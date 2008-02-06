@@ -69,6 +69,7 @@
 #include "tremolo.h"
 #include "trill.h"
 #include "zip.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -219,6 +220,7 @@ class ExportMusicXml {
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       void tempoText(TempoText* text, int staff);
+      void harmony(Harmony*);
       };
 
 //---------------------------------------------------------
@@ -2331,12 +2333,25 @@ foreach(Element* el, *(score->gel())) {
                               // must ignore start repeat to prevent spurious backup/forward
                               if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
                                     continue;
+
+                              // look for harmony element for this tick position
+                              if (el->isChordRest()) {
+                                    foreach(Element* he, *m->el()) {
+                                          if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
+                                             && (he->tick() == el->tick())) {
+                                                attr.doAttr(xml, false);
+                                                harmony((Harmony*)he);
+                                                }
+                                          }
+                                    }
+
                               if (tick != el->tick()) {
                                     attr.doAttr(xml, false);
                                     moveToTick(el->tick());
                                     }
                               if (el->isChordRest())
                                     tick += el->tickLen();
+
                               dh.handleElement(this, el, sstaff, true);
                               switch (el->type()) {
                                     case CLEF:
@@ -2544,3 +2559,42 @@ bool Score::saveMxl(const QString& name)
 
       return true;
       }
+
+//---------------------------------------------------------
+//   harmony
+//---------------------------------------------------------
+
+void ExportMusicXml::harmony(Harmony* h)
+      {
+      static char* stepTable[] = {
+//          "C",  "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
+            "C",  "D",  "D", "E",  "E", "F", "G",  "G", "A",  "A", "B",  "B"
+            };
+      static int alterTable[] = {
+            0,     -1,   0,  -1,    0,   0,   -1,   0,  -1,    0,   -1,   0
+            };
+
+      xml.stag("harmony print-frame=\"no\"");
+      int root = h->root();
+      const char* extension = "";
+      if (root > 0) {
+            xml.stag("root");
+            xml.tag("root-step", stepTable[root - 1]);
+            int alter = alterTable[root - 1];
+            if (alter)
+                  xml.tag("root-alter", alter);
+            xml.etag();
+            for (unsigned int i = 0; ; ++i) {
+                  if (chordExtensions[i].idx == -1)
+                        break;
+                  if (chordExtensions[i].idx == h->extension()) {
+                        extension = chordExtensions[i].xmlName;
+                        break;
+                        }
+                  }
+            }
+      xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);
+      xml.etag();
+      }
+
+

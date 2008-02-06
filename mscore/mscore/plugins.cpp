@@ -117,8 +117,11 @@ void MuseScore::pluginTriggered(int idx)
       if (debugMode)
             printf("Run Plugin <%s>\n", qPrintable(pluginPath));
       QScriptEngine se(0);
-      QScriptValue objectValue = se.newQObject(cs);
-      se.globalObject().setProperty("score", objectValue);
+
+      QScriptValue v = se.newQObject(cs);
+      se.globalObject().setProperty("score", v);
+      v = se.newVariant(division);
+      se.globalObject().setProperty("division", v);
 
       QScriptValue val = se.evaluate(f.readAll(), pluginPath);
       f.close();

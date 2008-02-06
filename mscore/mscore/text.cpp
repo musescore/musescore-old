@@ -123,7 +123,7 @@ QString TextBase::getText() const
 
 QString TextBase::getHtml() const
       {
-      return _doc->toHtml();
+      return _doc->toHtml("utf-8");
       }
 
 //---------------------------------------------------------
@@ -144,7 +144,7 @@ void TextBase::writeProperties(Xml& xml) const
             xml.tag("frameRound", _frameRound);
       if (_circle)
             xml.tag("circle", _circle);
-      xml << _doc->toHtml("UTF-8") << '\n';
+      xml << _doc->toHtml("utf-8") << '\n';
       }
 
 //---------------------------------------------------------

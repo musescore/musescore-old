@@ -369,3 +369,115 @@ void Harmony::read(QDomElement e)
             }
       }
 
+//---------------------------------------------------------
+//   buildText
+//    construct Chord Symbol
+//---------------------------------------------------------
+
+void Harmony::buildText()
+      {
+      setText(harmonyName());
+      }
+
+//---------------------------------------------------------
+//   convertRoot
+//---------------------------------------------------------
+
+int convertRoot(const QString& s, int* alter)
+      {
+      int n = s.size();
+      if (n < 1)
+            return -1;
+      *alter = 0;
+      if (n > 1) {
+            if (s[1].toLower().toAscii() == 'b')
+                  *alter = -1;
+            }
+      int r = 0;
+      switch(s[0].toLower().toAscii()) {
+            case 'c':
+                  r = 1;
+                  break;
+            case 'd':
+                  r = 3;
+                  break;
+            case 'e':
+                  r = 5;
+                  break;
+            case 'f':
+                  r = 6;
+                  break;
+            case 'g':
+                  r = 8;
+                  break;
+            case 'a':
+                  r = 10;
+                  break;
+            case 'b':
+                  r = 12;
+                  break;
+            default:
+                  return -1;
+            }
+      r -= *alter;
+      if (r < 1)
+            r = 12;
+      return r;
+      }
+
+//---------------------------------------------------------
+//   parseHarmony
+//---------------------------------------------------------
+
+int Harmony::parseHarmony(const QString& ss, int* root, int* base)
+      {
+      QString s = ss.simplified();
+      int n = s.size();
+      if (n < 1)
+            return -1;
+      int alter;
+      int r = convertRoot(s, &alter);
+      if (r == -1)
+            return -1;
+      *root   = r;
+      int idx = alter ? 2 : 1;
+      *base = 0;
+      int slash = s.indexOf('/');
+      if (slash != -1) {
+            s     = s.mid(idx, slash - idx);
+            *base = convertRoot(s.mid(slash + 1), &alter);
+            }
+      else
+            s = s.mid(idx);
+      for (unsigned i = 1; i < sizeof(extensionNames)/sizeof(*extensionNames); ++i) {
+            if (extensionNames[i] == s)
+                  return i;
+            }
+      return 1;
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Harmony::endEdit()
+      {
+      Text::endEdit();
+
+      QString s = getText();
+      int r, b;
+      int e = parseHarmony(getText(), &r, &b);
+      if (e != -1) {
+            setRoot(r);
+            setBase(b);
+            setExtension(e);
+            buildText();
+            }
+      else {
+            setRoot(0);             // unknown
+            setBase(0);
+            setExtension(1);
+            // leave text as entered
+            }
+      }
+

@@ -44,6 +44,7 @@
 #include "keysig.h"
 #include "beam.h"
 #include "utils.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -1011,7 +1012,7 @@ void Score::cmdDeleteSelection()
 
 void Score::chordTab(bool back)
       {
-      Text* cn         = (Text*)editObject;
+      Harmony* cn      = (Harmony*)editObject;
       Measure* measure = (Measure*)cn->parent();
       Segment* segment = measure->tick2segment(cn->tick());
       if (segment == 0) {
@@ -1051,16 +1052,14 @@ void Score::chordTab(bool back)
       measure         = segment->measure();
       ElementList* el = measure->el();
       foreach(Element* e, *el) {
-            if (e->type() == TEXT && e->subtype() == TEXT_CHORD
-               && e->tick() == segment->tick()) {
-                  cn = (Text*)e;
+            if (e->type() == HARMONY && e->tick() == segment->tick()) {
+                  cn = (Harmony*)e;
                   break;
                   }
             }
 
       if (!cn) {
-            cn = new Text(this);
-            cn->setSubtype(TEXT_CHORD);
+            cn = new Harmony(this);
             cn->setTick(segment->tick());
             cn->setStaffIdx(ocn->staffIdx());
             cn->setParent(measure);
@@ -1069,7 +1068,7 @@ void Score::chordTab(bool back)
 
       select(cn, 0, 0);
       canvas()->startEdit(cn);
-      ((Text*)editObject)->moveCursorToEnd();
+      ((Harmony*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
       }

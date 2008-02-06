@@ -41,6 +41,8 @@ class Harmony : public Text {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
+      virtual void endEdit();
+
       unsigned char base() const           { return _base;      }
       void setBase(unsigned char val)      { _base = val;       }
       unsigned char extension() const      { return _extension; }
@@ -50,9 +52,13 @@ class Harmony : public Text {
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      QString harmonyName() const { return harmonyName(root(), extension(), base()); }
+      QString harmonyName() const   { return harmonyName(root(), extension(), base()); }
+      QString extensionName() const { return getExtensionName(extension()); }
+      void buildText();
+
       static const char* getExtensionName(int i);
       static QString harmonyName(int root, int extension, int base);
+      static int parseHarmony(const QString& s, int* root, int* base);
       };
 
 #endif

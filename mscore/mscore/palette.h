@@ -77,6 +77,7 @@ class Palette : public QWidget {
       qreal extraMag;
       bool _drawGrid;
       bool _selectable;
+      bool _readOnly;
 
       bool staff;
 
@@ -122,6 +123,8 @@ class Palette : public QWidget {
       bool selectable() const      { return _selectable; }
       int getSelectedIdx() const   { return selectedIdx; }
       void setSelected(int idx)    { selectedIdx = idx;  }
+      bool readOnly() const        { return _readOnly;   }
+      void setReadOnly(bool val)   { _readOnly = val;    }
       };
 
 #endif

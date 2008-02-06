@@ -20,6 +20,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+//
+//    This is ECMAScript code (ECMA-262 aka "Java Script")
+//
+
 //---------------------------------------------------------
 //    init
 //    this function will be called on startup of
@@ -39,7 +43,9 @@ function init()
 
 function run()
       {
-      print("score", score.name, "has ", score.nstaves, " staves\n");
+      print("score name: ", score.name);
+      print("staves:     ", score.nstaves);
+      print("division:   ", division);
       }
 
 //---------------------------------------------------------
