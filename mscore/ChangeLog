@@ -1,3 +1,5 @@
+7.2.8 (ws)
+      - implemented easy slur creation in note entry mode
 6.2.8 (ws)
       - fixed build without JACK
       - midi import: use track name meta information

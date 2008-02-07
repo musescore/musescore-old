@@ -302,25 +302,25 @@ void SLine::layout(ScoreLayout* layout)
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
-                  seg->setSegmentType(SEGMENT_SINGLE);
+                  seg->setLineSegmentType(SEGMENT_SINGLE);
                   seg->setPos(p1);
                   seg->setXpos2(p2.x() - p1.x());
                   }
             else if (i == sysIdx1) {
                   // start segment
-                  seg->setSegmentType(SEGMENT_BEGIN);
+                  seg->setLineSegmentType(SEGMENT_BEGIN);
                   seg->setPos(p1);
                   seg->setXpos2(seg->gripAnchor(1).x() - p1.x());
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
-                  seg->setSegmentType(SEGMENT_MIDDLE);
+                  seg->setLineSegmentType(SEGMENT_MIDDLE);
                   seg->setPos(seg->gripAnchor(0));
                   seg->setXpos2(seg->gripAnchor(1).x() - seg->ipos().x());
                   }
             else if (i == sysIdx2) {
                   // end segment
-                  seg->setSegmentType(SEGMENT_END);
+                  seg->setLineSegmentType(SEGMENT_END);
                   seg->setPos(seg->gripAnchor(0));
                   seg->setXpos2(p2.x() - seg->ipos().x());
                   }

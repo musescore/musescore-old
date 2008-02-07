@@ -1,3 +1,17 @@
+Release 0.9.2 (svn):
+      - new Harmony element replacing Text element for chord names
+            - Harmony elements are also imported from or exported to
+              MusixXml. Only a few MusixXml chord names are currently
+              supported.
+      - new "select all"
+      - new transpose function
+      - can now import some "band in a box" files
+      - Slur entry in "note entry mode":
+            While in note entry mode typing "S" starts a slur. The slur
+            is extended during subsequent note entries until you hit
+            "S" again or leave note entry mode.
+      - lots of bug fixes
+
 Release 0.9
       There are two new palettes, "Notes" and "Beam Properties". This
       palettes replace the "Note Entry Pad" which is removed in this release.

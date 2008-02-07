@@ -463,7 +463,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
       if (_padState.pitch > 127)
             _padState.pitch = 127;
 
-
       if (addFlag) {
             // add note to chord
             Note* on = getSelectedNote();
@@ -479,6 +478,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   len = cr->tuplet()->noteLen();
                   }
             setNote(_is.pos, _is.track, _padState.pitch, len);
+            if (_is.slur) {
+                  _is.slur->setEnd(_is.pos, _is.track);
+                  }
             _is.pos += len;
             }
       }
@@ -1375,23 +1377,8 @@ void Score::cmd(const QString& cmd)
                   pageEnd();
             else if (cmd == "add-tie")
                   cmdAddTie();
-            else if (cmd == "add-slur") {
-                  Slur* slur = cmdAddSlur();
-                  //
-                  // start slur in edit mode
-                  //
-                  // slur->setSelected(true);
-                  if (slur) {
-                        slur->layout(mainLayout());
-                        QList<SlurSegment*>* el = slur->elements();
-                        if (!el->isEmpty()) {
-                              SlurSegment* ss = el->front();
-                              if (canvas()->startEdit(ss)) {
-                                    return;
-                                    }
-                              }
-                        }
-                  }
+            else if (cmd == "add-slur")
+                  cmdAddSlur();
             else if (cmd == "add-hairpin")
                   cmdAddHairpin(false);
             else if (cmd == "add-hairpin-reverse")

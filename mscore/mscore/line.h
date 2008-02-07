@@ -41,7 +41,7 @@ class LineSegment : public Element {
       QPointF _p2;
       QPointF _userOff2;
       QRectF r1, r2;
-      SegmentType _segmentType;
+      LineSegmentType _segmentType;
       System* _system;
 
       virtual bool isMovable() const { return true; }
@@ -65,8 +65,8 @@ class LineSegment : public Element {
       void setPos2(const QPointF& p)      { _p2 = p;     }
       void setXpos2(qreal x)              { _p2.setX(x); }
       QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
-      void setSegmentType(SegmentType s)  { _segmentType = s;  }
-      void setSystem(System* s)           { _system = s;       }
+      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
+      void setSystem(System* s)                   { _system = s;       }
       virtual void resetUserOffsets();
       friend class SLine;
       };

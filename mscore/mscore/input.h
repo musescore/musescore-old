@@ -21,6 +21,8 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
+class Slur;
+
 //---------------------------------------------------------
 //   InputState
 //---------------------------------------------------------
@@ -29,10 +31,14 @@ struct InputState {
       int pos;          // tick: current cursor position for input
                         //     -1 = not in note entry mode
       int track;        // current track for input
+      bool noteEntryMode;
+      Slur* slur;
 
       InputState() {
-            pos = 0;
-            track = 0;
+            pos           = 0;
+            track         = 0;
+            noteEntryMode = false;
+            slur          = 0;
             }
       };
 

@@ -126,7 +126,6 @@ bool Score::needLayout() const
 
 Score::Score()
       {
-      _noteEntryMode    = false;
       info.setFile("");
       _layout           = new ScoreLayout(this);
       _style            = new Style(defaultStyle);
@@ -1017,16 +1016,22 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                   else
                         _is.pos += cr->tickLen();
                   }
-            _noteEntryMode = true;
+            _is.noteEntryMode = true;
             }
       else {
-            _padState.len   = 0;
-            _is.pos        = -1;
-            _noteEntryMode = false;
+            _padState.len     = 0;
+            _is.pos           = -1;
+            _is.noteEntryMode = false;
+            if (_is.slur) {
+                  QList<SlurSegment*>* el = _is.slur->elements();
+                  if (!el->isEmpty())
+                        el->front()->setSelected(false);
+                  _is.slur = 0;
+                  }
             setPadState();
             }
-      canvas()->setState(_noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
-      mscore->setState(_noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
+      canvas()->setState(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
+      mscore->setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
       return cr;
       }
 
@@ -1063,6 +1068,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
       layoutAll = true;
       endCmd();
       }
+
 #if 0
 //---------------------------------------------------------
 //   snapNote

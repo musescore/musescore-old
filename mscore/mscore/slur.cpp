@@ -775,26 +775,26 @@ void Slur::layout(ScoreLayout* layout)
             // case 1: one segment
             if (s1 == s2) {
                   segment->layout(layout, p1, p2, bow);
-                  segment->setSegmentType(SEGMENT_SINGLE);
+                  segment->setLineSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
                   segment->layout(layout, p1, QPointF(x, p1.y()), bow);
-                  segment->setSegmentType(SEGMENT_BEGIN);
+                  segment->setLineSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
                   qreal x1 = sp.x();
                   qreal x2 = x1 + system->bbox().width();
                   segment->layout(layout, QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
-                  segment->setSegmentType(SEGMENT_MIDDLE);
+                  segment->setLineSegmentType(SEGMENT_MIDDLE);
                   }
             // case 4: end segment
             else {
                   qreal x = sp.x();
                   segment->layout(layout, QPointF(x, p2.y()), p2, bow);
-                  segment->setSegmentType(SEGMENT_END);
+                  segment->setLineSegmentType(SEGMENT_END);
                   }
             if (system == s2)
                   break;
@@ -945,13 +945,13 @@ void Tie::layout(ScoreLayout* layout)
             // case 1: one segment
             if (s1 == s2) {
                   segment->layout(layout, p1, p2, bow);
-                  segment->setSegmentType(SEGMENT_SINGLE);
+                  segment->setLineSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
                   segment->layout(layout, p1, QPointF(x, p1.y()), bow);
-                  segment->setSegmentType(SEGMENT_BEGIN);
+                  segment->setLineSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
@@ -962,7 +962,7 @@ void Tie::layout(ScoreLayout* layout)
             else {
                   qreal x = sp.x();
                   segment->layout(layout, QPointF(x, p2.y()), p2, bow);
-                  segment->setSegmentType(SEGMENT_END);
+                  segment->setLineSegmentType(SEGMENT_END);
                   }
             }
       }

@@ -1080,11 +1080,14 @@ again:
 
       Space spaces[segs+1][nstaves];
       double width[segs+1];
+      Segment::SegmentType types[segs];
+
 
       int seg = 1;
       bool notesSeg = first()->subtype() == Segment::SegChordRest;
       bool firstNoteRest = true;
       for (const Segment* s = first(); s; s = s->next(), ++seg) {
+            types[seg-1] = Segment::SegmentType(s->subtype());
             //
             // add extra space between clef/key/timesig and first notes
             //
@@ -1185,6 +1188,7 @@ for (int i = 0; i < segs; ++i)
      printf(" %f-%f", spaces[i][0].min(), spaces[i][0].extra());
 printf("\n");
 #endif
+
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             for (int seg = segs; seg > 0; --seg) {    // seg 0 cannot move any space
                   double extra = spaces[seg][staffIdx].extra();
@@ -1201,11 +1205,10 @@ printf("\n");
                               spaces[tseg][staffIdx].setMin(extra);
                         }
                   else {
-                        // grace notes have min = 0.0, add to extra
-                        if (spaces[tseg][staffIdx].min() > 0.00001)
-                              spaces[tseg][staffIdx].addMin(extra);
-                        else
+                        if (types[tseg] ==  Segment::SegGrace)
                               spaces[tseg][staffIdx].addExtra(extra);
+                        else
+                              spaces[tseg][staffIdx].addMin(extra);
                         }
                   }
             }
