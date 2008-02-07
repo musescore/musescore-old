@@ -18,10 +18,11 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-REVISION = `cat build/revision.h`
-PREFIX  = "/usr/local"
-VERSION = "0.9.2b${REVISION}"
-# VERSION = "0.9.2"
+REVISION  = `cat build/revision.h`
+CPUS      = `grep -c processor /proc/cpuinfo`
+PREFIX    = "/usr/local"
+VERSION   = "0.9.2b${REVISION}"
+#VERSION   = "0.9.2"
 
 ROOT=`pwd`
 
@@ -35,7 +36,7 @@ release:
             	   ../mscore; 			       \
             make lupdate;                              \
             make lrelease;                             \
-            make;                                      \
+            make -j ${CPUS};                           \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'"; \
          fi;
@@ -50,7 +51,7 @@ debug:
             	   ../mscore; 			       \
             make lupdate;                              \
             make lrelease;                             \
-            make;                                      \
+            make -j ${CPUS};                           \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'";       \
          fi
@@ -73,7 +74,7 @@ win32:
             cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
             make lupdate ;                             \
             make lrelease;                             \
-            make -j2 -f Makefile;                      \
+            make -j ${CPUS};                           \
             make man;                                  \
             make install;                              \
             make package;                              \
@@ -109,7 +110,7 @@ dist:
 	mv mscore.dist/mscore-${VERSION}.tar.bz2 .
 	tar xvofj mscore-${VERSION}.tar.bz2
 	cd mscore-${VERSION}
-	make -j2 release
+	make -j ${CPUS} release
 
 revision:
 	svn info mscore | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
@@ -127,7 +128,7 @@ unix:
             mkdir linux;                           \
             cd unixBuild;                          \
             cmake -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
-            make -j2 -f Makefile;                  \
+            make -j${CPUS} -f Makefile;            \
             make package;                          \
          else                                      \
             echo "build directory unixBuild does alread exist, please remove first";  \
