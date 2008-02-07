@@ -64,6 +64,12 @@
 #include "unzip.h"
 #include "harmony.h"
 
+//---------------------------------------------------------
+//   chordExtensions
+//    map between internal chord numbers and
+//    MusicXml names
+//---------------------------------------------------------
+
 extern const XmlChordExtension chordExtensions[] = {
       {   1, "major"              },
       {  16, "minor"              },

@@ -489,12 +489,19 @@ void Canvas::modifyElement(Element* el)
 //    'S' typed on keyboard
 //---------------------------------------------------------
 
-Slur* Score::cmdAddSlur()
+void Score::cmdAddSlur()
       {
+      if (noteEntryMode() && _is.slur) {
+            QList<SlurSegment*>* el = _is.slur->elements();
+            if (!el->isEmpty())
+                  el->front()->setSelected(false);
+            _is.slur = 0;
+            return;
+            }
       Element* e = sel->element();
       if (!e || e->type() != NOTE) {
             printf("no note selected\n");
-            return 0;
+            return;
             }
       Note* note   = (Note*)(e);
       Chord* chord = note->chord();
@@ -506,7 +513,7 @@ Slur* Score::cmdAddSlur()
 
       if (tick2 == 0) {
             printf("cannot create slur: at end\n");
-            return 0;
+            return;
             }
       Slur* slur = new Slur(this);
       slur->setTrack(track);
@@ -514,7 +521,24 @@ Slur* Score::cmdAddSlur()
       slur->setEnd(tick2, track);
       slur->setParent(_layout);
       cmdAdd(slur);
-      return slur;
+
+      slur->layout(mainLayout());
+      QList<SlurSegment*>* el = slur->elements();
+
+      if (noteEntryMode()) {
+            _is.slur = slur;
+            if (!el->isEmpty())
+                  el->front()->setSelected(true);
+            }
+      else {
+            //
+            // start slur in edit mode
+            //
+            if (!el->isEmpty()) {
+                  SlurSegment* ss = el->front();
+                  canvas()->startEdit(ss);
+                  }
+            }
       }
 
 //---------------------------------------------------------

@@ -45,7 +45,7 @@ class SlurSegment : public Element {
       struct UP ups[4];
       QPainterPath path;
       qreal bow;
-      SegmentType _segmentType;
+      LineSegmentType _segmentType;
       System* _system;
 
       virtual QRectF bbox() const;
@@ -78,8 +78,8 @@ class SlurSegment : public Element {
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
-      void setSegmentType(SegmentType s)  { _segmentType = s;  }
-      void setSystem(System* s)           { _system = s;       }
+      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
+      void setSystem(System* s)                   { _system = s;       }
       };
 
 //---------------------------------------------------------

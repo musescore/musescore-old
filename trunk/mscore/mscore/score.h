@@ -91,9 +91,8 @@ class Score : public QObject {
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
 
-      PadState _padState;
+      PadState   _padState;
       InputState _is;
-      bool _noteEntryMode;
 
       Style* _style;
       QVector<TextStyle*> _textStyles;
@@ -239,7 +238,7 @@ class Score : public QObject {
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
-      Slur* cmdAddSlur();
+      void cmdAddSlur();
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
@@ -462,14 +461,16 @@ class Score : public QObject {
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
       Style* style() const          { return _style; }
-      bool noteEntryMode() const    { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
       QList<Viewer*> getViewer()    { return viewer;    }
       int playPos() const           { return _playPos;  }
       void setPlayPos(int val)      { _playPos = val;   }
+
+      bool noteEntryMode() const    { return _is.noteEntryMode; }
       int inputPos() const          { return _is.pos;   }
       int inputTrack() const        { return _is.track; }
+
       void setInputTrack(int);
       PadState* padState()          { return &_padState; }
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }

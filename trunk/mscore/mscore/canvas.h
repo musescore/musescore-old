@@ -47,9 +47,7 @@ class Canvas : public QFrame, public Viewer {
 
    public:
       enum State {
-         NORMAL, DRAG_OBJ,
-         EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG,
-         NOTE_ENTRY_EDIT, STATES
+         NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
          };
 
    private:

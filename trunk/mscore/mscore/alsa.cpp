@@ -952,6 +952,9 @@ void readMidiEvent()
                   else
                         --active;
                   }
+            else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
+                  --active;
+
             if (dumpMidi) {
                   printf("MidiIn: ");
                   switch(ev->type) {

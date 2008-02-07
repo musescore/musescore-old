@@ -56,7 +56,7 @@ enum DurationType {
       D_16TH, D_HALF, D_WHOLE, D_BREVE, D_LONG
       };
 
-enum SegmentType {
+enum LineSegmentType {
       SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
       };
 
