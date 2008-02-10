@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Mag>0.75</Mag>
-  <xoff>22</xoff>
-  <yoff>37</yoff>
+  <xoff>4.65667</xoff>
+  <yoff>7.83167</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -25,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -49,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -62,7 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -337,670 +339,687 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Slur>
     <tick2>96960</tick2>
+    <track>0</track>
     <tick>96240</tick>
     </Slur>
   <Slur>
     <tick2>97920</tick2>
+    <track>0</track>
     <tick>97200</tick>
     </Slur>
   <Slur>
     <tick2>98880</tick2>
+    <track>0</track>
     <tick>98160</tick>
     </Slur>
   <Slur>
     <tick2>99840</tick2>
+    <track>0</track>
     <tick>99120</tick>
     </Slur>
   <Slur>
     <tick2>137280</tick2>
+    <track>0</track>
     <tick>136800</tick>
     </Slur>
   <Slur>
     <tick2>138240</tick2>
+    <track>0</track>
     <tick>137520</tick>
     </Slur>
   <Slur>
     <tick2>141120</tick2>
+    <track>0</track>
     <tick>140400</tick>
     </Slur>
   <Slur>
     <tick2>142080</tick2>
+    <track>0</track>
     <tick>141360</tick>
     </Slur>
   <Slur>
     <tick2>164160</tick2>
+    <track>0</track>
     <tick>163680</tick>
     </Slur>
   <Slur>
     <tick2>165120</tick2>
+    <track>0</track>
     <tick>164400</tick>
     </Slur>
   <Slur>
     <tick2>166080</tick2>
+    <track>0</track>
     <tick>165360</tick>
     </Slur>
   <Slur>
     <tick2>175440</tick2>
+    <track>0</track>
     <tick>174960</tick>
     </Slur>
   <Slur>
     <tick2>176400</tick2>
+    <track>0</track>
     <tick>175920</tick>
     </Slur>
   <Slur>
     <tick2>204480</tick2>
+    <track>0</track>
     <tick>203760</tick>
     </Slur>
   <Slur>
     <tick2>205440</tick2>
+    <track>0</track>
     <tick>204720</tick>
     </Slur>
   <Slur>
     <tick2>206400</tick2>
+    <track>0</track>
     <tick>205680</tick>
     </Slur>
   <Slur>
     <tick2>207360</tick2>
+    <track>0</track>
     <tick>206640</tick>
     </Slur>
   <Slur>
     <tick2>73560</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>73200</tick>
     </Slur>
   <Slur>
     <tick2>100800</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>100080</tick>
     </Slur>
   <Slur>
     <tick2>101760</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>101040</tick>
     </Slur>
   <Slur>
     <tick2>111960</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>111600</tick>
     </Slur>
   <Slur>
     <tick2>121440</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>121200</tick>
     </Slur>
   <Slur>
     <tick2>122400</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>122160</tick>
     </Slur>
   <Slur>
     <tick2>123360</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>123120</tick>
     </Slur>
   <Slur>
     <tick2>124320</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>124080</tick>
     </Slur>
   <Slur>
     <tick2>125280</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>125040</tick>
     </Slur>
   <Slur>
     <tick2>126240</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>126000</tick>
     </Slur>
   <Slur>
     <tick2>141120</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>140400</tick>
     </Slur>
   <Slur>
     <tick2>141840</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>141360</tick>
     </Slur>
   <Slur>
     <tick2>157800</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>157680</tick>
     </Slur>
   <Slur>
     <tick2>158040</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>157920</tick>
     </Slur>
   <Slur>
     <tick2>175680</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>174960</tick>
     </Slur>
   <Slur>
     <tick2>176640</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>175920</tick>
     </Slur>
   <Slur>
     <tick2>177600</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>177120</tick>
     </Slur>
   <Slur>
     <tick2>210240</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>209520</tick>
     </Slur>
   <Slur>
     <tick2>211200</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>210480</tick>
     </Slur>
   <Slur>
     <tick2>225000</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>224880</tick>
     </Slur>
   <Slur>
     <tick2>225240</tick2>
-    <track>4</track>
     <track2>4</track2>
+    <track>4</track>
     <tick>225120</tick>
     </Slur>
   <Slur>
     <tick2>73560</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>73200</tick>
     </Slur>
   <Slur>
     <tick2>95040</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>94320</tick>
     </Slur>
   <Slur>
     <tick2>96000</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>95280</tick>
     </Slur>
   <Slur>
     <tick2>100800</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>100080</tick>
     </Slur>
   <Slur>
     <tick2>101760</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>101040</tick>
     </Slur>
   <Slur>
     <tick2>104640</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>103920</tick>
     </Slur>
   <Slur>
     <tick2>105360</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>104880</tick>
     </Slur>
   <Slur>
     <tick2>111960</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>111600</tick>
     </Slur>
   <Slur>
     <tick2>175440</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>174960</tick>
     </Slur>
   <Slur>
     <tick2>176400</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>175920</tick>
     </Slur>
   <Slur>
     <tick2>177600</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>176880</tick>
     </Slur>
   <Slur>
     <tick2>194520</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>194280</tick>
     </Slur>
   <Slur>
     <tick2>214080</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>213600</tick>
     </Slur>
   <Slur>
     <tick2>215040</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>214320</tick>
     </Slur>
   <Slur>
     <tick2>225240</tick2>
-    <track>8</track>
     <track2>8</track2>
+    <track>8</track>
     <tick>224880</tick>
     </Slur>
   <Slur>
     <tick2>73320</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>73200</tick>
     </Slur>
   <Slur>
     <tick2>73560</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>73440</tick>
     </Slur>
   <Slur>
     <tick2>96960</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>96240</tick>
     </Slur>
   <Slur>
     <tick2>97920</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>97200</tick>
     </Slur>
   <Slur>
     <tick2>104640</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>103920</tick>
     </Slur>
   <Slur>
     <tick2>105360</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>104880</tick>
     </Slur>
   <Slur>
     <tick2>111720</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>111600</tick>
     </Slur>
   <Slur>
     <tick2>111960</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>111840</tick>
     </Slur>
   <Slur>
     <tick2>117480</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>117360</tick>
     </Slur>
   <Slur>
     <tick2>117720</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>117600</tick>
     </Slur>
   <Slur>
     <tick2>125280</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>125040</tick>
     </Slur>
   <Slur>
     <tick2>126240</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>126000</tick>
     </Slur>
   <Slur>
     <tick2>127200</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>126960</tick>
     </Slur>
   <Slur>
     <tick2>128160</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>127920</tick>
     </Slur>
   <Slur>
     <tick2>139200</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>138720</tick>
     </Slur>
   <Slur>
     <tick2>140160</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>139440</tick>
     </Slur>
   <Slur>
     <tick2>157800</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>157680</tick>
     </Slur>
   <Slur>
     <tick2>158040</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>157920</tick>
     </Slur>
   <Slur>
     <tick2>194280</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>194160</tick>
     </Slur>
   <Slur>
     <tick2>194520</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>194400</tick>
     </Slur>
   <Slur>
     <tick2>206400</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>205680</tick>
     </Slur>
   <Slur>
     <tick2>207360</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>206640</tick>
     </Slur>
   <Slur>
     <tick2>225000</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>224880</tick>
     </Slur>
   <Slur>
     <tick2>225240</tick2>
-    <track>12</track>
     <track2>12</track2>
+    <track>12</track>
     <tick>225120</tick>
     </Slur>
   <Slur>
     <tick2>73320</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>73200</tick>
     </Slur>
   <Slur>
     <tick2>73560</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>73440</tick>
     </Slur>
   <Slur>
     <tick2>111720</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>111600</tick>
     </Slur>
   <Slur>
     <tick2>111960</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>111840</tick>
     </Slur>
   <Slur>
     <tick2>157800</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>157680</tick>
     </Slur>
   <Slur>
     <tick2>158040</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>157920</tick>
     </Slur>
   <Slur>
     <tick2>194280</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>194160</tick>
     </Slur>
   <Slur>
     <tick2>194520</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>194400</tick>
     </Slur>
   <Slur>
     <tick2>225000</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>224880</tick>
     </Slur>
   <Slur>
     <tick2>225240</tick2>
-    <track>16</track>
     <track2>16</track2>
+    <track>16</track>
     <tick>225120</tick>
     </Slur>
   <Slur>
     <tick2>95040</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>94320</tick>
     </Slur>
   <Slur>
     <tick2>96000</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>95280</tick>
     </Slur>
   <Slur>
     <tick2>96960</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>96240</tick>
     </Slur>
   <Slur>
     <tick2>97920</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>97200</tick>
     </Slur>
   <Slur>
     <tick2>98880</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>98160</tick>
     </Slur>
   <Slur>
     <tick2>99840</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>99120</tick>
     </Slur>
   <Slur>
     <tick2>100800</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>100080</tick>
     </Slur>
   <Slur>
     <tick2>101760</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>101040</tick>
     </Slur>
   <Slur>
     <tick2>102720</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>102000</tick>
     </Slur>
   <Slur>
     <tick2>103680</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>102960</tick>
     </Slur>
   <Slur>
     <tick2>104640</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>103920</tick>
     </Slur>
   <Slur>
     <tick2>105600</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>104880</tick>
     </Slur>
   <Slur>
     <tick2>137280</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>136560</tick>
     </Slur>
   <Slur>
     <tick2>138240</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>137520</tick>
     </Slur>
   <Slur>
     <tick2>139200</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>138480</tick>
     </Slur>
   <Slur>
     <tick2>140160</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>139440</tick>
     </Slur>
   <Slur>
     <tick2>141120</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>140400</tick>
     </Slur>
   <Slur>
     <tick2>142080</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>141360</tick>
     </Slur>
   <Slur>
     <tick2>204480</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>203760</tick>
     </Slur>
   <Slur>
     <tick2>205440</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>204720</tick>
     </Slur>
   <Slur>
     <tick2>206400</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>205680</tick>
     </Slur>
   <Slur>
     <tick2>207360</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>206640</tick>
     </Slur>
   <Slur>
     <tick2>208320</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>207600</tick>
     </Slur>
   <Slur>
     <tick2>209280</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>208560</tick>
     </Slur>
   <Slur>
     <tick2>210240</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>209520</tick>
     </Slur>
   <Slur>
     <tick2>211200</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>210480</tick>
     </Slur>
   <Slur>
     <tick2>212160</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>211440</tick>
     </Slur>
   <Slur>
     <tick2>213120</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>212400</tick>
     </Slur>
   <Slur>
     <tick2>214080</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>213360</tick>
     </Slur>
   <Slur>
     <tick2>215040</tick2>
-    <track>32</track>
     <track2>32</track2>
+    <track>32</track>
     <tick>214320</tick>
     </Slur>
   <Staff id="1">
@@ -1008,21 +1027,24 @@ p, li { white-space: pre-wrap; }
       <height>6.91147</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Brandenburg Concerto no. 2 in F Major</p></body></html>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1 st Movement</p></body></html>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">J.S. Bach</p></body></html>

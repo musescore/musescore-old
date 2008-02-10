@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>0.75</Mag>
-  <xoff>157.49</xoff>
-  <yoff>30.7235</yoff>
+  <xoff>33.3354</xoff>
+  <yoff>6.50314</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -25,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.5</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -49,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -62,7 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -119,14 +121,16 @@
       <height>13.2</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Test accidental 2</p></body></html>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Accidentals &amp; key signatures</p></body></html>
@@ -153,6 +157,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -186,6 +191,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="8">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -219,6 +225,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="12">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -252,6 +259,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="16">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -285,6 +293,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="20">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -318,6 +327,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -351,6 +361,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -384,6 +395,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -417,6 +429,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="36">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -450,6 +463,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="40">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -483,6 +497,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -516,6 +531,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="48">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -549,6 +565,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>
@@ -582,6 +599,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="56">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Rest>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>58.048</xoff>
-  <yoff>21.324</yoff>
+  <xoff>12.2868</xoff>
+  <yoff>4.51358</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -13,6 +13,8 @@
     <systemDistance>9.25</systemDistance>
     <lyricsDistance>6.5</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -27,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -51,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -64,6 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -123,7 +124,8 @@
       <height>10</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Scales</p></body></html>
@@ -132,8 +134,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="1">
       <Text>
         <subtype>Chordname</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
@@ -152,8 +153,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="3">
       <Text>
         <subtype>Chordname</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">G</p></body></html>
@@ -169,6 +169,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
@@ -178,8 +179,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="5">
       <Text>
         <subtype>Chordname</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">D</p></body></html>
@@ -201,8 +201,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="7">
       <Text>
         <subtype>Chordname</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">A</p></body></html>
@@ -218,6 +217,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="8">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
@@ -227,8 +227,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <Text>
         <subtype>Chordname</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">E</p></body></html>
@@ -259,6 +258,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="12">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
@@ -292,6 +292,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="16">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
@@ -325,6 +326,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="20">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
@@ -358,6 +360,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
@@ -391,6 +394,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="66" tpc="8" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>

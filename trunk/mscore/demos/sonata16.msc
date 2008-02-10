@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.62</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>-5064.25</xoff>
-  <yoff>30</yoff>
+  <xoff>-1066.64</xoff>
+  <yoff>6.35</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -29,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -53,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -147,67 +142,83 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Slur>
     <tick2>2880</tick2>
+    <track>0</track>
     <tick>1920</tick>
     </Slur>
   <Slur>
     <tick2>6600</tick2>
+    <track>0</track>
     <tick>6240</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>25200</tick2>
+    <track>0</track>
     <tick>24960</tick>
     </Slur>
   <Slur>
     <tick2>26400</tick2>
+    <track>0</track>
     <tick>25440</tick>
     </Slur>
   <Slur>
     <tick2>27240</tick2>
+    <track>0</track>
     <tick>26880</tick>
     </Slur>
   <Slur>
     <tick2>29040</tick2>
+    <track>0</track>
     <tick>28800</tick>
     </Slur>
   <Slur>
     <tick2>30240</tick2>
+    <track>0</track>
     <tick>29280</tick>
     </Slur>
   <Slur>
     <tick2>31080</tick2>
+    <track>0</track>
     <tick>30720</tick>
     </Slur>
   <Slur>
     <tick2>36480</tick2>
+    <track>0</track>
     <tick>36360</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>43440</tick2>
+    <track>0</track>
     <tick>43200</tick>
     </Slur>
   <Slur>
     <tick2>43920</tick2>
+    <track>0</track>
     <tick>43680</tick>
     </Slur>
   <Slur>
     <tick2>113640</tick2>
+    <track>0</track>
     <tick>113280</tick>
     </Slur>
   <Slur>
     <tick2>115440</tick2>
+    <track>0</track>
     <tick>115200</tick>
     </Slur>
   <Slur>
     <tick2>116640</tick2>
+    <track>0</track>
     <tick>115680</tick>
     </Slur>
   <Slur>
     <tick2>117480</tick2>
+    <track>0</track>
     <tick>117120</tick>
     </Slur>
   <Trill>
+    <track>0</track>
     <tick>46080</tick>
     <tick2>47760</tick2>
     <track>0</track>
@@ -217,6 +228,7 @@ p, li { white-space: pre-wrap; }
       </Segment>
     </Trill>
   <Trill>
+    <track>0</track>
     <tick>132480</tick>
     <tick2>134160</tick2>
     <track>0</track>
@@ -227,21 +239,24 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>Title</subtype>
         <offset x="-0.13" y="-0.92"/>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Sonata Facile</p></body></html>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">W.A.Mozart</p></body></html>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Köchel No. 545</p></body></html>
@@ -251,8 +266,7 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Allegro</p></body></html>
@@ -708,6 +722,7 @@ p, li { white-space: pre-wrap; }
       <endRepeat>2</endRepeat>
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Chord>
@@ -1414,7 +1429,6 @@ p, li { white-space: pre-wrap; }
         <tickOffset>-1</tickOffset>
         <StemDirection>up</StemDirection>
         <Note>
-          <selected>1</selected>
           <ticklen>240</ticklen>
           <pitch>80</pitch>
           <tpc>22</tpc>

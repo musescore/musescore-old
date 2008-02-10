@@ -29,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -53,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -130,6 +125,7 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Slur>
     <tick2>1440</tick2>
+    <track>0</track>
     <tick>1320</tick>
     <SlurSegment no="0">
       <o1 x="-0.358987" y="-0.280947"/>
@@ -141,6 +137,7 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur>
     <tick2>960</tick2>
+    <track>0</track>
     <tick>720</tick>
     <SlurSegment no="0">
       <o1 x="-0.525436" y="-0.105087"/>
@@ -149,6 +146,7 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur>
     <tick2>3360</tick2>
+    <track>0</track>
     <tick>3358</tick>
     </Slur>
   <Staff id="1">
@@ -168,7 +166,11 @@ p, li { white-space: pre-wrap; }
         <tickOffset>-120</tickOffset>
         <Note pitch="77" tpc="11"/>
         </Chord>
-      <Note pitch="74" tpc="16" ticks="480"/>
+      <Chord>
+        <tick>1080</tick>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
       <Chord>
         <tick>1320</tick>
         <ticklen>240</ticklen>

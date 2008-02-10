@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>0.995934</Mag>
-  <xoff>10</xoff>
-  <yoff>11</yoff>
+  <xoff>2.11667</xoff>
+  <yoff>2.32833</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -13,6 +13,8 @@
     <systemDistance>9.25</systemDistance>
     <lyricsDistance>3</lyricsDistance>
     <lyricsMinBottomDistance>4</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -27,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -51,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -64,6 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -133,14 +134,16 @@
       <height>10</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Adeste Fideles</p></body></html>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">John F. Wade</p></body></html>
@@ -228,13 +231,13 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <selected>1</selected>
         <tick>1440</tick>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <tick>0</tick>
           <pitch>64</pitch>
           <tpc>18</tpc>
@@ -290,12 +293,12 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <selected>1</selected>
         <tick>3360</tick>
         <ticklen>960</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <tick>0</tick>
           <pitch>64</pitch>
           <tpc>18</tpc>
@@ -673,6 +676,7 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="-1.08" y="0"/>
+            <track>-1</track>
             </Accidental>
           </Note>
         <Note>
@@ -703,11 +707,11 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>5</track>
         <tick>4320</tick>
         <ticklen>480</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>5</track>
           <tick>0</tick>
           <pitch>57</pitch>
           <tpc>17</tpc>
