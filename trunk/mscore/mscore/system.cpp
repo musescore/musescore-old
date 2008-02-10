@@ -182,7 +182,7 @@ void System::layout(ScoreLayout* layout)
                         if (b == 0) {
                               ss->brackets[i] = b = new Bracket(score());
                               b->setParent(this);
-                              b->setStaffIdx(staffIdx);
+                              b->setTrack(staffIdx * VOICES);
                               }
                         b->setSubtype(s->bracket(i));
                         int span = s->bracketSpan(i);
@@ -454,16 +454,16 @@ void System::setInstrumentNames()
 //   setInstrumentName
 //---------------------------------------------------------
 
-void System::setInstrumentName(int idx)
+void System::setInstrumentName(int staffIdx)
       {
       if (isVbox())                 // ignore vbox
             return;
 
       Score* cs = score();
-      Staff* s  = cs->staff(idx);
+      Staff* s  = cs->staff(staffIdx);
       if (!s->isTop())
             return;
-      SysStaff* staff = _staves[idx];
+      SysStaff* staff = _staves[staffIdx];
       if (staff->instrumentName == 0)
             staff->instrumentName = new Text(cs);
       if (_firstSystem) {
@@ -475,7 +475,7 @@ void System::setInstrumentName(int idx)
             staff->instrumentName->setDoc(s->shortName());
             }
       staff->instrumentName->setParent(this);
-      staff->instrumentName->setStaffIdx(idx);
+      staff->instrumentName->setTrack(staffIdx * VOICES);
       }
 
 //---------------------------------------------------------

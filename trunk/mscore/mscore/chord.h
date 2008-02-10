@@ -208,7 +208,7 @@ class Chord : public ChordRest {
       void setTickOffset(int val) { _tickOffset = val; }
 
       virtual int staffMove() const;
-      virtual void setStaffIdx(int val);
+      virtual void setTrack(int val);
       };
 
 #endif

@@ -352,7 +352,7 @@ void Staff::changeKeySig(int tick, int st)
 
       if (!removeFlag) {
             KeySig* keysig = new KeySig(_score);
-            keysig->setStaffIdx(idx());
+            keysig->setTrack(idx() * VOICES);
             keysig->setTick(tick);
             int oldKey = _keymap->key(tick-1);
             keysig->setSig(oldKey, st);
@@ -449,7 +449,7 @@ void Staff::changeClef(int tick, int st)
 
       if (!removeFlag) {
             Clef* clef = new Clef(_score);
-            clef->setStaffIdx(idx());
+            clef->setTrack(idx() * VOICES);
             clef->setTick(tick);
             clef->setSubtype(st);
 

@@ -101,8 +101,8 @@ class Element {
 
       int _subtype;
 
-      int _voice;               ///< 0 < VOICES
-      int _staffIdx;
+      int _track;               ///< staffIdx * VOICES + voice
+
       MTime _time;
       QColor _color;
       double _mag;              ///< standard magnification (derived value)
@@ -113,8 +113,7 @@ class Element {
       Score* _score;
       QPointF _pos;             ///< Reference position, relative to _parent.
                                 ///< Usually set from layout().
-      Align _align;
-      Anchor _anchor;
+      Align  _align;
       double _xoff, _yoff;
       double _rxoff, _ryoff;
       OffsetType _offsetType;
@@ -205,7 +204,7 @@ class Element {
 
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
-      virtual void endDrag()                  {}
+      virtual void endDrag();
       virtual QLineF dragAnchor() const       { return QLineF(); }
 
       virtual bool startEdit(const QPointF&);
@@ -216,13 +215,11 @@ class Element {
       virtual void updateGrips(int* grips, QRectF*) const      { *grips = 0;       }
       virtual QPointF gripAnchor(int) const   { return QPointF(); }
 
+      int track() const                       { return _track; }
+      virtual void setTrack(int val)          { _track = val;  }
+      int staffIdx() const                    { return _track / VOICES; }
+      int voice() const                       { return _track % VOICES; }
       Staff* staff() const;
-      int staffIdx() const                    { return _staffIdx; }
-      virtual void setStaffIdx(int val)       { _staffIdx = val;  }
-      int voice() const                       { return _voice;    }
-      int track() const                       { return staffIdx() * VOICES + voice(); }
-      void setTrack(int val);
-      void setVoice(int v)                    { _voice = v;    }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -317,7 +314,6 @@ class Element {
  the *.msc file
  */
       Align align() const                   { return _align;        }
-      Anchor anchor() const                 { return _anchor;       }
       OffsetType offsetType() const         { return _offsetType;   }
       double xoff() const                   { return _xoff;         }
       double yoff() const                   { return _yoff;         }
@@ -328,7 +324,6 @@ class Element {
       void setYoff(double val)              { _yoff   = val;        }
       void setRXoff(double val)             { _rxoff  = val;        }
       void setRYoff(double val)             { _ryoff  = val;        }
-      void setAnchor(Anchor val)            { _anchor = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
       };
 

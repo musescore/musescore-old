@@ -25,6 +25,7 @@
 #include "staff.h"
 #include "measure.h"
 #include "layout.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   Symbol
@@ -33,7 +34,6 @@
 Symbol::Symbol(Score* s)
    : BSymbol(s)
       {
-      setAnchor(ANCHOR_PARENT);
       _sym = 0;
       }
 
@@ -150,5 +150,23 @@ void Symbol::read(QDomElement e)
             }
       setPos(pos);
       setSym(s);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Symbol::dragAnchor() const
+      {
+      if (parent()->type() == MEASURE) {
+            Measure* measure = (Measure*)parent();
+            Segment* segment = measure->tick2segment(tick());
+            System* s        = measure->system();
+            double y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
+            QPointF anchor(segment->abbox().x(), y);
+            return QLineF(canvasPos(), anchor);
+            }
+      else
+            return QLineF(canvasPos(), parent()->canvasPos());
       }
 

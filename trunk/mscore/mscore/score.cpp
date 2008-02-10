@@ -302,6 +302,7 @@ void Score::read(QString name)
 
 void Score::write(Xml& xml)
       {
+      xml.curTrack = -1;
       if (editObject) {                          // in edit mode?
             endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
@@ -331,7 +332,8 @@ void Score::write(Xml& xml)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
-            xml.curTick = 0;
+            xml.curTick  = 0;
+            xml.curTrack = staffIdx * VOICES;
             for (MeasureBase* m = _layout->first(); m; m = m->next()) {
                   if (m->type() == MEASURE || staffIdx == 0)
                         m->write(xml, staffIdx);
@@ -340,6 +342,7 @@ void Score::write(Xml& xml)
                   }
             xml.etag();
             }
+      xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track);
       }
 
@@ -792,7 +795,8 @@ void Score::readStaff(QDomElement e)
       MeasureBase* mb = _layout->first();
       int staff       = e.attribute("id", "1").toInt() - 1;
 
-      int curTick = 0;
+      curTick  = 0;
+      curTrack = staff * VOICES;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
 

@@ -30,7 +30,7 @@
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
-      <file>data/demo.msc</file>
+      <file alias="data/demo.msc">../demos/promenade.msc</file>
       <file>data/piano1.sf2</file>
       <file>data/speaker.svg</file>
       <file>data/midiin.svg</file>

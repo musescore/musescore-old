@@ -1314,11 +1314,13 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
       if (mb && mb->type() == MEASURE) {
             Measure* m = (Measure*)mb;
-            System* s = m->system();
+            System* s  = m->system();
             QRectF sb(s->staff(staffIdx)->bbox());
             sb.translate(s->pos() + s->page()->pos());
             QPointF anchor(seg->abbox().x(), sb.topLeft().y());
             setDropAnchor(QLineF(pos, anchor));
+            dragElement->setTrack(staffIdx * VOICES);
+            dragElement->setTick(tick);
             return true;
             }
       setDropTarget(0);
@@ -1451,9 +1453,6 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                         el = Element::create(type, score());
                         ((SLine*)el)->setLen(_spatium * 7);
                         break;
-                  case SYMBOL:
-                        el = new Symbol(score());
-                        break;
                   case IMAGE:
                         {
                         // look ahead for image type
@@ -1495,6 +1494,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case REPEAT_MEASURE:
                   case ICON:
                   case NOTE:
+                  case SYMBOL:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1543,6 +1543,29 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
       }
 
 //---------------------------------------------------------
+//   dragSymbol
+//    drag SYMBOL and IMAGE elements
+//---------------------------------------------------------
+
+void Canvas::dragSymbol(const QPointF& pos)
+      {
+      const QList<const Element*> el = elementsAt(pos);
+      if (el.isEmpty()) {
+            setDropTarget(0);
+            return;
+            }
+      if (el[0]->type() == NOTE) {
+            if (el[0]->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+                  return;
+            else {
+                  setDropTarget(0);
+                  return;
+                  }
+            }
+      dragTimeAnchorElement(pos);
+      }
+
+//---------------------------------------------------------
 //   dragMoveEvent
 //---------------------------------------------------------
 
@@ -1572,13 +1595,9 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case TEXTLINE:
                         dragTimeAnchorElement(pos);
                         break;
+                  case IMAGE:
                   case SYMBOL:
-                        {
-                        Symbol* s = (Symbol*)dragElement;
-                        if (s->anchor() == ANCHOR_STAFF) {
-                              dragTimeAnchorElement(pos);
-                              }
-                        }
+                        dragSymbol(pos);
                         break;
                   case KEYSIG:
                   case CLEF:
@@ -1599,18 +1618,11 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case ICON:
                         {
                         Element* el = elementAt(pos);
-                        if (el) {
-                              if (el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
-                                    event->acceptProposedAction();
-                                    break;
-                                    }
-                              if (debugMode)
-                                    printf("ignore drag of %s\n", dragElement->name());
-                              }
+                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+                              break;
                         setDropTarget(0);
                         }
                         break;
-                  case IMAGE:
                   default:
                         break;
                   }
@@ -1700,14 +1712,26 @@ void Canvas::dropEvent(QDropEvent* event)
                         event->acceptProposedAction();
                         break;
                   case SYMBOL:
-                        {
-                        Symbol* s = (Symbol*) dragElement;
-                        score()->cmdAddBSymbol(s, pos, dragOffset);
-                        event->acceptProposedAction();
-                        }
-                        break;
                   case IMAGE:
-                        score()->cmdAddBSymbol((Image*)dragElement, pos, dragOffset);
+                        {
+printf("canvas drop SYMBOL\n");
+                        // Symbol* s = (Symbol*)dragElement;
+                        Element* el = elementAt(pos);
+
+                        if (!el) {
+                              printf("cannot drop here\n");
+                              delete dragElement;
+                              break;
+                              }
+                        _score->addRefresh(el->abbox());
+                        _score->addRefresh(dragElement->abbox());
+                        Element* dropElement = el->drop(pos, dragOffset, dragElement);
+                        _score->addRefresh(el->abbox());
+                        if (dropElement) {
+                              _score->select(dropElement, 0, 0);
+                              _score->addRefresh(dropElement->abbox());
+                              }
+                        }
                         event->acceptProposedAction();
                         break;
                   case KEYSIG:
@@ -1730,21 +1754,20 @@ void Canvas::dropEvent(QDropEvent* event)
                   case NOTE:
                         {
                         Element* el = elementAt(pos);
-                        if (el) {
-                              _score->addRefresh(el->abbox());
-                              _score->addRefresh(dragElement->abbox());
-                              Element* dropElement = el->drop(pos, dragOffset, dragElement);
-                              _score->addRefresh(el->abbox());
-                              if (dropElement) {
-                                    _score->select(dropElement, 0, 0);
-                                    _score->addRefresh(dropElement->abbox());
-                                    }
-                              event->acceptProposedAction();
-                              }
-                        else {
+                        if (!el) {
                               printf("cannot drop here\n");
                               delete dragElement;
+                              break;
                               }
+                        _score->addRefresh(el->abbox());
+                        _score->addRefresh(dragElement->abbox());
+                        Element* dropElement = el->drop(pos, dragOffset, dragElement);
+                        _score->addRefresh(el->abbox());
+                        if (dropElement) {
+                              _score->select(dropElement, 0, 0);
+                              _score->addRefresh(dropElement->abbox());
+                              }
+                        event->acceptProposedAction();
                         }
                         break;
                   default:
@@ -1775,11 +1798,9 @@ void Canvas::dropEvent(QDropEvent* event)
                         return;
                   _score->startCmd();
                   s->setPath(u.path());
-                  s->setAnchor(ANCHOR_PARENT);
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {
-                        s->setAnchor(ANCHOR_STAFF);
-                        s->setStaffIdx(el->staffIdx());
+                        s->setTrack(el->track());
                         if (el->type() == NOTE) {
                               Note* note = (Note*)el;
                               s->setTick(note->chord()->tick());
@@ -1975,16 +1996,25 @@ static bool elementLower(const Element* e1, const Element* e2)
       }
 
 //---------------------------------------------------------
+//   elementsAt
+//---------------------------------------------------------
+
+const QList<const Element*> Canvas::elementsAt(const QPointF& p)
+      {
+      QList<const Element*> el = _layout->items(p);
+      qSort(el.begin(), el.end(), elementLower);
+      return el;
+      }
+
+//---------------------------------------------------------
 //   elementAt
 //---------------------------------------------------------
 
 Element* Canvas::elementAt(const QPointF& p)
       {
-      QList<const Element*> el = _layout->items(p);
+      QList<const Element*> el = elementsAt(p);
       if (el.empty())
             return 0;
-      qSort(el.begin(), el.end(), elementLower);
-
 #if 0
       printf("elementAt\n");
       foreach(const Element* e, el)

@@ -129,9 +129,8 @@ void MuseData::readChord(Part*, const QString& s)
       Chord* chord = (Chord*)chordRest;
       Note* note = new Note(score);
       note->setPitch(pitch);
-      note->setStaffIdx(staffIdx);
+      note->setTrack(staffIdx * VOICES + voice);
       note->setTick(chord->tick());
-      note->setVoice(voice);
       chord->add(note);
       }
 
@@ -148,7 +147,7 @@ void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
             }
       slur[idx] = new Slur(score);
       slur[idx]->setStart(tick, staffIdx * VOICES + voice);
-      slur[idx]->setStaffIdx(staffIdx);
+      slur[idx]->setTrack(staffIdx * VOICES + voice);
       slur[idx]->setParent(score->mainLayout());
       score->addElement(slur[idx]);
       }
@@ -233,7 +232,7 @@ void MuseData::readNote(Part* part, const QString& s)
                         }
                   else {
                         tuplet = new Tuplet(score);
-                        tuplet->setStaffIdx(gstaff);
+                        tuplet->setTrack(gstaff * VOICES);
                         tuplet->setBaseLen(ticks * a / b);
 
                         ntuplet = a;
@@ -252,7 +251,7 @@ void MuseData::readNote(Part* part, const QString& s)
       Chord* chord = new Chord(score);
       chord->setTick(tick);
       chordRest = chord;
-      chord->setStaffIdx(gstaff);
+      chord->setTrack(gstaff * VOICES);
       chord->setStemDirection(dir);
       if (tuplet) {
             chord->setTuplet(tuplet);
@@ -267,7 +266,7 @@ void MuseData::readNote(Part* part, const QString& s)
       for (; voice < VOICES; ++voice) {
             Element* e = segment->element(gstaff * VOICES + voice);
             if (e == 0) {
-                  chord->setVoice(voice);
+                  chord->setTrack(gstaff * VOICES + voice);
                   segment->add(chord);
                   break;
                   }
@@ -279,9 +278,8 @@ void MuseData::readNote(Part* part, const QString& s)
             }
       Note* note = new Note(score);
       note->setPitch(pitch);
-      note->setStaffIdx(gstaff);
+      note->setTrack(gstaff * VOICES + voice);
       note->setTick(tick);
-      note->setVoice(voice);
       chord->add(note);
 
       QString dynamics;
@@ -374,7 +372,7 @@ void MuseData::readNote(Part* part, const QString& s)
       if (!dynamics.isEmpty()) {
             Dynamic* dyn = new Dynamic(score);
             dyn->setSubtype(dynamics);
-            dyn->setStaffIdx(gstaff);
+            dyn->setTrack(gstaff * VOICES);
             dyn->setTick(tick);
             measure->add(dyn);
             }
@@ -389,7 +387,7 @@ void MuseData::readNote(Part* part, const QString& s)
                   l->setText(w);
                   l->setTick(tick);
                   l->setNo(no++);
-                  l->setStaffIdx(gstaff);
+                  l->setTrack(gstaff * VOICES);
                   Segment* segment = measure->tick2segment(tick);
                   segment->add(l);
                   }
@@ -446,14 +444,14 @@ void MuseData::readRest(Part* part, const QString& s)
 
       Rest* rest = new Rest(score, tick, ticks);
       chordRest = rest;
-      rest->setStaffIdx(staffIdx);
+      rest->setTrack(staffIdx * VOICES);
       Segment* segment = measure->getSegment(rest);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
             Element* e = segment->element(gstaff * VOICES + voice);
             if (e == 0) {
-                  rest->setVoice(voice);
+                  rest->setTrack(staffIdx * VOICES + voice);
                   segment->add(rest);
                   break;
                   }

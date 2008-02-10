@@ -41,7 +41,7 @@ MeasureBase::MeasureBase(Score* score)
 void MeasureBase::collectElements(QList<const Element*>& el) const
       {
       foreach(Element* e, _el) {
-            if ((e->staffIdx() != -1) && (!e->staff()->show()))
+            if (e->staff() && !e->staff()->show())
                   continue;
             el.append(e);
             }

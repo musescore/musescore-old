@@ -112,7 +112,7 @@ void Dynamic::endDrag()
             Measure* measure = (Measure*)mb;
             QPointF op = canvasPos();
             setTick(ntick);
-            setStaffIdx(stfi);
+            setTrack(stfi * VOICES);
             if (measure != parent()) {
                   ((Measure*)parent())->remove(this);
                   measure->add(this);

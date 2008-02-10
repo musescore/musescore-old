@@ -115,6 +115,7 @@ class Canvas : public QFrame, public Viewer {
       void setShadowNote(const QPointF&);
       void drawElements(QPainter& p,const QList<const Element*>& el);
       bool dragTimeAnchorElement(const QPointF& pos);
+      void dragSymbol(const QPointF& pos);
       bool dragMeasureAnchorElement(const QPointF& pos);
       bool dragAboveMeasure(const QPointF& pos);
       bool dragAboveSystem(const QPointF& pos);
@@ -188,6 +189,7 @@ class Canvas : public QFrame, public Viewer {
       void showNavigator(bool visible);
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;
+      const QList<const Element*> elementsAt(const QPointF& pp);
       Element* elementAt(const QPointF& pp);
       Element* selectedElementAt(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }

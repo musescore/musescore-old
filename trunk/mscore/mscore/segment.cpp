@@ -183,13 +183,13 @@ void Segment::add(Element* el)
       el->setParent(this);
 
       el->setTick(tick());    //DEBUG
-      int staffIdx = el->staffIdx();
-      if (staffIdx == -1) {
-            printf("staff not found\n");
+      int track = el->track();
+      if (track == -1) {
+            printf("element <%s> has invalid track\n", el->name());
             abort();
             }
-      int track = staffIdx * VOICES + el->voice();
 
+      int staffIdx = track / VOICES;
       switch(el->type()) {
             case LYRICS:
                   {
@@ -385,13 +385,13 @@ void Segment::fixStaffIdx()
       int track = 0;
       foreach(Element* e, _elist) {
             if (e)
-                  e->setStaffIdx(track / VOICES);
+                  e->setTrack(track);
             ++track;
             }
       for (int staffIdx = 0; staffIdx < _lyrics.size(); staffIdx++) {
             foreach(Lyrics* l, _lyrics[staffIdx]) {
                   if (l)
-                        l->setStaffIdx(staffIdx);
+                        l->setTrack(staffIdx * VOICES);
                   }
             }
       }

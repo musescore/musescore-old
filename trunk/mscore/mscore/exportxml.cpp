@@ -1502,10 +1502,16 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   sh.doSlurStart(chord, notations, xml);
                   chordAttributes(chord, notations, technical, xml);
                   }
-            foreach (const Text* f, note->fingering()) {
-                  notations.tag(xml);
-                  technical.tag(xml);
-                  xml.tag("fingering", f->getText());
+            foreach (const Element* e, *note->el()) {
+                  if (e->type() == TEXT && e->subtype() == TEXT_FINGERING) {
+                        Text* f = (Text*)e;
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tag("fingering", f->getText());
+                        }
+                  else {
+                        // TODO
+                        }
                   }
             technical.etag(xml);
             if (chord->arpeggio()) {

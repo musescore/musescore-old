@@ -195,7 +195,8 @@ class Score : public QObject {
       void selectionChanged(int);
 
    public:
-      int curTick;      // used for read()/write() optimization
+      int curTick;            // for read optimizations
+      int curTrack;
 
       //---------------------------------------------------
       //    input data for layout():
@@ -303,7 +304,7 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
 
       void setNote(int tick, int track, int pitch, int len);
-      void setGraceNote(int tick, int track,  int pitch, NoteType type, int len);
+      void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track, Measure*);
       bool setRest(int tick, int track, int len, bool useDots);
@@ -492,6 +493,7 @@ class Score : public QObject {
 
       SigList*   getSigmap()  { return sigmap; }
       Measure* appendMeasure();
+      UndoList* getUndoList() { return &undoList; }
       };
 
 extern Score* gscore;

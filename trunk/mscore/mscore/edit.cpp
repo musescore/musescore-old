@@ -202,8 +202,7 @@ Rest* Score::setRest(int tick, int len, int track, Measure* measure)
             rest = new Rest(this, tick, division/32);
             }
       if (rest) {
-            rest->setVoice(track % VOICES);
-            rest->setStaffIdx(track / VOICES);
+            rest->setTrack(track);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -364,7 +363,7 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
       Measure* measure = tick2measure(tick);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setStaffIdx(staffIdx);
+            nsig->setTrack(staffIdx * VOICES);
             nsig->setTick(tick);
             Segment::SegmentType st = Segment::segmentType(TIMESIG);
             Segment* seg = measure->findSegment(st, tick);
@@ -580,7 +579,7 @@ void Score::cmdAddTie()
       Tie* tie = new Tie(this);
       tie->setStartNote(note);
       tie->setEndNote(note);
-      tie->setStaffIdx(staffIdx);
+      tie->setTrack(staffIdx * VOICES);
       note->setTieFor(tie);
       _layout->connectTies();
       layoutAll = true;
@@ -612,7 +611,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setTick(tick1);
       pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
-      pin->setStaffIdx(el->staffIdx());
+      pin->setTrack(el->track());
       pin->setParent(_layout);
       pin->layout(mainLayout());
 #if 0
@@ -698,12 +697,13 @@ void Score::cmdFlipStemDirection()
 
 //---------------------------------------------------------
 //   cmdAddBSymbol
+//    add Symbol or Image
 //---------------------------------------------------------
 
 void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       {
       s->setSelected(false);
-
+#if 0
       if (s->anchor() == ANCHOR_STAFF) {
             int staffIdx = -1;
             int pitch, tick;
@@ -720,10 +720,11 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             s->setPos(segment->x(), 0.0);
             s->setUserOff(offset / _spatium);
             s->setTick(segment->tick());
-            s->setStaffIdx(staffIdx);
+            s->setTrack(staffIdx * VOICES);
             s->setParent(measure);
             }
       else if (s->anchor() == ANCHOR_PARENT) {
+#endif
             bool foundPage = false;
             foreach (Page* page, _layout->pages()) {
                   if (page->contains(pos)) {
@@ -741,8 +742,8 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                               return;
                               }
                         s->setPos(0.0, 0.0);
-                        s->setUserOff((pos - page->pos() - off) / _spatium);
-                        s->setStaffIdx(0);
+                        s->setUserOff((pos - m->canvasPos() - off) / _spatium);
+                        s->setTrack(0);
                         s->setParent(m);
                         foundPage = true;
                         break;
@@ -753,12 +754,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                   delete s;
                   return;
                   }
-            }
-      else {
-            printf("Anchor type not implemented\n");
-            delete s;
-            return;
-            }
+//            }
 
       undoAddElement(s);
       addRefresh(s->abbox());
@@ -841,9 +837,8 @@ void Score::deleteItem(Element* el)
                         // voice 0 chords are always replaced by rests
                         //
                         Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
-                        rest->setStaffIdx(el->staffIdx());
+                        rest->setTrack(el->track());
                         rest->setParent(chord->parent());
-                        rest->setVoice(el->voice());
                         undoAddElement(rest);
                         }
                   else {
@@ -871,6 +866,17 @@ void Score::deleteItem(Element* el)
 
             case ACCIDENTAL:
                   addAccidental((Note*)(el->parent()), ACC_NONE);
+                  break;
+
+            case BAR_LINE:
+                  {
+                  BarLine* bl      = (BarLine*)el;
+                  Segment* segment = bl->segment();
+                  Measure* m       = segment->measure();
+                  if (segment->subtype() == Segment::SegStartRepeatBarLine) {
+                        undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatStart);
+                        }
+                  }
                   break;
 
             default:
@@ -1000,8 +1006,8 @@ void Score::cmdDeleteSelection()
                               seg = m->createSegment(Segment::SegChordRest, m->tick());
                               undoAddElement(seg);
                               }
-                        Rest* rest    = new Rest(this, m->tick(), 0);
-                        rest->setStaffIdx(staffIdx);
+                        Rest* rest = new Rest(this, m->tick(), 0);
+                        rest->setTrack(staffIdx * VOICES);
                         rest->setParent(seg);
                         undoAddElement(rest);
                         foreach(Element* el, *m->el()) {
@@ -1085,7 +1091,7 @@ void Score::chordTab(bool back)
       if (!cn) {
             cn = new Harmony(this);
             cn->setTick(segment->tick());
-            cn->setStaffIdx(ocn->staffIdx());
+            cn->setTrack(ocn->track());
             cn->setParent(measure);
             undoAddElement(cn);
             }
@@ -1161,7 +1167,7 @@ void Score::lyricsTab(bool back)
             }
 
       lyrics->setTick(segment->tick());
-      lyrics->setStaffIdx(oldLyrics->staffIdx());
+      lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no());
       undoAddElement(lyrics);
@@ -1220,7 +1226,7 @@ void Score::lyricsMinus()
       lyrics->setSyllabic(Lyrics::END);
 
       lyrics->setTick(segment->tick());
-      lyrics->setStaffIdx(oldLyrics->staffIdx());
+      lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no());
       undoAddElement(lyrics);
@@ -1250,7 +1256,7 @@ void Score::lyricsReturn()
 
       lyrics = new Lyrics(this);
       lyrics->setTick(segment->tick());
-      lyrics->setStaffIdx(oldLyrics->staffIdx());
+      lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no() + 1);
       undoAddElement(lyrics);
@@ -1308,7 +1314,7 @@ void Score::addLyrics()
             no = ll->size();
       lyrics = new Lyrics(this);
       lyrics->setTick(tick);
-      lyrics->setStaffIdx(chord->staffIdx());
+      lyrics->setTrack(chord->track());
       lyrics->setParent(segment);
       lyrics->setNo(no);
       undoAddElement(lyrics);
@@ -1371,7 +1377,7 @@ void Score::cmdTuplet(int n)
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
-      tuplet->setStaffIdx(staffIdx);
+      tuplet->setTrack(staffIdx * VOICES);
       Measure* measure = chord->measure();
       tuplet->setParent(measure);
       undoAddElement(tuplet);
@@ -1380,13 +1386,12 @@ void Score::cmdTuplet(int n)
 
       note = new Note(this);
       note->setPitch(pitch);
-      note->setStaffIdx(staffIdx);
+      note->setTrack(staffIdx * VOICES + voice);
 
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTuplet(tuplet);
-      chord->setVoice(voice);
-      chord->setStaffIdx(staffIdx);
+      chord->setTrack(staffIdx * VOICES + voice);
       chord->add(note);
 
       chord->setTickLen(ticks);
@@ -1404,8 +1409,7 @@ void Score::cmdTuplet(int n)
             Rest* rest = new Rest(this);
             rest->setTick(tick);
             rest->setTuplet(tuplet);
-            rest->setVoice(voice);
-            rest->setStaffIdx(staffIdx);
+            rest->setTrack(staffIdx * VOICES + voice);
             rest->setTickLen(ticks);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);

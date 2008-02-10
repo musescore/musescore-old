@@ -213,10 +213,12 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       l->addWidget(sa);
 
       QButtonGroup* bg = new QButtonGroup();
+#if 0       // TODO
       bg->addButton(anchorPage, ANCHOR_PARENT);
       bg->addButton(anchorTime, ANCHOR_STAFF);
       bg->addButton(anchorNote, ANCHOR_PARENT);
-      bg->addButton(anchorSystem, ANCHOR_MEASURE);
+      bg->addButton(anchorSystem, ANCHOR_PARENT);
+#endif
       connect(bg, SIGNAL(buttonClicked(int)), SLOT(anchorClicked(int)));
       anchorPage->setChecked(true);
 
@@ -238,6 +240,7 @@ SymbolDialog::SymbolDialog(QWidget* parent)
 
 void SymbolDialog::anchorClicked(int val)
       {
+#if 0
       Anchor anchor = (Anchor)val;
       int rows    = sp->getRows();
       int columns = sp->getColumns();
@@ -247,6 +250,7 @@ void SymbolDialog::anchorClicked(int val)
             if (e && e->type() == SYMBOL)
                   ((Symbol*)e)->setAnchor(anchor);
             }
+#endif
       }
 
 //---------------------------------------------------------

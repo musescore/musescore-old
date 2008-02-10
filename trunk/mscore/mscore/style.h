@@ -72,14 +72,12 @@ class TextStyle {
       bool italic;
       bool underline;
       Align align;
-      Anchor anchor;
       double xoff, yoff;                  // absolute offset: inch or spatium
       OffsetType offsetType;
       double rxoff, ryoff;                // relative offset: % of parent width/height
       bool sizeIsSpatiumDependent;        // text point size depends on _spatium unit
 
       double frameWidth;
-//      double marginWidth;
       double paddingWidth;
       int frameRound;
       QColor frameColor;
@@ -87,11 +85,10 @@ class TextStyle {
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
-         Align _align, Anchor _anchor,
+         Align _align,
          double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
          double _rxoff = 0, double _ryoff = 0,
          bool sd = false,
-//         double fw = 0.0, double mw = 0.0, double pw = 0.0, int fr = 25,
          double fw = 0.0, double pw = 0.0, int fr = 25,
          QColor co = QColor(Qt::black), bool circle = false);
 
@@ -109,7 +106,6 @@ class TextStyle {
                 || s.italic != italic
                 || s.underline != underline
                 || s.align != align
-                || s.anchor != anchor
                 || s.xoff   != xoff
                 || s.yoff   != yoff
                 || s.rxoff != rxoff
@@ -117,7 +113,6 @@ class TextStyle {
                 || s.offsetType != offsetType
                 || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
                 || s.frameWidth != frameWidth
-//                || s.marginWidth != marginWidth
                 || s.paddingWidth != paddingWidth
                 || s.frameRound != frameRound
                 || s.frameColor != frameColor
@@ -160,10 +155,6 @@ struct Style {
       Spatium barNoteDistance;
       Spatium noteBarDistance;
 
-      double spacing16;
-      double spacing8;
-      double spacing4;
-      double spacing2;
       double measureSpacing;
 
       Spatium staffLineWidth;
@@ -184,7 +175,7 @@ struct Style {
       Spatium propertyDistanceHead;  // note property to note head
       Spatium propertyDistanceStem;  // note property to note stem
       Spatium propertyDistance;      // note property to note property
-      double ticklen2Width;         // 1.0 - with of elements is proportional to
+//      double ticklen2Width;         // 1.0 - with of elements is proportional to
                                     // ticklen
       double pageFillLimit;         // 0-1.0
       Spatium hairpinHeight;

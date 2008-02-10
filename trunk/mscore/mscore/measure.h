@@ -149,7 +149,7 @@ class Measure : public MeasureBase {
       void layout(ScoreLayout*, double width);
       void layout2(ScoreLayout*);
 
-      Chord* findChord(int tick, int staff, int voice, bool grace);
+      Chord* findChord(int tick, int track, bool grace);
       ChordRest* findChordRest(int tick, int track);
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;

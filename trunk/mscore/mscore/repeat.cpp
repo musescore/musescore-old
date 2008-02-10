@@ -233,7 +233,6 @@ int Marker::markerType() const
 void Marker::read(QDomElement e)
       {
       setAlign(0);
-      setAnchor(ANCHOR_PARENT);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "label")
@@ -373,7 +372,6 @@ int Jump::jumpType() const
 void Jump::read(QDomElement e)
       {
       setAlign(0);
-      setAnchor(ANCHOR_PARENT);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "jumpTo")

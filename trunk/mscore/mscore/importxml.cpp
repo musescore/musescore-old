@@ -840,7 +840,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   else {
                         if (newSystem == "yes" || newPage == "yes") {
                               LayoutBreak* lb = new LayoutBreak(score);
-                              lb->setStaffIdx(staff);
+                              lb->setTrack(staff * VOICES);
                               lb->setSubtype(
                                  newSystem == "yes" ? LAYOUT_BREAK_LINE : LAYOUT_BREAK_PAGE
                                  );
@@ -924,7 +924,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               }
                         else
                               printf("unsupported bar type <%s>\n", barStyle.toLatin1().data());
-                        barLine->setStaffIdx(staff);
+                        barLine->setTrack(staff * VOICES);
                         if (barLine->subtype() == START_REPEAT) {
                               measure->setRepeatFlags(RepeatStart);
                               }
@@ -947,7 +947,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               else {
                                     if (endingType == "start") {
                                           Volta* volta = new Volta(score);
-                                          volta->setStaffIdx(staff);
+                                          volta->setTrack(staff * VOICES);
                                           volta->setTick(tick);
                                           volta->setText(endingNumber);
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
@@ -1224,65 +1224,59 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 */
 
       if (repeat != "") {
+            Element* e = 0;
             if (repeat == "segno") {
-                  Marker* m = new Marker(score);
-                  m->setMarkerType(MARKER_SEGNO);
-                  m->setStaffIdx(staff + rstaff);
-                  measure->add(m);
+                  e = new Marker(score);
+                  ((Marker*)e)->setMarkerType(MARKER_SEGNO);
                   }
             else if (repeat == "coda") {
                   Marker* m = new Marker(score);
                   m->setMarkerType(MARKER_CODA);
-                  m->setStaffIdx(staff + rstaff);
-                  measure->add(m);
+                  e = m;
                   }
             else if (repeat == "fine") {
                   Marker* m = new Marker(score);
                   m->setMarkerType(MARKER_FINE);
-                  m->setStaffIdx(staff + rstaff);
-                  measure->add(m);
+                  e = m;
                   }
             else if (repeat == "toCoda") {
                   Marker* m = new Marker(score);
                   m->setMarkerType(MARKER_TOCODA);
-                  m->setStaffIdx(staff + rstaff);
-                  measure->add(m);
+                  e = m;
                   }
             else if (repeat == "daCapo") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DC);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
                   }
             else if (repeat == "daCapoAlCoda") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DC_AL_CODA);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
                   }
             else if (repeat == "daCapoAlFine") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DC_AL_FINE);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
                   }
             else if (repeat == "dalSegno") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DS);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
                   }
             else if (repeat == "dalSegnoAlCoda") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DS_AL_CODA);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
                   }
             else if (repeat == "dalSegnoAlFine") {
                   Jump* jp = new Jump(score);
                   jp->setJumpType(JUMP_DS_AL_FINE);
-                  jp->setStaffIdx(staff + rstaff);
-                  measure->add(jp);
+                  e = jp;
+                  }
+            if (e) {
+                  e->setTrack((staff + rstaff) * VOICES);
+                  measure->add(e);
                   }
             }
 
@@ -1310,7 +1304,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
-            t->setStaffIdx(staff + rstaff);
+            t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
             }
       else if (dirType == "rehearsal") {
@@ -1321,7 +1315,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
-            t->setStaffIdx(staff + rstaff);
+            t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
             }
       else if (dirType == "pedal") {
@@ -1334,7 +1328,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else {
                               pedal = new Pedal(score);
-                              pedal->setStaffIdx(staff + rstaff);
+                              pedal->setTrack((staff + rstaff) * VOICES);
                               pedal->setTick(tick);
                               }
                         }
@@ -1353,7 +1347,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else {
                   Symbol* s = new Symbol(score);
-                  s->setAnchor(ANCHOR_SEGMENT);
                   s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                   s->setOffsetType(OFFSET_SPATIUM);
                   s->setTick(tick);
@@ -1366,7 +1359,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   s->setAbove(placement == "above");
                   s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   s->setMxmlOff(offset);
-                  s->setStaffIdx(staff + rstaff);
+                  s->setTrack((staff + rstaff) * VOICES);
                   measure->add(s);
                   }
             }
@@ -1380,7 +1373,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
 
-                  dyn->setStaffIdx(staff + rstaff);
+                  dyn->setTrack((staff + rstaff) * VOICES);
                   dyn->setTick(tick);
                   measure->add(dyn);
                   }
@@ -1405,7 +1398,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         ottava = new Ottava(score);
-                        ottava->setStaffIdx(staff + rstaff);
+                        ottava->setTrack((staff + rstaff) * VOICES);
                         ottava->setTick(tick);
                         if (ottavasize == 8)
                               ottava->setSubtype(0);
@@ -1426,7 +1419,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         ottava = new Ottava(score);
-                        ottava->setStaffIdx(staff + rstaff);
+                        ottava->setTrack((staff + rstaff) * VOICES);
                         ottava->setTick(tick);
                         if (ottavasize == 8)
                               ottava->setSubtype(2);
@@ -1505,7 +1498,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                                           // apply to all staves in part
                                           KeySig* keysig = new KeySig(score);
                                           keysig->setTick(tick);
-                                          keysig->setStaffIdx(staffIdx + i);
+                                          keysig->setTrack((staffIdx + i) * VOICES);
                                           keysig->setSubtype(key);
                                           Segment* s = measure->getSegment(keysig);
                                           s->add(keysig);
@@ -1525,7 +1518,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               if (tick) {
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTick(tick);
-                                    keysig->setStaffIdx(staffIdx);
+                                    keysig->setTrack(staffIdx * VOICES);
                                     keysig->setSubtype(key);
                                     Segment* s = measure->getSegment(keysig);
                                     s->add(keysig);
@@ -1595,7 +1588,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         // dont generate symbol for tick 0
                         Clef* clefs = new Clef(score, clef);
                         clefs->setTick(tick);
-                        clefs->setStaffIdx(staff + clefno);
+                        clefs->setTrack((staff + clefno) * VOICES);
                         Segment* s = measure->getSegment(clefs);
                         s->add(clefs);
                         ++clefno;
@@ -1656,7 +1649,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         TimeSig* timesig = new TimeSig(score);
                         timesig->setTick(tick);
                         timesig->setSubtype(st);
-                        timesig->setStaffIdx(staff + i);
+                        timesig->setTrack((staff + i) * VOICES);
                         Segment* s = measure->getSegment(timesig);
                         s->add(timesig);
                         }
@@ -1705,7 +1698,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             }
-      l->setStaffIdx(staff);
+      l->setTrack(staff * VOICES);
       Segment* segment = measure->getSegment(l);
       segment->add(l);
       }
@@ -1937,7 +1930,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     else if (pl == "below")
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
-                                    slur[slurNo]->setStaffIdx(staff + relStaff);
+                                    slur[slurNo]->setTrack((staff + relStaff) * VOICES);
                                     slur[slurNo]->setParent(score->mainLayout());
                                     score->addElement(slur[slurNo]);
                                     if (endSlur)
@@ -2110,8 +2103,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // TODO: try to find out if this rest is part of a beam
             cr->setBeamMode(BEAM_NO);
 //            cr->setBeamMode(BEAM_AUTO);
-            cr->setVoice(voice);
-            cr->setStaffIdx(staff + relStaff);
+            cr->setTrack((staff + relStaff) * VOICES + voice);
             ((Rest*)cr)->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
             s->add(cr);
@@ -2124,7 +2116,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             note->setType(durationType);
             note->setDots(dots);
-            note->setVoice(voice);
+            int track = (staff + relStaff) * VOICES + voice;
+            note->setTrack(track);
             note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
@@ -2137,17 +2130,16 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (tie) {
                   note->setTieFor(tie);
                   tie->setStartNote(note);
-                  tie->setStaffIdx(staff + relStaff);
+                  tie->setTrack(track);
                   tie = 0;
                   }
 
-            cr = measure->findChord(tick, staff + relStaff, voice, grace);
+            cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
                   cr = new Chord(score);
                   cr->setTick(tick);
-                  cr->setVoice(voice);
                   cr->setBeamMode(bm);
-                  cr->setStaffIdx(staff + relStaff);
+                  cr->setTrack(track);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")
@@ -2215,7 +2207,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         trill = new Trill(score);
-                        trill->setStaffIdx(staff + relStaff);
+                        trill->setTrack((staff + relStaff) * VOICES);
                         trill->setTick(tick);
                         wavyLineStart = true;
                         }
@@ -2298,7 +2290,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
-                  tuplet->setStaffIdx(staff + relStaff);
+                  tuplet->setTrack((staff + relStaff) * VOICES);
                   tuplet->setNormalNotes(normalNotes);
                   tuplet->setActualNotes(actualNotes);
                   tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
@@ -2381,7 +2373,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
-      hp->setStaffIdx(staff);
+      hp->setTrack(staff * VOICES);
       score->mainLayout()->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());

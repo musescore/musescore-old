@@ -337,7 +337,7 @@ newBeam:
                                           }
                                     else {
                                           beam = new Beam(score());
-                                          beam->setStaffIdx(a1->staffIdx());
+                                          beam->setTrack(a1->track());
                                           beam->setParent(this);
                                           _beamList.push_back(beam);
                                           a1->setBeam(beam);
@@ -595,10 +595,12 @@ void Beam::layout(ScoreLayout* layout)
       double min = 1000;
       double max = -1000;
       int lmove = elements.front()->staffMove();
+      bool isGrace = false;
       foreach(ChordRest* cr, elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord  = (Chord*)(cr);
+            isGrace = chord->noteType() != NOTE_NORMAL;
             if (chord->staffMove() != lmove)
                   break;
             QPointF npos(chord->stemPos(chord->isUp(), true) + chord->pos() + chord->segment()->pos());
@@ -617,6 +619,8 @@ void Beam::layout(ScoreLayout* layout)
       double n = 3.0;   // minimum stem len (should be a style parameter)
       if (fabs(max-min) > _spatium * 2)
             n = 2.0;    // reduce minimum stem len (heuristic)
+      if (isGrace)
+            n *= score()->style()->graceNoteMag;
 
       {
       double diff = _spatium * n - min;

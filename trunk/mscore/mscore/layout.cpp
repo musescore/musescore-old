@@ -282,7 +282,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   //
                   if (keyIdx) {
                         KeySig* ks = new KeySig(_score);
-                        ks->setStaffIdx(i);
+                        ks->setTrack(i * VOICES);
                         ks->setTick(tick);
                         ks->setGenerated(true);
                         ks->setSubtype(keyIdx);
@@ -297,7 +297,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   //
                   int idx = staff->clef()->clef(tick);
                   Clef* cs = new Clef(_score, idx);
-                  cs->setStaffIdx(i);
+                  cs->setTrack(i * VOICES);
                   cs->setTick(tick);
                   cs->setGenerated(true);
                   cs->setMag(staff->mag());
@@ -590,10 +590,10 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         Measure* m = (Measure*)lm;
                         Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
                         int nstaves = score()->nstaves();
-                        for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                              if (s->element(staffIdx * VOICES) == 0) {
+                        for (int track = 0; track < nstaves * VOICES; track += VOICES) {
+                              if (s->element(track) == 0) {
                                     TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
-                                    ts->setStaffIdx(staffIdx);
+                                    ts->setTrack(track);
                                     ts->setGenerated(true);
                                     s->add(ts);
                                     needRelayout = true;
@@ -613,7 +613,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         continue;
                   Measure* m = (Measure*)mb;
 
-                  if (i == (n-1)) {
+                  if (i == (n-1)) {       // last measure in system?
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);
                         else if (m->endBarLineGenerated())
