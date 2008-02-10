@@ -117,7 +117,7 @@ void Pedal::read(QDomElement e)
 LineSegment* Pedal::createLineSegment()
       {
       LineSegment* seg = new PedalSegment(score());
-      seg->setStaffIdx(staffIdx());
+      seg->setTrack(track());
       return seg;
       }
 

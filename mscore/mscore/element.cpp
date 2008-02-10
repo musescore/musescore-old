@@ -102,11 +102,29 @@ bool Element::operator>(const Element& el) const
 
 Element::~Element()
       {
-      if (_selected) {
-            if (score())
-                  score()->deselect(this);
-            if (debugMode)
-                  printf("delete selected element\n");
+      if (score()) {
+            Selection* s = score()->selection();
+            QList<Element*>* el = s->elements();
+            foreach(Element* e, *el) {
+                  if (e == this) {
+                        if (debugMode)
+                              printf("======~Element: %p still in selection!\n", this);
+                        el->removeAt(el->indexOf(this));
+                        }
+                  }
+            UndoList* ul = score()->getUndoList();
+            if (!ul->isEmpty()) {
+                  Undo* undo = ul->back();
+                  s = &undo->selection;
+                  QList<Element*>* el = s->elements();
+                  foreach(Element* e, *el) {
+                        if (e == this) {
+                              if (debugMode)
+                                    printf("======~Element: %p still in undo!\n", this);
+                              el->removeAt(el->indexOf(this));
+                              }
+                        }
+                  }
             }
       }
 
@@ -122,8 +140,7 @@ void Element::init()
       _dropTarget = false;
       _visible    = true;
       _generated  = false;
-      _voice      = 0;
-      _staffIdx   = -1;
+      _track      = -1;
       _color      = Qt::black;
       _mxmlOff    = 0;
       _pos.setX(0.0);
@@ -136,7 +153,6 @@ void Element::init()
       _yoff        = 0;
       _rxoff       = 0;
       _ryoff       = 0;
-      _anchor      = ANCHOR_PARENT;
       _offsetType  = OFFSET_SPATIUM;
       }
 
@@ -153,24 +169,14 @@ Element::Element(Score* s)
       }
 
 //---------------------------------------------------------
-//   staffIdx
+//   staff
 //---------------------------------------------------------
 
 Staff* Element::staff() const
       {
-      return score()->staff(_staffIdx);
-      }
-
-//---------------------------------------------------------
-//   setTrack
-//---------------------------------------------------------
-
-void Element::setTrack(int track)
-      {
-      if (track < 0)
-            return;
-      setVoice(track % VOICES);
-      setStaffIdx(track / VOICES);
+      if (_track == -1)
+            return 0;
+      return score()->staff(staffIdx());
       }
 
 //---------------------------------------------------------
@@ -182,7 +188,7 @@ QColor Element::curColor() const
       if (score() && score()->printing())
             return _color;
       if (_selected)
-            return preferences.selectColor[_voice];
+            return preferences.selectColor[voice()];
       if (_dropTarget)
             return preferences.dropColor;
       if (!_visible)
@@ -198,11 +204,19 @@ QColor Element::curColor() const
  Return update Rect relative to canvas.
 */
 
-QRectF Element::drag(const QPointF& s)
+QRectF Element::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(s / _spatium);
+      setUserOff(pos / _spatium);
       return abbox() | r;
+      }
+
+//---------------------------------------------------------
+//   endDrag
+//---------------------------------------------------------
+
+void Element::endDrag()
+      {
       }
 
 //---------------------------------------------------------
@@ -313,8 +327,8 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("subtype", subtypeName()));
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
-      if (voice())
-            pl.append(Prop("voice", voice()));
+      if (track() != xml.curTrack)
+            pl.append(Prop("track", track()));
       if (selected())
             pl.append(Prop("selected", selected()));
       if (!visible())
@@ -348,6 +362,7 @@ bool Element::readProperties(QDomElement e)
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
+//      setTrack(score()->curTrack);
 
       if (tag == "tick") {
             setTick(score()->fileDivision(i));
@@ -364,7 +379,9 @@ bool Element::readProperties(QDomElement e)
       else if (tag == "visible")
             setVisible(i);
       else if (tag == "voice")
-            setVoice(i);
+            setTrack((_track/VOICES)*VOICES + i);
+      else if (tag == "track")
+            setTrack(i);
       else if (tag == "selected")
             setSelected(i);
       else if (tag == "color") {
@@ -495,6 +512,17 @@ void ElementList::add(Element* e)
             }
       append(e);
       }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void ElementList::write(Xml& xml) const
+      {
+      for (ciElement ie = begin(); ie != end(); ++ie)
+            (*ie)->write(xml);
+      }
+
 
 //---------------------------------------------------------
 //   StaffLines
@@ -1095,6 +1123,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case NOTE:
                   el = new Note(score);
+                  break;
+            case SYMBOL:
+                  el = new Symbol(score);
                   break;
             default:
                   printf("Element::create(): cannot create element type %d\n", type);

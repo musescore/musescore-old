@@ -89,7 +89,7 @@ class Note : public Element {
       DurationType _durationType;
       bool _mirror;           ///< True if note is mirrored at stem.
       int _dots;
-      QList<Text*> _fingering;
+      ElementList _el;        ///< fingering, other text, symbols or images
 
       Tie* _tieFor;
       Tie* _tieBack;
@@ -112,6 +112,8 @@ class Note : public Element {
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout(ScoreLayout*);
+      virtual void collectElements(QList<const Element*>& el) const;
+      virtual void setTrack(int val);
 
       void setHead(int);
       int totalTicks() const;
@@ -140,8 +142,6 @@ class Note : public Element {
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n)             { _line = n;      }
-
-      QList<Text*>& fingering()       { return _fingering; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -173,8 +173,11 @@ class Note : public Element {
       void setHidden(bool val)      { _hidden = val;  }
 
       NoteType noteType() const;
-      int staffMove() const      { return _staffMove; }
-      void setStaffMove(int val) { _staffMove = val; }
+      int staffMove() const         { return _staffMove; }
+      void setStaffMove(int val)    { _staffMove = val; }
+
+      ElementList* el()             { return &_el; }
+      const ElementList* el() const { return &_el; }
       };
 
 //---------------------------------------------------------

@@ -232,9 +232,8 @@ void Rest::add(Element* e)
       {
       if (e->type() != ATTRIBUTE)
             return;
-      e->setVoice(voice());
       e->setParent(this);
-      e->setStaffIdx(staffIdx());
+      e->setTrack(track());
       attributes.push_back((NoteAttribute*)e);
       }
 

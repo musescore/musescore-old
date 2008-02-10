@@ -30,7 +30,8 @@ QString docName;
 Xml::Xml()
       {
       stack.clear();
-      curTick = 0;
+      curTick  = 0;
+      curTrack = -1;
       }
 
 Xml::Xml(QIODevice* device)
@@ -38,7 +39,8 @@ Xml::Xml(QIODevice* device)
       {
       setCodec("utf8");
       stack.clear();
-      curTick = 0;
+      curTick  = 0;
+      curTrack = -1;
       }
 
 //---------------------------------------------------------

@@ -37,8 +37,10 @@ class Symbol : public BSymbol {
       Symbol(Score*);
       Symbol &operator=(const Symbol&);
 
-      virtual Symbol* clone() const    { return new Symbol(*this); }
-      virtual ElementType type() const { return SYMBOL; }
+      virtual Symbol* clone() const     { return new Symbol(*this); }
+      virtual ElementType type() const  { return SYMBOL; }
+      virtual QLineF dragAnchor() const;
+
       void setSym(int);
       int sym() const { return _sym;  }
 

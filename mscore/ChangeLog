@@ -1,3 +1,11 @@
+10.2.8 (ws)
+      - start reapeat bar line in first measure of system can now be deleted
+      - remove Anchor property from element
+      - replace staffIdx and voice in Element() with track
+8.2.8 (ws)
+      - better spacing: accidental now do not collide with left bar line
+      - fix fill color of selected slur
+      - calculate better stem with for beamed grace notes
 7.2.8 (ws)
       - implemented easy slur creation in note entry mode
 6.2.8 (ws)

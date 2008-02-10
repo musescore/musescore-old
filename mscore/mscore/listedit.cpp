@@ -315,7 +315,7 @@ void PageListEditor::updateList()
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
                                                       }
-                                                foreach(Text* f, note->fingering())
+                                                foreach(Element* f, *note->el())
                                                       new ElementItem(ni, f);
                                                 if (note->tieFor()) {
                                                       Tie* tie = note->tieFor();
@@ -801,12 +801,14 @@ void ShowNoteWidget::setElement(Element* e)
       nb.tieBack->setEnabled(note->tieBack());
       nb.accidental->setEnabled(note->accidental());
 
+#if 0 // TODO
       foreach(Text* text, note->fingering()) {
             QString s;
             s.setNum(long(text), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
             nb.fingering->addItem(item);
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1015,7 +1017,6 @@ void TextView::setElement(Element* e)
       tb.rxoffset->setValue(te->rxoff());
       tb.ryoffset->setValue(te->ryoff());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
-      tb.anchor->setCurrentIndex(int(te->anchor()));
       }
 
 //---------------------------------------------------------

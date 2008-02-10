@@ -51,13 +51,13 @@ class Part;
 
 struct UndoOp {
       enum UndoType {
-            RemoveElement, AddElement,
-            InsertPart, RemovePart,
-            InsertStaff, RemoveStaff,
+            RemoveElement,  AddElement,
+            InsertPart,     RemovePart,
+            InsertStaff,    RemoveStaff,
             InsertSegStaff, RemoveSegStaff,
-            InsertMStaff, RemoveMStaff,
-            InsertMeasure, RemoveMeasure,
-            InsertStaves, RemoveStaves,
+            InsertMStaff,   RemoveMStaff,
+            InsertMeasure,  RemoveMeasure,
+            InsertStaves,   RemoveStaves,
             SortStaves,
             ToggleInvisible,
             ChangeColor,

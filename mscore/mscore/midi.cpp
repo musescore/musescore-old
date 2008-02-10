@@ -1096,7 +1096,7 @@ if (tick)
                   TimeSig* ts = new TimeSig(this);
                   ts->setTick(tick);
                   ts->setSig(se.denominator, se.nominator);
-                  ts->setStaffIdx(staffIdx);
+                  ts->setTrack(staffIdx * VOICES);
                   Segment* seg = m->getSegment(ts);
                   seg->add(ts);
                   }
@@ -1168,9 +1168,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               }
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
-                        chord->setStaffIdx(staffIdx);
+                        chord->setTrack(staffIdx * VOICES + voice);
                         chord->setTickLen(len);
-                        chord->setVoice(voice);
                         Segment* s = measure->getSegment(chord);
                         s->add(chord);
 
@@ -1181,7 +1180,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         		Note* note = new Note(this);
                                     note->setPitch(mn->pitch());
                                     note->setTpc(mn->tpc());
-                        		note->setStaffIdx(staffIdx);
+                        		note->setTrack(chord->track());
                   	      	chord->add(note);
                                     note->setTick(tick);
 
@@ -1196,7 +1195,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
 
                                     if (n->ties[i]) {
                                           n->ties[i]->setEndNote(note);
-                                          n->ties[i]->setStaffIdx(note->staffIdx());
+                                          n->ties[i]->setTrack(note->track());
                                           note->setTieBack(n->ties[i]);
                                           }
                                     }
@@ -1229,7 +1228,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     len = measure->tick() + measure->tickLen() - ctick;
                                     }
                               Rest* rest = new Rest(this, ctick, len);
-                              rest->setStaffIdx(staffIdx);
+                              rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest);
                               s->add(rest);
                               ctick   += len;
@@ -1265,7 +1264,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             	Measure* measure = tick2measure(tick);
                   Chord* chord = new Chord(this);
                   chord->setTick(tick);
-                  chord->setStaffIdx(staffIdx);
+                  chord->setTrack(staffIdx * VOICES + voice);
                   Segment* s = measure->getSegment(chord);
                   s->add(chord);
                   int len = 0x7fffffff;      // MAXINT;
@@ -1278,10 +1277,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         foreach(MidiNote* mn, n->mc->notes()) {
                   		Note* note = new Note(this);
                               note->setPitch(mn->pitch());
-            	      	note->setStaffIdx(staffIdx);
+            	      	note->setTrack(staffIdx * VOICES + voice);
                               note->setTick(tick);
                               note->setTpc(mn->tpc());
-                              note->setVoice(voice);
             	      	chord->add(note);
                               }
                         n->mc->setDuration(n->mc->duration() - len);
@@ -1298,10 +1296,10 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   // check for gap and fill with rest
                   //
                   int restLen = measure->tick() + measure->tickLen() - ctick;
-                  if (restLen > 0 && voice > 0) {
+                  if (restLen > 0 && voice == 0) {
                         Rest* rest = new Rest(this, ctick, restLen);
             		Measure* measure = tick2measure(ctick);
-                        rest->setStaffIdx(staffIdx);
+                        rest->setTrack(staffIdx * VOICES + voice);
                         Segment* s = measure->getSegment(rest);
                         s->add(rest);
                         }
@@ -1351,7 +1349,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         QString txt((char*)(mm->data()));
                         l->setText(txt);
                         l->setTick(seg->tick());
-                        l->setStaffIdx(staffIdx);
+                        l->setTrack(staffIdx * VOICES);
                         if (debugMode)
                               printf("Meta Lyric <%s>\n", qPrintable(txt));
                         seg->add(l);

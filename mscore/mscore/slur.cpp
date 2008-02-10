@@ -87,7 +87,7 @@ void SlurSegment::move(const QPointF& s)
 
 void SlurSegment::draw(QPainter& p) const
       {
-      p.setBrush(color());
+      p.setBrush(curColor());
       p.drawPath(path);
       }
 
@@ -633,8 +633,6 @@ void Slur::write(Xml& xml) const
       {
       xml.stag("Slur");
       xml.tag("tick2", _tick2);
-      if (track())
-            xml.tag("track", track());
       if (_track2)
             xml.tag("track2", _track2);
       SlurTie::writeProperties(xml);
@@ -654,8 +652,6 @@ void Slur::read(QDomElement e)
             int i = val.toInt();
             if (tag == "tick2")
                   _tick2 = score()->fileDivision(i);
-            else if (tag == "track")
-                  setTrack(i);
             else if (tag == "track2")
                   _track2 = i;
             else if (tag == "startTick")        // obsolete
@@ -677,8 +673,8 @@ void Slur::read(QDomElement e)
 
 void Slur::layout(ScoreLayout* layout)
       {
-      if (staffIdx() == -1) {
-            printf("Slur::layout: no staff\n");
+      if (track() == -1) {
+            printf("Slur::layout: no track\n");
 //            return;
             }
       double _spatium = layout->spatium();

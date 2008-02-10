@@ -76,13 +76,6 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Align);
 static const Align ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
 
 
-enum Anchor {
-      ANCHOR_PARENT,    ///< anchor is topleft of parent boundingRect
-      ANCHOR_MEASURE,   ///< anchor is topleft of measure boundingRect
-      ANCHOR_STAFF,     ///< top of staff, left of measure
-      ANCHOR_SEGMENT,   ///< top of staff, left of segment
-      };
-
 enum OffsetType {
       OFFSET_ABS,       ///< offset in point units
       OFFSET_SPATIUM    ///< offset in space units

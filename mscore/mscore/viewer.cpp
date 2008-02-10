@@ -60,6 +60,7 @@ void Viewer::setDropTarget(const Element* el)
             r.setBottomRight(dropAnchor.p2());
             _score->addRefresh(r.normalized());
             dropAnchor = QLineF();
+printf("dropAnchor=0\n");
             }
       if (dropRectangle.isValid()) {
             _score->addRefresh(dropRectangle);
@@ -87,6 +88,7 @@ void Viewer::setDropRectangle(const QRectF& r)
             r.setBottomRight(dropAnchor.p2());
             _score->addRefresh(r.normalized());
             dropAnchor = QLineF();
+printf("2dropAnchor=0\n");
             }
       _score->addRefresh(r);
       }

@@ -45,93 +45,93 @@ static const QString ff("Times New Roman");
 
 const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF),
+         ALIGN_LEFT),
 
       TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF),
+         ALIGN_LEFT),
 
       TextStyle(QString("Title"), ff, 24, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, 0, OA, 50, 0),
+         ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0),
 
       TextStyle(QString("Subtitle"), ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, MM(10), OA, 50, 0),
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0),
 
       TextStyle(QString("Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PARENT, 0, 0, OA, 100, 100),
+         ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100),
 
       TextStyle(QString("Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, ANCHOR_PARENT, 0, 0, OA, 0, 100),
+         ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_STAFF, 0, 7),
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7),
 
       TextStyle(QString("Fingering"), ff,  8, false, false, false,
-         ALIGN_CENTER, ANCHOR_PARENT),
+         ALIGN_CENTER),
 
       TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_PARENT),
+         ALIGN_RIGHT | ALIGN_VCENTER),
 
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_PARENT),
+         ALIGN_RIGHT | ALIGN_VCENTER),
 
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, 8.0, OS),
+         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS),
 
       TextStyle(QString("Technik"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, -2.0, OS),
+         ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS),
 
 /*12*/
       TextStyle(QString("Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF),
+         ALIGN_LEFT),
 
       TextStyle(QString("Copyright"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_PARENT, 0, MM(-15), OA, 50.0, 100.0),
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT,    ANCHOR_PARENT, -1.0, -2.2, OS),
+         ALIGN_LEFT, -1.0, -2.2, OS),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BASELINE, ANCHOR_PARENT, MM(-10), MM(-10), OA, 100.0, 100.0),
+         ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),
 
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_PARENT, MM(10), MM(-10), OA, 0.0, 100.0),
+         ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0),
 
       TextStyle(QString("Translator"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6),
+         ALIGN_HCENTER | ALIGN_TOP, 0, 6),
 
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, 8.0, OS),
+         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS),
 
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
-         ALIGN_CENTER, ANCHOR_PARENT),
+         ALIGN_CENTER),
 
       TextStyle(QString("System"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_MEASURE, 0, -4.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QString("Staff"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QString("Chordname"), ff,  12, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
-         ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_SEGMENT, 0, -3.0, OS, 0, 0, true,
+         ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
          0.3, 1.0, 20, Qt::black, false),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
-         ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_MEASURE, 0, -2.0, OS, 100, 0, true),
+         ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true),
 
       TextStyle(QString("Volta"), ff, 11, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Frame"), ff, 11, true, false, false,
-         ALIGN_LEFT,    ANCHOR_PARENT, 0, 0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, 0, OS, 0, 0, true),
 
       TextStyle(QString("TextLine"), ff,  12, false, false, false,
-         ALIGN_HCENTER, ANCHOR_PARENT, 0, 0, OS, 0, 0, true),
+         ALIGN_HCENTER, 0, 0, OS, 0, 0, true),
       };
 
 #undef MM
@@ -173,11 +173,6 @@ Style defaultStyle = {
       Spatium(1.5),   // barNoteDistance
       Spatium(1.0),   // noteBarDistance
 
-      1.0,              // spacing16;
-      1.4,              // spacing8;
-      1.8,              // spacing4;
-      2.2,              // spacing2;
-
       1.3,              // measureSpacing
 
       Spatium(0.08),    // staff line width
@@ -200,7 +195,6 @@ Style defaultStyle = {
       Spatium(0.5),     // propertyDistanceHead
       Spatium(0.5),     // propertyDistanceStem; note property to note stem
       Spatium(0.25),    // propertyDistance; note property to note property
-      .5,               // ticklen2Width
       0.3,              // pageFillLimit
       Spatium(1.2),     // hairpinHeight
       Spatium(0.5),     // hairpinContHeight
@@ -227,14 +221,14 @@ Style defaultStyle = {
 TextStyle::TextStyle(
    QString _name, QString _family, int _size,
    bool _bold, bool _italic, bool _underline,
-   Align _align, Anchor _anchor,
+   Align _align,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
    double fw, double pw, int fr, QColor co, bool _circle)
 
    : name(_name), family(_family), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
-   align(_align), anchor(_anchor),
+   align(_align),
    xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
    frameRound(fr), frameColor(co), circle(_circle)
@@ -284,7 +278,6 @@ void TextStyle::write(Xml& xml) const
       xml.tag("italic", italic);
       xml.tag("underline", underline);
       xml.tag("align", int(align));
-      xml.tag("anchor", anchor);
       xml.tag("offsetType", offsetType);
       xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
       if (offsetType == OFFSET_ABS) {
@@ -298,7 +291,6 @@ void TextStyle::write(Xml& xml) const
       xml.tag("rxoffset", rxoff);
       xml.tag("ryoffset", ryoff);
       xml.tag("frameWidth", frameWidth);
-//      xml.tag("marginWidth", marginWidth);
       xml.tag("paddingWidth", paddingWidth);
       xml.tag("frameRound", frameRound);
       xml.tag("frameColor", frameColor);
@@ -330,8 +322,8 @@ void TextStyle::read(QDomElement e)
                   underline = i;
             else if (tag == "align")
                   align = Align(i);
-            else if (tag == "anchor")
-                  anchor = (Anchor)i;
+            else if (tag == "anchor")     // obsolete
+                  ;
             else if (tag == "xoffset")
                   xoff = val.toDouble();
             else if (tag == "yoffset")
@@ -346,8 +338,6 @@ void TextStyle::read(QDomElement e)
                   sizeIsSpatiumDependent = val.toDouble();
             else if (tag == "frameWidth")
                   frameWidth = val.toDouble();
-//            else if (tag == "marginWidth")
-//                  marginWidth = val.toDouble();
             else if (tag == "paddingWidth")
                   paddingWidth = val.toDouble();
             else if (tag == "frameRound")
@@ -421,14 +411,14 @@ void Style::load(QDomElement e)
                   stemWidth = Spatium(d);
             else if (tag == "minNoteDistance")
                   minNoteDistance = Spatium(d);
-            else if (tag == "spacing16")
-                  spacing16 = d;
-            else if (tag == "spacing8")
-                  spacing8 = d;
-            else if (tag == "spacing4")
-                  spacing4 = d;
-            else if (tag == "spacing2")
-                  spacing2 = d;
+            else if (tag == "spacing16")        // obsolete
+                  ;
+            else if (tag == "spacing8")         // obsolete
+                  ;
+            else if (tag == "spacing4")         // obsolete
+                  ;
+            else if (tag == "spacing2")         // obsolete
+                  ;
             else if (tag == "measureSpacing")
                   measureSpacing = d;
             else if (tag == "barNoteDistance")
@@ -471,8 +461,8 @@ void Style::load(QDomElement e)
                   propertyDistanceStem = Spatium(d);
             else if (tag == "propertyDistance")
                   propertyDistance = Spatium(d);
-            else if (tag == "ticklen2Width")
-                  ticklen2Width = d;
+            else if (tag == "ticklen2Width")    // obsolete
+                  ;
             else if (tag == "pageFillLimit")
                   pageFillLimit = d;
             else if (tag == "hairpinHeight")
@@ -544,10 +534,6 @@ void Style::save(Xml& xml)
       xml.tag("stemWidth",              stemWidth.val());
       xml.tag("minNoteDistance",        minNoteDistance.val());
 
-      xml.tag("spacing16",              spacing16);
-      xml.tag("spacing8",               spacing8);
-      xml.tag("spacing4",               spacing4);
-      xml.tag("spacing2",               spacing2);
       xml.tag("measureSpacing",         measureSpacing);
 
       xml.tag("barNoteDistance",        barNoteDistance.val());
@@ -569,7 +555,6 @@ void Style::save(Xml& xml)
       xml.tag("propertyDistanceHead",   propertyDistanceHead.val());
       xml.tag("propertyDistanceStem",   propertyDistanceStem.val());
       xml.tag("propertyDistance",       propertyDistance.val());
-      xml.tag("ticklen2Width",          ticklen2Width);
       xml.tag("pageFillLimit",          pageFillLimit);
       xml.tag("hairpinHeight",          hairpinHeight.val());
       xml.tag("hairpinContHeight",      hairpinContHeight.val());

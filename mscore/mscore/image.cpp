@@ -31,7 +31,6 @@ Image::Image(Score* s)
    : BSymbol(s)
       {
       _dirty = false;
-      setAnchor(ANCHOR_PARENT);
       }
 
 //---------------------------------------------------------

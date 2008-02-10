@@ -412,7 +412,7 @@ bool Score::importBB(const QString& name)
                         continue;
                   Measure* measure = (Measure*)mb;
                   Rest* rest = new Rest(this, measure->tick(), 0);
-                  rest->setStaffIdx(0);
+                  rest->setTrack(0);
                   Segment* s = measure->getSegment(rest);
                   s->add(rest);
                   }
@@ -562,7 +562,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
                         }
                   if (n->ties[i]) {
                         n->ties[i]->setEndNote(note);
-                        n->ties[i]->setStaffIdx(note->staffIdx());
+                        n->ties[i]->setTrack(note->track());
                         note->setTieBack(n->ties[i]);
                         }
                   }
@@ -673,7 +673,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                                           }
                                     }
                               Rest* rest = new Rest(this, ctick, len);
-                              rest->setStaffIdx(staffIdx);
+                              rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest);
                               s->add(rest);
 // printf("   add rest %d\n", len);

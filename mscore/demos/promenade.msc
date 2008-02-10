@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>18.2552</xoff>
-  <yoff>24.9487</yoff>
+  <xoff>2.78098</xoff>
+  <yoff>2.96044</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -242,21 +242,21 @@
       <height>15.5593</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bilder einer Ausstellung</p></body></html>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Modeste Moussorgsky</p></body></html>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Promenade</p></body></html>
@@ -269,8 +269,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-5.60395" y="-2.6212"/>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"><span style=" font-family:'Century Schoolbook L'; font-size:9pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
@@ -739,7 +738,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="56" tpc="10"/>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Accidental>
+            <subtype>2</subtype>
+            <offset x="-0.297076" y="0"/>
+            </Accidental>
+          </Note>
         <Note pitch="68" tpc="10"/>
         </Chord>
       <Chord>
@@ -830,7 +836,14 @@ p, li { white-space: pre-wrap; }
         <Note pitch="66" tpc="20"/>
         <Note pitch="70" tpc="12"/>
         <Note pitch="75" tpc="11"/>
-        <Note pitch="78" tpc="20"/>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>20</tpc>
+          <Accidental>
+            <subtype>1</subtype>
+            <offset x="-1.1883" y="0"/>
+            </Accidental>
+          </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>

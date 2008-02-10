@@ -737,6 +737,7 @@ bool Score::loadMsc(QString name)
                   QStringList sl = version.split('.');
                   _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        curTrack = -1;
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         int i = val.toInt();
@@ -749,13 +750,13 @@ bool Score::loadMsc(QString name)
                         else if (tag == "Mag")
                               setMag(val.toDouble());
                         else if (tag == "xoff") {
-                              if (_mscVersion < 106)
+                              if (_mscVersion < 105)
                                     setXoffset(val.toDouble());
                               else
                                     setXoffset(val.toDouble() * DPMM);
                               }
                         else if (tag == "yoff") {
-                              if (_mscVersion < 106)
+                              if (_mscVersion < 105)
                                     setYoffset(val.toDouble());
                               else
                                     setYoffset(val.toDouble() * DPMM);
@@ -785,8 +786,6 @@ bool Score::loadMsc(QString name)
                               }
                         else if (tag == "page-layout")
                               pageFormat()->read(ee);
-//                        else if (tag == "instrument-group")
-//                              readInstrumentGroup(ee);
                         else if (tag == "rights") {
                               if (rights == 0)
                                     rights = new QTextDocument(0);
@@ -866,16 +865,6 @@ bool Score::loadMsc(QString name)
 
       f.close();
       return false;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void ElementList::write(Xml& xml) const
-      {
-      for (ciElement ie = begin(); ie != end(); ++ie)
-            (*ie)->write(xml);
       }
 
 //---------------------------------------------------------

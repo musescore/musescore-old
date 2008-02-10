@@ -498,7 +498,7 @@ void SLine::write(Xml& xml) const
 
 void SLine::read(QDomElement e)
       {
-      setStaffIdx(0);  // set default staff
+      setTrack(0);  // set default track
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!SLine::readProperties(e))
                   domError(e);

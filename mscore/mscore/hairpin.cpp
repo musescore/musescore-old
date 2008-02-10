@@ -95,7 +95,6 @@ QRectF HairpinSegment::bbox() const
 Hairpin::Hairpin(Score* s)
    : SLine(s)
       {
-      setAnchor(ANCHOR_SEGMENT);
       setOffsetType(OFFSET_SPATIUM);
       setYoff(7.0);
       }

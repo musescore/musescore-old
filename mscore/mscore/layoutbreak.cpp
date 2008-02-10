@@ -31,7 +31,6 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      setAnchor(ANCHOR_PARENT);
       setRXoff(100.0);
       setXoff(-1.0);
       setYoff(-2.0);

@@ -27,6 +27,7 @@
 #include "viewer.h"
 #include "canvas.h"
 #include "boxproperties.h"
+#include "symbol.h"
 
 //---------------------------------------------------------
 //   Box
@@ -199,6 +200,12 @@ void Box::read(QDomElement e)
                   t->setTick(curTickPos);
                   t->read(e);
                   add(t);
+                  }
+            else if (tag == "Symbol") {
+                  Symbol* s = new Symbol(score());
+                  s->setTick(curTickPos);
+                  s->read(e);
+                  add(s);
                   }
             else
                   domError(e);

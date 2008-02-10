@@ -196,8 +196,9 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             delete e;
             return;
             }
+      int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       Measure* measure = (Measure*)mb;
-      e->setStaffIdx(staffIdx);
+      e->setTrack(track);
       e->setParent(_layout);
 
       // calculate suitable endposition
@@ -531,21 +532,19 @@ void Score::cmdAddInterval(int val)
 //---------------------------------------------------------
 //   setGraceNote
 ///   Create a grace note in front of a normal note.
-///   \arg tick is the tick of the normal note
-///   \arg track is the track of the normal note (staff&voice)
+///   \arg chord is the normal note
 ///   \arg pitch is the pitch of the grace note
 ///   \arg is the grace note type
 ///   \len is the visual duration of the grace note (1/16 or 1/32)
 //---------------------------------------------------------
 
-void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len)
+void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       {
-      Measure* measure = tick2measure(tick);
-      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
-      if (seg == 0) {
-            printf("main note for grace note not found\n");
-            return;
-            }
+      Segment* seg     = chord->segment();
+      Measure* measure = seg->measure();
+      int tick         = chord->tick();
+      int track        = chord->track();
+
       int n = 1;
       while ((seg = seg->prev())) {
             if (seg->subtype() != Segment::SegGrace)
@@ -555,6 +554,7 @@ void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len
 
       Segment::SegmentType st = Segment::SegGrace;
       seg = measure->createSegment(st, tick-n);
+
       undoAddElement(seg);
 
       Note* note = new Note(this);
@@ -562,7 +562,7 @@ void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len
       note->setTrack(track);
       note->setTickLen(len);
 
-      Chord* chord = new Chord(this);
+      chord = new Chord(this);
       chord->setTick(tick);
       chord->setTrack(track);
       chord->add(note);
@@ -646,7 +646,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
 
             note = new Note(this);
             note->setPitch(pitch);
-            note->setStaffIdx(track / VOICES);
+            note->setTrack(track);
 
             if (seq && mscore->playEnabled())
                   seq->startNote(note->staff()->midiChannel(), note->pitch(), 64);
@@ -657,8 +657,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
                   }
             Chord* chord = new Chord(this);
             chord->setTick(tick);
-            chord->setVoice(track % VOICES);
-            chord->setStaffIdx(track / VOICES);
+            chord->setTrack(track);
             chord->add(note);
             chord->setTickLen(noteLen);
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
@@ -686,13 +685,13 @@ void Score::setNote(int tick, int track, int pitch, int len)
             //  next part of note
             tie = new Tie(this);
             tie->setStartNote(note);
-            tie->setStaffIdx(note->staffIdx());
+            tie->setTrack(note->track());
             note->setTieFor(tie);
             }
       if (note && addTie) {
             tie = new Tie(this);
             tie->setStartNote(note);
-            tie->setStaffIdx(note->staffIdx());
+            tie->setTrack(note->track());
             note->setTieFor(tie);
             }
       _layout->connectTies();
@@ -816,7 +815,7 @@ void Score::cmdAddChordName()
       if (el->type() == NOTE)
             el = el->parent();
       Harmony* s = new Harmony(this);
-      s->setStaffIdx(el->staffIdx());
+      s->setTrack(el->track());
       s->setParent(((Chord*)el)->measure());
       s->setTick(el->tick());
       undoAddElement(s);
@@ -901,7 +900,7 @@ void Score::cmdAddText(int subtype)
                   if (el->type() == NOTE)
                         el = el->parent();
                   s = new Text(this);
-                  s->setStaffIdx(el->staffIdx());
+                  s->setTrack(el->track());
                   s->setSubtype(subtype);
                   s->setParent(((ChordRest*)el)->measure());
                   s->setTick(el->tick());
@@ -1005,7 +1004,7 @@ Measure* Score::appendMeasure()
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             Rest* rest = new Rest(this, tick, 0);
-            rest->setStaffIdx(staffIdx);
+            rest->setTrack(staffIdx * VOICES);
             Segment* s = measure->getSegment(rest);
             s->add(rest);
             }
@@ -1079,7 +1078,7 @@ void Score::insertMeasures(int n, int type)
       		m->setTickLen(ticks);
 	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
 		      	Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
-	      		rest->setStaffIdx(staffIdx);
+	      		rest->setTrack(staffIdx * VOICES);
 		      	Segment* s = ((Measure*)m)->getSegment(rest);
 			      s->add(rest);
 		            }

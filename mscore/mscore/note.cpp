@@ -43,6 +43,7 @@
 #include "chordproperties.h"
 #include "icons.h"
 #include "utils.h"
+#include "image.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -225,30 +226,32 @@ void Note::changeAccidental(int accType)
 //   add
 //---------------------------------------------------------
 
-void Note::add(Element* el)
+void Note::add(Element* e)
       {
-	el->setParent(this);
-      switch(el->type()) {
+	e->setParent(this);
+      switch(e->type()) {
             case TEXT:
-                  el->setMag(mag());
-                  _fingering.append((Text*) el);
+            case SYMBOL:
+            case IMAGE:
+                  e->setMag(mag());
+                  _el.append(e);
                   break;
             case TIE:
                   {
-                  Tie* tie = (Tie*)el;
+                  Tie* tie = (Tie*)e;
 	      	tie->setStartNote(this);
-                  tie->setStaffIdx(staffIdx());
+                  tie->setTrack(track());
       		setTieFor(tie);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(tie);
                   }
                   break;
             case ACCIDENTAL:
-                  _accidental = (Accidental*)el;
+                  _accidental = (Accidental*)e;
                   _accidental->setMag(mag());
                   break;
             default:
-                  printf("Note::add() not impl. %s\n", el->name());
+                  printf("Note::add() not impl. %s\n", e->name());
                   break;
             }
       }
@@ -270,31 +273,21 @@ void Note::setTieBack(Tie* t)
 //   remove
 //---------------------------------------------------------
 
-void Note::remove(Element* el)
+void Note::remove(Element* e)
       {
-      switch(el->type()) {
+      switch(e->type()) {
             case TEXT:
-                  {
-                  int i = _fingering.indexOf((Text*)el);
-                  if (i != -1)
-                        _fingering.removeAt(i);
-                  else
-                        printf("Note::remove: fingering not found\n");
-                  }
+            case SYMBOL:
+            case IMAGE:
+                  if (!_el.remove(e))
+                        printf("Note::remove(): cannot find %s\n", e->name());
                   break;
 	      case TIE:
                   {
-                  Tie* tie = (Tie*) el;
+                  Tie* tie = (Tie*) e;
                   setTieFor(0);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(0);
-#if 0
-            	QList<SlurSegment*>* el = tie->elements();
-                  for (iElement i = el->begin(); i != el->end(); ++i) {
-      	            score()->removeElement(*i);
-                        }
-                  el->clear();
-#endif
                   }
                   break;
 
@@ -303,7 +296,7 @@ void Note::remove(Element* el)
                   break;
 
             default:
-                  printf("Note::remove() not impl. %s\n", el->name());
+                  printf("Note::remove() not impl. %s\n", e->name());
                   break;
             }
       }
@@ -465,7 +458,7 @@ bool Note::isSimple(Xml& xml) const
       QList<Prop> pl = Element::properties(xml);
       if (_accidental && !_accidental->userOff().isNull())
             return false;
-      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _staffMove == 0
+      return (pl.empty() && _el.empty() && _tieFor == 0 && _staffMove == 0
          && _headGroup == 0
          && _userAccidental == 0);
       }
@@ -491,8 +484,7 @@ void Note::write(Xml& xml) const
             if (_accidental && !_accidental->userOff().isNull())
                   _accidental->write(xml);
 
-            foreach(const Text* f, _fingering)
-                  f->write(xml);
+            _el.write(xml);
             if (_tieFor)
                   _tieFor->write(xml);
             if (_staffMove)
@@ -525,17 +517,46 @@ void Note::read(QDomElement e)
                   tpcVal = i;
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
-                  _tieFor->setStaffIdx(staffIdx());
+                  _tieFor->setTrack(track());
                   _tieFor->read(e);
                   _tieFor->setStartNote(this);
                   }
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
-                  f->setStaffIdx(staffIdx());
+                  f->setTrack(track());
                   f->read(e);
-                  f->setParent(this);
-                  _fingering.append(f);
+                  add(f);
+                  }
+            else if (tag == "Symbol") {
+                  Symbol* s = new Symbol(score());
+                  s->setTrack(track());
+                  s->read(e);
+                  add(s);
+                  }
+            else if (tag == "Image") {
+                  // look ahead for image type
+                  QString path;
+                  QDomElement ee = e.firstChildElement("path");
+                  if (!ee.isNull())
+                        path = ee.text();
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        ) {
+                        image = new RasterImage(score());
+                        }
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->setTrack(track());
+                        image->read(e);
+                        add(image);
+                        }
                   }
             else if (tag == "head")
                   _headGroup = i;
@@ -677,6 +698,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ICON && subtype == ICON_NBEAM)
          || (type == ICON && subtype == ICON_BEAM32)
          || (type == ICON && subtype == ICON_AUTOBEAM)
+         || (type == SYMBOL)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -705,27 +727,20 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                         }
                   else {
                         atr->setParent(cr);
-                        atr->setStaffIdx(staffIdx());
+                        atr->setTrack(track());
                         score()->select(atr, 0, 0);
                         score()->cmdAdd(atr);
                         }
                   return atr;
                   }
             case TEXT:
-                  {
-                  Text* f = (Text*)e;
-                  //
-                  // override palette settings for text:
-                  //
-                  // QString s(f->getText());
-                  // f->setSubtype(TEXT_FINGERING);
-                  // f->setText(s);
+            case SYMBOL:
+            case IMAGE:
+                  e->setParent(this);
+                  score()->select(e, 0, 0);
+                  score()->undoAddElement(e);
+                  return e;
 
-                  f->setParent(this);
-                  score()->select(f, 0, 0);
-                  score()->undoAddElement(f);
-                  return f;
-                  }
             case ACCIDENTAL:
                   {
                   Accidental* a = (Accidental*)e;
@@ -738,7 +753,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   {
                   Breath* b = (Breath*)e;
                   int tick   = cr->tick();
-                  b->setStaffIdx(staffIdx());
+                  b->setTrack(track());
                   Measure* m = cr->segment()->measure();
 
                   // TODO: insert automatically in all staves?
@@ -791,12 +806,10 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   {
                   switch(e->subtype()) {
                         case ICON_ACCIACCATURA:
-                              score()->setGraceNote(cr->tick(), track(), pitch(),
-                                 NOTE_ACCIACCATURA, division/2);
+                              score()->setGraceNote(cr, pitch(), NOTE_ACCIACCATURA, division/2);
                               break;
                         case ICON_APPOGGIATURA:
-                              score()->setGraceNote(cr->tick(), track(), pitch(),
-                                 NOTE_APPOGGIATURA, division/2);
+                              score()->setGraceNote(cr, pitch(), NOTE_APPOGGIATURA, division/2);
                               break;
                         case ICON_SBEAM:
                               if (!cr->tuplet())
@@ -885,9 +898,9 @@ void Note::layout(ScoreLayout* layout)
       setMag(chord()->mag());
       if (_accidental)
             _accidental->setMag(mag());
-      foreach(Text* t, _fingering) {
-            t->setMag(mag());
-            t->layout(layout);
+      foreach(Element* e, _el) {
+            e->setMag(mag());
+            e->layout(layout);
             }
       }
 
@@ -916,3 +929,38 @@ QPointF Note::canvasPos() const
       return QPointF(xp, yp);
       }
 
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void Note::collectElements(QList<const Element*>& elist) const
+      {
+      elist.append(this);
+      if (_tieFor) {
+            elist.append(_tieFor);
+            foreach(SlurSegment* seg, *_tieFor->elements())
+                  elist.append(seg);
+            }
+      foreach(Element* e, _el)
+            elist.append(e);
+      if (_accidental)
+            elist.append(_accidental);
+      }
+
+//---------------------------------------------------------
+//   setTrack
+//---------------------------------------------------------
+
+void Note::setTrack(int val)
+      {
+      Element::setTrack(val);
+      if (_tieFor) {
+            _tieFor->setTrack(val);
+            foreach(SlurSegment* seg, *_tieFor->elements())
+                  seg->setTrack(val);
+            }
+      foreach(Element* e, _el)
+            e->setTrack(val);
+      if (_accidental)
+            _accidental->setTrack(val);
+      }

@@ -67,7 +67,7 @@ void KeySig::addLayout(Sym* s, double x, double y)
 
 double KeySig::yoffset() const
       {
-      if (staffIdx() != -1) {
+      if (staff()) {
             int clef       = staff()->clef()->clef(tick());
             int clefOffset = clefTable[clef].yOffset;
             while (clefOffset >= 7)

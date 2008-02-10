@@ -36,9 +36,6 @@ class BSymbol : public Element {
       BSymbol &operator=(const BSymbol&);
 
       virtual bool isMovable() const { return true; }
-
-      void setAnchor(Anchor a) { setSubtype(int(a)); }
-      Anchor anchor() const    { return (Anchor)subtype(); }
       };
 
 #endif

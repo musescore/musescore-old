@@ -328,7 +328,7 @@ Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
       if (e->type() == BRACKET) {
             Bracket* b = (Bracket*)e;
             b->setParent(parent());
-            b->setStaffIdx(staffIdx());
+            b->setTrack(track());
             b->setSpan(span());
             b->setLevel(level());
             score()->cmdRemove(this);

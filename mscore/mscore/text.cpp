@@ -340,7 +340,6 @@ void TextC::setStyle(const TextStyle* s)
       _yoff          = s->yoff;
       _rxoff         = s->rxoff;
       _ryoff         = s->ryoff;
-      _anchor        = s->anchor;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       }
@@ -654,7 +653,6 @@ void TextB::setStyle(const TextStyle* s)
       _yoff          = s->yoff;
       _rxoff         = s->rxoff;
       _ryoff         = s->ryoff;
-      _anchor        = s->anchor;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
 
@@ -693,7 +691,6 @@ void TextB::write(Xml& xml, const char* name) const
 void TextB::read(QDomElement e)
       {
       _align  = 0;
-      _anchor = ANCHOR_PARENT;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
@@ -734,18 +731,6 @@ void TextB::writeProperties(Xml& xml) const
             xml.tag("rxoffset", _rxoff);
       if (_ryoff != st->ryoff)
             xml.tag("ryoffset", _ryoff);
-
-      if (_anchor != st->anchor) {
-            const char* p = 0;
-            switch(_anchor) {
-                  case ANCHOR_PARENT:                    break;   // default
-                  case ANCHOR_MEASURE:    p = "measure"; break;
-                  case ANCHOR_STAFF:      p = "staff";   break;
-                  case ANCHOR_SEGMENT:    p = "segment"; break;
-                  }
-            if (p)
-                  xml.tag("anchor", p);
-            }
 
       if (_offsetType != st->offsetType) {
             const char* p = 0;
@@ -799,18 +784,6 @@ bool TextB::readProperties(QDomElement e)
             _rxoff = val.toDouble();
       else if (tag == "ryoffset")
             _ryoff = val.toDouble();
-      else if (tag == "anchor") {
-            if (val == "parent")
-                  _anchor = ANCHOR_PARENT;
-            else if (val == "measure")
-                  _anchor = ANCHOR_MEASURE;
-            else if (val == "staff")
-                  _anchor = ANCHOR_STAFF;
-            else if (val == "segment")
-                  _anchor = ANCHOR_SEGMENT;
-            else
-                  printf("Text::readProperties: unknown anchor: <%s>\n", qPrintable(val));
-            }
       else if (tag == "offsetType") {
             if (val == "absolute")
                   _offsetType = OFFSET_ABS;
@@ -1217,6 +1190,7 @@ QLineF TextB::dragAnchor() const
             x = tw;
       else if (_align & ALIGN_HCENTER)
             x = (tw * .5);
+#if 0
       if (anchor() == ANCHOR_SEGMENT) {
             Measure* m   = (Measure*) parent();
             if (m->type() != MEASURE)
@@ -1227,8 +1201,9 @@ QLineF TextB::dragAnchor() const
             return QLineF(p1, QPointF(x, y) + canvasPos());
             }
       else if (anchor() == ANCHOR_PARENT) {
+#endif
             return QLineF(p1, abbox().topLeft());
-            }
+//            }
       return QLineF(p1, QPointF(x, y) + canvasPos());
       }
 

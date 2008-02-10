@@ -45,6 +45,7 @@ class Xml : public QTextStream {
 
    public:
       int curTick;      // used to optimize output
+      int curTrack;
 
       Xml(QIODevice*);
       Xml();
