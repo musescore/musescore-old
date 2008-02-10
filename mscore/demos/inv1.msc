@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
+<museScore version="1.5">
   <Spatium>1.62</Spatium>
   <Division>480</Division>
   <Mag>0.75</Mag>
-  <xoff>36</xoff>
-  <yoff>-3</yoff>
+  <xoff>7.62</xoff>
+  <yoff>-0.635</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -25,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -49,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -62,7 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -117,10 +119,12 @@
     </Part>
   <Slur>
     <tick2>23040</tick2>
+    <track>0</track>
     <tick>22560</tick>
     </Slur>
   <Slur>
     <tick2>28800</tick2>
+    <track>0</track>
     <tick>27840</tick>
     </Slur>
   <Staff id="1">
@@ -128,21 +132,24 @@
       <height>10</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Inventio 1</p></body></html>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">BWV 772</p></body></html>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">J.S.Bach</p></body></html>
@@ -2161,7 +2168,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4096</subtype>
-        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="9">
@@ -2461,7 +2467,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4100</subtype>
-        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>

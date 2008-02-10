@@ -1,16 +1,20 @@
-<?xml version="1.0" encoding="utf8"?>
-<museScore version="1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.5">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>14</xoff>
-  <yoff>8</yoff>
+  <xoff>2.96333</xoff>
+  <yoff>1.69333</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -25,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -49,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -62,7 +61,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <TextStyle name="Repeat Text">
     <family>Times New Roman</family>
@@ -71,10 +73,17 @@
     <italic>0</italic>
     <underline>0</underline>
     <align>4</align>
-    <anchor>3</anchor>
     <offsetType>2</offsetType>
+    <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
     <xoffset>0</xoffset>
     <yoffset>-1.5</yoffset>
+    <rxoffset>100</rxoffset>
+    <ryoffset>0</ryoffset>
+    <frameWidth>0</frameWidth>
+    <paddingWidth>0</paddingWidth>
+    <frameRound>25</frameRound>
+    <frameColor r="0" g="0" b="0"/>
+    <circle>0</circle>
     </TextStyle>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -113,14 +122,18 @@
       <bracket type="-1" span="1"/>
       </Staff>
     <trackName>Guitar</trackName>
-    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+    <name>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Guitar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
-    <shortName>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Guitar</p></body></html>
+      </name>
+    <shortName>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Guit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</shortName>
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Guit.</p></body></html>
+      </shortName>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -131,6 +144,7 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Volta>
     <subtype>1</subtype>
+    <track>0</track>
     <tick>5760</tick>
     <tick2>7680</tick2>
     <track>0</track>
@@ -143,6 +157,7 @@ p, li { white-space: pre-wrap; }
     </Volta>
   <Volta>
     <subtype>2</subtype>
+    <track>0</track>
     <tick>7680</tick>
     <tick2>9600</tick2>
     <track>0</track>
@@ -155,20 +170,15 @@ p, li { white-space: pre-wrap; }
     </Volta>
   <Staff id="1">
     <VBox>
-      <height>154.333</height>
+      <height>18.52</height>
       <Text>
-        <align>12</align>
-        <xoffset>0</xoffset>
-        <yoffset>0.590551</yoffset>
-        <anchor>page</anchor>
-        <offsetType>absolute</offsetType>
-        <spatiumSizeDependent>0</spatiumSizeDependent>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Testfile with one error, the seconda volta measure would never be played.&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This is an error made as an example to show the order process repeats.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Subtitle</subtype>
+        <track>-1</track>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Testfile with one error, the seconda volta measure would never be played.</p>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">This is an error made as an example to show the order process repeats.</p></body></html>
         </Text>
       </VBox>
     <Measure number="1">
@@ -178,19 +188,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="480"/>
       </Measure>
     <Measure number="2">
-      <Repeat>
-        <subtype>segno</subtype>
-        </Repeat>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
     <Measure number="3">
-      <Repeat>
-        <subtype>coda</subtype>
-        <offset x="12.87" y="-2.31"/>
-        </Repeat>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
@@ -220,9 +223,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="7">
-      <Repeat>
-        <subtype>dalSegnoAlCoda</subtype>
-        </Repeat>
       <Chord>
         <selected>1</selected>
         <ticklen>240</ticklen>
@@ -260,9 +260,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <startRepeat/>
       <endRepeat>2</endRepeat>
-      <Repeat>
-        <subtype>codetta</subtype>
-        </Repeat>
       <TimeSig>
         <subtype>196</subtype>
         <den>4</den>

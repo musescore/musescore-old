@@ -29,10 +29,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -53,7 +49,6 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
     <pageFillLimit>0.3</pageFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
@@ -158,6 +153,7 @@
     </Part>
   <Slur>
     <tick2>1920</tick2>
+    <track>0</track>
     <tick>1440</tick>
     <SlurSegment no="0">
       <offset x="-0.0765101" y="-1.07114"/>
@@ -165,6 +161,7 @@
     </Slur>
   <Slur>
     <tick2>2880</tick2>
+    <track>0</track>
     <tick>2400</tick>
     <SlurSegment no="0">
       <offset x="-0.038255" y="-1.07114"/>
@@ -172,22 +169,21 @@
     </Slur>
   <Slur>
     <tick2>7200</tick2>
-    <track>1</track>
     <track2>1</track2>
-    <voice>1</voice>
+    <track>1</track>
     <tick>6720</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>8160</tick2>
-    <track>1</track>
     <track2>1</track2>
-    <voice>1</voice>
+    <track>1</track>
     <tick>7680</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>12480</tick2>
+    <track>0</track>
     <tick>12000</tick>
     <SlurSegment no="0">
       <offset x="-0.140943" y="0.466337"/>
@@ -195,6 +191,7 @@
     </Slur>
   <Slur>
     <tick2>13440</tick2>
+    <track>0</track>
     <tick>12960</tick>
     <SlurSegment no="0">
       <offset x="0.0203371" y="0.833822"/>
@@ -203,16 +200,17 @@
   <Slur>
     <tick2>15360</tick2>
     <track>1</track>
-    <voice>1</voice>
     <tick>14880</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>17760</tick2>
+    <track>0</track>
     <tick>17280</tick>
     </Slur>
   <Slur>
     <tick2>18720</tick2>
+    <track>0</track>
     <tick>18240</tick>
     <SlurSegment no="0">
       <o1 x="-0.105941" y="-1.80099"/>
@@ -221,14 +219,12 @@
   <Slur>
     <tick2>20640</tick2>
     <track>1</track>
-    <voice>1</voice>
     <tick>20160</tick>
     <up>1</up>
     </Slur>
   <Slur>
     <tick2>28800</tick2>
     <track>1</track>
-    <voice>1</voice>
     <tick>28320</tick>
     <SlurSegment no="0">
       <o1 x="-0.376872" y="0.242275"/>
@@ -242,6 +238,7 @@
       <height>15.5593</height>
       <Text>
         <subtype>Title</subtype>
+        <track>-1</track>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
@@ -249,6 +246,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
+        <track>-1</track>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
@@ -256,6 +254,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
+        <track>-1</track>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
@@ -413,32 +412,32 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </BarLine>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>6720</tick>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>72</pitch>
           <tpc>14</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>77</pitch>
           <tpc>13</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>480</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>74</pitch>
           <tpc>16</tpc>
           </Note>
@@ -447,6 +446,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <TimeSig>
         <subtype>388</subtype>
@@ -493,32 +493,32 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </BarLine>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>7680</tick>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>72</pitch>
           <tpc>14</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>77</pitch>
           <tpc>13</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>480</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>74</pitch>
           <tpc>16</tpc>
           </Note>
@@ -611,21 +611,21 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </BarLine>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>14880</tick>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>72</pitch>
           <tpc>14</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>70</pitch>
           <tpc>12</tpc>
           </Note>
@@ -680,6 +680,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="8">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <TimeSig>
         <subtype>388</subtype>
@@ -715,21 +716,21 @@ p, li { white-space: pre-wrap; }
       <Note pitch="68" tpc="10" ticks="480"/>
       <BarLine/>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>20160</tick>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>75</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>73</pitch>
           <tpc>21</tpc>
           </Note>
@@ -744,6 +745,7 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="-0.297076" y="0"/>
+            <track>-1</track>
             </Accidental>
           </Note>
         <Note pitch="68" tpc="10"/>
@@ -784,24 +786,24 @@ p, li { white-space: pre-wrap; }
         <Note pitch="68" tpc="10"/>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>21120</tick>
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.4" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.4" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
@@ -842,6 +844,7 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>1</subtype>
             <offset x="-1.1883" y="0"/>
+            <track>-1</track>
             </Accidental>
           </Note>
         </Chord>
@@ -901,6 +904,7 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="-0.4" y="0"/>
+            <track>-1</track>
             </Accidental>
           </Note>
         <Note pitch="68" tpc="10"/>
@@ -939,35 +943,35 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </BarLine>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>26880</tick>
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.6" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.8" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="1.4" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
@@ -1021,24 +1025,24 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <BarLine/>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>29280</tick>
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.4" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>67</pitch>
           <tpc>15</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
           <offset x="-0.46" y="0"/>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>67</pitch>
           <tpc>15</tpc>
           </Note>
@@ -1155,21 +1159,21 @@ p, li { white-space: pre-wrap; }
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>35040</tick>
         <ticklen>240</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>81</pitch>
           <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>76</pitch>
           <tpc>18</tpc>
           </Note>
@@ -1213,42 +1217,42 @@ p, li { white-space: pre-wrap; }
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>37920</tick>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>77</pitch>
           <tpc>13</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>72</pitch>
           <tpc>14</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>39840</tick>
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>77</pitch>
           <tpc>13</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>72</pitch>
           <tpc>14</tpc>
           </Note>
@@ -1290,66 +1294,66 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>40800</tick>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>64</pitch>
           <tpc>18</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>42240</tick>
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <StemDirection>down</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>63</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>64</pitch>
           <tpc>18</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <tick>43200</tick>
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>70</pitch>
           <tpc>12</tpc>
           </Note>
         </Chord>
       <Chord>
-        <voice>1</voice>
+        <track>1</track>
         <ticklen>240</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
-          <voice>1</voice>
+          <track>1</track>
           <pitch>74</pitch>
           <tpc>16</tpc>
           </Note>
