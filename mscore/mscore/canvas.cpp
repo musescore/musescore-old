@@ -1309,9 +1309,8 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       {
       int staffIdx = -1;
       Segment* seg;
-      QPointF offset;
       int tick;
-      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
+      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
       if (mb && mb->type() == MEASURE) {
             Measure* m = (Measure*)mb;
             System* s  = m->system();
@@ -1550,11 +1549,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 void Canvas::dragSymbol(const QPointF& pos)
       {
       const QList<const Element*> el = elementsAt(pos);
-      if (el.isEmpty()) {
-            setDropTarget(0);
-            return;
-            }
-      if (el[0]->type() == NOTE) {
+      if (!el.isEmpty() && el[0]->type() == NOTE) {
             if (el[0]->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
                   return;
             else {
@@ -1714,7 +1709,6 @@ void Canvas::dropEvent(QDropEvent* event)
                   case SYMBOL:
                   case IMAGE:
                         {
-printf("canvas drop SYMBOL\n");
                         // Symbol* s = (Symbol*)dragElement;
                         Element* el = elementAt(pos);
 

@@ -497,13 +497,12 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
       {
       int voice = 0;
       foreach (const Page* page, _layout->pages()) {
-            // if (!page->contains(p))
             if (!page->abbox().contains(p))
                   continue;
 
             QPointF pp = p - page->pos();  // transform to page relative
             const QList<System*>* sl = page->systems();
-            double y1 = 0;
+            double y1 = 0.0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
                   System* s = *is;
