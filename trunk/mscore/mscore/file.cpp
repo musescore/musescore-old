@@ -887,6 +887,7 @@ void Score::printFile()
       printer.setColorMode(QPrinter::Color);
       printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
+      printer.setOutputFileName(info.path() + "/" + name() + ".pdf");
 
       QPrintDialog pd(&printer, 0);
       if (!pd.exec())
