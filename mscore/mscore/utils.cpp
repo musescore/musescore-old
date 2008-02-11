@@ -18,6 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <sys/time.h>
 #include "score.h"
 #include "page.h"
 #include "segment.h"
@@ -381,5 +382,16 @@ int quantizeLen(int, int len, int raster)
             rl = 1;
       rl = ((len + rl - 1) / rl) * rl;
       return rl;
+      }
+
+//---------------------------------------------------------
+//   curTime
+//---------------------------------------------------------
+
+double curTime()
+      {
+      struct timeval t;
+      gettimeofday(&t, 0);
+      return (double)((double)t.tv_sec + (t.tv_usec / 1000000.0));
       }
 

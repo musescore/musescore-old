@@ -22,8 +22,7 @@
 #include "rtctimer.h"
 #include "preferences.h"
 #include "mididriver.h"
-
-// #include "sync.h"
+#include "utils.h"
 
 MidiSeq* midiSeq;
 
@@ -172,22 +171,21 @@ void MidiSeq::midiTick(void* p, void*)
       MidiSeq* at = (MidiSeq*)p;
       at->getTimerTicks();    // read elapsed rtc timer ticks
 
-//      while (!at->fifo.isEmpty())
-//            at->playEvents.insert(at->fifo.get());
+      while (!at->fifo.isEmpty())
+            at->playEvents.insert(at->fifo.get());
 
       //
       // schedule all events upto curFrame()
       //
-#if 0
-      unsigned curFrame = audioDriver->frameTime();
+
+      unsigned curFrame = unsigned(curTime() * 44100.0);
 
       iMidiOutEvent i = at->playEvents.begin();
       for (; i != at->playEvents.end(); ++i) {
-            if (i->event.time() > curFrame)
+            if (i->time > curFrame)
                   break;
-            midiDriver->putEvent(i->port, i->event);
+            midiDriver->write(*i);
             }
       at->playEvents.erase(at->playEvents.begin(), i);
-#endif
       }
 

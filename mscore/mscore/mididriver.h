@@ -26,6 +26,7 @@
 #define __MIDIDRIVER_H
 
 class Event;
+class MidiOutEvent;
 
 //---------------------------------------------------------
 //    Port
@@ -66,7 +67,7 @@ class MidiDriver {
       virtual void getInputPollFd(struct pollfd**, int* n) = 0;
       virtual void getOutputPollFd(struct pollfd**, int* n) = 0;
       virtual void read() = 0;
-      virtual void write(const Event*) = 0;
+      virtual void write(const MidiOutEvent&) = 0;
       };
 
 extern MidiDriver* midiDriver;

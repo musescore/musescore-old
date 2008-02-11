@@ -37,6 +37,7 @@ extern int pitchKeyAdjust(int note, int key);
 extern int line2pitch(int line, int clef, int key);
 extern int y2pitch(double y, int clef);
 extern int quantizeLen(int, int, int);
+extern double curTime();
 
 #endif
 

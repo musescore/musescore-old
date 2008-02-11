@@ -24,58 +24,35 @@
 #define MIDI_FIFO_SIZE    512
 
 #include <set>
-
-#if 0
-
-#include "midievent.h"
-
-//---------------------------------------------------------
-//   MidiFifo
-//---------------------------------------------------------
-
-class MidiFifo {
-      MidiEvent fifo[MIDI_FIFO_SIZE];
-      volatile int size;
-      int wIndex;
-      int rIndex;
-
-   public:
-      MidiFifo()  { clear(); }
-      bool put(const MidiEvent& event);   // returns true on fifo overflow
-      MidiEvent get();
-      const MidiEvent& peek(int n = 0);
-      void remove();
-      bool isEmpty() const { return size == 0; }
-      void clear()         { size = 0, wIndex = 0, rIndex = 0; }
-      int getSize() const  { return size; }
-      };
+#include "event.h"
 
 //---------------------------------------------------------
 //   MidiOutEvent
 //---------------------------------------------------------
 
 struct MidiOutEvent {
-      Port port;
-      MidiEvent event;
+      unsigned time;
+      char port;
+      char type;
+      char a;
+      char b;
 
       MidiOutEvent() {}
-      MidiOutEvent(const Port& p, const MidiEvent& e)
-         : port(p), event(e) {}
+
       bool operator<(const MidiOutEvent& e) const {
-            if (port == e.port)
-                  return event < e.event;
-            return event < e.event;
+            if (time != e.time)
+                  return time < e.time;
+            // play note off events first to prevent overlapping
+            // notes
+
+            int channel = type & 0xf;
+            if (channel == e.type & 0xf) {
+                  int t = type & 0xf0;
+                  return t == ME_NOTEOFF || (t == ME_NOTEON && b == 0);
+                  }
+            int map[16] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15 };
+            return map[channel] < map[e.type & 0xf];
             }
-      };
-
-#endif
-
-//---------------------------------------------------------
-//   MidiOutEvent
-//---------------------------------------------------------
-
-struct MidiOutEvent {
-      int port;
       };
 
 typedef std::multiset<MidiOutEvent, std::less<MidiOutEvent> > MidiOutEventList;

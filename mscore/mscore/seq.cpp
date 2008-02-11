@@ -47,6 +47,7 @@
 #include "preferences.h"
 #include "part.h"
 #include "ottava.h"
+#include "midiseq.h"
 
 Seq* seq;
 
@@ -138,6 +139,10 @@ bool Seq::isRealtime() const
 
 bool Seq::initMidi()
       {
+      static const int realTimePriority = 0;
+
+      midiSeq = new MidiSeq("Midi");
+      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
       // create midi thread
       // install timer tick for midi thread
       return false;
@@ -195,6 +200,7 @@ bool Seq::initAudio()
 
 bool Seq::init()
       {
+      midiSeq = 0;
       audio = 0;
       if (preferences.useMidiOutput) {
             if (!initMidi())
@@ -222,6 +228,8 @@ void Seq::exit()
       {
       if (audio)
             audio->stop();
+      if (midiSeq)
+            midiSeq->stop(true);
       }
 
 //---------------------------------------------------------
