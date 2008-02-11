@@ -28,6 +28,7 @@
 #include "mscore.h"
 #include "midifile.h"
 #include "globals.h"
+#include "midififo.h"
 
 Port midiInPort;
 Port* midiOutPorts;
@@ -116,7 +117,7 @@ class AlsaMidiDriver : public MidiDriver {
       virtual void getInputPollFd(struct pollfd**, int* n);
       virtual void getOutputPollFd(struct pollfd**, int* n);
       virtual void read();
-      virtual void write(const Event*);
+      virtual void write(const MidiOutEvent&);
       };
 
 //---------------------------------------------------------
@@ -319,30 +320,26 @@ void AlsaMidiDriver::read()
 //   write
 //---------------------------------------------------------
 
-void AlsaMidiDriver::write(const Event* e)
+void AlsaMidiDriver::write(const MidiOutEvent& e)
       {
       if (midiOutputTrace) {
-//            printf("MidiOut<%s>: midiAlsa: ", portName(p).toLatin1().data());
-//            e.dump();
+            // TODO
             }
 
-      int chn = 0, a = 0, b = 0;
-      if (e->isChannelEvent()) {
-            chn = ((const ChannelEvent*)e)->channel();
-            a   = ((const ChannelEvent*)e)->dataA();
-            b   = ((const ChannelEvent*)e)->dataB();
-            }
+      int chn = e.type & 0xf;
+      int a   = e.a;
+      int b   = e.b;
 
       snd_seq_event_t event;
       memset(&event, 0, sizeof(event));
       snd_seq_ev_set_direct(&event);
-      int port = e->port();
+      int port = e.port;
       if (port >= preferences.midiPorts)
             port = 0;
       snd_seq_ev_set_source(&event, midiOutPorts[port].alsaPort());
       snd_seq_ev_set_dest(&event, SND_SEQ_ADDRESS_SUBSCRIBERS, 0);
 
-      switch(e->type()) {
+      switch(e.type & 0xf0) {
             case ME_NOTEON:
                   snd_seq_ev_set_noteon(&event, chn, a, b);
                   break;
@@ -366,6 +363,7 @@ void AlsaMidiDriver::write(const Event* e)
                   break;
             case ME_SYSEX:
                   {
+#if 0
                   SysexEvent* se         = (SysexEvent*) e;
                   const unsigned char* p = se->data();
                   int n                  = se->len();
@@ -382,11 +380,12 @@ void AlsaMidiDriver::write(const Event* e)
                   pp += n;
                   *pp = 0xf7;
                   putEvent(&event);
+#endif
                   return;
                   }
             default:
-                  printf("MidiAlsaDriver::putEvent(): event type %d not implemented\n",
-                     e->type());
+                  printf("MidiAlsaDriver::putEvent(): event type 0x%02x not implemented\n",
+                     e.type & 0xf0);
                   return;
             }
       putEvent(&event);

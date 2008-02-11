@@ -30,6 +30,7 @@ class QTimer;
 class Score;
 class Painter;
 class Measure;
+class MidiSeq;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -64,6 +65,7 @@ class Seq : public QObject {
 
       Synth* synti;
       Audio* audio;
+      MidiSeq* midiSeq;
 
       EventMap events;                    // playlist
       QList<NoteOn*> _activeNotes;        // currently sounding notes
