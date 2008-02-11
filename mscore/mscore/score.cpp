@@ -1022,6 +1022,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         _is.pos += cr->tickLen();
                   }
             _is.noteEntryMode = true;
+            canvas()->moveCursor();
             }
       else {
             _padState.len     = 0;
