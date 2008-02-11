@@ -662,6 +662,7 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
+printf("heart beat\n");
       if (guiPos == playPos)
             return;
       cs->start();
