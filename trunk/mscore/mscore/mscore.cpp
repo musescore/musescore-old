@@ -51,6 +51,7 @@
 #include "instrtemplate.h"
 #include "note.h"
 #include "staff.h"
+#include "mididriver.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -996,7 +997,8 @@ static void usage(const char* prog, const char*)
         "   -s        no internal synthesizer\n"
         "   -m        no midi\n"
         "   -L        layout debug\n"
-        "   -i        dump midi input\n"
+        "   -I        dump midi input\n"
+        "   -O        dump midi output\n"
         "   -o file   export to 'file'; format depends on file extension\n");
       }
 
@@ -1417,7 +1419,7 @@ int main(int argc, char* argv[])
 // #endif
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmio:")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1435,7 +1437,11 @@ int main(int argc, char* argv[])
                         noMidi = true;
                         break;
                   case 'i':
-                        dumpMidi = true;
+                  case 'I':
+                        midiInputTrace = true;
+                        break;
+                  case 'O':
+                        midiOutputTrace = true;
                         break;
                   case 'o':
                         converterMode = true;
@@ -1448,8 +1454,6 @@ int main(int argc, char* argv[])
             }
       argc -= optind;
       ++argc;
-
-      haveMidi = !initMidi();
 
       QWidget wi(0);
       appDpiX = wi.logicalDpiX();
@@ -1504,6 +1508,7 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
+      haveMidi = !initMidi();
       if (debugMode) {
             if (haveMidi)
                   printf("midi devices found\n");
@@ -1529,7 +1534,7 @@ int main(int argc, char* argv[])
             noSeq = true;
       else {
             if (!noSeq) {
-                  if (seq->init()) {
+                  if (!seq->init()) {
                         printf("sequencer init failed\n");
                         noSeq = true;
                         }
@@ -1608,11 +1613,18 @@ int main(int argc, char* argv[])
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
 
-      int rfd = getMidiReadFd();
-      if (rfd != -1) {
-            QSocketNotifier* sn = new QSocketNotifier(rfd,
-               QSocketNotifier::Read,  mscore);
-            sn->connect(sn, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
+      extern MidiDriver* midiDriver;
+      if (midiDriver) {
+            struct pollfd* pfd;
+            int npfd;
+            midiDriver->getInputPollFd(&pfd, &npfd);
+            for (int i = 0; i < npfd; ++i) {
+                  int fd = pfd[i].fd;
+                  if (fd != -1) {
+                        QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
+                        s->connect(s, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
+                        }
+                  }
             }
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       qApp->setStyleSheet(appStyleSheet);

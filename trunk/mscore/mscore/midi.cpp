@@ -20,7 +20,6 @@
 
 #include "mscore.h"
 #include "midifile.h"
-#include "midi.h"
 #include "canvas.h"
 #include "file.h"
 #include "score.h"
@@ -680,7 +679,7 @@ void ExportMidi::writeHeader()
                   int len     = str.length() + 1;
                   unsigned char* data = new unsigned char[len];
                   strcpy((char*)(data), str.toLatin1().data());
-                  MidiMeta* ev = new MidiMeta();
+                  MetaEvent* ev = new MetaEvent();
                   ev->setOntime(0);
                   ev->setData(data);
                   ev->setLen(len);
@@ -739,7 +738,7 @@ void ExportMidi::writeHeader()
             data[2] = 24;
             data[3] = 8;
 
-            MidiMeta* ev = new MidiMeta;
+            MetaEvent* ev = new MetaEvent;
             ev->setMetaType(META_TIME_SIGNATURE);
             ev->setData(data);
             ev->setLen(4);
@@ -758,7 +757,7 @@ void ExportMidi::writeHeader()
 
             KeyList* keymap = cs->staff(i)->keymap();
             for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-                  MidiMeta* ev  = new MidiMeta;
+                  MetaEvent* ev  = new MetaEvent;
                   ev->setOntime(ik->first);
                   int key       = ik->second;
                   ev->setMetaType(META_KEY_SIGNATURE);
@@ -777,7 +776,7 @@ void ExportMidi::writeHeader()
 
       TempoList* tempomap = cs->tempomap;
       for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-            MidiMeta* ev = new MidiMeta;
+            MetaEvent* ev = new MetaEvent;
             ev->setOntime(it->first);
             //
             // compute midi tempo: microseconds / quarter note
@@ -829,24 +828,23 @@ bool ExportMidi::write(const QString& name)
             track->setOutChannel(channel);
 
             if (staff->isTop()) {
-                  track->insert(new MidiController(0, channel, CTRL_PROGRAM,     part->midiProgram()));
-                  track->insert(new MidiController(2, channel, CTRL_VOLUME,      part->volume()));
-                  track->insert(new MidiController(4, channel, CTRL_PANPOT,      part->pan()));
-                  track->insert(new MidiController(6, channel, CTRL_REVERB_SEND, part->reverb()));
-                  track->insert(new MidiController(8, channel, CTRL_CHORUS_SEND, part->chorus()));
+                  track->insert(new ControllerEvent(0, channel, CTRL_PROGRAM,     part->midiProgram()));
+                  track->insert(new ControllerEvent(2, channel, CTRL_VOLUME,      part->volume()));
+                  track->insert(new ControllerEvent(4, channel, CTRL_PANPOT,      part->pan()));
+                  track->insert(new ControllerEvent(6, channel, CTRL_REVERB_SEND, part->reverb()));
+                  track->insert(new ControllerEvent(8, channel, CTRL_CHORUS_SEND, part->chorus()));
                   }
-            QMap<int, Event> events;
+            EventMap events;
             cs->toEList(&events, preferences.midiExpandRepeats, tickOffset, staffIdx);
-            for (QMap<int,Event>::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
-                  if (i.value().type == ME_NOTEON) {
-                        track->insert(new MidiNoteOn(i.key(),
-                           i.value().channel, i.value().val1, i.value().val2));
+            for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
+                  if (i.value()->type() == ME_NOTEON) {
+                        NoteOn* n = (NoteOn*)i.value();
+                        track->insert(new NoteOn(i.key(), n->channel(), n->pitch(), n->velo()));
                         }
                   else
-                        printf("writeMidi: unknown midi event 0x%02x\n", i.value().type);
+                        printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());
                   }
             }
-
       return !mf.write(&f);
       }
 
@@ -916,18 +914,18 @@ void Score::convertMidi(MidiFile* mf)
             track->program  = 0;
 		int events      = 0;
             const EventList el = track->events();
-            foreach (MidiEvent* e, track->events()) {
+            foreach (Event* e, track->events()) {
                   if (e->type() == ME_NOTE) {
                         ++events;
-                        int pitch = ((MidiNote*)e)->pitch();
+                        int pitch = ((NoteEvent*)e)->pitch();
                         if (pitch > track->maxPitch)
                               track->maxPitch = pitch;
                         if (pitch < track->minPitch)
                               track->minPitch = pitch;
                         track->medPitch += pitch;
                         }
-                  else if (e->type() == ME_CONTROLLER && ((MidiController*)e)->controller() == CTRL_PROGRAM) {
-                        track->program = ((MidiController*)e)->value();
+                  else if (e->type() == ME_CONTROLLER && ((ControllerEvent*)e)->controller() == CTRL_PROGRAM) {
+                        track->program = ((ControllerEvent*)e)->value();
                         }
                   }
             if (events == 0) {
@@ -1026,7 +1024,7 @@ void Score::convertMidi(MidiFile* mf)
             int tick2 = sigmap->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
-                  foreach(const MidiEvent* ev, midiTrack->events()) {
+                  foreach(const Event* ev, midiTrack->events()) {
                         int t = ev->ontime();
                         if (t >= tick2)
                               break;
@@ -1057,7 +1055,7 @@ if (tick)
             for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
                   if ((*ie)->type() != ME_NOTE)
                         continue;
-                  int tick = (*ie)->ontime() + ((MidiNote*)(*ie))->duration();
+                  int tick = (*ie)->ontime() + ((NoteEvent*)(*ie))->duration();
                   if (tick > lastTick)
                         lastTick = tick;
                   }
@@ -1109,10 +1107,10 @@ if (tick)
 //---------------------------------------------------------
 
 struct MNote {
-	MidiChord* mc;
+	ChordEvent* mc;
       QList<Tie*> ties;
 
-      MNote(MidiChord* _mc) : mc(_mc) {
+      MNote(ChordEvent* _mc) : mc(_mc) {
             for (int i = 0; i < mc->notes().size(); ++i)
                   ties.append(0);
             }
@@ -1140,12 +1138,12 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             QList<MNote*> notes;
             int ctick = 0;
             for (ciEvent i = el.begin(); i != el.end();) {
-                  MidiEvent* e = *i;
+                  Event* e = *i;
                   if (e->type() != ME_CHORD) {
                         ++i;
                         continue;
                         }
-                  if (((MidiChord*)e)->voice() != voice) {
+                  if (((ChordEvent*)e)->voice() != voice) {
                         ++i;
                         continue;
                         }
@@ -1174,9 +1172,9 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         s->add(chord);
 
                   	foreach (MNote* n, notes) {
-                              QList<MidiNote*>& nl = n->mc->notes();
+                              QList<NoteEvent*>& nl = n->mc->notes();
                               for (int i = 0; i < nl.size(); ++i) {
-                                    MidiNote* mn = nl[i];
+                                    NoteEvent* mn = nl[i];
                         		Note* note = new Note(this);
                                     note->setPitch(mn->pitch());
                                     note->setTpc(mn->tpc());
@@ -1204,7 +1202,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     continue;
                                     }
                               for (int i = 0; i < nl.size(); ++i) {
-                                    MidiNote* mn = nl[i];
+                                    NoteEvent* mn = nl[i];
                                     Note* note = chord->noteList()->find(mn->pitch());
             				n->ties[i] = new Tie(this);
                                     n->ties[i]->setStartNote(note);
@@ -1243,12 +1241,12 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   // tick position
                   //
                   for (;i != el.end(); ++i) {
-                  	MidiEvent* e = *i;
+                  	Event* e = *i;
                         if (e->type() != ME_CHORD)
                               continue;
                         if ((*i)->ontime() != ctick)
                               break;
-                        MidiChord* mc = (MidiChord*)e;
+                        ChordEvent* mc = (ChordEvent*)e;
                         if (mc->voice() != voice)
                               continue;
                   	MNote* n = new MNote(mc);
@@ -1274,7 +1272,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         }
                   chord->setTickLen(len);
             	foreach (MNote* n, notes) {
-                        foreach(MidiNote* mn, n->mc->notes()) {
+                        foreach(NoteEvent* mn, n->mc->notes()) {
                   		Note* note = new Note(this);
                               note->setPitch(mn->pitch());
             	      	note->setTrack(staffIdx * VOICES + voice);
@@ -1312,11 +1310,11 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
       // process meta events
       //
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->type() != ME_META)
                   continue;
 
-            MidiMeta* mm = (MidiMeta*)e;
+            MetaEvent* mm = (MetaEvent*)e;
             if (debugMode)
                   printf("meta type 0x%02x\n", mm->metaType());
 

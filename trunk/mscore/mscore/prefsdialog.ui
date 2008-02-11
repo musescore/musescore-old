@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>673</width>
-    <height>515</height>
+    <width>681</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -982,30 +982,86 @@
      </widget>
      <widget class="QWidget" name="tab_2" >
       <attribute name="title" >
-       <string>Audio</string>
+       <string>I/O</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
        <item>
-        <widget class="QGroupBox" name="groupBox_7" >
+        <widget class="QGroupBox" name="useMidiOutput" >
          <property name="title" >
-          <string>Synthesizer</string>
+          <string>Use midi output</string>
          </property>
          <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label_22" >
+            <property name="text" >
+             <string>Ports</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="midiPorts" >
+            <property name="minimum" >
+             <number>1</number>
+            </property>
+            <property name="maximum" >
+             <number>8</number>
+            </property>
+            <property name="value" >
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="midiAutoConnect" >
+            <property name="text" >
+             <string>Auto Connect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="useSynthesizer" >
+         <property name="title" >
+          <string>Use internal synthesizer</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <property name="checkable" >
           <bool>true</bool>
          </property>
          <layout class="QHBoxLayout" >
@@ -1046,50 +1102,50 @@
          <property name="checkable" >
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_7" >
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label_6" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text" >
-             <string>JACK: R-Port</string>
+             <string>Left-Port:</string>
             </property>
             <property name="textFormat" >
              <enum>Qt::PlainText</enum>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="QComboBox" name="jackRPort" />
-          </item>
-          <item row="0" column="1" >
+          <item>
            <widget class="QComboBox" name="jackLPort" />
           </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_6" >
+          <item>
+           <widget class="QLabel" name="label_7" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text" >
-             <string>JACK: L-Port</string>
+             <string>Right-Port:</string>
             </property>
             <property name="textFormat" >
              <enum>Qt::PlainText</enum>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="jackRPort" />
           </item>
          </layout>
         </widget>
@@ -1108,150 +1164,149 @@
          <property name="checked" >
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
-          <item row="0" column="1" >
-           <widget class="QLineEdit" name="alsaDevice" >
-            <property name="text" >
-             <string>default</string>
-            </property>
-           </widget>
+         <layout class="QVBoxLayout" >
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_10" >
+              <property name="text" >
+               <string>Device:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="alsaDevice" >
+              <property name="text" >
+               <string>default</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="1" column="1" >
-           <widget class="QComboBox" name="alsaSampleRate" >
+          <item>
+           <layout class="QHBoxLayout" >
             <item>
-             <property name="text" >
-              <string>192000</string>
-             </property>
+             <widget class="QLabel" name="label_11" >
+              <property name="text" >
+               <string>Sample Rate:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text" >
-              <string>96000</string>
-             </property>
+             <widget class="QComboBox" name="alsaSampleRate" >
+              <item>
+               <property name="text" >
+                <string>192000</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>96000</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>88200</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>48000</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>44100</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>32000</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>22050</string>
+               </property>
+              </item>
+             </widget>
             </item>
             <item>
-             <property name="text" >
-              <string>88200</string>
-             </property>
+             <widget class="QLabel" name="label_13" >
+              <property name="text" >
+               <string>Fragments:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text" >
-              <string>48000</string>
-             </property>
+             <widget class="QSpinBox" name="alsaFragments" >
+              <property name="minimum" >
+               <number>2</number>
+              </property>
+              <property name="maximum" >
+               <number>8</number>
+              </property>
+              <property name="value" >
+               <number>2</number>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text" >
-              <string>44100</string>
-             </property>
+             <widget class="QLabel" name="label_12" >
+              <property name="text" >
+               <string>Period Size:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text" >
-              <string>32000</string>
-             </property>
+             <widget class="QComboBox" name="alsaPeriodSize" >
+              <item>
+               <property name="text" >
+                <string>4096</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>2048</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>1024</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>512</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>256</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>128</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>64</string>
+               </property>
+              </item>
+             </widget>
             </item>
-            <item>
-             <property name="text" >
-              <string>22050</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="2" column="1" >
-           <widget class="QComboBox" name="alsaPeriodSize" >
-            <item>
-             <property name="text" >
-              <string>4096</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>2048</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>1024</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>512</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>256</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>128</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>64</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="3" column="1" >
-           <widget class="QSpinBox" name="alsaFragments" >
-            <property name="minimum" >
-             <number>2</number>
-            </property>
-            <property name="maximum" >
-             <number>8</number>
-            </property>
-            <property name="value" >
-             <number>2</number>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" >
-           <widget class="QLabel" name="label_13" >
-            <property name="text" >
-             <string>Fragments:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" >
-           <widget class="QLabel" name="label_12" >
-            <property name="text" >
-             <string>Period Size:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_11" >
-            <property name="text" >
-             <string>Sample Rate:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_10" >
-            <property name="text" >
-             <string>Device:</string>
-            </property>
-           </widget>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1318,8 +1373,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>633</width>
+           <height>31</height>
           </size>
          </property>
         </spacer>

@@ -3,7 +3,8 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  (C) Copyright 2004 Robert Jonsson (rj@spamatica.se)
+//  Copyright (C) 2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,32 +19,31 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PITCHSPELLING_H__
-#define __PITCHSPELLING_H__
+#ifndef __RTCTIMER_H__
+#define __RTCTIMER_H__
 
-class MidiNote;
-class Note;
+#include "timerdev.h"
 
 //---------------------------------------------------------
-//   pitch2tpc
-//    Returns a default tpc for a given midi pitch.
-//    Midi pitch 60 is middle C.
+//   RtcTimer
 //---------------------------------------------------------
 
-inline static int pitch2tpc(int pitch)
-      {
-      return (((((pitch % 12) * 7) % 12) + 5) % 12) + 9;
-      }
+class RtcTimer : public Timer{
+      int timerFd;
 
-extern void spell(QList<NoteEvent*>& notes, int);
-extern void spell(QList<Note*>& notes);
-extern int computeWindow(const QList<Note*>& notes, int start, int end);
-extern int tpc(int idx, int pitch, int opt);
-extern int pitch2line(int pitch);
-extern QString tpc2name(int tpc);
-extern int line2tpc(int line, int prefix);
-extern int tpc2pitch(int tpc);
-extern int tpc2line(int tpc);
+    public:
+      RtcTimer();
+      virtual ~RtcTimer();
 
-#endif
+      virtual bool initTimer();
+      virtual int getTimerResolution();
+      virtual bool setTimerFreq(unsigned int tick);
+      virtual unsigned int getTimerFreq();
 
+      virtual bool startTimer();
+      virtual bool stopTimer();
+      virtual unsigned long  getTimerTicks();
+      virtual int getFd() const { return timerFd; }
+      };
+
+#endif //__ALSATIMER_H__

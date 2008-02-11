@@ -162,7 +162,7 @@ class Score : public QObject {
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
-      void collectMeasureEvents(QMap<int, Event>*, Measure*, int staffIdx, int tickOffset);
+      void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
       void padToggle(int n);
       void insertMeasures(int, int);
 
@@ -487,8 +487,8 @@ class Score : public QObject {
       QList<Element*>* gel();
       const QList<Element*>* gel() const;
       bool isVolta(int tick, int repeat) const;
-      void toEList(QMap<int, Event>* events, int tickOffset);
-      void toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx);
+      void toEList(EventMap* events, int tickOffset);
+      void toEList(EventMap* events, bool expandRepeats, int tickOffset, int staffIdx);
       int mscVersion() const { return _mscVersion; }
 
       SigList*   getSigmap()  { return sigmap; }

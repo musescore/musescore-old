@@ -85,6 +85,10 @@ struct Preferences {
       bool playRepeats;
       QString instrumentList;  // file path of instrument templates
       bool alternateNoteEntryMethod;
+      bool useMidiOutput;
+      int midiPorts;
+      bool midiAutoConnect;
+      int rtcTicks;
 
       bool dirty;
 
@@ -106,6 +110,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void apply();
       bool sfChanged;
       void updateSCListView();
+      void setUseMidiOutput(bool);
 
    private slots:
       void buttonBoxClicked(QAbstractButton*);
@@ -128,6 +133,8 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void clearShortcutClicked();
       void defineShortcutClicked();
       void portaudioApiActivated(int idx);
+      void useMidiOutputClicked();
+      void useSynthesizerClicked();
 
    signals:
       void preferencesChanged();

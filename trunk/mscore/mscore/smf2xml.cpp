@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
                   if (cleanup)
                         t->cleanup();
                   xml.stag("Track");
-                  foreach (const MidiEvent* e, t->events())
+                  foreach (const Event* e, t->events())
                         e->dump(xml);
                   xml.etag();
                   }

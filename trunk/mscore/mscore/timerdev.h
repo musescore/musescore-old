@@ -1,9 +1,12 @@
 //=============================================================================
-//  MuseScore
-//  Linux Music Score Editor
+//  MusE
+//  Linux Music Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Plenty of code borrowed from timer.c example in
+//  alsalib 1.0.7
+//
+//  (C) Copyright 2004 Robert Jonsson (rj@spamatica.se)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,32 +21,31 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PITCHSPELLING_H__
-#define __PITCHSPELLING_H__
+#ifndef __TIMERDEV_H__
+#define __TIMERDEV_H__
 
-class MidiNote;
-class Note;
+#include <pthread.h>
+
+#define TIMER_DEBUG 0
 
 //---------------------------------------------------------
-//   pitch2tpc
-//    Returns a default tpc for a given midi pitch.
-//    Midi pitch 60 is middle C.
+//   Timer
 //---------------------------------------------------------
 
-inline static int pitch2tpc(int pitch)
-      {
-      return (((((pitch % 12) * 7) % 12) + 5) % 12) + 9;
-      }
+class Timer {
 
-extern void spell(QList<NoteEvent*>& notes, int);
-extern void spell(QList<Note*>& notes);
-extern int computeWindow(const QList<Note*>& notes, int start, int end);
-extern int tpc(int idx, int pitch, int opt);
-extern int pitch2line(int pitch);
-extern QString tpc2name(int tpc);
-extern int line2tpc(int line, int prefix);
-extern int tpc2pitch(int tpc);
-extern int tpc2line(int tpc);
+     public:
+      Timer() {};
+      virtual ~Timer() {};
 
-#endif
+      virtual bool initTimer() = 0;
+      virtual int  getTimerResolution() = 0;
+      virtual bool setTimerFreq(unsigned int freq) = 0;
 
+      virtual bool startTimer() = 0;
+      virtual bool stopTimer() = 0;
+      virtual unsigned long getTimerTicks() = 0;
+      virtual int getFd() const { return -1; }
+      };
+
+#endif //__TIMERDEV_H__

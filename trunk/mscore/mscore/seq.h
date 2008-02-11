@@ -65,10 +65,10 @@ class Seq : public QObject {
       Synth* synti;
       Audio* audio;
 
-      QMap<int, Event> events;            // playlist
-      QList<Event> _activeNotes;          // currently sounding notes
+      EventMap events;                    // playlist
+      QList<NoteOn*> _activeNotes;        // currently sounding notes
       int playFrame;
-      QMap<int, Event>::const_iterator playPos, guiPos;
+      EventMap::const_iterator playPos, guiPos;
 
       int endTick;
 
@@ -77,7 +77,7 @@ class Seq : public QObject {
       QTimer* heartBeatTimer;
       QTimer* playTimer;
 
-      QList<Event> eventList;
+      QList<Event*> eventList;
 
       void collectEvents();
       void collectMeasureEvents(Measure*, int staffIdx);
@@ -87,9 +87,11 @@ class Seq : public QObject {
       int frame2tick(int frame) const;
       int tick2frame(int tick) const;
       void setPos(int);
-      void playEvent(const Event& event);
+      void playEvent(const Event* event);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
+      bool initAudio();
+      bool initMidi();
 
    private slots:
       void seqMessage(int msg);
@@ -145,8 +147,6 @@ class Seq : public QObject {
 
 extern Seq* seq;
 extern void initSequencer();
-extern void readMidiEvent();
 extern bool initMidi();
-extern int getMidiReadFd();
 #endif
 

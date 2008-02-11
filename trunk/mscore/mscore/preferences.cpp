@@ -160,9 +160,13 @@ Preferences::Preferences()
       len6.type          = -1;
       len12.type         = -1;
       len24.type         = -1;
-      midiExpandRepeats  = true;
-      playRepeats        = true;
+      midiExpandRepeats        = true;
+      playRepeats              = true;
       alternateNoteEntryMethod = false;
+      useMidiOutput            = false;
+      midiPorts                = 1;
+      midiAutoConnect          = true;
+      rtcTicks                 = 1024;    // 1ms midi resolution
       };
 
 //---------------------------------------------------------
@@ -213,6 +217,9 @@ void Preferences::write()
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
       s.setValue("playRepeats",        playRepeats);
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
+      s.setValue("useMidiOutput",      useMidiOutput);
+      s.setValue("midiPorts",          midiPorts);
+      s.setValue("midiAutoConnect",    midiAutoConnect);
 
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
@@ -288,6 +295,9 @@ void Preferences::read()
       midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
       playRepeats        = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
+      useMidiOutput            = s.value("useMidiOutput", false).toBool();
+      midiPorts                = s.value("midiPorts", 1).toInt();
+      midiAutoConnect          = s.value("midiAutoConnect", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -431,6 +441,10 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       instrumentList->setText(preferences.instrumentList);
       alternateInput->setChecked(preferences.alternateNoteEntryMethod);
 
+      setUseMidiOutput(preferences.useMidiOutput);
+      midiPorts->setValue(preferences.midiPorts);
+      midiAutoConnect->setChecked(preferences.midiAutoConnect);
+
       //
       // initialize local shortcut table
       //    we need a deep copy to be able to rewind all
@@ -477,6 +491,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
       connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
+      connect(useMidiOutput, SIGNAL(clicked()), SLOT(useMidiOutputClicked()));
+      connect(useSynthesizer, SIGNAL(clicked()), SLOT(useSynthesizerClicked()));
       }
 
 //---------------------------------------------------------
@@ -851,6 +867,10 @@ void PreferenceDialog::apply()
       preferences.instrumentList     = instrumentList->text();
       preferences.alternateNoteEntryMethod = alternateInput->isChecked();
 
+      preferences.useMidiOutput      = useMidiOutput->isChecked();
+      preferences.midiPorts          = midiPorts->value();
+      preferences.midiAutoConnect    = midiAutoConnect->isChecked();
+
       if (shortcutsChanged) {
             shortcutsChanged = false;
             foreach(Shortcut* s, localShortcuts) {
@@ -986,5 +1006,33 @@ QAction* getAction(const char* id)
                   a->setIcon(*s->icon);
             }
       return s->action;
+      }
+
+//---------------------------------------------------------
+//   setUseMidiOutput
+//---------------------------------------------------------
+
+void PreferenceDialog::setUseMidiOutput(bool flag)
+      {
+      useMidiOutput->setChecked(flag);
+      useSynthesizer->setChecked(!flag);
+      }
+
+//---------------------------------------------------------
+//   useMidiOutputClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::useMidiOutputClicked()
+      {
+      setUseMidiOutput(useMidiOutput->isChecked());
+      }
+
+//---------------------------------------------------------
+//   useSynthesizerClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::useSynthesizerClicked()
+      {
+      setUseMidiOutput(!useSynthesizer->isChecked());
       }
 

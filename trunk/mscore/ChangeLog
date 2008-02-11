@@ -1,3 +1,5 @@
+11.2.8 (ws)
+      - build up infrastructure for linux midi output
 10.2.8 (ws)
       - changed interval entry
       - set output pdf file name in printer dialog to score name
