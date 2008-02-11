@@ -61,6 +61,7 @@
 #include "barline.h"
 #include "box.h"
 #include "utils.h"
+#include "mididriver.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -68,12 +69,13 @@ QPoint scorePos(0,0);
 QSize  scoreSize(950, 500);
 
 MuseScore* mscore;
-bool debugMode      = false;
-bool layoutDebug    = false;
-bool noSeq          = false;
-bool noMidi         = false;
-bool dumpMidi       = false;
-bool showRubberBand = true;
+bool debugMode       = false;
+bool layoutDebug     = false;
+bool noSeq           = false;
+bool noMidi          = false;
+bool midiInputTrace  = false;
+bool midiOutputTrace = false;
+bool showRubberBand  = true;
 
 //---------------------------------------------------------
 //   doLayout
@@ -1044,7 +1046,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
 
 void Score::midiReceived()
       {
-      readMidiEvent();
+      midiDriver->read();
       }
 
 //---------------------------------------------------------
@@ -1435,7 +1437,7 @@ bool Score::isVolta(int tick, int repeat) const
 //   collectMeasureEvents
 //---------------------------------------------------------
 
-void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staffIdx, int tickOffset)
+void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
       Part* prt       = part(staffIdx);
       int pitchOffset = prt->pitchOffset();
@@ -1500,17 +1502,21 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
                               }
                         len += (note->chord()->tickLen() * gateTime / 100);
 
-                        Event ev;
-                        ev.type = ME_NOTEON;
-                        ev.val1 = note->pitch() + pitchOffset + ottavaShift;
-                        if (ev.val1 > 127)
-                              ev.val1 = 127;
-                        ev.val2       = 60;
-                        ev.note       = note;
-                        ev.channel    = channel;
+                        NoteOn* ev = new NoteOn();
+                        int pitch = note->pitch() + pitchOffset + ottavaShift;
+                        if (pitch > 127)
+                              pitch = 127;
+                        ev->setPitch(pitch);
+                        ev->setVelo(60);
+                        ev->setNote(note);
+                        ev->setChannel(channel);
                         events->insertMulti(tick + tickOffset, ev);
 
-                        ev.val2 = 0;
+                        ev = new NoteOn();
+                        ev->setPitch(pitch);
+                        ev->setVelo(0);
+                        ev->setNote(note);
+                        ev->setChannel(channel);
                         events->insertMulti(tick + len + tickOffset, ev);
                         }
                   }
@@ -1522,7 +1528,7 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
 //    export score to event list
 //---------------------------------------------------------
 
-void Score::toEList(QMap<int, Event>* events, int offset)
+void Score::toEList(EventMap* events, int offset)
       {
       bool expandRepeats = getAction("repeat")->isChecked();
       int staffIdx   = 0;
@@ -1592,7 +1598,7 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 //          - d.s. al fine
 //---------------------------------------------------------
 
-void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)
+void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffIdx)
       {
       if (!expandRepeats) {
             for (MeasureBase* mb = mainLayout()->first(); mb; mb = mb->next()) {

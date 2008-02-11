@@ -22,6 +22,8 @@
 #define __EVENT_H__
 
 class Note;
+class MidiFile;
+class Xml;
 
 //---------------------------------------------------------
 //   Midi Events
@@ -75,17 +77,296 @@ enum {
       };
 
 //---------------------------------------------------------
-//   Event
-//    sequencer event type (note on, note off)
+//   Midi Controller
 //---------------------------------------------------------
 
-struct Event {
-      int type;
-      int channel;
-      int val1;         // pitch
-      int val2;         // velocity
-      Note* note;       // used to mark the currently played notes
+enum {
+      CTRL_HBANK = 0x00,
+      CTRL_LBANK = 0x20,
+
+      CTRL_HDATA = 0x06,
+      CTRL_LDATA = 0x26,
+
+      CTRL_HNRPN = 0x63,
+      CTRL_LNRPN = 0x62,
+
+      CTRL_HRPN  = 0x65,
+      CTRL_LRPN  = 0x64,
+
+      CTRL_MODULATION         = 0x01,
+      CTRL_PORTAMENTO_TIME    = 0x05,
+      CTRL_VOLUME             = 0x07,
+      CTRL_PANPOT             = 0x0a,
+      CTRL_EXPRESSION         = 0x0b,
+      CTRL_SUSTAIN            = 0x40,
+      CTRL_PORTAMENTO         = 0x41,
+      CTRL_SOSTENUTO          = 0x42,
+      CTRL_SOFT_PEDAL         = 0x43,
+      CTRL_HARMONIC_CONTENT   = 0x47,
+      CTRL_RELEASE_TIME       = 0x48,
+      CTRL_ATTACK_TIME        = 0x49,
+
+      CTRL_BRIGHTNESS         = 0x4a,
+      CTRL_PORTAMENTO_CONTROL = 0x54,
+      CTRL_REVERB_SEND        = 0x5b,
+      CTRL_CHORUS_SEND        = 0x5d,
+      CTRL_VARIATION_SEND     = 0x5e,
+
+      CTRL_ALL_SOUNDS_OFF     = 0x78, // 120
+      CTRL_RESET_ALL_CTRL     = 0x79, // 121
+      CTRL_LOCAL_OFF          = 0x7a, // 122
+
+      // special midi events are mapped to internal
+      // controller
+      //
+      CTRL_PROGRAM   = 0x40001,
+      CTRL_PITCH     = 0x40002,
+      CTRL_PRESS     = 0x40003,
+      CTRL_POLYAFTER = 0x40004
       };
+
+//---------------------------------------------------------
+//   Event
+//---------------------------------------------------------
+
+class Event {
+      int _port;
+      int _ontime;
+
+   public:
+      Event()           { _ontime = -1; _port = 0; }
+      Event(int t)      { _ontime = t;  }
+      virtual ~Event()  {}
+      virtual int type() const = 0;
+
+      int ontime() const    { return _ontime; }
+      void setOntime(int v) { _ontime = v;    }
+      int port() const      { return _port;   }
+      void setPort(int v)   { _port = v;      }
+
+      virtual bool isChannelEvent() const = 0;
+      virtual void write(MidiFile*) const {}
+      virtual void dump(Xml&) const {}
+      };
+
+//---------------------------------------------------------
+//   MidiChannelEvent
+//---------------------------------------------------------
+
+class ChannelEvent : public Event {
+      int _channel;
+
+   protected:
+      int _a;
+      int _b;
+
+   public:
+      ChannelEvent()          { _channel = 0; _a = -1; _b = -1;   }
+      ChannelEvent(int t, int c) : Event(t), _channel(c) {}
+      ChannelEvent(int t, int c, int a, int b)
+         : Event(t), _channel(c), _a(a), _b(b) {}
+      virtual int type() const = 0;
+
+      bool isChannelEvent() const { return true;     }
+      int channel() const         { return _channel; }
+      void setChannel(int c)      { _channel = c;    }
+      int dataA() const           { return _a;       }
+      int dataB() const           { return _b;       }
+      void setDataA(int v)        { _a = v;          }
+      void setDataB(int v)        { _b = v;          }
+      };
+
+//---------------------------------------------------------
+//   NoteOnOff
+//---------------------------------------------------------
+
+class NoteOnOff : public ChannelEvent {
+      Note* _note;
+
+   public:
+      NoteOnOff()          { _note = 0; }
+      NoteOnOff(int t, int c, int p, int v)
+         : ChannelEvent(t, c, p, v) { _note = 0; }
+      virtual int type() const = 0;
+
+      int pitch() const        { return _a; }
+      void setPitch(int p)     { _a = p;    }
+      int velo() const         { return _b; }
+      void setVelo(int v)      { _b = v;    }
+      Note* note() const       { return _note; }
+      void setNote(Note* n)    { _note = n; }
+      };
+
+//---------------------------------------------------------
+//   NoteOn
+//---------------------------------------------------------
+
+class NoteOn : public NoteOnOff {
+   public:
+      NoteOn()             {}
+      NoteOn(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
+      virtual int type() const { return ME_NOTEON; }
+
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiNoteOff
+//---------------------------------------------------------
+
+class NoteOff : public NoteOnOff {
+   public:
+      NoteOff()            {}
+      NoteOff(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
+      virtual int type() const { return ME_NOTEOFF; }
+
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   NoteEvent
+//---------------------------------------------------------
+
+class NoteEvent : public NoteOnOff {
+      int _duration;
+      int _tpc;               // tonal pitch class
+
+   public:
+      NoteEvent()               { _a = -1; _b = -1; _duration = -1; }
+      virtual int type() const { return ME_NOTE; }
+
+      int duration() const     { return _duration; }
+      void setDuration(int v)  { _duration = v; }
+      int offtime() const      { return ontime() + _duration; }
+      int tpc() const          { return _tpc;    }
+      void setTpc(int v)       { _tpc = v;       }
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   ChordEvent
+//---------------------------------------------------------
+
+class ChordEvent : public Event {
+      int _duration;
+      int _voice;
+      QList<NoteEvent*> _notes;
+
+   public:
+      ChordEvent()                  {}
+      virtual int type() const      { return ME_CHORD;  }
+
+      int duration() const          { return _duration; }
+      void setDuration(int v)       { _duration = v;    }
+      int voice() const             { return _voice;    }
+      void setVoice(int val)        { _voice = val;     }
+      int offtime() const           { return ontime() + _duration; }
+      QList<NoteEvent*>& notes()    { return _notes;    }
+      bool isChannelEvent() const   { return true;      }
+      virtual void dump(Xml&) const {}
+      };
+
+//---------------------------------------------------------
+//   ControllerEvent
+//    the following midi events are stored as special
+//    controller:
+//      ME_POLYAFTER  =
+//      ME_PROGRAM    =
+//      ME_AFTERTOUCH =
+//      ME_PITCHBEND  =
+//---------------------------------------------------------
+
+class ControllerEvent : public ChannelEvent {
+   public:
+      ControllerEvent()                    { _a = -1; _b = 0; }
+      ControllerEvent(int t, int ch, int c, int v)
+         : ChannelEvent(t, ch, c, v) {}
+      virtual int type() const            { return ME_CONTROLLER; }
+
+      virtual bool isChannelEvent() const { return true; }
+      int controller() const              { return _a; }
+      void setController(int val)         { _a = val; }
+      int value() const                   { return _b; }
+      void setValue(int v)                { _b = v; }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   DataEvent
+//---------------------------------------------------------
+
+class DataEvent : public Event {
+   protected:
+      int _len;
+      unsigned char* _data;
+
+   public:
+      DataEvent() { _data = 0; _len = 0; }
+      DataEvent(int t, int l, unsigned char* d) : Event(t), _len(l), _data(d) {}
+      virtual int type() const = 0;
+
+      ~DataEvent() {
+            if (_data)
+                  delete _data;
+            }
+      virtual bool isChannelEvent() const { return false; }
+      unsigned char* data() const         { return _data; }
+      void setData(unsigned char* d)      { _data = d;    }
+      int len() const                     { return _len;  }
+      void setLen(int l)                  { _len = l;     }
+      };
+
+//---------------------------------------------------------
+//   SysexEvent
+//---------------------------------------------------------
+
+class SysexEvent : public DataEvent {
+   public:
+      SysexEvent()              {}
+      SysexEvent(int t, int l, unsigned char* d) : DataEvent(t, l, d) {}
+      virtual int type() const { return ME_SYSEX; }
+
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MetaEvent
+//---------------------------------------------------------
+
+class MetaEvent : public DataEvent {
+      int _metaType;
+
+   public:
+      MetaEvent()               { _metaType = -1; }
+      MetaEvent(int t, int mt, int l, unsigned char* d)
+         : DataEvent(t, l, d), _metaType(mt) {}
+      virtual int type() const { return ME_META;   }
+
+      int metaType() const     { return _metaType; }
+      void setMetaType(int v)  { _metaType = v;    }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   EventList
+//   EventMap
+//---------------------------------------------------------
+
+class EventList : public QList<Event*> {
+   public:
+      void insert(Event*);
+      void insert(int,int);
+      };
+
+typedef QMap<int, Event*> EventMap;
+
+typedef EventList::iterator iEvent;
+typedef EventList::const_iterator ciEvent;
 
 #endif
 

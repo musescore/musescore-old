@@ -31,7 +31,8 @@ extern bool debugMode;
 extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.
 extern bool noMidi;           ///< Dont use midi; cmd line option.
-extern bool dumpMidi;         ///< debug option: dump midi input
+extern bool midiInputTrace;   ///< debug option: dump midi input
+extern bool midiOutputTrace;  ///< debug option: dump midi output
 
 static const QString mimeSymbolFormat("application/mscore/symbol");
 static const QString mimeSymbolListFormat("application/mscore/symbollist");

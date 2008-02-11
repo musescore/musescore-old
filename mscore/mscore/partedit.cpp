@@ -175,7 +175,7 @@ void PartEdit::panChanged(double val)
       Synth* synti = seq->synth();
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      synti->setController(i->midiChannel, CTRL_PAN, iv);
+      synti->setController(i->midiChannel, CTRL_PANPOT, iv);
       i->pan = iv;
       }
 

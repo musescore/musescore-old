@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id: synti.h,v 1.12 2006/03/02 17:08:43 wschweer Exp $
+//  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,35 +18,39 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SYNTI_H__
-#define __SYNTI_H__
+#ifndef __MIDISEQ_H__
+#define __MIDISEQ_H__
+
+#include "thread.h"
+#include "timerdev.h"
+#include "midififo.h"
 
 //---------------------------------------------------------
-//   MidiPatch
+//   MidiSeq
 //---------------------------------------------------------
 
-struct MidiPatch {
-      signed char typ;                     // 1 - GM  2 - GS  4 - XG
-      signed char hbank, lbank, prog;
-      const char* name;
-      };
+class MidiSeq : public Thread {
+      int realRtcTicks;
+      Timer* timer;
 
-//---------------------------------------------------------
-//   Synth
-//---------------------------------------------------------
+      MidiOutFifo fifo;
+      MidiOutEventList playEvents;
 
-class Synth {
+      static void midiTick(void* p, void*);
+      int getTimerTicks() { return timer->getTimerTicks(); }
 
    public:
-      Synth() {}
-      virtual ~Synth() {}
-      virtual bool init(int sampleRate) = 0;
-      virtual bool loadSoundFont(const QString&) = 0;
-      virtual void process(unsigned, float*, float*, int) = 0;
-      virtual void playNote(int channel, int pitch, int velo) = 0;
-      virtual bool setController(int ch, int ctrl, int val) = 0;
-      virtual const MidiPatch* getPatchInfo(int ch, const MidiPatch* p) const = 0;
+      MidiSeq(const char* name);
+      bool start(int);
+      virtual void threadStop();
+      virtual void threadStart(void*);
+      void updatePollFd();
+      bool initRealtimeTimer();
+      void putEvent(const MidiOutEvent& e) {
+            fifo.put(e);
+            }
       };
 
+extern MidiSeq* midiSeq;
 #endif
 

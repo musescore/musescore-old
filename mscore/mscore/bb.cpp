@@ -56,10 +56,10 @@ BBTrack::~BBTrack()
 //---------------------------------------------------------
 
 struct MNote {
-	MidiChord* mc;
+	ChordEvent* mc;
       QList<Tie*> ties;
 
-      MNote(MidiChord* _mc) : mc(_mc) {
+      MNote(ChordEvent* _mc) : mc(_mc) {
             for (int i = 0; i < mc->notes().size(); ++i)
                   ties.append(0);
             }
@@ -330,7 +330,7 @@ bool BBFile::read(const QString& name)
                               printf("event tick %d > %d\n", tick, endTick);
                               continue;
                               }
-                        MidiNote* note = new MidiNote();
+                        NoteEvent* note = new NoteEvent();
                         note->setOntime((tick * division) / bbDivision);
                         note->setPitch(a[idx + 5]);
                         note->setVelo(a[idx + 6]);
@@ -542,9 +542,9 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       s->add(chord);
 
       foreach (MNote* n, *notes) {
-            QList<MidiNote*>& nl = n->mc->notes();
+            QList<NoteEvent*>& nl = n->mc->notes();
             for (int i = 0; i < nl.size(); ++i) {
-                  MidiNote* mn = nl[i];
+                  NoteEvent* mn = nl[i];
       		Note* note = new Note(this);
                   note->setPitch(mn->pitch());
                   note->setTpc(mn->tpc());
@@ -571,7 +571,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
                   continue;
                   }
             for (int i = 0; i < nl.size(); ++i) {
-                  MidiNote* mn = nl[i];
+                  NoteEvent* mn = nl[i];
                   Note* note = chord->noteList()->find(mn->pitch());
       		n->ties[i] = new Tie(this);
                   n->ties[i]->setStartNote(note);
@@ -590,10 +590,10 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
 static ciEvent collectNotes(int tick, int voice, ciEvent i, const EventList* el, QList<MNote*>* notes)
       {
       for (;i != el->end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->type() != ME_CHORD)
                   continue;
-            MidiChord* mc = (MidiChord*)e;
+            ChordEvent* mc = (ChordEvent*)e;
             if (mc->voice() != voice)
                   continue;
             if ((*i)->ontime() > tick)
@@ -624,8 +624,8 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
             ciEvent i = collectNotes(ctick, voice, el.begin(), &el, &notes);
 
             for (; i != el.end();) {
-                  MidiEvent* e = *i;
-                  if (e->type() != ME_CHORD || ((MidiChord*)e)->voice() != voice) {
+                  Event* e = *i;
+                  if (e->type() != ME_CHORD || ((ChordEvent*)e)->voice() != voice) {
                         ++i;
                         continue;
                         }
@@ -715,11 +715,11 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
             }
       iEvent si = i;
       for (; i != _events.end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->ontime() >= endTick)
                   break;
-            if (e->type() == ME_NOTE && (((MidiNote*)e)->duration() < mintick))
-                  mintick = ((MidiNote*)e)->duration();
+            if (e->type() == ME_NOTE && (((NoteEvent*)e)->duration() < mintick))
+                  mintick = ((NoteEvent*)e)->duration();
             }
       if (mintick <= division / 16)        // minimum duration is 1/64
             mintick = division / 16;
@@ -747,11 +747,11 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       //  quantize onset
       //
       for (iEvent i = si; i != _events.end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->ontime() >= endTick)
                   break;
             if (e->type() == ME_NOTE) {
-                  MidiNote* note = (MidiNote*)e;
+                  NoteEvent* note = (NoteEvent*)e;
                   // prefer moving note to the right
       	      int tick = ((note->ontime() + raster/2) / raster) * raster;
                   int diff = tick - note->ontime();
@@ -765,17 +765,17 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       //  quantize duration
       //
       for (iEvent i = dst->begin(); i != dst->end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->type() != ME_NOTE)
                   continue;
-            MidiNote* note = (MidiNote*)e;
+            NoteEvent* note = (NoteEvent*)e;
             int tick   = note->ontime();
             int len    = note->duration();
             int ntick  = tick + len;
             int nntick = -1;
             for (iEvent ii = (i+1); ii != dst->end(); ++ii) {
                   if ((*ii)->type() == ME_NOTE) {
-                        MidiEvent* ee = *ii;
+                        Event* ee = *ii;
                         if (ee->ontime() == tick)
                               continue;
                         nntick = ee->ontime();
@@ -818,10 +818,10 @@ void BBTrack::cleanup()
       //	quantize
       //
       int lastTick = 0;
-      foreach (MidiEvent* e, _events) {
+      foreach (Event* e, _events) {
             if (e->type() != ME_NOTE)
                   continue;
-            int offtime  = ((MidiNote*)e)->offtime();
+            int offtime  = ((NoteEvent*)e)->offtime();
             if (offtime > lastTick)
                   lastTick = offtime;
             }
@@ -840,20 +840,20 @@ void BBTrack::cleanup()
       _events.clear();
 
       for(iEvent i = dl.begin(); i != dl.end(); ++i) {
-            MidiEvent* e = *i;
+            Event* e = *i;
             if (e->type() == ME_NOTE) {
                   iEvent ii = i;
                   ++ii;
                   for (; ii != dl.end(); ++ii) {
-                        MidiEvent* ee = *ii;
-                        if (ee->type() != ME_NOTE || ((MidiNote*)ee)->pitch() != ((MidiNote*)e)->pitch())
+                        Event* ee = *ii;
+                        if (ee->type() != ME_NOTE || ((NoteEvent*)ee)->pitch() != ((NoteEvent*)e)->pitch())
                               continue;
-                        if (ee->ontime() >= e->ontime() + ((MidiNote*)e)->duration())
+                        if (ee->ontime() >= e->ontime() + ((NoteEvent*)e)->duration())
                               break;
-                        ((MidiNote*)e)->setDuration(ee->ontime() - e->ontime());
+                        ((NoteEvent*)e)->setDuration(ee->ontime() - e->ontime());
                         break;
                         }
-                  if (((MidiNote*)e)->duration() <= 0)
+                  if (((NoteEvent*)e)->duration() <= 0)
                         continue;
                   }
 		_events.insert(e);
@@ -877,7 +877,7 @@ void BBTrack::findChords()
       int jitter = 3;   // tick tolerance for note on/off
 
       for (int i = 0; i < n; ++i) {
-            MidiEvent* e = _events[i];
+            Event* e = _events[i];
             if (e == 0)
                   continue;
             if (e->type() != ME_NOTE) {
@@ -885,10 +885,10 @@ void BBTrack::findChords()
                   continue;
                   }
 
-            MidiNote* note   = (MidiNote*)e;
+            NoteEvent* note  = (NoteEvent*)e;
             int ontime       = note->ontime();
             int offtime      = note->offtime();
-            MidiChord* chord = new MidiChord();
+            ChordEvent* chord = new ChordEvent();
             chord->setOntime(ontime);
             chord->setDuration(note->duration());
             chord->notes().append(note);
@@ -909,7 +909,7 @@ void BBTrack::findChords()
             for (int k = i + 1; k < n; ++k) {
                   if (_events[k] == 0 || _events[k]->type() != ME_NOTE)
                         continue;
-                  MidiNote* nn = (MidiNote*)_events[k];
+                  NoteEvent* nn = (NoteEvent*)_events[k];
                   if (nn->ontime() - jitter > ontime)
                         break;
                   if (qAbs(nn->ontime() - ontime) > jitter || qAbs(nn->offtime() - offtime) > jitter)
