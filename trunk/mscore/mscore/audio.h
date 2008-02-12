@@ -21,6 +21,8 @@
 #ifndef __AUDIO_H__
 #define __AUDIO_H__
 
+struct MidiOutEvent;
+
 //---------------------------------------------------------
 //   Audio
 //---------------------------------------------------------
@@ -30,14 +32,15 @@ class Audio {
       Audio() {}
       virtual ~Audio() {}
       virtual bool init() = 0;
-      virtual bool start() = 0;
-      virtual bool stop() = 0;
-      virtual std::list<QString> inputPorts() = 0;
+      virtual void start() = 0;
+      virtual void stop() = 0;
+      virtual QList<QString> inputPorts() = 0;
       virtual void stopTransport() = 0;
       virtual void startTransport() = 0;
       virtual int getState() = 0;
       virtual int sampleRate() const = 0;
       virtual bool isRealtime() const { return false; }
+      virtual void putEvent(const MidiOutEvent&) {}
       };
 
 #endif

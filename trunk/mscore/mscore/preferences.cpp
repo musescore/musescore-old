@@ -391,9 +391,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             }
 
       if (seq->isRunning()) {
-            std::list<QString> sl = seq->inputPorts();
+            QList<QString> sl = seq->inputPorts();
             int idx = 0;
-            for (std::list<QString>::iterator i = sl.begin(); i != sl.end(); ++i, ++idx) {
+            for (QList<QString>::iterator i = sl.begin(); i != sl.end(); ++i, ++idx) {
                   jackRPort->addItem(*i);
                   jackLPort->addItem(*i);
                   if (preferences.rPort == *i)

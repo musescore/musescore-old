@@ -107,10 +107,10 @@ void JackAudio::unregisterPort(void* p)
 //   inputPorts
 //---------------------------------------------------------
 
-std::list<QString> JackAudio::inputPorts()
+QList<QString> JackAudio::inputPorts()
       {
       const char** ports = jack_get_ports(client, 0, 0, 0);
-      std::list<QString> clientList;
+      QList<QString> clientList;
       for (const char** p = ports; p && *p; ++p) {
             jack_port_t* port = jack_port_by_name(client, *p);
             int flags = jack_port_flags(port);
@@ -120,7 +120,7 @@ std::list<QString> JackAudio::inputPorts()
             strncpy(buffer, *p, 128);
             if (strncmp(buffer, "Mscore", 6) == 0)
                   continue;
-            clientList.push_back(QString(buffer));
+            clientList.append(QString(buffer));
             }
       return clientList;
       }
@@ -297,7 +297,7 @@ static void noJackError(const char* /* s */)
 
 //---------------------------------------------------------
 //   init
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool JackAudio::init()
@@ -315,7 +315,7 @@ bool JackAudio::init()
                   break;
             }
       if (client == 0)
-            return true;
+            return false;
       jack_set_error_function(jackError);
       jack_set_process_callback(client, processAudio, this);
       jack_on_shutdown(client, processShutdown, this);
@@ -335,8 +335,8 @@ bool JackAudio::init()
       // connect mscore output ports to jack input ports
       QString lport = preferences.lPort;
       QString rport = preferences.rPort;
-      std::list<QString> ports = inputPorts();
-      std::list<QString>::iterator pi = ports.begin();
+      QList<QString> ports = inputPorts();
+      QList<QString>::iterator pi = ports.begin();
       if (lport.isEmpty()) {
             if (pi != ports.end()) {
                   preferences.lPort = *pi;
@@ -346,7 +346,7 @@ bool JackAudio::init()
                   fprintf(stderr, "no jack ports found\n");
                   jack_client_close(client);
                   client = 0;
-                  return true;
+                  return false;
                   }
             }
       if (rport.isEmpty()) {
@@ -357,7 +357,7 @@ bool JackAudio::init()
                   fprintf(stderr, "no jack port for right channel found!\n");
                   }
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------

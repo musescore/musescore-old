@@ -65,7 +65,7 @@ Portaudio::~Portaudio()
 
 //---------------------------------------------------------
 //   init
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool Portaudio::init()
@@ -73,7 +73,7 @@ bool Portaudio::init()
       PaError err = Pa_Initialize();
       if (err != paNoError) {
             printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
-            return true;
+            return false;
             }
 
       initialized = true;
@@ -100,9 +100,9 @@ bool Portaudio::init()
 
       if (err != paNoError) {
             printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
-            return true;
+            return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -167,9 +167,9 @@ void Portaudio::unregisterPort(void*)
 //   inputPorts
 //---------------------------------------------------------
 
-std::list<QString> Portaudio::inputPorts()
+QList<QString> Portaudio::inputPorts()
       {
-      std::list<QString> clientList;
+      QList<QString> clientList;
       return clientList;
       }
 

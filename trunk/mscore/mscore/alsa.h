@@ -114,9 +114,9 @@ class AlsaAudio : public Audio {
       virtual bool init();
       void* registerPort(const char* name);
       void unregisterPort(void* p);
-      virtual std::list<QString> inputPorts();
-      virtual bool start();
-      virtual bool stop();
+      virtual QList<QString> inputPorts();
+      virtual void start();
+      virtual void stop();
       void connect(void*, void*) {}
       void disconnect(void* src, void* dst);
       float* getLBuffer(long n);
