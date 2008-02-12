@@ -1461,13 +1461,31 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
                         _score->undoOp(UndoOp::RemoveElement, el);
                         }
                   }
+            // TODO: remove empty segment?
             }
+      foreach(Element* e, _el) {
+            if (e->track() == -1)
+                  continue;
+            int voice = e->voice();
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff && staffIdx < eStaff) {
+                  _score->undoOp(UndoOp::RemoveElement, e);
+                  }
+            else if (staffIdx >= eStaff) {
+                  staffIdx -= eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+
       _score->undoOp(UndoOp::RemoveStaves, this, sStaff, eStaff);
       removeStaves(sStaff, eStaff);
 
       for (int i = eStaff - 1; i >= sStaff; --i)
             _score->undoOp(UndoOp::RemoveMStaff, this, *(staves.begin() + i), i);
       staves.erase(staves.begin() + sStaff, staves.begin() + eStaff);
+
+      for (int i = 0; i < staves.size(); ++i)
+            staves[i]->lines->setTrack(i * VOICES);
 
       // BeamList   _beamList;
       // TupletList _tuplets;
@@ -2621,6 +2639,17 @@ void Measure::setRepeatFlags(int val)
 
 void Measure::sortStaves(QList<int>& src, QList<int>& dst)
       {
+#if 0
+      printf("src: ");
+      foreach(int i, src)
+            printf(" %d", i);
+      printf("\n");
+
+      printf("dst: ");
+      foreach(int i, dst)
+            printf(" %d", i);
+      printf("\n");
+#endif
       QList<MStaff*> ms;
       for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
             int didx = *i;
@@ -2641,4 +2670,12 @@ void Measure::sortStaves(QList<int>& src, QList<int>& dst)
 
       for (Segment* s = first(); s; s = s->next())
             s->sortStaves(src, dst);
+#if 0 //TODO?
+      foreach(Element* e, _el) {
+            if (e->track() == -1)
+                  continue;
+            int voice = e->voice();
+            int track = e->track();
+            }
+#endif
       }

@@ -94,12 +94,14 @@ class Staff {
       void write(Xml& xml) const;
       Instrument* instrument() const;
       Part* part() const             { return _part;        }
+
       int bracket(int idx) const;
       int bracketSpan(int idx) const;
       void setBracket(int idx, int val);
       void setBracketSpan(int idx, int val);
       int bracketLevels() const      { return _brackets.size(); }
       void addBracket(BracketItem);
+
       KeyList* keymap() const        { return _keymap; }
       ClefList* clef() const         { return _clef;   }
       void changeKeySig(int tick, int st);

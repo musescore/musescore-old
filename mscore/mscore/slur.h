@@ -135,10 +135,12 @@ class Slur : public SlurTie {
       virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
+      virtual void setTrack(int val);
 
       int tick2() const       { return _tick2; }
       void setTick2(int val);
       int track2() const      { return _track2; }
+      int staffIdx2() const   { return _track2 / VOICES; }
       void setTrack2(int val) { _track2 = val; }
 
       void setStart(int t, int track);
