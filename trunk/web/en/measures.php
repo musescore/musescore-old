@@ -4,6 +4,23 @@
   ?>
 <h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Measure Operations</h4>
 <h5>
+Insert Measures  </h5>
+
+
+      First select a measure then press &lt;<b>Ins</b>&gt; to insert a new empty measure before
+      the selected on.
+
+    <h5>
+Delete Measures  </h5>
+
+
+      Complete measures can be deletet by first selecting them with &lt;<b>Ctrl+Click</b>&gt;.
+      The measure is marked with a dottet line indicating that you selected a &quot;piece of time&quot;.
+      Press &lt;<b>Shift+Click</b>&gt; to extent the selection.
+      Pressing &lt;<b>Del</b>&gt; removes the selected measures.
+
+
+    <h5>
 Properties  </h5>
 <table cellspacing="0" cellpadding="0">
   <tr>
