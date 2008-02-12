@@ -30,7 +30,6 @@ class QTimer;
 class Score;
 class Painter;
 class Measure;
-class MidiSeq;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -65,7 +64,6 @@ class Seq : public QObject {
 
       Synth* synti;
       Audio* audio;
-      MidiSeq* midiSeq;
 
       EventMap events;                    // playlist
       QList<NoteOn*> _activeNotes;        // currently sounding notes
@@ -92,8 +90,6 @@ class Seq : public QObject {
       void playEvent(const Event* event);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
-      bool initAudio();
-      bool initMidi();
 
    private slots:
       void seqMessage(int msg);
@@ -133,7 +129,8 @@ class Seq : public QObject {
       bool isPlaying() const    { return state == PLAY; }
       bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*, int stride);
-      std::list<QString> inputPorts();
+      void processMidi(int);
+      QList<QString> inputPorts();
       int sampleRate() const;
       int getEndTick() const    { return endTick; }
       float volume() const      {  return _volume; }

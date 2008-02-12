@@ -51,6 +51,5 @@ class MidiSeq : public Thread {
             }
       };
 
-extern MidiSeq* midiSeq;
 #endif
 

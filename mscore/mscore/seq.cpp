@@ -28,6 +28,7 @@
 #endif
 #ifdef USE_ALSA
 #include "alsa.h"
+#include "mididriver.h"
 #endif
 #ifdef USE_PORTAUDIO
 #include "pa.h"
@@ -134,28 +135,27 @@ bool Seq::isRealtime() const
       }
 
 //---------------------------------------------------------
-//   initMidi
+//   init
+//    return false on error
 //---------------------------------------------------------
 
-bool Seq::initMidi()
+bool Seq::init()
       {
-      static const int realTimePriority = 0;
+      audio   = 0;
 
-      midiSeq = new MidiSeq("Midi");
-      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
-      // create midi thread
-      // install timer tick for midi thread
-      return false;
-      }
+      bool useJackFlag      = preferences.useJackAudio;
+      bool useAlsaFlag      = preferences.useAlsaAudio;
+      bool usePortaudioFlag = preferences.usePortaudioAudio;
+      bool useMidiOutFlag   = preferences.useMidiOutput;
 
-//---------------------------------------------------------
-//   initAudio
-//---------------------------------------------------------
+      if (useMidiOutFlag) {
+            useJackFlag      = false;
+            useAlsaFlag      = false;
+            usePortaudioFlag = false;
+            }
 
-bool Seq::initAudio()
-      {
 #ifdef USE_JACK
-      if (preferences.useJackAudio) {
+      if (useJackFlag) {
             audio = new JackAudio;
             if (audio->init()) {
                   printf("no JACK server found\n");
@@ -167,9 +167,9 @@ bool Seq::initAudio()
             }
 #endif
 #ifdef USE_ALSA
-      if (audio == 0 && preferences.useAlsaAudio) {
+      if (audio == 0 && useAlsaFlag) {
             audio = new AlsaAudio;
-            if (audio->init()) {
+            if (!audio->init()) {
                   printf("no ALSA audio found\n");
                   delete audio;
                   audio = 0;
@@ -177,11 +177,19 @@ bool Seq::initAudio()
             else
                   useALSA = true;
             }
+      if (useMidiOutFlag) {
+            audio = new DummyAudio;
+            if (!audio->init()) {
+                  printf("init DummyAudio failed\n");
+                  delete audio;
+                  audio = 0;
+                  }
+            }
 #endif
 #ifdef USE_PORTAUDIO
-      if (audio == 0 && preferences.usePortaudioAudio) {
+      if (usePortaudioFlag) {
             audio = new Portaudio;
-            if (audio->init()) {
+            if (!audio->init()) {
                   printf("no audio output found\n");
                   delete audio;
                   audio = 0;
@@ -190,32 +198,15 @@ bool Seq::initAudio()
                   usePortaudio = true;
             }
 #endif
-      return (audio != 0);
-      }
+      if (audio == 0)
+            return false;
 
-//---------------------------------------------------------
-//   init
-//    return false on error
-//---------------------------------------------------------
-
-bool Seq::init()
-      {
-      midiSeq = 0;
-      audio = 0;
-      if (preferences.useMidiOutput) {
-            if (!initMidi())
-                  return false;
+      int sr = audio->sampleRate();
+      if (synti->init(sr)) {
+            printf("Synti init failed\n");
+            return false;
             }
-      else  {
-            if (!initAudio())
-                  return false;
-            int sr = audio->sampleRate();
-            if (synti->init(sr)) {
-                  printf("Synti init failed\n");
-                  return false;
-                  }
-            audio->start();
-            }
+      audio->start();
       running = true;
       return true;
       }
@@ -228,8 +219,6 @@ void Seq::exit()
       {
       if (audio)
             audio->stop();
-      if (midiSeq)
-            midiSeq->stop(true);
       }
 
 //---------------------------------------------------------
@@ -265,11 +254,11 @@ int Seq::tick2frame(int tick) const
 //   inputPorts
 //---------------------------------------------------------
 
-std::list<QString> Seq::inputPorts()
+QList<QString> Seq::inputPorts()
       {
       if (audio)
             return audio->inputPorts();
-      std::list<QString> a;
+      QList<QString> a;
       return a;
       }
 
@@ -526,6 +515,89 @@ void Seq::playEvent(const Event* event)
       }
 
 //---------------------------------------------------------
+//   processMidi
+//---------------------------------------------------------
+
+void Seq::processMidi(int frames)
+      {
+      int driverState = audio->getState();
+      if (state == START_PLAY && driverState == PLAY)
+            startTransport();
+      else if (state == PLAY && driverState == STOP)
+            stopTransport();
+      else if (state == START_PLAY && driverState == STOP)
+            stopTransport();
+      else if (state == STOP && driverState == PLAY)
+            startTransport();
+      else if (state != driverState)
+            printf("Driver: state transition %d -> %d ?\n",
+               state, driverState);
+
+      QMutexLocker locker(&mutex);
+      while (!toSeq.isEmpty()) {
+            SeqMsg msg = toSeq.dequeue();
+            switch(msg.id) {
+                  case SEQ_TEMPO_CHANGE:
+                        {
+                        int tick = frame2tick(playFrame);
+                        cs->tempomap->setRelTempo(msg.data1);
+                        playFrame = tick2frame(tick);
+                        }
+                        break;
+
+                  case SEQ_PLAY:
+                        {
+                        int channel = msg.data1 & 0xf;
+                        int type    = msg.data1 & 0xf0;
+                        if (type == ME_NOTEON)
+                              synti->playNote(channel, msg.data2, msg.data3);
+                        else if (type == ME_CONTROLLER)
+                              synti->setController(channel, msg.data2, msg.data3);
+                        }
+                        break;
+                  case SEQ_SEEK:
+                        setPos(msg.data1);
+                        break;
+                  }
+            }
+      if (state == PLAY) {
+            //
+            // collect events for one segment
+            //
+            int endFrame = playFrame + frames;
+            for (; playPos != events.constEnd(); ++playPos) {
+                  int f = tick2frame(playPos.key());
+                  if (f >= endFrame)
+                        break;
+
+                  int n = f - playFrame;
+                  if (n < 0 || n > int(frames)) {
+                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
+                           playPos.key(), n, frames, f, playFrame);
+                        break;
+                        }
+                  playFrame += n;
+                  frames    -= n;
+                  MidiOutEvent ev;
+                  ev.time = playFrame;
+                  Event* e = playPos.value();
+                  if (e->type() == ME_NOTEON) {
+                        NoteOn* n = (NoteOn*)e;
+                        ev.type = n->type() | n->channel();
+                        ev.port = n->port();
+                        ev.a    = n->pitch();
+                        ev.b    = n->velo();
+                        }
+                  audio->putEvent(ev);
+                  }
+            if (frames)
+                  playFrame += frames;
+            if (playPos == events.constEnd())
+                  audio->stopTransport();
+            }
+      }
+
+//---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
@@ -662,7 +734,6 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
-printf("heart beat\n");
       if (guiPos == playPos)
             return;
       cs->start();

@@ -586,7 +586,7 @@ AlsaAudio::~AlsaAudio()
 
 //---------------------------------------------------------
 //   init
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool AlsaAudio::init()
@@ -600,9 +600,9 @@ bool AlsaAudio::init()
             delete alsa;
             alsa = 0;
             fprintf(stderr, "init ALSA audio driver failed\n");
-            return true;
+            return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -647,7 +647,7 @@ void AlsaAudio::alsaLoop()
 //   start
 //---------------------------------------------------------
 
-bool AlsaAudio::start()
+void AlsaAudio::start()
       {
       runAlsa = 2;
       pthread_attr_t* attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
@@ -655,14 +655,13 @@ bool AlsaAudio::start()
       if (pthread_create(&thread, attributes, ::alsaLoop, this))
             perror("creating thread failed:");
       pthread_attr_destroy(attributes);
-      return false;
       }
 
 //---------------------------------------------------------
 //   stop
 //---------------------------------------------------------
 
-bool AlsaAudio::stop()
+void AlsaAudio::stop()
       {
       if (runAlsa == 2) {
             runAlsa = 1;
@@ -671,7 +670,6 @@ bool AlsaAudio::stop()
             pthread_cancel(thread);
             pthread_join(thread, 0);
             }
-      return false;
       }
 
 //---------------------------------------------------------
@@ -695,9 +693,9 @@ void AlsaAudio::unregisterPort(void*)
 //   inputPorts
 //---------------------------------------------------------
 
-std::list<QString> AlsaAudio::inputPorts()
+QList<QString> AlsaAudio::inputPorts()
       {
-      std::list<QString> l;
+      QList<QString> l;
       return l;
       }
 

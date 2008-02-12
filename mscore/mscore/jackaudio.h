@@ -45,7 +45,7 @@ class JackAudio : public Audio {
       virtual bool init();
       void* registerPort(const char* name);
       void unregisterPort(void* p);
-      virtual std::list<QString> inputPorts();
+      virtual QList<QString> inputPorts();
       virtual bool start();
       virtual bool stop();
       int framePos() const;

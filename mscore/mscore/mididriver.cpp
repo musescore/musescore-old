@@ -29,10 +29,13 @@
 #include "midifile.h"
 #include "globals.h"
 #include "midififo.h"
+#include "seq.h"
+#include "midiseq.h"
 
-Port midiInPort;
-Port* midiOutPorts;
 MidiDriver* midiDriver;
+
+static Port midiInPort;
+static Port* midiOutPorts;
 
 //---------------------------------------------------------
 //   Port
@@ -95,7 +98,6 @@ bool Port::operator<(const Port& p) const
       }
 
 #ifdef USE_ALSA
-
 static const unsigned int inCap  = SND_SEQ_PORT_CAP_SUBS_READ;
 static const unsigned int outCap = SND_SEQ_PORT_CAP_SUBS_WRITE;
 
@@ -322,13 +324,14 @@ void AlsaMidiDriver::read()
 
 void AlsaMidiDriver::write(const MidiOutEvent& e)
       {
-      if (midiOutputTrace) {
-            // TODO
-            }
-
       int chn = e.type & 0xf;
       int a   = e.a;
       int b   = e.b;
+
+      if (midiOutputTrace) {
+            printf("midiOut: %2d %5d %02x %02x %02x\n",
+               e.port, e.time, e.type & 0xff, e.a, e.b);
+            }
 
       snd_seq_event_t event;
       memset(&event, 0, sizeof(event));
@@ -423,6 +426,166 @@ bool AlsaMidiDriver::putEvent(snd_seq_event_t* event)
       return true;
       }
 
+//---------------------------------------------------------
+//   DummyAudio
+//---------------------------------------------------------
+
+DummyAudio::DummyAudio()
+      {
+      state     = Seq::STOP;
+      seekflag  = false;
+//      startTime = curTime();
+      }
+
+DummyAudio::~DummyAudio()
+      {
+      }
+
+//---------------------------------------------------------
+//   init
+//    return false on error
+//---------------------------------------------------------
+
+bool DummyAudio::init()
+      {
+      int realTimePriority = 0;
+      midiSeq = new MidiSeq("Midi");
+      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   dummyLoop
+//---------------------------------------------------------
+
+void* DummyAudio::loop(void* pa)
+      {
+      DummyAudio* da = (DummyAudio*)pa;
+
+      if (da->realTimePriority) {
+            //
+            // check if we really got realtime priviledges
+            //
+            int policy;
+            if ((policy = sched_getscheduler (0)) < 0)
+                  printf("cannot get current client scheduler for audio dummy thread: %s!\n", strerror(errno));
+            else {
+                  if (policy != SCHED_FIFO)
+                        printf("audio dummy thread _NOT_ running SCHED_FIFO\n");
+                  else if (debugMode) {
+                        struct sched_param rt_param;
+                        memset(&rt_param, 0, sizeof(sched_param));
+                        int type;
+                        int rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
+                        if (rv == -1)
+                              perror("get scheduler parameter");
+                        printf("audio dummy thread running SCHED_FIFO priority %d\n",
+                        rt_param.sched_priority);
+                        }
+                  }
+            }
+      for (;;) {
+            seq->processMidi(1024);
+            usleep(1024*10000/441);
+            }
+#if 0
+      for (;;) {
+            if (audioState == AUDIO_RUNNING)
+                  seq->audioDriver()->audio->process(segmentSize, dummyAudio->state);
+            else if (audioState == AUDIO_START1)
+                  audioState = AUDIO_START2;
+            usleep(dummyFrames*1000000/AL::sampleRate);
+            if (dummyAudio->seekflag) {
+                  audio->sync(Audio::STOP, dummyAudio->pos);
+                  dummyAudio->seekflag = false;
+                  }
+            if (dummyAudio->state == Audio::PLAY)
+                  dummyAudio->pos += dummyFrames;
+            }
+#endif
+      pthread_exit(0);
+      }
+
+//---------------------------------------------------------
+//   start
+//---------------------------------------------------------
+
+void DummyAudio::start()
+      {
+      realTimePriority = 0;
+      pthread_attr_t* attributes = 0;
+
+      if (realTimePriority) {
+            attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
+            pthread_attr_init(attributes);
+
+            if (pthread_attr_setschedpolicy(attributes, SCHED_FIFO)) {
+                  printf("cannot set FIFO scheduling class for RT thread\n");
+                  }
+            if (pthread_attr_setscope (attributes, PTHREAD_SCOPE_SYSTEM)) {
+                  printf("Cannot set scheduling scope for RT thread\n");
+                  }
+            struct sched_param rt_param;
+            memset(&rt_param, 0, sizeof(rt_param));
+            rt_param.sched_priority = realTimePriority;
+            if (pthread_attr_setschedparam (attributes, &rt_param)) {
+                  printf("Cannot set scheduling priority %d for RT thread (%s)\n",
+                     realTimePriority, strerror(errno));
+                  }
+            }
+      if (pthread_create(&dummyThread, attributes, loop, this))
+            perror("creating thread failed:");
+      if (realTimePriority)
+            pthread_attr_destroy(attributes);
+      }
+
+//---------------------------------------------------------
+//   stop
+//---------------------------------------------------------
+
+void DummyAudio::stop()
+      {
+      pthread_cancel(dummyThread);
+      pthread_join(dummyThread, 0);
+      }
+
+//---------------------------------------------------------
+//   inputPorts
+//---------------------------------------------------------
+
+QList<QString> DummyAudio::inputPorts()
+      {
+      QList<QString> clientList;
+      return clientList;
+      }
+
+//---------------------------------------------------------
+//   startTransport
+//---------------------------------------------------------
+
+void DummyAudio::startTransport()
+      {
+      state = Seq::PLAY;
+      }
+
+//---------------------------------------------------------
+//   stopTransport
+//---------------------------------------------------------
+
+void DummyAudio::stopTransport()
+      {
+      state = Seq::STOP;
+      }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void DummyAudio::putEvent(const MidiOutEvent& e)
+      {
+      midiSeq->putEvent(e);
+      }
+
 #endif /* USE_ALSA */
 
 //---------------------------------------------------------
@@ -440,7 +603,7 @@ bool initMidi()
       return true;
 #endif
       midiOutPorts = new Port[preferences.midiPorts];
-      midiInPort = midiDriver->registerOutPort("MuseScore Port-0");
+      midiInPort   = midiDriver->registerOutPort("MuseScore Port-0");
       for (int i = 0; i < preferences.midiPorts; ++i)
             midiOutPorts[i] = midiDriver->registerInPort(QString("MuseScore Port-%1").arg(i));
       return false;
