@@ -1419,7 +1419,7 @@ void Score::cmd(const QString& cmd)
                               }
                         }
                   if (noteEntryMode()) {
-                        if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dot))
+                        if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots))
                               _is.pos += _padState.tickLen;
                         }
                   _padState.rest = false;  // continue with normal note entry
@@ -1547,6 +1547,8 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_REST);
             else if (cmd == "pad-dot")
                   padToggle(PAD_DOT);
+            else if (cmd == "pad-dotdot")
+                  padToggle(PAD_DOTDOT);
             else if (cmd == "beam-start")
                   padToggle(PAD_BEAM_START);
             else if (cmd == "beam-mid")

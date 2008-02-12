@@ -161,7 +161,16 @@ void Score::padToggle(int n)
                   _padState.rest = !_padState.rest;
                   break;
             case PAD_DOT:
-                  _padState.dot = !_padState.dot;
+                  if (_padState.dots == 1)
+                        _padState.dots = 0;
+                  else
+                        _padState.dots = 1;
+                  break;
+            case PAD_DOTDOT:
+                  if (_padState.dots == 2)
+                        _padState.dots = 0;
+                  else
+                        _padState.dots = 2;
                   break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
@@ -177,9 +186,9 @@ void Score::padToggle(int n)
                   break;
             }
       setPadState();
-      if (n >= PAD_NOTE1 && n <= PAD_DOT) {
+      if (n >= PAD_NOTE1 && n <= PAD_DOTDOT) {
             if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
-                  _padState.dot = false;
+                  _padState.dots = 0;
                   //
                   // if in "note enter" mode, reset
                   // rest flag
@@ -198,7 +207,7 @@ void Score::padToggle(int n)
                         if (cr->tuplet())
                               len = cr->tuplet()->noteLen();
                         if (_padState.rest)
-                              setRest(tick, _is.track, len, _padState.dot);
+                              setRest(tick, _is.track, len, _padState.dots);
                         else
                               setNote(tick, _is.track, _padState.pitch, len);
                         }
@@ -251,7 +260,7 @@ void Score::setPadState(Element* obj)
             _padState.beamMode = BEAM_INVALID;
             }
       if (len == -1) {
-            _padState.dot = false;
+            _padState.dots = 0;
             return;
             }
       struct nv {
@@ -271,11 +280,13 @@ void Score::setPadState(Element* obj)
             int n = values[i].ticks;
             if (len / n) {
                   _padState.len = n;
-                  int rest     = len % n;
-                  if (len <= (division * 4))
-                        _padState.dot = (rest == n/2);
+                  int rest      = len % n;
+                  if (rest == (n / 2))
+                        _padState.dots = 1;
+                  else if (rest == ((n * 3) / 4))
+                        _padState.dots = 2;
                   else
-                        _padState.dot = false;
+                        _padState.dots = 0;
                   break;
                   }
             }
@@ -288,7 +299,8 @@ void Score::setPadState(Element* obj)
 void Score::setPadState()
       {
       getAction("pad-rest")->setChecked(_padState.rest);
-      getAction("pad-dot")->setChecked(_padState.dot);
+      getAction("pad-dot")->setChecked(_padState.dots == 1);
+      getAction("pad-dotdot")->setChecked(_padState.dots == 2);
       getAction("pad-tie")->setChecked(_padState.tie);
 
       getAction("pad-note-1")->setChecked(_padState.len == division * 4);
@@ -319,6 +331,12 @@ void Score::setPadState()
       getAction("beam32")->setChecked(_padState.beamMode == BEAM_BEGIN32);
       getAction("auto-beam")->setChecked(_padState.beamMode == BEAM_AUTO);
 
-      _padState.tickLen = _padState.len + (_padState.dot ? _padState.len/2 : 0);
+      _padState.tickLen = _padState.len;
+      if (_padState.dots == 1)
+            _padState.tickLen += _padState.len / 2;
+      else if (_padState.dots == 2)
+            _padState.tickLen += ((_padState.len * 3)/4);
+      else
+            printf("too many dots: %d\n", _padState.dots);
       }
 

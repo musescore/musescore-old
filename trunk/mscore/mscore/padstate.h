@@ -29,7 +29,7 @@
 //---------------------------------------------------------
 
 struct PadState {
-      bool dot;
+      int dots;
       int len;
       int tickLen;  // len + len * (dot ? .5 : 0)
       bool rest;
@@ -54,9 +54,9 @@ struct PadState {
 //    10 - (natural)       15 - [natural]
 
       PadState() {
-            dot      = false;
-            len      = 480;
-            tickLen  = 480;
+            dots     = 0;
+            len      = division;
+            tickLen  = division;
             rest     = false;
             pad      = 0;
             voice    = 0;

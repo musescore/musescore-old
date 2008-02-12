@@ -432,7 +432,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             if (cr && cr->tuplet())
                   len = cr->tuplet()->noteLen();
             if (_padState.rest)
-                  setRest(tick, track, len, _padState.dot);
+                  setRest(tick, track, len, _padState.dots);
             else
                   setNote(tick, track, pitch, len);
             }

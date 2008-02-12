@@ -705,6 +705,6 @@ void initSymbols()
       symbols[note16Sym]                  = Sym("note 1/16",  0xe0f9, 0);
       symbols[note32Sym]                  = Sym("note 1/32",  0xe0fa, 0);
       symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, 0);
-      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fd, 0);
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fe, 0);
       }
 
