@@ -355,35 +355,9 @@ void Note::setAccidentalSubtype(int pre)
 
 void Note::setHead(int ticks)
       {
-      int headType = 0;
-      if (ticks < (2*division)) {
-            headType = 2;
-            int nt = division;
-            for (int i = 0; i < 4; ++i) {
-                  if (ticks / nt) {
-                        int rest = ticks % nt;
-                        if (rest) {
-                              _dots = 1;
-                              nt /= 2;
-                              if (rest % nt)
-                                    ++_dots;
-                              }
-                        break;
-                        }
-                  nt /= 2;
-                  }
-            }
-      else if (ticks >= (4 * division)) {
-            headType = 0;
-            if (ticks % (4 * division))
-                  _dots = 1;
-            }
-      else {
-            headType = 1;
-            if (ticks % (2 * division))
-                  _dots = 1;
-            }
-      _head = noteHeads[_headGroup][headType];
+      DurationType dt;
+      headType(ticks, &dt, &_dots);
+      setType(dt);
       }
 
 //---------------------------------------------------------
