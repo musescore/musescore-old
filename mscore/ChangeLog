@@ -1,4 +1,5 @@
 12.2.8 (ws)
+      - fix rendering of double dottet half notes
       - add "double dots" button to note entry toolbar
       - fix crash when removing an instrument (staff/part)
 11.2.8 (ws)
