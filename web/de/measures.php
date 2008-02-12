@@ -4,6 +4,22 @@
   ?>
 <h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Dokumentation</a> -- <a href="reference.php">Index</a> -- Takte bearbeiten</h4>
 <h5>
+Takte einfügen  </h5>
+
+
+      Zunächst muß ein Takt selektiert werden. &lt;<b>Einfg</b>&gt; erzeugt einen neuen
+      leeren Takt vor dem ausgewählten.
+
+    <h5>
+Takte löschen  </h5>
+
+
+      Um komplette Takte zu löschen, müssen sie zunächst mit &lt;<b>Strg+Click</b>&gt;
+      ausgewählt werden. Die Takte sind dann mit einer gestrichelten Linie umrandet um
+      anzuzeigen, das eine komplette Zeiteinheit selektiert wurde. &lt;<b>Entf</b>&gt; löscht
+      die so selektierten Takte.
+
+    <h5>
 Eigenschaften  </h5>
 <table cellspacing="0" cellpadding="0">
   <tr>
