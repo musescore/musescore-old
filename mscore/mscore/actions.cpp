@@ -896,6 +896,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-dotdot",
+         QT_TR_NOOP("pad dot dot"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("dot dot"),
+         QT_TR_NOOP("dot dot"),
+         &dotdotIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-tie",
          QT_TR_NOOP("pad tie"),
          Qt::Key_Plus,

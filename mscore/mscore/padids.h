@@ -29,6 +29,7 @@ enum {
       //--------------------
       PAD_REST,
       PAD_DOT,
+      PAD_DOTDOT,
       //--------------------
       PAD_SHARP2,
       PAD_SHARP,
