@@ -1,5 +1,6 @@
 12.2.8 (ws)
       - add "double dots" button to note entry toolbar
+      - fix crash when removing an instrument (staff/part)
 11.2.8 (ws)
       - build up infrastructure for linux midi output
 10.2.8 (ws)

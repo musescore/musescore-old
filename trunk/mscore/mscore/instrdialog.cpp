@@ -502,8 +502,9 @@ void MuseScore::editInstrList()
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             rstaff = 0;
             PartListItem* pli = (PartListItem*)item;
-            if (pli->op == ITEM_DELETE)
+            if (pli->op == ITEM_DELETE) {
                   cs->cmdRemovePart(pli->part);
+                  }
             else if (pli->op == ITEM_ADD) {
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
@@ -558,8 +559,7 @@ void MuseScore::editInstrList()
                                     Measure* m = (Measure*)mb;
                                     m->cmdRemoveStaves(sidx, eidx);
                                     }
-                              cs->undoOp(UndoOp::RemoveStaff, staff, sidx);
-                              cs->removeStaff(staff);
+                              cs->cmdRemoveStaff(sidx);
                               }
                         else if (sli->op == ITEM_ADD) {
                               Staff* staff = new Staff(cs, part, rstaff);
@@ -652,6 +652,24 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
             Measure* m = (Measure*)mb;
             m->cmdAddStaves(sidx, eidx);
             }
+      //
+      //    adjust brackets
+      //
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            int bl = staff->bracketLevels();
+            for (int i = 0; i < bl; ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                        staff->setBracketSpan(i, span + (eidx-sidx));
+                  else {
+                        printf("TODO: adjust brackets\n");
+                        }
+                  }
+            }
+
       }
 
 //---------------------------------------------------------
@@ -660,10 +678,52 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
 void Score::cmdRemovePart(Part* part)
       {
-      int sidx = staffIdx(part);
-      int n    = part->nstaves();
-      int eidx = sidx + n;
+      int sidx   = staffIdx(part);
+      int n      = part->nstaves();
+      int eidx   = sidx + n;
+      int strack = sidx * VOICES;
+      int etrack = eidx * VOICES;
 
+      //
+      //    remove/adjust slurs in _gel
+      //
+      foreach(Element* e, *_layout->gel()) {
+            if (e->type() != SLUR) {
+                  printf("gel element %s %d\n", e->name(), e->track());
+                  continue;
+                  }
+            Slur* slur = (Slur*)e;
+            if (((slur->track() >= strack) && (slur->track() < etrack)
+               || ((slur->track2() >= strack) && (slur->track2() < etrack))))
+                  undoRemoveElement(slur);
+            else {
+                  if (slur->track() >= etrack)
+                        slur->setTrack(slur->track() - VOICES);
+                  if (slur->track2() >= etrack)
+                        slur->setTrack2(slur->track2() - VOICES);
+                  }
+            }
+      //
+      //    adjust brackets
+      //
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            int bl = staff->bracketLevels();
+            for (int i = 0; i < bl; ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                        staff->setBracketSpan(i, span - (eidx-sidx));
+                  else {
+                        printf("TODO: adjust brackets\n");
+                        }
+                  }
+            }
+
+      //
+      //    adjust measures
+      //
       for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -730,6 +790,25 @@ void Score::insertStaff(Staff* staff, int idx)
       }
 
 //---------------------------------------------------------
+//   cmdRemoveStaff
+//---------------------------------------------------------
+
+void Score::cmdRemoveStaff(int staffIdx)
+      {
+      foreach(Element* e, *_layout->gel()) {
+            if (e->type() != SLUR)
+                  continue;
+            Slur* slur = (Slur*)e;
+            if ((slur->staffIdx() == staffIdx) || (slur->staffIdx2() == staffIdx)) {
+                  undoRemoveElement(slur);
+                  }
+            }
+      Staff* s = staff(staffIdx);
+      undoOp(UndoOp::RemoveStaff, s, staffIdx);
+      removeStaff(s);
+      }
+
+//---------------------------------------------------------
 //   removeStaff
 //---------------------------------------------------------
 
@@ -742,9 +821,8 @@ void Score::removeStaff(Staff* staff)
       foreach(Element* e, *_layout->gel()) {
             if (e->type() == SLUR) {
                   Slur* slur = (Slur*)e;
-                  if (slur->track() > track) {
+                  if (slur->track() > track)
                         slur->setTrack(slur->track() - VOICES);
-                        }
                   if (slur->track2() > track)
                         slur->setTrack2(slur->track2() - VOICES);
                   }

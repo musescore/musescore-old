@@ -229,6 +229,7 @@ class Score : public QObject {
       void insertPart(Part*, int);
       void removePart(Part*);
       void insertStaff(Staff*, int);
+      void cmdRemoveStaff(int staffIdx);
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
       void removeMeasure(MeasureBase*);

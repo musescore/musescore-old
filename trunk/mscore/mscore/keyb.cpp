@@ -336,7 +336,7 @@ void Score::setPadState()
             _padState.tickLen += _padState.len / 2;
       else if (_padState.dots == 2)
             _padState.tickLen += ((_padState.len * 3)/4);
-      else
+      else if (_padState.dots)
             printf("too many dots: %d\n", _padState.dots);
       }
 
