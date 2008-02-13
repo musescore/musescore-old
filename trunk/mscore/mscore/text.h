@@ -206,21 +206,4 @@ class TextC : public TextB {
       void baseChanged();
       };
 
-//---------------------------------------------------------
-//   TempoText
-//---------------------------------------------------------
-
-class TempoText : public Text  {
-      double _tempo;     // bpm
-
-   public:
-      TempoText(Score*);
-      virtual TempoText* clone() const { return new TempoText(*this); }
-      virtual ElementType type() const { return TEMPO_TEXT; }
-      double tempo() const    { return _tempo; }
-      void setTempo(double v) { _tempo = v; }
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
-      };
-
 #endif

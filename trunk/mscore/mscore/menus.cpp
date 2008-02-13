@@ -51,6 +51,7 @@
 #include "arpeggio.h"
 #include "tremolo.h"
 #include "repeat.h"
+#include "tempotext.h"
 
 static const char* keyNames[] = {
       "g-major, e-minor",     "ces",

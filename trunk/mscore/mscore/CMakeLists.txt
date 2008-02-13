@@ -66,7 +66,7 @@ QT4_WRAP_UI (ui_headers
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
-      chordedit.ui transposedialog.ui
+      chordedit.ui transposedialog.ui tempoproperties.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -77,7 +77,7 @@ QT4_WRAP_CPP (mocs
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       voltaproperties.h chordproperties.h restproperties.h repeatproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h chordedit.h
+      transposedialog.h chordedit.h tempotext.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -94,7 +94,8 @@ else (MINGW)
             set (AUDIO ${AUDIO} jackaudio.cpp)
       endif (USE_JACK)
       if (USE_ALSA)
-            set (AUDIO ${AUDIO} alsa.cpp)
+            set (AUDIO ${AUDIO} alsa.cpp midiseq.cpp midififo.cpp rtctimer.cpp
+               thread.cpp mididriver.cpp)
       endif (USE_ALSA)
 endif (MINGW)
 
@@ -130,8 +131,7 @@ add_executable ( mscore
       repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
-      harmony.cpp chordedit.cpp plugins.cpp mididriver.cpp
-      thread.cpp rtctimer.cpp midiseq.cpp midififo.cpp
+      harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       ${AUDIO}
       )
 

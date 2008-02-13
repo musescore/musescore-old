@@ -55,6 +55,7 @@ class Port {
       friend class AlsaMidiDriver;
       };
 
+#ifdef USE_ALSA
 //---------------------------------------------------------
 //   MidiDriver
 //---------------------------------------------------------
@@ -107,5 +108,7 @@ class DummyAudio : public Audio {
       };
 
 extern MidiDriver* midiDriver;
+#endif
+
 #endif
 

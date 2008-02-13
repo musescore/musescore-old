@@ -18,6 +18,9 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <poll.h>
+
+#include "config.h"
 #include "midiseq.h"
 #include "rtctimer.h"
 #include "preferences.h"

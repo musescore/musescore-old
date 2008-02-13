@@ -1131,45 +1131,6 @@ bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
       }
 
 //---------------------------------------------------------
-//   TempoText
-//---------------------------------------------------------
-
-TempoText::TempoText(Score* s)
-   : Text(s)
-      {
-      setSubtype(TEXT_TEMPO);
-      _tempo = 2.0;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void TempoText::write(Xml& xml) const
-      {
-      xml.stag("Tempo");
-      xml.tag("tempo", _tempo);
-      Text::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void TempoText::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "tempo")
-                  setTempo(e.text().toDouble());
-            else if (!Text::readProperties(e))
-                  domError(e);
-            }
-      cursorPos = 0;
-      }
-
-//---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
 

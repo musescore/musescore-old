@@ -21,6 +21,9 @@
 #include <signal.h>
 #include <fenv.h>
 #include "config.h"
+#ifdef USE_ALSA
+#include <poll.h>
+#endif
 
 #include "mscore.h"
 #include "canvas.h"
@@ -1508,11 +1511,15 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
+#ifdef USE_ALSA
       haveMidi = !initMidi();
       if (debugMode) {
             if (haveMidi)
                   printf("midi devices found\n");
             }
+#else
+      haveMidi = false;
+#endif
 
       //
       //  load internal fonts
@@ -1613,6 +1620,7 @@ int main(int argc, char* argv[])
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
 
+#ifdef USE_ALSA
       extern MidiDriver* midiDriver;
       if (midiDriver) {
             struct pollfd* pfd;
@@ -1626,6 +1634,8 @@ int main(int argc, char* argv[])
                         }
                   }
             }
+#endif
+
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       qApp->setStyleSheet(appStyleSheet);
 
