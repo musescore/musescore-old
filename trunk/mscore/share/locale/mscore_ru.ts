@@ -3573,6 +3573,14 @@ failed: </source>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>pad dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4031,14 +4039,6 @@ failed: </source>
         <translation>Цвет выделения для голоса 4</translation>
     </message>
     <message>
-        <source>JACK: L-Port</source>
-        <translation>JACK: Л-порт</translation>
-    </message>
-    <message>
-        <source>JACK: R-Port</source>
-        <translation>JACK: П-порт</translation>
-    </message>
-    <message>
         <source>StemDir</source>
         <translation>Направление штилей</translation>
     </message>
@@ -4105,10 +4105,6 @@ failed: </source>
     <message>
         <source>Draw Antialiased</source>
         <translation>Сглаженная отрисовка</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation>Звук</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -4291,10 +4287,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Portaudio</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4337,6 +4329,34 @@ failed: </source>
     <message>
         <source>Voice 4</source>
         <translation type="unfinished">Голос 4</translation>
+    </message>
+    <message>
+        <source>I/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right-Port:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

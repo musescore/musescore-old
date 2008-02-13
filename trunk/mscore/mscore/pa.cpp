@@ -197,9 +197,9 @@ bool Portaudio::start()
       {
       PaError err = Pa_StartStream(stream);
       if (err != paNoError) {
-            return true;
+            return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -210,9 +210,9 @@ bool Portaudio::stop()
       {
       PaError err = Pa_StopStream(stream);
       if (err != paNoError) {
-            return true;
+            return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------

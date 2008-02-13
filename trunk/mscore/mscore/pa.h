@@ -44,8 +44,8 @@ class Portaudio : public Audio {
       void* registerPort(const char* name);
       void unregisterPort(void* p);
       virtual QList<QString> inputPorts();
-      virtual void start();
-      virtual void stop();
+      virtual bool start();
+      virtual bool stop();
       int framePos() const;
       void connect(void*, void*);
       void disconnect(void* src, void* dst);

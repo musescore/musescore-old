@@ -94,8 +94,8 @@ class DummyAudio : public Audio {
       virtual ~DummyAudio();
 
       virtual bool init();
-      virtual void start();
-      virtual void stop();
+      virtual bool start();
+      virtual bool stop();
       virtual QList<QString> inputPorts();
       virtual void startTransport();
       virtual void stopTransport();
@@ -104,23 +104,6 @@ class DummyAudio : public Audio {
       virtual int sampleRate() const  { return 44100; }
       virtual bool isRealtime() const { return false; }
       virtual void putEvent(const MidiOutEvent&);
-#if 0
-      unsigned frameTime() const;
-      unsigned lastFrameTime() const;
-      unsigned curFrame() const { return pos; }
-      QList<PortName> outputPorts(bool midi = false);
-      virtual void registerClient();
-      virtual Port registerOutPort(const QString& s, bool);
-      virtual Port registerInPort(const QString& s, bool);
-      virtual void unregisterPort(Port);
-      virtual bool connect(Port, Port);
-      virtual bool disconnect(Port, Port);
-      virtual void setPortName(Port, const QString&);
-      virtual Port findPort(const QString& s);
-      virtual QString portName(Port port);
-      virtual int realtimePriority() const { return 40; }
-      virtual void seekTransport(unsigned n);
-#endif
       };
 
 extern MidiDriver* midiDriver;

@@ -167,13 +167,14 @@ void JackAudio::disconnect(void* src, void* dst)
 
 //---------------------------------------------------------
 //   start
+//    return false on error
 //---------------------------------------------------------
 
 bool JackAudio::start()
       {
       if (jack_activate(client)) {
             fprintf (stderr, "JACK: cannot activate client\n");
-            return true;
+            return false;
             }
       /* connect the ports. Note: you can't do this before
          the client is activated, because we can't allow
@@ -197,20 +198,21 @@ bool JackAudio::start()
                      src, rport.toLatin1().data());
                   }
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
 //   stop
+//    return false on error
 //---------------------------------------------------------
 
 bool JackAudio::stop()
       {
       if (jack_deactivate(client)) {
             fprintf (stderr, "cannot deactivate client");
-            return true;
+            return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
