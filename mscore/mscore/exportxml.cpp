@@ -70,6 +70,7 @@
 #include "trill.h"
 #include "zip.h"
 #include "harmony.h"
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary

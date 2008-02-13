@@ -63,6 +63,7 @@
 #include "pedal.h"
 #include "unzip.h"
 #include "harmony.h"
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   chordExtensions

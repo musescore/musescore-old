@@ -28,7 +28,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <poll.h>
 
 #include <QtXml/QtXml>
 #include <QtCore/QPointF>

@@ -71,6 +71,7 @@
 #include "repeatflag.h"
 #include "box.h"
 #include "harmony.h"
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   MStaff

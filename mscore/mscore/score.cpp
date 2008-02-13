@@ -1047,7 +1047,9 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
 
 void Score::midiReceived()
       {
+#ifdef USE_ALSA
       midiDriver->read();
+#endif
       }
 
 //---------------------------------------------------------

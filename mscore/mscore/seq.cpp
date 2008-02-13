@@ -29,6 +29,7 @@
 #ifdef USE_ALSA
 #include "alsa.h"
 #include "mididriver.h"
+#include "midiseq.h"
 #endif
 #ifdef USE_PORTAUDIO
 #include "pa.h"
@@ -48,7 +49,6 @@
 #include "preferences.h"
 #include "part.h"
 #include "ottava.h"
-#include "midiseq.h"
 
 Seq* seq;
 
@@ -520,6 +520,7 @@ void Seq::playEvent(const Event* event)
 
 void Seq::processMidi(int frames)
       {
+#ifdef USE_ALSA
       int driverState = audio->getState();
       if (state == START_PLAY && driverState == PLAY)
             startTransport();
@@ -595,6 +596,7 @@ void Seq::processMidi(int frames)
             if (playPos == events.constEnd())
                   audio->stopTransport();
             }
+#endif
       }
 
 //---------------------------------------------------------

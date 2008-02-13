@@ -1,4 +1,6 @@
 13.2.8 (ws)
+      - added TempoText properties dialog, which allows to edit the
+        actual tempo value
       - New demo file: inv4.msc: Inventio 4, J.S.Bach BWV 775
       - Midi import: implement time signature meta events
       - Midi import: implement tempo meta events
