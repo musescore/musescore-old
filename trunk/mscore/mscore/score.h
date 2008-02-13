@@ -157,7 +157,7 @@ class Score : public QObject {
       Note* downAltCtrl(Note*) const;
       void moveUp(Note*);
       void moveDown(Note*);
-      void convertTrack(MidiTrack*, int);
+      void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
@@ -495,6 +495,7 @@ class Score : public QObject {
       SigList*   getSigmap()  { return sigmap; }
       Measure* appendMeasure();
       UndoList* getUndoList() { return &undoList; }
+      void addLyrics(int tick, int staffIdx, const QString&);
       };
 
 extern Score* gscore;

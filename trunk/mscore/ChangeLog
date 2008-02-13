@@ -1,3 +1,6 @@
+13.2.8 (ws)
+      - Midi import: implement time signature meta events
+      - Midi import: implement tempo meta events
 12.2.8 (ws)
       - fix rendering of double dottet half notes
       - add "double dots" button to note entry toolbar

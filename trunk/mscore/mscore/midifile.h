@@ -51,6 +51,8 @@ class MidiTrack {
       QString _name;
       QString _comment;
       bool _drumTrack;
+      bool _hasKey;
+      int _staffIdx;
 
    protected:
       void readXml(QDomElement);
@@ -79,6 +81,7 @@ class MidiTrack {
       void append(Event* e)             { _events.append(e);  }
       void mergeNoteOnOff();
       void cleanup();
+      inline int division() const;
       void changeDivision(int newDivision);
       void move(int ticks);
       bool isDrumTrack() const;
@@ -87,6 +90,10 @@ class MidiTrack {
       int getInitProgram();
       void findChords();
       int separateVoices(int);
+      void setHasKey(bool val) { _hasKey = val;    }
+      bool hasKey() const      { return _hasKey;   }
+      int staffIdx() const     { return _staffIdx; }
+      void setStaffIdx(int v)  { _staffIdx = v;    }
 
       friend class MidiFile;
       };
@@ -152,6 +159,7 @@ class MidiFile {
       SigList siglist() const         { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
+      void processMeta(Score*, MidiTrack* track, int staffIdx, MetaEvent* e);
 
       friend class NoteOn;
       friend class NoteOff;
@@ -160,6 +168,8 @@ class MidiFile {
       friend class ControllerEvent;
       friend class MidiTrack;
       };
+
+int MidiTrack::division() const { return mf->division(); }
 
 extern QString midiMetaName(int meta);
 
