@@ -586,6 +586,8 @@ MidiTrack::MidiTrack(MidiFile* f)
       _outChannel = -1;
       _outPort    = -1;
       _drumTrack  = false;
+      _hasKey     = false;
+      _staffIdx   = -1;
       }
 
 MidiTrack::~MidiTrack()
@@ -1174,6 +1176,7 @@ void MidiTrack::changeDivision(int newDivision)
                   }
 		dl.insert(e);
             }
+      _events = dl;     // ?
       }
 
 //---------------------------------------------------------

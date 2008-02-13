@@ -887,6 +887,143 @@ bool LoadMidi::loader(QFile* fp)
       }
 
 //---------------------------------------------------------
+//   addLyrics
+//---------------------------------------------------------
+
+void Score::addLyrics(int tick, int staffIdx, const QString& txt)
+      {
+      Measure* measure = tick2measure(tick);
+      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+      if (seg == 0) {
+            for (seg = measure->first(); seg;) {
+                  if (seg->subtype() != Segment::SegChordRest) {
+                        seg = seg->next();
+                        continue;
+                        }
+                  Segment* ns;
+                  for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
+                        ;
+                  if (ns == 0 || ns->tick() > tick)
+                        break;
+                  seg = ns;
+                  }
+            }
+      if (seg == 0) {
+            printf("no segment found for lyrics<%s> at tick %d\n",
+               qPrintable(txt), tick);
+            return;
+            }
+      Lyrics* l = new Lyrics(this);
+      l->setText(txt);
+      l->setTick(seg->tick());
+      l->setTrack(staffIdx * VOICES);
+      if (debugMode)
+            printf("Meta Lyric <%s>\n", qPrintable(txt));
+      seg->add(l);
+      }
+
+//---------------------------------------------------------
+//   processMeta
+//---------------------------------------------------------
+
+void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent* mm)
+      {
+      int tick = mm->ontime();
+      Staff* staff = cs->staff(staffIdx);
+      unsigned char* data = (unsigned char*)mm->data();
+
+      switch (mm->metaType()) {
+            case META_TEXT:
+            case META_LYRIC:
+                  {
+                  QString s((char*)data);
+                  cs->addLyrics(tick, staffIdx, s);
+                  }
+                  break;
+
+            case META_TRACK_NAME:
+                  {
+                  QString txt((char*)data);
+                  staff->part()->setTrackName(txt);
+                  staff->part()->setLongName(txt);
+                  }
+                  break;
+
+            case META_TEMPO:
+                  {
+                  unsigned tempo = data[2] + (data[1] << 8) + (data[0] <<16);
+                  double t = 1000000.0 / double(tempo);
+                  cs->tempomap->addTempo(tick, t);
+                  }
+                  break;
+
+            case META_KEY_SIGNATURE:
+                  {
+                  int key = ((char*)data)[0];
+                  if (key < -7 || key > 7) {
+                        printf("ImportMidi: illegal key %d\n", key);
+                        break;
+                        }
+                  (*staff->keymap())[mm->ontime()] = key;
+                  track->setHasKey(true);
+                  }
+                  break;
+            case META_COMPOSER:     // mscore extension
+            case META_POET:
+            case META_TRANSLATOR:
+            case META_SUBTITLE:
+            case META_TITLE:
+                  {
+                  Text* text = new Text(cs);
+                  switch(mm->metaType()) {
+                        case META_COMPOSER:
+                              text->setSubtype(TEXT_COMPOSER);
+                              break;
+                        case META_TRANSLATOR:
+                              text->setSubtype(TEXT_TRANSLATOR);
+                              break;
+                        case META_POET:
+                              text->setSubtype(TEXT_POET);
+                              break;
+                        case META_SUBTITLE:
+                              text->setSubtype(TEXT_SUBTITLE);
+                              break;
+                        case META_TITLE:
+                              text->setSubtype(TEXT_TITLE);
+                              break;
+                        }
+
+                  text->setText((char*)(mm->data()));
+
+                  ScoreLayout* layout = cs->mainLayout();
+                  MeasureBase* measure = layout->first();
+                  if (measure->type() != VBOX) {
+                        measure = new VBox(cs);
+                        measure->setTick(0);
+                        measure->setNext(layout->first());
+                        layout->add(measure);
+                        }
+                  measure->add(text);
+                  }
+                  break;
+
+            case META_TIME_SIGNATURE:
+                  {
+                  int z = data[0];
+                  int n = 1 << data[1];
+printf("META: time signature %d/%d\n", z, n);
+                  cs->sigmap->add(tick, z, n);
+                  }
+                  break;
+
+            default:
+                  if (debugMode)
+                        printf("unknown meta type 0x%02x\n", mm->metaType());
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
 //   convertMidi
 //---------------------------------------------------------
 
@@ -907,6 +1044,7 @@ void Score::convertMidi(MidiFile* mf)
       //    build time signature list
       //---------------------------------------------------
 
+      int staffIdx = 0;
       foreach (MidiTrack* track, *tracks) {
             track->maxPitch = 0;
             track->minPitch = 127;
@@ -929,22 +1067,28 @@ void Score::convertMidi(MidiFile* mf)
                         }
                   }
             if (events == 0) {
-                  printf("remove empty track\n");
-//		      tracks->removeAt(tracks->indexOf(track));
+                  printf("empty track found\n");
+                  track->setStaffIdx(-1);       // dont create staff for this track
                   }
-            else
+            else {
+                  track->setStaffIdx(staffIdx++);
 	            track->medPitch /= events;
+                  }
             }
+      if (staffIdx == 0)
+            printf("no tracks found\n");
 
       //---------------------------------------------------
       //  create instruments
       //---------------------------------------------------
 
-      int ntracks = tracks->size();
-      for (int i = 0;;) {
-            MidiTrack* track = tracks->at(i);
-            int program      = track->getInitProgram();
-            Part* part       = new Part(this);
+      int ntracks = staffIdx;
+      foreach (MidiTrack* track, *tracks) {
+            int staffIdx = track->staffIdx();
+            if (staffIdx == -1)
+                  continue;
+            int program  = track->getInitProgram();
+            Part* part   = new Part(this);
 
             Staff* s = new Staff(this, part, 0);
             part->insertStaff(s);
@@ -955,7 +1099,7 @@ void Score::convertMidi(MidiFile* mf)
                   part->setDrumset(smDrumset);
                   }
             else {
-                  if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
+                  if ((staffIdx < (ntracks-1)) && (tracks->at(staffIdx+1)->outChannel() == track->outChannel()
                      && ((program & 0xff) == 0))) {
                         // assume that the current track and the next track
                         // form a piano part
@@ -967,7 +1111,6 @@ void Score::convertMidi(MidiFile* mf)
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
                         ss->clef()->setClef(0, CLEF_F);
-                        ++i;
                         }
                   else {
                         s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
@@ -994,14 +1137,12 @@ void Score::convertMidi(MidiFile* mf)
             part->setMidiChannel(track->outChannel());
             part->setMidiProgram(track->program & 0x7f);  // only GM
             _parts.push_back(part);
-
-            ++i;
-            if (i >= ntracks)
-                  break;
             }
 
       int lastTick = 0;
       foreach (MidiTrack* midiTrack, *tracks) {
+            if (midiTrack->staffIdx() == -1)
+                  continue;
             const EventList el = midiTrack->events();
             if (!el.empty()) {
                   ciEvent i = el.end();
@@ -1024,6 +1165,8 @@ void Score::convertMidi(MidiFile* mf)
             int tick2 = sigmap->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
+                  if (midiTrack->staffIdx() == -1)
+                        continue;
                   foreach(const Event* ev, midiTrack->events()) {
                         int t = ev->ontime();
                         if (t >= tick2)
@@ -1041,8 +1184,8 @@ void Score::convertMidi(MidiFile* mf)
             }
 
       tick = sigmap->bar2tick(startBar, 0, 0);
-if (tick)
-   printf("remove empty measures %d ticks\n", tick);
+      if (tick)
+            printf("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
 
       //---------------------------------------------------
@@ -1051,6 +1194,8 @@ if (tick)
 
       lastTick = 0;
       foreach (MidiTrack* midiTrack, *tracks) {
+            if (midiTrack->staffIdx() == -1)
+                  continue;
             const EventList el = midiTrack->events();
             for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
                   if ((*ie)->type() != ME_NOTE)
@@ -1077,12 +1222,32 @@ if (tick)
       	_layout->add(measure);
             }
 
-	foreach (MidiTrack* midiTrack, *tracks)
+	foreach (MidiTrack* midiTrack, *tracks) {
+            if (midiTrack->staffIdx() == -1)
+                  continue;
             midiTrack->cleanup();
+            }
 
-	int staffIdx = 0;
-	foreach (MidiTrack* midiTrack, *tracks)
-            convertTrack(midiTrack, staffIdx++);
+	staffIdx = 0;
+	foreach (MidiTrack* midiTrack, *tracks) {
+            if (midiTrack->staffIdx() == -1)
+                  continue;
+            convertTrack(midiTrack);
+            }
+
+      //---------------------------------------------------
+      //  process meta events
+      //---------------------------------------------------
+
+      staffIdx = 0;
+      foreach (MidiTrack* track, *tracks) {
+            if (track->staffIdx() != -1)
+                  staffIdx = track->staffIdx();
+            foreach (Event* e, track->events()) {
+                  if (e->type() == ME_META)
+                        mf->processMeta(this, track, staffIdx, (MetaEvent*)e);
+                  }
+            }
 
       for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
             SigEvent se = is->second;
@@ -1120,11 +1285,10 @@ struct MNote {
 //   convertTrack
 //---------------------------------------------------------
 
-void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
+void Score::convertTrack(MidiTrack* midiTrack)
 	{
-      // try to find out key
       int key = findKey(midiTrack, sigmap);
-
+      int staffIdx = midiTrack->staffIdx();
       midiTrack->findChords();
       int voices = midiTrack->separateVoices(2);
 
@@ -1303,126 +1467,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         }
                   }
             }
-
-      bool keyFound = false;
-
-      //
-      // process meta events
-      //
-      for (ciEvent i = el.begin(); i != el.end(); ++i) {
-            Event* e = *i;
-            if (e->type() != ME_META)
-                  continue;
-
-            MetaEvent* mm = (MetaEvent*)e;
-            if (debugMode)
-                  printf("meta type 0x%02x\n", mm->metaType());
-
-            switch(mm->metaType()) {
-                  case META_TEXT:
-                  case META_LYRIC:
-                        {
-      	            Measure* measure = tick2measure(mm->ontime());
-                        Segment* seg = measure->findSegment(Segment::SegChordRest, e->ontime());
-                        if (seg == 0) {
-                              for (seg = measure->first(); seg;) {
-                                    if (seg->subtype() != Segment::SegChordRest) {
-                                          seg = seg->next();
-                                          continue;
-                                          }
-                                    Segment* ns;
-                                    for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
-                                          ;
-                                    if (ns == 0 || ns->tick() > e->ontime())
-                                          break;
-                                    seg = ns;
-                                    }
-                              }
-                        if (seg == 0) {
-                              printf("no segment found for lyrics<%s> at tick %d\n",
-                                 mm->data(), e->ontime());
-                              break;
-                              }
-                        Lyrics* l = new Lyrics(this);
-                        QString txt((char*)(mm->data()));
-                        l->setText(txt);
-                        l->setTick(seg->tick());
-                        l->setTrack(staffIdx * VOICES);
-                        if (debugMode)
-                              printf("Meta Lyric <%s>\n", qPrintable(txt));
-                        seg->add(l);
-                        }
-                        break;
-
-                  case META_TRACK_NAME:
-                        {
-                        QString txt((char*)(mm->data()));
-                        cstaff->part()->setTrackName(txt);
-                        cstaff->part()->setLongName(txt);
-                        }
-                        break;
-                  case META_TEMPO:
-                        break;
-
-                  case META_KEY_SIGNATURE:
-                        {
-                        unsigned char* data = mm->data();
-                        int key = (char)data[0];
-                        if (key < -7 || key > 7) {
-                              printf("ImportMidi: illegal key %d\n", key);
-                              break;
-                              }
-                        (*cstaff->keymap())[e->ontime()] = key;
-                        keyFound = false;
-                        }
-                        break;
-                  case META_COMPOSER:     // mscore extension
-                  case META_POET:
-                  case META_TRANSLATOR:
-                  case META_SUBTITLE:
-                  case META_TITLE:
-                        {
-                        Text* text = new Text(this);
-                        switch(mm->metaType()) {
-                              case META_COMPOSER:
-                                    text->setSubtype(TEXT_COMPOSER);
-                                    break;
-                              case META_TRANSLATOR:
-                                    text->setSubtype(TEXT_TRANSLATOR);
-                                    break;
-                              case META_POET:
-                                    text->setSubtype(TEXT_POET);
-                                    break;
-                              case META_SUBTITLE:
-                                    text->setSubtype(TEXT_SUBTITLE);
-                                    break;
-                              case META_TITLE:
-                                    text->setSubtype(TEXT_TITLE);
-                                    break;
-                              }
-
-                        text->setText((char*)(mm->data()));
-
-                        ScoreLayout* layout = mainLayout();
-                        MeasureBase* measure = layout->first();
-                        if (measure->type() != VBOX) {
-                              measure = new VBox(this);
-                              measure->setTick(0);
-                              measure->setNext(layout->first());
-                              layout->add(measure);
-                              }
-                        measure->add(text);
-                        }
-                        break;
-                  default:
-                        if (debugMode) {
-                              printf("unknown meta type 0x%02x\n", mm->metaType());
-                              }
-                        break;
-                  }
-            }
-
-      if (!keyFound && !midiTrack->isDrumTrack()) {
+      if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
             (*cstaff->keymap())[0] = key;
             }
       }
