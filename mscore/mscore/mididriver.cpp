@@ -510,7 +510,7 @@ void* DummyAudio::loop(void* pa)
 //   start
 //---------------------------------------------------------
 
-void DummyAudio::start()
+bool DummyAudio::start()
       {
       realTimePriority = 0;
       pthread_attr_t* attributes = 0;
@@ -537,16 +537,18 @@ void DummyAudio::start()
             perror("creating thread failed:");
       if (realTimePriority)
             pthread_attr_destroy(attributes);
+      return true;
       }
 
 //---------------------------------------------------------
 //   stop
 //---------------------------------------------------------
 
-void DummyAudio::stop()
+bool DummyAudio::stop()
       {
       pthread_cancel(dummyThread);
       pthread_join(dummyThread, 0);
+      return true;
       }
 
 //---------------------------------------------------------

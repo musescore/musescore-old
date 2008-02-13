@@ -3569,6 +3569,14 @@ falhou:</translation>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>pad dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4143,28 +4151,12 @@ falhou:</translation>
         <translation>Tocar</translation>
     </message>
     <message>
-        <source>Audio</source>
-        <translation>Áudio</translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation>Sintetizador</translation>
-    </message>
-    <message>
         <source>Sound Font</source>
         <translation>Sound Font</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
         <translation>Servidor de Áudio JACK</translation>
-    </message>
-    <message>
-        <source>JACK: R-Port</source>
-        <translation>JACK: Port-D</translation>
-    </message>
-    <message>
-        <source>JACK: L-Port</source>
-        <translation>JACK: Port-E</translation>
     </message>
     <message>
         <source>ALSA Audio</source>
@@ -4333,6 +4325,34 @@ falhou:</translation>
     <message>
         <source>Voice 4</source>
         <translation type="unfinished">Voz 4</translation>
+    </message>
+    <message>
+        <source>I/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use midi output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right-Port:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

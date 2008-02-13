@@ -232,6 +232,7 @@ QList<Prop> ChordRest::properties(Xml& xml) const
                   case BEAM_END:     s = "end"; break;
                   case BEAM_NO:      s = "no"; break;
                   case BEAM_BEGIN32: s = "begin32"; break;
+                  case BEAM_INVALID: s = "?"; break;
                   }
             pl.append(Prop("BeamMode", s));
             }

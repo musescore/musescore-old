@@ -804,7 +804,7 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
 //   actionToggled
 //---------------------------------------------------------
 
-void Palette::actionToggled(bool val)
+void Palette::actionToggled(bool /*val*/)
       {
       selectedIdx = -1;
       for (int n = 0; n < (rows * columns); ++n) {

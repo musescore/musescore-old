@@ -32,8 +32,8 @@ class Audio {
       Audio() {}
       virtual ~Audio() {}
       virtual bool init() = 0;
-      virtual void start() = 0;
-      virtual void stop() = 0;
+      virtual bool start() = 0;
+      virtual bool stop() = 0;
       virtual QList<QString> inputPorts() = 0;
       virtual void stopTransport() = 0;
       virtual void startTransport() = 0;

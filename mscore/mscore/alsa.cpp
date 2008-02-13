@@ -647,7 +647,7 @@ void AlsaAudio::alsaLoop()
 //   start
 //---------------------------------------------------------
 
-void AlsaAudio::start()
+bool AlsaAudio::start()
       {
       runAlsa = 2;
       pthread_attr_t* attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
@@ -655,13 +655,14 @@ void AlsaAudio::start()
       if (pthread_create(&thread, attributes, ::alsaLoop, this))
             perror("creating thread failed:");
       pthread_attr_destroy(attributes);
+      return true;
       }
 
 //---------------------------------------------------------
 //   stop
 //---------------------------------------------------------
 
-void AlsaAudio::stop()
+bool AlsaAudio::stop()
       {
       if (runAlsa == 2) {
             runAlsa = 1;
@@ -670,6 +671,7 @@ void AlsaAudio::stop()
             pthread_cancel(thread);
             pthread_join(thread, 0);
             }
+      return true;
       }
 
 //---------------------------------------------------------

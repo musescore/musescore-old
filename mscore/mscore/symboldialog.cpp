@@ -238,7 +238,7 @@ SymbolDialog::SymbolDialog(QWidget* parent)
 //   anchorClicked
 //---------------------------------------------------------
 
-void SymbolDialog::anchorClicked(int val)
+void SymbolDialog::anchorClicked(int /*val*/)
       {
 #if 0
       Anchor anchor = (Anchor)val;
