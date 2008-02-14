@@ -24,6 +24,8 @@
 #include "mscore.h"
 #include "seq.h"
 #include "pa.h"
+#include "fluid.h"
+
 #include <portaudio.h>
 
 PaStream* stream;
@@ -45,7 +47,7 @@ int paCallback(const void*, void* out, long unsigned frames,
 //---------------------------------------------------------
 
 Portaudio::Portaudio()
-   : Audio()
+   : Driver()
       {
       _sampleRate = 44100;
       initialized = false;
@@ -100,6 +102,13 @@ bool Portaudio::init()
 
       if (err != paNoError) {
             printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
+            return false;
+            }
+      synth = new ISynth();
+      if (!synth->init(_sampleRate)) {
+            fprintf(stderr, "Synti init failed\n");
+            delete synth;
+            synth = 0;
             return false;
             }
       return true;
@@ -255,16 +264,23 @@ int Portaudio::getState()
 //   putEvent
 //---------------------------------------------------------
 
-void PortAudio::putEvent(const MidiOutEvent&)
+void Portaudio::putEvent(const MidiOutEvent& e)
       {
+      if ((e.type & 0xf0) == ME_NOTEON) {
+            synth->playNote(e.type & 0xf, e.a, e.b);
+            }
+      else if ((e.type & 0xf0) == ME_CONTROLLER) {
+            synth->setController(e.type & 0xf, e.a, e.b);
+            }
       }
 
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
-void PortAudio::process(int, float*, float*, int)
+void Portaudio::process(int n, float* l, float* r, int stride)
       {
+      synth->process(n, l, r, stride);
       }
 
 

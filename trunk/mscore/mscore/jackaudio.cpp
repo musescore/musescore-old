@@ -415,6 +415,9 @@ void JackAudio::putEvent(const MidiOutEvent& e)
       if ((e.type & 0xf0) == ME_NOTEON) {
             synth->playNote(e.type & 0xf, e.a, e.b);
             }
+      else if ((e.type & 0xf0) == ME_CONTROLLER) {
+            synth->setController(e.type & 0xf, e.a, e.b);
+            }
       }
 
 //---------------------------------------------------------
@@ -425,5 +428,4 @@ void JackAudio::process(int n, float* l, float* r, int stride)
       {
       synth->process(n, l, r, stride);
       }
-
 
