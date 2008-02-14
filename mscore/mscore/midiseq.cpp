@@ -27,14 +27,17 @@
 #include "mididriver.h"
 #include "utils.h"
 
+MidiDriver* MidiSeq::midiDriver;
+
 //---------------------------------------------------------
 //   MidiSeq
 //---------------------------------------------------------
 
-MidiSeq::MidiSeq(const char* name)
+MidiSeq::MidiSeq(MidiDriver* driver, const char* name)
    : Thread(name)
       {
-      timer = 0;
+      midiDriver = driver;
+      timer      = 0;
       }
 
 //---------------------------------------------------------
@@ -83,8 +86,9 @@ void MidiSeq::threadStart(void*)
       if (!timer->initTimer()) {
             delete timer;
             fprintf(stderr, "no midi timer available\n");
-            abort();
             }
+      else if (debugMode)
+            printf("midi RTC started\n");
       initRealtimeTimer();
       updatePollFd();
       }
@@ -93,9 +97,9 @@ void MidiSeq::threadStart(void*)
 //   midiRead
 //---------------------------------------------------------
 
-static void midiRead(void*, void*)
+static void midiRead(void* a, void* b)
       {
-//TODO      midiDriver->read(midiSeq);
+//TODO      ((MidiDriver*)a)->read((MidiSeq*)a);
       }
 
 //---------------------------------------------------------
@@ -118,7 +122,7 @@ void MidiSeq::updatePollFd()
       int n;
       midiDriver->getInputPollFd(&pfd, &n);
       for (int i = 0; i < n; ++i)
-            addPollFd(pfd[i].fd, POLLIN, ::midiRead, this, 0);
+            addPollFd(pfd[i].fd, POLLIN, ::midiRead, this, midiDriver);
       }
 
 //---------------------------------------------------------
@@ -163,8 +167,6 @@ bool MidiSeq::start(int prio)
 //---------------------------------------------------------
 //   midiTick
 //    schedule events in playEvents
-//    "now" is the free running audioDriver->frameTime()
-//    frame counter
 //---------------------------------------------------------
 
 void MidiSeq::midiTick(void* p, void*)
@@ -176,14 +178,14 @@ void MidiSeq::midiTick(void* p, void*)
             at->playEvents.insert(at->fifo.get());
 
       //
-      // schedule all events upto curFrame()
+      // schedule all events upto curTime()
       //
 
-      unsigned curFrame = unsigned(curTime() * 44100.0);
+      double now = curTime();
 
       iMidiOutEvent i = at->playEvents.begin();
       for (; i != at->playEvents.end(); ++i) {
-            if (i->time > curFrame)
+            if (i->time > now)
                   break;
             midiDriver->write(*i);
             }

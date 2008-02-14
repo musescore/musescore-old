@@ -24,12 +24,22 @@
 #include "event.h"
 
 class Synth;
-class Audio;
 class Note;
 class QTimer;
 class Score;
 class Painter;
 class Measure;
+class Driver;
+
+//---------------------------------------------------------
+//   MidiPatch
+//---------------------------------------------------------
+
+struct MidiPatch {
+      signed char typ;                     // 1 - GM  2 - GS  4 - XG
+      signed char hbank, lbank, prog;
+      const char* name;
+      };
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -62,12 +72,13 @@ class Seq : public QObject {
       mutable QMutex mutex;
       QQueue<SeqMsg> toSeq;
 
-      Synth* synti;
-      Audio* audio;
+//      Synth* synti;
+      Driver* driver;
 
       EventMap events;                    // playlist
       QList<NoteOn*> _activeNotes;        // currently sounding notes
       int playFrame;
+      double startTime;
       EventMap::const_iterator playPos, guiPos;
 
       int endTick;
@@ -86,8 +97,9 @@ class Seq : public QObject {
       void startTransport();
       int frame2tick(int frame) const;
       int tick2frame(int tick) const;
+      double tick2time(int tick) const;
       void setPos(int);
-      void playEvent(const Event* event);
+      void playEvent(double t, const Event* event);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
 
@@ -129,19 +141,19 @@ class Seq : public QObject {
       bool isPlaying() const    { return state == PLAY; }
       bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*, int stride);
-      void processMidi(int);
+      void processMidi();
       QList<QString> inputPorts();
       int sampleRate() const;
-      int getEndTick() const    { return endTick; }
-      float volume() const      {  return _volume; }
-      bool isRealtime() const;
+      int getEndTick() const    { return endTick;  }
+      float volume() const      { return _volume;  }
+      bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
       void startNote(int, int, int);
       void startNote(int, int, int, int);
       void setController(int, int, int);
       void setScore(Score* s);
-      Synth* synth() const  { return synti; }
-      Audio* audioDriver() const { return audio; }
+
+      const MidiPatch* getPatchInfo(int ch, const MidiPatch* p);
       };
 
 extern Seq* seq;

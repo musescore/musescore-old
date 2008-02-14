@@ -44,7 +44,6 @@ Installation:
       - make
             cd mscore-x.x.x
             make release
-            make
 
       if something goes wrong, then remove the whole build subdirectory
       with "make clean" and start new with "make release"

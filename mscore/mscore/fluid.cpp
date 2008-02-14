@@ -38,7 +38,7 @@ ISynth::ISynth()
 
 //---------------------------------------------------------
 //   init
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool ISynth::init(int sampleRate)
@@ -64,7 +64,7 @@ bool ISynth::init(int sampleRate)
 
 //---------------------------------------------------------
 //   loadSoundFont
-//    return true on error;
+//    return false on error;
 //---------------------------------------------------------
 
 bool ISynth::loadSoundFont(const QString& sfont)
@@ -78,10 +78,10 @@ bool ISynth::loadSoundFont(const QString& sfont)
 #endif
       if (fontId == -1) {
             fprintf(stderr, "ISynth: %s", fluid_synth_error(_fluidsynth));
-            return true;
+            return false;
             }
       fluid_synth_set_gain(_fluidsynth, 0.2);
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------

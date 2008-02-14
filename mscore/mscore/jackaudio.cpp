@@ -25,6 +25,7 @@
 #include "score.h"
 #include "mscore.h"
 #include "seq.h"
+#include "fluid.h"
 
 //---------------------------------------------------------
 //   jack_thread_init
@@ -66,7 +67,7 @@ static void jack_thread_init (void* /*data*/)
 //---------------------------------------------------------
 
 JackAudio::JackAudio()
-   : Audio()
+   : Driver()
       {
       client = 0;
       }
@@ -306,10 +307,10 @@ bool JackAudio::init()
       {
       jack_set_error_function(noJackError);
 
-      portL = 0;
-      portR = 0;
+      portL  = 0;
+      portR  = 0;
       client = 0;
-      int i = 0;
+      int i  = 0;
       for (i = 0; i < 5; ++i) {
             sprintf(_jackName, "Mscore%d", i+1);
             client = jack_client_new(_jackName);
@@ -359,6 +360,13 @@ bool JackAudio::init()
                   fprintf(stderr, "no jack port for right channel found!\n");
                   }
             }
+      synth = new ISynth();
+      if (!synth->init(_sampleRate)) {
+            fprintf(stderr, "Synti init failed\n");
+            delete synth;
+            synth = 0;
+            return false;
+            }
       return true;
       }
 
@@ -397,4 +405,25 @@ int JackAudio::getState()
                   return Seq::STOP;
             }
       }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void JackAudio::putEvent(const MidiOutEvent& e)
+      {
+      if ((e.type & 0xf0) == ME_NOTEON) {
+            synth->playNote(e.type & 0xf, e.a, e.b);
+            }
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
+void JackAudio::process(int n, float* l, float* r, int stride)
+      {
+      synth->process(n, l, r, stride);
+      }
+
 

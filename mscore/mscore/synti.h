@@ -21,15 +21,7 @@
 #ifndef __SYNTI_H__
 #define __SYNTI_H__
 
-//---------------------------------------------------------
-//   MidiPatch
-//---------------------------------------------------------
-
-struct MidiPatch {
-      signed char typ;                     // 1 - GM  2 - GS  4 - XG
-      signed char hbank, lbank, prog;
-      const char* name;
-      };
+struct MidiPatch;
 
 //---------------------------------------------------------
 //   Synth

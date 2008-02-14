@@ -25,6 +25,8 @@
 #include "timerdev.h"
 #include "midififo.h"
 
+class MidiDriver;
+
 //---------------------------------------------------------
 //   MidiSeq
 //---------------------------------------------------------
@@ -32,6 +34,7 @@
 class MidiSeq : public Thread {
       int realRtcTicks;
       Timer* timer;
+      static MidiDriver* midiDriver;
 
       MidiOutFifo fifo;
       MidiOutEventList playEvents;
@@ -40,7 +43,7 @@ class MidiSeq : public Thread {
       int getTimerTicks() { return timer->getTimerTicks(); }
 
    public:
-      MidiSeq(const char* name);
+      MidiSeq(MidiDriver*, const char* name);
       bool start(int);
       virtual void threadStop();
       virtual void threadStart(void*);

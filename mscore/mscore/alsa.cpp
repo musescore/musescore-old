@@ -582,6 +582,10 @@ int AlsaAudio::sampleRate() const
 
 AlsaAudio::~AlsaAudio()
       {
+      if (synth)
+            delete synth;
+      if (alsa)
+            delete alsa;
       }
 
 //---------------------------------------------------------
@@ -600,6 +604,16 @@ bool AlsaAudio::init()
             delete alsa;
             alsa = 0;
             fprintf(stderr, "init ALSA audio driver failed\n");
+            return false;
+            }
+      synth = new ISynth();
+      int sr = alsa->sampleRate();
+      if (!synth->init(sr)) {
+            fprintf(stderr, "Synti init failed\n");
+            delete synth;
+            delete alsa;
+            alsa  = 0;
+            synth = 0;
             return false;
             }
       return true;
@@ -735,5 +749,28 @@ int AlsaAudio::getState()
       {
       return state;
       }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void AlsaAudio::putEvent(const MidiOutEvent& e)
+      {
+      if ((e.type & 0xf0) == ME_NOTEON) {
+            synth->playNote(e.type & 0xf, e.a, e.b);
+            }
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
+void AlsaAudio::process(int n, float* l, float* r, int stride)
+      {
+      synth->process(n, l, r, stride);
+      }
+
+
+
 #endif
 

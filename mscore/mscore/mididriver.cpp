@@ -22,6 +22,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <time.h>
+
 #include "config.h"
 #include "mididriver.h"
 #include "alsa.h"
@@ -32,6 +34,7 @@
 #include "midififo.h"
 #include "seq.h"
 #include "midiseq.h"
+#include "utils.h"
 
 MidiDriver* midiDriver;
 
@@ -330,7 +333,7 @@ void AlsaMidiDriver::write(const MidiOutEvent& e)
       int b   = e.b;
 
       if (midiOutputTrace) {
-            printf("midiOut: %2d %5d %02x %02x %02x\n",
+            printf("midiOut: %2d %f %02x %02x %02x\n",
                e.port, e.time, e.type & 0xff, e.a, e.b);
             }
 
@@ -436,6 +439,8 @@ DummyAudio::DummyAudio()
       state     = Seq::STOP;
       seekflag  = false;
 //      startTime = curTime();
+      realTimePriority = 40;
+      midiDriver       = 0;
       }
 
 DummyAudio::~DummyAudio()
@@ -449,8 +454,19 @@ DummyAudio::~DummyAudio()
 
 bool DummyAudio::init()
       {
-      int realTimePriority = 0;
-      midiSeq = new MidiSeq("Midi");
+#ifdef USE_ALSA
+      midiDriver = new AlsaMidiDriver();
+      if (!midiDriver->init())
+            return false;
+#else
+      return false;
+#endif
+      midiOutPorts = new Port[preferences.midiPorts];
+      midiInPort   = midiDriver->registerOutPort("MuseScore Port-0");
+      for (int i = 0; i < preferences.midiPorts; ++i)
+            midiOutPorts[i] = midiDriver->registerInPort(QString("MuseScore Port-%1").arg(i));
+
+      midiSeq = new MidiSeq(midiDriver, "Midi");
       midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
       return true;
       }
@@ -464,6 +480,23 @@ void* DummyAudio::loop(void* pa)
       DummyAudio* da = (DummyAudio*)pa;
 
       if (da->realTimePriority) {
+            struct sched_param rt_param;
+            memset(&rt_param, 0, sizeof(rt_param));
+	      int prio     = da->realTimePriority;
+            int prio_min = sched_get_priority_min(SCHED_FIFO);
+            int prio_max = sched_get_priority_max(SCHED_FIFO);
+            if (prio < prio_min)
+                  prio = prio_min;
+            else if (prio > prio_max)
+                  prio = prio_max;
+            rt_param.sched_priority = prio;
+
+            pthread_t tid = pthread_self();
+            int rv = pthread_setschedparam(tid, SCHED_FIFO, &rt_param);
+            if (rv != 0)
+                  perror("set realtime scheduler");
+
+
             //
             // check if we really got realtime priviledges
             //
@@ -471,39 +504,29 @@ void* DummyAudio::loop(void* pa)
             if ((policy = sched_getscheduler (0)) < 0)
                   printf("cannot get current client scheduler for audio dummy thread: %s!\n", strerror(errno));
             else {
-                  if (policy != SCHED_FIFO)
+                  if (policy != SCHED_FIFO) {
                         printf("audio dummy thread _NOT_ running SCHED_FIFO\n");
-                  else if (debugMode) {
-                        struct sched_param rt_param;
-                        memset(&rt_param, 0, sizeof(sched_param));
-                        int type;
-                        int rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
-                        if (rv == -1)
-                              perror("get scheduler parameter");
-                        printf("audio dummy thread running SCHED_FIFO priority %d\n",
-                        rt_param.sched_priority);
+                        if (debugMode) {
+                              struct sched_param rt_param;
+                              memset(&rt_param, 0, sizeof(sched_param));
+                              int type;
+                              int rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
+                              if (rv == -1)
+                                    perror("get scheduler parameter");
+                              printf("audio dummy thread running SCHED_FIFO priority %d\n",
+                              rt_param.sched_priority);
+                              }
                         }
                   }
             }
+      long int ns = 20000000;       // 20ms
       for (;;) {
-            seq->processMidi(1024);
-            usleep(1024*10000/441);
+            seq->processMidi();
+            struct timespec cr;
+            cr.tv_sec  = 0;
+            cr.tv_nsec = ns;
+            nanosleep(&cr, 0);
             }
-#if 0
-      for (;;) {
-            if (audioState == AUDIO_RUNNING)
-                  seq->audioDriver()->audio->process(segmentSize, dummyAudio->state);
-            else if (audioState == AUDIO_START1)
-                  audioState = AUDIO_START2;
-            usleep(dummyFrames*1000000/AL::sampleRate);
-            if (dummyAudio->seekflag) {
-                  audio->sync(Audio::STOP, dummyAudio->pos);
-                  dummyAudio->seekflag = false;
-                  }
-            if (dummyAudio->state == Audio::PLAY)
-                  dummyAudio->pos += dummyFrames;
-            }
-#endif
       pthread_exit(0);
       }
 
@@ -513,7 +536,6 @@ void* DummyAudio::loop(void* pa)
 
 bool DummyAudio::start()
       {
-      realTimePriority = 0;
       pthread_attr_t* attributes = 0;
 
       if (realTimePriority) {
@@ -589,26 +611,13 @@ void DummyAudio::putEvent(const MidiOutEvent& e)
       midiSeq->putEvent(e);
       }
 
-#endif /* USE_ALSA */
-
 //---------------------------------------------------------
-//   initMidi
-//    return true on error
+//   process
 //---------------------------------------------------------
 
-bool initMidi()
+void DummyAudio::process(int, float*, float*, int)
       {
-#ifdef USE_ALSA
-      midiDriver = new AlsaMidiDriver();
-      if (!midiDriver->init())
-            return true;
-#else
-      return true;
-#endif
-      midiOutPorts = new Port[preferences.midiPorts];
-      midiInPort   = midiDriver->registerOutPort("MuseScore Port-0");
-      for (int i = 0; i < preferences.midiPorts; ++i)
-            midiOutPorts[i] = midiDriver->registerInPort(QString("MuseScore Port-%1").arg(i));
-      return false;
       }
+
+#endif /* USE_ALSA */
 

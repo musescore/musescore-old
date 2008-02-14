@@ -21,9 +21,6 @@
 #include <signal.h>
 #include <fenv.h>
 #include "config.h"
-#ifdef USE_ALSA
-#include <poll.h>
-#endif
 
 #include "mscore.h"
 #include "canvas.h"
@@ -54,7 +51,7 @@
 #include "instrtemplate.h"
 #include "note.h"
 #include "staff.h"
-#include "mididriver.h"
+#include "driver.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -64,8 +61,6 @@ QString mscoreGlobalShare;
 static unsigned int startMag = 3;   // 100%, synchronize with canvas default
 
 const char* eventRecordFile;
-
-static bool haveMidi;
 
 struct ProjectItem {
       QString name;
@@ -1511,16 +1506,6 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
-#ifdef USE_ALSA
-      haveMidi = !initMidi();
-      if (debugMode) {
-            if (haveMidi)
-                  printf("midi devices found\n");
-            }
-#else
-      haveMidi = false;
-#endif
-
       //
       //  load internal fonts
       //
@@ -1619,22 +1604,6 @@ int main(int argc, char* argv[])
       mscore->showPlayPanel(preferences.showPlayPanel);
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
-
-#ifdef USE_ALSA
-      extern MidiDriver* midiDriver;
-      if (midiDriver) {
-            struct pollfd* pfd;
-            int npfd;
-            midiDriver->getInputPollFd(&pfd, &npfd);
-            for (int i = 0; i < npfd; ++i) {
-                  int fd = pfd[i].fd;
-                  if (fd != -1) {
-                        QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
-                        s->connect(s, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
-                        }
-                  }
-            }
-#endif
 
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       qApp->setStyleSheet(appStyleSheet);
