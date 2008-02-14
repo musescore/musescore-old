@@ -154,6 +154,7 @@ class Seq : public QObject {
       void setScore(Score* s);
 
       const MidiPatch* getPatchInfo(int ch, const MidiPatch* p);
+      Driver* getDriver()  { return driver; }
       };
 
 extern Seq* seq;

@@ -4885,6 +4885,28 @@ set tempo.</source>
     </message>
 </context>
 <context>
+    <name>TempoProperties</name>
+    <message>
+        <source>MuseScore: Tempo Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tempo:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TempoText</name>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>

@@ -463,7 +463,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       //
 #ifdef USE_PORTAUDIO
       if (usePortaudio) {
-            Portaudio* audio = (Portaudio*)seq->audioDriver();
+            Portaudio* audio = (Portaudio*)seq->getDriver();
             QStringList apis = audio->apiList();
             portaudioApi->addItems(apis);
             QStringList devices = audio->deviceList(0);
@@ -502,7 +502,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #ifdef USE_PORTAUDIO
 void PreferenceDialog::portaudioApiActivated(int idx)
       {
-      Portaudio* audio = (Portaudio*)seq->audioDriver();
+      Portaudio* audio = (Portaudio*)seq->getDriver();
       QStringList devices = audio->deviceList(idx);
       portaudioDevice->clear();
       portaudioDevice->addItems(devices);
@@ -850,7 +850,7 @@ void PreferenceDialog::apply()
       preferences.alsaFragments      = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
 #ifdef USE_PORTAUDIO
-      Portaudio* audio = (Portaudio*)seq->audioDriver();
+      Portaudio* audio = (Portaudio*)seq->getDriver();
       preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
          portaudioDevice->currentIndex());
 #endif

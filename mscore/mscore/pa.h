@@ -24,6 +24,8 @@
 #include "config.h"
 #include "driver.h"
 
+class ISynth;
+
 //---------------------------------------------------------
 //   Portaudio
 //---------------------------------------------------------
@@ -36,6 +38,7 @@ class Portaudio : public Driver {
       bool seekflag;
       unsigned pos;
       double startTime;
+      ISynth* synth;
 
    public:
       Portaudio();
