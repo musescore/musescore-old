@@ -22,13 +22,13 @@
 #define __PORTAUDIO_H__
 
 #include "config.h"
-#include "audio.h"
+#include "driver.h"
 
 //---------------------------------------------------------
 //   Portaudio
 //---------------------------------------------------------
 
-class Portaudio : public Audio {
+class Portaudio : public Driver {
       bool initialized;
       int _sampleRate;
 
@@ -60,6 +60,9 @@ class Portaudio : public Audio {
       QStringList apiList() const;
       QStringList deviceList(int apiIdx);
       int deviceIndex(int apiIdx, int apiDevIdx);
+
+      virtual void putEvent(const MidiOutEvent&);
+      virtual void process(int, float*, float*, int);
       };
 
 #endif

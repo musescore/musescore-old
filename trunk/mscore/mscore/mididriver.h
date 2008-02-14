@@ -25,7 +25,7 @@
 #ifndef __MIDIDRIVER_H__
 #define __MIDIDRIVER_H
 
-#include "audio.h"
+#include "driver.h"
 
 class Event;
 class MidiOutEvent;
@@ -78,11 +78,12 @@ class MidiDriver {
 //   DummyAudio
 //---------------------------------------------------------
 
-class DummyAudio : public Audio {
+class DummyAudio : public Driver {
       float* buffer;
       pthread_t dummyThread;
       int realTimePriority;
       MidiSeq* midiSeq;
+      MidiDriver* midiDriver;
 
       static void* loop(void* pa);
 
@@ -102,12 +103,12 @@ class DummyAudio : public Audio {
       virtual void stopTransport();
 
       virtual int getState()          { return state; }
-      virtual int sampleRate() const  { return 44100; }
+      virtual int sampleRate() const  { return 10000; }
       virtual bool isRealtime() const { return false; }
       virtual void putEvent(const MidiOutEvent&);
+      virtual void process(int, float*, float*, int);
       };
 
-extern MidiDriver* midiDriver;
 #endif
 
 #endif

@@ -23,7 +23,6 @@
 #include "part.h"
 #include "partedit.h"
 #include "seq.h"
-#include "synti.h"
 
 //---------------------------------------------------------
 //   PartEdit
@@ -98,10 +97,9 @@ void InstrumentListEditor::updateAll(Score* cs)
       while (n > 0) {
             PartEdit* pe = new PartEdit;
             vb->addWidget(pe);
-            Synth* synti = seq->synth();
             const MidiPatch* p = 0;
-            while (synti) {
-                  p = synti->getPatchInfo(0, p);
+            for (;;) {
+                  p = seq->getPatchInfo(0, p);
                   if (p == 0)
                         break;
                   pe->patch->addItem(p->name);
@@ -136,15 +134,14 @@ void MuseScore::startInstrumentListEditor()
 
 void PartEdit::patchChanged(int n)
       {
-      Synth* synti = seq->synth();
       const MidiPatch* p = 0;
-      for (int idx = 0; synti; ++idx) {
-            p = synti->getPatchInfo(0, p);
+      for (int idx = 0;; ++idx) {
+            p = seq->getPatchInfo(0, p);
             if (p == 0)
                   break;
             if (idx == n) {
                   Instrument* i = part->instrument();
-                  synti->setController(i->midiChannel, CTRL_PROGRAM, p->prog);
+                  seq->setController(i->midiChannel, CTRL_PROGRAM, p->prog);
                   i->midiProgram = p->prog;
                   break;
                   }
@@ -158,10 +155,9 @@ void PartEdit::patchChanged(int n)
 void PartEdit::volChanged(double val)
       {
 // printf("volChanged %d\n", lrint(val));
-      Synth* synti = seq->synth();
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      synti->setController(i->midiChannel, CTRL_VOLUME, iv);
+      seq->setController(i->midiChannel, CTRL_VOLUME, iv);
       i->volume = iv;
       }
 
@@ -172,10 +168,9 @@ void PartEdit::volChanged(double val)
 void PartEdit::panChanged(double val)
       {
 // printf("panChanged %d\n", lrint(val));
-      Synth* synti = seq->synth();
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      synti->setController(i->midiChannel, CTRL_PANPOT, iv);
+      seq->setController(i->midiChannel, CTRL_PANPOT, iv);
       i->pan = iv;
       }
 
@@ -186,10 +181,9 @@ void PartEdit::panChanged(double val)
 void PartEdit::reverbChanged(double val)
       {
 // printf("reverbChanged %d\n", lrint(val));
-      Synth* synti = seq->synth();
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      synti->setController(i->midiChannel, CTRL_REVERB_SEND, iv);
+      seq->setController(i->midiChannel, CTRL_REVERB_SEND, iv);
       i->reverb = iv;
       }
 
@@ -200,10 +194,9 @@ void PartEdit::reverbChanged(double val)
 void PartEdit::chorusChanged(double val)
       {
 // printf("chorusChanged %d\n", lrint(val));
-      Synth* synti = seq->synth();
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      synti->setController(i->midiChannel, CTRL_CHORUS_SEND, iv);
+      seq->setController(i->midiChannel, CTRL_CHORUS_SEND, iv);
       i->chorus = iv;
       }
 

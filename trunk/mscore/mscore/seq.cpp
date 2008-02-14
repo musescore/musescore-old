@@ -49,6 +49,7 @@
 #include "preferences.h"
 #include "part.h"
 #include "ottava.h"
+#include "utils.h"
 
 Seq* seq;
 
@@ -66,8 +67,7 @@ Seq::Seq()
 
       endTick  = 0;
       state    = STOP;
-      synti    = new ISynth();
-      audio    = 0;
+      driver   = 0;
       _volume  = 1.0;
       playPos  = events.constBegin();
 
@@ -87,8 +87,8 @@ Seq::Seq()
 
 Seq::~Seq()
       {
-//      delete synti;
-//      delete audio;
+      if (driver)
+            delete driver;
       }
 
 //---------------------------------------------------------
@@ -108,7 +108,7 @@ void Seq::setScore(Score* s)
       cs = s;
       playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      if (audio)
+      if (driver)
             seek(0);
       }
 
@@ -118,21 +118,23 @@ void Seq::setScore(Score* s)
 
 void Seq::selectionChanged(int mode)
       {
-      if (mode != SEL_SINGLE || state != STOP || cs == 0 || audio == 0)
+      if (mode != SEL_SINGLE || state != STOP || cs == 0 || driver == 0)
             return;
       int tick = cs->pos();
       if (tick != -1)
             seek(tick);
       }
 
+#if 0
 //---------------------------------------------------------
 //   isRealtime
 //---------------------------------------------------------
 
 bool Seq::isRealtime() const
       {
-      return audio->isRealtime();
+      return driver->isRealtime();
       }
+#endif
 
 //---------------------------------------------------------
 //   init
@@ -141,7 +143,7 @@ bool Seq::isRealtime() const
 
 bool Seq::init()
       {
-      audio   = 0;
+      driver = 0;
 
       bool useJackFlag      = preferences.useJackAudio;
       bool useAlsaFlag      = preferences.useAlsaAudio;
@@ -156,57 +158,63 @@ bool Seq::init()
 
 #ifdef USE_JACK
       if (useJackFlag) {
-            audio = new JackAudio;
-            if (audio->init()) {
+            driver = new JackAudio;
+            if (!driver->init()) {
                   printf("no JACK server found\n");
-                  delete audio;
-                  audio = 0;
+                  delete driver;
+                  driver = 0;
                   }
             else
                   useJACK = true;
             }
 #endif
 #ifdef USE_ALSA
-      if (audio == 0 && useAlsaFlag) {
-            audio = new AlsaAudio;
-            if (!audio->init()) {
-                  printf("no ALSA audio found\n");
-                  delete audio;
-                  audio = 0;
+      if (driver == 0 && useAlsaFlag) {
+            driver = new AlsaAudio;
+            if (!driver->init()) {
+                  printf("init ALSA driver failed\n");
+                  delete driver;
+                  driver = 0;
                   }
             else
                   useALSA = true;
             }
       if (useMidiOutFlag) {
-            audio = new DummyAudio;
-            if (!audio->init()) {
+            driver = new DummyAudio;
+            if (!driver->init()) {
                   printf("init DummyAudio failed\n");
-                  delete audio;
-                  audio = 0;
+                  delete driver;
+                  driver = 0;
                   }
             }
 #endif
 #ifdef USE_PORTAUDIO
       if (usePortaudioFlag) {
-            audio = new Portaudio;
-            if (!audio->init()) {
+            driver = new Portaudio;
+            if (!driver->init()) {
                   printf("no audio output found\n");
-                  delete audio;
-                  audio = 0;
+                  delete driver;
+                  driver = 0;
                   }
             else
                   usePortaudio = true;
             }
 #endif
-      if (audio == 0)
+      if (driver == 0) {
+            printf("no audio driver\n");
             return false;
-
-      int sr = audio->sampleRate();
+            }
+#if 0
+      int sr = driver->sampleRate();
       if (synti->init(sr)) {
             printf("Synti init failed\n");
             return false;
             }
-      audio->start();
+#endif
+      if (!driver->start()) {
+            printf("Cannot start I/O\n");
+            return false;
+            }
       running = true;
       return true;
       }
@@ -217,8 +225,11 @@ bool Seq::init()
 
 void Seq::exit()
       {
-      if (audio)
-            audio->stop();
+      if (driver) {
+            if (debugMode)
+                  printf("Stop I/O\n");
+            driver->stop();
+            }
       }
 
 //---------------------------------------------------------
@@ -227,8 +238,8 @@ void Seq::exit()
 
 int Seq::sampleRate() const
       {
-      if (audio)
-            return audio->sampleRate();
+      if (driver)
+            return driver->sampleRate();
       return 44100;
       }
 
@@ -251,13 +262,22 @@ int Seq::tick2frame(int tick) const
       }
 
 //---------------------------------------------------------
+//   tick2time
+//---------------------------------------------------------
+
+double Seq::tick2time(int tick) const
+      {
+      return cs->tempomap->tick2time(tick);
+      }
+
+//---------------------------------------------------------
 //   inputPorts
 //---------------------------------------------------------
 
 QList<QString> Seq::inputPorts()
       {
-      if (audio)
-            return audio->inputPorts();
+      if (driver)
+            return driver->inputPorts();
       QList<QString> a;
       return a;
       }
@@ -266,9 +286,9 @@ QList<QString> Seq::inputPorts()
 //   loadSoundFont
 //---------------------------------------------------------
 
-bool Seq::loadSoundFont(const QString& s)
+bool Seq::loadSoundFont(const QString& /*s*/)
       {
-      return synti->loadSoundFont(s);
+      return true;      // TODO: synti->loadSoundFont(s);
       }
 
 //---------------------------------------------------------
@@ -287,7 +307,7 @@ void Seq::rewindStart()
 
 void Seq::start()
       {
-      if (!audio)
+      if (!driver)
             return;
       QAction* a = getAction("play");
       if (!a->isChecked()) {
@@ -299,7 +319,7 @@ void Seq::start()
                   state = STOP;
                   }
             else {
-                  audio->stopTransport();
+                  driver->stopTransport();
                   }
             }
       else {
@@ -308,7 +328,7 @@ void Seq::start()
             seek(cs->playPos());
             heartBeatTimer->start(100);
             if (!pauseState)
-                  audio->startTransport();
+                  driver->startTransport();
             else
                   emit started();
             }
@@ -321,9 +341,9 @@ void Seq::start()
 
 void Seq::stop()
       {
-      if (!audio)
+      if (!driver)
             return;
-      audio->stopTransport();
+      driver->stopTransport();
       }
 
 //---------------------------------------------------------
@@ -333,7 +353,7 @@ void Seq::stop()
 
 void Seq::pause()
       {
-      if (!audio)
+      if (!driver)
             return;
       QAction* a = getAction("pause");
       int pstate = a->isChecked();
@@ -341,10 +361,10 @@ void Seq::pause()
       int playState = a->isChecked();
       if (state == PLAY && pstate)  {
             pauseState = pstate;
-            audio->stopTransport();
+            driver->stopTransport();
             }
       else if (state == STOP && pauseState && playState) {
-            audio->startTransport();
+            driver->startTransport();
             }
       pauseState = pstate;
       }
@@ -453,7 +473,13 @@ void Seq::stopTransport()
             if (e->type() != ME_NOTEON)
                   continue;
             NoteOn* no = (NoteOn*)e;
-            synti->playNote(no->channel(), no->pitch(), 0);
+            MidiOutEvent e;
+            e.time = 0;
+            e.port = no->port();
+            e.type = ME_NOTEON | no->channel();
+            e.a    = no->pitch();
+            e.b    = 0;
+            driver->putEvent(e);
             no->note()->setSelected(false);
             }
       _activeNotes.clear();
@@ -477,6 +503,7 @@ void Seq::startTransport()
       if (!pauseState)
             emit toGui('1');
       state = PLAY;
+      startTime = curTime();
       }
 
 //---------------------------------------------------------
@@ -484,22 +511,27 @@ void Seq::startTransport()
 //    send one event to the synthesizer
 //---------------------------------------------------------
 
-void Seq::playEvent(const Event* event)
+void Seq::playEvent(double t, const Event* event)
       {
       int type = event->type();
       if (type == ME_NOTEON) {
             NoteOn* n = (NoteOn*) event;
             int channel = n->channel();
-            if (n->velo()) {         // note on:
+            MidiOutEvent e;
+            e.time = t;
+            e.port = n->port();
+            e.type = ME_NOTEON | channel;
+            e.a    = n->pitch();
+            e.b    = n->velo();
+            driver->putEvent(e);
+
+            if (n->velo())
                   _activeNotes.append(n);
-                  synti->playNote(channel, n->pitch(), n->velo());
-                  }
             else {
                   for (QList<NoteOn*>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
                         NoteOn* l = *k;
                         if (l->channel() == channel && l->pitch() == n->pitch()) {
                               _activeNotes.erase(k);
-                              synti->playNote(channel, n->pitch(), 0);
                               break;
                               }
                         }
@@ -507,7 +539,13 @@ void Seq::playEvent(const Event* event)
             }
       else if (type == ME_CONTROLLER)  {
             ControllerEvent* c = (ControllerEvent*)event;
-            synti->setController(c->channel(), c->controller(), c->value());
+            MidiOutEvent e;
+            e.time = t;
+            e.port = c->port();
+            e.type = ME_CONTROLLER | c->channel();
+            e.a    = c->controller();
+            e.b    = c->value();
+            driver->putEvent(e);
             }
       else {
             printf("bad event type %x\n", type);
@@ -518,10 +556,9 @@ void Seq::playEvent(const Event* event)
 //   processMidi
 //---------------------------------------------------------
 
-void Seq::processMidi(int frames)
+void Seq::processMidi()
       {
-#ifdef USE_ALSA
-      int driverState = audio->getState();
+      int driverState = driver->getState();
       if (state == START_PLAY && driverState == PLAY)
             startTransport();
       else if (state == PLAY && driverState == STOP)
@@ -550,10 +587,24 @@ void Seq::processMidi(int frames)
                         {
                         int channel = msg.data1 & 0xf;
                         int type    = msg.data1 & 0xf0;
-                        if (type == ME_NOTEON)
-                              synti->playNote(channel, msg.data2, msg.data3);
-                        else if (type == ME_CONTROLLER)
-                              synti->setController(channel, msg.data2, msg.data3);
+                        if (type == ME_NOTEON) {
+                              MidiOutEvent e;
+                              e.time = 0;
+                              e.port = 0;
+                              e.type = ME_NOTEON | channel;
+                              e.a    = msg.data2;
+                              e.b    = msg.data3;
+                              driver->putEvent(e);
+                              }
+                        else if (type == ME_CONTROLLER) {
+                              MidiOutEvent e;
+                              e.time = 0;
+                              e.port = 0;
+                              e.type = ME_CONTROLLER | channel;
+                              e.a    = msg.data2;
+                              e.b    = msg.data3;
+                              driver->putEvent(e);
+                              }
                         }
                         break;
                   case SEQ_SEEK:
@@ -565,38 +616,17 @@ void Seq::processMidi(int frames)
             //
             // collect events for one segment
             //
-            int endFrame = playFrame + frames;
-            for (; playPos != events.constEnd(); ++playPos) {
-                  int f = tick2frame(playPos.key());
-                  if (f >= endFrame)
-                        break;
+            double endTime = curTime() + 0.040;       // 40msec
 
-                  int n = f - playFrame;
-                  if (n < 0 || n > int(frames)) {
-                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
-                           playPos.key(), n, frames, f, playFrame);
+            for (; playPos != events.constEnd(); ++playPos) {
+                  double t = startTime + tick2time(playPos.key());
+                  if (t >= endTime)
                         break;
-                        }
-                  playFrame += n;
-                  frames    -= n;
-                  MidiOutEvent ev;
-                  ev.time = playFrame;
-                  Event* e = playPos.value();
-                  if (e->type() == ME_NOTEON) {
-                        NoteOn* n = (NoteOn*)e;
-                        ev.type = n->type() | n->channel();
-                        ev.port = n->port();
-                        ev.a    = n->pitch();
-                        ev.b    = n->velo();
-                        }
-                  audio->putEvent(ev);
+                  playEvent(t, playPos.value());
                   }
-            if (frames)
-                  playFrame += frames;
             if (playPos == events.constEnd())
-                  audio->stopTransport();
+                  driver->stopTransport();
             }
-#endif
       }
 
 //---------------------------------------------------------
@@ -606,7 +636,7 @@ void Seq::processMidi(int frames)
 void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       {
       int frames = n;
-      int jackState = audio->getState();
+      int jackState = driver->getState();
 
       if (state == START_PLAY && jackState == PLAY)
             startTransport();
@@ -639,12 +669,25 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                         {
                         int channel = msg.data1 & 0xf;
                         int type    = msg.data1 & 0xf0;
-                        if (type == ME_NOTEON)
-                              synti->playNote(channel, msg.data2, msg.data3);
-                        else if (type == ME_CONTROLLER)
-                              synti->setController(channel, msg.data2, msg.data3);
+                        if (type == ME_NOTEON) {
+                              MidiOutEvent e;
+                              e.time = 0;
+                              e.port = 0;
+                              e.type = ME_NOTEON | channel;
+                              e.a    = msg.data2;
+                              e.b    = msg.data3;
+                              driver->putEvent(e);
+                              }
+                        else if (type == ME_CONTROLLER) {
+                              MidiOutEvent e;
+                              e.time = 0;
+                              e.port = 0;
+                              e.type = ME_CONTROLLER | channel;
+                              e.a    = msg.data2;
+                              e.b    = msg.data3;
+                              driver->putEvent(e);
+                              }
                         }
-                        break;
                   case SEQ_SEEK:
                         setPos(msg.data1);
                         break;
@@ -667,23 +710,23 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                            playPos.key(), n, frames, f, playFrame);
                         break;
                         }
-                  synti->process(n, l, r, stride);
+                  driver->process(n, l, r, stride);
                   l         += n * stride;
                   r         += n * stride;
                   playFrame += n;
                   frames    -= n;
-                  playEvent(playPos.value());
+                  playEvent(0, playPos.value());
                   }
             if (frames) {
-                  synti->process(frames, l, r, stride);
+                  driver->process(frames, l, r, stride);
                   playFrame += frames;
                   }
             if (playPos == events.constEnd()) {
-                  audio->stopTransport();
+                  driver->stopTransport();
                   }
             }
       else
-            synti->process(frames, l, r, stride);
+            driver->process(frames, l, r, stride);
 
       // apply volume:
       for (unsigned i = 0; i < n; ++i) {
@@ -810,7 +853,13 @@ void Seq::setPos(int tick)
       {
       // send note off events
       foreach(const NoteOn* n, _activeNotes) {
-            synti->playNote(n->channel(), n->pitch(), 0);
+            MidiOutEvent e;
+            e.time = 0;
+            e.port = 0;
+            e.type = ME_NOTEON | n->channel();
+            e.a    = n->pitch();
+            e.b    = 0;
+            driver->putEvent(e);
             n->note()->setSelected(false);
             }
       _activeNotes.clear();
@@ -1014,5 +1063,32 @@ void Seq::guiToSeq(const SeqMsg& msg)
       {
       QMutexLocker locker(&mutex);
       toSeq.enqueue(msg);
+      }
+
+#if 0
+#ifdef USE_ALSA
+      extern MidiDriver* midiDriver;
+      if (midiDriver) {
+            struct pollfd* pfd;
+            int npfd;
+            midiDriver->getInputPollFd(&pfd, &npfd);
+            for (int i = 0; i < npfd; ++i) {
+                  int fd = pfd[i].fd;
+                  if (fd != -1) {
+                        QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
+                        s->connect(s, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
+                        }
+                  }
+            }
+#endif
+#endif
+
+//---------------------------------------------------------
+//   getPatchInfo
+//---------------------------------------------------------
+
+const MidiPatch* Seq::getPatchInfo(int /*ch*/, const MidiPatch* /*p*/)
+      {
+      return 0;
       }
 

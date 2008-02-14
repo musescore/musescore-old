@@ -24,36 +24,7 @@
 #define MIDI_FIFO_SIZE    512
 
 #include <set>
-#include "event.h"
-
-//---------------------------------------------------------
-//   MidiOutEvent
-//---------------------------------------------------------
-
-struct MidiOutEvent {
-      unsigned time;
-      char port;
-      char type;
-      char a;
-      char b;
-
-      MidiOutEvent() {}
-
-      bool operator<(const MidiOutEvent& e) const {
-            if (time != e.time)
-                  return time < e.time;
-            // play note off events first to prevent overlapping
-            // notes
-
-            int channel = type & 0xf;
-            if (channel == e.type & 0xf) {
-                  int t = type & 0xf0;
-                  return t == ME_NOTEOFF || (t == ME_NOTEON && b == 0);
-                  }
-            int map[16] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15 };
-            return map[channel] < map[e.type & 0xf];
-            }
-      };
+#include "driver.h"
 
 typedef std::multiset<MidiOutEvent, std::less<MidiOutEvent> > MidiOutEventList;
 typedef MidiOutEventList::iterator iMidiOutEvent;

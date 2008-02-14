@@ -22,15 +22,16 @@
 #define __JACKAUDIO_H__
 
 #include "config.h"
-#include "audio.h"
-
+#include "driver.h"
 #include <jack/jack.h>
+
+class ISynth;
 
 //---------------------------------------------------------
 //   JackAudio
 //---------------------------------------------------------
 
-class JackAudio : public Audio {
+class JackAudio : public Driver {
       int _sampleRate;
       int _segmentSize;
 
@@ -38,6 +39,8 @@ class JackAudio : public Audio {
       char _jackName[8];
       jack_port_t* portR;
       jack_port_t* portL;
+
+      ISynth* synth;
 
    public:
       JackAudio();
@@ -58,6 +61,8 @@ class JackAudio : public Audio {
       virtual void stopTransport();
       virtual int getState();
       virtual int sampleRate() const { return _sampleRate; }
+      virtual void putEvent(const MidiOutEvent&);
+      virtual void process(int, float*, float*, int);
       };
 
 #endif

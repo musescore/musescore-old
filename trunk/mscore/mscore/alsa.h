@@ -25,8 +25,9 @@
 #ifndef __ALSA_H__
 #define __ALSA_H
 
-#include "audio.h"
+#include "driver.h"
 #include "config.h"
+#include "fluid.h"
 
 #define ALSA_PCM_NEW_HW_PARAMS_API
 #define ALSA_PCM_NEW_SW_PARAMS_API
@@ -98,13 +99,14 @@ class AlsaDriver {
 //   AlsaAudio
 //---------------------------------------------------------
 
-class AlsaAudio : public Audio {
+class AlsaAudio : public Driver {
       pthread_t thread;
       AlsaDriver* alsa;
       volatile int runAlsa;
       int state;
       bool seekflag;
       double startTime;
+      ISynth* synth;
 
       void registerClient();
 
@@ -128,6 +130,9 @@ class AlsaAudio : public Audio {
       virtual int sampleRate() const;
       void alsaLoop();
       void write(int n, void* l, void* r);
+
+      virtual void putEvent(const MidiOutEvent&);
+      virtual void process(int, float*, float*, int);
       };
 
 #endif
