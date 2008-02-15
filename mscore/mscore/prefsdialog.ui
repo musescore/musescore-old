@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
-    <height>531</height>
+    <width>603</width>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -996,15 +996,15 @@
          <property name="checkable" >
           <bool>true</bool>
          </property>
-         <layout class="QHBoxLayout" >
-          <item>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
            <widget class="QLabel" name="label_22" >
             <property name="text" >
              <string>Ports</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="1" >
            <widget class="QSpinBox" name="midiPorts" >
             <property name="minimum" >
              <number>1</number>
@@ -1017,7 +1017,7 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="2" >
            <spacer>
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -1030,14 +1030,14 @@
             </property>
            </spacer>
           </item>
-          <item>
+          <item row="0" column="3" >
            <widget class="QCheckBox" name="midiAutoConnect" >
             <property name="text" >
              <string>Auto Connect</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="4" >
            <spacer>
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -1064,303 +1064,307 @@
          <property name="checkable" >
           <bool>true</bool>
          </property>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLabel" name="label_8" >
-            <property name="text" >
-             <string>Sound Font</string>
-            </property>
-            <property name="textFormat" >
-             <enum>Qt::PlainText</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="soundFont" />
-          </item>
-          <item>
-           <widget class="QToolButton" name="sfButton" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-            <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="jackDriver" >
-         <property name="title" >
-          <string>JACK Audio Server</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLabel" name="label_6" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text" >
-             <string>Left-Port:</string>
-            </property>
-            <property name="textFormat" >
-             <enum>Qt::PlainText</enum>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="jackLPort" />
-          </item>
-          <item>
-           <widget class="QLabel" name="label_7" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text" >
-             <string>Right-Port:</string>
-            </property>
-            <property name="textFormat" >
-             <enum>Qt::PlainText</enum>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="jackRPort" />
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="alsaDriver" >
-         <property name="title" >
-          <string>ALSA Audio</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <property name="checked" >
-          <bool>true</bool>
-         </property>
          <layout class="QVBoxLayout" >
           <item>
            <layout class="QHBoxLayout" >
             <item>
-             <widget class="QLabel" name="label_10" >
+             <widget class="QLabel" name="label_8" >
               <property name="text" >
-               <string>Device:</string>
+               <string>Sound Font</string>
+              </property>
+              <property name="textFormat" >
+               <enum>Qt::PlainText</enum>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="alsaDevice" >
+             <widget class="QLineEdit" name="soundFont" />
+            </item>
+            <item>
+             <widget class="QToolButton" name="sfButton" >
               <property name="text" >
-               <string>default</string>
+               <string>...</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
-            <item>
-             <widget class="QLabel" name="label_11" >
-              <property name="text" >
-               <string>Sample Rate:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="alsaSampleRate" >
-              <item>
-               <property name="text" >
-                <string>192000</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>96000</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>88200</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>48000</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>44100</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>32000</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>22050</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_13" >
-              <property name="text" >
-               <string>Fragments:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="alsaFragments" >
-              <property name="minimum" >
-               <number>2</number>
-              </property>
-              <property name="maximum" >
-               <number>8</number>
-              </property>
-              <property name="value" >
-               <number>2</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_12" >
-              <property name="text" >
-               <string>Period Size:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="alsaPeriodSize" >
-              <item>
-               <property name="text" >
-                <string>4096</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>2048</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>1024</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>512</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>256</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>128</string>
-               </property>
-              </item>
-              <item>
-               <property name="text" >
-                <string>64</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="portaudioDriver" >
-         <property name="title" >
-          <string>Portaudio</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLabel" name="label_21" >
-            <property name="text" >
-             <string>Api:</string>
+           <widget class="QGroupBox" name="jackDriver" >
+            <property name="title" >
+             <string>JACK Audio Server</string>
             </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <property name="flat" >
+             <bool>true</bool>
             </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="label_6" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text" >
+                <string>Left-Port:</string>
+               </property>
+               <property name="textFormat" >
+                <enum>Qt::PlainText</enum>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="jackLPort" />
+             </item>
+             <item>
+              <widget class="QLabel" name="label_7" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text" >
+                <string>Right-Port:</string>
+               </property>
+               <property name="textFormat" >
+                <enum>Qt::PlainText</enum>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="jackRPort" />
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="portaudioApi" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QGroupBox" name="alsaDriver" >
+            <property name="title" >
+             <string>ALSA Audio</string>
             </property>
+            <property name="flat" >
+             <bool>true</bool>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+            <layout class="QVBoxLayout" >
+             <item>
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QLabel" name="label_10" >
+                 <property name="text" >
+                  <string>Device:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="alsaDevice" >
+                 <property name="text" >
+                  <string>default</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" >
+               <item>
+                <widget class="QLabel" name="label_11" >
+                 <property name="text" >
+                  <string>Sample Rate:</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="alsaSampleRate" >
+                 <item>
+                  <property name="text" >
+                   <string>192000</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>96000</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>88200</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>48000</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>44100</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>32000</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>22050</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_13" >
+                 <property name="text" >
+                  <string>Fragments:</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="alsaFragments" >
+                 <property name="minimum" >
+                  <number>2</number>
+                 </property>
+                 <property name="maximum" >
+                  <number>8</number>
+                 </property>
+                 <property name="value" >
+                  <number>2</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_12" >
+                 <property name="text" >
+                  <string>Period Size:</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="alsaPeriodSize" >
+                 <item>
+                  <property name="text" >
+                   <string>4096</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>2048</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>1024</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>512</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>256</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>128</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text" >
+                   <string>64</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_3" >
-            <property name="text" >
-             <string>Device:</string>
+           <widget class="QGroupBox" name="portaudioDriver" >
+            <property name="title" >
+             <string>Portaudio</string>
             </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <property name="flat" >
+             <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="portaudioDevice" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="checkable" >
+             <bool>true</bool>
             </property>
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="label_21" >
+               <property name="text" >
+                <string>Api:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="portaudioApi" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3" >
+               <property name="text" >
+                <string>Device:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="portaudioDevice" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
@@ -1373,8 +1377,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>633</width>
-           <height>31</height>
+           <width>561</width>
+           <height>131</height>
           </size>
          </property>
         </spacer>
