@@ -1410,12 +1410,6 @@ int main(int argc, char* argv[])
       QCoreApplication::setApplicationName("MuseScore");
       qApp->setWindowIcon(windowIcon);
 
-// #ifdef __MINGW32__
-//       QFont font = qApp->font();
-//      font.setFamily("Arial");
-//      qApp->setFont(font);
-// #endif
-
       int c;
       while ((c = getopt(argc, argv, "vdLsmiIOo:")) != EOF) {
             switch (c) {
@@ -1712,9 +1706,6 @@ void MuseScore::clipboardChanged()
       if (ms == 0)
             return;
       QStringList formats = ms->formats();
-//      printf("Formats:\n");
-//      foreach(QString s, formats)
-//            printf("format <%s>\n", s.toLatin1().data());
 
       bool flag = ms->hasFormat(mimeSymbolFormat)
             ||    ms->hasFormat(mimeStaffListFormat)

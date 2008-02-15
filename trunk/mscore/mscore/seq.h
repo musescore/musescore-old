@@ -72,7 +72,6 @@ class Seq : public QObject {
       mutable QMutex mutex;
       QQueue<SeqMsg> toSeq;
 
-//      Synth* synti;
       Driver* driver;
 
       EventMap events;                    // playlist
@@ -107,6 +106,7 @@ class Seq : public QObject {
       void seqMessage(int msg);
       void heartBeat();
       void selectionChanged(int);
+      void midiInputReady();
 
    public slots:
       void setVolume(float);

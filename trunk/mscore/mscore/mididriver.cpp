@@ -35,11 +35,7 @@
 #include "seq.h"
 #include "midiseq.h"
 #include "utils.h"
-
-MidiDriver* midiDriver;
-
-static Port midiInPort;
-static Port* midiOutPorts;
+#include "alsamidi.h"
 
 //---------------------------------------------------------
 //   Port
@@ -109,27 +105,6 @@ static const unsigned int outCap = SND_SEQ_PORT_CAP_SUBS_WRITE;
 //   AlsaMidiDriver
 //---------------------------------------------------------
 
-class AlsaMidiDriver : public MidiDriver {
-      snd_seq_t* alsaSeq;
-
-      bool putEvent(snd_seq_event_t* event);
-
-   public:
-      AlsaMidiDriver();
-      virtual ~AlsaMidiDriver() {}
-      virtual bool init();
-      virtual Port registerOutPort(const QString& name);
-      virtual Port registerInPort(const QString& name);
-      virtual void getInputPollFd(struct pollfd**, int* n);
-      virtual void getOutputPollFd(struct pollfd**, int* n);
-      virtual void read();
-      virtual void write(const MidiOutEvent&);
-      };
-
-//---------------------------------------------------------
-//   AlsaMidiDriver
-//---------------------------------------------------------
-
 AlsaMidiDriver::AlsaMidiDriver()
    : MidiDriver()
       {
@@ -181,6 +156,10 @@ bool AlsaMidiDriver::init()
             fprintf(stderr, "Alsa: Subscribe System failed: %s\n", snd_strerror(error));
             return false;
             }
+      midiOutPorts = new Port[preferences.midiPorts];
+      midiInPort   = registerOutPort("MuseScore Port-0");
+      for (int i = 0; i < preferences.midiPorts; ++i)
+            midiOutPorts[i] = registerInPort(QString("MuseScore Port-%1").arg(i));
       return true;
       }
 
@@ -434,11 +413,11 @@ bool AlsaMidiDriver::putEvent(snd_seq_event_t* event)
 //   DummyAudio
 //---------------------------------------------------------
 
-DummyAudio::DummyAudio()
+DummyAudio::DummyAudio(Seq* s)
+   : Driver(s)
       {
       state     = Seq::STOP;
       seekflag  = false;
-//      startTime = curTime();
       realTimePriority = 40;
       midiDriver       = 0;
       }
@@ -454,17 +433,20 @@ DummyAudio::~DummyAudio()
 
 bool DummyAudio::init()
       {
-#ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver();
       if (!midiDriver->init())
             return false;
-#else
-      return false;
-#endif
-      midiOutPorts = new Port[preferences.midiPorts];
-      midiInPort   = midiDriver->registerOutPort("MuseScore Port-0");
-      for (int i = 0; i < preferences.midiPorts; ++i)
-            midiOutPorts[i] = midiDriver->registerInPort(QString("MuseScore Port-%1").arg(i));
+
+      struct pollfd* pfd;
+      int npfd;
+      midiDriver->getInputPollFd(&pfd, &npfd);
+      for (int i = 0; i < npfd; ++i) {
+            int fd = pfd[i].fd;
+            if (fd != -1) {
+                  QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
+                  s->connect(s, SIGNAL(activated(int)), seq, SLOT(midiInputReady()));
+                  }
+            }
 
       midiSeq = new MidiSeq(midiDriver, "Midi");
       midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
@@ -521,7 +503,7 @@ void* DummyAudio::loop(void* pa)
             }
       long int ns = 20000000;       // 20ms
       for (;;) {
-            seq->processMidi();
+            da->seq->processMidi();
             struct timespec cr;
             cr.tv_sec  = 0;
             cr.tv_nsec = ns;
@@ -617,6 +599,15 @@ void DummyAudio::putEvent(const MidiOutEvent& e)
 
 void DummyAudio::process(int, float*, float*, int)
       {
+      }
+
+//---------------------------------------------------------
+//   midiRead
+//---------------------------------------------------------
+
+void DummyAudio::midiRead()
+      {
+      midiDriver->read();
       }
 
 #endif /* USE_ALSA */

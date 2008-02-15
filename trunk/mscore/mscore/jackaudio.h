@@ -26,6 +26,7 @@
 #include <jack/jack.h>
 
 class ISynth;
+class Seq;
 
 //---------------------------------------------------------
 //   JackAudio
@@ -43,7 +44,7 @@ class JackAudio : public Driver {
       ISynth* synth;
 
    public:
-      JackAudio();
+      JackAudio(Seq*);
       virtual ~JackAudio();
       virtual bool init();
       void* registerPort(const char* name);

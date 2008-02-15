@@ -66,8 +66,8 @@ static void jack_thread_init (void* /*data*/)
 //   JackAudio
 //---------------------------------------------------------
 
-JackAudio::JackAudio()
-   : Driver()
+JackAudio::JackAudio(Seq* s)
+   : Driver(s)
       {
       client = 0;
       }
