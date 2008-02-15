@@ -441,7 +441,7 @@ void MuseScore::newFile()
             newWizard->createInstruments(score);
             }
       if (measures)
-            score->appendMeasures(measures);
+            score->appendMeasures(measures, MEASURE);
       score->changeTimeSig(0, TimeSig::sigtype(timesigN, timesigZ));
       QString title     = newWizard->title();
       QString subtitle  = newWizard->subtitle();

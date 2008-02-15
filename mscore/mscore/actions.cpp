@@ -792,6 +792,22 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "append-hbox",
+         QT_TR_NOOP("Append horizontal Frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Append horizontal Frame")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "append-vbox",
+         QT_TR_NOOP("Append vertical Frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Append vertical Frame")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "duplet",
          QT_TR_NOOP("duplet"),
          Qt::CTRL+Qt::Key_2,
