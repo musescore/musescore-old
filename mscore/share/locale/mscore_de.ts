@@ -2217,7 +2217,7 @@ failed: </source>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation>Intrumente...</translation>
+        <translation>Instrumente...</translation>
     </message>
     <message>
         <source>Show Instruments Dialog</source>
