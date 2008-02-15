@@ -194,6 +194,8 @@ void TextStyleDialog::nameSelected(int n)
             unitSpace->setChecked(true);
             curUnit = 1;
             }
+      rxOffset->setValue(s->rxoff);
+      ryOffset->setValue(s->ryoff);
 
       QFont f(s->family);
       f.setPointSizeF(s->size);
