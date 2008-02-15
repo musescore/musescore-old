@@ -277,10 +277,12 @@ void Preferences::read()
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
+      useMidiOutput      = s.value("useMidiOutput", false).toBool();
 #else
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
+      useMidiOutput      = s.value("useMidiOutput", false).toBool();
 #endif
 
       alsaDevice         = s.value("alsaDevice", "default").toString();
@@ -295,7 +297,6 @@ void Preferences::read()
       midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
       playRepeats        = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
-      useMidiOutput            = s.value("useMidiOutput", false).toBool();
       midiPorts                = s.value("midiPorts", 1).toInt();
       midiAutoConnect          = s.value("midiAutoConnect", true).toBool();
 
@@ -348,6 +349,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #endif
 #ifndef USE_PORTAUDIO
       portaudioDriver->setEnabled(false);
+#endif
+#ifdef __MINGW32__
+      useMidiOutput->setEnabled(false);
 #endif
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       cursorBlink->setChecked(preferences.cursorBlink);
@@ -441,7 +445,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       instrumentList->setText(preferences.instrumentList);
       alternateInput->setChecked(preferences.alternateNoteEntryMethod);
 
-      setUseMidiOutput(preferences.useMidiOutput);
       midiPorts->setValue(preferences.midiPorts);
       midiAutoConnect->setChecked(preferences.midiAutoConnect);
 
