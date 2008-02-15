@@ -25,6 +25,7 @@
 #include "driver.h"
 
 class ISynth;
+class Seq;
 
 //---------------------------------------------------------
 //   Portaudio
@@ -41,7 +42,7 @@ class Portaudio : public Driver {
       ISynth* synth;
 
    public:
-      Portaudio();
+      Portaudio(Seq*);
       virtual ~Portaudio();
       virtual bool init();
       void* registerPort(const char* name);

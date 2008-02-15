@@ -125,17 +125,6 @@ void Seq::selectionChanged(int mode)
             seek(tick);
       }
 
-#if 0
-//---------------------------------------------------------
-//   isRealtime
-//---------------------------------------------------------
-
-bool Seq::isRealtime() const
-      {
-      return driver->isRealtime();
-      }
-#endif
-
 //---------------------------------------------------------
 //   init
 //    return false on error
@@ -158,7 +147,7 @@ bool Seq::init()
 
 #ifdef USE_JACK
       if (useJackFlag) {
-            driver = new JackAudio;
+            driver = new JackAudio(this);
             if (!driver->init()) {
                   printf("no JACK server found\n");
                   delete driver;
@@ -170,7 +159,7 @@ bool Seq::init()
 #endif
 #ifdef USE_ALSA
       if (driver == 0 && useAlsaFlag) {
-            driver = new AlsaAudio;
+            driver = new AlsaAudio(this);
             if (!driver->init()) {
                   printf("init ALSA driver failed\n");
                   delete driver;
@@ -180,7 +169,7 @@ bool Seq::init()
                   useALSA = true;
             }
       if (useMidiOutFlag) {
-            driver = new DummyAudio;
+            driver = new DummyAudio(this);
             if (!driver->init()) {
                   printf("init DummyAudio failed\n");
                   delete driver;
@@ -190,7 +179,7 @@ bool Seq::init()
 #endif
 #ifdef USE_PORTAUDIO
       if (usePortaudioFlag) {
-            driver = new Portaudio;
+            driver = new Portaudio(this);
             if (!driver->init()) {
                   printf("no audio output found\n");
                   delete driver;
@@ -204,13 +193,6 @@ bool Seq::init()
             printf("no audio driver\n");
             return false;
             }
-#if 0
-      int sr = driver->sampleRate();
-      if (synti->init(sr)) {
-            printf("Synti init failed\n");
-            return false;
-            }
-#endif
       if (!driver->start()) {
             printf("Cannot start I/O\n");
             return false;
@@ -1065,24 +1047,6 @@ void Seq::guiToSeq(const SeqMsg& msg)
       toSeq.enqueue(msg);
       }
 
-#if 0
-#ifdef USE_ALSA
-      extern MidiDriver* midiDriver;
-      if (midiDriver) {
-            struct pollfd* pfd;
-            int npfd;
-            midiDriver->getInputPollFd(&pfd, &npfd);
-            for (int i = 0; i < npfd; ++i) {
-                  int fd = pfd[i].fd;
-                  if (fd != -1) {
-                        QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
-                        s->connect(s, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
-                        }
-                  }
-            }
-#endif
-#endif
-
 //---------------------------------------------------------
 //   getPatchInfo
 //---------------------------------------------------------
@@ -1090,5 +1054,14 @@ void Seq::guiToSeq(const SeqMsg& msg)
 const MidiPatch* Seq::getPatchInfo(int /*ch*/, const MidiPatch* /*p*/)
       {
       return 0;
+      }
+
+//---------------------------------------------------------
+//   midiInputReady
+//---------------------------------------------------------
+
+void Seq::midiInputReady()
+      {
+      driver->midiRead();
       }
 

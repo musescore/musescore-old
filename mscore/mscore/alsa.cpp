@@ -30,6 +30,7 @@
 #include "mscore.h"
 #include "preferences.h"
 #include "seq.h"
+#include "alsamidi.h"
 
 #ifdef USE_ALSA
 //---------------------------------------------------------
@@ -556,7 +557,8 @@ static double curTime()
 //   AlsaAudio
 //---------------------------------------------------------
 
-AlsaAudio::AlsaAudio()
+AlsaAudio::AlsaAudio(Seq* s)
+   : Driver(s)
       {
       alsa      = 0;
       state     = Seq::STOP;
@@ -615,6 +617,21 @@ bool AlsaAudio::init()
             alsa  = 0;
             synth = 0;
             return false;
+            }
+      midiDriver = new AlsaMidiDriver();
+      if (!midiDriver->init())
+            return false;
+      midiInPort = midiDriver->registerOutPort("MuseScore Port-0");
+
+      struct pollfd* pfd;
+      int npfd;
+      midiDriver->getInputPollFd(&pfd, &npfd);
+      for (int i = 0; i < npfd; ++i) {
+            int fd = pfd[i].fd;
+            if (fd != -1) {
+                  QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
+                  s->connect(s, SIGNAL(activated(int)), seq, SLOT(midiInputReady()));
+                  }
             }
       return true;
       }
@@ -771,6 +788,15 @@ void AlsaAudio::putEvent(const MidiOutEvent& e)
 void AlsaAudio::process(int n, float* l, float* r, int stride)
       {
       synth->process(n, l, r, stride);
+      }
+
+//---------------------------------------------------------
+//   midiRead
+//---------------------------------------------------------
+
+void AlsaAudio::midiRead()
+      {
+      midiDriver->read();
       }
 
 #endif

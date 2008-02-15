@@ -46,8 +46,8 @@ int paCallback(const void*, void* out, long unsigned frames,
 //   Portaudio
 //---------------------------------------------------------
 
-Portaudio::Portaudio()
-   : Driver()
+Portaudio::Portaudio(Seq* s)
+   : Driver(s)
       {
       _sampleRate = 44100;
       initialized = false;

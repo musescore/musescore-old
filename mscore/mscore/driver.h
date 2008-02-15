@@ -23,6 +23,8 @@
 
 #include "event.h"
 
+class Seq;
+
 //---------------------------------------------------------
 //   MidiOutEvent
 //---------------------------------------------------------
@@ -57,8 +59,12 @@ struct MidiOutEvent {
 //---------------------------------------------------------
 
 class Driver {
+
+   protected:
+      Seq* seq;
+
    public:
-      Driver() {}
+      Driver(Seq* s)    { seq = s;}
       virtual ~Driver() {}
       virtual bool init() = 0;
       virtual bool start() = 0;
@@ -71,6 +77,7 @@ class Driver {
 
       virtual void putEvent(const MidiOutEvent&) = 0;
       virtual void process(int, float*, float*, int) = 0;
+      virtual void midiRead() {}
       };
 
 #endif

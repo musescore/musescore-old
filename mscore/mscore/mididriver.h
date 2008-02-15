@@ -23,13 +23,14 @@
 //=============================================================================
 
 #ifndef __MIDIDRIVER_H__
-#define __MIDIDRIVER_H
+#define __MIDIDRIVER_H__
 
 #include "driver.h"
 
 class Event;
 class MidiOutEvent;
 class MidiSeq;
+class Seq;
 
 //---------------------------------------------------------
 //    Port
@@ -61,6 +62,9 @@ class Port {
 //---------------------------------------------------------
 
 class MidiDriver {
+   protected:
+      Port midiInPort;
+      Port* midiOutPorts;
 
    public:
       MidiDriver() {}
@@ -92,7 +96,7 @@ class DummyAudio : public Driver {
       bool seekflag;
       unsigned pos;
 
-      DummyAudio();
+      DummyAudio(Seq*);
       virtual ~DummyAudio();
 
       virtual bool init();
@@ -107,6 +111,7 @@ class DummyAudio : public Driver {
       virtual bool isRealtime() const { return false; }
       virtual void putEvent(const MidiOutEvent&);
       virtual void process(int, float*, float*, int);
+      virtual void midiRead();
       };
 
 #endif
