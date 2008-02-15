@@ -265,7 +265,7 @@ MuseScore::MuseScore()
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
          << "redo" << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
-         << "insert-hbox" << "insert-vbox"
+         << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
          << "duplet" << "triplet" << "quintuplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"

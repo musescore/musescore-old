@@ -233,7 +233,7 @@ class Score : public QObject {
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
       void removeMeasure(MeasureBase*);
-      void appendMeasures(int);
+      void appendMeasures(int, int);
       void readStaff(QDomElement);
 
       void cmdTuplet(int);
@@ -493,7 +493,7 @@ class Score : public QObject {
       int mscVersion() const { return _mscVersion; }
 
       SigList*   getSigmap()  { return sigmap; }
-      Measure* appendMeasure();
+      MeasureBase* appendMeasure(int type);
       UndoList* getUndoList() { return &undoList; }
       void addLyrics(int tick, int staffIdx, const QString&);
       };

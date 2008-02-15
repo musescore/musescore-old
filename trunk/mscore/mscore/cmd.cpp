@@ -614,7 +614,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             int stick = tick;
             Measure* measure = tick2measure(stick);
             if (measure == 0 || (stick >= (measure->tick() + measure->tickLen()))) {
-                  measure = appendMeasure();
+                  measure = (Measure*)appendMeasure(MEASURE);
                   if (measure == 0)
                         return;
                   }
@@ -1005,7 +1005,7 @@ void Score::upDown(bool up, bool octave)
 void Score::cmdAppendMeasures(int n)
       {
       startCmd();
-      appendMeasures(n);
+      appendMeasures(n, MEASURE);
       endCmd();
       }
 
@@ -1013,31 +1013,40 @@ void Score::cmdAppendMeasures(int n)
 //   appendMeasure
 //---------------------------------------------------------
 
-Measure* Score::appendMeasure()
+MeasureBase* Score::appendMeasure(int type)
       {
       MeasureBase* last = _layout->last();
       int tick = last ? last->tick() + last->tickLen() : 0;
-      Measure* measure  = new Measure(this);
-      measure->setTick(tick);
+      MeasureBase* mb;
+      if (type == MEASURE)
+            mb = new Measure(this);
+      else if (type == HBOX)
+            mb = new HBox(this);
+      else if (type == VBOX)
+            mb = new VBox(this);
+      mb->setTick(tick);
 
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            Rest* rest = new Rest(this, tick, 0);
-            rest->setTrack(staffIdx * VOICES);
-            Segment* s = measure->getSegment(rest);
-            s->add(rest);
+      if (type == MEASURE) {
+            Measure* measure = (Measure*)mb;
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  Rest* rest = new Rest(this, tick, 0);
+                  rest->setTrack(staffIdx * VOICES);
+                  Segment* s = measure->getSegment(rest);
+                  s->add(rest);
+                  }
             }
-      undoOp(UndoOp::InsertMeasure, measure);
-      measure->setNext(0);
-      _layout->add(measure);
+      undoOp(UndoOp::InsertMeasure, mb);
+      mb->setNext(0);
+      _layout->add(mb);
       layoutAll = true;
-      return measure;
+      return mb;
       }
 
 //---------------------------------------------------------
 //   appendMeasures
 //---------------------------------------------------------
 
-void Score::appendMeasures(int n)
+void Score::appendMeasures(int n, int type)
       {
       if (noStaves()) {
             QMessageBox::warning(0, "MuseScore",
@@ -1047,7 +1056,7 @@ void Score::appendMeasures(int n)
             return;
             }
       for (int i = 0; i < n; ++i)
-            appendMeasure();
+            appendMeasure(type);
       }
 
 //---------------------------------------------------------
@@ -1377,13 +1386,21 @@ void Score::cmd(const QString& cmd)
                   }
             startCmd();
             if (cmd == "append-measure")
-                  appendMeasures(1);
+                  appendMeasures(1, MEASURE);
             else if (cmd == "insert-measure")
 		      insertMeasures(1, MEASURE);
             else if (cmd == "insert-hbox")
 		      insertMeasures(1, HBOX);
             else if (cmd == "insert-vbox")
 		      insertMeasures(1, VBOX);
+            else if (cmd == "append-hbox") {
+		      MeasureBase* mb = appendMeasure(HBOX);
+                  select(mb, 0, 0);
+                  }
+            else if (cmd == "append-vbox") {
+		      MeasureBase* mb = appendMeasure(VBOX);
+                  select(mb, 0, 0);
+                  }
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")
