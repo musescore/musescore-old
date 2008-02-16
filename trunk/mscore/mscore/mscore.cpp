@@ -495,7 +495,7 @@ MuseScore::MuseScore()
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Part List..."), this, SLOT(startInstrumentListEditor()));
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Page List..."), this, SLOT(startPageListEditor()));
+      menuEdit->addAction(tr("Inspector..."), this, SLOT(startPageListEditor()));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
 

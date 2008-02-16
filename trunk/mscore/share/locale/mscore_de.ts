@@ -2343,8 +2343,8 @@ failed: </source>
     </message>
     <message>
         <location filename="" line="139670060"/>
-        <source>Page List...</source>
-        <translation>Seitenliste...</translation>
+        <source>Inspector...</source>
+        <translation>Inspektor...</translation>
     </message>
     <message>
         <location filename="" line="139670060"/>
