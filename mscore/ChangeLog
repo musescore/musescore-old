@@ -1,3 +1,5 @@
+16.2.8 (ws)
+      - fix selection color for elements with invalid track
 15.2.8 (ws)
       - new commands: append horizontal frame, append vertical frame
       - text style edit: fix relXoffset relYoffset values

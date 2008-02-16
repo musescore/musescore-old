@@ -3582,6 +3582,14 @@ fallito: </translation>
         <source>dot dot</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Append horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5096,10 +5104,6 @@ impostare il Tempo.</translation>
         <translation>Posizione</translation>
     </message>
     <message>
-        <source>Reference Position</source>
-        <translation>Ancoraggio</translation>
-    </message>
-    <message>
         <source>Alignment</source>
         <translation>Allineamento</translation>
     </message>
@@ -5206,22 +5210,6 @@ impostare il Tempo.</translation>
     <message>
         <source>Style:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation type="unfinished">Padre</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished">Battuta</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished">Pentagramma</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation type="unfinished">Segmento</translation>
     </message>
     <message>
         <source>Baseline</source>

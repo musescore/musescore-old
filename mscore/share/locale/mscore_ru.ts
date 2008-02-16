@@ -3581,6 +3581,14 @@ failed: </source>
         <source>dot dot</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Append horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5087,10 +5095,6 @@ set tempo.</source>
         <translation>Позиция</translation>
     </message>
     <message>
-        <source>Reference Position</source>
-        <translation>Привязка</translation>
-    </message>
-    <message>
         <source>Alignment</source>
         <translation>Выравнивание</translation>
     </message>
@@ -5201,22 +5205,6 @@ set tempo.</source>
     <message>
         <source>Style:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation type="unfinished">Родительский</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished">Такт</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished">Нотоносец</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation type="unfinished">Сегмент</translation>
     </message>
     <message>
         <source>Baseline</source>

@@ -187,8 +187,12 @@ QColor Element::curColor() const
       {
       if (score() && score()->printing())
             return _color;
-      if (_selected)
-            return preferences.selectColor[voice()];
+      if (_selected) {
+            if (track() == -1)
+                  return preferences.selectColor[0];
+            else
+                  return preferences.selectColor[voice()];
+            }
       if (_dropTarget)
             return preferences.dropColor;
       if (!_visible)
