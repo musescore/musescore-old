@@ -3577,6 +3577,14 @@ falhou:</translation>
         <source>dot dot</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Append horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5087,10 +5095,6 @@ em que deseja inserir novas notas</translation>
         <translation>Posição</translation>
     </message>
     <message>
-        <source>Reference Position</source>
-        <translation>Posição de referência</translation>
-    </message>
-    <message>
         <source>Alignment</source>
         <translation>Alinhamento</translation>
     </message>
@@ -5197,22 +5201,6 @@ em que deseja inserir novas notas</translation>
     <message>
         <source>Style:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished">Compasso</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished">Pauta</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation type="unfinished">Segmento</translation>
     </message>
     <message>
         <source>Baseline</source>
