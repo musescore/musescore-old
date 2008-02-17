@@ -1,4 +1,5 @@
 17.2.8 (ws)
+      - added (text-) line properties dialog
       - added dialog for midi import: select raster
 16.2.8 (ws)
       - new windows testrelease build 716

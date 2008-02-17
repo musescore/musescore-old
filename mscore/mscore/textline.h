@@ -22,6 +22,7 @@
 
 #include "line.h"
 #include "text.h"
+#include "ui_lineproperties.h"
 
 class TextLine;
 
@@ -47,6 +48,9 @@ class TextLineSegment : public LineSegment {
       virtual void remove(Element*);
       virtual void layout(ScoreLayout*);
       TextC* text() const { return _text; }
+
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 //---------------------------------------------------------
@@ -55,6 +59,10 @@ class TextLineSegment : public LineSegment {
 //---------------------------------------------------------
 
 class TextLine : public SLine {
+      Spatium _hookHeight;
+      Spatium _lineWidth;
+      Qt::PenStyle _lineStyle;
+      bool _hookUp;
 
    protected:
       TextBase* _text;
@@ -64,18 +72,42 @@ class TextLine : public SLine {
       TextLine(Score* s);
       TextLine(const TextLine&);
       ~TextLine();
-      virtual TextLine* clone() const     { return new TextLine(*this); }
-      virtual ElementType type() const    { return TEXTLINE; }
+      virtual TextLine* clone() const      { return new TextLine(*this); }
+      virtual ElementType type() const     { return TEXTLINE; }
       virtual void layout(ScoreLayout*);
       virtual LineSegment* createLineSegment();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      void setText(const QString& s) { _text->setText(s, 0);    }
-      QString text() const           { return _text->getText(); }
-      TextBase** textBasePtr()       { return &_text;           }
-      TextBase*  textBase()          { return _text;            }
-      void setTextBase(TextBase* b)  { _text = b;               }
+      void setText(const QString& s)       { _text->setText(s, 0);    }
+      QString text() const                 { return _text->getText(); }
+      TextBase** textBasePtr()             { return &_text;           }
+      TextBase*  textBase()                { return _text;            }
+      void setTextBase(TextBase* b)        { _text = b;               }
+      Spatium hookHeight() const           { return _hookHeight;      }
+      void setHookHeight(const Spatium& v) { _hookHeight = v;         }
+      Spatium lineWidth() const            { return _lineWidth;       }
+      void setLineWidth(const Spatium& v)  { _lineWidth = v;          }
+      Qt::PenStyle lineStyle() const       { return _lineStyle;       }
+      void setLineStyle(Qt::PenStyle v)    { _lineStyle = v;          }
+      bool hookUp() const                  { return _hookUp;          }
+      void setHookUp(bool v)               { _hookUp = v;             }
+      };
+
+//---------------------------------------------------------
+//   LineProperties
+//---------------------------------------------------------
+
+class LineProperties : public QDialog, public Ui::LinePropertiesDialog {
+      Q_OBJECT
+
+      TextLine* tl;
+
+   public slots:
+      virtual void accept();
+
+   public:
+      LineProperties(TextLine*, QWidget* parent = 0);
       };
 
 #endif
