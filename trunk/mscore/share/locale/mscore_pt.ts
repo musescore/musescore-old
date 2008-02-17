@@ -3378,10 +3378,6 @@ falhou:</translation>
         <translation>Lista de partes...</translation>
     </message>
     <message>
-        <source>Page List...</source>
-        <translation>Lista de páginas...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Definições...</translation>
     </message>
@@ -3583,6 +3579,10 @@ falhou:</translation>
     </message>
     <message>
         <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1978,10 +1978,6 @@ failed: </source>
         <translation>&amp;Правка</translation>
     </message>
     <message>
-        <source>Page List...</source>
-        <translation>Список страниц...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Параметры...</translation>
     </message>
@@ -3587,6 +3583,10 @@ failed: </source>
     </message>
     <message>
         <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

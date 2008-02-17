@@ -116,6 +116,7 @@ class MidiFile {
       int sstatus;               ///< running status (not reset after meta or sysex events)
       int click;                 ///< current tick position in file
       qint64 curPos;             ///< current file byte position
+      int _shortestNote;
 
    protected:
       // write
@@ -135,6 +136,7 @@ class MidiFile {
       int readLong();
       Event* readEvent();
       bool readTrack();
+      QString _error;
 
       void resetRunningStatus() { status = -1; }
 
@@ -160,6 +162,9 @@ class MidiFile {
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
       void processMeta(Score*, MidiTrack* track, int staffIdx, MetaEvent* e);
+      const QString& error() const    { return _error; }
+      void setShortestNote(int v)     { _shortestNote = v;    }
+      int shortestNote() const        { return _shortestNote; }
 
       friend class NoteOn;
       friend class NoteOff;
