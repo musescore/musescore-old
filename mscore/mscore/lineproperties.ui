@@ -14,17 +14,26 @@
   </property>
   <layout class="QVBoxLayout" >
    <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="groupBox_2" >
+     <property name="title" >
+      <string>Text</string>
      </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+     <property name="flat" >
+      <bool>true</bool>
      </property>
-    </spacer>
+     <layout class="QHBoxLayout" >
+      <item>
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>Text:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit" />
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox" >
@@ -146,6 +155,9 @@
        <widget class="QRadioButton" name="down" >
         <property name="text" >
          <string>Down</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
