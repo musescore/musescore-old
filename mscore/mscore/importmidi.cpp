@@ -49,6 +49,7 @@
 #include "drumset.h"
 #include "preferences.h"
 #include "box.h"
+#include "importmidi.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -849,44 +850,6 @@ bool ExportMidi::write(const QString& name)
       }
 
 //---------------------------------------------------------
-//   LoadMidi
-//---------------------------------------------------------
-
-class LoadMidi : public LoadFile {
-   public:
-      MidiFile mf;
-      LoadMidi(Score*) : mf() {}
-      virtual bool loader(QFile* f);
-      };
-
-//---------------------------------------------------------
-//   importMidi
-//    return true on success
-//---------------------------------------------------------
-
-bool Score::importMidi(const QString& name)
-      {
-      LoadMidi lm(this);
-      if (lm.load(name))
-            return false;
-      _saved = false;
-      convertMidi(&(lm.mf));
-      _created = true;
-      return true;
-      }
-
-//---------------------------------------------------------
-//   loader
-//    import midi file
-//    return true on error
-//---------------------------------------------------------
-
-bool LoadMidi::loader(QFile* fp)
-      {
-      return mf.read(fp);
-      }
-
-//---------------------------------------------------------
 //   addLyrics
 //---------------------------------------------------------
 
@@ -1011,7 +974,6 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent*
                   {
                   int z = data[0];
                   int n = 1 << data[1];
-printf("META: time signature %d/%d\n", z, n);
                   cs->sigmap->add(tick, z, n);
                   }
                   break;
@@ -1027,7 +989,7 @@ printf("META: time signature %d/%d\n", z, n);
 //   convertMidi
 //---------------------------------------------------------
 
-void Score::convertMidi(MidiFile* mf)
+void Score::convertMidi(MidiFile* mf, int shortestNote)
       {
       mf->separateChannel();
       mf->process1();
@@ -1287,7 +1249,7 @@ struct MNote {
 
 void Score::convertTrack(MidiTrack* midiTrack)
 	{
-      int key = findKey(midiTrack, sigmap);
+      int key      = findKey(midiTrack, sigmap);
       int staffIdx = midiTrack->staffIdx();
       midiTrack->findChords();
       int voices = midiTrack->separateVoices(2);
@@ -1470,5 +1432,95 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
             (*cstaff->keymap())[0] = key;
             }
+      }
+
+//---------------------------------------------------------
+//   ImportMidiDialog
+//---------------------------------------------------------
+
+ImportMidiDialog::ImportMidiDialog(QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      }
+
+//---------------------------------------------------------
+//   shortestNote
+//---------------------------------------------------------
+
+int ImportMidiDialog::shortestNote() const
+      {
+      switch(shortestNoteCombo->currentIndex()) {
+            case 0:     return division;
+            case 1:     return division / 2;
+            case 2:     return division / 4;
+            case 3:     return division / 8;
+            case 4:     return division / 16;
+
+            default:
+            case 5:
+                  return division / 32;
+            }
+      }
+
+//---------------------------------------------------------
+//   setShortestNote
+//---------------------------------------------------------
+
+void ImportMidiDialog::setShortestNote(int val)
+      {
+      int idx;
+
+      if (val == division)
+            idx = 0;
+      else if (val == division/2)
+            idx = 1;
+      else if (val == division/4)
+            idx = 2;
+      else if (val == division/8)
+            idx = 3;
+      else if (val == division/16)
+            idx = 4;
+      else
+            idx = 5;
+
+      shortestNoteCombo->setCurrentIndex(idx);
+      }
+
+//---------------------------------------------------------
+//   importMidi
+//    return true on success
+//---------------------------------------------------------
+
+bool Score::importMidi(const QString& name)
+      {
+      if (name.isEmpty())
+            return false;
+      QFile fp(name);
+      if (!fp.open(QIODevice::ReadOnly))
+            return false;
+      MidiFile mf;
+      if (!mf.read(&fp)) {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: load midi"),
+               QString("Load failed: ") + mf.error(),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            }
+      fp.close();
+
+      int shortestNote = division / 16;
+      if (!converterMode) {
+            ImportMidiDialog id(0);
+            id.setShortestNote(shortestNote);
+            id.exec();
+            shortestNote = id.shortestNote();
+            }
+printf("shortest note %d\n", shortestNote);
+      mf.setShortestNote(shortestNote);
+
+      _saved = false;
+      convertMidi(&mf, shortestNote);
+      _created = true;
+      return true;
       }
 

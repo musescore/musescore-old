@@ -206,10 +206,11 @@ void MetaEvent::dump(Xml& xml) const
 
 MidiFile::MidiFile()
       {
-      fp        = 0;
-      _format   = 1;
-      _midiType = MT_UNKNOWN;
+      fp               = 0;
+      _format          = 1;
+      _midiType        = MT_UNKNOWN;
       _noRunningStatus = false;
+      _shortestNote    = ::division /32;       // 1/128
       }
 
 //---------------------------------------------------------
@@ -354,12 +355,13 @@ void MidiFile::writeStatus(int nstat, int c)
 
 //---------------------------------------------------------
 //   readMidi
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool MidiFile::read(QIODevice* in)
      {
       fp = in;
+      _error = "";
       _tracks.clear();
       _siglist.clear();
       curPos    = 0;
@@ -369,8 +371,8 @@ bool MidiFile::read(QIODevice* in)
       read(tmp, 4);
       int len = readLong();
       if (memcmp(tmp, "MThd", 4) || len < 6) {
-            printf("bad midifile: MThd expected\n");
-            return true;
+            _error = "bad midifile: MThd expected";
+            return false;
             }
 
       _format     = readShort();
@@ -385,19 +387,19 @@ bool MidiFile::read(QIODevice* in)
       switch (_format) {
             case 0:
                   if (readTrack())
-                        return true;
+                        return false;
                   break;
             case 1:
                   for (int i = 0; i < ntracks; i++) {
                         if (readTrack())
-                              return true;
+                              return false;
                         }
                   break;
             default:
-                  printf("midi fileformat %d not implemented!\n", _format);
-                  return true;
+                  _error = QString("midi fileformat %1 not implemented").arg(_format);
+                  return false;
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -410,7 +412,7 @@ bool MidiFile::readTrack()
       char tmp[4];
       read(tmp, 4);
       if (memcmp(tmp, "MTrk", 4)) {
-            printf("bad midifile: MTrk expected\n");
+            _error = "bad midifile: MTrk expected";
             return true;
             }
       int len       = readLong();       // len
@@ -1081,6 +1083,10 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
             mintick = division * 4;
       else if (mintick <= division * 8)
             mintick = division * 8;
+
+      if (mintick < mf->shortestNote())
+            mintick = mf->shortestNote();
+
       int raster;
       if (mintick > division)
             raster = division;

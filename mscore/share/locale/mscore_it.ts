@@ -2087,10 +2087,6 @@ fallito: </translation>
         <translation>&amp;Modifica</translation>
     </message>
     <message>
-        <source>Page List...</source>
-        <translation>Elenco Oggetti Pagina...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Preferenze...</translation>
     </message>
@@ -3588,6 +3584,10 @@ fallito: </translation>
     </message>
     <message>
         <source>Append vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

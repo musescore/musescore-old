@@ -66,7 +66,7 @@ QT4_WRAP_UI (ui_headers
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
-      chordedit.ui transposedialog.ui tempoproperties.ui
+      chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -77,7 +77,7 @@ QT4_WRAP_CPP (mocs
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       voltaproperties.h chordproperties.h restproperties.h repeatproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h chordedit.h tempotext.h
+      transposedialog.h chordedit.h tempotext.h importmidi.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -113,7 +113,7 @@ add_executable ( mscore
       edittempo.cpp element.cpp exportxml.cpp file.cpp fluid.cpp
       hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
-      measure.cpp menus.cpp midifile.cpp midi.cpp mscore.cpp
+      measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
       mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
       page.cpp pagesettings.cpp palette.cpp part.cpp
       partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp

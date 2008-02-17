@@ -75,7 +75,8 @@ int appDpiY = 75;
 double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
-static bool converterMode = false;
+bool converterMode = false;
+
 static const char* outFileName;
 static QString localeName;
 
