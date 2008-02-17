@@ -99,16 +99,16 @@ void TextLineSegment::collectElements(QList<const Element*>& el) const
 
 void TextLineSegment::draw(QPainter& p) const
       {
-      qreal textlineLineWidth    = _spatium * .15;
+      qreal textlineLineWidth    = textLine()->lineWidth().point();
       qreal textlineTextDistance = _spatium * .25;
 
       QPointF pp2(pos2());
 
-      qreal h = 0.0;
+//      qreal h = 0.0;
       qreal w = 0.0;
       if (_text) {
             QRectF bb(_text->bbox());
-            h = bb.height() * .5 - textlineLineWidth * .5;
+//            h = bb.height() * .5 - textlineLineWidth * .5;
             w = bb.width();
             }
 
@@ -116,11 +116,17 @@ void TextLineSegment::draw(QPainter& p) const
 
       QPen pen(p.pen());
       pen.setWidthF(textlineLineWidth);
+      pen.setStyle(textLine()->lineStyle());
 
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
-            p.drawLine(QLineF(pp2, QPointF(pp2.x(), h * .55)));
+
+      double hh = textLine()->hookHeight().point();
+      if (textLine()->hookUp())
+            hh *= -1;
+      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
+            p.drawLine(QLineF(pp2, QPointF(pp2.x(), hh)));
+            }
       }
 
 //---------------------------------------------------------
@@ -170,13 +176,21 @@ void TextLineSegment::layout(ScoreLayout* l)
 TextLine::TextLine(Score* s)
    : SLine(s)
       {
-      _text = new TextBase;
+      _text       = new TextBase;
+      _hookHeight = Spatium(2);
+      _lineWidth  = Spatium(0.15);
+      _lineStyle  = Qt::SolidLine;
+      _hookUp     = false;
       }
 
 TextLine::TextLine(const TextLine& e)
    : SLine(e)
       {
-      _text = e._text;
+      _text       = e._text;
+      _hookHeight = e._hookHeight;
+      _lineWidth  = e._lineWidth;
+      _lineStyle  = e._lineStyle;
+      _hookUp     = e._hookUp;
       }
 
 //---------------------------------------------------------
@@ -204,6 +218,11 @@ void TextLine::layout(ScoreLayout* layout)
 void TextLine::write(Xml& xml) const
       {
       xml.stag("TextLine");
+      xml.tag("hookHeight", _hookHeight.val());
+      xml.tag("lineWidth", _lineWidth.val());
+      xml.tag("lineStyle", _lineStyle);
+      xml.tag("hookUp", _hookUp);
+
       SLine::writeProperties(xml);
       _text->writeProperties(xml);
       xml.etag();
@@ -216,7 +235,17 @@ void TextLine::write(Xml& xml) const
 void TextLine::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (_text->readProperties(e))
+            QString tag(e.tagName());
+            const QString& text = e.text();
+            if (tag == "hookHeight")
+                  _hookHeight = Spatium(text.toDouble());
+            else if (tag == "lineWidth")
+                  _lineWidth = Spatium(text.toDouble());
+            else if (tag == "lineStyle")
+                  _lineStyle = Qt::PenStyle(text.toInt());
+            else if (tag == "hookUp")
+                  _hookUp = text.toInt();
+            else if (_text->readProperties(e))
                   ;
             else if (!SLine::readProperties(e))
                   domError(e);
@@ -231,5 +260,59 @@ LineSegment* TextLine::createLineSegment()
       {
       LineSegment* seg = new TextLineSegment(score());
       return seg;
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool TextLineSegment::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void TextLineSegment::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            LineProperties lp(textLine(), 0);
+            lp.exec();
+            }
+      else
+            Element::propertyAction(s);
+      }
+
+//---------------------------------------------------------
+//   LineProperties
+//---------------------------------------------------------
+
+LineProperties::LineProperties(TextLine* l, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      tl = l;
+      lineWidth->setValue(tl->lineWidth().val());
+      hookHeight->setValue(tl->hookHeight().val());
+      up->setChecked(tl->hookUp());
+      lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void LineProperties::accept()
+      {
+      tl->setLineWidth(Spatium(lineWidth->value()));
+      tl->setHookHeight(Spatium(hookHeight->value()));
+      tl->setHookUp(up->isChecked());
+      tl->setLineStyle(Qt::PenStyle(lineStyle->currentIndex() + 1));
+      QDialog::accept();
       }
 
