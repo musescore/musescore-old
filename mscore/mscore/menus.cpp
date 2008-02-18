@@ -54,14 +54,14 @@
 #include "tempotext.h"
 
 static const char* keyNames[] = {
-      "g-major, e-minor",     "ces",
-      "d-major, h-minor",     "ges-major, es-minor",
-      "a-major, fis-minor",   "des-minor, b-minor",
-      "e-major, cis-minor",   "as-major, f-minor",
-      "h-major, gis-minor",   "es-major, c-minor",
-      "fis-major, dis-minor", "b-major, g-minor",
-      "cis",                  "f-major, d-minor",
-      "c-major, a-minor"
+      "G major, E minor",   "Cb major, Ab minor",
+      "D major, B minor",   "Gb major, Eb minor",
+      "A major, F# minor",  "Db major, Bb minor",
+      "E major, C# minor",  "Ab major, F minor",
+      "B major, G# minor",  "Eb major, C minor",
+      "F# major, D# minor", "Bb major, G minor",
+      "C# major, A minor",  "F major,  D minor",
+      "C major, A minor"
       };
 
 //---------------------------------------------------------
