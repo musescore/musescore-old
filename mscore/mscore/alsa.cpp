@@ -561,6 +561,7 @@ AlsaAudio::AlsaAudio(Seq* s)
    : Driver(s)
       {
       alsa      = 0;
+      synth     = 0;
       state     = Seq::STOP;
       seekflag  = false;
       startTime = curTime();
