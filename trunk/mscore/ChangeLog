@@ -1,4 +1,6 @@
 18.2.8 (ws)
+      - make key signature names translatable, add german translation
+      - fix key signature names
       - more code for line properties dialog
 17.2.8 (ws)
       - added (text-) line properties dialog

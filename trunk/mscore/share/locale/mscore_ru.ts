@@ -1398,6 +1398,41 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>ImportMidiDialog</name>
+    <message>
+        <source>MuseScore: Midi Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortest note on import:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4</source>
+        <translation type="unfinished">1/4</translation>
+    </message>
+    <message>
+        <source>1/8</source>
+        <translation type="unfinished">1/8</translation>
+    </message>
+    <message>
+        <source>1/16</source>
+        <translation type="unfinished">1/16</translation>
+    </message>
+    <message>
+        <source>1/32</source>
+        <translation type="unfinished">1/32</translation>
+    </message>
+    <message>
+        <source>1/64</source>
+        <translation type="unfinished">1/64</translation>
+    </message>
+    <message>
+        <source>1/128</source>
+        <translation type="unfinished">1/128</translation>
+    </message>
+</context>
+<context>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
@@ -1602,6 +1637,105 @@ failed: </source>
     </message>
     <message>
         <source>Continue at:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LinePropertiesDialog</name>
+    <message>
+        <source>MuseScore: Line Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Текст</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished">Текст:</translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Кегль:</translation>
+    </message>
+    <message>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boxed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frame:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>solid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dot</source>
+        <translation type="unfinished">Точка</translation>
+    </message>
+    <message>
+        <source>dash dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Хвостик</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3589,6 +3723,74 @@ failed: </source>
         <source>Inspector...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(2+2)/4 alla breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G major, E minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cb major, Ab minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D major, B minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gb major, Eb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A major, F# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Db major, Bb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E major, C# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ab major, F minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B major, G# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eb major, C minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F# major, D# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bb major, G minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C# major, A# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F major,  D minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C major, A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4011,10 +4213,6 @@ failed: </source>
         <translation>Нотная страница</translation>
     </message>
     <message>
-        <source>CS</source>
-        <translation>Изм</translation>
-    </message>
-    <message>
         <source>Wallpaper</source>
         <translation>Обои</translation>
     </message>
@@ -4283,10 +4481,6 @@ failed: </source>
         <translation>22050</translation>
     </message>
     <message>
-        <source>select color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export Midi</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4414,6 +4608,10 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load midi</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4974,6 +5172,13 @@ set tempo.</source>
     </message>
 </context>
 <context>
+    <name>TextLineSegment</name>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextPaletteBase</name>
     <message>
         <source>MuseScore: Special Text Symbols</source>
@@ -5171,32 +5376,8 @@ set tempo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>border width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>margin width</source>
-        <translation type="unfinished">Ширина поля</translation>
-    </message>
-    <message>
-        <source>border color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>border style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation>Просмотр</translation>
-    </message>
-    <message>
-        <source>:Font:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Size:</source>
@@ -5223,11 +5404,31 @@ set tempo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CS</source>
-        <translation type="unfinished">Изм</translation>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>frame round</source>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
