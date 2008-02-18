@@ -70,6 +70,7 @@ JackAudio::JackAudio(Seq* s)
    : Driver(s)
       {
       client = 0;
+      synth  = 0;
       }
 
 //---------------------------------------------------------
@@ -84,6 +85,8 @@ JackAudio::~JackAudio()
                      strerror(errno));
                   }
             }
+      if (synth)
+            delete synth;
       }
 
 //---------------------------------------------------------
