@@ -181,7 +181,7 @@ TextLine::TextLine(Score* s)
    : SLine(s)
       {
       _text       = new TextBase;
-      _hookHeight = Spatium(2);
+      _hookHeight = Spatium(1.5);
       _lineWidth  = Spatium(0.15);
       _lineStyle  = Qt::SolidLine;
       _hookUp     = false;
