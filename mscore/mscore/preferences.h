@@ -116,12 +116,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void buttonBoxClicked(QAbstractButton*);
       void bgClicked(bool);
       void fgClicked(bool);
-      void selectFgColor();
-      void selectBgColor();
-      void selectSelectColor1();
-      void selectSelectColor2();
-      void selectSelectColor3();
-      void selectSelectColor4();
       void selectFgWallpaper();
       void selectBgWallpaper();
       void selectSoundFont();

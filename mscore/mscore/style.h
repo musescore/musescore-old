@@ -175,8 +175,7 @@ struct Style {
       Spatium propertyDistanceHead;  // note property to note head
       Spatium propertyDistanceStem;  // note property to note stem
       Spatium propertyDistance;      // note property to note property
-//      double ticklen2Width;         // 1.0 - with of elements is proportional to
-                                    // ticklen
+
       double pageFillLimit;         // 0-1.0
       Spatium hairpinHeight;
       Spatium hairpinContHeight;

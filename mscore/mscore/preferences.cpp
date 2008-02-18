@@ -474,12 +474,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
             }
 #endif
-      connect(fgColorSelect,      SIGNAL(clicked()), SLOT(selectFgColor()));
-      connect(bgColorSelect,      SIGNAL(clicked()), SLOT(selectBgColor()));
-      connect(selectColorSelect1, SIGNAL(clicked()), SLOT(selectSelectColor1()));
-      connect(selectColorSelect2, SIGNAL(clicked()), SLOT(selectSelectColor2()));
-      connect(selectColorSelect3, SIGNAL(clicked()), SLOT(selectSelectColor3()));
-      connect(selectColorSelect4, SIGNAL(clicked()), SLOT(selectSelectColor4()));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
@@ -601,72 +595,6 @@ void PreferenceDialog::defineShortcutClicked()
       }
 
 //---------------------------------------------------------
-//   selectFgColor
-//---------------------------------------------------------
-
-void PreferenceDialog::selectFgColor()
-      {
-      QColor c = QColorDialog::getColor(fgColorLabel->color(), this);
-      if (c.isValid())
-            fgColorLabel->setColor(c);
-      }
-
-//---------------------------------------------------------
-//   selectBgColor
-//---------------------------------------------------------
-
-void PreferenceDialog::selectBgColor()
-      {
-      QColor c = QColorDialog::getColor(bgColorLabel->color(), this);
-      if (c.isValid())
-            bgColorLabel->setColor(c);
-      }
-
-//---------------------------------------------------------
-//   selectSelectColor1
-//---------------------------------------------------------
-
-void PreferenceDialog::selectSelectColor1()
-      {
-      QColor c = QColorDialog::getColor(selectColorLabel1->color(), this);
-      if (c.isValid())
-            selectColorLabel1->setColor(c);
-      }
-
-//---------------------------------------------------------
-//   selectSelectColor2
-//---------------------------------------------------------
-
-void PreferenceDialog::selectSelectColor2()
-      {
-      QColor c = QColorDialog::getColor(selectColorLabel2->color(), this);
-      if (c.isValid())
-            selectColorLabel2->setColor(c);
-      }
-
-//---------------------------------------------------------
-//   selectSelectColor3
-//---------------------------------------------------------
-
-void PreferenceDialog::selectSelectColor3()
-      {
-      QColor c = QColorDialog::getColor(selectColorLabel3->color(), this);
-      if (c.isValid())
-            selectColorLabel3->setColor(c);
-      }
-
-//---------------------------------------------------------
-//   selectSelectColor4
-//---------------------------------------------------------
-
-void PreferenceDialog::selectSelectColor4()
-      {
-      QColor c = QColorDialog::getColor(selectColorLabel4->color(), this);
-      if (c.isValid())
-            selectColorLabel4->setColor(c);
-      }
-
-//---------------------------------------------------------
 //   selectFgWallpaper
 //---------------------------------------------------------
 
@@ -770,7 +698,6 @@ void PreferenceDialog::selectStartWith()
 void PreferenceDialog::fgClicked(bool id)
       {
       fgColorLabel->setEnabled(id);
-      fgColorSelect->setEnabled(id);
       fgWallpaper->setEnabled(!id);
       fgWallpaperSelect->setEnabled(!id);
       }
@@ -782,7 +709,6 @@ void PreferenceDialog::fgClicked(bool id)
 void PreferenceDialog::bgClicked(bool id)
       {
       bgColorLabel->setEnabled(id);
-      bgColorSelect->setEnabled(id);
       bgWallpaper->setEnabled(!id);
       bgWallpaperSelect->setEnabled(!id);
       }

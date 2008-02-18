@@ -43,6 +43,9 @@ class JackAudio : public Driver {
 
       ISynth* synth;
 
+      static void jack_thread_init(void* data);
+      static int processAudio(jack_nframes_t, void*);
+
    public:
       JackAudio(Seq*);
       virtual ~JackAudio();

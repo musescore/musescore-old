@@ -31,9 +31,9 @@
 //   jack_thread_init
 //---------------------------------------------------------
 
-static void jack_thread_init (void* /*data*/)
+void JackAudio::jack_thread_init (void* data)
       {
-      if (seq->isRealtime()) {
+      if (((JackAudio*)data)->seq->isRealtime()) {
             struct sched_param rt_param;
             int rv;
             memset(&rt_param, 0, sizeof(sched_param));
@@ -209,10 +209,13 @@ bool JackAudio::start()
 
 bool JackAudio::stop()
       {
+      jack_client_close(client);
+#if 0
       if (jack_deactivate(client)) {
             fprintf (stderr, "cannot deactivate client");
             return false;
             }
+#endif
       return true;
       }
 
@@ -263,12 +266,12 @@ static int graph_callback(void*)
 //    JACK callback
 //---------------------------------------------------------
 
-static int processAudio(jack_nframes_t frames, void* p)
+int JackAudio::processAudio(jack_nframes_t frames, void* p)
       {
       JackAudio* audio = (JackAudio*)p;
       float* lbuffer = audio->getLBuffer(frames);
       float* rbuffer = audio->getRBuffer(frames);
-      seq->process((unsigned)frames, lbuffer, rbuffer, 1);
+      audio->seq->process((unsigned)frames, lbuffer, rbuffer, 1);
       return 0;
       }
 
@@ -329,7 +332,7 @@ bool JackAudio::init()
       jack_set_freewheel_callback (client, freewheel_callback, this);
       _sampleRate   = jack_get_sample_rate(client);
       _segmentSize  = jack_get_buffer_size(client);
-      jack_set_thread_init_callback(client, (JackThreadInitCallback) jack_thread_init, 0);
+      jack_set_thread_init_callback(client, (JackThreadInitCallback) jack_thread_init, this);
 
       // register mscore left/right output ports
       portL = jack_port_register(client, "left",  JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);

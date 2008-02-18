@@ -35,4 +35,17 @@ namespace Awl {
             p.fillRect(r, _color);
             }
 
+      //---------------------------------------------------------
+      //   mousePressEvent
+      //---------------------------------------------------------
+
+      void ColorLabel::mousePressEvent(QMouseEvent* ev)
+            {
+            QColor c = QColorDialog::getColor(_color, this);
+            if (c.isValid()) {
+                  _color = c;
+                  update();
+                  }
+            }
+
       } // namespace Awl

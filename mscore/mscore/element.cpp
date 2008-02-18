@@ -820,7 +820,8 @@ void Cursor::draw(QPainter& p) const
       {
       if (!(_on && _blink))
             return;
-      p.fillRect(abbox(), QBrush(preferences.selectColor[voice()]));
+      int v = track() == -1 ? 0 : voice();
+      p.fillRect(abbox(), QBrush(preferences.selectColor[v]));
       }
 
 //---------------------------------------------------------

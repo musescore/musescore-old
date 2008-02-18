@@ -32,7 +32,7 @@
 
 function init()
       {
-      print("test2 script init");
+      // print("test2 script init");
       }
 
 //---------------------------------------------------------

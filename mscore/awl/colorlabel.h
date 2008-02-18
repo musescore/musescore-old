@@ -32,6 +32,7 @@ namespace Awl {
             QColor _color;
 
             virtual void paintEvent(QPaintEvent*);
+            virtual void mousePressEvent(QMouseEvent*);
 
          public:
             ColorLabel(QWidget* parent = 0) : QFrame (parent) {
