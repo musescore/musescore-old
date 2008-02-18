@@ -379,19 +379,6 @@
             <item>
              <widget class="Awl::ColorLabel" name="bgColorLabel" />
             </item>
-            <item>
-             <widget class="QToolButton" name="bgColorSelect" >
-              <property name="statusTip" >
-               <string>select color</string>
-              </property>
-              <property name="autoFillBackground" >
-               <bool>false</bool>
-              </property>
-              <property name="text" >
-               <string>CS</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
          </layout>
@@ -475,19 +462,6 @@
             </property>
             <item>
              <widget class="Awl::ColorLabel" name="fgColorLabel" />
-            </item>
-            <item>
-             <widget class="QToolButton" name="fgColorSelect" >
-              <property name="statusTip" >
-               <string>select color</string>
-              </property>
-              <property name="autoFillBackground" >
-               <bool>false</bool>
-              </property>
-              <property name="text" >
-               <string>CS</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </item>
@@ -586,46 +560,6 @@
        <property name="verticalSpacing" >
         <number>6</number>
        </property>
-       <item row="2" column="2" >
-        <widget class="QToolButton" name="selectColorSelect3" >
-         <property name="statusTip" >
-          <string>select color</string>
-         </property>
-         <property name="text" >
-          <string>CS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2" >
-        <widget class="QToolButton" name="selectColorSelect4" >
-         <property name="statusTip" >
-          <string>select color</string>
-         </property>
-         <property name="text" >
-          <string>CS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" >
-        <widget class="QToolButton" name="selectColorSelect1" >
-         <property name="statusTip" >
-          <string>select color</string>
-         </property>
-         <property name="text" >
-          <string>CS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2" >
-        <widget class="QToolButton" name="selectColorSelect2" >
-         <property name="statusTip" >
-          <string>select color</string>
-         </property>
-         <property name="text" >
-          <string>CS</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0" >
         <widget class="QLabel" name="label_5" >
          <property name="text" >
@@ -995,6 +929,9 @@
          </property>
          <property name="checkable" >
           <bool>true</bool>
+         </property>
+         <property name="checked" >
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout" >
           <item row="0" column="0" >

@@ -3532,7 +3532,7 @@ failed: </source>
     </message>
     <message>
         <source>Beam properties</source>
-        <translation>Eigenschaften Balken</translation>
+        <translation>Balken</translation>
     </message>
     <message>
         <source>load style</source>

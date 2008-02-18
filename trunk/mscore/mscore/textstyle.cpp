@@ -64,7 +64,6 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(topV,          SIGNAL(clicked()), SLOT(alignTopV()));
       connect(bottomV,       SIGNAL(clicked()), SLOT(alignBottomV()));
       connect(centerV,       SIGNAL(clicked()), SLOT(alignCenterV()));
-      connect(borderColorSelect, SIGNAL(clicked()), SLOT(selectBorderColor()));
 
       QButtonGroup* bg = new QButtonGroup(this);
       bg->setExclusive(true);
@@ -179,7 +178,6 @@ void TextStyleDialog::nameSelected(int n)
             centerV->setChecked(true);
       else
             topV->setChecked(true);
-//TODO      referencePos->setCurrentIndex(s->anchor);
 
       QString str;
       if (s->offsetType == OFFSET_ABS) {
@@ -218,9 +216,9 @@ void TextStyleDialog::nameSelected(int n)
             }
       borderColor->setColor(s->frameColor);
       borderWidth->setValue(s->frameWidth);
-//      marginWidth->setValue(s->marginWidth);
       paddingWidth->setValue(s->paddingWidth);
       frameRound->setValue(s->frameRound);
+      circleButton->setChecked(s->circle);
       current = n;
       }
 
@@ -274,7 +272,6 @@ void TextStyleDialog::saveStyle(int n)
       s->italic       = fontItalic->isChecked();
       s->underline    = fontUnderline->isChecked();
       s->size         = fontSize->value();
-//      s->anchor       = (Anchor)(referencePos->currentIndex());
       s->family       = strdup(fontName->currentText().toLatin1().data());  // memory leak
       s->xoff         = xOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
       s->yoff         = yOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
@@ -282,8 +279,8 @@ void TextStyleDialog::saveStyle(int n)
       s->ryoff        = ryOffset->value();
       s->frameColor   = borderColor->color();
       s->frameWidth   = borderWidth->value();
-//      s->marginWidth  = marginWidth->value();
       s->paddingWidth = paddingWidth->value();
+      s->circle       = circleButton->isChecked();
       s->frameRound   = frameRound->value();
       }
 
@@ -309,17 +306,5 @@ void TextStyleDialog::apply()
       cs->setLayoutAll(true);
       cs->endCmd();
       cs->setDirty(true);
-      }
-
-//---------------------------------------------------------
-//   selectBorderColor
-//---------------------------------------------------------
-
-void TextStyleDialog::selectBorderColor()
-      {
-      QColor c = QColorDialog::getColor(borderColor->color(), this);
-      if (c.isValid()) {
-            borderColor->setColor(c);
-            }
       }
 

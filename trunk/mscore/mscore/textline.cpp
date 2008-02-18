@@ -25,6 +25,7 @@
 #include "utils.h"
 #include "layout.h"
 #include "score.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -104,11 +105,9 @@ void TextLineSegment::draw(QPainter& p) const
 
       QPointF pp2(pos2());
 
-//      qreal h = 0.0;
       qreal w = 0.0;
       if (_text) {
             QRectF bb(_text->bbox());
-//            h = bb.height() * .5 - textlineLineWidth * .5;
             w = bb.width();
             }
 
@@ -117,6 +116,11 @@ void TextLineSegment::draw(QPainter& p) const
       QPen pen(p.pen());
       pen.setWidthF(textlineLineWidth);
       pen.setStyle(textLine()->lineStyle());
+
+      if (selected() && !(score() && score()->printing()))
+            pen.setColor(preferences.selectColor[0]);
+      else
+            pen.setColor(textLine()->lineColor());
 
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
@@ -181,6 +185,7 @@ TextLine::TextLine(Score* s)
       _lineWidth  = Spatium(0.15);
       _lineStyle  = Qt::SolidLine;
       _hookUp     = false;
+      _lineColor  = Qt::black;
       }
 
 TextLine::TextLine(const TextLine& e)
@@ -191,6 +196,7 @@ TextLine::TextLine(const TextLine& e)
       _lineWidth  = e._lineWidth;
       _lineStyle  = e._lineStyle;
       _hookUp     = e._hookUp;
+      _lineColor  = e._lineColor;
       }
 
 //---------------------------------------------------------
@@ -222,6 +228,7 @@ void TextLine::write(Xml& xml) const
       xml.tag("lineWidth", _lineWidth.val());
       xml.tag("lineStyle", _lineStyle);
       xml.tag("hookUp", _hookUp);
+      xml.tag("lineColor", _lineColor);
 
       SLine::writeProperties(xml);
       _text->writeProperties(xml);
@@ -245,6 +252,8 @@ void TextLine::read(QDomElement e)
                   _lineStyle = Qt::PenStyle(text.toInt());
             else if (tag == "hookUp")
                   _hookUp = text.toInt();
+            else if (tag == "lineColor")
+                  _lineColor = readColor(e);
             else if (_text->readProperties(e))
                   ;
             else if (!SLine::readProperties(e))
@@ -268,7 +277,6 @@ LineSegment* TextLine::createLineSegment()
 
 bool TextLineSegment::genPropertyMenu(QMenu* popup) const
       {
-      Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Properties..."));
       a->setData("props");
       return true;
@@ -301,6 +309,20 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       hookHeight->setValue(tl->hookHeight().val());
       up->setChecked(tl->hookUp());
       lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
+      text->setText(tl->text());
+      linecolor->setColor(tl->lineColor());
+      TextBase* tb = tl->textBase();
+      textFont->setCurrentFont(tb->defaultFont());
+      textSize->setValue(tb->defaultFont().pointSizeF());
+      if (tb->frameWidth()) {
+            frame->setChecked(true);
+            frameWidth->setValue(tb->frameWidth());
+            frameMargin->setValue(tb->paddingWidth());
+            frameColor->setColor(tb->frameColor());
+            frameCircled->setChecked(tb->circle());
+            }
+      else
+            frame->setChecked(false);
       }
 
 //---------------------------------------------------------
@@ -313,6 +335,20 @@ void LineProperties::accept()
       tl->setHookHeight(Spatium(hookHeight->value()));
       tl->setHookUp(up->isChecked());
       tl->setLineStyle(Qt::PenStyle(lineStyle->currentIndex() + 1));
+      tl->setLineColor(linecolor->color());
+      TextBase* tb = tl->textBase();
+      QFont f(textFont->currentFont());
+      f.setPointSizeF(textSize->value());
+      tb->setDefaultFont(f);
+      if (frame->isChecked()) {
+            tb->setFrameWidth(frameWidth->value());
+            tb->setPaddingWidth(frameMargin->value());
+            tb->setFrameColor(frameColor->color());
+            tb->setCircle(frameCircled->isChecked());
+            }
+      else
+            tb->setFrameWidth(0.0);
+      tl->setText(text->text());
+
       QDialog::accept();
       }
-
