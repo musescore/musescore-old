@@ -54,14 +54,14 @@
 #include "tempotext.h"
 
 static const char* keyNames[] = {
-      "G major, E minor",   "Cb major, Ab minor",
-      "D major, B minor",   "Gb major, Eb minor",
-      "A major, F# minor",  "Db major, Bb minor",
-      "E major, C# minor",  "Ab major, F minor",
-      "B major, G# minor",  "Eb major, C minor",
-      "F# major, D# minor", "Bb major, G minor",
-      "C# major, A minor",  "F major,  D minor",
-      "C major, A minor"
+      QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),   QT_TRANSLATE_NOOP("MuseScore", "Cb major, Ab minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "D major, B minor"),   QT_TRANSLATE_NOOP("MuseScore", "Gb major, Eb minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "A major, F# minor"),  QT_TRANSLATE_NOOP("MuseScore", "Db major, Bb minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "E major, C# minor"),  QT_TRANSLATE_NOOP("MuseScore", "Ab major, F minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "B major, G# minor"),  QT_TRANSLATE_NOOP("MuseScore", "Eb major, C minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "F# major, D# minor"), QT_TRANSLATE_NOOP("MuseScore", "Bb major, G minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "C# major, A# minor"), QT_TRANSLATE_NOOP("MuseScore", "F major,  D minor"),
+      QT_TRANSLATE_NOOP("MuseScore", "C major, A minor")
       };
 
 //---------------------------------------------------------
@@ -120,12 +120,12 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->addObject(i,  k, keyNames[i*2]);
+                  sp->addObject(i,  k, tr(keyNames[i*2]));
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->addObject(14 + i,  k, keyNames[(7 + i) * 2 + 1]);
+                  sp->addObject(14 + i,  k, tr(keyNames[(7 + i) * 2 + 1]));
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
@@ -150,8 +150,8 @@ void MuseScore::showPalette(bool visible)
       	sp->addObject(7,   new TimeSig(gscore, 8, 6), "6/8");
       	sp->addObject(8,   new TimeSig(gscore, 8, 9), "9/8");
       	sp->addObject(9,   new TimeSig(gscore, 8, 12), "12/8");
-      	sp->addObject(10,  new TimeSig(gscore, TSIG_FOUR_FOUR), "4/4 common time");
-      	sp->addObject(11,  new TimeSig(gscore, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
+      	sp->addObject(10,  new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
+      	sp->addObject(11,  new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
             paletteBox->addPalette(tr("Time"), sp);
 
             //-----------------------------------
@@ -505,8 +505,6 @@ void MuseScore::showPalette(bool visible)
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_TOCODA);
             sp->addObject(12, mk, tr("To Coda"));
-
-//                  "alSegno"
 
             paletteBox->addPalette(tr("Repeats"), sp);
 
