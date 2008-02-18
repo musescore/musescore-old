@@ -1473,7 +1473,6 @@ int main(int argc, char* argv[])
       QString lp = mscoreGlobalShare + "/locale/" + QString("mscore_") + localeName;
       translator.load(lp);
       app.installTranslator(&translator);
-printf("Translator installed\n");
       //
       // initialize shortcut hash table
       //

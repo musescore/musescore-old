@@ -341,6 +341,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       {
       setupUi(this);
 
+      useMidiOutput->setChecked(preferences.useMidiOutput);
+      useSynthesizer->setChecked(!preferences.useMidiOutput);
+
 #ifndef USE_JACK
       jackDriver->setEnabled(false);
 #endif
