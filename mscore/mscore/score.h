@@ -246,6 +246,8 @@ class Score : public QObject {
       void cmdAddStretch(double);
       void transpose();
 
+      Rest* addRest(int tick, int len, int track);
+
    public:
       Score();
       ~Score();
@@ -307,7 +309,7 @@ class Score : public QObject {
       void setNote(int tick, int track, int pitch, int len);
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
-      Rest* setRest(int tick, int len, int track, Measure*);
+      Rest* setRest(int tick, int len, int track);
       bool setRest(int tick, int track, int len, bool useDots);
       Canvas* canvas() const;
 

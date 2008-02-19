@@ -78,6 +78,7 @@ class Driver {
       virtual void putEvent(const MidiOutEvent&) = 0;
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
+      virtual void heartBeat() {}
       };
 
 #endif

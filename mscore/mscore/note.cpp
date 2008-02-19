@@ -207,7 +207,9 @@ void Note::changePitch(int n)
 
 /**
  Sets a "user selected" accidental.
- This recomputes _pitch and _tpc.
+ This recomputes _pitch and _tpc. If the accidental is
+ redundant, it is set as an editorial accidental
+ "userAccidental"
 */
 
 void Note::changeAccidental(int accType)
@@ -217,9 +219,17 @@ void Note::changeAccidental(int accType)
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
-      int acc2  = accidentalSubtype();
-      if (accType != acc2)
-            _userAccidental = accType;    // bracketed editorial accidental
+
+      // compute the "normal" accidental of this note in
+      // measure context:
+      Measure* m = chord()->measure();
+      int type2  = m->findAccidental(this);
+
+      // if the accidentals differ, this which means acc1 is
+      // redundant and is set as an editorial accidental
+
+      if (accType != type2)
+            _userAccidental = accType;    // editorial accidental
       }
 
 //---------------------------------------------------------

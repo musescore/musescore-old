@@ -1,3 +1,7 @@
+19.2.8 (ws)
+      - change the order of created rests to "longest first" when filling
+        a time gap (tracker item 1896512)
+      - fix entry of "editorial accidentals" (tracker item 1896506)
 18.2.8 (ws)
       - fixed missing initialization in alsa driver
       - make key signature names translatable, add german translation

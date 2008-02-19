@@ -448,68 +448,17 @@ bool DummyAudio::init()
                   }
             }
 
-      midiSeq = new MidiSeq(midiDriver, "Midi");
-      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
+      midiSeq = new MidiSeq(this, midiDriver, "Midi");
       return true;
       }
 
 //---------------------------------------------------------
-//   dummyLoop
+//   heartBeat
 //---------------------------------------------------------
 
-void* DummyAudio::loop(void* pa)
+void DummyAudio::heartBeat()
       {
-      DummyAudio* da = (DummyAudio*)pa;
-
-      if (da->realTimePriority) {
-            struct sched_param rt_param;
-            memset(&rt_param, 0, sizeof(rt_param));
-	      int prio     = da->realTimePriority;
-            int prio_min = sched_get_priority_min(SCHED_FIFO);
-            int prio_max = sched_get_priority_max(SCHED_FIFO);
-            if (prio < prio_min)
-                  prio = prio_min;
-            else if (prio > prio_max)
-                  prio = prio_max;
-            rt_param.sched_priority = prio;
-
-            pthread_t tid = pthread_self();
-            int rv = pthread_setschedparam(tid, SCHED_FIFO, &rt_param);
-            if (rv != 0)
-                  perror("set realtime scheduler");
-
-
-            //
-            // check if we really got realtime priviledges
-            //
-            int policy;
-            if ((policy = sched_getscheduler (0)) < 0)
-                  printf("cannot get current client scheduler for audio dummy thread: %s!\n", strerror(errno));
-            else {
-                  if (policy != SCHED_FIFO) {
-                        printf("audio dummy thread _NOT_ running SCHED_FIFO\n");
-                        if (debugMode) {
-                              struct sched_param rt_param;
-                              memset(&rt_param, 0, sizeof(sched_param));
-                              int type;
-                              int rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
-                              if (rv == -1)
-                                    perror("get scheduler parameter");
-                              printf("audio dummy thread running SCHED_FIFO priority %d\n",
-                              rt_param.sched_priority);
-                              }
-                        }
-                  }
-            }
-      long int ns = 20000000;       // 20ms
-      for (;;) {
-            da->seq->processMidi();
-            struct timespec cr;
-            cr.tv_sec  = 0;
-            cr.tv_nsec = ns;
-            nanosleep(&cr, 0);
-            }
-      pthread_exit(0);
+      seq->processMidi();
       }
 
 //---------------------------------------------------------
@@ -518,30 +467,7 @@ void* DummyAudio::loop(void* pa)
 
 bool DummyAudio::start()
       {
-      pthread_attr_t* attributes = 0;
-
-      if (realTimePriority) {
-            attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
-            pthread_attr_init(attributes);
-
-            if (pthread_attr_setschedpolicy(attributes, SCHED_FIFO)) {
-                  printf("cannot set FIFO scheduling class for RT thread\n");
-                  }
-            if (pthread_attr_setscope (attributes, PTHREAD_SCOPE_SYSTEM)) {
-                  printf("Cannot set scheduling scope for RT thread\n");
-                  }
-            struct sched_param rt_param;
-            memset(&rt_param, 0, sizeof(rt_param));
-            rt_param.sched_priority = realTimePriority;
-            if (pthread_attr_setschedparam (attributes, &rt_param)) {
-                  printf("Cannot set scheduling priority %d for RT thread (%s)\n",
-                     realTimePriority, strerror(errno));
-                  }
-            }
-      if (pthread_create(&dummyThread, attributes, loop, this))
-            perror("creating thread failed:");
-      if (realTimePriority)
-            pthread_attr_destroy(attributes);
+      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
       return true;
       }
 
@@ -551,8 +477,7 @@ bool DummyAudio::start()
 
 bool DummyAudio::stop()
       {
-      pthread_cancel(dummyThread);
-      pthread_join(dummyThread, 0);
+      midiSeq->stop(true);
       return true;
       }
 
@@ -591,14 +516,6 @@ void DummyAudio::stopTransport()
 void DummyAudio::putEvent(const MidiOutEvent& e)
       {
       midiSeq->putEvent(e);
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void DummyAudio::process(int, float*, float*, int)
-      {
       }
 
 //---------------------------------------------------------

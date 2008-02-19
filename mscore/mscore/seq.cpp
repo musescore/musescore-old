@@ -484,7 +484,7 @@ void Seq::startTransport()
             return;
       if (!pauseState)
             emit toGui('1');
-      state = PLAY;
+      state     = PLAY;
       startTime = curTime();
       }
 
@@ -598,7 +598,7 @@ void Seq::processMidi()
             //
             // collect events for one segment
             //
-            double endTime = curTime() + 0.040;       // 40msec
+            double endTime = curTime() + (512.0 / preferences.rtcTicks);
 
             for (; playPos != events.constEnd(); ++playPos) {
                   double t = startTime + tick2time(playPos.key());
@@ -761,6 +761,8 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
+      driver->heartBeat();
+
       if (guiPos == playPos)
             return;
       cs->start();
@@ -776,7 +778,8 @@ void Seq::heartBeat()
                   }
             }
       else {
-            for (EventMap::const_iterator i = guiPos; i != playPos; ++i) {
+            EventMap::const_iterator e = playPos;
+            for (EventMap::const_iterator i = guiPos; i != e; ++i) {
                   if (i.value()->type() == ME_NOTEON) {
                         NoteOn* n = (NoteOn*)i.value();
                         n->note()->setSelected(n->velo());
