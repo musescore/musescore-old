@@ -131,86 +131,98 @@ void Score::changeRest(Rest* rest, int /*tick*/, int len)
       }
 
 //---------------------------------------------------------
-//   setRest
+//   addRest
+//    create one Rest at tick with len
+//    create segment if necessary
 //---------------------------------------------------------
 
-Rest* Score::setRest(int tick, int len, int track, Measure* measure)
+Rest* Score::addRest(int tick, int len, int track)
+      {
+      Measure* measure = tick2measure(tick);
+      Rest* rest = new Rest(this, tick, len);
+      rest->setTrack(track);
+      Segment::SegmentType st = Segment::segmentType(rest->type());
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoAddElement(seg);
+            }
+      rest->setParent(seg);
+      cmdAdd(rest);
+      return rest;
+      }
+
+//---------------------------------------------------------
+//   setRest
+//    create one or more rests to fill "len" ticks
+//---------------------------------------------------------
+
+Rest* Score::setRest(int tick, int len, int track)
       {
       Rest* rest = 0;
       if (len / (division*4)) {
+            rest = addRest(tick, division*4, track);
             int nlen =  len % (division*4);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division*4, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division*4);
             }
       else if (len / (division*2)) {
+            rest = addRest(tick, division*2, track);
             int nlen =  len % (division*2);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division*2, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division*2);
             }
       else if (len / division) {
+            rest = addRest(tick, division, track);
             int nlen =  len % (division);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division);
             }
       else if (len / (division/2)) {
+            rest = addRest(tick, division/2, track);
             int nlen = len % (division/2);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division/2, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division/2);
             }
       else if (len / (division/4)) {
+            rest = addRest(tick, division/4, track);
             int nlen = len % (division/4);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division/4, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division/4);
             }
       else if (len / (division/8)) {
+            rest = addRest(tick, division/8, track);
             int nlen = len % (division/8);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division/8, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division/8);
             }
       else if (len / (division/16)) {
+            rest = addRest(tick, division/16, track);
             int nlen = len % (division/16);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division/16, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division/16);
             }
       else if (len / (division/32)) {
+            rest = addRest(tick, division/32, track);
             int nlen = len % (division/32);
             if (nlen) {
-                  setRest(tick, nlen, track, measure);
+                  setRest(tick + division/32, nlen, track);
                   tick += nlen;
                   }
-            rest = new Rest(this, tick, division/32);
-            }
-      if (rest) {
-            rest->setTrack(track);
-            Segment::SegmentType st = Segment::segmentType(rest->type());
-            Segment* seg = measure->findSegment(st, tick);
-            if (seg == 0) {
-                  seg = measure->createSegment(st, tick);
-                  undoAddElement(seg);
-                  }
-            rest->setParent(seg);
-            cmdAdd(rest);
             }
       return rest;
       }

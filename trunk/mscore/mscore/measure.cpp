@@ -451,6 +451,89 @@ void Measure::layout0(int staffIdx)
       }
 
 //---------------------------------------------------------
+//   findAccidental
+//---------------------------------------------------------
+
+int Measure::findAccidental(Note* note)
+      {
+      char tversatz[74];      // list of already set accidentals for this measure
+      int key = note->chord()->staff()->keymap()->key(tick());
+      initLineList(tversatz, key);
+
+      for (Segment* segment = first(); segment; segment = segment->next()) {
+            if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                  continue;
+            int startTrack = note->staffIdx() * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (int track = startTrack; track < endTrack; ++track) {
+                  Element* e = segment->element(track);
+                  if (!e || e->type() != CHORD)
+                        continue;
+                  Chord* chord = (Chord*)e;
+                  if (chord->noteType() != NOTE_NORMAL)
+                        continue;
+
+
+                  Drumset* drumset = 0;
+                  if (chord->staff()->part()->useDrumset())
+                        drumset = chord->staff()->part()->drumset();
+                  NoteList* nl     = chord->noteList();
+                  QList<Note*> notes;
+                  for (iNote in = nl->begin(); in != nl->end(); ++in)
+                        notes.append(in->second);
+
+                  int nNotes  = notes.size();
+                  for (int i = 0; i < nNotes; ++i) {
+                        Note* note1  = notes[i];
+                        int pitch   = note1->pitch();
+
+                        //
+                        // compute accidental
+                        //
+                        int tpc        = note1->tpc();
+                        int line       = tpc2line(tpc) + (pitch/12) * 7;
+                        int tpcPitch   = tpc2pitch(tpc);
+                        if (tpcPitch < 0)
+                              line += 7;
+                        else
+                              line -= (tpcPitch/12)*7;
+
+                        int accidental = 0;
+                        if (note1->userAccidental())
+                              // cannot be note
+                              accidental = note1->userAccidental();
+                        else  {
+                              int accVal = ((tpc + 1) / 7) - 2;
+                              accidental = ACC_NONE;
+                              if (accVal != tversatz[line]) {
+                                    if (note == note1) {
+                                          switch(accVal) {
+                                                case -2: return ACC_FLAT2;
+                                                case -1: return ACC_FLAT;
+                                                case  1: return ACC_SHARP;
+                                                case  2: return ACC_SHARP2;
+                                                case  0: return ACC_NATURAL;
+                                                default:
+                                                      printf("bad accidental\n");
+                                                      return 0;
+                                                }
+                                          }
+                                    if (chord->noteType() == NOTE_NORMAL)
+                                          tversatz[line] = accVal;
+                                    }
+                              else {
+                                    if (note == note1)
+                                          return 0;
+                                    }
+                              }
+                        }
+                  }
+            }
+      printf("note not found\n");
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   Measure::layout
 //---------------------------------------------------------
 

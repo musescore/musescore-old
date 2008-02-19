@@ -27,15 +27,14 @@
 #include "mididriver.h"
 #include "utils.h"
 
-MidiDriver* MidiSeq::midiDriver;
-
 //---------------------------------------------------------
 //   MidiSeq
 //---------------------------------------------------------
 
-MidiSeq::MidiSeq(MidiDriver* driver, const char* name)
+MidiSeq::MidiSeq(DummyAudio* a, MidiDriver* driver, const char* name)
    : Thread(name)
       {
+      da         = a;
       midiDriver = driver;
       timer      = 0;
       }
@@ -94,15 +93,6 @@ void MidiSeq::threadStart(void*)
       }
 
 //---------------------------------------------------------
-//   midiRead
-//---------------------------------------------------------
-
-static void midiRead(void* a, void* b)
-      {
-//TODO      ((MidiDriver*)a)->read((MidiSeq*)a);
-      }
-
-//---------------------------------------------------------
 //   updatePollFd
 //---------------------------------------------------------
 
@@ -117,12 +107,6 @@ void MidiSeq::updatePollFd()
             if (timerFd != -1)
                   addPollFd(timerFd, POLLIN, midiTick, this, 0);
             }
-
-      struct pollfd* pfd;
-      int n;
-      midiDriver->getInputPollFd(&pfd, &n);
-      for (int i = 0; i < n; ++i)
-            addPollFd(pfd[i].fd, POLLIN, ::midiRead, this, midiDriver);
       }
 
 //---------------------------------------------------------
@@ -174,6 +158,12 @@ void MidiSeq::midiTick(void* p, void*)
       MidiSeq* at = (MidiSeq*)p;
       at->getTimerTicks();    // read elapsed rtc timer ticks
 
+#if 0
+      static int tickNo = 0;
+      if ((tickNo++ % 256) == 0)
+            at->da->collectEvents();
+#endif
+
       while (!at->fifo.isEmpty())
             at->playEvents.insert(at->fifo.get());
 
@@ -187,7 +177,7 @@ void MidiSeq::midiTick(void* p, void*)
       for (; i != at->playEvents.end(); ++i) {
             if (i->time > now)
                   break;
-            midiDriver->write(*i);
+            at->midiDriver->write(*i);
             }
       at->playEvents.erase(at->playEvents.begin(), i);
       }

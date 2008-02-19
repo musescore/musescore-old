@@ -41,6 +41,7 @@ class ChordRest;
 class Score;
 class Viewer;
 class System;
+class Note;
 
 //---------------------------------------------------------
 //   MStaff
@@ -200,6 +201,7 @@ class Measure : public MeasureBase {
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val);
+      int findAccidental(Note*);
       };
 
 #endif

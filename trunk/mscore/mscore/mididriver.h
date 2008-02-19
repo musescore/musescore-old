@@ -84,7 +84,6 @@ class MidiDriver {
 
 class DummyAudio : public Driver {
       float* buffer;
-      pthread_t dummyThread;
       int realTimePriority;
       MidiSeq* midiSeq;
       MidiDriver* midiDriver;
@@ -110,8 +109,9 @@ class DummyAudio : public Driver {
       virtual int sampleRate() const  { return 10000; }
       virtual bool isRealtime() const { return false; }
       virtual void putEvent(const MidiOutEvent&);
-      virtual void process(int, float*, float*, int);
+      virtual void process(int, float*, float*, int) {}
       virtual void midiRead();
+      virtual void heartBeat();
       };
 
 #endif

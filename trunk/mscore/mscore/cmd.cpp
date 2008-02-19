@@ -789,13 +789,13 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             undoAddElement(rest);
             }
       else {
-            rest = setRest(tick, len, track, measure);
+            rest = setRest(tick, len, track);
             }
       if (tuplet)
             rest->setTuplet(tuplet);
       select(rest, 0, 0);
       if (noteLen - len > 0)
-            setRest(tick + len, noteLen - len, track, measure);
+            setRest(tick + len, noteLen - len, track);
       layoutAll = true;
       return true;
       }
