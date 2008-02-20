@@ -211,19 +211,22 @@ void Part::setStaves(int n)
 
 Instrument::Instrument()
       {
-      midiChannel = 0;
-      midiProgram = 0;
-      volume      = 100;
-      pan         = 64;
-      chorus      = 30;
-      reverb      = 30;
-      mute        = false;
-      solo        = false;
-      minPitch    = 0;
-      maxPitch    = 127;
-      pitchOffset = 0;
-      drumset     = 0;
-      useDrumset  = false;
+      midiChannel     = 0;
+      midiPort        = 0;
+      midiProgram     = 0;
+      midiBankSelectH = -1;
+      midiBankSelectL = -1;
+      volume          = 100;
+      pan             = 64;
+      chorus          = 30;
+      reverb          = 30;
+      mute            = false;
+      solo            = false;
+      minPitch        = 0;
+      maxPitch        = 127;
+      pitchOffset     = 0;
+      drumset         = 0;
+      useDrumset      = false;
       }
 
 //---------------------------------------------------------
@@ -244,9 +247,18 @@ void Part::setUseDrumset(bool val)
 void Instrument::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.tag("midiChannel", midiChannel);
-      xml.tag("midiProgram", midiProgram);
-      xml.tag("volume", volume);
+      if (midiChannel != 0)
+            xml.tag("midiChannel", midiChannel);
+      if (midiPort != 0)
+            xml.tag("midiPort", midiPort);
+      if (midiProgram != 0)
+            xml.tag("midiProgram", midiProgram);
+      if (midiBankSelectH != -1)
+            xml.tag("midiBankSelectH", midiBankSelectH);
+      if (midiBankSelectL != -1)
+            xml.tag("midiBankSelectL", midiBankSelectL);
+      if (volume != 100)
+            xml.tag("volume", volume);
       if (pan != 64)
             xml.tag("pan", pan);
       if (chorus)
@@ -282,8 +294,14 @@ void Instrument::read(QDomElement e)
             int i = val.toInt();
             if (tag == "midiChannel")
                   midiChannel = i;
+            else if (tag == "midiPort")
+                  midiPort = i;
             else if (tag == "midiProgram")
                   midiProgram = i;
+            else if (tag == "midiBankSelectH")
+                  midiBankSelectH = i;
+            else if (tag == "midiBankSelectL")
+                  midiBankSelectL = i;
             else if (tag == "volume")
                   volume = i;
             else if (tag == "pan")

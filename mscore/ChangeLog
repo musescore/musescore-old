@@ -1,3 +1,8 @@
+20.2.8 (ws)
+      - extend staff properties: midi channel, port, bank select
+      - bugfixes for hiding staves:
+            - fixed system brackets related crash
+            - only show slurs for visible staves
 19.2.8 (ws)
       - change the order of created rests to "longest first" when filling
         a time gap (tracker item 1896512)

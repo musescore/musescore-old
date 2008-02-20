@@ -34,17 +34,21 @@ class Drumset;
 //---------------------------------------------------------
 
 struct Instrument {
-      int  midiChannel;
-      int  midiProgram;
-      int  volume;
-      int  pan;
-      int  chorus;
-      int  reverb;
+      char midiChannel;
+      char midiPort;
+      char midiProgram;
+      char midiBankSelectH;
+      char midiBankSelectL;
+      char volume;
+      char pan;
+      char chorus;
+      char reverb;
+      char minPitch;
+      char maxPitch;
+      char pitchOffset;
+
       bool mute;
       bool solo;
-      int  minPitch;
-      int  maxPitch;
-      int  pitchOffset;
       Drumset* drumset;
       bool useDrumset;
 
@@ -97,6 +101,7 @@ class Part {
       void setUseDrumset(bool val);
 
       int midiChannel() const                  { return _instrument.midiChannel; }
+      int midiPort() const                     { return _instrument.midiPort; }
       int midiProgram() const                  { return _instrument.midiProgram; }
       int minPitch() const                     { return _instrument.minPitch;    }
       int maxPitch() const                     { return _instrument.maxPitch;    }

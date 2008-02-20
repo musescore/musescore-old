@@ -141,7 +141,7 @@ void PartEdit::patchChanged(int n)
                   break;
             if (idx == n) {
                   Instrument* i = part->instrument();
-                  seq->setController(i->midiChannel, CTRL_PROGRAM, p->prog);
+                  seq->setController(i->midiPort, i->midiChannel, CTRL_PROGRAM, p->prog);
                   i->midiProgram = p->prog;
                   break;
                   }
@@ -157,7 +157,7 @@ void PartEdit::volChanged(double val)
 // printf("volChanged %d\n", lrint(val));
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiChannel, CTRL_VOLUME, iv);
+      seq->setController(i->midiPort, i->midiChannel, CTRL_VOLUME, iv);
       i->volume = iv;
       }
 
@@ -170,7 +170,7 @@ void PartEdit::panChanged(double val)
 // printf("panChanged %d\n", lrint(val));
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiChannel, CTRL_PANPOT, iv);
+      seq->setController(i->midiPort, i->midiChannel, CTRL_PANPOT, iv);
       i->pan = iv;
       }
 
@@ -183,7 +183,7 @@ void PartEdit::reverbChanged(double val)
 // printf("reverbChanged %d\n", lrint(val));
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiChannel, CTRL_REVERB_SEND, iv);
+      seq->setController(i->midiPort, i->midiChannel, CTRL_REVERB_SEND, iv);
       i->reverb = iv;
       }
 
@@ -196,7 +196,7 @@ void PartEdit::chorusChanged(double val)
 // printf("chorusChanged %d\n", lrint(val));
       Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiChannel, CTRL_CHORUS_SEND, iv);
+      seq->setController(i->midiPort, i->midiChannel, CTRL_CHORUS_SEND, iv);
       i->chorus = iv;
       }
 

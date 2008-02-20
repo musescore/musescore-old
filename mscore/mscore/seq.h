@@ -22,6 +22,7 @@
 #define __SEQ_H__
 
 #include "event.h"
+#include "driver.h"
 
 class Synth;
 class Note;
@@ -50,9 +51,8 @@ enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 
 struct SeqMsg {
       int id;
-      int data1;
-      int data2;
-      int data3;
+      int data;
+      MidiOutEvent midiOutEvent;
       };
 
 //---------------------------------------------------------
@@ -76,7 +76,7 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
       QList<NoteOn*> _activeNotes;        // currently sounding notes
-      int playFrame;
+      double playTime;
       double startTime;
       EventMap::const_iterator playPos, guiPos;
 
@@ -94,8 +94,7 @@ class Seq : public QObject {
 
       void stopTransport();
       void startTransport();
-      int frame2tick(int frame) const;
-      int tick2frame(int tick) const;
+      int time2tick(double) const;
       double tick2time(int tick) const;
       void setPos(int);
       void playEvent(double t, const Event* event);
@@ -140,6 +139,8 @@ class Seq : public QObject {
       bool isRunning() const    { return running; }
       bool isPlaying() const    { return state == PLAY; }
       bool isStopped() const    { return state == STOP; }
+
+      void processMessages();
       void process(unsigned, float*, float*, int stride);
       void processMidi();
       QList<QString> inputPorts();
@@ -148,9 +149,9 @@ class Seq : public QObject {
       float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(int, int, int);
       void startNote(int, int, int, int);
-      void setController(int, int, int);
+      void startNote(int, int, int, int, int);
+      void setController(int, int, int, int);
       void setScore(Score* s);
 
       const MidiPatch* getPatchInfo(int ch, const MidiPatch* p);

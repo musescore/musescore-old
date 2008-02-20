@@ -666,8 +666,10 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setPitch(pitch);
             note->setTrack(track);
 
-            if (seq && mscore->playEnabled())
-                  seq->startNote(note->staff()->midiChannel(), note->pitch(), 64);
+            if (seq && mscore->playEnabled()) {
+                  Staff* staff = note->staff();
+                  seq->startNote(staff->midiPort(), staff->midiChannel(), note->pitch(), 64);
+                  }
 
             if (tie) {
                   tie->setEndNote(note);

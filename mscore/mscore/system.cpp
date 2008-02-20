@@ -159,6 +159,7 @@ void System::layout(ScoreLayout* layout)
             if (!s->show())
                   continue;
             SysStaff* ss = _staves[staffIdx];
+
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {
                         Bracket* b = ss->brackets.takeLast();
@@ -238,8 +239,11 @@ void System::layout(ScoreLayout* layout)
       //---------------------------------------------------
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            SysStaff* ss = _staves[staffIdx];
+            Staff* s = score()->staff(staffIdx);
+            if (!s->show())
+                  continue;
 
+            SysStaff* ss = _staves[staffIdx];
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
                   xo += bracketWidth[i] + _spatium * .25;
@@ -291,6 +295,7 @@ void System::layout2(ScoreLayout* layout)
       int staves = _staves.size();
 
       qreal y = 0.0;
+      int lastStaffIdx = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff    = score()->staff(staffIdx);
             double staffMag = staff->mag();
@@ -305,30 +310,6 @@ void System::layout2(ScoreLayout* layout)
                   dist = std::max(dist, m->distance(staffIdx));
             if (dist > distance(staffIdx))
                   setDistance(staffIdx, dist);
-#if 0
-            //
-            //  layout lyrics separators
-            //
-            foreach(MeasureBase* mb, ml) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = (Measure*)mb;
-
-                  MStaff* ms = m->staffList()->at(staffIdx);
-                  if (ms->lines)
-                        ms->lines->setPos(QPointF(0.0, 0.0));
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        LyricsList* ll = s->lyricsList(staffIdx);
-                        if (!ll)
-                              continue;
-                        foreach(Lyrics* l, *ll) {
-                              if (!l)
-                                   continue;
-                              layoutLyrics(layout, l, s, staffIdx);
-                              }
-                        }
-                  }
-#endif
             SysStaff* s = _staves[staffIdx];
             if (!staff->show()) {
                   s->setbbox(QRectF());
@@ -337,8 +318,9 @@ void System::layout2(ScoreLayout* layout)
             double sHeight = (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
             y += sHeight + s->distance();
+            lastStaffIdx = staffIdx;
             }
-      qreal systemHeight = staff(staves-1)->bbox().bottom();
+      qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();
       setHeight(systemHeight);
       foreach(MeasureBase* m, ml) {
             if (m->type() == MEASURE || m->type() == HBOX)
@@ -365,6 +347,9 @@ void System::layout2(ScoreLayout* layout)
             bracketWidth[i] = 0.0;
 
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            Staff* s = score()->staff(staffIdx);
+            if (!s->show())
+                  continue;
             SysStaff* ss = _staves[staffIdx];
 
             double xo = 0.0;
