@@ -83,6 +83,7 @@ class Staff {
       const QTextDocument& longName() const;
       const QTextDocument& shortName() const;
       int midiChannel() const;
+      int midiPort() const;
       int midiProgram() const;
       int volume() const;
       int reverb() const;

@@ -226,21 +226,12 @@ int Seq::sampleRate() const
       }
 
 //---------------------------------------------------------
-//   frame2tick
+//   time2tick
 //---------------------------------------------------------
 
-int Seq::frame2tick(int frame) const
+int Seq::time2tick(double time) const
       {
-      return cs->tempomap->time2tick(double(frame) / sampleRate());
-      }
-
-//---------------------------------------------------------
-//   tick2frame
-//---------------------------------------------------------
-
-int Seq::tick2frame(int tick) const
-      {
-      return int(cs->tempomap->tick2time(tick) * sampleRate());
+      return cs->tempomap->time2tick(time);
       }
 
 //---------------------------------------------------------
@@ -485,7 +476,7 @@ void Seq::startTransport()
       if (!pauseState)
             emit toGui('1');
       state     = PLAY;
-      startTime = curTime();
+      startTime = curTime() - playTime;
       }
 
 //---------------------------------------------------------
@@ -535,6 +526,35 @@ void Seq::playEvent(double t, const Event* event)
       }
 
 //---------------------------------------------------------
+//   processMessages
+//---------------------------------------------------------
+
+void Seq::processMessages()
+      {
+      QMutexLocker locker(&mutex);
+      while (!toSeq.isEmpty()) {
+            SeqMsg msg = toSeq.dequeue();
+            switch(msg.id) {
+                  case SEQ_TEMPO_CHANGE:
+                        {
+                        int tick = time2tick(playTime);
+                        cs->tempomap->setRelTempo(msg.data);
+                        playTime = tick2time(tick);
+                        startTime = curTime() - playTime;
+                        }
+                        break;
+
+                  case SEQ_PLAY:
+                        driver->putEvent(msg.midiOutEvent);
+                        break;
+                  case SEQ_SEEK:
+                        setPos(msg.data);
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   processMidi
 //---------------------------------------------------------
 
@@ -553,47 +573,8 @@ void Seq::processMidi()
             printf("Driver: state transition %d -> %d ?\n",
                state, driverState);
 
-      QMutexLocker locker(&mutex);
-      while (!toSeq.isEmpty()) {
-            SeqMsg msg = toSeq.dequeue();
-            switch(msg.id) {
-                  case SEQ_TEMPO_CHANGE:
-                        {
-                        int tick = frame2tick(playFrame);
-                        cs->tempomap->setRelTempo(msg.data1);
-                        playFrame = tick2frame(tick);
-                        }
-                        break;
+      processMessages();
 
-                  case SEQ_PLAY:
-                        {
-                        int channel = msg.data1 & 0xf;
-                        int type    = msg.data1 & 0xf0;
-                        if (type == ME_NOTEON) {
-                              MidiOutEvent e;
-                              e.time = 0;
-                              e.port = 0;
-                              e.type = ME_NOTEON | channel;
-                              e.a    = msg.data2;
-                              e.b    = msg.data3;
-                              driver->putEvent(e);
-                              }
-                        else if (type == ME_CONTROLLER) {
-                              MidiOutEvent e;
-                              e.time = 0;
-                              e.port = 0;
-                              e.type = ME_CONTROLLER | channel;
-                              e.a    = msg.data2;
-                              e.b    = msg.data3;
-                              driver->putEvent(e);
-                              }
-                        }
-                        break;
-                  case SEQ_SEEK:
-                        setPos(msg.data1);
-                        break;
-                  }
-            }
       if (state == PLAY) {
             //
             // collect events for one segment
@@ -601,7 +582,8 @@ void Seq::processMidi()
             double endTime = curTime() + (512.0 / preferences.rtcTicks);
 
             for (; playPos != events.constEnd(); ++playPos) {
-                  double t = startTime + tick2time(playPos.key());
+                  playTime = tick2time(playPos.key());
+                  double t = startTime + playTime;
                   if (t >= endTime)
                         break;
                   playEvent(t, playPos.value());
@@ -635,73 +617,28 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       float* l = lbuffer;
       float* r = rbuffer;
 
-      QMutexLocker locker(&mutex);
-      while (!toSeq.isEmpty()) {
-            SeqMsg msg = toSeq.dequeue();
-            switch(msg.id) {
-                  case SEQ_TEMPO_CHANGE:
-                        {
-                        int tick = frame2tick(playFrame);
-                        cs->tempomap->setRelTempo(msg.data1);
-                        playFrame = tick2frame(tick);
-                        }
-                        break;
-
-                  case SEQ_PLAY:
-                        {
-                        int channel = msg.data1 & 0xf;
-                        int type    = msg.data1 & 0xf0;
-                        if (type == ME_NOTEON) {
-                              MidiOutEvent e;
-                              e.time = 0;
-                              e.port = 0;
-                              e.type = ME_NOTEON | channel;
-                              e.a    = msg.data2;
-                              e.b    = msg.data3;
-                              driver->putEvent(e);
-                              }
-                        else if (type == ME_CONTROLLER) {
-                              MidiOutEvent e;
-                              e.time = 0;
-                              e.port = 0;
-                              e.type = ME_CONTROLLER | channel;
-                              e.a    = msg.data2;
-                              e.b    = msg.data3;
-                              driver->putEvent(e);
-                              }
-                        }
-                  case SEQ_SEEK:
-                        setPos(msg.data1);
-                        break;
-                  }
-            }
+      processMessages();
 
       if (state == PLAY) {
             //
             // collect events for one segment
             //
-            int endFrame = playFrame + frames;
+            double endTime = playTime + double(frames)/double(sampleRate());
             for (; playPos != events.constEnd(); ++playPos) {
-                  int f = tick2frame(playPos.key());
-                  if (f >= endFrame)
+                  double f = tick2time(playPos.key());
+                  if (f >= endTime)
                         break;
-
-                  int n = f - playFrame;
-                  if (n < 0 || n > int(frames)) {
-                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
-                           playPos.key(), n, frames, f, playFrame);
-                        break;
-                        }
+                  int n = lrint((f - playTime) * sampleRate());
                   driver->process(n, l, r, stride);
                   l         += n * stride;
                   r         += n * stride;
-                  playFrame += n;
+                  playTime += double(n)/double(sampleRate());
                   frames    -= n;
                   playEvent(0, playPos.value());
                   }
             if (frames) {
                   driver->process(frames, l, r, stride);
-                  playFrame += frames;
+                  playTime += double(frames)/double(sampleRate());
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
@@ -732,11 +669,13 @@ void Seq::collectEvents()
 
       foreach(Part* part, *cs->parts()) {
             int channel = part->midiChannel();
-            setController(channel, CTRL_PROGRAM, part->midiProgram());
-            setController(channel, CTRL_VOLUME, part->volume());
-            setController(channel, CTRL_REVERB_SEND, part->reverb());
-            setController(channel, CTRL_CHORUS_SEND, part->chorus());
-            setController(channel, CTRL_PANPOT, part->pan());
+            int port    = part->midiPort();
+
+            setController(port, channel, CTRL_PROGRAM, part->midiProgram());
+            setController(port, channel, CTRL_VOLUME, part->volume());
+            setController(port, channel, CTRL_REVERB_SEND, part->reverb());
+            setController(port, channel, CTRL_CHORUS_SEND, part->chorus());
+            setController(port, channel, CTRL_PANPOT, part->pan());
             }
 
       cs->toEList(&events, 0);
@@ -817,7 +756,7 @@ void Seq::setVolume(float val)
 void Seq::setRelTempo(int relTempo)
       {
       SeqMsg msg;
-      msg.data1 = relTempo;
+      msg.data = relTempo;
       msg.id    = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
@@ -832,6 +771,7 @@ void Seq::setRelTempo(int relTempo)
 
 //---------------------------------------------------------
 //   setPos
+//    seek
 //---------------------------------------------------------
 
 void Seq::setPos(int tick)
@@ -848,20 +788,22 @@ void Seq::setPos(int tick)
             n->note()->setSelected(false);
             }
       _activeNotes.clear();
-      playFrame = tick2frame(tick);
+      playTime  = tick2time(tick);
+      startTime = curTime() - playTime;
       playPos   = events.lowerBound(tick);
       guiPos    = events.end();     // special case so signal heartBeat a seek
       }
 
 //---------------------------------------------------------
 //   seek
+//    send seek message to sequencer
 //---------------------------------------------------------
 
 void Seq::seek(int tick)
       {
       cs->setPlayPos(tick);
       SeqMsg msg;
-      msg.data1 = tick;
+      msg.data = tick;
       msg.id    = SEQ_SEEK;
       guiToSeq(msg);
       }
@@ -870,14 +812,16 @@ void Seq::seek(int tick)
 //   startNote
 //---------------------------------------------------------
 
-void Seq::startNote(int channel, int pitch, int velo)
+void Seq::startNote(int port, int channel, int pitch, int velo)
       {
       if (state != STOP)
             return;
       SeqMsg msg;
-      msg.data1 = ME_NOTEON | channel;
-      msg.data2 = pitch;
-      msg.data3 = velo;
+      msg.midiOutEvent.time = 0.0;
+      msg.midiOutEvent.port = port;
+      msg.midiOutEvent.type = ME_NOTEON | channel;
+      msg.midiOutEvent.a    = pitch;
+      msg.midiOutEvent.a    = velo;
       msg.id    = SEQ_PLAY;
       guiToSeq(msg);
 
@@ -888,9 +832,9 @@ void Seq::startNote(int channel, int pitch, int velo)
       eventList.append(e);
       }
 
-void Seq::startNote(int channel, int pitch, int velo, int duration)
+void Seq::startNote(int port, int channel, int pitch, int velo, int duration)
       {
-      startNote(channel, pitch, velo);
+      startNote(port, channel, pitch, velo);
       playTimer->start(duration);
       }
 
@@ -904,10 +848,12 @@ void Seq::stopNotes()
             if (event->type() == ME_NOTEON) {
                   NoteOn* n = (NoteOn*)event;
                   SeqMsg msg;
-                  msg.data1 = ME_NOTEON | n->channel();
-                  msg.data2 = n->pitch();
-                  msg.data3 = 0;
-                  msg.id    = SEQ_PLAY;
+                  msg.id                = SEQ_PLAY;
+                  msg.midiOutEvent.time = 0.0;
+                  msg.midiOutEvent.port = n->port();
+                  msg.midiOutEvent.type = ME_NOTEON | n->channel();
+                  msg.midiOutEvent.a    = n->pitch();
+                  msg.midiOutEvent.a    = 0;
                   guiToSeq(msg);
                   }
             delete event;
@@ -919,13 +865,15 @@ void Seq::stopNotes()
 //   setController
 //---------------------------------------------------------
 
-void Seq::setController(int channel, int ctrl, int data)
+void Seq::setController(int port, int channel, int ctrl, int data)
       {
       SeqMsg msg;
-      msg.data1 = 0xb0 | channel;
-      msg.data2 = ctrl;
-      msg.data3 = data;
       msg.id    = SEQ_PLAY;
+      msg.midiOutEvent.time = 0.0;
+      msg.midiOutEvent.port = port;
+      msg.midiOutEvent.type = ME_CONTROLLER | channel;
+      msg.midiOutEvent.a    = ctrl;
+      msg.midiOutEvent.a    = data;
       guiToSeq(msg);
       }
 

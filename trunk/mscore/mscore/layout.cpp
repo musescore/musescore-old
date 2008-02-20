@@ -217,21 +217,18 @@ void ScoreLayout::doLayout()
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (const Element* element, _gel)
+      foreach (const Element* element, _gel) {
+            if (element->track() != -1) {
+                  if (!element->staff()->show())
+                        continue;
+                  }
             element->collectElements(el);
+            }
 
       int depth = intmaxlog(el.size());
       bspTree.initialize(r, depth);
-//      int maxTrack = _score->nstaves() * VOICES;
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
-#if 0
-            if (e->track() != -1 && e->track() >= maxTrack) {
-                  printf("bad element %s %d\n", e->name(), e->track());
-                  // abort();
-                  ((Element*)e)->setTrack(0);
-                  }
-#endif
             bspTree.insert(e);
             }
       }

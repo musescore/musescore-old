@@ -1445,6 +1445,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
       Part* prt       = part(staffIdx);
       int pitchOffset = prt->pitchOffset();
       int channel     = prt->midiChannel();
+      int port        = prt->midiPort();
 
       for (int voice = 0; voice < VOICES; ++voice) {
             int track = staffIdx * VOICES + voice;
@@ -1513,6 +1514,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         ev->setVelo(60);
                         ev->setNote(note);
                         ev->setChannel(channel);
+                        ev->setPort(port);
                         events->insertMulti(tick + tickOffset, ev);
 
                         ev = new NoteOn();
@@ -1520,6 +1522,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         ev->setVelo(0);
                         ev->setNote(note);
                         ev->setChannel(channel);
+                        ev->setPort(port);
                         events->insertMulti(tick + len + tickOffset, ev);
                         }
                   }
