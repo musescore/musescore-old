@@ -62,6 +62,7 @@
 #include "box.h"
 #include "utils.h"
 #include "mididriver.h"
+#include "excerpt.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -205,6 +206,7 @@ Canvas* Score::canvas() const
 
 void Score::clear()
       {
+      _excerpt        = 0;
       _padState.pitch = 60;
       info.setFile("");
       _dirty          = false;
@@ -330,6 +332,9 @@ void Score::write(Xml& xml)
       tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
+printf("write %d excerpts\n", _excerpts.size());
+      foreach(const Excerpt* excerpt, _excerpts)
+            excerpt->write(xml);
       foreach(Element* el, _layout->_gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {

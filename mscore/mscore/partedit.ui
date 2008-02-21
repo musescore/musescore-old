@@ -5,9 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>438</width>
-    <height>117</height>
+    <width>408</width>
+    <height>88</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
@@ -30,6 +36,12 @@
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title" >
       <string/>
      </property>
@@ -37,15 +49,39 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
+      <property name="leftMargin" >
+       <number>1</number>
+      </property>
+      <property name="topMargin" >
+       <number>1</number>
+      </property>
+      <property name="rightMargin" >
+       <number>1</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>1</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing" >
+       <number>0</number>
+      </property>
       <item row="0" column="0" >
        <widget class="QLineEdit" name="partName" />
       </item>
       <item rowspan="3" row="0" column="1" >
        <layout class="QGridLayout" >
+        <property name="horizontalSpacing" >
+         <number>0</number>
+        </property>
+        <property name="verticalSpacing" >
+         <number>0</number>
+        </property>
         <item row="0" column="0" >
          <widget class="Awl::Knob" name="volume" >
           <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -77,7 +113,7 @@
         <item row="0" column="1" >
          <widget class="Awl::MidiPanKnob" name="pan" >
           <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -90,7 +126,7 @@
         <item row="0" column="2" >
          <widget class="Awl::Knob" name="reverb" >
           <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -112,7 +148,7 @@
         <item row="0" column="3" >
          <widget class="Awl::Knob" name="chorus" >
           <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>

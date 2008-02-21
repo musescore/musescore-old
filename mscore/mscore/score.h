@@ -62,6 +62,7 @@ class Volta;
 class BBTrack;
 class MidiEvent;
 struct MNote;
+class Excerpt;
 
 struct Style;
 struct SigEvent;
@@ -93,6 +94,9 @@ class Score : public QObject {
 
       PadState   _padState;
       InputState _is;
+
+      QList<Excerpt*> _excerpts;
+      Excerpt* _excerpt;
 
       Style* _style;
       QVector<TextStyle*> _textStyles;
@@ -339,7 +343,6 @@ class Score : public QObject {
       void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
 
-//      Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
 
       void deleteItem(Element*);
@@ -498,6 +501,10 @@ class Score : public QObject {
       MeasureBase* appendMeasure(int type);
       UndoList* getUndoList() { return &undoList; }
       void addLyrics(int tick, int staffIdx, const QString&);
+
+      QList<Excerpt*>* excerpts() { return &_excerpts; }
+      Excerpt* excerpt() const    { return _excerpt;   }
+      void setExcerpt(Excerpt* e) { _excerpt = e;      }
       };
 
 extern Score* gscore;
