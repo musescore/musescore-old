@@ -1,0 +1,228 @@
+//=============================================================================
+//  MuseScore
+//  Linux Music Score Editor
+//  $Id:$
+//
+//  Copyright (C) 2008 Werner Schweer and others
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
+
+#include "excerptsdialog.h"
+#include "mscore.h"
+#include "score.h"
+#include "part.h"
+#include "excerpt.h"
+
+//---------------------------------------------------------
+//   ExcerptItem
+//---------------------------------------------------------
+
+ExcerptItem::ExcerptItem(Excerpt* e, QListWidget* parent)
+   : QListWidgetItem(parent)
+      {
+      _excerpt = e;
+      setText(e->name());
+      }
+
+//---------------------------------------------------------
+//   PartItem
+//---------------------------------------------------------
+
+PartItem::PartItem(Part* p, QListWidget* parent)
+   : QListWidgetItem(parent)
+      {
+      setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+      setCheckState(Qt::Unchecked);
+      _part = p;
+      setText(p->trackName());
+      }
+
+//---------------------------------------------------------
+//   ExcerptsDialog
+//---------------------------------------------------------
+
+ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      setModal(true);
+      score = s;
+
+      // make a deep copy of all excerpts:
+
+      Excerpt* excerpt = score->excerpt();
+      QList<Excerpt*>* sel = score->excerpts();
+      int currentRow = -1;
+      int row = 0;
+      foreach(Excerpt* e, *sel) {
+            el.append(new Excerpt(*e));
+            if (excerpt == e)
+                  currentRow = row;
+            ++row;
+            }
+      foreach(Excerpt* e, el) {
+            ExcerptItem* ei = new ExcerptItem(e);
+            excerptList->addItem(ei);
+            }
+      if (currentRow != -1)
+            excerptList->setCurrentRow(currentRow);
+      showExcerpt->setChecked(currentRow != -1);
+
+      foreach(Part* p, *s->parts()) {
+            PartItem* item = new PartItem(p);
+            partList->addItem(item);
+            }
+
+      connect(newButton, SIGNAL(clicked()), SLOT(newClicked()));
+      connect(deleteButton, SIGNAL(clicked()), SLOT(deleteClicked()));
+      connect(excerptList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
+         SLOT(excerptChanged(QListWidgetItem*, QListWidgetItem*)));
+      connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+         SLOT(partDoubleClicked(QListWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void ExcerptsDialog::accept()
+      {
+      QList<Excerpt*>* sel = score->excerpts();
+      foreach(Excerpt* e, *sel)
+            delete e;
+      sel->clear();
+      foreach(Excerpt* e, el)
+            sel->append(e);
+      Excerpt* excerpt = 0;
+      if (showExcerpt->isChecked()) {
+            ExcerptItem* ei = (ExcerptItem*)excerptList->currentItem();
+            if (ei)
+                  excerpt = ei->excerpt();
+            }
+      //
+      // there must be at least one part in excerpt:
+      //
+      if (excerpt && excerpt->parts()->isEmpty())
+            excerpt = 0;
+      score->setExcerpt(excerpt);
+      if (excerpt) {
+            foreach(Part* part, *score->parts()) {
+                  int idx = excerpt->parts()->indexOf(part);
+                  part->setShow(idx != -1);
+                  }
+            }
+      else {
+            foreach(Part* part, *score->parts())
+                  part->setShow(true);
+            }
+
+      score->setDirty(true);
+      el.clear();
+      QDialog::accept();
+      }
+
+//---------------------------------------------------------
+//   startExcerptsDialog
+//---------------------------------------------------------
+
+void MuseScore::startExcerptsDialog()
+      {
+      if (cs == 0)
+            return;
+      ExcerptsDialog ed(cs, 0);
+      cs->start();
+      ed.exec();
+      cs->setLayoutAll(true);
+      cs->end();
+      }
+
+//---------------------------------------------------------
+//   deleteClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::deleteClicked()
+      {
+      printf("delete %d\n", excerptList->currentRow());
+      }
+
+//---------------------------------------------------------
+//   newClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::newClicked()
+      {
+      Excerpt* e = new Excerpt(score);
+      QString name;
+      for (int i = 1;; ++i) {
+            name = QString("Excerpt-%1").arg(i);
+            Excerpt* e;
+            foreach(e, el) {
+                  if (e->name() == name)
+                        break;
+                  }
+            if (e->name() != name)
+                  break;
+            }
+      e->setName(name);
+      el.append(e);
+      ExcerptItem* ei = new ExcerptItem(e);
+      excerptList->addItem(ei);
+      excerptList->setCurrentRow(el.size() - 1);
+      }
+
+//---------------------------------------------------------
+//   excerptChanged
+//---------------------------------------------------------
+
+void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
+      {
+      if (prev) {
+            Excerpt* pex = ((ExcerptItem*)prev)->excerpt();
+            prev->setText(name->text());
+            pex->setName(name->text());
+            pex->setTitle(title->text());
+            int n = partList->count();
+            pex->parts()->clear();
+            for (int i = 0; i < n; ++i) {
+                  PartItem* pi = (PartItem*)partList->item(i);
+                  if (pi->checkState() == Qt::Checked)
+                        pex->parts()->append(pi->part());
+                  }
+            }
+      if (cur) {
+            Excerpt* e = ((ExcerptItem*)cur)->excerpt();
+            name->setText(e->name());
+            title->setText(e->title());
+
+            // set selection:
+            QList<Part*>* pl = e->parts();
+            int n = partList->count();
+            for (int i = 0; i < n; ++i) {
+                  PartItem* pi = (PartItem*)partList->item(i);
+                  int idx = pl->indexOf(pi->part());
+                  pi->setCheckState(idx != -1 ? Qt::Checked : Qt::Unchecked);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   partDoubleClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::partDoubleClicked(QListWidgetItem* item)
+      {
+      PartItem* pi = (PartItem*)item;
+      title->setText(pi->part()->trackName());
+      }
+

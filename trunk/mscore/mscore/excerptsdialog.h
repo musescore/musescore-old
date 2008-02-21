@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: partedit.h,v 1.2 2006/03/02 17:08:40 wschweer Exp $
+//  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,53 +18,57 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __ILEDIT_H__
-#define __ILEDIT_H__
+#ifndef __EXCERPTSDIALOG_H__
+#define __EXCERPTSDIALOG_H__
 
-#include "ui_partedit.h"
+#include "ui_excerptsdialog.h"
 
 class Score;
+class Excerpt;
 class Part;
 
 //---------------------------------------------------------
-//   PartEdit
+//   ExcerptItem
 //---------------------------------------------------------
 
-class PartEdit : public QWidget, public Ui::PartEditBase {
-      Q_OBJECT
-
-      Part* part;
-
-   private slots:
-      void patchChanged(int);
-      void volChanged(double);
-      void panChanged(double);
-      void reverbChanged(double);
-      void chorusChanged(double);
-      void muteChanged(bool);
-      void soloChanged(bool);
-      void showPartChanged(bool);
-
+class ExcerptItem : public QListWidgetItem {
+      Excerpt* _excerpt;
    public:
-      PartEdit(QWidget* parent = 0);
-      void setPart(Part*);
+      ExcerptItem(Excerpt*, QListWidget* parent = 0);
+      Excerpt* excerpt() const { return _excerpt; }
       };
 
 //---------------------------------------------------------
-//   InstrumentListEditor
+//   PartItem
 //---------------------------------------------------------
 
-class InstrumentListEditor : public QScrollArea
-      {
-      Q_OBJECT
-      QScrollArea* sa;
-      QVBoxLayout* vb;
+class PartItem : public QListWidgetItem {
+      Part* _part;
+   public:
+      PartItem(Part*, QListWidget* parent = 0);
+      Part* part() const { return _part; }
+      };
 
-      virtual void closeEvent(QCloseEvent*);
+//---------------------------------------------------------
+//   ExcerptsDialog
+//---------------------------------------------------------
+
+class ExcerptsDialog : public QDialog, private Ui::ExcerptsDialog {
+      Q_OBJECT
+      Score* score;
+      QList<Excerpt*> el;
+
+   private slots:
+      void deleteClicked();
+      void newClicked();
+      void excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev);
+      void partDoubleClicked(QListWidgetItem*);
+
+   public slots:
+      virtual void accept();
 
    public:
-      InstrumentListEditor(QWidget* parent);
-      void updateAll(Score*);
+      ExcerptsDialog(Score*, QWidget* parent = 0);
       };
 
 #endif

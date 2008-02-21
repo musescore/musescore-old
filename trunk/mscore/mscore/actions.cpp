@@ -1149,6 +1149,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         "toggle-mixer",
+         QT_TR_NOOP("Mixer"),
+         Qt::Key_F10,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Mixer"),
+         QT_TR_NOOP("Mixer")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-transport",
          QT_TR_NOOP("Transport Toolbar"),
          0,

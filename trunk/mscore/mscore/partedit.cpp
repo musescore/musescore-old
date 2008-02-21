@@ -28,8 +28,8 @@
 //   PartEdit
 //---------------------------------------------------------
 
-PartEdit::PartEdit()
-   : QWidget()
+PartEdit::PartEdit(QWidget* parent)
+   : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
       connect(patch,    SIGNAL(activated(int)),    SLOT(patchChanged(int)));
@@ -79,6 +79,17 @@ InstrumentListEditor::InstrumentListEditor(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   closeEvent
+//---------------------------------------------------------
+
+void InstrumentListEditor::closeEvent(QCloseEvent* ev)
+      {
+      QAction* a = getAction("toggle-mixer");
+      a->setChecked(false);
+      QWidget::closeEvent(ev);
+      }
+
+//---------------------------------------------------------
 //   updateAll
 //---------------------------------------------------------
 
@@ -117,15 +128,15 @@ void InstrumentListEditor::updateAll(Score* cs)
       }
 
 //---------------------------------------------------------
-//   startInstrumentEditor
+//   showMixer
 //---------------------------------------------------------
 
-void MuseScore::startInstrumentListEditor()
+void MuseScore::showMixer(bool val)
       {
       if (iledit == 0)
             iledit = new InstrumentListEditor(0);
       iledit->updateAll(cs);
-      iledit->show();
+      iledit->setShown(val);
       }
 
 //---------------------------------------------------------

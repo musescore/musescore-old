@@ -61,6 +61,7 @@
 #include "newwizard.h"
 #include "timesig.h"
 #include "box.h"
+#include "excerpt.h"
 
 double printerMag = 1.0;
 
@@ -852,6 +853,11 @@ bool Score::loadMsc(QString name)
                               Pedal* pedal = new Pedal(this);
                               pedal->read(ee);
                               _layout->add(pedal);
+                              }
+                        else if (tag == "Excerpt") {
+                              Excerpt* e = new Excerpt(this);
+                              e->read(ee);
+                              _excerpts.append(e);
                               }
                         else
                               domError(ee);

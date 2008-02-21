@@ -46,6 +46,7 @@ class Xml;
 class MagBox;
 class NewWizard;
 class Palette;
+class ExcerptsDialog;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -241,7 +242,8 @@ class MuseScore : public QMainWindow {
       void selectScore(QAction*);
       void selectionChanged(int);
       void startPreferenceDialog();
-      void startInstrumentListEditor();
+      void showMixer(bool);
+      void startExcerptsDialog();
       void startPageListEditor();
       void preferencesChanged();
       void editStyle();

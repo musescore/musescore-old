@@ -494,7 +494,7 @@ MuseScore::MuseScore()
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Part List..."), this, SLOT(startInstrumentListEditor()));
+      menuEdit->addAction(tr("Excerpts..."), this, SLOT(startExcerptsDialog()));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Inspector..."), this, SLOT(startPageListEditor()));
       menuEdit->addSeparator();
@@ -611,6 +611,11 @@ MuseScore::MuseScore()
       navigatorId->setCheckable(true);
       connect(navigatorId, SIGNAL(toggled(bool)), SLOT(showNavigator(bool)));
       menuDisplay->addAction(navigatorId);
+
+      a = getAction("toggle-mixer");
+      a->setCheckable(true);
+      connect(a, SIGNAL(toggled(bool)), SLOT(showMixer(bool)));
+      menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
 
