@@ -43,7 +43,6 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
       void chorusChanged(double);
       void muteChanged(bool);
       void soloChanged(bool);
-      void showPartChanged(bool);
 
    public:
       PartEdit(QWidget* parent = 0);

@@ -249,13 +249,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QCheckBox" name="showPart" >
-          <property name="text" >
-           <string>Show</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item row="2" column="0" >
