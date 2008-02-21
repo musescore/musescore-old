@@ -43,7 +43,6 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       midiBankSelectH->setValue(i->midiBankSelectH);
       midiBankSelectL->setValue(i->midiBankSelectL);
 
-      showStaff->setChecked(part->show());
       useDrumset->setChecked(part->useDrumset());
       editDrumset->setEnabled(part->useDrumset());
       lines->setValue(staff->lines());
@@ -96,7 +95,6 @@ void EditStaff::apply()
       i->midiBankSelectH = midiBankSelectH->value();
       i->midiBankSelectL = midiBankSelectL->value();
 
-      part->setShow(showStaff->isChecked());
       part->setUseDrumset(useDrumset->isChecked());
       part->setPitchOffset(transposition->value());
       staff->setLines(lines->value());

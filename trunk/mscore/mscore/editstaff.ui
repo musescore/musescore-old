@@ -273,14 +273,7 @@
         </property>
        </spacer>
       </item>
-      <item row="4" column="0" >
-       <widget class="QCheckBox" name="showStaff" >
-        <property name="text" >
-         <string>Show</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="3" >
+      <item row="4" column="0" colspan="3" >
        <layout class="QHBoxLayout" >
         <item>
          <widget class="QCheckBox" name="useDrumset" >
@@ -335,7 +328,6 @@
  <tabstops>
   <tabstop>lines</tabstop>
   <tabstop>small</tabstop>
-  <tabstop>showStaff</tabstop>
   <tabstop>useDrumset</tabstop>
   <tabstop>editDrumset</tabstop>
   <tabstop>buttonBox</tabstop>

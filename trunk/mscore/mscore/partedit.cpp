@@ -39,7 +39,6 @@ PartEdit::PartEdit(QWidget* parent)
       connect(reverb,   SIGNAL(valueChanged(double,int)), SLOT(reverbChanged(double)));
       connect(mute,     SIGNAL(toggled(bool)),     SLOT(muteChanged(bool)));
       connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloChanged(bool)));
-      connect(showPart, SIGNAL(toggled(bool)),     SLOT(showPartChanged(bool)));
       }
 
 //---------------------------------------------------------
@@ -53,7 +52,6 @@ void PartEdit::setPart(Part* p)
       partName->setText(part->trackName());
       mute->setChecked(i->mute);
       solo->setChecked(i->solo);
-      showPart->setChecked(part->show());
       volume->setValue(i->volume);
       reverb->setValue(i->reverb);
       chorus->setValue(i->chorus);
@@ -223,10 +221,4 @@ void PartEdit::soloChanged(bool val)
       i->solo = val;
       }
 
-void PartEdit::showPartChanged(bool val)
-      {
-      part->setShow(val);
-      part->score()->setLayoutAll(true);
-      part->score()->end();
-      }
 
