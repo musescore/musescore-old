@@ -157,6 +157,37 @@ void Box::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Box::write(Xml& xml, int staffIdx, bool writeSystemElements) const
+      {
+      xml.stag(name());
+      if (writeSystemElements) {
+            if (type() == VBOX)
+                  xml.tag("height", _boxHeight.val());
+            else if (type() == HBOX)
+                  xml.tag("width", _boxWidth.val());
+            if (_leftMargin != 0.0)
+                  xml.tag("leftMargin", _leftMargin);
+            if (_rightMargin != 0.0)
+                  xml.tag("rightMargin", _rightMargin);
+            if (_topMargin != 0.0)
+                  xml.tag("topMargin", _topMargin);
+            if (_bottomMargin != 0.0)
+                  xml.tag("bottomMargin", _bottomMargin);
+            }
+      foreach (const Element* el, _el) {
+            if (el->track() == -1 && !writeSystemElements)
+                  continue;
+            if (el->track() != -1 && el->staffIdx() != staffIdx)
+                  continue;
+            el->write(xml);
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 

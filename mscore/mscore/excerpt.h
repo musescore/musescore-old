@@ -45,6 +45,8 @@ class Excerpt {
 
       void write(Xml&) const;
       void read(QDomElement);
+
+      bool operator!=(const Excerpt&) const;
       };
 
 #endif

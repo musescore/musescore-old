@@ -460,7 +460,7 @@ QByteArray Selection::staffMimeData() const
                         continue;
                   if (ms >= tickEnd)
                         break;
-                  m->write(xml, staffIdx);
+                  m->write(xml, staffIdx, staffIdx == 0);
                   }
             xml.etag();
             }

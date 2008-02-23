@@ -697,7 +697,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             tick += noteLen;
 
             if (len < 0)
-                  setRest(tick, -len, track, measure);
+                  setRest(tick, -len, track);
             if (len <= 0)
                   break;
             //

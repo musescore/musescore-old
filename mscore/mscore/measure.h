@@ -107,7 +107,7 @@ class Measure : public MeasureBase {
       virtual ElementType type() const { return MEASURE; }
 
       virtual void read(QDomElement, int idx);
-      virtual void write(Xml&, int) const;
+      virtual void write(Xml&, int, bool writeSystemElements) const;
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
       virtual void read(QDomElement);

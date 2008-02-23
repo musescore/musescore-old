@@ -331,8 +331,8 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("subtype", subtypeName()));
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
-      if (track() != xml.curTrack)
-            pl.append(Prop("track", track()));
+      if ((track() != -1) && (track() != xml.curTrack))
+            pl.append(Prop("track", track() + xml.trackDiff));
       if (selected())
             pl.append(Prop("selected", selected()));
       if (!visible())

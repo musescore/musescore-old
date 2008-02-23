@@ -79,7 +79,7 @@ class MeasureBase : public Element {
       MeasureBase* prev() const              { return _prev;   }
       void setPrev(MeasureBase* e)           { _prev = e;      }
 
-      virtual void write(Xml&, int) const = 0;
+      virtual void write(Xml&, int, bool) const = 0;
 
       virtual void collectElements(QList<const Element*>& el) const;
       MeasureWidth& layoutWidth()            { return _mw;        }

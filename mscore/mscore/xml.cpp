@@ -39,8 +39,9 @@ Xml::Xml(QIODevice* device)
       {
       setCodec("utf8");
       stack.clear();
-      curTick  = 0;
-      curTrack = -1;
+      curTick   = 0;
+      curTrack  = -1;
+      trackDiff = 0;
       }
 
 //---------------------------------------------------------

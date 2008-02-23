@@ -174,6 +174,16 @@ Score::~Score()
       }
 
 //---------------------------------------------------------
+//   setStyle
+//---------------------------------------------------------
+
+void Score::setStyle(const Style& s)
+      {
+      delete _style;
+      _style = new Style(s);
+      }
+
+//---------------------------------------------------------
 //   addViewer
 //---------------------------------------------------------
 
@@ -206,7 +216,10 @@ Canvas* Score::canvas() const
 
 void Score::clear()
       {
-      _excerpt        = 0;
+      foreach(Excerpt* e, _excerpts)
+            delete e;
+      _excerpts.clear();
+
       _padState.pitch = 60;
       info.setFile("");
       _dirty          = false;
@@ -306,6 +319,8 @@ void Score::read(QString name)
 
 void Score::write(Xml& xml)
       {
+      xml.tag("Division", division);
+      xml.tag("Spatium", _spatium / DPMM);
       xml.curTrack = -1;
       if (editObject) {                          // in edit mode?
             endCmd();
@@ -332,7 +347,6 @@ void Score::write(Xml& xml)
       tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
-printf("write %d excerpts\n", _excerpts.size());
       foreach(const Excerpt* excerpt, _excerpts)
             excerpt->write(xml);
       foreach(Element* el, _layout->_gel)
@@ -343,7 +357,7 @@ printf("write %d excerpts\n", _excerpts.size());
             xml.curTrack = staffIdx * VOICES;
             for (MeasureBase* m = _layout->first(); m; m = m->next()) {
                   if (m->type() == MEASURE || staffIdx == 0)
-                        m->write(xml, staffIdx);
+                        m->write(xml, staffIdx, staffIdx == 0);
                   if (m->type() == MEASURE)
                         xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
                   }

@@ -677,8 +677,6 @@ bool MuseScore::saveFile(QFile* f)
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
 
-      xml.tag("Spatium", _spatium / DPMM);
-      xml.tag("Division", division);
       xml.tag("Mag",  canvas->mag());
       xml.tag("xoff", canvas->xoffset() / DPMM);
       xml.tag("yoff", canvas->yoffset() / DPMM);
@@ -728,148 +726,157 @@ bool Score::loadMsc(QString name)
             QMessageBox::critical(mscore, tr("MuseScore: Read File"), s);
             return true;
             }
+      f.close();
+      docName = f.fileName();
+      return read(doc.documentElement());
+      }
 
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+bool Score::read(QDomElement e)
+      {
       _fileDivision = 384;   // for compatibility with old mscore files
 
-      docName = f.fileName();
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "museScore") {
-                  QString version = e.attribute(QString("version"));
-                  QStringList sl = version.split('.');
-                  _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        curTrack = -1;
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
-                        int i = val.toInt();
-                        if (tag == "Staff")
-                              readStaff(ee);
-                        else if (tag == "siglist")
-                              sigmap->read(ee, division, _fileDivision);
-                        else if (tag == "tempolist")
-                              tempomap->read(ee, this);
-                        else if (tag == "Mag")
-                              setMag(val.toDouble());
-                        else if (tag == "xoff") {
-                              if (_mscVersion < 105)
-                                    setXoffset(val.toDouble());
-                              else
-                                    setXoffset(val.toDouble() * DPMM);
-                              }
-                        else if (tag == "yoff") {
-                              if (_mscVersion < 105)
-                                    setYoffset(val.toDouble());
-                              else
-                                    setYoffset(val.toDouble() * DPMM);
-                              }
-                        else if (tag == "Spatium")
-                              setSpatium (val.toDouble() * DPMM);
-                        else if (tag == "Division")
-                              _fileDivision = i;
-                        else if (tag == "showInvisible")
-                              _showInvisible = i;
-                        else if (tag == "Style")
-                              _style->load(ee);
-                        else if (tag == "TextStyle") {
-                              QString name = ee.attribute("name");
-                              TextStyle* s = 0;
-                              foreach(TextStyle* ts, textStyles()) {
-                                    if (ts->name == name) {
-                                          s = ts;
-                                          break;
-                                          }
-                                    }
-                              if (s == 0) {
-                                    printf("new TextStyle <%s>\n", qPrintable(name));
-                                    }
-                              else
-                                    s->read(ee);
-                              }
-                        else if (tag == "page-layout")
-                              pageFormat()->read(ee);
-                        else if (tag == "rights") {
-                              if (rights == 0)
-                                    rights = new QTextDocument(0);
-                              if (mscVersion() <= 103)
-                                    rights->setHtml(val);
-                              else {
-                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                          if (eee.tagName() == "html")
-                                                rights->setHtml(Xml::htmlToString(eee));
-                                          else
-                                                domError(eee);
-                                          }
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() != "museScore")
+                  continue;
+            QString version = e.attribute(QString("version"));
+            QStringList sl = version.split('.');
+            _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  curTrack = -1;
+                  QString tag(ee.tagName());
+                  QString val(ee.text());
+                  int i = val.toInt();
+                  if (tag == "Staff")
+                        readStaff(ee);
+                  else if (tag == "siglist")
+                        sigmap->read(ee, division, _fileDivision);
+                  else if (tag == "tempolist")
+                        tempomap->read(ee, this);
+                  else if (tag == "Mag")
+                        setMag(val.toDouble());
+                  else if (tag == "xoff") {
+                        if (_mscVersion < 105)
+                              setXoffset(val.toDouble());
+                        else
+                              setXoffset(val.toDouble() * DPMM);
+                        }
+                  else if (tag == "yoff") {
+                        if (_mscVersion < 105)
+                              setYoffset(val.toDouble());
+                        else
+                              setYoffset(val.toDouble() * DPMM);
+                        }
+                  else if (tag == "Spatium")
+                        setSpatium (val.toDouble() * DPMM);
+                  else if (tag == "Division")
+                        _fileDivision = i;
+                  else if (tag == "showInvisible")
+                        _showInvisible = i;
+                  else if (tag == "Style")
+                        _style->load(ee);
+                  else if (tag == "TextStyle") {
+                        QString name = ee.attribute("name");
+                        TextStyle* s = 0;
+                        foreach(TextStyle* ts, textStyles()) {
+                              if (ts->name == name) {
+                                    s = ts;
+                                    break;
                                     }
                               }
-                        else if (tag == "movement-number")
-                              movementNumber = val;
-                        else if (tag == "movement-title")
-                              movementTitle = val;
-                        else if (tag == "Part") {
-                              Part* part = new Part(this);
-                              part->read(ee);
-                              parts()->push_back(part);
-                              }
-                        else if (tag == "showInvisible")
-                              _showInvisible = i;
-                        else if (tag == "Symbols") {
-                              if (::symbolPalette == 0)
-                                    createSymbolPalette();
-                              ::symbolPalette->read(ee);
-                              }
-                        else if (tag == "cursorTrack")
-                              _is.track = i;
-                        else if (tag == "Slur") {
-                              Slur* slur = new Slur(this);
-                              slur->read(ee);
-                              _layout->add(slur);
-                              }
-                        else if (tag == "HairPin") {
-                              Hairpin* hairpin = new Hairpin(this);
-                              hairpin->read(ee);
-                              _layout->add(hairpin);
-                              }
-                        else if (tag == "Ottava") {
-                              Ottava* ottava = new Ottava(this);
-                              ottava->read(ee);
-                              _layout->add(ottava);
-                              }
-                        else if (tag == "TextLine") {
-                              TextLine* textLine = new TextLine(this);
-                              textLine->read(ee);
-                              _layout->add(textLine);
-                              }
-                        else if (tag == "Volta") {
-                              Volta* volta = new Volta(this);
-                              volta->read(ee);
-                              _layout->add(volta);
-                              }
-                        else if (tag == "Trill") {
-                              Trill* trill = new Trill(this);
-                              trill->read(ee);
-                              _layout->add(trill);
-                              }
-                        else if (tag == "Pedal") {
-                              Pedal* pedal = new Pedal(this);
-                              pedal->read(ee);
-                              _layout->add(pedal);
-                              }
-                        else if (tag == "Excerpt") {
-                              Excerpt* e = new Excerpt(this);
-                              e->read(ee);
-                              _excerpts.append(e);
+                        if (s == 0) {
+                              printf("new TextStyle <%s>\n", qPrintable(name));
                               }
                         else
-                              domError(ee);
+                              s->read(ee);
                         }
+                  else if (tag == "page-layout")
+                        pageFormat()->read(ee);
+                  else if (tag == "rights") {
+                        if (rights == 0)
+                              rights = new QTextDocument(0);
+                        if (mscVersion() <= 103)
+                              rights->setHtml(val);
+                        else {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "html")
+                                          rights->setHtml(Xml::htmlToString(eee));
+                                    else
+                                          domError(eee);
+                                    }
+                              }
+                        }
+                  else if (tag == "movement-number")
+                        movementNumber = val;
+                  else if (tag == "movement-title")
+                        movementTitle = val;
+                  else if (tag == "Part") {
+                        Part* part = new Part(this);
+                        part->read(ee);
+                        parts()->push_back(part);
+                        }
+                  else if (tag == "showInvisible")
+                        _showInvisible = i;
+                  else if (tag == "Symbols") {
+                        if (::symbolPalette == 0)
+                              createSymbolPalette();
+                        ::symbolPalette->read(ee);
+                        }
+                  else if (tag == "cursorTrack")
+                        _is.track = i;
+                  else if (tag == "Slur") {
+                        Slur* slur = new Slur(this);
+                        slur->read(ee);
+                        _layout->add(slur);
+                        }
+                  else if (tag == "HairPin") {
+                        Hairpin* hairpin = new Hairpin(this);
+                        hairpin->read(ee);
+                        _layout->add(hairpin);
+                        }
+                  else if (tag == "Ottava") {
+                        Ottava* ottava = new Ottava(this);
+                        ottava->read(ee);
+                        _layout->add(ottava);
+                        }
+                  else if (tag == "TextLine") {
+                        TextLine* textLine = new TextLine(this);
+                        textLine->read(ee);
+                        _layout->add(textLine);
+                        }
+                  else if (tag == "Volta") {
+                        Volta* volta = new Volta(this);
+                        volta->read(ee);
+                        _layout->add(volta);
+                        }
+                  else if (tag == "Trill") {
+                        Trill* trill = new Trill(this);
+                        trill->read(ee);
+                        _layout->add(trill);
+                        }
+                  else if (tag == "Pedal") {
+                        Pedal* pedal = new Pedal(this);
+                        pedal->read(ee);
+                        _layout->add(pedal);
+                        }
+                  else if (tag == "Excerpt") {
+                        Excerpt* e = new Excerpt(this);
+                        e->read(ee);
+                        _excerpts.append(e);
+                        }
+                  else
+                        domError(ee);
                   }
             }
       _layout->connectTies();
       _layout->searchHiddenNotes();
+      _layout->setInstrumentNames();
+
       searchSelectedElements();
       _fileDivision = division;
-
-      f.close();
       return false;
       }
 

@@ -53,7 +53,7 @@ class Box : public MeasureBase {
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;
       virtual void layout(ScoreLayout*);
-      virtual void write(Xml& xml, int) const { write(xml); }
+      virtual void write(Xml& xml, int, bool) const;
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
 

@@ -634,7 +634,7 @@ void Slur::write(Xml& xml) const
       xml.stag("Slur");
       xml.tag("tick2", _tick2);
       if (_track2)
-            xml.tag("track2", _track2);
+            xml.tag("track2", _track2 + xml.trackDiff);
       SlurTie::writeProperties(xml);
       xml.etag();
       }
