@@ -96,7 +96,6 @@ class Score : public QObject {
       InputState _is;
 
       QList<Excerpt*> _excerpts;
-      Excerpt* _excerpt;
 
       Style* _style;
       QVector<TextStyle*> _textStyles;
@@ -185,6 +184,7 @@ class Score : public QObject {
       void cmdAddText(int style);
       void cmdAddChordName();
       int processPendingNotes(QList<MNote*>* notes, int, int);
+      void writeExcerpt(Excerpt*, Xml&);
 
    public slots:
       void doUndo();
@@ -258,6 +258,7 @@ class Score : public QObject {
 
       void clear();
       void write(Xml&);
+      bool read(QDomElement);
 
       QList<Staff*>& staves()                { return _staves; }
       Q_INVOKABLE int nstaves() const        { return _staves.size(); }
@@ -468,6 +469,8 @@ class Score : public QObject {
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
       Style* style() const          { return _style; }
+      void setStyle(const Style& s);
+
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
       QList<Viewer*> getViewer()    { return viewer;    }
@@ -503,8 +506,7 @@ class Score : public QObject {
       void addLyrics(int tick, int staffIdx, const QString&);
 
       QList<Excerpt*>* excerpts() { return &_excerpts; }
-      Excerpt* excerpt() const    { return _excerpt;   }
-      void setExcerpt(Excerpt* e) { _excerpt = e;      }
+      Score* createExcerpt(Excerpt*);
       };
 
 extern Score* gscore;

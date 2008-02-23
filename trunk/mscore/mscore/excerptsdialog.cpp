@@ -61,28 +61,20 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
 
       // make a deep copy of all excerpts:
 
-      Excerpt* excerpt = score->excerpt();
       QList<Excerpt*>* sel = score->excerpts();
-      int currentRow = -1;
-      int row = 0;
-      foreach(Excerpt* e, *sel) {
+      foreach(Excerpt* e, *sel)
             el.append(new Excerpt(*e));
-            if (excerpt == e)
-                  currentRow = row;
-            ++row;
-            }
+
       foreach(Excerpt* e, el) {
             ExcerptItem* ei = new ExcerptItem(e);
             excerptList->addItem(ei);
             }
-      if (currentRow != -1)
-            excerptList->setCurrentRow(currentRow);
-      showExcerpt->setChecked(currentRow != -1);
 
       foreach(Part* p, *s->parts()) {
             PartItem* item = new PartItem(p);
             partList->addItem(item);
             }
+      createExcerpt->setEnabled(false);
 
       connect(newButton, SIGNAL(clicked()), SLOT(newClicked()));
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteClicked()));
@@ -90,6 +82,10 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
          SLOT(excerptChanged(QListWidgetItem*, QListWidgetItem*)));
       connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(partDoubleClicked(QListWidgetItem*)));
+      connect(createExcerpt, SIGNAL(clicked()), SLOT(createExcerptClicked()));
+
+      if (!sel->isEmpty())
+            excerptList->setCurrentRow(0);
       }
 
 //---------------------------------------------------------
@@ -98,36 +94,33 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
 
 void ExcerptsDialog::accept()
       {
+      QListWidgetItem* cur = excerptList->currentItem();
+      excerptChanged(0, cur);
+
+      //
+      // set dirty if list changed
+      //
       QList<Excerpt*>* sel = score->excerpts();
+      bool dirty = false;
+      if (sel->size() != el.size())
+            dirty = true;
+      else {
+            int n = sel->size();
+            for (int i = 0; i < n; ++i) {
+                  if (*(sel->at(i)) != *(el.at(i))) {
+                        dirty = true;
+                        break;
+                        }
+                  }
+            }
+      if (dirty)
+            score->setDirty(true);
+
       foreach(Excerpt* e, *sel)
             delete e;
       sel->clear();
       foreach(Excerpt* e, el)
             sel->append(e);
-      Excerpt* excerpt = 0;
-      if (showExcerpt->isChecked()) {
-            ExcerptItem* ei = (ExcerptItem*)excerptList->currentItem();
-            if (ei)
-                  excerpt = ei->excerpt();
-            }
-      //
-      // there must be at least one part in excerpt:
-      //
-      if (excerpt && excerpt->parts()->isEmpty())
-            excerpt = 0;
-      score->setExcerpt(excerpt);
-      if (excerpt) {
-            foreach(Part* part, *score->parts()) {
-                  int idx = excerpt->parts()->indexOf(part);
-                  part->setShow(idx != -1);
-                  }
-            }
-      else {
-            foreach(Part* part, *score->parts())
-                  part->setShow(true);
-            }
-
-      score->setDirty(true);
       el.clear();
       QDialog::accept();
       }
@@ -187,6 +180,8 @@ void ExcerptsDialog::newClicked()
 
 void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
       {
+// printf("excerpt changed %p %p\n", cur, prev);
+      createExcerpt->setEnabled(true);
       if (prev) {
             Excerpt* pex = ((ExcerptItem*)prev)->excerpt();
             prev->setText(name->text());
@@ -224,5 +219,20 @@ void ExcerptsDialog::partDoubleClicked(QListWidgetItem* item)
       {
       PartItem* pi = (PartItem*)item;
       title->setText(pi->part()->trackName());
+      }
+
+//---------------------------------------------------------
+//   createExcerptClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::createExcerptClicked()
+      {
+      QListWidgetItem* cur = excerptList->currentItem();
+      if (cur == 0)
+            return;
+      excerptChanged(0, cur);       // update Excerpt
+      Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
+      Score* nscore = score->createExcerpt(excerpt);
+      mscore->appendScore(nscore);
       }
 

@@ -63,6 +63,7 @@ class ExcerptsDialog : public QDialog, private Ui::ExcerptsDialog {
       void newClicked();
       void excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev);
       void partDoubleClicked(QListWidgetItem*);
+      void createExcerptClicked();
 
    public slots:
       virtual void accept();

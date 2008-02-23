@@ -1658,7 +1658,6 @@ void MuseScore::cmd(QAction* a)
             printf("cmd <%s> not valid in state %d\n", qPrintable(cmd), _state);
             return;
             }
-
       if (cmd == "instruments")
             editInstrList();
       else if (cmd == "clefs")

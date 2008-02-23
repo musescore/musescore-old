@@ -2118,7 +2118,7 @@ void Measure::adjustToLen(int ol, int nl)
 //   write
 //---------------------------------------------------------
 
-void Measure::write(Xml& xml, int staff) const
+void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       {
       if (xml.curTick != tick())
             xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(_no + 1).arg(tick()));
@@ -2126,7 +2126,7 @@ void Measure::write(Xml& xml, int staff) const
             xml.stag(QString("Measure number=\"%1\"").arg(_no + 1));
       xml.curTick = tick();
 
-      if (staff == 0) {
+      if (writeSystemElements) {
             if (_repeatFlags & RepeatStart)
                   xml.tagE("startRepeat");
             if (_repeatFlags & RepeatEnd)
@@ -2135,13 +2135,16 @@ void Measure::write(Xml& xml, int staff) const
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
-            int id = 0;
-            foreach(Tuplet* tuplet, _tuplets)
+            }
+
+      int id = 0;
+      foreach(Tuplet* tuplet, _tuplets) {
+            if (tuplet->staffIdx() == staff)
                   tuplet->write(xml, id++);
             }
 
       foreach (const Element* el, _el) {
-            if ((el->staffIdx() == staff) || (el->staffIdx() == -1 && staff == 0))
+            if ((el->staffIdx() == staff) || (el->staffIdx() == -1 && writeSystemElements))
                   el->write(xml);
             }
 

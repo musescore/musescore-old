@@ -5,167 +5,154 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
-    <height>339</height>
+    <width>660</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MuseScore: Excerpts</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <item>
-    <widget class="QGroupBox" name="showExcerpt" >
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QGroupBox" name="groupBox_3" >
      <property name="title" >
-      <string>Show Excerpt</string>
+      <string>Select Excerpt:</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <property name="checkable" >
-      <bool>true</bool>
-     </property>
-     <property name="checked" >
-      <bool>false</bool>
-     </property>
-     <layout class="QHBoxLayout" >
+     <layout class="QVBoxLayout" >
       <item>
-       <widget class="QGroupBox" name="groupBox_3" >
-        <property name="title" >
-         <string>Select Excerpt:</string>
-        </property>
-        <property name="flat" >
+       <widget class="QListWidget" name="excerptList" >
+        <property name="uniformItemSizes" >
          <bool>true</bool>
         </property>
-        <layout class="QVBoxLayout" >
-         <item>
-          <widget class="QListWidget" name="excerptList" >
-           <property name="uniformItemSizes" >
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QPushButton" name="deleteButton" >
-             <property name="text" >
-              <string>Delete</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="newButton" >
-             <property name="text" >
-              <string>New</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_2" >
-        <property name="title" >
-         <string>Edit Excerpt:</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <layout class="QGridLayout" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Name:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" >
-          <widget class="QLineEdit" name="name" />
-         </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Titel:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QLineEdit" name="title" />
-         </item>
-         <item row="2" column="0" colspan="2" >
-          <widget class="QLabel" name="label_3" >
-           <property name="text" >
-            <string>Parts:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" colspan="2" >
-          <widget class="QListWidget" name="partList" />
-         </item>
-        </layout>
-       </widget>
+       <layout class="QHBoxLayout" >
+        <item>
+         <widget class="QPushButton" name="deleteButton" >
+          <property name="text" >
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="newButton" >
+          <property name="text" >
+           <string>New</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
+   <item row="0" column="1" >
+    <widget class="QGroupBox" name="groupBox_2" >
+     <property name="title" >
+      <string>Edit Excerpt:</string>
      </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     <property name="flat" >
+      <bool>true</bool>
      </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLineEdit" name="name" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Titel:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLineEdit" name="title" />
+      </item>
+      <item row="2" column="0" colspan="2" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
+         <string>Parts:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2" >
+       <widget class="QListWidget" name="partList" />
+      </item>
+     </layout>
     </widget>
+   </item>
+   <item row="1" column="0" colspan="2" >
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QPushButton" name="createExcerpt" >
+       <property name="text" >
+        <string>Create Excerpt</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton" >
+       <property name="text" >
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
    <receiver>ExcerptsDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>248</x>
-     <y>254</y>
+     <x>600</x>
+     <y>324</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>ExcerptsDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>286</x>
-     <y>274</y>
+     <x>423</x>
+     <y>295</y>
     </hint>
    </hints>
   </connection>

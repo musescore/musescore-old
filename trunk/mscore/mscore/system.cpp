@@ -63,9 +63,10 @@ SysStaff::~SysStaff()
       foreach(Bracket* b, brackets)
             delete b;
       brackets.clear();
-      if (instrumentName)
+      if (instrumentName) {
             delete instrumentName;
-      instrumentName = 0;
+            instrumentName = 0;
+            }
       }
 
 //---------------------------------------------------------

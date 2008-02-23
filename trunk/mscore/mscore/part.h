@@ -78,6 +78,7 @@ class Part {
       void write(Xml& xml) const;
       int nstaves() const;
       QList<Staff*>* staves()                  { return &_staves; }
+      const QList<Staff*>* staves() const      { return &_staves; }
       Staff* staff(int idx) const;
       void setId(const QString& s)             { _id = s; }
       QString id() const                       { return _id; }
@@ -115,7 +116,8 @@ class Part {
       void removeStaff(Staff*);
       const Instrument* instrument() const     { return &_instrument; }
       Instrument* instrument()                 { return &_instrument; }
-      bool show() const                        { return _show; }
+      void setInstrument(const Instrument& i)  { _instrument = i;     }
+      bool show() const                        { return _show;        }
       void setShow(bool val);
       Score* score() const                     { return _score; }
       };
