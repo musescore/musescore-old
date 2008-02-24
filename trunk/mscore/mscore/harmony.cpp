@@ -242,7 +242,17 @@ static char* extensionNames[] = {
             0,
             0,
             0,
-            "sus"
+            "sus",
+            "dim7",     // mscore ext.
+            "sus2",     //
+            "mb3b13",   // neapolitan
+            "#13",      // italian
+            "#11#13",   // french
+
+/*190*/     "add#13",   // german
+            "6/add9",
+            "sus4",
+
       };
 
 //---------------------------------------------------------
@@ -257,21 +267,30 @@ const char* Harmony::getExtensionName(int i)
       }
 
 //---------------------------------------------------------
-//   getName
+//   rootName
 //---------------------------------------------------------
 
-QString Harmony::harmonyName(int root, int extension, int base)
+QString Harmony::rootName(int root)
       {
       static char* rootTable[] = {
             "C",   "Db", "D",   "Eb",  "E",   "F",   "Gb", "G",
             "Ab", "A",   "Bb", "B"
             };
-      QString s(rootTable[root-1]);
+      return QString(rootTable[root-1]);
+      }
+
+//---------------------------------------------------------
+//   harmonyName
+//---------------------------------------------------------
+
+QString Harmony::harmonyName(int root, int extension, int base)
+      {
+      QString s(rootName(root));
       if (extension)
             s += getExtensionName(extension);
       if (base) {
             s += "/";
-            s += rootTable[base-1];
+            s += rootName(base);
             }
       return s;
       }

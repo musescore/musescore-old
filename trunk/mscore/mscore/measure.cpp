@@ -1433,39 +1433,21 @@ printf("\n");
                   QPointF pos(0.0, y);
                   ElementType t = e->type();
                   if (t == REST) {
-                        double y = 0.0;
                         //
                         // center symbol if its a whole measure rest
                         //
-                        double yoffset = 0.0;
                         if (!_irregular && (e->tickLen() == 0)) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
                               pos.setX((stretch - s->x() - e->width()) * .5);
-                              yoffset = -_spatium;
                               }
-                        if (e->voice() == 1)          // TODO: check ??
-                              y += -1 * _spatium;
-                        else
-                              y += 2 * _spatium;
-                        e->setPos(pos.x(), y + yoffset);
+                        else if (e->voice() == 1) {          // TODO: check ??
+                              e->move(0.0, -3 * _spatium);
+                              }
                         }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
                         }
-                  else if (t == CHORD) {
-                        e->setPos(0.0, 0.0);
-                        }
-#if 0
-                  else if ((t == CHORD) && (((Chord*)e)->noteType() == NOTE_NORMAL)) {
-                        e->setPos(0.0, 0.0);
-                        }
-                  else if ((t == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
-                        Chord* chord = (Chord*)e;
-                        double x     = -chord->bbox().width();
-                        e->setPos(x, 0.0);
-                        }
-#endif
                   else {
                         double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)

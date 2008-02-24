@@ -59,6 +59,7 @@ class Harmony : public Text {
       static const char* getExtensionName(int i);
       static QString harmonyName(int root, int extension, int base);
       static int parseHarmony(const QString& s, int* root, int* base);
+      static QString rootName(int root);
       };
 
 #endif

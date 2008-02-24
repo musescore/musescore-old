@@ -39,6 +39,7 @@ Rest::Rest(Score* s)
       _staffMove = 0;
       _dots      = 0;
       dotline    = -1;
+      setOffsetType(OFFSET_SPATIUM);
       }
 
 Rest::Rest(Score* s, int tick, int len)
@@ -50,6 +51,7 @@ Rest::Rest(Score* s, int tick, int len)
       _beamMode  = BEAM_NO;
       _staffMove = 0;
       dotline    = -1;
+      setOffsetType(OFFSET_SPATIUM);
       }
 
 //---------------------------------------------------------
@@ -85,7 +87,6 @@ void Rest::setSym(int s)
 void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
-
       if (i == 0) {
             setSym(wholerestSym);
             return;
@@ -93,6 +94,7 @@ void Rest::setTickLen(int i)
       if (tuplet())
             i = tuplet()->baseLen();
 
+      setYoff(2.0);
       DurationType type;
       headType(i, &type, &_dots);
       switch(type) {
@@ -104,6 +106,7 @@ void Rest::setTickLen(int i)
                   break;
             case D_WHOLE:
                   setSym(wholerestSym);
+                  setYoff(1.0);
                   break;
             case D_HALF:
                   setSym(halfrestSym);
@@ -259,6 +262,7 @@ void Rest::remove(Element* e)
 void Rest::layout(ScoreLayout* l)
       {
       layoutAttributes(l);
+      Element::layout(l);
       }
 
 //---------------------------------------------------------
