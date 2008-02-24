@@ -670,12 +670,45 @@ void Seq::collectEvents()
       foreach(Part* part, *cs->parts()) {
             int channel = part->midiChannel();
             int port    = part->midiPort();
+            const Instrument* instr = part->instrument();
 
-            setController(port, channel, CTRL_PROGRAM, part->midiProgram());
-            setController(port, channel, CTRL_VOLUME, part->volume());
-            setController(port, channel, CTRL_REVERB_SEND, part->reverb());
-            setController(port, channel, CTRL_CHORUS_SEND, part->chorus());
-            setController(port, channel, CTRL_PANPOT, part->pan());
+            MidiOutEvent event;
+            event.time = 0.0;       // play now
+            event.port = port;
+
+            event.type = ME_CONTROLLER | channel;
+            if (instr->midiBankSelectH != -1) {
+                  event.a    = CTRL_HBANK;
+                  event.b    = instr->midiBankSelectH;
+                  sendEvent(event);
+                  }
+            if (instr->midiBankSelectL != -1) {
+                  event.a    = CTRL_LBANK;
+                  event.b    = instr->midiBankSelectL;
+                  sendEvent(event);
+                  }
+            if (instr->midiProgram != -1) {
+                  event.type = ME_PROGRAM | channel;
+                  event.a    = instr->midiProgram;
+                  sendEvent(event);
+                  }
+
+            event.type = ME_CONTROLLER | channel;
+            event.a    = CTRL_VOLUME;
+            event.b    = instr->volume;
+            sendEvent(event);
+
+            event.a    = CTRL_REVERB_SEND;
+            event.b    = instr->reverb;
+            sendEvent(event);
+
+            event.a    = CTRL_CHORUS_SEND;
+            event.b    = instr->chorus;
+            sendEvent(event);
+
+            event.a    = CTRL_PANPOT;
+            event.b    = instr->pan;
+            sendEvent(event);
             }
 
       cs->toEList(&events, 0);
@@ -821,7 +854,7 @@ void Seq::startNote(int port, int channel, int pitch, int velo)
       msg.midiOutEvent.port = port;
       msg.midiOutEvent.type = ME_NOTEON | channel;
       msg.midiOutEvent.a    = pitch;
-      msg.midiOutEvent.a    = velo;
+      msg.midiOutEvent.b    = velo;
       msg.id    = SEQ_PLAY;
       guiToSeq(msg);
 
@@ -853,7 +886,7 @@ void Seq::stopNotes()
                   msg.midiOutEvent.port = n->port();
                   msg.midiOutEvent.type = ME_NOTEON | n->channel();
                   msg.midiOutEvent.a    = n->pitch();
-                  msg.midiOutEvent.a    = 0;
+                  msg.midiOutEvent.b    = 0;
                   guiToSeq(msg);
                   }
             delete event;
@@ -867,13 +900,26 @@ void Seq::stopNotes()
 
 void Seq::setController(int port, int channel, int ctrl, int data)
       {
+      MidiOutEvent event;
+      event.time = 0.0;       // play now
+      event.port = port;
+      event.type = ME_CONTROLLER | channel;
+      event.a    = ctrl;
+      event.b    = data;
+      sendEvent(event);
+      }
+
+//---------------------------------------------------------
+//   sendEvent
+//    called from GUI context to send a midi event to
+//    midi out or synthesizer
+//---------------------------------------------------------
+
+void Seq::sendEvent(const MidiOutEvent& ev)
+      {
       SeqMsg msg;
       msg.id    = SEQ_PLAY;
-      msg.midiOutEvent.time = 0.0;
-      msg.midiOutEvent.port = port;
-      msg.midiOutEvent.type = ME_CONTROLLER | channel;
-      msg.midiOutEvent.a    = ctrl;
-      msg.midiOutEvent.a    = data;
+      msg.midiOutEvent = ev;
       guiToSeq(msg);
       }
 

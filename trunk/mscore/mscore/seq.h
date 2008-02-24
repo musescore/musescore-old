@@ -152,6 +152,7 @@ class Seq : public QObject {
       void startNote(int, int, int, int);
       void startNote(int, int, int, int, int);
       void setController(int, int, int, int);
+      void sendEvent(const MidiOutEvent&);
       void setScore(Score* s);
 
       const MidiPatch* getPatchInfo(int ch, const MidiPatch* p);
