@@ -1199,7 +1199,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
             Measure* sm = _score->tick2measure(sstart);
             Measure* em = _score->tick2measure(send);
-            if (em->tick() != send) {       // hack for last measure
+            if (em && em->tick() != send) {       // hack for last measure
                   em = 0;
                   }
 

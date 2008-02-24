@@ -72,17 +72,39 @@
 //---------------------------------------------------------
 
 extern const XmlChordExtension chordExtensions[] = {
+      {   0, "none"               },
+      {   1, "other"              },
       {   1, "major"              },
       {  16, "minor"              },
       {  19, "minor-seventh"      },
       {  99, "augmented-seventh"  },
       {  70, "dominant-ninth"     },
       {   5, "major-sixth"        },
-      {   7, "major-seventh"      },
+      {   6, "major-seventh"      },
       {  23, "minor-sixth"        },
       {  64, "dominant"           },
-      { 128, "suspended-fourth"   },
-      {  33, "diminished-seventh" },
+      { 192, "suspended-fourth"   },
+      { 185, "diminished-seventh" },
+      {   7, "major-ninth"        },
+      {  10, "major-13th"         },
+      {  20, "minor-ninth"        },
+      {  21, "minor-11th",        },
+      {  22, "minor-13th",        },
+      {   1, "minor-major"        },      // ??
+      {  64, "dominant-seventh"   },
+      {   1, "dominant-11th"      },      // ??
+      {  33, "diminished"         },
+      {  32, "half-diminished"    },
+      {   4, "augmented"          },
+      { 186, "suspended-second"   },
+      {   1, "power"              },      // ??
+      { 187, "neapolitan"         },
+      { 188, "italian"            },
+      { 189, "french"             },
+      { 190, "german"             },
+      { 191, "maj69"              },
+      {   1, "augmented-ninth"    },      // ??
+      {   1, "altered"            },      // ??
       {  -1, ""                   }
       };
 
@@ -2509,7 +2531,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       if (extension == 0) {
             printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
-            ha->setText(kindText);
+            QString s = Harmony::rootName(ha->root()) + kindText;
+            ha->setText(s);
             }
       else {
             ha->setExtension(extension);
