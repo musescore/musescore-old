@@ -149,9 +149,29 @@ void PartEdit::patchChanged(int n)
             if (p == 0)
                   break;
             if (idx == n) {
-                  Instrument* i = part->instrument();
-                  seq->setController(i->midiPort, i->midiChannel, CTRL_PROGRAM, p->prog);
-                  i->midiProgram = p->prog;
+                  Instrument* instr = part->instrument();
+                  instr->midiProgram = p->prog;
+
+                  MidiOutEvent event;
+                  event.time = 0.0;       // play now
+                  event.port = instr->midiPort;
+                  event.type = ME_CONTROLLER | instr->midiChannel;
+
+                  if (instr->midiBankSelectH != -1) {
+                        event.a    = CTRL_HBANK;
+                        event.b    = instr->midiBankSelectH;
+                        seq->sendEvent(event);
+                        }
+                  if (instr->midiBankSelectL != -1) {
+                        event.a    = CTRL_LBANK;
+                        event.b    = instr->midiBankSelectL;
+                        seq->sendEvent(event);
+                        }
+                  if (instr->midiProgram != -1) {
+                        event.type = ME_PROGRAM | instr->midiChannel;
+                        event.a    = instr->midiProgram;
+                        seq->sendEvent(event);
+                        }
                   break;
                   }
             }
