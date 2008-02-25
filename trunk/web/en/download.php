@@ -20,9 +20,9 @@
   <h3> Windows Testreleases </h3>
   <table>
     <tr>
-      <td><a href="http://prereleases.musescore.org/mscore-r646.exe">mscore-r675.exe</a></td>
+      <td><a href="http://prereleases.musescore.org/mscore-r716.exe">mscore-r716.exe</a></td>
       <td>&nbsp;&nbsp</td>
-      <td>31. jan 2008</td>
+      <td>16. feb 2008</td>
       </tr>
   </table>
 
