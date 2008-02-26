@@ -1022,10 +1022,6 @@ fallito: </translation>
         <translation>Suona Trasposizione (Semitoni)</translation>
     </message>
     <message>
-        <source>Show</source>
-        <translation>Mostra</translation>
-    </message>
-    <message>
         <source>Use Drumset</source>
         <translation>Usa Percussioni</translation>
     </message>
@@ -1039,6 +1035,34 @@ fallito: </translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select L:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1352,6 +1376,49 @@ fallito: </translation>
     <message>
         <source>Mag</source>
         <translation type="unfinished">Lente</translation>
+    </message>
+</context>
+<context>
+    <name>ExcerptsDialog</name>
+    <message>
+        <source>MuseScore: Excerpts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Elimina</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nuovo</translation>
+    </message>
+    <message>
+        <source>Edit Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Titel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Excerpt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>
@@ -2355,10 +2422,6 @@ fallito: </translation>
     <message>
         <source>edit mode</source>
         <translation>Modalità di Modifica</translation>
-    </message>
-    <message>
-        <source>Part List...</source>
-        <translation>Elenco Parti...</translation>
     </message>
     <message>
         <source>file open</source>
@@ -3792,6 +3855,14 @@ fallito: </translation>
         <source>C major, A minor</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Excerpts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mixer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4079,10 +4150,6 @@ fallito: </translation>
     <message>
         <source>Mute</source>
         <translation>Muto</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Mostra</translation>
     </message>
     <message>
         <source>Pan</source>

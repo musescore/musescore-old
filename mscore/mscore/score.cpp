@@ -251,6 +251,23 @@ void Score::clear()
       }
 
 //---------------------------------------------------------
+//   renumberMeasures
+//---------------------------------------------------------
+
+void Score::renumberMeasures()
+      {
+      int measureNo = 0;
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
+            measure->setNo(measureNo);
+            if (!measure->irregular())
+                  ++measureNo;
+            }
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -288,15 +305,7 @@ void Score::read(QString name)
       else {
             loadMsc(name);
             }
-      int measureNo = 0;
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* measure = (Measure*)mb;
-            measure->setNo(measureNo);
-            if (!measure->irregular())
-                  ++measureNo;
-            }
+      renumberMeasures();
       if (_mscVersion < 103) {
             foreach(Staff* staff, _staves) {
                   Part* part = staff->part();

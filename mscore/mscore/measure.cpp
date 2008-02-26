@@ -1429,8 +1429,6 @@ printf("\n");
                   Element* e = s->element(staff);
                   if (e == 0)
                         continue;
-                  double y = 0.0;
-                  QPointF pos(0.0, y);
                   ElementType t = e->type();
                   if (t == REST) {
                         //
@@ -1439,7 +1437,7 @@ printf("\n");
                         if (!_irregular && (e->tickLen() == 0)) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
-                              pos.setX((stretch - s->x() - e->width()) * .5);
+                              e->setXpos((stretch - s->x() - e->width()) * .5);
                               }
                         else if (e->voice() == 1) {          // TODO: check ??
                               e->move(0.0, -3 * _spatium);
@@ -1449,6 +1447,7 @@ printf("\n");
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
                         }
                   else {
+                        double y = 0.0;
                         double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)
                               e->setPos(-e->bbox().x() - xo + point(style->clefLeftMargin), y);

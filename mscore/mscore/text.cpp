@@ -188,13 +188,18 @@ void TextBase::layout(ScoreLayout* layout)
 
       _doc->documentLayout()->setPaintDevice(device);
 
+      _doc->setTextWidth(1000000.0);       //!? qt bug?
+      double tw = _doc->idealWidth();
+      _doc->setTextWidth(tw);
+
       if (_frameWidth > 0.0) {
             frame = QRectF();
             for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
                   QTextLayout* tl = tb.layout();
                   int n = tl->lineCount();
                   for (int i = 0; i < n; ++i)
-                        frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                        // frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                        frame |= tl->lineAt(0).rect().translated(tl->position());
                   }
             if (_circle) {
                   if (frame.width() > frame.height()) {
@@ -214,9 +219,6 @@ void TextBase::layout(ScoreLayout* layout)
             _bbox = frame.adjusted(-lw, -lw, lw, lw);
             }
       else {
-            _doc->setTextWidth(1000000.0);       //!? qt bug?
-            double tw = _doc->idealWidth();
-            _doc->setTextWidth(tw);
             _bbox = QRectF(QPointF(), _doc->size());
             }
       }

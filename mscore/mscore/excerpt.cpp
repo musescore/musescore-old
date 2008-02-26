@@ -115,6 +115,8 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       docName = "--";
       QDomElement e = doc.documentElement();
       s->read(e);
+      s->renumberMeasures();
+      s->setCreated(true);
       return s;
       }
 

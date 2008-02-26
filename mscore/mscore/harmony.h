@@ -5,6 +5,9 @@
 //
 //  Copyright (C) 2008 Werner Schweer and others
 //
+//  Some Code inspired by "The JAZZ++ Midi Sequencer"
+//  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
 //
@@ -24,12 +27,50 @@
 #include "text.h"
 
 //---------------------------------------------------------
+//   HChord
+//---------------------------------------------------------
+
+class HChord {
+      static const char* const scaleNames[2][12];
+      static const HChord C0;
+
+   protected:
+      int keys;
+
+   public:
+      HChord()      { keys = 0; }
+      HChord(int k) { keys = k; }
+      HChord(int a, int b, int c=-1, int d=-1, int e=-1, int f=-1, int g=-1,
+            int h=-1, int i=-1, int k=-1, int l=-1);
+      HChord(const char*);
+      void rotate(int semiTones);
+      static const char* scaleName(int key, bool flat = false) {
+            return scaleNames[flat][key % 12];
+            }
+      bool contains(int key) const {       // key in chord?
+            return (1 << (key % 12)) & keys;
+            }
+      HChord& operator+= (int key) {
+            keys |= (1 << (key % 12));
+            return *this;
+            }
+      HChord& operator-= (int key) {
+            keys &= ~(1 << (key % 12));
+            return *this;
+            }
+      bool operator==(const HChord& o) const { return (keys == o.keys); }
+      bool operator!=(const HChord& o) const { return (keys != o.keys); }
+
+      QString name(int key, bool flat);
+      };
+
+//---------------------------------------------------------
 //   class Harmony
 //---------------------------------------------------------
 
 class Harmony : public Text {
       unsigned char _base;
-      unsigned char _extension;
+      int _extension;
       unsigned char _root;
 
    public:
@@ -45,7 +86,7 @@ class Harmony : public Text {
 
       unsigned char base() const           { return _base;      }
       void setBase(unsigned char val)      { _base = val;       }
-      unsigned char extension() const      { return _extension; }
+      unsigned int extension() const       { return _extension; }
       void setExtension(unsigned char val) { _extension = val;  }
       unsigned char root() const           { return _root;      }
       void setRoot(unsigned char val)      { _root = val;       }

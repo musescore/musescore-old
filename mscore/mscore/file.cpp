@@ -892,15 +892,20 @@ void Score::printFile()
 
       QPrinter printer(QPrinter::HighResolution);
 //      QPrinter printer;
-
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
+
       printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
+
+#ifndef __MINGW32__
+      // when setting this on windows platform, pd.exec() does not
+      // show dialog
       printer.setOutputFileName(info.path() + "/" + name() + ".pdf");
+#endif
 
       QPrintDialog pd(&printer, 0);
       if (!pd.exec())

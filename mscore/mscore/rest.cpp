@@ -88,6 +88,7 @@ void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
       if (i == 0) {
+            setYoff(1.0);
             setSym(wholerestSym);
             return;
             }
