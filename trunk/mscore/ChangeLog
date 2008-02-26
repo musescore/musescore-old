@@ -1,4 +1,5 @@
 26.2.8 (ws)
+      - fix handling of line elements on excerpts
       - fix missing print dialog on windows port
       - fix measure numbers on new created excerpts
       - fixed some regressions: wrong whole measure rest layout
