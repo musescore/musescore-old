@@ -336,7 +336,7 @@ void SLine::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
       xml.tag("tick2", _tick2);
-      xml.tag("track", track());
+//      xml.tag("track", track());
       //
       // check if user has modified the default layout
       //
