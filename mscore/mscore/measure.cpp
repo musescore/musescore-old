@@ -1443,6 +1443,8 @@ printf("\n");
                               e->move(0.0, -3 * _spatium);
                               }
                         }
+                  else if (t == CHORD)
+                        ;
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
                         }
