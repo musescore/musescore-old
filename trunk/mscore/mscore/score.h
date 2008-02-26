@@ -185,6 +185,7 @@ class Score : public QObject {
       void cmdAddChordName();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
+      void renumberMeasures();
 
    public slots:
       void doUndo();

@@ -1021,10 +1021,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show</source>
-        <translation type="unfinished">Показать</translation>
-    </message>
-    <message>
         <source>Use Drumset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1038,6 +1034,34 @@ failed: </source>
     </message>
     <message>
         <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select L:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1351,6 +1375,49 @@ failed: </source>
     <message>
         <source>Mag</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExcerptsDialog</name>
+    <message>
+        <source>MuseScore: Excerpts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Создать</translation>
+    </message>
+    <message>
+        <source>Edit Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Titel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Excerpt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">ОК</translation>
     </message>
 </context>
 <context>
@@ -2426,10 +2493,6 @@ failed: </source>
     <message>
         <source>edit mode</source>
         <translation>Режим правки</translation>
-    </message>
-    <message>
-        <source>Part List...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file open</source>
@@ -3791,6 +3854,14 @@ failed: </source>
         <source>C major, A minor</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Excerpts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mixer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4078,10 +4149,6 @@ failed: </source>
     <message>
         <source>Mute</source>
         <translation>Приглушить</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Показать</translation>
     </message>
     <message>
         <source>Pan</source>

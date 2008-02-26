@@ -31,9 +31,11 @@ add_custom_command (
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
       )
 
-add_custom_target ( man
+add_custom_target ( man-en
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/man-en.pdf
       )
+
+add_dependencies (man-en man-scores)
 
 install (
       FILES

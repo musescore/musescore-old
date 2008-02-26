@@ -1019,10 +1019,6 @@ failed: </source>
         <translation>Tocar Transposição (meios tons)</translation>
     </message>
     <message>
-        <source>Show</source>
-        <translation>Mostrar</translation>
-    </message>
-    <message>
         <source>Use Drumset</source>
         <translation>Usar Percussão</translation>
     </message>
@@ -1036,6 +1032,34 @@ failed: </source>
     </message>
     <message>
         <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank Select L:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1349,6 +1373,49 @@ failed: </source>
     <message>
         <source>Mag</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>ExcerptsDialog</name>
+    <message>
+        <source>MuseScore: Excerpts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Novo</translation>
+    </message>
+    <message>
+        <source>Edit Excerpt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Titel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Excerpt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>
@@ -3508,10 +3575,6 @@ falhou:</translation>
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <source>Part List...</source>
-        <translation>Lista de partes...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Definições...</translation>
     </message>
@@ -3785,6 +3848,14 @@ falhou:</translation>
     </message>
     <message>
         <source>C major, A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excerpts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mixer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4070,10 +4141,6 @@ falhou:</translation>
     <message>
         <source>Sound:</source>
         <translation>Som:</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Solo</source>

@@ -1,3 +1,8 @@
+26.2.8 (ws)
+      - fix missing print dialog on windows port
+      - fix measure numbers on new created excerpts
+      - fixed some regressions: wrong whole measure rest layout
+      - fixed transposition of keys
 24.2.8 (ws)
       - extended harmony tables for MusicXml import/export
       - fixed layout of whole rests

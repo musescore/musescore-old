@@ -45,7 +45,7 @@ add_custom_command(
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
    )
 
-add_custom_target ( man
+add_custom_target ( man-scores
       DEPENDS
       ${CMAKE_CURRENT_BINARY_DIR}/promenade.pdf
       ${CMAKE_CURRENT_BINARY_DIR}/inv1-1.pdf

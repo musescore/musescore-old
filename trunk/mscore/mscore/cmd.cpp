@@ -1019,7 +1019,7 @@ MeasureBase* Score::appendMeasure(int type)
       {
       MeasureBase* last = _layout->last();
       int tick = last ? last->tick() + last->tickLen() : 0;
-      MeasureBase* mb;
+      MeasureBase* mb = 0;
       if (type == MEASURE)
             mb = new Measure(this);
       else if (type == HBOX)

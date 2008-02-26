@@ -121,7 +121,8 @@ void Score::transpose()
                         else if (nKey == 7)
                               nKey = -6;
                         nKey += 6;
-                        nKey = (nKey + 8) % 13;
+//                        nKey = (nKey + 8) % 13;
+                        nKey = (nKey + diff) % 13;
                         nKey -= 6;
                         undoChangeKey(staff(staffIdx), tick, oKey, nKey);
                         }

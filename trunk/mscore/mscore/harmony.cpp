@@ -5,6 +5,10 @@
 //
 //  Copyright (C) 2008 Werner Schweer and others
 //
+//  Some Code inspired by "The JAZZ++ Midi Sequencer"
+//  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.
+//
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
 //
@@ -20,6 +24,183 @@
 
 #include "harmony.h"
 #include "chordedit.h"
+
+const HChord HChord::C0(0,3,6,9);
+
+//---------------------------------------------------------
+//   scale_names
+//---------------------------------------------------------
+
+const char* const HChord::scaleNames[2][12] = {
+      { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" },
+      { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
+      };
+
+//---------------------------------------------------------
+//   HChord
+//---------------------------------------------------------
+
+HChord::HChord(const char* s)
+      {
+      QStringList sl = QString(s).split(" ", QString::SkipEmptyParts);
+      foreach(QString s, sl) {
+            for (int i = 0; i < 12; ++i) {
+                  if (s == scaleNames[0][i] || s == scaleNames[1][i]) {
+                        operator+=(i);
+                        break;
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   HChord
+//---------------------------------------------------------
+
+HChord::HChord(int a, int b, int c, int d, int e, int f, int g, int h, int i, int k, int l)
+      {
+      keys = 0;
+      if (a >= 0)
+            operator+=(a);
+      if (b >= 0)
+            operator+=(b);
+      if (c >= 0)
+            operator+=(c);
+      if (d >= 0)
+            operator+=(d);
+      if (e >= 0)
+            operator+=(e);
+      if (f >= 0)
+            operator+=(f);
+      if (g >= 0)
+            operator+=(g);
+      if (h >= 0)
+            operator+=(h);
+      if (i >= 0)
+            operator+=(i);
+      if (k >= 0)
+            operator+=(k);
+      if (l >= 0)
+            operator+=(l);
+      }
+
+//---------------------------------------------------------
+//   rotate
+//    rotate 12 Bits
+//---------------------------------------------------------
+
+void HChord::rotate(int semiTones)
+      {
+      while (semiTones > 0) {
+            if (keys & 0x800)
+                  keys = ((keys & ~0x800) << 1) + 1;
+            else
+                  keys <<= 1;
+            --semiTones;
+            }
+      while (semiTones < 0) {
+            if (keys & 1)
+                  keys = (keys >> 1) | 0x800;
+            else
+                  keys >>= 1;
+            ++semiTones;
+            }
+      }
+
+//---------------------------------------------------------
+//   name
+//---------------------------------------------------------
+
+QString HChord::name(int key, bool flat)
+      {
+      QString buf = scaleName(key, flat);
+      HChord c(*this);
+      c.rotate(-key);        // transpose to C
+
+      // special cases
+      if (c == C0) {
+            buf += "o";
+            return buf;
+            }
+
+      bool seven   = false;
+      bool sharp9  = false;
+      bool nat11   = false;
+      bool sharp11 = false;
+      bool nat13   = false;
+      bool flat13  = false;
+
+      // minor?
+      if (c.contains(3)) {
+            if (!c.contains(4))
+                  buf += "m";
+            else
+                  sharp9 = true;
+            }
+
+      // 7
+      if (c.contains(11)) {
+            buf += "j7";
+            seven = true;
+            }
+      else if (c.contains(10)) {
+            buf += "7";
+            seven = true;
+            }
+
+      // 4
+      if (c.contains(5)) {
+            if (!c.contains(4)) {
+                  buf += "sus4";
+                  }
+            else
+                  nat11 = true;
+            }
+
+      // 5
+      if (c.contains(7)) {
+            if (c.contains(6))
+                  sharp11 = true;
+            if (c.contains(8))
+                  flat13 = true;
+            }
+      else {
+            if (c.contains(6))
+                  buf += "5-";
+            if (c.contains(8))
+                  buf += "5+";
+            }
+
+      // 6
+      if (c.contains(9)) {
+            if (!seven)
+                  buf += "6";
+            else
+                  nat13 = true;
+            }
+
+      // 9
+      if (c.contains(1))
+            buf += "9-";
+      if (c.contains(2))
+            buf += "9";
+      if (sharp9)
+            buf += "9+";
+
+      // 11
+      if (nat11)
+            buf += "11 ";
+      if (sharp11)
+            buf += "11+";
+
+      // 13
+      if (flat13)
+            buf += "13-";
+      if (nat13)
+            buf += "13";
+      return buf;
+      }
+
 
 #if 0
         ======================unknown==================
@@ -39,220 +220,225 @@
 //    chord extension names
 //---------------------------------------------------------
 
-static char* extensionNames[] = {
-            0,
-            "",
-            "Maj",
-            "5b",
-            "aug",
-            "6",
-            "Maj7",
-            "Maj9",
-            "Maj9#11",
-            "Maj13#11",
+struct ChordNames {
+      const char* name;
+      HChord chord;           // C based chord
+      };
 
-/*10*/      "Maj13",
-            0,
-            "+",
-            "Maj7#5",
-            "69",
-            "2",
-            "m",
-            "maug",
-            "mMaj7",
-            "m7",
+static const ChordNames extensionNames[] = {
+            { 0,            HChord() },
+            { "",           HChord("C E G") },        // major triad
+            { "Maj",        HChord("C E G") },
+            { "5b",         HChord("C E Gb") },       // major flat 5 triad
+            { "aug",        HChord("C E G#") },       // augmented triad
+            { "6",          HChord("C E G A") },      // sixth
+            { "Maj7",       HChord("C E G B") },
+            { "Maj9",       HChord("C E G B D") },
+            { "Maj9#11",    HChord("C E G B D F#") },
+            { "Maj13#11",   HChord("C E G B D F# A") },
+/*10*/
+            { "Maj13",      HChord("C E G B D F# A") },
+            { 0,            HChord() },
+            { "+",          HChord("C E G#") },       // augmented triad
+            { "Maj7#5",     HChord() },
+            { "69",         HChord("C D E G A") },
+            { "2",          HChord("C D E G") },      // major add 2
+            { "m",          HChord("C Eb G") },
+            { "maug",       HChord("C D# G#") },
+            { "mMaj7",      HChord() },
+            { "m7",         HChord("C Eb G Bb") },
 
-/*20*/      "m9",
-            "m11",
-            "m13",
-            "m6",
-            "m#5",
-            "m7#5",
-            "m69",
-            0,
-            "Maj7Lyd",
-            "Maj7b5",
+/*20*/      { "m9",         HChord("C Eb G Bb D") },
+            { "m11",        HChord("C Eb G Bb D F") },
+            { "m13",        HChord("C Eb G Bb D F A") },
+            { "m6",         HChord("C Eb G A") },
+            { "m#5",        HChord() },
+            { "m7#5",       HChord() },
+            { "m69",        HChord() },
+            { 0,            HChord() },
+            { "Maj7Lyd",    HChord() },
+            { "Maj7b5",     HChord() },
 
-/*30*/      0,
-            0,
-            "m7b5",
-            "dim",            // dim7
-            "m9b5",
-            0,
-            0,
-            0,
-            0,
-            0,
+/*30*/      { 0,            HChord() },
+            { 0,            HChord() },
+            { "m7b5",       HChord() },
+            { "dim",        HChord("C Eb Gb A") },    // dim7
+            { "m9b5",       HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
 
-/*40*/      "5",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+/*40*/      { "5",          HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
 
-/*50*/      0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            "7+",
-            "9+",
-            "13+",
-            "(blues)",
+/*50*/      { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { "7+",         HChord() },
+            { "9+",         HChord() },
+            { "13+",        HChord() },
+            { "(blues)",    HChord() },
 
-/*60*/      "7(Blues)",
-            0,
-            0,
-            0,
-            "7",
-            "13",
-            "7b13",
-            "7#11",
-            "13#11",
-            "7#11b13",
+/*60*/      { "7(Blues)",   HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { "7",          HChord() },
+            { "13",         HChord() },
+            { "7b13",       HChord() },
+            { "7#11",       HChord() },
+            { "13#11",      HChord() },
+            { "7#11b13",    HChord() },
 
-/*70*/      "9",
-            "9b13",
-            0,
-            "9#11",
-            "13#11",
-            "9#11b13",
-            "7b9",
-            "13b9",
-            "7b9b13",
-            "7b9#11",
+/*70*/      { "9",          HChord() },
+            { "9b13",       HChord() },
+            { 0,            HChord() },
+            { "9#11",       HChord() },
+            { "13#11",      HChord() },
+            { "9#11b13",    HChord() },
+            { "7b9",        HChord() },
+            { "13b9",       HChord() },
+            { "7b9b13",     HChord() },
+            { "7b9#11",     HChord() },
 
-/*80*/      "13b9#11",
-            "7b9#11b13",
-            "7#9",
-            "13#9",
-            "7#9b13",
-            "9#11",
-            "13#9#11",
-            "7#9#11b13",
-            "7b5",
-            "13b5",
+/*80*/      { "13b9#11",    HChord() },
+            { "7b9#11b13",  HChord() },
+            { "7#9",        HChord() },
+            { "13#9",       HChord() },
+            { "7#9b13",     HChord() },
+            { "9#11",       HChord() },
+            { "13#9#11",    HChord() },
+            { "7#9#11b13",  HChord() },
+            { "7b5",        HChord() },
+            { "13b5",       HChord() },
 
-/*90*/      "7b5b13",
-            "9b5",
-            "9b5b13",
-            "7b5b9",
-            "13b5b9",
-            "7b5b9b13",
-            "7b5#9",
-            "13b5#9",
-            "7b5#9b13",
-            "7#5",
+/*90*/      { "7b5b13",     HChord() },
+            { "9b5",        HChord() },
+            { "9b5b13",     HChord() },
+            { "7b5b9",      HChord() },
+            { "13b5b9",     HChord() },
+            { "7b5b9b13",   HChord() },
+            { "7b5#9",      HChord() },
+            { "13b5#9",     HChord() },
+            { "7b5#9b13",   HChord() },
+            { "7#5",        HChord() },
 
-/*100*/     "13#5",
-            "7#5#11",
-            "13#5#11",
-            "9#5",
-            "9#5#11",
-            "7#5b9",
-            "13#5b9",
-            "7#5b9#11",
-            "13#5b9#11",
-            "7#5#9",
+/*100*/     { "13#5",       HChord() },
+            { "7#5#11",     HChord() },
+            { "13#5#11",    HChord() },
+            { "9#5",        HChord() },
+            { "9#5#11",     HChord() },
+            { "7#5b9",      HChord() },
+            { "13#5b9",     HChord() },
+            { "7#5b9#11",   HChord() },
+            { "13#5b9#11",  HChord() },
+            { "7#5#9",      HChord() },
 
-/*110*/     "13#5#9#11",
-            "7#5#9#11",
-            "13#5#9#11",
-            "7alt",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+/*110*/     { "13#5#9#11",  HChord() },
+            { "7#5#9#11",   HChord() },
+            { "13#5#9#11",  HChord() },
+            { "7alt",       HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
 
-/*120*/     0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            "7sus",
-            "13sus",
+/*120*/     { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { 0,            HChord() },
+            { "7sus",       HChord() },
+            { "13sus",      HChord() },
 
-/*130*/     "7susb13",
-            "7sus#11",
-            "13sus#11",
-            "7sus#11b13",
-            "9sus",
-            "9susb13",
-            "9sus#11",
-            "13sus#11",
-            "9sus#11b13",
-            0,
+/*130*/     { "7susb13",    HChord() },
+            { "7sus#11",    HChord() },
+            { "13sus#11",   HChord() },
+            { "7sus#11b13", HChord() },
+            { "9sus",       HChord() },
+            { "9susb13",    HChord() },
+            { "9sus#11",    HChord() },
+            { "13sus#11",   HChord() },
+            { "9sus#11b13", HChord() },
+            { 0,            HChord() },
 
-/*140*/     "7susb9",
-            "13susb9",
-            "7susb9b13",
-            "7susb9#11",
-            "13susb9#11",
-            "7susb9#11b13",
-            "7sus#9",
-            "13sus#9",
-            "7sus#9b13",
-            "9sus#11",
+/*140*/     { "7susb9",     HChord() },
+            { "13susb9",    HChord() },
+            { "7susb9b13",  HChord() },
+            { "7susb9#11",  HChord() },
+            { "13susb9#11", HChord() },
+            { "7susb9#11b13",HChord() },
+            { "7sus#9",      HChord() },
+            { "13sus#9",     HChord() },
+            { "7sus#9b13",   HChord() },
+            { "9sus#11",     HChord() },
 
-/*150*/     "13sus#9#11",
-            "7sus#9#11b13",
-            "7susb5",
-            "13susb5",
-            "7susb5b13",
-            "9susb5",
-            "9susb5b13",
-            "7susb5b9",
-            "13susb5b9",
-            "7susb5b9b13",
+/*150*/     { "13sus#9#11",   HChord() },
+            { "7sus#9#11b13", HChord() },
+            { "7susb5",       HChord() },
+            { "13susb5",      HChord() },
+            { "7susb5b13",    HChord() },
+            { "9susb5",       HChord() },
+            { "9susb5b13",    HChord() },
+            { "7susb5b9",     HChord() },
+            { "13susb5b9",    HChord() },
+            { "7susb5b9b13",  HChord() },
 
-/*160*/     "7susb5#9",
-            "13susb5#9",
-            "7susb5#9b13",
-            "7sus#5",
-            "13sus#5",
-            "7sus#5#11",
-            "13sus#5#11",
-            "9sus#5",
-            "9sus#5#11",
-            "7sus#5b9",
+/*160*/     { "7susb5#9",     HChord() },
+            { "13susb5#9",    HChord() },
+            { "7susb5#9b13",  HChord() },
+            { "7sus#5",       HChord() },
+            { "13sus#5",      HChord() },
+            { "7sus#5#11",    HChord() },
+            { "13sus#5#11",   HChord() },
+            { "9sus#5",       HChord() },
+            { "9sus#5#11",    HChord() },
+            { "7sus#5b9",     HChord() },
 
-/*170*/     "13sus#5b9",
-            "7sus#5b9#11",
-            "13sus#5b9#11",
-            "7sus#5#9",
-            "13sus#5#9#11",
-            "7sus#5#9#11",
-            "13sus#5#9#11",
-            "4",
-            0,
-            0,
+/*170*/     { "13sus#5b9",    HChord() },
+            { "7sus#5b9#11",  HChord() },
+            { "13sus#5b9#11", HChord() },
+            { "7sus#5#9",     HChord() },
+            { "13sus#5#9#11", HChord() },
+            { "7sus#5#9#11",  HChord() },
+            { "13sus#5#9#11", HChord() },
+            { "4",            HChord() },
+            { 0,              HChord() },
+            { 0,              HChord() },
 
-/*180*/     0,
-            0,
-            0,
-            0,
-            "sus",
-            "dim7",     // mscore ext.
-            "sus2",     //
-            "mb3b13",   // neapolitan
-            "#13",      // italian
-            "#11#13",   // french
+/*180*/     { 0,              HChord() },
+            { 0,              HChord() },
+            { 0,              HChord() },
+            { 0,              HChord() },
+            { "sus",          HChord("C F G") },
 
-/*190*/     "add#13",   // german
-            "6/add9",
-            "sus4",
+            { "dim7",         HChord() },  // mscore ext.
+            { "sus2",         HChord("C D G") },      // suspended 2nd chord
+            { "mb3b13",       HChord() },  // neapolitan
+            { "#13",          HChord() },  // italian
+            { "#11#13",       HChord() },  // french
 
+/*190*/     { "add#13",       HChord() },  // german
+            { "6/add9",       HChord() },
+            { "sus4",         HChord("C F G") },      // sus
       };
 
 //---------------------------------------------------------
@@ -263,7 +449,7 @@ const char* Harmony::getExtensionName(int i)
       {
       if (i >= int(sizeof(extensionNames)/sizeof(*extensionNames)))
             return 0;
-      return extensionNames[i];
+      return extensionNames[i].name;
       }
 
 //---------------------------------------------------------
@@ -469,7 +655,7 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       else
             s = s.mid(idx);
       for (unsigned i = 1; i < sizeof(extensionNames)/sizeof(*extensionNames); ++i) {
-            if (extensionNames[i] == s)
+            if (extensionNames[i].name == s)
                   return i;
             }
       return 1;
