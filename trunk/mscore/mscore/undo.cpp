@@ -85,7 +85,8 @@ static const char* undoName[] = {
       "ChangeBarLineSpan",
       "SigInsertTime",
       "FixTicks",
-      "ChangeBeamMode"
+      "ChangeBeamMode",
+      "ChangeCopyright"
       };
 
 static bool UNDO = false;
@@ -586,6 +587,13 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = span;
                   }
                   break;
+            case UndoOp::ChangeCopyright:
+                  {
+                  QString s = rights->toHtml("UTF-8");
+                  rights->setHtml(i->s);
+                  i->s = s;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -850,6 +858,20 @@ void Score::undoChangeBarLineSpan(Staff* staff, int span)
       i.type  = UndoOp::ChangeBarLineSpan;
       i.staff = staff;
       i.val1  = span;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeCopyright
+//---------------------------------------------------------
+
+void Score::undoChangeCopyright(const QString& s)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type  = UndoOp::ChangeCopyright;
+      i.s    = s;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

@@ -186,6 +186,7 @@ class Score : public QObject {
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
       void renumberMeasures();
+      void cmdResetBeamMode();
 
    public slots:
       void doUndo();
@@ -311,6 +312,7 @@ class Score : public QObject {
       void undoChangeBeamMode(ChordRest* cr, int mode);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
+      void undoChangeCopyright(const QString&);
 
       void setNote(int tick, int track, int pitch, int len);
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);

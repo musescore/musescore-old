@@ -434,8 +434,11 @@ DummyAudio::~DummyAudio()
 bool DummyAudio::init()
       {
       midiDriver = new AlsaMidiDriver();
-      if (!midiDriver->init())
+      if (!midiDriver->init()) {
+            delete midiDriver;
+            midiDriver = 0;
             return false;
+            }
 
       struct pollfd* pfd;
       int npfd;

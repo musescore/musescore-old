@@ -196,7 +196,8 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             xml.trackDiff = trackOffset[staffIdx];
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1 + xml.trackDiff/4));
             for (MeasureBase* m = _layout->first(); m; m = m->next()) {
-                  m->write(xml, staffIdx, isFirstStaff);
+                  if (isFirstStaff || m->type() == MEASURE)
+                        m->write(xml, staffIdx, isFirstStaff);
                   if (m->type() == MEASURE)
                         xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
                   }

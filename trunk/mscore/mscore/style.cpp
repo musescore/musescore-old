@@ -119,7 +119,7 @@ const TextStyle defaultTextStyleArray[] = {
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
-         0.3, 1.0, 20, Qt::black, false),
+         0.3, 1.0, 20, Qt::black, false, true),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true),
@@ -224,14 +224,14 @@ TextStyle::TextStyle(
    Align _align,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
-   double fw, double pw, int fr, QColor co, bool _circle)
+   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag)
 
    : name(_name), family(_family), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
    align(_align),
    xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
-   frameRound(fr), frameColor(co), circle(_circle)
+   frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag)
       {
       }
 
@@ -294,8 +294,10 @@ void TextStyle::write(Xml& xml) const
       xml.tag("paddingWidth", paddingWidth);
       xml.tag("frameRound", frameRound);
       xml.tag("frameColor", frameColor);
-      xml.tag("circle", circle);
-
+      if (circle)
+            xml.tag("circle", circle);
+      if (systemFlag)
+            xml.tag("systemFlag", systemFlag);
       xml.etag();
       }
 
@@ -346,6 +348,8 @@ void TextStyle::read(QDomElement e)
                   frameColor = readColor(e);
             else if (tag == "circle")
                   circle = val.toInt();
+            else if (tag == "systemFlag")
+                  systemFlag = val.toInt();
             else
                   domError(e);
             }

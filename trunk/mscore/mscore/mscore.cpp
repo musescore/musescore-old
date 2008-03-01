@@ -285,6 +285,7 @@ MuseScore::MuseScore()
          << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
          << "seek-begin" << "seek-end"
          << "load-style" << "save-style" << "select-all" << "transpose"
+         << "reset-beammode"
          ;
 
       foreach(const QString s, sl) {
@@ -576,6 +577,7 @@ MuseScore::MuseScore()
       menuLayout->addAction(getAction("stretch-"));
 
       menuLayout->addAction(tr("Reset Stretch"), this, SLOT(resetUserStretch()));
+      menuLayout->addAction(getAction("reset-beammode"));
       menuLayout->addAction(tr("Breaks..."), this, SLOT(showLayoutBreakPalette()));
 
       //---------------------

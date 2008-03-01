@@ -518,6 +518,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "reset-beammode",
+         QT_TR_NOOP("Reset Beam Mode"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Reset Beam Mode"),
+         QT_TR_NOOP("Reset Beam Mode of selected measures")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "flip",
          QT_TR_NOOP("flip stem"),
          Qt::Key_X,

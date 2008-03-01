@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: cmd.cpp,v 1.74 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1325,6 +1325,47 @@ void Score::cmdAddStretch(double val)
       }
 
 //---------------------------------------------------------
+//   cmdResetBeamMode
+//---------------------------------------------------------
+
+void Score::cmdResetBeamMode()
+      {
+      if (sel->state() != SEL_SYSTEM && sel->state() != SEL_STAFF) {
+            printf("no system or staff selected\n");
+            return;
+            }
+      int startTick = sel->tickStart;
+      int endTick   = sel->tickEnd;
+      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            if (m->type() != MEASURE)
+                  continue;
+            if (m->tick() < startTick)
+                  continue;
+            if (m->tick() >= endTick)
+                  break;
+            Measure* measure = (Measure*)m;
+            for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+                  if (seg->subtype() != Segment::SegChordRest)
+                        continue;
+                  for (int track = 0; track < nstaves() * VOICES; ++track) {
+                        ChordRest* cr = (ChordRest*)seg->element(track);
+                        if (cr == 0)
+                              continue;
+                        if (cr->type() == CHORD) {
+                              if (cr->beamMode() != BEAM_AUTO)
+                                    undoChangeBeamMode(cr, BEAM_AUTO);
+                              }
+                        else if (cr->type() == REST) {
+                              if (cr->beamMode() != BEAM_NO)
+                                    undoChangeBeamMode(cr, BEAM_NO);
+                              }
+                        }
+                  }
+            }
+      layoutAll = true;
+      }
+
+//---------------------------------------------------------
 //   cmd
 //---------------------------------------------------------
 
@@ -1712,6 +1753,8 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "transpose") {
                   transpose();
                   }
+            else if (cmd == "reset-beammode")
+                  cmdResetBeamMode();
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();
