@@ -102,6 +102,7 @@ class Element {
       int _subtype;
 
       int _track;               ///< staffIdx * VOICES + voice
+                                ///< -1 if this is a system element
 
       MTime _time;
       QColor _color;

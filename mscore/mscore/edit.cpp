@@ -787,9 +787,13 @@ void Score::deleteItem(Element* el)
                         layoutAll = true;
                         break;
                         }
-                  if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
+                  else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
                         el->staff()->part()->setShortName(QString());
                         _layout->setInstrumentNames();
+                        break;
+                        }
+                  else if (el->subtype() == TEXT_COPYRIGHT) {
+                        undoChangeCopyright(QString(""));
                         break;
                         }
 

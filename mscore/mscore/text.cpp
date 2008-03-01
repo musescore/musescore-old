@@ -344,6 +344,8 @@ void TextC::setStyle(const TextStyle* s)
       _ryoff         = s->ryoff;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+      if (s->systemFlag)
+            setTrack(-1);
       }
 
 //---------------------------------------------------------
@@ -657,6 +659,8 @@ void TextB::setStyle(const TextStyle* s)
       _ryoff         = s->ryoff;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+      if (s->systemFlag)
+            setTrack(-1);
 
       textBase()->setFrameWidth(s->frameWidth);
       textBase()->setPaddingWidth(s->paddingWidth);
@@ -999,7 +1003,8 @@ void TextB::endEdit()
       // HACK
       //
       if (subtype() == TEXT_COPYRIGHT) {
-            score()->setCopyright(doc());
+            score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
+//            score()->setCopyright(doc());
             }
       if (subtype() == TEXT_TEXTLINE) {
             TextLineSegment* tls = (TextLineSegment*)parent();

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.5">
-  <Spatium>1.5</Spatium>
+  <Mag>4.65999</Mag>
+  <xoff>-332.74</xoff>
+  <yoff>-697.865</yoff>
   <Division>480</Division>
-  <Mag>0.894871</Mag>
-  <xoff>5.08</xoff>
-  <yoff>2.96333</yoff>
+  <Spatium>1.5</Spatium>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -247,9 +247,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          </p></body></html>
       </name>
     <Instrument>
-      <midiChannel>0</midiChannel>
       <midiProgram>24</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -321,11 +319,13 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     </Slur>
   <Slur>
-    <tick2>12000</tick2>
+    <tick2>12960</tick2>
     <track>0</track>
     <tick>11760</tick>
     <SlurSegment no="0">
-      <o4 x="15.1163" y="-4.95696"/>
+      <o2 x="0.207622" y="-0.498293"/>
+      <o3 x="0.207622" y="-0.207622"/>
+      <o4 x="0.125998" y="0.150539"/>
       </SlurSegment>
     </Slur>
   <Slur>
@@ -364,11 +364,11 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     </Slur>
   <Slur>
-    <tick2>18960</tick2>
+    <tick2>19680</tick2>
     <track>0</track>
     <tick>18720</tick>
     <SlurSegment no="0">
-      <o4 x="11.1733" y="-3.43489"/>
+      <o4 x="0.01304" y="0.288492"/>
       </SlurSegment>
     </Slur>
   <Slur>
@@ -407,12 +407,12 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     </Slur>
   <Slur>
-    <tick2>24960</tick2>
+    <tick2>25200</tick2>
     <track>0</track>
     <tick>24720</tick>
     <SlurSegment no="0">
       <o2 x="0.956489" y="-0.873316"/>
-      <o4 x="3.90913" y="-1.16442"/>
+      <o4 x="-0.174957" y="0.367112"/>
       </SlurSegment>
     </Slur>
   <Slur>
@@ -807,7 +807,6 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>69600</tick>
     <tick2>77880</tick2>
-    <track>0</track>
     <Segment>
       <off1 x="-0.125186" y="3.88077"/>
       <off2 x="0" y="0"/>
@@ -3684,5 +3683,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

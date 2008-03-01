@@ -84,11 +84,13 @@ void MidiSeq::threadStart(void*)
       timer = new RtcTimer;
       if (!timer->initTimer()) {
             delete timer;
+            timer = 0;
             fprintf(stderr, "no midi timer available\n");
             }
       else if (debugMode)
             printf("midi RTC started\n");
-      initRealtimeTimer();
+      if (!initRealtimeTimer())
+            printf("RTC init failed\n");
       updatePollFd();
       }
 

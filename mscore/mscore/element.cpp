@@ -141,6 +141,7 @@ void Element::init()
       _visible    = true;
       _generated  = false;
       _track      = -1;
+//      _track      = 0;
       _color      = Qt::black;
       _mxmlOff    = 0;
       _pos.setX(0.0);
@@ -331,8 +332,15 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("subtype", subtypeName()));
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
-      if ((track() != -1) && (track() != xml.curTrack))
-            pl.append(Prop("track", track() + xml.trackDiff));
+//      if ((track() != -1) && (track() != xml.curTrack))
+      if (track() != xml.curTrack) {
+            int t;
+            if (track() == -1)
+                  t = -1;
+            else
+                  t = track() + xml.trackDiff;
+            pl.append(Prop("track", t));
+            }
       if (selected())
             pl.append(Prop("selected", selected()));
       if (!visible())

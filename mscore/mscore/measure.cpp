@@ -2127,8 +2127,9 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             }
 
       foreach (const Element* el, _el) {
-            if ((el->staffIdx() == staff) || (el->staffIdx() == -1 && writeSystemElements))
+            if ((el->staffIdx() == staff) || ((el->track() == -1) && writeSystemElements)) {
                   el->write(xml);
+                  }
             }
 
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {

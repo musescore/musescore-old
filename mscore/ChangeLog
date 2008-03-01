@@ -1,3 +1,9 @@
+1.3.8 (ws)
+      - implemented: delete Copyright
+      - implemented: undo/redo for changing copyright text
+27.2.8 (ws)
+      - new Function: reset beam mode for selected measures
+
 26.2.8 (ws)
       - fix handling of line elements on excerpts
       - fix missing print dialog on windows port
