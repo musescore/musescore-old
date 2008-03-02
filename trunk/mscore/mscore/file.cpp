@@ -168,6 +168,7 @@ void MuseScore::clearScore()
 /**
  Create a modal file open dialog.
  If a file is selected, load it.
+ Handles the GUI's file-open action.
  */
 
 void MuseScore::loadFile()
@@ -200,6 +201,12 @@ void MuseScore::loadFile()
 //    return true on success
 //---------------------------------------------------------
 
+/**
+ Save the current score.
+ Handles the GUI's file-save action.
+ Return true if OK and false on error.
+ */
+
 bool MuseScore::saveFile()
       {
       bool val = cs->saveFile();
@@ -207,6 +214,15 @@ bool MuseScore::saveFile()
       tab->setTabText(tab->currentIndex(), cs->name());
       return val;
       }
+
+/**
+ If file has generated name, create a modal file save dialog
+ and ask filename.
+ Rename old file to backup file (.xxxx.msc,).
+ Default is to save score in .msc format,
+ but (compressed) MusicXML files are also saved correctly.
+ Return true if OK and false on error.
+ */
 
 bool Score::saveFile()
       {
@@ -223,10 +239,16 @@ bool Score::saveFile()
             }
 
       // if file was already saved in this session
-      // dont overwrite backup again
+      // save but don't overwrite backup again
 
       if (saved()) {
-            bool rv = mscore->saveFile(*fileInfo());
+            bool rv = false;
+            if (fileInfo()->suffix() == "mxl")
+                  rv = saveMxl(fileInfo()->absoluteFilePath());
+            else if (fileInfo()->suffix() == "xml")
+                  rv = saveXml(fileInfo()->absoluteFilePath());
+            else
+                  rv = mscore->saveFile(*fileInfo());
             if (rv)
                   setDirty(false);
             return rv;
@@ -244,7 +266,13 @@ bool Score::saveFile()
             QMessageBox::critical(mscore, tr("MuseScore: Open File"), s);
             return false;
             }
-      bool rv = mscore->saveFile(&temp);
+      bool rv = false;
+      if (qf->suffix() == "mxl")
+            rv = saveMxl(temp.fileName());
+      else if (qf->suffix() == "xml")
+            rv = saveXml(temp.fileName());
+      else
+            rv = mscore->saveFile(&temp);
 
       if (!rv)
             return false;
@@ -283,6 +311,12 @@ bool Score::saveFile()
 //    return true on success
 //---------------------------------------------------------
 
+/**
+ Save the current score using a different name or type.
+ Handles the GUI's file-save-as action.
+ Return true if OK and false on error.
+ */
+
 bool MuseScore::saveAs()
       {
       if (!cs)
@@ -309,6 +343,7 @@ bool MuseScore::saveAs()
       if (fn.isEmpty())
             return false;
 
+      bool rv = false;
       if (selectedFilter == fl[0]) {
             // save as mscore *.msc file
             if (!fn.endsWith(".msc"))
@@ -320,13 +355,13 @@ bool MuseScore::saveAs()
             // save as MusicXML *.xml file
             if (!fn.endsWith(".xml"))
                   fn.append(".xml");
-            return cs->saveXml(fn);
+            rv = cs->saveXml(fn);
             }
       if (selectedFilter == fl[2]) {
             // save as compressed MusicXML *.mxl file
             if (!fn.endsWith(".mxl"))
                   fn.append(".mxl");
-            return cs->saveMxl(fn);
+            rv = cs->saveMxl(fn);
             }
       if (selectedFilter == fl[3]) {
             // save as midi file *.mid
@@ -364,6 +399,13 @@ bool MuseScore::saveAs()
                   fn.append(".ly");
             return cs->saveLilypond(fn);
             }
+
+      // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
+      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl"))) {
+            cs->setDirty(false);
+            return true;
+      }
+
       return false;
       }
 

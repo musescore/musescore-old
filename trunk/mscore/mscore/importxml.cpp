@@ -329,7 +329,7 @@ void Score::importMusicXml(const QString& name)
       musicxml.import(this);
       _layout->connectTies();
       layoutAll = true;
-      _created = true;
+      _created = false;
       }
 
 //---------------------------------------------------------
@@ -349,7 +349,7 @@ void Score::importCompressedMusicXml(const QString& name)
       musicxml.import(this);
       _layout->connectTies();
       layoutAll = true;
-      _created = true;
+      _created = false;
       }
 
 //---------------------------------------------------------
