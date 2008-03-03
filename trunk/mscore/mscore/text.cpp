@@ -427,6 +427,7 @@ TextStyle* TextB::style() const
             case TEXT_FINGERING:        st = TEXT_STYLE_FINGERING; break;
             case TEXT_INSTRUMENT_LONG:  st = TEXT_STYLE_INSTRUMENT_LONG; break;
             case TEXT_INSTRUMENT_SHORT: st = TEXT_STYLE_INSTRUMENT_SHORT; break;
+            case TEXT_INSTRUMENT_EXCERPT: st = TEXT_STYLE_INSTRUMENT_EXCERPT; break;
             case TEXT_TEMPO:            st = TEXT_STYLE_TEMPO; break;
             case TEXT_LYRIC:            st = TEXT_STYLE_LYRIC; break;
             case TEXT_TUPLET:           st = TEXT_STYLE_TUPLET; break;
@@ -467,6 +468,7 @@ const QString TextB::subtypeName() const
             case TEXT_FINGERING:        return "Fingering";
             case TEXT_INSTRUMENT_LONG:  return "InstrumentLong";
             case TEXT_INSTRUMENT_SHORT: return "InstrumentShort";
+            case TEXT_INSTRUMENT_EXCERPT: return "InstrumentExcerpt";
             case TEXT_TEMPO:            return "Tempo";
             case TEXT_LYRIC:            return "Lyric";
             case TEXT_TUPLET:           return "Tuplet";
@@ -516,6 +518,8 @@ void TextB::setSubtype(const QString& s)
             st = TEXT_INSTRUMENT_LONG;
       else if (s == "InstrumentShort")
             st = TEXT_INSTRUMENT_SHORT;
+      else if (s == "InstrumentExcerpt")
+            st = TEXT_INSTRUMENT_EXCERPT;
       else if (s == "Tempo")
             st = TEXT_TEMPO;
       else if (s == "Lyric")
@@ -660,7 +664,7 @@ void TextB::setStyle(const TextStyle* s)
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       if (s->systemFlag)
-            setTrack(-1);
+            setSystemFlag(true);
 
       textBase()->setFrameWidth(s->frameWidth);
       textBase()->setPaddingWidth(s->paddingWidth);

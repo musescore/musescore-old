@@ -155,6 +155,7 @@ void Element::init()
       _rxoff       = 0;
       _ryoff       = 0;
       _offsetType  = OFFSET_SPATIUM;
+      _systemFlag  = false;
       }
 
 //---------------------------------------------------------
@@ -332,7 +333,6 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("subtype", subtypeName()));
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
-//      if ((track() != -1) && (track() != xml.curTrack))
       if (track() != xml.curTrack) {
             int t;
             if (track() == -1)
@@ -351,6 +351,8 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("ticklen", _duration.tick()));
       if (_color != Qt::black)
             pl.append(Prop("color", _color));
+      if (_systemFlag)
+            pl.append(Prop("systemFlag", _systemFlag));
       return pl;
       }
 
@@ -401,6 +403,11 @@ bool Element::readProperties(QDomElement e)
             int g = e.attribute("g", "0").toInt();
             int b = e.attribute("b", "0").toInt();
             _color.setRgb(r, g, b);
+            }
+      else if (tag == "systemFlag") {
+            _systemFlag = i;
+            if (_systemFlag)
+                  _track = 0;
             }
       else
             return false;

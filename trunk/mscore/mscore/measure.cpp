@@ -1771,8 +1771,9 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
       // determine staff
       System* s = system();
       int staffIdx = s->y2staff(p.y());
-      if (staffIdx == -1)
-            return 0;
+      if (staffIdx == -1 || e->systemFlag()) {
+            staffIdx = 0;
+            }
       Staff* staff = score()->staff(staffIdx);
 
       // convert p from canvas to measure relative position and take x coordinate
@@ -2127,7 +2128,7 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             }
 
       foreach (const Element* el, _el) {
-            if ((el->staffIdx() == staff) || ((el->track() == -1) && writeSystemElements)) {
+            if ((el->staffIdx() == staff) || (el->systemFlag() && writeSystemElements)) {
                   el->write(xml);
                   }
             }

@@ -1712,12 +1712,17 @@ void Canvas::dropEvent(QDropEvent* event)
                         {
                         // Symbol* s = (Symbol*)dragElement;
                         Element* el = elementAt(pos);
-
-                        if (!el) {
-                              printf("cannot drop here\n");
-                              delete dragElement;
-                              break;
-                              }
+                        if (el == 0) {
+                              int staffIdx = -1;
+                              Segment* seg;
+                              int tick;
+                              el = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
+                              if (el == 0) {
+                                    printf("cannot drop here\n");
+                                    delete dragElement;
+                                    break;
+                                    }
+                             }
                         _score->addRefresh(el->abbox());
                         _score->addRefresh(dragElement->abbox());
                         Element* dropElement = el->drop(pos, dragOffset, dragElement);

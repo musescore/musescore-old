@@ -146,7 +146,10 @@ void MuseScore::startExcerptsDialog()
 
 void ExcerptsDialog::deleteClicked()
       {
-      printf("delete %d\n", excerptList->currentRow());
+printf("delete %d\n", excerptList->currentRow());
+      int idx = excerptList->currentRow();
+      delete excerptList->item(idx);
+      el.removeAt(idx);
       }
 
 //---------------------------------------------------------

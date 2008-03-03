@@ -1285,6 +1285,7 @@ void ShowElementBase::setElement(Element* e)
       eb.color->setColor(e->color());
       eb.parentButton->setEnabled(e->parent());
       eb.mag->setValue(e->mag());
+      eb.systemFlag->setChecked(e->systemFlag());
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,8 @@
+3.3.8 (ws)
+      - implemented new text style "InstrumentsExcerpt"
+      - create "InstrumentsExcerpt" text from "Title" when creating an excerpt
+      - fix crash when deleting symbols in symbol palette
+      - slur editing: reset user offset and relayout after moving anchor
 2.3.8 (lv)
       - handle save of (compressed) MusicXML files just like MuseScore files
       - clear "dirty" flag after sucessful save of (compressed) MusicXML files

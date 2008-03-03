@@ -151,6 +151,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="systemFlag" >
+          <property name="text" >
+           <string>system</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_4" >
           <property name="sizePolicy" >
            <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >

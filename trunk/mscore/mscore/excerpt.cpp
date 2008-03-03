@@ -28,6 +28,7 @@
 #include "canvas.h"
 #include "style.h"
 #include "page.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   read
@@ -115,6 +116,19 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       docName = "--";
       QDomElement e = doc.documentElement();
       s->read(e);
+      if (!excerpt->title().isEmpty()) {
+            MeasureBase* measure = s->mainLayout()->first();
+            if (measure->type() != VBOX) {
+                  measure = new VBox(s);
+                  measure->setTick(0);
+                  s->addMeasure(measure);
+                  }
+            Text* txt = new Text(s);
+            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+            txt->setText(excerpt->title());
+            measure->add(txt);
+            }
+
       s->renumberMeasures();
       s->setCreated(true);
       return s;

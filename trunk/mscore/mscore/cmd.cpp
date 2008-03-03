@@ -871,6 +871,7 @@ void Score::cmdAddText(int subtype)
             case TEXT_SUBTITLE:
             case TEXT_COMPOSER:
             case TEXT_POET:
+            case TEXT_INSTRUMENT_EXCERPT:
                   {
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
