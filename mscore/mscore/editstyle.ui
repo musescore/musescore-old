@@ -131,7 +131,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page2" >
       <layout class="QGridLayout" >
@@ -335,7 +335,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>staff h-frame dist.</string>
+          <string>staff v-frame dist.</string>
          </property>
         </widget>
        </item>
@@ -364,7 +364,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>h-frame staff dist.</string>
+          <string>v-frame staff dist.</string>
          </property>
         </widget>
        </item>

@@ -212,16 +212,6 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       QScrollArea* sa = new QScrollArea;
       l->addWidget(sa);
 
-      QButtonGroup* bg = new QButtonGroup();
-#if 0       // TODO
-      bg->addButton(anchorPage, ANCHOR_PARENT);
-      bg->addButton(anchorTime, ANCHOR_STAFF);
-      bg->addButton(anchorNote, ANCHOR_PARENT);
-      bg->addButton(anchorSystem, ANCHOR_PARENT);
-#endif
-      connect(bg, SIGNAL(buttonClicked(int)), SLOT(anchorClicked(int)));
-      anchorPage->setChecked(true);
-
       if (symbolPalette == 0)
             createSymbolPalette();
       sp = symbolPalette;
@@ -230,27 +220,9 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       sp->setSelectable(true);
 
       connect(sp, SIGNAL(droppedElement(Element*)), SLOT(elementDropped(Element*)));
+      connect(sp, SIGNAL(startDragElement(Element*)), SLOT(startDragElement(Element*)));
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteElement()));
       sa->setWidget(sp);
-      }
-
-//---------------------------------------------------------
-//   anchorClicked
-//---------------------------------------------------------
-
-void SymbolDialog::anchorClicked(int /*val*/)
-      {
-#if 0
-      Anchor anchor = (Anchor)val;
-      int rows    = sp->getRows();
-      int columns = sp->getColumns();
-
-      for (int i = 0; i < rows * columns; ++i) {
-            Element* e = sp->element(i);
-            if (e && e->type() == SYMBOL)
-                  ((Symbol*)e)->setAnchor(anchor);
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -274,3 +246,13 @@ void SymbolDialog::deleteElement()
       sp->addObject(idx, 0, QString());
       preferences.dirty = true;
       }
+
+//---------------------------------------------------------
+//   startDragElement
+//---------------------------------------------------------
+
+void SymbolDialog::startDragElement(Element* el)
+      {
+      el->setSystemFlag(systemFlag->isChecked());
+      }
+

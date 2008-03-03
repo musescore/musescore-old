@@ -74,6 +74,9 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER),
 
+      TextStyle(QString("InstrumentsExcerpt"), ff, 18, false, false, false,
+         ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
+
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS),
 

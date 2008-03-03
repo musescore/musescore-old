@@ -250,6 +250,7 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   drag->setMimeData(mimeData);
 
                   int srcIdx = currentIdx;
+                  emit startDragElement(el);
                   if (_readOnly) {
                         drag->start(Qt::CopyAction);
                         }
@@ -303,7 +304,7 @@ void Palette::addObject(int idx, Element* s, const QString& name)
       symbols[idx] = s;
       names[idx]   = name;
       update();
-      if (s->type() == ICON) {
+      if (s && s->type() == ICON) {
             Icon* icon = (Icon*)s;
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }

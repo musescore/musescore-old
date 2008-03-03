@@ -98,6 +98,7 @@ class Element {
       mutable bool _dropTarget; ///< true, if element accepts drops
       bool _generated;          ///< automatically generated Element
       bool _visible;            ///< visibility attribute
+      bool _systemFlag;         ///< system elements appear on all excerpts
 
       int _subtype;
 
@@ -326,6 +327,8 @@ class Element {
       void setRXoff(double val)             { _rxoff  = val;        }
       void setRYoff(double val)             { _ryoff  = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
+      bool systemFlag() const               { return _systemFlag;   }
+      void setSystemFlag(bool f)            { _systemFlag = f;      }
       };
 
 //---------------------------------------------------------

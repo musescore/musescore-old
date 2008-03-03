@@ -135,16 +135,24 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             int tick2  = sl->tick2();
 
             if (ev->key() == Qt::Key_Left) {
-                  if (curGrip == 0)
+                  if (curGrip == 0) {
                         tick1 = score()->prevSeg1(tick1, track1);
-                  else if (curGrip == 3)
+                        ups[0].off = QPointF();
+                        }
+                  else if (curGrip == 3) {
                         tick2 = score()->prevSeg1(tick2, track2);
+                        ups[3].off = QPointF();
+                        }
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (curGrip == 0)
+                  if (curGrip == 0) {
                         tick1 = score()->nextSeg1(tick1, track1);
-                  else if (curGrip == 3)
+                        ups[0].off = QPointF();
+                        }
+                  else if (curGrip == 3) {
                         tick2 = score()->nextSeg1(tick2, track2);
+                        ups[3].off = QPointF();
+                        }
                   }
             else {
                   return false;
@@ -153,6 +161,7 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             sl->setTrack2(track2);
             sl->setTick(tick1);
             sl->setTick2(tick2);
+            score()->setLayoutAll(true);
             return true;
             }
       if (ev->key() == Qt::Key_X) {
