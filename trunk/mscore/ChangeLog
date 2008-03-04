@@ -1,3 +1,6 @@
+4.3.8 (ws)
+      - implemented "delete" for arpeggios
+      - fixed crash when creating copyright text
 3.3.8 (ws)
       - implemented new text style "InstrumentsExcerpt"
       - create "InstrumentsExcerpt" text from "Title" when creating an excerpt

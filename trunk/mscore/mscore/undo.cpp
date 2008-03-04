@@ -589,8 +589,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeCopyright:
                   {
-                  QString s = rights->toHtml("UTF-8");
-                  rights->setHtml(i->s);
+                  QString s;
+                  if (rights)
+                        s = rights->toHtml("UTF-8");
+                  setCopyrightHtml(i->s);
                   i->s = s;
                   }
                   break;

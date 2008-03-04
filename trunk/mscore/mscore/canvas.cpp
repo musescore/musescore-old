@@ -828,7 +828,7 @@ void Canvas::setState(State action)
 /*NORMAL     */ {  1,       99,    8,         0,     6,          2,   4 },
 /*DRAG_OBJ   */ { 99,        1,    0,         0,     0,          0,   0 },
 /*EDIT       */ {  9,        0,    1,        99,     0,          0,   0 },
-/*DRAG_EDIT  */ { 99,        0,   99,         1,     0,          0,   0 },
+/*DRAG_EDIT  */ { 11,        0,   99,         1,     0,          0,   0 },
 /*LASSO      */ {  7,        0,    0,         0,     1,          0,   0 },
 /*NOTE_ENTRY */ {  3,        0,   10,         0,     0,          1,   0 },
 /*MAG        */ {  5,        0,    0,         0,     0,          0,   1 },
@@ -879,7 +879,8 @@ void Canvas::setState(State action)
                   state = action;
                   mscore->setState(STATE_EDIT);
                   break;
-            case 9:     // EDIT - NORMAL
+            case  9:     // EDIT      - NORMAL
+            case 11:     // DRAG_EDIT - NORMAL
                   state = action;
                   setDropTarget(0);
                   _score->endEdit();

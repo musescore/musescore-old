@@ -1430,6 +1430,17 @@ void Score::setCopyright(const QString& s)
       }
 
 //---------------------------------------------------------
+//   setCopyrightHtml
+//---------------------------------------------------------
+
+void Score::setCopyrightHtml(const QString& s)
+      {
+      if (rights == 0)
+            rights = new QTextDocument(0);
+      rights->setHtml(s);
+      }
+
+//---------------------------------------------------------
 //   gel
 //---------------------------------------------------------
 

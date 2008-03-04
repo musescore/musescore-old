@@ -55,8 +55,9 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       if (key == Qt::Key_Escape) {
             if (state == DRAG_EDIT)
                   e->endEditDrag();
+// printf("keyPressEvent:: ESC\n");
             setState(NORMAL);
-            _score->endCmd();
+//            _score->endCmd();
             ev->accept();
             return;
             }

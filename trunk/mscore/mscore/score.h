@@ -495,6 +495,7 @@ class Score : public QObject {
 
       void setCopyright(QTextDocument*);
       void setCopyright(const QString& s);
+      void setCopyrightHtml(const QString& s);
       void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
       QList<Element*>* gel();
       const QList<Element*>* gel() const;

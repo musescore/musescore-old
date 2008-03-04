@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.5">
   <Mag>0.75</Mag>
-  <xoff>-676.063</xoff>
-  <yoff>13.7583</yoff>
+  <xoff>-127.846</xoff>
+  <yoff>8.6783</yoff>
   <Division>480</Division>
   <Spatium>1.764</Spatium>
   <Style>
@@ -327,6 +327,26 @@ p, li { white-space: pre-wrap; }
       <reverb>30</reverb>
       </Instrument>
     </Part>
+  <Excerpt>
+    <name>Trumpet</name>
+    <title>Trumpet             </title>
+    <part>0</part>
+    </Excerpt>
+  <Excerpt>
+    <name>Flute</name>
+    <title>Flute</title>
+    <part>1</part>
+    </Excerpt>
+  <Excerpt>
+    <name>Oboe</name>
+    <title>Oboe                </title>
+    <part>2</part>
+    </Excerpt>
+  <Excerpt>
+    <name>Violin</name>
+    <title>Violin</title>
+    <part>3</part>
+    </Excerpt>
   <Slur>
     <tick2>96960</tick2>
     <track>0</track>
@@ -51703,5 +51723,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>28</cursorTrack>
   </museScore>
