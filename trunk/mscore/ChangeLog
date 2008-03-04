@@ -1,4 +1,5 @@
 4.3.8 (ws)
+      - implemented: drop of clefs onto note heads inserts clef before note
       - implemented "delete" for arpeggios
       - fixed crash when creating copyright text
 3.3.8 (ws)
