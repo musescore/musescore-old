@@ -2503,7 +2503,18 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                         }
                   }
             else if (tag == "degree") {
-                  domNotImplemented(e);
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "degree-value") {
+                              }
+                        else if (tag == "degree-alter") {
+                              }
+                        else if (tag == "degree-type") {
+                              // add alter
+                              }
+                        else
+                              domError(ee);
+                        }
                   }
             else if (tag == "level") {
                   domNotImplemented(e);

@@ -115,7 +115,7 @@ void Score::endCmd()
       {
       if (!cmdActive) {
             if (debugMode)
-                  fprintf(stderr, "endCmd: no cmd active\n");
+                  fprintf(stderr, "Score::endCmd(): no cmd active\n");
             end();
             return;
             }
@@ -851,6 +851,7 @@ void Score::cmdAddChordName()
 void Score::cmdAddText(int subtype)
       {
       if (editObject) {
+printf("Score::cmdAddText: editObject active\n");
             endEdit();
             endCmd();
             }
@@ -1376,8 +1377,8 @@ void Score::cmd(const QString& cmd)
             printf("cmd <%s>\n", cmd.toLatin1().data());
 
       if (editObject) {                          // in edit mode?
-            endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
+            endCmd();
             }
       if (cmd == "print")
             printFile();
@@ -1397,6 +1398,13 @@ void Score::cmd(const QString& cmd)
             start();
             setNoteEntry(true, false);
             _padState.rest = false;
+            end();
+            }
+      else if (cmd == "escape") {
+            start();
+            if (noteEntryMode())
+                  setNoteEntry(false, false);
+            select(0, 0, 0);
             end();
             }
       else if (cmd == "pause")
@@ -1461,11 +1469,6 @@ void Score::cmd(const QString& cmd)
                   cmdAddHairpin(false);
             else if (cmd == "add-hairpin-reverse")
                   cmdAddHairpin(true);
-            else if (cmd == "escape") {
-                  if (noteEntryMode())
-                        setNoteEntry(false, false);
-                  select(0, 0, 0);
-                  }
             else if (cmd == "delete")
                   cmdDeleteSelection();
             else if (cmd == "rest") {
