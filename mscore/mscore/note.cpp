@@ -683,6 +683,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ICON && subtype == ICON_BEAM32)
          || (type == ICON && subtype == ICON_AUTOBEAM)
          || (type == SYMBOL)
+         || (type == CLEF)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -827,6 +828,10 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   score()->undoRemoveElement(this);
                   score()->undoAddElement(e);
                   }
+                  break;
+
+            case CLEF:
+                  cr->staff()->changeClef(cr->tick(), e->subtype());
                   break;
 
             default:

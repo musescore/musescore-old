@@ -94,7 +94,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT, -1.0, -2.2, OS),
+         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),

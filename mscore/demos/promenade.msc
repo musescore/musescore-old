@@ -125,7 +125,6 @@
     <Staff>
       <cleflist>
         <clef tick="0" idx="0"/>
-        <clef tick="7680" idx="0"/>
         </cleflist>
       <keylist>
         <key tick="0" idx="-2"/>
