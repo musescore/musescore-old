@@ -75,10 +75,13 @@ class Seq : public QObject {
       Driver* driver;
 
       EventMap events;                    // playlist
-      QList<NoteOn*> _activeNotes;        // currently sounding notes
+      QList<NoteOn*> _activeNotes;        // notes sounding
       double playTime;
       double startTime;
-      EventMap::const_iterator playPos, guiPos;
+
+      EventMap::const_iterator playPos;   // moved in real time thread
+      EventMap::const_iterator guiPos;    // moved in gui thread
+      QList<NoteOn*> markedNotes;         // notes marked as sounding
 
       int endTick;
 

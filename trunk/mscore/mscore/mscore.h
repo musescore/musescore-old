@@ -232,7 +232,6 @@ class MuseScore : public QMainWindow {
       bool saveAs();
       void newFile();
       void fingeringMenu();
-      QString createDefaultName() const;
 
    private slots:
       void helpBrowser();
@@ -308,6 +307,7 @@ class MuseScore : public QMainWindow {
       void writeSettings();
       void play(Element* e) const;
       void loadPlugins();
+      QString createDefaultName() const;
       };
 
 //---------------------------------------------------------

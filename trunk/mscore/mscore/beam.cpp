@@ -163,6 +163,11 @@ static bool endBeam(int tsZ, int tsN, int l, int p)
                   if (pos != p)
                         continue;
                   }
+/*
+   printf("endBeam(pos %d len %d %d/%d: %d/%d %d/%d %d/%d\n",
+      p, l, tsZ, tsN, h.noteLenZ, h.noteLenN, h.timeSigZ,
+      h.timeSigN, h.posZ, h.posN);
+*/
             return true;
             }
       return false;
@@ -302,7 +307,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         int z, n;
                         _score->sigmap->timesig(cr->tick(), z, n);
                         bool styleBreak = endBeam(z, n, cr->tickLen(), cr->tick() - tick());
-                        if (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO) {
+                        if ((bm != BEAM_MID) && (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO)) {
                               beam->layout1(layout);
                               beam = 0;
                               a1   = 0;

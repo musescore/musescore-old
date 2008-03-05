@@ -1,3 +1,7 @@
+5.3.8 (ws)
+      - fix crash when defining new excerpt
+      - add missing default score name when starting in "start with new score"
+        mode
 4.3.8 (ws)
       - implemented: drop of clefs onto note heads inserts clef before note
       - implemented "delete" for arpeggios

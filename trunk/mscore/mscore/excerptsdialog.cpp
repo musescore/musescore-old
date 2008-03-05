@@ -86,6 +86,9 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
 
       if (!sel->isEmpty())
             excerptList->setCurrentRow(0);
+      bool flag = excerptList->currentItem() != 0;
+      editGroup->setEnabled(flag);
+      deleteButton->setEnabled(flag);
       }
 
 //---------------------------------------------------------
@@ -146,7 +149,6 @@ void MuseScore::startExcerptsDialog()
 
 void ExcerptsDialog::deleteClicked()
       {
-printf("delete %d\n", excerptList->currentRow());
       int idx = excerptList->currentRow();
       delete excerptList->item(idx);
       el.removeAt(idx);
@@ -162,12 +164,12 @@ void ExcerptsDialog::newClicked()
       QString name;
       for (int i = 1;; ++i) {
             name = QString("Excerpt-%1").arg(i);
-            Excerpt* e;
-            foreach(e, el) {
-                  if (e->name() == name)
+            Excerpt* ee = 0;
+            foreach(ee, el) {
+                  if (ee->name() == name)
                         break;
                   }
-            if (e->name() != name)
+            if ((ee == 0) || (ee->name() != name))
                   break;
             }
       e->setName(name);
@@ -183,7 +185,6 @@ void ExcerptsDialog::newClicked()
 
 void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
       {
-// printf("excerpt changed %p %p\n", cur, prev);
       createExcerpt->setEnabled(true);
       if (prev) {
             Excerpt* pex = ((ExcerptItem*)prev)->excerpt();
@@ -212,6 +213,18 @@ void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
                   pi->setCheckState(idx != -1 ? Qt::Checked : Qt::Unchecked);
                   }
             }
+      else {
+            name->setText("");
+            title->setText("");
+            int n = partList->count();
+            for (int i = 0; i < n; ++i) {
+                  PartItem* pi = (PartItem*)partList->item(i);
+                  pi->setCheckState(Qt::Unchecked);
+                  }
+            }
+      bool flag = excerptList->currentItem() != 0;
+      editGroup->setEnabled(flag);
+      deleteButton->setEnabled(flag);
       }
 
 //---------------------------------------------------------

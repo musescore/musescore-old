@@ -735,29 +735,34 @@ void Seq::heartBeat()
       {
       driver->heartBeat();
 
-      if (guiPos == playPos)
-            return;
+      int playTick = time2tick(curTime() - startTime);
+      EventMap::const_iterator pp = events.lowerBound(playTick);
+
       cs->start();
-      Note* note = 0;
       if (guiPos == events.constEnd()) {
             // special case seek:
-            guiPos = playPos;
-            if (guiPos.value()->type() == ME_NOTEON) {
-                  NoteOn* n = (NoteOn*)guiPos.value();
-                  note = n->note();
-                  foreach(Viewer* v, cs->getViewer())
-                        v->moveCursor(note->chord()->segment());
+            guiPos = pp;
+            foreach(const NoteOn* n, markedNotes) {
+                  n->note()->setSelected(false);
+                  cs->addRefresh(n->note()->abbox());
                   }
+            markedNotes.clear();
             }
-      else {
-            EventMap::const_iterator e = playPos;
-            for (EventMap::const_iterator i = guiPos; i != e; ++i) {
-                  if (i.value()->type() == ME_NOTEON) {
-                        NoteOn* n = (NoteOn*)i.value();
-                        n->note()->setSelected(n->velo());
-                        cs->addRefresh(n->note()->abbox());
-                        if (n->velo())
-                              note = n->note();
+      else if (guiPos == pp)
+            return;
+
+      Note* note = 0;
+      for (EventMap::const_iterator i = guiPos; i != pp; ++i) {
+            if (i.value()->type() == ME_NOTEON) {
+                  NoteOn* n = (NoteOn*)i.value();
+                  n->note()->setSelected(n->velo());
+                  cs->addRefresh(n->note()->abbox());
+                  if (n->velo()) {
+                        markedNotes.append(n);
+                        note = n->note();
+                        }
+                  else {
+                        markedNotes.removeAll(n);
                         }
                   }
             }
@@ -770,7 +775,7 @@ void Seq::heartBeat()
             }
       cs->setLayoutAll(false);      // DEBUG
       cs->end();
-      guiPos = playPos;
+      guiPos = pp;
       }
 
 //---------------------------------------------------------
@@ -809,6 +814,7 @@ void Seq::setRelTempo(int relTempo)
 
 void Seq::setPos(int tick)
       {
+// printf("Seq::seek %d\n", tick);
       // send note off events
       foreach(const NoteOn* n, _activeNotes) {
             MidiOutEvent e;
@@ -818,7 +824,6 @@ void Seq::setPos(int tick)
             e.a    = n->pitch();
             e.b    = 0;
             driver->putEvent(e);
-            n->note()->setSelected(false);
             }
       _activeNotes.clear();
       playTime  = tick2time(tick);
