@@ -1595,9 +1595,13 @@ int main(int argc, char* argv[])
                   }
             }
 
-      if (!scoreCreated)
+      if (!scoreCreated) {
             // start with empty score:
-            mscore->appendScore(new Score());
+            Score* score = new Score();
+            score->fileInfo()->setFile(mscore->createDefaultName());
+            score->setCreated(true);
+            mscore->appendScore(score);
+            }
 
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
