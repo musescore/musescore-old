@@ -36,7 +36,7 @@ typedef MidiOutEventList::const_iterator ciMidiOutEvent;
 
 class MidiOutFifo {
       MidiOutEvent fifo[MIDI_FIFO_SIZE];
-      volatile int size;
+      QAtomicInt size;
       int wIndex;
       int rIndex;
 
@@ -44,7 +44,7 @@ class MidiOutFifo {
       MidiOutFifo()  { clear(); }
       bool put(const MidiOutEvent& event);   // returns true on fifo overflow
       MidiOutEvent get();
-      bool isEmpty() const { return size == 0; }
+      bool isEmpty() const { return int(size) == 0; }
       void clear()         { size = 0, wIndex = 0, rIndex = 0; }
       };
 

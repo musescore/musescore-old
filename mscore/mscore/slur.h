@@ -92,6 +92,8 @@ class SlurTie : public Element {
       QList<SlurSegment*> segments;
       Direction _slurDirection;
 
+      double firstNoteRestSegmentX(System* system);
+
    public:
       SlurTie(Score*);
       SlurTie(const SlurTie&);

@@ -382,31 +382,18 @@ void Seq::guiStop()
             a->setChecked(false);
             }
 
-      // code from heart beat:
-      Note* note = 0;
-      for (EventMap::const_iterator i = guiPos; i != playPos; ++i) {
-            const Event* e = i.value();
-            if (e->type() == ME_NOTEON) {
-                  NoteOn* no = (NoteOn*)e;
-                  no->note()->setSelected(no->velo() != 0);
-                  cs->addRefresh(no->note()->abbox());
-                  if (no->velo())
-                        note = no->note();
-                  }
+      foreach(const NoteOn* n, markedNotes) {
+            n->note()->setSelected(false);
+            cs->addRefresh(n->note()->abbox());
             }
-      if (note == 0) {
-            for (EventMap::const_iterator i = playPos; i != events.constEnd(); ++i) {
-                  const Event* e = i.value();
-                  if (e->type() == ME_NOTEON) {
-                        note = ((NoteOn*)e)->note();
-                        break;
-                        }
-                  }
-            }
+      markedNotes.clear();
+#if 0
       if (note) {
             cs->select(note, 0, 0);
             cs->setPlayPos(note->chord()->tick());
             }
+#endif
+      cs->setPlayPos(time2tick(playTime));
       emit stopped();
       }
 
@@ -561,17 +548,19 @@ void Seq::processMessages()
 void Seq::processMidi()
       {
       int driverState = driver->getState();
-      if (state == START_PLAY && driverState == PLAY)
-            startTransport();
-      else if (state == PLAY && driverState == STOP)
-            stopTransport();
-      else if (state == START_PLAY && driverState == STOP)
-            stopTransport();
-      else if (state == STOP && driverState == PLAY)
-            startTransport();
-      else if (state != driverState)
-            printf("Driver: state transition %d -> %d ?\n",
-               state, driverState);
+      if (driverState != state) {
+            if (state == START_PLAY && driverState == PLAY)
+                  startTransport();
+            else if (state == PLAY && driverState == STOP)
+                  stopTransport();
+            else if (state == START_PLAY && driverState == STOP)
+                  stopTransport();
+            else if (state == STOP && driverState == PLAY)
+                  startTransport();
+            else if (state != driverState)
+                  printf("Seq: state transition %d -> %d ?\n",
+                     state, driverState);
+            }
 
       processMessages();
 
@@ -600,19 +589,21 @@ void Seq::processMidi()
 void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       {
       int frames = n;
-      int jackState = driver->getState();
+      int driverState = driver->getState();
 
-      if (state == START_PLAY && jackState == PLAY)
-            startTransport();
-      else if (state == PLAY && jackState == STOP)
-            stopTransport();
-      else if (state == START_PLAY && jackState == STOP)
-            stopTransport();
-      else if (state == STOP && jackState == PLAY)
-            startTransport();
-      else if (state != jackState)
-            printf("JACK: state transition %d -> %d ?\n",
-               state, jackState);
+      if (driverState != state) {
+            if (state == START_PLAY && driverState == PLAY)
+                  startTransport();
+            else if (state == PLAY && driverState == STOP)
+                  stopTransport();
+            else if (state == START_PLAY && driverState == STOP)
+                  stopTransport();
+            else if (state == STOP && driverState == PLAY)
+                  startTransport();
+            else if (state != driverState)
+                  printf("Seq: state transition %d -> %d ?\n",
+                     state, driverState);
+            }
 
       float* l = lbuffer;
       float* r = rbuffer;
@@ -734,6 +725,9 @@ void Seq::collectEvents()
 void Seq::heartBeat()
       {
       driver->heartBeat();
+
+      if (state != PLAY)
+            return;
 
       int playTick = time2tick(curTime() - startTime);
       EventMap::const_iterator pp = events.lowerBound(playTick);
@@ -923,7 +917,7 @@ void Seq::setController(int port, int channel, int ctrl, int data)
 void Seq::sendEvent(const MidiOutEvent& ev)
       {
       SeqMsg msg;
-      msg.id    = SEQ_PLAY;
+      msg.id = SEQ_PLAY;
       msg.midiOutEvent = ev;
       guiToSeq(msg);
       }
@@ -1053,8 +1047,10 @@ void Seq::guiToSeq(const SeqMsg& msg)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* Seq::getPatchInfo(int /*ch*/, const MidiPatch* /*p*/)
+const MidiPatch* Seq::getPatchInfo(int ch, const MidiPatch* p)
       {
+      if (driver)
+            return driver->getPatchInfo(ch, p);
       return 0;
       }
 

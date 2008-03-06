@@ -66,8 +66,8 @@ Dyn dynList[] = {
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "rf",     QString(rfz, 2)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "fz",     QString(fz,  2)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "m",      QString(mp,  1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "rfz",    QString(rfz, 1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfz",    QString(sfz, 1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "r",      QString(rfz, 1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "s",      QString(sfz, 1)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "z",      QString(z,   1)),
       };
 
@@ -99,6 +99,50 @@ void Dynamic::setSubtype(int idx)
       }
 
 //---------------------------------------------------------
+//   isMovable
+//---------------------------------------------------------
+
+bool Dynamic::isMovable() const
+      {
+      dragOffset = QPointF();
+      return true;
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+QRectF Dynamic::drag(const QPointF& pos)
+      {
+      QRectF r(abbox());
+      setUserOff((pos - dragOffset) / _spatium);
+#if 0
+      int ntick;
+      int stfi = staffIdx();
+      int line;
+      Segment* seg;
+//      MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stfi, 0, 0, 0);
+      MeasureBase* mb = _score->pos2measure2(canvasPos(), &ntick, &stfi, &line, &seg);
+      if (mb && mb->type() == MEASURE) {
+            Measure* measure = (Measure*)mb;
+            QPointF op = canvasPos();
+            setTick(ntick);
+            setTrack(stfi * VOICES);
+            if (measure != parent()) {
+                  ((Measure*)parent())->remove(this);
+                  measure->add(this);
+                  }
+            QPointF uo(op - layoutPos());
+            setUserOff(uo / _spatium);
+            dragOffset = pos - uo;
+            }
+      else
+            printf("Dynamic::drag(): measure not found\n");
+#endif
+      return abbox() | r;
+      }
+
+//---------------------------------------------------------
 //   endDrag
 //    bind to nearest tick position
 //---------------------------------------------------------
@@ -117,8 +161,7 @@ void Dynamic::endDrag()
                   ((Measure*)parent())->remove(this);
                   measure->add(this);
                   }
-            QPointF np = layoutPos();
-            setUserOff((op - np) / _spatium);
+            setUserOff((op - layoutPos()) / _spatium);
             }
       else
             printf("Dynamic::endDrag(): measure not found\n");
@@ -153,9 +196,7 @@ QPointF Dynamic::layoutPos()
             p.setX(-(tw * .5));
       p += o;
 
-      Measure* m   = (Measure*) parent();
-      if (m->type() != MEASURE)
-            abort();
+      Measure* m = (Measure*) parent();
       Segment* seg = m->tick2segment(tick());
       double xp = seg->x();
       for (Element* e = parent(); e; e = e->parent())
@@ -233,5 +274,16 @@ QPointF Dynamic::canvasPos() const
       System* system = measure()->system();
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Dynamic::dragAnchor() const
+      {
+      QPointF cp = canvasPos();
+      QPointF anchor = cp - (userOff() * _spatium);
+      return QLineF(cp, anchor);
       }
 

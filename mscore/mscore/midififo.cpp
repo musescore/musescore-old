@@ -31,7 +31,7 @@ bool MidiFifo::put(const MidiEvent& event)
       if (size < MIDI_FIFO_SIZE) {
             fifo[wIndex] = event;
             wIndex = (wIndex + 1) % MIDI_FIFO_SIZE;
-            q_atomic_increment(&size);
+            size.ref();
             return false;
             }
       return true;
@@ -45,7 +45,7 @@ MidiEvent MidiFifo::get()
       {
       MidiEvent event(fifo[rIndex]);
       rIndex = (rIndex + 1) % MIDI_FIFO_SIZE;
-      q_atomic_decrement(&size);
+      size.deref();
       return event;
       }
 
@@ -66,7 +66,7 @@ const MidiEvent& MidiFifo::peek(int n)
 void MidiFifo::remove()
       {
       rIndex = (rIndex + 1) % MIDI_FIFO_SIZE;
-      q_atomic_decrement(&size);
+      size.deref();
       }
 #endif
 
@@ -78,10 +78,10 @@ void MidiFifo::remove()
 
 bool MidiOutFifo::put(const MidiOutEvent& event)
       {
-      if (size < MIDI_FIFO_SIZE) {
+      if (int(size) < MIDI_FIFO_SIZE) {
             fifo[wIndex] = event;
             wIndex = (wIndex + 1) % MIDI_FIFO_SIZE;
-            q_atomic_increment(&size);
+            size.ref();
             return false;
             }
       return true;
@@ -95,7 +95,7 @@ MidiOutEvent MidiOutFifo::get()
       {
       MidiOutEvent event(fifo[rIndex]);
       rIndex = (rIndex + 1) % MIDI_FIFO_SIZE;
-      q_atomic_decrement(&size);
+      size.deref();
       return event;
       }
 

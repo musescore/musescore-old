@@ -925,11 +925,8 @@ QPointF Note::canvasPos() const
 void Note::collectElements(QList<const Element*>& elist) const
       {
       elist.append(this);
-      if (_tieFor) {
-            elist.append(_tieFor);
-            foreach(SlurSegment* seg, *_tieFor->elements())
-                  elist.append(seg);
-            }
+      if (_tieFor)
+            _tieFor->collectElements(elist);
       foreach(Element* e, _el)
             elist.append(e);
       if (_accidental)

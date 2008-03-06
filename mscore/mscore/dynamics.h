@@ -39,6 +39,7 @@ struct Dyn {
 
 class Dynamic : public Text {
 
+      mutable QPointF dragOffset;
       QPointF layoutPos();
 
    public:
@@ -53,11 +54,14 @@ class Dynamic : public Text {
       virtual void setSubtype(const QString&);
       virtual const QString subtypeName() const;
 
-      virtual bool isMovable() const { return true; }
+      virtual bool isMovable() const;
+      virtual QRectF drag(const QPointF& pos);
       virtual void endDrag();
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+
+      virtual QLineF dragAnchor() const;
       };
 
 #endif

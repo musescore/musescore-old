@@ -37,8 +37,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
 
       Part* part = staff->part();
       Instrument* i = part->instrument();
-      midiChannel->setValue(i->midiChannel);
-      midiPort->setValue(i->midiPort);
+      midiChannel->setValue(i->midiChannel + 1);
+      midiPort->setValue(i->midiPort + 1);
       midiProgram->setValue(i->midiProgram);
       midiBankSelectH->setValue(i->midiBankSelectH);
       midiBankSelectL->setValue(i->midiBankSelectL);
@@ -89,8 +89,8 @@ void EditStaff::apply()
       {
       Part* part         = staff->part();
       Instrument* i      = part->instrument();
-      i->midiChannel     = midiChannel->value();
-      i->midiPort        = midiPort->value();
+      i->midiChannel     = midiChannel->value() - 1;
+      i->midiPort        = midiPort->value() - 1;
       i->midiProgram     = midiProgram->value();
       i->midiBankSelectH = midiBankSelectH->value();
       i->midiBankSelectL = midiBankSelectL->value();

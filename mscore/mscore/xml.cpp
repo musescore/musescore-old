@@ -369,3 +369,18 @@ QString Xml::htmlToString(QDomElement e)
       return s;
       }
 
+//---------------------------------------------------------
+//   writeHtml
+//---------------------------------------------------------
+
+void Xml::writeHtml(const QString& s)
+      {
+      if (QT_VERSION < 0x040400)
+            *this << s << "\n";
+      else {
+            QStringList sl(s.split("\n"));
+            for (int i = 1; i < sl.size(); ++i)
+                  *this << sl[i] << "\n";
+            }
+      }
+

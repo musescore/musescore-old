@@ -36,6 +36,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QtGlobal>
 #include <QtCore/QtDebug>
+#include <QtCore/QAtomicInt>
 
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>

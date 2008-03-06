@@ -790,20 +790,42 @@ void Slur::layout(ScoreLayout* layout)
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
-                  qreal x1 = sp.x();
-                  qreal x2 = x1 + system->bbox().width();
+//                  qreal x1 = sp.x();
+                  qreal x1 = firstNoteRestSegmentX(system) - _spatium;
+                  qreal x2 = sp.x() + system->bbox().width();
                   segment->layout(layout, QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
                   segment->setLineSegmentType(SEGMENT_MIDDLE);
                   }
             // case 4: end segment
             else {
-                  qreal x = sp.x();
+                  //qreal x = sp.x();
+                  qreal x = firstNoteRestSegmentX(system) - _spatium;
                   segment->layout(layout, QPointF(x, p2.y()), p2, bow);
                   segment->setLineSegmentType(SEGMENT_END);
                   }
             if (system == s2)
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   firstNoteRestSegmentX
+//---------------------------------------------------------
+
+double SlurTie::firstNoteRestSegmentX(System* system)
+      {
+      foreach(const MeasureBase* mb, system->measures()) {
+            if (mb->type() == MEASURE) {
+                  Measure* measure = (Measure*)mb;
+                  for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+                        if (seg->subtype() == Segment::SegChordRest) {
+                              return seg->canvasPos().x();
+                              }
+                        }
+                  }
+            }
+      printf("firstNoteRestSegmentX: did not find segment\n");
+      return 0.0;
       }
 
 //---------------------------------------------------------
@@ -976,7 +998,9 @@ void Tie::layout(ScoreLayout* layout)
                   }
             // case 4: end segment
             else {
-                  qreal x = sp.x();
+                  // qreal x = sp.x();
+                  qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
+
                   segment->layout(layout, QPointF(x, p2.y()), p2, bow);
                   segment->setLineSegmentType(SEGMENT_END);
                   }

@@ -76,26 +76,14 @@ void Part::read(QDomElement e)
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
                         _longName.setHtml(val);
-                  else {
-                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                              if (ee.tagName() == "html")
-                                    _longName.setHtml(Xml::htmlToString(ee));
-                              else
-                                    domError(ee);
-                              }
-                        }
+                  else
+                        _longName.setHtml(Xml::htmlToString(e.firstChildElement()));
                   }
             else if (tag == "shortName") {
                   if (_score->mscVersion() <= 101)
                         _shortName.setHtml(val);
-                  else {
-                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                              if (ee.tagName() == "html")
-                                    _shortName.setHtml(Xml::htmlToString(ee));
-                              else
-                                    domError(ee);
-                              }
-                        }
+                  else
+                        _shortName.setHtml(Xml::htmlToString(e.firstChildElement()));
                   }
             else if (tag == "trackName") {
                   _trackName = val;
@@ -156,12 +144,12 @@ void Part::write(Xml& xml) const
             xml.tag("trackName", _trackName);
       if (!_longName.isEmpty()) {
             xml.stag("name");
-            xml << _longName.toHtml("UTF-8") << '\n';
+            xml.writeHtml(_longName.toHtml("UTF-8"));
             xml.etag();
             }
       if (!_shortName.isEmpty()) {
             xml.stag("shortName");
-            xml << _shortName.toHtml("UTF-8") << '\n';
+            xml.writeHtml(_shortName.toHtml("UTF-8"));
             xml.etag();
             }
       if (!_show)

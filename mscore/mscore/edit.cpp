@@ -837,8 +837,7 @@ void Score::deleteItem(Element* el)
                   Chord* chord = (Chord*)(el->parent());
                   int notes = chord->noteList()->size();
                   if (notes > 1) {
-                        chord->remove((Note*) el);
-                        undoOp(UndoOp::RemoveElement, el);
+                        undoRemoveElement(el);
                         break;
                         }
                   // else fall through
@@ -1167,8 +1166,7 @@ void Score::lyricsTab(bool back)
       if (!lyrics)
             lyrics = new Lyrics(this);
       else {
-            lyrics->parent()->remove(lyrics);
-            undoOp(UndoOp::RemoveElement, lyrics);
+            undoRemoveElement(lyrics);
             }
 
       switch(lyrics->syllabic()) {
@@ -1386,7 +1384,7 @@ void Score::cmdTuplet(int n)
 
       Segment* segment = chord->segment();
       undoRemoveElement(chord);
-      undoOp(UndoOp::RemoveElement, chord);
+//      undoOp(UndoOp::RemoveElement, chord);   ??
       if (segment->isEmpty())
             undoRemoveElement(segment);
 

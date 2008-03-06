@@ -2062,8 +2062,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
 //   printf("text %p <%s> %f %f\n",
 //      e, qPrintable(((Text*)e)->getText()), e->canvasPos().x(), e->canvasPos().y());
 
-//            if (debugMode && e->selected()) {
-            if (false) {
+            if (debugMode && e->selected()) {
                   //
                   //  draw bounding box rectangle for all
                   //  selected Elements
