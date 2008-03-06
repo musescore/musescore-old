@@ -800,5 +800,16 @@ void AlsaAudio::midiRead()
       midiDriver->read();
       }
 
+//---------------------------------------------------------
+//   getPatchInfo
+//---------------------------------------------------------
+
+const MidiPatch* AlsaAudio::getPatchInfo(int ch, const MidiPatch* p)
+      {
+      if (synth)
+            return synth->getPatchInfo(ch, p);
+      return 0;
+      }
+
 #endif
 

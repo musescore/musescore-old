@@ -139,6 +139,8 @@ add_executable ( mscore
       )
 
 if (MINGW)
+   set(QT4 "/home/ws/.wine/drive_c/Qt/4.4.0-beta1")
+
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
       COMMAND wrc -i mscore.rc -o ${PROJECT_BINARY_DIR}/mscore.res
@@ -154,7 +156,7 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -DQT_SCRIPT_LIB"
-         LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
+         LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L ${QT4}/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore
       fluid
@@ -167,22 +169,22 @@ if (MINGW)
 #   install(FILES ../man RUNTIME DESTINATION doc)
 
    install_files ( /bin .dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/mingwm10.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtCore4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtGui4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtXml4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtSvg4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtScript4.dll
+      ${QT4}/bin/mingwm10.dll
+      ${QT4}/bin/QtCore4.dll
+      ${QT4}/bin/QtGui4.dll
+      ${QT4}/bin/QtXml4.dll
+      ${QT4}/bin/QtSvg4.dll
+      ${QT4}/bin/QtScript4.dll
       /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
       /home/ws/.wine/drive_c/Qt/4.3.3/plugins/iconengines/qsvg4.dll
       )
    install_files ( /bin/imageformats .dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qjpeg4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qmng4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qsvg4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qtiff4.dll
+      ${QT4}/plugins/imageformats/qjpeg4.dll
+      ${QT4}/plugins/imageformats/qmng4.dll
+      ${QT4}/plugins/imageformats/qsvg4.dll
+      ${QT4}/plugins/imageformats/qtiff4.dll
       )
 
 else (MINGW)

@@ -288,8 +288,8 @@ void Score::cmdRemove(Element* e)
                   cl->erase(ki);
                   undoOp(UndoOp::ChangeClef, staff, tick, oval, -1000);
 
-                  undoOp(UndoOp::RemoveElement, clef);
-                  removeElement(clef);
+                  undoRemoveElement(clef);
+
                   Measure* measure = tick2measure(tick);
                   measure->cmdRemoveEmptySegment((Segment*)(clef->parent()));
 
@@ -346,8 +346,8 @@ void Score::cmdRemove(Element* e)
                   kl->erase(ki);
                   undoOp(UndoOp::ChangeKeySig, staff, tick, oval, -1000);
 
-                  undoOp(UndoOp::RemoveElement, ks);
-                  removeElement(ks);
+                  undoRemoveElement(ks);
+
                   Measure* measure = tick2measure(tick);
                   measure->cmdRemoveEmptySegment((Segment*)(ks->parent()));
 
@@ -641,8 +641,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
                               l = measure->tickLen();
                         if (tuplet)
                               tuplet->remove(cr);
-                        segment->setElement(track, 0);
-                        undoOp(UndoOp::RemoveElement, element);
+                        undoRemoveElement(element);
                         if (segment->isEmpty())
                               undoRemoveElement(segment);
                         }
@@ -1695,7 +1694,9 @@ void Score::cmd(const QString& cmd)
                         int line, column;
                         QString err;
                         if (!doc.setContent(data, &err, &line, &column)) {
-                              printf("error reading paste data\n");
+                              printf("error reading paste data at line %d column %d: %s\n",
+                                 line, column, qPrintable(err));
+                              printf("%s\n", data.data());
                               return;
                               }
                         docName = "--";
@@ -1795,7 +1796,9 @@ void Score::pasteStaff(const QMimeData* ms)
       int line, column;
       QString err;
       if (!doc.setContent(data, &err, &line, &column)) {
-            printf("error reading paste data\n");
+            printf("error reading paste data at line %d column %d: %s\n",
+               line, column, qPrintable(err));
+            printf("%s\n", data.data());
             return;
             }
       docName = "--";
@@ -1806,21 +1809,21 @@ void Score::pasteStaff(const QMimeData* ms)
 //   pasteStaff
 //---------------------------------------------------------
 
-void Score::pasteStaff(QDomElement e, Measure* measure, int staffStart)
+void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
       {
       int srcStaffStart = -1;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "Staff") {
                   Measure* m = measure;
-                  int staffIdx = e.attribute("id", "0").toInt();
+                  int srcStaffIdx = e.attribute("id", "0").toInt();
                   if (srcStaffStart == -1)
-                        srcStaffStart = staffIdx;
-                  staffIdx = staffStart - srcStaffStart + staffIdx;
+                        srcStaffStart = srcStaffIdx;
+                  int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "Measure") {
                               Measure* sm = new Measure(this);
-                              sm->read(ee, staffIdx);
-                              cmdReplaceElements(sm, m, staffIdx);
+                              sm->read(ee, srcStaffIdx);
+                              cmdReplaceElements(sm, m, srcStaffIdx, dstStaffIdx);
                               delete sm;
                               MeasureBase* mb = m;
                               do {
@@ -1843,7 +1846,7 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int staffStart)
 //   cmdReplaceElements
 //---------------------------------------------------------
 
-void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
+void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int dstStaffIdx)
       {
       //
       // TODO: handle special cases: sm->tickLen() != ds->tickLen()
@@ -1852,7 +1855,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
       select(0, 0, 0);
       // clear staff in destination Measure
       for (Segment* s = dm->first(); s;) {
-            int startTrack = staffIdx * VOICES;
+            int startTrack = dstStaffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int t = startTrack; t < endTrack; ++t) {
                   Element* e = s->element(t);
@@ -1868,7 +1871,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
       int dstTickOffset = dm->tick();
 
       for (Segment* s = sm->first(); s; s = s->next()) {
-            int startTrack = staffIdx * VOICES;
+            int startTrack = srcStaffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             int tick       = s->tick() - srcTickOffset + dstTickOffset;
             Segment* ns    = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
@@ -1880,8 +1883,10 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
                   Element* e = s->element(t);
                   if (!e || !e->isChordRest())
                         continue;
+                  int trackOffset = (dstStaffIdx - srcStaffIdx) * VOICES;
                   e->setParent(ns);
                   e->setTick(tick);
+                  e->setTrack(e->track() + trackOffset);
                   undoAddElement(e);
                   e->setSelected(false);
                   if (e->type() == REST)

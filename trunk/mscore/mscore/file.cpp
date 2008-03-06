@@ -842,14 +842,8 @@ bool Score::read(QDomElement e)
                               rights = new QTextDocument(0);
                         if (mscVersion() <= 103)
                               rights->setHtml(val);
-                        else {
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    if (eee.tagName() == "html")
-                                          rights->setHtml(Xml::htmlToString(eee));
-                                    else
-                                          domError(eee);
-                                    }
-                              }
+                        else
+                              rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
                         }
                   else if (tag == "movement-number")
                         movementNumber = val;
@@ -980,21 +974,29 @@ printerMag = DPI / oldDPI;
       doLayout();
 
       QList<const Element*> el;
+      foreach (const Element* element, *mainLayout()->gel())
+            element->collectElements(el);
+      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            m->collectElements(el);
+            }
+
       const QList<Page*> pl = _layout->pages();
       int pages = pl.size();
       for (int n = 0; n < pages; ++n) {
             if (n)
                   printer->newPage();
             const Page* page = pl.at(n);
-            el.clear();
+
+//            el.clear();
             page->collectElements(el);
-            foreach (const Element* element, *mainLayout()->gel())
+/*            foreach (const Element* element, *mainLayout()->gel())
                   element->collectElements(el);
             foreach(System* system, *page->systems()) {
                   foreach(MeasureBase* m, system->measures()) {
                         m->collectElements(el);
                         }
                   }
+*/
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el[i];
                   if (!e->visible())

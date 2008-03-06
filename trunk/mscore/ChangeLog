@@ -1,3 +1,8 @@
+6.3.8 (ws)
+      - fix: second segment of a splitted tie was not printed when crossing
+        a page boundary
+      - enhance layout of splittet slurs and ties
+      - add list of sound names to mixer (read from soundfont)
 5.3.8 (ws)
       - fix crash when defining new excerpt
       - add missing default score name when starting in "start with new score"

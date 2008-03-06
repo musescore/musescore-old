@@ -736,6 +736,16 @@ void Score::undoSetPitchSpellNeeded()
 
 void Score::undoRemoveElement(Element* element)
       {
+      if (element->isChordRest()) {
+            // remove any slurs pointing to this chor/rest
+            foreach(Element* el, *gel()) {
+                  if (el->type() == SLUR
+                     && el->tick() == element->tick()
+                     && el->track() == element->track()) {
+                        undoRemoveElement(el);
+                        }
+                  }
+            }
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::RemoveElement;

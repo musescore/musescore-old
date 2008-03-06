@@ -24,6 +24,7 @@
 #include "event.h"
 
 class Seq;
+class MidiPatch;
 
 //---------------------------------------------------------
 //   MidiOutEvent
@@ -79,6 +80,7 @@ class Driver {
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
       virtual void heartBeat() {}
+      virtual const MidiPatch* getPatchInfo(int, const MidiPatch*) { return 0; }
       };
 
 #endif

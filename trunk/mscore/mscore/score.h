@@ -245,7 +245,7 @@ class Score : public QObject {
       void cmdTuplet(int);
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
-      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
+      void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
       void cmdAddSlur();
       void cmdAddTie();
       void cmdAddHairpin(bool);

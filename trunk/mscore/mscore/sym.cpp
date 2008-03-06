@@ -521,12 +521,12 @@ void initSymbols()
       symbols[eightSym]                   = Sym("eight",              0x38, 0);
       symbols[nineSym]                    = Sym("nine",               0x39, 0);
 
-      symbols[letterfSym]                 = Sym("f",                  0x66, 0);
-      symbols[lettermSym]                 = Sym("m",                  0x6d, 0);
-      symbols[letterpSym]                 = Sym("p",                  0x70, 0);
-      symbols[letterrSym]                 = Sym("r",                  0x72, 0);
-      symbols[lettersSym]                 = Sym("s",                  0x73, 0);
-      symbols[letterzSym]                 = Sym("z",                  0x7a, 0);
+      symbols[letterfSym]                 = Sym("f",                  0x66, 1);
+      symbols[lettermSym]                 = Sym("m",                  0x6d, 1);
+      symbols[letterpSym]                 = Sym("p",                  0x70, 1);
+      symbols[letterrSym]                 = Sym("r",                  0x72, 1);
+      symbols[lettersSym]                 = Sym("s",                  0x73, 1);
+      symbols[letterzSym]                 = Sym("z",                  0x7a, 1);
 
       symbols[wholerestSym]               = Sym("whole rest",         0xe100, 0);
 

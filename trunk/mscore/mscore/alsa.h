@@ -140,6 +140,7 @@ class AlsaAudio : public Driver {
       virtual void putEvent(const MidiOutEvent&);
       virtual void process(int, float*, float*, int);
       virtual void midiRead();
+      virtual const MidiPatch* getPatchInfo(int, const MidiPatch*);
       };
 
 #endif

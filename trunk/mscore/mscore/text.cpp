@@ -144,7 +144,9 @@ void TextBase::writeProperties(Xml& xml) const
             xml.tag("frameRound", _frameRound);
       if (_circle)
             xml.tag("circle", _circle);
-      xml << _doc->toHtml("utf-8") << '\n';
+      xml.stag("html-data");
+      xml.writeHtml(_doc->toHtml("utf-8"));
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -160,6 +162,10 @@ bool TextBase::readProperties(QDomElement e)
             _doc->setHtml(val);
       else if (tag == "html") {
             QString s = Xml::htmlToString(e);
+            _doc->setHtml(s);
+            }
+      else if (tag == "html-data") {
+            QString s = Xml::htmlToString(e.firstChildElement());
             _doc->setHtml(s);
             }
       else if (tag == "frameWidth")
@@ -624,6 +630,7 @@ void TextB::draw(QPainter& p) const
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(f);
             }
+#if 0
       if (debugMode && selected()) {
             QRectF f;
             for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
@@ -644,6 +651,7 @@ void TextB::draw(QPainter& p) const
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(f);
             }
+#endif
       p.restore();
       }
 
@@ -1004,12 +1012,8 @@ void TextB::endEdit()
       cursor = 0;
       editMode = false;
 
-      // HACK
-      //
-      if (subtype() == TEXT_COPYRIGHT) {
+      if (subtype() == TEXT_COPYRIGHT)
             score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
-//            score()->setCopyright(doc());
-            }
       if (subtype() == TEXT_TEXTLINE) {
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
