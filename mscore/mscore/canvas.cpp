@@ -1163,6 +1163,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 void Canvas::paint(const QRect& rr, QPainter& p)
       {
+// printf("paint %d %d -- %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
       p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
             p.fillRect(rr, _fgColor);
