@@ -108,8 +108,8 @@ void Seq::setScore(Score* s)
       cs = s;
       playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      if (driver)
-            seek(0);
+//      if (driver)
+//            seek(0);
       }
 
 //---------------------------------------------------------
@@ -298,12 +298,12 @@ void Seq::start()
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
-            seek(cs->playPos());
-            heartBeatTimer->start(100);
             if (!pauseState)
                   driver->startTransport();
             else
                   emit started();
+            seek(cs->playPos());
+//            heartBeatTimer->start(100);
             }
       }
 
@@ -332,12 +332,13 @@ void Seq::pause()
       int pstate = a->isChecked();
       a = getAction("play");
       int playState = a->isChecked();
-      if (state == PLAY && pstate)  {
-            pauseState = pstate;
+      if (state == PLAY && pstate) {
+//            heartBeatTimer->stop();
             driver->stopTransport();
             }
       else if (state == STOP && pauseState && playState) {
             driver->startTransport();
+//            heartBeatTimer->start(100);
             }
       pauseState = pstate;
       }
@@ -349,8 +350,10 @@ void Seq::pause()
 void MuseScore::seqStarted()
       {
       setState(STATE_PLAY);
+      cs->start();
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(true);
+      cs->end();
       }
 
 //---------------------------------------------------------
@@ -377,24 +380,24 @@ void MuseScore::seqStopped()
 void Seq::guiStop()
       {
       if (!pauseState) {
-            heartBeatTimer->stop();
             QAction* a = getAction("play");
             a->setChecked(false);
             }
+//      heartBeatTimer->stop();
 
+      //
+      // deselect all selected notes
+      //
+      cs->start();
       foreach(const NoteOn* n, markedNotes) {
             n->note()->setSelected(false);
             cs->addRefresh(n->note()->abbox());
             }
       markedNotes.clear();
-#if 0
-      if (note) {
-            cs->select(note, 0, 0);
-            cs->setPlayPos(note->chord()->tick());
-            }
-#endif
       cs->setPlayPos(time2tick(playTime));
-      emit stopped();
+      cs->end();
+      if (!pauseState)
+            emit stopped();
       }
 
 //---------------------------------------------------------
@@ -408,10 +411,12 @@ void Seq::seqMessage(int msg)
       switch(msg) {
             case '0':         // STOP
                   guiStop();
+                  heartBeatTimer->stop();
                   break;
 
             case '1':         // PLAY
                   emit started();
+                  heartBeatTimer->start(100);
                   break;
 
             default:
@@ -440,11 +445,9 @@ void Seq::stopTransport()
             e.a    = no->pitch();
             e.b    = 0;
             driver->putEvent(e);
-            no->note()->setSelected(false);
             }
       _activeNotes.clear();
-      if (!pauseState)
-            emit toGui('0');
+      emit toGui('0');
       state = STOP;
       }
 
@@ -733,6 +736,7 @@ void Seq::heartBeat()
       EventMap::const_iterator pp = events.lowerBound(playTick);
 
       cs->start();
+      Note* note = 0;
       if (guiPos == events.constEnd()) {
             // special case seek:
             guiPos = pp;
@@ -741,11 +745,20 @@ void Seq::heartBeat()
                   cs->addRefresh(n->note()->abbox());
                   }
             markedNotes.clear();
+            if (guiPos.value()->type() == ME_NOTEON) {
+                  NoteOn* n = (NoteOn*)guiPos.value();
+                  n->note()->setSelected(n->velo());
+                  cs->addRefresh(n->note()->abbox());
+                  if (n->velo()) {
+                        markedNotes.append(n);
+                        note = n->note();
+                        }
+                  else {
+                        markedNotes.removeAll(n);
+                        }
+                  }
             }
-      else if (guiPos == pp)
-            return;
 
-      Note* note = 0;
       for (EventMap::const_iterator i = guiPos; i != pp; ++i) {
             if (i.value()->type() == ME_NOTEON) {
                   NoteOn* n = (NoteOn*)i.value();
@@ -767,7 +780,6 @@ void Seq::heartBeat()
             if (pp)
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
             }
-      cs->setLayoutAll(false);      // DEBUG
       cs->end();
       guiPos = pp;
       }
@@ -833,7 +845,15 @@ void Seq::setPos(int tick)
 
 void Seq::seek(int tick)
       {
+      cs->start();
+      Segment* seg = cs->tick2segment(tick);
+      if (seg) {
+            foreach(Viewer* v, cs->getViewer())
+                  v->moveCursor(seg);
+            }
       cs->setPlayPos(tick);
+      cs->end();
+
       SeqMsg msg;
       msg.data = tick;
       msg.id    = SEQ_SEEK;
