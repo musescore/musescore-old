@@ -29,12 +29,12 @@ struct Manuals {
 
 Manuals manuals[] = {
       {  QString("doc-de.xml"),
-         QString("/home/ws/mscore/mscore/trunk/web/de"),
-         QString("/home/ws/mscore/mscore/trunk/web/de/reference.php")
+         QString("../web/de"),
+         QString("../web/de/reference.php")
          },
       {  QString("doc-en.xml"),
-         QString("/home/ws/mscore/mscore/trunk/web/en"),
-         QString("/home/ws/mscore/mscore/trunk/web/en/reference.php")
+         QString("../web/en"),
+         QString("../web/en/reference.php")
          }
       };
 
