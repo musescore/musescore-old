@@ -168,6 +168,7 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
                         tick2 = m2->tick() + m2->tickLen();
+printf("Volta new tick2 %d\n", tick2);
                         line()->setTick2(tick2);
                         line()->layout(score()->mainLayout());
                         if (line()->lineSegments().size() != segments)

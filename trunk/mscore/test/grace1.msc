@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.5">
-  <Spatium>1.76389</Spatium>
+  <Mag>0.884799</Mag>
+  <xoff>5.29167</xoff>
+  <yoff>7.83167</yoff>
   <Division>480</Division>
-  <Mag>2.28382</Mag>
-  <xoff>-115.57</xoff>
-  <yoff>47.8367</yoff>
+  <Spatium>1.76389</Spatium>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -116,9 +116,6 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Pno.</p></body></html>
       </shortName>
     <Instrument>
-      <midiChannel>0</midiChannel>
-      <midiProgram>0</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>

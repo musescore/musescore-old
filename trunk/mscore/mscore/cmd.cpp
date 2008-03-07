@@ -1828,7 +1828,7 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
                               MeasureBase* mb = m;
                               do {
                                     mb = mb->next();
-                                    } while (mb->type() != MEASURE);
+                                    } while (mb && mb->type() != MEASURE);
                               m = (Measure*)mb;
                               if (m == 0)
                                     break;

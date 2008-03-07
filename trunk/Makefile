@@ -18,7 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-REVISION  = `cat build/revision.h`
+REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 PREFIX    = "/usr/local"
 VERSION   = "0.9.2b${REVISION}"
@@ -75,7 +75,8 @@ win32:
             make lupdate ;                             \
             make lrelease;                             \
             make -j ${CPUS};                           \
-            make man;                                  \
+            make man-de;                               \
+            make man-en;                               \
             make install;                              \
             make package;                              \
          else                                          \
@@ -103,7 +104,6 @@ dist:
 	-rm -rf mscore.dist
 	mkdir mscore.dist
 	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-${VERSION}
-	svn info mscore | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
 	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
 	cd mscore.dist; rm -rf mscore-${VERSION}/web
 	cd mscore.dist; tar cvfj mscore-${VERSION}.tar.bz2 mscore-${VERSION}
@@ -113,7 +113,7 @@ dist:
 	make -j ${CPUS} release
 
 revision:
-	svn info mscore | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
+	svn info -r HEAD | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
 
 install:
 	cd build; make install
@@ -135,5 +135,5 @@ unix:
          fi
 
 man:
-	cd build; make man
+	cd build; make man-de; make man-en;
 

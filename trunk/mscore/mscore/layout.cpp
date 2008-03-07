@@ -626,7 +626,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         }
                   else {
                         MeasureBase* mb = m->next();
-                        while (mb->type() != MEASURE && (mb != ml[n-1]))
+                        while (mb && mb->type() != MEASURE && (mb != ml[n-1]))
                               mb = mb->next();
                         Measure* nm = 0;
                         if (mb->type() == MEASURE)

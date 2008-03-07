@@ -24,9 +24,9 @@
   <h3> Windows Testreleases </h3>
   <table>
     <tr>
-      <td><a href="http://prereleases.musescore.org/mscore-r716.exe">mscore-r716.exe</a></td>
+      <td><a href="http://prereleases.musescore.org/mscore-r736.exe">mscore-r736.exe</a></td>
       <td>&nbsp;&nbsp</td>
-      <td>16. feb 2008</td>
+      <td>26. feb 2008</td>
       </tr>
   </table>
 
