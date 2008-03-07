@@ -30,6 +30,22 @@ typedef std::multiset<MidiOutEvent, std::less<MidiOutEvent> > MidiOutEventList;
 typedef MidiOutEventList::iterator iMidiOutEvent;
 typedef MidiOutEventList::const_iterator ciMidiOutEvent;
 
+#if QT_VERSION < 0x040400
+//---------------------------------------------------------
+//   QAtomicInt
+//---------------------------------------------------------
+
+class QAtomicInt {
+      volatile int size;
+
+   public:
+      operator int() const { return size; }
+      int operator=(int v) { return size = v; }
+      void ref()           { q_atomic_increment(&size); }
+      void deref()         { q_atomic_decrement(&size); }
+      };
+#endif
+
 //---------------------------------------------------------
 //   MidiOutFifo
 //---------------------------------------------------------

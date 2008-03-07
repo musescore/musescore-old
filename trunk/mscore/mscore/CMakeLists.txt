@@ -139,7 +139,8 @@ add_executable ( mscore
       )
 
 if (MINGW)
-   set(QT4 "/home/ws/.wine/drive_c/Qt/4.4.0-beta1")
+   # set(QT4 "/home/ws/.wine/drive_c/Qt/4.4.0-beta1")
+   set(QT4 "/home/ws/.wine/drive_c/Qt/4.3.3")
 
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o

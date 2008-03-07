@@ -36,7 +36,10 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QtGlobal>
 #include <QtCore/QtDebug>
+
+#if QT_VERSION >= 0x040400
 #include <QtCore/QAtomicInt>
+#endif
 
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>
