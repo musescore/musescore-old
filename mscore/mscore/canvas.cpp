@@ -1876,6 +1876,7 @@ void Canvas::dropEvent(QDropEvent* event)
             if (idx != -1)
                   score()->pasteStaff(e, measure, idx);
             event->acceptProposedAction();
+            _score->setLayoutAll(true);
             _score->endCmd();
             }
       setDropTarget(0); // this also resets dropRectangle and dropAnchor

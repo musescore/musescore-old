@@ -1,3 +1,5 @@
+7.3.8 (ws)
+      - fix crash when pasting to last measure
 6.3.8 (ws)
       - fix: second segment of a splitted tie was not printed when crossing
         a page boundary

@@ -232,6 +232,7 @@ void SLine::setTick2(int t)
 QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
+printf("Sline::tick2pos %d %p\n", tick, seg);
       System*  sys = seg->measure()->system();
       *system = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
