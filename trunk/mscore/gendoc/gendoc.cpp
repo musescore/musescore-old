@@ -364,6 +364,13 @@ void genProgPage(const QString& dir, QDomElement e, int lang)
                               xml << "</a>";
                               }
                         }
+                  else if (de.tagName() == "img") {
+                        QString src = de.attribute("src");
+                        QFile f(srcPathPrefix + QString("/pic/") + src);
+                        if (!f.exists())
+                              printf("image <%s> does not exist\n", qPrintable(f.fileName()));
+                        genHtml(ee.toElement(), xml);
+                        }
                   else
                         genHtml(ee.toElement(), xml);
                   }
