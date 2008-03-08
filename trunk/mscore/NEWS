@@ -1,4 +1,5 @@
 Release 0.9.2 (svn):
+      - new online documentation
       - midi output
       - new Harmony element replacing Text element for chord names
             - Harmony elements are also imported from or exported to
