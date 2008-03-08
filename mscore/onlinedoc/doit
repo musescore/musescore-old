@@ -1,5 +1,0 @@
-#!/bin/bash
-svn --force move ../../web/pic/beampalette.png                 pic
-svn --force move ../../web/pic/measure.png                     pic
-svn --force move ../../web/pic/beampalette.png                 pic
-svn --force move ../../web/pic/measure.png                     pic
