@@ -108,8 +108,6 @@ void Seq::setScore(Score* s)
       cs = s;
       playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-//      if (driver)
-//            seek(0);
       }
 
 //---------------------------------------------------------
@@ -118,7 +116,7 @@ void Seq::setScore(Score* s)
 
 void Seq::selectionChanged(int mode)
       {
-      if (mode != SEL_SINGLE || state != STOP || cs == 0 || driver == 0)
+      if (mode != SEL_SINGLE || state == STOP || cs == 0 || driver == 0)
             return;
       int tick = cs->pos();
       if (tick != -1)
@@ -303,7 +301,6 @@ void Seq::start()
             else
                   emit started();
             seek(cs->playPos());
-//            heartBeatTimer->start(100);
             }
       }
 
@@ -332,14 +329,10 @@ void Seq::pause()
       int pstate = a->isChecked();
       a = getAction("play");
       int playState = a->isChecked();
-      if (state == PLAY && pstate) {
-//            heartBeatTimer->stop();
+      if (state == PLAY && pstate)
             driver->stopTransport();
-            }
-      else if (state == STOP && pauseState && playState) {
+      else if (state == STOP && pauseState && playState)
             driver->startTransport();
-//            heartBeatTimer->start(100);
-            }
       pauseState = pstate;
       }
 
@@ -383,7 +376,6 @@ void Seq::guiStop()
             QAction* a = getAction("play");
             a->setChecked(false);
             }
-//      heartBeatTimer->stop();
 
       //
       // deselect all selected notes
@@ -820,7 +812,6 @@ void Seq::setRelTempo(int relTempo)
 
 void Seq::setPos(int tick)
       {
-// printf("Seq::seek %d\n", tick);
       // send note off events
       foreach(const NoteOn* n, _activeNotes) {
             MidiOutEvent e;
@@ -1080,6 +1071,7 @@ const MidiPatch* Seq::getPatchInfo(int ch, const MidiPatch* p)
 
 void Seq::midiInputReady()
       {
-      driver->midiRead();
+      if (driver)
+            driver->midiRead();
       }
 

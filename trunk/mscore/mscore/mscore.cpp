@@ -1128,6 +1128,7 @@ void MuseScore::setCurrentScore(int idx)
       if (playPanel)
             playPanel->setScore(cs);
 
+      cs->start();
       cs->setLayoutAll(true);
       cs->end();
 

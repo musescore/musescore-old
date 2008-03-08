@@ -60,6 +60,8 @@
 #include "box.h"
 #include "harmony.h"
 
+static bool startMode = false;
+
 //---------------------------------------------------------
 //   start
 //---------------------------------------------------------
@@ -70,6 +72,14 @@
 
 void Score::start()
       {
+      if (startMode) {
+            printf("Score::start(): already started\n");
+            if (debugMode) {
+                  abort();
+                  }
+            return;
+            }
+      startMode = true;
       refresh.setRect(0.0,0.0,0.0,0.0);
       updateAll   = false;
       layoutStart = 0;          ///< start a relayout at this measure
@@ -146,6 +156,14 @@ void Score::endCmd()
 */
 void Score::end()
       {
+      if (!startMode) {
+            if (debugMode) {
+                  printf("Score:end: not started\n");
+                  abort();
+                  }
+            }
+      startMode = false;
+
       if (layoutAll) {
             updateAll = true;
             _layout->layout();
