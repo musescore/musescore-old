@@ -11,7 +11,14 @@
   <br>
 
   <h3> Binaries</h3>
-  <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>.
+  Für Ubuntu/Kubuntu 7.10 gibt es fertige Binärpakete unter dem Namen
+  "mscore" und "mscore-common" in der "universe" Paketquelle.
+  <br>
+  Die
+  <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>
+  Version kann
+  <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">hier</a>
+  heruntergeladen werden.
   <br>
 
   <h3> Subversion Sourcecode Repository</h3>
