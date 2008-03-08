@@ -25,16 +25,22 @@ struct Manuals {
       QString src;
       QString dst;
       QString idx;
+      QString progDst;
+      QString progIdx;
       };
 
 Manuals manuals[] = {
       {  QString("doc-de.xml"),
          QString("../web/de"),
-         QString("../web/de/reference.php")
+         QString("../web/de/reference.php"),
+         QString("man/de"),
+         QString("man/de/index.html")
          },
       {  QString("doc-en.xml"),
          QString("../web/en"),
-         QString("../web/en/reference.php")
+         QString("../web/en/reference.php"),
+         QString("man/en"),
+         QString("man/en/index.html")
          }
       };
 
@@ -130,6 +136,59 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
             }
       os << "</table>\n";
       os << "<?php require(\"trailer.html\");  ?>\n";
+      ff.close();
+      }
+
+//---------------------------------------------------------
+//   genIndexProg
+//---------------------------------------------------------
+
+void genIndexProg(const QString& of, const QList<Index> lst, int lang)
+      {
+      QFile ff(of);
+      if (!ff.open(QIODevice::WriteOnly)) {
+            printf("cannot open <%s>\n", qPrintable(of));
+            return;
+            }
+      QTextStream os(&ff);
+      os.setCodec("UTF-8");
+      os << "<html>\n";
+      os << "<head>\n";
+      os << "  <meta content=\"text/html; charset=UTF-8\">\n";
+      os << "  </head>\n";
+      os << "<body>\n";
+
+      os << "<h4>MuseScore</a> -- Index</h4>\n";
+      os << "<table>\n";
+
+      int columns = 3;
+      int rows    = (lst.size() + columns - 1) / columns;
+
+      for (int row = 0; row < rows; ++row) {
+            os << "  <tr>\n";
+            for (int col = 0; col < columns; ++col) {
+                  os << "    <td>";
+                  int idx = col * rows + row;
+                  if (idx < lst.size()) {
+                        QString ref = lst[idx].target + ".html";
+                        // checkFile(ocol, ref);
+                        os << QString("<a href=\"%1\">").arg(ref);
+                        os << lst[idx].tag;
+                        os << "</a>";
+                        }
+                  os << "</td>\n";
+                  if ((col + 1) < columns) {
+                        if (idx == 0)
+                              os << "    <td>&nbsp;&nbsp;&nbsp;</td>\n";
+                        else
+                              os << "    <td/>\n";
+                        }
+                  }
+            os << "  </tr>\n";
+            }
+      os << "</table>\n";
+      os << "</body>\n";
+      os << "</html>\n";
       ff.close();
       }
 
@@ -244,17 +303,90 @@ void genPage(const QString& dir, QDomElement e, int lang)
       }
 
 //---------------------------------------------------------
+//   genProgPage
+//---------------------------------------------------------
+
+void genProgPage(const QString& dir, QDomElement e, int lang)
+      {
+      QString name   = e.attribute("name");
+      QString header = e.attribute("header");
+      if (name.isEmpty()) {
+            printf("genPage: empty name\n");
+            return;
+            }
+      if (header.isEmpty()) {
+            printf("genPage: empty header\n");
+            return;
+            }
+      printf("create page %s\n", qPrintable(name));
+      QString docFile = dir + "/" + name + ".html";
+      QFile qf(docFile);
+      if (!qf.open(QIODevice::WriteOnly)) {
+            printf("cannot open <%s>\n", qPrintable(qf.fileName()));
+            return;
+            }
+      Xml xml(&qf);
+
+      xml << "<html>\n";
+      xml << "<head>\n";
+      xml << "  <meta content=\"text/html; charset=UTF-8\">\n";
+      xml << "  </head>\n";
+      xml << "<body>\n";
+
+      xml << QString("<h4>MuseScore -- <a href=\"index.html\">Index</a> -- %1</h4>\n").arg(header);
+
+      QDomNode ee = e;
+      for (ee = ee.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+            if (ee.nodeType() == QDomNode::TextNode)
+                  xml << Xml::xmlString(ee.toText().data());
+            else if (ee.nodeType() == QDomNode::ElementNode) {
+                  QDomElement de = ee.toElement();
+                  if (de.tagName() == "index") {
+                        idxList.append(Index(de.text(), name));
+                        }
+                  else if (de.tagName() == "a") {
+                        QString href = de.attribute("href");
+                        if (!href.endsWith(".php")) {
+                              genHtml(ee.toElement(), xml);
+                              }
+                        else {
+                              xml << "<a href=\"" << href.left(href.size() - 4)
+                                  << ".html\">";
+                              for (QDomNode eee = ee.firstChild(); !eee.isNull(); eee = eee.nextSibling()) {
+                                    if (eee.nodeType() == QDomNode::ElementNode)
+                                          genHtml(eee.toElement(), xml);
+                                    else if (eee.nodeType() == QDomNode::TextNode)
+                                          xml << Xml::xmlString(eee.toText().data());
+                                    }
+                              xml << "</a>";
+                              }
+                        }
+                  else
+                        genHtml(ee.toElement(), xml);
+                  }
+            }
+
+      xml << "</body>\n";
+      xml << "</html>\n";
+      qf.close();
+      }
+
+//---------------------------------------------------------
 //   genWeb
 //---------------------------------------------------------
 
-static void genWeb(const QString& dir, const QDomDocument& doc, int lang)
+static void genWeb(const QString& dir, const QDomDocument& doc, int lang, bool web)
       {
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScoreManual") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-                        if (tag == "page")
-                              genPage(dir, ee, lang);
+                        if (tag == "page") {
+                              if (web)
+                                    genPage(dir, ee, lang);
+                              else
+                                    genProgPage(dir, ee, lang);
+                              }
                         else
                               domError(ee);
                         }
@@ -265,10 +397,10 @@ static void genWeb(const QString& dir, const QDomDocument& doc, int lang)
       }
 
 //---------------------------------------------------------
-//   main
+//   createWebDoc
 //---------------------------------------------------------
 
-int main(int /*argc*/, char* /*argv[]*/)
+static int createWebDoc()
       {
       for (unsigned i = 0; i < sizeof(manuals)/sizeof(*manuals); ++i) {
             QString src = manuals[i].src;
@@ -290,9 +422,82 @@ int main(int /*argc*/, char* /*argv[]*/)
                   return -1;
                   }
             docName = src;
-            genWeb(dst, doc, i);
+            genWeb(dst, doc, i, true);
             qSort(idxList.begin(), idxList.end(), sort);
             genIndex(manuals[i].idx, idxList, i);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   createProgramDoc
+//---------------------------------------------------------
+
+static int createProgramDoc()
+      {
+      for (unsigned i = 0; i < sizeof(manuals)/sizeof(*manuals); ++i) {
+            QString src = manuals[i].src;
+            QString dst = manuals[i].progDst;
+
+            idxList.clear();
+
+            QFile qf(src);
+            if (!qf.open(QIODevice::ReadOnly)) {
+                  printf("cannot open <%s>\n", qPrintable(qf.fileName()));
+                  return -1;
+                  }
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(&qf, false, &err, &line, &column)) {
+                  printf("error reading doc file %s at line %d column %d: %s\n",
+                     qPrintable(qf.fileName()), line, column, qPrintable(err));
+                  return -1;
+                  }
+            docName = src;
+            genWeb(dst, doc, i, false);
+            qSort(idxList.begin(), idxList.end(), sort);
+            genIndexProg(manuals[i].progIdx, idxList, i);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   usage
+//---------------------------------------------------------
+
+void usage(const char* name, const char* txt)
+      {
+      printf("gendoc: usage: gendoc <options>\n");
+      printf("  options:\n");
+      printf("     -w   create web documentation (default)\n");
+      printf("     -p   create program documentation\n");
+      }
+
+//---------------------------------------------------------
+//   main
+//---------------------------------------------------------
+
+int main(int argc, char* argv[])
+      {
+      int c;
+      int action = 0;
+      while ((c = getopt(argc, argv, "wp")) != EOF) {
+            switch (c) {
+                  case 'w':
+                        action = 0;
+                        break;
+                  case 'p':
+                        action = 1;
+                        break;
+                  default:
+                        usage(argv[0], "bad argument");
+                        return -1;
+                  }
+            }
+      switch(action) {
+            case 0: return createWebDoc();
+            case 1: return createProgramDoc();
             }
       }
 
