@@ -740,6 +740,8 @@ void Seq::heartBeat()
                   cs->addRefresh(n->note()->abbox());
                   }
             markedNotes.clear();
+            if (guiPos == events.constEnd())
+                  return;
             if (guiPos.value()->type() == ME_NOTEON) {
                   NoteOn* n = (NoteOn*)guiPos.value();
                   n->note()->setSelected(n->velo());
