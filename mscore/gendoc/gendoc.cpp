@@ -21,6 +21,9 @@
 #include <QtXml/QtXml>
 #include "xml.h"
 
+
+char* srcPathPrefix = "";
+
 struct Manuals {
       QString src;
       QString dst;
@@ -436,7 +439,7 @@ static int createWebDoc()
 static int createProgramDoc()
       {
       for (unsigned i = 0; i < sizeof(manuals)/sizeof(*manuals); ++i) {
-            QString src = manuals[i].src;
+            QString src = srcPathPrefix + QString("/") + manuals[i].src;
             QString dst = manuals[i].progDst;
 
             idxList.clear();
@@ -482,7 +485,7 @@ int main(int argc, char* argv[])
       {
       int c;
       int action = 0;
-      while ((c = getopt(argc, argv, "wp")) != EOF) {
+      while ((c = getopt(argc, argv, "wps:")) != EOF) {
             switch (c) {
                   case 'w':
                         action = 0;
@@ -490,6 +493,10 @@ int main(int argc, char* argv[])
                   case 'p':
                         action = 1;
                         break;
+                  case 's':
+                        srcPathPrefix = optarg;
+                        break;
+
                   default:
                         usage(argv[0], "bad argument");
                         return -1;

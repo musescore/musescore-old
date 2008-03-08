@@ -16,6 +16,8 @@ Skydiver: MuseScore 0.9.1, professioneller Notensatz</a>
 Martin Sauer: MuseScore: Notesatz für den Alltag</a>
 <li><a href="http://www.aldoboccacci.it/index.php?mod=read&id=1201872564">
 Aldo Boccacci: Musescore: un programma di notazione musicale multipiattaforma</a>
+<li><a href="http://www.linuxjournal.com/content/music-notation-programs-recent-releases">
+Dave Phillips: Music Notation Programs: Recent Releases</a>
 </ul>
 
 <h3>Andere freie Notensatzprogramme oder verwandte Programme:</h3>
