@@ -10,7 +10,13 @@
     <br>
 
   <h3> Binaries</h3>
-    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>.
+    There are ready to install packages for Ubuntu/Kubuntu 7.10 in the
+    "universe" repository. Please consult your favorite package manager.
+    <br>
+    A
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>
+    version is available
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">here</a>.
 
   <h3> Subversion Sourcecode Repository</h3>
     The latest <i>MuseScore</i> code is always available in the

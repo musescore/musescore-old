@@ -10,6 +10,12 @@
 <ul>
 <li><a href="http://www.linuxjournal.com/node/8972/print">Dave Phillips: At
 the Sounding Edge: Music Notation Software, the Final Installment</a>
+<li><a href="http://www.pro-community.com/wordpress/2008/02/04/musescore-091-kostenloser-professioneller-notensatz/">
+Skydiver: MuseScore 0.9.1, professioneller Notensatz</a>
+<li><a href="http://www.workshop.ch/openmind/2008/01/02/musescore-notensatz-fr-den-alltag/">
+Martin Sauer: MuseScore: Notesatz für den Alltag</a>
+<li><a href="http://www.aldoboccacci.it/index.php?mod=read&id=1201872564">
+Aldo Boccacci: Musescore: un programma di notazione musicale multipiattaforma</a>
 </ul>
 
 <h3>Andere freie Notensatzprogramme oder verwandte Programme:</h3>

@@ -909,11 +909,11 @@ void MuseScore::navigatorVisible(bool flag)
 void MuseScore::helpBrowser()
       {
       QString lang(localeName.left(2));
-      QFileInfo mscoreHelp(mscoreGlobalShare + QString("/doc/man-") + lang + QString(".pdf"));
+      QFileInfo mscoreHelp(mscoreGlobalShare + QString("/man/") + lang + QString("/index.html"));
       if (!mscoreHelp.isReadable()) {
-            mscoreHelp.setFile(mscoreGlobalShare + QString("/doc/man-en.pdf"));
+            mscoreHelp.setFile(mscoreGlobalShare + QString("/man/man/en/index.html"));
             if (!mscoreHelp.isReadable()) {
-                  QString info(tr("MuseScore manual not found at: "));
+                  QString info(tr("MuseScore online manual not found at: "));
                   info += mscoreHelp.filePath();
                   QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
                   return;
