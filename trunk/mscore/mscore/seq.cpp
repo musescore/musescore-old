@@ -116,9 +116,11 @@ void Seq::setScore(Score* s)
 
 void Seq::selectionChanged(int mode)
       {
-      if (mode != SEL_SINGLE || state == STOP || cs == 0 || driver == 0)
-            return;
       int tick = cs->pos();
+      if (mode != SEL_SINGLE || state == STOP || cs == 0 || driver == 0) {
+            cs->setPlayPos(tick);
+            return;
+            }
       if (tick != -1)
             seek(tick);
       }
@@ -300,6 +302,7 @@ void Seq::start()
                   driver->startTransport();
             else
                   emit started();
+printf("start seq: seek %d\n", cs->playPos());
             seek(cs->playPos());
             }
       }
