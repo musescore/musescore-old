@@ -1,3 +1,8 @@
+8.3.8 (ws)
+      - added new demo file "PlanxtyCarolan.msc" from Jirka Vysata
+      - changed build system to generate online html help from web manual
+      - new directories onlinedoc, gendoc
+      - renamed "doc" directory to "manual"
 7.3.8 (ws)
       - fix crash when pasting to last measure
 6.3.8 (ws)
