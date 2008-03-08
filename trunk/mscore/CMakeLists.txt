@@ -181,7 +181,7 @@ if (NOT MINGW)
 endif (NOT MINGW)
 
 if (USE_GLOBAL_FLUID)
-      subdirs(awl osdabzip mscore share doc demos gendoc onlinedoc)
+      subdirs(awl osdabzip mscore share manual demos gendoc onlinedoc)
 else (USE_GLOBAL_FLUID)
       subdirs(awl fluid osdabzip mscore share doc demos gendoc onlinedoc)
 endif (USE_GLOBAL_FLUID)
