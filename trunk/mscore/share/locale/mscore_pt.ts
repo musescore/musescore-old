@@ -3667,10 +3667,6 @@ falhou:</translation>
         <translation>Sobre&amp;Qt</translation>
     </message>
     <message>
-        <source>MuseScore manual not found at: </source>
-        <translation>Manual de MuseScore não encontrado em:</translation>
-    </message>
-    <message>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: Abrir ajuda</translation>
     </message>
@@ -3868,6 +3864,10 @@ falhou:</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

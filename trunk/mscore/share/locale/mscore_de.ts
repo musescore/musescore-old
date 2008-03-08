@@ -2299,10 +2299,6 @@ failed: </source>
         <translation>Umbrüche...</translation>
     </message>
     <message>
-        <source>MuseScore manual not found at: </source>
-        <translation>MuseScore Handbuch nicht gefunden: </translation>
-    </message>
-    <message>
         <source>Add Note</source>
         <translation>Note zufügen</translation>
     </message>
@@ -3872,6 +3868,10 @@ failed: </source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
