@@ -2387,10 +2387,6 @@ failed: </source>
         <translation>Разрывы...</translation>
     </message>
     <message>
-        <source>MuseScore manual not found at: </source>
-        <translation>Руководство MuseScore не найдено в каталоге: </translation>
-    </message>
-    <message>
         <source>Load Score from File</source>
         <translation>Загрузить партитуру из файла</translation>
     </message>
@@ -3872,6 +3868,10 @@ failed: </source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

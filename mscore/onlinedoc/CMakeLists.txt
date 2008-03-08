@@ -19,30 +19,30 @@
 #=============================================================================
 
 add_custom_command(
-      OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/man
-      COMMAND rm -rf man
-      COMMAND mkdir man man/de man/en
+      OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/online-doc
+      COMMAND rm -rf man/de man/en
+      COMMAND mkdir man/de man/en
       COMMAND ${CMAKE_BINARY_DIR}/gendoc/gendoc -p -s ${CMAKE_SOURCE_DIR}/onlinedoc
+      COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/online-doc
       DEPENDS doc-de.xml doc-en.xml
-      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       )
 
 add_custom_target(onlinedoc ALL
-      COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/onlinedoc
-      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/man
+      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/online-doc
       )
 
 add_dependencies(onlinedoc gendoc)
 
 
 install(
-      DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/man
+      DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/man
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}
       PATTERN ".svn" EXCLUDE
       )
 
 install(
-      DIRECTORY ${CMAKE_SOURCE_DIR}/../web/pic
+      DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pic
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/man
       PATTERN ".svn" EXCLUDE
       )

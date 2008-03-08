@@ -2416,10 +2416,6 @@ fallito: </translation>
         <translation>Manuale</translation>
     </message>
     <message>
-        <source>MuseScore manual not found at: </source>
-        <translation> Manuale di MuseScore non trovato in:</translation>
-    </message>
-    <message>
         <source>note entry mode</source>
         <translation>Modalità Inserimento Note</translation>
     </message>
@@ -3873,6 +3869,10 @@ fallito: </translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
