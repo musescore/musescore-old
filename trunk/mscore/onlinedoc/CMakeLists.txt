@@ -34,6 +34,7 @@ add_custom_target(onlinedoc ALL
 
 add_dependencies(onlinedoc gendoc)
 
+
 install(
       DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/man
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}
