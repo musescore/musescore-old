@@ -1,5 +1,6 @@
 <?php
   $file="features.php";
+  $level="..";
   require("header.html");
   ?>
 <h4>Features</h4>
@@ -11,7 +12,7 @@
       Automatic note head positioning in chords:
       </td>
     <td>
-      <img src="../pic/chord.png">
+      <img src="../wpic/chord.png">
       </td>
     </tr>
 
@@ -20,7 +21,7 @@
       Drum notation:
       </td>
     <td>
-      <img src="../pic/drum1.png">
+      <img src="../wpic/drum1.png">
       </td>
     </tr>
 

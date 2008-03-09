@@ -1,5 +1,6 @@
 <?php
   $file="features.php";
+  $level="..";
   require("header.html");
   ?>
 <h4>Features</h4>
@@ -10,7 +11,7 @@
       Automatische Anordnung der Notenköpfe in Akkorden:
       </td>
     <td>
-      <img src="../pic/chord.png">
+      <img src="../wpic/chord.png">
       </td>
     </tr>
 
@@ -19,7 +20,7 @@
       Drumnotation:
       </td>
     <td>
-      <img src="../pic/drum1.png">
+      <img src="../wpic/drum1.png">
       </td>
     </tr>
 

@@ -7,8 +7,10 @@
    <meta name="robots" content="index, nofollow">
    <meta name="description" content="MuseScore ist ein Notensatzprogramm" />
    <title>MuseScore: Linux Music Score Typesetter</title>
-   <link rel="shortcut icon" href="../favicon.ico" />
-   <link rel="stylesheet" type="text/css" href="../styles.css">
+   <?php
+      echo "<link rel=\"shortcut icon\" href=\"$level/favicon.ico\" />";
+      echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$level/styles.css\">";
+      ?>
 </head>
 
 <body>
@@ -24,29 +26,35 @@
          <table width="10%" cellpadding="5">
 	      <tr><td class="nav">
                <center><h2 class="head">MuseScore</h2></center>
-               <center><img src="../pic/mscore_icon.png"/></center>
                <?php
-                  echo "<a href=\"../en/$file\"><img src=\"../pic/english.png\"/></a>";
+                  echo "<center><img src=\"$level/wpic/mscore_icon.png\"/></center>";
+                  echo "<a href=\"$level/en/$file\"><img src=\"$level/wpic/english.png\"/></a>";
                   ?>
 
                <center><h3>Aktuelle&nbsp;Version<br>0.9.1</h3></center>
                <ul>
-                  <li><a class="navlink" href="idx.php">Startseite</a></li>
+                  <?php
+                     echo "<li><a class=\"navlink\" href=\"$level/de/idx.php\">Startseite</a></li>";
+                     ?>
                   </ul>
                <ul>
-                  <li><a class="navlink" href="download.php">Download</a></li>
-                  <li><a class="navlink" href="screenshots.php">Bildschirmfotos</a></li>
-                  <li><a class="navlink" href="features.php">Features</a></li>
-                  <li><a class="navlink" href="manual.php">Dokumentation</a></li>
-                  <li><a class="navlink" href="help.php">Mitmachen</a></li>
-                  <li><a class="navlink" href="links.php">Links</a></li>
+                  <?php
+                     echo "<li><a class=\"navlink\" href=\"$level/de/download.php\">Download</a></li>";
+                     echo "<li><a class=\"navlink\" href=\"$level/de/screenshots.php\">Bildschirmfotos</a></li>";
+                     echo "<li><a class=\"navlink\" href=\"$level/de/features.php\">Features</a></li>";
+                     echo "<li><a class=\"navlink\" href=\"$level/de/manual.php\">Dokumentation</a></li>";
+                     echo "<li><a class=\"navlink\" href=\"$level/de/help.php\">Mitmachen</a></li>";
+                     echo "<li><a class=\"navlink\" href=\"$level/de/links.php\">Links</a></li>";
+                     ?>
                   </ul>
                <ul>
 		      <li><a class="navlink" href="http://sourceforge.net/projects/mscore">SF Projektseite</a></li>
                   </ul>
 
 		   <hr/>
-               <center><a href="http://lmuse.sourceforge.net"><img src="../pic/poweredby_muse_88x31.png"/></A></center>
+               <?php
+                  echo "<center><a href=\"http://lmuse.sourceforge.net\"><img src=\"$level/wpic/poweredby_muse_88x31.png\"/></A></center>";
+                  ?>
 		   <hr/>
                <center><a href="http://sourceforge.net"> <IMG src="http://sourceforge.net/sflogo.php?group_id=93414&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo" /></A></center>
 		   <hr/>

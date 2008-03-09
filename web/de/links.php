@@ -1,5 +1,6 @@
 <?php
   $file="links.php";
+  $level="..";
   require("header.html");
   ?>
 <!-- Main body -->
@@ -64,7 +65,7 @@ Dave Phillips: Music Notation Programs: Recent Releases</a>
       MusicNotation</a> section.
    <li>Linux-Audio-Development(LAD) Mailing List:<br>
       <a href="http://lad.linuxaudio.org/">
-      <img src="../pic/ladbutton.gif" width="90" height="31" border="0"
+      <img src="../wpic/ladbutton.gif" width="90" height="31" border="0"
       alt="Go to the Linux Audio Development Homepage" align="left">
       </a>
 </ul>

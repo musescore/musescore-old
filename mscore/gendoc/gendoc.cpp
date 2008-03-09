@@ -39,14 +39,14 @@ struct Manuals {
 
 Manuals manuals[] = {
       {  QString("doc-de.xml"),
-         QString("man-de"),
-         QString("man-de/reference.php"),
+         QString("de/man"),
+         QString("de/man/reference.php"),
          QString("man/de"),
          QString("man/de/index.html")
          },
       {  QString("doc-en.xml"),
-         QString("man-en"),
-         QString("man-en/reference.php"),
+         QString("en/man"),
+         QString("en/man/reference.php"),
          QString("man/en"),
          QString("man/en/index.html")
          }
@@ -113,16 +113,13 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
       os.setCodec("UTF-8");
       os << "<?php\n";
       os << "  $file=\"reference.php\";\n";
-      if (lang == 0) {
-            os << "  require(\"../de/header.html\");\n";
-            os << "  ?>\n";
+      os << "  $level=\"../..\";";
+      os << "  require(\"../header.html\");\n";
+      os << "  ?>\n";
+      if (lang == 0)
             os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Dokumentation</a> -- Index</h4>\n";
-            }
-      else {
-            os << "  require(\"../en/header.html\");\n";
-            os << "  ?>\n";
+      else
             os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Documentation</a> -- Index</h4>\n";
-            }
       os << "<table>\n";
 
       int columns = 3;
@@ -151,10 +148,7 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
             os << "  </tr>\n";
             }
       os << "</table>\n";
-      if (lang == 0)
-            os << "<?php require(\"../de/trailer.html\");  ?>\n";
-      else
-            os << "<?php require(\"../en/trailer.html\");  ?>\n";
+      os << "<?php require(\"../trailer.html\");  ?>\n";
       ff.close();
       }
 
@@ -293,19 +287,18 @@ void genPage(const QString& dir, QDomElement e, int lang)
             }
       Xml xml(&qf);
       xml << "<?php\n";
-      xml << QString("  $file=\"%1.php\";\n").arg(name);
+      xml << QString("  $file=\"man/%1.php\";\n").arg(name);
+      xml << "  $level=\"../..\";";
+      xml << "  require(\"../header.html\");\n";
+      xml << "  ?>\n";
       if (lang == 0) {
-            xml << "  require(\"../de/header.html\");\n";
-            xml << "  ?>\n";
-            xml << QString("<h4><a href=\"idx.php\">MuseScore</a> -- "
-                   "<a href=\"../de/manual.php\">Dokumentation</a> -- "
+            xml << QString("<h4><a href=\"../idx.php\">MuseScore</a> -- "
+                   "<a href=\"../manual.php\">Dokumentation</a> -- "
                    "<a href=\"reference.php\">Index</a> -- %1</h4>\n").arg(header);
             }
       else if (lang == 1) {
-            xml << "  require(\"../en/header.html\");\n";
-            xml << "  ?>\n";
-            xml << QString("<h4><a href=\"idx.php\">MuseScore</a> -- "
-                   "<a href=\"../en/manual.php\">Documentation</a> -- "
+            xml << QString("<h4><a href=\"../idx.php\">MuseScore</a> -- "
+                   "<a href=\"../manual.php\">Documentation</a> -- "
                    "<a href=\"reference.php\">Index</a> -- %1</h4>\n").arg(header);
             }
 
@@ -323,10 +316,7 @@ void genPage(const QString& dir, QDomElement e, int lang)
                   }
             }
 
-      if (lang == 0)
-            xml << "<?php require(\"../de/trailer.html\");  ?>\n";
-      else
-            xml << "<?php require(\"../en/trailer.html\");  ?>\n";
+      xml << "<?php require(\"../trailer.html\");  ?>\n";
       qf.close();
       }
 
