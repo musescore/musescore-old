@@ -42,6 +42,7 @@ const char* const HChord::scaleNames[2][12] = {
 
 HChord::HChord(const char* s)
       {
+      keys = 0;
       QStringList sl = QString(s).split(" ", QString::SkipEmptyParts);
       foreach(QString s, sl) {
             for (int i = 0; i < 12; ++i) {

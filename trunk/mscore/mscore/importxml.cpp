@@ -73,8 +73,8 @@
 
 extern const XmlChordExtension chordExtensions[] = {
       {   0, "none"               },
-      {   1, "other"              },
       {   1, "major"              },
+      {   1, "other"              },
       {  16, "minor"              },
       {  19, "minor-seventh"      },
       {  99, "augmented-seventh"  },
