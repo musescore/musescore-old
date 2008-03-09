@@ -1,5 +1,6 @@
 <?php
   $file="help.php";
+  $level="..";
   require("header.html");
   ?>
 <h3>Getting Involved:</h3>

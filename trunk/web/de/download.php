@@ -1,5 +1,6 @@
 <?php
   $file="download.php";
+  $level="..";
   require("header.html");
   ?>
 <div id="intro">

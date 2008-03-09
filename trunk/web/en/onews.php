@@ -1,5 +1,6 @@
 <?php
   $file="onews.php";
+  $level="..";
   require("header.html");
   ?>
 <h4>MuseScore -- Older News</h4>
