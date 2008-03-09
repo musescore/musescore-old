@@ -23,6 +23,11 @@
 
 
 char* srcPathPrefix = "";
+char* dstPathPrefix = "";
+
+//---------------------------------------------------------
+//   Manuals
+//---------------------------------------------------------
 
 struct Manuals {
       QString src;
@@ -34,14 +39,14 @@ struct Manuals {
 
 Manuals manuals[] = {
       {  QString("doc-de.xml"),
-         QString("../web/de"),
-         QString("../web/de/reference.php"),
+         QString("man-de"),
+         QString("man-de/reference.php"),
          QString("man/de"),
          QString("man/de/index.html")
          },
       {  QString("doc-en.xml"),
-         QString("../web/en"),
-         QString("../web/en/reference.php"),
+         QString("man-en"),
+         QString("man-en/reference.php"),
          QString("man/en"),
          QString("man/en/index.html")
          }
@@ -51,6 +56,9 @@ const QString deIndex("../web/de/reference.php");
 const QString enIndex("../web/en/reference.php");
 const QString indexFile("index.doc");
 
+//---------------------------------------------------------
+//   Index
+//---------------------------------------------------------
 
 struct Index {
       QString tag;
@@ -91,6 +99,7 @@ static bool sort(const Index& s1, const Index& s2)
 
 //---------------------------------------------------------
 //   genIndex
+//    gen web index
 //---------------------------------------------------------
 
 void genIndex(const QString& of, const QList<Index> lst, int lang)
@@ -104,12 +113,16 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
       os.setCodec("UTF-8");
       os << "<?php\n";
       os << "  $file=\"reference.php\";\n";
-      os << "  require(\"header.html\");\n";
-      os << "  ?>\n";
-      if (lang == 0)
+      if (lang == 0) {
+            os << "  require(\"../de/header.html\");\n";
+            os << "  ?>\n";
             os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Dokumentation</a> -- Index</h4>\n";
-      else
+            }
+      else {
+            os << "  require(\"../en/header.html\");\n";
+            os << "  ?>\n";
             os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Documentation</a> -- Index</h4>\n";
+            }
       os << "<table>\n";
 
       int columns = 3;
@@ -138,7 +151,10 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
             os << "  </tr>\n";
             }
       os << "</table>\n";
-      os << "<?php require(\"trailer.html\");  ?>\n";
+      if (lang == 0)
+            os << "<?php require(\"../de/trailer.html\");  ?>\n";
+      else
+            os << "<?php require(\"../en/trailer.html\");  ?>\n";
       ff.close();
       }
 
@@ -266,7 +282,9 @@ void genPage(const QString& dir, QDomElement e, int lang)
             printf("genPage: empty header\n");
             return;
             }
+
       printf("create page %s\n", qPrintable(name));
+
       QString docFile = dir + "/" + name + ".php";
       QFile qf(docFile);
       if (!qf.open(QIODevice::WriteOnly)) {
@@ -276,16 +294,20 @@ void genPage(const QString& dir, QDomElement e, int lang)
       Xml xml(&qf);
       xml << "<?php\n";
       xml << QString("  $file=\"%1.php\";\n").arg(name);
-      xml << "  require(\"header.html\");\n";
-      xml << "  ?>\n";
-      if (lang == 0)
+      if (lang == 0) {
+            xml << "  require(\"../de/header.html\");\n";
+            xml << "  ?>\n";
             xml << QString("<h4><a href=\"idx.php\">MuseScore</a> -- "
-                   "<a href=\"manual.php\">Dokumentation</a> -- "
+                   "<a href=\"../de/manual.php\">Dokumentation</a> -- "
                    "<a href=\"reference.php\">Index</a> -- %1</h4>\n").arg(header);
-      else if (lang == 1)
+            }
+      else if (lang == 1) {
+            xml << "  require(\"../en/header.html\");\n";
+            xml << "  ?>\n";
             xml << QString("<h4><a href=\"idx.php\">MuseScore</a> -- "
-                   "<a href=\"manual.php\">Documentation</a> -- "
+                   "<a href=\"../en/manual.php\">Documentation</a> -- "
                    "<a href=\"reference.php\">Index</a> -- %1</h4>\n").arg(header);
+            }
 
       QDomNode ee = e;
       for (ee = ee.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
@@ -301,7 +323,10 @@ void genPage(const QString& dir, QDomElement e, int lang)
                   }
             }
 
-      xml << "<?php require(\"trailer.html\"); ?>\n";
+      if (lang == 0)
+            xml << "<?php require(\"../de/trailer.html\");  ?>\n";
+      else
+            xml << "<?php require(\"../en/trailer.html\");  ?>\n";
       qf.close();
       }
 
@@ -413,8 +438,8 @@ static void genWeb(const QString& dir, const QDomDocument& doc, int lang, bool w
 static int createWebDoc()
       {
       for (unsigned i = 0; i < sizeof(manuals)/sizeof(*manuals); ++i) {
-            QString src = manuals[i].src;
-            QString dst = manuals[i].dst;
+            QString src = srcPathPrefix + QString("/") + manuals[i].src;
+            QString dst = dstPathPrefix + QString("/") + manuals[i].dst;
 
             idxList.clear();
 
@@ -434,7 +459,9 @@ static int createWebDoc()
             docName = src;
             genWeb(dst, doc, i, true);
             qSort(idxList.begin(), idxList.end(), sort);
-            genIndex(manuals[i].idx, idxList, i);
+
+            QString idst = dstPathPrefix + QString("/") + manuals[i].idx;
+            genIndex(idst, idxList, i);
             }
       return 0;
       }
@@ -480,8 +507,10 @@ void usage(const char* name, const char* txt)
       {
       printf("gendoc: usage: gendoc <options>\n");
       printf("  options:\n");
-      printf("     -w   create web documentation (default)\n");
-      printf("     -p   create program documentation\n");
+      printf("     -w       create web documentation (default)\n");
+      printf("     -p       create program documentation\n");
+      printf("     -sPath   source path prefix\n");
+      printf("     -dPath   destination path prefix\n");
       }
 
 //---------------------------------------------------------
@@ -492,7 +521,7 @@ int main(int argc, char* argv[])
       {
       int c;
       int action = 0;
-      while ((c = getopt(argc, argv, "wps:")) != EOF) {
+      while ((c = getopt(argc, argv, "wps:d:")) != EOF) {
             switch (c) {
                   case 'w':
                         action = 0;
@@ -503,7 +532,9 @@ int main(int argc, char* argv[])
                   case 's':
                         srcPathPrefix = optarg;
                         break;
-
+                  case 'd':
+                        dstPathPrefix = optarg;
+                        break;
                   default:
                         usage(argv[0], "bad argument");
                         return -1;

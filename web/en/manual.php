@@ -4,6 +4,6 @@
   ?>
 <h4><a href="idx.php">MuseScore</a> -- Documentation</h4>
 
-<a href="reference.php">Online Reference</a>
+<a href="../man-en/reference.php">Online Reference</a>
 <?php require("trailer.html");  ?>
 
