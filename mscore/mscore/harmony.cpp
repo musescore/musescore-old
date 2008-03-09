@@ -598,6 +598,8 @@ int convertRoot(const QString& s, int* alter)
       if (n > 1) {
             if (s[1].toLower().toAscii() == 'b')
                   *alter = -1;
+            else if (s[1] == '#')
+                  *alter = 1;
             }
       int r = 0;
       switch(s[0].toLower().toAscii()) {
