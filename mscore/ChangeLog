@@ -1,3 +1,6 @@
+9.3.8 (lv)
+      - new testfile testHarmony1.xml
+      - minor harmony fixes
 8.3.8 (ws)
       - added new demo file "PlanxtyCarolan.msc" from Jirka Vysata
       - changed build system to generate online html help from web manual
