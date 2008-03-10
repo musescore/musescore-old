@@ -79,6 +79,7 @@ Seq::Seq()
       connect(playTimer, SIGNAL(timeout()), this, SLOT(stopNotes()));
 
       connect(this, SIGNAL(toGui(int)), this, SLOT(seqMessage(int)), Qt::QueuedConnection);
+      heartBeatTimer->start(100);
       }
 
 //---------------------------------------------------------
@@ -405,12 +406,12 @@ void Seq::seqMessage(int msg)
       switch(msg) {
             case '0':         // STOP
                   guiStop();
-                  heartBeatTimer->stop();
+                  // heartBeatTimer->stop();
                   break;
 
             case '1':         // PLAY
                   emit started();
-                  heartBeatTimer->start(100);
+                  // heartBeatTimer->start(100);
                   break;
 
             default:
@@ -565,8 +566,7 @@ void Seq::processMidi()
             //
             // collect events for one segment
             //
-            double endTime = curTime() + (512.0 / preferences.rtcTicks);
-
+            double endTime = curTime() + (128.0 / preferences.rtcTicks);
             for (; playPos != events.constEnd(); ++playPos) {
                   playTime = tick2time(playPos.key());
                   double t = startTime + playTime;
