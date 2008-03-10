@@ -1641,6 +1641,7 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 //          - volta
 //          - d.c. al fine
 //          - d.s. al fine
+//          - d.s. al coda
 //---------------------------------------------------------
 
 void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffIdx)
@@ -1664,7 +1665,11 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                   continue;
                   }
             Measure* m = (Measure*)mb;
-            if ((m->repeatFlags() & RepeatStart) && (rstack.isEmpty() || (rstack.top().m != m)))
+            if (
+                  (m->repeatFlags() & RepeatStart)
+               && (rstack.isEmpty() || (rstack.top().m != m))
+               && (rstack.isEmpty() || (rstack.top().type != RepeatLoop::LOOP_JUMP))
+               )
                   rstack.push(RepeatLoop(m));
 
             if (!rstack.isEmpty() && !isVolta(m->tick(), rstack.top().count + 1))
@@ -1729,12 +1734,17 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                   }
             else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
                   MeasureBase* m = searchLabel(rstack.top().stop);
+                  if (m == 0)
+                        printf("LOOP_JUMP: label not found\n");
                   if (m == mb) {
                         if (m->next() == 0)
                               break;
                         MeasureBase* nmb = searchLabel(rstack.top().cont, m->next());
                         if (nmb)
                               tickOffset += m->tick() + m->tickLen() - nmb->tick();
+                        else if (!rstack.top().cont.isEmpty())
+                              printf("Cont label not found: <%s>\n", qPrintable(rstack.top().cont));
+
                         mb = nmb;
                         rstack.pop();     // end this loop
                         continue;
