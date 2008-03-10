@@ -45,7 +45,7 @@ SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
 
 if (MINGW)
       SET(Mscore_INSTALL_NAME  "")
-      SET(Mscore_SHARE_NAME    "")
+      SET(Mscore_SHARE_NAME    ".")
 else (MINGW)
       SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}/")
       SET(Mscore_SHARE_NAME    "share/")
