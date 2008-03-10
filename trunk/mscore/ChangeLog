@@ -1,3 +1,5 @@
+10.3.8 (ws)
+      - fix for rearranging order of staves (#1910327)
 9.3.8 (lv)
       - new testfile testHarmony1.xml
       - minor harmony fixes
