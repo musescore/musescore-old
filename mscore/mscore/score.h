@@ -279,7 +279,7 @@ class Score : public QObject {
       void addViewer(Viewer* v);
       void clearViewer();
 
-      void undoOp(QList<int> si, QList<int> di);
+      void undoOp(QList<int>);
       void undoOp(UndoOp::UndoType type, MeasureBase* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
@@ -395,7 +395,7 @@ class Score : public QObject {
       void midiNoteReceived(int pitch, bool);
       QList<Part*>* parts()       { return &_parts; }
       void updateStaffIndex();
-      void sortStaves(QList<int> src, QList<int> dst);
+      void sortStaves(QList<int> dst);
       void read(QString name);
 
       void setSpatium(double v);

@@ -175,7 +175,7 @@ class Measure : public MeasureBase {
       double tick2pos(int) const;
       Segment* tick2segment(int) const;
 
-      void sortStaves(QList<int>& src, QList<int>& dst);
+      void sortStaves(QList<int>& dst);
 
       void dump() const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;

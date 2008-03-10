@@ -358,18 +358,17 @@ bool Segment::isEmpty() const
 //   sortStaves
 //---------------------------------------------------------
 
-void Segment::sortStaves(QList<int>& src, QList<int>& dst)
+void Segment::sortStaves(QList<int>& dst)
       {
-      QList<Element*> dl;
+      QList<Element*>   dl;
       QList<LyricsList> ll;
 
-      foreach (int didx, dst) {
-            int sidx       = src.indexOf(didx);
-            int startTrack = sidx * VOICES;
+      for (int i = 0; i < dst.size(); ++i) {
+            int startTrack = dst[i] * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int k = startTrack; k < endTrack; ++k)
                   dl.append(_elist[k]);
-            ll.append(_lyrics[sidx]);
+            ll.append(_lyrics[dst[i]]);
             }
       _elist = dl;
       _lyrics = ll;

@@ -2709,45 +2709,25 @@ void Measure::setRepeatFlags(int val)
 //   sortStaves
 //---------------------------------------------------------
 
-void Measure::sortStaves(QList<int>& src, QList<int>& dst)
+void Measure::sortStaves(QList<int>& dst)
       {
-#if 0
-      printf("src: ");
-      foreach(int i, src)
-            printf(" %d", i);
-      printf("\n");
-
-      printf("dst: ");
-      foreach(int i, dst)
-            printf(" %d", i);
-      printf("\n");
-#endif
       QList<MStaff*> ms;
-      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            int didx = *i;
-            int sidx = 0;
-            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
-                  if (didx == *ii) {
-                        ms.push_back(staves[sidx]);
-                        break;
-                        }
-                  }
-            }
+      foreach(int idx, dst)
+            ms.push_back(staves[idx]);
       staves = ms;
 
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
             if (staves[staffIdx]->lines)
                   staves[staffIdx]->lines->setTrack(staffIdx * VOICES);
             }
-
       for (Segment* s = first(); s; s = s->next())
-            s->sortStaves(src, dst);
-#if 0 //TODO?
+            s->sortStaves(dst);
+
       foreach(Element* e, _el) {
             if (e->track() == -1)
                   continue;
-            int voice = e->voice();
-            int track = e->track();
+            int voice    = e->voice();
+            int staffIdx = e->staffIdx();
+            e->setTrack(dst[staffIdx] * VOICES + voice);
             }
-#endif
       }

@@ -335,6 +335,7 @@ void InstrumentsDialog::on_upButton_clicked()
       QTreeWidgetItem* item = wi.front();
 
       if (item->type() == PART_LIST_ITEM) {
+            partiturList->selectionModel()->clear();
             bool isExpanded = partiturList->isItemExpanded(item);
             int idx = partiturList->indexOfTopLevelItem(item);
             if (idx) {
@@ -345,6 +346,7 @@ void InstrumentsDialog::on_upButton_clicked()
                   }
             }
       else {
+            partiturList->selectionModel()->clear();
             QTreeWidgetItem* parent = item->parent();
             int idx = parent->indexOfChild(item);
             if (idx) {
@@ -603,11 +605,7 @@ void MuseScore::editInstrList()
                   dst.push_back(sli->staff);
                   }
             }
-      QList<int> sl;
       QList<int> dl;
-
-      for (int idx = 0; idx < cs->staves().size(); ++idx)
-            sl.push_back(idx);
 
       foreach(Staff* staff, dst) {
             int idx = cs->staves().indexOf(staff);
@@ -617,18 +615,16 @@ void MuseScore::editInstrList()
                   dl.push_back(idx);
             }
 
-      if (sl.size() != dl.size())
-            printf("cannot happen: sl(%d) != dl(%d)\n", sl.size(), dl.size());
       bool sort = false;
-      for (int i = 0; i < sl.size(); ++i) {
-            if (sl[i] != dl[i]) {
+      for (int i = 0; i < dl.size(); ++i) {
+            if (dl[i] != i) {
                   sort = true;
                   break;
                   }
             }
       if (sort) {
-            cs->sortStaves(sl, dl);
-            cs->undoOp(sl, dl);
+            cs->sortStaves(dl);
+            cs->undoOp(dl);
             }
       cs->setLayoutAll(true);
       cs->endCmd();
@@ -833,28 +829,21 @@ void Score::removeStaff(Staff* staff)
 //   sortStaves
 //---------------------------------------------------------
 
-void Score::sortStaves(QList<int> src, QList<int> dst)
+void Score::sortStaves(QList<int> dst)
       {
       _layout->systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
       QList<Staff*> dl;
-      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            int didx = *i;
-            int sidx = 0;
-            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
-                  if (didx == *ii) {
-                        Staff* staff = _staves[sidx];
-                        if (staff->part() != curPart) {
-                              curPart = staff->part();
-                              curPart->staves()->clear();
-                              _parts.push_back(curPart);
-                              }
-                        curPart->staves()->push_back(staff);
-                        dl.push_back(staff);
-                        break;
-                        }
+      foreach(int idx, dst) {
+            Staff* staff = _staves[idx];
+            if (staff->part() != curPart) {
+                  curPart = staff->part();
+                  curPart->staves()->clear();
+                  _parts.push_back(curPart);
                   }
+            curPart->staves()->push_back(staff);
+            dl.push_back(staff);
             }
       _staves = dl;
 
@@ -862,7 +851,18 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
-            m->sortStaves(src, dst);
+            m->sortStaves(dst);
+            }
+      foreach(Element* e, *gel()) {
+            if (e->type() == SLUR) {
+                  Slur* slur = (Slur*)e;
+                  int staffIdx = slur->staffIdx();
+                  int voice    = slur->voice();
+                  int staffIdx2 = slur->track() / VOICES;
+                  int voice2    = slur->track() % VOICES;
+                  slur->setTrack(dst[staffIdx] * VOICES + voice);
+                  slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                  }
             }
       }
 

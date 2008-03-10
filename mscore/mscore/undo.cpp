@@ -290,10 +290,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         removeMeasure(i->measure);
                   break;
             case UndoOp::SortStaves:
-                  if (undo)
-                        sortStaves(i->di, i->si);
-                  else
-                        sortStaves(i->si, i->di);
+                  sortStaves(i->si);
                   break;
             case UndoOp::ToggleInvisible:
                   i->element1->setVisible(!i->element1->visible());
@@ -967,13 +964,12 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m, int a, int b)
       undoList.back()->push_back(i);
       }
 
-void Score::undoOp(QList<int> si, QList<int> di)
+void Score::undoOp(QList<int> si)
       {
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::SortStaves;
       i.si   = si;
-      i.di   = di;
       undoList.back()->push_back(i);
       }
 

@@ -412,6 +412,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   dst.push_back(sli->staff);
                   }
             }
+#if 0
       QList<int> sl;
       QList<int> dl;
 
@@ -439,9 +440,10 @@ void InstrumentWizard::createInstruments(Score* cs)
                   }
             }
       if (sort) {
-            cs->sortStaves(sl, dl);
-            cs->undoOp(sl, dl);
+            cs->sortStaves(dl);
+            cs->undoOp(dl);
             }
+#endif
       cs->setLayoutAll(true);
       }
 
