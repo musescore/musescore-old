@@ -302,7 +302,6 @@ void Seq::start()
                   driver->startTransport();
             else
                   emit started();
-printf("start seq: seek %d\n", cs->playPos());
             seek(cs->playPos());
             }
       }
@@ -727,38 +726,15 @@ void Seq::heartBeat()
       if (state != PLAY)
             return;
 
-      int playTick = time2tick(curTime() - startTime);
-      EventMap::const_iterator pp = events.lowerBound(playTick);
-
       cs->start();
+      double endTime = curTime() - startTime;
       Note* note = 0;
-      if (guiPos == events.constEnd()) {
-            // special case seek:
-            guiPos = pp;
-            foreach(const NoteOn* n, markedNotes) {
-                  n->note()->setSelected(false);
-                  cs->addRefresh(n->note()->abbox());
-                  }
-            markedNotes.clear();
-            if (guiPos == events.constEnd())
-                  return;
+      for (; guiPos != events.constEnd(); ++guiPos) {
+            double f = tick2time(guiPos.key());
+            if (f >= endTime)
+                  break;
             if (guiPos.value()->type() == ME_NOTEON) {
                   NoteOn* n = (NoteOn*)guiPos.value();
-                  n->note()->setSelected(n->velo());
-                  cs->addRefresh(n->note()->abbox());
-                  if (n->velo()) {
-                        markedNotes.append(n);
-                        note = n->note();
-                        }
-                  else {
-                        markedNotes.removeAll(n);
-                        }
-                  }
-            }
-
-      for (EventMap::const_iterator i = guiPos; i != pp; ++i) {
-            if (i.value()->type() == ME_NOTEON) {
-                  NoteOn* n = (NoteOn*)i.value();
                   n->note()->setSelected(n->velo());
                   cs->addRefresh(n->note()->abbox());
                   if (n->velo()) {
@@ -778,7 +754,6 @@ void Seq::heartBeat()
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
             }
       cs->end();
-      guiPos = pp;
       }
 
 //---------------------------------------------------------
@@ -831,7 +806,7 @@ void Seq::setPos(int tick)
       playTime  = tick2time(tick);
       startTime = curTime() - playTime;
       playPos   = events.lowerBound(tick);
-      guiPos    = events.end();     // special case so signal heartBeat a seek
+      guiPos    = playPos;
       }
 
 //---------------------------------------------------------
