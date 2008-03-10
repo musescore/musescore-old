@@ -1183,7 +1183,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       QRegion r1(rr);
       foreach (const Page* page, _layout->pages())
             r1 -= _matrix.mapRect(page->abbox()).toRect();
-      p.setClipRect(fr);
+//      p.setClipRect(fr);
 
       QList<const Element*> ell = _layout->items(fr);
       drawElements(p, ell);
