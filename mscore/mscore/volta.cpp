@@ -150,7 +150,10 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                         tick1 = m1->prev()->tick();
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
-                        tick2 = m2->prev()->tick();
+                        if (m2->tick() < tick2)
+                              tick2 = m2->tick();
+                        else
+                              tick2 = m2->prev()->tick();
                         if (tick2 <= tick1)
                               return true;
                         line()->setTick2(tick2);
