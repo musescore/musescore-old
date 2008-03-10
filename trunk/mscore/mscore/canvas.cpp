@@ -1136,8 +1136,14 @@ void Canvas::paintEvent(QPaintEvent* ev)
             moveCursor();
 
       QVector<QRect> vector = region.rects();
-      foreach(QRect r, vector)
-            paint(r, p);
+//      if (vector.size() <= 2) {
+            foreach(QRect r, vector)
+                  paint(r, p);
+//            }
+//      else {
+//            paint(region.boundingRect(), p);
+//            }
+
 
       p.setMatrix(_matrix);
       p.setClipping(false);
@@ -2060,9 +2066,6 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
             p.translate(e->canvasPos());
             p.setPen(QPen(e->curColor()));
             e->draw(p);
-// if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG)
-//   printf("text %p <%s> %f %f\n",
-//      e, qPrintable(((Text*)e)->getText()), e->canvasPos().x(), e->canvasPos().y());
 
             if (debugMode && e->selected()) {
                   //
