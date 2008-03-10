@@ -22,11 +22,17 @@
 #     mscore online doc
 #----------------------------------------------------------
 
+if (MINGW)
+      set (GENDOC_UTIL "/home/ws/mscore/mscore/trunk/build/gendoc/gendoc")
+else (MINGW)
+      set (GENDOC_UTIL "${CMAKE_BINARY_DIR}/gendoc/gendoc")
+endif (MINGW)
+
 add_custom_command(
       OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/online-doc
       COMMAND rm -rf man/de man/en
       COMMAND mkdir man/de man/en
-      COMMAND ${CMAKE_BINARY_DIR}/gendoc/gendoc -p -s ${CMAKE_SOURCE_DIR}/onlinedoc
+      COMMAND ${GENDOC_UTIL} -p -s ${CMAKE_SOURCE_DIR}/onlinedoc
       COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/online-doc
       DEPENDS doc-de.xml doc-en.xml
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -45,7 +51,7 @@ add_dependencies(onlinedoc gendoc)
 
 add_custom_command(
       OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/web-doc
-      COMMAND ${CMAKE_BINARY_DIR}/gendoc/gendoc -s ${CMAKE_SOURCE_DIR}/onlinedoc -d ${CMAKE_SOURCE_DIR}/../web
+      COMMAND ${GENDOC_UTIL} -s ${CMAKE_SOURCE_DIR}/onlinedoc -d ${CMAKE_SOURCE_DIR}/../web
       COMMAND cp -af ${CMAKE_CURRENT_SOURCE_DIR}/pic ${CMAKE_SOURCE_DIR}/../web
       COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/web-doc
       DEPENDS doc-de.xml doc-en.xml
@@ -71,7 +77,7 @@ install(
 
 install(
       DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pic
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/man
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
       PATTERN ".svn" EXCLUDE
       )
 
