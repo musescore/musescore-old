@@ -168,7 +168,6 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
                         tick2 = m2->tick() + m2->tickLen();
-printf("Volta new tick2 %d\n", tick2);
                         line()->setTick2(tick2);
                         line()->layout(score()->mainLayout());
                         if (line()->lineSegments().size() != segments)
@@ -223,7 +222,12 @@ LineSegment* Volta::createLineSegment()
 QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
       {
       Measure* m = score()->tick2measure(tick);
+      double x = m->canvasPos().x();
+      if (m->tick() < tick)
+            x += m->width();
+
       System* s = m->system();
+
       if ((grip == 1) && (m == s->measures().front())) {
             MeasureBase* mb = m;
             do {
@@ -240,7 +244,7 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
                   }
             }
       *system = s;
-      return QPointF(m->canvasPos().x(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
+      return QPointF(x, s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
       }
 
 //---------------------------------------------------------
