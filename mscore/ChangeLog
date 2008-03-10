@@ -1,4 +1,6 @@
-10.3.8 (ws)
+10.3.8 (lv)
+      - updated testHarmony1.xml
+       (ws)
       - fix volta on last measure
       - fix for rearranging order of staves (#1910327)
 9.3.8 (lv)
