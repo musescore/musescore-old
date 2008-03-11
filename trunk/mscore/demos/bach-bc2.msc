@@ -117,6 +117,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Trumpet</p></body></html>
       </name>
     <Instrument>
+      <midiChannel>0</midiChannel>
       <midiProgram>42</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -217,7 +218,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>3</midiChannel>
+      <midiChannel>4</midiChannel>
       <midiProgram>40</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -243,7 +244,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>3</midiChannel>
+      <midiChannel>5</midiChannel>
       <midiProgram>40</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -269,7 +270,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>4</midiChannel>
+      <midiChannel>6</midiChannel>
       <midiProgram>41</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -295,7 +296,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>5</midiChannel>
+      <midiChannel>7</midiChannel>
       <midiProgram>42</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -321,7 +322,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">e Cembalo</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>7</midiChannel>
+      <midiChannel>8</midiChannel>
       <midiProgram>43</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
