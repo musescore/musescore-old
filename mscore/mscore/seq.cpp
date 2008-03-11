@@ -1027,10 +1027,10 @@ void Seq::guiToSeq(const SeqMsg& msg)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* Seq::getPatchInfo(int ch, const MidiPatch* p)
+const MidiPatch* Seq::getPatchInfo(int port, int ch, const MidiPatch* p)
       {
       if (driver)
-            return driver->getPatchInfo(ch, p);
+            return driver->getPatchInfo(port, ch, p);
       return 0;
       }
 

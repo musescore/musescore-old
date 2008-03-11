@@ -418,12 +418,7 @@ int JackAudio::getState()
 
 void JackAudio::putEvent(const MidiOutEvent& e)
       {
-      if ((e.type & 0xf0) == ME_NOTEON) {
-            synth->playNote(e.type & 0xf, e.a, e.b);
-            }
-      else if ((e.type & 0xf0) == ME_CONTROLLER) {
-            synth->setController(e.type & 0xf, e.a, e.b);
-            }
+      synth->play(e);
       }
 
 //---------------------------------------------------------
@@ -439,10 +434,10 @@ void JackAudio::process(int n, float* l, float* r, int stride)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* JackAudio::getPatchInfo(int ch, const MidiPatch* p)
+const MidiPatch* JackAudio::getPatchInfo(int port, int ch, const MidiPatch* p)
       {
       if (synth)
-            return synth->getPatchInfo(ch, p);
+            return synth->getPatchInfo(port, ch, p);
       return 0;
       }
 

@@ -108,7 +108,7 @@ void InstrumentListEditor::updateAll(Score* cs)
             vb->addWidget(pe);
             const MidiPatch* p = 0;
             for (;;) {
-                  p = seq->getPatchInfo(0, p);
+                  p = seq->getPatchInfo(0, 0, p);
                   if (p == 0)
                         break;
                   pe->patch->addItem(p->name);
@@ -145,12 +145,14 @@ void PartEdit::patchChanged(int n)
       {
       const MidiPatch* p = 0;
       for (int idx = 0;; ++idx) {
-            p = seq->getPatchInfo(0, p);
+            p = seq->getPatchInfo(0, 0, p);
             if (p == 0)
                   break;
             if (idx == n) {
-                  Instrument* instr = part->instrument();
-                  instr->midiProgram = p->prog;
+                  Instrument* instr      = part->instrument();
+                  instr->midiProgram     = p->prog;
+                  instr->midiBankSelectH = p->hbank;
+                  instr->midiBankSelectL = p->lbank;
 
                   MidiOutEvent event;
                   event.port = instr->midiPort;
@@ -171,9 +173,10 @@ void PartEdit::patchChanged(int n)
                         event.a    = instr->midiProgram;
                         seq->sendEvent(event);
                         }
-                  break;
+                  return;
                   }
             }
+      printf("patch %d not found\n", n);
       }
 
 //---------------------------------------------------------

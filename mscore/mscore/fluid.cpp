@@ -34,6 +34,7 @@ ISynth::ISynth()
       sfont       = 0;
       fontId      = -1;
       fluid_font  = 0;
+      lbank       = 0;
       }
 
 //---------------------------------------------------------
@@ -45,6 +46,8 @@ bool ISynth::init(int sampleRate)
       {
       fluid_settings_t* settings = new_fluid_settings();
       fluid_settings_setnum(settings, "synth.sample-rate", float(sampleRate));
+      fluid_settings_setnum(settings, "synth.midi-channels", 64);
+      fluid_settings_setnum(settings, "synth.audio-channels", 2);
 
       _fluidsynth = new_fluid_synth(settings);
 
@@ -98,74 +101,48 @@ void ISynth::process(unsigned n, float* l, float* r, int stride)
       }
 
 //---------------------------------------------------------
-//   playNote
+//   play
 //---------------------------------------------------------
 
-void ISynth::playNote(int channel, int pitch, int velo)
+void ISynth::play(const MidiOutEvent& e)
       {
+      int channel = e.port * 16 + e.type & 0xf;
 // printf("note %d %d %d\n", channel, pitch, velo);
 
-      int err;
-      if (velo) {
-            err = fluid_synth_noteon(_fluidsynth, channel, pitch, velo);
-            if (err)
-                  fprintf(stderr, "FluidSynth: error %d note on, ch %d pitch %d velo %d: %s\n",
-                     err, channel, pitch, velo, fluid_synth_error(_fluidsynth));
-            }
-      else {
-            err = fluid_synth_noteoff(_fluidsynth, channel, pitch);
-            if (err)
-                  fprintf(stderr, "FluidSynth: error %d note off, ch %d pitch %d: %s\n",
-                     err, channel, pitch, fluid_synth_error(_fluidsynth));
-            }
-      }
-
-//---------------------------------------------------------
-//   setController
-//    return true if busy
-//---------------------------------------------------------
-
-bool ISynth::setController(int ch, int ctrl, int val)
-      {
-      if (_fluidsynth == 0)
-            return false;
-      switch(ctrl) {
-            case CTRL_PROGRAM:
-                  {
-                  int hbank = (val & 0xff0000) >> 16;
-                  int lbank = (val & 0xff00) >> 8;
-                  if (hbank > 127)  // map "dont care" to 0
-                        hbank = 0;
-                  if (lbank > 127)
-                        lbank = 0;
-                  if (lbank == 127 || ch == 9)       // drum HACK
-                        lbank = 128;
-                  int prog  = val & 0x7f;
-
-                  fluid_synth_program_select(_fluidsynth, ch,
-                      fontId, lbank, prog);
-                  }
+      int err = 0;
+      switch(e.type & 0xf0) {
+            case ME_NOTEON:
+                  if (e.b == 0)
+                        err = fluid_synth_noteoff(_fluidsynth, channel, e.a);
+                  else
+                        err = fluid_synth_noteon(_fluidsynth, channel, e.a, e.b);
+                  break;
+            case ME_CONTROLLER:
+                  if (e.a == CTRL_LBANK)
+                        lbank = e.b;
+                  else
+                        fluid_synth_cc(_fluidsynth, channel, e.a, e.b);
                   break;
 
-            case CTRL_PITCH:
-                  fluid_synth_pitch_bend (_fluidsynth, ch, val);
-                  break;
-
-            default:
-                  fluid_synth_cc(_fluidsynth, ch, ctrl & 0x3fff, val);
+            case ME_PROGRAM:
+                  fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, e.a);
                   break;
             }
-      return false;
+
+      if (err)
+            fprintf(stderr, "FluidSynth: error %d ch %d a %d b %d: %s\n",
+               err, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
       }
 
 //---------------------------------------------------------
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* ISynth::getPatchInfo(int ch, const MidiPatch* p) const
+const MidiPatch* ISynth::getPatchInfo(int port, int ch, const MidiPatch* p) const
       {
       if (_fluidsynth == 0)
             return 0;
+      ch = port * 16 + ch;
       if (p == 0) {
             // get font at font stack index 0
             fluid_font = fluid_synth_get_sfont(_fluidsynth, 0);
