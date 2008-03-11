@@ -31,7 +31,6 @@ class MidiPatch;
 //---------------------------------------------------------
 
 struct MidiOutEvent {
-      double time;
       char port;
       char type;        // midi event type and channel
       char a;
@@ -40,8 +39,6 @@ struct MidiOutEvent {
       MidiOutEvent() {}
 
       bool operator<(const MidiOutEvent& e) const {
-            if (time != e.time)
-                  return time < e.time;
             // play note off events first to prevent overlapping
             // notes
 
@@ -79,7 +76,6 @@ class Driver {
       virtual void putEvent(const MidiOutEvent&) = 0;
       virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
-      virtual void heartBeat() {}
       virtual const MidiPatch* getPatchInfo(int, const MidiPatch*) { return 0; }
       };
 

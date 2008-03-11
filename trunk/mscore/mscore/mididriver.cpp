@@ -31,7 +31,6 @@
 #include "mscore.h"
 #include "midifile.h"
 #include "globals.h"
-#include "midififo.h"
 #include "seq.h"
 #include "midiseq.h"
 #include "utils.h"
@@ -312,8 +311,8 @@ void AlsaMidiDriver::write(const MidiOutEvent& e)
       int b   = e.b;
 
       if (midiOutputTrace) {
-            printf("midiOut: %2d %f %02x %02x %02x\n",
-               e.port, e.time, e.type & 0xff, e.a, e.b);
+            printf("midiOut: %2d %02x %02x %02x\n",
+               e.port, e.type & 0xff, e.a, e.b);
             }
 
       snd_seq_event_t event;
@@ -410,10 +409,10 @@ bool AlsaMidiDriver::putEvent(snd_seq_event_t* event)
       }
 
 //---------------------------------------------------------
-//   DummyAudio
+//   AlsaMidi
 //---------------------------------------------------------
 
-DummyAudio::DummyAudio(Seq* s)
+AlsaMidi::AlsaMidi(Seq* s)
    : Driver(s)
       {
       state     = Seq::STOP;
@@ -422,16 +421,12 @@ DummyAudio::DummyAudio(Seq* s)
       midiDriver       = 0;
       }
 
-DummyAudio::~DummyAudio()
-      {
-      }
-
 //---------------------------------------------------------
 //   init
 //    return false on error
 //---------------------------------------------------------
 
-bool DummyAudio::init()
+bool AlsaMidi::init()
       {
       midiDriver = new AlsaMidiDriver();
       if (!midiDriver->init()) {
@@ -451,24 +446,15 @@ bool DummyAudio::init()
                   }
             }
 
-      midiSeq = new MidiSeq(this, midiDriver, "Midi");
+      midiSeq = new MidiSeq("Midi");
       return true;
-      }
-
-//---------------------------------------------------------
-//   heartBeat
-//---------------------------------------------------------
-
-void DummyAudio::heartBeat()
-      {
-      seq->processMidi();
       }
 
 //---------------------------------------------------------
 //   start
 //---------------------------------------------------------
 
-bool DummyAudio::start()
+bool AlsaMidi::start()
       {
       midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
       return true;
@@ -478,7 +464,7 @@ bool DummyAudio::start()
 //   stop
 //---------------------------------------------------------
 
-bool DummyAudio::stop()
+bool AlsaMidi::stop()
       {
       midiSeq->stop(true);
       return true;
@@ -488,7 +474,7 @@ bool DummyAudio::stop()
 //   inputPorts
 //---------------------------------------------------------
 
-QList<QString> DummyAudio::inputPorts()
+QList<QString> AlsaMidi::inputPorts()
       {
       QList<QString> clientList;
       return clientList;
@@ -498,7 +484,7 @@ QList<QString> DummyAudio::inputPorts()
 //   startTransport
 //---------------------------------------------------------
 
-void DummyAudio::startTransport()
+void AlsaMidi::startTransport()
       {
       state = Seq::PLAY;
       }
@@ -507,7 +493,7 @@ void DummyAudio::startTransport()
 //   stopTransport
 //---------------------------------------------------------
 
-void DummyAudio::stopTransport()
+void AlsaMidi::stopTransport()
       {
       state = Seq::STOP;
       }
@@ -516,16 +502,16 @@ void DummyAudio::stopTransport()
 //   putEvent
 //---------------------------------------------------------
 
-void DummyAudio::putEvent(const MidiOutEvent& e)
+void AlsaMidi::putEvent(const MidiOutEvent& e)
       {
-      midiSeq->putEvent(e);
+      midiDriver->write(e);
       }
 
 //---------------------------------------------------------
 //   midiRead
 //---------------------------------------------------------
 
-void DummyAudio::midiRead()
+void AlsaMidi::midiRead()
       {
       midiDriver->read();
       }

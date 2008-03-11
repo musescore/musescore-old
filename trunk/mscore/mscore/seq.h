@@ -70,12 +70,13 @@ class Seq : public QObject {
       bool pauseState;
 
       mutable QMutex mutex;
+      QWaitCondition wait;
       QQueue<SeqMsg> toSeq;
 
       Driver* driver;
 
       EventMap events;                    // playlist
-      QList<NoteOn*> _activeNotes;        // notes sounding
+      QList<NoteOn*> activeNotes;         // notes sounding
       double playTime;
       double startTime;
 
@@ -100,7 +101,7 @@ class Seq : public QObject {
       int time2tick(double) const;
       double tick2time(int tick) const;
       void setPos(int);
-      void playEvent(double t, const Event* event);
+      void playEvent(const Event* event);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
 
