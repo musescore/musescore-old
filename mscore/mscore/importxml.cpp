@@ -90,14 +90,15 @@ extern const XmlChordExtension chordExtensions[] = {
       {  20, "minor-ninth"        },
       {  21, "minor-11th",        },
       {  22, "minor-13th",        },
-      {   1, "minor-major"        },      // ??
+      {  18, "minor-major"        },
+      {  18, "major-minor"        },
       {  64, "dominant-seventh"   },
-      {   1, "dominant-11th"      },      // ??
+      { 193, "dominant-11th"      },
       {  33, "diminished"         },
       {  32, "half-diminished"    },
       {   4, "augmented"          },
       { 186, "suspended-second"   },
-      {   1, "power"              },      // ??
+      {  40, "power"              },
       { 187, "neapolitan"         },
       { 188, "italian"            },
       { 189, "french"             },
@@ -105,6 +106,9 @@ extern const XmlChordExtension chordExtensions[] = {
       { 191, "maj69"              },
       {   1, "augmented-ninth"    },      // ??
       {   1, "altered"            },      // ??
+      { 194, "major-11th"         },
+      {  65, "dominant-13th"      },
+      { 195, "tristan"            },
       {  -1, ""                   }
       };
 
@@ -2532,10 +2536,11 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       ha->setBase(getStep(bassStep, bassAlter));
 
       int extension = 0;
+      QString lowerCaseKind = kind.toLower();
       for (unsigned int i = 0; ; ++i) {
             if (chordExtensions[i].idx == -1)
                   break;
-            if (kind == chordExtensions[i].xmlName) {
+            if (lowerCaseKind == chordExtensions[i].xmlName) {
                   extension = chordExtensions[i].idx;
                   break;
                   }

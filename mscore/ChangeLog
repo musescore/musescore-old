@@ -1,4 +1,6 @@
-11.3.8 (ws)
+11.3.8 (lv)
+      - harmony fixes
+       (ws)
       - more midi output fixes
       - setup internal fluid synthesizer for 64 channels
       - fix "program change" for internal synthesizer
