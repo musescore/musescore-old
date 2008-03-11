@@ -246,7 +246,7 @@ static const ChordNames extensionNames[] = {
             { "2",          HChord("C D E G") },      // major add 2
             { "m",          HChord("C Eb G") },
             { "maug",       HChord("C D# G#") },
-            { "mMaj7",      HChord() },
+            { "mMaj7",      HChord("C Eb G B") },     // minor major 7th = major minor 7th
             { "m7",         HChord("C Eb G Bb") },
 
 /*20*/      { "m9",         HChord("C Eb G Bb D") },
@@ -271,7 +271,7 @@ static const ChordNames extensionNames[] = {
             { 0,            HChord() },
             { 0,            HChord() },
 
-/*40*/      { "5",          HChord() },
+/*40*/      { "5",          HChord("C G") },  // power
             { 0,            HChord() },
             { 0,            HChord() },
             { 0,            HChord() },
@@ -298,7 +298,7 @@ static const ChordNames extensionNames[] = {
             { 0,            HChord() },
             { 0,            HChord() },
             { "7",          HChord() },
-            { "13",         HChord() },
+            { "13",         HChord("C E G Bb D F A") },  // dominant 13th
             { "7b13",       HChord() },
             { "7#11",       HChord() },
             { "13#11",      HChord() },
@@ -439,7 +439,10 @@ static const ChordNames extensionNames[] = {
 
 /*190*/     { "add#13",       HChord() },  // german
             { "6/add9",       HChord() },
-            { "sus4",         HChord("C F G") },      // sus
+            { "sus4",         HChord("C F G") },        // sus
+            { "11",           HChord("C E G Bb D F") }, // dominant 11th
+            { "Maj11",        HChord("C E G B D F") },  // major 11th
+            { "Tristan",      HChord("C F# A# D") },    // Tristan
       };
 
 //---------------------------------------------------------
