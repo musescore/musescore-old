@@ -1157,7 +1157,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Navigator")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-mixer",
          QT_TR_NOOP("Mixer"),
          Qt::Key_F10,

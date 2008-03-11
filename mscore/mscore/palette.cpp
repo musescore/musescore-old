@@ -264,20 +264,16 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   }
             }
       else {
-            int i = idx(ev->pos());
-            if (i == -1)
-                  return;
-
             QRect r;
-            if (currentIdx != -1) {
+            if (currentIdx != -1)
                   r = idxRect(currentIdx);
+            currentIdx = idx(ev->pos());
+            if (currentIdx != -1) {
+                  if (symbols[currentIdx] == 0)
+                        currentIdx = -1;
+                  else
+                        r |= idxRect(currentIdx);
                   }
-            if (symbols[i] == 0) {
-                  update(r);
-                  return;
-                  }
-            currentIdx = i;
-            r |= idxRect(currentIdx);
             update(r);
             }
       }

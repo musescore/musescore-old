@@ -77,9 +77,7 @@ Seq::Seq()
       playTimer = new QTimer(this);
       playTimer->setSingleShot(true);
       connect(playTimer, SIGNAL(timeout()), this, SLOT(stopNotes()));
-
       connect(this, SIGNAL(toGui(int)), this, SLOT(seqMessage(int)), Qt::QueuedConnection);
-      heartBeatTimer->start(100);
       }
 
 //---------------------------------------------------------
@@ -170,9 +168,9 @@ bool Seq::init()
                   useALSA = true;
             }
       if (useMidiOutFlag) {
-            driver = new DummyAudio(this);
+            driver = new AlsaMidi(this);
             if (!driver->init()) {
-                  printf("init DummyAudio failed\n");
+                  printf("init AlsaMidi failed\n");
                   delete driver;
                   driver = 0;
                   }
@@ -299,11 +297,11 @@ void Seq::start()
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
+            seek(cs->playPos());
             if (!pauseState)
                   driver->startTransport();
             else
                   emit started();
-            seek(cs->playPos());
             }
       }
 
@@ -406,12 +404,12 @@ void Seq::seqMessage(int msg)
       switch(msg) {
             case '0':         // STOP
                   guiStop();
-                  // heartBeatTimer->stop();
+                  heartBeatTimer->stop();
                   break;
 
             case '1':         // PLAY
                   emit started();
-                  // heartBeatTimer->start(100);
+                  heartBeatTimer->start(100);
                   break;
 
             default:
@@ -429,25 +427,24 @@ void Seq::seqMessage(int msg)
 void Seq::stopTransport()
       {
       // send note off events
-      foreach(const Event* e, _activeNotes) {
+      foreach(const Event* e, activeNotes) {
             if (e->type() != ME_NOTEON)
                   continue;
             NoteOn* no = (NoteOn*)e;
             MidiOutEvent e;
-            e.time = 0;
             e.port = no->port();
             e.type = ME_NOTEON | no->channel();
             e.a    = no->pitch();
             e.b    = 0;
             driver->putEvent(e);
             }
-      _activeNotes.clear();
+      activeNotes.clear();
       emit toGui('0');
       state = STOP;
       }
 
 //---------------------------------------------------------
-//   startTranspor
+//   startTransport
 //    JACK has started
 //    executed in realtime environment
 //---------------------------------------------------------
@@ -460,8 +457,8 @@ void Seq::startTransport()
             return;
       if (!pauseState)
             emit toGui('1');
-      state     = PLAY;
       startTime = curTime() - playTime;
+      state     = PLAY;
       }
 
 //---------------------------------------------------------
@@ -469,14 +466,13 @@ void Seq::startTransport()
 //    send one event to the synthesizer
 //---------------------------------------------------------
 
-void Seq::playEvent(double t, const Event* event)
+void Seq::playEvent(const Event* event)
       {
       int type = event->type();
       if (type == ME_NOTEON) {
             NoteOn* n = (NoteOn*) event;
             int channel = n->channel();
             MidiOutEvent e;
-            e.time = t;
             e.port = n->port();
             e.type = ME_NOTEON | channel;
             e.a    = n->pitch();
@@ -484,12 +480,12 @@ void Seq::playEvent(double t, const Event* event)
             driver->putEvent(e);
 
             if (n->velo())
-                  _activeNotes.append(n);
+                  activeNotes.append(n);
             else {
-                  for (QList<NoteOn*>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
+                  for (QList<NoteOn*>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
                         NoteOn* l = *k;
                         if (l->channel() == channel && l->pitch() == n->pitch()) {
-                              _activeNotes.erase(k);
+                              activeNotes.erase(k);
                               break;
                               }
                         }
@@ -498,7 +494,6 @@ void Seq::playEvent(double t, const Event* event)
       else if (type == ME_CONTROLLER)  {
             ControllerEvent* c = (ControllerEvent*)event;
             MidiOutEvent e;
-            e.time = t;
             e.port = c->port();
             e.type = ME_CONTROLLER | c->channel();
             e.a    = c->controller();
@@ -516,7 +511,7 @@ void Seq::playEvent(double t, const Event* event)
 
 void Seq::processMessages()
       {
-      QMutexLocker locker(&mutex);
+      mutex.lock();
       while (!toSeq.isEmpty()) {
             SeqMsg msg = toSeq.dequeue();
             switch(msg.id) {
@@ -528,7 +523,6 @@ void Seq::processMessages()
                         startTime = curTime() - playTime;
                         }
                         break;
-
                   case SEQ_PLAY:
                         driver->putEvent(msg.midiOutEvent);
                         break;
@@ -537,6 +531,8 @@ void Seq::processMessages()
                         break;
                   }
             }
+      wait.wakeAll();
+      mutex.unlock();
       }
 
 //---------------------------------------------------------
@@ -563,16 +559,13 @@ void Seq::processMidi()
       processMessages();
 
       if (state == PLAY) {
-            //
-            // collect events for one segment
-            //
-            double endTime = curTime() + (128.0 / preferences.rtcTicks);
+            double endTime = curTime();
             for (; playPos != events.constEnd(); ++playPos) {
                   playTime = tick2time(playPos.key());
                   double t = startTime + playTime;
                   if (t >= endTime)
                         break;
-                  playEvent(t, playPos.value());
+                  playEvent(playPos.value());
                   }
             if (playPos == events.constEnd())
                   driver->stopTransport();
@@ -622,7 +615,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   r         += n * stride;
                   playTime += double(n)/double(sampleRate());
                   frames    -= n;
-                  playEvent(0, playPos.value());
+                  playEvent(playPos.value());
                   }
             if (frames) {
                   driver->process(frames, l, r, stride);
@@ -661,7 +654,6 @@ void Seq::collectEvents()
             const Instrument* instr = part->instrument();
 
             MidiOutEvent event;
-            event.time = 0.0;       // play now
             event.port = port;
 
             event.type = ME_CONTROLLER | channel;
@@ -721,8 +713,6 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
-      driver->heartBeat();
-
       if (state != PLAY)
             return;
 
@@ -788,21 +778,21 @@ void Seq::setRelTempo(int relTempo)
 //---------------------------------------------------------
 //   setPos
 //    seek
+//    realtime environment
 //---------------------------------------------------------
 
 void Seq::setPos(int tick)
       {
       // send note off events
-      foreach(const NoteOn* n, _activeNotes) {
+      foreach(const NoteOn* n, activeNotes) {
             MidiOutEvent e;
-            e.time = 0;
             e.port = 0;
             e.type = ME_NOTEON | n->channel();
             e.a    = n->pitch();
             e.b    = 0;
             driver->putEvent(e);
             }
-      _activeNotes.clear();
+      activeNotes.clear();
       playTime  = tick2time(tick);
       startTime = curTime() - playTime;
       playPos   = events.lowerBound(tick);
@@ -827,7 +817,7 @@ void Seq::seek(int tick)
 
       SeqMsg msg;
       msg.data = tick;
-      msg.id    = SEQ_SEEK;
+      msg.id   = SEQ_SEEK;
       guiToSeq(msg);
       }
 
@@ -840,7 +830,6 @@ void Seq::startNote(int port, int channel, int pitch, int velo)
       if (state != STOP)
             return;
       SeqMsg msg;
-      msg.midiOutEvent.time = 0.0;
       msg.midiOutEvent.port = port;
       msg.midiOutEvent.type = ME_NOTEON | channel;
       msg.midiOutEvent.a    = pitch;
@@ -872,7 +861,6 @@ void Seq::stopNotes()
                   NoteOn* n = (NoteOn*)event;
                   SeqMsg msg;
                   msg.id                = SEQ_PLAY;
-                  msg.midiOutEvent.time = 0.0;
                   msg.midiOutEvent.port = n->port();
                   msg.midiOutEvent.type = ME_NOTEON | n->channel();
                   msg.midiOutEvent.a    = n->pitch();
@@ -891,7 +879,6 @@ void Seq::stopNotes()
 void Seq::setController(int port, int channel, int ctrl, int data)
       {
       MidiOutEvent event;
-      event.time = 0.0;       // play now
       event.port = port;
       event.type = ME_CONTROLLER | channel;
       event.a    = ctrl;
@@ -1030,8 +1017,10 @@ void Seq::seekEnd()
 
 void Seq::guiToSeq(const SeqMsg& msg)
       {
-      QMutexLocker locker(&mutex);
+      mutex.lock();
       toSeq.enqueue(msg);
+      wait.wait(&mutex);
+      mutex.unlock();
       }
 
 //---------------------------------------------------------

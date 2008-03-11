@@ -153,7 +153,6 @@ void PartEdit::patchChanged(int n)
                   instr->midiProgram = p->prog;
 
                   MidiOutEvent event;
-                  event.time = 0.0;       // play now
                   event.port = instr->midiPort;
                   event.type = ME_CONTROLLER | instr->midiChannel;
 

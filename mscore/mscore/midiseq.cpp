@@ -26,17 +26,16 @@
 #include "preferences.h"
 #include "mididriver.h"
 #include "utils.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   MidiSeq
 //---------------------------------------------------------
 
-MidiSeq::MidiSeq(DummyAudio* a, MidiDriver* driver, const char* name)
+MidiSeq::MidiSeq(const char* name)
    : Thread(name)
       {
-      da         = a;
-      midiDriver = driver;
-      timer      = 0;
+      timer = 0;
       }
 
 //---------------------------------------------------------
@@ -159,28 +158,6 @@ void MidiSeq::midiTick(void* p, void*)
       {
       MidiSeq* at = (MidiSeq*)p;
       at->getTimerTicks();    // read elapsed rtc timer ticks
-
-#if 0
-      static int tickNo = 0;
-      if ((tickNo++ % 256) == 0)
-            at->da->collectEvents();
-#endif
-
-      while (!at->fifo.isEmpty())
-            at->playEvents.insert(at->fifo.get());
-
-      //
-      // schedule all events upto curTime()
-      //
-
-      double now = curTime();
-
-      iMidiOutEvent i = at->playEvents.begin();
-      for (; i != at->playEvents.end(); ++i) {
-            if (i->time > now)
-                  break;
-            at->midiDriver->write(*i);
-            }
-      at->playEvents.erase(at->playEvents.begin(), i);
+      seq->processMidi();
       }
 

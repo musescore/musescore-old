@@ -79,10 +79,10 @@ class MidiDriver {
       };
 
 //---------------------------------------------------------
-//   DummyAudio
+//   AlsaMidi
 //---------------------------------------------------------
 
-class DummyAudio : public Driver {
+class AlsaMidi : public Driver {
       float* buffer;
       int realTimePriority;
       MidiSeq* midiSeq;
@@ -95,8 +95,8 @@ class DummyAudio : public Driver {
       bool seekflag;
       unsigned pos;
 
-      DummyAudio(Seq*);
-      virtual ~DummyAudio();
+      AlsaMidi(Seq*);
+      virtual ~AlsaMidi() {}
 
       virtual bool init();
       virtual bool start();
@@ -111,7 +111,6 @@ class DummyAudio : public Driver {
       virtual void putEvent(const MidiOutEvent&);
       virtual void process(int, float*, float*, int) {}
       virtual void midiRead();
-      virtual void heartBeat();
       };
 
 #endif

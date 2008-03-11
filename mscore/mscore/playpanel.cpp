@@ -50,8 +50,8 @@ PlayPanel::PlayPanel(QWidget* parent)
       rewindButton->setDefaultAction(getAction("rewind"));
 
       connect(volumeSlider, SIGNAL(sliderMoved(int)), SLOT(volumeChanged(int)));
-      connect(posSlider,    SIGNAL(sliderMoved(int)), SLOT(posChanged(int)));
-      connect(tempoSlider,  SIGNAL(sliderMoved(int)), SIGNAL(relTempoChanged(int)));
+      connect(posSlider,    SIGNAL(sliderMoved(int)),  SLOT(posChanged(int)));
+      connect(tempoSlider,  SIGNAL(valueChanged(int)), SIGNAL(relTempoChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -137,9 +137,10 @@ void PlayPanel::volumeChanged(int val)
 //   posChanged
 //---------------------------------------------------------
 
-void PlayPanel::posChanged(int val)
+void PlayPanel::posChanged(int tick)
       {
-      emit posChange(val);
+      emit posChange(tick);
+      heartBeat(tick, tick);
       }
 
 //---------------------------------------------------------
