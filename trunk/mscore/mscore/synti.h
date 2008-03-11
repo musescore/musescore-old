@@ -22,6 +22,7 @@
 #define __SYNTI_H__
 
 struct MidiPatch;
+struct MidiOutEvent;
 
 //---------------------------------------------------------
 //   Synth
@@ -35,9 +36,8 @@ class Synth {
       virtual bool init(int sampleRate) = 0;
       virtual bool loadSoundFont(const QString&) = 0;
       virtual void process(unsigned, float*, float*, int) = 0;
-      virtual void playNote(int channel, int pitch, int velo) = 0;
-      virtual bool setController(int ch, int ctrl, int val) = 0;
-      virtual const MidiPatch* getPatchInfo(int ch, const MidiPatch* p) const = 0;
+      virtual void play(const MidiOutEvent&) = 0;
+      virtual const MidiPatch* getPatchInfo(int port, int ch, const MidiPatch* p) const = 0;
       };
 
 #endif

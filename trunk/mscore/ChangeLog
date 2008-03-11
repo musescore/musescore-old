@@ -1,3 +1,7 @@
+11.3.8 (ws)
+      - more midi output fixes
+      - setup internal fluid synthesizer for 64 channels
+      - fix "program change" for internal synthesizer
 10.3.8 (lv)
       - updated testHarmony1.xml
        (ws)

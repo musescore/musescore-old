@@ -266,12 +266,7 @@ int Portaudio::getState()
 
 void Portaudio::putEvent(const MidiOutEvent& e)
       {
-      if ((e.type & 0xf0) == ME_NOTEON) {
-            synth->playNote(e.type & 0xf, e.a, e.b);
-            }
-      else if ((e.type & 0xf0) == ME_CONTROLLER) {
-            synth->setController(e.type & 0xf, e.a, e.b);
-            }
+      synth->play(e);
       }
 
 //---------------------------------------------------------

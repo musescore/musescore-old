@@ -159,7 +159,7 @@ class Seq : public QObject {
       void sendEvent(const MidiOutEvent&);
       void setScore(Score* s);
 
-      const MidiPatch* getPatchInfo(int ch, const MidiPatch* p);
+      const MidiPatch* getPatchInfo(int port, int ch, const MidiPatch* p);
       Driver* getDriver()  { return driver; }
       };
 
