@@ -825,28 +825,28 @@ void Seq::seek(int tick)
 //   startNote
 //---------------------------------------------------------
 
-void Seq::startNote(int port, int channel, int pitch, int velo)
+void Seq::startNote(Part* part, int pitch, int velo)
       {
       if (state != STOP)
             return;
       SeqMsg msg;
-      msg.midiOutEvent.port = port;
-      msg.midiOutEvent.type = ME_NOTEON | channel;
-      msg.midiOutEvent.a    = pitch;
+      msg.midiOutEvent.port = part->midiPort();
+      msg.midiOutEvent.type = ME_NOTEON | part->midiChannel();
+      msg.midiOutEvent.a    = pitch + part->pitchOffset();
       msg.midiOutEvent.b    = velo;
       msg.id    = SEQ_PLAY;
       guiToSeq(msg);
 
       NoteOn* e = new NoteOn;
-      e->setChannel(channel);
+      e->setChannel(part->midiChannel());
       e->setPitch(pitch);
       e->setVelo(velo);
       eventList.append(e);
       }
 
-void Seq::startNote(int port, int channel, int pitch, int velo, int duration)
+void Seq::startNote(Part* part, int pitch, int velo, int duration)
       {
-      startNote(port, channel, pitch, velo);
+      startNote(part, pitch, velo);
       playTimer->start(duration);
       }
 

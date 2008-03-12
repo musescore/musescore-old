@@ -683,10 +683,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setPitch(pitch);
             note->setTrack(track);
 
-            if (seq && mscore->playEnabled()) {
-                  Staff* staff = note->staff();
-                  seq->startNote(staff->midiPort(), staff->midiChannel(), note->pitch(), 64);
-                  }
+            if (seq && mscore->playEnabled())
+                  seq->startNote(note->staff()->part(), note->pitch(), 64);
 
             if (tie) {
                   tie->setEndNote(note);
@@ -1004,7 +1002,7 @@ void Score::upDown(bool up, bool octave)
 
             // play new note with velocity 80 for 0.3 sec:
             if (seq && mscore->playEnabled())
-                  seq->startNote(oNote->staff()->part()->midiChannel(), newPitch, 80, 300);
+                  seq->startNote(oNote->staff()->part(), newPitch, 80, 300);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed

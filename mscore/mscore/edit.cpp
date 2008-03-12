@@ -431,8 +431,7 @@ void Score::putNote(const QPointF& pos, bool replace)
                   Note* note = addNote((Chord*)cr, pitch);
                   select(note, 0, 0);
                   if (seq && mscore->playEnabled()) {
-                        Staff* staff = note->staff();
-                        seq->startNote(staff->midiPort(), staff->midiChannel(), note->pitch(), 60);
+                        seq->startNote(note->staff()->part(), note->pitch(), 60);
                         }
                   }
             else {

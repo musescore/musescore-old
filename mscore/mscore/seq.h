@@ -31,6 +31,7 @@ class Score;
 class Painter;
 class Measure;
 class Driver;
+class Part;
 
 //---------------------------------------------------------
 //   MidiPatch
@@ -153,8 +154,8 @@ class Seq : public QObject {
       float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(int, int, int, int);
-      void startNote(int, int, int, int, int);
+      void startNote(Part*, int, int);
+      void startNote(Part*, int, int, int);
       void setController(int, int, int, int);
       void sendEvent(const MidiOutEvent&);
       void setScore(Score* s);

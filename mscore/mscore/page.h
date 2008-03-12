@@ -48,6 +48,8 @@ struct PaperSize {
 
 struct PageFormat {
       int size;                     // index in paperSizes[]
+      double _width;
+      double _height;
       double evenLeftMargin;        // values in inch
       double evenRightMargin;
       double evenTopMargin;

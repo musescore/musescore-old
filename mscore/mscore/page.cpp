@@ -286,6 +286,8 @@ const char* PageFormat::name() const
 
 double PageFormat::width() const
       {
+      if (paperSizes[size].qtsize == QPrinter::Custom)
+            return landscape ? _height : _width;
       return landscape ? paperSizes[size].h : paperSizes[size].w;
       }
 
@@ -296,9 +298,10 @@ double PageFormat::width() const
 
 double PageFormat::height() const
       {
+      if (paperSizes[size].qtsize == QPrinter::Custom)
+            return landscape ? _width : _height;
       return landscape ? paperSizes[size].w : paperSizes[size].h;
       }
-
 
 //---------------------------------------------------------
 //   read
@@ -362,10 +365,14 @@ void PageFormat::read(QDomElement e)
                         evenBottomMargin = bm;
                         }
                   }
-            else if (tag == "page-height")	// TODO
-                  ;
-            else if (tag == "page-width")	 	// TODO
-                  ;
+            else if (tag == "page-height") {
+                  size = paperSizeNameToIndex("Custom");
+                  _height = val.toDouble();
+                  }
+            else if (tag == "page-width") {
+                  size = paperSizeNameToIndex("Custom");
+                  _width = val.toDouble();
+                  }
             else
                   domError(e);
             }
@@ -385,7 +392,7 @@ void PageFormat::write(Xml& xml)
       // double t = 10 * PPI / (20 / 4);
       double t = 2 * PPI;
 
-      if (name() != "Other") {
+      if (name() != "Custom") {
             xml.tag("pageFormat", QString(name()));
             if (landscape)
                   xml.tag("landscape", landscape);
