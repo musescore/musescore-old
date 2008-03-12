@@ -1859,11 +1859,11 @@ void Canvas::dropEvent(QDropEvent* event)
       int line, column;
       QString err;
       if (!doc.setContent(data, &err, &line, &column)) {
-            printf("error reading drag data\n");
+            cout << "error reading drag data at " << line << "/" << column << ":"
+                  << err << "\n" << data << "\n";
             return;
             }
       docName = "--";
-      QDomElement e = doc.documentElement();
       Element* el = elementAt(pos);
       if (el == 0 || el->type() != MEASURE) {
             setDropTarget(0);
@@ -1880,7 +1880,7 @@ void Canvas::dropEvent(QDropEvent* event)
             System* s = measure->system();
             int idx = s->y2staff(pos.y());
             if (idx != -1)
-                  score()->pasteStaff(e, measure, idx);
+                  score()->pasteStaff(doc.documentElement(), measure, idx);
             event->acceptProposedAction();
             _score->setLayoutAll(true);
             _score->endCmd();

@@ -451,6 +451,7 @@ QByteArray Selection::staffMimeData() const
       Xml xml(&buffer);
       xml.header();
 
+      xml.stag("StaffList");
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
             for (MeasureBase* m = _score->mainLayout()->first(); m; m = m->next()) {
@@ -464,6 +465,7 @@ QByteArray Selection::staffMimeData() const
                   }
             xml.etag();
             }
+      xml.etag();
       buffer.close();
       return buffer.buffer();
       }
