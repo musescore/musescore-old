@@ -63,25 +63,18 @@ QPointF BarLine::canvasPos() const
 void BarLine::getY(double* y1, double* y2) const
       {
       if (parent() && parent()->type() == SEGMENT) {
-            int staffIdx1 = staffIdx();
-            int staffIdx2 = staffIdx1 + _span - 1;
+            int staffIdx1    = staffIdx();
+            int staffIdx2    = staffIdx1 + _span - 1;
             Segment* segment = (Segment*)parent();
             Measure* measure = segment->measure();
             System* system   = measure->system();
-#if 0
-            *y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
-            Spatium barLineLen(4.0 * staff()->mag());
-            *y2 += barLineLen.point();
-#endif
-            StaffLines* l1 = measure->staffLines(staffIdx1);
-            StaffLines* l2 = measure->staffLines(staffIdx2);
+            StaffLines* l1   = measure->staffLines(staffIdx1);
+            StaffLines* l2   = measure->staffLines(staffIdx2);
 
             double yp = system->staff(staffIdx())->y();
 
             *y1 = l1->y1() - yp;
             *y2 = l2->y2() - yp;
-
-// printf("BarLine %d-%d  %f %f\n", staffIdx1, staffIdx2, *y1, *y2);
             }
       else {
             *y2 = 4.0 * _spatium;    // for use in palette
@@ -147,7 +140,7 @@ void BarLine::draw(QPainter& p) const
                   qreal x = lw * .5;
                   p.drawLine(QLineF(x, y1, x, y2));
                   x += d + lw;
-                  p.drawLine(QLineF(x, y2, x, y2));
+                  p.drawLine(QLineF(x, y1, x, y2));
                   lw = 2 * lw + d;
                   }
                   break;
