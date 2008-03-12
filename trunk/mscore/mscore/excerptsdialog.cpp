@@ -80,6 +80,8 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteClicked()));
       connect(excerptList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
          SLOT(excerptChanged(QListWidgetItem*, QListWidgetItem*)));
+      connect(excerptList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+         SLOT(createExcerptClicked(QListWidgetItem*)));
       connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(partDoubleClicked(QListWidgetItem*)));
       connect(createExcerpt, SIGNAL(clicked()), SLOT(createExcerptClicked()));
@@ -246,9 +248,18 @@ void ExcerptsDialog::createExcerptClicked()
       QListWidgetItem* cur = excerptList->currentItem();
       if (cur == 0)
             return;
-      excerptChanged(0, cur);       // update Excerpt
+      createExcerptClicked(cur);
+      }
+
+//---------------------------------------------------------
+//   createExcerpt
+//---------------------------------------------------------
+
+void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
+      {
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
       Score* nscore = score->createExcerpt(excerpt);
       mscore->appendScore(nscore);
       }
+
 
