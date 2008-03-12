@@ -37,9 +37,9 @@ enum BarType {
 
 class BarLine : public Element {
       int _span;
-      qreal yoff;
+      qreal yoff;       // used during drag edit to extend y2
 
-      double getY2() const;
+      void getY(double*, double*) const;
 
    public:
       BarLine(Score*);

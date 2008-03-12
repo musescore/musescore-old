@@ -102,7 +102,6 @@ void Staff::addBracket(BracketItem b)
             //
             // create new bracket level
             //
-printf("create new bracket level\n");
             foreach(Staff* s, _score->staves()) {
                   if (s == this)
                         s->_brackets.append(b);
@@ -489,7 +488,8 @@ void Staff::setBarLineSpan(int val)
 
 double Staff::height() const
       {
-      return _lines * _spatium * mag();
+//      return _lines * _spatium * mag();
+      return 4 * _spatium * mag();
       }
 
 //---------------------------------------------------------
