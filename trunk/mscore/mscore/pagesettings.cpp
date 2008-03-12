@@ -59,6 +59,7 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
+      PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
       PaperSize(QPrinter::A4, 0, 0, 0  )
       };
 
@@ -105,6 +106,8 @@ PageSettings::PageSettings(QWidget* parent)
       connect(buttonOk, SIGNAL(clicked()), SLOT(ok()));
       connect(landscape, SIGNAL(toggled(bool)), SLOT(landscapeToggled(bool)));
       connect(twosided, SIGNAL(toggled(bool)), SLOT(twosidedToggled(bool)));
+      connect(pageHeight, SIGNAL(valueChanged(double)), SLOT(pageHeightChanged(double)));
+      connect(pageWidth,  SIGNAL(valueChanged(double)), SLOT(pageWidthChanged(double)));
       }
 
 //---------------------------------------------------------
@@ -188,6 +191,8 @@ void PageSettings::setValues(ScoreLayout* lo)
       PageFormat* pf = lo->pageFormat();
 
       QString s;
+      pageWidth->blockSignals(true);
+      pageHeight->blockSignals(true);
       if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin * INCH);
             oddPageBottomMargin->setValue(pf->oddBottomMargin * INCH);
@@ -230,6 +235,9 @@ void PageSettings::setValues(ScoreLayout* lo)
                   pageHeight->setValue(pf->height());
                   }
             }
+      pageWidth->blockSignals(false);
+      pageHeight->blockSignals(false);
+
       evenPageTopMargin->setEnabled(pf->twosided);
       evenPageBottomMargin->setEnabled(pf->twosided);
       evenPageLeftMargin->setEnabled(pf->twosided);
@@ -301,6 +309,8 @@ void PageSettings::apply()
       double f1 = mmButton->isChecked() ? DPMM : DPI;
 
       cs->pageFormat()->size             = pageGroup->currentIndex();
+      cs->pageFormat()->_width           = pageWidth->value() * f;
+      cs->pageFormat()->_height          = pageHeight->value() * f;
       cs->pageFormat()->evenTopMargin    = evenPageTopMargin->value() * f;
       cs->pageFormat()->evenBottomMargin = evenPageBottomMargin->value() * f;
       cs->pageFormat()->evenLeftMargin   = evenPageLeftMargin->value() * f;
@@ -455,4 +465,21 @@ void PageSettings::spatiumChanged(double val)
       preview->layout();
       }
 
+//---------------------------------------------------------
+//   pageHeightChanged
+//---------------------------------------------------------
+
+void PageSettings::pageHeightChanged(double)
+      {
+      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
+      }
+
+//---------------------------------------------------------
+//   pageWidthChanged
+//---------------------------------------------------------
+
+void PageSettings::pageWidthChanged(double)
+      {
+      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
+      }
 

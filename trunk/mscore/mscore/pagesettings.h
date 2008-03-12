@@ -59,6 +59,8 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void elmChanged(double val);
       void ermChanged(double val);
       void spatiumChanged(double val);
+      void pageHeightChanged(double);
+      void pageWidthChanged(double);
 
    signals:
       void pageSettingsChanged();

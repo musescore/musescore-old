@@ -67,16 +67,21 @@ void BarLine::getY(double* y1, double* y2) const
             int staffIdx2 = staffIdx1 + _span - 1;
             Segment* segment = (Segment*)parent();
             Measure* measure = segment->measure();
-#if 0
             System* system   = measure->system();
+#if 0
             *y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
             Spatium barLineLen(4.0 * staff()->mag());
             *y2 += barLineLen.point();
 #endif
             StaffLines* l1 = measure->staffLines(staffIdx1);
             StaffLines* l2 = measure->staffLines(staffIdx2);
-            *y1 = l1->y1();
-            *y2 = l2->y2();
+
+            double yp = system->staff(staffIdx())->y();
+
+            *y1 = l1->y1() - yp;
+            *y2 = l2->y2() - yp;
+
+// printf("BarLine %d-%d  %f %f\n", staffIdx1, staffIdx2, *y1, *y2);
             }
       else {
             *y2 = 4.0 * _spatium;    // for use in palette

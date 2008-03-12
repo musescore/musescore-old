@@ -1842,7 +1842,7 @@ void MuseScore::play(Element* e) const
       {
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = (Note*) e;
-            seq->startNote(note->staff()->part()->midiChannel(), note->pitch(), 80, 300);
+            seq->startNote(note->staff()->part(), note->pitch(), 80, 300);
             }
       }
 
