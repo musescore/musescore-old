@@ -1831,32 +1831,39 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
       {
       int srcStaffStart = -1;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "Staff") {
+            if (e.tagName() != "StaffList") {
+                  domError(e);
+                  continue;
+                  }
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() != "Staff") {
+                        domError(ee);
+                        continue;
+                        }
                   Measure* m = measure;
-                  int srcStaffIdx = e.attribute("id", "0").toInt();
+                  int srcStaffIdx = ee.attribute("id", "0").toInt();
                   if (srcStaffStart == -1)
                         srcStaffStart = srcStaffIdx;
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "Measure") {
-                              Measure* sm = new Measure(this);
-                              sm->read(ee, srcStaffIdx);
-                              cmdReplaceElements(sm, m, srcStaffIdx, dstStaffIdx);
-                              delete sm;
-                              MeasureBase* mb = m;
-                              do {
-                                    mb = mb->next();
-                                    } while (mb && mb->type() != MEASURE);
-                              m = (Measure*)mb;
-                              if (m == 0)
-                                    break;
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        if (eee.tagName() != "Measure") {
+                              domError(eee);
+                              continue;
                               }
-                        else
-                              domError(ee);
+                        Measure* sm = new Measure(this);
+                        sm->read(eee, srcStaffIdx);
+                        if (dstStaffIdx < nstaves())
+                              cmdReplaceElements(sm, m, srcStaffIdx, dstStaffIdx);
+                        delete sm;
+                        MeasureBase* mb = m;
+                        do {
+                              mb = mb->next();
+                              } while (mb && mb->type() != MEASURE);
+                        m = (Measure*)mb;
+                        if (m == 0)
+                              break;
                         }
                   }
-            else
-                  domError(e);
             }
       }
 
