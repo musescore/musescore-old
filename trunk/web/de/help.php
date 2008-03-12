@@ -6,6 +6,7 @@
 <h3>Mitmachen:</h3>
 
 <ul>
+      <li><b><a href="http://www.nabble.com/MuseScore-Developer-f30380.html">Nabble Forum</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653454">Fehler Reports</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653457">Feature Request</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653455">Support Requests</a></b></li>
