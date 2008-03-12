@@ -575,10 +575,14 @@ QRectF StaffLines::bbox() const
       int l    = lines() - 1;
       qreal lw = point(score()->style()->staffLineWidth);
 
-      if (l == 0)
-            return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
-      else
-            return QRectF(0.0, -lw*.5, _width, l * _spatium + lw);
+      switch(l) {
+            case 0:
+                  return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
+            case 1:
+                  return QRectF(0.0,  -lw*.5, _width, 4 * _spatium + lw);
+            default:
+                  return QRectF(0.0, -lw*.5, _width, l * _spatium + lw);
+            }
       }
 
 //---------------------------------------------------------
@@ -602,17 +606,62 @@ void StaffLines::draw(QPainter& p) const
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
-      if (lines() == 1) {
-            qreal y = _pos.y() + 2 * _spatium;
-            p.drawLine(QLineF(x1, y, x2, y));
-            }
-      else {
-            for (int i = 0; i < lines(); ++i) {
-                  qreal y = _pos.y() + i * _spatium * mag();
+      switch(lines()) {
+            case 1:
+                  {
+                  qreal y = _pos.y() + 2 * _spatium * mag();
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
+                  break;
+            case 2:
+                  {
+                  qreal y = _pos.y() + 1 * _spatium * mag();
+                  p.drawLine(QLineF(x1, y, x2, y));
+                  y += 2 * _spatium * mag();
+                  p.drawLine(QLineF(x1, y, x2, y));
+                  }
+                  break;
+            default:
+                  for (int i = 0; i < lines(); ++i) {
+                        qreal y = _pos.y() + i * _spatium * mag();
+                        p.drawLine(QLineF(x1, y, x2, y));
+                        }
+                  break;
             }
       p.restore();
+      }
+
+
+//---------------------------------------------------------
+//   y1
+//---------------------------------------------------------
+
+double StaffLines::y1() const
+      {
+      switch(lines()) {
+            case 1:
+                  return _pos.y() + 1 * _spatium * mag();
+            case 2:
+                  return _pos.y() + 1 * _spatium * mag();
+            default:
+                  return _pos.y();
+            }
+      }
+
+//---------------------------------------------------------
+//   y2
+//---------------------------------------------------------
+
+double StaffLines::y2() const
+      {
+      switch(lines()) {
+            case 1:
+                  return _pos.y() + 3 * _spatium * mag();
+            case 2:
+                  return _pos.y() + 3 * _spatium * mag();
+            default:
+                  return _pos.y() + 4 * _spatium * mag();
+            }
       }
 
 //---------------------------------------------------------

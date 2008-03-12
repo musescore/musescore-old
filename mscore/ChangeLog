@@ -1,4 +1,5 @@
 12.3.8 (ws)
+      - fixes for 2 line staves
       - fix cut&paste for more than one selected stave
 11.3.8 (lv)
       - harmony fixes

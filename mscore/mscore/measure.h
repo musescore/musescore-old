@@ -120,10 +120,11 @@ class Measure : public MeasureBase {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      System* system() const           { return (System*)parent(); }
-      QList<MStaff*>* staffList()      { return &staves;      }
-      QList<Beam*>* beamList()         { return &_beamList;   }
-      QList<Tuplet*>* tuplets()        { return &_tuplets;    }
+      System* system() const               { return (System*)parent(); }
+      QList<MStaff*>* staffList()          { return &staves;      }
+      StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
+      QList<Beam*>* beamList()             { return &_beamList;   }
+      QList<Tuplet*>* tuplets()            { return &_tuplets;    }
 
       int    no() const                { return _no;          }
       bool   irregular() const         { return _irregular;   }

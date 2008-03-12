@@ -316,7 +316,7 @@ void System::layout2(ScoreLayout* layout)
                   s->setbbox(QRectF());
                   continue;
                   }
-            double sHeight = (staff->lines() - 1) * _spatium * staffMag;
+            double sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
             y += sHeight + s->distance();
             lastStaffIdx = staffIdx;

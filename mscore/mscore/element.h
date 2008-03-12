@@ -377,6 +377,8 @@ class StaffLines : public Element {
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
       int lines() const                    { return subtype(); }
       void setLines(int val)               { setSubtype(val);  }
+      double y1() const;
+      double y2() const;
       };
 
 //---------------------------------------------------------

@@ -57,28 +57,34 @@ QPointF BarLine::canvasPos() const
       }
 
 //---------------------------------------------------------
-//   getY2
+//   getY
 //---------------------------------------------------------
 
-double BarLine::getY2() const
+void BarLine::getY(double* y1, double* y2) const
       {
       int staffIdx1 = staffIdx();
       int staffIdx2 = staffIdx1 + _span - 1;
-      qreal y2;
 
       if (parent() && parent()->type() == SEGMENT) {
             Segment* segment = (Segment*)parent();
             Measure* measure = segment->measure();
-            System* system = measure->system();
-            y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
+#if 0
+            System* system   = measure->system();
+            *y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
             Spatium barLineLen(4.0 * staff()->mag());
-            y2 += barLineLen.point();
+            *y2 += barLineLen.point();
+#endif
+            StaffLines* l1 = measure->staffLines(staffIdx1);
+            StaffLines* l2 = measure->staffLines(staffIdx2);
+            *y1 = l1->y1();
+            *y2 = l2->y2();
             }
-      else
-            y2 = 4.0 * _spatium;    // for use in palette
+      else {
+            *y2 = 4.0 * _spatium;    // for use in palette
+            *y1 = 0.0;
+            }
 
-      y2 += yoff;
-      return y2;
+      *y2 += yoff;
       }
 
 //---------------------------------------------------------
@@ -88,7 +94,8 @@ double BarLine::getY2() const
 void BarLine::draw(QPainter& p) const
       {
       qreal lw = point(score()->style()->barWidth) * mag();
-      qreal y2 = getY2();
+      qreal y1, y2;
+      getY(&y1, &y2);
 
       QPen pen(p.pen());
       pen.setWidthF(lw);
@@ -109,7 +116,7 @@ void BarLine::draw(QPainter& p) const
                   }
 
             case NORMAL_BAR:
-                  p.drawLine(QLineF(lw * .5, 0.0, lw * .5, y2));
+                  p.drawLine(QLineF(lw * .5, y1, lw * .5, y2));
                   break;
 
             case END_BAR:
@@ -117,11 +124,11 @@ void BarLine::draw(QPainter& p) const
                   qreal lw2 = point(score()->style()->endBarWidth) * mag();
                   qreal d   = point(score()->style()->endBarDistance) * mag();
 
-                  p.drawLine(QLineF(lw * .5, 0.0, lw * .5, y2));
+                  p.drawLine(QLineF(lw * .5, y1, lw * .5, y2));
                   pen.setWidthF(lw2);
                   p.setPen(pen);
                   qreal x = d + lw2 * .5 + lw;
-                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  p.drawLine(QLineF(x, y1, x, y2));
                   lw = lw + d + lw2;
                   }
                   break;
@@ -134,9 +141,9 @@ void BarLine::draw(QPainter& p) const
                   pen.setWidthF(lw);
                   p.setPen(pen);
                   qreal x = lw * .5;
-                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  p.drawLine(QLineF(x, y1, x, y2));
                   x += d + lw;
-                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  p.drawLine(QLineF(x, y2, x, y2));
                   lw = 2 * lw + d;
                   }
                   break;
@@ -158,10 +165,10 @@ void BarLine::draw(QPainter& p) const
                         symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, y2));
+                  p.drawLine(QLineF(x1, y1, x1, y2));
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, y2));
+                  p.drawLine(QLineF(x2, y1, x2, y2));
                   lw = x2;
                   }
                   break;
@@ -184,11 +191,11 @@ void BarLine::draw(QPainter& p) const
                         symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, y2));
+                  p.drawLine(QLineF(x1, y1, x1, y2));
 
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, y2));
+                  p.drawLine(QLineF(x2, y1, x2, y2));
                   lw = x2;
                   }
                   break;
@@ -217,20 +224,20 @@ void BarLine::draw(QPainter& p) const
                         symbols[dotSym].draw(p, mag(), x4, y2 - ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, y2));
+                  p.drawLine(QLineF(x1, y1, x1, y2));
 
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, y2));
+                  p.drawLine(QLineF(x2, y1, x2, y2));
 
                   pen.setWidthF(lw);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x3, 0.0, x3, y2));
+                  p.drawLine(QLineF(x3, y1, x3, y2));
                   lw = x2;
                   }
                   break;
             }
-      setbbox(QRectF(0.0, 0.0, lw, y2).adjusted(-lw * .5, 0.0, lw, 0.0));
+      setbbox(QRectF(0.0, y1, lw, y2).adjusted(-lw * .5, 0.0, lw, 0.0));
       }
 
 //---------------------------------------------------------
@@ -267,7 +274,8 @@ void BarLine::read(QDomElement e)
 
 QRectF BarLine::bbox() const
       {
-      qreal y2  = getY2();
+      qreal y1, y2;
+      getY(&y1, &y2);
       Spatium w = score()->style()->barWidth;
       qreal dw  = 0.0;
 
@@ -297,7 +305,7 @@ QRectF BarLine::bbox() const
                   printf("illegal bar line type\n");
                   break;
             }
-      return QRectF(0.0, 0.0, dw, y2);
+      return QRectF(0.0, y1, dw, y2);
       }
 
 
@@ -359,7 +367,8 @@ void BarLine::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
       qreal lw = point(score()->style()->barWidth);
-      qreal y2 = getY2();
+      qreal y1, y2;
+      getY(&y1, &y2);
       grip[0].translate(QPointF(lw * .5, y2) + canvasPos());
       }
 
@@ -405,7 +414,8 @@ void BarLine::editDrag(int, const QPointF&, const QPointF& delta)
 
 void BarLine::endEditDrag()
       {
-      double h2 = getY2();
+      double y1, h2;
+      getY(&y1, &h2);
       yoff      = 0.0;
       qreal ay1 = canvasPos().y();
       qreal ay2 = ay1 + h2;

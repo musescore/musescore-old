@@ -508,7 +508,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
            return;
       if (state == LASSO || state == NOTE_ENTRY)
             _score->setLayoutAll(false);  // DEBUG
-      _score->end();
+//      _score->end();
       }
 
 //---------------------------------------------------------
