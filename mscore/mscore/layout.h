@@ -91,6 +91,7 @@ class ScoreLayout : public Element {
       // values used during doLayout:
       int curPage;
       int curSystem;
+      bool firstSystem;
       MeasureBase* curMeasure;
 
    protected:

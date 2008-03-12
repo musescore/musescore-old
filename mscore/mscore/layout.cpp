@@ -164,6 +164,7 @@ void ScoreLayout::doLayout()
 
       curMeasure = first();
       curSystem  = 0;
+      firstSystem = true;
       for (curPage = 0; curMeasure; curPage++) {
             getCurPage();
             MeasureBase* om = curMeasure;
@@ -371,8 +372,8 @@ bool ScoreLayout::layoutPage()
       page->clear();
       qreal y = page->tm();
 
-      bool firstSystem = true;
       int rows = 0;
+      bool firstSystemOnPage = true;
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
@@ -397,19 +398,15 @@ bool ScoreLayout::layoutPage()
                   curMeasure = curMeasure->next();
                   ++curSystem;
                   y += bh + score()->style()->boxSystemDistance.point();
-                  firstSystem = false;
                   }
             else {
-                  bool isFirstSystem = false;
-                  if (firstSystem) {
+                  if (firstSystemOnPage) {
                         y += point(score()->style()->staffUpperBorder);
-                        if (curPage == 0)
-                              isFirstSystem = true;
                         }
                   int cs            = curSystem;
                   MeasureBase* cm   = curMeasure;
                   double h;
-                  QList<System*> sl = layoutSystemRow(x, y, w, isFirstSystem, &h);
+                  QList<System*> sl = layoutSystemRow(x, y, w, firstSystem, &h);
                   if (sl.isEmpty()) {
                         printf("layoutSystemRow returns zero systems\n");
                         abort();
@@ -427,10 +424,11 @@ bool ScoreLayout::layoutPage()
                         page->appendSystem(system);
                         system->setYpos(y);
                         }
+                  firstSystem = false;
+                  firstSystemOnPage = false;
                   y += h;
                   if (sl.back()->pageBreak())
                         break;
-                  firstSystem = false;
                   }
             ++rows;
             }
