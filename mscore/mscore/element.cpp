@@ -638,13 +638,14 @@ void StaffLines::draw(QPainter& p) const
 
 double StaffLines::y1() const
       {
+      double y = measure()->system()->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
-                  return _pos.y() + 1 * _spatium * mag();
+                  return y + _pos.y() + 1 * _spatium * mag();
             case 2:
-                  return _pos.y() + 1 * _spatium * mag();
+                  return y + _pos.y() + 1 * _spatium * mag();
             default:
-                  return _pos.y();
+                  return y + _pos.y();
             }
       }
 
@@ -654,13 +655,14 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
+      double y = measure()->system()->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
-                  return _pos.y() + 3 * _spatium * mag();
+                  return y + _pos.y() + 3 * _spatium * mag();
             case 2:
-                  return _pos.y() + 3 * _spatium * mag();
+                  return y + _pos.y() + 3 * _spatium * mag();
             default:
-                  return _pos.y() + 4 * _spatium * mag();
+                  return y + _pos.y() + 4 * _spatium * mag();
             }
       }
 

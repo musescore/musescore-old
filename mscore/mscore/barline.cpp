@@ -62,10 +62,9 @@ QPointF BarLine::canvasPos() const
 
 void BarLine::getY(double* y1, double* y2) const
       {
-      int staffIdx1 = staffIdx();
-      int staffIdx2 = staffIdx1 + _span - 1;
-
       if (parent() && parent()->type() == SEGMENT) {
+            int staffIdx1 = staffIdx();
+            int staffIdx2 = staffIdx1 + _span - 1;
             Segment* segment = (Segment*)parent();
             Measure* measure = segment->measure();
 #if 0
