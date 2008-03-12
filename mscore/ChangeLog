@@ -1,4 +1,6 @@
 12.3.8 (ws)
+      - apply part pitch offset when playing notes during editing (#1912726)
+      - add custom page format
       - fixes for 2 line staves
       - fix cut&paste for more than one selected stave
 11.3.8 (lv)
