@@ -264,7 +264,7 @@ void Lilypond::createMeasure()
             measure = new Measure(score);
             measure->setTick(tick);
             measure->setTickLen(division * 4);
-            score->mainLayout()->add(measure);
+            score->layout()->add(measure);
             }
       }
 
@@ -391,7 +391,7 @@ void Lilypond::convert()
       measure = new Measure(score);
       measure->setTick(tick);
       measure->setTickLen(division * 4);
-      score->mainLayout()->add(measure);
+      score->layout()->add(measure);
 
       QChar c = lookup();
       if (c == '\\') {

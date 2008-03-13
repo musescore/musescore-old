@@ -125,7 +125,7 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
                         if (tick1 > tick2)
                               return true;
                         line()->setTick2(tick2);
-                        line()->layout(score()->mainLayout());
+                        line()->layout(score()->layout());
                         if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
                         }
@@ -140,7 +140,7 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
                         int segments = line()->lineSegments().size();
                         tick2 = score()->nextSeg1(tick2, track);
                         line()->setTick2(tick2);
-                        line()->layout(score()->mainLayout());
+                        line()->layout(score()->layout());
                         if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
                         }

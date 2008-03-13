@@ -454,7 +454,7 @@ QByteArray Selection::staffMimeData() const
       xml.stag("StaffList");
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
-            for (MeasureBase* m = _score->mainLayout()->first(); m; m = m->next()) {
+            for (MeasureBase* m = _score->layout()->first(); m; m = m->next()) {
                   int ms = m->tick();
                   int me = ms + m->tickLen();
                   if (me <= tickStart)

@@ -466,7 +466,7 @@ void MuseScore::newFile()
             score->fileInfo()->setFile(createDefaultName());
 
             int m = 0;
-            ScoreLayout* layout = score->mainLayout();
+            ScoreLayout* layout = score->layout();
             for (MeasureBase* mb = layout->first(); mb; mb = mb->next()) {
                   if (mb->type() == MEASURE)
                         ++m;
@@ -492,7 +492,7 @@ void MuseScore::newFile()
       QString poet      = newWizard->poet();
       QString copyright = newWizard->copyright();
       if (!title.isEmpty() || !subtitle.isEmpty() || !composer.isEmpty() || !poet.isEmpty()) {
-            MeasureBase* measure = score->mainLayout()->first();
+            MeasureBase* measure = score->layout()->first();
             if (measure->type() != VBOX) {
                   measure = new VBox(score);
                   measure->setTick(0);
@@ -969,12 +969,12 @@ printerMag = DPI / oldDPI;
 
       DPMM             = DPI / INCH;                     // dots/mm
       setSpatium(_spatium * DPI / oldDPI);
-      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
-      mainLayout()->setPaintDevice(printer);
+      QPaintDevice* oldPaintDevice = layout()->paintDevice();
+      layout()->setPaintDevice(printer);
       doLayout();
 
       QList<const Element*> el;
-      foreach (const Element* element, *mainLayout()->gel())
+      foreach (const Element* element, *layout()->gel())
             element->collectElements(el);
       for (MeasureBase* m = _layout->first(); m; m = m->next()) {
             m->collectElements(el);
@@ -989,7 +989,7 @@ printerMag = DPI / oldDPI;
 
 //            el.clear();
             page->collectElements(el);
-/*            foreach (const Element* element, *mainLayout()->gel())
+/*            foreach (const Element* element, *layout()->gel())
                   element->collectElements(el);
             foreach(System* system, *page->systems()) {
                   foreach(MeasureBase* m, system->measures()) {
@@ -1014,7 +1014,7 @@ printerMag = 1.0;
       DPI       = oldDPI;
       DPMM      = DPI / INCH;                     // dots/mm
       setSpatium(oldSpatium);
-      mainLayout()->setPaintDevice(oldPaintDevice);
+      layout()->setPaintDevice(oldPaintDevice);
       doLayout();
       }
 
@@ -1143,15 +1143,15 @@ bool Score::savePng(const QString& name)
       printer.fill(QColor(0, 0, 0, 0));
 
       QPainter p(&printer);
-      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
-      mainLayout()->setPaintDevice(&printer);
+      QPaintDevice* oldPaintDevice = layout()->paintDevice();
+      layout()->setPaintDevice(&printer);
 
       doLayout();
 
       canvas()->paintLasso(p);
       bool rv = printer.save(name, "png");
 
-      mainLayout()->setPaintDevice(oldPaintDevice);
+      layout()->setPaintDevice(oldPaintDevice);
       doLayout();
       return rv;
       }

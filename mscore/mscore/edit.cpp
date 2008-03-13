@@ -532,7 +532,7 @@ void Score::cmdAddSlur()
       slur->setParent(_layout);
       cmdAdd(slur);
 
-      slur->layout(mainLayout());
+      slur->layout(layout());
       QList<SlurSegment*>* el = slur->elements();
 
       if (noteEntryMode()) {
@@ -624,7 +624,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setSubtype(decrescendo ? 1 : 0);
       pin->setTrack(el->track());
       pin->setParent(_layout);
-      pin->layout(mainLayout());
+      pin->layout(layout());
 #if 0
       LineSegment* ls = line->lineSegments().front();
       QPointF uo(pos - ls->canvasPos() - dragOffset);

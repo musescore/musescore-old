@@ -553,7 +553,7 @@ void ExportLy::writeScore()
                   indent();
                   writeClef(staff->clef()->clef(0));
                   writeKeySig(staff->keymap()->key(0));
-                  for (MeasureBase* m = score->mainLayout()->first(); m; m = m->next()) {
+                  for (MeasureBase* m = score->layout()->first(); m; m = m->next()) {
                         if (m->type() != MEASURE)
                               continue;
                         os << "\n";
@@ -631,7 +631,7 @@ bool ExportLy::write(const QString& name)
       indent();
       os << "\\header {\n";
       ++level;
-      const MeasureBase* m = score->mainLayout()->first();
+      const MeasureBase* m = score->layout()->first();
       foreach(const Element* e, *m->el()) {
             if (e->type() != TEXT)
                   continue;
@@ -683,7 +683,7 @@ bool ExportLy::write(const QString& name)
 
 void ExportLy::checkSlur(int tick, int track)
       {
-      for (const MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+      for (const MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*) mb;

@@ -433,13 +433,12 @@ bool Score::importBB(const QString& name)
       text->setSubtype(TEXT_TITLE);
       text->setText(bb.title());
 
-      ScoreLayout* layout = mainLayout();
-      MeasureBase* measure = layout->first();
+      MeasureBase* measure = _layout->first();
       if (measure->type() != VBOX) {
             measure = new VBox(this);
             measure->setTick(0);
-            measure->setNext(layout->first());
-            layout->add(measure);
+            measure->setNext(_layout->first());
+            _layout->add(measure);
             }
       measure->add(text);
 
@@ -475,7 +474,7 @@ bool Score::importBB(const QString& name)
       int endChorus   = bb.endChorus() - 1;
 
       int n = 0;
-      for (MeasureBase* mb = layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = (Measure*)mb;

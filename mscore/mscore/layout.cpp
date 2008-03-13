@@ -387,8 +387,11 @@ bool ScoreLayout::layoutPage()
                   vbox->setParent(system);
                   vbox->layout(this);
                   double bh = vbox->height();
-                  if (y + bh > ey)
+
+                  // put at least one system on page
+                  if (((y + bh) > ey) && !firstSystemOnPage)
                         break;
+
                   system->setPos(QPointF(x, y));
                   system->setHeight(vbox->height());
 
@@ -398,6 +401,8 @@ bool ScoreLayout::layoutPage()
                   curMeasure = curMeasure->next();
                   ++curSystem;
                   y += bh + score()->style()->boxSystemDistance.point();
+                  if (y > ey)
+                        break;
                   }
             else {
                   if (firstSystemOnPage) {
@@ -448,7 +453,7 @@ bool ScoreLayout::layoutPage()
       double dist = restHeight / (rows - 1);
       y = 0;
       int n = page->systems()->size();
-      for (int i = 0; ;) {
+      for (int i = 0; i < n;) {
             System* system = page->systems()->at(i);
             double yy = system->pos().y();
             system->move(0, y);

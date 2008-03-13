@@ -239,7 +239,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   Measure* m = pos2measure3(pos, &tick);
                   volta->setTick(m->tick());
                   volta->setTick2(m->tick() + m->tickLen());
-                  volta->layout(mainLayout());
+                  volta->layout(layout());
                   LineSegment* ls = volta->lineSegments().front();
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
                   ls->setUserOff(uo / _spatium);
@@ -254,7 +254,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   SLine* line = (SLine*)e;
                   line->setTick(tick);
                   line->setTick2(tick2);
-                  line->layout(mainLayout());
+                  line->layout(layout());
                   LineSegment* ls = line->lineSegments().front();
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
                   ls->setUserOff(uo / _spatium);
@@ -270,7 +270,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   QRectF sb(s->staff(staffIdx)->bbox());
                   sb.translate(s->pos() + s->page()->pos());
                   QPointF anchor(segment->abbox().x(), sb.topLeft().y());
-                  dyn->layout(mainLayout());
+                  dyn->layout(layout());
                   QPointF uo(pos - anchor - e->ipos() - dragOffset);
                   dyn->setUserOff(uo / _spatium);
                   }

@@ -2355,7 +2355,7 @@ void Measure::read(QDomElement e, int idx)
                         case TEXT_POET:
                               // for backward compatibility:
                               {
-                              ScoreLayout* layout = score()->mainLayout();
+                              ScoreLayout* layout = score()->layout();
                               MeasureBase* measure = layout->first();
                               if (measure->type() != VBOX) {
                                     measure = new VBox(score());
@@ -2456,7 +2456,7 @@ void Measure::read(QDomElement e, int idx)
                   Slur* slur = new Slur(score());
                   slur->setTrack(score()->curTrack);
                   slur->read(e);
-                  score()->mainLayout()->add(slur);
+                  score()->layout()->add(slur);
                   }
             else
                   domError(e);

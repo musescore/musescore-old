@@ -130,7 +130,7 @@ void PageSettings::setScore(Score* s)
       preview->setScore(s);
 
       ScoreLayout* sl = preview->lo();
-      ScoreLayout* ml = s->mainLayout();
+      ScoreLayout* ml = s->layout();
 
       PageFormat* pf  = ml->pageFormat();
       sl->setPageFormat(*pf);
@@ -143,7 +143,7 @@ void PageSettings::setScore(Score* s)
             }
 
       pageGroup->setCurrentIndex(pf->size);
-      setValues(s->mainLayout());
+      setValues(s->layout());
 
       connect(oddPageTopMargin, SIGNAL(valueChanged(double)), SLOT(otmChanged(double)));
       connect(oddPageBottomMargin, SIGNAL(valueChanged(double)), SLOT(obmChanged(double)));

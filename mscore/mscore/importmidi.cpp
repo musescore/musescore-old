@@ -671,7 +671,7 @@ bool Score::saveMidi(const QString& name)
 void ExportMidi::writeHeader()
       {
       MidiTrack* track  = mf.tracks()->front();
-      MeasureBase* measure  = cs->mainLayout()->first();
+      MeasureBase* measure  = cs->layout()->first();
 
       foreach (const Element* e, *measure->el()) {
             if (e->type() == TEXT) {
@@ -958,7 +958,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent*
 
                   text->setText((char*)(mm->data()));
 
-                  ScoreLayout* layout = cs->mainLayout();
+                  ScoreLayout* layout = cs->layout();
                   MeasureBase* measure = layout->first();
                   if (measure->type() != VBOX) {
                         measure = new VBox(cs);

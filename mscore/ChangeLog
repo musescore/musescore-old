@@ -1,3 +1,5 @@
+13.3.8 (ws)
+      - fix crash if page height is too small
 12.3.8 (ws)
       - apply part pitch offset when playing notes during editing (#1912726)
       - add custom page format

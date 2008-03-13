@@ -357,11 +357,11 @@ void InstrumentWizard::createInstruments(Score* cs)
                   for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                         StaffListItem* sli = (StaffListItem*)ci;
                         if (sli->op == ITEM_DELETE) {
-                              cs->mainLayout()->systems()->clear();
+                              cs->layout()->systems()->clear();
                               Staff* staff = sli->staff;
                               int sidx = staff->idx();
                               int eidx = sidx + 1;
-                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
                                     if (mb->type() != MEASURE)
                                           continue;
                                     Measure* m = (Measure*)mb;
@@ -380,7 +380,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                               cs->insertStaff(staff, staffIdx);
                               cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
 
-                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
                                     if (mb->type() != MEASURE)
                                           continue;
                                     Measure* m = (Measure*)mb;

@@ -722,10 +722,10 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       maxtick        = 0;
       lastMeasureLen = 0;
 
-      if (!score->mainLayout()->first()) {
+      if (!score->layout()->first()) {
             VBox* vbox  = new VBox(score);
             vbox->setTick(tick);
-            score->mainLayout()->add(vbox);
+            score->layout()->add(vbox);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
@@ -798,7 +798,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       // search measure for tick
       Measure* measure = 0;
       Measure* lastMeasure = 0;
-      for (MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -817,7 +817,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure  = new Measure(score);
             measure->setTick(tick);
             measure->setNo(number);
-            score->mainLayout()->add(measure);
+            score->layout()->add(measure);
             }
 
       // initialize voice list
@@ -980,7 +980,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
                                           volta->endings().append(iEendingNumber);
-                                          score->mainLayout()->add(volta);
+                                          score->layout()->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
@@ -1365,7 +1365,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else {
                               pedal->setTick2(tick);
-                              score->mainLayout()->add(pedal);
+                              score->layout()->add(pedal);
                               pedal = 0;
                               }
                         }
@@ -1465,7 +1465,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         ottava->setTick2(tick);
-                        score->mainLayout()->add(ottava);
+                        score->layout()->add(ottava);
                         ottava = 0;
                         }
                   }
@@ -1958,7 +1958,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
                                     slur[slurNo]->setTrack((staff + relStaff) * VOICES);
-                                    slur[slurNo]->setParent(score->mainLayout());
+                                    slur[slurNo]->setParent(score->layout());
                                     score->addElement(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
@@ -2245,7 +2245,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         trill->setTick2(tick+ticks);
-                        score->mainLayout()->add(trill);
+                        score->layout()->add(trill);
                         trill = 0;
                         }
                   }
@@ -2401,7 +2401,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       hp->setSubtype(wedgeList[no].subType);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
-      score->mainLayout()->add(hp);
+      score->layout()->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }
