@@ -257,6 +257,7 @@ void ExcerptsDialog::createExcerptClicked()
 
 void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       {
+      excerptChanged(cur, cur);
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
       Score* nscore = score->createExcerpt(excerpt);
       mscore->appendScore(nscore);
