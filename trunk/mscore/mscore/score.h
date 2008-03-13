@@ -117,7 +117,7 @@ class Score : public QObject {
       QList<Viewer*> viewer;
 
       ScoreView scoreView;
-      ScoreLayout* _layout;   ///< Main layout.
+      ScoreLayout* _layout;
 
       bool _showInvisible;
 
@@ -257,6 +257,8 @@ class Score : public QObject {
    public:
       Score();
       ~Score();
+
+      Score* clone();
 
       void clear();
       void write(Xml&);
@@ -399,6 +401,7 @@ class Score : public QObject {
       void read(QString name);
 
       void setSpatium(double v);
+
       double mag() const         { return scoreView._mag;     }
       void setMag(double val)    { scoreView._mag = val;      }
       qreal xoffset() const      { return scoreView._xoffset; }
@@ -439,7 +442,7 @@ class Score : public QObject {
       bool undoEmpty() const;
       bool redoEmpty() const;
       PageFormat* pageFormat() const;
-      ScoreLayout* mainLayout() const { return _layout; }
+      ScoreLayout* layout() const { return _layout; }
 
       void addAttribute(Element*, NoteAttribute* atr);
 

@@ -1518,7 +1518,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   dragElement = el;
                   dragElement->setParent(0);
                   dragElement->read(e);
-                  dragElement->layout(score()->mainLayout());
+                  dragElement->layout(score()->layout());
                   }
             }
 

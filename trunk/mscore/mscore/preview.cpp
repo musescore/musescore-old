@@ -43,48 +43,14 @@ PagePreview::PagePreview(QWidget* parent)
 
 void PagePreview::setScore(Score* s)
       {
-      _score = s;
-      _layout = new ScoreLayout(_score);
-      ScoreLayout* ol = _score->mainLayout();
-      _layout->setSpatium(ol->spatium());
-      _layout->setPageFormat(*(ol->pageFormat()));
-
-      for (MeasureBase* m = ol->first(); m; m = m->next()) {
-            //
-            // create deep copy of Measure
-            //
-            static const char* mimeType = "application/mscore/measure";
-            QMimeData* mimeData = new QMimeData;
-            mimeData->setData(mimeType, m->mimeData(QPointF()));
-
-            MeasureBase* nm = 0;
-            switch(m->type()) {
-                  case MEASURE:     nm = new Measure(s); break;
-                  case HBOX:        nm = new HBox(s); break;
-                  case VBOX:        nm = new VBox(s); break;
-                  default:
-                        printf("PagePreview::setScore: bad type\n");
-                        break;
-                  }
-            QByteArray data(mimeData->data(mimeType));
-
-// printf("DATA\n%s\n", data.data());
-
-            QDomDocument doc;
-            int line, column;
-            QString err;
-            if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading internal data\n");
-                  return;
-                  }
-            docName = "--";
-            QDomElement e = doc.documentElement();
-            e = e.firstChildElement();
-            nm->read(e);
-            _layout->add(nm);
+      if (_score)
+            delete _score;
+      _score  = s->clone();
+      if (_score == 0) {
+            _layout = 0;
+            return;
             }
-      _layout->setScore(s);
-      setMag();
+      _layout = _score->layout();
       _layout->doLayout();
       }
 
@@ -94,11 +60,8 @@ void PagePreview::setScore(Score* s)
 
 PagePreview::~PagePreview()
       {
-      if (_layout) {
-            for (MeasureBase* m = _layout->first(); m; m = m->next())
-                  delete m;
-            delete _layout;
-            }
+      if (_score)
+            delete _score;
       }
 
 //---------------------------------------------------------
@@ -130,7 +93,6 @@ void PagePreview::resizeEvent(QResizeEvent*)
 
 void PagePreview::layout()
       {
-//TODO?      _layout->pages().update();
       _layout->doLayout();
       update();
       }

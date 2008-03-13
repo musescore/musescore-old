@@ -101,7 +101,7 @@ void EditStaff::apply()
       staff->setSmall(small->isChecked());
       part->setShortName(*shortName->document());
       part->setLongName(*longName->document());
-      staff->score()->mainLayout()->setInstrumentNames();
+      staff->score()->layout()->setInstrumentNames();
       }
 
 //---------------------------------------------------------

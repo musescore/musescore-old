@@ -624,7 +624,7 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
 
 static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
       {
-      for (MeasureBase* mb = sc->mainLayout()->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = sc->layout()->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -716,7 +716,7 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
                   }
             }
       // part-level elements stored in measures
-      for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -2083,7 +2083,7 @@ foreach(Element* el, *(score->gel())) {
       xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
       xml.stag("score-partwise");
 
-      const MeasureBase* measure = score->mainLayout()->first();
+      const MeasureBase* measure = score->layout()->first();
       work(xml, measure);
 
       xml.stag("identification");
@@ -2214,7 +2214,7 @@ foreach(Element* el, *(score->gel())) {
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
             int pickupMeasureNo = 1;    // number of next pickup measure
-            for (MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;

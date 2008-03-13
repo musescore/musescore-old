@@ -133,6 +133,6 @@ void Viewer::setDropAnchor(const QLineF& l)
 
 ScoreLayout* Viewer::layout()
       {
-      return _score->mainLayout();
+      return _score->layout();
       }
 

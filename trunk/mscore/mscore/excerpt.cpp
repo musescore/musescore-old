@@ -117,7 +117,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       QDomElement e = doc.documentElement();
       s->read(e);
       if (!excerpt->title().isEmpty()) {
-            MeasureBase* measure = s->mainLayout()->first();
+            MeasureBase* measure = s->layout()->first();
             if (measure->type() != VBOX) {
                   measure = new VBox(s);
                   measure->setTick(0);

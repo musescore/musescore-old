@@ -157,7 +157,7 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                         if (tick2 <= tick1)
                               return true;
                         line()->setTick2(tick2);
-                        line()->layout(score()->mainLayout());
+                        line()->layout(score()->layout());
                         if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
                         }
@@ -172,7 +172,7 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                         int segments = line()->lineSegments().size();
                         tick2 = m2->tick() + m2->tickLen();
                         line()->setTick2(tick2);
-                        line()->layout(score()->mainLayout());
+                        line()->layout(score()->layout());
                         if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
                         }

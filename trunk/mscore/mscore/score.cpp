@@ -56,7 +56,6 @@
 #include "volta.h"
 #include "event.h"
 #include "repeat.h"
-#include "repeat2.h"
 #include "ottava.h"
 #include "barline.h"
 #include "box.h"
@@ -1617,11 +1616,11 @@ struct RepeatLoop {
 MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
       {
       if (s == "start")
-            return mainLayout()->first();
+            return layout()->first();
       else if (s == "end")
             ;
       if (start == 0)
-            start = mainLayout()->first();
+            start = layout()->first();
       for (MeasureBase* m = start; m; m = m->next()) {
             foreach(const Element* e, *m->el()) {
                   if (e->type() == MARKER) {
@@ -1647,7 +1646,7 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffIdx)
       {
       if (!expandRepeats) {
-            for (MeasureBase* mb = mainLayout()->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = layout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   collectMeasureEvents(events, (Measure*)mb, staffIdx, offset);
@@ -1658,7 +1657,7 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
       int tickOffset = 0;
       int overallRepeatCount = 0;
 
-      MeasureBase* fm = mainLayout()->first();
+      MeasureBase* fm = layout()->first();
       for (MeasureBase* mb = fm; mb;) {
             if (mb->type() != MEASURE) {
                   mb = mb->next();
@@ -1708,7 +1707,7 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                         //    repeat from beginning
                         ++overallRepeatCount;
                         if (overallRepeatCount < m->repeatCount()) {
-                              mb = mainLayout()->first();
+                              mb = layout()->first();
                               tickOffset += m->tick() + m->tickLen() - mb->tick();
                               continue;
                               }
@@ -1768,5 +1767,36 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
 void Score::setInputTrack(int v)
       {
       _is.track = v;
+      }
+
+//---------------------------------------------------------
+//   clone
+//---------------------------------------------------------
+
+Score* Score::clone()
+      {
+      QBuffer buffer;
+      buffer.open(QIODevice::WriteOnly);
+      Xml xml(&buffer);
+      xml.header();
+
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      write(xml);
+      xml.etag();
+
+      buffer.close();
+
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(buffer.buffer(), &err, &line, &column)) {
+            printf("error cloning score %d/%d: %s\n<%s>\n",
+               line, column, err.toLatin1().data(), buffer.buffer().data());
+            return 0;
+            }
+      Score* score = new Score;
+      docName = "--";
+      score->read(doc.documentElement());
+      return score;
       }
 

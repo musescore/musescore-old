@@ -1117,13 +1117,13 @@ void MuseScore::setCurrentScore(int idx)
 
       visibleId->setChecked(cs->showInvisible());
 
-      cs->setSpatium(cs->mainLayout()->spatium());
+      cs->setSpatium(cs->layout()->spatium());
       setMag(cs->mag());
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
 
       setWindowTitle("MuseScore: " + cs->name());
-      canvas->setScore(cs, cs->mainLayout());
+      canvas->setScore(cs, cs->layout());
       seq->setScore(cs);
       if (playPanel)
             playPanel->setScore(cs);

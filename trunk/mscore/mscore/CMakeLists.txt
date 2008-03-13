@@ -131,7 +131,7 @@ add_executable ( mscore
       lilypond.cpp exportly.cpp repeatflag.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       repeatproperties.cpp box.cpp measurebase.cpp
-      repeat2.cpp instrtemplate.cpp boxproperties.cpp
+      instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp

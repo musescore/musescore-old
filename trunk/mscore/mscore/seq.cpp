@@ -18,8 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "repeat2.h"
-
 #include "seq.h"
 #include "mscore.h"
 #include "fluid.h"

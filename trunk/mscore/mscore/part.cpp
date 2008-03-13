@@ -183,7 +183,7 @@ void Part::setStaves(int n)
             Staff* staff = new Staff(_score, this, i);
             _staves.push_back(staff);
             _score->staves().insert(staffIdx, staff);
-            for (MeasureBase* mb = _score->mainLayout()->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = _score->layout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
