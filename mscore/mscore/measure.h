@@ -30,7 +30,6 @@
 #include "segment.h"
 #include "measurebase.h"
 
-class Segment;
 class Xml;
 class Beam;
 class Tuplet;

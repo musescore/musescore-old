@@ -32,6 +32,7 @@
 #include "greendotbutton.h"
 #include "clef.h"
 #include "utils.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   RecordButton

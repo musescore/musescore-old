@@ -56,6 +56,7 @@
 #include "layoutbreak.h"
 #include "repeat.h"
 #include "page.h"
+#include "system.h"
 
 extern bool debugMode;
 extern bool showInvisible;

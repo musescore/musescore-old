@@ -38,6 +38,7 @@
 #include "bracket.h"
 #include "line.h"
 #include "staff.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   Page

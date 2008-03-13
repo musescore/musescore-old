@@ -363,7 +363,7 @@ class EventList : public QList<Event*> {
       void insert(int,int);
       };
 
-typedef QMap<int, Event*> EventMap;
+class EventMap : public QMap<int, Event*> {};
 
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;

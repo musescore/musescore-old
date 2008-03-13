@@ -23,7 +23,6 @@
  Implementation of class Score (partial).
 */
 
-// #include "alsa.h"
 #include "score.h"
 #include "key.h"
 #include "sig.h"
@@ -78,6 +77,118 @@ bool midiOutputTrace = false;
 bool showRubberBand  = true;
 
 //---------------------------------------------------------
+//   MeasureBaseList
+//---------------------------------------------------------
+
+MeasureBaseList::MeasureBaseList()
+      {
+      _first = 0;
+      _last  = 0;
+      _size  = 0;
+      };
+
+//---------------------------------------------------------
+//   push_back
+//---------------------------------------------------------
+
+void MeasureBaseList::push_back(MeasureBase* e)
+      {
+      ++_size;
+      if (_last) {
+            _last->setNext(e);
+            e->setPrev(_last);
+            e->setNext(0);
+            }
+      else {
+            _first = e;
+            e->setPrev(0);
+            e->setNext(0);
+            }
+      _last = e;
+      }
+
+//---------------------------------------------------------
+//   push_front
+//---------------------------------------------------------
+
+void MeasureBaseList::push_front(MeasureBase* e)
+      {
+      ++_size;
+      if (_first) {
+            _first->setPrev(e);
+            e->setNext(_first);
+            e->setPrev(0);
+            }
+      else {
+            _last = e;
+            e->setPrev(0);
+            e->setNext(0);
+            }
+      _first = e;
+      }
+
+//---------------------------------------------------------
+//   add
+//    insert e before e->next()
+//---------------------------------------------------------
+
+void MeasureBaseList::add(MeasureBase* e)
+      {
+      MeasureBase* el = e->next();
+      if (el == 0) {
+            push_back(e);
+            return;
+            }
+      if (el == _first) {
+            push_front(e);
+            return;
+            }
+      ++_size;
+      e->setNext(el);
+      e->setPrev(el->prev());
+      el->prev()->setNext(e);
+      el->setPrev(e);
+      }
+
+//---------------------------------------------------------
+//   erase
+//---------------------------------------------------------
+
+void MeasureBaseList::remove(MeasureBase* el)
+      {
+      --_size;
+      if (el->prev())
+            el->prev()->setNext(el->next());
+      else
+            _first = el->next();
+      if (el->next())
+            el->next()->setPrev(el->prev());
+      else
+            _last = el->prev();
+      }
+
+//---------------------------------------------------------
+//   change
+//---------------------------------------------------------
+
+void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
+      {
+      nb->setPrev(ob->prev());
+      nb->setNext(ob->next());
+      if (ob->prev())
+            ob->prev()->setNext(nb);
+      if (ob->next())
+            ob->next()->setPrev(nb);
+      if (ob == _last)
+            _last = nb;
+      if (ob == _first)
+            _first = nb;
+      foreach(Element* e, *nb->el())
+            e->setParent(nb);
+      }
+
+#if 0
+//---------------------------------------------------------
 //   doLayout
 //---------------------------------------------------------
 
@@ -85,15 +196,7 @@ void Score::doLayout()
       {
       _layout->doLayout();
       }
-
-//---------------------------------------------------------
-//   reLayout
-//---------------------------------------------------------
-
-void Score::reLayout(Measure* m)
-      {
-      _layout->reLayout(m);
-      }
+#endif
 
 //---------------------------------------------------------
 //   pageFormat
@@ -235,7 +338,7 @@ void Score::clear()
       foreach(Staff* staff, _staves)
             delete staff;
       _staves.clear();
-      _layout->clear();
+      _measures.clear();
       foreach(Part* p, _parts)
             delete p;
       _parts.clear();

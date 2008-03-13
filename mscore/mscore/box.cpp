@@ -28,6 +28,7 @@
 #include "canvas.h"
 #include "boxproperties.h"
 #include "symbol.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   Box

@@ -23,7 +23,6 @@
 
 #include "viewer.h"
 #include "bsp.h"
-#include "element.h"
 
 class Rest;
 class Element;
@@ -37,6 +36,7 @@ class Navigator;
 class Cursor;
 class ElementList;
 class Segment;
+class Measure;
 
 //---------------------------------------------------------
 //   Canvas

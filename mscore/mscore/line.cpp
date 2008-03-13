@@ -25,6 +25,7 @@
 #include "xml.h"
 #include "layout.h"
 #include "viewer.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   LineSegment

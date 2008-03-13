@@ -23,6 +23,7 @@
 
 class MidiNote;
 class Note;
+class NoteEvent;
 
 //---------------------------------------------------------
 //   pitch2tpc

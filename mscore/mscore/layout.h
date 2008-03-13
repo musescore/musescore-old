@@ -22,8 +22,6 @@
 #define __LAYOUT_H__
 
 #include "bsp.h"
-#include "measure.h"
-#include "element.h"
 
 class Score;
 class PageFormat;
@@ -31,32 +29,7 @@ class Page;
 class Measure;
 class QPaintDevice;
 class System;
-
-//---------------------------------------------------------
-//   MeasureBaseList
-//---------------------------------------------------------
-
-class MeasureBaseList {
-      int _size;
-      MeasureBase* _first;
-      MeasureBase* _last;
-
-      void push_back(MeasureBase* e);
-      void push_front(MeasureBase* e);
-
-   public:
-      MeasureBaseList() {
-            _first = 0;
-            _last  = 0;
-            _size  = 0;
-            };
-      MeasureBase* first() const { return _first; }
-      MeasureBase* last()  const { return _last; }
-      void clear()               { _first = _last = 0; }
-      void add(MeasureBase*);
-      void remove(MeasureBase*);
-      void change(MeasureBase* o, MeasureBase* n);
-      };
+class MeasureBase;
 
 //---------------------------------------------------------
 //   ScoreLayout
@@ -69,16 +42,13 @@ class ScoreLayout : public Element {
       BspTree bspTree;
 
       //
-      // modified by layout()
-      //
-      MeasureBaseList _measures;           // here are the notes
-      //
       // generated objects by layout():
       //
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
 
       bool _needLayout;
+      Measure* startLayout;
 
       Page* addPage();
       bool layoutPage();
@@ -93,6 +63,7 @@ class ScoreLayout : public Element {
       int curSystem;
       bool firstSystem;
       MeasureBase* curMeasure;
+      void doReLayout();
 
    protected:
       QList<Element*> _gel;   // global elements: Slur, SLine
@@ -115,9 +86,8 @@ class ScoreLayout : public Element {
       QList<System*>* systems()               { return &_systems; }
       bool needLayout() const                 { return _needLayout; }
 
-      MeasureBase* first() const              { return _measures.first(); }
-      MeasureBase* last()  const              { return _measures.last();  }
-      void clear()                            { _measures.clear(); }
+      MeasureBase* first() const;
+      MeasureBase* last()  const;
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
       QPaintDevice* paintDevice() const             { return _paintDevice; }

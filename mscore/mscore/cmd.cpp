@@ -59,6 +59,7 @@
 #include "dynamics.h"
 #include "box.h"
 #include "harmony.h"
+#include "system.h"
 
 static bool startMode = false;
 
@@ -169,7 +170,7 @@ void Score::end()
             _layout->layout();
             }
       else if (layoutStart)
-            reLayout(layoutStart);
+            _layout->reLayout(layoutStart);
 
       foreach(Viewer* v, viewer) {
             if (updateAll)
@@ -972,6 +973,8 @@ void Score::upDown(bool up, bool octave)
             Note* note = (Note*)e;
             while (note->tieBack())
                   note = note->tieBack()->startNote();
+//            if (layoutStart == 0)
+//                  layoutStart = note->chord()->segment()->measure();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
                   iElement ii;
                   for (ii = el.begin(); ii != el.end(); ++ii) {
@@ -1034,7 +1037,7 @@ void Score::cmdAppendMeasures(int n)
 
 MeasureBase* Score::appendMeasure(int type)
       {
-      MeasureBase* last = _layout->last();
+      MeasureBase* last = _measures.last();
       int tick = last ? last->tick() + last->tickLen() : 0;
       MeasureBase* mb = 0;
       if (type == MEASURE)
@@ -1267,7 +1270,7 @@ void Score::resetUserOffsets()
 
 void Score::resetUserStretch()
       {
-      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() == MEASURE)
                   ((Measure*)m)->setUserStretch(1.0);
             }
@@ -1327,7 +1330,7 @@ void Score::cmdAddStretch(double val)
             return;
       int startTick = sel->tickStart;
       int endTick   = sel->tickEnd;
-      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
             if (m->tick() < startTick)
@@ -1353,7 +1356,7 @@ void Score::cmdResetBeamMode()
             }
       int startTick = sel->tickStart;
       int endTick   = sel->tickEnd;
-      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
             if (m->tick() < startTick)
@@ -1767,7 +1770,7 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "select-all") {
                   sel->setState(SEL_SYSTEM);
                   sel->tickStart  = 0;
-                  sel->tickEnd    = _layout->last()->tick() + _layout->last()->tickLen();
+                  sel->tickEnd    = _measures.last()->tick() + _measures.last()->tickLen();
                   sel->staffStart = 0;
                   sel->staffEnd   = nstaves();
                   }
@@ -1795,7 +1798,7 @@ void Score::pasteStaff(const QMimeData* ms)
       int tickStart  = sel->tickStart;
 
       Measure* measure = 0;
-      for (MeasureBase* e = _layout->first(); e; e = e->next()) {
+      for (MeasureBase* e = _measures.first(); e; e = e->next()) {
             if (e->type() != MEASURE)
                   continue;
             if (e->tick() == tickStart) {

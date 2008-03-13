@@ -43,6 +43,7 @@
 #include "barline.h"
 #include "lyrics.h"
 #include "layout.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   SysStaff

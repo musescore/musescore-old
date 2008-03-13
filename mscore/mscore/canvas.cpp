@@ -53,6 +53,7 @@
 #include "editstaff.h"
 #include "repeatflag.h"
 #include "barline.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -1121,7 +1122,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
       QRegion region;
       if (_score->needLayout()) {
-            _score->doLayout();
+            _score->layout()->doLayout();
             if (navigator)
                   navigator->layoutChanged();
             if (state == EDIT || state == DRAG_EDIT)

@@ -45,6 +45,7 @@
 #include "beam.h"
 #include "utils.h"
 #include "harmony.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -260,7 +261,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             // check if there is already a time signature symbol
             //
             Segment* ts = 0;
-            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
@@ -310,7 +311,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
       int staves = nstaves();
       Segment* segment = 0;
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() == MEASURE) {
                   segment = ((Measure*)mb)->first();
                   break;
@@ -351,7 +352,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       // modify measures
       //---------------------------------------------
 
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;

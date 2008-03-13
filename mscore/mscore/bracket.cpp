@@ -27,6 +27,7 @@
 #include "score.h"
 #include "layout.h"
 #include "viewer.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   Bracket

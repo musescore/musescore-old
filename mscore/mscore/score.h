@@ -26,12 +26,11 @@
  Definition of Score class.
 */
 
-#include "system.h"
 #include "undo.h"
 #include "input.h"
 #include "padstate.h"
-#include "event.h"
 
+class System;
 class TextStyle;
 class Page;
 class SigList;
@@ -63,6 +62,7 @@ class BBTrack;
 class MidiEvent;
 struct MNote;
 class Excerpt;
+class EventMap;
 
 struct Style;
 struct SigEvent;
@@ -84,6 +84,28 @@ class ScoreView {
       };
 
 //---------------------------------------------------------
+//   MeasureBaseList
+//---------------------------------------------------------
+
+class MeasureBaseList {
+      int _size;
+      MeasureBase* _first;
+      MeasureBase* _last;
+
+      void push_back(MeasureBase* e);
+      void push_front(MeasureBase* e);
+
+   public:
+      MeasureBaseList();
+      MeasureBase* first() const { return _first; }
+      MeasureBase* last()  const { return _last; }
+      void clear()               { _first = _last = 0; }
+      void add(MeasureBase*);
+      void remove(MeasureBase*);
+      void change(MeasureBase* o, MeasureBase* n);
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -91,6 +113,8 @@ class Score : public QObject {
       Q_OBJECT
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
+
+      MeasureBaseList _measures;           // here are the notes
 
       PadState   _padState;
       InputState _is;
@@ -329,8 +353,7 @@ class Score : public QObject {
       void searchSelectedElements();
 
       bool needLayout() const;
-      void doLayout();
-      void reLayout(Measure*);
+//      void doLayout();
 
       void upDown(bool up, bool octave);
       Element* searchNote(int tick, int track) const;
@@ -514,6 +537,7 @@ class Score : public QObject {
 
       QList<Excerpt*>* excerpts() { return &_excerpts; }
       Score* createExcerpt(Excerpt*);
+      MeasureBaseList* measures()  { return &_measures; }
       };
 
 extern Score* gscore;

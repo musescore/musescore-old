@@ -23,6 +23,10 @@
 
 #include "text.h"
 
+//---------------------------------------------------------
+//   Dyn
+//---------------------------------------------------------
+
 struct Dyn {
       int textStyle;
       int velocity;           ///< associated midi velocity (0-127, -1 = none)
