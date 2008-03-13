@@ -29,6 +29,7 @@
 #include "layout.h"
 #include "chordlist.h"
 #include "score.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList

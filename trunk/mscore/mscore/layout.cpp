@@ -38,6 +38,7 @@
 #include "barline.h"
 #include "repeat.h"
 #include "box.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   intmaxlog
@@ -46,6 +47,24 @@
 static inline int intmaxlog(int n)
       {
       return (n > 0 ? qMax(int(::ceil(::log(double(n))/::log(double(2)))), 5) : 0);
+      }
+
+//---------------------------------------------------------
+//   first
+//---------------------------------------------------------
+
+MeasureBase* ScoreLayout::first() const
+      {
+      return _score->measures()->first();
+      }
+
+//---------------------------------------------------------
+//   last
+//---------------------------------------------------------
+
+MeasureBase* ScoreLayout::last()  const
+      {
+      return _score->measures()->last();
       }
 
 //---------------------------------------------------------
@@ -66,6 +85,7 @@ ScoreLayout::ScoreLayout(Score* score)
       _needLayout = false;
       _pageFormat = new PageFormat;
       _paintDevice = _score->canvas();
+      startLayout = 0;
       }
 
 ScoreLayout::~ScoreLayout()
@@ -85,7 +105,7 @@ Element* Score::searchNote(int tick, int track) const
       int startTrack = track;
       int endTrack   = startTrack + 1;
 
-      for (const MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (const MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = (Measure*)mb;
@@ -128,7 +148,13 @@ void ScoreLayout::doLayout()
       {
       ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
-
+#if 0
+      if (startLayout) {
+            doReLayout();
+            startLayout = 0;
+            // return;
+            }
+#endif
       if (first() == 0) {
             // score is empty
             foreach(Page* page, _pages)
@@ -727,106 +753,6 @@ void ScoreLayout::setPageFormat(const PageFormat& pf)
       }
 
 //---------------------------------------------------------
-//   push_back
-//---------------------------------------------------------
-
-void MeasureBaseList::push_back(MeasureBase* e)
-      {
-      ++_size;
-      if (_last) {
-            _last->setNext(e);
-            e->setPrev(_last);
-            e->setNext(0);
-            }
-      else {
-            _first = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _last = e;
-      }
-
-//---------------------------------------------------------
-//   push_front
-//---------------------------------------------------------
-
-void MeasureBaseList::push_front(MeasureBase* e)
-      {
-      ++_size;
-      if (_first) {
-            _first->setPrev(e);
-            e->setNext(_first);
-            e->setPrev(0);
-            }
-      else {
-            _last = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _first = e;
-      }
-
-//---------------------------------------------------------
-//   add
-//    insert e before e->next()
-//---------------------------------------------------------
-
-void MeasureBaseList::add(MeasureBase* e)
-      {
-      MeasureBase* el = e->next();
-      if (el == 0) {
-            push_back(e);
-            return;
-            }
-      if (el == _first) {
-            push_front(e);
-            return;
-            }
-      ++_size;
-      e->setNext(el);
-      e->setPrev(el->prev());
-      el->prev()->setNext(e);
-      el->setPrev(e);
-      }
-
-//---------------------------------------------------------
-//   erase
-//---------------------------------------------------------
-
-void MeasureBaseList::remove(MeasureBase* el)
-      {
-      --_size;
-      if (el->prev())
-            el->prev()->setNext(el->next());
-      else
-            _first = el->next();
-      if (el->next())
-            el->next()->setPrev(el->prev());
-      else
-            _last = el->prev();
-      }
-
-//---------------------------------------------------------
-//   change
-//---------------------------------------------------------
-
-void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
-      {
-      nb->setPrev(ob->prev());
-      nb->setNext(ob->next());
-      if (ob->prev())
-            ob->prev()->setNext(nb);
-      if (ob->next())
-            ob->next()->setPrev(nb);
-      if (ob == _last)
-            _last = nb;
-      if (ob == _first)
-            _first = nb;
-      foreach(Element* e, *nb->el())
-            e->setParent(nb);
-      }
-
-//---------------------------------------------------------
 //   setInstrumentNames
 //---------------------------------------------------------
 
@@ -944,22 +870,13 @@ void ScoreLayout::searchHiddenNotes()
       }
 
 //---------------------------------------------------------
-//   reLayout
-//---------------------------------------------------------
-
-void ScoreLayout::reLayout(Measure*)
-      {
-      printf("reLayout\n");
-      }
-
-//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
 void ScoreLayout::add(Element* el)
       {
       if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            _measures.add((MeasureBase*)el);
+            _score->measures()->add((MeasureBase*)el);
             }
       else {
             el->setParent(this);
@@ -974,7 +891,7 @@ void ScoreLayout::add(Element* el)
 void ScoreLayout::remove(Element* el)
       {
       if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            _measures.remove((MeasureBase*)el);
+            _score->measures()->remove((MeasureBase*)el);
             }
       else {
             int idx = _gel.indexOf(el);
@@ -992,10 +909,29 @@ void ScoreLayout::remove(Element* el)
 void ScoreLayout::change(Element* o, Element* n)
       {
       if (n->type() == MEASURE || n->type() == HBOX || n->type() == VBOX)
-            _measures.change((MeasureBase*)o, (MeasureBase*)n);
+            _score->measures()->change((MeasureBase*)o, (MeasureBase*)n);
       else {
             remove(o);
             add(n);
             }
+      }
+
+//---------------------------------------------------------
+//   reLayout
+//---------------------------------------------------------
+
+void ScoreLayout::reLayout(Measure* m)
+      {
+      _needLayout = true;
+      startLayout = m;
+      }
+
+//---------------------------------------------------------
+//   doReLayout
+//---------------------------------------------------------
+
+void ScoreLayout::doReLayout()
+      {
+      printf("doReLayout\n");
       }
 

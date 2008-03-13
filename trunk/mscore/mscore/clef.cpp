@@ -31,6 +31,7 @@
 #include "score.h"
 #include "staff.h"
 #include "viewer.h"
+#include "system.h"
 
 // FIXME!
 // only values for CLEF_G..CLEF_G3 CLEF_F and CLEF_C3 are

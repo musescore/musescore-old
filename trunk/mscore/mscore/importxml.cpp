@@ -722,10 +722,10 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       maxtick        = 0;
       lastMeasureLen = 0;
 
-      if (!score->layout()->first()) {
+      if (!score->measures()->first()) {
             VBox* vbox  = new VBox(score);
             vbox->setTick(tick);
-            score->layout()->add(vbox);
+            score->measures()->add(vbox);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
@@ -798,7 +798,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       // search measure for tick
       Measure* measure = 0;
       Measure* lastMeasure = 0;
-      for (MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -817,7 +817,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure  = new Measure(score);
             measure->setTick(tick);
             measure->setNo(number);
-            score->layout()->add(measure);
+            score->measures()->add(measure);
             }
 
       // initialize voice list

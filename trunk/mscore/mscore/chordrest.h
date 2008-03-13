@@ -22,7 +22,6 @@
 #define __CHORDREST_H__
 
 #include "globals.h"
-#include "sym.h"
 #include "symbol.h"
 
 class Score;

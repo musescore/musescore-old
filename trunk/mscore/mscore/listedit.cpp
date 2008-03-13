@@ -44,6 +44,7 @@
 #include "volta.h"
 #include "line.h"
 #include "textline.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   ElementItem

@@ -5,6 +5,9 @@
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
+//  beam tables from GNU LilyPond music typesetter
+//  (c) 2000--2007 Jan Nieuwenhuizen <janneke@gnu.org>
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
 //
@@ -28,9 +31,7 @@
 #include "note.h"
 #include "tuplet.h"
 #include "layout.h"
-
-// beam tables from GNU LilyPond music typesetter
-// (c) 2000--2007 Jan Nieuwenhuizen <janneke@gnu.org>
+#include "system.h"
 
 //---------------------------------------------------------
 //   startBeam

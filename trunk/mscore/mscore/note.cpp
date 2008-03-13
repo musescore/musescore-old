@@ -44,6 +44,7 @@
 #include "icons.h"
 #include "utils.h"
 #include "image.h"
+#include "system.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},

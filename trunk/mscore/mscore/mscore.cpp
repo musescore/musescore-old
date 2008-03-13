@@ -1617,7 +1617,8 @@ int main(int argc, char* argv[])
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();
-            cs->doLayout();
+//            cs->doLayout();
+            cs->layout();
 
             bool rv;
             if (fn.endsWith(".msc")) {

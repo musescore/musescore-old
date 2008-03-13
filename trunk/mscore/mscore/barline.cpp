@@ -27,6 +27,7 @@
 #include "sym.h"
 #include "viewer.h"
 #include "staff.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   BarLine

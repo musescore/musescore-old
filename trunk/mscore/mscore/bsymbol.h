@@ -22,7 +22,6 @@
 #define __BSYMBOL_H__
 
 #include "element.h"
-#include "style.h"
 
 //---------------------------------------------------------
 //   BSymbol

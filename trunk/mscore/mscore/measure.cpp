@@ -72,6 +72,7 @@
 #include "box.h"
 #include "harmony.h"
 #include "tempotext.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   MStaff

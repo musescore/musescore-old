@@ -27,6 +27,7 @@
 #include "restproperties.h"
 #include "utils.h"
 #include "tuplet.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Rest

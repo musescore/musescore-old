@@ -555,7 +555,7 @@ void MuseScore::editInstrList()
                               Staff* staff = sli->staff;
                               int sidx = staff->idx();
                               int eidx = sidx + 1;
-                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
+                              for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
                                     if (mb->type() != MEASURE)
                                           continue;
                                     Measure* m = (Measure*)mb;
@@ -573,7 +573,7 @@ void MuseScore::editInstrList()
                               cs->insertStaff(staff, staffIdx);
                               cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
 
-                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
+                              for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
                                     if (mb->type() != MEASURE)
                                           continue;
                                     Measure* m = (Measure*)mb;
@@ -642,7 +642,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
       int sidx = this->staffIdx(part);
       int eidx = sidx + part->nstaves();
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -720,7 +720,7 @@ void Score::cmdRemovePart(Part* part)
       //
       //    adjust measures
       //
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -847,7 +847,7 @@ void Score::sortStaves(QList<int> dst)
             }
       _staves = dl;
 
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;

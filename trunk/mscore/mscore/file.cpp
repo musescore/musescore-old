@@ -62,6 +62,7 @@
 #include "timesig.h"
 #include "box.h"
 #include "excerpt.h"
+#include "system.h"
 
 double printerMag = 1.0;
 
@@ -466,8 +467,7 @@ void MuseScore::newFile()
             score->fileInfo()->setFile(createDefaultName());
 
             int m = 0;
-            ScoreLayout* layout = score->layout();
-            for (MeasureBase* mb = layout->first(); mb; mb = mb->next()) {
+            for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
                   if (mb->type() == MEASURE)
                         ++m;
                   }
@@ -492,7 +492,7 @@ void MuseScore::newFile()
       QString poet      = newWizard->poet();
       QString copyright = newWizard->copyright();
       if (!title.isEmpty() || !subtitle.isEmpty() || !composer.isEmpty() || !poet.isEmpty()) {
-            MeasureBase* measure = score->layout()->first();
+            MeasureBase* measure = score->measures()->first();
             if (measure->type() != VBOX) {
                   measure = new VBox(score);
                   measure->setTick(0);
@@ -971,12 +971,12 @@ printerMag = DPI / oldDPI;
       setSpatium(_spatium * DPI / oldDPI);
       QPaintDevice* oldPaintDevice = layout()->paintDevice();
       layout()->setPaintDevice(printer);
-      doLayout();
+      layout()->doLayout();
 
       QList<const Element*> el;
       foreach (const Element* element, *layout()->gel())
             element->collectElements(el);
-      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             m->collectElements(el);
             }
 
@@ -1015,7 +1015,7 @@ printerMag = 1.0;
       DPMM      = DPI / INCH;                     // dots/mm
       setSpatium(oldSpatium);
       layout()->setPaintDevice(oldPaintDevice);
-      doLayout();
+      layout()->doLayout();
       }
 
 //---------------------------------------------------------
@@ -1146,13 +1146,13 @@ bool Score::savePng(const QString& name)
       QPaintDevice* oldPaintDevice = layout()->paintDevice();
       layout()->setPaintDevice(&printer);
 
-      doLayout();
+      layout()->doLayout();
 
       canvas()->paintLasso(p);
       bool rv = printer.save(name, "png");
 
       layout()->setPaintDevice(oldPaintDevice);
-      doLayout();
+      layout()->doLayout();
       return rv;
       }
 
