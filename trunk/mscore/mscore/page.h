@@ -65,7 +65,7 @@ struct PageFormat {
       PageFormat();
       double width() const;         // return width in inch
       double height() const;        // height in inch
-      const char* name() const;
+      QString name() const;
       void read(QDomElement);
       void write(Xml&);
       };
