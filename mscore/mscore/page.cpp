@@ -275,9 +275,9 @@ PageFormat::PageFormat()
 //   name
 //---------------------------------------------------------
 
-const char* PageFormat::name() const
+QString PageFormat::name() const
       {
-      return paperSizes[size].name;
+      return QString(paperSizes[size].name);
       }
 
 //---------------------------------------------------------
@@ -368,11 +368,11 @@ void PageFormat::read(QDomElement e)
                   }
             else if (tag == "page-height") {
                   size = paperSizeNameToIndex("Custom");
-                  _height = val.toDouble();
+                  _height = val.toDouble() * 0.5 / PPI;
                   }
             else if (tag == "page-width") {
                   size = paperSizeNameToIndex("Custom");
-                  _width = val.toDouble();
+                  _width = val.toDouble() * .5 / PPI;
                   }
             else
                   domError(e);

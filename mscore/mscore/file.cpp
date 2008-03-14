@@ -350,7 +350,14 @@ bool MuseScore::saveAs()
             if (!fn.endsWith(".msc"))
                   fn.append(".msc");
             QFileInfo fi(fn);
-            return saveFile(fi);
+            rv = saveFile(fi);
+            if (rv && cs->created()) {
+                  cs->fileInfo()->setFile(fn);
+                  setWindowTitle("MuseScore: " + cs->name());
+                  tab->setTabText(tab->currentIndex(), cs->name());
+                  cs->setCreated(false);
+                  }
+            return rv;
             }
       if (selectedFilter == fl[1]) {
             // save as MusicXML *.xml file

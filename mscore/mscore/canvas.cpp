@@ -633,6 +633,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   _score->addRefresh(shadowNote->abbox());
                   setShadowNote(p);
                   _score->addRefresh(shadowNote->abbox());
+                  _score->end();
                   break;
 
             case MAG:

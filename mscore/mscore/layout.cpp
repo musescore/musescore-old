@@ -40,6 +40,8 @@
 #include "box.h"
 #include "system.h"
 
+// #define OPTIMIZE_LAYOUT
+
 //---------------------------------------------------------
 //   intmaxlog
 //---------------------------------------------------------
@@ -149,11 +151,13 @@ void ScoreLayout::doLayout()
       ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
 
+#ifdef OPTIMIZE_LAYOUT
       if (startLayout) {
             doReLayout();
             startLayout = 0;
-            // return;
+            return;
             }
+#endif
 
       if (first() == 0) {
             // score is empty
@@ -932,6 +936,101 @@ void ScoreLayout::reLayout(Measure* m)
 
 void ScoreLayout::doReLayout()
       {
-//      printf("doReLayout\n");
+      if (startLayout->type() == MEASURE) {
+            for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
+                  ((Measure*)startLayout)->layout0(staffIdx);
+            }
+
+      // collect row of systems
+      System* curSystem   = startLayout->system();
+      Page* page  = curSystem->page();
+      QList<System*>* psl = page->systems();
+
+      int i = 0;
+      for(; i < psl->size(); ++i) {
+            if (psl->at(i) == curSystem) {
+                  printf("curSystem %d\n", i);
+                  break;
+                  }
+            }
+      QList<System*> sl;
+      double y = curSystem->y();
+      while (i) {
+            if (psl->at(i-1)->y() != y)
+                  break;
+            --i;
+            }
+      for (; i < psl->size(); ++i) {
+            if (psl->at(i)->y() != y)
+                  break;
+            sl.append(psl->at(i));
+            }
+
+#if 0
+      //-----------------------------------------
+      //    pass I:  process pages
+      //-----------------------------------------
+
+      curSystem   = startLayout->system();
+      curMeasure  = curSystem->measures()->front();
+      firstSystem = false;
+
+      //---------------------------------------------------
+      //   pass II:  place ties & slurs & hairpins & beams
+      //---------------------------------------------------
+
+      foreach(MeasureBase* mb, curSystem->measures()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            m->layout2(this);
+            }
+
+      foreach(Element* el, _gel)
+            el->layout(this);
+
+      //---------------------------------------------------
+      //    remove remaining pages and systems
+      //---------------------------------------------------
+
+      int n = _pages.size() - curPage;
+      for (int i = 0; i < n; ++i) {
+            Page* page = _pages.takeLast();
+            delete page;
+            }
+
+      n = _systems.size() - curSystem;
+      for (int i = 0; i < n; ++i) {
+            System* system = _systems.takeLast();
+            delete system;
+            }
+#endif
+
+      //---------------------------------------------------
+      //    rebuild bspTree
+      //---------------------------------------------------
+
+      QRectF r;
+      QList<const Element*> el;
+      for (const MeasureBase* m = first(); m; m = m->next())
+            m->collectElements(el);
+      foreach(const Page* page, _pages) {
+            r |= page->abbox();
+            page->collectElements(el);
+            }
+      foreach (const Element* element, _gel) {
+            if (element->track() != -1) {
+                  if (!element->staff()->show())
+                        continue;
+                  }
+            element->collectElements(el);
+            }
+
+      int depth = intmaxlog(el.size());
+      bspTree.initialize(r, depth);
+      for (int i = 0; i < el.size(); ++i) {
+            const Element* e = el.at(i);
+            bspTree.insert(e);
+            }
       }
 
