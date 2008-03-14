@@ -148,13 +148,13 @@ void ScoreLayout::doLayout()
       {
       ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
-#if 0
+
       if (startLayout) {
             doReLayout();
             startLayout = 0;
             // return;
             }
-#endif
+
       if (first() == 0) {
             // score is empty
             foreach(Page* page, _pages)
@@ -932,6 +932,6 @@ void ScoreLayout::reLayout(Measure* m)
 
 void ScoreLayout::doReLayout()
       {
-      printf("doReLayout\n");
+//      printf("doReLayout\n");
       }
 

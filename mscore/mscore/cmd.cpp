@@ -169,8 +169,10 @@ void Score::end()
             updateAll = true;
             _layout->layout();
             }
-      else if (layoutStart)
+      else if (layoutStart) {
+            updateAll = true;
             _layout->reLayout(layoutStart);
+            }
 
       foreach(Viewer* v, viewer) {
             if (updateAll)
@@ -973,8 +975,8 @@ void Score::upDown(bool up, bool octave)
             Note* note = (Note*)e;
             while (note->tieBack())
                   note = note->tieBack()->startNote();
-//            if (layoutStart == 0)
-//                  layoutStart = note->chord()->segment()->measure();
+            if (layoutStart == 0)
+                  layoutStart = note->chord()->segment()->measure();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
                   iElement ii;
                   for (ii = el.begin(); ii != el.end(); ++ii) {
@@ -1009,7 +1011,7 @@ void Score::upDown(bool up, bool octave)
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
-      layoutAll = true;
+      layoutAll = false;
       }
 
 //---------------------------------------------------------
