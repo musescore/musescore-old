@@ -145,6 +145,7 @@ Preferences::Preferences()
       startScore         = ":/data/demo.msc";
       instrumentList     = ":/data/instruments.xml";
       imagePath          = "~/mscore/images";
+      workingDirectory   = ".";
       showSplashScreen   = true;
       rewind.type        = -1;
       rewind.type        = -1;
@@ -213,6 +214,7 @@ void Preferences::write()
       s.setValue("layoutBreakColor",   layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
       s.setValue("imagePath",          imagePath);
+      s.setValue("workingDirectory",   workingDirectory);
       s.setValue("showSplashScreen",   showSplashScreen);
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
       s.setValue("playRepeats",        playRepeats);
@@ -293,6 +295,7 @@ void Preferences::read()
       layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
       imagePath          = s.value("imagePath", "~/mscore/images").toString();
+      workingDirectory   = s.value("workingDirectory", ".").toString();
       showSplashScreen   = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
       playRepeats        = s.value("playRepeats", true).toBool();
@@ -443,6 +446,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             }
       sessionScore->setText(preferences.startScore);
       imagePath->setText(preferences.imagePath);
+      workingDirectory->setText(preferences.workingDirectory);
       showSplashScreen->setChecked(preferences.showSplashScreen);
       expandRepeats->setChecked(preferences.midiExpandRepeats);
       instrumentList->setText(preferences.instrumentList);
@@ -480,9 +484,10 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(imagePathButton,      SIGNAL(clicked()), SLOT(selectImagePath()));
-      connect(instrumentListButton, SIGNAL(clicked()), SLOT(selectInstrumentList()));
-      connect(startWithButton,      SIGNAL(clicked()), SLOT(selectStartWith()));
+      connect(imagePathButton,        SIGNAL(clicked()), SLOT(selectImagePath()));
+      connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
+      connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
+      connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
       sfChanged = false;
 
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
@@ -663,6 +668,21 @@ void PreferenceDialog::selectImagePath()
       }
 
 //---------------------------------------------------------
+//   selectWorkingDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectWorkingDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose WorkingDirectory"),
+         workingDirectory->text()
+         );
+      if (!s.isNull())
+            workingDirectory->setText(s);
+      }
+
+//---------------------------------------------------------
 //   selectInstrumentList
 //---------------------------------------------------------
 
@@ -794,6 +814,7 @@ void PreferenceDialog::apply()
             preferences.sessionStart = SCORE_SESSION;
       preferences.startScore         = sessionScore->text();
       preferences.imagePath          = imagePath->text();
+      preferences.workingDirectory   = workingDirectory->text();
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
       preferences.instrumentList     = instrumentList->text();

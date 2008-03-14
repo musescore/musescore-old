@@ -1,3 +1,5 @@
+14.3.8 (ws)
+      - added "working directory" to preferences
 13.3.8 (ws)
       - fix crash if page height is too small
 12.3.8 (ws)
