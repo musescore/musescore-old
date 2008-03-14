@@ -77,6 +77,7 @@ struct Preferences {
       SessionStart sessionStart;
       QString startScore;
       QString imagePath;
+      QString workingDirectory;
       bool showSplashScreen;
       MidiRemote rewind, play, stop;
       MidiRemote len1, len2, len4, len8, len16, len32;
@@ -120,6 +121,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectBgWallpaper();
       void selectSoundFont();
       void selectImagePath();
+      void selectWorkingDirectory();
       void selectInstrumentList();
       void selectStartWith();
       void playPanelCurClicked();
