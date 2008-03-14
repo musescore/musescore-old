@@ -1130,7 +1130,7 @@ Shortcut MuseScore::sc[] = {
          &abeamIcon
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
          QT_TR_NOOP("Palette"),
          Qt::Key_F9,
@@ -1148,7 +1148,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Play Panel")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-navigator",
          QT_TR_NOOP("Navigator"),
          Qt::Key_F12,

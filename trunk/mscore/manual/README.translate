@@ -12,16 +12,12 @@ Step 1:
             below "echo "TRANSLATIONS =":
                echo "     $1/share/locale/mscore_fr.ts \\"
 
-      Execute the script to create a current "mscore.pro" file
-
-            ./gen-qt-projectfile
-
 Step 2:
       Enter the build directory and type:
 
             make lupdate
 
-      This generates the file "locale/mscore_fr.ts".
+      This generates the file "mscore/share/locale/mscore_fr.ts".
 
 Step 3:
       Edit "locale/mscore_fr.ts" manually or use the Qt "linguist" tool:
@@ -30,12 +26,14 @@ Step 3:
 
 Step 4:
      Save the edited file "mscore_fr.ts" from linguist and
-     in the build directory type
+     then in the build directory type
 
             make lrelease
 
+      This produces the compressed translation file mscore_fr.qm.
+
 Step 5:
-      install the *.qm files: as superuser type
+      install the *.qm files: as superuser type in the build dirctory:
 
             make install
 

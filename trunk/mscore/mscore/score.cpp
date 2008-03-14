@@ -430,8 +430,8 @@ void Score::read(QString name)
 
 void Score::write(Xml& xml)
       {
-      xml.tag("Division", division);
       xml.tag("Spatium", _spatium / DPMM);
+      xml.tag("Division", division);
       xml.curTrack = -1;
       if (editObject) {                          // in edit mode?
             endCmd();

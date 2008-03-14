@@ -11,8 +11,8 @@
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653457">Feature Request</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653455">Support Requests</a></b></li>
       <li><b>Translations</b><br>
-            If you like to contribute a translation of <i>MuseScore</i> please look at
-            <code>.../mscore/doc/README.translate</code> for more info.
+            If you like to contribute a translation of <i>MuseScore</i> read
+            <a href="translations.php">translations</a> for more info.
             </li>
       <li> If you have suggestions, comments, patches, questions, problems or whatever
           please mail me <a href=mailto:ws at seh.de>ws at seh.de</a>
