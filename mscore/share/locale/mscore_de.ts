@@ -4272,6 +4272,10 @@ failed: </source>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore Datei (*.msc);;All (*)</translation>
     </message>
+    <message>
+        <source>Choose WorkingDirectory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
@@ -4638,6 +4642,10 @@ failed: </source>
     <message>
         <source>Right-Port:</source>
         <translation>Rechter Port:</translation>
+    </message>
+    <message>
+        <source>Working Directory:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

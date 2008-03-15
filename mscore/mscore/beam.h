@@ -82,6 +82,8 @@ class Beam : public Element {
       QList<ChordRest*> elements;
       BeamSegmentList beamSegments;
 
+      void layoutCrossStaff(ScoreLayout* layout);
+
    public:
       Beam(Score* s) : Element(s) {}
       ~Beam();

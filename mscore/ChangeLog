@@ -1,4 +1,6 @@
-15.3.8 (lv)
+15.3.8 (ws)
+      - fix support for cross beams
+      (lv)
       - MusicXML import of <degree> element (not handled yet)
 14.3.8 (ws)
       - added "working directory" to preferences
