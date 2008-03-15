@@ -203,7 +203,7 @@ void Chord::setStem(Stem* s)
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
       const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
-      return note->stemPos(upFlag);
+      return note->stemPos(upFlag) + pos() + segment()->pos();
       }
 
 //---------------------------------------------------------
@@ -392,9 +392,8 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   _hook->setMag(mag());
                   }
             _hook->setSubtype(hookIdx);
-            qreal lw = point(score()->style()->stemWidth) * .5;
-            QPointF npos  = stemPos(up, false);
-            QPointF p(npos + QPointF(lw, 0.0));
+            qreal lw     = point(score()->style()->stemWidth) * .5;
+            QPointF npos = (up ? downNote() : upNote())->stemPos(up);
             // set x-pos to get correct boundingRect width for layout
             _hook->setPos(npos + QPointF(lw, 0.0));
             }
@@ -486,7 +485,9 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
       double pstemLen = point(stemLen);
-      QPointF npos    = stemPos(up, false);
+
+      QPointF npos = (up ? downNote() : upNote())->stemPos(up);
+
       if (up)
             npos += QPointF(0, -pstemLen);
 

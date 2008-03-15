@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.5">
+  <Mag>1</Mag>
+  <xoff>-16.51</xoff>
+  <yoff>16.51</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Mag>1</Mag>
-  <xoff>8.67833</xoff>
-  <yoff>7.83167</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -119,9 +119,6 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">Pno.</p></body></html>
       </shortName>
     <Instrument>
-      <midiChannel>0</midiChannel>
-      <midiProgram>0</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -220,13 +217,34 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
+      <Chord>
+        <ticklen>360</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>47</pitch>
+          <tpc>19</tpc>
+          <move>1</move>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="53" tpc="13"/>
+        <Note pitch="59" tpc="19"/>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
       <Rest>
-        <ticklen>960</ticklen>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>120</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>120</ticklen>
         </Rest>
       </Measure>
     <Measure number="4">
       <Rest>
-        <ticklen>1920</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     </Staff>

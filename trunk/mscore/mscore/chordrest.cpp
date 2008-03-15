@@ -207,7 +207,7 @@ int ChordRest::beams() const
       else if (t < division)
             return 1;
       else
-            printf("ChordRest::beams(): unsupported ticlLen %d\n", t);
+            printf("ChordRest::beams(): unsupported tickLen %d\n", t);
       return 0;
       }
 

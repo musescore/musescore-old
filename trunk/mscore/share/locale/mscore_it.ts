@@ -4273,6 +4273,10 @@ fallito: </translation>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Choose WorkingDirectory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
@@ -4638,6 +4642,10 @@ fallito: </translation>
     </message>
     <message>
         <source>Right-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Working Directory:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -321,7 +321,10 @@ QPointF Note::stemPos(bool upFlag) const
       double sw = point(score()->style()->stemWidth) * .5 * mag();
       double x  = pos().x();
       double y  = pos().y();
-
+      if (staffMove()) {
+            System* system = chord()->measure()->system();
+            y  += system->staff(staffIdx() + staffMove())->y() - system->staff(staffIdx())->y();
+            }
       if (_mirror)
             upFlag = !upFlag;
       qreal yo = _spatium * .2 * mag();
