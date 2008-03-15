@@ -24,6 +24,7 @@
 #ifndef __HARMONY_H__
 #define __HARMONY_H__
 
+#include "QList"
 #include "text.h"
 
 //---------------------------------------------------------
@@ -65,6 +66,26 @@ class HChord {
       };
 
 //---------------------------------------------------------
+//   class HDegree
+//---------------------------------------------------------
+
+enum HDegreeType {
+      ADD, ALTER, SUBTRACT
+      };
+
+class HDegree {
+      int _value;
+      int _alter;
+      int _type;
+
+   public:
+      HDegree(int v, int a, int t) { _value = v; _alter = a; _type = t; }
+      int value() const { return _value; }
+      int alter() const { return _alter; }
+      int type() const  { return _type; }
+};
+
+//---------------------------------------------------------
 //   class Harmony
 //---------------------------------------------------------
 
@@ -72,6 +93,7 @@ class Harmony : public Text {
       unsigned char _base;
       int _extension;
       unsigned char _root;
+      QList<HDegree> _degreeList;
 
    public:
       Harmony(Score*);
@@ -90,6 +112,7 @@ class Harmony : public Text {
       void setExtension(unsigned char val) { _extension = val;  }
       unsigned char root() const           { return _root;      }
       void setRoot(unsigned char val)      { _root = val;       }
+      void addDegree(HDegree d)            { _degreeList << d;  }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
