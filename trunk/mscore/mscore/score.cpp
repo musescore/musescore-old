@@ -421,7 +421,8 @@ void Score::read(QString name)
                         }
                   }
             }
-      layoutAll = true;
+      _layout->doLayout();
+      layoutAll = false;
       }
 
 //---------------------------------------------------------
