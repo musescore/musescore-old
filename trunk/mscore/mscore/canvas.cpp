@@ -508,7 +508,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
            return;
       if (state == LASSO || state == NOTE_ENTRY)
             _score->setLayoutAll(false);  // DEBUG
-//      _score->end();
+      _score->end();
       }
 
 //---------------------------------------------------------
@@ -633,7 +633,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   _score->addRefresh(shadowNote->abbox());
                   setShadowNote(p);
                   _score->addRefresh(shadowNote->abbox());
-                  _score->end();
                   break;
 
             case MAG:
