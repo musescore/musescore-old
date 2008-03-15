@@ -2457,6 +2457,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       QString bassStep;
       int bassAlter = 0;
 
+      Harmony* ha = new Harmony(measure->score());
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "root") {
@@ -2507,17 +2509,36 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                         }
                   }
             else if (tag == "degree") {
+                  int degreeValue = 0;
+                  int degreeAlter = 0;
+                  QString degreeType = "";
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "degree-value") {
+                              degreeValue = ee.text().toInt();
                               }
                         else if (tag == "degree-alter") {
+                              degreeAlter = ee.text().toInt();
                               }
                         else if (tag == "degree-type") {
-                              // add alter
+                              degreeType = ee.text();
                               }
                         else
                               domError(ee);
+                        }
+                  if (degreeValue <= 0 || degreeValue > 13
+                      || degreeAlter < -2 || degreeAlter > 2
+                      || (degreeType != "add" && degreeType != "alter" && degreeType != "subtract")) {
+                        printf("incorrect degree: degreeValue=%d degreeAlter=%d degreeType=%s\n",
+                               degreeValue, degreeAlter, qPrintable(degreeType));
+                        }
+                  else {
+                        if (degreeType == "add")
+                              ha->addDegree(HDegree(degreeValue, degreeAlter, ADD));
+                        else if (degreeType == "alter")
+                              ha->addDegree(HDegree(degreeValue, degreeAlter, ALTER));
+                        else if (degreeType == "subtract")
+                              ha->addDegree(HDegree(degreeValue, degreeAlter, SUBTRACT));
                         }
                   }
             else if (tag == "level") {
@@ -2530,7 +2551,6 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   domError(e);
             }
 
-      Harmony* ha = new Harmony(measure->score());
       ha->setTick(tick);
       ha->setRoot(getStep(rootStep, rootAlter));
       ha->setBase(getStep(bassStep, bassAlter));
