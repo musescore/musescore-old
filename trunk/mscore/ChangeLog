@@ -1,4 +1,6 @@
 15.3.8 (ws)
+      - fix bug which prevented auto beams for voices != 0 in some
+        situations
       - fix support for cross beams
       (lv)
       - MusicXML import of <degree> element (not handled yet)
