@@ -112,7 +112,7 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
       QTextStream os(&ff);
       os.setCodec("UTF-8");
       os << "<?php\n";
-      os << "  $file=\"reference.php\";\n";
+      os << "  $file=\"man/reference.php\";\n";
       os << "  $level=\"../..\";";
       os << "  require(\"../header.html\");\n";
       os << "  ?>\n";

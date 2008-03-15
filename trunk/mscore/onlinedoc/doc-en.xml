@@ -961,7 +961,7 @@
     All notes and rests on this measure are then replaced by a one-bar rest.
     </page>
 
-<page name="rest" header="Hairpins">
+<page name="hairpins" header="Hairpins">
     <index>Crescendo</index>
     <index>Diminuendo</index>
     <index>Decrescendo</index>

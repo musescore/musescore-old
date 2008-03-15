@@ -24,7 +24,7 @@
 #ifndef __HARMONY_H__
 #define __HARMONY_H__
 
-#include "QList"
+// #include "QList"
 #include "text.h"
 
 //---------------------------------------------------------
