@@ -270,6 +270,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
 
       int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
+            int curTick   = tick();
             ChordRest* a1 = 0;      // start of (potential) beam
             Beam* beam    = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -291,8 +292,17 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         continue;
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
+                  int len       = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
 
-                  int len      = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
+                  if (curTick != cr->tick() && beam) {
+                        // gap found; this is possible for voices != 0
+                        // end current beam
+                        beam->layout1(layout);
+                        beam = 0;
+                        a1   = 0;
+                        }
+                  curTick += len;
+
                   bool tooLong = len >= division;
                   if (beam) {
                         //---------------------------------------
@@ -307,8 +317,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               }
                         int z, n;
                         _score->sigmap->timesig(cr->tick(), z, n);
-                        bool styleBreak = endBeam(z, n, cr->tickLen(), cr->tick() - tick());
-                        if ((bm != BEAM_MID) && (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO)) {
+                        bool beamEnd = tooLong || bm == BEAM_BEGIN || bm == BEAM_NO;
+                        if (!beamEnd && (bm != BEAM_MID))
+                              beamEnd = endBeam(z, n, cr->tickLen(), cr->tick() - tick());
+                        if (beamEnd) {
                               beam->layout1(layout);
                               beam = 0;
                               a1   = 0;
@@ -328,12 +340,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         }
                   else {
 newBeam:
-                        bool hint = true;
-                        if (tooLong || (bm == BEAM_NO))
-                              hint = false;
-//                        if (hint && a1 && endBeam(z, n, cr->tickLen(), cr->tick() - tick()))
-//                              hint = false;
-                        if (hint) {
+                        if (!tooLong && (bm != BEAM_NO)) {
                               if (a1 == 0)
                                     a1 = cr;
                               else {
@@ -762,12 +769,9 @@ void Beam::layout(ScoreLayout* layout)
 //   layoutCrossStaff
 //---------------------------------------------------------
 
-void Beam::layoutCrossStaff(ScoreLayout* layout)
+void Beam::layoutCrossStaff(ScoreLayout*)
       {
-//      int upCount    = 0;
       int maxTickLen = 0;
-//      const ChordRest* a1  = elements.front();
-//      const ChordRest* a2  = elements.back();
       Chord* c1      = 0;
       Chord* c2      = 0;
       int move       = 0;
