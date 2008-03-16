@@ -473,8 +473,86 @@ QString Harmony::rootName(int root)
 //   harmonyName
 //---------------------------------------------------------
 
+// convert degrees to semitones
+
+static int degreeTable[] = {
+      // 1  2  3  4  5  6   7
+      // C  D  E  F  G  A   B
+         0, 2, 4, 5, 7, 9, 11
+      };
+
+QString Harmony::harmonyName() const
+      {
+//      printf("Harmony::harmonyName(this=%p)", this);
+
+      HChord hc;
+      if (_extension >= 0 && _extension < int(sizeof(extensionNames)/sizeof(*extensionNames)))
+            hc = extensionNames[_extension].chord;
+//      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
+//      printf("\n");
+
+      if (_degreeList.isEmpty())
+            return harmonyName(root(), extension(), base());
+/*
+      // print the chord without the degree modification(s)
+      for (int i = 0; i < 12; i++)
+            if (hc.contains(i))
+                  printf(" %s", qPrintable(rootName(i+1)));
+      printf("\n");
+*/
+      // factor in the degrees
+      for (int i = 0; i < _degreeList.size(); i++) {
+            HDegree d = _degreeList[i];
+            if (d.type() == ADD) {
+//                  printf(" add degree value=%d alter=%d\n", d.value(), d.alter());
+                  hc += (degreeTable[(d.value() - 1) % 7] + d.alter());
+                  }
+            else if (d.type() == ALTER) {
+//                  printf(" alter degree value=%d alter=%d\n", d.value(), d.alter());
+                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
+                        hc -= (degreeTable[(d.value() - 1) % 7]);
+                        hc += (degreeTable[(d.value() - 1) % 7] + d.alter());
+                  }
+                  else
+                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
+                  }
+            else if (d.type() == SUBTRACT) {
+//                  printf(" subtract degree value=%d alter=%d\n", d.value(), d.alter());
+                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
+                        hc -= (degreeTable[(d.value() - 1) % 7]);
+                  }
+                  else
+                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
+                  }
+            else printf("degree type %d not supported\n", d.type());
+            }
+/*
+      // print the chord with the degree modification(s)
+      for (int i = 0; i < 12; i++)
+            if (hc.contains(i))
+                  printf(" %s", qPrintable(rootName(i+1)));
+      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
+      printf("\n");
+*/
+      // try to find the chord in extensionNames
+      for (int i = 1; i < int(sizeof(extensionNames)/sizeof(*extensionNames)); i++)
+            if (hc == extensionNames[i].chord) {
+//                  printf(" found in table as %s\n", extensionNames[i].name);
+                  return harmonyName(root(), i, base());
+                  }
+
+      // if that fails, use HChord.name()
+      QString s = hc.name(_root, 0);
+      if (_base) {
+            s += "/";
+            s += rootName(_base);
+            }
+      return s;
+      }
+
 QString Harmony::harmonyName(int root, int extension, int base)
       {
+//      printf("Harmony::harmonyName(root=%d extension=%d base=%d)", root, extension, base);
       QString s(rootName(root));
       if (extension)
             s += getExtensionName(extension);
@@ -482,6 +560,7 @@ QString Harmony::harmonyName(int root, int extension, int base)
             s += "/";
             s += rootName(base);
             }
+//      printf(" %s\n", qPrintable(s));
       return s;
       }
 
@@ -585,6 +664,7 @@ void Harmony::read(QDomElement e)
 
 void Harmony::buildText()
       {
+//      printf("Harmony::buildText()");
       setText(harmonyName());
       }
 

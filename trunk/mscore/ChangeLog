@@ -1,10 +1,12 @@
-16.3.8 (ws)
+16.3.8 (lv)
+      - first steps towards handling MusicXML <degree> element
+       (ws)
       - save visible attribute for accidentals (#1915355)
 15.3.8 (ws)
       - fix bug which prevented auto beams for voices != 0 in some
         situations
       - fix support for cross beams
-      (lv)
+       (lv)
       - MusicXML import of <degree> element (not handled yet)
 14.3.8 (ws)
       - added "working directory" to preferences

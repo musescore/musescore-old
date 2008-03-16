@@ -24,7 +24,6 @@
 #ifndef __HARMONY_H__
 #define __HARMONY_H__
 
-// #include "QList"
 #include "text.h"
 
 //---------------------------------------------------------
@@ -116,7 +115,7 @@ class Harmony : public Text {
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      QString harmonyName() const   { return harmonyName(root(), extension(), base()); }
+      QString harmonyName() const;
       QString extensionName() const { return getExtensionName(extension()); }
       void buildText();
 
