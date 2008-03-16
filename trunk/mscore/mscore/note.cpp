@@ -444,7 +444,9 @@ QRectF Note::bbox() const
 bool Note::isSimple(Xml& xml) const
       {
       QList<Prop> pl = Element::properties(xml);
-      if (_accidental && !_accidental->userOff().isNull())
+      if (_accidental &&
+         (!_accidental->userOff().isNull() || !_accidental->visible())
+         )
             return false;
       return (pl.empty() && _el.empty() && _tieFor == 0 && _staffMove == 0
          && _headGroup == 0
@@ -469,7 +471,9 @@ void Note::write(Xml& xml) const
 
             if (_userAccidental)
                   xml.tag("userAccidental", _userAccidental);
-            if (_accidental && !_accidental->userOff().isNull())
+            if (_accidental &&
+               (!_accidental->userOff().isNull() || !_accidental->visible())
+               )
                   _accidental->write(xml);
 
             _el.write(xml);
