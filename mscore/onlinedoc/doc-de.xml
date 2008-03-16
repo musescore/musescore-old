@@ -113,6 +113,9 @@
         <td>Beginnt eine neue Balkenebene an dieser Note.</td>
         </tr>
       </table>
+      <br/>
+      Siehe auch:
+        <a href="crossbeams.php">Cross staff beams</a>
     </page>
 
 <page name="brackets" header="Klammern">
@@ -1128,6 +1131,28 @@
     </tr>
 
     </table>
+    </page>
+
+<page name="crossbeams" header="Cross staff beaming">
+    <index>Cross staff beaming</index>
+
+      In Pianonoten werden für musikalische Phrasen oft beide
+      Notenzeilen (Bass und Violinenschlüssel) verwendet.<br/>
+      In <i>MuseScore</i> wird so etwas wie folgt eingegeben:
+
+    <table>
+    <tr>
+      <td>Zunächst werden alle Noten auf einer<br/>
+          Zeile eingebeben:</td>
+      <td><img src="../pic/crossbeams1.png" align="center"/></td>
+      </tr>
+    <tr>
+      <td><key>Umsch+Strg+Down</key>  verschiebt eine selektierte<br/>
+          Note oder Akkord zur nächsten Notenzeile</td>
+      <td><img src="../pic/crossbeams2.png" align="center"/></td>
+      </tr>
+    </table>
+
 
     </page>
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.5">
-  <Spatium>1.76389</Spatium>
-  <Division>480</Division>
   <Mag>0.995934</Mag>
   <xoff>2.11667</xoff>
   <yoff>2.32833</yoff>
+  <Spatium>1.76389</Spatium>
+  <Division>480</Division>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -103,9 +103,6 @@
       </Staff>
     <trackName>Voice</trackName>
     <Instrument>
-      <midiChannel>0</midiChannel>
-      <midiProgram>0</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -122,9 +119,6 @@
       </Staff>
     <trackName>Voice</trackName>
     <Instrument>
-      <midiChannel>0</midiChannel>
-      <midiProgram>0</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -135,18 +129,22 @@
       <Text>
         <subtype>Title</subtype>
         <track>-1</track>
+        <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Adeste Fideles</p></body></html>
+          </html-data>
         </Text>
       <Text>
         <subtype>Composer</subtype>
         <track>-1</track>
+        <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">John F. Wade</p></body></html>
+          </html-data>
         </Text>
       </VBox>
     <Measure number="1">
@@ -222,7 +220,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         <Note>
           <tick>0</tick>
@@ -250,10 +248,27 @@ p, li { white-space: pre-wrap; }
         <tick>480</tick>
         </Lyrics>
       <Lyrics>
+        <data>te,</data>
+        <syllabic>end</syllabic>
+        <subtype>Lyric</subtype>
+        <tick>1440</tick>
+        </Lyrics>
+      <Lyrics>
+        <data>tet</data>
+        <no>1</no>
+        <syllabic>end</syllabic>
+        <subtype>Lyric</subtype>
+        </Lyrics>
+      <Lyrics>
+        <data>go</data>
+        <no>2</no>
+        <subtype>Lyric</subtype>
+        </Lyrics>
+      <Lyrics>
         <data>fi</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>1440</tick>
+        <tick>1920</tick>
         </Lyrics>
       <Lyrics>
         <data>nunc</data>
@@ -354,7 +369,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -382,7 +397,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -478,7 +493,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -499,7 +514,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         <Note>
           <tick>0</tick>
@@ -584,7 +599,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -599,7 +614,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -607,7 +622,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>49</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         <Note>
           <tick>0</tick>
@@ -640,7 +655,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -648,7 +663,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         <Note>
           <tick>0</tick>
@@ -672,12 +687,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
-          <tpc>10</tpc>
-          <Accidental>
-            <subtype>2</subtype>
-            <offset x="-1.08" y="0"/>
-            <track>-1</track>
-            </Accidental>
+          <tpc>22</tpc>
           </Note>
         <Note>
           <tick>0</tick>
@@ -717,6 +727,17 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
+      <Chord>
+        <track>5</track>
+        <tick>5280</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>5</track>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="5">
       <Chord>
@@ -742,7 +763,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -760,5 +781,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

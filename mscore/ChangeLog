@@ -1,3 +1,5 @@
+16.3.8 (ws)
+      - save visible attribute for accidentals (#1915355)
 15.3.8 (ws)
       - fix bug which prevented auto beams for voices != 0 in some
         situations

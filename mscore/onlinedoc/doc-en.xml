@@ -101,8 +101,10 @@
         <td/>
         <td>Start a second level beam at this note.</td>
         </tr>
-
       </table>
+    <br/>
+    See also:
+       <a href="crossbeams.php">Cross staff beams</a>
     </page>
 
 <page name="brackets" header="Brackets">
@@ -1007,6 +1009,27 @@
       <td><img src="../pic/hairpin4.png" align="center"/></td>
       </tr>
     </table>
+    </page>
+
+<page name="crossbeams" header="Cross staff beaming">
+    <index>Cross staff beaming</index>
+
+      In piano scores it is common to use both staves (bass and treble clef)
+      to write a musical phrase.<br/>
+      This can be entered in <i>MuseScore</i> as follows:
+
+    <table>
+    <tr>
+      <td>First enter all notes<br/>in one staff:</td>
+      <td><img src="../pic/crossbeams1.png" align="center"/></td>
+      </tr>
+    <tr>
+      <td><key>Shift+Ctrl+Down</key> moves the selected <br/>
+          note or chord to the next staff</td>
+      <td><img src="../pic/crossbeams2.png" align="center"/></td>
+      </tr>
+    </table>
+
     </page>
 
 </museScoreManual>

@@ -86,8 +86,9 @@ const char* elementNames[] = {
       "NoteHead", "Tremolo",
       "HairPin", "Ottava", "Pedal", "Trill", "TextLine",
       "Segment", "System", "Compound", "Chord", "Slur",
-      "Element", "ElementList", "StaffList", "MeasureList",
-      "Layout", "HBox", "VBox", "Icon"
+      "Element", "ElementList", "StaffList", "MeasureList", "Layout",
+      "HBox", "VBox",
+      "Icon"
       };
 
 //---------------------------------------------------------
