@@ -1,3 +1,5 @@
+17.3.8 (lv)
+      - MusicXML export of <degree> element
 16.3.8 (lv)
       - first steps towards handling MusicXML <degree> element
        (ws)

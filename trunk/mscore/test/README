@@ -63,6 +63,7 @@ testDirections1.xml      all supported direction types
 testDynamics1.xml        the "dynamics" directions from ppp to fff
 testDynamics2.xml        dynamics in a multi-part (voice and a piano) score
 testHarmony1.xml         several (simple) harmony elements
+testHarmony2.xml         several (more complex) harmony elements
 testHello.xml            Recordare's "Hello World"
 testHello.mxl            Recordare's "Hello World" (compressed MusicXML)
 testImplicitMeasure1.xml pickup measure
