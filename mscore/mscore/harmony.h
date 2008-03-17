@@ -69,7 +69,7 @@ class HChord {
 //---------------------------------------------------------
 
 enum HDegreeType {
-      ADD, ALTER, SUBTRACT
+      UNDEF, ADD, ALTER, SUBTRACT
       };
 
 class HDegree {
@@ -78,6 +78,7 @@ class HDegree {
       int _type;
 
    public:
+      HDegree() { _value = 0; _alter = 0; _type = UNDEF; }
       HDegree(int v, int a, int t) { _value = v; _alter = a; _type = t; }
       int value() const { return _value; }
       int alter() const { return _alter; }
@@ -112,6 +113,8 @@ class Harmony : public Text {
       unsigned char root() const           { return _root;      }
       void setRoot(unsigned char val)      { _root = val;       }
       void addDegree(HDegree d)            { _degreeList << d;  }
+      int numberOfDegrees()                { return _degreeList.size(); }
+      HDegree degree(int i)                { return _degreeList.value(i); }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

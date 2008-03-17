@@ -67,12 +67,12 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="1">
+    <measure number="2">
       <harmony print-frame="no">
         <root>
           <root-step>C</root-step>
           </root>
-        <kind>major</kind>
+        <kind text="">major</kind>
         <degree>
           <degree-value>7</degree-value>
           <degree-alter>0</degree-alter>
@@ -100,12 +100,12 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="1">
+    <measure number="3">
       <harmony print-frame="no">
         <root>
           <root-step>D</root-step>
           </root>
-        <kind>major</kind>
+        <kind text="">major</kind>
         <degree>
           <degree-value>7</degree-value>
           <degree-alter>0</degree-alter>
@@ -133,7 +133,7 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="2">
+    <measure number="4">
       <harmony print-frame="no">
         <root>
           <root-step>C</root-step>
@@ -166,13 +166,13 @@
         <stem>up</stem>
         </note>
       </measure>
-    <measure number="2">
+    <measure number="5">
       <harmony print-frame="no">
         <root>
-          <root-step>C</root-step>
-          <root-alter>1</root-alter>
+          <root-step>D</root-step>
+          <root-alter>-1</root-alter>
           </root>
-        <kind>suspended-fourth</kind>
+        <kind text="sus4">suspended-fourth</kind>
         <degree>
           <degree-value>7</degree-value>
           <degree-alter>0</degree-alter>
