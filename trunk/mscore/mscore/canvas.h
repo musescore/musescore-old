@@ -192,6 +192,7 @@ class Canvas : public QFrame, public Viewer {
       Element* elementAt(const QPointF& pp);
       Element* selectedElementAt(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
+      void setLassoRect(const QRectF& r) { _lassoRect = r; }
       void paintLasso(QPainter& p);
       };
 
