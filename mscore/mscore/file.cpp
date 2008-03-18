@@ -1144,10 +1144,11 @@ bool Score::savePng(const QString& name)
       QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
       printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
       printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+      printer.fill(0);
 #else
       QPixmap printer(lrint(w), lrint(h));
-#endif
       printer.fill(QColor(0, 0, 0, 0));
+#endif
 
       QPainter p(&printer);
       QPaintDevice* oldPaintDevice = layout()->paintDevice();
@@ -1155,6 +1156,11 @@ bool Score::savePng(const QString& name)
 
       layout()->doLayout();
 
+      if (canvas()->lassoRect().isEmpty()) {
+            Page* page = _layout->pages().front();
+            QRectF r = page->bbox();
+            canvas()->setLassoRect(r);
+            }
       canvas()->paintLasso(p);
       bool rv = printer.save(name, "png");
 
