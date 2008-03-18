@@ -43,6 +43,8 @@ TransposeDialog::TransposeDialog(QWidget* parent)
 
 void Score::transpose()
       {
+      if (_layout->last() == 0)     // empty score?
+            return;
       if (sel->state() == SEL_NONE) {
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
                tr("MuseScore: transpose"),

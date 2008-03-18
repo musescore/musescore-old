@@ -766,8 +766,9 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                   delete s;
                   return;
                   }
-//            }
-
+#if 0
+            }
+#endif
       undoAddElement(s);
       addRefresh(s->abbox());
       select(s, 0, 0);
@@ -1125,66 +1126,74 @@ void Score::chordTab(bool back)
 
 void Score::lyricsTab(bool back)
       {
+      start();
+
       Lyrics* lyrics   = (Lyrics*)editObject;
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
       Segment* segment = (Segment*)(lyrics->parent());
-      int staff        = lyrics->staffIdx();
+      int verse        = lyrics->no();
+      int endTick      = lyrics->tick();
 
-      // search next chord
-      if (back) {
-            while ((segment = segment->prev1())) {
-                  if (segment->subtype() == Segment::SegChordRest)
-                        break;
-                  }
-            }
-      else {
-            while ((segment = segment->next1())) {
-                  if (segment->subtype() == Segment::SegChordRest)
-                        break;
-                  }
-            }
-      if (segment == 0)
-            return;
-
-      canvas()->setState(Canvas::NORMAL);
-      Lyrics* oldLyrics = lyrics;
-      switch(oldLyrics->syllabic()) {
-            case Lyrics::SINGLE:
-            case Lyrics::END:
-                  break;
-            case Lyrics::BEGIN:
-                  oldLyrics->setSyllabic(Lyrics::SINGLE);
-                  break;
-            case Lyrics::MIDDLE:
-                  oldLyrics->setSyllabic(Lyrics::END);
-                  break;
-            }
+      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
+      // search next chord
+      Segment* nextSegment = segment;
+      while ((nextSegment = nextSegment->next1())) {
+            Element* el = nextSegment->element(track);
+            if (el &&  el->type() == CHORD)
+                  break;
+            }
+      if (nextSegment == 0) {
+            return;
+            }
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      while (segment) {
+            LyricsList* nll = segment->lyricsList(staffIdx);
+            if (!nll)
+                  continue;
+            oldLyrics = nll->value(verse);
+            if (oldLyrics)
+                  break;
+            segment = segment->prev1();
+            }
+
       startCmd();
-      LyricsList* ll = segment->lyricsList(staff);
-      lyrics = ll->value(oldLyrics->no());
-      if (!lyrics)
+
+      LyricsList* ll = nextSegment->lyricsList(staffIdx);
+      lyrics         = ll->value(verse);
+      if (!lyrics) {
             lyrics = new Lyrics(this);
-      else {
-            undoRemoveElement(lyrics);
+            lyrics->setTick(nextSegment->tick());
+            lyrics->setTrack(track);
+            lyrics->setParent(nextSegment);
+            lyrics->setNo(verse);
             }
 
-      switch(lyrics->syllabic()) {
-            case Lyrics::SINGLE:
-            case Lyrics::BEGIN:
-                  break;
-            case Lyrics::END:
-                  lyrics->setSyllabic(Lyrics::SINGLE);
-                  break;
-            case Lyrics::MIDDLE:
-                  lyrics->setSyllabic(Lyrics::BEGIN);
-                  break;
+      lyrics->setSyllabic(Lyrics::SINGLE);
+
+      if (oldLyrics) {
+            switch(oldLyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                  case Lyrics::END:
+                        break;
+                  case Lyrics::BEGIN:
+                        oldLyrics->setEndTick(endTick);
+                        oldLyrics->setSyllabic(Lyrics::END);
+                        break;
+                  case Lyrics::MIDDLE:
+                        if (oldLyrics->tick() < endTick) {
+                              oldLyrics->setEndTick(endTick);
+                              }
+                        oldLyrics->setSyllabic(Lyrics::END);
+                        break;
+                  }
             }
 
-      lyrics->setTick(segment->tick());
-      lyrics->setTrack(oldLyrics->track());
-      lyrics->setParent(segment);
-      lyrics->setNo(oldLyrics->no());
+      lyrics->setSyllabic(Lyrics::SINGLE);
       undoAddElement(lyrics);
 
       select(lyrics, 0, 0);
@@ -1200,50 +1209,80 @@ void Score::lyricsTab(bool back)
 
 void Score::lyricsMinus()
       {
-      Lyrics* lyrics   = (Lyrics*)editObject;
-      Segment* segment = (Segment*)(lyrics->parent());
-      int staff        = lyrics->staffIdx();
-      int track        = staff * VOICES;
+      start();
 
-      canvas()->setState(Canvas::NORMAL);
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
+      Segment* segment = (Segment*)(lyrics->parent());
+      int verse        = lyrics->no();
+      int endTick      = lyrics->tick();
+
+      canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
       // search next chord
-      while ((segment = segment->next1())) {
-            Element* el = segment->element(track);
+      Segment* nextSegment = segment;
+      while ((nextSegment = nextSegment->next1())) {
+            Element* el = nextSegment->element(track);
             if (el &&  el->type() == CHORD)
                   break;
             }
-      if (segment == 0) {
+      if (nextSegment == 0) {
             return;
+            }
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      while (segment) {
+            LyricsList* nll = segment->lyricsList(staffIdx);
+            if (!nll)
+                  continue;
+            oldLyrics = nll->value(verse);
+            if (oldLyrics)
+                  break;
+            segment = segment->prev1();
+            }
+      if(oldLyrics) {
+            if (oldLyrics->syllabic() == Lyrics::END) {
+                  if (oldLyrics->endTick() != endTick) {
+                        printf("end tick gap\n");
+                        oldLyrics = 0;
+                        }
+                  }
             }
 
       startCmd();
 
-      Lyrics* oldLyrics = lyrics;
-
-      LyricsList* ll = segment->lyricsList(staff);
-      lyrics = ll->value(oldLyrics->no());
-      if (!lyrics)
+      LyricsList* ll = nextSegment->lyricsList(staffIdx);
+      lyrics         = ll->value(verse);
+      if (!lyrics) {
             lyrics = new Lyrics(this);
-
-      switch(oldLyrics->syllabic()) {
-            case Lyrics::SINGLE:
-                  oldLyrics->setSyllabic(Lyrics::BEGIN);
-                  break;
-            case Lyrics::BEGIN:
-            case Lyrics::MIDDLE:
-                  break;
-            case Lyrics::END:
-                  oldLyrics->setSyllabic(Lyrics::MIDDLE);
-                  break;
+            lyrics->setTick(nextSegment->tick());
+            lyrics->setTrack(track);
+            lyrics->setParent(nextSegment);
+            lyrics->setNo(verse);
             }
+
       lyrics->setSyllabic(Lyrics::END);
 
-      lyrics->setTick(segment->tick());
-      lyrics->setTrack(oldLyrics->track());
-      lyrics->setParent(segment);
-      lyrics->setNo(oldLyrics->no());
+      if (oldLyrics) {
+            switch(oldLyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                        oldLyrics->setSyllabic(Lyrics::BEGIN);
+                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        break;
+                  case Lyrics::BEGIN:
+                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        break;
+                  case Lyrics::MIDDLE:
+                        break;
+                  case Lyrics::END:
+                        oldLyrics->setSyllabic(Lyrics::MIDDLE);
+                        lyrics->setSyllabic(Lyrics::MIDDLE);
+                        break;
+                  }
+            }
       undoAddElement(lyrics);
 
       select(lyrics, 0, 0);
@@ -1259,6 +1298,7 @@ void Score::lyricsMinus()
 
 void Score::lyricsReturn()
       {
+      start();
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
 

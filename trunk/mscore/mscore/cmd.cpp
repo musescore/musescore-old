@@ -73,18 +73,14 @@ static bool startMode = false;
 
 void Score::start()
       {
-      if (startMode) {
-            printf("Score::start(): already started\n");
-            if (debugMode) {
-                  abort();
-                  }
+      if (startMode)
             return;
-            }
       startMode = true;
       refresh.setRect(0.0,0.0,0.0,0.0);
       updateAll   = false;
       layoutStart = 0;          ///< start a relayout at this measure
-      layoutAll   = false;      ///< do a complete relayout
+//      layoutAll   = false;      ///< do a complete relayout
+      layoutAll   = true;      ///< do a complete relayout
       }
 
 //---------------------------------------------------------
@@ -99,14 +95,13 @@ void Score::start()
 void Score::startCmd()
       {
       start();
-      layoutAll = true;       // debug
 
       // Start collecting low-level undo operations for a
       // user-visible undo action.
 
       if (cmdActive) {
-            if (debugMode)
-                  fprintf(stderr, "Score::startCmd(): cmd already active\n");
+            // if (debugMode)
+            fprintf(stderr, "Score::startCmd(): cmd already active\n");
             return;
             }
       undoList.push_back(new Undo(_is, sel));
@@ -125,7 +120,7 @@ void Score::startCmd()
 void Score::endCmd()
       {
       if (!cmdActive) {
-            if (debugMode)
+            // if (debugMode)
                   fprintf(stderr, "Score::endCmd(): no cmd active\n");
             end();
             return;
@@ -158,10 +153,8 @@ void Score::endCmd()
 void Score::end()
       {
       if (!startMode) {
-            if (debugMode) {
-                  printf("Score:end: not started\n");
-                  abort();
-                  }
+            printf("Score:end: not started\n");
+            return;
             }
       startMode = false;
 
@@ -1397,6 +1390,7 @@ void Score::cmd(const QString& cmd)
             printf("cmd <%s>\n", cmd.toLatin1().data());
 
       if (editObject) {                          // in edit mode?
+            start();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             endCmd();
             }

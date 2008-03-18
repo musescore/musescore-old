@@ -34,6 +34,7 @@ Lyrics::Lyrics(Score* s)
       _no        = 0;
       _syllabic  = SINGLE;
       _separator = 0;
+      _endTick   = 0;
       }
 
 //---------------------------------------------------------
@@ -51,6 +52,8 @@ void Lyrics::write(Xml& xml) const
             };
       if (_syllabic != SINGLE)
             xml.tag("syllabic", sl[_syllabic]);
+      if (_endTick)
+            xml.tag("endTick", _endTick);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -81,6 +84,8 @@ void Lyrics::read(QDomElement e)
                   else
                         printf("bad syllabic property\n");
                   }
+            else if (tag == "endTick")
+                  _endTick = i;
             else if (!Element::readProperties(e))
                   domError(e);
             }

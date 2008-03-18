@@ -33,6 +33,7 @@ class Lyrics : public Text {
 
    private:
       int _no;                ///< row index
+      int _endTick;           ///< if > 0 then draw an underline to this tick position
       Syllabic _syllabic;
       Line* _separator;
 
@@ -53,7 +54,9 @@ class Lyrics : public Text {
       virtual void remove(Element*);
       virtual void draw(QPainter&) const;
       Line* separator() const       { return _separator; }
-      void setSeparator(Line* l)    { _separator = l; }
+      void setSeparator(Line* l)    { _separator = l;    }
+      int endTick() const           { return _endTick;   }
+      void setEndTick(int tick)     { _endTick = tick;   }
       };
 
 #endif

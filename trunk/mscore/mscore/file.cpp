@@ -130,8 +130,8 @@ bool MuseScore::checkDirty(Score* s)
       {
       if (s->dirty()) {
             int n = QMessageBox::warning(this, tr("MuseScore"),
-               tr("The current Score contains unsaved data\n"
-               "Save Current Score?"),
+               tr("The score \"%1\"contains unsaved data\n"
+               "Save Current Score?").arg(s->name()),
                tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
             if (n == 0) {
                   if (s->isSavable()) {
