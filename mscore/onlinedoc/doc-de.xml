@@ -575,10 +575,17 @@
             Liedtext ein (Silbentrenner).
             </li>
         </ul>
-
       <img src="../pic/lyrics.png" align="center"/>
       <br/>
-
+      Soll eine Silbe über mehrere Noten gesungen werden, so wird dies
+      mit einem Unterstreichungsstrich angezeigt:
+      <img src="../pic/lyrics1.png" align="center"/>
+      <br/>
+      Der Text wird mit <key>"soul,"</key>
+      <key>-</key><key>-</key><key>Leertaste</key><key>"To"</key>
+      <key>Esc</key> erzeugt.
+      <br/>
+      <br/>
       Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.
       <br/>
       <br/>

@@ -37,6 +37,7 @@
 #include "ui_slur.h"
 #include "ui_line.h"
 #include "ui_linesegment.h"
+#include "ui_lyrics.h"
 
 class ShowElementBase;
 class Element;
@@ -78,6 +79,7 @@ class PageListEditor : public QWidget {
       ShowElementBase* tieView;
       ShowElementBase* voltaView;
       ShowElementBase* voltaSegmentView;
+      ShowElementBase* lyricsView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
@@ -472,6 +474,20 @@ class VoltaSegmentView : public ShowElementBase {
 
    public:
       VoltaSegmentView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   VoltaSegmentView
+//---------------------------------------------------------
+
+class LyricsView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::LyricsBase lb;
+
+   public:
+      LyricsView();
       virtual void setElement(Element*);
       };
 

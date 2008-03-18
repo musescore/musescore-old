@@ -101,7 +101,6 @@ class TextB : public Element {
       bool setCursor(const QPointF& p);
       int cursorPos;
       TextStyle* style() const;
-      qreal basePosition() const;
 
    public:
       TextB(Score*);
@@ -170,6 +169,7 @@ class TextB : public Element {
       void setDefaultFont(QFont f) { textBase()->setDefaultFont(f);    }
 
       void setAbove(bool val);
+      qreal basePosition() const;
       };
 
 //---------------------------------------------------------

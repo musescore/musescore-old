@@ -155,6 +155,7 @@ PageListEditor::PageListEditor(Score* s)
       tieView      = new TieView;
       voltaView    = new VoltaView;
       voltaSegmentView = new VoltaSegmentView;
+      lyricsView   = new LyricsView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -176,6 +177,7 @@ PageListEditor::PageListEditor(Score* s)
       stack->addWidget(tieView);
       stack->addWidget(voltaView);
       stack->addWidget(voltaSegmentView);
+      stack->addWidget(lyricsView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -197,6 +199,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(voltaView,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -438,6 +441,7 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case TIE:           ew = tieView;      break;
             case VOLTA:         ew = voltaView;    break;
             case VOLTA_SEGMENT: ew = voltaSegmentView; break;
+            case LYRICS:        ew = lyricsView;   break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -1516,6 +1520,33 @@ void VoltaSegmentView::setElement(Element* e)
       lb.pos2y->setValue(vs->pos2().y());
       lb.offset2x->setValue(vs->userOff2().x());
       lb.offset2y->setValue(vs->userOff2().y());
+      }
+
+//---------------------------------------------------------
+//   LyricsView
+//---------------------------------------------------------
+
+LyricsView::LyricsView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void LyricsView::setElement(Element* e)
+      {
+      Lyrics* l = (Lyrics*)e;
+      ShowElementBase::setElement(e);
+
+      lb.row->setValue(l->no());
+      lb.endTick->setValue(l->endTick());
+      lb.syllabic->setCurrentIndex(l->syllabic());
       }
 
 

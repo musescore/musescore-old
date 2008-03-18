@@ -1038,11 +1038,36 @@ void Score::endEdit()
                   }
             }
       else if (editObject->type() == LYRICS) {
+            //
+            //  special handling of Lyrics
+            //
             Lyrics* lyrics = (Lyrics*)editObject;
-            Lyrics* origL = (Lyrics*)origEditObject;
+            Lyrics* origL  = (Lyrics*)origEditObject;
+
+            // search previous lyric:
+            int verse    = lyrics->no();
+            Segment* seg = (Segment*)lyrics->parent();
+            int staffIdx = lyrics->staffIdx();
+            Lyrics* nl = 0;
+            while (seg->prev1()) {
+                  seg = seg->prev1();
+                  LyricsList* nll = seg->lyricsList(staffIdx);
+                  if (!nll)
+                        continue;
+                  nl = nll->value(verse);
+                  if (nl)
+                        break;
+                  }
+
             if (lyrics->isEmpty() && origL->isEmpty()) {
                   Measure* measure = (Measure*)(lyrics->parent());
                   measure->remove(lyrics);
+                  }
+            else {
+                  if (nl && nl->syllabic() == Lyrics::END) {
+                        if (nl->endTick() >= lyrics->tick())
+                              nl->setEndTick(0);
+                        }
                   }
             }
       layoutAll = true;

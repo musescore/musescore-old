@@ -490,6 +490,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
+      _score->start();
       if (QApplication::mouseButtons() == Qt::MidButton) {
             QString mimeType = _score->sel->mimeType();
             if (!mimeType.isEmpty()) {
@@ -672,6 +673,7 @@ void Canvas::updateGrips()
 
 void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
+      _score->start();
       if (dragCanvasState) {
             dragCanvasState = false;
             setCursor(QCursor(Qt::ArrowCursor));
@@ -699,18 +701,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
             setState(NORMAL);
             return;
             }
-      mouseReleaseEvent1(ev);
-      // here we can be in state EDIT again
-      if (state != EDIT)
-            _score->endCmd();
-      }
 
-//---------------------------------------------------------
-//   mouseReleaseEvent
-//---------------------------------------------------------
-
-void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
-      {
       switch (state) {
             case DRAG_EDIT:
                   _score->addRefresh(_score->editObject->abbox());
@@ -719,7 +710,6 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
-                  _score->end();
                   break;
 
             case LASSO:
@@ -746,6 +736,12 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setState(NORMAL);
                   break;
             }
+
+      // here we can be in state EDIT again
+      if (state != EDIT)
+            _score->endCmd();
+      else
+            _score->end();
       }
 
 //---------------------------------------------------------

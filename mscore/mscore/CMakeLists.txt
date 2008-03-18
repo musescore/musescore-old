@@ -67,7 +67,7 @@ QT4_WRAP_UI (ui_headers
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
-      lineproperties.ui excerptsdialog.ui
+      lineproperties.ui excerptsdialog.ui lyrics.ui
       )
 
 QT4_WRAP_CPP (mocs

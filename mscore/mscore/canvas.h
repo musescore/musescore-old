@@ -98,7 +98,6 @@ class Canvas : public QFrame, public Viewer {
       virtual void wheelEvent(QWheelEvent*);
       void mouseMoveEvent1(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
-      void mouseReleaseEvent1(QMouseEvent*);
       virtual void mouseDoubleClickEvent(QMouseEvent*);
       virtual bool event(QEvent*);
 

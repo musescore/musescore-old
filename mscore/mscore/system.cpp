@@ -300,7 +300,7 @@ void System::layout2(ScoreLayout* layout)
       int lastStaffIdx = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff    = score()->staff(staffIdx);
-            double staffMag = staff->mag();
+//            double staffMag = staff->mag();
             if ((staffIdx + 1) == staves)
                   setDistance(staffIdx, score()->style()->systemDistance);
             else if ((staff->part()->staves()->size() + 1) < staff->rstaff())
@@ -614,12 +614,35 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
 
 void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffIdx)
       {
-      if (l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) {
+      if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->endTick() == 0)) {
             Line* line = l->separator();
             if (line) {
                   // delete line;  // does not work, undo needs this object
                   l->setSeparator(0);
                   }
+            return;
+            }
+      if (l->endTick()) {
+            Segment* seg = score()->tick2segment(l->endTick());
+            if (seg == 0) {
+                  printf("System::layoutLyrics: no segment found for tick %d\n", l->endTick());
+                  return;
+                  }
+            Line* line = l->separator();
+            if (!line) {
+                  line = new Line(l->score(), false);
+                  line->setLineWidth(Spatium(0.1));
+                  }
+            QRectF b = l->bbox();
+            double x = b.x() + b.width();
+            line->setPos(QPointF(x, l->basePosition()));
+
+            double len = seg->canvasPos().x() - l->canvasPos().x() - x + 2. * _spatium;
+            Spatium sp;
+            sp.set(len);
+            line->setLen(sp);       // line end: segment start + 2 * _spatium
+            line->layout(layout);
+            l->setSeparator(line);
             return;
             }
       //
@@ -663,7 +686,12 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             line->setLen(sp);
             line->layout(layout);
             l->setSeparator(line);
-            break;
+            return;
+            }
+      Line* line = l->separator();
+      if (line) {
+            // delete line;  // does not work, undo needs this object
+            l->setSeparator(0);
             }
       }
 
