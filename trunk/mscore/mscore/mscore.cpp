@@ -1478,7 +1478,10 @@ int main(int argc, char* argv[])
       //
       localeName = QLocale::system().name();
       QTranslator translator;
-      QString lp = mscoreGlobalShare + "/locale/" + QString("mscore_") + localeName;
+      QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
+      if (debugMode)
+            cout << "load translator <" << lp << ">\n";
+
       translator.load(lp);
       app.installTranslator(&translator);
       //
