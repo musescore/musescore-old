@@ -779,6 +779,10 @@ p, li { white-space: pre-wrap; }
         <source>/B</source>
         <translation></translation>
     </message>
+    <message>
+        <source>C#</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>

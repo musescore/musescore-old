@@ -726,8 +726,9 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       *base = INVALID_TPC;
       int slash = s.indexOf('/');
       if (slash != -1) {
+            QString bs = s.mid(slash+1);
             s     = s.mid(idx, slash - idx);
-            *base = convertRoot(s.mid(slash + 1));
+            *base = convertRoot(bs);
             }
       else
             s = s.mid(idx);
