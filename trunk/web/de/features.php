@@ -24,6 +24,15 @@
       </td>
     </tr>
 
+  <tr>
+    <td>
+      Cross staff beams:
+      </td>
+    <td>
+      <img src="../wpic/crossbeams.png">
+      </td>
+    </tr>
+
   </table>
 
 

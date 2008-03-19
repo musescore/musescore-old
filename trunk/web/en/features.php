@@ -25,8 +25,16 @@
       </td>
     </tr>
 
-  </table>
+  <tr>
+    <td>
+      Cross staff beams:
+      </td>
+    <td>
+      <img src="../wpic/crossbeams.png">
+      </td>
+    </tr>
 
+  </table>
 
 <?php require("trailer.html");  ?>
 
