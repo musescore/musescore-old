@@ -1247,6 +1247,14 @@ fehlgeschlagen: </translation>
         <source>v-frame staff dist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1851,6 +1859,45 @@ fehlgeschlagen: </translation>
     </message>
 </context>
 <context>
+    <name>LyricsBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished">Liedtext</translation>
+    </message>
+    <message>
+        <source>Syllabic:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Tick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MagBox</name>
     <message>
         <source>Mag</source>
@@ -2032,12 +2079,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>The current Score contains unsaved data
-Save Current Score?</source>
-        <translation>Die aktuelle Partitur enthält ungesicherte Daten.
-Aktuelle Partitur sichern?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -3874,6 +3915,11 @@ failed: </source>
         <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The score &quot;%1&quot;contains unsaved data
+Save Current Score?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4712,45 +4758,6 @@ failed: </source>
     <message>
         <source>Setup...</source>
         <translation>Einstellungen...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatFlagDialogBase</name>
-    <message>
-        <source>Dialog - Setup Repeats</source>
-        <translation>Dialog - Repeateinstellungen</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>repTypName</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>Besonderheiten für</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>Textlabel</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>Zyklen</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Nummer</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Zielnummer</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>Zu spielende Zyklen</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>Zyklusnummern, Beispiel: 1,3,5</translation>
     </message>
 </context>
 <context>

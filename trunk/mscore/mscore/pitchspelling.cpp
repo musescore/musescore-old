@@ -29,17 +29,10 @@
 #include "staff.h"
 #include "chord.h"
 
-//---------------------------------------------------------
-//   line2tpc
-//    prefix -2 < 2
-//---------------------------------------------------------
-
-int line2tpc(int line, int prefix)
-      {
 //    TPC - tonal pitch classes
 //    "line of fifth's" LOF
 
-      static int spellings[] = {
+static const int spellings[] = {
 //          bb  b   -   #  ##
             0,  7, 14, 21, 28,  // C
             2,  9, 16, 23, 30,  // D
@@ -49,11 +42,33 @@ int line2tpc(int line, int prefix)
             3, 10, 17, 24, 31,  // A
             5, 12, 19, 26, 33,  // B
             };
+
+//---------------------------------------------------------
+//   line2tpc
+//    prefix -2 < 2
+//---------------------------------------------------------
+
+int line2tpc(int line, int prefix)
+      {
       int i = line * 5 + 2 + prefix;
       if (i < 0 || (i >= int(sizeof(spellings)/sizeof(*spellings))))
             abort();
       return spellings[line * 5 + 2 + prefix];
       };
+
+//---------------------------------------------------------
+//   step2tpc
+//---------------------------------------------------------
+
+int step2tpc(const QString& step, int alter)
+      {
+      if (step.isEmpty())
+            return INVALID_TPC;
+      int r = step[0].toLower().toAscii() - 'c';
+      if (r < 0 || r > 6)
+            return INVALID_TPC;
+      return spellings[r * 5 + alter + 2];
+      }
 
 //---------------------------------------------------------
 //   tpc2pitch
@@ -111,11 +126,34 @@ QString tpc2name(int tpc)
       switch(acc) {
             case -2: s += "bb"; break;
             case -1: s += "b";  break;
+            case  0: break;
             case  1: s += "#";  break;
             case  2: s += "##"; break;
-            default: s += "??"; break;
+            default:
+                  printf("tpc2name(%d): acc %d\n", tpc, acc);
+                  s += "??";
+                  break;
             }
       return s;
+      }
+
+//---------------------------------------------------------
+//   tpc2stepName
+//---------------------------------------------------------
+
+QString tpc2stepName(int tpc)
+      {
+      const char names[] = "FCGDAEB";
+      return QString(names[(tpc + 1) % 7]);
+      }
+
+//---------------------------------------------------------
+//   tpc2alter
+//---------------------------------------------------------
+
+int tpc2alter(int tpc)
+      {
+      return ((tpc+1) / 7) - 2;
       }
 
 // table of alternative spellings for one octave

@@ -1,3 +1,7 @@
+19.3.8 (ws)
+      - extend harmony representation to allow for C# and Db root notes:
+        root and base notes are now represented as tpc (tonal pitch class)
+        values
 18.3.8 (ws)
       - extension for lyrics (underline)
 17.3.8 (lv)

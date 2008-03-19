@@ -128,7 +128,11 @@ void Tuplet::layout(ScoreLayout* layout)
             if (cr1->type() == CHORD) {
                   Chord* chord1 = (Chord*)cr1;
                   Stem* stem = chord1->stem();
-                  p1 = QPointF(stem->abbox().topLeft());
+                  if (stem)
+                        p1 = QPointF(stem->abbox().topLeft());
+                  else
+                        p1 = QPointF(cr1->abbox().topLeft());
+
                   }
             else {
                   p1 = QPointF(cr1->abbox().topLeft());

@@ -1247,6 +1247,14 @@ failed: </source>
         <source>v-frame staff dist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1850,6 +1858,45 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>LyricsBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished">Лирика</translation>
+    </message>
+    <message>
+        <source>Syllabic:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Tick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MagBox</name>
     <message>
         <source>Mag</source>
@@ -2031,12 +2078,6 @@ failed: </source>
     <message>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>The current Score contains unsaved data
-Save Current Score?</source>
-        <translation>В текущей партитуре не сохранены все изменения.
-Сохранить партитуру?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -3874,6 +3915,11 @@ failed: </source>
         <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The score &quot;%1&quot;contains unsaved data
+Save Current Score?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4713,45 +4759,6 @@ failed: </source>
     <name>RepeatFlag</name>
     <message>
         <source>Setup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RepeatFlagDialogBase</name>
-    <message>
-        <source>Dialog - Setup Repeats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

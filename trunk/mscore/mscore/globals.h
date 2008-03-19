@@ -21,11 +21,12 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.5"
+#define MSC_VERSION     "1.6"
 
 // History:
 //    1.3   added staff->_barLineSpan
 //    1.5   save xoff/yoff in mm instead of pixel
+//    1.6   save harmony base/root as tpc value
 
 extern bool debugMode;
 extern bool layoutDebug;

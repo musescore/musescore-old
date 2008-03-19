@@ -2407,36 +2407,6 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       }
 
 //---------------------------------------------------------
-//   getStep
-//---------------------------------------------------------
-
-static int getStep(const QString& step, int alter)
-      {
-      if (step.isEmpty())
-            return 0;
-      int val;
-      if (step == "C")
-            val = 0;
-      else if (step == "D")
-            val = 2;
-      else if (step == "E")
-            val = 4;
-      else if (step == "F")
-            val = 5;
-      else if (step == "G")
-            val = 7;
-      else if (step == "A")
-            val = 9;
-      else if (step == "B")
-            val = 11;
-      else {
-            printf("unknown step <%s>\n", qPrintable(step));
-            val = 0;
-            }
-      return ((alter + val) % 12) + 1;
-      }
-
-//---------------------------------------------------------
 //   xmlHarmony
 //---------------------------------------------------------
 
@@ -2552,8 +2522,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
 
       ha->setTick(tick);
-      ha->setRoot(getStep(rootStep, rootAlter));
-      ha->setBase(getStep(bassStep, bassAlter));
+      ha->setRootTpc(step2tpc(rootStep, rootAlter));
+      ha->setBaseTpc(step2tpc(bassStep, bassAlter));
 
       int extension = 0;
       QString lowerCaseKind = kind.toLower();
@@ -2567,7 +2537,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       if (extension == 0) {
             printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
-            QString s = Harmony::rootName(ha->root()) + kindText;
+            QString s = tpc2name(ha->rootTpc()) + kindText;
             ha->setText(s);
             }
       else {
