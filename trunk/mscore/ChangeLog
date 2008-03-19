@@ -1,4 +1,5 @@
 19.3.8 (ws)
+      - fix entry of slash chords (e.g. C/G)
       - extend harmony representation to allow for C# and Db root notes:
         root and base notes are now represented as tpc (tonal pitch class)
         values
