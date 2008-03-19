@@ -261,6 +261,64 @@ void genHtml(QDomElement e, Xml& xml)
       }
 
 //---------------------------------------------------------
+//   genHtmlProg
+//---------------------------------------------------------
+
+void genHtmlProg(QDomElement e, Xml& xml)
+      {
+      QString s = e.tagName();
+
+      if (s == "img" || s == "br") {
+            addAttributes(e, s);
+            xml.tagE(s);
+            return;
+            }
+      if (s == "key") {
+            xml << QString("&lt;<b>%1</b>&gt;").arg(e.text());
+            return;
+            }
+      if (s == "sp") {
+            xml << "&nbsp;&nbsp;";
+            return;
+            }
+
+      if (s == "a") {
+            QString href = e.attribute("href");
+
+            if (href.endsWith(".php")) {
+                  xml << "<a href=\"" << href.left(href.size() - 4)
+                      << ".html\">";
+                  for (QDomNode eee = e.firstChild(); !eee.isNull(); eee = eee.nextSibling()) {
+                        if (eee.nodeType() == QDomNode::ElementNode)
+                              genHtmlProg(eee.toElement(), xml);
+                        else if (eee.nodeType() == QDomNode::TextNode)
+                              xml << Xml::xmlString(eee.toText().data());
+                        }
+                  xml << "</a>";
+                  return;
+                  }
+            }
+
+      if (s == "b" || s == "i")           // inline this tags
+            xml << "<" << s << ">";
+      else {
+            addAttributes(e, s);
+            xml.stag(s);
+            }
+
+      for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+            if (ee.nodeType() == QDomNode::ElementNode)
+                  genHtmlProg(ee.toElement(), xml);
+            else if (ee.nodeType() == QDomNode::TextNode)
+                  xml << Xml::xmlString(ee.toText().data());
+            }
+      if (s == "b" || s == "i")           // inlined tags
+            xml << "</" << s << ">";
+      else
+            xml.etag();
+      }
+
+//---------------------------------------------------------
 //   genPage
 //---------------------------------------------------------
 
@@ -362,32 +420,15 @@ void genProgPage(const QString& dir, QDomElement e, int lang)
                   if (de.tagName() == "index") {
                         idxList.append(Index(de.text(), name));
                         }
-                  else if (de.tagName() == "a") {
-                        QString href = de.attribute("href");
-                        if (!href.endsWith(".php")) {
-                              genHtml(ee.toElement(), xml);
-                              }
-                        else {
-                              xml << "<a href=\"" << href.left(href.size() - 4)
-                                  << ".html\">";
-                              for (QDomNode eee = ee.firstChild(); !eee.isNull(); eee = eee.nextSibling()) {
-                                    if (eee.nodeType() == QDomNode::ElementNode)
-                                          genHtml(eee.toElement(), xml);
-                                    else if (eee.nodeType() == QDomNode::TextNode)
-                                          xml << Xml::xmlString(eee.toText().data());
-                                    }
-                              xml << "</a>";
-                              }
-                        }
                   else if (de.tagName() == "img") {
                         QString src = de.attribute("src");
                         QFile f(srcPathPrefix + QString("/pic/") + src);
                         if (!f.exists())
                               printf("image <%s> does not exist\n", qPrintable(f.fileName()));
-                        genHtml(ee.toElement(), xml);
+                        genHtmlProg(ee.toElement(), xml);
                         }
                   else
-                        genHtml(ee.toElement(), xml);
+                        genHtmlProg(ee.toElement(), xml);
                   }
             }
 
