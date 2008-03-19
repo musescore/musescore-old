@@ -446,6 +446,9 @@ bool Score::importBB(const QString& name)
       //    create chord names
       //---------------------------------------------------
 
+      static const int table[] = {
+            14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
+            };
       const QList<BBChord> cl = bb.chords();
       foreach(BBChord c, cl) {
             int tick = c.beat * division;
@@ -457,8 +460,8 @@ bool Score::importBB(const QString& name)
             Harmony* h = new Harmony(this);
             h->setTick(tick);
             h->setTrack(0);
-            h->setRoot(c.root);
-            h->setBase(c.bass);
+            h->setRootTpc(table[c.root-1]);
+            h->setBaseTpc(table[c.bass-1]);
             h->setExtension(c.extension);
             QString s(Harmony::harmonyName(c.root, c.extension, c.bass));
             h->setText(s);

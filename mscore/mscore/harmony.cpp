@@ -24,6 +24,8 @@
 
 #include "harmony.h"
 #include "chordedit.h"
+#include "pitchspelling.h"
+#include "score.h"
 
 const HChord HChord::C0(0,3,6,9);
 
@@ -112,10 +114,13 @@ void HChord::rotate(int semiTones)
 //   name
 //---------------------------------------------------------
 
-QString HChord::name(int key, bool flat)
+QString HChord::name(int tpc)
       {
-      QString buf = scaleName(key, flat);
+      QString buf = tpc2name(tpc);
       HChord c(*this);
+
+      int key = tpc2pitch(tpc);
+
       c.rotate(-key);        // transpose to C
 
       // special cases
@@ -457,19 +462,6 @@ const char* Harmony::getExtensionName(int i)
       }
 
 //---------------------------------------------------------
-//   rootName
-//---------------------------------------------------------
-
-QString Harmony::rootName(int root)
-      {
-      static char* rootTable[] = {
-            "C",   "Db", "D",   "Eb",  "E",   "F",   "Gb", "G",
-            "Ab", "A",   "Bb", "B"
-            };
-      return QString(rootTable[root-1]);
-      }
-
-//---------------------------------------------------------
 //   harmonyName
 //---------------------------------------------------------
 
@@ -492,12 +484,12 @@ QString Harmony::harmonyName() const
 //      printf("\n");
 
       if (_degreeList.isEmpty())
-            return harmonyName(root(), extension(), base());
+            return harmonyName(rootTpc(), extension(), baseTpc());
 /*
       // print the chord without the degree modification(s)
       for (int i = 0; i < 12; i++)
             if (hc.contains(i))
-                  printf(" %s", qPrintable(rootName(i+1)));
+                  printf(" %s", qPrintable(tpc2name(i+1)));
       printf("\n");
 */
       // factor in the degrees
@@ -530,7 +522,7 @@ QString Harmony::harmonyName() const
       // print the chord with the degree modification(s)
       for (int i = 0; i < 12; i++)
             if (hc.contains(i))
-                  printf(" %s", qPrintable(rootName(i+1)));
+                  printf(" %s", qPrintable(tpc2name(i+1)));
       printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
       printf("\n");
 */
@@ -538,14 +530,14 @@ QString Harmony::harmonyName() const
       for (int i = 1; i < int(sizeof(extensionNames)/sizeof(*extensionNames)); i++)
             if (hc == extensionNames[i].chord) {
 //                  printf(" found in table as %s\n", extensionNames[i].name);
-                  return harmonyName(root(), i, base());
+                  return harmonyName(rootTpc(), i, baseTpc());
                   }
 
       // if that fails, use HChord.name()
-      QString s = hc.name(_root, 0);
-      if (_base) {
+      QString s = hc.name(_rootTpc);
+      if (_baseTpc != INVALID_TPC) {
             s += "/";
-            s += rootName(_base);
+            s += tpc2name(_baseTpc);
             }
       return s;
       }
@@ -553,12 +545,12 @@ QString Harmony::harmonyName() const
 QString Harmony::harmonyName(int root, int extension, int base)
       {
 //      printf("Harmony::harmonyName(root=%d extension=%d base=%d)", root, extension, base);
-      QString s(rootName(root));
+      QString s(tpc2name(root));
       if (extension)
             s += getExtensionName(extension);
-      if (base) {
+      if (base != INVALID_TPC) {
             s += "/";
-            s += rootName(base);
+            s += tpc2name(base);
             }
 //      printf(" %s\n", qPrintable(s));
       return s;
@@ -572,9 +564,9 @@ Harmony::Harmony(Score* score)
    : Text(score)
       {
       Text::setSubtype(TEXT_CHORD);
-      _root      = 0;
+      _rootTpc   = INVALID_TPC;
       _extension = 0;
-      _base      = 0;
+      _baseTpc   = INVALID_TPC;
       }
 
 //---------------------------------------------------------
@@ -607,13 +599,13 @@ void Harmony::propertyAction(const QString& s)
       {
       if (s == "props") {
             ChordEdit ce;
-            ce.setRoot(root());
-            ce.setBase(base());
+            ce.setRoot(rootTpc());
+            ce.setBase(baseTpc());
             ce.setExtension(extension());
             int rv = ce.exec();
             if (rv) {
-                  setRoot(ce.root());
-                  setBase(ce.base());
+                  setRootTpc(ce.root());
+                  setBaseTpc(ce.base());
                   setExtension(ce.extension());
                   setText(harmonyName());
                   }
@@ -629,11 +621,11 @@ void Harmony::propertyAction(const QString& s)
 void Harmony::write(Xml& xml) const
       {
       xml.stag("Harmony");
-      xml.tag("root", _root);
+      xml.tag("root", _rootTpc);
       if (_extension)
             xml.tag("extension", _extension);
-      if (_base)
-            xml.tag("base", _base);
+      if (_baseTpc != INVALID_TPC)
+            xml.tag("base", _baseTpc);
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -644,14 +636,27 @@ void Harmony::write(Xml& xml) const
 
 void Harmony::read(QDomElement e)
       {
+      // convert table to tpc values
+      static const int table[] = {
+            14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
+            };
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "base")
-                  setBase(e.text().toInt());
+            int i = e.text().toInt();
+            if (tag == "base") {
+                  if (score()->mscVersion() >= 0x106)
+                        setBaseTpc(i);
+                  else
+                        setBaseTpc(table[i-1]);    // obsolete
+                  }
             else if (tag == "extension")
-                  setExtension(e.text().toInt());
-            else if (tag == "root")
-                  setRoot(e.text().toInt());
+                  setExtension(i);
+            else if (tag == "root") {
+                  if (score()->mscVersion() >= 0x106)
+                        setRootTpc(i);
+                  else
+                        setRootTpc(table[i-1]);    // obsolete
+                  }
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -670,54 +675,41 @@ void Harmony::buildText()
 
 //---------------------------------------------------------
 //   convertRoot
+//    convert something like "C#" into tpc 21
 //---------------------------------------------------------
 
-int convertRoot(const QString& s, int* alter)
+int convertRoot(const QString& s)
       {
       int n = s.size();
       if (n < 1)
-            return -1;
-      *alter = 0;
+            return INVALID_TPC;
+      int alter = 0;
       if (n > 1) {
             if (s[1].toLower().toAscii() == 'b')
-                  *alter = -1;
+                  alter = -1;
             else if (s[1] == '#')
-                  *alter = 1;
+                  alter = 1;
             }
-      int r = 0;
-      switch(s[0].toLower().toAscii()) {
-            case 'c':
-                  r = 1;
-                  break;
-            case 'd':
-                  r = 3;
-                  break;
-            case 'e':
-                  r = 5;
-                  break;
-            case 'f':
-                  r = 6;
-                  break;
-            case 'g':
-                  r = 8;
-                  break;
-            case 'a':
-                  r = 10;
-                  break;
-            case 'b':
-                  r = 12;
-                  break;
-            default:
-                  return -1;
-            }
-      r -= *alter;
-      if (r < 1)
-            r = 12;
+      int r = s[0].toLower().toAscii() - 'c';
+      if (r < 0 || r > 6)
+            return INVALID_TPC;
+      static const int spellings[] = {
+         // bb  b   -   #  ##
+            0,  7, 14, 21, 28,  // C
+            2,  9, 16, 23, 30,  // D
+            4, 11, 18, 25, 32,  // E
+           -1,  6, 13, 20, 27,  // F
+            1,  8, 15, 22, 29,  // G
+            3, 10, 17, 24, 31,  // A
+            5, 12, 19, 26, 33,  // B
+            };
+      r = spellings[r * 5 + alter + 2];
       return r;
       }
 
 //---------------------------------------------------------
 //   parseHarmony
+//    return extension number
 //---------------------------------------------------------
 
 int Harmony::parseHarmony(const QString& ss, int* root, int* base)
@@ -726,17 +718,16 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       int n = s.size();
       if (n < 1)
             return -1;
-      int alter;
-      int r = convertRoot(s, &alter);
-      if (r == -1)
+      int r = convertRoot(s);
+      if (r == INVALID_TPC)
             return -1;
-      *root   = r;
-      int idx = alter ? 2 : 1;
-      *base = 0;
+      *root = r;
+      int idx = ((n > 1) && ((s[1] == 'b') || (s[1] == '#'))) ? 2 : 1;
+      *base = INVALID_TPC;
       int slash = s.indexOf('/');
       if (slash != -1) {
             s     = s.mid(idx, slash - idx);
-            *base = convertRoot(s.mid(slash + 1), &alter);
+            *base = convertRoot(s.mid(slash + 1));
             }
       else
             s = s.mid(idx);
@@ -744,7 +735,7 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
             if (extensionNames[i].name == s)
                   return i;
             }
-      return 1;
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -758,17 +749,17 @@ void Harmony::endEdit()
       QString s = getText();
       int r, b;
       int e = parseHarmony(getText(), &r, &b);
-      if (e != -1) {
-            setRoot(r);
-            setBase(b);
+      if (e > 0) {
+            setRootTpc(r);
+            setBaseTpc(b);
             setExtension(e);
             buildText();
             }
       else {
-            setRoot(0);             // unknown
-            setBase(0);
-            setExtension(1);
-            // leave text as entered
+            // syntax error, leave text as is
+            setRootTpc(INVALID_TPC);
+            setBaseTpc(INVALID_TPC);
+            setExtension(0);
             }
       }
 

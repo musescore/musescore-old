@@ -1245,6 +1245,14 @@ failed: </source>
         <source>v-frame staff dist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1844,6 +1852,45 @@ failed: </source>
     <message>
         <source>Offset2</source>
         <translation>Offset2</translation>
+    </message>
+</context>
+<context>
+    <name>LyricsBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Forma</translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished">Letras</translation>
+    </message>
+    <message>
+        <source>Syllabic:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Tick:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3234,12 +3281,6 @@ failed: </source>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>The current Score contains unsaved data
-Save Current Score?</source>
-        <translation>A partitura em utilização contém informação por gravar
-Gravar pauta?</translation>
-    </message>
-    <message>
         <source>&amp;Save</source>
         <translation>&amp;Gravar</translation>
     </message>
@@ -3868,6 +3909,11 @@ falhou:</translation>
     </message>
     <message>
         <source>MuseScore online manual not found at: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The score &quot;%1&quot;contains unsaved data
+Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4708,45 +4754,6 @@ falhou:</translation>
     <message>
         <source>Setup...</source>
         <translation>Setup...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatFlagDialogBase</name>
-    <message>
-        <source>Dialog - Setup Repeats</source>
-        <translation>Diálogo - Setup de repetições</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>RepTypeName</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>Especial para</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>Rótulo de texto</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>Ciclos</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Múmero</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Número de destino</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>Ciclos a tocar</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>Número de ciclos, exemplo: 1,3,5</translation>
     </message>
 </context>
 <context>

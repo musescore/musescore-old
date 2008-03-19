@@ -111,6 +111,7 @@ void EditStyle::getValues()
       lstyle->smallStaffMag          = smallStaffSize->value() * 0.01;
       lstyle->smallNoteMag           = smallNoteSize->value() * 0.01;
       lstyle->smallClefMag           = smallClefSize->value() * 0.01;
+      lstyle->pageFillLimit          = pageFillThreshold->value() * 0.01;
       }
 
 //---------------------------------------------------------
@@ -170,5 +171,6 @@ void EditStyle::setValues()
       smallStaffSize->setValue(lstyle->smallStaffMag * 100.0);
       smallNoteSize->setValue(lstyle->smallNoteMag * 100.0);
       smallClefSize->setValue(lstyle->smallClefMag * 100.0);
+      pageFillThreshold->setValue(lstyle->pageFillLimit * 100.0);
       }
 

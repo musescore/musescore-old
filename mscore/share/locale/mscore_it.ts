@@ -1248,6 +1248,14 @@ fallito: </translation>
         <source>v-frame staff dist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1851,6 +1859,45 @@ fallito: </translation>
     </message>
 </context>
 <context>
+    <name>LyricsBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
+    <message>
+        <source>Lyrics</source>
+        <translation type="unfinished">Lirica</translation>
+    </message>
+    <message>
+        <source>Syllabic:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Tick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MagBox</name>
     <message>
         <source>Mag</source>
@@ -2032,12 +2079,6 @@ fallito: </translation>
     <message>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>The current Score contains unsaved data
-Save Current Score?</source>
-        <translation>Lo Spartito in uso contiene Dati non ancora Salvati
-Vuoi Salvarlo?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -3875,6 +3916,11 @@ fallito: </translation>
         <source>MuseScore online manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The score &quot;%1&quot;contains unsaved data
+Save Current Score?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4713,45 +4759,6 @@ fallito: </translation>
     <message>
         <source>Setup...</source>
         <translation>Impostazioni...</translation>
-    </message>
-</context>
-<context>
-    <name>RepeatFlagDialogBase</name>
-    <message>
-        <source>Dialog - Setup Repeats</source>
-        <translation>Impostazioni Ripetizioni</translation>
-    </message>
-    <message>
-        <source>repTypeName</source>
-        <translation>Nome Tipo Ripetizione</translation>
-    </message>
-    <message>
-        <source>Set specials for</source>
-        <translation>Impostazione speciale per</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>Etichetta Testo</translation>
-    </message>
-    <message>
-        <source>Cycles</source>
-        <translation>Cicli</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Numero</translation>
-    </message>
-    <message>
-        <source>Destination number</source>
-        <translation>Numero Destinazione</translation>
-    </message>
-    <message>
-        <source>Cycles to play</source>
-        <translation>Cicli da Sounare</translation>
-    </message>
-    <message>
-        <source>cycle numbers, example: 1,3,5</source>
-        <translation>Numero Ciclo, esempio: 1,3,5</translation>
     </message>
 </context>
 <context>

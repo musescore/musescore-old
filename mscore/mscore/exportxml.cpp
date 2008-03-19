@@ -72,6 +72,7 @@
 #include "harmony.h"
 #include "tempotext.h"
 #include "sym.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -2574,21 +2575,21 @@ bool Score::saveMxl(const QString& name)
 
 void ExportMusicXml::harmony(Harmony* h)
       {
-      static char* stepTable[] = {
+//      static char* stepTable[] = {
 //          "C",  "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
-            "C",  "D",  "D", "E",  "E", "F", "G",  "G", "A",  "A", "B",  "B"
-            };
-      static int alterTable[] = {
-            0,     -1,   0,  -1,    0,   0,   -1,   0,  -1,    0,   -1,   0
-            };
+//            "C",  "D",  "D", "E",  "E", "F", "G",  "G", "A",  "A", "B",  "B"
+//            };
+//      static int alterTable[] = {
+//            0,     -1,   0,  -1,    0,   0,   -1,   0,  -1,    0,   -1,   0
+//            };
 
       xml.stag("harmony print-frame=\"no\"");
-      int root = h->root();
+      int rootTpc = h->rootTpc();
       const char* extension = "";
-      if (root > 0) {
+      if (rootTpc != INVALID_TPC) {
             xml.stag("root");
-            xml.tag("root-step", stepTable[root - 1]);
-            int alter = alterTable[root - 1];
+            xml.tag("root-step", tpc2stepName(rootTpc));
+            int alter = tpc2alter(rootTpc);
             if (alter)
                   xml.tag("root-alter", alter);
             xml.etag();

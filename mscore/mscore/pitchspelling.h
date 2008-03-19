@@ -36,6 +36,8 @@ inline static int pitch2tpc(int pitch)
       return (((((pitch % 12) * 7) % 12) + 5) % 12) + 9;
       }
 
+const int INVALID_TPC = -2;
+
 extern void spell(QList<NoteEvent*>& notes, int);
 extern void spell(QList<Note*>& notes);
 extern int computeWindow(const QList<Note*>& notes, int start, int end);
@@ -45,6 +47,9 @@ extern QString tpc2name(int tpc);
 extern int line2tpc(int line, int prefix);
 extern int tpc2pitch(int tpc);
 extern int tpc2line(int tpc);
+extern int tpc2alter(int tpc);
+extern QString tpc2stepName(int tpc);
+extern int step2tpc(const QString& step, int alter);
 
 #endif
 

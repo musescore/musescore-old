@@ -61,7 +61,7 @@ class HChord {
       bool operator==(const HChord& o) const { return (keys == o.keys); }
       bool operator!=(const HChord& o) const { return (keys != o.keys); }
 
-      QString name(int key, bool flat);
+      QString name(int tpc);
       };
 
 //---------------------------------------------------------
@@ -87,12 +87,24 @@ class HDegree {
 
 //---------------------------------------------------------
 //   class Harmony
+//
+//    root note and bass note are notatated as
+//    "tonal pitch class":
+//
+//           bb  b   -   #  ##
+//            0,  7, 14, 21, 28,  // C
+//            2,  9, 16, 23, 30,  // D
+//            4, 11, 18, 25, 32,  // E
+//           -1,  6, 13, 20, 27,  // F
+//            1,  8, 15, 22, 29,  // G
+//            3, 10, 17, 24, 31,  // A
+//            5, 12, 19, 26, 33,  // B
 //---------------------------------------------------------
 
 class Harmony : public Text {
-      unsigned char _base;
-      int _extension;
-      unsigned char _root;
+      int _baseTpc;     // bass note, chord base; used for "slash" chords
+      int _extension;   // chord number, index in table "extensionNames"
+      int _rootTpc;     // root note for chord
       QList<HDegree> _degreeList;
 
    public:
@@ -106,14 +118,14 @@ class Harmony : public Text {
 
       virtual void endEdit();
 
-      unsigned char base() const           { return _base;      }
-      void setBase(unsigned char val)      { _base = val;       }
-      unsigned int extension() const       { return _extension; }
-      void setExtension(unsigned char val) { _extension = val;  }
-      unsigned char root() const           { return _root;      }
-      void setRoot(unsigned char val)      { _root = val;       }
-      void addDegree(HDegree d)            { _degreeList << d;  }
-      int numberOfDegrees()                { return _degreeList.size(); }
+      int baseTpc() const                  { return _baseTpc;      }
+      void setBaseTpc(int val)             { _baseTpc = val;       }
+      int rootTpc() const                  { return _rootTpc;      }
+      void setRootTpc(int val)             { _rootTpc = val;       }
+      int extension() const                { return _extension;    }
+      void setExtension(int val)           { _extension = val;     }
+      void addDegree(HDegree d)            { _degreeList << d;     }
+      int numberOfDegrees()                { return _degreeList.size();   }
       HDegree degree(int i)                { return _degreeList.value(i); }
 
       virtual void write(Xml& xml) const;
@@ -125,7 +137,6 @@ class Harmony : public Text {
       static const char* getExtensionName(int i);
       static QString harmonyName(int root, int extension, int base);
       static int parseHarmony(const QString& s, int* root, int* base);
-      static QString rootName(int root);
       };
 
 #endif
