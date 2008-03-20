@@ -198,7 +198,8 @@ Style defaultStyle = {
       Spatium(0.5),     // propertyDistanceHead
       Spatium(0.5),     // propertyDistanceStem; note property to note stem
       Spatium(0.25),    // propertyDistance; note property to note property
-      0.3,              // pageFillLimit
+      0.7,              // pageFillLimit
+      0.5,              // lastSystemFillLimit
       Spatium(1.2),     // hairpinHeight
       Spatium(0.5),     // hairpinContHeight
       Spatium(0.13),    // hairpinWidth
@@ -366,7 +367,7 @@ void TextStyle::read(QDomElement e)
 //   load
 //---------------------------------------------------------
 
-void Style::load(QDomElement e)
+void Style::load(QDomElement e, int version)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -470,8 +471,13 @@ void Style::load(QDomElement e)
                   propertyDistance = Spatium(d);
             else if (tag == "ticklen2Width")    // obsolete
                   ;
-            else if (tag == "pageFillLimit")
+            else if (tag == "pageFillLimit") {
                   pageFillLimit = d;
+                  if (version < 0x107)
+                        pageFillLimit = 1.0 - pageFillLimit;
+                  }
+            else if (tag == "lastSystemFillLimit")
+                  lastSystemFillLimit = d;
             else if (tag == "hairpinHeight")
                   hairpinHeight = Spatium(d);
             else if (tag == "hairpinContHeight")
@@ -563,6 +569,7 @@ void Style::save(Xml& xml)
       xml.tag("propertyDistanceStem",   propertyDistanceStem.val());
       xml.tag("propertyDistance",       propertyDistance.val());
       xml.tag("pageFillLimit",          pageFillLimit);
+      xml.tag("lastSystemFillLimit",    lastSystemFillLimit);
       xml.tag("hairpinHeight",          hairpinHeight.val());
       xml.tag("hairpinContHeight",      hairpinContHeight.val());
       xml.tag("hairpinWidth",           hairpinWidth.val());

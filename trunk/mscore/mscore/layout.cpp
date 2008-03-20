@@ -477,7 +477,7 @@ bool ScoreLayout::layoutPage()
       double ph = page->height()
             - point(score()->style()->staffLowerBorder + score()->style()->staffUpperBorder);
 
-      if (restHeight > (ph * score()->style()->pageFillLimit))
+      if (restHeight > (ph * (1.0 - score()->style()->pageFillLimit)))
             return true;
 
       double dist = restHeight / (rows - 1);
@@ -599,6 +599,12 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             ++curSystem;
             ww -= minWidth;
             }
+
+      //
+      // dont stretch last system row, if minWidth is <= lastSystemFillLimit
+      //
+      if (curMeasure == 0 && ((minWidth / rowWidth) <= score()->style()->lastSystemFillLimit))
+            rowWidth = minWidth;
 
       //-------------------------------------------------------
       //    Round II

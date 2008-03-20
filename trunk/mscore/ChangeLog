@@ -1,3 +1,7 @@
+20.3.8 (ws)
+      - implemented style parameter "lastSystemFillLimit". If normal
+        width of last system in score is less than configured value (in %),
+        then last measure is not stretched to full page width
 19.3.8 (ws)
       - fix entry of slash chords (e.g. C/G)
       - extend harmony representation to allow for C# and Db root notes:
