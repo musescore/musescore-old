@@ -1,4 +1,5 @@
 20.3.8 (ws)
+      - fixed crash when trying to move a line anchor past last measure
       - implemented style parameter "lastSystemFillLimit". If normal
         width of last system in score is less than configured value (in %),
         then last measure is not stretched to full page width

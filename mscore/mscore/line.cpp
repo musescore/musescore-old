@@ -233,6 +233,18 @@ void SLine::setTick2(int t)
 QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
+      if (seg == 0) {
+            MeasureBase* mb = score()->measures()->last();;
+            while (mb) {
+                  if (mb->type() == MEASURE)
+                        break;
+                  mb = mb->prev();
+                  }
+            if (mb == 0 || mb->type() != MEASURE)
+                  return QPointF();
+            Measure* m = (Measure*)mb;
+            seg = m->last();
+            }
       System*  sys = seg->measure()->system();
       *system = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
