@@ -49,6 +49,11 @@
        <string>Sizes</string>
       </property>
      </item>
+     <item>
+      <property name="text" >
+       <string>Hairpins</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="0" column="1" >
@@ -283,6 +288,26 @@
          </property>
          <property name="value" >
           <double>70.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2" >
+        <widget class="QLabel" name="label_7" >
+         <property name="text" >
+          <string>Last system fill threshold</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3" >
+        <widget class="QDoubleSpinBox" name="lastSystemFillThreshold" >
+         <property name="suffix" >
+          <string>%</string>
+         </property>
+         <property name="maximum" >
+          <double>100.000000000000000</double>
+         </property>
+         <property name="value" >
+          <double>100.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -799,6 +824,66 @@
           <double>70.000000000000000</double>
          </property>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Seite_3" >
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label_8" >
+         <property name="text" >
+          <string>Line width</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QDoubleSpinBox" name="hairpinLineWidth" />
+       </item>
+       <item row="0" column="2" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_9" >
+         <property name="text" >
+          <string>Height</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QDoubleSpinBox" name="hairpinHeight" />
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_10" >
+         <property name="text" >
+          <string>Continue Height</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QDoubleSpinBox" name="hairpinContinueHeight" />
+       </item>
+       <item row="3" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

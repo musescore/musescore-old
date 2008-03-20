@@ -111,7 +111,13 @@ void EditStyle::getValues()
       lstyle->smallStaffMag          = smallStaffSize->value() * 0.01;
       lstyle->smallNoteMag           = smallNoteSize->value() * 0.01;
       lstyle->smallClefMag           = smallClefSize->value() * 0.01;
+
       lstyle->pageFillLimit          = pageFillThreshold->value() * 0.01;
+      lstyle->lastSystemFillLimit    = lastSystemFillThreshold->value() * 0.01;
+
+      lstyle->hairpinWidth           = Spatium(hairpinLineWidth->value());
+      lstyle->hairpinHeight          = Spatium(hairpinHeight->value());
+      lstyle->hairpinContHeight      = Spatium(hairpinContinueHeight->value());
       }
 
 //---------------------------------------------------------
@@ -172,5 +178,10 @@ void EditStyle::setValues()
       smallNoteSize->setValue(lstyle->smallNoteMag * 100.0);
       smallClefSize->setValue(lstyle->smallClefMag * 100.0);
       pageFillThreshold->setValue(lstyle->pageFillLimit * 100.0);
+      lastSystemFillThreshold->setValue(lstyle->lastSystemFillLimit * 100.0);
+
+      hairpinLineWidth->setValue(lstyle->hairpinWidth.val());
+      hairpinHeight->setValue(lstyle->hairpinHeight.val());
+      hairpinContinueHeight->setValue(lstyle->hairpinContHeight.val());
       }
 

@@ -180,6 +180,8 @@ struct Style {
       Spatium propertyDistance;      // note property to note property
 
       double pageFillLimit;         // 0-1.0
+      double lastSystemFillLimit;
+
       Spatium hairpinHeight;
       Spatium hairpinContHeight;
       Spatium hairpinWidth;
@@ -198,7 +200,7 @@ struct Style {
       double smallStaffMag;
       double smallClefMag;
 
-      void load(QDomElement e);
+      void load(QDomElement e, int version);
       void save(Xml& xml);
       };
 

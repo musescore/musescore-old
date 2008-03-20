@@ -642,16 +642,14 @@ bool Score::loadStyle(QFile* qf)
       docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  /*
                   QString version = e.attribute(QString("version"));
                   QStringList sl = version.split('.');
                   _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
-                  */
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         if (tag == "Style")
-                              _style->load(ee);
+                              _style->load(ee, _mscVersion);
                         else if (tag == "TextStyle") {
                               QString name = ee.attribute("name");
                               TextStyle* s = 0;
@@ -826,7 +824,7 @@ bool Score::read(QDomElement e)
                   else if (tag == "showInvisible")
                         _showInvisible = i;
                   else if (tag == "Style")
-                        _style->load(ee);
+                        _style->load(ee, _mscVersion);
                   else if (tag == "TextStyle") {
                         QString name = ee.attribute("name");
                         TextStyle* s = 0;
