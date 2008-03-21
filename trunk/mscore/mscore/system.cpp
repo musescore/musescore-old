@@ -670,7 +670,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             QRectF b = l->bbox();
             qreal w  = b.width();
             qreal h  = b.height();
-            qreal x  = b.x() + _spatium + w;
+            qreal x  = b.x() + w;
             qreal y  = b.y() + h * .5;
             line->setPos(QPointF(x, y));
 
@@ -681,7 +681,19 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
                   System* system = s->measure()->system();
                   x2 = system->canvasPos().x() + system->bbox().width();
                   }
+
             len = x2 - x1 - 2 * _spatium - w;
+            double xo = _spatium;
+            if (len < 0.0) {                // set minimum len
+                  len       = _spatium * .5;
+                  double gap = x2 - x1 - w - len;
+                  if (gap < 0.0)
+                        xo = 0.0;
+                  else
+                        xo = gap * .5;
+                  }
+
+            line->setPos(QPointF(x + xo, y));
             Spatium sp;
             sp.set(len);
             line->setLen(sp);
