@@ -473,7 +473,7 @@ void Style::load(QDomElement e, int version)
                   ;
             else if (tag == "pageFillLimit") {
                   pageFillLimit = d;
-                  if (version < 0x107)
+                  if (version < 107)
                         pageFillLimit = 1.0 - pageFillLimit;
                   }
             else if (tag == "lastSystemFillLimit")

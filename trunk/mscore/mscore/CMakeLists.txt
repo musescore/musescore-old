@@ -196,6 +196,7 @@ else (MINGW)
    if (USE_GLOBAL_FLUID)
          target_link_libraries(mscore
             ${QT_LIBRARIES}
+            ${QT_QTSCRIPT_LIBRARY_RELEASE}
             ${ALSA_LIB}
             ${JACK_LIB}
             ${PORTAUDIO_LIB}
@@ -206,6 +207,7 @@ else (MINGW)
    else (USE_GLOBAL_FLUID)
          target_link_libraries(mscore
             ${QT_LIBRARIES}
+            ${QT_QTSCRIPT_LIBRARY_RELEASE}
             ${ALSA_LIB}
             ${JACK_LIB}
             ${PORTAUDIO_LIB}
