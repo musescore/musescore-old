@@ -40,8 +40,8 @@
     <beamWidth>0.48</beamWidth>
     <beamDistance>0.5</beamDistance>
     <beamMinLen>1.25</beamMinLen>
-    <beamMinSlope>0.1</beamMinSlope>
-    <beamMaxSlope>0.5</beamMaxSlope>
+    <beamMinSlope>0.05</beamMinSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
     <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
     <dotRestDistance>0.25</dotRestDistance>

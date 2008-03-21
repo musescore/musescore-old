@@ -571,7 +571,6 @@ void Measure::layout(ScoreLayout* layout, double width)
                         Lyrics* lyrics = *i;
                         if (lyrics == 0)
                               continue;
-                        lyrics->layout(layout);
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width(mag());
                         double lh            = lyrics->lineSpacing();
@@ -2314,8 +2313,10 @@ void Measure::read(QDomElement e, int idx)
                   ks->setTrack(score()->curTrack);
                   ks->setTick(score()->curTick);
                   ks->read(e);
-                  int oldSig = staff->keymap()->key(score()->curTick - 1);
-                  ks->setSig(oldSig, ks->subtype() & 0xff);
+                  char oldSig = staff->keymap()->key(score()->curTick - 1);
+                  char newSig = ks->subtype() & 0xff;
+printf("setSig  old %d  new %d  raw %d\n", oldSig, newSig, ks->subtype());
+                  ks->setSig(oldSig, newSig);
                   Segment* s = getSegment(ks);
                   s->add(ks);
                   score()->curTick = ks->tick();

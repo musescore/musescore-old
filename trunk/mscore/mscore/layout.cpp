@@ -505,9 +505,10 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
-      minWidth = 0.0;
       system->layout(this);
-      double systemWidth  = w - system->leftMargin();
+      minWidth            = system->leftMargin();
+      double systemWidth  = w;
+
       double uStretch     = 1.0;
       bool continueFlag   = false;
 

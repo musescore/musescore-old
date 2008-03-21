@@ -260,7 +260,7 @@ Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
 
 void KeySig::setSig(int old, int newSig)
       {
-      setSubtype((old << 8) | (newSig & 0xff));
+      setSubtype(((old & 0xff) << 8) | (newSig & 0xff));
       }
 
 

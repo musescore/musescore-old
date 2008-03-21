@@ -95,7 +95,7 @@ _QT4_ADJUST_LIB_VARS(QTSCRIPT)
 include(${QT_USE_FILE})
 
 #for cmake 2.4
-QT_MODULE_SETUP(SCRIPT)
+# QT_MODULE_SETUP(SCRIPT)
 
 ##
 ## look for fluidsynth

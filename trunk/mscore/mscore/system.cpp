@@ -209,6 +209,7 @@ void System::layout(ScoreLayout* layout)
       //---------------------------------------------------
 
       _leftMargin = xoff2;
+
       for (int i = 0; i < bracketLevels; ++i)
             _leftMargin += bracketWidth[i];
 

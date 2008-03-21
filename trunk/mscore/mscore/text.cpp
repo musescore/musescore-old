@@ -47,6 +47,7 @@ TextBase::TextBase()
       _frameColor   = QColor(Qt::black);
       _frameRound   = 25;
       _circle       = false;
+      _doc->setUseDesignMetrics(true);
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
@@ -194,9 +195,14 @@ void TextBase::layout(ScoreLayout* layout)
 
       _doc->documentLayout()->setPaintDevice(device);
 
-      _doc->setTextWidth(1000000.0);       //!? qt bug?
+#if 1
+//      _doc->setTextWidth(1000000.0);       //!? qt bug?
+      _doc->setTextWidth(-1.0);
       double tw = _doc->idealWidth();
       _doc->setTextWidth(tw);
+#else
+      _doc->adjustSize();
+#endif
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -217,15 +223,14 @@ void TextBase::layout(ScoreLayout* layout)
                         frame.setWidth(frame.height());
                         }
                   }
-            double w = _paddingWidth * dpmm;
-            frame.adjust(-w, -w, w, w);
-
-            _bbox = frame;
-            double lw = _frameWidth * dpmm * .5;
-            _bbox = frame.adjusted(-lw, -lw, lw, lw);
+            double w = (_paddingWidth + _frameWidth * .5) * dpmm;
+            _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            _bbox = QRectF(QPointF(), _doc->size());
+            // _bbox = QRectF(QPointF(), _doc->size() * 1.3);
+            // _bbox = QRectF(QPointF(), _doc->size());
+//            _bbox = QRectF(QPointF(), _doc->documentLayout()->size());
+            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
             }
       }
 
