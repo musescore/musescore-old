@@ -189,8 +189,8 @@ Style defaultStyle = {
       Spatium(0.48),    // beamWidth
       0.5,              // beamDistance, units of beamWidth
       Spatium(1.25),    // beamMinLen, len for broken beams
-      0.1,              // beamMinSlope
-      0.5,              // beamMaxSlope
+      0.05,             // beamMinSlope
+      0.2,              // beamMaxSlope
       division,         //  maxBeamTicks : 1/4 or 1/2 groups
       Spatium(0.5),     // dotNoteDistance
       Spatium(0.25),    // dotRestDistance

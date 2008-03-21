@@ -949,8 +949,9 @@ void Score::printFile()
 #endif
 
       QPrintDialog pd(&printer, 0);
-      if (!pd.exec())
+      if (!pd.exec()) {
             return;
+            }
       print(&printer);
       }
 
@@ -969,11 +970,13 @@ void Score::print(QPrinter* printer)
       double oldDPI    = DPI;
       DPI              = printer->logicalDpiX();         // drawing resolution
 
-//HACK:
-printerMag = DPI / oldDPI;
+      //HACK:
+      printerMag = DPI / oldDPI;    // used for text line spacing
 
-      DPMM             = DPI / INCH;                     // dots/mm
-      setSpatium(_spatium * DPI / oldDPI);
+      DPMM     = DPI / INCH;                     // dots/mm
+      _spatium = 20.0 / 72.0 * DPI / 4.0;
+      setSpatium(_spatium);
+
       QPaintDevice* oldPaintDevice = layout()->paintDevice();
       layout()->setPaintDevice(printer);
       layout()->doLayout();
@@ -991,17 +994,7 @@ printerMag = DPI / oldDPI;
             if (n)
                   printer->newPage();
             const Page* page = pl.at(n);
-
-//            el.clear();
             page->collectElements(el);
-/*            foreach (const Element* element, *layout()->gel())
-                  element->collectElements(el);
-            foreach(System* system, *page->systems()) {
-                  foreach(MeasureBase* m, system->measures()) {
-                        m->collectElements(el);
-                        }
-                  }
-*/
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el[i];
                   if (!e->visible())
@@ -1014,11 +1007,13 @@ printerMag = DPI / oldDPI;
                   }
             }
       p.end();
-      _printing = false;
-printerMag = 1.0;
-      DPI       = oldDPI;
-      DPMM      = DPI / INCH;                     // dots/mm
-      setSpatium(oldSpatium);
+      _printing  = false;
+      printerMag = 1.0;
+      DPI        = oldDPI;
+      DPMM       = DPI / INCH;                     // dots/mm
+
+      _spatium = oldSpatium;
+      setSpatium(_spatium);
       layout()->setPaintDevice(oldPaintDevice);
       layout()->doLayout();
       }

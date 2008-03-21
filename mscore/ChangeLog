@@ -1,3 +1,5 @@
+21.3.8 (ws)
+      - fix key sig changes
 20.3.8 (ws)
       - fixed crash when trying to move a line anchor past last measure
       - implemented style parameter "lastSystemFillLimit". If normal
