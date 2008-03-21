@@ -1,4 +1,5 @@
 21.3.8 (ws)
+      - better formatting of hyphens in lyrics
       - fix key sig changes
 20.3.8 (ws)
       - fixed crash when trying to move a line anchor past last measure
