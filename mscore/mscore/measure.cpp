@@ -2315,7 +2315,6 @@ void Measure::read(QDomElement e, int idx)
                   ks->read(e);
                   char oldSig = staff->keymap()->key(score()->curTick - 1);
                   char newSig = ks->subtype() & 0xff;
-printf("setSig  old %d  new %d  raw %d\n", oldSig, newSig, ks->subtype());
                   ks->setSig(oldSig, newSig);
                   Segment* s = getSegment(ks);
                   s->add(ks);
