@@ -1,0 +1,1508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.7">
+  <Mag>1</Mag>
+  <xoff>2.75167</xoff>
+  <yoff>-0.211633</yoff>
+  <Spatium>1.76389</Spatium>
+  <Division>480</Division>
+  <Style>
+    <staffUpperBorder>7</staffUpperBorder>
+    <staffLowerBorder>7</staffLowerBorder>
+    <staffDistance>6.5</staffDistance>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <systemDistance>9.25</systemDistance>
+    <lyricsDistance>2</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
+    <minMeasureWidth>4</minMeasureWidth>
+    <barWidth>0.16</barWidth>
+    <doubleBarWidth>0.16</doubleBarWidth>
+    <endBarWidth>0.3</endBarWidth>
+    <doubleBarDistance>0.3</doubleBarDistance>
+    <endBarDistance>0.3</endBarDistance>
+    <bracketWidth>0.35</bracketWidth>
+    <bracketDistance>0.3</bracketDistance>
+    <clefLeftMargin>0.5</clefLeftMargin>
+    <keysigLeftMargin>0.5</keysigLeftMargin>
+    <timesigLeftMargin>0.5</timesigLeftMargin>
+    <clefKeyRightMargin>1.75</clefKeyRightMargin>
+    <stemWidth>0.13</stemWidth>
+    <minNoteDistance>0.5</minNoteDistance>
+    <measureSpacing>1.3</measureSpacing>
+    <barNoteDistance>1.5</barNoteDistance>
+    <noteBarDistance>1</noteBarDistance>
+    <staffLineWidth>0.08</staffLineWidth>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <akkoladeWidth>1.6</akkoladeWidth>
+    <prefixDistance>0.13</prefixDistance>
+    <prefixNoteDistance>0.22</prefixNoteDistance>
+    <beamWidth>0.48</beamWidth>
+    <beamDistance>0.5</beamDistance>
+    <beamMinLen>1.25</beamMinLen>
+    <beamMinSlope>0.1</beamMinSlope>
+    <beamMaxSlope>0.5</beamMaxSlope>
+    <maxBeamTicks>480</maxBeamTicks>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <dotRestDistance>0.25</dotRestDistance>
+    <dotDotDistance>0.5</dotDotDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistanceStem>0.5</propertyDistanceStem>
+    <propertyDistance>0.25</propertyDistance>
+    <pageFillLimit>0.7</pageFillLimit>
+    <lastSystemFillLimit>0</lastSystemFillLimit>
+    <hairpinHeight>1.2</hairpinHeight>
+    <hairpinContHeight>0.5</hairpinContHeight>
+    <hairpinWidth>0.13</hairpinWidth>
+    <showPageNumber>1</showPageNumber>
+    <showPageNumberOne>0</showPageNumberOne>
+    <pageNumberOddEven>1</pageNumberOddEven>
+    <showMeasureNumber>1</showMeasureNumber>
+    <showMeasureNumberOne>0</showMeasureNumberOne>
+    <measureNumberInterval>5</measureNumberInterval>
+    <measureNumberAllStaffs>0</measureNumberAllStaffs>
+    <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <movement-title>Chord test</movement-title>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="2">
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      </Staff>
+    <Instrument>
+      <chorus>30</chorus>
+      <reverb>30</reverb>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <VBox>
+      <height>10</height>
+      <Text>
+        <subtype>Title</subtype>
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Chord test</p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>Composer</subtype>
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Wijnand</p></body></html>
+          </html-data>
+        </Text>
+      </VBox>
+    <Measure number="1">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>12</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bb</p></body></html>
+          </html-data>
+        </Harmony>
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="2">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">none</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="3">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">other</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="4">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">(empty)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="5">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">(space)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C </p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="6">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-sixth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>5</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C6</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="7">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-seventh</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>6</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="8">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-ninth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>7</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj9</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="9">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-11th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="10">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-13th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>10</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="11">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>16</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="12">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-sixth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>23</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm6</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-seventh</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>19</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="14">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-ninth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>20</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm9</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="15">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-11th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>21</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm11</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="16">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-13th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>22</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="17">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-major</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="18">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-seventh</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="19">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-ninth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>70</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C9</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="20">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-11th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="21">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-13th</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="22">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">diminished</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>33</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cdim</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="23">
+      <Harmony>
+        <root>14</root>
+        <extension>185</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cdim7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">diminished-</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">seventh</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="24">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">half-diminished</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>88</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7b5</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="25">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>4</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Caug</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="26">
+      <Harmony>
+        <root>14</root>
+        <extension>99</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7#5</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented-</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">seventh</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="27">
+      <Harmony>
+        <root>14</root>
+        <extension>128</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7sus</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">suspended-</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">fourth</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="28">
+      <Harmony>
+        <root>14</root>
+        <extension>186</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Csus2</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">suspended-</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">second</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="29">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">power</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="30">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">neapolitan</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>187</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmb3b13</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="31">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">italian</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>188</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C#13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="32">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">french</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>189</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C#11#13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="33">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">german</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>190</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cadd#13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="34">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj69</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>191</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C6/add9</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="35">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented-ninth</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="36">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">altered</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="37">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj(no5)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="38">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj(add2)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>1</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="39">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#11)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>6</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="40">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#5)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>6</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="41">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#5#11)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>6</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="42">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">m7(b9)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>19</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+          </html-data>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="43">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">m7(b13)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>19</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="44">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(b5)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="45">
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(b5b9)</p></body></html>
+          </html-data>
+        </Text>
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="46">
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt1:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(#5#9#11)</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="47">
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt2:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(#5b9#9#11)</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="48">
+      <Harmony>
+        <root>14</root>
+        <extension>99</extension>
+        <subtype>Chordname</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7#5</p></body></html>
+          </html-data>
+        </Harmony>
+      <Text>
+        <subtype>Staff</subtype>
+        <valign>baseline</valign>
+        <yoffset>7</yoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt3:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">aug7(#9#11)</p></body></html>
+          </html-data>
+        </Text>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    </Staff>
+  <cursorTrack>0</cursorTrack>
+  </museScore>
