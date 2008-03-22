@@ -42,7 +42,13 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
       void reverbChanged(double);
       void chorusChanged(double);
       void muteChanged(bool);
-      void soloChanged(bool);
+      void soloToggled(bool);
+
+   public slots:
+      void updateSolo();
+
+   signals:
+      void soloChanged();
 
    public:
       PartEdit(QWidget* parent = 0);
@@ -60,6 +66,12 @@ class InstrumentListEditor : public QScrollArea
       QVBoxLayout* vb;
 
       virtual void closeEvent(QCloseEvent*);
+
+   private slots:
+      void updateSolo();
+
+   signals:
+      void soloChanged();
 
    public:
       InstrumentListEditor(QWidget* parent);

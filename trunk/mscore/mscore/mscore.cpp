@@ -277,7 +277,7 @@ MuseScore::MuseScore()
          << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
          << "rehearsalmark-text" << "copyright-text"
          << "lyrics" << "fingering" << "system-text" << "tempo"
-         << "metronome" << "cut" << "copy" << "paste"
+         << "cut" << "copy" << "paste"
          << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"

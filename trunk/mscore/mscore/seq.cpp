@@ -475,15 +475,28 @@ void Seq::playEvent(const Event* event)
             e.type = ME_NOTEON | channel;
             e.a    = n->pitch();
             e.b    = n->velo();
-            driver->putEvent(e);
+            bool mute;
+            Note* note = n->note();
+            if (note) {
+                  Instrument* instr = n->note()->staff()->part()->instrument();
+                  mute = instr->mute || instr->solo;
+                  }
+            else {
+                  mute = false;
+                  }
 
-            if (n->velo())
-                  activeNotes.append(n);
+            if (n->velo()) {
+                  if (!mute) {
+                        driver->putEvent(e);
+                        activeNotes.append(n);
+                        }
+                  }
             else {
                   for (QList<NoteOn*>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
                         NoteOn* l = *k;
                         if (l->channel() == channel && l->pitch() == n->pitch()) {
                               activeNotes.erase(k);
+                              driver->putEvent(e);
                               break;
                               }
                         }

@@ -120,7 +120,6 @@ class Canvas : public QFrame, public Viewer {
       bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
-      const QList<const Element*> elementsAt(const QRectF&);
 
    private slots:
       void cursorBlink();

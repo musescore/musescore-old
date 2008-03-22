@@ -1240,6 +1240,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Tempo..."),
          QT_TR_NOOP("Tempo")
          ),
+#if 0
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "metronome",
@@ -1249,6 +1250,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Metronome"),
          QT_TR_NOOP("Metronome")
          ),
+#endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "system-text",

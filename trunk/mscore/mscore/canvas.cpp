@@ -2009,23 +2009,7 @@ const QList<const Element*> Canvas::elementsAt(const QPointF& p)
       {
       QList<const Element*> el = _layout->items(p);
       qSort(el.begin(), el.end(), elementLower);
-      foreach(const Element* e, el)
-            e->itemDiscovered = false;
       return el;
-      }
-
-const QList<const Element*> Canvas::elementsAt(const QRectF& r)
-      {
-      QList<const Element*> el = _layout->items(r);
-      QList<const Element*> ll;
-      for (int i = 0; i < el.size(); ++i) {
-            const Element* e = el.at(i);
-            e->itemDiscovered = 0;
-            if (e->abbox().intersects(r))
-                  ll.append(e);
-            }
-      qSort(ll.begin(), ll.end(), elementLower);
-      return ll;
       }
 
 //---------------------------------------------------------
@@ -2054,15 +2038,25 @@ Element* Canvas::elementNear(const QPointF& p)
       double w  = (preferences.proximity * .5) / matrix().m11();
       QRectF r(p.x() - w, p.y() - w, 2.0 * w, 2.0 * w);
 
-      QList<const Element*> el = elementsAt(r);
-      if (el.empty())
+
+      QList<const Element*> el = _layout->items(r);
+      QList<const Element*> ll;
+      for (int i = 0; i < el.size(); ++i) {
+            const Element* e = el.at(i);
+            e->itemDiscovered = 0;
+            if (e->abbox().intersects(r) && e->selectable())
+                  ll.append(e);
+            }
+      qSort(ll.begin(), ll.end(), elementLower);
+
+      if (ll.empty())
             return 0;
 #if 0
       printf("elementNear ========= %f %f\n", _spatium, w);
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
-      return const_cast<Element*>(el.at(0));
+      return const_cast<Element*>(ll.at(0));
       }
 
 //---------------------------------------------------------
