@@ -2542,7 +2542,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       else {
             ha->setExtension(extension);
-            ha->setText(ha->harmonyName());
+            ha->buildText();
             }
       ha->setVisible(printObject == "yes");
       measure->add(ha);

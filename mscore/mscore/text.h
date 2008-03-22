@@ -78,6 +78,7 @@ class TextBase {
       bool readProperties(QDomElement e);
       QFont defaultFont() const             { return _doc->defaultFont(); }
       void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
+      void clear()                          { _doc->clear();              }
       void layout(ScoreLayout*);
       QRectF bbox() const { return _bbox; }
       void draw(QPainter&, QTextCursor*) const;
@@ -118,6 +119,7 @@ class TextB : public Element {
       void setMovable(bool val)             { _movable = val;              }
 
       virtual TextBase* textBase() const = 0;
+      void clear()                          { textBase()->clear();          }
       void setText(const QString& s)        { textBase()->setText(s, _align); }
       QString getText() const               { return textBase()->getText(); }
       QString getHtml() const               { return textBase()->getHtml(); }

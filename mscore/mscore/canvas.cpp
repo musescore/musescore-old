@@ -671,7 +671,7 @@ void Canvas::updateGrips()
 //   mouseReleaseEvent
 //---------------------------------------------------------
 
-void Canvas::mouseReleaseEvent(QMouseEvent* ev)
+void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
       {
       _score->start();
       if (dragCanvasState) {

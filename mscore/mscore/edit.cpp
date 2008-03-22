@@ -1124,7 +1124,7 @@ void Score::chordTab(bool back)
 //   lyricsTab
 //---------------------------------------------------------
 
-void Score::lyricsTab(bool back)
+void Score::lyricsTab(bool /*back*/)
       {
       start();
 

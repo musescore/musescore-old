@@ -31,7 +31,7 @@
 //---------------------------------------------------------
 
 class HChord {
-      static const char* const scaleNames[2][12];
+//      static const char* const scaleNames[2][12];
       static const HChord C0;
 
    protected:
@@ -44,9 +44,9 @@ class HChord {
             int h=-1, int i=-1, int k=-1, int l=-1);
       HChord(const char*);
       void rotate(int semiTones);
-      static const char* scaleName(int key, bool flat = false) {
-            return scaleNames[flat][key % 12];
-            }
+//      static const char* scaleName(int key, bool flat = false) {
+//            return scaleNames[flat][key % 12];
+//            }
       bool contains(int key) const {       // key in chord?
             return (1 << (key % 12)) & keys;
             }
