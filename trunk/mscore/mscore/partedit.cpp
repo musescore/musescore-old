@@ -252,15 +252,18 @@ void PartEdit::soloToggled(bool val)
       {
       Instrument* i = part->instrument();
 
+      i->solo = val;
       if (val) {
             foreach(Part* part, *part->score()->parts()) {
                   Instrument* instr = part->instrument();
-                  instr->solo = instr != i;
+                  instr->soloMute = (instr != i);
+                  instr->solo = (instr == i);
                   }
             }
       else {
             foreach(Part* part, *part->score()->parts()) {
                   Instrument* instr = part->instrument();
+                  instr->soloMute = false;
                   instr->solo = false;
                   }
             }
