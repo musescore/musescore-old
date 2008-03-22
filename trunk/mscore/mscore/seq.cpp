@@ -728,6 +728,8 @@ void Seq::heartBeat()
             return;
 
       cs->start();
+      cs->setLayoutAll(false);
+
       double endTime = curTime() - startTime;
       Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
