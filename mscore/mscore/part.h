@@ -49,6 +49,7 @@ struct Instrument {
 
       bool mute;
       bool solo;
+      bool soloMute;
       Drumset* drumset;
       bool useDrumset;
 

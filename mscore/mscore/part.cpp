@@ -210,6 +210,7 @@ Instrument::Instrument()
       reverb          = 30;
       mute            = false;
       solo            = false;
+      soloMute        = false;
       minPitch        = 0;
       maxPitch        = 127;
       pitchOffset     = 0;

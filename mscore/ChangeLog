@@ -1,4 +1,5 @@
 21.3.8 (ws)
+      - implement solo/mute for sequencer
       - easier selection of slurs/ties and other objects by implementing
         a proximity of 6x6 pixel
       - better formatting of hyphens in lyrics

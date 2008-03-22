@@ -479,7 +479,7 @@ void Seq::playEvent(const Event* event)
             Note* note = n->note();
             if (note) {
                   Instrument* instr = n->note()->staff()->part()->instrument();
-                  mute = instr->mute || instr->solo;
+                  mute = instr->mute || instr->soloMute;
                   }
             else {
                   mute = false;
