@@ -118,11 +118,16 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
             int tick2 = line()->tick2();
 
             if (ev->key() == Qt::Key_Left) {
-                  if (curGrip == 0)
-                        tick1 = score()->prevSeg1(tick1, track);
+                  if (curGrip == 0) {
+                        int t1 = score()->prevSeg1(tick1, track);
+                        if (t1 >= 0)
+                              tick1 = t1;
+                        }
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
-                        tick2 = score()->prevSeg1(tick2, track);
+                        int t2 = score()->prevSeg1(tick2, track);
+                        if (t2 >= 0)
+                              tick2 = t2;
                         if (tick1 > tick2)
                               return true;
                         line()->setTick2(tick2);
@@ -133,13 +138,17 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
                   }
             else if (ev->key() == Qt::Key_Right) {
                   if (curGrip == 0) {
-                        tick1 = score()->nextSeg1(tick1, track);
+                        int t1 = score()->nextSeg1(tick1, track);
+                        if (t1 >= 0)
+                              tick1 = t1;
                         if (tick1 >= tick2)
                               return true;
                         }
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
-                        tick2 = score()->nextSeg1(tick2, track);
+                        int t2 = score()->nextSeg1(tick2, track);
+                        if (t2 >= 0)
+                              tick2 = t2;
                         line()->setTick2(tick2);
                         line()->layout(score()->layout());
                         if (line()->lineSegments().size() != segments)
