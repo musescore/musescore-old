@@ -211,12 +211,15 @@ int Score::nextSeg1(int tick, int& track)
                   continue;
             if (seg->element(track))
                   break;
-            for (track = startTrack; track < endTrack; ++track) {
-                  if (seg->element(track))
+            int t = startTrack;
+            for (; t < endTrack; ++t) {
+                  if (seg->element(t))
                         break;
                   }
-            if (track < endTrack)
+            if (t < endTrack) {
+                  track = t;
                   break;
+                  }
             }
       if (seg == 0) {
             printf("no seg found\n");
@@ -243,12 +246,15 @@ int Score::prevSeg1(int tick, int& track)
                   continue;
             if (seg->element(track))
                   break;
-            for (track = startTrack; track < endTrack; ++track) {
-                  if (seg->element(track))
+            int t = startTrack;
+            for (; t < endTrack; ++t) {
+                  if (seg->element(t))
                         break;
                   }
-            if (track < endTrack)
+            if (t < endTrack) {
+                  track = t;
                   break;
+                  }
             }
       if (seg == 0) {
             printf("no seg found\n");

@@ -350,7 +350,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       Qt::MouseButtons buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
-      Element* element = elementAt(startMove);
+      // Element* element = elementAt(startMove);
+      Element* element = elementNear(startMove);
 
       _score->setDragObject(element);
 
@@ -2008,7 +2009,23 @@ const QList<const Element*> Canvas::elementsAt(const QPointF& p)
       {
       QList<const Element*> el = _layout->items(p);
       qSort(el.begin(), el.end(), elementLower);
+      foreach(const Element* e, el)
+            e->itemDiscovered = false;
       return el;
+      }
+
+const QList<const Element*> Canvas::elementsAt(const QRectF& r)
+      {
+      QList<const Element*> el = _layout->items(r);
+      QList<const Element*> ll;
+      for (int i = 0; i < el.size(); ++i) {
+            const Element* e = el.at(i);
+            e->itemDiscovered = 0;
+            if (e->abbox().intersects(r))
+                  ll.append(e);
+            }
+      qSort(ll.begin(), ll.end(), elementLower);
+      return ll;
       }
 
 //---------------------------------------------------------
@@ -2029,19 +2046,23 @@ Element* Canvas::elementAt(const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   selectedElementAt
+//   elementAt
 //---------------------------------------------------------
 
-Element* Canvas::selectedElementAt(const QPointF& p)
+Element* Canvas::elementNear(const QPointF& p)
       {
-      QList<const Element*> el = _layout->items(p);
+      double w  = 3.0 / matrix().m11();
+      QRectF r(p.x() - w, p.y() - w, 2.0 * w, 2.0 * w);
+
+      QList<const Element*> el = elementsAt(r);
       if (el.empty())
             return 0;
-      foreach(const Element* e, el) {
-            if (e->selected())
-                  return const_cast<Element*>(e);
-            }
-      return 0;
+#if 0
+      printf("elementNear ========= %f %f\n", _spatium, w);
+      foreach(const Element* e, el)
+            printf("  %s %d\n", e->name(), e->selected());
+#endif
+      return const_cast<Element*>(el.at(0));
       }
 
 //---------------------------------------------------------

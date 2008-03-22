@@ -119,6 +119,8 @@ class Canvas : public QFrame, public Viewer {
       bool dragAboveMeasure(const QPointF& pos);
       bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
+      const QList<const Element*> elementsAt(const QPointF&);
+      const QList<const Element*> elementsAt(const QRectF&);
 
    private slots:
       void cursorBlink();
@@ -188,9 +190,8 @@ class Canvas : public QFrame, public Viewer {
       void showNavigator(bool visible);
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;
-      const QList<const Element*> elementsAt(const QPointF& pp);
       Element* elementAt(const QPointF& pp);
-      Element* selectedElementAt(const QPointF& pp);
+      Element* elementNear(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
       void setLassoRect(const QRectF& r) { _lassoRect = r; }
       void paintLasso(QPainter& p);

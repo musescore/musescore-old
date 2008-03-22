@@ -1,4 +1,6 @@
 21.3.8 (ws)
+      - easier selection of slurs/ties and other objects by implementing
+        a proximity of 6x6 pixel
       - better formatting of hyphens in lyrics
       - fix key sig changes
 20.3.8 (ws)
