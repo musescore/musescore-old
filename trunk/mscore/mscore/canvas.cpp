@@ -2051,7 +2051,7 @@ Element* Canvas::elementAt(const QPointF& p)
 
 Element* Canvas::elementNear(const QPointF& p)
       {
-      double w  = 3.0 / matrix().m11();
+      double w  = (preferences.proximity * .5) / matrix().m11();
       QRectF r(p.x() - w, p.y() - w, 2.0 * w, 2.0 * w);
 
       QList<const Element*> el = elementsAt(r);
