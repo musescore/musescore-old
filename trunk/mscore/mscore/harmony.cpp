@@ -30,20 +30,15 @@
 const HChord HChord::C0(0,3,6,9);
 
 //---------------------------------------------------------
-//   scale_names
-//---------------------------------------------------------
-
-const char* const HChord::scaleNames[2][12] = {
-      { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" },
-      { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
-      };
-
-//---------------------------------------------------------
 //   HChord
 //---------------------------------------------------------
 
 HChord::HChord(const char* s)
       {
+      static const char* const scaleNames[2][12] = {
+            { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" },
+            { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" }
+            };
       keys = 0;
       QStringList sl = QString(s).split(" ", QString::SkipEmptyParts);
       foreach(QString s, sl) {
@@ -585,7 +580,6 @@ bool Harmony::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
-//      a->setText(tr("Chord name"));
       a = popup->addAction(tr("Properties..."));
       a->setData("props");
       return true;
@@ -644,7 +638,7 @@ void Harmony::read(QDomElement e)
             QString tag(e.tagName());
             int i = e.text().toInt();
             if (tag == "base") {
-                  if (score()->mscVersion() >= 0x106)
+                  if (score()->mscVersion() >= 106)
                         setBaseTpc(i);
                   else
                         setBaseTpc(table[i-1]);    // obsolete
@@ -652,7 +646,7 @@ void Harmony::read(QDomElement e)
             else if (tag == "extension")
                   setExtension(i);
             else if (tag == "root") {
-                  if (score()->mscVersion() >= 0x106)
+                  if (score()->mscVersion() >= 106)
                         setRootTpc(i);
                   else
                         setRootTpc(table[i-1]);    // obsolete
@@ -669,8 +663,24 @@ void Harmony::read(QDomElement e)
 
 void Harmony::buildText()
       {
-//      printf("Harmony::buildText()");
-      setText(harmonyName());
+      QString s(harmonyName());
+      cursor = new QTextCursor(doc());
+      cursor->setPosition(0);
+      int n = s.size();
+      if (n == 0)
+            return;
+      cursor->insertText(QString(s[0]));
+
+      QTextCharFormat f = cursor->charFormat();
+      if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
+            f.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+      else if (f.verticalAlignment() == QTextCharFormat::AlignSubScript)
+            f.setVerticalAlignment(QTextCharFormat::AlignNormal);
+      cursor->setCharFormat(f);
+
+      cursor->insertText(s.mid(1));
+
+//      setText(s);
       }
 
 //---------------------------------------------------------
