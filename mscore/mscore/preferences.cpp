@@ -168,6 +168,7 @@ Preferences::Preferences()
       midiPorts                = 1;
       midiAutoConnect          = true;
       rtcTicks                 = 1024;    // 1ms midi resolution
+      proximity                = 6;
       };
 
 //---------------------------------------------------------
@@ -222,6 +223,7 @@ void Preferences::write()
       s.setValue("useMidiOutput",      useMidiOutput);
       s.setValue("midiPorts",          midiPorts);
       s.setValue("midiAutoConnect",    midiAutoConnect);
+      s.setValue("proximity",          proximity);
 
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
@@ -302,6 +304,7 @@ void Preferences::read()
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
       midiPorts                = s.value("midiPorts", 1).toInt();
       midiAutoConnect          = s.value("midiAutoConnect", true).toBool();
+      proximity                = s.value("proximity", 6).toInt();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -454,6 +457,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       midiPorts->setValue(preferences.midiPorts);
       midiAutoConnect->setChecked(preferences.midiAutoConnect);
+      proximity->setValue(preferences.proximity);
 
       //
       // initialize local shortcut table
@@ -823,6 +827,7 @@ void PreferenceDialog::apply()
       preferences.useMidiOutput      = useMidiOutput->isChecked();
       preferences.midiPorts          = midiPorts->value();
       preferences.midiAutoConnect    = midiAutoConnect->isChecked();
+      preferences.proximity          = proximity->value();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

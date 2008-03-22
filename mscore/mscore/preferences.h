@@ -90,6 +90,7 @@ struct Preferences {
       int midiPorts;
       bool midiAutoConnect;
       int rtcTicks;
+      int proximity;    // proximity for selecting elements on canvas
 
       bool dirty;
 
