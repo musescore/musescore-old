@@ -779,7 +779,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       text->addAction(getAction("fingering"));
       text->addAction(getAction("dynamics"));
       text->addAction(getAction("tempo"));
-      text->addAction(getAction("metronome"));
+//      text->addAction(getAction("metronome"));
 
       popup->addAction(getAction("symbols"));
       return popup;

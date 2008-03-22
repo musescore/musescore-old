@@ -38,7 +38,7 @@ PartEdit::PartEdit(QWidget* parent)
       connect(chorus,   SIGNAL(valueChanged(double,int)), SLOT(chorusChanged(double)));
       connect(reverb,   SIGNAL(valueChanged(double,int)), SLOT(reverbChanged(double)));
       connect(mute,     SIGNAL(toggled(bool)),     SLOT(muteChanged(bool)));
-      connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloChanged(bool)));
+      connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -105,6 +105,9 @@ void InstrumentListEditor::updateAll(Score* cs)
             }
       while (n > 0) {
             PartEdit* pe = new PartEdit;
+            connect(pe, SIGNAL(soloChanged()), SLOT(updateSolo()));
+            connect(this, SIGNAL(soloChanged()), pe, SLOT(updateSolo()));
+
             vb->addWidget(pe);
             const MidiPatch* p = 0;
             for (;;) {
@@ -231,16 +234,54 @@ void PartEdit::chorusChanged(double val)
       i->chorus = iv;
       }
 
+//---------------------------------------------------------
+//   muteChanged
+//---------------------------------------------------------
+
 void PartEdit::muteChanged(bool val)
       {
       Instrument* i = part->instrument();
       i->mute = val;
       }
 
-void PartEdit::soloChanged(bool val)
+//---------------------------------------------------------
+//   soloToggled
+//---------------------------------------------------------
+
+void PartEdit::soloToggled(bool val)
       {
       Instrument* i = part->instrument();
-      i->solo = val;
+
+      if (val) {
+            foreach(Part* part, *part->score()->parts()) {
+                  Instrument* instr = part->instrument();
+                  instr->solo = instr != i;
+                  }
+            }
+      else {
+            foreach(Part* part, *part->score()->parts()) {
+                  Instrument* instr = part->instrument();
+                  instr->solo = false;
+                  }
+            }
+      emit soloChanged();
       }
 
+//---------------------------------------------------------
+//   updateSolo
+//---------------------------------------------------------
+
+void PartEdit::updateSolo()
+      {
+      solo->setChecked(part->instrument()->solo);
+      }
+
+//---------------------------------------------------------
+//   soloChanged
+//---------------------------------------------------------
+
+void InstrumentListEditor::updateSolo()
+      {
+      emit soloChanged();
+      }
 

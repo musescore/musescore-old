@@ -989,7 +989,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, int staffIdx, MetaEvent*
 //   convertMidi
 //---------------------------------------------------------
 
-void Score::convertMidi(MidiFile* mf, int shortestNote)
+void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       {
       mf->separateChannel();
       mf->process1();

@@ -178,8 +178,6 @@ QList<const Element*> BspTree::items(const QPointF& pos)
       findVisitor->foundItems = &tmp;
       climbTree(findVisitor, pos);
 
-      return  tmp;
-#if 0
       QList<const Element*> l;
       for (int i = 0; i < tmp.size(); ++i) {
             const Element* e = tmp.at(i);
@@ -188,7 +186,6 @@ QList<const Element*> BspTree::items(const QPointF& pos)
                   l.append(e);
             }
       return l;
-#endif
       }
 
 //---------------------------------------------------------
