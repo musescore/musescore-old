@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
+    <width>885</width>
     <height>418</height>
    </rect>
   </property>
@@ -137,6 +137,16 @@
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item rowspan="2" row="1" column="1" >
+    <widget class="QFrame" name="frame" >
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
     </widget>
    </item>
    <item rowspan="2" row="1" column="2" >
@@ -965,6 +975,62 @@
      </layout>
     </widget>
    </item>
+   <item rowspan="2" row="1" column="3" >
+    <widget class="QFrame" name="frame_2" >
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+   </item>
+   <item rowspan="2" row="1" column="4" >
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Degrees</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <widget class="QPushButton" name="addButton" >
+      <property name="geometry" >
+       <rect>
+        <x>99</x>
+        <y>240</y>
+        <width>75</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteButton" >
+      <property name="geometry" >
+       <rect>
+        <x>184</x>
+        <y>240</y>
+        <width>75</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text" >
+       <string>Delete</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="degreeTable" >
+      <property name="geometry" >
+       <rect>
+        <x>15</x>
+        <y>30</y>
+        <width>241</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
    <item row="2" column="0" >
     <widget class="QGroupBox" name="groupBox_3" >
      <property name="title" >
@@ -1046,23 +1112,13 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="3" >
+   <item row="3" column="2" colspan="3" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item rowspan="2" row="1" column="1" >
-    <widget class="QFrame" name="frame" >
-     <property name="frameShape" >
-      <enum>QFrame::VLine</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
      </property>
     </widget>
    </item>
