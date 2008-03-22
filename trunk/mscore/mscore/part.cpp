@@ -33,12 +33,12 @@
 
 Part::Part(Score* s)
       {
-/*      QTextOption to = _longName.defaultTextOption();
+      QTextOption to = _longName.defaultTextOption();
       to.setUseDesignMetrics(true);
       to.setWrapMode(QTextOption::NoWrap);
       _longName.setDefaultTextOption(to);
       _shortName.setDefaultTextOption(to);
-  */
+
       _longName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_LONG)->font());
       _shortName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_SHORT)->font());
       _score = s;
