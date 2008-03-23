@@ -54,7 +54,7 @@ class ScoreLayout : public Element {
       bool layoutPage();
       bool layoutSystem1(double& minWidth, double w, bool);
       QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, double*);
-      void processSystemHeader(Measure* m);
+      void processSystemHeader(Measure* m, bool);
       System* getNextSystem(bool, bool);
       void getCurPage();
 

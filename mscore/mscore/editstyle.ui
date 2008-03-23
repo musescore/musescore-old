@@ -16,7 +16,7 @@
    <item row="0" column="0" >
     <widget class="QListWidget" name="pageList" >
      <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -255,19 +255,6 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>51</width>
-           <height>131</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="5" column="0" >
         <widget class="QLabel" name="label_6" >
          <property name="text" >
@@ -310,6 +297,33 @@
           <double>100.000000000000000</double>
          </property>
         </widget>
+       </item>
+       <item row="6" column="0" colspan="2" >
+        <widget class="QCheckBox" name="genClef" >
+         <property name="text" >
+          <string>Create clef for all systems</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="2" >
+        <widget class="QCheckBox" name="genKeysig" >
+         <property name="text" >
+          <string>Create key sig for all systems</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>137</width>
+           <height>21</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

@@ -118,6 +118,9 @@ void EditStyle::getValues()
       lstyle->hairpinWidth           = Spatium(hairpinLineWidth->value());
       lstyle->hairpinHeight          = Spatium(hairpinHeight->value());
       lstyle->hairpinContHeight      = Spatium(hairpinContinueHeight->value());
+
+      lstyle->genClef                = genClef->isChecked();
+      lstyle->genKeysig             = genKeysig->isChecked();
       }
 
 //---------------------------------------------------------
@@ -183,5 +186,8 @@ void EditStyle::setValues()
       hairpinLineWidth->setValue(lstyle->hairpinWidth.val());
       hairpinHeight->setValue(lstyle->hairpinHeight.val());
       hairpinContinueHeight->setValue(lstyle->hairpinContHeight.val());
+
+      genClef->setChecked(lstyle->genClef);
+      genKeysig->setChecked(lstyle->genKeysig);
       }
 

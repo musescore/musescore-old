@@ -301,7 +301,6 @@ void System::layout2(ScoreLayout* layout)
       int lastStaffIdx = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff    = score()->staff(staffIdx);
-//            double staffMag = staff->mag();
             if ((staffIdx + 1) == staves)
                   setDistance(staffIdx, score()->style()->systemDistance);
             else if ((staff->part()->staves()->size() + 1) < staff->rstaff())

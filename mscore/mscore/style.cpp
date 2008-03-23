@@ -215,7 +215,9 @@ Style defaultStyle = {
       0.7,              // smallNoteMag
       0.7,              // graceNoteMag
       0.7,              // smallStaffMag
-      0.8               // smallClefMag
+      0.8,              // smallClefMag
+      true,             // genClef
+      true              // genKeySig
       };
 
 //---------------------------------------------------------
@@ -508,6 +510,10 @@ void Style::load(QDomElement e, int version)
                   smallNoteMag = d;
             else if (tag == "smallClefMag")
                   smallClefMag = d;
+            else if (tag == "genClef")
+                  genClef = i;
+            else if (tag == "genKeysig")
+                  genKeysig = i;
             else
                   domError(e);
             }
@@ -587,5 +593,7 @@ void Style::save(Xml& xml)
       xml.tag("smallStaffMag",          smallStaffMag);
       xml.tag("smallNoteMag",           smallNoteMag);
       xml.tag("smallClefMag",           smallClefMag);
+      xml.tag("genClef",                genClef);
+      xml.tag("genKeysig",              genKeysig);
       xml.etag();
       }
