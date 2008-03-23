@@ -21,7 +21,15 @@
 #ifndef __CHORDEDIT_H__
 #define __CHORDEDIT_H__
 
+#include <QItemDelegate>
+#include <QModelIndex>
+#include <QSize>
+#include <QStandardItemModel>
+
+#include "harmony.h"
 #include "ui_chordedit.h"
+
+class DegreeTabDelegate;
 
 //---------------------------------------------------------
 //   class ChordEdit
@@ -32,20 +40,52 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
 
       QButtonGroup* rootGroup;
       QButtonGroup* extensionGroup;
+      QStandardItemModel* model;
+      DegreeTabDelegate* delegate;
+      void updateDegrees();
+      bool isValidDegree(int r);
 
    private slots:
       void otherToggled(bool);
       void chordChanged();
+      void addButtonClicked();
+      void deleteButtonClicked();
+      void modelDataChanged(const QModelIndex & topLeft, const QModelIndex & bottomRight);
 
    public:
       ChordEdit(QWidget* parent = 0);
       void setExtension(int val);
       void setRoot(int val);
       void setBase(int val);
+      void addDegree(HDegree d);
+      int numberOfDegrees();
+      HDegree degree(int i);
       int extension();
       int root();
       int base();
       };
+
+//---------------------------------------------------------
+//   class DegreeTabDelegate
+//---------------------------------------------------------
+
+class DegreeTabDelegate : public QItemDelegate
+{
+    Q_OBJECT
+
+public:
+    DegreeTabDelegate(QObject *parent = 0);
+
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                          const QModelIndex &index) const;
+
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model,
+                      const QModelIndex &index) const;
+
+    void updateEditorGeometry(QWidget *editor,
+        const QStyleOptionViewItem &option, const QModelIndex &index) const;
+};
 
 #endif
 
