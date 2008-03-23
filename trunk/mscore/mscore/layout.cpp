@@ -269,7 +269,7 @@ void ScoreLayout::doLayout()
 //    add generated timesig keysig and clef
 //---------------------------------------------------------
 
-void ScoreLayout::processSystemHeader(Measure* m)
+void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
       {
       int tick = m->tick();
       int nstaves = _score->nstaves();
@@ -279,9 +279,9 @@ void ScoreLayout::processSystemHeader(Measure* m)
             if (!staff->show())
                   continue;
 
-            bool hasKeysig  = false;
-            bool hasClef    = false;
-            int strack      = i * VOICES;
+            KeySig* hasKeysig = 0;
+            Clef*   hasClef   = 0;
+            int strack        = i * VOICES;
 
             // we assume that keysigs and clefs are only in the first
             // track of a segment
@@ -297,37 +297,39 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         continue;
                   switch (el->type()) {
                         case KEYSIG:
-                              {
-                              hasKeysig = true;
-                              KeySig* ks = (KeySig*)el;
-                              ks->setSubtype(keyIdx);
-                              ks->setMag(staff->mag());
-                              }
+                              hasKeysig = (KeySig*)el;
+                              hasKeysig->setSubtype(keyIdx);
+                              hasKeysig->setMag(staff->mag());
                               break;
                         case CLEF:
-                              hasClef = true;
-                              el->setMag(staff->mag());
+                              hasClef = (Clef*)el;
+                              hasClef->setMag(staff->mag());
                               break;
                         default:
                               break;
                         }
                   }
-            if (!hasKeysig) {
+            bool needKeysig = keyIdx && (isFirstSystem || _score->style()->genKeysig);
+            if (needKeysig && !hasKeysig) {
                   //
                   // create missing key signature
                   //
-                  if (keyIdx) {
-                        KeySig* ks = new KeySig(_score);
-                        ks->setTrack(i * VOICES);
-                        ks->setTick(tick);
-                        ks->setGenerated(true);
-                        ks->setSubtype(keyIdx);
-                        ks->setMag(staff->mag());
-                        Segment* seg = m->getSegment(ks);
-                        seg->add(ks);
-                        }
+                  KeySig* ks = new KeySig(_score);
+                  ks->setTrack(i * VOICES);
+                  ks->setTick(tick);
+                  ks->setGenerated(true);
+                  ks->setSubtype(keyIdx);
+                  ks->setMag(staff->mag());
+                  Segment* seg = m->getSegment(ks);
+                  seg->add(ks);
                   }
-            if (!hasClef) {
+            else if (!needKeysig && hasKeysig) {
+                  int track = hasKeysig->track();
+                  Segment* seg = hasKeysig->segment();
+                  seg->setElement(track, 0);    // TODO: delete element
+                  }
+            bool needClef = isFirstSystem || _score->style()->genClef;
+            if (needClef && !hasClef) {
                   //
                   // create missing clef
                   //
@@ -339,6 +341,11 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   cs->setMag(staff->mag());
                   Segment* s = m->getSegment(cs);
                   s->add(cs);
+                  }
+            else if (!needClef && hasClef) {
+                  int track = hasClef->track();
+                  Segment* seg = hasClef->segment();
+                  seg->setElement(track, 0);    // TODO: delete element
                   }
             }
       }
@@ -528,7 +535,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = (Measure*)curMeasure;
                   if (isFirstMeasure)
-                        processSystemHeader((Measure*)curMeasure);
+                        processSystemHeader((Measure*)curMeasure, isFirstSystem);
 
                   //
                   // remove generated elements

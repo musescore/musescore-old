@@ -200,6 +200,9 @@ struct Style {
       double smallStaffMag;
       double smallClefMag;
 
+      bool genClef;           // create clef for all systems, not only for first
+      bool genKeysig;         // create key signature for all systems
+
       void load(QDomElement e, int version);
       void save(Xml& xml);
       };
