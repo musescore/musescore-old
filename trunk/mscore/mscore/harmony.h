@@ -127,6 +127,7 @@ class Harmony : public Text {
       void addDegree(HDegree d)            { _degreeList << d;     }
       int numberOfDegrees()                { return _degreeList.size();   }
       HDegree degree(int i)                { return _degreeList.value(i); }
+      void clearDegrees()                  { _degreeList.clear(); }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

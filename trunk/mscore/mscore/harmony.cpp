@@ -596,12 +596,17 @@ void Harmony::propertyAction(const QString& s)
             ce.setRoot(rootTpc());
             ce.setBase(baseTpc());
             ce.setExtension(extension());
+            for (int i = 0; i < numberOfDegrees(); i++)
+                  ce.addDegree(degree(i));
             int rv = ce.exec();
             if (rv) {
                   setRootTpc(ce.root());
                   setBaseTpc(ce.base());
                   setExtension(ce.extension());
                   setText(harmonyName());
+                  clearDegrees();
+                  for (int i = 0; i < ce.numberOfDegrees(); i++)
+                        addDegree(ce.degree(i));
                   }
             }
       else
