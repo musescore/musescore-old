@@ -21,10 +21,10 @@
 #ifndef __CHORDEDIT_H__
 #define __CHORDEDIT_H__
 
-#include <QItemDelegate>
-#include <QModelIndex>
-#include <QSize>
-#include <QStandardItemModel>
+// #include <QItemDelegate>
+// #include <QModelIndex>
+// #include <QSize>
+// #include <QStandardItemModel>
 
 #include "harmony.h"
 #include "ui_chordedit.h"
