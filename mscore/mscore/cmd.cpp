@@ -1764,11 +1764,14 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "rehearsalmark-text")
                   return cmdAddText(TEXT_REHEARSAL_MARK);
             else if (cmd == "select-all") {
-                  sel->setState(SEL_SYSTEM);
-                  sel->tickStart  = 0;
-                  sel->tickEnd    = _measures.last()->tick() + _measures.last()->tickLen();
-                  sel->staffStart = 0;
-                  sel->staffEnd   = nstaves();
+                  MeasureBase* mb = _measures.last();
+                  if (mb) {   // check for empty score
+                        sel->setState(SEL_SYSTEM);
+                        sel->tickStart  = 0;
+                        sel->tickEnd    = _measures.last()->tick() + _measures.last()->tickLen();
+                        sel->staffStart = 0;
+                        sel->staffEnd   = nstaves();
+                        }
                   }
             else if (cmd == "transpose") {
                   transpose();

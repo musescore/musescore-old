@@ -123,6 +123,8 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             return false;
       Slur* sl = (Slur*) slurTie();
 
+printf("edit grip %d segment %d\n", curGrip, _segmentType);
+
       if ((ev->modifiers() & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
@@ -134,6 +136,7 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             int tick1  = sl->tick();
             int tick2  = sl->tick2();
 
+printf("  edit\n");
             if (ev->key() == Qt::Key_Left) {
                   if (curGrip == 0) {
                         tick1 = score()->prevSeg1(tick1, track1);
@@ -151,6 +154,7 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
                         }
                   else if (curGrip == 3) {
                         tick2 = score()->nextSeg1(tick2, track2);
+printf("next %d\n", tick2);
                         ups[3].off = QPointF();
                         }
                   }
@@ -322,7 +326,7 @@ void SlurSegment::read(QDomElement e)
 void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal b)
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
-      bow = b;
+      bow      = b;
       ups[0].p = p1;
       ups[3].p = p2;
 
@@ -336,11 +340,12 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
-            printf("warning: slur has zero width\n");
+            printf("warning: slur has zero width at %d-%d\n",
+               slurTie()->tick(), ((Slur*)slurTie())->tick2());
             return;
             }
 
-      qreal d = xdelta / 4.0;
+      qreal d  = xdelta / 4.0;
       qreal x1 = x0 + d;
       qreal x2 = x3 - d;
 
