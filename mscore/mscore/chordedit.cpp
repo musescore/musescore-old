@@ -20,9 +20,9 @@
 
 #include <iostream>
 
-#include <QComboBox>
-#include <QSpinBox>
-#include <QVariant>
+// #include <QComboBox>
+// #include <QSpinBox>
+// #include <QVariant>
 
 #include "chordedit.h"
 #include "harmony.h"

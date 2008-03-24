@@ -26,6 +26,7 @@
 #include "chordedit.h"
 #include "pitchspelling.h"
 #include "score.h"
+#include "sym.h"
 
 const HChord HChord::C0(0,3,6,9);
 
@@ -659,6 +660,7 @@ void Harmony::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
+      buildText();
       }
 
 //---------------------------------------------------------
@@ -668,24 +670,92 @@ void Harmony::read(QDomElement e)
 
 void Harmony::buildText()
       {
-      QString s(harmonyName());
-      cursor = new QTextCursor(doc());
-      cursor->setPosition(0);
-      int n = s.size();
-      if (n == 0)
+      clear();
+
+      QString txt(harmonyName());
+      const char* s = strdup(txt.toAscii().data());
+
+//printf("Harmony <%s>\n", s);
+
+      QTextCursor cursor(doc());
+      cursor.setPosition(0);
+      QTextCharFormat f = cursor.charFormat();
+
+      if (*s == 0)
             return;
-      cursor->insertText(QString(s[0]));
 
-      QTextCharFormat f = cursor->charFormat();
-      if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
+      cursor.insertText(QString(*s++));
+      if (s == 0)
+            return;
+
+      QTextCharFormat sf(f);
+#if 0
+      double extraMag = 1.0;
+      double mag = _spatium * extraMag / (spatiumBase20 * DPI);
+      QFont font("MScore1");
+      font.setPointSizeF(20.0 * mag);
+      sf.setFont(font);
+#endif
+      sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+
+      if (*s == '#' || *s == 'b') {
+            cursor.insertText(QString(*s), sf);
+#if 0
+            cursor.setCharFormat(sf);
+            if (*s == '#')
+                  cursor.insertText(QString(symbols[sharpSym].code()));
+            else
+                  cursor.insertText(QString(symbols[flatSym].code()));
+#endif
+            ++s;
+            }
+      if (*s == 0)
+            return;
+      if (*s == 'm') {
+            cursor.setCharFormat(f);
+            cursor.insertText(QString("m"));
+            ++s;
+            }
+      else if (strncmp(s, "Maj", 3) == 0) {
+            cursor.setCharFormat(f);
+            cursor.insertText(QString("maj"));
+            s += 3;
+            }
+      else if (strncmp(s, "aug", 3) == 0) {
+            cursor.setCharFormat(f);
+            cursor.insertText(QString("aug"));
+            s += 3;
+            }
+      else if (strncmp(s, "sus", 3) == 0) {
+            cursor.setCharFormat(f);
+            cursor.insertText(QString("sus"));
+            s += 3;
+            }
+      else if (strncmp(s, "dim", 3) == 0) {
+            cursor.setCharFormat(f);
+            cursor.insertText(QString("dim"));
+            s += 3;
+            }
+
+      const char* ss = s;
+      while (*ss) {
+            if (*ss == '/')
+                  break;
+            ++ss;
+            }
+      const char* slash = *ss == '/' ? ss+1 : 0;
+      if (ss - s > 0) {
             f.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-      else if (f.verticalAlignment() == QTextCharFormat::AlignSubScript)
+            cursor.setCharFormat(f);
+            while (s < ss)
+                  cursor.insertText(QString(*s++));
+            }
+      if (slash) {
             f.setVerticalAlignment(QTextCharFormat::AlignNormal);
-      cursor->setCharFormat(f);
-
-      cursor->insertText(s.mid(1));
-
-//      setText(s);
+            cursor.setCharFormat(f);
+            cursor.insertText(QString('/'));
+            cursor.insertText(QString(slash));
+            }
       }
 
 //---------------------------------------------------------
