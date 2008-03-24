@@ -52,87 +52,80 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QRadioButton" name="rootFis" >
-        <property name="text" >
-         <string>F#</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0" >
-       <widget class="QRadioButton" name="rootDb" >
-        <property name="text" >
-         <string>Db</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" >
-       <widget class="QRadioButton" name="rootG" >
-        <property name="text" >
-         <string>G</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" >
-       <widget class="QRadioButton" name="rootD" >
-        <property name="text" >
-         <string>D</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" >
-       <widget class="QRadioButton" name="rootAb" >
-        <property name="text" >
-         <string>Ab</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" >
-       <widget class="QRadioButton" name="rootEb" >
-        <property name="text" >
-         <string>Eb</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" >
-       <widget class="QRadioButton" name="rootA" >
-        <property name="text" >
-         <string>A</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" >
        <widget class="QRadioButton" name="rootE" >
         <property name="text" >
          <string>E</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1" >
-       <widget class="QRadioButton" name="rootBb" >
+      <item row="2" column="1" >
+       <widget class="QRadioButton" name="accDFlat" >
         <property name="text" >
-         <string>Bb</string>
+         <string>bb (double flat)</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" >
+      <item row="3" column="0" >
        <widget class="QRadioButton" name="rootF" >
         <property name="text" >
          <string>F</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1" >
+      <item row="3" column="1" >
+       <widget class="QRadioButton" name="accFlat" >
+        <property name="text" >
+         <string>b (flat)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QRadioButton" name="rootG" >
+        <property name="text" >
+         <string>G</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" >
+       <widget class="QRadioButton" name="accNone" >
+        <property name="text" >
+         <string>(no accidental)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" >
+       <widget class="QRadioButton" name="rootA" >
+        <property name="text" >
+         <string>A</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" >
+       <widget class="QRadioButton" name="accSharp" >
+        <property name="text" >
+         <string># (sharp)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" >
        <widget class="QRadioButton" name="rootB" >
         <property name="text" >
          <string>B</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
-       <widget class="QRadioButton" name="rootCis" >
+      <item row="6" column="1" >
+       <widget class="QRadioButton" name="accDSharp" >
         <property name="text" >
-         <string>C#</string>
+         <string># (double sharp)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QRadioButton" name="rootD" >
+        <property name="text" >
+         <string>D</string>
         </property>
        </widget>
       </item>
@@ -1034,82 +1027,119 @@
    <item row="2" column="0" >
     <widget class="QGroupBox" name="groupBox_3" >
      <property name="title" >
-      <string>Bass Note</string>
+      <string>Bass Note / Inversion</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" >
+     <widget class="QComboBox" name="bassNote" >
+      <property name="geometry" >
+       <rect>
+        <x>11</x>
+        <y>32</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
       <item>
-       <widget class="QComboBox" name="bassNote" >
-        <item>
-         <property name="text" >
-          <string>none</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/C</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/Db</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/D</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/Eb</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/E</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/F</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/F#</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/G</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/Ab</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/A</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/Bb</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>/B</string>
-         </property>
-        </item>
-       </widget>
+       <property name="text" >
+        <string>none</string>
+       </property>
       </item>
-     </layout>
+      <item>
+       <property name="text" >
+        <string>/C</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/Db</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/D</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/Eb</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/E</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/F</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/F#</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/G</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/Ab</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/A</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/Bb</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>/B</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="inversion" >
+      <property name="geometry" >
+       <rect>
+        <x>150</x>
+        <y>32</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="currentIndex" >
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text" >
+        <string>none</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text" >
+        <string>3</string>
+       </property>
+      </item>
+     </widget>
     </widget>
    </item>
    <item row="3" column="2" colspan="3" >

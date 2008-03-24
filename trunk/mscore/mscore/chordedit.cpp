@@ -20,10 +20,6 @@
 
 #include <iostream>
 
-// #include <QComboBox>
-// #include <QSpinBox>
-// #include <QVariant>
-
 #include "chordedit.h"
 #include "harmony.h"
 
@@ -37,17 +33,19 @@ ChordEdit::ChordEdit(QWidget* parent)
       setupUi(this);
       rootGroup = new QButtonGroup(this);
       rootGroup->addButton(rootC,   1);
-      rootGroup->addButton(rootDb,  2);
-      rootGroup->addButton(rootD,   3);
-      rootGroup->addButton(rootEb,  4);
-      rootGroup->addButton(rootE,   5);
-      rootGroup->addButton(rootF,   6);
-      rootGroup->addButton(rootFis, 7);
-      rootGroup->addButton(rootG,   8);
-      rootGroup->addButton(rootAb,  9);
-      rootGroup->addButton(rootA,  10);
-      rootGroup->addButton(rootBb, 11);
-      rootGroup->addButton(rootB,  12);
+      rootGroup->addButton(rootD,   2);
+      rootGroup->addButton(rootE,   3);
+      rootGroup->addButton(rootF,   4);
+      rootGroup->addButton(rootG,   5);
+      rootGroup->addButton(rootA,   6);
+      rootGroup->addButton(rootB,   7);
+
+      accidentalsGroup = new QButtonGroup(this);
+      accidentalsGroup->addButton(accDFlat,  -2);
+      accidentalsGroup->addButton(accFlat,   -1);
+      accidentalsGroup->addButton(accNone,    0);
+      accidentalsGroup->addButton(accSharp,   1);
+      accidentalsGroup->addButton(accDSharp,  2);
 
       extensionGroup = new QButtonGroup(this);
       extensionGroup->addButton(extMaj,    2);

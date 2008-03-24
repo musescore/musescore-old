@@ -1,4 +1,6 @@
-23.3.8 (ws)
+23.3.8 (lv)
+      - new chordedit dialog (note: not fully functional yet)
+       (ws)
       - new style feature for lead sheets: do create clef / key signature
         only for first system
 22.3.8 (ws)
