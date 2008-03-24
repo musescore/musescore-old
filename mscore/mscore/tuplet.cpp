@@ -324,6 +324,14 @@ void Tuplet::read(QDomElement e)
 
 void Tuplet::add(Element* e)
       {
+#if 0
+      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
+            if (i->second == e) {
+                  printf("Tuplet::add: already there\n");
+                  abort();
+                  }
+            }
+#endif
       switch(e->type()) {
             case TEXT:
                   _number = (Text*)e;

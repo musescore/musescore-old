@@ -871,8 +871,17 @@ void Score::deleteItem(Element* el)
                   // only allow for voices != 0
                   //    e.g. voice 0 rests cannot be removed
                   //
-                  if (el->voice() != 0)
+                  {
+                  Rest* rest = (Rest*)el;
+                  if (rest->tuplet() && rest->tuplet()->elements()->empty())
+                        undoRemoveElement(rest->tuplet());
+                  if (el->voice() != 0) {
                         undoRemoveElement(el);
+                        Segment* seg = rest->segment();
+                        if (seg->isEmpty())
+                              undoRemoveElement(seg);
+                        }
+                  }
                   break;
 
             case MEASURE:
@@ -1032,6 +1041,7 @@ void Score::cmdDeleteSelection()
                                     undoRemoveElement(el);
                               }
                         }
+
                   }
             for (MeasureBase* m = is; m && m != ie; m = m->next()) {
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx)

@@ -255,6 +255,8 @@ class ShowNoteWidget : public ShowElementBase {
 class ShowRestWidget : public ShowElementBase {
       Q_OBJECT;
 
+      Ui::ChordRestBase crb;
+
       QSpinBox* segment;
 
    public:

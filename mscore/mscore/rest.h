@@ -67,9 +67,6 @@ class Rest : public ChordRest {
 
       virtual int staffMove() const { return _staffMove; }
       void setStaffMove(int val)    { _staffMove = val; }
-
-//      void setDots(int n)             { _dots = n; }
-//      int dots() const                { return _dots; }
       };
 
 #endif

@@ -860,6 +860,17 @@ void ShowNoteWidget::accidentalClicked()
 ShowRestWidget::ShowRestWidget()
    : ShowElementBase()
       {
+      // chort rest
+      QWidget* chr = new QWidget;
+      crb.setupUi(chr);
+      layout->addWidget(chr);
+      crb.beamMode->addItem(tr("auto"));
+      crb.beamMode->addItem(tr("beam begin"));
+      crb.beamMode->addItem(tr("beam mid"));
+      crb.beamMode->addItem(tr("beam end"));
+      crb.beamMode->addItem(tr("no beam"));
+      crb.beamMode->addItem(tr("begin 1/32"));
+
       QFrame* line = new QFrame(this);
       line->setFrameStyle(QFrame::HLine | QFrame::Raised);
       line->setLineWidth(1);
@@ -883,6 +894,18 @@ void ShowRestWidget::setElement(Element* e)
       {
       Rest* rest = (Rest*)e;
       ShowElementBase::setElement(e);
+
+      crb.beamButton->setEnabled(rest->beam());
+      crb.tupletButton->setEnabled(rest->tuplet());
+      crb.upFlag->setChecked(rest->isUp());
+      crb.beamMode->setCurrentIndex(int(rest->beamMode()));
+      crb.attributes->clear();
+      foreach(NoteAttribute* a, *rest->getAttributes()) {
+            QString s;
+            s.setNum(long(a), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
+            crb.attributes->addItem(item);
+            }
 
       Measure* m = rest->measure();
       int seg = 0;

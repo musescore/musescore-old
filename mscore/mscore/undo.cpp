@@ -50,6 +50,7 @@
 #include "canvas.h"
 #include "barline.h"
 #include "volta.h"
+#include "tuplet.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -566,6 +567,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   ChordRest* cr = (ChordRest*)i->element1;
                   int mode = int(cr->beamMode());
                   cr->setBeamMode(BeamMode(i->val1));
+printf("change beam mode %d %d\n", mode, i->val1);
                   i->val1 = int(mode);
                   }
                   break;
@@ -742,6 +744,9 @@ void Score::undoRemoveElement(Element* element)
                         undoRemoveElement(el);
                         }
                   }
+            ChordRest* cr = (ChordRest*)element;
+            if (cr->tuplet() && cr->tuplet()->elements()->empty())
+                  undoRemoveElement(cr->tuplet());
             }
       checkUndoOp();
       UndoOp i;
