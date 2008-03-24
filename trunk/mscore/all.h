@@ -29,6 +29,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <QtGui/QItemDelegate>
+#include <QtCore/QModelIndex>
+#include <QtGui/QStandardItemModel>
+#include <QtGui/QSpinBox>
+
 #include <QtXml/QtXml>
 #include <QtCore/QPointF>
 #include <QtCore/QVariant>

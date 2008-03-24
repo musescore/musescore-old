@@ -303,8 +303,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   int len       = cr->tickLen();
 
                   if (curTick != cr->tick() && beam && !cr->tuplet()) {
-                        printf("  gap %d != %d\n", curTick, cr->tick());
+                        // printf("  gap %d != %d\n", curTick, cr->tick());
                         // gap found; this is possible for voices != 0
+                        // tuplets and grace notes
+                        //
                         // end current beam
                         beam->layout1(layout);
                         beam = 0;

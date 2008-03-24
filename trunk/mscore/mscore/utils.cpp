@@ -200,13 +200,12 @@ int Score::nextSeg(int tick, int track)
 int Score::nextSeg1(int tick, int& track)
       {
       Segment* seg   = tick2segment(tick);
+      if (seg == 0)
+            return -1;
       int staffIdx   = track / VOICES;
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      while (seg) {
-            seg = seg->next1();
-            if (seg == 0)
-                  break;
+      while ((seg = seg->next1())) {
             if (seg->subtype() != Segment::SegChordRest)
                   continue;
             if (seg->element(track))

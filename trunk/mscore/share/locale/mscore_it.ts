@@ -783,6 +783,18 @@ p, li { white-space: pre-wrap; }
         <source>C#</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Aggiungi</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Elimina</translation>
+    </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>
@@ -1278,6 +1290,14 @@ fallito: </translation>
     </message>
     <message>
         <source>Continue Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create clef for all systems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create key sig for all systems</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4716,6 +4736,10 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Working Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proximity for selecting elements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
