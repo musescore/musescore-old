@@ -21,11 +21,6 @@
 #ifndef __CHORDEDIT_H__
 #define __CHORDEDIT_H__
 
-// #include <QItemDelegate>
-// #include <QModelIndex>
-// #include <QSize>
-// #include <QStandardItemModel>
-
 #include "harmony.h"
 #include "ui_chordedit.h"
 
@@ -39,6 +34,7 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
       Q_OBJECT
 
       QButtonGroup* rootGroup;
+      QButtonGroup* accidentalsGroup;
       QButtonGroup* extensionGroup;
       QStandardItemModel* model;
       DegreeTabDelegate* delegate;

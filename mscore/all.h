@@ -67,6 +67,9 @@
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QSplitter>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QStandardItemModel>
+#include <QtGui/QSpinBox>
 #ifndef __MINGW32__
 #include <QtGui/QX11Info>
 #endif
