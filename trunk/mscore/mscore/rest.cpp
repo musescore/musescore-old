@@ -28,6 +28,7 @@
 #include "utils.h"
 #include "tuplet.h"
 #include "sym.h"
+#include "icons.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -168,9 +169,15 @@ void Rest::space(double& min, double& extra) const
 
 bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
-      if (type != ATTRIBUTE)
-            return false;
-      if (subtype == UfermataSym || subtype == DfermataSym) {
+      if (
+         (type == ICON && subtype == ICON_SBEAM)
+         || (type == ICON && subtype == ICON_MBEAM)
+         || (type == ICON && subtype == ICON_NBEAM)
+         || (type == ICON && subtype == ICON_BEAM32)
+         || (type == ICON && subtype == ICON_AUTOBEAM)
+         || (type == ATTRIBUTE && subtype == UfermataSym)
+         || (type == ATTRIBUTE && subtype == DfermataSym)
+         ) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -183,18 +190,39 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 
 Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (e->type() != ATTRIBUTE) {
-            delete e;
-            return 0;
+      switch (e->type()) {
+            case ATTRIBUTE:
+                  if (e->subtype() == UfermataSym || e->subtype() == DfermataSym)
+                        score()->addAttribute(this, (NoteAttribute*)e);
+                  return 0;
+            case ICON:
+                  {
+                  printf("change beam mode\n");
+                  switch(e->subtype()) {
+                        case ICON_SBEAM:
+                              score()->undoChangeBeamMode(this, BEAM_BEGIN);
+                              break;
+                        case ICON_MBEAM:
+                              score()->undoChangeBeamMode(this, BEAM_MID);
+                              break;
+                        case ICON_NBEAM:
+                              score()->undoChangeBeamMode(this, BEAM_NO);
+                              break;
+                        case ICON_BEAM32:
+                              score()->undoChangeBeamMode(this, BEAM_BEGIN32);
+                              break;
+                        case ICON_AUTOBEAM:
+                              score()->undoChangeBeamMode(this, BEAM_AUTO);
+                              break;
+                        }
+                  }
+                  delete e;
+                  break;
+            default:
+                  printf("cannot drop %s\n", e->name());
+                  return 0;
             }
-      NoteAttribute* atr = (NoteAttribute*)e;
-      int st = atr->subtype();
-      if (!(st == UfermataSym || st == DfermataSym)) {
-            delete atr;
-            return 0;
-            }
-      score()->addAttribute(this, atr);
-      return atr;
+      return 0;
       }
 
 //---------------------------------------------------------

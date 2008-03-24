@@ -187,7 +187,7 @@ QPointF ChordRest::canvasPos() const
 
 void ChordRest::setBeamMode(BeamMode m)
       {
-      if (!_tuplet)
+//      if (!_tuplet)
             _beamMode = m;
       }
 
@@ -313,10 +313,6 @@ bool ChordRest::readProperties(QDomElement e)
             // parent is Segment
             Measure* m    = (Measure*)parent();
             _tuplet       = m->tuplets()->value(i);
-            if (_tuplet == 0)
-                  printf("ChordRest::readProperties(): tuplet not found\n");
-            else
-                  _tuplet->add(this);
             setTickLen(tickLen());  // set right symbol + dots
             }
       else if (tag == "small")

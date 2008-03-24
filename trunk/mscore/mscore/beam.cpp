@@ -148,8 +148,15 @@ static BeamHint endBeamList[] = {
 //   endBeam
 //---------------------------------------------------------
 
-static bool endBeam(int tsZ, int tsN, int l, int p)
+static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
       {
+      if (cr->tuplet()) {
+            if (cr->tuplet()->elements()->front() == cr) {
+                  return true;
+                  }
+            return false;
+            }
+      int l = cr->tickLen();
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
             if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
@@ -292,9 +299,11 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         continue;
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
-                  int len       = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
+                  // int len       = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
+                  int len       = cr->tickLen();
 
-                  if (curTick != cr->tick() && beam) {
+                  if (curTick != cr->tick() && beam && !cr->tuplet()) {
+                        printf("  gap %d != %d\n", curTick, cr->tick());
                         // gap found; this is possible for voices != 0
                         // end current beam
                         beam->layout1(layout);
@@ -319,7 +328,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         _score->sigmap->timesig(cr->tick(), z, n);
                         bool beamEnd = tooLong || bm == BEAM_BEGIN || bm == BEAM_NO;
                         if (!beamEnd && (bm != BEAM_MID))
-                              beamEnd = endBeam(z, n, cr->tickLen(), cr->tick() - tick());
+                              beamEnd = endBeam(z, n, cr, cr->tick() - tick());
                         if (beamEnd) {
                               beam->layout1(layout);
                               beam = 0;

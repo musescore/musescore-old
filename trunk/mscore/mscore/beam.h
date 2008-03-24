@@ -90,8 +90,9 @@ class Beam : public Element {
       virtual Beam* clone() const      { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual bool startEdit(const QPointF&) { return false; }
 
-      Measure* measure() const { return (Measure*)parent(); }
+      Measure* measure() const               { return (Measure*)parent(); }
 
       void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
