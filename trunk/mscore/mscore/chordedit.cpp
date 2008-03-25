@@ -22,6 +22,7 @@
 
 #include "chordedit.h"
 #include "harmony.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   ChordEdit
@@ -31,15 +32,19 @@ ChordEdit::ChordEdit(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      // note that rootGroup button identifiers map conveniently
+      // onto all possible tpc2line return values: don't change
       rootGroup = new QButtonGroup(this);
-      rootGroup->addButton(rootC,   1);
-      rootGroup->addButton(rootD,   2);
-      rootGroup->addButton(rootE,   3);
-      rootGroup->addButton(rootF,   4);
-      rootGroup->addButton(rootG,   5);
-      rootGroup->addButton(rootA,   6);
-      rootGroup->addButton(rootB,   7);
+      rootGroup->addButton(rootC,   0);
+      rootGroup->addButton(rootD,   1);
+      rootGroup->addButton(rootE,   2);
+      rootGroup->addButton(rootF,   3);
+      rootGroup->addButton(rootG,   4);
+      rootGroup->addButton(rootA,   5);
+      rootGroup->addButton(rootB,   6);
 
+      // note that accidentalsGroup button identifiers map conveniently
+      // onto all possible tpc2alter return values: don't change
       accidentalsGroup = new QButtonGroup(this);
       accidentalsGroup->addButton(accDFlat,  -2);
       accidentalsGroup->addButton(accFlat,   -1);
@@ -104,17 +109,46 @@ ChordEdit::ChordEdit(QWidget* parent)
       chordChanged();
       }
 
+// Set the chord root to val (in tpc)
+
 //---------------------------------------------------------
 //   setRoot
 //---------------------------------------------------------
 
 void ChordEdit::setRoot(int val)
       {
-      QAbstractButton* button = rootGroup->button(val);
+//      printf("ChordEdit::setRoot(val=%d) tpc2line=%d tpc2stepname=%s tpc2alter=%d\n",
+//             val, tpc2line(val), qPrintable(tpc2stepName(val)), tpc2alter(val));
+
+      QAbstractButton* button = NULL;
+      int id = 0;
+
+      // catch INVALID_TPC
+      if (val == INVALID_TPC) {
+            printf("ChordEdit::setRoot(val=INVALID_TPC)\n");
+            // default to C, no accidentals
+            button = rootGroup->button(0);
+            button->setChecked(true);
+            button = accidentalsGroup->button(0);
+            button->setChecked(true);
+            return;
+            }
+
+      // translate tpc to button nr
+      id = tpc2line(val);
+      button = rootGroup->button(id);
       if (button)
             button->setChecked(true);
       else
             printf("root button %d not found\n", val);
+
+      id = tpc2alter(val);
+      button = accidentalsGroup->button(id);
+      if (button)
+            button->setChecked(true);
+      else
+            printf("accidentals button %d not found\n", val);
+
       chordChanged();
       }
 
@@ -167,9 +201,14 @@ int ChordEdit::extension()
 //   root
 //---------------------------------------------------------
 
+// return root as tpc
+
 int ChordEdit::root()
       {
-      return rootGroup->checkedId();
+      int tpc = line2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId());
+//      printf("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
+//             rootGroup->checkedId(), accidentalsGroup->checkedId(), tpc);
+      return tpc;
       }
 
 //---------------------------------------------------------
@@ -196,6 +235,7 @@ void ChordEdit::otherToggled(bool val)
 
 void ChordEdit::chordChanged()
       {
+//      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d\n", root(), extension(), base());
       QString s = Harmony::harmonyName(root(), extension(), base());
       chordLabel->setText(s);
       }
