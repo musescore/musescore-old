@@ -503,7 +503,7 @@ void Canvas::modifyElement(Element* el)
 void Score::cmdAddSlur()
       {
       if (noteEntryMode() && _is.slur) {
-            QList<SlurSegment*>* el = _is.slur->elements();
+            QList<SlurSegment*>* el = _is.slur->slurSegments();
             if (!el->isEmpty())
                   el->front()->setSelected(false);
             _is.slur = 0;
@@ -534,7 +534,7 @@ void Score::cmdAddSlur()
       cmdAdd(slur);
 
       slur->layout(layout());
-      QList<SlurSegment*>* el = slur->elements();
+      QList<SlurSegment*>* el = slur->slurSegments();
 
       if (noteEntryMode()) {
             _is.slur = slur;
@@ -815,6 +815,7 @@ void Score::deleteItem(Element* el)
             case JUMP:
             case BREATH:
             case ARPEGGIO:
+            case HARMONY:
                   cmdRemove(el);
                   break;
 
@@ -1345,6 +1346,29 @@ void Score::changeLineSegment(bool last)
             newSegment = segment->line()->lineSegments().back();
       else
             newSegment = segment->line()->lineSegments().front();
+
+      canvas()->setState(Canvas::NORMAL);
+      endCmd();
+
+      startCmd();
+      canvas()->startEdit(newSegment);
+      layoutAll = true;
+      }
+
+//---------------------------------------------------------
+//   changeSlurSegment
+//    switch to first/last LineSegment while editing
+//---------------------------------------------------------
+
+void Score::changeSlurSegment(bool last)
+      {
+      SlurSegment* segment = (SlurSegment*)editObject;
+
+      SlurSegment* newSegment;
+      if (last)
+            newSegment = segment->slurTie()->slurSegments()->back();
+      else
+            newSegment = segment->slurTie()->slurSegments()->front();
 
       canvas()->setState(Canvas::NORMAL);
       endCmd();

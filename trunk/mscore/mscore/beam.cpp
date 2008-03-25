@@ -277,7 +277,6 @@ void Measure::layoutBeams1(ScoreLayout* layout)
 
       int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
-            int curTick   = tick();
             ChordRest* a1 = 0;      // start of (potential) beam
             Beam* beam    = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -299,83 +298,74 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         continue;
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
-                  // int len       = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
                   int len       = cr->tickLen();
 
-                  if (curTick != cr->tick() && beam && !cr->tuplet()) {
-                        // printf("  gap %d != %d\n", curTick, cr->tick());
-                        // gap found; this is possible for voices != 0
-                        // tuplets and grace notes
-                        //
-                        // end current beam
-                        beam->layout1(layout);
-                        beam = 0;
-                        a1   = 0;
+                  if ((len >= division) || (bm == BEAM_NO)) {
+                        if (beam) {
+                              beam->layout1(layout);
+                              beam = 0;
+                              }
+                        if (a1) {
+                              a1->layoutStem1(layout);
+                              a1 = 0;
+                              }
+                        cr->layoutStem1(layout);
+                        continue;
                         }
-                  curTick += len;
-
-                  bool tooLong = len >= division;
+                  bool beamEnd = false;
                   if (beam) {
-                        //---------------------------------------
-                        //   check for beam end
-                        //---------------------------------------
-
                         // end beam if there are chords/rests missing
                         // in voice:
                         ChordRest* le = beam->getElements().back();
                         if (le->tick() + le->tickLen() != cr->tick()) {
-                              tooLong = true;
+//                              if (!((le->tuplet()!=0) ^ (cr->tuplet()!=0)))
+                                    beamEnd = true;
                               }
-                        int z, n;
-                        _score->sigmap->timesig(cr->tick(), z, n);
-                        bool beamEnd = tooLong || bm == BEAM_BEGIN || bm == BEAM_NO;
-                        if (!beamEnd && (bm != BEAM_MID))
-                              beamEnd = endBeam(z, n, cr, cr->tick() - tick());
+                        // end beam if note tye changed (grace notes)
+                        else if (le->segment()->subtype() != cr->segment()->subtype())
+                              beamEnd = true;
+                        else if (bm == BEAM_BEGIN)
+                              beamEnd = true;
+                        else if (bm != BEAM_MID) {
+                              int z, n;
+                              _score->sigmap->timesig(cr->tick(), z, n);
+                              if (endBeam(z, n, cr, cr->tick() - tick()))
+                                    beamEnd = true;
+                              }
                         if (beamEnd) {
                               beam->layout1(layout);
                               beam = 0;
                               a1   = 0;
-                              goto newBeam;
                               }
                         else {
                               cr->setBeam(beam);
                               beam->add(cr);
+                              cr = 0;
 
                               // is this the last beam element?
                               if (bm == BEAM_END) {
                                     beam->layout1(layout);
                                     beam = 0;
-                                    a1   = 0;
                                     }
                               }
                         }
-                  else {
-newBeam:
-                        if (!tooLong && (bm != BEAM_NO)) {
-                              if (a1 == 0)
-                                    a1 = cr;
-                              else {
-                                    if (bm == BEAM_BEGIN) {
-                                          a1->layoutStem1(layout);
-                                          a1 = cr;
-                                          }
-                                    else {
-                                          beam = new Beam(score());
-                                          beam->setTrack(a1->track());
-                                          beam->setParent(this);
-                                          _beamList.push_back(beam);
-                                          a1->setBeam(beam);
-                                          beam->add(a1);
-                                          cr->setBeam(beam);
-                                          beam->add(cr);
-                                          a1 = 0;
-                                          }
-                                    }
-                              }
+                  if (cr) {
+                        if (a1 == 0)
+                              a1 = cr;
                         else {
-                              cr->layoutStem1(layout);
-                              if (a1) {
+                              if (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype())) {
                                     a1->layoutStem1(layout);
+                                    a1 = cr;
+                                    }
+                              else {
+                                    beam = new Beam(score());
+                                    beam->setTrack(a1->track());
+                                    beam->setParent(this);
+                                    _beamList.push_back(beam);
+                                    a1->setBeam(beam);
+                                    beam->add(a1);
+                                    cr->setBeam(beam);
+                                    beam->add(cr);
                                     a1 = 0;
                                     }
                               }

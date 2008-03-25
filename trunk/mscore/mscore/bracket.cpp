@@ -28,6 +28,7 @@
 #include "layout.h"
 #include "viewer.h"
 #include "system.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Bracket
@@ -95,8 +96,8 @@ void Bracket::layout(ScoreLayout* layout)
             qreal w = point(score()->style()->bracketWidth);
 
             TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
-            QChar up(0xe19c);
-            QChar down(0xe19d);
+            QChar up = symbols[brackettipsUp].code();
+            QChar down = symbols[brackettipsDown].code();
             QFont f;
             f.setFamily(s->family);
 

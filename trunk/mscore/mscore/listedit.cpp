@@ -252,7 +252,7 @@ void PageListEditor::updateList()
             if (el->type() == SLUR) {
                   ElementItem* se = new ElementItem(li, el);
                   Slur* slur = (Slur*)el;
-                  foreach(Element* el1, *slur->elements())
+                  foreach(Element* el1, *slur->slurSegments())
                         new ElementItem(se, el1);
                   }
             else if (el->isSLine()) {
@@ -324,7 +324,7 @@ void PageListEditor::updateList()
                                                 if (note->tieFor()) {
                                                       Tie* tie = note->tieFor();
                                                       ElementItem* ti = new ElementItem(ni, tie);
-                                                      foreach(Element* el1, *tie->elements())
+                                                      foreach(Element* el1, *tie->slurSegments())
                                                             new ElementItem(ti, el1);
                                                       }
                                                 }
@@ -1401,7 +1401,7 @@ void SlurView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      QList<SlurSegment*>* el = slur->elements();
+      QList<SlurSegment*>* el = slur->slurSegments();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
@@ -1460,7 +1460,7 @@ void TieView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      QList<SlurSegment*>* el = tie->elements();
+      QList<SlurSegment*>* el = tie->slurSegments();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));

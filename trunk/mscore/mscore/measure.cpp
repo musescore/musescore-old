@@ -859,13 +859,10 @@ void Measure::add(Element* el)
                   int st = el->subtype();
                   if (st == Segment::SegGrace) {
                         Segment* s;
-printf("SegGrace %d\n", t);
                         for (s = first(); s && s->tick() < t; s = s->next()) {
                               }
-printf("  SegGrace %d\n", s ? s->tick() : -1);
                         for (; s && s->subtype() != Segment::SegChordRest; s = s->next()) {
                               }
-printf("  SegGrace %d\n", s ? s->tick() : -1);
                         insert((Segment*)el, s);
                         break;
                         }

@@ -123,8 +123,6 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             return false;
       Slur* sl = (Slur*) slurTie();
 
-printf("edit grip %d segment %d\n", curGrip, _segmentType);
-
       if ((ev->modifiers() & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
@@ -136,15 +134,23 @@ printf("edit grip %d segment %d\n", curGrip, _segmentType);
             int tick1  = sl->tick();
             int tick2  = sl->tick2();
 
-printf("  edit\n");
             if (ev->key() == Qt::Key_Left) {
                   if (curGrip == 0) {
                         tick1 = score()->prevSeg1(tick1, track1);
                         ups[0].off = QPointF();
                         }
                   else if (curGrip == 3) {
-                        tick2 = score()->prevSeg1(tick2, track2);
-                        ups[3].off = QPointF();
+                        int segments = slurTie()->slurSegments()->size();
+                        int t2 = score()->prevSeg1(tick2, track2);
+                        if (t2 >= 0) {
+                              tick2 = t2;
+                              ups[3].off = QPointF();
+                              }
+                        sl->setTick2(tick2);
+                        Slur* slur = (Slur*)slurTie();
+                        slur->layout(score()->layout());
+                        if (slur->slurSegments()->size() != segments)
+                              score()->changeSlurSegment(true);
                         }
                   }
             else if (ev->key() == Qt::Key_Right) {
@@ -153,9 +159,17 @@ printf("  edit\n");
                         ups[0].off = QPointF();
                         }
                   else if (curGrip == 3) {
-                        tick2 = score()->nextSeg1(tick2, track2);
-printf("next %d\n", tick2);
-                        ups[3].off = QPointF();
+                        int segments = slurTie()->slurSegments()->size();
+                        int t2 = score()->nextSeg1(tick2, track2);
+                        if (t2 >= 0) {
+                              tick2 = t2;
+                              ups[3].off = QPointF();
+                              }
+                        sl->setTick2(tick2);
+                        Slur* slur = (Slur*)slurTie();
+                        slur->layout(score()->layout());
+                        if (slur->slurSegments()->size() != segments)
+                              score()->changeSlurSegment(true);
                         }
                   }
             else {
@@ -165,10 +179,9 @@ printf("next %d\n", tick2);
             sl->setTrack2(track2);
             sl->setTick(tick1);
             sl->setTick2(tick2);
-            score()->setLayoutAll(true);
             return true;
             }
-      if (ev->key() == Qt::Key_X) {
+      else if (ev->key() == Qt::Key_X) {
             slurTie()->setSlurDirection(slurTie()->isUp() ? DOWN : UP);
             return true;
             }

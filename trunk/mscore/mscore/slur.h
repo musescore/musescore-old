@@ -109,7 +109,7 @@ class SlurTie : public Element {
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const { return false; }  // not selectable
 
-      QList<SlurSegment*>* elements()             { return &segments;      }
+      QList<SlurSegment*>* slurSegments()             { return &segments;      }
       virtual void add(Element* s);
       virtual void remove(Element* s);
       virtual void change(Element* o, Element* n);

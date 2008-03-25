@@ -1,3 +1,7 @@
+25.3.8 (ws)
+      - dont beam grace notes with normal notes
+      - slur edit mode: can now create system spanning slurs
+      - implement delete chord names
 23.3.8 (lv)
       - new chordedit dialog (note: not fully functional yet)
        (ws)
