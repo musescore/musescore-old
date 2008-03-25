@@ -75,6 +75,7 @@ void EditInstrument::on_buttonCancel_pressed()
 
 void EditInstrument::on_buttonOk_pressed()
       {
+      valueChanged();
       *instr = *lt;
       }
 

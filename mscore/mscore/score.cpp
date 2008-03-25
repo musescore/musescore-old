@@ -1185,7 +1185,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             _is.pos           = -1;
             _is.noteEntryMode = false;
             if (_is.slur) {
-                  QList<SlurSegment*>* el = _is.slur->elements();
+                  QList<SlurSegment*>* el = _is.slur->slurSegments();
                   if (!el->isEmpty())
                         el->front()->setSelected(false);
                   _is.slur = 0;

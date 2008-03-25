@@ -402,6 +402,7 @@ class Score : public QObject {
       void lyricsReturn();
       void lyricsMinus();
       void changeLineSegment(bool);
+      void changeSlurSegment(bool last);
 
       void startEdit(Element* element);
       void endEdit();

@@ -950,7 +950,7 @@ void Note::setTrack(int val)
       Element::setTrack(val);
       if (_tieFor) {
             _tieFor->setTrack(val);
-            foreach(SlurSegment* seg, *_tieFor->elements())
+            foreach(SlurSegment* seg, *_tieFor->slurSegments())
                   seg->setTrack(val);
             }
       foreach(Element* e, _el)
