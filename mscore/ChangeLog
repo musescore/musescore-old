@@ -1,10 +1,12 @@
-25.3.8 (ws)
+25.3.8 (lv)
+      - set / return root note as tpc value in chordedit dialog
+       (ws)
       - dont beam grace notes with normal notes
       - slur edit mode: can now create system spanning slurs
       - implement delete chord names
-23.3.8 (lv)
+24.3.8 (lv)
       - new chordedit dialog (note: not fully functional yet)
-       (ws)
+23.3.8 (ws)
       - new style feature for lead sheets: do create clef / key signature
         only for first system
 22.3.8 (ws)
