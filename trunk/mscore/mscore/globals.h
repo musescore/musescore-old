@@ -21,13 +21,14 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.7"
+#define MSC_VERSION     "1.8"
 
 // History:
 //    1.3   added staff->_barLineSpan
 //    1.5   save xoff/yoff in mm instead of pixel
 //    1.6   save harmony base/root as tpc value
 //    1.7   invert semantic of page fill limit
+//    1.8   slur id, slur anchor in in Note
 
 extern bool debugMode;
 extern bool layoutDebug;
@@ -57,7 +58,7 @@ enum Placement {
 
 enum DurationType {
       D_QUARTER, D_EIGHT, D_256TH, D_128TH, D_64TH, D_32ND,
-      D_16TH, D_HALF, D_WHOLE, D_BREVE, D_LONG
+      D_16TH, D_HALF, D_WHOLE, D_BREVE, D_LONG, D_MEASURE
       };
 
 enum LineSegmentType {

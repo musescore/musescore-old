@@ -291,6 +291,10 @@ static int getDots(int base, int rest, int* dots)
 
 int headType(int tickLen, DurationType* type, int* dots)
       {
+      if (tickLen == 0) {
+            *type = D_MEASURE;
+            *dots = 0;
+            }
       struct Duration {
             int ticks;
             DurationType type;

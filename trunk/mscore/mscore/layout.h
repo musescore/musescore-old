@@ -65,9 +65,6 @@ class ScoreLayout : public Element {
       MeasureBase* curMeasure;
       void doReLayout();
 
-   protected:
-      QList<Element*> _gel;   // global elements: Slur, SLine
-
    public:
       ScoreLayout(Score*);
       ~ScoreLayout();
@@ -100,9 +97,6 @@ class ScoreLayout : public Element {
       void setInstrumentNames();
       void connectTies();
       void searchHiddenNotes();
-
-      QList<Element*>* gel()                  { return &_gel; }
-      const QList<Element*>* gel() const      { return &_gel; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

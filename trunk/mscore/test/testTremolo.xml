@@ -10,8 +10,8 @@
     <creator type="poet">Leon</creator>
     <rights>Public Domain</rights>
     <encoding>
-      <software>MuseScore 0.7.0</software>
-      <encoding-date>2007-09-10</encoding-date>
+      <software>MuseScore 0.9.2</software>
+      <encoding-date>2008-03-26</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -148,6 +148,68 @@
         <duration>30</duration>
         <voice>1</voice>
         <type>64th</type>
+        </note>
+      </measure>
+    <measure number="3">
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>up</stem>
+        <notations>
+          <ornaments>
+            <tremolo>1</tremolo>
+            </ornaments>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>up</stem>
+        <notations>
+          <ornaments>
+            <tremolo>2</tremolo>
+            </ornaments>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        <notations>
+          <ornaments>
+            <tremolo>1</tremolo>
+            </ornaments>
+          </notations>
+        </note>
+      <note>
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+          </pitch>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        <notations>
+          <ornaments>
+            <tremolo>2</tremolo>
+            </ornaments>
+          </notations>
         </note>
       </measure>
     </part>

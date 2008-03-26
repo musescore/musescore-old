@@ -683,7 +683,7 @@ void Score::cmdRemovePart(Part* part)
       //
       //    remove/adjust slurs in _gel
       //
-      foreach(Element* e, *_layout->gel()) {
+      foreach(Element* e, _gel) {
             if (e->type() != SLUR) {
                   printf("gel element %s %d\n", e->name(), e->track());
                   continue;
@@ -773,7 +773,7 @@ void Score::insertStaff(Staff* staff, int idx)
       staff->part()->insertStaff(staff);
 
       int track = idx * VOICES;
-      foreach(Element* e, *_layout->gel()) {
+      foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
                   Slur* slur = (Slur*)e;
                   if (slur->track() >= track) {
@@ -791,7 +791,7 @@ void Score::insertStaff(Staff* staff, int idx)
 
 void Score::cmdRemoveStaff(int staffIdx)
       {
-      foreach(Element* e, *_layout->gel()) {
+      foreach(Element* e, _gel) {
             if (e->type() != SLUR)
                   continue;
             Slur* slur = (Slur*)e;
@@ -814,7 +814,7 @@ void Score::removeStaff(Staff* staff)
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
       int track = idx * VOICES;
-      foreach(Element* e, *_layout->gel()) {
+      foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
                   Slur* slur = (Slur*)e;
                   if (slur->track() > track)
@@ -853,7 +853,7 @@ void Score::sortStaves(QList<int> dst)
             Measure* m = (Measure*)mb;
             m->sortStaves(dst);
             }
-      foreach(Element* e, *gel()) {
+      foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
                   Slur* slur = (Slur*)e;
                   int staffIdx = slur->staffIdx();

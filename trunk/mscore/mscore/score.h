@@ -115,6 +115,7 @@ class Score : public QObject {
       Q_PROPERTY (QString name READ name)
 
       MeasureBaseList _measures;           // here are the notes
+      QList<Element*> _gel;   // global elements: Slur, SLine
 
       PadState   _padState;
       InputState _is;
@@ -167,8 +168,6 @@ class Score : public QObject {
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
 
-      ChordRest* nextChordRest(ChordRest*);
-      ChordRest* prevChordRest(ChordRest*);
       ChordRest* nextMeasure(ChordRest*);
       ChordRest* prevMeasure(ChordRest*);
       void cmdSetBeamMode(int);
@@ -402,7 +401,6 @@ class Score : public QObject {
       void lyricsReturn();
       void lyricsMinus();
       void changeLineSegment(bool);
-      void changeSlurSegment(bool last);
 
       void startEdit(Element* element);
       void endEdit();
@@ -524,8 +522,6 @@ class Score : public QObject {
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
       void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
-      QList<Element*>* gel();
-      const QList<Element*>* gel() const;
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events, int tickOffset);
       void toEList(EventMap* events, bool expandRepeats, int tickOffset, int staffIdx);
@@ -539,6 +535,9 @@ class Score : public QObject {
       QList<Excerpt*>* excerpts() { return &_excerpts; }
       Score* createExcerpt(Excerpt*);
       MeasureBaseList* measures()  { return &_measures; }
+
+      QList<Element*>* gel()                  { return &_gel; }
+      const QList<Element*>* gel() const      { return &_gel; }
       };
 
 extern Score* gscore;

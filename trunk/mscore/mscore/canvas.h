@@ -156,7 +156,7 @@ class Canvas : public QFrame, public Viewer {
       virtual void dataChanged(const QRectF&);
       void setState(State);
       State getState() const { return state; }
-      bool startEdit(Element*);
+      bool startEdit(Element*, int startGrip = -1);
       void setScore(Score* s, ScoreLayout*);
 
       qreal mag() const;

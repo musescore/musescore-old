@@ -843,8 +843,10 @@ bool Score::read(QDomElement e)
                   else if (tag == "page-layout")
                         pageFormat()->read(ee);
                   else if (tag == "rights") {
-                        if (rights == 0)
+                        if (rights == 0) {
                               rights = new QTextDocument(0);
+                              rights->setUseDesignMetrics(true);
+                              }
                         if (mscVersion() <= 103)
                               rights->setHtml(val);
                         else
@@ -912,6 +914,34 @@ bool Score::read(QDomElement e)
                         domError(ee);
                   }
             }
+      if (_mscVersion < 108) {
+            foreach(Element* e, _gel) {
+                  if (e->type() != SLUR)
+                        continue;
+                  Slur* s = (Slur*)e;
+                  Element* n1 = searchNote(s->tick(), s->track());
+                  Element* n2 = searchNote(s->tick2(), s->track2());
+                  if (n1 == 0 || n2 == 0) {
+                        printf("  not found\n");
+                        // TODO: remove SLur
+                        }
+                  else {
+                        if (n1->isChordRest()) {
+                              ((ChordRest*)n1)->addSlurFor(s);
+                              s->setStartElement(n1);
+                              }
+                        else
+                              printf("   n1 is %s\n", n1->name());
+                        if (n2->isChordRest()) {
+                              ((ChordRest*)n2)->addSlurBack(s);
+                              s->setEndElement(n2);
+                              }
+                        else
+                              printf("   n2 is %s\n", n2->name());
+                        }
+                  }
+            }
+
       _layout->connectTies();
       _layout->searchHiddenNotes();
       _layout->setInstrumentNames();
@@ -973,8 +1003,7 @@ void Score::print(QPrinter* printer)
       //HACK:
       printerMag = DPI / oldDPI;    // used for text line spacing
 
-      DPMM     = DPI / INCH;                     // dots/mm
-      _spatium = 20.0 / 72.0 * DPI / 4.0;
+      _spatium *= printerMag;
       setSpatium(_spatium);
 
       QPaintDevice* oldPaintDevice = layout()->paintDevice();
@@ -982,7 +1011,7 @@ void Score::print(QPrinter* printer)
       layout()->doLayout();
 
       QList<const Element*> el;
-      foreach (const Element* element, *layout()->gel())
+      foreach (const Element* element, _gel)
             element->collectElements(el);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             m->collectElements(el);

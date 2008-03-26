@@ -190,7 +190,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             ++didx;
             }
       xml.trackDiff = 0;
-      foreach(Element* el, _layout->_gel) {
+      foreach(Element* el, _gel) {
             if (el->track() != -1) {
                   int staffIdx = el->staffIdx();
                   if (trackOffset[staffIdx] == HIDDEN)

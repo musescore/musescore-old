@@ -58,7 +58,7 @@ QPointF KeySig::canvasPos() const
 
 void KeySig::addLayout(Sym* s, double x, double y)
       {
-      _bbox |= s->bbox().translated(x * _spatium, y * _spatium);
+      _bbox |= s->bbox(mag()).translated(x * _spatium * mag(), y * _spatium * mag());
       }
 
 //---------------------------------------------------------

@@ -42,12 +42,12 @@ TextPalette* palette;
 TextBase::TextBase()
       {
       _doc          = new QTextDocument(0);
+      _doc->setUseDesignMetrics(true);
       _frameWidth   = 0.0;
       _paddingWidth = 0.0;
       _frameColor   = QColor(Qt::black);
       _frameRound   = 25;
       _circle       = false;
-      _doc->setUseDesignMetrics(true);
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
@@ -228,9 +228,9 @@ void TextBase::layout(ScoreLayout* layout)
             }
       else {
             // _bbox = QRectF(QPointF(), _doc->size() * 1.3);
-            // _bbox = QRectF(QPointF(), _doc->size());
+            _bbox = QRectF(QPointF(), QPointF(tw, _doc->size().height()));
 //            _bbox = QRectF(QPointF(), _doc->documentLayout()->size());
-            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
+//            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
             }
       }
 
@@ -241,6 +241,7 @@ void TextBase::layout(ScoreLayout* layout)
 void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       {
       p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
 
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;

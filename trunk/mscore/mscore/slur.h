@@ -87,9 +87,14 @@ class SlurSegment : public Element {
 //---------------------------------------------------------
 
 class SlurTie : public Element {
+      Element* _startElement;
+      Element* _endElement;
+
    protected:
       bool up;
       QList<SlurSegment*> segments;
+      QQueue<SlurSegment*> delSegments;   // "deleted" segments
+
       Direction _slurDirection;
 
       double firstNoteRestSegmentX(System* system);
@@ -116,8 +121,13 @@ class SlurTie : public Element {
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
-      QPointF slurPos(int tick, int track, System*& s);
+      QPointF slurPos(Element*, System*& s);
       virtual void collectElements(QList<const Element*>& el) const;
+
+      void setStartElement(Element* e)    { _startElement = e;    }
+      void setEndElement(Element* e)      { _endElement = e;      }
+      Element* startElement() const       { return _startElement; }
+      Element* endElement() const         { return _endElement;   }
       };
 
 //---------------------------------------------------------
@@ -125,8 +135,9 @@ class SlurTie : public Element {
 //---------------------------------------------------------
 
 class Slur : public SlurTie {
-      int _track2;
-      int _tick2;
+      int _track2;      // obsolete used temporarily for reading old version
+      int _tick2;       // obsolete
+      int _id;          // used temporarily on write()
 
    public:
       Slur(Score*);
@@ -145,10 +156,14 @@ class Slur : public SlurTie {
       int staffIdx2() const   { return _track2 / VOICES; }
       void setTrack2(int val) { _track2 = val; }
 
+#if 1       // obsolete
       void setStart(int t, int track);
       void setEnd(int t,   int track);
       bool startsAt(int t, int track);
       bool endsAt(int t,   int track);
+#endif
+      int id() const    { return _id; }
+      void setId(int i) { _id = i;    }
       };
 
 //---------------------------------------------------------
@@ -156,20 +171,18 @@ class Slur : public SlurTie {
 //---------------------------------------------------------
 
 class Tie : public SlurTie {
-      Note* _startNote; // parent
-      Note* _endNote;
-
    public:
       Tie(Score*);
-      virtual Tie* clone() const    { return new Tie(*this); }
-      virtual ElementType type() const { return TIE; }
+      virtual Tie* clone() const          { return new Tie(*this);        }
+      virtual ElementType type() const    { return TIE;                   }
       void setStartNote(Note* note);
-      void setEndNote(Note* note)   { _endNote = note; }
-      Note* startNote() const       { return _startNote; }
-      Note* endNote() const         { return _endNote; }
+      void setEndNote(Note* note)         { setEndElement((Element*)note); }
+      Note* startNote() const             { return (Note*)startElement(); }
+      Note* endNote() const               { return (Note*)endElement();   }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
       };
 
 #endif
+

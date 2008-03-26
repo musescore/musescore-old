@@ -46,6 +46,7 @@
 #include "utils.h"
 #include "harmony.h"
 #include "system.h"
+#include "navigate.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -514,22 +515,16 @@ void Score::cmdAddSlur()
             printf("no note selected\n");
             return;
             }
-      Note* note   = (Note*)(e);
-      Chord* chord = note->chord();
-      int staffIdx = chord->staffIdx();
-      int voice    = chord->voice();
+      ChordRest* cr1 = ((Note*)e)->chord();
+      ChordRest* cr2 = nextChordRest(cr1);
 
-      int track = staffIdx * VOICES + voice;
-      int tick2 = nextSeg(chord->tick(), track);
-
-      if (tick2 == 0) {
+      if (cr2 == 0) {
             printf("cannot create slur: at end\n");
             return;
             }
       Slur* slur = new Slur(this);
-      slur->setTrack(track);
-      slur->setStart(chord->tick(), track);
-      slur->setEnd(tick2, track);
+      slur->setStartElement(cr1);
+      slur->setEndElement(cr2);
       slur->setParent(_layout);
       cmdAdd(slur);
 
@@ -918,7 +913,7 @@ void Score::deleteItem(Element* el)
 void Score::cmdRemoveTime(int tick, int len)
       {
       int tick2 = tick + len;
-      foreach(Element* el, _layout->_gel) {
+      foreach(Element* el, _gel) {
             if (el->type() == SLUR) {
                   Slur* s = (Slur*) el;
                   if (s->tick() >= tick && s->tick2() < tick2)
@@ -1346,29 +1341,6 @@ void Score::changeLineSegment(bool last)
             newSegment = segment->line()->lineSegments().back();
       else
             newSegment = segment->line()->lineSegments().front();
-
-      canvas()->setState(Canvas::NORMAL);
-      endCmd();
-
-      startCmd();
-      canvas()->startEdit(newSegment);
-      layoutAll = true;
-      }
-
-//---------------------------------------------------------
-//   changeSlurSegment
-//    switch to first/last LineSegment while editing
-//---------------------------------------------------------
-
-void Score::changeSlurSegment(bool last)
-      {
-      SlurSegment* segment = (SlurSegment*)editObject;
-
-      SlurSegment* newSegment;
-      if (last)
-            newSegment = segment->slurTie()->slurSegments()->back();
-      else
-            newSegment = segment->slurTie()->slurSegments()->front();
 
       canvas()->setState(Canvas::NORMAL);
       endCmd();

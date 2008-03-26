@@ -461,7 +461,15 @@ void Score::write(Xml& xml)
             part->write(xml);
       foreach(const Excerpt* excerpt, _excerpts)
             excerpt->write(xml);
-      foreach(Element* el, _layout->_gel)
+
+      // to serialize slurs, the get an id; this id is referenced
+      // in begin-end elements
+      int slurId = 0;
+      foreach(Element* el, _gel) {
+            if (el->type() == SLUR)
+                  ((Slur*)el)->setId(slurId++);
+            }
+      foreach(Element* el, _gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
@@ -531,7 +539,7 @@ void Score::insertTime(int tick, int len)
                   staff->clef()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
                   }
-            foreach(Element* el, _layout->_gel) {
+            foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
                         if (s->tick() >= tick + len) {
@@ -559,7 +567,7 @@ void Score::insertTime(int tick, int len)
                   staff->clef()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
                   }
-            foreach(Element* el, _layout->_gel) {
+            foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
                         if (s->tick() >= tick) {
@@ -1552,8 +1560,10 @@ void Score::setCopyright(QTextDocument* doc)
 
 void Score::setCopyright(const QString& s)
       {
-      if (rights == 0)
+      if (rights == 0) {
             rights = new QTextDocument(0);
+            rights->setUseDesignMetrics(true);
+            }
       rights->setPlainText(s);
       }
 
@@ -1566,20 +1576,6 @@ void Score::setCopyrightHtml(const QString& s)
       if (rights == 0)
             rights = new QTextDocument(0);
       rights->setHtml(s);
-      }
-
-//---------------------------------------------------------
-//   gel
-//---------------------------------------------------------
-
-QList<Element*>* Score::gel()
-      {
-      return _layout->gel();
-      }
-
-const QList<Element*>* Score::gel() const
-      {
-      return _layout->gel();
       }
 
 //---------------------------------------------------------

@@ -967,7 +967,7 @@ void Canvas::resetStaffOffsets()
 //   startEdit
 //---------------------------------------------------------
 
-bool Canvas::startEdit(Element* element)
+bool Canvas::startEdit(Element* element, int startGrip)
       {
       if (element->startEdit(startMove)) {
             setFocus();
@@ -979,7 +979,10 @@ bool Canvas::startEdit(Element* element)
             for (int i = 0; i < 4; ++i)
                   grip[i] = r;
             _score->editObject->updateGrips(&grips, grip);
-            curGrip = grips-1;
+            if (startGrip == -1)
+                  curGrip = grips-1;
+            else
+                  curGrip = startGrip;
 
             update();         // DEBUG
             return true;
@@ -1116,6 +1119,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
       {
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
 
       QRegion region;
       if (_score->needLayout()) {

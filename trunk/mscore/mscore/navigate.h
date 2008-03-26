@@ -22,6 +22,8 @@
 #define __NAVIGATE_H__
 
 extern int pitch2y(int pitch, int enh, int clefOffset, int key, int& prefix, const char* tversatz);
+extern ChordRest* nextChordRest(ChordRest* cr);
+extern ChordRest* prevChordRest(ChordRest* cr);
 
 #endif
 
