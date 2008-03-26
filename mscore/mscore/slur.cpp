@@ -31,6 +31,8 @@
 #include "staff.h"
 #include "layout.h"
 #include "viewer.h"
+#include "navigate.h"
+#include "canvas.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -123,69 +125,46 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             return false;
       Slur* sl = (Slur*) slurTie();
 
-      if ((ev->modifiers() & Qt::ShiftModifier)
+      if (ev->key() == Qt::Key_X) {
+            sl->setSlurDirection(sl->isUp() ? DOWN : UP);
+            return true;
+            }
+      if (!((ev->modifiers() & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
               || (_segmentType == SEGMENT_END && curGrip == 3)
-            )
-         ) {
-            int track1 = sl->track();
-            int track2 = track1;          // prefer same voice
-            int tick1  = sl->tick();
-            int tick2  = sl->tick2();
+            )))
+            return false;
 
-            if (ev->key() == Qt::Key_Left) {
-                  if (curGrip == 0) {
-                        tick1 = score()->prevSeg1(tick1, track1);
-                        ups[0].off = QPointF();
-                        }
-                  else if (curGrip == 3) {
-                        int segments = slurTie()->slurSegments()->size();
-                        int t2 = score()->prevSeg1(tick2, track2);
-                        if (t2 >= 0) {
-                              tick2 = t2;
-                              ups[3].off = QPointF();
-                              }
-                        sl->setTick2(tick2);
-                        Slur* slur = (Slur*)slurTie();
-                        slur->layout(score()->layout());
-                        if (slur->slurSegments()->size() != segments)
-                              score()->changeSlurSegment(true);
-                        }
-                  }
-            else if (ev->key() == Qt::Key_Right) {
-                  if (curGrip == 0) {
-                        tick1 = score()->nextSeg1(tick1, track1);
-                        ups[0].off = QPointF();
-                        }
-                  else if (curGrip == 3) {
-                        int segments = slurTie()->slurSegments()->size();
-                        int t2 = score()->nextSeg1(tick2, track2);
-                        if (t2 >= 0) {
-                              tick2 = t2;
-                              ups[3].off = QPointF();
-                              }
-                        sl->setTick2(tick2);
-                        Slur* slur = (Slur*)slurTie();
-                        slur->layout(score()->layout());
-                        if (slur->slurSegments()->size() != segments)
-                              score()->changeSlurSegment(true);
-                        }
-                  }
-            else {
-                  return false;
-                  }
-            sl->setTrack(track1);
-            sl->setTrack2(track2);
-            sl->setTick(tick1);
-            sl->setTick2(tick2);
+      int segments  = sl->slurSegments()->size();
+      ChordRest* cr = 0;
+      Element* e    = curGrip == 0 ? sl->startElement() : sl->endElement();
+      Element* e1   = curGrip == 0 ? sl->endElement() : sl->startElement();
+
+      if (ev->key() == Qt::Key_Left)
+            cr = prevChordRest((ChordRest*)e);
+      else if (ev->key() == Qt::Key_Right)
+            cr = nextChordRest((ChordRest*)e);
+
+      if (cr == 0 || cr == (ChordRest*)e1)
             return true;
+      if (curGrip == 0)
+            sl->setStartElement(cr);
+      else
+            sl->setEndElement(cr);
+
+      ups[curGrip].off = QPointF();
+      sl->layout(score()->layout());
+      if (sl->slurSegments()->size() != segments) {
+            QList<SlurSegment*>* ss = sl->slurSegments();
+            SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
+            score()->canvas()->setState(Canvas::NORMAL);
+            score()->endCmd();
+            score()->startCmd();
+            score()->canvas()->startEdit(newSegment, curGrip);
+            score()->setLayoutAll(true);
             }
-      else if (ev->key() == Qt::Key_X) {
-            slurTie()->setSlurDirection(slurTie()->isUp() ? DOWN : UP);
-            return true;
-            }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -201,13 +180,13 @@ QPointF SlurSegment::gripAnchor(int grip) const
       switch(_segmentType) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return sl->slurPos(sl->tick(), sl->track(), s);
+                        return sl->slurPos(sl->startElement(), s);
                   else if (grip == 3)
-                        return sl->slurPos(sl->tick2(), sl->track2(), s);
+                        return sl->slurPos(sl->endElement(), s);
                   return QPointF();
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return sl->slurPos(sl->tick(), sl->track(), s);
+                        return sl->slurPos(sl->startElement(), s);
                   else if (grip == 3)
                         return _system->abbox().topRight();
                   break;
@@ -221,7 +200,7 @@ QPointF SlurSegment::gripAnchor(int grip) const
                   if (grip == 0)
                         return sp;
                   else if (grip == 3)
-                        return sl->slurPos(sl->tick2(), sl->track2(), s);
+                        return sl->slurPos(sl->endElement(), s);
                   break;
             }
       return QPointF();
@@ -354,7 +333,7 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
             printf("warning: slur has zero width at %d-%d\n",
-               slurTie()->tick(), ((Slur*)slurTie())->tick2());
+               slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
             return;
             }
 
@@ -412,7 +391,9 @@ SlurTie::SlurTie(Score* s)
    : Element(s)
       {
       _slurDirection = AUTO;
-      up = true;
+      up             = true;
+      _startElement  = 0;
+      _endElement    = 0;
       }
 
 SlurTie::SlurTie(const SlurTie& t)
@@ -420,6 +401,10 @@ SlurTie::SlurTie(const SlurTie& t)
       {
       up             = t.up;
       _slurDirection = t._slurDirection;
+      _startElement  = t._startElement;
+      _endElement    = t._endElement;
+      delSegments    = t.delSegments;
+
       //
       // duplicate segments
       //
@@ -482,20 +467,14 @@ void SlurTie::change(Element* o, Element* n)
 //   slurPos
 //---------------------------------------------------------
 
-QPointF SlurTie::slurPos(int tick, int track, System*& s)
+QPointF SlurTie::slurPos(Element* e, System*& s)
       {
-      Measure* m = _score->tick2measure(tick);
-      if (m == 0) {
-            printf("SlurTie: cannot find measure for tick %d\n", tick);
-            return QPointF(0,0);
-            }
-      s = m->system();
-      ChordRest* cr = m->findChordRest(tick, track);
-      if (cr == 0) {
-            printf("SlurTie: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
-               tick, track, m->tick(), m->tick() + m->tickLen());
-            return QPointF(0,0);
-            }
+      ChordRest* cr;
+      if (e->type() == NOTE)
+            cr = ((Note*)e)->chord();
+      else
+            cr = (Chord*)e;
+      s = cr->measure()->system();
 
       //-----------------------------------------
       //    off
@@ -614,6 +593,7 @@ void Slur::setTick2(int val)
             _tick2 = val;
       }
 
+#if 1       // obsolete
 //---------------------------------------------------------
 //   setStart
 //---------------------------------------------------------
@@ -651,6 +631,7 @@ bool Slur::endsAt(int t, int track)
       {
       return ((_tick2 == t) && (_track2 == track));
       }
+#endif
 
 //---------------------------------------------------------
 //   write
@@ -658,7 +639,7 @@ bool Slur::endsAt(int t, int track)
 
 void Slur::write(Xml& xml) const
       {
-      xml.stag("Slur");
+      xml.stag(QString("Slur id=\"%1\"").arg(_id + 1));
       xml.tag("tick2", _tick2);
       if (_track2)
             xml.tag("track2", _track2 + xml.trackDiff);
@@ -673,6 +654,7 @@ void Slur::write(Xml& xml) const
 void Slur::read(QDomElement e)
       {
       setTrack(0);      // set staff
+      _id = e.attribute("id").toInt() - 1;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -700,57 +682,28 @@ void Slur::read(QDomElement e)
 
 void Slur::layout(ScoreLayout* layout)
       {
-      if (track() == -1) {
-            printf("Slur::layout: no track\n");
-//            return;
-            }
       double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
             case DOWN:  up = false; break;
             case AUTO:
                   {
-                  Measure* m1 = _score->tick2measure(tick());
-                  if (m1 == 0) {
-                        printf("Slur: cannot find measure for tick %d\n", tick());
-                        return;
-                        }
-                  if ((_tick2 - tick()) > m1->tickLen()) {
+                  ChordRest* cr1 = (ChordRest*)startElement();
+                  ChordRest* cr2 = (ChordRest*)endElement();
+                  Measure* m1    = cr1->measure();
+                  if ((cr2->tick() - cr1->tick()) > m1->tickLen()) {
                         // long slurs are always above
                         up = true;
                         }
-                  else {
-                        ChordRest* c1 = m1->findChordRest(tick(), track());
-                        if (c1 == 0) {
-                              printf("Slur-1: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
-                                 tick(), track(), m1->tick(), m1->tick() + m1->tickLen());
-                              return;
-                              }
-
-                        Measure* m2 = _score->tick2measure(_tick2);
-                        if (m2 == 0) {
-                              printf("Slur: cannot find measure for tick %d\n", _tick2);
-                              return;
-                              }
-                        ChordRest* c2 = m2->findChordRest(_tick2, _track2);
-                        if (c2 == 0) {
-                              printf("Slur-2: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
-                                 _tick2, _track2, m2->tick(), m2->tick() + m2->tickLen());
-                              return;
-                              }
-                        if (c1->isUp())
-                              up = false;
-                        else
-                              up = true;
-                        }
+                  else
+                        up = !(cr1->isUp());
                   }
                   break;
             }
 
       System *s1, *s2;
-
-      QPointF p1 = slurPos(tick(), track(), s1);
-      QPointF p2 = slurPos(_tick2, _track2, s2);
+      QPointF p1 = slurPos(startElement(), s1);
+      QPointF p2 = slurPos(endElement(), s2);
 
       QList<System*>* sl = layout->systems();
       iSystem is = sl->begin();
@@ -776,7 +729,12 @@ void Slur::layout(ScoreLayout* layout)
       unsigned onsegs = segments.size();
       if (nsegs > onsegs) {
             for (unsigned i = onsegs; i < nsegs; ++i) {
-                  SlurSegment* s = new SlurSegment(score());
+                  SlurSegment* s;
+                  if (!delSegments.isEmpty()) {
+                        s = delSegments.dequeue();
+                        }
+                  else
+                        s = new SlurSegment(score());
                   s->setTrack(track());
                   add(s);
                   }
@@ -784,7 +742,7 @@ void Slur::layout(ScoreLayout* layout)
       else if (nsegs < onsegs) {
             for (unsigned i = nsegs; i < onsegs; ++i) {
                   SlurSegment* s = (SlurSegment*)(segments.takeLast());
-                  delete s;
+                  delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
                   }
             }
 
@@ -808,7 +766,6 @@ void Slur::layout(ScoreLayout* layout)
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
-//                  qreal x1 = sp.x();
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
                   qreal x2 = sp.x() + system->bbox().width();
                   segment->layout(layout, QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
@@ -877,8 +834,6 @@ void Slur::setTrack(int n)
 Tie::Tie(Score* s)
    : SlurTie(s)
       {
-      _startNote = 0;
-      _endNote   = 0;
       }
 
 //---------------------------------------------------------
@@ -887,7 +842,7 @@ Tie::Tie(Score* s)
 
 void Tie::setStartNote(Note* note)
       {
-      _startNote = note;
+      setStartElement(note);
       setParent(note);
       }
 
@@ -930,15 +885,15 @@ void Tie::layout(ScoreLayout* layout)
       //
       // TODO: if there is a startNote but no endNote
       //    show short bow
-      if (_startNote == 0 || _endNote == 0)
+      if (startElement() == 0 || endElement() == 0)
             return;
 
       double _spatium = layout->spatium();
 
-      Chord* c1   = _startNote->chord();
+      Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();
       System* s1  = m1->system();
-      Chord* c2   = _endNote->chord();
+      Chord* c2   = endNote()->chord();
       Measure* m2 = c2->measure();
       System* s2  = m2->system();
 
@@ -946,7 +901,7 @@ void Tie::layout(ScoreLayout* layout)
             up = !c1->isUp();
       else
             up = _slurDirection == UP ? true : false;
-      qreal w   = _startNote->headWidth();
+      qreal w   = startNote()->headWidth();
       qreal h   = w * 0.3;
       qreal yo  = up ? -h : h;
 
@@ -954,8 +909,8 @@ void Tie::layout(ScoreLayout* layout)
       QPointF off2(0.0, yo);
 
       QPointF ppos(canvasPos());
-      QPointF p1 = _startNote->canvasPos() + off1;
-      QPointF p2 = _endNote->canvasPos()   + off2;
+      QPointF p1 = startNote()->canvasPos() + off1;
+      QPointF p2 = endNote()->canvasPos()   + off2;
 
       QList<System*>* systems = layout->systems();
       setPos(0, 0);

@@ -217,7 +217,7 @@ void ScoreLayout::doLayout()
             m->layout2(this);
             }
 
-      foreach(Element* el, _gel)
+      foreach(Element* el, *score()->gel())
             el->layout(this);
 
       //---------------------------------------------------
@@ -248,7 +248,7 @@ void ScoreLayout::doLayout()
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (const Element* element, _gel) {
+      foreach (const Element* element, *score()->gel()) {
             if (element->track() != -1) {
                   if (!element->staff()->show())
                         continue;
@@ -403,8 +403,7 @@ bool ScoreLayout::layoutPage()
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
-      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder)
-                  /* - point(score()->style()->systemDistance)*/;
+      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder);
 
       page->clear();
       qreal y = page->tm();
@@ -486,6 +485,7 @@ bool ScoreLayout::layoutPage()
 
       if (restHeight > (ph * (1.0 - score()->style()->pageFillLimit)))
             return true;
+return true;
 
       double dist = restHeight / (rows - 1);
       y = 0;
@@ -898,7 +898,7 @@ void ScoreLayout::add(Element* el)
             }
       else {
             el->setParent(this);
-            _gel.append(el);
+            score()->gel()->append(el);
             }
       }
 
@@ -912,11 +912,11 @@ void ScoreLayout::remove(Element* el)
             _score->measures()->remove((MeasureBase*)el);
             }
       else {
-            int idx = _gel.indexOf(el);
+            int idx = score()->gel()->indexOf(el);
             if (idx == -1)
                   printf("ScoreLayout::remove(): element not found\n");
             else
-                  _gel.removeAt(idx);
+                  score()->gel()->removeAt(idx);
             }
       }
 
@@ -1000,7 +1000,7 @@ void ScoreLayout::doReLayout()
             m->layout2(this);
             }
 
-      foreach(Element* el, _gel)
+      foreach(Element* el, *score()->gel())
             el->layout(this);
 
       //---------------------------------------------------
@@ -1032,7 +1032,7 @@ void ScoreLayout::doReLayout()
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (const Element* element, _gel) {
+      foreach (const Element* element, *score()->gel()) {
             if (element->track() != -1) {
                   if (!element->staff()->show())
                         continue;

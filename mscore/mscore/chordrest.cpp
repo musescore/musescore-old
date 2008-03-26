@@ -30,6 +30,7 @@
 #include "chordlist.h"
 #include "score.h"
 #include "sym.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList
@@ -259,6 +260,10 @@ void ChordRest::writeProperties(Xml& xml) const
       xml.prop(pl);
       for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia)
             (*ia)->write(xml);
+      foreach(Slur* s, _slurFor)
+            xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
+      foreach(Slur* s, _slurBack)
+            xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
       xml.curTick = tick() + tickLen();
       }
 
@@ -269,7 +274,7 @@ void ChordRest::writeProperties(Xml& xml) const
 bool ChordRest::isSimple(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
-      return pl.size() <= 1 && attributes.empty();
+      return pl.size() <= 1 && attributes.empty() && _slurFor.empty() && _slurBack.empty();
       }
 
 //---------------------------------------------------------
@@ -317,6 +322,32 @@ bool ChordRest::readProperties(QDomElement e)
             }
       else if (tag == "small")
             _small = i;
+      else if (tag == "Slur") {
+            int id = e.attribute("number").toInt() - 1;
+            QString type = e.attribute("type");
+            Slur* slur = 0;
+            foreach(Element* e, *score()->gel()) {
+                  if (e->type() == SLUR && ((Slur*)e)->id() == id) {
+                        slur = (Slur*)e;
+                        break;
+                        }
+                  }
+            if (slur) {
+                  if (type == "start") {
+                        slur->setStartElement(this);
+                        _slurFor.append(slur);
+                        }
+                  else if (type == "stop") {
+                        slur->setEndElement(this);
+                        _slurBack.append(slur);
+                        }
+                  else
+                        printf("Note::read(): unknown Slur type <%s>\n", qPrintable(type));
+                  }
+            else {
+                  printf("Note::read(): Slur not found\n");
+                  }
+            }
       else
             return false;
       return true;
@@ -438,3 +469,60 @@ void ChordRestList::add(ChordRest* n)
       {
       std::multimap<const int, ChordRest*, std::less<int> >::insert(std::pair<const int, ChordRest*> (n->tick(), n));
       }
+
+//---------------------------------------------------------
+//   addSlurFor
+//---------------------------------------------------------
+
+void ChordRest::addSlurFor(Slur* s)
+      {
+      int idx = _slurFor.indexOf(s);
+      if (idx >= 0) {
+            printf("ChordRest::setSlurFor(): already there\n");
+            return;
+            }
+      _slurFor.append(s);
+      }
+
+//---------------------------------------------------------
+//   addSlurBack
+//---------------------------------------------------------
+
+void ChordRest::addSlurBack(Slur* s)
+      {
+      int idx = _slurBack.indexOf(s);
+      if (idx >= 0) {
+            printf("ChordRest::setSlurBack(): already there\n");
+            return;
+            }
+      _slurBack.append(s);
+      }
+
+//---------------------------------------------------------
+//   removeSlurFor
+//---------------------------------------------------------
+
+void ChordRest::removeSlurFor(Slur* s)
+      {
+      int idx = _slurFor.indexOf(s);
+      if (idx < 0) {
+            printf("ChordRest::removeSlurFor(): not found\n");
+            return;
+            }
+      _slurFor.removeAt(idx);
+      }
+
+//---------------------------------------------------------
+//   removeSlurBack
+//---------------------------------------------------------
+
+void ChordRest::removeSlurBack(Slur* s)
+      {
+      int idx = _slurBack.indexOf(s);
+      if (idx < 0) {
+            printf("ChordRest::removeSlurBack(): not found\n");
+            return;
+            }
+      _slurBack.removeAt(idx);
+      }
+

@@ -30,7 +30,7 @@ class Beam;
 class Tuplet;
 class Segment;
 class Sym;
-
+class Slur;
 
 enum NoteAttributeIdx {
       UfermataSym,
@@ -120,6 +120,8 @@ typedef QList<NoteAttribute*>::const_iterator ciAttribute;
 //---------------------------------------------------------
 
 class ChordRest : public Element {
+      QList<Slur*> _slurFor;
+      QList<Slur*> _slurBack;
 
    protected:
       QList<NoteAttribute*> attributes;
@@ -169,6 +171,10 @@ class ChordRest : public Element {
       bool small() const                        { return _small; }
       void setSmall(bool val);
       virtual int staffMove() const = 0;
+      void addSlurFor(Slur*);
+      void addSlurBack(Slur*);
+      void removeSlurFor(Slur*);
+      void removeSlurBack(Slur*);
       };
 
 #endif

@@ -1,3 +1,15 @@
+26.3.8 (ws)
+      - fix drawing of some elements for "small" staves (clef, rests)
+      - fix different text metrics for printer resolution
+      - fix bad wrong calculation of _spatium for printer resolution
+      - changed slur implementation: anchors are defined by ChordRest pointers
+        instead of tick/track values; this enables slurs from grace notes to
+        their main note
+        -> this breaks MusicXml import/export for slurs
+      - changed implementation of grace notes: grace notes now have the
+        same tick position as their main note. This ensures that segments
+        are always ordered by tick position which was not the case in the older
+        implementation.
 25.3.8 (lv)
       - set / return root note as tpc value in chordedit dialog
        (ws)

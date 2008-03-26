@@ -89,52 +89,6 @@ void Rest::setSym(int s)
 void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
-      if (i == 0) {
-            setYoff(1.0);
-            setSym(wholerestSym);
-            return;
-            }
-      if (tuplet())
-            i = tuplet()->baseLen();
-
-      setYoff(2.0);
-      DurationType type;
-      headType(i, &type, &_dots);
-      switch(type) {
-            case D_LONG:
-                  setSym(longarestSym);
-                  break;
-            case D_BREVE:
-                  setSym(breverestSym);
-                  break;
-            case D_WHOLE:
-                  setSym(wholerestSym);
-                  setYoff(1.0);
-                  break;
-            case D_HALF:
-                  setSym(halfrestSym);
-                  break;
-            case D_QUARTER:
-                  setSym(quartrestSym);
-                  break;
-            case D_EIGHT:
-                  setSym(eighthrestSym);
-                  break;
-            case D_16TH:
-                  setSym(sixteenthrestSym);
-                  break;
-            case D_32ND:
-                  setSym(thirtysecondrestSym);
-                  break;
-            case D_64TH:
-                  setSym(sixtyfourthrestSym);
-                  break;
-            case D_128TH:
-                  setSym(hundredtwentyeighthrestSym);
-                  break;
-            case D_256TH:
-                  break;
-            }
       }
 
 void Rest::dump() const
@@ -291,6 +245,47 @@ void Rest::remove(Element* e)
 
 void Rest::layout(ScoreLayout* l)
       {
+      int i = tuplet() ? tuplet()->baseLen() : tickLen();
+
+      setYoff(2.0 * mag());
+      DurationType type;
+      headType(i, &type, &_dots);
+      switch(type) {
+            case D_LONG:
+                  setSym(longarestSym);
+                  break;
+            case D_BREVE:
+                  setSym(breverestSym);
+                  break;
+            case D_MEASURE:
+            case D_WHOLE:
+                  setSym(wholerestSym);
+                  setYoff(1.0 * mag());
+                  break;
+            case D_HALF:
+                  setSym(halfrestSym);
+                  break;
+            case D_QUARTER:
+                  setSym(quartrestSym);
+                  break;
+            case D_EIGHT:
+                  setSym(eighthrestSym);
+                  break;
+            case D_16TH:
+                  setSym(sixteenthrestSym);
+                  break;
+            case D_32ND:
+                  setSym(thirtysecondrestSym);
+                  break;
+            case D_64TH:
+                  setSym(sixtyfourthrestSym);
+                  break;
+            case D_128TH:
+                  setSym(hundredtwentyeighthrestSym);
+                  break;
+            case D_256TH:
+                  break;
+            }
       layoutAttributes(l);
       Element::layout(l);
       }
@@ -301,7 +296,7 @@ void Rest::layout(ScoreLayout* l)
 
 QRectF Rest::bbox() const
       {
-      QRectF b = symbols[_sym].bbox();
+      QRectF b = symbols[_sym].bbox(mag());
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
             b |= (*i)->bbox().translated((*i)->pos());
       return b;

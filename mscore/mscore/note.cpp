@@ -958,3 +958,4 @@ void Note::setTrack(int val)
       if (_accidental)
             _accidental->setTrack(val);
       }
+

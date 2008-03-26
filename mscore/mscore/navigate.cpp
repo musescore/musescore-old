@@ -34,6 +34,53 @@
 #include "layout.h"
 
 //---------------------------------------------------------
+//   nextChordRest
+//    return next NOTE or REST
+//    element - current element
+//---------------------------------------------------------
+
+ChordRest* nextChordRest(ChordRest* cr)
+      {
+      if (!cr)
+            return 0;
+      Segment* seg = cr->segment();
+      int track = cr->staffIdx() * VOICES + cr->voice();
+
+      for (;;) {
+            seg = seg->next1();
+            if (!seg)
+                  break;
+            Element* e = seg->element(track);
+            if (e && e->isChordRest())
+                  return (ChordRest*) e;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   prevChordRest
+//    return previous Chord or Rest
+//---------------------------------------------------------
+
+ChordRest* prevChordRest(ChordRest* cr)
+      {
+      if (!cr)
+            return 0;
+      Segment* seg = cr->segment();
+      int track = cr->staffIdx() * VOICES + cr->voice();
+
+      for (;;) {
+            seg = seg->prev1();
+            if (!seg)
+                  break;
+            Element* e = seg->element(track);
+            if (e && e->isChordRest())
+                  return (ChordRest*) e;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   upAlt
 //    select next higher pitched note in chord
 //---------------------------------------------------------
@@ -157,53 +204,6 @@ Note* Score::downAltCtrl(Note* note) const
       Chord* chord = note->chord();
       NoteList* nl  = chord->noteList();
       return nl->begin()->second;
-      }
-
-//---------------------------------------------------------
-//   nextChordRest
-//    return next NOTE or REST
-//    element - current element
-//---------------------------------------------------------
-
-ChordRest* Score::nextChordRest(ChordRest* cr)
-      {
-      if (!cr)
-            return 0;
-      Segment* seg = cr->segment();
-      int track = cr->staffIdx() * VOICES + cr->voice();
-
-      for (;;) {
-            seg = seg->next1();
-            if (!seg)
-                  break;
-            Element* e = seg->element(track);
-            if (e && e->isChordRest())
-                  return (ChordRest*) e;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   prevChordRest
-//    return previous Chord or Rest
-//---------------------------------------------------------
-
-ChordRest* Score::prevChordRest(ChordRest* cr)
-      {
-      if (!cr)
-            return 0;
-      Segment* seg = cr->segment();
-      int track = cr->staffIdx() * VOICES + cr->voice();
-
-      for (;;) {
-            seg = seg->prev1();
-            if (!seg)
-                  break;
-            Element* e = seg->element(track);
-            if (e && e->isChordRest())
-                  return (ChordRest*) e;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
