@@ -2050,9 +2050,9 @@ Element* Canvas::elementNear(const QPointF& p)
             if (e->abbox().contains(r) && e->selectable())
                   ll.append(e);
             }
-      if (ll.empty()) {
+      if ((ll.size() == 1) && (ll.front()->type() == MEASURE)) {
             //
-            // if no element hit, look nearby
+            // if no relevant element hit, look nearby
             //
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el.at(i);
