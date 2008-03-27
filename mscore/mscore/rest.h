@@ -42,11 +42,15 @@ class Rest : public ChordRest {
       virtual qreal downPos() const;
       virtual qreal centerX() const;
 
+      void setSymbol(int tickLen);
+
    public:
       Rest(Score*);
       Rest(Score*, int tick, int len);
       virtual Rest* clone() const { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
+      virtual void setTickLen(int t);
+      virtual void setTuplet(Tuplet* t);
 
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
@@ -54,7 +58,6 @@ class Rest : public ChordRest {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      void setSym(int);
       virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
