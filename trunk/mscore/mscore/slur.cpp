@@ -646,9 +646,6 @@ bool Slur::endsAt(int t, int track)
 void Slur::write(Xml& xml) const
       {
       xml.stag(QString("Slur id=\"%1\"").arg(_id + 1));
-      xml.tag("tick2", _tick2);
-      if (_track2)
-            xml.tag("track2", _track2 + xml.trackDiff);
       SlurTie::writeProperties(xml);
       xml.etag();
       }

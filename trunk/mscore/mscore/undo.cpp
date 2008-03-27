@@ -737,14 +737,13 @@ void Score::undoRemoveElement(Element* element)
       {
       if (element->isChordRest()) {
             // remove any slurs pointing to this chor/rest
-            foreach(Element* el, *gel()) {
-                  if (el->type() == SLUR
-                     && el->tick() == element->tick()
-                     && el->track() == element->track()) {
-                        undoRemoveElement(el);
-                        }
-                  }
             ChordRest* cr = (ChordRest*)element;
+            foreach(Slur* slur, cr->slurFor()) {
+                  undoRemoveElement(slur);
+                  }
+            foreach(Slur* slur, cr->slurBack()) {
+                  undoRemoveElement(slur);
+                  }
             if (cr->tuplet() && cr->tuplet()->elements()->empty())
                   undoRemoveElement(cr->tuplet());
             }
@@ -1182,6 +1181,11 @@ void Score::addElement(Element* element)
             // fixup all accidentals
             layoutAll = true;
             }
+      else if (element->type() == SLUR) {
+            Slur* s = (Slur*)element;
+            ((ChordRest*)s->startElement())->addSlurFor(s);
+            ((ChordRest*)s->endElement())->addSlurBack(s);
+            }
       }
 
 //---------------------------------------------------------
@@ -1244,6 +1248,11 @@ void Score::removeElement(Element* element)
             }
       else if (element->type() == KEYSIG) {
             layoutAll = true;
+            }
+      else if (element->type() == SLUR) {
+            Slur* s = (Slur*)element;
+            ((ChordRest*)s->startElement())->removeSlurFor(s);
+            ((ChordRest*)s->endElement())->removeSlurBack(s);
             }
       }
 
