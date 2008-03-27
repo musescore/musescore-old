@@ -148,11 +148,11 @@ class ChordRest : public Element {
       Measure* measure() const      { return (Measure*)(parent()->parent()); }
 
       void setBeamMode(BeamMode m);
-      BeamMode beamMode() const     { return _beamMode; }
-      void setBeam(Beam* b)         { _beam = b; }
-      Beam* beam() const            { return _beam; }
-      void setTuplet(Tuplet* t)     { _tuplet = t; }
-      Tuplet* tuplet() const        { return _tuplet; }
+      BeamMode beamMode() const           { return _beamMode; }
+      void setBeam(Beam* b)               { _beam = b; }
+      Beam* beam() const                  { return _beam; }
+      virtual void setTuplet(Tuplet* t)   { _tuplet = t; }
+      Tuplet* tuplet() const              { return _tuplet; }
       int beams() const;
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;

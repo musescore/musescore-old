@@ -42,18 +42,20 @@ Rest::Rest(Score* s)
       _dots      = 0;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
+      _sym       = quartrestSym;
       }
 
 Rest::Rest(Score* s, int tick, int len)
   : ChordRest(s)
       {
-      setTick(tick);
-      _dots      = 0;
-      setTickLen(len);
       _beamMode  = BEAM_NO;
       _staffMove = 0;
+      _dots      = 0;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
+      _sym       = quartrestSym;
+      setTick(tick);
+      setTickLen(len);
       }
 
 //---------------------------------------------------------
@@ -71,15 +73,6 @@ void Rest::draw(QPainter& p) const
                   symbols[dotSym].draw(p, mag(), x, y);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   setSym
-//---------------------------------------------------------
-
-void Rest::setSym(int s)
-      {
-      _sym = s;
       }
 
 //---------------------------------------------------------
@@ -226,53 +219,79 @@ void Rest::remove(Element* e)
       }
 
 //---------------------------------------------------------
+//   setTuplet
+//---------------------------------------------------------
+
+void Rest::setTuplet(Tuplet* t)
+      {
+      ChordRest::setTuplet(t);
+      setSymbol(t->baseLen());
+      }
+
+//---------------------------------------------------------
+//   setSymbol
+//---------------------------------------------------------
+
+void Rest::setSymbol(int i)
+      {
+      setYoff(2.0 * mag());
+      DurationType type;
+      headType(i, &type, &_dots);
+      switch(type) {
+            case D_LONG:
+                  _sym = longarestSym;
+                  break;
+            case D_BREVE:
+                  _sym = breverestSym;
+                  break;
+            case D_MEASURE:
+            case D_WHOLE:
+                  _sym = wholerestSym;
+                  setYoff(1.0 * mag());
+                  break;
+            case D_HALF:
+                  _sym = halfrestSym;
+                  break;
+            case D_QUARTER:
+                  _sym = quartrestSym;
+                  break;
+            case D_EIGHT:
+                  _sym = eighthrestSym;
+                  break;
+            case D_16TH:
+                  _sym = sixteenthrestSym;
+                  break;
+            case D_32ND:
+                  _sym = thirtysecondrestSym;
+                  break;
+            case D_64TH:
+                  _sym = sixtyfourthrestSym;
+                  break;
+            case D_128TH:
+                  _sym = hundredtwentyeighthrestSym;
+                  break;
+            case D_256TH:
+                  _sym = quartrestSym;    // TODO
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   setTickLen
+//---------------------------------------------------------
+
+void Rest::setTickLen(int i)
+      {
+      Element::setTickLen(i);
+      setSymbol(tuplet() ? tuplet()->baseLen() : tickLen());
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Rest::layout(ScoreLayout* l)
       {
-      int i = tuplet() ? tuplet()->baseLen() : tickLen();
-
-      setYoff(2.0 * mag());
-      DurationType type;
-      headType(i, &type, &_dots);
-printf("Rest layout ticks %d type %d\n", i, type);
-      switch(type) {
-            case D_LONG:
-                  setSym(longarestSym);
-                  break;
-            case D_BREVE:
-                  setSym(breverestSym);
-                  break;
-            case D_MEASURE:
-            case D_WHOLE:
-                  setSym(wholerestSym);
-                  setYoff(1.0 * mag());
-                  break;
-            case D_HALF:
-                  setSym(halfrestSym);
-                  break;
-            case D_QUARTER:
-                  setSym(quartrestSym);
-                  break;
-            case D_EIGHT:
-                  setSym(eighthrestSym);
-                  break;
-            case D_16TH:
-                  setSym(sixteenthrestSym);
-                  break;
-            case D_32ND:
-                  setSym(thirtysecondrestSym);
-                  break;
-            case D_64TH:
-                  setSym(sixtyfourthrestSym);
-                  break;
-            case D_128TH:
-                  setSym(hundredtwentyeighthrestSym);
-                  break;
-            case D_256TH:
-                  break;
-            }
       layoutAttributes(l);
       Element::layout(l);
       }
