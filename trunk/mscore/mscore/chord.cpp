@@ -1017,6 +1017,8 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   _tremolo->read(e);
                   _tremolo->setParent(this);
                   }
+            else if (tag == "tickOffset")       // obsolete
+                  ;
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }

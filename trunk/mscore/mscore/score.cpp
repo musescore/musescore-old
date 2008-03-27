@@ -423,6 +423,7 @@ void Score::read(QString name)
                         }
                   }
             }
+      checkSlurs();
       _layout->doLayout();
       layoutAll = false;
       }
@@ -1198,6 +1199,8 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                   QList<SlurSegment*>* el = _is.slur->slurSegments();
                   if (!el->isEmpty())
                         el->front()->setSelected(false);
+                  ((ChordRest*)_is.slur->startElement())->addSlurFor(_is.slur);
+                  ((ChordRest*)_is.slur->endElement())->addSlurBack(_is.slur);
                   _is.slur = 0;
                   }
             setPadState();
