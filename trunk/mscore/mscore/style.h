@@ -203,9 +203,20 @@ struct Style {
       bool genClef;           // create clef for all systems, not only for first
       bool genKeysig;         // create key signature for all systems
 
+      //---------------------------------------------------------
+      //   PlayStyle
+      //---------------------------------------------------------
+
+      int gateTime;           // 0-100%
+      int tenutoGateTime;
+      int staccatoGateTime;
+      int slurGateTime;
+
+
       void load(QDomElement e, int version);
       void save(Xml& xml);
       };
+
 
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];

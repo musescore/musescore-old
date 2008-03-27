@@ -217,7 +217,12 @@ Style defaultStyle = {
       0.7,              // smallStaffMag
       0.8,              // smallClefMag
       true,             // genClef
-      true              // genKeySig
+      true,             // genKeySig
+      // play style
+      70,               // gateTime
+      100,              // tenutoGateTime
+      40,               // staccatoGateTime
+      90                // slurGateTime
       };
 
 //---------------------------------------------------------
@@ -514,6 +519,14 @@ void Style::load(QDomElement e, int version)
                   genClef = i;
             else if (tag == "genKeysig")
                   genKeysig = i;
+            else if (tag == "gateTime")
+                  gateTime  = i;
+            else if (tag == "tenutoGateTime")
+                  tenutoGateTime = i;
+            else if (tag == "staccatoGateTime")
+                  staccatoGateTime = i;
+            else if (tag == "slurGateTime")
+                  slurGateTime = i;
             else
                   domError(e);
             }
@@ -595,5 +608,11 @@ void Style::save(Xml& xml)
       xml.tag("smallClefMag",           smallClefMag);
       xml.tag("genClef",                genClef);
       xml.tag("genKeysig",              genKeysig);
+
+      xml.tag("gateTime",               gateTime);
+      xml.tag("tenutoGateTime",         tenutoGateTime);
+      xml.tag("staccatoGateTime",       staccatoGateTime);
+      xml.tag("slurGateTime",           slurGateTime);
+
       xml.etag();
       }
