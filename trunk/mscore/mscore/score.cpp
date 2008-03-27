@@ -384,8 +384,10 @@ void Score::read(QString name)
 
       QString cs = info.completeSuffix();
 
-      if (cs == "xml")
+      if (cs == "xml") {
             importMusicXml(name);
+            connectSlurs();
+            }
       else if (cs == "mxl")
             importCompressedMusicXml(name);
       else if (cs.toLower() == "mid" || cs.toLower() == "kar") {

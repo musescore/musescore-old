@@ -914,33 +914,8 @@ bool Score::read(QDomElement e)
                         domError(ee);
                   }
             }
-      if (_mscVersion < 108) {
-            foreach(Element* e, _gel) {
-                  if (e->type() != SLUR)
-                        continue;
-                  Slur* s = (Slur*)e;
-                  Element* n1 = searchNote(s->tick(), s->track());
-                  Element* n2 = searchNote(s->tick2(), s->track2());
-                  if (n1 == 0 || n2 == 0) {
-                        printf("  not found\n");
-                        // TODO: remove SLur
-                        }
-                  else {
-                        if (n1->isChordRest()) {
-                              ((ChordRest*)n1)->addSlurFor(s);
-                              s->setStartElement(n1);
-                              }
-                        else
-                              printf("   n1 is %s\n", n1->name());
-                        if (n2->isChordRest()) {
-                              ((ChordRest*)n2)->addSlurBack(s);
-                              s->setEndElement(n2);
-                              }
-                        else
-                              printf("   n2 is %s\n", n2->name());
-                        }
-                  }
-            }
+      if (_mscVersion < 108)
+            connectSlurs();
 
       _layout->connectTies();
       _layout->searchHiddenNotes();
@@ -949,6 +924,40 @@ bool Score::read(QDomElement e)
       searchSelectedElements();
       _fileDivision = division;
       return false;
+      }
+
+//---------------------------------------------------------
+//   connectSlurs
+//    helper routine for old msc versions and MusicXml import
+//---------------------------------------------------------
+
+void Score::connectSlurs()
+      {
+      foreach(Element* e, _gel) {
+            if (e->type() != SLUR)
+                  continue;
+            Slur* s = (Slur*)e;
+            Element* n1 = searchNote(s->tick(), s->track());
+            Element* n2 = searchNote(s->tick2(), s->track2());
+            if (n1 == 0 || n2 == 0) {
+                  printf("  not found\n");
+                  // TODO: remove SLur
+                  }
+            else {
+                  if (n1->isChordRest()) {
+                        ((ChordRest*)n1)->addSlurFor(s);
+                        s->setStartElement(n1);
+                        }
+                  else
+                        printf("   n1 is %s\n", n1->name());
+                  if (n2->isChordRest()) {
+                        ((ChordRest*)n2)->addSlurBack(s);
+                        s->setEndElement(n2);
+                        }
+                  else
+                        printf("   n2 is %s\n", n2->name());
+                  }
+            }
       }
 
 //---------------------------------------------------------

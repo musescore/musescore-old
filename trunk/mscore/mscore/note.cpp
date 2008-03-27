@@ -401,6 +401,8 @@ void Note::setType(DurationType t)
             case D_LONG:      // not impl.
                   headType = 3;
                   break;
+            case D_MEASURE:
+                  break;
             }
       _head = noteHeads[_headGroup][headType];
       }

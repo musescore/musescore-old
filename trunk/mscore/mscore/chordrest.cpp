@@ -274,7 +274,7 @@ void ChordRest::writeProperties(Xml& xml) const
 bool ChordRest::isSimple(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
-      return pl.size() <= 1 && attributes.empty() && _slurFor.empty() && _slurBack.empty();
+      return (pl.size() <= 1) && attributes.empty() && _slurFor.empty() && _slurBack.empty();
       }
 
 //---------------------------------------------------------

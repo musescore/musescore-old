@@ -83,20 +83,6 @@ void Rest::setSym(int s)
       }
 
 //---------------------------------------------------------
-//   setLen
-//---------------------------------------------------------
-
-void Rest::setTickLen(int i)
-      {
-      Element::setTickLen(i);
-      }
-
-void Rest::dump() const
-      {
-      printf("Rest tick %d  len %d\n", tick(), tickLen());
-      }
-
-//---------------------------------------------------------
 //   drag
 //---------------------------------------------------------
 
@@ -250,6 +236,7 @@ void Rest::layout(ScoreLayout* l)
       setYoff(2.0 * mag());
       DurationType type;
       headType(i, &type, &_dots);
+printf("Rest layout ticks %d type %d\n", i, type);
       switch(type) {
             case D_LONG:
                   setSym(longarestSym);

@@ -526,6 +526,8 @@ void Score::cmdAddSlur()
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(_layout);
+      cr1->addSlurFor(slur);
+      cr2->addSlurBack(slur);
       cmdAdd(slur);
 
       slur->layout(layout());

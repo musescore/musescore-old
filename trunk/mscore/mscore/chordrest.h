@@ -171,10 +171,13 @@ class ChordRest : public Element {
       bool small() const                        { return _small; }
       void setSmall(bool val);
       virtual int staffMove() const = 0;
+
       void addSlurFor(Slur*);
       void addSlurBack(Slur*);
       void removeSlurFor(Slur*);
       void removeSlurBack(Slur*);
+      const QList<Slur*> slurFor() const { return _slurFor; }
+      const QList<Slur*> slurBack() const { return _slurBack; }
       };
 
 #endif

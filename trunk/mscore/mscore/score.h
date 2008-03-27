@@ -210,6 +210,7 @@ class Score : public QObject {
       void writeExcerpt(Excerpt*, Xml&);
       void renumberMeasures();
       void cmdResetBeamMode();
+      void connectSlurs();
 
    public slots:
       void doUndo();

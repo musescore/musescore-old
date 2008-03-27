@@ -182,9 +182,9 @@ class Technical {
 //---------------------------------------------------------
 
 class SlurHandler {
-      Slur* slur[MAX_SLURS];
+      const Slur* slur[MAX_SLURS];
       bool started[MAX_SLURS];
-      int findSlur(Slur* s);
+      int findSlur(const Slur* s) const;
 
    public:
       SlurHandler();
@@ -331,7 +331,7 @@ SlurHandler::SlurHandler()
 //   return -1 if not found
 //---------------------------------------------------------
 
-int SlurHandler::findSlur(Slur* s)
+int SlurHandler::findSlur(const Slur* s) const
       {
       for (int i = 0; i < MAX_SLURS; ++i)
             if (slur[i] == s) return i;
@@ -345,32 +345,27 @@ int SlurHandler::findSlur(Slur* s)
 void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
       {
       // search for slur(s) starting at this chord
-      foreach(Element* el, *(chord->score()->gel())) {
-            if (el->type() == SLUR) {
-                  Slur* s = (Slur*) el;
-                  if (s->startsAt(chord->tick(), chord->track())) {
-                        // check if on slur list (i.e. stop already seen)
-                        int i = findSlur(s);
-                        if (i >= 0) {
-                              // remove from list and print start
-                              slur[i] = 0;
-                              started[i] = false;
-                              notations.tag(xml);
-                              xml.tagE("slur type=\"start\"%s number=\"%d\"", s->slurDirection() == UP ? " placement=\"above\"" : "", i + 1);
-                              }
-                        else {
-                              // find free slot to store it
-                              i = findSlur(0);
-                              if (i >= 0) {
-                                    slur[i] = s;
-                                    started[i] = true;
-                                    notations.tag(xml);
-                                    xml.tagE("slur type=\"start\" number=\"%d\"", i + 1);
-                                    }
-                              else
-                                    printf("no free slur slot");
-                              }
+      foreach(const Slur* s, chord->slurFor()) {
+            // check if on slur list (i.e. stop already seen)
+            int i = findSlur(s);
+            if (i >= 0) {
+                  // remove from list and print start
+                  slur[i] = 0;
+                  started[i] = false;
+                  notations.tag(xml);
+                  xml.tagE("slur type=\"start\"%s number=\"%d\"", s->slurDirection() == UP ? " placement=\"above\"" : "", i + 1);
+                  }
+            else {
+                  // find free slot to store it
+                  i = findSlur(0);
+                  if (i >= 0) {
+                        slur[i] = s;
+                        started[i] = true;
+                        notations.tag(xml);
+                        xml.tagE("slur type=\"start\" number=\"%d\"", i + 1);
                         }
+                  else
+                        printf("no free slur slot");
                   }
             }
       }
@@ -388,30 +383,25 @@ void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
 void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
       {
       // search for slur(s) stopping at this chord but not on slur list yet
-      foreach(Element* el, *(chord->score()->gel())) {
-            if (el->type() == SLUR) {
-                  Slur* s = (Slur*) el;
-                  if (s->endsAt(chord->tick(), chord->track())) {
-                        // check if on slur list
-                        int i = findSlur(s);
-                        if (i < 0) {
-                              // if not, find free slot to store it
-                              i = findSlur(0);
-                              if (i >= 0) {
-                                    slur[i] = s;
-                                    started[i] = false;
-                                    notations.tag(xml);
-                                    xml.tagE("slur type=\"stop\" number=\"%d\"", i + 1);
-                                    }
-                              else
-                                    printf("no free slur slot");
-                              }
+      foreach(const Slur* s, chord->slurBack()) {
+            // check if on slur list
+            int i = findSlur(s);
+            if (i < 0) {
+                  // if not, find free slot to store it
+                  i = findSlur(0);
+                  if (i >= 0) {
+                        slur[i] = s;
+                        started[i] = false;
+                        notations.tag(xml);
+                        xml.tagE("slur type=\"stop\" number=\"%d\"", i + 1);
                         }
+                  else
+                        printf("no free slur slot");
                   }
             }
       // search slur list for already started slur(s) stopping at this chord
       for (int i = 0; i < MAX_SLURS; ++i) {
-            if (slur[i] && slur[i]->endsAt(chord->tick(), chord->track())) {
+            if (slur[i] && slur[i]->endElement() == chord) {
                   if (started[i]) {
                         slur[i] = 0;
                         started[i] = false;
