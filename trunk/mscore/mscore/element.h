@@ -48,9 +48,10 @@ class Viewer;
 
 enum ElementType {
       SYMBOL, TEXT, SLUR_SEGMENT, BAR_LINE,
-      STEM, STEM_SLASH, LINE, BRACKET,
+      STEM_SLASH, LINE, BRACKET,
       ARPEGGIO,
       ACCIDENTAL, NOTE,
+      STEM,
       CLEF, KEYSIG, TIMESIG, REST,
       BREATH,
       REPEAT_MEASURE,
