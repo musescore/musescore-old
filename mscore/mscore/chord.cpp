@@ -152,7 +152,6 @@ Chord::Chord(Score* s)
       _arpeggio      = 0;
       _tremolo       = 0;
       _noteType      = NOTE_NORMAL;
-      _tickOffset    = 0;
       _stemSlash     = 0;
       }
 
@@ -871,7 +870,6 @@ void Chord::write(Xml& xml) const
          && !_arpeggio
          && !_tremolo
          && (_noteType == NOTE_NORMAL)
-         && (_tickOffset == 0)
          ) {
             if (tick() != xml.curTick)
                   xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
@@ -896,8 +894,6 @@ void Chord::write(Xml& xml) const
                               break;
                         }
                   }
-            if (_tickOffset)
-                  xml.tag("tickOffset", _tickOffset);
             switch(_stemDirection) {
                   case UP:   xml.tag("StemDirection", QVariant("up")); break;
                   case DOWN: xml.tag("StemDirection", QVariant("down")); break;
@@ -999,8 +995,6 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   _noteType = NOTE_APPOGGIATURA;
             else if (tag == "appoggiatura")
                   _noteType = NOTE_APPOGGIATURA;
-            else if (tag == "tickOffset")
-                  _tickOffset = i;
             else if (tag == "acciaccatura")
                   _noteType = NOTE_ACCIACCATURA;
             else if (tag == "StemDirection") {

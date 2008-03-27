@@ -142,7 +142,6 @@ class Chord : public ChordRest {
       Arpeggio* _arpeggio;
       Tremolo* _tremolo;
       NoteType _noteType;     ///< mark grace notes: acciaccatura and appoggiatura
-      int _tickOffset;        ///< used to sort acciaccatura and appoggiatura
 
       void computeUp();
       virtual qreal upPos()   const;
@@ -162,8 +161,6 @@ class Chord : public ChordRest {
       virtual void read(QDomElement, int staff);
       virtual void setSelected(bool f);
       virtual void dump() const;
-
-      int ltick() const { return tick() - _tickOffset; }    ///< "logical" tick position
 
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
@@ -205,7 +202,6 @@ class Chord : public ChordRest {
       void setNoteType(NoteType t) { _noteType = t; }
 
       virtual void collectElements(QList<const Element*>& el) const;
-      void setTickOffset(int val) { _tickOffset = val; }
 
       virtual int staffMove() const;
       virtual void setTrack(int val);

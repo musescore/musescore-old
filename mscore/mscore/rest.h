@@ -48,8 +48,6 @@ class Rest : public ChordRest {
       virtual Rest* clone() const { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
 
-      virtual void setTickLen(int l);
-      virtual void dump() const;
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

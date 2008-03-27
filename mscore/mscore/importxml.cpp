@@ -2172,7 +2172,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         if (graceSlash == "yes")
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
-                        ((Chord*)cr)->setTickOffset(-division / 2);
                         cr->setTick(tick - (division / 2));
                         cr->setTickLen(division / 2); // to get a hook
                         }

@@ -294,6 +294,7 @@ int headType(int tickLen, DurationType* type, int* dots)
       if (tickLen == 0) {
             *type = D_MEASURE;
             *dots = 0;
+            return 0;
             }
       struct Duration {
             int ticks;

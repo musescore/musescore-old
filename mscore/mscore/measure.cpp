@@ -2258,7 +2258,7 @@ void Measure::read(QDomElement e, int idx)
                   chord->read(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
-                  score()->curTick = chord->ltick() + chord->tickLen();
+                  score()->curTick = chord->tick() + chord->tickLen();
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());

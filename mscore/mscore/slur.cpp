@@ -148,10 +148,16 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
 
       if (cr == 0 || cr == (ChordRest*)e1)
             return true;
-      if (curGrip == 0)
+      if (curGrip == 0) {
+            ((ChordRest*)sl->startElement())->removeSlurFor(sl);
             sl->setStartElement(cr);
-      else
+            cr->addSlurFor(sl);
+            }
+      else {
+            ((ChordRest*)sl->endElement())->removeSlurBack(sl);
             sl->setEndElement(cr);
+            cr->addSlurBack(sl);
+            }
 
       ups[curGrip].off = QPointF();
       sl->layout(score()->layout());
@@ -593,7 +599,6 @@ void Slur::setTick2(int val)
             _tick2 = val;
       }
 
-#if 1       // obsolete
 //---------------------------------------------------------
 //   setStart
 //---------------------------------------------------------
@@ -614,6 +619,7 @@ void Slur::setEnd(int t, int track)
       _track2 = track;
       }
 
+#if 0
 //---------------------------------------------------------
 //   startsAt
 //---------------------------------------------------------

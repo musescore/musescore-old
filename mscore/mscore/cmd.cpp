@@ -494,7 +494,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             setNote(_is.pos, _is.track, _padState.pitch, len);
             if (_is.slur) {
-                  _is.slur->setEnd(_is.pos, _is.track);
+//TODO                  _is.slur->setEnd(_is.pos, _is.track);
                   }
             _is.pos += len;
             }
@@ -577,15 +577,8 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       int tick         = chord->tick();
       int track        = chord->track();
 
-      int n = 1;
-      while ((seg = seg->prev())) {
-            if (seg->subtype() != Segment::SegGrace)
-                  break;
-            ++n;
-            }
-
       Segment::SegmentType st = Segment::SegGrace;
-      seg = measure->createSegment(st, tick-n);
+      seg = measure->createSegment(st, tick);
 
       undoAddElement(seg);
 
@@ -600,7 +593,6 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       chord->add(note);
 
       chord->setTickLen(len);
-      chord->setTickOffset(-n);
       chord->setStemDirection(UP);
       chord->setNoteType(type);
       chord->setParent(seg);

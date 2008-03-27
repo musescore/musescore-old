@@ -156,9 +156,10 @@ class Slur : public SlurTie {
       int staffIdx2() const   { return _track2 / VOICES; }
       void setTrack2(int val) { _track2 = val; }
 
-#if 1       // obsolete
+      // obsolete:
       void setStart(int t, int track);
       void setEnd(int t,   int track);
+#if 0       // obsolete
       bool startsAt(int t, int track);
       bool endsAt(int t,   int track);
 #endif
