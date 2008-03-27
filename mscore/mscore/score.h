@@ -211,6 +211,7 @@ class Score : public QObject {
       void renumberMeasures();
       void cmdResetBeamMode();
       void connectSlurs();
+      void checkSlurs();
 
    public slots:
       void doUndo();

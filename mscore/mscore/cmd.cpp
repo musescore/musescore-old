@@ -494,7 +494,15 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             setNote(_is.pos, _is.track, _padState.pitch, len);
             if (_is.slur) {
-//TODO                  _is.slur->setEnd(_is.pos, _is.track);
+                  Element* e = searchNote(_is.pos, _is.track);
+                  if (e) {
+                        if (e->type() == NOTE)
+                              e = e->parent();
+                        if (_is.slur->startElement()->tick() == e->tick())
+                              _is.slur->setStartElement(e);
+                        else
+                              _is.slur->setEndElement(e);
+                        }
                   }
             _is.pos += len;
             }

@@ -55,25 +55,25 @@
 static void selectNoteMessage()
       {
       QMessageBox::critical(0,
-               QMessageBox::tr("MuseScore:"),
-               QMessageBox::tr("please select a single note and retry operation\n"),
-               QMessageBox::Ok, QMessageBox::NoButton);
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 static void selectNoteRestMessage()
       {
       QMessageBox::critical(0,
-               QMessageBox::tr("MuseScore:"),
-               QMessageBox::tr("please select a single note or rest and retry operation\n"),
-               QMessageBox::Ok, QMessageBox::NoButton);
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note or rest and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 static void selectNoteSlurMessage()
       {
       QMessageBox::critical(0,
-               QMessageBox::tr("MuseScore:"),
-               QMessageBox::tr("please select a single note or slur and retry operation\n"),
-               QMessageBox::Ok, QMessageBox::NoButton);
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note or slur and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 //---------------------------------------------------------
@@ -410,9 +410,6 @@ void Score::putNote(const QPointF& pos, bool replace)
       int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
 
-//      int octave = pitch / 12;
-//      int note   = pitch % 12;
-
       int voice = _padState.voice;
       int track = staffIdx * VOICES + voice;
 
@@ -507,6 +504,8 @@ void Score::cmdAddSlur()
             QList<SlurSegment*>* el = _is.slur->slurSegments();
             if (!el->isEmpty())
                   el->front()->setSelected(false);
+            ((ChordRest*)_is.slur->startElement())->addSlurFor(_is.slur);
+            ((ChordRest*)_is.slur->endElement())->addSlurBack(_is.slur);
             _is.slur = 0;
             return;
             }
@@ -526,8 +525,6 @@ void Score::cmdAddSlur()
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(_layout);
-      cr1->addSlurFor(slur);
-      cr2->addSlurBack(slur);
       cmdAdd(slur);
 
       slur->layout(layout());
@@ -537,6 +534,8 @@ void Score::cmdAddSlur()
             _is.slur = slur;
             if (!el->isEmpty())
                   el->front()->setSelected(true);
+            ((ChordRest*)slur->startElement())->removeSlurFor(slur); // set again when leaving slur mode
+            ((ChordRest*)slur->endElement())->removeSlurBack(slur);
             }
       else {
             //

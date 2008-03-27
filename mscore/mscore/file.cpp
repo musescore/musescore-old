@@ -961,6 +961,31 @@ void Score::connectSlurs()
       }
 
 //---------------------------------------------------------
+//   checkSlurs
+//    helper routine to check for sanity slurs
+//---------------------------------------------------------
+
+void Score::checkSlurs()
+      {
+      foreach(Element* e, _gel) {
+            if (e->type() != SLUR)
+                  continue;
+            Slur* s = (Slur*)e;
+            Element* n1 = s->startElement();
+            Element* n2 = s->endElement();
+            if (n1 == 0 || n2 == 0 || n1 == n2) {
+                  printf("unconnected slur: removing\n");
+                  if (n1) {
+                        ((ChordRest*)n1)->removeSlurFor(s);
+                        ((ChordRest*)n1)->removeSlurBack(s);
+                        }
+                  int idx = _gel.indexOf(s);
+                  _gel.removeAt(idx);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   printFile
 //---------------------------------------------------------
 
