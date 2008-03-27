@@ -849,3 +849,15 @@ void Harmony::endEdit()
             }
       }
 
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Harmony::dragAnchor() const
+      {
+      QPointF cp = canvasPos();
+      QPointF anchor = cp - (userOff() * _spatium);
+      return QLineF(cp, anchor);
+      }
+
+

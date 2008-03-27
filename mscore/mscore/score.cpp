@@ -1605,6 +1605,41 @@ bool Score::isVolta(int tick, int repeat) const
       }
 
 //---------------------------------------------------------
+//   collectChord
+//---------------------------------------------------------
+
+void Score::collectChord(EventMap* events, int channel, int port,
+   int pitchOffset, Chord* chord, int tick, int len)
+      {
+      NoteList* nl = chord->noteList();
+      for (iNote in = nl->begin(); in != nl->end(); ++in) {
+            Note* note = in->second;
+            if (note->hidden())       // do not play overlapping notes
+                  continue;
+            if (note->tieBack())
+                  continue;
+            NoteOn* ev = new NoteOn();
+            int pitch = note->pitch() + pitchOffset;
+            if (pitch > 127)
+                  pitch = 127;
+            ev->setPitch(pitch);
+            ev->setVelo(60);
+            ev->setNote(note);
+            ev->setChannel(channel);
+            ev->setPort(port);
+            events->insertMulti(tick, ev);
+
+            ev = new NoteOn();
+            ev->setPitch(pitch);
+            ev->setVelo(0);
+            ev->setNote(note);
+            ev->setChannel(channel);
+            ev->setPort(port);
+            events->insertMulti(tick + len, ev);
+            }
+      }
+
+//---------------------------------------------------------
 //   collectMeasureEvents
 //---------------------------------------------------------
 
@@ -1615,6 +1650,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
       int channel     = prt->midiChannel();
       int port        = prt->midiPort();
 
+      QList<Chord*> lv;       // appoggiatura
+      QList<Chord*> sv;       // acciaccatura
+
       for (int voice = 0; voice < VOICES; ++voice) {
             int track = staffIdx * VOICES + voice;
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
@@ -1622,8 +1660,15 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   if (!el || el->type() != CHORD)
                         continue;
                   Chord* chord = (Chord*)el;
-                  NoteList* nl = chord->noteList();
-                  int gateTime = 70;  // 100 - legato (100%)
+                  if (chord->noteType() != NOTE_NORMAL) {
+                        if (chord->noteType() == NOTE_ACCIACCATURA)
+                              sv.append(chord);
+                        else if (chord->noteType() == NOTE_APPOGGIATURA)
+                              lv.append(chord);
+                        continue;
+                        }
+
+                  int gateTime = _style->gateTime;  // 100 - legato (100%)
 
                   int tick        = chord->tick();
                   int ottavaShift = 0;
@@ -1641,7 +1686,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               int tick1 = slur->tick();
                               int tick2 = slur->tick2();
                               if (tick >= tick1 && tick < tick2 && slur->track() == track) {
-                                    gateTime = 90;
+                                    gateTime = _style->slurGateTime;
                                     }
 
                               }
@@ -1649,50 +1694,72 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   foreach(NoteAttribute* a, *chord->getAttributes()) {
                         switch(a->subtype()) {
                               case TenutoSym:
-                                    gateTime = 100;
+                                    gateTime = _style->tenutoGateTime;
                                     break;
                               case StaccatoSym:
-                                    gateTime = 40;
+                                    gateTime = _style->staccatoGateTime;
                                     break;
                               default:
                                     break;
                               }
                         }
 
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        Note* note = in->second;
-                        if (note->hidden())       // do not play overlapping notes
-                              continue;
-                        if (note->tieBack())
-                              continue;
-                        unsigned len = 0;
-                        while (note->tieFor()) {
-                              if (note->tieFor()->endNote() == 0)
-                                    break;
-                              len += note->chord()->tickLen();
-                              note = note->tieFor()->endNote();
-                              }
-                        len += (note->chord()->tickLen() * gateTime / 100);
+                  // compute len of chord
 
-                        NoteOn* ev = new NoteOn();
-                        int pitch = note->pitch() + pitchOffset + ottavaShift;
-                        if (pitch > 127)
-                              pitch = 127;
-                        ev->setPitch(pitch);
-                        ev->setVelo(60);
-                        ev->setNote(note);
-                        ev->setChannel(channel);
-                        ev->setPort(port);
-                        events->insertMulti(tick + tickOffset, ev);
-
-                        ev = new NoteOn();
-                        ev->setPitch(pitch);
-                        ev->setVelo(0);
-                        ev->setNote(note);
-                        ev->setChannel(channel);
-                        ev->setPort(port);
-                        events->insertMulti(tick + len + tickOffset, ev);
+                  int len = chord->tickLen();
+                  Note* note = chord->noteList()->front();
+                  if (note->tieBack())
+                        continue;
+                  while (note->tieFor()) {
+                        if (note->tieFor()->endNote() == 0)
+                              break;
+                        len += note->chord()->tickLen();
+                        note = note->tieFor()->endNote();
                         }
+
+                  if (!sv.isEmpty()) {
+                        //
+                        // move acciaccatura's in front of
+                        // main note
+                        //
+                        int sl = len / 4;
+                        int ssl = len / (2 * sv.size());
+                        foreach(Chord* c, sv) {
+                              collectChord(events, channel, port,
+                                 pitchOffset + ottavaShift,
+                                 c,
+                                 tick + tickOffset - sl,
+                                 ssl * gateTime / 100
+                                 );
+                              sl -= ssl;
+                              }
+                        }
+                  else if (!lv.isEmpty()) {
+                        //
+                        // appoggiatura's use time from main note
+                        //
+                        int sl = 0;
+                        foreach(Chord* c, lv) {
+                              int ssl = c->tickLen();
+                              collectChord(events, channel, port,
+                                 pitchOffset + ottavaShift,
+                                 c,
+                                 tick + tickOffset + sl,
+                                 ssl * gateTime / 100
+                                 );
+                              sl += ssl;
+                              len -= ssl;
+                              }
+                        }
+                  collectChord(events,
+                     channel,
+                     port,
+                     pitchOffset + ottavaShift,
+                     chord, tick + tickOffset,
+                     (len * gateTime) / 100
+                     );
+                  lv.clear();
+                  sv.clear();
                   }
             }
       }

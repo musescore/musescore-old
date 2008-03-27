@@ -117,6 +117,7 @@ class Harmony : public Text {
       virtual void propertyAction(const QString&);
 
       virtual void endEdit();
+      virtual QLineF dragAnchor() const;
 
       int baseTpc() const                  { return _baseTpc;      }
       void setBaseTpc(int val)             { _baseTpc = val;       }

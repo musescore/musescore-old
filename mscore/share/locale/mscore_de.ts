@@ -1848,7 +1848,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation>Haken</translation>
+        <translation>Fähnchen</translation>
     </message>
     <message>
         <source>Up</source>
@@ -3441,7 +3441,7 @@ failed: </source>
     </message>
     <message>
         <source>Time</source>
-        <translation>Taktart</translation>
+        <translation>Tick</translation>
     </message>
     <message>
         <source>Bar Lines</source>

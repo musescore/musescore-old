@@ -188,7 +188,11 @@ class Score : public QObject {
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
+
+      void collectChord(EventMap*, int channel, int port,
+         int pitchOffset, Chord*, int tick, int gateTime);
       void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
+
       void padToggle(int n);
       void insertMeasures(int, int);
 
@@ -498,6 +502,7 @@ class Score : public QObject {
       int nextSeg(int tick, int track);
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
+
       Style* style() const          { return _style; }
       void setStyle(const Style& s);
 

@@ -2042,19 +2042,28 @@ Element* Canvas::elementNear(const QPointF& p)
       double w  = (preferences.proximity * .5) / matrix().m11();
       QRectF r(p.x() - w, p.y() - w, 2.0 * w, 2.0 * w);
 
-
       QList<const Element*> el = _layout->items(r);
       QList<const Element*> ll;
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
-            if (e->abbox().intersects(r) && e->selectable())
+            if (e->abbox().contains(r) && e->selectable())
                   ll.append(e);
             }
-      qSort(ll.begin(), ll.end(), elementLower);
-
+      if (ll.empty()) {
+            //
+            // if no element hit, look nearby
+            //
+            for (int i = 0; i < el.size(); ++i) {
+                  const Element* e = el.at(i);
+                  if (e->abbox().intersects(r) && e->selectable())
+                        ll.append(e);
+                  }
+            }
       if (ll.empty())
             return 0;
+      qSort(ll.begin(), ll.end(), elementLower);
+
 #if 0
       printf("elementNear ========= %f %f\n", _spatium, w);
       foreach(const Element* e, el)
