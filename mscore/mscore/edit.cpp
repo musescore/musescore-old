@@ -851,7 +851,7 @@ void Score::deleteItem(Element* el)
                         //
                         // voice 0 chords are always replaced by rests
                         //
-                        Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
+                        Rest* rest = new Rest(this, chord->tick(), chord->tickLen());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
                         undoAddElement(rest);
