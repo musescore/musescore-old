@@ -1463,9 +1463,9 @@ int main(int argc, char* argv[])
       DPI  = appDpiX;     // drawing resolution
       DPMM = DPI / INCH;  // dots/mm
 
-      //_spatium = 20.0 / 72.0 * DPI / 4.0;
-      _spatium = 20.0 / 120.0 * DPI / 4.0;
-      // _spatium = 5.0 / 72.0 * DPI;
+      // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
+      //   staff has 5 lines = 4 * _spatium
+      _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
 
