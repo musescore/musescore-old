@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.8">
-  <Mag>0.930085</Mag>
-  <xoff>29.21</xoff>
-  <yoff>18.8383</yoff>
+  <Mag>1.82955</Mag>
+  <xoff>-72.8133</xoff>
+  <yoff>22.6483</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -68,6 +68,10 @@
     <smallClefMag>0.8</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -124,27 +128,20 @@ p, li { white-space: pre-wrap; }
       </Instrument>
     </Part>
   <Slur id="1">
-    <tick2>0</tick2>
+    <track>0</track>
     <SlurSegment no="0">
-      <o1 x="-0.313733" y="-0.209156"/>
-      <o4 x="-0.888911" y="-3.45107"/>
+      <o4 x="-0.132416" y="-2.91315"/>
       </SlurSegment>
     </Slur>
   <Slur id="2">
-    <tick2>0</tick2>
+    <track>0</track>
     <SlurSegment no="0">
-      <o1 x="-0.313733" y="-0.209156"/>
-      <o4 x="-0.9412" y="-3.60793"/>
+      <offset x="-0.397247" y="0"/>
+      <o4 x="0.529663" y="-2.71452"/>
       </SlurSegment>
     </Slur>
   <Slur id="3">
-    <tick2>0</tick2>
-    <SlurSegment no="0">
-      <o1 x="-0.313733" y="-0.156867"/>
-      <o2 x="-0.209156" y="-0.156867"/>
-      <o3 x="-0.104578" y="-0.156867"/>
-      <o4 x="-0.366022" y="-0.0522889"/>
-      </SlurSegment>
+    <track>0</track>
     </Slur>
   <Staff id="1">
     <Measure number="1">
@@ -158,22 +155,37 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="480"/>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="1"/>
         <acciaccatura/>
         <Note pitch="77" tpc="11"/>
         </Chord>
       <Chord>
         <tick>960</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="1"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="2"/>
         <appoggiatura/>
         <Note pitch="77" tpc="11"/>
         </Chord>
       <Chord>
         <tick>1440</tick>
+        <ticklen>240</ticklen>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <ticklen>240</ticklen>
+          <pitch>78</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>1440</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="2"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
       </Measure>
@@ -185,6 +197,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>3358</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="3"/>
         <appoggiatura/>
         <StemDirection>up</StemDirection>
         <Note>
@@ -207,6 +220,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>3360</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="3"/>
         <Note pitch="69" tpc="17"/>
         </Chord>
       </Measure>
@@ -261,5 +275,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

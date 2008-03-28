@@ -236,6 +236,8 @@ void ScoreLayout::doLayout()
             delete system;
             }
 
+      searchHiddenNotes();
+
       //---------------------------------------------------
       //    rebuild bspTree
       //---------------------------------------------------
@@ -849,7 +851,27 @@ void ScoreLayout::connectTies()
 
 void ScoreLayout::searchHiddenNotes()
       {
+      // TODO: should be coded more efficient
+
       int staves = _score->nstaves();
+      int tracks = staves * VOICES;
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  if (s->subtype() != Segment::SegChordRest)
+                        continue;
+                  for (int track = 0; track < tracks; ++track) {
+                        Element* el = s->element(track);
+                        if (el == 0 || el->type() != CHORD)
+                              continue;
+                        NoteList* nl = ((Chord*)el)->noteList();
+                        for (iNote in = nl->begin(); in != nl->end(); ++in)
+                              in->second->setHidden(false);
+                        }
+                  }
+            }
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
