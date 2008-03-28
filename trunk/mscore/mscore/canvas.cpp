@@ -2040,17 +2040,18 @@ Element* Canvas::elementAt(const QPointF& p)
 Element* Canvas::elementNear(const QPointF& p)
       {
       double w  = (preferences.proximity * .5) / matrix().m11();
-      QRectF r(p.x() - w, p.y() - w, 2.0 * w, 2.0 * w);
+      QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
 
       QList<const Element*> el = _layout->items(r);
       QList<const Element*> ll;
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
-            if (e->abbox().contains(r) && e->selectable())
+            if (e->selectable() && e->contains(p))
                   ll.append(e);
             }
-      if ((ll.size() == 1) && (ll.front()->type() == MEASURE)) {
+      int n = ll.size();
+      if ((n == 0) || ((n == 1) && (ll[0]->type() == MEASURE))) {
             //
             // if no relevant element hit, look nearby
             //
