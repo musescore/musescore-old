@@ -1958,8 +1958,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
                                     slur[slurNo]->setTrack((staff + relStaff) * VOICES);
-                                    slur[slurNo]->setParent(score->layout());
-                                    score->addElement(slur[slurNo]);
+                                    score->layout()->add(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
                                     }

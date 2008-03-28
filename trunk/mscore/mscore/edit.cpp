@@ -812,6 +812,7 @@ void Score::deleteItem(Element* el)
             case BREATH:
             case ARPEGGIO:
             case HARMONY:
+            case TREMOLO:
                   cmdRemove(el);
                   break;
 
