@@ -1,3 +1,6 @@
+28.3.8 (ws)
+      - draw tremolo for beamed notes
+      - implement delete tremolo
 26.3.8 (ws)
       - fix drawing of some elements for "small" staves (clef, rests)
       - fix different text metrics for printer resolution
