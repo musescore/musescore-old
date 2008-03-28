@@ -183,8 +183,8 @@ class Element {
       QRectF abbox() const                    { return bbox().translated(canvasPos()); }
       virtual void setbbox(const QRectF& r) const   { _bbox = r;                 }
       virtual bool contains(const QPointF& p) const;
-      virtual QPainterPath shape() const;
       bool intersects(const QRectF& r) const;
+      virtual QPainterPath shape() const;
 
       virtual ElementType type() const = 0;
       int subtype() const                     { return _subtype;        }

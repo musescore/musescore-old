@@ -1262,6 +1262,7 @@ again:
                         min = style->timesigLeftMargin;
                         break;
                   case Segment::SegChordRest:
+                  case Segment::SegGrace:
                         min = style->barNoteDistance;
                         break;
                   }
@@ -1452,6 +1453,7 @@ printf("\n");
                               e->move(0.0, -3 * _spatium);
                               }
                         }
+//                  else if ((t == CHORD) && ((Chord*)e)->noteType() == NOTE_NORMAL)
                   else if (t == CHORD)
                         ;
                   else if (t == REPEAT_MEASURE) {
