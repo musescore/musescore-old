@@ -32,6 +32,7 @@
 #include "tuplet.h"
 #include "layout.h"
 #include "system.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   startBeam
@@ -762,7 +763,17 @@ void Beam::layout(ScoreLayout* layout)
 
             if (chord->isUp())
                   npos += QPointF(0, -stemLen);
-            stem->setPos(npos - chord->pos() - chord->segment()->pos());
+            QPointF sp(npos - chord->pos() - chord->segment()->pos());
+            stem->setPos(sp);
+            Tremolo* tremolo = chord->tremolo();
+            if (tremolo) {
+                  tremolo->layout(layout);
+                  qreal x  = sp.x();
+                  qreal y  = sp.y();
+                  qreal h  = stemLen;
+                  qreal th = tremolo->bbox().height();
+                  tremolo->setPos(x, y + h * .5 - th * .5);
+                  }
             }
       }
 

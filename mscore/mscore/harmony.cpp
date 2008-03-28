@@ -241,7 +241,7 @@ static const ChordNames extensionNames[] = {
 /*10*/
             { "Maj13",      HChord("C E G B D F# A") },
             { 0,            HChord() },
-            { "+",          HChord("C E G#") },       // augmented triad
+            { "+",          HChord("C E G#") },       // xx augmented triad
             { "Maj7#5",     HChord() },
             { "69",         HChord("C D E G A") },
             { "2",          HChord("C D E G") },      // major add 2
@@ -292,9 +292,9 @@ static const ChordNames extensionNames[] = {
             { "7+",         HChord() },
             { "9+",         HChord() },
             { "13+",        HChord() },
-            { "(blues)",    HChord() },
+            { "(blues)",    HChord() },   // ??
 
-/*60*/      { "7(Blues)",   HChord() },
+/*60*/      { "7(Blues)",   HChord() },   // ??
             { 0,            HChord() },
             { 0,            HChord() },
             { 0,            HChord() },
@@ -375,7 +375,7 @@ static const ChordNames extensionNames[] = {
             { "7sus#11",    HChord() },
             { "13sus#11",   HChord() },
             { "7sus#11b13", HChord() },
-            { "9sus",       HChord() },
+            { "9sus",       HChord() },   // 11 - 9sus
             { "9susb13",    HChord() },
             { "9sus#11",    HChord() },
             { "13sus#11",   HChord() },
@@ -441,7 +441,7 @@ static const ChordNames extensionNames[] = {
 /*190*/     { "add#13",       HChord() },  // german
             { "6/add9",       HChord() },
             { "sus4",         HChord("C F G") },        // sus
-            { "11",           HChord("C E G Bb D F") }, // dominant 11th
+            { "11",           HChord("C E G Bb D F") }, // dominant 11th / 9sus
             { "Maj11",        HChord("C E G B D F") },  // major 11th
             { "Tristan",      HChord("C F# A# D") },    // Tristan
       };
