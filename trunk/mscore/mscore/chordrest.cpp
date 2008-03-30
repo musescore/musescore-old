@@ -316,9 +316,12 @@ bool ChordRest::readProperties(QDomElement e)
             // while reading Measure, parent of Chord or Rest is set
             // to measure; after inserting Chord or Rest into Measure
             // parent is Segment
-            Measure* m    = (Measure*)parent();
-            _tuplet       = m->tuplets()->value(i);
-            setTickLen(tickLen());  // set right symbol + dots
+            Measure* m = (Measure*)parent();
+            _tuplet    = m->tuplets()->value(i);
+            if (_tuplet == 0)
+                  printf("Tuplet index %d not found\n", i);
+            else
+                  setTickLen(tickLen());  // set right symbol + dots
             }
       else if (tag == "small")
             _small = i;
