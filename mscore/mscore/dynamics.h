@@ -44,7 +44,7 @@ struct Dyn {
 class Dynamic : public Text {
 
       mutable QPointF dragOffset;
-      QPointF layoutPos();
+//      QPointF layoutPos();
 
    public:
       Dynamic(Score*);

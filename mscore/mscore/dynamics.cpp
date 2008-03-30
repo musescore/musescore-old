@@ -116,29 +116,6 @@ QRectF Dynamic::drag(const QPointF& pos)
       {
       QRectF r(abbox());
       setUserOff((pos - dragOffset) / _spatium);
-#if 0
-      int ntick;
-      int stfi = staffIdx();
-      int line;
-      Segment* seg;
-//      MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stfi, 0, 0, 0);
-      MeasureBase* mb = _score->pos2measure2(canvasPos(), &ntick, &stfi, &line, &seg);
-      if (mb && mb->type() == MEASURE) {
-            Measure* measure = (Measure*)mb;
-            QPointF op = canvasPos();
-            setTick(ntick);
-            setTrack(stfi * VOICES);
-            if (measure != parent()) {
-                  ((Measure*)parent())->remove(this);
-                  measure->add(this);
-                  }
-            QPointF uo(op - layoutPos());
-            setUserOff(uo / _spatium);
-            dragOffset = pos - uo;
-            }
-      else
-            printf("Dynamic::drag(): measure not found\n");
-#endif
       return abbox() | r;
       }
 
@@ -149,6 +126,7 @@ QRectF Dynamic::drag(const QPointF& pos)
 
 void Dynamic::endDrag()
       {
+#if 0       // TODO
       int ntick;
       int stfi = staffIdx();
       MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stfi, 0, 0, 0);
@@ -165,8 +143,10 @@ void Dynamic::endDrag()
             }
       else
             printf("Dynamic::endDrag(): measure not found\n");
+#endif
       }
 
+#if 0
 //---------------------------------------------------------
 //   layoutPos
 //    return layout position relative to canvas
@@ -205,6 +185,7 @@ QPointF Dynamic::layoutPos()
       double yp = system->staff(staffIdx())->y() + system->y();
       return p + QPointF(xp, yp);
       }
+#endif
 
 //---------------------------------------------------------
 //   write

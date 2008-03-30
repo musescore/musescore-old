@@ -1,3 +1,5 @@
+30.3.8 (ws)
+      - fix layout of dynamics on staff != 0
 28.3.8 (ws)
       - draw tremolo for beamed notes
       - implement delete tremolo

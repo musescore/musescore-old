@@ -662,7 +662,7 @@ void Measure::layout2(ScoreLayout* layout)
             double x = 0.0;
             double y = 0.0;
             int track = element->track();
-            if (track != -1)
+            if ((element->type() != DYNAMIC) && (track != -1))
                   y = system()->staff(track / VOICES)->y();
             if (element->time().isValid())
                   x = tick2pos(element->tick());
@@ -919,8 +919,6 @@ void Measure::add(Element* el)
             case TEMPO_TEXT:
             case IMAGE:
             case HARMONY:
-//                  el->setAnchor(ANCHOR_SEGMENT);
-
             case MARKER:
                   _el.append(el);
                   break;
