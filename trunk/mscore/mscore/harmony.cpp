@@ -472,82 +472,95 @@ static int degreeTable[] = {
 QString Harmony::harmonyName() const
       {
 //      printf("Harmony::harmonyName(this=%p)", this);
+      return harmonyName(rootTpc(), extension(), baseTpc(), &_degreeList);
+      }
 
+QString Harmony::harmonyName(int root, int extension, int base, const QList<HDegree>* degreeList)
+      {
+/*
+      printf("Harmony::harmonyName(root=%d extension=%d base=%d list=%p", root, extension, base, degreeList);
+      if (degreeList)
+            printf(" size=%d)", degreeList->size());
+      else
+            printf(")");
+*/
       HChord hc;
-      if (_extension >= 0 && _extension < int(sizeof(extensionNames)/sizeof(*extensionNames)))
-            hc = extensionNames[_extension].chord;
+      QString s;
+
+      if (extension >= 0 && extension < int(sizeof(extensionNames)/sizeof(*extensionNames)))
+            hc = extensionNames[extension].chord;
 //      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
 //      printf("\n");
 
-      if (_degreeList.isEmpty())
-            return harmonyName(rootTpc(), extension(), baseTpc());
+      if (degreeList && !degreeList->isEmpty()) {
 /*
-      // print the chord without the degree modification(s)
-      for (int i = 0; i < 12; i++)
-            if (hc.contains(i))
-                  printf(" %s", qPrintable(tpc2name(i+1)));
-      printf("\n");
+            // print the chord without the degree modification(s)
+            for (int i = 0; i < 12; i++)
+                  if (hc.contains(i))
+                        printf(" %s", qPrintable(tpc2name(i+1)));
+            printf("\n");
 */
-      // factor in the degrees
-      for (int i = 0; i < _degreeList.size(); i++) {
-            HDegree d = _degreeList[i];
-            if (d.type() == ADD) {
-//                  printf(" add degree value=%d alter=%d\n", d.value(), d.alter());
-                  hc += (degreeTable[(d.value() - 1) % 7] + d.alter());
-                  }
-            else if (d.type() == ALTER) {
-//                  printf(" alter degree value=%d alter=%d\n", d.value(), d.alter());
-                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                        hc -= (degreeTable[(d.value() - 1) % 7]);
+            // factor in the degrees
+            for (int i = 0; i < degreeList->size(); i++) {
+                  HDegree d = (*degreeList)[i];
+                  if (d.type() == ADD) {
+//                        printf(" add degree value=%d alter=%d\n", d.value(), d.alter());
                         hc += (degreeTable[(d.value() - 1) % 7] + d.alter());
+                        }
+                  else if (d.type() == ALTER) {
+//                        printf(" alter degree value=%d alter=%d\n", d.value(), d.alter());
+                        if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
+                              hc -= (degreeTable[(d.value() - 1) % 7]);
+                              hc += (degreeTable[(d.value() - 1) % 7] + d.alter());
+                              }
+                        else
+                              printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
+                        }
+                  else if (d.type() == SUBTRACT) {
+//                        printf(" subtract degree value=%d alter=%d\n", d.value(), d.alter());
+                        if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
+                              hc -= (degreeTable[(d.value() - 1) % 7]);
+                              }
+                        else
+                              printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
+                        }
+                  else printf("degree type %d not supported\n", d.type());
                   }
-                  else
-                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                  }
-            else if (d.type() == SUBTRACT) {
-//                  printf(" subtract degree value=%d alter=%d\n", d.value(), d.alter());
-                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                        hc -= (degreeTable[(d.value() - 1) % 7]);
-                  }
-                  else
-                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                  }
-            else printf("degree type %d not supported\n", d.type());
-            }
 /*
-      // print the chord with the degree modification(s)
-      for (int i = 0; i < 12; i++)
-            if (hc.contains(i))
-                  printf(" %s", qPrintable(tpc2name(i+1)));
-      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
-      printf("\n");
+            // print the chord with the degree modification(s)
+            for (int i = 0; i < 12; i++)
+                  if (hc.contains(i))
+                        printf(" %s", qPrintable(tpc2name(i+1)));
+            printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
+            printf("\n");
 */
-      // try to find the chord in extensionNames
-      for (int i = 1; i < int(sizeof(extensionNames)/sizeof(*extensionNames)); i++)
-            if (hc == extensionNames[i].chord) {
-//                  printf(" found in table as %s\n", extensionNames[i].name);
-                  return harmonyName(rootTpc(), i, baseTpc());
-                  }
+            // try to find the chord in extensionNames
+            int newExtension = 0;
+            for (int i = 1; i < int(sizeof(extensionNames)/sizeof(*extensionNames)); i++)
+                  if (extensionNames[i].chord == hc && extensionNames[i].name != 0) {
+//                        printf(" found in table as %s\n", extensionNames[i].name);
+                        newExtension = i;
+                        break;
+                        }
 
-      // if that fails, use HChord.name()
-      QString s = hc.name(_rootTpc);
-      if (_baseTpc != INVALID_TPC) {
-            s += "/";
-            s += tpc2name(_baseTpc);
-            }
-      return s;
+            // now determine the chord name
+            if (newExtension)
+                  s = tpc2name(root) + getExtensionName(newExtension);
+            else
+                  // not in table, fallback to using HChord.name()
+                  s = hc.name(root);
+            } // end if (degreeList ...
+      else {
+            s = tpc2name(root);
+            if (extension)
+                  s += getExtensionName(extension);
       }
 
-QString Harmony::harmonyName(int root, int extension, int base)
-      {
-//      printf("Harmony::harmonyName(root=%d extension=%d base=%d)", root, extension, base);
-      QString s(tpc2name(root));
-      if (extension)
-            s += getExtensionName(extension);
       if (base != INVALID_TPC) {
             s += "/";
             s += tpc2name(base);
             }
+
 //      printf(" %s\n", qPrintable(s));
       return s;
       }
@@ -604,10 +617,10 @@ void Harmony::propertyAction(const QString& s)
                   setRootTpc(ce.root());
                   setBaseTpc(ce.base());
                   setExtension(ce.extension());
-                  setText(harmonyName());
                   clearDegrees();
                   for (int i = 0; i < ce.numberOfDegrees(); i++)
                         addDegree(ce.degree(i));
+                  setText(harmonyName());
                   }
             }
       else
