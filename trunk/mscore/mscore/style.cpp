@@ -269,7 +269,8 @@ QFont TextStyle::font() const
       if (sizeIsSpatiumDependent)
             m *= mag;
       QFont f(family);
-      f.setWeight(bold ? QFont::Bold : QFont::Normal);
+//      f.setWeight(bold ? QFont::Bold : QFont::Normal);
+      f.setBold(bold);
       f.setItalic(italic);
       f.setPointSizeF(m);
       f.setUnderline(underline);

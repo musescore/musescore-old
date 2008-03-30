@@ -47,8 +47,6 @@ class OttavaSegment : public TextLineSegment {
       virtual ElementType type() const     { return OTTAVA_SEGMENT; }
       virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
       Ottava* ottava() const               { return (Ottava*)parent(); }
-//      virtual void draw(QPainter&) const;
-//      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------

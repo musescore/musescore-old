@@ -223,7 +223,7 @@ void TextLine::layout(ScoreLayout* layout)
 
 void TextLine::write(Xml& xml) const
       {
-      xml.stag("TextLine");
+      xml.stag(name());
       xml.tag("hookHeight", _hookHeight.val());
       xml.tag("lineWidth", _lineWidth.val());
       xml.tag("lineStyle", _lineStyle);
@@ -314,6 +314,7 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       TextBase* tb = tl->textBase();
       QFont font(tb->defaultFont());
       textFont->setCurrentFont(font);
+
       textSize->setValue(font.pointSizeF());
       italic->setChecked(font.italic());
       bold->setChecked(font.bold());
