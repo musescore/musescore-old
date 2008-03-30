@@ -21,7 +21,7 @@
 #ifndef __OTTAVA_H__
 #define __OTTAVA_H__
 
-#include "line.h"
+#include "textline.h"
 
 //---------------------------------------------------------
 //   OttavaE
@@ -39,16 +39,16 @@ class Ottava;
 //   OttavaSegment
 //---------------------------------------------------------
 
-class OttavaSegment : public LineSegment {
+class OttavaSegment : public TextLineSegment {
    protected:
 
    public:
-      OttavaSegment(Score* s) : LineSegment(s) {}
+      OttavaSegment(Score* s) : TextLineSegment(s) {}
       virtual ElementType type() const     { return OTTAVA_SEGMENT; }
       virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
       Ottava* ottava() const               { return (Ottava*)parent(); }
-      virtual void draw(QPainter&) const;
-      virtual QRectF bbox() const;
+//      virtual void draw(QPainter&) const;
+//      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
@@ -56,7 +56,7 @@ class OttavaSegment : public LineSegment {
 //    brackets
 //---------------------------------------------------------
 
-class Ottava : public SLine {
+class Ottava : public TextLine {
 
    protected:
       QString text;
@@ -69,7 +69,6 @@ class Ottava : public SLine {
       Ottava(Score* s);
       virtual Ottava* clone() const    { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
-      virtual void layout(ScoreLayout*);
       virtual void setSubtype(int val);
       virtual LineSegment* createLineSegment();
       int pitchShift() const { return _pitchShift; }
