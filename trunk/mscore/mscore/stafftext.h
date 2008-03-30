@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TEMPOTEXT_H__
-#define __TEMPOTEXT_H__
+#ifndef __STAFFTEXT_H__
+#define __STAFFTEXT_H__
 
 #include "text.h"
 #include "ui_stafftext.h"

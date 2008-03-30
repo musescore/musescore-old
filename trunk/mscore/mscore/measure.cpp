@@ -73,6 +73,7 @@
 #include "harmony.h"
 #include "tempotext.h"
 #include "sym.h"
+#include "stafftext.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -920,6 +921,7 @@ void Measure::add(Element* el)
             case IMAGE:
             case HARMONY:
             case MARKER:
+            case STAFF_TEXT:
                   _el.append(el);
                   break;
 
@@ -978,6 +980,7 @@ void Measure::remove(Element* el)
             case SYMBOL:
             case IMAGE:
             case HARMONY:
+            case STAFF_TEXT:
                   if (!_el.remove(el)) {
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
@@ -2392,6 +2395,14 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
+                  t->setTrack(score()->curTrack);
+                  t->setTick(score()->curTick);
+                  t->read(e);
+                  add(t);
+                  score()->curTick = t->tick();
+                  }
+            else if (tag == "StaffText") {
+                  StaffText* t = new StaffText(score());
                   t->setTrack(score()->curTrack);
                   t->setTick(score()->curTick);
                   t->read(e);

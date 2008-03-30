@@ -101,7 +101,7 @@ void TextLineSegment::collectElements(QList<const Element*>& el) const
 void TextLineSegment::draw(QPainter& p) const
       {
       qreal textlineLineWidth    = textLine()->lineWidth().point();
-      qreal textlineTextDistance = _spatium * .25;
+      qreal textlineTextDistance = _spatium * .5;
 
       QPointF pp2(pos2());
 
@@ -312,8 +312,11 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       text->setText(tl->text());
       linecolor->setColor(tl->lineColor());
       TextBase* tb = tl->textBase();
-      textFont->setCurrentFont(tb->defaultFont());
-      textSize->setValue(tb->defaultFont().pointSizeF());
+      QFont font(tb->defaultFont());
+      textFont->setCurrentFont(font);
+      textSize->setValue(font.pointSizeF());
+      italic->setChecked(font.italic());
+      bold->setChecked(font.bold());
       if (tb->frameWidth()) {
             frame->setChecked(true);
             frameWidth->setValue(tb->frameWidth());
@@ -338,6 +341,8 @@ void LineProperties::accept()
       tl->setLineColor(linecolor->color());
       TextBase* tb = tl->textBase();
       QFont f(textFont->currentFont());
+      f.setBold(bold->isChecked());
+      f.setItalic(italic->isChecked());
       f.setPointSizeF(textSize->value());
       tb->setDefaultFont(f);
       if (frame->isChecked()) {

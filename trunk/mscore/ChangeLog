@@ -1,8 +1,10 @@
 30.3.8 (lv)
-      - fix removal of editorial accidentals
       - fixed bass handling in chordedit dialog
       - fixed chord name handling in chordedit dialog when degrees are used
        (ws)
+      - use TextLine() as base class for Ottava(), this allows editing
+        of various properties
+      - fix removal of editorial accidentals
       - fix stuck midi notes
       - fix chord name entry
       - use right codec when reading file names form command line

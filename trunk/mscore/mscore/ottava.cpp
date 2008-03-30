@@ -28,62 +28,11 @@
 #include "score.h"
 
 //---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void OttavaSegment::draw(QPainter& p) const
-      {
-      qreal ottavaLineWidth    = _spatium * .18;
-      qreal ottavaTextDistance = _spatium * .5;
-
-      QPointF pp2(pos2());
-
-      QFont f(score()->textStyle(TEXT_STYLE_DYNAMICS)->font());
-      p.setFont(f);
-      QFontMetricsF fm(f);
-      QString txt;
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
-            txt = ottava()->text;
-      else
-            txt = QString("(%1)").arg(ottava()->text);
-      QRectF bb(fm.boundingRect(txt));
-      qreal h = ottava()->textHeight;
-      p.drawText(QPointF(0.0, h), txt);
-      QPointF pp1(bb.width() + ottavaTextDistance, 0.0);
-
-      QPen pen(p.pen());
-      pen.setWidthF(ottavaLineWidth);
-      pen.setStyle(Qt::DashLine);
-      QVector<qreal> dashes;
-      dashes << _spatium * .5 << _spatium * .5;
-      pen.setDashPattern(dashes);
-
-      p.setPen(pen);
-      p.drawLine(QLineF(pp1, pp2));
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
-            p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF OttavaSegment::bbox() const
-      {
-      QPointF pp1;
-      QPointF pp2(pos2());
-
-      qreal h1 = ottava()->textHeight;
-      QRectF r(.0, -h1, pp2.x(), 2 * h1);
-      return r;
-      }
-
-//---------------------------------------------------------
 //   Ottava
 //---------------------------------------------------------
 
 Ottava::Ottava(Score* s)
-   : SLine(s)
+   : TextLine(s)
       {
       setSubtype(0);
       }
@@ -97,44 +46,23 @@ void Ottava::setSubtype(int val)
       Element::setSubtype(val);
       switch(val) {
             case 0:
-                  text = "8va";
+                  setText("8va");
                   _pitchShift = 12;
                   break;
             case 1:
-                  text = "15ma";
+                  setText("15ma");
                   _pitchShift = 24;
                   break;
             case 2:
-                  text = "8vb";
+                  setText("8vb");
                   _pitchShift = -12;
                   break;
             case 3:
-                  text = "15mb";
+                  setText("15mb");
                   _pitchShift = -24;
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Ottava::layout(ScoreLayout* layout)
-      {
-      SLine::layout(layout);
-
-      qreal y = -3.0 * layout->spatium();
-      setPos(ipos().x(), y);
-
-      QFontMetricsF fm(score()->textStyle(TEXT_STYLE_DYNAMICS)->fontMetrics());
-      qreal h1 = 0.0;
-      int n = text.size();
-      for (int i = 0; i < n; ++i) {
-            qreal h = fm.boundingRect(text[i]).height();
-            if (h > h1)
-                  h1 = h;
-            }
-      textHeight = h1 * .5;
+      textBase()->setDefaultFont(score()->textStyle(TEXT_STYLE_DYNAMICS)->font());
       }
 
 //---------------------------------------------------------
