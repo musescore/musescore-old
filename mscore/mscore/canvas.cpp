@@ -357,7 +357,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       if (mscore->playEnabled() && element && element->type() == NOTE) {
             Note* note = (Note*)element;
-            seq->startNote(note->staff()->part(), note->pitch(), 60);
+            seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
             }
 
       //-----------------------------------------

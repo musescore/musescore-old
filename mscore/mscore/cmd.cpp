@@ -680,7 +680,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setTrack(track);
 
             if (seq && mscore->playEnabled())
-                  seq->startNote(note->staff()->part(), note->pitch(), 64);
+                  seq->startNote(note->staff()->part(), note->pitch(), 64, 1000);
 
             if (tie) {
                   tie->setEndNote(note);

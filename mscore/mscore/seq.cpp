@@ -475,6 +475,7 @@ void Seq::playEvent(const Event* event)
             e.type = ME_NOTEON | channel;
             e.a    = n->pitch();
             e.b    = n->velo();
+
             bool mute;
             Note* note = n->note();
             if (note) {
@@ -842,19 +843,36 @@ void Seq::startNote(Part* part, int pitch, int velo)
       {
       if (state != STOP)
             return;
-      SeqMsg msg;
-      msg.midiOutEvent.port = part->midiPort();
-      msg.midiOutEvent.type = ME_NOTEON | part->midiChannel();
-      msg.midiOutEvent.a    = pitch + part->pitchOffset();
-      msg.midiOutEvent.b    = velo;
-      msg.id    = SEQ_PLAY;
-      guiToSeq(msg);
 
-      NoteOn* e = new NoteOn;
-      e->setChannel(part->midiChannel());
-      e->setPitch(pitch);
-      e->setVelo(velo);
-      eventList.append(e);
+      bool active = false;
+      foreach(const Event* event, eventList) {
+            NoteOn* n = (NoteOn*)event;
+            if (n->port() == part->midiPort() && n->channel() == part->midiChannel() && n->pitch() == pitch) {
+                  MidiOutEvent ev;
+                  ev.port = n->port();
+                  ev.type = ME_NOTEON | n->channel();
+                  ev.a    = n->pitch();
+                  ev.b    = 0;
+                  sendEvent(ev);
+                  active = true;
+                  break;
+                  }
+            }
+
+      MidiOutEvent ev;
+      ev.port = part->midiPort();
+      ev.type = ME_NOTEON | part->midiChannel();
+      ev.a    = pitch + part->pitchOffset();
+      ev.b    = velo;
+      sendEvent(ev);
+
+      if (!active) {
+            NoteOn* e = new NoteOn;
+            e->setChannel(part->midiChannel());
+            e->setPitch(pitch);
+            e->setVelo(velo);
+            eventList.append(e);
+            }
       }
 
 void Seq::startNote(Part* part, int pitch, int velo, int duration)
@@ -865,21 +883,19 @@ void Seq::startNote(Part* part, int pitch, int velo, int duration)
 
 //---------------------------------------------------------
 //   stopNotes
+//    called from GUI context
 //---------------------------------------------------------
 
 void Seq::stopNotes()
       {
       foreach(const Event* event, eventList) {
-            if (event->type() == ME_NOTEON) {
-                  NoteOn* n = (NoteOn*)event;
-                  SeqMsg msg;
-                  msg.id                = SEQ_PLAY;
-                  msg.midiOutEvent.port = n->port();
-                  msg.midiOutEvent.type = ME_NOTEON | n->channel();
-                  msg.midiOutEvent.a    = n->pitch();
-                  msg.midiOutEvent.b    = 0;
-                  guiToSeq(msg);
-                  }
+            NoteOn* n = (NoteOn*)event;
+            MidiOutEvent ev;
+            ev.port = n->port();
+            ev.type = ME_NOTEON | n->channel();
+            ev.a    = n->pitch();
+            ev.b    = 0;
+            sendEvent(ev);
             delete event;
             }
       eventList.clear();
