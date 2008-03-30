@@ -91,7 +91,7 @@ Note::Note(Score* s)
       _mirror         = false;
       _line           = 0;
       _staffMove      = 0;
-      _userAccidental = 0;
+      _userAccidental = ACC_NONE;
       _lineOffset     = 0;
       _dots           = 0;
       _tieFor         = 0;
@@ -215,7 +215,11 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
-      _userAccidental = 0;
+      if (_userAccidental && accType == ACC_NONE) {
+            _userAccidental = ACC_NONE;
+            return;
+            }
+      _userAccidental = ACC_NONE;
       int acc1  = Accidental::subtype2value(accType);
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);

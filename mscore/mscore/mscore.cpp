@@ -276,7 +276,7 @@ MuseScore::MuseScore()
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
          << "rehearsalmark-text" << "copyright-text"
-         << "lyrics" << "fingering" << "system-text" << "tempo"
+         << "lyrics" << "fingering" << "system-text" << "staff-text" << "tempo"
          << "cut" << "copy" << "paste"
          << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          << "quit"
