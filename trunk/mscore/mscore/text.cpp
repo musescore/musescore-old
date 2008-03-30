@@ -597,7 +597,7 @@ void TextB::layout(ScoreLayout* layout)
       o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
       double th = height();
-      double tw = doc()->idealWidth();
+      double tw = width();
       QPointF p;
       if (_align & ALIGN_BOTTOM)
             p.setY(-th);
