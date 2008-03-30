@@ -102,9 +102,11 @@ class Seq : public QObject {
       int time2tick(double) const;
       double tick2time(int tick) const;
       void setPos(int);
-      void playEvent(const Event* event);
+      void playEvent(const Event*);
+      void playEvent(const MidiOutEvent&);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
+      void startNote(Part*, int, int);
 
    private slots:
       void seqMessage(int msg);
@@ -154,7 +156,6 @@ class Seq : public QObject {
       float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(Part*, int, int);
       void startNote(Part*, int, int, int);
       void setController(int, int, int, int);
       void sendEvent(const MidiOutEvent&);
