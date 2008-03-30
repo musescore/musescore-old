@@ -137,7 +137,7 @@ class Harmony : public Text {
       void buildText();
 
       static const char* getExtensionName(int i);
-      static QString harmonyName(int root, int extension, int base);
+      static QString harmonyName(int root, int extension, int base, const QList<HDegree>* degreeList = 0);
       static int parseHarmony(const QString& s, int* root, int* base);
       };
 

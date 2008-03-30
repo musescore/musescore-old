@@ -1,4 +1,7 @@
-30.3.8 (ws)
+30.3.8 (lv)
+      - fixed bass handling in chordedit dialog
+      - fixed chord name handling in chordedit dialog when degrees are used
+       (ws)
       - fix chord name entry
       - use right codec when reading file names form command line
         (my system uses utf8 and was not able to read german "umlaute")

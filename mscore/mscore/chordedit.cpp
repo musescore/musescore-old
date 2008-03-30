@@ -215,9 +215,31 @@ int ChordEdit::root()
 //   base
 //---------------------------------------------------------
 
+// convert base (which is the current index in the bassNote combobox)
+// to a tpc value.
+// Note that the labels for each index are defined in chordedit.ui
+// Note that the the combobox item text could also be used, but
+// by using tpc2name all note name knowledge is in one location
+
 int ChordEdit::base()
       {
-      return bassNote->currentIndex();
+      int baseTpc;
+      switch (bassNote->currentIndex()) {
+            case  1: baseTpc = 14; break; // C
+            case  2: baseTpc =  9; break; // Db
+            case  3: baseTpc = 16; break; // D
+            case  4: baseTpc = 11; break; // Eb
+            case  5: baseTpc = 18; break; // E
+            case  6: baseTpc = 13; break; // F
+            case  7: baseTpc = 20; break; // F#
+            case  8: baseTpc = 15; break; // G
+            case  9: baseTpc = 10; break; // Ab
+            case 10: baseTpc = 17; break; // A
+            case 11: baseTpc = 12; break; // Bb
+            case 12: baseTpc = 19; break; // B
+            default: baseTpc = INVALID_TPC;
+            }
+      return baseTpc;
       }
 
 //---------------------------------------------------------
@@ -235,8 +257,12 @@ void ChordEdit::otherToggled(bool val)
 
 void ChordEdit::chordChanged()
       {
-//      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d\n", root(), extension(), base());
-      QString s = Harmony::harmonyName(root(), extension(), base());
+//      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
+//             root(), extension(), base(), numberOfDegrees());
+      QList<HDegree> degreeList;
+      for (int i = 0; i < numberOfDegrees(); i++)
+            degreeList << degree(i);
+      QString s = Harmony::harmonyName(root(), extension(), base(), &degreeList);
       chordLabel->setText(s);
       }
 
@@ -271,6 +297,7 @@ void ChordEdit::deleteButtonClicked()
       if (degreeTable->currentIndex().isValid()) {
             model->removeRow(degreeTable->currentIndex().row());
             }
+      chordChanged();
       }
 
 //---------------------------------------------------------
@@ -279,10 +306,11 @@ void ChordEdit::deleteButtonClicked()
 
 // Call-back, called when the model was changed. Happens three times in a row
 // when a new degree is added and once when an individual cell is changed.
-// Debug only. Not used for data handling, as degree() directly reads from the model.
+// Doesn't happen when a row is deleted.
 
 void ChordEdit::modelDataChanged(const QModelIndex & /* topLeft */, const QModelIndex & /* bottomRight */)
       {
+      chordChanged();
 /*
       std::cout << "ChordEdit::modelDataChanged()" << std::endl;
       for (int row = 0; row < model->rowCount(); ++row) {
