@@ -772,6 +772,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       text->addAction(getAction("copyright-text"));
       text->addSeparator();
       text->addAction(getAction("system-text"));
+      text->addAction(getAction("staff-text"));
       text->addAction(getAction("chord-text"));
       text->addAction(getAction("rehearsalmark-text"));
       text->addSeparator();

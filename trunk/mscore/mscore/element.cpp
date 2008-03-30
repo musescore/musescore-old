@@ -76,7 +76,7 @@ const char* elementNames[] = {
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Marker", "Jump",
       "Tuplet", "VSpacer",
-      "TempoText",
+      "TempoText", "StaffText",
       "Harmony",
       "Volta",
       "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment", "TextLineSegment",

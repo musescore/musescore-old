@@ -1261,6 +1261,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add System Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "staff-text",
+         QT_TR_NOOP("Add Staff Text"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Staff Text"),
+         QT_TR_NOOP("Add Staff Text")
+         ),
+      Shortcut(
          STATE_NORMAL,
          "frame-text",
          QT_TR_NOOP("Add Text"),

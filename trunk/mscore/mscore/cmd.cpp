@@ -60,6 +60,7 @@
 #include "box.h"
 #include "harmony.h"
 #include "system.h"
+#include "stafftext.h"
 
 static bool startMode = false;
 
@@ -862,7 +863,6 @@ void Score::cmdAddChordName()
 void Score::cmdAddText(int subtype)
       {
       if (editObject) {
-printf("Score::cmdAddText: editObject active\n");
             endEdit();
             endCmd();
             }
@@ -933,8 +933,26 @@ printf("Score::cmdAddText: editObject active\n");
                   if (el->type() == NOTE)
                         el = el->parent();
                   s = new Text(this);
-                  s->setTrack(el->track());
+                  s->setTrack(subtype == TEXT_SYSTEM ? 0 : el->track());
                   s->setSubtype(subtype);
+                  s->setParent(((ChordRest*)el)->measure());
+                  s->setTick(el->tick());
+                  }
+                  break;
+            case TEXT_STAFF:
+                  {
+                  Element* el = sel->element();
+                  if (!el || (el->type() != NOTE && el->type() != REST)) {
+                        QMessageBox::information(0, "MuseScore: Text Entry",
+                        tr("No note or rest selected:\n"
+                           "please select a note or rest were you want to\n"
+                           "start text entry"));
+                        break;
+                        }
+                  if (el->type() == NOTE)
+                        el = el->parent();
+                  s = new StaffText(this);
+                  s->setTrack(el->track());
                   s->setParent(((ChordRest*)el)->measure());
                   s->setTick(el->tick());
                   }
@@ -1759,6 +1777,8 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_COPYRIGHT);
             else if (cmd == "system-text")
                   return cmdAddText(TEXT_SYSTEM);
+            else if (cmd == "staff-text")
+                  return cmdAddText(TEXT_STAFF);
             else if (cmd == "chord-text")
                   return cmdAddChordName();
             else if (cmd == "rehearsalmark-text")
