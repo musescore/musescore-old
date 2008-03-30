@@ -101,7 +101,7 @@ void Ottava::setSubtype(int val)
                   _pitchShift = 12;
                   break;
             case 1:
-                  text = "15va";
+                  text = "15ma";
                   _pitchShift = 24;
                   break;
             case 2:
@@ -109,7 +109,7 @@ void Ottava::setSubtype(int val)
                   _pitchShift = -12;
                   break;
             case 3:
-                  text = "15vb";
+                  text = "15mb";
                   _pitchShift = -24;
                   break;
             }

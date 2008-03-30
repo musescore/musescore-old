@@ -245,7 +245,7 @@ void MuseScore::showPalette(bool visible)
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
-            sp->addObject(7, ottava, tr("15va"));
+            sp->addObject(7, ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
@@ -255,7 +255,7 @@ void MuseScore::showPalette(bool visible)
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
-            sp->addObject(9, ottava, tr("15vb"));
+            sp->addObject(9, ottava, tr("15mb"));
 
             Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
@@ -939,7 +939,7 @@ void MuseScore::lineMenu()
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
-            sp->addObject(9, ottava, tr("15va"));
+            sp->addObject(9, ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
@@ -949,7 +949,7 @@ void MuseScore::lineMenu()
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
-            sp->addObject(11, ottava, tr("15vb"));
+            sp->addObject(11, ottava, tr("15mb"));
 
             //-------
 
