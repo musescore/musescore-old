@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>885</width>
+    <width>821</width>
     <height>418</height>
    </rect>
   </property>
@@ -36,8 +36,20 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
+      <property name="leftMargin" >
+       <number>4</number>
+      </property>
+      <property name="topMargin" >
+       <number>4</number>
+      </property>
+      <property name="rightMargin" >
+       <number>4</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>4</number>
+      </property>
       <property name="horizontalSpacing" >
-       <number>0</number>
+       <number>9</number>
       </property>
       <property name="verticalSpacing" >
        <number>0</number>
@@ -151,6 +163,24 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
+      <property name="leftMargin" >
+       <number>4</number>
+      </property>
+      <property name="topMargin" >
+       <number>4</number>
+      </property>
+      <property name="rightMargin" >
+       <number>4</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>4</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>0</number>
+      </property>
+      <property name="verticalSpacing" >
+       <number>0</number>
+      </property>
       <item row="0" column="0" >
        <widget class="QRadioButton" name="extMaj" >
         <property name="text" >
@@ -986,42 +1016,37 @@
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <widget class="QPushButton" name="addButton" >
-      <property name="geometry" >
-       <rect>
-        <x>99</x>
-        <y>240</y>
-        <width>75</width>
-        <height>27</height>
-       </rect>
+     <layout class="QGridLayout" >
+      <property name="leftMargin" >
+       <number>4</number>
       </property>
-      <property name="text" >
-       <string>Add</string>
+      <property name="topMargin" >
+       <number>4</number>
       </property>
-     </widget>
-     <widget class="QPushButton" name="deleteButton" >
-      <property name="geometry" >
-       <rect>
-        <x>184</x>
-        <y>240</y>
-        <width>75</width>
-        <height>27</height>
-       </rect>
+      <property name="rightMargin" >
+       <number>4</number>
       </property>
-      <property name="text" >
-       <string>Delete</string>
+      <property name="bottomMargin" >
+       <number>4</number>
       </property>
-     </widget>
-     <widget class="QTableView" name="degreeTable" >
-      <property name="geometry" >
-       <rect>
-        <x>15</x>
-        <y>30</y>
-        <width>241</width>
-        <height>192</height>
-       </rect>
-      </property>
-     </widget>
+      <item row="0" column="0" colspan="2" >
+       <widget class="QTableView" name="degreeTable" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QPushButton" name="addButton" >
+        <property name="text" >
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QPushButton" name="deleteButton" >
+        <property name="text" >
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item row="2" column="0" >
@@ -1032,114 +1057,104 @@
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <widget class="QComboBox" name="bassNote" >
-      <property name="geometry" >
-       <rect>
-        <x>11</x>
-        <y>32</y>
-        <width>111</width>
-        <height>25</height>
-       </rect>
-      </property>
+     <layout class="QHBoxLayout" >
       <item>
-       <property name="text" >
-        <string>none</string>
-       </property>
+       <widget class="QComboBox" name="bassNote" >
+        <item>
+         <property name="text" >
+          <string>none</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/C</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Db</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/D</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Eb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/E</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/F</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/F#</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/G</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Ab</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/A</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Bb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/B</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
-       <property name="text" >
-        <string>/C</string>
-       </property>
+       <widget class="QComboBox" name="inversion" >
+        <property name="currentIndex" >
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>none</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>3</string>
+         </property>
+        </item>
+       </widget>
       </item>
-      <item>
-       <property name="text" >
-        <string>/Db</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/D</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/Eb</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/E</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/F</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/F#</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/G</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/Ab</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/A</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/Bb</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>/B</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QComboBox" name="inversion" >
-      <property name="geometry" >
-       <rect>
-        <x>150</x>
-        <y>32</y>
-        <width>111</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="currentIndex" >
-       <number>0</number>
-      </property>
-      <item>
-       <property name="text" >
-        <string>none</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text" >
-        <string>3</string>
-       </property>
-      </item>
-     </widget>
+     </layout>
     </widget>
    </item>
    <item row="3" column="2" colspan="3" >

@@ -63,6 +63,7 @@
 #include "box.h"
 #include "excerpt.h"
 #include "system.h"
+#include "tuplet.h"
 
 double printerMag = 1.0;
 
@@ -981,6 +982,26 @@ void Score::checkSlurs()
                         }
                   int idx = _gel.indexOf(s);
                   _gel.removeAt(idx);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   checkTuplets
+//    helper routine to check for tuplet sanity
+//---------------------------------------------------------
+
+void Score::checkTuplets()
+      {
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            foreach(Tuplet* t, *m->tuplets()) {
+                  if (t->elements()->empty()) {
+                        printf("empty tuplet: removing\n");
+                        m->tuplets()->removeAll(t);
+                        }
                   }
             }
       }

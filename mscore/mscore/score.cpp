@@ -424,6 +424,7 @@ void Score::read(QString name)
                   }
             }
       checkSlurs();
+      checkTuplets();
       _layout->doLayout();
       layoutAll = false;
       }

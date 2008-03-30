@@ -2133,7 +2133,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       int id = 0;
       foreach(Tuplet* tuplet, _tuplets) {
             if (tuplet->staffIdx() == staff)
-                  tuplet->write(xml, id++);
+                  tuplet->write(xml, id);
+            ++id;
             }
 
       foreach (const Element* el, _el) {

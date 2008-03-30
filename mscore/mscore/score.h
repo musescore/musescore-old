@@ -216,6 +216,7 @@ class Score : public QObject {
       void cmdResetBeamMode();
       void connectSlurs();
       void checkSlurs();
+      void checkTuplets();
 
    public slots:
       void doUndo();

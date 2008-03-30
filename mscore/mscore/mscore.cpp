@@ -1590,7 +1590,7 @@ int main(int argc, char* argv[])
             }
       else {
             while (argc > 1) {
-                  QString name = argv[optind++];
+                  QString name = QString::fromLocal8Bit(argv[optind++]);
                   --argc;
                   if (!name.isEmpty()) {
                         Score* score = new Score();

@@ -775,9 +775,17 @@ int convertRoot(const QString& s)
             else if (s[1] == '#')
                   alter = 1;
             }
-      int r = s[0].toLower().toAscii() - 'c';
-      if (r < 0 || r > 6)
-            return INVALID_TPC;
+      int r;
+      switch(s[0].toLower().toAscii()) {
+            case 'c':   r = 0; break;
+            case 'd':   r = 1; break;
+            case 'e':   r = 2; break;
+            case 'f':   r = 3; break;
+            case 'g':   r = 4; break;
+            case 'a':   r = 5; break;
+            case 'b':   r = 6; break;
+            default:    return INVALID_TPC;
+            }
       static const int spellings[] = {
          // bb  b   -   #  ##
             0,  7, 14, 21, 28,  // C
@@ -801,11 +809,15 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       {
       QString s = ss.simplified();
       int n = s.size();
-      if (n < 1)
+      if (n < 1) {
+            printf("parseHarmony failed <%s>\n", qPrintable(ss));
             return -1;
+            }
       int r = convertRoot(s);
-      if (r == INVALID_TPC)
+      if (r == INVALID_TPC) {
+            printf("parseHarmony failed <%s>\n", qPrintable(ss));
             return -1;
+            }
       *root = r;
       int idx = ((n > 1) && ((s[1] == 'b') || (s[1] == '#'))) ? 2 : 1;
       *base = INVALID_TPC;
