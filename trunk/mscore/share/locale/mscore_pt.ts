@@ -156,14 +156,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Dó</translation>
     </message>
     <message>
-        <source>F#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Db</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>G</source>
         <translation type="unfinished">Sol</translation>
     </message>
@@ -172,24 +164,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Ré</translation>
     </message>
     <message>
-        <source>Ab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A</source>
         <translation type="unfinished">Lá</translation>
     </message>
     <message>
         <source>E</source>
         <translation type="unfinished">Mi</translation>
-    </message>
-    <message>
-        <source>Bb</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
@@ -724,10 +704,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">4</translation>
     </message>
     <message>
-        <source>Bass Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
@@ -780,10 +756,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>C#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
@@ -794,6 +766,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete</source>
         <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>bb (double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>b (flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(no accidental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source># (sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source># (double sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass Note / Inversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished">3</translation>
+    </message>
+    <message>
+        <source>## (double sharp)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1857,6 +1865,14 @@ failed: </source>
     <message>
         <source>Height:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>italic</source>
+        <translation type="unfinished">itálico</translation>
+    </message>
+    <message>
+        <source>bold</source>
+        <translation type="unfinished">negrito</translation>
     </message>
 </context>
 <context>
@@ -3960,6 +3976,22 @@ Save Current Score?</source>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>15mb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5124,16 +5156,36 @@ em que deseja inserir novas notas</translation>
         <source>Segment:</source>
         <translation>Segmento:</translation>
     </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished">auto</translation>
+    </message>
+    <message>
+        <source>beam begin</source>
+        <translation type="unfinished">início da codete</translation>
+    </message>
+    <message>
+        <source>beam mid</source>
+        <translation type="unfinished">meio da codete</translation>
+    </message>
+    <message>
+        <source>beam end</source>
+        <translation type="unfinished">fim da codete</translation>
+    </message>
+    <message>
+        <source>no beam</source>
+        <translation type="unfinished">sem codete</translation>
+    </message>
+    <message>
+        <source>begin 1/32</source>
+        <translation type="unfinished">início 1/32</translation>
+    </message>
 </context>
 <context>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
         <translation>Forma</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>Acorde</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -5150,6 +5202,10 @@ em que deseja inserir novas notas</translation>
     <message>
         <source>Tick:</source>
         <translation>Tick:</translation>
+    </message>
+    <message>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5188,6 +5244,20 @@ em que deseja inserir novas notas</translation>
     <message>
         <source>Down</source>
         <translation>Baixo</translation>
+    </message>
+</context>
+<context>
+    <name>StaffText</name>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StaffTextProperties</name>
+    <message>
+        <source>MuseScore: Staff Text Properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
