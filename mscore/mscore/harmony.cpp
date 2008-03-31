@@ -639,6 +639,26 @@ void Harmony::write(Xml& xml) const
             xml.tag("extension", _extension);
       if (_baseTpc != INVALID_TPC)
             xml.tag("base", _baseTpc);
+      for (int i = 0; i < _degreeList.size(); i++) {
+            HDegree hd = _degreeList.value(i);
+            int tp = hd.type();
+            if (tp == ADD || tp == ALTER || tp == SUBTRACT) {
+                  xml.stag("degree");
+                  xml.tag("degree-value", hd.value());
+                  xml.tag("degree-alter", hd.alter());
+                  switch (tp) {
+                        case ADD: xml.tag("degree-type", "add");
+                              break;
+                        case ALTER: xml.tag("degree-type", "alter");
+                              break;
+                        case SUBTRACT: xml.tag("degree-type", "subtract");
+                              break;
+                        default:
+                              break;
+                        }
+                  xml.etag();
+                  }
+            }
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -669,6 +689,39 @@ void Harmony::read(QDomElement e)
                         setRootTpc(i);
                   else
                         setRootTpc(table[i-1]);    // obsolete
+                  }
+            else if (tag == "degree") {
+                  int degreeValue = 0;
+                  int degreeAlter = 0;
+                  QString degreeType = "";
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "degree-value") {
+                              degreeValue = ee.text().toInt();
+                              }
+                        else if (tag == "degree-alter") {
+                              degreeAlter = ee.text().toInt();
+                              }
+                        else if (tag == "degree-type") {
+                              degreeType = ee.text();
+                              }
+                        else
+                              domError(ee);
+                        }
+                  if (degreeValue <= 0 || degreeValue > 13
+                      || degreeAlter < -2 || degreeAlter > 2
+                      || (degreeType != "add" && degreeType != "alter" && degreeType != "subtract")) {
+                        printf("incorrect degree: degreeValue=%d degreeAlter=%d degreeType=%s\n",
+                               degreeValue, degreeAlter, qPrintable(degreeType));
+                        }
+                  else {
+                        if (degreeType == "add")
+                              addDegree(HDegree(degreeValue, degreeAlter, ADD));
+                        else if (degreeType == "alter")
+                              addDegree(HDegree(degreeValue, degreeAlter, ALTER));
+                        else if (degreeType == "subtract")
+                              addDegree(HDegree(degreeValue, degreeAlter, SUBTRACT));
+                        }
                   }
             else if (!Text::readProperties(e))
                   domError(e);

@@ -1,4 +1,6 @@
-31.3.8 (ws)
+31.3.8 (lv)
+      - input/output of Harmony degrees in mscore format
+       (ws)
       - fixed crash, when setting volta on last measure if this measure is the
         first and last on a system
 30.3.8 (lv)
