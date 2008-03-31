@@ -563,6 +563,7 @@ void Measure::layout(ScoreLayout* layout, double width)
       //   layout Lyrics
       //---------------------------------------------------
 
+      double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   LyricsList* ll = segment->lyricsList(staffIdx);
@@ -573,12 +574,12 @@ void Measure::layout(ScoreLayout* layout, double width)
                         if (lyrics == 0)
                               continue;
                         // center to middle of notehead:
-                        double noteHeadWidth = symbols[quartheadSym].width(mag());
-                        double lh            = lyrics->lineSpacing();
-                        y  = lh * line + point(score()->style()->lyricsDistance);
-                        lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
+                        double lh = lyrics->lineSpacing();
+                        y         = lh * line + point(score()->style()->lyricsDistance);
+                        lyrics->setPos(noteHeadWidth2 - lyrics->bbox().width() * .5,
                            y + system()->staff(staffIdx)->bbox().bottom());
-                        y += lyrics->bbox().height();
+                        // y += lyrics->bbox().height();
+                        y += lyrics->lineHeight();
                         }
                   // increase staff distance if necessary
                   y += point(score()->style()->lyricsMinBottomDistance);

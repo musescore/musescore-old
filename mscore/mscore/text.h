@@ -163,6 +163,7 @@ class TextB : public Element {
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&, QMouseEvent* ev);
       double lineSpacing() const;
+      double lineHeight() const;
       void moveCursorToEnd();
 
       virtual QLineF dragAnchor() const;
