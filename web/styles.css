@@ -15,8 +15,7 @@ td.nav {
 
 td.ld {
    background: #aec3e8;
-   valign: top;
-   width: 60;
+   width: 60pt;
    font-weight: bold;
    font-size: 10pt;
    }
@@ -30,7 +29,6 @@ td.lb {
 h3.navhead {
    margin-top: 0.2em;
    margin-bottom: 0em;
-#   font-size: 10pt;
    font-family: Verdana, Geneva, Arial, sans-serif;
    }
 
