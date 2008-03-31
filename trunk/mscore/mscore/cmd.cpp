@@ -237,9 +237,16 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   volta->setTick(m->tick());
                   volta->setTick2(m->tick() + m->tickLen());
                   volta->layout(layout());
-                  LineSegment* ls = volta->lineSegments().front();
-                  QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo / _spatium);
+                  const QList<LineSegment*> lsl = volta->lineSegments();
+                  if (lsl.isEmpty()) {
+                        delete e;
+                        return;
+                        }
+                  else {
+                        LineSegment* ls = lsl.front();
+                        QPointF uo(pos - ls->canvasPos() - dragOffset);
+                        ls->setUserOff(uo / _spatium);
+                        }
                   }
                   break;
             case PEDAL:

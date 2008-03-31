@@ -231,7 +231,7 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
 
       System* s = m->system();
 
-      if ((grip == 1) && (m == s->measures().front())) {
+      if ((grip == 1) && (m == s->measures().front()) && m->tick() == tick) {
             MeasureBase* mb = m;
             do {
                   mb = mb->prev();

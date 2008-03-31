@@ -243,19 +243,23 @@ QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
       if (seg == 0) {
+            // this never should be triggered because tick2segment
+            // always returns the last segment for tick > score end
             MeasureBase* mb = score()->measures()->last();;
             while (mb) {
                   if (mb->type() == MEASURE)
                         break;
                   mb = mb->prev();
                   }
-            if (mb == 0 || mb->type() != MEASURE)
+            if (mb == 0 || mb->type() != MEASURE) {
+                  *system = 0;
                   return QPointF();
+                  }
             Measure* m = (Measure*)mb;
             seg = m->last();
             }
-      System*  sys = seg->measure()->system();
-      *system = sys;
+      System* sys = seg->measure()->system();
+      *system     = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
       }
 
@@ -290,10 +294,10 @@ void SLine::layout(ScoreLayout* layout)
 
       QList<System*>* systems = layout->systems();
 
-      int sysIdx1 = systems->indexOf(s1);
-      int sysIdx2 = systems->indexOf(s2, sysIdx1);
-
+      int sysIdx1        = systems->indexOf(s1);
+      int sysIdx2        = systems->indexOf(s2, sysIdx1);
       int segmentsNeeded = sysIdx2 - sysIdx1 + 1;
+
       int segCount       = segments.size();
       if (segmentsNeeded != segCount) {
             if (segmentsNeeded > segCount) {
