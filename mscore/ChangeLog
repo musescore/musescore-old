@@ -1,3 +1,6 @@
+31.3.8 (ws)
+      - fixed crash, when setting volta on last measure if this measure is the
+        first and last on a system
 30.3.8 (lv)
       - fixed bass handling in chordedit dialog
       - fixed chord name handling in chordedit dialog when degrees are used
