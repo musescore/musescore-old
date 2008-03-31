@@ -1074,6 +1074,21 @@ double TextB::lineSpacing() const
       }
 
 //---------------------------------------------------------
+//   lineHeight
+//    HACK
+//---------------------------------------------------------
+
+double TextB::lineHeight() const
+      {
+      extern double printerMag;
+
+      QTextBlock tb   = doc()->begin();
+      QTextLayout* tl = tb.layout();
+      QFontMetricsF fm(tl->font());
+      return fm.height() * printerMag;
+      }
+
+//---------------------------------------------------------
 //   addSymbol
 //---------------------------------------------------------
 

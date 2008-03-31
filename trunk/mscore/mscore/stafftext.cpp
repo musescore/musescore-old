@@ -28,6 +28,13 @@
 StaffText::StaffText(Score* s)
    : Text(s)
       {
+      _midiAction           = MIDI_ACTION_NO;
+      _hbank                = -1;
+      _lbank                = -1;
+      _program              = 0;
+      _controller           = 0;
+      _controllerValue      = 0;
+
       setSubtype(TEXT_STAFF);
       }
 
@@ -38,6 +45,21 @@ StaffText::StaffText(Score* s)
 void StaffText::write(Xml& xml) const
       {
       xml.stag("StaffText");
+      switch(_midiAction) {
+            case MIDI_ACTION_NO:
+                  break;
+            case MIDI_ACTION_PROGRAM_CHANGE:
+                  xml.tagE(QString("midiProgramChange hbank=\"%1\" lbank=\"%2\" program=\"%3\"")
+                     .arg(_hbank).arg(_lbank).arg(_program));
+                  break;
+            case MIDI_ACTION_CONTROLLER:
+                  xml.tagE(QString("midiController controller=\"%1\" value=\"%2\"")
+                     .arg(_controller).arg(_controllerValue));
+                  break;
+            case MIDI_ACTION_INSTRUMENT:
+                  xml.tagE(QString("midiInstrumentAction name=\"%1\"").arg(_instrumentActionName));
+                  break;
+            }
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -48,9 +70,25 @@ void StaffText::write(Xml& xml) const
 
 void StaffText::read(QDomElement e)
       {
+      _midiAction = MIDI_ACTION_NO;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (!Text::readProperties(e))
+            if (tag == "midiProgramChange") {
+                  _hbank   = e.attribute("hbank", "-1").toInt();
+                  _lbank   = e.attribute("lbank", "-1").toInt();
+                  _program = e.attribute("program", "0").toInt();
+                  _midiAction = MIDI_ACTION_PROGRAM_CHANGE;
+                  }
+            else if (tag == "midiController") {
+                  _controller      = e.attribute("controller", "-1").toInt();
+                  _controllerValue = e.attribute("value", "0").toInt();
+                  _midiAction = MIDI_ACTION_CONTROLLER;
+                  }
+            else if (tag == "midiInstrumentAction") {
+                  _instrumentActionName = e.attribute("name");
+                  _midiAction = MIDI_ACTION_INSTRUMENT;
+                  }
+            else if (!Text::readProperties(e))
                   domError(e);
             }
       cursorPos = 0;
@@ -91,7 +129,30 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       {
       setupUi(this);
       staffText = st;
+
+      MidiAction ma = st->midiAction();
+
+      sendProgramChange->setChecked(ma == MIDI_ACTION_PROGRAM_CHANGE);
+      sendControllerValue->setChecked(ma == MIDI_ACTION_CONTROLLER);
+      instrumentDefinedAction->setChecked(ma == MIDI_ACTION_INSTRUMENT);
+
+      int hbank, lbank, program;
+      st->midiProgramChange(&hbank, &lbank, &program);
+      midiBankSelectH->setValue(hbank + 1);
+      midiBankSelectL->setValue(lbank + 1);
+      midiProgram->setValue(program + 1);
+
+      int controller, controllerValue;
+      st->midiController(&controller, &controllerValue);
+      midiController->setValue(controller + 1);
+      midiControllerValue->setValue(controllerValue);
+
+      midiActionName->setText(st->instrumentActionName());
+
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
+      connect(sendProgramChange, SIGNAL(toggled(bool)), SLOT(typeProgramChanged(bool)));
+      connect(sendControllerValue, SIGNAL(toggled(bool)), SLOT(typeControllerChanged(bool)));
+      connect(instrumentDefinedAction, SIGNAL(toggled(bool)), SLOT(typeInstrumentChanged(bool)));
       }
 
 //---------------------------------------------------------
@@ -100,24 +161,61 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
 void StaffTextProperties::saveValues()
       {
-#if 0
-      Score* score    = tempoText->score();
-      double newTempo = tempo->value() / 60.0;
-      if (newTempo == tempoText->tempo())
-            return;
-      int tick        = tempoText->tick();
-      TempoList* tl   = score->tempomap;
+      staffText->setMidiProgram(
+         midiBankSelectH->value() - 1,
+         midiBankSelectL->value() - 1,
+         midiProgram->value() - 1
+         );
+      staffText->setMidiController(
+         midiController->value() - 1,
+         midiControllerValue->value()
+         );
+      staffText->setInstrumentActionName(midiActionName->text());
 
-      iTEvent o = tl->find(tick);
-      if (o == tl->end()) {
-            printf("TempoProperties: cannot find tempo at %d\n", tick);
-            return;
-            }
-      TEvent n(newTempo);
-      score->undoChangeTempo(tick, o->second, n);
-      TempoText* ntt = new TempoText(*tempoText);
-      ntt->setTempo(newTempo);
-      score->undoChangeElement(tempoText, ntt);
-#endif
+      if (sendProgramChange->isChecked())
+            staffText->setMidiAction(MIDI_ACTION_PROGRAM_CHANGE);
+      else if (sendControllerValue->isChecked())
+            staffText->setMidiAction(MIDI_ACTION_CONTROLLER);
+      else if (instrumentDefinedAction->isChecked())
+            staffText->setMidiAction(MIDI_ACTION_INSTRUMENT);
+      else
+            staffText->setMidiAction(MIDI_ACTION_NO);
       }
+
+//---------------------------------------------------------
+//   typeProgramChanged
+//---------------------------------------------------------
+
+void StaffTextProperties::typeProgramChanged(bool val)
+      {
+      if (val) {
+            sendControllerValue->setChecked(false);
+            instrumentDefinedAction->setChecked(false);
+            }
+      }
+
+//---------------------------------------------------------
+//   typeControllerChanged
+//---------------------------------------------------------
+
+void StaffTextProperties::typeControllerChanged(bool val)
+      {
+      if (val) {
+            sendProgramChange->setChecked(false);
+            instrumentDefinedAction->setChecked(false);
+            }
+      }
+
+//---------------------------------------------------------
+//   typeInstrumentChanged
+//---------------------------------------------------------
+
+void StaffTextProperties::typeInstrumentChanged(bool val)
+      {
+      if (val) {
+            sendProgramChange->setChecked(false);
+            sendControllerValue->setChecked(false);
+            }
+      }
+
 

@@ -487,7 +487,6 @@ bool ScoreLayout::layoutPage()
 
       if (restHeight > (ph * (1.0 - score()->style()->pageFillLimit)))
             return true;
-return true;
 
       double dist = restHeight / (rows - 1);
       y = 0;
