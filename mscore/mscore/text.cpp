@@ -195,14 +195,8 @@ void TextBase::layout(ScoreLayout* layout)
 
       _doc->documentLayout()->setPaintDevice(device);
 
-#if 1
-//      _doc->setTextWidth(1000000.0);       //!? qt bug?
       _doc->setTextWidth(-1.0);
-      double tw = _doc->idealWidth();
-      _doc->setTextWidth(tw);
-#else
-      _doc->adjustSize();
-#endif
+      _doc->setTextWidth(-1.0);
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -227,10 +221,8 @@ void TextBase::layout(ScoreLayout* layout)
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            // _bbox = QRectF(QPointF(), _doc->size() * 1.3);
+            double tw = _doc->idealWidth();
             _bbox = QRectF(QPointF(), QPointF(tw, _doc->size().height()));
-//            _bbox = QRectF(QPointF(), _doc->documentLayout()->size());
-//            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
             }
       }
 
