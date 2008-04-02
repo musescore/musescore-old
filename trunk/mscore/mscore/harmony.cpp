@@ -895,8 +895,9 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
             }
       else
             s = s.mid(idx);
+      s = s.toLower();
       for (unsigned i = 1; i < sizeof(extensionNames)/sizeof(*extensionNames); ++i) {
-            if (extensionNames[i].name == s)
+            if (QString(extensionNames[i].name).toLower() == s)
                   return i;
             }
       return 0;

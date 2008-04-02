@@ -73,6 +73,7 @@
 #include "tempotext.h"
 #include "sym.h"
 #include "pitchspelling.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -793,75 +794,25 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 //    set type + dots depending on tick len
 //---------------------------------------------------------
 
-static QString tick2xml(const int ticks, int& dots)
+static QString tick2xml(const int ticks, int* dots)
       {
-      QString type;
-      dots = 0;
-      if (ticks == 16*division)       // 4/1
-            type = "long";
-      else if (ticks == 8*division)        // 2/1
-            type = "breve";
-      else if (ticks == 6*division) {        // 1/1 + 1/2  (does this exist???)
-            type = "whole";
-            dots  = 1;
+      DurationType t;
+      headType(ticks, &t, dots);
+      switch(t) {
+            case D_QUARTER:   return "quarter";
+            case D_EIGHT:     return "eight";
+            case D_256TH:     return "256th";
+            case D_128TH:     return "128th";
+            case D_64TH:      return "64th";
+            case D_32ND:      return "32th";
+            case D_16TH:      return "16th";
+            case D_HALF:      return "half";
+            case D_WHOLE:
+            case D_MEASURE:   return "whole";
+            case D_BREVE:     return "breve";
+            case D_LONG:      return "long";
             }
-      else if (ticks == 5*division)        // HACK
-            type = "whole";
-      else if (ticks == 4*division)        // 1/1
-            type = "whole";
-      else if (ticks == 3*division) {        // 1/2
-            dots = 1;
-            type = "half";
-            }
-      else if (ticks == 2*division)        // 1/2
-            type = "half";
-      else if (ticks == division + division/2) {
-            dots = 1;
-            type = "quarter";
-            }
-      else if (ticks == division)          // quarternote
-            type = "quarter";
-      else if (ticks == division/2 + division/4) {
-            dots = 1;
-            type = "eighth";
-            }
-      else if (ticks == division/2)        // 1/8
-            type = "eighth";
-      else if (ticks == division/4 + division/8) {
-            dots = 1;
-            type = "16th";
-            }
-      else if (ticks == division/4)        // 1/16
-            type = "16th";
-      else if (ticks == division/8 + division/16) {
-            dots = 1;
-            type = "32nd";
-            }
-      else if (ticks == division/8)        // 1/32
-            type = "32nd";
-      else if (ticks == division/16 + division/32) {
-            dots = 1;
-            type = "64th";
-            }
-      else if (ticks == division/16)       // 1/64
-            type = "64th";
-      else if (ticks == division/32 + division/64) {
-            dots = 1;
-            type = "128th";
-            }
-      else if (ticks == division/32)       // 1/128
-            type = "128th";
-      else if (ticks == division/64 + division/128) {
-            dots = 1;
-            type = "256th";
-            }
-      else if (ticks == division/64)       // 1/128
-            type = "256th";
-      else {
-            fprintf(stderr, "tick2xml: invalid note len %d (%d, %d)\n",
-               ticks, ticks/division, ticks%division);
-            }
-      return type;
+      return QString();
       }
 
 //---------------------------------------------------------
@@ -1414,7 +1365,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.etag();
                   }
 
-            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, dots);
+            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
                      note->chord()->tickLen());
@@ -1550,7 +1501,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             actNotes = t->actualNotes();
             nrmNotes = t->normalNotes();
             }
-      QString s = tick2xml(rest->tickLen() * actNotes / nrmNotes, dots);
+      QString s = tick2xml(rest->tickLen() * actNotes / nrmNotes, &dots);
       if (s.isEmpty()) {
             printf("no rest type found for ticks %d at %d in measure %d\n",
                rest->tickLen(), rest->tick(), rest->measure()->no()+1);
