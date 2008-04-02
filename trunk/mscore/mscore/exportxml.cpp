@@ -800,11 +800,11 @@ static QString tick2xml(const int ticks, int* dots)
       headType(ticks, &t, dots);
       switch(t) {
             case D_QUARTER:   return "quarter";
-            case D_EIGHT:     return "eight";
+            case D_EIGHT:     return "eighth";
             case D_256TH:     return "256th";
             case D_128TH:     return "128th";
             case D_64TH:      return "64th";
-            case D_32ND:      return "32th";
+            case D_32ND:      return "32nd";
             case D_16TH:      return "16th";
             case D_HALF:      return "half";
             case D_WHOLE:
