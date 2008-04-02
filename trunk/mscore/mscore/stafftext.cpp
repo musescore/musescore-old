@@ -28,13 +28,6 @@
 StaffText::StaffText(Score* s)
    : Text(s)
       {
-      _midiAction           = MIDI_ACTION_NO;
-      _hbank                = -1;
-      _lbank                = -1;
-      _program              = 0;
-      _controller           = 0;
-      _controllerValue      = 0;
-
       setSubtype(TEXT_STAFF);
       }
 
@@ -45,21 +38,10 @@ StaffText::StaffText(Score* s)
 void StaffText::write(Xml& xml) const
       {
       xml.stag("StaffText");
-      switch(_midiAction) {
-            case MIDI_ACTION_NO:
-                  break;
-            case MIDI_ACTION_PROGRAM_CHANGE:
-                  xml.tagE(QString("midiProgramChange hbank=\"%1\" lbank=\"%2\" program=\"%3\"")
-                     .arg(_hbank).arg(_lbank).arg(_program));
-                  break;
-            case MIDI_ACTION_CONTROLLER:
-                  xml.tagE(QString("midiController controller=\"%1\" value=\"%2\"")
-                     .arg(_controller).arg(_controllerValue));
-                  break;
-            case MIDI_ACTION_INSTRUMENT:
-                  xml.tagE(QString("midiInstrumentAction name=\"%1\"").arg(_instrumentActionName));
-                  break;
-            }
+      if (!_instrumentActionName.isEmpty())
+            xml.tagE(QString("midiInstrumentAction name=\"%1\"").arg(_instrumentActionName));
+      else
+            _midiAction.write(xml);
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -70,24 +52,13 @@ void StaffText::write(Xml& xml) const
 
 void StaffText::read(QDomElement e)
       {
-      _midiAction = MIDI_ACTION_NO;
+      _midiAction = MidiAction();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "midiProgramChange") {
-                  _hbank   = e.attribute("hbank", "-1").toInt();
-                  _lbank   = e.attribute("lbank", "-1").toInt();
-                  _program = e.attribute("program", "0").toInt();
-                  _midiAction = MIDI_ACTION_PROGRAM_CHANGE;
-                  }
-            else if (tag == "midiController") {
-                  _controller      = e.attribute("controller", "-1").toInt();
-                  _controllerValue = e.attribute("value", "0").toInt();
-                  _midiAction = MIDI_ACTION_CONTROLLER;
-                  }
-            else if (tag == "midiInstrumentAction") {
+            if (tag == "MidiAction")
+                  _midiAction.read(e);
+            else if (tag == "midiInstrumentAction")
                   _instrumentActionName = e.attribute("name");
-                  _midiAction = MIDI_ACTION_INSTRUMENT;
-                  }
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -131,23 +102,40 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       staffText = st;
 
       MidiAction ma = st->midiAction();
-
-      sendProgramChange->setChecked(ma == MIDI_ACTION_PROGRAM_CHANGE);
-      sendControllerValue->setChecked(ma == MIDI_ACTION_CONTROLLER);
-      instrumentDefinedAction->setChecked(ma == MIDI_ACTION_INSTRUMENT);
-
-      int hbank, lbank, program;
-      st->midiProgramChange(&hbank, &lbank, &program);
-      midiBankSelectH->setValue(hbank + 1);
-      midiBankSelectL->setValue(lbank + 1);
-      midiProgram->setValue(program + 1);
-
-      int controller, controllerValue;
-      st->midiController(&controller, &controllerValue);
-      midiController->setValue(controller + 1);
-      midiControllerValue->setValue(controllerValue);
-
-      midiActionName->setText(st->instrumentActionName());
+      if (!st->instrumentActionName().isEmpty()) {
+            instrumentDefinedAction->setChecked(true);
+            midiActionName->setText(st->instrumentActionName());
+            }
+      else {
+            instrumentDefinedAction->setChecked(false);
+            switch (ma.type()) {
+                  case MidiAction::ACTION_PROGRAM_CHANGE:
+                        {
+                        sendProgramChange->setChecked(true);
+                        sendControllerValue->setChecked(false);
+                        int hbank, lbank, program;
+                        ma.programChange(&hbank, &lbank, &program);
+                        midiBankSelectH->setValue(hbank + 1);
+                        midiBankSelectL->setValue(lbank + 1);
+                        midiProgram->setValue(program + 1);
+                        }
+                        break;
+                  case MidiAction::ACTION_CONTROLLER:
+                        {
+                        sendControllerValue->setChecked(true);
+                        sendProgramChange->setChecked(false);
+                        int controller, controllerValue;
+                        ma.controller(&controller, &controllerValue);
+                        midiController->setValue(controller + 1);
+                        midiControllerValue->setValue(controllerValue);
+                        }
+                        break;
+                  default:
+                        sendControllerValue->setChecked(false);
+                        sendProgramChange->setChecked(false);
+                        break;
+                  }
+            }
 
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       connect(sendProgramChange, SIGNAL(toggled(bool)), SLOT(typeProgramChanged(bool)));
@@ -161,25 +149,24 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
 void StaffTextProperties::saveValues()
       {
-      staffText->setMidiProgram(
-         midiBankSelectH->value() - 1,
-         midiBankSelectL->value() - 1,
-         midiProgram->value() - 1
-         );
-      staffText->setMidiController(
-         midiController->value() - 1,
-         midiControllerValue->value()
-         );
-      staffText->setInstrumentActionName(midiActionName->text());
-
-      if (sendProgramChange->isChecked())
-            staffText->setMidiAction(MIDI_ACTION_PROGRAM_CHANGE);
-      else if (sendControllerValue->isChecked())
-            staffText->setMidiAction(MIDI_ACTION_CONTROLLER);
-      else if (instrumentDefinedAction->isChecked())
-            staffText->setMidiAction(MIDI_ACTION_INSTRUMENT);
+      if (sendProgramChange->isChecked()) {
+            staffText->setMidiProgram(
+               midiBankSelectH->value() - 1,
+               midiBankSelectL->value() - 1,
+               midiProgram->value() - 1
+               );
+            }
+      else if (sendControllerValue->isChecked()) {
+            staffText->setMidiController(
+               midiController->value() - 1,
+               midiControllerValue->value()
+               );
+            }
+      else if (instrumentDefinedAction->isChecked()) {
+            staffText->setInstrumentActionName(midiActionName->text());
+            }
       else
-            staffText->setMidiAction(MIDI_ACTION_NO);
+            staffText->setMidiAction(MidiAction());
       }
 
 //---------------------------------------------------------

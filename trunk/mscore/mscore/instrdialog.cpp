@@ -517,6 +517,7 @@ void MuseScore::editInstrList()
                   part->setTrackName(t->name);
                   part->setLongName(t->name);
                   part->setPitchOffset(t->transpose);
+                  part->instrument()->midiActions = t->midiActions;
                   if (t->useDrumset) {
                         part->setUseDrumset(true);
                         part->setDrumset(new Drumset(*smDrumset));

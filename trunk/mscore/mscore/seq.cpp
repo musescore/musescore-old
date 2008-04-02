@@ -505,12 +505,40 @@ void Seq::playEvent(const Event* event)
             }
       else if (type == ME_CONTROLLER)  {
             ControllerEvent* c = (ControllerEvent*)event;
-            MidiOutEvent e;
-            e.port = c->port();
-            e.type = ME_CONTROLLER | c->channel();
-            e.a    = c->controller();
-            e.b    = c->value();
-            driver->putEvent(e);
+            if (c->controller() == CTRL_PROGRAM) {
+                  int hb = (c->value() >> 16) & 0xff;
+                  int lb = (c->value() >> 8) & 0xff;
+                  int pr = c->value() & 0xff;
+                  if (hb != 0xff) {
+                        MidiOutEvent e;
+                        e.port = c->port();
+                        e.type = ME_CONTROLLER | c->channel();
+                        e.a    = CTRL_HBANK;
+                        e.b    = hb;
+                        driver->putEvent(e);
+                        }
+                  if (lb != 0xff) {
+                        MidiOutEvent e;
+                        e.port = c->port();
+                        e.type = ME_CONTROLLER | c->channel();
+                        e.a    = CTRL_LBANK;
+                        e.b    = lb;
+                        driver->putEvent(e);
+                        }
+                  MidiOutEvent e;
+                  e.port = c->port();
+                  e.type = ME_PROGRAM | c->channel();
+                  e.a    = pr;
+                  driver->putEvent(e);
+                  }
+            else {
+                  MidiOutEvent e;
+                  e.port = c->port();
+                  e.type = ME_CONTROLLER | c->channel();
+                  e.a    = c->controller();
+                  e.b    = c->value();
+                  driver->putEvent(e);
+                  }
             }
       else {
             printf("bad event type %x\n", type);

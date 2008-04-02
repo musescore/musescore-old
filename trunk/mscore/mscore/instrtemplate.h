@@ -23,6 +23,7 @@
 
 #include "ui_instrdialog.h"
 #include "globals.h"
+#include "instrument.h"
 
 class Xml;
 class Part;
@@ -46,6 +47,7 @@ struct InstrumentTemplate {
       int maxPitch;
       int transpose;          // for transposing instruments
       bool useDrumset;
+      QList<MidiAction> midiActions;
 
       void write(Xml& xml) const;
       void read(const QString& group, QDomElement);

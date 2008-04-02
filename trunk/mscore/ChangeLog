@@ -1,3 +1,6 @@
+2.4.8 (ws)
+      - bind midi commands to staff text (program change, controller)
+      - implement delete staff text
 31.3.8 (lv)
       - input/output of Harmony degrees in mscore format
        (ws)
