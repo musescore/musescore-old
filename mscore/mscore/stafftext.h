@@ -23,26 +23,14 @@
 
 #include "text.h"
 #include "ui_stafftext.h"
-
-//---------------------------------------------------------
-//   MidiAction
-//---------------------------------------------------------
-
-enum MidiAction {
-      MIDI_ACTION_NO,               // no midi action
-      MIDI_ACTION_PROGRAM_CHANGE,   // send midi program change message
-      MIDI_ACTION_CONTROLLER,       // send midi controller message
-      MIDI_ACTION_INSTRUMENT        // instrument defines action
-      };
+#include "part.h"
 
 //---------------------------------------------------------
 //   StaffText
 //---------------------------------------------------------
 
 class StaffText : public Text  {
-      enum MidiAction _midiAction;
-      int _hbank, _lbank, _program;
-      int _controller, _controllerValue;
+      MidiAction _midiAction;
       QString _instrumentActionName;
 
    public:
@@ -53,33 +41,13 @@ class StaffText : public Text  {
       virtual void read(QDomElement);
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
-      void setMidiProgram(int hb, int lb, int pr) {
-            _hbank = hb;
-            _lbank = lb;
-            _program = pr;
-            _midiAction = MIDI_ACTION_PROGRAM_CHANGE;
-            }
-      void setMidiController(int ctrl, int value) {
-            _controller = ctrl;
-            _controllerValue = value;
-            _midiAction = MIDI_ACTION_CONTROLLER;
-            }
-      MidiAction midiAction() const               { return _midiAction; }
-      void setMidiAction(MidiAction a)            { _midiAction = a; }
-      void setInstrumentActionName(const QString& s) {
-            _instrumentActionName = s;
-            _midiAction = MIDI_ACTION_INSTRUMENT;
-            }
-      QString instrumentActionName() const        { return _instrumentActionName; }
-      void midiProgramChange(int* hb, int* lb, int* pr) const {
-            *hb = _hbank;
-            *lb = _lbank;
-            *pr = _program;
-            }
-      void midiController(int* ctrl, int* value) {
-            *ctrl = _controller;
-            *value = _controllerValue;
-            }
+      void setMidiProgram(int hb, int lb, int pr)    { _midiAction.setProgram(hb, lb, pr);     }
+      void setMidiController(int ctrl, int value)    { _midiAction.setController(ctrl, value); }
+      void setMidiAction(const MidiAction& a)        { _midiAction = a; }
+      MidiAction midiAction() const                  { return _midiAction; }
+
+      void setInstrumentActionName(const QString& s) { _instrumentActionName = s; }
+      QString instrumentActionName() const           { return _instrumentActionName; }
       };
 
 //---------------------------------------------------------

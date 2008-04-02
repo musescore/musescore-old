@@ -75,6 +75,10 @@ printf("keyPressEvent:: ESC\n");
                   _score->lyricsMinus();
                   found = true;
                   }
+            else if (ev->key() == Qt::Key_Underscore && !(ev->modifiers() & Qt::ControlModifier)) {
+                  _score->lyricsUnderscore();
+                  found = true;
+                  }
             if (found) {
                   ev->accept();
                   return;

@@ -134,7 +134,7 @@ add_executable ( mscore
       instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
-      excerptsdialog.cpp excerpt.cpp stafftext.cpp
+      excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp
       ${AUDIO}
       )
 

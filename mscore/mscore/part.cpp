@@ -197,31 +197,6 @@ void Part::setStaves(int n)
       }
 
 //---------------------------------------------------------
-//   Instrument
-//---------------------------------------------------------
-
-Instrument::Instrument()
-      {
-      midiChannel     = 0;
-      midiPort        = 0;
-      midiProgram     = 0;
-      midiBankSelectH = -1;
-      midiBankSelectL = -1;
-      volume          = 100;
-      pan             = 64;
-      chorus          = 30;
-      reverb          = 30;
-      mute            = false;
-      solo            = false;
-      soloMute        = false;
-      minPitch        = 0;
-      maxPitch        = 127;
-      pitchOffset     = 0;
-      drumset         = 0;
-      useDrumset      = false;
-      }
-
-//---------------------------------------------------------
 //   setUseDrumset
 //---------------------------------------------------------
 
@@ -230,101 +205,6 @@ void Part::setUseDrumset(bool val)
       _instrument.useDrumset = val;
       if (val && _instrument.drumset == 0)
             _instrument.drumset = new Drumset(*smDrumset);
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Instrument::write(Xml& xml) const
-      {
-      xml.stag("Instrument");
-      if (midiChannel != 0)
-            xml.tag("midiChannel", midiChannel);
-      if (midiPort != 0)
-            xml.tag("midiPort", midiPort);
-      if (midiProgram != 0)
-            xml.tag("midiProgram", midiProgram);
-      if (midiBankSelectH != -1)
-            xml.tag("midiBankSelectH", midiBankSelectH);
-      if (midiBankSelectL != -1)
-            xml.tag("midiBankSelectL", midiBankSelectL);
-      if (volume != 100)
-            xml.tag("volume", volume);
-      if (pan != 64)
-            xml.tag("pan", pan);
-      if (chorus)
-            xml.tag("chorus", chorus);
-      if (reverb)
-            xml.tag("reverb", reverb);
-      if (mute)
-            xml.tag("mute", mute);
-      if (solo)
-            xml.tag("solo", solo);
-      if (minPitch > 0)
-            xml.tag("minPitch", minPitch);
-      if (maxPitch < 127)
-            xml.tag("maxPitch", maxPitch);
-      if (pitchOffset)
-            xml.tag("transposition", pitchOffset);
-      if (useDrumset) {
-            xml.tag("useDrumset", useDrumset);
-            drumset->save(xml);
-            }
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   Instrument::read
-//---------------------------------------------------------
-
-void Instrument::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "midiChannel")
-                  midiChannel = i;
-            else if (tag == "midiPort")
-                  midiPort = i;
-            else if (tag == "midiProgram")
-                  midiProgram = i;
-            else if (tag == "midiBankSelectH")
-                  midiBankSelectH = i;
-            else if (tag == "midiBankSelectL")
-                  midiBankSelectL = i;
-            else if (tag == "volume")
-                  volume = i;
-            else if (tag == "pan")
-                  pan = i;
-            else if (tag == "chorus")
-                  chorus = i;
-            else if (tag == "reverb")
-                  reverb = i;
-            else if (tag == "mute")
-                  mute = i;
-            else if (tag == "solo")
-                  solo = i;
-            else if (tag == "minPitch")
-                  minPitch = i;
-            else if (tag == "maxPitch")
-                  maxPitch = i;
-            else if (tag == "transposition")
-                  pitchOffset = i;
-            else if (tag == "useDrumset") {
-                  useDrumset = i;
-                  if (useDrumset)
-                        drumset = new Drumset(*smDrumset);
-                  }
-            else if (tag == "Drum") {
-                  if (drumset == 0)
-                        drumset = new Drumset(*smDrumset);
-                  drumset->load(e);
-                  }
-            else
-                  domError(e);
-            }
       }
 
 //---------------------------------------------------------
@@ -365,3 +245,4 @@ void Part::setShow(bool val)
       foreach(Staff* staff, _staves)
             staff->setShow(_show);
       }
+

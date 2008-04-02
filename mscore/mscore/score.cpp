@@ -61,6 +61,7 @@
 #include "utils.h"
 #include "mididriver.h"
 #include "excerpt.h"
+#include "stafftext.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1761,6 +1762,32 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                      );
                   lv.clear();
                   sv.clear();
+                  }
+            }
+      //
+      // collect program changes and controller
+      //
+      foreach(const Element* e, *m->el()) {
+            if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
+                  continue;
+            StaffText* st = (StaffText*)e;
+            MidiAction a;
+            if (!st->instrumentActionName().isEmpty()) {
+                  a = prt->instrument()->midiAction(st->instrumentActionName());
+                  }
+            else
+                  a = st->midiAction();
+            int hb, lb, pr, c, v;
+            int tick = st->tick();
+            if (a.programChange(&hb, &lb, &pr)) {
+                  int v = ((hb & 0xff) << 16) + ((lb & 0xff) << 8) + (pr & 0xff);
+                  ControllerEvent* ev = new ControllerEvent(tick, channel, CTRL_PROGRAM, v);
+                  ev->setPort(port);
+                  events->insertMulti(tick, ev);
+                  }
+            else if (a.controller(&c, &v)) {
+                  ControllerEvent* ev = new ControllerEvent(tick, channel, c, v);
+                  events->insertMulti(tick, ev);
                   }
             }
       }

@@ -60,6 +60,8 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("drumset", useDrumset);
       if (midiProgram)
             xml.tag("midiprogram", midiProgram);
+      foreach(const MidiAction& a, midiActions)
+            a.write(xml);
       xml.etag();
       }
 
@@ -123,6 +125,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   useDrumset = i;
             else if (tag == "midiprogram")
                   midiProgram = i;
+            else if (tag == "MidiAction") {
+                  MidiAction a;
+                  a.read(e);
+                  midiActions.append(a);
+                  }
             else
                   domError(e);
             }

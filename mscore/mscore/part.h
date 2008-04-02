@@ -22,41 +22,12 @@
 #define __PART_H__
 
 #include "globals.h"
+#include "instrument.h"
 
-class Instrument;
 class Xml;
 class Staff;
 class Score;
 class Drumset;
-
-//---------------------------------------------------------
-//   Instrument
-//---------------------------------------------------------
-
-struct Instrument {
-      char midiChannel;
-      char midiPort;
-      char midiProgram;
-      char midiBankSelectH;
-      char midiBankSelectL;
-      char volume;
-      char pan;
-      char chorus;
-      char reverb;
-      char minPitch;
-      char maxPitch;
-      char pitchOffset;
-
-      bool mute;
-      bool solo;
-      bool soloMute;
-      Drumset* drumset;
-      bool useDrumset;
-
-      Instrument();
-      void read(QDomElement);
-      void write(Xml& xml) const;
-      };
 
 //---------------------------------------------------------
 //   Part
