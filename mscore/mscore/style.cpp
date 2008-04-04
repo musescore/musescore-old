@@ -263,16 +263,15 @@ void setDefaultStyle()
 
 QFont TextStyle::font() const
       {
-      double mag = ::_spatium / (spatiumBase20 * DPI);
+      double mag = ::_spatium / (SPATIUM20 * DPI);
 
-      double m = size;
+      double m = size * DPI / PPI;
       if (sizeIsSpatiumDependent)
             m *= mag;
       QFont f(family);
-//      f.setWeight(bold ? QFont::Bold : QFont::Normal);
       f.setBold(bold);
       f.setItalic(italic);
-      f.setPointSizeF(m);
+      f.setPixelSize(lrint(m));
       f.setUnderline(underline);
       return f;
       }

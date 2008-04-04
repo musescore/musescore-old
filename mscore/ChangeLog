@@ -1,4 +1,13 @@
+4.4.8 (ws)
+      - can now create *.png files from command line
+        (example: mscore promenade.msc -o promenade.png)
+      - big changes to drawing engine to get rid of differences between
+        display and printout. Screen layout is now calculated at printer
+        resolution (1200dpi) and scaled down. No relayout needed anymore
+        for printing.
 2.4.8 (ws)
+      - change lyrics underline input
+      - check for rtc timer if midi output selected
       - bind midi commands to staff text (program change, controller)
       - implement delete staff text
 31.3.8 (lv)

@@ -38,7 +38,7 @@ void TrillSegment::draw(QPainter& p) const
       {
       QRectF b1 = symbols[trillSym].bbox();
       QRectF b2 = symbols[trillelementSym].bbox();
-      qreal w2  = symbols[trillelementSym].width();
+      qreal w2  = symbols[trillelementSym].width(mag());
       int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);
 
       symbols[trillSym].draw(p, -b1.x(), 0);

@@ -53,6 +53,10 @@
 #include "staff.h"
 #include "driver.h"
 
+QPaintDevice* pdev;
+double PDPI, DPI, DPMM;
+double SPATIUM;
+
 QTextStream cout(stdout);
 QTextStream eout(stderr);
 
@@ -69,10 +73,6 @@ struct ProjectItem {
       };
 
 QList<ProjectItem*> projectList;
-
-int appDpiX = 75;
-int appDpiY = 75;
-double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
 bool converterMode = false;
@@ -1119,8 +1119,7 @@ void MuseScore::setCurrentScore(int idx)
 
       cs->setSpatium(cs->layout()->spatium());
       setMag(cs->mag());
-      canvas->setXoffset(cs->xoffset());
-      canvas->setYoffset(cs->yoffset());
+      canvas->setOffset(cs->xoffset(), cs->yoffset());
 
       setWindowTitle("MuseScore: " + cs->name());
       canvas->setScore(cs, cs->layout());
@@ -1219,8 +1218,7 @@ void MuseScore::showPageSettings()
 
 void MuseScore::pageSettingsChanged()
       {
-//TODO      cs->pages()->update();
-      setMag(cs->mag());
+      cs->start();
       canvas->updateNavigator(true);
       cs->setLayoutAll(true);
       cs->end();
@@ -1456,16 +1454,16 @@ int main(int argc, char* argv[])
       argc -= optind;
       ++argc;
 
+      pdev = new QPrinter(QPrinter::HighResolution);
       QWidget wi(0);
-      appDpiX = wi.logicalDpiX();
-      appDpiY = wi.logicalDpiY();
 
-      DPI  = appDpiX;     // drawing resolution
+      PDPI = wi.logicalDpiX();         // physical resolution
+      DPI  = pdev->logicalDpiX();       // logical drawing resolution
       DPMM = DPI / INCH;  // dots/mm
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
-      _spatium = 20.0 / 72.0 * DPI / 4.0;
+      _spatium = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
 
@@ -1636,9 +1634,9 @@ int main(int argc, char* argv[])
             else if (fn.endsWith(".mid"))
                   rv = cs->saveMidi(fn);
             else if (fn.endsWith(".pdf"))
-                  rv = cs->savePdf(fn);
+                  rv = cs->savePsPdf(fn, QPrinter::PdfFormat);
             else if (fn.endsWith(".ps"))
-                  rv = cs->savePs(fn);
+                  rv = cs->savePsPdf(fn, QPrinter::PostScriptFormat);
             else if (fn.endsWith(".png"))
                   rv = cs->savePng(fn);
             else if (fn.endsWith(".svg"))

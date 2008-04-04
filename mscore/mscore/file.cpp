@@ -22,6 +22,7 @@
  File handling: loading and saving.
  */
 
+#include "globals.h"
 #include "config.h"
 #include "mscore.h"
 #include "canvas.h"
@@ -64,8 +65,6 @@
 #include "excerpt.h"
 #include "system.h"
 #include "tuplet.h"
-
-double printerMag = 1.0;
 
 //---------------------------------------------------------
 //   load
@@ -382,13 +381,13 @@ bool MuseScore::saveAs()
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
-            return cs->savePdf(fn);
+            return cs->savePsPdf(fn, QPrinter::PdfFormat);
             }
       if (selectedFilter == fl[5]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
-            return cs->savePs(fn);
+            return cs->savePsPdf(fn, QPrinter::PostScriptFormat);
             }
       if (selectedFilter == fl[6]) {
             // save as png file *.png
@@ -1012,12 +1011,7 @@ void Score::checkTuplets()
 
 void Score::printFile()
       {
-      //
-      // HighResolution gives higher output quality
-      // but layout may be slightly different
-
       QPrinter printer(QPrinter::HighResolution);
-//      QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
@@ -1051,20 +1045,6 @@ void Score::print(QPrinter* printer)
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      qreal oldSpatium = _spatium;
-      double oldDPI    = DPI;
-      DPI              = printer->logicalDpiX();         // drawing resolution
-
-      //HACK:
-      printerMag = DPI / oldDPI;    // used for text line spacing
-
-      _spatium *= printerMag;
-      setSpatium(_spatium);
-
-      QPaintDevice* oldPaintDevice = layout()->paintDevice();
-      layout()->setPaintDevice(printer);
-      layout()->doLayout();
-
       QList<const Element*> el;
       foreach (const Element* element, _gel)
             element->collectElements(el);
@@ -1091,29 +1071,16 @@ void Score::print(QPrinter* printer)
                   }
             }
       p.end();
-      _printing  = false;
-      printerMag = 1.0;
-      DPI        = oldDPI;
-      DPMM       = DPI / INCH;                     // dots/mm
-
-      _spatium = oldSpatium;
-      setSpatium(_spatium);
-      layout()->setPaintDevice(oldPaintDevice);
-      layout()->doLayout();
+      _printing = false;
       }
 
 //---------------------------------------------------------
-//   savePdf
+//   savePsPdf
 //---------------------------------------------------------
 
-bool Score::savePdf(const QString& saveName)
+bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
-      //
-      // HighResolution gives higher output quality
-      // but layout may be slightly different
-
       QPrinter printer(QPrinter::HighResolution);
-      // QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
@@ -1121,33 +1088,7 @@ bool Score::savePdf(const QString& saveName)
       printer.setColorMode(QPrinter::Color);
       printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
-      printer.setOutputFormat(QPrinter::PdfFormat);
-      printer.setOutputFileName(saveName);
-
-      print(&printer);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   savePs
-//---------------------------------------------------------
-
-bool Score::savePs(const QString& saveName)
-      {
-      //
-      // HighResolution gives higher output quality
-      // but layout may be slightly different
-
-      QPrinter printer(QPrinter::HighResolution);
-      // QPrinter printer;
-      printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
-      printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-      printer.setCreator("MuseScore Version: " VERSION);
-      printer.setFullPage(true);
-      printer.setColorMode(QPrinter::Color);
-      printer.setDocName(name());
-      printer.setDoubleSidedPrinting(pageFormat()->twosided);
-      printer.setOutputFormat(QPrinter::PostScriptFormat);
+      printer.setOutputFormat(format);
       printer.setOutputFileName(saveName);
 
       print(&printer);
@@ -1212,37 +1153,24 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
-      QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
-      double w = r.width();
-      double h = r.height();
-#if 0
-      // scaling of fonts does not work
-
-      QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
-      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
-      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-      printer.fill(0);
-#else
-      QPixmap printer(lrint(w), lrint(h));
-      printer.fill(QColor(0, 0, 0, 0));
-#endif
-
-      QPainter p(&printer);
-      QPaintDevice* oldPaintDevice = layout()->paintDevice();
-      layout()->setPaintDevice(&printer);
-
-      layout()->doLayout();
-
       if (canvas()->lassoRect().isEmpty()) {
             Page* page = _layout->pages().front();
             QRectF r = page->bbox();
             canvas()->setLassoRect(r);
             }
-      canvas()->paintLasso(p);
+      QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
+      double w = r.width() * PDPI / DPI;
+      double h = r.height() * PDPI / DPI;
+
+      QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
+      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+      printer.fill(0);
+
+      QPainter p(&printer);
+      canvas()->paintLasso(p, PDPI / DPI);
       bool rv = printer.save(name, "png");
 
-      layout()->setPaintDevice(oldPaintDevice);
-      layout()->doLayout();
       return rv;
       }
 

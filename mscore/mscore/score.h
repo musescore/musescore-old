@@ -455,8 +455,7 @@ class Score : public QObject {
       bool saveXml(const QString& name);
       bool saveMxl(const QString& name);
       bool saveMidi(const QString& name);
-      bool savePdf(const QString& name);
-      bool savePs(const QString& name);
+      bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       bool savePng(const QString& name);
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);

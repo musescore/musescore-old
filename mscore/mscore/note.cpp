@@ -640,7 +640,7 @@ void ShadowNote::draw(QPainter& p) const
 
             symbols[quartheadSym].draw(p);
 
-            double x1 = symbols[quartheadSym].width()/2 - _spatium;
+            double x1 = symbols[quartheadSym].width(mag())*.5 - _spatium;
             double x2 = x1 + 2 * _spatium;
 
             for (int i = -2; i >= _line; i -= 2) {

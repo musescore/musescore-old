@@ -74,8 +74,7 @@ void PagePreview::setMag()
       double mag1 = (width()  - 20) / (_score->pageFormat()->width() * DPI);
       double mag2 = (height() - 20) / (_score->pageFormat()->height() * DPI);
       qreal  m    = (mag1 > mag2) ? mag2 : mag1;
-      matrix.setMatrix(m, matrix.m12(), matrix.m21(),
-         m * qreal(appDpiY)/qreal(appDpiX), 10, 10);
+      matrix.setMatrix(m, matrix.m12(), matrix.m21(), m, 10, 10);
       }
 
 //---------------------------------------------------------

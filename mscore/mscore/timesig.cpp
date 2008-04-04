@@ -279,14 +279,19 @@ void TimeSig::draw(QPainter& p) const
             if (z4)
                   zs += QString("+%1").arg(z4);
             QString ns = QString("%1").arg(n);
-            p.setFont(symbols[allabreveSym].font(mag()));
+//            p.setFont(symbols[allabreveSym].font(mag()));
+            p.setFont(symbols[allabreveSym].font());
 
             QRectF r(0.0, 0.0 * _spatium , 0.0, 0.0);
             QRectF rz = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, zs);
             QRectF rn = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, ns);
 
-            p.drawText(QPointF(0.0, 2.0 * _spatium * mag()), zs);
-            p.drawText(QPointF((rz.width()-rn.width())*.5, 4.0 * _spatium * mag()), ns);
+            double m = _spatium / (DPI * SPATIUM20);
+            double im = 1.0 / m;
+            p.scale(m, m);
+            p.drawText(QPointF(0.0, 2.0 * _spatium * mag())*im, zs);
+            p.drawText(QPointF((rz.width()-rn.width())*.5, 4.0 * _spatium * mag()) * im, ns);
+            p.scale(im, im);
             }
       }
 

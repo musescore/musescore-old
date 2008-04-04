@@ -142,7 +142,6 @@ class Canvas : public QFrame, public Viewer {
       void setBackground(const QColor&);
       void setForeground(QPixmap*);
       void setForeground(const QColor&);
-      void setChanged(double mag);
 
       Page* addPage();
 
@@ -160,24 +159,10 @@ class Canvas : public QFrame, public Viewer {
       void setScore(Score* s, ScoreLayout*);
 
       qreal mag() const;
-      qreal xoffset() const   { return _matrix.dx();  }
-      qreal yoffset() const   { return _matrix.dy();  }
+      qreal xoffset() const;
+      qreal yoffset() const;
       void setMag(qreal m);
-      void setXoffset(qreal x)  {
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), x, _matrix.dy());
-            imatrix = _matrix.inverted();
-            }
-      void setYoffset(qreal y)  {
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), _matrix.dx(), y);
-            imatrix = _matrix.inverted();
-            }
-      void setOffset(qreal x, qreal y) {
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), x, y);
-            imatrix = _matrix.inverted();
-            }
+      void setOffset(qreal x, qreal y);
       qreal xMag() const { return _matrix.m11(); }
       qreal yMag() const { return _matrix.m22(); }
 
@@ -193,7 +178,7 @@ class Canvas : public QFrame, public Viewer {
       Element* elementNear(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
       void setLassoRect(const QRectF& r) { _lassoRect = r; }
-      void paintLasso(QPainter& p);
+      void paintLasso(QPainter& p, double mag);
       };
 
 extern int searchStaff(const Element* element);

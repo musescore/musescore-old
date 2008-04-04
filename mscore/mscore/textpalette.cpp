@@ -161,7 +161,6 @@ TextPalette::TextPalette(QWidget* parent)
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
       connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
       connect(frameWidth, SIGNAL(valueChanged(double)),  SLOT(borderChanged(double)));
-//      connect(marginWidth, SIGNAL(valueChanged(double)),  SLOT(marginChanged(double)));
       connect(paddingWidth, SIGNAL(valueChanged(double)), SLOT(paddingChanged(double)));
       connect(borderRounding, SIGNAL(valueChanged(int)), SLOT(frameRoundChanged(int)));
       connect(circle, SIGNAL(toggled(bool)), SLOT(circleToggled(bool)));
@@ -351,20 +350,6 @@ void TextPalette::borderChanged(double val)
       _textElement->score()->end();
       }
 
-#if 0
-//---------------------------------------------------------
-//   marginChanged
-//---------------------------------------------------------
-
-void TextPalette::marginChanged(double val)
-      {
-      _textElement->setMarginWidth(val);
-      mscore->activateWindow();
-      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-      _textElement->score()->end();
-      }
-#endif
-
 //---------------------------------------------------------
 //   paddingChanged
 //---------------------------------------------------------
@@ -372,7 +357,6 @@ void TextPalette::marginChanged(double val)
 void TextPalette::paddingChanged(double val)
       {
       _textElement->setPaddingWidth(val);
-//      mscore->activateWindow();
       _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
       _textElement->score()->end();
       }
@@ -384,7 +368,6 @@ void TextPalette::paddingChanged(double val)
 void TextPalette::frameRoundChanged(int val)
       {
       _textElement->setFrameRound(val);
-//      mscore->activateWindow();
       _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
       _textElement->score()->end();
       }
