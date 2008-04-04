@@ -57,11 +57,12 @@ class Sym {
       int getFontId() const                { return fontId;  }
       const QFont& font() const            { return _font;   }
       void setCode(const QChar& c)         { _code = c;      }
-      void draw(QPainter& painter, qreal x, qreal y, int n) const;
+      void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, qreal x, qreal y) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;
       void draw(QPainter& painter) const;
       void draw(QPainter& painter, double mag) const;
+      static void writeCtable();
       };
 
 extern QVector<Sym> symbols;
