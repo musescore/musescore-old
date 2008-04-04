@@ -315,7 +315,7 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       QFont font(tb->defaultFont());
       textFont->setCurrentFont(font);
 
-      textSize->setValue(font.pointSizeF());
+      textSize->setValue(font.pixelSize() * PPI / DPI);
       italic->setChecked(font.italic());
       bold->setChecked(font.bold());
       if (tb->frameWidth()) {
@@ -344,7 +344,7 @@ void LineProperties::accept()
       QFont f(textFont->currentFont());
       f.setBold(bold->isChecked());
       f.setItalic(italic->isChecked());
-      f.setPointSizeF(textSize->value());
+      f.setPixelSize(lrint(textSize->value() * DPI / PPI));
       tb->setDefaultFont(f);
       if (frame->isChecked()) {
             tb->setFrameWidth(frameWidth->value());

@@ -43,6 +43,7 @@ TextBase::TextBase()
       {
       _doc          = new QTextDocument(0);
       _doc->setUseDesignMetrics(true);
+
       _frameWidth   = 0.0;
       _paddingWidth = 0.0;
       _frameColor   = QColor(Qt::black);
@@ -188,13 +189,9 @@ bool TextBase::readProperties(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void TextBase::layout(ScoreLayout* layout)
+void TextBase::layout(ScoreLayout*)
       {
-      QPaintDevice* device = layout->paintDevice();
-      double dpmm          = double(device->logicalDpiX()) / INCH;
-
-      _doc->documentLayout()->setPaintDevice(device);
-
+      _doc->documentLayout()->setPaintDevice(pdev);
       _doc->setTextWidth(-1.0);
       _doc->setTextWidth(-1.0);
 
@@ -217,7 +214,9 @@ void TextBase::layout(ScoreLayout* layout)
                         frame.setWidth(frame.height());
                         }
                   }
-            double w = (_paddingWidth + _frameWidth * .5) * dpmm;
+            double w = (_paddingWidth + _frameWidth * .5) * DPMM;
+            frame.adjust(-w, -w, w, w);
+            w = _frameWidth * DPMM;
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
@@ -246,12 +245,12 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
             }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
+      _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
       _doc->documentLayout()->draw(&p, c);
 
       // draw border
       if (_frameWidth > 0.0) {
-            double dpmm = double(p.device()->logicalDpiX()) / INCH;
-            p.setPen(QPen(QBrush(_frameColor), _frameWidth * dpmm));
+            p.setPen(QPen(QBrush(_frameColor), _frameWidth * DPMM));
             p.setBrush(QBrush(Qt::NoBrush));
             if (_circle)
                   p.drawArc(frame, 0, 5760);
@@ -1057,12 +1056,10 @@ qreal TextB::basePosition() const
 
 double TextB::lineSpacing() const
       {
-      extern double printerMag;
-
       QTextBlock tb   = doc()->begin();
       QTextLayout* tl = tb.layout();
       QFontMetricsF fm(tl->font());
-      return fm.lineSpacing() * printerMag;     // HACK
+      return fm.lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -1072,12 +1069,10 @@ double TextB::lineSpacing() const
 
 double TextB::lineHeight() const
       {
-      extern double printerMag;
-
       QTextBlock tb   = doc()->begin();
       QTextLayout* tl = tb.layout();
       QFontMetricsF fm(tl->font());
-      return fm.height() * printerMag;
+      return fm.height();
       }
 
 //---------------------------------------------------------

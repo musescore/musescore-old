@@ -41,27 +41,27 @@ class Sym {
       QChar _code;
       int fontId;
       const char* _name;
-      mutable QRectF _bbox;   // cached bounding box at mag X 10 at mag 1.0
-      mutable qreal  _width;  // cached width at mag X 10 at mag 1.0
+      QFont _font;
+      double w;
+      QRectF _bbox;
 
    public:
       Sym() { _code = 0; }
       Sym(const char* name, const QChar& c, int fid);
 
-      QFont font(double mag = 1.0) const;
-      const char* name() const { return _name; }
+      const char* name() const             { return _name; }
       const QRectF bbox(double mag = 1.0) const;
-      double width(double mag = 1.0) const;
       double height(double mag = 1.0) const;
-      QChar code() const           { return _code;   }
-      int getFontId() const        { return fontId;  }
-      void setCode(const QChar& c) { _code = c;      }
+      double width(double) const;
+      QChar code() const                   { return _code;   }
+      int getFontId() const                { return fontId;  }
+      const QFont& font() const            { return _font;   }
+      void setCode(const QChar& c)         { _code = c;      }
       void draw(QPainter& painter, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, qreal x, qreal y) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;
       void draw(QPainter& painter) const;
       void draw(QPainter& painter, double mag) const;
-      static void writeCtable();
       };
 
 extern QVector<Sym> symbols;

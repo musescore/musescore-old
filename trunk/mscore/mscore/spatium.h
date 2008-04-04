@@ -23,9 +23,6 @@
 
 extern double _spatium; // spatium value in points
 
-// size of Spatium for 20pt font in inch:
-static const double spatiumBase20 = 20.0 / 72.0 / 4.0; // size of Spatium for 20pt font in inch
-
 //---------------------------------------------------------
 //   Spatium
 //    - a unit of measure

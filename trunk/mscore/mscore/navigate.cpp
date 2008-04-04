@@ -320,8 +320,8 @@ void Score::pageNext()
       if (_layout->pages().empty())
             return;
       Page* page = _layout->pages().back();
-      qreal mag  = canvas()->xMag();
-      qreal x    = canvas()->xoffset() - (page->width()+25.0) * mag;
+      qreal mag  = canvas()->xMag() * DPI / PDPI;
+      qreal x    = canvas()->xoffset() - (page->width() + 25.0) * mag;
       qreal lx   = 10.0 - page->canvasPos().x() * mag;
       if (x < lx)
             x = lx;
@@ -339,7 +339,8 @@ void Score::pagePrev()
       if (_layout->pages().empty())
             return;
       Page* page = _layout->pages().back();
-      qreal x = canvas()->xoffset() +( page->width() + 25.0) * canvas()->xMag();
+      qreal mag  = canvas()->xMag() * DPI / PDPI;
+      qreal x = canvas()->xoffset() +( page->width() + 25.0) * mag;
       if (x > 10.0)
             x = 10.0;
       canvas()->setOffset(x, 10.0);

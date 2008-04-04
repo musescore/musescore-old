@@ -80,14 +80,6 @@ void MidiSeq::threadStart(void*)
                      rt_param.sched_priority);
                   }
             }
-      timer = new RtcTimer;
-      if (!timer->initTimer()) {
-            delete timer;
-            timer = 0;
-            fprintf(stderr, "no midi timer available\n");
-            }
-      else if (debugMode)
-            printf("midi RTC started\n");
       if (!initRealtimeTimer())
             printf("RTC init failed\n");
       updatePollFd();
@@ -145,6 +137,13 @@ bool MidiSeq::initRealtimeTimer()
 
 bool MidiSeq::start(int prio)
       {
+      timer = new RtcTimer;
+      if (!timer->initTimer()) {
+            delete timer;
+            timer = 0;
+            fprintf(stderr, "MidiSeq:start(): no midi timer available\n");
+            return true;
+            }
       Thread::start(prio);
       return false;
       }

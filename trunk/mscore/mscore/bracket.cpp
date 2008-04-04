@@ -98,14 +98,8 @@ void Bracket::layout(ScoreLayout* layout)
             TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
             QChar up = symbols[brackettipsUp].code();
             QChar down = symbols[brackettipsDown].code();
-            QFont f;
-            f.setFamily(s->family);
 
-            //?!?:
-            extern int appDpiX;
-            double mmag = DPI / double(appDpiX);
-            double mag  = mmag * _spatium / (spatiumBase20 * DPI);
-            f.setPointSizeF(20.0 * mag);
+            QFont f(s->family, lrint(2.0 * _spatium));
 
             qreal o   = _spatium * .27;
             qreal slw = point(score()->style()->staffLineWidth);
@@ -247,17 +241,10 @@ void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
             qreal w = point(score()->style()->bracketWidth);
 
             TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
-            QChar up(0xe19c);
-            QChar down(0xe19d);
-            QFont f;
-            f.setFamily(s->family);
+            QChar up     = symbols[brackettipsUp].code();
+            QChar down   = symbols[brackettipsDown].code();
 
-            //?!?:
-            extern int appDpiX;
-            double mmag   = DPI / double(appDpiX);
-            double mag = mmag * _spatium / (spatiumBase20 * DPI);
-            f.setPointSizeF(20.0 * mag);
-
+            QFont f(s->family, lrint(2.0 * _spatium));
             qreal o = _spatium * .27;
             qreal slw = point(score()->style()->staffLineWidth);
 
@@ -305,7 +292,7 @@ void Bracket::endEditDrag()
       h2 = (ey - sy) * .5;
 
       int span = staffIdx2 - staffIdx1 + 1;
-      score()->staff(staffIdx1)->setBracketSpan(_level, span);
+      staff()->setBracketSpan(_level, span);
       }
 
 //---------------------------------------------------------

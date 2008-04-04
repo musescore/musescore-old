@@ -285,7 +285,7 @@ QRectF BarLine::bbox() const
             case START_REPEAT:
             case END_REPEAT:
                   w  += score()->style()->endBarWidth + 2 * score()->style()->endBarDistance;
-                  dw = point(w) + symbols[dotSym].width();
+                  dw = point(w) + symbols[dotSym].width(mag());
                   break;
             case END_BAR:
                   w += score()->style()->endBarWidth + score()->style()->endBarDistance;
@@ -293,7 +293,7 @@ QRectF BarLine::bbox() const
                   break;
             case  END_START_REPEAT:
                   w  += score()->style()->endBarWidth + 3 * score()->style()->endBarDistance;
-                  dw = point(w) + 2 * symbols[dotSym].width();
+                  dw = point(w) + 2 * symbols[dotSym].width(mag());
                   break;
             case BROKEN_BAR:
             case NORMAL_BAR:
@@ -442,6 +442,7 @@ void BarLine::endEditDrag()
       int newSpan = staffIdx2 - staffIdx1 + 1;
       if (newSpan != _span) {
             _span = newSpan;
+            staff()->setBarLineSpan(_span);
             }
       }
 

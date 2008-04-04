@@ -784,10 +784,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source># (double sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bass Note / Inversion</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2440,15 +2436,7 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>15va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>15vb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5261,6 +5249,50 @@ set tempo.</source>
     <name>StaffTextProperties</name>
     <message>
         <source>MuseScore: Staff Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Program Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank-H:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank-L:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Controller Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Controller:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument defined action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action Name:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

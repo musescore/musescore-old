@@ -196,7 +196,7 @@ void TextStyleDialog::nameSelected(int n)
       ryOffset->setValue(s->ryoff);
 
       QFont f(s->family);
-      f.setPointSizeF(s->size);
+      f.setPixelSize(lrint(s->size * DPI / PPI));
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
       f.setBold(s->bold);
@@ -242,7 +242,7 @@ void TextStyleDialog::fontChanged()
 void TextStyleDialog::fontSizeChanged(int n)
       {
       QFont f(fontSample->font());
-      f.setPointSizeF(n);
+      f.setPixelSize(lrint(n * DPI / PPI));
       fontSample->setFont(f);
       }
 

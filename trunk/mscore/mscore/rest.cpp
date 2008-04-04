@@ -314,7 +314,7 @@ QRectF Rest::bbox() const
 
 qreal Rest::centerX() const
       {
-      return symbols[_sym].width()*.5;
+      return symbols[_sym].width(mag())*.5;
       }
 
 //---------------------------------------------------------

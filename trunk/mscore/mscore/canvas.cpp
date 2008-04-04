@@ -23,6 +23,7 @@
  Implementation of most part of class Canvas.
 */
 
+#include "globals.h"
 #include "canvas.h"
 #include "score.h"
 #include "preferences.h"
@@ -47,7 +48,6 @@
 #include "trill.h"
 #include "hairpin.h"
 #include "image.h"
-#include "globals.h"
 #include "part.h"
 #include "editdrumset.h"
 #include "editstaff.h"
@@ -80,8 +80,7 @@ Canvas::Canvas(QWidget* parent)
       bgPixmap         = 0;
       lasso            = new Lasso(_score);
 
-      setXoffset(30);
-      setYoffset(30);
+//      setOffset(30, 30);
 
       state            = NORMAL;
       cursor           = 0;
@@ -751,20 +750,28 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
 
 void Canvas::setMag(double nmag)
       {
+      nmag *= PDPI / DPI;
+
       qreal m = mag();
       if (nmag == m)
             return;
-      double deltamag = nmag / m;;
-      setXoffset(xoffset() * deltamag);
-      setYoffset(yoffset() * deltamag);
+      double deltamag = nmag / m;
+      setOffset(xoffset() * deltamag, yoffset() * deltamag);
 
-      m = nmag;
-      _matrix.setMatrix(m, _matrix.m12(), _matrix.m21(),
-         m * qreal(appDpiY)/qreal(appDpiX), _matrix.dx(), _matrix.dy());
+      _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m21(), nmag, _matrix.dx(), _matrix.dy());
       imatrix = _matrix.inverted();
 
       update();
       updateNavigator(false);
+      }
+
+//---------------------------------------------------------
+//   mag
+//---------------------------------------------------------
+
+qreal Canvas::mag() const
+      {
+      return _matrix.m11() *  DPI/PDPI;
       }
 
 //---------------------------------------------------------
@@ -1084,15 +1091,6 @@ void Canvas::setShadowNote(const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   mag
-//---------------------------------------------------------
-
-qreal Canvas::mag() const
-      {
-      return _matrix.m11();
-      }
-
-//---------------------------------------------------------
 //   fsize
 //---------------------------------------------------------
 
@@ -1301,9 +1299,7 @@ void Canvas::setViewRect(const QRectF& r)
          _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-	//
-      // this is necessary at least for qt4.1:
-      //
+
       if ((dx > 0 || dy < 0) && navigator->isVisible()) {
 		QRect r(navigator->geometry());
             r.translate(dx, dy);
@@ -1451,6 +1447,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             QDomElement e = doc.documentElement();
 
             int type = Element::readType(e, &dragOffset);
+            dragOffset *= PDPI/DPI;
+
             Element* el = 0;
             switch(type) {
                   case VOLTA:
@@ -1939,8 +1937,11 @@ void Canvas::wheelEvent(QWheelEvent* event)
 
             QPointF p2 = imatrix.map(QPointF(event->pos()));
             QPointF p3 = p2 - p1;
-            int dx    = lrint(p3.x() * _mag);
-            int dy    = lrint(p3.y() * _mag);
+
+            double m = _mag * PDPI/DPI;
+
+            int dx    = lrint(p3.x() * m);
+            int dy    = lrint(p3.y() * m);
 
             _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
                _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
@@ -2126,7 +2127,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
 //   paintLasso
 //---------------------------------------------------------
 
-void Canvas::paintLasso(QPainter& p)
+void Canvas::paintLasso(QPainter& p, double mag)
       {
       QRectF r = _matrix.mapRect(lassoRect());
       double x = r.x();
@@ -2134,8 +2135,10 @@ void Canvas::paintLasso(QPainter& p)
 
       QMatrix omatrix(_matrix);
 
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-         _matrix.m22(), _matrix.dx()-x, _matrix.dy()-y);
+      double imag = 1.0 / mag;
+
+      _matrix.setMatrix(_matrix.m11() * mag, _matrix.m12(), _matrix.m21(),
+         _matrix.m22() * mag, (_matrix.dx()-x) * imag, (_matrix.dy()-y) * imag);
       imatrix = _matrix.inverted();
 
       p.setMatrix(_matrix);
@@ -2168,4 +2171,33 @@ void Canvas::paintLasso(QPainter& p)
       p.end();
       }
 
+//---------------------------------------------------------
+//   setOffset
+//---------------------------------------------------------
+
+void Canvas::setOffset(qreal x, qreal y)
+      {
+      double m = PDPI / DPI;
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), x * m, y * m);
+      imatrix = _matrix.inverted();
+      }
+
+//---------------------------------------------------------
+//   xoffset
+//---------------------------------------------------------
+
+qreal Canvas::xoffset() const
+      {
+      return _matrix.dx() * DPI / PDPI;
+      }
+
+//---------------------------------------------------------
+//   yoffset
+//---------------------------------------------------------
+
+qreal Canvas::yoffset() const
+      {
+      return _matrix.dy() * DPI / PDPI;
+      }
 

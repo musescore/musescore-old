@@ -44,10 +44,12 @@ static const QString mimeStaffListFormat("application/mscore/stafflist");
 static const QString mimeMeasureListFormat("application/mscore/measurelist");
 
 static const qreal INCH = 25.4;
-static const qreal PPI  = 72.0;     // printer points per inch
+static const qreal PPI  = 72.0;           // printer points per inch
+static const qreal SPATIUM20 = 5.0 / PPI; // size of Spatium for 20pt font in inch
 
-extern qreal DPI;       // drawing resolution
-extern qreal DPMM;      // dots/mm
+extern qreal PDPI;      // physical drawing resolution
+extern qreal DPI;       // logical drawing resolution
+extern qreal DPMM;      // logical dots/mm
 
 // used for stem and slur:
 enum Direction { AUTO, UP, DOWN };
@@ -101,10 +103,6 @@ enum NoteType {
       NOTE_INVALID
       };
 
-// to move Anchor to right of measure set
-//    OffsetType = OFFSET_REL
-//    offset     = 100
-
 const int VOICES = 4;
 const int MAX_STAVES = 4;
 
@@ -113,8 +111,7 @@ static const qreal PALETTE_SPATIUM = 1.9 * DPMM_DISPLAY;
 
 extern QString language;
 
-extern int appDpiX;
-extern int appDpiY;
-
 extern QTextStream cout, eout;
+
+extern QPaintDevice* pdev;
 #endif

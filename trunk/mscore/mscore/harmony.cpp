@@ -757,7 +757,7 @@ void Harmony::buildText()
       QTextCharFormat sf(f);
 #if 0
       double extraMag = 1.0;
-      double mag = _spatium * extraMag / (spatiumBase20 * DPI);
+      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
       QFont font("MScore1");
       font.setPointSizeF(20.0 * mag);
       sf.setFont(font);

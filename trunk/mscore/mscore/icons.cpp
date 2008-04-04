@@ -65,30 +65,25 @@ QIcon acciaccaturaIcon, appoggiaturaIcon;
 
 //---------------------------------------------------------
 //   symIcon
+//    default size=20
 //---------------------------------------------------------
 
 QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
-      double iconSpatium = 1.3 * DPMM_DISPLAY;
-
-      double ospatium = _spatium;
-      _spatium  = iconSpatium * (size / 20.0);
-
-      QRectF bb = sc.bbox();
+      double mag = (size/20.0) * 0.6 * (_spatium / (SPATIUM20 * DPI)) * PDPI / DPI;
+      QRectF bb = sc.bbox(mag);
       qreal w   = bb.width();
       qreal h   = bb.height();
-      qreal x   = (width - w) / 2 - bb.x();
-      qreal y   = ((height - h) / 2) - bb.y();
+      qreal x   = (width  - w) * .5 - bb.x();
+      qreal y   = (height - h) * .5 - bb.y();
 
       QPixmap image(width, height);
       image.fill(QColor(255, 255, 255, 0));
-
       QPainter painter(&image);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
-      sc.draw(painter, x, y);
+      sc.draw(painter, mag, x, y);
       painter.end();
-      _spatium = ospatium;
       return QIcon(image);
       }
 

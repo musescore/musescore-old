@@ -456,8 +456,7 @@ bool AlsaMidi::init()
 
 bool AlsaMidi::start()
       {
-      midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
-      return true;
+      return !midiSeq->start(realTimePriority ? realTimePriority + 2 : 0);
       }
 
 //---------------------------------------------------------

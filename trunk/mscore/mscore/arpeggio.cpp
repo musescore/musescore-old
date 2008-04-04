@@ -78,7 +78,7 @@ QRectF Arpeggio::bbox() const
       {
       QRectF b = symbols[arpeggioSym].bbox();
 //      printf("====%f %f %f %f\n", b.x(), b.y(), b.height(), b.width());
-      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(), _height);
+      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(mag()), _height);
       }
 
 //---------------------------------------------------------
