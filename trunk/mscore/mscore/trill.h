@@ -45,8 +45,6 @@ class TrillSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Trill : public SLine {
-      QString text;
-
    public:
       Trill(Score* s);
       virtual Trill* clone() const { return new Trill(*this); }

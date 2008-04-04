@@ -27,22 +27,19 @@
 #include "sym.h"
 #include "layout.h"
 
-static const QChar TC(0xe161);
-static const QChar TLC(0xe16f);
-
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
 void TrillSegment::draw(QPainter& p) const
       {
-      QRectF b1 = symbols[trillSym].bbox();
-      QRectF b2 = symbols[trillelementSym].bbox();
+      QRectF b1 = symbols[trillSym].bbox(mag());
+      QRectF b2 = symbols[trillelementSym].bbox(mag());
       qreal w2  = symbols[trillelementSym].width(mag());
       int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);
 
-      symbols[trillSym].draw(p, -b1.x(), 0);
-      symbols[trillelementSym].draw(p, b1.width() - b2.x(), b2.y(), n);
+      symbols[trillSym].draw(p, mag(), -b1.x(), 0);
+      symbols[trillelementSym].draw(p, mag(), b1.width() - b2.x(), b2.y(), n);
       }
 
 //---------------------------------------------------------
@@ -51,7 +48,7 @@ void TrillSegment::draw(QPainter& p) const
 
 QRectF TrillSegment::bbox() const
       {
-      QRectF rr(symbols[trillSym].bbox());
+      QRectF rr(symbols[trillSym].bbox(mag()));
       QRectF r(0.0, rr.y(), pos2().x(), rr.height());
       return r;
       }
@@ -63,7 +60,6 @@ QRectF TrillSegment::bbox() const
 Trill::Trill(Score* s)
   : SLine(s)
       {
-      text = TC;
       }
 
 //---------------------------------------------------------
