@@ -69,7 +69,7 @@ QPoint scorePos(0,0);
 QSize  scoreSize(950, 500);
 
 MuseScore* mscore;
-bool debugMode       = true;
+bool debugMode       = false;
 bool layoutDebug     = false;
 bool noSeq           = false;
 bool noMidi          = false;
