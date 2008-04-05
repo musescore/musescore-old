@@ -381,6 +381,7 @@ void Score::renumberMeasures()
 
 void Score::read(QString name)
       {
+      _mscVersion = MSCVERSION;
       _saved = false;
       info.setFile(name);
 

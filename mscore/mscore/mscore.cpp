@@ -209,7 +209,6 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
-      mscore = this;
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
@@ -1410,12 +1409,14 @@ int main(int argc, char* argv[])
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 //      signal(SIGFPE, signalHandler);
 
-      setDefaultStyle();
       QApplication app(argc, argv);
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
+      qApp->setStyleSheet(appStyleSheet);
       qApp->setWindowIcon(windowIcon);
+
+      setDefaultStyle();
 
       int c;
       while ((c = getopt(argc, argv, "vdLsmiIOo:")) != EOF) {
@@ -1458,8 +1459,17 @@ int main(int argc, char* argv[])
       QWidget wi(0);
 
       PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = pdev->logicalDpiX();       // logical drawing resolution
+      DPI  = pdev->logicalDpiX();      // logical drawing resolution
       DPMM = DPI / INCH;  // dots/mm
+
+      // HACK:
+      QFont f = qApp->font();
+      double size = f.pointSizeF();
+      if (size > 0.0) {
+            int px = lrint(size * PDPI / PPI);
+            f.setPixelSize(px);
+            qApp->setFont(f);
+            }
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
@@ -1541,8 +1551,9 @@ int main(int argc, char* argv[])
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
       //
+
 #ifndef __MINGW32__
-      setenv("LANG", "mops", 1);
+      setenv("LANG", "C", 1);
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
@@ -1615,7 +1626,6 @@ int main(int argc, char* argv[])
             mscore->getPlayPanel()->move(preferences.playPanelPos);
 
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
-      qApp->setStyleSheet(appStyleSheet);
 
       if (converterMode) {
             QString fn(outFileName);
