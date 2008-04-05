@@ -1058,7 +1058,7 @@ double TextB::lineSpacing() const
       {
       QTextBlock tb   = doc()->begin();
       QTextLayout* tl = tb.layout();
-      QFontMetricsF fm(tl->font());
+      QFontMetricsF fm(tl->font(), pdev);
       return fm.lineSpacing();
       }
 
@@ -1071,7 +1071,7 @@ double TextB::lineHeight() const
       {
       QTextBlock tb   = doc()->begin();
       QTextLayout* tl = tb.layout();
-      QFontMetricsF fm(tl->font());
+      QFontMetricsF fm(tl->font(), pdev);
       return fm.height();
       }
 

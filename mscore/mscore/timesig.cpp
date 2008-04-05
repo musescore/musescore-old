@@ -243,10 +243,7 @@ QRectF TimeSig::bbox() const
             if (z4)
                   zs += QString("+%1").arg(z4);
             QString ns = QString("%1").arg(n);
-            QPaintDevice* pd = 0;
-            if (score())
-                  pd = score()->layout()->paintDevice();
-            QFontMetricsF fm(symbols[allabreveSym].font(), pd);
+            QFontMetricsF fm(symbols[allabreveSym].font(), pdev);
 
             qreal  zw = fm.width(zs);
             qreal  nw = fm.width(ns);
