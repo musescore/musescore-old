@@ -22,6 +22,7 @@
 #define __GLOBALS_H__
 
 #define MSC_VERSION     "1.8"
+static const int MSCVERSION = 108;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -103,8 +104,8 @@ enum NoteType {
       NOTE_INVALID
       };
 
-const int VOICES = 4;
-const int MAX_STAVES = 4;
+static const int VOICES = 4;
+static const int MAX_STAVES = 4;
 
 static const qreal DPMM_DISPLAY = 4;   // 100 DPI
 static const qreal PALETTE_SPATIUM = 1.9 * DPMM_DISPLAY;
