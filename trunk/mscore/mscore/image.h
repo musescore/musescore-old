@@ -35,7 +35,7 @@ class Image : public BSymbol {
       mutable bool _dirty;
 
       virtual bool startEdit(const QPointF&);
-      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
       virtual void endEdit();
       virtual void draw(QPainter&) const;
       virtual void updateGrips(int*, QRectF*) const;

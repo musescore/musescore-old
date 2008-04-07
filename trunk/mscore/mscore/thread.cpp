@@ -210,15 +210,15 @@ void Thread::loop()
       pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, 0);
       pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, 0);
 
-      int policy;
-      /*if ((policy = sched_getscheduler (0)) < 0) {
+/*      int policy;
+      if ((policy = sched_getscheduler (0)) < 0) {
             printf("Thread: Cannot get current client scheduler: %s\n", strerror(errno));
             }
-*/
       if (debugMode)
             printf("Thread <%s, id %p> has %s priority %d\n",
                _name, (void *)pthread_self(), policy == SCHED_FIFO ? "SCHED_FIFO" : "SCHED_OTHER",
                 realTimePriority);
+*/
 
       _running = true;
 

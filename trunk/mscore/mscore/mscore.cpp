@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <signal.h>
+// #include <signal.h>
 #include <fenv.h>
 #include "config.h"
 
@@ -1134,19 +1134,6 @@ void MuseScore::setCurrentScore(int idx)
       }
 
 //---------------------------------------------------------
-//   signalHandler
-//---------------------------------------------------------
-
-#if 0
-static void signalHandler(int)
-      {
-      printf("fp exception\n");
-//      feclearexcept(fegetexcept());
-      abort();
-      }
-#endif
-
-//---------------------------------------------------------
 //   midiReceived
 //---------------------------------------------------------
 
@@ -1406,8 +1393,8 @@ void MuseScore::removeTab(int i)
 
 int main(int argc, char* argv[])
       {
-//      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-//      signal(SIGFPE, signalHandler);
+      // feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+      // feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 
       QApplication app(argc, argv);
       QCoreApplication::setOrganizationName("MusE");
@@ -1463,6 +1450,9 @@ int main(int argc, char* argv[])
       DPMM = DPI / INCH;  // dots/mm
 
       // HACK:
+      // without setting the application font to a pixel size,
+      // menu entries are garbled
+#if 1
       QFont f = qApp->font();
       double size = f.pointSizeF();
       if (size > 0.0) {
@@ -1470,6 +1460,7 @@ int main(int argc, char* argv[])
             f.setPixelSize(px);
             qApp->setFont(f);
             }
+#endif
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium

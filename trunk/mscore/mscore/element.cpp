@@ -1222,7 +1222,7 @@ bool Element::startEdit(const QPointF&)
 //   editDrag
 //---------------------------------------------------------
 
-void Element::editDrag(int, const QPointF&, const QPointF& delta)
+void Element::editDrag(int, const QPointF& delta)
       {
       setUserOff(userOff() + delta / _spatium);
       }

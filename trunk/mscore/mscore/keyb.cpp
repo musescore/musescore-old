@@ -126,7 +126,7 @@ printf("keyPressEvent:: ESC\n");
                   ev->ignore();
                   return;
             }
-      e->editDrag(curGrip, grip[curGrip].center(), delta);
+      e->editDrag(curGrip, delta);
       updateGrips();
       _score->end();
       ev->accept();

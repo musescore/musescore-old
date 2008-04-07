@@ -48,7 +48,7 @@ class Box : public MeasureBase {
 
       virtual bool startEdit(const QPointF&);
       virtual bool edit(int, QKeyEvent*);
-      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;

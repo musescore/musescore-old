@@ -93,7 +93,7 @@ bool Box::edit(int, QKeyEvent*)
 //   editDrag
 //---------------------------------------------------------
 
-void Box::editDrag(int, const QPointF&, const QPointF& d)
+void Box::editDrag(int, const QPointF& d)
       {
       if (type() == VBOX)
             _boxHeight += d.y();
@@ -394,12 +394,14 @@ void VBox::layout(ScoreLayout* layout)
       setbbox(QRectF(0.0, 0.0, system()->width(), boxHeight().point()));
       Box::layout(layout);
       int n    = _hboxList.size();
-      double w = (system()->width() - 2.0 * leftMargin() * DPMM) / n;
-      for (int i = 0; i < _hboxList.size(); ++i) {
-            HBox* hb = _hboxList[i];
-            hb->setPos(leftMargin() * DPMM + (i * w), topMargin() * DPMM);
-            hb->setbbox(QRectF(0.0, 0.0, w,
-               boxHeight().point() - (topMargin() + bottomMargin()) * DPMM));
+      if (n) {
+            double w = (system()->width() - 2.0 * leftMargin() * DPMM) / n;
+            for (int i = 0; i < _hboxList.size(); ++i) {
+                  HBox* hb = _hboxList[i];
+                  hb->setPos(leftMargin() * DPMM + (i * w), topMargin() * DPMM);
+                  hb->setbbox(QRectF(0.0, 0.0, w,
+                     boxHeight().point() - (topMargin() + bottomMargin()) * DPMM));
+                  }
             }
       }
 

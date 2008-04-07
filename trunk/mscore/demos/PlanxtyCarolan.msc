@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.4">
-  <Spatium>1.425</Spatium>
-  <Division>480</Division>
+<museScore version="1.8">
   <Mag>1.3</Mag>
-  <xoff>163</xoff>
-  <yoff>-100</yoff>
+  <xoff>3.45017</xoff>
+  <yoff>-2.11667</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -793,6 +791,8 @@
       <name>z</name>
       </Symbol>
     </Symbols>
+  <Spatium>1.425</Spatium>
+  <Division>480</Division>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -817,10 +817,6 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <spacing16>1</spacing16>
-    <spacing8>1.4</spacing8>
-    <spacing4>1.8</spacing4>
-    <spacing2>2.2</spacing2>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
@@ -833,7 +829,7 @@
     <beamDistance>0.5</beamDistance>
     <beamMinLen>1.25</beamMinLen>
     <beamMinSlope>0.1</beamMinSlope>
-    <beamMaxSlope>0.5</beamMaxSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
     <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
     <dotRestDistance>0.25</dotRestDistance>
@@ -841,8 +837,8 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <ticklen2Width>0.5</ticklen2Width>
-    <pageFillLimit>0.3</pageFillLimit>
+    <pageFillLimit>0.7</pageFillLimit>
+    <lastSystemFillLimit>0.5</lastSystemFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
     <hairpinWidth>0.13</hairpinWidth>
@@ -858,6 +854,12 @@
     <smallStaffMag>0.7</smallStaffMag>
     <smallNoteMag>0.7</smallNoteMag>
     <smallClefMag>0.8</smallClefMag>
+    <genClef>1</genClef>
+    <genKeysig>1</genKeysig>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -872,7 +874,7 @@
   <rights>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8.25pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Arial'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">2008</p></body></html>
     </rights>
   <siglist>
@@ -909,19 +911,17 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Harp</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Harp</p></body></html>
       </name>
     <shortName>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Hrp.</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Hrp.</p></body></html>
       </shortName>
     <Instrument>
-      <midiChannel>0</midiChannel>
       <midiProgram>46</midiProgram>
-      <volume>100</volume>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -931,24 +931,33 @@ p, li { white-space: pre-wrap; }
       <height>10</height>
       <Text>
         <subtype>Title</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Planxty Carolan</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Planxty Carolan</p></body></html>
+          </html-data>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Per MuseScore</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">Per MuseScore</p></body></html>
+          </html-data>
         </Text>
       <Text>
         <subtype>Composer</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Jirka Vyšata</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Jirka Vyšata</p></body></html>
+          </html-data>
         </Text>
       </VBox>
     <Measure number="1">
@@ -956,11 +965,12 @@ p, li { white-space: pre-wrap; }
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-0.866472" y="-1.98051"/>
-        <anchor>segment</anchor>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;">Allegro</p></body></html>
+          </html-data>
         </Tempo>
       <KeySig>
         <subtype>2</subtype>
@@ -1132,6 +1142,7 @@ p, li { white-space: pre-wrap; }
       <endRepeat>2</endRepeat>
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="81" tpc="17" ticks="120"/>
       <Note pitch="79" tpc="15" ticks="120"/>
@@ -1174,6 +1185,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="21">
       <LayoutBreak>
         <subtype>line</subtype>
+        <track>-1</track>
         </LayoutBreak>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
@@ -1360,7 +1372,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="14">
       <Clef>
-        <offset x="0" y="3"/>
+        <offset x="0" y="2.4"/>
         </Clef>
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
@@ -1389,7 +1401,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="17">
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="1"/>
+        <offset x="0" y="0.8"/>
         </Clef>
       <Note pitch="57" tpc="17" ticks="480"/>
       <Note pitch="57" tpc="17" ticks="240"/>
@@ -1425,7 +1437,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="25">
       <Clef>
-        <offset x="0" y="3"/>
+        <offset x="0" y="2.4"/>
         </Clef>
       <Note pitch="57" tpc="17" ticks="720"/>
       <Chord>
@@ -1444,4 +1456,3 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <cursorTrack>0</cursorTrack>
   </museScore>
-

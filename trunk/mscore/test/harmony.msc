@@ -1,8 +1,792 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.7">
+<museScore version="1.8">
   <Mag>1</Mag>
   <xoff>2.75167</xoff>
   <yoff>-0.211633</yoff>
+  <Symbols>
+    <rows>11</rows>
+    <columns>16</columns>
+    <idx>0</idx>
+    <name>whole rest</name>
+    <Symbol>
+      <name>whole rest</name>
+      </Symbol>
+    <idx>1</idx>
+    <name>half rest</name>
+    <Symbol>
+      <name>half rest</name>
+      </Symbol>
+    <idx>2</idx>
+    <name>outside whole rest</name>
+    <Symbol>
+      <name>outside whole rest</name>
+      </Symbol>
+    <idx>3</idx>
+    <name>outside half rest</name>
+    <Symbol>
+      <name>outside half rest</name>
+      </Symbol>
+    <idx>4</idx>
+    <name>longa rest</name>
+    <Symbol>
+      <name>longa rest</name>
+      </Symbol>
+    <idx>5</idx>
+    <name>breve rest</name>
+    <Symbol>
+      <name>breve rest</name>
+      </Symbol>
+    <idx>6</idx>
+    <name>quart rest</name>
+    <Symbol>
+      <name>quart rest</name>
+      </Symbol>
+    <idx>7</idx>
+    <name>eight rest</name>
+    <Symbol>
+      <name>eight rest</name>
+      </Symbol>
+    <idx>8</idx>
+    <name>clas quart rest</name>
+    <Symbol>
+      <name>clas quart rest</name>
+      </Symbol>
+    <idx>9</idx>
+    <name>16&apos; rest</name>
+    <Symbol>
+      <name>16&apos; rest</name>
+      </Symbol>
+    <idx>10</idx>
+    <name>32&apos;  rest</name>
+    <Symbol>
+      <name>32&apos;  rest</name>
+      </Symbol>
+    <idx>11</idx>
+    <name>64&apos; rest</name>
+    <Symbol>
+      <name>64&apos; rest</name>
+      </Symbol>
+    <idx>12</idx>
+    <name>128&apos; rest</name>
+    <Symbol>
+      <name>128&apos; rest</name>
+      </Symbol>
+    <idx>16</idx>
+    <name>zero</name>
+    <Symbol>
+      <name>zero</name>
+      </Symbol>
+    <idx>17</idx>
+    <name>one</name>
+    <Symbol>
+      <name>one</name>
+      </Symbol>
+    <idx>18</idx>
+    <name>two</name>
+    <Symbol>
+      <name>two</name>
+      </Symbol>
+    <idx>19</idx>
+    <name>three</name>
+    <Symbol>
+      <name>three</name>
+      </Symbol>
+    <idx>20</idx>
+    <name>four</name>
+    <Symbol>
+      <name>four</name>
+      </Symbol>
+    <idx>21</idx>
+    <name>five</name>
+    <Symbol>
+      <name>five</name>
+      </Symbol>
+    <idx>22</idx>
+    <name>six</name>
+    <Symbol>
+      <name>six</name>
+      </Symbol>
+    <idx>23</idx>
+    <name>seven</name>
+    <Symbol>
+      <name>seven</name>
+      </Symbol>
+    <idx>24</idx>
+    <name>eight</name>
+    <Symbol>
+      <name>eight</name>
+      </Symbol>
+    <idx>25</idx>
+    <name>nine</name>
+    <Symbol>
+      <name>nine</name>
+      </Symbol>
+    <idx>31</idx>
+    <name>sharp</name>
+    <Symbol>
+      <name>sharp</name>
+      </Symbol>
+    <idx>32</idx>
+    <name>natural</name>
+    <Symbol>
+      <name>natural</name>
+      </Symbol>
+    <idx>33</idx>
+    <name>flat</name>
+    <Symbol>
+      <name>flat</name>
+      </Symbol>
+    <idx>34</idx>
+    <name>flat flat</name>
+    <Symbol>
+      <name>flat flat</name>
+      </Symbol>
+    <idx>35</idx>
+    <name>sharp sharp</name>
+    <Symbol>
+      <name>sharp sharp</name>
+      </Symbol>
+    <idx>36</idx>
+    <name>right parenthesis</name>
+    <Symbol>
+      <name>right parenthesis</name>
+      </Symbol>
+    <idx>37</idx>
+    <name>left parenthesis</name>
+    <Symbol>
+      <name>left parenthesis</name>
+      </Symbol>
+    <idx>38</idx>
+    <name>dot</name>
+    <Symbol>
+      <name>dot</name>
+      </Symbol>
+    <idx>39</idx>
+    <name>brevis head</name>
+    <Symbol>
+      <name>brevis head</name>
+      </Symbol>
+    <idx>40</idx>
+    <name>whole head</name>
+    <Symbol>
+      <name>whole head</name>
+      </Symbol>
+    <idx>41</idx>
+    <name>half head</name>
+    <Symbol>
+      <name>half head</name>
+      </Symbol>
+    <idx>42</idx>
+    <name>quart head</name>
+    <Symbol>
+      <name>quart head</name>
+      </Symbol>
+    <idx>43</idx>
+    <name>whole diamond head</name>
+    <Symbol>
+      <name>whole diamond head</name>
+      </Symbol>
+    <idx>44</idx>
+    <name>half diamond head</name>
+    <Symbol>
+      <name>half diamond head</name>
+      </Symbol>
+    <idx>45</idx>
+    <name>diamond head</name>
+    <Symbol>
+      <name>diamond head</name>
+      </Symbol>
+    <idx>46</idx>
+    <name>whole triangle head</name>
+    <Symbol>
+      <name>whole triangle head</name>
+      </Symbol>
+    <idx>47</idx>
+    <name>half triangle head</name>
+    <Symbol>
+      <name>half triangle head</name>
+      </Symbol>
+    <idx>48</idx>
+    <name>triangle head</name>
+    <Symbol>
+      <name>triangle head</name>
+      </Symbol>
+    <idx>49</idx>
+    <name>whole slash head</name>
+    <Symbol>
+      <name>whole slash head</name>
+      </Symbol>
+    <idx>50</idx>
+    <name>half slash head</name>
+    <Symbol>
+      <name>half slash head</name>
+      </Symbol>
+    <idx>51</idx>
+    <name>quart slash head</name>
+    <Symbol>
+      <name>quart slash head</name>
+      </Symbol>
+    <idx>52</idx>
+    <name>whole cross head</name>
+    <Symbol>
+      <name>whole cross head</name>
+      </Symbol>
+    <idx>53</idx>
+    <name>half cross head</name>
+    <Symbol>
+      <name>half cross head</name>
+      </Symbol>
+    <idx>54</idx>
+    <name>cross head</name>
+    <Symbol>
+      <name>cross head</name>
+      </Symbol>
+    <idx>55</idx>
+    <name>x circle head</name>
+    <Symbol>
+      <name>x circle head</name>
+      </Symbol>
+    <idx>57</idx>
+    <name>ufermata</name>
+    <Symbol>
+      <name>ufermata</name>
+      </Symbol>
+    <idx>58</idx>
+    <name>dfermata</name>
+    <Symbol>
+      <name>dfermata</name>
+      </Symbol>
+    <idx>59</idx>
+    <name>thumb</name>
+    <Symbol>
+      <name>thumb</name>
+      </Symbol>
+    <idx>60</idx>
+    <name>sforza to accent</name>
+    <Symbol>
+      <name>sforza to accent</name>
+      </Symbol>
+    <idx>61</idx>
+    <name>staccato</name>
+    <Symbol>
+      <name>staccato</name>
+      </Symbol>
+    <idx>62</idx>
+    <name>ustaccatissimo</name>
+    <Symbol>
+      <name>ustaccatissimo</name>
+      </Symbol>
+    <idx>63</idx>
+    <name>dstacattissimo</name>
+    <Symbol>
+      <name>dstacattissimo</name>
+      </Symbol>
+    <idx>64</idx>
+    <name>tenuto</name>
+    <Symbol>
+      <name>tenuto</name>
+      </Symbol>
+    <idx>65</idx>
+    <name>uportato</name>
+    <Symbol>
+      <name>uportato</name>
+      </Symbol>
+    <idx>66</idx>
+    <name>dportato</name>
+    <Symbol>
+      <name>dportato</name>
+      </Symbol>
+    <idx>67</idx>
+    <name>umarcato</name>
+    <Symbol>
+      <name>umarcato</name>
+      </Symbol>
+    <idx>68</idx>
+    <name>dmarcato</name>
+    <Symbol>
+      <name>dmarcato</name>
+      </Symbol>
+    <idx>69</idx>
+    <name>ouvert</name>
+    <Symbol>
+      <name>ouvert</name>
+      </Symbol>
+    <idx>70</idx>
+    <name>plus stop</name>
+    <Symbol>
+      <name>plus stop</name>
+      </Symbol>
+    <idx>71</idx>
+    <name>up bow</name>
+    <Symbol>
+      <name>up bow</name>
+      </Symbol>
+    <idx>72</idx>
+    <name>down bow</name>
+    <Symbol>
+      <name>down bow</name>
+      </Symbol>
+    <idx>73</idx>
+    <name>reverse turn</name>
+    <Symbol>
+      <name>reverse turn</name>
+      </Symbol>
+    <idx>74</idx>
+    <name>turn</name>
+    <Symbol>
+      <name>turn</name>
+      </Symbol>
+    <idx>75</idx>
+    <name>trill</name>
+    <Symbol>
+      <name>trill</name>
+      </Symbol>
+    <idx>76</idx>
+    <name>upedal heel</name>
+    <Symbol>
+      <name>upedal heel</name>
+      </Symbol>
+    <idx>77</idx>
+    <name>dpedalheel</name>
+    <Symbol>
+      <name>dpedalheel</name>
+      </Symbol>
+    <idx>78</idx>
+    <name>upedal toe</name>
+    <Symbol>
+      <name>upedal toe</name>
+      </Symbol>
+    <idx>79</idx>
+    <name>dpedal toe</name>
+    <Symbol>
+      <name>dpedal toe</name>
+      </Symbol>
+    <idx>80</idx>
+    <name>flageolet</name>
+    <Symbol>
+      <name>flageolet</name>
+      </Symbol>
+    <idx>81</idx>
+    <name>segno</name>
+    <Symbol>
+      <name>segno</name>
+      </Symbol>
+    <idx>82</idx>
+    <name>coda</name>
+    <Symbol>
+      <name>coda</name>
+      </Symbol>
+    <idx>83</idx>
+    <name>rcomma</name>
+    <Symbol>
+      <name>rcomma</name>
+      </Symbol>
+    <idx>84</idx>
+    <name>lcomma</name>
+    <Symbol>
+      <name>lcomma</name>
+      </Symbol>
+    <idx>85</idx>
+    <name>arpeggio</name>
+    <Symbol>
+      <name>arpeggio</name>
+      </Symbol>
+    <idx>86</idx>
+    <name>trillelement</name>
+    <Symbol>
+      <name>trillelement</name>
+      </Symbol>
+    <idx>87</idx>
+    <name>arpeggio arrow down</name>
+    <Symbol>
+      <name>arpeggio arrow down</name>
+      </Symbol>
+    <idx>88</idx>
+    <name>arpeggio arrow up</name>
+    <Symbol>
+      <name>arpeggio arrow up</name>
+      </Symbol>
+    <idx>89</idx>
+    <name>trill element</name>
+    <Symbol>
+      <name>trill element</name>
+      </Symbol>
+    <idx>90</idx>
+    <name>prall</name>
+    <Symbol>
+      <name>prall</name>
+      </Symbol>
+    <idx>91</idx>
+    <name>mordent</name>
+    <Symbol>
+      <name>mordent</name>
+      </Symbol>
+    <idx>92</idx>
+    <name>prall prall</name>
+    <Symbol>
+      <name>prall prall</name>
+      </Symbol>
+    <idx>93</idx>
+    <name>prall mordent</name>
+    <Symbol>
+      <name>prall mordent</name>
+      </Symbol>
+    <idx>94</idx>
+    <name>up prall</name>
+    <Symbol>
+      <name>up prall</name>
+      </Symbol>
+    <idx>95</idx>
+    <name>down prall</name>
+    <Symbol>
+      <name>down prall</name>
+      </Symbol>
+    <idx>96</idx>
+    <name>up mordent</name>
+    <Symbol>
+      <name>up mordent</name>
+      </Symbol>
+    <idx>97</idx>
+    <name>down mordent</name>
+    <Symbol>
+      <name>down mordent</name>
+      </Symbol>
+    <idx>98</idx>
+    <name>line prall</name>
+    <Symbol>
+      <name>line prall</name>
+      </Symbol>
+    <idx>99</idx>
+    <name>prall down</name>
+    <Symbol>
+      <name>prall down</name>
+      </Symbol>
+    <idx>101</idx>
+    <name>prall up</name>
+    <Symbol>
+      <name>prall up</name>
+      </Symbol>
+    <idx>102</idx>
+    <name>eight flag</name>
+    <Symbol>
+      <name>eight flag</name>
+      </Symbol>
+    <idx>103</idx>
+    <name>sixteenth flag</name>
+    <Symbol>
+      <name>sixteenth flag</name>
+      </Symbol>
+    <idx>104</idx>
+    <name>thirtysecond flag</name>
+    <Symbol>
+      <name>thirtysecond flag</name>
+      </Symbol>
+    <idx>105</idx>
+    <name>sixtyfour flag</name>
+    <Symbol>
+      <name>sixtyfour flag</name>
+      </Symbol>
+    <idx>106</idx>
+    <name>deight flag</name>
+    <Symbol>
+      <name>deight flag</name>
+      </Symbol>
+    <idx>107</idx>
+    <name>grace dash</name>
+    <Symbol>
+      <name>grace dash</name>
+      </Symbol>
+    <idx>108</idx>
+    <name>dgrace dash</name>
+    <Symbol>
+      <name>dgrace dash</name>
+      </Symbol>
+    <idx>109</idx>
+    <name>dsixteenth flag</name>
+    <Symbol>
+      <name>dsixteenth flag</name>
+      </Symbol>
+    <idx>110</idx>
+    <name>dthirtysecond flag</name>
+    <Symbol>
+      <name>dthirtysecond flag</name>
+      </Symbol>
+    <idx>111</idx>
+    <name>dsixtyfourth flag</name>
+    <Symbol>
+      <name>dsixtyfourth flag</name>
+      </Symbol>
+    <idx>112</idx>
+    <name>stem</name>
+    <Symbol>
+      <name>stem</name>
+      </Symbol>
+    <idx>113</idx>
+    <name>dstem</name>
+    <Symbol>
+      <name>dstem</name>
+      </Symbol>
+    <idx>114</idx>
+    <name>alto clef</name>
+    <Symbol>
+      <name>alto clef</name>
+      </Symbol>
+    <idx>115</idx>
+    <name>calto clef</name>
+    <Symbol>
+      <name>calto clef</name>
+      </Symbol>
+    <idx>116</idx>
+    <name>bass clef</name>
+    <Symbol>
+      <name>bass clef</name>
+      </Symbol>
+    <idx>117</idx>
+    <name>cbass clef</name>
+    <Symbol>
+      <name>cbass clef</name>
+      </Symbol>
+    <idx>118</idx>
+    <name>trebleclef</name>
+    <Symbol>
+      <name>trebleclef</name>
+      </Symbol>
+    <idx>119</idx>
+    <name>ctrebleclef</name>
+    <Symbol>
+      <name>ctrebleclef</name>
+      </Symbol>
+    <idx>120</idx>
+    <name>percussion clef</name>
+    <Symbol>
+      <name>percussion clef</name>
+      </Symbol>
+    <idx>121</idx>
+    <name>cpercussion clef</name>
+    <Symbol>
+      <name>cpercussion clef</name>
+      </Symbol>
+    <idx>122</idx>
+    <name>tab clef</name>
+    <Symbol>
+      <name>tab clef</name>
+      </Symbol>
+    <idx>123</idx>
+    <name>ctab clef</name>
+    <Symbol>
+      <name>ctab clef</name>
+      </Symbol>
+    <idx>124</idx>
+    <name>four four meter</name>
+    <Symbol>
+      <name>four four meter</name>
+      </Symbol>
+    <idx>125</idx>
+    <name>allabreve</name>
+    <Symbol>
+      <name>allabreve</name>
+      </Symbol>
+    <idx>126</idx>
+    <name>pedalasterisk</name>
+    <Symbol>
+      <name>pedalasterisk</name>
+      </Symbol>
+    <idx>127</idx>
+    <name>pedaldash</name>
+    <Symbol>
+      <name>pedaldash</name>
+      </Symbol>
+    <idx>128</idx>
+    <name>pedaldot</name>
+    <Symbol>
+      <name>pedaldot</name>
+      </Symbol>
+    <idx>129</idx>
+    <name>pedalP</name>
+    <Symbol>
+      <name>pedalP</name>
+      </Symbol>
+    <idx>130</idx>
+    <name>pedald</name>
+    <Symbol>
+      <name>pedald</name>
+      </Symbol>
+    <idx>131</idx>
+    <name>pedale</name>
+    <Symbol>
+      <name>pedale</name>
+      </Symbol>
+    <idx>132</idx>
+    <name>pedal ped</name>
+    <Symbol>
+      <name>pedal ped</name>
+      </Symbol>
+    <idx>133</idx>
+    <name>acc discant</name>
+    <Symbol>
+      <name>acc discant</name>
+      </Symbol>
+    <idx>134</idx>
+    <name>acc dot</name>
+    <Symbol>
+      <name>acc dot</name>
+      </Symbol>
+    <idx>135</idx>
+    <name>acc freebase</name>
+    <Symbol>
+      <name>acc freebase</name>
+      </Symbol>
+    <idx>136</idx>
+    <name>acc stdbase</name>
+    <Symbol>
+      <name>acc stdbase</name>
+      </Symbol>
+    <idx>137</idx>
+    <name>acc bayanbase</name>
+    <Symbol>
+      <name>acc bayanbase</name>
+      </Symbol>
+    <idx>138</idx>
+    <name>acc sb</name>
+    <Symbol>
+      <name>acc sb</name>
+      </Symbol>
+    <idx>139</idx>
+    <name>acc bb</name>
+    <Symbol>
+      <name>acc bb</name>
+      </Symbol>
+    <idx>140</idx>
+    <name>acc old ee</name>
+    <Symbol>
+      <name>acc old ee</name>
+      </Symbol>
+    <idx>141</idx>
+    <name>acc old ees</name>
+    <Symbol>
+      <name>acc old ees</name>
+      </Symbol>
+    <idx>142</idx>
+    <name>whole do head</name>
+    <Symbol>
+      <name>whole do head</name>
+      </Symbol>
+    <idx>143</idx>
+    <name>half do head</name>
+    <Symbol>
+      <name>half do head</name>
+      </Symbol>
+    <idx>144</idx>
+    <name>do head</name>
+    <Symbol>
+      <name>do head</name>
+      </Symbol>
+    <idx>145</idx>
+    <name>whole re head</name>
+    <Symbol>
+      <name>whole re head</name>
+      </Symbol>
+    <idx>146</idx>
+    <name>half re head</name>
+    <Symbol>
+      <name>half re head</name>
+      </Symbol>
+    <idx>147</idx>
+    <name>re head</name>
+    <Symbol>
+      <name>re head</name>
+      </Symbol>
+    <idx>148</idx>
+    <name>whole me head</name>
+    <Symbol>
+      <name>whole me head</name>
+      </Symbol>
+    <idx>149</idx>
+    <name>half me head</name>
+    <Symbol>
+      <name>half me head</name>
+      </Symbol>
+    <idx>150</idx>
+    <name>me head</name>
+    <Symbol>
+      <name>me head</name>
+      </Symbol>
+    <idx>151</idx>
+    <name>whole fa head</name>
+    <Symbol>
+      <name>whole fa head</name>
+      </Symbol>
+    <idx>152</idx>
+    <name>fau head</name>
+    <Symbol>
+      <name>fau head</name>
+      </Symbol>
+    <idx>153</idx>
+    <name>half fad head</name>
+    <Symbol>
+      <name>half fad head</name>
+      </Symbol>
+    <idx>154</idx>
+    <name>fad head</name>
+    <Symbol>
+      <name>fad head</name>
+      </Symbol>
+    <idx>155</idx>
+    <name>whole la head</name>
+    <Symbol>
+      <name>whole la head</name>
+      </Symbol>
+    <idx>156</idx>
+    <name>half la head</name>
+    <Symbol>
+      <name>half la head</name>
+      </Symbol>
+    <idx>157</idx>
+    <name>la head</name>
+    <Symbol>
+      <name>la head</name>
+      </Symbol>
+    <idx>158</idx>
+    <name>whole te head</name>
+    <Symbol>
+      <name>whole te head</name>
+      </Symbol>
+    <idx>159</idx>
+    <name>half te head</name>
+    <Symbol>
+      <name>half te head</name>
+      </Symbol>
+    <idx>160</idx>
+    <name>f</name>
+    <Symbol>
+      <name>f</name>
+      </Symbol>
+    <idx>161</idx>
+    <name>m</name>
+    <Symbol>
+      <name>m</name>
+      </Symbol>
+    <idx>162</idx>
+    <name>p</name>
+    <Symbol>
+      <name>p</name>
+      </Symbol>
+    <idx>163</idx>
+    <name>r</name>
+    <Symbol>
+      <name>r</name>
+      </Symbol>
+    <idx>164</idx>
+    <name>s</name>
+    <Symbol>
+      <name>s</name>
+      </Symbol>
+    <idx>165</idx>
+    <name>z</name>
+    <Symbol>
+      <name>z</name>
+      </Symbol>
+    </Symbols>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -66,6 +850,12 @@
     <smallStaffMag>0.7</smallStaffMag>
     <smallNoteMag>0.7</smallNoteMag>
     <smallClefMag>0.8</smallClefMag>
+    <genClef>1</genClef>
+    <genKeysig>1</genKeysig>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -109,8 +899,8 @@
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Chord test</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Chord test</p></body></html>
           </html-data>
         </Text>
       <Text>
@@ -119,8 +909,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Wijnand</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Wijnand</p></body></html>
           </html-data>
         </Text>
       </VBox>
@@ -133,7 +923,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major</p></body></html>
           </html-data>
         </Text>
@@ -144,8 +934,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bb</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">B<span style=" vertical-align:super;">b</span></p></body></html>
           </html-data>
         </Harmony>
       <TimeSig>
@@ -166,7 +956,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">none</p></body></html>
           </html-data>
         </Text>
@@ -176,7 +966,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -193,7 +983,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">other</p></body></html>
           </html-data>
         </Text>
@@ -204,7 +994,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -221,7 +1011,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">(empty)</p></body></html>
           </html-data>
         </Text>
@@ -231,7 +1021,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -248,7 +1038,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">(space)</p></body></html>
           </html-data>
         </Text>
@@ -258,8 +1048,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C </p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -275,7 +1065,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-sixth</p></body></html>
           </html-data>
         </Text>
@@ -286,8 +1076,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C6</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">6</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -307,7 +1097,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-seventh</p></body></html>
           </html-data>
         </Text>
@@ -318,8 +1108,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -335,7 +1125,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-ninth</p></body></html>
           </html-data>
         </Text>
@@ -346,8 +1136,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj9</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">9</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -363,7 +1153,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-11th</p></body></html>
           </html-data>
         </Text>
@@ -373,7 +1163,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -390,7 +1180,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">major-13th</p></body></html>
           </html-data>
         </Text>
@@ -401,8 +1191,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">13</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -418,7 +1208,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor</p></body></html>
           </html-data>
         </Text>
@@ -429,7 +1219,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm</p></body></html>
           </html-data>
         </Harmony>
@@ -446,7 +1236,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-sixth</p></body></html>
           </html-data>
         </Text>
@@ -457,8 +1247,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm6</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">6</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -478,7 +1268,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-seventh</p></body></html>
           </html-data>
         </Text>
@@ -489,8 +1279,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -506,7 +1296,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-ninth</p></body></html>
           </html-data>
         </Text>
@@ -517,8 +1307,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm9</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">9</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -534,7 +1324,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-11th</p></body></html>
           </html-data>
         </Text>
@@ -545,8 +1335,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm11</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">11</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -562,7 +1352,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-13th</p></body></html>
           </html-data>
         </Text>
@@ -573,8 +1363,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">13</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -590,7 +1380,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">minor-major</p></body></html>
           </html-data>
         </Text>
@@ -601,7 +1391,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -618,7 +1408,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-seventh</p></body></html>
           </html-data>
         </Text>
@@ -629,8 +1419,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -650,7 +1440,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-ninth</p></body></html>
           </html-data>
         </Text>
@@ -661,8 +1451,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C9</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">9</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -678,7 +1468,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-11th</p></body></html>
           </html-data>
         </Text>
@@ -689,7 +1479,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -706,7 +1496,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">dominant-13th</p></body></html>
           </html-data>
         </Text>
@@ -716,7 +1506,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -733,7 +1523,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">diminished</p></body></html>
           </html-data>
         </Text>
@@ -744,7 +1534,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cdim</p></body></html>
           </html-data>
         </Harmony>
@@ -760,8 +1550,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cdim7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cdim<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -772,7 +1562,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">diminished-</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">seventh</p></body></html>
           </html-data>
@@ -790,7 +1580,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">half-diminished</p></body></html>
           </html-data>
         </Text>
@@ -801,8 +1591,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7b5</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7b5</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -822,7 +1612,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented</p></body></html>
           </html-data>
         </Text>
@@ -833,7 +1623,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Caug</p></body></html>
           </html-data>
         </Harmony>
@@ -849,8 +1639,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7#5</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7#5</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -861,7 +1651,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented-</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">seventh</p></body></html>
           </html-data>
@@ -878,8 +1668,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7sus</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7sus</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -890,7 +1680,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">suspended-</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">fourth</p></body></html>
           </html-data>
@@ -907,8 +1697,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Csus2</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Csus<span style=" vertical-align:super;">2</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -919,7 +1709,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">suspended-</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">second</p></body></html>
           </html-data>
@@ -937,7 +1727,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">power</p></body></html>
           </html-data>
         </Text>
@@ -948,7 +1738,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -965,7 +1755,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">neapolitan</p></body></html>
           </html-data>
         </Text>
@@ -976,8 +1766,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmb3b13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">b3b13</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -997,7 +1787,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">italian</p></body></html>
           </html-data>
         </Text>
@@ -1008,8 +1798,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C#13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">#13</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1025,7 +1815,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">french</p></body></html>
           </html-data>
         </Text>
@@ -1036,8 +1826,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C#11#13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">#11#13</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1053,7 +1843,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">german</p></body></html>
           </html-data>
         </Text>
@@ -1064,8 +1854,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cadd#13</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">add#13</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1081,7 +1871,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj69</p></body></html>
           </html-data>
         </Text>
@@ -1092,8 +1882,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C6/add9</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">6</span>/add9</p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1109,7 +1899,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">augmented-ninth</p></body></html>
           </html-data>
         </Text>
@@ -1120,7 +1910,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -1137,7 +1927,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">altered</p></body></html>
           </html-data>
         </Text>
@@ -1148,7 +1938,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -1169,7 +1959,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj(no5)</p></body></html>
           </html-data>
         </Text>
@@ -1180,7 +1970,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -1197,7 +1987,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj(add2)</p></body></html>
           </html-data>
         </Text>
@@ -1208,7 +1998,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
           </html-data>
         </Harmony>
@@ -1225,7 +2015,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#11)</p></body></html>
           </html-data>
         </Text>
@@ -1236,8 +2026,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1253,7 +2043,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#5)</p></body></html>
           </html-data>
         </Text>
@@ -1264,8 +2054,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1281,7 +2071,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">maj7(#5#11)</p></body></html>
           </html-data>
         </Text>
@@ -1292,8 +2082,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">CMaj7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cmaj<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1309,7 +2099,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">m7(b9)</p></body></html>
           </html-data>
         </Text>
@@ -1320,8 +2110,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <LayoutBreak>
@@ -1341,7 +2131,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">m7(b13)</p></body></html>
           </html-data>
         </Text>
@@ -1352,8 +2142,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cm<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1369,7 +2159,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(b5)</p></body></html>
           </html-data>
         </Text>
@@ -1380,8 +2170,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1397,7 +2187,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(b5b9)</p></body></html>
           </html-data>
         </Text>
@@ -1408,8 +2198,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Rest>
@@ -1424,8 +2214,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -1436,7 +2226,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt1:</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(#5#9#11)</p></body></html>
           </html-data>
@@ -1453,8 +2243,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -1465,7 +2255,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt2:</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">7(#5b9#9#11)</p></body></html>
           </html-data>
@@ -1482,8 +2272,8 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C7#5</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" vertical-align:super;">7#5</span></p></body></html>
           </html-data>
         </Harmony>
       <Text>
@@ -1494,7 +2284,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">alt3:</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:italic;">aug7(#9#11)</p></body></html>
           </html-data>

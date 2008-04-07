@@ -1,10 +1,798 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.5">
+<museScore version="1.8">
   <Mag>0.75</Mag>
   <xoff>-127.846</xoff>
   <yoff>8.6783</yoff>
-  <Division>480</Division>
+  <Symbols>
+    <rows>11</rows>
+    <columns>16</columns>
+    <idx>0</idx>
+    <name>whole rest</name>
+    <Symbol>
+      <name>whole rest</name>
+      </Symbol>
+    <idx>1</idx>
+    <name>half rest</name>
+    <Symbol>
+      <name>half rest</name>
+      </Symbol>
+    <idx>2</idx>
+    <name>outside whole rest</name>
+    <Symbol>
+      <name>outside whole rest</name>
+      </Symbol>
+    <idx>3</idx>
+    <name>outside half rest</name>
+    <Symbol>
+      <name>outside half rest</name>
+      </Symbol>
+    <idx>4</idx>
+    <name>longa rest</name>
+    <Symbol>
+      <name>longa rest</name>
+      </Symbol>
+    <idx>5</idx>
+    <name>breve rest</name>
+    <Symbol>
+      <name>breve rest</name>
+      </Symbol>
+    <idx>6</idx>
+    <name>quart rest</name>
+    <Symbol>
+      <name>quart rest</name>
+      </Symbol>
+    <idx>7</idx>
+    <name>eight rest</name>
+    <Symbol>
+      <name>eight rest</name>
+      </Symbol>
+    <idx>8</idx>
+    <name>clas quart rest</name>
+    <Symbol>
+      <name>clas quart rest</name>
+      </Symbol>
+    <idx>9</idx>
+    <name>16&apos; rest</name>
+    <Symbol>
+      <name>16&apos; rest</name>
+      </Symbol>
+    <idx>10</idx>
+    <name>32&apos;  rest</name>
+    <Symbol>
+      <name>32&apos;  rest</name>
+      </Symbol>
+    <idx>11</idx>
+    <name>64&apos; rest</name>
+    <Symbol>
+      <name>64&apos; rest</name>
+      </Symbol>
+    <idx>12</idx>
+    <name>128&apos; rest</name>
+    <Symbol>
+      <name>128&apos; rest</name>
+      </Symbol>
+    <idx>16</idx>
+    <name>zero</name>
+    <Symbol>
+      <name>zero</name>
+      </Symbol>
+    <idx>17</idx>
+    <name>one</name>
+    <Symbol>
+      <name>one</name>
+      </Symbol>
+    <idx>18</idx>
+    <name>two</name>
+    <Symbol>
+      <name>two</name>
+      </Symbol>
+    <idx>19</idx>
+    <name>three</name>
+    <Symbol>
+      <name>three</name>
+      </Symbol>
+    <idx>20</idx>
+    <name>four</name>
+    <Symbol>
+      <name>four</name>
+      </Symbol>
+    <idx>21</idx>
+    <name>five</name>
+    <Symbol>
+      <name>five</name>
+      </Symbol>
+    <idx>22</idx>
+    <name>six</name>
+    <Symbol>
+      <name>six</name>
+      </Symbol>
+    <idx>23</idx>
+    <name>seven</name>
+    <Symbol>
+      <name>seven</name>
+      </Symbol>
+    <idx>24</idx>
+    <name>eight</name>
+    <Symbol>
+      <name>eight</name>
+      </Symbol>
+    <idx>25</idx>
+    <name>nine</name>
+    <Symbol>
+      <name>nine</name>
+      </Symbol>
+    <idx>31</idx>
+    <name>sharp</name>
+    <Symbol>
+      <name>sharp</name>
+      </Symbol>
+    <idx>32</idx>
+    <name>natural</name>
+    <Symbol>
+      <name>natural</name>
+      </Symbol>
+    <idx>33</idx>
+    <name>flat</name>
+    <Symbol>
+      <name>flat</name>
+      </Symbol>
+    <idx>34</idx>
+    <name>flat flat</name>
+    <Symbol>
+      <name>flat flat</name>
+      </Symbol>
+    <idx>35</idx>
+    <name>sharp sharp</name>
+    <Symbol>
+      <name>sharp sharp</name>
+      </Symbol>
+    <idx>36</idx>
+    <name>right parenthesis</name>
+    <Symbol>
+      <name>right parenthesis</name>
+      </Symbol>
+    <idx>37</idx>
+    <name>left parenthesis</name>
+    <Symbol>
+      <name>left parenthesis</name>
+      </Symbol>
+    <idx>38</idx>
+    <name>dot</name>
+    <Symbol>
+      <name>dot</name>
+      </Symbol>
+    <idx>39</idx>
+    <name>brevis head</name>
+    <Symbol>
+      <name>brevis head</name>
+      </Symbol>
+    <idx>40</idx>
+    <name>whole head</name>
+    <Symbol>
+      <name>whole head</name>
+      </Symbol>
+    <idx>41</idx>
+    <name>half head</name>
+    <Symbol>
+      <name>half head</name>
+      </Symbol>
+    <idx>42</idx>
+    <name>quart head</name>
+    <Symbol>
+      <name>quart head</name>
+      </Symbol>
+    <idx>43</idx>
+    <name>whole diamond head</name>
+    <Symbol>
+      <name>whole diamond head</name>
+      </Symbol>
+    <idx>44</idx>
+    <name>half diamond head</name>
+    <Symbol>
+      <name>half diamond head</name>
+      </Symbol>
+    <idx>45</idx>
+    <name>diamond head</name>
+    <Symbol>
+      <name>diamond head</name>
+      </Symbol>
+    <idx>46</idx>
+    <name>whole triangle head</name>
+    <Symbol>
+      <name>whole triangle head</name>
+      </Symbol>
+    <idx>47</idx>
+    <name>half triangle head</name>
+    <Symbol>
+      <name>half triangle head</name>
+      </Symbol>
+    <idx>48</idx>
+    <name>triangle head</name>
+    <Symbol>
+      <name>triangle head</name>
+      </Symbol>
+    <idx>49</idx>
+    <name>whole slash head</name>
+    <Symbol>
+      <name>whole slash head</name>
+      </Symbol>
+    <idx>50</idx>
+    <name>half slash head</name>
+    <Symbol>
+      <name>half slash head</name>
+      </Symbol>
+    <idx>51</idx>
+    <name>quart slash head</name>
+    <Symbol>
+      <name>quart slash head</name>
+      </Symbol>
+    <idx>52</idx>
+    <name>whole cross head</name>
+    <Symbol>
+      <name>whole cross head</name>
+      </Symbol>
+    <idx>53</idx>
+    <name>half cross head</name>
+    <Symbol>
+      <name>half cross head</name>
+      </Symbol>
+    <idx>54</idx>
+    <name>cross head</name>
+    <Symbol>
+      <name>cross head</name>
+      </Symbol>
+    <idx>55</idx>
+    <name>x circle head</name>
+    <Symbol>
+      <name>x circle head</name>
+      </Symbol>
+    <idx>57</idx>
+    <name>ufermata</name>
+    <Symbol>
+      <name>ufermata</name>
+      </Symbol>
+    <idx>58</idx>
+    <name>dfermata</name>
+    <Symbol>
+      <name>dfermata</name>
+      </Symbol>
+    <idx>59</idx>
+    <name>thumb</name>
+    <Symbol>
+      <name>thumb</name>
+      </Symbol>
+    <idx>60</idx>
+    <name>sforza to accent</name>
+    <Symbol>
+      <name>sforza to accent</name>
+      </Symbol>
+    <idx>61</idx>
+    <name>staccato</name>
+    <Symbol>
+      <name>staccato</name>
+      </Symbol>
+    <idx>62</idx>
+    <name>ustaccatissimo</name>
+    <Symbol>
+      <name>ustaccatissimo</name>
+      </Symbol>
+    <idx>63</idx>
+    <name>dstacattissimo</name>
+    <Symbol>
+      <name>dstacattissimo</name>
+      </Symbol>
+    <idx>64</idx>
+    <name>tenuto</name>
+    <Symbol>
+      <name>tenuto</name>
+      </Symbol>
+    <idx>65</idx>
+    <name>uportato</name>
+    <Symbol>
+      <name>uportato</name>
+      </Symbol>
+    <idx>66</idx>
+    <name>dportato</name>
+    <Symbol>
+      <name>dportato</name>
+      </Symbol>
+    <idx>67</idx>
+    <name>umarcato</name>
+    <Symbol>
+      <name>umarcato</name>
+      </Symbol>
+    <idx>68</idx>
+    <name>dmarcato</name>
+    <Symbol>
+      <name>dmarcato</name>
+      </Symbol>
+    <idx>69</idx>
+    <name>ouvert</name>
+    <Symbol>
+      <name>ouvert</name>
+      </Symbol>
+    <idx>70</idx>
+    <name>plus stop</name>
+    <Symbol>
+      <name>plus stop</name>
+      </Symbol>
+    <idx>71</idx>
+    <name>up bow</name>
+    <Symbol>
+      <name>up bow</name>
+      </Symbol>
+    <idx>72</idx>
+    <name>down bow</name>
+    <Symbol>
+      <name>down bow</name>
+      </Symbol>
+    <idx>73</idx>
+    <name>reverse turn</name>
+    <Symbol>
+      <name>reverse turn</name>
+      </Symbol>
+    <idx>74</idx>
+    <name>turn</name>
+    <Symbol>
+      <name>turn</name>
+      </Symbol>
+    <idx>75</idx>
+    <name>trill</name>
+    <Symbol>
+      <name>trill</name>
+      </Symbol>
+    <idx>76</idx>
+    <name>upedal heel</name>
+    <Symbol>
+      <name>upedal heel</name>
+      </Symbol>
+    <idx>77</idx>
+    <name>dpedalheel</name>
+    <Symbol>
+      <name>dpedalheel</name>
+      </Symbol>
+    <idx>78</idx>
+    <name>upedal toe</name>
+    <Symbol>
+      <name>upedal toe</name>
+      </Symbol>
+    <idx>79</idx>
+    <name>dpedal toe</name>
+    <Symbol>
+      <name>dpedal toe</name>
+      </Symbol>
+    <idx>80</idx>
+    <name>flageolet</name>
+    <Symbol>
+      <name>flageolet</name>
+      </Symbol>
+    <idx>81</idx>
+    <name>segno</name>
+    <Symbol>
+      <name>segno</name>
+      </Symbol>
+    <idx>82</idx>
+    <name>coda</name>
+    <Symbol>
+      <name>coda</name>
+      </Symbol>
+    <idx>83</idx>
+    <name>rcomma</name>
+    <Symbol>
+      <name>rcomma</name>
+      </Symbol>
+    <idx>84</idx>
+    <name>lcomma</name>
+    <Symbol>
+      <name>lcomma</name>
+      </Symbol>
+    <idx>85</idx>
+    <name>arpeggio</name>
+    <Symbol>
+      <name>arpeggio</name>
+      </Symbol>
+    <idx>86</idx>
+    <name>trillelement</name>
+    <Symbol>
+      <name>trillelement</name>
+      </Symbol>
+    <idx>87</idx>
+    <name>arpeggio arrow down</name>
+    <Symbol>
+      <name>arpeggio arrow down</name>
+      </Symbol>
+    <idx>88</idx>
+    <name>arpeggio arrow up</name>
+    <Symbol>
+      <name>arpeggio arrow up</name>
+      </Symbol>
+    <idx>89</idx>
+    <name>trill element</name>
+    <Symbol>
+      <name>trill element</name>
+      </Symbol>
+    <idx>90</idx>
+    <name>prall</name>
+    <Symbol>
+      <name>prall</name>
+      </Symbol>
+    <idx>91</idx>
+    <name>mordent</name>
+    <Symbol>
+      <name>mordent</name>
+      </Symbol>
+    <idx>92</idx>
+    <name>prall prall</name>
+    <Symbol>
+      <name>prall prall</name>
+      </Symbol>
+    <idx>93</idx>
+    <name>prall mordent</name>
+    <Symbol>
+      <name>prall mordent</name>
+      </Symbol>
+    <idx>94</idx>
+    <name>up prall</name>
+    <Symbol>
+      <name>up prall</name>
+      </Symbol>
+    <idx>95</idx>
+    <name>down prall</name>
+    <Symbol>
+      <name>down prall</name>
+      </Symbol>
+    <idx>96</idx>
+    <name>up mordent</name>
+    <Symbol>
+      <name>up mordent</name>
+      </Symbol>
+    <idx>97</idx>
+    <name>down mordent</name>
+    <Symbol>
+      <name>down mordent</name>
+      </Symbol>
+    <idx>98</idx>
+    <name>line prall</name>
+    <Symbol>
+      <name>line prall</name>
+      </Symbol>
+    <idx>99</idx>
+    <name>prall down</name>
+    <Symbol>
+      <name>prall down</name>
+      </Symbol>
+    <idx>100</idx>
+    <Symbol>
+      <name>turn</name>
+      </Symbol>
+    <idx>101</idx>
+    <name>prall up</name>
+    <Symbol>
+      <name>prall up</name>
+      </Symbol>
+    <idx>102</idx>
+    <name>eight flag</name>
+    <Symbol>
+      <name>eight flag</name>
+      </Symbol>
+    <idx>103</idx>
+    <name>sixteenth flag</name>
+    <Symbol>
+      <name>sixteenth flag</name>
+      </Symbol>
+    <idx>104</idx>
+    <name>thirtysecond flag</name>
+    <Symbol>
+      <name>thirtysecond flag</name>
+      </Symbol>
+    <idx>105</idx>
+    <name>sixtyfour flag</name>
+    <Symbol>
+      <name>sixtyfour flag</name>
+      </Symbol>
+    <idx>106</idx>
+    <name>deight flag</name>
+    <Symbol>
+      <name>deight flag</name>
+      </Symbol>
+    <idx>107</idx>
+    <name>grace dash</name>
+    <Symbol>
+      <name>grace dash</name>
+      </Symbol>
+    <idx>108</idx>
+    <name>dgrace dash</name>
+    <Symbol>
+      <name>dgrace dash</name>
+      </Symbol>
+    <idx>109</idx>
+    <name>dsixteenth flag</name>
+    <Symbol>
+      <name>dsixteenth flag</name>
+      </Symbol>
+    <idx>110</idx>
+    <name>dthirtysecond flag</name>
+    <Symbol>
+      <name>dthirtysecond flag</name>
+      </Symbol>
+    <idx>111</idx>
+    <name>dsixtyfourth flag</name>
+    <Symbol>
+      <name>dsixtyfourth flag</name>
+      </Symbol>
+    <idx>112</idx>
+    <name>stem</name>
+    <Symbol>
+      <name>stem</name>
+      </Symbol>
+    <idx>113</idx>
+    <name>dstem</name>
+    <Symbol>
+      <name>dstem</name>
+      </Symbol>
+    <idx>114</idx>
+    <name>alto clef</name>
+    <Symbol>
+      <name>alto clef</name>
+      </Symbol>
+    <idx>115</idx>
+    <name>calto clef</name>
+    <Symbol>
+      <name>calto clef</name>
+      </Symbol>
+    <idx>116</idx>
+    <name>bass clef</name>
+    <Symbol>
+      <name>bass clef</name>
+      </Symbol>
+    <idx>117</idx>
+    <name>cbass clef</name>
+    <Symbol>
+      <name>cbass clef</name>
+      </Symbol>
+    <idx>118</idx>
+    <name>trebleclef</name>
+    <Symbol>
+      <name>trebleclef</name>
+      </Symbol>
+    <idx>119</idx>
+    <name>ctrebleclef</name>
+    <Symbol>
+      <name>ctrebleclef</name>
+      </Symbol>
+    <idx>120</idx>
+    <name>percussion clef</name>
+    <Symbol>
+      <name>percussion clef</name>
+      </Symbol>
+    <idx>121</idx>
+    <name>cpercussion clef</name>
+    <Symbol>
+      <name>cpercussion clef</name>
+      </Symbol>
+    <idx>122</idx>
+    <name>tab clef</name>
+    <Symbol>
+      <name>tab clef</name>
+      </Symbol>
+    <idx>123</idx>
+    <name>ctab clef</name>
+    <Symbol>
+      <name>ctab clef</name>
+      </Symbol>
+    <idx>124</idx>
+    <name>four four meter</name>
+    <Symbol>
+      <name>four four meter</name>
+      </Symbol>
+    <idx>125</idx>
+    <name>allabreve</name>
+    <Symbol>
+      <name>allabreve</name>
+      </Symbol>
+    <idx>126</idx>
+    <name>pedalasterisk</name>
+    <Symbol>
+      <name>pedalasterisk</name>
+      </Symbol>
+    <idx>127</idx>
+    <name>pedaldash</name>
+    <Symbol>
+      <name>pedaldash</name>
+      </Symbol>
+    <idx>128</idx>
+    <name>pedaldot</name>
+    <Symbol>
+      <name>pedaldot</name>
+      </Symbol>
+    <idx>129</idx>
+    <name>pedalP</name>
+    <Symbol>
+      <name>pedalP</name>
+      </Symbol>
+    <idx>130</idx>
+    <name>pedald</name>
+    <Symbol>
+      <name>pedald</name>
+      </Symbol>
+    <idx>131</idx>
+    <name>pedale</name>
+    <Symbol>
+      <name>pedale</name>
+      </Symbol>
+    <idx>132</idx>
+    <name>pedal ped</name>
+    <Symbol>
+      <name>pedal ped</name>
+      </Symbol>
+    <idx>133</idx>
+    <name>acc discant</name>
+    <Symbol>
+      <name>acc discant</name>
+      </Symbol>
+    <idx>134</idx>
+    <name>acc dot</name>
+    <Symbol>
+      <name>acc dot</name>
+      </Symbol>
+    <idx>135</idx>
+    <name>acc freebase</name>
+    <Symbol>
+      <name>acc freebase</name>
+      </Symbol>
+    <idx>136</idx>
+    <name>acc stdbase</name>
+    <Symbol>
+      <name>acc stdbase</name>
+      </Symbol>
+    <idx>137</idx>
+    <name>acc bayanbase</name>
+    <Symbol>
+      <name>acc bayanbase</name>
+      </Symbol>
+    <idx>138</idx>
+    <name>acc sb</name>
+    <Symbol>
+      <name>acc sb</name>
+      </Symbol>
+    <idx>139</idx>
+    <name>acc bb</name>
+    <Symbol>
+      <name>acc bb</name>
+      </Symbol>
+    <idx>140</idx>
+    <name>acc old ee</name>
+    <Symbol>
+      <name>acc old ee</name>
+      </Symbol>
+    <idx>141</idx>
+    <name>acc old ees</name>
+    <Symbol>
+      <name>acc old ees</name>
+      </Symbol>
+    <idx>142</idx>
+    <name>whole do head</name>
+    <Symbol>
+      <name>whole do head</name>
+      </Symbol>
+    <idx>143</idx>
+    <name>half do head</name>
+    <Symbol>
+      <name>half do head</name>
+      </Symbol>
+    <idx>144</idx>
+    <name>do head</name>
+    <Symbol>
+      <name>do head</name>
+      </Symbol>
+    <idx>145</idx>
+    <name>whole re head</name>
+    <Symbol>
+      <name>whole re head</name>
+      </Symbol>
+    <idx>146</idx>
+    <name>half re head</name>
+    <Symbol>
+      <name>half re head</name>
+      </Symbol>
+    <idx>147</idx>
+    <name>re head</name>
+    <Symbol>
+      <name>re head</name>
+      </Symbol>
+    <idx>148</idx>
+    <name>whole me head</name>
+    <Symbol>
+      <name>whole me head</name>
+      </Symbol>
+    <idx>149</idx>
+    <name>half me head</name>
+    <Symbol>
+      <name>half me head</name>
+      </Symbol>
+    <idx>150</idx>
+    <name>me head</name>
+    <Symbol>
+      <name>me head</name>
+      </Symbol>
+    <idx>151</idx>
+    <name>whole fa head</name>
+    <Symbol>
+      <name>whole fa head</name>
+      </Symbol>
+    <idx>152</idx>
+    <name>fau head</name>
+    <Symbol>
+      <name>fau head</name>
+      </Symbol>
+    <idx>153</idx>
+    <name>half fad head</name>
+    <Symbol>
+      <name>half fad head</name>
+      </Symbol>
+    <idx>154</idx>
+    <name>fad head</name>
+    <Symbol>
+      <name>fad head</name>
+      </Symbol>
+    <idx>155</idx>
+    <name>whole la head</name>
+    <Symbol>
+      <name>whole la head</name>
+      </Symbol>
+    <idx>156</idx>
+    <name>half la head</name>
+    <Symbol>
+      <name>half la head</name>
+      </Symbol>
+    <idx>157</idx>
+    <name>la head</name>
+    <Symbol>
+      <name>la head</name>
+      </Symbol>
+    <idx>158</idx>
+    <name>whole te head</name>
+    <Symbol>
+      <name>whole te head</name>
+      </Symbol>
+    <idx>159</idx>
+    <name>half te head</name>
+    <Symbol>
+      <name>half te head</name>
+      </Symbol>
+    <idx>160</idx>
+    <name>f</name>
+    <Symbol>
+      <name>f</name>
+      </Symbol>
+    <idx>161</idx>
+    <name>m</name>
+    <Symbol>
+      <name>m</name>
+      </Symbol>
+    <idx>162</idx>
+    <name>p</name>
+    <Symbol>
+      <name>p</name>
+      </Symbol>
+    <idx>163</idx>
+    <name>r</name>
+    <Symbol>
+      <name>r</name>
+      </Symbol>
+    <idx>164</idx>
+    <name>s</name>
+    <Symbol>
+      <name>s</name>
+      </Symbol>
+    <idx>165</idx>
+    <name>z</name>
+    <Symbol>
+      <name>z</name>
+      </Symbol>
+    </Symbols>
   <Spatium>1.764</Spatium>
+  <Division>480</Division>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -41,7 +829,7 @@
     <beamDistance>0.5</beamDistance>
     <beamMinLen>1.25</beamMinLen>
     <beamMinSlope>0.1</beamMinSlope>
-    <beamMaxSlope>0.5</beamMaxSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
     <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
     <dotRestDistance>0.25</dotRestDistance>
@@ -49,7 +837,8 @@
     <propertyDistanceHead>0.5</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
-    <pageFillLimit>0.3</pageFillLimit>
+    <pageFillLimit>0.7</pageFillLimit>
+    <lastSystemFillLimit>0.5</lastSystemFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
     <hairpinWidth>0.13</hairpinWidth>
@@ -65,6 +854,12 @@
     <smallStaffMag>0.7</smallStaffMag>
     <smallNoteMag>0.7</smallNoteMag>
     <smallClefMag>0.8</smallClefMag>
+    <genClef>1</genClef>
+    <genKeysig>1</genKeysig>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -113,11 +908,10 @@
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Trumpet</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Trumpet</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>0</midiChannel>
       <midiProgram>42</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
@@ -138,8 +932,8 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Flute</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Flute</p></body></html>
       </name>
     <Instrument>
       <midiChannel>1</midiChannel>
@@ -163,8 +957,8 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Oboe</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Oboe</p></body></html>
       </name>
     <Instrument>
       <midiChannel>2</midiChannel>
@@ -188,8 +982,8 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violin</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violin</p></body></html>
       </name>
     <Instrument>
       <midiChannel>3</midiChannel>
@@ -213,9 +1007,9 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violino 1.</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 1.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
       <midiChannel>4</midiChannel>
@@ -239,9 +1033,9 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violino 2.</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 2.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
       <midiChannel>5</midiChannel>
@@ -265,9 +1059,9 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Viola</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Viola</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
       <midiChannel>6</midiChannel>
@@ -291,9 +1085,9 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violone</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">di ripieno</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violone</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
       <midiChannel>7</midiChannel>
@@ -317,9 +1111,9 @@ p, li { white-space: pre-wrap; }
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violoncello</p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">e Cembalo</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violoncello</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">e Cembalo</p></body></html>
       </name>
     <Instrument>
       <midiChannel>8</midiChannel>
@@ -348,688 +1142,471 @@ p, li { white-space: pre-wrap; }
     <title>Violin</title>
     <part>3</part>
     </Excerpt>
-  <Slur>
-    <tick2>96960</tick2>
+  <Slur id="1">
     <track>0</track>
     <tick>96240</tick>
     </Slur>
-  <Slur>
-    <tick2>97920</tick2>
+  <Slur id="2">
     <track>0</track>
     <tick>97200</tick>
     </Slur>
-  <Slur>
-    <tick2>98880</tick2>
+  <Slur id="3">
     <track>0</track>
     <tick>98160</tick>
     </Slur>
-  <Slur>
-    <tick2>99840</tick2>
+  <Slur id="4">
     <track>0</track>
     <tick>99120</tick>
     </Slur>
-  <Slur>
-    <tick2>137280</tick2>
+  <Slur id="5">
     <track>0</track>
     <tick>136800</tick>
     </Slur>
-  <Slur>
-    <tick2>138240</tick2>
+  <Slur id="6">
     <track>0</track>
     <tick>137520</tick>
     </Slur>
-  <Slur>
-    <tick2>141120</tick2>
+  <Slur id="7">
     <track>0</track>
     <tick>140400</tick>
     </Slur>
-  <Slur>
-    <tick2>142080</tick2>
+  <Slur id="8">
     <track>0</track>
     <tick>141360</tick>
     </Slur>
-  <Slur>
-    <tick2>164160</tick2>
+  <Slur id="9">
     <track>0</track>
     <tick>163680</tick>
     </Slur>
-  <Slur>
-    <tick2>165120</tick2>
+  <Slur id="10">
     <track>0</track>
     <tick>164400</tick>
     </Slur>
-  <Slur>
-    <tick2>166080</tick2>
+  <Slur id="11">
     <track>0</track>
     <tick>165360</tick>
     </Slur>
-  <Slur>
-    <tick2>175440</tick2>
+  <Slur id="12">
     <track>0</track>
     <tick>174960</tick>
     </Slur>
-  <Slur>
-    <tick2>176400</tick2>
+  <Slur id="13">
     <track>0</track>
     <tick>175920</tick>
     </Slur>
-  <Slur>
-    <tick2>204480</tick2>
+  <Slur id="14">
     <track>0</track>
     <tick>203760</tick>
     </Slur>
-  <Slur>
-    <tick2>205440</tick2>
+  <Slur id="15">
     <track>0</track>
     <tick>204720</tick>
     </Slur>
-  <Slur>
-    <tick2>206400</tick2>
+  <Slur id="16">
     <track>0</track>
     <tick>205680</tick>
     </Slur>
-  <Slur>
-    <tick2>207360</tick2>
+  <Slur id="17">
     <track>0</track>
     <tick>206640</tick>
     </Slur>
-  <Slur>
-    <tick2>73560</tick2>
-    <track2>4</track2>
+  <Slur id="18">
     <track>4</track>
     <tick>73200</tick>
     </Slur>
-  <Slur>
-    <tick2>100800</tick2>
-    <track2>4</track2>
+  <Slur id="19">
     <track>4</track>
     <tick>100080</tick>
     </Slur>
-  <Slur>
-    <tick2>101760</tick2>
-    <track2>4</track2>
+  <Slur id="20">
     <track>4</track>
     <tick>101040</tick>
     </Slur>
-  <Slur>
-    <tick2>111960</tick2>
-    <track2>4</track2>
+  <Slur id="21">
     <track>4</track>
     <tick>111600</tick>
     </Slur>
-  <Slur>
-    <tick2>121440</tick2>
-    <track2>4</track2>
+  <Slur id="22">
     <track>4</track>
     <tick>121200</tick>
     </Slur>
-  <Slur>
-    <tick2>122400</tick2>
-    <track2>4</track2>
+  <Slur id="23">
     <track>4</track>
     <tick>122160</tick>
     </Slur>
-  <Slur>
-    <tick2>123360</tick2>
-    <track2>4</track2>
+  <Slur id="24">
     <track>4</track>
     <tick>123120</tick>
     </Slur>
-  <Slur>
-    <tick2>124320</tick2>
-    <track2>4</track2>
+  <Slur id="25">
     <track>4</track>
     <tick>124080</tick>
     </Slur>
-  <Slur>
-    <tick2>125280</tick2>
-    <track2>4</track2>
+  <Slur id="26">
     <track>4</track>
     <tick>125040</tick>
     </Slur>
-  <Slur>
-    <tick2>126240</tick2>
-    <track2>4</track2>
+  <Slur id="27">
     <track>4</track>
     <tick>126000</tick>
     </Slur>
-  <Slur>
-    <tick2>141120</tick2>
-    <track2>4</track2>
+  <Slur id="28">
     <track>4</track>
     <tick>140400</tick>
     </Slur>
-  <Slur>
-    <tick2>141840</tick2>
-    <track2>4</track2>
+  <Slur id="29">
     <track>4</track>
     <tick>141360</tick>
     </Slur>
-  <Slur>
-    <tick2>157800</tick2>
-    <track2>4</track2>
+  <Slur id="30">
     <track>4</track>
     <tick>157680</tick>
     </Slur>
-  <Slur>
-    <tick2>158040</tick2>
-    <track2>4</track2>
+  <Slur id="31">
     <track>4</track>
     <tick>157920</tick>
     </Slur>
-  <Slur>
-    <tick2>175680</tick2>
-    <track2>4</track2>
+  <Slur id="32">
     <track>4</track>
     <tick>174960</tick>
     </Slur>
-  <Slur>
-    <tick2>176640</tick2>
-    <track2>4</track2>
+  <Slur id="33">
     <track>4</track>
     <tick>175920</tick>
     </Slur>
-  <Slur>
-    <tick2>177600</tick2>
-    <track2>4</track2>
+  <Slur id="34">
     <track>4</track>
     <tick>177120</tick>
     </Slur>
-  <Slur>
-    <tick2>210240</tick2>
-    <track2>4</track2>
+  <Slur id="35">
     <track>4</track>
     <tick>209520</tick>
     </Slur>
-  <Slur>
-    <tick2>211200</tick2>
-    <track2>4</track2>
+  <Slur id="36">
     <track>4</track>
     <tick>210480</tick>
     </Slur>
-  <Slur>
-    <tick2>225000</tick2>
-    <track2>4</track2>
+  <Slur id="37">
     <track>4</track>
     <tick>224880</tick>
     </Slur>
-  <Slur>
-    <tick2>225240</tick2>
-    <track2>4</track2>
+  <Slur id="38">
     <track>4</track>
     <tick>225120</tick>
     </Slur>
-  <Slur>
-    <tick2>73560</tick2>
-    <track2>8</track2>
+  <Slur id="39">
     <track>8</track>
     <tick>73200</tick>
     </Slur>
-  <Slur>
-    <tick2>95040</tick2>
-    <track2>8</track2>
+  <Slur id="40">
     <track>8</track>
     <tick>94320</tick>
     </Slur>
-  <Slur>
-    <tick2>96000</tick2>
-    <track2>8</track2>
+  <Slur id="41">
     <track>8</track>
     <tick>95280</tick>
     </Slur>
-  <Slur>
-    <tick2>100800</tick2>
-    <track2>8</track2>
+  <Slur id="42">
     <track>8</track>
     <tick>100080</tick>
     </Slur>
-  <Slur>
-    <tick2>101760</tick2>
-    <track2>8</track2>
+  <Slur id="43">
     <track>8</track>
     <tick>101040</tick>
     </Slur>
-  <Slur>
-    <tick2>104640</tick2>
-    <track2>8</track2>
+  <Slur id="44">
     <track>8</track>
     <tick>103920</tick>
     </Slur>
-  <Slur>
-    <tick2>105360</tick2>
-    <track2>8</track2>
+  <Slur id="45">
     <track>8</track>
     <tick>104880</tick>
     </Slur>
-  <Slur>
-    <tick2>111960</tick2>
-    <track2>8</track2>
+  <Slur id="46">
     <track>8</track>
     <tick>111600</tick>
     </Slur>
-  <Slur>
-    <tick2>175440</tick2>
-    <track2>8</track2>
+  <Slur id="47">
     <track>8</track>
     <tick>174960</tick>
     </Slur>
-  <Slur>
-    <tick2>176400</tick2>
-    <track2>8</track2>
+  <Slur id="48">
     <track>8</track>
     <tick>175920</tick>
     </Slur>
-  <Slur>
-    <tick2>177600</tick2>
-    <track2>8</track2>
+  <Slur id="49">
     <track>8</track>
     <tick>176880</tick>
     </Slur>
-  <Slur>
-    <tick2>194520</tick2>
-    <track2>8</track2>
+  <Slur id="50">
     <track>8</track>
     <tick>194280</tick>
     </Slur>
-  <Slur>
-    <tick2>214080</tick2>
-    <track2>8</track2>
+  <Slur id="51">
     <track>8</track>
     <tick>213600</tick>
     </Slur>
-  <Slur>
-    <tick2>215040</tick2>
-    <track2>8</track2>
+  <Slur id="52">
     <track>8</track>
     <tick>214320</tick>
     </Slur>
-  <Slur>
-    <tick2>225240</tick2>
-    <track2>8</track2>
+  <Slur id="53">
     <track>8</track>
     <tick>224880</tick>
     </Slur>
-  <Slur>
-    <tick2>73320</tick2>
-    <track2>12</track2>
+  <Slur id="54">
     <track>12</track>
     <tick>73200</tick>
     </Slur>
-  <Slur>
-    <tick2>73560</tick2>
-    <track2>12</track2>
+  <Slur id="55">
     <track>12</track>
     <tick>73440</tick>
     </Slur>
-  <Slur>
-    <tick2>96960</tick2>
-    <track2>12</track2>
+  <Slur id="56">
     <track>12</track>
     <tick>96240</tick>
     </Slur>
-  <Slur>
-    <tick2>97920</tick2>
-    <track2>12</track2>
+  <Slur id="57">
     <track>12</track>
     <tick>97200</tick>
     </Slur>
-  <Slur>
-    <tick2>104640</tick2>
-    <track2>12</track2>
+  <Slur id="58">
     <track>12</track>
     <tick>103920</tick>
     </Slur>
-  <Slur>
-    <tick2>105360</tick2>
-    <track2>12</track2>
+  <Slur id="59">
     <track>12</track>
     <tick>104880</tick>
     </Slur>
-  <Slur>
-    <tick2>111720</tick2>
-    <track2>12</track2>
+  <Slur id="60">
     <track>12</track>
     <tick>111600</tick>
     </Slur>
-  <Slur>
-    <tick2>111960</tick2>
-    <track2>12</track2>
+  <Slur id="61">
     <track>12</track>
     <tick>111840</tick>
     </Slur>
-  <Slur>
-    <tick2>117480</tick2>
-    <track2>12</track2>
+  <Slur id="62">
     <track>12</track>
     <tick>117360</tick>
     </Slur>
-  <Slur>
-    <tick2>117720</tick2>
-    <track2>12</track2>
+  <Slur id="63">
     <track>12</track>
     <tick>117600</tick>
     </Slur>
-  <Slur>
-    <tick2>125280</tick2>
-    <track2>12</track2>
+  <Slur id="64">
     <track>12</track>
     <tick>125040</tick>
     </Slur>
-  <Slur>
-    <tick2>126240</tick2>
-    <track2>12</track2>
+  <Slur id="65">
     <track>12</track>
     <tick>126000</tick>
     </Slur>
-  <Slur>
-    <tick2>127200</tick2>
-    <track2>12</track2>
+  <Slur id="66">
     <track>12</track>
     <tick>126960</tick>
     </Slur>
-  <Slur>
-    <tick2>128160</tick2>
-    <track2>12</track2>
+  <Slur id="67">
     <track>12</track>
     <tick>127920</tick>
     </Slur>
-  <Slur>
-    <tick2>139200</tick2>
-    <track2>12</track2>
+  <Slur id="68">
     <track>12</track>
     <tick>138720</tick>
     </Slur>
-  <Slur>
-    <tick2>140160</tick2>
-    <track2>12</track2>
+  <Slur id="69">
     <track>12</track>
     <tick>139440</tick>
     </Slur>
-  <Slur>
-    <tick2>157800</tick2>
-    <track2>12</track2>
+  <Slur id="70">
     <track>12</track>
     <tick>157680</tick>
     </Slur>
-  <Slur>
-    <tick2>158040</tick2>
-    <track2>12</track2>
+  <Slur id="71">
     <track>12</track>
     <tick>157920</tick>
     </Slur>
-  <Slur>
-    <tick2>194280</tick2>
-    <track2>12</track2>
+  <Slur id="72">
     <track>12</track>
     <tick>194160</tick>
     </Slur>
-  <Slur>
-    <tick2>194520</tick2>
-    <track2>12</track2>
+  <Slur id="73">
     <track>12</track>
     <tick>194400</tick>
     </Slur>
-  <Slur>
-    <tick2>206400</tick2>
-    <track2>12</track2>
+  <Slur id="74">
     <track>12</track>
     <tick>205680</tick>
     </Slur>
-  <Slur>
-    <tick2>207360</tick2>
-    <track2>12</track2>
+  <Slur id="75">
     <track>12</track>
     <tick>206640</tick>
     </Slur>
-  <Slur>
-    <tick2>225000</tick2>
-    <track2>12</track2>
+  <Slur id="76">
     <track>12</track>
     <tick>224880</tick>
     </Slur>
-  <Slur>
-    <tick2>225240</tick2>
-    <track2>12</track2>
+  <Slur id="77">
     <track>12</track>
     <tick>225120</tick>
     </Slur>
-  <Slur>
-    <tick2>73320</tick2>
-    <track2>16</track2>
+  <Slur id="78">
     <track>16</track>
     <tick>73200</tick>
     </Slur>
-  <Slur>
-    <tick2>73560</tick2>
-    <track2>16</track2>
+  <Slur id="79">
     <track>16</track>
     <tick>73440</tick>
     </Slur>
-  <Slur>
-    <tick2>111720</tick2>
-    <track2>16</track2>
+  <Slur id="80">
     <track>16</track>
     <tick>111600</tick>
     </Slur>
-  <Slur>
-    <tick2>111960</tick2>
-    <track2>16</track2>
+  <Slur id="81">
     <track>16</track>
     <tick>111840</tick>
     </Slur>
-  <Slur>
-    <tick2>157800</tick2>
-    <track2>16</track2>
+  <Slur id="82">
     <track>16</track>
     <tick>157680</tick>
     </Slur>
-  <Slur>
-    <tick2>158040</tick2>
-    <track2>16</track2>
+  <Slur id="83">
     <track>16</track>
     <tick>157920</tick>
     </Slur>
-  <Slur>
-    <tick2>194280</tick2>
-    <track2>16</track2>
+  <Slur id="84">
     <track>16</track>
     <tick>194160</tick>
     </Slur>
-  <Slur>
-    <tick2>194520</tick2>
-    <track2>16</track2>
+  <Slur id="85">
     <track>16</track>
     <tick>194400</tick>
     </Slur>
-  <Slur>
-    <tick2>225000</tick2>
-    <track2>16</track2>
+  <Slur id="86">
     <track>16</track>
     <tick>224880</tick>
     </Slur>
-  <Slur>
-    <tick2>225240</tick2>
-    <track2>16</track2>
+  <Slur id="87">
     <track>16</track>
     <tick>225120</tick>
     </Slur>
-  <Slur>
-    <tick2>95040</tick2>
-    <track2>32</track2>
+  <Slur id="88">
     <track>32</track>
     <tick>94320</tick>
     </Slur>
-  <Slur>
-    <tick2>96000</tick2>
-    <track2>32</track2>
+  <Slur id="89">
     <track>32</track>
     <tick>95280</tick>
     </Slur>
-  <Slur>
-    <tick2>96960</tick2>
-    <track2>32</track2>
+  <Slur id="90">
     <track>32</track>
     <tick>96240</tick>
     </Slur>
-  <Slur>
-    <tick2>97920</tick2>
-    <track2>32</track2>
+  <Slur id="91">
     <track>32</track>
     <tick>97200</tick>
     </Slur>
-  <Slur>
-    <tick2>98880</tick2>
-    <track2>32</track2>
+  <Slur id="92">
     <track>32</track>
     <tick>98160</tick>
     </Slur>
-  <Slur>
-    <tick2>99840</tick2>
-    <track2>32</track2>
+  <Slur id="93">
     <track>32</track>
     <tick>99120</tick>
     </Slur>
-  <Slur>
-    <tick2>100800</tick2>
-    <track2>32</track2>
+  <Slur id="94">
     <track>32</track>
     <tick>100080</tick>
     </Slur>
-  <Slur>
-    <tick2>101760</tick2>
-    <track2>32</track2>
+  <Slur id="95">
     <track>32</track>
     <tick>101040</tick>
     </Slur>
-  <Slur>
-    <tick2>102720</tick2>
-    <track2>32</track2>
+  <Slur id="96">
     <track>32</track>
     <tick>102000</tick>
     </Slur>
-  <Slur>
-    <tick2>103680</tick2>
-    <track2>32</track2>
+  <Slur id="97">
     <track>32</track>
     <tick>102960</tick>
     </Slur>
-  <Slur>
-    <tick2>104640</tick2>
-    <track2>32</track2>
+  <Slur id="98">
     <track>32</track>
     <tick>103920</tick>
     </Slur>
-  <Slur>
-    <tick2>105600</tick2>
-    <track2>32</track2>
+  <Slur id="99">
     <track>32</track>
     <tick>104880</tick>
     </Slur>
-  <Slur>
-    <tick2>137280</tick2>
-    <track2>32</track2>
+  <Slur id="100">
     <track>32</track>
     <tick>136560</tick>
     </Slur>
-  <Slur>
-    <tick2>138240</tick2>
-    <track2>32</track2>
+  <Slur id="101">
     <track>32</track>
     <tick>137520</tick>
     </Slur>
-  <Slur>
-    <tick2>139200</tick2>
-    <track2>32</track2>
+  <Slur id="102">
     <track>32</track>
     <tick>138480</tick>
     </Slur>
-  <Slur>
-    <tick2>140160</tick2>
-    <track2>32</track2>
+  <Slur id="103">
     <track>32</track>
     <tick>139440</tick>
     </Slur>
-  <Slur>
-    <tick2>141120</tick2>
-    <track2>32</track2>
+  <Slur id="104">
     <track>32</track>
     <tick>140400</tick>
     </Slur>
-  <Slur>
-    <tick2>142080</tick2>
-    <track2>32</track2>
+  <Slur id="105">
     <track>32</track>
     <tick>141360</tick>
     </Slur>
-  <Slur>
-    <tick2>204480</tick2>
-    <track2>32</track2>
+  <Slur id="106">
     <track>32</track>
     <tick>203760</tick>
     </Slur>
-  <Slur>
-    <tick2>205440</tick2>
-    <track2>32</track2>
+  <Slur id="107">
     <track>32</track>
     <tick>204720</tick>
     </Slur>
-  <Slur>
-    <tick2>206400</tick2>
-    <track2>32</track2>
+  <Slur id="108">
     <track>32</track>
     <tick>205680</tick>
     </Slur>
-  <Slur>
-    <tick2>207360</tick2>
-    <track2>32</track2>
+  <Slur id="109">
     <track>32</track>
     <tick>206640</tick>
     </Slur>
-  <Slur>
-    <tick2>208320</tick2>
-    <track2>32</track2>
+  <Slur id="110">
     <track>32</track>
     <tick>207600</tick>
     </Slur>
-  <Slur>
-    <tick2>209280</tick2>
-    <track2>32</track2>
+  <Slur id="111">
     <track>32</track>
     <tick>208560</tick>
     </Slur>
-  <Slur>
-    <tick2>210240</tick2>
-    <track2>32</track2>
+  <Slur id="112">
     <track>32</track>
     <tick>209520</tick>
     </Slur>
-  <Slur>
-    <tick2>211200</tick2>
-    <track2>32</track2>
+  <Slur id="113">
     <track>32</track>
     <tick>210480</tick>
     </Slur>
-  <Slur>
-    <tick2>212160</tick2>
-    <track2>32</track2>
+  <Slur id="114">
     <track>32</track>
     <tick>211440</tick>
     </Slur>
-  <Slur>
-    <tick2>213120</tick2>
-    <track2>32</track2>
+  <Slur id="115">
     <track>32</track>
     <tick>212400</tick>
     </Slur>
-  <Slur>
-    <tick2>214080</tick2>
-    <track2>32</track2>
+  <Slur id="116">
     <track>32</track>
     <tick>213360</tick>
     </Slur>
-  <Slur>
-    <tick2>215040</tick2>
-    <track2>32</track2>
+  <Slur id="117">
     <track>32</track>
     <tick>214320</tick>
     </Slur>
@@ -1039,26 +1616,32 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>Title</subtype>
         <track>-1</track>
+        <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Brandenburg Concerto no. 2 in F Major</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Brandenburg Concerto no. 2 in F Major</p></body></html>
+          </html-data>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
         <track>-1</track>
+        <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1 st Movement</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">1 st Movement</p></body></html>
+          </html-data>
         </Text>
       <Text>
         <subtype>Composer</subtype>
         <track>-1</track>
+        <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">J.S. Bach</p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J.S. Bach</p></body></html>
+          </html-data>
         </Text>
       </VBox>
     <Measure number="1">
@@ -3136,6 +3719,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="1"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -3151,6 +3735,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="1"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="2"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -3166,11 +3757,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="81" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="2"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -3178,6 +3765,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="3"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -3193,6 +3781,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="3"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="86" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="4"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -3208,11 +3803,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="86" tpc="16"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="4"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -3932,6 +4523,24 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="5"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="5"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="6"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
@@ -3947,21 +4556,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="82" tpc="12"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="82" tpc="12"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="82" tpc="12"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="6"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
@@ -4021,6 +4616,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="7"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -4036,6 +4632,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="7"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="8"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -4051,11 +4654,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="81" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="8"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
@@ -4507,6 +5106,24 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="9"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="9"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="10"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -4522,21 +5139,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="10"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -4544,6 +5147,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="87">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="11"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -4559,6 +5163,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="11"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -4768,6 +5373,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="92">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="12"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -4778,6 +5384,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="12"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -4788,6 +5395,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="13"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
@@ -4798,6 +5406,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="13"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
@@ -5326,6 +5935,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="14"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -5341,6 +5951,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="14"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="15"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -5356,11 +5973,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="77" tpc="13"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="15"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -5368,6 +5981,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="108">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="16"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -5383,6 +5997,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="16"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="17"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -5398,11 +6019,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="79" tpc="15"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="17"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -8107,6 +8724,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="18"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -8122,6 +8740,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="18"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -9099,6 +9718,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="19"/>
         <StemDirection>down</StemDirection>
         <Note pitch="80" tpc="10"/>
         </Chord>
@@ -9114,6 +9734,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="19"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="80" tpc="10"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="20"/>
         <StemDirection>down</StemDirection>
         <Note pitch="80" tpc="10"/>
         </Chord>
@@ -9129,11 +9756,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="80" tpc="10"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="20"/>
         <StemDirection>down</StemDirection>
         <Note pitch="80" tpc="10"/>
         </Chord>
@@ -9461,6 +10084,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="59">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="21"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
@@ -9476,6 +10100,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="21"/>
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -9805,11 +10430,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="64">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="22"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="22"/>
         <StemDirection>down</StemDirection>
         <Note pitch="80" tpc="10"/>
         </Chord>
@@ -9823,11 +10450,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="23"/>
         <StemDirection>down</StemDirection>
         <Note pitch="80" tpc="10"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="23"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -9843,11 +10472,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="65">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="24"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="24"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -9861,11 +10492,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="25"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="25"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
@@ -9881,11 +10514,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="66">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="26"/>
         <StemDirection>down</StemDirection>
         <Note pitch="87" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="26"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
@@ -9899,11 +10534,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="27"/>
         <StemDirection>down</StemDirection>
         <Note pitch="86" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="27"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
@@ -10400,6 +11037,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="28"/>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
@@ -10415,6 +11053,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="28"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="78" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="29"/>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
@@ -10425,11 +11070,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="78" tpc="20"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="29"/>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
@@ -10978,21 +11619,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="83">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="30"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="30"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="31"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="31"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -11621,6 +12266,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="92">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="32"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
@@ -11636,6 +12282,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="32"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="33"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
@@ -11651,11 +12304,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="76" tpc="18"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="33"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
@@ -11674,6 +12323,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="34"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -11684,6 +12334,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="34"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -12601,6 +13252,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="35"/>
         <StemDirection>down</StemDirection>
         <Note pitch="73" tpc="9"/>
         </Chord>
@@ -12616,6 +13268,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="35"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="73" tpc="9"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="36"/>
         <StemDirection>down</StemDirection>
         <Note pitch="73" tpc="9"/>
         </Chord>
@@ -12631,11 +13290,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="73" tpc="9"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="36"/>
         <StemDirection>down</StemDirection>
         <Note pitch="73" tpc="9"/>
         </Chord>
@@ -13084,21 +13739,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="118">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="37"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="37"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="38"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="38"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -15181,6 +15840,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="39"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -15196,6 +15856,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="39"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -15940,6 +16601,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="40"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -15955,6 +16617,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="40"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="41"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -15970,11 +16639,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="72" tpc="14"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="41"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -16090,6 +16755,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="42"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -16105,6 +16771,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="42"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="43"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -16120,11 +16793,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="71" tpc="19"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="43"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -16208,6 +16877,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>103920</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="44"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -16223,6 +16893,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="44"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="45"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -16233,11 +16910,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="45"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -16419,6 +17092,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="59">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="46"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
@@ -16434,6 +17108,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="46"/>
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -18187,6 +18862,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="92">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="47"/>
         <StemDirection>up</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -18197,6 +18873,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="47"/>
         <StemDirection>up</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
@@ -18207,6 +18884,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="48"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -18217,6 +18895,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="48"/>
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -18229,6 +18908,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="93">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="49"/>
         <StemDirection>up</StemDirection>
         <Note pitch="68" tpc="10"/>
         </Chord>
@@ -18244,6 +18924,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="49"/>
         <StemDirection>up</StemDirection>
         <Note pitch="68" tpc="10"/>
         </Chord>
@@ -18770,6 +19451,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="50"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -18780,6 +19462,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="50"/>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -19387,6 +20070,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="51"/>
         <StemDirection>up</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -19397,11 +20081,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="51"/>
         <StemDirection>up</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="52"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -19417,6 +20103,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="52"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -19712,6 +20399,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="118">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="53"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
@@ -19727,6 +20415,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="53"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -22126,21 +22815,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="39">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="54"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="54"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="55"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="55"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -23083,6 +23776,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="56"/>
         <StemDirection>up</StemDirection>
         <Note pitch="66" tpc="20"/>
         <Note pitch="69" tpc="17"/>
@@ -23101,6 +23795,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="56"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="66" tpc="20"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="57"/>
         <StemDirection>up</StemDirection>
         <Note pitch="66" tpc="20"/>
         <Note pitch="69" tpc="17"/>
@@ -23119,12 +23821,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="66" tpc="20"/>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="57"/>
         <StemDirection>up</StemDirection>
         <Note pitch="66" tpc="20"/>
         <Note pitch="69" tpc="17"/>
@@ -23333,6 +24030,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>103920</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="58"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -23348,6 +24046,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="58"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="59"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -23358,11 +24063,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="72" tpc="14"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="59"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -23539,21 +24240,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="59">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="60"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="60"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="61"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="61"/>
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -23751,21 +24456,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="62">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="62"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="62"/>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="63"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="63"/>
         <StemDirection>down</StemDirection>
         <Note pitch="78" tpc="20"/>
         </Chord>
@@ -24045,11 +24754,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="66">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="64"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="64"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -24063,11 +24774,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="65"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="65"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
@@ -24083,11 +24796,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="67">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="66"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="66"/>
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -24101,11 +24816,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="67"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="67"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -24503,6 +25220,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="68"/>
         <StemDirection>down</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="72" tpc="14"/>
@@ -24515,12 +25233,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="68"/>
         <StemDirection>down</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="69"/>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="72" tpc="14"/>
@@ -24539,6 +25259,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="69"/>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="72" tpc="14"/>
@@ -25207,21 +25928,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="83">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="70"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="70"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="71"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="71"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -26326,21 +27051,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="102">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="72"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="72"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="73"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="73"/>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -26698,6 +27427,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="74"/>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="71" tpc="19"/>
@@ -26716,12 +27446,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="74"/>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         <Note pitch="71" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="75"/>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         <Note pitch="71" tpc="19"/>
@@ -26740,6 +27472,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="75"/>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         <Note pitch="71" tpc="19"/>
@@ -27315,21 +28048,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="118">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="76"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="76"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="77"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="77"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -29061,21 +29798,25 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>73200</tick>
         <ticklen>120</ticklen>
+        <Slur type="start" number="78"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="78"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="79"/>
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="79"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -30138,21 +30879,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="59">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="80"/>
         <StemDirection>down</StemDirection>
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="80"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="81"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="81"/>
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -30964,21 +31709,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="83">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="82"/>
         <StemDirection>down</StemDirection>
         <Note pitch="84" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="82"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="83"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="83"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -31497,21 +32246,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="102">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="84"/>
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="84"/>
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="85"/>
         <StemDirection>down</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="85"/>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -32232,21 +32985,25 @@ p, li { white-space: pre-wrap; }
     <Measure number="118">
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="86"/>
         <StemDirection>down</StemDirection>
         <Note pitch="82" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="86"/>
         <StemDirection>down</StemDirection>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="start" number="87"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Slur type="stop" number="87"/>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -48261,6 +49018,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="50">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="88"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -48276,6 +49034,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="88"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="51" tpc="11"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="89"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -48291,11 +49056,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="51" tpc="11"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="89"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -48303,6 +49064,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="51">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="90"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -48318,6 +49080,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="90"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="91"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -48333,11 +49102,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="50" tpc="16"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="91"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -48345,6 +49110,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="92"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -48360,6 +49126,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="92"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="93"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -48375,11 +49148,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="53" tpc="13"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="93"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -48387,6 +49156,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="53">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="94"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -48402,6 +49172,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="94"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="95"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -48417,11 +49194,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="52" tpc="18"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="95"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -48429,6 +49202,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="54">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="96"/>
         <StemDirection>down</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -48444,6 +49218,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="96"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="97"/>
         <StemDirection>down</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -48459,11 +49240,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="55" tpc="15"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="97"/>
         <StemDirection>down</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -48471,6 +49248,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="98"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -48486,6 +49264,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="98"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="99"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -48501,11 +49286,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="53" tpc="13"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="99"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -49283,6 +50064,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="100"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -49298,6 +50080,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="100"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="101"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -49313,11 +50102,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="52" tpc="18"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="101"/>
         <StemDirection>down</StemDirection>
         <Note pitch="52" tpc="18"/>
         </Chord>
@@ -49325,6 +50110,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="102"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -49340,6 +50126,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="102"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="51" tpc="11"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="103"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -49355,11 +50148,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="51" tpc="11"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="103"/>
         <StemDirection>down</StemDirection>
         <Note pitch="51" tpc="11"/>
         </Chord>
@@ -49367,6 +50156,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="74">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="104"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -49382,6 +50172,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="104"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="105"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -49397,11 +50194,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>down</StemDirection>
-        <Note pitch="50" tpc="16"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="105"/>
         <StemDirection>down</StemDirection>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -51193,6 +51986,7 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="106"/>
         <StemDirection>up</StemDirection>
         <Note pitch="44" tpc="10"/>
         </Chord>
@@ -51208,6 +52002,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="106"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="44" tpc="10"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="107"/>
         <StemDirection>up</StemDirection>
         <Note pitch="44" tpc="10"/>
         </Chord>
@@ -51223,11 +52024,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="44" tpc="10"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="107"/>
         <StemDirection>up</StemDirection>
         <Note pitch="44" tpc="10"/>
         </Chord>
@@ -51235,6 +52032,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="108">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="108"/>
         <StemDirection>up</StemDirection>
         <Note pitch="43" tpc="15"/>
         </Chord>
@@ -51250,6 +52048,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="108"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="109"/>
         <StemDirection>up</StemDirection>
         <Note pitch="43" tpc="15"/>
         </Chord>
@@ -51265,11 +52070,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="43" tpc="15"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="109"/>
         <StemDirection>up</StemDirection>
         <Note pitch="43" tpc="15"/>
         </Chord>
@@ -51277,6 +52078,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="109">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="110"/>
         <StemDirection>up</StemDirection>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -51292,6 +52094,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="110"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="111"/>
         <StemDirection>up</StemDirection>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -51307,11 +52116,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="46" tpc="12"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="111"/>
         <StemDirection>up</StemDirection>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -51319,6 +52124,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="110">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="112"/>
         <StemDirection>up</StemDirection>
         <Note pitch="45" tpc="17"/>
         </Chord>
@@ -51334,6 +52140,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="112"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="113"/>
         <StemDirection>up</StemDirection>
         <Note pitch="45" tpc="17"/>
         </Chord>
@@ -51349,11 +52162,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="45" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="113"/>
         <StemDirection>up</StemDirection>
         <Note pitch="45" tpc="17"/>
         </Chord>
@@ -51361,6 +52170,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="111">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="114"/>
         <StemDirection>up</StemDirection>
         <Note pitch="48" tpc="14"/>
         </Chord>
@@ -51376,6 +52186,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="114"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="115"/>
         <StemDirection>up</StemDirection>
         <Note pitch="48" tpc="14"/>
         </Chord>
@@ -51391,11 +52208,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="48" tpc="14"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="115"/>
         <StemDirection>up</StemDirection>
         <Note pitch="48" tpc="14"/>
         </Chord>
@@ -51403,6 +52216,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="112">
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="116"/>
         <StemDirection>up</StemDirection>
         <Note pitch="47" tpc="19"/>
         </Chord>
@@ -51418,6 +52232,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="116"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="47" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="117"/>
         <StemDirection>up</StemDirection>
         <Note pitch="47" tpc="19"/>
         </Chord>
@@ -51433,11 +52254,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note pitch="47" tpc="19"/>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
+        <Slur type="stop" number="117"/>
         <StemDirection>up</StemDirection>
         <Note pitch="47" tpc="19"/>
         </Chord>
