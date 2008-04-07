@@ -1056,10 +1056,7 @@ qreal TextB::basePosition() const
 
 double TextB::lineSpacing() const
       {
-      QTextBlock tb   = doc()->begin();
-      QTextLayout* tl = tb.layout();
-      QFontMetricsF fm(tl->font(), pdev);
-      return fm.lineSpacing();
+      return QFontMetricsF(doc()->defaultFont(), pdev).lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -1069,9 +1066,7 @@ double TextB::lineSpacing() const
 
 double TextB::lineHeight() const
       {
-      QTextBlock tb   = doc()->begin();
-      QTextLayout* tl = tb.layout();
-      QFontMetricsF fm(tl->font(), pdev);
+      QFontMetricsF fm(doc()->defaultFont(), pdev);
       return fm.height();
       }
 

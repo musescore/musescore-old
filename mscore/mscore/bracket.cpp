@@ -216,7 +216,7 @@ QRectF Bracket::bbox() const
 //   editDrag
 //---------------------------------------------------------
 
-void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
+void Bracket::editDrag(int, const QPointF& delta)
       {
       qreal dy = delta.y();
       yoff += dy;

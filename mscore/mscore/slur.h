@@ -55,15 +55,15 @@ class SlurSegment : public Element {
       SlurSegment(Score*);
       SlurSegment(const SlurSegment&);
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
-      virtual ElementType type() const { return SLUR_SEGMENT; }
-      virtual bool isMovable() const { return true; }
+      virtual ElementType type() const   { return SLUR_SEGMENT; }
+      virtual bool isMovable() const     { return true; }
 
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&) const;
 
       virtual bool startEdit(const QPointF&);
-      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
       virtual bool edit(int, QKeyEvent*);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
@@ -159,10 +159,7 @@ class Slur : public SlurTie {
       // obsolete:
       void setStart(int t, int track);
       void setEnd(int t,   int track);
-#if 0       // obsolete
-      bool startsAt(int t, int track);
-      bool endsAt(int t,   int track);
-#endif
+
       int id() const    { return _id; }
       void setId(int i) { _id = i;    }
       };

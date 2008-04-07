@@ -216,7 +216,7 @@ QPointF SlurSegment::gripAnchor(int grip) const
 //   editDrag
 //---------------------------------------------------------
 
-void SlurSegment::editDrag(int curGrip, const QPointF&, const QPointF& delta)
+void SlurSegment::editDrag(int curGrip, const QPointF& delta)
       {
       ups[curGrip].off += (delta / _spatium);
 
@@ -252,7 +252,8 @@ void SlurSegment::editDrag(int curGrip, const QPointF&, const QPointF& delta)
 
 QRectF SlurSegment::bbox() const
       {
-      return path.boundingRect();
+      QRectF r(path.boundingRect());
+      return r;
       }
 
 //---------------------------------------------------------

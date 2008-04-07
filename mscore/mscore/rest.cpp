@@ -130,7 +130,6 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   return 0;
             case ICON:
                   {
-                  printf("change beam mode\n");
                   switch(e->subtype()) {
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(this, BEAM_BEGIN);

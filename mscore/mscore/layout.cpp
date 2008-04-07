@@ -18,6 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <fenv.h>
 #include "page.h"
 #include "sig.h"
 #include "key.h"

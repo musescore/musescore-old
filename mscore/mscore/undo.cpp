@@ -567,7 +567,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   ChordRest* cr = (ChordRest*)i->element1;
                   int mode = int(cr->beamMode());
                   cr->setBeamMode(BeamMode(i->val1));
-printf("change beam mode %d %d\n", mode, i->val1);
                   i->val1 = int(mode);
                   }
                   break;

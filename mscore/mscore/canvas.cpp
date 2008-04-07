@@ -87,6 +87,7 @@ Canvas::Canvas(QWidget* parent)
       shadowNote       = 0;
       cursorTimer      = new QTimer(this);
       mousePressed     = false;
+      grips            = 0;
 
       connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
       if (preferences.cursorBlink)
@@ -610,7 +611,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   _score->setLayoutAll(false);
                   Element* e = _score->editObject;
                   score()->addRefresh(e->abbox());
-                  e->editDrag(curGrip, startMove, delta);
+                  e->editDrag(curGrip, delta);
                   updateGrips();
                   startMove += delta;
                   }
@@ -651,14 +652,23 @@ void Canvas::updateGrips()
       if (e == 0)
             return;
 
-      qreal w = 8.0 / _matrix.m11();
-      qreal h = 8.0 / _matrix.m22();
+      double dx = 1.5 / _matrix.m11();
+      double dy = 1.5 / _matrix.m22();
+
+      for (int i = 0; i < grips; ++i)
+            score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
+
+      qreal w   = 8.0 / _matrix.m11();
+      qreal h   = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
       for (int i = 0; i < 4; ++i)
             grip[i] = r;
+
       e->updateGrips(&grips, grip);
-      for (int i = 0; i < 4; ++i)
-            score()->addRefresh(grip[i]);
+
+      for (int i = 0; i < grips; ++i)
+            score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
+
       QPointF anchor = e->gripAnchor(curGrip);
       if (!anchor.isNull())
             setDropAnchor(QLineF(anchor, grip[curGrip].center()));
@@ -707,6 +717,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
                   _score->addRefresh(_score->editObject->abbox());
                   _score->editObject->endEditDrag();
                   updateGrips();
+                  grips = 0;
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);

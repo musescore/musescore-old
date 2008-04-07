@@ -126,7 +126,7 @@ bool Image::startEdit(const QPointF&)
 //   editDrag
 //---------------------------------------------------------
 
-void Image::editDrag(int curGrip, const QPointF&, const QPointF& d)
+void Image::editDrag(int curGrip, const QPointF& d)
       {
       if (curGrip == 0)
             sz.setWidth(sz.width() + d.x());

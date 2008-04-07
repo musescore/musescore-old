@@ -177,7 +177,7 @@ QPointF LineSegment::pos2anchor(const QPointF& pos, int* tick) const
 //   editDrag
 //---------------------------------------------------------
 
-void LineSegment::editDrag(int curGrip, const QPointF&, const QPointF& d)
+void LineSegment::editDrag(int curGrip, const QPointF& d)
       {
       QPointF delta(d.x() / _spatium, 0);    // only x-axis move
 

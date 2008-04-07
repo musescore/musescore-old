@@ -186,6 +186,7 @@ TextLine::TextLine(Score* s)
       _lineStyle  = Qt::SolidLine;
       _hookUp     = false;
       _lineColor  = Qt::black;
+      textBase()->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
       }
 
 TextLine::TextLine(const TextLine& e)
@@ -336,7 +337,10 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
 void LineProperties::accept()
       {
       tl->setLineWidth(Spatium(lineWidth->value()));
-      tl->setHookHeight(Spatium(hookHeight->value()));
+      if (hook->isChecked())
+            tl->setHookHeight(Spatium(hookHeight->value()));
+      else
+            tl->setHookHeight(Spatium(0.0));
       tl->setHookUp(up->isChecked());
       tl->setLineStyle(Qt::PenStyle(lineStyle->currentIndex() + 1));
       tl->setLineColor(linecolor->color());
