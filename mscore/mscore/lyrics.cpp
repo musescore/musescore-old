@@ -244,7 +244,6 @@ void Score::lyricsMinus()
       int staffIdx     = lyrics->staffIdx();
       Segment* segment = (Segment*)(lyrics->parent());
       int verse        = lyrics->no();
-      int endTick      = lyrics->tick();
 
       canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
@@ -270,14 +269,6 @@ void Score::lyricsMinus()
             if (oldLyrics)
                   break;
             segment = segment->prev1();
-            }
-      if(oldLyrics) {
-            if (oldLyrics->syllabic() == Lyrics::END) {
-                  if (oldLyrics->endTick() != endTick) {
-                        printf("end tick gap\n");
-                        oldLyrics = 0;
-                        }
-                  }
             }
 
       startCmd();
