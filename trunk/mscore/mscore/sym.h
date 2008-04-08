@@ -41,12 +41,12 @@ class Sym {
       QChar _code;
       int fontId;
       const char* _name;
-      QFont _font;
+      QFont* _font;
       double w;
       QRectF _bbox;
 
    public:
-      Sym() { _code = 0; }
+      Sym() { _code = 0; _font = 0; }
       Sym(const char* name, const QChar& c, int fid);
 
       const char* name() const             { return _name; }
@@ -55,7 +55,7 @@ class Sym {
       double width(double) const;
       QChar code() const                   { return _code;   }
       int getFontId() const                { return fontId;  }
-      const QFont& font() const            { return _font;   }
+      const QFont& font() const            { return *_font;   }
       void setCode(const QChar& c)         { _code = c;      }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, qreal x, qreal y) const;

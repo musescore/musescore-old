@@ -1397,6 +1397,7 @@ int main(int argc, char* argv[])
       // feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 
       QApplication app(argc, argv);
+
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
@@ -1449,24 +1450,17 @@ int main(int argc, char* argv[])
       DPI  = pdev->logicalDpiX();      // logical drawing resolution
       DPMM = DPI / INCH;  // dots/mm
 
-      // HACK:
-      // without setting the application font to a pixel size,
-      // menu entries are garbled
-#if 1
-      QFont f = qApp->font();
-      double size = f.pointSizeF();
-      if (size > 0.0) {
-            int px = lrint(size * PDPI / PPI);
-            f.setPixelSize(px);
-            qApp->setFont(f);
-            }
-#endif
+      if (debugMode)
+            printf("DPI %f(%d) PDPI %f(%d)\n",
+               DPI, pdev->physicalDpiX(),
+               PDPI, wi.physicalDpiX());
+
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
       _spatium = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
-      initSymbols();
+//      initSymbols();
 
       mscoreGlobalShare = getSharePath();
       if (debugMode) {
