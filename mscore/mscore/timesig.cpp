@@ -219,37 +219,45 @@ void TimeSig::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF TimeSig::bbox() const
+void TimeSig::layout(ScoreLayout*)
       {
-      QRectF _bbox;
+      QRectF bb;
       int st = subtype();
       if (st == 0)
-            _bbox = QRectF(0, 0,0, 0);
+            bb = QRectF(0, 0,0, 0);
       else if (st ==  TSIG_FOUR_FOUR)
-            _bbox = symbols[fourfourmeterSym].bbox().translated(0.0, 2.0 * _spatium);
+            bb = symbols[fourfourmeterSym].bbox().translated(0.0, 2.0 * _spatium);
       else if (st == TSIG_ALLA_BREVE)
-            _bbox = symbols[allabreveSym].bbox().translated(0.0, 2.0 * _spatium);
+            bb = symbols[allabreveSym].bbox().translated(0.0, 2.0 * _spatium);
       else {
             int n, z1, z2, z3, z4;
             getSig(&n, &z1, &z2, &z3, &z4);
-            QString zs = QString("%1").arg(z1);
+            sz = QString("%1").arg(z1);
             if (z2)
-                  zs += QString("+%1").arg(z2);
+                  sz += QString("+%1").arg(z2);
             if (z3)
-                  zs += QString("+%1").arg(z3);
+                  sz += QString("+%1").arg(z3);
             if (z4)
-                  zs += QString("+%1").arg(z4);
-            QString ns = QString("%1").arg(n);
+                  sz += QString("+%1").arg(z4);
+            sn = QString("%1").arg(n);
+
             QFontMetricsF fm(symbols[allabreveSym].font(), pdev);
 
-            qreal  zw = fm.width(zs);
-            qreal  nw = fm.width(ns);
-            _bbox = QRectF(0.0, 0.0, qMax(zw, nw), 4.0 * _spatium);
+            QRectF rz = fm.tightBoundingRect(sz);
+            QRectF rn = fm.tightBoundingRect(sn);
+
+            double m = _spatium / (DPI * SPATIUM20);
+            double im = 1.0 / m;
+            pz = QPointF(0.0, 2.0 * _spatium * mag()) * im;
+            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium * mag()) * im;
+
+            bb |= rz.translated(pz);
+            bb |= rn.translated(pn);
             }
-      return _bbox;
+      setbbox(bb);
       }
 
 //---------------------------------------------------------
@@ -266,28 +274,12 @@ void TimeSig::draw(QPainter& p) const
       else if (st == TSIG_ALLA_BREVE)
             symbols[allabreveSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
       else {
-            int n, z1, z2, z3, z4;
-            getSig(&n, &z1, &z2, &z3, &z4);
-            QString zs = QString("%1").arg(z1);
-            if (z2)
-                  zs += QString("+%1").arg(z2);
-            if (z3)
-                  zs += QString("+%1").arg(z3);
-            if (z4)
-                  zs += QString("+%1").arg(z4);
-            QString ns = QString("%1").arg(n);
-//            p.setFont(symbols[allabreveSym].font(mag()));
             p.setFont(symbols[allabreveSym].font());
-
-            QRectF r(0.0, 0.0 * _spatium , 0.0, 0.0);
-            QRectF rz = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, zs);
-            QRectF rn = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, ns);
-
-            double m = _spatium / (DPI * SPATIUM20);
+            double m  = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;
             p.scale(m, m);
-            p.drawText(QPointF(0.0, 2.0 * _spatium * mag())*im, zs);
-            p.drawText(QPointF((rz.width()-rn.width())*.5, 4.0 * _spatium * mag()) * im, ns);
+            p.drawText(pz, sz);
+            p.drawText(pn, sn);
             p.scale(im, im);
             }
       }

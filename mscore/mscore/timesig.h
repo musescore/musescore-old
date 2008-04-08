@@ -47,6 +47,9 @@ enum {
 */
 class TimeSig : public Element {
 
+      QString sz, sn;   // cached values, set in layout()
+      QPointF pz, pn;
+
    public:
       TimeSig(Score*);
       TimeSig(Score*, int st);
@@ -59,6 +62,9 @@ class TimeSig : public Element {
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+      virtual void layout(ScoreLayout*);
+
+
       void getSig(int* n, int* z1) const;
       static void getSig(int st, int* n, int* z) {
             *n = st & 0x3f;
@@ -71,7 +77,6 @@ class TimeSig : public Element {
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      virtual QRectF bbox() const;
       static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
             }

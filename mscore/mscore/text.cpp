@@ -42,7 +42,7 @@ TextPalette* palette;
 TextBase::TextBase()
       {
       _doc          = new QTextDocument(0);
-      _doc->setUseDesignMetrics(true);
+//      _doc->setUseDesignMetrics(true);
 
       _frameWidth   = 0.0;
       _paddingWidth = 0.0;

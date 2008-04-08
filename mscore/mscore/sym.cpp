@@ -236,21 +236,21 @@ Sym::Sym(const char* name, const QChar& c, int fid)
       //
       int size = lrint(20.0 * DPI / PPI);
       if (fontId == 0) {
-            _font = QFont("MScore");
+            _font = new QFont("MScore");
             }
       else if (fontId == 1) {
-            _font = QFont("MScore1");
+            _font = new QFont("MScore1");
             }
       else if (fontId == 2) {
-            _font = QFont("Times New Roman");
+            _font = new QFont("Times New Roman");
             size = lrint(8 * DPI / PPI);
             }
       else {
             printf("illegal font id %d\n", fontId);
             abort();
             }
-      _font.setPixelSize(size);
-      QFontMetricsF fm(_font);
+      _font->setPixelSize(size);
+      QFontMetricsF fm(*_font);
 #ifdef CTABLE_HACK
       double m = (DPI/PPI) / 16.66667;
       unsigned i;
@@ -263,8 +263,8 @@ Sym::Sym(const char* name, const QChar& c, int fid)
             }
       if (i == sizeof(ctable)/sizeof(*ctable)) {
             printf("sym not found\n");
-            _bbox = QFontMetricsF(_font).boundingRect(_code);
-            w     = QFontMetricsF(_font).width(_code);
+            _bbox = QFontMetricsF(*_font).boundingRect(_code);
+            w     = QFontMetricsF(*_font).width(_code);
             }
 #else
       w     = fm.width(_code);
@@ -332,7 +332,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       mag *= _spatium / (DPI * SPATIUM20);
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-      painter.setFont(_font);
+      painter.setFont(*_font);
       painter.drawText(QPointF(x, y) * imag, QString(_code));
       painter.scale(imag, imag);
       }
@@ -346,7 +346,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       mag *= _spatium / (DPI * SPATIUM20);
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-      painter.setFont(_font);
+      painter.setFont(*_font);
       painter.drawText(QPointF(x, y) * imag, QString(n, _code));
       painter.scale(imag, imag);
       }
