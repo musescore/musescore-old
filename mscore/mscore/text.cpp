@@ -627,28 +627,6 @@ void TextB::draw(QPainter& p) const
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(f);
             }
-#if 0
-      if (debugMode && selected()) {
-            QRectF f;
-            for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
-                  QTextLayout* tl = tb.layout();
-                  int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i) {
-                        const QTextLine l = tl->lineAt(i);
-                        //f |= l.naturalTextRect().translated(tl->position());
-                        f |= l.rect().translated(tl->position());
-//                        printf("Line %f %f %f, %f %f\n",
-//                              l.rect().height(), l.naturalTextRect().height(), l.height(),
-//                                 l.ascent(), l.descent());
-                        }
-                  }
-            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
-            f.adjust(-w, -w, w, w);
-            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
-            p.setBrush(QBrush(Qt::NoBrush));
-            p.drawRect(f);
-            }
-#endif
       p.restore();
       }
 
@@ -1180,9 +1158,10 @@ QLineF TextB::dragAnchor() const
             return QLineF(p1, QPointF(x, y) + canvasPos());
             }
       else if (anchor() == ANCHOR_PARENT) {
+            }
 #endif
             return QLineF(p1, abbox().topLeft());
 //            }
-      return QLineF(p1, QPointF(x, y) + canvasPos());
+//      return QLineF(p1, QPointF(x, y) + canvasPos());
       }
 
