@@ -1185,7 +1185,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
             p.fillRect(rr, _fgColor);
       else {
             p.drawTiledPixmap(rr, *fgPixmap, rr.topLeft()
-               - QPoint(lrint(_matrix.dx()), lrint(_matrix.dx())));
+               - QPoint(lrint(_matrix.dx()), lrint(_matrix.dy())));
             }
 
       p.setMatrix(_matrix);

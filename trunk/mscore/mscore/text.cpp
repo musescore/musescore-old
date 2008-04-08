@@ -193,7 +193,7 @@ void TextBase::layout(ScoreLayout*)
       {
       _doc->documentLayout()->setPaintDevice(pdev);
       _doc->setTextWidth(-1.0);
-      _doc->setTextWidth(-1.0);
+//      _doc->setTextWidth(-1.0);
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -220,8 +220,11 @@ void TextBase::layout(ScoreLayout*)
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            double tw = _doc->idealWidth();
-            _bbox = QRectF(QPointF(), QPointF(tw, _doc->size().height()));
+            // double tw = _doc->idealWidth();
+            // _bbox = QRectF(QPointF(), QPointF(tw, _doc->size().height()));
+            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
+            // _bbox = QRectF(QPointF(), _doc->documentLayout()->documentSize());
+            // _bbox = _doc->documentLayout()->blockBoundingRect(_doc->begin());
             }
       }
 

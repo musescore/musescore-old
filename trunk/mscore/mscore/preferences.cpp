@@ -40,7 +40,7 @@ extern void readShortcuts();
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
 QString appStyleSheet(
-      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
+      "PaletteBoxButton  { font-size: 8pt; background-color: rgb(215, 215, 215) }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
       "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
