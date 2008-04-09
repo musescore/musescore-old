@@ -1445,9 +1445,10 @@ int main(int argc, char* argv[])
       DPMM = DPI / INCH;  // dots/mm
 
       if (debugMode)
-            printf("DPI %f(%d) PDPI %f(%d)\n",
+            printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
                DPI, pdev->physicalDpiX(),
-               PDPI, wi.physicalDpiX());
+               PDPI, wi.physicalDpiX(),
+               DPMM);
 
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots

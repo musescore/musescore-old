@@ -220,6 +220,7 @@ void Box::read(QDomElement e)
                         image = new SvgImage(score());
                   else if (path.endsWith(".jpg")
                      || path.endsWith(".png")
+                     || path.endsWith(".gif")
                      || path.endsWith(".xpm")
                         ) {
                         image = new RasterImage(score());
