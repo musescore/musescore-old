@@ -26,6 +26,8 @@
 #include "mscore.h"
 #include "seq.h"
 #include "fluid.h"
+#include "alsa.h"
+#include "alsamidi.h"
 
 //---------------------------------------------------------
 //   jack_thread_init
@@ -373,6 +375,12 @@ bool JackAudio::init()
             synth = 0;
             return false;
             }
+      midiDriver = new AlsaMidiDriver(seq);
+      if (!midiDriver->init()) {
+            delete midiDriver;
+            midiDriver = 0;
+            return false;
+            }
       return true;
       }
 
@@ -441,4 +449,12 @@ const MidiPatch* JackAudio::getPatchInfo(int port, int ch, const MidiPatch* p)
       return 0;
       }
 
+//---------------------------------------------------------
+//   midiRead
+//---------------------------------------------------------
+
+void JackAudio::midiRead()
+      {
+      midiDriver->read();
+      }
 

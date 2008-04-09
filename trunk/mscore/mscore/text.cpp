@@ -480,7 +480,7 @@ const QString TextB::subtypeName() const
             case TEXT_TUPLET:           return "Tuplet";
             case TEXT_SYSTEM:           return "System";
             case TEXT_STAFF:            return "Staff";
-            case TEXT_CHORD:            return "Chordname";
+            case TEXT_CHORD:            return "";     // "Chordname";
             case TEXT_REHEARSAL_MARK:   return "RehearsalMark";
             case TEXT_REPEAT:           return "Repeat";
             case TEXT_VOLTA:            return "Volta";

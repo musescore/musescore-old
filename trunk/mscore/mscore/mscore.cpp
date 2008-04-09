@@ -1134,16 +1134,6 @@ void MuseScore::setCurrentScore(int idx)
       }
 
 //---------------------------------------------------------
-//   midiReceived
-//---------------------------------------------------------
-
-void MuseScore::midiReceived()
-      {
-      if (cs)
-            cs->midiReceived();
-      }
-
-//---------------------------------------------------------
 //   resetUserStretch
 //---------------------------------------------------------
 
@@ -1169,7 +1159,11 @@ void MuseScore::resetUserOffsets()
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
-      if (cs)
+      // do not accept any note input if any modal widget
+      // is active
+
+      QWidget* w = QApplication::activeModalWidget();
+      if (cs && w == 0)
             cs->midiNoteReceived(pitch, chord);
       }
 

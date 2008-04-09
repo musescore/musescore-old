@@ -27,6 +27,11 @@
 
 #include "mididriver.h"
 
+struct PortName {
+      Port port;
+      QString name;
+      };
+
 //---------------------------------------------------------
 //   AlsaMidiDriver
 //---------------------------------------------------------
@@ -35,9 +40,12 @@ class AlsaMidiDriver : public MidiDriver {
       snd_seq_t* alsaSeq;
 
       bool putEvent(snd_seq_event_t* event);
+      QList<PortName> outputPorts();
+      QList<PortName> inputPorts();
+      bool connect(Port src, Port dst);
 
    public:
-      AlsaMidiDriver();
+      AlsaMidiDriver(Seq* s);
       virtual ~AlsaMidiDriver() {}
       virtual bool init();
       virtual Port registerOutPort(const QString& name);

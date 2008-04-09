@@ -1215,23 +1215,11 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
       }
 
 //---------------------------------------------------------
-//   midiReceived
-//---------------------------------------------------------
-
-void Score::midiReceived()
-      {
-#ifdef USE_ALSA
-      midiDriver->read();
-#endif
-      }
-
-//---------------------------------------------------------
 //   midiNoteReceived
 //---------------------------------------------------------
 
 void Score::midiNoteReceived(int pitch, bool chord)
       {
-      startCmd();
       if (!noteEntryMode())
             setNoteEntry(true, false);
       if (noteEntryMode()) {
@@ -1245,9 +1233,8 @@ void Score::midiNoteReceived(int pitch, bool chord)
                   setNote(_is.pos, _is.track, pitch, len);
                   _is.pos += len;
                   }
+            layoutAll = true;
             }
-      layoutAll = true;
-      endCmd();
       }
 
 #if 0

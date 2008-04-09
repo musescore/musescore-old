@@ -223,7 +223,6 @@ class Score : public QObject {
       void doRedo();
       void processUndoOp(UndoOp*, bool);
 
-      void midiReceived();
       void resetUserOffsets();
       void resetUserStretch();
 

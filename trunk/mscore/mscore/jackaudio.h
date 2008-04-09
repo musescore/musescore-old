@@ -27,6 +27,7 @@
 
 class ISynth;
 class Seq;
+class MidiDriver;
 
 //---------------------------------------------------------
 //   JackAudio
@@ -42,6 +43,7 @@ class JackAudio : public Driver {
       jack_port_t* portL;
 
       ISynth* synth;
+      MidiDriver* midiDriver;
 
       static void jack_thread_init(void* data);
       static int processAudio(jack_nframes_t, void*);
@@ -68,6 +70,7 @@ class JackAudio : public Driver {
       virtual void putEvent(const MidiOutEvent&);
       virtual void process(int, float*, float*, int);
       virtual const MidiPatch* getPatchInfo(int, int, const MidiPatch*);
+      virtual void midiRead();
       };
 
 #endif

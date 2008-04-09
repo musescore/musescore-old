@@ -256,7 +256,6 @@ class MuseScore : public QMainWindow {
       void barMenu();
       void noteAttributesMenu();
       void accidentalsMenu();
-      void midiReceived();
       void cmdAppendMeasures();
       void cmdInsertMeasures();
       void resetUserStretch();
