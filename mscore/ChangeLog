@@ -1,3 +1,8 @@
+9.4.8 (ws)
+      - add ALSA midi input to JACK driver
+      - auto connect all midi sources
+      - add ALSA midi input to PortAudio driver on linux
+      - better handling of invalid chord names
 4.4.8 (ws)
       - can now create *.png files from command line
         (example: mscore promenade.msc -o promenade.png)

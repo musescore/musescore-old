@@ -928,6 +928,8 @@ QPointF Note::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = chord()->measure()->system();
+      if (system == 0)
+            return pos();
       double yp = y() + system->staff(staffIdx() + staffMove())->y() + system->y();
       return QPointF(xp, yp);
       }

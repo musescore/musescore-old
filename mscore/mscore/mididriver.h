@@ -65,9 +65,10 @@ class MidiDriver {
    protected:
       Port midiInPort;
       Port* midiOutPorts;
+      Seq* seq;
 
    public:
-      MidiDriver() {}
+      MidiDriver(Seq* s) { seq = s; }
       virtual ~MidiDriver() {}
       virtual bool init() = 0;
       virtual Port registerOutPort(const QString& name) = 0;

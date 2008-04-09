@@ -22,10 +22,10 @@
 #define __PORTAUDIO_H__
 
 #include "config.h"
-#include "driver.h"
 
 class ISynth;
 class Seq;
+class MidiDriver;
 
 //---------------------------------------------------------
 //   Portaudio
@@ -39,7 +39,9 @@ class Portaudio : public Driver {
       bool seekflag;
       unsigned pos;
       double startTime;
+
       ISynth* synth;
+      MidiDriver* midiDriver;
 
    public:
       Portaudio(Seq*);
@@ -67,6 +69,7 @@ class Portaudio : public Driver {
 
       virtual void putEvent(const MidiOutEvent&);
       virtual void process(int, float*, float*, int);
+      virtual void midiRead();
       };
 
 #endif

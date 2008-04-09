@@ -560,11 +560,12 @@ static double curTime()
 AlsaAudio::AlsaAudio(Seq* s)
    : Driver(s)
       {
-      alsa      = 0;
-      synth     = 0;
-      state     = Seq::STOP;
-      seekflag  = false;
-      startTime = curTime();
+      alsa       = 0;
+      synth      = 0;
+      state      = Seq::STOP;
+      seekflag   = false;
+      startTime  = curTime();
+      midiDriver = 0;
       }
 
 //---------------------------------------------------------
@@ -619,20 +620,11 @@ bool AlsaAudio::init()
             synth = 0;
             return false;
             }
-      midiDriver = new AlsaMidiDriver();
-      if (!midiDriver->init())
+      midiDriver = new AlsaMidiDriver(seq);
+      if (!midiDriver->init()) {
+            delete midiDriver;
+            midiDriver = 0;
             return false;
-      midiInPort = midiDriver->registerOutPort("MuseScore Port-0");
-
-      struct pollfd* pfd;
-      int npfd;
-      midiDriver->getInputPollFd(&pfd, &npfd);
-      for (int i = 0; i < npfd; ++i) {
-            int fd = pfd[i].fd;
-            if (fd != -1) {
-                  QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
-                  s->connect(s, SIGNAL(activated(int)), seq, SLOT(midiInputReady()));
-                  }
             }
       return true;
       }

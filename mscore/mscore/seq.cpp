@@ -1097,7 +1097,10 @@ const MidiPatch* Seq::getPatchInfo(int port, int ch, const MidiPatch* p)
 
 void Seq::midiInputReady()
       {
-      if (driver)
+      if (driver) {
+            cs->startCmd();
             driver->midiRead();
+            cs->endCmd();
+            }
       }
 

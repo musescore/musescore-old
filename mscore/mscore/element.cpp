@@ -333,8 +333,11 @@ void Element::layout(ScoreLayout* layout)
 QList<Prop> Element::properties(Xml& xml) const
       {
       QList<Prop> pl;
-      if (_subtype)
-            pl.append(Prop("subtype", subtypeName()));
+      if (_subtype) {
+            QString s(subtypeName());
+            if (!s.isEmpty())
+                  pl.append(Prop("subtype", subtypeName()));
+            }
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
       if (track() != xml.curTrack) {

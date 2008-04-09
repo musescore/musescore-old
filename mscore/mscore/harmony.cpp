@@ -634,29 +634,31 @@ void Harmony::propertyAction(const QString& s)
 void Harmony::write(Xml& xml) const
       {
       xml.stag("Harmony");
-      xml.tag("root", _rootTpc);
-      if (_extension)
-            xml.tag("extension", _extension);
-      if (_baseTpc != INVALID_TPC)
-            xml.tag("base", _baseTpc);
-      for (int i = 0; i < _degreeList.size(); i++) {
-            HDegree hd = _degreeList.value(i);
-            int tp = hd.type();
-            if (tp == ADD || tp == ALTER || tp == SUBTRACT) {
-                  xml.stag("degree");
-                  xml.tag("degree-value", hd.value());
-                  xml.tag("degree-alter", hd.alter());
-                  switch (tp) {
-                        case ADD: xml.tag("degree-type", "add");
-                              break;
-                        case ALTER: xml.tag("degree-type", "alter");
-                              break;
-                        case SUBTRACT: xml.tag("degree-type", "subtract");
-                              break;
-                        default:
-                              break;
+      if (_rootTpc != INVALID_TPC) {
+            xml.tag("root", _rootTpc);
+            if (_extension)
+                  xml.tag("extension", _extension);
+            if (_baseTpc != INVALID_TPC)
+                  xml.tag("base", _baseTpc);
+            for (int i = 0; i < _degreeList.size(); i++) {
+                  HDegree hd = _degreeList.value(i);
+                  int tp = hd.type();
+                  if (tp == ADD || tp == ALTER || tp == SUBTRACT) {
+                        xml.stag("degree");
+                        xml.tag("degree-value", hd.value());
+                        xml.tag("degree-alter", hd.alter());
+                        switch (tp) {
+                              case ADD: xml.tag("degree-type", "add");
+                                    break;
+                              case ALTER: xml.tag("degree-type", "alter");
+                                    break;
+                              case SUBTRACT: xml.tag("degree-type", "subtract");
+                                    break;
+                              default:
+                                    break;
+                              }
+                        xml.etag();
                         }
-                  xml.etag();
                   }
             }
       Text::writeProperties(xml);
@@ -736,6 +738,9 @@ void Harmony::read(QDomElement e)
 
 void Harmony::buildText()
       {
+      if (_rootTpc == INVALID_TPC)
+            return;
+
       clear();
 
       QString txt(harmonyName());
@@ -881,7 +886,7 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
             }
       int r = convertRoot(s);
       if (r == INVALID_TPC) {
-            printf("parseHarmony failed <%s>\n", qPrintable(ss));
+            printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
             return -1;
             }
       *root = r;
@@ -900,7 +905,8 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
             if (QString(extensionNames[i].name).toLower() == s)
                   return i;
             }
-      return 0;
+      printf("2:parseHarmony failed <%s>\n", qPrintable(ss));
+      return -1;
       }
 
 //---------------------------------------------------------
@@ -911,7 +917,6 @@ void Harmony::endEdit()
       {
       Text::endEdit();
 
-      QString s = getText();
       int r, b;
       int e = parseHarmony(getText(), &r, &b);
       if (e > 0) {

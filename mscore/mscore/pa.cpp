@@ -26,6 +26,11 @@
 #include "pa.h"
 #include "fluid.h"
 
+#ifdef USE_ALSA
+#include "alsa.h"
+#include "alsamidi.h"
+#endif
+
 #include <portaudio.h>
 
 PaStream* stream;
@@ -53,6 +58,7 @@ Portaudio::Portaudio(Seq* s)
       initialized = false;
       state       = Seq::STOP;
       seekflag    = false;
+      midiDriver  = 0;
       }
 
 //---------------------------------------------------------
@@ -111,6 +117,14 @@ bool Portaudio::init()
             synth = 0;
             return false;
             }
+#ifdef USE_ALSA
+      midiDriver = new AlsaMidiDriver(seq);
+      if (!midiDriver->init()) {
+            delete midiDriver;
+            midiDriver = 0;
+            return false;
+            }
+#endif
       return true;
       }
 
@@ -278,5 +292,12 @@ void Portaudio::process(int n, float* l, float* r, int stride)
       synth->process(n, l, r, stride);
       }
 
+//---------------------------------------------------------
+//   midiRead
+//---------------------------------------------------------
 
+void Portaudio::midiRead()
+      {
+      midiDriver->read();
+      }
 

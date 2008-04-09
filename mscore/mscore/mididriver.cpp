@@ -104,8 +104,8 @@ static const unsigned int outCap = SND_SEQ_PORT_CAP_SUBS_WRITE;
 //   AlsaMidiDriver
 //---------------------------------------------------------
 
-AlsaMidiDriver::AlsaMidiDriver()
-   : MidiDriver()
+AlsaMidiDriver::AlsaMidiDriver(Seq* s)
+   : MidiDriver(s)
       {
       }
 
@@ -159,6 +159,127 @@ bool AlsaMidiDriver::init()
       midiInPort   = registerOutPort("MuseScore Port-0");
       for (int i = 0; i < preferences.midiPorts; ++i)
             midiOutPorts[i] = registerInPort(QString("MuseScore Port-%1").arg(i));
+
+      struct pollfd* pfd;
+      int npfd;
+      getInputPollFd(&pfd, &npfd);
+      for (int i = 0; i < npfd; ++i) {
+            int fd = pfd[i].fd;
+            if (fd != -1) {
+                  QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
+                  s->connect(s, SIGNAL(activated(int)), seq, SLOT(midiInputReady()));
+                  }
+            }
+#if 0
+      // TODO: autoconnect all output ports
+      QList<PortName> ol = outputPorts();
+      foreach(PortName pn, ol) {
+            printf("Output <%s>\n", qPrintable(pn.name));
+            }
+#endif
+
+      // connect all midi sources to mscore
+      QList<PortName> il = inputPorts();
+      foreach(PortName pn, il) {
+            printf("Input <%s>\n", qPrintable(pn.name));
+            connect(pn.port, midiInPort);
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   outputPorts
+//---------------------------------------------------------
+
+QList<PortName> AlsaMidiDriver::outputPorts()
+      {
+      QList<PortName> clientList;
+      snd_seq_client_info_t* cinfo;
+      snd_seq_client_info_alloca(&cinfo);
+      snd_seq_client_info_set_client(cinfo, 0);
+
+      while (snd_seq_query_next_client(alsaSeq, cinfo) >= 0) {
+            snd_seq_port_info_t *pinfo;
+            snd_seq_port_info_alloca(&pinfo);
+            snd_seq_port_info_set_client(pinfo, snd_seq_client_info_get_client(cinfo));
+            snd_seq_port_info_set_port(pinfo, -1);
+            while (snd_seq_query_next_port(alsaSeq, pinfo) >= 0) {
+                  unsigned int capability = snd_seq_port_info_get_capability(pinfo);
+                  if (((capability & outCap) == outCap)
+                     && !(capability & SND_SEQ_PORT_CAP_NO_EXPORT)) {
+                        int client = snd_seq_port_info_get_client(pinfo);
+                        if (client != snd_seq_client_id(alsaSeq)) {
+                              PortName pn;
+                              pn.name = QString(snd_seq_port_info_get_name(pinfo));
+                              pn.port = Port(client, snd_seq_port_info_get_port(pinfo));
+                              clientList.append(pn);
+                              }
+                        }
+                  }
+            }
+      return clientList;
+      }
+
+//---------------------------------------------------------
+//   inputPorts
+//---------------------------------------------------------
+
+QList<PortName> AlsaMidiDriver::inputPorts()
+      {
+      QList<PortName> clientList;
+
+      snd_seq_client_info_t* cinfo;
+      snd_seq_client_info_alloca(&cinfo);
+      snd_seq_client_info_set_client(cinfo, 0);
+
+      while (snd_seq_query_next_client(alsaSeq, cinfo) >= 0) {
+            snd_seq_port_info_t *pinfo;
+            snd_seq_port_info_alloca(&pinfo);
+            snd_seq_port_info_set_client(pinfo, snd_seq_client_info_get_client(cinfo));
+            snd_seq_port_info_set_port(pinfo, -1);
+            while (snd_seq_query_next_port(alsaSeq, pinfo) >= 0) {
+                  unsigned int capability = snd_seq_port_info_get_capability(pinfo);
+                  if (((capability & inCap) == inCap)
+                     && !(capability & SND_SEQ_PORT_CAP_NO_EXPORT)) {
+                        int client = snd_seq_port_info_get_client(pinfo);
+                        if (client != snd_seq_client_id(alsaSeq)) {
+                              PortName pn;
+                              pn.name = QString(snd_seq_port_info_get_name(pinfo));
+                              pn.port = Port(client, snd_seq_port_info_get_port(pinfo));
+                              clientList.append(pn);
+                              }
+                        }
+                  }
+            }
+      return clientList;
+      }
+
+//---------------------------------------------------------
+//   connect
+//    return false if connect fails
+//---------------------------------------------------------
+
+bool AlsaMidiDriver::connect(Port src, Port dst)
+      {
+      snd_seq_port_subscribe_t* sub;
+      snd_seq_port_subscribe_alloca(&sub);
+
+      snd_seq_addr_t s, d;
+      s.port   = src.alsaPort();
+      s.client = src.alsaClient();
+      d.port   = dst.alsaPort();
+      d.client = dst.alsaClient();
+      snd_seq_port_subscribe_set_sender(sub, &s);
+      snd_seq_port_subscribe_set_dest(sub, &d);
+
+      int rv = snd_seq_subscribe_port(alsaSeq, sub);
+      if (rv < 0) {
+            printf("AlsaMidi::connect(%d:%d, %d:%d) failed: %s\n",
+               src.alsaClient(), src.alsaPort(),
+               dst.alsaClient(), dst.alsaPort(),
+               snd_strerror(rv));
+            return false;
+            }
       return true;
       }
 
@@ -227,77 +348,79 @@ void AlsaMidiDriver::read()
       static int active;
 
       snd_seq_event_t* ev;
-      int rv = snd_seq_event_input(alsaSeq, &ev);
-      if (rv < 0)
-            return;
+      for (;;) {
+            int rv = snd_seq_event_input(alsaSeq, &ev);
+            if (rv < 0)
+                  return;
 
-      if (!mscore->midiinEnabled()) {
-            snd_seq_free_event(ev);
-            active = 0;
-            return;
-            }
-
-      if (ev->type == SND_SEQ_EVENT_NOTEON) {
-            int pitch   = ev->data.note.note;
-            int velo    = ev->data.note.velocity;
-            if (velo) {
-                  mscore->midiNoteReceived(pitch, active);
-                  ++active;
+            if (!mscore->midiinEnabled()) {
+                  snd_seq_free_event(ev);
+                  active = 0;
+                  return;
                   }
-            else
+
+            if (ev->type == SND_SEQ_EVENT_NOTEON) {
+                  int pitch   = ev->data.note.note;
+                  int velo    = ev->data.note.velocity;
+                  if (velo) {
+                        mscore->midiNoteReceived(pitch, active);
+                        ++active;
+                        }
+                  else
+                        --active;
+                  }
+            else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
                   --active;
-            }
-      else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
-            --active;
 
-      if (midiInputTrace) {
-            printf("MidiIn: ");
-            switch(ev->type) {
-                  case SND_SEQ_EVENT_NOTEON:
-                        printf("noteOn ch:%2d 0x%02x 0x%02x\n",
-                           ev->data.note.channel,
-                           ev->data.note.note,
-                           ev->data.note.velocity);
-                        break;
-                  case SND_SEQ_EVENT_SYSEX:
-                        printf("sysEx len %d", ev->data.ext.len);
-                        break;
-                  case SND_SEQ_EVENT_CONTROLLER:
-                        printf("ctrl 0x%02x 0x%02x",
-                           ev->data.control.param,
-                           ev->data.control.value);
-                        break;
-                  case SND_SEQ_EVENT_PITCHBEND:
-                        printf("pitchbend 0x%04x", ev->data.control.value);
-                        break;
-                  case SND_SEQ_EVENT_PGMCHANGE:
-                        printf("pgmChange 0x%02x", ev->data.control.value);
-                        break;
-                  case SND_SEQ_EVENT_CHANPRESS:
-                        printf("channelPress 0x%02x", ev->data.control.value);
-                        break;
-                  case SND_SEQ_EVENT_START:
-                        printf("start");
-                        break;
-                  case SND_SEQ_EVENT_CONTINUE:
-                        printf("continue");
-                        break;
-                  case SND_SEQ_EVENT_STOP:
-                        printf("stop");
-                        break;
-                  case SND_SEQ_EVENT_SONGPOS:
-                        printf("songpos");
-                        break;
-                  default:
-                        printf("type 0x%02x", ev->type);
-                        break;
-                  case SND_SEQ_EVENT_PORT_SUBSCRIBED:
-                  case SND_SEQ_EVENT_SENSING:
-                        break;
+            if (midiInputTrace) {
+                  printf("MidiIn: ");
+                  switch(ev->type) {
+                        case SND_SEQ_EVENT_NOTEON:
+                              printf("noteOn ch:%2d 0x%02x 0x%02x\n",
+                                 ev->data.note.channel,
+                                 ev->data.note.note,
+                                 ev->data.note.velocity);
+                              break;
+                        case SND_SEQ_EVENT_SYSEX:
+                              printf("sysEx len %d", ev->data.ext.len);
+                              break;
+                        case SND_SEQ_EVENT_CONTROLLER:
+                              printf("ctrl 0x%02x 0x%02x",
+                                 ev->data.control.param,
+                                 ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_PITCHBEND:
+                              printf("pitchbend 0x%04x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_PGMCHANGE:
+                              printf("pgmChange 0x%02x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_CHANPRESS:
+                              printf("channelPress 0x%02x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_START:
+                              printf("start");
+                              break;
+                        case SND_SEQ_EVENT_CONTINUE:
+                              printf("continue");
+                              break;
+                        case SND_SEQ_EVENT_STOP:
+                              printf("stop");
+                              break;
+                        case SND_SEQ_EVENT_SONGPOS:
+                              printf("songpos");
+                              break;
+                        default:
+                              printf("type 0x%02x", ev->type);
+                              break;
+                        case SND_SEQ_EVENT_PORT_SUBSCRIBED:
+                        case SND_SEQ_EVENT_SENSING:
+                              break;
+                        }
+                  printf("\n");
                   }
-            printf("\n");
+            snd_seq_free_event(ev);
             }
-      snd_seq_free_event(ev);
       }
 
 //---------------------------------------------------------
@@ -428,24 +551,12 @@ AlsaMidi::AlsaMidi(Seq* s)
 
 bool AlsaMidi::init()
       {
-      midiDriver = new AlsaMidiDriver();
+      midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
             delete midiDriver;
             midiDriver = 0;
             return false;
             }
-
-      struct pollfd* pfd;
-      int npfd;
-      midiDriver->getInputPollFd(&pfd, &npfd);
-      for (int i = 0; i < npfd; ++i) {
-            int fd = pfd[i].fd;
-            if (fd != -1) {
-                  QSocketNotifier* s = new QSocketNotifier(fd, QSocketNotifier::Read,  mscore);
-                  s->connect(s, SIGNAL(activated(int)), seq, SLOT(midiInputReady()));
-                  }
-            }
-
       midiSeq = new MidiSeq("Midi");
       return true;
       }
