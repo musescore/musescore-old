@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "mscore.h"
 #include "preferences.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Image
@@ -31,6 +32,7 @@ Image::Image(Score* s)
    : BSymbol(s)
       {
       _dirty = false;
+      _lockAspectRatio = true;
       }
 
 //---------------------------------------------------------
@@ -57,7 +59,9 @@ void Image::write(Xml& xml) const
       xml.stag("Image");
       Element::writeProperties(xml);
       xml.tag("path", _path);
-      xml.tag("size", sz);
+      xml.tag("size", sz / DPMM);
+      if (!_lockAspectRatio)
+            xml.tag("lockAspectRatio", _lockAspectRatio);
       xml.etag();
       }
 
@@ -71,8 +75,13 @@ void Image::read(QDomElement e)
             QString tag(e.tagName());
             if (tag == "path")
                   setPath(e.text());
-            else if (tag == "size")
+            else if (tag == "size") {
                   sz = readSize(e);
+                  if (score()->mscVersion() >= 109)
+                        sz *= DPMM;
+                  }
+            else if (tag == "lockAspectRatio")
+                  _lockAspectRatio = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -128,10 +137,17 @@ bool Image::startEdit(const QPointF&)
 
 void Image::editDrag(int curGrip, const QPointF& d)
       {
-      if (curGrip == 0)
+      double ratio = sz.width() / sz.height();
+      if (curGrip == 0) {
             sz.setWidth(sz.width() + d.x());
-      else
+            if (_lockAspectRatio)
+                  sz.setHeight(sz.width() / ratio);
+            }
+      else {
             sz.setHeight(sz.height() + d.y());
+            if (_lockAspectRatio)
+                  sz.setWidth(sz.height() * ratio);
+            }
       }
 
 //---------------------------------------------------------
@@ -196,9 +212,7 @@ void SvgImage::draw(QPainter& p) const
       {
       if (!doc)
             return;
-      QSizeF sf(sz.width() * p.device()->logicalDpiX() / mscore->logicalDpiX(),
-              sz.height() * p.device()->logicalDpiY() / mscore->logicalDpiY());
-      QSize s = sf.toSize();
+      QSize s = sz.toSize();
 
       if (buffer.size() != s || _dirty) {
             buffer = QImage(s, QImage::Format_ARGB32_Premultiplied);
@@ -255,9 +269,7 @@ RasterImage* RasterImage::clone() const
 
 void RasterImage::draw(QPainter& p) const
       {
-      QSizeF sf(sz.width() * p.device()->logicalDpiX() / mscore->logicalDpiX(),
-              sz.height() * p.device()->logicalDpiY() / mscore->logicalDpiY());
-      QSize s = sf.toSize();
+      QSize s = sz.toSize();
 
       if (buffer.size() != s || _dirty) {
             buffer = doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
@@ -275,8 +287,68 @@ void RasterImage::setPath(const QString& s)
       Image::setPath(s);
       doc.load(path());
       if (!doc.isNull()) {
-            sz = doc.size();
+            sz = doc.size() * 0.4 * DPI / PDPI;
             _dirty = true;
+            }
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Image::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Image"));
+      a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Image::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            ImageProperties vp(this);
+            int rv = vp.exec();
+            if (rv) {
+                  }
+            }
+      else
+            Element::propertyAction(s);
+      }
+
+//---------------------------------------------------------
+//   ImageProperties
+//---------------------------------------------------------
+
+ImageProperties::ImageProperties(Image* i, QWidget* parent)
+   : QDialog(parent)
+      {
+      img = i;
+      setupUi(this);
+      lockAspectRatio->setChecked(img->lockAspectRatio());
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(clicked(QAbstractButton*)));
+      }
+
+//---------------------------------------------------------
+//   clicked
+//---------------------------------------------------------
+
+void ImageProperties::clicked(QAbstractButton* b)
+      {
+      switch (buttonBox->buttonRole(b)) {
+            case QDialogButtonBox::AcceptRole:
+            case QDialogButtonBox::ApplyRole:
+                  if (img->lockAspectRatio() != lockAspectRatio->isChecked())
+                        img->setLockAspectRatio(lockAspectRatio->isChecked());
+                  break;
+            default:
+                  break;
             }
       }
 

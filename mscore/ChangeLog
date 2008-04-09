@@ -1,4 +1,5 @@
 9.4.8 (ws)
+      - new image properties dialog: lockAspectRatio
       - add ALSA midi input to JACK driver
       - auto connect all midi sources
       - add ALSA midi input to PortAudio driver on linux

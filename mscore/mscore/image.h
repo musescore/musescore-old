@@ -21,6 +21,7 @@
 #ifndef __IMAGE_H__
 #define __IMAGE_H__
 
+#include "ui_imageproperties.h"
 #include "bsymbol.h"
 
 //---------------------------------------------------------
@@ -32,6 +33,7 @@ class Image : public BSymbol {
       QString _path;
       mutable QImage buffer;        ///< cached rendering
       QSizeF sz;
+      bool _lockAspectRatio;
       mutable bool _dirty;
 
       virtual bool startEdit(const QPointF&);
@@ -49,7 +51,12 @@ class Image : public BSymbol {
       virtual void setPath(const QString& s);
       QString path() const;
       virtual QRectF bbox() const;
-      void setSize(QSizeF s) { sz = s; }
+      void setSize(QSizeF s)          { sz = s; }
+      bool lockAspectRatio() const    { return _lockAspectRatio; }
+      void setLockAspectRatio(bool v) { _lockAspectRatio = v; }
+
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 //---------------------------------------------------------
@@ -80,6 +87,22 @@ class SvgImage : public Image {
       virtual SvgImage* clone() const;
       virtual void draw(QPainter&) const;
       virtual void setPath(const QString& s);
+      };
+
+//---------------------------------------------------------
+//   ImageProperties
+//---------------------------------------------------------
+
+class ImageProperties : public QDialog, public Ui::ImageProperties {
+      Q_OBJECT
+
+      Image* img;
+
+   private slots:
+      void clicked(QAbstractButton*);
+
+   public:
+      ImageProperties(Image*, QWidget* parent = 0);
       };
 
 #endif

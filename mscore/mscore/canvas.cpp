@@ -1488,6 +1488,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                               image = new SvgImage(score());
                         else if (path.endsWith(".jpg")
                            || path.endsWith(".png")
+                           || path.endsWith(".gif")
                            || path.endsWith(".xpm")
                               )
                               image = new RasterImage(score());
@@ -1546,6 +1547,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   if (fi.suffix() == "svg"
                      || fi.suffix() == "jpg"
                      || fi.suffix() == "png"
+                     || fi.suffix() == "gif"
                      || fi.suffix() == "xpm"
                      ) {
                         event->acceptProposedAction();
@@ -1656,6 +1658,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   if (fi.suffix() != "svg"
                      && fi.suffix() != "jpg"
                      && fi.suffix() != "png"
+                     && fi.suffix() != "gif"
                      && fi.suffix() != "xpm"
                      )
                         return;
@@ -1810,6 +1813,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         s = new SvgImage(score());
                   else if (fi.suffix() == "jpg"
                      || fi.suffix() == "png"
+                     || fi.suffix() == "gif"
                      || fi.suffix() == "xpm"
                         )
                         s = new RasterImage(score());
