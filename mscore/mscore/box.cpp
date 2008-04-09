@@ -29,6 +29,7 @@
 #include "boxproperties.h"
 #include "symbol.h"
 #include "system.h"
+#include "image.h"
 
 //---------------------------------------------------------
 //   Box
@@ -207,6 +208,30 @@ void Box::read(QDomElement e)
                   s->setTick(curTickPos);
                   s->read(e);
                   add(s);
+                  }
+            else if (tag == "Image") {
+                  // look ahead for image type
+                  QString path;
+                  QDomElement ee = e.firstChildElement("path");
+                  if (!ee.isNull())
+                        path = ee.text();
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        ) {
+                        image = new RasterImage(score());
+                        }
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->setTrack(score()->curTrack);
+                        image->read(e);
+                        add(image);
+                        }
                   }
             else
                   domError(e);
