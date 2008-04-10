@@ -112,7 +112,7 @@ void HChord::rotate(int semiTones)
 
 QString HChord::name(int tpc)
       {
-      QString buf = tpc2name(tpc);
+      QString buf = tpc2name(tpc, false);
       HChord c(*this);
 
       int key = tpc2pitch(tpc);
@@ -472,10 +472,11 @@ static int degreeTable[] = {
 QString Harmony::harmonyName() const
       {
 //      printf("Harmony::harmonyName(this=%p)", this);
-      return harmonyName(rootTpc(), extension(), baseTpc(), &_degreeList);
+      bool germanNames = score()->style()->useGermanNoteNames;
+      return harmonyName(germanNames, rootTpc(), extension(), baseTpc(), &_degreeList);
       }
 
-QString Harmony::harmonyName(int root, int extension, int base, const QList<HDegree>* degreeList)
+QString Harmony::harmonyName(bool germanNames, int root, int extension, int base, const QList<HDegree>* degreeList)
       {
 /*
       printf("Harmony::harmonyName(root=%d extension=%d base=%d list=%p", root, extension, base, degreeList);
@@ -497,7 +498,7 @@ QString Harmony::harmonyName(int root, int extension, int base, const QList<HDeg
             // print the chord without the degree modification(s)
             for (int i = 0; i < 12; i++)
                   if (hc.contains(i))
-                        printf(" %s", qPrintable(tpc2name(i+1)));
+                        printf(" %s", qPrintable(tpc2name(i+1, germanNames)));
             printf("\n");
 */
             // factor in the degrees
@@ -530,7 +531,7 @@ QString Harmony::harmonyName(int root, int extension, int base, const QList<HDeg
             // print the chord with the degree modification(s)
             for (int i = 0; i < 12; i++)
                   if (hc.contains(i))
-                        printf(" %s", qPrintable(tpc2name(i+1)));
+                        printf(" %s", qPrintable(tpc2name(i+1, germanNames)));
             printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
             printf("\n");
 */
@@ -545,20 +546,20 @@ QString Harmony::harmonyName(int root, int extension, int base, const QList<HDeg
 
             // now determine the chord name
             if (newExtension)
-                  s = tpc2name(root) + getExtensionName(newExtension);
+                  s = tpc2name(root, germanNames) + getExtensionName(newExtension);
             else
                   // not in table, fallback to using HChord.name()
                   s = hc.name(root);
             } // end if (degreeList ...
       else {
-            s = tpc2name(root);
+            s = tpc2name(root, germanNames);
             if (extension)
                   s += getExtensionName(extension);
       }
 
       if (base != INVALID_TPC) {
             s += "/";
-            s += tpc2name(base);
+            s += tpc2name(base, germanNames);
             }
 
 //      printf(" %s\n", qPrintable(s));
@@ -606,7 +607,7 @@ bool Harmony::genPropertyMenu(QMenu* popup) const
 void Harmony::propertyAction(const QString& s)
       {
       if (s == "props") {
-            ChordEdit ce;
+            ChordEdit ce(score());
             ce.setRoot(rootTpc());
             ce.setBase(baseTpc());
             ce.setExtension(extension());
@@ -834,7 +835,7 @@ void Harmony::buildText()
 //    convert something like "C#" into tpc 21
 //---------------------------------------------------------
 
-int convertRoot(const QString& s)
+static int convertRoot(const QString& s, bool germanNames)
       {
       int n = s.size();
       if (n < 1)
@@ -847,27 +848,59 @@ int convertRoot(const QString& s)
                   alter = 1;
             }
       int r;
-      switch(s[0].toLower().toAscii()) {
-            case 'c':   r = 0; break;
-            case 'd':   r = 1; break;
-            case 'e':   r = 2; break;
-            case 'f':   r = 3; break;
-            case 'g':   r = 4; break;
-            case 'a':   r = 5; break;
-            case 'b':   r = 6; break;
-            default:    return INVALID_TPC;
+      if (germanNames) {
+            switch(s[0].toLower().toAscii()) {
+                  case 'c':   r = 0; break;
+                  case 'd':   r = 1; break;
+                  case 'e':   r = 2; break;
+                  case 'f':   r = 3; break;
+                  case 'g':   r = 4; break;
+                  case 'a':   r = 5; break;
+                  case 'h':   r = 6; break;
+                  case 'b':
+                        if (alter)
+                              return INVALID_TPC;
+                        r = 6;
+                        alter = -1;
+                        break;
+                  default:
+                        return INVALID_TPC;
+                  }
+            static const int spellings[] = {
+               // bb  b   -   #  ##
+                  0,  7, 14, 21, 28,  // C
+                  2,  9, 16, 23, 30,  // D
+                  4, 11, 18, 25, 32,  // E
+                 -1,  6, 13, 20, 27,  // F
+                  1,  8, 15, 22, 29,  // G
+                  3, 10, 17, 24, 31,  // A
+                  5, 12, 19, 26, 33,  // B
+                  };
+            r = spellings[r * 5 + alter + 2];
             }
-      static const int spellings[] = {
-         // bb  b   -   #  ##
-            0,  7, 14, 21, 28,  // C
-            2,  9, 16, 23, 30,  // D
-            4, 11, 18, 25, 32,  // E
-           -1,  6, 13, 20, 27,  // F
-            1,  8, 15, 22, 29,  // G
-            3, 10, 17, 24, 31,  // A
-            5, 12, 19, 26, 33,  // B
-            };
-      r = spellings[r * 5 + alter + 2];
+      else {
+            switch(s[0].toLower().toAscii()) {
+                  case 'c':   r = 0; break;
+                  case 'd':   r = 1; break;
+                  case 'e':   r = 2; break;
+                  case 'f':   r = 3; break;
+                  case 'g':   r = 4; break;
+                  case 'a':   r = 5; break;
+                  case 'b':   r = 6; break;
+                  default:    return INVALID_TPC;
+                  }
+            static const int spellings[] = {
+               // bb  b   -   #  ##
+                  0,  7, 14, 21, 28,  // C
+                  2,  9, 16, 23, 30,  // D
+                  4, 11, 18, 25, 32,  // E
+                 -1,  6, 13, 20, 27,  // F
+                  1,  8, 15, 22, 29,  // G
+                  3, 10, 17, 24, 31,  // A
+                  5, 12, 19, 26, 33,  // B
+                  };
+            r = spellings[r * 5 + alter + 2];
+            }
       return r;
       }
 
@@ -884,7 +917,8 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
             printf("parseHarmony failed <%s>\n", qPrintable(ss));
             return -1;
             }
-      int r = convertRoot(s);
+      bool germanNames = score()->style()->useGermanNoteNames;
+      int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
             printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
             return -1;
@@ -896,7 +930,7 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       if (slash != -1) {
             QString bs = s.mid(slash+1);
             s     = s.mid(idx, slash - idx);
-            *base = convertRoot(bs);
+            *base = convertRoot(bs, germanNames);
             }
       else
             s = s.mid(idx);

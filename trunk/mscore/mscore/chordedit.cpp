@@ -23,14 +23,16 @@
 #include "chordedit.h"
 #include "harmony.h"
 #include "pitchspelling.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   ChordEdit
 //---------------------------------------------------------
 
-ChordEdit::ChordEdit(QWidget* parent)
+ChordEdit::ChordEdit(Score* s, QWidget* parent)
    : QDialog(parent)
       {
+      score = s;
       setupUi(this);
       // note that rootGroup button identifiers map conveniently
       // onto all possible tpc2line return values: don't change
@@ -262,7 +264,9 @@ void ChordEdit::chordChanged()
       QList<HDegree> degreeList;
       for (int i = 0; i < numberOfDegrees(); i++)
             degreeList << degree(i);
-      QString s = Harmony::harmonyName(root(), extension(), base(), &degreeList);
+      bool useGermanNoteNames = score->style()->useGermanNoteNames;
+      QString s = Harmony::harmonyName(useGermanNoteNames, root(), extension(),
+         base(), &degreeList);
       chordLabel->setText(s);
       }
 

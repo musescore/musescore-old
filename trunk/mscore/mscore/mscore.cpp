@@ -76,6 +76,7 @@ QList<ProjectItem*> projectList;
 
 QMap<QString, Shortcut*> shortcuts;
 bool converterMode = false;
+double converterDpi = 300;
 
 static const char* outFileName;
 static QString localeName;
@@ -1004,7 +1005,9 @@ static void usage(const char* prog, const char*)
         "   -L        layout debug\n"
         "   -I        dump midi input\n"
         "   -O        dump midi output\n"
-        "   -o file   export to 'file'; format depends on file extension\n");
+        "   -o file   export to 'file'; format depends on file extension\n"
+        "   -r dpi    set output resolution for image export\n"
+        );
       }
 
 //---------------------------------------------------------
@@ -1401,7 +1404,7 @@ int main(int argc, char* argv[])
       setDefaultStyle();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:r:")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1429,6 +1432,10 @@ int main(int argc, char* argv[])
                         converterMode = true;
                         outFileName = optarg;
                         break;
+                  case 'r':
+                        converterDpi = atof(optarg);
+                        break;
+
                   default:
                         usage(argv[0], "bad argument");
                         return -1;
@@ -1474,6 +1481,12 @@ int main(int argc, char* argv[])
 
       translator.load(lp);
       app.installTranslator(&translator);
+
+      QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+      QTranslator qtTranslator(0);
+      qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir);
+      app.installTranslator(&qtTranslator);
+
       //
       // initialize shortcut hash table
       //
@@ -1482,6 +1495,7 @@ int main(int argc, char* argv[])
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
+
       preferences.read();
       QSplashScreen* sc = 0;
       if (!converterMode && preferences.showSplashScreen) {

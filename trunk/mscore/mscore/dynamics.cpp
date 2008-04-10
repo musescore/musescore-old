@@ -116,6 +116,7 @@ QRectF Dynamic::drag(const QPointF& pos)
       {
       QRectF r(abbox());
       setUserOff((pos - dragOffset) / _spatium);
+      score()->setLayoutAll(false);
       return abbox() | r;
       }
 

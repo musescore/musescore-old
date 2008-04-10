@@ -34,6 +34,7 @@
 #include "harmony.h"
 #include "layoutbreak.h"
 #include "key.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -170,7 +171,6 @@ bool BBFile::read(const QString& name)
       //    read bar types
       //---------------------------------------------------
 
-      _measures = 0;
       int bar = a[idx++];           // starting bar number
       while (bar < 255) {
             int val = a[idx++];
@@ -178,11 +178,9 @@ bool BBFile::read(const QString& name)
                   bar += a[idx++];
             else {
                   printf("bar type: bar %d val %d\n", bar, val);
-                  _measures = bar;
                   _barType[bar++] = val;
                   }
             }
-      _measures -= 1;
 
       //---------------------------------------------------
       //    read chord extensions
@@ -207,6 +205,7 @@ bool BBFile::read(const QString& name)
       //---------------------------------------------------
 
       int roots = 0;
+      int maxbeat = 0;
       for (beat = 0; beat < MAX_BARS * 4;) {
             int val = a[idx++];
             if (val == 0)
@@ -223,15 +222,20 @@ bool BBFile::read(const QString& name)
                         }
                   _chords[roots].root = root;
                   _chords[roots].bass = bass;
+                  if (maxbeat < beat)
+                        maxbeat = beat;
                   ++roots;
                   ++beat;
                   }
             }
 
+      _measures = ((maxbeat + timesigZ() - 1) / timesigZ()) + 1;
+
       if (roots != _chords.size()) {
             printf("import bb: roots %d != extensions %d\n", roots, _chords.size());
             return false;
             }
+      printf("Measures %d\n", _measures);
 
 #if 0
       printf("================chords=======================\n");
@@ -241,9 +245,6 @@ bool BBFile::read(const QString& name)
             }
       printf("================chords=======================\n");
 #endif
-
-      printf("Measures %d\n", _measures);
-      ++_measures;
 
       if (a[idx] == 1) {            //??
             printf("Skip 0x%02x at 0x%04x\n", a[idx], idx);
@@ -256,6 +257,12 @@ bool BBFile::read(const QString& name)
 
       printf("start chorus %d  end chorus %d repeats %d, pos now 0x%x\n",
          _startChorus, _endChorus, _repeats, idx);
+
+      if (_startChorus >= _endChorus) {
+            _startChorus = 0;
+            _endChorus = 0;
+            _repeats = 1;
+            }
 
       //---------------------------------------------------
       //    read style file
@@ -301,7 +308,7 @@ bool BBFile::read(const QString& name)
 
       if (eventCount == 0) {
             printf("no melody\n");
-            return false;
+            return true;
             }
       else {
             idx = eventStart;
@@ -461,10 +468,12 @@ bool Score::importBB(const QString& name)
             h->setTick(tick);
             h->setTrack(0);
             h->setRootTpc(table[c.root-1]);
-            h->setBaseTpc(table[c.bass-1]);
+            if (c.bass > 0)
+                  h->setBaseTpc(table[c.bass-1]);
+            else
+                  h->setBaseTpc(INVALID_TPC);
             h->setExtension(c.extension);
-            QString s(Harmony::harmonyName(c.root, c.extension, c.bass));
-            h->setText(s);
+            h->buildText();
             m->add(h);
             }
 

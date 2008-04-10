@@ -118,11 +118,16 @@ int pitch2line(int pitch)
 //    print note name
 //---------------------------------------------------------
 
-QString tpc2name(int tpc)
+QString tpc2name(int tpc, bool germanNames)
       {
       const char names[] = "FCGDAEB";
       int acc   = ((tpc+1) / 7) - 2;
       QString s(names[(tpc + 1) % 7]);
+      if (germanNames && (s == "B")) {
+            if (acc == -1)
+                  return s;
+            s = "H";
+            }
       switch(acc) {
             case -2: s += "bb"; break;
             case -1: s += "b";  break;

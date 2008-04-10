@@ -2535,7 +2535,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       if (extension == 0) {
             printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
-            QString s = tpc2name(ha->rootTpc()) + kindText;
+            QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
             ha->setText(s);
             }
       else {

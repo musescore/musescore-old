@@ -1301,6 +1301,14 @@ failed: </source>
         <source>Create key sig for all systems</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Chordnames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>use german names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1519,6 +1527,28 @@ failed: </source>
     <name>Harmony</name>
     <message>
         <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Image</name>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImageProperties</name>
+    <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished">Propriedades do Acorde</translation>
+    </message>
+    <message>
+        <source>lock aspect ratio</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3961,10 +3991,6 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>15ma</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3978,6 +4004,10 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4755,6 +4785,10 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Proximity for selecting elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
