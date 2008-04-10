@@ -43,7 +43,7 @@ extern void spell(QList<Note*>& notes);
 extern int computeWindow(const QList<Note*>& notes, int start, int end);
 extern int tpc(int idx, int pitch, int opt);
 extern int pitch2line(int pitch);
-extern QString tpc2name(int tpc);
+extern QString tpc2name(int tpc, bool germanNames);
 extern int line2tpc(int line, int prefix);
 extern int tpc2pitch(int tpc);
 extern int tpc2line(int tpc);

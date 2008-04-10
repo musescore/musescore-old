@@ -1153,22 +1153,28 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
+      QRectF r;
       if (canvas()->lassoRect().isEmpty()) {
             Page* page = _layout->pages().front();
-            QRectF r = page->bbox();
+            r = page->bbox();
             canvas()->setLassoRect(r);
             }
-      QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
-      double w = r.width() * PDPI / DPI;
-      double h = r.height() * PDPI / DPI;
+      else
+            r = canvas()->matrix().mapRect(canvas()->lassoRect());
 
-      QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
+      int w = lrint(r.width()  * converterDpi / DPI);
+      int h = lrint(r.height() * converterDpi / DPI);
+
+      QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
       printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
       printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-      printer.fill(0);
+//      printer.fill(-1);     // white background
+      printer.fill(0);        // transparent background
+
+      double m = converterDpi / PDPI;
 
       QPainter p(&printer);
-      canvas()->paintLasso(p, PDPI / DPI);
+      canvas()->paintLasso(p, m);
       bool rv = printer.save(name, "png");
 
       return rv;

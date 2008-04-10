@@ -203,6 +203,8 @@ struct Style {
       bool genClef;           // create clef for all systems, not only for first
       bool genKeysig;         // create key signature for all systems
 
+      bool useGermanNoteNames;
+
       //---------------------------------------------------------
       //   PlayStyle
       //---------------------------------------------------------

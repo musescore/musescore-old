@@ -298,6 +298,8 @@ void Portaudio::process(int n, float* l, float* r, int stride)
 
 void Portaudio::midiRead()
       {
+#ifdef USE_ALSA
       midiDriver->read();
+#endif
       }
 

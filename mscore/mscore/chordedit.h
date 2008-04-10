@@ -33,6 +33,8 @@ class DegreeTabDelegate;
 class ChordEdit : public QDialog, Ui::ChordEdit {
       Q_OBJECT
 
+      Score* score;
+
       QButtonGroup* rootGroup;
       QButtonGroup* accidentalsGroup;
       QButtonGroup* extensionGroup;
@@ -49,7 +51,7 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
       void modelDataChanged(const QModelIndex & topLeft, const QModelIndex & bottomRight);
 
    public:
-      ChordEdit(QWidget* parent = 0);
+      ChordEdit(Score* s, QWidget* parent = 0);
       void setExtension(int val);
       void setRoot(int val);
       void setBase(int val);

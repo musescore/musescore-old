@@ -218,6 +218,7 @@ Style defaultStyle = {
       0.8,              // smallClefMag
       true,             // genClef
       true,             // genKeySig
+      false,            // use german note names
       // play style
       70,               // gateTime
       100,              // tenutoGateTime
@@ -519,6 +520,8 @@ void Style::load(QDomElement e, int version)
                   genClef = i;
             else if (tag == "genKeysig")
                   genKeysig = i;
+            else if (tag == "useGermanNoteNames")
+                  useGermanNoteNames = i;
             else if (tag == "gateTime")
                   gateTime  = i;
             else if (tag == "tenutoGateTime")
@@ -608,6 +611,8 @@ void Style::save(Xml& xml)
       xml.tag("smallClefMag",           smallClefMag);
       xml.tag("genClef",                genClef);
       xml.tag("genKeysig",              genKeysig);
+      if (useGermanNoteNames)
+            xml.tag("useGermanNoteNames", useGermanNoteNames);
 
       xml.tag("gateTime",               gateTime);
       xml.tag("tenutoGateTime",         tenutoGateTime);
