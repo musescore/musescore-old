@@ -22,7 +22,7 @@ REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 PREFIX    = "/usr/local"
 #VERSION   = "0.9.2b${REVISION}"
-VERSION   = "0.9.2"
+VERSION   = 0.9.2
 
 ROOT=`pwd`
 
@@ -108,9 +108,10 @@ dist:
 	cd mscore.dist; rm -rf mscore-${VERSION}/web
 	cd mscore.dist; tar cvfj mscore-${VERSION}.tar.bz2 mscore-${VERSION}
 	mv mscore.dist/mscore-${VERSION}.tar.bz2 .
+
+testdist:
 	tar xvofj mscore-${VERSION}.tar.bz2
-	cd mscore-${VERSION}
-	make -j ${CPUS} release
+	cd mscore-${VERSION}; make -j ${CPUS} release
 
 revision:
 	svn info -r HEAD | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
