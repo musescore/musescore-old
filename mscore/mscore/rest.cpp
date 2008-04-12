@@ -110,6 +110,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ICON && subtype == ICON_AUTOBEAM)
          || (type == ATTRIBUTE && subtype == UfermataSym)
          || (type == ATTRIBUTE && subtype == DfermataSym)
+         || (type == CLEF)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -150,6 +151,10 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   }
                   delete e;
                   break;
+            case CLEF:
+                  staff()->changeClef(tick(), e->subtype());
+                  break;
+
             default:
                   printf("cannot drop %s\n", e->name());
                   return 0;
