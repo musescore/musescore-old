@@ -164,7 +164,8 @@ class ChordRest : public Element {
       virtual int downLine() const              { return 8;}
       virtual int line(bool up) const           { return up ? upLine() : downLine(); }
       virtual QPointF stemPos(bool, bool) const { return pos(); }    // point to connect stem
-      bool isUp() const                         { return _up; }
+      bool up() const;
+      bool isUp() const;
       void setUp(bool val)                      { _up = val; }
       QList<NoteAttribute*>* getAttributes()    { return &attributes; }
       NoteAttribute* hasAttribute(const NoteAttribute*);
@@ -181,6 +182,5 @@ class ChordRest : public Element {
       };
 
 #endif
-
 
 

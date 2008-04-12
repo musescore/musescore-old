@@ -4015,6 +4015,14 @@ Save Current Score?</source>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>violin clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>

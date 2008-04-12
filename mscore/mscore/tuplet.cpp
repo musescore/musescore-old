@@ -107,7 +107,7 @@ void Tuplet::layout(ScoreLayout* layout)
                   if (c->stemDirection() != AUTO)
                         up += c->stemDirection() == UP ? 1000 : -1000;
                   else
-                        up += c->isUp() ? 1 : -1;
+                        up += c->up() ? 1 : -1;
                   }
             }
       bool isUp = up > 0;

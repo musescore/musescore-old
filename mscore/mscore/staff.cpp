@@ -424,24 +424,26 @@ void Staff::changeClef(int tick, int st)
                   continue;
             Measure* m = (Measure*)mb;
             bool found = false;
+            //
+            // we assume Clefs are only in first track (voice 0)
+            //
+            int track = idx() * VOICES;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegClef)
                         continue;
-                  //
-                  // we assume Clefs are only in first track (voice 0)
-                  //
-                  int track = idx() * VOICES;
                   Clef* e = (Clef*)segment->element(track);
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;
                   int est = e->subtype();
-                  if ((est != st) && (etick > tick)) {
+                  if ((est != st) && (etick > tick) && !e->generated()) {
                         found = true;
                         break;
                         }
-                  _score->undoRemoveElement(e);
-                  m->cmdRemoveEmptySegment(segment);
+                  if (!e->generated()) {
+                        _score->undoRemoveElement(e);
+                        m->cmdRemoveEmptySegment(segment);
+                        }
                   if (etick > tick) {
                         found = true;
                         break;

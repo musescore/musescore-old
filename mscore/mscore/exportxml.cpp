@@ -1412,7 +1412,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)
-                  xml.tag("stem", QString(note->chord()->isUp() ? "up" : "down"));
+                  xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             // LVIFIX: check move() handling
             if (staff)
                   xml.tag("staff", staff + note->staffMove());

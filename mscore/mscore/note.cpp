@@ -424,7 +424,7 @@ void Note::draw(QPainter& p) const
             double y = 0;
             // do not draw dots on line
             if (_line >= 0 && (_line & 1) == 0) {
-                  if (chord()->isUp())
+                  if (chord()->up())
                         y = -_spatium *.5 * mag();
                   else
                         y = _spatium * .5 * mag();
