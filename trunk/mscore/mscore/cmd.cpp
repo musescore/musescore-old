@@ -1365,6 +1365,18 @@ void Score::cmdAddStretch(double val)
       }
 
 //---------------------------------------------------------
+//   cmdInsertClef
+//---------------------------------------------------------
+
+void Score::cmdInsertClef(int type)
+      {
+      if (!noteEntryMode())
+            return;
+      int tick = inputPos();
+      staff(inputTrack()/VOICES)->changeClef(tick, type);
+      }
+
+//---------------------------------------------------------
 //   cmdResetBeamMode
 //---------------------------------------------------------
 
@@ -1805,6 +1817,10 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "reset-beammode")
                   cmdResetBeamMode();
+            else if (cmd == "clef-violin")
+                  cmdInsertClef(CLEF_G);
+            else if (cmd == "clef-bass")
+                  cmdInsertClef(CLEF_F);
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();

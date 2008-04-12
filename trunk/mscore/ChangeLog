@@ -1,4 +1,6 @@
 12.4.8 (ws)
+      - fix layout position of small clefs
+      - new kb shortcuts for entering clefs in note edit mode
       - new: drop clef to rest
 9.4.8 (ws)
       - new image properties dialog: lockAspectRatio
