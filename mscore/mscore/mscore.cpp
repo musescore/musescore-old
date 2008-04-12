@@ -286,6 +286,7 @@ MuseScore::MuseScore()
          << "seek-begin" << "seek-end"
          << "load-style" << "save-style" << "select-all" << "transpose"
          << "reset-beammode"
+         << "clef-violin" << "clef-bass"
          ;
 
       foreach(const QString s, sl) {

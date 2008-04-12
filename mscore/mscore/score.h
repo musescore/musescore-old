@@ -218,6 +218,8 @@ class Score : public QObject {
       void checkSlurs();
       void checkTuplets();
 
+      void cmdInsertClef(int type);
+
    public slots:
       void doUndo();
       void doRedo();
