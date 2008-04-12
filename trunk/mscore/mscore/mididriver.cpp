@@ -174,6 +174,8 @@ bool AlsaMidiDriver::init()
       // TODO: autoconnect all output ports
       QList<PortName> ol = outputPorts();
       foreach(PortName pn, ol) {
+            if (debugMode)
+                  printf("connect to midi output <%s>\n", qPrintable(pn.name));
             printf("Output <%s>\n", qPrintable(pn.name));
             }
 #endif
@@ -181,7 +183,8 @@ bool AlsaMidiDriver::init()
       // connect all midi sources to mscore
       QList<PortName> il = inputPorts();
       foreach(PortName pn, il) {
-            printf("Input <%s>\n", qPrintable(pn.name));
+            if (debugMode)
+                  printf("connect to midi input <%s>\n", qPrintable(pn.name));
             connect(pn.port, midiInPort);
             }
       return true;
