@@ -668,7 +668,7 @@ void ShowChordWidget::setElement(Element* e)
 
       crb.beamButton->setEnabled(chord->beam());
       crb.tupletButton->setEnabled(chord->tuplet());
-      crb.upFlag->setChecked(chord->isUp());
+      crb.upFlag->setChecked(chord->up());
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
 
       cb.hookButton->setEnabled(chord->hook());
@@ -897,7 +897,7 @@ void ShowRestWidget::setElement(Element* e)
 
       crb.beamButton->setEnabled(rest->beam());
       crb.tupletButton->setEnabled(rest->tuplet());
-      crb.upFlag->setChecked(rest->isUp());
+      crb.upFlag->setChecked(rest->up());
       crb.beamMode->setCurrentIndex(int(rest->beamMode()));
       crb.attributes->clear();
       foreach(NoteAttribute* a, *rest->getAttributes()) {

@@ -81,30 +81,32 @@ typedef BeamSegmentList::const_iterator ciBeamSegment;
 class Beam : public Element {
       QList<ChordRest*> elements;
       BeamSegmentList beamSegments;
+      bool _up;
 
       void layoutCrossStaff(ScoreLayout* layout);
 
    public:
-      Beam(Score* s) : Element(s) {}
+      Beam(Score* s);
       ~Beam();
-      virtual Beam* clone() const      { return new Beam(*this); }
-      virtual ElementType type() const { return BEAM; }
+      virtual Beam* clone() const         { return new Beam(*this); }
+      virtual ElementType type() const    { return BEAM; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual bool startEdit(const QPointF&) { return false; }
 
-      Measure* measure() const               { return (Measure*)parent(); }
+      Measure* measure() const            { return (Measure*)parent(); }
 
       void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
 
-      void add(ChordRest* a)           { elements.append(a); }
-      QList<ChordRest*> getElements()  { return elements; }
+      QList<ChordRest*> getElements()     { return elements; }
+      void add(ChordRest* a)              { elements.append(a); }
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);
       virtual QRectF bbox() const;
-
       virtual void draw(QPainter&) const;
+      bool up() const                     { return _up; }
+      void setUp(bool v)                  { _up = v; }
       };
 
 #endif

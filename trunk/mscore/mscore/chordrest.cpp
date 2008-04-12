@@ -31,6 +31,7 @@
 #include "score.h"
 #include "sym.h"
 #include "slur.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList
@@ -166,6 +167,24 @@ ChordRest::ChordRest(Score* s)
       _tuplet   = 0;
       _small    = false;
       _beamMode = BEAM_AUTO;
+      }
+
+//---------------------------------------------------------
+//   up
+//---------------------------------------------------------
+
+bool ChordRest::up() const
+      {
+      return _up;
+      }
+
+//---------------------------------------------------------
+//   isUp
+//---------------------------------------------------------
+
+bool ChordRest::isUp() const
+      {
+      return _beam ? _beam->up() : _up;
       }
 
 //---------------------------------------------------------
@@ -389,7 +408,6 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - sy;
       qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + sy;
 
-      bool up     = isUp();
       qreal dyTop = 0;
       qreal dyBot = 0;
 
@@ -402,7 +420,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
             qreal y = 0;
             AttrAnchor aa = NoteAttribute::atrList[a->subtype()].anchor;
             if (aa == A_CHORD)
-                  aa = up ? A_BOTTOM_CHORD : A_TOP_CHORD;
+                  aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
             if (aa == A_TOP_CHORD) {
                   y = chordTopY - dyTop;
                   //

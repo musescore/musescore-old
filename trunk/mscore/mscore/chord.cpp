@@ -336,8 +336,6 @@ void Chord::layoutStem1(ScoreLayout* layout)
       //  process stem
       //-----------------------------------------
 
-      bool up = isUp();
-
       int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
       int hookIdx;
 
@@ -383,7 +381,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       //-----------------------------------------
 
       if (hookIdx) {
-            if (!up)
+            if (!up())
                   hookIdx = -hookIdx;
             if (!_hook) {
                   _hook = new Hook(score());
@@ -392,7 +390,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   }
             _hook->setSubtype(hookIdx);
             qreal lw     = point(score()->style()->stemWidth) * .5;
-            QPointF npos = (up ? downNote() : upNote())->stemPos(up);
+            QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
             // set x-pos to get correct boundingRect width for layout
             _hook->setPos(npos + QPointF(lw, 0.0));
             }
@@ -430,8 +428,6 @@ void Chord::layoutStem(ScoreLayout* layout)
       //  process stem
       //-----------------------------------------
 
-      bool up = isUp();
-
       int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
       int hookIdx;
       Spatium stemLen;
@@ -444,7 +440,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             stemLen = normalLen * score()->style()->graceNoteMag;
             }
       else {
-            stemLen = Spatium((up ? uppos - 3.0 * staffMag : 3.0 * staffMag - downpos) * .5);
+            stemLen = Spatium((up() ? uppos - 3.0 * staffMag : 3.0 * staffMag - downpos) * .5);
             Spatium normalLen(3.5 * staffMag);
             if (stemLen < normalLen)
                   stemLen = normalLen;
@@ -485,9 +481,9 @@ void Chord::layoutStem(ScoreLayout* layout)
       stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
       double pstemLen = point(stemLen);
 
-      QPointF npos = (up ? downNote() : upNote())->stemPos(up);
+      QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
 
-      if (up)
+      if (up())
             npos += QPointF(0, -pstemLen);
 
       if (hasStem) {
@@ -529,11 +525,11 @@ void Chord::layoutStem(ScoreLayout* layout)
       //-----------------------------------------
 
       if (hookIdx) {
-            if (!up)
+            if (!up())
                   hookIdx = -hookIdx;
             _hook->setSubtype(hookIdx);
             qreal lw = point(score()->style()->stemWidth) * .5;
-            QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
+            QPointF p = npos + QPointF(lw, up() ? -lw : pstemLen);
             _hook->setPos(p);
             }
       else
@@ -586,9 +582,6 @@ void Chord::layout(ScoreLayout* layout)
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 
-      computeUp();
-      bool up = isUp();
-
       //-----------------------------------------
       //  process notes
       //    - position
@@ -616,7 +609,7 @@ void Chord::layout(ScoreLayout* layout)
             y        += in->second->line() * _spatium * .5 * staffMag;
 
             if (note->mirror())
-                  x += up ? headWidth : - headWidth;
+                  x += up() ? headWidth : - headWidth;
             note->setPos(x, y);
 
             Accidental* accidental = note->accidental();
@@ -1062,7 +1055,7 @@ void Chord::space(double& min, double& extra) const
                         extra += prefixWidth;
                   }
             if (note->mirror()) {
-                  if (isUp()) {
+                  if (up()) {
                         // note head on the right side of stem
                         mirror = lhw;
                         }
@@ -1074,7 +1067,7 @@ void Chord::space(double& min, double& extra) const
                   }
             }
       min = mirror + hw;
-      if (isUp() && _hook)
+      if (up() && _hook)
             min += _hook->width();
 /*      if (_noteType != NOTE_NORMAL) {
             extra += min;

@@ -655,7 +655,7 @@ void Score::cmdFlipStemDirection()
             Chord* chord = ((Note*)el)->chord();
 
             if (chord->stemDirection() == AUTO)
-                  chord->setStemDirection(chord->isUp() ? DOWN : UP);
+                  chord->setStemDirection(chord->up() ? DOWN : UP);
             else
                   chord->setStemDirection(chord->stemDirection() == UP ? DOWN : UP);
             Direction dir = chord->stemDirection();

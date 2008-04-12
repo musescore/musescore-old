@@ -186,6 +186,16 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
 //   Beam
 //---------------------------------------------------------
 
+Beam::Beam(Score* s)
+   : Element(s)
+      {
+      _up = true;
+      }
+
+//---------------------------------------------------------
+//   Beam
+//---------------------------------------------------------
+
 Beam::~Beam()
       {
       //
@@ -443,6 +453,54 @@ void Beam::layout1(ScoreLayout* /*layout*/)
                   chord->setHook(0);
                   }
             }
+
+      //---------------------------------------------------
+      //   calculate direction of beam
+      //    - majority
+      //          number count of up or down notes
+      //    - mean
+      //          mean centre distance of all notes
+      //    - median
+      //          mean centre distance weighted per note
+      //
+      //   currently we use the "majority" method
+      //---------------------------------------------------
+
+      int upCount    = 0;
+      int maxTickLen = 0;
+      int move       = 0;
+      int firstMove  = elements.front()->staffMove();
+
+      foreach(ChordRest* cr, elements) {
+            if (cr->type() == CHORD) {
+                  Chord* chord = (Chord*)cr;
+                  //
+                  // if only one stem direction is manually set it
+                  // determines if beams are up or down
+                  //
+                  if (chord->stemDirection() != AUTO)
+                        upCount += chord->stemDirection() == UP ? 1000 : -1000;
+                  else
+                        upCount += chord->up() ? 1 : -1;
+                  if (chord->staffMove()) {
+                        if (firstMove == 0)
+                              move = chord->staffMove() * -1;
+                        else
+                              move = chord->staffMove() * -1;
+                        }
+                  }
+            int tl = cr->tickLen();
+            Tuplet* tuplet = cr->tuplet();
+            if (tuplet)
+                  tl = tuplet->baseLen();
+            if (tl > maxTickLen)
+                  maxTickLen = tl;
+            }
+      _up = upCount >= 0;
+/*      foreach(ChordRest* cr, elements) {
+            cr->setUp(_up);
+            }
+      */
       }
 
 //---------------------------------------------------------
@@ -465,7 +523,7 @@ void Beam::layout(ScoreLayout* layout)
       //   currently we use the "majority" method
       //---------------------------------------------------
 
-      int upCount    = 0;
+//      int upCount    = 0;
       int maxTickLen = 0;
       const ChordRest* a1  = elements.front();
       const ChordRest* a2  = elements.back();
@@ -474,6 +532,7 @@ void Beam::layout(ScoreLayout* layout)
       int move       = 0;
       int firstMove  = elements.front()->staffMove();
 
+#if 1
       foreach(ChordRest* cr, elements) {
             if (cr->type() == CHORD) {
                   c2 = (Chord*)(cr);
@@ -484,10 +543,11 @@ void Beam::layout(ScoreLayout* layout)
                   // if only one stem direction is manually set it
                   // determines if beams are up or down
                   //
-                  if (chord->stemDirection() != AUTO)
+/*                  if (chord->stemDirection() != AUTO)
                         upCount += chord->stemDirection() == UP ? 1000 : -1000;
                   else
-                        upCount += chord->isUp() ? 1 : -1;
+                        upCount += chord->up() ? 1 : -1;
+*/
                   if (chord->staffMove()) {
                         if (firstMove == 0)
                               move = chord->staffMove() * -1;
@@ -502,15 +562,12 @@ void Beam::layout(ScoreLayout* layout)
             if (tl > maxTickLen)
                   maxTickLen = tl;
             }
+#endif
+//      _up = upCount >= 0;
 
-      bool upFlag = upCount >= 0;
       if (move) {
             layoutCrossStaff(layout);
             return;
-            }
-
-      foreach(ChordRest* cr, elements) {
-            cr->setUp(upFlag);
             }
 
       //------------------------------------------------------------
@@ -520,9 +577,9 @@ void Beam::layout(ScoreLayout* layout)
 
       bool concave = false;
       for (int i = 0; i < elements.size() - 2; ++i) {
-            int l1 = elements[i]->line(upFlag);
-            int l  = elements[i+1]->line(upFlag);
-            int l2 = elements[i+2]->line(upFlag);
+            int l1 = elements[i]->line(_up);
+            int l  = elements[i+1]->line(_up);
+            int l2 = elements[i+2]->line(_up);
 
             concave = ((l1 < l2) && ((l < l1) || (l > l2)))
                     || ((l1 > l2) && ((l > l1) || (l < l2)));
@@ -530,8 +587,8 @@ void Beam::layout(ScoreLayout* layout)
                   break;
             }
 
-      int l1 = elements.front()->line(upFlag);
-      int l2 = elements.back()->line(upFlag);
+      int l1 = elements.front()->line(_up);
+      int l2 = elements.back()->line(_up);
 
       int cut     = 0;
       qreal slope = 0.0;
@@ -556,7 +613,7 @@ void Beam::layout(ScoreLayout* layout)
                   }
             }
 
-      cut *= (upFlag ? 1 : -1);
+      cut *= (_up ? 1 : -1);
 
       //---------------------------------------------------
       //    create beam segments
@@ -569,8 +626,8 @@ void Beam::layout(ScoreLayout* layout)
       double xoffLeft  = point(score()->style()->stemWidth)/2;
       double xoffRight = xoffLeft;
 
-      QPointF p1s(a1->stemPos(a1->isUp(), false));
-      QPointF p2s(a2->stemPos(a2->isUp(), false));
+      QPointF p1s(a1->stemPos(_up, false));
+      QPointF p2s(a2->stemPos(_up, false));
       double x1 = p1s.x() - xoffLeft;
       double x2 = p2s.x() + xoffRight;
 
@@ -592,7 +649,7 @@ void Beam::layout(ScoreLayout* layout)
       //    adjust beam position if necessary
       //
       double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
-                        + score()->style()->beamWidth) * (upFlag ? 1.0 : -1.0);
+                        + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
       double min = 1000.0;
       double max = -1000.0;
       bool isGrace = false;
@@ -601,11 +658,11 @@ void Beam::layout(ScoreLayout* layout)
                   continue;
             Chord* chord  = (Chord*)(cr);
             isGrace = chord->noteType() != NOTE_NORMAL;
-            QPointF npos(chord->stemPos(chord->isUp(), true));
-            double bd      = (chord->beams() - 1) * beamDist * (chord->isUp() ? 1.0 : -1.0);
+            QPointF npos(chord->stemPos(_up, true));
+            double bd      = (chord->beams() - 1) * beamDist * (_up ? 1.0 : -1.0);
             double y1      = npos.y();
             double y2      = p1.y() + (npos.x() - x1) * slope;
-            double stemLen = chord->isUp() ? (y1 - y2) : (y2 - y1);
+            double stemLen = _up ? (y1 - y2) : (y2 - y1);
             stemLen -= bd;
             if (stemLen < min)
                   min = stemLen;
@@ -620,7 +677,7 @@ void Beam::layout(ScoreLayout* layout)
       if (isGrace)
             n *= score()->style()->graceNoteMag;
       double diff = _spatium * n - min;
-      if (upFlag)
+      if (_up)
             diff = -diff;
       p1.ry() += diff;
       p2.ry() += diff;
@@ -684,8 +741,8 @@ void Beam::layout(ScoreLayout* layout)
                               // create short segment
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(nn1->isUp(), false).x();
-                              double x3 = nn2->stemPos(nn2->isUp(), false).x();
+                              double x2 = nn1->stemPos(_up, false).x();
+                              double x3 = nn2->stemPos(_up, false).x();
                               bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                               bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                               }
@@ -693,7 +750,7 @@ void Beam::layout(ScoreLayout* layout)
                               // create broken segment
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(nn1->isUp(), false).x();
+                              double x2 = nn1->stemPos(_up, false).x();
                               double x3 = x2 + point(score()->style()->beamMinLen);
 
                               if (!nn1r) {
@@ -720,8 +777,8 @@ void Beam::layout(ScoreLayout* layout)
                   // create short segment
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
-                  double x2 = nn1->stemPos(nn1->isUp(), false).x();
-                  double x3 = nn2->stemPos(nn2->isUp(), false).x();
+                  double x2 = nn1->stemPos(_up, false).x();
+                  double x3 = nn2->stemPos(_up, false).x();
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
@@ -729,7 +786,7 @@ void Beam::layout(ScoreLayout* layout)
                   // create broken segment
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
-                  double x3 = nn1->stemPos(nn1->isUp(), false).x();
+                  double x3 = nn1->stemPos(_up, false).x();
                   double x2 = x3 - point(score()->style()->beamMinLen);
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
@@ -752,16 +809,16 @@ void Beam::layout(ScoreLayout* layout)
                   chord->setStem(stem);
                   }
 
-            QPointF npos(chord->stemPos(chord->isUp(), false));
+            QPointF npos(chord->stemPos(_up, false));
 
             double x2 = npos.x();
             double y1 = npos.y();
             double y2 = p1.y() + (x2 - x1) * slope;
 
-            double stemLen = chord->isUp() ? (y1 - y2) : (y2 - y1);
+            double stemLen = _up ? (y1 - y2) : (y2 - y1);
             stem->setLen(spatium(stemLen));
 
-            if (chord->isUp())
+            if (_up)
                   npos += QPointF(0, -stemLen);
             QPointF sp(npos - chord->pos() - chord->segment()->pos());
             stem->setPos(sp);
@@ -813,7 +870,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       //  move = -1    staff 1 - 2
       //       = 1     staff 2 - 1
 
-      bool upFlag = move == 1;
+      _up = move == 1;
 
       foreach(ChordRest* cr, elements) {
             if (move == 1)
@@ -835,8 +892,8 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       double xoffLeft  = point(score()->style()->stemWidth)/2;
       double xoffRight = xoffLeft;
 
-      QPointF p1s(c1->stemPos(c1->isUp(), false));
-      QPointF p2s(c2->stemPos(c2->isUp(), false));
+      QPointF p1s(c1->stemPos(_up, false));
+      QPointF p2s(c2->stemPos(_up, false));
 
       double x1 = p1s.x() - xoffLeft;
       double x2 = p2s.x() + xoffRight;
@@ -852,7 +909,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       foreach(ChordRest* cr, elements) {
             if (cr->type() != CHORD)
                   continue;
-            double y = cr->stemPos(cr->isUp(), false).y();
+            double y = cr->stemPos(_up, false).y();
             if (cr->staffMove() == 0) {
                  if (y < yo1)
                         yo1 = y;
@@ -875,7 +932,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       //---------------------------------------------------
 
       double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
-                        + score()->style()->beamWidth) * (upFlag ? 1.0 : -1.0);
+                        + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
       BeamSegment* bs = new BeamSegment;
       beamSegments.push_back(bs);
       bs->p1  = p1;
@@ -933,8 +990,8 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                               // create short segment
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(nn1->isUp(), false).x();
-                              double x3 = nn2->stemPos(nn2->isUp(), false).x();
+                              double x2 = nn1->stemPos(_up, false).x();
+                              double x3 = nn2->stemPos(_up, false).x();
                               bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                               bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                               }
@@ -942,7 +999,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                               // create broken segment
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(nn1->isUp(), false).x();
+                              double x2 = nn1->stemPos(_up, false).x();
                               double x3 = x2 + point(score()->style()->beamMinLen);
 
                               if (!nn1r) {
@@ -969,8 +1026,8 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                   // create short segment
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
-                  double x2 = nn1->stemPos(nn1->isUp(), false).x();
-                  double x3 = nn2->stemPos(nn2->isUp(), false).x();
+                  double x2 = nn1->stemPos(_up, false).x();
+                  double x3 = nn2->stemPos(_up, false).x();
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
@@ -978,7 +1035,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                   // create broken segment
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
-                  double x3 = nn1->stemPos(nn1->isUp(), false).x();
+                  double x3 = nn1->stemPos(_up, false).x();
                   double x2 = x3 - point(score()->style()->beamMinLen);
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
@@ -1001,16 +1058,16 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                   chord->setStem(stem);
                   }
 
-            QPointF npos(chord->stemPos(chord->isUp(), false));
+            QPointF npos(chord->stemPos(_up, false));
 
             double x2 = npos.x();
             double y1 = npos.y();
             double y2 = p1.y() + (x2 - x1) * slope;
 
-            double stemLen = chord->isUp() ? (y1 - y2) : (y2 - y1);
+            double stemLen = _up ? (y1 - y2) : (y2 - y1);
             stem->setLen(spatium(stemLen));
 
-            if (chord->isUp())
+            if (_up)
                   npos += QPointF(0, -stemLen);
             stem->setPos(npos - chord->pos() - chord->segment()->pos());
             }

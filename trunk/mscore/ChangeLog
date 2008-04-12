@@ -1,4 +1,6 @@
 12.4.8 (ws)
+      - removed obsolete TeX manuals, replaced by open office version
+        (german only)
       - fix layout position of small clefs
       - new kb shortcuts for entering clefs in note edit mode
       - new: drop clef to rest

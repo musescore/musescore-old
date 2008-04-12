@@ -218,6 +218,7 @@ QRectF Element::drag(const QPointF& pos)
       {
       QRectF r(abbox());
       setUserOff(pos / _spatium);
+      score()->setLayoutAll(false); // debug
       return abbox() | r;
       }
 

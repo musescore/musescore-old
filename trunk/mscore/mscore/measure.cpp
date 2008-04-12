@@ -404,6 +404,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             ll3 = ll2;
             ll2 = line;
             }
+      chord->computeUp();
       }
 
 //---------------------------------------------------------
