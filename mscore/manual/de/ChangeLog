@@ -1,5 +1,0 @@
-04.07.05
-      - replace some constructs with \starttabulate
-      - removed \Cmd for using standard \starttyping ... \stoptyping
-      - define \setuptyping to get gray background for typed text
-
