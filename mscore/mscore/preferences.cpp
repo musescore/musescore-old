@@ -548,7 +548,6 @@ void PreferenceDialog::updateSCListView()
             else if (s->state & STATE_PLAY)
                   newItem = new QTreeWidgetItem(statePlay);
             else {
-                  printf("PreferenceDialog::updateSCListView(): illegal shortcut state\n");
                   return;
                   }
             newItem->setText(0, s->descr);

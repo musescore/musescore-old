@@ -20,6 +20,7 @@
 
 #include "score.h"
 #include "stafftext.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   StaffText
@@ -203,6 +204,19 @@ void StaffTextProperties::typeInstrumentChanged(bool val)
             sendProgramChange->setChecked(false);
             sendControllerValue->setChecked(false);
             }
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void StaffText::layout(ScoreLayout* l)
+      {
+      Text::layout(l);
+      Measure* m = (Measure*)parent();
+      double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
+      double x = time().isValid() ? m->tick2pos(tick()) : 0.0;
+      setPos(ipos() + QPointF(x, y));
       }
 
 
