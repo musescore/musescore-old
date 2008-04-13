@@ -662,15 +662,17 @@ void Measure::layout2(ScoreLayout* layout)
 
       foreach(Element* element, _el) {
             element->layout(layout);
-            double x = 0.0;
-            double y = 0.0;
-            int track = element->track();
-            if ((element->type() != DYNAMIC) && (track != -1))
-                  y = system()->staff(track / VOICES)->y();
-            if (element->time().isValid())
-                  x = tick2pos(element->tick());
-            QPointF o(x, y);
-            element->setPos(element->ipos() + o);
+            if (element->type() != HARMONY) {
+                  double x = 0.0;
+                  double y = 0.0;
+                  int track = element->track();
+                  if ((element->type() != DYNAMIC) && (track != -1))
+                        y = system()->staff(track / VOICES)->y();
+                  if (element->time().isValid())
+                        x = tick2pos(element->tick());
+                  QPointF o(x, y);
+                  element->setPos(element->ipos() + o);
+                  }
             }
 
       //

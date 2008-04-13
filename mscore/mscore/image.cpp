@@ -126,7 +126,7 @@ QRectF Image::bbox() const
 //   startEdit
 //---------------------------------------------------------
 
-bool Image::startEdit(const QPointF&)
+bool Image::startEdit(Viewer*, const QPointF&)
       {
       return true;
       }

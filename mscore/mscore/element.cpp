@@ -1217,7 +1217,7 @@ Element* Element::create(int type, Score* score)
 //   startEdit
 //---------------------------------------------------------
 
-bool Element::startEdit(const QPointF&)
+bool Element::startEdit(Viewer*, const QPointF&)
       {
       return !_generated;
       }
@@ -1236,7 +1236,7 @@ void Element::editDrag(int, const QPointF& delta)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Element::edit(int, QKeyEvent* ev)
+bool Element::edit(Viewer*, int, QKeyEvent* ev)
       {
       if (ev->key() ==  Qt::Key_Home) {
             setUserOff(QPoint());

@@ -24,6 +24,7 @@ install(FILES
       pianoa5demo.msc
       violina5demo.msc
       a4piano.msc
+      leadsheet.msc
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 

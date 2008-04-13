@@ -29,6 +29,7 @@
 #include "measurebase.h"
 
 class BarLine;
+class Viewer;
 
 //---------------------------------------------------------
 //   Box
@@ -46,8 +47,8 @@ class Box : public MeasureBase {
       Box(Score*);
       virtual void draw(QPainter& p) const;
 
-      virtual bool startEdit(const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
+      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool edit(Viewer*, int, QKeyEvent*);
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();
       virtual void endEdit();
