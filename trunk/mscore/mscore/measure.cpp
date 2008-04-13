@@ -564,26 +564,21 @@ void Measure::layout(ScoreLayout* layout, double width)
       //   layout Lyrics
       //---------------------------------------------------
 
-      double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   LyricsList* ll = segment->lyricsList(staffIdx);
+                  if (ll->isEmpty())
+                        continue;
                   int line = 0;
-                  double y = 0;
                   for (iLyrics i = ll->begin(); i != ll->end(); ++i, ++line) {
                         Lyrics* lyrics = *i;
                         if (lyrics == 0)
                               continue;
-                        // center to middle of notehead:
-                        double lh = lyrics->lineSpacing();
-                        y         = lh * line + point(score()->style()->lyricsDistance);
-                        lyrics->setPos(noteHeadWidth2 - lyrics->bbox().width() * .5,
-                           y + system()->staff(staffIdx)->bbox().bottom());
-                        // y += lyrics->bbox().height();
-                        y += lyrics->lineHeight();
+                        lyrics->layout(score()->layout());
                         }
-                  // increase staff distance if necessary
-                  y += point(score()->style()->lyricsMinBottomDistance);
+                  Lyrics* lyrics = ll->back();
+                  double y = lyrics->ipos().y() + lyrics->lineHeight()
+                             + point(score()->style()->lyricsMinBottomDistance);
                   if (y > staves[staffIdx]->distance)
                         staves[staffIdx]->distance = y;
                   }
@@ -1241,8 +1236,13 @@ again:
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
                               continue;
+#if 1
+                        (*l)->doc()->setTextWidth(-1.0);
+                        double lw = (*l)->doc()->idealWidth() * .5;
+#else
                         (*l)->layout(layout);
                         double lw = ((*l)->bbox().width() + _spatium * 0) * .5;
+#endif
                         if (lw > min)
                               min = lw;
                         if (lw > extra)
