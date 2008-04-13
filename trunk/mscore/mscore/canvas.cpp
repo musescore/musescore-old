@@ -899,6 +899,7 @@ void Canvas::setState(State action)
                   state = action;
                   setDropTarget(0);
                   _score->endEdit();
+                  setEditRectangle(QRectF());
                   break;
             case 10:    // NOTE_ENTRY - EDIT
                   state = action;
@@ -987,7 +988,7 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element, int startGrip)
       {
-      if (element->startEdit(startMove)) {
+      if (element->startEdit(this, startMove)) {
             setFocus();
             _score->startEdit(element);
             setState(EDIT);
@@ -1201,6 +1202,12 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
+      if (_editRectangle.isValid()) {
+            qreal w = 2.0 / p.matrix().m11();
+            p.setPen(QPen(QBrush(Qt::blue), w));
+            p.setBrush(QBrush(Qt::NoBrush));
+            p.drawRect(_editRectangle);
+            }
 
       if (state == EDIT || state == DRAG_EDIT) {
             qreal lw = 2.0/p.matrix().m11();

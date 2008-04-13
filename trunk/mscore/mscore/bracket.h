@@ -62,7 +62,7 @@ class Bracket : public Element {
       virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
 
-      virtual bool startEdit(const QPointF&);
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void endEdit();
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();

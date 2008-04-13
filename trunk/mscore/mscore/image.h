@@ -24,6 +24,8 @@
 #include "ui_imageproperties.h"
 #include "bsymbol.h"
 
+class Viewer;
+
 //---------------------------------------------------------
 //   Image
 //---------------------------------------------------------
@@ -36,7 +38,7 @@ class Image : public BSymbol {
       bool _lockAspectRatio;
       mutable bool _dirty;
 
-      virtual bool startEdit(const QPointF&);
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
       virtual void endEdit();
       virtual void draw(QPainter&) const;

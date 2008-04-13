@@ -614,22 +614,6 @@ void TextB::draw(QPainter& p) const
       {
       p.save();
       textBase()->draw(p, cursor);
-      if (editMode) {
-            QRectF f;
-            for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
-                  QTextLayout* tl = tb.layout();
-                  int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i) {
-                        const QTextLine l = tl->lineAt(i);
-                        f |= l.naturalTextRect().translated(tl->position());
-                        }
-                  }
-            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
-            f.adjust(-w, -w, w, w);
-            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
-            p.setBrush(QBrush(Qt::NoBrush));
-            p.drawRect(f);
-            }
       p.restore();
       }
 
@@ -801,7 +785,7 @@ bool TextB::readProperties(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool TextB::startEdit(const QPointF& p)
+bool TextB::startEdit(Viewer* view, const QPointF& p)
       {
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
@@ -826,7 +810,7 @@ bool TextB::startEdit(const QPointF& p)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-
+      setEditRectangle(view);
       return true;
       }
 
@@ -835,11 +819,12 @@ bool TextB::startEdit(const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool TextB::edit(int, QKeyEvent* ev)
+bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
       {
-//      score()->setLayoutAll(false);
-score()->setLayoutAll(true);
-      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));
+      score()->setLayoutAll(false);
+      qreal w = 2.0 / view->matrix().m11();
+      score()->addRefresh(view->editRectangle().adjusted(-w, -w, w, w));
+
       int key = ev->key();
       if (key == Qt::Key_F2) {
             if (palette == 0)
@@ -963,8 +948,33 @@ score()->setLayoutAll(true);
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));      // HACK
+      setEditRectangle(view);
       return true;
+      }
+
+//---------------------------------------------------------
+//   setEditRectangle
+//---------------------------------------------------------
+
+void TextB::setEditRectangle(Viewer* view)
+      {
+      layout(0);
+      QRectF editBox;
+      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
+            QTextLayout* tl = tb.layout();
+            int n = tl->lineCount();
+            for (int i = 0; i < n; ++i) {
+                  const QTextLine l = tl->lineAt(i);
+                  editBox |= l.naturalTextRect().translated(tl->position());
+                  }
+            }
+      qreal w = 6.0 / view->matrix().m11();   // 6 pixel border
+      editBox.adjust(-w, -w, w, w);
+      editBox.moveTo(canvasPos());
+      view->setEditRectangle(editBox);
+
+      w = 2.0 / view->matrix().m11();   // 2 pixel pen size
+      score()->addRefresh(view->editRectangle().adjusted(-w, -w, w, w));
       }
 
 //---------------------------------------------------------

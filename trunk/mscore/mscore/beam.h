@@ -24,6 +24,7 @@
 #include "chordlist.h"
 #include "element.h"
 
+class Viewer;
 
 //---------------------------------------------------------
 //   BeamHint
@@ -91,7 +92,7 @@ class Beam : public Element {
       virtual Beam* clone() const         { return new Beam(*this); }
       virtual ElementType type() const    { return BEAM; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      virtual bool startEdit(const QPointF&) { return false; }
+      virtual bool startEdit(Viewer*, const QPointF&) { return false; }
 
       Measure* measure() const            { return (Measure*)parent(); }
 

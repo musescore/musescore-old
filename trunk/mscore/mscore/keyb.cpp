@@ -92,7 +92,7 @@ printf("keyPressEvent:: ESC\n");
                   }
             }
       _score->start();
-      if (e->edit(curGrip, ev)) {
+      if (e->edit(this, curGrip, ev)) {
             updateGrips();
             ev->accept();
             _score->end();

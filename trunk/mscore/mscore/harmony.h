@@ -112,9 +112,12 @@ class Harmony : public Text {
       ~Harmony();
       virtual Harmony* clone() const   { return new Harmony(*this); }
       virtual ElementType type() const { return HARMONY; }
+      Measure* measure() { return (Measure*)parent(); }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      virtual void layout(ScoreLayout*);
 
       virtual void endEdit();
       virtual QLineF dragAnchor() const;

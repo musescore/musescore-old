@@ -26,6 +26,7 @@
 
 class SLine;
 class System;
+class Viewer;
 
 //---------------------------------------------------------
 //   LineSegment
@@ -45,9 +46,9 @@ class LineSegment : public Element {
       System* _system;
 
       virtual bool isMovable() const { return true; }
-      virtual bool startEdit(const QPointF&);
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
+      virtual bool edit(Viewer*, int, QKeyEvent*);
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int*, QRectF*) const;

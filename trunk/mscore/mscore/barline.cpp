@@ -351,7 +351,7 @@ Element* BarLine::drop(const QPointF& p1, const QPointF& p2, Element* e)
 //   startEdit
 //---------------------------------------------------------
 
-bool BarLine::startEdit(const QPointF&)
+bool BarLine::startEdit(Viewer*, const QPointF&)
       {
       yoff = 0.0;
       return true;

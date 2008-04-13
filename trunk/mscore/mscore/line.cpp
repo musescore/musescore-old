@@ -96,7 +96,7 @@ QPointF LineSegment::gripAnchor(int grip) const
 //   startEdit
 //---------------------------------------------------------
 
-bool LineSegment::startEdit(const QPointF&)
+bool LineSegment::startEdit(Viewer*, const QPointF&)
       {
       return true;
       }
@@ -106,7 +106,7 @@ bool LineSegment::startEdit(const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(int curGrip, QKeyEvent* ev)
+bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
       {
       if ((ev->modifiers() & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)

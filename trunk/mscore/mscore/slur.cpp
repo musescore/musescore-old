@@ -109,7 +109,7 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
 //   startEdit
 //---------------------------------------------------------
 
-bool SlurSegment::startEdit(const QPointF&)
+bool SlurSegment::startEdit(Viewer*, const QPointF&)
       {
       return true;
       }
@@ -119,7 +119,7 @@ bool SlurSegment::startEdit(const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
+bool SlurSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
       {
       if (slurTie()->type() != SLUR)
             return false;

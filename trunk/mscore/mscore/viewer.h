@@ -49,6 +49,8 @@ class Viewer {
       const Element* dropTarget;    ///< current drop target during dragMove
       QRectF dropRectangle;         ///< current drop rectangle during dragMove
       QLineF dropAnchor;            ///< line to current anchor point during dragMove
+      QRectF _editRectangle;        ///< frame during editing of text
+
       QMatrix _matrix, imatrix;
 
    public:
@@ -67,6 +69,8 @@ class Viewer {
       virtual void moveCursor() {}
       virtual void moveCursor(Segment*) {}
       virtual void setCursorOn(bool) {}
+      void setEditRectangle(const QRectF& r) { _editRectangle = r; }
+      QRectF editRectangle() const { return _editRectangle; }
       };
 
 #endif

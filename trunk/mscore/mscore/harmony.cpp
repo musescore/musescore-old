@@ -27,6 +27,7 @@
 #include "pitchspelling.h"
 #include "score.h"
 #include "sym.h"
+#include "system.h"
 
 const HChord HChord::C0(0,3,6,9);
 
@@ -978,4 +979,20 @@ QLineF Harmony::dragAnchor() const
       return QLineF(cp, anchor);
       }
 
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Harmony::layout(ScoreLayout* l)
+      {
+      Text::layout(l);
+      double x = 0.0;
+      double y = 0.0;
+      if (track() != -1)
+            y = measure()->system()->staff(track() / VOICES)->y();
+      if (time().isValid())
+            x = measure()->tick2pos(tick());
+      QPointF o(x, y);
+      setPos(ipos() + o);
+      }
 

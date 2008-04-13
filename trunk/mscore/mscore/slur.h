@@ -28,6 +28,7 @@ class Note;
 class System;
 class SlurTie;
 class Score;
+class Viewer;
 
 struct UP {
       QPointF p;            // layout position relative to pos()
@@ -62,9 +63,9 @@ class SlurSegment : public Element {
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&) const;
 
-      virtual bool startEdit(const QPointF&);
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
+      virtual bool edit(Viewer*, int, QKeyEvent*);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
 

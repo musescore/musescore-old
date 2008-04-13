@@ -25,6 +25,8 @@
 #include "style.h"
 
 class TextPalette;
+class Viewer;
+
 struct SymCode;
 
 extern TextPalette* palette;
@@ -94,6 +96,9 @@ class TextBase {
 
 class TextB : public Element {
       bool _movable;
+      QRectF editBox;   // box is shown during editing
+
+      void setEditRectangle(Viewer*);
 
    protected:
       bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
@@ -148,12 +153,12 @@ class TextB : public Element {
 
       virtual void draw(QPainter&) const;
 
-      virtual bool startEdit(const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
+      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool edit(Viewer*, int, QKeyEvent*);
+      virtual void endEdit();
       void addSymbol(const SymCode&);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
-      virtual void endEdit();
       virtual void write(Xml& xml) const;
       virtual void write(Xml& xml, const char*) const;
       virtual void read(QDomElement);
