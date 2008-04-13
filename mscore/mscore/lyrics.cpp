@@ -24,6 +24,7 @@
 #include "measure.h"
 #include "score.h"
 #include "canvas.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Lyrics
@@ -415,4 +416,26 @@ void Score::lyricsReturn()
 
       setLayoutAll(true);
       }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Lyrics::layout(ScoreLayout* l)
+      {
+      Text::layout(l);
+      double lh             = lineSpacing();
+      double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;
+
+      Segment* seg   = segment();
+      System* sys    = seg->measure()->system();
+      LyricsList* ll = seg->lyricsList(staffIdx());
+
+      int line       = ll->indexOf(this);
+      double y       = lh * line + point(score()->style()->lyricsDistance)
+                       + sys->staff(staffIdx())->bbox().height();
+      double x       = noteHeadWidth2 - bbox().width() * .5;
+      setPos(x, y);
+      }
+
 

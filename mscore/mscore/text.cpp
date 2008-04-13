@@ -42,7 +42,7 @@ TextPalette* palette;
 TextBase::TextBase()
       {
       _doc          = new QTextDocument(0);
-//      _doc->setUseDesignMetrics(true);
+      _doc->setUseDesignMetrics(true);
 
       _frameWidth   = 0.0;
       _paddingWidth = 0.0;
@@ -959,18 +959,9 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
 void TextB::setEditRectangle(Viewer* view)
       {
       layout(0);
-      QRectF editBox;
-      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
-            QTextLayout* tl = tb.layout();
-            int n = tl->lineCount();
-            for (int i = 0; i < n; ++i) {
-                  const QTextLine l = tl->lineAt(i);
-                  editBox |= l.naturalTextRect().translated(tl->position());
-                  }
-            }
+      QRectF editBox = abbox();
       qreal w = 6.0 / view->matrix().m11();   // 6 pixel border
       editBox.adjust(-w, -w, w, w);
-      editBox.moveTo(canvasPos());
       view->setEditRectangle(editBox);
 
       w = 2.0 / view->matrix().m11();   // 2 pixel pen size

@@ -986,13 +986,8 @@ QLineF Harmony::dragAnchor() const
 void Harmony::layout(ScoreLayout* l)
       {
       Text::layout(l);
-      double x = 0.0;
-      double y = 0.0;
-      if (track() != -1)
-            y = measure()->system()->staff(track() / VOICES)->y();
-      if (time().isValid())
-            x = measure()->tick2pos(tick());
-      QPointF o(x, y);
-      setPos(ipos() + o);
+      double y = track() != -1 ? measure()->system()->staff(track() / VOICES)->y() : 0.0;
+      double x = time().isValid() ? measure()->tick2pos(tick()) : 0.0;
+      setPos(ipos() + QPointF(x, y));
       }
 

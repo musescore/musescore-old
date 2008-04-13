@@ -23,6 +23,8 @@
 
 #include "text.h"
 
+class Segment;
+
 //---------------------------------------------------------
 //   Lyrics
 //---------------------------------------------------------
@@ -42,7 +44,10 @@ class Lyrics : public Text {
       virtual Lyrics* clone() const    { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
       virtual QPointF canvasPos() const;
+      Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
+
+      virtual void layout(ScoreLayout*);
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
