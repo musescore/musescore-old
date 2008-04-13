@@ -1474,7 +1474,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Transpose")
          ),
       Shortcut (
-         STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "clef-violin",
          QT_TR_NOOP("violin clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_1),
@@ -1483,7 +1483,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("violin clef")
          ),
       Shortcut (
-         STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "clef-bass",
          QT_TR_NOOP("bass clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_2),

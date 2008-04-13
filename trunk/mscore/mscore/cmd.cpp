@@ -926,7 +926,6 @@ void Score::cmdAddText(int subtype)
                   break;
 
             case TEXT_CHORD:
-            case TEXT_SYSTEM:
             case TEXT_REHEARSAL_MARK:
                   {
                   Element* el = sel->element();
@@ -947,6 +946,7 @@ void Score::cmdAddText(int subtype)
                   }
                   break;
             case TEXT_STAFF:
+            case TEXT_SYSTEM:
                   {
                   Element* el = sel->element();
                   if (!el || (el->type() != NOTE && el->type() != REST)) {
@@ -959,7 +959,15 @@ void Score::cmdAddText(int subtype)
                   if (el->type() == NOTE)
                         el = el->parent();
                   s = new StaffText(this);
-                  s->setTrack(el->track());
+                  if (subtype == TEXT_SYSTEM) {
+                        s->setTrack(0);
+                        s->setSystemFlag(true);
+                        }
+                  else {
+                        s->setTrack(el->track());
+                        s->setSystemFlag(false);
+                        }
+                  s->setSubtype(subtype);
                   s->setParent(((ChordRest*)el)->measure());
                   s->setTick(el->tick());
                   }

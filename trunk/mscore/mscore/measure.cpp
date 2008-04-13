@@ -657,7 +657,9 @@ void Measure::layout2(ScoreLayout* layout)
 
       foreach(Element* element, _el) {
             element->layout(layout);
-            if (element->type() != HARMONY) {
+            if (element->type() != HARMONY
+               && element->type() != TEMPO_TEXT
+               && element->type() != STAFF_TEXT) {
                   double x = 0.0;
                   double y = 0.0;
                   int track = element->track();

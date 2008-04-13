@@ -21,6 +21,7 @@
 #include "score.h"
 #include "tempotext.h"
 #include "tempo.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   TempoText
@@ -123,5 +124,18 @@ void TempoProperties::saveValues()
       TempoText* ntt = new TempoText(*tempoText);
       ntt->setTempo(newTempo);
       score->undoChangeElement(tempoText, ntt);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void TempoText::layout(ScoreLayout* l)
+      {
+      Text::layout(l);
+      Measure* m = (Measure*)parent();
+      double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
+      double x = time().isValid() ? m->tick2pos(tick()) : 0.0;
+      setPos(ipos() + QPointF(x, y));
       }
 

@@ -41,6 +41,9 @@ class StaffText : public Text  {
       virtual void read(QDomElement);
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      virtual void layout(ScoreLayout*);
+
       void setMidiProgram(int hb, int lb, int pr)    { _midiAction.setProgram(hb, lb, pr);     }
       void setMidiController(int ctrl, int value)    { _midiAction.setController(ctrl, value); }
       void setMidiAction(const MidiAction& a)        { _midiAction = a; }
