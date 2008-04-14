@@ -77,7 +77,7 @@ struct PageFormat {
 class Page : public Element {
       ScoreLayout* _layout;
       QList<System*> _systems;
-      int _no;                            // page number
+      int _no;                      // page number
       Text* _pageNo;
       Text* _copyright;
 
@@ -95,7 +95,7 @@ class Page : public Element {
       void appendSystem(System* s);
 
       int no() const                     { return _no;        }
-      void setNo(int n)                  { _no = n;           }
+      void setNo(int n);
       bool isOdd() const                 { return (_no+1) & 1;    }
 
       double tm() const;            // margins in pixel

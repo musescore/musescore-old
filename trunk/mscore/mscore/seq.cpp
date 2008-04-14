@@ -342,7 +342,6 @@ void Seq::pause()
 void MuseScore::seqStarted()
       {
       setState(STATE_PLAY);
-      cs->start();
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(true);
       cs->end();
@@ -359,7 +358,6 @@ void MuseScore::seqStopped()
       setState(STATE_NORMAL);
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(false);
-      cs->start();
       cs->setLayoutAll(false);
       cs->setUpdateAll();
       cs->end();
@@ -379,7 +377,6 @@ void Seq::guiStop()
       //
       // deselect all selected notes
       //
-      cs->start();
       foreach(const NoteOn* n, markedNotes) {
             n->note()->setSelected(false);
             cs->addRefresh(n->note()->abbox());
@@ -756,9 +753,6 @@ void Seq::heartBeat()
       if (state != PLAY)
             return;
 
-      cs->start();
-      cs->setLayoutAll(false);
-
       double endTime = curTime() - startTime;
       Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
@@ -848,7 +842,6 @@ void Seq::setPos(int tick)
 
 void Seq::seek(int tick)
       {
-      cs->start();
       Segment* seg = cs->tick2segment(tick);
       if (seg) {
             foreach(Viewer* v, cs->getViewer())

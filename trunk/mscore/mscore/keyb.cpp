@@ -52,10 +52,9 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             return;
             }
       Element* e = _score->editObject;
-      if (key == Qt::Key_Escape) {
-            if (state == DRAG_EDIT)
+      if (key == Qt::Key_Escape) {  // TODO: no ESC arrived here because its defined as
+            if (state == DRAG_EDIT) //       a shortcut
                   e->endEditDrag();
-printf("keyPressEvent:: ESC\n");
             setState(NORMAL);
             ev->accept();
             return;
@@ -91,7 +90,6 @@ printf("keyPressEvent:: ESC\n");
                   return;
                   }
             }
-      _score->start();
       if (e->edit(this, curGrip, ev)) {
             updateGrips();
             ev->accept();

@@ -291,7 +291,7 @@ const Sym* findSymbol(QChar code, int fontId)
 
 const QRectF Sym::bbox(double mag) const
       {
-      mag *= _spatium / (DPI * SPATIUM20);
+      mag *= _spatiumMag;
       return QRectF(_bbox.x() * mag, _bbox.y() * mag, _bbox.width() * mag, _bbox.height() * mag);
       }
 
@@ -301,8 +301,7 @@ const QRectF Sym::bbox(double mag) const
 
 double Sym::height(double mag) const
       {
-      mag *= _spatium / (DPI * SPATIUM20);
-      return _bbox.height() * mag;
+      return _bbox.height() * mag * _spatiumMag;
       }
 
 //---------------------------------------------------------
@@ -311,7 +310,7 @@ double Sym::height(double mag) const
 
 double Sym::width(double mag) const
       {
-      return w * mag * _spatium / (DPI * SPATIUM20);
+      return w * mag * _spatiumMag;
       }
 
 //---------------------------------------------------------
@@ -329,7 +328,7 @@ void Sym::draw(QPainter& painter, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
-      mag *= _spatium / (DPI * SPATIUM20);
+      mag *= _spatiumMag;
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(*_font);
@@ -343,7 +342,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       {
-      mag *= _spatium / (DPI * SPATIUM20);
+      mag *= _spatiumMag;
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(*_font);

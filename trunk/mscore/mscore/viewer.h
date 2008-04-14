@@ -25,6 +25,7 @@ class Score;
 class Element;
 class ScoreLayout;
 class Segment;
+class TextB;
 
 //---------------------------------------------------------
 //   Viewer
@@ -49,7 +50,9 @@ class Viewer {
       const Element* dropTarget;    ///< current drop target during dragMove
       QRectF dropRectangle;         ///< current drop rectangle during dragMove
       QLineF dropAnchor;            ///< line to current anchor point during dragMove
-      QRectF _editRectangle;        ///< frame during editing of text
+
+      // in text edit mode text is framed
+      TextB* _editText;
 
       QMatrix _matrix, imatrix;
 
@@ -69,8 +72,8 @@ class Viewer {
       virtual void moveCursor() {}
       virtual void moveCursor(Segment*) {}
       virtual void setCursorOn(bool) {}
-      void setEditRectangle(const QRectF& r) { _editRectangle = r; }
-      QRectF editRectangle() const { return _editRectangle; }
+      void setEditText(TextB* t)              { _editText = t;      }
+      TextB* editText() const                 { return _editText;   }
       };
 
 #endif

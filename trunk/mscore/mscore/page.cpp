@@ -101,6 +101,15 @@ void Page::appendSystem(System* s)
       }
 
 //---------------------------------------------------------
+//   setNo
+//---------------------------------------------------------
+
+void Page::setNo(int n)
+      {
+      _no = n;
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -116,8 +125,10 @@ void Page::layout(ScoreLayout* layout)
                   _pageNo = new Text(score());
                   _pageNo->setParent(this);
                   }
-            // always set subtype so that style changes take immediate effect
-            _pageNo->setSubtype(subtype);
+            // TODO: always set subtype so that style changes take immediate effect
+            if (subtype != _pageNo->subtype()) {
+                  _pageNo->setSubtype(subtype);
+                  }
             _pageNo->setText(QString("%1").arg(n));
             _pageNo->layout(layout);
             }

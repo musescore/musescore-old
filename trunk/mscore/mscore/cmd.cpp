@@ -62,27 +62,6 @@
 #include "system.h"
 #include "stafftext.h"
 
-static bool startMode = false;
-
-//---------------------------------------------------------
-//   start
-//---------------------------------------------------------
-
-/**
- Clear the area to be redrawn.
-*/
-
-void Score::start()
-      {
-      if (startMode)
-            return;
-      startMode = true;
-      refresh.setRect(0.0,0.0,0.0,0.0);
-      updateAll   = false;
-      layoutStart = 0;          ///< start a relayout at this measure
-//      layoutAll   = false;      ///< do a complete relayout
-      layoutAll   = true;      ///< do a complete relayout
-      }
 
 //---------------------------------------------------------
 //   startCmd
@@ -95,7 +74,7 @@ void Score::start()
 
 void Score::startCmd()
       {
-      start();
+      layoutAll = true;      ///< do a complete relayout
 
       // Start collecting low-level undo operations for a
       // user-visible undo action.
@@ -153,12 +132,6 @@ void Score::endCmd()
 */
 void Score::end()
       {
-      if (!startMode) {
-            printf("Score:end: not started\n");
-            return;
-            }
-      startMode = false;
-
       if (layoutAll) {
             updateAll = true;
             _layout->layout();
@@ -179,7 +152,10 @@ void Score::end()
                   v->dataChanged(r);
                   }
             }
+      refresh   = QRectF();
+      layoutAll = false;
       updateAll = false;
+      layoutStart = 0;
       setPadState();
       }
 
@@ -1435,32 +1411,27 @@ void Score::cmd(const QString& cmd)
             printf("cmd <%s>\n", cmd.toLatin1().data());
 
       if (editObject) {                          // in edit mode?
-            start();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             endCmd();
             }
       if (cmd == "print")
             printFile();
       else if (cmd == "undo") {
-            start();
             doUndo();
             setLayoutAll(true);
             end();
             }
       else if (cmd == "redo") {
-            start();
             doRedo();
             setLayoutAll(true);
             end();
             }
       else if (cmd == "note-input") {
-            start();
             setNoteEntry(true, false);
             _padState.rest = false;
             end();
             }
       else if (cmd == "escape") {
-            start();
             if (noteEntryMode())
                   setNoteEntry(false, false);
             select(0, 0, 0);
@@ -1559,12 +1530,14 @@ void Score::cmd(const QString& cmd)
                   Element* el = sel->element(); // single selection
                   if (el && el->type() == NOTE)
                         moveUp((Note*)el);
+                  setLayoutAll(false);
                   }
             else if (cmd == "move-down") {
                   Element* el = sel->element(); // single selection
                   if (el && el->type() == NOTE) {
                         moveDown((Note*)el);
                         }
+                  setLayoutAll(false);
                   }
             else if (cmd == "up-chord") {
                   Element* el = sel->element(); // single selection
@@ -1578,6 +1551,7 @@ void Score::cmd(const QString& cmd)
                               select(e, 0, 0);
                               }
                         }
+                  setLayoutAll(false);
                   }
             else if (cmd == "down-chord") {
                   Element* el = sel->element(); // single selection
@@ -1591,6 +1565,7 @@ void Score::cmd(const QString& cmd)
                               select(e, 0, 0);
                               }
                         }
+                  setLayoutAll(false);
                   }
             else if (cmd == "top-chord" ) {
                   Element* el = sel->element(); // single selection
@@ -1604,6 +1579,7 @@ void Score::cmd(const QString& cmd)
                               select(e, 0, 0);
                               }
                         }
+                  setLayoutAll(false);
                   }
             else if (cmd == "bottom-chord") {
                   Element* el = sel->element(); // single selection
@@ -1617,12 +1593,15 @@ void Score::cmd(const QString& cmd)
                               select(e, 0, 0);
                               }
                         }
+                  setLayoutAll(false);
                   }
             else if (cmd == "next-chord"
                || cmd == "prev-chord"
                || cmd == "next-measure"
-               || cmd == "prev-measure")
+               || cmd == "prev-measure") {
                   move(cmd);
+                  setLayoutAll(false);
+                  }
 
             else if (cmd == "note-c")
                   cmdAddPitch(0, false);

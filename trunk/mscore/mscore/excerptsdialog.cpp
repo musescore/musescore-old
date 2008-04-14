@@ -139,7 +139,6 @@ void MuseScore::startExcerptsDialog()
       if (cs == 0)
             return;
       ExcerptsDialog ed(cs, 0);
-      cs->start();
       ed.exec();
       cs->setLayoutAll(true);
       cs->end();

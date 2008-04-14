@@ -31,6 +31,7 @@ Style* style;
 //  spatium = 20/4 points
 
 double _spatium;
+double _spatiumMag;
 QVector<TextStyle> defaultTextStyles;
 
 //---------------------------------------------------------

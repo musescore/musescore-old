@@ -22,6 +22,7 @@
 #define __SPATIUM_H__
 
 extern double _spatium; // spatium value in points
+extern double _spatiumMag;
 
 //---------------------------------------------------------
 //   Spatium

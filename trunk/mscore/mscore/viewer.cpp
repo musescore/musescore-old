@@ -32,9 +32,9 @@
 
 Viewer::Viewer()
       {
-      _score = 0;
+      _score     = 0;
       dropTarget = 0;
-      _editRectangle = QRectF();
+      _editText  = 0;
       };
 
 //---------------------------------------------------------

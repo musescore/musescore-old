@@ -81,8 +81,6 @@ ScoreLayout::ScoreLayout(Score* score)
       _pageFormat  = new PageFormat;
       _paintDevice = 0;
 
-      //DEBUG:
-      _spatium = ::_spatium;
       _systems.clear();
       _pages.clear();
       _needLayout = false;
@@ -149,7 +147,8 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void ScoreLayout::doLayout()
       {
-      ::_spatium = _spatium;        // needed for preview
+      ::_spatium  = _spatium;        // needed for preview
+      _spatiumMag = _spatium / (DPI * SPATIUM20);
       _needLayout = false;
 
 #ifdef OPTIMIZE_LAYOUT
