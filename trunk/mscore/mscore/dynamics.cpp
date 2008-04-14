@@ -147,47 +147,6 @@ void Dynamic::endDrag()
 #endif
       }
 
-#if 0
-//---------------------------------------------------------
-//   layoutPos
-//    return layout position relative to canvas
-//---------------------------------------------------------
-
-QPointF Dynamic::layoutPos()
-      {
-      QPointF o(QPointF(_xoff, _yoff));
-      if (_offsetType == OFFSET_SPATIUM)
-            o *= _spatium;
-      else
-            o *= DPI;
-      o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
-
-      double th = height();
-      double tw = width();
-      QPointF p;
-      if (_align & ALIGN_BOTTOM)
-            p.setY(-th);
-      else if (_align & ALIGN_VCENTER)
-            p.setY(-(th * .5));
-      else if (_align & ALIGN_BASELINE)
-            p.setY(-basePosition());
-      if (_align & ALIGN_RIGHT)
-            p.setX(-tw);
-      else if (_align & ALIGN_HCENTER)
-            p.setX(-(tw * .5));
-      p += o;
-
-      Measure* m = (Measure*) parent();
-      Segment* seg = m->tick2segment(tick());
-      double xp = seg->x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = measure()->system();
-      double yp = system->staff(staffIdx())->y() + system->y();
-      return p + QPointF(xp, yp);
-      }
-#endif
-
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------
@@ -268,4 +227,17 @@ QLineF Dynamic::dragAnchor() const
       QPointF anchor = cp - (userOff() * _spatium);
       return QLineF(cp, anchor);
       }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Dynamic::layout(ScoreLayout* l)
+      {
+      Text::layout(l);
+      double y = track() != -1 ? measure()->system()->staff(track() / VOICES)->y() : 0.0;
+      double x = time().isValid() ? measure()->tick2pos(tick()) : 0.0;
+      setPos(ipos() + QPointF(x, y));
+      }
+
 

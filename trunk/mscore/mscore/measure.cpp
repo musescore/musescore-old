@@ -569,18 +569,20 @@ void Measure::layout(ScoreLayout* layout, double width)
                   LyricsList* ll = segment->lyricsList(staffIdx);
                   if (ll->isEmpty())
                         continue;
-                  int line = 0;
-                  for (iLyrics i = ll->begin(); i != ll->end(); ++i, ++line) {
-                        Lyrics* lyrics = *i;
-                        if (lyrics == 0)
+                  Lyrics* lyrics = 0;
+                  for (iLyrics i = ll->begin(); i != ll->end(); ++i) {
+                        Lyrics* l = *i;
+                        if (l == 0)
                               continue;
+                        lyrics = l;
                         lyrics->layout(score()->layout());
                         }
-                  Lyrics* lyrics = ll->back();
-                  double y = lyrics->ipos().y() + lyrics->lineHeight()
+                  if (lyrics) {
+                        double y = lyrics->ipos().y() + lyrics->lineHeight()
                              + point(score()->style()->lyricsMinBottomDistance);
-                  if (y > staves[staffIdx]->distance)
-                        staves[staffIdx]->distance = y;
+                        if (y > staves[staffIdx]->distance)
+                              staves[staffIdx]->distance = y;
+                        }
                   }
             }
       }
@@ -659,11 +661,12 @@ void Measure::layout2(ScoreLayout* layout)
             element->layout(layout);
             if (element->type() != HARMONY
                && element->type() != TEMPO_TEXT
+               && element->type() != DYNAMIC
                && element->type() != STAFF_TEXT) {
                   double x = 0.0;
                   double y = 0.0;
                   int track = element->track();
-                  if ((element->type() != DYNAMIC) && (track != -1))
+                  if (track != -1)
                         y = system()->staff(track / VOICES)->y();
                   if (element->time().isValid())
                         x = tick2pos(element->tick());

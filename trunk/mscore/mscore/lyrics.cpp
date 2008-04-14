@@ -337,9 +337,6 @@ void Score::lyricsUnderscore()
             if (el &&  el->type() == CHORD)
                   break;
             }
-      if (nextSegment == 0) {
-            return;
-            }
 
       // search previous lyric
       Lyrics* oldLyrics = 0;
@@ -353,6 +350,21 @@ void Score::lyricsUnderscore()
             segment = segment->prev1();
             }
 
+      if (nextSegment == 0) {
+            if (oldLyrics) {
+                  switch(oldLyrics->syllabic()) {
+                        case Lyrics::SINGLE:
+                        case Lyrics::END:
+                              break;
+                        default:
+                              oldLyrics->setSyllabic(Lyrics::END);
+                              break;
+                        }
+                  if (oldLyrics->tick() < endTick)
+                        oldLyrics->setEndTick(endTick);
+                  }
+            return;
+            }
       startCmd();
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);

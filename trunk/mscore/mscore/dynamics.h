@@ -44,7 +44,6 @@ struct Dyn {
 class Dynamic : public Text {
 
       mutable QPointF dragOffset;
-//      QPointF layoutPos();
 
    public:
       Dynamic(Score*);
@@ -53,6 +52,8 @@ class Dynamic : public Text {
       virtual ElementType type() const { return DYNAMIC; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Measure* measure() const         { return (Measure*)parent(); }
+
+      virtual void layout(ScoreLayout*);
 
       virtual void setSubtype(int val);
       virtual void setSubtype(const QString&);
