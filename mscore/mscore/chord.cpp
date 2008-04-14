@@ -1047,10 +1047,6 @@ void Chord::space(double& min, double& extra) const
             double prefixWidth  = 0.0;
             if (note->accidental()) {
                   prefixWidth = -note->accidental()->pos().x();
-#if 0
-                  prefixWidth = note->accidental()->width();
-                  prefixWidth += point(score()->style()->prefixNoteDistance) * mag();
-#endif
                   if (prefixWidth > extra)
                         extra += prefixWidth;
                   }
@@ -1069,11 +1065,6 @@ void Chord::space(double& min, double& extra) const
       min = mirror + hw;
       if (up() && _hook)
             min += _hook->width();
-/*      if (_noteType != NOTE_NORMAL) {
-            extra += min;
-            min = 0.0;
-            }
-      */
       }
 
 //---------------------------------------------------------

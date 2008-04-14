@@ -426,6 +426,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               }
                         update();
                         }
+                  _score->setLayoutAll(false);
                   break;
 
             case NOTE_ENTRY:
@@ -491,7 +492,6 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
-      _score->start();
       if (QApplication::mouseButtons() == Qt::MidButton) {
             QString mimeType = _score->sel->mimeType();
             if (!mimeType.isEmpty()) {
@@ -683,7 +683,6 @@ void Canvas::updateGrips()
 
 void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
       {
-      _score->start();
       if (dragCanvasState) {
             dragCanvasState = false;
             setCursor(QCursor(Qt::ArrowCursor));
@@ -899,7 +898,7 @@ void Canvas::setState(State action)
                   state = action;
                   setDropTarget(0);
                   _score->endEdit();
-                  setEditRectangle(QRectF());
+                  setEditText(0);
                   break;
             case 10:    // NOTE_ENTRY - EDIT
                   state = action;
@@ -1133,12 +1132,18 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
       QRegion region;
       if (_score->needLayout()) {
+
+//            unsigned long long a = cycles();
             _score->layout()->doLayout();
+//            unsigned long long b = (cycles() - a) / 1000000LL;
+//            printf("layout %lld\n", b);
+
             if (navigator)
                   navigator->layoutChanged();
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
+// printf("layout\n");
             }
       else
             region = ev->region();
@@ -1180,7 +1185,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 void Canvas::paint(const QRect& rr, QPainter& p)
       {
-// printf("paint %d %d -- %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
+//    printf("paint %d %d -- %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
       p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
             p.fillRect(rr, _fgColor);
@@ -1202,11 +1207,15 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
-      if (_editRectangle.isValid()) {
-            qreal w = 2.0 / p.matrix().m11();
+
+      if (_editText) {
+            QRectF r = _editText->abbox();
+            qreal w = 6.0 / matrix().m11();   // 6 pixel border
+            r.adjust(-w, -w, w, w);
+            w = 2.0 / matrix().m11();   // 2 pixel pen size
             p.setPen(QPen(QBrush(Qt::blue), w));
             p.setBrush(QBrush(Qt::NoBrush));
-            p.drawRect(_editRectangle);
+            p.drawRect(r);
             }
 
       if (state == EDIT || state == DRAG_EDIT) {
@@ -1600,9 +1609,6 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
 
       event->acceptProposedAction();
 
-      _score->start();
-      _score->setLayoutAll(false);
-
       // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
@@ -1918,7 +1924,6 @@ void Canvas::dropEvent(QDropEvent* event)
 void Canvas::dragLeaveEvent(QDragLeaveEvent*)
       {
       if (dragElement) {
-            _score->start();
             _score->setLayoutAll(false);
             _score->addRefresh(dragElement->abbox());
             delete dragElement;
@@ -2142,6 +2147,14 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                         continue;
                         }
                   }
+            p.restore();
+            }
+      Element* e = score()->dragObject();
+      if (e) {
+            p.save();
+            p.translate(e->canvasPos());
+            p.setPen(QPen(e->curColor()));
+            e->draw(p);
             p.restore();
             }
       }

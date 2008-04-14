@@ -208,7 +208,7 @@ class Element {
 
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
-      virtual void endDrag();
+      virtual void endDrag()                  {}
       virtual QLineF dragAnchor() const       { return QLineF(); }
 
       virtual bool startEdit(Viewer*, const QPointF&);
@@ -331,6 +331,19 @@ class Element {
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
       bool systemFlag() const               { return _systemFlag;   }
       void setSystemFlag(bool f)            { _systemFlag = f;      }
+
+      bool isTextB() { return
+                  type()  == TEXT
+                || type() == LYRICS
+                || type() == DYNAMIC
+                || type() == HARMONY
+                || type() == OTTAVA_SEGMENT
+                || type() == OTTAVA
+                || type() == MARKER
+                || type() == JUMP
+                || type() == STAFF_TEXT
+                || type() == TEMPO_TEXT;
+            }
       };
 
 //---------------------------------------------------------

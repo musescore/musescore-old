@@ -82,7 +82,7 @@ class TextBase {
       void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
       void clear()                          { _doc->clear();              }
       void layout(ScoreLayout*);
-      QRectF bbox() const { return _bbox; }
+      QRectF bbox() const                   { return _bbox; }
       void draw(QPainter&, QTextCursor*) const;
       void setText(const QString&, Align);
       QString getText() const;
@@ -96,9 +96,6 @@ class TextBase {
 
 class TextB : public Element {
       bool _movable;
-      QRectF editBox;   // box is shown during editing
-
-      void setEditRectangle(Viewer*);
 
    protected:
       bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit

@@ -22,6 +22,7 @@
 #define __SYM_H__
 
 extern void initSymbols();
+extern double _spatiumMag;
 
 //---------------------------------------------------------
 //   SymCode
@@ -52,11 +53,11 @@ class Sym {
       const char* name() const             { return _name; }
       const QRectF bbox(double mag = 1.0) const;
       double height(double mag = 1.0) const;
-      double width(double) const;
-      QChar code() const                   { return _code;   }
-      int getFontId() const                { return fontId;  }
+      double width(double mag) const;
+      QChar code() const                   { return _code;    }
+      int getFontId() const                { return fontId;   }
       const QFont& font() const            { return *_font;   }
-      void setCode(const QChar& c)         { _code = c;      }
+      void setCode(const QChar& c)         { _code = c;       }
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, qreal x, qreal y) const;
       void draw(QPainter& painter, double mag, qreal x, qreal y) const;

@@ -1130,7 +1130,6 @@ void MuseScore::setCurrentScore(int idx)
       if (playPanel)
             playPanel->setScore(cs);
 
-      cs->start();
       cs->setLayoutAll(true);
       cs->end();
 
@@ -1202,7 +1201,6 @@ void MuseScore::showPageSettings()
 
 void MuseScore::pageSettingsChanged()
       {
-      cs->start();
       canvas->updateNavigator(true);
       cs->setLayoutAll(true);
       cs->end();
@@ -1461,7 +1459,8 @@ int main(int argc, char* argv[])
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium
-      _spatium = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
+      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
+      _spatiumMag = 1.0;
 
 //      initSymbols();
 

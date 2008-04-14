@@ -284,6 +284,7 @@ class Score : public QObject {
       void transpose();
 
       Rest* addRest(int tick, int len, int track);
+      void lyricsEndEdit();
 
    public:
       Score();
@@ -391,10 +392,9 @@ class Score : public QObject {
       void setPadState();
       void setPadState(Element* obj);
 
-      void startCmd();
-      void start();
-      void end();
-      void endCmd();
+      void startCmd();        // start undoable command
+      void endCmd();          // end undoable command
+      void end();             // layout & update canvas
 
       void cmdAdd(Element*);
       void cmdRemove(Element*);

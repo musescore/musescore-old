@@ -188,17 +188,6 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
             e->setParent(nb);
       }
 
-#if 0
-//---------------------------------------------------------
-//   doLayout
-//---------------------------------------------------------
-
-void Score::doLayout()
-      {
-      _layout->doLayout();
-      }
-#endif
-
 //---------------------------------------------------------
 //   pageFormat
 //---------------------------------------------------------
@@ -215,7 +204,8 @@ PageFormat* Score::pageFormat() const
 void Score::setSpatium(double v)
       {
       _layout->setSpatium(v);
-      _spatium = v;
+      _spatium    = v;
+      _spatiumMag = _spatium / (DPI * SPATIUM20);
       }
 
 //---------------------------------------------------------
@@ -1027,6 +1017,8 @@ void Score::startEdit(Element* element)
       undoChangeElement(origEditObject, editObject);
       select(editObject, 0, 0);
       updateAll = true;
+      if (editObject->isTextB())
+            canvas()->setEditText((TextB*)editObject);
       end();
       }
 
@@ -1052,39 +1044,8 @@ void Score::endEdit()
                   _layout->setInstrumentNames();
                   }
             }
-      else if (editObject->type() == LYRICS) {
-            //
-            //  special handling of Lyrics
-            //
-            Lyrics* lyrics = (Lyrics*)editObject;
-            Lyrics* origL  = (Lyrics*)origEditObject;
-
-            // search previous lyric:
-            int verse    = lyrics->no();
-            Segment* seg = (Segment*)lyrics->parent();
-            int staffIdx = lyrics->staffIdx();
-            Lyrics* nl = 0;
-            while (seg->prev1()) {
-                  seg = seg->prev1();
-                  LyricsList* nll = seg->lyricsList(staffIdx);
-                  if (!nll)
-                        continue;
-                  nl = nll->value(verse);
-                  if (nl)
-                        break;
-                  }
-
-            if (lyrics->isEmpty() && origL->isEmpty()) {
-                  Measure* measure = (Measure*)(lyrics->parent());
-                  measure->remove(lyrics);
-                  }
-            else {
-                  if (nl && nl->syllabic() == Lyrics::END) {
-                        if (nl->endTick() >= lyrics->tick())
-                              nl->setEndTick(0);
-                        }
-                  }
-            }
+      else if (editObject->type() == LYRICS)
+            lyricsEndEdit();
       layoutAll = true;
       mscore->setState(STATE_NORMAL);
       editObject = 0;
@@ -1101,6 +1062,7 @@ void Score::startDrag()
       undoChangeElement(origDragObject, _dragObject);
       sel->clear();
       sel->add(_dragObject);
+      layout()->removeBsp(origDragObject);
       }
 
 //---------------------------------------------------------
@@ -1327,10 +1289,8 @@ bool Score::redoEmpty() const
 
 void Score::setShowInvisible(bool v)
       {
-      start();
       _showInvisible = v;
       updateAll      = true;
-      layoutAll      = false;
       end();
       }
 

@@ -68,6 +68,10 @@ TextBase::TextBase(const TextBase& t)
       _frameColor   = t._frameColor;
       _frameRound   = t._frameRound;
       _circle       = t._circle;
+      frame         = t.frame;
+      _bbox         = t._bbox;
+      _doc->documentLayout()->setPaintDevice(pdev);
+      layout(0);
       }
 
 //---------------------------------------------------------
@@ -191,9 +195,10 @@ bool TextBase::readProperties(QDomElement e)
 
 void TextBase::layout(ScoreLayout*)
       {
+      if (!_doc->isModified())
+            return;
       _doc->documentLayout()->setPaintDevice(pdev);
       _doc->setTextWidth(-1.0);
-//      _doc->setTextWidth(-1.0);
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -220,12 +225,9 @@ void TextBase::layout(ScoreLayout*)
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            // double tw = _doc->idealWidth();
-            // _bbox = QRectF(QPointF(), QPointF(tw, _doc->size().height()));
             _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
-            // _bbox = QRectF(QPointF(), _doc->documentLayout()->documentSize());
-            // _bbox = _doc->documentLayout()->blockBoundingRect(_doc->begin());
             }
+      _doc->setModified(false);
       }
 
 //---------------------------------------------------------
@@ -234,8 +236,8 @@ void TextBase::layout(ScoreLayout*)
 
 void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       {
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
+//      p.setRenderHint(QPainter::Antialiasing, true);
+//      p.setRenderHint(QPainter::TextAntialiasing, true);
 
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
@@ -612,9 +614,7 @@ void TextB::layout(ScoreLayout* layout)
 
 void TextB::draw(QPainter& p) const
       {
-      p.save();
       textBase()->draw(p, cursor);
-      p.restore();
       }
 
 //---------------------------------------------------------
@@ -810,7 +810,8 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      setEditRectangle(view);
+      qreal w = 8.0 / view->matrix().m11();
+      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
       return true;
       }
 
@@ -821,9 +822,10 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 
 bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
       {
-      score()->setLayoutAll(false);
-      qreal w = 2.0 / view->matrix().m11();
-      score()->addRefresh(view->editRectangle().adjusted(-w, -w, w, w));
+      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
+      score()->setLayoutAll(lo);
+      qreal w = 8.0 / view->matrix().m11();
+      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
 
       int key = ev->key();
       if (key == Qt::Key_F2) {
@@ -948,24 +950,9 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      setEditRectangle(view);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   setEditRectangle
-//---------------------------------------------------------
-
-void TextB::setEditRectangle(Viewer* view)
-      {
       layout(0);
-      QRectF editBox = abbox();
-      qreal w = 6.0 / view->matrix().m11();   // 6 pixel border
-      editBox.adjust(-w, -w, w, w);
-      view->setEditRectangle(editBox);
-
-      w = 2.0 / view->matrix().m11();   // 2 pixel pen size
-      score()->addRefresh(view->editRectangle().adjusted(-w, -w, w, w));
+      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
+      return true;
       }
 
 //---------------------------------------------------------

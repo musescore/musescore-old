@@ -156,8 +156,6 @@ QPointF Lyrics::canvasPos() const
 
 void Score::lyricsTab(bool /*back*/)
       {
-      start();
-
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
@@ -238,8 +236,6 @@ void Score::lyricsTab(bool /*back*/)
 
 void Score::lyricsMinus()
       {
-      start();
-
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
@@ -318,8 +314,6 @@ void Score::lyricsMinus()
 
 void Score::lyricsUnderscore()
       {
-      start();
-
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
@@ -406,7 +400,6 @@ void Score::lyricsUnderscore()
 
 void Score::lyricsReturn()
       {
-      start();
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
 
@@ -427,6 +420,45 @@ void Score::lyricsReturn()
       canvas()->startEdit(lyrics);
 
       setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsEndEdit
+//---------------------------------------------------------
+
+void Score::lyricsEndEdit()
+      {
+      Lyrics* lyrics = (Lyrics*)editObject;
+      Lyrics* origL  = (Lyrics*)origEditObject;
+      int endTick    = lyrics->tick();
+
+      // search previous lyric:
+      int verse    = lyrics->no();
+      int staffIdx = lyrics->staffIdx();
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      Segment* segment  = (Segment*)(lyrics->parent());
+      while (segment) {
+            LyricsList* nll = segment->lyricsList(staffIdx);
+            if (!nll)
+                  continue;
+            oldLyrics = nll->value(verse);
+            if (oldLyrics)
+                  break;
+            segment = segment->prev1();
+            }
+
+      if (lyrics->isEmpty() && origL->isEmpty()) {
+            Measure* measure = (Measure*)(lyrics->parent());
+            measure->remove(lyrics);
+            }
+      else {
+            if (oldLyrics && oldLyrics->syllabic() == Lyrics::END) {
+                  if (oldLyrics->endTick() >= endTick)
+                        oldLyrics->setEndTick(0);
+                  }
+            }
       }
 
 //---------------------------------------------------------
