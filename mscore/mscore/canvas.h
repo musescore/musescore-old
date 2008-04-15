@@ -56,7 +56,9 @@ class Canvas : public QFrame, public Viewer {
 
       State state;
       bool dragCanvasState;
-      Element* dragElement;
+      Element* dragElement;   // current moved drag&drop element
+      Element* dragObject;    // current canvas element
+
       QPointF dragOffset;
       bool mousePressed;
 

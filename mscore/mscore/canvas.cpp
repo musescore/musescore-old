@@ -71,6 +71,7 @@ Canvas::Canvas(QWidget* parent)
       setAutoFillBackground(true);
 
       dragElement      = 0;
+      dragObject       = 0;
       navigator        = 0;
       _score           = 0;
       dragCanvasState  = false;
@@ -350,13 +351,10 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       Qt::MouseButtons buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
-      // Element* element = elementAt(startMove);
-      Element* element = elementNear(startMove);
+      dragObject = elementNear(startMove);
 
-      _score->setDragObject(element);
-
-      if (mscore->playEnabled() && element && element->type() == NOTE) {
-            Note* note = (Note*)element;
+      if (mscore->playEnabled() && dragObject && dragObject->type() == NOTE) {
+            Note* note = (Note*)dragObject;
             seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
             }
 
@@ -365,11 +363,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       //-----------------------------------------
 
       if (b3) {
-            if (element) {
-                  ElementType type = element->type();
+            if (dragObject) {
+                  ElementType type = dragObject->type();
                   _score->dragStaff = 0;
                   if (type == MEASURE) {
-                        _score->dragSystem = (System*)(element->parent());
+                        _score->dragSystem = (System*)(dragObject->parent());
                         _score->dragStaff  = getStaff(_score->dragSystem, startMove);
                         }
                   // As findSelectableElement may return a measure
@@ -377,14 +375,14 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   // may not find the staff and return -1, which would cause
                   // select() to crash
                   if (_score->dragStaff >= 0)
-                        _score->select(element, keyState, _score->dragStaff);
-                  _score->setDragObject(0);
+                        _score->select(dragObject, keyState, _score->dragStaff);
+                  dragObject = 0;
                   seq->stopNotes();       // stop now because we dont get a mouseRelease event
                   if (type == MEASURE) {
-                        measurePopup(ev->globalPos(), (Measure*)element);
+                        measurePopup(ev->globalPos(), (Measure*)dragObject);
                         }
                   else {
-                        objectPopup(ev->globalPos(), element);
+                        objectPopup(ev->globalPos(), dragObject);
                         }
                   }
             else {
@@ -401,11 +399,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   //  select operation
                   //-----------------------------------------
 
-                  if (element) {
-                        ElementType type = element->type();
+                  if (dragObject) {
+                        ElementType type = dragObject->type();
                         _score->dragStaff = 0;
                         if (type == MEASURE) {
-                              _score->dragSystem = (System*)(element->parent());
+                              _score->dragSystem = (System*)(dragObject->parent());
                               _score->dragStaff  = getStaff(_score->dragSystem, startMove);
                               }
                         // As findSelectableElement may return a measure
@@ -413,9 +411,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         // may not find the staff and return -1, which would cause
                         // select() to crash
                         if (_score->dragStaff >= 0)
-                              _score->select(element, keyState, _score->dragStaff);
+                              _score->select(dragObject, keyState, _score->dragStaff);
                         else
-                              _score->setDragObject(0);
+                              dragObject = 0;
                         }
                   else {
                         _score->select(0, 0, 0);
@@ -473,14 +471,12 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       if (state == EDIT)
             return;
 
-      Element* element = _score->dragObject();
-
-      if (element) {
+      if (dragObject) {
             _score->startCmd();
 
-            if (!startEdit(element)) {
+            _score->setLayoutAll(false);
+            if (!startEdit(dragObject))
                   _score->endCmd();
-                  }
             }
       else
             mousePressEvent(ev);
@@ -552,8 +548,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   if (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0)
                         return;
                   {
-                  Element* de = _score->dragObject();
-                  if (de && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
+                  if (dragObject && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
                         // drag selection
                         QString mimeType = _score->sel->mimeType();
                         if (!mimeType.isEmpty()) {
@@ -566,11 +561,11 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                               }
                         break;
                         }
-                  if (de && de->isMovable()) {
+                  if (dragObject && dragObject->isMovable()) {
                         QPointF o;
                         if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM) {
-                              _score->startDrag();
-                              o = QPointF(de->userOff() * _spatium);
+                              _score->startDrag(dragObject);
+                              o = QPointF(dragObject->userOff() * _spatium);
                               setState(DRAG_OBJ);
                               }
                         startMove -= o;
@@ -738,7 +733,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
                   break;
 
             case NORMAL:
-                  if (!_score->dragObject())
+                  if (!dragObject)
                         _score->select(0, 0, 0);      // deselect all
                   break;
 
@@ -987,6 +982,7 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element, int startGrip)
       {
+      dragObject = 0;
       if (element->startEdit(this, startMove)) {
             setFocus();
             _score->startEdit(element);
@@ -1134,6 +1130,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
       if (_score->needLayout()) {
 
 //            unsigned long long a = cycles();
+printf("paint event layout\n");
             _score->layout()->doLayout();
 //            unsigned long long b = (cycles() - a) / 1000000LL;
 //            printf("layout %lld\n", b);
@@ -1143,7 +1140,6 @@ void Canvas::paintEvent(QPaintEvent* ev)
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
-// printf("layout\n");
             }
       else
             region = ev->region();
@@ -1151,15 +1147,9 @@ void Canvas::paintEvent(QPaintEvent* ev)
       if (score()->noteEntryMode())
             moveCursor();
 
-      QVector<QRect> vector = region.rects();
-//      if (vector.size() <= 2) {
-            foreach(QRect r, vector)
-                  paint(r, p);
-//            }
-//      else {
-//            paint(region.boundingRect(), p);
-//            }
-
+      const QVector<QRect>& vector = region.rects();
+      foreach(const QRect& r, vector)
+            paint(r, p);
 
       p.setMatrix(_matrix);
       p.setClipping(false);
@@ -2111,7 +2101,6 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
-
             if (!e->visible()) {
                   if (score()->printing() || !score()->showInvisible())
                         continue;
@@ -2150,6 +2139,14 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
             p.restore();
             }
       Element* e = score()->dragObject();
+      if (e) {
+            p.save();
+            p.translate(e->canvasPos());
+            p.setPen(QPen(e->curColor()));
+            e->draw(p);
+            p.restore();
+            }
+      e = score()->editObject;
       if (e) {
             p.save();
             p.translate(e->canvasPos());

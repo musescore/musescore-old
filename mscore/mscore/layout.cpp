@@ -41,7 +41,7 @@
 #include "box.h"
 #include "system.h"
 
-// #define OPTIMIZE_LAYOUT
+#define OPTIMIZE_LAYOUT
 
 //---------------------------------------------------------
 //   intmaxlog
@@ -192,8 +192,8 @@ void ScoreLayout::doLayout()
       //    pass I:  process pages
       //-----------------------------------------
 
-      curMeasure = first();
-      curSystem  = 0;
+      curMeasure  = first();
+      curSystem   = 0;
       firstSystem = true;
       for (curPage = 0; curMeasure; curPage++) {
             getCurPage();
@@ -971,50 +971,49 @@ void ScoreLayout::reLayout(Measure* m)
 
 void ScoreLayout::doReLayout()
       {
+printf("doReLayout\n");
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
                   ((Measure*)startLayout)->layout0(staffIdx);
             }
 
       // collect row of systems
-      System* curSystem   = startLayout->system();
-      Page* page  = curSystem->page();
-      QList<System*>* psl = page->systems();
-
-      int i = 0;
-      for(; i < psl->size(); ++i) {
-            if (psl->at(i) == curSystem) {
-                  printf("curSystem %d\n", i);
-                  break;
-                  }
-            }
-      QList<System*> sl;
-      double y = curSystem->y();
-      while (i) {
-            if (psl->at(i-1)->y() != y)
-                  break;
-            --i;
-            }
-      for (; i < psl->size(); ++i) {
-            if (psl->at(i)->y() != y)
-                  break;
-            sl.append(psl->at(i));
+      System* s  = startLayout->system();
+      Page* page = s->page();
+      curPage    = _pages.indexOf(page);
+      if (curPage == -1) {
+            printf(" cannot find page %p system %p\n", page, s);
+            curPage = 0;
             }
 
-#if 0
       //-----------------------------------------
       //    pass I:  process pages
       //-----------------------------------------
 
-      curSystem   = startLayout->system();
-      curMeasure  = curSystem->measures()->front();
-      firstSystem = false;
+      firstSystem = true;
+      page        = _pages[curPage];
+      s           = page->systems()->front();
+      curSystem   = _systems.indexOf(s);
+      curMeasure  = s->measures().front();
+      startLayout = (Measure*)curMeasure;
+
+      for (; curMeasure; curPage++) {
+            // Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
+            getCurPage();
+            MeasureBase* om = curMeasure;
+            if (!layoutPage())
+                  break;
+            if (curMeasure == om) {
+                  printf("empty page?\n");
+                  break;
+                  }
+            }
 
       //---------------------------------------------------
       //   pass II:  place ties & slurs & hairpins & beams
       //---------------------------------------------------
 
-      foreach(MeasureBase* mb, curSystem->measures()) {
+      for (MeasureBase* mb = startLayout; mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
@@ -1039,7 +1038,8 @@ void ScoreLayout::doReLayout()
             System* system = _systems.takeLast();
             delete system;
             }
-#endif
+
+      searchHiddenNotes();
 
       //---------------------------------------------------
       //    rebuild bspTree

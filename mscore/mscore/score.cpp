@@ -1019,6 +1019,7 @@ void Score::startEdit(Element* element)
       updateAll = true;
       if (editObject->isTextB())
             canvas()->setEditText((TextB*)editObject);
+      layout()->removeBsp(origEditObject);
       end();
       }
 
@@ -1055,10 +1056,10 @@ void Score::endEdit()
 //   startDrag
 //---------------------------------------------------------
 
-void Score::startDrag()
+void Score::startDrag(Element* e)
       {
-      origDragObject  = _dragObject;
-      _dragObject     = _dragObject->clone();
+      origDragObject  = e;
+      _dragObject     = e->clone();
       undoChangeElement(origDragObject, _dragObject);
       sel->clear();
       sel->add(_dragObject);

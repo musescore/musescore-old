@@ -369,8 +369,8 @@ void Score::pageEnd()
             return;
       Page* lastPage = _layout->pages().back();
       QPointF p(lastPage->canvasPos());
-      qreal mag = canvas()->xMag();
-      canvas()->setOffset(10.0 - p.x() * mag, 10.0);
+      qreal mag  = canvas()->xMag() * DPI / PDPI;
+      canvas()->setOffset(25.0 - p.x() * mag, 25.0);
       canvas()->updateNavigator(false);
       updateAll = true;
       }
