@@ -105,7 +105,6 @@ void Score::endCmd()
             end();
             return;
             }
-
       if (undoList.back()->empty()) {
             // nothing to undo
             delete undoList.back();
@@ -152,9 +151,9 @@ void Score::end()
                   v->dataChanged(r);
                   }
             }
-      refresh   = QRectF();
-      layoutAll = false;
-      updateAll = false;
+      refresh    = QRectF();
+      layoutAll  = false;
+      updateAll  = false;
       layoutStart = 0;
       setPadState();
       }
@@ -970,6 +969,8 @@ void Score::cmdAddText(int subtype)
 
 void Score::upDown(bool up, bool octave)
       {
+      layoutAll = false;
+      layoutStart = 0;        // DEBUG
       ElementList el;
       foreach(const Element* e, *sel->elements()) {
             if (e->type() != NOTE)
@@ -1013,7 +1014,6 @@ void Score::upDown(bool up, bool octave)
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
-      layoutAll = false;
       }
 
 //---------------------------------------------------------
@@ -1483,14 +1483,22 @@ void Score::cmd(const QString& cmd)
 		      MeasureBase* mb = appendMeasure(VBOX);
                   select(mb, 0, 0);
                   }
-            else if (cmd == "page-prev")
+            else if (cmd == "page-prev") {
                   pagePrev();
-            else if (cmd == "page-next")
+                  setLayoutAll(false);
+                  }
+            else if (cmd == "page-next") {
                   pageNext();
-            else if (cmd == "page-top")
+                  setLayoutAll(false);
+                  }
+            else if (cmd == "page-top") {
                   pageTop();
-            else if (cmd == "page-end")
+                  setLayoutAll(false);
+                  }
+            else if (cmd == "page-end") {
                   pageEnd();
+                  setLayoutAll(false);
+                  }
             else if (cmd == "add-tie")
                   cmdAddTie();
             else if (cmd == "add-slur")

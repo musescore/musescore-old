@@ -414,7 +414,7 @@ class Score : public QObject {
       void startEdit(Element* element);
       void endEdit();
 
-      void startDrag();
+      void startDrag(Element*);
       void drag(const QPointF&);
       void endDrag();
 
