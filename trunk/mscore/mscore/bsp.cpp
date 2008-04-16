@@ -33,9 +33,7 @@ class InsertItemBspTreeVisitor : public BspTreeVisitor
    public:
       const Element* item;
 
-      void visit(QList<const Element*> *items) {
-            items->prepend(item);
-            }
+      inline void visit(QList<const Element*> *items) { items->prepend(item); }
       };
 
 //---------------------------------------------------------
@@ -47,9 +45,7 @@ class RemoveItemBspTreeVisitor : public BspTreeVisitor
    public:
       const Element* item;
 
-      void visit(QList<const Element*> *items) {
-            items->removeAll(item);
-            }
+      inline void visit(QList<const Element*> *items) { items->removeAll(item); }
       };
 
 //---------------------------------------------------------
@@ -82,6 +78,7 @@ BspTree::BspTree()
       insertVisitor = new InsertItemBspTreeVisitor;
       removeVisitor = new RemoveItemBspTreeVisitor;
       findVisitor   = new FindItemBspTreeVisitor;
+      depth = 0;
       }
 
 BspTree::~BspTree()
@@ -92,18 +89,27 @@ BspTree::~BspTree()
       }
 
 //---------------------------------------------------------
+//   intmaxlog
+//---------------------------------------------------------
+
+static inline int intmaxlog(int n)
+      {
+      return (n > 0 ? qMax(int(::ceil(::log(double(n))/::log(double(2)))), 5) : 0);
+      }
+
+//---------------------------------------------------------
 //   initialize
 //---------------------------------------------------------
 
-void BspTree::initialize(const QRectF& rect, int depth)
+void BspTree::initialize(const QRectF& rect, int n)
       {
+      depth      = intmaxlog(n);
       this->rect = rect;
-      leafCnt = 0;
-      nodes.resize((1 << (depth + 1)) - 1);
-      nodes.fill(Node());
+      leafCnt    = 0;
+
+      nodes.resize((1 << (depth+1)) - 1);
       leaves.resize(1 << depth);
       leaves.fill(QList<const Element*>());
-
       initialize(rect, depth, 0);
       }
 
@@ -189,15 +195,6 @@ QList<const Element*> BspTree::items(const QPointF& pos)
       }
 
 //---------------------------------------------------------
-//   leafCount
-//---------------------------------------------------------
-
-int BspTree::leafCount() const
-      {
-      return leafCnt;
-      }
-
-//---------------------------------------------------------
 //   debug
 //---------------------------------------------------------
 
@@ -247,14 +244,14 @@ void BspTree::initialize(const QRectF& rect, int depth, int index)
 
             if (node->type == Node::Horizontal) {
                   type = Node::Vertical;
-                  rect1.setRect(rect.left(), rect.top(), rect.width(), rect.height() / 2);
+                  rect1.setRect(rect.left(), rect.top(), rect.width(), rect.height() * .5);
                   rect2.setRect(rect1.left(), rect1.bottom(), rect1.width(), rect.height() - rect1.height());
                   offset1 = rect1.center().x();
                   offset2 = rect2.center().x();
                   }
             else {
                   type = Node::Horizontal;
-                  rect1.setRect(rect.left(), rect.top(), rect.width() / 2, rect.height());
+                  rect1.setRect(rect.left(), rect.top(), rect.width() * .5, rect.height());
                   rect2.setRect(rect1.right(), rect1.top(), rect.width() - rect1.width(), rect1.height());
                   offset1 = rect1.center().y();
                   offset2 = rect2.center().y();
@@ -262,19 +259,19 @@ void BspTree::initialize(const QRectF& rect, int depth, int index)
 
             int childIndex = firstChildIndex(index);
 
-            Node* child = &nodes[childIndex];
+            Node* child   = &nodes[childIndex];
             child->offset = offset1;
-            child->type = type;
+            child->type   = type;
 
             child = &nodes[childIndex + 1];
             child->offset = offset2;
-            child->type = type;
+            child->type   = type;
 
             initialize(rect1, depth - 1, childIndex);
             initialize(rect2, depth - 1, childIndex + 1);
             }
       else {
-            node->type = Node::Leaf;
+            node->type      = Node::Leaf;
             node->leafIndex = leafCnt++;
             }
       }

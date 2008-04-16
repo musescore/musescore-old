@@ -32,6 +32,7 @@ MeasureBase::MeasureBase(Score* score)
       _next = 0;
       _lineBreak = false;
       _pageBreak = false;
+      _dirty     = true;
       }
 
 //---------------------------------------------------------

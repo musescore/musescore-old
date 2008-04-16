@@ -22,7 +22,6 @@
 #define __SCANVAS_H__
 
 #include "viewer.h"
-#include "bsp.h"
 
 class Rest;
 class Element;

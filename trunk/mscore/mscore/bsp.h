@@ -48,6 +48,7 @@ class BspTree
             Type type;
             };
    private:
+      uint depth;
       void initialize(const QRectF& rect, int depth, int index);
       void climbTree(BspTreeVisitor* visitor, const QPointF& pos, int index = 0);
       void climbTree(BspTreeVisitor* visitor, const QRectF& rect, int index = 0);
@@ -78,11 +79,9 @@ class BspTree
 
       QList<const Element*> items(const QRectF& rect);
       QList<const Element*> items(const QPointF& pos);
-      int leafCount() const;
 
-      inline int firstChildIndex(int index) const {
-            return index * 2 + 1;
-            }
+      int leafCount() const                       { return leafCnt; }
+      inline int firstChildIndex(int index) const { return index * 2 + 1; }
 
       inline int parentIndex(int index) const {
             return index > 0 ? ((index & 1) ? ((index - 1) / 2) : ((index - 2) / 2)) : -1;

@@ -40,17 +40,9 @@
 #include "repeat.h"
 #include "box.h"
 #include "system.h"
+#include "utils.h"
 
-#define OPTIMIZE_LAYOUT
-
-//---------------------------------------------------------
-//   intmaxlog
-//---------------------------------------------------------
-
-static inline int intmaxlog(int n)
-      {
-      return (n > 0 ? qMax(int(::ceil(::log(double(n))/::log(double(2)))), 5) : 0);
-      }
+// #define OPTIMIZE_LAYOUT
 
 //---------------------------------------------------------
 //   first
@@ -147,12 +139,17 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void ScoreLayout::doLayout()
       {
+#ifdef OPTIMIZE_LAYOUT
+      unsigned long long ta = cycles();
+#endif
+
       ::_spatium  = _spatium;        // needed for preview
       _spatiumMag = _spatium / (DPI * SPATIUM20);
       _needLayout = false;
 
 #ifdef OPTIMIZE_LAYOUT
       if (startLayout) {
+            startLayout->setDirty();
             doReLayout();
             startLayout = 0;
             return;
@@ -181,6 +178,7 @@ void ScoreLayout::doLayout()
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+                  mb->setDirty();
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
@@ -236,11 +234,16 @@ void ScoreLayout::doLayout()
             delete system;
             }
 
+      unsigned long long td = cycles();
       searchHiddenNotes();
 
       //---------------------------------------------------
       //    rebuild bspTree
       //---------------------------------------------------
+
+#ifdef OPTIMIZE_LAYOUT
+      unsigned long long tb = cycles();
+#endif
 
       QRectF r;
       QList<const Element*> el;
@@ -258,12 +261,22 @@ void ScoreLayout::doLayout()
             element->collectElements(el);
             }
 
-      int depth = intmaxlog(el.size());
-      bspTree.initialize(r, depth);
+      bspTree.initialize(r, el.size());
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             bspTree.insert(e);
             }
+
+#ifdef OPTIMIZE_LAYOUT
+      unsigned long long tc = cycles();
+      long totalTime = (tc -ta)/10000LL;
+      long layoutTime = (tb - ta) / 10000LL;
+      long bspTime    = (tc - tb) / 10000LL;
+      long searchTime = (tb -td) /  10000LL;
+
+      printf("doLayout %ld  layout: %ld  bsp: %ld  %ld  search %ld\n",
+         totalTime, layoutTime, bspTime, bspTime * 100 / layoutTime, searchTime);
+#endif
       }
 
 //---------------------------------------------------------
@@ -971,7 +984,8 @@ void ScoreLayout::reLayout(Measure* m)
 
 void ScoreLayout::doReLayout()
       {
-printf("doReLayout\n");
+      unsigned long long ta = cycles();
+
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
                   ((Measure*)startLayout)->layout0(staffIdx);
@@ -1041,6 +1055,7 @@ printf("doReLayout\n");
 
       searchHiddenNotes();
 
+      unsigned long long tb = cycles();
       //---------------------------------------------------
       //    rebuild bspTree
       //---------------------------------------------------
@@ -1061,11 +1076,17 @@ printf("doReLayout\n");
             element->collectElements(el);
             }
 
-      int depth = intmaxlog(el.size());
-      bspTree.initialize(r, depth);
+      bspTree.initialize(r, el.size());
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             bspTree.insert(e);
             }
+
+      unsigned long long tc = cycles();
+      long totalTime = (tc -ta)/10000LL;
+      long layoutTime = (tb - ta) / 10000LL;
+      long bspTime    = (tc - tb) / 10000LL;
+      printf("reLayout %ld  layout: %ld  bsp: %ld  %ld\n",
+         totalTime, layoutTime, bspTime, bspTime * 100 / layoutTime);
       }
 
