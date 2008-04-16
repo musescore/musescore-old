@@ -1139,6 +1139,9 @@ static double sff(double x, double xMin)
 
 void Measure::layoutX(ScoreLayout* layout, double stretch)
       {
+      if (!_dirty && (stretch == 1.0))
+            return;
+
       int nstaves = _score->nstaves();
       int tracks  = nstaves * VOICES;
 
@@ -1146,6 +1149,7 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
 
       if (nstaves == 0 || segs == 0) {
             _mw = MeasureWidth(1.0, 0.0);
+            _dirty = false;
             return;
             }
 
@@ -1167,6 +1171,7 @@ again:
       segs = size();
       if (segs == 0) {
             _mw = MeasureWidth(1.0, 0.0);
+            _dirty = false;
             return;
             }
 
@@ -1435,6 +1440,7 @@ printf("\n");
       if (stretch == 1.0) {
             // printf("this is pass 1\n");
             _mw = MeasureWidth(xpos[segs + 1], 0.0);
+            _dirty = false;
             return;
             }
 
@@ -1485,7 +1491,7 @@ printf("\n");
                         }
                   }
             }
-      _mw = MeasureWidth(xpos[segs + 1], 0.0);
+//      _mw = MeasureWidth(xpos[segs + 1], 0.0);
       }
 
 //---------------------------------------------------------

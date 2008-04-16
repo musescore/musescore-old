@@ -376,7 +376,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   // select() to crash
                   if (_score->dragStaff >= 0)
                         _score->select(dragObject, keyState, _score->dragStaff);
-                  dragObject = 0;
                   seq->stopNotes();       // stop now because we dont get a mouseRelease event
                   if (type == MEASURE) {
                         measurePopup(ev->globalPos(), (Measure*)dragObject);
@@ -384,6 +383,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   else {
                         objectPopup(ev->globalPos(), dragObject);
                         }
+                  dragObject = 0;
                   }
             else {
                   canvasPopup(ev->globalPos());
@@ -1113,13 +1113,6 @@ QSizeF Canvas::fsize() const
 //    scaled
 //---------------------------------------------------------
 
-static inline unsigned long long cycles()
-      {
-      unsigned long long rv;
-      __asm__ __volatile__("rdtsc" : "=A" (rv));
-      return rv;
-      }
-
 void Canvas::paintEvent(QPaintEvent* ev)
       {
       QPainter p(this);
@@ -1130,7 +1123,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
       if (_score->needLayout()) {
 
 //            unsigned long long a = cycles();
-printf("paint event layout\n");
+// printf("paint event layout\n");
             _score->layout()->doLayout();
 //            unsigned long long b = (cycles() - a) / 1000000LL;
 //            printf("layout %lld\n", b);

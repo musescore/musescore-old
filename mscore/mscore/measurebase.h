@@ -64,6 +64,8 @@ class MeasureBase : public Element {
 
    protected:
       MeasureWidth _mw;
+      bool _dirty;
+
       ElementList _el;        ///< Measure(/tick) relative -elements: with defined start time
                               ///< but outside the staff
 
@@ -96,6 +98,7 @@ class MeasureBase : public Element {
       virtual double userDistance(int) const { return 0.0; }
       virtual void add(Element*);
       virtual void remove(Element*);
+      void setDirty()                        { _dirty = true; }
       };
 
 #endif
