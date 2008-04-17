@@ -1469,7 +1469,6 @@ printf("\n");
                               e->move(0.0, -3 * _spatium);
                               }
                         }
-//                  else if ((t == CHORD) && ((Chord*)e)->noteType() == NOTE_NORMAL)
                   else if (t == CHORD)
                         ;
                   else if (t == REPEAT_MEASURE) {
@@ -1491,7 +1490,6 @@ printf("\n");
                         }
                   }
             }
-//      _mw = MeasureWidth(xpos[segs + 1], 0.0);
       }
 
 //---------------------------------------------------------

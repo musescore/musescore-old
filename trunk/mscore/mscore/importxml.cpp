@@ -2523,6 +2523,9 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       ha->setRootTpc(step2tpc(rootStep, rootAlter));
       ha->setBaseTpc(step2tpc(bassStep, bassAlter));
 
+      if (ha->rootTpc() == INVALID_TPC)
+            printf("xmlHarmony: invalid root <%s> alter %d\n", qPrintable(rootStep), rootAlter);
+
       int extension = 0;
       QString lowerCaseKind = kind.toLower();
       for (unsigned int i = 0; ; ++i) {

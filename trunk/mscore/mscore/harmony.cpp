@@ -474,7 +474,9 @@ QString Harmony::harmonyName() const
       {
 //      printf("Harmony::harmonyName(this=%p)", this);
       bool germanNames = score()->style()->useGermanNoteNames;
-      return harmonyName(germanNames, rootTpc(), extension(), baseTpc(), &_degreeList);
+      QString s = harmonyName(germanNames, rootTpc(), extension(), baseTpc(), &_degreeList);
+      printf("Harmony::harmonyName: <%s>\n", qPrintable(s));
+      return s;
       }
 
 QString Harmony::harmonyName(bool germanNames, int root, int extension, int base, const QList<HDegree>* degreeList)
@@ -740,6 +742,12 @@ void Harmony::read(QDomElement e)
 
 void Harmony::buildText()
       {
+      static const QChar majorSym(0x25b3);
+      static const QChar minor(0x2d);
+      static const QChar augmented(0x2b);
+      static const QChar diminished(0xb0);
+      static const QChar halfDiminished(0xf8);
+
       if (_rootTpc == INVALID_TPC)
             return;
 
@@ -748,7 +756,7 @@ void Harmony::buildText()
       QString txt(harmonyName());
       const char* s = strdup(txt.toAscii().data());
 
-//printf("Harmony <%s>\n", s);
+//    printf("Harmony <%s>\n", s);
 
       QTextCursor cursor(doc());
       cursor.setPosition(0);
@@ -771,9 +779,10 @@ void Harmony::buildText()
 #endif
       sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
 
-      if (*s == '#' || *s == 'b') {
-            cursor.insertText(QString(*s), sf);
-#if 0
+      if ((*s == '#') || (*s == 'b')) {
+#if 1
+            cursor.insertText(QString(*s), f);
+#else
             cursor.setCharFormat(sf);
             if (*s == '#')
                   cursor.insertText(QString(symbols[sharpSym].code()));
@@ -782,31 +791,32 @@ void Harmony::buildText()
 #endif
             ++s;
             }
+      bool useSymbols = score()->style()->chordNamesUseSymbols;
+
       if (*s == 0)
             return;
       if (*s == 'm') {
-            cursor.setCharFormat(f);
-            cursor.insertText(QString("m"));
+            cursor.insertText(QString("m"), f);
             ++s;
             }
+      else if (useSymbols && (strncmp(s, "Maj7", 4) == 0)) {
+            cursor.insertText(QString(majorSym), sf);
+            s += 4;
+            }
       else if (strncmp(s, "Maj", 3) == 0) {
-            cursor.setCharFormat(f);
-            cursor.insertText(QString("maj"));
+            cursor.insertText(QString("maj"), f);
             s += 3;
             }
       else if (strncmp(s, "aug", 3) == 0) {
-            cursor.setCharFormat(f);
-            cursor.insertText(QString("aug"));
+            cursor.insertText(QString("aug"), f);
             s += 3;
             }
       else if (strncmp(s, "sus", 3) == 0) {
-            cursor.setCharFormat(f);
-            cursor.insertText(QString("sus"));
+            cursor.insertText(QString("sus"), f);
             s += 3;
             }
       else if (strncmp(s, "dim", 3) == 0) {
-            cursor.setCharFormat(f);
-            cursor.insertText(QString("dim"));
+            cursor.insertText(QString("dim"), f);
             s += 3;
             }
 
@@ -818,16 +828,12 @@ void Harmony::buildText()
             }
       const char* slash = *ss == '/' ? ss+1 : 0;
       if (ss - s > 0) {
-            f.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-            cursor.setCharFormat(f);
             while (s < ss)
-                  cursor.insertText(QString(*s++));
+                  cursor.insertText(QString(*s++), sf);
             }
       if (slash) {
-            f.setVerticalAlignment(QTextCharFormat::AlignNormal);
-            cursor.setCharFormat(f);
-            cursor.insertText(QString('/'));
-            cursor.insertText(QString(slash));
+            cursor.insertText(QString('/'), f);
+            cursor.insertText(QString(slash), f);
             }
       }
 

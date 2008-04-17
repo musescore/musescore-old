@@ -64,7 +64,17 @@ int step2tpc(const QString& step, int alter)
       {
       if (step.isEmpty())
             return INVALID_TPC;
-      int r = step[0].toLower().toAscii() - 'c';
+      char c = step[0].toLower().toAscii();
+      int r = -1;
+      switch (c) {
+            case 'c': r = 0; break;
+            case 'd': r = 1; break;
+            case 'e': r = 2; break;
+            case 'f': r = 3; break;
+            case 'g': r = 4; break;
+            case 'a': r = 5; break;
+            case 'b': r = 6; break;
+            }
       if (r < 0 || r > 6)
             return INVALID_TPC;
       return spellings[r * 5 + alter + 2];

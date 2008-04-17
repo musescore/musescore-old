@@ -13,29 +13,56 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
    </property>
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
      </property>
     </layout>
    </item>
    <item>
     <layout class="QVBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
      </property>
     </layout>
    </item>
@@ -48,19 +75,40 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
-      <property name="margin" >
+      <property name="leftMargin" >
        <number>9</number>
       </property>
-      <property name="spacing" >
+      <property name="topMargin" >
+       <number>9</number>
+      </property>
+      <property name="rightMargin" >
+       <number>9</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>9</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing" >
        <number>6</number>
       </property>
       <item row="0" column="0" colspan="2" >
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QCheckBox" name="hasNumber" >
@@ -80,11 +128,20 @@
       </item>
       <item row="1" column="0" colspan="2" >
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label" >
@@ -94,7 +151,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="baseLen" />
+         <widget class="QSpinBox" name="baseLen" >
+          <property name="maximum" >
+           <number>99999</number>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_2" >
@@ -104,7 +165,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="normalNotes" />
+         <widget class="QSpinBox" name="normalNotes" >
+          <property name="maximum" >
+           <number>99999</number>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_3" >
@@ -114,7 +179,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="actualNotes" />
+         <widget class="QSpinBox" name="actualNotes" >
+          <property name="maximum" >
+           <number>99999</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -174,4 +243,3 @@
  <resources/>
  <connections/>
 </ui>
-

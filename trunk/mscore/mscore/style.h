@@ -204,6 +204,7 @@ struct Style {
       bool genKeysig;         // create key signature for all systems
 
       bool useGermanNoteNames;
+      bool chordNamesUseSymbols;
 
       //---------------------------------------------------------
       //   PlayStyle

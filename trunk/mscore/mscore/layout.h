@@ -63,7 +63,8 @@ class ScoreLayout : public Element {
       int curSystem;
       bool firstSystem;
       MeasureBase* curMeasure;
-      void doReLayout();
+      bool doReLayout();
+      void rebuildBspTree();
 
    public:
       ScoreLayout(Score*);
