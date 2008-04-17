@@ -120,7 +120,9 @@ void EditStyle::getValues()
       lstyle->hairpinContHeight      = Spatium(hairpinContinueHeight->value());
 
       lstyle->genClef                = genClef->isChecked();
-      lstyle->genKeysig             = genKeysig->isChecked();
+      lstyle->genKeysig              = genKeysig->isChecked();
+      lstyle->useGermanNoteNames     = useGermanNoteNames->isChecked();
+      lstyle->chordNamesUseSymbols   = chordNamesUseSymbols->isChecked();
       }
 
 //---------------------------------------------------------
@@ -189,5 +191,8 @@ void EditStyle::setValues()
 
       genClef->setChecked(lstyle->genClef);
       genKeysig->setChecked(lstyle->genKeysig);
+
+      useGermanNoteNames->setChecked(lstyle->useGermanNoteNames);
+      chordNamesUseSymbols->setChecked(lstyle->chordNamesUseSymbols);
       }
 

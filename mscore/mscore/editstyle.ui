@@ -70,7 +70,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>6</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page2" >
       <layout class="QGridLayout" >
@@ -928,7 +928,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" >
+       <item row="2" column="0" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -940,6 +940,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="chordNamesUseSymbols" >
+         <property name="text" >
+          <string>use symbols</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

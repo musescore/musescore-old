@@ -220,6 +220,7 @@ Style defaultStyle = {
       true,             // genClef
       true,             // genKeySig
       false,            // use german note names
+      true,             // use symbols in chord names
       // play style
       70,               // gateTime
       100,              // tenutoGateTime
@@ -523,6 +524,8 @@ void Style::load(QDomElement e, int version)
                   genKeysig = i;
             else if (tag == "useGermanNoteNames")
                   useGermanNoteNames = i;
+            else if (tag == "chordNamesUseSymbols")
+                  chordNamesUseSymbols = i;
             else if (tag == "gateTime")
                   gateTime  = i;
             else if (tag == "tenutoGateTime")
@@ -614,6 +617,8 @@ void Style::save(Xml& xml)
       xml.tag("genKeysig",              genKeysig);
       if (useGermanNoteNames)
             xml.tag("useGermanNoteNames", useGermanNoteNames);
+      if (chordNamesUseSymbols)
+            xml.tag("chordNamesUseSymbols", chordNamesUseSymbols);
 
       xml.tag("gateTime",               gateTime);
       xml.tag("tenutoGateTime",         tenutoGateTime);

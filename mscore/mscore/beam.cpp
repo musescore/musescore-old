@@ -310,6 +310,9 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
                   int len       = cr->tickLen();
+                  if (cr->tuplet())
+                        len = cr->tuplet()->baseLen();
+
 
                   if ((len >= division) || (bm == BEAM_NO)) {
                         if (beam) {
