@@ -3,6 +3,8 @@
 -------------------------------------------------
 
 iotest      read *.msc files, save files and compare
+rendertest  renders misc *.xml files with lilypond and mscore
+            and puts up *.html pages
 
 -------------------------------------------------
       *.msc Testfiles
