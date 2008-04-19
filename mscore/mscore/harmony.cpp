@@ -143,7 +143,7 @@ QString HChord::name(int tpc)
 
       // 7
       if (c.contains(11)) {
-            buf += "j7";
+            buf += "Maj7";
             seven = true;
             }
       else if (c.contains(10)) {
@@ -205,19 +205,6 @@ QString HChord::name(int tpc)
       }
 
 
-#if 0
-        ======================unknown==================
-      "7susb13",
-      "7sus#11",
-      "13sus#11",
-      "7sus#11b13",
-      "9sus",
-      "9susb13",
-      "9sus#11",
-      "13sus#11",
-      "9sus#11b13",
-#endif
-
 //---------------------------------------------------------
 //   extensionNames
 //    chord extension names
@@ -242,7 +229,7 @@ static const ChordNames extensionNames[] = {
 /*10*/
             { "Maj13",      HChord("C E G B D F# A") },
             { 0,            HChord() },
-            { "+",          HChord("C E G#") },       // xx augmented triad
+            { "+",          HChord("C E G#") },       // +5, #5, +, augmented triad
             { "Maj7#5",     HChord() },
             { "69",         HChord("C D E G A") },
             { "2",          HChord("C D E G") },      // major add 2
@@ -265,7 +252,7 @@ static const ChordNames extensionNames[] = {
 /*30*/      { 0,            HChord() },
             { 0,            HChord() },
             { "m7b5",       HChord() },
-            { "dim",        HChord("C Eb Gb A") },    // dim7
+            { "dim",        HChord("C Eb Gb") },    // dim
             { "m9b5",       HChord() },
             { 0,            HChord() },
             { 0,            HChord() },
@@ -299,7 +286,7 @@ static const ChordNames extensionNames[] = {
             { 0,            HChord() },
             { 0,            HChord() },
             { 0,            HChord() },
-            { "7",          HChord() },
+            { "7",          HChord("C E G Bb") },
             { "13",         HChord("C E G Bb D F A") },  // dominant 13th
             { "7b13",       HChord() },
             { "7#11",       HChord() },
@@ -372,7 +359,7 @@ static const ChordNames extensionNames[] = {
             { "7sus",       HChord() },
             { "13sus",      HChord() },
 
-/*130*/     { "7susb13",    HChord() },
+/*130*/     { "7susb13",    HChord() },  //?? not checked
             { "7sus#11",    HChord() },
             { "13sus#11",   HChord() },
             { "7sus#11b13", HChord() },
@@ -441,7 +428,7 @@ static const ChordNames extensionNames[] = {
 
 /*190*/     { "add#13",       HChord() },  // german
             { "6/add9",       HChord() },
-            { "sus4",         HChord("C F G") },        // sus
+            { "sus4",         HChord("C F G") },        // sus4
             { "11",           HChord("C E G Bb D F") }, // dominant 11th / 9sus
             { "Maj11",        HChord("C E G B D F") },  // major 11th
             { "Tristan",      HChord("C F# A# D") },    // Tristan

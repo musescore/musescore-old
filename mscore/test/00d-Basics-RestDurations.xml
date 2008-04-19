@@ -5,7 +5,7 @@
   <movement-title>Rest unit test</movement-title>
   <identification>
     <creator type="composer">Reinhold Kainhofer</creator>
-    <rights>Public Domain</rights>
+    <!-- <rights>Public Domain</rights> -->
     <encoding>
       <software>Finale 2007 for Windows</software>
       <software>Dolet Light for Finale 2007</software>

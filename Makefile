@@ -21,8 +21,8 @@
 REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 PREFIX    = "/usr/local"
-#VERSION   = "0.9.2b${REVISION}"
-VERSION   = 0.9.2
+VERSION   = "0.9.3b${REVISION}"
+#VERSION   = 0.9.3
 
 ROOT=`pwd`
 

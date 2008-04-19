@@ -200,7 +200,7 @@ Style defaultStyle = {
       Spatium(0.5),     // propertyDistanceStem; note property to note stem
       Spatium(0.25),    // propertyDistance; note property to note property
       0.7,              // pageFillLimit
-      0.5,              // lastSystemFillLimit
+      0.3,              // lastSystemFillLimit
       Spatium(1.2),     // hairpinHeight
       Spatium(0.5),     // hairpinContHeight
       Spatium(0.13),    // hairpinWidth
@@ -220,7 +220,7 @@ Style defaultStyle = {
       true,             // genClef
       true,             // genKeySig
       false,            // use german note names
-      true,             // use symbols in chord names
+      false,             // use symbols in chord names
       // play style
       70,               // gateTime
       100,              // tenutoGateTime

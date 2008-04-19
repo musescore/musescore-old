@@ -1069,7 +1069,7 @@ void MuseScore::dynamicsMenu()
                   sp->addObject(i, dynamic, dynamic->subtypeName());
                   }
 
-            char* expr[] = {
+            const char* expr[] = {
                   "crescendo", "diminuendo", "dolce", "espressivo",
                   "legato", "leggiero", "marcato", "mero", "molto"
                   };

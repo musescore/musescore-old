@@ -111,19 +111,6 @@ if (USE_GLOBAL_FLUID)
 endif (USE_GLOBAL_FLUID)
 
 ##
-## find texexec (ConTeXt)
-##
-
-if (MINGW)
-      set(TEXEXEC_PATH "/usr/bin")
-else (MINGW)
-      find_path( TEXEXEC_PATH texutil )
-      if (NOT TEXEXEC_PATH)
-            message("texexec from ConTeXt package not found. Documentation will not be build")
-      endif (NOT TEXEXEC_PATH)
-endif (MINGW)
-
-##
 ## alsa >= 0.9.0
 ##
 

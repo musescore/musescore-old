@@ -467,6 +467,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (on) {
                   Note* n = addNote(on->chord(), _padState.pitch);
                   select(n, 0, 0);
+                  setLayoutAll(false);
+                  setLayoutStart(on->chord()->measure());
                   }
             }
       else {
@@ -486,6 +488,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
                         else
                               _is.slur->setEndElement(e);
                         }
+                  }
+            else {
+                  setLayoutAll(false);
+                  setLayoutStart(cr->measure());
                   }
             _is.pos += len;
             }

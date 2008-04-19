@@ -5,7 +5,7 @@
   <movement-title>Finale tuplet test</movement-title>
   <identification>
     <creator type="composer">Reinhold Kainhofer</creator>
-    <rights>Public domain</rights>
+    <!-- <rights>Public domain</rights> -->
     <encoding>
       <software>Finale 2007 for Windows</software>
       <software>Dolet Light for Finale 2007</software>

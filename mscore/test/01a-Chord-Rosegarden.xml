@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 0.6 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
-	<work> <work-title>/home/reinhold/lilypond-dev-files/01_chord.xml</work-title></work> 
-	<identification> 
-		<rights>Unknown</rights>
+	<work> <work-title>/home/reinhold/lilypond-dev-files/01_chord.xml</work-title></work>
+	<identification>
+		<!--<rights>Unknown</rights>-->
 		<encoding>
 			<software>Rosegarden-4</software>
 		</encoding>
-	</identification> 
+	</identification>
 	<part-list>
 		<score-part id="P0">
 			<part-name>Chord test</part-name>

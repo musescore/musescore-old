@@ -457,6 +457,7 @@ void MusicXml::scorePartwise(QDomElement e)
                                           domError(eee);
                                     }
                               _spatium = DPMM * (millimeter * 10.0 / tenths);
+                              score->setSpatium(_spatium);
                               }
                         else if (tag == "page-layout")
                               score->pageFormat()->read(ee);
@@ -662,8 +663,9 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
 
       for (;!e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
-                  part->setLongName(e.text());
-                  part->setTrackName(e.text());
+                  // OK? (ws)
+                  // part->setLongName(e.text());
+                  // part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation")
                   ;
@@ -1513,6 +1515,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   if (number == -1) {
                         //
                         //   apply key to all staves in the part
+                        //   ws: number of staves is not always known at this
+                        //       point, so we have to set key signature when
+                        //       we see the "staves" tag
                         //
                         int staves = score->part(staff)->nstaves();
                         for (int i = 0; i < staves; ++i) {
@@ -1625,10 +1630,17 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   int staves = e.text().toInt();
                   Part* part = score->part(staff);
                   part->setStaves(staves);
-                  Staff* staff = part->staff(0);
-                  if (staff && staves == 2) {
-                        staff->setBracket(0, BRACKET_AKKOLADE);
-                        staff->setBracketSpan(0, 2);
+                  Staff* st = part->staff(0);
+                  if (st && staves == 2) {
+                        st->setBracket(0, BRACKET_AKKOLADE);
+                        st->setBracketSpan(0, 2);
+                        }
+                  // set key signature
+                  int key = score->staff(staff)->keymap()->key(tick);
+                  for (int i = 1; i < staves; ++i) {
+                        int oldkey = score->staff(staff+i)->keymap()->key(tick);
+                        if (oldkey != key)
+                              (*score->staff(staff+i)->keymap())[tick] = key;
                         }
                   }
             else if (e.tagName() == "staff-details")
@@ -1651,7 +1663,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             else if (beats == "4" && beatType == "4" && timeSymbol == "common") {
                   st = TSIG_FOUR_FOUR;
                   }
-            else if (timeSymbol == "") {
+            else  {
+                  if (!timeSymbol.isEmpty()) {
+                        printf("ImportMusicXml: time symbol <%s> not recognized\n",
+                           qPrintable(timeSymbol));
+                        }
+
                   btp = beatType.toInt();
                   QStringList list = beats.split("+");
                   for (int i = 0; i < 4; i++) bts[i] = 0;
@@ -2179,10 +2196,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   Segment* s = measure->getSegment(cr);
                   s->add(cr);
                   }
+
+            // pitch must be set before adding note to chord as note
+            // is inserted into pitch sorted list (ws)
+
+            xmlSetPitch(note, tick, c, alter, octave, accidental);
             cr->add(note);
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
-            xmlSetPitch(note, tick, c, alter, octave, accidental);
             if (accidental && editorial)
                   note->changeAccidental(accidental + 5);
 
@@ -2318,7 +2339,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   tuplet->setTrack((staff + relStaff) * VOICES);
                   tuplet->setNormalNotes(normalNotes);
                   tuplet->setActualNotes(actualNotes);
-                  tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
+                  // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
+                  // avoid rounding errors:
+                  int bl = duration * actualNotes / normalNotes;
+                  tuplet->setBaseLen((::division * bl) / divisions);
 
                   // type, placement
 

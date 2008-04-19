@@ -67,13 +67,13 @@ class Clef : public Compound {
 */
 
 struct ClefInfo {
-      char* sign;             ///< Name for musicXml.
+      const char* sign;       ///< Name for musicXml.
       int line;               ///< Line for musicXml.
       int octChng;            ///< Octave change for musicXml.
       int yOffset;
       int pitchOffset;        ///< Pitch offset for line 0.
       const char* name;
-      ClefInfo(char* s, int l, int oc, int yo, int po, const char* n)
+      ClefInfo(const char* s, int l, int oc, int yo, int po, const char* n)
          : sign(s), line(l), octChng(oc), yOffset(yo), pitchOffset(po), name(n)
             {
             }

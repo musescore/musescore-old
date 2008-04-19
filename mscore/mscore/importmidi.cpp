@@ -66,7 +66,7 @@ struct MidiInstrument {
       int type;
       int hbank, lbank, patch;
       int split;
-      char* name;
+      const char* name;
       };
 
 static MidiInstrument minstr[] = {
