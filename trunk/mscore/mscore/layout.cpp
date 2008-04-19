@@ -42,7 +42,7 @@
 #include "system.h"
 #include "utils.h"
 
-#define OPTIMIZE_LAYOUT
+// #define PROFILE_LAYOUT
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -168,7 +168,7 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void ScoreLayout::doLayout()
       {
-#ifdef OPTIMIZE_LAYOUT
+#ifdef PROFILE_LAYOUT
       unsigned long long ta = cycles();
 #endif
 
@@ -261,21 +261,22 @@ void ScoreLayout::doLayout()
             System* system = _systems.takeLast();
             delete system;
             }
-
+#ifdef PROFILE_LAYOUT
       unsigned long long td = cycles();
+#endif
       searchHiddenNotes();
 
       //---------------------------------------------------
       //    rebuild bspTree
       //---------------------------------------------------
 
-#ifdef OPTIMIZE_LAYOUT
+#ifdef PROFILE_LAYOUT
       unsigned long long tb = cycles();
 #endif
 
       rebuildBspTree();
 
-#ifdef OPTIMIZE_LAYOUT
+#ifdef PROFILE_LAYOUT
       unsigned long long tc = cycles();
       long totalTime = (tc -ta)/10000LL;
       long layoutTime = (tb - ta) / 10000LL;
@@ -999,7 +1000,9 @@ void ScoreLayout::reLayout(Measure* m)
 
 bool ScoreLayout::doReLayout()
       {
+#ifdef PROFILE_LAYOUT
       unsigned long long ta = cycles();
+#endif
 
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
@@ -1085,16 +1088,19 @@ bool ScoreLayout::doReLayout()
                   static_cast<Measure*>(mb)->layout2(this);
             }
 
+#ifdef PROFILE_LAYOUT
       unsigned long long tb = cycles();
+#endif
 
       rebuildBspTree();
 
+#ifdef PROFILE_LAYOUT
       unsigned long long tc = cycles();
       long totalTime = (tc -ta)/10000LL;
       long layoutTime = (tb - ta) / 10000LL;
       long bspTime    = (tc - tb) / 10000LL;
       printf("reLayout %ld  layout: %ld  bsp: %ld  %ld%%\n",
          totalTime, layoutTime, bspTime, bspTime * 100 / layoutTime);
-
+#endif
       return true;
       }
