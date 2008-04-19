@@ -1638,8 +1638,8 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
       int st = ot->subtype();
       directionTag(xml, attr, ot);
       if (ot->tick() == tick) {
-            char* sz = 0;
-            char* tp = 0;
+            const char* sz = 0;
+            const char* tp = 0;
             switch(st) {
                   case 0:
                         sz = "8";
@@ -1725,13 +1725,15 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
       QString name = symbols[sym->sym()].name();
-      char* mxmlName = "";
-      if (name == "pedal ped") mxmlName = "pedal type=\"start\"";
-      else if (name == "pedalasterisk") mxmlName = "pedal type=\"stop\"";
-      if (mxmlName == "") {
+      const char* mxmlName = "";
+      if (name == "pedal ped")
+            mxmlName = "pedal type=\"start\"";
+      else if (name == "pedalasterisk")
+            mxmlName = "pedal type=\"stop\"";
+      else {
             printf("ExportMusicXml::symbol(): %s not supported", name.toLatin1().data());
             return;
-      }
+            }
       directionTag(xml, attr, sym);
       xml.tagE(mxmlName);
       directionETag(xml, staff, sym->mxmlOff());

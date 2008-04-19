@@ -79,6 +79,7 @@ bool converterMode = false;
 double converterDpi = 300;
 
 static const char* outFileName;
+static const char* styleFile;
 static QString localeName;
 
 //---------------------------------------------------------
@@ -1008,6 +1009,7 @@ static void usage(const char* prog, const char*)
         "   -O        dump midi output\n"
         "   -o file   export to 'file'; format depends on file extension\n"
         "   -r dpi    set output resolution for image export\n"
+        "   -S style  load style file\n"
         );
       }
 
@@ -1403,7 +1405,7 @@ int main(int argc, char* argv[])
       setDefaultStyle();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:r:")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1434,6 +1436,9 @@ int main(int argc, char* argv[])
                   case 'r':
                         converterDpi = atof(optarg);
                         break;
+                  case 'S':
+                        styleFile = optarg;
+                        break;
 
                   default:
                         usage(argv[0], "bad argument");
@@ -1461,8 +1466,6 @@ int main(int argc, char* argv[])
       //   staff has 5 lines = 4 * _spatium
       _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
       _spatiumMag = 1.0;
-
-//      initSymbols();
 
       mscoreGlobalShare = getSharePath();
       if (debugMode) {
@@ -1555,7 +1558,7 @@ int main(int argc, char* argv[])
       //  load scores
       //-------------------------------
 
-      initSymbols();    // again!?!
+      initSymbols();
       genIcons();
       initDrumset();
 
@@ -1624,6 +1627,11 @@ int main(int argc, char* argv[])
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();
+            if (styleFile) {
+                  QFile f(styleFile);
+                  if (f.open(QIODevice::ReadOnly))
+                        cs->loadStyle(&f);
+                  }
             cs->layout();
 
             bool rv;

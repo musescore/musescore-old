@@ -128,7 +128,7 @@ void KeySig::layout(ScoreLayout*)
             case 0:
                   break;
             default:
-                  printf("illegal t2 key %02x\n", t2);
+                  printf("illegal t2 key %d (t1=%d)\n", t2, t1);
                   break;
             }
 
@@ -151,7 +151,7 @@ void KeySig::layout(ScoreLayout*)
             case 0:
                   break;
             default:
-                  printf("illegal t1 key %02x\n", t1);
+                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       }
@@ -191,7 +191,7 @@ void KeySig::draw(QPainter& p) const
             case 0:
                   break;
             default:
-                  printf("illegal t2 key %02x\n", t2);
+                  printf("KeySig::draw(): illegal t2 key %d (t1=%d)\n", t2, t1);
                   break;
             }
 
@@ -214,7 +214,7 @@ void KeySig::draw(QPainter& p) const
             case 0:
                   break;
             default:
-                  printf("illegal t1 key %02x\n", t1);
+                  printf("KeySig::draw(): illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       }

@@ -1792,8 +1792,8 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
       {
       if (s == "start")
             return layout()->first();
-      else if (s == "end")
-            ;
+//      else if (s == "end")
+//            ;
       if (start == 0)
             start = layout()->first();
       for (MeasureBase* m = start; m; m = m->next()) {

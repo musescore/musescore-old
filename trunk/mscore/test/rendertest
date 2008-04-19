@@ -8,6 +8,7 @@
 #
 
 echo "Render test for MuseScore"
+
 TESTDIR=html
 testfiles="
 00a-Basics-Pitches
@@ -90,13 +91,6 @@ testfiles="
 99b-Lyrics-BeamsMelismata-IgnoreBeams
 "
 
-if [[ -d $TESTDIR ]]; then
-      rm -rf $TESTDIR
-      mkdir $TESTDIR
-      mkdir $TESTDIR/mscore
-      mkdir $TESTDIR/lilypond
-      fi
-
 function genIndex() {
       echo "gen index"
 
@@ -151,17 +145,36 @@ function genHtml() {
       cd ..
       }
 
+function genFiles() {
+      musicxml2ly $1.xml -o $1.ly
+      lilypond --png --output mops $1.ly
+      convert -trim mops.png $TESTDIR/lilypond/$1.png
+      rm $1.ly
+      if [[ -f mops.png ]]; then
+            rm mops.png
+            fi
+      mscore -S xmltest.mss -r 100 $1.xml -o mops.png
+      convert -trim mops.png $TESTDIR/mscore/$1.png
+      genHtml $1
+      }
+
+if [[ -n $1 ]]; then
+      echo $1
+      genFiles $1
+      exit;
+      fi
+
+if [[ -d $TESTDIR ]]; then
+      rm -rf $TESTDIR
+      mkdir $TESTDIR
+      mkdir $TESTDIR/mscore
+      mkdir $TESTDIR/lilypond
+      fi
 
 genIndex
 
 for test in $testfiles; do
       echo $test
-
-      musicxml2ly $test.xml -o $test.ly
-      lilypond --png --output mops $test.ly
-      convert -trim mops.png $TESTDIR/lilypond/$test.png
-      rm $test.ly
-      mscore -r 100 $test.xml -o mops.png
-      convert -trim mops.png $TESTDIR/mscore/$test.png
-      genHtml $test
+      genFiles $test
       done
+

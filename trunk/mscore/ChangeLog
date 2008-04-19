@@ -1,3 +1,6 @@
+18.4.8 (ws)
+      - incremental layout for note entry and note pitch changes
+      - fix for MusicXml import of some chords
 17.4.8 (ws)
       - fix tuplet rendering
       - fix music xml import of chordnames (root a/b not recognized)
