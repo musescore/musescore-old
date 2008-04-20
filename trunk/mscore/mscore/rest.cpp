@@ -82,7 +82,13 @@ void Rest::draw(QPainter& p) const
 QRectF Rest::drag(const QPointF& s)
       {
       QRectF r(abbox());
-      setUserOff(QPointF(0, s.y()) / _spatium);  // only move vertical
+
+      // Limit horizontal drag range
+      const qreal xDragRange = 250.0;
+      qreal xoff = (fabs(s.x()) > xDragRange) ? xDragRange : fabs(s.x());
+      if (s.x() < 0)
+            xoff *= -1;
+      setUserOff(QPointF(xoff, s.y()) / _spatium);
       return abbox() | r;
       }
 

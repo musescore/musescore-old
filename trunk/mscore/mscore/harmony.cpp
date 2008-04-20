@@ -295,7 +295,7 @@ const ChordDescription Harmony::chordList[] = {
             { 61, 0,            0, HChord() },
             { 62, 0,            0, HChord() },
             { 63, 0,            0, HChord() },
-            { 64, "7",  "dominant",      HChord("C E G Bb") },        // dominant-seventh
+            { 64, "7",  "dominant-seventh",      HChord("C E G Bb") },        // dominant-seventh
             { 65, "13", "dominant-13th", HChord("C E G Bb D F A") },  // dominant 13th
             { 66, "7b13",       0, HChord() },
             { 67, "7#11",       0, HChord() },
@@ -441,6 +441,8 @@ const ChordDescription Harmony::chordList[] = {
             { 193, "11",       "dominant-11th",    HChord("C E G Bb D F") }, // dominant 11th / 9sus
             { 194, "Maj11",    "major-11th",       HChord("C E G B D F") },  // major 11th
             { 195, "Tristan",  "tristan",          HChord("C F# A# D") },    // Tristan
+
+            { 64, "7",         "dominant",         HChord("C E G Bb") },     // dominant-seventh
       };
 
 //---------------------------------------------------------
