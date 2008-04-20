@@ -2518,33 +2518,48 @@ bool Score::saveMxl(const QString& name)
 
 void ExportMusicXml::harmony(Harmony* h)
       {
-//      static char* stepTable[] = {
-//          "C",  "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
-//            "C",  "D",  "D", "E",  "E", "F", "G",  "G", "A",  "A", "B",  "B"
-//            };
-//      static int alterTable[] = {
-//            0,     -1,   0,  -1,    0,   0,   -1,   0,  -1,    0,   -1,   0
-//            };
-
       xml.stag("harmony print-frame=\"no\"");
       int rootTpc = h->rootTpc();
-      const char* extension = "";
       if (rootTpc != INVALID_TPC) {
             xml.stag("root");
             xml.tag("root-step", tpc2stepName(rootTpc));
             int alter = tpc2alter(rootTpc);
-            if (alter)
+            if (alter) {
                   xml.tag("root-alter", alter);
+                  }
             xml.etag();
-            for (unsigned int i = 0; ; ++i) {
-                  if (chordExtensions[i].idx == -1)
-                        break;
-                  if (chordExtensions[i].idx == h->extension()) {
-                        extension = chordExtensions[i].xmlName;
-                        break;
+            QString cn(h->xmlName());
+            if (!cn.isEmpty()) {
+                  // can be something like "dominant add#9"
+                  QStringList l(cn.split(" ", QString::SkipEmptyParts));
+                  xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), l[0]);
+                  for (int i = 1; i < l.size(); ++i) {
+                        xml.stag("degree");
+                        QString tag(l[i]);
+                        int alter = 0;
+                        int idx = 3;
+                        if (tag[idx] == '#') {
+                              alter = 1;
+                              ++idx;
+                              }
+                        else if (tag[idx] == 'b') {
+                              alter = -1;
+                              ++idx;
+                              }
+                        xml.tag("degree-value", tag.mid(idx));
+                        if (alter)
+                              xml.tag("degree-alter", alter);
+                        if (tag.startsWith("add"))
+                              xml.tag("degree-type", "add");
+                        else if (tag.startsWith("sub"))
+                              xml.tag("degree-type", "subtract");
+                        else if (tag.startsWith("alt"))
+                              xml.tag("degree-type", "alter");
+                        xml.etag();
                         }
                   }
             }
+#if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);
       for (int i = 0; i < h->numberOfDegrees(); i++) {
             HDegree hd = h->degree(i);
@@ -2554,11 +2569,14 @@ void ExportMusicXml::harmony(Harmony* h)
                   xml.tag("degree-value", hd.value());
                   xml.tag("degree-alter", hd.alter());
                   switch (tp) {
-                        case ADD: xml.tag("degree-type", "add");
+                        case ADD:
+                              xml.tag("degree-type", "add");
                               break;
-                        case ALTER: xml.tag("degree-type", "alter");
+                        case ALTER:
+                              xml.tag("degree-type", "alter");
                               break;
-                        case SUBTRACT: xml.tag("degree-type", "subtract");
+                        case SUBTRACT:
+                              xml.tag("degree-type", "subtract");
                               break;
                         default:
                               break;
@@ -2566,6 +2584,7 @@ void ExportMusicXml::harmony(Harmony* h)
                   xml.etag();
                   }
             }
+#endif
       xml.etag();
       }
 

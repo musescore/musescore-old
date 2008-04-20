@@ -652,9 +652,9 @@ void initSymbols()
 
       symbols[flipSym]                    = Sym("flip stem",  0xe0fd, 0);
 
-      symbols[wholediamond2headSym]        = Sym("whole diamond2 head",       0xe148, 0);
-      symbols[halfdiamond2headSym]         = Sym("half diamond2 head",        0xe149, 0);
-      symbols[diamond2headSym]             = Sym("diamond2 head",             0xe14a, 0);
+      symbols[wholediamond2headSym]        = Sym("whole diamond2 head",       0xe147, 0);
+      symbols[halfdiamond2headSym]         = Sym("half diamond2 head",        0xe148, 0);
+      symbols[diamond2headSym]             = Sym("diamond2 head",             0xe149, 0);
 
 
       // used for GUI:
