@@ -31,7 +31,6 @@
 //---------------------------------------------------------
 
 class HChord {
-//      static const char* const scaleNames[2][12];
       static const HChord C0;
 
    protected:
@@ -44,9 +43,7 @@ class HChord {
             int h=-1, int i=-1, int k=-1, int l=-1);
       HChord(const char*);
       void rotate(int semiTones);
-//      static const char* scaleName(int key, bool flat = false) {
-//            return scaleNames[flat][key % 12];
-//            }
+
       bool contains(int key) const {       // key in chord?
             return (1 << (key % 12)) & keys;
             }
@@ -60,6 +57,9 @@ class HChord {
             }
       bool operator==(const HChord& o) const { return (keys == o.keys); }
       bool operator!=(const HChord& o) const { return (keys != o.keys); }
+
+      int getKeys() const { return keys; }
+      void print() const;
 
       QString name(int tpc);
       };
@@ -83,7 +83,18 @@ class HDegree {
       int value() const { return _value; }
       int alter() const { return _alter; }
       int type() const  { return _type; }
-};
+      };
+
+//---------------------------------------------------------
+//   ChordDescription
+//---------------------------------------------------------
+
+struct ChordDescription {
+      int biab;               // Band In A Box Chord Number
+      const char* name;       // chord name as entered from the keyboard (without root/base)
+      const char* xml;        // MusicXml description
+      HChord chord;           // C based chord
+      };
 
 //---------------------------------------------------------
 //   class Harmony
@@ -102,6 +113,8 @@ class HDegree {
 //---------------------------------------------------------
 
 class Harmony : public Text {
+      static const ChordDescription chordList[];
+
       int _baseTpc;     // bass note, chord base; used for "slash" chords
       int _extension;   // chord number, index in table "extensionNames"
       int _rootTpc;     // root note for chord
@@ -143,6 +156,9 @@ class Harmony : public Text {
       static QString harmonyName(bool useGermanNames, int root, int extension,
          int base, const QList<HDegree>* degreeList = 0);
       int parseHarmony(const QString& s, int* root, int* base);
+      const char* xmlName() const;
+      static int fromXml(const QString& s);
+      void resolveDegreeList();
       };
 
 #endif

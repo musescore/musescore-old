@@ -1,3 +1,9 @@
+20.4.8 (ws)
+      - fixes for harmony import/export
+      - misc small fixes for MusicXml import/export
+      - added xml testfiles from Reinhold Kainhofer (Lilypond project);
+        build script to render each xml testfile with mscore and lilypond
+        and create html files to easy compare both renderings
 18.4.8 (ws)
       - incremental layout for note entry and note pitch changes
       - fix for MusicXml import of some chords

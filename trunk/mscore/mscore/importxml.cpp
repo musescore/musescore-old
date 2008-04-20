@@ -66,53 +66,6 @@
 #include "tempotext.h"
 
 //---------------------------------------------------------
-//   chordExtensions
-//    map between internal chord numbers and
-//    MusicXml names
-//---------------------------------------------------------
-
-extern const XmlChordExtension chordExtensions[] = {
-      {   0, "none"               },
-      {   1, "major"              },
-      {   1, "other"              },
-      {  16, "minor"              },
-      {  19, "minor-seventh"      },
-      {  99, "augmented-seventh"  },
-      {  70, "dominant-ninth"     },
-      {   5, "major-sixth"        },
-      {   6, "major-seventh"      },
-      {  23, "minor-sixth"        },
-      {  64, "dominant"           },
-      { 192, "suspended-fourth"   },
-      { 185, "diminished-seventh" },
-      {   7, "major-ninth"        },
-      {  10, "major-13th"         },
-      {  20, "minor-ninth"        },
-      {  21, "minor-11th",        },
-      {  22, "minor-13th",        },
-      {  18, "minor-major"        },
-      {  18, "major-minor"        },
-      {  64, "dominant-seventh"   },
-      { 193, "dominant-11th"      },
-      {  33, "diminished"         },
-      {  32, "half-diminished"    },
-      {   4, "augmented"          },
-      { 186, "suspended-second"   },
-      {  40, "power"              },
-      { 187, "neapolitan"         },
-      { 188, "italian"            },
-      { 189, "french"             },
-      { 190, "german"             },
-      { 191, "maj69"              },
-      {   1, "augmented-ninth"    },      // ??
-      {   1, "altered"            },      // ??
-      { 194, "major-11th"         },
-      {  65, "dominant-13th"      },
-      { 195, "tristan"            },
-      {  -1, ""                   }
-      };
-
-//---------------------------------------------------------
 //   xmlSetPitch
 //---------------------------------------------------------
 
@@ -2437,37 +2390,37 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       // type:
 
       // placement:
-//      double rx = e.attribute("relative-x", "0").toDouble();
-//      double dy = e.attribute("default-y", "0").toDouble();
+      // double rx = e.attribute("relative-x", "0").toDouble();
+      // double dy = e.attribute("default-y", "0").toDouble();
 
       QString printObject(e.attribute("print-object", "yes"));
       QString printFrame(e.attribute("print-frame"));
       QString printStyle(e.attribute("print-style"));
 
-      QString rootStep, kind, kindText;
-      int rootAlter = 0;
-      QString bassStep;
-      int bassAlter = 0;
+      QString kind, kindText;
 
       Harmony* ha = new Harmony(measure->score());
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "root") {
+                  QString step;
+                  int alter = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "root-step") {
                               // attributes: print-style
-                              rootStep = ee.text();
+                              step = ee.text();
                               }
                         else if (tag == "root-alter") {
                               // attributes: print-object, print-style
                               //             location (left-right)
-                              rootAlter = ee.text().toInt();
+                              alter = ee.text().toInt();
                               }
                         else
                               domError(ee);
                         }
+                  ha->setRootTpc(step2tpc(step, alter));
                   }
             else if (tag == "function") {
                   // attributes: print-style
@@ -2485,20 +2438,23 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   // attributes: print-style
                   }
             else if (tag == "bass") {
+                  QString step;
+                  int alter = 0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "bass-step") {
                               // attributes: print-style
-                              bassStep = ee.text();
+                              step = ee.text();
                               }
                         else if (tag == "bass-alter") {
                               // attributes: print-object, print-style
                               //             location (left-right)
-                              bassAlter = ee.text().toInt();
+                              alter = ee.text().toInt();
                               }
                         else
                               domError(ee);
                         }
+                  ha->setBaseTpc(step2tpc(step, alter));
                   }
             else if (tag == "degree") {
                   int degreeValue = 0;
@@ -2544,22 +2500,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
 
       ha->setTick(tick);
-      ha->setRootTpc(step2tpc(rootStep, rootAlter));
-      ha->setBaseTpc(step2tpc(bassStep, bassAlter));
 
-      if (ha->rootTpc() == INVALID_TPC)
-            printf("xmlHarmony: invalid root <%s> alter %d\n", qPrintable(rootStep), rootAlter);
-
-      int extension = 0;
-      QString lowerCaseKind = kind.toLower();
-      for (unsigned int i = 0; ; ++i) {
-            if (chordExtensions[i].idx == -1)
-                  break;
-            if (lowerCaseKind == chordExtensions[i].xmlName) {
-                  extension = chordExtensions[i].idx;
-                  break;
-                  }
-            }
+      int extension = Harmony::fromXml(kind);
       if (extension == 0) {
             printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
             QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
@@ -2570,6 +2512,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             ha->buildText();
             }
       ha->setVisible(printObject == "yes");
+      ha->resolveDegreeList();
       measure->add(ha);
       }
 
