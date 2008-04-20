@@ -1898,7 +1898,7 @@ fallito: </translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="588"/>
+        <location filename="../../mscore/harmony.cpp" line="657"/>
         <source>Properties...</source>
         <translation type="unfinished">Proprietà...</translation>
     </message>
@@ -4991,6 +4991,11 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/bu3/actions.cpp" line="1493"/>
         <source>bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/bu3/actions.cpp" line="1427"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
