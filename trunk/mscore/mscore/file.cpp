@@ -123,17 +123,18 @@ bool LoadFile::load(const QString& name)
 //---------------------------------------------------------
 //   checkDirty
 //    if dirty, save score
-//    return true on abort
+//    return true on cancel
 //---------------------------------------------------------
 
 bool MuseScore::checkDirty(Score* s)
       {
       if (s->dirty()) {
-            int n = QMessageBox::warning(this, tr("MuseScore"),
+            QMessageBox::StandardButton n = QMessageBox::warning(this, tr("MuseScore"),
                tr("The score \"%1\"contains unsaved data\n"
                "Save Current Score?").arg(s->name()),
-               tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
-            if (n == 0) {
+               QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+               QMessageBox::Save);
+            if (n == QMessageBox::Save) {
                   if (s->isSavable()) {
                         if (!s->saveFile())
                               return true;
@@ -144,7 +145,7 @@ bool MuseScore::checkDirty(Score* s)
                         }
 
                   }
-            else if (n == 2)
+            else if (n == QMessageBox::Cancel)
                   return true;
             }
       return false;

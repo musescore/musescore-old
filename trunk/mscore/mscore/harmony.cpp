@@ -222,35 +222,37 @@ void HChord::print() const
 //---------------------------------------------------------
 //   Chord List
 //    list of all known chords
+//    sus4 == sus
+//    sus2 == 2
 //---------------------------------------------------------
 
 const ChordDescription Harmony::chordList[] = {
-            { 0, 0,            0, HChord() },
-            { 1, "",           "major", HChord("C E G") },        // major triad
-            { 2, "Maj",        0, HChord("C E G") },
-            { 3, "5b",         0, HChord("C E Gb") },       // major flat 5 triad
-            { 4, "aug",   "augmented", HChord("C E G#") },       // augmented triad
-            { 5, "6",     "major-sixth",  HChord("C E G A") },      // sixth
-            { 6, "Maj7", "major-seventh", HChord("C E G B") },
-            { 7, "Maj9", "major-ninth", HChord("C E G B D") },
-            { 8, "Maj9#11",    0, HChord("C E G B D F#") },
-            { 9, "Maj13#11",   0, HChord("C E G B D F# A") },
+            { 0, 0,            0,           HChord() },
+            { 1, "",           "major",     HChord("C E G") },        // major triad
+            { 2, "Maj",        0,           HChord("C E G") },
+            { 3, "5b",         0,           HChord("C E Gb") },       // major flat 5 triad
+            { 4, "aug",   "augmented",      HChord("C E G#") },       // augmented triad
+            { 5, "6",     "major-sixth",    HChord("C E G A") },      // sixth
+            { 6, "Maj7", "major-seventh",   HChord("C E G B") },
+            { 7, "Maj9", "major-ninth",     HChord("C E G B D") },
+            { 8, "Maj9#11",    0,           HChord("C E G B D F#") },
+            { 9, "Maj13#11",   0,           HChord("C E G B D F# A") },
 /*10*/
-            { 10, "Maj13",  "major-13th", HChord("C E G B D F# A") },
-            { 11, 0,            0, HChord() },
-            { 12, "+",          0, HChord("C E G#") },       // +5, #5, +, augmented triad
-            { 13, "Maj7#5",     0, HChord() },
-            { 14, "69",         0, HChord("C D E G A") },
-            { 15, "2",          0, HChord("C D E G") },      // major add 2
-            { 16, "m",    "minor", HChord("C Eb G") },
-            { 17, "maug",       0, HChord("C D# G#") },
+            { 10, "Maj13",  "major-13th",   HChord("C E G B D F# A") },
+            { 11, 0,            0,          HChord() },
+            { 12, "+",          0,          HChord("C E G#") },       // +5, #5, +, augmented triad
+            { 13, "Maj7#5",     0,          HChord() },
+            { 14, "69",         0,          HChord("C D E G A") },
+            { 15, "2",          0,          HChord("C D E G") },      // major add 2
+            { 16, "m",    "minor",          HChord("C Eb G") },
+            { 17, "maug",       0,          HChord("C D# G#") },
             { 18, "mMaj7", "minor-major",   HChord("C Eb G B") },     // minor major 7th = major minor 7th
             { 19, "m7",    "minor-seventh", HChord("C Eb G Bb") },
 
-/*20*/      { 20, "m9",  "minor-ninth", HChord("C Eb G Bb D") },
-            { 21, "m11", "minor-11th",  HChord("C Eb G Bb D F") },
-            { 22, "m13", "minor-13th",  HChord("C Eb G Bb D F A") },
-            { 23, "m6",         "minor-sixth", HChord("C Eb G A") },
+/*20*/      { 20, "m9",  "minor-ninth",     HChord("C Eb G Bb D") },
+            { 21, "m11", "minor-11th",      HChord("C Eb G Bb D F") },
+            { 22, "m13", "minor-13th",      HChord("C Eb G Bb D F A") },
+            { 23, "m6",      "minor-sixth", HChord("C Eb G A") },
             { 24, "m#5",        0, HChord() },
             { 25, "m7#5",       0, HChord() },
             { 26, "m69",        0, HChord() },
@@ -258,8 +260,8 @@ const ChordDescription Harmony::chordList[] = {
             { 28, "Maj7Lyd",    0, HChord() },
             { 29, "Maj7b5",     0, HChord() },
 
-/*30*/      { 30, 0,                          0, HChord() },
-            { 31, 0,                          0, HChord() },
+/*30*/      { 30, 0,                       0, HChord() },
+            { 31, 0,                       0, HChord() },
             { 32, "m7b5",  "half-diminished", HChord("C Eb Gb Bb") },
             { 33, "dim",   "diminished",      HChord("C Eb Gb") },    // dim
             { 34, "m9b5",       0, HChord() },
@@ -296,7 +298,7 @@ const ChordDescription Harmony::chordList[] = {
             { 62, 0,            0, HChord() },
             { 63, 0,            0, HChord() },
             { 64, "7",  "dominant-seventh",      HChord("C E G Bb") },        // dominant-seventh
-            { 65, "13", "dominant-13th", HChord("C E G Bb D F A") },  // dominant 13th
+            { 65, "13", "dominant-13th",         HChord("C E G Bb D F A") },  // dominant 13th
             { 66, "7b13",       0, HChord() },
             { 67, "7#11",       0, HChord() },
             { 68, "13#11",      0, HChord() },
@@ -333,7 +335,7 @@ const ChordDescription Harmony::chordList[] = {
             { 96, "7b5#9",      0, HChord() },
             { 97, "13b5#9",     0, HChord() },
             { 98, "7b5#9b13",   0, HChord() },
-            { 99, "7#5",        "augmented-seventh", HChord() },
+            { 99, "7#5",      "augmented-seventh", HChord("C E Ab Bb") },
 
 /*100*/     { 100, "13#5",       0, HChord() },
             { 101, "7#5#11",     0, HChord() },
@@ -365,14 +367,14 @@ const ChordDescription Harmony::chordList[] = {
             { 125, 0,            0, HChord() },
             { 126, 0,            0, HChord() },
             { 127, 0,            0, HChord() },
-            { 128, "7sus",       0, HChord() },
-            { 129, "13sus",      0, HChord() },
+            { 128, "7sus", "suspended-fourth addb7", HChord("C F G Bb") },
+            { 129, "13sus",      0,                  HChord("C F G A Bb") },
 
-/*130*/     { 130, "7susb13",    0, HChord() },  //?? not checked
-            { 131, "7sus#11",    0, HChord() },
+/*130*/     { 130, "7susb13",    0, HChord("C F G Ab Bb") },  //?? not checked
+            { 131, "7sus#11",    0, HChord("C F G Gb Bb") },
             { 132, "13sus#11",   0, HChord() },
             { 133, "7sus#11b13", 0, HChord() },
-            { 134, "9sus",       0, HChord() },   // 11 - 9sus
+            { 134, "9sus",       0, HChord("C D F G Bb") },   // 11 - 9sus
             { 135, "9susb13",    0, HChord() },
             { 136, "9sus#11",    0, HChord() },
             { 137, "13sus#11",   0, HChord() },
@@ -427,13 +429,13 @@ const ChordDescription Harmony::chordList[] = {
             { 181, 0,              0, HChord() },
             { 182, 0,              0, HChord() },
             { 183, 0,              0, HChord() },
-            { 184, "sus",          0, HChord("C F G") },
+            { 184, "sus",          0,              HChord("C F G") },
 
             { 185, "dim7",   "diminished-seventh", HChord() },  // mscore ext.
-            { 186, "sus2",   "suspended-second", HChord("C D G") },      // suspended 2nd chord
-            { 187, "mb3b13", "neapolitan", HChord() },
-            { 188, "#13",    "italian", HChord() },
-            { 189, "#11#13",  "french", HChord() },
+            { 186, "sus2",   "suspended-second",   HChord("C D G") },      // suspended 2nd chord
+            { 187, "mb3b13", "neapolitan",         HChord() },
+            { 188, "#13",    "italian",            HChord() },
+            { 189, "#11#13",  "french",            HChord() },
 
 /*190*/     { 190, "add#13",   "german",           HChord() },
             { 191, "6/add9",   "maj69",            HChord() },
@@ -508,13 +510,13 @@ QString Harmony::harmonyName(bool germanNames, int root, int extension, int base
                   int dv = degreeTable[(d.value() - 1) % 7] + d.alter();
 
                   if (d.type() == ADD) {
-//                        printf("hc: ");
-//                        hc.print();
+                        printf("hc: ");
+                        hc.print();
                         hc += dv;
-//                        printf(" add degree value=%d alter=%d, dv=%d\n",
-//                           d.value(), d.alter(), dv);
-//                        hc.print();
-//                        printf("hc: ");
+                        printf(" add degree value=%d alter=%d, dv=%d\n",
+                           d.value(), d.alter(), dv);
+                        hc.print();
+                        printf("hc: ");
                         }
                   else if (d.type() == ALTER) {
 //                        printf(" alter degree value=%d alter=%d\n", d.value(), d.alter());

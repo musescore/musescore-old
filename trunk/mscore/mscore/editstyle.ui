@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>709</width>
+    <width>705</width>
     <height>365</height>
    </rect>
   </property>
@@ -16,10 +16,22 @@
    <item row="0" column="0" >
     <widget class="QListWidget" name="pageList" >
      <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Maximum" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="horizontalScrollBarPolicy" >
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+     <property name="resizeMode" >
+      <enum>QListView::Adjust</enum>
+     </property>
+     <property name="uniformItemSizes" >
+      <bool>true</bool>
      </property>
      <property name="currentRow" >
       <number>-1</number>
@@ -194,6 +206,12 @@
        </item>
        <item row="3" column="0" >
         <widget class="QLabel" name="label_34" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>lyrics top distance</string>
          </property>
@@ -208,6 +226,12 @@
        </item>
        <item row="3" column="2" >
         <widget class="QLabel" name="label_36" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>lyrics bottom dist.</string>
          </property>
@@ -310,10 +334,24 @@
          </property>
         </widget>
        </item>
+       <item row="6" column="2" colspan="2" >
+        <widget class="QCheckBox" name="genTimesig" >
+         <property name="text" >
+          <string>Create time signatures</string>
+         </property>
+        </widget>
+       </item>
        <item row="7" column="0" colspan="2" >
         <widget class="QCheckBox" name="genKeysig" >
          <property name="text" >
           <string>Create key sig for all systems</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2" colspan="2" >
+        <widget class="QCheckBox" name="genCourtesyTimesig" >
+         <property name="text" >
+          <string>Create courtesy time signatures</string>
          </property>
         </widget>
        </item>

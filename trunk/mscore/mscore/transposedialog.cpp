@@ -49,10 +49,10 @@ void Score::transpose()
             QMessageBox::StandardButton sb = QMessageBox::question(mscore,
                tr("MuseScore: transpose"),
                tr("There is nothing selected. Transpose whole score?"),
-               QMessageBox::Yes | QMessageBox::Abort,
+               QMessageBox::Yes | QMessageBox::Cancel,
                QMessageBox::Yes
             );
-            if (sb == QMessageBox::Abort)
+            if (sb == QMessageBox::Cancel)
                   return;
             //
             // select all

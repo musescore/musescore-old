@@ -121,6 +121,8 @@ void EditStyle::getValues()
 
       lstyle->genClef                = genClef->isChecked();
       lstyle->genKeysig              = genKeysig->isChecked();
+      lstyle->genTimesig             = genTimesig->isChecked();
+      lstyle->genCourtesyTimesig     = genCourtesyTimesig->isChecked();
       lstyle->useGermanNoteNames     = useGermanNoteNames->isChecked();
       lstyle->chordNamesUseSymbols   = chordNamesUseSymbols->isChecked();
       }
@@ -191,6 +193,8 @@ void EditStyle::setValues()
 
       genClef->setChecked(lstyle->genClef);
       genKeysig->setChecked(lstyle->genKeysig);
+      genTimesig->setChecked(lstyle->genTimesig);
+      genCourtesyTimesig->setChecked(lstyle->genCourtesyTimesig);
 
       useGermanNoteNames->setChecked(lstyle->useGermanNoteNames);
       chordNamesUseSymbols->setChecked(lstyle->chordNamesUseSymbols);

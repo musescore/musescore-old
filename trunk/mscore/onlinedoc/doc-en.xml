@@ -20,8 +20,8 @@
       <table cellpadding="0" cellspacing="0">
       <tr><td><key>Up</key></td><td>Increase the pitch of a note for one semitone.</td></tr>
       <tr><td><key>Down</key></td><td>Decrease the pitch of a note for one semitone.</td></tr>
-      <tr><td><key>Shift+Up</key></td><td>Increase the pitch of a note for one octave.</td></tr>
-      <tr><td><key>Shift+Down</key></td><td>Decrease the pitch of a note for one Octave.</td></tr>
+      <tr><td><key>Ctrl+Up</key></td><td>Increase the pitch of a note for one octave.</td></tr>
+      <tr><td><key>Ctrl+Down</key></td><td>Decrease the pitch of a note for one Octave.</td></tr>
       </table>
       <br/>
       <i>MuseScore</i> automatically tries to set an appropriate accidental for
