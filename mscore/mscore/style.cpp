@@ -219,6 +219,9 @@ Style defaultStyle = {
       0.8,              // smallClefMag
       true,             // genClef
       true,             // genKeySig
+      true,             // genTimesig
+      true,             // genCourtesyTimesig
+
       false,            // use german note names
       false,             // use symbols in chord names
       // play style
@@ -522,6 +525,10 @@ void Style::load(QDomElement e, int version)
                   genClef = i;
             else if (tag == "genKeysig")
                   genKeysig = i;
+            else if (tag == "genTimesig")
+                  genTimesig = i;
+            else if (tag == "genCourtesyTimesig")
+                  genCourtesyTimesig = i;
             else if (tag == "useGermanNoteNames")
                   useGermanNoteNames = i;
             else if (tag == "chordNamesUseSymbols")
@@ -615,6 +622,10 @@ void Style::save(Xml& xml)
       xml.tag("smallClefMag",           smallClefMag);
       xml.tag("genClef",                genClef);
       xml.tag("genKeysig",              genKeysig);
+      if (!genTimesig)
+            xml.tag("genTimesig", genTimesig);
+      if (!genCourtesyTimesig)
+            xml.tag("genCourtesyTimesig", genCourtesyTimesig);
       if (useGermanNoteNames)
             xml.tag("useGermanNoteNames", useGermanNoteNames);
       if (chordNamesUseSymbols)

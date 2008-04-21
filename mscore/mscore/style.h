@@ -202,6 +202,8 @@ struct Style {
 
       bool genClef;           // create clef for all systems, not only for first
       bool genKeysig;         // create key signature for all systems
+      bool genTimesig;
+      bool genCourtesyTimesig;
 
       bool useGermanNoteNames;
       bool chordNamesUseSymbols;

@@ -68,7 +68,11 @@
        <number>0</number>
       </property>
       <item row="0" column="0" >
-       <widget class="QLineEdit" name="partName" />
+       <widget class="QLineEdit" name="partName" >
+        <property name="toolTip" >
+         <string>Part Name</string>
+        </property>
+       </widget>
       </item>
       <item rowspan="3" row="0" column="1" >
        <layout class="QGridLayout" >
@@ -85,6 +89,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip" >
+           <string>Volume</string>
           </property>
           <property name="invertedAppearance" >
            <bool>false</bool>
@@ -118,6 +125,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip" >
+           <string>Panorama Position</string>
+          </property>
           <property name="scaleWidth" >
            <number>5</number>
           </property>
@@ -130,6 +140,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip" >
+           <string>Reverb</string>
           </property>
           <property name="scaleWidth" >
            <number>5</number>
@@ -152,6 +165,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip" >
+           <string>Chorus</string>
           </property>
           <property name="scaleWidth" >
            <number>5</number>
@@ -270,7 +286,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="patch" />
+         <widget class="QComboBox" name="patch" >
+          <property name="toolTip" >
+           <string>midi sound for part</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

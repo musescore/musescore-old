@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>646</width>
+    <width>771</width>
     <height>580</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -739,7 +739,7 @@
           </font>
          </property>
          <property name="text" >
-          <string>When pressing F in note entry mode the created note pitch depends on the current clef. In G-major a fis is created. If the alternate input method is enabled, the current clef is irrelevant. Pressing F always creates a f note.</string>
+          <string>When pressing F in note entry mode the created note pitch depends on the current key signature. In G-major a fis is created. If the alternate input method is enabled, the current key signature is irrelevant. Pressing F always creates a f note.</string>
          </property>
          <property name="wordWrap" >
           <bool>true</bool>
@@ -1392,6 +1392,69 @@
           <size>
            <width>561</width>
            <height>131</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Import" >
+      <attribute name="title" >
+       <string>Import</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="groupBox_7" >
+         <property name="title" >
+          <string>Style used for import</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QRadioButton" name="useBuildinStyle" >
+            <property name="text" >
+             <string>build in style</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QCheckBox" name="useStyleFile" >
+              <property name="text" >
+               <string>use style file:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="styleFile" />
+            </item>
+            <item>
+             <widget class="QToolButton" name="styleFileButton" >
+              <property name="text" >
+               <string>...</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
