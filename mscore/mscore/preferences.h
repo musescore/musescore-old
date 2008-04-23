@@ -91,6 +91,8 @@ struct Preferences {
       bool midiAutoConnect;
       int rtcTicks;
       int proximity;    // proximity for selecting elements on canvas
+      bool autoSave;
+      int autoSaveTime;
 
       bool dirty;
 

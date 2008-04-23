@@ -675,6 +675,42 @@ MuseScore::MuseScore()
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
       connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
       setState(STATE_NORMAL);
+      autoSaveTimer = new QTimer(this);
+      autoSaveTimer->setSingleShot(true);
+      connect(autoSaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveTimerTimeout()));
+      startAutoSave();
+      }
+
+//---------------------------------------------------------
+//   startAutoSave
+//---------------------------------------------------------
+
+void MuseScore::startAutoSave()
+      {
+      if (preferences.autoSave) {
+            int t = preferences.autoSaveTime * 60 * 1000;
+            autoSaveTimer->start(t);
+            }
+      else
+            autoSaveTimer->stop();
+      }
+
+//---------------------------------------------------------
+//   autoSaveTimerTimeout
+//---------------------------------------------------------
+
+void MuseScore::autoSaveTimerTimeout()
+      {
+      foreach(Score* s, scoreList) {
+            if (s->dirty()) {
+                  printf("auto save <%s>\n", qPrintable(s->name()));
+                  s->saveFile();
+                  }
+            }
+      if (preferences.autoSave) {
+            int t = preferences.autoSaveTime * 60 * 1000;
+            autoSaveTimer->start(t);
+            }
       }
 
 //---------------------------------------------------------
