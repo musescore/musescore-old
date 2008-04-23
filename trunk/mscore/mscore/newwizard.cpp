@@ -320,7 +320,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   part->setMinPitch(t->minPitch);
                   part->setMaxPitch(t->maxPitch);
                   part->setShortName(t->shortName);
-                  part->setTrackName(t->name);
+                  part->setTrackName(t->trackName);
                   part->setLongName(t->name);
                   part->setPitchOffset(t->transpose);
                   if (t->useDrumset) {

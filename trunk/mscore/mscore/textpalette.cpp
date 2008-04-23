@@ -138,12 +138,17 @@ TextPalette::TextPalette(QWidget* parent)
             if (sc.style == -1)
                   tb->setText(sc.code);
             else {
-                  const Sym* sym = findSymbol(sc.code, 0);
-                  if (sym) {
-                        QIcon icon = symIcon(*sym, 25, 35, 35);
-                        tb->setIconSize(QSize(35, 35));
-                        tb->setIcon(icon);
-                        }
+                  int id = 2;
+                  TextStyle* style = &defaultTextStyles[sc.style];
+                  QString family = style->family;
+                  if (family == "MScore")
+                        id = 0;
+                  else if (family == "MScore1")
+                        id = 1;
+                  Sym sym("", sc.code, id);
+                  QIcon icon = symIcon(sym, 25, 35, 35);
+                  tb->setIconSize(QSize(35, 35));
+                  tb->setIcon(icon);
                   }
             gl->addWidget(tb, i / 16, i % 16);
             sg->addButton(tb, i);

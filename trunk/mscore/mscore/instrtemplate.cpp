@@ -20,9 +20,50 @@
 
 #include "instrtemplate.h"
 #include "xml.h"
+#include "style.h"
+#include "sym.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
 
+//---------------------------------------------------------
+//   InstrumentTemplate
+//---------------------------------------------------------
+
+InstrumentTemplate::InstrumentTemplate()
+      {
+      QTextOption to = name.defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(QTextOption::NoWrap);
+      name.setUseDesignMetrics(true);
+      name.setDefaultTextOption(to);
+      shortName.setUseDesignMetrics(true);
+      shortName.setDefaultTextOption(to);
+      name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
+      shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
+      }
+#if 0
+InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
+      {
+      group     = t.group;
+      trackName = t.trackName;
+      name      = t.name.clone();
+      shortName = t.shortName.clone();
+      staves    = t.staves;
+
+      for (int i = 0; i < MAX_STAVES; ++i) {
+            clefIdx[i]    = t.clefIdx[i];
+            staffLines[i] = t.staffLines[i];
+            smallStaff[i] = t.smallStaff[i];
+            }
+      bracket      = t.bracket;            // bracket type (NO_BRACKET)
+      midiProgram  = t.midiProgram;
+      minPitch     = t.minPitch;
+      maxPitch     = t.maxPitch;
+      transpose    = t.transpose;          // for transposing instruments
+      useDrumset   = t.useDrumset;
+      midiActions  = t.midiActions;
+      }
+#endif
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------
@@ -30,8 +71,8 @@ QList<InstrumentTemplate*> instrumentTemplates;
 void InstrumentTemplate::write(Xml& xml) const
       {
       xml.stag("instrument");
-      xml.tag("name", name);
-      xml.tag("short-name", shortName);
+      xml.tag("name", name.toPlainText());            // TODO
+      xml.tag("short-name", shortName.toPlainText()); // TODO
       if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
             if (staffLines[0] != 5)
@@ -69,7 +110,7 @@ void InstrumentTemplate::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void InstrumentTemplate::read(const QString& g, QDomElement e)
+void InstrumentTemplate::read(const QString& g, QDomElement de)
       {
       group  = g;
       staves = 1;
@@ -85,30 +126,85 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
       transpose   = 0;
       useDrumset  = false;
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
+
+      double extraMag = 1.0;
+      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
+      QFont font("MScore1");
+      font.setPointSizeF(12.0 * mag);     // TODO: get from style
+
+      for (QDomNode e = de.firstChildElement(); !e.isNull(); e = e.nextSibling()) {
+            QDomElement de = e.toElement();
+            QString tag(de.tagName());
+            QString val(de.text());
             int i = val.toInt();
-            if (tag == "name")
-                  name = val;
-            else if (tag == "short-name")
-                  shortName = val;
+
+            if (tag == "name") {
+                  QString n;
+                  QTextCursor cursor(&name);
+                  QTextCharFormat f = cursor.charFormat();
+                  QTextCharFormat sf(f);
+                  sf.setFont(font);
+
+                  for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+                        QDomElement de1 = ee.toElement();
+                        QString tag(de1.tagName());
+                        if (tag == "symbol") {
+                              QString name = de1.attribute(QString("name"));
+                              if (name == "flat") {
+                                    n += "b";
+                                    cursor.insertText(QString(0xe112), sf);
+                                    }
+                              else if (name == "sharp") {
+                                    n += "#";
+                                    cursor.insertText(QString(0xe10e), sf);
+                                    }
+                              }
+                        QDomText t = ee.toText();
+                        if (!t.isNull()) {
+                              n += t.data();
+                              cursor.insertText(t.data(), f);
+                              }
+                        }
+                  trackName = n;
+                  }
+            else if (tag == "short-name") {
+                  QTextCursor cursor(&shortName);
+                  QTextCharFormat f = cursor.charFormat();
+                  QTextCharFormat sf(f);
+                  sf.setFont(font);
+
+                  for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+                        QDomElement de1 = ee.toElement();
+                        QString tag(de1.tagName());
+                        if (tag == "symbol") {
+                              QString name = de1.attribute(QString("name"));
+                              if (name == "flat")
+                                    cursor.insertText(QString(0xe112), sf);
+                              else if (name == "sharp")
+                                    cursor.insertText(QString(0xe10e), sf);
+                              }
+                        QDomText t = ee.toText();
+                        if (!t.isNull()) {
+                              cursor.insertText(t.data(), f);
+                              }
+                        }
+                  }
             else if (tag == "staves")
                   staves = i;
             else if (tag == "clef") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  int idx = de.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   clefIdx[idx] = i;
                   }
             else if (tag == "stafflines") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  int idx = de.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   staffLines[idx] = i;
                   }
             else if (tag == "smallStaff") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  int idx = de.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   smallStaff[idx] = i;
@@ -127,11 +223,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   midiProgram = i;
             else if (tag == "MidiAction") {
                   MidiAction a;
-                  a.read(e);
+                  a.read(de);
                   midiActions.append(a);
                   }
             else
-                  domError(e);
+                  domError(de);
             }
       }
 

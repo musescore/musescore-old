@@ -90,7 +90,7 @@ class HDegree {
 //---------------------------------------------------------
 
 struct ChordDescription {
-      int biab;               // Band In A Box Chord Number
+      int id;                 // Chord id number (Band In A Box Chord Number)
       const char* name;       // chord name as entered from the keyboard (without root/base)
       const char* xml;        // MusicXml description
       HChord chord;           // C based chord
@@ -114,18 +114,23 @@ struct ChordDescription {
 
 class Harmony : public Text {
       static const ChordDescription chordList[];
+      static QHash<int, const ChordDescription*> chordHash;
 
-      int _baseTpc;     // bass note, chord base; used for "slash" chords
-      int _extension;   // chord number, index in table "extensionNames"
-      int _rootTpc;     // root note for chord
+      int _baseTpc;                   // bass note, chord base; used for "slash" chords
+      int _rootTpc;                   // root note for chord
+      const ChordDescription* _descr; // chord description
       QList<HDegree> _degreeList;
 
    public:
       Harmony(Score*);
+      Harmony(const Harmony&);
       ~Harmony();
-      virtual Harmony* clone() const   { return new Harmony(*this); }
-      virtual ElementType type() const { return HARMONY; }
-      Measure* measure() { return (Measure*)parent(); }
+      virtual Harmony* clone() const           { return new Harmony(*this); }
+      virtual ElementType type() const         { return HARMONY; }
+      Measure* measure()                       { return (Measure*)parent(); }
+
+      void setDescr(const ChordDescription* d) { _descr = d; }
+      const ChordDescription* descr() const { return _descr; }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
@@ -139,26 +144,28 @@ class Harmony : public Text {
       void setBaseTpc(int val)             { _baseTpc = val;       }
       int rootTpc() const                  { return _rootTpc;      }
       void setRootTpc(int val)             { _rootTpc = val;       }
-      int extension() const                { return _extension;    }
-      void setExtension(int val)           { _extension = val;     }
+      int chordId() const                  { return _descr ? _descr->id : 0; }
       void addDegree(HDegree d)            { _degreeList << d;     }
-      int numberOfDegrees()                { return _degreeList.size();   }
-      HDegree degree(int i)                { return _degreeList.value(i); }
+      int numberOfDegrees() const          { return _degreeList.size();   }
+      HDegree degree(int i) const          { return _degreeList.value(i); }
       void clearDegrees()                  { _degreeList.clear(); }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       QString harmonyName() const;
-      QString extensionName() const { return getExtensionName(extension()); }
+      QString extensionName() const        { return _descr ? _descr->name : QString(); }
       void buildText();
 
-      static const char* getExtensionName(int i);
-      static QString harmonyName(bool useGermanNames, int root, int extension,
-         int base, const QList<HDegree>* degreeList = 0);
-      int parseHarmony(const QString& s, int* root, int* base);
+      const ChordDescription* parseHarmony(const QString& s, int* root, int* base);
       const char* xmlName() const;
-      static int fromXml(const QString& s);
       void resolveDegreeList();
+      void setChordId(int id);
+
+      static const ChordDescription* fromXml(const QString& s);
+      static void initHarmony();
+      static const ChordDescription* chords()  { return chordList; }
+      static unsigned int chordListSize();
+      static const ChordDescription* chordDescription(int id) { return chordHash[id]; }
       };
 
 #endif

@@ -34,6 +34,7 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
       Q_OBJECT
 
       Score* score;
+      Harmony* _harmony;
 
       QButtonGroup* rootGroup;
       QButtonGroup* accidentalsGroup;
@@ -43,24 +44,31 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
       void updateDegrees();
       bool isValidDegree(int r);
 
+      int numberOfDegrees();
+      HDegree degree(int i);
+      void addDegree(HDegree d);
+
+      void setRoot(int val);
+      void setExtension(int val);
+      void setBase(int val);
+
+      int base();
+      int root();
+      const ChordDescription* extension();
+
    private slots:
       void otherToggled(bool);
       void chordChanged();
       void addButtonClicked();
       void deleteButtonClicked();
-      void modelDataChanged(const QModelIndex & topLeft, const QModelIndex & bottomRight);
+      void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
    public:
       ChordEdit(Score* s, QWidget* parent = 0);
-      void setExtension(int val);
-      void setRoot(int val);
-      void setBase(int val);
-      void addDegree(HDegree d);
-      int numberOfDegrees();
-      HDegree degree(int i);
-      int extension();
-      int root();
-      int base();
+      ~ChordEdit();
+
+      void setHarmony(const Harmony* h);
+      const Harmony* harmony() const { return _harmony; }
       };
 
 //---------------------------------------------------------
@@ -68,22 +76,22 @@ class ChordEdit : public QDialog, Ui::ChordEdit {
 //---------------------------------------------------------
 
 class DegreeTabDelegate : public QItemDelegate
-{
-    Q_OBJECT
+      {
+      Q_OBJECT
 
-public:
-    DegreeTabDelegate(QObject *parent = 0);
+   public:
+      DegreeTabDelegate(QObject *parent = 0);
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const;
+      QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+         const QModelIndex& index) const;
 
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
-    void setModelData(QWidget *editor, QAbstractItemModel *model,
-                      const QModelIndex &index) const;
+      void setEditorData(QWidget* editor, const QModelIndex& index) const;
+      void setModelData(QWidget* editor, QAbstractItemModel* model,
+         const QModelIndex& index) const;
 
-    void updateEditorGeometry(QWidget *editor,
-        const QStyleOptionViewItem &option, const QModelIndex &index) const;
-};
+      void updateEditorGeometry(QWidget* editor,
+         const QStyleOptionViewItem& option, const QModelIndex& index) const;
+      };
 
 #endif
 

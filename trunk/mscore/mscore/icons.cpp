@@ -81,6 +81,7 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       image.fill(QColor(255, 255, 255, 0));
       QPainter painter(&image);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
+      painter.setFont(sc.font());
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
       sc.draw(painter, mag, x, y);
       painter.end();

@@ -1,3 +1,7 @@
+23.4.8 (ws)
+      - layout all after loading style
+      - fix special characters in text palette (no flat symbol)
+      - fix accidentals #/b in instrument names
 21.4.8 (ws)
       - new style option "create courtesy time signatures"
       - can read now MusicXml files with incomplete part-list

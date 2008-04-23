@@ -106,7 +106,7 @@
          <midiprogram>60</midiprogram>
          </instrument>
       <instrument>
-         <name>B<symbol name="flat"/> Trumpet</name>
+         <name>B<symbol name="flat"/> TTrumpet</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <midiprogram>56</midiprogram>
          </instrument>

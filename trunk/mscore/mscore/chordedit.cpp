@@ -32,7 +32,9 @@
 ChordEdit::ChordEdit(Score* s, QWidget* parent)
    : QDialog(parent)
       {
-      score = s;
+      _harmony = 0;
+      score    = s;
+
       setupUi(this);
       // note that rootGroup button identifiers map conveniently
       // onto all possible tpc2line return values: don't change
@@ -48,11 +50,11 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       // note that accidentalsGroup button identifiers map conveniently
       // onto all possible tpc2alter return values: don't change
       accidentalsGroup = new QButtonGroup(this);
-      accidentalsGroup->addButton(accDFlat,  -2);
-      accidentalsGroup->addButton(accFlat,   -1);
-      accidentalsGroup->addButton(accNone,    0);
-      accidentalsGroup->addButton(accSharp,   1);
-      accidentalsGroup->addButton(accDSharp,  2);
+      accidentalsGroup->addButton(accDFlat,  -2 + 3);
+      accidentalsGroup->addButton(accFlat,   -1 + 3);
+      accidentalsGroup->addButton(accNone,    0 + 3);
+      accidentalsGroup->addButton(accSharp,   1 + 3);
+      accidentalsGroup->addButton(accDSharp,  2 + 3);
 
       extensionGroup = new QButtonGroup(this);
       extensionGroup->addButton(extMaj,    2);
@@ -78,8 +80,11 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extensionGroup->addButton(extOther,  0);
 
       extOtherCombo->clear();
-      for (int i = 0; i < 185; ++i) {           // HACK
-            const char* p = Harmony::getExtensionName(i);
+      const ChordDescription* cd = Harmony::chords();
+      unsigned int n = Harmony::chordListSize();
+
+      for (unsigned int i = 0; i < n; ++i) {           // HACK
+            const char* p = cd[i].name;
             if (p)
                   extOtherCombo->addItem(p, i);
             }
@@ -107,9 +112,33 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       degreeTable->setColumnWidth(0, 80);
       degreeTable->setColumnWidth(1, 71);
       degreeTable->setColumnWidth(2, 71);
-
-      chordChanged();
       }
+
+//---------------------------------------------------------
+//   ChordEdit
+//---------------------------------------------------------
+
+ChordEdit::~ChordEdit()
+      {
+      if (_harmony)
+            delete _harmony;
+      }
+
+//---------------------------------------------------------
+//   setHarmony
+//---------------------------------------------------------
+
+void ChordEdit::setHarmony(const Harmony* h)
+      {
+      _harmony = h->clone();
+      setRoot(h->rootTpc());
+      setBase(h->baseTpc());
+      setExtension(h->chordId());
+
+      for (int i = 0; i < h->numberOfDegrees(); ++i)
+            addDegree(h->degree(i));
+      }
+
 
 // Set the chord root to val (in tpc)
 
@@ -131,7 +160,7 @@ void ChordEdit::setRoot(int val)
             // default to C, no accidentals
             button = rootGroup->button(0);
             button->setChecked(true);
-            button = accidentalsGroup->button(0);
+            button = accidentalsGroup->button(0 + 3);
             button->setChecked(true);
             return;
             }
@@ -145,11 +174,11 @@ void ChordEdit::setRoot(int val)
             printf("root button %d not found\n", val);
 
       id = tpc2alter(val);
-      button = accidentalsGroup->button(id);
+      button = accidentalsGroup->button(id + 3);
       if (button)
             button->setChecked(true);
       else
-            printf("accidentals button %d not found\n", val);
+            printf("accidentals button %d not found\n", id);
 
       chordChanged();
       }
@@ -161,11 +190,13 @@ void ChordEdit::setRoot(int val)
 void ChordEdit::setExtension(int val)
       {
       QAbstractButton* button = extensionGroup->button(val);
+printf("setExtension %d button %p\n", val, button);
       if (button)
             button->setChecked(true);
       else {
             extOther->setChecked(true);
             int idx = extOtherCombo->findData(val);
+printf("ext other data %d, idx = %d\n", val, idx);
             if (idx != -1)
                   extOtherCombo->setCurrentIndex(idx);
             }
@@ -186,17 +217,17 @@ void ChordEdit::setBase(int val)
 //   extension
 //---------------------------------------------------------
 
-int ChordEdit::extension()
+const ChordDescription* ChordEdit::extension()
       {
       int id = extensionGroup->checkedId();
       if (id == -1)
             return 0;
       else if (id == 0) {
             int idx = extOtherCombo->currentIndex();
-            return extOtherCombo->itemData(idx).toInt();
+            return Harmony::chordDescription(extOtherCombo->itemData(idx).toInt());
             }
       else
-            return id;
+            return Harmony::chordDescription(id);
       }
 
 //---------------------------------------------------------
@@ -207,9 +238,9 @@ int ChordEdit::extension()
 
 int ChordEdit::root()
       {
-      int tpc = line2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId());
+      int tpc = line2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId() - 3);
 //      printf("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
-//             rootGroup->checkedId(), accidentalsGroup->checkedId(), tpc);
+//             rootGroup->checkedId(), accidentalsGroup->checkedId() - 3, tpc);
       return tpc;
       }
 
@@ -261,12 +292,13 @@ void ChordEdit::chordChanged()
       {
 //      printf("ChordEdit::chordChanged() root=%d ext=%d base=%d ndeg=%d\n",
 //             root(), extension(), base(), numberOfDegrees());
-      QList<HDegree> degreeList;
+      _harmony->clearDegrees();
       for (int i = 0; i < numberOfDegrees(); i++)
-            degreeList << degree(i);
-      bool useGermanNoteNames = score->style()->useGermanNoteNames;
-      QString s = Harmony::harmonyName(useGermanNoteNames, root(), extension(),
-         base(), &degreeList);
+            _harmony->addDegree(degree(i));
+      _harmony->setRootTpc(root());
+      _harmony->setBaseTpc(base());
+      _harmony->setDescr(extension());
+      QString s = _harmony->harmonyName();
       chordLabel->setText(s);
       }
 
