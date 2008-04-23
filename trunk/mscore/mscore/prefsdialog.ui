@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>771</width>
-    <height>580</height>
+    <width>743</width>
+    <height>605</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -31,28 +31,13 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
        <string>General</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_5" >
          <property name="title" >
@@ -63,22 +48,22 @@
          </property>
          <layout class="QGridLayout" >
           <property name="leftMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="topMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="rightMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="horizontalSpacing" >
-           <number>6</number>
+           <number>3</number>
           </property>
           <property name="verticalSpacing" >
-           <number>6</number>
+           <number>3</number>
           </property>
           <item row="2" column="1" >
            <widget class="QLineEdit" name="sessionScore" />
@@ -137,22 +122,22 @@
          </property>
          <layout class="QGridLayout" >
           <property name="leftMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="topMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="rightMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin" >
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="horizontalSpacing" >
-           <number>6</number>
+           <number>3</number>
           </property>
           <property name="verticalSpacing" >
-           <number>6</number>
+           <number>3</number>
           </property>
           <item row="1" column="0" >
            <widget class="QLabel" name="label_9" >
@@ -226,6 +211,24 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
+          <property name="leftMargin" >
+           <number>3</number>
+          </property>
+          <property name="topMargin" >
+           <number>3</number>
+          </property>
+          <property name="rightMargin" >
+           <number>3</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>3</number>
+          </property>
+          <property name="horizontalSpacing" >
+           <number>3</number>
+          </property>
+          <property name="verticalSpacing" >
+           <number>3</number>
+          </property>
           <item row="0" column="0" >
            <widget class="QLabel" name="label_17" >
             <property name="text" >
@@ -280,6 +283,73 @@
              <string>show</string>
             </property>
            </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="autoSave" >
+         <property name="title" >
+          <string>Auto Save</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" >
+          <property name="spacing" >
+           <number>3</number>
+          </property>
+          <property name="leftMargin" >
+           <number>3</number>
+          </property>
+          <property name="topMargin" >
+           <number>3</number>
+          </property>
+          <property name="rightMargin" >
+           <number>3</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_25" >
+            <property name="text" >
+             <string>Saver every</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="autoSaveTime" >
+            <property name="minimum" >
+             <number>1</number>
+            </property>
+            <property name="value" >
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_27" >
+            <property name="text" >
+             <string>minutes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

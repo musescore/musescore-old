@@ -212,6 +212,8 @@ class MuseScore : public QMainWindow {
       QString lastOpenPath;
       QList<QString> plugins;
 
+      QTimer* autoSaveTimer;
+
       virtual void closeEvent(QCloseEvent*);
 
       void playVisible(bool flag);
@@ -234,6 +236,7 @@ class MuseScore : public QMainWindow {
       void fingeringMenu();
 
    private slots:
+      void autoSaveTimerTimeout();
       void helpBrowser();
       void about();
       void aboutQt();
@@ -307,6 +310,7 @@ class MuseScore : public QMainWindow {
       void play(Element* e) const;
       void loadPlugins();
       QString createDefaultName() const;
+      void startAutoSave();
       };
 
 //---------------------------------------------------------
