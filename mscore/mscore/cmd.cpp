@@ -1463,8 +1463,6 @@ void Score::cmd(const QString& cmd)
             seq->rewindStart();
       else if (cmd == "seek-end")
             seq->seekEnd();
-      else if (cmd == "load-style")
-            loadStyle();
       else if (cmd == "save-style")
             saveStyle();
       else {
@@ -1822,6 +1820,10 @@ void Score::cmd(const QString& cmd)
                   cmdInsertClef(CLEF_G);
             else if (cmd == "clef-bass")
                   cmdInsertClef(CLEF_F);
+            else if (cmd == "load-style") {
+                  loadStyle();
+                  setLayoutAll(true);
+                  }
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();

@@ -35,8 +35,10 @@ class Staff;
 
 struct InstrumentTemplate {
       QString group;
-      QString name;           // also used for track name
-      QString shortName;
+      QString trackName;            // also used for track name
+      QTextDocument name;           ///< shown on first system
+      QTextDocument shortName;      ///< shown on followup systems
+
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
@@ -49,6 +51,8 @@ struct InstrumentTemplate {
       bool useDrumset;
       QList<MidiAction> midiActions;
 
+      InstrumentTemplate();
+//      InstrumentTemplate(const InstrumentTemplate&);
       void write(Xml& xml) const;
       void read(const QString& group, QDomElement);
       };

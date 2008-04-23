@@ -41,9 +41,9 @@ EditInstrument::EditInstrument(QWidget* parent)
 void EditInstrument::setInstrument(InstrumentTemplate* t)
       {
       instr = t;
-      *lt   = *t;
-      nameEdit->setText(t->name);
-      shortNameEdit->setText(t->shortName);
+//TODO      *lt   = *t;
+//      nameEdit->setText(t->name);
+//      shortNameEdit->setText(t->shortName);
       minPitch->setValue(t->minPitch);
       maxPitch->setValue(t->maxPitch);
       transpose->setValue(t->transpose);
@@ -76,7 +76,7 @@ void EditInstrument::on_buttonCancel_pressed()
 void EditInstrument::on_buttonOk_pressed()
       {
       valueChanged();
-      *instr = *lt;
+//TODO      *instr = *lt;
       }
 
 //---------------------------------------------------------
@@ -85,8 +85,8 @@ void EditInstrument::on_buttonOk_pressed()
 
 void EditInstrument::valueChanged()
       {
-      lt->name        = nameEdit->text();
-      lt->shortName   = shortNameEdit->text();
+//      lt->name        = nameEdit->text();
+//      lt->shortName   = shortNameEdit->text();
       lt->minPitch    = minPitch->value();
       lt->maxPitch    = maxPitch->value();
       lt->transpose   = transpose->value();

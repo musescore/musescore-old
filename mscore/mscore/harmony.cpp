@@ -30,6 +30,7 @@
 #include "system.h"
 
 const HChord HChord::C0(0,3,6,9);
+QHash<int, const ChordDescription*> Harmony::chordHash;
 
 //---------------------------------------------------------
 //   HChord
@@ -227,76 +228,48 @@ void HChord::print() const
 //---------------------------------------------------------
 
 const ChordDescription Harmony::chordList[] = {
-            { 0, 0,            0,           HChord() },
-            { 1, "",           "major",     HChord("C E G") },        // major triad
-            { 2, "Maj",        0,           HChord("C E G") },
-            { 3, "5b",         0,           HChord("C E Gb") },       // major flat 5 triad
-            { 4, "aug",   "augmented",      HChord("C E G#") },       // augmented triad
-            { 5, "6",     "major-sixth",    HChord("C E G A") },      // sixth
-            { 6, "Maj7", "major-seventh",   HChord("C E G B") },
-            { 7, "Maj9", "major-ninth",     HChord("C E G B D") },
-            { 8, "Maj9#11",    0,           HChord("C E G B D F#") },
-            { 9, "Maj13#11",   0,           HChord("C E G B D F# A") },
+            { 1, "",         "major",         HChord("C E G") },        // major triad
+            { 2, "Maj",      0,               HChord("C E G") },
+            { 3, "5b",       0,               HChord("C E Gb") },       // major flat 5 triad
+            { 4, "aug",      "augmented",     HChord("C E G#") },       // augmented triad
+            { 5, "6",        "major-sixth",   HChord("C E G A") },      // sixth
+            { 6, "Maj7",     "major-seventh", HChord("C E G B") },
+            { 7, "Maj9",     "major-ninth",   HChord("C E G B D") },
+            { 8, "Maj9#11",  0,               HChord("C E G B D F#") },
+            { 9, "Maj13#11", 0,               HChord("C E G B D F# A") },
 /*10*/
-            { 10, "Maj13",  "major-13th",   HChord("C E G B D F# A") },
-            { 11, 0,            0,          HChord() },
-            { 12, "+",          0,          HChord("C E G#") },       // +5, #5, +, augmented triad
-            { 13, "Maj7#5",     0,          HChord() },
-            { 14, "69",         0,          HChord("C D E G A") },
-            { 15, "2",          0,          HChord("C D E G") },      // major add 2
-            { 16, "m",    "minor",          HChord("C Eb G") },
-            { 17, "maug",       0,          HChord("C D# G#") },
-            { 18, "mMaj7", "minor-major",   HChord("C Eb G B") },     // minor major 7th = major minor 7th
-            { 19, "m7",    "minor-seventh", HChord("C Eb G Bb") },
+            { 10, "Maj13",   "major-13th",    HChord("C E G B D F# A") },
+            { 12, "+",       0,               HChord("C E G#") },       // +5, #5, +, augmented triad
+            { 13, "Maj7#5",  0,               HChord("C D E Ab B") },
+            { 14, "69",      0,               HChord("C D E G A") },
+            { 15, "2",       0,               HChord("C D E G") },      // major add 2
+            { 16, "m",       "minor",         HChord("C Eb G") },
+            { 17, "maug",    0,               HChord("C D# G#") },
+            { 18, "mMaj7",   "minor-major",   HChord("C Eb G B") },     // minor major 7th = major minor 7th
+            { 19, "m7",      "minor-seventh", HChord("C Eb G Bb") },
 
-/*20*/      { 20, "m9",  "minor-ninth",     HChord("C Eb G Bb D") },
-            { 21, "m11", "minor-11th",      HChord("C Eb G Bb D F") },
-            { 22, "m13", "minor-13th",      HChord("C Eb G Bb D F A") },
-            { 23, "m6",      "minor-sixth", HChord("C Eb G A") },
-            { 24, "m#5",        0, HChord() },
-            { 25, "m7#5",       0, HChord() },
-            { 26, "m69",        0, HChord() },
-            { 27, 0,            0, HChord() },
-            { 28, "Maj7Lyd",    0, HChord() },
-            { 29, "Maj7b5",     0, HChord() },
+/*20*/      { 20, "m9",      "minor-ninth",   HChord("C Eb G Bb D") },
+            { 21, "m11",     "minor-11th",    HChord("C Eb G Bb D F") },
+            { 22, "m13",     "minor-13th",    HChord("C Eb G Bb D F A") },
+            { 23, "m6",      "minor-sixth",   HChord("C Eb G A") },
+            { 24, "m#5",     0,               HChord("C Eb Ab") },
+            { 25, "m7#5",    0,               HChord("C Eb Ab Bb") },
+            { 26, "m69",     0,               HChord("C D Eb G A") },
+            { 28, "Maj7Lyd", 0,               HChord("C D E G A") },
+            { 29, "Maj7b5",  0,               HChord("C E Gb B") },
 
-/*30*/      { 30, 0,                       0, HChord() },
-            { 31, 0,                       0, HChord() },
             { 32, "m7b5",  "half-diminished", HChord("C Eb Gb Bb") },
             { 33, "dim",   "diminished",      HChord("C Eb Gb") },    // dim
             { 34, "m9b5",       0, HChord() },
-            { 35, 0,            0, HChord() },
-            { 36, 0,            0, HChord() },
-            { 37, 0,            0, HChord() },
-            { 38, 0,            0, HChord() },
-            { 39, 0,            0, HChord() },
 
 /*40*/      { 40, "5",  "power", HChord("C G") },  // power
-            { 41, 0,            0, HChord() },
-            { 42, 0,            0, HChord() },
-            { 43, 0,            0, HChord() },
-            { 44, 0,            0, HChord() },
-            { 45, 0,            0, HChord() },
-            { 46, 0,            0, HChord() },
-            { 47, 0,            0, HChord() },
-            { 48, 0,            0, HChord() },
-            { 49, 0,            0, HChord() },
 
-/*50*/      { 50, 0,            0, HChord() },
-            { 51, 0,            0, HChord() },
-            { 52, 0,            0, HChord() },
-            { 53, 0,            0, HChord() },
-            { 54, 0,            0, HChord() },
-            { 55, 0,            0, HChord() },
             { 56, "7+",         0, HChord() },
             { 57, "9+",         0, HChord() },
             { 58, "13+",        0, HChord() },
             { 59, "(blues)",    0, HChord() },   // ??
 
 /*60*/      { 60, "7(Blues)",   0, HChord() },   // ??
-            { 61, 0,            0, HChord() },
-            { 62, 0,            0, HChord() },
-            { 63, 0,            0, HChord() },
             { 64, "7",  "dominant-seventh",      HChord("C E G Bb") },        // dominant-seventh
             { 65, "13", "dominant-13th",         HChord("C E G Bb D F A") },  // dominant 13th
             { 66, "7b13",       0, HChord() },
@@ -304,9 +277,8 @@ const ChordDescription Harmony::chordList[] = {
             { 68, "13#11",      0, HChord() },
             { 69, "7#11b13",    0, HChord() },
 
-/*70*/      { 70, "9", "dominant-ninth", HChord() },
+/*70*/      { 70, "9", "dominant-ninth", HChord("C Bb D F") },
             { 71, "9b13",       0, HChord() },
-            { 72, 0,            0, HChord() },
             { 73, "9#11",       0, HChord() },
             { 74, "13#11",      0, HChord() },
             { 75, "9#11b13",    0, HChord() },
@@ -337,60 +309,45 @@ const ChordDescription Harmony::chordList[] = {
             { 98, "7b5#9b13",   0, HChord() },
             { 99, "7#5",      "augmented-seventh", HChord("C E Ab Bb") },
 
-/*100*/     { 100, "13#5",       0, HChord() },
-            { 101, "7#5#11",     0, HChord() },
-            { 102, "13#5#11",    0, HChord() },
-            { 103, "9#5",        0, HChord() },
-            { 104, "9#5#11",     0, HChord() },
-            { 105, "7#5b9",      0, HChord() },
-            { 106, "13#5b9",     0, HChord() },
-            { 107, "7#5b9#11",   0, HChord() },
-            { 108, "13#5b9#11",  0, HChord() },
-            { 109, "7#5#9",      0, HChord() },
+/*100*/     { 100, "13#5",         0, HChord() },
+            { 101, "7#5#11",       0, HChord() },
+            { 102, "13#5#11",      0, HChord() },
+            { 103, "9#5",          0, HChord() },
+            { 104, "9#5#11",       0, HChord() },
+            { 105, "7#5b9",        0, HChord() },
+            { 106, "13#5b9",       0, HChord() },
+            { 107, "7#5b9#11",     0, HChord() },
+            { 108, "13#5b9#11",    0, HChord() },
+            { 109, "7#5#9",        0, HChord() },
 
-/*110*/     { 110, "13#5#9#11",  0, HChord() },
-            { 111, "7#5#9#11",   0, HChord() },
-            { 112, "13#5#9#11",  0, HChord() },
-            { 113, "7alt",       0, HChord() },
-            { 114, 0,            0, HChord() },
-            { 115, 0,            0, HChord() },
-            { 116, 0,            0, HChord() },
-            { 117, 0,            0, HChord() },
-            { 118, 0,            0, HChord() },
-            { 119, 0,            0, HChord() },
+/*110*/     { 110, "13#5#9#11",    0, HChord() },
+            { 111, "7#5#9#11",     0, HChord() },
+            { 112, "13#5#9#11",    0, HChord() },
+            { 113, "7alt",         0, HChord() },
 
-/*120*/     { 120, 0,           0, HChord() },
-            { 121, 0,           0, HChord() },
-            { 122, 0,           0, HChord() },
-            { 123, 0,           0, HChord() },
-            { 124, 0,           0, HChord() },
-            { 125, 0,            0, HChord() },
-            { 126, 0,            0, HChord() },
-            { 127, 0,            0, HChord() },
             { 128, "7sus", "suspended-fourth addb7", HChord("C F G Bb") },
-            { 129, "13sus",      0,                  HChord("C F G A Bb") },
+            { 129, "13sus",        0,                HChord("C F G A Bb") },
 
-/*130*/     { 130, "7susb13",    0, HChord("C F G Ab Bb") },  //?? not checked
-            { 131, "7sus#11",    0, HChord("C F G Gb Bb") },
-            { 132, "13sus#11",   0, HChord() },
-            { 133, "7sus#11b13", 0, HChord() },
-            { 134, "9sus",       0, HChord("C D F G Bb") },   // 11 - 9sus
-            { 135, "9susb13",    0, HChord() },
-            { 136, "9sus#11",    0, HChord() },
-            { 137, "13sus#11",   0, HChord() },
-            { 138, "9sus#11b13", 0, HChord() },
-            { 139, 0,            0, HChord() },
+/*130*/     { 130, "7susb13",      0, HChord("C F G Ab Bb") },  //?? not checked
+            { 131, "7sus#11",      0, HChord("C F G Gb Bb") },
+            { 132, "13sus#11",     0, HChord() },
+            { 133, "7sus#11b13",   0, HChord() },
+            { 134, "9sus",         0, HChord("C D F G Bb") },   // 11 - 9sus
+            { 135, "9susb13",      0, HChord() },
+            { 136, "9sus#11",      0, HChord() },
+            { 137, "13sus#11",     0, HChord() },
+            { 138, "9sus#11b13",   0, HChord() },
 
-/*140*/     { 140, "7susb9",     0, HChord() },
-            { 141, "13susb9",    0, HChord() },
-            { 142, "7susb9b13",  0, HChord() },
-            { 143, "7susb9#11",  0, HChord() },
-            { 144, "13susb9#11", 0, HChord() },
-            { 145, "7susb9#11b13",0, HChord() },
-            { 146, "7sus#9",      0, HChord() },
-            { 147, "13sus#9",     0, HChord() },
-            { 148, "7sus#9b13",   0, HChord() },
-            { 149, "9sus#11",     0, HChord() },
+/*140*/     { 140, "7susb9",       0, HChord() },
+            { 141, "13susb9",      0, HChord() },
+            { 142, "7susb9b13",    0, HChord() },
+            { 143, "7susb9#11",    0, HChord() },
+            { 144, "13susb9#11",   0, HChord() },
+            { 145, "7susb9#11b13", 0, HChord() },
+            { 146, "7sus#9",       0, HChord() },
+            { 147, "13sus#9",      0, HChord() },
+            { 148, "7sus#9b13",    0, HChord() },
+            { 149, "9sus#11",      0, HChord() },
 
 /*150*/     { 150, "13sus#9#11",   0, HChord() },
             { 151, "7sus#9#11b13", 0, HChord() },
@@ -422,14 +379,8 @@ const ChordDescription Harmony::chordList[] = {
             { 175, "7sus#5#9#11",  0, HChord() },
             { 176, "13sus#5#9#11", 0, HChord() },
             { 177, "4",            0, HChord() },
-            { 178, 0,              0, HChord() },
-            { 179, 0,              0, HChord() },
 
-/*180*/     { 180, 0,              0, HChord() },
-            { 181, 0,              0, HChord() },
-            { 182, 0,              0, HChord() },
-            { 183, 0,              0, HChord() },
-            { 184, "sus",          0,              HChord("C F G") },
+            { 184, "sus",          0,              HChord("C F G") },         // sus4
 
             { 185, "dim7",   "diminished-seventh", HChord() },  // mscore ext.
             { 186, "sus2",   "suspended-second",   HChord("C D G") },      // suspended 2nd chord
@@ -448,14 +399,25 @@ const ChordDescription Harmony::chordList[] = {
       };
 
 //---------------------------------------------------------
-//   getExtensionName
+//   chordListSize
 //---------------------------------------------------------
 
-const char* Harmony::getExtensionName(int i)
+unsigned int Harmony::chordListSize()
       {
-      if (i >= int(sizeof(chordList)/sizeof(*chordList)))
-            return 0;
-      return chordList[i].name;
+      return sizeof(chordList)/sizeof(*chordList);
+      }
+
+//---------------------------------------------------------
+//   initHarmony
+//    init chordHash hash table
+//---------------------------------------------------------
+
+void Harmony::initHarmony()
+      {
+      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
+            if (chordList[i].name)
+                  chordHash[i] = &chordList[i];
+            }
       }
 
 //---------------------------------------------------------
@@ -472,17 +434,9 @@ static int degreeTable[] = {
 
 QString Harmony::harmonyName() const
       {
-//      printf("Harmony::harmonyName(this=%p)", this);
       bool germanNames = score()->style()->useGermanNoteNames;
-      QString s = harmonyName(germanNames, rootTpc(), extension(), baseTpc(), &_degreeList);
-//      printf("Harmony::harmonyName: <%s>\n", qPrintable(s));
-      return s;
-      }
-
-QString Harmony::harmonyName(bool germanNames, int root, int extension, int base, const QList<HDegree>* degreeList)
-      {
 /*
-      printf("Harmony::harmonyName(root=%d extension=%d base=%d list=%p", root, extension, base, degreeList);
+      printf("Harmony::harmonyName(root=%d extension=%p base=%d list=%p", root, extension, base, degreeList);
       if (degreeList)
             printf(" size=%d)", degreeList->size());
       else
@@ -491,12 +445,12 @@ QString Harmony::harmonyName(bool germanNames, int root, int extension, int base
       HChord hc;
       QString s;
 
-      if (extension >= 0 && extension < int(sizeof(chordList)/sizeof(*chordList)))
-            hc = chordList[extension].chord;
+      if (_descr)
+            hc = _descr->chord;
 //      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
 //      printf("\n");
 
-      if (degreeList && !degreeList->isEmpty()) {
+      if (!_degreeList.isEmpty()) {
 /*
             // print the chord without the degree modification(s)
             for (int i = 0; i < 12; i++)
@@ -505,8 +459,8 @@ QString Harmony::harmonyName(bool germanNames, int root, int extension, int base
             printf("\n");
 */
             // factor in the degrees
-            for (int i = 0; i < degreeList->size(); i++) {
-                  HDegree d = (*degreeList)[i];
+            for (int i = 0; i < _degreeList.size(); i++) {
+                  HDegree d = _degreeList[i];
                   int dv = degreeTable[(d.value() - 1) % 7] + d.alter();
 
                   if (d.type() == ADD) {
@@ -546,31 +500,31 @@ QString Harmony::harmonyName(bool germanNames, int root, int extension, int base
             printf("\n");
 */
             // try to find the chord in chordList
-            int newExtension = 0;
+            const ChordDescription* newExtension = 0;
             for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
                   if (chordList[i].chord == hc && chordList[i].name != 0) {
                         printf(" found in table as %s\n", chordList[i].name);
-                        newExtension = i;
+                        newExtension = &chordList[i];
                         break;
                         }
                   }
 
             // now determine the chord name
             if (newExtension)
-                  s = tpc2name(root, germanNames) + getExtensionName(newExtension);
+                  s = tpc2name(_rootTpc, germanNames) + newExtension->name;
             else
                   // not in table, fallback to using HChord.name()
-                  s = hc.name(root);
+                  s = hc.name(_rootTpc);
             } // end if (degreeList ...
       else {
-            s = tpc2name(root, germanNames);
-            if (extension)
-                  s += getExtensionName(extension);
-      }
+            s = tpc2name(_rootTpc, germanNames);
+            if (_descr)
+                  s += _descr->name;
+            }
 
-      if (base != INVALID_TPC) {
+      if (_baseTpc != INVALID_TPC) {
             s += "/";
-            s += tpc2name(base, germanNames);
+            s += tpc2name(_baseTpc, germanNames);
             }
 
 //      printf(" %s\n", qPrintable(s));
@@ -588,7 +542,7 @@ void Harmony::resolveDegreeList()
       if (_degreeList.isEmpty())
             return;
 
-      HChord hc = chordList[_extension].chord;
+      HChord hc = _descr ? _descr->chord : HChord();
 
       // factor in the degrees
       for (int i = 0; i < _degreeList.size(); i++) {
@@ -622,7 +576,7 @@ void Harmony::resolveDegreeList()
       for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
             if (chordList[i].chord == hc && chordList[i].name != 0) {
                   printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
-                  _extension = i;
+                  _descr = &chordList[i];
                   _degreeList.clear();
                   break;
                   }
@@ -638,8 +592,17 @@ Harmony::Harmony(Score* score)
       {
       Text::setSubtype(TEXT_CHORD);
       _rootTpc   = INVALID_TPC;
-      _extension = 0;
       _baseTpc   = INVALID_TPC;
+      _descr     = 0;
+      }
+
+Harmony::Harmony(const Harmony& h)
+   : Text(h)
+      {
+      _rootTpc    = h._rootTpc;
+      _baseTpc    = h._baseTpc;
+      _descr      = h._descr;
+      _degreeList = h._degreeList;
       }
 
 //---------------------------------------------------------
@@ -671,19 +634,16 @@ void Harmony::propertyAction(const QString& s)
       {
       if (s == "props") {
             ChordEdit ce(score());
-            ce.setRoot(rootTpc());
-            ce.setBase(baseTpc());
-            ce.setExtension(extension());
-            for (int i = 0; i < numberOfDegrees(); i++)
-                  ce.addDegree(degree(i));
+            ce.setHarmony(this);
             int rv = ce.exec();
             if (rv) {
-                  setRootTpc(ce.root());
-                  setBaseTpc(ce.base());
-                  setExtension(ce.extension());
+                  const Harmony* h = ce.harmony();
+                  setRootTpc(h->rootTpc());
+                  setBaseTpc(h->baseTpc());
+                  setDescr(h->descr());
                   clearDegrees();
-                  for (int i = 0; i < ce.numberOfDegrees(); i++)
-                        addDegree(ce.degree(i));
+                  for (int i = 0; i < h->numberOfDegrees(); i++)
+                        addDegree(h->degree(i));
                   setText(harmonyName());
                   }
             }
@@ -700,8 +660,8 @@ void Harmony::write(Xml& xml) const
       xml.stag("Harmony");
       if (_rootTpc != INVALID_TPC) {
             xml.tag("root", _rootTpc);
-            if (_extension)
-                  xml.tag("extension", _extension);
+            if (_descr)
+                  xml.tag("extension", _descr->id);
             if (_baseTpc != INVALID_TPC)
                   xml.tag("base", _baseTpc);
             for (int i = 0; i < _degreeList.size(); i++) {
@@ -749,7 +709,7 @@ void Harmony::read(QDomElement e)
                         setBaseTpc(table[i-1]);    // obsolete
                   }
             else if (tag == "extension")
-                  setExtension(i);
+                  setChordId(i);
             else if (tag == "root") {
                   if (score()->mscVersion() >= 106)
                         setRootTpc(i);
@@ -973,22 +933,22 @@ static int convertRoot(const QString& s, bool germanNames)
 
 //---------------------------------------------------------
 //   parseHarmony
-//    return extension number
+//    return ChordDescription
 //---------------------------------------------------------
 
-int Harmony::parseHarmony(const QString& ss, int* root, int* base)
+const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int* base)
       {
       QString s = ss.simplified();
       int n = s.size();
       if (n < 1) {
             printf("parseHarmony failed <%s>\n", qPrintable(ss));
-            return -1;
+            return 0;
             }
       bool germanNames = score()->style()->useGermanNoteNames;
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
             printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
-            return -1;
+            return 0;
             }
       *root = r;
       int idx = ((n > 1) && ((s[1] == 'b') || (s[1] == '#'))) ? 2 : 1;
@@ -1004,10 +964,10 @@ int Harmony::parseHarmony(const QString& ss, int* root, int* base)
       s = s.toLower();
       for (unsigned i = 1; i < sizeof(chordList)/sizeof(*chordList); ++i) {
             if (QString(chordList[i].name).toLower() == s)
-                  return i;
+                  return &chordList[i];
             }
       printf("2:parseHarmony failed <%s>\n", qPrintable(ss));
-      return -1;
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -1019,18 +979,18 @@ void Harmony::endEdit()
       Text::endEdit();
 
       int r, b;
-      int e = parseHarmony(getText(), &r, &b);
-      if (e > 0) {
+      const ChordDescription* e = parseHarmony(getText(), &r, &b);
+      if (e) {
             setRootTpc(r);
             setBaseTpc(b);
-            setExtension(e);
+            setDescr(e);
             buildText();
             }
       else {
             // syntax error, leave text as is
             setRootTpc(INVALID_TPC);
             setBaseTpc(INVALID_TPC);
-            setExtension(0);
+            setDescr(0);
             }
       }
 
@@ -1056,30 +1016,38 @@ void Harmony::layout(ScoreLayout* l)
       double x = time().isValid() ? measure()->tick2pos(tick()) : 0.0;
       setPos(ipos() + QPointF(x, y));
       }
+
 //---------------------------------------------------------
 //   xmlName
 //---------------------------------------------------------
 
 const char* Harmony::xmlName() const
       {
-      return chordList[_extension].xml;
+      return _descr ? _descr->xml : 0;
       }
 
 //---------------------------------------------------------
 //   fromXml
 //---------------------------------------------------------
 
-int Harmony::fromXml(const QString& s)
+const ChordDescription* Harmony::fromXml(const QString& kind)
       {
-      int extension = 0;
-      QString lowerCaseKind = s.toLower();
-      for (unsigned i = 1; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            if (lowerCaseKind == chordList[i].xml) {
-                  extension = i;
-                  break;
-                  }
+      QString lowerCaseKind = kind.toLower();
+      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
+            QStringList sl(QString(chordList[i].xml).split(" ", QString::SkipEmptyParts));
+            if (lowerCaseKind == sl[0])
+                  return &chordList[i];
             }
-      return extension;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   setChordId
+//---------------------------------------------------------
+
+void Harmony::setChordId(int id)
+      {
+      _descr = chordHash[id];
       }
 
 

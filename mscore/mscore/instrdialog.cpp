@@ -100,7 +100,7 @@ PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)
       part = 0;
       it   = i;
       op   = ITEM_ADD;
-      setText(0, it->name);
+      setText(0, it->trackName);
       }
 
 //---------------------------------------------------------
@@ -118,14 +118,14 @@ InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, In
    : QTreeWidgetItem(item) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
-      setText(0, i->name);
+      setText(0, i->trackName);
       }
 
 InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent)
    : QTreeWidgetItem(parent) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
-      setText(0, i->name);
+      setText(0, i->trackName);
       }
 
 //---------------------------------------------------------
@@ -137,7 +137,7 @@ QString InstrumentTemplateListItem::text(int col) const
       switch (col) {
             case 0:
                   return _instrumentTemplate ?
-                     _instrumentTemplate->name : _group;
+                     _instrumentTemplate->trackName : _group;
             default:
                   return QString("");
             }
@@ -514,7 +514,7 @@ void MuseScore::editInstrList()
                   part->setMinPitch(t->minPitch);
                   part->setMaxPitch(t->maxPitch);
                   part->setShortName(t->shortName);
-                  part->setTrackName(t->name);
+                  part->setTrackName(t->trackName);
                   part->setLongName(t->name);
                   part->setPitchOffset(t->transpose);
                   part->instrument()->midiActions = t->midiActions;

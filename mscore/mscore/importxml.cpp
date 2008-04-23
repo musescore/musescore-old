@@ -2526,14 +2526,14 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       ha->setTick(tick);
 
-      int extension = Harmony::fromXml(kind);
-      if (extension == 0) {
-            printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
+      const ChordDescription* d = Harmony::fromXml(kind);
+      if (d == 0) {
+            printf("unknown chord <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
             QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
             ha->setText(s);
             }
       else {
-            ha->setExtension(extension);
+            ha->setDescr(d);
             ha->buildText();
             }
       ha->setVisible(printObject == "yes");
