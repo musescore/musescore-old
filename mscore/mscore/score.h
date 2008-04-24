@@ -295,7 +295,7 @@ class Score : public QObject {
       Score* clone();
 
       void clear();
-      void write(Xml&);
+      void write(Xml&, bool autosave);
       bool read(QDomElement);
 
       QList<Staff*>& staves()                { return _staves; }
@@ -484,7 +484,7 @@ class Score : public QObject {
 
       void cmd(const QString&);
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
-      bool saveFile();
+      bool saveFile(bool autosave);
       void adjustTime(int tick, MeasureBase*);
 
       QString filePath() const    { return info.filePath(); }

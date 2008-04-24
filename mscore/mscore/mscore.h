@@ -287,8 +287,8 @@ class MuseScore : public QMainWindow {
       Canvas* getCanvas() { return canvas; }
       bool checkDirty(Score*);
       void clearScore();
-      bool saveFile(QFileInfo&);
-      bool saveFile(QFile*);
+      bool saveFile(QFileInfo&, bool autosave);
+      bool saveFile(QFile*, bool autosave);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
       void appendScore(Score*);
