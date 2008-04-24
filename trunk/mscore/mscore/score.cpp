@@ -1047,6 +1047,8 @@ void Score::endEdit()
             }
       else if (editObject->type() == LYRICS)
             lyricsEndEdit();
+      else if (editObject->type() == HARMONY)
+            harmonyEndEdit();
       layoutAll = true;
       mscore->setState(STATE_NORMAL);
       editObject = 0;

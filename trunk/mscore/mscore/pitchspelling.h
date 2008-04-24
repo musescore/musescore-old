@@ -50,6 +50,7 @@ extern int tpc2line(int tpc);
 extern int tpc2alter(int tpc);
 extern QString tpc2stepName(int tpc);
 extern int step2tpc(const QString& step, int alter);
+extern int transposeTpc(int tpc, int semitones);
 
 #endif
 

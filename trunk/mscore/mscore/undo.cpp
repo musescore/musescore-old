@@ -51,6 +51,8 @@
 #include "barline.h"
 #include "volta.h"
 #include "tuplet.h"
+#include "harmony.h"
+#include "pitchspelling.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -87,7 +89,8 @@ static const char* undoName[] = {
       "SigInsertTime",
       "FixTicks",
       "ChangeBeamMode",
-      "ChangeCopyright"
+      "ChangeCopyright",
+      "TransposeHarmony"
       };
 
 static bool UNDO = false;
@@ -594,6 +597,19 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->s = s;
                   }
                   break;
+            case UndoOp::TransposeHarmony:
+                  {
+                  Harmony* h = static_cast<Harmony*>(i->element1);
+                  int semitones = i->val1;
+                  if (undo)
+                        semitones = -semitones;
+                  int baseTpc = h->baseTpc();
+                  int rootTpc = h->rootTpc();
+                  h->setBaseTpc(transposeTpc(baseTpc, semitones));
+                  h->setRootTpc(transposeTpc(rootTpc, semitones));
+                  h->buildText();
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -884,6 +900,21 @@ void Score::undoChangeCopyright(const QString& s)
       UndoOp i;
       i.type  = UndoOp::ChangeCopyright;
       i.s    = s;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoTransposeHarmony
+//---------------------------------------------------------
+
+void Score::undoTransposeHarmony(Harmony* h, int semitones)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type  = UndoOp::TransposeHarmony;
+      i.element1 = h;
+      i.val1     = semitones;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

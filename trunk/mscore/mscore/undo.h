@@ -84,7 +84,8 @@ struct UndoOp {
             SigInsertTime,
             FixTicks,
             ChangeBeamMode,
-            ChangeCopyright
+            ChangeCopyright,
+            TransposeHarmony
             };
       UndoType type;
       Element* element1;

@@ -63,6 +63,7 @@ class MidiEvent;
 struct MNote;
 class Excerpt;
 class EventMap;
+class Harmony;
 
 struct Style;
 struct SigEvent;
@@ -285,6 +286,7 @@ class Score : public QObject {
 
       Rest* addRest(int tick, int len, int track);
       void lyricsEndEdit();
+      void harmonyEndEdit();
 
    public:
       Score();
@@ -347,6 +349,7 @@ class Score : public QObject {
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeCopyright(const QString&);
+      void undoTransposeHarmony(Harmony*, int);
 
       void setNote(int tick, int track, int pitch, int len);
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
