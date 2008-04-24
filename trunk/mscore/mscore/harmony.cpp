@@ -415,8 +415,10 @@ unsigned int Harmony::chordListSize()
 void Harmony::initHarmony()
       {
       for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            if (chordList[i].name)
-                  chordHash[i] = &chordList[i];
+            if (chordList[i].name) {
+                  int id = chordList[i].id;
+                  chordHash[id] = &chordList[i];
+                  }
             }
       }
 
