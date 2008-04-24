@@ -702,9 +702,9 @@ void MuseScore::startAutoSave()
 void MuseScore::autoSaveTimerTimeout()
       {
       foreach(Score* s, scoreList) {
-            if (s->dirty()) {
+            if (s->dirty() && !s->created()) {
                   printf("auto save <%s>\n", qPrintable(s->name()));
-                  s->saveFile();
+                  s->saveFile(true);
                   }
             }
       if (preferences.autoSave) {
@@ -1675,7 +1675,7 @@ int main(int argc, char* argv[])
             bool rv;
             if (fn.endsWith(".msc")) {
                   QFileInfo fi(fn);
-                  rv = mscore->saveFile(fi);
+                  rv = mscore->saveFile(fi, false);
                   }
             else if (fn.endsWith(".xml"))
                   rv = cs->saveXml(fn);

@@ -1,4 +1,6 @@
 24.4.8 (ws)
+      - dont leave editmode when autosave a file
+      - dont autosave new created files
       - extend the chord table with some new chords
       - new function: transpose chords
 23.4.8 (ws)

@@ -136,7 +136,7 @@ bool MuseScore::checkDirty(Score* s)
                QMessageBox::Save);
             if (n == QMessageBox::Save) {
                   if (s->isSavable()) {
-                        if (!s->saveFile())
+                        if (!s->saveFile(false))
                               return true;
                         }
                   else {
@@ -211,7 +211,7 @@ void MuseScore::loadFile()
 
 bool MuseScore::saveFile()
       {
-      bool val = cs->saveFile();
+      bool val = cs->saveFile(false);
       setWindowTitle("MuseScore: " + cs->name());
       tab->setTabText(tab->currentIndex(), cs->name());
       return val;
@@ -226,7 +226,7 @@ bool MuseScore::saveFile()
  Return true if OK and false on error.
  */
 
-bool Score::saveFile()
+bool Score::saveFile(bool autosave)
       {
       if (created()) {
             QString fn = QFileDialog::getSaveFileName(
@@ -250,7 +250,7 @@ bool Score::saveFile()
             else if (fileInfo()->suffix() == "xml")
                   rv = saveXml(fileInfo()->absoluteFilePath());
             else
-                  rv = mscore->saveFile(*fileInfo());
+                  rv = mscore->saveFile(*fileInfo(), autosave);
             if (rv)
                   setDirty(false);
             return rv;
@@ -274,7 +274,7 @@ bool Score::saveFile()
       else if (qf->suffix() == "xml")
             rv = saveXml(temp.fileName());
       else
-            rv = mscore->saveFile(&temp);
+            rv = mscore->saveFile(&temp, autosave);
 
       if (!rv)
             return false;
@@ -351,7 +351,7 @@ bool MuseScore::saveAs()
             if (!fn.endsWith(".msc"))
                   fn.append(".msc");
             QFileInfo fi(fn);
-            rv = saveFile(fi);
+            rv = saveFile(fi, false);
             if (rv && cs->created()) {
                   cs->fileInfo()->setFile(fn);
                   setWindowTitle("MuseScore: " + cs->name());
@@ -549,7 +549,7 @@ void MuseScore::newFile()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveFile(QFileInfo& info)
+bool MuseScore::saveFile(QFileInfo& info, bool autosave)
       {
       QString ext(".msc");
 
@@ -562,7 +562,7 @@ bool MuseScore::saveFile(QFileInfo& info)
             QMessageBox::critical(this, tr("MuseScore: Open File"), s);
             return false;
             }
-      bool rv = saveFile(&fp);
+      bool rv = saveFile(&fp, autosave);
       fp.close();
       return rv;
       }
@@ -719,7 +719,7 @@ void Score::saveStyle()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveFile(QFile* f)
+bool MuseScore::saveFile(QFile* f, bool autosave)
       {
       Xml xml(f);
       xml.header();
@@ -732,7 +732,7 @@ bool MuseScore::saveFile(QFile* f)
       if (::symbolPalette)
             ::symbolPalette->write(xml, "Symbols");
 
-      cs->write(xml);
+      cs->write(xml, autosave);
 
       xml.etag();
       if (f->error() != QFile::NoError) {

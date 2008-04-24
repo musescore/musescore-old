@@ -426,12 +426,12 @@ void Score::read(QString name)
 //   write
 //---------------------------------------------------------
 
-void Score::write(Xml& xml)
+void Score::write(Xml& xml, bool autosave)
       {
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", division);
       xml.curTrack = -1;
-      if (editObject) {                          // in edit mode?
+      if (!autosave && editObject) {                          // in edit mode?
             endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
@@ -1958,7 +1958,7 @@ Score* Score::clone()
       xml.header();
 
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-      write(xml);
+      write(xml, false);
       xml.etag();
 
       buffer.close();
