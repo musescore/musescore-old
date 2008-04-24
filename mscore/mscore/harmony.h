@@ -27,11 +27,32 @@
 #include "text.h"
 
 //---------------------------------------------------------
+//   class HDegree
+//---------------------------------------------------------
+
+enum HDegreeType {
+      UNDEF, ADD, ALTER, SUBTRACT
+      };
+
+class HDegree {
+      int _value;
+      int _alter;
+      int _type;
+
+   public:
+      HDegree() { _value = 0; _alter = 0; _type = UNDEF; }
+      HDegree(int v, int a, int t) { _value = v; _alter = a; _type = t; }
+      int value() const { return _value; }
+      int alter() const { return _alter; }
+      int type() const  { return _type; }
+      };
+
+//---------------------------------------------------------
 //   HChord
 //---------------------------------------------------------
 
 class HChord {
-      static const HChord C0;
+//      static const HChord C0;
 
    protected:
       int keys;
@@ -62,27 +83,7 @@ class HChord {
       void print() const;
 
       QString name(int tpc);
-      };
-
-//---------------------------------------------------------
-//   class HDegree
-//---------------------------------------------------------
-
-enum HDegreeType {
-      UNDEF, ADD, ALTER, SUBTRACT
-      };
-
-class HDegree {
-      int _value;
-      int _alter;
-      int _type;
-
-   public:
-      HDegree() { _value = 0; _alter = 0; _type = UNDEF; }
-      HDegree(int v, int a, int t) { _value = v; _alter = a; _type = t; }
-      int value() const { return _value; }
-      int alter() const { return _alter; }
-      int type() const  { return _type; }
+      void add(const QList<HDegree>& degreeList);
       };
 
 //---------------------------------------------------------
