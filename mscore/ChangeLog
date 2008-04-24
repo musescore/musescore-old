@@ -1,3 +1,6 @@
+24.4.8 (ws)
+      - extend the chord table with some new chords
+      - new function: transpose chords
 23.4.8 (ws)
       - on popular demand: configurable auto save function
       - layout all after loading style

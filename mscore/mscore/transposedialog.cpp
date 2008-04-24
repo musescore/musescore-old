@@ -26,6 +26,7 @@
 #include "note.h"
 #include "key.h"
 #include "staff.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -109,6 +110,13 @@ void Score::transpose()
                               undoChangePitch(note, note->pitch() + diff);
                         }
                   }
+            foreach (Element* e, *mb->el()) {
+                  if (e->type() != HARMONY)
+                        continue;
+                  Harmony* harmony = static_cast<Harmony*>(e);
+                  undoTransposeHarmony(harmony, diff);
+                  }
+
             }
       if (transposeKeys) {
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {

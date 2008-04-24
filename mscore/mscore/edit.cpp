@@ -1075,7 +1075,6 @@ void Score::chordTab(bool back)
             printf("chordTab: no segment\n");
             return;
             }
-      // int staff     = cn->staffIdx();
 
       // search next chord
       if (back) {

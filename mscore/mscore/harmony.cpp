@@ -653,7 +653,8 @@ void Harmony::write(Xml& xml) const
                         }
                   }
             }
-      Text::writeProperties(xml);
+      else
+            Text::writeProperties(xml);
       xml.etag();
       }
 
@@ -909,7 +910,7 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
       QString s = ss.simplified();
       int n = s.size();
       if (n < 1) {
-            printf("parseHarmony failed <%s>\n", qPrintable(ss));
+            printf("harmony is empty\n");
             return 0;
             }
       bool germanNames = score()->style()->useGermanNoteNames;
@@ -930,11 +931,11 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
       else
             s = s.mid(idx);
       s = s.toLower();
-      for (unsigned i = 1; i < sizeof(chordList)/sizeof(*chordList); ++i) {
+      for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
             if (QString(chordList[i].name).toLower() == s)
                   return &chordList[i];
             }
-      printf("2:parseHarmony failed <%s>\n", qPrintable(ss));
+      printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
       return 0;
       }
 
@@ -1015,6 +1016,22 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
 void Harmony::setChordId(int id)
       {
       _descr = chordHash[id];
+      }
+
+//---------------------------------------------------------
+//   harmonyEndEdit
+//---------------------------------------------------------
+
+void Score::harmonyEndEdit()
+      {
+      Harmony* harmony = static_cast<Harmony*>(editObject);
+      Harmony* origH   = static_cast<Harmony*>(origEditObject);
+
+      if (harmony->isEmpty() && origH->isEmpty()) {
+            Measure* measure = (Measure*)(harmony->parent());
+printf("remove empty harmony\n");
+            measure->remove(harmony);
+            }
       }
 
 

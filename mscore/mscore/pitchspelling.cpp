@@ -33,15 +33,15 @@
 //    "line of fifth's" LOF
 
 static const int spellings[] = {
-//          bb  b   -   #  ##
-            0,  7, 14, 21, 28,  // C
-            2,  9, 16, 23, 30,  // D
-            4, 11, 18, 25, 32,  // E
-           -1,  6, 13, 20, 27,  // F
-            1,  8, 15, 22, 29,  // G
-            3, 10, 17, 24, 31,  // A
-            5, 12, 19, 26, 33,  // B
-            };
+//     bb  b   -   #  ##
+       0,  7, 14, 21, 28,  // C
+       2,  9, 16, 23, 30,  // D
+       4, 11, 18, 25, 32,  // E
+      -1,  6, 13, 20, 27,  // F
+       1,  8, 15, 22, 29,  // G
+       3, 10, 17, 24, 31,  // A
+       5, 12, 19, 26, 33,  // B
+       };
 
 //---------------------------------------------------------
 //   line2tpc
@@ -629,5 +629,25 @@ void spell(QList<Note*>& notes)
             // advance to next window
             start += 3;
             }
+      }
+
+//---------------------------------------------------------
+//   transposeTpc
+//---------------------------------------------------------
+
+int transposeTpc(int tpc, int semitones)
+      {
+      if (semitones == 0)
+            return tpc;
+      if (tpc == INVALID_TPC)
+            return INVALID_TPC;
+      if (semitones < 0)
+            semitones = -((-semitones) % 12);
+      else
+            semitones = (semitones % 12);
+      if (semitones == 0)
+            return tpc;
+      int pitch = tpc2pitch(tpc) + semitones;
+      return pitch2tpc(pitch);
       }
 
