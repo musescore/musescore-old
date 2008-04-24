@@ -243,6 +243,12 @@ void HChord::add(const QList<HDegree>& degreeList)
             int dv  = degreeTable[(d.value() - 1) % 7] + d.alter();
             int dv1 = degreeTable[(d.value() - 1) % 7];
 
+            if (d.value() == 7 && d.alter() == 0) {
+                  // DEBUG: seventh degree is Bb, not B
+                  //        except Maj   (TODO)
+                  dv -= 1;
+                  }
+
             if (d.type() == ADD)
                   *this += dv;
             else if (d.type() == ALTER) {
@@ -251,9 +257,9 @@ void HChord::add(const QList<HDegree>& degreeList)
                         *this += dv;
                         }
                   else {
-                        printf("ALTER: chord does not contain degree %d(%d):",
-                           d.value(), d.alter());
-                        print();
+//                        printf("ALTER: chord does not contain degree %d(%d):",
+//                           d.value(), d.alter());
+//                        print();
                         *this += dv;      // DEBUG: default to add
                         }
                   }
@@ -315,25 +321,25 @@ const ChordDescription Harmony::chordList[] = {
 
 /*40*/      { 40, "5",  "power", HChord("C G") },  // power
 
-            { 56, "7+",  "augmented-seventh", HChord("C E Ab") },        // augmented 7th
-            { 57, "9+",  "augmented-ninth",   HChord("C E Ab Bb D") },   // augmented 9th
-            { 58, "13+",        0,            HChord() },
-            { 59, "(blues)",    0,            HChord() },   // ??
+            { 56, "7+",  "augmented-seventh",      HChord("C E Ab") },        // augmented 7th
+            { 57, "9+",  "augmented-ninth",        HChord("C E Ab Bb D") },   // augmented 9th
+            { 58, "13+",        0,                 HChord() },
+            { 59, "(blues)",    0,                 HChord() },   // ??
 
-/*60*/      { 60, "7(Blues)",   0, HChord() },   // ??
-            { 64, "7",  "dominant-seventh",      HChord("C E G Bb") },        // dominant-seventh
-            { 65, "13", "dominant-13th",         HChord("C E G Bb D F A") },  // dominant 13th
+/*60*/      { 60, "7(Blues)",                   0, HChord() },   // ??
+            { 64, "7",  "dominant-seventh",        HChord("C E G Bb") },        // dominant-seventh
+            { 65, "13", "dominant-13th",           HChord("C E G Bb D F A") },  // dominant 13th
             { 66, "7b13",       0, HChord() },
             { 67, "7#11",       0, HChord() },
             { 68, "13#11",      0, HChord() },
             { 69, "7#11b13",    0, HChord() },
 
-/*70*/      { 70, "9", "dominant-ninth", HChord("C Bb D F") },
+/*70*/      { 70, "9",          "dominant-ninth",  HChord("C Bb D F") },
             { 71, "9b13",       0, HChord() },
             { 73, "9#11",       0, HChord() },
             { 74, "13#11",      0, HChord() },
             { 75, "9#11b13",    0, HChord() },
-            { 76, "7b9",        0, HChord() },
+            { 76, "7b9", "suspended-fourth addb9", HChord("C F G Db") },
             { 77, "13b9",       0, HChord() },
             { 78, "7b9b13",     0, HChord() },
             { 79, "7b9#11",     0, HChord() },
@@ -527,15 +533,17 @@ void Harmony::resolveDegreeList()
 
       HChord hc = _descr ? _descr->chord : HChord();
 
-      printf("resolve: <%s> <%s>: ", _descr->name, _descr->xml);
-      _descr->chord.print();
-
       hc.add(_degreeList);
+
+      printf("resolveDegreeList: <%s> <%s>: ", _descr->name, _descr->xml);
+      hc.print();
+
+//      _descr->chord.print();
 
       // try to find the chord in chordList
       for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
-            if (chordList[i].chord == hc && chordList[i].name != 0) {
-//                  printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
+            if ((chordList[i].chord == hc) && chordList[i].name != 0) {
+printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
                   _descr = &chordList[i];
                   _degreeList.clear();
                   break;
@@ -994,8 +1002,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
       {
       QString lowerCaseKind = kind.toLower();
       for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
-            QStringList sl(QString(chordList[i].xml).split(" ", QString::SkipEmptyParts));
-            if (lowerCaseKind == sl.value(0))
+            if (lowerCaseKind == chordList[i].xml)
                   return &chordList[i];
             }
       return 0;

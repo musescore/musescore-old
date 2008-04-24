@@ -2534,10 +2534,10 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       else {
             ha->setDescr(d);
+            ha->resolveDegreeList();
             ha->buildText();
             }
       ha->setVisible(printObject == "yes");
-      ha->resolveDegreeList();
       measure->add(ha);
       }
 
