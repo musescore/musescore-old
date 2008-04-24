@@ -69,7 +69,8 @@ void ScoreLayout::rebuildBspTree()
       bspTree.initialize(r, el.size());
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
-            bspTree.insert(e);
+            if (e)                              // DEBUG
+                  bspTree.insert(e);
             }
       }
 

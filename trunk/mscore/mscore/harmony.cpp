@@ -29,7 +29,6 @@
 #include "sym.h"
 #include "system.h"
 
-const HChord HChord::C0(0,3,6,9);
 QHash<int, const ChordDescription*> Harmony::chordHash;
 
 //---------------------------------------------------------
@@ -114,6 +113,9 @@ void HChord::rotate(int semiTones)
 
 QString HChord::name(int tpc)
       {
+      static const HChord C0(0,3,6,9);
+      static const HChord C1(0,3);
+
       QString buf = tpc2name(tpc, false);
       HChord c(*this);
 
@@ -123,7 +125,11 @@ QString HChord::name(int tpc)
 
       // special cases
       if (c == C0) {
-            buf += "o";
+            buf += "dim";
+            return buf;
+            }
+      if (c == C1) {
+            buf += "no5";
             return buf;
             }
 
@@ -170,9 +176,9 @@ QString HChord::name(int tpc)
             }
       else {
             if (c.contains(6))
-                  buf += "5-";
+                  buf += "b5";
             if (c.contains(8))
-                  buf += "5+";
+                  buf += "#5";
             }
 
       // 6
@@ -185,21 +191,21 @@ QString HChord::name(int tpc)
 
       // 9
       if (c.contains(1))
-            buf += "9-";
+            buf += "b9";
       if (c.contains(2))
             buf += "9";
       if (sharp9)
-            buf += "9+";
+            buf += "#9";
 
       // 11
       if (nat11)
             buf += "11 ";
       if (sharp11)
-            buf += "11+";
+            buf += "#11";
 
       // 13
       if (flat13)
-            buf += "13-";
+            buf += "b13";
       if (nat13)
             buf += "13";
       return buf;
@@ -218,6 +224,51 @@ void HChord::print() const
                   printf(" %s", names[i]);
             }
       printf("\n");
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void HChord::add(const QList<HDegree>& degreeList)
+      {
+      // convert degrees to semitones
+      static const int degreeTable[] = {
+            // 1  2  3  4  5  6   7
+            // C  D  E  F  G  A   B
+               0, 2, 4, 5, 7, 9, 11
+            };
+      // factor in the degrees
+      foreach(const HDegree d, degreeList) {
+            int dv  = degreeTable[(d.value() - 1) % 7] + d.alter();
+            int dv1 = degreeTable[(d.value() - 1) % 7];
+
+            if (d.type() == ADD)
+                  *this += dv;
+            else if (d.type() == ALTER) {
+                  if (contains(dv1)) {
+                        *this -= dv1;
+                        *this += dv;
+                        }
+                  else {
+                        printf("ALTER: chord does not contain degree %d(%d):",
+                           d.value(), d.alter());
+                        print();
+                        *this += dv;      // DEBUG: default to add
+                        }
+                  }
+            else if (d.type() == SUBTRACT) {
+                  if (contains(dv1))
+                        *this -= dv1;
+                  else {
+                        printf("SUB: chord does not contain degree %d(%d):",
+                           d.value(), d.alter());
+                        print();
+                        }
+                  }
+            else
+                  printf("degree type %d not supported\n", d.type());
+            }
       }
 
 //---------------------------------------------------------
@@ -241,7 +292,7 @@ const ChordDescription Harmony::chordList[] = {
             { 10, "Maj13",   "major-13th",    HChord("C E G B D F# A") },
             { 12, "+",       0,               HChord("C E G#") },       // +5, #5, +, augmented triad
             { 13, "Maj7#5",  0,               HChord("C D E Ab B") },
-            { 14, "69",      0,               HChord("C D E G A") },
+            { 14, "69",      "maj69",         HChord("C D E G A") },
             { 15, "2",       0,               HChord("C D E G") },      // major add 2
             { 16, "m",       "minor",         HChord("C Eb G") },
             { 17, "maug",    0,               HChord("C D# G#") },
@@ -254,7 +305,7 @@ const ChordDescription Harmony::chordList[] = {
             { 23, "m6",      "minor-sixth",   HChord("C Eb G A") },
             { 24, "m#5",     0,               HChord("C Eb Ab") },
             { 25, "m7#5",    0,               HChord("C Eb Ab Bb") },
-            { 26, "m69",     0,               HChord("C D Eb G A") },
+            { 26, "m69",     0,               HChord("C D Eb G A") },   // minor 6th add9
             { 28, "Maj7Lyd", 0,               HChord("C D E G A") },
             { 29, "Maj7b5",  0,               HChord("C E Gb B") },
 
@@ -264,10 +315,10 @@ const ChordDescription Harmony::chordList[] = {
 
 /*40*/      { 40, "5",  "power", HChord("C G") },  // power
 
-            { 56, "7+",         0, HChord() },
-            { 57, "9+",         0, HChord() },
-            { 58, "13+",        0, HChord() },
-            { 59, "(blues)",    0, HChord() },   // ??
+            { 56, "7+",  "augmented-seventh", HChord("C E Ab") },        // augmented 7th
+            { 57, "9+",  "augmented-ninth",   HChord("C E Ab Bb D") },   // augmented 9th
+            { 58, "13+",        0,            HChord() },
+            { 59, "(blues)",    0,            HChord() },   // ??
 
 /*60*/      { 60, "7(Blues)",   0, HChord() },   // ??
             { 64, "7",  "dominant-seventh",      HChord("C E G Bb") },        // dominant-seventh
@@ -325,8 +376,8 @@ const ChordDescription Harmony::chordList[] = {
             { 112, "13#5#9#11",    0, HChord() },
             { 113, "7alt",         0, HChord() },
 
-            { 128, "7sus", "suspended-fourth addb7", HChord("C F G Bb") },
-            { 129, "13sus",        0,                HChord("C F G A Bb") },
+            { 128, "7sus", "suspended-fourth add7", HChord("C F G Bb")   },
+            { 129, "13sus",        0,               HChord("C F G A Bb") },
 
 /*130*/     { 130, "7susb13",      0, HChord("C F G Ab Bb") },  //?? not checked
             { 131, "7sus#11",      0, HChord("C F G Gb Bb") },
@@ -395,7 +446,8 @@ const ChordDescription Harmony::chordList[] = {
             { 194, "Maj11",    "major-11th",       HChord("C E G B D F") },  // major 11th
             { 195, "Tristan",  "tristan",          HChord("C F# A# D") },    // Tristan
 
-            { 64, "7",         "dominant",         HChord("C E G Bb") },     // dominant-seventh
+            { 64, "7",         "dominant",          HChord("C E G Bb") },     // dominant-seventh
+            { 128, "7sus4","suspended-fourth add7", HChord("C F G Bb")   },
       };
 
 //---------------------------------------------------------
@@ -426,91 +478,23 @@ void Harmony::initHarmony()
 //   harmonyName
 //---------------------------------------------------------
 
-// convert degrees to semitones
-
-static int degreeTable[] = {
-      // 1  2  3  4  5  6   7
-      // C  D  E  F  G  A   B
-         0, 2, 4, 5, 7, 9, 11
-      };
-
 QString Harmony::harmonyName() const
       {
       bool germanNames = score()->style()->useGermanNoteNames;
-/*
-      printf("Harmony::harmonyName(root=%d extension=%p base=%d list=%p", root, extension, base, degreeList);
-      if (degreeList)
-            printf(" size=%d)", degreeList->size());
-      else
-            printf(")");
-*/
-      HChord hc;
+
+      HChord hc = _descr ? _descr->chord : HChord();
       QString s;
 
-      if (_descr)
-            hc = _descr->chord;
-//      printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
-//      printf("\n");
-
       if (!_degreeList.isEmpty()) {
-/*
-            // print the chord without the degree modification(s)
-            for (int i = 0; i < 12; i++)
-                  if (hc.contains(i))
-                        printf(" %s", qPrintable(tpc2name(i+1, germanNames)));
-            printf("\n");
-*/
-            // factor in the degrees
-            for (int i = 0; i < _degreeList.size(); i++) {
-                  HDegree d = _degreeList[i];
-                  int dv = degreeTable[(d.value() - 1) % 7] + d.alter();
-
-                  if (d.type() == ADD) {
-                        printf("hc: ");
-                        hc.print();
-                        hc += dv;
-                        printf(" add degree value=%d alter=%d, dv=%d\n",
-                           d.value(), d.alter(), dv);
-                        hc.print();
-                        printf("hc: ");
-                        }
-                  else if (d.type() == ALTER) {
-//                        printf(" alter degree value=%d alter=%d\n", d.value(), d.alter());
-                        if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                              hc -= (degreeTable[(d.value() - 1) % 7]);
-                              hc += dv;
-                              }
-                        else
-                              printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                        }
-                  else if (d.type() == SUBTRACT) {
-//                        printf(" subtract degree value=%d alter=%d\n", d.value(), d.alter());
-                        if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                              hc -= (degreeTable[(d.value() - 1) % 7]);
-                              }
-                        else
-                              printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                        }
-                  else printf("degree type %d not supported\n", d.type());
-                  }
-/*
-            // print the chord with the degree modification(s)
-            for (int i = 0; i < 12; i++)
-                  if (hc.contains(i))
-                        printf(" %s", qPrintable(tpc2name(i+1, germanNames)));
-            printf(" HChord.name=%s", qPrintable(hc.name(0, 0)));
-            printf("\n");
-*/
+            hc.add(_degreeList);
             // try to find the chord in chordList
             const ChordDescription* newExtension = 0;
             for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
                   if (chordList[i].chord == hc && chordList[i].name != 0) {
-                        printf(" found in table as %s\n", chordList[i].name);
                         newExtension = &chordList[i];
                         break;
                         }
                   }
-
             // now determine the chord name
             if (newExtension)
                   s = tpc2name(_rootTpc, germanNames) + newExtension->name;
@@ -523,13 +507,10 @@ QString Harmony::harmonyName() const
             if (_descr)
                   s += _descr->name;
             }
-
       if (_baseTpc != INVALID_TPC) {
             s += "/";
             s += tpc2name(_baseTpc, germanNames);
             }
-
-//      printf(" %s\n", qPrintable(s));
       return s;
       }
 
@@ -546,38 +527,15 @@ void Harmony::resolveDegreeList()
 
       HChord hc = _descr ? _descr->chord : HChord();
 
-      // factor in the degrees
-      for (int i = 0; i < _degreeList.size(); i++) {
-            HDegree d = _degreeList[i];
-            int dv = degreeTable[(d.value() - 1) % 7] + d.alter();
+      printf("resolve: <%s> <%s>: ", _descr->name, _descr->xml);
+      _descr->chord.print();
 
-            if (d.type() == ADD) {
-                  hc += dv;
-                  }
-            else if (d.type() == ALTER) {
-                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                        hc -= (degreeTable[(d.value() - 1) % 7]);
-                        hc += dv;
-                        }
-                  else
-                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                  }
-            else if (d.type() == SUBTRACT) {
-                  if (hc.contains(degreeTable[(d.value() - 1) % 7])) {
-                        hc -= (degreeTable[(d.value() - 1) % 7]);
-                        }
-                  else
-                        printf("chord does not contain degree %d\n", degreeTable[(d.value() - 1) % 7]);
-                  }
-            else
-                  printf("degree type %d not supported\n", d.type());
-            }
-
+      hc.add(_degreeList);
 
       // try to find the chord in chordList
       for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
             if (chordList[i].chord == hc && chordList[i].name != 0) {
-                  printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
+//                  printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
                   _descr = &chordList[i];
                   _degreeList.clear();
                   break;
@@ -1037,7 +995,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
       QString lowerCaseKind = kind.toLower();
       for (unsigned i = 0; i < sizeof(chordList)/sizeof(*chordList); ++i) {
             QStringList sl(QString(chordList[i].xml).split(" ", QString::SkipEmptyParts));
-            if (lowerCaseKind == sl[0])
+            if (lowerCaseKind == sl.value(0))
                   return &chordList[i];
             }
       return 0;
