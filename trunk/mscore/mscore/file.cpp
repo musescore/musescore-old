@@ -1153,8 +1153,10 @@ bool Score::saveSvg(const QString& saveName)
 
 bool Score::savePng(const QString& name)
       {
+      _printing = !preferences.pngScreenShot;
+
       QRectF r;
-      if (canvas()->lassoRect().isEmpty()) {
+      if (!preferences.pngScreenShot || canvas()->lassoRect().isEmpty()) {
             Page* page = _layout->pages().front();
             r = page->bbox();
             canvas()->setLassoRect(r);
