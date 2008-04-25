@@ -294,6 +294,7 @@ void Tuplet::write(Xml& xml, int id) const
 
 void Tuplet::read(QDomElement e)
       {
+      _id = e.attribute("id", "0").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();

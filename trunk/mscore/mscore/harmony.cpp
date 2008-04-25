@@ -339,7 +339,6 @@ const ChordDescription Harmony::chordList[] = {
             { 73, "9#11",       0, HChord() },
             { 74, "13#11",      0, HChord() },
             { 75, "9#11b13",    0, HChord() },
-            { 76, "7b9", "suspended-fourth addb9", HChord("C F G Db") },
             { 77, "13b9",       0, HChord() },
             { 78, "7b9b13",     0, HChord() },
             { 79, "7b9#11",     0, HChord() },
@@ -352,7 +351,8 @@ const ChordDescription Harmony::chordList[] = {
             { 85, "9#11",       0, HChord() },
             { 86, "13#9#11",    0, HChord() },
             { 87, "7#9#11b13",  0, HChord() },
-            { 88, "7b5",        0, HChord() },
+            { 88, "7b5",        0,                 HChord("C E Gb Bb") },
+            { 76, "7b9", "suspended-fourth addb9", HChord("C F  G Bb") },
             { 89, "13b5",       0, HChord() },
 
 /*90*/      { 90, "7b5b13",     0, HChord() },
@@ -382,78 +382,83 @@ const ChordDescription Harmony::chordList[] = {
             { 112, "13#5#9#11",    0, HChord() },
             { 113, "7alt",         0, HChord() },
 
-            { 128, "7sus", "suspended-fourth add7", HChord("C F G Bb")   },
+
             { 129, "13sus",        0,               HChord("C F G A Bb") },
 
-/*130*/     { 130, "7susb13",      0, HChord("C F G Ab Bb") },  //?? not checked
-            { 131, "7sus#11",      0, HChord("C F G Gb Bb") },
             { 132, "13sus#11",     0, HChord() },
-            { 133, "7sus#11b13",   0, HChord() },
             { 134, "9sus",         0, HChord("C D F G Bb") },   // 11 - 9sus
             { 135, "9susb13",      0, HChord() },
             { 136, "9sus#11",      0, HChord() },
             { 137, "13sus#11",     0, HChord() },
             { 138, "9sus#11b13",   0, HChord() },
 
-/*140*/     { 140, "7susb9",       0, HChord() },
-            { 141, "13susb9",      0, HChord() },
-            { 142, "7susb9b13",    0, HChord() },
-            { 143, "7susb9#11",    0, HChord() },
-            { 144, "13susb9#11",   0, HChord() },
-            { 145, "7susb9#11b13", 0, HChord() },
-            { 146, "7sus#9",       0, HChord() },
-            { 147, "13sus#9",      0, HChord() },
-            { 148, "7sus#9b13",    0, HChord() },
-            { 149, "9sus#11",      0, HChord() },
+            { 128, "7sus",         "suspended-fourth add7",                    HChord("C F G Bb")        },
+            { 152, "7susb5",       "suspended-fourth add7 altb5" ,             HChord("C F Gb Bb")       },
+/*160*/     { 160, "7susb5#9",     "suspended-fourth add7 altb5 add#9",        HChord("C F Gb Bb Eb")    },
+            { 162, "7susb5#9b13",  "suspended-fourth add7 altb5 add#9 addb13", HChord("C F Gb Bb Eb Ab") },
+            { 157, "7susb5b9",     "suspended-fourth add7 altb5 addb9",        HChord("C F Gb Bb Db")    },
+            { 159, "7susb5b9b13",  "suspended-fourth add7 altb5 addb9 addb13", HChord("C F Gb Bb Db Ab") },
+            { 154, "7susb5b13",    "suspended-fourth add7 altb5 addb13",       HChord("C F Gb Bb Ab")    },
 
-/*150*/     { 150, "13sus#9#11",   0, HChord() },
-            { 151, "7sus#9#11b13", 0, HChord() },
-            { 152, "7susb5",       0, HChord() },
-            { 153, "13susb5",      0, HChord() },
-            { 154, "7susb5b13",    0, HChord() },
-            { 155, "9susb5",       0, HChord() },
-            { 156, "9susb5b13",    0, HChord() },
-            { 157, "7susb5b9",     0, HChord() },
-            { 158, "13susb5b9",    0, HChord() },
-            { 159, "7susb5b9b13",  0, HChord() },
+            { 163, "7sus#5",       "suspended-fourth add7 alt#5",              HChord("C F Ab Bb")       },
+            { 169, "7sus#5b9",     "suspended-fourth add7 alt#5 addb9",        HChord("C F Ab Bb Db")    },
+            { 171, "7sus#5b9#11",  "suspended-fourth add7 alt#5 addb9 add#11", HChord("C F Ab Bb Db Gb") },
+            { 173, "7sus#5#9",     "suspended-fourth add7 alt#5 add#9",        HChord("C F Ab Bb Eb")    },
+            { 175, "7sus#5#9#11",  "suspended-fourth add7 alt#5 add#9 add#11", HChord("C F Ab Bb Eb Gb") },
+            { 165, "7sus#5#11",    "suspended-fourth add7 alt#5 add#11",       HChord("C F Ab Bb")       },
 
-/*160*/     { 160, "7susb5#9",     0, HChord() },
-            { 161, "13susb5#9",    0, HChord() },
-            { 162, "7susb5#9b13",  0, HChord() },
-            { 163, "7sus#5",       0, HChord() },
-            { 164, "13sus#5",      0, HChord() },
-            { 165, "7sus#5#11",    0, HChord() },
-            { 166, "13sus#5#11",   0, HChord() },
-            { 167, "9sus#5",       0, HChord() },
-            { 168, "9sus#5#11",    0, HChord() },
-            { 169, "7sus#5b9",     0, HChord() },
+/*140*/     { 140, "7susb9",       "suspended-fourth add7 addb9",              HChord("C F G Bb Db") },
+            { 146, "7sus#9",       "suspended-fourth add7 add#9",              HChord("C F G Bb Eb") },
+            { 143, "7susb9#11",     0, HChord() },
+            { 145, "7susb9#11b13",  0, HChord() },
+            { 142, "7susb9b13",     0, HChord() },
+            { 151, "7sus#9#11b13",  0, HChord() },     //??
+            { 148, "7sus#9b13",     0, HChord() },
 
-/*170*/     { 170, "13sus#5b9",    0, HChord() },
-            { 171, "7sus#5b9#11",  0, HChord() },
-            { 172, "13sus#5b9#11", 0, HChord() },
-            { 173, "7sus#5#9",     0, HChord() },
-            { 174, "13sus#5#9#11", 0, HChord() },
-            { 175, "7sus#5#9#11",  0, HChord() },
-            { 176, "13sus#5#9#11", 0, HChord() },
-            { 177, "4",            0, HChord() },
+            { 131, "7sus#11",       0, HChord("C F G Gb Bb") },
+            { 133, "7sus#11b13",    0, HChord("C F G Gb Bb Ab") },
 
-            { 184, "sus",          0,              HChord("C F G") },         // sus4
+/*130*/     { 130, "7susb13",       0, HChord("C F G Ab Bb") },
 
-            { 185, "dim7",   "diminished-seventh", HChord() },  // mscore ext.
-            { 186, "sus2",   "suspended-second",   HChord("C D G") },      // suspended 2nd chord
-            { 187, "mb3b13", "neapolitan",         HChord() },
-            { 188, "#13",    "italian",            HChord() },
-            { 189, "#11#13",  "french",            HChord() },
+            { 141, "13susb9",       0, HChord() },
+            { 144, "13susb9#11",    0, HChord() },
+            { 147, "13sus#9",       0, HChord() },
+            { 149, "9sus#11",       0, HChord() },
 
-/*190*/     { 190, "add#13",   "german",           HChord() },
-            { 191, "6/add9",   "maj69",            HChord() },
-            { 192, "sus4",     "suspended-fourth", HChord("C F G") },        // sus4
-            { 193, "11",       "dominant-11th",    HChord("C E G Bb D F") }, // dominant 11th / 9sus
-            { 194, "Maj11",    "major-11th",       HChord("C E G B D F") },  // major 11th
-            { 195, "Tristan",  "tristan",          HChord("C F# A# D") },    // Tristan
+/*150*/     { 150, "13sus#9#11",    0, HChord() },
+            { 153, "13susb5",       0, HChord() },
+            { 155, "9susb5",        0, HChord() },
+            { 156, "9susb5b13",     0, HChord() },
+            { 158, "13susb5b9",     0, HChord() },
 
-            { 64, "7",         "dominant",          HChord("C E G Bb") },     // dominant-seventh
-            { 128, "7sus4","suspended-fourth add7", HChord("C F G Bb")   },
+            { 161, "13susb5#9",     0, HChord() },
+            { 164, "13sus#5",       0, HChord() },
+            { 166, "13sus#5#11",    0, HChord() },
+            { 167, "9sus#5",        0, HChord() },
+            { 168, "9sus#5#11",     0, HChord() },
+
+/*170*/     { 170, "13sus#5b9",     0, HChord() },
+            { 172, "13sus#5b9#11",  0, HChord() },
+            { 174, "13sus#5#9#11",  0, HChord() },
+            { 176, "13sus#5#9#11",  0, HChord() },
+            { 177, "4",             0,                       HChord("C F Bb") },
+            { 184, "sus",           0,                       HChord("C F G") },         // sus4
+
+            { 185, "dim7",          "diminished-seventh",    HChord() },  // mscore ext.
+            { 186, "sus2",          "suspended-second",      HChord("C D G") },      // suspended 2nd chord
+            { 187, "mb3b13",        "neapolitan",            HChord() },
+            { 188, "#13",           "italian",               HChord() },
+            { 189, "#11#13",        "french",                HChord() },
+
+/*190*/     { 190, "add#13",        "german",                HChord() },
+            { 191, "6/add9",        "maj69",                 HChord("C E G A D") },
+            { 192, "sus4",          "suspended-fourth",      HChord("C F G") },        // sus4
+            { 193, "11",            "dominant-11th",         HChord("C E G Bb D F") }, // dominant 11th / 9sus
+            { 194, "Maj11",         "major-11th",            HChord("C E G B D F") },  // major 11th
+            { 195, "Tristan",       "tristan",               HChord("C F# A# D") },    // Tristan
+
+            { 64, "7",              "dominant",              HChord("C E G Bb") },     // dominant-seventh
+            { 128, "7sus4",         "suspended-fourth add7", HChord("C F G Bb")   },
       };
 
 //---------------------------------------------------------
@@ -589,7 +594,7 @@ bool Harmony::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("Harmony Properties..."));
       a->setData("props");
       return true;
       }
@@ -640,11 +645,14 @@ void Harmony::write(Xml& xml) const
                         xml.tag("degree-value", hd.value());
                         xml.tag("degree-alter", hd.alter());
                         switch (tp) {
-                              case ADD: xml.tag("degree-type", "add");
+                              case ADD:
+                                    xml.tag("degree-type", "add");
                                     break;
-                              case ALTER: xml.tag("degree-type", "alter");
+                              case ALTER:
+                                    xml.tag("degree-type", "alter");
                                     break;
-                              case SUBTRACT: xml.tag("degree-type", "subtract");
+                              case SUBTRACT:
+                                    xml.tag("degree-type", "subtract");
                                     break;
                               default:
                                     break;
@@ -652,6 +660,7 @@ void Harmony::write(Xml& xml) const
                         xml.etag();
                         }
                   }
+            Element::writeProperties(xml);
             }
       else
             Text::writeProperties(xml);
@@ -910,7 +919,7 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
       QString s = ss.simplified();
       int n = s.size();
       if (n < 1) {
-            printf("harmony is empty\n");
+            printf("harmony is empty %d\n", tick());
             return 0;
             }
       bool germanNames = score()->style()->useGermanNoteNames;
@@ -1029,7 +1038,7 @@ void Score::harmonyEndEdit()
 
       if (harmony->isEmpty() && origH->isEmpty()) {
             Measure* measure = (Measure*)(harmony->parent());
-printf("remove empty harmony\n");
+printf("remove empty harmony %d\n", harmony->tick());
             measure->remove(harmony);
             }
       }

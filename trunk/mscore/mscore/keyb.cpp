@@ -63,7 +63,21 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             int found = false;
             if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
                   // TODO: shift+tab events are filtered by qt
-                  _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier);
+                  _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier, true);
+                  found = true;
+                  }
+            else if (ev->key() == Qt::Key_Left) {
+                  if (e->edit(this, curGrip, ev))
+                        _score->end();
+                  else
+                        _score->lyricsTab(true, true);
+                  found = true;
+                  }
+            else if (ev->key() == Qt::Key_Right) {
+                  if (e->edit(this, curGrip, ev))
+                        _score->end();
+                  else
+                        _score->lyricsTab(false, false);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Return) {

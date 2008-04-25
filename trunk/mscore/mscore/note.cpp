@@ -866,7 +866,7 @@ bool Note::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Chord"));
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("Note Properties..."));
       a->setData("props");
       return true;
       }

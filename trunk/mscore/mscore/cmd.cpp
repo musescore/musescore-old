@@ -1937,6 +1937,19 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
             dm->cmdRemoveEmptySegment(s);
             s = ns;
             }
+
+      foreach(Tuplet* tuplet, *dm->tuplets()) {
+            if (tuplet->staffIdx() == dstStaffIdx)
+                  undoRemoveElement(tuplet);
+            }
+
+      int trackOffset   = (dstStaffIdx - srcStaffIdx) * VOICES;
+      foreach(Tuplet* tuplet, *sm->tuplets()) {
+            tuplet->setParent(dm);
+            tuplet->setTrack(tuplet->track() + trackOffset);
+            undoAddElement(tuplet);
+            }
+
       // add src elements to destination
       int srcTickOffset = sm->tick();
       int dstTickOffset = dm->tick();
@@ -1954,7 +1967,6 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
                   Element* e = s->element(t);
                   if (!e || !e->isChordRest())
                         continue;
-                  int trackOffset = (dstStaffIdx - srcStaffIdx) * VOICES;
                   e->setParent(ns);
                   e->setTick(tick);
                   e->setTrack(e->track() + trackOffset);

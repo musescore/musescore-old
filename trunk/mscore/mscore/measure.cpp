@@ -1178,7 +1178,6 @@ again:
       //-----------------------------------------------------------------------
       //    fill array of Spaces for all segments and staves
       //    spaces[0]      - left margin
-      //    // spaces[segs+1] - right margin
       //-----------------------------------------------------------------------
 
       Space spaces[segs+1][nstaves];
@@ -1332,10 +1331,12 @@ printf("\n");
 
       for (int seg = segs; seg >= 0; --seg) {
             double ww = 0.0;
+            double ew = 0.0;
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (!spaces[seg][staffIdx].valid())
                         continue;
                   double w = spaces[seg][staffIdx].min();
+                  double eew = (seg == 0) ? spaces[1][staffIdx].extra() : 0.0;
                   for (int nseg = seg+1; nseg < segs+1; ++nseg) {
                         if (spaces[nseg][staffIdx].valid())
                               break;
@@ -1345,8 +1346,10 @@ printf("\n");
                         }
                   if (w > ww)
                         ww = w;
+                  if (eew > ew)
+                        ew = eew;
                   }
-            width[seg] = ww;
+            width[seg] = ww + ew;
             }
 
       //---------------------------------------------------
@@ -1986,7 +1989,7 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 
 bool Measure::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Measure Properties..."));
       a->setData("props");
       return true;
       }
@@ -2146,11 +2149,11 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tag("stretch", _userStretch);
             }
 
-      int id = 0;
       foreach(Tuplet* tuplet, _tuplets) {
-            if (tuplet->staffIdx() == staff)
+            if (tuplet->staffIdx() == staff) {
+                  int id = _tuplets.indexOf(tuplet);
                   tuplet->write(xml, id);
-            ++id;
+                  }
             }
 
       foreach (const Element* el, _el) {
@@ -2200,10 +2203,11 @@ void Measure::write(Xml& xml) const
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);
                   }
-            int id = 0;
             foreach(Tuplet* tuplet, _tuplets) {
-                  if (staffIdx == tuplet->staffIdx())
-                        tuplet->write(xml, id++);
+                  if (staffIdx == tuplet->staffIdx()) {
+                        int id = _tuplets.indexOf(tuplet);
+                        tuplet->write(xml, id);
+                        }
                   }
             for (int track = staffIdx * VOICES; track < staffIdx * VOICES + VOICES; ++track) {
                   for (Segment* segment = first(); segment; segment = segment->next()) {

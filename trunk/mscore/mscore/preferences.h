@@ -78,6 +78,7 @@ struct Preferences {
       QString startScore;
       QString imagePath;
       QString workingDirectory;
+      QString lastSaveDirectory;
       bool showSplashScreen;
       MidiRemote rewind, play, stop;
       MidiRemote len1, len2, len4, len8, len16, len32;

@@ -911,11 +911,13 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   break;
 
             case Qt::Key_Left:
-                  cursor->movePosition(QTextCursor::Left, mm);
+                  if (!cursor->movePosition(QTextCursor::Left, mm))
+                        return false;
                   break;
 
             case Qt::Key_Right:
-                  cursor->movePosition(QTextCursor::Right, mm);
+                  if (!cursor->movePosition(QTextCursor::Right, mm))
+                        return false;
                   break;
 
             case Qt::Key_Up:
@@ -963,6 +965,16 @@ void TextB::moveCursorToEnd()
       {
       if (cursor)
             cursor->movePosition(QTextCursor::End);
+      }
+
+//---------------------------------------------------------
+//   moveCursor
+//---------------------------------------------------------
+
+void TextB::moveCursor(int col)
+      {
+      if (cursor)
+            cursor->setPosition(col);
       }
 
 //---------------------------------------------------------

@@ -52,7 +52,6 @@ class Clef : public Compound {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Segment* segment() const         { return (Segment*)parent(); }
 
-      virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout(ScoreLayout*);

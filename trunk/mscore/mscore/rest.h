@@ -58,7 +58,6 @@ class Rest : public ChordRest {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout(ScoreLayout*);

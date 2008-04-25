@@ -251,7 +251,12 @@ class Element {
       void setTick(int t)             { _time.setTick(t); }
       virtual int tickLen() const     { return _duration.tick(); }
       virtual void setTickLen(int t)  { _duration.setTick(t); }
-      virtual void space(double& min, double& extra) const;
+
+      virtual void space(double& min, double& extra) const {
+            min   = width();
+            extra = 0.0;
+            }
+
       QColor color() const            { return _color; }
       QColor curColor() const;
       void setColor(const QColor& c)  { _color = c;    }

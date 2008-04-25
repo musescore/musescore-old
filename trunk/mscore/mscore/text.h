@@ -167,6 +167,7 @@ class TextB : public Element {
       double lineSpacing() const;
       double lineHeight() const;
       void moveCursorToEnd();
+      void moveCursor(int val);
 
       virtual QLineF dragAnchor() const;
 
