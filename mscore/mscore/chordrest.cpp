@@ -336,9 +336,15 @@ bool ChordRest::readProperties(QDomElement e)
             // to measure; after inserting Chord or Rest into Measure
             // parent is Segment
             Measure* m = (Measure*)parent();
-            _tuplet    = m->tuplets()->value(i);
+            _tuplet = 0;
+            foreach(Tuplet* t, *m->tuplets()) {
+                  if (t->id() == i) {
+                        _tuplet = t;
+                        break;
+                        }
+                  }
             if (_tuplet == 0)
-                  printf("Tuplet index %d not found\n", i);
+                  printf("Tuplet id %d not found\n", i);
             else
                   setTickLen(tickLen());  // set right symbol + dots
             }

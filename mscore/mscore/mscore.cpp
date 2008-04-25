@@ -169,6 +169,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
+      QSettings s;
+      s.setValue("lastSaveDirectory",  preferences.lastSaveDirectory);
 
       //
       // close all toplevel windows

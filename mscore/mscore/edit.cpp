@@ -1071,6 +1071,7 @@ void Score::chordTab(bool back)
       Harmony* cn      = (Harmony*)editObject;
       Measure* measure = (Measure*)cn->parent();
       Segment* segment = measure->tick2segment(cn->tick());
+      int track        = cn->track();
       if (segment == 0) {
             printf("chordTab: no segment\n");
             return;
@@ -1100,15 +1101,12 @@ void Score::chordTab(bool back)
       startCmd();
 
       // search for next chord name
-
-      Text* ocn = cn;
-      cn        = 0;
-
+      cn              = 0;
       measure         = segment->measure();
       ElementList* el = measure->el();
       foreach(Element* e, *el) {
             if (e->type() == HARMONY && e->tick() == segment->tick()) {
-                  cn = (Harmony*)e;
+                  cn = static_cast<Harmony*>(e);
                   break;
                   }
             }
@@ -1116,7 +1114,8 @@ void Score::chordTab(bool back)
       if (!cn) {
             cn = new Harmony(this);
             cn->setTick(segment->tick());
-            cn->setTrack(ocn->track());
+printf("create Harmony tick %d\n", cn->tick());
+            cn->setTrack(track);
             cn->setParent(measure);
             undoAddElement(cn);
             }

@@ -1,3 +1,14 @@
+25.4.8 (ws)
+      - implement Drag&Drop of measures with tuplets
+      - remember last "save as" directory
+      - lyrics edit mode: if at last column <cursor right> moves to
+        next note (syllable)
+      - lyrics edit mode: if at column zero <cursor left> moves to
+        previous note (syllable)
+      - shift+space now position to previous note (syllable) in lyrics
+        edit mode
+      - fix layout: left margin in measure was too small if first note had
+        accidentals (accidentals moved into the margin)
 24.4.8 (ws)
       - dont leave editmode when autosave a file
       - dont autosave new created files

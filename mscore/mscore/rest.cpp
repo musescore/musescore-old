@@ -93,16 +93,6 @@ QRectF Rest::drag(const QPointF& s)
       }
 
 //---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-void Rest::space(double& min, double& extra) const
-      {
-      min   = width();
-      extra = 0.0;
-      }
-
-//---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
@@ -354,7 +344,7 @@ bool Rest::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Rest"));
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("Rest Properties..."));
       a->setData("props");
       return true;
       }

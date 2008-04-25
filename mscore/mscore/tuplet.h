@@ -47,6 +47,8 @@ class Tuplet : public Element {
       int _normalNotes;
       int _actualNotes;
 
+      int _id;          // used during read
+
       Text* _number;
       QPolygonF bracketL;
       QPolygonF bracketR;
@@ -87,6 +89,7 @@ class Tuplet : public Element {
       void write(Xml&, int) const;
 
       virtual void draw(QPainter&) const;
+      int id() const  { return _id; }
       };
 
 #endif

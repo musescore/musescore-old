@@ -259,7 +259,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       a = popup->addAction(tr("Edit Drumset..."));
       a->setData("edit-drumset");
       a->setEnabled(staff->part()->drumset() != 0);
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("Staff Properties..."));
       a->setData("staff-properties");
 
       a = popup->addSeparator();

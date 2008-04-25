@@ -408,7 +408,7 @@ class Score : public QObject {
       void addRefresh(const QRectF& r) { refresh |= r;     }
 
       void chordTab(bool back);
-      void lyricsTab(bool back);
+      void lyricsTab(bool back, bool end);
       void lyricsReturn();
       void lyricsMinus();
       void lyricsUnderscore();

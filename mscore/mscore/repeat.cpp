@@ -261,7 +261,7 @@ void Marker::write(Xml& xml) const
 bool Marker::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Marker Properties..."));
       a->setData("props");
       return true;
       }
@@ -406,7 +406,7 @@ void Jump::write(Xml& xml) const
 bool Jump::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Jump Properties..."));
       a->setData("props");
       return true;
       }

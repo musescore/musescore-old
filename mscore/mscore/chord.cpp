@@ -1048,7 +1048,7 @@ void Chord::space(double& min, double& extra) const
             if (note->accidental()) {
                   prefixWidth = -note->accidental()->pos().x();
                   if (prefixWidth > extra)
-                        extra += prefixWidth;
+                        extra = prefixWidth;
                   }
             if (note->mirror()) {
                   if (up()) {
@@ -1058,7 +1058,7 @@ void Chord::space(double& min, double& extra) const
                   else {
                         // note head on left side of stem
                         if ((lhw + prefixWidth) > extra)
-                              extra += lhw + prefixWidth;
+                              extra = lhw + prefixWidth;
                         }
                   }
             }

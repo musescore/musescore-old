@@ -338,7 +338,7 @@ bool MuseScore::saveAs()
 
       QString fn = QFileDialog::getSaveFileName(
          this, tr("MuseScore: Save As"),
-         ".",
+         preferences.lastSaveDirectory,
          fl.join(";;"),
          &selectedFilter
          );
@@ -358,64 +358,63 @@ bool MuseScore::saveAs()
                   tab->setTabText(tab->currentIndex(), cs->name());
                   cs->setCreated(false);
                   }
-            return rv;
             }
-      if (selectedFilter == fl[1]) {
+      else if (selectedFilter == fl[1]) {
             // save as MusicXML *.xml file
             if (!fn.endsWith(".xml"))
                   fn.append(".xml");
             rv = cs->saveXml(fn);
             }
-      if (selectedFilter == fl[2]) {
+      else if (selectedFilter == fl[2]) {
             // save as compressed MusicXML *.mxl file
             if (!fn.endsWith(".mxl"))
                   fn.append(".mxl");
             rv = cs->saveMxl(fn);
             }
-      if (selectedFilter == fl[3]) {
+      else if (selectedFilter == fl[3]) {
             // save as midi file *.mid
             if (!fn.endsWith(".mid"))
                   fn.append(".mid");
-            return cs->saveMidi(fn);
+            rv = cs->saveMidi(fn);
             }
-      if (selectedFilter == fl[4]) {
+      else if (selectedFilter == fl[4]) {
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
-            return cs->savePsPdf(fn, QPrinter::PdfFormat);
+            rv = cs->savePsPdf(fn, QPrinter::PdfFormat);
             }
-      if (selectedFilter == fl[5]) {
+      else if (selectedFilter == fl[5]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
-            return cs->savePsPdf(fn, QPrinter::PostScriptFormat);
+            rv = cs->savePsPdf(fn, QPrinter::PostScriptFormat);
             }
-      if (selectedFilter == fl[6]) {
+      else if (selectedFilter == fl[6]) {
             // save as png file *.png
             if (!fn.endsWith(".png"))
                   fn.append(".png");
-            return cs->savePng(fn);
+            rv = cs->savePng(fn);
             }
-      if (selectedFilter == fl[7]) {
+      else if (selectedFilter == fl[7]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
-            return cs->saveSvg(fn);
+            rv = cs->saveSvg(fn);
             }
-      if (selectedFilter == fl[8]) {
+      else if (selectedFilter == fl[8]) {
             // save as lilypond file *.ly
             if (!fn.endsWith(".ly"))
                   fn.append(".ly");
-            return cs->saveLilypond(fn);
+            rv = cs->saveLilypond(fn);
             }
 
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
-      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl"))) {
+      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")))
             cs->setDirty(false);
-            return true;
-      }
 
-      return false;
+      QFileInfo fi(fn);
+      preferences.lastSaveDirectory = fi.absolutePath();
+      return rv;
       }
 
 //---------------------------------------------------------

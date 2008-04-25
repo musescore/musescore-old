@@ -301,7 +301,7 @@ bool Image::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Image"));
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("Image Properties..."));
       a->setData("props");
       return true;
       }

@@ -301,7 +301,7 @@ bool HBox::genPropertyMenu(QMenu* popup) const
       QMenu* textMenu = popup->addMenu(tr("Add Text"));
       QAction* a = getAction("frame-text");
       textMenu->addAction(a);
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("HBox Properties..."));
       a->setData("props");
       return true;
       }
@@ -355,7 +355,7 @@ bool VBox::genPropertyMenu(QMenu* popup) const
       a->blockSignals(true);
       textMenu->addAction(a);
 
-      a = popup->addAction(tr("Properties..."));
+      a = popup->addAction(tr("VBox Properties..."));
       a->setData("props");
       return true;
       }

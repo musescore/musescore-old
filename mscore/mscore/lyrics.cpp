@@ -154,7 +154,7 @@ QPointF Lyrics::canvasPos() const
 //   lyricsTab
 //---------------------------------------------------------
 
-void Score::lyricsTab(bool /*back*/)
+void Score::lyricsTab(bool back, bool end)
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
@@ -162,30 +162,41 @@ void Score::lyricsTab(bool /*back*/)
       Segment* segment = (Segment*)(lyrics->parent());
       int verse        = lyrics->no();
 
+      Segment* nextSegment = segment;
+      if (back) {
+            // search prev chord
+            while ((nextSegment = nextSegment->prev1())) {
+                  Element* el = nextSegment->element(track);
+                  if (el &&  el->type() == CHORD)
+                        break;
+                  }
+            }
+      else {
+            // search next chord
+            while ((nextSegment = nextSegment->next1())) {
+                  Element* el = nextSegment->element(track);
+                  if (el &&  el->type() == CHORD)
+                        break;
+                  }
+            }
+      if (nextSegment == 0)
+            return;
+
       canvas()->setState(Canvas::NORMAL); // this can remove lyrics if empty
       endCmd();
 
-      // search next chord
-      Segment* nextSegment = segment;
-      while ((nextSegment = nextSegment->next1())) {
-            Element* el = nextSegment->element(track);
-            if (el &&  el->type() == CHORD)
-                  break;
-            }
-      if (nextSegment == 0) {
-            return;
-            }
-
       // search previous lyric
       Lyrics* oldLyrics = 0;
-      while (segment) {
-            LyricsList* nll = segment->lyricsList(staffIdx);
-            if (!nll)
-                  continue;
-            oldLyrics = nll->value(verse);
-            if (oldLyrics)
-                  break;
-            segment = segment->prev1();
+      if (!back) {
+            while (segment) {
+                  LyricsList* nll = segment->lyricsList(staffIdx);
+                  if (!nll)
+                        continue;
+                  oldLyrics = nll->value(verse);
+                  if (oldLyrics)
+                        break;
+                  segment = segment->prev1();
+                  }
             }
 
       startCmd();
@@ -225,7 +236,10 @@ void Score::lyricsTab(bool /*back*/)
 
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
-      ((Lyrics*)editObject)->moveCursorToEnd();
+      if (end)
+            ((Lyrics*)editObject)->moveCursorToEnd();
+      else
+            ((Lyrics*)editObject)->moveCursor(0);
 
       layoutAll = true;
       }

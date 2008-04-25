@@ -69,7 +69,7 @@ void TempoText::read(QDomElement e)
 bool TempoText::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Tempo Properties..."));
       a->setData("props");
       return true;
       }
