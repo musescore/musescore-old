@@ -173,6 +173,7 @@ Preferences::Preferences()
       proximity                = 6;
       autoSave                 = false;
       autoSaveTime             = 2;       // minutes
+      pngScreenShot            = false;
       };
 
 //---------------------------------------------------------
@@ -231,6 +232,7 @@ void Preferences::write()
       s.setValue("proximity",          proximity);
       s.setValue("autoSave",           autoSave);
       s.setValue("autoSaveTime",       autoSaveTime);
+      s.setValue("pngScreenShot",      pngScreenShot);
 
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
@@ -315,6 +317,7 @@ void Preferences::read()
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", false).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
+      pngScreenShot            = s.value("pngScreenShot", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -470,6 +473,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       proximity->setValue(preferences.proximity);
       autoSave->setChecked(preferences.autoSave);
       autoSaveTime->setValue(preferences.autoSaveTime);
+      pngScreenShot->setChecked(preferences.pngScreenShot);
 
       //
       // initialize local shortcut table
@@ -840,7 +844,8 @@ void PreferenceDialog::apply()
       preferences.midiAutoConnect    = midiAutoConnect->isChecked();
       preferences.proximity          = proximity->value();
       preferences.autoSave           = autoSave->isChecked();
-      preferences.autoSaveTime      = autoSaveTime->value();
+      preferences.autoSaveTime       = autoSaveTime->value();
+      preferences.pngScreenShot      = pngScreenShot->isChecked();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

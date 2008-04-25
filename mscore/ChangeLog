@@ -1,4 +1,5 @@
 25.4.8 (ws)
+      - png export can be configured to be like screen shot or like printout
       - implement Drag&Drop of measures with tuplets
       - remember last "save as" directory
       - lyrics edit mode: if at last column <cursor right> moves to
