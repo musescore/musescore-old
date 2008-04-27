@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
+<museScore version="1.9">
   <Mag>1</Mag>
-  <xoff>2.78098</xoff>
-  <yoff>2.96044</yoff>
+  <xoff>37.9706</xoff>
+  <yoff>-16.6187</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -1547,7 +1547,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <track>1</track>
           <pitch>73</pitch>
-          <tpc>21</tpc>
+          <tpc>9</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -1650,18 +1650,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="80" tpc="10" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
-        <Note pitch="66" tpc="20"/>
+        <Note pitch="66" tpc="8"/>
         <Note pitch="70" tpc="12"/>
         <Note pitch="75" tpc="11"/>
-        <Note>
-          <pitch>78</pitch>
-          <tpc>20</tpc>
-          <Accidental>
-            <subtype>1</subtype>
-            <offset x="-1.1883" y="0"/>
-            <track>-1</track>
-            </Accidental>
-          </Note>
+        <Note pitch="78" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
@@ -1679,8 +1671,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Note pitch="66" tpc="20"/>
-        <Note pitch="78" tpc="20"/>
+        <Note pitch="66" tpc="8"/>
+        <Note pitch="78" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
@@ -2725,8 +2717,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <Chord>
         <ticklen>960</ticklen>
-        <Note pitch="30" tpc="20"/>
-        <Note pitch="42" tpc="20"/>
+        <Note pitch="30" tpc="8"/>
+        <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -2735,18 +2727,18 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="30" tpc="20"/>
-        <Note pitch="42" tpc="20"/>
+        <Note pitch="30" tpc="8"/>
+        <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="30" tpc="20"/>
-        <Note pitch="42" tpc="20"/>
+        <Note pitch="30" tpc="8"/>
+        <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="42" tpc="20"/>
-        <Note pitch="54" tpc="20"/>
+        <Note pitch="42" tpc="8"/>
+        <Note pitch="54" tpc="8"/>
         </Chord>
       </Measure>
     <Measure number="10">
@@ -2799,8 +2791,8 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Chord>
         <ticklen>960</ticklen>
-        <Note pitch="30" tpc="20"/>
-        <Note pitch="42" tpc="20"/>
+        <Note pitch="30" tpc="8"/>
+        <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -2809,13 +2801,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="30" tpc="20"/>
-        <Note pitch="42" tpc="20"/>
+        <Note pitch="30" tpc="8"/>
+        <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Note pitch="42" tpc="20"/>
-        <Note pitch="54" tpc="20"/>
+        <Note pitch="42" tpc="8"/>
+        <Note pitch="54" tpc="8"/>
         </Chord>
       <Rest>
         <ticklen>240</ticklen>
@@ -3257,5 +3249,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>
