@@ -59,11 +59,13 @@
       <instrument>
          <name>Bassoon</name>
          <short-name>Bsn.</short-name>
+         <clef>4</clef>
          <midiprogram>70</midiprogram>
          </instrument>
       <instrument>
          <name>Contrabassoon</name>
          <short-name>Cbsn.</short-name>
+         <clef>4</clef>
          <midiprogram>70</midiprogram>
          </instrument>
       <instrument>
@@ -132,26 +134,31 @@
       <instrument>
          <name>Trombone</name>
          <short-name>Trb.</short-name>
+         <clef>4</clef>
          <midiprogram>57</midiprogram>
          </instrument>
       <instrument>
          <name>Tenor Trombone</name>
          <short-name>Ten. Trb.</short-name>
+         <clef>4</clef>
          <midiprogram>57</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Trombone</name>
          <short-name>Bs. Trb.</short-name>
+         <clef>4</clef>
          <midiprogram>57</midiprogram>
          </instrument>
       <instrument>
          <name>Tuba</name>
          <short-name>Tba.</short-name>
+         <clef>4</clef>
          <midiprogram>58</midiprogram>
          </instrument>
       <instrument>
          <name>Euphonium</name>
          <short-name>Euph.</short-name>
+         <clef>4</clef>
          <midiprogram>58</midiprogram>
          </instrument>
       </instrument-group>
@@ -198,6 +205,7 @@
       <instrument>
          <name>Bass Gitarre</name>
          <short-name>B. Guit.</short-name>
+         <clef>4</clef>
          <midiprogram>33</midiprogram>
          </instrument>
       </instrument-group>
@@ -225,14 +233,17 @@
          </instrument>
       <instrument>
          <name>Tenor</name>
+         <clef>3</clef>
          <midiprogram>52</midiprogram>
          </instrument>
       <instrument>
          <name>Bariton</name>
+         <clef>4</clef>
          <midiprogram>52</midiprogram>
          </instrument>
       <instrument>
          <name>Bass</name>
+         <clef>4</clef>
          <midiprogram>52</midiprogram>
          </instrument>
       </instrument-group>
@@ -316,37 +327,49 @@
       <instrument>
          <name>Viola</name>
          <short-name>V1a.</short-name>
+         <clef>11</clef>
          <midiprogram>41</midiprogram>
          </instrument>
+       <instrument>
+          <name>Violas</name>
+          <short-name>V1as.</short-name>
+          <clef>11</clef>
+          <midiprogram>49</midiprogram>
+          </instrument>
       <instrument>
          <name>Violoncello</name>
          <short-name>Vlc.</short-name>
+         <clef>4</clef>
          <midiprogram>42</midiprogram>
          </instrument>
+       <instrument>
+          <name>Violoncellos</name>
+          <short-name>Vlcs.</short-name>
+          <clef>4</clef>
+          <midiprogram>49</midiprogram>
+          </instrument>
+       <instrument>
+          <name>Double Bass</name>
+          <short-name>D.B.</short-name>
+          <clef>4</clef>
+          <midiprogram>32</midiprogram>
+          </instrument>
       <instrument>
          <name>Kontrabass</name>
          <short-name>C.B.</short-name>
+         <clef>4</clef>
          <midiprogram>43</midiprogram>
          </instrument>
-      <instrument>
-         <name>Violas</name>
-         <short-name>V1as.</short-name>
-         <midiprogram>49</midiprogram>
-         </instrument>
-      <instrument>
-         <name>Violoncellos</name>
-         <short-name>Vlcs.</short-name>
-         <midiprogram>49</midiprogram>
-         </instrument>
+        <instrument>
+          <name>Contrabasses</name>
+          <short-name>Cbs.</short-name>
+          <clef>4</clef>
+          <midiprogram>49</midiprogram>
+          </instrument>
       <instrument>
          <name>Double Bass</name>
          <short-name>D.B.</short-name>
          <midiprogram>32</midiprogram>
-         </instrument>
-       <instrument>
-         <name>Kontrabasses</name>
-         <short-name>C.B.</short-name>
-         <midiprogram>49</midiprogram>
          </instrument>
       </instrument-group>
 
