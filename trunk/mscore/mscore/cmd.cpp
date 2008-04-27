@@ -1714,8 +1714,18 @@ void Score::cmd(const QString& cmd)
                   cmdTuplet(2);
             else if (cmd == "triplet")
                   cmdTuplet(3);
+            else if (cmd == "quadruplet")
+                  cmdTuplet(4);
             else if (cmd == "quintuplet")
                   cmdTuplet(5);
+            else if (cmd == "sextuplet")
+                  cmdTuplet(6);
+            else if (cmd == "septuplet")
+                  cmdTuplet(7);
+            else if (cmd == "octuplet")
+                  cmdTuplet(8);
+            else if (cmd == "nonuplet")
+                  cmdTuplet(9);
             else if (cmd == "stretch+")
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
@@ -1824,6 +1834,8 @@ void Score::cmd(const QString& cmd)
                   loadStyle();
                   setLayoutAll(true);
                   }
+            else if (cmd == "tuplet-dialog")
+                  tupletDialog();
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();

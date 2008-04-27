@@ -271,7 +271,8 @@ MuseScore::MuseScore()
          << "next-measure" << "prev-measure" << "print" << "undo"
          << "redo" << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
          << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
-         << "duplet" << "triplet" << "quintuplet"
+         << "duplet" << "triplet" << "quadruplet" << "quintuplet" << "sextuplet"
+         << "septuplet" << "octuplet" << "nonuplet" << "tuplet-dialog"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
          << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
@@ -562,7 +563,13 @@ MuseScore::MuseScore()
       QMenu* menuNtole = new QMenu(tr("Tuplets"));
       menuNtole->addAction(getAction("duplet"));
       menuNtole->addAction(getAction("triplet"));
+      menuNtole->addAction(getAction("quadruplet"));
       menuNtole->addAction(getAction("quintuplet"));
+      menuNtole->addAction(getAction("sextuplet"));
+      menuNtole->addAction(getAction("septuplet"));
+      menuNtole->addAction(getAction("octuplet"));
+      menuNtole->addAction(getAction("nonuplet"));
+      menuNtole->addAction(getAction("tuplet-dialog"));
       menuNotes->addMenu(menuNtole);
 
       menuNotes->addSeparator();

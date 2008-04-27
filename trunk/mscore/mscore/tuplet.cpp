@@ -400,3 +400,13 @@ void Tuplet::propertyAction(const QString& s)
             Element::propertyAction(s);
       }
 
+//---------------------------------------------------------
+//   tupletDialog
+//    create tuplet dialog
+//---------------------------------------------------------
+
+void Score::tupletDialog()
+      {
+      printf("tuplet dialog\n");
+      }
+

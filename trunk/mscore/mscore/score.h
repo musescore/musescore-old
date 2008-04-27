@@ -218,6 +218,7 @@ class Score : public QObject {
       void connectSlurs();
       void checkSlurs();
       void checkTuplets();
+      void tupletDialog();
 
       void cmdInsertClef(int type);
 

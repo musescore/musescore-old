@@ -1191,26 +1191,51 @@ void Score::addLyrics()
 void Score::cmdTuplet(int n)
       {
       Note* note = getSelectedNote();
-      if (note == 0)
+      if (note == 0) {
+            printf("cmdTuplet: no note selected\n");
             return;
+            }
       Chord* chord = note->chord();
 
       int normalNotes=2, actualNotes=3;
       switch (n) {
-            case 2:
-                  // normalNotes = 3;
-                  // actualNotes = 2;
-                  printf("duole not implemented\n");
-                  return;
-            case 3:
+            case 2:                       // duplet
+                  normalNotes = 3;
+                  actualNotes = 2;
+                  break;
+            case 3:                       // triplet
                   normalNotes = 2;
                   actualNotes = 3;
                   break;
-            case 5:
+            case 4:                       // quadruplet
+                  normalNotes = 6;
+                  actualNotes = 4;
+                  break;
+            case 5:                       // quintuplet
                   normalNotes = 4;
                   actualNotes = 5;
                   break;
+            case 6:                       // sextuplet
+                  normalNotes = 4;
+                  actualNotes = 6;
+                  break;
+            case 7:                       // septuplet
+                  normalNotes = 4;        // (sometimes 6)
+                  actualNotes = 7;
+                  break;
+            case 8:                       // octuplet
+                  normalNotes = 6;
+                  actualNotes = 8;
+                  break;
+            case 9:                       // nonuplet
+                  normalNotes = 8;        // (sometimes 6)
+                  actualNotes = 9;
+                  break;
+            default:
+                  printf("illegal tuplet %d\n", n);
+                  return;
             }
+
       int baseLen = chord->tickLen() / normalNotes;
       if (chord->tickLen() % normalNotes) {
             printf("cannot handle tuplet (rest %d)\n", chord->tickLen() % normalNotes);
