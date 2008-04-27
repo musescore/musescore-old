@@ -1,4 +1,5 @@
 27.4.8 (ws)
+      - fix tranposition of chordnames
       - correct enharmonic misspellings in "promenade" demo.
       - fix some clefs in instrument list (David Bolton)
 26.4.8 (ws)

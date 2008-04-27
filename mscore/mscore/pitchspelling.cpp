@@ -642,7 +642,7 @@ int transposeTpc(int tpc, int semitones)
       if (tpc == INVALID_TPC)
             return INVALID_TPC;
       if (semitones < 0)
-            semitones = -((-semitones) % 12);
+            semitones = 12 + semitones;
       else
             semitones = (semitones % 12);
       if (semitones == 0)
