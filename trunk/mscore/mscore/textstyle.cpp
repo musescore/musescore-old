@@ -48,7 +48,7 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
       foreach (TextStyle* s, styles)
-            textNames->addItem(s->name);
+            textNames->addItem(qApp->translate("MuseScore", s->name.toAscii().data()));
 
       connect(textNames,     SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
       connect(buttonOk,      SIGNAL(clicked()), SLOT(ok()));

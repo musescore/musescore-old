@@ -21,12 +21,14 @@
 #include "tuplet.h"
 #include "score.h"
 #include "chord.h"
+#include "note.h"
 #include "xml.h"
 #include "preferences.h"
 #include "style.h"
 #include "text.h"
 #include "element.h"
 #include "layout.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -407,6 +409,45 @@ void Tuplet::propertyAction(const QString& s)
 
 void Score::tupletDialog()
       {
-      printf("tuplet dialog\n");
+      Note* note = getSelectedNote();
+      if (note == 0) {
+            selectNoteMessage();
+            return;
+            }
+      TupletDialog td;
+      if (!td.exec())
+            return;
+
+      Chord* chord   = note->chord();
+      int baseLen    = chord->tickLen() / td.getNormalNotes();
+      Tuplet* tuplet = new Tuplet(this);
+      tuplet->setBaseLen(baseLen);
+      tuplet->setTrack(chord->track());
+      td.setupTuplet(tuplet);
+
+      Measure* measure = chord->measure();
+      tuplet->setParent(measure);
+
+      cmdCreateTuplet(chord, tuplet);
+      }
+
+//---------------------------------------------------------
+//   TupletDialog
+//---------------------------------------------------------
+
+TupletDialog::TupletDialog(QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      }
+
+//---------------------------------------------------------
+//   setupTuplet
+//---------------------------------------------------------
+
+void TupletDialog::setupTuplet(Tuplet* tuplet)
+      {
+      tuplet->setNormalNotes(normalNotes->value());
+      tuplet->setActualNotes(actualNotes->value());
       }
 

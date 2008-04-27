@@ -153,10 +153,10 @@ int fluid_synth_setstr(fluid_synth_t* synth, char* name, char* str);
 int fluid_synth_getstr(fluid_synth_t* synth, char* name, char** str);
 
 /** returns 1 if the value has been set, 0 otherwise */
-int fluid_synth_setnum(fluid_synth_t* synth, char* name, double val);
+int fluid_synth_setnum(fluid_synth_t* synth, const char* name, double val);
 
 /** returns 1 if the value exists, 0 otherwise */
-int fluid_synth_getnum(fluid_synth_t* synth, char* name, double* val);
+int fluid_synth_getnum(fluid_synth_t* synth, const char* name, double* val);
 
 /** returns 1 if the value has been set, 0 otherwise */
 int fluid_synth_setint(fluid_synth_t* synth, char* name, int val);

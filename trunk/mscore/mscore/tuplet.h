@@ -23,6 +23,7 @@
 
 #include "chordlist.h"
 #include "element.h"
+#include "ui_tupletdialog.h"
 
 class Text;
 
@@ -90,6 +91,19 @@ class Tuplet : public Element {
 
       virtual void draw(QPainter&) const;
       int id() const  { return _id; }
+      };
+
+
+//---------------------------------------------------------
+//   TupletDialog
+//---------------------------------------------------------
+
+class TupletDialog : public QDialog, Ui::TupletDialog {
+
+   public:
+      TupletDialog(QWidget* parent = 0);
+      void setupTuplet(Tuplet* tuplet);
+      int getNormalNotes() const { return normalNotes->value(); }
       };
 
 #endif

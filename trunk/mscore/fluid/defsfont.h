@@ -452,7 +452,7 @@ enum
 #define ErrnoStart	Errno
 #define ErrnoEnd	ErrWrite
 
-int gerr (int ev, char * fmt, ...);
+int gerr (int ev, const char * fmt, ...);
 int safe_fread (void *buf, int count, QFile* fd);
 int safe_fwrite (void *buf, int count, QFile* fd);
 int safe_fseek (QFile*, long ofs, int whence);
@@ -574,7 +574,7 @@ struct _fluid_preset_zone_t
   fluid_mod_t * mod; /* List of modulators */
 };
 
-fluid_preset_zone_t* new_fluid_preset_zone(char* name);
+fluid_preset_zone_t* new_fluid_preset_zone(const char* name);
 int delete_fluid_preset_zone(fluid_preset_zone_t* zone);
 fluid_preset_zone_t* fluid_preset_zone_next(fluid_preset_zone_t* preset);
 int fluid_preset_zone_import_sfont(fluid_preset_zone_t* zone, SFZone* sfzone, fluid_defsfont_t* sfont);
@@ -615,7 +615,7 @@ struct _fluid_inst_zone_t
   fluid_mod_t * mod; /* List of modulators */
 };
 
-fluid_inst_zone_t* new_fluid_inst_zone(char* name);
+fluid_inst_zone_t* new_fluid_inst_zone(const char* name);
 int delete_fluid_inst_zone(fluid_inst_zone_t* zone);
 fluid_inst_zone_t* fluid_inst_zone_next(fluid_inst_zone_t* zone);
 int fluid_inst_zone_import_sfont(fluid_inst_zone_t* zone, SFZone *sfzone, fluid_defsfont_t* sfont);

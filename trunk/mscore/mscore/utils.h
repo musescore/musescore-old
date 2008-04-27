@@ -49,6 +49,10 @@ extern int line2pitch(int line, int clef, int key);
 extern int y2pitch(double y, int clef);
 extern int quantizeLen(int, int, int);
 extern double curTime();
+extern void selectNoteMessage();
+extern void selectNoteRestMessage();
+extern void selectNoteSlurMessage();
+
 
 #endif
 

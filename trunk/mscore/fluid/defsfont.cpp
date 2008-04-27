@@ -905,7 +905,7 @@ fluid_preset_zone_next(fluid_preset_zone_t* preset)
  * new_fluid_preset_zone
  */
 fluid_preset_zone_t*
-new_fluid_preset_zone(char *name)
+new_fluid_preset_zone(const char *name)
 {
   int size;
   fluid_preset_zone_t* zone = 0;
@@ -1301,8 +1301,7 @@ fluid_inst_zone_t* fluid_inst_get_global_zone(fluid_inst_t* inst)
 /*
  * new_fluid_inst_zone
  */
-fluid_inst_zone_t*
-new_fluid_inst_zone(char* name)
+fluid_inst_zone_t* new_fluid_inst_zone(const char* name)
 {
   int size;
   fluid_inst_zone_t* zone = 0;
@@ -3139,7 +3138,7 @@ int gen_validp (int gen)
 /*================================util.c===========================*/
 
 /* Logging function, returns FAIL to use as a return value in calling funcs */
-int gerr (int ev, char * fmt, ...)
+int gerr (int ev, const char * fmt, ...)
       {
       va_list args;
 
