@@ -833,11 +833,59 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "quadruplet",
+         QT_TR_NOOP("quadruplet"),
+         Qt::CTRL+Qt::Key_4,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Quadruplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "quintuplet",
          QT_TR_NOOP("Quintuplet"),
          Qt::CTRL+Qt::Key_5,
          Qt::WindowShortcut,
          QT_TR_NOOP("Quintuplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "sextuplet",
+         QT_TR_NOOP("Sextuplet"),
+         Qt::CTRL+Qt::Key_6,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Sextuplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "septuplet",
+         QT_TR_NOOP("Septuplet"),
+         Qt::CTRL+Qt::Key_7,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Septuplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "octuplet",
+         QT_TR_NOOP("Octuplet"),
+         Qt::CTRL+Qt::Key_8,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("OCtuplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "nonuplet",
+         QT_TR_NOOP("Nonuplet"),
+         Qt::CTRL+Qt::Key_9,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Nonuplet")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "tuplet-dialog",
+         QT_TR_NOOP("Other Tuplets"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Other Tuplets")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,

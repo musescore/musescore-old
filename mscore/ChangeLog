@@ -1,4 +1,6 @@
 27.4.8 (ws)
+      - make transpose chord names optional
+      - added more basic tuplet types (Ctrl+2(duplet) - Ctrl+9 (nonuplet))
       - fix tranposition of chordnames
       - correct enharmonic misspellings in "promenade" demo.
       - fix some clefs in instrument list (David Bolton)

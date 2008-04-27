@@ -32,9 +32,10 @@ class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
 
    public:
       TransposeDialog(QWidget* parent = 0);
-      void enableTransposeKeys(bool val) { transposeKeys->setEnabled(val);    }
-      bool getTransposeKeys() const      { return transposeKeys->isChecked(); }
-      int getSemitones() const           { return semitones->value();         }
+      void enableTransposeKeys(bool val)  { transposeKeys->setEnabled(val);       }
+      bool getTransposeKeys() const       { return transposeKeys->isChecked();    }
+      int getSemitones() const            { return semitones->value();            }
+      bool getTransposeChordNames() const { return transposeChordNames->isChecked(); }
       };
 #endif
 

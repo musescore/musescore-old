@@ -73,6 +73,17 @@ void Score::transpose()
       if (sel->state() != SEL_SYSTEM)
             transposeKeys = false;
 
+      if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
+            QList<Element*>* el = sel->elements();
+            foreach(Element* e, *el) {
+                  if (e->type() != NOTE)
+                        continue;
+                  Note* n = static_cast<Note*>(e);
+                  undoChangePitch(n, n->pitch() + diff);
+                  }
+            return;
+            }
+
       int startTrack = sel->staffStart * VOICES;
       int endTrack   = sel->staffEnd * VOICES;
       if (sel->state() == SEL_SYSTEM) {
@@ -110,13 +121,14 @@ void Score::transpose()
                               undoChangePitch(note, note->pitch() + diff);
                         }
                   }
-            foreach (Element* e, *mb->el()) {
-                  if (e->type() != HARMONY)
-                        continue;
-                  Harmony* harmony = static_cast<Harmony*>(e);
-                  undoTransposeHarmony(harmony, diff);
+            if (td.getTransposeChordNames()) {
+                  foreach (Element* e, *mb->el()) {
+                        if (e->type() != HARMONY)
+                              continue;
+                        Harmony* harmony = static_cast<Harmony*>(e);
+                        undoTransposeHarmony(harmony, diff);
+                        }
                   }
-
             }
       if (transposeKeys) {
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
