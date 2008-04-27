@@ -49,34 +49,6 @@
 #include "navigate.h"
 
 //---------------------------------------------------------
-//   selectNoteMessage
-//---------------------------------------------------------
-
-static void selectNoteMessage()
-      {
-      QMessageBox::critical(0,
-         QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note and retry operation\n"),
-         QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
-static void selectNoteRestMessage()
-      {
-      QMessageBox::critical(0,
-         QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note or rest and retry operation\n"),
-         QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
-static void selectNoteSlurMessage()
-      {
-      QMessageBox::critical(0,
-         QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note or slur and retry operation\n"),
-         QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
-//---------------------------------------------------------
 //   getSelectedNote
 //---------------------------------------------------------
 
@@ -1236,6 +1208,29 @@ void Score::cmdTuplet(int n)
                   return;
             }
 
+      int baseLen    = chord->tickLen() / normalNotes;
+      Tuplet* tuplet = new Tuplet(this);
+      tuplet->setNormalNotes(normalNotes);
+      tuplet->setActualNotes(actualNotes);
+      tuplet->setBaseLen(baseLen);
+      tuplet->setTrack(chord->track());
+      Measure* measure = chord->measure();
+      tuplet->setParent(measure);
+
+      cmdCreateTuplet(chord, tuplet);
+      }
+
+//---------------------------------------------------------
+//   cmdCreateTuplet
+//---------------------------------------------------------
+
+void Score::cmdCreateTuplet(Chord* chord, Tuplet* tuplet)
+      {
+      int normalNotes  = tuplet->normalNotes();
+      int actualNotes  = tuplet->actualNotes();
+      int track        = chord->track();
+      Measure* measure = chord->measure();
+
       int baseLen = chord->tickLen() / normalNotes;
       if (chord->tickLen() % normalNotes) {
             printf("cannot handle tuplet (rest %d)\n", chord->tickLen() % normalNotes);
@@ -1248,36 +1243,27 @@ void Score::cmdTuplet(int n)
       //    - add 2 rests of 1/d2 duration as placeholder
       //---------------------------------------------------
 
-      int voice    = chord->voice();
-      int staffIdx = chord->staffIdx();
+//      int voice    = chord->voice();
       int tick     = chord->tick();
-      int pitch    = note->pitch();
+      int pitch    = getSelectedNote()->pitch();
 
       Segment* segment = chord->segment();
       undoRemoveElement(chord);
-//      undoOp(UndoOp::RemoveElement, chord);   ??
       if (segment->isEmpty())
             undoRemoveElement(segment);
 
-      Tuplet* tuplet = new Tuplet(this);
-      tuplet->setNormalNotes(normalNotes);
-      tuplet->setActualNotes(actualNotes);
-      tuplet->setBaseLen(baseLen);
-      tuplet->setTrack(staffIdx * VOICES);
-      Measure* measure = chord->measure();
-      tuplet->setParent(measure);
       undoAddElement(tuplet);
 
       int ticks = baseLen * normalNotes / actualNotes;
 
-      note = new Note(this);
+      Note* note = new Note(this);
       note->setPitch(pitch);
-      note->setTrack(staffIdx * VOICES + voice);
+      note->setTrack(track);
 
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTuplet(tuplet);
-      chord->setTrack(staffIdx * VOICES + voice);
+      chord->setTrack(track);
       chord->add(note);
 
       chord->setTickLen(ticks);
@@ -1295,7 +1281,7 @@ void Score::cmdTuplet(int n)
             Rest* rest = new Rest(this);
             rest->setTick(tick);
             rest->setTuplet(tuplet);
-            rest->setTrack(staffIdx * VOICES + voice);
+            rest->setTrack(track);
             rest->setTickLen(ticks);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);

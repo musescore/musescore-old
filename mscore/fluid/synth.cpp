@@ -2561,12 +2561,12 @@ int fluid_synth_getstr(fluid_synth_t* synth, char* name, char** str)
   return fluid_settings_getstr(synth->settings, name, str);
 }
 
-int fluid_synth_setnum(fluid_synth_t* synth, char* name, double val)
+int fluid_synth_setnum(fluid_synth_t* synth, const char* name, double val)
 {
   return fluid_settings_setnum(synth->settings, name, val);
 }
 
-int fluid_synth_getnum(fluid_synth_t* synth, char* name, double* val)
+int fluid_synth_getnum(fluid_synth_t* synth, const char* name, double* val)
 {
   return fluid_settings_getnum(synth->settings, name, val);
 }

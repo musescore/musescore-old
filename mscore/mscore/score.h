@@ -221,6 +221,7 @@ class Score : public QObject {
       void tupletDialog();
 
       void cmdInsertClef(int type);
+      void cmdCreateTuplet(Chord* chord, Tuplet* tuplet);
 
    public slots:
       void doUndo();

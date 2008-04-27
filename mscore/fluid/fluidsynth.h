@@ -162,7 +162,7 @@ FLUIDSYNTH_API int fluid_settings_is_realtime(fluid_settings_t* settings, char* 
 
 /** returns 1 if the value has been set, 0 otherwise */
 FLUIDSYNTH_API
-int fluid_settings_setstr(fluid_settings_t* settings, char* name, char* str);
+int fluid_settings_setstr(fluid_settings_t* settings, const char* name, char* str);
 
 /**
     Get the value of a string setting. If the value does not exists,
@@ -174,11 +174,11 @@ int fluid_settings_setstr(fluid_settings_t* settings, char* name, char* str);
    \returns 1 if the value exists, 0 otherwise
 */
 FLUIDSYNTH_API
-int fluid_settings_getstr(fluid_settings_t* settings, char* name, char** str);
+int fluid_settings_getstr(fluid_settings_t* settings, const char* name, char** str);
 
 /** Get the default value of a string setting. */
 FLUIDSYNTH_API
-char* fluid_settings_getstr_default(fluid_settings_t* settings, char* name);
+char* fluid_settings_getstr_default(fluid_settings_t* settings, const char* name);
 
 /** Get the value of a numeric setting.
 
@@ -186,57 +186,57 @@ char* fluid_settings_getstr_default(fluid_settings_t* settings, char* name);
     otherwise
 */
 FLUIDSYNTH_API
-int fluid_settings_str_equal(fluid_settings_t* settings, char* name, char* value);
+int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, char* value);
 
 
 /** returns 1 if the value has been set, 0 otherwise */
 FLUIDSYNTH_API
-int fluid_settings_setnum(fluid_settings_t* settings, char* name, double val);
+int fluid_settings_setnum(fluid_settings_t* settings, const char* name, double val);
 
 /** returns 1 if the value exists, 0 otherwise */
 FLUIDSYNTH_API
-int fluid_settings_getnum(fluid_settings_t* settings, char* name, double* val);
+int fluid_settings_getnum(fluid_settings_t* settings, const char* name, double* val);
 
 /** Get the default value of a string setting. */
 FLUIDSYNTH_API
-double fluid_settings_getnum_default(fluid_settings_t* settings, char* name);
+double fluid_settings_getnum_default(fluid_settings_t* settings, const char* name);
 
 /** Get the range of values of a numeric settings. */
 FLUIDSYNTH_API
-void fluid_settings_getnum_range(fluid_settings_t* settings, char* name,
+void fluid_settings_getnum_range(fluid_settings_t* settings, const char* name,
 				double* min, double* max);
 
 
 /** returns 1 if the value has been set, 0 otherwise */
 FLUIDSYNTH_API
-int fluid_settings_setint(fluid_settings_t* settings, char* name, int val);
+int fluid_settings_setint(fluid_settings_t* settings, const char* name, int val);
 
 /** returns 1 if the value exists, 0 otherwise */
 FLUIDSYNTH_API
-int fluid_settings_getint(fluid_settings_t* settings, char* name, int* val);
+int fluid_settings_getint(fluid_settings_t* settings, const char* name, int* val);
 
 /** Get the default value of a string setting. */
 FLUIDSYNTH_API
-int fluid_settings_getint_default(fluid_settings_t* settings, char* name);
+int fluid_settings_getint_default(fluid_settings_t* settings, const char* name);
 
 /** Get the range of values of a numeric settings. */
 FLUIDSYNTH_API
-void fluid_settings_getint_range(fluid_settings_t* settings, char* name,
+void fluid_settings_getint_range(fluid_settings_t* settings, const char* name,
 				int* min, int* max);
 
 
 
-typedef void (*fluid_settings_foreach_option_t)(void* data, char* name, char* option);
+typedef void (*fluid_settings_foreach_option_t)(void* data, const char* name, char* option);
 
 
 
 FLUIDSYNTH_API
 void fluid_settings_foreach_option(fluid_settings_t* settings,
-				  char* name, void* data,
+				  const char* name, void* data,
 				  fluid_settings_foreach_option_t func);
 
 
-typedef void (*fluid_settings_foreach_t)(void* data, char* s, int type);
+typedef void (*fluid_settings_foreach_t)(void* data, const char* s, int type);
 
 FLUIDSYNTH_API
 void fluid_settings_foreach(fluid_settings_t* settings, void* data,

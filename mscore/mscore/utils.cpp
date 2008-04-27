@@ -417,3 +417,32 @@ double curTime()
 #endif
       }
 
+//---------------------------------------------------------
+//   selectNoteMessage
+//---------------------------------------------------------
+
+void selectNoteMessage()
+      {
+      QMessageBox::critical(0,
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+void selectNoteRestMessage()
+      {
+      QMessageBox::critical(0,
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note or rest and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+void selectNoteSlurMessage()
+      {
+      QMessageBox::critical(0,
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select a single note or slur and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+

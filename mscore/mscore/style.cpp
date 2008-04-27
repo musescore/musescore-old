@@ -45,96 +45,96 @@ static const QString ff("Times New Roman");
 #define OS     OFFSET_SPATIUM
 
 const TextStyle defaultTextStyleArray[] = {
-      TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Symbols1"), QString("MScore"), 20, false, false, false,
          ALIGN_LEFT),
 
-      TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Symbols3"), QString("MScore"), 14, false, false, false,
          ALIGN_LEFT),
 
-      TextStyle(QString("Title"), ff, 24, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0),
 
-      TextStyle(QString("Subtitle"), ff, 14, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Subtitle"), ff, 14, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0),
 
-      TextStyle(QString("Composer"), ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Composer"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100),
 
-      TextStyle(QString("Poet"), ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Poet"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
-      TextStyle(QString("Lyrics"), ff, 11, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7),
 
-      TextStyle(QString("Fingering"), ff,  8, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Fingering"), ff,  8, false, false, false,
          ALIGN_CENTER),
 
-      TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsLong"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER),
 
-      TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER),
 
-      TextStyle(QString("InstrumentsExcerpt"), ff, 18, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsExcerpt"), ff, 18, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
-      TextStyle(QString("Dynamics"), ff, 12, false, true, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS),
 
-      TextStyle(QString("Technik"), ff, 12, false, true, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS),
 
 /*12*/
-      TextStyle(QString("Tempo"), ff, 12, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tempo"), ff, 12, true, false, false,
          ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
-      TextStyle(QString("Metronome"), ff, 12, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT),
 
-      TextStyle(QString("Copyright"), ff, 8, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Copyright"), ff, 8, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
 
-      TextStyle(QString("Measure Number"), ff, 8, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Measure Number"), ff, 8, false, false, false,
          ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS),
 
-      TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),
 
-      TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0),
 
-      TextStyle(QString("Translator"), ff, 11, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6),
 
-      TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Dynamics1"), QString("MScore1"), 20, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS),
 
-      TextStyle(QString("Tuplets"), ff,  8, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tuplets"), ff,  8, false, false, false,
          ALIGN_CENTER),
 
-      TextStyle(QString("System"), ff,  10, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "System"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
-      TextStyle(QString("Staff"), ff,  10, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Staff"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
-      TextStyle(QString("Chordname"), ff,  12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Chordname"), ff,  12, false, false, false,
          ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
-      TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
          0.3, 1.0, 20, Qt::black, false, true),
 
-      TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true),
 
-      TextStyle(QString("Volta"), ff, 11, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Volta"), ff, 11, true, false, false,
          ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
-      TextStyle(QString("Frame"), ff, 11, true, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Frame"), ff, 11, true, false, false,
          ALIGN_LEFT, 0, 0, OS, 0, 0, true),
 
-      TextStyle(QString("TextLine"), ff,  12, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "TextLine"), ff,  12, false, false, false,
          ALIGN_HCENTER, 0, 0, OS, 0, 0, true),
       };
 

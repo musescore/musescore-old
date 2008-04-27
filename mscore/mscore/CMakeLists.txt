@@ -68,7 +68,7 @@ QT4_WRAP_UI (ui_headers
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
-      imageproperties.ui
+      imageproperties.ui tupletdialog.ui
       )
 
 QT4_WRAP_CPP (mocs
