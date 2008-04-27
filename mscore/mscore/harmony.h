@@ -114,6 +114,8 @@ struct ChordDescription {
 //---------------------------------------------------------
 
 class Harmony : public Text {
+      Q_DECLARE_TR_FUNCTIONS(Harmony)
+
       static const ChordDescription chordList[];
       static QHash<int, const ChordDescription*> chordHash;
 
