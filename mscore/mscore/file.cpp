@@ -464,7 +464,6 @@ void MuseScore::newFile()
 
       Score* score = new Score;
       score->setCreated(true);
-      score->startCmd();
 
       //
       //  create score from template
@@ -503,42 +502,36 @@ void MuseScore::newFile()
             if (measure->type() != VBOX) {
                   measure = new VBox(score);
                   measure->setTick(0);
-                  score->addMeasure(measure);
-	            score->undoOp(UndoOp::InsertMeasure, measure);
+                  score->measures()->add(measure);
                   }
             if (!title.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_TITLE);
                   s->setText(title);
-                  s->setParent(measure);
-                  score->undoAddElement(s);
+                  measure->add(s);
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_SUBTITLE);
                   s->setText(subtitle);
-                  s->setParent(measure);
-                  score->undoAddElement(s);
+                  measure->add(s);
                   }
             if (!composer.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_COMPOSER);
                   s->setText(composer);
-                  s->setParent(measure);
-                  score->undoAddElement(s);
+                  measure->add(s);
                   }
             if (!poet.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_POET);
                   s->setText(poet);
-                  s->setParent(measure);
-                  score->undoAddElement(s);
+                  measure->add(s);
                   }
             }
       if (!copyright.isEmpty())
             score->setCopyright(copyright);
 
-      score->endCmd();
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
       }

@@ -95,7 +95,7 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("pad-appoggiatura"));
             notePalette->addObject(1,  ik, tr("appoggiatura"));
 
-            paletteBox->addPalette(tr("Notes"), notePalette);
+            paletteBox->addPalette(qApp->translate("NotePalette", "Notes"), notePalette);
 
             //-----------------------------------
             //    clefs

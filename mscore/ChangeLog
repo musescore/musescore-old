@@ -1,3 +1,6 @@
+28.4.8 (ws)
+      - fix measure number style dialog
+      - extent tuplet configuration
 27.4.8 (ws)
       - make transpose chord names optional
       - added more basic tuplet types (Ctrl+2(duplet) - Ctrl+9 (nonuplet))

@@ -165,7 +165,8 @@ class NewWizard : public QWizard {
       friend class QWizardPage;
       virtual int nextId() const;
 
-      enum { Page_Type, Page_Instruments, Page_Timesig, Page_Template };
+      enum { Page_Type, Page_Instruments, Page_Template, Page_Timesig };
+
       QString templatePath() const { return p4->templatePath(); }
       bool useTemplate() const;
       int measures() const               { return p3->measures();    }

@@ -1157,7 +1157,7 @@ TupletView::TupletView()
 void TupletView::hasNumberToggled(bool val)
       {
       Tuplet* tuplet = (Tuplet*)element();
-      tuplet->setHasNumber(val);
+//      tuplet->setHasNumber(val);
       emit scoreChanged();
       }
 
@@ -1168,7 +1168,7 @@ void TupletView::hasNumberToggled(bool val)
 void TupletView::hasLineToggled(bool val)
       {
       Tuplet* tuplet = (Tuplet*)element();
-      tuplet->setHasLine(val);
+//      tuplet->setHasLine(val);
       emit scoreChanged();
       }
 
@@ -1199,8 +1199,8 @@ void TupletView::setElement(Element* e)
       {
       ShowElementBase::setElement(e);
       Tuplet* tuplet = (Tuplet*)e;
-      tb.hasNumber->setChecked(tuplet->hasNumber());
-      tb.hasLine->setChecked(tuplet->hasLine());
+//      tb.hasNumber->setChecked(tuplet->hasNumber());
+//      tb.hasLine->setChecked(tuplet->hasLine());
       tb.baseLen->setValue(tuplet->baseLen());
       tb.normalNotes->setValue(tuplet->normalNotes());
       tb.actualNotes->setValue(tuplet->actualNotes());

@@ -519,7 +519,7 @@ MuseScore::MuseScore()
       //    Menu Notes
       //---------------------
 
-      QMenu* menuNotes = mb->addMenu(tr("Notes"));
+      QMenu* menuNotes = mb->addMenu(qApp->translate("MenuNotes", "Notes"));
       menuNotes->setObjectName("Notes");
 
       menuNotes->addAction(getAction("note-input"));

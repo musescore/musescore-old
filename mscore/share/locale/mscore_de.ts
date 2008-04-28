@@ -1373,52 +1373,52 @@ fehlgeschlagen: </translation>
         <translation>Seitenzahlen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="583"/>
+        <location filename="../../mscore/editstyle.ui" line="559"/>
         <source>odd/even</source>
         <translation>gerade/ungerade</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="644"/>
+        <location filename="../../mscore/editstyle.ui" line="594"/>
         <source>show first</source>
         <translation>ersten zeigen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="600"/>
+        <location filename="../../mscore/editstyle.ui" line="582"/>
         <source>Measure Numbers</source>
         <translation>Taktnummern</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="630"/>
+        <location filename="../../mscore/editstyle.ui" line="601"/>
         <source>all staffs</source>
         <translation>alle Zeilen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="637"/>
+        <location filename="../../mscore/editstyle.ui" line="608"/>
         <source>every system</source>
         <translation>jedes System</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1026"/>
+        <location filename="../../mscore/editstyle.ui" line="993"/>
         <source>Apply</source>
         <translation>Anwenden</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1033"/>
+        <location filename="../../mscore/editstyle.ui" line="1000"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="1040"/>
+        <location filename="../../mscore/editstyle.ui" line="1007"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="651"/>
+        <location filename="../../mscore/editstyle.ui" line="615"/>
         <source>interval</source>
         <translation>Intervall</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="759"/>
+        <location filename="../../mscore/editstyle.ui" line="726"/>
         <source>spaces</source>
         <translation>Spatien</translation>
     </message>
@@ -1493,32 +1493,32 @@ fehlgeschlagen: </translation>
         <translation>Balken</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="675"/>
+        <location filename="../../mscore/editstyle.ui" line="642"/>
         <source>beam width</source>
         <translation>Balkenbreite</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="685"/>
+        <location filename="../../mscore/editstyle.ui" line="652"/>
         <source>beam distance</source>
         <translation>Balkenabstand</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="695"/>
+        <location filename="../../mscore/editstyle.ui" line="662"/>
         <source>min. len</source>
         <translation>min. Len</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="705"/>
+        <location filename="../../mscore/editstyle.ui" line="672"/>
         <source>min. slope</source>
         <translation>min. Neigung</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="722"/>
+        <location filename="../../mscore/editstyle.ui" line="689"/>
         <source>max. slope</source>
         <translation>max. Neigung</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="766"/>
+        <location filename="../../mscore/editstyle.ui" line="733"/>
         <source>beam width units</source>
         <translation>Balkenbreite Einheit</translation>
     </message>
@@ -1538,27 +1538,27 @@ fehlgeschlagen: </translation>
         <translation>Unterer Abstand Liedtext</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="777"/>
+        <location filename="../../mscore/editstyle.ui" line="744"/>
         <source>Small Staff Size</source>
         <translation>Größe für kleine Notenzeile</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="872"/>
+        <location filename="../../mscore/editstyle.ui" line="839"/>
         <source>%</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="803"/>
+        <location filename="../../mscore/editstyle.ui" line="770"/>
         <source>Grace Note Size</source>
         <translation>Größe Vorschlagnote</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="842"/>
+        <location filename="../../mscore/editstyle.ui" line="809"/>
         <source>Small Note Size</source>
         <translation>Größe für kleine Note</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="865"/>
+        <location filename="../../mscore/editstyle.ui" line="832"/>
         <source>Small Clef Size</source>
         <translation>Größe f. kleine Schlüssel</translation>
     </message>
@@ -1595,17 +1595,17 @@ zu Notenzeile</translation>
         <translation>Füllgrad letzte Zeile</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="892"/>
+        <location filename="../../mscore/editstyle.ui" line="859"/>
         <source>Line width</source>
         <translation>Linienbreite</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="915"/>
+        <location filename="../../mscore/editstyle.ui" line="882"/>
         <source>Height</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="925"/>
+        <location filename="../../mscore/editstyle.ui" line="892"/>
         <source>Continue Height</source>
         <translation>Fortsetzungshöhe</translation>
     </message>
@@ -1625,12 +1625,12 @@ zu Notenzeile</translation>
         <translation>Akkordbezeichnungen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="952"/>
+        <location filename="../../mscore/editstyle.ui" line="919"/>
         <source>use german names</source>
         <translation>deutsche Bezeichnungen benutzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="985"/>
+        <location filename="../../mscore/editstyle.ui" line="952"/>
         <source>use symbols</source>
         <translation>Bebutze Symbole</translation>
     </message>
@@ -2684,6 +2684,14 @@ fehlgeschlagen: </translation>
     </message>
 </context>
 <context>
+    <name>MenuNotes</name>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="522"/>
+        <source>Notes</source>
+        <translation type="unfinished">Noten</translation>
+    </message>
+</context>
+<context>
     <name>MuseScore</name>
     <message>
         <location filename="../../mscore/file.cpp" line="132"/>
@@ -2691,25 +2699,25 @@ fehlgeschlagen: </translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="560"/>
+        <location filename="../../mscore/file.cpp" line="553"/>
         <source>
 failed: </source>
         <translation> fehlgeschlagen: </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="561"/>
+        <location filename="../../mscore/file.cpp" line="554"/>
         <source>MuseScore: Open File</source>
         <translation>MuseScore: Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="559"/>
+        <location filename="../../mscore/file.cpp" line="552"/>
         <source>Open File
 </source>
         <translation>Datei öffnen
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="739"/>
+        <location filename="../../mscore/file.cpp" line="732"/>
         <source>MuseScore: Write File</source>
         <translation>MuseScore: Datei schreiben</translation>
     </message>
@@ -4349,11 +4357,6 @@ failed: </source>
         <translation>Symbole</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="522"/>
-        <source>Notes</source>
-        <translation>Noten</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="1188"/>
         <source>Palette</source>
         <translation>Palette</translation>
@@ -5041,11 +5044,6 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished">kurzer Instrumentenname</translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1475"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/style.cpp" line="48"/>
         <source>Symbols1</source>
         <translation type="unfinished"></translation>
@@ -5320,6 +5318,14 @@ Aktuelle Partitur sichern? </translation>
         <location filename="../../mscore/note.ui" line="110"/>
         <source>note head group</source>
         <translation>Notenkopfgruppe</translation>
+    </message>
+</context>
+<context>
+    <name>NotePalette</name>
+    <message>
+        <location filename="../../mscore/menus.cpp" line="98"/>
+        <source>Notes</source>
+        <translation type="unfinished">Noten</translation>
     </message>
 </context>
 <context>
@@ -6219,12 +6225,12 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Stil laden fehlgeschlagen:</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="604"/>
+        <location filename="../../mscore/file.cpp" line="597"/>
         <source>MuseScore: Load Style</source>
         <translation>MuseScore: Stil laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="609"/>
+        <location filename="../../mscore/file.cpp" line="602"/>
         <source>MuseScore Styles (*.mss);;All files (*)</source>
         <translation>MuseScore Stile (*.mss);;Alle Dateien(*)</translation>
     </message>
@@ -6355,7 +6361,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
 <context>
     <name>Score</name>
     <message>
-        <location filename="../../mscore/file.cpp" line="773"/>
+        <location filename="../../mscore/file.cpp" line="766"/>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Datei lesen</translation>
     </message>
@@ -6389,7 +6395,7 @@ starten soll.</translation>
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="697"/>
+        <location filename="../../mscore/file.cpp" line="690"/>
         <source>
 failed: </source>
         <translation> fehlgeschlagen: </translation>
@@ -6425,29 +6431,29 @@ Bitte zuerst Note oder Pause auswählen, ab der das
 Tempo gesetzt werden soll.</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="683"/>
+        <location filename="../../mscore/file.cpp" line="676"/>
         <source>MuseScore: Save Style</source>
         <translation>MuseScore: Stildatei sichern</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="686"/>
+        <location filename="../../mscore/file.cpp" line="679"/>
         <source>MuseScore style file (*.mss)</source>
         <translation>MuseScore Stilfile (*.mss)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="696"/>
+        <location filename="../../mscore/file.cpp" line="689"/>
         <source>Open Style File
 </source>
         <translation>Stilfile öffnen
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="698"/>
+        <location filename="../../mscore/file.cpp" line="691"/>
         <source>MuseScore: Open Style file</source>
         <translation>MuseScore: Stildatei öffnen</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="712"/>
+        <location filename="../../mscore/file.cpp" line="705"/>
         <source>MuseScore: Write Style</source>
         <translation>MuseScore: Stil schreiben</translation>
     </message>
@@ -7380,7 +7386,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Tuplet</name>
     <message>
-        <location filename="../../mscore/tuplet.cpp" line="385"/>
+        <location filename="../../mscore/tuplet.cpp" line="396"/>
         <source>Show number</source>
         <translation>Zeige Zahl</translation>
     </message>

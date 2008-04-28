@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>705</width>
-    <height>365</height>
+    <width>806</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -82,7 +82,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page2" >
       <layout class="QGridLayout" >
@@ -546,24 +546,20 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
+          <item row="0" column="0" >
+           <widget class="QCheckBox" name="showFirstPageNumber" >
+            <property name="text" >
+             <string>show first</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QCheckBox" name="showOddEvenPageNumber" >
+            <property name="text" >
+             <string>odd/even</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0" >
            <spacer>
             <property name="orientation" >
@@ -576,20 +572,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="0" column="1" >
-           <widget class="QCheckBox" name="showOddEvenPageNumber" >
-            <property name="text" >
-             <string>odd/even</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QCheckBox" name="showFirstPageNumber" >
-            <property name="text" >
-             <string>show first</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -606,24 +588,13 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>8</number>
-          </property>
-          <property name="topMargin" >
-           <number>8</number>
-          </property>
-          <property name="rightMargin" >
-           <number>8</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>8</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
+          <item row="0" column="0" >
+           <widget class="QCheckBox" name="showFirstMeasureNumber" >
+            <property name="text" >
+             <string>show first</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1" >
            <widget class="QCheckBox" name="showAllStaffsMeasureNumber" >
             <property name="text" >
@@ -632,23 +603,19 @@
            </widget>
           </item>
           <item row="1" column="0" >
-           <widget class="QCheckBox" name="showEverySystemMeasureNumber" >
+           <widget class="QRadioButton" name="showEverySystemMeasureNumber" >
             <property name="text" >
              <string>every system</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0" >
-           <widget class="QCheckBox" name="showFirstMeasureNumber" >
-            <property name="text" >
-             <string>show first</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0" >
-           <widget class="QCheckBox" name="showIntervalMeasureNumber" >
+           <widget class="QRadioButton" name="showIntervalMeasureNumber" >
             <property name="text" >
              <string>interval</string>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
             </property>
            </widget>
           </item>
