@@ -35,7 +35,7 @@
 //---------------------------------------------------------
 
 Tuplet::Tuplet(Score* s)
-  : Element(s), bracketL(3), bracketR(3)
+  : Element(s)
       {
       _numberType  = SHOW_NUMBER;
       _bracketType = AUTO_BRACKET;
@@ -81,12 +81,11 @@ void Tuplet::layout(ScoreLayout* layout)
                   _number = new Text(score());
                   _number->setSubtype(TEXT_TUPLET);
                   _number->setParent(this);
-                  if (_numberType == SHOW_NUMBER)
-                        _number->setText(QString("%1").arg(_actualNotes));
-                  else
-                        _number->setText(QString("%1:%2").arg(_actualNotes).arg(_normalNotes));
-
                   }
+            if (_numberType == SHOW_NUMBER)
+                  _number->setText(QString("%1").arg(_actualNotes));
+            else
+                  _number->setText(QString("%1:%2").arg(_actualNotes).arg(_normalNotes));
             }
       else {
             if (_number) {
@@ -95,7 +94,6 @@ void Tuplet::layout(ScoreLayout* layout)
                   delete _number;
                   _number = 0;
                   }
-            return;
             }
 
       if (_elements.empty()) {
@@ -127,8 +125,15 @@ void Tuplet::layout(ScoreLayout* layout)
 
       const ChordRest* cr1 = _elements.front();
       const ChordRest* cr2 = _elements.back();
-      if (cr1->beam())
-            _hasBracket = false;
+      if (cr1->beam()) {
+            if (_bracketType == AUTO_BRACKET)
+                  _hasBracket = false;
+            else
+                  _hasBracket = _bracketType == SHOW_BRACKET;
+            }
+      else {
+            _hasBracket = _bracketType != SHOW_NO_BRACKET;
+            }
 
       QPointF p1, p2;
       if (isUp) {
@@ -195,44 +200,64 @@ void Tuplet::layout(ScoreLayout* layout)
       p2 -= mp;
 
       // center number
-      _number->layout(layout);
-      qreal x3 = p1.x() + (p2.x() - p1.x()) * .5;
+      qreal x3, y3;
+      qreal numberWidth;
+      if (_number) {
+            _number->layout(layout);
+            x3 = p1.x() + (p2.x() - p1.x()) * .5;
 
-      qreal y3 = p1.y() + (p2.y() - p1.y()) * .5
-         - _number->bbox().height() * .5
-         - (l1 + l2) * (isUp ? 1.0 : -1.0);
+            y3 = p1.y() + (p2.y() - p1.y()) * .5
+               - _number->bbox().height() * .5
+               - (l1 + l2) * (isUp ? 1.0 : -1.0);
 
-      qreal numberWidth = _number->bbox().width();
-      _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
+            numberWidth = _number->bbox().width();
+            _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
+            }
 
       if (_hasBracket) {
             qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
 
             if (isUp) {
-                  bracketL[0] = QPointF(p1.x(), p1.y() - l2);
-                  bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
-                  qreal x     = x3 - numberWidth * .5 - _spatium * .5;
-                  qreal y     = p1.y() + (x - p1.x()) * slope;
-                  bracketL[2] = QPointF(x,   y - l1 - l2);
+                  if (_number) {
+                        bracketL[0] = QPointF(p1.x(), p1.y() - l2);
+                        bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
+                        qreal x     = x3 - numberWidth * .5 - _spatium * .5;
+                        qreal y     = p1.y() + (x - p1.x()) * slope;
+                        bracketL[2] = QPointF(x,   y - l1 - l2);
 
-                  x           = x3 + numberWidth * .5 + _spatium * .5;
-                  y           = p1.y() + (x - p1.x()) * slope;
-                  bracketR[0] = QPointF(x,   y - l1 - l2);
-                  bracketR[1] = QPointF(p2.x(), p2.y() - l1 - l2);
-                  bracketR[2] = QPointF(p2.x(), p2.y() - l2);
+                        x           = x3 + numberWidth * .5 + _spatium * .5;
+                        y           = p1.y() + (x - p1.x()) * slope;
+                        bracketR[0] = QPointF(x,   y - l1 - l2);
+                        bracketR[1] = QPointF(p2.x(), p2.y() - l1 - l2);
+                        bracketR[2] = QPointF(p2.x(), p2.y() - l2);
+                        }
+                  else {
+                        bracketL[0] = QPointF(p1.x(), p1.y() - l2);
+                        bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
+                        bracketL[2] = QPointF(p2.x(), p2.y() - l1 - l2);
+                        bracketL[3] = QPointF(p2.x(), p2.y() - l2);
+                        }
                   }
             else {
-                  bracketL[0] = QPointF(p1.x(), p1.y() + l2);
-                  bracketL[1] = QPointF(p1.x(), p1.y() + l1 + l2);
-                  qreal x     = x3 - numberWidth * .5 - _spatium * .5;
-                  qreal y     = p1.y() + (x - p1.x()) * slope;
-                  bracketL[2] = QPointF(x,   y + l1 + l2);
+                  if (_number) {
+                        bracketL[0] = QPointF(p1.x(), p1.y() + l2);
+                        bracketL[1] = QPointF(p1.x(), p1.y() + l1 + l2);
+                        qreal x     = x3 - numberWidth * .5 - _spatium * .5;
+                        qreal y     = p1.y() + (x - p1.x()) * slope;
+                        bracketL[2] = QPointF(x,   y + l1 + l2);
 
-                  x           = x3 + numberWidth * .5 + _spatium * .5;
-                  y           = p1.y() + (x - p1.x()) * slope;
-                  bracketR[0] = QPointF(x,   y + l1 + l2);
-                  bracketR[1] = QPointF(p2.x(), p2.y() + l1 + l2);
-                  bracketR[2] = QPointF(p2.x(), p2.y() + l2);
+                        x           = x3 + numberWidth * .5 + _spatium * .5;
+                        y           = p1.y() + (x - p1.x()) * slope;
+                        bracketR[0] = QPointF(x,   y + l1 + l2);
+                        bracketR[1] = QPointF(p2.x(), p2.y() + l1 + l2);
+                        bracketR[2] = QPointF(p2.x(), p2.y() + l2);
+                        }
+                  else {
+                        bracketL[0] = QPointF(p1.x(), p1.y() + l2);
+                        bracketL[1] = QPointF(p1.x(), p1.y() + l1 + l2);
+                        bracketL[2] = QPointF(p2.x(), p2.y() + l1 + l2);
+                        bracketL[3] = QPointF(p2.x(), p2.y() + l2);
+                        }
                   }
 
             }
@@ -245,15 +270,19 @@ void Tuplet::layout(ScoreLayout* layout)
 QRectF Tuplet::bbox() const
       {
       QRectF r;
-      //
-      // _hasBracket implies _hasNumber
-      //
-      if (_hasBracket) {
-            r = bracketL.boundingRect() | bracketR.boundingRect();
+      if (_number) {
             r |= _number->bbox().translated(_number->pos());
+            if (_hasBracket) {
+                  QRectF b;
+                  b.setCoords(bracketL[1].x(), bracketL[1].y(), bracketR[2].x(), bracketR[2].y());
+                  r |= b;
+                  }
             }
-      if (_numberType != NO_TEXT)
-            r |= _number->bbox().translated(_number->pos());
+      else if (_hasBracket) {
+            QRectF b;
+            b.setCoords(bracketL[1].x(), bracketL[1].y(), bracketL[3].x(), bracketL[3].y());
+            r |= b;
+            }
       return r;
       }
 
@@ -268,12 +297,16 @@ void Tuplet::draw(QPainter& p) const
             p.translate(_number->pos());
             _number->draw(p);
             p.restore();
-            if (_hasBracket) {
-                  QPen pen(p.pen());
-                  pen.setWidthF(_spatium * 0.1);
-                  p.setPen(pen);
-                  p.drawPolyline(bracketL);
-                  p.drawPolyline(bracketR);
+            }
+      if (_hasBracket) {
+            QPen pen(p.pen());
+            pen.setWidthF(_spatium * 0.1);
+            p.setPen(pen);
+            if (!_number)
+                  p.drawPolyline(bracketL, 4);
+            else {
+                  p.drawPolyline(bracketL, 3);
+                  p.drawPolyline(bracketR, 3);
                   }
             }
       }
@@ -393,10 +426,8 @@ void Tuplet::remove(Element* e)
 bool Tuplet::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Show number"));
-      a->setData("number");
-      a->setCheckable(true);
-//      a->setChecked(_hasNumber);
+      QAction* a = popup->addAction(tr("Tuplet Properties..."));
+      a->setData("props");
       return true;
       }
 
@@ -406,11 +437,11 @@ bool Tuplet::genPropertyMenu(QMenu* popup) const
 
 void Tuplet::propertyAction(const QString& s)
       {
-/*      if (s == "number") {
-            _hasNumber = !_hasNumber;
+      if (s == "props") {
+            TupletProperties vp(this);
+            vp.exec();
             }
       else
-*/
             Element::propertyAction(s);
       }
 
@@ -461,5 +492,71 @@ void TupletDialog::setupTuplet(Tuplet* tuplet)
       {
       tuplet->setNormalNotes(normalNotes->value());
       tuplet->setActualNotes(actualNotes->value());
+      if (number->isChecked())
+            tuplet->setNumberType(Tuplet::SHOW_NUMBER);
+      else if (relation->isChecked())
+            tuplet->setNumberType(Tuplet::SHOW_RELATION);
+      else if (noNumber->isChecked())
+            tuplet->setNumberType(Tuplet::NO_TEXT);
+      if (autoBracket->isChecked())
+            tuplet->setBracketType(Tuplet::AUTO_BRACKET);
+      else if (bracket->isChecked())
+            tuplet->setBracketType(Tuplet::SHOW_BRACKET);
+      else if (noBracket->isChecked())
+            tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
+      }
+
+//---------------------------------------------------------
+//   TupletProperties
+//---------------------------------------------------------
+
+TupletProperties::TupletProperties(Tuplet* t, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      tuplet = t;
+      switch(tuplet->numberType()) {
+            case Tuplet::SHOW_NUMBER:
+                  number->setChecked(true);
+                  break;
+            case Tuplet::SHOW_RELATION:
+                  relation->setChecked(true);
+                  break;
+            case Tuplet::NO_TEXT:
+                  noNumber->setChecked(true);
+                  break;
+            }
+      switch(tuplet->bracketType()) {
+            case Tuplet::AUTO_BRACKET:
+                  autoBracket->setChecked(true);
+                  break;
+            case Tuplet::SHOW_BRACKET:
+                  bracket->setChecked(true);
+                  break;
+            case Tuplet::SHOW_NO_BRACKET:
+                  noBracket->setChecked(true);
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void TupletProperties::accept()
+      {
+      if (number->isChecked())
+            tuplet->setNumberType(Tuplet::SHOW_NUMBER);
+      else if (relation->isChecked())
+            tuplet->setNumberType(Tuplet::SHOW_RELATION);
+      else if (noNumber->isChecked())
+            tuplet->setNumberType(Tuplet::NO_TEXT);
+      if (autoBracket->isChecked())
+            tuplet->setBracketType(Tuplet::AUTO_BRACKET);
+      else if (bracket->isChecked())
+            tuplet->setBracketType(Tuplet::SHOW_BRACKET);
+      else if (noBracket->isChecked())
+            tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
+      QDialog::accept();
       }
 

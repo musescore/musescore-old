@@ -24,6 +24,7 @@
 #include "chordlist.h"
 #include "element.h"
 #include "ui_tupletdialog.h"
+#include "ui_tupletproperties.h"
 
 class Text;
 
@@ -58,8 +59,8 @@ class Tuplet : public Element {
       int _id;          // used during read
 
       Text* _number;
-      QPolygonF bracketL;
-      QPolygonF bracketR;
+      QPointF bracketL[4];
+      QPointF bracketR[3];
 
       virtual bool genPropertyMenu(QMenu* menu) const;
       virtual void propertyAction(const QString&);
@@ -114,6 +115,21 @@ class TupletDialog : public QDialog, Ui::TupletDialog {
       TupletDialog(QWidget* parent = 0);
       void setupTuplet(Tuplet* tuplet);
       int getNormalNotes() const { return normalNotes->value(); }
+      };
+
+//---------------------------------------------------------
+//   TupletProperties
+//---------------------------------------------------------
+
+class TupletProperties : public QDialog, public Ui::TupletProperties {
+      Q_OBJECT
+      Tuplet* tuplet;
+
+   public slots:
+      virtual void accept();
+
+   public:
+      TupletProperties(Tuplet* tuplet, QWidget* parent = 0);
       };
 
 #endif

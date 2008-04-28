@@ -45,6 +45,7 @@
 #include "utils.h"
 #include "image.h"
 #include "system.h"
+#include "tuplet.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -864,10 +865,12 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
 bool Note::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addSeparator();
-      a->setText(tr("Chord"));
-      a = popup->addAction(tr("Note Properties..."));
+      QAction* a = popup->addAction(tr("Note Properties..."));
       a->setData("props");
+      if (chord()->tuplet()) {
+            a = popup->addAction(tr("Tuplet Properties..."));
+            a->setData("tupletProps");
+            }
       return true;
       }
 
@@ -886,6 +889,10 @@ void Note::propertyAction(const QString& s)
                   if (val != chord()->small())
                         score()->undoChangeChordRestSize(chord(), val);
                   }
+            }
+      else if (s == "tupletProps") {
+            TupletProperties vp(chord()->tuplet());
+            vp.exec();
             }
       else
             Element::propertyAction(s);
