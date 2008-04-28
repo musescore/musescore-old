@@ -37,9 +37,10 @@
 Tuplet::Tuplet(Score* s)
   : Element(s), bracketL(3), bracketR(3)
       {
-      _hasNumber = true;
-      _hasLine   = true;
-      _number    = 0;
+      _numberType  = SHOW_NUMBER;
+      _bracketType = AUTO_BRACKET;
+      _number      = 0;
+      _hasBracket  = false;
       }
 
 //---------------------------------------------------------
@@ -75,12 +76,16 @@ void Tuplet::setSelected(bool f)
 void Tuplet::layout(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
-      if (_hasNumber) {
+      if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
                   _number->setSubtype(TEXT_TUPLET);
                   _number->setParent(this);
-                  _number->setText(QString("%1").arg(_actualNotes));
+                  if (_numberType == SHOW_NUMBER)
+                        _number->setText(QString("%1").arg(_actualNotes));
+                  else
+                        _number->setText(QString("%1:%2").arg(_actualNotes).arg(_normalNotes));
+
                   }
             }
       else {
@@ -123,7 +128,7 @@ void Tuplet::layout(ScoreLayout* layout)
       const ChordRest* cr1 = _elements.front();
       const ChordRest* cr2 = _elements.back();
       if (cr1->beam())
-            _hasLine = false;
+            _hasBracket = false;
 
       QPointF p1, p2;
       if (isUp) {
@@ -200,7 +205,7 @@ void Tuplet::layout(ScoreLayout* layout)
       qreal numberWidth = _number->bbox().width();
       _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
 
-      if (_hasLine) {
+      if (_hasBracket) {
             qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
 
             if (isUp) {
@@ -241,13 +246,13 @@ QRectF Tuplet::bbox() const
       {
       QRectF r;
       //
-      // _hasLine implies _hasNumber
+      // _hasBracket implies _hasNumber
       //
-      if (_hasLine) {
+      if (_hasBracket) {
             r = bracketL.boundingRect() | bracketR.boundingRect();
             r |= _number->bbox().translated(_number->pos());
             }
-      else if (_hasNumber)
+      if (_numberType != NO_TEXT)
             r |= _number->bbox().translated(_number->pos());
       return r;
       }
@@ -263,7 +268,7 @@ void Tuplet::draw(QPainter& p) const
             p.translate(_number->pos());
             _number->draw(p);
             p.restore();
-            if (_hasLine) {
+            if (_hasBracket) {
                   QPen pen(p.pen());
                   pen.setWidthF(_spatium * 0.1);
                   p.setPen(pen);
@@ -280,8 +285,8 @@ void Tuplet::draw(QPainter& p) const
 void Tuplet::write(Xml& xml, int id) const
       {
       xml.stag(QString("Tuplet id=\"%1\"").arg(id));
-      xml.tag("hasNumber", _hasNumber);
-      xml.tag("hasLine", _hasLine);
+      xml.tag("numberType", _numberType);
+      xml.tag("bracketType", _bracketType);
       xml.tag("baseLen", _baseLen);
       xml.tag("normalNotes", _normalNotes);
       xml.tag("actualNotes", _actualNotes);
@@ -300,10 +305,16 @@ void Tuplet::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
-            if (tag == "hasNumber")
-                  _hasNumber = i;
-            else if (tag == "hasLine")
-                  _hasLine = i;
+            if (tag == "hasNumber")             // obsolete
+                  _numberType = i ? SHOW_NUMBER : NO_TEXT;
+            else if (tag == "hasLine") {          // obsolete
+                  _hasBracket = i;
+                  _bracketType = AUTO_BRACKET;
+                  }
+            else if (tag == "numberType")
+                  _numberType = i;
+            else if (tag == "bracketType")
+                  _bracketType = i;
             else if (tag == "baseLen")
                   _baseLen = i;
             else if (tag == "normalNotes")
@@ -385,7 +396,7 @@ bool Tuplet::genPropertyMenu(QMenu* popup) const
       QAction* a = popup->addAction(tr("Show number"));
       a->setData("number");
       a->setCheckable(true);
-      a->setChecked(_hasNumber);
+//      a->setChecked(_hasNumber);
       return true;
       }
 
@@ -395,10 +406,11 @@ bool Tuplet::genPropertyMenu(QMenu* popup) const
 
 void Tuplet::propertyAction(const QString& s)
       {
-      if (s == "number") {
+/*      if (s == "number") {
             _hasNumber = !_hasNumber;
             }
       else
+*/
             Element::propertyAction(s);
       }
 

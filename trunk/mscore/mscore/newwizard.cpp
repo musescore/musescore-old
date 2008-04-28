@@ -651,6 +651,7 @@ NewWizard::NewWizard(QWidget* parent)
       setPage(Page_Template, p4);
       setPage(Page_Timesig, p3);
       p3->setFinalPage(true);
+      p4->setFinalPage(false);
       resize(700, 500);
       }
 

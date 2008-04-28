@@ -678,7 +678,7 @@ void Measure::layout2(ScoreLayout* layout)
       //
       //   set measure number
       //
-      int pn = _no + _noOffset;
+      int pn    = _no + _noOffset;
       QString s = QString("%1").arg(pn + 1);
 
       QString ns;

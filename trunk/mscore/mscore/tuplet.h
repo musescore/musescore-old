@@ -39,11 +39,18 @@ class Text;
 //------------------------------------------------------------------------
 
 class Tuplet : public Element {
+   public:
+      enum { SHOW_NUMBER, SHOW_RELATION, NO_TEXT };
+      enum { AUTO_BRACKET, SHOW_BRACKET, SHOW_NO_BRACKET };
+
+   private:
       Q_DECLARE_TR_FUNCTIONS(Tuplet)
 
       ChordRestList _elements;
-      bool _hasNumber;
-      bool _hasLine;
+      int _numberType;
+      int _bracketType;
+      bool _hasBracket;
+
       int _baseLen;     // tick len of a "normal note"
       int _normalNotes;
       int _actualNotes;
@@ -68,20 +75,23 @@ class Tuplet : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      Measure* measure() const     { return (Measure*)parent(); }
-      bool hasNumber() const       { return _hasNumber;   }
-      bool hasLine() const         { return _hasLine;     }
-      void setHasNumber(bool val)  { _hasNumber = val;    }
-      void setHasLine(bool val)    { _hasLine = val;      }
-      void setBaseLen(int val)     { _baseLen = val;      }
-      void setNormalNotes(int val) { _normalNotes = val;  }
-      void setActualNotes(int val) { _actualNotes = val;  }
-      int baseLen() const          { return _baseLen;     }
-      int normalNotes() const      { return _normalNotes; }
-      int actualNotes() const      { return _actualNotes; }
-      int normalLen() const        { return _baseLen / _normalNotes; }
-      int noteLen() const { return _baseLen * _normalNotes / _actualNotes; }
-      ChordRestList* elements()    { return &_elements; }
+      Measure* measure() const      { return (Measure*)parent(); }
+
+      int numberType() const        { return _numberType;   }
+      int bracketType() const       { return _bracketType;  }
+      void setNumberType(int val)   { _numberType = val;    }
+      void setBracketType(int val)  { _bracketType = val;   }
+      bool hasBracket() const       { return _hasBracket;   }
+
+      void setBaseLen(int val)      { _baseLen = val;       }
+      void setNormalNotes(int val)  { _normalNotes = val;   }
+      void setActualNotes(int val)  { _actualNotes = val;   }
+      int baseLen() const           { return _baseLen;      }
+      int normalNotes() const       { return _normalNotes;  }
+      int actualNotes() const       { return _actualNotes;  }
+      int normalLen() const         { return _baseLen / _normalNotes; }
+      int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
+      ChordRestList* elements()     { return &_elements; }
 
       virtual void layout(ScoreLayout*);
       Text* number() const { return _number; }
