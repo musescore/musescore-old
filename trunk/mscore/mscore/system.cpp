@@ -381,20 +381,20 @@ void System::layout2(ScoreLayout* layout)
       //  layout instrument names
       //---------------------------------------------------
 
-      int idx = 0;
+      int staffIdx = 0;
       foreach(Part* p, *score()->parts()) {
-            SysStaff* s = staff(idx);
+            SysStaff* s = staff(staffIdx);
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
                   //
                   // override Text->layout()
                   //
                   double y1 = s->bbox().top();
-                  double y2 = staff(idx + nstaves - 1)->bbox().bottom();
+                  double y2 = staff(staffIdx + nstaves - 1)->bbox().bottom();
                   double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
                   s->instrumentName->setYpos(y);
                   }
-            idx += nstaves;
+            staffIdx += nstaves;
             }
       }
 

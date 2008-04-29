@@ -460,7 +460,9 @@ void MuseScore::newFile()
             return;
       int measures = newWizard->measures();
       int timesigZ, timesigN;
+      int pickupTimesigZ, pickupTimesigN;
       newWizard->timesig(&timesigZ, &timesigN);
+      bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
 
       Score* score = new Score;
       score->setCreated(true);
@@ -481,6 +483,30 @@ void MuseScore::newFile()
                   measures -= m;
             else
                   measures = 0;
+            //
+            // remove all notes & rests
+            //
+            int tracks = score->nstaves() * VOICES;
+            for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* measure = static_cast<Measure*>(mb);
+                  for (Segment* s = measure->first(); s;) {
+                        Segment* ns = s->next();
+                        if (
+                              (s->subtype() == Segment::SegChordRest)
+                           || (s->subtype() == Segment::SegClef)
+                           || (s->subtype() == Segment::SegTimeSig)
+                           ) {
+                              for (int track = 0; track < tracks; ++track) {
+                                    if (s->element(track))
+                                          delete s->element(track);
+                                    }
+                              measure->remove(s);
+                              }
+                        s = ns;
+                        }
+                  }
             }
       //
       //  create new score from scratch
@@ -489,9 +515,48 @@ void MuseScore::newFile()
             score->fileInfo()->setFile(createDefaultName());
             newWizard->createInstruments(score);
             }
-      if (measures)
-            score->appendMeasures(measures, MEASURE);
-      score->changeTimeSig(0, TimeSig::sigtype(timesigN, timesigZ));
+      for (int i = 0; i < measures; ++i) {
+            Measure* measure = new Measure(score);
+            score->measures()->add(measure);
+            }
+
+      SigList* sigmap = score->getSigmap();
+      if (pickupMeasure) {
+            sigmap->add(0, SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
+            int tick = score->getSigmap()->ticksMeasure(0);
+            sigmap->add(tick, SigEvent(timesigN, timesigZ));
+            }
+      else {
+            sigmap->add(0, SigEvent(timesigN, timesigZ));
+            }
+
+      int tick = 0;
+      for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
+            mb->setTick(tick);
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = static_cast<Measure*>(mb);
+            int ticks = sigmap->ticksMeasure(tick);
+	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
+                  int len = 0;
+                  if (tick == 0) {
+                        TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
+                        ts->setTick(0);
+                        ts->setTrack(staffIdx * VOICES);
+                        Segment* s = measure->getSegment(ts);
+                        s->add(ts);
+                        if (pickupMeasure)
+	                        len = ticks;
+                        }
+		      Rest* rest = new Rest(score, tick, len);
+      	      rest->setTrack(staffIdx * VOICES);
+	      	Segment* s = measure->getSegment(rest);
+		      s->add(rest);
+                  }
+            tick += ticks;
+            }
+      score->fixTicks();
+
       QString title     = newWizard->title();
       QString subtitle  = newWizard->subtitle();
       QString composer  = newWizard->composer();

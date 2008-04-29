@@ -505,10 +505,10 @@ Part* Score::part(int n)
 
 void Score::addMeasure(MeasureBase* m)
       {
-      int tick    = m->tick();
+      int tick        = m->tick();
       MeasureBase* im = tick2measureBase(tick);
       m->setNext(im);
-      _layout->add(m);
+      _measures.add(m);
       }
 
 //---------------------------------------------------------
