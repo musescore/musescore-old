@@ -52,5 +52,7 @@ class KeySig : public Element {
       Segment* segment() const { return (Segment*)parent(); }
       };
 
+extern const char* keyNames[15];
+
 #endif
 

@@ -26,6 +26,7 @@
 #include "ui_newwizard.h"
 
 class Score;
+class Palette;
 
 //---------------------------------------------------------
 //   InstrumentWizard
@@ -151,6 +152,21 @@ class NewWizardPage4 : public QWizardPage {
       };
 
 //---------------------------------------------------------
+//   NewWizardPage5
+//---------------------------------------------------------
+
+class NewWizardPage5 : public QWizardPage {
+      Q_OBJECT
+
+      Palette* sp;
+
+   public:
+      NewWizardPage5(QWidget* parent = 0);
+      virtual bool isComplete() const { return true; }
+      int keysig() const;
+      };
+
+//---------------------------------------------------------
 //   NewWizard
 //---------------------------------------------------------
 
@@ -161,13 +177,14 @@ class NewWizard : public QWizard {
       NewWizardPage2* p2;
       NewWizardPage3* p3;
       NewWizardPage4* p4;
+      NewWizardPage5* p5;
 
    public:
       NewWizard(QWidget* parent = 0);
       friend class QWizardPage;
       virtual int nextId() const;
 
-      enum { Page_Type, Page_Instruments, Page_Template, Page_Timesig };
+      enum { Page_Type, Page_Instruments, Page_Template, Page_Keysig, Page_Timesig};
 
       QString templatePath() const { return p4->templatePath(); }
       bool useTemplate() const;
@@ -179,6 +196,7 @@ class NewWizard : public QWizard {
       QString composer() const           { return p1->composer();    }
       QString poet() const               { return p1->poet();        }
       QString copyright() const          { return p1->copyright();   }
+      int keysig() const                 { return p5->keysig();      }
       bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
       };
 

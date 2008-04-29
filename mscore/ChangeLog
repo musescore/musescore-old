@@ -1,4 +1,5 @@
 29.4.8 (ws)
+      - added selection of time signature to "new" wizard
       - added pickup measure to "new" wizard
 28.4.8 (ws)
       - fix measure number style dialog
