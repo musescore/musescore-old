@@ -663,7 +663,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             SigEvent sig1   = _score->sigmap->timesig(tick - 1);
             SigEvent sig2   = _score->sigmap->timesig(tick);
 
-            if (score()->style()->genCourtesyTimesig && !(sig1 == sig2)) {
+            if (score()->style()->genCourtesyTimesig && !sig1.nominalEqual(sig2)) {
                   while (lm && lm->type() != MEASURE)
                         lm = lm->prev();
                   if (lm) {

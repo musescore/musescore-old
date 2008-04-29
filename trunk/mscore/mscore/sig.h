@@ -50,6 +50,9 @@ struct SigEvent {
             else
                   return QString("void");
             }
+      bool nominalEqual(const SigEvent& e) const {
+            return (e.nominator2 == nominator2) && (e.denominator2 == denominator2);
+            }
       };
 
 //---------------------------------------------------------
