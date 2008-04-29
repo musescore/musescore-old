@@ -65,6 +65,7 @@
 #include "excerpt.h"
 #include "system.h"
 #include "tuplet.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   load
@@ -463,6 +464,7 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       newWizard->timesig(&timesigZ, &timesigN);
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
+      int ks = newWizard->keysig();
 
       Score* score = new Score;
       score->setCreated(true);
@@ -545,6 +547,15 @@ void MuseScore::newFile()
                         ts->setTrack(staffIdx * VOICES);
                         Segment* s = measure->getSegment(ts);
                         s->add(ts);
+                        if (ks) {
+                              Staff* staff = score->staff(staffIdx);
+                              (*(staff->keymap()))[0] = ks;
+                              KeySig* keysig = new KeySig(score);
+                              keysig->setTrack(staffIdx * VOICES);
+                              keysig->setTick(0);
+                              s = measure->getSegment(keysig);
+                              s->add(keysig);
+                              }
                         if (pickupMeasure)
 	                        len = ticks;
                         }
@@ -565,9 +576,11 @@ void MuseScore::newFile()
       if (!title.isEmpty() || !subtitle.isEmpty() || !composer.isEmpty() || !poet.isEmpty()) {
             MeasureBase* measure = score->measures()->first();
             if (measure->type() != VBOX) {
-                  measure = new VBox(score);
-                  measure->setTick(0);
-                  score->measures()->add(measure);
+                  MeasureBase* nm = new VBox(score);
+                  nm->setTick(0);
+                  nm->setNext(measure);
+                  score->measures()->add(nm);
+                  measure = nm;
                   }
             if (!title.isEmpty()) {
                   Text* s = new Text(score);

@@ -27,6 +27,8 @@
 #include "clef.h"
 #include "part.h"
 #include "drumset.h"
+#include "palette.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   InstrumentWizard
@@ -555,6 +557,51 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   NewWizardPage5
+//---------------------------------------------------------
+
+NewWizardPage5::NewWizardPage5(QWidget* parent)
+   : QWizardPage(parent)
+      {
+      setTitle(tr("Create New Score"));
+      setSubTitle(tr("Select Key Signature:"));
+
+      sp = new Palette(5, 3, .8);
+      sp->setGrid(56, 45);
+      sp->setSelectable(true);
+      sp->showStaff(true);
+      for (int i = 0; i < 7; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i+1);
+            sp->addObject(i,  k, tr(keyNames[i*2]));
+            }
+      for (int i = -7; i < 0; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i & 0xff);
+            sp->addObject(14 + i,  k, tr(keyNames[(7 + i) * 2 + 1]));
+            }
+      KeySig* k = new KeySig(gscore);
+      k->setSubtype(0);
+      sp->addObject(14,  k, keyNames[14]);
+      sp->setSelected(14);
+
+      QGridLayout* grid = new QGridLayout;
+      grid->addWidget(sp, 0, 0);
+      setLayout(grid);
+      }
+
+//---------------------------------------------------------
+//   keysig
+//---------------------------------------------------------
+
+int NewWizardPage5::keysig() const
+      {
+      int idx = sp->getSelectedIdx();
+      Element* e = sp->element(idx);
+      return e->subtype();
+      }
+
+//---------------------------------------------------------
 //   isComplete
 //---------------------------------------------------------
 
@@ -604,13 +651,16 @@ NewWizard::NewWizard(QWidget* parent)
       p2 = new NewWizardPage2;
       p3 = new NewWizardPage3;
       p4 = new NewWizardPage4;
+      p5 = new NewWizardPage5;
 
       setPage(Page_Type, p1);
       setPage(Page_Instruments, p2);
       setPage(Page_Template, p4);
       setPage(Page_Timesig, p3);
+      setPage(Page_Keysig, p5);
       p3->setFinalPage(true);
       p4->setFinalPage(false);
+      p5->setFinalPage(false);
       resize(700, 500);
       }
 
@@ -624,6 +674,8 @@ int NewWizard::nextId() const
             case Page_Type:
                   return useTemplate() ? Page_Template : Page_Instruments;
             case Page_Instruments:
+                  return Page_Keysig;
+            case Page_Keysig:
                   return Page_Timesig;
             case Page_Template:
                   return Page_Timesig;
