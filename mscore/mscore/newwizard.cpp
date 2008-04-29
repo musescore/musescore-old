@@ -305,96 +305,76 @@ void InstrumentWizard::createInstruments(Score* cs)
       QTreeWidget* pl = partiturList;
       Part* part   = 0;
       int staffIdx = 0;
-      int rstaff   = 0;
 
       QTreeWidgetItem* item = 0;
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
-            rstaff = 0;
             PartListItem* pli = (PartListItem*)item;
-            if (pli->op == ITEM_DELETE)
-                  cs->cmdRemovePart(pli->part);
-            else if (pli->op == ITEM_ADD) {
-                  const InstrumentTemplate* t = ((PartListItem*)item)->it;
-                  part = new Part(cs);
-                  part->setMidiProgram(t->midiProgram);
-                  part->setMinPitch(t->minPitch);
-                  part->setMaxPitch(t->maxPitch);
-                  part->setShortName(t->shortName);
-                  part->setTrackName(t->trackName);
-                  part->setLongName(t->name);
-                  part->setPitchOffset(t->transpose);
-                  if (t->useDrumset) {
-                        part->setUseDrumset(true);
-                        part->setDrumset(new Drumset(*smDrumset));
-                        }
-
-                  pli->part = part;
-                  QTreeWidgetItem* ci = 0;
-                  rstaff = 0;
-                  for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
-                        StaffListItem* sli = (StaffListItem*)ci;
-                        Staff* staff = new Staff(cs, part, rstaff);
-                        sli->staff = staff;
-                        staff->setRstaff(rstaff);
-                        ++rstaff;
-                        staff->clef()->setClef(0, sli->clef());
-                        staff->setLines(t->staffLines[cidx]);
-                        staff->setSmall(t->smallStaff[cidx]);
-                        if (cidx == 0) {
-                              staff->setBracket(0, t->bracket);
-                              staff->setBracketSpan(0, t->staves);
-                              }
-                        part->staves()->push_back(staff);
-                        cs->staves().insert(staffIdx + rstaff, staff);
-                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx+rstaff);
-                        }
-                  cs->cmdInsertPart(part, staffIdx);
-                  staffIdx += rstaff;
+            if (pli->op != ITEM_ADD) {
+                  printf("bad op\n");
+                  continue;
                   }
-            else {
-                  part = pli->part;
-                  QTreeWidgetItem* ci = 0;
-                  for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
-                        StaffListItem* sli = (StaffListItem*)ci;
-                        if (sli->op == ITEM_DELETE) {
-                              cs->layout()->systems()->clear();
-                              Staff* staff = sli->staff;
-                              int sidx = staff->idx();
-                              int eidx = sidx + 1;
-                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
-                                    if (mb->type() != MEASURE)
-                                          continue;
-                                    Measure* m = (Measure*)mb;
-                                    m->cmdRemoveStaves(sidx, eidx);
-                                    }
-                              cs->undoOp(UndoOp::RemoveStaff, staff, sidx);
-                              cs->removeStaff(staff);
-                              }
-                        else if (sli->op == ITEM_ADD) {
-                              Staff* staff = new Staff(cs, part, rstaff);
-                              sli->staff = staff;
-                              staff->setRstaff(rstaff);
-                              ++rstaff;
-                              staff->clef()->setClef(0, sli->clef());
+            const InstrumentTemplate* t = ((PartListItem*)item)->it;
+            part = new Part(cs);
+            part->setMidiProgram(t->midiProgram);
+            part->setMinPitch(t->minPitch);
+            part->setMaxPitch(t->maxPitch);
+            part->setShortName(t->shortName);
+            part->setTrackName(t->trackName);
+            part->setLongName(t->name);
+            part->setPitchOffset(t->transpose);
+            if (t->useDrumset) {
+                  part->setUseDrumset(true);
+                  part->setDrumset(new Drumset(*smDrumset));
+                  }
 
-                              cs->insertStaff(staff, staffIdx);
-                              cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
+            pli->part = part;
+            QTreeWidgetItem* ci = 0;
+            int rstaff = 0;
+            for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
+                  StaffListItem* sli = (StaffListItem*)ci;
+                  Staff* staff = new Staff(cs, part, rstaff);
+                  sli->staff = staff;
+                  staff->setRstaff(rstaff);
+                  ++rstaff;
+                  staff->clef()->setClef(0, sli->clef());
+                  staff->setLines(t->staffLines[cidx]);
+                  staff->setSmall(t->smallStaff[cidx]);
+                  if (cidx == 0) {
+                        staff->setBracket(0, t->bracket);
+                        staff->setBracketSpan(0, t->staves);
+                        }
+                  part->staves()->push_back(staff);
+                  cs->staves().insert(staffIdx + rstaff, staff);
+                  }
 
-                              for (MeasureBase* mb = cs->layout()->first(); mb; mb = mb->next()) {
-                                    if (mb->type() != MEASURE)
-                                          continue;
-                                    Measure* m = (Measure*)mb;
-                                    m->cmdAddStaves(staffIdx, staffIdx+1);
-                                    }
-
-                              ++staffIdx;
-                              }
+            // insert part
+            cs->insertPart(part, staffIdx);
+            int sidx = cs->staffIdx(part);
+            int eidx = sidx + part->nstaves();
+            for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+                  m->cmdAddStaves(sidx, eidx);
+                  }
+            //
+            //    adjust brackets
+            //
+            for (int staffIdx1 = 0; staffIdx1 < cs->staves().size(); ++staffIdx1) {
+                  Staff* staff = cs->staff(staffIdx1);
+                  int bl = staff->bracketLevels();
+                  for (int i = 0; i < bl; ++i) {
+                        int span = staff->bracketSpan(i);
+                        if ((span == 0) || ((staffIdx1 + span) < sidx) || (staffIdx1 > eidx))
+                              continue;
+                        if ((sidx >= staffIdx1) && (eidx <= (staffIdx1 + span)))
+                              staff->setBracketSpan(i, span + (eidx-sidx));
                         else {
-                              ++staffIdx;
-                              ++rstaff;
+                              printf("TODO: adjust brackets\n");
                               }
                         }
                   }
+            staffIdx += rstaff;
             }
       //
       //    sort staves
@@ -412,38 +392,6 @@ void InstrumentWizard::createInstruments(Score* cs)
                   dst.push_back(sli->staff);
                   }
             }
-#if 0
-      QList<int> sl;
-      QList<int> dl;
-
-      for (int idx = 0; idx < cs->staves().size(); ++idx)
-            sl.push_back(idx);
-
-      for (QList<Staff*>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            Staff* staff = *i;
-            int idx = cs->staves().indexOf(staff);
-            if (idx == -1)
-                  printf("staff in dialog(%p) not found in score\n", staff);
-            else
-                  dl.push_back(idx);
-            }
-
-      if (sl.size() != dl.size())
-            printf("cannot happen: sl(%d) != dl(%d)\n", sl.size(), dl.size());
-      bool sort = false;
-      QList<int>::iterator isl = sl.begin();
-      QList<int>::iterator dsl = dl.begin();
-      for (int i = 0; i < sl.size(); ++i, ++isl, ++dsl) {
-            if (*isl != *dsl) {
-                  sort = true;
-                  break;
-                  }
-            }
-      if (sort) {
-            cs->sortStaves(dl);
-            cs->undoOp(dl);
-            }
-#endif
       cs->setLayoutAll(true);
       }
 
@@ -474,6 +422,17 @@ void TimesigWizard::timesig(int* z, int* n) const
       {
       *z = timesigZ->value();
       *n = timesigN->value();
+      }
+
+//---------------------------------------------------------
+//   pickupMeasure
+//---------------------------------------------------------
+
+bool TimesigWizard::pickup(int* z, int* n) const
+      {
+      *z = pickupTimesigZ->value();
+      *n = pickupTimesigN->value();
+      return pickupMeasure->isChecked();
       }
 
 //---------------------------------------------------------

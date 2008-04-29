@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1</Mag>
-  <xoff>1.69333</xoff>
-  <yoff>4.445</yoff>
+  <xoff>3.81</xoff>
+  <yoff>1.905</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -790,12 +790,12 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
-    <staffUpperBorder>8</staffUpperBorder>
-    <staffLowerBorder>4</staffLowerBorder>
+    <staffUpperBorder>7</staffUpperBorder>
+    <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
-    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>7</systemFrameDistance>
     <frameSystemDistance>7</frameSystemDistance>
@@ -813,7 +813,7 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <measureSpacing>1.5</measureSpacing>
+    <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
@@ -824,8 +824,8 @@
     <beamWidth>0.48</beamWidth>
     <beamDistance>0.5</beamDistance>
     <beamMinLen>1.25</beamMinLen>
-    <beamMinSlope>0.1</beamMinSlope>
-    <beamMaxSlope>0.5</beamMaxSlope>
+    <beamMinSlope>0.05</beamMinSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
     <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
     <dotRestDistance>0.25</dotRestDistance>
@@ -834,7 +834,7 @@
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>0.25</propertyDistance>
     <pageFillLimit>0.7</pageFillLimit>
-    <lastSystemFillLimit>0.5</lastSystemFillLimit>
+    <lastSystemFillLimit>0.3</lastSystemFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
     <hairpinWidth>0.13</hairpinWidth>
@@ -857,7 +857,7 @@
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
     </Style>
-  <showInvisible>0</showInvisible>
+  <showInvisible>1</showInvisible>
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
@@ -872,9 +872,12 @@
       <nom>4</nom>
       <denom>4</denom>
       </sig>
+    <sig tick="3840">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
     </siglist>
-  <tempolist fix="1.5">
-    <tempo tick="0">1.5</tempo>
+  <tempolist fix="2">
     </tempolist>
   <Part>
     <Staff>
@@ -884,32 +887,11 @@
       <keylist>
         <key tick="0" idx="0"/>
         </keylist>
-      <bracket type="1" span="2"/>
-      <barLineSpan>2</barLineSpan>
+      <bracket type="-1" span="2"/>
       </Staff>
-    <Staff>
-      <cleflist>
-        <clef tick="0" idx="4"/>
-        </cleflist>
-      <keylist>
-        <key tick="0" idx="0"/>
-        </keylist>
-      <barLineSpan>0</barLineSpan>
-      </Staff>
-    <trackName>Piano</trackName>
-    <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">Piano</p></body></html>
-      </name>
-    <shortName>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">Pno.</p></body></html>
-      </shortName>
+    <trackName>Violin</trackName>
     <Instrument>
+      <midiProgram>40</midiProgram>
       <chorus>30</chorus>
       <reverb>30</reverb>
       </Instrument>
@@ -924,14 +906,14 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Tuplets</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Tuplets</p></body></html>
           </html-data>
         </Text>
       </VBox>
     <Measure number="1">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -942,47 +924,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
-        <baseLen>240</baseLen>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <Number>
-          <subtype>Tuplet</subtype>
-          <track>-1</track>
-          <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
-            </html-data>
-          </Number>
-        </Tuplet>
-      <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
-        <baseLen>240</baseLen>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <Number>
-          <subtype>Tuplet</subtype>
-          <track>-1</track>
-          <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
-            </html-data>
-          </Number>
-        </Tuplet>
-      <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>120</baseLen>
         <normalNotes>4</normalNotes>
         <actualNotes>5</actualNotes>
@@ -993,15 +941,44 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">5</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
-      <TimeSig>
-        <subtype>260</subtype>
-        <den>4</den>
-        <nom1>4</nom1>
-        </TimeSig>
+      <Tuplet id="2">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>120</baseLen>
+        <normalNotes>4</normalNotes>
+        <actualNotes>7</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">7</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Tuplet id="3">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>60</baseLen>
+        <normalNotes>8</normalNotes>
+        <actualNotes>9</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">9</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
@@ -1010,70 +987,125 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
-        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
-        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>1</Tuplet>
-        <Note pitch="69" tpc="17"/>
-        </Chord>
-      <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
-        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
-        <Note pitch="69" tpc="17"/>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
-        <Note pitch="71" tpc="19"/>
+        <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>96</ticklen>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <tick>1440</tick>
+        <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
-      <Rest>
-        <ticklen>96</ticklen>
+      <Chord>
+        <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
-        </Rest>
-      <Rest>
-        <ticklen>96</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
-        </Rest>
-      <Rest>
-        <ticklen>96</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
-        </Rest>
-      <Rest>
-        <ticklen>96</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
-        </Rest>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       </Measure>
     <Measure number="2">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
-        <baseLen>240</baseLen>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>120</baseLen>
         <normalNotes>4</normalNotes>
         <actualNotes>6</actualNotes>
         <Number>
@@ -1087,9 +1119,82 @@ p, li { white-space: pre-wrap; }
             </html-data>
           </Number>
         </Tuplet>
-      <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>1</hasLine>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>80</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      </Measure>
+    <Measure number="3">
+      <Tuplet id="0">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>480</baseLen>
+        <normalNotes>3</normalNotes>
+        <actualNotes>2</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>720</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>720</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Tuplet id="0">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>3</normalNotes>
         <actualNotes>2</actualNotes>
@@ -1105,72 +1210,24 @@ p, li { white-space: pre-wrap; }
           </Number>
         </Tuplet>
       <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>0</Tuplet>
-        <Note pitch="65" tpc="13"/>
-        </Chord>
-      <Chord>
-        <ticklen>160</ticklen>
+        <ticklen>360</ticklen>
         <Tuplet>0</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>0</Tuplet>
-        <Note pitch="65" tpc="13"/>
-        </Chord>
-      <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>0</Tuplet>
-        <Note pitch="64" tpc="18"/>
-        </Chord>
-      <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>0</Tuplet>
-        <Note pitch="62" tpc="16"/>
-        </Chord>
-      <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>0</Tuplet>
-        <Note pitch="60" tpc="14"/>
-        </Chord>
-      <Chord>
         <ticklen>360</ticklen>
-        <Tuplet>1</Tuplet>
+        <Tuplet>0</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
-      <Rest>
-        <ticklen>360</ticklen>
-        <Tuplet>1</Tuplet>
-        </Rest>
-      <Rest>
-        <ticklen>240</ticklen>
-        </Rest>
-      </Measure>
-    <Measure number="3">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
-      </Measure>
-    <Measure number="4">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Note pitch="67" tpc="15" ticks="720"/>
       </Measure>
     <Measure number="5">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
-      </Measure>
-    </Staff>
-  <Staff id="2">
-    <Measure number="1">
-      <Tuplet id="4">
-        <hasNumber>1</hasNumber>
-        <hasLine>1</hasLine>
-        <baseLen>240</baseLen>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
+      <Tuplet id="0">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>120</baseLen>
+        <normalNotes>3</normalNotes>
+        <actualNotes>2</actualNotes>
         <Number>
           <subtype>Tuplet</subtype>
           <track>-1</track>
@@ -1178,52 +1235,59 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
-      <TimeSig>
-        <subtype>260</subtype>
-        <den>4</den>
-        <nom1>4</nom1>
-        </TimeSig>
-      <Note pitch="47" tpc="19" ticks="480"/>
       <Chord>
-        <ticklen>160</ticklen>
-        <Tuplet>4</Tuplet>
-        <Note pitch="48" tpc="14"/>
+        <ticklen>180</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
         </Chord>
-      <Rest>
-        <ticklen>160</ticklen>
-        <Tuplet>4</Tuplet>
-        </Rest>
-      <Rest>
-        <ticklen>160</ticklen>
-        <Tuplet>4</Tuplet>
-        </Rest>
-      <Note pitch="50" tpc="16" ticks="480"/>
-      <Note pitch="52" tpc="18" ticks="480"/>
+      <Chord>
+        <ticklen>180</ticklen>
+        <Tuplet>0</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="360"/>
+      <Note pitch="67" tpc="15" ticks="360"/>
+      <Note pitch="67" tpc="15" ticks="360"/>
       </Measure>
-    <Measure number="2">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+    <Measure number="6">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
-    <Measure number="3">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+    <Measure number="7">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
-    <Measure number="4">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+    <Measure number="8">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
-    <Measure number="5">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+    <Measure number="9">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      </Measure>
+    <Measure number="10">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      </Measure>
+    <Measure number="11">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      </Measure>
+    <Measure number="12">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

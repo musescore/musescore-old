@@ -64,6 +64,7 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
       TimesigWizard(QWidget* parent = 0);
       int measures() const;
       void timesig(int* z, int* n) const;
+      bool pickup(int* z, int* n) const;
       };
 
 //---------------------------------------------------------
@@ -125,8 +126,9 @@ class NewWizardPage3 : public QWizardPage {
 
    public:
       NewWizardPage3(QWidget* parent = 0);
-      int measures() const { return w->measures(); }
-      void timesig(int* z, int* n) const { return w->timesig(z, n); }
+      int measures() const                     { return w->measures();          }
+      void timesig(int* z, int* n) const       { w->timesig(z, n);              }
+      bool pickupMeasure(int* z, int* n) const { return w->pickup(z, n); }
       };
 
 //---------------------------------------------------------
@@ -177,6 +179,7 @@ class NewWizard : public QWizard {
       QString composer() const           { return p1->composer();    }
       QString poet() const               { return p1->poet();        }
       QString copyright() const          { return p1->copyright();   }
+      bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
       };
 
 #endif
