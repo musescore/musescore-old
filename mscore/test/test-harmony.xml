@@ -708,7 +708,6 @@
 		</measure>
 
 		<measure number="57">
-                  <print new-system="yes"/>
 			<direction><direction-type><words>D7b9</words></direction-type></direction>
             <harmony>
                 <root><root-step>D</root-step></root>
@@ -717,6 +716,20 @@
 		      <degree-value>9</degree-value>
 			<degree-alter>-1</degree-alter>
 			<degree-type>add</degree-type>
+			</degree>
+            </harmony>
+			<note><rest/><duration>400</duration><type>whole</type></note>
+		</measure>
+
+		<measure number="58">
+			<direction><direction-type><words>D7b5</words></direction-type></direction>
+            <harmony>
+                <root><root-step>D</root-step></root>
+                <kind text="">dominant</kind>
+		    <degree>
+		      <degree-value>5</degree-value>
+			<degree-alter>-1</degree-alter>
+			<degree-type>alter</degree-type>
 			</degree>
             </harmony>
 			<note><rest/><duration>400</duration><type>whole</type></note>
