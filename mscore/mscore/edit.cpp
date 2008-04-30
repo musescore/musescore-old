@@ -1162,12 +1162,9 @@ void Score::addLyrics()
 
 void Score::cmdTuplet(int n)
       {
-      Note* note = getSelectedNote();
-      if (note == 0) {
-            printf("cmdTuplet: no note selected\n");
+      ChordRest* cr = getSelectedChordRest();
+      if (cr == 0)
             return;
-            }
-      Chord* chord = note->chord();
 
       int normalNotes=2, actualNotes=3;
       switch (n) {
@@ -1208,32 +1205,32 @@ void Score::cmdTuplet(int n)
                   return;
             }
 
-      int baseLen    = chord->tickLen() / normalNotes;
+      int baseLen    = cr->tickLen() / normalNotes;
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
-      tuplet->setTrack(chord->track());
-      Measure* measure = chord->measure();
+      tuplet->setTrack(cr->track());
+      Measure* measure = cr->measure();
       tuplet->setParent(measure);
 
-      cmdCreateTuplet(chord, tuplet);
+      cmdCreateTuplet(cr, tuplet);
       }
 
 //---------------------------------------------------------
 //   cmdCreateTuplet
 //---------------------------------------------------------
 
-void Score::cmdCreateTuplet(Chord* chord, Tuplet* tuplet)
+void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
       {
       int normalNotes  = tuplet->normalNotes();
       int actualNotes  = tuplet->actualNotes();
-      int track        = chord->track();
-      Measure* measure = chord->measure();
+      int track        = cr->track();
+      Measure* measure = cr->measure();
 
-      int baseLen = chord->tickLen() / normalNotes;
-      if (chord->tickLen() % normalNotes) {
-            printf("cannot handle tuplet (rest %d)\n", chord->tickLen() % normalNotes);
+      int baseLen = cr->tickLen() / normalNotes;
+      if (cr->tickLen() % normalNotes) {
+            printf("cannot handle tuplet (rest %d)\n", cr->tickLen() % normalNotes);
             return;
             }
 
@@ -1243,12 +1240,9 @@ void Score::cmdCreateTuplet(Chord* chord, Tuplet* tuplet)
       //    - add 2 rests of 1/d2 duration as placeholder
       //---------------------------------------------------
 
-//      int voice    = chord->voice();
-      int tick     = chord->tick();
-      int pitch    = getSelectedNote()->pitch();
-
-      Segment* segment = chord->segment();
-      undoRemoveElement(chord);
+      int tick = cr->tick();
+      Segment* segment = cr->segment();
+      undoRemoveElement(cr);
       if (segment->isEmpty())
             undoRemoveElement(segment);
 
@@ -1256,25 +1250,33 @@ void Score::cmdCreateTuplet(Chord* chord, Tuplet* tuplet)
 
       int ticks = baseLen * normalNotes / actualNotes;
 
-      Note* note = new Note(this);
-      note->setPitch(pitch);
-      note->setTrack(track);
+      if (cr->type() == CHORD) {
+            cr = new Chord(this);
+            cr->setTick(tick);
+            cr->setTuplet(tuplet);
+            cr->setTrack(track);
+            Note* note = new Note(this);
+            int pitch = getSelectedNote()->pitch();
+            note->setPitch(pitch);
+            note->setTrack(track);
+            cr->add(note);
+            }
+      else {
+            cr = new Rest(this);
+            cr->setTick(tick);
+            cr->setTuplet(tuplet);
+            cr->setTrack(track);
+            }
+      cr->setTickLen(ticks);
 
-      chord = new Chord(this);
-      chord->setTick(tick);
-      chord->setTuplet(tuplet);
-      chord->setTrack(track);
-      chord->add(note);
-
-      chord->setTickLen(ticks);
-      Segment::SegmentType st = Segment::segmentType(chord->type());
+      Segment::SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
             undoAddElement(seg);
             }
-      chord->setParent(seg);
-      undoAddElement(chord);
+      cr->setParent(seg);
+      undoAddElement(cr);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
