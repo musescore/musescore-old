@@ -670,6 +670,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.tupletButton->setEnabled(chord->tuplet());
       crb.upFlag->setChecked(chord->up());
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
+      crb.isUpFlag->setChecked(chord->isUp());
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());

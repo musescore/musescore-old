@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>282</width>
-    <height>207</height>
+    <width>855</width>
+    <height>220</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -84,6 +84,13 @@
          <widget class="QCheckBox" name="upFlag" >
           <property name="text" >
            <string>Up</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="isUpFlag" >
+          <property name="text" >
+           <string>isUp</string>
           </property>
          </widget>
         </item>

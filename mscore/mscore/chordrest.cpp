@@ -279,10 +279,12 @@ void ChordRest::writeProperties(Xml& xml) const
       xml.prop(pl);
       for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia)
             (*ia)->write(xml);
-      foreach(Slur* s, _slurFor)
-            xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
-      foreach(Slur* s, _slurBack)
-            xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
+      if (!xml.noSlurs) {
+            foreach(Slur* s, _slurFor)
+                  xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
+            foreach(Slur* s, _slurBack)
+                  xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
+            }
       xml.curTick = tick() + tickLen();
       }
 

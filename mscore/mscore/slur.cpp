@@ -857,7 +857,6 @@ void Tie::setStartNote(Note* note)
 void Tie::write(Xml& xml) const
       {
       xml.stag("Tie");
-      Element::writeProperties(xml);
       SlurTie::writeProperties(xml);
       xml.etag();
       }

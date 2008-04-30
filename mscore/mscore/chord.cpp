@@ -609,7 +609,7 @@ void Chord::layout(ScoreLayout* layout)
             y        += in->second->line() * _spatium * .5 * staffMag;
 
             if (note->mirror())
-                  x += up() ? headWidth : - headWidth;
+                  x += isUp() ? headWidth : - headWidth;
             note->setPos(x, y);
 
             Accidental* accidental = note->accidental();

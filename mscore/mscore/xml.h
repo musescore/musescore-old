@@ -47,6 +47,7 @@ class Xml : public QTextStream {
       int curTick;      // used to optimize output
       int curTrack;
       int trackDiff;    // saved track is curTrack-trackDiff
+      bool noSlurs;     // dont write slur info in ChordRest; used for drag&drop
 
       Xml(QIODevice*);
       Xml();
