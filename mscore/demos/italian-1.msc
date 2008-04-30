@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.74418</Mag>
-  <xoff>-362.585</xoff>
-  <yoff>-5.71433</yoff>
+  <xoff>-48.0487</xoff>
+  <yoff>33.2323</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -902,6 +902,7 @@
         <clef tick="14880" idx="4"/>
         <clef tick="15360" idx="0"/>
         <clef tick="16800" idx="4"/>
+        <clef tick="28080" idx="0"/>
         </cleflist>
       <keylist>
         <key tick="0" idx="-1"/>
@@ -1048,8 +1049,67 @@
     <track>0</track>
     </Slur>
   <Slur id="40">
+    <track>0</track>
     </Slur>
   <Slur id="41">
+    <track>0</track>
+    </Slur>
+  <Slur id="42">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="-0.0851621" y="0.510973"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="43">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="0" y="0.510973"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="44">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="0" y="0.340648"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="45">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="-0.0851621" y="0.42581"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="46">
+    <track>0</track>
+    </Slur>
+  <Slur id="47">
+    <track>0</track>
+    </Slur>
+  <Slur id="48">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="0" y="-0.596135"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="49">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="0" y="0.42581"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="50">
+    <track>0</track>
+    <SlurSegment no="0">
+      <offset x="-0.42581" y="0.0851621"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur id="51">
+    <SlurSegment no="0">
+      <o4 x="-1.53292" y="-4.01054"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="52">
+    <up>1</up>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -2330,46 +2390,34 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
+        <Attribute>
+          <subtype>tenuto</subtype>
+          </Attribute>
         <Note pitch="67" tpc="15"/>
-        <Note pitch="72" tpc="14"/>
-        <Note pitch="76" tpc="18"/>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="28">
       <Chord>
-        <ticklen>480</ticklen>
-        <Attribute>
-          <subtype>dmarcato</subtype>
-          <offset x="-0.0851621" y="2.89551"/>
-          </Attribute>
-        <StemDirection>down</StemDirection>
-        <Note pitch="65" tpc="13"/>
-        </Chord>
-      <Rest>
-        <offset x="0" y="2.89551"/>
-        <ticklen>480</ticklen>
-        </Rest>
-      <Chord>
-        <track>1</track>
-        <tick>25920</tick>
         <ticklen>120</ticklen>
         <StemDirection>up</StemDirection>
-        <Note>
-          <track>1</track>
-          <pitch>72</pitch>
-          <tpc>14</tpc>
-          </Note>
-        <Note>
-          <track>1</track>
-          <pitch>76</pitch>
-          <tpc>18</tpc>
-          </Note>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="76" tpc="18"/>
         </Chord>
       <Chord>
-        <track>1</track>
         <ticklen>120</ticklen>
         <Note>
-          <track>1</track>
           <pitch>77</pitch>
           <tpc>13</tpc>
           <Tie>
@@ -2378,65 +2426,59 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Chord>
-        <track>1</track>
         <ticklen>240</ticklen>
         <BeamMode>mid</BeamMode>
         <StemDirection>up</StemDirection>
         <Note>
-          <track>1</track>
           <pitch>71</pitch>
           <tpc>19</tpc>
           <Tie>
-            <track>1</track>
-            <track>1</track>
             </Tie>
           </Note>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>begin</BeamMode>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="51"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>25920</tick>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <subtype>dmarcato</subtype>
+          <offset x="-0.0851621" y="2.89551"/>
+          <track>1</track>
+          </Attribute>
+        <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
-          <pitch>77</pitch>
+          <pitch>65</pitch>
           <tpc>13</tpc>
           </Note>
         </Chord>
-      <Chord>
+      <Rest>
+        <offset x="0.510973" y="5.6207"/>
         <track>1</track>
-        <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
-        <Note>
-          <track>1</track>
-          <pitch>71</pitch>
-          <tpc>19</tpc>
-          </Note>
-        </Chord>
-      <Chord>
-        <track>1</track>
-        <ticklen>120</ticklen>
-        <StemDirection>up</StemDirection>
-        <Note>
-          <track>1</track>
-          <pitch>74</pitch>
-          <tpc>16</tpc>
-          </Note>
-        </Chord>
-      <Chord>
-        <track>1</track>
-        <ticklen>120</ticklen>
-        <BeamMode>mid</BeamMode>
-        <Note>
-          <track>1</track>
-          <pitch>72</pitch>
-          <tpc>14</tpc>
-          </Note>
-        </Chord>
-      <Chord>
-        <track>1</track>
-        <ticklen>120</ticklen>
-        <BeamMode>mid</BeamMode>
-        <Note>
-          <track>1</track>
-          <pitch>70</pitch>
-          <tpc>12</tpc>
-          </Note>
-        </Chord>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="29">
       <LayoutBreak>
@@ -2451,6 +2493,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>26880</tick>
         <ticklen>360</ticklen>
+        <Slur type="stop" number="51"/>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -2472,6 +2515,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>120</ticklen>
+        <Slur type="start" number="52"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -2488,7 +2532,6 @@ p, li { white-space: pre-wrap; }
           <tpc>13</tpc>
           <Tie>
             <track>1</track>
-            <track>1</track>
             <up>1</up>
             </Tie>
           </Note>
@@ -2496,6 +2539,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="52"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -2528,33 +2572,236 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
+      <Dynamic>
+        <subtype>mf</subtype>
+        <offset x="-1.21597" y="0.482414"/>
+        <tick>28560</tick>
+        </Dynamic>
+      <Chord>
+        <tick>27840</tick>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
       <Rest>
-        <ticklen>0</ticklen>
+        <ticklen>240</ticklen>
         </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="46"/>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.766459" y="-2.81035"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="31">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Note pitch="74" tpc="16" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="46"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="47"/>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="75" tpc="11"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
       </Measure>
     <Measure number="32">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="47"/>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="48"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       </Measure>
     <Measure number="33">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.766459" y="-2.89551"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="69" tpc="17" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="48"/>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.681297" y="-3.40648"/>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="34">
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
         </LayoutBreak>
+      <Dynamic>
+        <subtype>p</subtype>
+        <offset x="-0.0155951" y="-1.44465"/>
+        <tick>32400</tick>
+        </Dynamic>
+      <Chord>
+        <tick>31680</tick>
+        <ticklen>120</ticklen>
+        <appoggiatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <ticklen>120</ticklen>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>31680</tick>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="49"/>
+        <Slur type="stop" number="49"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="49"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       <Rest>
-        <ticklen>0</ticklen>
+        <ticklen>240</ticklen>
         </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.681297" y="-4.51359"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="35">
       <Rest>
@@ -4167,29 +4414,231 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      <Clef>
+        <offset x="0" y="3"/>
+        </Clef>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="start" number="42"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="42"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="31">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="start" number="43"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="43"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
       </Measure>
     <Measure number="32">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="start" number="44"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="44"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="33">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="start" number="45"/>
+        <Note>
+          <offset x="0.0148538" y="0"/>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="45"/>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       </Measure>
     <Measure number="34">
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <offset x="1.14374" y="0"/>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Note pitch="53" tpc="13" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Slur type="start" number="50"/>
+        <StemDirection>down</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <offset x="-0.170324" y="6.04651"/>
+          </Attribute>
+        <Slur type="stop" number="50"/>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <offset x="-0.42581" y="5.53554"/>
+          </Attribute>
+        <StemDirection>down</StemDirection>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <tick>31680</tick>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>5</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>5</track>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
       <Rest>
-        <ticklen>0</ticklen>
+        <offset x="0.0851621" y="3.06584"/>
+        <track>5</track>
+        <ticklen>240</ticklen>
         </Rest>
+      <Chord>
+        <track>5</track>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>5</track>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="35">
       <Rest>

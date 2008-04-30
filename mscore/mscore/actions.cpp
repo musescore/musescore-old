@@ -1539,6 +1539,60 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("bass clef"),
          QT_TR_NOOP("bass clef")
          ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x12",
+         QT_TR_NOOP("exchange voice 1-2"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 1-2"),
+         QT_TR_NOOP("exchange voice 1-2")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x13",
+         QT_TR_NOOP("exchange voice 1-3"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 1-3"),
+         QT_TR_NOOP("exchange voice 1-3")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x14",
+         QT_TR_NOOP("exchange voice 1-4"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 1-4"),
+         QT_TR_NOOP("exchange voice 1-4")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x23",
+         QT_TR_NOOP("exchange voice 2-3"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 2-3"),
+         QT_TR_NOOP("exchange voice 2-3")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x24",
+         QT_TR_NOOP("exchange voice 2-4"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 2-4"),
+         QT_TR_NOOP("exchange voice 2-4")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "voice-x34",
+         QT_TR_NOOP("exchange voice 3-4"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("exchange voice 3-4"),
+         QT_TR_NOOP("exchange voice 3-4")
+         ),
       Shortcut(0, 0, 0),
       };
 

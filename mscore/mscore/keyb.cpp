@@ -218,15 +218,25 @@ void Score::padToggle(int n)
                   if (el->type() == NOTE)
                         el = el->parent();
                   if (el->isChordRest()) {
-                        ChordRest* cr = (ChordRest*)el;
+                        ChordRest* cr = static_cast<ChordRest*>(el);
                         int tick      = cr->tick();
                         int len       = _padState.tickLen;
-                        if (cr->tuplet())
-                              len = cr->tuplet()->noteLen();
-                        if (_padState.rest)
-                              setRest(tick, _is.track, len, _padState.dots);
-                        else
-                              setNote(tick, _is.track, _padState.pitch, len);
+                        if (cr->type() == CHORD && ((Chord*)cr)->noteType() != NOTE_NORMAL) {
+                              Chord* c = static_cast<Chord*>(cr);
+                              cr->setTickLen(len);
+                              for (iNote in = c->noteList()->begin(); in != c->noteList()->end(); ++in) {
+                                    Note* n = in->second;
+                                    n->setTickLen(len);
+                                    }
+                              }
+                        else {
+                              if (cr->tuplet())
+                                    len = cr->tuplet()->noteLen();
+                              if (_padState.rest)
+                                    setRest(tick, _is.track, len, _padState.dots);
+                              else
+                                    setNote(tick, _is.track, _padState.pitch, len);
+                              }
                         }
                   }
             }

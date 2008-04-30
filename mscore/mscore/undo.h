@@ -85,7 +85,8 @@ struct UndoOp {
             FixTicks,
             ChangeBeamMode,
             ChangeCopyright,
-            TransposeHarmony
+            TransposeHarmony,
+            ExchangeVoice
             };
       UndoType type;
       Element* element1;
@@ -98,7 +99,7 @@ struct UndoOp {
       MeasureBase* measure;
       Segment* segment;
       QList<int> si;
-      int val1, val2, val3;
+      int val1, val2, val3, val4;
       QColor color;
       SigEvent sig1, sig2;
       TEvent t1, t2;

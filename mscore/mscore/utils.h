@@ -52,6 +52,7 @@ extern double curTime();
 extern void selectNoteMessage();
 extern void selectNoteRestMessage();
 extern void selectNoteSlurMessage();
+extern void selectStavesMessage();
 
 
 #endif

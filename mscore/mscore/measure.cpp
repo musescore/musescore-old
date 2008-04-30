@@ -1685,9 +1685,10 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
             s->insertStaff(staffIdx);
 
       MStaff* ms = new MStaff;
-      ms->lines   = new StaffLines(score());
+      ms->lines  = new StaffLines(score());
       ms->lines->setLines(staff->lines());
       ms->lines->setParent(this);
+      ms->lines->setTrack(staffIdx * VOICES);
       ms->distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
       insertMStaff(ms, staffIdx);
       }
@@ -2241,10 +2242,11 @@ void Measure::read(QDomElement e, int idx)
       {
       for (int n = staves.size(); n <= idx; ++n) {
             MStaff* s    = new MStaff;
-            Staff* staff = score()->staff(idx);
+            Staff* staff = score()->staff(n);
             s->lines     = new StaffLines(score());
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
+            s->lines->setTrack(n * VOICES);
             s->distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
             s->userDistance = 0.0;
             staves.append(s);
@@ -2768,5 +2770,36 @@ void Measure::sortStaves(QList<int>& dst)
             int voice    = e->voice();
             int staffIdx = e->staffIdx();
             e->setTrack(dst[staffIdx] * VOICES + voice);
+            }
+      }
+
+//---------------------------------------------------------
+//   exchangeVoice
+//---------------------------------------------------------
+
+void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
+      {
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            for (int staffIdx = staffIdx1; staffIdx < staffIdx2; ++ staffIdx) {
+                  int strack = staffIdx * VOICES + v1;
+                  int dtrack = staffIdx * VOICES + v2;
+                  if (s->element(strack) && s->element(dtrack)) {
+                        Element* e = s->element(strack);
+                        e->setTrack(dtrack);
+                        s->element(dtrack)->setTrack(strack);
+                        s->setElement(strack, s->element(dtrack));
+                        s->setElement(dtrack, e);
+                        }
+                  else if (s->element(strack) && !s->element(dtrack)) {
+                        s->setElement(dtrack, s->element(strack));
+                        s->element(dtrack)->setTrack(dtrack);
+                        }
+                  else if (!s->element(strack) && s->element(dtrack)) {
+                        s->setElement(strack, s->element(dtrack));
+                        s->element(strack)->setTrack(strack);
+                        }
+                  }
             }
       }

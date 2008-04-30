@@ -445,4 +445,12 @@ void selectNoteSlurMessage()
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 
+void selectStavesMessage()
+      {
+      QMessageBox::critical(0,
+         QMessageBox::tr("MuseScore:"),
+         QMessageBox::tr("please select one or more staves and retry operation\n"),
+         QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
 

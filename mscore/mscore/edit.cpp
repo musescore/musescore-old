@@ -1330,3 +1330,29 @@ void Score::colorItem(Element* element)
       sel->deselectAll(this);
       }
 
+//---------------------------------------------------------
+//   cmdExchangeVoice
+//---------------------------------------------------------
+
+void Score::cmdExchangeVoice(int s, int d)
+      {
+      if (selection()->state() != SEL_STAFF) {
+            selectStavesMessage();
+            return;
+            }
+      int t1 = selection()->tickStart;
+      int t2 = selection()->tickEnd;
+
+      Measure* m1 = tick2measure(t1);
+      Measure* m2 = tick2measure(t2);
+      printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2);
+      for (;;) {
+            undoExchangeVoice(m1, s, d, selection()->staffStart, selection()->staffEnd);
+            MeasureBase* mb = m1->next();
+            while (mb && mb->type() != MEASURE)
+                  mb = mb->next();
+            m1 = static_cast<Measure*>(mb);
+            if (m1 == 0 || m1 == m2)
+                  break;
+            }
+      }
