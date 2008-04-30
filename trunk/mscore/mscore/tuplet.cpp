@@ -200,8 +200,8 @@ void Tuplet::layout(ScoreLayout* layout)
       p2 -= mp;
 
       // center number
-      qreal x3, y3;
-      qreal numberWidth;
+      qreal x3 = 0.0, y3 = 0.0;
+      qreal numberWidth = 0.0;
       if (_number) {
             _number->layout(layout);
             x3 = p1.x() + (p2.x() - p1.x()) * .5;

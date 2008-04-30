@@ -450,6 +450,7 @@ QByteArray Selection::staffMimeData() const
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
       xml.header();
+      xml.noSlurs = true;
 
       xml.stag("StaffList");
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {

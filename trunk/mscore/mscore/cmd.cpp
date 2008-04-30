@@ -1923,6 +1923,7 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
                         }
                   }
             }
+      layout()->connectTies();
       }
 
 //---------------------------------------------------------

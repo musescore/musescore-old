@@ -30,8 +30,10 @@ QString docName;
 Xml::Xml()
       {
       stack.clear();
-      curTick  = 0;
-      curTrack = -1;
+      curTick   = 0;
+      curTrack  = -1;
+      trackDiff = 0;
+      noSlurs   = false;
       }
 
 Xml::Xml(QIODevice* device)
@@ -42,6 +44,7 @@ Xml::Xml(QIODevice* device)
       curTick   = 0;
       curTrack  = -1;
       trackDiff = 0;
+      noSlurs   = false;
       }
 
 //---------------------------------------------------------
