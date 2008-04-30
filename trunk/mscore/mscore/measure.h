@@ -202,6 +202,7 @@ class Measure : public MeasureBase {
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val);
       int findAccidental(Note*);
+      void exchangeVoice(int, int, int, int);
       };
 
 #endif

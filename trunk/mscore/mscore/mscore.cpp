@@ -292,6 +292,7 @@ MuseScore::MuseScore()
          << "load-style" << "save-style" << "select-all" << "transpose"
          << "reset-beammode"
          << "clef-violin" << "clef-bass"
+         << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
          ;
 
       foreach(const QString s, sl) {
@@ -500,6 +501,17 @@ MuseScore::MuseScore()
       selectionChanged(0);
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
+      menuEdit->addSeparator();
+
+      QMenu* menuVoices = new QMenu(tr("Voices"));
+      menuVoices->addAction(getAction("voice-x12"));
+      menuVoices->addAction(getAction("voice-x13"));
+      menuVoices->addAction(getAction("voice-x14"));
+      menuVoices->addAction(getAction("voice-x23"));
+      menuVoices->addAction(getAction("voice-x24"));
+      menuVoices->addAction(getAction("voice-x34"));
+      menuEdit->addMenu(menuVoices);
+
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Excerpts..."), this, SLOT(startExcerptsDialog()));
       menuEdit->addSeparator();

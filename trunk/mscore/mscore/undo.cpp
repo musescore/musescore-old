@@ -90,7 +90,8 @@ static const char* undoName[] = {
       "FixTicks",
       "ChangeBeamMode",
       "ChangeCopyright",
-      "TransposeHarmony"
+      "TransposeHarmony",
+      "ExchangeVoice"
       };
 
 static bool UNDO = false;
@@ -610,6 +611,15 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   h->buildText();
                   }
                   break;
+            case UndoOp::ExchangeVoice:
+                  {
+                  Measure* m = static_cast<Measure*>(i->element1);
+                  if (undo)
+                        m->exchangeVoice(i->val2, i->val1, i->val3, i->val4);
+                  else
+                        m->exchangeVoice(i->val1, i->val2, i->val3, i->val4);
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -915,6 +925,24 @@ void Score::undoTransposeHarmony(Harmony* h, int semitones)
       i.type  = UndoOp::TransposeHarmony;
       i.element1 = h;
       i.val1     = semitones;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoExchangeVoice
+//---------------------------------------------------------
+
+void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type  = UndoOp::ExchangeVoice;
+      i.element1 = measure;
+      i.val1     = val1;
+      i.val2     = val2;
+      i.val3     = staff1;
+      i.val4     = staff2;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

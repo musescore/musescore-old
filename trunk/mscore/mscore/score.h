@@ -222,6 +222,7 @@ class Score : public QObject {
 
       void cmdInsertClef(int type);
       void cmdCreateTuplet(Chord* chord, Tuplet* tuplet);
+      void cmdExchangeVoice(int, int);
 
    public slots:
       void doUndo();
@@ -352,6 +353,7 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int);
+      void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);
 
       void setNote(int tick, int track, int pitch, int len);
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);

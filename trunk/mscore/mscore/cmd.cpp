@@ -1836,6 +1836,18 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "tuplet-dialog")
                   tupletDialog();
+            else if (cmd == "voice-x12")
+                  cmdExchangeVoice(0, 1);
+            else if (cmd == "voice-x13")
+                  cmdExchangeVoice(0, 2);
+            else if (cmd == "voice-x14")
+                  cmdExchangeVoice(0, 3);
+            else if (cmd == "voice-x23")
+                  cmdExchangeVoice(1, 2);
+            else if (cmd == "voice-x24")
+                  cmdExchangeVoice(1, 3);
+            else if (cmd == "voice-x34")
+                  cmdExchangeVoice(3, 4);
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();
