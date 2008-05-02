@@ -1,3 +1,5 @@
+2.5.8 (ws)
+      - extended chord list (David Bolton)
 30.4.8 (ws)
       - allow rest to be changed into tuplet
       - fix drag of measures with slurs/ties

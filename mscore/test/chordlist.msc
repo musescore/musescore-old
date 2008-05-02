@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.9">
+  <Mag>2.59374</Mag>
+  <xoff>-10.16</xoff>
+  <yoff>-82.9733</yoff>
+  <Spatium>1.76389</Spatium>
+  <Division>480</Division>
+  <Style>
+    <staffUpperBorder>7</staffUpperBorder>
+    <staffLowerBorder>7</staffLowerBorder>
+    <staffDistance>6.5</staffDistance>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <systemDistance>9.25</systemDistance>
+    <lyricsDistance>2</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
+    <minMeasureWidth>4</minMeasureWidth>
+    <barWidth>0.16</barWidth>
+    <doubleBarWidth>0.16</doubleBarWidth>
+    <endBarWidth>0.3</endBarWidth>
+    <doubleBarDistance>0.3</doubleBarDistance>
+    <endBarDistance>0.3</endBarDistance>
+    <bracketWidth>0.35</bracketWidth>
+    <bracketDistance>0.3</bracketDistance>
+    <clefLeftMargin>0.5</clefLeftMargin>
+    <keysigLeftMargin>0.5</keysigLeftMargin>
+    <timesigLeftMargin>0.5</timesigLeftMargin>
+    <clefKeyRightMargin>1.75</clefKeyRightMargin>
+    <stemWidth>0.13</stemWidth>
+    <minNoteDistance>0.5</minNoteDistance>
+    <measureSpacing>1.3</measureSpacing>
+    <barNoteDistance>1.5</barNoteDistance>
+    <noteBarDistance>1</noteBarDistance>
+    <staffLineWidth>0.08</staffLineWidth>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <akkoladeWidth>1.6</akkoladeWidth>
+    <prefixDistance>0.13</prefixDistance>
+    <prefixNoteDistance>0.22</prefixNoteDistance>
+    <beamWidth>0.48</beamWidth>
+    <beamDistance>0.5</beamDistance>
+    <beamMinLen>1.25</beamMinLen>
+    <beamMinSlope>0.05</beamMinSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
+    <maxBeamTicks>480</maxBeamTicks>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <dotRestDistance>0.25</dotRestDistance>
+    <dotDotDistance>0.5</dotDotDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistanceStem>0.5</propertyDistanceStem>
+    <propertyDistance>0.25</propertyDistance>
+    <pageFillLimit>0.7</pageFillLimit>
+    <lastSystemFillLimit>0</lastSystemFillLimit>
+    <hairpinHeight>1.2</hairpinHeight>
+    <hairpinContHeight>0.5</hairpinContHeight>
+    <hairpinWidth>0.13</hairpinWidth>
+    <showPageNumber>1</showPageNumber>
+    <showPageNumberOne>0</showPageNumberOne>
+    <pageNumberOddEven>1</pageNumberOddEven>
+    <showMeasureNumber>1</showMeasureNumber>
+    <showMeasureNumberOne>0</showMeasureNumberOne>
+    <measureNumberInterval>5</measureNumberInterval>
+    <measureNumberAllStaffs>0</measureNumberAllStaffs>
+    <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
+    <genClef>0</genClef>
+    <genKeysig>0</genKeysig>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="2">
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      <bracket type="-1" span="2"/>
+      </Staff>
+    <trackName>Violin</trackName>
+    <Instrument>
+      <midiProgram>40</midiProgram>
+      <chorus>30</chorus>
+      <reverb>30</reverb>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <VBox>
+      <height>6.4</height>
+      <Text>
+        <subtype>Title</subtype>
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Chord List</p></body></html>
+          </html-data>
+        </Text>
+      </VBox>
+    <Measure number="1">
+      <Harmony>
+        <root>14</root>
+        <extension>2</extension>
+        </Harmony>
+      <StaffText>
+        <subtype>Staff</subtype>
+        <offset x="0.12" y="8.39999"/>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Maj</p></body></html>
+          </html-data>
+        </StaffText>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="2">
+      <Harmony>
+        <root>14</root>
+        <extension>3</extension>
+        </Harmony>
+      <Rest>
+        <selected>1</selected>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="3">
+      <Harmony>
+        <root>14</root>
+        <extension>4</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="4">
+      <Harmony>
+        <root>14</root>
+        <extension>5</extension>
+        </Harmony>
+      <Symbol>
+        <name>clef eight</name>
+        <offset x="0.24" y="5.63999"/>
+        </Symbol>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="5">
+      <Harmony>
+        <root>14</root>
+        <extension>6</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="6">
+      <Harmony>
+        <root>14</root>
+        <extension>7</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="7">
+      <Harmony>
+        <root>14</root>
+        <extension>8</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="8">
+      <Harmony>
+        <root>14</root>
+        <extension>9</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="9">
+      <Harmony>
+        <root>14</root>
+        <extension>10</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="10">
+      <Harmony>
+        <root>14</root>
+        <extension>12</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="11">
+      <Harmony>
+        <root>14</root>
+        <extension>13</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="12">
+      <Harmony>
+        <root>14</root>
+        <extension>14</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Harmony>
+        <root>14</root>
+        <extension>15</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="14">
+      <Harmony>
+        <root>14</root>
+        <extension>16</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="15">
+      <Harmony>
+        <root>14</root>
+        <extension>17</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="16">
+      <Harmony>
+        <root>14</root>
+        <extension>18</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="17">
+      <Harmony>
+        <root>14</root>
+        <extension>19</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="18">
+      <Harmony>
+        <root>14</root>
+        <extension>20</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="19">
+      <Harmony>
+        <root>14</root>
+        <extension>21</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="20">
+      <Harmony>
+        <root>14</root>
+        <extension>22</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="21">
+      <Harmony>
+        <root>14</root>
+        <extension>23</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="22">
+      <Harmony>
+        <root>14</root>
+        <extension>24</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="23">
+      <Harmony>
+        <root>14</root>
+        <extension>25</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="24">
+      <Harmony>
+        <root>14</root>
+        <extension>26</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="25">
+      <Harmony>
+        <root>14</root>
+        <extension>28</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="26">
+      <Harmony>
+        <root>14</root>
+        <extension>29</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="27">
+      <Harmony>
+        <root>14</root>
+        <extension>32</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="28">
+      <Harmony>
+        <root>14</root>
+        <extension>33</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="29">
+      <Harmony>
+        <root>14</root>
+        <extension>34</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="30">
+      <Harmony>
+        <root>14</root>
+        <extension>40</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="31">
+      <Harmony>
+        <root>14</root>
+        <extension>56</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="32">
+      <Harmony>
+        <root>14</root>
+        <extension>57</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="33">
+      <Harmony>
+        <root>14</root>
+        <extension>58</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="34">
+      <Harmony>
+        <root>14</root>
+        <extension>59</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="35">
+      <Harmony>
+        <root>14</root>
+        <extension>60</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="36">
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="37">
+      <Harmony>
+        <root>14</root>
+        <extension>65</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="38">
+      <Harmony>
+        <root>14</root>
+        <extension>66</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="39">
+      <Harmony>
+        <root>14</root>
+        <extension>67</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="40">
+      <Harmony>
+        <root>14</root>
+        <extension>69</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="41">
+      <Harmony>
+        <root>14</root>
+        <extension>70</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="42">
+      <Harmony>
+        <root>14</root>
+        <extension>71</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="43">
+      <Harmony>
+        <root>14</root>
+        <extension>73</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="44">
+      <Harmony>
+        <root>14</root>
+        <extension>68</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="45">
+      <Harmony>
+        <root>14</root>
+        <extension>69</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="46">
+      <Harmony>
+        <root>14</root>
+        <extension>70</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="47">
+      <Harmony>
+        <root>14</root>
+        <extension>71</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="48">
+      <Harmony>
+        <root>14</root>
+        <extension>73</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="49">
+      <Harmony>
+        <root>14</root>
+        <extension>68</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="50">
+      <Harmony>
+        <root>14</root>
+        <extension>75</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="51">
+      <Harmony>
+        <root>14</root>
+        <extension>77</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="52">
+      <Harmony>
+        <root>14</root>
+        <extension>78</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="53">
+      <Harmony>
+        <root>14</root>
+        <extension>79</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="54">
+      <Harmony>
+        <root>14</root>
+        <extension>80</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="55">
+      <Harmony>
+        <root>14</root>
+        <extension>81</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="56">
+      <Harmony>
+        <root>14</root>
+        <extension>82</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="57">
+      <Harmony>
+        <root>14</root>
+        <extension>83</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="58">
+      <Harmony>
+        <root>14</root>
+        <extension>84</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="59">
+      <Harmony>
+        <root>14</root>
+        <extension>73</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="60">
+      <Harmony>
+        <root>14</root>
+        <extension>86</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="61">
+      <Harmony>
+        <root>14</root>
+        <extension>87</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="62">
+      <Harmony>
+        <root>14</root>
+        <extension>88</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="63">
+      <Harmony>
+        <root>14</root>
+        <extension>76</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="64">
+      <Harmony>
+        <root>14</root>
+        <extension>89</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="65">
+      <Harmony>
+        <root>14</root>
+        <extension>90</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="66">
+      <Harmony>
+        <root>14</root>
+        <extension>91</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="67">
+      <Harmony>
+        <root>14</root>
+        <extension>92</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="68">
+      <Harmony>
+        <root>14</root>
+        <extension>93</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="69">
+      <Harmony>
+        <root>14</root>
+        <extension>94</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="70">
+      <Harmony>
+        <root>14</root>
+        <extension>95</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="71">
+      <Harmony>
+        <root>14</root>
+        <extension>96</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="72">
+      <Harmony>
+        <root>14</root>
+        <extension>97</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="73">
+      <Harmony>
+        <root>14</root>
+        <extension>98</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="74">
+      <Harmony>
+        <root>14</root>
+        <extension>99</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="75">
+      <Harmony>
+        <root>14</root>
+        <extension>100</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="76">
+      <Harmony>
+        <root>14</root>
+        <extension>101</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="77">
+      <Harmony>
+        <root>14</root>
+        <extension>102</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="78">
+      <Harmony>
+        <root>14</root>
+        <extension>103</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="79">
+      <Harmony>
+        <root>14</root>
+        <extension>104</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="80">
+      <Harmony>
+        <root>14</root>
+        <extension>105</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="81">
+      <Harmony>
+        <root>14</root>
+        <extension>106</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="82">
+      <Harmony>
+        <root>14</root>
+        <extension>107</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="83">
+      <Harmony>
+        <root>14</root>
+        <extension>108</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="84">
+      <Harmony>
+        <root>14</root>
+        <extension>109</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="85">
+      <Harmony>
+        <root>14</root>
+        <extension>110</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="86">
+      <Harmony>
+        <root>14</root>
+        <extension>111</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="87">
+      <Harmony>
+        <root>14</root>
+        <extension>110</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="88">
+      <Harmony>
+        <root>14</root>
+        <extension>113</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="89">
+      <Harmony>
+        <root>14</root>
+        <extension>129</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="90">
+      <Harmony>
+        <root>14</root>
+        <extension>132</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="91">
+      <Harmony>
+        <root>14</root>
+        <extension>134</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="92">
+      <Harmony>
+        <root>14</root>
+        <extension>135</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="93">
+      <Harmony>
+        <root>14</root>
+        <extension>136</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="94">
+      <Harmony>
+        <root>14</root>
+        <extension>132</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="95">
+      <Harmony>
+        <root>14</root>
+        <extension>138</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="96">
+      <Harmony>
+        <root>14</root>
+        <extension>128</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="97">
+      <Harmony>
+        <root>14</root>
+        <extension>152</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="98">
+      <Harmony>
+        <root>14</root>
+        <extension>160</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="99">
+      <Harmony>
+        <root>14</root>
+        <extension>162</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="100">
+      <Harmony>
+        <root>14</root>
+        <extension>157</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="101">
+      <Harmony>
+        <root>14</root>
+        <extension>159</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="102">
+      <Harmony>
+        <root>14</root>
+        <extension>154</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="103">
+      <Harmony>
+        <root>14</root>
+        <extension>163</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="104">
+      <Harmony>
+        <root>14</root>
+        <extension>169</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="105">
+      <Harmony>
+        <root>14</root>
+        <extension>171</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="106">
+      <Harmony>
+        <root>14</root>
+        <extension>173</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="107">
+      <Harmony>
+        <root>14</root>
+        <extension>175</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="108">
+      <Harmony>
+        <root>14</root>
+        <extension>165</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="109">
+      <Harmony>
+        <root>14</root>
+        <extension>140</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="110">
+      <Harmony>
+        <root>14</root>
+        <extension>146</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="111">
+      <Harmony>
+        <root>14</root>
+        <extension>143</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="112">
+      <Harmony>
+        <root>14</root>
+        <extension>145</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="113">
+      <Harmony>
+        <root>14</root>
+        <extension>142</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="114">
+      <Harmony>
+        <root>14</root>
+        <extension>151</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="115">
+      <Harmony>
+        <root>14</root>
+        <extension>148</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="116">
+      <Harmony>
+        <root>14</root>
+        <extension>131</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="117">
+      <Harmony>
+        <root>14</root>
+        <extension>133</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="118">
+      <Harmony>
+        <root>14</root>
+        <extension>130</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="119">
+      <Harmony>
+        <root>14</root>
+        <extension>141</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="120">
+      <Harmony>
+        <root>14</root>
+        <extension>144</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="121">
+      <Harmony>
+        <root>14</root>
+        <extension>147</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="122">
+      <Harmony>
+        <root>14</root>
+        <extension>136</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="123">
+      <Harmony>
+        <root>14</root>
+        <extension>150</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="124">
+      <Harmony>
+        <root>14</root>
+        <extension>153</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="125">
+      <Harmony>
+        <root>14</root>
+        <extension>155</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="126">
+      <Harmony>
+        <root>14</root>
+        <extension>156</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="127">
+      <Harmony>
+        <root>14</root>
+        <extension>158</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="128">
+      <Harmony>
+        <root>14</root>
+        <extension>161</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="129">
+      <Harmony>
+        <root>14</root>
+        <extension>164</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="130">
+      <Harmony>
+        <root>14</root>
+        <extension>166</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="131">
+      <Harmony>
+        <root>14</root>
+        <extension>167</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="132">
+      <Harmony>
+        <root>14</root>
+        <extension>168</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="133">
+      <Harmony>
+        <root>14</root>
+        <extension>170</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="134">
+      <Harmony>
+        <root>14</root>
+        <extension>172</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="135">
+      <Harmony>
+        <root>14</root>
+        <extension>174</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="136">
+      <Harmony>
+        <root>14</root>
+        <extension>177</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="137">
+      <Harmony>
+        <root>14</root>
+        <extension>184</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="138">
+      <Harmony>
+        <root>14</root>
+        <extension>185</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="139">
+      <Harmony>
+        <root>14</root>
+        <extension>186</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="140">
+      <Harmony>
+        <root>14</root>
+        <extension>187</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="141">
+      <Harmony>
+        <root>21</root>
+        <extension>65</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="142">
+      <Harmony>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">c#11#13</p></body></html>
+          </html-data>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="143">
+      <Harmony>
+        <root>14</root>
+        <extension>190</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="144">
+      <Harmony>
+        <root>14</root>
+        <extension>191</extension>
+        </Harmony>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="145">
+      <Harmony>
+        <root>14</root>
+        <extension>192</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="146">
+      <Harmony>
+        <root>14</root>
+        <extension>193</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="147">
+      <Harmony>
+        <root>14</root>
+        <extension>194</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="148">
+      <Harmony>
+        <root>14</root>
+        <extension>195</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="149">
+      <Harmony>
+        <root>14</root>
+        <extension>64</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="150">
+      <Harmony>
+        <root>14</root>
+        <extension>128</extension>
+        </Harmony>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    </Staff>
+  <cursorTrack>0</cursorTrack>
+  </museScore>
