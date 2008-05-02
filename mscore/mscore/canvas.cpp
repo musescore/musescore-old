@@ -731,8 +731,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
 
             case DRAG_OBJ:
                   setState(NORMAL);
-                  _score->endDrag();
-                  setDropTarget(0); // this also resets dropAnchor
                   break;
 
             case NOTE_ENTRY:
@@ -841,7 +839,7 @@ void Canvas::setState(State action)
       int stateTable[7][7] = {
 //action      NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
 /*NORMAL     */ {  1,       99,    8,         0,     6,          2,   4 },
-/*DRAG_OBJ   */ { 99,        1,    0,         0,     0,          0,   0 },
+/*DRAG_OBJ   */ { 12,        1,    0,         0,     0,          0,   0 },
 /*EDIT       */ {  9,        0,    1,        99,     0,          0,   0 },
 /*DRAG_EDIT  */ { 11,        0,   99,         1,     0,          0,   0 },
 /*LASSO      */ {  7,        0,    0,         0,     1,          0,   0 },
@@ -867,10 +865,6 @@ void Canvas::setState(State action)
                   setCursorOn(true);
                   state = action;
                   break;
-            case 5:     // MAG        - NORMAL
-                  setCursor(QCursor(Qt::ArrowCursor));
-                  state = action;
-                  break;
             case 3:     // NOTE_ENTRY - NORMAL
                   setCursor(QCursor(Qt::ArrowCursor));
                   setMouseTracking(false);
@@ -880,6 +874,10 @@ void Canvas::setState(State action)
                   break;
             case 4:     // NORMAL - MAG
                   setCursor(QCursor(Qt::SizeAllCursor));
+                  state = action;
+                  break;
+            case 5:     // MAG        - NORMAL
+                  setCursor(QCursor(Qt::ArrowCursor));
                   state = action;
                   break;
             case 6:     // NORMAL - LASSO
@@ -907,6 +905,12 @@ void Canvas::setState(State action)
                   setMouseTracking(false);
                   shadowNote->setVisible(false);
                   setCursorOn(false);
+                  break;
+            case 12:    // DRAG_OBJ - NORMAL
+printf("drag -> normal\n");
+                  _score->endDrag();
+                  setDropTarget(0); // this also resets dropAnchor
+                  state = NORMAL;
                   break;
             case 99:
                   state = action;
@@ -1511,6 +1515,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case ACCIDENTAL:
                   case DYNAMIC:
                   case TEXT:
+                  case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
@@ -1628,6 +1633,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case ATTRIBUTE:
                   case ACCIDENTAL:
                   case TEXT:
+                  case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
@@ -1768,6 +1774,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case ATTRIBUTE:
                   case ACCIDENTAL:
                   case TEXT:
+                  case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
