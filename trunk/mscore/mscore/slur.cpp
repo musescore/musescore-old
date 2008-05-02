@@ -928,6 +928,7 @@ void Tie::layout(ScoreLayout* layout)
       unsigned nsegs   = sysIdx2 - sysIdx1 + 1;
       unsigned onsegs  = segments.size();
 
+
       if (nsegs != onsegs) {
             if (nsegs > onsegs) {
                   int n = nsegs - onsegs;
@@ -970,6 +971,10 @@ void Tie::layout(ScoreLayout* layout)
             // case 3: middle segment
             else if (i != 0 && system != s2) {
                   // cannot happen
+                  printf("sysIdx %d - %d\n", sysIdx1, sysIdx2);
+                  Measure* m1 = c1->measure();
+                  Measure* m2 = c2->measure();
+                  printf("Measure %d - %d, %d %d\n", m1->no(), m2->no(), m1->tick(), m2->tick());
                   abort();
                   }
             // case 4: end segment
