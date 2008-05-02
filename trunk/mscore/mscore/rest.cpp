@@ -29,6 +29,7 @@
 #include "tuplet.h"
 #include "sym.h"
 #include "icons.h"
+#include "stafftext.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -107,6 +108,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ATTRIBUTE && subtype == UfermataSym)
          || (type == ATTRIBUTE && subtype == DfermataSym)
          || (type == CLEF)
+         || (type == STAFF_TEXT)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -149,6 +151,20 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   break;
             case CLEF:
                   staff()->changeClef(tick(), e->subtype());
+                  break;
+
+            case STAFF_TEXT:
+printf("drop staff text\n");
+                  {
+                  StaffText* s = static_cast<StaffText*>(e);
+                  s->setTrack(track());
+                  s->setSystemFlag(false);
+//                  s->setSubtype(STAFF_TEXT);
+                  s->setParent(measure());
+                  s->setTick(tick());
+                  score()->undoAddElement(s);
+                  score()->setLayoutAll(true);
+                  }
                   break;
 
             default:

@@ -57,6 +57,7 @@
 #include "repeat.h"
 #include "page.h"
 #include "system.h"
+#include "stafftext.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1055,6 +1056,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = VSPACER;
             else if (e.tagName() == "Segment")
                   type = SEGMENT;
+            else if (e.tagName() == "StaffText")
+                  type = STAFF_TEXT;
             else if (e.tagName() == "TempoText")
                   type = TEMPO_TEXT;
             else if (e.tagName() == "Volta")
@@ -1159,6 +1162,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case TEXT:
                   el = new Text(score);
+                  break;
+            case STAFF_TEXT:
+                  el = new StaffText(score);
                   break;
             case NOTEHEAD:
                   el = new NoteHead(score);
