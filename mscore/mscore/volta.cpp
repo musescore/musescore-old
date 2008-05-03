@@ -238,6 +238,9 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
                   }
             else {
                   printf("Volta::tick2pos(%d,%d) measure==zero\n", grip, tick);
+                  s = m->system();
+                  *system = s;
+                  return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
                   }
             }
       *system = s;

@@ -907,7 +907,6 @@ void Canvas::setState(State action)
                   setCursorOn(false);
                   break;
             case 12:    // DRAG_OBJ - NORMAL
-printf("drag -> normal\n");
                   _score->endDrag();
                   setDropTarget(0); // this also resets dropAnchor
                   state = NORMAL;

@@ -112,6 +112,7 @@ MusicXml::MusicXml(QDomDocument* d)
       {
       doc = d;
       maxLyrics = 0;
+      lastVolta = 0;
       }
 
 //---------------------------------------------------------
@@ -805,8 +806,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       for (int i = 0; i < MAX_STAVES; ++i)
             voicelist[i].clear();
 
-      // must remember volta to handle <ending type="discontinue">
-      Volta* lastVolta = 0;
+// must remember volta to handle <ending type="discontinue">
+//      Volta* lastVolta = 0;       // ws: move to global to allow for voltas spanning more
+                                    //     than one measure
 
       QString implicit = e.attribute("implicit", "no");
       if (implicit == "yes")
