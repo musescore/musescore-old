@@ -632,6 +632,9 @@ void Chord::layout(ScoreLayout* layout)
       //    moved to upper staff
       //---------------------------------------------------
 
+      double x1 = upnote->pos().x() + headWidth * .5 - _spatium * staffMag;
+      double x2 = notes.front()->pos().x() + headWidth * .5 - _spatium * staffMag;
+
       int uppos;
       int downpos;
       if (minMove == -1) {
@@ -645,14 +648,12 @@ void Chord::layout(ScoreLayout* layout)
                               downpos = in->second->line();
                         }
                   }
-            if (uppos < 0 || downpos >= 10) {
-                  double x = upnote->pos().x();
-                  x += headWidth/2 - _spatium * staffMag;
 
+            if (uppos < 0 || downpos >= 10) {
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x, staffIdx() - 1, i);
+                        addLedgerLine(x1, staffIdx() - 1, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x, staffIdx() - 1, i);
+                        addLedgerLine(x2, staffIdx() - 1, i);
                   }
             }
 
@@ -666,20 +667,16 @@ void Chord::layout(ScoreLayout* layout)
                         downpos = in->second->line();
                   }
             }
-      if (uppos < 0 || downpos >= 10) {
-            double x = upnote->pos().x();
-            x += headWidth/2 - _spatium * staffMag;
 
-            for (int i = -2; i >= uppos; i -= 2) {
-                  addLedgerLine(x, staffIdx(), i);
-                  }
-            for (int i = 10; i <= downpos; i += 2) {
-                  addLedgerLine(x, staffIdx(), i);
-                  }
+      if (uppos < 0 || downpos >= 10) {
+            for (int i = -2; i >= uppos; i -= 2)
+                  addLedgerLine(x1, staffIdx(), i);
+            for (int i = 10; i <= downpos; i += 2)
+                  addLedgerLine(x2, staffIdx(), i);
             }
 
       //---------------------------------------------------
-      //    process help lines for notes
+      //    process ledger lines for notes
       //    moved to lower staff
       //---------------------------------------------------
 
@@ -695,13 +692,10 @@ void Chord::layout(ScoreLayout* layout)
                         }
                   }
             if (uppos < 0 || downpos >= 10) {
-                  double x = upnote->pos().x();
-                  x += headWidth/2 - _spatium * staffMag;
-
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x, staffIdx() + 1, i);
+                        addLedgerLine(x1, staffIdx() + 1, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x, staffIdx() * 1, i);
+                        addLedgerLine(x2, staffIdx() * 1, i);
                   }
             }
 
