@@ -356,25 +356,30 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                   m->setDirty();
                   }
             bool needClef = isFirstSystem || _score->style()->genClef;
-            if (needClef && !hasClef) {
-                  //
-                  // create missing clef
-                  //
+            if (needClef) {
                   int idx = staff->clef()->clef(tick);
-                  Clef* cs = new Clef(_score, idx);
-                  cs->setTrack(i * VOICES);
-                  cs->setTick(tick);
-                  cs->setGenerated(true);
-                  cs->setMag(staff->mag());
-                  Segment* s = m->getSegment(cs);
-                  s->add(cs);
-                  m->setDirty();
+                  if (!hasClef) {
+                        //
+                        // create missing clef
+                        //
+                        hasClef = new Clef(_score);
+                        hasClef->setTrack(i * VOICES);
+                        hasClef->setTick(tick);
+                        hasClef->setGenerated(true);
+                        hasClef->setMag(staff->mag());
+                        Segment* s = m->getSegment(hasClef);
+                        s->add(hasClef);
+                        m->setDirty();
+                        }
+                  hasClef->setSubtype(idx);
                   }
-            else if (!needClef && hasClef) {
-                  int track = hasClef->track();
-                  Segment* seg = hasClef->segment();
-                  seg->setElement(track, 0);    // TODO: delete element
-                  m->setDirty();
+            else {
+                  if (hasClef) {
+                        int track = hasClef->track();
+                        Segment* seg = hasClef->segment();
+                        seg->setElement(track, 0);    // TODO: delete element
+                        m->setDirty();
+                        }
                   }
             }
       }

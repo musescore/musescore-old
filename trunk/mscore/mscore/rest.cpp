@@ -154,7 +154,6 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   break;
 
             case STAFF_TEXT:
-printf("drop staff text\n");
                   {
                   StaffText* s = static_cast<StaffText*>(e);
                   s->setTrack(track());
