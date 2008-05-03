@@ -39,6 +39,7 @@ class Note;
 class Ottava;
 class Trill;
 class Pedal;
+class Volta;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -83,6 +84,7 @@ class MusicXml {
       Tie* tie;
       int voice;
       int move;
+      Volta* lastVolta;
 
       QDomDocument* doc;
       int tick;         ///< Current position in MusicXML time
