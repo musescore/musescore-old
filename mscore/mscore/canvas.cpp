@@ -714,12 +714,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
 
       switch (state) {
             case DRAG_EDIT:
-                  _score->addRefresh(_score->editObject->abbox());
-                  _score->editObject->endEditDrag();
-                  updateGrips();
-                  grips = 0;
-                  setDropTarget(0); // this also resets dropRectangle and dropAnchor
-                  _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
                   break;
 
@@ -841,7 +835,7 @@ void Canvas::setState(State action)
 /*NORMAL     */ {  1,       99,    8,         0,     6,          2,   4 },
 /*DRAG_OBJ   */ { 12,        1,    0,         0,     0,          0,   0 },
 /*EDIT       */ {  9,        0,    1,        99,     0,          0,   0 },
-/*DRAG_EDIT  */ { 11,        0,   99,         1,     0,          0,   0 },
+/*DRAG_EDIT  */ { 11,        0,   13,         1,     0,          0,   0 },
 /*LASSO      */ {  7,        0,    0,         0,     1,          0,   0 },
 /*NOTE_ENTRY */ {  3,        0,   10,         0,     0,          1,   0 },
 /*MAG        */ {  5,        0,    0,         0,     0,          0,   1 },
@@ -911,6 +905,15 @@ void Canvas::setState(State action)
                   setDropTarget(0); // this also resets dropAnchor
                   state = NORMAL;
                   break;
+            case 13:    // DRAG_EDIT - EDIT
+                  _score->addRefresh(_score->editObject->abbox());
+                  _score->editObject->endEditDrag();
+                  updateGrips();
+                  setDropTarget(0); // this also resets dropRectangle and dropAnchor
+                  _score->addRefresh(_score->editObject->abbox());
+                  state = EDIT;
+                  break;
+
             case 99:
                   state = action;
                   break;
