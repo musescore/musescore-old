@@ -817,8 +817,11 @@ Segment* Measure::createSegment(Segment::SegmentType st, int t)
 Segment* Measure::getSegment(Element* e)
       {
       Segment::SegmentType st;
-      if ((e->type() == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL))
-            st = Segment::SegGrace;
+      if ((e->type() == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
+            Segment* s = createSegment(Segment::SegGrace, e->tick());
+            add(s);
+            return s;
+            }
       else
             st = Segment::segmentType(e->type());
       return getSegment(st, e->tick());
@@ -1216,6 +1219,8 @@ again:
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = point(Spatium(1.0));
                   }
+            else if (s->subtype() == Segment::SegGrace)
+                  additionalExtra = point(Spatium(style->minNoteDistance));
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   Staff* staff = score()->staff(staffIdx);
@@ -2296,7 +2301,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->setParent(this);       // only for reading tuplets
+                  chord->setParent(this);             // only for reading tuplets
                   chord->readNote(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);

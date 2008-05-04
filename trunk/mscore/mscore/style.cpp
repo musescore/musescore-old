@@ -173,7 +173,7 @@ Style defaultStyle = {
 
       Spatium(0.13),  // stemWidth = 1.3 * staffLineWidth
 
-      Spatium(.5),    // minNoteDistance
+      Spatium(0.4),   // minNoteDistance
       Spatium(1.5),   // barNoteDistance
       Spatium(1.0),   // noteBarDistance
 

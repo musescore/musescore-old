@@ -22,15 +22,19 @@ install(FILES
       sarabande.xml
       adeste.msc
       bach-bc2.msc
+      inv1.msc
+      inv4.msc
+      inv6.msc
       inv10.msc
       inv13.msc
-      inv1.msc
-      inv6.msc
       praeludium1.msc
       prelude.msc
       promenade.msc
       scales.msc
       sonata16.msc
+      italian-1.msc
+      Estudio-No1-Tarrega.msc
+      PlanxtyCarolan.msc
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos
       )
 

@@ -428,6 +428,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr == 0) {
                   // cannot enter notes
                   // no note/rest selected?
+printf("cmdAddPitch: no note/rest?\n");
                   return;
                   }
             }
@@ -438,15 +439,17 @@ void Score::cmdAddPitch(int note, bool addFlag)
             Measure* m = tick2measure(_is.pos);
             m->createVoice(_is.track);
             cr = (ChordRest*)searchNote(_is.pos, _is.track);
-            if (!cr || !cr->isChordRest())
+            if (((_is.track % VOICES) == 0) && (!cr || !cr->isChordRest())) {
+printf("cmdAddPitch: no note/rest\n");
                   return;
+                  }
             }
       if (!noteEntryMode())
             return;
 
       int key = 0;
       if (!preferences.alternateNoteEntryMethod)
-            key = cr->staff()->keymap()->key(_is.pos);
+            key = staff(_is.track / VOICES)->keymap()->key(_is.pos);
       int pitch = pitchKeyAdjust(note, key);
 
       int delta = _padState.pitch - (octave*12 + pitch);
@@ -474,7 +477,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
       else {
             // insert note
             int len = _padState.tickLen;
-            if (cr->tuplet()) {
+            if (cr && cr->tuplet()) {
                   len = cr->tuplet()->noteLen();
                   }
             setNote(_is.pos, _is.track, _padState.pitch, len);
@@ -491,7 +494,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             else {
                   setLayoutAll(false);
-                  setLayoutStart(cr->measure());
+                  if (cr == 0)
+                        setLayoutStart(tick2measure(_is.pos));
+                  else
+                        setLayoutStart(cr->measure());
                   }
             _is.pos += len;
             }
