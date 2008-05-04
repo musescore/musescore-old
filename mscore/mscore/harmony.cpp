@@ -296,6 +296,7 @@ const ChordDescription Harmony::chordList[] = {
             { 9, "Maj13#11",        "major-13th add#11",                              HChord("C E G B D F# A") },
 /*10*/
             { 10, "Maj13",          "major-13th",                                     HChord("C E G B D F# A") },
+            { 11, "Maj9(no 3)",     "major-ninth sub3",                               HChord("C G B D") },
             { 12, "+",              "augmented",                                      HChord("C E G#") },       // +5, #5, +, augmented triad
             { 13, "Maj7#5",         "major-seventh alt#5",                            HChord("C E G# B") },
             { 14, "69",             "maj69",                                          HChord("C D E G A") },
@@ -312,6 +313,7 @@ const ChordDescription Harmony::chordList[] = {
             { 24, "m#5",            "minor alt#5",                                    HChord("C Eb G#") },
             { 25, "m7#5",           "minor-seventh alt#5",                            HChord("C Eb G# Bb") },
             { 26, "m69",            "minor-sixth add9",                               HChord("C D Eb G A") },
+            { 27, "Lyd",            0,                                                HChord() },
             { 28, "Maj7Lyd",        "major-seventh altb5",                            HChord("C D E G A") },
             { 29, "Maj7b5",         "major-seventh altb5",                            HChord("C E Gb B") },
 
@@ -336,10 +338,11 @@ const ChordDescription Harmony::chordList[] = {
 
             { 69, "7#11b13",        "dominant-seventh add#11 addb13",                 HChord("C E G Bb F# Ab") },
 /*70*/      { 70, "9",              "dominant-ninth",                                 HChord("C E G Bb D") },
-            { 71, "9b13",           "dominant-ninth addb13",                          HChord("C E G Bb D Ab") },
+            { 72, "9b13",           "dominant-ninth addb13",                          HChord("C E G Bb D Ab") },  // same as 71
             { 73, "9#11",           "dominant-ninth add#11",                          HChord("C E G Bb D F#") },
             { 74, "13#11",          "dominant-13th alt#11",                           HChord("C E G Bb D F# A") },
             { 75, "9#11b13",        "dominanth-ninth add#11 addb13",                  HChord("C E G Bb D F# Ab") },
+            { 76, "7b9",            "dominant addb9",                                 HChord("C E  G Bb Db") },
             { 77, "13b9",           "dominanth-13th altb9",                           HChord("C E G Bb D Fb A") },
             { 78, "7b9b13",         "dominanth-seventh add9 addb13",                  HChord("C E G Bb Db Ab") },
             { 79, "7b9#11",         "dominanth-seventh add9 alt#11",                  HChord("C E G Bb Db F#") },
@@ -353,7 +356,6 @@ const ChordDescription Harmony::chordList[] = {
             { 86, "13#9#11",        "dominant-13th alt#9 alt#11",                     HChord("C E G Bb D# F# A") },
             { 87, "7#9#11b13",      "dominant-seventh add#9 add#11 addb13",           HChord("C E G Bb D# F# Ab") },
             { 88, "7b5",            "dominant altb5",                                 HChord("C E Gb Bb") },
-            { 76, "7b9",            "dominant addb9",                                 HChord("C E  G Bb Db") },
             { 89, "13b5",           "dominant-13th altb5",                            HChord("C E Gb Bb D F A") },
 
 /*90*/      { 90, "7b5b13",         "dominant-seventh altb5 addb13",                  HChord("C E Gb Bb A") },
@@ -380,10 +382,12 @@ const ChordDescription Harmony::chordList[] = {
 
 /*110*/     { 110, "13#5#9#11",     "dominant-13th alt#5 alt#9 alt#11",               HChord("C E G# Bb D# F# A") },
             { 111, "7#5#9#11",      "dominant-seventh alt#5 add#9 add#11",            HChord("C E G# Bb D# F#") },
-            { 112, "13#5#9#11",     "dominant-13th alt#5 alt#9 alt#11",               HChord("C E G# Bb D# F# A") }, // same as 110?
+            { 112, "13#5#9#11",     "dominant-13th alt#5 alt#9 alt#11",               HChord("C E G# Bb D# F# A") }, // same as 110
             { 113, "7alt",          "dominant-seventh alt#5 add#9 add#11",            HChord("C E G# Bb D# F#") },
 
+            { 128, "7sus",          "suspended-fourth add7",                          HChord("C F G Bb")        },
             { 129, "13sus",         "suspended-fourth add7 add13",                    HChord("C F G Bb D A") },
+
             { 130, "7susb13",       "suspended-fourth add7 addb13",                   HChord("C F G Bb Ab") },
             { 131, "7sus#11",       "suspended-fourth add7 add#11",                   HChord("C F G Bb F") },
             { 132, "13sus#11",      "suspended-fourth add#11 add13",                  HChord("C F G Bb D F# A") },
@@ -392,57 +396,54 @@ const ChordDescription Harmony::chordList[] = {
             { 135, "9susb13",       "suspended-fourth add7 add9 addb13",              HChord("C F G Bb D Ab") },
             { 136, "9sus#11",       "suspended-fourth add7 add9 add#11",              HChord("C F G Bb D F#") },
             { 137, "13sus#11",      "suspended-fourth add7 add9 add#11 add13",        HChord("C F G Bb D F# A") },
-            { 138, "9sus#11b13",    "suspended-fourth add7 add9 add#11 addb13",       HChord("C F G Bb D F# Ab") },
-
-            { 128, "7sus",          "suspended-fourth add7",                          HChord("C F G Bb")        },
-/*160*/     { 160, "7susb5#9",      "suspended-fourth add7 altb5 add#9",              HChord("C F Gb Bb Eb")    },
-            { 162, "7susb5#9b13",   "suspended-fourth add7 altb5 add#9 addb13",       HChord("C F Gb Bb Eb Ab") },
-            { 157, "7susb5b9",      "suspended-fourth add7 altb5 addb9",              HChord("C F Gb Bb Db")    },
-            { 159, "7susb5b9b13",   "suspended-fourth add7 altb5 addb9 addb13",       HChord("C F Gb Bb Db Ab") },
-            { 154, "7susb5b13",     "suspended-fourth add7 altb5 addb13",             HChord("C F Gb Bb Ab")    },
-
-            { 163, "7sus#5",        "suspended-fourth add7 alt#5",                    HChord("C F Ab Bb")       },
-            { 169, "7sus#5b9",      "suspended-fourth add7 alt#5 addb9",              HChord("C F Ab Bb Db")    },
-            { 171, "7sus#5b9#11",   "suspended-fourth add7 alt#5 addb9 add#11",       HChord("C F Ab Bb Db Gb") },
-            { 173, "7sus#5#9",      "suspended-fourth add7 alt#5 add#9",              HChord("C F Ab Bb Eb")    },
-            { 175, "7sus#5#9#11",   "suspended-fourth add7 alt#5 add#9 add#11",       HChord("C F Ab Bb Eb Gb") },
-            { 165, "7sus#5#11",     "suspended-fourth add7 alt#5 add#11",             HChord("C F Ab Bb")       },
+            { 138, "13sus#11",      "suspended-fourth add7 add9 add#11 add13",        HChord("C F G Bb D F# A") },   // as 137
+            { 139, "9sus#11b13",    "suspended-fourth add7 add9 add#11 addb13",       HChord("C F G Bb D F# Ab") },
 
 /*140*/     { 140, "7susb9",        "suspended-fourth add7 addb9",                    HChord("C F G Bb Db") },
-            { 146, "7sus#9",        "suspended-fourth add7 add#9",                    HChord("C F G Bb Eb") },
-
             { 141, "13susb9",       "suspended-fourth add7 addb9 add11 add13",        HChord("C F G Bb Db F A") },
             { 142, "7susb9b13",     "suspended-fourth add7 addb9 addb13",             HChord("C F G Bb Db Ab") },
             { 143, "7susb9#11",     "suspended-fourth add7 addb9 add#11",             HChord("C F G Bb Db F#") },
             { 144, "13susb9#11",    "suspended-fourth add7 addb9 add#11 add13",       HChord("C F G Bb Dd F# A") },
             { 145, "7susb9#11b13",  "suspended-fourth add7 addb9 add#11 addb13",      HChord("C F G Bb Db F# Ab") },
+            { 146, "7sus#9",        "suspended-fourth add7 add#9",                    HChord("C F G Bb Eb") },
             { 147, "13sus#9",       "suspended-fourth add7 add#9 add13",              HChord("C F G Bb D# A") },
             { 148, "7sus#9b13",     "suspended-fourth add7 add#9 addb13",             HChord("C F G Bb D# Ab") },
             { 149, "9sus#11",       "suspended-fourth add7 add9 add#11",              HChord("C F G Bb D F#") },
-/*150*/     { 150, "13sus#9#11",    "suspended-fourth add7 add#9 add#11 add13",       HChord("C F G Bb D# F# A") },
 
+/*150*/     { 150, "13sus#9#11",    "suspended-fourth add7 add#9 add#11 add13",       HChord("C F G Bb D# F# A") },
             { 151, "7sus#9#11b13",  0,                                                HChord() },
             { 152, "7susb5",        "suspended-fourth add7 altb5" ,                   HChord("C F Gb Bb")       },
-
             { 153, "13susb5",       "suspended-fourth alt5 add7 add9 add13",          HChord("C F Gb Bb D A") },
+            { 154, "7susb5b13",     "suspended-fourth add7 altb5 addb13",             HChord("C F Gb Bb Ab")    },
             { 155, "9susb5",        "suspended-fourth alt5 add7 add9",                HChord("C F Gb Bb D") },
             { 156, "9susb5b13",     "suspended-fourth alt5 add7 add9 add13",          HChord("C F Gb Bb D Ab") },
+            { 157, "7susb5b9",      "suspended-fourth add7 altb5 addb9",              HChord("C F Gb Bb Db")    },
             { 158, "13susb5b9",     "suspended-fourth alt5 add7 altb9 add13",         HChord("C F Gb Bb D A") },
+            { 159, "7susb5b9b13",   "suspended-fourth add7 altb5 addb9 addb13",       HChord("C F Gb Bb Db Ab") },
 
+/*160*/     { 160, "7susb5#9",      "suspended-fourth add7 altb5 add#9",              HChord("C F Gb Bb Eb")    },
             { 161, "13susb5#9",     "suspended-fourth altb5 add7 add#9 add13",        HChord("C F Gb Bb D# A") },
+            { 162, "7susb5#9b13",   "suspended-fourth add7 altb5 add#9 addb13",       HChord("C F Gb Bb Eb Ab") },
+            { 163, "7sus#5",        "suspended-fourth add7 alt#5",                    HChord("C F Ab Bb")       },
             { 164, "13sus#5",       "suspended-fourth alt#5 add7 add9 add13",         HChord("C F G# Bb D A") },
+            { 165, "7sus#5#11",     "suspended-fourth add7 alt#5 add#11",             HChord("C F Ab Bb")       },
             { 166, "13sus#5#11",    "suspended-fourth alt#5 add7 add9 add#11 add13",  HChord("C F G# Bb D F# A") },
             { 167, "9sus#5",        "suspended-fourth alt#5 add7 add9",               HChord("C F G# Bb D") },
             { 168, "9sus#5#11",     "suspended-fourth alt#5 add7 add9 add#11",        HChord("C F G# Bb D F#") },
+            { 169, "7sus#5b9",      "suspended-fourth add7 alt#5 addb9",              HChord("C F Ab Bb Db")    },
 
 /*170*/     { 170, "13sus#5b9",     "suspended-fourth alt#5 add7 add9 add13",         HChord("C F G# Bb Db A") },
+            { 171, "7sus#5b9#11",   "suspended-fourth add7 alt#5 addb9 add#11",       HChord("C F Ab Bb Db Gb") },
             { 172, "13sus#5b9#11",  "suspended-fourth alt#5 add7 add9 add#11 add13",  HChord("C F G# Bb Db F# A") },
+            { 173, "7sus#5#9",      "suspended-fourth add7 alt#5 add#9",              HChord("C F Ab Bb Eb")    },
             { 174, "13sus#5#9#11",  "suspended-fourth alt#5 add7 add#9 add#11 add13", HChord("C F G# Bb D# F# A") },
-            { 176, "13sus#5#9#11",  "suspended-fourth alt#5 add7 add#9 add#11 add13", HChord("C F G# Bb D# F# A") }, //?? 176
-
+            { 175, "7sus#5#9#11",   "suspended-fourth add7 alt#5 add#9 add#11",       HChord("C F Ab Bb Eb Gb") },
+            { 176, "13sus#5#9#11",  "suspended-fourth alt#5 add7 add#9 add#11 add13", HChord("C F G# Bb D# F# A") }, //same as 174
             { 177, "4",             "major add4",                                     HChord("C E F G") },
+
             { 184, "sus",           "suspended-fourth",                               HChord("C F G") },  // sus4
 
+            // the following ids are not in "BandInABox"
             { 185, "dim7",          "diminished-seventh",                             HChord("C Eb Gb Bbb") },  // mscore ext.
             { 186, "sus2",          "suspended-second",                               HChord("C D G") },      // suspended 2nd chord
             { 187, "mb3b13",        "neapolitan",                                     HChord() },
