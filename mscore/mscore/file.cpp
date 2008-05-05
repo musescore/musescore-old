@@ -66,6 +66,8 @@
 #include "system.h"
 #include "tuplet.h"
 #include "keysig.h"
+#include "zip.h"
+#include "unzip.h"
 
 //---------------------------------------------------------
 //   load
@@ -180,7 +182,8 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("MuseScore Files (*.msc);;"
+         tr("Compressed MuseScore Files (*.mscz);;"
+            "MuseScore Files (*.msc);;"
             "MusicXml Files (*.xml);;"
             "Compressed MusicXml Files (*.mxl);;"
             "Midi Files (*.mid *.kar);;"
@@ -250,8 +253,10 @@ bool Score::saveFile(bool autosave)
                   rv = saveMxl(fileInfo()->absoluteFilePath());
             else if (fileInfo()->suffix() == "xml")
                   rv = saveXml(fileInfo()->absoluteFilePath());
-            else
+            else if (fileInfo()->suffix() == "msc")
                   rv = mscore->saveFile(*fileInfo(), autosave);
+            else
+                  rv = mscore->saveCompressedFile(*fileInfo(), autosave);
             if (rv)
                   setDirty(false);
             return rv;
@@ -260,8 +265,8 @@ bool Score::saveFile(bool autosave)
       // step 1
       // save into temporary file
       //
-      QFileInfo* qf = fileInfo();
-      QTemporaryFile temp(qf->path() + "/msXXXXXX");
+
+      QTemporaryFile temp(info.path() + "/msXXXXXX");
       temp.setAutoRemove(false);
       if (!temp.open()) {
             QString s = tr("Open Temp File\n") + temp.fileName() + tr("\nfailed: ")
@@ -270,13 +275,14 @@ bool Score::saveFile(bool autosave)
             return false;
             }
       bool rv = false;
-      if (qf->suffix() == "mxl")
+      if (info.suffix() == "mxl")
             rv = saveMxl(temp.fileName());
-      else if (qf->suffix() == "xml")
+      else if (info.suffix() == "xml")
             rv = saveXml(temp.fileName());
-      else
+      else if (info.suffix() == "msc")
             rv = mscore->saveFile(&temp, autosave);
-
+      else
+            rv = mscore->saveCompressedFile(&temp, info, autosave);
       if (!rv)
             return false;
 
@@ -284,17 +290,17 @@ bool Score::saveFile(bool autosave)
       // step 2
       // remove old backup file if exists
       //
-      QDir dir(qf->path());
-      QString backupName = QString(".") + qf->fileName() + QString(",");
+      QDir dir(info.path());
+      QString backupName = QString(".") + info.fileName() + QString(",");
       dir.remove(backupName);
 
       //
       // step 3
       // rename old file into backup
       //
-      QString name(qf->filePath());
-      if (qf->completeSuffix() == "")
-            name += QString(".msc");
+      QString name(info.filePath());
+      if (info.completeSuffix() == "")
+            name += QString(".mscz");
       dir.rename(name, backupName);
 
       //
@@ -302,8 +308,6 @@ bool Score::saveFile(bool autosave)
       // rename temp name into file name
       //
       temp.rename(name);
-//      temp.close();
-
       setDirty(false);
       setSaved(true);
       return true;
@@ -327,6 +331,7 @@ bool MuseScore::saveAs()
       QString selectedFilter;
       QStringList fl;
 
+      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
       fl.append(tr("MuseScore Format (*.msc)"));
       fl.append(tr("MusicXml Format (*.xml)"));
       fl.append(tr("Compressed MusicXml Format (*.mxl)"));
@@ -348,6 +353,19 @@ bool MuseScore::saveAs()
 
       bool rv = false;
       if (selectedFilter == fl[0]) {
+            // save as mscore *.mscz file
+            if (!fn.endsWith(".mscz"))
+                  fn.append(".mscz");
+            QFileInfo fi(fn);
+            rv = saveCompressedFile(fi, false);
+            if (rv && cs->created()) {
+                  cs->fileInfo()->setFile(fn);
+                  setWindowTitle("MuseScore: " + cs->name());
+                  tab->setTabText(tab->currentIndex(), cs->name());
+                  cs->setCreated(false);
+                  }
+            }
+      else if (selectedFilter == fl[0]) {
             // save as mscore *.msc file
             if (!fn.endsWith(".msc"))
                   fn.append(".msc");
@@ -615,6 +633,84 @@ void MuseScore::newFile()
       }
 
 //---------------------------------------------------------
+//   saveCompressedFile
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::saveCompressedFile(QFileInfo& info, bool autosave)
+      {
+      QString ext(".mscz");
+
+      if (info.completeSuffix().isEmpty())
+            info.setFile(info.filePath() + ext);
+
+      QFile fp(info.filePath());
+      if (!fp.open(QIODevice::WriteOnly)) {
+            QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
+               + QString(strerror(errno));
+            QMessageBox::critical(this, tr("MuseScore: Open File"), s);
+            return false;
+            }
+      bool rv = saveCompressedFile(&fp, info, autosave);
+//      fp.close();
+      return rv;
+      }
+
+//---------------------------------------------------------
+//   saveCompressedFile
+//---------------------------------------------------------
+
+bool MuseScore::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
+      {
+      Zip uz;
+      Zip::ErrorCode ec = uz.createArchive(f);
+      if (ec != Zip::Ok) {
+            printf("Cannot create compressed musescore file\n");
+            return false;
+            }
+
+      QDateTime dt;
+      if (debugMode)
+            dt = QDateTime(QDate(2007, 9, 10), QTime(12, 0));
+      else
+            dt = QDateTime::currentDateTime();
+
+      QString fn = info.baseName() + ".msc";
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml(&cbuf);
+      xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+      xml.stag("container");
+      xml.stag("rootfiles");
+      xml.stag(QString("rootfile full-path=\"%1\"").arg(fn));
+      xml.etag();
+      xml.etag();
+      xml.etag();
+      cbuf.seek(0);
+      ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add container.xml to zipfile '%s'\n", qPrintable(info.filePath()));
+            return false;
+            }
+
+      QBuffer dbuf;
+      dbuf.open(QIODevice::ReadWrite);
+      bool rv = saveFile(&dbuf, autosave);
+      dbuf.seek(0);
+      ec = uz.createEntry(fn, dbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add %s to zipfile '%s'\n", qPrintable(fn), qPrintable(info.filePath()));
+            return false;
+            }
+      ec = uz.closeArchive();
+      if (ec != Zip::Ok) {
+            printf("Cannot close zipfile '%s'\n", qPrintable(info.filePath()));
+            return false;
+            }
+      return rv;
+      }
+
+//---------------------------------------------------------
 //   saveFile
 //    return true on success
 //---------------------------------------------------------
@@ -789,7 +885,7 @@ void Score::saveStyle()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveFile(QFile* f, bool autosave)
+bool MuseScore::saveFile(QIODevice* f, bool autosave)
       {
       Xml xml(f);
       xml.header();
@@ -805,12 +901,95 @@ bool MuseScore::saveFile(QFile* f, bool autosave)
       cs->write(xml, autosave);
 
       xml.etag();
+#if 0
       if (f->error() != QFile::NoError) {
             QString s = QString("Write File failed: ") + f->errorString();
             QMessageBox::critical(this, tr("MuseScore: Write File"), s);
             return false;
             }
+#endif
       return true;
+      }
+
+//---------------------------------------------------------
+//   loadCompressedMsc
+//    return true on error
+//---------------------------------------------------------
+
+bool Score::loadCompressedMsc(QString name)
+      {
+      QString ext(".mscz");
+
+      info.setFile(name);
+      if (info.completeSuffix() == "") {
+            name += ext;
+            info.setFile(name);
+            }
+
+      UnZip uz;
+      UnZip::ErrorCode ec = uz.openArchive(name);
+      if (ec != UnZip::Ok)
+            return true;
+
+      QBuffer cbuf;
+      cbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+
+      QDomDocument container;
+      int line, column;
+      QString err;
+      if (!container.setContent(cbuf.data(), false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            QString error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", qPrintable(error));
+            return true;
+            }
+
+      // extract first rootfile
+      QString rootfile = "";
+      for (QDomElement e = container.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() != "container") {
+                  domError(e);
+                  continue;
+                  }
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() != "rootfiles") {
+                        domError(ee);
+                        continue;
+                        }
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        if (eee.tagName() == "rootfile") {
+                              if (rootfile.isEmpty())
+                                    rootfile = eee.attribute(QString("full-path"));
+                              }
+                        else
+                              domError(eee);
+                        }
+                  }
+            }
+      if (rootfile.isEmpty()) {
+            printf("can't find rootfile in: %s\n", qPrintable(name));
+            return true;
+            }
+
+      QBuffer dbuf;
+      dbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile(rootfile, &dbuf);
+
+      QDomDocument doc;
+      if (!doc.setContent(dbuf.data(), false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            QString error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", qPrintable(error));
+            return true;
+            }
+      dbuf.close();
+      docName = info.baseName();
+      return read(doc.documentElement());
       }
 
 //---------------------------------------------------------

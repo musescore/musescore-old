@@ -1,4 +1,4 @@
-The *.cpp and *.h files in this archive are 
+The *.cpp and *.h files in this archive are
 Copyright (C) 2007 Angius Fabrizio (blue_death@users.sourceforge.net)
 
 You may use, distribute and copy the files under the terms of
@@ -13,17 +13,28 @@ SourceForge.net project page: https://sourceforge.net/projects/osdab/
 
 detailed description
 --------------------
-Meet a couple of pure-Qt/C++ classes capable of handling PKZIP 2.0 compatible zip archives. 
+Meet a couple of pure-Qt/C++ classes capable of handling PKZIP 2.0 compatible zip archives.
 
-This is not a "port" of some other existing implementation, everything has been written from scratch (althought some code was actually inspired by existing public domain projects) and it's all pure C++/Qt. Please note that this is not a complete stand-alone library, it's just a bunch of classes. You will have to add them to your project and modify them to best fit your needs. 
+This is not a "port" of some other existing implementation, everything has been written from scratch
+(althought some code was actually inspired by existing public domain projects) and it's all pure C++/Qt.
+Please note that this is not a complete stand-alone library, it's just a bunch of classes.
+You will have to add them to your project and modify them to best fit your needs.
 
-It supports basic features like file extraction and compression (with optional password encryption) and archive comments. There are methods to extract single files or the whole archive and methods to compress the contents of a whole directory. Nevertheless, it should be quite trivial to add other features. The public API only has a few methods because this is what I was looking for. This does not mean you can't write a few more lines of code (it really shouldn't take more than a few lines!) to add more features. 
+It supports basic features like file extraction and compression (with optional password encryption)
+and archive comments. There are methods to extract single files or the whole archive and methods to
+compress the contents of a whole directory. Nevertheless, it should be quite trivial to add other
+features. The public API only has a few methods because this is what I was looking for. This does
+not mean you can't write a few more lines of code (it really shouldn't take more than a few lines!)
+to add more features.
 
-The classes are great if you only need to use the PKZIP format for loading/saving your application's data. Just remember that you will need to customize a few parts of the code, i.e. to add your own password retrieval method. 
+The classes are great if you only need to use the PKZIP format for loading/saving your application's
+data. Just remember that you will need to customize a few parts of the code, i.e. to add your own
+password retrieval method.
 
 zlib is used for actual compression and decompression.
 
-Please refer to the example application's main.cpp file or to the class comments in the source files for details and more usage examples.
+Please refer to the example application's main.cpp file or to the class comments in the source files
+for details and more usage examples.
 
 history
 -------
@@ -42,19 +53,23 @@ history
 
 features
 --------
-Pure C++/Qt based, clean & oo implementation. 
-Retrieve archive contents information before extracting any file. 
-Fast (but less robust with corrupt archives) parsing of the ZIP file format. 
-Traditional PKWARE password encryption (strong encryption as introduced by PKZip versions 5.0 and later is NOT available). 
+Pure C++/Qt based, clean & oo implementation.
+Retrieve archive contents information before extracting any file.
+Fast (but less robust with corrupt archives) parsing of the ZIP file format.
+Traditional PKWARE password encryption (strong encryption as introduced by PKZip versions 5.0 and later
+is NOT available).
 Support for archive comments.
 
 missing features and restrictions
 ---------------------------------
-Needs to be modified to fit into an existing project (i.e.: you might need to add your own password handling routine). 
-Weak support of corrupted archives (althought some files could be extracted even if the archive is corrupted). 
-No support for filesystem specific features like unix symbolic links. 
-No support for spanned archives. 
-No support for strong encryption or features introduced after PKZIP version 2.0 (see the PKWARE specs for details).
+Needs to be modified to fit into an existing project (i.e.: you might need to add your own password
+handling routine).
+Weak support of corrupted archives (althought some files could be extracted even if the archive is
+corrupted).
+No support for filesystem specific features like unix symbolic links.
+No support for spanned archives.
+No support for strong encryption or features introduced after PKZIP version 2.0 (see the PKWARE specs
+for details).
 
 requirements
 ------------

@@ -399,9 +399,11 @@ void Score::read(QString name)
             if (!importBB(name))
                   return;
             }
-      else {
+      else if (cs.toLower() == "msc")
             loadMsc(name);
-            }
+      else
+            loadCompressedMsc(name);
+
       renumberMeasures();
       if (_mscVersion < 103) {
             foreach(Staff* staff, _staves) {

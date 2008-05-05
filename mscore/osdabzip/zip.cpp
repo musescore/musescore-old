@@ -484,7 +484,7 @@ Zip::ErrorCode Zip::createEntry(const QString& entryName, QIODevice& actualFile,
 Zip::ErrorCode Zip::closeArchive()
 {
 	Zip::ErrorCode ec = d->closeArchive();
-	d->reset();
+//	d->reset();       // ws: does delete device which is wrong if created with Zip(QIODevice*)
 	return ec;
 }
 

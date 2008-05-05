@@ -288,7 +288,9 @@ class MuseScore : public QMainWindow {
       bool checkDirty(Score*);
       void clearScore();
       bool saveFile(QFileInfo&, bool autosave);
-      bool saveFile(QFile*, bool autosave);
+      bool saveCompressedFile(QFileInfo&, bool autosave);
+      bool saveFile(QIODevice*, bool autosave);
+      bool saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
       void appendScore(Score*);

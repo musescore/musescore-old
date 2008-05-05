@@ -2506,7 +2506,7 @@ failed: </source>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1993"/>
+        <location filename="../../mscore/measure.cpp" line="1997"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5160,6 +5160,11 @@ Save Current Score?</source>
         <source>Voices</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1475"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6442,7 +6447,7 @@ failed: </source>
         <translation>MuseScore: прочитать файл</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1087"/>
+        <location filename="../../mscore/cmd.cpp" line="1088"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6465,14 +6470,14 @@ start note entry</source>
         <translation>MuseScore: сохранить партитуру</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="937"/>
+        <location filename="../../mscore/cmd.cpp" line="938"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1120"/>
+        <location filename="../../mscore/cmd.cpp" line="1121"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation type="unfinished"></translation>
