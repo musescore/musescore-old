@@ -1833,7 +1833,6 @@ printf("drop staffList\n");
                   break;
 
             case SYMBOL:
-printf("drop symbol track %d\n", e->track());
                   e->setParent(this);
                   score()->cmdAdd(e);
                   break;

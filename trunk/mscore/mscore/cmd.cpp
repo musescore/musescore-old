@@ -206,7 +206,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       switch(e->type()) {
             case VOLTA:
                   {
-                  Volta* volta = (Volta*)e;
+                  Volta* volta = static_cast<Volta*>(e);
                   int tick;
                   Measure* m = pos2measure3(pos, &tick);
                   volta->setTick(m->tick());
@@ -230,7 +230,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case HAIRPIN:
             case TEXTLINE:
                   {
-                  SLine* line = (SLine*)e;
+                  SLine* line = static_cast<SLine*>(e);
                   line->setTick(tick);
                   line->setTick2(tick2);
                   line->layout(layout());
@@ -241,16 +241,11 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   break;
             case DYNAMIC:
                   {
-                  Dynamic* dyn = (Dynamic*)e;
+                  Dynamic* dyn = static_cast<Dynamic*>(e);
                   dyn->setTick(tick);
                   dyn->setParent(measure);
-
-                  System* s    = measure->system();
-                  QRectF sb(s->staff(staffIdx)->bbox());
-                  sb.translate(s->pos() + s->page()->pos());
-                  QPointF anchor(segment->abbox().x(), sb.topLeft().y());
                   dyn->layout(layout());
-                  QPointF uo(pos - anchor - e->ipos() - dragOffset);
+                  QPointF uo(pos - measure->canvasPos() - dyn->ipos() - dragOffset);
                   dyn->setUserOff(uo / _spatium);
                   }
                   break;

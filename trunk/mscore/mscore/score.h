@@ -451,6 +451,7 @@ class Score : public QObject {
       void setShowInvisible(bool v);
 
       bool loadMsc(QString name);
+      bool loadCompressedMsc(QString name);
       void importMusicXml(const QString&);
       void importCompressedMusicXml(const QString&);
       void convertMidi(MidiFile*, int);
