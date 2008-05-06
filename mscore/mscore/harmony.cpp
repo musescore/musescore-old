@@ -446,11 +446,11 @@ const ChordDescription Harmony::chordList[] = {
             // the following ids are not in "BandInABox"
             { 185, "dim7",          "diminished-seventh",                             HChord("C Eb Gb Bbb") },  // mscore ext.
             { 186, "sus2",          "suspended-second",                               HChord("C D G") },      // suspended 2nd chord
-            { 187, "mb3b13",        "neapolitan",                                     HChord() },
-            { 188, "#13",           "italian",                                        HChord() },
-            { 189, "#11#13",        "french",                                         HChord() },
+            { 187, "mb3b13",        "neapolitan sixth",                               HChord("C Eb Ab") },
+            { 188, "#13",           "italian sixth",                                  HChord("C E A#") },
+            { 189, "#11#13",        "french sixth",                                   HChord("C E Gb A#") },
 
-/*190*/     { 190, "add#13",        "german",                                         HChord() },
+/*190*/     { 190, "add#13",        "german sixth",                                   HChord("C E G A#") },
             { 191, "6add9",         "maj69",                                          HChord("C E G A D") },
             { 192, "sus4",          "suspended-fourth",                               HChord("C F G") },        // sus4
             { 193, "11",            "dominant-11th",                                  HChord("C E G Bb D F") }, // dominant 11th / 9sus
