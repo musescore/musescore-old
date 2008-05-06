@@ -99,7 +99,7 @@ class NoteAttribute : public Symbol {
       NoteAttribute &operator=(const NoteAttribute&);
 
       virtual NoteAttribute* clone() const { return new NoteAttribute(*this); }
-      virtual ElementType type() const { return ATTRIBUTE; }
+      virtual ElementType type() const     { return ATTRIBUTE; }
 
       virtual void setSubtype(int);
       virtual void read(QDomElement);
@@ -122,6 +122,7 @@ typedef QList<NoteAttribute*>::const_iterator ciAttribute;
 class ChordRest : public Element {
       QList<Slur*> _slurFor;
       QList<Slur*> _slurBack;
+      DurationType _durationType;
 
    protected:
       QList<NoteAttribute*> attributes;
@@ -130,6 +131,8 @@ class ChordRest : public Element {
       Tuplet* _tuplet;
       bool _up;
       bool _small;
+
+      int _dots;
 
       void layoutAttributes(ScoreLayout*);
 
@@ -144,15 +147,15 @@ class ChordRest : public Element {
       virtual QList<Prop> properties(Xml&) const;
       bool isSimple(Xml&) const;
 
-      Segment* segment() const      { return (Segment*)parent(); }
-      Measure* measure() const      { return (Measure*)(parent()->parent()); }
+      Segment* segment() const                  { return (Segment*)parent(); }
+      Measure* measure() const                  { return (Measure*)(parent()->parent()); }
 
       void setBeamMode(BeamMode m);
-      BeamMode beamMode() const           { return _beamMode; }
-      void setBeam(Beam* b)               { _beam = b; }
-      Beam* beam() const                  { return _beam; }
-      virtual void setTuplet(Tuplet* t)   { _tuplet = t; }
-      Tuplet* tuplet() const              { return _tuplet; }
+      BeamMode beamMode() const                 { return _beamMode; }
+      void setBeam(Beam* b)                     { _beam = b; }
+      Beam* beam() const                        { return _beam; }
+      virtual void setTuplet(Tuplet* t)         { _tuplet = t; }
+      Tuplet* tuplet() const                    { return _tuplet; }
       int beams() const;
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;
@@ -177,10 +180,15 @@ class ChordRest : public Element {
       void addSlurBack(Slur*);
       void removeSlurFor(Slur*);
       void removeSlurBack(Slur*);
-      const QList<Slur*> slurFor() const { return _slurFor; }
-      const QList<Slur*> slurBack() const { return _slurBack; }
+      const QList<Slur*> slurFor() const        { return _slurFor; }
+      const QList<Slur*> slurBack() const       { return _slurBack; }
+
+      DurationType durationType() const         { return _durationType; }
+      void setDurationType(DurationType t)      { _durationType = t; }
+
+      void setDots(int n)                       { _dots = n; }
+      int dots() const                          { return _dots; }
       };
 
 #endif
-
 

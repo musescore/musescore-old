@@ -1,3 +1,8 @@
+6.5.8 (ws)
+      - make tuplet numbers/brackets movable (dragable)
+      - do not start a beam on last note of a tuplet
+      - fix delete of notes in tuplets
+      - more chords from Stefan Koelling
 5.5.8 (ws)
       - implemented new compressed "*.mscz" format (now default)
       - fix drop position of dynamics

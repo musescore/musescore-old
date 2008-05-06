@@ -86,9 +86,7 @@ class Note : public Element {
 
       int _head;              ///< note head symbol number
       int _headGroup;
-      DurationType _durationType;
       bool _mirror;           ///< True if note is mirrored at stem.
-      int _dots;
       ElementList _el;        ///< fingering, other text, symbols or images
 
       Tie* _tieFor;
@@ -115,11 +113,9 @@ class Note : public Element {
       virtual void collectElements(QList<const Element*>& el) const;
       virtual void setTrack(int val);
 
-      void setHead(int);
+//      void setHead(int);
       int totalTicks() const;
       void setType(DurationType);
-      void setDots(int n)             { _dots = n; }
-      int dots() const                { return _dots; }
 
       double headWidth() const;
       double headHeight() const;
@@ -178,6 +174,8 @@ class Note : public Element {
 
       ElementList* el()             { return &_el; }
       const ElementList* el() const { return &_el; }
+
+      virtual void setTickLen(int n) { printf("Note: setTickLen %d\n", n); }
       };
 
 //---------------------------------------------------------

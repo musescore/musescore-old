@@ -40,7 +40,6 @@ Rest::Rest(Score* s)
       {
       _beamMode  = BEAM_NO;
       _staffMove = 0;
-      _dots      = 0;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
       _sym       = quartrestSym;

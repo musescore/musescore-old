@@ -167,6 +167,8 @@ ChordRest::ChordRest(Score* s)
       _tuplet   = 0;
       _small    = false;
       _beamMode = BEAM_AUTO;
+      _dots     = 0;
+      _durationType = D_QUARTER;
       }
 
 //---------------------------------------------------------

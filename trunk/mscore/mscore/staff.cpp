@@ -463,6 +463,17 @@ void Staff::changeClef(int tick, int st)
             clef->setTick(tick);
             clef->setSubtype(st);
 
+            //
+            // if clef is at measure beginning, move to end of
+            // previous measure
+            //
+            if (measure->tick() == tick) {
+                  MeasureBase* mb = measure->prev();
+                  while (mb && mb->type() != MEASURE)
+                        mb = mb->prev();
+                  if (mb)
+                        measure = static_cast<Measure*>(mb);
+                  }
             Segment::SegmentType stype = Segment::segmentType(CLEF);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {

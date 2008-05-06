@@ -828,6 +828,11 @@ void Score::deleteItem(Element* el)
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
                         undoAddElement(rest);
+                        Tuplet* tuplet = chord->tuplet();
+                        if (tuplet) {
+                              tuplet->add(rest);
+                              rest->setTuplet(tuplet);
+                              }
                         }
                   else {
                         Segment* seg = chord->segment();
@@ -1358,3 +1363,14 @@ void Score::cmdExchangeVoice(int s, int d)
                   break;
             }
       }
+
+//---------------------------------------------------------
+//   setTupletChordRest
+//    if pitch == -1 set rest
+//---------------------------------------------------------
+
+void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
+      {
+      printf("set tuplet chord rest pitch %d  len %d\n", pitch, len);
+      }
+

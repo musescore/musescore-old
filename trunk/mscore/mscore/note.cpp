@@ -87,14 +87,12 @@ Note::Note(Score* s)
    : Element(s)
       {
       _pitch          = 0;
-      _durationType   = D_QUARTER;
       _accidental     = 0;
       _mirror         = false;
       _line           = 0;
       _staffMove      = 0;
       _userAccidental = ACC_NONE;
       _lineOffset     = 0;
-      _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
       _tpc            = -1;
@@ -364,6 +362,7 @@ void Note::setAccidentalSubtype(int pre)
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   setHead
 //---------------------------------------------------------
@@ -378,6 +377,7 @@ void Note::setHead(int ticks)
       headType(ticks, &dt, &_dots);
       setType(dt);
       }
+#endif
 
 //---------------------------------------------------------
 //   setType
@@ -421,7 +421,8 @@ void Note::draw(QPainter& p) const
       if (!_hidden)
             symbols[_head].draw(p, mag());
 
-      if (_dots) {
+      int dots = chord()->dots();
+      if (dots) {
             double y = 0;
             // do not draw dots on line
             if (_line >= 0 && (_line & 1) == 0) {
@@ -430,7 +431,7 @@ void Note::draw(QPainter& p) const
                   else
                         y = _spatium * .5 * mag();
                   }
-            for (int i = 1; i <= _dots; ++i)
+            for (int i = 1; i <= dots; ++i)
                   symbols[dotSym].draw(p, mag(), symbols[_head].width(mag()) + point(score()->style()->dotNoteDistance) * i, y);
             }
       }
@@ -813,24 +814,19 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                               score()->setGraceNote(cr, pitch(), NOTE_APPOGGIATURA, division/2);
                               break;
                         case ICON_SBEAM:
-                              if (!cr->tuplet())
-                                    score()->undoChangeBeamMode(cr, BEAM_BEGIN);
+                              score()->undoChangeBeamMode(cr, BEAM_BEGIN);
                               break;
                         case ICON_MBEAM:
-                              if (!cr->tuplet())
-                                    score()->undoChangeBeamMode(cr, BEAM_MID);
+                              score()->undoChangeBeamMode(cr, BEAM_MID);
                               break;
                         case ICON_NBEAM:
-                              if (!cr->tuplet())
-                                    score()->undoChangeBeamMode(cr, BEAM_NO);
+                              score()->undoChangeBeamMode(cr, BEAM_NO);
                               break;
                         case ICON_BEAM32:
-                              if (!cr->tuplet())
-                                    score()->undoChangeBeamMode(cr, BEAM_BEGIN32);
+                              score()->undoChangeBeamMode(cr, BEAM_BEGIN32);
                               break;
                         case ICON_AUTOBEAM:
-                              if (!cr->tuplet())
-                                    score()->undoChangeBeamMode(cr, BEAM_AUTO);
+                              score()->undoChangeBeamMode(cr, BEAM_AUTO);
                               break;
                         }
                   }

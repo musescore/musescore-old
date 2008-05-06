@@ -298,7 +298,6 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
       {
       int tick = m->tick();
       int nstaves = _score->nstaves();
-
       for (int i = 0; i < nstaves; ++i) {
             Staff* staff   = _score->staff(i);
             if (!staff->show())
@@ -581,13 +580,14 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                         for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
                               int track = staffIdx * VOICES;
                               Element* el = seg->element(track);
-                              if (el) {
-                                    if (el->generated()) {
-                                          if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
-                                                seg->setElement(track, 0);
-                                          }
-                                    if (!isFirstMeasure && el->type() == CLEF)
-                                          el->setMag(el->staff()->mag() * score()->style()->smallClefMag);
+                              if (el == 0)
+                                    continue;
+                              if (el->generated()) {
+                                    if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
+                                          seg->setElement(track, 0);
+                                    }
+                              if ((el->type() == CLEF) && (!isFirstMeasure || (seg != m->first()))) {
+                                    el->setMag(el->staff()->mag() * score()->style()->smallClefMag);
                                     }
                               }
                         }
@@ -687,11 +687,12 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         }
                   }
 
+            const QList<MeasureBase*>& ml = system->measures();
+            int n                         = ml.size();
+
             //
             //    compute repeat bar lines
             //
-            const QList<MeasureBase*>& ml = system->measures();
-            int n                     = ml.size();
             for (int i = 0; i < n; ++i) {
                   MeasureBase* mb = ml[i];
                   if (mb->type() != MEASURE)
