@@ -259,6 +259,10 @@ class ShowRestWidget : public ShowElementBase {
 
       QSpinBox* segment;
 
+   private slots:
+      void tupletClicked();
+      void beamClicked();
+
    public:
       ShowRestWidget();
       virtual void setElement(Element*);

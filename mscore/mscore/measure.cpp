@@ -74,6 +74,7 @@
 #include "tempotext.h"
 #include "sym.h"
 #include "stafftext.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -292,6 +293,13 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int ll           = 1000;      // line distance to previous note head
       int move1        = nl->front()->staffMove();
       Tuplet* tuplet   = chord->tuplet();
+      int ticks        = tuplet ? tuplet->baseLen() : chord->tickLen();
+
+      DurationType dt;
+      int dots;
+      headType(ticks, &dt, &dots);
+      chord->setDots(dots);
+      chord->setDurationType(dt);
 
       QList<Note*> notes;
       for (iNote in = nl->begin(); in != nl->end(); ++in)
@@ -302,6 +310,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       for (int i = 0; i < nNotes; ++i) {
             Note* note  = notes[i];
             int pitch   = note->pitch();
+            note->setType(dt);
             if (drumset) {
                   if (!drumset->isValid(pitch)) {
                         printf("unmapped drum note %d\n", pitch);
@@ -309,12 +318,9 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   else {
                         note->setHeadGroup(drumset->noteHead(pitch));
                         note->setLine(drumset->line(pitch));
-                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
                         continue;
                         }
                   }
-
-            note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
             int move     = note->staffMove();
             int staffIdx = note->staffIdx() + move;
             int clef     = score()->staff(staffIdx)->clef()->clef(tick);

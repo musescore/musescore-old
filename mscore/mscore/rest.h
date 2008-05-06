@@ -32,7 +32,6 @@ class Rest : public ChordRest {
 
       int _staffMove;         // -1, 0, +1, used for crossbeaming
       int _sym;
-      int _dots;
 
       int dotline;            // depends on rest symbol
 

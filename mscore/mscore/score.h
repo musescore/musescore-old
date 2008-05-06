@@ -356,6 +356,8 @@ class Score : public QObject {
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);
 
       void setNote(int tick, int track, int pitch, int len);
+      void setTupletChordRest(ChordRest* cr, int pitch, int len);
+
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track);

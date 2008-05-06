@@ -423,7 +423,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr == 0) {
                   // cannot enter notes
                   // no note/rest selected?
-printf("cmdAddPitch: no note/rest?\n");
                   return;
                   }
             }
@@ -435,7 +434,6 @@ printf("cmdAddPitch: no note/rest?\n");
             m->createVoice(_is.track);
             cr = (ChordRest*)searchNote(_is.pos, _is.track);
             if (((_is.track % VOICES) == 0) && (!cr || !cr->isChordRest())) {
-printf("cmdAddPitch: no note/rest\n");
                   return;
                   }
             }
@@ -2042,3 +2040,5 @@ void Score::move(const QString& cmd)
                   }
             }
       }
+
+

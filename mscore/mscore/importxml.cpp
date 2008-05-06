@@ -2138,7 +2138,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // xmlSetPitch(note, tick, c, alter, octave, accidental);
 
             note->setType(durationType);
-            note->setDots(dots);
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
             note->setStaffMove(move);
@@ -2163,6 +2162,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
+                  cr->setDots(dots);
                   if (grace) {
                         NoteType nt = NOTE_APPOGGIATURA;
                         if (graceSlash == "yes")

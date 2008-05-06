@@ -797,7 +797,7 @@ void ShowNoteWidget::setElement(Element* e)
       nb.pitch->setValue(note->pitch());
       nb.line->setValue(note->line());
       nb.move->setValue(note->staffMove());
-      nb.dots->setValue(note->dots());
+//      nb.dots->setValue(note->dots());
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
       nb.head->setValue(note->noteHead());
@@ -871,6 +871,8 @@ ShowRestWidget::ShowRestWidget()
       crb.beamMode->addItem(tr("beam end"));
       crb.beamMode->addItem(tr("no beam"));
       crb.beamMode->addItem(tr("begin 1/32"));
+      connect(crb.beamButton, SIGNAL(clicked()), SLOT(beamClicked()));
+      connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
 
       QFrame* line = new QFrame(this);
       line->setFrameStyle(QFrame::HLine | QFrame::Raised);
@@ -922,6 +924,24 @@ void ShowRestWidget::setElement(Element* e)
                   break;
             }
       segment->setValue(seg);
+      }
+
+//---------------------------------------------------------
+//   beamClicked
+//---------------------------------------------------------
+
+void ShowRestWidget::beamClicked()
+      {
+      emit elementChanged(static_cast<Rest*>(element())->beam());
+      }
+
+//---------------------------------------------------------
+//   tupletClicked
+//---------------------------------------------------------
+
+void ShowRestWidget::tupletClicked()
+      {
+      emit elementChanged(static_cast<Rest*>(element())->tuplet());
       }
 
 //---------------------------------------------------------
@@ -1155,22 +1175,22 @@ TupletView::TupletView()
 //   hasNumberToggled
 //---------------------------------------------------------
 
-void TupletView::hasNumberToggled(bool val)
+void TupletView::hasNumberToggled(bool /*val*/)
       {
-      Tuplet* tuplet = (Tuplet*)element();
+//      Tuplet* tuplet = (Tuplet*)element();
 //      tuplet->setHasNumber(val);
-      emit scoreChanged();
+//      emit scoreChanged();
       }
 
 //---------------------------------------------------------
 //   hasLineToggled
 //---------------------------------------------------------
 
-void TupletView::hasLineToggled(bool val)
+void TupletView::hasLineToggled(bool /*val*/)
       {
-      Tuplet* tuplet = (Tuplet*)element();
+//      Tuplet* tuplet = (Tuplet*)element();
 //      tuplet->setHasLine(val);
-      emit scoreChanged();
+//      emit scoreChanged();
       }
 
 //---------------------------------------------------------

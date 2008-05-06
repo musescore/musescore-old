@@ -313,7 +313,6 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   if (cr->tuplet())
                         len = cr->tuplet()->baseLen();
 
-
                   if ((len >= division) || (bm == BEAM_NO)) {
                         if (beam) {
                               beam->layout1(layout);
@@ -363,7 +362,18 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     }
                               }
                         }
-                  if (cr) {
+                  if (cr && cr->tuplet() && (cr->tuplet()->elements()->back() == cr)) {
+                        if (beam) {
+                              beam->layout1(layout);
+                              beam = 0;
+                              }
+                        if (a1) {
+                              a1->layoutStem1(layout);
+                              a1 = 0;
+                              }
+                        cr->layoutStem1(layout);
+                        }
+                  else if (cr) {
                         if (a1 == 0)
                               a1 = cr;
                         else {
