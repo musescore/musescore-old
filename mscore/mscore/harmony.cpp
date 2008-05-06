@@ -411,7 +411,8 @@ const ChordDescription Harmony::chordList[] = {
             { 149, "9sus#11",       "suspended-fourth add7 add9 add#11",              HChord("C F G Bb D F#") },
 
 /*150*/     { 150, "13sus#9#11",    "suspended-fourth add7 add#9 add#11 add13",       HChord("C F G Bb D# F# A") },
-            { 151, "7sus#9#11b13",  0,                                                HChord() },
+            { 151, "7sus#9#11b13",  "suspended-fourth add7 add#9 add#11 addb13",      HChord("C F G Bb D# F# Ab") },
+            { 148, "7sus#9b13",     "suspended-fourth add7 add#9 addb13",             HChord("C F G Bb D# Ab") },
             { 152, "7susb5",        "suspended-fourth add7 altb5" ,                   HChord("C F Gb Bb")       },
             { 153, "13susb5",       "suspended-fourth alt5 add7 add9 add13",          HChord("C F Gb Bb D A") },
             { 154, "7susb5b13",     "suspended-fourth add7 altb5 addb13",             HChord("C F Gb Bb Ab")    },
