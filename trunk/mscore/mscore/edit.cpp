@@ -1371,6 +1371,148 @@ void Score::cmdExchangeVoice(int s, int d)
 
 void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       {
-      printf("set tuplet chord rest pitch %d  len %d\n", pitch, len);
+      Tuplet* tuplet = cr->tuplet();
+      int bl         = tuplet->baseLen();
+
+      // make sure len is baseLen * 2^n or 1/baseLen*2^n for n = 1-8
+      if (len > bl) {
+            int i = 2;
+            for (i = 2; i < 256; i <<= 1) {
+                  if (bl * i == len)
+                        break;
+                  }
+            if (i >= 256) {
+                  printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
+                  return;
+                  }
+            }
+      if (len < bl) {
+            int i = 2;
+            for (i = 2; i < 256; i <<= 1) {
+                  if (len * i == bl)
+                        break;
+                  }
+            if (i >= 256) {
+                  printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
+                  return;
+                  }
+            }
+
+      //---------------------------------------------------
+      //    make gap for new note/rest
+      //---------------------------------------------------
+
+      ChordRestList* crl = tuplet->elements();
+      iChordRest i = crl->begin();
+      for (; i != crl->end(); ++i) {
+            if (i->second == cr)
+                  break;
+            }
+      if (i == crl->end()) {
+            printf("setTupletChordRest: cr not found in tuplet\n");
+            return;
+            }
+      int remaining = len;
+      iChordRest ii = i;
+      for (; ii != crl->end(); ++ii) {
+            remaining -= ii->second->duration().ticks();
+            if (remaining <= 0)
+                  break;
+            }
+      if (remaining > 0) {
+            printf("setTupletChordRest: note/rest does not fit\n");
+            return;
+            }
+      remaining = len;
+      ii   = i;
+      Measure* measure = cr->measure();
+      measure->setDirty();
+
+      for (; ii != crl->end(); ++ii) {
+            ChordRest* cr = ii->second;
+            undoRemoveElement(cr);
+            measure->cmdRemoveEmptySegment(cr->segment());
+            remaining -= cr->duration().ticks();
+            if (remaining <= 0)
+                  break;
+            }
+
+      //---------------------------------------------------
+      //    set new note/rest
+      //---------------------------------------------------
+
+      Duration dt;
+      dt.setVal(len);
+
+      int tick = cr->tick();
+      int tl   = len * tuplet->normalNotes() / tuplet->actualNotes();
+
+      if (pitch != -1) {
+            Note* note = new Note(this);
+            note->setPitch(pitch);
+            note->setTrack(cr->track());
+            Chord* chord = new Chord(this);
+            chord->setTick(tick);
+            chord->add(note);
+            chord->setTickLen(tl);
+            chord->setDuration(dt);
+            chord->setTrack(cr->track());
+            Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
+            if (segment == 0) {
+                  segment = measure->createSegment(Segment::SegChordRest, tick);
+                  undoAddElement(segment);
+                  }
+            chord->setParent(segment);
+            undoAddElement(chord);
+            tuplet->add(chord);
+            chord->setTuplet(tuplet);
+            }
+      else {
+            Rest* rest = new Rest(this);
+            rest->setTrack(cr->track());
+            rest->setTick(tick);
+            rest->setTickLen(tl);
+            rest->setDuration(dt);
+            Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
+            if (segment == 0) {
+                  segment = measure->createSegment(Segment::SegChordRest, tick);
+                  undoAddElement(segment);
+                  }
+            rest->setParent(segment);
+            undoAddElement(rest);
+            rest->setTuplet(tuplet);
+            tuplet->add(rest);
+            }
+
+      //---------------------------------------------------
+      //    fill gap with rest(s)
+      //---------------------------------------------------
+
+      if (remaining < 0) {
+            remaining = -remaining;
+            tick += tl;
+            printf("fill gap at %d len %d\n", tick, remaining);
+            while (remaining > 0) {
+                  Duration dt;
+                  dt.setVal(remaining);
+                  int tl = dt.ticks() * tuplet->normalNotes() / tuplet->actualNotes();
+                  Rest* rest = new Rest(this);
+                  rest->setTrack(cr->track());
+                  rest->setTick(tick);
+                  rest->setTickLen(tl);
+                  rest->setDuration(dt);
+                  Segment* segment = measure->findSegment(Segment::SegChordRest, tick);
+                  if (segment == 0) {
+                        segment = measure->createSegment(Segment::SegChordRest, tick);
+                        undoAddElement(segment);
+                        }
+                  rest->setParent(segment);
+                  undoAddElement(rest);
+                  rest->setTuplet(tuplet);
+                  tuplet->add(rest);
+                  remaining -= dt.ticks();
+                  tick += tl;
+                  }
+            }
       }
 
