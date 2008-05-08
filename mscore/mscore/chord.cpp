@@ -39,6 +39,7 @@
 #include "score.h"
 #include "tremolo.h"
 #include "staff.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -232,6 +233,7 @@ void Chord::add(Element* e)
                   if (note->tieFor()->endNote())
                         note->tieFor()->endNote()->setTieBack(note->tieFor());
                   }
+            note->setType(duration());
             }
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
@@ -336,28 +338,8 @@ void Chord::layoutStem1(ScoreLayout* layout)
       //  process stem
       //-----------------------------------------
 
-      int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
-      int hookIdx;
-
-      bool hasStem = true;
-      if (ticks < division/16)
-            hookIdx = 5;
-      else if (ticks < division/8)
-            hookIdx = 4;
-      else if (ticks < division/4)
-            hookIdx = 3;
-      else if (ticks < division/2)
-            hookIdx = 2;
-      else if (ticks < division)
-            hookIdx = 1;
-      else if (ticks < division*2)
-            hookIdx = 0;
-      else if (ticks < division*4)  // < 1/1
-            hookIdx = 0;
-      else {
-            hookIdx = 0;
-            hasStem = false;
-            }
+      bool hasStem = duration().hasStem();
+      int hookIdx  = duration().hooks();
 
       if (hasStem) {
             if (!_stem)
@@ -428,13 +410,12 @@ void Chord::layoutStem(ScoreLayout* layout)
       //  process stem
       //-----------------------------------------
 
-      int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
-      int hookIdx;
       Spatium stemLen;
-
       Spatium normalLen(3.5 * staffMag);
 
-      bool hasStem = true;
+      bool hasStem = duration().hasStem();
+      int hookIdx  = duration().hooks();
+
       if (_noteType != NOTE_NORMAL) {
             // stemLen = Spatium(2.5 * mag());
             stemLen = normalLen * score()->style()->graceNoteMag;
@@ -444,24 +425,6 @@ void Chord::layoutStem(ScoreLayout* layout)
             Spatium normalLen(3.5 * staffMag);
             if (stemLen < normalLen)
                   stemLen = normalLen;
-            }
-      if (ticks < division/16)
-            hookIdx = 5;
-      else if (ticks < division/8)
-            hookIdx = 4;
-      else if (ticks < division/4)
-            hookIdx = 3;
-      else if (ticks < division/2)
-            hookIdx = 2;
-      else if (ticks < division)
-            hookIdx = 1;
-      else if (ticks < division*2)
-            hookIdx = 0;
-      else if (ticks < division*4)  // < 1/1
-            hookIdx = 0;
-      else {
-            hookIdx = 0;
-            hasStem = false;
             }
 
       int extraStemLen = hookIdx - 2;
@@ -951,13 +914,16 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }
-      note->setParent(this);
-      note->setTrack(track());
       if (ptch != -1)
             note->setPitch(ptch);
       if (tpc != -1)
             note->setTpc(tpc);
-      notes.add(note);
+      if (!duration().isValid()) {
+            Duration dt;
+            headType(tickLen(), &dt, &_dots);
+            setDuration(dt);
+            }
+      add(note);
       }
 
 //---------------------------------------------------------
@@ -1008,6 +974,18 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   ;
             else if (!ChordRest::readProperties(e))
                   domError(e);
+            }
+      int len = tickLen();
+      if (tuplet())
+            len = (len * (tuplet()->actualNotes()) + (tuplet()->normalNotes()/2)) / tuplet()->normalNotes();
+      if (!duration().isValid()) {
+            Duration dt;
+            headType(len, &dt, &_dots);
+            setDuration(dt);
+            }
+      for (iNote i = notes.begin(); i != notes.end(); ++i) {
+            Note* note = i->second;
+            note->setType(duration());
             }
       }
 

@@ -66,6 +66,12 @@ struct BBChord {
       unsigned char bass;
       unsigned char root;
       unsigned char extension;
+      BBChord() {
+            beat = 0;
+            bass = 0;
+            root = 0;
+            extension = 0;
+            }
       };
 
 //---------------------------------------------------------

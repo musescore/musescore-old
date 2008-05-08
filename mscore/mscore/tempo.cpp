@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mtime.h"
 #include "tempo.h"
 #include "xml.h"
 #include "score.h"

@@ -135,7 +135,7 @@ void TempoText::layout(ScoreLayout* l)
       Text::layout(l);
       Measure* m = (Measure*)parent();
       double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
-      double x = time().isValid() ? m->tick2pos(tick()) : 0.0;
+      double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
       setPos(ipos() + QPointF(x, y));
       }
 

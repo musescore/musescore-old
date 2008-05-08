@@ -54,6 +54,8 @@
 #include "driver.h"
 #include "harmony.h"
 
+int division = 480;     // 480 midi ticks represent a quarter note
+
 QPaintDevice* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;

@@ -118,7 +118,7 @@ add_executable ( mscore
       hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
-      mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
+      navigate.cpp navigator.cpp note.cpp ottava.cpp
       page.cpp pagesettings.cpp palette.cpp part.cpp
       partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
@@ -136,7 +136,7 @@ add_executable ( mscore
       instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
-      excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp
+      excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       ${AUDIO}
       )
 

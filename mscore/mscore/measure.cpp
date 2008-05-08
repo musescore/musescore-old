@@ -184,7 +184,7 @@ void Measure::dump() const
 int Measure::tickLen() const
       {
       if (Element::tickLen() == -1)
-            _duration.setTick(_score->sigmap->ticksMeasure(tick()));
+            _duration = _score->sigmap->ticksMeasure(tick());
       return Element::tickLen();
       }
 
@@ -292,14 +292,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int tick         = chord->tick();
       int ll           = 1000;      // line distance to previous note head
       int move1        = nl->front()->staffMove();
-      Tuplet* tuplet   = chord->tuplet();
-      int ticks        = tuplet ? tuplet->baseLen() : chord->tickLen();
-
-      DurationType dt;
-      int dots;
-      headType(ticks, &dt, &dots);
-      chord->setDots(dots);
-      chord->setDurationType(dt);
 
       QList<Note*> notes;
       for (iNote in = nl->begin(); in != nl->end(); ++in)
@@ -310,7 +302,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       for (int i = 0; i < nNotes; ++i) {
             Note* note  = notes[i];
             int pitch   = note->pitch();
-            note->setType(dt);
             if (drumset) {
                   if (!drumset->isValid(pitch)) {
                         printf("unmapped drum note %d\n", pitch);
@@ -674,7 +665,7 @@ void Measure::layout2(ScoreLayout* layout)
                   int track = element->track();
                   if (track != -1)
                         y = system()->staff(track / VOICES)->y();
-                  if (element->time().isValid())
+                  if (element->tick() != -1)
                         x = tick2pos(element->tick());
                   QPointF o(x, y);
                   element->setPos(element->ipos() + o);

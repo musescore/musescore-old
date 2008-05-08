@@ -796,23 +796,9 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
 static QString tick2xml(const int ticks, int* dots)
       {
-      DurationType t;
+      Duration t;
       headType(ticks, &t, dots);
-      switch(t) {
-            case D_QUARTER:   return "quarter";
-            case D_EIGHT:     return "eighth";
-            case D_256TH:     return "256th";
-            case D_128TH:     return "128th";
-            case D_64TH:      return "64th";
-            case D_32ND:      return "32nd";
-            case D_16TH:      return "16th";
-            case D_HALF:      return "half";
-            case D_WHOLE:
-            case D_MEASURE:   return "whole";
-            case D_BREVE:     return "breve";
-            case D_LONG:      return "long";
-            }
-      return QString();
+      return t.name();
       }
 
 //---------------------------------------------------------

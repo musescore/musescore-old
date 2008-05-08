@@ -446,7 +446,7 @@ void Score::write(Xml& xml, bool autosave)
       pageFormat()->write(xml);
       if (rights) {
             xml.stag("rights");
-            xml << rights->toHtml("UTF-8") << '\n';
+            xml.writeHtml(rights->toHtml("UTF-8"));
             xml.etag();
             }
       if (!movementNumber.isEmpty())

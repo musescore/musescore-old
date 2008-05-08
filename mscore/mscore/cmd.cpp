@@ -470,10 +470,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
       else {
             // insert note
             int len = _padState.tickLen;
-            if (cr && cr->tuplet()) {
-                  len = cr->tuplet()->noteLen();
-                  }
-            setNote(_is.pos, _is.track, _padState.pitch, len);
+            if (cr && cr->tuplet())
+                  setTupletChordRest(cr, _padState.pitch, len);
+            else
+                  setNote(_is.pos, _is.track, _padState.pitch, len);
             if (_is.slur) {
                   Element* e = searchNote(_is.pos, _is.track);
                   if (e) {
@@ -779,7 +779,12 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             rest = new Rest(this);
             rest->setTick(tick);
             rest->setTickLen(len);
+            Duration dt;
+            int dots;
+            headType(len, &dt, &dots);
+            rest->setDuration(dt);
             rest->setTrack(track);
+            rest->setDots(dots);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -792,8 +797,8 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       else {
             rest = setRest(tick, len, track);
             }
-      if (tuplet)
-            rest->setTuplet(tuplet);
+//      if (tuplet)
+//            rest->setTuplet(tuplet);
       select(rest, 0, 0);
       if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track);
@@ -1135,7 +1140,7 @@ void Score::insertMeasures(int n, int type)
             if (type == MEASURE) {
       		m->setTickLen(ticks);
 	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-		      	Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
+		      	Rest* rest = new Rest(this, tick, 0);  // whole measure rest
 	      		rest->setTrack(staffIdx * VOICES);
 		      	Segment* s = ((Measure*)m)->getSegment(rest);
 			      s->add(rest);
@@ -1513,19 +1518,25 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "delete")
                   cmdDeleteSelection();
             else if (cmd == "rest") {
+                  Element* el = sel->element();
+                  if (el && el->type() == NOTE)
+                        el = el->parent();
                   if (!noteEntryMode()) {
                         setNoteEntry(true, true);
-                        Element* el = sel->element();
                         if (el) {
-                              if (el->type() == NOTE)
-                                    el = el->parent();
-                              if (el->isChordRest())
+                              if (el->isChordRest()) {
                                     _is.pos = ((ChordRest*)el)->tick();
+                                    }
                               }
                         }
                   if (noteEntryMode()) {
-                        if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots))
-                              _is.pos += _padState.tickLen;
+                        if (el && el->isChordRest() && ((ChordRest*)el)->tuplet()) {
+                              setTupletChordRest((ChordRest*)el, -1, _padState.tickLen);
+                              }
+                        else {
+                              if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots))
+                                    _is.pos += _padState.tickLen;
+                              }
                         }
                   _padState.rest = false;  // continue with normal note entry
                   }
@@ -1971,6 +1982,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
       foreach(Tuplet* tuplet, *sm->tuplets()) {
             tuplet->setParent(dm);
             tuplet->setTrack(tuplet->track() + trackOffset);
+            tuplet->elements()->clear();
             undoAddElement(tuplet);
             }
 
