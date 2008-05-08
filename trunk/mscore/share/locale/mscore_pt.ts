@@ -1910,7 +1910,7 @@ failed: </source>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="597"/>
+        <location filename="../../mscore/harmony.cpp" line="598"/>
         <source>Harmony Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2503,7 +2503,7 @@ failed: </source>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1997"/>
+        <location filename="../../mscore/measure.cpp" line="1994"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4198,85 +4198,85 @@ failed: </source>
         <translation>Repetições on/off</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="133"/>
+        <location filename="../../mscore/file.cpp" line="135"/>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="181"/>
+        <location filename="../../mscore/file.cpp" line="183"/>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: Abrir partitura</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="330"/>
+        <location filename="../../mscore/file.cpp" line="335"/>
         <source>MuseScore Format (*.msc)</source>
         <translation>Formato MuseScore (*.msc)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="331"/>
+        <location filename="../../mscore/file.cpp" line="336"/>
         <source>MusicXml Format (*.xml)</source>
         <translation>Formato MusicXml (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="333"/>
+        <location filename="../../mscore/file.cpp" line="338"/>
         <source>Standard Midi File (*.mid)</source>
         <translation>Formato Midi (*.mid)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="334"/>
+        <location filename="../../mscore/file.cpp" line="339"/>
         <source>PDF File (*.pdf)</source>
         <translation>Ficheiro PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="335"/>
+        <location filename="../../mscore/file.cpp" line="340"/>
         <source>Postscript File (*.ps)</source>
         <translation>Ficheiro Postscript (*.ps)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="336"/>
+        <location filename="../../mscore/file.cpp" line="341"/>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>Imagem PNG (*.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="337"/>
+        <location filename="../../mscore/file.cpp" line="342"/>
         <source>Scalable Vector Graphic (*.svg)</source>
         <translation>Imagem Scalable Vector (*.svg)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="338"/>
+        <location filename="../../mscore/file.cpp" line="343"/>
         <source>Lilypond Format (*.ly)</source>
         <translation>Formato Lilypond (*.ly)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="341"/>
+        <location filename="../../mscore/file.cpp" line="346"/>
         <source>MuseScore: Save As</source>
         <translation>MuseScore: Gravar como</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="427"/>
+        <location filename="../../mscore/file.cpp" line="445"/>
         <source>untitled</source>
         <translation>sem título</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="630"/>
+        <location filename="../../mscore/file.cpp" line="726"/>
         <source>Open File
 </source>
         <translation>Abrir Ficheiro</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="631"/>
+        <location filename="../../mscore/file.cpp" line="727"/>
         <source>
 failed: </source>
         <translation>
 falhou:</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="632"/>
+        <location filename="../../mscore/file.cpp" line="728"/>
         <source>MuseScore: Open File</source>
         <translation>MuseScore: Abrir ficheiro</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="810"/>
+        <location filename="../../mscore/file.cpp" line="907"/>
         <source>MuseScore: Write File</source>
         <translation>MuseScore: Escrever ficheiro</translation>
     </message>
@@ -4786,7 +4786,7 @@ falhou:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="332"/>
+        <location filename="../../mscore/file.cpp" line="337"/>
         <source>Compressed MusicXml Format (*.mxl)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4814,11 +4814,6 @@ falhou:</translation>
         <location filename="../../mscore/actions.cpp" line="1523"/>
         <source>Transpose</source>
         <translation type="unfinished">Transpor</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/file.cpp" line="192"/>
-        <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Midi Files (*.mid *.kar);;Muse Data Files (*.md);;Lilypond Files (*.ly);;BB Files (*.mgu *.MGU *.sgu *.SGU);;All files (*)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="973"/>
@@ -4956,7 +4951,7 @@ falhou:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="135"/>
+        <location filename="../../mscore/file.cpp" line="137"/>
         <source>The score &quot;%1&quot;contains unsaved data
 Save Current Score?</source>
         <translation type="unfinished"></translation>
@@ -5157,8 +5152,13 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1475"/>
-        <source></source>
+        <location filename="../../mscore/file.cpp" line="195"/>
+        <source>Compressed MuseScore Files (*.mscz);;MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Midi Files (*.mid *.kar);;Muse Data Files (*.md);;Lilypond Files (*.ly);;BB Files (*.mgu *.MGU *.sgu *.SGU);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/file.cpp" line="334"/>
+        <source>Compressed MuseScore Format (*.mscz)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5278,12 +5278,12 @@ Save Current Score?</source>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="868"/>
+        <location filename="../../mscore/note.cpp" line="823"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="871"/>
+        <location filename="../../mscore/note.cpp" line="826"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6231,33 +6231,33 @@ Save Current Score?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="451"/>
+        <location filename="../../mscore/utils.cpp" line="388"/>
         <source>MuseScore:</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="428"/>
+        <location filename="../../mscore/utils.cpp" line="365"/>
         <source>please select a single note and retry operation
 </source>
         <translation>Por favor, escolha uma só nota e volte a tentar
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="436"/>
+        <location filename="../../mscore/utils.cpp" line="373"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation>Por favor, escolha uma só nota ou pausa e volte a tentar
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="444"/>
+        <location filename="../../mscore/utils.cpp" line="381"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation>Por favor, escolha uma só nota ou ligadura de expressão e volte a tentar
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="452"/>
+        <location filename="../../mscore/utils.cpp" line="389"/>
         <source>please select one or more staves and retry operation
 </source>
         <translation type="unfinished"></translation>
@@ -6266,7 +6266,7 @@ Save Current Score?</source>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../../mscore/file.cpp" line="116"/>
+        <location filename="../../mscore/file.cpp" line="118"/>
         <source>MuseScore: load failed:</source>
         <translation>MuseScore: Abertura falhou:</translation>
     </message>
@@ -6281,12 +6281,12 @@ Save Current Score?</source>
         <translation>MuseScore: Abertura de estilo falhou:</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="675"/>
+        <location filename="../../mscore/file.cpp" line="771"/>
         <source>MuseScore: Load Style</source>
         <translation type="unfinished">MuseScore: Abrir estilo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="680"/>
+        <location filename="../../mscore/file.cpp" line="776"/>
         <source>MuseScore Styles (*.mss);;All files (*)</source>
         <translation type="unfinished">Estilos MuseScore (*.mss);;Todos os ficheiros (*)</translation>
     </message>
@@ -6363,12 +6363,12 @@ Save Current Score?</source>
 <context>
     <name>Rest</name>
     <message>
-        <location filename="../../mscore/rest.cpp" line="361"/>
+        <location filename="../../mscore/rest.cpp" line="351"/>
         <source>Rest</source>
         <translation>Pausa</translation>
     </message>
     <message>
-        <location filename="../../mscore/rest.cpp" line="362"/>
+        <location filename="../../mscore/rest.cpp" line="352"/>
         <source>Rest Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6417,7 +6417,7 @@ Save Current Score?</source>
 <context>
     <name>Score</name>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="938"/>
+        <location filename="../../mscore/cmd.cpp" line="941"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
@@ -6425,7 +6425,7 @@ start text entry</source>
 Por favor, seleccione uma nota ou pausa no local desejado</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1088"/>
+        <location filename="../../mscore/cmd.cpp" line="1091"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6433,37 +6433,37 @@ first create some staves</source>
 Por favor, use o painel de instrumentos para criar uma pauta</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1121"/>
+        <location filename="../../mscore/cmd.cpp" line="1124"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Nenhum compasso seleccionado:
 Por favor, seleccione um compasso e tente de novo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="234"/>
+        <location filename="../../mscore/file.cpp" line="237"/>
         <source>MuseScore: Save Score</source>
         <translation>MuseScore: Gravar partitura</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="267"/>
+        <location filename="../../mscore/file.cpp" line="272"/>
         <source>Open Temp File
 </source>
         <translation>Abrir ficheiro temp</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="768"/>
+        <location filename="../../mscore/file.cpp" line="864"/>
         <source>
 failed: </source>
         <translation>
 Falhou:  </translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="269"/>
+        <location filename="../../mscore/file.cpp" line="274"/>
         <source>MuseScore: Open File</source>
         <translation>MuseScore: Abrir ficheiro</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="844"/>
+        <location filename="../../mscore/file.cpp" line="1023"/>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Ler ficheiro</translation>
     </message>
@@ -6477,7 +6477,7 @@ Por favor, seleccione a nota ou pausa para a qual deseja
 definir o tempo.</translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="1128"/>
+        <location filename="../../mscore/score.cpp" line="1130"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>
@@ -6486,28 +6486,28 @@ Por favor, seleccione a nota ou pause no local
 em que deseja inserir novas notas</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="754"/>
+        <location filename="../../mscore/file.cpp" line="850"/>
         <source>MuseScore: Save Style</source>
         <translation type="unfinished">MuseScore: Gravar estilo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="757"/>
+        <location filename="../../mscore/file.cpp" line="853"/>
         <source>MuseScore style file (*.mss)</source>
         <translation type="unfinished">Ficheiro de estilo MuseScore (*.mss)</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="767"/>
+        <location filename="../../mscore/file.cpp" line="863"/>
         <source>Open Style File
 </source>
         <translation type="unfinished">Abrir ficheiro de estilo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="769"/>
+        <location filename="../../mscore/file.cpp" line="865"/>
         <source>MuseScore: Open Style file</source>
         <translation type="unfinished">MuseScore: Abrir ficheiro de estilo</translation>
     </message>
     <message>
-        <location filename="../../mscore/file.cpp" line="783"/>
+        <location filename="../../mscore/file.cpp" line="879"/>
         <source>MuseScore: Write Style</source>
         <translation type="unfinished">MuseScore: Escrever estilo</translation>
     </message>
@@ -6687,7 +6687,7 @@ em que deseja inserir novas notas</translation>
 <context>
     <name>ShowClefWidget</name>
     <message>
-        <location filename="../../mscore/listedit.cpp" line="942"/>
+        <location filename="../../mscore/listedit.cpp" line="962"/>
         <source>Clef Type:</source>
         <translation>Tipo de clave:</translation>
     </message>
@@ -6695,7 +6695,7 @@ em que deseja inserir novas notas</translation>
 <context>
     <name>ShowRestWidget</name>
     <message>
-        <location filename="../../mscore/listedit.cpp" line="882"/>
+        <location filename="../../mscore/listedit.cpp" line="884"/>
         <source>Segment:</source>
         <translation>Segmento:</translation>
     </message>
@@ -7450,7 +7450,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Tuplet</name>
     <message>
-        <location filename="../../mscore/tuplet.cpp" line="429"/>
+        <location filename="../../mscore/tuplet.cpp" line="430"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
