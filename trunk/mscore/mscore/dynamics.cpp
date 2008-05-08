@@ -236,7 +236,7 @@ void Dynamic::layout(ScoreLayout* l)
       {
       Text::layout(l);
       double y = track() != -1 ? measure()->system()->staff(track() / VOICES)->y() : 0.0;
-      double x = time().isValid() ? measure()->tick2pos(tick()) : 0.0;
+      double x = tick() != -1 ? measure()->tick2pos(tick()) : 0.0;
       setPos(ipos() + QPointF(x, y));
       }
 

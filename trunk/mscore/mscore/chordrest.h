@@ -23,6 +23,7 @@
 
 #include "globals.h"
 #include "symbol.h"
+#include "durationtype.h"
 
 class Score;
 class Measure;
@@ -122,7 +123,7 @@ typedef QList<NoteAttribute*>::const_iterator ciAttribute;
 class ChordRest : public Element {
       QList<Slur*> _slurFor;
       QList<Slur*> _slurBack;
-      DurationType _durationType;
+      Duration _duration;
 
    protected:
       QList<NoteAttribute*> attributes;
@@ -150,13 +151,13 @@ class ChordRest : public Element {
       Segment* segment() const                  { return (Segment*)parent(); }
       Measure* measure() const                  { return (Measure*)(parent()->parent()); }
 
-      void setBeamMode(BeamMode m);
+      void setBeamMode(BeamMode m)              { _beamMode = m; }
       BeamMode beamMode() const                 { return _beamMode; }
       void setBeam(Beam* b)                     { _beam = b; }
       Beam* beam() const                        { return _beam; }
-      virtual void setTuplet(Tuplet* t)         { _tuplet = t; }
+      void setTuplet(Tuplet* t)                 { _tuplet = t; }
       Tuplet* tuplet() const                    { return _tuplet; }
-      int beams() const;
+      int beams() const                         { return _duration.hooks(); }
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
@@ -167,7 +168,7 @@ class ChordRest : public Element {
       virtual int downLine() const              { return 8;}
       virtual int line(bool up) const           { return up ? upLine() : downLine(); }
       virtual QPointF stemPos(bool, bool) const { return pos(); }    // point to connect stem
-      bool up() const;
+      bool up() const                           { return _up;   }
       bool isUp() const;
       void setUp(bool val)                      { _up = val; }
       QList<NoteAttribute*>* getAttributes()    { return &attributes; }
@@ -183,8 +184,8 @@ class ChordRest : public Element {
       const QList<Slur*> slurFor() const        { return _slurFor; }
       const QList<Slur*> slurBack() const       { return _slurBack; }
 
-      DurationType durationType() const         { return _durationType; }
-      void setDurationType(DurationType t)      { _durationType = t; }
+      Duration duration() const                 { return _duration; }
+      virtual void setDuration(Duration t)      { _duration = t; }
 
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }

@@ -309,9 +309,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         continue;
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
-                  int len       = cr->tickLen();
-                  if (cr->tuplet())
-                        len = cr->tuplet()->baseLen();
+                  int len       = cr->duration().ticks();
 
                   if ((len >= division) || (bm == BEAM_NO)) {
                         if (beam) {
@@ -331,7 +329,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         // in voice:
                         ChordRest* le = beam->getElements().back();
                         if (le->tick() + le->tickLen() != cr->tick()) {
-//                              if (!((le->tuplet()!=0) ^ (cr->tuplet()!=0)))
+                              if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet()))
                                     beamEnd = true;
                               }
                         // end beam if note tye changed (grace notes)
@@ -505,7 +503,7 @@ void Beam::layout1(ScoreLayout* /*layout*/)
             int tl = cr->tickLen();
             Tuplet* tuplet = cr->tuplet();
             if (tuplet)
-                  tl = tuplet->baseLen();
+                  tl = cr->duration().ticks();
             if (tl > maxTickLen)
                   maxTickLen = tl;
             }
@@ -571,7 +569,7 @@ void Beam::layout(ScoreLayout* layout)
             int tl = cr->tickLen();
             Tuplet* tuplet = cr->tuplet();
             if (tuplet)
-                  tl = tuplet->baseLen();
+                  tl = cr->duration().ticks();
             if (tl > maxTickLen)
                   maxTickLen = tl;
             }
@@ -874,7 +872,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
             int tl = cr->tickLen();
             Tuplet* tuplet = cr->tuplet();
             if (tuplet)
-                  tl = tuplet->baseLen();
+                  tl = cr->duration().ticks();
             if (tl > maxTickLen)
                   maxTickLen = tl;
             }

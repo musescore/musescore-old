@@ -168,16 +168,6 @@ ChordRest::ChordRest(Score* s)
       _small    = false;
       _beamMode = BEAM_AUTO;
       _dots     = 0;
-      _durationType = D_QUARTER;
-      }
-
-//---------------------------------------------------------
-//   up
-//---------------------------------------------------------
-
-bool ChordRest::up() const
-      {
-      return _up;
       }
 
 //---------------------------------------------------------
@@ -201,36 +191,6 @@ QPointF ChordRest::canvasPos() const
       System* system = measure()->system();
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
-      }
-
-//---------------------------------------------------------
-//   setBeamMode
-//---------------------------------------------------------
-
-void ChordRest::setBeamMode(BeamMode m)
-      {
-//      if (!_tuplet)
-            _beamMode = m;
-      }
-
-//---------------------------------------------------------
-//   beams
-//---------------------------------------------------------
-
-int ChordRest::beams() const
-      {
-      int t = tickLen();
-      if (t < division/8)
-            return 4;
-      else if (t < division/4)
-            return 3;
-      else if (t < division/2)
-            return 2;
-      else if (t < division)
-            return 1;
-      else
-            printf("ChordRest::beams(): unsupported tickLen %d\n", t);
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -268,6 +228,12 @@ QList<Prop> ChordRest::properties(Xml& xml) const
             }
       if (_small)
             pl.append(Prop("small", _small));
+      Duration d;
+      d.setVal(tickLen());
+      if (_duration != d) {
+            printf("prop duration %d - %d   %d %d\n", duration().val(), d.val(), duration().ticks(), d.ticks());
+            pl.append(Prop("durationType", _duration.name()));
+            }
       return pl;
       }
 
@@ -379,6 +345,11 @@ bool ChordRest::readProperties(QDomElement e)
             else {
                   printf("Note::read(): Slur not found\n");
                   }
+            }
+      else if (tag == "durationType") {
+            Duration d;
+            d.setVal(val);
+            setDuration(d);
             }
       else
             return false;

@@ -32,6 +32,8 @@ static const int MSCVERSION = 109;
 //    1.8   slur id, slur anchor in in Note
 //    1.8   image size stored in mm instead of pixel
 
+extern int division;
+
 extern bool debugMode;
 extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.
@@ -59,11 +61,6 @@ enum Direction { AUTO, UP, DOWN };
 
 enum Placement {
       PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW
-      };
-
-enum DurationType {
-      D_QUARTER, D_EIGHT, D_256TH, D_128TH, D_64TH, D_32ND,
-      D_16TH, D_HALF, D_WHOLE, D_BREVE, D_LONG, D_MEASURE
       };
 
 enum LineSegmentType {

@@ -263,69 +263,6 @@ int Score::prevSeg1(int tick, int& track)
       }
 
 //---------------------------------------------------------
-//   dots
-//---------------------------------------------------------
-
-static int getDots(int base, int rest, int* dots)
-      {
-      *dots = 0;
-      if (rest >= base / 2) {
-            *dots = *dots + 1;
-            rest -= base / 2;
-            }
-      if (rest >= base / 4) {
-            *dots = *dots + 1;
-            rest -= base / 4;
-            }
-      return rest;
-      }
-
-//---------------------------------------------------------
-//   headType
-//    return for a given tickLen the baselen of a note
-//    (which determines the head symbol) and a number of
-//    dots (<= 2)
-//
-//    return the remaining ticks if any
-//---------------------------------------------------------
-
-int headType(int tickLen, DurationType* type, int* dots)
-      {
-      if (tickLen == 0) {
-            *type = D_MEASURE;
-            *dots = 0;
-            return 0;
-            }
-      struct Duration {
-            int ticks;
-            DurationType type;
-            };
-      Duration base[] = {
-            { division * 16, D_LONG    },
-            { division * 8,  D_BREVE   },
-            { division * 4,  D_WHOLE   },
-            { division * 2,  D_HALF    },
-            { division,      D_QUARTER },
-            { division / 2,  D_EIGHT   },
-            { division / 4,  D_16TH    },
-            { division / 8,  D_32ND    },
-            { division / 16, D_64TH    },
-            { division / 32, D_128TH   },
-            { division / 64, D_256TH   }
-            };
-
-      for (unsigned int i = 0; i < sizeof(base)/sizeof(*base); ++i) {
-            if (tickLen / base[i].ticks) {
-                  *type = base[i].type;
-                  return getDots(base[i].ticks, tickLen % base[i].ticks, dots);
-                  }
-            }
-      *type = D_QUARTER;
-      *dots = 0;
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   pitchKeyAdjust
 //    change entered note to sounding pitch dependend
 //    on key.
@@ -452,5 +389,4 @@ void selectStavesMessage()
          QMessageBox::tr("please select one or more staves and retry operation\n"),
          QMessageBox::Ok, QMessageBox::NoButton);
       }
-
 

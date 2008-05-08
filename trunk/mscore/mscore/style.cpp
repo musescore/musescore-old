@@ -22,7 +22,6 @@
 #include "style.h"
 #include "xml.h"
 #include "score.h"
-#include "mtime.h"
 
 Style* style;
 //  20 points        font design size

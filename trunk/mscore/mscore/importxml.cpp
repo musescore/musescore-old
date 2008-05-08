@@ -1761,7 +1761,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int octave = 4;
       int accidental = 0;
       bool editorial = false;
-      DurationType durationType = D_QUARTER;
+      Duration durationType(Duration::V_QUARTER);
       bool trillMark = false;
       QString strongAccentType;
       bool accent = false;
@@ -1800,32 +1800,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             else if (tag == "duration")
                   duration = s.toInt();
-            else if (tag == "type") {
-                  if (s == "quarter")
-                        durationType = D_QUARTER;
-                  else if (s == "eighth")
-                        durationType = D_EIGHT;
-                  else if (s == "256th")
-                        durationType = D_256TH;
-                  else if (s == "128th")
-                        durationType = D_128TH;
-                  else if (s == "64th")
-                        durationType = D_64TH;
-                  else if (s == "32nd")
-                        durationType = D_32ND;
-                  else if (s == "16th")
-                        durationType = D_16TH;
-                  else if (s == "half")
-                        durationType = D_HALF;
-                  else if (s == "whole")
-                        durationType = D_WHOLE;
-                  else if (s == "breve")
-                        durationType = D_BREVE;
-                  else if (s == "long")
-                        durationType = D_LONG;
-                  else
-                        printf("unknown note type <%s>\n", s.toLatin1().data());
-                  }
+            else if (tag == "type")
+                  durationType.setVal(s);
             else if (tag == "chord")
                   tick -= lastLen;
             else if (tag == "voice")
@@ -2137,7 +2113,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             // xmlSetPitch(note, tick, c, alter, octave, accidental);
 
-            note->setType(durationType);
+//            note->setType(durationType);
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
             note->setStaffMove(move);
@@ -2171,8 +2147,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         cr->setTick(tick - (division / 2));
                         cr->setTickLen(division / 2); // to get a hook
                         }
-                  else
+                  else {
                         cr->setTickLen(ticks);
+                        cr->setDuration(durationType);
+                        }
                   Segment* s = measure->getSegment(cr);
                   s->add(cr);
                   }

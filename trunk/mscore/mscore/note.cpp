@@ -362,54 +362,13 @@ void Note::setAccidentalSubtype(int pre)
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   setHead
-//---------------------------------------------------------
-
-/**
- Set note head and dots depending on \a ticks.
-*/
-
-void Note::setHead(int ticks)
-      {
-      DurationType dt;
-      headType(ticks, &dt, &_dots);
-      setType(dt);
-      }
-#endif
-
 //---------------------------------------------------------
 //   setType
 //---------------------------------------------------------
 
-void Note::setType(DurationType t)
+void Note::setType(Duration t)
       {
-      int headType = 0;
-      switch(t) {
-            case D_256TH:
-            case D_128TH:
-            case D_64TH:
-            case D_32ND:
-            case D_16TH:
-            case D_EIGHT:
-            case D_QUARTER:
-                  headType = 2;
-                  break;
-            case D_HALF:
-                  headType = 1;
-                  break;
-            case D_WHOLE:
-                  headType = 0;
-                  break;
-            case D_BREVE:
-            case D_LONG:      // not impl.
-                  headType = 3;
-                  break;
-            case D_MEASURE:
-                  break;
-            }
-      _head = noteHeads[_headGroup][headType];
+      _head = noteHeads[_headGroup][t.headType()];
       }
 
 //---------------------------------------------------------

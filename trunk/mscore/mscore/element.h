@@ -30,7 +30,7 @@
 */
 
 #include "spatium.h"
-#include "mtime.h"
+// #include "mtime.h"
 
 class QKeyEvent;
 class Xml;
@@ -107,7 +107,7 @@ class Element {
       int _track;               ///< staffIdx * VOICES + voice
                                 ///< -1 if this is a system element
 
-      MTime _time;
+      int _tick;
       QColor _color;
       double _mag;              ///< standard magnification (derived value)
 
@@ -131,7 +131,7 @@ class Element {
       mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
                                 ///< valid after call to layout()
 
-      mutable MTime _duration;  ///< Note: lazy evaluation
+      mutable int _duration;    ///< Note: lazy evaluation
 
    public:
       Element(Score*);
@@ -244,13 +244,10 @@ class Element {
 
       bool operator>(const Element&) const;
 
-      MTime time() const              { return _time; }
-      MTime duration() const          { return _duration; }
-
-      int tick() const                { return _time.tick(); }
-      void setTick(int t)             { _time.setTick(t); }
-      virtual int tickLen() const     { return _duration.tick(); }
-      virtual void setTickLen(int t)  { _duration.setTick(t); }
+      int tick() const                { return _tick;         }
+      void setTick(int t)             { _tick = t;            }
+      virtual int tickLen() const     { return _duration;     }
+      virtual void setTickLen(int t)  { _duration = t;        }
 
       virtual void space(double& min, double& extra) const {
             min   = width();

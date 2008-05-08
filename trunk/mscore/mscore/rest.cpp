@@ -56,6 +56,9 @@ Rest::Rest(Score* s, int tick, int len)
       _sym       = quartrestSym;
       setTick(tick);
       setTickLen(len);
+      Duration d;
+      d.setVal(len);
+      setDuration(d);
       }
 
 //---------------------------------------------------------
@@ -202,6 +205,11 @@ void Rest::read(QDomElement e)
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }
+      if (!duration().isValid()) {
+            Duration dt;
+            headType(tickLen(), &dt, &_dots);
+            setDuration(dt);
+            }
       }
 
 //---------------------------------------------------------
@@ -233,71 +241,51 @@ void Rest::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   setTuplet
+//   setDuration
 //---------------------------------------------------------
 
-void Rest::setTuplet(Tuplet* t)
+void Rest::setDuration(Duration dt)
       {
-      ChordRest::setTuplet(t);
-      setSymbol(t->baseLen());
-      }
-
-//---------------------------------------------------------
-//   setSymbol
-//---------------------------------------------------------
-
-void Rest::setSymbol(int i)
-      {
+      ChordRest::setDuration(dt);
       setYoff(2.0 * mag());
-      DurationType type;
-      headType(i, &type, &_dots);
-      switch(type) {
-            case D_LONG:
+      switch(dt.val()) {
+            case Duration::V_LONG:
                   _sym = longarestSym;
                   break;
-            case D_BREVE:
+            case Duration::V_BREVE:
                   _sym = breverestSym;
                   break;
-            case D_MEASURE:
-            case D_WHOLE:
+            case Duration::V_MEASURE:
+            case Duration::V_WHOLE:
                   _sym = wholerestSym;
                   setYoff(1.0 * mag());
                   break;
-            case D_HALF:
+            case Duration::V_HALF:
                   _sym = halfrestSym;
                   break;
-            case D_QUARTER:
+            case Duration::V_INVALID:
+            case Duration::V_QUARTER:
                   _sym = quartrestSym;
                   break;
-            case D_EIGHT:
+            case Duration::V_EIGHT:
                   _sym = eighthrestSym;
                   break;
-            case D_16TH:
+            case Duration::V_16TH:
                   _sym = sixteenthrestSym;
                   break;
-            case D_32ND:
+            case Duration::V_32ND:
                   _sym = thirtysecondrestSym;
                   break;
-            case D_64TH:
+            case Duration::V_64TH:
                   _sym = sixtyfourthrestSym;
                   break;
-            case D_128TH:
+            case Duration::V_128TH:
                   _sym = hundredtwentyeighthrestSym;
                   break;
-            case D_256TH:
+            case Duration::V_256TH:
                   _sym = quartrestSym;    // TODO
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   setTickLen
-//---------------------------------------------------------
-
-void Rest::setTickLen(int i)
-      {
-      Element::setTickLen(i);
-      setSymbol(tuplet() ? tuplet()->baseLen() : tickLen());
       }
 
 //---------------------------------------------------------

@@ -371,11 +371,11 @@ void Tuplet::read(QDomElement e)
 
 void Tuplet::add(Element* e)
       {
-#if 0
+#if 1
       for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
             if (i->second == e) {
                   printf("Tuplet::add: already there\n");
-                  abort();
+//                  abort();
                   }
             }
 #endif
@@ -412,6 +412,7 @@ void Tuplet::remove(Element* e)
                               return;
                               }
                         }
+                  printf("Tuplet()::remove: element %p at %d not found\n", e, e->tick());
                   break;
             default:
                   printf("Tuplet::remove() unknown element\n");

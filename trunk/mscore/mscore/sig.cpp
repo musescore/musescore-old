@@ -20,7 +20,6 @@
 
 #include "sig.h"
 #include "xml.h"
-#include "mtime.h"
 #include "globals.h"
 
 //---------------------------------------------------------
@@ -350,7 +349,6 @@ void SigList::removeTime(int tick, int len)
       {
       SigList tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-//            if ((i->first >= tick) && (tick != 0)) {
             if (i->first >= tick) {
                   if (i->first >= tick + len)
                         tmp.add(i->first - len, i->second);
@@ -373,7 +371,6 @@ void SigList::insertTime(int tick, int len)
       {
       SigList tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-//            if ((i->first >= tick) && (tick != 0))
             if (i->first >= tick)
                   tmp.add(i->first + len, i->second);
             else

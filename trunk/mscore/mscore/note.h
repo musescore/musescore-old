@@ -30,6 +30,7 @@
 #include "element.h"
 #include "symbol.h"
 #include "accidental.h"
+#include "durationtype.h"
 
 class Tie;
 class Chord;
@@ -113,9 +114,8 @@ class Note : public Element {
       virtual void collectElements(QList<const Element*>& el) const;
       virtual void setTrack(int val);
 
-//      void setHead(int);
       int totalTicks() const;
-      void setType(DurationType);
+      void setType(Duration);
 
       double headWidth() const;
       double headHeight() const;

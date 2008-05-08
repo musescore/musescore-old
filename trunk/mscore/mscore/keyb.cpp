@@ -253,37 +253,34 @@ void Score::padToggle(int n)
 //   setPadState
 //---------------------------------------------------------
 
-void Score::setPadState(Element* obj)
+void Score::setPadState(Element* e)
       {
-      ElementType type = obj->type();
-      int len = -1;
+      int len       = -1;
       _padState.tie = false;
 
-      if (type == NOTE) {
-            Note* note = (Note*)obj;
-            Chord* chord = note->chord();
-            Tuplet* tuplet = chord->tuplet();
-            len = tuplet ? tuplet->baseLen() : chord->tickLen();
-            Accidental* prefix  = ((Note*)obj)->accidental();
-            _padState.prefix = prefix ? prefix->subtype() : 0;
-            _padState.rest   = false;
-            _padState.voice  = obj->voice();
-            _padState.pitch  = ((Note*)obj)->pitch();
-            _padState.tie    = ((Note*)obj)->tieFor();
-            _padState.noteType = ((Note*)obj)->noteType();
-            _padState.beamMode = chord->beamMode();
+      if (e->type() == NOTE) {
+            Note* note          = static_cast<Note*>(e);
+            Chord* chord        = note->chord();
+            len                 = chord->duration().ticks();
+            Accidental* prefix  = note->accidental();
+            _padState.prefix    = prefix ? prefix->subtype() : 0;
+            _padState.rest      = false;
+            _padState.voice     = note->voice();
+            _padState.pitch     = note->pitch();
+            _padState.tie       = note->tieFor();
+            _padState.noteType  = note->noteType();
+            _padState.beamMode  = chord->beamMode();
             }
-      else if (type == REST) {
-            Rest* rest = (Rest*)obj;
-            Tuplet* tuplet = rest->tuplet();
-            len = tuplet ? tuplet->baseLen() : rest->tickLen();
+      else if (e->type() == REST) {
+            Rest* rest = static_cast<Rest*>(e);
+            len        = rest->duration().ticks();
 
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
 
             _padState.prefix   = 0;
             _padState.rest     = true;
-            _padState.voice    = obj->voice();
+            _padState.voice    = rest->voice();
             _padState.beamMode = rest->beamMode();
             }
       else {
@@ -297,33 +294,9 @@ void Score::setPadState(Element* obj)
             _padState.dots = 0;
             return;
             }
-      struct nv {
-            int ticks;
-            int pad;
-            } values[] = {
-            { division*4 ,  PAD_NOTE1},
-            { division*2 ,  PAD_NOTE2},
-            { division ,    PAD_NOTE4},
-            { division/2 ,  PAD_NOTE8},
-            { division/4 ,  PAD_NOTE16},
-            { division/8 ,  PAD_NOTE32},
-            { division/16 , PAD_NOTE64},
-            };
-
-      for (unsigned int i = 0; i < sizeof(values)/sizeof(*values); ++i) {
-            int n = values[i].ticks;
-            if (len / n) {
-                  _padState.len = n;
-                  int rest      = len % n;
-                  if (rest == (n / 2))
-                        _padState.dots = 1;
-                  else if (rest == ((n * 3) / 4))
-                        _padState.dots = 2;
-                  else
-                        _padState.dots = 0;
-                  break;
-                  }
-            }
+      Duration d;
+      headType(len, &d, &(_padState.dots));
+      _padState.len = d.ticks();
       }
 
 //---------------------------------------------------------
