@@ -2,7 +2,7 @@
 <museScore version="1.9">
   <Mag>1</Mag>
   <xoff>3.81</xoff>
-  <yoff>1.905</yoff>
+  <yoff>1.69333</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -872,10 +872,6 @@
       <nom>4</nom>
       <denom>4</denom>
       </sig>
-    <sig tick="3840">
-      <nom>6</nom>
-      <denom>8</denom>
-      </sig>
     </siglist>
   <tempolist fix="2">
     </tempolist>
@@ -982,122 +978,146 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>96</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>68</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <tick>1440</tick>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>53</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       </Measure>
@@ -1126,38 +1146,223 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>80</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>16th</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="960"/>
       </Measure>
     <Measure number="3">
+      <Tuplet id="0">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Tuplet id="1">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>120</baseLen>
+        <normalNotes>4</normalNotes>
+        <actualNotes>5</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Tuplet id="2">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>120</baseLen>
+        <normalNotes>4</normalNotes>
+        <actualNotes>7</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">7</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Tuplet id="3">
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
+        <baseLen>60</baseLen>
+        <normalNotes>8</normalNotes>
+        <actualNotes>9</actualNotes>
+        <Number>
+          <subtype>Tuplet</subtype>
+          <track>-1</track>
+          <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">9</p></body></html>
+            </html-data>
+          </Number>
+        </Tuplet>
+      <Chord>
+        <ticklen>320</ticklen>
+        <Tuplet>0</Tuplet>
+        <durationType>quarter</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>160</ticklen>
+        <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>192</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>96</ticklen>
+        <Tuplet>1</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>137</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <tick>4936</tick>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>68</ticklen>
+        <Tuplet>2</Tuplet>
+        <durationType>16th</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <tick>5281</tick>
+        <ticklen>106</ticklen>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>53</ticklen>
+        <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>213</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Tuplet>3</Tuplet>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <tick>5705</tick>
+        <ticklen>53</ticklen>
+        <BeamMode>mid</BeamMode>
+        <Tuplet>3</Tuplet>
+        <durationType>32nd</durationType>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="5">
       <Tuplet id="0">
         <numberType>0</numberType>
         <bracketType>0</bracketType>
@@ -1190,8 +1395,11 @@ p, li { white-space: pre-wrap; }
         <Tuplet>0</Tuplet>
         <Note pitch="67" tpc="15"/>
         </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
-    <Measure number="4">
+    <Measure number="6">
       <Tuplet id="0">
         <numberType>0</numberType>
         <bracketType>0</bracketType>
@@ -1220,8 +1428,11 @@ p, li { white-space: pre-wrap; }
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Note pitch="67" tpc="15" ticks="720"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
-    <Measure number="5">
+    <Measure number="7">
       <Tuplet id="0">
         <numberType>0</numberType>
         <bracketType>0</bracketType>
@@ -1252,42 +1463,68 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="360"/>
       <Note pitch="67" tpc="15" ticks="360"/>
       <Note pitch="67" tpc="15" ticks="360"/>
-      </Measure>
-    <Measure number="6">
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      </Measure>
-    <Measure number="7">
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="8">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="9">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="10">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="11">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     <Measure number="12">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="14">
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

@@ -1,9 +1,9 @@
 Release 0.9.3 (svn):
+      - more tuplet types; allow for notes/rests of different len in tuplets
       - speedups/optimizations for layout
       - configurable autosave
       - more configuration and style options
-      - more tuplets
-      - new compressed file format
+      - new compressed file format *.mscz
       - lots of bug fixes and render enhancements
 
 Release 0.9.2:
