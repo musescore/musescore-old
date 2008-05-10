@@ -180,6 +180,7 @@ void Segment::removeStaff(int staff)
 
 void Segment::add(Element* el)
       {
+// printf("segment add(%d, %d, %s)\n", tick(), el->track(), el->name());
       el->setParent(this);
 
       el->setTick(tick());    //DEBUG
@@ -218,6 +219,9 @@ void Segment::add(Element* el)
                         cr->tuplet()->setTrack(track);      // debug
                         }
                   }
+                  if (_elist[track])
+                        printf("Segment::add() there is already an element at %d track %d\n",
+                           tick(), track);
                   _elist[track] = el;
                   break;
 

@@ -539,8 +539,7 @@ void MuseScore::editInstrList()
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);
                               }
-                        cs->insertStaff(staff, staffIdx + rstaff);
-                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx + rstaff);
+                        cs->undoInsertStaff(staff, staffIdx + rstaff);
                         ++rstaff;
                         }
                   cs->cmdInsertPart(part, staffIdx);
@@ -571,8 +570,7 @@ void MuseScore::editInstrList()
                               ++rstaff;
                               staff->clef()->setClef(0, sli->clef());
 
-                              cs->insertStaff(staff, staffIdx);
-                              cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
+                              cs->undoInsertStaff(staff, staffIdx);
 
                               for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
                                     if (mb->type() != MEASURE)
@@ -590,6 +588,7 @@ void MuseScore::editInstrList()
                         }
                   }
             }
+
       //
       //    sort staves
       //
@@ -606,8 +605,8 @@ void MuseScore::editInstrList()
                   dst.push_back(sli->staff);
                   }
             }
-      QList<int> dl;
 
+      QList<int> dl;
       foreach(Staff* staff, dst) {
             int idx = cs->staves().indexOf(staff);
             if (idx == -1)
@@ -624,9 +623,11 @@ void MuseScore::editInstrList()
                   }
             }
       if (sort) {
+printf("sort staves\n");
             cs->sortStaves(dl);
             cs->undoOp(dl);
             }
+
       cs->setLayoutAll(true);
       cs->endCmd();
       }
@@ -638,8 +639,7 @@ void MuseScore::editInstrList()
 
 void Score::cmdInsertPart(Part* part, int staffIdx)
       {
-      undoOp(UndoOp::InsertPart, part, staffIdx);
-      insertPart(part, staffIdx);
+      undoInsertPart(part, staffIdx);
 
       int sidx = this->staffIdx(part);
       int eidx = sidx + part->nstaves();
@@ -681,9 +681,12 @@ void Score::cmdRemovePart(Part* part)
       int strack = sidx * VOICES;
       int etrack = eidx * VOICES;
 
+printf("remove part track %d - %d\n", strack, etrack);
+
       //
       //    remove/adjust slurs in _gel
       //
+#if 0
       foreach(Element* e, _gel) {
             if (e->type() != SLUR) {
                   printf("gel element %s %d\n", e->name(), e->track());
@@ -700,6 +703,7 @@ void Score::cmdRemovePart(Part* part)
                         slur->setTrack2(slur->track2() - VOICES);
                   }
             }
+#endif
       //
       //    adjust brackets
       //
@@ -713,7 +717,7 @@ void Score::cmdRemovePart(Part* part)
                   if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                         staff->setBracketSpan(i, span - (eidx-sidx));
                   else {
-                        printf("TODO: adjust brackets\n");
+                        printf("TODO: adjust brackets, span %d\n", span);
                         }
                   }
             }
@@ -728,14 +732,11 @@ void Score::cmdRemovePart(Part* part)
             m->cmdRemoveStaves(sidx, eidx);
             }
 
-      int idx = eidx - 1;
-      for (QList<Staff*>::iterator i = _staves.begin() + idx; n > 0; --n, --idx, --i) {
-            undoOp(UndoOp::RemoveStaff, *i, idx);
-            part->staves()->removeAll(*i);
+      for (int i = 0; i < n; ++i) {
+            Staff* staff = _staves[sidx];
+            undoRemoveStaff(staff, sidx);
             }
-      _staves.erase(_staves.begin() + sidx, _staves.begin() + eidx);
-      _parts.removeAt(_parts.indexOf(part));
-      undoOp(UndoOp::RemovePart, part, sidx);
+      undoRemovePart(part, sidx);
       }
 
 //---------------------------------------------------------
@@ -801,8 +802,7 @@ void Score::cmdRemoveStaff(int staffIdx)
                   }
             }
       Staff* s = staff(staffIdx);
-      undoOp(UndoOp::RemoveStaff, s, staffIdx);
-      removeStaff(s);
+      undoRemoveStaff(s, staffIdx);
       }
 
 //---------------------------------------------------------

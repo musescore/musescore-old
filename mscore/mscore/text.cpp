@@ -562,6 +562,10 @@ void TextB::setSubtype(const QString& s)
 void TextB::resetMode()
       {
       editMode = 0;
+      if (cursor) {
+            delete cursor;
+            cursor = 0;
+            }
       }
 
 //---------------------------------------------------------

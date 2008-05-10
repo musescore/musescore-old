@@ -322,9 +322,8 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, MeasureBase* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
-      void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
+//      void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
       void undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval);
-      void undoOp(UndoOp::UndoType type, Part* part, int idx);
       void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
       void undoOp(UndoOp::UndoType type, Element* object);
       void undoOp(UndoOp::UndoType type, Element*, const QColor&);
@@ -354,6 +353,10 @@ class Score : public QObject {
       void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);
+      void undoRemovePart(Part* part, int idx);
+      void undoInsertPart(Part* part, int idx);
+      void undoRemoveStaff(Staff* staff, int idx);
+      void undoInsertStaff(Staff* staff, int idx);
 
       void setNote(int tick, int track, int pitch, int len);
       void setTupletChordRest(ChordRest* cr, int pitch, int len);
