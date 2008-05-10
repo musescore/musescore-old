@@ -101,7 +101,7 @@ int Score::pos()
 
 void Score::changeRest(Rest* rest, int /*tick*/, int len)
       {
-      rest->setTickLen(len);
+      rest->setLen(len);
       }
 
 //---------------------------------------------------------
@@ -1218,8 +1218,23 @@ void Score::cmdTuplet(int n)
       tuplet->setTrack(cr->track());
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
-
       cmdCreateTuplet(cr, tuplet);
+      ChordRestList* cl = tuplet->elements();
+      iChordRest i = cl->begin();
+      cr = 0;
+      if (i != cl->end()) {
+            if (i->second->type() == REST)
+                  cr  = i->second;
+            else {
+                  ++i;
+                  if (i != cl->end())
+                        cr = i->second;
+                  }
+            }
+      if (cr) {
+            select(cr, 0, 0);
+            setNoteEntry(true, false);
+            }
       }
 
 //---------------------------------------------------------
@@ -1273,6 +1288,9 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
             cr->setTrack(track);
             }
       cr->setTickLen(ticks);
+      Duration dt;
+      dt.setVal(baseLen);
+      cr->setDuration(dt);
 
       Segment::SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
@@ -1290,6 +1308,9 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
             rest->setTuplet(tuplet);
             rest->setTrack(track);
             rest->setTickLen(ticks);
+            Duration dt;
+            dt.setVal(baseLen);
+            rest->setDuration(dt);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {

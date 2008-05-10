@@ -189,6 +189,7 @@ class ChordRest : public Element {
 
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }
+      void setLen(int ticks);
       };
 
 #endif
