@@ -2533,8 +2533,7 @@ void ExportMusicXml::harmony(Harmony* h)
                               ++idx;
                               }
                         xml.tag("degree-value", tag.mid(idx));
-                        if (alter)
-                              xml.tag("degree-alter", alter);
+                        xml.tag("degree-alter", alter);     // finale insists on this even if 0
                         if (tag.startsWith("add"))
                               xml.tag("degree-type", "add");
                         else if (tag.startsWith("sub"))
@@ -2544,6 +2543,8 @@ void ExportMusicXml::harmony(Harmony* h)
                         xml.etag();
                         }
                   }
+            else
+                  xml.tag("kind", "");
             }
 #if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);

@@ -365,7 +365,7 @@ bool MuseScore::saveAs()
                   cs->setCreated(false);
                   }
             }
-      else if (selectedFilter == fl[0]) {
+      else if (selectedFilter == fl[1]) {
             // save as mscore *.msc file
             if (!fn.endsWith(".msc"))
                   fn.append(".msc");
@@ -378,49 +378,49 @@ bool MuseScore::saveAs()
                   cs->setCreated(false);
                   }
             }
-      else if (selectedFilter == fl[1]) {
+      else if (selectedFilter == fl[2]) {
             // save as MusicXML *.xml file
             if (!fn.endsWith(".xml"))
                   fn.append(".xml");
             rv = cs->saveXml(fn);
             }
-      else if (selectedFilter == fl[2]) {
+      else if (selectedFilter == fl[3]) {
             // save as compressed MusicXML *.mxl file
             if (!fn.endsWith(".mxl"))
                   fn.append(".mxl");
             rv = cs->saveMxl(fn);
             }
-      else if (selectedFilter == fl[3]) {
+      else if (selectedFilter == fl[4]) {
             // save as midi file *.mid
             if (!fn.endsWith(".mid"))
                   fn.append(".mid");
             rv = cs->saveMidi(fn);
             }
-      else if (selectedFilter == fl[4]) {
+      else if (selectedFilter == fl[5]) {
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
             rv = cs->savePsPdf(fn, QPrinter::PdfFormat);
             }
-      else if (selectedFilter == fl[5]) {
+      else if (selectedFilter == fl[6]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
             rv = cs->savePsPdf(fn, QPrinter::PostScriptFormat);
             }
-      else if (selectedFilter == fl[6]) {
+      else if (selectedFilter == fl[7]) {
             // save as png file *.png
             if (!fn.endsWith(".png"))
                   fn.append(".png");
             rv = cs->savePng(fn);
             }
-      else if (selectedFilter == fl[7]) {
+      else if (selectedFilter == fl[8]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
             rv = cs->saveSvg(fn);
             }
-      else if (selectedFilter == fl[8]) {
+      else if (selectedFilter == fl[9]) {
             // save as lilypond file *.ly
             if (!fn.endsWith(".ly"))
                   fn.append(".ly");

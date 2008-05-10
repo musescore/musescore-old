@@ -2167,45 +2167,45 @@ fallito: </translation>
         <translation>Chiave</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="888"/>
+        <location filename="../../mscore/instrdialog.cpp" line="878"/>
         <source>MuseScore: Save Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="891"/>
+        <location filename="../../mscore/instrdialog.cpp" line="881"/>
         <source>MuseScore Instruments (*.xml);;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="901"/>
+        <location filename="../../mscore/instrdialog.cpp" line="891"/>
         <source>Open Instruments File
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="902"/>
+        <location filename="../../mscore/instrdialog.cpp" line="892"/>
         <source>
 failed: </source>
         <translation type="unfinished">
 fallito: </translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="903"/>
+        <location filename="../../mscore/instrdialog.cpp" line="893"/>
         <source>MuseScore: Open Instruments file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="925"/>
+        <location filename="../../mscore/instrdialog.cpp" line="915"/>
         <source>MuseScore: Write Style</source>
         <translation type="unfinished">MuseScore: Scrivi Stile</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="936"/>
+        <location filename="../../mscore/instrdialog.cpp" line="926"/>
         <source>MuseScore: Load Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="941"/>
+        <location filename="../../mscore/instrdialog.cpp" line="931"/>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2507,7 +2507,7 @@ fallito: </translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1994"/>
+        <location filename="../../mscore/measure.cpp" line="1997"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5166,6 +5166,11 @@ Save Current Score?</source>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1475"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6276,12 +6281,12 @@ Save Current Score?</source>
         <translation>MuseScore: Caricamento Fallito:</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="949"/>
+        <location filename="../../mscore/instrdialog.cpp" line="939"/>
         <source>Quit</source>
         <translation>Esci</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="947"/>
+        <location filename="../../mscore/instrdialog.cpp" line="937"/>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: Caricamento Stile Fallito:</translation>
     </message>

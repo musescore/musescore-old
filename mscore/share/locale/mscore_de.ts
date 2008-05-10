@@ -2168,46 +2168,46 @@ zu Notenzeile</translation>
         <translation>Schlüssel</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="888"/>
+        <location filename="../../mscore/instrdialog.cpp" line="878"/>
         <source>MuseScore: Save Instrument List</source>
         <translation>MuseScore: Instrumentenliste sichern</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="891"/>
+        <location filename="../../mscore/instrdialog.cpp" line="881"/>
         <source>MuseScore Instruments (*.xml);;</source>
         <translation>MuseScore Instrumente (*.xml);;</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="901"/>
+        <location filename="../../mscore/instrdialog.cpp" line="891"/>
         <source>Open Instruments File
 </source>
         <translation>Instrumentenliste öffnen
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="902"/>
+        <location filename="../../mscore/instrdialog.cpp" line="892"/>
         <source>
 failed: </source>
         <translation>
 fehlgeschlagen: </translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="903"/>
+        <location filename="../../mscore/instrdialog.cpp" line="893"/>
         <source>MuseScore: Open Instruments file</source>
         <translation>MuseScore: Instrumentendatei öffnen</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="925"/>
+        <location filename="../../mscore/instrdialog.cpp" line="915"/>
         <source>MuseScore: Write Style</source>
         <translation>MuseScore: Stildatei schreiben</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="936"/>
+        <location filename="../../mscore/instrdialog.cpp" line="926"/>
         <source>MuseScore: Load Instrument List</source>
         <translation>MuseScore: Instrumentenliste laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="941"/>
+        <location filename="../../mscore/instrdialog.cpp" line="931"/>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore Instrumente (*.xml);;Alle Dateien (*)</translation>
     </message>
@@ -2509,7 +2509,7 @@ fehlgeschlagen: </translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="1994"/>
+        <location filename="../../mscore/measure.cpp" line="1997"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5168,6 +5168,11 @@ Aktuelle Partitur sichern? </translation>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1475"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6279,12 +6284,12 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Fehler beim Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="949"/>
+        <location filename="../../mscore/instrdialog.cpp" line="939"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="947"/>
+        <location filename="../../mscore/instrdialog.cpp" line="937"/>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: Stil laden fehlgeschlagen:</translation>
     </message>
