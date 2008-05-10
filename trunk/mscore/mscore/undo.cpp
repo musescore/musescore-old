@@ -91,7 +91,7 @@ static const char* undoName[] = {
       "ChangeBeamMode",
       "ChangeCopyright",
       "TransposeHarmony",
-      "ExchangeVoice"
+      "ExchangeVoice",
       };
 
 static bool UNDO = false;
@@ -948,6 +948,66 @@ void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, 
       }
 
 //---------------------------------------------------------
+//   undoRemovePart
+//---------------------------------------------------------
+
+void Score::undoRemovePart(Part* part, int idx)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::RemovePart;
+      i.part = part;
+      i.val1  = idx;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoInsertPart
+//---------------------------------------------------------
+
+void Score::undoInsertPart(Part* part, int idx)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::InsertPart;
+      i.part = part;
+      i.val1  = idx;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoRemoveStaff
+//---------------------------------------------------------
+
+void Score::undoRemoveStaff(Staff* staff, int idx)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::RemoveStaff;
+      i.staff = staff;
+      i.val1  = idx;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoInsertStaff
+//---------------------------------------------------------
+
+void Score::undoInsertStaff(Staff* staff, int idx)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::InsertStaff;
+      i.staff = staff;
+      i.val1  = idx;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
 //   undoOp
 //---------------------------------------------------------
 
@@ -975,6 +1035,7 @@ void Score::undoOp(UndoOp::UndoType type, Segment* seg, int staff)
       undoList.back()->push_back(i);
       }
 
+#if 0
 void Score::undoOp(UndoOp::UndoType type, Part* part, int idx)
       {
       checkUndoOp();
@@ -994,6 +1055,7 @@ void Score::undoOp(UndoOp::UndoType type, Staff* staff, int idx)
       i.val1   = idx;
       undoList.back()->push_back(i);
       }
+#endif
 
 void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff)
       {

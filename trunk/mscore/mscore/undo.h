@@ -86,7 +86,7 @@ struct UndoOp {
             ChangeBeamMode,
             ChangeCopyright,
             TransposeHarmony,
-            ExchangeVoice
+            ExchangeVoice,
             };
       UndoType type;
       Element* element1;

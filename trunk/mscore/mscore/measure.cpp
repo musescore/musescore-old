@@ -852,6 +852,7 @@ void Measure::add(Element* el)
       int t = el->tick();
       ElementType type = el->type();
 
+
 //      if (debugMode)
 //            printf("measure %p(%d): add %s %p\n", this, _no, el->name(), el);
 
@@ -861,6 +862,8 @@ void Measure::add(Element* el)
                   break;
             case SEGMENT:
                   {
+// printf("measure add Segment(%d, %d, %s)\n", el->tick(), el->track(), el->name());
+
                   int st = el->subtype();
                   if (st == Segment::SegGrace) {
                         Segment* s;
@@ -1554,11 +1557,11 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       for (Segment* s = _first; s; s = s->next()) {
             for (int track = eTrack - 1; track >= sTrack; --track) {
                   Element* el = s->element(track);
-                  if (el && !el->generated()) {
-                        _score->undoOp(UndoOp::RemoveElement, el);
-                        }
+                  if (el && !el->generated())
+                        _score->undoRemoveElement(el);
                   }
-            // TODO: remove empty segment?
+            if (s->isEmpty())
+                  _score->undoRemoveElement(s);
             }
       foreach(Element* e, _el) {
             if (e->track() == -1)
@@ -1566,7 +1569,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
             int voice = e->voice();
             int staffIdx = e->staffIdx();
             if (staffIdx >= sStaff && staffIdx < eStaff) {
-                  _score->undoOp(UndoOp::RemoveElement, e);
+                  _score->undoRemoveElement(e);
                   }
             else if (staffIdx >= eStaff) {
                   staffIdx -= eStaff - sStaff;
