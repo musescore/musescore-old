@@ -544,7 +544,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
-      system->setInstrumentNames();       //DEBUG
+      system->setInstrumentNames();
       system->layout(this);
       minWidth            = system->leftMargin();
       double systemWidth  = w;
@@ -812,11 +812,8 @@ void ScoreLayout::setPageFormat(const PageFormat& pf)
 
 void ScoreLayout::setInstrumentNames()
       {
-printf("setInstrumentNames %d\n", systems()->size());
-      for (iSystem is = systems()->begin(); is != systems()->end(); ++is) {
-            printf("   setInstrName\n");
+      for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
             (*is)->setInstrumentNames();
-            }
       }
 
 //---------------------------------------------------------

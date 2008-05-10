@@ -140,8 +140,7 @@ add_executable ( mscore
       )
 
 if (MINGW)
-   # set(QT4 "/home/ws/.wine/drive_c/Qt/4.4.0-beta1")
-   set(QT4 "/home/ws/.wine/drive_c/Qt/4.3.3")
+   set(QT4 "/home/ws/.wine/drive_c/Qt/4.4.0")
 
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
@@ -179,7 +178,7 @@ if (MINGW)
       /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
-      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/iconengines/qsvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.4.0/plugins/iconengines/qsvgicon4.dll
       )
    install_files ( /bin/imageformats .dll
       ${QT4}/plugins/imageformats/qjpeg4.dll

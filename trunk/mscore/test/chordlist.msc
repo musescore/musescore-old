@@ -947,7 +947,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Harmony>
         <root>14</root>
-        <extension>71</extension>
         </Harmony>
       <LayoutBreak>
         <subtype>line</subtype>
@@ -1091,7 +1090,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1211,7 +1210,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1332,7 +1331,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1452,7 +1451,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1572,7 +1571,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1692,7 +1691,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1812,7 +1811,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1932,7 +1931,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2052,7 +2051,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2172,7 +2171,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2292,7 +2291,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2412,7 +2411,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2532,7 +2531,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2652,7 +2651,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2772,7 +2771,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
@@ -2896,7 +2895,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-7681</tick>
+        <tick>-7680</tick>
         </LayoutBreak>
       <StaffText>
         <subtype>Staff</subtype>
