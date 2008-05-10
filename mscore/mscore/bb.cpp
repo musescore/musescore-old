@@ -548,7 +548,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       Chord* chord = new Chord(this);
       chord->setTick(tick);
       chord->setTrack(track);
-      chord->setTickLen(len);
+      chord->setLen(len);
       Segment* s = measure->getSegment(chord);
       s->add(chord);
 

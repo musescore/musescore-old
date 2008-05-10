@@ -18,7 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions")
 set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
@@ -169,7 +168,6 @@ if (MINGW)
       portaudio
       )
    install(TARGETS mscore RUNTIME DESTINATION bin)
-#   install(FILES ../man RUNTIME DESTINATION doc)
 
    install_files ( /bin .dll
       ${QT4}/bin/mingwm10.dll

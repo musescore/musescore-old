@@ -581,14 +581,13 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       Note* note = new Note(this);
       note->setPitch(pitch);
       note->setTrack(track);
-      note->setTickLen(len);
 
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTrack(track);
       chord->add(note);
 
-      chord->setTickLen(len);
+      chord->setLen(len);
       chord->setStemDirection(UP);
       chord->setNoteType(type);
       chord->setParent(seg);
@@ -610,7 +609,6 @@ void Score::setNote(int tick, int track, int pitch, int len)
       bool addTie    = _padState.tie;
       Tie* tie       = 0;
       Note* note     = 0;
-      Tuplet* tuplet = 0;
 
       while (len) {
             int stick = tick;
@@ -637,12 +635,9 @@ void Score::setNote(int tick, int track, int pitch, int len)
                   int l = 0;
                   if (element && element->isChordRest()) {
                         ChordRest* cr = (ChordRest*)element;
-                        tuplet        = cr->tuplet();
                         l             = cr->tickLen();
                         if (l == 0 && element->type() == REST)    // whole measure rest?
                               l = measure->tickLen();
-                        if (tuplet)
-                              tuplet->remove(cr);
                         undoRemoveElement(element);
                         if (segment->isEmpty())
                               undoRemoveElement(segment);
@@ -678,10 +673,9 @@ void Score::setNote(int tick, int track, int pitch, int len)
             chord->setTick(tick);
             chord->setTrack(track);
             chord->add(note);
-            chord->setTickLen(noteLen);
+            chord->setLen(noteLen);
+
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
-            if (tuplet)
-                  chord->setTuplet(tuplet);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -735,7 +729,6 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             }
       Segment* segment = measure->first();
       int noteLen      = 0;
-      Tuplet* tuplet   = 0;
       while (segment) {
             for (; segment; segment = segment->next()) {
                   if (segment->tick() >= stick)
@@ -749,9 +742,6 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             int l = 0;
             if (element && element->isChordRest()) {
                   ChordRest* cr = (ChordRest*) element;
-                  tuplet = cr->tuplet();
-                  if (tuplet)
-                        tuplet->remove(cr);
                   l = cr->tickLen();
                   if (l == 0)
                         l = measure->tickLen();
@@ -778,13 +768,8 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       if (useDots) {
             rest = new Rest(this);
             rest->setTick(tick);
-            rest->setTickLen(len);
-            Duration dt;
-            int dots;
-            headType(len, &dt, &dots);
-            rest->setDuration(dt);
+            rest->setLen(len);      // set duration type & dots
             rest->setTrack(track);
-            rest->setDots(dots);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -797,8 +782,6 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       else {
             rest = setRest(tick, len, track);
             }
-//      if (tuplet)
-//            rest->setTuplet(tuplet);
       select(rest, 0, 0);
       if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track);

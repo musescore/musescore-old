@@ -528,3 +528,17 @@ void ChordRest::removeSlurBack(Slur* s)
       _slurBack.removeAt(idx);
       }
 
+//---------------------------------------------------------
+//   setLen
+//---------------------------------------------------------
+
+void ChordRest::setLen(int ticks)
+      {
+      setTickLen(ticks);
+      Duration dt;
+      int dts;
+      headType(ticks, &dt, &dts);
+      setDuration(dt);
+      setDots(dts);
+      }
+
