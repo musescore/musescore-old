@@ -341,11 +341,11 @@ const ChordDescription Harmony::chordList[] = {
             { 72, "9b13",           "dominant-ninth addb13",                          HChord("C E G Bb D Ab") },  // same as 71
             { 73, "9#11",           "dominant-ninth add#11",                          HChord("C E G Bb D F#") },
             { 74, "13#11",          "dominant-13th alt#11",                           HChord("C E G Bb D F# A") },
-            { 75, "9#11b13",        "dominanth-ninth add#11 addb13",                  HChord("C E G Bb D F# Ab") },
+            { 75, "9#11b13",        "dominant-ninth add#11 addb13",                  HChord("C E G Bb D F# Ab") },
             { 76, "7b9",            "dominant addb9",                                 HChord("C E  G Bb Db") },
-            { 77, "13b9",           "dominanth-13th altb9",                           HChord("C E G Bb D Fb A") },
-            { 78, "7b9b13",         "dominanth-seventh add9 addb13",                  HChord("C E G Bb Db Ab") },
-            { 79, "7b9#11",         "dominanth-seventh add9 alt#11",                  HChord("C E G Bb Db F#") },
+            { 77, "13b9",           "dominant-13th altb9",                           HChord("C E G Bb D Fb A") },
+            { 78, "7b9b13",         "dominant-seventh addb9 addb13",                 HChord("C E G Bb Db Ab") },
+            { 79, "7b9#11",         "dominant-seventh addb9 alt#11",                 HChord("C E G Bb Db F#") },
 
 /*80*/      { 80, "13b9#11",        "dominant-13th altb9 alt#11",                     HChord("C E G Bb Db F# A") },
             { 81, "7b9#11b13",      "dominant-seventh add#11 addb13",                 HChord("C E G Bb Db F# Ab") },
@@ -541,15 +541,15 @@ void Harmony::resolveDegreeList()
 
       hc.add(_degreeList);
 
-      printf("resolveDegreeList: <%s> <%s>: ", _descr->name, _descr->xml);
-      hc.print();
+//      printf("resolveDegreeList: <%s> <%s>: ", _descr->name, _descr->xml);
+//      hc.print();
 
 //      _descr->chord.print();
 
       // try to find the chord in chordList
       for (int i = 1; i < int(sizeof(chordList)/sizeof(*chordList)); i++) {
             if ((chordList[i].chord == hc) && chordList[i].name != 0) {
-printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
+// printf("ResolveDegreeList: found in table as %s\n", chordList[i].name);
                   _descr = &chordList[i];
                   _degreeList.clear();
                   break;
