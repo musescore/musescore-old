@@ -443,16 +443,10 @@ class DirectionsAnchor {
 //     To minimize this, limit the search to the current measure where possible
 //---------------------------------------------------------
 
-//---------------------------------------------------------
-//   LVI FIXME:
-//   - replace fix-sized anchors[] by something dynamically sized
-//---------------------------------------------------------
-
 class DirectionsHandler {
       Score *cs;
-      static const int MAX_ANCHORS = 50;
       int nextAnchor;
-      DirectionsAnchor* anchors[MAX_ANCHORS];
+      QList<DirectionsAnchor*> anchors;
       void storeAnchor(DirectionsAnchor* a);
 
    public:
@@ -471,7 +465,7 @@ DirectionsHandler::DirectionsHandler(Score* s)
       {
       cs = s;
       nextAnchor = 0;
-      for (int i = 0; i < MAX_ANCHORS; i++) anchors[i] = 0;
+//      for (int i = 0; i < MAX_ANCHORS; i++) anchors[i] = 0;
       }
 
 //---------------------------------------------------------
@@ -480,8 +474,12 @@ DirectionsHandler::DirectionsHandler(Score* s)
 
 void DirectionsHandler::storeAnchor(DirectionsAnchor* a)
       {
-      if (nextAnchor < MAX_ANCHORS) anchors[nextAnchor++] = a;
-      else printf("DirectionsHandler: too many directions");
+      anchors.append(a);
+/*      if (nextAnchor < MAX_ANCHORS)
+            anchors[nextAnchor++] = a;
+      else
+            printf("DirectionsHandler: too many directions\n");
+ */
       }
 
 //---------------------------------------------------------
@@ -490,40 +488,47 @@ void DirectionsHandler::storeAnchor(DirectionsAnchor* a)
 
 void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int sstaff, bool start)
       {
-      for (int i = 0; i < MAX_ANCHORS; i++)
-            if (DirectionsAnchor* da = anchors[i])
-                  if (da->getAnchor() && da->getAnchor() == el && da->getStart() == start) {
-                        Element* dir = da->getDirect();
-                        switch(dir->type()) {
-                              case SYMBOL:
-                                    exp->symbol((Symbol *) dir, sstaff);
-                                    break;
-                              case TEMPO_TEXT:
-                                    exp->tempoText((TempoText*) dir, sstaff);
-                                    break;
-                              case TEXT:
-                                    exp->words((Text*) dir, sstaff);
-                                    break;
-                              case DYNAMIC:
-                                    exp->dynamic((Dynamic*) dir, sstaff);
-                                    break;
-                              case HAIRPIN:
-                                    exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
-                                    break;
-                              case OTTAVA:
-                                    exp->ottava((Ottava*) dir, sstaff, da->getTick());
-                                    break;
-                              case PEDAL:
-                                    exp->pedal((Pedal*) dir, sstaff, da->getTick());
-                                    break;
-                              default:
-                                    printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
-                                            elementNames[dir->type()], da->getTick());
-                                    break;
-                              }
-                        delete anchors[i];
-                        anchors[i] = 0;
+      int i = 0;
+      foreach(DirectionsAnchor* da, anchors) {
+            if (da == 0) {
+                  ++i;
+                  continue;
+                  }
+            if (da->getAnchor() && da->getAnchor() == el && da->getStart() == start) {
+                  Element* dir = da->getDirect();
+                  switch(dir->type()) {
+                        case SYMBOL:
+                              exp->symbol((Symbol *) dir, sstaff);
+                              break;
+                        case TEMPO_TEXT:
+                              exp->tempoText((TempoText*) dir, sstaff);
+                              break;
+                        case STAFF_TEXT:
+                        case TEXT:
+                              exp->words((Text*) dir, sstaff);
+                              break;
+                        case DYNAMIC:
+                              exp->dynamic((Dynamic*) dir, sstaff);
+                              break;
+                        case HAIRPIN:
+                              exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
+                              break;
+                        case OTTAVA:
+                              exp->ottava((Ottava*) dir, sstaff, da->getTick());
+                              break;
+                        case PEDAL:
+                              exp->pedal((Pedal*) dir, sstaff, da->getTick());
+                              break;
+                        default:
+                              printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
+                                      elementNames[dir->type()], da->getTick());
+                              break;
                         }
+                  delete da;
+                  anchors[i] = 0;
+                  }
+            ++i;
+            }
       }
 
 //---------------------------------------------------------
@@ -532,42 +537,48 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
 
 void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int mstart, int mend, int sstaff)
       {
-      for (int i = 0; i < MAX_ANCHORS; i++)
-            if (DirectionsAnchor* da = anchors[i]) {
-                  Element* dir = da->getDirect();
-                  if (dir && dir->staff() == staff && mstart <= da->getTick() && da->getTick() < mend) {
-                        exp->moveToTick(da->getTick());
-                        switch(dir->type()) {
-                              case SYMBOL:
-                                    exp->symbol((Symbol *) dir, sstaff);
-                                    break;
-                              case TEMPO_TEXT:
-                                    exp->tempoText((TempoText*) dir, sstaff);
-                                    break;
-                              case TEXT:
-                                    exp->words((Text*) dir, sstaff);
-                                    break;
-                              case DYNAMIC:
-                                    exp->dynamic((Dynamic*) dir, sstaff);
-                                    break;
-                              case HAIRPIN:
-                                    exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
-                                    break;
-                              case OTTAVA:
-                                    exp->ottava((Ottava*) dir, sstaff, da->getTick());
-                                    break;
-                              case PEDAL:
-                                    exp->pedal((Pedal*) dir, sstaff, da->getTick());
-                                    break;
-                              default:
-                                    printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
-                                            elementNames[dir->type()], da->getTick());
-                                    break;
-                              }
-                        delete anchors[i];
-                        anchors[i] = 0;
-                        }
+      int i = 0;
+      foreach(DirectionsAnchor* da, anchors) {
+            if (da == 0) {
+                  ++i;
+                  continue;
                   }
+            Element* dir = da->getDirect();
+            if (dir && dir->staff() == staff && mstart <= da->getTick() && da->getTick() < mend) {
+                  exp->moveToTick(da->getTick());
+                  switch(dir->type()) {
+                        case SYMBOL:
+                              exp->symbol((Symbol *) dir, sstaff);
+                              break;
+                        case TEMPO_TEXT:
+                              exp->tempoText((TempoText*) dir, sstaff);
+                              break;
+                        case STAFF_TEXT:
+                        case TEXT:
+                              exp->words((Text*) dir, sstaff);
+                              break;
+                        case DYNAMIC:
+                              exp->dynamic((Dynamic*) dir, sstaff);
+                              break;
+                        case HAIRPIN:
+                              exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
+                              break;
+                        case OTTAVA:
+                              exp->ottava((Ottava*) dir, sstaff, da->getTick());
+                              break;
+                        case PEDAL:
+                              exp->pedal((Pedal*) dir, sstaff, da->getTick());
+                              break;
+                        default:
+                              printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
+                                      elementNames[dir->type()], da->getTick());
+                              break;
+                        }
+                  delete da;
+                  anchors[i] = 0;
+                  }
+            ++i;
+            }
       }
 
 //---------------------------------------------------------
@@ -735,6 +746,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case SYMBOL:
                   case TEMPO_TEXT:
                   case TEXT:
+                  case STAFF_TEXT:
                         if (!dopart) {
                               // LVIFIX 20071110 TODO
                               // Even though they are moved to from measure to vbox, the elements
@@ -2544,7 +2556,7 @@ void ExportMusicXml::harmony(Harmony* h)
                         }
                   }
             else
-                  xml.tag("kind", "");
+                  xml.tag("kind", "");    // finale wants to see this
             }
 #if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);
