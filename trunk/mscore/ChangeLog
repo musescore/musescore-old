@@ -1,4 +1,6 @@
 12.5.8 (ws)
+      - fix for cross beams
+      - auto beamer: implement table feature "stop on every beat"
       - fix regression: entering notes, duration type not set correctly
         (issue 1961843)
 8.5.8 (ws)

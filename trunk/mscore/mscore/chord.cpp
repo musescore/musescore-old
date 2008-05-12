@@ -571,8 +571,15 @@ void Chord::layout(ScoreLayout* layout)
             y        -= s->staff(staffIdx())->bbox().y();
             y        += in->second->line() * _spatium * .5 * staffMag;
 
+            bool stemUp = isUp();
+            if (note->staffMove() == -1) {
+                  stemUp = false;
+                  }
+            else if (note->staffMove() == 1) {
+                  stemUp = true;
+                  }
             if (note->mirror())
-                  x += isUp() ? headWidth : - headWidth;
+                  x += stemUp ? headWidth : - headWidth;
             note->setPos(x, y);
 
             Accidental* accidental = note->accidental();
