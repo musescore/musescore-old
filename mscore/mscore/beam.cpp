@@ -52,6 +52,8 @@ static BeamHint endBeamList[] = {
       //   end beams with 16th notes each 1 4 note
       //   end beams with 32th notes each 1 8 note
 
+      //       note   timesig  position
+
       BeamHint(0,  0, 3, 2,  1, 2 ),
       BeamHint(0,  0, 3, 1,  2, 2 ),
 
@@ -172,11 +174,19 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
                   if (pos != p)
                         continue;
                   }
-/*
-   printf("endBeam(pos %d len %d %d/%d: %d/%d %d/%d %d/%d\n",
-      p, l, tsZ, tsN, h.noteLenZ, h.noteLenN, h.timeSigZ,
-      h.timeSigN, h.posZ, h.posN);
-*/
+            if (h.posZ == 0) {
+                  // stop on every beat
+                  int len = (4 * division) / h.timeSigN;
+                  if (p % len)
+                        continue;
+                  }
+
+/*   printf("endBeam(pos %d len %d  ts %d/%d: table-note: %d/%d  table-pos:%d/%d\n",
+      p, l,
+      tsZ, tsN,
+      h.noteLenZ, h.noteLenN,
+      h.posZ, h.posN);
+  */
             return true;
             }
       return false;
@@ -903,8 +913,8 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       double xoffLeft  = point(score()->style()->stemWidth)/2;
       double xoffRight = xoffLeft;
 
-      QPointF p1s(c1->stemPos(_up, false));
-      QPointF p2s(c2->stemPos(_up, false));
+      QPointF p1s(c1->stemPos(c1->up(), false));
+      QPointF p2s(c2->stemPos(c2->up(), false));
 
       double x1 = p1s.x() - xoffLeft;
       double x2 = p2s.x() + xoffRight;
@@ -918,6 +928,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       double yu2 =  -100000;   //maximum staff 1
 
       foreach(ChordRest* cr, elements) {
+            _up = cr->up();
             if (cr->type() != CHORD)
                   continue;
             double y = cr->stemPos(_up, false).y();
@@ -995,6 +1006,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = (Chord*)(cr);
+                  _up = chord->up();
                   int tl = chord->tickLen();
                   if (tl > l) {
                         if (nn2) {
@@ -1062,6 +1074,7 @@ void Beam::layoutCrossStaff(ScoreLayout*)
             if (cr->type() != CHORD)
                   continue;
             Chord* chord = (Chord*)(cr);
+            _up = cr->up();
 
             Stem* stem = chord->stem();
             if (!stem) {

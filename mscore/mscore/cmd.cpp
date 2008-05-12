@@ -1300,7 +1300,6 @@ void Score::moveUp(Note* note)
 
 void Score::moveDown(Note* note)
       {
-//      int staffIdx = staff(note->staff());
       Staff* staff = note->staff();
       Part* part   = staff->part();
       int rstaff   = staff->rstaff();

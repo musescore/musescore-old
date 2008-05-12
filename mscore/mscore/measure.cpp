@@ -364,6 +364,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   notes[i-1]->setMirror(true);
                   mirror = false;
                   }
+
             note->setMirror(mirror);
             note->setAccidentalSubtype(accidental);
             move1 = move;
