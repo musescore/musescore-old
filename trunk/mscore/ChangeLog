@@ -1,3 +1,6 @@
+12.5.8 (ws)
+      - fix regression: entering notes, duration type not set correctly
+        (issue 1961843)
 8.5.8 (ws)
       - should work now with qt4.4 (as available in kubuntu 8.04)
       - more flexible tuplet handling; its now possible to put

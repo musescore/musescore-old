@@ -672,8 +672,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
             Chord* chord = new Chord(this);
             chord->setTick(tick);
             chord->setTrack(track);
-            chord->add(note);
             chord->setLen(noteLen);
+            chord->add(note);
 
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
             Segment::SegmentType st = Segment::SegChordRest;
