@@ -1,3 +1,5 @@
+13.5.8 (ws)
+      - new wizard: nominator and denominator was exchanged in time sig setup
 12.5.8 (ws)
       - fix for cross beams
       - auto beamer: implement table feature "stop on every beat"

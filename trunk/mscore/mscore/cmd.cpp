@@ -131,6 +131,9 @@ void Score::endCmd()
 */
 void Score::end()
       {
+      if (noteEntryMode())
+            canvas()->moveCursor();
+
       if (layoutAll) {
             updateAll = true;
             _layout->layout();

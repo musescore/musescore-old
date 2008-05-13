@@ -412,6 +412,7 @@ class Cursor : public Element {
       virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
       virtual void draw(QPainter&) const;
+      virtual QRectF bbox() const;
 
       void setOn(bool f)      { _on = f; }
       bool isOn() const       { return _on; }

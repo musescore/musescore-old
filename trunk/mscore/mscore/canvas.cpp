@@ -1039,8 +1039,11 @@ void Canvas::moveCursor()
       if (track == -1)
             track = 0;
 
-      if (track == cursor->track() && cursor->tick() == _score->inputPos())
+      double d = _spatium * .5;
+      if (track == cursor->track() && cursor->tick() == _score->inputPos()) {
+            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
+            }
 
       cursor->setTrack(track);
       cursor->setTick(_score->inputPos());
@@ -1050,10 +1053,11 @@ void Canvas::moveCursor()
             System* system = segment->measure()->system();
             double x = segment->canvasPos().x();
             double y = system->bboxStaff(cursor->staffIdx()).y() + system->canvasPos().y();
-            _score->addRefresh(cursor->abbox());
+
+            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             cursor->setPos(x - _spatium, y - _spatium);
-            _score->addRefresh(cursor->abbox());
             cursor->setHeight(6.0 * _spatium);
+            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
             }
       // _score->appendMeasures(1);
@@ -1063,16 +1067,13 @@ void Canvas::moveCursor()
 void Canvas::moveCursor(Segment* segment)
       {
       System* system = segment->measure()->system();
-      double x = segment->canvasPos().x();
+      double x       = segment->canvasPos().x();
+      double y       = system->bboxStaff(0).y() + system->canvasPos().y();
+      double y2      = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
 
-      double y = system->bboxStaff(0).y() + system->canvasPos().y();
-      double y2 = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
-      cursor->setHeight(y2 - y + 6.0 * _spatium);
-
-      qreal d = _spatium * .5;
-
-      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2.0 * d, 2.0 * d));
+      _score->addRefresh(cursor->abbox());
       cursor->setPos(x - _spatium, y - _spatium);
+      cursor->setHeight(y2 - y + 6.0 * _spatium);
       _score->addRefresh(cursor->abbox());
       }
 
@@ -1149,8 +1150,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
       else
             region = ev->region();
 
-      if (score()->noteEntryMode())
-            moveCursor();
+//      if (score()->noteEntryMode())
+//            moveCursor();
 
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
