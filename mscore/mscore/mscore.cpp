@@ -335,11 +335,13 @@ MuseScore::MuseScore()
       //    Transport Action
       //---------------------------------------------------
 
+#ifdef HAS_MIDI
       a  = getAction("midi-on");
       a->setCheckable(true);
       a->setEnabled(preferences.enableMidiInput);
       a->setChecked(_midiinEnabled);
       connect(a, SIGNAL(triggered(bool)), SLOT(midiinToggled(bool)));
+#endif
 
       a = getAction("sound-on");
       a->setCheckable(true);
@@ -377,7 +379,9 @@ MuseScore::MuseScore()
 
       transportTools = addToolBar(tr("Transport Tools"));
       transportTools->addAction(getAction("sound-on"));
+#ifdef HAS_MIDI
       transportTools->addAction(getAction("midi-on"));
+#endif
       transportTools->addSeparator();
       transportTools->addAction(getAction("rewind"));
       transportTools->addAction(getAction("pause"));
@@ -982,6 +986,7 @@ void MuseScore::helpBrowser()
                   }
             }
       QString url("file://" + mscoreHelp.filePath());
+      printf("Url: <%s>\n", qPrintable(url));
       QDesktopServices::openUrl(url);
       }
 

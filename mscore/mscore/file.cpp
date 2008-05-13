@@ -544,10 +544,10 @@ void MuseScore::newFile()
       if (pickupMeasure) {
             sigmap->add(0, SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));
             int tick = score->getSigmap()->ticksMeasure(0);
-            sigmap->add(tick, SigEvent(timesigN, timesigZ));
+            sigmap->add(tick, SigEvent(timesigZ, timesigN));
             }
       else {
-            sigmap->add(0, SigEvent(timesigN, timesigZ));
+            sigmap->add(0, SigEvent(timesigZ, timesigN));
             }
 
       int tick = 0;

@@ -22,6 +22,8 @@
 #cmakedefine USE_JACK
 #cmakedefine USE_PORTAUDIO
 
+#cmakedefine HAS_MIDI
+
 #define INSTALL_NAME     "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
 #define VERSION          "${Mscore_VERSION_FULL}"

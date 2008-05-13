@@ -586,7 +586,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       el = el->parent();
 
       int tick1 = el->tick();
-      int tick2 = tick1 + 4 * division;
+      int tick2 = tick1 + 2 * division;
       Hairpin* pin = new Hairpin(this);
       pin->setTick(tick1);
       pin->setTick2(tick2);
@@ -594,13 +594,9 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setTrack(el->track());
       pin->setParent(_layout);
       pin->layout(layout());
-#if 0
-      LineSegment* ls = line->lineSegments().front();
-      QPointF uo(pos - ls->canvasPos() - dragOffset);
-      ls->setUserOff(uo / _spatium);
-#endif
       cmdAdd(pin);
       select(pin, 0, 0);
+//      canvas()->startEdit(pin);
       }
 
 //---------------------------------------------------------

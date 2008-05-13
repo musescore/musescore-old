@@ -230,10 +230,8 @@ QList<Prop> ChordRest::properties(Xml& xml) const
             pl.append(Prop("small", _small));
       Duration d;
       d.setVal(tickLen());
-      if (_duration != d) {
-            printf("prop duration %d - %d   %d %d\n", duration().val(), d.val(), duration().ticks(), d.ticks());
+      if (_duration != d)
             pl.append(Prop("durationType", _duration.name()));
-            }
       return pl;
       }
 

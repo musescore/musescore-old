@@ -117,15 +117,20 @@ endif (USE_GLOBAL_FLUID)
 if (APPLE OR MINGW)
 	message("Disabling ALSA support due to OS X or MINGW build.")
       set (USE_ALSA 0)
+      set (HAS_MIDI 0)
 else (APPLE OR MINGW)
       PKGCONFIG (alsa 1.0.0 ALSA_INCDIR ALSA_LIBDIR ALSA_LIB ALSA_CPP )
       if (NOT ALSA_INCDIR)
             message(FATAL_ERROR "Fatal error: ALSA >= 1.0.0 required")
       else (NOT ALSA_INCDIR)
 	      message("Alsa detected.")
-            set ( USE_ALSA 1 )
+            set (USE_ALSA 1)
+            set (HAS_MIDI 1)
       endif (NOT ALSA_INCDIR)
 endif (APPLE OR MINGW)
+
+##DEBUG:
+      set (HAS_MIDI 0)
 
 ##
 ## find jack >= 0.98.0
@@ -139,7 +144,7 @@ endif (MINGW)
 
 if (JACK_INCDIR)
 	message("Jack detected")
-      set ( USE_JACK 1 )
+      set (USE_JACK 1)
 endif (JACK_INCDIR)
 
 ##

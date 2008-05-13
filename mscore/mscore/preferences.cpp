@@ -501,6 +501,10 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
             }
 #endif
+#ifndef HAS_MIDI
+      enableMidiInput->setEnabled(false);
+      rcGroup->setEnabled(false);
+#endif
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.768</Mag>
-  <xoff>-762</xoff>
-  <yoff>-38.735</yoff>
+  <xoff>-370.629</xoff>
+  <yoff>-306.917</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -1521,6 +1521,7 @@
       </SlurSegment>
     </Slur>
   <Slur id="122">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.0767442" y="3.53023"/>
       <o3 x="2.22558" y="0.690698"/>
@@ -1529,7 +1530,174 @@
     <up>2</up>
     </Slur>
   <Slur id="123">
+    <track>0</track>
     </Slur>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>8280</tick>
+    <tick2>8640</tick2>
+    <Segment>
+      <off1 x="0" y="0.767442"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>9120</tick>
+    <tick2>9480</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>10080</tick>
+    <tick2>10440</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="-0.135684" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>10560</tick>
+    <tick2>11400</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>13560</tick>
+    <tick2>14280</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>14400</tick>
+    <tick2>14760</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>15360</tick>
+    <tick2>16200</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>16320</tick>
+    <tick2>16680</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>19680</tick>
+    <tick2>20040</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>20160</tick>
+    <tick2>20520</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>20640</tick>
+    <tick2>21120</tick2>
+    <Segment>
+      <off1 x="0.230233" y="1.45814"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>21240</tick>
+    <tick2>21480</tick2>
+    <Segment>
+      <off1 x="0.306977" y="1.53488"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>21600</tick>
+    <tick2>22080</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="-0.0678419" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>22320</tick>
+    <tick2>22560</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="0.997675" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>25440</tick>
+    <tick2>26160</tick2>
+    <Segment>
+      <off1 x="0.306977" y="1.30465"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>26400</tick>
+    <tick2>26760</tick2>
+    <Segment>
+      <off1 x="0.460465" y="1.22791"/>
+      <off2 x="-0.122115" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>34800</tick>
+    <tick2>35160</tick2>
+    <Segment>
+      <off1 x="0" y="0.613954"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>35280</tick>
+    <tick2>35640</tick2>
+    <Segment>
+      <off1 x="0" y="0.613954"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>42360</tick>
+    <tick2>42720</tick2>
+    <Segment>
+      <off1 x="0.230233" y="1.30465"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>43680</tick>
+    <tick2>44040</tick2>
+    <Segment>
+      <off1 x="0.230233" y="0.383721"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>44640</tick>
+    <tick2>45000</tick2>
+    <Segment>
+      <off1 x="0.153488" y="0.383721"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
   <Staff id="1">
     <VBox>
       <height>12.5251</height>
