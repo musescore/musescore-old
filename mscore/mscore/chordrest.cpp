@@ -32,6 +32,8 @@
 #include "sym.h"
 #include "slur.h"
 #include "beam.h"
+#include "breath.h"
+#include "barline.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList
@@ -538,5 +540,61 @@ void ChordRest::setLen(int ticks)
       headType(ticks, &dt, &dts);
       setDuration(dt);
       setDots(dts);
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
+      {
+      Measure* m  = measure();
+      switch (e->type()) {
+            case BREATH:
+                  {
+                  Breath* b = static_cast<Breath*>(e);
+                  b->setTrack(staffIdx() * VOICES);
+
+                  // TODO: insert automatically in all staves?
+
+                  Segment* seg = m->findSegment(Segment::SegBreath, tick());
+                  if (seg == 0) {
+                        seg = m->createSegment(Segment::SegBreath, tick());
+                        score()->undoAddElement(seg);
+                        }
+                  b->setParent(seg);
+                  score()->undoAddElement(b);
+                  }
+                  break;
+
+            case BAR_LINE:
+                  {
+                  BarLine* bl = static_cast<BarLine*>(e);
+                  bl->setTrack(staffIdx() * VOICES);
+
+                  if ((bl->tick() == m->tick())
+                     || (bl->tick() == m->tick() + m->tickLen())) {
+                        return m->drop(p1, p2, e);
+                        }
+
+                  Segment* seg = m->findSegment(Segment::SegBarLine, tick());
+                  if (seg == 0) {
+                        seg = m->createSegment(Segment::SegBarLine, tick());
+                        score()->undoAddElement(seg);
+                        }
+                  bl->setParent(seg);
+                  score()->undoAddElement(bl);
+                  }
+                  break;
+
+            case CLEF:
+                  staff()->changeClef(tick(), e->subtype());
+                  break;
+
+            default:
+                  printf("cannot drop %s\n", e->name());
+                  return 0;
+            }
+      return 0;
       }
 

@@ -64,7 +64,6 @@
 #include "pitchspelling.h"
 #include "keysig.h"
 #include "breath.h"
-#include "arpeggio.h"
 #include "tremolo.h"
 #include "drumset.h"
 #include "repeat.h"
@@ -436,7 +435,7 @@ void Measure::layout0(int staffIdx)
                   if (!e)
                         continue;
                   if (e->type() == CHORD) {
-                        Chord* chord = (Chord*)e;
+                        Chord* chord = static_cast<Chord*>(e);
                         double m = staffMag;
                         if (chord->small())
                               m *= style->smallNoteMag;
@@ -470,7 +469,7 @@ int Measure::findAccidental(Note* note)
                   Element* e = segment->element(track);
                   if (!e || e->type() != CHORD)
                         continue;
-                  Chord* chord = (Chord*)e;
+                  Chord* chord = static_cast<Chord*>(e);
                   if (chord->noteType() != NOTE_NORMAL)
                         continue;
 
@@ -872,7 +871,7 @@ void Measure::add(Element* el)
                               }
                         for (; s && s->subtype() != Segment::SegChordRest; s = s->next()) {
                               }
-                        insert((Segment*)el, s);
+                        insert(static_cast<Segment*>(el), s);
                         break;
                         }
                   Segment* s;
@@ -894,7 +893,7 @@ void Measure::add(Element* el)
                                     }
                               }
                         }
-                  insert((Segment*)el, s);
+                  insert(static_cast<Segment*>(el), s);
                   }
                   break;
             case TUPLET:
@@ -1166,7 +1165,7 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
 again:
       for (Segment* s = first(); s; s = s->next()) {
             if (s->isEmpty()) {
-//                  printf("Measure::layoutX(): note: remove empty segment %p\n", s);
+// printf("Measure::layoutX(): note: remove empty segment %p %s\n", s, s->name());
                   remove(s);
                   goto again;
                   }
@@ -2273,10 +2272,18 @@ void Measure::read(QDomElement e, int idx)
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
                   barLine->setParent(this);
+                  barLine->setTick(score()->curTick);
                   barLine->read(e);
-                  setEndBarLineType(barLine->subtype(), false);
-                  _endBarLineGenerated = false;
-                  delete barLine;
+                  if ((barLine->tick() != tick())
+                     && (barLine->tick() != (tick() + tickLen()))) {
+                        Segment* s = getSegment(Segment::SegBarLine, barLine->tick());
+                        s->add(barLine);
+                        }
+                  else {
+                        setEndBarLineType(barLine->subtype(), false);
+                        _endBarLineGenerated = false;
+                        delete barLine;
+                        }
                   }
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());

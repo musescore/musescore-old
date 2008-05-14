@@ -23,6 +23,8 @@
 #include "globals.h"
 #include "score.h"
 
+static const int INTERNAL_STYLES = 2;     // do not present first two styles to user
+
 //---------------------------------------------------------
 //   TextStyleDialog
 //---------------------------------------------------------
@@ -32,8 +34,8 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       {
       setupUi(this);
       cs = score;
-      foreach(TextStyle* ts, score->textStyles())
-            styles.append(new TextStyle(*ts));
+      foreach(TextStyle* s, score->textStyles())
+            styles.append(new TextStyle(*s));
 
       QFontDatabase fdb;
       QStringList families = fdb.families();
@@ -47,8 +49,10 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
             }
       textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
-      foreach (TextStyle* s, styles)
+      for (int i = INTERNAL_STYLES; i < styles.size(); ++i) {
+            TextStyle* s = styles.at(i);
             textNames->addItem(qApp->translate("MuseScore", s->name.toAscii().data()));
+            }
 
       connect(textNames,     SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
       connect(buttonOk,      SIGNAL(clicked()), SLOT(ok()));
@@ -159,7 +163,7 @@ void TextStyleDialog::nameSelected(int n)
       {
       if (current != -1)
             saveStyle(current);
-      TextStyle* s = styles[n];
+      TextStyle* s = styles[n + INTERNAL_STYLES];
 
       fontBold->setChecked(s->bold);
       fontItalic->setChecked(s->italic);
@@ -219,7 +223,7 @@ void TextStyleDialog::nameSelected(int n)
       paddingWidth->setValue(s->paddingWidth);
       frameRound->setValue(s->frameRound);
       circleButton->setChecked(s->circle);
-      current = n;
+      current = n + INTERNAL_STYLES;
       }
 
 //---------------------------------------------------------

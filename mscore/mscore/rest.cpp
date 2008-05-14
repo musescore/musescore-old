@@ -22,7 +22,6 @@
 #include "score.h"
 #include "xml.h"
 #include "style.h"
-#include "staff.h"
 #include "viewer.h"
 #include "restproperties.h"
 #include "utils.h"
@@ -111,6 +110,8 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ATTRIBUTE && subtype == DfermataSym)
          || (type == CLEF)
          || (type == STAFF_TEXT)
+         || (type == BAR_LINE)
+         || (type == BREATH)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -122,7 +123,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 //   drop
 //---------------------------------------------------------
 
-Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
+Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
       switch (e->type()) {
             case ATTRIBUTE:
@@ -151,9 +152,6 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   }
                   delete e;
                   break;
-            case CLEF:
-                  staff()->changeClef(tick(), e->subtype());
-                  break;
 
             case STAFF_TEXT:
                   {
@@ -169,8 +167,7 @@ Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
                   break;
 
             default:
-                  printf("cannot drop %s\n", e->name());
-                  return 0;
+                  return ChordRest::drop(p1, p2, e);
             }
       return 0;
       }

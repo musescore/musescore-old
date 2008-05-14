@@ -33,11 +33,9 @@
 #include "text.h"
 #include "clef.h"
 #include "preferences.h"
-#include "padstate.h"
 #include "staff.h"
 #include "viewer.h"
 #include "pitchspelling.h"
-#include "breath.h"
 #include "arpeggio.h"
 #include "tremolo.h"
 #include "chordproperties.h"
@@ -660,6 +658,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == ICON && subtype == ICON_AUTOBEAM)
          || (type == SYMBOL)
          || (type == CLEF)
+         || (type == BAR_LINE)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -671,7 +670,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 //   drop
 //---------------------------------------------------------
 
-Element* Note::drop(const QPointF&, const QPointF&, Element* e)
+Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
       Chord* cr = chord();
       switch(e->type()) {
@@ -710,24 +709,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   score()->addAccidental(this, subtype);
                   }
                   break;
-            case BREATH:
-                  {
-                  Breath* b = (Breath*)e;
-                  int tick   = cr->tick();
-                  b->setTrack(track());
-                  Measure* m = cr->segment()->measure();
 
-                  // TODO: insert automatically in all staves?
-
-                  Segment* seg = m->findSegment(Segment::SegBreath, tick);
-                  if (seg == 0) {
-                        seg = m->createSegment(Segment::SegBreath, tick);
-                        score()->undoAddElement(seg);
-                        }
-                  b->setParent(seg);
-                  score()->undoAddElement(b);
-                  }
-                  break;
             case ARPEGGIO:
                   {
                   Arpeggio* a = (Arpeggio*)e;
@@ -801,14 +783,8 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   }
                   break;
 
-            case CLEF:
-                  cr->staff()->changeClef(cr->tick(), e->subtype());
-                  break;
-
             default:
-                  printf("note: cannot accept drop %s\n", e->name());
-                  delete e;
-                  break;
+                  return cr->drop(p1, p2, e);
             }
       return 0;
       }

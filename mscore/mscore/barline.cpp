@@ -107,9 +107,10 @@ void BarLine::draw(QPainter& p) const
                   {
                   QPen pen(p.pen());
                   pen.setStyle(Qt::DashLine);
-                  QVector<qreal> dashes;
+/*                  QVector<qreal> dashes;
                   dashes << ld * .5 << ld * .5;
                   pen.setDashPattern(dashes);
+ */
                   p.setPen(pen);
                   }
 
