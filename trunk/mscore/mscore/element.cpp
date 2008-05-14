@@ -595,8 +595,8 @@ void StaffLines::draw(QPainter& p) const
       {
       QPointF _pos(0.0, 0.0);
 
-      p.save();
-      p.setRenderHint(QPainter::Antialiasing, false);
+//      p.save();
+//      p.setRenderHint(QPainter::Antialiasing, false);
 
       QPen pen(p.pen());
       pen.setWidthF(point(score()->style()->staffLineWidth) * mag());
@@ -630,7 +630,7 @@ void StaffLines::draw(QPainter& p) const
                         }
                   break;
             }
-      p.restore();
+//      p.restore();
       }
 
 

@@ -395,9 +395,6 @@ void Score::putNote(const QPointF& pos, bool replace)
             addToChord = true;
             }
       if (addToChord) {
-            if (cr->tuplet())
-                  len = cr->tuplet()->noteLen();
-
             if (cr->type() == CHORD) {
                   Note* note = addNote((Chord*)cr, pitch);
                   select(note, 0, 0);
@@ -406,20 +403,27 @@ void Score::putNote(const QPointF& pos, bool replace)
                         }
                   }
             else {
-                  setNote(tick, track, pitch, len);
+                  if (cr->tuplet()) {
+                        setTupletChordRest(cr, pitch, len);
+                        }
+                  else {
+                        setNote(tick, track, pitch, len);
+                        }
                   }
             }
       else {
             // replace chord
-            if (cr && cr->tuplet())
-                  len = cr->tuplet()->noteLen();
-            if (_padState.rest)
-                  setRest(tick, track, len, _padState.dots);
-            else
-                  setNote(tick, track, pitch, len);
+            if (cr->tuplet()) {
+                  setTupletChordRest(cr, pitch, len);
+                  }
+            else {
+                  if (_padState.rest)
+                        setRest(tick, track, len, _padState.dots);
+                  else
+                        setNote(tick, track, pitch, len);
+                  }
             }
       _is.track       = staffIdx * VOICES + voice;
-
       _padState.pitch = pitch;
       _is.pos         = tick + len;
       }

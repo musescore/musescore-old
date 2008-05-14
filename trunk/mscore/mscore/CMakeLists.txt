@@ -22,6 +22,12 @@ set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
+add_custom_target(update_revision_target
+  ${CMAKE_CURRENT_SOURCE_DIR}/updaterevision
+  COMMENT "Updating revision.h" VERBATIM)
+
+SET_SOURCE_FILES_PROPERTIES(revsion.h PROPERTIES GENERATED TRUE)
+
 add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h
    COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
@@ -251,4 +257,7 @@ if (NOT MINGW)
             PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
             )
 endif (NOT MINGW)
+
+add_dependencies(mscore update_revision_target)
+
 

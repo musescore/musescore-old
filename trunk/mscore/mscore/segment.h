@@ -63,11 +63,13 @@ typedef LyricsList::const_iterator ciLyrics;
 class Segment : public Element {
       Segment* _next;
       Segment* _prev;
+      mutable bool empty;
 
    public:
       enum SegmentType {
             SegClef, SegKeySig, SegTimeSig,
             SegStartRepeatBarLine,
+            SegBarLine,
             SegGrace,
             SegChordRest,
             SegBreath,
@@ -80,6 +82,7 @@ class Segment : public Element {
       QList<LyricsList> _lyrics;   ///< Lyrics storage, size  = staves.
 
       void init();
+      void checkEmpty() const;
 
    public:
       Segment(Measure*);
@@ -116,7 +119,7 @@ class Segment : public Element {
       static SegmentType segmentType(int type);
       void setTime(int tick);
       void removeGeneratedElements();
-      bool isEmpty() const;
+      bool isEmpty() const               { return empty; }
       void fixStaffIdx();
       };
 

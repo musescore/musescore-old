@@ -34,7 +34,8 @@
 #include "staff.h"
 
 const char* Segment::segmentTypeNames[] = {
-   "Clef", "Key Signature", "Time Signature", "Begin Repeat", "Grace", "ChordRest",
+   "Clef", "Key Signature", "Time Signature", "Begin Repeat",
+   "BarLine", "Grace", "ChordRest",
    "Breath", "Bar Line", "Time Sig Precaution",
    0
    };
@@ -45,9 +46,15 @@ const char* Segment::segmentTypeNames[] = {
 
 void Segment::setElement(int track, Element* el)
       {
-      if (el)
+      if (el) {
             el->setParent(this);
-      _elist[track] = el;
+            _elist[track] = el;
+            empty = false;
+            }
+      else {
+            _elist[track] = 0;
+            checkEmpty();
+            }
       }
 
 //---------------------------------------------------------
@@ -77,6 +84,7 @@ Segment::Segment(Measure* m)
       {
       setParent(m);
       init();
+      empty = true;
       }
 
 Segment::Segment(Measure* m, int t)
@@ -85,6 +93,7 @@ Segment::Segment(Measure* m, int t)
       setParent(m);
       setTick(t);
       init();
+      empty = true;
       }
 
 //---------------------------------------------------------
@@ -208,6 +217,7 @@ void Segment::add(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
                   _elist[track] = el;
+                  empty = false;
                   break;
 
             case CHORD:
@@ -222,11 +232,10 @@ void Segment::add(Element* el)
                   if (_elist[track])
                         printf("Segment::add() there is already an element at %d track %d\n",
                            tick(), track);
-                  _elist[track] = el;
-                  break;
 
             default:
                   _elist[track] = el;
+                  empty = false;
                   break;
             }
       }
@@ -237,12 +246,12 @@ void Segment::add(Element* el)
 
 void Segment::remove(Element* el)
       {
-      int staffIdx = el->staffIdx();
-      int track    = staffIdx * VOICES + el->voice();
+      int track = el->track();
 
       switch(el->type()) {
             case LYRICS:
                   {
+                  int staffIdx = el->staffIdx();
                   LyricsList& ll = _lyrics[staffIdx];
                   for (int i = 0; i < ll.size(); ++i) {
                         if (ll[i] == el) {
@@ -286,6 +295,7 @@ void Segment::remove(Element* el)
                   _elist[track] = 0;
                   break;
             }
+      checkEmpty();
       }
 
 //---------------------------------------------------------
@@ -344,20 +354,7 @@ void Segment::removeGeneratedElements()
                   _elist[i] = 0;
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   isEmpty
-//---------------------------------------------------------
-
-bool Segment::isEmpty() const
-      {
-      foreach(const Element* e, _elist) {
-            if (e)
-                  return false;
-            }
-      // TODO: check for lyrics?
-      return true;
+      checkEmpty();
       }
 
 //---------------------------------------------------------
@@ -400,4 +397,20 @@ void Segment::fixStaffIdx()
                   }
             }
       }
+
+//---------------------------------------------------------
+//   checkEmpty
+//---------------------------------------------------------
+
+void Segment::checkEmpty() const
+      {
+      empty = true;
+      foreach(const Element* e, _elist) {
+            if (e) {
+                  empty = false;
+                  break;
+                  }
+            }
+      }
+
 
