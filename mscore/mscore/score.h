@@ -431,7 +431,7 @@ class Score : public QObject {
       void endDrag();
 
       void changeVoice(int);
-      ChordRest* setNoteEntry(bool on, bool step);
+      void setNoteEntry(bool on);
 
       void colorItem(Element*);
       void adjustCanvasPosition(Element*);
@@ -530,8 +530,8 @@ class Score : public QObject {
       bool noteEntryMode() const    { return _is.noteEntryMode; }
       int inputPos() const          { return _is.pos;   }
       int inputTrack() const        { return _is.track; }
-
       void setInputTrack(int);
+
       PadState* padState()          { return &_padState; }
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }

@@ -423,7 +423,7 @@ void Score::putNote(const QPointF& pos, bool replace)
                         setNote(tick, track, pitch, len);
                   }
             }
-      _is.track       = staffIdx * VOICES + voice;
+      setInputTrack(staffIdx * VOICES + voice);
       _padState.pitch = pitch;
       _is.pos         = tick + len;
       }
@@ -872,17 +872,22 @@ void Score::deleteItem(Element* el)
 
             case BAR_LINE:
                   {
-                  BarLine* bl      = (BarLine*)el;
-                  Segment* segment = bl->segment();
-                  Measure* m       = segment->measure();
-                  if (segment->subtype() == Segment::SegStartRepeatBarLine) {
+                  BarLine* bl  = static_cast<BarLine*>(el);
+                  Segment* seg = bl->segment();
+                  Measure* m   = seg->measure();
+                  if (seg->subtype() == Segment::SegStartRepeatBarLine)
                         undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatStart);
+                  else if (seg->subtype() == Segment::SegBarLine) {
+                        undoRemoveElement(el);
+                        if (seg->isEmpty())
+                              undoRemoveElement(seg);
                         }
                   }
                   break;
 
             default:
                   printf("deleteItem: %s: not implemented\n", el->name());
+                  break;
             }
       }
 
@@ -1233,7 +1238,7 @@ void Score::cmdTuplet(int n)
             }
       if (cr) {
             select(cr, 0, 0);
-            setNoteEntry(true, false);
+            setNoteEntry(true);
             }
       }
 
@@ -1331,7 +1336,7 @@ void Score::changeVoice(int voice)
       {
       _padState.voice = voice;
       if (_is.track % VOICES != voice) {
-            _is.track = (_is.track / VOICES) * VOICES + voice;
+            setInputTrack((_is.track / VOICES) * VOICES + voice);
             layoutAll = true;
             }
       }

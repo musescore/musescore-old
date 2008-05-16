@@ -143,16 +143,15 @@ void Score::end()
             _layout->reLayout(layoutStart);
             }
 
+      // update a little more:
+      double d = _spatium * .5;
+      refresh.adjust(-d, -d, 2 * d, 2 * d);
+
       foreach(Viewer* v, viewer) {
             if (updateAll)
                   v->updateAll(this);
-            else {
-                  // update a little more:
-                  int dx = lrint(v->matrix().m11() + .5);
-                  int dy = lrint(v->matrix().m22() + .5);
-                  QRectF r(refresh.adjusted(-dx, -dy, 2 * dx, 2 * dy));
-                  v->dataChanged(r);
-                  }
+            else
+                  v->dataChanged(refresh);
             }
       refresh    = QRectF();
       layoutAll  = false;
@@ -416,33 +415,11 @@ void Score::cmdRemove(Element* e)
 void Score::cmdAddPitch(int note, bool addFlag)
       {
       int octave    = _padState.pitch / 12;
-      ChordRest* cr = 0;
-      if (!noteEntryMode()) {
-            //
-            // start note entry mode at current selected
-            // note/rest
-            //
-            cr = setNoteEntry(true, false);
-            if (cr == 0) {
-                  // cannot enter notes
-                  // no note/rest selected?
-                  return;
-                  }
-            }
-      else {
-            //
-            // look for next note position
-            //
-            Measure* m = tick2measure(_is.pos);
-            m->createVoice(_is.track);
-            cr = (ChordRest*)searchNote(_is.pos, _is.track);
-            if (((_is.track % VOICES) == 0) && (!cr || !cr->isChordRest())) {
-                  return;
-                  }
-            }
-      if (!noteEntryMode())
+      setNoteEntry(true);
+      if (_is.cr == 0) {
+            printf("cannot enter notes here\n");
             return;
-
+            }
       int key = 0;
       if (!preferences.alternateNoteEntryMethod)
             key = staff(_is.track / VOICES)->keymap()->key(_is.pos);
@@ -473,10 +450,12 @@ void Score::cmdAddPitch(int note, bool addFlag)
       else {
             // insert note
             int len = _padState.tickLen;
+            ChordRest* cr = _is.cr;
             if (cr && cr->tuplet())
                   setTupletChordRest(cr, _padState.pitch, len);
-            else
+            else {
                   setNote(_is.pos, _is.track, _padState.pitch, len);
+                  }
             if (_is.slur) {
                   Element* e = searchNote(_is.pos, _is.track);
                   if (e) {
@@ -509,7 +488,10 @@ void Score::cmdAddInterval(int val)
       if (on == 0)
             return;
 
-      setNoteEntry(true, true);
+      setNoteEntry(true);
+      ChordRest* cr = _is.cr;
+      _is.pos += cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
+
       Staff* staff = on->staff();
       int key = staff->keymap()->key(on->chord()->tick());
 
@@ -618,8 +600,10 @@ void Score::setNote(int tick, int track, int pitch, int len)
             Measure* measure = tick2measure(stick);
             if (measure == 0 || (stick >= (measure->tick() + measure->tickLen()))) {
                   measure = (Measure*)appendMeasure(MEASURE);
-                  if (measure == 0)
+                  if (measure == 0) {
+                        printf("append measure failed\n");
                         return;
+                        }
                   }
             Segment* segment = measure->first();
             int noteLen      = 0;
@@ -1422,13 +1406,14 @@ void Score::cmd(const QString& cmd)
             end();
             }
       else if (cmd == "note-input") {
-            setNoteEntry(true, false);
-            _padState.rest = false;
+            QAction* a = getAction(cmd.toLatin1().data());
+            setNoteEntry(a->isChecked());
+//            _padState.rest = false;
             end();
             }
       else if (cmd == "escape") {
             if (noteEntryMode())
-                  setNoteEntry(false, false);
+                  setNoteEntry(false);
             select(0, 0, 0);
             end();
             }
@@ -1507,7 +1492,7 @@ void Score::cmd(const QString& cmd)
                   if (el && el->type() == NOTE)
                         el = el->parent();
                   if (!noteEntryMode()) {
-                        setNoteEntry(true, true);
+                        setNoteEntry(true);
                         if (el) {
                               if (el->isChordRest()) {
                                     _is.pos = ((ChordRest*)el)->tick();

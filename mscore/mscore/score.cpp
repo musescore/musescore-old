@@ -1100,71 +1100,48 @@ void Score::endDrag()
 //   setNoteEntry
 //---------------------------------------------------------
 
-/**
- Switch note entry mode
-*/
-
-ChordRest* Score::setNoteEntry(bool val, bool step)
+void Score::setNoteEntry(bool val)
       {
-      ChordRest* cr = 0;
+      _is.cr = 0;
       if (val) {
             Element* el = sel->element();
-            if (noteEntryMode()) {     // already in note entry mode
-                  if (el) {
-                        if (el->type() == NOTE)
-                              el = el->parent();
-                        if (!el->isChordRest())
-                              return 0;
-                        cr = (ChordRest*)el;
-                        if (cr->tick() == _is.pos) {
-                              // int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
-                              _is.pos += cr->tickLen();
-                              }
-                        }
-                  return cr;
+            Note* note = 0;
+            Rest* rest = 0;
+            if (el) {
+                  if (el->type() == NOTE)
+                        note = static_cast<Note*>(el);
+                  else if (el->type() == REST)
+                        rest = static_cast<Rest*>(el);
                   }
-            if (sel->state() == SEL_NONE || (el && el->type() != NOTE && !el->isChordRest())) {
-                  QMessageBox::information(0, "MuseScore: Note Entry",
-                        tr("No note or rest selected:\n"
-                           "please select a note or rest were you want to\n"
-                           "start note entry"));
-                  return 0;
-                  }
-            if (el == 0) {
-                  // int tick = sel->tickStart;
-                  Segment* seg = tick2segment(sel->tickStart);
-                  if (seg == 0) {
+            if (rest == 0 && note == 0) {
+                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos, _is.track));
+                  if (_is.cr == 0) {
                         printf("no note or rest selected 1\n");
-                        return 0;
+                        return;
                         }
-                  int staffIdx = sel->staffStart;
-                  for (int track = staffIdx * VOICES; track < (staffIdx+1)*VOICES; ++track) {
-                        el = seg->element(track);
-                        if (el)
-                              break;
+                  if (_is.cr->type() == CHORD) {
+                        Chord* chord = static_cast<Chord*>(_is.cr);
+                        note = chord->selectedNote();
+                        if (note == 0)
+                              note = chord->upNote();
                         }
-                  if (el == 0) {
-                        printf("no note or rest selected 2\n");
-                        return 0;
-                        }
-                  select(el, 0, 0);
-                  }
-            if (el->type() == NOTE)
-                  el = el->parent();
-            cr = (ChordRest*)el;
-            _is.pos = cr->tick();
-            if (step) {
-                  if (cr->tuplet())
-                        _is.pos += cr->tuplet()->noteLen();
+                  if (note)
+                        select(note, 0, 0);
                   else
-                        _is.pos += cr->tickLen();
+                        select(_is.cr, 0, 0);
                   }
+            else if (rest)
+                  _is.cr = rest;
+            else
+                  _is.cr = note->chord();
+            _is.pos   = _is.cr->tick();
+            setInputTrack(_is.cr->track());
             _is.noteEntryMode = true;
             canvas()->moveCursor();
+            _padState.rest = false;
+            getAction("pad-rest")->setChecked(false);
             }
       else {
-            _padState.len     = 0;
-            _is.pos           = -1;
             _is.noteEntryMode = false;
             if (_is.slur) {
                   QList<SlurSegment*>* el = _is.slur->slurSegments();
@@ -1174,11 +1151,9 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                   ((ChordRest*)_is.slur->endElement())->addSlurBack(_is.slur);
                   _is.slur = 0;
                   }
-            setPadState();
             }
       canvas()->setState(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
       mscore->setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
-      return cr;
       }
 
 //---------------------------------------------------------
@@ -1188,7 +1163,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
 void Score::midiNoteReceived(int pitch, bool chord)
       {
       if (!noteEntryMode())
-            setNoteEntry(true, false);
+            setNoteEntry(true);
       if (noteEntryMode()) {
             int len = _padState.tickLen;
             if (chord) {
@@ -1945,6 +1920,10 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
 
 void Score::setInputTrack(int v)
       {
+      if (v < 0) {
+            printf("setInputTrack: bad value: %d\n", v);
+            return;
+            }
       _is.track = v;
       }
 

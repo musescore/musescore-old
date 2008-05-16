@@ -1118,8 +1118,10 @@ bool Score::read(QDomElement e)
                               createSymbolPalette();
                         ::symbolPalette->read(ee);
                         }
-                  else if (tag == "cursorTrack")
-                        _is.track = i;
+                  else if (tag == "cursorTrack") {
+                        if (i >= 0)
+                              setInputTrack(i);
+                        }
                   else if (tag == "Slur") {
                         Slur* slur = new Slur(this);
                         slur->read(ee);

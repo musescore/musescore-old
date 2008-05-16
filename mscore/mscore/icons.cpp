@@ -52,6 +52,7 @@ QIcon tenutoIcon;
 QIcon plusIcon;
 QIcon flipIcon;
 QIcon voiceIcons[VOICES];
+QIcon noteEntryIcon;
 
 QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
@@ -162,8 +163,9 @@ void genIcons()
       fileNewIcon  = QIcon(":/data/filenew.svg");
       fileSaveIcon = QIcon(":/data/filesave.svg");
       fileSaveAsIcon = QIcon(":/data/filesaveas.svg");
-      exitIcon     = QIcon(":/data/exit.svg");
-      viewmagIcon  = QIcon(":/data/viewmag.xpm");
-      repeatIcon   = QIcon(":/data/repeat.svg");
+      exitIcon       = QIcon(":/data/exit.svg");
+      viewmagIcon    = QIcon(":/data/viewmag.xpm");
+      repeatIcon     = QIcon(":/data/repeat.svg");
+      noteEntryIcon  = QIcon(":/data/noteentry.svg");
       }
 

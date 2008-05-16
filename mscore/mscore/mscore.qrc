@@ -51,6 +51,7 @@
       <file>data/abeam.svg</file>
       <file>data/bg1.jpg</file>
       <file>data/flip.svg</file>
+      <file>data/noteentry.svg</file>
    </qresource>
 </RCC>
 
