@@ -198,8 +198,9 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("note input"),
          Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Input"),
-         QT_TR_NOOP("Note Input Mode")
+         QT_TR_NOOP("Note Input"),
+         QT_TR_NOOP("toggle note input mode N"),
+         &noteEntryIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -869,7 +870,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Octuplet"),
          Qt::CTRL+Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("OCtuplet")
+         QT_TR_NOOP("Octuplet")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,

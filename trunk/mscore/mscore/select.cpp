@@ -383,6 +383,8 @@ void Selection::updateState()
                   Element* e = element();
                   if (e->type() == NOTE || e->type() == REST) {
                         e->score()->setPadState(e);
+                        if (e->type() == NOTE)
+                              e = e->parent();
                         e->score()->setInputTrack(e->track());
                         }
                   }

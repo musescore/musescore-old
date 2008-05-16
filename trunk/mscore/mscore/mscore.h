@@ -134,8 +134,8 @@ class Shortcut {
       QString descr;          //! descriptor, shown in editor
       QKeySequence key;       //! shortcut
       Qt::ShortcutContext context;
-      QString text;
-      QString help;
+      QString text;           //! text as shown on buttons or menus
+      QString help;           //! ballon help
       QIcon* icon;
       QAction* action;        //! cached action
 

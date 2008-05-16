@@ -407,6 +407,10 @@ MuseScore::MuseScore()
       entryTools = addToolBar(tr("Note Entry"));
       entryTools->setIconSize(QSize(ICON_WIDTH, ICON_HEIGHT));
 
+      a = getAction("note-input");
+      a->setCheckable(true);
+      entryTools->addAction(a);
+
       QStringList sl1;
       sl1 << "pad-note-1" << "pad-note-2" << "pad-note-4" << "pad-note-8"
          << "pad-note-16" << "pad-note-32" << "pad-note-64" << "pad-dot" << "pad-dotdot"
@@ -1821,7 +1825,6 @@ void MuseScore::setState(int val)
                         s->action->setShortcut(0);
                   }
             }
-
       switch(val) {
             case STATE_NORMAL:
                   _modeText->hide();
@@ -1842,6 +1845,8 @@ void MuseScore::setState(int val)
                   printf("MuseScore::setState: illegal state %d\n", val);
                   break;
             }
+      QAction* a = getAction("note-input");
+      a->setChecked(val == STATE_NOTE_ENTRY);
       _state = val;
       }
 
