@@ -287,6 +287,8 @@ class Score : public QObject {
       void cmdAddStretch(double);
       void transpose();
 
+      void cmdEnterRest();
+
       Rest* addRest(int tick, int len, int track);
       void lyricsEndEdit();
       void harmonyEndEdit();
