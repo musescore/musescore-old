@@ -1958,3 +1958,17 @@ Score* Score::clone()
       return score;
       }
 
+//---------------------------------------------------------
+//   setLayout
+//---------------------------------------------------------
+
+void Score::setLayout(Measure* m)
+      {
+      if (m)
+            m->setDirty();
+      if (layoutStart && layoutStart != m)
+            setLayoutAll(true);
+      else
+            layoutStart = m;
+      }
+

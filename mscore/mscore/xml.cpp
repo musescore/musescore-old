@@ -197,14 +197,6 @@ void Xml::tag(const QString& name, QVariant data)
             }
       }
 
-#if 0
-void Xml::tag(const char* name, const QString& attributes, const QString& s)
-      {
-      putLevel();
-      *this << "<" << name << " " << attributes << ">" << s << "</" << name << ">\n";
-      }
-#endif
-
 void Xml::tag(const char* name, const QWidget* g)
       {
       tag(name, QRect(g->pos(), g->size()));

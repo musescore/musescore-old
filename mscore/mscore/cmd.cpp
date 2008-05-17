@@ -414,8 +414,9 @@ void Score::cmdRemove(Element* e)
 
 void Score::cmdAddPitch(int note, bool addFlag)
       {
-      int octave    = _padState.pitch / 12;
-      setNoteEntry(true);
+      int octave = _padState.pitch / 12;
+      if (!noteEntryMode())
+            setNoteEntry(true);
       if (_is.cr == 0) {
             printf("cannot enter notes here\n");
             return;
@@ -466,13 +467,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
                         else
                               _is.slur->setEndElement(e);
                         }
-                  }
-            else {
-                  setLayoutAll(false);
-                  if (cr == 0)
-                        setLayoutStart(tick2measure(_is.pos));
-                  else
-                        setLayoutStart(cr->measure());
+                  setLayoutAll(true);
                   }
             _is.pos += len;
             }
@@ -605,6 +600,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
                         return;
                         }
                   }
+            setLayout(measure);
             Segment* segment = measure->first();
             int noteLen      = 0;
             while (segment) {
@@ -714,6 +710,7 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             printf("setRest:  ...measure not found\n");
             return false;
             }
+      setLayout(measure);
       Segment* segment = measure->first();
       int noteLen      = 0;
       while (segment) {
