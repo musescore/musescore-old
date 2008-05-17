@@ -989,9 +989,7 @@ void MuseScore::helpBrowser()
                   return;
                   }
             }
-      QString url("file://" + mscoreHelp.filePath());
-      printf("Url: <%s>\n", qPrintable(url));
-      QDesktopServices::openUrl(url);
+      QDesktopServices::openUrl(QUrl::fromLocalFile(mscoreHelp.filePath()));
       }
 
 //---------------------------------------------------------

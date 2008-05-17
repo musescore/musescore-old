@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.768</Mag>
-  <xoff>-370.629</xoff>
-  <yoff>-306.917</yoff>
+  <xoff>-735.119</xoff>
+  <yoff>-151.765</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -9602,14 +9602,23 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="67">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="52" tpc="18" ticks="240"/>
       </Measure>
     <Measure number="68">
-      <Rest>
-        <ticklen>0</ticklen>
-        </Rest>
+      <Note pitch="50" tpc="16" ticks="240"/>
+      <Note pitch="46" tpc="12" ticks="240"/>
+      <Note pitch="45" tpc="17" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <selected>1</selected>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="69">
       <Rest>
@@ -10274,5 +10283,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>4</cursorTrack>
   </museScore>

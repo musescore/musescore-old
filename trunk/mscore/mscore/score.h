@@ -560,6 +560,7 @@ class Score : public QObject {
 
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
+      void setLayout(Measure* m);
       };
 
 extern Score* gscore;

@@ -599,8 +599,8 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setParent(_layout);
       pin->layout(layout());
       cmdAdd(pin);
-      select(pin, 0, 0);
-//      canvas()->startEdit(pin);
+      if (!noteEntryMode())
+            select(pin, 0, 0);
       }
 
 //---------------------------------------------------------
@@ -1452,7 +1452,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       remaining = len;
       ii   = i;
       Measure* measure = cr->measure();
-      measure->setDirty();
+      setLayout(measure);
 
       for (; ii != crl->end(); ++ii) {
             ChordRest* cr = ii->second;
