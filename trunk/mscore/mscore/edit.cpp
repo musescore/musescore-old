@@ -1542,3 +1542,26 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             }
       }
 
+//---------------------------------------------------------
+//   cmdEnterRest
+//---------------------------------------------------------
+
+void Score::cmdEnterRest()
+      {
+      if (!noteEntryMode())
+            setNoteEntry(true);
+      if (_is.cr == 0) {
+            printf("cannot enter rest here\n");
+            return;
+            }
+      ChordRest* cr = _is.cr;
+      if (cr->tuplet()) {
+            setTupletChordRest(cr, -1, _padState.tickLen);
+            }
+      else {
+            setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots);
+            _is.pos += _padState.tickLen;
+            }
+      _padState.rest = false;  // continue with normal note entry
+      }
+

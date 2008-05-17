@@ -1484,29 +1484,8 @@ void Score::cmd(const QString& cmd)
                   cmdAddHairpin(true);
             else if (cmd == "delete")
                   cmdDeleteSelection();
-            else if (cmd == "rest") {
-                  Element* el = sel->element();
-                  if (el && el->type() == NOTE)
-                        el = el->parent();
-                  if (!noteEntryMode()) {
-                        setNoteEntry(true);
-                        if (el) {
-                              if (el->isChordRest()) {
-                                    _is.pos = ((ChordRest*)el)->tick();
-                                    }
-                              }
-                        }
-                  if (noteEntryMode()) {
-                        if (el && el->isChordRest() && ((ChordRest*)el)->tuplet()) {
-                              setTupletChordRest((ChordRest*)el, -1, _padState.tickLen);
-                              }
-                        else {
-                              if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots))
-                                    _is.pos += _padState.tickLen;
-                              }
-                        }
-                  _padState.rest = false;  // continue with normal note entry
-                  }
+            else if (cmd == "rest")
+                  cmdEnterRest();
             else if (cmd == "pitch-up")
                   upDown(true, false);
             else if (cmd == "pitch-down")
