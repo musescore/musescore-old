@@ -74,6 +74,7 @@
 #include "sym.h"
 #include "stafftext.h"
 #include "utils.h"
+#include "glissando.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -1477,8 +1478,11 @@ printf("\n");
                               e->move(0.0, -3 * _spatium);
                               }
                         }
-                  else if (t == CHORD)
-                        ;
+                  else if (t == CHORD) {
+                        if (static_cast<Chord*>(e)->glissando())
+                              static_cast<Chord*>(e)->glissando()->layout(layout);
+
+                        }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
                         }

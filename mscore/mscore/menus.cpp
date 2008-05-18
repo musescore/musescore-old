@@ -52,6 +52,7 @@
 #include "tremolo.h"
 #include "repeat.h"
 #include "tempotext.h"
+#include "glissando.h"
 
 //---------------------------------------------------------
 //   showPalette
@@ -265,16 +266,22 @@ void MuseScore::showPalette(bool visible)
             //    Arpeggios
             //-----------------------------------
 
-            sp = new Palette(1, 4);
-            sp->setGrid(42, 60);
+            sp = new Palette(1, 6);
+            sp->setGrid(27, 60);
 
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 3; ++i) {
                   Arpeggio* a = new Arpeggio(gscore);
                   a->setSubtype(i);
                   a->setHeight(_spatium * 4);
                   sp->addObject(i, a, tr("arpeggio"));
                   }
-            paletteBox->addPalette(tr("Arpeggios"), sp);
+            for (int i = 0; i < 2; ++i) {
+                  Glissando* a = new Glissando(gscore);
+                  a->setSubtype(i);
+                  a->setSize(QSizeF(_spatium * 2, _spatium * 4));
+                  sp->addObject(i + 3, a, tr("glissando"));
+                  }
+            paletteBox->addPalette(tr("Arpeggio/Glissando"), sp);
 
             //-----------------------------------
             //    Symbols: Breath

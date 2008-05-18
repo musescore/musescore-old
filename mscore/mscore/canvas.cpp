@@ -1514,6 +1514,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case CLEF:
                   case TIMESIG:
                   case BREATH:
+                  case GLISSANDO:
                   case ATTRIBUTE:
                   case ACCIDENTAL:
                   case DYNAMIC:
@@ -1632,6 +1633,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case BAR_LINE:
                   case ARPEGGIO:
                   case BREATH:
+                  case GLISSANDO:
                   case BRACKET:
                   case ATTRIBUTE:
                   case ACCIDENTAL:
@@ -1773,6 +1775,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case BAR_LINE:
                   case ARPEGGIO:
                   case BREATH:
+                  case GLISSANDO:
                   case BRACKET:
                   case ATTRIBUTE:
                   case ACCIDENTAL:

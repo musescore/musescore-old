@@ -989,7 +989,14 @@ void MuseScore::helpBrowser()
                   return;
                   }
             }
-      QDesktopServices::openUrl(QUrl::fromLocalFile(mscoreHelp.filePath()));
+      QUrl url(QUrl::fromLocalFile(mscoreHelp.filePath()));
+      if (!QDesktopServices::openUrl(url)) {
+            QString s(url.toString());
+            QMessageBox::critical(0,
+               tr("MuseScore: Error"),
+               tr("failed to open help file:\n") + s
+               );
+            }
       }
 
 //---------------------------------------------------------
