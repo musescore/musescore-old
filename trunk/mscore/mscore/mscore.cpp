@@ -126,7 +126,8 @@ void InsertMeasuresDialog::accept()
 static QString getSharePath()
       {
 #ifdef __MINGW32__
-      return QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME);
+      QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
+      return dir.absolutePath() + "/";
 #else
       return QString( INSTPREFIX "/share/" INSTALL_NAME);
 #endif
@@ -979,9 +980,9 @@ void MuseScore::navigatorVisible(bool flag)
 void MuseScore::helpBrowser()
       {
       QString lang(localeName.left(2));
-      QFileInfo mscoreHelp(mscoreGlobalShare + QString("/man/") + lang + QString("/index.html"));
+      QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/") + lang + QString("/index.html"));
       if (!mscoreHelp.isReadable()) {
-            mscoreHelp.setFile(mscoreGlobalShare + QString("/man/man/en/index.html"));
+            mscoreHelp.setFile(mscoreGlobalShare + QString("man/en/index.html"));
             if (!mscoreHelp.isReadable()) {
                   QString info(tr("MuseScore online manual not found at: "));
                   info += mscoreHelp.filePath();
@@ -989,14 +990,19 @@ void MuseScore::helpBrowser()
                   return;
                   }
             }
-      QUrl url(QUrl::fromLocalFile(mscoreHelp.filePath()));
+      QString p = mscoreHelp.filePath();
+      p = p.replace(" ", "%20");    // HACK: why does'nt fromLocalFile() do this?
+      QUrl url(QUrl::fromLocalFile(p));
+      QDesktopServices::openUrl(url);
+#if 0
+      // on windows openUrl() always returns false
       if (!QDesktopServices::openUrl(url)) {
-            QString s(url.toString());
             QMessageBox::critical(0,
                tr("MuseScore: Error"),
-               tr("failed to open help file:\n") + s
+               tr("Failed to open help file:\n") + url.toString()
                );
             }
+#endif
       }
 
 //---------------------------------------------------------
