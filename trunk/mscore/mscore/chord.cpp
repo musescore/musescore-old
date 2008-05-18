@@ -38,8 +38,10 @@
 #include "arpeggio.h"
 #include "score.h"
 #include "tremolo.h"
+#include "glissando.h"
 #include "staff.h"
 #include "utils.h"
+#include "glissando.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -152,6 +154,7 @@ Chord::Chord(Score* s)
       _stemDirection = AUTO;
       _arpeggio      = 0;
       _tremolo       = 0;
+      _glissando     = 0;
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       }
@@ -227,7 +230,7 @@ void Chord::add(Element* e)
       e->setParent(this);
       e->setTrack(track());
       if (e->type() == NOTE) {
-            Note* note = (Note*)e;
+            Note* note = static_cast<Note*>(e);
             notes.add(note);
             if (note->tieFor()) {
                   if (note->tieFor()->endNote())
@@ -236,11 +239,13 @@ void Chord::add(Element* e)
             note->setType(duration());
             }
       else if (e->type() == ATTRIBUTE)
-            attributes.push_back((NoteAttribute*)e);
+            attributes.push_back(static_cast<NoteAttribute*>(e));
       else if (e->type() == ARPEGGIO)
-            _arpeggio = (Arpeggio*)e;
+            _arpeggio = static_cast<Arpeggio*>(e);
       else if (e->type() == TREMOLO)
-            _tremolo = (Tremolo*)e;
+            _tremolo = static_cast<Tremolo*>(e);
+      else if (e->type() == GLISSANDO)
+            _glissando = static_cast<Glissando*>(e);
       else
             printf("Chord::add: unknown element\n");
       }
@@ -279,6 +284,8 @@ void Chord::remove(Element* e)
             _arpeggio = 0;
       else if (e->type() == TREMOLO)
             _tremolo = 0;
+      else if (e->type() == GLISSANDO)
+            _glissando = 0;
       else
             printf("Chord::remove: unknown element\n");
       }
@@ -302,6 +309,8 @@ QRectF Chord::bbox() const
             _bbox |= _stem->bbox().translated(_stem->pos());
       if (_arpeggio)
             _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
+      if (_glissando)
+            _bbox |= _glissando->bbox().translated(_glissando->pos());
       if (_stemSlash)
             _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
       return _bbox;
@@ -825,6 +834,7 @@ void Chord::write(Xml& xml) const
          && note->isSimple(xml)
          && (_stemDirection == AUTO)
          && !_arpeggio
+         && !_glissando
          && !_tremolo
          && (_noteType == NOTE_NORMAL)
          ) {
@@ -860,6 +870,8 @@ void Chord::write(Xml& xml) const
                   in->second->write(xml);
             if (_arpeggio)
                   _arpeggio->write(xml);
+            if (_glissando)
+                  _glissando->write(xml);
             if (_tremolo)
                   _tremolo->write(xml);
             xml.etag();
@@ -971,6 +983,12 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   _arpeggio->read(e);
                   _arpeggio->setParent(this);
                   }
+            else if (tag == "Glissando") {
+                  _glissando = new Glissando(score());
+                  _glissando->setTrack(track());
+                  _glissando->read(e);
+                  _glissando->setParent(this);
+                  }
             else if (tag == "Tremolo") {
                   _tremolo = new Tremolo(score());
                   _tremolo->setTrack(track());
@@ -1017,6 +1035,8 @@ void Chord::space(double& min, double& extra) const
 
       if (_arpeggio)
             extra = _arpeggio->width() + _spatium * .5;
+      if (_glissando)
+            extra += _spatium * 2.5;
 
       for (ciNote i = notes.begin(); i != notes.end(); ++i) {
             Note* note = i->second;
@@ -1121,6 +1141,8 @@ void Chord::collectElements(QList<const Element*>& el) const
             el.append(_arpeggio);
       if (_tremolo)
             el.append(_tremolo);
+      if (_glissando)
+            el.append(_glissando);
 
       foreach(LedgerLine* h, _ledgerLines)
             el.append(h);
@@ -1144,6 +1166,8 @@ void Chord::setTrack(int val)
             _stemSlash->setTrack(val);
       if (_arpeggio)
             _arpeggio->setTrack(val);
+      if (_glissando)
+            _glissando->setTrack(val);
       if (_tremolo)
             _tremolo->setTrack(val);
 

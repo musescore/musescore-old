@@ -659,6 +659,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == SYMBOL)
          || (type == CLEF)
          || (type == BAR_LINE)
+         || (type == GLISSANDO)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -779,6 +780,15 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Chord* ch = chord();
                   e->setParent(ch);
                   score()->undoRemoveElement(this);
+                  score()->undoAddElement(e);
+                  }
+                  break;
+
+            case GLISSANDO:
+                  {
+                  e->setTick(cr->tick());
+                  e->setTrack(track());
+                  e->setParent(chord());
                   score()->undoAddElement(e);
                   }
                   break;

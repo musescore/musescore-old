@@ -59,6 +59,7 @@
 #include "system.h"
 #include "stafftext.h"
 #include "canvas.h"
+#include "glissando.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -72,7 +73,7 @@ const char* elementNames[] = {
       "Note",
       "Stem",
       "Clef", "KeySig", "TimeSig", "Rest",
-      "Breath",
+      "Breath", "Glissando",
       "RepeatMeasure",
       "Image",
       "Tie",
@@ -1089,6 +1090,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = IMAGE;
             else if (e.tagName() == "Breath")
                   type = BREATH;
+            else if (e.tagName() == "Glissando")
+                  type = GLISSANDO;
             else if (e.tagName() == "Arpeggio")
                   type = ARPEGGIO;
             else if (e.tagName() == "NoteHead")
@@ -1158,6 +1161,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case BREATH:
                   el = new Breath(score);
+                  break;
+            case GLISSANDO:
+                  el = new Glissando(score);
                   break;
             case BRACKET:
                   el = new Bracket(score);

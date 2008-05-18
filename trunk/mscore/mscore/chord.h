@@ -34,6 +34,7 @@ class Hook;
 class Arpeggio;
 class Tremolo;
 class Chord;
+class Glissando;
 
 //---------------------------------------------------------
 //   Stem
@@ -141,6 +142,7 @@ class Chord : public ChordRest {
       Direction _stemDirection;
       Arpeggio* _arpeggio;
       Tremolo* _tremolo;
+      Glissando* _glissando;
       NoteType _noteType;     ///< mark grace notes: acciaccatura and appoggiatura
 
       virtual qreal upPos()   const;
@@ -178,8 +180,9 @@ class Chord : public ChordRest {
 
       Stem* stem() const                     { return _stem; }
       void setStem(Stem* s);
-      Arpeggio* arpeggio() const             { return _arpeggio; }
-      Tremolo* tremolo() const               { return _tremolo;  }
+      Arpeggio* arpeggio() const             { return _arpeggio;  }
+      Tremolo* tremolo() const               { return _tremolo;   }
+      Glissando* glissando() const           { return _glissando; }
 
       virtual QPointF stemPos(bool, bool) const;
 

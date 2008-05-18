@@ -53,7 +53,7 @@ enum ElementType {
       ACCIDENTAL, NOTE,
       STEM,
       CLEF, KEYSIG, TIMESIG, REST,
-      BREATH,
+      BREATH, GLISSANDO,
       REPEAT_MEASURE,
       IMAGE,
 /*18*/TIE,
