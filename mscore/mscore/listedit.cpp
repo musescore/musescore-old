@@ -45,6 +45,9 @@
 #include "line.h"
 #include "textline.h"
 #include "system.h"
+#include "arpeggio.h"
+#include "glissando.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -308,6 +311,13 @@ void PageListEditor::updateList()
                                                 new ElementItem(sei, chord->hook());
                                           if (chord->stem())
                                                 new ElementItem(sei, chord->stem());
+                                          if (chord->arpeggio())
+                                                new ElementItem(sei, chord->arpeggio());
+                                          if (chord->tremolo())
+                                                new ElementItem(sei, chord->tremolo());
+                                          if (chord->glissando())
+                                                new ElementItem(sei, chord->glissando());
+
                                           foreach(NoteAttribute* a, *chord->getAttributes())
                                                 new ElementItem(sei, a);
                                           foreach(LedgerLine* h, *chord->ledgerLines())
