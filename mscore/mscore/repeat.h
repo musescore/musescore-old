@@ -24,6 +24,7 @@
 #include "text.h"
 
 class Score;
+class Segment;
 
 //---------------------------------------------------------
 //   RepeatMeasure
@@ -41,6 +42,8 @@ class RepeatMeasure : public Element {
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+      virtual QPointF canvasPos() const;
+      Segment* segment() const { return (Segment*)parent(); }
       };
 
 enum {
