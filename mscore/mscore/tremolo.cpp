@@ -20,6 +20,10 @@
 
 #include "tremolo.h"
 #include "layout.h"
+#include "score.h"
+#include "style.h"
+#include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   Tremolo
@@ -38,6 +42,13 @@ void Tremolo::draw(QPainter& p) const
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);
+      if ((parent() == 0) && (subtype() < 3)) {
+            double x = 0.0; // bbox().width() * .25;
+            QPen pen(p.pen());
+            pen.setWidthF(score()->style()->stemWidth.point());
+            p.setPen(pen);
+            p.drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
+            }
       }
 
 //---------------------------------------------------------
@@ -47,16 +58,15 @@ void Tremolo::draw(QPainter& p) const
 void Tremolo::layout(ScoreLayout* layout)
       {
       double sp  = layout->spatium();
-
       double w   = sp * 1.2;
       double h   = sp * .8;
       double lw  = sp * .35;
       double d   = sp * 0.8;
-
       path       = QPainterPath();
 
       qreal y = 0.0;
-      for (int i = 0; i < subtype() + 1; ++i) {
+      int lines = (subtype() % 3) + 1;
+      for (int i = 0; i < lines; ++i) {
             path.moveTo(-w*.5, y + h - lw);
             path.lineTo(w*.5,  y);
             path.lineTo(w*.5,  y + lw);
@@ -65,6 +75,33 @@ void Tremolo::layout(ScoreLayout* layout)
             y += d;
             }
       setbbox(path.boundingRect());
+      if (subtype() > 2) {
+            Chord* chord = static_cast<Chord*>(parent());
+            if (chord == 0)
+                  return;
+            Note* anchor2   = chord->upNote();
+            Segment* s = chord->segment();
+            s = s->prev();
+            while (s) {
+                  if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                        break;
+                  s = s->prev();
+                  }
+            if (s == 0) {
+                  printf("no segment for first note of tremolo found\n");
+                  return;
+                  }
+            ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
+            if (cr == 0 || cr->type() != CHORD) {
+                  printf("no first note for tremolo found, track %d\n", track());
+                  return;
+                  }
+            Note* anchor1 = static_cast<Chord*>(cr)->upNote();
+            QPointF p1    = anchor1->canvasPos();
+            QPointF p2    = anchor2->canvasPos();
+            double x1 = anchor1->headWidth() - (p2.x() - p1.x());
+            setPos(x1 + ipos().x(), ipos().y());
+            }
       }
 
 //---------------------------------------------------------

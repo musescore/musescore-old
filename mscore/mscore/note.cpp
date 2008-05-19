@@ -739,11 +739,8 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   }
                   break;
             case TREMOLO:
-                  {
-                  Tremolo* tremolo = (Tremolo*)e;
-                  tremolo->setParent(cr);
-                  score()->undoAddElement(tremolo);
-                  }
+                  e->setParent(cr);
+                  score()->undoAddElement(e);
                   break;
 
             case ICON:

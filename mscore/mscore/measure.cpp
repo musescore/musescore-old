@@ -1479,9 +1479,11 @@ printf("\n");
                               }
                         }
                   else if (t == CHORD) {
-                        if (static_cast<Chord*>(e)->glissando())
-                              static_cast<Chord*>(e)->glissando()->layout(layout);
-
+                        Chord* chord = static_cast<Chord*>(e);
+                        if (chord->glissando())
+                              chord->glissando()->layout(layout);
+//                        if (chord->tremolo() && chord->tremolo()->subtype() < 3)
+//                              chord->tremolo()->layout(layout);
                         }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
