@@ -24,6 +24,7 @@
 #include "score.h"
 #include "jumpproperties.h"
 #include "markerproperties.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   JumpProperties
@@ -140,6 +141,22 @@ void RepeatMeasure::read(QDomElement e)
             if (!Element::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF RepeatMeasure::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = segment()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
 
 //---------------------------------------------------------

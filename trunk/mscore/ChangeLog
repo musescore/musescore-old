@@ -1,3 +1,6 @@
+19.5.8 (ws)
+      - new: tremolo signs between notes
+      - fix measure reapeat layout for staff != 1
 18.5.8 (ws)
       - new: glissando
 16.5.8 (ws)
