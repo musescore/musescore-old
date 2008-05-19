@@ -22,6 +22,9 @@
 #include "chord.h"
 #include "segment.h"
 #include "note.h"
+#include "style.h"
+#include "score.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Glissando
@@ -30,8 +33,8 @@
 Glissando::Glissando(Score* s)
   : Element(s)
       {
-      _anchor1 = 0;
-      _anchor2 = 0;
+      _text = "gliss.";
+      _showText = true;
       }
 
 //---------------------------------------------------------
@@ -43,11 +46,11 @@ void Glissando::layout(ScoreLayout*)
       Chord* chord = static_cast<Chord*>(parent());
       if (chord == 0)
             return;
-      _anchor2   = chord->upNote();
+      Note* anchor2   = chord->upNote();
       Segment* s = chord->segment();
       s = s->prev();
       while (s) {
-            if (s->subtype() == Segment::SegChordRest)
+            if (s->subtype() == Segment::SegChordRest && s->element(track()))
                   break;
             s = s->prev();
             }
@@ -57,19 +60,20 @@ void Glissando::layout(ScoreLayout*)
             }
       ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
       if (cr == 0 || cr->type() != CHORD) {
-            printf("no first note for glissando found\n");
+            printf("no first note for glissando found, track %d\n", track());
             return;
             }
-      _anchor1   = static_cast<Chord*>(cr)->upNote();
-      QPointF p1 = _anchor1->canvasPos();
-      QPointF p2 = _anchor2->canvasPos();
+      Note* anchor1 = static_cast<Chord*>(cr)->upNote();
+      QPointF p1    = anchor1->canvasPos();
+      QPointF p2    = anchor2->canvasPos();
 
-      double xo = _spatium * .2;
-      double x1 = _anchor1->headWidth() - (p2.x() - p1.x()) + xo;
-      double y2 = _anchor2->pos().y();
+      double xo = _spatium * .5;
+      double x1 = anchor1->headWidth() - (p2.x() - p1.x()) + xo;
+      double y2 = anchor2->pos().y();
       double y1 = (p1.y() - p2.y()) + y2;
-      double x2 = _anchor2->pos().x() - xo;
+      double x2 = anchor2->pos().x() - xo;
       bool up   = p2.y() < p1.y();
+      setPos(0.0, 0.0);
 
       double yo = up ? _spatium * .5 : -_spatium * .5;
       line.setLine(x1, y1 - yo, x2, y2 + yo);
@@ -82,6 +86,8 @@ void Glissando::layout(ScoreLayout*)
 void Glissando::write(Xml& xml) const
       {
       xml.stag("Glissando");
+      if (_showText && !_text.isEmpty())
+            xml.tag("text", _text);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -92,8 +98,14 @@ void Glissando::write(Xml& xml) const
 
 void Glissando::read(QDomElement e)
       {
+      _showText = false;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+            QString tag(e.tagName());
+            if (tag == "text") {
+                  _showText = true;
+                  _text = e.text();
+                  }
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -109,18 +121,20 @@ void Glissando::draw(QPainter& p) const
       pen.setWidthF(_spatium * .15);
       pen.setCapStyle(Qt::RoundCap);
       p.setPen(pen);
-      if (subtype() == 0)
-            p.drawLine(line);
+
+      double w = line.dx();
+      double h = line.dy();
+
+      double l = sqrt(w * w + h * h);
+      p.translate(line.p1());
+      double wi = asin(-h / l) * 180.0 / M_PI;
+      p.rotate(-wi);
+
+      if (subtype() == 0) {
+            p.drawLine(0.0, 0.0, l, 0.0);
+            }
+#if 0
       else if (subtype() == 1) {
-
-            double w = line.dx();
-            double h = line.dy();
-
-            double l = sqrt(w * w + h * h);
-            p.translate(line.p1());
-            double wi = asin(-h / l) * 180.0 / M_PI;
-            p.rotate(-wi);
-
             double x    = 0.0;
             double step = _spatium * .5;
             double h1   = step * .8;
@@ -137,6 +151,23 @@ void Glissando::draw(QPainter& p) const
                   if (x >= l)
                         break;
                   up = !up;
+                  }
+            }
+#endif
+      else if (subtype() == 1) {
+            QRectF b = symbols[trillelementSym].bbox(mag());
+            qreal w  = symbols[trillelementSym].width(mag());
+            int n    = lrint(l / w);
+            symbols[trillelementSym].draw(p, mag(), 0.0, b.height()*.5, n);
+            }
+      if (_showText) {
+            TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);
+            QRectF r      = st->bbox(_text);
+            if (r.width() < l) {
+                  QFont f = st->font();
+                  p.setFont(f);
+                  double x = (l - r.width()) * .5;
+                  p.drawText(x, -_spatium * .5, _text);
                   }
             }
       p.restore();
@@ -163,10 +194,62 @@ QRectF Glissando::bbox() const
 
 //---------------------------------------------------------
 //   setSize
+//    used for palette
 //---------------------------------------------------------
 
 void Glissando::setSize(const QSizeF& s)
       {
       line.setLine(0, s.height(), s.width(), 0);
       }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Glissando::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addAction(tr("Glissando Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Glissando::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            GlissandoProperties vp(this);
+            vp.exec();
+            }
+      else
+            Element::propertyAction(s);
+      }
+
+//---------------------------------------------------------
+//   GlissandoProperties
+//---------------------------------------------------------
+
+GlissandoProperties::GlissandoProperties(Glissando* g, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      glissando = g;
+      showText->setChecked(glissando->showText());
+      text->setText(glissando->text());
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void GlissandoProperties::accept()
+      {
+      glissando->setShowText(showText->isChecked());
+      glissando->setText(text->text());
+      QDialog::accept();
+      }
+
 

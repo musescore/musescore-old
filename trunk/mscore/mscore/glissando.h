@@ -22,6 +22,7 @@
 #define __GLISSANDO_H__
 
 #include "element.h"
+#include "ui_glissandoprop.h"
 
 class Note;
 
@@ -30,9 +31,9 @@ class Note;
 //---------------------------------------------------------
 
 class Glissando : public Element {
-      Note* _anchor1;
-      Note* _anchor2;
       QLine line;
+      QString _text;
+      bool _showText;
 
    public:
       Glissando(Score* s);
@@ -47,7 +48,30 @@ class Glissando : public Element {
       virtual void read(QDomElement);
       virtual bool isMovable() const   { return false; }
 
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
+
       void setSize(const QSizeF&);        // used for palette
+
+      QString text() const           { return _text;     }
+      void setText(const QString& t) { _text = t;        }
+      bool showText() const          { return _showText; }
+      void setShowText(bool v)       { _showText = v;    }
+      };
+
+//---------------------------------------------------------
+//   GlissandoProperties
+//---------------------------------------------------------
+
+class GlissandoProperties : public QDialog, public Ui::GlissandoProperties {
+      Q_OBJECT
+      Glissando* glissando;
+
+   public slots:
+      virtual void accept();
+
+   public:
+      GlissandoProperties(Glissando* tuplet, QWidget* parent = 0);
       };
 
 #endif

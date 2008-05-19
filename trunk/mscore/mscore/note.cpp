@@ -786,10 +786,29 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case GLISSANDO:
                   {
-                  e->setTick(cr->tick());
+                  Segment* s = cr->segment();
+                  s = s->next();
+                  while (s) {
+                        if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                              break;
+                        s = s->next();
+                        }
+                  if (s == 0) {
+                        printf("no segment for second note of glissando found\n");
+                        delete e;
+                        return 0;
+                        }
+                  ChordRest* cr1 = static_cast<ChordRest*>(s->element(track()));
+                  if (cr1 == 0 || cr1->type() != CHORD) {
+                        printf("no second note for glissando found, track %d\n", track());
+                        delete e;
+                        return 0;
+                        }
+                  e->setTick(cr1->tick());
                   e->setTrack(track());
-                  e->setParent(chord());
+                  e->setParent(cr1);
                   score()->undoAddElement(e);
+                  score()->setLayout(cr1->measure());
                   }
                   break;
 
