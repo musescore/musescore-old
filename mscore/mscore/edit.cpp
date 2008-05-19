@@ -413,7 +413,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
       else {
             // replace chord
-            if (cr->tuplet()) {
+            if (cr && cr->tuplet()) {
                   setTupletChordRest(cr, pitch, len);
                   }
             else {
