@@ -76,7 +76,7 @@ void Glissando::layout(ScoreLayout*)
       setPos(0.0, 0.0);
 
       double yo = up ? _spatium * .5 : -_spatium * .5;
-      line.setLine(x1, y1 - yo, x2, y2 + yo);
+      line = QLineF(x1, y1 - yo, x2, y2 + yo);
       }
 
 //---------------------------------------------------------
@@ -199,7 +199,7 @@ QRectF Glissando::bbox() const
 
 void Glissando::setSize(const QSizeF& s)
       {
-      line.setLine(0, s.height(), s.width(), 0);
+      line = QLineF(0.0, s.height(), s.width(), 0.0);
       }
 
 //---------------------------------------------------------

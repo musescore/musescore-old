@@ -31,7 +31,7 @@ class Note;
 //---------------------------------------------------------
 
 class Glissando : public Element {
-      QLine line;
+      QLineF line;
       QString _text;
       bool _showText;
 
