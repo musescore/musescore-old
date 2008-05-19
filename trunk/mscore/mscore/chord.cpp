@@ -41,7 +41,6 @@
 #include "glissando.h"
 #include "staff.h"
 #include "utils.h"
-#include "glissando.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -313,6 +312,8 @@ QRectF Chord::bbox() const
             _bbox |= _glissando->bbox().translated(_glissando->pos());
       if (_stemSlash)
             _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
+      if (_tremolo)
+            _bbox |= _tremolo->bbox().translated(_tremolo->pos());
       return _bbox;
       }
 
@@ -437,7 +438,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
 
       int extraStemLen = hookIdx - 2;
-      if (_tremolo) {
+      if (_tremolo && _tremolo->subtype() < 3) {
             int extraStemLen2 = _tremolo->subtype();
             if (hookIdx == 0)
                   extraStemLen2 -= 1;
@@ -490,6 +491,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             qreal h  = pstemLen;
             qreal th = _tremolo->bbox().height();
             _tremolo->setPos(x, y + h * .5 - th * .5);
+            _tremolo->layout(layout);     //DEBUG
             }
 
       //-----------------------------------------

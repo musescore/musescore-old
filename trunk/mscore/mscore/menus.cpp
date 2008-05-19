@@ -432,14 +432,18 @@ void MuseScore::showPalette(bool visible)
             //    Tremolo
             //-----------------------------------
 
-            sp = new Palette(1, 4, 1.0);
-            sp->setGrid(42, 40);
+            sp = new Palette(1, 6, 1.0);
+            sp->setGrid(27, 40);
             sp->setDrawGrid(true);
+            const char* tremoloName[] = {
+                  "1 through stem", "2 through stem", "3 through stem",
+                  "1 between notes", "2 between notes", "3 between notes"
+                  };
 
-            for (int i = 0; i < 3; ++i) {
+            for (int i = 0; i < 6; ++i) {
                   Tremolo* tremolo = new Tremolo(gscore);
                   tremolo->setSubtype(i);
-                  sp->addObject(i, tremolo, QString("normal"));
+                  sp->addObject(i, tremolo, QString(tremoloName[i]));
                   }
             paletteBox->addPalette(tr("Tremolo"), sp);
 
