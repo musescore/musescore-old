@@ -673,12 +673,12 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 
 Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
-      Chord* cr = chord();
+      Chord* ch = chord();
       switch(e->type()) {
             case ATTRIBUTE:
                   {
                   NoteAttribute* atr = (NoteAttribute*)e;
-                  NoteAttribute* oa = cr->hasAttribute(atr);
+                  NoteAttribute* oa = ch->hasAttribute(atr);
                   if (oa) {
                         delete atr;
                         atr = 0;
@@ -687,7 +687,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         score()->select(oa, 0, 0);
                         }
                   else {
-                        atr->setParent(cr);
+                        atr->setParent(ch);
                         atr->setTrack(track());
                         score()->select(atr, 0, 0);
                         score()->cmdAdd(atr);
@@ -714,7 +714,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
             case ARPEGGIO:
                   {
                   Arpeggio* a = (Arpeggio*)e;
-                  a->setParent(cr);
+                  a->setParent(ch);
                   a->setHeight(_spatium * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
@@ -738,34 +738,30 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         score()->undoChangeNoteHead(this, group);
                   }
                   break;
-            case TREMOLO:
-                  e->setParent(cr);
-                  score()->undoAddElement(e);
-                  break;
 
             case ICON:
                   {
                   switch(e->subtype()) {
                         case ICON_ACCIACCATURA:
-                              score()->setGraceNote(cr, pitch(), NOTE_ACCIACCATURA, division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_ACCIACCATURA, division/2);
                               break;
                         case ICON_APPOGGIATURA:
-                              score()->setGraceNote(cr, pitch(), NOTE_APPOGGIATURA, division/2);
+                              score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, division/2);
                               break;
                         case ICON_SBEAM:
-                              score()->undoChangeBeamMode(cr, BEAM_BEGIN);
+                              score()->undoChangeBeamMode(ch, BEAM_BEGIN);
                               break;
                         case ICON_MBEAM:
-                              score()->undoChangeBeamMode(cr, BEAM_MID);
+                              score()->undoChangeBeamMode(ch, BEAM_MID);
                               break;
                         case ICON_NBEAM:
-                              score()->undoChangeBeamMode(cr, BEAM_NO);
+                              score()->undoChangeBeamMode(ch, BEAM_NO);
                               break;
                         case ICON_BEAM32:
-                              score()->undoChangeBeamMode(cr, BEAM_BEGIN32);
+                              score()->undoChangeBeamMode(ch, BEAM_BEGIN32);
                               break;
                         case ICON_AUTOBEAM:
-                              score()->undoChangeBeamMode(cr, BEAM_AUTO);
+                              score()->undoChangeBeamMode(ch, BEAM_AUTO);
                               break;
                         }
                   }
@@ -783,12 +779,12 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case GLISSANDO:
                   {
-                  Segment* s = cr->segment();
-                  s = s->next();
+                  Segment* s = ch->segment();
+                  s = s->next1();
                   while (s) {
                         if (s->subtype() == Segment::SegChordRest && s->element(track()))
                               break;
-                        s = s->next();
+                        s = s->next1();
                         }
                   if (s == 0) {
                         printf("no segment for second note of glissando found\n");
@@ -809,8 +805,44 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   }
                   break;
 
+            case TREMOLO:
+                  {
+                  Tremolo* tremolo = static_cast<Tremolo*>(e);
+                  if (tremolo->twoNotes()) {
+                        Segment* s = ch->segment();
+                        s = s->next();
+                        while (s) {
+                              if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                                    break;
+                              s = s->next();
+                              }
+                        if (s == 0) {
+                              printf("no segment for second note of tremolo found\n");
+                              delete e;
+                              return 0;
+                              }
+                        ChordRest* cr1 = static_cast<ChordRest*>(s->element(track()));
+                        if (cr1 == 0 || cr1->type() != CHORD) {
+                              printf("no second note for tremolo found, track %d\n", track());
+                              delete e;
+                              return 0;
+                              }
+                        Chord* ch1 = static_cast<Chord*>(cr1);
+                        tremolo->setChords(ch, ch1);
+                        score()->setLayout(ch1->measure());
+                        tremolo->setParent(ch1);
+                        }
+                  else {
+                        e->setParent(ch);
+                        score()->setLayout(ch->measure());
+                        }
+                  score()->undoAddElement(e);
+                  }
+                  break;
+
+
             default:
-                  return cr->drop(p1, p2, e);
+                  return ch->drop(p1, p2, e);
             }
       return 0;
       }

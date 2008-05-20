@@ -23,6 +23,8 @@
 
 #include "symbol.h"
 
+class Chord;
+
 // Tremolo subtypes:
 enum { TREMOLO_1, TREMOLO_2, TREMOLO_3 };
 
@@ -31,6 +33,8 @@ enum { TREMOLO_1, TREMOLO_2, TREMOLO_3 };
 //---------------------------------------------------------
 
 class Tremolo : public Element {
+      Chord* _chord1;
+      Chord* _chord2;
       QPainterPath path;
 
    public:
@@ -40,8 +44,19 @@ class Tremolo : public Element {
       virtual ElementType type() const { return TREMOLO; }
       virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
+      virtual void layout2(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+
+      Chord* chord1() const { return _chord1; }
+      Chord* chord2() const { return _chord2; }
+
+      void setChords(Chord* c1, Chord* c2) {
+            _chord1 = c1;
+            _chord2 = c2;
+            }
+
+      bool twoNotes() const { return subtype() > 2; } // is it a two note tremolo?
       };
 
 #endif

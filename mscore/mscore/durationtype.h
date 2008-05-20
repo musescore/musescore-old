@@ -51,6 +51,7 @@ class Duration {
       int headType() const;               // note head type
       int hooks() const;
       bool hasStem() const;
+      Duration shift(int val);
       };
 
 extern int headType(int tickLen, Duration* type, int* dots);

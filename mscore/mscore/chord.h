@@ -56,6 +56,7 @@ class Stem : public Element {
       virtual ElementType type() const { return STEM; }
       virtual void draw(QPainter& p) const;
       void setLen(const Spatium&);
+      Spatium stemLen() const { return _len; }
       virtual QRectF bbox() const;
       };
 
@@ -162,6 +163,8 @@ class Chord : public ChordRest {
       virtual void read(QDomElement, int staff);
       virtual void setSelected(bool f);
       virtual void dump() const;
+
+      virtual void setDuration(Duration t);
 
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }

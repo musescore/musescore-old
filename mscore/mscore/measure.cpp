@@ -559,7 +559,7 @@ void Measure::layout(ScoreLayout* layout, double width)
       layoutX(layout, width);
 
       //---------------------------------------------------
-      //   layout Lyrics
+      //   layout lyrics
       //---------------------------------------------------
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -1482,8 +1482,6 @@ printf("\n");
                         Chord* chord = static_cast<Chord*>(e);
                         if (chord->glissando())
                               chord->glissando()->layout(layout);
-//                        if (chord->tremolo() && chord->tremolo()->subtype() < 3)
-//                              chord->tremolo()->layout(layout);
                         }
                   else if (t == REPEAT_MEASURE) {
                         e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
@@ -2594,9 +2592,8 @@ void Measure::collectElements(QList<const Element*>& el) const
                   if (e == 0)
                         continue;
                   if (e->isChordRest()) {
-                        if (e->type() == CHORD) {
+                        if (e->type() == CHORD)
                               e->collectElements(el);
-                              }
                         else
                               el.append(e);
                         ChordRest* cr = (ChordRest*)e;

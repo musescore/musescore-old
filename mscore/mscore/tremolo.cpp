@@ -32,6 +32,8 @@
 Tremolo::Tremolo(Score* score)
    : Element(score)
       {
+      _chord1 = 0;
+      _chord2 = 0;
       }
 
 //---------------------------------------------------------
@@ -75,33 +77,61 @@ void Tremolo::layout(ScoreLayout* layout)
             y += d;
             }
       setbbox(path.boundingRect());
-      if (subtype() > 2) {
-            Chord* chord = static_cast<Chord*>(parent());
-            if (chord == 0)
-                  return;
-            Note* anchor2   = chord->upNote();
-            Segment* s = chord->segment();
-            s = s->prev();
-            while (s) {
-                  if (s->subtype() == Segment::SegChordRest && s->element(track()))
-                        break;
-                  s = s->prev();
-                  }
-            if (s == 0) {
-                  printf("no segment for first note of tremolo found\n");
-                  return;
-                  }
-            ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
-            if (cr == 0 || cr->type() != CHORD) {
-                  printf("no first note for tremolo found, track %d\n", track());
-                  return;
-                  }
-            Note* anchor1 = static_cast<Chord*>(cr)->upNote();
-            QPointF p1    = anchor1->canvasPos();
-            QPointF p2    = anchor2->canvasPos();
-            double x1 = anchor1->headWidth() - (p2.x() - p1.x());
-            setPos(x1 + ipos().x(), ipos().y());
+      }
+
+//---------------------------------------------------------
+//   layout2
+//    called after notes have their x position
+//---------------------------------------------------------
+
+void Tremolo::layout2(ScoreLayout*)
+      {
+      _chord2 = static_cast<Chord*>(parent());
+      if (_chord2 == 0)
+            return;
+      Stem* stem = _chord2->stem();
+      qreal x, y, h;
+      if (stem) {
+            x = stem->pos().x();
+            y  = stem->pos().y();
+            h  = stem->stemLen().point();
             }
+      else {
+            // center tremolo above note
+            Note* upnote = _chord2->upNote();
+            x = upnote->x() + upnote->headWidth() * .5;
+            y = 0.0;
+            h = 3 * _spatium;
+            }
+      y += (h - bbox().height()) * .5;
+      if (!twoNotes()) {
+            setPos(x, y);
+            return;
+            }
+      Note* anchor2   = _chord2->upNote();
+      Segment* s = _chord2->segment();
+      s = s->prev();
+      while (s) {
+            if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                  break;
+            s = s->prev();
+            }
+      if (s == 0) {
+            printf("no segment for first note of tremolo found\n");
+            return;
+            }
+      ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
+      if (cr == 0 || cr->type() != CHORD) {
+            printf("no first note for tremolo found, track %d\n", track());
+            return;
+            }
+      _chord1       = static_cast<Chord*>(cr);
+      Note* anchor1 = _chord1->upNote();
+      QPointF p1    = anchor1->canvasPos();
+      QPointF p2    = anchor2->canvasPos();
+      double x1     = anchor1->headWidth() - ((p2.x() - p1.x()) * .5);
+
+      setPos(x1, y);
       }
 
 //---------------------------------------------------------
