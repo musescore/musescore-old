@@ -165,7 +165,6 @@ class Score : public QObject {
                         ///< saves will not overwrite the backup file.
       int _playPos;     ///< sequencer seek position
 
-      bool cmdActive;
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
 
@@ -236,6 +235,7 @@ class Score : public QObject {
       void selectionChanged(int);
 
    public:
+      bool cmdActive;
       int curTick;            // for read optimizations
       int curTrack;
 

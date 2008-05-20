@@ -48,11 +48,11 @@ void Glissando::layout(ScoreLayout*)
             return;
       Note* anchor2   = chord->upNote();
       Segment* s = chord->segment();
-      s = s->prev();
+      s = s->prev1();
       while (s) {
             if (s->subtype() == Segment::SegChordRest && s->element(track()))
                   break;
-            s = s->prev();
+            s = s->prev1();
             }
       if (s == 0) {
             printf("no segment for first note of glissando found\n");

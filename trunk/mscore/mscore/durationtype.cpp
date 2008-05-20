@@ -268,4 +268,17 @@ void Duration::setVal(const QString& s)
             printf("unknown duration type <%s>\n", qPrintable(s));
       }
 
+//---------------------------------------------------------
+//   shift
+//---------------------------------------------------------
+
+Duration Duration::shift(int v)
+      {
+      if (_val == V_MEASURE || _val == V_INVALID)
+            return Duration();
+      int newValue = _val + v;
+      if ((newValue < 0) || (newValue > V_256TH))
+            return Duration();
+      return Duration(DurationType(newValue));
+      }
 

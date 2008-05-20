@@ -168,6 +168,10 @@ Chord::~Chord()
             delete _arpeggio;
       if (_tremolo)
             delete _tremolo;
+      if (_glissando)
+            delete _glissando;
+      if (_stemSlash)
+            delete _stemSlash;
       }
 
 //---------------------------------------------------------
@@ -241,8 +245,13 @@ void Chord::add(Element* e)
             attributes.push_back(static_cast<NoteAttribute*>(e));
       else if (e->type() == ARPEGGIO)
             _arpeggio = static_cast<Arpeggio*>(e);
-      else if (e->type() == TREMOLO)
-            _tremolo = static_cast<Tremolo*>(e);
+      else if (e->type() == TREMOLO) {
+            Tremolo* tr = static_cast<Tremolo*>(e);
+            Duration d  = duration().shift(-1);
+            tr->chord1()->setDuration(d);
+            tr->chord2()->setDuration(d);
+            _tremolo = tr;
+            }
       else if (e->type() == GLISSANDO)
             _glissando = static_cast<Glissando*>(e);
       else
@@ -281,8 +290,13 @@ void Chord::remove(Element* e)
             }
       else if (e->type() == ARPEGGIO)
             _arpeggio = 0;
-      else if (e->type() == TREMOLO)
+      else if (e->type() == TREMOLO) {
+            Tremolo* tremolo = static_cast<Tremolo*>(e);
+            Duration d       = duration().shift(1);
+            tremolo->chord1()->setDuration(d);
+            tremolo->chord2()->setDuration(d);
             _tremolo = 0;
+            }
       else if (e->type() == GLISSANDO)
             _glissando = 0;
       else
@@ -438,7 +452,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
 
       int extraStemLen = hookIdx - 2;
-      if (_tremolo && _tremolo->subtype() < 3) {
+      if (_tremolo && !_tremolo->twoNotes()) {
             int extraStemLen2 = _tremolo->subtype();
             if (hookIdx == 0)
                   extraStemLen2 -= 1;
@@ -482,16 +496,7 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       if (_tremolo) {
             _tremolo->layout(layout);
-            qreal x  = npos.x();
-            if (!hasStem) {
-                  // center tremolo above note
-                  x = upnote->x() + upnote->headWidth() * .5;
-                  }
-            qreal y  = npos.y();
-            qreal h  = pstemLen;
-            qreal th = _tremolo->bbox().height();
-            _tremolo->setPos(x, y + h * .5 - th * .5);
-            _tremolo->layout(layout);     //DEBUG
+            _tremolo->layout2(layout);
             }
 
       //-----------------------------------------
@@ -1141,8 +1146,10 @@ void Chord::collectElements(QList<const Element*>& el) const
             el.append(_stemSlash);
       if (_arpeggio)
             el.append(_arpeggio);
-      if (_tremolo)
+      if (_tremolo) {
+            QRectF r(_tremolo->abbox());
             el.append(_tremolo);
+            }
       if (_glissando)
             el.append(_glissando);
 
@@ -1178,6 +1185,18 @@ void Chord::setTrack(int val)
 
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->setTrack(val);
+      }
+
+//---------------------------------------------------------
+//   setDuration
+//---------------------------------------------------------
+
+void Chord::setDuration(Duration t)
+      {
+      ChordRest::setDuration(t);
+      NoteList* nl = noteList();
+      for (iNote in = nl->begin(); in != nl->end(); ++in)
+            in->second->setType(t);
       }
 
 //---------------------------------------------------------

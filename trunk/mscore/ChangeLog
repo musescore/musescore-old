@@ -1,3 +1,7 @@
+20.5.8 (ws)
+      - fixes for tremolo (i was totally wrong on how tremolo of two notes
+        works)
+      - glissando can now cross measure boundaries
 19.5.8 (ws)
       - new: tremolo signs between notes
       - fix measure reapeat layout for staff != 1

@@ -459,8 +459,25 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         break;
                   else if (_score->editObject->mousePress(startMove, ev))
                         update();
-                  else
+                  else {
+                        if (dragObject) {
+                              ElementType type = dragObject->type();
+                              _score->dragStaff = 0;
+                              if (type == MEASURE) {
+                                    _score->dragSystem = (System*)(dragObject->parent());
+                                    _score->dragStaff  = getStaff(_score->dragSystem, startMove);
+                                    }
+                              // As findSelectableElement may return a measure
+                              // when clicked "a little bit" above or below it, getStaff
+                              // may not find the staff and return -1, which would cause
+                              // select() to crash
+                              if (_score->dragStaff >= 0)
+                                    _score->select(dragObject, keyState, _score->dragStaff);
+                              else
+                                    dragObject = 0;
+                              }
                         setState(NORMAL);
+                        }
                   break;
 
             default:
@@ -1814,7 +1831,7 @@ void Canvas::dropEvent(QDropEvent* event)
             score()->endCmd();
             dragElement = 0;
             setDropTarget(0); // this also resets dropRectangle and dropAnchor
-            setState(NORMAL);
+//DEBUG            setState(NORMAL);
             return;
             }
 
