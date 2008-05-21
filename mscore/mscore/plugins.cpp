@@ -20,6 +20,26 @@
 
 #include "mscore.h"
 #include "score.h"
+#include "script.h"
+
+//---------------------------------------------------------
+//   WrapperQMessageBox
+//---------------------------------------------------------
+
+WrapperQMessageBox::WrapperQMessageBox(QWidget* parent)
+   : QMessageBox(parent)
+      {
+      }
+
+//---------------------------------------------------------
+//   qscript_call
+//---------------------------------------------------------
+
+QScriptValue WrapperQMessageBox::qscript_call(QWidget* parent)
+      {
+      QMessageBox* const iface = new WrapperQMessageBox(parent);
+      return engine()->newQObject(iface, QScriptEngine::AutoOwnership);
+      }
 
 //---------------------------------------------------------
 //   loadPlugins
@@ -122,6 +142,7 @@ void MuseScore::pluginTriggered(int idx)
       se.globalObject().setProperty("score", v);
       v = se.newVariant(division);
       se.globalObject().setProperty("division", v);
+      se.globalObject().setProperty("QMessageBox", se.newQObject(new WrapperQMessageBox, QScriptEngine::AutoOwnership));
 
       QScriptValue val = se.evaluate(f.readAll(), pluginPath);
       f.close();

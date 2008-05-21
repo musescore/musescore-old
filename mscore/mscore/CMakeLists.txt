@@ -88,6 +88,7 @@ QT4_WRAP_CPP (mocs
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
+      script.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
