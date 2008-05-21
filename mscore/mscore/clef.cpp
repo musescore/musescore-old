@@ -337,3 +337,13 @@ void ClefList::insertTime(int tick, int len)
       insert(tmp.begin(), tmp.end());
       }
 
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+void Clef::space(double& min, double& extra) const
+      {
+      min   = 0.0;
+      extra = width();
+      }
+
