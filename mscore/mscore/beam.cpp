@@ -843,17 +843,12 @@ void Beam::layout(ScoreLayout* layout)
                   npos += QPointF(0, -stemLen);
             QPointF sp(npos - chord->pos() - chord->segment()->pos());
             stem->setPos(sp);
-#if 0
+
             Tremolo* tremolo = chord->tremolo();
             if (tremolo) {
                   tremolo->layout(layout);
-                  qreal x  = sp.x();
-                  qreal y  = sp.y();
-                  qreal h  = stemLen;
-                  qreal th = tremolo->bbox().height();
-                  tremolo->setPos(x, y + h * .5 - th * .5 + _spatium * 8);
+                  tremolo->layout2(layout);
                   }
-#endif
             }
       }
 

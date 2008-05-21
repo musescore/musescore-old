@@ -89,7 +89,8 @@ void Tremolo::layout2(ScoreLayout*)
       _chord2 = static_cast<Chord*>(parent());
       if (_chord2 == 0)
             return;
-      Stem* stem = _chord2->stem();
+      Note* anchor2 = _chord2->upNote();
+      Stem* stem    = _chord2->stem();
       qreal x, y, h;
       if (stem) {
             x = stem->pos().x();
@@ -98,40 +99,37 @@ void Tremolo::layout2(ScoreLayout*)
             }
       else {
             // center tremolo above note
-            Note* upnote = _chord2->upNote();
-            x = upnote->x() + upnote->headWidth() * .5;
-            y = 0.0;
-            h = 3 * _spatium;
+            x = anchor2->x() + anchor2->headWidth() * .5;
+            y = anchor2->y();
+            h = 2.0 * _spatium + bbox().height();
+            if (anchor2->line() > 4)
+                  h *= -1;
             }
       y += (h - bbox().height()) * .5;
       if (!twoNotes()) {
+            if (_chord2->hook())
+                  y -= _spatium * .5 * (_chord2->isUp() ? -1.0 : 1.0);
             setPos(x, y);
             return;
             }
-      Note* anchor2   = _chord2->upNote();
-      Segment* s = _chord2->segment();
-      s = s->prev();
+      Segment* s = _chord2->segment()->prev();
       while (s) {
-            if (s->subtype() == Segment::SegChordRest && s->element(track()))
+            if (s->element(track()) && (s->element(track())->type() == CHORD))
                   break;
             s = s->prev();
             }
       if (s == 0) {
-            printf("no segment for first note of tremolo found\n");
+            printf("no first note of tremolo found\n");
             return;
             }
-      ChordRest* cr = static_cast<ChordRest*>(s->element(track()));
-      if (cr == 0 || cr->type() != CHORD) {
-            printf("no first note for tremolo found, track %d\n", track());
-            return;
-            }
-      _chord1       = static_cast<Chord*>(cr);
+      _chord1       = static_cast<Chord*>(s->element(track()));
       Note* anchor1 = _chord1->upNote();
-      QPointF p1    = anchor1->canvasPos();
-      QPointF p2    = anchor2->canvasPos();
-      double x1     = anchor1->headWidth() - ((p2.x() - p1.x()) * .5);
-
-      setPos(x1, y);
+      double x1     = anchor1->canvasPos().x();
+      double x2     = anchor2->canvasPos().x();
+      x             = anchor2->pos().x() + (x1 - x2) * .5;
+      if (_chord1->isUp())
+            x += anchor1->headWidth();
+      setPos(x, y);
       }
 
 //---------------------------------------------------------

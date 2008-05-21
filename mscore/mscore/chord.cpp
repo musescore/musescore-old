@@ -461,7 +461,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
 
       if (extraStemLen > 0)
-            stemLen += extraStemLen * Spatium(0.5 * staffMag);
+            stemLen += extraStemLen * Spatium(.6 * staffMag);
 
       double headCorrection = 0.2;
 
