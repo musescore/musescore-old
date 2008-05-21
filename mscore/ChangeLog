@@ -1,3 +1,7 @@
+21.5.8 (ws)
+      - set smaller beams for grace notes
+      - reduce distances for grace notes
+      - more compact layout for mid measure clefs
 20.5.8 (ws)
       - fixes for tremolo (i was totally wrong on how tremolo of two notes
         works)

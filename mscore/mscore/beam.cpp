@@ -259,7 +259,7 @@ void Beam::draw(QPainter& p) const
 
             QPointF ip1 = bs->p1;
             QPointF ip2 = bs->p2;
-            qreal lw2   = point(score()->style()->beamWidth) * .5;
+            qreal lw2   = point(score()->style()->beamWidth) * .5 * mag();
 
             QPolygonF a(4);
             a[0] = QPointF(ip1.x(), ip1.y()-lw2);
@@ -669,16 +669,33 @@ void Beam::layout(ScoreLayout* layout)
       // calculate min stem len
       //    adjust beam position if necessary
       //
-      double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
-                        + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
-      double min = 1000.0;
-      double max = -1000.0;
       bool isGrace = false;
       foreach(ChordRest* cr, elements) {
             if (cr->type() != CHORD)
                   continue;
-            Chord* chord  = (Chord*)(cr);
+            Chord* chord  = static_cast<Chord*>(cr);
             isGrace = chord->noteType() != NOTE_NORMAL;
+            break;
+            }
+      Spatium bw        = score()->style()->beamWidth;
+      double bd         = score()->style()->beamDistance;
+      double beamMinLen = point(score()->style()->beamMinLen);
+      double graceMag   = score()->style()->graceNoteMag;
+      if (isGrace) {
+            setMag(graceMag);
+            bw *= graceMag;
+            beamMinLen *= graceMag;
+            }
+      setMag(isGrace ? graceMag : 1.0);
+
+      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      double min = 1000.0;
+      double max = -1000.0;
+
+      foreach(ChordRest* cr, elements) {
+            if (cr->type() != CHORD)
+                  continue;
+            Chord* chord  = (Chord*)(cr);
             QPointF npos(chord->stemPos(_up, true));
             double bd      = (chord->beams() - 1) * beamDist * (_up ? 1.0 : -1.0);
             double y1      = npos.y();
@@ -696,7 +713,7 @@ void Beam::layout(ScoreLayout* layout)
       if (fabs(max-min) > _spatium * 2)
             n = 2.0;    // reduce minimum stem len (heuristic)
       if (isGrace)
-            n *= score()->style()->graceNoteMag;
+            n *= graceMag;
       double diff = _spatium * n - min;
       if (_up)
             diff = -diff;
@@ -772,7 +789,7 @@ void Beam::layout(ScoreLayout* layout)
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(_up, false).x();
-                              double x3 = x2 + point(score()->style()->beamMinLen);
+                              double x3 = x2 + beamMinLen;
 
                               if (!nn1r) {
                                     double tmp = x3;
@@ -808,7 +825,7 @@ void Beam::layout(ScoreLayout* layout)
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(_up, false).x();
-                  double x2 = x3 - point(score()->style()->beamMinLen);
+                  double x2 = x3 - beamMinLen;
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
