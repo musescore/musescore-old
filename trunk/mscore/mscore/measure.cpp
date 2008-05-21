@@ -1189,7 +1189,9 @@ again:
       Segment::SegmentType types[segs];
 
       int seg = 1;
-      bool notesSeg = first()->subtype() == Segment::SegChordRest;
+      bool notesSeg = first()->subtype() == Segment::SegChordRest
+         || first()->subtype() == Segment::SegGrace;
+
       bool firstNoteRest = true;
       for (const Segment* s = first(); s; s = s->next(), ++seg) {
             types[seg-1] = Segment::SegmentType(s->subtype());
@@ -1202,11 +1204,15 @@ again:
                   additionalMin = point(style->clefKeyRightMargin);
                   notesSeg = true;
                   }
-            if (s->subtype() == Segment::SegChordRest) {
+            if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace) {
                   if (firstNoteRest)
                         firstNoteRest = false;
-                  else
-                        additionalExtra = point(style->minNoteDistance);
+                  else {
+                        if (s->subtype() == Segment::SegGrace)
+                              additionalExtra = point(style->minNoteDistance) * style->graceNoteMag;
+                        else
+                              additionalExtra = point(style->minNoteDistance);
+                        }
                   }
             else if (s->subtype() == Segment::SegClef)
                   additionalExtra = point(style->clefLeftMargin);
@@ -1220,8 +1226,6 @@ again:
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = point(Spatium(1.0));
                   }
-            else if (s->subtype() == Segment::SegGrace)
-                  additionalExtra = point(Spatium(style->minNoteDistance));
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   Staff* staff = score()->staff(staffIdx);
@@ -1282,8 +1286,10 @@ again:
                         min = style->timesigLeftMargin;
                         break;
                   case Segment::SegChordRest:
-                  case Segment::SegGrace:
                         min = style->barNoteDistance;
+                        break;
+                  case Segment::SegGrace:
+                        min = style->barNoteDistance * style->graceNoteMag;
                         break;
                   }
             spaces[0][staffIdx].setMin(min.point());
@@ -1314,15 +1320,11 @@ printf("\n");
                               break;
                         }
                   if (tseg == 0) {
-                        if (spaces[tseg][staffIdx].min() < extra)
-                              spaces[tseg][staffIdx].setMin(extra);
+//                        if (spaces[tseg][staffIdx].min() < extra)
+//                              spaces[tseg][staffIdx].setMin(extra);
                         }
-                  else {
-//                        if (types[tseg] ==  Segment::SegGrace)
-//                              spaces[tseg][staffIdx].addExtra(extra);
-//                        else
-                              spaces[tseg][staffIdx].addMin(extra);
-                        }
+                  else
+                        spaces[tseg][staffIdx].addMin(extra);
                   }
             }
 #if 0
