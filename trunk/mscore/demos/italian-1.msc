@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <Mag>1.07558</Mag>
-  <xoff>3.38667</xoff>
-  <yoff>2.54</yoff>
+  <Mag>4.60652</Mag>
+  <xoff>-5361.73</xoff>
+  <yoff>-625.052</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -2544,9 +2544,9 @@
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.165533" y="-0.413831"/>
-      <o2 x="0.0827663" y="-0.827663"/>
-      <o3 x="-0.0827663" y="-0.66213"/>
-      <o4 x="-0.993196" y="-4.22108"/>
+      <o2 x="0.0533116" y="-0.297478"/>
+      <o3 x="0.0350527" y="-0.367583"/>
+      <o4 x="-0.963741" y="-4.30944"/>
       </SlurSegment>
     </Slur>
   <Slur id="274">
@@ -11806,7 +11806,8 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <tick>148800</tick>
-        <ticklen>240</ticklen>
+        <ticklen>120</ticklen>
+        <durationType>eighth</durationType>
         <Slur type="start" number="301"/>
         <appoggiatura/>
         <StemDirection>up</StemDirection>
@@ -11828,7 +11829,8 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <tick>148800</tick>
-        <ticklen>240</ticklen>
+        <ticklen>120</ticklen>
+        <durationType>eighth</durationType>
         <appoggiatura/>
         <StemDirection>up</StemDirection>
         <Note pitch="67" tpc="15"/>
