@@ -212,6 +212,7 @@ Note* Score::addNote(Chord* chord, int pitch)
       note->setParent(chord);
       cmdAdd(note);
       spell(note);
+      setLayout(chord->measure());
       return note;
       }
 

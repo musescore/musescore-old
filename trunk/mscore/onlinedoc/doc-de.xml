@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScoreManual version="1.0">
+
 <page name="accidentals" header="Vorzeichen" >
     <index>Vorzeichen</index>
     <table>
@@ -1159,8 +1160,23 @@
       <td><img src="../pic/crossbeams2.png" align="center"/></td>
       </tr>
     </table>
+    </page>
 
+<page name="tremolo" header="Tremolo">
+    <index>Tremolo</index>
 
+      Mit Tremolo wird eine schnelle Wiederholung von Noten bezeichnet.
+      Es wird durch ein bis drei schräge Balken am Notenhals einer Note oder
+      beim Zwei-Noten-Tremolo zwischen den Noten dargestellt.
+      <br/>
+      Für Ein- und Zwei-Noten-Tremoli gibt es jeweils getrennte Symbole in
+      der Tremolopalette.
+      <br/>
+      Bei einem Zwei-Noten-Tremolo hat jede Note den Wert der gesamten Dauer
+      des Tremolo. Für ein Tremolo mit der Dauer einer halben Note müssen sie
+      zunächst jedoch zwei Viertelnoten eingeben. Nach dem Ziehen des
+      Tremolosymbols auf die erste Note werden die Notenwerte automatisch
+      verdoppelt.
     </page>
 
 </museScoreManual>

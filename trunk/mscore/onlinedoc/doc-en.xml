@@ -1040,5 +1040,21 @@
 
     </page>
 
+<page name="tremolo" header="Tremolo">
+    <index>Tremolo</index>
+
+      Tremolo is the rapid repetition of one note or a rapid alternation
+      between two or more notes. It is indicated by strokes through the stems
+      of the notes. If the tremolo is between two or more notes, the bars
+      are drawn between them.<br/>
+      There are separate Symbols for one note and two note tremoli in the
+      tremolo palette.
+      <br/>
+      In a two note tremolo every note has the value of the whole tremolo
+      duration. To enter a tremolo with the duration of a half note first
+      enter two normal quarter notes. After dragging a tremolo symbol to the
+      first note the note values automatically double to half notes.
+    </page>
+
 </museScoreManual>
 

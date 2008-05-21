@@ -809,10 +809,9 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   {
                   Tremolo* tremolo = static_cast<Tremolo*>(e);
                   if (tremolo->twoNotes()) {
-                        Segment* s = ch->segment();
-                        s = s->next();
+                        Segment* s = ch->segment()->next();
                         while (s) {
-                              if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                              if (s->element(track()) && s->element(track())->type() == CHORD)
                                     break;
                               s = s->next();
                               }
@@ -821,13 +820,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                               delete e;
                               return 0;
                               }
-                        ChordRest* cr1 = static_cast<ChordRest*>(s->element(track()));
-                        if (cr1 == 0 || cr1->type() != CHORD) {
-                              printf("no second note for tremolo found, track %d\n", track());
-                              delete e;
-                              return 0;
-                              }
-                        Chord* ch1 = static_cast<Chord*>(cr1);
+                        Chord* ch1 = static_cast<Chord*>(s->element(track()));
                         tremolo->setChords(ch, ch1);
                         score()->setLayout(ch1->measure());
                         tremolo->setParent(ch1);
