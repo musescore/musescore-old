@@ -46,6 +46,10 @@ function run()
       print("score name: ", score.name);
       print("staves:     ", score.nstaves);
       print("division:   ", division);
+      mb = new QMessageBox();
+      mb.setWindowTitle("MuseScore: Testplugin");
+      mb.text = "Hello MuseScore!";
+      mb.exec();
       }
 
 //---------------------------------------------------------
