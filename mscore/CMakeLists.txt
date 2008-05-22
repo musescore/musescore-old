@@ -129,9 +129,6 @@ else (APPLE OR MINGW)
       endif (NOT ALSA_INCDIR)
 endif (APPLE OR MINGW)
 
-##DEBUG:
-      set (HAS_MIDI 0)
-
 ##
 ## find jack >= 0.98.0
 ##
