@@ -182,10 +182,8 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("Compressed MuseScore Files (*.mscz);;"
-            "MuseScore Files (*.msc);;"
-            "MusicXml Files (*.xml);;"
-            "Compressed MusicXml Files (*.mxl);;"
+         tr("MuseScore Files (*.mscz *.msc);;"
+            "MusicXml Files (*.xml *.mxl);;"
             "Midi Files (*.mid *.kar);;"
             "Muse Data Files (*.md);;"
             "Lilypond Files (*.ly);;"
@@ -235,8 +233,8 @@ bool Score::saveFile(bool autosave)
       if (created()) {
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("./%1.msc").arg(name()),
-               QString("*.msc")
+               QString("./%1.mscz").arg(name()),
+               QString("*.mscz")
                );
             if (fn.isEmpty())
                   return false;

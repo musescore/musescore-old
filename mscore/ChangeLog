@@ -1,4 +1,6 @@
 23.5.8 (ws)
+      - in "open" dialog show both *.msc and *.mscz files
+      - in "save" dialog default to *.mscz file format
       - note stems are now editable
 22.5.8 (ws)
       - adapt ledger line length for grace notes
