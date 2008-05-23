@@ -464,6 +464,7 @@ void Beam::layout1(ScoreLayout* /*layout*/)
             delete *i;
       beamSegments.clear();
 
+#if 0
       //
       // delete stem & hook for all chords
       //
@@ -474,6 +475,7 @@ void Beam::layout1(ScoreLayout* /*layout*/)
                   chord->setHook(0);
                   }
             }
+#endif
 
       //---------------------------------------------------
       //   calculate direction of beam
@@ -518,10 +520,6 @@ void Beam::layout1(ScoreLayout* /*layout*/)
                   maxTickLen = tl;
             }
       _up = upCount >= 0;
-/*      foreach(ChordRest* cr, elements) {
-            cr->setUp(_up);
-            }
-      */
       }
 
 //---------------------------------------------------------
@@ -584,7 +582,6 @@ void Beam::layout(ScoreLayout* layout)
                   maxTickLen = tl;
             }
 #endif
-//      _up = upCount >= 0;
 
       if (move) {
             layoutCrossStaff(layout);
@@ -846,6 +843,7 @@ void Beam::layout(ScoreLayout* layout)
                   stem = new Stem(score());
                   chord->setStem(stem);
                   }
+            chord->setHook(0);
 
             QPointF npos(chord->stemPos(_up, false));
 
@@ -862,10 +860,8 @@ void Beam::layout(ScoreLayout* layout)
             stem->setPos(sp);
 
             Tremolo* tremolo = chord->tremolo();
-            if (tremolo) {
+            if (tremolo)
                   tremolo->layout(layout);
-                  tremolo->layout2(layout);
-                  }
             }
       }
 

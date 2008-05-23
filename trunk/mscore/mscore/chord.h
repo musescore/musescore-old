@@ -47,6 +47,7 @@ class Glissando;
 
 class Stem : public Element {
       Spatium _len;
+      Spatium _userLen;
 
    public:
       Stem(Score*);
@@ -56,8 +57,16 @@ class Stem : public Element {
       virtual ElementType type() const { return STEM; }
       virtual void draw(QPainter& p) const;
       void setLen(const Spatium&);
-      Spatium stemLen() const { return _len; }
+      Spatium stemLen() const { return _len + _userLen; }
       virtual QRectF bbox() const;
+      virtual bool isMovable() const  { return true; }
+      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual void write(Xml& xml) const;
+      virtual void read(QDomElement e);
+      virtual void resetUserOffsets() {  _userLen = Spatium(0.0); }
+      Spatium userLen() const { return _userLen; }
       };
 
 //---------------------------------------------------------
@@ -97,9 +106,6 @@ class LedgerLine : public Line {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Chord* chord() const { return (Chord*)parent(); }
       };
-
-// typedef QList<LedgerLine*>::iterator iLedgerLine;
-// typedef QList<LedgerLine*>::const_iterator ciLedgerLine;
 
 //---------------------------------------------------------
 //   NoteList

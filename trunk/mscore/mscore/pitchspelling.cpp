@@ -458,8 +458,10 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
             int tick = notes[i]->chord()->tick();
             key[k]   = notes[i]->staff()->keymap()->key(tick) + 7;
             if (key[k] < 0 || key[k] > 14) {
-                  printf("illegal key at tick %d: %d\n", tick, key[k] - 7);
-                  abort();
+                  printf("illegal key at tick %d: %d, window %d-%d\n",
+                     tick, key[k] - 7, start, end);
+                  return 0;
+                  // abort();
                   }
             ++k;
             ++i;
