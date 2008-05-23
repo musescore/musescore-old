@@ -1,4 +1,5 @@
 23.5.8 (ws)
+      - play transposition was not applied to all note off events
       - in "open" dialog show both *.msc and *.mscz files
       - in "save" dialog default to *.mscz file format
       - note stems are now editable
