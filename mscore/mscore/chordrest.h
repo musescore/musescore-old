@@ -147,7 +147,6 @@ class ChordRest : public Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       virtual QList<Prop> properties(Xml&) const;
-      bool isSimple(Xml&) const;
 
       Segment* segment() const                  { return (Segment*)parent(); }
       Measure* measure() const                  { return (Measure*)(parent()->parent()); }

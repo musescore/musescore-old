@@ -77,21 +77,13 @@ void Tremolo::layout(ScoreLayout* layout)
             y += d;
             }
       setbbox(path.boundingRect());
-      }
 
-//---------------------------------------------------------
-//   layout2
-//    called after notes have their x position
-//---------------------------------------------------------
-
-void Tremolo::layout2(ScoreLayout*)
-      {
       _chord2 = static_cast<Chord*>(parent());
       if (_chord2 == 0)
             return;
       Note* anchor2 = _chord2->upNote();
       Stem* stem    = _chord2->stem();
-      qreal x, y, h;
+      qreal x;
       if (stem) {
             x = stem->pos().x();
             y  = stem->pos().y();

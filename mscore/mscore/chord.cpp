@@ -63,7 +63,7 @@ void Stem::draw(QPainter& p) const
       pen.setWidthF(lw);
       p.setPen(pen);
 
-      p.drawLine(QLineF(0.0, 0.0, 0.0, point(_len)));
+      p.drawLine(QLineF(0.0, 0.0, 0.0, point(_len + _userLen)));
       }
 
 //---------------------------------------------------------
@@ -76,14 +76,74 @@ void Stem::setLen(const Spatium& l)
       }
 
 //---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Stem::write(Xml& xml) const
+      {
+      xml.stag("Stem");
+      Element::writeProperties(xml);
+      if (_userLen.val() != 0.0)
+            xml.tag("userLen", _userLen.val());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Stem::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "userLen")
+                  _userLen = Spatium(e.text().toDouble());
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
 QRectF Stem::bbox() const
       {
       double w = point(score()->style()->stemWidth) * mag();
-      double l = point(_len);
-      return QRectF(-w * .5, 0, w, l);
+      double l = point(_len + _userLen);
+      return QRectF(-w * .5, 0, w, l).normalized();
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Stem::startEdit(Viewer*, const QPointF&)
+      {
+      return true;
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Stem::updateGrips(int* grips, QRectF* grip) const
+      {
+      *grips   = 1;
+      QPointF p(0.0, point(_len) + point(_userLen));
+      grip[0].translate(canvasPos() + p);
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Stem::editDrag(int, const QPointF& delta)
+      {
+      _userLen += delta.y();
+      Chord* c = static_cast<Chord*>(parent());
+      if (c->hook())
+            c->hook()->move(0.0, delta.y());
       }
 
 //---------------------------------------------------------
@@ -254,6 +314,10 @@ void Chord::add(Element* e)
             }
       else if (e->type() == GLISSANDO)
             _glissando = static_cast<Glissando*>(e);
+      else if (e->type() == STEM)
+            _stem = static_cast<Stem*>(e);
+      else if (e->type() == HOOK)
+            _hook = static_cast<Hook*>(e);
       else
             printf("Chord::add: unknown element\n");
       }
@@ -299,6 +363,10 @@ void Chord::remove(Element* e)
             }
       else if (e->type() == GLISSANDO)
             _glissando = 0;
+      else if (e->type() == STEM)
+            _stem = 0;
+      else if (e->type() == HOOK)
+            _hook = 0;
       else
             printf("Chord::remove: unknown element\n");
       }
@@ -389,11 +457,9 @@ void Chord::layoutStem1(ScoreLayout* layout)
       if (hookIdx) {
             if (!up())
                   hookIdx = -hookIdx;
-            if (!_hook) {
-                  _hook = new Hook(score());
-                  _hook->setParent(this);
-                  _hook->setMag(mag());
-                  }
+            if (!_hook)
+                  setHook(new Hook(score()));
+            _hook->setMag(mag());
             _hook->setSubtype(hookIdx);
             qreal lw     = point(score()->style()->stemWidth) * .5;
             QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
@@ -466,12 +532,11 @@ void Chord::layoutStem(ScoreLayout* layout)
       double headCorrection = 0.2;
 
       stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
-      double pstemLen = point(stemLen);
 
       QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
 
       if (up())
-            npos += QPointF(0, -pstemLen);
+            stemLen *= -1.0;
 
       if (hasStem) {
             _stem->setLen(stemLen);
@@ -494,10 +559,8 @@ void Chord::layoutStem(ScoreLayout* layout)
       //    process tremolo
       //-----------------------------------------
 
-      if (_tremolo) {
+      if (_tremolo)
             _tremolo->layout(layout);
-            _tremolo->layout2(layout);
-            }
 
       //-----------------------------------------
       //  process hook
@@ -507,8 +570,8 @@ void Chord::layoutStem(ScoreLayout* layout)
             if (!up())
                   hookIdx = -hookIdx;
             _hook->setSubtype(hookIdx);
-            qreal lw = point(score()->style()->stemWidth) * .5;
-            QPointF p = npos + QPointF(lw, up() ? -lw : pstemLen);
+            qreal lw  = point(score()->style()->stemWidth) * .5;
+            QPointF p = npos + QPointF(lw, point(_stem->stemLen()));
             _hook->setPos(p);
             }
       else
@@ -518,7 +581,7 @@ void Chord::layoutStem(ScoreLayout* layout)
 //---------------------------------------------------------
 //   addLedgerLine
 ///   Add a ledger line to a chord.
-///   \arg x          horizontal position of line start
+///   \arg x          center of note head
 ///   \arg staffIdx   determines the y origin
 ///   \arg line       vertical position of line
 //---------------------------------------------------------
@@ -528,6 +591,8 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
       double staffMag = score()->staff(staffIdx)->mag();
       LedgerLine* h   = new LedgerLine(score());
       Spatium len     = h->len() * staffMag;
+      if (_noteType != NOTE_NORMAL)
+            len *= score()->style()->graceNoteMag;
       h->setParent(this);
       h->setTrack(staffIdx * VOICES);
 
@@ -544,7 +609,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
                   }
             }
       h->setLen(len);
-      h->setPos(x + ho, _spatium * .5 * line * staffMag);
+      h->setPos(x + ho - len.point() * .5, _spatium * .5 * line * staffMag);
       _ledgerLines.push_back(h);
       }
 
@@ -618,8 +683,8 @@ void Chord::layout(ScoreLayout* layout)
       //    moved to upper staff
       //---------------------------------------------------
 
-      double x1 = upnote->pos().x() + headWidth * .5 - _spatium * staffMag;
-      double x2 = notes.front()->pos().x() + headWidth * .5 - _spatium * staffMag;
+      double x1 = upnote->pos().x() + headWidth * .5; //  - _spatium * staffMag;
+      double x2 = notes.front()->pos().x() + headWidth * .5; // - _spatium * staffMag;
 
       int uppos;
       int downpos;
@@ -834,55 +899,38 @@ Note* Chord::selectedNote() const
 void Chord::write(Xml& xml) const
       {
       ciNote in = notes.begin();
-      Note* note = in->second;
 
-      if (ChordRest::isSimple(xml)
-         && (notes.size() == 1)
-         && note->isSimple(xml)
-         && (_stemDirection == AUTO)
-         && !_arpeggio
-         && !_glissando
-         && !_tremolo
-         && (_noteType == NOTE_NORMAL)
-         ) {
-            if (tick() != xml.curTick)
-                  xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
-                     .arg(tick()).arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
-            else
-                  xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\" ticks=\"%3\"")
-                     .arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
-            }
-      else {
-            xml.stag("Chord");
-            ChordRest::writeProperties(xml);
-            if (_noteType != NOTE_NORMAL) {
-                  switch(_noteType) {
-                        case NOTE_INVALID:
-                        case NOTE_NORMAL:
-                              break;
-                        case NOTE_ACCIACCATURA:
-                              xml.tagE("acciaccatura");
-                              break;
-                        case NOTE_APPOGGIATURA:
-                              xml.tagE("appoggiatura");
-                              break;
-                        }
+      xml.stag("Chord");
+      ChordRest::writeProperties(xml);
+      if (_noteType != NOTE_NORMAL) {
+            switch(_noteType) {
+                  case NOTE_INVALID:
+                  case NOTE_NORMAL:
+                        break;
+                  case NOTE_ACCIACCATURA:
+                        xml.tagE("acciaccatura");
+                        break;
+                  case NOTE_APPOGGIATURA:
+                        xml.tagE("appoggiatura");
+                        break;
                   }
-            switch(_stemDirection) {
-                  case UP:   xml.tag("StemDirection", QVariant("up")); break;
-                  case DOWN: xml.tag("StemDirection", QVariant("down")); break;
-                  case AUTO: break;
-                  }
-            for (; in != notes.end(); ++in)
-                  in->second->write(xml);
-            if (_arpeggio)
-                  _arpeggio->write(xml);
-            if (_glissando)
-                  _glissando->write(xml);
-            if (_tremolo)
-                  _tremolo->write(xml);
-            xml.etag();
             }
+      if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().point() != 0.0)))
+            _stem->write(xml);
+      switch(_stemDirection) {
+            case UP:   xml.tag("StemDirection", QVariant("up")); break;
+            case DOWN: xml.tag("StemDirection", QVariant("down")); break;
+            case AUTO: break;
+            }
+      for (; in != notes.end(); ++in)
+            in->second->write(xml);
+      if (_arpeggio)
+            _arpeggio->write(xml);
+      if (_glissando)
+            _glissando->write(xml);
+      if (_tremolo)
+            _tremolo->write(xml);
+      xml.etag();
       xml.curTick = tick() + tickLen();
       }
 
@@ -1004,6 +1052,11 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   }
             else if (tag == "tickOffset")       // obsolete
                   ;
+            else if (tag == "Stem") {
+                  _stem = new Stem(score());
+                  _stem->read(e);
+                  add(_stem);
+                  }
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }
@@ -1223,4 +1276,3 @@ QPointF LedgerLine::canvasPos() const
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
-

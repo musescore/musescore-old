@@ -44,7 +44,6 @@ class Tremolo : public Element {
       virtual ElementType type() const { return TREMOLO; }
       virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
-      virtual void layout2(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
