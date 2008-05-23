@@ -1,807 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
-  <Mag>1</Mag>
-  <xoff>3.81</xoff>
-  <yoff>3.81</yoff>
-  <Symbols>
-    <rows>11</rows>
-    <columns>16</columns>
-    <idx>0</idx>
-    <name>whole rest</name>
-    <Symbol>
-      <name>whole rest</name>
-      </Symbol>
-    <idx>1</idx>
-    <name>half rest</name>
-    <Symbol>
-      <name>half rest</name>
-      </Symbol>
-    <idx>2</idx>
-    <name>outside whole rest</name>
-    <Symbol>
-      <name>outside whole rest</name>
-      </Symbol>
-    <idx>3</idx>
-    <name>outside half rest</name>
-    <Symbol>
-      <name>outside half rest</name>
-      </Symbol>
-    <idx>4</idx>
-    <name>longa rest</name>
-    <Symbol>
-      <name>longa rest</name>
-      </Symbol>
-    <idx>5</idx>
-    <name>breve rest</name>
-    <Symbol>
-      <name>breve rest</name>
-      </Symbol>
-    <idx>6</idx>
-    <name>quart rest</name>
-    <Symbol>
-      <name>quart rest</name>
-      </Symbol>
-    <idx>7</idx>
-    <name>eight rest</name>
-    <Symbol>
-      <name>eight rest</name>
-      </Symbol>
-    <idx>8</idx>
-    <name>clas quart rest</name>
-    <Symbol>
-      <name>clas quart rest</name>
-      </Symbol>
-    <idx>9</idx>
-    <name>16&apos; rest</name>
-    <Symbol>
-      <name>16&apos; rest</name>
-      </Symbol>
-    <idx>10</idx>
-    <name>32&apos;  rest</name>
-    <Symbol>
-      <name>32&apos;  rest</name>
-      </Symbol>
-    <idx>11</idx>
-    <name>64&apos; rest</name>
-    <Symbol>
-      <name>64&apos; rest</name>
-      </Symbol>
-    <idx>12</idx>
-    <name>128&apos; rest</name>
-    <Symbol>
-      <name>128&apos; rest</name>
-      </Symbol>
-    <idx>16</idx>
-    <name>zero</name>
-    <Symbol>
-      <name>zero</name>
-      </Symbol>
-    <idx>17</idx>
-    <name>one</name>
-    <Symbol>
-      <name>one</name>
-      </Symbol>
-    <idx>18</idx>
-    <name>two</name>
-    <Symbol>
-      <name>two</name>
-      </Symbol>
-    <idx>19</idx>
-    <name>three</name>
-    <Symbol>
-      <name>three</name>
-      </Symbol>
-    <idx>20</idx>
-    <name>four</name>
-    <Symbol>
-      <name>four</name>
-      </Symbol>
-    <idx>21</idx>
-    <name>five</name>
-    <Symbol>
-      <name>five</name>
-      </Symbol>
-    <idx>22</idx>
-    <name>six</name>
-    <Symbol>
-      <name>six</name>
-      </Symbol>
-    <idx>23</idx>
-    <name>seven</name>
-    <Symbol>
-      <name>seven</name>
-      </Symbol>
-    <idx>24</idx>
-    <name>eight</name>
-    <Symbol>
-      <name>eight</name>
-      </Symbol>
-    <idx>25</idx>
-    <name>nine</name>
-    <Symbol>
-      <name>nine</name>
-      </Symbol>
-    <idx>31</idx>
-    <name>sharp</name>
-    <Symbol>
-      <name>sharp</name>
-      </Symbol>
-    <idx>32</idx>
-    <name>natural</name>
-    <Symbol>
-      <name>natural</name>
-      </Symbol>
-    <idx>33</idx>
-    <name>flat</name>
-    <Symbol>
-      <name>flat</name>
-      </Symbol>
-    <idx>34</idx>
-    <name>flat flat</name>
-    <Symbol>
-      <name>flat flat</name>
-      </Symbol>
-    <idx>35</idx>
-    <name>sharp sharp</name>
-    <Symbol>
-      <name>sharp sharp</name>
-      </Symbol>
-    <idx>36</idx>
-    <name>right parenthesis</name>
-    <Symbol>
-      <name>right parenthesis</name>
-      </Symbol>
-    <idx>37</idx>
-    <name>left parenthesis</name>
-    <Symbol>
-      <name>left parenthesis</name>
-      </Symbol>
-    <idx>38</idx>
-    <name>dot</name>
-    <Symbol>
-      <name>dot</name>
-      </Symbol>
-    <idx>39</idx>
-    <name>brevis head</name>
-    <Symbol>
-      <name>brevis head</name>
-      </Symbol>
-    <idx>40</idx>
-    <name>whole head</name>
-    <Symbol>
-      <name>whole head</name>
-      </Symbol>
-    <idx>41</idx>
-    <name>half head</name>
-    <Symbol>
-      <name>half head</name>
-      </Symbol>
-    <idx>42</idx>
-    <name>quart head</name>
-    <Symbol>
-      <name>quart head</name>
-      </Symbol>
-    <idx>43</idx>
-    <name>whole diamond head</name>
-    <Symbol>
-      <name>whole diamond head</name>
-      </Symbol>
-    <idx>44</idx>
-    <name>half diamond head</name>
-    <Symbol>
-      <name>half diamond head</name>
-      </Symbol>
-    <idx>45</idx>
-    <name>diamond head</name>
-    <Symbol>
-      <name>diamond head</name>
-      </Symbol>
-    <idx>46</idx>
-    <name>whole triangle head</name>
-    <Symbol>
-      <name>whole triangle head</name>
-      </Symbol>
-    <idx>47</idx>
-    <name>half triangle head</name>
-    <Symbol>
-      <name>half triangle head</name>
-      </Symbol>
-    <idx>48</idx>
-    <name>triangle head</name>
-    <Symbol>
-      <name>triangle head</name>
-      </Symbol>
-    <idx>49</idx>
-    <name>whole slash head</name>
-    <Symbol>
-      <name>whole slash head</name>
-      </Symbol>
-    <idx>50</idx>
-    <name>half slash head</name>
-    <Symbol>
-      <name>half slash head</name>
-      </Symbol>
-    <idx>51</idx>
-    <name>quart slash head</name>
-    <Symbol>
-      <name>quart slash head</name>
-      </Symbol>
-    <idx>52</idx>
-    <name>whole cross head</name>
-    <Symbol>
-      <name>whole cross head</name>
-      </Symbol>
-    <idx>53</idx>
-    <name>half cross head</name>
-    <Symbol>
-      <name>half cross head</name>
-      </Symbol>
-    <idx>54</idx>
-    <name>cross head</name>
-    <Symbol>
-      <name>cross head</name>
-      </Symbol>
-    <idx>55</idx>
-    <name>x circle head</name>
-    <Symbol>
-      <name>x circle head</name>
-      </Symbol>
-    <idx>57</idx>
-    <name>ufermata</name>
-    <Symbol>
-      <name>ufermata</name>
-      </Symbol>
-    <idx>58</idx>
-    <name>dfermata</name>
-    <Symbol>
-      <name>dfermata</name>
-      </Symbol>
-    <idx>59</idx>
-    <name>thumb</name>
-    <Symbol>
-      <name>thumb</name>
-      </Symbol>
-    <idx>60</idx>
-    <name>sforza to accent</name>
-    <Symbol>
-      <name>sforza to accent</name>
-      </Symbol>
-    <idx>61</idx>
-    <name>staccato</name>
-    <Symbol>
-      <name>staccato</name>
-      </Symbol>
-    <idx>62</idx>
-    <name>ustaccatissimo</name>
-    <Symbol>
-      <name>ustaccatissimo</name>
-      </Symbol>
-    <idx>63</idx>
-    <name>dstacattissimo</name>
-    <Symbol>
-      <name>dstacattissimo</name>
-      </Symbol>
-    <idx>64</idx>
-    <name>tenuto</name>
-    <Symbol>
-      <name>tenuto</name>
-      </Symbol>
-    <idx>65</idx>
-    <name>uportato</name>
-    <Symbol>
-      <name>uportato</name>
-      </Symbol>
-    <idx>66</idx>
-    <name>dportato</name>
-    <Symbol>
-      <name>dportato</name>
-      </Symbol>
-    <idx>67</idx>
-    <name>umarcato</name>
-    <Symbol>
-      <name>umarcato</name>
-      </Symbol>
-    <idx>68</idx>
-    <name>dmarcato</name>
-    <Symbol>
-      <name>dmarcato</name>
-      </Symbol>
-    <idx>69</idx>
-    <name>ouvert</name>
-    <Symbol>
-      <name>ouvert</name>
-      </Symbol>
-    <idx>70</idx>
-    <name>plus stop</name>
-    <Symbol>
-      <name>plus stop</name>
-      </Symbol>
-    <idx>71</idx>
-    <name>up bow</name>
-    <Symbol>
-      <name>up bow</name>
-      </Symbol>
-    <idx>72</idx>
-    <name>down bow</name>
-    <Symbol>
-      <name>down bow</name>
-      </Symbol>
-    <idx>73</idx>
-    <name>reverse turn</name>
-    <Symbol>
-      <name>reverse turn</name>
-      </Symbol>
-    <idx>74</idx>
-    <name>turn</name>
-    <Symbol>
-      <name>turn</name>
-      </Symbol>
-    <idx>75</idx>
-    <name>trill</name>
-    <Symbol>
-      <name>trill</name>
-      </Symbol>
-    <idx>76</idx>
-    <name>upedal heel</name>
-    <Symbol>
-      <name>upedal heel</name>
-      </Symbol>
-    <idx>77</idx>
-    <name>dpedalheel</name>
-    <Symbol>
-      <name>dpedalheel</name>
-      </Symbol>
-    <idx>78</idx>
-    <name>upedal toe</name>
-    <Symbol>
-      <name>upedal toe</name>
-      </Symbol>
-    <idx>79</idx>
-    <name>dpedal toe</name>
-    <Symbol>
-      <name>dpedal toe</name>
-      </Symbol>
-    <idx>80</idx>
-    <name>flageolet</name>
-    <Symbol>
-      <name>flageolet</name>
-      </Symbol>
-    <idx>81</idx>
-    <name>segno</name>
-    <Symbol>
-      <name>segno</name>
-      </Symbol>
-    <idx>82</idx>
-    <name>coda</name>
-    <Symbol>
-      <name>coda</name>
-      </Symbol>
-    <idx>83</idx>
-    <name>rcomma</name>
-    <Symbol>
-      <name>rcomma</name>
-      </Symbol>
-    <idx>84</idx>
-    <name>lcomma</name>
-    <Symbol>
-      <name>lcomma</name>
-      </Symbol>
-    <idx>85</idx>
-    <name>arpeggio</name>
-    <Symbol>
-      <name>arpeggio</name>
-      </Symbol>
-    <idx>86</idx>
-    <name>trillelement</name>
-    <Symbol>
-      <name>trillelement</name>
-      </Symbol>
-    <idx>87</idx>
-    <name>arpeggio arrow down</name>
-    <Symbol>
-      <name>arpeggio arrow down</name>
-      </Symbol>
-    <idx>88</idx>
-    <name>arpeggio arrow up</name>
-    <Symbol>
-      <name>arpeggio arrow up</name>
-      </Symbol>
-    <idx>89</idx>
-    <name>trill element</name>
-    <Symbol>
-      <name>trill element</name>
-      </Symbol>
-    <idx>90</idx>
-    <name>prall</name>
-    <Symbol>
-      <name>prall</name>
-      </Symbol>
-    <idx>91</idx>
-    <name>mordent</name>
-    <Symbol>
-      <name>mordent</name>
-      </Symbol>
-    <idx>92</idx>
-    <name>prall prall</name>
-    <Symbol>
-      <name>prall prall</name>
-      </Symbol>
-    <idx>93</idx>
-    <name>prall mordent</name>
-    <Symbol>
-      <name>prall mordent</name>
-      </Symbol>
-    <idx>94</idx>
-    <name>up prall</name>
-    <Symbol>
-      <name>up prall</name>
-      </Symbol>
-    <idx>95</idx>
-    <name>down prall</name>
-    <Symbol>
-      <name>down prall</name>
-      </Symbol>
-    <idx>96</idx>
-    <name>up mordent</name>
-    <Symbol>
-      <name>up mordent</name>
-      </Symbol>
-    <idx>97</idx>
-    <name>down mordent</name>
-    <Symbol>
-      <name>down mordent</name>
-      </Symbol>
-    <idx>98</idx>
-    <name>line prall</name>
-    <Symbol>
-      <name>line prall</name>
-      </Symbol>
-    <idx>99</idx>
-    <name>prall down</name>
-    <Symbol>
-      <name>prall down</name>
-      </Symbol>
-    <idx>100</idx>
-    <Symbol>
-      <name>turn</name>
-      </Symbol>
-    <idx>101</idx>
-    <name>prall up</name>
-    <Symbol>
-      <name>prall up</name>
-      </Symbol>
-    <idx>102</idx>
-    <name>eight flag</name>
-    <Symbol>
-      <name>eight flag</name>
-      </Symbol>
-    <idx>103</idx>
-    <name>sixteenth flag</name>
-    <Symbol>
-      <name>sixteenth flag</name>
-      </Symbol>
-    <idx>104</idx>
-    <name>thirtysecond flag</name>
-    <Symbol>
-      <name>thirtysecond flag</name>
-      </Symbol>
-    <idx>105</idx>
-    <name>sixtyfour flag</name>
-    <Symbol>
-      <name>sixtyfour flag</name>
-      </Symbol>
-    <idx>106</idx>
-    <name>deight flag</name>
-    <Symbol>
-      <name>deight flag</name>
-      </Symbol>
-    <idx>107</idx>
-    <name>grace dash</name>
-    <Symbol>
-      <name>grace dash</name>
-      </Symbol>
-    <idx>108</idx>
-    <name>dgrace dash</name>
-    <Symbol>
-      <name>dgrace dash</name>
-      </Symbol>
-    <idx>109</idx>
-    <name>dsixteenth flag</name>
-    <Symbol>
-      <name>dsixteenth flag</name>
-      </Symbol>
-    <idx>110</idx>
-    <name>dthirtysecond flag</name>
-    <Symbol>
-      <name>dthirtysecond flag</name>
-      </Symbol>
-    <idx>111</idx>
-    <name>dsixtyfourth flag</name>
-    <Symbol>
-      <name>dsixtyfourth flag</name>
-      </Symbol>
-    <idx>112</idx>
-    <name>stem</name>
-    <Symbol>
-      <name>stem</name>
-      </Symbol>
-    <idx>113</idx>
-    <name>dstem</name>
-    <Symbol>
-      <name>dstem</name>
-      </Symbol>
-    <idx>114</idx>
-    <name>alto clef</name>
-    <Symbol>
-      <name>alto clef</name>
-      </Symbol>
-    <idx>115</idx>
-    <name>calto clef</name>
-    <Symbol>
-      <name>calto clef</name>
-      </Symbol>
-    <idx>116</idx>
-    <name>bass clef</name>
-    <Symbol>
-      <name>bass clef</name>
-      </Symbol>
-    <idx>117</idx>
-    <name>cbass clef</name>
-    <Symbol>
-      <name>cbass clef</name>
-      </Symbol>
-    <idx>118</idx>
-    <name>trebleclef</name>
-    <Symbol>
-      <name>trebleclef</name>
-      </Symbol>
-    <idx>119</idx>
-    <name>ctrebleclef</name>
-    <Symbol>
-      <name>ctrebleclef</name>
-      </Symbol>
-    <idx>120</idx>
-    <name>percussion clef</name>
-    <Symbol>
-      <name>percussion clef</name>
-      </Symbol>
-    <idx>121</idx>
-    <name>cpercussion clef</name>
-    <Symbol>
-      <name>cpercussion clef</name>
-      </Symbol>
-    <idx>122</idx>
-    <name>tab clef</name>
-    <Symbol>
-      <name>tab clef</name>
-      </Symbol>
-    <idx>123</idx>
-    <name>ctab clef</name>
-    <Symbol>
-      <name>ctab clef</name>
-      </Symbol>
-    <idx>124</idx>
-    <name>four four meter</name>
-    <Symbol>
-      <name>four four meter</name>
-      </Symbol>
-    <idx>125</idx>
-    <name>allabreve</name>
-    <Symbol>
-      <name>allabreve</name>
-      </Symbol>
-    <idx>126</idx>
-    <name>pedalasterisk</name>
-    <Symbol>
-      <name>pedalasterisk</name>
-      </Symbol>
-    <idx>127</idx>
-    <name>pedaldash</name>
-    <Symbol>
-      <name>pedaldash</name>
-      </Symbol>
-    <idx>128</idx>
-    <name>pedaldot</name>
-    <Symbol>
-      <name>pedaldot</name>
-      </Symbol>
-    <idx>129</idx>
-    <name>pedalP</name>
-    <Symbol>
-      <name>pedalP</name>
-      </Symbol>
-    <idx>130</idx>
-    <name>pedald</name>
-    <Symbol>
-      <name>pedald</name>
-      </Symbol>
-    <idx>131</idx>
-    <name>pedale</name>
-    <Symbol>
-      <name>pedale</name>
-      </Symbol>
-    <idx>132</idx>
-    <name>pedal ped</name>
-    <Symbol>
-      <name>pedal ped</name>
-      </Symbol>
-    <idx>133</idx>
-    <name>acc discant</name>
-    <Symbol>
-      <name>acc discant</name>
-      </Symbol>
-    <idx>134</idx>
-    <name>acc dot</name>
-    <Symbol>
-      <name>acc dot</name>
-      </Symbol>
-    <idx>135</idx>
-    <name>acc freebase</name>
-    <Symbol>
-      <name>acc freebase</name>
-      </Symbol>
-    <idx>136</idx>
-    <name>acc stdbase</name>
-    <Symbol>
-      <name>acc stdbase</name>
-      </Symbol>
-    <idx>137</idx>
-    <name>acc bayanbase</name>
-    <Symbol>
-      <name>acc bayanbase</name>
-      </Symbol>
-    <idx>138</idx>
-    <name>acc sb</name>
-    <Symbol>
-      <name>acc sb</name>
-      </Symbol>
-    <idx>139</idx>
-    <name>acc bb</name>
-    <Symbol>
-      <name>acc bb</name>
-      </Symbol>
-    <idx>140</idx>
-    <name>acc old ee</name>
-    <Symbol>
-      <name>acc old ee</name>
-      </Symbol>
-    <idx>141</idx>
-    <name>acc old ees</name>
-    <Symbol>
-      <name>acc old ees</name>
-      </Symbol>
-    <idx>142</idx>
-    <name>whole do head</name>
-    <Symbol>
-      <name>whole do head</name>
-      </Symbol>
-    <idx>143</idx>
-    <name>half do head</name>
-    <Symbol>
-      <name>half do head</name>
-      </Symbol>
-    <idx>144</idx>
-    <name>do head</name>
-    <Symbol>
-      <name>do head</name>
-      </Symbol>
-    <idx>145</idx>
-    <name>whole re head</name>
-    <Symbol>
-      <name>whole re head</name>
-      </Symbol>
-    <idx>146</idx>
-    <name>half re head</name>
-    <Symbol>
-      <name>half re head</name>
-      </Symbol>
-    <idx>147</idx>
-    <name>re head</name>
-    <Symbol>
-      <name>re head</name>
-      </Symbol>
-    <idx>148</idx>
-    <name>whole me head</name>
-    <Symbol>
-      <name>whole me head</name>
-      </Symbol>
-    <idx>149</idx>
-    <name>half me head</name>
-    <Symbol>
-      <name>half me head</name>
-      </Symbol>
-    <idx>150</idx>
-    <name>me head</name>
-    <Symbol>
-      <name>me head</name>
-      </Symbol>
-    <idx>151</idx>
-    <name>whole fa head</name>
-    <Symbol>
-      <name>whole fa head</name>
-      </Symbol>
-    <idx>152</idx>
-    <name>fau head</name>
-    <Symbol>
-      <name>fau head</name>
-      </Symbol>
-    <idx>153</idx>
-    <name>half fad head</name>
-    <Symbol>
-      <name>half fad head</name>
-      </Symbol>
-    <idx>154</idx>
-    <name>fad head</name>
-    <Symbol>
-      <name>fad head</name>
-      </Symbol>
-    <idx>155</idx>
-    <name>whole la head</name>
-    <Symbol>
-      <name>whole la head</name>
-      </Symbol>
-    <idx>156</idx>
-    <name>half la head</name>
-    <Symbol>
-      <name>half la head</name>
-      </Symbol>
-    <idx>157</idx>
-    <name>la head</name>
-    <Symbol>
-      <name>la head</name>
-      </Symbol>
-    <idx>158</idx>
-    <name>whole te head</name>
-    <Symbol>
-      <name>whole te head</name>
-      </Symbol>
-    <idx>159</idx>
-    <name>half te head</name>
-    <Symbol>
-      <name>half te head</name>
-      </Symbol>
-    <idx>160</idx>
-    <name>f</name>
-    <Symbol>
-      <name>f</name>
-      </Symbol>
-    <idx>161</idx>
-    <name>m</name>
-    <Symbol>
-      <name>m</name>
-      </Symbol>
-    <idx>162</idx>
-    <name>p</name>
-    <Symbol>
-      <name>p</name>
-      </Symbol>
-    <idx>163</idx>
-    <name>r</name>
-    <Symbol>
-      <name>r</name>
-      </Symbol>
-    <idx>164</idx>
-    <name>s</name>
-    <Symbol>
-      <name>s</name>
-      </Symbol>
-    <idx>165</idx>
-    <name>z</name>
-    <Symbol>
-      <name>z</name>
-      </Symbol>
-    </Symbols>
+<museScore version="1.9">
+  <Mag>1.17897</Mag>
+  <xoff>-889.846</xoff>
+  <yoff>-7.61997</yoff>
   <Spatium>1.62</Spatium>
   <Division>480</Division>
   <Style>
-    <staffUpperBorder>7</staffUpperBorder>
+    <staffUpperBorder>5</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
-    <systemFrameDistance>7</systemFrameDistance>
+    <systemFrameDistance>6</systemFrameDistance>
     <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
@@ -817,7 +29,7 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.5</minNoteDistance>
-    <measureSpacing>1.3</measureSpacing>
+    <measureSpacing>1</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
@@ -864,17 +76,23 @@
   <showInvisible>0</showInvisible>
   <page-layout>
     <pageFormat>A4</pageFormat>
-    <page-margins type="both">
-      <left-margin>61.7284</left-margin>
-      <right-margin>61.7284</right-margin>
-      <top-margin>61.7284</top-margin>
-      <bottom-margin>123.457</bottom-margin>
+    <page-margins type="even">
+      <left-margin>61.7386</left-margin>
+      <right-margin>61.7386</right-margin>
+      <top-margin>61.7386</top-margin>
+      <bottom-margin>66.7843</bottom-margin>
+      </page-margins>
+    <page-margins type="odd">
+      <left-margin>61.7386</left-margin>
+      <right-margin>61.7386</right-margin>
+      <top-margin>61.7386</top-margin>
+      <bottom-margin>66.7843</bottom-margin>
       </page-margins>
     </page-layout>
   <rights>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;">Copyright 2004 W.Schweer</p></body></html>
     </rights>
   <siglist>
@@ -882,9 +100,14 @@ p, li { white-space: pre-wrap; }
       <nom>4</nom>
       <denom>4</denom>
       </sig>
+    <sig tick="140160">
+      <nom>3</nom>
+      <denom>4</denom>
+      </sig>
     </siglist>
   <tempolist fix="2">
     <tempo tick="0">1.33333</tempo>
+    <tempo tick="140160">1.33333</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -893,6 +116,7 @@ p, li { white-space: pre-wrap; }
         </cleflist>
       <keylist>
         <key tick="0" idx="0"/>
+        <key tick="140160" idx="1"/>
         </keylist>
       <bracket type="1" span="2"/>
       <barLineSpan>2</barLineSpan>
@@ -918,6 +142,7 @@ p, li { white-space: pre-wrap; }
         </cleflist>
       <keylist>
         <key tick="0" idx="0"/>
+        <key tick="140160" idx="1"/>
         </keylist>
       <barLineSpan>0</barLineSpan>
       </Staff>
@@ -1008,9 +233,166 @@ p, li { white-space: pre-wrap; }
     <tick>132480</tick>
     <tick2>134160</tick2>
     </Trill>
+  <Slur id="16">
+    <track>0</track>
+    <tick>0</tick>
+    <SlurSegment no="0">
+      <o1 x="-0.391975" y="-0.0653292"/>
+      <o3 x="0.130658" y="0.195988"/>
+      <o4 x="-0.979938" y="-3.00514"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="17">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="-0.195988" y="-0.261317"/>
+      <o4 x="-0.84928" y="-3.33179"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="18">
+    <track>0</track>
+    </Slur>
+  <Slur id="19">
+    <track>0</track>
+    </Slur>
+  <Slur id="20">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="-0.261317" y="-0.261317"/>
+      <o2 x="0.0653292" y="-0.0653292"/>
+      <o3 x="0" y="-0.195988"/>
+      <o4 x="-0.979938" y="-3.10314"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="21">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="-0.42464" y="-0.261317"/>
+      <o4 x="-0.881944" y="-3.59311"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="22">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="-0.42464" y="-0.261317"/>
+      <o4 x="-0.947274" y="-3.59311"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="23">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="-0.326646" y="-0.261317"/>
+      <o4 x="-0.84928" y="-3.72377"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="24">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="0.261317" y="-3.20113"/>
+      <o4 x="-1.04527" y="-3.07047"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur id="25">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="1.04527" y="3.20113"/>
+      <o4 x="0.0653292" y="2.54784"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="26">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="0.979938" y="2.93981"/>
+      <o4 x="-0.0653292" y="3.07047"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="27">
+    <track>0</track>
+    </Slur>
+  <Slur id="28">
+    <track>0</track>
+    </Slur>
+  <Slur id="29">
+    <track>0</track>
+    </Slur>
+  <Slur id="30">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o3 x="1.71919" y="-1.10028"/>
+      <o4 x="0.0687676" y="-1.03151"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="31">
+    <track>0</track>
+    </Slur>
+  <Slur id="32">
+    <track>0</track>
+    </Slur>
+  <Slur id="33">
+    <track>0</track>
+    </Slur>
+  <Slur id="34">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o2 x="-0.137535" y="-0.481373"/>
+      <o3 x="0.206303" y="-0.756444"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="35">
+    <track>0</track>
+    </Slur>
+  <Slur id="36">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o2 x="-2.7507" y="-1.65042"/>
+      <o3 x="0.550141" y="-0.412606"/>
+      <o4 x="-0.0687676" y="-1.16905"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="37">
+    <track>0</track>
+    </Slur>
+  <Slur id="38">
+    <track>0</track>
+    </Slur>
+  <Slur id="39">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o2 x="0.137535" y="-1.51289"/>
+      <o3 x="0.962746" y="-0.756444"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="40">
+    <track>0</track>
+    </Slur>
+  <Slur id="41">
+    <track>0</track>
+    </Slur>
+  <Slur id="42">
+    <track>0</track>
+    </Slur>
+  <Slur id="43">
+    <track>0</track>
+    <up>1</up>
+    </Slur>
+  <Slur id="44">
+    <track>0</track>
+    </Slur>
+  <Slur id="45">
+    <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="0.75829" y="3.51377"/>
+      <o4 x="-0.0653292" y="2.93981"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
   <Staff id="1">
     <VBox>
-      <height>12.8</height>
+      <height>6.26708</height>
       <Text>
         <subtype>Title</subtype>
         <offset x="-0.13" y="-0.92"/>
@@ -1093,6 +475,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="84" tpc="14" ticks="480"/>
       </Measure>
     <Measure number="4">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="79" tpc="15" ticks="480"/>
       <Chord>
         <ticklen>240</ticklen>
@@ -1249,6 +635,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="13">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -1463,37 +853,37 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="120"/>
       </Measure>
     <Measure number="22">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="69" tpc="17" ticks="960"/>
       <Chord>
         <tick>41279</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="16"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>71</pitch>
-          <tpc>19</tpc>
-          </Note>
+        <Note pitch="71" tpc="19"/>
         </Chord>
       <Chord>
         <tick>41280</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="16"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <tick>41759</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="17"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>75</pitch>
-          <tpc>23</tpc>
-          </Note>
+        <Note pitch="75" tpc="23"/>
         </Chord>
       <Chord>
         <tick>41760</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="17"/>
         <Note pitch="76" tpc="18"/>
         </Chord>
       </Measure>
@@ -1594,6 +984,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="29">
+      <startRepeat/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="79" tpc="15" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
@@ -1639,7 +1030,14 @@ p, li { white-space: pre-wrap; }
       <Note pitch="82" tpc="12" ticks="120"/>
       <Note pitch="81" tpc="17" ticks="120"/>
       <Note pitch="79" tpc="15" ticks="120"/>
-      <Note pitch="77" tpc="13" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        </Chord>
       <Note pitch="76" tpc="18" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
       </Measure>
@@ -1858,6 +1256,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="44">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="86" tpc="16" ticks="960"/>
       <Note pitch="84" tpc="14" ticks="480"/>
       <Note pitch="89" tpc="13" ticks="480"/>
@@ -1986,7 +1388,11 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="71" tpc="19"/>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
         <Note pitch="77" tpc="13"/>
         </Chord>
       </Measure>
@@ -2045,6 +1451,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="120"/>
       </Measure>
     <Measure number="56">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
@@ -2073,13 +1483,39 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="59">
-      <Note pitch="79" tpc="15" ticks="240"/>
-      <Note pitch="76" tpc="18" ticks="240"/>
-      <Note pitch="72" tpc="14" ticks="720"/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="18"/>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="18"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>720</ticklen>
+        <Slur type="start" number="19"/>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       <Note pitch="74" tpc="16" ticks="120"/>
       <Note pitch="76" tpc="18" ticks="120"/>
-      <Note pitch="74" tpc="16" ticks="240"/>
-      <Note pitch="72" tpc="14" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="19"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       </Measure>
     <Measure number="60">
       <Chord>
@@ -2251,68 +1687,64 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>127679</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="20"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>73</pitch>
-          <tpc>21</tpc>
-          </Note>
+        <Note pitch="73" tpc="21"/>
         </Chord>
       <Chord>
         <tick>127680</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="20"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <tick>128159</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="21"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>73</pitch>
-          <tpc>21</tpc>
-          </Note>
+        <Note pitch="73" tpc="21"/>
         </Chord>
       <Chord>
         <tick>128160</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="21"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
       </Measure>
     <Measure number="68">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="81" tpc="17" ticks="960"/>
       <Chord>
         <tick>129599</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="22"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>80</pitch>
-          <tpc>22</tpc>
-          </Note>
+        <Note pitch="80" tpc="22"/>
         </Chord>
       <Chord>
         <tick>129600</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="22"/>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Chord>
         <tick>130079</tick>
         <ticklen>240</ticklen>
+        <Slur type="start" number="23"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note>
-          <ticklen>240</ticklen>
-          <pitch>80</pitch>
-          <tpc>22</tpc>
-          </Note>
+        <Note pitch="80" tpc="22"/>
         </Chord>
       <Chord>
         <tick>130080</tick>
         <ticklen>480</ticklen>
+        <Slur type="stop" number="23"/>
         <Note pitch="81" tpc="17"/>
         </Chord>
       </Measure>
@@ -2334,6 +1766,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="120"/>
       </Measure>
     <Measure number="70">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="74" tpc="16" ticks="1920"/>
       </Measure>
     <Measure number="71">
@@ -2368,6 +1804,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="73">
       <endRepeat>2</endRepeat>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Note pitch="60" tpc="14" ticks="480"/>
       <Chord>
         <ticklen>480</ticklen>
@@ -2376,6 +1816,960 @@ p, li { white-space: pre-wrap; }
         <Note pitch="84" tpc="14"/>
         </Chord>
       <Note pitch="72" tpc="14" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="74">
+      <startRepeat/>
+      <Tempo>
+        <tempo>1.33333</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-0.261317" y="0.326646"/>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Andante</p></body></html>
+          </html-data>
+        </Tempo>
+      <Dynamic>
+        <subtype>p</subtype>
+        <offset x="0.474015" y="-1.3632"/>
+        </Dynamic>
+      <KeySig>
+        <subtype>1</subtype>
+        </KeySig>
+      <TimeSig>
+        <subtype>196</subtype>
+        <den>4</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Slur type="start" number="27"/>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.825211" y="-2.95701"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="74" tpc="16" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Note pitch="71" tpc="19" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="27"/>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="75">
+      <Chord>
+        <ticklen>360</ticklen>
+        <Slur type="start" number="28"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.550141" y="-2.1318"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="28"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="76">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Slur type="start" number="29"/>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.618908" y="-1.99426"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="-2.20056"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="79" tpc="15" ticks="120"/>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="76" tpc="18" ticks="120"/>
+      <Note pitch="74" tpc="16" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="29"/>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>21</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.825211" y="-2.47563"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="77">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        <tick>-1438</tick>
+        </LayoutBreak>
+      <Chord>
+        <tick>144480</tick>
+        <ticklen>360</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Note pitch="71" tpc="19" ticks="120"/>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="78">
+      <Chord>
+        <ticklen>360</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.756444" y="-2.7507"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="69" tpc="17" ticks="120"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>begin</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>begin</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.756444" y="-3.23208"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="79">
+      <Chord>
+        <ticklen>360</ticklen>
+        <Slur type="start" number="33"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="33"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="79" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="80">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="30"/>
+        <Note>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.687676" y="-2.20056"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="79" tpc="15" ticks="120"/>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="79" tpc="15" ticks="120"/>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="76" tpc="18" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>23</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.550141" y="-1.99426"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="120"/>
+      <Note pitch="74" tpc="16" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="-2.81947"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="30"/>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="81">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        <tick>-3358</tick>
+        </LayoutBreak>
+      <Chord>
+        <tick>150240</tick>
+        <ticklen>360</ticklen>
+        <Slur type="start" number="31"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="72" tpc="14" ticks="60"/>
+      <Note pitch="71" tpc="19" ticks="60"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="31"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="start" number="32"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="-2.3381"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="73" tpc="21" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Slur type="stop" number="32"/>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.550141" y="-2.7507"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="82">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.756444" y="-2.88824"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="34"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="120"/>
+      <Note pitch="71" tpc="19" ticks="120"/>
+      <Note pitch="74" tpc="16" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.825211" y="-2.3381"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="69" tpc="17" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="34"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="83">
+      <Chord>
+        <ticklen>360</ticklen>
+        <Slur type="start" number="35"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.687676" y="-2.5444"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="35"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.893979" y="-5.22634"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="1.03151" y="-5.57018"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.687676" y="-2.88824"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="78" tpc="20"/>
+        </Chord>
+      </Measure>
+    <Measure number="84">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="36"/>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>20</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.756444" y="-1.37535"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.756444" y="-1.37535"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="81" tpc="17" ticks="120"/>
+      <Note pitch="79" tpc="15" ticks="120"/>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="79" tpc="15" ticks="120"/>
+      <Note pitch="78" tpc="20" ticks="120"/>
+      <Note pitch="76" tpc="18" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.343838" y="-1.85673"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="36"/>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      </Measure>
+    <Measure number="85">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        <tick>-5278</tick>
+        </LayoutBreak>
+      <Chord>
+        <tick>156000</tick>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="37"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Note pitch="71" tpc="19" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.27507" y="-3.09454"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="37"/>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.618908" y="-3.43838"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="86">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="38"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="-2.7507"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="69" tpc="17" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="38"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="39"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Note pitch="68" tpc="22" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="1.23782" y="-4.95127"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="70" tpc="24" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.618908" y="-2.95701"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="39"/>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      </Measure>
+    <Measure number="87">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="40"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.962746" y="-4.53866"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.687676" y="-3.30084"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="40"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="79" tpc="15" ticks="480"/>
+      <Rest>
+        <ticklen>120</ticklen>
+        </Rest>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="41"/>
+        <Note>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.550141" y="-2.3381"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>20</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.618908" y="-1.92549"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="41"/>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="88">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="42"/>
+        <Note pitch="75" tpc="23"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="120"/>
+      <Note pitch="72" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="42"/>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="-3.50715"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>360</ticklen>
+        <BeamMode>begin</BeamMode>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.687676" y="-5.43264"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="start" number="43"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Note pitch="69" tpc="17" ticks="120"/>
+      <Note pitch="67" tpc="15" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Slur type="stop" number="43"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>161280</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="89">
+      <endRepeat>2</endRepeat>
+      <Dynamic>
+        <subtype>fp</subtype>
+        <offset x="-1.7481" y="-1.75955"/>
+        </Dynamic>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Slur type="start" number="44"/>
+        <Note pitch="66" tpc="20"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Slur type="stop" number="44"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -2469,7 +2863,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2664,7 +3058,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="62" tpc="16" ticks="120"/>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="18">
@@ -2922,7 +3316,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2987,7 +3381,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -3049,7 +3443,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -3072,7 +3466,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -3134,7 +3528,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>
@@ -3178,7 +3572,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>
@@ -3220,11 +3614,11 @@ p, li { white-space: pre-wrap; }
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
         </Chord>
+      <Clef>
+        <offset x="0" y="3"/>
+        </Clef>
       </Measure>
     <Measure number="42">
-      <Clef>
-        <offset x="0" y="2.4"/>
-        </Clef>
       <Note pitch="65" tpc="13" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
@@ -3313,10 +3707,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
-      <Clef>
-        <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
-        </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="58" tpc="12"/>
@@ -3482,7 +3872,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="58">
@@ -3578,7 +3968,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="63">
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Rest>
         <ticklen>120</ticklen>
@@ -3629,7 +4019,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="65">
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       <Rest>
         <ticklen>120</ticklen>
@@ -3721,7 +4111,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="68">
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Rest>
         <ticklen>240</ticklen>
@@ -3859,6 +4249,416 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       </Measure>
+    <Measure number="74">
+      <KeySig>
+        <subtype>1</subtype>
+        </KeySig>
+      <TimeSig>
+        <subtype>196</subtype>
+        <den>4</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="75">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="76">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="61" tpc="21" ticks="120"/>
+      <Note pitch="58" tpc="24" ticks="120"/>
+      <Note pitch="61" tpc="21" ticks="120"/>
+      </Measure>
+    <Measure number="77">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="78">
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="79">
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="5.63894"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.412606" y="6.67046"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="52" tpc="18" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.27507" y="6.53292"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="5.57018"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="47" tpc="19" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.343838" y="6.67046"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>50</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.481373" y="5.0888"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      </Measure>
+    <Measure number="80">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Slur type="start" number="26"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="1.16905" y="3.85099"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Slur type="stop" number="26"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <tick>148800</tick>
+        <ticklen>960</ticklen>
+        <Slur type="start" number="24"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>5</track>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="1.03151" y="4.40113"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <ticklen>480</ticklen>
+        <Slur type="stop" number="24"/>
+        <Note>
+          <track>5</track>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="81">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Slur type="start" number="25"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Slur type="stop" number="25"/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="54" tpc="20"/>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Chord>
+        <track>5</track>
+        <tick>150240</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <track>5</track>
+          <pitch>50</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="82">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="83">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="84">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="64" tpc="18" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="61" tpc="21" ticks="120"/>
+      <Note pitch="58" tpc="24" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      </Measure>
+    <Measure number="85">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="86">
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      </Measure>
+    <Measure number="87">
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="62" tpc="16" ticks="120"/>
+      <Note pitch="52" tpc="18" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="47" tpc="19" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="50" tpc="16" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      </Measure>
+    <Measure number="88">
+      <Note pitch="48" tpc="14" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="52" tpc="18" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="50" tpc="16" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="55" tpc="15" ticks="120"/>
+      <Note pitch="59" tpc="19" ticks="120"/>
+      <Note pitch="50" tpc="16" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      <Note pitch="57" tpc="17" ticks="120"/>
+      <Note pitch="60" tpc="14" ticks="120"/>
+      </Measure>
+    <Measure number="89">
+      <Note pitch="55" tpc="15" ticks="960"/>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Chord>
+        <track>5</track>
+        <tick>161760</tick>
+        <ticklen>480</ticklen>
+        <Slur type="start" number="45"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>5</track>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <ticklen>480</ticklen>
+        <Slur type="stop" number="45"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>5</track>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
