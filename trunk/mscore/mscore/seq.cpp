@@ -866,6 +866,7 @@ void Seq::startNote(Part* part, int pitch, int velo)
             return;
 
       bool active = false;
+      pitch += part->pitchOffset();
       foreach(const Event* event, eventList) {
             NoteOn* n = (NoteOn*)event;
             if (n->port() == part->midiPort() && n->channel() == part->midiChannel() && n->pitch() == pitch) {
@@ -883,7 +884,7 @@ void Seq::startNote(Part* part, int pitch, int velo)
       MidiOutEvent ev;
       ev.port = part->midiPort();
       ev.type = ME_NOTEON | part->midiChannel();
-      ev.a    = pitch + part->pitchOffset();
+      ev.a    = pitch;
       ev.b    = velo;
       sendEvent(ev);
 
