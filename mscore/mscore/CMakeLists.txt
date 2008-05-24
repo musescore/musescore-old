@@ -184,6 +184,7 @@ if (MINGW)
       ${QT4}/bin/QtXml4.dll
       ${QT4}/bin/QtSvg4.dll
       ${QT4}/bin/QtScript4.dll
+      ${QT4}/bin/QtNetwork4.dll
       /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
