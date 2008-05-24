@@ -480,7 +480,7 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       newWizard->timesig(&timesigZ, &timesigN);
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
-      int ks = newWizard->keysig();
+      char ks = newWizard->keysig();
 
       Score* score = new Score;
       score->setCreated(true);
@@ -569,6 +569,7 @@ void MuseScore::newFile()
                               KeySig* keysig = new KeySig(score);
                               keysig->setTrack(staffIdx * VOICES);
                               keysig->setTick(0);
+                              keysig->setSig(0, ks);
                               s = measure->getSegment(keysig);
                               s->add(keysig);
                               }
