@@ -5,6 +5,9 @@
   ?>
 <h4>MusE Score -- Screen Shots</h4>
 
+Demo Score: "Italian Concerto, J.S.Bach BWV 971":
+<a href="../italian-1.pdf">italian-1.pdf</a><br/><br/>
+
 MuseScore main window with demo score:<br/>
 <a href="../wpic/sc1.png"><img src="../wpic/sc1s.png"></a><br>
 

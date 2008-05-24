@@ -32,9 +32,9 @@
   <h3> Windows Testreleases </h3>
   <table>
     <tr>
-      <td><a href="http://prereleases.musescore.org/mscore-r929.exe">mscore-r929.exe</a></td>
+      <td><a href="http://prereleases.musescore.org/mscore-r971.exe">mscore-r971.exe</a></td>
       <td>&nbsp;&nbsp</td>
-      <td>vom 30.4.2008</td>
+      <td>vom 21.5.2008</td>
       </tr>
   </table>
 
