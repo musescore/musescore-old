@@ -39,5 +39,10 @@ set_target_properties(qtscript_uitools
          "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
+target_link_libraries(qtscript_uitools
+      QtUiTools
+      )
+
+
 install( TARGETS qtscript_uitools DESTINATION ${QT_PLUGINS_DIR}/script/ )
 
