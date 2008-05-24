@@ -62,8 +62,10 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 ##
 
 set(QT_MIN_VERSION "4.3.0")
-set(QT_USE_QTXML    TRUE)
-set(QT_USE_QTSVG    TRUE)
+set(QT_USE_QTXML     TRUE)
+set(QT_USE_QTSVG     TRUE)
+set(QT_USE_QTNETWORK TRUE)
+set(QT_USE_QTUITOOLS TRUE)
 # only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 
@@ -172,9 +174,9 @@ if (NOT MINGW)
 endif (NOT MINGW)
 
 if (USE_GLOBAL_FLUID)
-      subdirs(awl osdabzip mscore share manual demos gendoc onlinedoc)
+      subdirs(awl osdabzip mscore scriptgen share manual demos gendoc onlinedoc)
 else (USE_GLOBAL_FLUID)
-      subdirs(awl fluid osdabzip mscore share manual demos gendoc onlinedoc)
+      subdirs(awl fluid osdabzip mscore scriptgen share manual demos gendoc onlinedoc)
 endif (USE_GLOBAL_FLUID)
 
 include_directories(

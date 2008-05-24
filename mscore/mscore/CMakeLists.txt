@@ -262,5 +262,3 @@ if (NOT MINGW)
 endif (NOT MINGW)
 
 add_dependencies(mscore update_revision_target)
-
-

@@ -21,20 +21,5 @@
 #ifndef __SCRIPT_H__
 #define __SCRIPT_H__
 
-//---------------------------------------------------------
-//   WrapperQMessageBox
-//---------------------------------------------------------
-
-class WrapperQMessageBox : public QMessageBox, protected QScriptable {
-      Q_OBJECT
-
-   public slots:
-      QScriptValue qscript_call(QWidget* parent = 0);
-
-   public:
-      WrapperQMessageBox(QWidget* parent = 0);
-      void setWindowTitle(const QString& s) { QMessageBox::setWindowTitle(s); }
-      };
-
 #endif
 

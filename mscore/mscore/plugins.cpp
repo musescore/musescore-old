@@ -23,25 +23,6 @@
 #include "script.h"
 
 //---------------------------------------------------------
-//   WrapperQMessageBox
-//---------------------------------------------------------
-
-WrapperQMessageBox::WrapperQMessageBox(QWidget* parent)
-   : QMessageBox(parent)
-      {
-      }
-
-//---------------------------------------------------------
-//   qscript_call
-//---------------------------------------------------------
-
-QScriptValue WrapperQMessageBox::qscript_call(QWidget* parent)
-      {
-      QMessageBox* const iface = new WrapperQMessageBox(parent);
-      return engine()->newQObject(iface, QScriptEngine::AutoOwnership);
-      }
-
-//---------------------------------------------------------
 //   loadPlugins
 //---------------------------------------------------------
 
@@ -137,12 +118,28 @@ void MuseScore::pluginTriggered(int idx)
       if (debugMode)
             printf("Run Plugin <%s>\n", qPrintable(pluginPath));
       QScriptEngine se(0);
+      se.importExtension("qt.core");
+      se.importExtension("qt.gui");
+      se.importExtension("qt.xml");
+      se.importExtension("qt.network");
+      se.importExtension("qt.uitools");
+
+      QStringList sl = se.availableExtensions();
+      printf("available:\n");
+      foreach(QString s, sl)
+            printf("  <%s>\n", qPrintable(s));
+
+      sl = se.importedExtensions();
+      printf("imported:\n");
+      foreach(QString s, sl)
+            printf("  <%s>\n", qPrintable(s));
+
 
       QScriptValue v = se.newQObject(cs);
       se.globalObject().setProperty("score", v);
       v = se.newVariant(division);
       se.globalObject().setProperty("division", v);
-      se.globalObject().setProperty("QMessageBox", se.newQObject(new WrapperQMessageBox, QScriptEngine::AutoOwnership));
+//      se.globalObject().setProperty("QMessageBox", se.newQObject(new WrapperQMessageBox, QScriptEngine::AutoOwnership));
 
       QScriptValue val = se.evaluate(f.readAll(), pluginPath);
       f.close();
