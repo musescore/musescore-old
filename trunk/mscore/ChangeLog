@@ -1,3 +1,5 @@
+24.5.8 (ws)
+      - plugins: add script bindings for qt base, gui, network, xml and uitools
 23.5.8 (ws)
       - play transposition was not applied to all note off events
       - in "open" dialog show both *.msc and *.mscz files
