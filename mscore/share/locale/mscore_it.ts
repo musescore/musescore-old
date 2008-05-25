@@ -2533,7 +2533,7 @@ fallito: </translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="2003"/>
+        <location filename="../../mscore/measure.cpp" line="2010"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>

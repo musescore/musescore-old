@@ -18,10 +18,10 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# gui and uitools do not link on MINGW
+# gui does not link on MINGW
 
 if (MINGW)
-subdirs (core network xml)
+subdirs (uitools core network xml)
 else (MINGW)
 subdirs (core gui network uitools xml)
 endif (MINGW)

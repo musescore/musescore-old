@@ -42,7 +42,6 @@ struct Dyn {
 //---------------------------------------------------------
 
 class Dynamic : public Text {
-
       mutable QPointF dragOffset;
 
    public:
