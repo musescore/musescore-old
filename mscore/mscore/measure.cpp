@@ -294,10 +294,17 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int move1        = nl->front()->staffMove();
 
       QList<Note*> notes;
-      for (iNote in = nl->begin(); in != nl->end(); ++in)
-            notes.append(in->second);
 
-      bool mirror = false;                 // notehead position relative to stem
+      if (chord->isUp()) {
+            for (iNote in = nl->begin(); in != nl->end(); ++in)
+                  notes.append(in->second);
+            }
+      else {
+            for (iNote in = nl->begin(); in != nl->end(); ++in)
+                  notes.prepend(in->second);
+            }
+
+      bool mirror = false;          // notehead position relative to stem
       int nNotes  = notes.size();
       for (int i = 0; i < nNotes; ++i) {
             Note* note  = notes[i];
