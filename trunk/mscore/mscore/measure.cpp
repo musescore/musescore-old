@@ -295,16 +295,17 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
 
       QList<Note*> notes;
 
+      bool mirror;          // notehead position relative to stem
       if (chord->isUp()) {
             for (iNote in = nl->begin(); in != nl->end(); ++in)
                   notes.append(in->second);
+            mirror = false;
             }
       else {
             for (iNote in = nl->begin(); in != nl->end(); ++in)
                   notes.prepend(in->second);
+            mirror = true;
             }
-
-      bool mirror = false;          // notehead position relative to stem
       int nNotes  = notes.size();
       for (int i = 0; i < nNotes; ++i) {
             Note* note  = notes[i];
@@ -364,7 +365,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             line = 127 - line - 82 + clefTable[clef].yOffset;
             note->setLine(line);
 
-            if (mirror || (((ll - line) < 2) && move1 == move))
+            if (mirror || ((qAbs(ll - line) < 2) && move1 == move))
                   mirror = !mirror;
 
             if ((nNotes >= 3) && (i == (nNotes-1)) && mirror && !notes[i-2]->mirror()) {

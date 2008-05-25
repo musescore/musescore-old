@@ -24,27 +24,14 @@ set (QT_INCLUDES ${QT_INCLUDE_DIR} ${QT_QT_INCLUDE_DIR}
      )
 set (QT_LIBRARY_DIR "/home/ws/.wine/drive_c/Qt/4.4.0/lib")
 set (QT_mingw_LIBRARIES
-    QtCore4 QtGui4 QtXml4 QtSvg4 QtScript4 QtNetwork4 QtUiTools QtUiToolsd
+    QtScript4
+    QtSvg4
+    QtNetwork4
+    QtUiTools
     Qt3Support4
-    QtAssistantClient4
-    QtCLucene4
-    QtHelp4
-    QtOpenGL4
-    QtSql4
-    QtTest4
-    QtWebKit4
-    QtXmlPatterns4
-
-    QtCore4 QtGui4 QtXml4 QtSvg4 QtScript4 QtNetwork4 QtUiTools QtUiToolsd
-    Qt3Support4
-    QtAssistantClient4
-    QtCLucene4
-    QtHelp4
-    QtOpenGL4
-    QtSql4
-    QtTest4
-    QtWebKit4
-    QtXmlPatterns4
+    QtGui4
+    QtCore4
+    QtXml4
     )
 
 set (WIN32 ON)

@@ -19,7 +19,7 @@
 #=============================================================================
 
 set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 include_directories(${QT_INCLUDES})
