@@ -41,29 +41,7 @@ InstrumentTemplate::InstrumentTemplate()
       name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
       shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
       }
-#if 0
-InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
-      {
-      group     = t.group;
-      trackName = t.trackName;
-      name      = t.name.clone();
-      shortName = t.shortName.clone();
-      staves    = t.staves;
 
-      for (int i = 0; i < MAX_STAVES; ++i) {
-            clefIdx[i]    = t.clefIdx[i];
-            staffLines[i] = t.staffLines[i];
-            smallStaff[i] = t.smallStaff[i];
-            }
-      bracket      = t.bracket;            // bracket type (NO_BRACKET)
-      midiProgram  = t.midiProgram;
-      minPitch     = t.minPitch;
-      maxPitch     = t.maxPitch;
-      transpose    = t.transpose;          // for transposing instruments
-      useDrumset   = t.useDrumset;
-      midiActions  = t.midiActions;
-      }
-#endif
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------

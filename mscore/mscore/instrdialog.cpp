@@ -623,7 +623,6 @@ void MuseScore::editInstrList()
                   }
             }
       if (sort) {
-printf("sort staves\n");
             cs->sortStaves(dl);
             cs->undoOp(dl);
             }
@@ -680,8 +679,6 @@ void Score::cmdRemovePart(Part* part)
       int eidx   = sidx + n;
       int strack = sidx * VOICES;
       int etrack = eidx * VOICES;
-
-printf("remove part track %d - %d\n", strack, etrack);
 
       //
       //    remove/adjust slurs in _gel

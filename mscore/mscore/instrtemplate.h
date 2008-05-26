@@ -45,6 +45,8 @@ struct InstrumentTemplate {
       int smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
       int midiProgram;
+      int midiBankSelectH;
+      int midiBankSelectL;
       int minPitch;
       int maxPitch;
       int transpose;          // for transposing instruments
@@ -52,7 +54,7 @@ struct InstrumentTemplate {
       QList<MidiAction> midiActions;
 
       InstrumentTemplate();
-//      InstrumentTemplate(const InstrumentTemplate&);
+
       void write(Xml& xml) const;
       void read(const QString& group, QDomElement);
       };
