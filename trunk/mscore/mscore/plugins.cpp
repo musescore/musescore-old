@@ -21,6 +21,7 @@
 #include "mscore.h"
 #include "score.h"
 #include "script.h"
+#include "config.h"
 
 //---------------------------------------------------------
 //   loadPlugins
@@ -124,7 +125,7 @@ void MuseScore::pluginTriggered(int idx)
       se.importExtension("qt.network");
       se.importExtension("qt.uitools");
 
-      if (QT_VERSION < 0x040400) {
+      if (QT_VERSION >= 0x040400) {
             QStringList sl = se.availableExtensions();
             printf("available:\n");
             foreach(QString s, sl)
