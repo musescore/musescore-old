@@ -31,6 +31,11 @@ if (MINGW)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
 
+# build qt script bindings
+# this requires qt >= 4.4
+
+set(BUILD_SCRIPT_INTERFACE FALSE)
+
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
@@ -173,11 +178,18 @@ if (NOT MINGW)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
-if (USE_GLOBAL_FLUID)
-      subdirs(awl osdabzip mscore scriptgen share manual demos gendoc onlinedoc)
-else (USE_GLOBAL_FLUID)
-      subdirs(awl fluid osdabzip mscore scriptgen share manual demos gendoc onlinedoc)
-endif (USE_GLOBAL_FLUID)
+set (subdirs awl osdabzip mscore share manual demos gendoc onlinedoc)
+
+if (NOT USE_GLOBAL_FLUID)
+      set (subdirs ${subdirs} fluid)
+endif (NOT USE_GLOBAL_FLUID)
+
+if (BUILD_SCRIPT_INTERFACE)
+      set (subdirs ${subdirs} scriptgen)
+endif (BUILD_SCRIPT_INTERFACE)
+
+subdirs(${subdirs})
+
 
 include_directories(
    ${PROJECT_SOURCE_DIR}

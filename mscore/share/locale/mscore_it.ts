@@ -2533,7 +2533,7 @@ fallito: </translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="2010"/>
+        <location filename="../../mscore/measure.cpp" line="2011"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5201,6 +5201,11 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/style.cpp" line="139"/>
         <source>Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1476"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
