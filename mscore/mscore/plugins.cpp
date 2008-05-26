@@ -124,16 +124,17 @@ void MuseScore::pluginTriggered(int idx)
       se.importExtension("qt.network");
       se.importExtension("qt.uitools");
 
-      QStringList sl = se.availableExtensions();
-      printf("available:\n");
-      foreach(QString s, sl)
-            printf("  <%s>\n", qPrintable(s));
+      if (QT_VERSION < 0x040400) {
+            QStringList sl = se.availableExtensions();
+            printf("available:\n");
+            foreach(QString s, sl)
+                  printf("  <%s>\n", qPrintable(s));
 
-      sl = se.importedExtensions();
-      printf("imported:\n");
-      foreach(QString s, sl)
-            printf("  <%s>\n", qPrintable(s));
-
+            sl = se.importedExtensions();
+            printf("imported:\n");
+            foreach(QString s, sl)
+                  printf("  <%s>\n", qPrintable(s));
+            }
 
       QScriptValue v = se.newQObject(cs);
       se.globalObject().setProperty("score", v);
