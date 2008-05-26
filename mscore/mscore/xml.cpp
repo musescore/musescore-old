@@ -20,6 +20,7 @@
 
 #include "xml.h"
 #include "globals.h"
+#include "config.h"
 
 QString docName;
 
