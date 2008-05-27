@@ -126,7 +126,6 @@ void MuseScore::pluginTriggered(int idx)
       se.importExtension("qt.uitools");
 
 #if QT_VERSION >= 0x040400
-      lkasf aklöfj öalsdkfj ö
       QStringList sl = se.availableExtensions();
       printf("available:\n");
       foreach(QString s, sl)
