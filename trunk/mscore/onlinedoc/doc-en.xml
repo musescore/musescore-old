@@ -21,14 +21,14 @@
       <tr><td><key>Up</key></td><td>Increase the pitch of a note for one semitone.</td></tr>
       <tr><td><key>Down</key></td><td>Decrease the pitch of a note for one semitone.</td></tr>
       <tr><td><key>Ctrl+Up</key></td><td>Increase the pitch of a note for one octave.</td></tr>
-      <tr><td><key>Ctrl+Down</key></td><td>Decrease the pitch of a note for one Octave.</td></tr>
+      <tr><td><key>Ctrl+Down</key></td><td>Decrease the pitch of a note for one cctave.</td></tr>
       </table>
       <br/>
       <i>MuseScore</i> automatically tries to set an appropriate accidental for
-      the changed pitch. If you don't agree with this or you want to place
+      the changed pitch. If you do not agree with this or you want to place
       an cautionary accidental (editorial accidental), then you have to manually
-      drag an accidental from the accidental palette to the note. If you again change
-      the pitch with cursor keys, this manual set accidental will be lost.<br/>
+      drag an accidental from the accidental palette to the note. If you later change
+      the pitch with cursor keys, manual settings to the accidental will be lost.<br/>
       <br/>
       The menu function &lt;<b>Notes/Pitch spell</b>&gt; tries to guess the
       right accidentals for the whole score.
@@ -68,9 +68,8 @@
     <table>
     <tr><td>
           Beams are set automatically but the automatic setting can be
-          manually overridden. For this drag a beam symbol from the
-          beam palette to a note  were you
-          want to change the beam behaviour.
+          overridden manually. Drag a beam symbol from the
+          beam palette to a note in order to change its beam behavior.
           <br/>
           You can also first select a note and then double click the
           appropriate symbol in the beam palette.
@@ -115,13 +114,13 @@
           Select the bracket and press &lt;<b>Del</b>&gt;<br/>
           <br/>
           <b>Add</b><br/>
-      Drag a bracket symbol from the bracket palette to an
-      empty space in the first measure of a system.<br/>
-      <br/>
-      <b>Change</b><br/>
-      Drag a bracket symbol from the bracket palette to an
-      bracket in the score.<br/>
-      </td>
+          Drag a bracket symbol from the bracket palette to an
+          empty space in the first measure of a system.<br/>
+          <br/>
+          <b>Change</b><br/>
+          Drag a bracket symbol from the bracket palette to an
+          bracket in the score.<br/>
+          </td>
       <td>
          <img src="../pic/bracketspalette.png"/>
          </td>
@@ -262,7 +261,7 @@
      </table>
     <br/>
 
-    Some elements show <i>handles</i> in editmode which can be
+    Some elements show <i>handles</i> in edit mode which can be
     moved by mouse dragging or keyboard commands.<br/>
     <br/>
     <a href="slurs.php">Slur</a> in edit mode: <img src="../pic/slur4.png" align="center"/><br/>
@@ -304,7 +303,7 @@
         </tr>
       <tr><td>&lt;<b>Tab</b>&gt;</td>
           <td/>
-          <td>goto next handle</td>
+          <td>go to next handle</td>
         </tr>
     </table>
 
@@ -332,7 +331,7 @@
           Fingering can be added to notes by dragging a fingering character
           from the fingering palette to a note head in the score. Fingerings
           are normal text which can be <a href="textedit.php">edited</a> like
-          any other thext.
+          any other text.
       </td>
       <td>
          <img src="../pic/fingeringspalette.png"/>
@@ -344,16 +343,16 @@
 <page name="frames" header="Frames">
     <index>Frames</index>
     Frames provide empty space outside of normal measures. They can also contain
-    text or pictures. <i>MuseScore</i> has two kind of frames:
+    text or pictures. <i>MuseScore</i> has two kinds of frames:
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
     <tr>
        <td valign="top"><b>horizontal</b></td>
        <td><sp/></td>
-       <td>Horizontal frames break a System. The width is adjustable and the
-          height equals the system height. HFrames can be used to separate
-          a Coda.
+       <td>Horizontal frames break a system. The width is adjustable and the
+          height equals the system height. Horizontal frames can be used to 
+          separate a coda.
           </td>
        </tr>
     <tr><td><br/></td></tr>
@@ -363,25 +362,25 @@
        <td>
        Vertical frames provide empty space between or before systems.
        The height is adjustable and the width equals the system width.
-       Vertical frames are used to place titel, subtitle or composer.
-       I you create a titel, a vertical frame is placed before the first
-       measure automatically if its not there already.
+       Vertical frames are used to place title, subtitle or composer.
+       If you create a title, a vertical frame is placed before the first
+       measure automatically if it is not there already.
        </td>
        </tr>
     </table>
     <br/>
 
     <h5>Create a frame</h5>
-    First select a measure. The command to insert a frame is found at
-    the pulldown menu <b>Create->Measures</b>. The frame is inserted
+    First select a measure. The command to insert a frame is found in
+    the menu <b>Create->Measures</b>. The frame is inserted
     <i>before</i> the selected measure.
 
     <h5>Delete a frame</h5>
     Select the frame and press &lt;<b>Del</b>&gt;.
 
     <h5>Edit frame</h5>
-    Doubleclick at the frame to enter
-    <a href="editmode.php"><b>Editmode</b></a>. A handle appears which
+    Double click the frame to enter
+    <a href="editmode.php"><b>edit mode</b></a>. A handle appears which
     can be used to drag the size of the frame.
     <br/><br/>
     Title frame in edit mode:<br/><br/>
@@ -394,7 +393,7 @@
     <index>Acciaccatura</index>
 
     A short grace note (Acciaccatura) is painted as a small note with a stroke
-    through the stem. Its placed before the normal sized main note.
+    through the stem. It is placed before the normal-sized main note.
     A long grace note (Appoggiatura) has no stroke.
     <br/>
     <br/>
@@ -424,13 +423,14 @@
     <index>Keys</index>
     <table>
     <tr><td>
-      Keys are created or changed by dragging a key symbol from the
-      key palette to a measure or another key.<br/>
+      Key signatures are created or changed by dragging a key symbol 
+      from the key palette to a measure or existing key 
+      signature.<br/>
       &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
       <br/>
       <b>Change</b><br/>
       Drag a key from the palette onto a key in the score. You can
-      also drag a key from the score to another key of the score
+      also drag a key from the score to another key on the score
       by using &lt;<b>Shift+leftMouseButton+Drag</b>&gt;.<br/>
       <br/>
       <b>Add</b><br/>
@@ -463,22 +463,19 @@
 <page name="lyrics" header="Lyrics">
     <index>Lyrics</index>
      <ul>
-        <li>First enter notes.</li>
-        <li>Select first note.</li>
+        <li>First enter notes</li>
+        <li>Select first note</li>
         <li>Type <code>&lt;<b>Ctrl+L</b>&gt;</code> and enter lyrics text for
-          first note.</li>
+          first note</li>
         <li>Type <code>&lt;<b>space</b>&gt;</code> at end of word to go next
-           note.</li>
+           note</li>
         <li>Type <code>&lt;<b>-</b>&gt;</code> at end of syllable to go to next note.
-           The syllables are connected with a dash.
-           </li>
-        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous note.</li>
+           The syllables are connected with a dash</li>
+        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous note</li>
         <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-            the lyrics text.
-            </li>
+            the lyrics text</li>
         <li><code>&lt;<b>Ctrl+Minus</b>&gt;</code> enters a <code>&lt;<b>-</b>&gt;</code> into
-            the lyrics text.
-            </li>
+            the lyrics text</li>
         </ul>
 
       <img src="../pic/lyrics.png" align="center"/>
@@ -498,28 +495,32 @@
       <br/>
       See also
           <a href="text.php">Text</a><sp/>
-          <a href="chordnames.php">Chordnames</a>.
+          <a href="chordnames.php">Chord names</a>.
     </page>
 
 <page name="measures" header="Measure Operations">
     <index>Measure Operations</index>
     <index>Insert Measure</index>
     <index>Delete Measure</index>
+    <index>Pickup Measure</index>
 
     <h5>Insert Measures</h5>
 
       First select a measure then press <key>Ins</key> to insert a new empty measure before
-      the selected on.
+      the selected one.
 
     <h5>Delete Measures</h5>
 
-      Complete measures can be deletet by first selecting them with <key>Ctrl+Click</key>.
-      The measure is marked with a dottet line indicating that you selected a "piece of time".
-      Press <key>Shift+Click</key> to extent the selection.
+      Complete measures can be deleted by first selecting them with <key>Ctrl+Click</key>.
+      The measure is marked with a dotted line indicating that you selected a "piece of time".
+      Press <key>Shift+Click</key> to extend the selection.
       Pressing <key>Del</key> removes the selected measures.
 
 
     <h5>Properties</h5>
+    
+      To edit the properties of a measure right click on an empty part of the measure and 
+      select <b>Measure Properties...</b>.
 
     <table cellspacing="0" cellpadding="0">
     <tr>
@@ -552,13 +553,13 @@
 <page name="newscore" header="Create new Score from Scratch">
     <index>Create new Score</index>
     <h5>Create new Score from Scratch</h5>
-    The menu entry &lt;<b>Score/New</b>&gt; create an empty
+    The menu entry &lt;<b>Score->New</b>&gt; creates an empty
     new score. First you have to populate the empty sheet with instruments and
     then you can add empty measures.
           <ul>
           <li>&lt;<b>I</b>&gt; popups the instrument menu</li>
           <li>&lt;<b>Ctrl+B</b>&gt; appends an empty measure</li>
-          <li>then menu &lt;<b>Create/Measures</b>&gt; can be used to create
+          <li>then menu &lt;<b>Create->Measures</b>&gt; can be used to create
              an arbitrary number of empty measures
              </li>
           </ul>
@@ -566,13 +567,13 @@
     Next steps are usually:
           <a href="clefs.php">set clef</a>,
           <a href="keys.php">set key</a>,
-          <a href="timesig.php">set time signature</a>
+          <a href="timesig.php">set time signature</a>.
 
 
     <h5>Create new Score from Template</h5>
 
     &lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
-    template and click &lt;<b>Ok</b>&gt;. This is the simplest way to create
+    template and click &lt;<b>OK</b>&gt;. This is the simplest way to create
     a new score. Note that template files are normal <i>MuseScore</i> files
     stored in the template folder.
 
@@ -603,10 +604,10 @@
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>1/4 note</td>  <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>1/8 note</td></tr>
-    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 note</td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 note</td></tr>
-    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 note</td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>1/1 note</td></tr>
-    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>1/2 note</td></tr>
+    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>Quarter note (crochet)</td>  <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>Eighth note (quaver)</td></tr>
+    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 note (semiquaver)</td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 note (demi-semiquaver)</td></tr>
+    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 note (semi-demi-semiquaver)</td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>Whole note (semibreve)</td></tr>
+    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>Half note (minim)</td></tr>
     </table>
     <br/>
     <table>
@@ -638,12 +639,12 @@
 
 <page name="palette" header="Palettes">
     <index>Palettes</index>
-    Your can drag&amp;drop palette symbols onto score elements.
+    You can drag&amp;drop palette symbols onto score elements.
     <br/>
     <br/>
-    A doubleclick on a symbol in a palette is equivalent to
-    drag&amp;drop this symbol to all selected score elements.
-    For example you can easily put a tenuto to several notes at once:
+    Double clicking a palette symbol is equivalent to
+    drag&amp;droping this symbol to all selected score elements.
+    For example you can easily put a tenuto on several notes at once:
     <ul>
           <li>select notes</li>
           <li>double click on the tenuto symbol in the attributes palette</li>
@@ -669,28 +670,28 @@
     <tr><td>&lt;<b>Right</b>&gt;</td><td> seek to next chord</td></tr>
     <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td><td> seek to previous measure</td></tr>
     <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td><td> seek to next measure</td></tr>
-    <tr><td>&lt;<b>Home</b>&gt;</td><td>rewind start of score</td></tr>
+    <tr><td>&lt;<b>Home</b>&gt;</td><td>rewind to start of score</td></tr>
     <tr><td>&lt;<b>F11</b>&gt;</td><td>toggle show play panel</td></tr>
     </table>
     <br/>
 
     <br/>
-    If you want to play other instruments than piano you have to
+    If you want to play instruments other than piano you have to
     change the <i>MuseScore</i> integrated <i>SoundFont</i> with a more
-    capable one in the <i>Preferences</i> menu.
+    capable one in the <i>I/O</i> tab of the <i>Preferences</i> menu.
 
     </page>
 
 <page name="repeats" header="Repeats">
     <index>Repeats</index>
-    Start and end of simple repeats can be defined by setting
+    The start and end of simple repeats can be defined by setting
     appropriate <a href="barlines.php">bar lines</a>.
     In the last measure of a repeat you can set the
     <a href="measures.php">property</a> "Repeat Count" to define
-    the nunber of played repeats.
+    the number of played repeats.
     <br/>
     <br/>
-    See also: <a href="volta.php">Volta</a>
+    See also: <a href="volta.php">Volta</a> for first and second endings
     </page>
 
 <page name="slurs" header="Slurs">
@@ -719,7 +720,7 @@
     </table>
 
     <br/>
-    A slur can span several systems and pages. Slur start and end is anchord to
+    A slur can span several systems and pages. Slur start and end is anchored to
     a note/chord or rest. This means that if the notes move in a relayout,
     the slur moves to.<br/>
     <br/>
@@ -761,8 +762,8 @@
            superscript mode</li>
         <li>move cursor: <code>&lt;<b>Home</b>&gt; &lt;<b>End</b>&gt; &lt;<b>Left</b>&gt;
            &lt;<b>Right</b>&gt;</code></li>
-        <li><code>&lt;<b>Backspace</b>&gt;</code> remove character left from cursor</li>
-        <li><code>&lt;<b>Delete</b>&gt;</code> remove character right from cursor</li>
+        <li><code>&lt;<b>Backspace</b>&gt;</code> remove character to the left of the cursor</li>
+        <li><code>&lt;<b>Delete</b>&gt;</code> remove character to the right of the cursor</li>
         <li><code>&lt;<b>Return</b>&gt;</code> start new line</li>
         <li><code>&lt;<b>F2</b>&gt;</code> Show text palette. The text palette
             can be used to enter special characters and symbols.</li>
@@ -783,7 +784,7 @@
     <table cellspacing="0" cellpadding="0">
     <tr><td><b>font family</b></td>
         <td><sp/></td>
-        <td>this is the name of the font</td>
+        <td>Name of the font such as "Times New Roman" or "Arial"</td>
         </tr>
     <tr><td><b>point size</b></td>
         <td/>
@@ -799,7 +800,7 @@
         </tr>
     <tr><td><b>alignment</b></td>
         <td/>
-        <td>horizontal: left, right center; vertical: top, bottom, center</td>
+        <td>horizontal: left, right, center; vertical: top, bottom, center</td>
         </tr>
     <tr><td><b>offset</b></td>
         <td></td>
@@ -807,27 +808,27 @@
         </tr>
     <tr><td><b>offset type</b></td>
         <td/>
-        <td>mm, space or % of pagesize</td>
+        <td>mm, space, or percent of page size</td>
         </tr>
     </table>
     <br/>
     <h5>Text types:</h5>
     <table cellspacing="0" cellpadding="0">
-    <tr><td><b>titel, subtitle,<br/>composer, poet</b></td>
+    <tr><td><b>title, subtitle,<br/>composer, poet</b></td>
         <td><sp/></td>
-        <td>achord to page</td>
+        <td>anchored to page</td>
         </tr>
     <tr><td><a href="fingering.php"><b>fingering</b></a></td>
         <td/>
-        <td>Fingerings are anchord to note heads.</td>
+        <td>Fingerings are anchored to note heads.</td>
         </tr>
     <tr><td><a href="lyrics.php"><b>lyrics</b></a></td>
         <td/>
-        <td>Lyrics are achored to a time position.</td>
+        <td>Lyrics are anchored to a time position.</td>
         </tr>
     <tr><td><a href="chordnames.php"><b>chord names</b></a></td>
         <td/>
-        <td>Chord names are also anchord to a time position.</td>
+        <td>Chord names are also anchored to a time position.</td>
         </tr>
     </table>
 
@@ -874,7 +875,7 @@
 
     To create a triplet first create a note with a duration of the whole
     triplet. Then select the note and press &lt;<b>Ctrl+3</b>&gt; to change
-    it to a triplet. Similarly a &lt;<b>Ctrl+5</b>&gt; changes to note
+    it to a triplet. Similarly &lt;<b>Ctrl+5</b>&gt; changes the note
     to a quintuplet.
 
     <table>
@@ -915,9 +916,13 @@
     <br/>
     <img src="../pic/volta.png" align="center"/>
     <br/><br/>
-
+    
+    Volta brackets can be place on the score by drag&amp;droping from the 
+    <a href="palette.php">lines palette</a>.
+    <br/>
+    <br/>
     The brackets can span more than one measure. Double click the volta to
-    enter  <a href="editmode.php">edit mode</a>  and then move the handles
+    enter <a href="editmode.php">edit mode</a> and then move the handles
     with:
     <br/>
     <br/>
@@ -927,10 +932,8 @@
     </table>
     <br/>
     This commands move the "logical" start or end of the volta which determine
-    the bracketet measures.
-    Other commands in
-    <a href="editmode.php">edit mode</a>
-    also move the
+    the bracketed measures.
+    Other commands in <a href="editmode.php">edit mode</a> also move the
     handles but do not change how the repeat is played.
 
     If you move the handles, a dashed line from the logical position to
@@ -946,9 +949,9 @@
     <tr>
       <td>
           <b>Repeat List</b><br/>
-          This list determines in which repeat the volta should be played.
+          This list determines which repeat the volta should be played.
           If the volta is played in more than one repeat all repeat numbers
-          must be entered separated with a ",".
+          must be listed and separated by a comma (",").
           <br/><br/>
           <b>Text</b><br/>
           You can set an arbitrary volta text. Of course the text
@@ -965,7 +968,7 @@
 
 <page name="rest" header="One-bar rests">
     <index>One-bar rests</index>
-    When an entire measure is devoid of notes, a semibreve (whole) rest is
+    When an entire measure is devoid of notes, a full measure (semibreve) rest is
     used.<br/>
     A one-bar rest can be created by marking a measure and pressing <key>Del</key>.
     All notes and rests on this measure are then replaced by a one-bar rest.
@@ -994,7 +997,7 @@
             </tr>
       </table>
     <br/>
-    Haipins could also be created by dragging a hairpin symbol from the line palette
+    Hairpins could also be created by dragging a hairpin symbol from the line palette
     to a note head.
     <br/>
     <br/>
@@ -1047,13 +1050,14 @@
       between two or more notes. It is indicated by strokes through the stems
       of the notes. If the tremolo is between two or more notes, the bars
       are drawn between them.<br/>
-      There are separate Symbols for one note and two note tremoli in the
+      There are separate symbols for one note and two note tremoli in the
       tremolo palette.
       <br/>
       In a two note tremolo every note has the value of the whole tremolo
-      duration. To enter a tremolo with the duration of a half note first
-      enter two normal quarter notes. After dragging a tremolo symbol to the
-      first note the note values automatically double to half notes.
+      duration. To enter a tremolo with the duration of a half note (minum)
+      first enter two normal quarter notes (quavers). After dragging a 
+      tremolo symbol to the first note the note values automatically double
+      to half notes.
     </page>
 
 </museScoreManual>

@@ -167,11 +167,12 @@ void genIndexProg(const QString& of, const QList<Index> lst, int lang)
       os.setCodec("UTF-8");
       os << "<html>\n";
       os << "<head>\n";
+      os << "  <title>Index - MuseScore</title>";
       os << "  <meta content=\"text/html; charset=UTF-8\">\n";
       os << "  </head>\n";
       os << "<body>\n";
 
-      os << "<h4>MuseScore</a> -- Index</h4>\n";
+      os << "<h4>MuseScore -- Index</h4>\n";
       os << "<table>\n";
 
       int columns = 3;

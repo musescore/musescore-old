@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
+<museScore version="1.9">
   <Mag>0.995934</Mag>
   <xoff>2.11667</xoff>
   <yoff>2.32833</yoff>
@@ -1200,8 +1200,8 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <tick>0</tick>
-          <pitch>64</pitch>
-          <tpc>18</tpc>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
           </Note>
         <Note>
           <tick>0</tick>
