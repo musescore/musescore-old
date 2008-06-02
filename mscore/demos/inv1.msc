@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
-  <Mag>0.75</Mag>
-  <xoff>7.62</xoff>
-  <yoff>-0.635</yoff>
+<museScore version="1.9">
+  <Mag>1</Mag>
+  <xoff>0.423333</xoff>
+  <yoff>0.423333</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -909,14 +909,6 @@
       <reverb>30</reverb>
       </Instrument>
     </Part>
-  <Slur id="1">
-    <track>0</track>
-    <tick>22560</tick>
-    </Slur>
-  <Slur id="2">
-    <track>0</track>
-    <tick>27840</tick>
-    </Slur>
   <Staff id="1">
     <VBox>
       <height>10</height>
@@ -947,7 +939,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J.S.Bach</p></body></html>
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J. S. Bach</p></body></html>
           </html-data>
         </Text>
       </VBox>
@@ -1421,8 +1413,14 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
-      <Note pitch="71" tpc="19" ticks="60"/>
-      <Note pitch="72" tpc="14" ticks="60"/>
+      <Chord>
+        <ticklen>60</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>60</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>mid</BeamMode>
@@ -1441,7 +1439,10 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="71" tpc="19"/>
         </Chord>
-      <Note pitch="69" tpc="17" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>end</BeamMode>
@@ -1775,16 +1776,19 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="1"/>
         <StemDirection>down</StemDirection>
-        <Note pitch="74" tpc="16"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="13">
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>begin</BeamMode>
-        <Slur type="stop" number="1"/>
         <StemDirection>up</StemDirection>
         <Note pitch="74" tpc="16"/>
         </Chord>
@@ -1958,7 +1962,10 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <Note pitch="71" tpc="19" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>end</BeamMode>
@@ -2018,16 +2025,19 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="2"/>
         <StemDirection>down</StemDirection>
-        <Note pitch="79" tpc="15"/>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="16">
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>begin</BeamMode>
-        <Slur type="stop" number="2"/>
         <StemDirection>down</StemDirection>
         <Note pitch="79" tpc="15"/>
         </Chord>
@@ -2375,7 +2385,10 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="76" tpc="18"/>
         </Chord>
-      <Note pitch="74" tpc="16" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>end</BeamMode>
@@ -2489,6 +2502,9 @@ p, li { white-space: pre-wrap; }
         <Note pitch="67" tpc="15"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -2967,7 +2983,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Clef>
-        <subtype>4096</subtype>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="9">
@@ -3266,7 +3282,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Clef>
-        <subtype>4100</subtype>
+        <subtype>4</subtype>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>
