@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
+<museScore version="1.9">
   <Mag>0.75</Mag>
-  <xoff>-127.846</xoff>
-  <yoff>8.6783</yoff>
+  <xoff>-50.6412</xoff>
+  <yoff>1.74625</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -1630,7 +1630,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">1 st Movement</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">1st Movement</p></body></html>
           </html-data>
         </Text>
       <Text>
@@ -1640,7 +1640,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J.S. Bach</p></body></html>
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J. S. Bach</p></body></html>
           </html-data>
         </Text>
       </VBox>
@@ -6476,6 +6476,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -13776,6 +13779,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="3">
@@ -20434,6 +20440,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="4">
@@ -28085,6 +28094,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="5">
@@ -31861,7 +31873,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="87">
-      <Note pitch="79" tpc="15" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
       </Measure>
     <Measure number="88">
       <Chord>
@@ -32077,10 +32092,16 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="97">
-      <Note pitch="76" tpc="18" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
       </Measure>
     <Measure number="98">
-      <Note pitch="74" tpc="16" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
       </Measure>
     <Measure number="99">
       <Chord>
@@ -32772,7 +32793,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="114">
-      <Note pitch="60" tpc="14" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
       </Measure>
     <Measure number="115">
       <Dynamic>
@@ -33022,6 +33046,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="6">
@@ -34150,10 +34177,16 @@ p, li { white-space: pre-wrap; }
         <subtype>f</subtype>
         <offset x="0" y="0.84"/>
         </Dynamic>
-      <Note pitch="70" tpc="12" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
       </Measure>
     <Measure number="34">
-      <Note pitch="69" tpc="17" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="35">
       <Chord>
@@ -35767,10 +35800,16 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="77">
-      <Note pitch="75" tpc="11" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="75" tpc="11"/>
+        </Chord>
       </Measure>
     <Measure number="78">
-      <Note pitch="74" tpc="16" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
       </Measure>
     <Measure number="79">
       <Chord>
@@ -36032,7 +36071,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="87">
-      <Note pitch="73" tpc="21" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
       </Measure>
     <Measure number="88">
       <Chord>
@@ -36895,7 +36937,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="114">
-      <Note pitch="55" tpc="15" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
       </Measure>
     <Measure number="115">
       <Dynamic>
@@ -37083,6 +37128,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="7">
@@ -40299,7 +40347,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="87">
-      <Note pitch="64" tpc="18" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
       </Measure>
     <Measure number="88">
       <Chord>
@@ -40313,13 +40364,22 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="89">
-      <Note pitch="69" tpc="17" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="90">
-      <Note pitch="70" tpc="12" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
       </Measure>
     <Measure number="91">
-      <Note pitch="69" tpc="17" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="92">
       <Chord>
@@ -41230,7 +41290,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="114">
-      <Note pitch="52" tpc="18" ticks="1920"/>
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
       </Measure>
     <Measure number="115">
       <Dynamic>
@@ -41413,6 +41476,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="8">
@@ -41985,7 +42051,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="13">
       <Rest>
-        <selected>1</selected>
         <ticklen>0</ticklen>
         </Rest>
       </Measure>
@@ -46477,6 +46542,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="41" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="9">
@@ -52539,7 +52607,10 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="41" tpc="13"/>
         </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>28</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
