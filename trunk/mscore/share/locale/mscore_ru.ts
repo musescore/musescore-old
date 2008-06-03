@@ -2116,7 +2116,7 @@ failed: </source>
 <context>
     <name>InstrumentListEditor</name>
     <message>
-        <location filename="../../mscore/partedit.cpp" line="69"/>
+        <location filename="../../mscore/partedit.cpp" line="72"/>
         <source>MuseScore: Part List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2192,45 +2192,45 @@ failed: </source>
         <translation>Ключ</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="878"/>
+        <location filename="../../mscore/instrdialog.cpp" line="865"/>
         <source>MuseScore: Save Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="881"/>
+        <location filename="../../mscore/instrdialog.cpp" line="868"/>
         <source>MuseScore Instruments (*.xml);;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="891"/>
+        <location filename="../../mscore/instrdialog.cpp" line="878"/>
         <source>Open Instruments File
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="892"/>
+        <location filename="../../mscore/instrdialog.cpp" line="879"/>
         <source>
 failed: </source>
         <translation type="unfinished">
 не удалось: </translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="893"/>
+        <location filename="../../mscore/instrdialog.cpp" line="880"/>
         <source>MuseScore: Open Instruments file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="915"/>
+        <location filename="../../mscore/instrdialog.cpp" line="902"/>
         <source>MuseScore: Write Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="926"/>
+        <location filename="../../mscore/instrdialog.cpp" line="913"/>
         <source>MuseScore: Load Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="931"/>
+        <location filename="../../mscore/instrdialog.cpp" line="918"/>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5202,11 +5202,6 @@ Save Current Score?</source>
         <source>Glissando</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1476"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5251,7 +5246,7 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="648"/>
+        <location filename="../../mscore/newwizard.cpp" line="638"/>
         <source>MuseScore: Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5259,12 +5254,12 @@ Save Current Score?</source>
 <context>
     <name>NewWizardPage1</name>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="457"/>
+        <location filename="../../mscore/newwizard.cpp" line="447"/>
         <source>Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="458"/>
+        <location filename="../../mscore/newwizard.cpp" line="448"/>
         <source>This wizard creates a new score</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5272,12 +5267,12 @@ Save Current Score?</source>
 <context>
     <name>NewWizardPage2</name>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="475"/>
+        <location filename="../../mscore/newwizard.cpp" line="465"/>
         <source>Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="477"/>
+        <location filename="../../mscore/newwizard.cpp" line="467"/>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5285,12 +5280,12 @@ Save Current Score?</source>
 <context>
     <name>NewWizardPage3</name>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="514"/>
+        <location filename="../../mscore/newwizard.cpp" line="504"/>
         <source>Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="515"/>
+        <location filename="../../mscore/newwizard.cpp" line="505"/>
         <source>Create Time Signature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5298,12 +5293,12 @@ Save Current Score?</source>
 <context>
     <name>NewWizardPage4</name>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="529"/>
+        <location filename="../../mscore/newwizard.cpp" line="519"/>
         <source>Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="530"/>
+        <location filename="../../mscore/newwizard.cpp" line="520"/>
         <source>Select Template File:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5311,12 +5306,12 @@ Save Current Score?</source>
 <context>
     <name>NewWizardPage5</name>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="566"/>
+        <location filename="../../mscore/newwizard.cpp" line="556"/>
         <source>Create New Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/newwizard.cpp" line="567"/>
+        <location filename="../../mscore/newwizard.cpp" line="557"/>
         <source>Select Key Signature:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5324,12 +5319,12 @@ Save Current Score?</source>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="850"/>
+        <location filename="../../mscore/note.cpp" line="866"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="853"/>
+        <location filename="../../mscore/note.cpp" line="869"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5570,67 +5565,67 @@ Save Current Score?</source>
         <translation>Form</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="264"/>
+        <location filename="../../mscore/partedit.ui" line="243"/>
         <source>Solo</source>
         <translation>Соло</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="257"/>
+        <location filename="../../mscore/partedit.ui" line="236"/>
         <source>Mute</source>
         <translation>Приглушить</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="211"/>
+        <location filename="../../mscore/partedit.ui" line="190"/>
         <source>Pan</source>
         <translation>Пан</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="281"/>
+        <location filename="../../mscore/partedit.ui" line="260"/>
         <source>Sound:</source>
         <translation>Звук:</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="195"/>
+        <location filename="../../mscore/partedit.ui" line="174"/>
         <source>Vol</source>
         <translation>Уровень</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="227"/>
+        <location filename="../../mscore/partedit.ui" line="206"/>
         <source>Rev</source>
         <translation>Ревер</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="243"/>
+        <location filename="../../mscore/partedit.ui" line="222"/>
         <source>Cho</source>
         <translation>Хор</translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="73"/>
+        <location filename="../../mscore/partedit.ui" line="52"/>
         <source>Part Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="94"/>
+        <location filename="../../mscore/partedit.ui" line="73"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="129"/>
+        <location filename="../../mscore/partedit.ui" line="108"/>
         <source>Panorama Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="145"/>
+        <location filename="../../mscore/partedit.ui" line="124"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="170"/>
+        <location filename="../../mscore/partedit.ui" line="149"/>
         <source>Chorus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/partedit.ui" line="291"/>
+        <location filename="../../mscore/partedit.ui" line="270"/>
         <source>midi sound for part</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6277,19 +6272,19 @@ Save Current Score?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="388"/>
+        <location filename="../../mscore/utils.cpp" line="396"/>
         <source>MuseScore:</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="365"/>
+        <location filename="../../mscore/utils.cpp" line="373"/>
         <source>please select a single note and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту и попробуйте ещё раз
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="373"/>
+        <location filename="../../mscore/utils.cpp" line="381"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или паузу
@@ -6297,7 +6292,7 @@ Save Current Score?</source>
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="381"/>
+        <location filename="../../mscore/utils.cpp" line="389"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или лигу
@@ -6305,7 +6300,7 @@ Save Current Score?</source>
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="389"/>
+        <location filename="../../mscore/utils.cpp" line="397"/>
         <source>please select one or more staves and retry operation
 </source>
         <translation type="unfinished"></translation>
@@ -6319,12 +6314,12 @@ Save Current Score?</source>
         <translation>MuseScore: загрузка не удалась:</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="939"/>
+        <location filename="../../mscore/instrdialog.cpp" line="926"/>
         <source>Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="937"/>
+        <location filename="../../mscore/instrdialog.cpp" line="924"/>
         <source>MuseScore: load Style failed:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6489,7 +6484,7 @@ failed: </source>
         <translation>MuseScore: прочитать файл</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1058"/>
+        <location filename="../../mscore/cmd.cpp" line="1059"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6503,14 +6498,14 @@ first create some staves</source>
         <translation>MuseScore: сохранить партитуру</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="908"/>
+        <location filename="../../mscore/cmd.cpp" line="909"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1091"/>
+        <location filename="../../mscore/cmd.cpp" line="1092"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation type="unfinished"></translation>

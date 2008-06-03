@@ -1540,7 +1540,7 @@ bool Score::isVolta(int tick, int repeat) const
 //   collectChord
 //---------------------------------------------------------
 
-void Score::collectChord(EventMap* events, int channel, int port,
+void Score::collectChord(EventMap* events, Instrument* instr,
    int pitchOffset, Chord* chord, int tick, int len)
       {
       NoteList* nl = chord->noteList();
@@ -1550,6 +1550,9 @@ void Score::collectChord(EventMap* events, int channel, int port,
                   continue;
             if (note->tieBack())
                   continue;
+            int idx = instr->articulations[note->subchannel()]->channel;
+            int channel = midiChannel(idx);
+            int port    = midiPort(idx);
             NoteOn* ev = new NoteOn();
             int pitch = note->pitch() + pitchOffset;
             if (pitch > 127)
@@ -1577,11 +1580,9 @@ void Score::collectChord(EventMap* events, int channel, int port,
 
 void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
-#if 0
-      Part* prt       = part(staffIdx);
-      int pitchOffset = prt->pitchOffset();
-      int channel     = prt->midiChannel();
-      int port        = prt->midiPort();
+      Part* prt         = part(staffIdx);
+      Instrument* instr = prt->instrument();
+      int pitchOffset   = instr->pitchOffset;
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
@@ -1657,7 +1658,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         int sl = len / 4;
                         int ssl = len / (2 * sv.size());
                         foreach(Chord* c, sv) {
-                              collectChord(events, channel, port,
+                              collectChord(events, instr,
                                  pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset - sl,
@@ -1673,7 +1674,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         int sl = 0;
                         foreach(Chord* c, lv) {
                               int ssl = c->tickLen();
-                              collectChord(events, channel, port,
+                              collectChord(events, instr,
                                  pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset + sl,
@@ -1684,8 +1685,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               }
                         }
                   collectChord(events,
-                     channel,
-                     port,
+                     instr,
                      pitchOffset + ottavaShift,
                      chord, tick + tickOffset,
                      (len * gateTime) / 100
@@ -1694,11 +1694,11 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   sv.clear();
                   }
             }
+#if 0 // TODO
       //
       // collect program changes and controller
       //
       foreach(const Element* e, *m->el()) {
-#if 0 // TODO
             if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                   continue;
             StaffText* st = static_cast<StaffText*>(e);
@@ -1720,7 +1720,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   ControllerEvent* ev = new ControllerEvent(tick, channel, c, v);
                   events->insertMulti(tick, ev);
                   }
-#endif
             }
 #endif
       }
@@ -1736,8 +1735,7 @@ void Score::toEList(EventMap* events, int offset)
       int staffIdx   = 0;
       foreach(Part* part, _parts) {
             for (int i = 0; i < part->staves()->size(); ++i) {
-                  toEList(events, expandRepeats, offset, staffIdx);
-                  ++staffIdx;
+                  toEList(events, expandRepeats, offset, staffIdx++);
                   }
             }
       }

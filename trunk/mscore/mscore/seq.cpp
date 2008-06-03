@@ -694,6 +694,8 @@ void Seq::collectEvents()
                   int port    = cs->midiPort(idx);
 
                   foreach(Event* e, a->init) {
+                        if (e == 0)
+                              continue;
                         MidiOutEvent event;
                         if (e->midiOutEvent(&event)) {
                               event.port = port;
