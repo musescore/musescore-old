@@ -317,17 +317,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   }
             const InstrumentTemplate* t = ((PartListItem*)item)->it;
             part = new Part(cs);
-            part->setMidiProgram(t->midiProgram);
-            part->setMinPitch(t->minPitch);
-            part->setMaxPitch(t->maxPitch);
-            part->setShortName(t->shortName);
-            part->setTrackName(t->trackName);
-            part->setLongName(t->name);
-            part->setPitchOffset(t->transpose);
-            if (t->useDrumset) {
-                  part->setUseDrumset(true);
-                  part->setDrumset(new Drumset(*smDrumset));
-                  }
+            part->initFromInstrTemplate(t);
 
             pli->part = part;
             QTreeWidgetItem* ci = 0;

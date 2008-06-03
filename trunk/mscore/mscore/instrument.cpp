@@ -23,62 +23,14 @@
 #include "drumset.h"
 
 //---------------------------------------------------------
-//   MidiAction
-//---------------------------------------------------------
-
-MidiAction::MidiAction()
-      {
-      _type = ACTION_NO;
-      }
-
-//---------------------------------------------------------
-//   setProgram
-//---------------------------------------------------------
-
-void MidiAction::setProgram(int hb, int lb, int pr)
-      {
-      hbank   = hb;
-      lbank   = lb;
-      program = pr;
-      _type    = ACTION_PROGRAM_CHANGE;
-      }
-
-//---------------------------------------------------------
-//   setController
-//---------------------------------------------------------
-
-void MidiAction::setController(int c, int v)
-      {
-      ctrl      = c;
-      ctrlValue = v;
-      _type     = ACTION_CONTROLLER;
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
-void MidiAction::write(Xml& xml) const
+void NamedEventList::write(Xml& xml, const QString& n) const
       {
-      if (_type == ACTION_NO)
-            return;
-
-      if (!_name.isEmpty())
-            xml.stag(QString("MidiAction name=\"%1\"").arg(_name));
-      else
-            xml.stag("MidiAction");
-      switch(_type) {
-            case ACTION_PROGRAM_CHANGE:
-                  xml.tagE(QString("programChange hbank=\"%1\" lbank=\"%2\" program=\"%3\"")
-                     .arg(hbank).arg(lbank).arg(program));
-                  break;
-            case ACTION_CONTROLLER:
-                  xml.tagE(QString("controller controller=\"%1\" value=\"%2\"")
-                     .arg(ctrl).arg(ctrlValue));
-                  break;
-            case ACTION_NO:
-                  break;
-            }
+      xml.stag(QString("%1 name=\"%2\"").arg(n).arg(name));
+      foreach(Event* e, events)
+            e->write(xml);
       xml.etag();
       }
 
@@ -86,53 +38,26 @@ void MidiAction::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void MidiAction::read(QDomElement e)
+void NamedEventList::read(QDomElement e)
       {
-      _type = ACTION_NO;
-      _name = e.attribute("name");
+      name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "programChange") {
-                  _type = ACTION_PROGRAM_CHANGE;
-                  hbank   = e.attribute("hbank", "-1").toInt();
-                  lbank   = e.attribute("lbank", "-1").toInt();
-                  program = e.attribute("program", "0").toInt();
+            if (tag == "program") {
+                  ControllerEvent* ev = new ControllerEvent();
+                  ev->setController(CTRL_PROGRAM);
+                  ev->setValue(e.attribute("value", "0").toInt());
+                  events.append(ev);
                   }
             else if (tag == "controller") {
-                  _type = ACTION_CONTROLLER;
-                  ctrl  = e.attribute("controller", "0").toInt();
-                  ctrlValue = e.attribute("controller", "0").toInt();
+                  ControllerEvent* ev = new ControllerEvent();
+                  ev->setController(e.attribute("ctrl", "0").toInt());
+                  ev->setValue(e.attribute("value", "0").toInt());
+                  events.append(ev);
                   }
             else
                   domError(e);
             }
-      }
-
-//---------------------------------------------------------
-//   programChange
-//---------------------------------------------------------
-
-bool MidiAction::programChange(int* hb, int* lb, int* pr)
-      {
-      if (_type != ACTION_PROGRAM_CHANGE)
-            return false;
-      *hb = hbank;
-      *lb = lbank;
-      *pr = program;
-      return true;
-      }
-
-//---------------------------------------------------------
-//   controller
-//---------------------------------------------------------
-
-bool MidiAction::controller(int* c, int* v)
-      {
-      if (_type != ACTION_CONTROLLER)
-            return false;
-      *c  = ctrl;
-      *v  = ctrlValue;
-      return true;
       }
 
 //---------------------------------------------------------
@@ -141,18 +66,10 @@ bool MidiAction::controller(int* c, int* v)
 
 Instrument::Instrument()
       {
-      midiChannel     = 0;
-      midiPort        = 0;
-      midiProgram     = 0;
-      midiBankSelectH = -1;
-      midiBankSelectL = -1;
-      volume          = 100;
-      pan             = 64;
-      chorus          = 30;
-      reverb          = 30;
-      mute            = false;
-      solo            = false;
-      soloMute        = false;
+      Articulation* a = new Articulation();
+      a->name         = "normal";
+      articulations.append(a);
+
       minPitch        = 0;
       maxPitch        = 127;
       pitchOffset     = 0;
@@ -167,28 +84,6 @@ Instrument::Instrument()
 void Instrument::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      if (midiChannel != 0)
-            xml.tag("midiChannel", midiChannel);
-      if (midiPort != 0)
-            xml.tag("midiPort", midiPort);
-      if (midiProgram != 0)
-            xml.tag("midiProgram", midiProgram);
-      if (midiBankSelectH != -1)
-            xml.tag("midiBankSelectH", midiBankSelectH);
-      if (midiBankSelectL != -1)
-            xml.tag("midiBankSelectL", midiBankSelectL);
-      if (volume != 100)
-            xml.tag("volume", volume);
-      if (pan != 64)
-            xml.tag("pan", pan);
-      if (chorus)
-            xml.tag("chorus", chorus);
-      if (reverb)
-            xml.tag("reverb", reverb);
-      if (mute)
-            xml.tag("mute", mute);
-      if (solo)
-            xml.tag("solo", solo);
       if (minPitch > 0)
             xml.tag("minPitch", minPitch);
       if (maxPitch < 127)
@@ -199,8 +94,10 @@ void Instrument::write(Xml& xml) const
             xml.tag("useDrumset", useDrumset);
             drumset->save(xml);
             }
-      foreach(const MidiAction& a, midiActions)
-            a.write(xml);
+      foreach(const NamedEventList& a, midiActions)
+            a.write(xml, "MidiAction");
+      foreach(const Articulation* a, articulations)
+            a->write(xml);
       xml.etag();
       }
 
@@ -210,33 +107,14 @@ void Instrument::write(Xml& xml) const
 
 void Instrument::read(QDomElement e)
       {
+      foreach(Articulation* a, articulations)
+            delete a;
+      articulations.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "midiChannel")
-                  midiChannel = i;
-            else if (tag == "midiPort")
-                  midiPort = i;
-            else if (tag == "midiProgram")
-                  midiProgram = i;
-            else if (tag == "midiBankSelectH")
-                  midiBankSelectH = i;
-            else if (tag == "midiBankSelectL")
-                  midiBankSelectL = i;
-            else if (tag == "volume")
-                  volume = i;
-            else if (tag == "pan")
-                  pan = i;
-            else if (tag == "chorus")
-                  chorus = i;
-            else if (tag == "reverb")
-                  reverb = i;
-            else if (tag == "mute")
-                  mute = i;
-            else if (tag == "solo")
-                  solo = i;
-            else if (tag == "minPitch")
+            if (tag == "minPitch")
                   minPitch = i;
             else if (tag == "maxPitch")
                   maxPitch = i;
@@ -253,10 +131,19 @@ void Instrument::read(QDomElement e)
                   drumset->load(e);
                   }
             else if (tag == "MidiAction") {
-                  MidiAction a;
+                  NamedEventList a;
                   a.read(e);
                   midiActions.append(a);
                   }
+            else if (tag == "Articulation") {
+                  Articulation* a = new Articulation();
+                  a->read(e);
+                  articulations.append(a);
+                  }
+            else if (tag == "chorus")     // obsolete
+                  ;
+            else if (tag == "reverb")     // obsolete
+                  ;
             else
                   domError(e);
             }
@@ -266,12 +153,168 @@ void Instrument::read(QDomElement e)
 //   action
 //---------------------------------------------------------
 
-MidiAction Instrument::midiAction(const QString& s) const
+NamedEventList Instrument::midiAction(const QString& s) const
       {
-      foreach(const MidiAction& a, midiActions) {
-            if (s == a.name())
+      foreach(const NamedEventList& a, midiActions) {
+            if (s == a.name)
                   return a;
             }
-      return MidiAction();
+      return NamedEventList();
+      }
+
+//---------------------------------------------------------
+//   Articulation
+//---------------------------------------------------------
+
+Articulation::Articulation()
+      {
+      for(int i = 0; i < A_INIT_COUNT; ++i)
+            init.append(0);
+      channel  = -1;
+      program  = 0;
+      hbank    = -1;
+      lbank    = -1;
+      volume   = 100;
+      pan      = 64;
+      chorus   = 30;
+      reverb   = 30;
+
+      mute     = false;
+      solo     = false;
+      soloMute = false;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Articulation::write(Xml& xml) const
+      {
+      if (name.isEmpty())
+            xml.stag("Articulation");
+      else
+            xml.stag(QString("Articulation name=\"%1\"").arg(name));
+      updateInitList();
+      foreach(Event* e, init) {
+            if (e)
+                  e->write(xml);
+            }
+      if (mute)
+            xml.tag("mute", mute);
+      if (solo)
+            xml.tag("solo", solo);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Articulation::read(QDomElement e)
+      {
+      name = e.attribute("name");
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "program") {
+                  program = e.attribute("value", "-1").toInt();
+                  if (program == -1)
+                        program = val.toInt();
+                  ControllerEvent* e = new ControllerEvent();
+                  e->setController(CTRL_PROGRAM);
+                  e->setValue(program);
+                  init[A_PROGRAM] = e;
+                  }
+            else if (tag == "controller") {
+                  int value = e.attribute("value", "0").toInt();
+                  int ctrl  = e.attribute("ctrl", "0").toInt();
+                  ControllerEvent* e = new ControllerEvent();
+                  e->setController(ctrl);
+                  e->setValue(value);
+                  switch(ctrl) {
+                        case CTRL_HBANK:
+                              init[A_HBANK] = e;
+                              hbank = value;
+                              break;
+                        case CTRL_LBANK:
+                              init[A_LBANK] = e;
+                              lbank = value;
+                              break;
+                        case CTRL_VOLUME:
+                              init[A_VOLUME] = e;
+                              volume = value;
+                              break;
+                        case CTRL_PANPOT:
+                              pan = value;
+                              init[A_PAN] = e;
+                              break;
+                        case CTRL_CHORUS_SEND:
+                              chorus = value;
+                              init[A_CHORUS] = e;
+                              break;
+                        case CTRL_REVERB_SEND:
+                              reverb = value;
+                              init[A_REVERB] = e;
+                              break;
+                        default:
+                              init.append(e);
+                              break;
+                        }
+                  }
+            else
+                  domError(e);
+            }
+      updateInitList();
+      }
+
+//---------------------------------------------------------
+//   updateInitList
+//---------------------------------------------------------
+
+void Articulation::updateInitList() const
+      {
+      for (int i = 0; i < A_INIT_COUNT; ++i) {
+            if (init[i]) {
+                  delete init[i];
+                  init[i] = 0;
+                  }
+            }
+      if (program) {
+            ControllerEvent* e = new ControllerEvent();
+            e->setController(CTRL_PROGRAM);
+            e->setValue(program);
+            init[A_PROGRAM] = e;
+            }
+      if (hbank != -1) {
+            ControllerEvent* e = new ControllerEvent();
+            e->setController(CTRL_HBANK);
+            e->setValue(hbank);
+            init[A_HBANK] = e;
+            }
+      if (lbank != -1) {
+            ControllerEvent* e = new ControllerEvent();
+            e->setController(CTRL_LBANK);
+            e->setValue(lbank);
+            init[A_LBANK] = e;
+            }
+      ControllerEvent* e = new ControllerEvent();
+      e->setController(CTRL_VOLUME);
+      e->setValue(volume);
+      init[A_VOLUME] = e;
+
+      e = new ControllerEvent();
+      e->setController(CTRL_PANPOT);
+      e->setValue(pan);
+      init[A_PAN] = e;
+
+      e = new ControllerEvent();
+      e->setController(CTRL_CHORUS_SEND);
+      e->setValue(chorus);
+      init[A_CHORUS] = e;
+
+      e = new ControllerEvent();
+      e->setController(CTRL_REVERB_SEND);
+      e->setValue(reverb);
+      init[A_REVERB] = e;
       }
 

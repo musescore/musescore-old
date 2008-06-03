@@ -82,12 +82,6 @@ class Staff {
       QString trackName() const;
       const QTextDocument& longName() const;
       const QTextDocument& shortName() const;
-      int midiChannel() const;
-      int midiPort() const;
-      int midiProgram() const;
-      int volume() const;
-      int reverb() const;
-      int chorus() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n;    }

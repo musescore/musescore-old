@@ -44,14 +44,12 @@ struct InstrumentTemplate {
       int staffLines[MAX_STAVES];
       int smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
-      int midiProgram;
-      int midiBankSelectH;
-      int midiBankSelectL;
-      int minPitch;
-      int maxPitch;
-      int transpose;          // for transposing instruments
+      char minPitch;
+      char maxPitch;
+      char transpose;          // for transposing instruments
       bool useDrumset;
-      QList<MidiAction> midiActions;
+      QList<NamedEventList> midiActions;
+      QList<Articulation*> articulations;
 
       InstrumentTemplate();
 

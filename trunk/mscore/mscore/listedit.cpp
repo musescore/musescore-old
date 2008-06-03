@@ -111,11 +111,10 @@ void ElementItem::init()
 //   PageListEditor
 //---------------------------------------------------------
 
-PageListEditor::PageListEditor(Score* s)
-   : QWidget()
+PageListEditor::PageListEditor(QWidget* parent)
+   : QWidget(parent)
       {
       setWindowTitle(tr("MuseScore: Object Inspector"));
-      cs = s;
       QHBoxLayout* hbox = new QHBoxLayout;
       setLayout(hbox);
 
@@ -247,8 +246,9 @@ void PageListEditor::layoutScore()
 //   updateList
 //---------------------------------------------------------
 
-void PageListEditor::updateList()
+void PageListEditor::updateList(Score* s)
       {
+      cs = s;
       list->clear();
       ElementItem* li = new ElementItem(list, cs->layout());
       foreach(Element* el, *cs->gel()) {

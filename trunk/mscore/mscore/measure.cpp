@@ -2665,9 +2665,9 @@ void Measure::createVoice(int track)
 bool Measure::setStartRepeatBarLine(bool val)
       {
       bool changed = false;
-      QList<Part*>* pl = score()->parts();
+      const QList<Part*>* pl = score()->parts();
 
-      foreach(Part* part, *pl) {
+      foreach(const Part* part, *pl) {
             BarLine* bl  = 0;
             Staff* staff = part->staff(0);
             int track    = staff->idx() * VOICES;

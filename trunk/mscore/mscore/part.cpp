@@ -26,6 +26,7 @@
 #include "style.h"
 #include "note.h"
 #include "drumset.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   Part
@@ -46,6 +47,30 @@ Part::Part(Score* s)
 
       _score = s;
       _show  = true;
+      }
+
+//---------------------------------------------------------
+//   initFromInstrTemplate
+//---------------------------------------------------------
+
+void Part::initFromInstrTemplate(const InstrumentTemplate* t)
+      {
+      // setMidiProgram(t->midiProgram);
+      setMinPitch(t->minPitch);
+      setMaxPitch(t->maxPitch);
+      setShortName(t->shortName);
+      setTrackName(t->trackName);
+      setLongName(t->name);
+      setPitchOffset(t->transpose);
+      if (t->useDrumset) {
+            setUseDrumset(true);
+            setDrumset(new Drumset(*smDrumset));
+            }
+      _instrument.midiActions   = t->midiActions;
+      foreach(Articulation* a, _instrument.articulations)
+            delete a;
+      _instrument.articulations.clear();
+      _instrument.articulations = t->articulations;
       }
 
 //---------------------------------------------------------
@@ -244,5 +269,57 @@ void Part::setShow(bool val)
       _show = val;
       foreach(Staff* staff, _staves)
             staff->setShow(_show);
+      }
+
+//---------------------------------------------------------
+//   setMidiProgram
+//    TODO
+//---------------------------------------------------------
+
+void Part::setMidiProgram(int)
+      {
+      }
+
+int Part::volume() const
+      {
+      return _instrument.articulations[0]->volume;
+      }
+
+int Part::reverb() const
+      {
+      return _instrument.articulations[0]->reverb;
+      }
+
+int Part::chorus() const
+      {
+      return _instrument.articulations[0]->chorus;
+      }
+
+int Part::pan() const
+      {
+      return _instrument.articulations[0]->pan;
+      }
+
+int Part::midiProgram() const
+      {
+      return _instrument.articulations[0]->program;
+      }
+
+//---------------------------------------------------------
+//   midiChannel
+//---------------------------------------------------------
+
+int Part::midiChannel() const
+      {
+      return score()->midiChannel(_instrument.articulations[0]->channel);
+      }
+
+//---------------------------------------------------------
+//   setMidiChannel
+//---------------------------------------------------------
+
+void Part::setMidiChannel(int)
+      {
+
       }
 

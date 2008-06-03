@@ -45,18 +45,21 @@ PartEdit::PartEdit(QWidget* parent)
 //   setPart
 //---------------------------------------------------------
 
-void PartEdit::setPart(Part* p)
+void PartEdit::setPart(Part* p, Articulation* a)
       {
-      part = p;
-      const Instrument* i = part->instrument();
-      partName->setText(part->trackName());
-      mute->setChecked(i->mute);
-      solo->setChecked(i->solo);
-      volume->setValue(i->volume);
-      reverb->setValue(i->reverb);
-      chorus->setValue(i->chorus);
-      pan->setValue(i->pan);
-      patch->setCurrentIndex(i->midiProgram);
+      articulation = a;
+      part         = p;
+      QString s = part->trackName();
+      if (!a->name.isEmpty())
+            s += "-" + a->name;
+      partName->setText(s);
+      mute->setChecked(a->mute);
+      solo->setChecked(a->solo);
+      volume->setValue(a->volume);
+      reverb->setValue(a->reverb);
+      chorus->setValue(a->chorus);
+      pan->setValue(a->pan);
+      patch->setCurrentIndex(a->program);
       }
 
 //---------------------------------------------------------
@@ -93,9 +96,9 @@ void InstrumentListEditor::closeEvent(QCloseEvent* ev)
 
 void InstrumentListEditor::updateAll(Score* cs)
       {
-      QList<Part*>* pl = cs->parts();
+      QList<MidiMapping>* mm = cs->midiMapping();
 
-      int n = pl->size() - vb->count();
+      int n = mm->size() - vb->count();
       while (n < 0) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(0));
             vb->removeItem(wi);
@@ -120,10 +123,10 @@ void InstrumentListEditor::updateAll(Score* cs)
             }
       QString s;
       int idx = 0;
-      foreach (Part* part, *pl) {
+      foreach (const MidiMapping& m, *mm) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            pe->setPart(part);
+            pe->setPart(m.part, m.articulation);
             ++idx;
             }
       }
@@ -152,30 +155,28 @@ void PartEdit::patchChanged(int n)
             if (p == 0)
                   break;
             if (idx == n) {
-                  Instrument* instr      = part->instrument();
-                  instr->midiProgram     = p->prog;
-                  instr->midiBankSelectH = p->hbank;
-                  instr->midiBankSelectL = p->lbank;
+                  articulation->program = p->prog;
+                  articulation->hbank   = p->hbank;
+                  articulation->lbank   = p->lbank;
 
                   MidiOutEvent event;
-                  event.port = instr->midiPort;
-                  event.type = ME_CONTROLLER | instr->midiChannel;
+                  int idx = articulation->channel;
+                  event.port = part->score()->midiPort(idx);
+                  event.type = ME_CONTROLLER | part->score()->midiChannel(idx);
 
-                  if (instr->midiBankSelectH != -1) {
+                  if (articulation->hbank != -1) {
                         event.a    = CTRL_HBANK;
-                        event.b    = instr->midiBankSelectH;
+                        event.b    = articulation->hbank;
                         seq->sendEvent(event);
                         }
-                  if (instr->midiBankSelectL != -1) {
+                  if (articulation->lbank != -1) {
                         event.a    = CTRL_LBANK;
-                        event.b    = instr->midiBankSelectL;
+                        event.b    = articulation->lbank;
                         seq->sendEvent(event);
                         }
-                  if (instr->midiProgram != -1) {
-                        event.type = ME_PROGRAM | instr->midiChannel;
-                        event.a    = instr->midiProgram;
-                        seq->sendEvent(event);
-                        }
+                  event.type = ME_PROGRAM | part->score()->midiChannel(idx);
+                  event.a    = articulation->program;
+                  seq->sendEvent(event);
                   return;
                   }
             }
@@ -188,11 +189,9 @@ void PartEdit::patchChanged(int n)
 
 void PartEdit::volChanged(double val)
       {
-// printf("volChanged %d\n", lrint(val));
-      Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiPort, i->midiChannel, CTRL_VOLUME, iv);
-      i->volume = iv;
+      seq->setController(articulation->channel, CTRL_VOLUME, iv);
+      articulation->volume = iv;
       }
 
 //---------------------------------------------------------
@@ -201,11 +200,9 @@ void PartEdit::volChanged(double val)
 
 void PartEdit::panChanged(double val)
       {
-// printf("panChanged %d\n", lrint(val));
-      Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiPort, i->midiChannel, CTRL_PANPOT, iv);
-      i->pan = iv;
+      seq->setController(articulation->channel, CTRL_PANPOT, iv);
+      articulation->pan = iv;
       }
 
 //---------------------------------------------------------
@@ -214,11 +211,9 @@ void PartEdit::panChanged(double val)
 
 void PartEdit::reverbChanged(double val)
       {
-// printf("reverbChanged %d\n", lrint(val));
-      Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiPort, i->midiChannel, CTRL_REVERB_SEND, iv);
-      i->reverb = iv;
+      seq->setController(articulation->channel, CTRL_REVERB_SEND, iv);
+      articulation->reverb = iv;
       }
 
 //---------------------------------------------------------
@@ -227,11 +222,9 @@ void PartEdit::reverbChanged(double val)
 
 void PartEdit::chorusChanged(double val)
       {
-// printf("chorusChanged %d\n", lrint(val));
-      Instrument* i = part->instrument();
       int iv = lrint(val);
-      seq->setController(i->midiPort, i->midiChannel, CTRL_CHORUS_SEND, iv);
-      i->chorus = iv;
+      seq->setController(articulation->channel, CTRL_CHORUS_SEND, iv);
+      articulation->chorus = iv;
       }
 
 //---------------------------------------------------------
@@ -240,8 +233,7 @@ void PartEdit::chorusChanged(double val)
 
 void PartEdit::muteChanged(bool val)
       {
-      Instrument* i = part->instrument();
-      i->mute = val;
+      articulation->mute = val;
       }
 
 //---------------------------------------------------------
@@ -250,21 +242,23 @@ void PartEdit::muteChanged(bool val)
 
 void PartEdit::soloToggled(bool val)
       {
-      Instrument* i = part->instrument();
-
-      i->solo = val;
+      articulation->solo = val;
       if (val) {
             foreach(Part* part, *part->score()->parts()) {
                   Instrument* instr = part->instrument();
-                  instr->soloMute = (instr != i);
-                  instr->solo = (instr == i);
+                  foreach(Articulation* a, instr->articulations) {
+                        a->soloMute = (articulation != a);
+                        a->solo = (articulation == a);
+                        }
                   }
             }
       else {
             foreach(Part* part, *part->score()->parts()) {
                   Instrument* instr = part->instrument();
-                  instr->soloMute = false;
-                  instr->solo = false;
+                  foreach(Articulation* a, instr->articulations) {
+                        a->soloMute = false;
+                        a->solo = false;
+                        }
                   }
             }
       emit soloChanged();
@@ -276,7 +270,7 @@ void PartEdit::soloToggled(bool val)
 
 void PartEdit::updateSolo()
       {
-      solo->setChecked(part->instrument()->solo);
+      solo->setChecked(articulation->solo);
       }
 
 //---------------------------------------------------------

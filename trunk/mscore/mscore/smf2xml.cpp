@@ -169,7 +169,7 @@ int main(int argc, char* argv[])
                         t->cleanup();
                   xml.stag("Track");
                   foreach (const Event* e, t->events())
-                        e->dump(xml);
+                        e->write(xml);
                   xml.etag();
                   }
             xml.etag();

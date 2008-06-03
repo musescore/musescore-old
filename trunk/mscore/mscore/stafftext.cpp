@@ -42,7 +42,7 @@ void StaffText::write(Xml& xml) const
       if (!_instrumentActionName.isEmpty())
             xml.tagE(QString("midiInstrumentAction name=\"%1\"").arg(_instrumentActionName));
       else
-            _midiAction.write(xml);
+            _midiAction.write(xml, "MidiAction");
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -53,7 +53,7 @@ void StaffText::write(Xml& xml) const
 
 void StaffText::read(QDomElement e)
       {
-      _midiAction = MidiAction();
+      _midiAction = NamedEventList();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "MidiAction")
@@ -102,6 +102,7 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       setupUi(this);
       staffText = st;
 
+#if 0
       MidiAction ma = st->midiAction();
       if (!st->instrumentActionName().isEmpty()) {
             instrumentDefinedAction->setChecked(true);
@@ -137,6 +138,7 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
                         break;
                   }
             }
+#endif
 
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       connect(sendProgramChange, SIGNAL(toggled(bool)), SLOT(typeProgramChanged(bool)));
@@ -150,6 +152,7 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
 void StaffTextProperties::saveValues()
       {
+#if 0       // TODO
       if (sendProgramChange->isChecked()) {
             staffText->setMidiProgram(
                midiBankSelectH->value() - 1,
@@ -168,6 +171,7 @@ void StaffTextProperties::saveValues()
             }
       else
             staffText->setMidiAction(MidiAction());
+#endif
       }
 
 //---------------------------------------------------------

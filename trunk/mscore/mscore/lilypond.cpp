@@ -382,7 +382,7 @@ void Lilypond::convert()
       tick = 0;
 
       part = new Part(score);
-      score->parts()->push_back(part);
+      score->appendPart(part);
 
       staff = new Staff(score, part, 0);
       score->staves().push_back(staff);

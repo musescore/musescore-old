@@ -76,6 +76,8 @@ class Note : public Element {
       static int noteHeads[HEAD_GROUPS][4];
       static int smallNoteHeads[HEAD_GROUPS][4];
 
+      int _subchannel;        ///< articulation
+
       int _pitch;             ///< Note pitch as midi value (0 - 127).
       int _tpc;               ///< tonal pitch class
 
@@ -121,7 +123,7 @@ class Note : public Element {
       double headHeight() const;
       int noteHead() const            { return _head;  }
       int headGroup() const           { return _headGroup; }
-      void setHeadGroup(int val)      { _headGroup = val; }
+      void setHeadGroup(int val);
 
       int pitch() const               { return _pitch; }
       void setPitch(int val);
@@ -174,6 +176,9 @@ class Note : public Element {
 
       ElementList* el()             { return &_el; }
       const ElementList* el() const { return &_el; }
+
+      int subchannel() const        { return _subchannel; }
+      void setSubchannel(int val)   { _subchannel = val;  }
 
       virtual void setTickLen(int n) { printf("Note: setTickLen %d\n", n); }
       };

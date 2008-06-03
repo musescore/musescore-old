@@ -361,7 +361,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       if (mscore->playEnabled() && dragObject && dragObject->type() == NOTE) {
             Note* note = (Note*)dragObject;
-            seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
+            Part* part = note->staff()->part();
+            int pitch  = note->pitch() + part->pitchOffset();
+            Instrument* i = part->instrument();
+            // TODO whats the current articulation?
+            seq->startNote(i->articulations[0], pitch, 60, 1000);
             }
 
       //-----------------------------------------
@@ -1068,6 +1072,11 @@ void Canvas::moveCursor()
       Segment* segment = _score->tick2segment(cursor->tick());
       if (segment) {
             System* system = segment->measure()->system();
+            if (system == 0) {
+                  // a new measure was appended but no layout took place
+printf("zero SYSTEM\n");
+                  return;
+                  }
             double x = segment->canvasPos().x();
             double y = system->bboxStaff(cursor->staffIdx()).y() + system->canvasPos().y();
 

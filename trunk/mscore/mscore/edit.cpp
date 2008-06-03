@@ -399,9 +399,9 @@ void Score::putNote(const QPointF& pos, bool replace)
             if (cr->type() == CHORD) {
                   Note* note = addNote((Chord*)cr, pitch);
                   select(note, 0, 0);
-                  if (seq && mscore->playEnabled()) {
-                        seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
-                        }
+//                  if (seq && mscore->playEnabled()) {
+//                        seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
+//                        }
                   }
             else {
                   if (cr->tuplet()) {

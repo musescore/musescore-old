@@ -5,99 +5,137 @@
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
          <clef>0</clef>
-         <midiprogram>72</midiprogram>
+         <Articulation>
+            <program>72</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Flute</name>
          <short-name>Fl.</short-name>
-         <midiprogram>73</midiprogram>
+         <Articulation>
+            <program>73</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Alto Flute</name>
          <short-name>Alt. Fl.</short-name>
-         <midiprogram>73</midiprogram>
+         <Articulation>
+            <program>73</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass Flute</name>
          <short-name>Bs. Fl.</short-name>
-         <midiprogram>73</midiprogram>
+         <Articulation>
+            <program>73</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Pan Flute</name>
          <short-name>Pan Fl.</short-name>
-         <midiprogram>75</midiprogram>
+         <Articulation>
+            <program>75</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Oboe</name>
          <short-name>Ob.</short-name>
-         <midiprogram>68</midiprogram>
+         <Articulation>
+            <program>68</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>English Horn</name>
          <short-name>Eng. Hn.</short-name>
-         <midiprogram>69</midiprogram>
+         <Articulation>
+            <program>69</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Clarinet</name>
          <short-name>B<symbol name="flat"/>Cl.</short-name>
-         <midiprogram>71</midiprogram>
+         <Articulation>
+            <program>71</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Clarinet</name>
          <short-name>E<symbol name="flat"/>Cl.</short-name>
-         <midiprogram>71</midiprogram>
+         <Articulation>
+            <program>71</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>A Clarinet</name>
          <short-name>A Cl.</short-name>
-         <midiprogram>71</midiprogram>
+         <Articulation>
+            <program>71</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass Clarinet</name>
          <short-name>Bs. Cl.</short-name>
-         <midiprogram>71</midiprogram>
+         <Articulation>
+            <program>71</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bassoon</name>
          <short-name>Bsn.</short-name>
          <clef>4</clef>
-         <midiprogram>70</midiprogram>
+         <Articulation>
+            <program>70</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Contrabassoon</name>
          <short-name>Cbsn.</short-name>
          <clef>4</clef>
-         <midiprogram>70</midiprogram>
+         <Articulation>
+            <program>70</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Saxophone</name>
          <short-name>Sax.</short-name>
-         <midiprogram>65</midiprogram>
+         <Articulation>
+            <program>65</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Soprano Saxophone</name>
          <short-name>Sop. Sax.</short-name>
-         <midiprogram>64</midiprogram>
+         <Articulation>
+            <program>64</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Alto Saxophone</name>
          <short-name>Alt. Sax.</short-name>
-         <midiprogram>65</midiprogram>
+         <Articulation>
+            <program>65</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Tenor Saxophone</name>
          <short-name>Ten. Sax.</short-name>
-         <midiprogram>66</midiprogram>
+         <Articulation>
+            <program>66</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Baritone Saxophone</name>
          <short-name>Bar. Sax.</short-name>
-         <midiprogram>67</midiprogram>
+         <Articulation>
+            <program>67</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass Saxophone</name>
          <short-name>Bs. Sax.</short-name>
-         <midiprogram>67</midiprogram>
+         <Articulation>
+            <program>67</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -105,62 +143,84 @@
       <instrument>
          <name>Horn</name>
          <short-name>F Hn.</short-name>
-         <midiprogram>60</midiprogram>
+         <Articulation>
+            <program>60</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Trumpet</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
-         <midiprogram>56</midiprogram>
+         <Articulation>
+            <program>56</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>D Trumpet</name>
          <short-name>D Tpt.</short-name>
-         <midiprogram>56</midiprogram>
+         <Articulation>
+            <program>56</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>C Trumpet</name>
          <short-name>C Tpt.</short-name>
-         <midiprogram>56</midiprogram>
+         <Articulation>
+            <program>56</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Trumpet</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
-         <midiprogram>56</midiprogram>
+         <Articulation>
+            <program>56</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Muted Trumpet</name>
          <short-name>Mt. Tpt.</short-name>
-         <midiprogram>59</midiprogram>
+         <Articulation>
+            <program>59</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Trombone</name>
          <short-name>Trb.</short-name>
          <clef>4</clef>
-         <midiprogram>57</midiprogram>
+         <Articulation>
+            <program>57</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Tenor Trombone</name>
          <short-name>Ten. Trb.</short-name>
          <clef>4</clef>
-         <midiprogram>57</midiprogram>
+         <Articulation>
+            <program>57</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass Trombone</name>
          <short-name>Bs. Trb.</short-name>
          <clef>4</clef>
-         <midiprogram>57</midiprogram>
+         <Articulation>
+            <program>57</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Tuba</name>
          <short-name>Tba.</short-name>
          <clef>4</clef>
-         <midiprogram>58</midiprogram>
+         <Articulation>
+            <program>58</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Euphonium</name>
          <short-name>Euph.</short-name>
          <clef>4</clef>
-         <midiprogram>58</midiprogram>
+         <Articulation>
+            <program>58</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -182,7 +242,9 @@
          <name>Tympani</name>
          <short-name>Tymp.</short-name>
          <clef>4</clef>
-         <midiprogram>47</midiprogram>
+         <Articulation>
+            <program>47</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -190,56 +252,78 @@
       <instrument>
          <name>Guitar</name>
          <short-name>Guit.</short-name>
-         <midiprogram>24</midiprogram>
+         <Articulation>
+            <program>24</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Electric Guitar</name>
          <short-name>El. Guit.</short-name>
-         <midiprogram>27</midiprogram>
+         <Articulation>
+            <program>27</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass Guitar</name>
          <short-name>B. Guit.</short-name>
          <clef>4</clef>
-         <midiprogram>33</midiprogram>
+         <Articulation>
+            <program>33</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
    <instrument-group name="Vocals">
       <instrument>
          <name>Voice</name>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Soprano</name>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Mezzo-soprano</name>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Contralto</name>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Countertenor</name>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Tenor</name>
          <clef>3</clef>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Baritone</name>
          <clef>4</clef>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Bass</name>
          <clef>4</clef>
-         <midiprogram>52</midiprogram>
+         <Articulation>
+            <program>52</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -251,7 +335,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>0</midiprogram>
+         <Articulation>
+            <program>0</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Harpsichord</name>
@@ -260,7 +346,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>6</midiprogram>
+         <Articulation>
+            <program>6</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Organ</name>
@@ -269,7 +357,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>19</midiprogram>
+         <Articulation>
+            <program>19</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Rock Organ</name>
@@ -278,7 +368,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>18</midiprogram>
+         <Articulation>
+            <program>18</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Accordian</name>
@@ -287,7 +379,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>21</midiprogram>
+         <Articulation>
+            <program>21</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -299,7 +393,9 @@
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
          <bracket>1</bracket>
-         <midiprogram>46</midiprogram>
+         <Articulation>
+            <program>46</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 
@@ -307,59 +403,85 @@
       <instrument>
          <name>Violin</name>
          <short-name>V1n.</short-name>
-         <midiprogram>40</midiprogram>
+         <Articulation>
+            <program>40</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Violins 1</name>
          <short-name>V1ns. 1</short-name>
-         <midiprogram>48</midiprogram>
+         <Articulation>
+           <program value="48"/>
+            </Articulation>
+         <Articulation name="pizzicato">
+           <program value="45"/>
+           </Articulation>
+         <Articulation name="tremolo">
+           <program value="44"/>
+           </Articulation>
          </instrument>
       <instrument>
          <name>Violins 2</name>
          <short-name>V1ns. 2</short-name>
-         <midiprogram>48</midiprogram>
+         <Articulation>
+            <program>48</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Viola</name>
          <short-name>V1a.</short-name>
          <clef>11</clef>
-         <midiprogram>41</midiprogram>
+         <Articulation>
+            <program>41</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Violas</name>
          <short-name>V1as.</short-name>
          <clef>11</clef>
-         <midiprogram>49</midiprogram>
+         <Articulation>
+            <program>49</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Violoncello</name>
          <short-name>Vlc.</short-name>
          <clef>4</clef>
-         <midiprogram>42</midiprogram>
+         <Articulation>
+            <program>42</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Violoncellos</name>
          <short-name>Vlcs.</short-name>
          <clef>4</clef>
-         <midiprogram>49</midiprogram>
+         <Articulation>
+            <program>49</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Double Bass</name>
          <short-name>D.B.</short-name>
          <clef>4</clef>
-         <midiprogram>32</midiprogram>
+         <Articulation>
+            <program>32</program>
+            </Articulation>
          </instrument>
       <instrument>
          <name>Contrabass</name>
          <short-name>C.B.</short-name>
          <clef>4</clef>
-         <midiprogram>43</midiprogram>
+         <Articulation>
+            <program>43</program>
+            </Articulation>
          </instrument>
        <instrument>
          <name>Contrabasses</name>
          <short-name>Cbs.</short-name>
          <clef>4</clef>
-         <midiprogram>49</midiprogram>
+         <Articulation>
+            <program>49</program>
+            </Articulation>
          </instrument>
       </instrument-group>
 

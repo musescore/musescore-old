@@ -28,6 +28,7 @@ class Xml;
 class Staff;
 class Score;
 class Drumset;
+class InstrumentTemplate;
 
 //---------------------------------------------------------
 //   Part
@@ -46,6 +47,8 @@ class Part {
    public:
       Part(Score*);
       ~Part() {}
+      void initFromInstrTemplate(const InstrumentTemplate*);
+
       void read(QDomElement);
       void write(Xml& xml) const;
       int nstaves() const;
@@ -63,8 +66,7 @@ class Part {
       void setShortName(const QTextDocument& s);
       void setTrackName(const QString& s)      { _trackName = s; }
       void setStaves(int);
-      void setMidiChannel(int val)             { _instrument.midiChannel = val;  }
-      void setMidiProgram(int val)             { _instrument.midiProgram = val;  }
+
       void setMinPitch(int val)                { _instrument.minPitch = val;     }
       void setMaxPitch(int val)                { _instrument.maxPitch = val;     }
 
@@ -73,15 +75,19 @@ class Part {
       bool useDrumset() const                  { return _instrument.useDrumset;  }
       void setUseDrumset(bool val);
 
-      int midiChannel() const                  { return _instrument.midiChannel; }
-      int midiPort() const                     { return _instrument.midiPort; }
-      int midiProgram() const                  { return _instrument.midiProgram; }
       int minPitch() const                     { return _instrument.minPitch;    }
       int maxPitch() const                     { return _instrument.maxPitch;    }
-      int volume() const                       { return _instrument.volume;      }
-      int reverb() const                       { return _instrument.reverb;      }
-      int chorus() const                       { return _instrument.chorus;      }
-      int pan() const                          { return _instrument.chorus;      }
+
+      int volume() const;
+      int reverb() const;
+      int chorus() const;
+      int pan() const;
+      int midiProgram() const;
+      void setMidiProgram(int);
+
+      int midiChannel() const;
+      void setMidiChannel(int);
+
       void setPitchOffset(int val)             { _instrument.pitchOffset = val;  }
       int pitchOffset() const                  { return _instrument.pitchOffset; }
       void insertStaff(Staff*);

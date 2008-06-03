@@ -599,6 +599,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
                         printf("append measure failed\n");
                         return;
                         }
+                  setLayoutAll(true);
                   }
             setLayout(measure);
             Segment* segment = measure->first();
@@ -645,8 +646,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setPitch(pitch);
             note->setTrack(track);
 
-            if (seq && mscore->playEnabled())
-                  seq->startNote(note->staff()->part(), note->pitch(), 64, 1000);
+//            if (seq && mscore->playEnabled())
+//                  seq->startNote(note->staff()->part(), note->pitch(), 64, 1000);
 
             if (tie) {
                   tie->setEndNote(note);
@@ -953,8 +954,8 @@ void Score::upDown(bool up, bool octave)
             if (e->type() != NOTE)
                   continue;
             Note* note = (Note*)e;
-            while (note->tieBack())
-                  note = note->tieBack()->startNote();
+//            while (note->tieBack())
+//                  note = note->tieBack()->startNote();
             if (layoutStart == 0)
                   layoutStart = note->chord()->segment()->measure();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
@@ -986,8 +987,8 @@ void Score::upDown(bool up, bool octave)
             undoChangePitch(oNote, newPitch);
 
             // play new note with velocity 80 for 0.3 sec:
-            if (seq && mscore->playEnabled())
-                  seq->startNote(oNote->staff()->part(), newPitch, 80, 300);
+//            if (seq && mscore->playEnabled())
+//                  seq->startNote(oNote->staff()->part(), newPitch, 80, 300);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed

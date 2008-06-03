@@ -30,7 +30,7 @@
 //---------------------------------------------------------
 
 class StaffText : public Text  {
-      MidiAction _midiAction;
+      NamedEventList _midiAction;
       QString _instrumentActionName;
 
    public:
@@ -44,11 +44,7 @@ class StaffText : public Text  {
 
       virtual void layout(ScoreLayout*);
 
-      void setMidiProgram(int hb, int lb, int pr)    { _midiAction.setProgram(hb, lb, pr);     }
-      void setMidiController(int ctrl, int value)    { _midiAction.setController(ctrl, value); }
-      void setMidiAction(const MidiAction& a)        { _midiAction = a; }
-      MidiAction midiAction() const                  { return _midiAction; }
-
+      NamedEventList midiAction() const              { return _midiAction; }
       void setInstrumentActionName(const QString& s) { _instrumentActionName = s; }
       QString instrumentActionName() const           { return _instrumentActionName; }
       };

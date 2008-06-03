@@ -1108,7 +1108,7 @@ bool Score::read(QDomElement e)
                   else if (tag == "Part") {
                         Part* part = new Part(this);
                         part->read(ee);
-                        parts()->push_back(part);
+                        _parts.push_back(part);
                         }
                   else if (tag == "showInvisible")
                         _showInvisible = i;

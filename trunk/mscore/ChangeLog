@@ -1,3 +1,8 @@
+3.6.8  (ws)
+      - new (incomplete) midi structure; a part (all staves for one instrument)
+        can use more than one midi channel configurable in the instruments.xml
+        file. The channels are used for different articulations of that instrument
+        (example pizzicato for strings).
 25.5.8 (ws)
       - fix dynamics text
       - changed layout of note heads in stem down chord

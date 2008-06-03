@@ -64,6 +64,7 @@ struct MNote;
 class Excerpt;
 class EventMap;
 class Harmony;
+struct Articulation;
 
 struct Style;
 struct SigEvent;
@@ -107,6 +108,17 @@ class MeasureBaseList {
       };
 
 //---------------------------------------------------------
+//   MidiMapping
+//---------------------------------------------------------
+
+struct MidiMapping {
+      char port;
+      char channel;
+      Part* part;
+      Articulation* articulation;
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -115,8 +127,9 @@ class Score : public QObject {
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
 
-      MeasureBaseList _measures;           // here are the notes
-      QList<Element*> _gel;   // global elements: Slur, SLine
+      QList<MidiMapping> _midiMapping;
+      MeasureBaseList _measures;          // here are the notes
+      QList<Element*> _gel;               // global elements: Slur, SLine
 
       PadState   _padState;
       InputState _is;
@@ -440,7 +453,8 @@ class Score : public QObject {
       Element* dragObject() const    { return _dragObject; }
       void setDragObject(Element* e) { _dragObject = e; }
       void midiNoteReceived(int pitch, bool);
-      QList<Part*>* parts()       { return &_parts; }
+      const QList<Part*>* parts() const  { return &_parts; }
+      void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int> dst);
       void read(QString name);
@@ -563,6 +577,10 @@ class Score : public QObject {
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
       void setLayout(Measure* m);
+      int midiPort(int idx)                   { return _midiMapping[idx].port; }
+      int midiChannel(int idx)                { return _midiMapping[idx].channel; }
+      QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
+      void rebuildMidiMapping();
       };
 
 extern Score* gscore;
