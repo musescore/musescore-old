@@ -107,6 +107,8 @@ void Instrument::write(Xml& xml) const
 
 void Instrument::read(QDomElement e)
       {
+      int chorus = 30;
+      int reverb = 30;
       foreach(Articulation* a, articulations)
             delete a;
       articulations.clear();
@@ -141,11 +143,18 @@ void Instrument::read(QDomElement e)
                   articulations.append(a);
                   }
             else if (tag == "chorus")     // obsolete
-                  ;
+                  chorus = i;
             else if (tag == "reverb")     // obsolete
-                  ;
+                  reverb = i;
             else
                   domError(e);
+            }
+      if (articulations.isEmpty()) {      // for backward compatibility
+            Articulation* a = new Articulation();
+            a->chorus       = chorus;
+            a->reverb       = reverb;
+            a->name         = "normal";
+            articulations.append(a);
             }
       }
 

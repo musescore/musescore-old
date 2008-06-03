@@ -202,7 +202,7 @@ class Score : public QObject {
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
 
-      void collectChord(EventMap*, int channel, int port,
+      void collectChord(EventMap*, Instrument*,
          int pitchOffset, Chord*, int tick, int gateTime);
       void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
 
