@@ -24,6 +24,7 @@
 class Note;
 class MidiFile;
 class Xml;
+class MidiOutEvent;
 
 //---------------------------------------------------------
 //   Midi Events
@@ -146,7 +147,9 @@ class Event {
 
       virtual bool isChannelEvent() const = 0;
       virtual void write(MidiFile*) const {}
-      virtual void dump(Xml&) const {}
+      virtual void write(Xml&) const {}
+      virtual void read(QDomElement) {}
+      virtual bool midiOutEvent(MidiOutEvent*) { return false; }
       };
 
 //---------------------------------------------------------
@@ -208,7 +211,7 @@ class NoteOn : public NoteOnOff {
       virtual int type() const { return ME_NOTEON; }
 
       virtual void write(MidiFile*) const;
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -222,7 +225,7 @@ class NoteOff : public NoteOnOff {
       virtual int type() const { return ME_NOTEOFF; }
 
       virtual void write(MidiFile*) const;
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -242,7 +245,7 @@ class NoteEvent : public NoteOnOff {
       int offtime() const      { return ontime() + _duration; }
       int tpc() const          { return _tpc;    }
       void setTpc(int v)       { _tpc = v;       }
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -265,7 +268,7 @@ class ChordEvent : public Event {
       int offtime() const           { return ontime() + _duration; }
       QList<NoteEvent*>& notes()    { return _notes;    }
       bool isChannelEvent() const   { return true;      }
-      virtual void dump(Xml&) const {}
+      virtual void write(Xml&) const {}
       };
 
 //---------------------------------------------------------
@@ -291,7 +294,8 @@ class ControllerEvent : public ChannelEvent {
       int value() const                   { return _b; }
       void setValue(int v)                { _b = v; }
       virtual void write(MidiFile*) const;
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
+      virtual bool midiOutEvent(MidiOutEvent*);
       };
 
 //---------------------------------------------------------
@@ -330,7 +334,7 @@ class SysexEvent : public DataEvent {
       virtual int type() const { return ME_SYSEX; }
 
       virtual void write(MidiFile*) const;
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -349,7 +353,7 @@ class MetaEvent : public DataEvent {
       int metaType() const     { return _metaType; }
       void setMetaType(int v)  { _metaType = v;    }
       virtual void write(MidiFile*) const;
-      virtual void dump(Xml&) const;
+      virtual void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -360,7 +364,6 @@ class MetaEvent : public DataEvent {
 class EventList : public QList<Event*> {
    public:
       void insert(Event*);
-      void insert(int,int);
       };
 
 class EventMap : public QMap<int, Event*> {};

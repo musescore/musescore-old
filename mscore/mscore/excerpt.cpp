@@ -36,7 +36,7 @@
 
 void Excerpt::read(QDomElement e)
       {
-      QList<Part*>* pl = score->parts();
+      const QList<Part*>* pl = score->parts();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag = e.tagName();
             if (tag == "name")
@@ -62,8 +62,8 @@ void Excerpt::write(Xml& xml) const
       xml.stag("Excerpt");
       xml.tag("name", _name);
       xml.tag("title", _title);
-      QList<Part*>* pl = score->parts();
-      foreach(Part* part, _parts)
+      const QList<Part*>* pl = score->parts();
+      foreach(Part* const part, _parts)
             xml.tag("part", pl->indexOf(part));
       xml.etag();
       }

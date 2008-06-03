@@ -95,9 +95,9 @@ class PageListEditor : public QWidget {
       void setElement(Element*);
 
    public:
-      PageListEditor(Score*);
+      PageListEditor(QWidget* parent = 0);
       void writeSettings();
-	void updateList();
+	void updateList(Score*);
       };
 
 //---------------------------------------------------------

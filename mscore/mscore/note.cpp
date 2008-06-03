@@ -96,7 +96,8 @@ Note::Note(Score* s)
       _tpc            = -1;
       _headGroup      = 0;
       _hidden         = false;
-      _head = noteHeads[0][2];
+      _subchannel     = 0;
+      _head           = noteHeads[0][2];
       }
 
 //---------------------------------------------------------
@@ -105,8 +106,12 @@ Note::Note(Score* s)
 
 void Note::setPitch(int val)
       {
+      if (val > 127)
+            val = 127;
+      else if (val < 0)
+            val = 0;
       _pitch = val;
-      _tpc   = pitch2tpc(_pitch);
+      _tpc = pitch2tpc(_pitch);
       }
 
 //---------------------------------------------------------
@@ -370,6 +375,16 @@ void Note::setType(Duration t)
       }
 
 //---------------------------------------------------------
+//   setHeadGroup
+//---------------------------------------------------------
+
+void Note::setHeadGroup(int val)
+      {
+      _headGroup = val;
+      _head = noteHeads[_headGroup][chord()->duration().headType()];
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -564,6 +579,7 @@ void Note::endDrag()
       int clef    = chord()->staff()->clef()->clef(chord()->tick());
       int key     = staff()->keymap()->key(chord()->tick());
       int npitch = line2pitch(_line, clef, key);
+printf("line %d  pitch %d\n", _line, npitch);
       setPitch(npitch);
       }
 

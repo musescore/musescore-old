@@ -145,6 +145,7 @@ add_executable ( mscore
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
+      event.cpp
       ${AUDIO}
       )
 
@@ -237,7 +238,9 @@ endif (MINGW)
 #======================================
 
 if (NOT MINGW)
-      add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp drumset.cpp)
+      add_executable(
+            smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+            )
 
       target_link_libraries( smf2xml
             ${QT_LIBRARIES}
@@ -252,7 +255,9 @@ endif (NOT MINGW)
 #======================================
 
 if (NOT MINGW)
-      add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp drumset.cpp)
+      add_executable(
+            xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+            )
 
       target_link_libraries( xml2smf
             ${QT_LIBRARIES}

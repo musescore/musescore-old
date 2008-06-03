@@ -420,6 +420,7 @@ void Score::read(QString name)
             }
       checkSlurs();
       checkTuplets();
+      rebuildMidiMapping();
       _layout->doLayout();
       layoutAll = false;
       }
@@ -1576,6 +1577,7 @@ void Score::collectChord(EventMap* events, int channel, int port,
 
 void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
+#if 0
       Part* prt       = part(staffIdx);
       int pitchOffset = prt->pitchOffset();
       int channel     = prt->midiChannel();
@@ -1599,8 +1601,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         continue;
                         }
 
-                  int gateTime = _style->gateTime;  // 100 - legato (100%)
-
+                  int gateTime    = _style->gateTime;  // 100 - legato (100%)
                   int tick        = chord->tick();
                   int ottavaShift = 0;
                   foreach(Element* e, *m->score()->gel()) {
@@ -1697,9 +1698,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
       // collect program changes and controller
       //
       foreach(const Element* e, *m->el()) {
+#if 0 // TODO
             if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                   continue;
-            StaffText* st = (StaffText*)e;
+            StaffText* st = static_cast<StaffText*>(e);
             MidiAction a;
             if (!st->instrumentActionName().isEmpty()) {
                   a = prt->instrument()->midiAction(st->instrumentActionName());
@@ -1718,7 +1720,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   ControllerEvent* ev = new ControllerEvent(tick, channel, c, v);
                   events->insertMulti(tick, ev);
                   }
+#endif
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1972,3 +1976,40 @@ void Score::setLayout(Measure* m)
             layoutStart = m;
       }
 
+//---------------------------------------------------------
+//   appendPart
+//---------------------------------------------------------
+
+void Score::appendPart(Part* p)
+      {
+      _parts.append(p);
+      }
+
+//---------------------------------------------------------
+//   rebuildMidiMapping
+//---------------------------------------------------------
+
+void Score::rebuildMidiMapping()
+      {
+      _midiMapping.clear();
+      int port = 0;
+      int channel = 0;
+      int idx = 0;
+      foreach(Part* part, _parts) {
+            Instrument* i = part->instrument();
+            foreach(Articulation* a, i->articulations) {
+                  MidiMapping mm;
+                  mm.port = port;
+                  mm.channel = channel;
+                  if (channel == 15) {
+                        channel = 0;
+                        ++port;
+                        }
+                  mm.part         = part;
+                  mm.articulation = a;
+                  _midiMapping.append(mm);
+                  a->channel = idx;
+                  ++idx;
+                  }
+            }
+      }

@@ -310,17 +310,25 @@ int y2pitch(double y, int clef)
 
 int line2pitch(int line, int clef, int key)
       {
-      int l = clefTable[clef].pitchOffset - line;
+      int l      = clefTable[clef].pitchOffset - line;
       int octave = 0;
       while (l < 0) {
             l += 7;
             octave++;
             }
-      if (l > 74)
-            l = 74;
+printf("  l %d line %d\n", l, line);
+//      if (l > 74)
+//            l = 74;
       octave += l / 7;
       l       = l % 7;
-      return pitchKeyAdjust(l, key) + octave * 12;
+printf("  l %d oct %d\n", l, octave);
+
+      int pitch = pitchKeyAdjust(l, key) + octave * 12;
+      if (pitch > 127)
+            pitch = 127;
+      else if (pitch < 0)
+            pitch = 0;
+      return pitch;
       }
 
 //---------------------------------------------------------

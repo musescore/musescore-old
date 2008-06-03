@@ -510,18 +510,7 @@ void MuseScore::editInstrList()
             else if (pli->op == ITEM_ADD) {
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
-                  part->setMidiProgram(t->midiProgram);
-                  part->setMinPitch(t->minPitch);
-                  part->setMaxPitch(t->maxPitch);
-                  part->setShortName(t->shortName);
-                  part->setTrackName(t->trackName);
-                  part->setLongName(t->name);
-                  part->setPitchOffset(t->transpose);
-                  part->instrument()->midiActions = t->midiActions;
-                  if (t->useDrumset) {
-                        part->setUseDrumset(true);
-                        part->setDrumset(new Drumset(*smDrumset));
-                        }
+                  part->initFromInstrTemplate(t);
 
                   pli->part = part;
                   QTreeWidgetItem* ci = 0;
@@ -629,6 +618,7 @@ void MuseScore::editInstrList()
 
       cs->setLayoutAll(true);
       cs->endCmd();
+      cs->rebuildMidiMapping();
       }
 
 //---------------------------------------------------------
@@ -677,8 +667,8 @@ void Score::cmdRemovePart(Part* part)
       int sidx   = staffIdx(part);
       int n      = part->nstaves();
       int eidx   = sidx + n;
-      int strack = sidx * VOICES;
-      int etrack = eidx * VOICES;
+//      int strack = sidx * VOICES;
+//      int etrack = eidx * VOICES;
 
       //
       //    remove/adjust slurs in _gel

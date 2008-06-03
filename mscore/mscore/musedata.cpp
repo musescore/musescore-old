@@ -673,7 +673,7 @@ bool MuseData::read(const QString& name)
                               staff->setBracketSpan(0, 2);
                               }
                         }
-                  score->parts()->push_back(mpart);
+                  score->appendPart(mpart);
                   mpart->setLongName(part[8]);
                   part.clear();
                   continue;

@@ -361,7 +361,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                   QString id = e.attribute(QString("id"));
                   Part* part = new Part(score);
                   part->setId(id);
-                  score->parts()->push_back(part);
+                  score->appendPart(part);
                   Staff* staff = new Staff(score, part, 0);
                   part->staves()->push_back(staff);
                   score->staves().push_back(staff);

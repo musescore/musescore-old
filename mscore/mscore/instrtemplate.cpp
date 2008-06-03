@@ -77,10 +77,10 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("transpose", transpose);
       if (useDrumset)
             xml.tag("drumset", useDrumset);
-      if (midiProgram)
-            xml.tag("midiprogram", midiProgram);
-      foreach(const MidiAction& a, midiActions)
-            a.write(xml);
+      foreach(const NamedEventList& a, midiActions)
+            a.write(xml, "MidiAction");
+      foreach(const Articulation* a, articulations)
+            a->write(xml);
       xml.etag();
       }
 
@@ -97,12 +97,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
             staffLines[i] = 5;
             smallStaff[i] = false;
             }
-      bracket     = -1;
-      midiProgram = 0;
-      minPitch    = 0;
-      maxPitch    = 127;
-      transpose   = 0;
-      useDrumset  = false;
+      bracket    = -1;
+      minPitch   = 0;
+      maxPitch   = 127;
+      transpose  = 0;
+      useDrumset = false;
 
 
       double extraMag = 1.0;
@@ -197,12 +196,15 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                   transpose = i;
             else if (tag == "drumset")
                   useDrumset = i;
-            else if (tag == "midiprogram")
-                  midiProgram = i;
             else if (tag == "MidiAction") {
-                  MidiAction a;
+                  NamedEventList a;
                   a.read(de);
                   midiActions.append(a);
+                  }
+            else if (tag == "Articulation") {
+                  Articulation* a = new Articulation();
+                  a->read(de);
+                  articulations.append(a);
                   }
             else
                   domError(de);

@@ -22,6 +22,7 @@
 #define __INSTRUMENT_H__
 
 #include "globals.h"
+#include "event.h"
 
 class Instrument;
 class Xml;
@@ -30,39 +31,50 @@ class Score;
 class Drumset;
 
 //---------------------------------------------------------
-//   MidiAction
+//   NamedEventList
 //---------------------------------------------------------
 
-class MidiAction {
-   public:
-      enum MidiActionType {
-            ACTION_NO,               // no midi action
-            ACTION_PROGRAM_CHANGE,   // send midi program change message
-            ACTION_CONTROLLER,       // send midi controller message
-            };
+struct NamedEventList {
+      QString name;
+      EventList events;
 
-   private:
-      QString _name;
-      MidiActionType _type;
-      union {
-            struct {
-                  int hbank, lbank, program;
-                  };
-            struct {
-                  int ctrl, ctrlValue;
-                  };
-            };
-   public:
-      MidiAction();
-      void setProgram(int hb, int lb, int pr);
-      void setController(int ctrl, int value);
-      bool programChange(int* hbank, int* lbank, int* program);
-      bool controller(int* controller, int* controllerValue);
+      void write(Xml&, const QString& name) const;
+      void read(QDomElement);
+      };
+
+//---------------------------------------------------------
+//   Articulation
+//---------------------------------------------------------
+
+// this are the indexes of controllers which are always present in
+// Articulation init EventList (maybe zero)
+
+enum {
+      A_HBANK, A_LBANK, A_PROGRAM, A_VOLUME, A_PAN, A_CHORUS, A_REVERB,
+      A_INIT_COUNT
+      };
+
+struct Articulation {
+      QString name;
+      int channel;      // mscore channel number, mapped to midi port/channel
+      mutable EventList init;
+
+      char program;     // current values as shown in mixer
+      char hbank;       // initialized from "init"
+      char lbank;
+      char volume;
+      char pan;
+      char chorus;
+      char reverb;
+
+      bool mute;
+      bool solo;
+      bool soloMute;
+
+      Articulation();
       void write(Xml&) const;
       void read(QDomElement);
-      MidiActionType type()          { return _type; }
-      QString name() const           { return _name; }
-      void setName(const QString& n) { _name = n; }
+      void updateInitList() const;
       };
 
 //---------------------------------------------------------
@@ -70,31 +82,20 @@ class MidiAction {
 //---------------------------------------------------------
 
 struct Instrument {
-      char midiChannel;
-      char midiPort;
-      char midiProgram;
-      char midiBankSelectH;
-      char midiBankSelectL;
-      char volume;
-      char pan;
-      char chorus;
-      char reverb;
       char minPitch;
       char maxPitch;
       char pitchOffset;
 
-      bool mute;
-      bool solo;
-      bool soloMute;
       Drumset* drumset;
       bool useDrumset;
 
-      QList<MidiAction> midiActions;
+      QList<NamedEventList> midiActions;
+      QList<Articulation*> articulations;      // at least one entry
 
       Instrument();
       void read(QDomElement);
       void write(Xml& xml) const;
-      MidiAction midiAction(const QString& s) const;
+      NamedEventList midiAction(const QString& s) const;
       };
 
 #endif

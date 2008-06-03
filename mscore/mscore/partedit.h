@@ -24,6 +24,7 @@
 #include "ui_partedit.h"
 
 class Score;
+struct Articulation;
 class Part;
 
 //---------------------------------------------------------
@@ -33,6 +34,7 @@ class Part;
 class PartEdit : public QWidget, public Ui::PartEditBase {
       Q_OBJECT
 
+      Articulation* articulation;
       Part* part;
 
    private slots:
@@ -52,7 +54,7 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
 
    public:
       PartEdit(QWidget* parent = 0);
-      void setPart(Part*);
+      void setPart(Part*, Articulation*);
       };
 
 //---------------------------------------------------------
@@ -62,6 +64,7 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
 class InstrumentListEditor : public QScrollArea
       {
       Q_OBJECT
+      Score*       cs;
       QScrollArea* sa;
       QVBoxLayout* vb;
 

@@ -47,7 +47,7 @@ void EditInstrument::setInstrument(InstrumentTemplate* t)
       minPitch->setValue(t->minPitch);
       maxPitch->setValue(t->maxPitch);
       transpose->setValue(t->transpose);
-      midiProgram->setValue(t->midiProgram);
+//      midiProgram->setValue(t->midiProgram);
       staves->setValue(t->staves);
       }
 
@@ -90,7 +90,7 @@ void EditInstrument::valueChanged()
       lt->minPitch    = minPitch->value();
       lt->maxPitch    = maxPitch->value();
       lt->transpose   = transpose->value();
-      lt->midiProgram = midiProgram->value();
+//      lt->midiProgram = midiProgram->value();
       lt->staves      = staves->value();
       }
 

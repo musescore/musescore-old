@@ -1295,9 +1295,9 @@ void MuseScore::pageSettingsChanged()
 void MuseScore::startPageListEditor()
       {
       if (pageListEdit == 0) {
-            pageListEdit = new PageListEditor(cs);
+            pageListEdit = new PageListEditor(this);
             }
-      pageListEdit->updateList();
+      pageListEdit->updateList(cs);
       pageListEdit->show();
       }
 
@@ -1937,10 +1937,12 @@ void MuseScore::readSettings()
 
 void MuseScore::play(Element* e) const
       {
+#if 0
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = (Note*) e;
             seq->startNote(note->staff()->part(), note->pitch(), 80, 300);
             }
+#endif
       }
 
 //---------------------------------------------------------
