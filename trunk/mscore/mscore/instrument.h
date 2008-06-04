@@ -95,7 +95,8 @@ struct Instrument {
       Instrument();
       void read(QDomElement);
       void write(Xml& xml) const;
-      NamedEventList midiAction(const QString& s) const;
+      NamedEventList* midiAction(const QString& s) const;
+      int articulation(const QString& s) const;
       };
 
 #endif

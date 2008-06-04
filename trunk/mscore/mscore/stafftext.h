@@ -30,8 +30,8 @@
 //---------------------------------------------------------
 
 class StaffText : public Text  {
-      NamedEventList _midiAction;
-      QString _instrumentActionName;
+      QString _articulationName;
+      QString _midiActionName;
 
    public:
       StaffText(Score*);
@@ -44,9 +44,10 @@ class StaffText : public Text  {
 
       virtual void layout(ScoreLayout*);
 
-      NamedEventList midiAction() const              { return _midiAction; }
-      void setInstrumentActionName(const QString& s) { _instrumentActionName = s; }
-      QString instrumentActionName() const           { return _instrumentActionName; }
+      QString articulationName() const           { return _articulationName; }
+      QString midiActionName() const             { return _midiActionName;   }
+      void setArticulationName(const QString& s) { _articulationName = s;    }
+      void setMidiActionName(const QString& s)   { _midiActionName = s;      }
       };
 
 //---------------------------------------------------------
@@ -61,9 +62,6 @@ class StaffTextProperties : public QDialog, public Ui::StaffTextProperties {
 
    private slots:
       void saveValues();
-      void typeProgramChanged(bool);
-      void typeControllerChanged(bool);
-      void typeInstrumentChanged(bool);
 
    public:
       StaffTextProperties(StaffText*, QWidget* parent = 0);

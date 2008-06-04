@@ -5,208 +5,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>461</width>
-    <height>328</height>
+    <width>448</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MuseScore: Staff Text Properties</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
-    <widget class="QGroupBox" name="groupBox_2" >
+    <widget class="QGroupBox" name="articulationChange" >
      <property name="title" >
-      <string>Midi Action</string>
+      <string>Articulation Change</string>
      </property>
-     <layout class="QVBoxLayout" >
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
       <item>
-       <widget class="QGroupBox" name="sendProgramChange" >
-        <property name="title" >
-         <string>Send Program Change</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="checked" >
-         <bool>false</bool>
-        </property>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Bank-H:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="midiBankSelectH" >
-           <property name="specialValueText" >
-            <string>no</string>
-           </property>
-           <property name="minimum" >
-            <number>0</number>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-           <property name="value" >
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Bank-L:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="midiBankSelectL" >
-           <property name="specialValueText" >
-            <string>no</string>
-           </property>
-           <property name="minimum" >
-            <number>0</number>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-           <property name="value" >
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_3" >
-           <property name="text" >
-            <string>Program:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="midiProgram" >
-           <property name="minimum" >
-            <number>1</number>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="sendControllerValue" >
-        <property name="title" >
-         <string>Send Controller Value</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="checked" >
-         <bool>false</bool>
-        </property>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_5" >
-           <property name="text" >
-            <string>Controller:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="midiController" >
-           <property name="minimum" >
-            <number>1</number>
-           </property>
-           <property name="maximum" >
-            <number>128</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_6" >
-           <property name="text" >
-            <string>Value:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="midiControllerValue" >
-           <property name="maximum" >
-            <number>127</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="instrumentDefinedAction" >
-        <property name="title" >
-         <string>Instrument defined action</string>
-        </property>
-        <property name="flat" >
-         <bool>true</bool>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="checked" >
-         <bool>false</bool>
-        </property>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_4" >
-           <property name="text" >
-            <string>Action Name:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="midiActionName" />
-         </item>
-        </layout>
-       </widget>
+       <widget class="QListWidget" name="articulationList" />
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="midiAction" >
+     <property name="title" >
+      <string>Midi Action</string>
      </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+     <property name="flat" >
+      <bool>true</bool>
      </property>
-    </spacer>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="checked" >
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <item>
+       <widget class="QListWidget" name="midiActionList" />
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox" >
@@ -214,7 +58,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>

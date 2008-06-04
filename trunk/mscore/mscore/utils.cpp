@@ -316,12 +316,10 @@ int line2pitch(int line, int clef, int key)
             l += 7;
             octave++;
             }
-printf("  l %d line %d\n", l, line);
 //      if (l > 74)
 //            l = 74;
       octave += l / 7;
       l       = l % 7;
-printf("  l %d oct %d\n", l, octave);
 
       int pitch = pitchKeyAdjust(l, key) + octave * 12;
       if (pitch > 127)
