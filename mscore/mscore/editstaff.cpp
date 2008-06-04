@@ -36,14 +36,6 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       setupUi(this);
 
       Part* part = staff->part();
-      Instrument* i = part->instrument();
-#if 0
-      midiChannel->setValue(i->midiChannel + 1);
-      midiPort->setValue(i->midiPort + 1);
-      midiProgram->setValue(i->midiProgram);
-      midiBankSelectH->setValue(i->midiBankSelectH);
-      midiBankSelectL->setValue(i->midiBankSelectL);
-#endif
 
       useDrumset->setChecked(part->useDrumset());
       editDrumset->setEnabled(part->useDrumset());
@@ -89,15 +81,7 @@ void EditStaff::bboxClicked(QAbstractButton* button)
 
 void EditStaff::apply()
       {
-      Part* part         = staff->part();
-      Instrument* i      = part->instrument();
-#if 0
-      i->midiChannel     = midiChannel->value() - 1;
-      i->midiPort        = midiPort->value() - 1;
-      i->midiProgram     = midiProgram->value();
-      i->midiBankSelectH = midiBankSelectH->value();
-      i->midiBankSelectL = midiBankSelectL->value();
-#endif
+      Part* part = staff->part();
 
       part->setUseDrumset(useDrumset->isChecked());
       part->setPitchOffset(transposition->value());

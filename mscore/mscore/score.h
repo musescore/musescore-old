@@ -482,13 +482,13 @@ class Score : public QObject {
       bool importBB(const QString& name);
 
       void print(QPrinter* printer);
-      bool saveXml(const QString& name);
-      bool saveMxl(const QString& name);
-      bool saveMidi(const QString& name);
+      Q_INVOKABLE bool saveXml(const QString& name);
+      Q_INVOKABLE bool saveMxl(const QString& name);
+      Q_INVOKABLE bool saveMidi(const QString& name);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
-      bool savePng(const QString& name);
-      bool saveSvg(const QString& name);
-      bool saveLilypond(const QString& name);
+      Q_INVOKABLE bool savePng(const QString& name);
+      Q_INVOKABLE bool saveSvg(const QString& name);
+      Q_INVOKABLE bool saveLilypond(const QString& name);
 
       ChordRest* getSelectedChordRest() const;
       Element* getSelectedElement() const { return sel->element(); }
@@ -577,10 +577,11 @@ class Score : public QObject {
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
       void setLayout(Measure* m);
-      int midiPort(int idx)                   { return _midiMapping[idx].port; }
-      int midiChannel(int idx)                { return _midiMapping[idx].channel; }
+      int midiPort(int idx) const;
+      int midiChannel(int idx) const;
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
+      void updateArticulation();
       };
 
 extern Score* gscore;

@@ -21,6 +21,7 @@
 #include "score.h"
 #include "stafftext.h"
 #include "system.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   StaffText
@@ -39,10 +40,10 @@ StaffText::StaffText(Score* s)
 void StaffText::write(Xml& xml) const
       {
       xml.stag("StaffText");
-      if (!_instrumentActionName.isEmpty())
-            xml.tagE(QString("midiInstrumentAction name=\"%1\"").arg(_instrumentActionName));
-      else
-            _midiAction.write(xml, "MidiAction");
+      if (!_midiActionName.isEmpty())
+            xml.tagE(QString("midiAction name=\"%1\"").arg(_midiActionName));
+      if (!_articulationName.isEmpty())
+            xml.tagE(QString("articulationChange name=\"%1\"").arg(_articulationName));
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -53,13 +54,14 @@ void StaffText::write(Xml& xml) const
 
 void StaffText::read(QDomElement e)
       {
-      _midiAction = NamedEventList();
+      _midiActionName.clear();
+      _articulationName.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "MidiAction")
-                  _midiAction.read(e);
-            else if (tag == "midiInstrumentAction")
-                  _instrumentActionName = e.attribute("name");
+            if (tag == "midiAction")
+                  _midiActionName = e.attribute("name");
+            else if (tag == "articulationChange")
+                  _articulationName = e.attribute("name");
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -91,125 +93,6 @@ void StaffText::propertyAction(const QString& s)
       else
             Element::propertyAction(s);
       }
-
-//---------------------------------------------------------
-//   StaffTextProperties
-//---------------------------------------------------------
-
-StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
-   : QDialog(parent)
-      {
-      setupUi(this);
-      staffText = st;
-
-#if 0
-      MidiAction ma = st->midiAction();
-      if (!st->instrumentActionName().isEmpty()) {
-            instrumentDefinedAction->setChecked(true);
-            midiActionName->setText(st->instrumentActionName());
-            }
-      else {
-            instrumentDefinedAction->setChecked(false);
-            switch (ma.type()) {
-                  case MidiAction::ACTION_PROGRAM_CHANGE:
-                        {
-                        sendProgramChange->setChecked(true);
-                        sendControllerValue->setChecked(false);
-                        int hbank, lbank, program;
-                        ma.programChange(&hbank, &lbank, &program);
-                        midiBankSelectH->setValue(hbank + 1);
-                        midiBankSelectL->setValue(lbank + 1);
-                        midiProgram->setValue(program + 1);
-                        }
-                        break;
-                  case MidiAction::ACTION_CONTROLLER:
-                        {
-                        sendControllerValue->setChecked(true);
-                        sendProgramChange->setChecked(false);
-                        int controller, controllerValue;
-                        ma.controller(&controller, &controllerValue);
-                        midiController->setValue(controller + 1);
-                        midiControllerValue->setValue(controllerValue);
-                        }
-                        break;
-                  default:
-                        sendControllerValue->setChecked(false);
-                        sendProgramChange->setChecked(false);
-                        break;
-                  }
-            }
-#endif
-
-      connect(this, SIGNAL(accepted()), SLOT(saveValues()));
-      connect(sendProgramChange, SIGNAL(toggled(bool)), SLOT(typeProgramChanged(bool)));
-      connect(sendControllerValue, SIGNAL(toggled(bool)), SLOT(typeControllerChanged(bool)));
-      connect(instrumentDefinedAction, SIGNAL(toggled(bool)), SLOT(typeInstrumentChanged(bool)));
-      }
-
-//---------------------------------------------------------
-//   saveValues
-//---------------------------------------------------------
-
-void StaffTextProperties::saveValues()
-      {
-#if 0       // TODO
-      if (sendProgramChange->isChecked()) {
-            staffText->setMidiProgram(
-               midiBankSelectH->value() - 1,
-               midiBankSelectL->value() - 1,
-               midiProgram->value() - 1
-               );
-            }
-      else if (sendControllerValue->isChecked()) {
-            staffText->setMidiController(
-               midiController->value() - 1,
-               midiControllerValue->value()
-               );
-            }
-      else if (instrumentDefinedAction->isChecked()) {
-            staffText->setInstrumentActionName(midiActionName->text());
-            }
-      else
-            staffText->setMidiAction(MidiAction());
-#endif
-      }
-
-//---------------------------------------------------------
-//   typeProgramChanged
-//---------------------------------------------------------
-
-void StaffTextProperties::typeProgramChanged(bool val)
-      {
-      if (val) {
-            sendControllerValue->setChecked(false);
-            instrumentDefinedAction->setChecked(false);
-            }
-      }
-
-//---------------------------------------------------------
-//   typeControllerChanged
-//---------------------------------------------------------
-
-void StaffTextProperties::typeControllerChanged(bool val)
-      {
-      if (val) {
-            sendProgramChange->setChecked(false);
-            instrumentDefinedAction->setChecked(false);
-            }
-      }
-
-//---------------------------------------------------------
-//   typeInstrumentChanged
-//---------------------------------------------------------
-
-void StaffTextProperties::typeInstrumentChanged(bool val)
-      {
-      if (val) {
-            sendProgramChange->setChecked(false);
-            sendControllerValue->setChecked(false);
-            }
-      }
-
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
@@ -223,4 +106,60 @@ void StaffText::layout(ScoreLayout* l)
       setPos(ipos() + QPointF(x, y));
       }
 
+//---------------------------------------------------------
+//   StaffTextProperties
+//---------------------------------------------------------
 
+StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      staffText = st;
+
+      Part* part = st->staff()->part();
+      Instrument* i = part->instrument();
+      foreach(Articulation* a, i->articulations) {
+            if (a->name.isEmpty())
+                  articulationList->addItem(tr("normal"));
+            else
+                  articulationList->addItem(a->name);
+            }
+
+      foreach(const NamedEventList& e, i->midiActions)
+            midiActionList->addItem(e.name);
+
+      articulationChange->setChecked(!st->articulationName().isEmpty());
+      midiAction->setChecked(!st->midiActionName().isEmpty());
+
+      if (!st->articulationName().isEmpty()) {
+            QList<QListWidgetItem*> wl = articulationList
+               ->findItems(st->articulationName(), Qt::MatchExactly);
+            if (!wl.isEmpty())
+                  articulationList->setCurrentRow(articulationList->row(wl[0]));
+            }
+      if (!st->midiActionName().isEmpty()) {
+            QList<QListWidgetItem*> wl = midiActionList
+               ->findItems(st->midiActionName(), Qt::MatchExactly);
+            if (!wl.isEmpty())
+                  midiActionList->setCurrentRow(midiActionList->row(wl[0]));
+            }
+      connect(this, SIGNAL(accepted()), SLOT(saveValues()));
+      }
+
+//---------------------------------------------------------
+//   saveValues
+//---------------------------------------------------------
+
+void StaffTextProperties::saveValues()
+      {
+      if (articulationChange->isChecked()) {
+            QListWidgetItem* i = articulationList->currentItem();
+            if (i)
+                  staffText->setArticulationName(i->text());
+            }
+      if (midiAction->isChecked()) {
+            QListWidgetItem* i = midiActionList->currentItem();
+            if (i)
+                  staffText->setMidiActionName(i->text());
+            }
+      }

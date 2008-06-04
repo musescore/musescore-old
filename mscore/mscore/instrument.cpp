@@ -162,13 +162,13 @@ void Instrument::read(QDomElement e)
 //   action
 //---------------------------------------------------------
 
-NamedEventList Instrument::midiAction(const QString& s) const
+NamedEventList* Instrument::midiAction(const QString& s) const
       {
       foreach(const NamedEventList& a, midiActions) {
             if (s == a.name)
-                  return a;
+                  return const_cast<NamedEventList*>(&a);
             }
-      return NamedEventList();
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -326,4 +326,22 @@ void Articulation::updateInitList() const
       e->setValue(reverb);
       init[A_REVERB] = e;
       }
+
+//---------------------------------------------------------
+//   articulation
+//---------------------------------------------------------
+
+int Instrument::articulation(const QString& s) const
+      {
+      int idx = 0;
+      foreach(const Articulation* a, articulations) {
+            if (a->name.isEmpty() && s == "normal")
+                  return idx;
+            if (s == a->name)
+                  return idx;
+            ++idx;
+            }
+      return -1;
+      }
+
 

@@ -106,26 +106,39 @@ void ISynth::process(unsigned n, float* l, float* r, int stride)
 
 void ISynth::play(const MidiOutEvent& e)
       {
-      int channel = e.port * 16 + e.type & 0xf;
+      int ch = e.type & 0xf;
+      int channel = e.port * 16 + ch;
 // printf("note %d %d %d\n", channel, pitch, velo);
 
+//                        midiOutputTrace = true;
       int err = 0;
       switch(e.type & 0xf0) {
             case ME_NOTEON:
-                  if (e.b == 0)
+                  if (e.b == 0) {
                         err = fluid_synth_noteoff(_fluidsynth, channel, e.a);
-                  else
+                        if (midiOutputTrace)
+                              printf("MidiOut: %2d:%2d NoteOff %3d\n", e.port, ch, e.a);
+                        }
+                  else {
                         err = fluid_synth_noteon(_fluidsynth, channel, e.a, e.b);
+                        if (midiOutputTrace)
+                              printf("MidiOut: %2d:%2d NoteOn  %3d %3d\n", e.port, ch, e.a, e.b);
+                        }
                   break;
             case ME_CONTROLLER:
                   if (e.a == CTRL_LBANK)
                         lbank = e.b;
-                  else
+                  else {
                         fluid_synth_cc(_fluidsynth, channel, e.a, e.b);
+                        if (midiOutputTrace)
+                              printf("MidiOut: %2d:%2d Ctrl    %3d %3d\n", e.port, ch, e.a, e.b);
+                        }
                   break;
 
             case ME_PROGRAM:
                   fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, e.a);
+                  if (midiOutputTrace)
+                        printf("MidiOut: %2d:%2d Prog    %3d %3d\n", e.port, ch, lbank, e.a);
                   break;
             }
 

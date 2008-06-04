@@ -145,7 +145,7 @@ add_executable ( mscore
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
-      event.cpp
+      event.cpp rendermidi.cpp
       ${AUDIO}
       )
 

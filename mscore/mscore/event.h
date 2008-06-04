@@ -135,8 +135,8 @@ class Event {
       int _ontime;
 
    public:
-      Event()           { _ontime = -1; _port = 0; }
-      Event(int t)      { _ontime = t;  }
+      Event()               { _ontime = -1; _port = 0; }
+      Event(int t)          { _ontime = t;  }
       virtual ~Event()  {}
       virtual int type() const = 0;
 
@@ -150,6 +150,7 @@ class Event {
       virtual void write(Xml&) const {}
       virtual void read(QDomElement) {}
       virtual bool midiOutEvent(MidiOutEvent*) { return false; }
+      virtual Event* clone() const = 0;
       };
 
 //---------------------------------------------------------
@@ -209,6 +210,7 @@ class NoteOn : public NoteOnOff {
       NoteOn()             {}
       NoteOn(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
       virtual int type() const { return ME_NOTEON; }
+      virtual Event* clone() const { return new NoteOn(*this); }
 
       virtual void write(MidiFile*) const;
       virtual void write(Xml&) const;
@@ -223,6 +225,7 @@ class NoteOff : public NoteOnOff {
       NoteOff()            {}
       NoteOff(int t, int c, int p, int v) : NoteOnOff(t, c, p, v) {}
       virtual int type() const { return ME_NOTEOFF; }
+      virtual Event* clone() const { return new NoteOff(*this); }
 
       virtual void write(MidiFile*) const;
       virtual void write(Xml&) const;
@@ -239,6 +242,7 @@ class NoteEvent : public NoteOnOff {
    public:
       NoteEvent()               { _a = -1; _b = -1; _duration = -1; }
       virtual int type() const { return ME_NOTE; }
+      virtual Event* clone() const { return new NoteEvent(*this); }
 
       int duration() const     { return _duration; }
       void setDuration(int v)  { _duration = v; }
@@ -260,6 +264,7 @@ class ChordEvent : public Event {
    public:
       ChordEvent()                  {}
       virtual int type() const      { return ME_CHORD;  }
+      virtual Event* clone() const { return new ChordEvent(*this); }
 
       int duration() const          { return _duration; }
       void setDuration(int v)       { _duration = v;    }
@@ -287,6 +292,7 @@ class ControllerEvent : public ChannelEvent {
       ControllerEvent(int t, int ch, int c, int v)
          : ChannelEvent(t, ch, c, v) {}
       virtual int type() const            { return ME_CONTROLLER; }
+      virtual Event* clone() const { return new ControllerEvent(*this); }
 
       virtual bool isChannelEvent() const { return true; }
       int controller() const              { return _a; }
@@ -332,6 +338,7 @@ class SysexEvent : public DataEvent {
       SysexEvent()              {}
       SysexEvent(int t, int l, unsigned char* d) : DataEvent(t, l, d) {}
       virtual int type() const { return ME_SYSEX; }
+      virtual Event* clone() const { return new SysexEvent(*this); }
 
       virtual void write(MidiFile*) const;
       virtual void write(Xml&) const;
@@ -349,6 +356,7 @@ class MetaEvent : public DataEvent {
       MetaEvent(int t, int mt, int l, unsigned char* d)
          : DataEvent(t, l, d), _metaType(mt) {}
       virtual int type() const { return ME_META;   }
+      virtual Event* clone() const { return new MetaEvent(*this); }
 
       int metaType() const     { return _metaType; }
       void setMetaType(int v)  { _metaType = v;    }

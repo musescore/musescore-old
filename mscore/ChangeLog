@@ -1,3 +1,6 @@
+4.6.8  (ws)
+      - testfile articulation.msc shows violin staff with switch between
+        "pizzicato" and "arco" using two channels
 3.6.8  (ws)
       - new (incomplete) midi structure; a part (all staves for one instrument)
         can use more than one midi channel configurable in the instruments.xml
