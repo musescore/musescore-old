@@ -9,25 +9,25 @@
   <h3> Sources</h3>
     Die <i>MuseScore</i> Quellen gibt es bei
    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
-  <br>
+  <br/>
 
   <h3> Binaries</h3>
   Für Ubuntu/Kubuntu 7.10 gibt es fertige Binärpakete unter dem Namen
   "mscore" und "mscore-common" in der "universe" Paketquelle.
-  <br>
+  <br/>
   Die
   <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>
   Version kann
   <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">hier</a>
   heruntergeladen werden.
-  <br>
+  <br/>
 
   <h3> Subversion Sourcecode Repository</h3>
   Der aktuellste <i>MuseScore</i> Code ist immer im SourceForge SVN
   Repository verfügbar.
   Für Hilfe zum Download bitte auf der SourceForge Projektseite
   nachschlagen.
-  <br>
+  <br/>
 
   <h3> Windows Testreleases </h3>
   <table>
@@ -42,18 +42,18 @@
 
   <h2>Voraussetzungen</h2>
 <ul>
-  <li> <a href="ftp://ftp.trolltech.com/qt/source">qt gui lib version 4.3</a>
+  <li> <a href="ftp://ftp.trolltech.com/qt/source">Qt gui lib version 4.3</a>
       oder neuer
-      <br>
-      <i>MuseScore</i> kompiliert nicht mit älteren Versionen.<br>
+      <br/>
+      <i>MuseScore</i> kompiliert nicht mit älteren Versionen.<br/>
       Vorkompilierte Pakete sind oft in "runtime" und "development"
-      gesplittet. Es müssen beide Pakete installiert werden.
+      gesplittet. Es müssen beide Pakete installiert werden.</li>
 
   <li> <a href="http://www.alsa-project.org/">ALSA</a>
        Version 1.0 oder neuer. ALSA wird für Midi-Input und Soundausgabe
-       benötigt.
+       benötigt.</li>
 
-  <li> CMake 2.4
+  <li> CMake 2.4</li>
 </ul>
 
 Die aktuelle <i>MuseScore</i> Entwicklerplatform ist Kubuntu 7.04.
