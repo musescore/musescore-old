@@ -12,7 +12,7 @@
       Automatic note head positioning in chords:
       </td>
     <td>
-      <img src="../wpic/chord.png">
+      <img src="../wpic/chord.png" alt="example chords">
       </td>
     </tr>
 
@@ -21,7 +21,7 @@
       Drum notation:
       </td>
     <td>
-      <img src="../wpic/drum1.png">
+      <img src="../wpic/drum1.png" alt="example drum notation">
       </td>
     </tr>
 
@@ -30,7 +30,7 @@
       Cross staff beams:
       </td>
     <td>
-      <img src="../wpic/crossbeams.png">
+      <img src="../wpic/crossbeams.png" alt="example cross staff beam">
       </td>
     </tr>
 
