@@ -538,6 +538,10 @@ void MuseScore::newFile()
             score->measures()->add(measure);
             }
 
+      Measure* lastMeasure = static_cast<Measure*>(score->measures()->last());
+      if ((lastMeasure->type() == MEASURE) && (lastMeasure->endBarLineType() == NORMAL_BAR))
+            lastMeasure->setEndBarLineType(END_BAR, false);
+
       SigList* sigmap = score->getSigmap();
       if (pickupMeasure) {
             sigmap->add(0, SigEvent(pickupTimesigZ, pickupTimesigN, timesigZ, timesigN));

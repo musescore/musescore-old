@@ -1720,6 +1720,10 @@ int main(int argc, char* argv[])
                   QFileInfo fi(fn);
                   rv = mscore->saveFile(fi, false);
                   }
+            else if (fn.endsWith(".mscz")) {
+                  QFileInfo fi(fn);
+                  rv = mscore->saveCompressedFile(fi, false);
+                  }
             else if (fn.endsWith(".xml"))
                   rv = cs->saveXml(fn);
             else if (fn.endsWith(".mxl"))

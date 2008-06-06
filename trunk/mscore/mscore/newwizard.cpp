@@ -520,6 +520,7 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       setSubTitle(tr("Select Template File:"));
 
       QStringList nameFilter;
+      nameFilter.append("*.mscz");
       nameFilter.append("*.msc");
 
       model = new QDirModel;
@@ -534,9 +535,6 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       tree->header()->hideSection(2);
       tree->header()->hideSection(3);
 
-      QString path(mscoreGlobalShare);
-      path += "/templates";
-      tree->setRootIndex(model->index(path));
       QGridLayout* grid = new QGridLayout;
       grid->addWidget(tree, 0, 0);
       setLayout(grid);
@@ -544,6 +542,18 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       QItemSelectionModel* sm = tree->selectionModel();
       connect(sm, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
          this, SLOT(templateChanged(const QItemSelection&, const QItemSelection&)));
+      }
+
+//---------------------------------------------------------
+//   initializePage
+//---------------------------------------------------------
+
+void NewWizardPage4::initializePage()
+      {
+      model->refresh();
+      QString path(mscoreGlobalShare);
+      path += "/templates";
+      tree->setRootIndex(model->index(path));
       }
 
 //---------------------------------------------------------

@@ -149,6 +149,7 @@ class NewWizardPage4 : public QWizardPage {
       NewWizardPage4(QWidget* parent = 0);
       virtual bool isComplete() const;
       QString templatePath() const;
+      virtual void initializePage();
       };
 
 //---------------------------------------------------------

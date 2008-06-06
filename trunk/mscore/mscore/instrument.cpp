@@ -107,8 +107,11 @@ void Instrument::write(Xml& xml) const
 
 void Instrument::read(QDomElement e)
       {
+      int program = 0;
       int chorus = 30;
       int reverb = 30;
+      int volume = 100;
+
       foreach(Articulation* a, articulations)
             delete a;
       articulations.clear();
@@ -146,6 +149,10 @@ void Instrument::read(QDomElement e)
                   chorus = i;
             else if (tag == "reverb")     // obsolete
                   reverb = i;
+            else if (tag == "midiProgram")  // obsolete
+                  program = i;
+            else if (tag == "volume")     // obsolete
+                  volume = i;
             else
                   domError(e);
             }
@@ -154,6 +161,8 @@ void Instrument::read(QDomElement e)
             a->chorus       = chorus;
             a->reverb       = reverb;
             a->name         = "normal";
+            a->program      = program;
+            a->volume       = volume;
             articulations.append(a);
             }
       }

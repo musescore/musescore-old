@@ -1,3 +1,9 @@
+5.6.8  (ws)
+      - automatically move end bar line when appending new measure(s)
+      - automatically create end bar line in "new wizard"
+      - allow *.mscz files as template files
+      - refresh QDirModel before showing templates list to also show new
+        created templates
 4.6.8  (ws)
       - testfile articulation.msc shows violin staff with switch between
         "pizzicato" and "arco" using two channels
