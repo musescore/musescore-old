@@ -1579,8 +1579,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             QUrl u = ul.front();
             if (debugMode)
                   printf("drag Url: %s\n", u.toString().toLatin1().data());
-            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
-               u.path().toLatin1().data());
+//            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+//               u.path().toLatin1().data());
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
                   if (fi.suffix() == "svg"
@@ -1592,13 +1592,18 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                         event->acceptProposedAction();
                         }
                   }
+            else {
+                  QString s = QString("drag Url: %1").arg(u.toString());
+                  QMessageBox::warning(0,
+                  "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
+                  }
             }
       else {
-            if (debugMode) {
-                  printf("dragEnterEvent: formats %d:\n", data->hasFormat(mimeSymbolFormat));
-                  foreach(QString s, data->formats())
-                        printf("   <%s>\n", s.toLatin1().data());
-                  }
+            QString s = QString("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
+            foreach(QString ss, data->formats())
+                  s += (QString("   <%1>\n").arg(ss));
+            QMessageBox::warning(0,
+               "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
             }
       }
 

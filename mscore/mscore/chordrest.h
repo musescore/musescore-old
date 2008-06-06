@@ -33,6 +33,10 @@ class Segment;
 class Sym;
 class Slur;
 
+//---------------------------------------------------------
+//   NoteAttributeIdx
+//---------------------------------------------------------
+
 enum NoteAttributeIdx {
       UfermataSym,
       DfermataSym,

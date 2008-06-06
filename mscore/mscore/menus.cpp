@@ -321,23 +321,13 @@ void MuseScore::showPalette(bool visible)
             //    Attributes
             //-----------------------------------
 
-            static const char* atrSyms[] = {
-                  "ufermata", "dfermata", "thumb", "sforzato",
-                  "espressivo", "staccato", "ustaccatissimo", "dstaccatissimo",
-                  "tenuto", "uportato", "dportato", "umarcato", "dmarcato",
-                  "ouvert", "plusstop", "upbow", "downbow", "reverseturn",
-                  "turn", "trill", "prall", "mordent", "prallprall",
-                  "prallmordent", "upprall", "downprall", "upmordent",
-	            "downmordent"
-                  };
-
-            unsigned nn = sizeof(atrSyms)/sizeof(*atrSyms);
+            unsigned nn = NOTE_ATTRIBUTES;
             sp = new Palette((nn + 3) / 4, 4);
             sp->setGrid(42, 30);
 
             for (unsigned i = 0; i < nn; ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
-                  s->setSubtype(atrSyms[i]);
+                  s->setSubtype(i);
                   sp->addObject(i, s, s->subtypeName());
                   }
             paletteBox->addPalette(tr("Attributes"), sp);
@@ -1004,22 +994,15 @@ void MuseScore::noteAttributesMenu()
       if (noteAttributesPalette == 0) {
             noteAttributesPalette = new QScrollArea;
             noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
-            Palette* sp = new Palette(3, 10);
-            ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
-            sp->setGrid(60, 60);
 
-            static const char* syms[] = {
-                  "ufermata", "dfermata", "thumb", "sforzato",
-                  "espressivo", "staccato", "ustaccatissimo", "dstaccatissimo",
-                  "tenuto", "uportato", "dportato", "umarcato", "dmarcato",
-                  "ouvert", "plusstop", "upbow", "downbow", "reverseturn",
-                  "turn", "trill", "prall", "mordent", "prallprall",
-                  "prallmordent", "upprall", "downprall", "upmordent",
-	            "downmordent"
-                  };
-            for (unsigned i = 0; i < sizeof(syms)/sizeof(*syms); ++i) {
+            unsigned nn = NOTE_ATTRIBUTES;
+            Palette* sp = new Palette((nn + 3) / 4, 4);
+            sp->setGrid(42, 30);
+            ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
+
+            for (unsigned i = 0; i < nn; ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
-                  s->setSubtype(syms[i]);
+                  s->setSubtype(i);
                   sp->addObject(i, s, s->subtypeName());
                   }
             }

@@ -1059,8 +1059,34 @@ void Score::appendMeasures(int n, int type)
                   "first create some staves"));
             return;
             }
+      bool createEndBar = false;
+      bool endBarGenerated = false;
+      if (type == MEASURE) {
+            MeasureBase* lastMb = _measures.last();
+            if (lastMb && (lastMb->type() == MEASURE)) {
+                  Measure* lastMeasure = static_cast<Measure*>(lastMb);
+                  if (lastMeasure->endBarLineType() == END_BAR) {
+                        if (!lastMeasure->endBarLineGenerated()) {
+                              undoChangeEndBarLineType(lastMeasure, NORMAL_BAR);
+                              createEndBar = true;
+                              // move end Bar to last Measure;
+                              }
+                        else {
+                              createEndBar = true;
+                              endBarGenerated = true;
+                              lastMeasure->setEndBarLineType(NORMAL_BAR, endBarGenerated);
+                              }
+                        }
+                  }
+            else if (lastMb == 0)
+                  createEndBar = true;
+            }
       for (int i = 0; i < n; ++i)
             appendMeasure(type);
+      if (createEndBar) {
+            Measure* lastMeasure = static_cast<Measure*>(_measures.last());
+            lastMeasure->setEndBarLineType(END_BAR, endBarGenerated);
+            }
       }
 
 //---------------------------------------------------------
