@@ -33,25 +33,24 @@ static int fluid_settings_tokenize(const char* s, char *buf, char** ptr);
 
 
 typedef struct {
-  char* value;
-  char* def;
-  int hints;
-  fluid_list_t* options;
-  fluid_str_update_t update;
-  void* data;
-} fluid_str_setting_t;
+      char* value;
+      char* def;
+      int hints;
+      fluid_list_t* options;
+      fluid_str_update_t update;
+      void* data;
+      } fluid_str_setting_t;
 
 static fluid_str_setting_t*
-new_fluid_str_setting(char* value, char* def, int hints, fluid_str_update_t fun, void* data)
+new_fluid_str_setting(const char* value, const char* def, int hints, fluid_str_update_t fun, void* data)
       {
-      fluid_str_setting_t* str;
-      str = FLUID_NEW(fluid_str_setting_t);
-      str->value = (char*)(value ? FLUID_STRDUP(value) : 0);
-      str->def = def? FLUID_STRDUP(def) : 0;
-      str->hints = hints;
+      fluid_str_setting_t* str = FLUID_NEW(fluid_str_setting_t);
+      str->value   = (char*)(value ? FLUID_STRDUP(value) : 0);
+      str->def     = def ? FLUID_STRDUP(def) : 0;
+      str->hints   = hints;
       str->options = 0;
-      str->update = fun;
-      str->data = data;
+      str->update  = fun;
+      str->data    = data;
       return str;
       }
 
@@ -294,9 +293,11 @@ static int fluid_settings_set(fluid_settings_t* settings,
 
 /** returns 1 if the value has been registered correctly, 0
     otherwise */
-int fluid_settings_register_str(fluid_settings_t* settings, const char* name, char* def, int hints,
-			       fluid_str_update_t fun, void* data)
-{
+
+int fluid_settings_register_str(fluid_settings_t* settings,
+   const char* name, const char* def, int hints,
+  fluid_str_update_t fun, void* data)
+      {
   int type;
   void* value;
   char* tokens[MAX_SETTINGS_TOKENS];
@@ -528,7 +529,7 @@ int fluid_settings_getstr(fluid_settings_t* settings, const char* name, char** s
   return 0;
 }
 
-int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, char* s)
+int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, const char* s)
 {
   int type;
   void* value;
@@ -620,46 +621,42 @@ int fluid_settings_remove_option(fluid_settings_t* settings, const char* name, c
 }
 
 int fluid_settings_setnum(fluid_settings_t* settings, const char* name, double val)
-{
-  int type;
-  void* value;
-  fluid_num_setting_t* setting;
-  char* tokens[MAX_SETTINGS_TOKENS];
-  char buf[MAX_SETTINGS_LABEL+1];
-  int ntokens;
+      {
+      int type;
+      void* value;
+      fluid_num_setting_t* setting;
+      char* tokens[MAX_SETTINGS_TOKENS];
+      char buf[MAX_SETTINGS_LABEL+1];
 
-  ntokens = fluid_settings_tokenize(name, buf, tokens);
+      int ntokens = fluid_settings_tokenize(name, buf, tokens);
 
-  if (fluid_settings_get(settings, tokens, ntokens, &value, &type)) {
+      if (fluid_settings_get(settings, tokens, ntokens, &value, &type)) {
+            if (type != FLUID_NUM_TYPE)
+                  return 0;
 
-    if (type != FLUID_NUM_TYPE) {
-      return 0;
-    }
+            setting = (fluid_num_setting_t*) value;
 
-    setting = (fluid_num_setting_t*) value;
+            if (val < setting->min)
+                  val = setting->min;
+            else if (val > setting->max)
+                  val = setting->max;
 
-    if (val < setting->min) {
-      val = setting->min;
-    } else if (val > setting->max) {
-      val = setting->max;
-    }
+            setting->value = val;
 
-    setting->value = val;
+            if (setting->update)
+                  (*setting->update)(setting->data, name, val);
 
-    if (setting->update) {
-      (*setting->update)(setting->data, name, val);
-    }
+            return 1;
 
-    return 1;
-
-  } else {
-    /* insert a new setting */
-    fluid_num_setting_t* setting;
-    setting = new_fluid_num_setting(-1e10, 1e10, 0.0f, 0, 0, 0);
-    setting->value = val;
-    return fluid_settings_set(settings, tokens, ntokens, setting, FLUID_NUM_TYPE);
-  }
-}
+            }
+      else {
+            /* insert a new setting */
+            fluid_num_setting_t* setting;
+            setting = new_fluid_num_setting(-1e10, 1e10, 0.0f, 0, 0, 0);
+            setting->value = val;
+            return fluid_settings_set(settings, tokens, ntokens, setting, FLUID_NUM_TYPE);
+            }
+      }
 
 int fluid_settings_getnum(fluid_settings_t* settings, const char* name, double* val)
 {

@@ -153,6 +153,8 @@ void Instrument::read(QDomElement e)
                   program = i;
             else if (tag == "volume")     // obsolete
                   volume = i;
+            else if (tag == "midiChannel")
+                  ;
             else
                   domError(e);
             }

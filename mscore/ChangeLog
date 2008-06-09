@@ -1,4 +1,6 @@
 9.6.8 (ws)
+      - fluid synth settings: increase max channel number to 64,
+        set audio channels to two
       - added qt script debug to build system
 6.6.8 (ws)
       - Transpose key in new wizard for transposing instruments.

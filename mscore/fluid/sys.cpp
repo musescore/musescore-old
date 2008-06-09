@@ -66,7 +66,7 @@ fluid_set_log_function(int level, fluid_log_function_t fun, void* data)
  * @param data User supplied data (not used)
  */
 void
-fluid_default_log_function(int level, char* message, void* data)
+fluid_default_log_function(int level, char* message, void* /*data*/)
 {
   FILE* out;
 
@@ -106,7 +106,7 @@ fluid_default_log_function(int level, char* message, void* data)
  * fluid_init_log
  */
 void
-fluid_log_config(void)
+fluid_log_config()
 {
   if (fluid_log_initialized == 0) {
 
@@ -141,24 +141,23 @@ fluid_log_config(void)
  * @param ... Arguments for printf 'fmt' message string
  * @return Always returns -1
  */
-int
-fluid_log(int level, char* fmt, ...)
-{
-  fluid_log_function_t fun = 0;
 
-  va_list args;
-  va_start (args, fmt);
-  vsnprintf(fluid_errbuf, sizeof (fluid_errbuf), fmt, args);
-  va_end (args);
+int fluid_log(int /*level*/, const char* fmt, ...)
+      {
+      //      fluid_log_function_t fun = 0;
 
-  if ((level >= 0) && (level < LAST_LOG_LEVEL)) {
-    fun = fluid_log_function[level];
-    if (fun != 0) {
-      (*fun)(level, fluid_errbuf, fluid_log_user_data[level]);
-    }
-  }
-  return FLUID_FAILED;
-}
+      va_list args;
+      va_start (args, fmt);
+      vsnprintf(fluid_errbuf, sizeof (fluid_errbuf), fmt, args);
+      va_end (args);
+
+//      if ((level >= 0) && (level < LAST_LOG_LEVEL)) {
+//            fun = fluid_log_function[level];
+//            if (fun)
+//                  (*fun)(level, fluid_errbuf, fluid_log_user_data[level]);
+//            }
+      return FLUID_FAILED;
+      }
 
 /**
  * An improved strtok, still trashes the input string, but is portable and
@@ -173,9 +172,10 @@ fluid_log(int level, char* fmt, ...)
  * @param delim String of delimiter chars.
  * @return Pointer to the next token or 0 if no more tokens.
  */
-char *fluid_strtok (char **str, char *delim)
+char *fluid_strtok (char **str, const char *delim)
 {
-  char *s, *d, *token;
+  const char* d;
+  char *s, *token;
   char c;
 
   if (str == 0 || delim == 0 || !*delim)
@@ -683,7 +683,7 @@ new_fluid_timer(int msec, fluid_timer_callback_t callback, void* data,
 {
   pthread_attr_t *attr = 0;
   pthread_attr_t rt_attr;
-  int sched = SCHED_FIFO;
+//  int sched = SCHED_FIFO;
   struct sched_param priority;
   int err;
 

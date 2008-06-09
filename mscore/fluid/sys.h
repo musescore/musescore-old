@@ -47,7 +47,7 @@ void fluid_time_config(void);
 /*
  * Utility functions
  */
-char *fluid_strtok (char **str, char *delim);
+char *fluid_strtok (char **str, const char *delim);
 
 
 /**
