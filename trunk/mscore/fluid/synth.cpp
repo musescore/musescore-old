@@ -135,7 +135,7 @@ void fluid_version(int *major, int *minor, int *micro)
 /*
  * fluid_version_str
  */
-char* fluid_version_str(void)
+const char* fluid_version_str(void)
 {
   return "0.0.0";
 }
@@ -308,7 +308,7 @@ fluid_synth_init()
 }
 
 
-int fluid_synth_verify_settings(fluid_settings_t *settings)
+int fluid_synth_verify_settings(fluid_settings_t*)
 {
   return 0;
 }
@@ -733,12 +733,10 @@ delete_fluid_synth(fluid_synth_t* synth)
  * The error messages are not thread-save, yet. They are still stored
  * in a global message buffer (see fluid_sys.c).
  * */
-char*
-fluid_synth_error(fluid_synth_t* synth)
-{
-//  return fluid_error();
-      return "?";
-}
+char* fluid_synth_error(fluid_synth_t*)
+      {
+      return fluid_error();
+      }
 
 /*
  * fluid_synth_noteon
@@ -747,7 +745,7 @@ int
 fluid_synth_noteon(fluid_synth_t* synth, int chan, int key, int vel)
 {
   fluid_channel_t* channel;
-  int r = FLUID_FAILED;
+//  int r = FLUID_FAILED;
 
   /* check the ranges of the arguments */
   if ((chan < 0) || (chan >= synth->midi_channels)) {
@@ -1093,7 +1091,7 @@ fluid_synth_get_preset(fluid_synth_t* synth, unsigned int sfontnum,
 {
   fluid_preset_t* preset = 0;
   fluid_sfont_t* sfont = 0;
-  fluid_list_t* list = synth->sfont;
+//  fluid_list_t* list = synth->sfont;
   int offset;
 
   sfont = fluid_synth_get_sfont_by_id(synth, sfontnum);
@@ -1265,7 +1263,7 @@ int fluid_synth_program_select(fluid_synth_t* synth,
   fluid_channel_t* channel;
 
   if ((chan < 0) || (chan >= synth->midi_channels)) {
-    FLUID_LOG(FLUID_ERR, "Channel number out of range (chan=%d)", chan);
+    FLUID_LOG(FLUID_ERR, "Channel number out of range (chan=%d > %d)", chan, synth->midi_channels);
     return FLUID_FAILED;
   }
   channel = synth->channel[chan];
@@ -1303,7 +1301,7 @@ int fluid_synth_program_select2(fluid_synth_t* synth,
   int offset;
 
   if ((chan < 0) || (chan >= synth->midi_channels)) {
-    FLUID_LOG(FLUID_ERR, "Channel number out of range (chan=%d)", chan);
+    FLUID_LOG(FLUID_ERR, "Channel number out of range (chan=%d > %d)", chan, synth->midi_channels);
     return FLUID_FAILED;
   }
   channel = synth->channel[chan];
@@ -1355,7 +1353,7 @@ void fluid_synth_update_presets(fluid_synth_t* synth)
 /*
  * fluid_synth_update_gain
  */
-int fluid_synth_update_gain(fluid_synth_t* synth, char* name, double value)
+int fluid_synth_update_gain(fluid_synth_t* synth, char* /*name*/, double value)
 {
   fluid_synth_set_gain(synth, (float) value);
   return 0;
@@ -1390,7 +1388,7 @@ float fluid_synth_get_gain(fluid_synth_t* synth)
 /*
  * fluid_synth_update_polyphony
  */
-int fluid_synth_update_polyphony(fluid_synth_t* synth, char* name, int value)
+int fluid_synth_update_polyphony(fluid_synth_t* synth, char* /*name*/, int value)
 {
   fluid_synth_set_polyphony(synth, value);
   return 0;
@@ -1431,10 +1429,10 @@ int fluid_synth_get_polyphony(fluid_synth_t* synth)
 /*
  * fluid_synth_get_internal_buffer_size
  */
-int fluid_synth_get_internal_bufsize(fluid_synth_t* synth)
-{
-  return FLUID_BUFSIZE;
-}
+int fluid_synth_get_internal_bufsize(fluid_synth_t*)
+      {
+      return FLUID_BUFSIZE;
+      }
 
 /*
  * fluid_synth_program_reset
@@ -1498,7 +1496,7 @@ void fluid_synth_set_chorus(fluid_synth_t* synth, int nr, double level,
   fluid_chorus_update(synth->chorus);
 }
 
-/******************************************************
+#if 0
 
 #define COMPRESS      1
 #define COMPRESS_X1   4.0
@@ -1544,6 +1542,7 @@ void fluid_synth_set_chorus(fluid_synth_t* synth, int nr, double level,
       }
     }
   }
+#endif
 
 
 /*

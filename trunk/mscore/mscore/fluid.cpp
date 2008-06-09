@@ -46,8 +46,8 @@ bool ISynth::init(int sampleRate)
       {
       fluid_settings_t* settings = new_fluid_settings();
       fluid_settings_setnum(settings, "synth.sample-rate", float(sampleRate));
-      fluid_settings_setnum(settings, "synth.midi-channels", 64);
-      fluid_settings_setnum(settings, "synth.audio-channels", 2);
+      fluid_settings_setint(settings, "synth.midi-channels", 64);
+      fluid_settings_setint(settings, "synth.audio-channels", 2);
 
       _fluidsynth = new_fluid_synth(settings);
 
@@ -136,15 +136,15 @@ void ISynth::play(const MidiOutEvent& e)
                   break;
 
             case ME_PROGRAM:
-                  fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, e.a);
+                  err = fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, e.a);
                   if (midiOutputTrace)
                         printf("MidiOut: %2d:%2d Prog    %3d %3d\n", e.port, ch, lbank, e.a);
                   break;
             }
 
       if (err)
-            fprintf(stderr, "FluidSynth: error %d ch %d a %d b %d: %s\n",
-               err, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
+            fprintf(stderr, "FluidSynth: channel %d dataA %d dataB %d: %s\n",
+               channel, e.a, e.b, fluid_synth_error(_fluidsynth));
       }
 
 //---------------------------------------------------------

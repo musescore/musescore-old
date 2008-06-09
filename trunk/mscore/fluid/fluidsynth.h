@@ -186,7 +186,7 @@ char* fluid_settings_getstr_default(fluid_settings_t* settings, const char* name
     otherwise
 */
 FLUIDSYNTH_API
-int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, char* value);
+int fluid_settings_str_equal(fluid_settings_t* settings, const char* name, const char* value);
 
 
 /** returns 1 if the value has been set, 0 otherwise */
@@ -1350,7 +1350,7 @@ fluid_log_function_t fluid_set_log_function(int level, fluid_log_function_t fun,
 
 FLUIDSYNTH_API void fluid_default_log_function(int level, char* message, void* data);
 
-FLUIDSYNTH_API int fluid_log(int level, char * fmt, ...);
+FLUIDSYNTH_API int fluid_log(int level, const char* fmt, ...);
 /*
  *
  *  Utility functions

@@ -278,8 +278,7 @@ typedef FILE*  fluid_file;
 #define FLUID_FLUSH()                fflush(stdout)
 #endif
 
-// #define FLUID_LOG                    fluid_log
-#define FLUID_LOG
+#define FLUID_LOG                    fluid_log
 
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
@@ -289,7 +288,7 @@ typedef FILE*  fluid_file;
 #define FLUID_ASSERT(a,b)
 #define FLUID_ASSERT_P(a,b)
 
-// char* fluid_error(void);
+char* fluid_error();
 
 /* Internationalization */
 #define _(s) s
