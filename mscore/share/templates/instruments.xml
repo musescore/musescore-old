@@ -119,6 +119,8 @@
       <instrument>
          <name>Tenor Saxophone</name>
          <short-name>Ten. Sax.</short-name>
+         <transposition>-14</transposition>
+         <clef>4</clef>
          <Articulation>
             <program>66</program>
             </Articulation>

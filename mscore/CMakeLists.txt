@@ -34,8 +34,11 @@ endif (MINGW)
 # build qt script bindings
 # this requires qt >= 4.4
 
-set(BUILD_SCRIPT_INTERFACE FALSE)
-#set(BUILD_SCRIPT_INTERFACE TRUE)
+#set(BUILD_SCRIPT_INTERFACE FALSE)
+set(BUILD_SCRIPT_INTERFACE TRUE)
+
+set(BUILD_SCRIPT_DEBUG FALSE)
+#set(BUILD_SCRIPT_DEBUG TRUE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
@@ -188,6 +191,10 @@ endif (NOT USE_GLOBAL_FLUID)
 if (BUILD_SCRIPT_INTERFACE)
       set (subdirs ${subdirs} scriptgen)
 endif (BUILD_SCRIPT_INTERFACE)
+
+if (BUILD_SCRIPT_DEBUG)
+      set (subdirs ${subdirs} scriptdebug)
+endif (BUILD_SCRIPT_DEBUG)
 
 subdirs(${subdirs})
 

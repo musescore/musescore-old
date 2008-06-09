@@ -61,6 +61,9 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       setShortName(t->shortName);
       setTrackName(t->trackName);
       setLongName(t->name);
+
+      printf("setPitchOffset %d\n", t->transpose);
+
       setPitchOffset(t->transpose);
       if (t->useDrumset) {
             setUseDrumset(true);

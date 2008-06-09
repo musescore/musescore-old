@@ -114,6 +114,7 @@ void ElementItem::init()
 PageListEditor::PageListEditor(QWidget* parent)
    : QWidget(parent)
       {
+      setWindowFlags(Qt::Dialog);
       setWindowTitle(tr("MuseScore: Object Inspector"));
       QHBoxLayout* hbox = new QHBoxLayout;
       setLayout(hbox);
