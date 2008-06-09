@@ -136,16 +136,8 @@ void Score::transpose()
                   for (iKeyEvent ke = km->lower_bound(sel->tickStart);
                      ke != km->lower_bound(sel->tickEnd); ++ke) {
                         int oKey  = ke->second;
-                        int tick = ke->first;
-                        int nKey = oKey;
-                        if (nKey == -7)
-                              nKey = 6;
-                        else if (nKey == 7)
-                              nKey = -6;
-                        nKey += 6;
-//                        nKey = (nKey + 8) % 13;
-                        nKey = (nKey + diff) % 13;
-                        nKey -= 6;
+                        int tick  = ke->first;
+                        int nKey  = transposeKey(oKey, diff);
                         undoChangeKey(staff(staffIdx), tick, oKey, nKey);
                         }
                   }

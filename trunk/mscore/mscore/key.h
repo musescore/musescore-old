@@ -46,5 +46,7 @@ class KeyList : public std::map<const int, int> {
       void insertTime(int start, int len);
       };
 
+extern int transposeKey(int oldKey, int semitones);
+
 #endif
 

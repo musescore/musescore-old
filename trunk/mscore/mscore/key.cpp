@@ -106,3 +106,24 @@ void KeyList::insertTime(int tick, int len)
       insert(tmp.begin(), tmp.end());
       }
 
+//---------------------------------------------------------
+//   transposeKey
+//---------------------------------------------------------
+
+int transposeKey(int key, int semitones)
+      {
+      while (semitones < 0)
+            semitones += 12;
+      // switch to enharmonic key:
+      if (key == -7)
+            key = 6;
+      else if (key == 7)
+            key = -6;
+      key += 6;
+      key = (key + semitones) % 13;
+      if (key + semitones >= 13)
+            ++key;
+      key -= 6;
+      return key;
+      }
+

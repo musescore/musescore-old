@@ -74,7 +74,7 @@ void InstrumentTemplate::write(Xml& xml) const
       if (maxPitch != 127)
             xml.tag("maxPitch", maxPitch);
       if (transpose)
-            xml.tag("transpose", transpose);
+            xml.tag("transposition", transpose);
       if (useDrumset)
             xml.tag("drumset", useDrumset);
       foreach(const NamedEventList& a, midiActions)
@@ -192,7 +192,7 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                   minPitch = i;
             else if (tag == "maxPitch")
                   maxPitch = i;
-            else if (tag == "transpose")
+            else if (tag == "transposition")
                   transpose = i;
             else if (tag == "drumset")
                   useDrumset = i;

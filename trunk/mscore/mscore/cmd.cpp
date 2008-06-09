@@ -1522,17 +1522,20 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "pitch-down-octave")
                   upDown(false, true);
             else if (cmd == "move-up") {
-                  Element* el = sel->element(); // single selection
-                  if (el && el->type() == NOTE)
-                        moveUp((Note*)el);
                   setLayoutAll(false);
-                  }
-            else if (cmd == "move-down") {
                   Element* el = sel->element(); // single selection
                   if (el && el->type() == NOTE) {
-                        moveDown((Note*)el);
+                        Note* note = static_cast<Note*>(el);
+                        moveUp(note);
                         }
+                  }
+            else if (cmd == "move-down") {
                   setLayoutAll(false);
+                  Element* el = sel->element(); // single selection
+                  if (el && el->type() == NOTE) {
+                        Note* note = static_cast<Note*>(el);
+                        moveDown(note);
+                        }
                   }
             else if (cmd == "up-chord") {
                   Element* el = sel->element(); // single selection

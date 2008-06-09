@@ -1,3 +1,10 @@
+9.6.8 (ws)
+      - added qt script debug to build system
+6.6.8 (ws)
+      - Transpose key in new wizard for transposing instruments.
+        Example: tenor sax sounds 14 semitones lower than notated,
+        if the score is c major, then the tenor sax staff is created with
+        two sharps (d major).
 5.6.8  (ws)
       - automatically move end bar line when appending new measure(s)
       - automatically create end bar line in "new wizard"
