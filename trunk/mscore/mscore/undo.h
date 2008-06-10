@@ -87,6 +87,7 @@ struct UndoOp {
             ChangeCopyright,
             TransposeHarmony,
             ExchangeVoice,
+            ChangeConcertPitch,
             };
       UndoType type;
       Element* element1;

@@ -99,6 +99,8 @@ void NoteAttribute::read(QDomElement e)
             QString tag(e.tagName());
             if (tag == "idx")                         // obsolete
                   setSubtype(e.text().toInt());
+            else if (tag == "articulationChange")
+                  _articulationName = e.attribute("name");
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -112,6 +114,8 @@ void NoteAttribute::read(QDomElement e)
 void NoteAttribute::write(Xml& xml) const
       {
       xml.stag("Attribute");
+      if (!_articulationName.isEmpty())
+            xml.tagE(QString("articulationChange name=\"%1\"").arg(_articulationName));
       Element::writeProperties(xml);
       xml.etag();
       }

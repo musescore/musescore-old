@@ -209,6 +209,8 @@ struct Style {
       bool useGermanNoteNames;
       bool chordNamesUseSymbols;
 
+      bool concertPitch;      // display transposing instruments in concert pitch
+
       //---------------------------------------------------------
       //   PlayStyle
       //---------------------------------------------------------

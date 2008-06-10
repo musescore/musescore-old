@@ -1,3 +1,7 @@
+10.6.8 (ws)
+      - first implementation of "Display in Concert Pitch" style option
+      - integrated qt script debugger; enable debugger by starting
+        mscore with option "-D"
 9.6.8 (ws)
       - fluid synth settings: increase max channel number to 64,
         set audio channels to two

@@ -23,10 +23,11 @@
 #cmakedefine USE_PORTAUDIO
 
 #cmakedefine HAS_MIDI
+#cmakedefine HAS_SCRIPT_DEBUG
 
-#define INSTALL_NAME     "${Mscore_INSTALL_NAME}"
-#define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
-#define VERSION          "${Mscore_VERSION_FULL}"
+#define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
+#define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"
+#define VERSION           "${Mscore_VERSION_FULL}"
 
 #cmakedefine USE_GLOBAL_FLUID
 

@@ -32,7 +32,6 @@ QT4_WRAP_CPP (mocs
       qscriptdebuggerconsolewidget_p.h
       qscriptdebuggercontrol_p.h
       qscriptdebugger.h
-      qscriptdebuggerlauncher.cpp
       qscriptdebuggerscriptswidget_p.h
       qscriptdebuggerstackwidget_p.h
       qscriptembeddeddebugger.h
@@ -41,11 +40,14 @@ QT4_WRAP_CPP (mocs
       editor/textedit.h
       )
 
+QT4_GENERATE_MOC(qscriptdebuggerlauncher.h moc_qscriptdebuggerlauncher.h)
+
 QT4_ADD_RESOURCES (qrc_files qtscriptdebug.qrc)
 
 add_library ( qtscript_debug SHARED
       ${qrc_files}
       ${mocs}
+      moc_qscriptdebuggerlauncher.h
       qscriptdebuggerglobal.cpp
       qscriptdebuggerfrontend.cpp
       qscriptdebuggervalue.cpp
@@ -88,4 +90,11 @@ set_target_properties(qtscript_debug
          "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG"
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
+
+if (MINGW)
+      install (TARGETS qtscript_debug DESTINATION bin)
+else (MINGW)
+      install (TARGETS qtscript_debug DESTINATION lib)
+endif (MINGW)
+
 

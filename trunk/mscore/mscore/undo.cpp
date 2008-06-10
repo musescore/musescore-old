@@ -92,6 +92,7 @@ static const char* undoName[] = {
       "ChangeCopyright",
       "TransposeHarmony",
       "ExchangeVoice",
+      "ChangeConcertPitch",
       };
 
 static bool UNDO = false;
@@ -618,6 +619,13 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         m->exchangeVoice(i->val2, i->val1, i->val3, i->val4);
                   else
                         m->exchangeVoice(i->val1, i->val2, i->val3, i->val4);
+                  }
+                  break;
+            case UndoOp::ChangeConcertPitch:
+                  {
+                  int oval = int(_style->concertPitch);
+                  _style->concertPitch = bool(i->val1);
+                  i->val1 = oval;
                   }
                   break;
             }

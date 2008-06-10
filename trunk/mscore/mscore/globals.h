@@ -35,6 +35,7 @@ static const int MSCVERSION = 109;
 extern int division;
 
 extern bool debugMode;
+extern bool scriptDebug;
 extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.
 extern bool noMidi;           ///< Dont use midi; cmd line option.

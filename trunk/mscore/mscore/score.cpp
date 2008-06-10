@@ -71,6 +71,7 @@ QSize  scoreSize(950, 500);
 MuseScore* mscore;
 bool debugMode       = false;
 bool layoutDebug     = false;
+bool scriptDebug     = false;
 bool noSeq           = false;
 bool noMidi          = false;
 bool midiInputTrace  = false;

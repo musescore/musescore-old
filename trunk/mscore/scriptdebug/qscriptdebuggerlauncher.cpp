@@ -369,4 +369,5 @@ void QScriptDebuggerLauncher::setDebugger(const QString &path)
     d->debugger = path;
 }
 
-#include "moc_qscriptdebuggerlauncher.cxx"
+#include "moc_qscriptdebuggerlauncher.h"
+
