@@ -1082,6 +1082,7 @@ static void usage(const char* prog, const char*)
       fprintf(stderr, "usage: %s flags scorefile\n   Flags:\n", prog);
       fprintf(stderr, "   -v        print version\n"
         "   -d        debug mode\n"
+        "   -D        enable plugin script debugger\n"
         "   -s        no internal synthesizer\n"
         "   -m        no midi\n"
         "   -L        layout debug\n"
@@ -1486,7 +1487,7 @@ int main(int argc, char* argv[])
       setDefaultStyle();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:D")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1519,6 +1520,9 @@ int main(int argc, char* argv[])
                         break;
                   case 'S':
                         styleFile = optarg;
+                        break;
+                  case 'D':
+                        scriptDebug = true;
                         break;
 
                   default:

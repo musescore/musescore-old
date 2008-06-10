@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
-    <height>442</height>
+    <width>859</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -16,7 +16,7 @@
    <item row="0" column="0" >
     <widget class="QListWidget" name="pageList" >
      <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Maximum" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -28,7 +28,7 @@
       <bool>true</bool>
      </property>
      <property name="resizeMode" >
-      <enum>QListView::Adjust</enum>
+      <enum>QListView::Fixed</enum>
      </property>
      <property name="uniformItemSizes" >
       <bool>true</bool>
@@ -36,6 +36,11 @@
      <property name="currentRow" >
       <number>-1</number>
      </property>
+     <item>
+      <property name="text" >
+       <string>Score</string>
+      </property>
+     </item>
      <item>
       <property name="text" >
        <string>Page</string>
@@ -76,20 +81,65 @@
    <item row="0" column="1" >
     <widget class="QStackedWidget" name="stackedWidget" >
      <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>2</number>
+      <number>0</number>
      </property>
+     <widget class="QWidget" name="Seite_5" >
+      <layout class="QGridLayout" name="gridLayout_2" >
+       <item row="0" column="0" >
+        <widget class="QCheckBox" name="concertPitch" >
+         <property name="text" >
+          <string>Display in Concert Pitch</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <spacer name="horizontalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>355</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" >
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>334</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="page2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>604</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -101,8 +151,17 @@
        </item>
        <item row="0" column="1" >
         <widget class="QDoubleSpinBox" name="staffUpperBorder" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
          <property name="minimum" >
           <double>-1000.000000000000000</double>
@@ -127,8 +186,17 @@
        </item>
        <item row="0" column="3" >
         <widget class="QDoubleSpinBox" name="staffLowerBorder" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
          <property name="minimum" >
           <double>-1000.000000000000000</double>
@@ -140,6 +208,12 @@
        </item>
        <item row="1" column="0" >
         <widget class="QLabel" name="label_3" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>staff distance</string>
          </property>
@@ -147,8 +221,17 @@
        </item>
        <item row="1" column="1" >
         <widget class="QDoubleSpinBox" name="staffDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
          <property name="minimum" >
           <double>-1000.000000000000000</double>
@@ -160,6 +243,12 @@
        </item>
        <item row="1" column="2" >
         <widget class="QLabel" name="label_4" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>akkolade distance</string>
          </property>
@@ -167,8 +256,17 @@
        </item>
        <item row="1" column="3" >
         <widget class="QDoubleSpinBox" name="akkoladeDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
          <property name="minimum" >
           <double>-1000.000000000000000</double>
@@ -181,7 +279,7 @@
        <item row="2" column="0" >
         <widget class="QLabel" name="label_5" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -193,8 +291,17 @@
        </item>
        <item row="2" column="1" >
         <widget class="QDoubleSpinBox" name="systemDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
          <property name="minimum" >
           <double>-1000.000000000000000</double>
@@ -219,15 +326,24 @@
        </item>
        <item row="3" column="1" >
         <widget class="QDoubleSpinBox" name="lyricsDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
         </widget>
        </item>
        <item row="3" column="2" >
         <widget class="QLabel" name="label_36" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -239,15 +355,24 @@
        </item>
        <item row="3" column="3" >
         <widget class="QDoubleSpinBox" name="lyricsMinBottomDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
         </widget>
        </item>
        <item row="4" column="0" >
         <widget class="QLabel" name="label_40" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -259,15 +384,24 @@
        </item>
        <item row="4" column="1" >
         <widget class="QDoubleSpinBox" name="systemFrameDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
         </widget>
        </item>
        <item row="4" column="2" >
         <widget class="QLabel" name="label_42" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -279,13 +413,28 @@
        </item>
        <item row="4" column="3" >
         <widget class="QDoubleSpinBox" name="frameSystemDistance" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>sp</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
          </property>
         </widget>
        </item>
        <item row="5" column="0" >
         <widget class="QLabel" name="label_6" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Page fill threshold:</string>
          </property>
@@ -293,8 +442,17 @@
        </item>
        <item row="5" column="1" >
         <widget class="QDoubleSpinBox" name="pageFillThreshold" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>%</string>
+         </property>
+         <property name="decimals" >
+          <number>0</number>
          </property>
          <property name="minimum" >
           <double>0.000000000000000</double>
@@ -309,6 +467,12 @@
        </item>
        <item row="5" column="2" >
         <widget class="QLabel" name="label_7" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Last system fill threshold</string>
          </property>
@@ -316,8 +480,17 @@
        </item>
        <item row="5" column="3" >
         <widget class="QDoubleSpinBox" name="lastSystemFillThreshold" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>%</string>
+         </property>
+         <property name="decimals" >
+          <number>0</number>
          </property>
          <property name="maximum" >
           <double>100.000000000000000</double>
@@ -329,6 +502,12 @@
        </item>
        <item row="6" column="0" colspan="2" >
         <widget class="QCheckBox" name="genClef" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Create clef for all systems</string>
          </property>
@@ -336,6 +515,12 @@
        </item>
        <item row="6" column="2" colspan="2" >
         <widget class="QCheckBox" name="genTimesig" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Create time signatures</string>
          </property>
@@ -343,6 +528,12 @@
        </item>
        <item row="7" column="0" colspan="2" >
         <widget class="QCheckBox" name="genKeysig" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Create key sig for all systems</string>
          </property>
@@ -350,6 +541,12 @@
        </item>
        <item row="7" column="2" colspan="2" >
         <widget class="QCheckBox" name="genCourtesyTimesig" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Create courtesy time signatures</string>
          </property>
@@ -360,7 +557,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>137</width>
            <height>21</height>
@@ -371,6 +568,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_11" >
@@ -510,7 +715,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>115</width>
            <height>31</height>
@@ -521,20 +726,19 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page1" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>8</number>
-       </property>
-       <property name="topMargin" >
-        <number>8</number>
-       </property>
-       <property name="rightMargin" >
-        <number>8</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>8</number>
        </property>
        <item>
@@ -565,7 +769,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -635,6 +839,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_26" >
@@ -695,7 +907,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>61</height>
@@ -737,9 +949,23 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_2" >
-      <layout class="QGridLayout" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_38" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Small Staff Size</string>
          </property>
@@ -747,6 +973,12 @@
        </item>
        <item row="0" column="1" >
         <widget class="QDoubleSpinBox" name="smallStaffSize" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>%</string>
          </property>
@@ -764,8 +996,49 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_44" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text" >
+          <string>Small Note Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QDoubleSpinBox" name="smallNoteSize" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="suffix" >
+          <string>%</string>
+         </property>
+         <property name="decimals" >
+          <number>1</number>
+         </property>
+         <property name="maximum" >
+          <double>200.000000000000000</double>
+         </property>
+         <property name="value" >
+          <double>70.000000000000000</double>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="0" >
         <widget class="QLabel" name="label_39" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Grace Note Size</string>
          </property>
@@ -773,6 +1046,12 @@
        </item>
        <item row="2" column="1" >
         <widget class="QDoubleSpinBox" name="graceNoteSize" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>%</string>
          </property>
@@ -790,44 +1069,14 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>181</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_44" >
-         <property name="text" >
-          <string>Small Note Size</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="smallNoteSize" >
-         <property name="suffix" >
-          <string>%</string>
-         </property>
-         <property name="decimals" >
-          <number>1</number>
-         </property>
-         <property name="maximum" >
-          <double>200.000000000000000</double>
-         </property>
-         <property name="value" >
-          <double>70.000000000000000</double>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0" >
         <widget class="QLabel" name="label_45" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Small Clef Size</string>
          </property>
@@ -835,6 +1084,12 @@
        </item>
        <item row="3" column="1" >
         <widget class="QDoubleSpinBox" name="smallClefSize" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="suffix" >
           <string>%</string>
          </property>
@@ -849,9 +1104,30 @@
          </property>
         </widget>
        </item>
+       <item row="4" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>181</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_8" >
@@ -868,7 +1144,7 @@
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>40</width>
            <height>20</height>
@@ -901,7 +1177,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -912,6 +1188,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QCheckBox" name="useGermanNoteNames" >
@@ -925,7 +1209,7 @@
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>40</width>
            <height>20</height>
@@ -938,7 +1222,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -962,16 +1246,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -979,7 +1254,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>

@@ -35,33 +35,6 @@
 
 void JackAudio::jack_thread_init (void* data)
       {
-      if (((JackAudio*)data)->seq->isRealtime()) {
-            struct sched_param rt_param;
-            int rv;
-            memset(&rt_param, 0, sizeof(sched_param));
-            int type;
-            rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
-            if (rv == -1)
-                  perror("get scheduler parameter");
-            if (type != SCHED_FIFO) {
-                  fprintf(stderr, "JACK thread not running SCHED_FIFO, try to set...\n");
-
-                  memset(&rt_param, 0, sizeof(sched_param));
-                  rt_param.sched_priority = 1;
-                  rv = pthread_setschedparam(pthread_self(), SCHED_FIFO, &rt_param);
-                  if (rv == -1)
-                        perror("set realtime scheduler");
-                  memset(&rt_param, 0, sizeof(sched_param));
-                  rv = pthread_getschedparam(pthread_self(), &type, &rt_param);
-                  if (rv == -1)
-                        perror("get scheduler parameter");
-                  if (type != SCHED_FIFO)
-                        fprintf(stderr, "JACK still not running FIFO !?!\n"
-                        "======reliable RT operation not possible!!======\n");
-                  else
-                        fprintf(stderr, "JACK thread succesfully set to SCHED_FIFO\n");
-                  }
-            }
       }
 
 //---------------------------------------------------------

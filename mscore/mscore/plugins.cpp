@@ -19,9 +19,11 @@
 //=============================================================================
 
 #include "mscore.h"
+#include "globals.h"
 #include "score.h"
 #include "script.h"
 #include "config.h"
+#include "qscriptembeddeddebugger.h"
 
 //---------------------------------------------------------
 //   loadPlugins
@@ -125,16 +127,26 @@ void MuseScore::pluginTriggered(int idx)
       se.importExtension("qt.network");
       se.importExtension("qt.uitools");
 
-#if QT_VERSION >= 0x040400
-      QStringList sl = se.availableExtensions();
-      printf("available:\n");
-      foreach(QString s, sl)
-            printf("  <%s>\n", qPrintable(s));
+#ifdef HAS_SCRIPT_DEBUG
+      QScriptEmbeddedDebugger debugger;
+      if (scriptDebug) {
+            debugger.attachTo(&se);
+            debugger.breakAtFirstStatement();
+            }
+#endif
 
-      sl = se.importedExtensions();
-      printf("imported:\n");
-      foreach(QString s, sl)
-            printf("  <%s>\n", qPrintable(s));
+#if QT_VERSION >= 0x040400
+      if (debugMode) {
+            QStringList sl = se.availableExtensions();
+            printf("available:\n");
+            foreach(QString s, sl)
+                  printf("  <%s>\n", qPrintable(s));
+
+            sl = se.importedExtensions();
+            printf("imported:\n");
+            foreach(QString s, sl)
+                  printf("  <%s>\n", qPrintable(s));
+            }
 #endif
 
       QScriptValue v = se.newQObject(cs);
@@ -151,6 +163,12 @@ void MuseScore::pluginTriggered(int idx)
             return;
             }
       run.call();
+
+#ifdef HAS_SCRIPT_DEBUG
+      if (scriptDebug) {
+            debugger.detach();
+            }
+#endif
       }
 
 

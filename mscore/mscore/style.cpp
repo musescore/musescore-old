@@ -225,7 +225,9 @@ Style defaultStyle = {
       true,             // genCourtesyTimesig
 
       false,            // use german note names
-      false,             // use symbols in chord names
+      false,            // use symbols in chord names
+      false,            // display in concert pitch
+
       // play style
       70,               // gateTime
       100,              // tenutoGateTime
@@ -535,6 +537,8 @@ void Style::load(QDomElement e, int version)
                   useGermanNoteNames = i;
             else if (tag == "chordNamesUseSymbols")
                   chordNamesUseSymbols = i;
+            else if (tag == "displayInConcertPitch")
+                  concertPitch = i;
             else if (tag == "gateTime")
                   gateTime  = i;
             else if (tag == "tenutoGateTime")
@@ -632,6 +636,8 @@ void Style::save(Xml& xml)
             xml.tag("useGermanNoteNames", useGermanNoteNames);
       if (chordNamesUseSymbols)
             xml.tag("chordNamesUseSymbols", chordNamesUseSymbols);
+      if (concertPitch)
+            xml.tag("displayInConcertPitch", concertPitch);
 
       xml.tag("gateTime",               gateTime);
       xml.tag("tenutoGateTime",         tenutoGateTime);

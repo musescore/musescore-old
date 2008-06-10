@@ -94,9 +94,8 @@ struct AttributeInfo {
 //---------------------------------------------------------
 
 class NoteAttribute : public Symbol {
-   public:
+      QString _articulationName;
 
-   protected:
       virtual bool isMovable() const { return true; }
 
    public:
@@ -114,6 +113,9 @@ class NoteAttribute : public Symbol {
       static AttributeInfo atrList[];
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
+
+      QString articulationName() const           { return _articulationName; }
+      void setArticulationName(const QString& s) { _articulationName = s;    }
       };
 
 typedef QList<NoteAttribute*>::iterator iAttribute;

@@ -27,6 +27,7 @@
 #include "key.h"
 #include "staff.h"
 #include "harmony.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -144,5 +145,78 @@ void Score::transpose()
             }
       undoSetPitchSpellNeeded();
       spell();
+      }
+
+//---------------------------------------------------------
+//   transposeStaff
+//---------------------------------------------------------
+
+void Score::cmdTransposeStaff(int staffIdx, int diff)
+      {
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            for (int st = startTrack; st < endTrack; ++st) {
+                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                        Element* e = segment->element(st);
+                        if (!e || e->type() != CHORD)
+                              continue;
+                        Chord* chord = static_cast<Chord*>(e);
+                        NoteList* notes = chord->noteList();
+
+                        // we have to operate on a list copy because
+                        // change pitch changes chord->noteList():
+                        QList<Note*> nl;
+                        for (iNote i = notes->begin(); i != notes->end(); ++i)
+                              nl.append(i->second);
+                        foreach(Note* note, nl)
+                              undoChangePitch(note, note->pitch() + diff);
+                        }
+                  }
+#if 0
+            foreach (Element* e, *mb->el()) {
+                  if (e->type() != HARMONY)
+                        continue;
+                  Harmony* harmony = static_cast<Harmony*>(e);
+                  undoTransposeHarmony(harmony, diff);
+                  }
+#endif
+            }
+      KeyList* km = staff(staffIdx)->keymap();
+      for (iKeyEvent ke = km->begin(); ke != km->end(); ++ke) {
+            int oKey  = ke->second;
+            int tick  = ke->first;
+            int nKey  = transposeKey(oKey, diff);
+            undoChangeKey(staff(staffIdx), tick, oKey, nKey);
+            }
+      undoSetPitchSpellNeeded();
+      spell();
+      }
+
+//---------------------------------------------------------
+//   cmdConcertPitchChanged
+//---------------------------------------------------------
+
+void Score::cmdConcertPitchChanged(bool flag)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type   = UndoOp::ChangeConcertPitch;
+      i.val1   = _style->concertPitch;
+      undoList.back()->push_back(i);
+
+      foreach(Staff* staff, _staves) {
+            Instrument* instr = staff->part()->instrument();
+            int offset = instr->pitchOffset;
+            if (offset == 0)
+                  continue;
+            if (!flag)
+                 offset = -offset;
+            cmdTransposeStaff(staff->idx(), offset);
+            }
       }
 

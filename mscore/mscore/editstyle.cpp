@@ -60,6 +60,11 @@ void EditStyle::ok()
 void EditStyle::apply()
       {
       getValues();
+      if (cs->style()->concertPitch != lstyle->concertPitch) {
+            cs->startCmd();
+            cs->cmdConcertPitchChanged(lstyle->concertPitch);
+            cs->endCmd();
+            }
       *(cs->style()) = *lstyle;
       cs->startCmd();
       cs->setLayoutAll(true);
@@ -125,6 +130,7 @@ void EditStyle::getValues()
       lstyle->genCourtesyTimesig     = genCourtesyTimesig->isChecked();
       lstyle->useGermanNoteNames     = useGermanNoteNames->isChecked();
       lstyle->chordNamesUseSymbols   = chordNamesUseSymbols->isChecked();
+      lstyle->concertPitch           = concertPitch->isChecked();
       }
 
 //---------------------------------------------------------
@@ -198,5 +204,6 @@ void EditStyle::setValues()
 
       useGermanNoteNames->setChecked(lstyle->useGermanNoteNames);
       chordNamesUseSymbols->setChecked(lstyle->chordNamesUseSymbols);
+      concertPitch->setChecked(lstyle->concertPitch);
       }
 

@@ -1602,7 +1602,7 @@ zu Notenzeile</translation>
     <message>
         <location filename="../../mscore/editstyle.ui" line="952"/>
         <source>use symbols</source>
-        <translation>Bebutze Symbole</translation>
+        <translation>Benutze Symbole</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="340"/>

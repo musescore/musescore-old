@@ -54,6 +54,7 @@ set_source_files_properties(
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}/awl
+      ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}
       )
@@ -176,6 +177,10 @@ if (MINGW)
       ${QT_mingw_LIBRARIES}
       portaudio
       )
+   if (BUILD_SCRIPT_DEBUG)
+         target_link_libraries(mscore qtscript_debug)
+   endif (BUILD_SCRIPT_DEBUG)
+
    install(TARGETS mscore RUNTIME DESTINATION bin)
 
    install_files ( /bin .dll
@@ -203,29 +208,25 @@ else (MINGW)
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
       )
+   target_link_libraries(mscore
+      ${QT_LIBRARIES}
+      ${QT_QTSCRIPT_LIBRARY_RELEASE}
+      ${ALSA_LIB}
+      ${JACK_LIB}
+      ${PORTAUDIO_LIB}
+      awl
+      osdabzip
+      )
    if (USE_GLOBAL_FLUID)
-         target_link_libraries(mscore
-            ${QT_LIBRARIES}
-            ${QT_QTSCRIPT_LIBRARY_RELEASE}
-            ${ALSA_LIB}
-            ${JACK_LIB}
-            ${PORTAUDIO_LIB}
-            ${FLUID_LIB}
-            awl
-            osdabzip
-            )
+         target_link_libraries(mscore ${FLUID_LIB} )
    else (USE_GLOBAL_FLUID)
-         target_link_libraries(mscore
-            ${QT_LIBRARIES}
-            ${QT_QTSCRIPT_LIBRARY_RELEASE}
-            ${ALSA_LIB}
-            ${JACK_LIB}
-            ${PORTAUDIO_LIB}
-            fluid
-            awl
-            osdabzip
-            )
+         target_link_libraries(mscore fluid )
    endif (USE_GLOBAL_FLUID)
+
+   if (BUILD_SCRIPT_DEBUG)
+         target_link_libraries(mscore qtscript_debug)
+   endif (BUILD_SCRIPT_DEBUG)
+
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
    install( FILES   data/mscore.png DESTINATION share/pixmaps)

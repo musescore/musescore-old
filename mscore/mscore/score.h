@@ -582,6 +582,8 @@ class Score : public QObject {
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
       void updateArticulation();
+      void cmdTransposeStaff(int staffIdx, int offset);
+      void cmdConcertPitchChanged(bool);
       };
 
 extern Score* gscore;
