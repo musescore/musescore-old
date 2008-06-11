@@ -22,7 +22,10 @@ set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti -I
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
-include_directories(${QT_INCLUDES} ${PROJECT_SOURCE_DIR}/qscriptdebug/editor)
+include_directories(${QT_INCLUDES}
+   ${PROJECT_SOURCE_DIR}/scriptdebug/editor
+   ${PROJECT_BINARY_DIR}/scriptdebug
+   )
 
 QT4_WRAP_CPP (mocs
       qscriptconsoledebugger.h
@@ -40,14 +43,15 @@ QT4_WRAP_CPP (mocs
       editor/textedit.h
       )
 
-QT4_GENERATE_MOC(qscriptdebuggerlauncher.h moc_qscriptdebuggerlauncher.h)
+QT4_GENERATE_MOC( qscriptdebuggerlauncher.h
+   ${PROJECT_BINARY_DIR}/scriptdebug/moc_qscriptdebuggerlauncher.h )
 
 QT4_ADD_RESOURCES (qrc_files qtscriptdebug.qrc)
 
 add_library ( qtscript_debug SHARED
       ${qrc_files}
       ${mocs}
-      moc_qscriptdebuggerlauncher.h
+      ${PROJECT_BINARY_DIR}/scriptdebug/moc_qscriptdebuggerlauncher.h
       qscriptdebuggerglobal.cpp
       qscriptdebuggerfrontend.cpp
       qscriptdebuggervalue.cpp
@@ -92,9 +96,12 @@ set_target_properties(qtscript_debug
       )
 
 if (MINGW)
+      target_link_libraries(
+            qtscript_debug
+            ${QT_mingw_LIBRARIES}
+            )
       install (TARGETS qtscript_debug DESTINATION bin)
 else (MINGW)
       install (TARGETS qtscript_debug DESTINATION lib)
 endif (MINGW)
-
 

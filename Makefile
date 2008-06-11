@@ -71,12 +71,10 @@ win32:
                   mkdir win32install;                  \
             fi;                                        \
             cd win32build;                             \
-            cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
+            cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=DEBUG  ../mscore; \
             make lupdate ;                             \
             make lrelease;                             \
             make -j ${CPUS};                           \
-            make man-de;                               \
-            make man-en;                               \
             make install;                              \
             make package;                              \
          else                                          \
@@ -135,6 +133,4 @@ unix:
             echo "build directory unixBuild does alread exist, please remove first";  \
          fi
 
-man:
-	cd build; make man-de; make man-en;
 
