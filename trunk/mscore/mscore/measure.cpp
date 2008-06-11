@@ -2274,6 +2274,10 @@ void Measure::read(QDomElement e, int idx)
       if (tck >= 0) {
             tck = score()->fileDivision(tck);
             setTick(tck);
+            score()->curTick = tick();
+            }
+      else {
+            setTick(score()->curTick);
             }
       Staff* staff     = _score->staff(idx);
       score()->curTick = tick();

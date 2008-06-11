@@ -1885,6 +1885,7 @@ void Score::pasteStaff(const QMimeData* ms)
 
 void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
       {
+      curTick = 0;
       int srcStaffStart = -1;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "StaffList") {
