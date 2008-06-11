@@ -82,14 +82,14 @@ set(QT_USE_QTUITOOLS TRUE)
 # only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 
-find_package(Qt4 4.3)
+find_package(Qt4 "4.3")
 
 if (NOT QT4_FOUND)
-      message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
+      message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required."
          "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
-         "If you have QT4 installed, make sure qmake is found in your PATH.\n"
-         "If you compiled QT4 yourself make sure your new qmake ist found\n"
-         "_first_ in your PATH.\n"
+         "If you have QT4 installed, make sure qmake is found in your PATH."
+         "If you compiled QT4 yourself make sure your new qmake ist found"
+         "_first_ in your PATH."
          )
       endif (NOT QT4_FOUND)
 
@@ -109,10 +109,10 @@ message("QT_LIBRARIES  ${QT_LIBRARIES}")
 
 _QT4_ADJUST_LIB_VARS(QTSCRIPT)
 
-include(${QT_USE_FILE})
-
 #for cmake 2.4
 # QT_MODULE_SETUP(SCRIPT)
+
+include(${QT_USE_FILE})
 
 ##
 ## look for fluidsynth

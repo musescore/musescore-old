@@ -234,11 +234,12 @@ else (MINGW)
 
 endif (MINGW)
 
+if (NOT MINGW)
+
 #======================================
 #     target smf2xml
 #======================================
 
-if (NOT MINGW)
       add_executable(
             smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
             )
@@ -249,13 +250,11 @@ if (NOT MINGW)
       set_target_properties( smf2xml
             PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
             )
-endif (NOT MINGW)
 
 #======================================
 #     target xml2smf
 #======================================
 
-if (NOT MINGW)
       add_executable(
             xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
             )

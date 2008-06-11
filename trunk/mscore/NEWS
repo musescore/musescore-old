@@ -1,4 +1,10 @@
 Release 0.9.3 (svn):
+      - "concert pitch" view
+      - midi articulation
+      - integrated plugin script debugger
+      - plugin script bindings for qt gui library
+      - tremolo between notes
+      - new element: glissando
       - more tuplet types; allow for notes/rests of different len in tuplets
       - speedups/optimizations for layout
       - configurable autosave

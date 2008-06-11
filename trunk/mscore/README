@@ -52,21 +52,6 @@ Installation:
             sudo make install
 
 User Documentation:
-      Currently there is no complete documentation.
-      Some fragments are in the "mscore/doc/de" (german) directory.
-
-      Requirements:
-            - TeX with ConTeXt macro package
-              (as part of tetex 3.0 distribution)
-
-              For ubuntu/kubuntu you need to install the package "tetex-extra" in
-              addition to the normal tetex packages.
-
-      Build:
-            cd build
-            make doc
-
-            This generates man-de.pdf in build/doc/de.
 
 Program Documentation:
 
