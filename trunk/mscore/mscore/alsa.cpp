@@ -31,6 +31,7 @@
 #include "preferences.h"
 #include "seq.h"
 #include "alsamidi.h"
+#include "utils.h"
 
 #ifdef USE_ALSA
 //---------------------------------------------------------
