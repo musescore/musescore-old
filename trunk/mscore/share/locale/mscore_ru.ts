@@ -6247,19 +6247,19 @@ Save Current Score?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="394"/>
+        <location filename="../../mscore/utils.cpp" line="396"/>
         <source>MuseScore:</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="371"/>
+        <location filename="../../mscore/utils.cpp" line="373"/>
         <source>please select a single note and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту и попробуйте ещё раз
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="379"/>
+        <location filename="../../mscore/utils.cpp" line="381"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или паузу
@@ -6267,7 +6267,7 @@ Save Current Score?</source>
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="387"/>
+        <location filename="../../mscore/utils.cpp" line="389"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или лигу
@@ -6275,7 +6275,7 @@ Save Current Score?</source>
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="395"/>
+        <location filename="../../mscore/utils.cpp" line="397"/>
         <source>please select one or more staves and retry operation
 </source>
         <translation type="unfinished"></translation>

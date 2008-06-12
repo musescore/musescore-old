@@ -1,13 +1,20 @@
+#
+#     toolchain file
+#
+
 set (CMAKE_SYSTEM_NAME "Windows")
 
 set (CMAKE_C_COMPILER   i586-mingw32msvc-gcc)
 set (CMAKE_CXX_COMPILER i586-mingw32msvc-g++)
+#set (CMAKE_C_COMPILER /home/ws/.wine/drive_c/MinGW/bin/gcc.exe)
+#set (CMAKE_CXX_COMPILER /home/ws/.wine/drive_c/MinGW/bin/g++.exe)
 
-set (CMAKE_FIND_ROOT_PATH /usr/i586-mingw32msvc /home/ws/mingw-install)
+set (CMAKE_FIND_ROOT_PATH /usr/i586-mingw32msvc)
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search
 # programs in the host environment
+
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
