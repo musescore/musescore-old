@@ -62,35 +62,35 @@
           </td>
       </tr>
     </table>
-    
+
     <h5>Create grand staff</h5>
     <table>
       <tr>
         <td>
-          To extend bar lines over multiple staves double click 
-          on a bar line to edit it (see <a href="editmode.html">Edit
+          To extend bar lines over multiple staves double click
+          on a bar line to edit it (see <a href="editmode.php">Edit
           mode</a>).
           </td>
         <td>
-          <img src="../pic/grandstaff0.png" />
+          <img src="../pic/grandstaff0.png" width="322" height="159"/>
           </td>
       </tr>
-      
+
       <tr>
         <td>
-          Click and drag the blue square down to the next staff. 
-          All staff bar lines will be updated when you leave edit 
+          Click and drag the blue square down to the next staff.
+          All staff bar lines will be updated when you leave edit
           mode.
           </td>
         <td>
-          <img src="../pic/grandstaff1.png" />
+          <img src="../pic/grandstaff1.png" width="322" height="159"/>
           </td>
       </tr>
     </table>
     <br/>
 
     See also
-       <a href="measures.html">Measure Operations</a>.
+       <a href="measures.php">Measure Operations</a>.
     </page>
 
 <page name="beams" header="Beams">
@@ -382,7 +382,7 @@
        <td valign="top"><b>horizontal</b></td>
        <td><sp/></td>
        <td>Horizontal frames break a system. The width is adjustable and the
-          height equals the system height. Horizontal frames can be used to 
+          height equals the system height. Horizontal frames can be used to
           separate a coda.
           </td>
        </tr>
@@ -454,8 +454,8 @@
     <index>Keys</index>
     <table>
     <tr><td>
-      Key signatures are created or changed by dragging a key symbol 
-      from the key palette to a measure or existing key 
+      Key signatures are created or changed by dragging a key symbol
+      from the key palette to a measure or existing key
       signature.<br/>
       &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
       <br/>
@@ -549,8 +549,8 @@
 
 
     <h5>Properties</h5>
-    
-      To edit the properties of a measure right click on an empty part of the measure and 
+
+      To edit the properties of a measure right click on an empty part of the measure and
       select <b>Measure Properties...</b>.
 
     <table cellspacing="0" cellpadding="0">
@@ -790,8 +790,8 @@
       <li>Press OK to finish</li>
     </ul>
     Existing tempo text can be changed by double clicking on the text to enter edit mode.
-    Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the 
-    text and selecting "Tempo Properties..."</br>
+    Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the
+    text and selecting "Tempo Properties..."<br/>
     <br/>
     Note: Tempo text in the score will override a tempo set in the play panel.
     </page>
@@ -967,8 +967,8 @@
     <br/>
     <img src="../pic/volta.png" align="center"/>
     <br/><br/>
-    
-    Volta brackets can be place on the score by drag&amp;droping from the 
+
+    Volta brackets can be place on the score by drag&amp;droping from the
     <a href="palette.php">lines palette</a>.
     <br/>
     <br/>
@@ -1094,7 +1094,7 @@
     <br/>
 
     See also
-       <a href="barlines.html">Bar line</a> for cross-staff bar lines (i.e. grand staff).
+       <a href="barlines.php">Bar line</a> for cross-staff bar lines (i.e. grand staff).
     </page>
 
 <page name="tremolo" header="Tremolo">
@@ -1109,7 +1109,7 @@
       <br/>
       In a two note tremolo every note has the value of the whole tremolo
       duration. To enter a tremolo with the duration of a half note (minum)
-      first enter two normal quarter notes (quavers). After dragging a 
+      first enter two normal quarter notes (quavers). After dragging a
       tremolo symbol to the first note the note values automatically double
       to half notes.
     </page>
