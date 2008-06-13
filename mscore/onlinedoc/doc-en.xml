@@ -49,18 +49,48 @@
     </page>
 
 <page name="barlines" header="Barlines">
-    <index>Barlines</index>
+    <index>Bar line</index>
+    <h5>Change bar line type</h5>
     <table>
       <tr>
         <td>
-          Barlines are changed by dragging a barline symbol from the
-          barline palette to an barline in the score.
+          Bar lines are changed by dragging a bar line symbol from the
+          bar line palette to an bar line in the score.
           </td>
         <td>
           <img src="../pic/barlinepalette.png"/>
           </td>
       </tr>
-      </table>
+    </table>
+    
+    <h5>Create grand staff</h5>
+    <table>
+      <tr>
+        <td>
+          To extend bar lines over multiple staves double click 
+          on a bar line to edit it (see <a href="editmode.html">Edit
+          mode</a>).
+          </td>
+        <td>
+          <img src="../pic/grandstaff0.png" />
+          </td>
+      </tr>
+      
+      <tr>
+        <td>
+          Click and drag the blue square down to the next staff. 
+          All staff bar lines will be updated when you leave edit 
+          mode.
+          </td>
+        <td>
+          <img src="../pic/grandstaff1.png" />
+          </td>
+      </tr>
+    </table>
+    <br/>
+
+    See also
+       <a href="measures.html">Measure Operations</a>.
     </page>
 
 <page name="beams" header="Beams">
@@ -203,7 +233,8 @@
       <br/>
       <b>Add</b><br/>
       Drag a clef from the palette onto an empty part of a measure.
-      This creates a clef at the beginning of the measure. If the
+      This creates a clef at the beginning of the measure. Drag a clef
+      to a particular note to create a mid-measure clef. If the
       measure is not the first measure in the staff it is drawn
       smaller.<br/>
       <br/>
@@ -743,6 +774,26 @@
 
 <page name="tempo" header="Tempo">
     <index>Tempo</index>
+    Play back tempo can be change via the play panel or via tempo text in the score.<br/>
+    <br/>
+    <h5>Play panel</h5>
+    <ul>
+      <li>Display the play panel: Display --&gt; Play Panel (F11)</li>
+      <li>Change the Beats per Minute (bpm) using the Tempo (Tmp) slider</li>
+    </ul>
+    <br/>
+    <h5>Tempo text</h5>
+    <ul>
+      <li>Select a note to indicate where the tempo text should be created</li>
+      <li>From the main menu: Create --&gt; Text... --&gt; Tempo... (Ctr+Alt+T)</li>
+      <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
+      <li>Press OK to finish</li>
+    </ul>
+    Existing tempo text can be changed by double clicking on the text to enter edit mode.
+    Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the 
+    text and selecting "Tempo Properties..."</br>
+    <br/>
+    Note: Tempo text in the score will override a tempo set in the play panel.
     </page>
 
 <page name="textedit" header="Text Editing">
@@ -1040,7 +1091,10 @@
       <td><img src="../pic/crossbeams2.png" align="center"/></td>
       </tr>
     </table>
+    <br/>
 
+    See also
+       <a href="barlines.html">Bar line</a> for cross-staff bar lines (i.e. grand staff).
     </page>
 
 <page name="tremolo" header="Tremolo">

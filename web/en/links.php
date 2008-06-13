@@ -43,7 +43,7 @@ Dave Phillips: Music Notation Programs: Recent Releases</a></li>
       or into MIDI, or into MusicXML.</li>
 </ul>
 
-<br>
+<br/>
 <h3>Tools:</h3>
 <ul>
    <li><a href="http://fontforge.sourceforge.net/">FontForge(fomerly PfaEdit)</a>
@@ -52,14 +52,14 @@ Dave Phillips: Music Notation Programs: Recent Releases</a></li>
 </ul>
 
 
-<br>
+<br/>
 <h3>General:</h3>
 <ul>
    <li>Dave Phillips <a href="http://linux-sound.org/">linuxsound</a>-page
       is the ultimate reference for <em>Sound &amp; MIDI Software For Linux</em>.</li>
    <li>The <a href="http://www.linuxlinks.com/">LinuxLinks</a> Forums;
       have a look at the <a href="http://www.linuxlinks.com/Software/Multimedia/Music_Notation/">
-      MusicNotation</a> section.
+      MusicNotation</a> section.</li>
    <li>Linux-Audio-Development(LAD) Mailing List:<br/>
       <a href="http://lad.linuxaudio.org">
       <img src="../wpic/ladbutton.gif" width="90" height="31" border="0"
