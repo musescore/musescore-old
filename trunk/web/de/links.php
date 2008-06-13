@@ -27,7 +27,7 @@ Dave Phillips: Music Notation Programs: Recent Releases</a></li>
 <li><a href="http://lmuse.sourceforge.net/">MusE</a>
       Midi/Audio sequencer</li>
 <li><a href="http://lilypond.org">LilyPond</a></li>
-<li><a href="http://noteedit.berlios.de">NoteEdit</a></li>
+<li><a href="http://noteedit.berlios.de">NoteEdit</a>
    ist ein grafisches Frontend für LilyPond von Jörg Anders.</li>
 <li><a href="http://canorus.berlios.de/wiki/index.php/Main_Page">Canorus</a>
    Nachfolger von NoteEdit</li>

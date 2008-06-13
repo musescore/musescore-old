@@ -11,7 +11,7 @@
       Automatische Anordnung der Notenköpfe in Akkorden:
       </td>
     <td>
-      <img src="../wpic/chord.png">
+      <img src="../wpic/chord.png" />
       </td>
     </tr>
 
@@ -20,7 +20,7 @@
       Drumnotation:
       </td>
     <td>
-      <img src="../wpic/drum1.png">
+      <img src="../wpic/drum1.png" />
       </td>
     </tr>
 
@@ -29,7 +29,7 @@
       Cross staff beams:
       </td>
     <td>
-      <img src="../wpic/crossbeams.png">
+      <img src="../wpic/crossbeams.png" />
       </td>
     </tr>
 
