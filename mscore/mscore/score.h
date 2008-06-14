@@ -43,7 +43,7 @@ class Rest;
 class Xml;
 class Canvas;
 class Viewer;
-class NoteAttribute;
+class Articulation;
 class Note;
 class Chord;
 class ChordRest;
@@ -64,7 +64,7 @@ struct MNote;
 class Excerpt;
 class EventMap;
 class Harmony;
-struct Articulation;
+struct Channel;
 
 struct Style;
 struct SigEvent;
@@ -115,7 +115,7 @@ struct MidiMapping {
       char port;
       char channel;
       Part* part;
-      Articulation* articulation;
+      Channel* articulation;
       };
 
 //---------------------------------------------------------
@@ -395,7 +395,7 @@ class Score : public QObject {
 
       // undo/redo ops
       void endUndoRedo(Undo*);
-      void addAttribute(int);
+      void addArticulation(int);
       void addAccidental(int);
       void addAccidental(Note* oNote, int prefix);
 
@@ -503,7 +503,7 @@ class Score : public QObject {
       PageFormat* pageFormat() const;
       ScoreLayout* layout() const { return _layout; }
 
-      void addAttribute(Element*, NoteAttribute* atr);
+      void addArticulation(Element*, Articulation* atr);
 
       bool playlistDirty();
       void changeTimeSig(int tick, int st);
@@ -581,7 +581,7 @@ class Score : public QObject {
       int midiChannel(int idx) const;
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
-      void updateArticulation();
+      void updateChannel();
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
       };

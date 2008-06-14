@@ -422,7 +422,7 @@ void Score::read(QString name)
       checkSlurs();
       checkTuplets();
       rebuildMidiMapping();
-      updateArticulation();
+      updateChannel();
       _layout->doLayout();
       layoutAll = false;
       }
@@ -1596,7 +1596,7 @@ void Score::rebuildMidiMapping()
       int idx     = 0;
       foreach(Part* part, _parts) {
             Instrument* i = part->instrument();
-            foreach(Articulation* a, i->articulations) {
+            foreach(Channel* a, i->channel) {
                   MidiMapping mm;
                   mm.port    = port;
                   mm.channel = channel;

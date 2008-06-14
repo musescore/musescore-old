@@ -1,3 +1,7 @@
+14.6.8 (ws)
+      - add language selection to preferences
+      - some name changes: changed Articulation to Channel; changed NoteAttribute
+        to Articulation
 10.6.8 (ws)
       - first implementation of "Display in Concert Pitch" style option
       - integrated qt script debugger; enable debugger by starting

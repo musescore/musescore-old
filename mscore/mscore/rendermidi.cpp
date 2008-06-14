@@ -36,6 +36,7 @@
 #include "slur.h"
 #include "stafftext.h"
 #include "repeat.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -43,14 +44,14 @@
 
 struct ARec {
       int tick;
-      int articulation;
+      int channel;
       };
 
 //---------------------------------------------------------
-//   updateArticulation
+//   updateChannel
 //---------------------------------------------------------
 
-void Score::updateArticulation()
+void Score::updateChannel()
       {
       int staffIdx   = 0;
       QList<ARec> alist;
@@ -65,18 +66,18 @@ void Score::updateArticulation()
                               if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                                     continue;
                               const StaffText* st = static_cast<const StaffText*>(e);
-                              QString an(st->articulationName());
+                              QString an(st->channelName());
                               if (an.isEmpty())
                                     continue;
-                              int a = part->instrument()->articulation(an);
+                              int a = part->instrument()->channelIdx(an);
                               if (a != -1) {
                                     ARec ar;
                                     ar.tick = st->tick();
-                                    ar.articulation = a;
+                                    ar.channel = a;
                                     alist.append(ar);
                                     }
                               else
-                                    printf("articulation <%s> not found\n", qPrintable(an));
+                                    printf("channel <%s> not found\n", qPrintable(an));
                               }
                         }
                   }
@@ -99,7 +100,7 @@ void Score::updateArticulation()
                               foreach(ARec ar, alist) {
                                     if (ar.tick > c->tick())
                                           break;
-                                    sc = ar.articulation;
+                                    sc = ar.channel;
                                     }
                               QList<ARec> alist;
                               for (iNote in = nl->begin(); in != nl->end(); ++in) {
@@ -154,7 +155,7 @@ void Score::collectChord(EventMap* events, Instrument* instr,
                   continue;
             if (note->tieBack())
                   continue;
-            int idx = instr->articulations[note->subchannel()]->channel;
+            int idx = instr->channel[note->subchannel()]->channel;
             int channel = midiChannel(idx);
             int port    = midiPort(idx);
             NoteOn* ev = new NoteOn();
@@ -229,7 +230,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 
                               }
                         }
-                  foreach(NoteAttribute* a, *chord->getAttributes()) {
+                  foreach(Articulation* a, *chord->getArticulations()) {
                         switch(a->subtype()) {
                               case TenutoSym:
                                     gateTime = _style->tenutoGateTime;
@@ -329,7 +330,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 void Score::toEList(EventMap* events, int offset)
       {
       bool expandRepeats = getAction("repeat")->isChecked();
-      updateArticulation();
+      updateChannel();
       int staffIdx   = 0;
       foreach(Part* part, _parts) {
             for (int i = 0; i < part->staves()->size(); ++i) {

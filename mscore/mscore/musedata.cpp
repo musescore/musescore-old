@@ -35,6 +35,7 @@
 #include "slur.h"
 #include "dynamics.h"
 #include "lyrics.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   musicalAttribute
@@ -302,42 +303,42 @@ void MuseData::readNote(Part* part, const QString& s)
             else if (an[i] == 'x')
                   closeSlur(3, tick, staff, voice);
             else if (an[i] == '.') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(StaccatoSym);
                   chord->add(atr);
                   }
             else if (an[i] == '_') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(TenutoSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'v') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(UpbowSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'n') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(DownbowSym);
                   chord->add(atr);
                   }
             else if (an[i] == 't') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(TrillSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'F') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(UfermataSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'E') {
-                  NoteAttribute* atr = new NoteAttribute(score);
+                  Articulation* atr = new Articulation(score);
                   atr->setSubtype(DfermataSym);
                   chord->add(atr);
                   }
             else if (an[i] == 'O') {
-                  // NoteAttribute* atr = new NoteAttribute(score);
+                  // Articulation* atr = new Articulation(score);
                   // atr->setSubtype(DownbowSym);
                   // chord->add(atr);
                   printf("%06d: open string '%c' not implemented\n", tick, an[i].toAscii());

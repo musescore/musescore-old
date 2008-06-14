@@ -32,7 +32,7 @@ class Painter;
 class Measure;
 class Driver;
 class Part;
-struct Articulation;
+struct Channel;
 
 //---------------------------------------------------------
 //   MidiPatch
@@ -107,7 +107,7 @@ class Seq : public QObject {
       void playEvent(const MidiOutEvent&);
       void guiStop();
       void guiToSeq(const SeqMsg& msg);
-      void startNote(Articulation*, int, int);
+      void startNote(Channel*, int, int);
 
    private slots:
       void seqMessage(int msg);
@@ -157,7 +157,7 @@ class Seq : public QObject {
       float volume() const      { return _volume;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(Articulation*, int, int, int);
+      void startNote(Channel*, int, int, int);
       void setController(int, int, int);
       void sendEvent(const MidiOutEvent&);
       void setScore(Score* s);

@@ -30,7 +30,7 @@
 //---------------------------------------------------------
 
 class StaffText : public Text  {
-      QString _articulationName;
+      QString _channelName;
       QString _midiActionName;
 
    public:
@@ -44,9 +44,9 @@ class StaffText : public Text  {
 
       virtual void layout(ScoreLayout*);
 
-      QString articulationName() const           { return _articulationName; }
+      QString channelName() const                { return _channelName;      }
       QString midiActionName() const             { return _midiActionName;   }
-      void setArticulationName(const QString& s) { _articulationName = s;    }
+      void setChannelName(const QString& s)      { _channelName = s;         }
       void setMidiActionName(const QString& s)   { _midiActionName = s;      }
       };
 

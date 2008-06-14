@@ -43,18 +43,30 @@ struct NamedEventList {
       };
 
 //---------------------------------------------------------
-//   Articulation
+//   MidiArticulation
+//---------------------------------------------------------
+
+struct MidiArticulation {
+      int idx;                // Articulation index (subtype())
+      int velocity;           // velocity change: -100% - +100%
+      int gateTime;           // gate time change: -100% - +100%
+      void write(Xml&) const;
+      void read(QDomElement);
+      };
+
+//---------------------------------------------------------
+//   Channel
 //---------------------------------------------------------
 
 // this are the indexes of controllers which are always present in
-// Articulation init EventList (maybe zero)
+// Channel init EventList (maybe zero)
 
 enum {
       A_HBANK, A_LBANK, A_PROGRAM, A_VOLUME, A_PAN, A_CHORUS, A_REVERB,
       A_INIT_COUNT
       };
 
-struct Articulation {
+struct Channel {
       QString name;
       int channel;      // mscore channel number, mapped to midi port/channel
       mutable EventList init;
@@ -71,7 +83,7 @@ struct Articulation {
       bool solo;
       bool soloMute;
 
-      Articulation();
+      Channel();
       void write(Xml&) const;
       void read(QDomElement);
       void updateInitList() const;
@@ -90,13 +102,13 @@ struct Instrument {
       bool useDrumset;
 
       QList<NamedEventList> midiActions;
-      QList<Articulation*> articulations;      // at least one entry
+      QList<Channel*> channel;      // at least one entry
 
       Instrument();
       void read(QDomElement);
       void write(Xml& xml) const;
       NamedEventList* midiAction(const QString& s) const;
-      int articulation(const QString& s) const;
+      int channelIdx(const QString& s) const;
       };
 
 #endif

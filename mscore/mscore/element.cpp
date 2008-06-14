@@ -60,6 +60,7 @@
 #include "stafftext.h"
 #include "canvas.h"
 #include "glissando.h"
+#include "articulation.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1169,7 +1170,7 @@ Element* Element::create(int type, Score* score)
                   el = new Bracket(score);
                   break;
             case ATTRIBUTE:
-                  el = new NoteAttribute(score);
+                  el = new Articulation(score);
                   break;
             case ACCIDENTAL:
                   el = new Accidental(score);

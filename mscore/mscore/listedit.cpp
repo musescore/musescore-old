@@ -48,6 +48,7 @@
 #include "arpeggio.h"
 #include "glissando.h"
 #include "tremolo.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -319,7 +320,7 @@ void PageListEditor::updateList(Score* s)
                                           if (chord->glissando())
                                                 new ElementItem(sei, chord->glissando());
 
-                                          foreach(NoteAttribute* a, *chord->getAttributes())
+                                          foreach(Articulation* a, *chord->getArticulations())
                                                 new ElementItem(sei, a);
                                           foreach(LedgerLine* h, *chord->ledgerLines())
                                                 new ElementItem(sei, h);
@@ -689,7 +690,7 @@ void ShowChordWidget::setElement(Element* e)
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
       crb.attributes->clear();
-      foreach(NoteAttribute* a, *chord->getAttributes()) {
+      foreach(Articulation* a, *chord->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
@@ -914,7 +915,7 @@ void ShowRestWidget::setElement(Element* e)
       crb.upFlag->setChecked(rest->up());
       crb.beamMode->setCurrentIndex(int(rest->beamMode()));
       crb.attributes->clear();
-      foreach(NoteAttribute* a, *rest->getAttributes()) {
+      foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));

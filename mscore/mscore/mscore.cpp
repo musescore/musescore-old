@@ -1561,7 +1561,11 @@ int main(int argc, char* argv[])
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
-      localeName = QLocale::system().name();
+      QSettings s;
+      localeName = s.value("language", "system").toString();
+      if (localeName == "system")
+            localeName = QLocale::system().name();
+
       QTranslator translator;
       QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
       if (debugMode)

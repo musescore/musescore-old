@@ -49,7 +49,7 @@ struct InstrumentTemplate {
       char transpose;          // for transposing instruments
       bool useDrumset;
       QList<NamedEventList> midiActions;
-      QList<Articulation*> articulations;
+      QList<Channel*> channel;
 
       InstrumentTemplate();
 

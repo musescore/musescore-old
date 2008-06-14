@@ -174,6 +174,7 @@ Preferences::Preferences()
       autoSave                 = false;
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
+      language                 = "system";
       };
 
 //---------------------------------------------------------
@@ -233,6 +234,7 @@ void Preferences::write()
       s.setValue("autoSave",           autoSave);
       s.setValue("autoSaveTime",       autoSaveTime);
       s.setValue("pngScreenShot",      pngScreenShot);
+      s.setValue("language",           language);
 
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
@@ -318,6 +320,7 @@ void Preferences::read()
       autoSave                 = s.value("autoSave", false).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
       pngScreenShot            = s.value("pngScreenShot", true).toBool();
+      language                 = s.value("language", "system").toString();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -862,6 +865,29 @@ void PreferenceDialog::apply()
                         }
                   }
             }
+      QString lang = language->currentText();
+      if (lang != "system") {
+            QStringList sl = lang.split(" ");
+            lang = sl[0];
+            }
+      preferences.language = lang;
+
+#if 0
+      QString localeName = QLocale::system().name();
+      if (localeName != lang) {
+            localeName = lang;
+            QTranslator translator;
+            QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
+            translator.load(lp);
+            qApp->installTranslator(&translator);
+            QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+            QTranslator qtTranslator(0);
+            qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir);
+            qApp->installTranslator(&qtTranslator);
+            mscore->update();
+            }
+#endif
+
       emit preferencesChanged();
       preferences.write();
       if (sfChanged) {

@@ -14,9 +14,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
-    <widget class="QGroupBox" name="articulationChange" >
+    <widget class="QGroupBox" name="channel" >
      <property name="title" >
-      <string>Articulation Change</string>
+      <string>Channel</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -26,7 +26,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2" >
       <item>
-       <widget class="QListWidget" name="articulationList" />
+       <widget class="QListWidget" name="channelList" />
       </item>
      </layout>
     </widget>

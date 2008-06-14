@@ -24,7 +24,7 @@
 #include "ui_partedit.h"
 
 class Score;
-struct Articulation;
+struct Channel;
 class Part;
 
 //---------------------------------------------------------
@@ -34,7 +34,7 @@ class Part;
 class PartEdit : public QWidget, public Ui::PartEditBase {
       Q_OBJECT
 
-      Articulation* articulation;
+      Channel* channel;
       Part* part;
 
    private slots:
@@ -54,7 +54,7 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
 
    public:
       PartEdit(QWidget* parent = 0);
-      void setPart(Part*, Articulation*);
+      void setPart(Part*, Channel*);
       };
 
 //---------------------------------------------------------

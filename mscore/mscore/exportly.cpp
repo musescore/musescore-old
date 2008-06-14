@@ -39,6 +39,7 @@
 #include "text.h"
 #include "slur.h"
 #include "beam.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   ExportLy
@@ -239,7 +240,7 @@ void ExportLy::writeChord(Chord* c)
       if (nl->size() > 1)
             os << ">";
       writeLen(c->tickLen());
-      foreach(NoteAttribute* a, *c->getAttributes()) {
+      foreach(Articulation* a, *c->getArticulations()) {
             switch(a->subtype()) {
                   case UfermataSym:
                         os << "\\fermata";

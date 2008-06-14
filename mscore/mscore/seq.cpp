@@ -477,7 +477,7 @@ void Seq::playEvent(const Event* event)
             Note* note = n->note();
             if (note) {
                   Instrument* instr = note->staff()->part()->instrument();
-                  Articulation* a = instr->articulations[note->subchannel()];
+                  Channel* a = instr->channel[note->subchannel()];
                   mute = a->mute || a->soloMute;
                   }
             else {
@@ -688,7 +688,7 @@ void Seq::collectEvents()
       foreach(Part* part, *cs->parts()) {
             const Instrument* instr = part->instrument();
 
-            foreach(const Articulation* a, instr->articulations) {
+            foreach(const Channel* a, instr->channel) {
                   int idx     = a->channel;
                   int channel = cs->midiChannel(idx);
                   int port    = cs->midiPort(idx);
@@ -840,7 +840,7 @@ void Seq::seek(int tick)
 //   startNote
 //---------------------------------------------------------
 
-void Seq::startNote(Articulation* a, int pitch, int velo)
+void Seq::startNote(Channel* a, int pitch, int velo)
       {
       if (state != STOP)
             return;
@@ -880,7 +880,7 @@ void Seq::startNote(Articulation* a, int pitch, int velo)
             }
       }
 
-void Seq::startNote(Articulation* a, int pitch, int velo, int duration)
+void Seq::startNote(Channel* a, int pitch, int velo, int duration)
       {
       startNote(a, pitch, velo);
       playTimer->start(duration);

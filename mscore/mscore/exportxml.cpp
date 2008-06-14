@@ -74,6 +74,7 @@
 #include "sym.h"
 #include "pitchspelling.h"
 #include "utils.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1070,9 +1071,9 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
 
 static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml)
       {
-      QList<NoteAttribute*>* na = chord->getAttributes();
+      QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
-      for (ciAttribute ia = chord->getAttributes()->begin(); ia != chord->getAttributes()->end(); ++ia) {
+      for (ciArticulation ia = chord->getArticulations()->begin(); ia != chord->getArticulations()->end(); ++ia) {
             if ((*ia)->subtype() == UfermataSym) {
                   notations.tag(xml);
                   xml.tagE("fermata type=\"upright\"");
@@ -1084,7 +1085,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             }
       // then the attributes whose elements are children of <articulations>
       Articulations articulations;
-      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
@@ -1153,7 +1154,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             articulations.etag(xml);
       // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
-      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
@@ -1238,7 +1239,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             wavyLineStartStop(chord, notations, ornaments, xml);
             ornaments.etag(xml);
       // and finally the attributes whose elements are children of <technical>
-      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
                   case PlusstopSym:
                         {

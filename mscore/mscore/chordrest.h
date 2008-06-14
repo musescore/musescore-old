@@ -26,100 +26,13 @@
 #include "durationtype.h"
 
 class Score;
+class ScoreLayout;
 class Measure;
 class Beam;
 class Tuplet;
 class Segment;
-class Sym;
 class Slur;
-
-//---------------------------------------------------------
-//   NoteAttributeIdx
-//---------------------------------------------------------
-
-enum NoteAttributeIdx {
-      UfermataSym,
-      DfermataSym,
-      ThumbSym,
-      SforzatoaccentSym,
-      EspressivoSym,
-      StaccatoSym,
-      UstaccatissimoSym,
-      DstaccatissimoSym,
-      TenutoSym,
-      UportatoSym,
-      DportatoSym,
-      UmarcatoSym,
-      DmarcatoSym,
-      OuvertSym,
-      PlusstopSym,
-      UpbowSym,
-      DownbowSym,
-      ReverseturnSym,
-      TurnSym,
-      TrillSym,
-      PrallSym,
-      MordentSym,
-      PrallPrallSym,
-      PrallMordentSym,
-      UpPrallSym,
-      DownPrallSym,
-      UpMordentSym,
-      DownMordentSym,
-      NOTE_ATTRIBUTES
-      };
-
-//---------------------------------------------------------
-//   AttributeInfo
-//    gives infos about note attributes
-//---------------------------------------------------------
-
-enum AttrAnchor {
-      A_TOP_STAFF,
-      A_BOTTOM_STAFF,
-      A_CHORD,          // anchor depends on chord direction
-      A_TOP_CHORD,      // attribute is alway placed at top of chord
-      A_BOTTOM_CHORD,   // attribute is placed at bottom of chord
-      };
-
-struct AttributeInfo {
-      int sym;
-      QString name;
-      AttrAnchor anchor;
-      };
-
-//---------------------------------------------------------
-//   NoteAttribute
-//    Artikulationszeichen
-//---------------------------------------------------------
-
-class NoteAttribute : public Symbol {
-      QString _articulationName;
-
-      virtual bool isMovable() const { return true; }
-
-   public:
-      NoteAttribute(Score*);
-      NoteAttribute &operator=(const NoteAttribute&);
-
-      virtual NoteAttribute* clone() const { return new NoteAttribute(*this); }
-      virtual ElementType type() const     { return ATTRIBUTE; }
-
-      virtual void setSubtype(int);
-      virtual void read(QDomElement);
-      virtual void write(Xml& xml) const;
-      QString name() const { return atrList[subtype()].name; }
-
-      static AttributeInfo atrList[];
-      virtual const QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-
-      QString articulationName() const           { return _articulationName; }
-      void setArticulationName(const QString& s) { _articulationName = s;    }
-      };
-
-typedef QList<NoteAttribute*>::iterator iAttribute;
-typedef QList<NoteAttribute*>::const_iterator ciAttribute;
+class Articulation;
 
 //---------------------------------------------------------
 //   ChordRest
@@ -132,7 +45,7 @@ class ChordRest : public Element {
       Duration _duration;
 
    protected:
-      QList<NoteAttribute*> attributes;
+      QList<Articulation*> articulations;
       Beam* _beam;
       BeamMode _beamMode;
       Tuplet* _tuplet;
@@ -177,8 +90,8 @@ class ChordRest : public Element {
       bool up() const                           { return _up;   }
       bool isUp() const;
       void setUp(bool val)                      { _up = val; }
-      QList<NoteAttribute*>* getAttributes()    { return &attributes; }
-      NoteAttribute* hasAttribute(const NoteAttribute*);
+      QList<Articulation*>* getArticulations()    { return &articulations; }
+      Articulation* hasArticulation(const Articulation*);
       bool small() const                        { return _small; }
       void setSmall(bool val);
       virtual int staffMove() const = 0;

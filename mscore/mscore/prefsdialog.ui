@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>605</height>
+    <width>809</width>
+    <height>643</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -16,16 +16,7 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>9</number>
    </property>
    <item>
@@ -34,10 +25,18 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>787</width>
+        <height>549</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>General</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout" name="verticalLayout_5" >
        <item>
         <widget class="QGroupBox" name="groupBox_5" >
          <property name="title" >
@@ -47,22 +46,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>3</number>
           </property>
-          <property name="topMargin" >
-           <number>3</number>
-          </property>
-          <property name="rightMargin" >
-           <number>3</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>3</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>3</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>3</number>
           </property>
           <item row="2" column="1" >
@@ -81,7 +68,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -121,22 +109,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>3</number>
           </property>
-          <property name="topMargin" >
-           <number>3</number>
-          </property>
-          <property name="rightMargin" >
-           <number>3</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>3</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>3</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>3</number>
           </property>
           <item row="1" column="0" >
@@ -155,7 +131,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -175,7 +152,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -195,7 +173,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -211,22 +190,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>3</number>
           </property>
-          <property name="topMargin" >
-           <number>3</number>
-          </property>
-          <property name="rightMargin" >
-           <number>3</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>3</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>3</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>3</number>
           </property>
           <item row="0" column="0" >
@@ -302,16 +269,7 @@
           <property name="spacing" >
            <number>3</number>
           </property>
-          <property name="leftMargin" >
-           <number>3</number>
-          </property>
-          <property name="topMargin" >
-           <number>3</number>
-          </property>
-          <property name="rightMargin" >
-           <number>3</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>3</number>
           </property>
           <item>
@@ -343,7 +301,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -354,9 +312,112 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_10" >
+         <property name="title" >
+          <string>Language</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout" >
+          <item>
+           <widget class="QComboBox" name="language" >
+            <item>
+             <property name="text" >
+              <string>system</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>de German</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>en English</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>es Spanish</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>it Italian</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>pt Portuguese</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>ru Russian</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="restartWarning_2" >
+            <property name="palette" >
+             <palette>
+              <active>
+               <colorrole role="WindowText" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
+                  <red>255</red>
+                  <green>1</green>
+                  <blue>39</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="WindowText" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
+                  <red>255</red>
+                  <green>1</green>
+                  <blue>39</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="WindowText" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
+                  <red>119</red>
+                  <green>119</green>
+                  <blue>121</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="text" >
+             <string>Attention: requires a restart of MuseScore.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Canvas</string>
       </attribute>
@@ -364,16 +425,7 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
        <item>
@@ -385,22 +437,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>9</number>
           </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>6</number>
           </property>
           <item row="0" column="1" >
@@ -422,16 +462,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -443,7 +474,8 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+               <iconset resource="mscore.qrc" >
+                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -454,16 +486,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -483,22 +506,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>9</number>
           </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>6</number>
           </property>
           <item row="1" column="1" >
@@ -506,16 +517,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -527,7 +529,8 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+               <iconset resource="mscore.qrc" >
+                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -538,16 +541,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -626,7 +620,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>201</width>
               <height>20</height>
@@ -640,26 +634,22 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Colors</string>
       </attribute>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="3" column="0" >
@@ -707,7 +697,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -770,6 +760,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Note Entry</string>
       </attribute>
@@ -824,7 +822,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -872,22 +870,10 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
+          <property name="margin" >
            <number>9</number>
           </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>6</number>
           </property>
           <item row="0" column="0" >
@@ -922,7 +908,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1017,6 +1003,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>I/O</string>
       </attribute>
@@ -1061,7 +1055,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1081,7 +1075,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1125,7 +1119,8 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+               <iconset resource="mscore.qrc" >
+                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -1458,7 +1453,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>561</width>
            <height>131</height>
@@ -1469,6 +1464,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Import" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Import</string>
       </attribute>
@@ -1507,7 +1510,8 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
+               <iconset resource="mscore.qrc" >
+                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -1521,7 +1525,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -1532,6 +1536,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Export" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Export</string>
       </attribute>
@@ -1557,7 +1569,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -1571,6 +1583,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab6" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>StemDir</string>
       </attribute>
@@ -1718,7 +1738,7 @@
             <x>0</x>
             <y>29</y>
             <width>101</width>
-            <height>91</height>
+            <height>98</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" >
@@ -1750,26 +1770,26 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>590</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Shortcuts</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="mscore.qrc" >:/data/hotkeys.svg</iconset>
+       <iconset resource="mscore.qrc" >
+        <normaloff>:/data/hotkeys.svg</normaloff>:/data/hotkeys.svg</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
        <item>
@@ -1806,16 +1826,7 @@
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
          <item>
@@ -1844,7 +1855,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>231</width>
              <height>20</height>
@@ -1863,16 +1874,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -1880,7 +1882,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>131</width>
          <height>31</height>
@@ -1894,7 +1896,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="standardButtons" >
-        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
       </widget>
      </item>
