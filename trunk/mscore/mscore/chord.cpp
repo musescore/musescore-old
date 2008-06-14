@@ -41,6 +41,7 @@
 #include "glissando.h"
 #include "staff.h"
 #include "utils.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -302,7 +303,7 @@ void Chord::add(Element* e)
             note->setType(duration());
             }
       else if (e->type() == ATTRIBUTE)
-            attributes.push_back(static_cast<NoteAttribute*>(e));
+            articulations.push_back(static_cast<Articulation*>(e));
       else if (e->type() == ARPEGGIO)
             _arpeggio = static_cast<Arpeggio*>(e);
       else if (e->type() == TREMOLO) {
@@ -345,11 +346,11 @@ void Chord::remove(Element* e)
                   printf("Chord::remove() note %p not found!\n", e);
             }
       else if (e->type() == ATTRIBUTE) {
-            int idx = attributes.indexOf((NoteAttribute*)e);
+            int idx = articulations.indexOf((Articulation*)e);
             if (idx == -1)
                   printf("Chord::remove(): attribute not found\n");
             else {
-                  attributes.removeAt(idx);
+                  articulations.removeAt(idx);
                   }
             }
       else if (e->type() == ARPEGGIO)
@@ -382,7 +383,7 @@ QRectF Chord::bbox() const
             _bbox |= i->second->bbox().translated(i->second->pos());
       foreach(LedgerLine* l, _ledgerLines)
             _bbox |= l->bbox().translated(l->pos());
-      for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
+      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
             _bbox |= (*i)->bbox().translated((*i)->pos());
       if (_hook)
             _bbox |= _hook->bbox().translated(_hook->pos());

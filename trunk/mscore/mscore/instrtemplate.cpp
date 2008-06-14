@@ -79,7 +79,7 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("drumset", useDrumset);
       foreach(const NamedEventList& a, midiActions)
             a.write(xml, "MidiAction");
-      foreach(const Articulation* a, articulations)
+      foreach(const Channel* a, channel)
             a->write(xml);
       xml.etag();
       }
@@ -196,15 +196,15 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                   transpose = i;
             else if (tag == "drumset")
                   useDrumset = i;
-            else if (tag == "MidiAction") {
+            else if (tag == "midiAction") {
                   NamedEventList a;
                   a.read(de);
                   midiActions.append(a);
                   }
-            else if (tag == "Articulation") {
-                  Articulation* a = new Articulation();
+            else if (tag == "channel") {
+                  Channel* a = new Channel();
                   a->read(de);
-                  articulations.append(a);
+                  channel.append(a);
                   }
             else
                   domError(de);
@@ -265,6 +265,8 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                         QString val(ee.text());
                         if (tag == "instrument-group")
                               readInstrumentGroup(ee);
+                        else if (tag == "articulation") {
+                              }
                         else
                               domError(ee);
                         }

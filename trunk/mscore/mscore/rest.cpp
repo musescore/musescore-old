@@ -29,6 +29,7 @@
 #include "sym.h"
 #include "icons.h"
 #include "stafftext.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -128,7 +129,7 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
       switch (e->type()) {
             case ATTRIBUTE:
                   if (e->subtype() == UfermataSym || e->subtype() == DfermataSym)
-                        score()->addAttribute(this, (NoteAttribute*)e);
+                        score()->addArticulation(this, (Articulation*)e);
                   return 0;
             case ICON:
                   {
@@ -219,7 +220,7 @@ void Rest::add(Element* e)
             return;
       e->setParent(this);
       e->setTrack(track());
-      attributes.push_back((NoteAttribute*)e);
+      articulations.push_back((Articulation*)e);
       }
 
 //---------------------------------------------------------
@@ -230,11 +231,11 @@ void Rest::remove(Element* e)
       {
       if (e->type() != ATTRIBUTE)
             return;
-      int idx = attributes.indexOf((NoteAttribute*)e);
+      int idx = articulations.indexOf((Articulation*)e);
       if (idx == -1)
             printf("Rest::remove(): attribute not found\n");
       else
-            attributes.removeAt(idx);
+            articulations.removeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -302,7 +303,7 @@ void Rest::layout(ScoreLayout* l)
 QRectF Rest::bbox() const
       {
       QRectF b = symbols[_sym].bbox(mag());
-      for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
+      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
             b |= (*i)->bbox().translated((*i)->pos());
       return b;
       }

@@ -64,6 +64,7 @@
 #include "unzip.h"
 #include "harmony.h"
 #include "tempotext.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -2170,7 +2171,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             ((Chord*)cr)->setStemDirection(sd);
             }
       if (!fermataType.isEmpty()) {
-            NoteAttribute* f = new NoteAttribute(score);
+            Articulation* f = new Articulation(score);
             if (fermataType == "upright") {
                   f->setSubtype(UfermataSym);
                   cr->add(f);
@@ -2186,7 +2187,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             }
       if (!strongAccentType.isEmpty()) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             if (strongAccentType == "up") {
                   na->setSubtype(UmarcatoSym);
                   cr->add(na);
@@ -2232,62 +2233,62 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       // note that mscore wavy line already implicitly includes a trillsym
       // so don't add an additional one
       if (trillMark && !wavyLineStart) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(TrillSym);
             cr->add(na);
             }
       if (invertedTurn) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(ReverseturnSym);
             cr->add(na);
             }
       if (turn) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(TurnSym);
             cr->add(na);
             }
       if (mordent) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(MordentSym);
             cr->add(na);
             }
       if (invertedMordent) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(PrallSym);
             cr->add(na);
             }
       if (accent) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(SforzatoaccentSym);
             cr->add(na);
             }
       if (staccatissimo) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(UstaccatissimoSym);
             cr->add(na);
             }
       if (staccato) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(StaccatoSym);
             cr->add(na);
             }
       if (tenuto) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(TenutoSym);
             cr->add(na);
             }
       if (stopped) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(PlusstopSym);
             cr->add(na);
             }
       if (upbow) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(UpbowSym);
             cr->add(na);
             }
       if (downbow) {
-            NoteAttribute* na = new NoteAttribute(score);
+            Articulation* na = new Articulation(score);
             na->setSubtype(DownbowSym);
             cr->add(na);
             }

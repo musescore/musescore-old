@@ -66,9 +66,9 @@ void NamedEventList::read(QDomElement e)
 
 Instrument::Instrument()
       {
-      Articulation* a = new Articulation();
+      Channel* a      = new Channel();
       a->name         = "normal";
-      articulations.append(a);
+      channel.append(a);
 
       minPitch        = 0;
       maxPitch        = 127;
@@ -96,7 +96,7 @@ void Instrument::write(Xml& xml) const
             }
       foreach(const NamedEventList& a, midiActions)
             a.write(xml, "MidiAction");
-      foreach(const Articulation* a, articulations)
+      foreach(const Channel* a, channel)
             a->write(xml);
       xml.etag();
       }
@@ -112,9 +112,9 @@ void Instrument::read(QDomElement e)
       int reverb = 30;
       int volume = 100;
 
-      foreach(Articulation* a, articulations)
+      foreach(Channel* a, channel)
             delete a;
-      articulations.clear();
+      channel.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -140,10 +140,10 @@ void Instrument::read(QDomElement e)
                   a.read(e);
                   midiActions.append(a);
                   }
-            else if (tag == "Articulation") {
-                  Articulation* a = new Articulation();
+            else if (tag == "channel") {
+                  Channel* a = new Channel();
                   a->read(e);
-                  articulations.append(a);
+                  channel.append(a);
                   }
             else if (tag == "chorus")     // obsolete
                   chorus = i;
@@ -158,14 +158,14 @@ void Instrument::read(QDomElement e)
             else
                   domError(e);
             }
-      if (articulations.isEmpty()) {      // for backward compatibility
-            Articulation* a = new Articulation();
+      if (channel.isEmpty()) {      // for backward compatibility
+            Channel* a      = new Channel();
             a->chorus       = chorus;
             a->reverb       = reverb;
             a->name         = "normal";
             a->program      = program;
             a->volume       = volume;
-            articulations.append(a);
+            channel.append(a);
             }
       }
 
@@ -183,10 +183,10 @@ NamedEventList* Instrument::midiAction(const QString& s) const
       }
 
 //---------------------------------------------------------
-//   Articulation
+//   Channel
 //---------------------------------------------------------
 
-Articulation::Articulation()
+Channel::Channel()
       {
       for(int i = 0; i < A_INIT_COUNT; ++i)
             init.append(0);
@@ -208,12 +208,12 @@ Articulation::Articulation()
 //   write
 //---------------------------------------------------------
 
-void Articulation::write(Xml& xml) const
+void Channel::write(Xml& xml) const
       {
       if (name.isEmpty())
-            xml.stag("Articulation");
+            xml.stag("channel");
       else
-            xml.stag(QString("Articulation name=\"%1\"").arg(name));
+            xml.stag(QString("channel name=\"%1\"").arg(name));
       updateInitList();
       foreach(Event* e, init) {
             if (e)
@@ -230,7 +230,7 @@ void Articulation::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Articulation::read(QDomElement e)
+void Channel::read(QDomElement e)
       {
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -291,7 +291,7 @@ void Articulation::read(QDomElement e)
 //   updateInitList
 //---------------------------------------------------------
 
-void Articulation::updateInitList() const
+void Channel::updateInitList() const
       {
       for (int i = 0; i < A_INIT_COUNT; ++i) {
             if (init[i]) {
@@ -339,13 +339,13 @@ void Articulation::updateInitList() const
       }
 
 //---------------------------------------------------------
-//   articulation
+//   channelIdx
 //---------------------------------------------------------
 
-int Instrument::articulation(const QString& s) const
+int Instrument::channelIdx(const QString& s) const
       {
       int idx = 0;
-      foreach(const Articulation* a, articulations) {
+      foreach(const Channel* a, channel) {
             if (a->name.isEmpty() && s == "normal")
                   return idx;
             if (s == a->name)
@@ -355,4 +355,32 @@ int Instrument::articulation(const QString& s) const
       return -1;
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void MidiArticulation::write(Xml& xml) const
+      {
+//      int idx;                // Articulation index (subtype())
+//      int velocity;           // velocity change: -100% - +100%
+//      int gateTime;           // gate time change: -100% - +100%
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void MidiArticulation::read(QDomElement e)
+      {
+      QString name = e.attribute("name");
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "velocity")
+                  velocity = e.text().toInt();
+            else if (tag == "gateTime")
+                  gateTime = e.text().toInt();
+            else
+                  domError(e);
+            }
+      }
 

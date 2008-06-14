@@ -44,6 +44,7 @@
 #include "image.h"
 #include "system.h"
 #include "tuplet.h"
+#include "articulation.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -693,8 +694,8 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
       switch(e->type()) {
             case ATTRIBUTE:
                   {
-                  NoteAttribute* atr = (NoteAttribute*)e;
-                  NoteAttribute* oa = ch->hasAttribute(atr);
+                  Articulation* atr = (Articulation*)e;
+                  Articulation* oa = ch->hasArticulation(atr);
                   if (oa) {
                         delete atr;
                         atr = 0;

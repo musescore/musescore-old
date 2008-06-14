@@ -47,6 +47,7 @@
 #include "harmony.h"
 #include "system.h"
 #include "navigate.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -460,7 +461,7 @@ void Canvas::modifyElement(Element* el)
             }
       switch (el->type()) {
             case ATTRIBUTE:
-                  chord->add((NoteAttribute*)el);
+                  chord->add((Articulation*)el);
                   break;
             default:
                   printf("modifyElement: %s not ATTRIBUTE\n", el->name());

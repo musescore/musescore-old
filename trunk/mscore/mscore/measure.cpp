@@ -75,6 +75,7 @@
 #include "stafftext.h"
 #include "utils.h"
 #include "glissando.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -2611,9 +2612,9 @@ void Measure::collectElements(QList<const Element*>& el) const
                         else
                               el.append(e);
                         ChordRest* cr = (ChordRest*)e;
-                        QList<NoteAttribute*>* al = cr->getAttributes();
-                        for (ciAttribute i = al->begin(); i != al->end(); ++i) {
-                              NoteAttribute* a = *i;
+                        QList<Articulation*>* al = cr->getArticulations();
+                        for (ciArticulation i = al->begin(); i != al->end(); ++i) {
+                              Articulation* a = *i;
                               el.append(a);
                               }
                         }

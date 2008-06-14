@@ -70,10 +70,10 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
             setDrumset(new Drumset(*smDrumset));
             }
       _instrument.midiActions   = t->midiActions;
-      foreach(Articulation* a, _instrument.articulations)
+      foreach(Channel* a, _instrument.channel)
             delete a;
-      _instrument.articulations.clear();
-      _instrument.articulations = t->articulations;
+      _instrument.channel.clear();
+      _instrument.channel = t->channel;
       }
 
 //---------------------------------------------------------
@@ -285,27 +285,27 @@ void Part::setMidiProgram(int)
 
 int Part::volume() const
       {
-      return _instrument.articulations[0]->volume;
+      return _instrument.channel[0]->volume;
       }
 
 int Part::reverb() const
       {
-      return _instrument.articulations[0]->reverb;
+      return _instrument.channel[0]->reverb;
       }
 
 int Part::chorus() const
       {
-      return _instrument.articulations[0]->chorus;
+      return _instrument.channel[0]->chorus;
       }
 
 int Part::pan() const
       {
-      return _instrument.articulations[0]->pan;
+      return _instrument.channel[0]->pan;
       }
 
 int Part::midiProgram() const
       {
-      return _instrument.articulations[0]->program;
+      return _instrument.channel[0]->program;
       }
 
 //---------------------------------------------------------
@@ -314,7 +314,7 @@ int Part::midiProgram() const
 
 int Part::midiChannel() const
       {
-      return score()->midiChannel(_instrument.articulations[0]->channel);
+      return score()->midiChannel(_instrument.channel[0]->channel);
       }
 
 //---------------------------------------------------------

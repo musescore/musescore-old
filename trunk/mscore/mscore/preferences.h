@@ -95,6 +95,7 @@ struct Preferences {
       bool autoSave;
       int autoSaveTime;
       bool pngScreenShot;
+      QString language;
 
       bool dirty;
 

@@ -53,6 +53,7 @@
 #include "repeat.h"
 #include "tempotext.h"
 #include "glissando.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   showPalette
@@ -326,11 +327,11 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(42, 30);
 
             for (unsigned i = 0; i < nn; ++i) {
-                  NoteAttribute* s = new NoteAttribute(gscore);
+                  Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
                   sp->addObject(i, s, s->subtypeName());
                   }
-            paletteBox->addPalette(tr("Attributes"), sp);
+            paletteBox->addPalette(tr("Articulations, Ornaments"), sp);
 
             //-----------------------------------
             //    Accidentals
@@ -1001,7 +1002,7 @@ void MuseScore::noteAttributesMenu()
             ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
 
             for (unsigned i = 0; i < nn; ++i) {
-                  NoteAttribute* s = new NoteAttribute(gscore);
+                  Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
                   sp->addObject(i, s, s->subtypeName());
                   }

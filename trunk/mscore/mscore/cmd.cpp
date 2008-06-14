@@ -61,7 +61,7 @@
 #include "harmony.h"
 #include "system.h"
 #include "stafftext.h"
-
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1160,7 +1160,7 @@ void Score::insertMeasures(int n, int type)
       }
 
 //---------------------------------------------------------
-//   addAttribute
+//   addArticulation
 //---------------------------------------------------------
 
 /**
@@ -1169,14 +1169,14 @@ void Score::insertMeasures(int n, int type)
  Called from padToggle() to add note prefix/accent.
 */
 
-void Score::addAttribute(int attr)
+void Score::addArticulation(int attr)
       {
       foreach(Element* el, *sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
-            NoteAttribute* na = new NoteAttribute(this);
+            Articulation* na = new Articulation(this);
             na->setSubtype(attr);
-            addAttribute(el, na);
+            addArticulation(el, na);
             }
       }
 
@@ -1218,10 +1218,10 @@ void Score::addAccidental(Note* oNote, int accidental)
       }
 
 //---------------------------------------------------------
-//   addAttribute
+//   addArticulation
 //---------------------------------------------------------
 
-void Score::addAttribute(Element* el, NoteAttribute* atr)
+void Score::addArticulation(Element* el, Articulation* atr)
       {
       ChordRest* cr;
       if (el->type() == NOTE)
@@ -1231,7 +1231,7 @@ void Score::addAttribute(Element* el, NoteAttribute* atr)
       else
             return;
       atr->setParent(cr);
-      NoteAttribute* oa = cr->hasAttribute(atr);
+      Articulation* oa = cr->hasArticulation(atr);
       if (oa) {
             delete atr;
             atr = 0;

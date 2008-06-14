@@ -34,132 +34,20 @@
 #include "beam.h"
 #include "breath.h"
 #include "barline.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
-//   NoteAttribute::atrList
+//   hasArticulation
 //---------------------------------------------------------
 
-AttributeInfo NoteAttribute::atrList[] = {
-      { ufermataSym,       QString("ufermata"),        A_TOP_STAFF    },
-      { dfermataSym,       QString("dfermata"),        A_BOTTOM_STAFF },
-      { thumbSym,          QString("thumb"),           A_CHORD        },
-      { sforzatoaccentSym, QString("sforzato"),        A_CHORD        },
-      { esprSym,           QString("espressivo"),      A_CHORD        },
-      { staccatoSym,       QString("staccato"),        A_CHORD        },
-      { ustaccatissimoSym, QString("ustaccatissimo"),  A_CHORD },
-      { dstaccatissimoSym, QString("dstaccatissimo"),  A_CHORD },
-      { tenutoSym,         QString("tenuto"),          A_CHORD },
-      { uportatoSym,       QString("uportato"),        A_CHORD },
-      { dportatoSym,       QString("dportato"),        A_CHORD },
-      { umarcatoSym,       QString("umarcato"),        A_CHORD },
-      { dmarcatoSym,       QString("dmarcato"),        A_CHORD },
-      { ouvertSym,         QString("ouvert"),          A_CHORD },
-      { plusstopSym,       QString("plusstop"),        A_CHORD },
-      { upbowSym,          QString("upbow"),           A_CHORD },
-      { downbowSym,        QString("downbow"),         A_CHORD },
-      { reverseturnSym,    QString("reverseturn"),     A_CHORD },
-      { turnSym,           QString("turn"),            A_CHORD },
-      { trillSym,          QString("trill"),           A_TOP_STAFF },
-      { prallSym,          QString("prall"),           A_TOP_STAFF },
-      { mordentSym,        QString("mordent"),         A_TOP_STAFF },
-      { prallprallSym,     QString("prallprall"),      A_TOP_STAFF },
-      { prallmordentSym,   QString("prallmordent"),    A_TOP_STAFF },
-      { upprallSym,        QString("upprall"),         A_TOP_STAFF },
-	{ downprallSym,      QString("downprall"),       A_TOP_STAFF },
-	{ upmordentSym,      QString("upmordent"),       A_TOP_STAFF },
-	{ downmordentSym,    QString("downmordent"),     A_TOP_STAFF },
-	};
-
-//---------------------------------------------------------
-//   NoteAttribute
-//---------------------------------------------------------
-
-NoteAttribute::NoteAttribute(Score* s)
-   : Symbol(s)
-      {
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void NoteAttribute::setSubtype(int idx)
-      {
-      Element::setSubtype(idx);
-      setSym(atrList[subtype()].sym);
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void NoteAttribute::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "idx")                         // obsolete
-                  setSubtype(e.text().toInt());
-            else if (tag == "articulationChange")
-                  _articulationName = e.attribute("name");
-            else if (!Element::readProperties(e))
-                  domError(e);
-            }
-      setSubtype(subtype());
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void NoteAttribute::write(Xml& xml) const
-      {
-      xml.stag("Attribute");
-      if (!_articulationName.isEmpty())
-            xml.tagE(QString("articulationChange name=\"%1\"").arg(_articulationName));
-      Element::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   hasAttribute
-//---------------------------------------------------------
-
-NoteAttribute* ChordRest::hasAttribute(const NoteAttribute* a)
+Articulation* ChordRest::hasArticulation(const Articulation* a)
       {
       int idx = a->subtype();
-      for (iAttribute l = attributes.begin(); l != attributes.end(); ++l) {
+      for (iArticulation l = articulations.begin(); l != articulations.end(); ++l) {
             if (idx == (*l)->subtype())
                   return *l;
             }
       return 0;
-      }
-
-//---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-const QString NoteAttribute::subtypeName() const
-      {
-      return atrList[subtype()].name;
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void NoteAttribute::setSubtype(const QString& s)
-      {
-      if (s[0].isDigit()) {         // for backward compatibility
-            setSubtype(s.toInt());
-            return;
-            }
-      for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
-            if (atrList[i].name == s) {
-                  setSubtype(i);
-                  return;
-                  }
-            }
-      printf("NoteAttribute <%s> unknown\n", qPrintable(s));
       }
 
 //---------------------------------------------------------
@@ -251,7 +139,7 @@ void ChordRest::writeProperties(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
       xml.prop(pl);
-      for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia)
+      for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
       if (!xml.noSlurs) {
             foreach(Slur* s, _slurFor)
@@ -293,7 +181,7 @@ bool ChordRest::readProperties(QDomElement e)
             _beamMode = BeamMode(bm);
             }
       else if (tag == "Attribute") {
-            NoteAttribute* atr = new NoteAttribute(score());
+            Articulation* atr = new Articulation(score());
             atr->read(e);
             add(atr);
             }
@@ -390,12 +278,12 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
 
       //
       //    pass 1
-      //    place all attributes with anchor at chord/rest
+      //    place all articulations with anchor at chord/rest
       //
-      for (iAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            NoteAttribute* a = *ia;
+      for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
+            Articulation* a = *ia;
             qreal y = 0;
-            AttrAnchor aa = NoteAttribute::atrList[a->subtype()].anchor;
+            ArticulationAnchor aa = Articulation::articulationList[a->subtype()].anchor;
             if (aa == A_CHORD)
                   aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
             if (aa == A_TOP_CHORD) {
@@ -430,7 +318,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
 
       //
       //    pass 1
-      //    now place all attributes with staff top or bottom anchor
+      //    now place all articulations with staff top or bottom anchor
       //
       if (chordTopY - dyTop > staffTopY)
             dyTop = 0;
@@ -442,10 +330,10 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       else
             dyBot = (chordBotY + dyBot) - staffBotY;
 
-      for (iAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            NoteAttribute* a = *ia;
+      for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
+            Articulation* a = *ia;
             qreal y = 0;
-            AttrAnchor aa = NoteAttribute::atrList[a->subtype()].anchor;
+            ArticulationAnchor aa = Articulation::articulationList[a->subtype()].anchor;
             if (aa == A_TOP_STAFF) {
                   y = staffTopY - dyTop;
                   a->setPos(x, y);

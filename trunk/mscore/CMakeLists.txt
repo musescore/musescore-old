@@ -34,7 +34,7 @@ endif (MINGW)
 # build qt script bindings
 # this requires qt >= 4.4
 
-#set(BUILD_SCRIPT_INTERFACE FALSE)
+#set(BUI5LD_SCRIPT_INTERFACE FALSE)
 set(BUILD_SCRIPT_INTERFACE TRUE)
 
 #set(BUILD_SCRIPT_DEBUG FALSE)

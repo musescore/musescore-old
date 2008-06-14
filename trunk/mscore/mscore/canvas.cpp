@@ -364,7 +364,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             Part* part = note->staff()->part();
             int pitch  = note->pitch() + part->pitchOffset();
             Instrument* i = part->instrument();
-            seq->startNote(i->articulations[note->subchannel()], pitch, 60, 1000);
+            seq->startNote(i->channel[note->subchannel()], pitch, 60, 1000);
             }
 
       //-----------------------------------------

@@ -42,8 +42,8 @@ void StaffText::write(Xml& xml) const
       xml.stag("StaffText");
       if (!_midiActionName.isEmpty())
             xml.tagE(QString("midiAction name=\"%1\"").arg(_midiActionName));
-      if (!_articulationName.isEmpty())
-            xml.tagE(QString("articulationChange name=\"%1\"").arg(_articulationName));
+      if (!_channelName.isEmpty())
+            xml.tagE(QString("channel name=\"%1\"").arg(_channelName));
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -55,13 +55,13 @@ void StaffText::write(Xml& xml) const
 void StaffText::read(QDomElement e)
       {
       _midiActionName.clear();
-      _articulationName.clear();
+      _channelName.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "midiAction")
                   _midiActionName = e.attribute("name");
-            else if (tag == "articulationChange")
-                  _articulationName = e.attribute("name");
+            else if (tag == "channel")
+                  _channelName = e.attribute("name");
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -93,6 +93,7 @@ void StaffText::propertyAction(const QString& s)
       else
             Element::propertyAction(s);
       }
+
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
@@ -118,24 +119,24 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
       Part* part = st->staff()->part();
       Instrument* i = part->instrument();
-      foreach(Articulation* a, i->articulations) {
+      foreach(Channel* a, i->channel) {
             if (a->name.isEmpty())
-                  articulationList->addItem(tr("normal"));
+                  channelList->addItem(tr("normal"));
             else
-                  articulationList->addItem(a->name);
+                  channelList->addItem(a->name);
             }
 
       foreach(const NamedEventList& e, i->midiActions)
             midiActionList->addItem(e.name);
 
-      articulationChange->setChecked(!st->articulationName().isEmpty());
+      channel->setChecked(!st->channelName().isEmpty());
       midiAction->setChecked(!st->midiActionName().isEmpty());
 
-      if (!st->articulationName().isEmpty()) {
-            QList<QListWidgetItem*> wl = articulationList
-               ->findItems(st->articulationName(), Qt::MatchExactly);
+      if (!st->channelName().isEmpty()) {
+            QList<QListWidgetItem*> wl = channelList
+               ->findItems(st->channelName(), Qt::MatchExactly);
             if (!wl.isEmpty())
-                  articulationList->setCurrentRow(articulationList->row(wl[0]));
+                  channelList->setCurrentRow(channelList->row(wl[0]));
             }
       if (!st->midiActionName().isEmpty()) {
             QList<QListWidgetItem*> wl = midiActionList
@@ -152,10 +153,10 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
 void StaffTextProperties::saveValues()
       {
-      if (articulationChange->isChecked()) {
-            QListWidgetItem* i = articulationList->currentItem();
+      if (channel->isChecked()) {
+            QListWidgetItem* i = channelList->currentItem();
             if (i)
-                  staffText->setArticulationName(i->text());
+                  staffText->setChannelName(i->text());
             }
       if (midiAction->isChecked()) {
             QListWidgetItem* i = midiActionList->currentItem();
