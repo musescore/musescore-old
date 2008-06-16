@@ -477,6 +477,12 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       autoSave->setChecked(preferences.autoSave);
       autoSaveTime->setValue(preferences.autoSaveTime);
       pngScreenShot->setChecked(preferences.pngScreenShot);
+      for (int i = 0; i < language->count(); ++i) {
+            if (language->itemText(i).startsWith(preferences.language)) {
+                  language->setCurrentIndex(i);
+                  break;
+                  }
+            }
 
       //
       // initialize local shortcut table

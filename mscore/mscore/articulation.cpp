@@ -125,13 +125,7 @@ void Articulation::setSubtype(const QString& s)
             setSubtype(s.toInt());
             return;
             }
-      for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
-            if (articulationList[i].name == s) {
-                  setSubtype(i);
-                  return;
-                  }
-            }
-      printf("Articulation <%s> unknown\n", qPrintable(s));
+      setSubtype(name2idx(s));
       }
 
 //---------------------------------------------------------
@@ -220,6 +214,29 @@ void ArticulationProperties::saveValues()
                   staffText->setMidiActionName(i->text());
             }
 #endif
+      }
+
+//---------------------------------------------------------
+//   idx2name
+//---------------------------------------------------------
+
+QString Articulation::idx2name(int idx)
+      {
+      return articulationList[idx].name;
+      }
+
+//---------------------------------------------------------
+//   name2idx
+//---------------------------------------------------------
+
+int Articulation::name2idx(const QString& s)
+      {
+      for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
+            if (articulationList[i].name == s) {
+                  return i;
+                  }
+            }
+      return -1;
       }
 
 
