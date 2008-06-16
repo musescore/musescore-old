@@ -140,7 +140,7 @@ void Instrument::read(QDomElement e)
                   a.read(e);
                   midiActions.append(a);
                   }
-            else if (tag == "channel") {
+            else if (tag == "Channel" || tag == "channel") {
                   Channel* a = new Channel();
                   a->read(e);
                   channel.append(a);
@@ -211,9 +211,9 @@ Channel::Channel()
 void Channel::write(Xml& xml) const
       {
       if (name.isEmpty())
-            xml.stag("channel");
+            xml.stag("Channel");
       else
-            xml.stag(QString("channel name=\"%1\"").arg(name));
+            xml.stag(QString("Channel name=\"%1\"").arg(name));
       updateInitList();
       foreach(Event* e, init) {
             if (e)

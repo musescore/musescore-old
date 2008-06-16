@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <museScore version="1.0">
 
-   <articulation name="staccato">
+   <Articulation name="staccato">
       <gateTime>70%</gateTime>
-      </articulation>
-   <articulation name="staccato">
+      </Articulation>
+   <Articulation name="staccato">
       <gateTime>40%</gateTime>
-      </articulation>
-   <articulation name="tenuto">
+      </Articulation>
+   <Articulation name="tenuto">
       <gateTime>100%</gateTime>
-      </articulation>
+      </Articulation>
 
    <instrument-group name="Woodwinds">
       <instrument>

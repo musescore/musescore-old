@@ -345,6 +345,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>fr French</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>it Italian</string>
              </property>
             </item>

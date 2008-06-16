@@ -48,7 +48,7 @@ InstrumentTemplate::InstrumentTemplate()
 
 void InstrumentTemplate::write(Xml& xml) const
       {
-      xml.stag("instrument");
+      xml.stag("Instrument");
       xml.tag("name", name.toPlainText());            // TODO
       xml.tag("short-name", shortName.toPlainText()); // TODO
       if (staves == 1) {
@@ -263,7 +263,7 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
-                        if (tag == "instrument-group")
+                        if (tag == "instrument-group" || tag == "InstrumentGroup")
                               readInstrumentGroup(ee);
                         else if (tag == "articulation") {
                               }
