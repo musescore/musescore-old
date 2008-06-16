@@ -889,7 +889,7 @@ void InstrumentsDialog::on_saveButton_clicked()
             if (curGroup != t->group) {
                   if (!curGroup.isEmpty())
                         xml.etag();
-                  xml.stag(QString("instrument-group name=\"%1\"").arg(t->group));
+                  xml.stag(QString("InstrumentGroup name=\"%1\"").arg(t->group));
                   curGroup = t->group;
                   }
             t->write(xml);

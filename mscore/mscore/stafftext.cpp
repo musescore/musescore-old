@@ -43,7 +43,7 @@ void StaffText::write(Xml& xml) const
       if (!_midiActionName.isEmpty())
             xml.tagE(QString("midiAction name=\"%1\"").arg(_midiActionName));
       if (!_channelName.isEmpty())
-            xml.tagE(QString("channel name=\"%1\"").arg(_channelName));
+            xml.tagE(QString("channelSwitch name=\"%1\"").arg(_channelName));
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -60,7 +60,7 @@ void StaffText::read(QDomElement e)
             QString tag(e.tagName());
             if (tag == "midiAction")
                   _midiActionName = e.attribute("name");
-            else if (tag == "channel")
+            else if (tag == "channelSwitch" || tag == "articulationChange")
                   _channelName = e.attribute("name");
             else if (!Text::readProperties(e))
                   domError(e);
