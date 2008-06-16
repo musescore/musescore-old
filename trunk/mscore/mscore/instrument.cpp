@@ -21,6 +21,7 @@
 #include "instrument.h"
 #include "xml.h"
 #include "drumset.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   write
@@ -361,9 +362,10 @@ int Instrument::channelIdx(const QString& s) const
 
 void MidiArticulation::write(Xml& xml) const
       {
-//      int idx;                // Articulation index (subtype())
-//      int velocity;           // velocity change: -100% - +100%
-//      int gateTime;           // gate time change: -100% - +100%
+      xml.stag(QString("Articulation name=\"%1\"").arg(Articulation::idx2name(idx)));
+      xml.tag("velocity", velocity);
+      xml.tag("gateTime", gateTime);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -373,6 +375,7 @@ void MidiArticulation::write(Xml& xml) const
 void MidiArticulation::read(QDomElement e)
       {
       QString name = e.attribute("name");
+      idx = Articulation::name2idx(name);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "velocity")

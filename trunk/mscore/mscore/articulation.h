@@ -113,6 +113,9 @@ class Articulation : public Symbol {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      static QString idx2name(int idx);
+      static int name2idx(const QString& name);
       };
 
 //---------------------------------------------------------

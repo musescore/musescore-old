@@ -188,6 +188,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             delete e;
             return;
             }
+
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       Measure* measure = (Measure*)mb;
       e->setTrack(track);
@@ -247,7 +248,11 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   dyn->setTick(tick);
                   dyn->setParent(measure);
                   dyn->layout(layout());
-                  QPointF uo(pos - measure->canvasPos() - dyn->ipos() - dragOffset);
+
+                  double xx = measure->tick2pos(tick);
+                  System* system = measure->system();
+                  double yy = system->staff(staffIdx)->y();
+                  QPointF uo(pos - measure->canvasPos() - QPointF(xx,yy) - dragOffset);
                   dyn->setUserOff(uo / _spatium);
                   }
                   break;

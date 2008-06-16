@@ -265,7 +265,8 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                         QString val(ee.text());
                         if (tag == "instrument-group" || tag == "InstrumentGroup")
                               readInstrumentGroup(ee);
-                        else if (tag == "articulation") {
+                        else if (tag == "Articulation") {
+                              //TODO
                               }
                         else
                               domError(ee);
