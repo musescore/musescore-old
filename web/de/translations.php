@@ -4,7 +4,7 @@
   require("header.html");
   ?>
 <!-- Main body -->
-<div class=mainbody>
+<div class="mainbody">
 
 <h3>Translations</h3>
 
@@ -14,7 +14,7 @@ The step for step instructions add as an example the new language "french" to
 is the two-letter ISO 3166 country code for french).
 It assumes you have downloaded the latest <i>MuseScore</i> source from the
 subversion repository and you are using linux:
-<br><br>
+<br/><br/>
 
 <table>
   <tr>
@@ -31,11 +31,11 @@ subversion repository and you are using linux:
   <tr>
     <td valign="top">Step 2:</td>
     <td>
-      Enter the build directory and type:<br>
+      Enter the build directory and type:<br/>
       <code>
         make lupdate
         </code>
-      <br>
+      <br/>
       This generates the file "mscore/share/locale/mscore_fr.ts".
       </td>
     </tr>
@@ -58,7 +58,7 @@ subversion repository and you are using linux:
       <code>
         make lrelease
         </code>
-      </br>
+      <br/>
       This produces the compressed translation file mscore_fr.qm.
       </td>
     </tr>
@@ -85,12 +85,12 @@ subversion repository and you are using linux:
     <td>
       Test:
             set the environment variable LC_ALL to the desired
-            Language:<br>
+            Language:<br/>
             <code>
               export LC_ALL=fr
               </code>
             <br/>
-            Start mscore and test your translation:<br>
+            Start mscore and test your translation:<br/>
             <code>
               mscore
               </code>
@@ -98,14 +98,14 @@ subversion repository and you are using linux:
     </tr>
 
   </table>
-<br>
+<br/>
 If you are using the windows version please ask
 <a href="mailto:ws at seh dot de">me</a> to create and install an
 mscore_xx.ts file for you to translate. The qt <i>linguist</i> is part of
 the qt package for windows available
 <a href="http://trolltech.com/developer/downloads/qt/windows">here</a>
 from trolltech.
-
+</div>
 
 <?php require("trailer.html");  ?>
 

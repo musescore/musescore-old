@@ -4,6 +4,7 @@
       <instrument>
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
+         <transposition>12</transposition>
          <clef>0</clef>
          <midiprogram>72</midiprogram>
          </instrument>
@@ -15,11 +16,13 @@
       <instrument>
          <name>Alto Flute</name>
          <short-name>Alt. Fl.</short-name>
+         <transposition>-5</transposition>
          <midiprogram>73</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Flute</name>
          <short-name>Bs. Fl.</short-name>
+         <transposition>-12</transposition>
          <midiprogram>73</midiprogram>
          </instrument>
       <instrument>
@@ -35,25 +38,30 @@
       <instrument>
          <name>Englisch Horn</name>
          <short-name>Eng. Hn.</short-name>
+         <transposition>-7</transposition>
          <midiprogram>69</midiprogram>
          </instrument>
       <instrument>
-         <name>Bb Clarinette</name>
-         <short-name>Bb Cl.</short-name>
+         <name>B<symbol name="flat"/> Clarinette</name>
+         <short-name>B<symbol name="flat"/> Cl.</short-name>
+         <transposition>-2</transposition>
          </instrument>
       <instrument>
-         <name>Eb Clarinette</name>
-         <short-name>Eb Cl.</short-name>
+         <name>E<symbol name="flat"/> Clarinette</name>
+         <short-name>E<symbol name="flat"/> Cl.</short-name>
+         <transposition>3</transposition>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
          <name>A Clarinette</name>
          <short-name>A Cl.</short-name>
+         <transposition>-3</transposition>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Clarinette</name>
          <short-name>Bs. Cl.</short-name>
+         <transposition>-14</transposition>
          <midiprogram>71</midiprogram>
          </instrument>
       <instrument>
@@ -65,37 +73,44 @@
       <instrument>
          <name>Contrabassoon</name>
          <short-name>Cbsn.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <midiprogram>70</midiprogram>
          </instrument>
       <instrument>
          <name>Saxophone</name>
          <short-name>Sax.</short-name>
+         <transposition>-9</transposition>
          <midiprogram>65</midiprogram>
          </instrument>
       <instrument>
          <name>Soprano Saxophone</name>
          <short-name>Sop. Sax.</short-name>
+         <transposition>-2</transposition>
          <midiprogram>64</midiprogram>
          </instrument>
       <instrument>
          <name>Alto Saxophone</name>
          <short-name>Alt. Sax.</short-name>
+         <transposition>-9</transposition>
          <midiprogram>65</midiprogram>
          </instrument>
       <instrument>
          <name>Tenor Saxophone</name>
          <short-name>Ten. Sax.</short-name>
+         <transposition>-14</transposition>
          <midiprogram>66</midiprogram>
          </instrument>
       <instrument>
          <name>Baritone Saxophone</name>
          <short-name>Bar. Sax.</short-name>
+         <transposition>-21</transposition>
          <midiprogram>67</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Saxophone</name>
          <short-name>Bs. Sax.</short-name>
+         <transposition>-26</transposition>
          <midiprogram>67</midiprogram>
          </instrument>
       </instrument-group>
@@ -104,16 +119,19 @@
       <instrument>
          <name>Horn</name>
          <short-name>F Hn.</short-name>
+         <transposition>-7</transposition>
          <midiprogram>60</midiprogram>
          </instrument>
       <instrument>
-         <name>Bb Trompete</name>
-         <short-name>Bb Tpt.</short-name>
+         <name>B<symbol name="flat"/> Trompete</name>
+         <short-name>B<symbol name="flat"/> Tpt.</short-name>
+         <transposition>-2</transposition>
          <midiprogram>56</midiprogram>
          </instrument>
       <instrument>
          <name>D Trompete</name>
          <short-name>D Tpt.</short-name>
+         <transposition>2</transposition>
          <midiprogram>56</midiprogram>
          </instrument>
       <instrument>
@@ -122,8 +140,9 @@
          <midiprogram>56</midiprogram>
          </instrument>
       <instrument>
-         <name>Eb Trompete</name>
-         <short-name>Eb Tpt.</short-name>
+         <name>E<symbol name="flat"/> Trompete</name>
+         <short-name>E<symbol name="flat"/> Tpt.</short-name>
+         <transposition>3</transposition>
          <midiprogram>56</midiprogram>
          </instrument>
       <instrument>
@@ -195,16 +214,19 @@
       <instrument>
          <name>Gitarre</name>
          <short-name>Git.</short-name>
+         <transposition>-12</transposition>
          <midiprogram>24</midiprogram>
          </instrument>
       <instrument>
          <name>El. Gitarre</name>
          <short-name>El. Git.</short-name>
+         <transposition>-12</transposition>
          <midiprogram>27</midiprogram>
          </instrument>
       <instrument>
          <name>Bass Gitarre</name>
          <short-name>B. Guit.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <midiprogram>33</midiprogram>
          </instrument>
@@ -288,10 +310,6 @@
       <instrument>
          <name>Accordian</name>
          <short-name>Acc.</short-name>
-         <staves>2</staves>
-         <clef staff="1">0</clef>
-         <clef staff="2">4</clef>
-         <bracket>1</bracket>
          <midiprogram>21</midiprogram>
          </instrument>
       </instrument-group>
@@ -351,26 +369,24 @@
        <instrument>
           <name>Double Bass</name>
           <short-name>D.B.</short-name>
+         <transposition>-12</transposition>
           <clef>4</clef>
           <midiprogram>32</midiprogram>
           </instrument>
       <instrument>
          <name>Kontrabass</name>
          <short-name>C.B.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <midiprogram>43</midiprogram>
          </instrument>
         <instrument>
           <name>Contrabasses</name>
           <short-name>Cbs.</short-name>
+         <transposition>-12</transposition>
           <clef>4</clef>
           <midiprogram>49</midiprogram>
           </instrument>
-      <instrument>
-         <name>Double Bass</name>
-         <short-name>D.B.</short-name>
-         <midiprogram>32</midiprogram>
-         </instrument>
       </instrument-group>
 
    </museScore>

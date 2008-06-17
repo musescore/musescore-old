@@ -15,6 +15,7 @@
       <instrument>
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
+         <transposition>12</transposition>
          <clef>0</clef>
          <channel>
             <program>72</program>
@@ -30,6 +31,7 @@
       <instrument>
          <name>Alto Flute</name>
          <short-name>Alt. Fl.</short-name>
+         <transposition>-5</transposition>
          <channel>
             <program>73</program>
             </channel>
@@ -37,6 +39,7 @@
       <instrument>
          <name>Bass Flute</name>
          <short-name>Bs. Fl.</short-name>
+         <transposition>-12</transposition>
          <channel>
             <program>73</program>
             </channel>
@@ -58,6 +61,7 @@
       <instrument>
          <name>English Horn</name>
          <short-name>Eng. Hn.</short-name>
+         <transposition>-7</transposition>
          <channel>
             <program>69</program>
             </channel>
@@ -65,6 +69,7 @@
       <instrument>
          <name>B<symbol name="flat"/> Clarinet</name>
          <short-name>B<symbol name="flat"/>Cl.</short-name>
+         <transposition>-2</transposition>
          <channel>
             <program>71</program>
             </channel>
@@ -72,6 +77,7 @@
       <instrument>
          <name>E<symbol name="flat"/> Clarinet</name>
          <short-name>E<symbol name="flat"/>Cl.</short-name>
+         <transposition>3</transposition>
          <channel>
             <program>71</program>
             </channel>
@@ -79,6 +85,7 @@
       <instrument>
          <name>A Clarinet</name>
          <short-name>A Cl.</short-name>
+         <transposition>-3</transposition>
          <channel>
             <program>71</program>
             </channel>
@@ -86,6 +93,7 @@
       <instrument>
          <name>Bass Clarinet</name>
          <short-name>Bs. Cl.</short-name>
+         <transposition>-14</transposition>
          <channel>
             <program>71</program>
             </channel>
@@ -101,6 +109,7 @@
       <instrument>
          <name>Contrabassoon</name>
          <short-name>Cbsn.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
             <program>70</program>
@@ -109,6 +118,7 @@
       <instrument>
          <name>Saxophone</name>
          <short-name>Sax.</short-name>
+         <transposition>-9</transposition>
          <channel>
             <program>65</program>
             </channel>
@@ -116,6 +126,7 @@
       <instrument>
          <name>Soprano Saxophone</name>
          <short-name>Sop. Sax.</short-name>
+         <transposition>-2</transposition>
          <channel>
             <program>64</program>
             </channel>
@@ -123,6 +134,7 @@
       <instrument>
          <name>Alto Saxophone</name>
          <short-name>Alt. Sax.</short-name>
+         <transposition>-9</transposition>
          <channel>
             <program>65</program>
             </channel>
@@ -139,6 +151,7 @@
       <instrument>
          <name>Baritone Saxophone</name>
          <short-name>Bar. Sax.</short-name>
+         <transposition>-21</transposition>
          <channel>
             <program>67</program>
             </channel>
@@ -146,6 +159,7 @@
       <instrument>
          <name>Bass Saxophone</name>
          <short-name>Bs. Sax.</short-name>
+         <transposition>-26</transposition>
          <channel>
             <program>67</program>
             </channel>
@@ -156,6 +170,7 @@
       <instrument>
          <name>Horn</name>
          <short-name>F Hn.</short-name>
+         <transposition>-7</transposition>
          <channel>
             <program>60</program>
             </channel>
@@ -163,6 +178,7 @@
       <instrument>
          <name>B<symbol name="flat"/> Trumpet</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
+         <transposition>-2</transposition>
          <channel>
             <program>56</program>
             </channel>
@@ -170,6 +186,7 @@
       <instrument>
          <name>D Trumpet</name>
          <short-name>D Tpt.</short-name>
+         <transposition>2</transposition>
          <channel>
             <program>56</program>
             </channel>
@@ -184,6 +201,7 @@
       <instrument>
          <name>E<symbol name="flat"/> Trumpet</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
+         <transposition>3</transposition>
          <channel>
             <program>56</program>
             </channel>
@@ -265,6 +283,7 @@
       <instrument>
          <name>Guitar</name>
          <short-name>Guit.</short-name>
+         <transposition>-12</transposition>
          <channel>
             <program>24</program>
             </channel>
@@ -272,6 +291,7 @@
       <instrument>
          <name>Electric Guitar</name>
          <short-name>El. Guit.</short-name>
+         <transposition>-12</transposition>
          <channel>
             <program>27</program>
             </channel>
@@ -279,6 +299,7 @@
       <instrument>
          <name>Bass Guitar</name>
          <short-name>B. Guit.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
             <program>33</program>
@@ -388,10 +409,6 @@
       <instrument>
          <name>Accordian</name>
          <short-name>Acc.</short-name>
-         <staves>2</staves>
-         <clef staff="1">0</clef>
-         <clef staff="2">4</clef>
-         <bracket>1</bracket>
          <channel>
             <program>21</program>
             </channel>
@@ -475,6 +492,7 @@
       <instrument>
          <name>Double Bass</name>
          <short-name>D.B.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
             <program>32</program>
@@ -483,6 +501,7 @@
       <instrument>
          <name>Contrabass</name>
          <short-name>C.B.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
             <program>43</program>
@@ -491,6 +510,7 @@
        <instrument>
          <name>Contrabasses</name>
          <short-name>Cbs.</short-name>
+         <transposition>-12</transposition>
          <clef>4</clef>
          <channel>
             <program>49</program>

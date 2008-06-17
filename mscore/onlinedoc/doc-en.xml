@@ -774,7 +774,7 @@
 
 <page name="tempo" header="Tempo">
     <index>Tempo</index>
-    Play back tempo can be change via the play panel or via tempo text in the score.<br/>
+    Play back tempo can be changed via the play panel or via tempo text in the score.<br/>
     <br/>
     <h5>Play panel</h5>
     <ul>
@@ -789,11 +789,11 @@
       <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
       <li>Press OK to finish</li>
     </ul>
-    Existing tempo text can be changed by double clicking on the text to enter edit mode.
+    Existing tempo text can be changed by double clicking the text to enter edit mode.
     Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the
     text and selecting "Tempo Properties..."<br/>
     <br/>
-    Note: Tempo text in the score will override a tempo set in the play panel.
+    Note: Tempo text in the score will override a tempo setting in the play panel.
     </page>
 
 <page name="textedit" header="Text Editing">
