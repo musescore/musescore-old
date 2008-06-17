@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
+<museScore version="1.9">
   <Mag>1</Mag>
-  <xoff>3.59833</xoff>
-  <yoff>4.65667</yoff>
+  <xoff>0.423333</xoff>
+  <yoff>0.423333</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -878,7 +878,7 @@
       </sig>
     </siglist>
   <tempolist fix="2">
-    <relTempo>112</relTempo>
+    <relTempo>142</relTempo>
     <tempo tick="0">1</tempo>
     </tempolist>
   <Part>
@@ -946,16 +946,6 @@ p, li { white-space: pre-wrap; }
     <VBox>
       <height>10</height>
       <Text>
-        <subtype>Title</subtype>
-        <track>-1</track>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Estudio Nr.1</p></body></html>
-          </html-data>
-        </Text>
-      <Text>
         <subtype>Composer</subtype>
         <track>-1</track>
         <html-data>
@@ -965,11 +955,21 @@ p, li { white-space: pre-wrap; }
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Francisco Tarrega (1852-1909)</p></body></html>
           </html-data>
         </Text>
+      <Text>
+        <subtype>Title</subtype>
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Estudio Nr. 1</p></body></html>
+          </html-data>
+        </Text>
       </VBox>
     <Measure number="1">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -980,13 +980,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -997,13 +997,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1014,13 +1014,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1031,7 +1031,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
@@ -1058,68 +1058,80 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -1142,8 +1154,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="2">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1154,13 +1166,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1171,13 +1183,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1188,13 +1200,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1205,75 +1217,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -1296,8 +1320,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1308,13 +1332,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1325,13 +1349,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1342,13 +1366,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1359,75 +1383,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -1450,8 +1486,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="4">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1462,13 +1498,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1479,13 +1515,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1496,13 +1532,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1513,75 +1549,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -1604,8 +1652,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="5">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1616,13 +1664,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1633,13 +1681,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1650,13 +1698,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1667,75 +1715,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="40" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="68" tpc="22"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="62" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
@@ -1758,8 +1818,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1770,13 +1830,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1787,13 +1847,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1804,13 +1864,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1821,75 +1881,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="45" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
@@ -1912,8 +1984,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="7">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1924,13 +1996,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1941,13 +2013,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1958,13 +2030,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -1975,75 +2047,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="50" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
@@ -2067,8 +2151,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="8">
       <endRepeat>2</endRepeat>
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2079,13 +2163,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2096,41 +2180,47 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -2171,8 +2261,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <startRepeat/>
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2183,13 +2273,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2200,13 +2290,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2217,13 +2307,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2234,78 +2324,91 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
+      <BarLine/>
       <Chord>
         <track>1</track>
         <tick>15360</tick>
@@ -2324,10 +2427,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="10">
-      <startRepeat/>
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2338,13 +2440,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2355,13 +2457,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2372,13 +2474,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2389,78 +2491,91 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
+      <BarLine/>
       <Chord>
         <track>1</track>
         <tick>17280</tick>
@@ -2479,10 +2594,9 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="11">
-      <startRepeat/>
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2493,13 +2607,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2510,13 +2624,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2527,13 +2641,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2544,75 +2658,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="47" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
@@ -2635,8 +2761,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="12">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2647,13 +2773,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2664,13 +2790,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2681,13 +2807,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2698,75 +2824,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="40" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="66" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -2789,8 +2927,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="13">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2801,13 +2939,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2818,13 +2956,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2835,13 +2973,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2852,75 +2990,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="41" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
@@ -2943,8 +3093,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="14">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2955,13 +3105,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2972,13 +3122,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -2989,13 +3139,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3006,75 +3156,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -3097,8 +3259,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="15">
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3109,13 +3271,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3126,13 +3288,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="2">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3143,13 +3305,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="3">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3160,75 +3322,87 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="43" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>2</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="59" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>3</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -3252,8 +3426,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="16">
       <endRepeat>0</endRepeat>
       <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3264,13 +3438,13 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Tuplet id="1">
-        <hasNumber>1</hasNumber>
-        <hasLine>0</hasLine>
+        <numberType>0</numberType>
+        <bracketType>0</bracketType>
         <baseLen>240</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
@@ -3281,41 +3455,47 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">3</p></body></html>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
             </html-data>
           </Number>
         </Tuplet>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="48" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>0</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <Note pitch="64" tpc="18"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="60" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>160</ticklen>
         <Tuplet>1</Tuplet>
+        <durationType>eighth</durationType>
         <StemDirection>up</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -3480,6 +3660,7 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="43" tpc="15"/>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="10">
       <Chord>
@@ -3492,6 +3673,7 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note pitch="29" tpc="13"/>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="11">
       <Chord>
@@ -3566,5 +3748,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
