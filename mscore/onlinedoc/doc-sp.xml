@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScoreManual version="1.0">
-<page name="accidentals" header="Accidentals" >
-    <index>Accidentals</index>
+<page name="accidentals" header="Accidentes" >
+    <index>Accidentes</index>
     <table>
     <tr><td>
-          Accidentals can be set or changed by dragging an accidental symbol
-          from the accidental palette to a note in the score.<br/>
-          <br/>
-          If you only want to change the pitch of a note you can also
-          select the note and:<br/>
-          <br/>
+          Los accidentes pueden ser agregados o cambiados arrastrándolos desde
+          la paleta de accidentes a una nota en la partitura.
       </td>
       <td>
          <img src="../pic/accidentalspalette.png"/>
          </td>
       </tr>
       </table>
-
+      Si solamente quiere cambiar el tono de una nota, puede seleccionarla y:
+      <br/>
+      <br/>
       <table cellpadding="0" cellspacing="0">
-      <tr><td><key>Up</key></td><td>Increase the pitch of a note for one semitone.</td></tr>
-      <tr><td><key>Down</key></td><td>Decrease the pitch of a note for one semitone.</td></tr>
-      <tr><td><key>Ctrl+Up</key></td><td>Increase the pitch of a note for one octave.</td></tr>
-      <tr><td><key>Ctrl+Down</key></td><td>Decrease the pitch of a note for one cctave.</td></tr>
+      <tr><td><key>Arriba</key></td><td>        Aumentar la nota en un semitono.</td></tr>
+      <tr><td><key>Abajo</key></td><td>         Decrementar la nota en un semitono</td></tr>
+      <tr><td><key>Ctrl+Arriba</key></td><td>   Aumentar la nota una octava.</td></tr>
+      <tr><td><key>Ctrl+Abajo</key></td><td>    Decrementar la nota en una octava</td></tr>
       </table>
       <br/>
-      <i>MuseScore</i> automatically tries to set an appropriate accidental for
-      the changed pitch. If you do not agree with this or you want to place
-      an cautionary accidental (editorial accidental), then you have to manually
-      drag an accidental from the accidental palette to the note. If you later change
-      the pitch with cursor keys, manual settings to the accidental will be lost.<br/>
+      MuseScore automáticamente intenta utilizar el accidente apropiado para la nota
+      cambiada. Si no está de acuerdo con esto o quiere agregar un accidente cautelar
+      (accidente editorial), debe arrastrar el accidente manualmente desde la paleta
+      de accidentes. Si nuevamente cambia la nota con las teclas de cursor, el accidente
+      manualmente agregado se perderá.
       <br/>
-      The menu function &lt;<b>Notes/Pitch spell</b>&gt; tries to guess the
-      right accidentals for the whole score.
+      <br/>
+      La función de menú &lt;<b>Notes/Pitch spell</b>&gt; intenta adivinar los accidentes correctos
+      para toda la partitura.
     </page>
 
-<page name="arpeggios" header="Arpeggios">
-    <index>Arpeggios</index>
+<page name="arpeggios" header="Arpegios">
+    <index>Arpegios</index>
     <table>
     <tr><td>
-          Arpeggios are set by dragging an arpeggio symbol from the arpeggio palette
-          to a note of a chord.
+          Los arpegios son agregados a una nota de un acorde arrastrando un símbolo de
+          arpegio desde la paleta de arpegios.
       </td>
       <td>
          <img src="../pic/arpeggiopalette.png"/>
@@ -48,14 +47,14 @@
       </table>
     </page>
 
-<page name="barlines" header="Barlines">
-    <index>Bar line</index>
-    <h5>Change bar line type</h5>
+<page name="barlines" header="Barras de compás">
+    <index>Barras de compás</index>
     <table>
       <tr>
         <td>
-          Bar lines are changed by dragging a bar line symbol from the
-          bar line palette to an bar line in the score.
+          Podemos cambiar las barras de compás arrastrado uno de los símbolos de barra
+          de compás desde la paleta de barras de compás hacia una de las barras de
+          la partitura.
           </td>
         <td>
           <img src="../pic/barlinepalette.png"/>
@@ -93,16 +92,16 @@
        <a href="measures.php">Measure Operations</a>.
     </page>
 
-<page name="beams" header="Beams">
-    <index>Beams</index>
+<page name="beams" header="Agrupaciones">
+    <index>Agrupaciones</index>
     <table>
     <tr><td>
-          Beams are set automatically but the automatic setting can be
-          overridden manually. Drag a beam symbol from the
-          beam palette to a note in order to change its beam behavior.
-          <br/>
-          You can also first select a note and then double click the
-          appropriate symbol in the beam palette.
+          Las agrupaciones de notas se van creando de forma automática, pero
+          podemos modificarlas manualmente. Para ello arrastramos el símbolo de
+          agrupación desde la paleta de agrupaciones hacia la nota que queremos
+          modificar. Otra forma de hacerlo es seleccionar primero la nota y
+          después hacer doble clic en el símbolo apropiado de la paleta
+          de agrupaciones.
           <br/>
           <br/>
 
@@ -116,40 +115,43 @@
     <table cellpadding="0" cellspacing="0">
       <tr><td><img src="../pic/beambutton1.png"/></td>
         <td><sp/></td>
-        <td>Start a beam at this note.</td>
+        <td>Iniciar agrupación en la nota.</td>
         </tr>
       <tr><td><img src="../pic/beambutton2.png"/></td>
         <td/>
-        <td>Do not end a beam a this note.</td>
+        <td>No finalizar agrupación en la nota.</td>
         </tr>
       <tr><td><img src="../pic/beambutton3.png"/></td>
         <td/>
-        <td>Do not beam this note.</td>
+        <td>No agrupar la nota.</td>
         </tr>
       <tr><td><img src="../pic/beambutton4.png"/></td>
         <td/>
-        <td>Start a second level beam at this note.</td>
+        <td>Iniciar agrupación de segundo nivel en la nota.</td>
         </tr>
       </table>
     <br/>
-    See also:
-       <a href="crossbeams.php">Cross staff beams</a>
+    Véase también:
+       <a href="crossbeams.php">Véase también: Agrupaciones entre compases.</a>
     </page>
 
-<page name="brackets" header="Brackets">
-    <index>Brackets</index>
+<page name="brackets" header="Corchetes">
+    <index>Corchetes</index>
     <table>
     <tr><td>
-          <b>Remove</b><br/>
-          Select the bracket and press &lt;<b>Del</b>&gt;<br/>
+          <b>Eliminar:</b><br/>
+          Seleccionar el corchete y pulsar  &lt;<b>Del</b>&gt;<br/>
           <br/>
-          <b>Add</b><br/>
-          Drag a bracket symbol from the bracket palette to an
-          empty space in the first measure of a system.<br/>
+          <b>Añadir:</b><br/>
+          Arrastrar un símbolo de corchete desde la paleta de corchetes hacia
+          un espacio en blanco en el primer compás de un sistema.
           <br/>
-          <b>Change</b><br/>
-          Drag a bracket symbol from the bracket palette to an
-          bracket in the score.<br/>
+          <br/>
+          <b>Cambiar:</b><br/>
+           Arrastrar un símbolo de corchete desde la paleta de corchetes hacia un
+           corchete de la partitura.
+          <br/>
+          <br/>
           </td>
       <td>
          <img src="../pic/bracketspalette.png"/>
@@ -157,24 +159,26 @@
       </tr>
       </table>
       <br/>
-      <b>Edit</b><br/>
-      Double click on a bracket to enter
-       <a href="editmode.php">edit mode</a>,
-      In edit mode you can drag the hight of a bracket to span arbitrary staves
-      of a system.
+      <b>Editar:</b><br/>
+      Hacer doble clic en un corchete para activar el modo de edición. En el
+      modo de edición se puede modificar la altura de un corchete para expandir
+      arbitrariamente pentagramas de un sistema.
     </page>
 
-<page name="breaks" header="Breaks">
-    <index>Breaks</index>
-    <index>Page Breaks</index>
-    <index>Line Breaks</index>
+<page name="breaks" header="Saltos">
+    <index>Saltos</index>
+    <index>Saltos de Línea</index>
+    <index>Saltos de Página</index>
     <table>
     <tr><td>
-          Page breaks or line breaks (system breaks) can be enforced
-          by dragging a page break symbol or line break symbol from the
-          breaks palette to an empty space of a measure in the score.<br/>
-          The break will happen <i>after</i> the marked measure.<br/>
-          The visible break marks will not be printed of course.
+      Podemos forzar un salto de página o de línea (salto de sistema) arrastrando
+      un símbolo de salto de página o de línea desde la paleta de saltos hacia un
+      espacio en blanco de la partitura.
+      <br/>
+      El salto ocurrirá después del compás marcado.
+      <br/>
+      Por supuesto, las marcas visibles de los saltos no se imprimen.
+      <br/>
       </td>
       <td>
          <img src="../pic/breakspalette.png"/>
@@ -183,13 +187,13 @@
       </table>
     </page>
 
-<page name="breath" header="Breath">
-    <index>Breath</index>
+<page name="breath" header="Respiro">
+    <index>Respiro</index>
     <table>
     <tr><td>
-          To place a breath symbol drag it from the breath palette to
-          a note in the score. The breath symbol will be placed <i>before</i>
-          the note.
+      Para poner un respiro arrastramos un símbolo de respiro desde la paleta de
+      respiros hacia una nota de la partitura. El símbolo de respiro quedará delante
+      de la nota.
       </td>
       <td>
          <img src="../pic/breathpalette.png"/>
@@ -197,49 +201,51 @@
       </tr>
       </table>
 
-    Breath symbol in score: <img src="../pic/breath.png" align="center"/>
+    Símbolo de respiro en una partitura: <img src="../pic/breath.png" align="center"/>
     </page>
 
-<page name="chordnames" header="Chord Names">
-    <index>Chord Names</index>
-      Chord names can be entered by first selecting a note and then
-      pressing <code>&lt;<b>Ctrl+K</b>&gt;</code>. This creates a chord name text object
-      for the selected chord.
+<page name="chordnames" header="Nombres de acordes">
+    <index>Nombres de acordes</index>
+
+      Los nombres de los acordes pueden ser ingresados luego de seleccionar una nota y apretar
+      <code>&lt;<b>Ctrl+K</b>&gt;</code>.
+      Esto crea un objeto de texto para el acorde seleccionado.
 
       <ul>
-        <li>Type <code>&lt;<b>space</b>&gt;</code> to move to the next chord.</li>
-        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous chord.</li>
-        <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-            the chord name text.
+        <li>Use <code>&lt;<b>espacio</b>&gt;</code> para ir al siguiente acorde.</li>
+        <li><code>&lt;<b>Shift+Espacio</b>&gt;</code> va al acorde anterior.</li>
+        <li><code>&lt;<b>Ctrl+Espacio</b>&gt;</code> ingresa un <code>&lt;<b>espacio</b>&gt;</code>
+            en el texto del nombre del acorde.
             </li>
         </ul>
-
-      Chord names can be <a href="textedit.php">edited</a> as normal text.
-
+      Los nombres de los acordes pueden ser <a href="textedit.php">editados</a>
+      como texto normal.
     </page>
 
-<page name="clefs" header="Clefs">
-    <index>Clefs</index>
+<page name="clefs" header="Claves">
+    <index>Claves</index>
     <table>
     <tr><td>
-      Clefs are created or changed by dragging a clef symbol from the
-      clef palette to a measure or another clef.<br/>
-      &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
+      Las claves son creadas o cambiadas arrastrándolas desde la paleta de claves
+      a un compás u otra clave.
       <br/>
-      <b>Change</b><br/>
-      Drag a clef from the palette onto a clef in the score. You can
-      also drag a clef from the score to another clef of the score
-      by using &lt;<b>Shift+leftMouseButton+Drag</b>&gt;.<br/>
+      &lt;<b>F9</b>&gt; Cambia la ventana de paletas.
       <br/>
-      <b>Add</b><br/>
-      Drag a clef from the palette onto an empty part of a measure.
-      This creates a clef at the beginning of the measure. Drag a clef
-      to a particular note to create a mid-measure clef. If the
-      measure is not the first measure in the staff it is drawn
-      smaller.<br/>
       <br/>
-      <b>Remove</b><br/>
-      Select a clef and press &lt;<b>Del</b>&gt;.
+      <b>Cambiar</b><br/>
+      Arrastre una clave desde la paleta a una clave de la partitura. También
+      es posible arrastrar una clave desde la partitura a otra clave de la partitura,
+      usando&lt;<b>Shift+leftMouseButton+Drag</b>&gt;.
+      <br/>
+      <br/>
+      <b>Agregar</b><br/>
+      Arrastre una clave desde la paleta dentro de una sección vacía de un compás. Esto
+      crea una clave al principio del compás. Si el compás no es el primero del pentagrama,
+      se dibujará más pequeño.
+      <br/>
+      <br/>
+      <b>Quitar</b><br/>
+      Seleccione una clave y presione  &lt;<b>Supr</b>&gt;.
       </td>
       <td>
          <img src="../pic/clefpalette.png"/>
@@ -248,8 +254,7 @@
       </table>
 
     <br/>
-    Note that changing a clef does not change the pitch of any note.
-    Instead the notes are moved.
+    Note que al cambiar la no cambia el tono de ninguna nota, sino que son movidas.
     </page>
 
 <page name="color" header="Color">
@@ -418,24 +423,28 @@
     <img src="../pic/frame.png"/>
     </page>
 
-<page name="gracenotes" header="Grace notes">
-    <index>Grace notes</index>
-    <index>Appoggiatura</index>
+<page name="gracenotes" header="Apoyatura">
+    <index>Apoyatura</index>
+    <index>Apoyatura Breve</index>
+    <index>Apoyatura Larga</index>
     <index>Acciaccatura</index>
+    <index>Appoggiatura</index>
+    <index>Grace note</index>
 
-    A short grace note (Acciaccatura) is painted as a small note with a stroke
-    through the stem. It is placed before the normal-sized main note.
-    A long grace note (Appoggiatura) has no stroke.
+    Una apoyatura breve o corta (Acciaccatura) se representa por una pequeña nota,
+    generalmente corchea, rayada o tachada (rayita que cruza plica y corchete
+    un poco inclinada). Se suele colocar justo antes de la nota principal, de
+    tamaño normal, a la que va ligada. La apoyatura larga (Appoggiatura) no está
+    tachada.
     <br/>
     <br/>
-    Create a grace note by dragging a grace note symbol from the notes palette
-    to a main note.
+    Puede crear una apoyatura arrastrando el símbolo de apotura de desde la paleta de
+    notas hasta la nota principal.
     <br/>
     <br/>
-    See also <a href="http://en.wikipedia.org/wiki/Grace_note">
-    Grace note</a> in <a href="http://en.wikipedia.org">Wikipedia</a>.
+    Véase también <a href="http://en.wikipedia.org/wiki/Grace_note"></a>(en inglés)
+    en <a href="http://en.wikipedia.org">Wikipedia</a>.
     </page>
-
 
 <page name="import" header="Import">
     <index>Import</index>
@@ -581,84 +590,92 @@
     </page>
 
 
-<page name="newscore" header="Create new Score from Scratch">
-    <index>Create new Score</index>
-    <h5>Create new Score from Scratch</h5>
-    The menu entry &lt;<b>Score->New</b>&gt; creates an empty
-    new score. First you have to populate the empty sheet with instruments and
-    then you can add empty measures.
+<page name="newscore" header="Crear una nueva partitura desde cero">
+    <index>Crear una nueva partitura desde cero</index>
+
+    La entrada del menú  &lt;<b>Partitura/Nueva</b>&gt;
+    crea una nueva partitura. Primero es necesario agregar instrumentos a
+    la nueva hoja, y luego puedes agregar compases vacíos
+
           <ul>
-          <li>&lt;<b>I</b>&gt; popups the instrument menu</li>
-          <li>&lt;<b>Ctrl+B</b>&gt; appends an empty measure</li>
-          <li>then menu &lt;<b>Create->Measures</b>&gt; can be used to create
-             an arbitrary number of empty measures
+          <li>&lt;<b>I</b>&gt; ventana con el menu de instrumentos</li>
+          <li>&lt;<b>Ctrl+B</b>&gt; agrega compases vacíos</li>
+          <li>entonces el menu&lt;<b>Crear/Compás</b>&gt;
+             puede ser usado para crear un número arbitrario de compases vacíos
              </li>
           </ul>
 
-    Next steps are usually:
-          <a href="clefs.php">set clef</a>,
-          <a href="keys.php">set key</a>,
-          <a href="timesig.php">set time signature</a>.
+    Los siguientes pasos usualmente incluyen:
+          <a href="clefs.php">elegir la clave</a>,
+          <a href="keys.php">el tono</a>,
+          <a href="timesig.php">y el tempo</a>.
 
 
-    <h5>Create new Score from Template</h5>
+    <h5>Crear nueva partitura desde plantilla</h5>
 
     &lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
     template and click &lt;<b>OK</b>&gt;. This is the simplest way to create
     a new score. Note that template files are normal <i>MuseScore</i> files
     stored in the template folder.
 
-    <h5>Create new Score with the New Wizard</h5>
+    &lt;<b>N</b>&gt; muestra el menú &lt;<b>Plantilla</b>&gt;.
+    Selecciona una plantilla y haz click en
+    &lt;<b>Ok</b>&gt;. Esta es la forma más simple de crear una nueva partitura.
+    Nota que los archivos de plantilla son archivos <i>MuseScore</i> normales,
+    guardados en el directorio template.
+
+    <h5>Crear una nueva partitura con el de manera guiada.</h5>
     </page>
 
-<page name="noteentry" header="Enter Notes">
-    <index>Enter Notes</index>
-    <index>Chords</index>
-    <index>Enter Chords</index>
-    <index>Enter Rests</index>
+<page name="noteentry" header="Ingresar Notas">
+    <index>Ingresar Notas</index>
+    <index>Acordes</index>
+    <index>Ingresar Acordes</index>
+    <index>Ingresar Pausas</index>
 
-    Notes are entered in &lt;<i>Note Edit</i>&gt; mode. First select a note
-    or rest as start position for note entry. When entering notes you are
-    always replacing existing notes or rests. So the duration of a measure
-    does not change.<br/>
-    <br/>
+    Las notas son ingresadas en el modo &lt;<i>Note Edit</i>&gt;.
+    Primero seleciona una nota o una pausa como posición inicial. Cuando ingresas
+    notas siempre estás reemplazando notas o pausas existentes. Por eso la duración
+    de un compás no cambia.
+    <br/><br/>
 
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>N</b>&gt;</td><td>enter &lt;<i>Note Edit</i>&gt; mode.</td></tr>
-    <tr><td>&lt;<b>Escape</b>&gt;</td><td> leave &lt;<i>Note Edit</i>&gt; mode.</td></tr>
+    <tr><td>&lt;<b>N</b>&gt;</td><td>ingresa al modo &lt;<i>Note Edit</i>&gt;.</td></tr>
+    <tr><td>&lt;<b>Escape</b>&gt;</td><td> deja el modo &lt;<i>Note Edit</i>&gt;.</td></tr>
     </table>
     <br/>
 
-    After entering &lt;<i>Note Edit</i>&gt; mode you should select the
-    duration of the note you want to enter by selecting a value from
-    the note palette or by pressing:
+    Luego de entrar al modo &lt;<i>Note Edit</i>&gt; debes seleccionar la duración de la nota que quieres
+    ingresar seleccionando un valor de la paleta de notas o presionando:
     <br/>
     <br/>
+
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>Quarter note (crochet)</td>  <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>Eighth note (quaver)</td></tr>
-    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 note (semiquaver)</td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 note (demi-semiquaver)</td></tr>
-    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 note (semi-demi-semiquaver)</td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>Whole note (semibreve)</td></tr>
-    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>Half note (minim)</td></tr>
+    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>1/4 nota  </td> <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>1/8 nota</td></tr>
+    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 nota </td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 nota</td></tr>
+    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 nota </td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>1/1 nota</td></tr>
+    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>1/2 nota  </td></tr>
     </table>
     <br/>
+
     <table>
     <tr>
-      <td>Notes are entered by pressing<br/>&lt;<b>C D E F G A B</b>&gt;:</td>
+      <td>Las notas se ingresan presionando<br/>&lt;<b>C D E F G A B</b>&gt;:</td>
       <td><img src="../pic/noteentry1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Space</b>&gt; creates a rest<br/>&lt;<b>C D Space E</b>&gt;:</td>
+      <td>&lt;<b>Espacio</b>&gt; crea una pausa<br/>&lt;<b>C D Espacio E</b>&gt;:</td>
       <td><img src="../pic/noteentry2.png" align="center"/></td>
       </tr>
     <tr>
-      <td>Notes are added to chords by
-          pressing &lt;<b>Shift+Notename</b>&gt;<br/>
+      <td>Las notas se agregan a los acordes presionando
+          &lt;<b>Shift+NombeNota</b>&gt;<br/>
           &lt;<b>C D Shift+F Shift+A E F</b>&gt;:
           </td>
       <td><img src="../pic/noteentry3.png" align="center"/></td>
       </tr>
     <tr>
-      <td>Beams are created automatically<br/>
+      <td>Los "Beams" son creados automáticamente<br/>
           &lt;<b>Alt+1 C D Alt+2 E F G A</b>&gt;:
       </td>
       <td><img src="../pic/noteentry4.png" align="center"/></td>

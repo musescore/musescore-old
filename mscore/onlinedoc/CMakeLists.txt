@@ -30,11 +30,11 @@ endif (MINGW)
 
 add_custom_command(
       OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/online-doc
-      COMMAND rm -rf man/de man/en
-      COMMAND mkdir man/de man/en
+      COMMAND rm -rf man/de man/en man/sp
+      COMMAND mkdir man/de man/en man/sp
       COMMAND ${GENDOC_UTIL} -p -s ${CMAKE_SOURCE_DIR}/onlinedoc
       COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/online-doc
-      DEPENDS doc-de.xml doc-en.xml
+      DEPENDS doc-de.xml doc-en.xml doc-sp.xml
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       )
 
@@ -54,7 +54,7 @@ add_custom_command(
       COMMAND ${GENDOC_UTIL} -s ${CMAKE_SOURCE_DIR}/onlinedoc -d ${CMAKE_SOURCE_DIR}/../web
       COMMAND cp -af ${CMAKE_CURRENT_SOURCE_DIR}/pic ${CMAKE_SOURCE_DIR}/../web
       COMMAND touch ${CMAKE_CURRENT_BINARY_DIR}/web-doc
-      DEPENDS doc-de.xml doc-en.xml
+      DEPENDS doc-de.xml doc-en.xml doc-sp.xml
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       )
 
