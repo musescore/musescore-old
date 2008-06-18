@@ -1243,7 +1243,7 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "quit",
          QT_TR_NOOP("Quit"),
          Qt::CTRL + Qt::Key_Q,

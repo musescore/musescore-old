@@ -979,9 +979,22 @@ void MuseScore::navigatorVisible(bool flag)
 
 void MuseScore::helpBrowser()
       {
+#if 0
+      QSettings s;
+      localeName = s.value("language", "system").toString();
+      if (localeName == "system")
+            localeName = QLocale::system().name();
+#endif
       QString lang(localeName.left(2));
+      if (debugMode) {
+            printf("open manual for language <%s>\n", qPrintable(lang));
+            }
+
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/") + lang + QString("/index.html"));
       if (!mscoreHelp.isReadable()) {
+            if (debugMode) {
+                  printf("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
+                  }
             mscoreHelp.setFile(mscoreGlobalShare + QString("man/en/index.html"));
             if (!mscoreHelp.isReadable()) {
                   QString info(tr("MuseScore online manual not found at: "));
@@ -1949,12 +1962,12 @@ void MuseScore::readSettings()
 
 void MuseScore::play(Element* e) const
       {
-#if 0
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = (Note*) e;
-            seq->startNote(note->staff()->part(), note->pitch(), 80, 300);
+            Part* part = note->staff()->part();
+            Instrument* i = part->instrument();
+            seq->startNote(i->channel[note->subchannel()], note->pitch(), 80, 300);
             }
-#endif
       }
 
 //---------------------------------------------------------

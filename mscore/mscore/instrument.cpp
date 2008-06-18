@@ -112,6 +112,7 @@ void Instrument::read(QDomElement e)
       int chorus = 30;
       int reverb = 30;
       int volume = 100;
+      int pan    = 60;
 
       foreach(Channel* a, channel)
             delete a;
@@ -154,7 +155,9 @@ void Instrument::read(QDomElement e)
                   program = i;
             else if (tag == "volume")     // obsolete
                   volume = i;
-            else if (tag == "midiChannel")
+            else if (tag == "pan")        // obsolete
+                  pan = i;
+            else if (tag == "midiChannel")      // obsolete
                   ;
             else
                   domError(e);
@@ -166,6 +169,7 @@ void Instrument::read(QDomElement e)
             a->name         = "normal";
             a->program      = program;
             a->volume       = volume;
+            a ->pan         = pan;
             channel.append(a);
             }
       }

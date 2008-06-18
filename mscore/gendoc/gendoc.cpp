@@ -22,8 +22,8 @@
 #include "xml.h"
 
 
-char* srcPathPrefix = "";
-char* dstPathPrefix = "";
+const char* srcPathPrefix = "";
+const char* dstPathPrefix = "";
 
 //---------------------------------------------------------
 //   Manuals
@@ -49,11 +49,17 @@ Manuals manuals[] = {
          QString("en/man/reference.php"),
          QString("man/en"),
          QString("man/en/index.html")
+         },
+      {  QString("doc-es.xml"),
+         QString("es/man"),
+         QString("es/man/reference.php"),
+         QString("man/es"),
+         QString("man/es/index.html")
          }
       };
 
-const QString deIndex("../web/de/reference.php");
-const QString enIndex("../web/en/reference.php");
+// const QString deIndex("../web/de/reference.php");
+// const QString enIndex("../web/en/reference.php");
 const QString indexFile("index.doc");
 
 //---------------------------------------------------------
