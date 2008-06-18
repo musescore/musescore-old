@@ -261,11 +261,11 @@
     <index>Color</index>
     </page>
 
-<page name="drumnotation" header="Drum Notation">
-    <index>Drum Notation</index>
+<page name="drumnotation" header="Notación de percusión">
+    <index>Notación de percusión</index>
     <table>
     <tr><td>
-          Example drum notation:
+          Un ejemplo de notación de percusión:
       </td>
       <td>
          <img src="../pic/drum1.png"/>
@@ -274,66 +274,68 @@
       </table>
     </page>
 
-<page name="dynamics" header="Dynamics">
-    <index>Dynamics</index>
+<page name="dynamics" header="Dinámica">
+    <index>Dinámica</index>
     </page>
 
-<page name="editmode" header="Edit Mode">
-    <index>Edit Mode</index>
-    Many elements in the score can be edited in &lt;<i><b>Edit Mode</b></i>&gt;:<br/>
+<page name="editmode" header="Modo de Edición">
+    <index>Modo de Edición</index>
+    Muchos elementos en la partitura pueden ser editados en el
+    &lt;<i><b>Modo de Edición</b></i>&gt;:<br/>
     <br/>
 
     <table cellpadding="0" cellspacing="0">
      <tr>
-        <td>&lt;<b>Double Click</b>&gt;</td>
+        <td>&lt;<b>Doble Click</b>&gt;</td>
         <td><sp/></td>
-        <td> start &lt;<i><b>Edit Mode</b></i>&gt; </td>
+        <td> inicia &lt;<i><b>Modo de Edición</b></i>&gt; </td>
         </tr>
      <tr>
         <td>&lt;<b>Escape</b>&gt;</td>
         <td/>
-        <td> end &lt;<i><b>Edit Mode</b></i>&gt; </td>
+        <td> termina &lt;<i><b>Modo de Edición</b></i>&gt; </td>
         </tr>
      </table>
     <br/>
 
     Some elements show <i>handles</i> in edit mode which can be
-    moved by mouse dragging or keyboard commands.<br/>
+    moved by mouse dragging or keyboard commands.
+    <br/>
     <br/>
     <a href="slurs.php">Slur</a> in edit mode: <img src="../pic/slur4.png" align="center"/><br/>
     <br/>
-    Available keyboard commands:<br/>
+    Comandos disponibles:<br/>
     <br/>
     <table cellpadding="0" cellspacing="0">
-      <tr><td>&lt;<b>Left</b>&gt;</td>
+      <tr><td>&lt;<b>Izquierda</b>&gt;</td>
           <td><sp/></td>
           <td>move handle left one Space</td>
         </tr>
-      <tr><td>&lt;<b>Right</b>&gt;</td>
+      <tr><td>&lt;<b>Derecha</b>&gt;</td>
           <td/>
           <td>move handle right one Space</td>
         </tr>
-      <tr><td>&lt;<b>Up</b>&gt;</td>
+      <tr><td>&lt;<b>Arriba</b>&gt;</td>
           <td/>
           <td>move handle up one Space</td>
         </tr>
-      <tr><td>&lt;<b>Down</b>&gt;</td>
+      <tr><td>&lt;<b>Abajo</b>&gt;</td>
           <td/>
           <td>move handle down one Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td>
+      <tr><td>&lt;<b>Ctrl+Izquierda</b>&gt;</td>
           <td/>
           <td>move handle left 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td>
+      <tr><td>&lt;<b>Ctrl+Derecha</b>&gt;</td>
           <td/>
           <td>move handle right 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Up</b>&gt;</td>
+      <tr><td>&lt;<b>Ctrl+Arriba</b>&gt;</td>
           <td/>
           <td>move handle up 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Down</b>&gt;</td>
+      <tr><td>&lt;<b>Ctrl+Abajo</b>&gt;</td>
           <td/>
           <td>move handle down 0.1 Space</td>
         </tr>
@@ -344,11 +346,11 @@
     </table>
 
     <br/>
-    See also
-       <a href="textedit.php">Text Editing</a>,
+    Ver también:
+       <a href="textedit.php">Edición de Texto</a>,
        <a href="slurs.php">Slurs</a>,
        <a href="brackets.php">Brackets</a>,
-       <a href="lines.php">Lines</a>.
+       <a href="lines.php">Líneas</a>.
 
     </page>
 
@@ -360,15 +362,14 @@
     <index>Export</index>
     </page>
 
-<page name="fingering" header="Fingering">
-    <index>Fingering</index>
+<page name="fingering" header="Digitaciones">
+    <index>Digitaciones</index>
     <table>
     <tr><td>
-          Fingering can be added to notes by dragging a fingering character
-          from the fingering palette to a note head in the score. Fingerings
-          are normal text which can be <a href="textedit.php">edited</a> like
-          any other text.
       </td>
+      Las digitaciones pueden ser agregadas a las notas arrastrando un caracter
+      desde la paleta de digitaciones a la cabeza de una nota. Las digitaciones
+      son texto normal, que puede ser editado [link] como cualquier otro texto.
       <td>
          <img src="../pic/fingeringspalette.png"/>
          </td>
@@ -376,19 +377,20 @@
       </table>
     </page>
 
-<page name="frames" header="Frames">
-    <index>Frames</index>
-    Frames provide empty space outside of normal measures. They can also contain
-    text or pictures. <i>MuseScore</i> has two kinds of frames:
+<page name="frames" header="Marcos">
+    <index>Marcos</index>
+    Los marcos proveen un espacio vacío fuera de los compases normales. Pueden
+    contener texto o imágenes. <i>MuseScore</i> tiene dos tipos de marcos:
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
     <tr>
        <td valign="top"><b>horizontal</b></td>
        <td><sp/></td>
-       <td>Horizontal frames break a system. The width is adjustable and the
-          height equals the system height. Horizontal frames can be used to
-          separate a coda.
+       <td>
+          Los marcos horizontales rompen un sistema. El ancho es modificable y la
+          altura iguala la altura del sistema. Los marcos horizontales pueden ser
+          usados para separar una Coda.
           </td>
        </tr>
     <tr><td><br/></td></tr>
@@ -396,30 +398,31 @@
        <td valign="top"><b>vertical</b></td>
        <td/>
        <td>
-       Vertical frames provide empty space between or before systems.
-       The height is adjustable and the width equals the system width.
-       Vertical frames are used to place title, subtitle or composer.
-       If you create a title, a vertical frame is placed before the first
-       measure automatically if it is not there already.
+       Los marcos verticales proveen espacio vacío entre o antes de los sistemas.
+       La altura es modificable y el ancho es el mimso que el del sistema. Los marcos
+       verticales son usados para ubicar títulos, subtítulos o compositor. Si creas un
+       título, un marco vertical es ubicado automáticamente antes del primer compás si
+       todavía no fue creado.
        </td>
        </tr>
     </table>
     <br/>
 
-    <h5>Create a frame</h5>
-    First select a measure. The command to insert a frame is found in
-    the menu <b>Create->Measures</b>. The frame is inserted
-    <i>before</i> the selected measure.
+    <h5>Crear un marco</h5>
+    Primero seleccionar un compás. El comando para insertar un marco se encuentra
+    en el menú Crear->Compás. El marco es insertado antes el compás seleccionado.
 
-    <h5>Delete a frame</h5>
-    Select the frame and press &lt;<b>Del</b>&gt;.
+    <h5>Borrar un marco</h5>
+    Seleccionar un marco y presionar &lt;<b>Del</b>&gt;.
 
-    <h5>Edit frame</h5>
-    Double click the frame to enter
-    <a href="editmode.php"><b>edit mode</b></a>. A handle appears which
-    can be used to drag the size of the frame.
+    <h5>Editar un marco</h5>
+    Para entrar en el <a href="editmode.php"><b>modo de edición</b></a> haz doble
+    click sobre el marco. Una asa aparece, y puede ser usada para arrastrar y
+    modificar el tamaño de un marco.
+
     <br/><br/>
-    Title frame in edit mode:<br/><br/>
+    Marco de título en modo edición:
+    <br/><br/>
     <img src="../pic/frame.png"/>
     </page>
 
@@ -459,26 +462,30 @@
     </page>
 
 
-<page name="keys" header="Keys">
-    <index>Keys</index>
+<page name="keys" header="Armadura de clave">
+    <index>Armadura de clave</index>
     <table>
     <tr><td>
-      Key signatures are created or changed by dragging a key symbol
-      from the key palette to a measure or existing key
-      signature.<br/>
-      &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
+      Las armaduras de clave son creadas o cambiadas arrastrando una armadura
+      desde la paleta de armaduars hacia un compás u otra armadura. <br/>
+      <key>F9</key> muestra la ventana de paletas.
       <br/>
-      <b>Change</b><br/>
-      Drag a key from the palette onto a key in the score. You can
-      also drag a key from the score to another key on the score
-      by using &lt;<b>Shift+leftMouseButton+Drag</b>&gt;.<br/>
       <br/>
-      <b>Add</b><br/>
-      Drag a key from the palette onto an empty part of a measure.
-      This creates a key at the beginning of the measure.<br/>
+      <b>Cambiar</b><br/>
+      Arrastrar la armadura desde la paleta hacia la clave de una partitura.
+      También puedes arrastrar la armadura desde una partitura hacia otra
+      armadura en la partitura usando <key>Shift+BotonIzqMouse+Arrastrar</key>.
       <br/>
-      <b>Remove</b><br/>
-      Select a key and press &lt;<b>Del</b>&gt;.
+      <br/>
+      <b>Agregar</b>
+      <br/>
+      Arrastrando una armadura desde la paleta hacia un lugar vacío de un compás,
+      se crea una armadura al comienzo del mismo.
+      <br/>
+      <br/>
+      <b>Quitar</b>
+      <br/>
+      Seleccione una armadura de clave y presiona <key>Supr</key>.
       </td>
       <td>
          <img src="../pic/keypalette.png"/>
@@ -487,8 +494,8 @@
       </table>
     </page>
 
-<page name="lines" header="Lines">
-    <index>Lines</index>
+<page name="lines" header="Líneas">
+    <index>Líneas</index>
     <table>
     <tr><td>
           todo
@@ -500,86 +507,77 @@
       </table>
     </page>
 
-<page name="lyrics" header="Lyrics">
-    <index>Lyrics</index>
+<page name="lyrics" header="Letra">
+    <index>Letra</index>
      <ul>
-        <li>First enter notes</li>
-        <li>Select first note</li>
-        <li>Type <code>&lt;<b>Ctrl+L</b>&gt;</code> and enter lyrics text for
-          first note</li>
-        <li>Type <code>&lt;<b>space</b>&gt;</code> at end of word to go next
-           note</li>
-        <li>Type <code>&lt;<b>-</b>&gt;</code> at end of syllable to go to next note.
-           The syllables are connected with a dash</li>
-        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous note</li>
-        <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-            the lyrics text</li>
-        <li><code>&lt;<b>Ctrl+Minus</b>&gt;</code> enters a <code>&lt;<b>-</b>&gt;</code> into
-            the lyrics text</li>
+        <li>En primer lugar, ingresar las notas.</li>
+        <li>Seleccionar la primera nota.</li>
+        <li>Presionar <key>Ctrl+L</key> e ingresar la letra para la primera nota.</li>
+        <li>Presionar <key>Espacio</key> al final de la palabra para ir a la siguiente nota.</li>
+        <li>Presionar <key>-</key> al final de una sílaba para ir a la siguiente nota.
+           Las sílabas son conectadas con un guión.</li>
+        <li><key>Shift+Espacio</key> cambia a la nota anterior.</li>
+        <li><key>Ctrl+Espacio</key> ingresa un <key>espacio</key> en el texto de la letra.</li>
+        <li><key>Ctrl+Menos</key> ingresa un <key>-</key> en el texto de la letra.</li>
         </ul>
 
       <img src="../pic/lyrics.png" align="center"/>
       <br/>
-      Syllables can be extended by an underline:
+      Las sílabas puede ser extendidas con una línea baja:
       <img src="../pic/lyrics1.png" align="center"/>
       <br/>
-      Entered with: <key>"soul,"</key>
+      Ingresado con: <key>"soul,"</key>
       <key>_</key><key>_</key><key>_</key><key>"To"</key>
       <key>Esc</key>.
       <br/>
       <br/>
-
-      Lyrics can be <a href="textedit.php">edited</a> as normal text.
-
+      La letra puede ser <a href="textedit.php">editada</a> como texto normal.
       <br/>
       <br/>
-      See also
-          <a href="text.php">Text</a><sp/>
-          <a href="chordnames.php">Chord names</a>.
+      Ver también
+          <a href="text.php">Texto</a><sp/>
+          <a href="chordnames.php">Nombres de acordes</a>.
     </page>
 
-<page name="measures" header="Measure Operations">
-    <index>Measure Operations</index>
-    <index>Insert Measure</index>
-    <index>Delete Measure</index>
-    <index>Pickup Measure</index>
+<page name="measures" header="Operaciones de compás">
+    <index>Operaciones de compás</index>
+    <index>Insertar compás</index>
+    <index>Borrar compás</index>
 
-    <h5>Insert Measures</h5>
+    <h5>Insertar compás</h5>
+         Insertar compases Primero selecciona un compás, y luego
+         apreta <key>Ins</key> para insertar un nuevo compás vacío antes
+         del seleccionado.
 
-      First select a measure then press <key>Ins</key> to insert a new empty measure before
-      the selected one.
+    <h5>Borrar compases</h5>
+       Borrar compases Un compás completo puede ser borrado seleccionándolo
+       y apretando <key>Ctrl+Click</key>. El compás es marcado con una linea
+       punteada que indica que se ha seleccionado un "trozo de tiempo".
+       Presiona <key>Shift+Click</key> para extender la selección.
+       Presionar <key>Supr</key> elimina el compás seleccionado.
 
-    <h5>Delete Measures</h5>
-
-      Complete measures can be deleted by first selecting them with <key>Ctrl+Click</key>.
-      The measure is marked with a dotted line indicating that you selected a "piece of time".
-      Press <key>Shift+Click</key> to extend the selection.
-      Pressing <key>Del</key> removes the selected measures.
-
-
-    <h5>Properties</h5>
-
-      To edit the properties of a measure right click on an empty part of the measure and
-      select <b>Measure Properties...</b>.
+    <h5>Propiedades</h5>
+        Duración del compás Normalmente, la duración nominal y real de un compás
+        son idénticas. Un compás débil puede tener una duración real
+        diferente.
 
     <table cellspacing="0" cellpadding="0">
     <tr>
       <td>
-          <b>Measure Duration</b><br/>
-          Normally the nominal and actual duration of a measure is identical.
-          An upbeat can have a different actual duration.
-          <br/><br/>
-
+          <b>Duración del compás</b><br/>
+          Normalmente, la duración nominal y real de un compás
+          son idénticas. Un compás débil puede tener una duración real
+          diferente.
+          <br/>
+          <br/>
           <b>Irregular</b><br/>
-            An "irregular" measure will not be counted. Normally an upbeat
-            is not counted as a regular measure.
-          <br/><br/>
-
-          <b>Repeat Count</b><br/>
-            If the measure is the end of a
-            <a href="repeats.php">repeat</a> you can define how often the
-            repeat should be played.
-
+          Un compás "irregular" no es contado. Normalmente, un compás débil (upbeat)
+          no es contado como regular.
+          <br/>
+          <br/>
+          <b>Repetición</b><br/>
+            Si un compás es el final de una <a href="repeats.php">repetición,</a>
+            es posible definir cuántas veces debe repetirse.
          </td>
       <td valign="top">
          <img src="../pic/measure.png"/>
@@ -685,17 +683,18 @@
 
     </page>
 
-<page name="palette" header="Palettes">
-    <index>Palettes</index>
-    You can drag&amp;drop palette symbols onto score elements.
+<page name="palette" header="Paletas">
+    <index>Paletas</index>
+    Es posible arrastrar y solar los símbolos de las paletas en elementos de la partitura.
     <br/>
     <br/>
-    Double clicking a palette symbol is equivalent to
-    drag&amp;droping this symbol to all selected score elements.
-    For example you can easily put a tenuto on several notes at once:
+    Hacer doble click en un símbolo de una paleta es equivalente a arrastrar y
+    soltar el mismo símbolo en todos los elementos seleccionados de la partitura.
+    Por ejemplo puedes fácilmente poner el símbolo de tenuto en muchas notas a la vez:
+
     <ul>
-          <li>select notes</li>
-          <li>double click on the tenuto symbol in the attributes palette</li>
+          <li>seleccionar notas,</li>
+          <li>doble click en el símbolo de tenuto, en la paleta de atributos.</li>
     </ul>
 
     </page>
@@ -704,77 +703,76 @@
     <index>Pictures</index>
     </page>
 
-<page name="playmode" header="Play Mode">
-    <index>Play Mode</index>
-    <i>MuseScore</i> has an integrated sequencer and synthesizer to play
-    your score.<br/>
-    By pressing the &lt;<b>Play</b>&gt; button you enter &lt;<i>Play</i>&gt;
-    mode. In &lt;<i>Play</i>&gt; mode the following commands are
-    available:<br/>
+<page name="playmode" header="Modo de Reproducción">
+    <index>Modo de Reproducción</index>
+     <i>MuseScore</i> tiene integrado un sequenciador y un sintetizador para
+     reproducir tu partitura. Presionando el botón <key>Play</key> ingresas al
+     modo de reproducción. En este modo los siguientes comandos están disponibles:
+
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Space</b>&gt;</td><td>toggle stop/play</td></tr>
-    <tr><td>&lt;<b>Left</b>&gt;</td><td> seek to previous chord</td></tr>
-    <tr><td>&lt;<b>Right</b>&gt;</td><td> seek to next chord</td></tr>
-    <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td><td> seek to previous measure</td></tr>
-    <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td><td> seek to next measure</td></tr>
-    <tr><td>&lt;<b>Home</b>&gt;</td><td>rewind to start of score</td></tr>
-    <tr><td>&lt;<b>F11</b>&gt;</td><td>toggle show play panel</td></tr>
+    <tr><td><key>Espacio</key></td><td>alterna stop/play</td></tr>
+    <tr><td><key>Izquierda</key></td><td>busca el acorde previo</td></tr>
+    <tr><td><key>Derecha</key></td><td>busca el acorde siguiente</td></tr>
+    <tr><td><key>Ctrl+Izquierda</key></td><td>busca el compás previo</td></tr>
+    <tr><td><key>Ctrl+Derecha</key></td><td>busca el compás siguiente</td></tr>
+    <tr><td><key>Inicio</key></td><td>retrocede al inicio de la partitura</td></tr>
+    <tr><td><key>F11</key></td><td>alterna mostrar el panel de reproducción</td></tr>
     </table>
     <br/>
-
     <br/>
-    If you want to play instruments other than piano you have to
-    change the <i>MuseScore</i> integrated <i>SoundFont</i> with a more
-    capable one in the <i>I/O</i> tab of the <i>Preferences</i> menu.
-
+    Si quieres tocar otro instrumento que no sea el piano, tienes que
+    cambiar el "<i>SoundFont</i>" integrado en <i>MuseScore</i> por uno más
+    versátil en el menú Preferencias.
     </page>
 
-<page name="repeats" header="Repeats">
-    <index>Repeats</index>
-    The start and end of simple repeats can be defined by setting
-    appropriate <a href="barlines.php">bar lines</a>.
-    In the last measure of a repeat you can set the
-    <a href="measures.php">property</a> "Repeat Count" to define
-    the number of played repeats.
+<page name="repeats" header="Repetir">
+    <index>Repetir</index>
+    Los comienzos y finalizaciones de repeticiones simples pueden ser definidos
+    usando las <a href="barlines.php">barras</a> apropiadas.
+    <br/>
+    En el último compás de una repetición
+    es posible elegir la <a href="measures.php">propiedad</a> "Cant. repeticiones"
+    para definir el  número de repeticiones.
     <br/>
     <br/>
-    See also: <a href="volta.php">Volta</a> for first and second endings
+    Ver también: <a href="volta.php">Volta</a>.
     </page>
 
-<page name="slurs" header="Slurs">
-    <index>Slurs</index>
+<page name="slurs" header="Legatos">
+    <index>Legatos</index>
     <table>
     <tr>
-      <td>select first note:</td>
+      <td>Selecciona primero una nota:</td>
       <td><img src="../pic/slur1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>S</b>&gt; creates a slur<br/>in <a href="editmode.php">edit mode</a>:</td>
+      <td><key>S</key> en el modo edición crea un legato:</td>
       <td><img src="../pic/slur2.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Shift+Right</b>&gt; moves the slur<br/> end to the next note:</td>
+      <td><key>Shift+Derecha</key> mueve el final del legato a la siguiente nota: </td>
       <td><img src="../pic/slur3.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>X</b>&gt; flips the slur direction:</td>
+      <td>&lt;<b>X</b>&gt; invierte la dirección del legato:</td>
       <td><img src="../pic/slur4.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Escape</b>&gt; ends edit mode:</td>
+      <td>&lt;<b>Escape</b>&gt; sale del modo de edición:</td>
       <td><img src="../pic/slur5.png" align="center"/></td>
       </tr>
     </table>
 
     <br/>
-    A slur can span several systems and pages. Slur start and end is anchored to
-    a note/chord or rest. This means that if the notes move in a relayout,
-    the slur moves to.<br/>
+    Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
+    a una nota, acorde, o silencio. Por lo tanto, al mover una nota, el legato también
+    se mueve.
     <br/>
-    See also
-          <a href="ties.php">Ties</a>,
-          <a href="editmode.php">Edit Mode</a>.
+    <br/>
+    Ver también
+          <a href="ties.php">Ligaduras</a>,
+          <a href="editmode.php">Modo de edición</a>.
     </page>
 
 <page name="soundfont" header="Sound Font">
@@ -813,42 +811,43 @@
     Note: Tempo text in the score will override a tempo setting in the play panel.
     </page>
 
-<page name="textedit" header="Text Editing">
-    <index>Text Editing</index>
-      Double click on text to enter <i>edit mode</i>:
-      <img src="../pic/textedit.png" align="center"/><br/>
-      <br/>
-      In text edit mode the following commands are available:
+<page name="textedit" header="Edición de Texto">
+    <index>Edición de Texto</index>
 
+      Doble click sobre el texto para entrar al <i>modo de edición</i>:
+      <img src="../pic/textedit.png" align="center"/>
+      <br/>
+      <br/>
+      En el modo de edición de texto los siguientes comandos están disponibles:
       <ul>
-        <li><code>&lt;<b>Ctrl+B</b>&gt;</code> toggles bold face</li>
-        <li><code>&lt;<b>Ctrl+I</b>&gt;</code> toggles italic</li>
-        <li><code>&lt;<b>Ctrl+U</b>&gt;</code> toggles underline</li>
-        <li><code>&lt;<b>Up</b>&gt;</code> start superscript or end subscript if in
-            subscript mode</li>
-        <li><code>&lt;<b>Down</b>&gt;</code> start subscript or end superscript if in
-           superscript mode</li>
-        <li>move cursor: <code>&lt;<b>Home</b>&gt; &lt;<b>End</b>&gt; &lt;<b>Left</b>&gt;
-           &lt;<b>Right</b>&gt;</code></li>
-        <li><code>&lt;<b>Backspace</b>&gt;</code> remove character to the left of the cursor</li>
-        <li><code>&lt;<b>Delete</b>&gt;</code> remove character to the right of the cursor</li>
-        <li><code>&lt;<b>Return</b>&gt;</code> start new line</li>
-        <li><code>&lt;<b>F2</b>&gt;</code> Show text palette. The text palette
-            can be used to enter special characters and symbols.</li>
+        <li><key>Ctrl+B</key> alterna negrita</li>
+        <li><key>Ctrl+I</key> alterna cursiva</li>
+        <li><key>Ctrl+U</key> alterna subrayado</li>
+        <li><key>Arriba</key> comienza superscript o termina subscript si está en modo subscript</li>
+        <li><key>Abajo</key> comienza subscript o termina superscript si está en modo superscript</li>
+        <li>mover el cursor: <key>Inicio</key> <key>Fin</key> <key>Izquierda</key>
+           <key>Derecha</key></li>
+        <li><key>Backspace</key> borra el caracter a la izquierda del cursor</li>
+        <li><key>Delete</key> borra el caracter a la derecha del cursor</li>
+        <li><key>Return</key> empieza nueva línea</li>
+        <li><key>F2</key> Muestra la paleta de texto. Ésta puede ser usada para insertar
+           caracteres y símbolosespeciales.</li>
         </ul>
 
-          See also:
-                <a href="chordnames.php">Chord Names</a>,
-                <a href="lyrics.php">Lyrics</a>
+        Ver también:
+                <a href="chordnames.php">Acordes</a>,
+                <a href="lyrics.php">Letras</a>
 
     </page>
 
-<page name="text" header="Text">
-    <index>Text</index>
-    Text elements are created from a <i>Text Style</i>. This style defines
-    the initial properties of text.
+<page name="text" header="Texto">
+    <index>Texto</index>
+
+    Los elementos de texto son creados desde un <i>Estilo de Texto</i>.
+    Este estilo define las propiedades iniciales del texto.
+
     <br/>
-    <h5>Text properties:</h5>
+    <h5>Propiedades de texto:</h5>
     <table cellspacing="0" cellpadding="0">
     <tr><td><b>font family</b></td>
         <td><sp/></td>
@@ -880,7 +879,7 @@
         </tr>
     </table>
     <br/>
-    <h5>Text types:</h5>
+    <h5>Tipos de texto:</h5>
     <table cellspacing="0" cellpadding="0">
     <tr><td><b>title, subtitle,<br/>composer, poet</b></td>
         <td><sp/></td>
@@ -1034,77 +1033,78 @@
     <img src="../pic/volta4.png" align="center"/>
     </page>
 
-<page name="rest" header="One-bar rests">
-    <index>One-bar rests</index>
-    When an entire measure is devoid of notes, a full measure (semibreve) rest is
-    used.<br/>
-    A one-bar rest can be created by marking a measure and pressing <key>Del</key>.
-    All notes and rests on this measure are then replaced by a one-bar rest.
+<page name="rest" header="Silencio de un compás">
+    <index>Silencio de un compás</index>
+    Cuando un compás completo no posee ntoas, un silencio de blanca es usado.
+    Un silencio de un compás puede ser creado marcando el compás y
+    presionando <key>Supr</key>. Todas las notas y silencios en este copás
+    serán reemplazados por un silencio con la duración de todo el compás.
     </page>
 
-<page name="hairpins" header="Hairpins">
+<page name="hairpins" header="llaves de dinámica">
     <index>Crescendo</index>
     <index>Diminuendo</index>
     <index>Decrescendo</index>
-    <index>Hairpins</index>
+    <index>llaves de dinámica</index>
 
-    Hairpins are <a href="lines.php">line</a> objects.
+    Las llaves de dinámica son objetos de <a href="lines.php">línea</a>.
     <br/>
     <br/>
-    To create a hairpin first select a note to mark the start point.
+    Para crear una llave de dinámica, primero selecciona la primera nota para
+    marcar el punto de inicio.
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
       <tr>
             <td><key>H</key></td>
-            <td><sp/>create a crescendo hairpin</td>
+            <td><sp/> crea una llave de dinámica de crescendo</td>
             </tr>
       <tr>
             <td><key>Shift+H</key></td>
-            <td><sp/>create a diminuendo hairpin (decrescendo)</td>
+            <td><sp/>crea una llave de dinámica de decrescendo</td>
             </tr>
       </table>
     <br/>
-    Hairpins could also be created by dragging a hairpin symbol from the line palette
-    to a note head.
+    Las llaves de dinámica pueden ser también creadas al arrastrar el símbolo
+    correspondiente de la paleta de líneas a la cabeza de una nota.
     <br/>
     <br/>
 
     <table>
     <tr>
-      <td><key>H</key> create a crescendo hairpin:</td>
+      <td><key>H</key>crea una llave de dinámica de crescendo:</td>
       <td><img src="../pic/hairpin1.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>double click</key> switch to edit mode:</td>
+      <td><key>double click</key>cambia al modo edición: </td>
       <td><img src="../pic/hairpin2.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>Shift+right</key> move end anchor:</td>
+      <td><key>Shift+derecha</key>mueve el ancla final: </td>
       <td><img src="../pic/hairpin3.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>right</key> move end point:</td>
+      <td><key>derecha</key>mueve el punto final: </td>
       <td><img src="../pic/hairpin4.png" align="center"/></td>
       </tr>
     </table>
     </page>
 
-<page name="crossbeams" header="Cross staff beaming">
-    <index>Cross staff beaming</index>
-
-      In piano scores it is common to use both staves (bass and treble clef)
-      to write a musical phrase.<br/>
-      This can be entered in <i>MuseScore</i> as follows:
+<page name="crossbeams" header="Frase cruzando entre pentagramas">
+    <index>Frase cruzando entre pentagramas</index>
+      En partituras de piano, es común usar ambos pentagramas
+      (clave de bajo y agudo) para escribir una frase musical.<br/>
+      Esto puede ser realizado en <i>MuseScore</i> como sigue:
 
     <table>
     <tr>
-      <td>First enter all notes<br/>in one staff:</td>
+      <td>Primero ingrese todas las notas en un pentagrama:<br/>in one staff:</td>
       <td><img src="../pic/crossbeams1.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>Shift+Ctrl+Down</key> moves the selected <br/>
-          note or chord to the next staff</td>
+      <td>Utilizando <key>Shift+Ctrl+Down</key>, se mueve la nota o acorde
+          al siguiente pentagrama.
+          </td>
       <td><img src="../pic/crossbeams2.png" align="center"/></td>
       </tr>
     </table>
