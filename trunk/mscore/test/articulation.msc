@@ -116,27 +116,27 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">V1ns. 1</p></body></html>
       </shortName>
     <Instrument>
-      <Articulation>
+      <Channel>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="64"/>
         <controller ctrl="93" value="30"/>
         <controller ctrl="91" value="30"/>
-        </Articulation>
-      <Articulation name="pizzicato">
+        </Channel>
+      <Channel name="pizzicato">
         <program value="45"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="64"/>
         <controller ctrl="93" value="30"/>
         <controller ctrl="91" value="30"/>
-        </Articulation>
-      <Articulation name="tremolo">
+        </Channel>
+      <Channel name="tremolo">
         <program value="44"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="64"/>
         <controller ctrl="93" value="30"/>
         <controller ctrl="91" value="30"/>
-        </Articulation>
+        </Channel>
       </Instrument>
     </Part>
   <Slur id="1">

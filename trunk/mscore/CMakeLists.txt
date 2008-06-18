@@ -32,9 +32,9 @@ if (MINGW)
 endif (MINGW)
 
 # build qt script bindings
-# this requires qt >= 4.4
+# this requires qt >= 4.4 and cmake 2.6
 
-set(BUI5LD_SCRIPT_INTERFACE FALSE)
+set(BUILD_SCRIPT_INTERFACE FALSE)
 #set(BUILD_SCRIPT_INTERFACE TRUE)
 
 set(BUILD_SCRIPT_DEBUG FALSE)

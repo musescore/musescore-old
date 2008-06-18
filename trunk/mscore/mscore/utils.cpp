@@ -347,7 +347,6 @@ int quantizeLen(int, int len, int raster)
 //   curTime
 //---------------------------------------------------------
 
-#ifndef __MINGW32__
 double curTime()
       {
 #ifdef __MINGW32__
@@ -360,7 +359,6 @@ double curTime()
       return double(t.tv_sec) + double(t.tv_nsec) / 1000000000.0;
 #endif
       }
-#endif
 
 //---------------------------------------------------------
 //   selectNoteMessage
