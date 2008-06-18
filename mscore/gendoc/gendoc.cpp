@@ -122,12 +122,19 @@ void genIndex(const QString& of, const QList<Index> lst, int lang)
       os << "  $level=\"../..\";";
       os << "  require(\"../header.html\");\n";
       os << "  ?>\n";
-      if (lang == 0)
-            os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Dokumentation</a> -- Index</h4>\n";
-      else
-            os << "<h4><a href=\"idx.php\">MuseScore</a> -- <a href=\"manual.php\">Documentation</a> -- Index</h4>\n";
-      os << "<table>\n";
+      switch (lang) {
+            case 0:
+                  os << "<h4><a href=\"../idx.php\">MuseScore</a> -- <a href=\"../manual.php\">Dokumentation</a> -- Index</h4>\n";
+                  break;
+            case 1:
+                  os << "<h4><a href=\"../idx.php\">MuseScore</a> -- <a href=\"../manual.php\">Documentation</a> -- Index</h4>\n";
+                  break;
+            case 2:     // spain
+                  os << QString::fromUtf8("<h4><a href=\"../../en/idx.php\">MuseScore</a> -- <a href=\"../manual.php\">Documentación</a> -- Índice</h4>\n");
+                  break;
+            }
 
+      os << "<table>\n";
       int columns = 3;
       int rows    = (lst.size() + columns - 1) / columns;
 
@@ -366,6 +373,11 @@ void genPage(const QString& dir, QDomElement e, int lang)
                    "<a href=\"../manual.php\">Documentation</a> -- "
                    "<a href=\"reference.php\">Index</a> -- %1</h4>\n").arg(header);
             }
+      else if (lang == 2) {
+            xml << QString::fromUtf8("<h4><a href=\"../../en/idx.php\">MuseScore</a> -- "
+                   "<a href=\"../manual.php\">Documentación</a> -- "
+                   "<a href=\"reference.php\">Índice</a> -- %1</h4>\n").arg(header);
+            }
 
       QDomNode ee = e;
       for (ee = ee.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
@@ -380,7 +392,6 @@ void genPage(const QString& dir, QDomElement e, int lang)
                         genHtml(ee.toElement(), xml);
                   }
             }
-
       xml << "<?php require(\"../trailer.html\");  ?>\n";
       qf.close();
       }
