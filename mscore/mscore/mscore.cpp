@@ -292,7 +292,7 @@ MuseScore::MuseScore()
          << "rewind" << "play" << "pause" <<"repeat"
          << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
          << "seek-begin" << "seek-end"
-         << "load-style" << "save-style" << "select-all" << "transpose"
+         << "load-style" << "save-style" << "select-all" << "transpose" << "concert-pitch"
          << "reset-beammode"
          << "clef-violin" << "clef-bass"
          << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
@@ -597,6 +597,9 @@ MuseScore::MuseScore()
 
       menuNotes->addSeparator();
       menuNotes->addAction(getAction("transpose"));
+      a = getAction("concert-pitch");
+      a->setCheckable(true);
+      menuNotes->addAction(a);
 
       //---------------------
       //    Menu Layout
@@ -1228,6 +1231,8 @@ void MuseScore::setCurrentScore(int idx)
 
       cs->setLayoutAll(true);
       cs->end();
+      QAction* a = getAction("concert-pitch");
+      a->setChecked(cs->style()->concertPitch);
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       }
