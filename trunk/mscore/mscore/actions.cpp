@@ -1594,6 +1594,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("exchange voice 3-4"),
          QT_TR_NOOP("exchange voice 3-4")
          ),
+      Shortcut (
+         STATE_NORMAL,
+         "concert-pitch",
+         QT_TR_NOOP("display in concert pitch"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Display in Concert Pitch"),
+         QT_TR_NOOP("Display in Concert Pitch")
+         ),
       Shortcut(0, 0, 0),
       };
 

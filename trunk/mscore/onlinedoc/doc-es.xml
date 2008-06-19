@@ -881,10 +881,14 @@
     <br/>
     <h5>Tipos de texto:</h5>
     <table cellspacing="0" cellpadding="0">
-    <tr><td><b>title, subtitle,<br/>composer, poet</b></td>
-        <td><sp/></td>
-        <td>anchored to page</td>
-        </tr>
+    <tr>
+      <td>
+        <b>title, subtitle,<br/>
+        composer, poet</b>
+        </td>
+      <td><sp/></td>
+      <td>anchored to page</td>
+      </tr>
     <tr><td><a href="fingering.php"><b>fingering</b></a></td>
         <td/>
         <td>Fingerings are anchored to note heads.</td>
@@ -901,33 +905,34 @@
 
     </page>
 
-<page name="ties" header="Ties">
-    <index>Ties</index>
+<page name="ties" header="Ligaduras">
+    <index>Ligaduras</index>
 
     <table>
     <tr>
-      <td>select first note:</td>
+      <td>selecciona la primera nota:</td>
       <td><img src="../pic/tie1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Shift+S</b>&gt; creates a tie:</td>
+      <td>&lt;<b>Shift+S</b>&gt; crea un lazo:</td>
       <td><img src="../pic/tie2.png" align="center"/></td>
       </tr>
     </table>
 
     <br/>
-    When in note entry mode you can press &lt;<b>+</b>&gt; before
-    entering the first note to create a tie to the next note.<br/>
+    Dentro del modo de ingreso de notas, puedes presionar <key>+</key>
+    antes de ingresar la primera nota para crear un lazo hasta la nota siguiente.
     <br/>
-    See also <a href="slurs.php">Slurs</a>.
+    <br/>
+    Ver también <a href="slurs.php">Legato</a>.
 
     </page>
 
-<page name="timesig" header="Time Signature">
-    <index>Time Signature</index>
+<page name="timesig" header="Tipo de compás">
+    <index>Tipo de compás</index>
     <table>
     <tr><td>
-          todo
+          To do
       </td>
       <td>
          <img src="../pic/timepalette.png"/>
@@ -961,14 +966,16 @@
     </table>
     </page>
 
-<page name="undo" header="Undo/Redo">
-    <index>Undo/Redo</index>
-    <i>MuseScore</i> has unlimited undo/redo functions.<br/>
-    The standard shortcuts are:<br/>
+<page name="undo" header="Deshacer/Rehacer">
+    <index>Deshacer/Rehacer</index>
+
+    <i>MuseScore</i> tiene ilimitadas funciones de deshacer/rehacer.
+    Los atajos estandar son:
+    <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Ctrl+Z</b>&gt;</td><td>Undo</td></tr>
-    <tr><td>&lt;<b>Ctrl+Shift+Z</b>&gt;</td><td>Redo</td></tr>
+    <tr><td>&lt;<b>Ctrl+Z</b>&gt;</td><td>Deshacer</td></tr>
+    <tr><td>&lt;<b>Ctrl+Shift+Z</b>&gt;</td><td>Rehacer</td></tr>
     </table>
     </page>
 
@@ -978,51 +985,46 @@
 
 <page name="volta" header="Volta">
     <index>Volta</index>
-    Volta brackets are used to mark different endings in a repeat:
+    Los corchetes de Volta son usados para marcar diferentes finales
+    en una repetición:
     <br/>
     <br/>
     <img src="../pic/volta.png" align="center"/>
-    <br/><br/>
-
-    Volta brackets can be place on the score by drag&amp;droping from the
-    <a href="palette.php">lines palette</a>.
     <br/>
     <br/>
-    The brackets can span more than one measure. Double click the volta to
-    enter <a href="editmode.php">edit mode</a> and then move the handles
-    with:
+    Los corchetes pueden abarcar más de un compás. Para editar una
+    volta, hacer doble click para entrar en el modo edición,
+    y luego mover los extremos con:
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Shift+Right</b>&gt;</td><td><sp/>one measure left</td></tr>
-    <tr><td>&lt;<b>Shift+Left</b>&gt;</td><td><sp/>one measure right</td></tr>
+    <tr><td><key>Shift+Derecha</key></td><td><sp/>un compás hacia la izquierda</td></tr>
+    <tr><td><key>Shift+Izquierda</key></td><td><sp/>un compás hacia de derecha</td></tr>
     </table>
     <br/>
-    This commands move the "logical" start or end of the volta which determine
-    the bracketed measures.
-    Other commands in <a href="editmode.php">edit mode</a> also move the
-    handles but do not change how the repeat is played.
-
-    If you move the handles, a dashed line from the logical position to
-    the actual position is shown
-
+    Estos comandos mueven el principio o final "lógico" de la volta. Otros comandos
+    en modo edición también mueven los extremos pero no cambian cómo la repetición
+    es interpretada. Si se mueven los extremos, una línea punteada desde la posición
+    lógica a la posición real es mostrada:
     <br/><br/>
     <img src="../pic/volta2.png" align="center"/>
     <br/><br/>
 
-    <h5>Properties</h5>
+    <h5>Propiedades</h5>
 
     <table cellspacing="0" cellpadding="0">
     <tr>
       <td>
-          <b>Repeat List</b><br/>
-          This list determines which repeat the volta should be played.
-          If the volta is played in more than one repeat all repeat numbers
-          must be listed and separated by a comma (",").
-          <br/><br/>
-          <b>Text</b><br/>
-          You can set an arbitrary volta text. Of course the text
-          should correspond with the repeat list.
+          <b>Lista de repetición</b><br/>
+          Esta lista determina en qué repetición la volta debe ser interpretada.
+          Si la volta es interpretada en más de una repetición, los números de
+          repetición deben ser ingresados separados con una ",".
+          <br/>
+          <br/>
+          <b>Texto</b>
+          <br/>
+          Es posible ingresar un texto de volta arbitrario. Por supuesto el texto
+          debe corresponderse con una lista de repetición.
          </td>
       <td valign="top">
          <img src="../pic/volta3.png"/>
@@ -1116,17 +1118,21 @@
 
 <page name="tremolo" header="Tremolo">
     <index>Tremolo</index>
-
-      Tremolo is the rapid repetition of one note or a rapid alternation
-      between two or more notes. It is indicated by strokes through the stems
-      of the notes. If the tremolo is between two or more notes, the bars
-      are drawn between them.<br/>
-      There are separate symbols for one note and two note tremoli in the
-      tremolo palette.
+      El trémolo es la rápida repetición de una nota o una alternancia veloz
+      entre dos o más notas. Es indicado mediante líneas a traves de las
+      plicas de las notas. Si el trémolo es entre dos o más notas, las
+      barras se dibujan entre ellas.
       <br/>
-      In a two note tremolo every note has the value of the whole tremolo
-      duration. To enter a tremolo with the duration of a half note (minum)
-      first enter two normal quarter notes (quavers). After dragging a
+      En la paleta de trémolo hay símbolos separados para una nota y dos notas.
+      <br/>
+      Cuando el trémolo es entre dos notas, cada nota tiene el valor de
+      la duración total del trémolo. Para ingresar un trémolo con una duración
+      de la mitad de la nota, primero ingrese dos cuartos de notas normales.
+      Después de arrastrar el símbolo de trémolo a la primera nota, el valor de
+      las notas automaticamente se duplican en medias notas.
+      <br/>
+      <br/>
+      After dragging a
       tremolo symbol to the first note the note values automatically double
       to half notes.
     </page>
