@@ -71,7 +71,7 @@
           mode</a>).
           </td>
         <td>
-          <img src="../pic/grandstaff0.png" width="322" height="159"/>
+          <img src="../pic/grandstaff0.png"/>
           </td>
       </tr>
 
@@ -82,7 +82,7 @@
           mode.
           </td>
         <td>
-          <img src="../pic/grandstaff1.png" width="322" height="159"/>
+          <img src="../pic/grandstaff1.png"/>
           </td>
       </tr>
     </table>
@@ -692,10 +692,10 @@
     soltar el mismo símbolo en todos los elementos seleccionados de la partitura.
     Por ejemplo puedes fácilmente poner el símbolo de tenuto en muchas notas a la vez:
 
-    <ul>
+    <ol>
           <li>seleccionar notas,</li>
           <li>doble click en el símbolo de tenuto, en la paleta de atributos.</li>
-    </ul>
+    </ol>
 
     </page>
 
@@ -793,14 +793,14 @@
     <br/>
     <h5>Play panel</h5>
     <ul>
-      <li>Display the play panel: Display --&gt; Play Panel (F11)</li>
+      <li>Display the play panel: Display --&gt; Play Panel</li>
       <li>Change the Beats per Minute (bpm) using the Tempo (Tmp) slider</li>
     </ul>
     <br/>
     <h5>Tempo text</h5>
     <ul>
       <li>Select a note to indicate where the tempo text should be created</li>
-      <li>From the main menu: Create --&gt; Text... --&gt; Tempo... (Ctr+Alt+T)</li>
+      <li>From the main menu: Create --&gt; Text... --&gt; Tempo...</li>
       <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
       <li>Press OK to finish</li>
     </ul>

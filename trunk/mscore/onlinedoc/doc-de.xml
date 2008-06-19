@@ -762,10 +762,10 @@
     Element auf alle selektierten Elemente der Partitur gezogen würde.
     Damit können z.B. auf einfache Weise gleiche mehrere Noten mit einem
     Tenuto-Zeichen versehen werden:
-    <ul>
+    <ol>
           <li>Noten selektieren</li>
           <li>Doppelclick auf das Tenuto Symbol der Attribute-Palette</li>
-    </ul>
+    </ol>
 
     </page>
 

@@ -12,7 +12,7 @@
           <br/>
       </td>
       <td>
-         <img src="../pic/accidentalspalette.png"/>
+         <img src="../pic/accidentalspalette.png" alt="Accidentals palette"/>
          </td>
       </tr>
       </table>
@@ -42,14 +42,14 @@
           to a note of a chord.
       </td>
       <td>
-         <img src="../pic/arpeggiopalette.png"/>
+         <img src="../pic/arpeggiopalette.png" alt="Arpeggios palette"/>
          </td>
       </tr>
       </table>
     </page>
 
-<page name="barlines" header="Barlines">
-    <index>Bar line</index>
+<page name="barlines" header="Bar Line">
+    <index>Bar Line</index>
     <h5>Change bar line type</h5>
     <table>
       <tr>
@@ -58,7 +58,7 @@
           bar line palette to an bar line in the score.
           </td>
         <td>
-          <img src="../pic/barlinepalette.png"/>
+          <img src="../pic/barlinepalette.png" alt="Bar Line palette"/>
           </td>
       </tr>
     </table>
@@ -72,7 +72,7 @@
           mode</a>).
           </td>
         <td>
-          <img src="../pic/grandstaff0.png" width="322" height="159"/>
+          <img src="../pic/grandstaff0.png" alt="Bar Line edit mode"/>
           </td>
       </tr>
 
@@ -83,7 +83,7 @@
           mode.
           </td>
         <td>
-          <img src="../pic/grandstaff1.png" width="322" height="159"/>
+          <img src="../pic/grandstaff1.png" alt="Grand staff"/>
           </td>
       </tr>
     </table>
@@ -108,25 +108,25 @@
 
       </td>
       <td>
-         <img src="../pic/beampalette.png"/>
+         <img src="../pic/beampalette.png" alt="Beam pallete"/>
          </td>
       </tr>
       </table>
 
     <table cellpadding="0" cellspacing="0">
-      <tr><td><img src="../pic/beambutton1.png"/></td>
+      <tr><td><img src="../pic/beambutton1.png" alt="Start beam button"/></td>
         <td><sp/></td>
         <td>Start a beam at this note.</td>
         </tr>
-      <tr><td><img src="../pic/beambutton2.png"/></td>
+      <tr><td><img src="../pic/beambutton2.png" alt="Middle of beam button"/></td>
         <td/>
         <td>Do not end a beam a this note.</td>
         </tr>
-      <tr><td><img src="../pic/beambutton3.png"/></td>
+      <tr><td><img src="../pic/beambutton3.png" alt="No beam button"/></td>
         <td/>
         <td>Do not beam this note.</td>
         </tr>
-      <tr><td><img src="../pic/beambutton4.png"/></td>
+      <tr><td><img src="../pic/beambutton4.png" alt="Second level beam button"/></td>
         <td/>
         <td>Start a second level beam at this note.</td>
         </tr>
@@ -152,7 +152,7 @@
           bracket in the score.<br/>
           </td>
       <td>
-         <img src="../pic/bracketspalette.png"/>
+         <img src="../pic/bracketspalette.png" alt="Brackets pallet"/>
          </td>
       </tr>
       </table>
@@ -177,7 +177,7 @@
           The visible break marks will not be printed of course.
       </td>
       <td>
-         <img src="../pic/breakspalette.png"/>
+         <img src="../pic/breakspalette.png" alt="Breaks palette"/>
          </td>
       </tr>
       </table>
@@ -192,12 +192,12 @@
           the note.
       </td>
       <td>
-         <img src="../pic/breathpalette.png"/>
+         <img src="../pic/breathpalette.png" alt="Breath palette"/>
          </td>
       </tr>
       </table>
 
-    Breath symbol in score: <img src="../pic/breath.png" align="center"/>
+    Breath symbol in score: <img src="../pic/breath.png" alt="Sample breath mark"/>
     </page>
 
 <page name="chordnames" header="Chord Names">
@@ -242,7 +242,7 @@
       Select a clef and press &lt;<b>Del</b>&gt;.
       </td>
       <td>
-         <img src="../pic/clefpalette.png"/>
+         <img src="../pic/clefpalette.png" alt="Clefs palette"/>
          </td>
       </tr>
       </table>
@@ -263,7 +263,7 @@
           Example drum notation:
       </td>
       <td>
-         <img src="../pic/drum1.png"/>
+         <img src="../pic/drum1.png" alt="Sample drum notation"/>
          </td>
       </tr>
       </table>
@@ -295,7 +295,7 @@
     Some elements show <i>handles</i> in edit mode which can be
     moved by mouse dragging or keyboard commands.<br/>
     <br/>
-    <a href="slurs.php">Slur</a> in edit mode: <img src="../pic/slur4.png" align="center"/><br/>
+    <a href="slurs.php">Slur</a> in edit mode: <img src="../pic/slur4.png" alt="Sample slur in edit mode"/><br/>
     <br/>
     Available keyboard commands:<br/>
     <br/>
@@ -365,7 +365,7 @@
           any other text.
       </td>
       <td>
-         <img src="../pic/fingeringspalette.png"/>
+         <img src="../pic/fingeringspalette.png" alt="Fingering palette"/>
          </td>
       </tr>
       </table>
@@ -415,7 +415,7 @@
     can be used to drag the size of the frame.
     <br/><br/>
     Title frame in edit mode:<br/><br/>
-    <img src="../pic/frame.png"/>
+    <img src="../pic/frame.png" alt="Horizontal frame"/>
     </page>
 
 <page name="gracenotes" header="Grace notes">
@@ -472,7 +472,7 @@
       Select a key and press &lt;<b>Del</b>&gt;.
       </td>
       <td>
-         <img src="../pic/keypalette.png"/>
+         <img src="../pic/keypalette.png" alt="Keys palette"/>
          </td>
       </tr>
       </table>
@@ -485,7 +485,7 @@
           todo
       </td>
       <td>
-         <img src="../pic/linepalette.png"/>
+         <img src="../pic/linepalette.png" alt="Lines palette"/>
          </td>
       </tr>
       </table>
@@ -509,10 +509,10 @@
             the lyrics text</li>
         </ul>
 
-      <img src="../pic/lyrics.png" align="center"/>
+      <img src="../pic/lyrics.png" alt="Sample lyrics"/>
       <br/>
       Syllables can be extended by an underline:
-      <img src="../pic/lyrics1.png" align="center"/>
+      <img src="../pic/lyrics1.png" alt="Syllable extension line"/>
       <br/>
       Entered with: <key>"soul,"</key>
       <key>_</key><key>_</key><key>_</key><key>"To"</key>
@@ -573,7 +573,7 @@
 
          </td>
       <td valign="top">
-         <img src="../pic/measure.png"/>
+         <img src="../pic/measure.png" alt="Measure Properties dialog"/>
          </td>
       </tr>
     </table>
@@ -581,9 +581,9 @@
     </page>
 
 
-<page name="newscore" header="Create new Score from Scratch">
-    <index>Create new Score</index>
-    <h5>Create new Score from Scratch</h5>
+<page name="newscore" header="Create New Score">
+    <index>Create New Score</index>
+    <h5>Create New Score from Scratch</h5>
     The menu entry &lt;<b>Score->New</b>&gt; creates an empty
     new score. First you have to populate the empty sheet with instruments and
     then you can add empty measures.
@@ -601,14 +601,14 @@
           <a href="timesig.php">set time signature</a>.
 
 
-    <h5>Create new Score from Template</h5>
+    <h5>Create New Score from Template</h5>
 
     &lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
     template and click &lt;<b>OK</b>&gt;. This is the simplest way to create
     a new score. Note that template files are normal <i>MuseScore</i> files
     stored in the template folder.
 
-    <h5>Create new Score with the New Wizard</h5>
+    <h5>Create New Score with the New Wizard</h5>
     </page>
 
 <page name="noteentry" header="Enter Notes">
@@ -643,25 +643,25 @@
     <br/>
     <table>
     <tr>
-      <td>Notes are entered by pressing<br/>&lt;<b>C D E F G A B</b>&gt;:</td>
-      <td><img src="../pic/noteentry1.png" align="center"/></td>
+      <td>Notes are entered by pressing<br/>&lt;<b>C D E F G A B C</b>&gt;:</td>
+      <td><img src="../pic/noteentry1.png" alt="Notes: C, D, E, F, G, A, B, C"/></td>
     </tr>
     <tr>
       <td>&lt;<b>Space</b>&gt; creates a rest<br/>&lt;<b>C D Space E</b>&gt;:</td>
-      <td><img src="../pic/noteentry2.png" align="center"/></td>
+      <td><img src="../pic/noteentry2.png" alt="C, D, rest, E"/></td>
       </tr>
     <tr>
       <td>Notes are added to chords by
           pressing &lt;<b>Shift+Notename</b>&gt;<br/>
           &lt;<b>C D Shift+F Shift+A E F</b>&gt;:
           </td>
-      <td><img src="../pic/noteentry3.png" align="center"/></td>
+      <td><img src="../pic/noteentry3.png" alt="C, D minor triad, E, F"/></td>
       </tr>
     <tr>
       <td>Beams are created automatically<br/>
           &lt;<b>Alt+1 C D Alt+2 E F G A</b>&gt;:
       </td>
-      <td><img src="../pic/noteentry4.png" align="center"/></td>
+      <td><img src="../pic/noteentry4.png" alt="Quater notes: C, D, Eight notes: E, F, G, A"/></td>
       </tr>
 
     </table>
@@ -670,16 +670,16 @@
 
 <page name="palette" header="Palettes">
     <index>Palettes</index>
-    You can drag&amp;drop palette symbols onto score elements.
+    You can drag-and-drop palette symbols onto score elements.
     <br/>
     <br/>
     Double clicking a palette symbol is equivalent to
-    drag&amp;droping this symbol to all selected score elements.
+    drag-and-droping this symbol to all selected score elements.
     For example you can easily put a tenuto on several notes at once:
-    <ul>
-          <li>select notes</li>
-          <li>double click on the tenuto symbol in the attributes palette</li>
-    </ul>
+    <ol>
+          <li>Select notes</li>
+          <li>Double click on the tenuto symbol in the attributes palette</li>
+    </ol>
 
     </page>
 
@@ -730,23 +730,23 @@
     <table>
     <tr>
       <td>select first note:</td>
-      <td><img src="../pic/slur1.png" align="center"/></td>
+      <td><img src="../pic/slur1.png" alt="First note selected"/></td>
     </tr>
     <tr>
       <td>&lt;<b>S</b>&gt; creates a slur<br/>in <a href="editmode.php">edit mode</a>:</td>
-      <td><img src="../pic/slur2.png" align="center"/></td>
+      <td><img src="../pic/slur2.png" alt="Slur to adjacent note"/></td>
       </tr>
     <tr>
       <td>&lt;<b>Shift+Right</b>&gt; moves the slur<br/> end to the next note:</td>
-      <td><img src="../pic/slur3.png" align="center"/></td>
+      <td><img src="../pic/slur3.png" alt="Three-note slur"/></td>
       </tr>
     <tr>
       <td>&lt;<b>X</b>&gt; flips the slur direction:</td>
-      <td><img src="../pic/slur4.png" align="center"/></td>
+      <td><img src="../pic/slur4.png" alt="Slur above note stems"/></td>
       </tr>
     <tr>
       <td>&lt;<b>Escape</b>&gt; ends edit mode:</td>
-      <td><img src="../pic/slur5.png" align="center"/></td>
+      <td><img src="../pic/slur5.png" alt="Slur no longer in edit mode"/></td>
       </tr>
     </table>
 
@@ -778,14 +778,14 @@
     <br/>
     <h5>Play panel</h5>
     <ul>
-      <li>Display the play panel: Display --&gt; Play Panel (F11)</li>
+      <li>Display the play panel: Display --&gt; Play Panel</li>
       <li>Change the Beats per Minute (bpm) using the Tempo (Tmp) slider</li>
     </ul>
     <br/>
     <h5>Tempo text</h5>
     <ul>
       <li>Select a note to indicate where the tempo text should be created</li>
-      <li>From the main menu: Create --&gt; Text... --&gt; Tempo... (Ctr+Alt+T)</li>
+      <li>From the main menu: Create --&gt; Text... --&gt; Tempo...</li>
       <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
       <li>Press OK to finish</li>
     </ul>
@@ -799,7 +799,7 @@
 <page name="textedit" header="Text Editing">
     <index>Text Editing</index>
       Double click on text to enter <i>edit mode</i>:
-      <img src="../pic/textedit.png" align="center"/><br/>
+      <img src="../pic/textedit.png" alt="Sample text in edit mode"/><br/>
       <br/>
       In text edit mode the following commands are available:
 
@@ -891,11 +891,11 @@
     <table>
     <tr>
       <td>select first note:</td>
-      <td><img src="../pic/tie1.png" align="center"/></td>
+      <td><img src="../pic/tie1.png" alt="First note selected"/></td>
     </tr>
     <tr>
       <td>&lt;<b>Shift+S</b>&gt; creates a tie:</td>
-      <td><img src="../pic/tie2.png" align="center"/></td>
+      <td><img src="../pic/tie2.png" alt="Slur to adjacent note"/></td>
       </tr>
     </table>
 
@@ -914,7 +914,7 @@
           todo
       </td>
       <td>
-         <img src="../pic/timepalette.png"/>
+         <img src="../pic/timepalette.png" alt="Time Signature palette"/>
          </td>
       </tr>
       </table>
@@ -932,15 +932,15 @@
     <table>
     <tr>
       <td>First select a note:</td>
-      <td><img src="../pic/tuplet1.png" align="center"/></td>
+      <td><img src="../pic/tuplet1.png" alt="Quarter note selected"/></td>
     </tr>
     <tr>
       <td>&lt;<b>Ctrl+3</b>&gt; creates a triplet:</td>
-      <td><img src="../pic/tuplet2.png" align="center"/></td>
+      <td><img src="../pic/tuplet2.png" alt="Triplet eight note followed by rests"/></td>
       </tr>
     <tr>
       <td>which can be further edited</td>
-      <td><img src="../pic/tuplet3.png" align="center"/></td>
+      <td><img src="../pic/tuplet3.png" alt="Three triplet eight notes"/></td>
       </tr>
     </table>
     </page>
@@ -965,10 +965,10 @@
     Volta brackets are used to mark different endings in a repeat:
     <br/>
     <br/>
-    <img src="../pic/volta.png" align="center"/>
+    <img src="../pic/volta.png" alt="Sample first and second endings"/>
     <br/><br/>
 
-    Volta brackets can be place on the score by drag&amp;droping from the
+    Volta brackets can be place on the score by drag-and-droping from the
     <a href="palette.php">lines palette</a>.
     <br/>
     <br/>
@@ -991,7 +991,7 @@
     the actual position is shown
 
     <br/><br/>
-    <img src="../pic/volta2.png" align="center"/>
+    <img src="../pic/volta2.png" alt="Second-ending volta in edit mode"/>
     <br/><br/>
 
     <h5>Properties</h5>
@@ -1009,12 +1009,12 @@
           should correspond with the repeat list.
          </td>
       <td valign="top">
-         <img src="../pic/volta3.png"/>
+         <img src="../pic/volta3.png" alt="Volta Properties dialog"/>
          </td>
       </tr>
     </table>
     <br/>
-    <img src="../pic/volta4.png" align="center"/>
+    <img src="../pic/volta4.png" alt="Sample first-through-fifth ending followed by sixth ending"/>
     </page>
 
 <page name="rest" header="One-bar rests">
@@ -1056,25 +1056,25 @@
     <table>
     <tr>
       <td><key>H</key> create a crescendo hairpin:</td>
-      <td><img src="../pic/hairpin1.png" align="center"/></td>
+      <td><img src="../pic/hairpin1.png" alt="One-measure crescendo"/></td>
       </tr>
     <tr>
       <td><key>double click</key> switch to edit mode:</td>
-      <td><img src="../pic/hairpin2.png" align="center"/></td>
+      <td><img src="../pic/hairpin2.png" alt="Crescendo hairpin in edit mode"/></td>
       </tr>
     <tr>
       <td><key>Shift+right</key> move end anchor:</td>
-      <td><img src="../pic/hairpin3.png" align="center"/></td>
+      <td><img src="../pic/hairpin3.png" alt="Crescendo extended to the last note of the next measure"/></td>
       </tr>
     <tr>
       <td><key>right</key> move end point:</td>
-      <td><img src="../pic/hairpin4.png" align="center"/></td>
+      <td><img src="../pic/hairpin4.png" alt="Crescendo visually extended beyond anchor point"/></td>
       </tr>
     </table>
     </page>
 
 <page name="crossbeams" header="Cross staff beaming">
-    <index>Cross staff beaming</index>
+    <index>Cross Staff Beaming</index>
 
       In piano scores it is common to use both staves (bass and treble clef)
       to write a musical phrase.<br/>
@@ -1083,12 +1083,12 @@
     <table>
     <tr>
       <td>First enter all notes<br/>in one staff:</td>
-      <td><img src="../pic/crossbeams1.png" align="center"/></td>
+      <td><img src="../pic/crossbeams1.png" alt="Beamed notes in upper staff"/></td>
       </tr>
     <tr>
       <td><key>Shift+Ctrl+Down</key> moves the selected <br/>
           note or chord to the next staff</td>
-      <td><img src="../pic/crossbeams2.png" align="center"/></td>
+      <td><img src="../pic/crossbeams2.png" alt="Selected note moved to lower staff"/></td>
       </tr>
     </table>
     <br/>
