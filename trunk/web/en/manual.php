@@ -12,8 +12,8 @@
       <a href="man/reference.php">English</a></li>
    <li><img src="../wpic/german.png" alt="Deutsch"/>
       <a href="../de/man/reference.php">Deutsch</a></li>
-   <li><img src="../wpic/spain.png" alt="Español"/>
-      <a href="../es/man/reference.php">Español</a></li>
+   <li><img src="../wpic/spain.png" alt="EspaÃ±ol"/>
+      <a href="../es/man/reference.php">EspaÃ±ol</a></li>
 </ul>
 
 
