@@ -7,20 +7,14 @@
 
 <h5>Online Referenz</h5>
 
-<table>
-   <tr>
-      <td><img src="../wpic/german.png" alt="german"/></td>
-      <td><a href="man/reference.php">deutsch</a>
-      </tr>
-   <tr>
-      <td><img src="../wpic/english.png" alt="englisch"/></td>
-      <td><a href="../en/man/reference.php">englisch</a>
-      </tr>
-   <tr>
-      <td><img src="../wpic/spain.png" alt="spanisch"/></td>
-      <td><a href="../es/man/reference.php">spanisch</a>
-      </tr>
-   </table>
+<ul class="nobullet">
+   <li><img src="../wpic/german.png" alt="Deutsch"/>
+      <a href="../de/man/reference.php">Deutsch</a></li>
+   <li><img src="../wpic/english.png" alt="English"/>
+      <a href="man/reference.php">English</a></li>
+   <li><img src="../wpic/spain.png" alt="Español"/>
+      <a href="../es/man/reference.php">Español</a></li>
+</ul>
 
 <?php require("trailer.html");  ?>
 
