@@ -1,3 +1,6 @@
+20.6.8 (ws)
+      - fixed crash when appending HFrame
+      - fixed crash when playing new created score
 16.6.8 (ws)
       - fix dragging dynamics symbols to staff > 1
       - added french translation from Lasconic
