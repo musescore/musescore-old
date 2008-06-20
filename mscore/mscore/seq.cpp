@@ -295,6 +295,10 @@ void Seq::start()
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
+            if (events.empty()) {
+                  a->setChecked(false);
+                  return;
+                  }
             seek(cs->playPos());
             if (!pauseState)
                   driver->startTransport();

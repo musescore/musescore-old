@@ -214,7 +214,6 @@ void ScoreLayout::doLayout()
                   m->layout0(staffIdx);
                   }
             }
-
       //-----------------------------------------
       //    pass I:  process pages
       //-----------------------------------------
@@ -223,6 +222,7 @@ void ScoreLayout::doLayout()
       curSystem   = 0;
       firstSystem = true;
       for (curPage = 0; curMeasure; curPage++) {
+
             getCurPage();
             MeasureBase* om = curMeasure;
             if (!layoutPage())
@@ -477,8 +477,8 @@ bool ScoreLayout::layoutPage()
                   if (firstSystemOnPage) {
                         y += point(score()->style()->staffUpperBorder);
                         }
-                  int cs            = curSystem;
-                  MeasureBase* cm   = curMeasure;
+                  int cs          = curSystem;
+                  MeasureBase* cm = curMeasure;
                   double h;
                   QList<System*> sl = layoutSystemRow(x, y, w, firstSystem, &h);
                   if (sl.isEmpty()) {
@@ -620,7 +620,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   break;
                   }
             }
-      return continueFlag;
+      return continueFlag && curMeasure;
       }
 
 //---------------------------------------------------------
@@ -664,6 +664,10 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             //    add cautionary time signatures if needed
             //
 
+            if (system->measures().isEmpty()) {
+                  printf("system %p is empty\n", system);
+                  abort();
+                  }
             MeasureBase* lm = system->measures().back();
             int tick        = lm->tick() + lm->tickLen();
             SigEvent sig1   = _score->sigmap->timesig(tick - 1);

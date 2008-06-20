@@ -2505,12 +2505,12 @@ echec :</translation>
 <context>
     <name>MagBox</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="768"/>
+        <location filename="../../mscore/mscore.cpp" line="771"/>
         <source>Mag</source>
         <translation type="unfinished">Mag</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="769"/>
+        <location filename="../../mscore/mscore.cpp" line="772"/>
         <source>Zoom Canvas</source>
         <translation>Zoom</translation>
     </message>
@@ -4999,114 +4999,114 @@ echec :</translation>
         <translation>Tuplets</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="605"/>
+        <location filename="../../mscore/mscore.cpp" line="608"/>
         <source>&amp;Layout</source>
         <translation>&amp;Mise en page</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="608"/>
+        <location filename="../../mscore/mscore.cpp" line="611"/>
         <source>Page Settings...</source>
         <translation>Paramètre de la page...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="609"/>
+        <location filename="../../mscore/mscore.cpp" line="612"/>
         <source>Reset Positions</source>
         <translation>Restaurer les positions</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="610"/>
+        <location filename="../../mscore/mscore.cpp" line="613"/>
         <source>Set Normal Staff Distances</source>
         <translation>Restaurer la distance entre les portées</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="614"/>
+        <location filename="../../mscore/mscore.cpp" line="617"/>
         <source>Reset Stretch</source>
         <translation>Restaurer l&apos;étirement</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="616"/>
+        <location filename="../../mscore/mscore.cpp" line="619"/>
         <source>Breaks...</source>
         <translation>Sauts...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="622"/>
+        <location filename="../../mscore/mscore.cpp" line="625"/>
         <source>&amp;Style</source>
         <translation>&amp;Style</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="624"/>
+        <location filename="../../mscore/mscore.cpp" line="627"/>
         <source>Edit Style...</source>
         <translation>Editer le style...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="625"/>
+        <location filename="../../mscore/mscore.cpp" line="628"/>
         <source>Edit Text Style...</source>
         <translation>Editer les styles de texte...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="634"/>
+        <location filename="../../mscore/mscore.cpp" line="637"/>
         <source>&amp;Display</source>
         <translation>&amp;Affichage</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="682"/>
+        <location filename="../../mscore/mscore.cpp" line="685"/>
         <source>Show Invisible</source>
         <translation>Afficher les élements invisibles</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="690"/>
+        <location filename="../../mscore/mscore.cpp" line="693"/>
         <source>&amp;Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="692"/>
+        <location filename="../../mscore/mscore.cpp" line="695"/>
         <source>Manual</source>
         <translation>Manuel</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="693"/>
+        <location filename="../../mscore/mscore.cpp" line="696"/>
         <source>&amp;About</source>
         <translation>&amp;A Propos</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="694"/>
+        <location filename="../../mscore/mscore.cpp" line="697"/>
         <source>About&amp;Qt</source>
         <translation>A propos de &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="987"/>
+        <location filename="../../mscore/mscore.cpp" line="1003"/>
         <source>MuseScore online manual not found at: </source>
         <translation>Le manuel de MuseScore n&apos;a pas été trouvé à : </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="989"/>
+        <location filename="../../mscore/mscore.cpp" line="1005"/>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore : Ouvrir l&apos;aide</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1001"/>
+        <location filename="../../mscore/mscore.cpp" line="1017"/>
         <source>MuseScore: Error</source>
         <translation>MuseScore : Erreur</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1002"/>
+        <location filename="../../mscore/mscore.cpp" line="1018"/>
         <source>Failed to open help file:
 </source>
         <translation>Echec lors de l&apos;ouverture du fichier d&apos;aide :
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1856"/>
+        <location filename="../../mscore/mscore.cpp" line="1874"/>
         <source>note entry mode</source>
         <translation>Mode saisie de notes</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1860"/>
+        <location filename="../../mscore/mscore.cpp" line="1878"/>
         <source>edit mode</source>
         <translation>Mode édition</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1864"/>
+        <location filename="../../mscore/mscore.cpp" line="1882"/>
         <source>play</source>
         <translation>jouer</translation>
     </message>
@@ -5208,6 +5208,21 @@ echec :</translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="334"/>
         <source>Articulations, Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1600"/>
+        <source>display in concert pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1605"/>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished">Afficher en tonalité de concert</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1476"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6330,33 +6345,33 @@ echec :</translation>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="396"/>
+        <location filename="../../mscore/utils.cpp" line="394"/>
         <source>MuseScore:</source>
         <translation>MuseScore :</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="373"/>
+        <location filename="../../mscore/utils.cpp" line="371"/>
         <source>please select a single note and retry operation
 </source>
         <translation>Veuillez selectionner une note seule et réessayez.
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="381"/>
+        <location filename="../../mscore/utils.cpp" line="379"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation>Veuillez selectionner une note seule ou un silence et réessayez.
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="389"/>
+        <location filename="../../mscore/utils.cpp" line="387"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation>Veuillez selectionner une note seule ou un coulé et réessayez.
 </translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="397"/>
+        <location filename="../../mscore/utils.cpp" line="395"/>
         <source>please select one or more staves and retry operation
 </source>
         <translation>Veuillez selectionner une ou plusieurs portées et réessayez.
@@ -7719,17 +7734,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>magTable</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="754"/>
+        <location filename="../../mscore/mscore.cpp" line="757"/>
         <source>PgeWidth</source>
         <translation>Largeur de la page</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="755"/>
+        <location filename="../../mscore/mscore.cpp" line="758"/>
         <source>Page</source>
         <translation>Page</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="756"/>
+        <location filename="../../mscore/mscore.cpp" line="759"/>
         <source>DblPage</source>
         <translation>Double page</translation>
     </message>
