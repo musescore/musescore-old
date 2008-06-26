@@ -1,4 +1,8 @@
 26.6.8 (ws)
+      - create end bar line after deletion of last measure as suggested by
+        David Bolton
+      - when selecting measures at score end for deletion the last measure was
+        never deleted
       - mscore did a complete relayout on every received midi event. This
         is especially slow when an attached keyboard sends midi clock or active sense
         messages.
