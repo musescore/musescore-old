@@ -1,3 +1,7 @@
+26.6.8 (ws)
+      - mscore did a complete relayout on every received midi event. This
+        is especially slow when an attached keyboard sends midi clock or active sense
+        messages.
 20.6.8 (ws)
       - fixed crash when appending HFrame
       - fixed crash when playing new created score
