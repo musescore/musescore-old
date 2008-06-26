@@ -93,6 +93,15 @@ Preferences preferences;
 
 Preferences::Preferences()
       {
+      init();
+      }
+
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void Preferences::init()
+      {
       selectColor[0] = Qt::blue;
       selectColor[1] = Qt::green;
       selectColor[2] = Qt::yellow;
@@ -363,9 +372,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       {
       setupUi(this);
 
-      useMidiOutput->setChecked(preferences.useMidiOutput);
-      useSynthesizer->setChecked(!preferences.useMidiOutput);
-
 #ifndef USE_JACK
       jackDriver->setEnabled(false);
 #endif
@@ -378,8 +384,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 #ifdef __MINGW32__
       useMidiOutput->setEnabled(false);
 #endif
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
-      cursorBlink->setChecked(preferences.cursorBlink);
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
       fgButtons->setExclusive(true);
@@ -391,32 +395,62 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       bgButtons->setExclusive(true);
       bgButtons->addButton(bgColorButton);
       bgButtons->addButton(bgWallpaperButton);
-      connect(bgColorButton, SIGNAL(toggled(bool)), SLOT(bgClicked(bool)));
 
-      fgWallpaper->setText(preferences.fgWallpaper);
-      bgWallpaper->setText(preferences.bgWallpaper);
+      updateValues(&preferences);
 
-      fgColorLabel->setColor(preferences.fgColor);
-      bgColorLabel->setColor(preferences.bgColor);
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
+      connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
+      connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
+      connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
+      connect(imagePathButton,        SIGNAL(clicked()), SLOT(selectImagePath()));
+      connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
+      connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
+      connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
+      connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
+      connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
+      connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
+      connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
+      connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
+      connect(useMidiOutput, SIGNAL(clicked()), SLOT(useMidiOutputClicked()));
+      connect(useSynthesizer, SIGNAL(clicked()), SLOT(useSynthesizerClicked()));
+      connect(resetToDefault, SIGNAL(clicked()), SLOT(resetAllValues()));
+      }
 
-      selectColorLabel1->setColor(preferences.selectColor[0]);
-      selectColorLabel2->setColor(preferences.selectColor[1]);
-      selectColorLabel3->setColor(preferences.selectColor[2]);
-      selectColorLabel4->setColor(preferences.selectColor[3]);
+//---------------------------------------------------------
+//   updateValues
+//---------------------------------------------------------
 
-      bgColorButton->setChecked(preferences.bgUseColor);
-      bgWallpaperButton->setChecked(!preferences.bgUseColor);
-      fgColorButton->setChecked(preferences.fgUseColor);
-      fgWallpaperButton->setChecked(!preferences.fgUseColor);
+void PreferenceDialog::updateValues(Preferences* p)
+      {
+      useMidiOutput->setChecked(p->useMidiOutput);
+      useSynthesizer->setChecked(!p->useMidiOutput);
 
-      enableMidiInput->setChecked(preferences.enableMidiInput);
-      playNotes->setChecked(preferences.playNotes);
+      cursorBlink->setChecked(p->cursorBlink);
 
-      if (!preferences.soundFont.isEmpty())
-            soundFont->setText(preferences.soundFont);
+      fgWallpaper->setText(p->fgWallpaper);
+      bgWallpaper->setText(p->bgWallpaper);
+
+      fgColorLabel->setColor(p->fgColor);
+      bgColorLabel->setColor(p->bgColor);
+
+      selectColorLabel1->setColor(p->selectColor[0]);
+      selectColorLabel2->setColor(p->selectColor[1]);
+      selectColorLabel3->setColor(p->selectColor[2]);
+      selectColorLabel4->setColor(p->selectColor[3]);
+
+      bgColorButton->setChecked(p->bgUseColor);
+      bgWallpaperButton->setChecked(!p->bgUseColor);
+      fgColorButton->setChecked(p->fgUseColor);
+      fgWallpaperButton->setChecked(!p->fgUseColor);
+
+      enableMidiInput->setChecked(p->enableMidiInput);
+      playNotes->setChecked(p->playNotes);
+
+      if (!p->soundFont.isEmpty())
+            soundFont->setText(p->soundFont);
       else {
-            const char* p = getenv("DEFAULT_SOUNDFONT");
-            soundFont->setText(QString(p ? p : ""));
+            const char* pp = getenv("DEFAULT_SOUNDFONT");
+            soundFont->setText(QString(pp ? pp : ""));
             }
 
       if (seq->isRunning()) {
@@ -425,9 +459,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             for (QList<QString>::iterator i = sl.begin(); i != sl.end(); ++i, ++idx) {
                   jackRPort->addItem(*i);
                   jackLPort->addItem(*i);
-                  if (preferences.rPort == *i)
+                  if (p->rPort == *i)
                         jackRPort->setCurrentIndex(idx);
-                  if (preferences.lPort == *i)
+                  if (p->lPort == *i)
                         jackLPort->setCurrentIndex(idx);
                   }
             }
@@ -436,49 +470,49 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             jackLPort->setEnabled(false);
             }
 
-      stemDir2button(preferences.stemDir[0], upRadioButton1, downRadioButton1, autoRadioButton1);
-      stemDir2button(preferences.stemDir[1], upRadioButton2, downRadioButton2, autoRadioButton2);
-      stemDir2button(preferences.stemDir[2], upRadioButton3, downRadioButton3, autoRadioButton3);
-      stemDir2button(preferences.stemDir[3], upRadioButton4, downRadioButton4, autoRadioButton4);
+      stemDir2button(p->stemDir[0], upRadioButton1, downRadioButton1, autoRadioButton1);
+      stemDir2button(p->stemDir[1], upRadioButton2, downRadioButton2, autoRadioButton2);
+      stemDir2button(p->stemDir[2], upRadioButton3, downRadioButton3, autoRadioButton3);
+      stemDir2button(p->stemDir[3], upRadioButton4, downRadioButton4, autoRadioButton4);
 
-      navigatorShow->setChecked(preferences.showNavigator);
-      playPanelShow->setChecked(preferences.showPlayPanel);
-      playPanelX->setValue(preferences.playPanelPos.x());
-      playPanelY->setValue(preferences.playPanelPos.y());
+      navigatorShow->setChecked(p->showNavigator);
+      playPanelShow->setChecked(p->showPlayPanel);
+      playPanelX->setValue(p->playPanelPos.x());
+      playPanelY->setValue(p->playPanelPos.y());
 
-      alsaDriver->setChecked(preferences.useAlsaAudio);
-      jackDriver->setChecked(preferences.useJackAudio);
-      portaudioDriver->setChecked(preferences.usePortaudioAudio);
-      alsaDevice->setText(preferences.alsaDevice);
+      alsaDriver->setChecked(p->useAlsaAudio);
+      jackDriver->setChecked(p->useJackAudio);
+      portaudioDriver->setChecked(p->usePortaudioAudio);
+      alsaDevice->setText(p->alsaDevice);
 
-      int index = alsaSampleRate->findText(QString("%1").arg(preferences.alsaSampleRate));
+      int index = alsaSampleRate->findText(QString("%1").arg(p->alsaSampleRate));
       alsaSampleRate->setCurrentIndex(index);
-      index = alsaPeriodSize->findText(QString("%1").arg(preferences.alsaPeriodSize));
+      index = alsaPeriodSize->findText(QString("%1").arg(p->alsaPeriodSize));
       alsaPeriodSize->setCurrentIndex(index);
 
-      alsaFragments->setValue(preferences.alsaFragments);
-      drawAntialiased->setChecked(preferences.antialiasedDrawing);
-      switch(preferences.sessionStart) {
+      alsaFragments->setValue(p->alsaFragments);
+      drawAntialiased->setChecked(p->antialiasedDrawing);
+      switch(p->sessionStart) {
             case LAST_SESSION:   lastSession->setChecked(true); break;
             case NEW_SESSION:    newSession->setChecked(true); break;
             case SCORE_SESSION:  scoreSession->setChecked(true); break;
             }
-      sessionScore->setText(preferences.startScore);
-      imagePath->setText(preferences.imagePath);
-      workingDirectory->setText(preferences.workingDirectory);
-      showSplashScreen->setChecked(preferences.showSplashScreen);
-      expandRepeats->setChecked(preferences.midiExpandRepeats);
-      instrumentList->setText(preferences.instrumentList);
-      alternateInput->setChecked(preferences.alternateNoteEntryMethod);
+      sessionScore->setText(p->startScore);
+      imagePath->setText(p->imagePath);
+      workingDirectory->setText(p->workingDirectory);
+      showSplashScreen->setChecked(p->showSplashScreen);
+      expandRepeats->setChecked(p->midiExpandRepeats);
+      instrumentList->setText(p->instrumentList);
+      alternateInput->setChecked(p->alternateNoteEntryMethod);
 
-      midiPorts->setValue(preferences.midiPorts);
-      midiAutoConnect->setChecked(preferences.midiAutoConnect);
-      proximity->setValue(preferences.proximity);
-      autoSave->setChecked(preferences.autoSave);
-      autoSaveTime->setValue(preferences.autoSaveTime);
-      pngScreenShot->setChecked(preferences.pngScreenShot);
+      midiPorts->setValue(p->midiPorts);
+      midiAutoConnect->setChecked(p->midiAutoConnect);
+      proximity->setValue(p->proximity);
+      autoSave->setChecked(p->autoSave);
+      autoSaveTime->setValue(p->autoSaveTime);
+      pngScreenShot->setChecked(p->pngScreenShot);
       for (int i = 0; i < language->count(); ++i) {
-            if (language->itemText(i).startsWith(preferences.language)) {
+            if (language->itemText(i).startsWith(p->language)) {
                   language->setCurrentIndex(i);
                   break;
                   }
@@ -514,23 +548,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       enableMidiInput->setEnabled(false);
       rcGroup->setEnabled(false);
 #endif
-      connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
-      connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
-      connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(imagePathButton,        SIGNAL(clicked()), SLOT(selectImagePath()));
-      connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
-      connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
-      connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
       sfChanged = false;
-
-      connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
-
-      connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
-      connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
-      connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
-      connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
-      connect(useMidiOutput, SIGNAL(clicked()), SLOT(useMidiOutputClicked()));
-      connect(useSynthesizer, SIGNAL(clicked()), SLOT(useSynthesizerClicked()));
       }
 
 //---------------------------------------------------------
@@ -1047,5 +1065,16 @@ void PreferenceDialog::useMidiOutputClicked()
 void PreferenceDialog::useSynthesizerClicked()
       {
       setUseMidiOutput(!useSynthesizer->isChecked());
+      }
+
+//---------------------------------------------------------
+//   resetAllValues
+//---------------------------------------------------------
+
+void PreferenceDialog::resetAllValues()
+      {
+      printf("reset all\n");
+      Preferences prefs;
+      updateValues(&prefs);
       }
 

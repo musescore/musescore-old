@@ -102,6 +102,7 @@ struct Preferences {
       Preferences();
       void write();
       void read();
+      void init();
       };
 
 //---------------------------------------------------------
@@ -118,6 +119,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       bool sfChanged;
       void updateSCListView();
       void setUseMidiOutput(bool);
+      void updateValues(Preferences*);
 
    private slots:
       void buttonBoxClicked(QAbstractButton*);
@@ -137,6 +139,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void portaudioApiActivated(int idx);
       void useMidiOutputClicked();
       void useSynthesizerClicked();
+      void resetAllValues();
 
    signals:
       void preferencesChanged();
