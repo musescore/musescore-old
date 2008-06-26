@@ -956,18 +956,33 @@ void Score::cmdRemoveTime(int tick, int len)
 void Score::cmdDeleteSelection()
       {
       if (sel->state() == SEL_SYSTEM) {
-            Measure* is = tick2measure(sel->tickStart);
+            MeasureBase* is = tick2measure(sel->tickStart);
+            bool createEndBar = false;
             if (is->next()) {
-                  Measure* ie = tick2measure(sel->tickEnd);
+                  MeasureBase* ie = tick2measure(sel->tickEnd);
                   if (ie) {
+                        if (ie->tick() < sel->tickEnd) {
+                              // if last measure is selected
+                              deleteItem(ie);
+                              createEndBar = true;
+                              }
                         do {
-                              ie = (Measure*)(ie->prev());        // TODO: MeasureBase
+                              ie = ie->prev();
                               deleteItem(ie);
                               } while (ie != is);
                         }
                   }
             else
                   deleteItem(is);
+            if (createEndBar) {
+                  MeasureBase* mb = _measures.last();
+                  while (mb && mb->type() != MEASURE)
+                        mb = mb->prev();
+                  Measure* lastMeasure = static_cast<Measure*>(mb);
+                  if (lastMeasure->endBarLineType() == NORMAL_BAR) {
+                        lastMeasure->setEndBarLineType(END_BAR, false);
+                        }
+                  }
             }
       else if (sel->state() == SEL_STAFF) {
             //
