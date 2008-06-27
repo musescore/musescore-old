@@ -1,3 +1,7 @@
+27.6.8 (ws)
+      - fix for midi input: midi clock events destroy relayout/refresh of score
+        during editing
+      - fixed crash when incrementing pitch of note in a system with a hbox
 26.6.8 (ws)
       - added "Reset to Default" button in preferences dialog
       - create end bar line after deletion of last measure as suggested by

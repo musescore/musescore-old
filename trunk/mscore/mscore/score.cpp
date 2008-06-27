@@ -1179,6 +1179,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
                   _is.pos += len;
                   }
             layoutAll = true;
+            end();
             }
       }
 

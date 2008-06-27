@@ -1018,7 +1018,7 @@ bool ScoreLayout::doReLayout()
 
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
-                  ((Measure*)startLayout)->layout0(staffIdx);
+                  static_cast<Measure*>(startLayout)->layout0(staffIdx);
             }
 
       System* system  = startLayout->system();
@@ -1030,16 +1030,21 @@ bool ScoreLayout::doReLayout()
       //
       MeasureBase* m = 0;
       foreach(m, system->measures()) {
-            Measure* measure = (Measure*)m;
-            measure->layoutBeams1(this);
-            measure->layoutX(this, 1.0);
-            double ww      = measure->layoutWidth().stretchable;
-            double stretch = measure->userStretch() * score()->style()->measureSpacing;
+            double ww;
+            if (m->type() == HBOX) {
+                  ww = static_cast<Box*>(m)->boxWidth().point();
+                  }
+            else if (m->type() == MEASURE) {
+                  Measure* measure = static_cast<Measure*>(m);
+                  measure->layoutBeams1(this);
+                  measure->layoutX(this, 1.0);
+                  ww      = measure->layoutWidth().stretchable;
+                  double stretch = measure->userStretch() * score()->style()->measureSpacing;
 
-            ww *= stretch;
-            if (ww < point(score()->style()->minMeasureWidth))
-                  ww = point(score()->style()->minMeasureWidth);
-
+                  ww *= stretch;
+                  if (ww < point(score()->style()->minMeasureWidth))
+                        ww = point(score()->style()->minMeasureWidth);
+                  }
             minWidth += ww;
             }
       if (minWidth > sysWidth)       // measure do not fit: do full layout
@@ -1050,7 +1055,7 @@ bool ScoreLayout::doReLayout()
       //
       m = m->next();
       if (m && m->subtype() == MEASURE) {
-            Measure* measure = (Measure*)m;
+            Measure* measure = static_cast<Measure*>(m);
             measure->layoutX(this, 1.0);
             double ww      = measure->layoutWidth().stretchable;
             double stretch = measure->userStretch() * score()->style()->measureSpacing;
@@ -1068,9 +1073,9 @@ bool ScoreLayout::doReLayout()
       double totalWeight = 0.0;
       foreach (MeasureBase* mb, system->measures()) {
             if (mb->type() == HBOX)
-                  minWidth += ((Box*)mb)->boxWidth().point();
+                  minWidth += static_cast<Box*>(mb)->boxWidth().point();
             else {
-                  Measure* m   = (Measure*)mb;
+                  Measure* m   = static_cast<Measure*>(mb);
                   minWidth    += m->layoutWidth().stretchable;
                   totalWeight += m->tickLen() * m->userStretch();
                   }
@@ -1083,13 +1088,13 @@ bool ScoreLayout::doReLayout()
             mb->setPos(pos);
             double ww = 0.0;
             if (mb->type() == MEASURE) {
-                  Measure* m    = (Measure*)mb;
+                  Measure* m    = static_cast<Measure*>(mb);
                   double weight = m->tickLen() * m->userStretch();
                   ww            = m->layoutWidth().stretchable + rest * weight;
                   m->layout(this, ww);
                   }
             else if (mb->type() == HBOX) {
-                  ww = ((Box*)mb)->boxWidth().point();
+                  ww = static_cast<Box*>(mb)->boxWidth().point();
                   mb->layout(this);
                   }
             pos.rx() += ww;
