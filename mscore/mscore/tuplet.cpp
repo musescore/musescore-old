@@ -453,26 +453,26 @@ void Tuplet::propertyAction(const QString& s)
 
 void Score::tupletDialog()
       {
-      Note* note = getSelectedNote();
-      if (note == 0) {
-            selectNoteMessage();
+      ChordRest* cr = getSelectedChordRest();
+      if (cr == 0)
             return;
-            }
       TupletDialog td;
       if (!td.exec())
             return;
 
-      Chord* chord   = note->chord();
-      int baseLen    = chord->tickLen() / td.getNormalNotes();
+      int len        = cr->tickLen();
+      if (cr->type() == REST && len == 0)
+            len = cr->measure()->tickLen();
+      int baseLen    = len / td.getNormalNotes();
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setBaseLen(baseLen);
-      tuplet->setTrack(chord->track());
+      tuplet->setTrack(cr->track());
       td.setupTuplet(tuplet);
 
-      Measure* measure = chord->measure();
+      Measure* measure = cr->measure();
       tuplet->setParent(measure);
 
-      cmdCreateTuplet(chord, tuplet);
+      cmdCreateTuplet(cr, tuplet);
       }
 
 //---------------------------------------------------------

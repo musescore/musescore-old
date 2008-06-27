@@ -1055,7 +1055,7 @@ void Seq::seekEnd()
 
 void Seq::guiToSeq(const SeqMsg& msg)
       {
-      if (!driver)
+      if (!driver || !running)
             return;
       mutex.lock();
       toSeq.enqueue(msg);
