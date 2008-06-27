@@ -238,8 +238,8 @@ void Dynamic::layout(ScoreLayout* l)
       if (tick() != -1) {
             double y = 0.0;
             double x = measure()->tick2pos(tick());
-            // setPos(ipos() + QPointF(x, y));
-            setPos(x, y);
+            setPos(ipos() + QPointF(x, y));
+            // setPos(x, y);
             }
       }
 
