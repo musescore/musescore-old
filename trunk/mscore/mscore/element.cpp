@@ -1000,6 +1000,7 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 
 //---------------------------------------------------------
 //   readType
+//    return -1 if no valid type found
 //---------------------------------------------------------
 
 int Element::readType(QDomElement& e, QPointF* dragOffset)
@@ -1109,7 +1110,6 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = ICON;
             else {
                   domError(e);
-                  type = 0;
                   break;
                   }
             if (type >= 0)

@@ -1755,11 +1755,14 @@ void Score::cmd(const QString& cmd)
                         QDomElement e = doc.documentElement();
                         QPointF dragOffset;
                         int type    = Element::readType(e, &dragOffset);
-                        Element* el = Element::create(type, this);
-                        el->read(e);
-                        addRefresh(sel->element()->abbox());   // layout() ?!
-                        sel->element()->drop(QPointF(), QPointF(), el);
-                        addRefresh(sel->element()->abbox());
+                        if (type != -1) {
+                              Element* el = Element::create(type, this);
+                              el->read(e);
+                              addRefresh(sel->element()->abbox());   // layout() ?!
+                              sel->element()->drop(QPointF(), QPointF(), el);
+                              if (sel->element())
+                                    addRefresh(sel->element()->abbox());
+                              }
                         }
                   else if (sel->state() == SEL_STAFF && ms && ms->hasFormat(mimeStaffListFormat))
                         pasteStaff(ms);

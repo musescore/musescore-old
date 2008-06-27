@@ -975,7 +975,7 @@ void Tie::layout(ScoreLayout* layout)
                   Measure* m1 = c1->measure();
                   Measure* m2 = c2->measure();
                   printf("Measure %d - %d, %d %d\n", m1->no(), m2->no(), m1->tick(), m2->tick());
-                  abort();
+                  // abort();
                   }
             // case 4: end segment
             else {

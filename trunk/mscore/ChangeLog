@@ -1,4 +1,6 @@
 27.6.8 (ws)
+      - fixed crash when trying to copy/paste a slur
+      - tuplet dialog now also works on selected rests
       - fix for midi input: midi clock events destroy relayout/refresh of score
         during editing
       - fixed crash when incrementing pitch of note in a system with a hbox

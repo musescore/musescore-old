@@ -1271,9 +1271,13 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
       int track        = cr->track();
       Measure* measure = cr->measure();
 
-      int baseLen = cr->tickLen() / normalNotes;
-      if (cr->tickLen() % normalNotes) {
-            printf("cannot handle tuplet (rest %d)\n", cr->tickLen() % normalNotes);
+      int len = cr->tickLen();
+      if (cr->type() == REST && len == 0)
+            len = cr->measure()->tickLen();
+
+      int baseLen = len / normalNotes;
+      if (len % normalNotes) {
+            printf("cannot handle tuplet (rest %d)\n", len % normalNotes);
             return;
             }
 
