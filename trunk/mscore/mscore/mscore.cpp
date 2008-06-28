@@ -151,6 +151,16 @@ static void printVersion(const char* prog)
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
+      // TODO: end edit mode
+      if (cs) {
+            //
+            // remember "global" values:
+            //
+            cs->setMag(canvas->mag());
+            cs->setXoffset(canvas->xoffset());
+            cs->setYoffset(canvas->yoffset());
+            cs->clearViewer();
+            }
       for (QList<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
             Score* score = *i;
             if (checkDirty(score)) {
@@ -1744,11 +1754,11 @@ int main(int argc, char* argv[])
             bool rv;
             if (fn.endsWith(".msc")) {
                   QFileInfo fi(fn);
-                  rv = mscore->saveFile(fi, false);
+                  rv = cs->saveFile(fi, false);
                   }
             else if (fn.endsWith(".mscz")) {
                   QFileInfo fi(fn);
-                  rv = mscore->saveCompressedFile(fi, false);
+                  rv = cs->saveCompressedFile(fi, false);
                   }
             else if (fn.endsWith(".xml"))
                   rv = cs->saveXml(fn);
@@ -1809,8 +1819,10 @@ void MuseScore::cmd(QAction* a)
             saveFile();
       else if (cmd == "file-close")
             removeTab(scoreList.indexOf(cs));
-      else if (cmd == "file-save-as")
-            saveAs();
+      else if (cmd == "file-save-as") {
+            if (cs)
+                  cs->saveAs();
+            }
       else if (cmd == "file-new")
             newFile();
       else if (cmd == "quit")

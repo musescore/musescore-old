@@ -231,7 +231,6 @@ class MuseScore : public QMainWindow {
       void dynamicsMenu();
       void loadFile();
       bool saveFile();
-      bool saveAs();
       void newFile();
       void fingeringMenu();
 
@@ -287,10 +286,6 @@ class MuseScore : public QMainWindow {
       Canvas* getCanvas() { return canvas; }
       bool checkDirty(Score*);
       void clearScore();
-      bool saveFile(QFileInfo&, bool autosave);
-      bool saveCompressedFile(QFileInfo&, bool autosave);
-      bool saveFile(QIODevice*, bool autosave);
-      bool saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
       void appendScore(Score*);
@@ -313,6 +308,7 @@ class MuseScore : public QMainWindow {
       void loadPlugins();
       QString createDefaultName() const;
       void startAutoSave();
+//      void setTabText(int idx, const QString& s) { tab->setTabText(idx, s); }
       };
 
 //---------------------------------------------------------
