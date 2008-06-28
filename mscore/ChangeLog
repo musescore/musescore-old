@@ -1,3 +1,6 @@
+28.6.8 (ws)
+      - bug fix: "save file" messed up the scores when more than one score was
+        loaded and modified
 27.6.8 (ws)
       - fixed crash when trying to copy/paste a slur
       - tuplet dialog now also works on selected rests

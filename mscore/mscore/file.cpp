@@ -143,7 +143,7 @@ bool MuseScore::checkDirty(Score* s)
                               return true;
                         }
                   else {
-                        if (!saveAs())
+                        if (!s->saveAs())
                               return true;
                         }
 
@@ -252,9 +252,9 @@ bool Score::saveFile(bool autosave)
             else if (fileInfo()->suffix() == "xml")
                   rv = saveXml(fileInfo()->absoluteFilePath());
             else if (fileInfo()->suffix() == "msc")
-                  rv = mscore->saveFile(*fileInfo(), autosave);
+                  rv = saveFile(*fileInfo(), autosave);
             else
-                  rv = mscore->saveCompressedFile(*fileInfo(), autosave);
+                  rv = saveCompressedFile(*fileInfo(), autosave);
             if (rv)
                   setDirty(false);
             return rv;
@@ -278,9 +278,9 @@ bool Score::saveFile(bool autosave)
       else if (info.suffix() == "xml")
             rv = saveXml(temp.fileName());
       else if (info.suffix() == "msc")
-            rv = mscore->saveFile(&temp, autosave);
+            rv = saveFile(&temp, autosave);
       else
-            rv = mscore->saveCompressedFile(&temp, info, autosave);
+            rv = saveCompressedFile(&temp, info, autosave);
       if (!rv)
             return false;
 
@@ -322,10 +322,8 @@ bool Score::saveFile(bool autosave)
  Return true if OK and false on error.
  */
 
-bool MuseScore::saveAs()
+bool Score::saveAs()
       {
-      if (!cs)
-            return false;
       QString selectedFilter;
       QStringList fl;
 
@@ -341,7 +339,7 @@ bool MuseScore::saveAs()
       fl.append(tr("Lilypond Format (*.ly)"));
 
       QString fn = QFileDialog::getSaveFileName(
-         this, tr("MuseScore: Save As"),
+         0, tr("MuseScore: Save As"),
          preferences.lastSaveDirectory,
          fl.join(";;"),
          &selectedFilter
@@ -356,11 +354,11 @@ bool MuseScore::saveAs()
                   fn.append(".mscz");
             QFileInfo fi(fn);
             rv = saveCompressedFile(fi, false);
-            if (rv && cs->created()) {
-                  cs->fileInfo()->setFile(fn);
-                  setWindowTitle("MuseScore: " + cs->name());
-                  tab->setTabText(tab->currentIndex(), cs->name());
-                  cs->setCreated(false);
+            if (rv && created()) {
+                  fileInfo()->setFile(fn);
+                  mscore->setWindowTitle("MuseScore: " + name());
+//                  tab->setTabText(tab->currentIndex(), name());
+                  setCreated(false);
                   }
             }
       else if (selectedFilter == fl[1]) {
@@ -369,65 +367,65 @@ bool MuseScore::saveAs()
                   fn.append(".msc");
             QFileInfo fi(fn);
             rv = saveFile(fi, false);
-            if (rv && cs->created()) {
-                  cs->fileInfo()->setFile(fn);
-                  setWindowTitle("MuseScore: " + cs->name());
-                  tab->setTabText(tab->currentIndex(), cs->name());
-                  cs->setCreated(false);
+            if (rv && created()) {
+                  fileInfo()->setFile(fn);
+                  mscore->setWindowTitle("MuseScore: " + name());
+//                  tab->setTabText(tab->currentIndex(), name());
+                  setCreated(false);
                   }
             }
       else if (selectedFilter == fl[2]) {
             // save as MusicXML *.xml file
             if (!fn.endsWith(".xml"))
                   fn.append(".xml");
-            rv = cs->saveXml(fn);
+            rv = saveXml(fn);
             }
       else if (selectedFilter == fl[3]) {
             // save as compressed MusicXML *.mxl file
             if (!fn.endsWith(".mxl"))
                   fn.append(".mxl");
-            rv = cs->saveMxl(fn);
+            rv = saveMxl(fn);
             }
       else if (selectedFilter == fl[4]) {
             // save as midi file *.mid
             if (!fn.endsWith(".mid"))
                   fn.append(".mid");
-            rv = cs->saveMidi(fn);
+            rv = saveMidi(fn);
             }
       else if (selectedFilter == fl[5]) {
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
-            rv = cs->savePsPdf(fn, QPrinter::PdfFormat);
+            rv = savePsPdf(fn, QPrinter::PdfFormat);
             }
       else if (selectedFilter == fl[6]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
-            rv = cs->savePsPdf(fn, QPrinter::PostScriptFormat);
+            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
             }
       else if (selectedFilter == fl[7]) {
             // save as png file *.png
             if (!fn.endsWith(".png"))
                   fn.append(".png");
-            rv = cs->savePng(fn);
+            rv = savePng(fn);
             }
       else if (selectedFilter == fl[8]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
-            rv = cs->saveSvg(fn);
+            rv = saveSvg(fn);
             }
       else if (selectedFilter == fl[9]) {
             // save as lilypond file *.ly
             if (!fn.endsWith(".ly"))
                   fn.append(".ly");
-            rv = cs->saveLilypond(fn);
+            rv = saveLilypond(fn);
             }
 
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
       if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")))
-            cs->setDirty(false);
+            setDirty(false);
 
       QFileInfo fi(fn);
       preferences.lastSaveDirectory = fi.absolutePath();
@@ -651,7 +649,7 @@ void MuseScore::newFile()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveCompressedFile(QFileInfo& info, bool autosave)
+bool Score::saveCompressedFile(QFileInfo& info, bool autosave)
       {
       QString ext(".mscz");
 
@@ -662,7 +660,7 @@ bool MuseScore::saveCompressedFile(QFileInfo& info, bool autosave)
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(this, tr("MuseScore: Open File"), s);
+            QMessageBox::critical(0, tr("MuseScore: Open File"), s);
             return false;
             }
       bool rv = saveCompressedFile(&fp, info, autosave);
@@ -674,7 +672,7 @@ bool MuseScore::saveCompressedFile(QFileInfo& info, bool autosave)
 //   saveCompressedFile
 //---------------------------------------------------------
 
-bool MuseScore::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
+bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       {
       Zip uz;
       Zip::ErrorCode ec = uz.createArchive(f);
@@ -729,7 +727,7 @@ bool MuseScore::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveFile(QFileInfo& info, bool autosave)
+bool Score::saveFile(QFileInfo& info, bool autosave)
       {
       QString ext(".msc");
 
@@ -739,7 +737,7 @@ bool MuseScore::saveFile(QFileInfo& info, bool autosave)
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(this, tr("MuseScore: Open File"), s);
+            QMessageBox::critical(0, tr("MuseScore: Open File"), s);
             return false;
             }
       bool rv = saveFile(&fp, autosave);
@@ -899,21 +897,20 @@ void Score::saveStyle()
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::saveFile(QIODevice* f, bool autosave)
+bool Score::saveFile(QIODevice* f, bool autosave)
       {
       Xml xml(f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
 
-      xml.tag("Mag",  canvas->mag());
-      xml.tag("xoff", canvas->xoffset() / DPMM);
-      xml.tag("yoff", canvas->yoffset() / DPMM);
+      xml.tag("Mag",  mag());
+      xml.tag("xoff", xoffset() / DPMM);
+      xml.tag("yoff", yoffset() / DPMM);
 
       if (::symbolPalette)
             ::symbolPalette->write(xml, "Symbols");
 
-      cs->write(xml, autosave);
-
+      write(xml, autosave);
       xml.etag();
 #if 0
       if (f->error() != QFile::NoError) {
