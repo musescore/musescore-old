@@ -306,6 +306,7 @@ MuseScore::MuseScore()
          << "reset-beammode"
          << "clef-violin" << "clef-bass"
          << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
+         << "repeat-cmd"
          ;
 
       foreach(const QString s, sl) {
@@ -1795,12 +1796,18 @@ int main(int argc, char* argv[])
 
 void MuseScore::cmd(QAction* a)
       {
+      static QString lastCmd;
+
       QString cmd(a->data().toString());
       Shortcut* sc = getShortcut(cmd.toAscii().data());
       if ((sc->state & _state) == 0) {
             printf("cmd <%s> not valid in state %d\n", qPrintable(cmd), _state);
             return;
             }
+      if (cmd == "repeat-cmd")
+            cmd = lastCmd;
+      else
+            lastCmd = cmd;
       if (cmd == "instruments")
             editInstrList();
       else if (cmd == "clefs")

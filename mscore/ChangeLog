@@ -1,4 +1,5 @@
 28.6.8 (ws)
+      - new command: "R" repeats last command
       - bug fix: "save file" messed up the scores when more than one score was
         loaded and modified
 27.6.8 (ws)
