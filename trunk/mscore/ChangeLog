@@ -1,3 +1,5 @@
+29.6.8 (ws)
+      - fix crash when entering note entry mode
 28.6.8 (ws)
       - new command: "R" repeats last command
       - bug fix: "save file" messed up the scores when more than one score was

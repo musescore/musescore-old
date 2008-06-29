@@ -651,8 +651,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setPitch(pitch);
             note->setTrack(track);
 
-//            if (seq && mscore->playEnabled())
-//                  seq->startNote(note->staff()->part(), note->pitch(), 64, 1000);
+            mscore->play(note);
 
             if (tie) {
                   tie->setEndNote(note);
@@ -955,10 +954,10 @@ void Score::upDown(bool up, bool octave)
       layoutAll = false;
       layoutStart = 0;        // DEBUG
       ElementList el;
-      foreach(const Element* e, *sel->elements()) {
+      foreach(Element* e, *sel->elements()) {
             if (e->type() != NOTE)
                   continue;
-            Note* note = (Note*)e;
+            Note* note = static_cast<Note*>(e);
 //            while (note->tieBack())
 //                  note = note->tieBack()->startNote();
             if (layoutStart == 0)
@@ -992,8 +991,7 @@ void Score::upDown(bool up, bool octave)
             undoChangePitch(oNote, newPitch);
 
             // play new note with velocity 80 for 0.3 sec:
-//            if (seq && mscore->playEnabled())
-//                  seq->startNote(oNote->staff()->part(), newPitch, 80, 300);
+            mscore->play(oNote, newPitch);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
@@ -1299,12 +1297,10 @@ void Score::moveUp(Note* note)
       {
       int rstaff = note->staff()->rstaff();
 
-      if (note->staffMove() == -1) {
+      if (note->staffMove() == -1)
             return;
-            }
-      if (rstaff + note->staffMove() <= 0) {
+      if (rstaff + note->staffMove() <= 0)
             return;
-            }
 
       note->setStaffMove(note->staffMove() - 1);
       layoutAll = true;
@@ -1548,7 +1544,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = upAlt(el);
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = ((Note*)e)->pitch();
+                                    _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, 0, 0);
@@ -1562,7 +1558,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = downAlt(el);
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = ((Note*)e)->pitch();
+                                    _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, 0, 0);
@@ -1573,10 +1569,10 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "top-chord" ) {
                   Element* el = sel->element(); // single selection
                   if (el && el->type() == NOTE) {
-                        Element* e = upAltCtrl((Note*)el);
+                        Element* e = upAltCtrl(static_cast<Note*>(el));
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = ((Note*)e)->pitch();
+                                    _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, 0, 0);
@@ -1587,10 +1583,10 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "bottom-chord") {
                   Element* el = sel->element(); // single selection
                   if (el && el->type() == NOTE) {
-                        Element* e = downAltCtrl((Note*)el);
+                        Element* e = downAltCtrl(static_cast<Note*>(el));
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = ((Note*)e)->pitch();
+                                    _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, 0, 0);
