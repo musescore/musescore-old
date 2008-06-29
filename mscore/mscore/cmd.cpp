@@ -253,6 +253,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   System* system = measure->system();
                   double yy = system->staff(staffIdx)->y();
                   QPointF uo(pos - measure->canvasPos() - QPointF(xx,yy) - dragOffset);
+                  uo -= QPointF(0.0, dyn->ipos().y());
                   dyn->setUserOff(uo / _spatium);
                   }
                   break;
