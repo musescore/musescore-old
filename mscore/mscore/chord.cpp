@@ -755,7 +755,7 @@ void Chord::layout(ScoreLayout* layout)
       //      l->layout(layout);
 
       //-----------------------------------------
-      //  Note Attributes
+      //  articulation
       //-----------------------------------------
 
       layoutAttributes(layout);

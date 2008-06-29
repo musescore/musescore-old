@@ -198,9 +198,11 @@ Style defaultStyle = {
       Spatium(0.5),     // dotNoteDistance
       Spatium(0.25),    // dotRestDistance
       Spatium(0.5),     // dotDotDistance
+
       Spatium(0.5),     // propertyDistanceHead
-      Spatium(0.5),     // propertyDistanceStem; note property to note stem
-      Spatium(0.25),    // propertyDistance; note property to note property
+      Spatium(0.5),     // propertyDistanceStem; note articulation to note stem
+      Spatium(0.25),    // propertyDistance; note articulation to note articulation
+
       0.7,              // pageFillLimit
       0.3,              // lastSystemFillLimit
       Spatium(1.2),     // hairpinHeight
