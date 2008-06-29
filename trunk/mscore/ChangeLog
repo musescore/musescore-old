@@ -1,4 +1,5 @@
 29.6.8 (ws)
+      - fix stem length of notes on ledger lines
       - allow "display in concert pitch" swich in note entry mode
       - disable all commands in gui which are not valid in current state
       - fix crash when entering note entry mode
