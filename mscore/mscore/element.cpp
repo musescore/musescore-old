@@ -878,6 +878,7 @@ Cursor::Cursor(Score* s, Viewer* v)
       viewer    = v;
       _on       = false;
       _blink    = true;
+      _h        = 6 * _spatium;
       }
 
 //---------------------------------------------------------
@@ -887,7 +888,7 @@ Cursor::Cursor(Score* s, Viewer* v)
 QRectF Cursor::bbox() const
       {
       double w  = 2.0 / static_cast<Viewer*>(score()->canvas())->matrix().m11();
-      _bbox = QRectF(0.0, 0.0, w, 6 * _spatium);
+      _bbox = QRectF(0.0, 0.0, w, _h);
       return _bbox;
       }
 

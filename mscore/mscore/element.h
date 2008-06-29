@@ -407,6 +407,7 @@ class Cursor : public Element {
       Viewer* viewer;
       bool _blink;
       bool _on;
+      double _h;
 
    public:
       Cursor(Score*, Viewer*);
@@ -415,10 +416,11 @@ class Cursor : public Element {
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
 
-      void setOn(bool f)      { _on = f; }
-      bool isOn() const       { return _on; }
-      void blink()            { _blink = !_blink; }
-      void noBlinking()       { _blink = true; }
+      void setOn(bool f)               { _on = f; }
+      bool isOn() const                { return _on; }
+      void blink()                     { _blink = !_blink; }
+      void noBlinking()                { _blink = true; }
+      virtual void setHeight(qreal v)  { _h = v; }
       };
 
 //---------------------------------------------------------
