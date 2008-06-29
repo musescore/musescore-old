@@ -1987,7 +1987,15 @@ void MuseScore::readSettings()
 void MuseScore::play(Element* e) const
       {
       if (mscore->playEnabled() && e->type() == NOTE) {
-            Note* note = (Note*) e;
+            Note* note = static_cast<Note*>(e);
+            play(e, note->pitch());
+            }
+      }
+
+void MuseScore::play(Element* e, int pitch) const
+      {
+      if (mscore->playEnabled() && e->type() == NOTE) {
+            Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
             Instrument* i = part->instrument();
             seq->startNote(i->channel[note->subchannel()], note->pitch(), 80, 300);

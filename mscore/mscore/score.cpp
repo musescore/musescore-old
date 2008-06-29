@@ -1117,7 +1117,10 @@ void Score::setNoteEntry(bool val)
                         rest = static_cast<Rest*>(el);
                   }
             if (rest == 0 && note == 0) {
-                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos, _is.track));
+                  int track = _is.track;
+                  if (track == -1)
+                        track = 0;
+                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos, track));
                   if (_is.cr == 0) {
                         printf("no note or rest selected 1\n");
                         return;
