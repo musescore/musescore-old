@@ -502,7 +502,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       //-----------------------------------------
 
       Spatium stemLen;
-      Spatium normalLen(3.5 * staffMag);
+      Spatium normalLen(3.5 * staffMag);  // stem length is one octave
 
       bool hasStem = duration().hasStem();
       int hookIdx  = duration().hooks();
@@ -513,7 +513,6 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
       else {
             stemLen = Spatium((up() ? uppos - 4.0 * staffMag : 4.0 * staffMag - downpos) * .5);
-            Spatium normalLen(3.5 * staffMag);
             if (stemLen < normalLen)
                   stemLen = normalLen;
             }
