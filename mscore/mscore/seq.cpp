@@ -553,9 +553,17 @@ void Seq::playEvent(const Event* event)
 
 void Seq::processMessages()
       {
-      mutex.lock();
-      while (!toSeq.isEmpty()) {
+      for (;;) {
+            mutex.lock();
+            if (toSeq.isEmpty()) {
+                  wait.wakeAll();
+                  mutex.unlock();
+                  break;
+                  }
             SeqMsg msg = toSeq.dequeue();
+            wait.wakeAll();
+            mutex.unlock();
+
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         {
@@ -573,8 +581,6 @@ void Seq::processMessages()
                         break;
                   }
             }
-      wait.wakeAll();
-      mutex.unlock();
       }
 
 //---------------------------------------------------------
@@ -783,7 +789,7 @@ void Seq::setRelTempo(int relTempo)
       {
       SeqMsg msg;
       msg.data = relTempo;
-      msg.id    = SEQ_TEMPO_CHANGE;
+      msg.id   = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
       double tempo = cs->tempomap->tempo(playPos.key()) * relTempo * 0.01;
