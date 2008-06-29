@@ -512,7 +512,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             stemLen = normalLen * score()->style()->graceNoteMag;
             }
       else {
-            stemLen = Spatium((up() ? uppos - 3.0 * staffMag : 3.0 * staffMag - downpos) * .5);
+            stemLen = Spatium((up() ? uppos - 4.0 * staffMag : 4.0 * staffMag - downpos) * .5);
             Spatium normalLen(3.5 * staffMag);
             if (stemLen < normalLen)
                   stemLen = normalLen;
