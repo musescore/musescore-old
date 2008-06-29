@@ -1801,7 +1801,10 @@ void MuseScore::cmd(QAction* a)
       QString cmd(a->data().toString());
       Shortcut* sc = getShortcut(cmd.toAscii().data());
       if ((sc->state & _state) == 0) {
-            printf("cmd <%s> not valid in state %d\n", qPrintable(cmd), _state);
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: invalid command"),
+               QString("command %1 not valid in current state").arg(cmd),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return;
             }
       if (cmd == "repeat-cmd")
@@ -1879,10 +1882,7 @@ void MuseScore::setState(int val)
       {
       foreach (Shortcut* s, shortcuts) {
             if (s->action) {
-                  if (s->state & val)
-                        s->action->setShortcut(s->key);
-                  else
-                        s->action->setShortcut(0);
+                  s->action->setEnabled(s->state & val);
                   }
             }
       switch(val) {
@@ -1998,7 +1998,7 @@ void MuseScore::play(Element* e, int pitch) const
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
             Instrument* i = part->instrument();
-            seq->startNote(i->channel[note->subchannel()], note->pitch(), 80, 300);
+            seq->startNote(i->channel[note->subchannel()], pitch, 80, 300);
             }
       }
 

@@ -1,4 +1,6 @@
 29.6.8 (ws)
+      - allow "display in concert pitch" swich in note entry mode
+      - disable all commands in gui which are not valid in current state
       - fix crash when entering note entry mode
 28.6.8 (ws)
       - new command: "R" repeats last command
