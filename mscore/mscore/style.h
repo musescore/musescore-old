@@ -164,7 +164,6 @@ struct Style {
       Spatium staffLineWidth;
       Spatium ledgerLineWidth;
       Spatium akkoladeWidth;
-      Spatium akkoladeDistance;
       Spatium prefixDistance;
       Spatium prefixNoteDistance;
       Spatium beamWidth;

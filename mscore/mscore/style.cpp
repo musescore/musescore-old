@@ -184,7 +184,6 @@ Style defaultStyle = {
       Spatium(0.08),    // staff line width
       Spatium(0.08),    // ledgerLineWidth;
       Spatium(1.6),     // akkoladeWidth;
-      Spatium(5.5),     // akkoladeDistance;
       Spatium(0.13),    // prefixDistance
 
       Spatium(0.22),    // prefixNoteDistance
@@ -458,8 +457,9 @@ void Style::load(QDomElement e, int version)
                   ledgerLineWidth = Spatium(d);
             else if (tag == "akkoladeWidth")
                   akkoladeWidth = Spatium(d);
-            else if (tag == "akkoladeDistance")
-                  akkoladeDistance = Spatium(d);
+            else if (tag == "akkoladeDistance") {
+                  accoladeDistance = Spatium(d);
+                  }
             else if (tag == "prefixDistance")
                   prefixDistance = Spatium(d);
             else if (tag == "prefixNoteDistance")
@@ -565,7 +565,8 @@ void Style::save(Xml& xml)
       xml.tag("staffUpperBorder",       staffUpperBorder.val());
       xml.tag("staffLowerBorder",       staffLowerBorder.val());
       xml.tag("staffDistance",          staffDistance.val());
-      xml.tag("akkoladeDistance",       akkoladeDistance.val());
+      xml.tag("akkoladeDistance",       accoladeDistance.val());
+
       xml.tag("systemDistance",         systemDistance.val());
       xml.tag("lyricsDistance",         lyricsDistance.val());
       xml.tag("lyricsMinBottomDistance", lyricsMinBottomDistance.val());
