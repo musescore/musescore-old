@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
-  <Mag>1</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+<museScore version="1.9">
+  <Mag>1.61051</Mag>
+  <xoff>-20.5317</xoff>
+  <yoff>-28.7867</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -794,7 +794,7 @@
     <staffLowerBorder>4</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
-    <systemDistance>9.25</systemDistance>
+    <systemDistance>15.2</systemDistance>
     <lyricsDistance>6.5</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>7</systemFrameDistance>
@@ -887,58 +887,234 @@
       </Staff>
     <trackName>Sopran</trackName>
     <Instrument>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <Note pitch="36" tpc="14" ticks="480"/>
-      <Note pitch="38" tpc="16" ticks="480"/>
-      <Note pitch="40" tpc="18" ticks="480"/>
-      <Note pitch="41" tpc="13" ticks="480"/>
-      </Measure>
-    <Measure number="2">
-      <Note pitch="43" tpc="15" ticks="480"/>
-      <Note pitch="45" tpc="17" ticks="480"/>
-      <Note pitch="47" tpc="19" ticks="480"/>
-      <Note pitch="48" tpc="14" ticks="480"/>
-      </Measure>
-    <Measure number="3">
-      <Note pitch="50" tpc="16" ticks="480"/>
-      <Note pitch="52" tpc="18" ticks="480"/>
-      <Note pitch="53" tpc="13" ticks="480"/>
-      <Note pitch="55" tpc="15" ticks="480"/>
-      </Measure>
-    <Measure number="4">
-      <Note pitch="57" tpc="17" ticks="480"/>
-      <Note pitch="59" tpc="19" ticks="480"/>
-      <Note pitch="60" tpc="14" ticks="480"/>
-      <Note pitch="62" tpc="16" ticks="480"/>
-      </Measure>
-    <Measure number="5">
-      <Note pitch="64" tpc="18" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="69" tpc="17" ticks="480"/>
-      </Measure>
-    <Measure number="6">
-      <Note pitch="71" tpc="19" ticks="480"/>
-      <Note pitch="72" tpc="14" ticks="480"/>
-      <Note pitch="74" tpc="16" ticks="480"/>
-      <Note pitch="76" tpc="18" ticks="480"/>
-      </Measure>
-    <Measure number="7">
-      <Note pitch="77" tpc="13" ticks="480"/>
-      <Note pitch="79" tpc="15" ticks="480"/>
-      <Note pitch="81" tpc="17" ticks="480"/>
       <Chord>
         <ticklen>480</ticklen>
-        <Note>
-          <selected>1</selected>
-          <pitch>83</pitch>
-          <tpc>19</tpc>
-          </Note>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="38" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="47" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="5">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="83" tpc="19"/>
+        </Chord>
+      </Measure>
+    <Measure number="8">
+      <StaffText>
+        <subtype>System</subtype>
+        <systemFlag>1</systemFlag>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">shorten note stem if stem has the "wrong" direction:</p></body></html>
+          </html-data>
+        </StaffText>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="10">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      </Measure>
+    <Measure number="1">
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="64" tpc="18"/>
         </Chord>
       </Measure>
     </Staff>

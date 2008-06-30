@@ -1,4 +1,7 @@
 30.6.8 (ws)
+      - new demo file "Gymnopedie 1" from Erik Satie. The demo looks better with
+        the new "short stem" feature.
+      - shorten note stem if stem has the "wrong" direction
       - fix: style parameter "akkoladeDistance" did not work
       - disable "R" repeat command in edit mode
 29.6.8 (ws)
