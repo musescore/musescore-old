@@ -447,7 +447,8 @@ TextStyle* TextB::style() const
             case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
             case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
             case TEXT_TEXTLINE:         st = TEXT_STYLE_TEXTLINE; break;
-            case TEXT_UNKNOWN:          break;
+            case TEXT_UNKNOWN:
+                  break;
             default:
                   printf("unknown text subtype %d <%s>\n",
                      subtype(), qPrintable(doc()->toPlainText()));

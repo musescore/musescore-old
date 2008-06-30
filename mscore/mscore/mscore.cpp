@@ -1807,8 +1807,11 @@ void MuseScore::cmd(QAction* a)
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return;
             }
-      if (cmd == "repeat-cmd")
+      if (cmd == "repeat-cmd") {
             cmd = lastCmd;
+            if (cmd.isEmpty())
+                  return;
+            }
       else
             lastCmd = cmd;
       if (cmd == "instruments")
