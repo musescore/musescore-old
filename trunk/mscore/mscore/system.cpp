@@ -300,13 +300,16 @@ void System::layout2(ScoreLayout* layout)
       qreal y = 0.0;
       int lastStaffIdx = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            Staff* staff    = score()->staff(staffIdx);
-            if ((staffIdx + 1) == staves)
+            Staff* staff = score()->staff(staffIdx);
+            if ((staffIdx + 1) == staves) {
                   setDistance(staffIdx, score()->style()->systemDistance);
-            else if ((staff->part()->staves()->size() + 1) < staff->rstaff())
+                  }
+            else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
                   setDistance(staffIdx, score()->style()->accoladeDistance);
-            else
+                  }
+            else {
                   setDistance(staffIdx, score()->style()->staffDistance);
+                  }
             double dist = 0.0;
             foreach(MeasureBase* m, ml)
                   dist = std::max(dist, m->distance(staffIdx));
