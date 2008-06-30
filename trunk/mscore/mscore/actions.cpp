@@ -1604,7 +1604,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Display in Concert Pitch")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "repeat-cmd",
          QT_TR_NOOP("repeat last command"),
          Qt::Key_R,
