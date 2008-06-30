@@ -512,8 +512,18 @@ void Chord::layoutStem(ScoreLayout* layout)
             stemLen = normalLen * score()->style()->graceNoteMag;
             }
       else {
-            stemLen = Spatium((up() ? uppos - 4.0 * staffMag : 4.0 * staffMag - downpos) * .5);
-            if (stemLen < normalLen)
+            if (up()) {
+                  stemLen = Spatium((uppos - 4.0 * staffMag) * .5);
+                  }
+            else {
+                  stemLen = Spatium((4.0 * staffMag - downpos) * .5);
+                  }
+
+            // stems in the "wrong" direction are shorter than one octave:
+            if (stemLen.val() < 0.0)
+                  stemLen = Spatium(2.5 * staffMag);
+
+            else if (stemLen < normalLen)
                   stemLen = normalLen;
             }
 
