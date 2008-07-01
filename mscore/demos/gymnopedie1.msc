@@ -139,9 +139,9 @@
       <o4 x="-0.289687" y="1.51987"/>
       </SlurSegment>
     <SlurSegment no="1">
-      <o1 x="0.12" y="-2.52"/>
-      <o2 x="-3.24" y="-2.64"/>
-      <o3 x="4.8" y="-1.68"/>
+      <o1 x="-0.372296" y="-2.0277"/>
+      <o2 x="-0.655448" y="-0.670818"/>
+      <o3 x="3.81541" y="-1.1877"/>
       </SlurSegment>
     </Slur>
   <Slur id="3">
@@ -178,19 +178,33 @@
     </Slur>
   <Slur id="7">
     <track>0</track>
+    <SlurSegment no="0">
+      <o1 x="1.8" y="2.28"/>
+      <o2 x="-1.56" y="-1.44"/>
+      <o3 x="1.32" y="-1.2"/>
+      </SlurSegment>
     </Slur>
   <Slur id="8">
     <track>0</track>
     </Slur>
   <Slur id="9">
     <track>0</track>
+    <SlurSegment no="0">
+      <o2 x="-2.16" y="-2.04"/>
+      <o3 x="4.2" y="-1.44"/>
+      </SlurSegment>
     </Slur>
   <Slur id="10">
     <track>0</track>
     <SlurSegment no="0">
-      <o2 x="-4.2" y="-4.92"/>
-      <o3 x="1.44" y="-3.12"/>
+      <o2 x="-3.72" y="-3.96"/>
+      <o3 x="2.64" y="-1.32"/>
       <o4 x="0.12" y="-2.28"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <o2 x="-18.72" y="-1.68"/>
+      <o3 x="15.36" y="-1.2"/>
+      <o4 x="-0.6" y="1.32"/>
       </SlurSegment>
     </Slur>
   <HairPin>
@@ -199,7 +213,156 @@
     <tick>108000</tick>
     <tick2>110880</tick2>
     <Segment>
-      <off1 x="0.026816" y="3.70861"/>
+      <off1 x="-0.0931839" y="2.86861"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>6240</tick>
+    <tick2>9600</tick2>
+    <Segment>
+      <off1 x="3.48" y="2.52"/>
+      <off2 x="-3.96" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>9600</tick>
+    <tick2>10560</tick2>
+    <Segment>
+      <off1 x="1.92" y="2.52"/>
+      <off2 x="2.4" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>17760</tick>
+    <tick2>21120</tick2>
+    <Segment>
+      <off1 x="0.12" y="2.28"/>
+      <off2 x="-0.6" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>21120</tick>
+    <tick2>25920</tick2>
+    <Segment>
+      <off1 x="1.44" y="2.16"/>
+      <off2 x="-0.72" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="8.03999" y="2.64"/>
+      <off2 x="-5.76" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>30720</tick>
+    <tick2>34080</tick2>
+    <Segment>
+      <off1 x="-1.8" y="0"/>
+      <off2 x="4.2" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>36960</tick>
+    <tick2>39840</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>40320</tick>
+    <tick2>41760</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>44160</tick>
+    <tick2>46560</tick2>
+    <Segment>
+      <off1 x="-0.12" y="1.56"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="1.92" y="2.64"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>62400</tick>
+    <tick2>64320</tick2>
+    <Segment>
+      <off1 x="0.12" y="2.52"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>64800</tick>
+    <tick2>66240</tick2>
+    <Segment>
+      <off1 x="0.24" y="2.28"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>73920</tick>
+    <tick2>77280</tick2>
+    <Segment>
+      <off1 x="0.6" y="2.76"/>
+      <off2 x="-0.839999" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>77280</tick>
+    <tick2>79680</tick2>
+    <Segment>
+      <off1 x="1.32" y="2.64"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>80640</tick>
+    <tick2>82080</tick2>
+    <Segment>
+      <off1 x="0.12" y="2.28"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>89280</tick>
+    <tick2>90720</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>93120</tick>
+    <tick2>96000</tick2>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>96480</tick>
+    <tick2>97920</tick2>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>100320</tick>
+    <tick2>102240</tick2>
+    <Segment>
+      <off1 x="0.24" y="2.04"/>
       <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
@@ -223,7 +386,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Erik Satie</p></body></html>
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Erik Satie (1866-1925)</p></body></html>
           </html-data>
         </Text>
       </VBox>
@@ -306,6 +469,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <Rest>
+        <offset x="0.398622" y="1.86897"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -318,6 +482,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="4">
       <Rest>
+        <offset x="0.0386219" y="1.93109"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -331,7 +496,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="5">
       <Dynamic>
         <subtype>pp</subtype>
-        <offset x="-0.671014" y="1.46401"/>
+        <offset x="-0.431014" y="1.94401"/>
         <tick>6240</tick>
         </Dynamic>
       <Rest>
@@ -386,6 +551,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Rest>
+        <offset x="0.115866" y="1.81523"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -440,7 +606,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="7">
       <Rest>
-        <offset x="0.36" y="3.96"/>
+        <offset x="0.398622" y="2.95583"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -488,7 +654,7 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </LayoutBreak>
       <Rest>
-        <offset x="0.36" y="3.12"/>
+        <offset x="0.437244" y="3.00413"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -634,7 +800,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="13">
       <Dynamic>
         <subtype>pp</subtype>
-        <offset x="-0.367094" y="0.672701"/>
+        <offset x="-0.367094" y="1.7527"/>
         </Dynamic>
       <Rest>
         <offset x="0.12" y="2.76"/>
@@ -934,7 +1100,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="22">
       <Dynamic>
         <subtype>p</subtype>
-        <offset x="0.234275" y="-1.69944"/>
+        <offset x="0.474275" y="-0.259441"/>
         </Dynamic>
       <Chord>
         <ticklen>480</ticklen>
@@ -1439,7 +1605,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Dynamic>
         <subtype>pp</subtype>
-        <offset x="-0.206957" y="0.658953"/>
+        <offset x="-0.326957" y="1.97895"/>
         </Dynamic>
       <Rest>
         <offset x="-0.12" y="3.12"/>
@@ -1739,7 +1905,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <Dynamic>
         <subtype>pp</subtype>
-        <offset x="-0.356957" y="0.525066"/>
+        <offset x="-0.116957" y="2.08507"/>
         </Dynamic>
       <Rest>
         <offset x="0" y="2.76"/>
@@ -2102,6 +2268,9 @@ p, li { white-space: pre-wrap; }
           <pitch>74</pitch>
           <tpc>16</tpc>
           <Tie>
+            <SlurSegment no="1">
+              <offset x="0.36" y="-1.2"/>
+              </SlurSegment>
             </Tie>
           </Note>
         </Chord>
@@ -2114,7 +2283,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Slur type="start" number="9"/>
-        <Note pitch="74" tpc="16"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.12" y="-2.4"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="66">
@@ -2179,7 +2362,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Slur type="start" number="10"/>
-        <Note pitch="74" tpc="16"/>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-0.48" y="-2.4"/>
+            <track>-1</track>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="71">
