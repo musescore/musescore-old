@@ -209,6 +209,8 @@ struct Style {
       bool chordNamesUseSymbols;
 
       bool concertPitch;      // display transposing instruments in concert pitch
+      bool createMultiMeasureRests;
+      bool hideEmptyStaves;
 
       //---------------------------------------------------------
       //   PlayStyle

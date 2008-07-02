@@ -90,6 +90,14 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="Seite_5" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>606</width>
+        <height>389</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" name="gridLayout_2" >
        <item row="0" column="0" >
         <widget class="QCheckBox" name="concertPitch" >
@@ -111,7 +119,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" >
+       <item row="3" column="0" >
         <spacer name="verticalSpacer" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -123,6 +131,20 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="createMultiMeasureRests" >
+         <property name="text" >
+          <string>Create Multi Measure Rests</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QCheckBox" name="hideEmptyStaves" >
+         <property name="text" >
+          <string>Hide Empty Staves</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

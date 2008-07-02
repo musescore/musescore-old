@@ -131,6 +131,8 @@ void EditStyle::getValues()
       lstyle->useGermanNoteNames     = useGermanNoteNames->isChecked();
       lstyle->chordNamesUseSymbols   = chordNamesUseSymbols->isChecked();
       lstyle->concertPitch           = concertPitch->isChecked();
+      lstyle->createMultiMeasureRests = createMultiMeasureRests->isChecked();
+      lstyle->hideEmptyStaves         = hideEmptyStaves->isChecked();
       }
 
 //---------------------------------------------------------
@@ -205,5 +207,7 @@ void EditStyle::setValues()
       useGermanNoteNames->setChecked(lstyle->useGermanNoteNames);
       chordNamesUseSymbols->setChecked(lstyle->chordNamesUseSymbols);
       concertPitch->setChecked(lstyle->concertPitch);
+      createMultiMeasureRests->setChecked(lstyle->createMultiMeasureRests);
+      hideEmptyStaves->setChecked(lstyle->hideEmptyStaves);
       }
 

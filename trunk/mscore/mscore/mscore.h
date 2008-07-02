@@ -213,6 +213,7 @@ class MuseScore : public QMainWindow {
       QList<QString> plugins;
 
       QTimer* autoSaveTimer;
+      QSignalMapper* pluginMapper;
 
       virtual void closeEvent(QCloseEvent*);
 
@@ -233,6 +234,7 @@ class MuseScore : public QMainWindow {
       bool saveFile();
       void newFile();
       void fingeringMenu();
+      void registerPlugin(const QString& pluginPath);
 
    private slots:
       void autoSaveTimerTimeout();

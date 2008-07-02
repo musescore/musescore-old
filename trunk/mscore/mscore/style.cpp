@@ -228,6 +228,8 @@ Style defaultStyle = {
       false,            // use german note names
       false,            // use symbols in chord names
       false,            // display in concert pitch
+      false,            // create multi measure rests
+      false,            // hide empty staves
 
       // play style
       70,               // gateTime
@@ -541,6 +543,10 @@ void Style::load(QDomElement e, int version)
                   chordNamesUseSymbols = i;
             else if (tag == "displayInConcertPitch")
                   concertPitch = i;
+            else if (tag == "createMultiMeasureRests")
+                  createMultiMeasureRests = i;
+            else if (tag == "hideEmptyStaves")
+                  hideEmptyStaves = i;
             else if (tag == "gateTime")
                   gateTime  = i;
             else if (tag == "tenutoGateTime")
@@ -641,6 +647,10 @@ void Style::save(Xml& xml)
             xml.tag("chordNamesUseSymbols", chordNamesUseSymbols);
       if (concertPitch)
             xml.tag("displayInConcertPitch", concertPitch);
+      if (createMultiMeasureRests)
+            xml.tag("createMultiMeasureRests", createMultiMeasureRests);
+      if (hideEmptyStaves)
+            xml.tag("hideEmptyStaves", hideEmptyStaves);
 
       xml.tag("gateTime",               gateTime);
       xml.tag("tenutoGateTime",         tenutoGateTime);
