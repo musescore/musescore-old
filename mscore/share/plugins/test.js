@@ -39,13 +39,18 @@ function init()
 //    run
 //    this function will be called when activating the
 //    plugin menu entry
+//
+//    global Variables:
+//    pluginPath - contains the plugin path; file separator
+//                 is "/"
 //---------------------------------------------------------
 
 function run()
       {
-      print("score name: ", score.name);
-      print("staves:     ", score.nstaves);
-      print("division:   ", division);
+      print("plugin path: ", pluginPath);
+      print("score name:  ", score.name);
+      print("staves:      ", score.nstaves);
+      print("division:    ", division);
       mb = new QMessageBox();
       mb.setWindowTitle("MuseScore: Testplugin");
       mb.text = "Hello MuseScore!";

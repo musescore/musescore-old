@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+  <xoff>-1.27</xoff>
+  <yoff>-5.50333</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -370,16 +370,6 @@
     <VBox>
       <height>10</height>
       <Text>
-        <subtype>Title</subtype>
-        <track>-1</track>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Gymnopèdie I</p></body></html>
-          </html-data>
-        </Text>
-      <Text>
         <subtype>Composer</subtype>
         <track>-1</track>
         <html-data>
@@ -387,6 +377,16 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Erik Satie (1866-1925)</p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>Title</subtype>
+        <track>-1</track>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1<span style=" vertical-align:super;">ère </span>Gymnopédie</p></body></html>
           </html-data>
         </Text>
       </VBox>
@@ -2268,7 +2268,7 @@ p, li { white-space: pre-wrap; }
           <pitch>74</pitch>
           <tpc>16</tpc>
           <Tie>
-            <SlurSegment no="1">
+            <SlurSegment no="0">
               <offset x="0.36" y="-1.2"/>
               </SlurSegment>
             </Tie>
