@@ -1,4 +1,5 @@
 3.7.8 (ws)
+      - add time display to transport panel; repeats are not handled yet
       - dont destroy script interpreter after script execution
       - mark dirty scores with asterisk in tab text
 2.7.8 (ws)

@@ -590,6 +590,7 @@ class Score : public QObject {
       void updateChannel();
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
+      TempoList* getTempomap() const { return tempomap; }
       };
 
 extern Score* gscore;

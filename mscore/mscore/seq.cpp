@@ -743,7 +743,10 @@ void Seq::heartBeat()
       if (state != PLAY)
             return;
 
+      PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
+      if (pp)
+            pp->heartBeat2(lrint(endTime));
       Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
             double f = tick2time(guiPos.key());
@@ -765,7 +768,6 @@ void Seq::heartBeat()
       if (note) {
             foreach(Viewer* v, cs->getViewer())
                   v->moveCursor(note->chord()->segment());
-            PlayPanel* pp = mscore->getPlayPanel();
             if (pp)
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
             }
