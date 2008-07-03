@@ -230,6 +230,8 @@ MuseScore::MuseScore()
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
+      se                    = 0;    // script engine
+      debugger              = 0;
       editStyleWin          = 0;
       instrList             = 0;
       playPanel             = 0;
@@ -1073,6 +1075,7 @@ void MuseScore::selectionChanged(int state)
 
 void MuseScore::appendScore(Score* score)
       {
+      connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
       scoreList.push_back(score);
       tab->addTab(score->name());
 
@@ -2026,5 +2029,22 @@ AboutBoxDialog::AboutBoxDialog()
       setupUi(this);
       versionLabel->setText("Version: " VERSION);
       revisionLabel->setText(QString("Revision: %1").arg(revision));
+      }
+
+//---------------------------------------------------------
+//   dirtyChanged
+//---------------------------------------------------------
+
+void MuseScore::dirtyChanged(Score* score)
+      {
+      int idx = scoreList.indexOf(score);
+      if (idx == -1) {
+            printf("score not in list\n");
+            return;
+            }
+      QString label(score->name());
+      if (score->dirty())
+            label += "*";
+      tab->setTabText(idx, label);
       }
 

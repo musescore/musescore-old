@@ -1,3 +1,6 @@
+3.7.8 (ws)
+      - dont destroy script interpreter after script execution
+      - mark dirty scores with asterisk in tab text
 2.7.8 (ws)
       - when searching for plugins look also into subdirs
       - export plugin path to plugin scripts

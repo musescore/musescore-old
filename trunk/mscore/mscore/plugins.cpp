@@ -31,6 +31,9 @@
 
 void MuseScore::registerPlugin(const QString& pluginPath)
       {
+      if (plugins.contains(pluginPath))
+            return;
+
       QFile f(pluginPath);
       if (!f.open(QIODevice::ReadOnly)) {
             if (debugMode)
@@ -124,53 +127,55 @@ void MuseScore::loadPlugins()
 
 void MuseScore::pluginTriggered(int idx)
       {
-      QString pluginPath = plugins[idx];
-      QFile f(pluginPath);
+      QString pp = plugins[idx];
+      QFile f(pp);
       if (!f.open(QIODevice::ReadOnly)) {
             if (debugMode)
-                  printf("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
+                  printf("Loading Plugin <%s> failed\n", qPrintable(pp));
             return;
             }
       if (debugMode)
-            printf("Run Plugin <%s>\n", qPrintable(pluginPath));
-      QScriptEngine se(0);
-      se.importExtension("qt.core");
-      se.importExtension("qt.gui");
-      se.importExtension("qt.xml");
-      se.importExtension("qt.network");
-      se.importExtension("qt.uitools");
+            printf("Run Plugin <%s>\n", qPrintable(pp));
+      if (se == 0) {
+            se = new QScriptEngine(0);
+            se->importExtension("qt.core");
+            se->importExtension("qt.gui");
+            se->importExtension("qt.xml");
+            se->importExtension("qt.network");
+            se->importExtension("qt.uitools");
 
 #ifdef HAS_SCRIPT_DEBUG
-      QScriptEmbeddedDebugger debugger;
-      if (scriptDebug) {
-            debugger.attachTo(&se);
-            debugger.breakAtFirstStatement();
-            }
+            if (scriptDebug) {
+                  if (debugger == 0)
+                        debugger = new QScriptEmbeddedDebugger();
+                  debugger->attachTo(se);
+                  debugger->breakAtFirstStatement();
+                  }
 #endif
-
 #if QT_VERSION >= 0x040400
-      if (debugMode) {
-            QStringList sl = se.availableExtensions();
-            printf("available:\n");
-            foreach(QString s, sl)
-                  printf("  <%s>\n", qPrintable(s));
+            if (debugMode) {
+                  QStringList sl = se->availableExtensions();
+                  printf("available:\n");
+                  foreach(QString s, sl)
+                        printf("  <%s>\n", qPrintable(s));
 
-            sl = se.importedExtensions();
-            printf("imported:\n");
-            foreach(QString s, sl)
-                  printf("  <%s>\n", qPrintable(s));
-            }
+                  sl = se->importedExtensions();
+                  printf("imported:\n");
+                  foreach(QString s, sl)
+                        printf("  <%s>\n", qPrintable(s));
+                  }
 #endif
-
-      QScriptValue v = se.newQObject(cs);
-      se.globalObject().setProperty("score", v);
-      v = se.newVariant(division);
-      se.globalObject().setProperty("division", v);
+            }
+      QScriptValue v = se->newQObject(cs);
+      se->globalObject().setProperty("score", v);
+      v = se->newVariant(division);
+      se->globalObject().setProperty("division", v);
       QFileInfo fi(f);
-      v = se.newVariant(fi.absolutePath());
-      se.globalObject().setProperty("pluginPath", v);
+      pluginPath = fi.absolutePath();
+      v = se->newVariant(pluginPath);
+      se->globalObject().setProperty("pluginPath", v);
 
-      QScriptValue val = se.evaluate(f.readAll(), pluginPath);
+      QScriptValue val = se->evaluate(f.readAll(), pp);
       f.close();
       QScriptValue run = val.property("run");
       if (!run.isFunction()) {
@@ -180,9 +185,9 @@ void MuseScore::pluginTriggered(int idx)
       run.call();
 
 #ifdef HAS_SCRIPT_DEBUG
-      if (scriptDebug) {
-            debugger.detach();
-            }
+//      if (scriptDebug) {
+//            debugger->detach();
+//            }
 #endif
       }
 

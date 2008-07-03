@@ -1287,9 +1287,13 @@ void Score::setShowInvisible(bool v)
 
 void Score::setDirty(bool val)
       {
-      _dirty = val;
-      if (val)
-            _playlistDirty = true;
+printf("Score::setDirty\n");
+      if (_dirty != val) {
+            _dirty = val;
+            if (val)
+                  _playlistDirty = true;
+            emit dirtyChanged(this);
+            }
       }
 
 //---------------------------------------------------------

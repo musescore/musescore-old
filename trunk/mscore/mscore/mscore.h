@@ -47,6 +47,7 @@ class MagBox;
 class NewWizard;
 class Palette;
 class ExcerptsDialog;
+class QScriptEmbeddedDebugger;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -154,7 +155,10 @@ class MuseScore : public QMainWindow {
       Q_OBJECT
 
       int _state;
+
+      QList<Score*> scoreList;
       Score* cs;              // current score
+
       Canvas* canvas;
       QVBoxLayout* layout;
       TabBar* tab;
@@ -206,14 +210,18 @@ class MuseScore : public QMainWindow {
       NewWizard* newWizard;
 
       PaletteBox* paletteBox;
-      QList<Score*> scoreList;
       bool _midiinEnabled;
       bool _speakerEnabled;
       QString lastOpenPath;
       QList<QString> plugins;
+      QScriptEngine* se;
+      QString pluginPath;
+      QScriptEmbeddedDebugger* debugger;
 
       QTimer* autoSaveTimer;
       QSignalMapper* pluginMapper;
+
+      //---------------------
 
       virtual void closeEvent(QCloseEvent*);
 
@@ -282,6 +290,7 @@ class MuseScore : public QMainWindow {
       void showPlayPanel(bool);
       void showPalette(bool);
       void showNavigator(bool);
+      void dirtyChanged(Score*);
 
    public:
       MuseScore();

@@ -246,6 +246,7 @@ class Score : public QObject {
 
    signals:
       void selectionChanged(int);
+      void dirtyChanged(Score*);
 
    public:
       bool cmdActive;
