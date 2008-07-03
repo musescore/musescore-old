@@ -36,6 +36,7 @@ PlayPanel::PlayPanel(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       cachedTickPosition = -1;
+      cachedTimePosition = -1;
       setupUi(this);
       volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
       tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
@@ -149,14 +150,38 @@ void PlayPanel::posChanged(int tick)
 
 void PlayPanel::heartBeat(int relTickpos, int absTickpos)
       {
+      if (!isVisible())
+            return;
       if (cachedTickPosition == absTickpos)
             return;
-      cachedTickPosition = absTickpos;
+      cachedTickPosition = relTickpos;
+
       int bar, beat, tick;
       cs->sigmap->tickValues(relTickpos, &bar, &beat, &tick);
+
       char buffer[32];
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);
       posLabel->setText(QString(buffer));
       posSlider->setValue(absTickpos);
+      }
+
+//---------------------------------------------------------
+//   heartBeat2
+//---------------------------------------------------------
+
+void PlayPanel::heartBeat2(int sec)
+      {
+      if (!isVisible())
+            return;
+      if (sec == cachedTimePosition)
+            return;
+      cachedTimePosition = sec;
+      int m              = sec / 60;
+      sec                = sec % 60;
+      int h              = m / 60;
+      m                  = m % 60;
+      char buffer[32];
+      sprintf(buffer, "%d:%02d:%02d", h, m, sec);
+      timeLabel->setText(QString(buffer));
       }
 
