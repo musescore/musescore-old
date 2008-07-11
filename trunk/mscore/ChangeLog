@@ -1,4 +1,5 @@
 11.07 (ws)
+      - fix saving of compressed MusicXML *.mxl format
       - changes in windows cross build
 3.7.8 (ws)
       - add time display to transport panel; repeats are not handled yet
