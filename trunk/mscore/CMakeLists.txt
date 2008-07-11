@@ -91,7 +91,10 @@ if (NOT QT4_FOUND)
          "If you compiled QT4 yourself make sure your new qmake ist found"
          "_first_ in your PATH."
          )
-      endif (NOT QT4_FOUND)
+else (NOT QT4_FOUND)
+      message("Qt lib found at ${QT_LIBRARY_DIR}")
+endif (NOT QT4_FOUND)
+
 
 # Set QT_QTSCRIPT_INCLUDE_DIR
 FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript

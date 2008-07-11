@@ -676,6 +676,8 @@ void Score::checkUndoOp()
             fprintf(stderr, "undoOp: cmd not started\n");
             if (debugMode)
                   abort();
+            undoList.push_back(new Undo(_is, sel));
+            cmdActive = true;
             }
       if (UNDO) {
             fprintf(stderr, "create undo op in undo/redo operation\n");

@@ -4,12 +4,12 @@
 
 set (CMAKE_SYSTEM_NAME "Windows")
 
-set (CMAKE_C_COMPILER   i586-mingw32msvc-gcc)
-set (CMAKE_CXX_COMPILER i586-mingw32msvc-g++)
-#set (CMAKE_C_COMPILER /home/ws/.wine/drive_c/MinGW/bin/gcc.exe)
-#set (CMAKE_CXX_COMPILER /home/ws/.wine/drive_c/MinGW/bin/g++.exe)
+set (CROSS /home/ws/mingw)
+set (CROSSQT ${CROSS}/Qt/4.4.0)
 
-set (CMAKE_FIND_ROOT_PATH /usr/i586-mingw32msvc)
+set (CMAKE_C_COMPILER     ${CROSS}/bin/i386-mingw32-gcc)
+set (CMAKE_CXX_COMPILER   ${CROSS}/bin/i386-mingw32-g++)
+set (CMAKE_FIND_ROOT_PATH ${CROSS}/i386-mingw32)
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search
@@ -19,27 +19,36 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-set (QT_INCLUDE_DIR           "/home/ws/.wine/drive_c/Qt/4.4.0/include")
-set (QT_QT_INCLUDE_DIR        "/home/ws/.wine/drive_c/Qt/4.4.0/include/Qt")
-set (QT_QTCORE_INCLUDE_DIR    "/home/ws/.wine/drive_c/Qt/4.4.0/include/QtCore")
-set (QT_QTXML_INCLUDE_DIR     "/home/ws/.wine/drive_c/Qt/4.4.0/include/QtXml")
-set (QT_QTGUI_INCLUDE_DIR     "/home/ws/.wine/drive_c/Qt/4.4.0/include/QtGui")
-set (QT_QTUITOOLS_INCLUDE_DIR "/home/ws/.wine/drive_c/Qt/4.4.0/include/QtUiTools")
-set (QT_LIBRARY_DIR "/home/ws/.wine/drive_c/Qt/4.4.0/lib")
+set (QT_INCLUDE_DIR           ${CROSSQT}/include)
+set (QT_QT_INCLUDE_DIR        ${CROSSQT}/include/Qt)
+set (QT_QTCORE_INCLUDE_DIR    ${CROSSQT}/include/QtCore)
+set (QT_QTXML_INCLUDE_DIR     ${CROSSQT}/include/QtXml)
+set (QT_QTGUI_INCLUDE_DIR     ${CROSSQT}/include/QtGui)
+set (QT_QTNETWORK_INCLUDE_DIR ${CROSSQT}/include/QtNetwork)
+set (QT_QTUITOOLS_INCLUDE_DIR ${CROSSQT}/include/QtUiTools)
+set (QT_LIBRARY_DIR           ${CROSSQT}/lib)
+
+set (QT_MOC_EXECUTABLE        "/usr/qt4/bin/moc")
+set (QT_UIC_EXECUTABLE        "/usr/qt4/bin/uic")
+set (QT_RCC_EXECUTABLE        "/usr/qt4/bin/rcc")
+set (QT_QTCORE_LIBRARY        "mops")
 
 set (QT_INCLUDES ${QT_INCLUDE_DIR} ${QT_QT_INCLUDE_DIR}
      ${QT_QTCORE_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR} ${QT_GUI_INCLUDE_DIR}
+     ${QT_QTNETWORK_INCLUDE_DIR}
      )
 set (QT_mingw_LIBRARIES
     QtScript4
     QtSvg4
-    QtNetwork4
     QtUiTools
-    Qt3Support4
+    QtUiToolsd
     QtGui4
     QtCore4
     QtXml4
+    QtNetwork4
     )
+
+#    Qt3Support4
 
 set (WIN32 ON)
 set (MINGW ON)

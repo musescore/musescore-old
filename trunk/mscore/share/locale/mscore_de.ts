@@ -3026,12 +3026,12 @@ fehlgeschlagen: </translation>
         <translation>Handbuch</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1898"/>
+        <location filename="../../mscore/mscore.cpp" line="1906"/>
         <source>note entry mode</source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1902"/>
+        <location filename="../../mscore/mscore.cpp" line="1910"/>
         <source>edit mode</source>
         <translation>Editieren</translation>
     </message>
@@ -4581,7 +4581,7 @@ fehlgeschlagen: </translation>
         <translation>Umbrüche</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1906"/>
+        <location filename="../../mscore/mscore.cpp" line="1914"/>
         <source>play</source>
         <translation>Wiedergabe</translation>
     </message>
@@ -5154,11 +5154,6 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1476"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="1609"/>
         <source>repeat last command</source>
         <translation type="unfinished"></translation>
@@ -5166,6 +5161,11 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1613"/>
         <source>Repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1476"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5599,17 +5599,17 @@ Aktuelle Partitur sichern? </translation>
 <context>
     <name>PlayPanelBase</name>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="1515"/>
+        <location filename="../../mscore/playpanel.ui" line="1019"/>
         <source>001.01</source>
         <translation>001.01</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2586"/>
+        <location filename="../../mscore/playpanel.ui" line="2621"/>
         <source>Rewind</source>
         <translation>Zurückspulen</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2603"/>
+        <location filename="../../mscore/playpanel.ui" line="2638"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
@@ -5619,95 +5619,125 @@ Aktuelle Partitur sichern? </translation>
         <translation>MuseScore: Abspielpanel</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2038"/>
+        <location filename="../../mscore/playpanel.ui" line="2047"/>
         <source>120bpm</source>
         <translation>120bpm</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2538"/>
+        <location filename="../../mscore/playpanel.ui" line="2553"/>
         <source>100%</source>
         <translation>100%</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2659"/>
+        <location filename="../../mscore/playpanel.ui" line="2672"/>
         <source>Vol</source>
         <translation>Vol</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2722"/>
+        <location filename="../../mscore/playpanel.ui" line="2713"/>
         <source>Tmp</source>
         <translation>Tmp</translation>
     </message>
     <message>
-        <location filename="../../mscore/playpanel.ui" line="2593"/>
+        <location filename="../../mscore/playpanel.ui" line="2628"/>
         <source>Pause</source>
         <translation>Pause</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="1013"/>
+        <source>measure.beat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="1522"/>
+        <source>h:mm:s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="1528"/>
+        <source>0:00:00</source>
+        <translation type="unfinished">0:00:00</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="2032"/>
+        <source>actual tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="2710"/>
+        <source>relative tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="2669"/>
+        <source>volume</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="682"/>
+        <location filename="../../mscore/preferences.cpp" line="683"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation>Bilder (*.jpg *.gif *.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="663"/>
+        <location filename="../../mscore/preferences.cpp" line="664"/>
         <source>Choose Notepaper</source>
         <translation>Wähle Notenpapier</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="679"/>
+        <location filename="../../mscore/preferences.cpp" line="680"/>
         <source>Choose Background Wallpaper</source>
         <translation>Wähle Hintergrundtapete</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="698"/>
+        <location filename="../../mscore/preferences.cpp" line="699"/>
         <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
         <translation>Soundfonts (*.sf2 *.SF2);;All(*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="695"/>
+        <location filename="../../mscore/preferences.cpp" line="696"/>
         <source>Choose Synthesizer Sound Font</source>
         <translation>Wähle Soundfont für Synthesizer</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="713"/>
+        <location filename="../../mscore/preferences.cpp" line="714"/>
         <source>Choose Image Path</source>
         <translation>Bildpfad wählen</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="579"/>
+        <location filename="../../mscore/preferences.cpp" line="580"/>
         <source>Normal State</source>
         <translation>Normalstatus</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="584"/>
+        <location filename="../../mscore/preferences.cpp" line="585"/>
         <source>Play State</source>
         <translation>Wiedergabestatus</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="743"/>
+        <location filename="../../mscore/preferences.cpp" line="744"/>
         <source>Choose default Instrument List</source>
         <translation>Standard Instrumentenliste auswählen</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="746"/>
+        <location filename="../../mscore/preferences.cpp" line="747"/>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Instrumentenliste (*.xml);;All (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="759"/>
+        <location filename="../../mscore/preferences.cpp" line="760"/>
         <source>Choose score to start with</source>
         <translation>Auswahl der Partitur, mit der MuseScore startet</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="762"/>
+        <location filename="../../mscore/preferences.cpp" line="763"/>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>MuseScore Datei (*.msc);;All (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="728"/>
+        <location filename="../../mscore/preferences.cpp" line="729"/>
         <source>Choose WorkingDirectory</source>
         <translation>Auswählen des Arbeitsverzeichnis</translation>
     </message>
@@ -6329,7 +6359,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Fehler beim Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1809"/>
+        <location filename="../../mscore/mscore.cpp" line="1817"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
@@ -6354,7 +6384,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Midi Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1807"/>
+        <location filename="../../mscore/mscore.cpp" line="1815"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>

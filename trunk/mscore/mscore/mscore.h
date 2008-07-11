@@ -148,6 +148,15 @@ class Shortcut {
       };
 
 //---------------------------------------------------------
+//   Command
+//---------------------------------------------------------
+
+struct Command {
+      QAction* a;
+      int data;
+      };
+
+//---------------------------------------------------------
 //   MuseScore
 //---------------------------------------------------------
 
@@ -158,6 +167,8 @@ class MuseScore : public QMainWindow {
 
       QList<Score*> scoreList;
       Score* cs;              // current score
+
+      QQueue<Command> commandQueue;
 
       Canvas* canvas;
       QVBoxLayout* layout;

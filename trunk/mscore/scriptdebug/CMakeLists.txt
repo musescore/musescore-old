@@ -3,7 +3,7 @@
 #  Linux Music Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2002-2008 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -48,7 +48,7 @@ QT4_GENERATE_MOC( qscriptdebuggerlauncher.h
 
 QT4_ADD_RESOURCES (qrc_files qtscriptdebug.qrc)
 
-add_library ( qtscript_debug SHARED
+add_library ( qtscript_debug STATIC
       ${qrc_files}
       ${mocs}
       ${PROJECT_BINARY_DIR}/scriptdebug/moc_qscriptdebuggerlauncher.h
@@ -83,25 +83,10 @@ add_library ( qtscript_debug SHARED
       editor/scriptedit.cpp
       )
 
-#set_target_properties(qtscript_debug
-#      PROPERTIES
-#      COMPILE_FLAGS
-#         "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
-#      )
 set_target_properties(qtscript_debug
       PROPERTIES
       COMPILE_FLAGS
          "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG"
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
-
-if (MINGW)
-      target_link_libraries(
-            qtscript_debug
-            ${QT_mingw_LIBRARIES}
-            )
-      install (TARGETS qtscript_debug DESTINATION bin)
-else (MINGW)
-      install (TARGETS qtscript_debug DESTINATION lib)
-endif (MINGW)
 
