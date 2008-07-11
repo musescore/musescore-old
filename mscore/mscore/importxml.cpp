@@ -194,16 +194,15 @@ class LoadCompressedMusicXml : public LoadFile {
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
-//      printf("LoadCompressedMusicXml::loader(%s)\n", qf->fileName().toLatin1().data());
+// printf("LoadCompressedMusicXml::loader(%s)\n", qPrintable(qf->fileName()));
       UnZip uz;
       UnZip::ErrorCode ec;
       ec = uz.openArchive(qf->fileName());
-      if (ec != UnZip::Ok)
-      {
-            printf("Unable to open archive: %s", uz.formatError(ec).toAscii().data());
+      if (ec != UnZip::Ok) {
+            error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.formatError(ec);
             return true;
-      }
-//      printf("ec=%d\n", ec);
+            }
+// printf("ec=%d\n", ec);
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
@@ -264,7 +263,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             col.setNum(column);
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", error.toLatin1().data());
+printf("error: %s\n", qPrintable(error));
             return true;
             }
       docName = qf->fileName();

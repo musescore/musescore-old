@@ -118,6 +118,7 @@ bool LoadFile::load(const QString& name)
                QWidget::tr("MuseScore: load failed:"),
                error,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            printf("load failed: %s\n", qPrintable(error));
             }
       fp.close();
       return false;

@@ -484,7 +484,7 @@ Zip::ErrorCode Zip::createEntry(const QString& entryName, QIODevice& actualFile,
 Zip::ErrorCode Zip::closeArchive()
 {
 	Zip::ErrorCode ec = d->closeArchive();
-//	d->reset();       // ws: does delete device which is wrong if created with Zip(QIODevice*)
+	d->reset();
 	return ec;
 }
 
@@ -1244,7 +1244,11 @@ void ZipPrivate::reset()
 		headers = 0;
 	}
 
-	delete device; device = 0;
+      if (device) {
+            device->close();
+      //	delete device;          // WSHACK
+            device = 0;
+            }
 }
 
 //! \internal Returns the path of the parent directory

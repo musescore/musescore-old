@@ -2459,7 +2459,6 @@ bool Score::saveMxl(const QString& name)
             printf("Cannot create zipfile '%s'\n", name.toLatin1().data());
             return false;
             }
-
       QFileInfo fi(name);
       QDateTime dt;
       if (debugMode)
@@ -2467,7 +2466,6 @@ bool Score::saveMxl(const QString& name)
       else
             dt = QDateTime::currentDateTime();
       QString fn = fi.baseName() + ".xml";
-//      printf("fn=%s\n", fn.toLatin1().data());
 
       QBuffer cbuf;
       cbuf.open(QIODevice::ReadWrite);
