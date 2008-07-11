@@ -1277,12 +1277,19 @@ void MuseScore::resetUserOffsets()
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
+      QAction* a = 0;
+      Command c;
+      c.data = pitch;
+
+      commandQueue.enqueue(c);
+
       // do not accept any note input if any modal widget
       // is active
-
+#if 0   //TODO
       QWidget* w = QApplication::activeModalWidget();
       if (cs && w == 0)
             cs->midiNoteReceived(pitch, chord);
+#endif
       }
 
 //---------------------------------------------------------

@@ -42,17 +42,8 @@ if (MINGW)
       target_link_libraries(
          qtscript_uitools
          ${QT_mingw_LIBRARIES}
-         QtUiTools
-         QtUiToolsd
-         )
-else (MINGW)
-      target_link_libraries(
-         qtscript_uitools
-         QtUiTools
          )
       install( TARGETS qtscript_uitools DESTINATION bin/script/ )
 else(MINGW)
-
       install( TARGETS qtscript_uitools DESTINATION ${QT_PLUGINS_DIR}/script/ )
 endif(MINGW)
-
