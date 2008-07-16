@@ -235,7 +235,8 @@ bool Score::saveFile(bool autosave)
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
                QString("./%1.mscz").arg(name()),
-               QString("*.mscz")
+               tr("Compressed MuseScore File (*.mscz);;"
+                  "MuseScore File (*.msc);;")
                );
             if (fn.isEmpty())
                   return false;
@@ -1118,6 +1119,10 @@ bool Score::read(QDomElement e)
                         movementNumber = val;
                   else if (tag == "movement-title")
                         movementTitle = val;
+                  else if (tag == "work-number")
+                        workNumber = val;
+                  else if (tag == "work-title")
+                        workTitle = val;
                   else if (tag == "Part") {
                         Part* part = new Part(this);
                         part->read(ee);

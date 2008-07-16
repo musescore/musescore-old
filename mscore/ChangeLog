@@ -1,3 +1,6 @@
+16.7 (ws)
+      exchange movement-number movement-title with work-number work-title in
+      MusicXML import/export
 11.07 (ws)
       - fix saving of compressed MusicXML *.mxl format
       - changes in windows cross build

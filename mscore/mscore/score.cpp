@@ -323,8 +323,11 @@ void Score::clear()
       if (rights)
             delete rights;
       rights          = 0;
-      movementNumber  = "";
-      movementTitle   = "";
+      movementNumber.clear();
+      movementTitle.clear();
+      workNumber.clear();
+      workTitle.clear();
+
       _pageOffset     = 0;
       _playPos        = 0;
 
@@ -456,6 +459,10 @@ void Score::write(Xml& xml, bool autosave)
             xml.tag("movement-number", movementNumber);
       if (!movementTitle.isEmpty())
             xml.tag("movement-title", movementTitle);
+      if (!workNumber.isEmpty())
+            xml.tag("work-number", workNumber);
+      if (!workTitle.isEmpty())
+            xml.tag("work-title", workTitle);
 
       sigmap->write(xml);
       tempomap->write(xml);
@@ -1287,7 +1294,6 @@ void Score::setShowInvisible(bool v)
 
 void Score::setDirty(bool val)
       {
-printf("Score::setDirty\n");
       if (_dirty != val) {
             _dirty = val;
             if (val)

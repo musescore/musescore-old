@@ -376,9 +376,9 @@ void MusicXml::scorePartwise(QDomElement ee)
             else if (tag == "work") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "work-number")
-                              subTitle = ee.text();
+                              score->workNumber = ee.text();
                         else if (ee.tagName() == "work-title")
-                              title = ee.text();
+                              score->workTitle = ee.text();
                         else
                               domError(ee);
                         }
@@ -704,31 +704,27 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       lastMeasureLen = 0;
 
       if (!score->measures()->first()) {
-            VBox* vbox  = new VBox(score);
-            vbox->setTick(tick);
-            score->measures()->add(vbox);
-            if (!title.isEmpty()) {
+            VBox* vbox  = 0;
+            if (!(score->movementTitle.isEmpty() || score->workTitle.isEmpty())) {
+                  QString s = score->movementTitle;
+                  if (s.isEmpty())
+                        s = score->workTitle;
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
-                  text->setText(title);
+                  text->setText(s);
+                  if (vbox == 0)
+                        vbox = new VBox(score);
                   vbox->add(text);
                   }
-            else if (!score->movementTitle.isEmpty()) {
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_TITLE);
-                  text->setText(score->movementTitle);
-                  vbox->add(text);
-                  }
-            if (!subTitle.isEmpty()) {
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_SUBTITLE);
-                  text->setText(subTitle);
-                  vbox->add(text);
-                  }
-            else if (!score->movementNumber.isEmpty()) {
+            if (!(score->movementNumber.isEmpty() || score->workNumber.isEmpty())) {
+                  QString s = score->movementNumber;
+                  if (s.isEmpty())
+                        s = score->workNumber;
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_SUBTITLE);
-                  text->setText(score->movementNumber);
+                  text->setText(s);
+                  if (vbox == 0)
+                        vbox = new VBox(score);
                   vbox->add(text);
                   }
             if (!composer.isEmpty()) {
@@ -736,18 +732,28 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                   text->setSubtype(TEXT_COMPOSER);
                   text->setText(composer);
                   vbox->add(text);
+                  if (vbox == 0)
+                        vbox = new VBox(score);
                   }
             if (!poet.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_POET);
                   text->setText(poet);
                   vbox->add(text);
+                  if (vbox == 0)
+                        vbox = new VBox(score);
                   }
             if (!translator.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TRANSLATOR);
                   text->setText(translator);
                   vbox->add(text);
+                  if (vbox == 0)
+                        vbox = new VBox(score);
+                  }
+            if (vbox) {
+                  vbox->setTick(tick);
+                  score->measures()->add(vbox);
                   }
             }
 
