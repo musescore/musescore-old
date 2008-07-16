@@ -97,8 +97,6 @@ class MusicXml {
       int divisions;
       Tuplet* tuplet;   ///< Current tuplet
 
-      QString title;
-      QString subTitle;
       QString composer;
       QString poet;
       QString translator;

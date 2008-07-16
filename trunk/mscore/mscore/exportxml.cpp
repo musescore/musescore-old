@@ -213,6 +213,7 @@ class ExportMusicXml {
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void lyrics(const LyricsList* ll);
+      void work(const MeasureBase* measure);
 
    public:
       ExportMusicXml(Score* s) { score = s; tick = 0; }
@@ -1967,26 +1968,35 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
 //---------------------------------------------------------
 //  work -- write the <work> element
 //  note that order must be work-number, work-title
+//
+//  also write <movement-number> and <movement-title>
 //---------------------------------------------------------
 
-static void work(Xml& xml, const MeasureBase* measure)
+void ExportMusicXml::work(const MeasureBase* measure)
       {
-      xml.stag("work");
+      if (!(score->workTitle.isEmpty() && score->workNumber.isEmpty())) {
+            xml.stag("work");
+            if (!score->workNumber.isEmpty())
+                  xml.tag("work-number", score->workNumber);
+            if (!score->workTitle.isEmpty())
+                  xml.tag("work-title", score->workTitle);
+            xml.etag();
+            }
+
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   if (text->subtype() == TEXT_SUBTITLE)
-                        xml.tag("work-number", text->getText());
+                        xml.tag("movement-number", text->getText());
                   }
             }
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
                   if (text->subtype() == TEXT_TITLE)
-                        xml.tag("work-title", text->getText());
+                        xml.tag("movement-title", text->getText());
                   }
             }
-      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -2028,7 +2038,7 @@ foreach(Element* el, *(score->gel())) {
       xml.stag("score-partwise");
 
       const MeasureBase* measure = score->measures()->first();
-      work(xml, measure);
+      work(measure);
 
       xml.stag("identification");
       foreach(const Element* element, *measure->el()) {

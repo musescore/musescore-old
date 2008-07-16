@@ -253,12 +253,11 @@ class Score : public QObject {
       int curTick;            // for read optimizations
       int curTrack;
 
-      //---------------------------------------------------
-      //    input data for layout():
-      //---------------------------------------------------
-
       QString movementNumber;
       QString movementTitle;
+      QString workNumber;
+      QString workTitle;
+
       QTextDocument* rights;
 
       int _pageOffset;              ///< Offset for page numbers.
