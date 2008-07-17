@@ -3,7 +3,7 @@
 #  Linux Music Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2002-2008 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -19,7 +19,7 @@
 #=============================================================================
 
 # set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti")
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
+set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 

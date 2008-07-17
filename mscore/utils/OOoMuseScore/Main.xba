@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Main" script:language="StarBasic">&apos;	
+&apos;    OOoLilyPondMusic : main module
+&apos;    Copyright (C) 2005  geoffroy piroux
+&apos;    Copyright (C) 2006  Samuel Hartmann
+&apos;
+&apos;    This program is free software; you can redistribute it and/or modify
+&apos;    it under the terms of the GNU General Public License as published by
+&apos;    the Free Software Foundation; either version 2 of the License, or
+&apos;    (at your option) any later version.
+&apos;
+&apos;    This program is distributed in the hope that it will be useful,
+&apos;    but WITHOUT ANY WARRANTY; without even the implied warranty of
+&apos;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+&apos;    GNU General Public License for more details.
+&apos;
+&apos;    You should have received a copy of the GNU General Public License
+&apos;    along with this program; if not, write to the Free Software
+&apos;    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+&apos;
+&apos; 
+&apos;
+
+Option Explicit
+
+Private sConfigFile, sTmpPath, sLilyPondExecutable, sImageMagicExecutable, sTemplatePath, sFormat, sOSType As String
+Private sWriterTemplate As String
+Private sImpressTemplate As String
+Private iWriterAnchor, iWriterWrap As Integer
+Private iGraphicDPI As Integer
+Private bInWriter As Boolean
+
+&apos; Selected shape&apos;s variables...
+Private oShapeSize, oShapePosition, oShapeCrop As Object
+Private bShapeIsSelected As Boolean
+
+&apos;---------------------------------------------------------------------------------------
+Sub main
+	Dim oDoc, oDocCtrl, oSelection, oAttributes, oGraphic, oShape  As Object
+	Dim sCode, sTemplate As String
+	Dim iAnchor, iWrap As Integer
+
+	Initialisation()
+
+	&apos; Get the current document and controller
+ 	oDoc = ThisComponent
+	oDocCtrl = oDoc.getCurrentController()
+
+	&apos; Test if we are in OOoWriter or OOoImpress 
+	&apos; And set the default user configuration.
+	If oDoc.getImplementationName() =  &quot;SwXTextDocument&quot; Then
+		bInWriter=true
+	Elseif oDoc.getImplementationName() = &quot;SdXImpressDocument&quot; Then
+		bInWriter=false
+	Else
+		Msgbox(oDoc.getImplementationName() &amp; &quot;: document type not supported by OOoLilyPond&quot;, 0, &quot;Error&quot;)
+		Exit Sub
+	End If
+
+	&apos; Set default values
+	if bInWriter then
+		&apos; We are in a Writer doc, set default configuration... 
+		sCode=&quot;&quot;
+		sTemplate=sWriterTemplate
+		iAnchor=iWriterAnchor
+		iWrap=iWriterWrap
+	else
+		&apos; We are in a Impress doc, set default configuration...
+		sCode=&quot;&quot;
+		sTemplate=sImpressTemplate
+	end if
+
+	&apos; If an OOoLilyPond object is selected, read the LilyPond Code
+	bShapeIsSelected = False
+	If Not isEmpty(oDocCtrl.selection()) Then &apos;only False in Impress when nothing is selected
+		oSelection = oDocCtrl.getSelection()
+		If oSelection.getImplementationName() = &quot;com.sun.star.drawing.SvxShapeCollection&quot; then
+			oShape = oSelection.getByIndex(0)
+			If Not ReadAttributes(oShape, sCode, sTemplate, iAnchor, iWrap) Then Exit Sub
+			oShapePosition = oShape.position()
+			bShapeIsSelected = True
+		ElseIf oSelection.getImplementationName() = &quot;SwXTextRanges&quot; Then
+			&apos;Nothing or normal text is selected
+			bShapeIsSelected = False
+		Else
+			Msgbox (&quot;The selected object is not an OOoLilyPond object ...&quot;, 0, &quot;Error&quot;)
+			Exit Sub
+		End If
+	End If
+
+	&apos; Open the dialogue box
+	OOoLilyPondDialog(sCode, sTemplate, iAnchor, iWrap)
+End Sub
+
+&apos; ToDo:
+&apos; Load Configration if Config File Exists
+Sub Initialisation
+
+	DefaultConfig()
+	if FileExists( sConfigFile ) then ReadConfigFile
+
+End Sub
+
+
+&apos; This is the core macro! It is called by the dialogue box.
+&apos; It calls the subroutinges that generate the image and insert it into the document.
+sub MakeMusic(sCode, sTemplate As String, iAnchor, iWrap As Integer)
+
+	&apos; Definitions of variables...
+	Dim iNumber As Integer
+	Dim sShellArg,sMsg,sLilyPondCode as String
+
+	&apos; We test if there is LilyPond code...
+	If sCode = &quot;&quot; then 
+		Msgbox (&quot;Enter LilyPond code...&quot;, 0, &quot;Error&quot;)
+		exit sub
+	end if
+
+
+	If Not ApplyTemplate(sCode, sTemplate, sLilyPondCode) Then Exit Sub
+
+	CleanUp()
+
+
+	If Not WriteLyFile(sLilyPondCode) Then Exit Sub
+
+	If Not CallLilyPond() Then Exit Sub
+
+	&apos;Check the result !
+
+	&apos;If Not FileExists(sTmpPath &amp; &quot;OOoLilyPond.eps&quot;) Then &apos; LilyPond error.
+  	&apos;	PrintFile(&quot;OOoLilyPond.out&quot;)
+  	&apos;	Exit Sub
+  	&apos;End If
+ 	&apos;If sFormat = &quot;png&quot; And (Not FileExists(sTmpPath &amp; &quot;OOoLilyPond.png&quot;)) Then
+ 	&apos;	MsgBox(&quot;No png output is found&quot;, 0, &quot;Error&quot;)
+  	&apos;	Exit Sub
+ 	&apos;End If
+
+	&apos; If we arrive here, the compilation succeed. We can close the dialog...
+	oDlgMain.endExecute()
+
+	InsertMusic(sCode, sTemplate, iAnchor, iWrap)
+	
+end sub
+
+
+sub test
+	Dim oDoc, oDocCtrl, oSelection, oAttributes, oGraphic, oShape  As Object
+ 	oDoc = ThisComponent
+	oDocCtrl = oDoc.getCurrentController()
+
+	MsgBox isEmpty(oDocCtrl.selection())
+end sub
+
+sub test2
+
+
+	MsgBox(&quot;Test3&quot;)
+	
+	Dim sCommand As String
+	
+		sCommand = &quot;cd /d &quot; &amp; Chr(34) &amp; &quot;c:\slask\&quot; &amp; Chr(34) &amp; Chr(10) _
+		&amp; Chr(34) &amp; sLilyPondExecutable  &amp; Chr(34) &apos;&quot;C:\Program\MuseScore 0.9\bin\mscore.exe&quot;
+		sCommand = sCommand &amp;  &quot; &quot; &apos;testWrite.msc -o test.pdf
+		MsgBox (sCommand)
+		WindowsCommand(sCommand)
+end sub
+
+sub loadDefaultCode
+	Dim sLyFile As String
+	Dim iNumber As Integer
+	Dim sLilyPondCode As String
+	Dim sCode As String
+	Dim sLine As String	
+	Dim sTemplate As String
+	
+	&apos;sLilyPondCode = &quot;hejsan hoppsan&quot;
+
+	&apos;Open sLyFile For Output As #iNumber
+	&apos;Print #iNumber, sLilyPondCode	
+	&apos;Close #iNumber
+	
+	&apos;Open sLyFile For Input As #iNumber
+	&apos;Read #iNumber, sLilyPondCode
+	&apos;Close #iNumber	
+	&apos;MsgBox (&quot;Hej&quot;)
+	
+	&apos;sCode = 	oDlgMain.getControl(&quot;LilyPondCode&quot;).getText()
+	&apos;Msgbox sMsg	
+
+	sTemplate = oDlgMain.getControl(&quot;Template&quot;).getText()
+	sLyFile=ConvertFromURL(sTemplatePath &amp; sTemplate &amp; &quot;.msc&quot;)
+	MsgBox(sLyFile)
+	iNumber = Freefile	
+	sCode = &quot;&quot;
+	Open sLyFile For Input As #iNumber
+	While not eof(#iNumber)
+		Line Input #iNumber, sLine
+		If sLine &lt;&gt;&quot;&quot; then
+		sCode = sCode &amp; sLine &amp; chr(13)
+		end if
+	wend
+	Close #iNumber
+	&apos;Msgbox sMsg	
+	oDlgMain.getControl(&quot;LilyPondCode&quot;).setText(sCode)
+
+
+end sub
+
+sub saveCodeToTempFile
+	Dim sLyFile As String
+	Dim sCode As String
+	Dim iNumber As Integer
+
+	sLyFile=ConvertFromURL(sTmpPath &amp; &quot;temp.msc&quot;)		
+	&apos;MsgBox sLyFile
+	sCode = 	oDlgMain.getControl(&quot;LilyPondCode&quot;).getText()
+	&apos;Msgbox sCode
+	iNumber = Freefile	
+	Open sLyFile For Output As #iNumber
+	Print #iNumber, sCode	
+	Close #iNumber
+
+end sub
+
+sub runMScoreWithTempFile
+	Dim sCommand As String
+	&apos;MuseScore
+	
+	If sOSType = &quot;Windows&quot; Then
+	&apos;MsgBox sTmpPath
+		sCommand = &quot;cd /d &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; Chr(10) &apos; &quot;c:\slask\&quot;
+		sCommand = sCommand &amp; Chr(34) &amp; sLilyPondExecutable &amp; Chr(34)
+		sCommand = sCommand &amp; &quot; &quot; &amp; &quot;temp.msc&quot;
+		WindowsCommand(sCommand)
+    ElseIf sOSType = &quot;Unix&quot; Then
+    	sCommand = &quot;cd &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; &quot;; &quot; &amp; sLilyPondExecutable &amp; &quot; temp.msc&quot;
+    	BashCommand(sCommand)
+    EndIf
+
+end sub
+
+sub loadCodeFromTempFile
+
+	Dim sLyFile As String
+	Dim iNumber As Integer
+	Dim sLilyPondCode As String
+	Dim sCode As String
+	Dim sLine As String	
+
+	sLyFile=ConvertFromURL(sTmpPath &amp; &quot;temp.msc&quot;)
+	&apos;MsgBox(sLyFile)
+	iNumber = Freefile	
+	sCode = &quot;&quot;
+	Open sLyFile For Input As #iNumber
+	While not eof(#iNumber)
+		Line Input #iNumber, sLine
+		If sLine &lt;&gt;&quot;&quot; then
+		sCode = sCode &amp; sLine &amp; chr(13)
+		end if
+	wend
+	Close #iNumber
+	&apos;Msgbox sMsg	
+	oDlgMain.getControl(&quot;LilyPondCode&quot;).setText(sCode)
+end sub
+
+sub handleMScore
+	Dim sCode As String
+	Dim control As Object
+	
+	sCode = 	oDlgMain.getControl(&quot;LilyPondCode&quot;).getText()
+	if sCode = &quot;&quot; Then
+		loadDefaultCode()
+	End If
+	&apos;msgBox &quot;Hej&quot;
+	saveCodeToTempFile()
+	runMScoreWithTempFile()
+	loadCodeFromTempFile()	
+	LilyPondButton_Clicked()
+end sub
+
+
+</script:module>
