@@ -19,7 +19,8 @@
 #=============================================================================
 
 # set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti -fvisibility=hidden")
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
@@ -154,6 +155,15 @@ add_executable ( mscore
 if (BUILD_SCRIPT_DEBUG)
       target_link_libraries(mscore qtscript_debug)
 endif (BUILD_SCRIPT_DEBUG)
+
+if (STATIC_SCRIPT_BINDINGS)
+      target_link_libraries(mscore
+            qtscript_core
+            qtscript_gui
+            qtscript_network
+            qtscript_uitools
+            qtscript_xml)
+endif (BUILD_SCRIPT_INTERFACE)
 
 if (MINGW)
    add_custom_command(

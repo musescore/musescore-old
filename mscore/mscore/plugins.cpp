@@ -138,11 +138,14 @@ void MuseScore::pluginTriggered(int idx)
             printf("Run Plugin <%s>\n", qPrintable(pp));
       if (se == 0) {
             se = new QScriptEngine(0);
+
+#ifdef HAS_SCRIPT_INTERFACE
             se->importExtension("qt.core");
             se->importExtension("qt.gui");
             se->importExtension("qt.xml");
             se->importExtension("qt.network");
             se->importExtension("qt.uitools");
+#endif
 
 #ifdef HAS_SCRIPT_DEBUG
             if (scriptDebug) {
@@ -154,6 +157,10 @@ void MuseScore::pluginTriggered(int idx)
 #endif
 #if QT_VERSION >= 0x040400
             if (debugMode) {
+                  QStringList lp = qApp->libraryPaths();
+                  foreach(QString s, lp)
+                        printf("lib path <%s>\n", qPrintable(s));
+
                   QStringList sl = se->availableExtensions();
                   printf("available:\n");
                   foreach(QString s, sl)
@@ -183,12 +190,6 @@ void MuseScore::pluginTriggered(int idx)
             return;
             }
       run.call();
-
-#ifdef HAS_SCRIPT_DEBUG
-//      if (scriptDebug) {
-//            debugger->detach();
-//            }
-#endif
       }
 
 

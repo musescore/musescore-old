@@ -24,6 +24,8 @@
 
 #cmakedefine HAS_MIDI
 #cmakedefine HAS_SCRIPT_DEBUG
+#cmakedefine HAS_SCRIPT_INTERFACE
+#cmakedefine STATIC_SCRIPT_BINDINGS
 
 #define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"

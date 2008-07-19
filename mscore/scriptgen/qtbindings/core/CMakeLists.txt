@@ -18,14 +18,22 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti -I${QT_INCLUDE}")
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
+# set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti -I${QT_INCLUDE}")
+
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
+if (STATIC_SCRIPT_BINDINGS)
+      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -DQT_STATICPLUGIN")
+      set(LIBTYPE "STATIC")
+else (STATIC_SCRIPT_BINDINGS)
+      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
+      set(LIBTYPE "SHARED")
+endif (STATIC_SCRIPT_BINDINGS)
+
 include_directories(${QT_INCLUDES})
 
-add_library ( qtscript_core SHARED
+add_library ( qtscript_core ${LIBTYPE}
       main.cpp
       qtscript_QBasicTimer.cpp
       qtscript_QBitArray.cpp
@@ -133,13 +141,16 @@ set_target_properties(qtscript_core
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 
-if (MINGW)
+if (STATIC_SCRIPT_BINDINGS)
+else (STATIC_SCRIPT_BINDINGS)
+   if (MINGW)
       target_link_libraries(
          qtscript_core
          ${QT_mingw_LIBRARIES}
          )
       install( TARGETS qtscript_core DESTINATION bin/script/ )
-else(MINGW)
+   else(MINGW)
       install( TARGETS qtscript_core DESTINATION ${QT_PLUGINS_DIR}/script/ )
-endif(MINGW)
+   endif(MINGW)
+endif (STATIC_SCRIPT_BINDINGS)
 
