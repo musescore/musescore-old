@@ -54,6 +54,14 @@
 #include "driver.h"
 #include "harmony.h"
 
+#ifdef STATIC_SCRIPT_BINDINGS
+Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
+Q_IMPORT_PLUGIN(com_trolltech_qt_core_ScriptPlugin)
+Q_IMPORT_PLUGIN(com_trolltech_qt_network_ScriptPlugin)
+Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
+Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
+#endif
+
 int division = 480;     // 480 midi ticks represent a quarter note
 
 QPaintDevice* pdev;
@@ -1277,12 +1285,12 @@ void MuseScore::resetUserOffsets()
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
-      QAction* a = 0;
+/*      QAction* a = 0;
       Command c;
       c.data = pitch;
 
       commandQueue.enqueue(c);
-
+  */
       // do not accept any note input if any modal widget
       // is active
 #if 0   //TODO

@@ -23,26 +23,25 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 
 # cmake 2.4.3 does not install all.h and does not link against qtsvg
 
-# set(CMAKE_BUILD_TYPE DEBUG)
-# set(CMAKE_BUILD_TYPE RELEASE)
+# for debugging the make system uncomment next line:
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(USE_GLOBAL_FLUID FALSE)
+set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib
+
+set(BUILD_SCRIPT_INTERFACE FALSE)         # this requires qt >= 4.4 && cmake 2.6
+set(BUILD_SCRIPT_DEBUG FALSE)
+set(STATIC_SCRIPT_BINDINGS FALSE)         # this requires qt 4.5
+
 if (MINGW)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
-
-# build qt script bindings
-# this requires qt >= 4.4 and cmake 2.6
-
-set(BUILD_SCRIPT_INTERFACE FALSE)
-#set(BUILD_SCRIPT_INTERFACE TRUE)
-
-set(BUILD_SCRIPT_DEBUG FALSE)
-#set(BUILD_SCRIPT_DEBUG TRUE)
-
 if (BUILD_SCRIPT_DEBUG)
       set (HAS_SCRIPT_DEBUG TRUE)
 endif (BUILD_SCRIPT_DEBUG)
+
+if (BUILD_SCRIPT_INTERFACE)
+      set (HAS_SCRIPT_INTERFACE TRUE)
+endif (BUILD_SCRIPT_INTERFACE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
@@ -66,9 +65,6 @@ endif (MINGW)
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
-
-# for debugging the make system uncomment next line:
-# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 ##
 ##  look for Qt4
