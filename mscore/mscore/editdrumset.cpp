@@ -225,7 +225,7 @@ void EditDrumset::save()
 
       Xml xml(&f);
       xml.header();
-      xml.stag("museScore version=\"1.0\"");
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
       nDrumset.save(xml);
       xml.etag();
       if (f.error() != QFile::NoError) {
