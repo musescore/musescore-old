@@ -1,3 +1,5 @@
+21.7 (ws)
+      - fix slurs in excerpts (#2015245)
 19.7 (ws)
       - preparations for static linking of plugin bindings
 17.7 (ws)

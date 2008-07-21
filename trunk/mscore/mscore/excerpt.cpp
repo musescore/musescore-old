@@ -29,6 +29,7 @@
 #include "style.h"
 #include "page.h"
 #include "text.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   read
@@ -99,8 +100,8 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       QBuffer buffer;
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
-      xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-      xml << "<museScore version=\"1.4\">\n";
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
       writeExcerpt(excerpt, xml);
       xml << "</museScore>\n";
       buffer.close();
@@ -189,15 +190,31 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             ++idx;
             ++didx;
             }
+
+      // to serialize slurs, the get an id; this id is referenced
+      // in begin-end elements
+      int slurId = 0;
+
       xml.trackDiff = 0;
       foreach(Element* el, _gel) {
-            if (el->track() != -1) {
-                  int staffIdx = el->staffIdx();
-                  if (trackOffset[staffIdx] == HIDDEN)
+            if (el->type() == SLUR) {
+                  Slur* slur = static_cast<Slur*>(el);
+                  int staffIdx1 = slur->startElement()->staffIdx();
+                  int staffIdx2 = slur->endElement()->staffIdx();
+                  if (trackOffset[staffIdx1] == HIDDEN || trackOffset[staffIdx2] == HIDDEN)
                         continue;
-                  xml.trackDiff = trackOffset[staffIdx];
+                  slur->setId(slurId++);
+                  slur->write(xml);
                   }
-            el->write(xml);
+            else {
+                  if (el->track() != -1) {
+                        int staffIdx = el->staffIdx();
+                        if (trackOffset[staffIdx] == HIDDEN)
+                              continue;
+                        xml.trackDiff = trackOffset[staffIdx];
+                        }
+                  el->write(xml);
+                  }
             }
       bool isFirstStaff = true;
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
