@@ -45,7 +45,6 @@ class JackAudio : public Driver {
       ISynth* synth;
       MidiDriver* midiDriver;
 
-      static void jack_thread_init(void* data);
       static int processAudio(jack_nframes_t, void*);
 
    public:

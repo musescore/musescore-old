@@ -119,7 +119,8 @@ class Harmony : public Text {
       static const ChordDescription chordList[];
       static QHash<int, const ChordDescription*> chordHash;
 
-      int _baseTpc;                   // bass note, chord base; used for "slash" chords
+      int _baseTpc;                   // bass note or chord base; used for "slash" chords
+                                      // or notation of base note in chord
       int _rootTpc;                   // root note for chord
       const ChordDescription* _descr; // chord description
       QList<HDegree> _degreeList;

@@ -2733,6 +2733,39 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>MetaEditDialog</name>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="13"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="19"/>
+        <source>Work Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="29"/>
+        <source>Work Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="39"/>
+        <source>Movement Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="49"/>
+        <source>Movement Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="59"/>
+        <source>Source:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MuseScore</name>
     <message>
         <location filename="../../mscore/actions.cpp" line="32"/>
@@ -5154,6 +5187,11 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="1613"/>
         <source>Repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1476"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>

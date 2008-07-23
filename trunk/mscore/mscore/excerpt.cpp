@@ -162,10 +162,10 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             xml.writeHtml(rights->toHtml("UTF-8"));
             xml.etag();
             }
-      if (!movementNumber.isEmpty())
-            xml.tag("movement-number", movementNumber);
-      if (!movementTitle.isEmpty())
-            xml.tag("movement-title", movementTitle);
+      if (!_movementNumber.isEmpty())
+            xml.tag("movement-number", _movementNumber);
+      if (!_movementTitle.isEmpty())
+            xml.tag("movement-title", _movementTitle);
 
       sigmap->write(xml);
       tempomap->write(xml);

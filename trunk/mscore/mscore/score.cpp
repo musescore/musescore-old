@@ -323,10 +323,11 @@ void Score::clear()
       if (rights)
             delete rights;
       rights          = 0;
-      movementNumber.clear();
-      movementTitle.clear();
-      workNumber.clear();
-      workTitle.clear();
+      _movementNumber.clear();
+      _movementTitle.clear();
+      _workNumber.clear();
+      _workTitle.clear();
+      _source.clear();
 
       _pageOffset     = 0;
       _playPos        = 0;
@@ -455,14 +456,16 @@ void Score::write(Xml& xml, bool autosave)
             xml.writeHtml(rights->toHtml("UTF-8"));
             xml.etag();
             }
-      if (!movementNumber.isEmpty())
-            xml.tag("movement-number", movementNumber);
-      if (!movementTitle.isEmpty())
-            xml.tag("movement-title", movementTitle);
-      if (!workNumber.isEmpty())
-            xml.tag("work-number", workNumber);
-      if (!workTitle.isEmpty())
-            xml.tag("work-title", workTitle);
+      if (!_movementNumber.isEmpty())
+            xml.tag("movement-number", _movementNumber);
+      if (!_movementTitle.isEmpty())
+            xml.tag("movement-title", _movementTitle);
+      if (!_workNumber.isEmpty())
+            xml.tag("work-number", _workNumber);
+      if (!_workTitle.isEmpty())
+            xml.tag("work-title", _workTitle);
+      if (!_source.isEmpty())
+            xml.tag("source", _source);
 
       sigmap->write(xml);
       tempomap->write(xml);

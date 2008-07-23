@@ -1613,6 +1613,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Repeat last command"),
          &fileOpenIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "edit-meta",
+         QT_TR_NOOP("edit score meta data"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Meta Data"),
+         QT_TR_NOOP("Meta Data")
+         ),
       Shortcut(0, 0, 0),
       };
 

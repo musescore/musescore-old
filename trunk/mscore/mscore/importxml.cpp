@@ -376,9 +376,9 @@ void MusicXml::scorePartwise(QDomElement ee)
             else if (tag == "work") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "work-number")
-                              score->workNumber = ee.text();
+                              score->setWorkNumber(ee.text());
                         else if (ee.tagName() == "work-title")
-                              score->workTitle = ee.text();
+                              score->setWorkTitle(ee.text());
                         else
                               domError(ee);
                         }
@@ -405,7 +405,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
                         else if (ee.tagName() == "source")
-                              domNotImplemented(ee);
+                              score->setSource(ee.text());
                         else
                               domError(ee);
                         }
@@ -467,9 +467,9 @@ void MusicXml::scorePartwise(QDomElement ee)
                         }
                   }
             else if (tag == "movement-number")
-                  score->movementNumber = e.text();
+                  score->setMovementNumber(e.text());
             else if (tag == "movement-title")
-                  score->movementTitle = e.text();
+                  score->setMovementTitle(e.text());
             else if (tag == "credit")
                   domNotImplemented(e);
             else
@@ -705,10 +705,10 @@ void MusicXml::xmlPart(QDomElement e, QString id)
 
       if (!score->measures()->first()) {
             VBox* vbox  = 0;
-            if (!(score->movementTitle.isEmpty() || score->workTitle.isEmpty())) {
-                  QString s = score->movementTitle;
+            if (!(score->movementTitle().isEmpty() && score->workTitle().isEmpty())) {
+                  QString s = score->movementTitle();
                   if (s.isEmpty())
-                        s = score->workTitle;
+                        s = score->workTitle();
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
                   text->setText(s);
@@ -716,10 +716,10 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                         vbox = new VBox(score);
                   vbox->add(text);
                   }
-            if (!(score->movementNumber.isEmpty() || score->workNumber.isEmpty())) {
-                  QString s = score->movementNumber;
+            if (!(score->movementNumber().isEmpty() && score->workNumber().isEmpty())) {
+                  QString s = score->movementNumber();
                   if (s.isEmpty())
-                        s = score->workNumber;
+                        s = score->workNumber();
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_SUBTITLE);
                   text->setText(s);
@@ -731,25 +731,25 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_COMPOSER);
                   text->setText(composer);
-                  vbox->add(text);
                   if (vbox == 0)
                         vbox = new VBox(score);
+                  vbox->add(text);
                   }
             if (!poet.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_POET);
                   text->setText(poet);
-                  vbox->add(text);
                   if (vbox == 0)
                         vbox = new VBox(score);
+                  vbox->add(text);
                   }
             if (!translator.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TRANSLATOR);
                   text->setText(translator);
-                  vbox->add(text);
                   if (vbox == 0)
                         vbox = new VBox(score);
+                  vbox->add(text);
                   }
             if (vbox) {
                   vbox->setTick(tick);
@@ -1767,7 +1767,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int octave = 4;
       int accidental = 0;
       bool editorial = false;
-      Duration durationType(Duration::V_QUARTER);
+      Duration durationType(Duration::V_INVALID);
       bool trillMark = false;
       QString strongAccentType;
       bool accent = false;
@@ -1856,10 +1856,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   if (!found) {
                         if (voicelist[staff+relStaff].size() >= unsigned(VOICES))
-                              printf("ImportMusicXml: too many voices (> %d)\n", VOICES);
+                              printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                                 staff, relStaff, voicelist[staff+relStaff].size(), VOICES);
                         else {
                               voicelist[staff+relStaff].push_back(voice);
-//                              printf(" append %d to voicelist[%d]", voice, staff+relStaff);
+printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                               voice = voicelist[staff+relStaff].size() -1;
                               }
                         }
@@ -2104,7 +2105,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       ChordRest* cr = 0;
 
       if (rest) {
-            cr = new Rest(score, tick, ticks);
+            // whole measure rests do not have a "type" element
+            int len = ticks;
+            if (durationType.val() == Duration::V_INVALID) {
+                  durationType.setType(Duration::V_MEASURE);
+                  len = 0;
+                  }
+            cr = new Rest(score, tick, len);
+            cr->setDuration(durationType);
+
             // TODO: try to find out if this rest is part of a beam
             cr->setBeamMode(BEAM_NO);
 //            cr->setBeamMode(BEAM_AUTO);
@@ -2117,9 +2126,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
 
-            // xmlSetPitch(note, tick, c, alter, octave, accidental);
-
-//            note->setType(durationType);
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
             note->setStaffMove(move);
@@ -2155,6 +2161,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         cr->setTickLen(ticks);
+                        if (durationType.val() == Duration::V_INVALID)
+                              durationType.setType(Duration::V_QUARTER);
                         cr->setDuration(durationType);
                         }
                   Segment* s = measure->getSegment(cr);
