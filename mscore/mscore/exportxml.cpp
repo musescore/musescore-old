@@ -1346,6 +1346,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             int voice = (staff-1) * VOICES + note->chord()->voice() + 1;
             if (staff == 0)
                   voice += VOICES;
+
             xml.tag("voice", voice);
 
           // type
@@ -1486,35 +1487,36 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       xml.stag("note");
       xml.tagE("rest");
 
-      xml.tag("duration", rest->tickLen());
+      Duration d = rest->duration();
+      int tickLen = rest->tickLen();
+      if (d.val() == Duration::V_MEASURE)
+            tickLen = rest->measure()->tickLen();
+
+      tick += tickLen;
+
+      xml.tag("duration", tickLen);
+
       // for a single-staff part, staff is 0, which needs to be corrected
       // to calculate the correct voice number
       int voice = (staff-1) * VOICES + rest->voice() + 1;
       if (staff == 0)
             voice += VOICES;
       xml.tag("voice", voice);
-      int dots = 0;
-      Tuplet* t = rest->tuplet();
-      int actNotes = 1;
-      int nrmNotes = 1;
-      if (t) {
-            actNotes = t->actualNotes();
-            nrmNotes = t->normalNotes();
-            }
-      QString s = tick2xml(rest->tickLen() * actNotes / nrmNotes, &dots);
-      if (s.isEmpty()) {
-            printf("no rest type found for ticks %d at %d in measure %d\n",
-               rest->tickLen(), rest->tick(), rest->measure()->no()+1);
-            }
-      xml.tag("type", s);
 
-      for (int i = dots; i > 0; i--)
-            xml.tagE("dot");
+      // do not output a "type" element for whole measure rest
+      if (d.val() != Duration::V_MEASURE) {
+            QString s = d.name();
+            int dots  = rest->dots();
+            xml.tag("type", s);
+            for (int i = dots; i > 0; i--)
+                  xml.tagE("dot");
+            }
 
-      if (t) {
+      if (rest->tuplet()) {
+            Tuplet* t = rest->tuplet();
             xml.stag("time-modification");
-            xml.tag("actual-notes", actNotes);
-            xml.tag("normal-notes", nrmNotes);
+            xml.tag("actual-notes", t->actualNotes());
+            xml.tag("normal-notes", t->normalNotes());
             xml.etag();
             }
 
@@ -1974,12 +1976,12 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
 
 void ExportMusicXml::work(const MeasureBase* measure)
       {
-      if (!(score->workTitle.isEmpty() && score->workNumber.isEmpty())) {
+      if (!(score->workTitle().isEmpty() && score->workNumber().isEmpty())) {
             xml.stag("work");
-            if (!score->workNumber.isEmpty())
-                  xml.tag("work-number", score->workNumber);
-            if (!score->workTitle.isEmpty())
-                  xml.tag("work-title", score->workTitle);
+            if (!score->workNumber().isEmpty())
+                  xml.tag("work-number", score->workNumber());
+            if (!score->workTitle().isEmpty())
+                  xml.tag("work-title", score->workTitle());
             xml.etag();
             }
 
@@ -2060,6 +2062,8 @@ foreach(Element* el, *(score->gel())) {
 
       if (score->rights)
             xml.tag("rights", score->rights->toPlainText());
+      if (!score->source().isEmpty())
+            xml.tag("source", score->source());
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
@@ -2566,6 +2570,16 @@ void ExportMusicXml::harmony(Harmony* h)
                   }
             else
                   xml.tag("kind", "");    // finale wants to see this
+            }
+      int baseTpc = h->baseTpc();
+      if (baseTpc != INVALID_TPC) {
+            xml.stag("bass");
+            xml.tag("bass-step", tpc2stepName(baseTpc));
+            int alter = tpc2alter(baseTpc);
+            if (alter) {
+                  xml.tag("bass-alter", alter);
+                  }
+            xml.etag();
             }
 #if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);

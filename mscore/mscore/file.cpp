@@ -1116,13 +1116,15 @@ bool Score::read(QDomElement e)
                               rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
                         }
                   else if (tag == "movement-number")
-                        movementNumber = val;
+                        _movementNumber = val;
                   else if (tag == "movement-title")
-                        movementTitle = val;
+                        _movementTitle = val;
                   else if (tag == "work-number")
-                        workNumber = val;
+                        _workNumber = val;
                   else if (tag == "work-title")
-                        workTitle = val;
+                        _workTitle = val;
+                  else if (tag == "source")
+                        _source = val;
                   else if (tag == "Part") {
                         Part* part = new Part(this);
                         part->read(ee);

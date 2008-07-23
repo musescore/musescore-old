@@ -30,14 +30,6 @@
 #include "alsamidi.h"
 
 //---------------------------------------------------------
-//   jack_thread_init
-//---------------------------------------------------------
-
-void JackAudio::jack_thread_init (void* data)
-      {
-      }
-
-//---------------------------------------------------------
 //   JackAudio
 //---------------------------------------------------------
 
@@ -310,7 +302,6 @@ bool JackAudio::init()
       jack_set_freewheel_callback (client, freewheel_callback, this);
       _sampleRate   = jack_get_sample_rate(client);
       _segmentSize  = jack_get_buffer_size(client);
-      jack_set_thread_init_callback(client, (JackThreadInitCallback) jack_thread_init, this);
 
       // register mscore left/right output ports
       portL = jack_port_register(client, "left",  JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);

@@ -1,3 +1,8 @@
+23.7 (ws)
+      - change notion of MusicXML "whole measure rest"
+      - harmony fixes: bass note entry & export/import to MusicXML
+      - new score meta data dialog
+      - support for MusicXML identity/source element
 21.7 (ws)
       - fix slurs in excerpts (#2015245)
 19.7 (ws)

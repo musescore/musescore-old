@@ -62,6 +62,7 @@
 #include "system.h"
 #include "stafftext.h"
 #include "articulation.h"
+#include "metaedit.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1465,6 +1466,10 @@ void Score::cmd(const QString& cmd)
             seq->seekEnd();
       else if (cmd == "save-style")
             saveStyle();
+      else if (cmd == "edit-meta") {
+            MetaEditDialog med(this, 0);
+            med.exec();
+            }
       else {
             if (cmdActive) {
                   printf("Score::cmd(): cmd already active\n");

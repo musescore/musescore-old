@@ -317,6 +317,7 @@ MuseScore::MuseScore()
          << "clef-violin" << "clef-bass"
          << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
          << "repeat-cmd"
+         << "edit-meta"
          ;
 
       foreach(const QString s, sl) {
@@ -546,6 +547,7 @@ MuseScore::MuseScore()
 
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Excerpts..."), this, SLOT(startExcerptsDialog()));
+      menuEdit->addAction(getAction("edit-meta"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Inspector..."), this, SLOT(startPageListEditor()));
       menuEdit->addSeparator();

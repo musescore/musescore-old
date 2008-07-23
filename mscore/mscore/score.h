@@ -181,6 +181,12 @@ class Score : public QObject {
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
 
+      QString _movementNumber;       // some meta data; used for musicXML
+      QString _movementTitle;
+      QString _workNumber;
+      QString _workTitle;
+      QString _source;
+
       ChordRest* nextMeasure(ChordRest*);
       ChordRest* prevMeasure(ChordRest*);
       void cmdSetBeamMode(int);
@@ -252,11 +258,6 @@ class Score : public QObject {
       bool cmdActive;
       int curTick;            // for read optimizations
       int curTrack;
-
-      QString movementNumber;
-      QString movementTitle;
-      QString workNumber;
-      QString workTitle;
 
       QTextDocument* rights;
 
@@ -337,7 +338,6 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, MeasureBase* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
-//      void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
       void undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval);
       void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
       void undoOp(UndoOp::UndoType type, Element* object);
@@ -590,6 +590,17 @@ class Score : public QObject {
       void cmdTransposeStaff(int staffIdx, int offset);
       void cmdConcertPitchChanged(bool);
       TempoList* getTempomap() const { return tempomap; }
+
+      QString movementNumber() const           { return _movementNumber; }
+      QString movementTitle() const            { return _movementTitle;  }
+      QString workNumber() const               { return _workNumber;     }
+      QString workTitle() const                { return _workTitle;      }
+      QString source() const                   { return _source;         }
+      void setMovementNumber(const QString& s) { _movementNumber = s;    }
+      void setMovementTitle(const QString& s)  { _movementTitle = s;     }
+      void setWorkNumber(const QString& s)     { _workNumber = s;        }
+      void setWorkTitle(const QString& s)      { _workTitle = s;         }
+      void setSource(const QString& s)         { _source = s;            }
       };
 
 extern Score* gscore;

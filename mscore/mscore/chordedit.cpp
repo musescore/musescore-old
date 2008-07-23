@@ -178,7 +178,7 @@ void ChordEdit::setRoot(int val)
       if (button)
             button->setChecked(true);
       else
-            printf("accidentals button %d not found\n", id);
+            printf("root button %d not found\n", id);
 
       chordChanged();
       }
@@ -209,7 +209,12 @@ printf("ext other data %d, idx = %d\n", val, idx);
 
 void ChordEdit::setBase(int val)
       {
-      bassNote->setCurrentIndex(val);
+      if (val == INVALID_TPC)
+            return;
+
+      // translate tpc to button nr
+      int idx = tpc2pitch(val) + 1;
+      bassNote->setCurrentIndex(idx);
       chordChanged();
       }
 

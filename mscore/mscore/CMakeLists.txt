@@ -78,7 +78,7 @@ QT4_WRAP_UI (ui_headers
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
-      glissandoprop.ui articulation.ui
+      glissandoprop.ui articulation.ui metaedit.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -91,7 +91,7 @@ QT4_WRAP_CPP (mocs
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
-      script.h articulation.h
+      script.h articulation.h metaedit.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -148,7 +148,7 @@ add_executable ( mscore
       newwizard.cpp revision.cpp transposedialog.cpp bb.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
-      event.cpp rendermidi.cpp articulation.cpp
+      event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       ${AUDIO}
       )
 
