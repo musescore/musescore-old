@@ -1600,7 +1600,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("display in concert pitch"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Display in Concert Pitch"),
+         QT_TR_NOOP("Concert Pitch"),
          QT_TR_NOOP("Display in Concert Pitch")
          ),
       Shortcut(

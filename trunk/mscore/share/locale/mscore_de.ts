@@ -201,11 +201,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ChordEdit</name>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="13"/>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
         <location filename="../../mscore/chordedit.ui" line="26"/>
         <source>TextLabel</source>
         <translation>Text</translation>
@@ -216,814 +211,819 @@ p, li { white-space: pre-wrap; }
         <translation>Root</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="60"/>
+        <location filename="../../mscore/chordedit.ui" line="51"/>
         <source>C</source>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="98"/>
+        <location filename="../../mscore/chordedit.ui" line="89"/>
         <source>G</source>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="140"/>
+        <location filename="../../mscore/chordedit.ui" line="131"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="112"/>
+        <location filename="../../mscore/chordedit.ui" line="103"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="70"/>
+        <location filename="../../mscore/chordedit.ui" line="61"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="84"/>
+        <location filename="../../mscore/chordedit.ui" line="75"/>
         <source>F</source>
         <translation>F</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="126"/>
+        <location filename="../../mscore/chordedit.ui" line="117"/>
         <source>B</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="160"/>
+        <location filename="../../mscore/chordedit.ui" line="151"/>
         <source>Extension</source>
         <translation>Erweiterung</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="328"/>
+        <location filename="../../mscore/chordedit.ui" line="307"/>
         <source>Maj</source>
         <translation>Maj</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1147"/>
+        <location filename="../../mscore/chordedit.ui" line="1117"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="348"/>
+        <location filename="../../mscore/chordedit.ui" line="327"/>
         <source>Maj7</source>
         <translation>Maj7</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="353"/>
+        <location filename="../../mscore/chordedit.ui" line="332"/>
         <source>Maj9</source>
         <translation>Maj9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="343"/>
+        <location filename="../../mscore/chordedit.ui" line="322"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="383"/>
+        <location filename="../../mscore/chordedit.ui" line="362"/>
         <source>69</source>
         <translation>69</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="393"/>
+        <location filename="../../mscore/chordedit.ui" line="372"/>
         <source>m</source>
         <translation>m</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="408"/>
+        <location filename="../../mscore/chordedit.ui" line="387"/>
         <source>m7</source>
         <translation>m7</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="458"/>
+        <location filename="../../mscore/chordedit.ui" line="437"/>
         <source>m7b5</source>
         <translation>m7b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="503"/>
+        <location filename="../../mscore/chordedit.ui" line="482"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="993"/>
+        <location filename="../../mscore/chordedit.ui" line="972"/>
         <source>sus</source>
         <translation>sus</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="264"/>
+        <location filename="../../mscore/chordedit.ui" line="243"/>
         <source>7Sus</source>
         <translation>7Sus</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="428"/>
+        <location filename="../../mscore/chordedit.ui" line="407"/>
         <source>m6</source>
         <translation>m6</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="413"/>
+        <location filename="../../mscore/chordedit.ui" line="392"/>
         <source>m9</source>
         <translation>m9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="403"/>
+        <location filename="../../mscore/chordedit.ui" line="382"/>
         <source>mMaj7</source>
         <translation>mMaj7</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="463"/>
+        <location filename="../../mscore/chordedit.ui" line="442"/>
         <source>dim</source>
         <translation>dim</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="533"/>
+        <location filename="../../mscore/chordedit.ui" line="512"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="508"/>
+        <location filename="../../mscore/chordedit.ui" line="487"/>
         <source>13</source>
         <translation>13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="558"/>
+        <location filename="../../mscore/chordedit.ui" line="537"/>
         <source>7b9</source>
         <translation>7b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="320"/>
+        <location filename="../../mscore/chordedit.ui" line="299"/>
         <source>Other:</source>
         <translation>Andere:</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="333"/>
+        <location filename="../../mscore/chordedit.ui" line="312"/>
         <source>5b</source>
         <translation>5b</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="338"/>
+        <location filename="../../mscore/chordedit.ui" line="317"/>
         <source>aug</source>
         <translation>aug</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="358"/>
+        <location filename="../../mscore/chordedit.ui" line="337"/>
         <source>Maj9#11</source>
         <translation>Maj9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="363"/>
+        <location filename="../../mscore/chordedit.ui" line="342"/>
         <source>Maj13#11</source>
         <translation>Maj13#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="368"/>
+        <location filename="../../mscore/chordedit.ui" line="347"/>
         <source>Maj13</source>
         <translation>Maj13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="373"/>
+        <location filename="../../mscore/chordedit.ui" line="352"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="378"/>
+        <location filename="../../mscore/chordedit.ui" line="357"/>
         <source>Maj7#5</source>
         <translation>Maj7#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="398"/>
+        <location filename="../../mscore/chordedit.ui" line="377"/>
         <source>maug</source>
         <translation>maug</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="418"/>
+        <location filename="../../mscore/chordedit.ui" line="397"/>
         <source>m11</source>
         <translation>m11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="423"/>
+        <location filename="../../mscore/chordedit.ui" line="402"/>
         <source>m13</source>
         <translation>m13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="433"/>
+        <location filename="../../mscore/chordedit.ui" line="412"/>
         <source>m#5</source>
         <translation>m#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="438"/>
+        <location filename="../../mscore/chordedit.ui" line="417"/>
         <source>m7#5</source>
         <translation>m7#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="443"/>
+        <location filename="../../mscore/chordedit.ui" line="422"/>
         <source>m69</source>
         <translation>m69</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="448"/>
+        <location filename="../../mscore/chordedit.ui" line="427"/>
         <source>Maj7Lyd</source>
         <translation>Maj7Lyd</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="453"/>
+        <location filename="../../mscore/chordedit.ui" line="432"/>
         <source>Maj7b5</source>
         <translation>Maj7b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="468"/>
+        <location filename="../../mscore/chordedit.ui" line="447"/>
         <source>m9b5</source>
         <translation>m9b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="473"/>
+        <location filename="../../mscore/chordedit.ui" line="452"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="478"/>
+        <location filename="../../mscore/chordedit.ui" line="457"/>
         <source>7+</source>
         <translation>7+</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="483"/>
+        <location filename="../../mscore/chordedit.ui" line="462"/>
         <source>9+</source>
         <translation>9+</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="488"/>
+        <location filename="../../mscore/chordedit.ui" line="467"/>
         <source>13+</source>
         <translation>13+</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="493"/>
+        <location filename="../../mscore/chordedit.ui" line="472"/>
         <source>(blues)</source>
         <translation>(blues)</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="498"/>
+        <location filename="../../mscore/chordedit.ui" line="477"/>
         <source>7(Blues)</source>
         <translation>7(Blues)</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="513"/>
+        <location filename="../../mscore/chordedit.ui" line="492"/>
         <source>7b13</source>
         <translation>7b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="518"/>
+        <location filename="../../mscore/chordedit.ui" line="497"/>
         <source>7#11</source>
         <translation>7#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="548"/>
+        <location filename="../../mscore/chordedit.ui" line="527"/>
         <source>13#11</source>
         <translation>13#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="528"/>
+        <location filename="../../mscore/chordedit.ui" line="507"/>
         <source>7#11b13</source>
         <translation>7#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="538"/>
+        <location filename="../../mscore/chordedit.ui" line="517"/>
         <source>9b13</source>
         <translation>9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="603"/>
+        <location filename="../../mscore/chordedit.ui" line="582"/>
         <source>9#11</source>
         <translation>9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="553"/>
+        <location filename="../../mscore/chordedit.ui" line="532"/>
         <source>9#11b13</source>
         <translation>9#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="563"/>
+        <location filename="../../mscore/chordedit.ui" line="542"/>
         <source>13b9</source>
         <translation>13b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="568"/>
+        <location filename="../../mscore/chordedit.ui" line="547"/>
         <source>7b9b13</source>
         <translation>7b9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="573"/>
+        <location filename="../../mscore/chordedit.ui" line="552"/>
         <source>7b9#11</source>
         <translation>7b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="578"/>
+        <location filename="../../mscore/chordedit.ui" line="557"/>
         <source>13b9#11</source>
         <translation>13b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="583"/>
+        <location filename="../../mscore/chordedit.ui" line="562"/>
         <source>7b9#11b13</source>
         <translation>7b9#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="588"/>
+        <location filename="../../mscore/chordedit.ui" line="567"/>
         <source>7#9</source>
         <translation>7#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="593"/>
+        <location filename="../../mscore/chordedit.ui" line="572"/>
         <source>13#9</source>
         <translation>13#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="598"/>
+        <location filename="../../mscore/chordedit.ui" line="577"/>
         <source>7#9b13</source>
         <translation>7#9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="608"/>
+        <location filename="../../mscore/chordedit.ui" line="587"/>
         <source>13#9#11</source>
         <translation>13#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="613"/>
+        <location filename="../../mscore/chordedit.ui" line="592"/>
         <source>7#9#11b13</source>
         <translation>7#9#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="618"/>
+        <location filename="../../mscore/chordedit.ui" line="597"/>
         <source>7b5</source>
         <translation>7b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="623"/>
+        <location filename="../../mscore/chordedit.ui" line="602"/>
         <source>13b5</source>
         <translation>13b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="628"/>
+        <location filename="../../mscore/chordedit.ui" line="607"/>
         <source>7b5b13</source>
         <translation>7b5b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="633"/>
+        <location filename="../../mscore/chordedit.ui" line="612"/>
         <source>9b5</source>
         <translation>9b5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="638"/>
+        <location filename="../../mscore/chordedit.ui" line="617"/>
         <source>9b5b13</source>
         <translation>9b5b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="643"/>
+        <location filename="../../mscore/chordedit.ui" line="622"/>
         <source>7b5b9</source>
         <translation>7b5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="648"/>
+        <location filename="../../mscore/chordedit.ui" line="627"/>
         <source>13b5b9</source>
         <translation>13b5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="653"/>
+        <location filename="../../mscore/chordedit.ui" line="632"/>
         <source>7b5b9b13</source>
         <translation>7b5b9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="658"/>
+        <location filename="../../mscore/chordedit.ui" line="637"/>
         <source>7b5#9</source>
         <translation>7b5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="663"/>
+        <location filename="../../mscore/chordedit.ui" line="642"/>
         <source>13b5#9</source>
         <translation>13b5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="668"/>
+        <location filename="../../mscore/chordedit.ui" line="647"/>
         <source>7b5#9b13</source>
         <translation>7b5#9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="673"/>
+        <location filename="../../mscore/chordedit.ui" line="652"/>
         <source>7#5</source>
         <translation>7#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="678"/>
+        <location filename="../../mscore/chordedit.ui" line="657"/>
         <source>13#5</source>
         <translation>13#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="683"/>
+        <location filename="../../mscore/chordedit.ui" line="662"/>
         <source>7#5#11</source>
         <translation>7#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="688"/>
+        <location filename="../../mscore/chordedit.ui" line="667"/>
         <source>13#5#11</source>
         <translation>13#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="693"/>
+        <location filename="../../mscore/chordedit.ui" line="672"/>
         <source>9#5</source>
         <translation>9#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="698"/>
+        <location filename="../../mscore/chordedit.ui" line="677"/>
         <source>9#5#11</source>
         <translation>9#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="703"/>
+        <location filename="../../mscore/chordedit.ui" line="682"/>
         <source>7#5b9</source>
         <translation>7#5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="708"/>
+        <location filename="../../mscore/chordedit.ui" line="687"/>
         <source>13#5b9</source>
         <translation>13#5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="713"/>
+        <location filename="../../mscore/chordedit.ui" line="692"/>
         <source>7#5b9#11</source>
         <translation>7#5b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="718"/>
+        <location filename="../../mscore/chordedit.ui" line="697"/>
         <source>13#5b9#11</source>
         <translation>13#5b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="723"/>
+        <location filename="../../mscore/chordedit.ui" line="702"/>
         <source>7#5#9</source>
         <translation>7#5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="738"/>
+        <location filename="../../mscore/chordedit.ui" line="717"/>
         <source>13#5#9#11</source>
         <translation>13#5#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="733"/>
+        <location filename="../../mscore/chordedit.ui" line="712"/>
         <source>7#5#9#11</source>
         <translation>7#5#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="743"/>
+        <location filename="../../mscore/chordedit.ui" line="722"/>
         <source>7alt</source>
         <translation>7alt</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="748"/>
+        <location filename="../../mscore/chordedit.ui" line="727"/>
         <source>7sus</source>
         <translation>7sus</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="753"/>
+        <location filename="../../mscore/chordedit.ui" line="732"/>
         <source>13sus</source>
         <translation>13sus</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="758"/>
+        <location filename="../../mscore/chordedit.ui" line="737"/>
         <source>7susb13</source>
         <translation>7susb13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="763"/>
+        <location filename="../../mscore/chordedit.ui" line="742"/>
         <source>7sus#11</source>
         <translation>7sus#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="793"/>
+        <location filename="../../mscore/chordedit.ui" line="772"/>
         <source>13sus#11</source>
         <translation>13sus#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="773"/>
+        <location filename="../../mscore/chordedit.ui" line="752"/>
         <source>7sus#11b13</source>
         <translation>7sus#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="778"/>
+        <location filename="../../mscore/chordedit.ui" line="757"/>
         <source>9sus</source>
         <translation>9sus</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="783"/>
+        <location filename="../../mscore/chordedit.ui" line="762"/>
         <source>9susb13</source>
         <translation>9susb13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="848"/>
+        <location filename="../../mscore/chordedit.ui" line="827"/>
         <source>9sus#11</source>
         <translation>9sus#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="798"/>
+        <location filename="../../mscore/chordedit.ui" line="777"/>
         <source>9sus#11b13</source>
         <translation>9sus#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="803"/>
+        <location filename="../../mscore/chordedit.ui" line="782"/>
         <source>7susb9</source>
         <translation>7susb9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="808"/>
+        <location filename="../../mscore/chordedit.ui" line="787"/>
         <source>13susb9</source>
         <translation>13susb9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="813"/>
+        <location filename="../../mscore/chordedit.ui" line="792"/>
         <source>7susb9b13</source>
         <translation>7susb9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="818"/>
+        <location filename="../../mscore/chordedit.ui" line="797"/>
         <source>7susb9#11</source>
         <translation>7susb9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="823"/>
+        <location filename="../../mscore/chordedit.ui" line="802"/>
         <source>13susb9#11</source>
         <translation>13susb9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="828"/>
+        <location filename="../../mscore/chordedit.ui" line="807"/>
         <source>7susb9#11b13</source>
         <translation>7susb9#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="833"/>
+        <location filename="../../mscore/chordedit.ui" line="812"/>
         <source>7sus#9</source>
         <translation>7sus#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="838"/>
+        <location filename="../../mscore/chordedit.ui" line="817"/>
         <source>13sus#9</source>
         <translation>13sus#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="843"/>
+        <location filename="../../mscore/chordedit.ui" line="822"/>
         <source>7sus#9b13</source>
         <translation>7sus#9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="853"/>
+        <location filename="../../mscore/chordedit.ui" line="832"/>
         <source>13sus#9#11</source>
         <translation>13sus#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="858"/>
+        <location filename="../../mscore/chordedit.ui" line="837"/>
         <source>7sus#9#11b13</source>
         <translation>7sus#9#11b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="863"/>
+        <location filename="../../mscore/chordedit.ui" line="842"/>
         <source>7susb5</source>
         <translation>7susb5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="868"/>
+        <location filename="../../mscore/chordedit.ui" line="847"/>
         <source>13susb5</source>
         <translation>13susb5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="873"/>
+        <location filename="../../mscore/chordedit.ui" line="852"/>
         <source>7susb5b13</source>
         <translation>7susb5b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="878"/>
+        <location filename="../../mscore/chordedit.ui" line="857"/>
         <source>9susb5</source>
         <translation>9susb5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="883"/>
+        <location filename="../../mscore/chordedit.ui" line="862"/>
         <source>9susb5b13</source>
         <translation>9susb5b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="888"/>
+        <location filename="../../mscore/chordedit.ui" line="867"/>
         <source>7susb5b9</source>
         <translation>7susb5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="893"/>
+        <location filename="../../mscore/chordedit.ui" line="872"/>
         <source>13susb5b9</source>
         <translation>13susb5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="898"/>
+        <location filename="../../mscore/chordedit.ui" line="877"/>
         <source>7susb5b9b13</source>
         <translation>7susb5b9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="903"/>
+        <location filename="../../mscore/chordedit.ui" line="882"/>
         <source>7susb5#9</source>
         <translation>7susb5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="908"/>
+        <location filename="../../mscore/chordedit.ui" line="887"/>
         <source>13susb5#9</source>
         <translation>13susb5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="913"/>
+        <location filename="../../mscore/chordedit.ui" line="892"/>
         <source>7susb5#9b13</source>
         <translation>7susb5#9b13</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="918"/>
+        <location filename="../../mscore/chordedit.ui" line="897"/>
         <source>7sus#5</source>
         <translation>7sus#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="923"/>
+        <location filename="../../mscore/chordedit.ui" line="902"/>
         <source>13sus#5</source>
         <translation>13sus#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="928"/>
+        <location filename="../../mscore/chordedit.ui" line="907"/>
         <source>7sus#5#11</source>
         <translation>7sus#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="933"/>
+        <location filename="../../mscore/chordedit.ui" line="912"/>
         <source>13sus#5#11</source>
         <translation>13sus#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="938"/>
+        <location filename="../../mscore/chordedit.ui" line="917"/>
         <source>9sus#5</source>
         <translation>9sus#5</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="943"/>
+        <location filename="../../mscore/chordedit.ui" line="922"/>
         <source>9sus#5#11</source>
         <translation>9sus#5#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="948"/>
+        <location filename="../../mscore/chordedit.ui" line="927"/>
         <source>7sus#5b9</source>
         <translation>7sus#5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="953"/>
+        <location filename="../../mscore/chordedit.ui" line="932"/>
         <source>13sus#5b9</source>
         <translation>13sus#5b9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="958"/>
+        <location filename="../../mscore/chordedit.ui" line="937"/>
         <source>7sus#5b9#11</source>
         <translation>7sus#5b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="963"/>
+        <location filename="../../mscore/chordedit.ui" line="942"/>
         <source>13sus#5b9#11</source>
         <translation>13sus#5b9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="968"/>
+        <location filename="../../mscore/chordedit.ui" line="947"/>
         <source>7sus#5#9</source>
         <translation>7sus#5#9</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="983"/>
+        <location filename="../../mscore/chordedit.ui" line="962"/>
         <source>13sus#5#9#11</source>
         <translation>13sus#5#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="978"/>
+        <location filename="../../mscore/chordedit.ui" line="957"/>
         <source>7sus#5#9#11</source>
         <translation>7sus#5#9#11</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="988"/>
+        <location filename="../../mscore/chordedit.ui" line="967"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1137"/>
+        <location filename="../../mscore/chordedit.ui" line="1107"/>
         <source>none</source>
         <translation>kein</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1070"/>
+        <location filename="../../mscore/chordedit.ui" line="1040"/>
         <source>/C</source>
         <translation>/C</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1075"/>
+        <location filename="../../mscore/chordedit.ui" line="1045"/>
         <source>/Db</source>
         <translation>/Db</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1080"/>
+        <location filename="../../mscore/chordedit.ui" line="1050"/>
         <source>/D</source>
         <translation>/D</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1085"/>
+        <location filename="../../mscore/chordedit.ui" line="1055"/>
         <source>/Eb</source>
         <translation>/Eb</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1090"/>
+        <location filename="../../mscore/chordedit.ui" line="1060"/>
         <source>/E</source>
         <translation>/E</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1095"/>
+        <location filename="../../mscore/chordedit.ui" line="1065"/>
         <source>/F</source>
         <translation>/F</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1100"/>
+        <location filename="../../mscore/chordedit.ui" line="1070"/>
         <source>/F#</source>
         <translation>/F#</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1105"/>
+        <location filename="../../mscore/chordedit.ui" line="1075"/>
         <source>/G</source>
         <translation>/G</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1110"/>
+        <location filename="../../mscore/chordedit.ui" line="1080"/>
         <source>/Ab</source>
         <translation>/Ab</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1115"/>
+        <location filename="../../mscore/chordedit.ui" line="1085"/>
         <source>/A</source>
         <translation>/A</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1120"/>
+        <location filename="../../mscore/chordedit.ui" line="1090"/>
         <source>/Bb</source>
         <translation>/B</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1125"/>
+        <location filename="../../mscore/chordedit.ui" line="1095"/>
         <source>/B</source>
         <translation>/H</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1014"/>
+        <location filename="../../mscore/chordedit.ui" line="993"/>
         <source>Degrees</source>
         <translation>Grad</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1038"/>
+        <location filename="../../mscore/chordedit.ui" line="1008"/>
         <source>Add</source>
         <translation>Zufügen</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1045"/>
+        <location filename="../../mscore/chordedit.ui" line="1015"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="77"/>
+        <location filename="../../mscore/chordedit.ui" line="68"/>
         <source>bb (double flat)</source>
         <translation>bb (Doppel b)</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="91"/>
+        <location filename="../../mscore/chordedit.ui" line="82"/>
         <source>b (flat)</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="105"/>
+        <location filename="../../mscore/chordedit.ui" line="96"/>
         <source>(no accidental)</source>
         <translation>(ohne Vorzeichen)</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="119"/>
+        <location filename="../../mscore/chordedit.ui" line="110"/>
         <source># (sharp)</source>
         <translation># (Kreuz)</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1055"/>
+        <location filename="../../mscore/chordedit.ui" line="1025"/>
         <source>Bass Note / Inversion</source>
         <translation>Bass Note / Invertierung</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1142"/>
+        <location filename="../../mscore/chordedit.ui" line="1112"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="1152"/>
+        <location filename="../../mscore/chordedit.ui" line="1122"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="../../mscore/chordedit.ui" line="133"/>
+        <location filename="../../mscore/chordedit.ui" line="124"/>
         <source>## (double sharp)</source>
         <translation>## (Doppelkreuz)</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/chordedit.ui" line="13"/>
+        <source>MuseScore: Harmony Properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2517,12 +2517,12 @@ fehlgeschlagen: </translation>
 <context>
     <name>MagBox</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="792"/>
+        <location filename="../../mscore/mscore.cpp" line="794"/>
         <source>Mag</source>
         <translation>Lupe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="793"/>
+        <location filename="../../mscore/mscore.cpp" line="795"/>
         <source>Zoom Canvas</source>
         <translation>Zoom Notenblatt</translation>
     </message>
@@ -2733,7 +2733,7 @@ fehlgeschlagen: </translation>
 <context>
     <name>MenuNotes</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="566"/>
+        <location filename="../../mscore/mscore.cpp" line="568"/>
         <source>Notes</source>
         <translation type="unfinished">Noten</translation>
     </message>
@@ -2794,37 +2794,37 @@ fehlgeschlagen: </translation>
         <translation>Text...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="390"/>
+        <location filename="../../mscore/mscore.cpp" line="391"/>
         <source>File Operations</source>
         <translation>Dateibefehle</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="402"/>
+        <location filename="../../mscore/mscore.cpp" line="403"/>
         <source>Transport Tools</source>
         <translation>Transportfenster</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="429"/>
+        <location filename="../../mscore/mscore.cpp" line="430"/>
         <source>Note Entry</source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="504"/>
+        <location filename="../../mscore/mscore.cpp" line="505"/>
         <source>Open &amp;Recent</source>
         <translation>&amp;Letzte Partituren</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="521"/>
+        <location filename="../../mscore/mscore.cpp" line="522"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="550"/>
+        <location filename="../../mscore/mscore.cpp" line="552"/>
         <source>Inspector...</source>
         <translation>Inspektor...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="552"/>
+        <location filename="../../mscore/mscore.cpp" line="554"/>
         <source>Preferences...</source>
         <translation>Einstellungen...</translation>
     </message>
@@ -2834,42 +2834,42 @@ fehlgeschlagen: </translation>
         <translation>&amp;Erzeugen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="629"/>
+        <location filename="../../mscore/mscore.cpp" line="631"/>
         <source>&amp;Layout</source>
         <translation>&amp;Layout</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="632"/>
+        <location filename="../../mscore/mscore.cpp" line="634"/>
         <source>Page Settings...</source>
         <translation>Seiteneinstellungen...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="633"/>
+        <location filename="../../mscore/mscore.cpp" line="635"/>
         <source>Reset Positions</source>
         <translation>Positionen zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="634"/>
+        <location filename="../../mscore/mscore.cpp" line="636"/>
         <source>Set Normal Staff Distances</source>
         <translation>Zeilenabstand auf Vorgabe setzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="638"/>
+        <location filename="../../mscore/mscore.cpp" line="640"/>
         <source>Reset Stretch</source>
         <translation>Dehnen/Stauchen zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="646"/>
+        <location filename="../../mscore/mscore.cpp" line="648"/>
         <source>&amp;Style</source>
         <translation>&amp;Stil</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="648"/>
+        <location filename="../../mscore/mscore.cpp" line="650"/>
         <source>Edit Style...</source>
         <translation>Stil Editieren...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="649"/>
+        <location filename="../../mscore/mscore.cpp" line="651"/>
         <source>Edit Text Style...</source>
         <translation>Text Stil Editieren...</translation>
     </message>
@@ -2884,32 +2884,32 @@ fehlgeschlagen: </translation>
         <translation>Stil Speichern</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="658"/>
+        <location filename="../../mscore/mscore.cpp" line="660"/>
         <source>&amp;Display</source>
         <translation>&amp;Anzeige</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="706"/>
+        <location filename="../../mscore/mscore.cpp" line="708"/>
         <source>Show Invisible</source>
         <translation>Unsichtbare Zeigen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="714"/>
+        <location filename="../../mscore/mscore.cpp" line="716"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="717"/>
+        <location filename="../../mscore/mscore.cpp" line="719"/>
         <source>&amp;About</source>
         <translation>Über MuseScore</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="718"/>
+        <location filename="../../mscore/mscore.cpp" line="720"/>
         <source>About&amp;Qt</source>
         <translation>Über &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1026"/>
+        <location filename="../../mscore/mscore.cpp" line="1028"/>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: Hilfe</translation>
     </message>
@@ -3044,27 +3044,27 @@ fehlgeschlagen: </translation>
         <translation>Seitenumbruch</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="640"/>
+        <location filename="../../mscore/mscore.cpp" line="642"/>
         <source>Breaks...</source>
         <translation>Umbrüche...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="573"/>
+        <location filename="../../mscore/mscore.cpp" line="575"/>
         <source>Add Note</source>
         <translation>Note zufügen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="716"/>
+        <location filename="../../mscore/mscore.cpp" line="718"/>
         <source>Manual</source>
         <translation>Handbuch</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1914"/>
+        <location filename="../../mscore/mscore.cpp" line="1916"/>
         <source>note entry mode</source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1918"/>
+        <location filename="../../mscore/mscore.cpp" line="1920"/>
         <source>edit mode</source>
         <translation>Editieren</translation>
     </message>
@@ -4334,12 +4334,12 @@ fehlgeschlagen: </translation>
         <translation>ohneName</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="499"/>
+        <location filename="../../mscore/mscore.cpp" line="500"/>
         <source>&amp;Score</source>
         <translation>&amp;Partitur</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="589"/>
+        <location filename="../../mscore/mscore.cpp" line="591"/>
         <source>Add Interval</source>
         <translation>Intervall zufügen</translation>
     </message>
@@ -4614,7 +4614,7 @@ fehlgeschlagen: </translation>
         <translation>Umbrüche</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1922"/>
+        <location filename="../../mscore/mscore.cpp" line="1924"/>
         <source>play</source>
         <translation>Wiedergabe</translation>
     </message>
@@ -4914,7 +4914,7 @@ fehlgeschlagen: </translation>
         <translation>C dur, A moll</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="548"/>
+        <location filename="../../mscore/mscore.cpp" line="549"/>
         <source>Excerpts...</source>
         <translation>Auszüge</translation>
     </message>
@@ -4934,7 +4934,7 @@ fehlgeschlagen: </translation>
         <translation>Balken in selektiertem Takt zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1024"/>
+        <location filename="../../mscore/mscore.cpp" line="1026"/>
         <source>MuseScore online manual not found at: </source>
         <translation>MuseScore Online-Handbuch nicht gefunden unter:</translation>
     </message>
@@ -5131,7 +5131,7 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="538"/>
+        <location filename="../../mscore/mscore.cpp" line="539"/>
         <source>Voices</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5156,12 +5156,12 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1038"/>
+        <location filename="../../mscore/mscore.cpp" line="1040"/>
         <source>MuseScore: Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1039"/>
+        <location filename="../../mscore/mscore.cpp" line="1041"/>
         <source>Failed to open help file:
 </source>
         <translation type="unfinished"></translation>
@@ -5194,6 +5194,16 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1613"/>
         <source>Repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1619"/>
+        <source>edit score meta data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1624"/>
+        <source>Meta Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6387,7 +6397,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Fehler beim Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1825"/>
+        <location filename="../../mscore/mscore.cpp" line="1827"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
@@ -6412,7 +6422,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Midi Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1823"/>
+        <location filename="../../mscore/mscore.cpp" line="1825"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6543,7 +6553,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Datei lesen</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1063"/>
+        <location filename="../../mscore/cmd.cpp" line="1064"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6574,7 +6584,7 @@ failed: </source>
         <translation>MuseScore: Öffne Datei</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="914"/>
+        <location filename="../../mscore/cmd.cpp" line="915"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
@@ -6583,7 +6593,7 @@ Bitte zuerst eine Note oder Pause auswählen, an der
 die Texteingabe starten soll</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1122"/>
+        <location filename="../../mscore/cmd.cpp" line="1123"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Kein Takt ausgewählt:
@@ -7812,17 +7822,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>magTable</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="778"/>
+        <location filename="../../mscore/mscore.cpp" line="780"/>
         <source>PgeWidth</source>
         <translation>Seitenbreite</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="779"/>
+        <location filename="../../mscore/mscore.cpp" line="781"/>
         <source>Page</source>
         <translation>Seite</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="780"/>
+        <location filename="../../mscore/mscore.cpp" line="782"/>
         <source>DblPage</source>
         <translation>Doppelseite</translation>
     </message>

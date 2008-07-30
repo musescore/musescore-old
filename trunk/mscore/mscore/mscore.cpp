@@ -423,6 +423,9 @@ MuseScore::MuseScore()
       fileTools->addWidget(mag);
       addToolBarBreak();
 
+      QToolBar* cpitchTools = addToolBar(tr("Concert Pitch"));
+      cpitchTools->addAction(getAction("concert-pitch"));
+
       //-------------------------------
       //    Note Entry Tool Bar
       //-------------------------------
