@@ -28,8 +28,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib
 
-set(BUILD_SCRIPT_INTERFACE FALSE)         # this requires qt >= 4.4 && cmake 2.6
-set(BUILD_SCRIPT_DEBUG FALSE)
+set(BUILD_SCRIPT_INTERFACE TRUE)         # this requires qt >= 4.4 && cmake 2.6
+set(BUILD_SCRIPT_DEBUG TRUE)
 set(STATIC_SCRIPT_BINDINGS FALSE)         # this requires qt 4.5
 
 if (MINGW)

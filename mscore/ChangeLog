@@ -1,3 +1,9 @@
+30.7 (ws)
+      - new "display in concert pitch" button
+      - fix for build script (if-endif mismatch)
+      - fix loading of plugins
+29.7 (ws)
+      - updated italian translation from Angelo Contardi
 23.7 (ws)
       - change notion of MusicXML "whole measure rest"
       - harmony fixes: bass note entry & export/import to MusicXML

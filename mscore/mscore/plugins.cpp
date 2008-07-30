@@ -111,13 +111,13 @@ void MuseScore::loadPlugins()
       QDir pluginDir(mscoreGlobalShare + "plugins");
       QDirIterator it(pluginDir, QDirIterator::Subdirectories);
       while (it.hasNext()) {
+            it.next();
             QFileInfo fi = it.fileInfo();
             if (fi.isFile()) {
                   QString path(fi.filePath());
                   if (path.endsWith(".js"))
                         registerPlugin(path);
                   }
-            it.next();
             }
       }
 

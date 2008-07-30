@@ -163,7 +163,7 @@ if (STATIC_SCRIPT_BINDINGS)
             qtscript_network
             qtscript_uitools
             qtscript_xml)
-endif (BUILD_SCRIPT_INTERFACE)
+endif (STATIC_SCRIPT_BINDINGS)
 
 if (MINGW)
    add_custom_command(
