@@ -465,6 +465,7 @@ NewWizardPage2::NewWizardPage2(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Define a set of instruments. Each instrument"
                      " is represented by one or more staves"));
+
       complete = false;
       w = new InstrumentWizard;
       QGridLayout* grid = new QGridLayout;
@@ -483,15 +484,6 @@ void NewWizardPage2::setComplete(bool val)
       {
       complete = val;
       emit completeChanged();
-      }
-
-//---------------------------------------------------------
-//   isComplete
-//---------------------------------------------------------
-
-bool NewWizardPage2::isComplete() const
-      {
-      return complete;
       }
 
 //---------------------------------------------------------
@@ -607,7 +599,14 @@ int NewWizardPage5::keysig() const
 
 bool NewWizardPage4::isComplete() const
       {
-      return tree->selectionModel()->hasSelection();
+      QItemSelectionModel* sm = tree->selectionModel();
+      QModelIndexList l = sm->selectedRows();
+      bool hasSelection = false;
+      if (!l.isEmpty()) {
+            QModelIndex idx = l.front();
+            hasSelection = idx.isValid();
+            }
+      return hasSelection;
       }
 
 //---------------------------------------------------------
@@ -629,6 +628,8 @@ QString NewWizardPage4::templatePath() const
       if (useTemplate) {
             QItemSelectionModel* sm = tree->selectionModel();
             QModelIndexList l = sm->selectedRows();
+            if (l.isEmpty())
+                  return QString();
             QModelIndex idx = l.front();
             if (idx.isValid())
                   return model->filePath(idx);

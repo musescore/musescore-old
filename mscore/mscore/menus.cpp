@@ -434,7 +434,7 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 6; ++i) {
                   Tremolo* tremolo = new Tremolo(gscore);
                   tremolo->setSubtype(i);
-                  sp->addObject(i, tremolo, QString(tremoloName[i]));
+                  sp->addObject(i, tremolo, tremoloName[i]);
                   }
             paletteBox->addPalette(tr("Tremolo"), sp);
 
