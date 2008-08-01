@@ -31,7 +31,7 @@ Dave Phillips: Music Notation Programs: Recent Releases</a></li>
    ist ein grafisches Frontend für LilyPond von Jörg Anders.</li>
 <li><a href="http://canorus.berlios.de/wiki/index.php/Main_Page">Canorus</a>
    Nachfolger von NoteEdit</li>
-<li><a href="http://rnvs.informatik.tu-chemnitz.de/~jan/noteedit/noteedit.html">NtEd</a>
+<li><a href="http://vsr.informatik.tu-chemnitz.de/staff/jan/nted/nted.xhtml">NtEd</a>
      ist das neue WYSIWYG Notationsprogramm von Jörg Anders.</li>
 <li><a href="http://ccrma.stanford.edu/software/cmn/">
      Common Music Notation</a></li>
