@@ -112,7 +112,7 @@ class NewWizardPage2 : public QWizardPage {
 
    public:
       NewWizardPage2(QWidget* parent = 0);
-      virtual bool isComplete() const;
+      virtual bool isComplete() const  { return complete; }
       void createInstruments(Score* s) { w->createInstruments(s); }
       };
 
@@ -187,7 +187,7 @@ class NewWizard : public QWizard {
 
       enum { Page_Type, Page_Instruments, Page_Template, Page_Keysig, Page_Timesig};
 
-      QString templatePath() const { return p4->templatePath(); }
+      QString templatePath() const       { return p4->templatePath(); }
       bool useTemplate() const;
       int measures() const               { return p3->measures();    }
       void timesig(int* z, int* n) const { p3->timesig(z, n);        }

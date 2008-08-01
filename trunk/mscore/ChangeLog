@@ -1,3 +1,5 @@
+1.8  (ws
+      - fix crash in new score wizard
 30.7 (ws)
       - new "display in concert pitch" button
       - fix for build script (if-endif mismatch)
