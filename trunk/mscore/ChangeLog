@@ -1,4 +1,6 @@
-1.8  (ws
+4.8 (ws)
+      - fixed regression in MusicXML export of rests (change from 23.7.)
+1.8  (ws)
       - fix crash in new score wizard
 30.7 (ws)
       - new "display in concert pitch" button
