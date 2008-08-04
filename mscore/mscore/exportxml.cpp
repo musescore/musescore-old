@@ -1492,7 +1492,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       if (d.val() == Duration::V_MEASURE)
             tickLen = rest->measure()->tickLen();
 
-      tick += tickLen;
+//      tick += tickLen;
 
       xml.tag("duration", tickLen);
 
