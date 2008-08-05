@@ -60,6 +60,7 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 16, 3, 2,  1, 4 ),
       BeamHint(1, 16, 3, 2,  1, 2 ),
       BeamHint(1, 16, 3, 2,  3, 4 ),
+      BeamHint(1, 16, 3, 2,  1, 1 ),
       BeamHint(1, 16, 3, 2,  5, 4 ),
 
       BeamHint(1, 32, 3, 2,  1, 8 ),
@@ -73,6 +74,10 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32, 3, 2,  5, 4 ),
       BeamHint(1, 32, 3, 2, 11, 8 ),
 
+      // in 2 2 time
+      //  end beams each 1 2 note
+      BeamHint(0,  0,  2,  2, 1, 2 ),
+      
       BeamHint(0,  0, 3, 4,  3, 4 ),
 
       BeamHint(1, 16, 3, 4,  1, 4 ),
