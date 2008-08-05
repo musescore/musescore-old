@@ -2113,6 +2113,7 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                   }
             cr = new Rest(score, tick, len);
             cr->setDuration(durationType);
+            cr->setDots(dots);
 
             // TODO: try to find out if this rest is part of a beam
             cr->setBeamMode(BEAM_NO);
