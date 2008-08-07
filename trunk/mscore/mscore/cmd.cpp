@@ -1821,10 +1821,8 @@ void Score::cmd(const QString& cmd)
                   transpose();
             else if (cmd == "concert-pitch") {
                   QAction* a = getAction(cmd.toLatin1().data());
-                  if (style()->concertPitch != a->isChecked()) {
-                        style()->concertPitch = a->isChecked();
+                  if (style()->concertPitch != a->isChecked())
                         cmdConcertPitchChanged(a->isChecked());
-                        }
                   }
             else if (cmd == "reset-beammode")
                   cmdResetBeamMode();

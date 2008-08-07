@@ -574,7 +574,7 @@ void MuseScore::newFile()
                         // transpose key
                         //
                         int nKey = ks;
-                        if (instrument->pitchOffset) {
+                        if (instrument->pitchOffset && !newWizard->useTemplate()) {
                               int diff = -instrument->pitchOffset;
                               nKey = transposeKey(nKey, diff);
                               }

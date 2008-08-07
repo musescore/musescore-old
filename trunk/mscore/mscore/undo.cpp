@@ -625,6 +625,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   int oval = int(_style->concertPitch);
                   _style->concertPitch = bool(i->val1);
+                  QAction* action = getAction("concert-pitch");
+                  action->setChecked(_style->concertPitch);
                   i->val1 = oval;
                   }
                   break;
