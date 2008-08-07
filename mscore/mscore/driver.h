@@ -43,7 +43,7 @@ struct MidiOutEvent {
             // notes
 
             int channel = type & 0xf;
-            if (channel == e.type & 0xf) {
+            if (channel == (e.type & 0xf)) {
                   int t = type & 0xf0;
                   return t == ME_NOTEOFF || (t == ME_NOTEON && b == 0);
                   }

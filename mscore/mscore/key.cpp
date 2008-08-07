@@ -112,6 +112,7 @@ void KeyList::insertTime(int tick, int len)
 
 int transposeKey(int key, int semitones)
       {
+printf("transpose key %d + (%d)\n", key, semitones);
       while (semitones < 0)
             semitones += 12;
       // switch to enharmonic key:

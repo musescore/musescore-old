@@ -44,8 +44,8 @@ class Duration {
       void setType(DurationType t)          { _val = t; }
 
       int ticks() const;
-      bool const operator==(const Duration& t) const { return t._val == _val; }
-      bool const operator!=(const Duration& t) const { return t._val != _val; }
+      bool operator==(const Duration& t) const { return t._val == _val; }
+      bool operator!=(const Duration& t) const { return t._val != _val; }
       static const int types = 12;
       QString name() const;
       int headType() const;               // note head type
