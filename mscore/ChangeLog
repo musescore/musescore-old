@@ -1,3 +1,6 @@
+8.8 (ws)
+      - fixed enable/disable undo/redo buttons; mscore crashed when a wrong enabled
+        button was pressed
 7.8 (ws)
       - added first version of spanish translation from Carlos Sanchiavedraz
 6.8 (ws)

@@ -291,8 +291,8 @@ MuseScore::MuseScore()
          << "pitch-up-octave" << "pitch-down-octave"
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
-         << "next-measure" << "prev-measure" << "print" << "undo"
-         << "redo" << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
+         << "next-measure" << "prev-measure" << "print" << "undo" << "redo"
+         << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
          << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
          << "duplet" << "triplet" << "quadruplet" << "quintuplet" << "sextuplet"
          << "septuplet" << "octuplet" << "nonuplet" << "tuplet-dialog"
@@ -1242,6 +1242,7 @@ void MuseScore::setCurrentScore(int idx)
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
+
       getAction("file-save")->setEnabled(cs->isSavable());
 
       visibleId->setChecked(cs->showInvisible());
@@ -1823,7 +1824,7 @@ void MuseScore::cmd(QAction* a)
 
       QString cmd(a->data().toString());
       Shortcut* sc = getShortcut(cmd.toAscii().data());
-      if ((sc->state & _state) == 0) {
+      if (sc == 0 || (sc->state & _state) == 0) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: invalid command"),
                QString("command %1 not valid in current state").arg(cmd),
@@ -1907,9 +1908,14 @@ void MuseScore::clipboardChanged()
 void MuseScore::setState(int val)
       {
       foreach (Shortcut* s, shortcuts) {
-            if (s->action) {
+            if (!s->action)
+                  continue;
+            if (strcmp(s->xml, "undo") == 0)
+                  s->action->setEnabled(cs && !cs->undoEmpty());
+            else if (strcmp(s->xml, "redo") == 0)
+                  s->action->setEnabled(cs && !cs->redoEmpty());
+            else
                   s->action->setEnabled(s->state & val);
-                  }
             }
       switch(val) {
             case STATE_NORMAL:
