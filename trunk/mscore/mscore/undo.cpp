@@ -136,34 +136,35 @@ Undo::Undo(const InputState& is, const Selection* s)
 void Score::doUndo()
       {
       if (debugMode)
-            printf("doUndo\n");
+            printf("doUndo %d redo: %d\n", undoList.size(), redoList.size());
       Selection oSel(*sel);
       InputState oIs(_is);
       sel->deselectAll(this);
-      if (!undoList.isEmpty()) {
-            Undo* u = undoList.back();
-            int n = u->size();
-            for (int i = n-1; i >= 0; --i) {
-                  UndoOp* op = &(*u)[i];
-                  processUndoOp(op, true);
-                  if (op->type == UndoOp::ChangeAccidental) {
-                        // HACK:
-                        // selection is not valid anymore because changeAccidental()
-                        // changes the selected Accidental element
-                        // u->selection.clear();
-                        oSel.clear();
-                        }
-                  }
-            if (u->pitchSpellNeeded)
-                  spell();
-            redoList.push_back(u); // put item on redo list
-            undoList.pop_back();
-            endUndoRedo(u);
-            u->inputState = oIs;
-            u->selection  = oSel;
-            if (debugMode)
-                  printf("  end doUndo\n");
+      if (undoList.isEmpty()) {
+            printf("doUndo: undoList is empty!\n");
+            getAction("undo")->setEnabled(false);
+            return;
             }
+      Undo* u = undoList.back();
+      int n = u->size();
+      for (int i = n-1; i >= 0; --i) {
+            UndoOp* op = &(*u)[i];
+            processUndoOp(op, true);
+            if (op->type == UndoOp::ChangeAccidental) {
+                  // HACK:
+                  // selection is not valid anymore because changeAccidental()
+                  // changes the selected Accidental element
+                  // u->selection.clear();
+                  oSel.clear();
+                  }
+            }
+      if (u->pitchSpellNeeded)
+            spell();
+      redoList.append(u); // put item on redo list
+      undoList.removeLast();
+      endUndoRedo(u);
+      u->inputState = oIs;
+      u->selection  = oSel;
       }
 
 //---------------------------------------------------------
@@ -195,13 +196,11 @@ void Score::doRedo()
             }
       if (u->pitchSpellNeeded)
             spell();
-      undoList.push_back(u); // put item on undo list
-      redoList.pop_back();
+      undoList.append(u); // put item on undo list
+      redoList.removeLast();
       endUndoRedo(u);
       u->inputState = oIs;
       u->selection  = oSel;
-      if (debugMode)
-            printf("  end doRedo\n");
       }
 
 //---------------------------------------------------------
@@ -644,8 +643,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
 void Score::endUndoRedo(Undo* undo)
       {
-      getAction("undo")->setEnabled(!undoList.empty());
-      getAction("redo")->setEnabled(!redoList.empty());
       setDirty(true);
 
       _is = undo->inputState;
@@ -660,6 +657,7 @@ void Score::endUndoRedo(Undo* undo)
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
             }
+
       *sel = undo->selection;
       sel->update();
       }

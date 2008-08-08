@@ -203,6 +203,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
 
 void Score::cmdConcertPitchChanged(bool flag)
       {
+printf("cmdConcertPitchChanged %d\n", flag);
       checkUndoOp();
       UndoOp i;
       i.type   = UndoOp::ChangeConcertPitch;

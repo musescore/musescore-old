@@ -1016,8 +1016,10 @@ Shortcut* getShortcut(const char* id)
 QAction* getAction(const char* id)
       {
       Shortcut* s = getShortcut(id);
-      if (s == 0)
+      if (s == 0) {
+            printf("no shortcut found for action <%s>\n", id);
             return 0;
+            }
       if (s->action == 0) {
             QAction* a = new QAction(s->xml, mscore);
             s->action  = a;
