@@ -1,4 +1,6 @@
 8.8 (ws)
+      - added "All Supported files" as default for "Open File Dialog" ass suggested by
+        Lasconic
       - fixed enable/disable undo/redo buttons; mscore crashed when a wrong enabled
         button was pressed
 7.8 (ws)
