@@ -18,10 +18,10 @@
       </table>
 
       <table cellpadding="0" cellspacing="0">
-      <tr><td><key>Up</key></td><td>Increase the pitch of a note for one semitone.</td></tr>
-      <tr><td><key>Down</key></td><td>Decrease the pitch of a note for one semitone.</td></tr>
-      <tr><td><key>Ctrl+Up</key></td><td>Increase the pitch of a note for one octave.</td></tr>
-      <tr><td><key>Ctrl+Down</key></td><td>Decrease the pitch of a note for one cctave.</td></tr>
+      <tr><td><kbd><kbd>Up</kbd></kbd></td><td>Increase the pitch of a note for one semitone.</td></tr>
+      <tr><td><kbd><kbd>Down</kbd></kbd></td><td>Decrease the pitch of a note for one semitone.</td></tr>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd></td><td>Increase the pitch of a note for one octave.</td></tr>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd></td><td>Decrease the pitch of a note for one cctave.</td></tr>
       </table>
       <br/>
       <i>MuseScore</i> automatically tries to set an appropriate accidental for
@@ -30,7 +30,7 @@
       drag an accidental from the accidental palette to the note. If you later change
       the pitch with cursor keys, manual settings to the accidental will be lost.<br/>
       <br/>
-      The menu function &lt;<b>Notes/Pitch spell</b>&gt; tries to guess the
+      The menu function <kbd><samp class="menu">Notes</samp> → <samp class="menuitem">Pitch spell</samp></kbd> tries to guess the
       right accidentals for the whole score.
     </page>
 
@@ -68,8 +68,8 @@
       <tr>
         <td>
           To extend bar lines over multiple staves double click
-          on a bar line to edit it (see <a href="editmode.php">Edit
-          mode</a>).
+          on a bar line to edit it (see <samp class="mode"><a href="editmode.php">Edit
+          mode</a></samp>).
           </td>
         <td>
           <img src="../pic/grandstaff0.png" alt="Bar Line edit mode"/>
@@ -79,8 +79,8 @@
       <tr>
         <td>
           Click and drag the blue square down to the next staff.
-          All staff bar lines will be updated when you leave edit
-          mode.
+          All staff bar lines will be updated when you leave <samp class="mode">edit
+          mode</samp>.
           </td>
         <td>
           <img src="../pic/grandstaff1.png" alt="Grand staff"/>
@@ -138,29 +138,22 @@
 
 <page name="brackets" header="Brackets">
     <index>Brackets</index>
-    <table>
-    <tr><td>
-          <b>Remove</b><br/>
-          Select the bracket and press &lt;<b>Del</b>&gt;<br/>
-          <br/>
-          <b>Add</b><br/>
-          Drag a bracket symbol from the bracket palette to an
-          empty space in the first measure of a system.<br/>
-          <br/>
-          <b>Change</b><br/>
-          Drag a bracket symbol from the bracket palette to an
-          bracket in the score.<br/>
-          </td>
-      <td>
-         <img src="../pic/bracketspalette.png" alt="Brackets pallet"/>
-         </td>
-      </tr>
-      </table>
+      <img src="../pic/bracketspalette.png" alt="Brackets pallet" style="float:right"/>
+      <b>Remove</b><br/>
+      Select the bracket and press <kbd><kbd>Del</kbd></kbd><br/>
+      <br/>
+      <b>Add</b><br/>
+      Drag a bracket symbol from the bracket palette to an
+      empty space in the first measure of a system.<br/>
+      <br/>
+      <b>Change</b><br/>
+      Drag a bracket symbol from the bracket palette to an
+      bracket in the score.<br/>
       <br/>
       <b>Edit</b><br/>
-      Double click on a bracket to enter
-       <a href="editmode.php">edit mode</a>,
-      In edit mode you can drag the hight of a bracket to span arbitrary staves
+      Double click on a bracket to enter 
+      <samp class="mode"><a href="editmode.php">edit mode</a></samp>,
+      In <samp class="mode">edit mode</samp> you can drag the hight of a bracket to span arbitrary staves
       of a system.
     </page>
 
@@ -168,88 +161,65 @@
     <index>Breaks</index>
     <index>Page Breaks</index>
     <index>Line Breaks</index>
-    <table>
-    <tr><td>
-          Page breaks or line breaks (system breaks) can be enforced
-          by dragging a page break symbol or line break symbol from the
-          breaks palette to an empty space of a measure in the score.<br/>
-          The break will happen <i>after</i> the marked measure.<br/>
-          The visible break marks will not be printed of course.
-      </td>
-      <td>
-         <img src="../pic/breakspalette.png" alt="Breaks palette"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/breakspalette.png" alt="Breaks palette" style="float:right"/>
+    <p>Page breaks or line breaks (system breaks) can be enforced
+    by dragging a page break symbol or line break symbol from the
+    breaks palette to an empty space of a measure in the score.
+    The break will happen <em>after</em> the marked measure.
+    The visible break marks will not be printed of course.
     </page>
 
 <page name="breath" header="Breath">
     <index>Breath</index>
-    <table>
-    <tr><td>
-          To place a breath symbol drag it from the breath palette to
-          a note in the score. The breath symbol will be placed <i>before</i>
-          the note.
-      </td>
-      <td>
-         <img src="../pic/breathpalette.png" alt="Breath palette"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/breathpalette.png" alt="Breath palette" style="float:right"/>
+    <p>To place a breath symbol drag it from the breath palette to
+    a note in the score. The breath symbol will be placed <em>before</em>
+    the note.</p>
 
-    Breath symbol in score: <img src="../pic/breath.png" alt="Sample breath mark"/>
+    <p>Breath symbol in score:</p>
+    <img src="../pic/breath.png" alt="Sample breath mark"/>
     </page>
 
 <page name="chordnames" header="Chord Names">
     <index>Chord Names</index>
-      Chord names can be entered by first selecting a note and then
-      pressing <code>&lt;<b>Ctrl+K</b>&gt;</code>. This creates a chord name text object
-      for the selected chord.
+      <p>Chord names can be entered by first selecting a note and then
+      pressing <kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd>. This creates a chord name text object
+      for the selected chord.</p>
 
-      <ul>
-        <li>Type <code>&lt;<b>space</b>&gt;</code> to move to the next chord.</li>
-        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous chord.</li>
-        <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-            the chord name text.
-            </li>
-        </ul>
+      <ol>
+        <li>Type <kbd><kbd>Space</kbd></kbd> to move to the next chord.</li>
+        <li><kbd><kbd>Shift</kbd>+<kbd>Space</kbd></kbd> moves to the previous chord.</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>Space</kbd></kbd> enters a <kbd><kbd>space</kbd></kbd> 
+            into the chord name text.</li>
+      </ol>
 
-      Chord names can be <a href="textedit.php">edited</a> as normal text.
-
+      <p>Chord names can be <a href="textedit.php">edited</a> as normal text.</p>
     </page>
 
 <page name="clefs" header="Clefs">
     <index>Clefs</index>
-    <table>
-    <tr><td>
-      Clefs are created or changed by dragging a clef symbol from the
-      clef palette to a measure or another clef.<br/>
-      &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
-      <br/>
-      <b>Change</b><br/>
-      Drag a clef from the palette onto a clef in the score. You can
-      also drag a clef from the score to another clef of the score
-      by using &lt;<b>Shift+leftMouseButton+Drag</b>&gt;.<br/>
-      <br/>
-      <b>Add</b><br/>
-      Drag a clef from the palette onto an empty part of a measure.
-      This creates a clef at the beginning of the measure. Drag a clef
-      to a particular note to create a mid-measure clef. If the
-      measure is not the first measure in the staff it is drawn
-      smaller.<br/>
-      <br/>
-      <b>Remove</b><br/>
-      Select a clef and press &lt;<b>Del</b>&gt;.
-      </td>
-      <td>
-         <img src="../pic/clefpalette.png" alt="Clefs palette"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/clefpalette.png" alt="Clefs palette" style="float:right"/>
+    <p>Clefs are created or changed by dragging a clef symbol from the
+    clef palette to a measure or another clef.<br/>
+    <kbd><kbd>F9</kbd></kbd> toggles the palettes window.</p>
+    
+    <h5>Change</h5>
+    <p>Drag a clef from the palette onto a clef in the score. You can
+    also drag a clef from the score to another clef of the score
+    by using <kbd><kbd>Shift</kbd>+<kbd class="mousebutton">leftMouseButton</kbd>+Drag</kbd>.</p>
+    
+    <h5>Add</h5>
+    <p>Drag a clef from the palette onto an empty part of a measure.
+    This creates a clef at the beginning of the measure. Drag a clef
+    to a particular note to create a mid-measure clef. If the
+    measure is not the first measure in the staff it is drawn
+    smaller.</p>
+    
+    <h5>Remove</h5>
+    <p>Select a clef and press <kbd><kbd>Del</kbd></kbd>.</p>
 
-    <br/>
-    Note that changing a clef does not change the pitch of any note.
-    Instead the notes are moved.
+    <p>Note that changing a clef does not change the pitch of any note.
+    Instead the notes are moved.</p>
     </page>
 
 <page name="color" header="Color">
@@ -275,64 +245,63 @@
 
 <page name="editmode" header="Edit Mode">
     <index>Edit Mode</index>
-    Many elements in the score can be edited in &lt;<i><b>Edit Mode</b></i>&gt;:<br/>
-    <br/>
+    <p>Many elements in the score can be edited in <samp class="mode">Edit Mode</samp>:</p>
 
     <table cellpadding="0" cellspacing="0">
      <tr>
-        <td>&lt;<b>Double Click</b>&gt;</td>
+        <td><kbd><kbd>Double Click</kbd></kbd></td>
         <td><sp/></td>
-        <td> start &lt;<i><b>Edit Mode</b></i>&gt; </td>
+        <td> start <samp class="mode">Edit Mode</samp></td>
         </tr>
      <tr>
-        <td>&lt;<b>Escape</b>&gt;</td>
+        <td><kbd><kbd>Escape</kbd></kbd></td>
         <td/>
-        <td> end &lt;<i><b>Edit Mode</b></i>&gt; </td>
+        <td> end <samp class="mode">Edit Mode</samp></td>
         </tr>
      </table>
-    <br/>
 
-    Some elements show <i>handles</i> in edit mode which can be
-    moved by mouse dragging or keyboard commands.<br/>
-    <br/>
-    <a href="slurs.php">Slur</a> in edit mode: <img src="../pic/slur4.png" alt="Sample slur in edit mode"/><br/>
-    <br/>
-    Available keyboard commands:<br/>
-    <br/>
+    <p>Some elements show <i>handles</i> in <samp class="mode">edit mode</samp> which can be
+    moved by mouse dragging or keyboard commands.</p>
+    
+    <p><a href="slurs.php">Slur</a> in <samp class="mode">edit mode</samp>:</p>
+    <img src="../pic/slur4.png" alt="Sample slur in edit mode"/>
+    
+    <p>Available keyboard commands:</p>
+    
     <table cellpadding="0" cellspacing="0">
-      <tr><td>&lt;<b>Left</b>&gt;</td>
+      <tr><td><kbd><kbd>Left</kbd></kbd></td>
           <td><sp/></td>
           <td>move handle left one Space</td>
         </tr>
-      <tr><td>&lt;<b>Right</b>&gt;</td>
+      <tr><td><kbd><kbd>Right</kbd></kbd></td>
           <td/>
           <td>move handle right one Space</td>
         </tr>
-      <tr><td>&lt;<b>Up</b>&gt;</td>
+      <tr><td><kbd><kbd>Up</kbd></kbd></td>
           <td/>
           <td>move handle up one Space</td>
         </tr>
-      <tr><td>&lt;<b>Down</b>&gt;</td>
+      <tr><td><kbd><kbd>Down</kbd></kbd></td>
           <td/>
           <td>move handle down one Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd></td>
           <td/>
           <td>move handle left 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Right</kbd></kbd></td>
           <td/>
           <td>move handle right 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Up</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd></td>
           <td/>
           <td>move handle up 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Down</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd></td>
           <td/>
           <td>move handle down 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Tab</b>&gt;</td>
+      <tr><td><kbd><kbd>Tab</kbd></kbd></td>
           <td/>
           <td>go to next handle</td>
         </tr>
@@ -357,64 +326,46 @@
 
 <page name="fingering" header="Fingering">
     <index>Fingering</index>
-    <table>
-    <tr><td>
-          Fingering can be added to notes by dragging a fingering character
-          from the fingering palette to a note head in the score. Fingerings
-          are normal text which can be <a href="textedit.php">edited</a> like
-          any other text.
-      </td>
-      <td>
-         <img src="../pic/fingeringspalette.png" alt="Fingering palette"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/fingeringspalette.png" alt="Fingering palette" style="float:right"/>
+    Fingering can be added to notes by dragging a fingering character
+    from the fingering palette to a note head in the score. Fingerings
+    are normal text which can be <a href="textedit.php">edited</a> like
+    any other text.
     </page>
 
 <page name="frames" header="Frames">
     <index>Frames</index>
-    Frames provide empty space outside of normal measures. They can also contain
-    text or pictures. <i>MuseScore</i> has two kinds of frames:
-    <br/>
-    <br/>
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-       <td valign="top"><b>horizontal</b></td>
-       <td><sp/></td>
-       <td>Horizontal frames break a system. The width is adjustable and the
-          height equals the system height. Horizontal frames can be used to
-          separate a coda.
-          </td>
-       </tr>
-    <tr><td><br/></td></tr>
-    <tr>
-       <td valign="top"><b>vertical</b></td>
-       <td/>
-       <td>
-       Vertical frames provide empty space between or before systems.
-       The height is adjustable and the width equals the system width.
-       Vertical frames are used to place title, subtitle or composer.
-       If you create a title, a vertical frame is placed before the first
-       measure automatically if it is not there already.
-       </td>
-       </tr>
-    </table>
-    <br/>
+    <p>Frames provide empty space outside of normal measures. They can also contain
+    text or pictures. <i>MuseScore</i> has two kinds of frames:</p>
+    
+    <dl>
+    <dt>horizontal</dt>
+    <dd>Horizontal frames break a system. The width is adjustable and the
+        height equals the system height. Horizontal frames can be used to
+        separate a coda.</dd>
+
+    <dt>vertical</dt>
+    <dd>Vertical frames provide empty space between or before systems.
+        The height is adjustable and the width equals the system width.
+        Vertical frames are used to place title, subtitle or composer.
+        If you create a title, a vertical frame is placed before the first
+        measure automatically if it is not there already.</dd>
+     </dl>
 
     <h5>Create a frame</h5>
-    First select a measure. The command to insert a frame is found in
-    the menu <b>Create->Measures</b>. The frame is inserted
-    <i>before</i> the selected measure.
+    <p>First select a measure. The command to insert a frame is found in
+    the menu <kbd><samp class="menu">Create</samp> → <samp class="menuitem">Measures</samp><kbd>. The frame is inserted
+    <em>before</em> the selected measure.</p>
 
     <h5>Delete a frame</h5>
-    Select the frame and press &lt;<b>Del</b>&gt;.
+    <p>Select the frame and press <kbd><kbd>Del</kbd></kbd>.</p>
 
     <h5>Edit frame</h5>
-    Double click the frame to enter
-    <a href="editmode.php"><b>edit mode</b></a>. A handle appears which
-    can be used to drag the size of the frame.
-    <br/><br/>
-    Title frame in edit mode:<br/><br/>
+    <p>Double click the frame to enter
+    <samp class="mode"><a href="editmode.php">edit mode</a></samp>. A handle appears which
+    can be used to drag the size of the frame.</p>
+    
+    <p>Title frame in <samp class="mode">edit mode</samp>:</p>
     <img src="../pic/frame.png" alt="Horizontal frame"/>
     </page>
 
@@ -422,18 +373,16 @@
     <index>Grace notes</index>
     <index>Appoggiatura</index>
     <index>Acciaccatura</index>
-
-    A short grace note (Acciaccatura) is painted as a small note with a stroke
+    
+    <p>A short grace note (Acciaccatura) is painted as a small note with a stroke
     through the stem. It is placed before the normal-sized main note.
-    A long grace note (Appoggiatura) has no stroke.
-    <br/>
-    <br/>
-    Create a grace note by dragging a grace note symbol from the notes palette
-    to a main note.
-    <br/>
-    <br/>
-    See also <a href="http://en.wikipedia.org/wiki/Grace_note">
-    Grace note</a> in <a href="http://en.wikipedia.org">Wikipedia</a>.
+    A long grace note (Appoggiatura) has no stroke.</p>
+    
+    <p>Create a grace note by dragging a grace note symbol from the notes palette
+    to a main note.</p>
+    
+    <p>See also <a href="http://en.wikipedia.org/wiki/Grace_note">
+    Grace note</a> at Wikipedia.</p>
     </page>
 
 
@@ -452,81 +401,64 @@
 
 <page name="keys" header="Keys">
     <index>Keys</index>
-    <table>
-    <tr><td>
-      Key signatures are created or changed by dragging a key symbol
-      from the key palette to a measure or existing key
-      signature.<br/>
-      &lt;<b>F9</b>&gt; toggles the palettes window.<br/>
-      <br/>
-      <b>Change</b><br/>
-      Drag a key from the palette onto a key in the score. You can
-      also drag a key from the score to another key on the score
-      by using &lt;<b>Shift+leftMouseButton+Drag</b>&gt;.<br/>
-      <br/>
-      <b>Add</b><br/>
-      Drag a key from the palette onto an empty part of a measure.
-      This creates a key at the beginning of the measure.<br/>
-      <br/>
-      <b>Remove</b><br/>
-      Select a key and press &lt;<b>Del</b>&gt;.
-      </td>
-      <td>
-         <img src="../pic/keypalette.png" alt="Keys palette"/>
-         </td>
-      </tr>
-      </table>
+    
+    <img src="../pic/keypalette.png" alt="Keys palette" style="float:right"/>
+    <p>Key signatures are created or changed by dragging a key symbol
+    from the key palette to a measure or existing key
+    signature.</p>
+    
+    <p><kbd><kbd>F9</kbd></kbd> toggles the palettes window.</p>
+    
+    <h5>Change</h5>
+    <p>Drag a key from the palette onto a key in the score. You can
+    also drag a key from the score to another key on the score
+    by using <kbd><kbd>Shift</kbd>+<kbd class="mouse">leftMouseButton</kbd>+Drag</kbd>.</p>
+    
+    <h5>Add</h5>
+    <p>Drag a key from the palette onto an empty part of a measure.
+    This creates a key at the beginning of the measure.</p>
+    
+    <h5>Remove</h5>
+    <p>Select a key and press <kbd><kbd>Del</kbd></kbd>.</p>
     </page>
 
 <page name="lines" header="Lines">
     <index>Lines</index>
-    <table>
-    <tr><td>
-          todo
-      </td>
-      <td>
-         <img src="../pic/linepalette.png" alt="Lines palette"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/linepalette.png" alt="Lines palette" style="float:right"/>
+    
+    <p>todo</p>
     </page>
 
 <page name="lyrics" header="Lyrics">
     <index>Lyrics</index>
-     <ul>
+     <ol>
         <li>First enter notes</li>
         <li>Select first note</li>
-        <li>Type <code>&lt;<b>Ctrl+L</b>&gt;</code> and enter lyrics text for
+        <li>Type <kbd><kbd>Ctrl</kbd>+<kbd>L</kbd></kbd> and enter lyrics text for
           first note</li>
-        <li>Type <code>&lt;<b>space</b>&gt;</code> at end of word to go next
+        <li>Type <kbd><kbd>space</kbd></kbd> at end of word to go next
            note</li>
-        <li>Type <code>&lt;<b>-</b>&gt;</code> at end of syllable to go to next note.
+        <li>Type an hyphen <kbd><kbd>-</kbd></kbd> at end of syllable to go to next note.
            The syllables are connected with a dash</li>
-        <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous note</li>
-        <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
+        <li><kbd><kbd>Shift</kbd>+<kbd>Space</kbd></kbd> moves to the previous note</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>Space</kbd></kbd> enters a <samp>space</samp> into
             the lyrics text</li>
-        <li><code>&lt;<b>Ctrl+Minus</b>&gt;</code> enters a <code>&lt;<b>-</b>&gt;</code> into
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>-</kbd></kbd> enters a <samp>-</samp> into
             the lyrics text</li>
-        </ul>
+        </ol>
 
       <img src="../pic/lyrics.png" alt="Sample lyrics"/>
-      <br/>
-      Syllables can be extended by an underline:
+      
+      <p>Syllables can be extended by an underline:</p>
       <img src="../pic/lyrics1.png" alt="Syllable extension line"/>
-      <br/>
-      Entered with: <key>"soul,"</key>
-      <key>_</key><key>_</key><key>_</key><key>"To"</key>
-      <key>Esc</key>.
-      <br/>
-      <br/>
+      
+      <p>Entered with: <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd>.</p>
+      
+      <p>Lyrics can be <a href="textedit.php">edited</a> as normal text.</p>
 
-      Lyrics can be <a href="textedit.php">edited</a> as normal text.
-
-      <br/>
-      <br/>
-      See also
+      <p>See also
           <a href="text.php">Text</a><sp/>
-          <a href="chordnames.php">Chord names</a>.
+          <a href="chordnames.php">Chord names</a>.</p>
     </page>
 
 <page name="measures" header="Measure Operations">
@@ -537,60 +469,47 @@
 
     <h5>Insert Measures</h5>
 
-      First select a measure then press <key>Ins</key> to insert a new empty measure before
+      First select a measure then press <kbd><kbd>Ins</kbd></kbd> to insert a new empty measure before
       the selected one.
 
     <h5>Delete Measures</h5>
 
-      Complete measures can be deleted by first selecting them with <key>Ctrl+Click</key>.
+      Complete measures can be deleted by first selecting them with <kbd><kbd>Ctrl</kbd>+<kbd class="mouse">Click</kbd></kbd>.
       The measure is marked with a dotted line indicating that you selected a "piece of time".
-      Press <key>Shift+Click</key> to extend the selection.
-      Pressing <key>Del</key> removes the selected measures.
+      Press <kbd><kbd>Shift</kbd>+<kbd class="mosue">Click</kbd></kbd> to extend the selection.
+      Pressing <kbd><kbd>Del</kbd></kbd> removes the selected measures.
 
 
     <h5>Properties</h5>
-
+      <img src="../pic/measure.png" alt="Measure Properties dialog" style="float:right"/>
       To edit the properties of a measure right click on an empty part of the measure and
-      select <b>Measure Properties...</b>.
-
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-      <td>
-          <b>Measure Duration</b><br/>
-          Normally the nominal and actual duration of a measure is identical.
-          An upbeat can have a different actual duration.
-          <br/><br/>
-
-          <b>Irregular</b><br/>
-            An "irregular" measure will not be counted. Normally an upbeat
-            is not counted as a regular measure.
-          <br/><br/>
-
-          <b>Repeat Count</b><br/>
-            If the measure is the end of a
-            <a href="repeats.php">repeat</a> you can define how often the
-            repeat should be played.
-
-         </td>
-      <td valign="top">
-         <img src="../pic/measure.png" alt="Measure Properties dialog"/>
-         </td>
-      </tr>
-    </table>
-    <br/>
+      select <kbd><samp class="menuitem">Measure Properties...</samp></kbd>.
+    
+    <h6>Measure Duration</h6>
+      Normally the nominal and actual duration of a measure is identical.
+      An upbeat can have a different actual duration.
+    
+    <h6>Irregular</h6>
+      An "irregular" measure will not be counted. Normally an upbeat
+      is not counted as a regular measure.
+    
+    <h6>Repeat Count</h6>
+      If the measure is the end of a
+      <a href="repeats.php">repeat</a> you can define how often the
+      repeat should be played.
     </page>
 
 
 <page name="newscore" header="Create New Score">
     <index>Create New Score</index>
     <h5>Create New Score from Scratch</h5>
-    The menu entry &lt;<b>Score->New</b>&gt; creates an empty
+    The menu entry <kbd><samp class="menu">Score</samp> → <samp class="menuitem">New</samp></kbd> creates an empty
     new score. First you have to populate the empty sheet with instruments and
     then you can add empty measures.
           <ul>
-          <li>&lt;<b>I</b>&gt; popups the instrument menu</li>
-          <li>&lt;<b>Ctrl+B</b>&gt; appends an empty measure</li>
-          <li>then menu &lt;<b>Create->Measures</b>&gt; can be used to create
+          <li><kbd><kbd>I</kbd></kbd> popups the instrument menu</li>
+          <li><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd> appends an empty measure</li>
+          <li>then menu <kbd><samp class="menu">Create</samp> → <samp class="submenu">Measures...</samp></kbd> can be used to create
              an arbitrary number of empty measures
              </li>
           </ul>
@@ -603,8 +522,8 @@
 
     <h5>Create New Score from Template</h5>
 
-    &lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
-    template and click &lt;<b>OK</b>&gt;. This is the simplest way to create
+    <kbd><kbd>N</kbd></kbd> popups the Template dialog. Select a
+    template and click <kbd><kbd>OK</kbd></kbd>. This is the simplest way to create
     a new score. Note that template files are normal <i>MuseScore</i> files
     stored in the template folder.
 
@@ -617,55 +536,68 @@
     <index>Enter Chords</index>
     <index>Enter Rests</index>
 
-    Notes are entered in &lt;<i>Note Edit</i>&gt; mode. First select a note
+    <p>Notes are entered in <samp class="mode">Note entry mode</samp>. First select a note
     or rest as start position for note entry. When entering notes you are
     always replacing existing notes or rests. So the duration of a measure
-    does not change.<br/>
-    <br/>
+    does not change.</p>
 
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>N</b>&gt;</td><td>enter &lt;<i>Note Edit</i>&gt; mode.</td></tr>
-    <tr><td>&lt;<b>Escape</b>&gt;</td><td> leave &lt;<i>Note Edit</i>&gt; mode.</td></tr>
+    <tr><td><kbd><kbd>N</kbd></kbd></td><td>enter <samp class="mode">Note entry mode</samp>.</td></tr>
+    <tr><td><kbd><kbd>Escape</kbd></kbd></td><td> leave <samp class="mode">Note entry mode</samp></td></tr>
     </table>
-    <br/>
-
-    After entering &lt;<i>Note Edit</i>&gt; mode you should select the
+    
+    <p>After entering <samp class="mode">Note entry mode</samp> you should select the
     duration of the note you want to enter by selecting a value from
-    the note palette or by pressing:
-    <br/>
-    <br/>
+    the note palette or by pressing:</p>
+
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>Quarter note (crochet)</td>  <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>Eighth note (quaver)</td></tr>
-    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 note (semiquaver)</td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 note (demi-semiquaver)</td></tr>
-    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 note (semi-demi-semiquaver)</td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>Whole note (semibreve)</td></tr>
-    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>Half note (minim)</td></tr>
+    <tr>
+    <td><kbd><kbd>Alt</kbd>+<kbd>1</kbd></kbd></td><td><sp/>Quarter note (crochet)</td>  
+    <td><sp/><sp/></td> 
+    <td><kbd><kbd>Alt</kbd>+<kbd>2</kbd></kbd></td><td><sp/>Eighth note (quaver)</td>
+    </tr>
+    
+    <tr>
+    <td><kbd><kbd>Alt</kbd>+<kbd>3</kbd></kbd></td><td><sp/>1/16 note (semiquaver)</td>
+    <td/> 
+    <td><kbd><kbd>Alt</kbd>+<kbd>4</kbd></kbd></td><td><sp/>1/32 note (demi-semiquaver)</td>
+    </tr>
+    
+    <tr>
+    <td><kbd><kbd>Alt</kbd>+<kbd>5</kbd></kbd></td><td><sp/>1/64 note (semi-demi-semiquaver)</td> 
+    <td/> 
+    <td><kbd><kbd>Alt</kbd>+<kbd>6</kbd></kbd></td><td><sp/>Whole note (semibreve)</td>
+    </tr>
+    
+    <tr>
+    <td><kbd><kbd>Alt</kbd>+<kbd>7</kbd></kbd></td><td><sp/>Half note (minim)</td>
+    </tr>
     </table>
     <br/>
     <table>
     <tr>
-      <td>Notes are entered by pressing<br/>&lt;<b>C D E F G A B C</b>&gt;:</td>
+      <td>Notes are entered by pressing<br/><kbd>C D E F G A B C</kbd>:</td>
       <td><img src="../pic/noteentry1.png" alt="Notes: C, D, E, F, G, A, B, C"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Space</b>&gt; creates a rest<br/>&lt;<b>C D Space E</b>&gt;:</td>
+      <td><kbd><kbd>Space</kbd></kbd> creates a rest<br/><kbd>C D <kbd>Space</kbd> E</kbd>:</td>
       <td><img src="../pic/noteentry2.png" alt="C, D, rest, E"/></td>
       </tr>
     <tr>
       <td>Notes are added to chords by
-          pressing &lt;<b>Shift+Notename</b>&gt;<br/>
-          &lt;<b>C D Shift+F Shift+A E F</b>&gt;:
+          pressing <kbd><kbd>Shift</kbd>+Notename</kbd><br/>
+          <kbd>C D <kbd>Shift</kbd>+F <kbd>Shift</kbd>+A E F</kbd>:
           </td>
       <td><img src="../pic/noteentry3.png" alt="C, D minor triad, E, F"/></td>
       </tr>
     <tr>
       <td>Beams are created automatically<br/>
-          &lt;<b>Alt+1 C D Alt+2 E F G A</b>&gt;:
+          <kbd><kbd>Alt</kbd>+1 C D <kbd>Alt</kbd>+2 E F G A</kbd>:
       </td>
       <td><img src="../pic/noteentry4.png" alt="Quater notes: C, D, Eight notes: E, F, G, A"/></td>
       </tr>
 
     </table>
-
     </page>
 
 <page name="palette" header="Palettes">
@@ -680,7 +612,6 @@
           <li>Select notes</li>
           <li>Double click on the tenuto symbol in the attributes palette</li>
     </ol>
-
     </page>
 
 <page name="pictures" header="Pictures">
@@ -691,26 +622,23 @@
     <index>Play Mode</index>
     <i>MuseScore</i> has an integrated sequencer and synthesizer to play
     your score.<br/>
-    By pressing the &lt;<b>Play</b>&gt; button you enter &lt;<i>Play</i>&gt;
-    mode. In &lt;<i>Play</i>&gt; mode the following commands are
-    available:<br/>
+    By pressing the Play <img src="../../pic/play.png" alt="[Play]"/> button you enter <samp class="mode">Play mode</samp>. In <samp class="mode">Play mode</samp> the following commands are available:<br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Space</b>&gt;</td><td>toggle stop/play</td></tr>
-    <tr><td>&lt;<b>Left</b>&gt;</td><td> seek to previous chord</td></tr>
-    <tr><td>&lt;<b>Right</b>&gt;</td><td> seek to next chord</td></tr>
-    <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td><td> seek to previous measure</td></tr>
-    <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td><td> seek to next measure</td></tr>
-    <tr><td>&lt;<b>Home</b>&gt;</td><td>rewind to start of score</td></tr>
-    <tr><td>&lt;<b>F11</b>&gt;</td><td>toggle show play panel</td></tr>
+    <tr><td><kbd><kbd>Space</kbd></kbd></td><td>toggle stop/play</td></tr>
+    <tr><td><kbd><kbd>Left</kbd></kbd></td><td> seek to previous chord</td></tr>
+    <tr><td><kbd><kbd>Right</kbd></kbd></td><td> seek to next chord</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd></td><td> seek to previous measure</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Right</kbd></kbd></td><td> seek to next measure</td></tr>
+    <tr><td><kbd><kbd>Home</kbd></kbd></td><td>rewind to start of score</td></tr>
+    <tr><td><kbd><kbd>F11</kbd></kbd></td><td>toggle show play panel</td></tr>
     </table>
     <br/>
 
     <br/>
     If you want to play instruments other than piano you have to
     change the <i>MuseScore</i> integrated <i>SoundFont</i> with a more
-    capable one in the <i>I/O</i> tab of the <i>Preferences</i> menu.
-
+    capable one in <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>.
     </page>
 
 <page name="repeats" header="Repeats">
@@ -733,19 +661,19 @@
       <td><img src="../pic/slur1.png" alt="First note selected"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>S</b>&gt; creates a slur<br/>in <a href="editmode.php">edit mode</a>:</td>
+      <td><kbd><kbd>S</kbd></kbd> creates a slur<br/>in <samp class="mode"><a href="editmode.php">edit mode</a></samp>:</td>
       <td><img src="../pic/slur2.png" alt="Slur to adjacent note"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Shift+Right</b>&gt; moves the slur<br/> end to the next note:</td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>Right</kbd></kbd> moves the slur<br/> end to the next note:</td>
       <td><img src="../pic/slur3.png" alt="Three-note slur"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>X</b>&gt; flips the slur direction:</td>
+      <td><kbd><kbd>X</kbd></kbd> flips the slur direction:</td>
       <td><img src="../pic/slur4.png" alt="Slur above note stems"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Escape</b>&gt; ends edit mode:</td>
+      <td><kbd><kbd>Escape</kbd></kbd> ends <samp class="mode">edit mode</samp>:</td>
       <td><img src="../pic/slur5.png" alt="Slur no longer in edit mode"/></td>
       </tr>
     </table>
@@ -778,45 +706,45 @@
     <br/>
     <h5>Play panel</h5>
     <ul>
-      <li>Display the play panel: Display --&gt; Play Panel</li>
+      <li>Display the play panel: <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Play Panel</samp></kbd></li>
       <li>Change the Beats per Minute (bpm) using the Tempo (Tmp) slider</li>
     </ul>
     <br/>
     <h5>Tempo text</h5>
     <ul>
       <li>Select a note to indicate where the tempo text should be created</li>
-      <li>From the main menu: Create --&gt; Text... --&gt; Tempo...</li>
+      <li>From the main menu: <kbd><samp class="menu">Create</samp> → <samp class="submenu">Text...</samp> → <samp class="menuitem">Tempo...</samp></kbd></li>
       <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
-      <li>Press OK to finish</li>
+      <li>Press <kbd><samp class="button">OK</samp></kbd> to finish</li>
     </ul>
-    Existing tempo text can be changed by double clicking the text to enter edit mode.
+    Existing tempo text can be changed by double clicking the text to enter <samp class="mode">edit mode</samp>.
     Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the
-    text and selecting "Tempo Properties..."<br/>
+    text and selecting <kbd><samp class="menuitem">Tempo Properties...</samp></kbd><br/>
     <br/>
     Note: Tempo text in the score will override a tempo setting in the play panel.
     </page>
 
 <page name="textedit" header="Text Editing">
     <index>Text Editing</index>
-      Double click on text to enter <i>edit mode</i>:
+      Double click on text to enter <samp class="mode">edit mode</samp>:
       <img src="../pic/textedit.png" alt="Sample text in edit mode"/><br/>
       <br/>
-      In text edit mode the following commands are available:
+      In text <samp class="mode">edit mode</samp> the following commands are available:
 
       <ul>
-        <li><code>&lt;<b>Ctrl+B</b>&gt;</code> toggles bold face</li>
-        <li><code>&lt;<b>Ctrl+I</b>&gt;</code> toggles italic</li>
-        <li><code>&lt;<b>Ctrl+U</b>&gt;</code> toggles underline</li>
-        <li><code>&lt;<b>Up</b>&gt;</code> start superscript or end subscript if in
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd> toggles bold face</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>I</kbd></kbd> toggles italic</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>U</kbd></kbd> toggles underline</li>
+        <li><kbd><kbd>Up</kbd></kbd> start superscript or end subscript if in
             subscript mode</li>
-        <li><code>&lt;<b>Down</b>&gt;</code> start subscript or end superscript if in
+        <li><kbd><kbd>Down</kbd></kbd> start subscript or end superscript if in
            superscript mode</li>
-        <li>move cursor: <code>&lt;<b>Home</b>&gt; &lt;<b>End</b>&gt; &lt;<b>Left</b>&gt;
-           &lt;<b>Right</b>&gt;</code></li>
-        <li><code>&lt;<b>Backspace</b>&gt;</code> remove character to the left of the cursor</li>
-        <li><code>&lt;<b>Delete</b>&gt;</code> remove character to the right of the cursor</li>
-        <li><code>&lt;<b>Return</b>&gt;</code> start new line</li>
-        <li><code>&lt;<b>F2</b>&gt;</code> Show text palette. The text palette
+        <li>move cursor: <kbd><kbd>Home</kbd></kbd> <kbd><kbd>End</kbd></kbd> <kbd><kbd>Left</kbd></kbd>
+           <kbd><kbd>Right</kbd></kbd></li>
+        <li><kbd><kbd>Backspace</kbd></kbd> remove character to the left of the cursor</li>
+        <li><kbd><kbd>Delete</kbd></kbd> remove character to the right of the cursor</li>
+        <li><kbd><kbd>Return</kbd></kbd> start new line</li>
+        <li><kbd><kbd>F2</kbd></kbd> Show text palette. The text palette
             can be used to enter special characters and symbols.</li>
         </ul>
 
@@ -894,13 +822,13 @@
       <td><img src="../pic/tie1.png" alt="First note selected"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Shift+S</b>&gt; creates a tie:</td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>S</kbd></kbd> creates a tie:</td>
       <td><img src="../pic/tie2.png" alt="Slur to adjacent note"/></td>
       </tr>
     </table>
 
     <br/>
-    When in note entry mode you can press &lt;<b>+</b>&gt; before
+    When in <samp class="mode">note entry mode</samp> you can press <kbd><kbd>+</kbd></kbd> before
     entering the first note to create a tie to the next note.<br/>
     <br/>
     See also <a href="slurs.php">Slurs</a>.
@@ -925,8 +853,8 @@
     <index>Triplets</index>
 
     To create a triplet first create a note with a duration of the whole
-    triplet. Then select the note and press &lt;<b>Ctrl+3</b>&gt; to change
-    it to a triplet. Similarly &lt;<b>Ctrl+5</b>&gt; changes the note
+    triplet. Then select the note and press <kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> to change
+    it to a triplet. Similarly <kbd><kbd>Ctrl</kbd>+<kbd>5</kbd></kbd> changes the note
     to a quintuplet.
 
     <table>
@@ -935,7 +863,7 @@
       <td><img src="../pic/tuplet1.png" alt="Quarter note selected"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Ctrl+3</b>&gt; creates a triplet:</td>
+      <td><kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> creates a triplet:</td>
       <td><img src="../pic/tuplet2.png" alt="Triplet eight note followed by rests"/></td>
       </tr>
     <tr>
@@ -951,13 +879,38 @@
     The standard shortcuts are:<br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Ctrl+Z</b>&gt;</td><td>Undo</td></tr>
-    <tr><td>&lt;<b>Ctrl+Shift+Z</b>&gt;</td><td>Redo</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Z</kbd></kbd></td><td>Undo</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></kbd></td><td>Redo</td></tr>
     </table>
     </page>
 
 <page name="voices" header="Voices">
     <index>Voices</index>
+    <p><strong>Note:</strong> The MuseScore implementation of voices is not yet complete and subject to change.</p>
+    
+    <h5>Enter notes into separate voices</h5>
+    <ol>
+    <li>To show two voices on one staff, first start by entering the top voice (all the up-stem notes).</li>
+    <li>When you enter the notes some may have down-stems. You can flip the stem direction by clicking the "Flip direction" button <img src="../pic/flipdirection" alt="Flip direction"/> on the toolbar or pressing <kbd><kbd>X</kbd></kbd> on the keyboard.<br/>
+    <img src="../pic/voices1.png" alt="Voice 1 notes with up-stems"/></li>
+    <li>Now select the first note to move your cursor back to the begining of the line.</li>
+    <li>Click on "Voice 2" button <img src="../pic/voicebuttons2.png" alt="Voice buttons" title="Voice 2 selected"/> and start entering the bottom voice (all the down-stem notes).</li>
+    <li>Be sure to flip the stems as to go along using <kbd><kbd>X</kbd></kbd> or <img src="../pic/flipdirection" alt="Flip direction"/></li>
+    <li>When you are done it should look like this:<br/>
+    <img src="../pic/voices2.png" alt="Voices 1 and 2"/></li>
+    </ol>
+    
+    <h5>Troubleshooting</h5>
+    <dl>
+    <dt>Stems not flipping independently for top and the bottom notes note</dt>
+    <dd>If the notes are both in the same voice they cannot flip independently. <em>Solution</em>: re-enter the problem note in the correct voice. Check the voice buttons on the toolbar to make sure you are in the correct voice. It is easy to switch voices accidentally by clicking on a note in a different voice.</dd>
+    </dl>
+    
+    <h5>When to use voices</h5>
+    <ul>
+    <li>If you need stems pointing in opposite directions within a chord on a single staff</li>
+    <li>If you need notes of different durations within a single staff, played simultaneously</li>
+    </ul>
     </page>
 
 <page name="volta" header="Volta">
@@ -973,18 +926,18 @@
     <br/>
     <br/>
     The brackets can span more than one measure. Double click the volta to
-    enter <a href="editmode.php">edit mode</a> and then move the handles
+    enter <samp class="mode"><a href="editmode.php">edit mode</a></samp> and then move the handles
     with:
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Shift+Right</b>&gt;</td><td><sp/>one measure left</td></tr>
-    <tr><td>&lt;<b>Shift+Left</b>&gt;</td><td><sp/>one measure right</td></tr>
+    <tr><td><kbd><kbd>Shift</kbd>+<kbd>Right</kbd></kbd></td><td><sp/>one measure left</td></tr>
+    <tr><td><kbd><kbd>Shift</kbd>+<kbd>Left</kbd></kbd></td><td><sp/>one measure right</td></tr>
     </table>
     <br/>
     This commands move the "logical" start or end of the volta which determine
     the bracketed measures.
-    Other commands in <a href="editmode.php">edit mode</a> also move the
+    Other commands in <samp class="mode"><a href="editmode.php">edit mode</a></samp> also move the
     handles but do not change how the repeat is played.
 
     If you move the handles, a dashed line from the logical position to
@@ -1021,7 +974,7 @@
     <index>One-bar rests</index>
     When an entire measure is devoid of notes, a full measure (semibreve) rest is
     used.<br/>
-    A one-bar rest can be created by marking a measure and pressing <key>Del</key>.
+    A one-bar rest can be created by marking a measure and pressing <kbd><kbd>Del</kbd></kbd>.
     All notes and rests on this measure are then replaced by a one-bar rest.
     </page>
 
@@ -1039,11 +992,11 @@
     <br/>
     <table cellspacing="0" cellpadding="0">
       <tr>
-            <td><key>H</key></td>
+            <td><kbd><kbd>H</kbd></kbd></td>
             <td><sp/>create a crescendo hairpin</td>
             </tr>
       <tr>
-            <td><key>Shift+H</key></td>
+            <td><kbd><kbd>Shift</kbd>+<kbd>H</kbd></kbd></td>
             <td><sp/>create a diminuendo hairpin (decrescendo)</td>
             </tr>
       </table>
@@ -1055,19 +1008,19 @@
 
     <table>
     <tr>
-      <td><key>H</key> create a crescendo hairpin:</td>
+      <td><kbd><kbd>H</kbd></kbd> create a crescendo hairpin:</td>
       <td><img src="../pic/hairpin1.png" alt="One-measure crescendo"/></td>
       </tr>
     <tr>
-      <td><key>double click</key> switch to edit mode:</td>
+      <td><kbd><kbd class="mouse">double click</kbd></kbd> switch to <samp class="mode">edit mode</samp>:</td>
       <td><img src="../pic/hairpin2.png" alt="Crescendo hairpin in edit mode"/></td>
       </tr>
     <tr>
-      <td><key>Shift+right</key> move end anchor:</td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>right</kbd></kbd> move end anchor:</td>
       <td><img src="../pic/hairpin3.png" alt="Crescendo extended to the last note of the next measure"/></td>
       </tr>
     <tr>
-      <td><key>right</key> move end point:</td>
+      <td><kbd><kbd>right</kbd></kbd> move end point:</td>
       <td><img src="../pic/hairpin4.png" alt="Crescendo visually extended beyond anchor point"/></td>
       </tr>
     </table>
@@ -1086,7 +1039,7 @@
       <td><img src="../pic/crossbeams1.png" alt="Beamed notes in upper staff"/></td>
       </tr>
     <tr>
-      <td><key>Shift+Ctrl+Down</key> moves the selected <br/>
+      <td><kbd><kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd> moves the selected <br/>
           note or chord to the next staff</td>
       <td><img src="../pic/crossbeams2.png" alt="Selected note moved to lower staff"/></td>
       </tr>
@@ -1115,4 +1068,3 @@
     </page>
 
 </museScoreManual>
-

@@ -16,10 +16,10 @@
       <br/>
       <br/>
       <table cellpadding="0" cellspacing="0">
-      <tr><td><key>Arriba</key></td><td>        Aumentar la nota en un semitono.</td></tr>
-      <tr><td><key>Abajo</key></td><td>         Decrementar la nota en un semitono</td></tr>
-      <tr><td><key>Ctrl+Arriba</key></td><td>   Aumentar la nota una octava.</td></tr>
-      <tr><td><key>Ctrl+Abajo</key></td><td>    Decrementar la nota en una octava</td></tr>
+      <tr><td><kbd><kbd>Arriba</kbd></kbd></td><td>        Aumentar la nota en un semitono.</td></tr>
+      <tr><td><kbd><kbd>Abajo</kbd></kbd></td><td>         Decrementar la nota en un semitono</td></tr>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Arriba</kbd></kbd></td><td>   Aumentar la nota una octava.</td></tr>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Abajo</kbd></kbd></td><td>    Decrementar la nota en una octava</td></tr>
       </table>
       <br/>
       MuseScore automáticamente intenta utilizar el accidente apropiado para la nota
@@ -29,7 +29,7 @@
       manualmente agregado se perderá.
       <br/>
       <br/>
-      La función de menú &lt;<b>Notes/Pitch spell</b>&gt; intenta adivinar los accidentes correctos
+      La función de menú <kbd><samp class="menu">Notes</samp> → <samp class="menuitem">Pitch spell</samp></kbd> intenta adivinar los accidentes correctos
       para toda la partitura.
     </page>
 
@@ -140,7 +140,7 @@
     <table>
     <tr><td>
           <b>Eliminar:</b><br/>
-          Seleccionar el corchete y pulsar  &lt;<b>Del</b>&gt;<br/>
+          Seleccionar el corchete y pulsar  <kbd><kbd>Del</kbd></kbd><br/>
           <br/>
           <b>Añadir:</b><br/>
           Arrastrar un símbolo de corchete desde la paleta de corchetes hacia
@@ -208,13 +208,13 @@
     <index>Nombres de acordes</index>
 
       Los nombres de los acordes pueden ser ingresados luego de seleccionar una nota y apretar
-      <code>&lt;<b>Ctrl+K</b>&gt;</code>.
+      <code><kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd></code>.
       Esto crea un objeto de texto para el acorde seleccionado.
 
       <ul>
-        <li>Use <code>&lt;<b>espacio</b>&gt;</code> para ir al siguiente acorde.</li>
-        <li><code>&lt;<b>Shift+Espacio</b>&gt;</code> va al acorde anterior.</li>
-        <li><code>&lt;<b>Ctrl+Espacio</b>&gt;</code> ingresa un <code>&lt;<b>espacio</b>&gt;</code>
+        <li>Use <code><kbd><kbd>espacio</kbd></kbd></code> para ir al siguiente acorde.</li>
+        <li><code><kbd><kbd>Shift</kbd>+<kbd>Espacio</kbd></kbd></code> va al acorde anterior.</li>
+        <li><code><kbd><kbd>Ctrl</kbd>+<kbd>Espacio</kbd></kbd></code> ingresa un <code><kbd><kbd>espacio</kbd></kbd></code>
             en el texto del nombre del acorde.
             </li>
         </ul>
@@ -229,13 +229,13 @@
       Las claves son creadas o cambiadas arrastrándolas desde la paleta de claves
       a un compás u otra clave.
       <br/>
-      &lt;<b>F9</b>&gt; Cambia la ventana de paletas.
+      <kbd><kbd>F9</kbd></kbd> Cambia la ventana de paletas.
       <br/>
       <br/>
       <b>Cambiar</b><br/>
       Arrastre una clave desde la paleta a una clave de la partitura. También
       es posible arrastrar una clave desde la partitura a otra clave de la partitura,
-      usando&lt;<b>Shift+leftMouseButton+Drag</b>&gt;.
+      usando<kbd><kbd>Shift</kbd>+<kbd class="mouse">leftMouseButton</kbd>+Drag</kbd></kbd>.
       <br/>
       <br/>
       <b>Agregar</b><br/>
@@ -245,7 +245,7 @@
       <br/>
       <br/>
       <b>Quitar</b><br/>
-      Seleccione una clave y presione  &lt;<b>Supr</b>&gt;.
+      Seleccione una clave y presione  <kbd><kbd>Supr</kbd></kbd>.
       </td>
       <td>
          <img src="../pic/clefpalette.png"/>
@@ -286,12 +286,12 @@
 
     <table cellpadding="0" cellspacing="0">
      <tr>
-        <td>&lt;<b>Doble Click</b>&gt;</td>
+        <td><kbd><kbd>Doble Click</kbd></kbd></td>
         <td><sp/></td>
         <td> inicia &lt;<i><b>Modo de Edición</b></i>&gt; </td>
         </tr>
      <tr>
-        <td>&lt;<b>Escape</b>&gt;</td>
+        <td><kbd><kbd>Escape</kbd></kbd></td>
         <td/>
         <td> termina &lt;<i><b>Modo de Edición</b></i>&gt; </td>
         </tr>
@@ -307,39 +307,39 @@
     Comandos disponibles:<br/>
     <br/>
     <table cellpadding="0" cellspacing="0">
-      <tr><td>&lt;<b>Izquierda</b>&gt;</td>
+      <tr><td><kbd><kbd>Izquierda</kbd></kbd></td>
           <td><sp/></td>
           <td>move handle left one Space</td>
         </tr>
-      <tr><td>&lt;<b>Derecha</b>&gt;</td>
+      <tr><td><kbd><kbd>Derecha</kbd></kbd></td>
           <td/>
           <td>move handle right one Space</td>
         </tr>
-      <tr><td>&lt;<b>Arriba</b>&gt;</td>
+      <tr><td><kbd><kbd>Arriba</kbd></kbd></td>
           <td/>
           <td>move handle up one Space</td>
         </tr>
-      <tr><td>&lt;<b>Abajo</b>&gt;</td>
+      <tr><td><kbd><kbd>Abajo</kbd></kbd></td>
           <td/>
           <td>move handle down one Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Izquierda</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Izquierda</kbd></kbd></td>
           <td/>
           <td>move handle left 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Derecha</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Derecha</kbd></kbd></td>
           <td/>
           <td>move handle right 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Arriba</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Arriba</kbd></kbd></td>
           <td/>
           <td>move handle up 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Ctrl+Abajo</b>&gt;</td>
+      <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Abajo</kbd></kbd></td>
           <td/>
           <td>move handle down 0.1 Space</td>
         </tr>
-      <tr><td>&lt;<b>Tab</b>&gt;</td>
+      <tr><td><kbd><kbd>Tab</kbd></kbd></td>
           <td/>
           <td>go to next handle</td>
         </tr>
@@ -381,39 +381,27 @@
     <index>Marcos</index>
     Los marcos proveen un espacio vacío fuera de los compases normales. Pueden
     contener texto o imágenes. <i>MuseScore</i> tiene dos tipos de marcos:
-    <br/>
-    <br/>
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-       <td valign="top"><b>horizontal</b></td>
-       <td><sp/></td>
-       <td>
-          Los marcos horizontales rompen un sistema. El ancho es modificable y la
+    
+    <dl>
+    <dt>horizontal</dt>
+    <dd>Los marcos horizontales rompen un sistema. El ancho es modificable y la
           altura iguala la altura del sistema. Los marcos horizontales pueden ser
-          usados para separar una Coda.
-          </td>
-       </tr>
-    <tr><td><br/></td></tr>
-    <tr>
-       <td valign="top"><b>vertical</b></td>
-       <td/>
-       <td>
-       Los marcos verticales proveen espacio vacío entre o antes de los sistemas.
+          usados para separar una Coda.</dd>
+    
+    <dt>vertical</dt>
+    <dd>Los marcos verticales proveen espacio vacío entre o antes de los sistemas.
        La altura es modificable y el ancho es el mimso que el del sistema. Los marcos
        verticales son usados para ubicar títulos, subtítulos o compositor. Si creas un
        título, un marco vertical es ubicado automáticamente antes del primer compás si
-       todavía no fue creado.
-       </td>
-       </tr>
-    </table>
-    <br/>
-
+       todavía no fue creado.</dd>
+    </dl>
+    
     <h5>Crear un marco</h5>
     Primero seleccionar un compás. El comando para insertar un marco se encuentra
-    en el menú Crear->Compás. El marco es insertado antes el compás seleccionado.
+    en el menú <kbd><samp class="menu">Crear</samp> → <samp class="menuitem">Compás</samp></kbd>. El marco es insertado antes el compás seleccionado.
 
     <h5>Borrar un marco</h5>
-    Seleccionar un marco y presionar &lt;<b>Del</b>&gt;.
+    Seleccionar un marco y presionar <kbd><kbd>Del</kbd></kbd>.
 
     <h5>Editar un marco</h5>
     Para entrar en el <a href="editmode.php"><b>modo de edición</b></a> haz doble
@@ -468,13 +456,13 @@
     <tr><td>
       Las armaduras de clave son creadas o cambiadas arrastrando una armadura
       desde la paleta de armaduars hacia un compás u otra armadura. <br/>
-      <key>F9</key> muestra la ventana de paletas.
+      <kbd><kbd>F9</kbd></kbd> muestra la ventana de paletas.
       <br/>
       <br/>
       <b>Cambiar</b><br/>
       Arrastrar la armadura desde la paleta hacia la clave de una partitura.
       También puedes arrastrar la armadura desde una partitura hacia otra
-      armadura en la partitura usando <key>Shift+BotonIzqMouse+Arrastrar</key>.
+      armadura en la partitura usando <kbd><kbd>Shift</kbd>+<kbd class="mouse">BotonIzqMouse</mouse>+Arrastrar</kbd></kbd>.
       <br/>
       <br/>
       <b>Agregar</b>
@@ -485,7 +473,7 @@
       <br/>
       <b>Quitar</b>
       <br/>
-      Seleccione una armadura de clave y presiona <key>Supr</key>.
+      Seleccione una armadura de clave y presiona <kbd><kbd>Supr</kbd></kbd>.
       </td>
       <td>
          <img src="../pic/keypalette.png"/>
@@ -512,31 +500,27 @@
      <ul>
         <li>En primer lugar, ingresar las notas.</li>
         <li>Seleccionar la primera nota.</li>
-        <li>Presionar <key>Ctrl+L</key> e ingresar la letra para la primera nota.</li>
-        <li>Presionar <key>Espacio</key> al final de la palabra para ir a la siguiente nota.</li>
-        <li>Presionar <key>-</key> al final de una sílaba para ir a la siguiente nota.
+        <li>Presionar <kbd><kbd>Ctrl</kbd>+<kbd>L</kbd></kbd> e ingresar la letra para la primera nota.</li>
+        <li>Presionar <kbd><kbd>Espacio</kbd></kbd> al final de la palabra para ir a la siguiente nota.</li>
+        <li>Presionar <kbd><kbd>-</kbd></kbd> al final de una sílaba para ir a la siguiente nota.
            Las sílabas son conectadas con un guión.</li>
-        <li><key>Shift+Espacio</key> cambia a la nota anterior.</li>
-        <li><key>Ctrl+Espacio</key> ingresa un <key>espacio</key> en el texto de la letra.</li>
-        <li><key>Ctrl+Menos</key> ingresa un <key>-</key> en el texto de la letra.</li>
+        <li><kbd><kbd>Shift</kbd>+<kbd>Espacio</kbd></kbd> cambia a la nota anterior.</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>Espacio</kbd></kbd> ingresa un <samp>espacio</samp> en el texto de la letra.</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>Menos</kbd></kbd> ingresa un <samp>-</samp> en el texto de la letra.</li>
         </ul>
 
       <img src="../pic/lyrics.png" align="center"/>
-      <br/>
-      Las sílabas puede ser extendidas con una línea baja:
+      
+      <p>Las sílabas puede ser extendidas con una línea baja:</p>
       <img src="../pic/lyrics1.png" align="center"/>
-      <br/>
-      Ingresado con: <key>"soul,"</key>
-      <key>_</key><key>_</key><key>_</key><key>"To"</key>
-      <key>Esc</key>.
-      <br/>
-      <br/>
-      La letra puede ser <a href="textedit.php">editada</a> como texto normal.
-      <br/>
-      <br/>
-      Ver también
+      
+      <p>Ingresado con: <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd>.</p>
+
+      <p>La letra puede ser <a href="textedit.php">editada</a> como texto normal.</p>
+      
+      <p>Ver también
           <a href="text.php">Texto</a><sp/>
-          <a href="chordnames.php">Nombres de acordes</a>.
+          <a href="chordnames.php">Nombres de acordes</a>.</p>
     </page>
 
 <page name="measures" header="Operaciones de compás">
@@ -545,60 +529,51 @@
     <index>Borrar compás</index>
 
     <h5>Insertar compás</h5>
-         Insertar compases Primero selecciona un compás, y luego
-         apreta <key>Ins</key> para insertar un nuevo compás vacío antes
-         del seleccionado.
+       Insertar compases Primero selecciona un compás, y luego
+       apreta <kbd><kbd>Ins</kbd></kbd> para insertar un nuevo compás vacío antes
+       del seleccionado.
 
     <h5>Borrar compases</h5>
        Borrar compases Un compás completo puede ser borrado seleccionándolo
-       y apretando <key>Ctrl+Click</key>. El compás es marcado con una linea
+       y apretando <kbd><kbd>Ctrl</kbd>+<kbd class="mouse">Click</kbd></kbd>. El compás es marcado con una linea
        punteada que indica que se ha seleccionado un "trozo de tiempo".
-       Presiona <key>Shift+Click</key> para extender la selección.
-       Presionar <key>Supr</key> elimina el compás seleccionado.
+       Presiona <kbd><kbd>Shift</kbd>+<kbd class="mouse">Click</kbd></kbd> para extender la selección.
+       Presionar <kbd><kbd>Supr</kbd></kbd> elimina el compás seleccionado.
 
     <h5>Propiedades</h5>
-        Duración del compás Normalmente, la duración nominal y real de un compás
-        son idénticas. Un compás débil puede tener una duración real
-        diferente.
+      <img src="../pic/measure.png" style="float:right"/>
+      Duración del compás Normalmente, la duración nominal y real de un compás
+      son idénticas. Un compás débil puede tener una duración real
+      diferente.
 
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-      <td>
-          <b>Duración del compás</b><br/>
-          Normalmente, la duración nominal y real de un compás
-          son idénticas. Un compás débil puede tener una duración real
-          diferente.
-          <br/>
-          <br/>
-          <b>Irregular</b><br/>
-          Un compás "irregular" no es contado. Normalmente, un compás débil (upbeat)
-          no es contado como regular.
-          <br/>
-          <br/>
-          <b>Repetición</b><br/>
-            Si un compás es el final de una <a href="repeats.php">repetición,</a>
-            es posible definir cuántas veces debe repetirse.
-         </td>
-      <td valign="top">
-         <img src="../pic/measure.png"/>
-         </td>
-      </tr>
-    </table>
-    <br/>
+    <dl>
+    <dt>Duración del compás</dt>
+      <dd>Normalmente, la duración nominal y real de un compás
+      son idénticas. Un compás débil puede tener una duración real
+      diferente.</dd>
+
+    <dt>Irregular</dt>
+      <dd>Un compás "irregular" no es contado. Normalmente, un compás débil (upbeat)
+      no es contado como regular.</dd>
+    
+    <dt>Repetición</dt>
+      <dd>Si un compás es el final de una <a href="repeats.php">repetición,</a>
+      es posible definir cuántas veces debe repetirse.</dd>
+    </dl>
     </page>
 
 
 <page name="newscore" header="Crear una nueva partitura desde cero">
     <index>Crear una nueva partitura desde cero</index>
 
-    La entrada del menú  &lt;<b>Partitura/Nueva</b>&gt;
+    La entrada del menú  <kbd><samp class="menu">Partitura</samp> → <samp class="menuitem">Nueva</samp></kbd>
     crea una nueva partitura. Primero es necesario agregar instrumentos a
     la nueva hoja, y luego puedes agregar compases vacíos
 
           <ul>
-          <li>&lt;<b>I</b>&gt; ventana con el menu de instrumentos</li>
-          <li>&lt;<b>Ctrl+B</b>&gt; agrega compases vacíos</li>
-          <li>entonces el menu&lt;<b>Crear/Compás</b>&gt;
+          <li><kbd><kbd>I</kbd></kbd> ventana con el menu de instrumentos</li>
+          <li><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd> agrega compases vacíos</li>
+          <li>entonces el menu<kbd><samp class="menu">Crear</samp> → <samp class="menuitem">Compás</samp></kbd>
              puede ser usado para crear un número arbitrario de compases vacíos
              </li>
           </ul>
@@ -611,14 +586,14 @@
 
     <h5>Crear nueva partitura desde plantilla</h5>
 
-    &lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
-    template and click &lt;<b>OK</b>&gt;. This is the simplest way to create
+    <kbd><kbd>N</kbd></kbd> popups the <kbd><kbd>Template</kbd></kbd> menu. Select a
+    template and click <kbd><kbd>OK</kbd></kbd>. This is the simplest way to create
     a new score. Note that template files are normal <i>MuseScore</i> files
     stored in the template folder.
 
-    &lt;<b>N</b>&gt; muestra el menú &lt;<b>Plantilla</b>&gt;.
+    <kbd><kbd>N</kbd></kbd> muestra el menú <kbd><kbd>Plantilla</kbd></kbd>.
     Selecciona una plantilla y haz click en
-    &lt;<b>Ok</b>&gt;. Esta es la forma más simple de crear una nueva partitura.
+    <kbd><kbd>Ok</kbd></kbd>. Esta es la forma más simple de crear una nueva partitura.
     Nota que los archivos de plantilla son archivos <i>MuseScore</i> normales,
     guardados en el directorio template.
 
@@ -638,8 +613,8 @@
     <br/><br/>
 
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>N</b>&gt;</td><td>ingresa al modo &lt;<i>Note Edit</i>&gt;.</td></tr>
-    <tr><td>&lt;<b>Escape</b>&gt;</td><td> deja el modo &lt;<i>Note Edit</i>&gt;.</td></tr>
+    <tr><td><kbd><kbd>N</kbd></kbd></td><td>ingresa al modo &lt;<i>Note Edit</i>&gt;.</td></tr>
+    <tr><td><kbd><kbd>Escape</kbd></kbd></td><td> deja el modo &lt;<i>Note Edit</i>&gt;.</td></tr>
     </table>
     <br/>
 
@@ -649,32 +624,32 @@
     <br/>
 
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Alt+1</b>&gt;</td><td><sp/>1/4 nota  </td> <td><sp/><sp/></td> <td>&lt;<b>Alt+2</b>&gt;</td><td><sp/>1/8 nota</td></tr>
-    <tr><td>&lt;<b>Alt+3</b>&gt;</td><td><sp/>1/16 nota </td> <td/> <td>&lt;<b>Alt+4</b>&gt;</td><td><sp/>1/32 nota</td></tr>
-    <tr><td>&lt;<b>Alt+5</b>&gt;</td><td><sp/>1/64 nota </td> <td/> <td>&lt;<b>Alt+6</b>&gt;</td><td><sp/>1/1 nota</td></tr>
-    <tr><td>&lt;<b>Alt+7</b>&gt;</td><td><sp/>1/2 nota  </td></tr>
+    <tr><td><kbd><kbd>Alt</kbd>+<kbd>1</kbd></kbd></td><td><sp/>1/4 nota  </td> <td><sp/><sp/></td> <td><kbd><kbd>Alt</kbd>+<kbd>2</kbd></kbd></td><td><sp/>1/8 nota</td></tr>
+    <tr><td><kbd><kbd>Alt</kbd>+<kbd>3</kbd></kbd></td><td><sp/>1/16 nota </td> <td/> <td><kbd><kbd>Alt</kbd>+<kbd>4</kbd></kbd></td><td><sp/>1/32 nota</td></tr>
+    <tr><td><kbd><kbd>Alt</kbd>+<kbd>5</kbd></kbd></td><td><sp/>1/64 nota </td> <td/> <td><kbd><kbd>Alt</kbd>+<kbd>6</kbd></kbd></td><td><sp/>1/1 nota</td></tr>
+    <tr><td><kbd><kbd>Alt</kbd>+<kbd>7</kbd></kbd></td><td><sp/>1/2 nota  </td></tr>
     </table>
     <br/>
 
     <table>
     <tr>
-      <td>Las notas se ingresan presionando<br/>&lt;<b>C D E F G A B</b>&gt;:</td>
+      <td>Las notas se ingresan presionando<br/><kbd><kbd>C D E F G A B</kbd></kbd>:</td>
       <td><img src="../pic/noteentry1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Espacio</b>&gt; crea una pausa<br/>&lt;<b>C D Espacio E</b>&gt;:</td>
+      <td><kbd><kbd>Espacio</kbd></kbd> crea una pausa<br/><kbd><kbd>C D Espacio E</kbd></kbd>:</td>
       <td><img src="../pic/noteentry2.png" align="center"/></td>
       </tr>
     <tr>
       <td>Las notas se agregan a los acordes presionando
-          &lt;<b>Shift+NombeNota</b>&gt;<br/>
-          &lt;<b>C D Shift+F Shift+A E F</b>&gt;:
+          <kbd><kbd>Shift</kbd>+NombeNota</kbd><br/>
+          <kbd>C D <kbd>Shift</kbd>+F <kbd>Shift</kbd>+A E F</kbd>:
           </td>
       <td><img src="../pic/noteentry3.png" align="center"/></td>
       </tr>
     <tr>
       <td>Los "Beams" son creados automáticamente<br/>
-          &lt;<b>Alt+1 C D Alt+2 E F G A</b>&gt;:
+          <kbd><kbd>Alt</kbd>+1 C D <kbd>Alt</kbd>+2 E F G A</kbd>:
       </td>
       <td><img src="../pic/noteentry4.png" align="center"/></td>
       </tr>
@@ -706,24 +681,24 @@
 <page name="playmode" header="Modo de Reproducción">
     <index>Modo de Reproducción</index>
      <i>MuseScore</i> tiene integrado un sequenciador y un sintetizador para
-     reproducir tu partitura. Presionando el botón <key>Play</key> ingresas al
+     reproducir tu partitura. Presionando el botón Play <img src="../../pic/play.png" alt="[Play]"/> ingresas al
      modo de reproducción. En este modo los siguientes comandos están disponibles:
 
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td><key>Espacio</key></td><td>alterna stop/play</td></tr>
-    <tr><td><key>Izquierda</key></td><td>busca el acorde previo</td></tr>
-    <tr><td><key>Derecha</key></td><td>busca el acorde siguiente</td></tr>
-    <tr><td><key>Ctrl+Izquierda</key></td><td>busca el compás previo</td></tr>
-    <tr><td><key>Ctrl+Derecha</key></td><td>busca el compás siguiente</td></tr>
-    <tr><td><key>Inicio</key></td><td>retrocede al inicio de la partitura</td></tr>
-    <tr><td><key>F11</key></td><td>alterna mostrar el panel de reproducción</td></tr>
+    <tr><td><kbd><kbd>Espacio</kbd></kbd></td><td>alterna stop/play</td></tr>
+    <tr><td><kbd><kbd>Izquierda</kbd></kbd></td><td>busca el acorde previo</td></tr>
+    <tr><td><kbd><kbd>Derecha</kbd></kbd></td><td>busca el acorde siguiente</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Izquierda</kbd></kbd></td><td>busca el compás previo</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Derecha</kbd></kbd></td><td>busca el compás siguiente</td></tr>
+    <tr><td><kbd><kbd>Inicio</kbd></kbd></td><td>retrocede al inicio de la partitura</td></tr>
+    <tr><td><kbd><kbd>F11</kbd></kbd></td><td>alterna mostrar el panel de reproducción</td></tr>
     </table>
     <br/>
     <br/>
     Si quieres tocar otro instrumento que no sea el piano, tienes que
     cambiar el "<i>SoundFont</i>" integrado en <i>MuseScore</i> por uno más
-    versátil en el menú Preferencias.
+    versátil en el menú <samp class="menuitem">Preferencias</samp>.
     </page>
 
 <page name="repeats" header="Repetir">
@@ -747,19 +722,19 @@
       <td><img src="../pic/slur1.png" align="center"/></td>
     </tr>
     <tr>
-      <td><key>S</key> en el modo edición crea un legato:</td>
+      <td><kbd><kbd>S</kbd></kbd> en el modo edición crea un legato:</td>
       <td><img src="../pic/slur2.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>Shift+Derecha</key> mueve el final del legato a la siguiente nota: </td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>Derecha</kbd></kbd> mueve el final del legato a la siguiente nota: </td>
       <td><img src="../pic/slur3.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>X</b>&gt; invierte la dirección del legato:</td>
+      <td><kbd><kbd>X</kbd></kbd> invierte la dirección del legato:</td>
       <td><img src="../pic/slur4.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Escape</b>&gt; sale del modo de edición:</td>
+      <td><kbd><kbd>Escape</kbd></kbd> sale del modo de edición:</td>
       <td><img src="../pic/slur5.png" align="center"/></td>
       </tr>
     </table>
@@ -793,20 +768,20 @@
     <br/>
     <h5>Play panel</h5>
     <ul>
-      <li>Display the play panel: Display --&gt; Play Panel</li>
+      <li>Display the play panel: <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Play Panel</samp></kbd></li>
       <li>Change the Beats per Minute (bpm) using the Tempo (Tmp) slider</li>
     </ul>
     <br/>
     <h5>Tempo text</h5>
     <ul>
       <li>Select a note to indicate where the tempo text should be created</li>
-      <li>From the main menu: Create --&gt; Text... --&gt; Tempo...</li>
+      <li>From the main menu: <kbd><samp class="menu">Create</samp> → <samp class="submenu">Text...</samp> → <samp class="menuitem">Tempo...</samp></kbd></li>
       <li>Select the desired tempo text and make adjustments to text or BPM if necessary</li>
-      <li>Press OK to finish</li>
+      <li>Press <kbd><samp class="button">OK</samp></kbd> to finish</li>
     </ul>
-    Existing tempo text can be changed by double clicking the text to enter edit mode.
+    Existing tempo text can be changed by double clicking the text to enter <samp class="mode">edit mode</samp>.
     Beats per minute (BPM) on existing tempo text can be adjusted by right clicking on the
-    text and selecting "Tempo Properties..."<br/>
+    text and selecting <kbd><samp class="menuitem">Tempo Properties...</samp></kbd><br/>
     <br/>
     Note: Tempo text in the score will override a tempo setting in the play panel.
     </page>
@@ -820,17 +795,17 @@
       <br/>
       En el modo de edición de texto los siguientes comandos están disponibles:
       <ul>
-        <li><key>Ctrl+B</key> alterna negrita</li>
-        <li><key>Ctrl+I</key> alterna cursiva</li>
-        <li><key>Ctrl+U</key> alterna subrayado</li>
-        <li><key>Arriba</key> comienza superscript o termina subscript si está en modo subscript</li>
-        <li><key>Abajo</key> comienza subscript o termina superscript si está en modo superscript</li>
-        <li>mover el cursor: <key>Inicio</key> <key>Fin</key> <key>Izquierda</key>
-           <key>Derecha</key></li>
-        <li><key>Backspace</key> borra el caracter a la izquierda del cursor</li>
-        <li><key>Delete</key> borra el caracter a la derecha del cursor</li>
-        <li><key>Return</key> empieza nueva línea</li>
-        <li><key>F2</key> Muestra la paleta de texto. Ésta puede ser usada para insertar
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd> alterna negrita</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>I</kbd></kbd> alterna cursiva</li>
+        <li><kbd><kbd>Ctrl</kbd>+<kbd>U</kbd></kbd> alterna subrayado</li>
+        <li><kbd><kbd>Arriba</kbd></kbd> comienza superscript o termina subscript si está en modo subscript</li>
+        <li><kbd><kbd>Abajo</kbd></kbd> comienza subscript o termina superscript si está en modo superscript</li>
+        <li>mover el cursor: <kbd><kbd>Inicio</kbd></kbd> <kbd><kbd>Fin</kbd></kbd> <kbd><kbd>Izquierda</kbd></kbd>
+           <kbd><kbd>Derecha</kbd></kbd></li>
+        <li><kbd><kbd>Backspace</kbd></kbd> borra el caracter a la izquierda del cursor</li>
+        <li><kbd><kbd>Delete</kbd></kbd> borra el caracter a la derecha del cursor</li>
+        <li><kbd><kbd>Return</kbd></kbd> empieza nueva línea</li>
+        <li><kbd><kbd>F2</kbd></kbd> Muestra la paleta de texto. Ésta puede ser usada para insertar
            caracteres y símbolosespeciales.</li>
         </ul>
 
@@ -914,13 +889,13 @@
       <td><img src="../pic/tie1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Shift+S</b>&gt; crea un lazo:</td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>S</kbd></kbd> crea un lazo:</td>
       <td><img src="../pic/tie2.png" align="center"/></td>
       </tr>
     </table>
 
     <br/>
-    Dentro del modo de ingreso de notas, puedes presionar <key>+</key>
+    Dentro del modo de ingreso de notas, puedes presionar <kbd><kbd>+</kbd></kbd>
     antes de ingresar la primera nota para crear un lazo hasta la nota siguiente.
     <br/>
     <br/>
@@ -946,8 +921,8 @@
     <index>Triplets</index>
 
     To create a triplet first create a note with a duration of the whole
-    triplet. Then select the note and press &lt;<b>Ctrl+3</b>&gt; to change
-    it to a triplet. Similarly &lt;<b>Ctrl+5</b>&gt; changes the note
+    triplet. Then select the note and press <kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> to change
+    it to a triplet. Similarly <kbd><kbd>Ctrl</kbd>+<kbd>5</kbd></kbd> changes the note
     to a quintuplet.
 
     <table>
@@ -956,7 +931,7 @@
       <td><img src="../pic/tuplet1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Ctrl+3</b>&gt; creates a triplet:</td>
+      <td><kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> creates a triplet:</td>
       <td><img src="../pic/tuplet2.png" align="center"/></td>
       </tr>
     <tr>
@@ -974,8 +949,8 @@
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Ctrl+Z</b>&gt;</td><td>Deshacer</td></tr>
-    <tr><td>&lt;<b>Ctrl+Shift+Z</b>&gt;</td><td>Rehacer</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Z</kbd></kbd></td><td>Deshacer</td></tr>
+    <tr><td><kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></kbd></td><td>Rehacer</td></tr>
     </table>
     </page>
 
@@ -998,8 +973,8 @@
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td><key>Shift+Derecha</key></td><td><sp/>un compás hacia la izquierda</td></tr>
-    <tr><td><key>Shift+Izquierda</key></td><td><sp/>un compás hacia de derecha</td></tr>
+    <tr><td><kbd><kbd>Shift</kbd>+<kbd>Derecha</kbd></kbd></td><td><sp/>un compás hacia la izquierda</td></tr>
+    <tr><td><kbd><kbd>Shift</kbd>+<kbd>Izquierda</kbd></kbd></td><td><sp/>un compás hacia de derecha</td></tr>
     </table>
     <br/>
     Estos comandos mueven el principio o final "lógico" de la volta. Otros comandos
@@ -1039,7 +1014,7 @@
     <index>Silencio de un compás</index>
     Cuando un compás completo no posee ntoas, un silencio de blanca es usado.
     Un silencio de un compás puede ser creado marcando el compás y
-    presionando <key>Supr</key>. Todas las notas y silencios en este copás
+    presionando <kbd><kbd>Supr</kbd></kbd>. Todas las notas y silencios en este copás
     serán reemplazados por un silencio con la duración de todo el compás.
     </page>
 
@@ -1058,11 +1033,11 @@
     <br/>
     <table cellspacing="0" cellpadding="0">
       <tr>
-            <td><key>H</key></td>
+            <td><kbd><kbd>H</kbd></kbd></td>
             <td><sp/> crea una llave de dinámica de crescendo</td>
             </tr>
       <tr>
-            <td><key>Shift+H</key></td>
+            <td><kbd><kbd>Shift</kbd>+<kbd>H</kbd></kbd></td>
             <td><sp/>crea una llave de dinámica de decrescendo</td>
             </tr>
       </table>
@@ -1074,19 +1049,19 @@
 
     <table>
     <tr>
-      <td><key>H</key>crea una llave de dinámica de crescendo:</td>
+      <td><kbd><kbd>H</kbd></kbd>crea una llave de dinámica de crescendo:</td>
       <td><img src="../pic/hairpin1.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>double click</key>cambia al modo edición: </td>
+      <td><kbd><kbd>double click</kbd></kbd>cambia al modo edición: </td>
       <td><img src="../pic/hairpin2.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>Shift+derecha</key>mueve el ancla final: </td>
+      <td><kbd><kbd>Shift</kbd>+<kbd>derecha</kbd></kbd>mueve el ancla final: </td>
       <td><img src="../pic/hairpin3.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>derecha</key>mueve el punto final: </td>
+      <td><kbd><kbd>derecha</kbd></kbd>mueve el punto final: </td>
       <td><img src="../pic/hairpin4.png" align="center"/></td>
       </tr>
     </table>
@@ -1104,7 +1079,7 @@
       <td><img src="../pic/crossbeams1.png" align="center"/></td>
       </tr>
     <tr>
-      <td>Utilizando <key>Shift+Ctrl+Down</key>, se mueve la nota o acorde
+      <td>Utilizando <kbd><kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd>, se mueve la nota o acorde
           al siguiente pentagrama.
           </td>
       <td><img src="../pic/crossbeams2.png" align="center"/></td>
