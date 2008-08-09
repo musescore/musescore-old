@@ -166,7 +166,7 @@
     by dragging a page break symbol or line break symbol from the
     breaks palette to an empty space of a measure in the score.
     The break will happen <em>after</em> the marked measure.
-    The visible break marks will not be printed of course.
+    The visible break marks will not be printed of course.</p>
     </page>
 
 <page name="breath" header="Breath">
@@ -354,7 +354,7 @@
 
     <h5>Create a frame</h5>
     <p>First select a measure. The command to insert a frame is found in
-    the menu <kbd><samp class="menu">Create</samp> → <samp class="menuitem">Measures</samp><kbd>. The frame is inserted
+    the menu <kbd><samp class="menu">Create</samp> → <samp class="menuitem">Measures</samp></kbd>. The frame is inserted
     <em>before</em> the selected measure.</p>
 
     <h5>Delete a frame</h5>

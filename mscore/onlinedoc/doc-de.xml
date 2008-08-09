@@ -220,7 +220,7 @@
           <b>Verändern</b><br/>
           Ziehen sie einen Schlüssel von der Palette auf einen Schlüssel
           der Partitur. Statt von einer Palette kann mit
-          <kbd><kbd>Umsch</kbd>+<kbd class="mouse">linkeMaustaste</kbd>+Ziehen</kbd></kbd>;.<br/> auch ein
+          <kbd><kbd>Umsch</kbd>+<kbd class="mouse">linkeMaustaste</kbd>+<kbd>Ziehen</kbd></kbd>;.<br/> auch ein
           Schlüssel der Partitur wie von einer Palette gezogen
           werden.
           <br/>
@@ -516,7 +516,7 @@
       <br/>
       <b>Verändern</b><br/>
       Ziehe ein Tonartsymbol von der Tonartpalette auf ein Tonartsymbol
-      der Partitur. Mit <kbd><kbd>Umsch</kbd>+<kbd class="mouse">line Maustaste</kbd>+ziehen</kbd></kbd>; kann auch
+      der Partitur. Mit <kbd><kbd>Umsch</kbd>+<kbd class="mouse">line Maustaste</kbd>+<kbd>ziehen</kbd></kbd>; kann auch
       ein Tonartsymbol der Partitur gezogen werden.
       <br/>
       <b>Zufügen</b><br/>
@@ -572,7 +572,7 @@
       mit einem Unterstreichungsstrich angezeigt:</p>
       <img src="../pic/lyrics1.png" align="center"/>
       
-      <p>Der Text wird mit <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd> erzeugt.
+      <p>Der Text wird mit <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd> erzeugt.</p>
       
       <p>Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.</p>
 

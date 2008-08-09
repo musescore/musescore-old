@@ -235,7 +235,7 @@
       <b>Cambiar</b><br/>
       Arrastre una clave desde la paleta a una clave de la partitura. También
       es posible arrastrar una clave desde la partitura a otra clave de la partitura,
-      usando<kbd><kbd>Shift</kbd>+<kbd class="mouse">leftMouseButton</kbd>+Drag</kbd></kbd>.
+      usando<kbd><kbd>Shift</kbd>+<kbd class="mouse">leftMouseButton</kbd>+<kbd>Drag</kbd></kbd>.
       <br/>
       <br/>
       <b>Agregar</b><br/>
@@ -462,7 +462,7 @@
       <b>Cambiar</b><br/>
       Arrastrar la armadura desde la paleta hacia la clave de una partitura.
       También puedes arrastrar la armadura desde una partitura hacia otra
-      armadura en la partitura usando <kbd><kbd>Shift</kbd>+<kbd class="mouse">BotonIzqMouse</mouse>+Arrastrar</kbd></kbd>.
+      armadura en la partitura usando <kbd><kbd>Shift</kbd>+<kbd class="mouse">BotonIzqMouse</kbd>+<kbd>Arrastrar</kbd></kbd>.
       <br/>
       <br/>
       <b>Agregar</b>
