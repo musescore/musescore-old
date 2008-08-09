@@ -22,10 +22,10 @@
       </table>
 
     <table cellpadding="0" cellspacing="0">
-      <tr><td><key>Hoch</key></td><td>Erhöht die Note um einen Semiton.</td></tr>
-      <tr><td><key>Tief</key></td><td>Erniedigt die Note um einen Semiton.</td></tr>
-      <tr><td><key>Strg+Hoch</key></td><td>Erhöht die Note um eine Oktave.</td></tr>
-      <tr><td><key>Strg+Tief</key></td><td>Erniedigt die Note um eine Oktave.</td></tr>
+      <tr><td><kbd><kbd>Hoch</kbd></kbd></td><td>Erhöht die Note um einen Semiton.</td></tr>
+      <tr><td><kbd><kbd>Tief</kbd></kbd></td><td>Erniedigt die Note um einen Semiton.</td></tr>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Hoch</kbd></kbd></td><td>Erhöht die Note um eine Oktave.</td></tr>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Tief</kbd></kbd></td><td>Erniedigt die Note um eine Oktave.</td></tr>
       </table>
     <br/>
     <i>MuseScore</i> wählt automatisch die Position der Note und evtl. ein
@@ -36,7 +36,7 @@
     Tonhöhe verändert wird, geht diese manuelle Wahl natürlich verloren.
     <br/>
     <br/>
-    Die Menüfunktion &lt;<b>Notes/Pitch spell</b>&gt; versucht, die Vorzeichen
+    Die Menüfunktion <kbd><samp class="menu">Notes</samp> → <samp class="menuitem">Pitch spell</samp></kbd> versucht, die Vorzeichen
     der gesamten Partitur neu zu berechnen.
   </page>
 
@@ -125,7 +125,7 @@
       <tr>
         <td>
           <b>Entfernen</b><br/>
-          Selektieren sie die Klammer und drücken dann &lt;<b>Entf</b>&gt;<br/>
+          Selektieren sie die Klammer und drücken dann <kbd><kbd>Entf</kbd></kbd><br/>
           <br/>
           <b>Zufügen</b><br/>
           Ziehen sie ein Klammersymbol von der Klammerpalette auf eine leere Stelle des
@@ -192,16 +192,16 @@
 <page name="chordnames" header="Akkordnamen">
     <index>Akkordnamen</index>
       Akkordnamen können gesetzt werden, indem eine Note des Akkordes selektiert
-      und dann <code>&lt;<b>Ctrl+K</b>&gt;</code> gedrückt wird.
+      und dann <code><kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd></code> gedrückt wird.
       Dies erzeugt einen Akkordnamen und schaltet in den
       <a href="textedit.php"><i>Editmodus</i></a>.
       <br/>
       <br/>
       Zusätzlich stehen folgenden Kommandos zur Verfügung:
       <ul>
-        <li><key>Leertaste</key> positioniert auf den nächsten Akkord.</li>
-        <li><key>Groß+Leertaste</key> positioniert auf den vorherigen Akkord.</li>
-        <li><key>Strg+Leertaste</key> gibt ein <key>Leerzeichen</key> ein </li>
+        <li><kbd><kbd>Leertaste</kbd></kbd> positioniert auf den nächsten Akkord.</li>
+        <li><kbd><kbd>Groß</kbd>+<kbd>Leertaste</kbd></kbd> positioniert auf den vorherigen Akkord.</li>
+        <li><kbd><kbd>Strg</kbd>+<kbd>Leertaste</kbd></kbd> gibt ein <kbd><kbd>Leerzeichen</kbd></kbd> ein </li>
         </ul>
 
     Akkordnamen können wie normaler Text <a href="textedit.php">editiert</a> werden.
@@ -220,7 +220,7 @@
           <b>Verändern</b><br/>
           Ziehen sie einen Schlüssel von der Palette auf einen Schlüssel
           der Partitur. Statt von einer Palette kann mit
-          <key>Umsch+linkeMaustaste+Ziehen</key>;.<br/> auch ein
+          <kbd><kbd>Umsch</kbd>+<kbd class="mouse">linkeMaustaste</kbd>+Ziehen</kbd></kbd>;.<br/> auch ein
           Schlüssel der Partitur wie von einer Palette gezogen
           werden.
           <br/>
@@ -233,7 +233,7 @@
           <br/>
           <br/>
           <b>Löschen</b><br/>
-          Selektieren sie einen Schlüssel und drücken dann &lt;<b>Del</b>&gt;.
+          Selektieren sie einen Schlüssel und drücken dann <kbd><kbd>Del</kbd></kbd>.
           </td>
         <td>
           <img src="../pic/clefpalette.png"/>
@@ -277,12 +277,12 @@
     <br/>
     <table cellpadding="0" cellspacing="0">
       <tr>
-        <td><key>Doppelclick</key></td>
+        <td><kbd><kbd>Doppelclick</kbd></kbd></td>
         <td><sp/></td>
         <td> startet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
         </tr>
       <tr>
-        <td><key>Escape</key></td>
+        <td><kbd><kbd>Escape</kbd></kbd></td>
         <td/>
         <td> beendet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
         </tr>
@@ -300,39 +300,39 @@
     Verfügbare Tastaturkommandos:<br/>
     <br/>
     <table cellpadding="0" cellspacing="0">
-      <tr><td><key>Links</key></td>
+      <tr><td><kbd><kbd>Links</kbd></kbd></td>
         <td><sp/></td>
         <td>verschiebt Anfasser ein Spatium nach links</td>
         </tr>
-      <tr><td>&lt;<b>Rechts</b>&gt;</td>
+      <tr><td><kbd><kbd>Rechts</kbd></kbd></td>
       <td/>
       <td>verschiebt Anfasser ein Spatium nach rechts</td>
     </tr>
-      <tr><td>&lt;<b>Hoch</b>&gt;</td>
+      <tr><td><kbd><kbd>Hoch</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser ein Spatium nach oben</td>
         </tr>
-      <tr><td>&lt;<b>Tief</b>&gt;</td>
+      <tr><td><kbd><kbd>Tief</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser ein Spatium nach unten</td>
         </tr>
-      <tr><td>&lt;<b>Strg+Links</b>&gt;</td>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Links</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser 0,1 * Spatium nach links</td>
         </tr>
-      <tr><td><key>Strg+Rechts</key></td>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Rechts</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser 0,1 * Spatium nach rechts</td>
         </tr>
-      <tr><td>&lt;<b>Strg+Hoch</b>&gt;</td>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Hoch</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser 0,1 * Spatium nach oben</td>
         </tr>
-      <tr><td>&lt;<b>Strg+Tief</b>&gt;</td>
+      <tr><td><kbd><kbd>Strg</kbd>+<kbd>Tief</kbd></kbd></td>
           <td/>
           <td>verschiebt Anfasser 0,1 * Spatium nach unten</td>
         </tr>
-      <tr><td>&lt;<b>Tab</b>&gt;</td>
+      <tr><td><kbd><kbd>Tab</kbd></kbd></td>
           <td/>
           <td>gehe zum nächsten Anfasser</td>
         </tr>
@@ -440,37 +440,28 @@
     Rahmen sind Platzhalter außerhalb der normalen Takte. Sie können leer sein
     oder Texte oder Bilder enthalten. <i>MuseScore</i> kennt zwei Arten von
     Rahmen:
-    <br/>
-    <br/>
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-       <td valign="top"><b>horizontal</b></td>
-       <td><sp/></td>
-       <td>Diese Rahmen unterbrechen ein Notensystem. Ihe Breite ist einstellbar,
+    
+    <dl>
+    <dt>horizontal</dt>
+    <dd>Diese Rahmen unterbrechen ein Notensystem. Ihe Breite ist einstellbar,
            die Höhe enspricht der aktuellen Systemhöhe. Sie werden z.B. zum Absetzen
-           einer Coda benutzt.</td>
-       </tr>
-    <tr><td><br/></td></tr>
-    <tr>
-       <td valign="top"><b>vertikal</b></td>
-       <td/>
-       <td>Vertikale Rahmen schaffen Platz zwischen oder vor Notensystemen. Ihre
+           einer Coda benutzt.</dd>
+
+    <dt>vertikal</dt>
+    <dd>Vertikale Rahmen schaffen Platz zwischen oder vor Notensystemen. Ihre
        Höhe ist einstellbar und ihre Breite entspricht der Systembreite.
        Sie werden z.B. für Titel, Subtitel oder Komponist genutzt. Beim Erstellen
        eines Titels wird automatisch ein vertikaler Rahmen vor dem ersten Takt
-       erzeugt, wenn nicht bereits vorhanden.
-       </td>
-       </tr>
-    </table>
-    <br/>
+       erzeugt, wenn nicht bereits vorhanden.</dd>
+    </dl>
 
     <h5>Rahmen erzeugen</h5>
     Zunächst muß der Takt ausgewählt werden, <i>vor</i> dem ein Rahmen einfügt
     werden soll. Das Kommando zum Einfügen von Rahmen befindet sich unter
-    <b>Erzeugen->Takte</b>.
+    <kbd><samp class="menu">Erzeugen</samp> → <samp class="menuitem">Takte</samp></kbd>.
 
     <h5>Rahmen löschen</h5>
-    Rahmen markieren und dann &lt;<b>Entf</b>&gt; drücken.
+    Rahmen markieren und dann <kbd><kbd>Entf</kbd></kbd> drücken.
 
     <h5>Rahmen editieren</h5>
     Ein Doppelclick innerhalb eines Rahmens schalten in den
@@ -521,11 +512,11 @@
           gezogen wird.
           <br/>
 
-      &lt;<b>F9</b>&gt; zeigt das Palettenfenster.<br/>
+      <kbd><kbd>F9</kbd></kbd> zeigt das Palettenfenster.<br/>
       <br/>
       <b>Verändern</b><br/>
       Ziehe ein Tonartsymbol von der Tonartpalette auf ein Tonartsymbol
-      der Partitur. Mit <key>Umsch+line Maustaste+ziehen</key>; kann auch
+      der Partitur. Mit <kbd><kbd>Umsch</kbd>+<kbd class="mouse">line Maustaste</kbd>+ziehen</kbd></kbd>; kann auch
       ein Tonartsymbol der Partitur gezogen werden.
       <br/>
       <b>Zufügen</b><br/>
@@ -534,7 +525,7 @@
       <br/>
       <br/>
       <b>Entfernen</b><br/>
-      Wähle ein Tonartsymbol aus und drücke dann <key>Del</key>.
+      Wähle ein Tonartsymbol aus und drücke dann <kbd><kbd>Del</kbd></kbd>.
       </td>
       <td>
          <img src="../pic/keypalette.png"/>
@@ -558,39 +549,34 @@
 
 <page name="lyrics" header="Liedtext">
     <index>Liedtext</index>
-      <ul>
+      <ol>
         <li>Gib zuerst alle Noten ein.</li>
         <li>Wähle die erste Note aus.</li>
-        <li>Gib <code>&lt;<b>Strg+L</b>&gt;</code> ein um in den Editmodus zu gelangen
+        <li>Gib <kbd><kbd>Strg</kbd>+<kbd>L</kbd></kbd> ein um in den Editmodus zu gelangen
           und gib dann den Liedtext für die erste Note ein</li>
-        <li><code>&lt;<b>space</b>&gt;</code> positioniert auf die nächste Note.
-           </li>
-        <li>Die Eingabe von <code>&lt;<b>-</b>&gt;</code> positioniert auf die Note und
+        <li><kbd><kbd>space</kbd></kbd> positioniert auf die nächste Note.</li>
+        <li>Die Eingabe von <kbd><kbd>-</kbd></kbd> positioniert auf die Note und
            verbindet die letzte Silbe mit der aktuellen mit einem Strich.
            </li>
-        <li><code>&lt;<b>Umsch+Leertaste</b>&gt;</code> positioniert auf die vorherige Note.</li>
-        <li><code>&lt;<b>Strg+Space</b>&gt;</code> fügt ein <code>&lt;<b>Leerzeichen</b>&gt;</code>
+        <li><kbd><kbd>Umsch</kbd>+<kbd>Leertaste</kbd></kbd> positioniert auf die vorherige Note.</li>
+        <li><kbd><kbd>Strg</kbd>+<kbd>Space</kbd></kbd> fügt ein <samp>Leerzeichen</samp>
             in den Liedtext ein.
             </li>
-        <li><code>&lt;<b>Strg+Minus</b>&gt;</code> fügt ein<code>&lt;<b>-</b>&gt;</code> in den
+        <li><kbd><kbd>Strg</kbd>+<kbd>Minus</kbd></kbd> fügt ein <samp>-</samp> in den
             Liedtext ein (Silbentrenner).
             </li>
-        </ul>
+        </ol>
       <img src="../pic/lyrics.png" align="center"/>
-      <br/>
-      Soll eine Silbe über mehrere Noten gesungen werden, so wird dies
-      mit einem Unterstreichungsstrich angezeigt:
+      
+      <p>Soll eine Silbe über mehrere Noten gesungen werden, so wird dies
+      mit einem Unterstreichungsstrich angezeigt:</p>
       <img src="../pic/lyrics1.png" align="center"/>
-      <br/>
-      Der Text wird mit <key>"soul,"</key>
-      <key>_</key><key>_</key><key>_</key><key>"To"</key>
-      <key>Esc</key> erzeugt.
-      <br/>
-      <br/>
-      Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.
-      <br/>
-      <br/>
-      Siehe auch <a href="chordnames.php">Akkordnamen</a>.
+      
+      <p>Der Text wird mit <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd> erzeugt.
+      
+      <p>Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.</p>
+
+      <p>Siehe auch <a href="chordnames.php">Akkordnamen</a>.</p>
     </page>
 
 <page name="measures" header="Takte bearbeiten">
@@ -600,55 +586,47 @@
 
     <h5>Takte einfügen</h5>
 
-      Zunächst muß ein Takt selektiert werden. <key>Einfg</key> erzeugt einen neuen
+      Zunächst muß ein Takt selektiert werden. <kbd><kbd>Einfg</kbd></kbd> erzeugt einen neuen
       leeren Takt vor dem ausgewählten.
 
     <h5>Takte löschen</h5>
 
-      Um komplette Takte zu löschen, müssen sie zunächst mit <key>Strg+Click</key>
+      Um komplette Takte zu löschen, müssen sie zunächst mit <kbd><kbd>Strg</kbd>+<kbd class="mouse">Click</kbd></kbd>
       ausgewählt werden. Die Takte sind dann mit einer gestrichelten Linie umrandet um
-      anzuzeigen, das eine komplette Zeiteinheit selektiert wurde. <key>Entf</key> löscht
+      anzuzeigen, das eine komplette Zeiteinheit selektiert wurde. <kbd><kbd>Entf</kbd></kbd> löscht
       die so selektierten Takte.
 
     <h5>Eigenschaften</h5>
 
-    <table cellspacing="0" cellpadding="0">
-    <tr>
-      <td>
-          <b>Taktdauer</b><br/>
-          Normalerweise ist die nominelle und die tatsächliche Taktdauer gleich.
-          Ein Auftakt kann jedoch eine andere tatsächliche Dauer haben.
-          <br/><br/>
+    <img src="../pic/measure.png" style="float:right"/>
 
-          <b>Irregular</b><br/>
-            Wenn der Takt als irregular gekennzeichnet ist, dann wird er
-            nicht gezählt. Dieses Flag wird allgemein für Auftakte gesetzt.
-          <br/><br/>
+    <dl>
+    <dt>Taktdauer</dt>
+      <dd>Normalerweise ist die nominelle und die tatsächliche Taktdauer gleich.
+      Ein Auftakt kann jedoch eine andere tatsächliche Dauer haben.</dd>
 
-          <b>Wiederholungszahl</b><br/>
-            Wenn der Takt das Ende einer
-            <a href="repeats.php">Wiederholung</a> darstellt, dann kann hier
-            angegeben werden, wie oft wiederholt werden soll.
+    <dt>Irregular</dt>
+      <dd>Wenn der Takt als irregular gekennzeichnet ist, dann wird er
+      nicht gezählt. Dieses Flag wird allgemein für Auftakte gesetzt.</dd>
 
-         </td>
-      <td valign="top">
-         <img src="../pic/measure.png"/>
-     </td>
-      </tr>
-    </table>
+    <dt>Wiederholungszahl</dt>
+      <dd>Wenn der Takt das Ende einer
+      <a href="repeats.php">Wiederholung</a> darstellt, dann kann hier
+      angegeben werden, wie oft wiederholt werden soll.</dd>
+    </dl>
     </page>
 
 <page name="newscore" header="Neue Partitur erzeugen">
     <index>Neue Partitur erzeugen</index>
     <h5>Neue Partitur erzeugen</h5>
 
-    Der Menüeintrag &lt;<b>Partitur/Neu</b>&gt; erzeugt eine neue leere Partitur.
+    Der Menüeintrag <kbd><samp class="menu">Partitur</samp> → <samp class="menuitem">Neu</samp></kbd> erzeugt eine neue leere Partitur.
     Zunächst muß die leere Seite mit Instrumenten versehen werden, befor leere
     Takte erzeugt werden können.
           <ul>
-          <li>&lt;<b>I</b>&gt; zeigt das Instrumentenmenü</li>
-          <li>&lt;<b>Ctrl+B</b>&gt; hängt einen leeren neuen Takt an</li>
-          <li>das Menü &lt;<b>Erzeugen/Takte</b>&gt; ermöglicht das Erzeugen einer
+          <li><kbd><kbd>I</kbd></kbd> zeigt das Instrumentenmenü</li>
+          <li><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd> hängt einen leeren neuen Takt an</li>
+          <li>das Menü <kbd><samp clas="menu">Erzeugen</samp> → <samp class="menuitem">Takte</samp></kbd> ermöglicht das Erzeugen einer
              beliebigen Anzahl leere Takte.
              </li>
           </ul>
@@ -660,9 +638,9 @@
 
     <h5>Neue Partitur aus Template erzeugen</h5>
 
-    &lt;<b>N</b>&gt; zeigt das &lt;<b>Template</b>&gt; Menü.
+    <kbd><kbd>N</kbd></kbd> zeigt das Template Menü.
 
-    Wähle ein Template und bestätige mit &lt;<b>Ok</b>&gt;. Dies ist der einfachste
+    Wähle ein Template und bestätige mit <kbd><kbd>Ok</kbd></kbd>. Dies ist der einfachste
     Weg, um eine neue Partitur zu erzeugen. Templates sind normale <i>MuseScore</i> Dateien,
     die im Template-Verzeichnis stehen.
 
@@ -683,11 +661,11 @@
 
     <table cellspacing="0" cellpadding="0">
       <tr>
-        <td><key>N</key></td>
+        <td><kbd><kbd>N</kbd></kbd></td>
         <td><sp/><i>Noteneingabemodus</i> starten.</td>
         </tr>
       <tr>
-        <td><key>Escape</key></td>
+        <td><kbd><kbd>Escape</kbd></kbd></td>
         <td><sp/><i>Noteneingabemodus</i> beenden.</td>
         </tr>
       </table>
@@ -700,51 +678,51 @@
     <br/>
     <table cellspacing="0" cellpadding="0">
       <tr>
-        <td><key>Alt+1</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>1</kbd></kbd></td>
         <td><sp/>1/4 Note</td>
         <td><sp/><sp/></td>
-        <td><key>Alt+2</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>2</kbd></kbd></td>
         <td><sp/>1/8 Note</td>
         </tr>
       <tr>
-        <td><key>Alt+3</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>3</kbd></kbd></td>
         <td><sp/>1/16 Note</td>
         <td/>
-        <td><key>Alt+4</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>4</kbd></kbd></td>
         <td><sp/>1/32 Note</td>
         </tr>
       <tr>
-        <td><key>Alt+5</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>5</kbd></kbd></td>
         <td><sp/>1/64 Note</td>
         <td/>
-        <td><key>Alt+6</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>6</kbd></kbd></td>
         <td><sp/>1/1 Note</td>
         </tr>
       <tr>
-        <td><key>Alt+7</key></td>
+        <td><kbd><kbd>Alt</kbd>+<kbd>7</kbd></kbd></td>
         <td><sp/>1/2 Note</td>
         </tr>
       </table>
     <br/>
     <table>
     <tr>
-      <td>Noten werden durch drücken von <br/>&lt;<b>C D E F G A B</b>&gt; eingegeben:</td>
+      <td>Noten werden durch drücken von <br/><kbd>C D E F G A B</kbd> eingegeben:</td>
       <td><img src="../pic/noteentry1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Leertaste</b>&gt; erzeugt eine Pause<br/>&lt;<b>C D Leertaste E</b>&gt;:</td>
+      <td><kbd><kbd>Leertaste</kbd></kbd> erzeugt eine Pause<br/><kbd>C D <kbd>Leertaste</kbd> E</kbd>:</td>
       <td><img src="../pic/noteentry2.png" align="center"/></td>
       </tr>
     <tr>
       <td>
-          &lt;<b>Umsch+Notename</b>&gt;<br/> fügt eine Note zu einem Akkord hinzu
-          &lt;<b>C D Umsch+F Umsch+A E F</b>&gt;:
+          <kbd><kbd>Umsch</kbd>+Notename</kbd><br/> fügt eine Note zu einem Akkord hinzu
+          <kbd>C D <kbd>Umsch</kbd>+F <kbd>Umsch</kbd>+A E F</kbd>:
           </td>
       <td><img src="../pic/noteentry3.png" align="center"/></td>
       </tr>
     <tr>
       <td>Balken werden automatisch erzeugt<br/>
-          &lt;<b>Alt+1 C D Alt+2 E F G A</b>&gt;:
+          <kbd><kbd>Alt</kbd>+1 C D <kbd>Alt</kbd>+2 E F G A</kbd>:
       </td>
       <td><img src="../pic/noteentry4.png" align="center"/></td>
       </tr>
@@ -778,25 +756,25 @@
     <i>MuseScore</i> besitzt einen integrierten Sequenzer sowie einen
     Synthesizer, um die Partitur wiedergeben zu können.
     <br/>
-    Durch drücken des &lt;<b>Play</b>&gt; Buttons wird der &lt;<i>Playmodus</i>&gt;
-    gestartet. Im &lt;<i>Playmodus</i>&gt; sind die folgenden Kommandos verfügbar:
+    Durch drücken des Play <img src="../../pic/play.png" alt="[Play]"/> Buttons wird der <samp class="mode">Playmodus</samp>
+    gestartet. Im <samp class="mode">Playmodus</samp> sind die folgenden Kommandos verfügbar:
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-    <tr><td>&lt;<b>Leertaste</b>&gt;</td><td>Stop/Play Taster</td></tr>
-    <tr><td>&lt;<b>Links</b>&gt;</td><td> zum vorherigen Akkord</td></tr>
-    <tr><td>&lt;<b>Rechts</b>&gt;</td><td> zum nächsten Akkord</td></tr>
-    <tr><td>&lt;<b>Strg+Links</b>&gt;</td><td> zum vorherigen Takt</td></tr>
-    <tr><td>&lt;<b>Strg+Rechts</b>&gt;</td><td> zum nächsten Takt</td></tr>
-    <tr><td>&lt;<b>Pos1</b>&gt;</td><td>Zurück zum Anfang</td></tr>
-    <tr><td>&lt;<b>F11</b>&gt;</td><td>zeigt das Playpanel</td></tr>
+    <tr><td><kbd><kbd>Leertaste</kbd></kbd></td><td>Stop/Play Taster</td></tr>
+    <tr><td><kbd><kbd>Links</kbd></kbd></td><td> zum vorherigen Akkord</td></tr>
+    <tr><td><kbd><kbd>Rechts</kbd></kbd></td><td> zum nächsten Akkord</td></tr>
+    <tr><td><kbd><kbd>Strg</kbd>+<kbd>Links</kbd></kbd></td><td> zum vorherigen Takt</td></tr>
+    <tr><td><kbd><kbd>Strg</kbd>+<kbd>Rechts</kbd></kbd></td><td> zum nächsten Takt</td></tr>
+    <tr><td><kbd><kbd>Pos1</kbd></kbd></td><td>Zurück zum Anfang</td></tr>
+    <tr><td><kbd><kbd>F11</kbd></kbd></td><td>zeigt das Playpanel</td></tr>
     </table>
     <br/>
 
     <br/>
     Der voreingestellte Soundfont kann nur ein Instrument (Piano) spielen und
     klingt auch nicht so toll, ist dafür aber sehr klein. Besser klingende Soundfonts
-    können unter Bearbeiten/Einstellungen/Midi konfiguriert werden.
+    können unter <samp class="menu">Bearbeiten</samp> → <samp class="menuitem">Einstellungen</samp> → <samp class="tab">Midi konfiguriert</samp> werden.
     </page>
 
 <page name="repeats" header="Wiederholungen">
@@ -862,21 +840,21 @@
       <td><img src="../pic/slur1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>S</b>&gt; erzeugt einen Haltebogen
+      <td><kbd><kbd>S</kbd></kbd> erzeugt einen Haltebogen
       <br/>
       im <a href="editmode.php">Editiermodus</a>:</td>
       <td><img src="../pic/slur2.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Umsch+Right</b>&gt; verlängert den Bogen zur nächsten Note:</td>
+      <td><kbd><kbd>Umsch</kbd>+<kbd>Right</kbd></kbd> verlängert den Bogen zur nächsten Note:</td>
       <td><img src="../pic/slur3.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>X</b>&gt; kippt die Bogenrichtung:</td>
+      <td><kbd><kbd>X</kbd></kbd> kippt die Bogenrichtung:</td>
       <td><img src="../pic/slur4.png" align="center"/></td>
       </tr>
     <tr>
-      <td>&lt;<b>Escape</b>&gt; beendet den Editiermodus:</td>
+      <td><kbd><kbd>Escape</kbd></kbd> beendet den Editiermodus:</td>
       <td><img src="../pic/slur5.png" align="center"/></td>
       </tr>
     </table>
@@ -917,17 +895,17 @@
       Im <i>edit mode</i> stehen folgende Kommandos zur Verfügung:
 
       <ul>
-        <li><code>&lt;<b>Ctrl+B</b>&gt;</code> Fettschrift ein/aus</li>
-        <li><code>&lt;<b>Ctrl+I</b>&gt;</code> Kursivschrift ein/aus</li>
-        <li><code>&lt;<b>Ctrl+U</b>&gt;</code> Unterstreichen ein/aus</li>
-        <li><code>&lt;<b>Up</b>&gt;</code>Hochstellen</li>
-        <li><code>&lt;<b>Down</b>&gt;</code>Tiefstellen</li>
-        <li>Cursor bewegen: <code>&lt;<b>Pos1</b>&gt; &lt;<b>Ende</b>&gt; &lt;<b>Links</b>&gt;
-           &lt;<b>Rechts</b>&gt;</code></li>
-        <li><code>&lt;<b>Zurück</b>&gt;</code> löscht Zeichen links vom Cursor</li>
-        <li><code>&lt;<b>Delete</b>&gt;</code> löscht Zeichen rechts vom Cursor</li>
-        <li><code>&lt;<b>Return</b>&gt;</code> neue Zeile beginnen</li>
-        <li><code>&lt;<b>F2</b>&gt;</code> Zeigt die Textpalette. Die Textpalette kann
+        <li><code><kbd><kbd>Ctrl</kbd>+<kbd>B</kbd></kbd></code> Fettschrift ein/aus</li>
+        <li><code><kbd><kbd>Ctrl</kbd>+<kbd>I</kbd></kbd></code> Kursivschrift ein/aus</li>
+        <li><code><kbd><kbd>Ctrl</kbd>+<kbd>U</kbd></kbd></code> Unterstreichen ein/aus</li>
+        <li><code><kbd><kbd>Up</kbd></kbd></code>Hochstellen</li>
+        <li><code><kbd><kbd>Down</kbd></kbd></code>Tiefstellen</li>
+        <li>Cursor bewegen: <code><kbd><kbd>Pos1</kbd></kbd> <kbd><kbd>Ende</kbd></kbd> <kbd><kbd>Links</kbd></kbd>
+           <kbd><kbd>Rechts</kbd></kbd></code></li>
+        <li><code><kbd><kbd>Zurück</kbd></kbd></code> löscht Zeichen links vom Cursor</li>
+        <li><code><kbd><kbd>Delete</kbd></kbd></code> löscht Zeichen rechts vom Cursor</li>
+        <li><code><kbd><kbd>Return</kbd></kbd></code> neue Zeile beginnen</li>
+        <li><code><kbd><kbd>F2</kbd></kbd></code> Zeigt die Textpalette. Die Textpalette kann
             zur Eingabe von Zeichen und Symbolen verwendet werden, die nicht auf
             der Tastatur verfügbar sind.</li>
         </ul>
@@ -945,13 +923,13 @@
       <td><img src="../pic/tie1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Umsch+S</b>&gt; erzeugt einen Bindebogen:</td>
+      <td><kbd><kbd>Umsch</kbd>+<kbd>S</kbd></kbd> erzeugt einen Bindebogen:</td>
       <td><img src="../pic/tie2.png" align="center"/></td>
       </tr>
     </table>
 
     <br/>
-    Im Noteneingabemode wird bei Eingabe von &lt;<b>+</b>&gt; vor der
+    Im Noteneingabemode wird bei Eingabe von <kbd><kbd>+</kbd></kbd> vor der
     ersten Note die Note mit der nächsten durch einen Bindebogen
     verbunden.
     <br/>
@@ -979,8 +957,8 @@
 
     Eine Triole wird erstellt, indem zunächst eine Note mit der Dauer
     der kompletten Triole gesetzt wird. Selektieren sie die Note und
-    geben dann &lt;<b>Ctrl+3</b>&gt; ein um die Note in eine Triole zu
-    verwandeln. Entsprechend kann mit &lt;<b>Ctrl+5</b>&gt; eine Pentole
+    geben dann <kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> ein um die Note in eine Triole zu
+    verwandeln. Entsprechend kann mit <kbd><kbd>Ctrl</kbd>+<kbd>5</kbd></kbd> eine Pentole
     erstellt werden.
 
     <table>
@@ -989,7 +967,7 @@
       <td><img src="../pic/tuplet1.png" align="center"/></td>
     </tr>
     <tr>
-      <td>&lt;<b>Ctrl+3</b>&gt; erstellt eine Triole:</td>
+      <td><kbd><kbd>Ctrl</kbd>+<kbd>3</kbd></kbd> erstellt eine Triole:</td>
       <td><img src="../pic/tuplet2.png" align="center"/></td>
       </tr>
     <tr>
@@ -1008,11 +986,11 @@
     <br/>
     <table cellspacing="0" cellpadding="0">
     <tr>
-       <td><key>Ctrl+Z</key></td>
+       <td><kbd><kbd>Ctrl</kbd>+<kbd>Z</kbd></kbd></td>
        <td>Rückgängig machen</td>
        </tr>
     <tr>
-       <td><key>Ctrl+Umsch+Z</key></td>
+       <td><kbd><kbd>Ctrl</kbd>+<kbd>Umsch</kbd>+<kbd>Z</kbd></kbd></td>
        <td>Wiederherstellen ("Rückgängig machen" rückgängig machen)</td>
        </tr>
     </table>
@@ -1038,8 +1016,8 @@
     <br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
-      <tr><td><key>Umsch+Rechts</key></td><td><sp/>um einen Takt nach rechts</td></tr>
-      <tr><td><key>Umsch+Links</key></td><td><sp/>um einen Takt nach links</td></tr>
+      <tr><td><kbd><kbd>Umsch</kbd>+<kbd>Rechts</kbd></kbd></td><td><sp/>um einen Takt nach rechts</td></tr>
+      <tr><td><kbd><kbd>Umsch</kbd>+<kbd>Links</kbd></kbd></td><td><sp/>um einen Takt nach links</td></tr>
       </table>
     <br/>
     verschieben. Durch diese Kommandos wird das "logische" Ende bzw. der Anfang
@@ -1088,7 +1066,7 @@
     für einen ganzen Takt unabhängig von dessen tatsächlicher Länge.
     <br/>
     Eine Ganztaktpause kann durch markieren eines Taktes und anschließendem
-    drücken von <key>Entf</key> erstellt werden. Alle Noten und Pausen werden dabei
+    drücken von <kbd><kbd>Entf</kbd></kbd> erstellt werden. Alle Noten und Pausen werden dabei
     von einer Ganztaktpause ersetzt.
     </page>
 
@@ -1107,11 +1085,11 @@
     <br/>
     <table cellspacing="0" cellpadding="0">
       <tr>
-            <td><key>H</key></td>
+            <td><kbd><kbd>H</kbd></kbd></td>
             <td><sp/>erzeugt eine Crescendogabel</td>
             </tr>
       <tr>
-            <td><key>Umsch+H</key></td>
+            <td><kbd><kbd>Umsch</kbd>+<kbd>H</kbd></kbd></td>
             <td><sp/>erzeugt eine Diminuendogabel (Decrescendogabel)</td>
             </tr>
       </table>
@@ -1122,19 +1100,19 @@
     <br/>
     <table>
     <tr>
-      <td><key>H</key> erzeugt eine Crescendo Gabel:</td>
+      <td><kbd><kbd>H</kbd></kbd> erzeugt eine Crescendo Gabel:</td>
       <td><img src="../pic/hairpin1.png" align="center"/></td>
     </tr>
     <tr>
-      <td><key>Doppelclick</key> schaltet in den Edit Mode:</td>
+      <td><kbd><kbd>Doppelclick</kbd></kbd> schaltet in den Edit Mode:</td>
       <td><img src="../pic/hairpin2.png" align="center"/></td>
     </tr>
     <tr>
-      <td><key>Umsch+rechts</key> verschiebt den End-Anker:</td>
+      <td><kbd><kbd>Umsch</kbd>+<kbd>rechts</kbd></kbd> verschiebt den End-Anker:</td>
       <td><img src="../pic/hairpin3.png" align="center"/></td>
     </tr>
     <tr>
-      <td><key>rechts</key> verschiebt den Endpunkt:</td>
+      <td><kbd><kbd>rechts</kbd></kbd> verschiebt den Endpunkt:</td>
       <td><img src="../pic/hairpin4.png" align="center"/></td>
     </tr>
 
@@ -1155,7 +1133,7 @@
       <td><img src="../pic/crossbeams1.png" align="center"/></td>
       </tr>
     <tr>
-      <td><key>Umsch+Strg+Down</key>  verschiebt eine selektierte<br/>
+      <td><kbd><kbd>Umsch</kbd>+<kbd>Strg</kbd>+<kbd>Down</kbd></kbd>  verschiebt eine selektierte<br/>
           Note oder Akkord zur nächsten Notenzeile</td>
       <td><img src="../pic/crossbeams2.png" align="center"/></td>
       </tr>
