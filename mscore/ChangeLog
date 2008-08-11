@@ -1,3 +1,5 @@
+11.8. (ws)
+      - implemented Ctrl+V (paste) shortcut for text edit mode
 8.8 (ws)
       - added "All Supported files" as default for "Open File Dialog" ass suggested by
         Lasconic

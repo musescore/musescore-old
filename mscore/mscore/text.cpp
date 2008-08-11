@@ -1128,11 +1128,24 @@ bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
       if (!setCursor(p))
             return false;
 
-      if (ev->button() == Qt::MidButton) {
-            QString txt = QApplication::clipboard()->text(QClipboard::Selection);
-            cursor->insertText(txt);
-            }
+      if (ev->button() == Qt::MidButton)
+            paste();
       return true;
+      }
+
+//---------------------------------------------------------
+//   paste
+//---------------------------------------------------------
+
+void TextB::paste()
+      {
+      QString txt = QApplication::clipboard()->text(QClipboard::Selection);
+      cursor->insertText(txt);
+      layout(0);
+      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
+      score()->setLayoutAll(lo);
+      score()->setUpdateAll();
+      score()->end();
       }
 
 //---------------------------------------------------------

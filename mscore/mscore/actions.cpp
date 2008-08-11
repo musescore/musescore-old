@@ -130,8 +130,8 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "paste",
          QT_TR_NOOP("paste"),
-         Qt::CTRL+Qt::Key_V,        // QKeySequence::Paste,
-         Qt::WindowShortcut,
+         Qt::CTRL+Qt::Key_V,        //  QKeySequence::Paste,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("Paste"),
          QT_TR_NOOP(""),
          &pasteIcon

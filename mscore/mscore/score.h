@@ -241,6 +241,7 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void cmdExchangeVoice(int, int);
+      void cmdPaste();
 
    public slots:
       void doUndo();
@@ -273,7 +274,7 @@ class Score : public QObject {
       Selection* sel;
 
       Element* origEditObject;
-      Element* editObject;
+      Element* editObject;    ///< Valid in edit mode
 
       System* dragSystem;     ///< Valid if DRAG_STAFF.
       int dragStaff;
@@ -388,7 +389,6 @@ class Score : public QObject {
       void searchSelectedElements();
 
       bool needLayout() const;
-//      void doLayout();
 
       void upDown(bool up, bool octave);
       Element* searchNote(int tick, int track) const;

@@ -1417,6 +1417,11 @@ void Score::cmd(const QString& cmd)
             printf("cmd <%s>\n", cmd.toLatin1().data());
 
       if (editObject) {                          // in edit mode?
+            if (cmd == "paste") {
+                  if (editObject->isTextB())
+                        static_cast<TextB*>(editObject)->paste();
+                  return;
+                  }
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             endCmd();
             }
@@ -1740,47 +1745,8 @@ void Score::cmd(const QString& cmd)
                         QApplication::clipboard()->setMimeData(mimeData);
                         }
                   }
-            else if (cmd == "paste") {
-                  const QMimeData* ms = QApplication::clipboard()->mimeData();
-                  if (sel->state() == SEL_SINGLE && ms && ms->hasFormat(mimeSymbolFormat)) {
-                        QByteArray data(ms->data(mimeSymbolFormat));
-                        QDomDocument doc;
-                        int line, column;
-                        QString err;
-                        if (!doc.setContent(data, &err, &line, &column)) {
-                              printf("error reading paste data at line %d column %d: %s\n",
-                                 line, column, qPrintable(err));
-                              printf("%s\n", data.data());
-                              return;
-                              }
-                        docName = "--";
-                        QDomElement e = doc.documentElement();
-                        QPointF dragOffset;
-                        int type    = Element::readType(e, &dragOffset);
-                        if (type != -1) {
-                              Element* el = Element::create(type, this);
-                              el->read(e);
-                              addRefresh(sel->element()->abbox());   // layout() ?!
-                              sel->element()->drop(QPointF(), QPointF(), el);
-                              if (sel->element())
-                                    addRefresh(sel->element()->abbox());
-                              }
-                        }
-                  else if (sel->state() == SEL_STAFF && ms && ms->hasFormat(mimeStaffListFormat))
-                        pasteStaff(ms);
-                  else if (sel->state() == SEL_SYSTEM && ms && ms->hasFormat(mimeMeasureListFormat)) {
-                        printf("paste system\n");
-                        }
-                  else {
-                        printf("paste not supported: sel state %d ms %p\n", sel->state(), ms);
-                        if (ms) {
-                              QStringList formats = ms->formats();
-                              printf("Formate:\n");
-                              foreach(QString s, formats)
-                                    printf("format <%s>\n", s.toLatin1().data());
-                              }
-                        }
-                  }
+            else if (cmd == "paste")
+                  cmdPaste();
             else if (cmd == "lyrics")
                   return addLyrics();
             else if (cmd == "tempo")
@@ -1851,6 +1817,39 @@ void Score::cmd(const QString& cmd)
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdPaste
+//---------------------------------------------------------
+
+void Score::cmdPaste()
+      {
+      const QMimeData* ms = QApplication::clipboard()->mimeData();
+      if (sel->state() == SEL_SINGLE && ms && ms->hasFormat(mimeSymbolFormat)) {
+            QByteArray data(ms->data(mimeSymbolFormat));
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading paste data at line %d column %d: %s\n",
+                     line, column, qPrintable(err));
+                  printf("%s\n", data.data());
+                  return;
+                  }
+            docName = "--";
+            QDomElement e = doc.documentElement();
+            QPointF dragOffset;
+            int type    = Element::readType(e, &dragOffset);
+            if (type != -1) {
+                  Element* el = Element::create(type, this);
+                  el->read(e);
+                  addRefresh(sel->element()->abbox());   // layout() ?!
+                  sel->element()->drop(QPointF(), QPointF(), el);
+                  if (sel->element())
+                        addRefresh(sel->element()->abbox());
+                  }
             }
       }
 
