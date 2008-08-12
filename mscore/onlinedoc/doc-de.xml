@@ -74,24 +74,15 @@
 
 <page name="beams" header="Balken">
     <index>Balken</index>
-    <table>
-      <tr>
-        <td>
-          Balken werden automatisch gesetzt. Diese Automatik kann mit
-          manuell gesetzten Hinweisen gesteuert werden. Ziehen sie dazu
-          das passende Symbol von der Balken-Palette auf die Note, deren
-          Balkenverhalten geändert werden soll.<br/>
-          Sie können auch zuerst eine Note auswählen und dann auf das
-          Balkensymbol doppelclicken.
-          </td>
-        <td>
-          <img src="../pic/beampalette.png"/>
-          </td>
-        </tr>
-      </table>
+    <img src="../pic/beampalette.png" style="float:right"/>
+    <p>Balken werden automatisch gesetzt. Diese Automatik kann mit
+    manuell gesetzten Hinweisen gesteuert werden. Ziehen sie dazu
+    das passende Symbol von der Balken-Palette auf die Note, deren
+    Balkenverhalten geändert werden soll.</p>
+    
+    <p>Sie können auch zuerst eine Note auswählen und dann auf das
+    Balkensymbol doppelclicken.</p>
 
-    <br/>
-    <br/>
     <table cellpadding="0" cellspacing="0">
       <tr>
         <td><img src="../pic/beambutton1.png"/></td>
@@ -146,7 +137,7 @@
       <br/>
       <b>Editieren</b><br/>
       Doppelklicken sie auf eine Klammer um in den
-       <a href="editmode.php">Editmodus</a> zu gelangen. Im Editmodus kann die Höhe
+       <samp class="mode"><a href="editmode.php">Editmodus</a></samp> zu gelangen. Im <samp class="mode">Editmodus</samp> kann die Höhe
        der Klammer verändert werden, um beliebige Notenzeilen zu klammern.
     </page>
 
@@ -194,7 +185,7 @@
       Akkordnamen können gesetzt werden, indem eine Note des Akkordes selektiert
       und dann <code><kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd></code> gedrückt wird.
       Dies erzeugt einen Akkordnamen und schaltet in den
-      <a href="textedit.php"><i>Editmodus</i></a>.
+      <samp class="mode"><a href="textedit.php">Editmodus</a></samp>.
       <br/>
       <br/>
       Zusätzlich stehen folgenden Kommandos zur Verfügung:
@@ -270,30 +261,30 @@
 
 <page name="editmode" header="Editiermodus">
     <index>Editiermodus</index>
-    Viele Elemente der Partitur können im &lt;<i><b>Edit Mode</b></i>&gt;:
+    Viele Elemente der Partitur können im <samp class="mode">Editiermodus</samp>:
     <br/>
     editiert werden.
 
     <br/>
     <table cellpadding="0" cellspacing="0">
       <tr>
-        <td><kbd><kbd>Doppelclick</kbd></kbd></td>
+        <td><kbd><kbd class="mouse">Doppelclick</kbd></kbd></td>
         <td><sp/></td>
-        <td> startet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
+        <td> startet den <samp class="mode">Editiermodus</samp></td>
         </tr>
       <tr>
         <td><kbd><kbd>Escape</kbd></kbd></td>
         <td/>
-        <td> beendet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
+        <td> beendet den <samp class="mouse">Editiermodus</samp></td>
         </tr>
      </table>
     <br/>
 
-    Einige Elemente zeigen im Editiermodus <i>Anfasser</i>, die mit
+    Einige Elemente zeigen im <samp class="mode">Editiermodus</samp> <i>Anfasser</i>, die mit
     der Maus oder mit Tastaturkommandos verschoben werden können.
     <br/>
     <br/>
-    <a href="slurs.php">Haltebogen</a> im Editiermodus: <img src="../pic/slur4.png" align="center"/>
+    <a href="slurs.php">Haltebogen</a> im <samp class="mode">Editiermodus</samp>: <img src="../pic/slur4.png" align="center"/>
     <br/>
     <br/>
 
@@ -465,10 +456,10 @@
 
     <h5>Rahmen editieren</h5>
     Ein Doppelclick innerhalb eines Rahmens schalten in den
-    <a href="editmode.php"><b>Editiermodus</b></a>.
+    <samp class="mode"><a href="editmode.php">Editiermodus</a></samp>.
     Es erscheint ein Anfasser, mit dem die Größe des Rahmens verstellt werden
     kann.<br/><br/>
-    Titelrahmen im Editiermodus:<br/><br/>
+    Titelrahmen im <samp class="mode">Editiermodus</samp>:<br/><br/>
 
     <img src="../pic/frame.png"/>
     </page>
@@ -552,7 +543,7 @@
       <ol>
         <li>Gib zuerst alle Noten ein.</li>
         <li>Wähle die erste Note aus.</li>
-        <li>Gib <kbd><kbd>Strg</kbd>+<kbd>L</kbd></kbd> ein um in den Editmodus zu gelangen
+        <li>Gib <kbd><kbd>Strg</kbd>+<kbd>L</kbd></kbd> ein um in den <samp class="mode">Editmodus</samp> zu gelangen
           und gib dann den Liedtext für die erste Note ein</li>
         <li><kbd><kbd>space</kbd></kbd> positioniert auf die nächste Note.</li>
         <li>Die Eingabe von <kbd><kbd>-</kbd></kbd> positioniert auf die Note und
@@ -652,7 +643,7 @@
     <index>Noten Eingeben</index>
     <index>Pausen Eingeben</index>
 
-    Noten werden im &lt;<i>Noteneingabemodus</i>&gt; eingegeben. Wähle zunächst eine
+    Noten werden im <samp class="mode">Noteneingabemodus</samp> eingegeben. Wähle zunächst eine
     Note oder eine Pause als Startposition für die Noteneingabe aus. Beim Eingeben
     von Noten werden immer Pausen oder bereits eingegebene Noten durch die neue
     Note ersetzt. Die Dauer eines Taktes ist vorgegeben und ändert sich dadurch nicht.
@@ -662,17 +653,17 @@
     <table cellspacing="0" cellpadding="0">
       <tr>
         <td><kbd><kbd>N</kbd></kbd></td>
-        <td><sp/><i>Noteneingabemodus</i> starten.</td>
+        <td><sp/><samp class="mode">Noteneingabemodus</samp> starten.</td>
         </tr>
       <tr>
         <td><kbd><kbd>Escape</kbd></kbd></td>
-        <td><sp/><i>Noteneingabemodus</i> beenden.</td>
+        <td><sp/><samp class="mode">Noteneingabemodus</samp> beenden.</td>
         </tr>
       </table>
     <br/>
 
 
-    Im &lt;<i>Noteneingabemodus</i>&gt; kann die Dauer der nächsten
+    Im <samp class="mode">Noteneingabemodus</samp> kann die Dauer der nächsten
     Note aus der Notenpalette oder mit folgenden Tastaturkürzel gewählt werden:
     <br/>
     <br/>
@@ -756,7 +747,7 @@
     <i>MuseScore</i> besitzt einen integrierten Sequenzer sowie einen
     Synthesizer, um die Partitur wiedergeben zu können.
     <br/>
-    Durch drücken des Play <img src="../../pic/play.png" alt="[Play]"/> Buttons wird der <samp class="mode">Playmodus</samp>
+    Durch drücken des Play <img src="../../pic/play.png" alt=""/> Buttons wird der <samp class="mode">Playmodus</samp>
     gestartet. Im <samp class="mode">Playmodus</samp> sind die folgenden Kommandos verfügbar:
     <br/>
     <br/>
@@ -842,7 +833,7 @@
     <tr>
       <td><kbd><kbd>S</kbd></kbd> erzeugt einen Haltebogen
       <br/>
-      im <a href="editmode.php">Editiermodus</a>:</td>
+      im <samp class="mode"><a href="editmode.php">Editiermodus</a></samp>:</td>
       <td><img src="../pic/slur2.png" align="center"/></td>
       </tr>
     <tr>
@@ -854,18 +845,16 @@
       <td><img src="../pic/slur4.png" align="center"/></td>
       </tr>
     <tr>
-      <td><kbd><kbd>Escape</kbd></kbd> beendet den Editiermodus:</td>
+      <td><kbd><kbd>Escape</kbd></kbd> beendet den <samp class="mode">Editiermodus</samp>:</td>
       <td><img src="../pic/slur5.png" align="center"/></td>
       </tr>
     </table>
 
-    <br/>
-    Ein Haltebogen kann mehrere Systeme oder Seiten überspannen. Der Anfang
+    <p>Ein Haltebogen kann mehrere Systeme oder Seiten überspannen. Der Anfang
     und das Ende eines Haltebogens ist an einer Note oder Pause verankert.
     Verschieben sich die Notenpositionen nach einem Relayout, dann verschiebt
-    sich auch der Haltbogen.
-    <br/>
-    <br/>
+    sich auch der Haltbogen.</p>
+    
     Siehe auch
           <a href="ties.php">Bindebögen</a>,
           <a href="editmode.php">Edit Mode</a>.
@@ -889,7 +878,7 @@
 
 <page name="textedit" header="Text Editieren">
     <index>Text Editieren</index>
-      Ein Doppelclick auf einen Text startet den <i>Editiermodus</i>:
+      Ein Doppelclick auf einen Text startet den <samp class="mode">Editiermodus</samp>:
       <img src="../pic/textedit.png" align="center"/><br/>
       <br/>
       Im <i>edit mode</i> stehen folgende Kommandos zur Verfügung:
@@ -1011,7 +1000,7 @@
     <br/>
 
     Die Klammern können auch mehr als einen Takt überspannen. Durch Doppelclick
-    auf eine Klammer kommen wir in den Editmodus und können die Anfasser
+    auf eine Klammer kommen wir in den <samp class="mode">Editmodus</samp> und können die Anfasser
     mit den Kommandos
     <br/>
     <br/>
@@ -1022,7 +1011,7 @@
     <br/>
     verschieben. Durch diese Kommandos wird das "logische" Ende bzw. der Anfang
     verschoben, die bestimmen, welche Takte die Volta umklammert.
-    Andere Kommandos im <a href="editmode.php">Editiermodus</a> verschieben die
+    Andere Kommandos im <samp class="mode"><a href="editmode.php">Editiermodus</a></samp> verschieben die
     Anfasser auch, haben jedoch keine Auswirkungen bei der Wiedergabe der
     Wiederholungen sondern wirken nur optisch.
     Wird der Anfang oder das Ende einer Voltaklammer verschoben, dann zeigt eine

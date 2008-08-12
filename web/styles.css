@@ -102,7 +102,7 @@ samp {
 samp.mode {
   font-family: sans-serif;
   background-color: #b0bef2;
-  padding: 1px 4px;
+  padding: 0px 1px;
 }
 samp.button {
   border: 1px solid gray;

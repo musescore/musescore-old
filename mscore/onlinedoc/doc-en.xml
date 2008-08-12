@@ -95,23 +95,13 @@
 
 <page name="beams" header="Beams">
     <index>Beams</index>
-    <table>
-    <tr><td>
-          Beams are set automatically but the automatic setting can be
-          overridden manually. Drag a beam symbol from the
-          beam palette to a note in order to change its beam behavior.
-          <br/>
-          You can also first select a note and then double click the
-          appropriate symbol in the beam palette.
-          <br/>
-          <br/>
-
-      </td>
-      <td>
-         <img src="../pic/beampalette.png" alt="Beam pallete"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/beampalette.png" alt="Beam pallete" style="float:right"/>
+    <p>Beams are set automatically but the automatic setting can be
+    overridden manually. Drag a beam symbol from the
+    beam palette to a note in order to change its beam behavior.</p>
+    
+    <p>You can also first select a note and then double click the
+    appropriate symbol in the beam palette.</p>
 
     <table cellpadding="0" cellspacing="0">
       <tr><td><img src="../pic/beambutton1.png" alt="Start beam button"/></td>
@@ -249,7 +239,7 @@
 
     <table cellpadding="0" cellspacing="0">
      <tr>
-        <td><kbd><kbd>Double Click</kbd></kbd></td>
+        <td><kbd><kbd class="mouse">Double Click</kbd></kbd></td>
         <td><sp/></td>
         <td> start <samp class="mode">Edit Mode</samp></td>
         </tr>
@@ -476,7 +466,7 @@
 
       Complete measures can be deleted by first selecting them with <kbd><kbd>Ctrl</kbd>+<kbd class="mouse">Click</kbd></kbd>.
       The measure is marked with a dotted line indicating that you selected a "piece of time".
-      Press <kbd><kbd>Shift</kbd>+<kbd class="mosue">Click</kbd></kbd> to extend the selection.
+      Press <kbd><kbd>Shift</kbd>+<kbd class="mouse">Click</kbd></kbd> to extend the selection.
       Pressing <kbd><kbd>Del</kbd></kbd> removes the selected measures.
 
 
@@ -622,7 +612,7 @@
     <index>Play Mode</index>
     <i>MuseScore</i> has an integrated sequencer and synthesizer to play
     your score.<br/>
-    By pressing the Play <img src="../../pic/play.png" alt="[Play]"/> button you enter <samp class="mode">Play mode</samp>. In <samp class="mode">Play mode</samp> the following commands are available:<br/>
+    By pressing the Play <img src="../../pic/play.png" alt=""/> button you enter <samp class="mode">Play mode</samp>. In <samp class="mode">Play mode</samp> the following commands are available:<br/>
     <br/>
     <table cellspacing="0" cellpadding="0">
     <tr><td><kbd><kbd>Space</kbd></kbd></td><td>toggle stop/play</td></tr>
@@ -678,11 +668,10 @@
       </tr>
     </table>
 
-    <br/>
-    A slur can span several systems and pages. Slur start and end is anchored to
+    <p>A slur can span several systems and pages. Slur start and end is anchored to
     a note/chord or rest. This means that if the notes move in a relayout,
-    the slur moves to.<br/>
-    <br/>
+    the slur moves to.</p>
+    
     See also
           <a href="ties.php">Ties</a>,
           <a href="editmode.php">Edit Mode</a>.
@@ -888,23 +877,17 @@
     <index>Voices</index>
     <p><strong>Note:</strong> The MuseScore implementation of voices is not yet complete and subject to change.</p>
     
-    <h5>Enter notes into separate voices</h5>
+    <h5>Enter multiple voices per staff:</h5>
     <ol>
-    <li>To show two voices on one staff, first start by entering the top voice (all the up-stem notes).</li>
-    <li>When you enter the notes some may have down-stems. You can flip the stem direction by clicking the "Flip direction" button <img src="../pic/flipdirection" alt="Flip direction"/> on the toolbar or pressing <kbd><kbd>X</kbd></kbd> on the keyboard.<br/>
+    <li>First start by entering the top voice (all the up-stem notes).</li>
+    <li>When you enter the notes some may have down-stems. You can flip the stem direction by clicking the "Flip direction" button <img src="../pic/flipdirection.png" alt=""/> on the toolbar or pressing <kbd><kbd>X</kbd></kbd> on the keyboard.<br/>
     <img src="../pic/voices1.png" alt="Voice 1 notes with up-stems"/></li>
     <li>Now select the first note to move your cursor back to the begining of the line.</li>
-    <li>Click on "Voice 2" button <img src="../pic/voicebuttons2.png" alt="Voice buttons" title="Voice 2 selected"/> and start entering the bottom voice (all the down-stem notes).</li>
-    <li>Be sure to flip the stems as to go along using <kbd><kbd>X</kbd></kbd> or <img src="../pic/flipdirection" alt="Flip direction"/></li>
+    <li>Click on "Voice 2" button <img src="../pic/voice2button.png" title="Voice 2 selected"/> and start entering the bottom voice (all the down-stem notes).</li>
+    <li>Remember to flip the stems as to go along using <kbd><kbd>X</kbd></kbd> on the keyboard or the flip direction button <img src="../pic/flipdirection.png" alt=""/></li>
     <li>When you are done it should look like this:<br/>
     <img src="../pic/voices2.png" alt="Voices 1 and 2"/></li>
     </ol>
-    
-    <h5>Troubleshooting</h5>
-    <dl>
-    <dt>Stems not flipping independently for top and the bottom notes note</dt>
-    <dd>If the notes are both in the same voice they cannot flip independently. <em>Solution</em>: re-enter the problem note in the correct voice. Check the voice buttons on the toolbar to make sure you are in the correct voice. It is easy to switch voices accidentally by clicking on a note in a different voice.</dd>
-    </dl>
     
     <h5>When to use voices</h5>
     <ul>

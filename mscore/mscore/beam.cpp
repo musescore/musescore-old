@@ -47,6 +47,10 @@ static BeamHint startBeamList[] = {
 //---------------------------------------------------------
 
 static BeamHint endBeamList[] = {
+      // in 2 2 time
+      //  end beams each 1 2 note
+      BeamHint(0,  0,  2,  2, 1, 2 ),
+
       // in 3 2 time:
       //   end beams each 1 2 note
       //   end beams with 16th notes each 1 4 note
@@ -55,7 +59,7 @@ static BeamHint endBeamList[] = {
       //       note   timesig  position
 
       BeamHint(0,  0, 3, 2,  1, 2 ),
-      BeamHint(0,  0, 3, 1,  2, 2 ),
+      BeamHint(0,  0, 3, 2,  2, 2 ),
 
       BeamHint(1, 16, 3, 2,  1, 4 ),
       BeamHint(1, 16, 3, 2,  1, 2 ),
@@ -70,26 +74,27 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32, 3, 2,  5, 8 ),
       BeamHint(1, 32, 3, 2,  3, 4 ),
       BeamHint(1, 32, 3, 2,  7, 8 ),
+      BeamHint(1, 32, 3, 2,  1, 1 ),
       BeamHint(1, 32, 3, 2,  9, 8 ),
       BeamHint(1, 32, 3, 2,  5, 4 ),
       BeamHint(1, 32, 3, 2, 11, 8 ),
 
-      // in 2 2 time
-      //  end beams each 1 2 note
-      BeamHint(0,  0,  2,  2, 1, 2 ),
+      BeamHint(0,  0,  2,  4, 0, 0 ),  // switch-off at-any-beat feature
+      BeamHint(0,  0,  2,  4, 1, 4 ),
+      BeamHint(1, 32,  2,  4, 1, 8 ),
+      BeamHint(1, 32,  2,  4, 3, 8 ),
       
-      BeamHint(0,  0, 3, 4,  3, 4 ),
+      BeamHint(0,  0,  3, 4,  1, 4 ),
+      BeamHint(0,  0,  3, 4,  1, 2 ),
+      
+      BeamHint(1, 16,  3, 4,  1, 4 ),
+      BeamHint(1, 16,  3, 4,  1, 2 ),
 
-      BeamHint(1, 16, 3, 4,  1, 4 ),
-      BeamHint(1, 16, 3, 4,  1, 2 ),
-
-      BeamHint(1, 32, 3, 4,  1, 8 ),
-      BeamHint(1, 32, 3, 4,  1, 4 ),
-      BeamHint(1, 32, 3, 4,  3, 8 ),
-      BeamHint(1, 32, 3, 4,  1, 2 ),
-      BeamHint(1, 32, 3, 4,  5, 8 ),
-
-      BeamHint(0,  0, 3, 8,  3, 8 ),
+      BeamHint(1, 32,  3, 4,  1, 8 ),
+      BeamHint(1, 32,  3, 4,  1, 4 ),
+      BeamHint(1, 32,  3, 4,  3, 8 ),
+      BeamHint(1, 32,  3, 4,  1, 2 ),
+      BeamHint(1, 32,  3, 4,  5, 8 ),
 
       // in common time:
       //   end beams each 1 2 note
@@ -110,21 +115,17 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32,  4,  4, 3, 4 ),
       BeamHint(1, 32,  4,  4, 7, 8 ),
 
-      BeamHint(1,  8,  6,  4, 1, 4 ),     // for promenade demo (ws)
-      BeamHint(1,  8,  6,  4, 3, 4 ),
+      BeamHint(0,  0,  5,  4, 3, 4 ),
+      
+      BeamHint(0,  0,  6,  4, 3, 4 ),
+      //BeamHint(1,  8,  6,  4, 1, 4 ),     // for promenade demo (ws)    //Moved custom beaming to promenade file (db)
 
-      BeamHint(0,  0,  2,  4, 0, 0 ),  // switch-off at-any-beat feature
-      BeamHint(0,  0,  2,  4, 1, 4 ),
-      BeamHint(1, 32,  2,  4, 1, 8 ),
-      BeamHint(1, 32,  2,  4, 3, 8 ),
+      BeamHint(0,  0,  3,  8, 3, 8 ),
 
       BeamHint(0,  0,  4,  8, 0, 0 ), // switch-off at-any-beat feature
       BeamHint(0,  0,  4,  8, 1, 4 ),
       BeamHint(1, 32,  4,  8, 1, 8 ),
       BeamHint(1, 32,  4,  8, 3, 8 ),
-
-      BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
-      BeamHint(0,  0,  4, 16, 1, 8 ),
 
       BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature
       BeamHint(0,  0,  6, 8,  3, 8 ),
@@ -150,6 +151,16 @@ static BeamHint endBeamList[] = {
       BeamHint(0,  0, 12, 8,  9, 8 ),
       BeamHint(0,  0, 12, 8,  2, 1 ),
       BeamHint(1, 32, 12, 8,  1, 8 ),
+      
+      //Experiment: triplet meter without switch-off at-any-beat line (DB)
+      BeamHint(0,  0, 15, 8,  3, 8 ),
+      BeamHint(0,  0, 15, 8,  3, 4 ),
+      BeamHint(0,  0, 15, 8,  9, 8 ),
+      BeamHint(0,  0, 15, 8,  6, 4 ),
+      
+      BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
+      BeamHint(0,  0,  4, 16, 1, 8 ),
+
       };
 
 //---------------------------------------------------------

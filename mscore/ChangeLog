@@ -1,3 +1,5 @@
+12.8 (db)
+      - Fixed beaming for the most common simple time signatures
 12.8  (ws)
       - put dot after a note always in the space above a note if note is on
         a line (tracker item 2012110)
