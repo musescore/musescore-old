@@ -1,3 +1,6 @@
+12.8  (ws)
+      - put dot after a note always in the space above a note if note is on
+        a line (tracker item 2012110)
 11.8. (ws)
       - implemented Ctrl+V (paste) shortcut for text edit mode
 8.8 (ws)
