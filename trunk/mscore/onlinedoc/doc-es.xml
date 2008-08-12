@@ -94,23 +94,13 @@
 
 <page name="beams" header="Agrupaciones">
     <index>Agrupaciones</index>
-    <table>
-    <tr><td>
-          Las agrupaciones de notas se van creando de forma automática, pero
-          podemos modificarlas manualmente. Para ello arrastramos el símbolo de
-          agrupación desde la paleta de agrupaciones hacia la nota que queremos
-          modificar. Otra forma de hacerlo es seleccionar primero la nota y
-          después hacer doble clic en el símbolo apropiado de la paleta
-          de agrupaciones.
-          <br/>
-          <br/>
-
-      </td>
-      <td>
-         <img src="../pic/beampalette.png"/>
-         </td>
-      </tr>
-      </table>
+    <img src="../pic/beampalette.png" style="float:right"/>
+    <p>Las agrupaciones de notas se van creando de forma automática, pero
+    podemos modificarlas manualmente. Para ello arrastramos el símbolo de
+    agrupación desde la paleta de agrupaciones hacia la nota que queremos
+    modificar. Otra forma de hacerlo es seleccionar primero la nota y
+    después hacer doble clic en el símbolo apropiado de la paleta
+    de agrupaciones.</p>
 
     <table cellpadding="0" cellspacing="0">
       <tr><td><img src="../pic/beambutton1.png"/></td>
@@ -281,24 +271,24 @@
 <page name="editmode" header="Modo de Edición">
     <index>Modo de Edición</index>
     Muchos elementos en la partitura pueden ser editados en el
-    &lt;<i><b>Modo de Edición</b></i>&gt;:<br/>
+    <samp class="mode">Modo de Edición</samp>:<br/>
     <br/>
 
     <table cellpadding="0" cellspacing="0">
      <tr>
-        <td><kbd><kbd>Doble Click</kbd></kbd></td>
+        <td><kbd><kbd class="mouse">Doble Click</kbd></kbd></td>
         <td><sp/></td>
-        <td> inicia &lt;<i><b>Modo de Edición</b></i>&gt; </td>
+        <td> inicia <samp class="mode">Modo de Edición</samp></td>
         </tr>
      <tr>
         <td><kbd><kbd>Escape</kbd></kbd></td>
         <td/>
-        <td> termina &lt;<i><b>Modo de Edición</b></i>&gt; </td>
+        <td> termina <samp class="mode">Modo de Edición</samp></td>
         </tr>
      </table>
     <br/>
 
-    Some elements show <i>handles</i> in edit mode which can be
+    Some elements show <i>handles</i> in <samp class="mode">edit mode</a> which can be
     moved by mouse dragging or keyboard commands.
     <br/>
     <br/>
@@ -606,19 +596,19 @@
     <index>Ingresar Acordes</index>
     <index>Ingresar Pausas</index>
 
-    Las notas son ingresadas en el modo &lt;<i>Note Edit</i>&gt;.
+    Las notas son ingresadas en el modo <samp class="mode">Note Edit</samp>;.
     Primero seleciona una nota o una pausa como posición inicial. Cuando ingresas
     notas siempre estás reemplazando notas o pausas existentes. Por eso la duración
     de un compás no cambia.
     <br/><br/>
 
     <table cellspacing="0" cellpadding="0">
-    <tr><td><kbd><kbd>N</kbd></kbd></td><td>ingresa al modo &lt;<i>Note Edit</i>&gt;.</td></tr>
-    <tr><td><kbd><kbd>Escape</kbd></kbd></td><td> deja el modo &lt;<i>Note Edit</i>&gt;.</td></tr>
+    <tr><td><kbd><kbd>N</kbd></kbd></td><td>ingresa al modo <samp class="mode">Note Edit</samp>.</td></tr>
+    <tr><td><kbd><kbd>Escape</kbd></kbd></td><td> deja el modo <samp class="mode">Note Edit</samp>.</td></tr>
     </table>
     <br/>
 
-    Luego de entrar al modo &lt;<i>Note Edit</i>&gt; debes seleccionar la duración de la nota que quieres
+    Luego de entrar al modo <samp class="mode">Note Edit</samp> debes seleccionar la duración de la nota que quieres
     ingresar seleccionando un valor de la paleta de notas o presionando:
     <br/>
     <br/>
@@ -681,7 +671,7 @@
 <page name="playmode" header="Modo de Reproducción">
     <index>Modo de Reproducción</index>
      <i>MuseScore</i> tiene integrado un sequenciador y un sintetizador para
-     reproducir tu partitura. Presionando el botón Play <img src="../../pic/play.png" alt="[Play]"/> ingresas al
+     reproducir tu partitura. Presionando el botón Play <img src="../../pic/play.png" alt=""/> ingresas al
      modo de reproducción. En este modo los siguientes comandos están disponibles:
 
     <br/>
@@ -739,12 +729,10 @@
       </tr>
     </table>
 
-    <br/>
-    Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
+    </p>Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
     a una nota, acorde, o silencio. Por lo tanto, al mover una nota, el legato también
-    se mueve.
-    <br/>
-    <br/>
+    se mueve.</p>
+    
     Ver también
           <a href="ties.php">Ligaduras</a>,
           <a href="editmode.php">Modo de edición</a>.

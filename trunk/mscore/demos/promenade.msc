@@ -2,7 +2,7 @@
 <museScore version="1.9">
   <Mag>1</Mag>
   <xoff>37.9706</xoff>
-  <yoff>-16.6187</yoff>
+  <yoff>-105.519</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -938,8 +938,12 @@
       </Staff>
     <trackName>Piano</trackName>
     <Instrument>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Slur id="1">
@@ -1094,7 +1098,10 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="1"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <Note pitch="77" tpc="13" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -1121,7 +1128,10 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="2"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <Note pitch="77" tpc="13" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -1353,7 +1363,10 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="5"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -1380,7 +1393,10 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="6"/>
         <Note pitch="67" tpc="15"/>
         </Chord>
-      <Note pitch="69" tpc="17" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -1469,7 +1485,10 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="8"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -1502,7 +1521,10 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <Note pitch="72" tpc="14" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Slur type="stop" number="9"/>
@@ -1647,7 +1669,10 @@ p, li { white-space: pre-wrap; }
         <Note pitch="73" tpc="9"/>
         <Note pitch="77" tpc="13"/>
         </Chord>
-      <Note pitch="80" tpc="10" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="80" tpc="10"/>
+        </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="66" tpc="8"/>
@@ -2345,8 +2370,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Breath>
         </Breath>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
       </Measure>
     <Measure number="21">
       <Chord>
@@ -2992,7 +3023,10 @@ p, li { white-space: pre-wrap; }
         <Note pitch="36" tpc="14"/>
         <Note pitch="48" tpc="14"/>
         </Chord>
-      <Note pitch="41" tpc="13" ticks="480"/>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="36" tpc="14"/>
@@ -3113,8 +3147,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Breath>
         </Breath>
-      <Note pitch="55" tpc="15" ticks="480"/>
-      <Note pitch="53" tpc="13" ticks="480"/>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
       </Measure>
     <Measure number="21">
       <Chord>
