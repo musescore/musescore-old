@@ -1,4 +1,5 @@
 13.8 (ws)
+      - fixed transposing key signatures
       - fixed image drag&drop for windows version
       - fixed "AltGr" key in windows version
 12.8 (db)

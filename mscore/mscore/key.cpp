@@ -122,8 +122,10 @@ int transposeKey(int key, int semitones)
       //                         Gb Db Ab Eb  Bb   F  C  G  D  A  E  B   F#
       //                         -6 -5 -4 -3  -2  -1  0  1  2  3  4  5   6
       //                          0  1  2  3   4  5   6  7  8  9 10  11  12
-      static const int kp[] =  {  6, 1, 8, 3, 11, 5,  0, 7, 2, 9, 4, 10, 6  };
-      static const int kp1[] = {  0, 1, 8, 3, 10, 5,  0, 7, 2, 9, 11, 4 };
+      static const int kp[] =  {  6, 1, 8, 3, 10, 5,  0, 7, 2, 9, 4, 11, 6  };
+
+//                                C  Db D  Eb  E   F  Gb  G Ab  A  Bb  B
+      static const int kp1[] = {  6, 1, 8,  3, 10, 5,  0, 7, 2, 9,  4, 11 };
 
       while (semitones < 0)
             semitones += 12;
