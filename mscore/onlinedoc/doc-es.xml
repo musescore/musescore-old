@@ -288,7 +288,7 @@
      </table>
     <br/>
 
-    Some elements show <i>handles</i> in <samp class="mode">edit mode</a> which can be
+    Some elements show <i>handles</i> in <samp class="mode">edit mode</samp> which can be
     moved by mouse dragging or keyboard commands.
     <br/>
     <br/>
@@ -729,7 +729,7 @@
       </tr>
     </table>
 
-    </p>Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
+    <p>Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
     a una nota, acorde, o silencio. Por lo tanto, al mover una nota, el legato también
     se mueve.</p>
     
