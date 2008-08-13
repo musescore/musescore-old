@@ -1865,7 +1865,13 @@ void Canvas::dropEvent(QDropEvent* event)
                   else
                         return;
                   _score->startCmd();
-                  s->setPath(u.path());
+                  QString str(u.path());
+                  if (str.startsWith("/C:/"))    // HACK
+                        str = str.mid(1);
+                  s->setPath(str);
+if (debugMode)
+      printf("drop image <%s> <%s>\n", qPrintable(str), qPrintable(s->path()));
+
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         s->setTrack(el->track());
