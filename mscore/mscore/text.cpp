@@ -828,6 +828,8 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 
 bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
       {
+      if (debugMode)
+            printf("TextB::edit\n");
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
       score()->setLayoutAll(lo);
       qreal w = 8.0 / view->matrix().m11();
@@ -847,7 +849,7 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   }
             return true;
             }
-      if (ev->modifiers() & Qt::ControlModifier) {
+      if (ev->modifiers() == Qt::ControlModifier) {
             switch (key) {
                   case Qt::Key_B:   // toggle bold face
                         {
@@ -951,6 +953,8 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   break;
 
             default:
+      if (debugMode)
+            printf("   TextB::edit insert <%s>\n", qPrintable(ev->text()));
                   cursor->insertText(ev->text());
                   break;
             }
@@ -1140,6 +1144,8 @@ bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
 void TextB::paste()
       {
       QString txt = QApplication::clipboard()->text(QClipboard::Selection);
+      if (debugMode)
+            printf("TextB::paste() <%s>\n", qPrintable(txt));
       cursor->insertText(txt);
       layout(0);
       bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);

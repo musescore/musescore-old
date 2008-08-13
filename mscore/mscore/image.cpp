@@ -108,7 +108,8 @@ void Image::setPath(const QString& ss)
 
 QString Image::path() const
       {
-      if (_path[0] == '/')
+      QFileInfo fi(_path);
+      if (fi.isAbsolute())
             return _path;
       return preferences.imagePath + '/' + _path;
       }
