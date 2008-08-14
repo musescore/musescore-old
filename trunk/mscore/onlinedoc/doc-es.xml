@@ -371,13 +371,13 @@
     <index>Marcos</index>
     Los marcos proveen un espacio vacío fuera de los compases normales. Pueden
     contener texto o imágenes. <i>MuseScore</i> tiene dos tipos de marcos:
-    
+
     <dl>
     <dt>horizontal</dt>
     <dd>Los marcos horizontales rompen un sistema. El ancho es modificable y la
           altura iguala la altura del sistema. Los marcos horizontales pueden ser
           usados para separar una Coda.</dd>
-    
+
     <dt>vertical</dt>
     <dd>Los marcos verticales proveen espacio vacío entre o antes de los sistemas.
        La altura es modificable y el ancho es el mimso que el del sistema. Los marcos
@@ -385,7 +385,7 @@
        título, un marco vertical es ubicado automáticamente antes del primer compás si
        todavía no fue creado.</dd>
     </dl>
-    
+
     <h5>Crear un marco</h5>
     Primero seleccionar un compás. El comando para insertar un marco se encuentra
     en el menú <kbd><samp class="menu">Crear</samp> → <samp class="menuitem">Compás</samp></kbd>. El marco es insertado antes el compás seleccionado.
@@ -500,14 +500,14 @@
         </ul>
 
       <img src="../pic/lyrics.png" align="center"/>
-      
+
       <p>Las sílabas puede ser extendidas con una línea baja:</p>
       <img src="../pic/lyrics1.png" align="center"/>
-      
+
       <p>Ingresado con: <kbd>soul, <kbd>_</kbd> <kbd>_</kbd> <kbd>_</kbd> To <kbd>Esc</kbd></kbd>.</p>
 
       <p>La letra puede ser <a href="textedit.php">editada</a> como texto normal.</p>
-      
+
       <p>Ver también
           <a href="text.php">Texto</a><sp/>
           <a href="chordnames.php">Nombres de acordes</a>.</p>
@@ -545,7 +545,7 @@
     <dt>Irregular</dt>
       <dd>Un compás "irregular" no es contado. Normalmente, un compás débil (upbeat)
       no es contado como regular.</dd>
-    
+
     <dt>Repetición</dt>
       <dd>Si un compás es el final de una <a href="repeats.php">repetición,</a>
       es posible definir cuántas veces debe repetirse.</dd>
@@ -732,7 +732,7 @@
     <p>Un legato puede abarcar muchos sistemas y páginas. Su inicio y final están fijados
     a una nota, acorde, o silencio. Por lo tanto, al mover una nota, el legato también
     se mueve.</p>
-    
+
     Ver también
           <a href="ties.php">Ligaduras</a>,
           <a href="editmode.php">Modo de edición</a>.

@@ -9,11 +9,11 @@
 
 <ul class="nobullet">
    <li><img src="../wpic/spain.png" alt="Español"/>
-      <a href="../es/man/reference.php">Español</a></li>
+      <a href="man/reference.php">Español</a></li>
    <li><img src="../wpic/german.png" alt="Deutsch"/>
       <a href="../de/man/reference.php">Deutsch</a></li>
    <li><img src="../wpic/english.png" alt="English"/>
-      <a href="man/reference.php">English</a></li>
+      <a href="../en/man/reference.php">English</a></li>
 </ul>
 
 <?php require("trailer.html");  ?>
