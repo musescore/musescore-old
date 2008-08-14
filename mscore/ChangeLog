@@ -1,3 +1,5 @@
+14.8 (ws)
+      - fixed Ctrl+V (paste) shortcut for text edit mode in windows
 13.8 (ws)
       - fixed transposing key signatures
       - fixed image drag&drop for windows version
