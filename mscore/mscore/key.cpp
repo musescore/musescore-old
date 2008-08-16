@@ -30,7 +30,7 @@
 int KeyList::key(int tick) const
       {
       if (empty())
-            return 0;
+            return NO_KEY;
       ciKeyEvent i = upper_bound(tick);
       if (i == begin())
             return 0;
@@ -135,9 +135,11 @@ int transposeKey(int key, int semitones)
 
       // switch to enharmonic key:
       if (key == -7)
-            key = 6;
+            key = 5;
       else if (key == 7)
-            key = -6;
+            key = -5;
+      printf("  transposeKey key %d semitones %d\n", key, semitones);
+
       key += 6;         // normalize key to 0 - 13
 
       int kpitch = kp[key];

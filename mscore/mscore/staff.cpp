@@ -149,7 +149,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _part         = p;
       _clef         = new ClefList;
       _keymap       = new KeyList;
-      (*_keymap)[0] = 0;
+      (*_keymap)[0] = 0;                  // default to C major
       _show         = true;
       _lines        = 5;
       _small        = false;
@@ -236,8 +236,6 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, int st)
       {
-      assert(st >= -7 && st <= 7);
-
       int ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change
