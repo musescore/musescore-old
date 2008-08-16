@@ -250,15 +250,12 @@ bool KeySig::acceptDrop(Viewer* v, const QPointF&, int type, int) const
 Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == KEYSIG) {
-            KeySig* k = (KeySig*)e;
+            KeySig* k = static_cast<KeySig*>(e);
             char stype = k->subtype() & 0xff;
             delete k;
             int st = subtype();
-            if (st != stype) {
-                  // change keysig applies to all staves, can't simply set subtype
-                  // for this one only
+            if (st != stype)
                   staff()->changeKeySig(tick(), stype);
-                  }
             return this;
             }
       delete e;
