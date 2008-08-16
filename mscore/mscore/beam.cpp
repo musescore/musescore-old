@@ -127,32 +127,16 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32,  4,  8, 1, 8 ),
       BeamHint(1, 32,  4,  8, 3, 8 ),
 
-      BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature
+      //BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature    //Feature does not work when beam is every three notes instead of every two. (db)
       BeamHint(0,  0,  6, 8,  3, 8 ),
-      BeamHint(1, 32,  6, 8,  1, 8 ),
-      BeamHint(1, 32,  6, 8,  1, 4 ),
-      BeamHint(1, 32,  6, 8,  1, 2 ),
-      BeamHint(1, 32,  6, 8,  5, 8 ),
 
-      BeamHint(0,  0,  9, 8,  0, 0 ),  // switch-off at-any-beat feature
       BeamHint(0,  0,  9, 8,  3, 8 ),
       BeamHint(0,  0,  9, 8,  3, 4 ),
-      BeamHint(1, 32,  9, 8,  1, 8 ),
-      BeamHint(1, 32,  9, 8,  1, 4 ),
-      BeamHint(1, 32,  9, 8,  1, 2 ),
-      BeamHint(1, 32,  9, 8,  5, 8 ),
-      BeamHint(1, 32,  9, 8,  7, 8 ),
-      BeamHint(1, 32,  9, 8,  1, 1 ),
-      BeamHint(1, 32,  9, 8,  9, 8 ),
 
-      BeamHint(0,  0, 12, 8,  0, 0 ),  // switch-off at-every-beat
       BeamHint(0,  0, 12, 8,  3, 8 ),
       BeamHint(0,  0, 12, 8,  3, 4 ),
       BeamHint(0,  0, 12, 8,  9, 8 ),
-      BeamHint(0,  0, 12, 8,  2, 1 ),
-      BeamHint(1, 32, 12, 8,  1, 8 ),
       
-      //Experiment: triplet meter without switch-off at-any-beat line (DB)
       BeamHint(0,  0, 15, 8,  3, 8 ),
       BeamHint(0,  0, 15, 8,  3, 4 ),
       BeamHint(0,  0, 15, 8,  9, 8 ),

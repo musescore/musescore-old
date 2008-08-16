@@ -1,3 +1,5 @@
+16.8 (db)
+      - fixed beaming for the most common compound time signatures
 14.8 (ws)
       - fixed Ctrl+V (paste) shortcut for text edit mode in windows
 13.8 (ws)
