@@ -190,13 +190,11 @@ void ChordEdit::setRoot(int val)
 void ChordEdit::setExtension(int val)
       {
       QAbstractButton* button = extensionGroup->button(val);
-printf("setExtension %d button %p\n", val, button);
       if (button)
             button->setChecked(true);
       else {
             extOther->setChecked(true);
             int idx = extOtherCombo->findData(val);
-printf("ext other data %d, idx = %d\n", val, idx);
             if (idx != -1)
                   extOtherCombo->setCurrentIndex(idx);
             }

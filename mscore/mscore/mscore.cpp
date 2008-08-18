@@ -318,6 +318,7 @@ MuseScore::MuseScore()
          << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
          << "repeat-cmd"
          << "edit-meta"
+         << "harmony-properties"
          ;
 
       foreach(const QString s, sl) {
@@ -1291,19 +1292,9 @@ void MuseScore::resetUserOffsets()
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
-/*      QAction* a = 0;
-      Command c;
-      c.data = pitch;
-
-      commandQueue.enqueue(c);
-  */
-      // do not accept any note input if any modal widget
-      // is active
-#if 0   //TODO
       QWidget* w = QApplication::activeModalWidget();
       if (cs && w == 0)
             cs->midiNoteReceived(pitch, chord);
-#endif
       }
 
 //---------------------------------------------------------

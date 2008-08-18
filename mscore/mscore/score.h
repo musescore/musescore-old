@@ -119,6 +119,15 @@ struct MidiMapping {
       };
 
 //---------------------------------------------------------
+//   MidiInputEvent
+//---------------------------------------------------------
+
+struct MidiInputEvent {
+      int pitch;
+      bool chord;
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -127,6 +136,7 @@ class Score : public QObject {
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
 
+      QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
@@ -229,6 +239,7 @@ class Score : public QObject {
 
       void cmdAddText(int style);
       void cmdAddChordName();
+      void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
       void renumberMeasures();
