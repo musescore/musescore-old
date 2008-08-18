@@ -1383,6 +1383,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "harmony-properties",
+         QT_TR_NOOP("show harmony properties for chord"),
+         Qt::SHIFT+Qt::Key_K,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Harmony Properties"),
+         QT_TR_NOOP("Harmony Properties")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "rehearsalmark-text",
          QT_TR_NOOP("Add Rehearsal Mark"),
          Qt::CTRL + Qt::Key_M,

@@ -63,6 +63,7 @@
 #include "stafftext.h"
 #include "articulation.h"
 #include "metaedit.h"
+#include "chordedit.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -820,6 +821,82 @@ void Score::cmdAddChordName()
       layoutAll = true;
       select(s, 0, 0);
       canvas()->startEdit(s);
+      }
+
+//---------------------------------------------------------
+//   cmdAddChordName2
+//---------------------------------------------------------
+
+void Score::cmdAddChordName2()
+      {
+      if (editObject) {
+            endEdit();
+            endCmd();
+            }
+      Page* page = _layout->pages().front();
+      const QList<System*>* sl = page->systems();
+      if (sl == 0 || sl->empty()) {
+            printf("first create measure, then repeat operation\n");
+            return;
+            }
+      const QList<MeasureBase*>& ml = sl->front()->measures();
+      if (ml.empty()) {
+            printf("first create measure, then repeat operation\n");
+            return;
+            }
+      Element* el = sel->element();
+      if (!el || (el->type() != NOTE && el->type() != REST)) {
+            QMessageBox::information(0, "MuseScore: Text Entry",
+               tr("No note or rest selected:\n"
+               "please select a note or rest were you want to\n"
+               "start text entry"));
+            endCmd();
+            return;
+            }
+      if (el->type() == NOTE)
+            el = el->parent();
+
+      Chord* chord = dynamic_cast<Chord*>(el);
+      int rootTpc = chord->downNote()->tpc();
+      Measure* measure = chord->measure();
+      Harmony* s = 0;
+
+      foreach(Element* element, *measure->el()) {
+            if ((element->type() == HARMONY) && (element->tick() == chord->tick())) {
+                  s = dynamic_cast<Harmony*>(element);
+                  break;
+                  }
+            }
+      bool created = false;
+      if (s == 0) {
+            s = new Harmony(this);
+            s->setTrack(el->track());
+            s->setParent(measure);
+            s->setTick(el->tick());
+            s->setRootTpc(rootTpc);
+            created = true;
+            }
+
+      ChordEdit ce(this);
+      ce.setHarmony(s);
+      int rv = ce.exec();
+      if (rv) {
+            const Harmony* h = ce.harmony();
+            s->setRootTpc(h->rootTpc());
+            s->setBaseTpc(h->baseTpc());
+            s->setDescr(h->descr());
+            s->clearDegrees();
+            for (int i = 0; i < h->numberOfDegrees(); i++)
+                  s->addDegree(h->degree(i));
+            s->buildText();
+            select(s, 0, 0);
+            undoAddElement(s);
+            layoutAll = true;
+            }
+      else {
+            if (created)
+                  delete s;
+            }
       }
 
 //---------------------------------------------------------
@@ -1771,6 +1848,8 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_STAFF);
             else if (cmd == "chord-text")
                   return cmdAddChordName();
+            else if (cmd == "harmony-properties")
+                  cmdAddChordName2();
             else if (cmd == "rehearsalmark-text")
                   return cmdAddText(TEXT_REHEARSAL_MARK);
             else if (cmd == "select-all") {
@@ -1814,8 +1893,33 @@ void Score::cmd(const QString& cmd)
                   cmdExchangeVoice(1, 3);
             else if (cmd == "voice-x34")
                   cmdExchangeVoice(3, 4);
+            else if (cmd == "")
+                  ;
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
+            endCmd();
+            }
+      if (!midiInputQueue.isEmpty()) {
+            if (!noteEntryMode())
+                  setNoteEntry(true);
+            if (!noteEntryMode())
+                  return;
+
+            startCmd();
+            while (!midiInputQueue.isEmpty()) {
+                  MidiInputEvent ev = midiInputQueue.dequeue();
+                  int len = _padState.tickLen;
+                  if (ev.chord) {
+                        Note* on = getSelectedNote();
+                        Note* n = addNote(on->chord(), ev.pitch);
+                        select(n, 0, 0);
+                        }
+                  else {
+                        setNote(_is.pos, _is.track, ev.pitch, len);
+                        _is.pos += len;
+                        }
+                  }
+            layoutAll = true;
             endCmd();
             }
       }

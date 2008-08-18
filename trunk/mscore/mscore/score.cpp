@@ -1178,22 +1178,15 @@ void Score::setNoteEntry(bool val)
 
 void Score::midiNoteReceived(int pitch, bool chord)
       {
-      if (!noteEntryMode())
-            setNoteEntry(true);
-      if (noteEntryMode()) {
-            int len = _padState.tickLen;
-            if (chord) {
-                  Note* on = getSelectedNote();
-                  Note* n = addNote(on->chord(), pitch);
-                  select(n, 0, 0);
-                  }
-            else {
-                  setNote(_is.pos, _is.track, pitch, len);
-                  _is.pos += len;
-                  }
-            layoutAll = true;
-            end();
-            }
+      MidiInputEvent ev;
+      ev.pitch = pitch;
+      ev.chord = chord;
+
+      midiInputQueue.enqueue(ev);
+      QString emptyCmd;
+
+      if (!cmdActive)
+            cmd(emptyCmd);
       }
 
 #if 0
