@@ -2479,7 +2479,7 @@ bool Score::saveMxl(const QString& name)
             dt = QDateTime(QDate(2007, 9, 10), QTime(12, 0));
       else
             dt = QDateTime::currentDateTime();
-      QString fn = fi.baseName() + ".xml";
+      QString fn = fi.completeBaseName() + ".xml";
 
       QBuffer cbuf;
       cbuf.open(QIODevice::ReadWrite);

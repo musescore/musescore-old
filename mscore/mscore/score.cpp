@@ -380,7 +380,7 @@ void Score::read(QString name)
       _saved = false;
       info.setFile(name);
 
-      QString cs = info.completeSuffix();
+      QString cs = info.suffix();
 
       if (cs == "xml") {
             importMusicXml(name);

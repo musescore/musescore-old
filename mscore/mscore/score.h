@@ -532,7 +532,7 @@ class Score : public QObject {
       QString filePath() const    { return info.filePath(); }
       QFileInfo* fileInfo()       { return &info; }
 
-      Q_INVOKABLE QString name() const { return info.baseName(); }
+      Q_INVOKABLE QString name() const { return info.completeBaseName(); }
 
       bool isSavable() const;
       void setDirty(bool val = true);

@@ -1212,7 +1212,7 @@ void MuseScore::openRecentMenu()
       for (int i = 0; i < projectList.size(); ++i) {
             const ProjectItem* item = projectList[i];
             QFileInfo fi(item->name);
-            QAction* action = openRecent->addAction(fi.baseName());
+            QAction* action = openRecent->addAction(fi.completeBaseName());
             action->setData(QVariant::fromValue<void*>((void*)item));
             }
       }

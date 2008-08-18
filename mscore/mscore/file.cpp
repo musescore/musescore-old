@@ -92,7 +92,7 @@ bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
             return true;
       QFileInfo info(_name);
 
-      if (info.completeSuffix() == QString("")) {
+      if (info.suffix().isEmpty()) {
             _name += ext;
             info.setFile(_name);
             }
@@ -300,7 +300,7 @@ bool Score::saveFile(bool autosave)
       // rename old file into backup
       //
       QString name(info.filePath());
-      if (info.completeSuffix() == "")
+      if (info.suffix().isEmpty())
             name += QString(".mscz");
       dir.rename(name, backupName);
 
@@ -656,7 +656,7 @@ bool Score::saveCompressedFile(QFileInfo& info, bool autosave)
       {
       QString ext(".mscz");
 
-      if (info.completeSuffix().isEmpty())
+      if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ext);
 
       QFile fp(info.filePath());
@@ -690,7 +690,7 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       else
             dt = QDateTime::currentDateTime();
 
-      QString fn = info.baseName() + ".msc";
+      QString fn = info.completeBaseName() + ".msc";
       QBuffer cbuf;
       cbuf.open(QIODevice::ReadWrite);
       Xml xml(&cbuf);
@@ -734,7 +734,7 @@ bool Score::saveFile(QFileInfo& info, bool autosave)
       {
       QString ext(".msc");
 
-      if (info.completeSuffix().isEmpty())
+      if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ext);
       QFile fp(info.filePath());
       if (!fp.open(QIODevice::WriteOnly)) {
@@ -871,7 +871,7 @@ void Score::saveStyle()
       QString ext(".mss");
       QFileInfo info(name);
 
-      if (info.completeSuffix().isEmpty())
+      if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ext);
       QFile f(info.filePath());
       if (!f.open(QIODevice::WriteOnly)) {
@@ -935,7 +935,7 @@ bool Score::loadCompressedMsc(QString name)
       QString ext(".mscz");
 
       info.setFile(name);
-      if (info.completeSuffix() == "") {
+      if (info.suffix().isEmpty()) {
             name += ext;
             info.setFile(name);
             }
@@ -1002,7 +1002,7 @@ bool Score::loadCompressedMsc(QString name)
             return true;
             }
       dbuf.close();
-      docName = info.baseName();
+      docName = info.completeBaseName();
       return read(doc.documentElement());
       }
 
@@ -1016,7 +1016,7 @@ bool Score::loadMsc(QString name)
       QString ext(".msc");
 
       info.setFile(name);
-      if (info.completeSuffix() == "") {
+      if (info.suffix().isEmpty()) {
             name += ext;
             info.setFile(name);
             }

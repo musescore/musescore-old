@@ -871,7 +871,7 @@ void InstrumentsDialog::on_saveButton_clicked()
       QString ext(".xml");
       QFileInfo info(name);
 
-      if (info.completeSuffix().isEmpty())
+      if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ext);
       QFile f(info.filePath());
       if (!f.open(QIODevice::WriteOnly)) {
