@@ -777,6 +777,7 @@ void MuseScore::autoSaveTimerTimeout()
 
 //---------------------------------------------------------
 //   magTable
+//    list of strings shown in QComboBox "MagBox"
 //---------------------------------------------------------
 
 static const char* magTable[] = {

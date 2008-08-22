@@ -215,7 +215,6 @@ class Score : public QObject {
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
       void checkUndoOp();
-      void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
 
       void collectChord(EventMap*, Instrument*,
