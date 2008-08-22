@@ -1,3 +1,5 @@
+22.8 (ws)
+      - export unrecognized harmony as text "direction" in MusicXML
 18.8 (ws)
       - fixed handling of filenames with dots like "a.b.c.mops.xml"
       - add new command Shift+K to popup harmony properties of selected note/chord

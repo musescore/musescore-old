@@ -2529,12 +2529,12 @@ bool Score::saveMxl(const QString& name)
 
 void ExportMusicXml::harmony(Harmony* h)
       {
-      if (h->frameWidth() > 0.0)
-            xml.stag("harmony print-frame=\"yes\"");
-      else
-            xml.stag("harmony print-frame=\"no\"");
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
+            if (h->frameWidth() > 0.0)
+                  xml.stag("harmony print-frame=\"yes\"");
+            else
+                  xml.stag("harmony print-frame=\"no\"");
             xml.stag("root");
             xml.tag("root-step", tpc2stepName(rootTpc));
             int alter = tpc2alter(rootTpc);
@@ -2588,14 +2588,18 @@ void ExportMusicXml::harmony(Harmony* h)
                         }
                   xml.etag();
                   }
+            xml.etag();
             }
       else {
             //
             // export an unrecognized Chord
-            // which may contain of arbitrary text
+            // which may contain arbitrary text
             //
-            xml.tag("root", "");
-            xml.tag(QString("kind text=\"%1\"").arg(h->getText()), "");
+            xml.stag("direction");
+            xml.stag("direction-type");
+            xml.tag("words default-y=\"100\"", h->getText());
+            xml.etag();
+            xml.etag();
             }
 #if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);
@@ -2623,7 +2627,6 @@ void ExportMusicXml::harmony(Harmony* h)
                   }
             }
 #endif
-      xml.etag();
       }
 
 
