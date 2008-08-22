@@ -1931,7 +1931,9 @@ void Score::cmd(const QString& cmd)
 void Score::cmdPaste()
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
-      if (sel->state() == SEL_SINGLE && ms && ms->hasFormat(mimeSymbolFormat)) {
+      if (ms == 0)
+            return;
+      if (sel->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
             QDomDocument doc;
             int line, column;
@@ -1955,45 +1957,35 @@ void Score::cmdPaste()
                         addRefresh(sel->element()->abbox());
                   }
             }
-      }
+      else if (sel->state() == SEL_STAFF && ms->hasFormat(mimeStaffListFormat)) {
+            int tickStart  = sel->tickStart;
 
-//---------------------------------------------------------
-//   pasteStaff
-//---------------------------------------------------------
-
-void Score::pasteStaff(const QMimeData* ms)
-      {
-      if (sel->state() != SEL_STAFF) {
-            printf("  cannot paste to selection\n");
-            return;
-            }
-      int tickStart  = sel->tickStart;
-
-      Measure* measure = 0;
-      for (MeasureBase* e = _measures.first(); e; e = e->next()) {
-            if (e->type() != MEASURE)
-                  continue;
-            if (e->tick() == tickStart) {
-                  measure = (Measure*)e;
-                  break;
+            Measure* measure = 0;
+            for (MeasureBase* e = _measures.first(); e; e = e->next()) {
+                  if (e->type() != MEASURE)
+                        continue;
+                  if (e->tick() == tickStart) {
+                        measure = (Measure*)e;
+                        break;
+                        }
                   }
+            if (measure->tick() != tickStart) {
+                  printf("  cannot find measure\n");
+                  return;
+                  }
+            QByteArray data(ms->data(mimeStaffListFormat));
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading paste data at line %d column %d: %s\n",
+                     line, column, qPrintable(err));
+                  printf("%s\n", data.data());
+                  return;
+                  }
+            docName = "--";
+            pasteStaff(doc.documentElement(), measure, sel->staffStart);
             }
-      if (measure->tick() != tickStart) {
-            printf("  cannot find measure\n");
-            return;
-            }
-      QByteArray data(ms->data(mimeStaffListFormat));
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(data, &err, &line, &column)) {
-            printf("error reading paste data at line %d column %d: %s\n",
-               line, column, qPrintable(err));
-            printf("%s\n", data.data());
-            return;
-            }
-      docName = "--";
-      pasteStaff(doc.documentElement(), measure, sel->staffStart);
       }
 
 //---------------------------------------------------------

@@ -2529,16 +2529,19 @@ bool Score::saveMxl(const QString& name)
 
 void ExportMusicXml::harmony(Harmony* h)
       {
-      xml.stag("harmony print-frame=\"no\"");
+      if (h->frameWidth() > 0.0)
+            xml.stag("harmony print-frame=\"yes\"");
+      else
+            xml.stag("harmony print-frame=\"no\"");
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
             xml.stag("root");
             xml.tag("root-step", tpc2stepName(rootTpc));
             int alter = tpc2alter(rootTpc);
-            if (alter) {
+            if (alter)
                   xml.tag("root-alter", alter);
-                  }
             xml.etag();
+
             QString cn(h->xmlName());
             if (!cn.isEmpty()) {
                   // can be something like "dominant add#9"
@@ -2568,18 +2571,31 @@ void ExportMusicXml::harmony(Harmony* h)
                         xml.etag();
                         }
                   }
-            else
-                  xml.tag("kind", "");    // finale wants to see this
-            }
-      int baseTpc = h->baseTpc();
-      if (baseTpc != INVALID_TPC) {
-            xml.stag("bass");
-            xml.tag("bass-step", tpc2stepName(baseTpc));
-            int alter = tpc2alter(baseTpc);
-            if (alter) {
-                  xml.tag("bass-alter", alter);
+            else {
+                  if (h->extensionName() == 0)
+                        xml.tag("kind", "");
+                  else
+                        xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), "");
                   }
-            xml.etag();
+
+            int baseTpc = h->baseTpc();
+            if (baseTpc != INVALID_TPC) {
+                  xml.stag("bass");
+                  xml.tag("bass-step", tpc2stepName(baseTpc));
+                  int alter = tpc2alter(baseTpc);
+                  if (alter) {
+                        xml.tag("bass-alter", alter);
+                        }
+                  xml.etag();
+                  }
+            }
+      else {
+            //
+            // export an unrecognized Chord
+            // which may contain of arbitrary text
+            //
+            xml.tag("root", "");
+            xml.tag(QString("kind text=\"%1\"").arg(h->getText()), "");
             }
 #if 0
       xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), extension);
