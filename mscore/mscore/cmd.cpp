@@ -64,6 +64,7 @@
 #include "articulation.h"
 #include "metaedit.h"
 #include "chordedit.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1899,6 +1900,20 @@ void Score::cmd(const QString& cmd)
                   cmdExchangeVoice(1, 3);
             else if (cmd == "voice-x34")
                   cmdExchangeVoice(3, 4);
+            else if (cmd == "system-break") {
+                  Element* e = selection()->element();
+                  if (e && e->type() == BAR_LINE) {
+                        BarLine* barline = static_cast<BarLine*>(e);
+                        Measure* measure = barline->measure();
+                        if (!measure->lineBreak()) {
+                              LayoutBreak* lb = new LayoutBreak(this);
+                              lb->setSubtype(LAYOUT_BREAK_LINE);
+                              lb->setTrack(-1);       // this are system elements
+                              lb->setParent(measure);
+                              cmdAdd(lb);
+                              }
+                        }
+                  }
             else if (cmd == "")
                   ;
             else
