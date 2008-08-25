@@ -307,6 +307,7 @@ class Score : public QObject {
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
       void cmdAddSlur();
+      void cmdAddStaccato();
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);

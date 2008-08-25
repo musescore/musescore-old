@@ -325,6 +325,7 @@ void Score::setPadState()
       getAction("pad-nat")->setChecked(_padState.prefix == 5);
       getAction("pad-flat")->setChecked(_padState.prefix == 2);
       getAction("pad-flat2")->setChecked(_padState.prefix == 4);
+      getAction("pad-staccato")->setChecked(_padState.prefix == 16);
 
       getAction("voice-1")->setChecked(_padState.voice == 0);
       getAction("voice-2")->setChecked(_padState.voice == 1);
@@ -333,6 +334,9 @@ void Score::setPadState()
 
       getAction("pad-acciaccatura")->setChecked(_padState.noteType == NOTE_ACCIACCATURA);
       getAction("pad-appoggiatura")->setChecked(_padState.noteType == NOTE_APPOGGIATURA);
+      getAction("pad-grace4")->setChecked(_padState.noteType == NOTE_GRACE4);
+      getAction("pad-grace16")->setChecked(_padState.noteType == NOTE_GRACE16);
+      getAction("pad-grace32")->setChecked(_padState.noteType == NOTE_GRACE32);
 
       getAction("beam-start")->setChecked(_padState.beamMode == BEAM_BEGIN);
       getAction("beam-mid")->setChecked(_padState.beamMode == BEAM_MID);

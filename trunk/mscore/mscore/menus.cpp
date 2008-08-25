@@ -86,6 +86,21 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("pad-appoggiatura"));
             notePalette->addObject(1,  ik, tr("appoggiatura"));
 
+	      ik = new Icon(gscore);
+            ik->setSubtype(ICON_GRACE4);
+            ik->setAction(getAction("pad-grace4"));
+            notePalette->addObject(2,  ik, tr("grace-4"));
+
+	      ik = new Icon(gscore);
+            ik->setSubtype(ICON_GRACE16);
+            ik->setAction(getAction("pad-grace16"));
+            notePalette->addObject(3,  ik, tr("grace-16"));
+
+	      ik = new Icon(gscore);
+            ik->setSubtype(ICON_GRACE32);
+            ik->setAction(getAction("pad-grace32"));
+            notePalette->addObject(4,  ik, tr("grace-32"));
+
             paletteBox->addPalette(qApp->translate("NotePalette", "Notes"), notePalette);
 
             //-----------------------------------

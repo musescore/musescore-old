@@ -923,6 +923,15 @@ void Chord::write(Xml& xml) const
                   case NOTE_APPOGGIATURA:
                         xml.tagE("appoggiatura");
                         break;
+     	            case NOTE_GRACE4:
+                        xml.tagE("grace4");
+                        break;
+                  case NOTE_GRACE16:
+                        xml.tagE("grace16");
+                        break;
+                  case NOTE_GRACE32:
+                        xml.tagE("grace32");
+                        break;
                   }
             }
       if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().point() != 0.0)))
@@ -1034,6 +1043,12 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   _noteType = NOTE_APPOGGIATURA;
             else if (tag == "acciaccatura")
                   _noteType = NOTE_ACCIACCATURA;
+            else if (tag == "grace4")
+                  _noteType = NOTE_GRACE4;
+            else if (tag == "grace16")
+                  _noteType = NOTE_GRACE16;
+            else if (tag == "grace32")
+                  _noteType = NOTE_GRACE32;
             else if (tag == "StemDirection") {
                   if (val == "up")
                         _stemDirection = UP;

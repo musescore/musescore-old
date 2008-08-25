@@ -501,6 +501,44 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "add-staccato",
+         QT_TR_NOOP("add staccato"),
+         Qt::SHIFT+Qt::Key_Period,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("staccato"),
+         QT_TR_NOOP("staccato")
+         ),
+       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-flat",
+         QT_TR_NOOP("flat"),
+         Qt::Key_Minus,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("flat"),
+         QT_TR_NOOP("flat"),
+         &flatIcon
+         ),
+       Shortcut(
+          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-staccato",
+         QT_TR_NOOP("staccato"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("staccato"),
+         QT_TR_NOOP("staccato"),
+         &staccatoIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "add-trill",
+         QT_TR_NOOP("add trill"),
+	   Qt::Key_T,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("trill"),
+         QT_TR_NOOP("trill")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "stretch+",
          QT_TR_NOOP("more stretch"),
          Qt::SHIFT + Qt::Key_Plus,
@@ -1068,6 +1106,39 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("appoggiatura"),
          &appoggiaturaIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+	 /* no stroke: 4th*/
+        "pad-grace4",
+        QT_TR_NOOP("grace-4"),
+        0,
+        Qt::WindowShortcut,
+        QT_TR_NOOP("grace-4"),
+        QT_TR_NOOP("grace-4"),
+        &grace4Icon
+        ),
+     Shortcut(
+        STATE_NORMAL | STATE_NOTE_ENTRY,
+      /* no stroke: 16th*/
+        "pad-grace16",
+        QT_TR_NOOP("grace-16"),
+        0,
+        Qt::WindowShortcut,
+        QT_TR_NOOP("grace-16"),
+        QT_TR_NOOP("grace-16"),
+        &grace16Icon
+        ),
+     Shortcut(
+        STATE_NORMAL | STATE_NOTE_ENTRY,
+      /* no stroke: 32th*/
+        "pad-grace32",
+        QT_TR_NOOP("grace-32"),
+        0,
+        Qt::WindowShortcut,
+        QT_TR_NOOP("grace-32"),
+        QT_TR_NOOP("grace-32"),
+        &grace32Icon
+        ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-1",

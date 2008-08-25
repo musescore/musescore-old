@@ -63,6 +63,7 @@ QIcon exitIcon, viewmagIcon;
 QIcon windowIcon;
 
 QIcon acciaccaturaIcon, appoggiaturaIcon;
+QIcon grace4Icon, grace16Icon, grace32Icon;
 
 //---------------------------------------------------------
 //   symIcon
@@ -116,6 +117,7 @@ void genIcons()
       tenutoIcon         = symIcon(symbols[tenutoSym]);
       plusIcon           = symIcon(symbols[plusSym], 30);
       clefIcon           = symIcon(symbols[trebleclefSym], 17);
+      staccatoIcon       = symIcon(symbols[dotSym], 30);   //":/data/staccato.svg");
 
       acciaccaturaIcon   = QIcon(":/data/acciaccatura.svg");
       appoggiaturaIcon   = QIcon(":/data/appoggiatura.svg");
@@ -167,5 +169,8 @@ void genIcons()
       viewmagIcon    = QIcon(":/data/viewmag.xpm");
       repeatIcon     = QIcon(":/data/repeat.svg");
       noteEntryIcon  = QIcon(":/data/noteentry.svg");
+      grace4Icon     = QIcon(":/data/grace4.svg");
+      grace16Icon    = QIcon(":/data/grace16.svg");
+      grace32Icon    = QIcon(":/data/grace32.svg");
       }
 

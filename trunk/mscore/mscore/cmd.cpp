@@ -1594,6 +1594,10 @@ void Score::cmd(const QString& cmd)
                   cmdAddTie();
             else if (cmd == "add-slur")
                   cmdAddSlur();
+	    else if (cmd == "add-staccato")
+                  addArticulation(5);
+	    else if (cmd == "add-trill")
+                  addArticulation(19);
             else if (cmd == "add-hairpin")
                   cmdAddHairpin(false);
             else if (cmd == "add-hairpin-reverse")
@@ -1771,6 +1775,8 @@ void Score::cmd(const QString& cmd)
                   _padState.prefix = _padState.prefix != 4 ? 4 : 0;
                   addAccidental(_padState.prefix);
                   }
+            else if (cmd == "pad-staccato")
+                  addArticulation(5);
             else if (cmd == "flip")
                   cmdFlipStemDirection();
             else if (cmd == "voice-1")

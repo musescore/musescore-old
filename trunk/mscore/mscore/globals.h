@@ -101,6 +101,9 @@ enum NoteType {
       NOTE_NORMAL,
       NOTE_ACCIACCATURA,
       NOTE_APPOGGIATURA,       // grace notes
+      NOTE_GRACE4,
+      NOTE_GRACE16,
+      NOTE_GRACE32,
       NOTE_INVALID
       };
 

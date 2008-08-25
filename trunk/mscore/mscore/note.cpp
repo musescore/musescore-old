@@ -665,6 +665,9 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || type == IMAGE
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
+	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE4)
+	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE16)
+	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE32)
          || (type == ICON && subtype == ICON_SBEAM)
          || (type == ICON && subtype == ICON_MBEAM)
          || (type == ICON && subtype == ICON_NBEAM)
@@ -761,6 +764,15 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                               break;
                         case ICON_APPOGGIATURA:
                               score()->setGraceNote(ch, pitch(), NOTE_APPOGGIATURA, division/2);
+                              break;
+                        case ICON_GRACE4:
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE4, division/1);
+                              break;
+                        case ICON_GRACE16:
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE16, division/4);
+                              break;
+                        case ICON_GRACE32:
+                              score()->setGraceNote(ch, pitch(), NOTE_GRACE32, division/8);
                               break;
                         case ICON_SBEAM:
                               score()->undoChangeBeamMode(ch, BEAM_BEGIN);
