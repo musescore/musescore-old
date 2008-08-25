@@ -43,8 +43,11 @@ namespace Awl {
             {
             QColor c = QColorDialog::getColor(_color, this);
             if (c.isValid()) {
-                  _color = c;
-                  update();
+                  if (_color != c) {
+                        _color = c;
+                        emit colorChanged(_color);
+                        update();
+                        }
                   }
             }
 

@@ -169,7 +169,7 @@ TextPalette::TextPalette(QWidget* parent)
       connect(paddingWidth, SIGNAL(valueChanged(double)), SLOT(paddingChanged(double)));
       connect(borderRounding, SIGNAL(valueChanged(int)), SLOT(frameRoundChanged(int)));
       connect(circle, SIGNAL(toggled(bool)), SLOT(circleToggled(bool)));
-      connect(frameColor, SIGNAL(pressed()), SLOT(frameColorPressed()));
+      connect(frameColor, SIGNAL(colorChanged(QColor)), SLOT(frameColorChanged(QColor)));
       setFocusPolicy(Qt::NoFocus);
       }
 
@@ -342,6 +342,7 @@ void TextPalette::setText(TextB* te)
       borderRounding->setValue(_textElement->frameRound());
       circle->setChecked(_textElement->circle());
       borderRounding->setEnabled(!_textElement->circle());
+      frameColor->setColor(_textElement->frameColor());
       }
 
 //---------------------------------------------------------
@@ -351,6 +352,7 @@ void TextPalette::setText(TextB* te)
 void TextPalette::borderChanged(double val)
       {
       _textElement->setFrameWidth(val);
+      _textElement->layout(0);
       _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
       _textElement->score()->end();
       }
@@ -378,12 +380,11 @@ void TextPalette::frameRoundChanged(int val)
       }
 
 //---------------------------------------------------------
-//   frameColorPressed
+//   frameColorChanged
 //---------------------------------------------------------
 
-void TextPalette::frameColorPressed()
+void TextPalette::frameColorChanged(QColor color)
       {
-      QColor color = QColorDialog::getColor(_textElement->frameColor(), this);
       if (color.isValid()) {
             _textElement->setFrameColor(color);
             mscore->activateWindow();

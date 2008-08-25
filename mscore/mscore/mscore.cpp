@@ -392,6 +392,7 @@ MuseScore::MuseScore()
       //---------------------
 
       fileTools = addToolBar(tr("File Operations"));
+      fileTools->setObjectName("file-operations");
       fileTools->addAction(getAction("file-new"));
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
@@ -404,6 +405,7 @@ MuseScore::MuseScore()
       fileTools->addSeparator();
 
       transportTools = addToolBar(tr("Transport Tools"));
+      transportTools->setObjectName("transport-tools");
       transportTools->addAction(getAction("sound-on"));
 #ifdef HAS_MIDI
       transportTools->addAction(getAction("midi-on"));
@@ -427,6 +429,7 @@ MuseScore::MuseScore()
       addToolBarBreak();
 
       QToolBar* cpitchTools = addToolBar(tr("Concert Pitch"));
+      cpitchTools->setObjectName("pitch-tools");
       cpitchTools->addAction(getAction("concert-pitch"));
 
       //-------------------------------
@@ -434,6 +437,7 @@ MuseScore::MuseScore()
       //-------------------------------
 
       entryTools = addToolBar(tr("Note Entry"));
+      entryTools->setObjectName("entry-tools");
       entryTools->setIconSize(QSize(ICON_WIDTH, ICON_HEIGHT));
 
       a = getAction("note-input");
@@ -1988,6 +1992,7 @@ void MuseScore::writeSettings()
       settings.setValue("size", size());
       settings.setValue("pos", pos());
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
+      settings.setValue("state", saveState());
       settings.endGroup();
       }
 
@@ -2002,6 +2007,7 @@ void MuseScore::readSettings()
       resize(settings.value("size", QSize(950, 500)).toSize());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       mscore->showPalette(settings.value("showPanel", "0").toBool());
+      restoreState(settings.value("state").toByteArray());
       settings.endGroup();
       }
 

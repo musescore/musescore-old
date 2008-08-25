@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>708</width>
+    <width>806</width>
     <height>288</height>
    </rect>
   </property>
@@ -80,22 +80,13 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>9</number>
    </property>
    <item>
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -123,16 +114,7 @@
           <property name="spacing" >
            <number>6</number>
           </property>
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>9</number>
           </property>
           <item>
@@ -144,7 +126,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_left.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_left.svg</normaloff>:/data/text_left.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -175,7 +158,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_center.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_center.svg</normaloff>:/data/text_center.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -203,7 +187,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_right.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_right.svg</normaloff>:/data/text_right.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -231,7 +216,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_bold.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_bold.svg</normaloff>:/data/text_bold.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -256,7 +242,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_italic.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_italic.svg</normaloff>:/data/text_italic.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -281,7 +268,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/text_under.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/text_under.svg</normaloff>:/data/text_under.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -306,7 +294,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/subscript.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/subscript.svg</normaloff>:/data/subscript.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -331,7 +320,8 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/superscript.svg</iconset>
+             <iconset resource="mscore.qrc" >
+              <normaloff>:/data/superscript.svg</normaloff>:/data/superscript.svg</iconset>
             </property>
             <property name="iconSize" >
              <size>
@@ -387,7 +377,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>16</width>
               <height>33</height>
@@ -546,13 +536,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="3" >
-        <widget class="QPushButton" name="frameColor" >
-         <property name="text" >
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0" >
         <widget class="QLabel" name="label_5" >
          <property name="text" >
@@ -588,7 +571,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>311</height>
@@ -596,12 +579,22 @@
          </property>
         </spacer>
        </item>
+       <item row="1" column="3" >
+        <widget class="Awl::ColorLabel" name="frameColor" />
+       </item>
       </layout>
      </widget>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Awl::ColorLabel</class>
+   <extends>QFrame</extends>
+   <header>awl/colorlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="mscore.qrc" />
  </resources>
