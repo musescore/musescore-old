@@ -1702,6 +1702,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Meta Data"),
          QT_TR_NOOP("Meta Data")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "system-break",
+         QT_TR_NOOP("add system break"),
+         Qt::Key_Return,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Add System Break"),
+         QT_TR_NOOP("Add System Break")
+         ),
       Shortcut(0, 0, 0),
       };
 
