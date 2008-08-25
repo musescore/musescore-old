@@ -51,7 +51,7 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void borderChanged(double);
       void paddingChanged(double);
       void frameRoundChanged(int val);
-      void frameColorPressed();
+      void frameColorChanged(QColor);
       void circleToggled(bool val);
 
    public:

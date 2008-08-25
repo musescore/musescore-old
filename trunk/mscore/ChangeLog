@@ -1,4 +1,5 @@
 25.8 (ws)
+      - make palette positions persistent
       - new shortcut: if bar line is selected <Return> inserts a line break
       - added patches from Olav Gundersen (lilypond export, more grace note types)
 22.8 (ws)

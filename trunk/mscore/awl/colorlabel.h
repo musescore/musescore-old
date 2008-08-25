@@ -34,6 +34,9 @@ namespace Awl {
             virtual void paintEvent(QPaintEvent*);
             virtual void mousePressEvent(QMouseEvent*);
 
+         signals:
+            void colorChanged(QColor);
+
          public:
             ColorLabel(QWidget* parent = 0) : QFrame (parent) {
                   _color = Qt::blue;

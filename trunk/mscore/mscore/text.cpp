@@ -250,6 +250,7 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
             }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
+
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
       _doc->documentLayout()->draw(&p, c);
 
@@ -260,10 +261,13 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
             if (_circle)
                   p.drawArc(frame, 0, 5760);
             else {
+                  double mag = 1.0; // DPI/PDPI;
+
                   int r2 = _frameRound * lrint((frame.width() / frame.height()));
                   if (r2 > 99)
                         r2 = 99;
-                  p.drawRoundRect(frame, _frameRound, r2);
+                  QRectF fr(frame.x(), frame.y(), frame.width() * mag, frame.height() * mag);
+                  p.drawRoundRect(fr, _frameRound, r2);
                   }
             }
       }
