@@ -22,7 +22,7 @@
 #define __ICONS_H__
 
 enum {
-      ICON_ACCIACCATURA, ICON_APPOGGIATURA ,
+      ICON_ACCIACCATURA, ICON_APPOGGIATURA, ICON_GRACE4, ICON_GRACE16, ICON_GRACE32,
       ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_AUTOBEAM
       };
 
@@ -40,6 +40,7 @@ extern QIcon sharpIcon;
 extern QIcon sharpsharpIcon;
 extern QIcon flatIcon;
 extern QIcon flatflatIcon;
+extern QIcon staccatoIcon;
 extern QIcon quartrestIcon;
 extern QIcon dotIcon;
 extern QIcon dotdotIcon;
@@ -59,6 +60,7 @@ extern QIcon exitIcon, viewmagIcon;
 extern QIcon windowIcon;
 
 extern QIcon acciaccaturaIcon, appoggiaturaIcon;
+extern QIcon grace4Icon, grace16Icon, grace32Icon;
 
 class Sym;
 
@@ -67,5 +69,6 @@ static const int ICON_WIDTH  = 16;
 
 extern QIcon symIcon(const Sym&, int size=20, int width=ICON_WIDTH, int height=ICON_HEIGHT);
 extern QIcon noteEntryIcon;
+
 #endif
 

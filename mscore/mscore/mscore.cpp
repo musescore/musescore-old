@@ -315,6 +315,7 @@ MuseScore::MuseScore()
          << "load-style" << "save-style" << "select-all" << "transpose" << "concert-pitch"
          << "reset-beammode"
          << "clef-violin" << "clef-bass"
+	   << "add-staccato" << "add-trill"
          << "voice-x12" << "voice-x13" << "voice-x14" << "voice-x23" << "voice-x24" << "voice-x34"
          << "repeat-cmd"
          << "edit-meta"
@@ -442,7 +443,7 @@ MuseScore::MuseScore()
       sl1 << "pad-note-1" << "pad-note-2" << "pad-note-4" << "pad-note-8"
          << "pad-note-16" << "pad-note-32" << "pad-note-64" << "pad-dot" << "pad-dotdot"
          << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
-         << "pad-nat" << "pad-flat" << "pad-flat2";
+         << "pad-nat" << "pad-flat"  <<"pad-flat2" << "pad-staccato";
 
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
@@ -454,7 +455,7 @@ MuseScore::MuseScore()
             }
 
       sl1.clear();
-      sl1 << "pad-appoggiatura" << "pad-acciaccatura";
+      sl1 << "pad-appoggiatura" << "pad-acciaccatura" << "pad-grace4" <<"pad-grace16" << "pad-grace32" ;
       sl1 << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam";
 
       foreach(const QString s, sl1) {

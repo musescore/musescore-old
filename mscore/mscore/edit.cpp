@@ -527,6 +527,24 @@ void Score::cmdAddSlur()
       }
 
 //---------------------------------------------------------
+//   cmdAddStaccato
+//     ":" typed on keyboard
+//---------------------------------------------------------
+
+void Score::cmdAddStaccato()
+      {
+      Element* e = sel->element();
+      if (!e || e->type() !=NOTE) {
+            printf("ingen note valgt\n");
+            return;
+            }
+      Note* note    = (Note*)(e);
+      Chord* chord  = note->chord();
+      int staffIdx  = chord->staffIdx();
+      //Vi er n� klar over hvor vi er, og kan operere p� dette stedet:
+      }
+
+//---------------------------------------------------------
 //   addTie
 //    shift+'S' typed on keyboard
 //---------------------------------------------------------
