@@ -320,7 +320,7 @@ MuseScore::MuseScore()
          << "repeat-cmd"
          << "edit-meta"
          << "harmony-properties"
-         << "system-break"
+         << "system-break" << "page-break"
          ;
 
       foreach(const QString s, sl) {
