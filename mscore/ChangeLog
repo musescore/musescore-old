@@ -1,3 +1,6 @@
+28.8 (ws)
+      - new shortcut: if bar line is selected <Ctrl+Return> inserts a page break
+        If there is already a page break, it is removed.
 25.8 (ws)
       - make palette positions persistent
       - new shortcut: if bar line is selected <Return> inserts a line break

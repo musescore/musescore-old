@@ -1705,11 +1705,20 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "system-break",
-         QT_TR_NOOP("add system break"),
+         QT_TR_NOOP("toggle system break"),
          Qt::Key_Return,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add System Break"),
-         QT_TR_NOOP("Add System Break")
+         QT_TR_NOOP("Toggle System Break"),
+         QT_TR_NOOP("Toggle System Break")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "page-break",
+         QT_TR_NOOP("toggle page break"),
+         Qt::CTRL+Qt::Key_Return,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Toggle Page Break"),
+         QT_TR_NOOP("Toggle Page Break")
          ),
       Shortcut(0, 0, 0),
       };

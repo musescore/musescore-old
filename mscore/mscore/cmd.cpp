@@ -1912,6 +1912,38 @@ void Score::cmd(const QString& cmd)
                               lb->setParent(measure);
                               cmdAdd(lb);
                               }
+                        else {
+                              // remove line break
+                              foreach(Element* e, *measure->el()) {
+                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
+                                          cmdRemove(e);
+                                          break;
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            else if (cmd == "page-break") {
+                  Element* e = selection()->element();
+                  if (e && e->type() == BAR_LINE) {
+                        BarLine* barline = static_cast<BarLine*>(e);
+                        Measure* measure = barline->measure();
+                        if (!measure->pageBreak()) {
+                              LayoutBreak* lb = new LayoutBreak(this);
+                              lb->setSubtype(LAYOUT_BREAK_PAGE);
+                              lb->setTrack(-1);       // this are system elements
+                              lb->setParent(measure);
+                              cmdAdd(lb);
+                              }
+                        else {
+                              // remove line break
+                              foreach(Element* e, *measure->el()) {
+                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_PAGE) {
+                                          cmdRemove(e);
+                                          break;
+                                          }
+                                    }
+                              }
                         }
                   }
             else if (cmd == "")
