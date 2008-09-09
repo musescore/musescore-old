@@ -2131,10 +2131,10 @@ foreach(Element* el, *(score->gel())) {
                   }
 
             xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
-            xml.tag("part-name", part->longName().toPlainText());
+            xml.tag("part-name", part->longName());
 
             xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("instrument-name", part->longName().toPlainText());
+            xml.tag("instrument-name", part->longName());
             xml.etag();
 
             xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));

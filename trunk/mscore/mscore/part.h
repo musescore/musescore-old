@@ -29,6 +29,7 @@ class Staff;
 class Score;
 class Drumset;
 class InstrumentTemplate;
+class TextBase;
 
 //---------------------------------------------------------
 //   Part
@@ -37,8 +38,10 @@ class InstrumentTemplate;
 class Part {
       Score* _score;
       QString _trackName;           ///< used in tracklist
-      QTextDocument _longName;      ///< shown on first system
-      QTextDocument _shortName;     ///< shown on followup systems
+
+      TextBase* _longNameBase;
+      TextBase* _shortNameBase;
+
       Instrument _instrument;
       QList<Staff*> _staves;
       QString _id;                  ///< used for MusicXml import
@@ -46,7 +49,7 @@ class Part {
 
    public:
       Part(Score*);
-      ~Part() {}
+      ~Part();
       void initFromInstrTemplate(const InstrumentTemplate*);
 
       void read(QDomElement);
@@ -57,14 +60,23 @@ class Part {
       Staff* staff(int idx) const;
       void setId(const QString& s)             { _id = s; }
       QString id() const                       { return _id; }
-      const QTextDocument& shortName() const   { return _shortName; }
-      const QTextDocument& longName()  const   { return _longName;  }
       QString trackName() const                { return _trackName;  }
+      void setTrackName(const QString& s)      { _trackName = s; }
+
+      QString shortName() const;
+      QString longName()  const;
+      QString shortNameHtml() const;
+      QString longNameHtml()  const;
+
+      TextBase** longNameBase()                { return &_longNameBase; }
+      TextBase** shortNameBase()               { return &_shortNameBase; }
       void setLongName(const QString& s);
       void setShortName(const QString& s);
+      void setLongNameHtml(const QString& s);
+      void setShortNameHtml(const QString& s);
       void setLongName(const QTextDocument& s);
       void setShortName(const QTextDocument& s);
-      void setTrackName(const QString& s)      { _trackName = s; }
+
       void setStaves(int);
 
       void setMinPitch(int val)                { _instrument.minPitch = val;     }

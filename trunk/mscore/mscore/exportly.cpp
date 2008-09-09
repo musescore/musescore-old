@@ -33,10 +33,10 @@
 Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
 */
 
-/* TODO  
+/* TODO
 1. Voltas
 2. Slurs: existing slurcheck does not work. Have to look at exportxml.cpp to find a way.
-3. Tuplets 
+3. Tuplets
 4. Segno etc.                      -----"-------
 */
 
@@ -79,13 +79,13 @@ class ExportLy {
   int indx;
   bool graceswitch;
   int prevpitch, chordpitch, oktavdiff;
-  
+
   void indent();
   int getLen(int ticks, int* dots);
   void writeLen(int);
   QString tpc2name(int tpc);
   void checkSlur(int, int);
-  
+
   void writeScore();
   void writeMeasure(Measure*, int);
   void writeKeySig(int);
@@ -94,7 +94,7 @@ class ExportLy {
   void writeChord(Chord*);
   void writeRest(int, int, int);
   void writeBarline(Measure* m);
-  
+
 public:
   ExportLy(Score* s) {
     score  = s;
@@ -288,7 +288,7 @@ void ExportLy::writeChord(Chord* c)
 
   // only the stem direction of the first chord in a
   // beamed chord group is relevant
-  if (c->beam() == 0 || c->beam()->getElements().front() == c) 
+  if (c->beam() == 0 || c->beam()->getElements().front() == c)
     {
       Direction d = c->stemDirection();
       if (d != stemDirection) {
@@ -310,17 +310,17 @@ void ExportLy::writeChord(Chord* c)
   if (nl->size() > 1)
     os << "<";
 
-  for (iNote i = nl->begin();;) 
+  for (iNote i = nl->begin();;)
     {
       Note* n = i->second;
       NoteType gracen;
-      
+
       gracen = n->noteType();
       /*OLAV: her må vi vel sjekke om noten er en grace*/
-      switch(gracen) 
+      switch(gracen)
 	{
 	case NOTE_INVALID:
-	case NOTE_NORMAL: if (graceswitch==true)  
+	case NOTE_NORMAL: if (graceswitch==true)
 	    {
 	      graceswitch=false;
 	      graceslur=true;
@@ -331,32 +331,32 @@ void ExportLy::writeChord(Chord* c)
 	case NOTE_APPOGGIATURA:
 	case NOTE_GRACE4:
 	case NOTE_GRACE16:
-	case NOTE_GRACE32: 	
-	  if (graceswitch==false)  
-	    { 
-	      os << "\\grace{"; 
-	      graceswitch=true; 
+	case NOTE_GRACE32:
+	  if (graceswitch==false)
+	    {
+	      os << "\\grace{";
+	      graceswitch=true;
 	    }
-	  else 
+	  else
 	    if (graceswitch==true)
 	      {
 		os << "[( ";
 	      }
-	  break;                   
+	  break;
 	} //end of switch
 
       os << tpc2name(n->tpc());
 
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());
-      
+
       if      (purename.contains("eses")==1) purepitch=purepitch+2;
       else if (purename.contains("es")==1) purepitch=purepitch+1;
       else if (purename.contains("isis")==1) purepitch=purepitch-2;
       else if (purename.contains("is")==1) purepitch=purepitch-1;
 
       oktavdiff=prevpitch - purepitch;
-      
+
       int oktreit = (numval(oktavdiff) / 12);
       int oktavmod = (numval(oktavdiff) % 12);
       if (oktavmod < 6) oktreit=oktreit-1;
@@ -367,13 +367,13 @@ void ExportLy::writeChord(Chord* c)
       else if (oktavdiff > 6)  {os << ",";}
 
 
-      while (oktreit > 0) 
+      while (oktreit > 0)
 	{
 	  --oktreit;
 	  if (oktavdiff < -6) {os << "'"; }
 	  else if (oktavdiff > 6)  {os << ",";}
 	}
-	  
+
       prevpitch=n->pitch();
 
       if (i == nl->begin()) chordpitch=prevpitch;
@@ -397,7 +397,7 @@ void ExportLy::writeChord(Chord* c)
       os << " ) "; //slur skulle vært avslutta etter hovednoten.
       graceslur=false;
     }
-      
+
   foreach(Articulation* a, *c->getArticulations()) {
     switch(a->subtype()) {
     case UfermataSym:
@@ -517,19 +517,19 @@ int ExportLy::getLen(int l, int* dots)
       {
       int len  = 4;
 
-      if      (l == 6 * division) 
+      if      (l == 6 * division)
 	{
 	  len  = 1;
 	  *dots = 1;
 	}
-      else if (l == 5 * division) 
+      else if (l == 5 * division)
 	{
 	  len = 1;
 	  *dots = 2;
 	}
       else if (l == 4 * division)
             len = 1;
-      else if (l == 3 * division) 
+      else if (l == 3 * division)
 	{
 	  len = 2;
 	  *dots = 1;
@@ -551,7 +551,7 @@ int ExportLy::getLen(int l, int* dots)
 	}
       else if (l == division / 16)
             len = 64;
-      else if (l == division /32) 
+      else if (l == division /32)
 	    len = 128;
       else printf("unsupported len %d (%d,%d)\n", l, l/division, l % division);
       return len;
@@ -611,10 +611,10 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 
       indent();
 
-      for (int voice = 0; voice < VOICES; ++voice) 
+      for (int voice = 0; voice < VOICES; ++voice)
 	{
 	  voiceActive[voice] = false;
-	  
+
 	  for(Segment* s = m->first(); s; s = s->next()) {
 	    Element* e = s->element(staffIdx * VOICES + voice);
 	    if (e) {
@@ -626,13 +626,13 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 
       int activeVoices = 0;
 
-      for (int voice = 0; voice < VOICES; ++voice) 
+      for (int voice = 0; voice < VOICES; ++voice)
 	{
 	  if (voiceActive[voice])
 	    ++activeVoices;
 	}
 
-      if (activeVoices > 1) 
+      if (activeVoices > 1)
 	{
 	  os << "<<\n";
 	  ++level;
@@ -641,7 +641,7 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 
       int nvoices = activeVoices;
 
-      for (int voice = 0; voice < VOICES; ++voice) 
+      for (int voice = 0; voice < VOICES; ++voice)
 	{
 	  if (!voiceActive[voice])
 	    continue;
@@ -649,10 +649,10 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 	    indent();
 	    os << "{ ";
 	  }
-	  
+
 	  int tick = m->tick();
-          
-	  for(Segment* s = m->first(); s; s = s->next()) 
+
+	  for(Segment* s = m->first(); s; s = s->next())
 	    {
 	      Element* e = s->element(staffIdx * VOICES + voice);
 	      if (e == 0 || e->generated())
@@ -708,7 +708,7 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 	      }
 	    } //end for segment
 
-            if (activeVoices > 1) 
+            if (activeVoices > 1)
 	      {
 		os << "}\n";
 		indent();
@@ -722,7 +722,7 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
             indent();
 	}// end for all voices
 
-      if (activeVoices > 1) 
+      if (activeVoices > 1)
 	{
 	  os << ">>";
 	  --level;
@@ -741,23 +741,23 @@ void ExportLy::writeScore()
 {
   char  cpartnum;
   char * relativ;
-  QString  partname[32], partshort[32]; 
+  QString  partname[32], partshort[32];
   chordpitch=41;
 
       int staffIdx = 0;
       int np = score->parts()->size();
       graceswitch=false;
-    
+
       if (np > 1) {
-           
+
             }
       foreach(Part* part, *score->parts()) {
             int n = part->staves()->size();
-	    
-	    partname[staffIdx] =  part->longName().toPlainText();	   
-	    partshort[staffIdx] = part->shortName().toPlainText();
-            
-	    if (n > 1) 
+
+	    partname[staffIdx] =  part->longName();
+	    partshort[staffIdx] = part->shortName();
+
+	    if (n > 1)
 	      {
 	     //OLAV TODO: må lagres for score-block på slutten isteden:
                   os << "\\new PianoStaff <<\n";
@@ -769,42 +769,42 @@ void ExportLy::writeScore()
 	      {
 
 		os << "\n";
-	
+
 		switch(staff->clef()->clef(0)) {
-		case CLEF_G:  
+		case CLEF_G:
 		  relativ="'";
 		  prevpitch=12*5;
 		  break;
-		case CLEF_TAB:              
-		case CLEF_PERC: 
-		case CLEF_G3: 
-		case CLEF_F:  
+		case CLEF_TAB:
+		case CLEF_PERC:
+		case CLEF_G3:
+		case CLEF_F:
 		  relativ="";
 		  prevpitch=12*4;
 		  break;
-		case CLEF_G1: 
-		case CLEF_G2: 
-		  relativ="''"; 
+		case CLEF_G1:
+		case CLEF_G2:
+		  relativ="''";
 		  prevpitch=12*6;
 		  break;
-		case CLEF_F_B: 
-		case CLEF_F_C: 
-		case CLEF_F8: 
-		  relativ=",";  
+		case CLEF_F_B:
+		case CLEF_F_C:
+		case CLEF_F8:
+		  relativ=",";
 		  prevpitch=12*3;
 		  break;
-		case CLEF_F15: 
+		case CLEF_F15:
 		  relativ=",,";
 		  prevpitch=12*2;
 		  break;
-		case CLEF_C1: 
-		case CLEF_C2: 
-		case CLEF_C3: 
-		case CLEF_C4: 
-		  relativ="'";  
+		case CLEF_C1:
+		case CLEF_C2:
+		case CLEF_C3:
+		case CLEF_C4:
+		  relativ="'";
 		  prevpitch=12*5;
 		  break;
-		}      
+		}
 
 		cpartnum = staffIdx + 65;
 		voiceid[staffIdx] = partshort[staffIdx];
@@ -817,27 +817,27 @@ void ExportLy::writeScore()
 
 		os << voiceid[staffIdx]  << " = \\relative c" << relativ <<  "\n";
 		os << "{\n";
- 
-		++level;               
+
+		++level;
 		indent();
-		
+
 
 		writeClef(staff->clef()->clef(0));
-		writeKeySig(staff->keymap()->key(0)); 
+		writeKeySig(staff->keymap()->key(0));
 		//done also in write measure,
 		// -- because there can be new keysigs unterwegs?
-		
-		for (MeasureBase* m = score->layout()->first(); m; m = m->next()) 
+
+		for (MeasureBase* m = score->layout()->first(); m; m = m->next())
 		  {
 		    if (m->type() != MEASURE)
 		      continue;
-		  
+
 		    os << "\n";
 		    writeMeasure((Measure*)m, staffIdx);
 		  }
 
 		os << "\n";
-		 
+
 		level=0;
 		indent();
 		os << "}%etter siste takt\n";
@@ -846,11 +846,11 @@ void ExportLy::writeScore()
 	      }
 	    voiceid[staffIdx]="laststaff";
             if (n > 1) {
-	      --level;	      
+	      --level;
 	      indent();
 	      os << "laststaff\n";
 	    }
-      }      
+      }
 }
 
 //---------------------------------------------------------
@@ -931,10 +931,10 @@ bool ExportLy::write(const QString& name)
             }
       indent();
       os << "}\n";
-    
+
 
       writeScore();
-      
+
       /*-------------olav:--------------*/
       // her må det lages en funksjon som produserer en egen
       // score-block ut fra data vi har samlet før:
@@ -945,7 +945,7 @@ bool ExportLy::write(const QString& name)
       indent();
       while (voiceid[indx]!="laststaff")
 	{
-	  os << "\\context Staff = O" << voiceid[indx] << "G" << "  << \n"; 
+	  os << "\\context Staff = O" << voiceid[indx] << "G" << "  << \n";
 	  ++level;
 	  indent();
 	  os << "\\context Voice = O" << voiceid[indx] << "G \\" << voiceid[indx] << "\n";
@@ -978,16 +978,16 @@ void ExportLy::checkSlur(int tick, int track)
 	  Measure* m = (Measure*) mb;
 	  foreach(Element* e, *m->el()) {
 	    if (e->type() != SLUR)
-	      {	 
+	      {
 		continue;
 	      }
 	    Slur* s = (Slur*)e;
-	    if ((s->tick() == tick) && (s->track() == track)) 
+	    if ((s->tick() == tick) && (s->track() == track))
 	      {
 		os << "(";
 		printf("startSlur %d-%d  %d-%d\n", tick, track, s->tick2(), s->track2());
 	      }
-	    if ((s->tick2() == tick) && (s->track2() == track)) 
+	    if ((s->tick2() == tick) && (s->track2() == track))
 	      {
 		os << ")";
 		printf("endSlur %d-%d  %d-%d\n", s->tick(), s->track(), tick, track);

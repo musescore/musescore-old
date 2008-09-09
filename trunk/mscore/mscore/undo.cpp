@@ -53,6 +53,7 @@
 #include "tuplet.h"
 #include "harmony.h"
 #include "pitchspelling.h"
+#include "part.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -93,6 +94,7 @@ static const char* undoName[] = {
       "TransposeHarmony",
       "ExchangeVoice",
       "ChangeConcertPitch",
+      "ChangeInstrumentShort", "ChangeInstrumentLong"
       };
 
 static bool UNDO = false;
@@ -627,6 +629,20 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   QAction* action = getAction("concert-pitch");
                   action->setChecked(_style->concertPitch);
                   i->val1 = oval;
+                  }
+                  break;
+            case UndoOp::ChangeInstrumentShort:
+                  {
+                  QString s = i->part->shortNameHtml();
+                  i->part->setShortNameHtml(i->s);
+                  i->s = s;
+                  }
+                  break;
+            case UndoOp::ChangeInstrumentLong:
+                  {
+                  QString s = i->part->longNameHtml();
+                  i->part->setLongNameHtml(i->s);
+                  i->s = s;
                   }
                   break;
             }

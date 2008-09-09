@@ -1,3 +1,5 @@
+9.9. (ws)
+      - fixed in place editing of instrument names
 28.8 (ws)
       - new shortcut: if bar line is selected <Ctrl+Return> inserts a page break
         If there is already a page break, it is removed.

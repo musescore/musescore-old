@@ -27,6 +27,7 @@
 #include "note.h"
 #include "drumset.h"
 #include "instrtemplate.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   Part
@@ -34,20 +35,25 @@
 
 Part::Part(Score* s)
       {
-      QTextOption to = _longName.defaultTextOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(QTextOption::NoWrap);
-      _longName.setUseDesignMetrics(true);
-      _longName.setDefaultTextOption(to);
-      _shortName.setUseDesignMetrics(true);
-      _shortName.setDefaultTextOption(to);
+//      QTextOption to = _longName.defaultTextOption();
+//      to.setUseDesignMetrics(true);
+//      to.setWrapMode(QTextOption::NoWrap);
 
-      _longName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_LONG)->font());
-      _shortName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_SHORT)->font());
+      _longNameBase = new TextBase;
+      _shortNameBase = new TextBase;
+      _longNameBase->setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_LONG)->font());
+      _shortNameBase->setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_SHORT)->font());
 
       _score = s;
       _show  = true;
       }
+
+Part::~Part()
+      {
+      delete _longNameBase;
+      delete _shortNameBase;
+      }
+
 
 //---------------------------------------------------------
 //   initFromInstrTemplate
@@ -104,15 +110,15 @@ void Part::read(QDomElement e)
                   _instrument.read(e);
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
-                        _longName.setHtml(val);
+                        _longNameBase->setHtml(val);
                   else
-                        _longName.setHtml(Xml::htmlToString(e.firstChildElement()));
+                        _longNameBase->setHtml(Xml::htmlToString(e.firstChildElement()));
                   }
             else if (tag == "shortName") {
                   if (_score->mscVersion() <= 101)
-                        _shortName.setHtml(val);
+                        _shortNameBase->setHtml(val);
                   else
-                        _shortName.setHtml(Xml::htmlToString(e.firstChildElement()));
+                        _shortNameBase->setHtml(Xml::htmlToString(e.firstChildElement()));
                   }
             else if (tag == "trackName") {
                   _trackName = val;
@@ -130,7 +136,7 @@ void Part::read(QDomElement e)
 
 void Part::setLongName(const QString& s)
       {
-      _longName.setPlainText(s);
+      _longNameBase->setText(s, ALIGN_LEFT);
       }
 
 //---------------------------------------------------------
@@ -139,7 +145,37 @@ void Part::setLongName(const QString& s)
 
 void Part::setShortName(const QString& s)
       {
-      _shortName.setPlainText(s);
+      _shortNameBase->setText(s, ALIGN_LEFT);
+      }
+
+void Part::setLongNameHtml(const QString& s)
+      {
+      _longNameBase->setHtml(s);
+      }
+
+void Part::setShortNameHtml(const QString& s)
+      {
+      _shortNameBase->setHtml(s);
+      }
+
+QString Part::shortName() const
+      {
+      return _shortNameBase->getText();
+      }
+
+QString Part::longName() const
+      {
+      return _longNameBase->getText();
+      }
+
+QString Part::shortNameHtml() const
+      {
+      return _shortNameBase->getHtml();
+      }
+
+QString Part::longNameHtml() const
+      {
+      return _longNameBase->getHtml();
       }
 
 //---------------------------------------------------------
@@ -148,7 +184,7 @@ void Part::setShortName(const QString& s)
 
 void Part::setLongName(const QTextDocument& s)
       {
-      _longName.setHtml(s.toHtml("utf8"));
+      _longNameBase->setDoc(s);
       }
 
 //---------------------------------------------------------
@@ -157,7 +193,7 @@ void Part::setLongName(const QTextDocument& s)
 
 void Part::setShortName(const QTextDocument& s)
       {
-      _shortName.setHtml(s.toHtml("utf8"));
+      _shortNameBase->setDoc(s);
       }
 
 //---------------------------------------------------------
@@ -171,14 +207,14 @@ void Part::write(Xml& xml) const
             staff->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
-      if (!_longName.isEmpty()) {
+      if (!_longNameBase->isEmpty()) {
             xml.stag("name");
-            xml.writeHtml(_longName.toHtml("UTF-8"));
+            xml.writeHtml(_longNameBase->getHtml());
             xml.etag();
             }
-      if (!_shortName.isEmpty()) {
+      if (!_shortNameBase->isEmpty()) {
             xml.stag("shortName");
-            xml.writeHtml(_shortName.toHtml("UTF-8"));
+            xml.writeHtml(_shortNameBase->getHtml());
             xml.etag();
             }
       if (!_show)

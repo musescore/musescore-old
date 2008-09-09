@@ -42,8 +42,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
       transposition->setValue(part->pitchOffset());
-      shortName->setHtml(part->shortName().toHtml("UTF-8"));
-      longName->setHtml(part->longName().toHtml("UTF-8"));
+      shortName->setHtml(part->shortNameHtml());
+      longName->setHtml(part->longNameHtml());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));

@@ -455,14 +455,14 @@ void System::setInstrumentName(int staffIdx)
             return;
       SysStaff* staff = _staves[staffIdx];
       if (staff->instrumentName == 0)
-            staff->instrumentName = new Text(cs);
+            staff->instrumentName = new TextC(s->part()->longNameBase(), cs);
       if (_firstSystem) {
             staff->instrumentName->setSubtype(TEXT_INSTRUMENT_LONG);
-            staff->instrumentName->setDoc(s->longName());
+            staff->instrumentName->setTextBase(s->part()->longNameBase());
             }
       else {
             staff->instrumentName->setSubtype(TEXT_INSTRUMENT_SHORT);
-            staff->instrumentName->setDoc(s->shortName());
+            staff->instrumentName->setTextBase(s->part()->shortNameBase());
             }
       staff->instrumentName->setParent(this);
       staff->instrumentName->setTrack(staffIdx * VOICES);
@@ -505,7 +505,7 @@ void System::add(Element* el)
       {
       el->setParent(this);
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
-            _staves[el->staffIdx()]->instrumentName = (Text*)el;
+            _staves[el->staffIdx()]->instrumentName = static_cast<TextC*>(el);
             }
       else if (el->type() == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
