@@ -1,4 +1,5 @@
 9.9. (ws)
+      - fixed "legato bug"
       - fixed in place editing of instrument names
 28.8 (ws)
       - new shortcut: if bar line is selected <Ctrl+Return> inserts a page break

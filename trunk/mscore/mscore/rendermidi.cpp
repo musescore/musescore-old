@@ -261,14 +261,14 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                         // move acciaccatura's in front of
                         // main note
                         //
-                        int sl = len / 4;
+                        int sl  = len / 4;
                         int ssl = len / (2 * sv.size());
                         foreach(Chord* c, sv) {
                               collectChord(events, instr,
                                  pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset - sl,
-                                 ssl * gateTime / 100
+                                 ssl * gateTime / 100 - 1
                                  );
                               sl -= ssl;
                               }
@@ -284,7 +284,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                                  pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset + sl,
-                                 ssl * gateTime / 100
+                                 ssl * gateTime / 100 - 1
                                  );
                               sl += ssl;
                               len -= ssl;
@@ -294,7 +294,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                      instr,
                      pitchOffset + ottavaShift,
                      chord, tick + tickOffset,
-                     (len * gateTime) / 100
+                     (len * gateTime) / 100 - 1
                      );
                   lv.clear();
                   sv.clear();
