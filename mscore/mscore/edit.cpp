@@ -535,12 +535,12 @@ void Score::cmdAddStaccato()
       {
       Element* e = sel->element();
       if (!e || e->type() !=NOTE) {
-            printf("ingen note valgt\n");
+            printf("no note selected\n");
             return;
             }
-      Note* note    = (Note*)(e);
-      Chord* chord  = note->chord();
-      int staffIdx  = chord->staffIdx();
+//      Note* note    = (Note*)(e);
+//      Chord* chord  = note->chord();
+//      int staffIdx  = chord->staffIdx();
       //Vi er n� klar over hvor vi er, og kan operere p� dette stedet:
       }
 

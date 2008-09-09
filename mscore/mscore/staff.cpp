@@ -120,6 +120,7 @@ QString Staff::trackName() const
       return _part->trackName();
       }
 
+#if 0
 //---------------------------------------------------------
 //   longName
 //---------------------------------------------------------
@@ -137,6 +138,7 @@ const QTextDocument& Staff::shortName() const
       {
       return _part->shortName();
       }
+#endif
 
 //---------------------------------------------------------
 //   Staff

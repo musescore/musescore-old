@@ -1027,6 +1027,14 @@ void Score::startEdit(Element* element)
       {
       origEditObject = element;
       editObject     = element->clone();
+
+      int tp = editObject->type();
+      int st = editObject->subtype();
+      if (tp == TEXT && (st == TEXT_INSTRUMENT_SHORT || st == TEXT_INSTRUMENT_LONG)) {
+            TextC* in = static_cast<TextC*>(editObject);
+            oldInstrumentName = in->getHtml();
+            }
+
       editObject->setSelected(false);
       origEditObject->resetMode();
       undoChangeElement(origEditObject, editObject);
@@ -1048,21 +1056,23 @@ void Score::endEdit()
       editObject->endEdit();
       refresh |= editObject->bbox();
 
-      if (editObject->type() == TEXT) {
-            Text* in = (Text*)editObject;
-            Part* p  = part(in->staffIdx());
-            if (editObject->subtype() == TEXT_INSTRUMENT_SHORT) {
-                  p->setShortName(*(in->doc()));
-                  _layout->setInstrumentNames();
-                  }
-            else if (editObject->subtype() == TEXT_INSTRUMENT_LONG) {
-                  p->setLongName(*(in->doc()));
-                  _layout->setInstrumentNames();
-                  }
+      int tp = editObject->type();
+      int st = editObject->subtype();
+
+      if (tp == TEXT && (st == TEXT_INSTRUMENT_SHORT || st == TEXT_INSTRUMENT_LONG)) {
+            TextC* in = static_cast<TextC*>(editObject);
+            UndoOp i;
+            if (st == TEXT_INSTRUMENT_SHORT)
+                  i.type = UndoOp::ChangeInstrumentShort;
+            else
+                  i.type = UndoOp::ChangeInstrumentLong;
+            i.part = in->staff()->part();
+            i.s    = oldInstrumentName;
+            undoList.back()->push_back(i);
             }
-      else if (editObject->type() == LYRICS)
+      else if (tp == LYRICS)
             lyricsEndEdit();
-      else if (editObject->type() == HARMONY)
+      else if (tp == HARMONY)
             harmonyEndEdit();
       layoutAll = true;
       mscore->setState(STATE_NORMAL);

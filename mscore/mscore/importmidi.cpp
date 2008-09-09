@@ -1095,7 +1095,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
 
                   part->setLongName(track->name());
 
-            part->setTrackName(part->longName().toPlainText());
+            part->setTrackName(part->longName());
             part->setMidiChannel(track->outChannel());
             part->setMidiProgram(track->program & 0x7f);  // only GM
             _parts.push_back(part);

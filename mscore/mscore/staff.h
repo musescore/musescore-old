@@ -80,8 +80,8 @@ class Staff {
       int key(int tick) const;
       bool isTop() const             { return _rstaff == 0; }
       QString trackName() const;
-      const QTextDocument& longName() const;
-      const QTextDocument& shortName() const;
+//      const QTextDocument& longName() const;
+//      const QTextDocument& shortName() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n;    }

@@ -88,6 +88,7 @@ class TextBase {
       QString getText() const;
       QString getHtml() const;
       void setHtml(const QString& s);
+      bool isEmpty() const                  { return _doc->isEmpty(); }
       };
 
 //---------------------------------------------------------
@@ -207,9 +208,10 @@ class TextC : public TextB {
       TextC(const TextC&);
       ~TextC();
       virtual TextC* clone() const          { return new TextC(*this); }
-      virtual TextBase* textBase() const    { return *_tbb; }
-      TextBase* otb()                       { return _otb; }
-      void setOtb(TextBase* b)              { _otb = b; }
+      virtual TextBase* textBase() const    { return *_tbb;            }
+      void setTextBase(TextBase** tb)       { _tbb = tb;               }
+      TextBase* otb()                       { return _otb;             }
+      void setOtb(TextBase* b)              { _otb = b;                }
       virtual void setStyle(const TextStyle*);
       void baseChanged();
       };

@@ -310,8 +310,8 @@ TextC::TextC(TextBase** txtb, Score* s)
 TextC::TextC(const TextC& e)
    : TextB(e)
       {
-      _tbb  = e._tbb;
-      _otb  = 0;
+      _tbb   = e._tbb;
+      _otb   = 0;
       cursor = 0;
       baseChanged();
       }
