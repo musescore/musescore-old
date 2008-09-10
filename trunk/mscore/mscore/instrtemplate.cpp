@@ -209,6 +209,16 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
             else
                   domError(de);
             }
+      if (channel.isEmpty()) {
+            Channel* a      = new Channel();
+            a->chorus       = 0;
+            a->reverb       = 0;
+            a->name         = "normal";
+            a->program      = 0;
+            a->volume       = 100;
+            a ->pan         = 60;
+            channel.append(a);
+            }
       }
 
 //---------------------------------------------------------
