@@ -1421,36 +1421,89 @@ bool Score::saveSvg(const QString& saveName)
 
 //---------------------------------------------------------
 //   savePng
+//    return true on success
 //---------------------------------------------------------
 
 bool Score::savePng(const QString& name)
       {
-      _printing = !preferences.pngScreenShot;
+      if (!canvas()->lassoRect().isEmpty() && preferences.pngScreenShot) {
+            // this is a special hack to export only the canvas lasso selection
+            // into png (screen shot mode)
 
-      QRectF r;
-      if (!preferences.pngScreenShot || canvas()->lassoRect().isEmpty()) {
-            Page* page = _layout->pages().front();
-            r = page->bbox();
-            canvas()->setLassoRect(r);
+            QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
+
+            int w = lrint(r.width()  * converterDpi / DPI);
+            int h = lrint(r.height() * converterDpi / DPI);
+
+            QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
+            printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+            printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+//          printer.fill(-1);     // white background
+            printer.fill(0);      // transparent background
+            double m = converterDpi / PDPI;
+            QPainter p(&printer);
+            canvas()->paintLasso(p, m);
+            return printer.save(name, "png");
             }
-      else
-            r = canvas()->matrix().mapRect(canvas()->lassoRect());
 
-      int w = lrint(r.width()  * converterDpi / DPI);
-      int h = lrint(r.height() * converterDpi / DPI);
+      const QList<Page*>& pl = _layout->pages();
+      int pages = pl.size();
 
-      QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
-      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
-      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-//      printer.fill(-1);     // white background
-      printer.fill(0);        // transparent background
+      QList<const Element*> eel;
+      foreach (const Element* element, _gel)
+            element->collectElements(eel);
+      for (MeasureBase* m = _measures.first(); m; m = m->next())
+            m->collectElements(eel);
 
-      double m = converterDpi / PDPI;
+      for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
+            const Page* page = pl.at(pageNumber);
+            QList<const Element*> el;
+            page->collectElements(el);
 
-      QPainter p(&printer);
-      canvas()->paintLasso(p, m);
-      bool rv = printer.save(name, "png");
+            QRectF r = page->abbox();
+            int w = lrint(r.width()  * converterDpi / DPI);
+            int h = lrint(r.height() * converterDpi / DPI);
 
-      return rv;
+            QImage printer(w, h, QImage::Format_ARGB32_Premultiplied);
+            printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+            printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+            printer.fill(0);      // transparent background
+
+            double mag = converterDpi / DPI;
+            QPainter p(&printer);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setRenderHint(QPainter::TextAntialiasing, true);
+            p.scale(mag, mag);
+
+            foreach(const Element* e, eel) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+
+            QString fileName(name);
+            if (fileName.endsWith(".png"))
+                  fileName = fileName.left(fileName.size() - 4);
+            fileName += QString("-%1.png").arg(pageNumber+1);
+
+            bool rv = printer.save(fileName, "png");
+            if (!rv)
+                  return false;
+            }
+      return true;
       }
 

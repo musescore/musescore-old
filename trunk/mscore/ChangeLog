@@ -1,3 +1,6 @@
+11.9 (ws)
+      - mscore can now export multi page scores to png. A new file is created for
+        every score page.
 9.9. (ws)
       - fixed "legato bug"
       - fixed in place editing of instrument names
