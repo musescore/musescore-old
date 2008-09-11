@@ -622,15 +622,17 @@ void Score::fixTicks()
                   mb->setTick(tick);
                   continue;
                   }
-            Measure* m = (Measure*)mb;
+            Measure* m = static_cast<Measure*>(mb);
             if (m->no() != bar)
                   m->setNo(bar);
             if (!m->irregular())
                   ++bar;
             int mtick = m->tick();
             int diff  = tick - mtick;
-// printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, sigmap->ticksMeasure(tick));
-            tick     += sigmap->ticksMeasure(tick);
+            int measureTicks = sigmap->ticksMeasure(tick);
+// printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, measureTicks);
+            tick += measureTicks;
+            m->setTickLen(measureTicks);
             m->moveTicks(diff);
             }
       }
