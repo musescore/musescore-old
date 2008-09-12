@@ -58,9 +58,9 @@ install(
       PATTERN ".svn" EXCLUDE
       )
 
-install(
-      DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pic
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
-      PATTERN ".svn" EXCLUDE
-      )
+#install(
+#      DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pic
+#      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
+#      PATTERN ".svn" EXCLUDE
+#      )
 
