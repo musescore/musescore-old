@@ -1,3 +1,6 @@
+13.9 (ws)
+      - replace semaphore locking with lockless fifo implementation; maybe this
+      fixes a problem when mscore did not start up on first try
 11.9 (ws)
       - fix changing time signature of a template in "Create New Score" wizard
       - mscore can now export multi page scores to png. A new file is created for

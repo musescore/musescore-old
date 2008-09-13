@@ -554,16 +554,9 @@ void Seq::playEvent(const Event* event)
 void Seq::processMessages()
       {
       for (;;) {
-            mutex.lock();
-            if (toSeq.isEmpty()) {
-                  wait.wakeAll();
-                  mutex.unlock();
+            if (toSeq.isEmpty())
                   break;
-                  }
             SeqMsg msg = toSeq.dequeue();
-            wait.wakeAll();
-            mutex.unlock();
-
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         {
@@ -1065,10 +1058,7 @@ void Seq::guiToSeq(const SeqMsg& msg)
       {
       if (!driver || !running)
             return;
-      mutex.lock();
       toSeq.enqueue(msg);
-      wait.wait(&mutex);
-      mutex.unlock();
       }
 
 //---------------------------------------------------------
@@ -1093,3 +1083,37 @@ void Seq::midiInputReady()
             }
       }
 
+//---------------------------------------------------------
+//   SeqMsgFifo
+//---------------------------------------------------------
+
+SeqMsgFifo::SeqMsgFifo()
+      {
+      maxCount = SEQ_MSG_FIFO_SIZE;
+      clear();
+      }
+
+//---------------------------------------------------------
+//   enqueue
+//---------------------------------------------------------
+
+void SeqMsgFifo::enqueue(const SeqMsg& msg)
+      {
+      if (isFull()) {
+            printf("SeqMsgFifo: overflow\n");
+            return;
+            }
+      messages[widx] = msg;
+      push();
+      }
+
+//---------------------------------------------------------
+//   dequeue
+//---------------------------------------------------------
+
+SeqMsg SeqMsgFifo::dequeue()
+      {
+      SeqMsg msg = messages[ridx];
+      pop();
+      return msg;
+      }
