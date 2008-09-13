@@ -23,6 +23,7 @@
 
 #include "event.h"
 #include "driver.h"
+#include "fifo.h"
 
 class Synth;
 class Note;
@@ -58,6 +59,22 @@ struct SeqMsg {
       };
 
 //---------------------------------------------------------
+//   SeqMsgFifo
+//---------------------------------------------------------
+
+static const int SEQ_MSG_FIFO_SIZE = 32;
+
+class SeqMsgFifo : public FifoBase {
+      SeqMsg messages[SEQ_MSG_FIFO_SIZE];
+
+   public:
+      SeqMsgFifo();
+      virtual ~SeqMsgFifo()     {}
+      void enqueue(const SeqMsg&);        // put object on fifo
+      SeqMsg dequeue();                   // remove object from fifo
+      };
+
+//---------------------------------------------------------
 //   Seq
 //    sequencer
 //---------------------------------------------------------
@@ -71,9 +88,7 @@ class Seq : public QObject {
       bool playlistChanged;
       bool pauseState;
 
-      mutable QMutex mutex;
-      QWaitCondition wait;
-      QQueue<SeqMsg> toSeq;
+      SeqMsgFifo toSeq;
 
       Driver* driver;
 
