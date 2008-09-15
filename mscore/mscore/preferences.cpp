@@ -1076,8 +1076,18 @@ void PreferenceDialog::useSynthesizerClicked()
 
 void PreferenceDialog::resetAllValues()
       {
-      printf("reset all\n");
       Preferences prefs;
       updateValues(&prefs);
+
+      shortcutsChanged = true;
+      foreach(Shortcut* sc, localShortcuts)
+            delete sc;
+      localShortcuts.clear();
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            localShortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+      updateSCListView();
       }
 

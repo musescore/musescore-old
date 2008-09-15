@@ -115,7 +115,7 @@ class Segment : public Element {
       virtual void remove(Element*);
 
       void sortStaves(QList<int>& dst);
-      const char* name() const { return segmentTypeNames[subtype()]; }
+      const char* subTypeName() const    { return segmentTypeNames[subtype()]; }
       static SegmentType segmentType(int type);
       void setTime(int tick);
       void removeGeneratedElements();

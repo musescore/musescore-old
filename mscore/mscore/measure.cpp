@@ -960,7 +960,7 @@ void Measure::remove(Element* el)
       {
       switch(el->type()) {
             case SEGMENT:
-                  remove((Segment*)el);
+                  remove(static_cast<Segment*>(el));
                   break;
             case TUPLET:
                   {
@@ -1175,7 +1175,7 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
 again:
       for (Segment* s = first(); s; s = s->next()) {
             if (s->isEmpty()) {
-// printf("Measure::layoutX(): note: remove empty segment %p %s\n", s, s->name());
+// printf("Measure::layoutX(): note: remove empty segment %p %s %s\n", s, s->name(), s->subTypeName());
                   remove(s);
                   goto again;
                   }

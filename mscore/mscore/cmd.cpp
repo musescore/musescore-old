@@ -1254,6 +1254,7 @@ void Score::insertMeasures(int n, int type)
 
 void Score::addArticulation(int attr)
       {
+printf("add articulation %d\n", attr);
       foreach(Element* el, *sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
@@ -2098,14 +2099,26 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
       //
 
       select(0, 0, 0);
+      //
       // clear staff in destination Measure
+      //
       for (Segment* s = dm->first(); s;) {
+            if (s->subtype() == Segment::SegEndBarLine) {     // do not remove
+                  s = s->next();
+                  continue;
+                  }
             int startTrack = dstStaffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int t = startTrack; t < endTrack; ++t) {
                   Element* e = s->element(t);
-                  if (e)
-                        undoRemoveElement(e);
+                  if (e) {
+                        if (e->generated()) {
+                              s->remove(e);
+                              }
+                        else {
+                              undoRemoveElement(e);
+                              }
+                        }
                   }
             Segment* ns = s->next();
             dm->cmdRemoveEmptySegment(s);
@@ -2125,11 +2138,19 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
             undoAddElement(tuplet);
             }
 
+      //
       // add src elements to destination
+      //
+
       int srcTickOffset = sm->tick();
       int dstTickOffset = dm->tick();
 
       for (Segment* s = sm->first(); s; s = s->next()) {
+            //
+            // paste only notes and rests
+            //
+            if (s->subtype() != Segment::SegGrace && s->subtype() != Segment::SegChordRest)
+                  continue;
             int startTrack = srcStaffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             int tick       = s->tick() - srcTickOffset + dstTickOffset;
@@ -2137,6 +2158,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
             if (ns == 0) {
                   ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
                   undoAddElement(ns);
+                  printf("add segment %s\n", ns->subTypeName());
                   }
             for (int t = startTrack; t < endTrack; ++t) {
                   Element* e = s->element(t);
@@ -2146,6 +2168,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
                   e->setTick(tick);
                   e->setTrack(e->track() + trackOffset);
                   undoAddElement(e);
+printf("add elem %s\n", e->name());
                   e->setSelected(false);
                   if (e->type() == REST)
                         select(e, Qt::ShiftModifier, 0);
@@ -2156,6 +2179,10 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
                               select(in->second, Qt::ShiftModifier, 0);
                               }
                         }
+                  }
+            if (ns->isEmpty()) {
+                  dm->cmdRemoveEmptySegment(ns);
+printf("remove empty segment %s in copy!\n", ns->subTypeName());
                   }
             }
       }

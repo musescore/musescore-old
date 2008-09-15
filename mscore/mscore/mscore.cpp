@@ -64,7 +64,7 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 
 int division = 480;     // 480 midi ticks represent a quarter note
 
-QPaintDevice* pdev;
+QPrinter* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;
 
@@ -448,7 +448,7 @@ MuseScore::MuseScore()
       sl1 << "pad-note-1" << "pad-note-2" << "pad-note-4" << "pad-note-8"
          << "pad-note-16" << "pad-note-32" << "pad-note-64" << "pad-dot" << "pad-dotdot"
          << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
-         << "pad-nat" << "pad-flat"  <<"pad-flat2" << "pad-staccato";
+         << "pad-nat" << "pad-flat"  <<"pad-flat2"; //  << "pad-staccato";
 
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
