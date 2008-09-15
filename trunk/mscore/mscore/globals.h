@@ -117,5 +117,5 @@ extern QString language;
 
 extern QTextStream cout, eout;
 
-extern QPaintDevice* pdev;
+extern QPrinter* pdev;
 #endif

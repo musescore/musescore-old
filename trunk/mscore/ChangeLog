@@ -1,3 +1,7 @@
+15.9 (ws)
+      - cut&paste measure fixes
+      - fixed pdf export on windows
+      - do not export green break icons to *.png
 13.9 (ws)
       - replace semaphore locking with lockless fifo implementation; maybe this
       fixes a problem when mscore did not start up on first try
