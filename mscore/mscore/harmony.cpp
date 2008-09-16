@@ -232,6 +232,7 @@ void HChord::print() const
 
 void HChord::add(const QList<HDegree>& degreeList)
       {
+printf("HChord::add   ");print();
       // convert degrees to semitones
       static const int degreeTable[] = {
             // 1  2  3  4  5  6   7
@@ -274,6 +275,8 @@ void HChord::add(const QList<HDegree>& degreeList)
                   }
             else
                   printf("degree type %d not supported\n", d.type());
+
+printf("  HCHord::added  "); print();
             }
       }
 
@@ -341,11 +344,14 @@ const ChordDescription Harmony::chordList[] = {
             { 72, "9b13",           "dominant-ninth addb13",                          HChord("C E G Bb D Ab") },  // same as 71
             { 73, "9#11",           "dominant-ninth add#11",                          HChord("C E G Bb D F#") },
             { 74, "13#11",          "dominant-13th alt#11",                           HChord("C E G Bb D F# A") },
-            { 75, "9#11b13",        "dominant-ninth add#11 addb13",                  HChord("C E G Bb D F# Ab") },
+            { 75, "9#11b13",        "dominant-ninth add#11 addb13",                   HChord("C E G Bb D F# Ab") },
             { 76, "7b9",            "dominant addb9",                                 HChord("C E  G Bb Db") },
-            { 77, "13b9",           "dominant-13th altb9",                           HChord("C E G Bb D Fb A") },
-            { 78, "7b9b13",         "dominant-seventh addb9 addb13",                 HChord("C E G Bb Db Ab") },
-            { 79, "7b9#11",         "dominant-seventh addb9 alt#11",                 HChord("C E G Bb Db F#") },
+
+//            { 77, "13b9",           "dominant-13th altb9",                            HChord("C E G Bb D Fb A") },
+            { 77, "13b9",           "dominant-13th altb9",                            HChord("C E G Bb Db F A") },
+
+            { 78, "7b9b13",         "dominant-seventh addb9 addb13",                  HChord("C E G Bb Db Ab") },
+            { 79, "7b9#11",         "dominant-seventh addb9 alt#11",                  HChord("C E G Bb Db F#") },
 
 /*80*/      { 80, "13b9#11",        "dominant-13th altb9 alt#11",                     HChord("C E G Bb Db F# A") },
             { 81, "7b9#11b13",      "dominant-seventh add#11 addb13",                 HChord("C E G Bb Db F# Ab") },
