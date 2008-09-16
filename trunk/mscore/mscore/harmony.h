@@ -36,7 +36,7 @@ enum HDegreeType {
 
 class HDegree {
       int _value;
-      int _alter;
+      int _alter;       // -1, 0, 1  (b - - #)
       int _type;
 
    public:
@@ -45,6 +45,7 @@ class HDegree {
       int value() const { return _value; }
       int alter() const { return _alter; }
       int type() const  { return _type; }
+      QString text() const;
       };
 
 //---------------------------------------------------------
@@ -93,7 +94,8 @@ class HChord {
 struct ChordDescription {
       int id;                 // Chord id number (Band In A Box Chord Number)
       const char* name;       // chord name as entered from the keyboard (without root/base)
-      const char* xml;        // MusicXml description
+      const char* xmlKind;    // MusicXml description: kind
+      const char* xmlDegrees; // MusicXml description: list of degrees (if any)
       HChord chord;           // C based chord
       };
 
@@ -149,7 +151,7 @@ class Harmony : public Text {
       int rootTpc() const                  { return _rootTpc;      }
       void setRootTpc(int val)             { _rootTpc = val;       }
       int chordId() const                  { return _descr ? _descr->id : 0; }
-      void addDegree(HDegree d)            { _degreeList << d;     }
+      void addDegree(const HDegree& d)     { _degreeList << d;     }
       int numberOfDegrees() const          { return _degreeList.size();   }
       HDegree degree(int i) const          { return _degreeList.value(i); }
       void clearDegrees()                  { _degreeList.clear(); }
@@ -161,11 +163,15 @@ class Harmony : public Text {
       void buildText();
 
       const ChordDescription* parseHarmony(const QString& s, int* root, int* base);
-      const char* xmlName() const;
+      const char* xmlKind() const         { return _descr ? _descr->xmlKind : 0; }
+      const char* xmlDegrees() const      { return _descr ? _descr->xmlDegrees : 0; }
+
       void resolveDegreeList();
       void setChordId(int id);
 
+      static const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       static const ChordDescription* fromXml(const QString& s);
+
       static void initHarmony();
       static const ChordDescription* chords()  { return chordList; }
       static unsigned int chordListSize();

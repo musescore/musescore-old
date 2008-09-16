@@ -2418,6 +2418,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       QString printStyle(e.attribute("print-style"));
 
       QString kind, kindText;
+      QList<HDegree> degreeList;
 
       Harmony* ha = new Harmony(measure->score());
 
@@ -2502,11 +2503,11 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                         }
                   else {
                         if (degreeType == "add")
-                              ha->addDegree(HDegree(degreeValue, degreeAlter, ADD));
+                              degreeList << HDegree(degreeValue, degreeAlter, ADD);
                         else if (degreeType == "alter")
-                              ha->addDegree(HDegree(degreeValue, degreeAlter, ALTER));
+                              degreeList << HDegree(degreeValue, degreeAlter, ALTER);
                         else if (degreeType == "subtract")
-                              ha->addDegree(HDegree(degreeValue, degreeAlter, SUBTRACT));
+                              degreeList << HDegree(degreeValue, degreeAlter, SUBTRACT);
                         }
                   }
             else if (tag == "level") {
@@ -2521,15 +2522,37 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       ha->setTick(tick);
 
-      const ChordDescription* d = Harmony::fromXml(kind);
+      const ChordDescription* d = Harmony::fromXml(kind, degreeList);
       if (d == 0) {
-            printf("unknown chord <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
-            QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
-            ha->setText(s);
+            QString degrees;
+            foreach(const HDegree& d, degreeList) {
+                  if (!degrees.isEmpty())
+                        degrees += " ";
+                  degrees += d.text();
+                  }
+            printf("unknown chord txt: <%s> kind: <%s> degrees: %s\n",
+               qPrintable(kindText), qPrintable(kind), qPrintable(degrees));
+
+            // Strategy II: lookup "kind", merge in degree list and try to find
+            //    harmony in list
+
+            d = Harmony::fromXml(kind);
+            if (d) {
+                  ha->setDescr(d);
+                  foreach(const HDegree& d, degreeList)
+                        ha->addDegree(d);
+                  ha->resolveDegreeList();
+                  ha->buildText();
+                  }
+            else {
+                  printf("'kind: <%s> not found in harmony data base\n", qPrintable(kind));
+                  QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
+                  ha->setText(s);
+                  }
             }
       else {
             ha->setDescr(d);
-            ha->resolveDegreeList();
+//            ha->resolveDegreeList();
             ha->buildText();
             }
       ha->setVisible(printObject == "yes");

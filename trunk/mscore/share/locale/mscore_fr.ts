@@ -40,7 +40,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.cpp" line="138"/>
         <source>Properties...</source>
-        <translation type="unfinished">Propriétés...</translation>
+        <translation>Propriétés...</translation>
     </message>
 </context>
 <context>
@@ -48,22 +48,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.cpp" line="172"/>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="13"/>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Propriétés de l&apos;articulation</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="19"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Channel</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="37"/>
         <source>Midi Action</source>
-        <translation type="unfinished">Action midi</translation>
+        <translation>Action midi</translation>
     </message>
 </context>
 <context>
@@ -1023,7 +1023,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="13"/>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Propriétés du nom d&apos;accord</translation>
     </message>
 </context>
 <context>
@@ -1656,12 +1656,12 @@ echec :</translation>
     <message>
         <location filename="../../mscore/editstyle.ui" line="138"/>
         <source>Create Multi Measure Rests</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une pause pour une mesure vide</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="145"/>
         <source>Hide Empty Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher les portées vides</translation>
     </message>
 </context>
 <context>
@@ -1954,9 +1954,9 @@ echec :</translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="598"/>
+        <location filename="../../mscore/harmony.cpp" line="604"/>
         <source>Harmony Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du nom d&apos;accord</translation>
     </message>
 </context>
 <context>
@@ -2594,7 +2594,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/measure.ui" line="106"/>
         <source>Beams:</source>
-        <translation type="unfinished"></translation>
+        <translation>Accroches :</translation>
     </message>
     <message>
         <location filename="../../mscore/measure.ui" line="125"/>
@@ -2639,12 +2639,12 @@ echec :</translation>
     <message>
         <location filename="../../mscore/measure.ui" line="224"/>
         <source>Elements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Elements :</translation>
     </message>
     <message>
         <location filename="../../mscore/measure.ui" line="232"/>
         <source>Element</source>
-        <translation type="unfinished">Element</translation>
+        <translation>Element</translation>
     </message>
     <message>
         <location filename="../../mscore/measure.ui" line="237"/>
@@ -2741,32 +2741,32 @@ echec :</translation>
     <message>
         <location filename="../../mscore/metaedit.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Edition des métadonnées</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="19"/>
         <source>Work Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre de l&apos;oeuvre :</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="29"/>
         <source>Work Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de l&apos;oeuvre :</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="39"/>
         <source>Movement Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre du mouvement :</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="49"/>
         <source>Movement Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro du mouvement :</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="59"/>
         <source>Source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Source :</translation>
     </message>
 </context>
 <context>
@@ -2879,17 +2879,17 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="102"/>
         <source>redo</source>
-        <translation>Répéter</translation>
+        <translation>Rétablir</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="105"/>
         <source>Redo</source>
-        <translation>Répéter</translation>
+        <translation>Rétablir</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="106"/>
         <source>redo last undo</source>
-        <translation>Répéter la dernière annulation</translation>
+        <translation>Rétablir la dernière annulation</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="112"/>
@@ -3779,7 +3779,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="824"/>
         <source>Insert Measures...</source>
-        <translation>Insérer une mesure...</translation>
+        <translation>Insérer des mesures...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
@@ -4139,7 +4139,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/style.cpp" line="68"/>
         <source>Fingering</source>
-        <translation>Doigté</translation>
+        <translation>Doigtés</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1357"/>
@@ -4284,12 +4284,12 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1472"/>
         <source>Add Rehearsal Mark</source>
-        <translation>Ajouter un signe de répétition</translation>
+        <translation>Ajouter un repère</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="123"/>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Repère</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1476"/>
@@ -4329,7 +4329,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1532"/>
         <source>seek to begin</source>
-        <translation type="unfinished"></translation>
+        <translation>aller au début</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1541"/>
@@ -4349,7 +4349,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1551"/>
         <source>seek to end</source>
-        <translation type="unfinished"></translation>
+        <translation>aller à la fin</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1560"/>
@@ -4359,7 +4359,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1563"/>
         <source>Repeat</source>
-        <translation type="unfinished">Reprise</translation>
+        <translation>Reprise</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1564"/>
@@ -4576,7 +4576,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="189"/>
         <source>Bar Lines</source>
-        <translation>Barres de mesures</translation>
+        <translation>Barres de mesure</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="899"/>
@@ -4671,7 +4671,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="334"/>
         <source>Brackets</source>
-        <translation>Parenthèse/Crochet</translation>
+        <translation>Accolades</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="363"/>
@@ -4796,7 +4796,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="569"/>
         <source>Beam properties</source>
-        <translation>Propriétés de la barre d&apos;accroche</translation>
+        <translation>Accroches</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="737"/>
@@ -5168,17 +5168,17 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="349"/>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation>Articulations, Ornements</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1680"/>
         <source>display in concert pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>afficher en tonalité de concert</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1685"/>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Afficher en tonalité de concert</translation>
+        <translation>Afficher en tonalité de concert</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1689"/>
@@ -5198,17 +5198,17 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1704"/>
         <source>Meta Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadonnées</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="431"/>
         <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonalité de concert</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="195"/>
         <source>All Supported files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;MuseScore Files (*.mscz *.msc);;MusicXml Files (*.xml *.mxl);;Midi Files (*.mid *.kar);;Muse Data Files (*.md);;Lilypond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers supportés (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;Fichiers MuseScore (*.mscz *.msc);;Fichiers MusicXml(*.xml *.mxl);;Fichiers Midi (*.mid *.kar);;Fichiers Muse Data (*.md);;Fichiers Lilypond &lt;experimental&gt; (*.ly);;Fichiers BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="505"/>
@@ -5253,7 +5253,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1463"/>
         <source>Harmony Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du nom d&apos;accord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1708"/>
@@ -5273,11 +5273,6 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Toggle Page Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6379,7 +6374,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="318"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="328"/>
@@ -6424,7 +6419,7 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="408"/>
         <source>Attention: requires a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention : ceci nécessite un redémarrage de MuseScore</translation>
     </message>
 </context>
 <context>
@@ -6717,79 +6712,79 @@ positionner le tempo.</translation>
     <message>
         <location filename="../../mscore/transposedialog.cpp" line="53"/>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Il n&apos;y a rien de selectionner. Transposer toute partition ?</translation>
+        <translation>Il n&apos;y a rien de selectionner. Transposer toute la partition ?</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="333"/>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">Compressed MuseScore Format (*.mscz)</translation>
+        <translation>MuseScore Compressé (*.mscz)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="334"/>
         <source>MuseScore Format (*.msc)</source>
-        <translation type="unfinished">MuseScore Format (*.msc)</translation>
+        <translation>MuseScore (*.msc)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXml Format (*.xml)</source>
-        <translation type="unfinished">MusicXml Format (*.xml)</translation>
+        <translation>MusicXml (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
         <source>Compressed MusicXml Format (*.mxl)</source>
-        <translation type="unfinished">Compressed MusicXml Format (*.mxl)</translation>
+        <translation>MusicXml Compressé (*.mxl)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard Midi File (*.mid)</source>
-        <translation type="unfinished">Fichier Midi Standard (*.mid)</translation>
+        <translation>Fichier Midi Standard (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="338"/>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">Fichier PDF  (*.pdf)</translation>
+        <translation>Fichier PDF  (*.pdf)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="339"/>
         <source>Postscript File (*.ps)</source>
-        <translation type="unfinished">Fichier Postscript (*.ps)</translation>
+        <translation>Fichier Postscript (*.ps)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="340"/>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG Bitmap Graphic (*.png)</translation>
+        <translation>PNG Bitmap Graphic (*.png)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="341"/>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Scalable Vector Graphic (*.svg)</translation>
+        <translation>Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="342"/>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond Format (*.ly)</translation>
+        <translation>Lilypond Format (*.ly)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="345"/>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished">MuseScore : Enregistrer sous</translation>
+        <translation>MuseScore : Enregistrer sous</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="741"/>
         <source>Open File
 </source>
-        <translation type="unfinished">Ouvrir un fichier
+        <translation>Ouvrir un fichier
 </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="921"/>
         <source>MuseScore: Write File</source>
-        <translation type="unfinished">MuseScore : Ecrire un fichier</translation>
+        <translation>MuseScore : Ecrire un fichier</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="241"/>
         <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier MuseScore Compressé (*.mscz);;Fichier MuseScore(*.msc);;</translation>
     </message>
 </context>
 <context>
@@ -7107,7 +7102,7 @@ positionner le tempo.</translation>
     <message>
         <location filename="../../mscore/stafftext.ui" line="19"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Channel</translation>
     </message>
 </context>
 <context>
@@ -7695,7 +7690,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tuplet.ui" line="72"/>
         <source>Tuplet</source>
-        <translation type="unfinished">Tuplet</translation>
+        <translation>Tuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/tuplet.ui" line="116"/>
