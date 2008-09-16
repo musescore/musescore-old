@@ -86,7 +86,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       for (unsigned int i = 0; i < n; ++i) {           // HACK
             const char* p = cd[i].name;
             if (p)
-                  extOtherCombo->addItem(p, i);
+            	extOtherCombo->addItem(p, cd[i].id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(extensionGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
