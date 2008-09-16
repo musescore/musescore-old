@@ -2542,33 +2542,34 @@ void ExportMusicXml::harmony(Harmony* h)
                   xml.tag("root-alter", alter);
             xml.etag();
 
-            QString cn(h->xmlName());
-            if (!cn.isEmpty()) {
-                  // can be something like "dominant add#9"
-                  QStringList l(cn.split(" ", QString::SkipEmptyParts));
-                  xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), l[0]);
-                  for (int i = 1; i < l.size(); ++i) {
-                        xml.stag("degree");
-                        QString tag(l[i]);
-                        int alter = 0;
-                        int idx = 3;
-                        if (tag[idx] == '#') {
-                              alter = 1;
-                              ++idx;
+            if (h->xmlKind()) {
+                  xml.tag(QString("kind text=\"%1\"").arg(h->extensionName()), h->xmlKind());
+                  if (h->xmlDegrees()) {
+                        QString cs(h->xmlDegrees());
+                        QStringList l(cs.split(" ", QString::SkipEmptyParts));
+                        for (int i = 0; i < l.size(); ++i) {
+                              xml.stag("degree");
+                              QString tag(l[i]);
+                              int alter = 0;
+                              int idx = 3;
+                              if (tag[idx] == '#') {
+                                    alter = 1;
+                                    ++idx;
+                                    }
+                              else if (tag[idx] == 'b') {
+                                    alter = -1;
+                                    ++idx;
+                                    }
+                              xml.tag("degree-value", tag.mid(idx));
+                              xml.tag("degree-alter", alter);     // finale insists on this even if 0
+                              if (tag.startsWith("add"))
+                                    xml.tag("degree-type", "add");
+                              else if (tag.startsWith("sub"))
+                                    xml.tag("degree-type", "subtract");
+                              else if (tag.startsWith("alt"))
+                                    xml.tag("degree-type", "alter");
+                              xml.etag();
                               }
-                        else if (tag[idx] == 'b') {
-                              alter = -1;
-                              ++idx;
-                              }
-                        xml.tag("degree-value", tag.mid(idx));
-                        xml.tag("degree-alter", alter);     // finale insists on this even if 0
-                        if (tag.startsWith("add"))
-                              xml.tag("degree-type", "add");
-                        else if (tag.startsWith("sub"))
-                              xml.tag("degree-type", "subtract");
-                        else if (tag.startsWith("alt"))
-                              xml.tag("degree-type", "alter");
-                        xml.etag();
                         }
                   }
             else {

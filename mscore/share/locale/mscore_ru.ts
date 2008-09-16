@@ -1954,7 +1954,7 @@ failed: </source>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="598"/>
+        <location filename="../../mscore/harmony.cpp" line="604"/>
         <source>Harmony Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5270,6 +5270,11 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Toggle Page Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>

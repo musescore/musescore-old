@@ -1,3 +1,9 @@
+16.9 (ws)
+      - Changed harmony import from musicXml. Lookup of harmonies in the harmony
+        data base is now done by "kind" and "degree" list. If no exact match is found,
+        a chord is constructed from "kind" and degree list and then searched in the
+        data base. This allows for ambigous chords/harmonies.
+      - updated french translation from Lasconic
 15.9 (ws)
       - cut&paste measure fixes
       - fixed pdf export on windows
