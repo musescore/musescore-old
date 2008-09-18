@@ -1831,16 +1831,6 @@ echec :</translation>
 <context>
     <name>ExcerptsDialog</name>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
-        <source>MuseScore: Excerpts</source>
-        <translation>MuseScore : Extraits</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
-        <source>Select Excerpt:</source>
-        <translation>Sélectionner un extrait :</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="37"/>
         <source>Delete</source>
         <translation>Effacer</translation>
@@ -1849,11 +1839,6 @@ echec :</translation>
         <location filename="../../mscore/excerptsdialog.ui" line="57"/>
         <source>New</source>
         <translation>Nouveau</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
-        <source>Edit Excerpt:</source>
-        <translation>Editer l&apos;extrait :</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
@@ -1866,19 +1851,34 @@ echec :</translation>
         <translation>Titre :</translation>
     </message>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
-        <source>Parts:</source>
-        <translation>Parties :</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
-        <source>Create Excerpt</source>
-        <translation>Créer l&apos;extrait</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="133"/>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
+        <source>MuseScore: Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
+        <source>Select Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
+        <source>Edit Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
+        <source>Instrument:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
+        <source>Create Part</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1954,7 +1954,7 @@ echec :</translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="604"/>
+        <location filename="../../mscore/harmony.cpp" line="607"/>
         <source>Harmony Properties...</source>
         <translation>Propriétés du nom d&apos;accord</translation>
     </message>
@@ -4919,19 +4919,14 @@ Sauver cette partition ? </translation>
         <translation>Partitions &amp;récentes</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="532"/>
+        <location filename="../../mscore/mscore.cpp" line="533"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edition</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="549"/>
+        <location filename="../../mscore/mscore.cpp" line="550"/>
         <source>Voices</source>
         <translation>Voix</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="559"/>
-        <source>Excerpts...</source>
-        <translation>Extraits...</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="562"/>
@@ -5273,6 +5268,16 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Toggle Page Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="524"/>
+        <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

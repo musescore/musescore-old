@@ -1829,16 +1829,6 @@ failed: </source>
 <context>
     <name>ExcerptsDialog</name>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
-        <source>MuseScore: Excerpts</source>
-        <translation type="unfinished">MuseScore: Fragmentos</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
-        <source>Select Excerpt:</source>
-        <translation type="unfinished">Seleccionar Fragmento:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="37"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
@@ -1847,11 +1837,6 @@ failed: </source>
         <location filename="../../mscore/excerptsdialog.ui" line="57"/>
         <source>New</source>
         <translation>Nuevo</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
-        <source>Edit Excerpt:</source>
-        <translation type="unfinished">Editar Fragmento:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
@@ -1864,19 +1849,34 @@ failed: </source>
         <translation>Título:</translation>
     </message>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
-        <source>Parts:</source>
-        <translation>Partes:</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
-        <source>Create Excerpt</source>
-        <translation type="unfinished">Crear Fragmento</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="133"/>
         <source>OK</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
+        <source>MuseScore: Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
+        <source>Select Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
+        <source>Edit Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
+        <source>Instrument:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
+        <source>Create Part</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1952,7 +1952,7 @@ failed: </source>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="604"/>
+        <location filename="../../mscore/harmony.cpp" line="607"/>
         <source>Harmony Properties...</source>
         <translation>Propiedades de Armonía...</translation>
     </message>
@@ -4914,18 +4914,13 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="532"/>
+        <location filename="../../mscore/mscore.cpp" line="533"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="549"/>
+        <location filename="../../mscore/mscore.cpp" line="550"/>
         <source>Voices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="559"/>
-        <source>Excerpts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5270,8 +5265,8 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
+        <location filename="../../mscore/mscore.cpp" line="524"/>
+        <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -521,6 +521,7 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("file-close"));
 
       menuFile->addSeparator();
+      menuFile->addAction(tr("Parts..."), this, SLOT(startExcerptsDialog()));
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
       menuFile->addAction(getAction("quit"));
@@ -556,7 +557,6 @@ MuseScore::MuseScore()
       menuEdit->addMenu(menuVoices);
 
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Excerpts..."), this, SLOT(startExcerptsDialog()));
       menuEdit->addAction(getAction("edit-meta"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Inspector..."), this, SLOT(startPageListEditor()));
@@ -1591,11 +1591,15 @@ int main(int argc, char* argv[])
       DPI  = pdev->logicalDpiX();      // logical drawing resolution
       DPMM = DPI / INCH;  // dots/mm
 
-      if (debugMode)
+      if (debugMode) {
             printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
                DPI, pdev->physicalDpiX(),
                PDPI, wi.physicalDpiX(),
                DPMM);
+            QStringList sl(QCoreApplication::libraryPaths());
+            foreach(QString s, sl)
+                  printf("LibraryPath: <%s>\n", qPrintable(s));
+            }
 
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
