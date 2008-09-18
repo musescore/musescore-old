@@ -1833,16 +1833,6 @@ zu Notenzeile</translation>
 <context>
     <name>ExcerptsDialog</name>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
-        <source>MuseScore: Excerpts</source>
-        <translation>MuseScore: Auszüge</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
-        <source>Select Excerpt:</source>
-        <translation>Auswahl Auszug:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="37"/>
         <source>Delete</source>
         <translation>Löschen</translation>
@@ -1851,11 +1841,6 @@ zu Notenzeile</translation>
         <location filename="../../mscore/excerptsdialog.ui" line="57"/>
         <source>New</source>
         <translation>Neu</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
-        <source>Edit Excerpt:</source>
-        <translation>Editieren Auszug:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
@@ -1868,19 +1853,34 @@ zu Notenzeile</translation>
         <translation>Titel:</translation>
     </message>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
-        <source>Parts:</source>
-        <translation>System</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
-        <source>Create Excerpt</source>
-        <translation>Auszug erzeugen</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="133"/>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
+        <source>MuseScore: Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
+        <source>Select Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
+        <source>Edit Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
+        <source>Instrument:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
+        <source>Create Part</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1956,7 +1956,7 @@ zu Notenzeile</translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="604"/>
+        <location filename="../../mscore/harmony.cpp" line="607"/>
         <source>Harmony Properties...</source>
         <translation type="unfinished">Eigenschaften Akkord</translation>
     </message>
@@ -2814,7 +2814,7 @@ fehlgeschlagen: </translation>
         <translation>&amp;Letzte Partituren</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="532"/>
+        <location filename="../../mscore/mscore.cpp" line="533"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bearbeiten</translation>
     </message>
@@ -4914,11 +4914,6 @@ fehlgeschlagen: </translation>
         <translation>C dur, A moll</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="559"/>
-        <source>Excerpts...</source>
-        <translation>Auszüge</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="1287"/>
         <source>Mixer</source>
         <translation>Mischpult</translation>
@@ -5131,7 +5126,7 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="549"/>
+        <location filename="../../mscore/mscore.cpp" line="550"/>
         <source>Voices</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5277,8 +5272,8 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
+        <location filename="../../mscore/mscore.cpp" line="524"/>
+        <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

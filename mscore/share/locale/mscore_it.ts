@@ -1840,16 +1840,6 @@ fallito: </translation>
 <context>
     <name>ExcerptsDialog</name>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
-        <source>MuseScore: Excerpts</source>
-        <translation>MuseScore: Estratto</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
-        <source>Select Excerpt:</source>
-        <translation>Seleziona Estratto:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="37"/>
         <source>Delete</source>
         <translation>Elimina</translation>
@@ -1858,11 +1848,6 @@ fallito: </translation>
         <location filename="../../mscore/excerptsdialog.ui" line="57"/>
         <source>New</source>
         <translation>Nuovo</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
-        <source>Edit Excerpt:</source>
-        <translation>Modifica Estratto:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
@@ -1875,19 +1860,34 @@ fallito: </translation>
         <translation>Titolo:</translation>
     </message>
     <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
-        <source>Parts:</source>
-        <translation>Parti:</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
-        <source>Create Excerpt</source>
-        <translation>Crea Estratto</translation>
-    </message>
-    <message>
         <location filename="../../mscore/excerptsdialog.ui" line="133"/>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="13"/>
+        <source>MuseScore: Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="19"/>
+        <source>Select Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="69"/>
+        <source>Edit Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="98"/>
+        <source>Instrument:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="113"/>
+        <source>Create Part</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1963,7 +1963,7 @@ fallito: </translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="604"/>
+        <location filename="../../mscore/harmony.cpp" line="607"/>
         <source>Harmony Properties...</source>
         <translation>Proprietà Armonia...</translation>
     </message>
@@ -3040,7 +3040,7 @@ fallito: </translation>
         <translation>&amp;Recenti</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="532"/>
+        <location filename="../../mscore/mscore.cpp" line="533"/>
         <source>&amp;Edit</source>
         <translation>&amp;Modifica</translation>
     </message>
@@ -4920,11 +4920,6 @@ fallito: </translation>
         <translation>Do maggiore, La minore</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="559"/>
-        <source>Excerpts...</source>
-        <translation>Estratto...</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="1287"/>
         <source>Mixer</source>
         <translation>Mixer Audio</translation>
@@ -5137,7 +5132,7 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Scambia Voce 3-4</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="549"/>
+        <location filename="../../mscore/mscore.cpp" line="550"/>
         <source>Voices</source>
         <translation>Voci</translation>
     </message>
@@ -5281,6 +5276,16 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Toggle Page Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="524"/>
+        <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

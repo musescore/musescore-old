@@ -10,13 +10,13 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>MuseScore: Excerpts</string>
+   <string>MuseScore: Parts</string>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
     <widget class="QGroupBox" name="groupBox_3" >
      <property name="title" >
-      <string>Select Excerpt:</string>
+      <string>Select Part:</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -43,7 +43,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>40</width>
             <height>20</height>
@@ -66,7 +66,7 @@
    <item row="0" column="1" >
     <widget class="QGroupBox" name="editGroup" >
      <property name="title" >
-      <string>Edit Excerpt:</string>
+      <string>Edit Part:</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -95,7 +95,7 @@
       <item row="2" column="0" colspan="2" >
        <widget class="QLabel" name="label_3" >
         <property name="text" >
-         <string>Parts:</string>
+         <string>Instrument:</string>
         </property>
        </widget>
       </item>
@@ -110,7 +110,7 @@
      <item>
       <widget class="QPushButton" name="createExcerpt" >
        <property name="text" >
-        <string>Create Excerpt</string>
+        <string>Create Part</string>
        </property>
       </widget>
      </item>
@@ -119,7 +119,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
