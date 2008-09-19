@@ -1963,7 +1963,7 @@ fallito: </translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="607"/>
+        <location filename="../../mscore/harmony.cpp" line="620"/>
         <source>Harmony Properties...</source>
         <translation>Proprietà Armonia...</translation>
     </message>
@@ -3190,12 +3190,12 @@ fallito: </translation>
         <translation>Manuale</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1923"/>
+        <location filename="../../mscore/mscore.cpp" line="1927"/>
         <source>note entry mode</source>
         <translation>Modalità Inserimento Note</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1927"/>
+        <location filename="../../mscore/mscore.cpp" line="1931"/>
         <source>edit mode</source>
         <translation>Modalità di Modifica</translation>
     </message>
@@ -4615,7 +4615,7 @@ fallito: </translation>
         <translation>Interruzioni</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1931"/>
+        <location filename="../../mscore/mscore.cpp" line="1935"/>
         <source>play</source>
         <translation>Riproduci</translation>
     </message>
@@ -5276,11 +5276,6 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Toggle Page Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6479,7 +6474,7 @@ Desideri Salvare lo Spartito?</translation>
         <translation>MuseScore: Caricamento Fallito:</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1829"/>
+        <location filename="../../mscore/mscore.cpp" line="1833"/>
         <source>Quit</source>
         <translation>Esci</translation>
     </message>
@@ -6504,7 +6499,7 @@ Desideri Salvare lo Spartito?</translation>
         <translation>MuseScore: Carica Midi</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1827"/>
+        <location filename="../../mscore/mscore.cpp" line="1831"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,3 +1,5 @@
+19.9 (ws)
+      - musicXml chord import fixes
 16.9 (ws)
       - Changed harmony import from musicXml. Lookup of harmonies in the harmony
         data base is now done by "kind" and "degree" list. If no exact match is found,
