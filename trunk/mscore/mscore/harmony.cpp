@@ -206,8 +206,12 @@ QString HChord::name(int tpc)
       // 13
       if (flat13)
             buf += "b13";
-      if (nat13)
-            buf += "13";
+      if (nat13) {
+            if (c.contains(1) || c.contains(2) || sharp9 || nat11 || sharp11)
+                  buf += "13";
+            else
+                  buf += "add13";
+            }
       return buf;
       }
 
@@ -317,7 +321,8 @@ const ChordDescription Harmony::chordList[] = {
             { 25, "m7#5",           "minor-seventh", "alt#5",                            HChord("C Eb G# Bb") },
             { 26, "m69",            "minor-sixth", "add9",                               HChord("C D Eb G A") },
             { 27, "Lyd",            0, 0,                                                  HChord() },
-            { 28, "Maj7Lyd",        "major-seventh", "altb5",                            HChord("C D E G A") },
+//??          { 28, "Maj7Lyd",        "major-seventh", "altb5",                            HChord("C D E G A") },
+            { 28, "Maj7Lyd",        0, 0,                                                HChord("C D E G A") },
             { 29, "Maj7b5",         "major-seventh", "altb5",                            HChord("C E Gb B") },
 
             { 32, "m7b5",           "half-diminished", 0,                                HChord("C Eb Gb Bb") },
@@ -345,7 +350,7 @@ const ChordDescription Harmony::chordList[] = {
             { 73, "9#11",           "dominant-ninth", "add#11",                          HChord("C E G Bb D F#") },
             { 74, "13#11",          "dominant-13th", "alt#11",                           HChord("C E G Bb D F# A") },
             { 75, "9#11b13",        "dominant-ninth", "add#11 addb13",                   HChord("C E G Bb D F# Ab") },
-            { 76, "7b9",            "dominant", "addb9",                                 HChord("C E  G Bb Db") },
+            { 76, "7b9",            "dominant", "addb9",                                 HChord("C E G Bb Db") },
 
 //          { 77, "13b9",           "dominant-13th", "altb9",                            HChord("C E G Bb D Fb A") },
             { 77, "13b9",           "dominant-13th", "altb9",                            HChord("C E G Bb Db F A") },
@@ -453,9 +458,10 @@ const ChordDescription Harmony::chordList[] = {
             // the following ids are not in "BandInABox"
             { 185, "dim7",          "diminished-seventh", 0,                             HChord("C Eb Gb Bbb") },  // mscore ext.
             { 186, "sus2",          "suspended-second", 0,                               HChord("C D G") },      // suspended 2nd chord
-            { 187, "mb3b13",        "minor", "addb13",                                   HChord("C Eb Ab") },
+            { 187, "maddb13",       "minor", "addb13",                                   HChord("C Eb Ab") },
             { 188, "#13",           "major", "add#13",                                   HChord("C E G A#") },
-            { 189, "#11#13",        "major", "add#11 add#13",                            HChord("C E G F# A#") },
+            // { 189, "#11#13",     "major", "add#11 add#13",                            HChord("C E G F# A#") },
+            { 189, "add#11#13",     "major", "add#11 add#13",                            HChord("C E G F# A#") },
 
 /*190*/     { 190, "add#13",        "major", "add#13",                                   HChord("C E G A#") },
             { 191, "6add9",         "maj69", 0,                                          HChord("C E G A D") },
@@ -469,6 +475,13 @@ const ChordDescription Harmony::chordList[] = {
 
 //            { 146, "7sus#9",        "suspended-fourth", "add7 add#9",                  HChord("C F G Bb Eb") },
             { 196, "m7add11",       "minor-seventh", "add11",                            HChord("C Eb F G Bb") },
+            { 197, "Maj7add13",     "major-seventh", "add13",                            HChord("C E G A B") },
+            { 198, "madd9",         "minor", "add9",                                     HChord("C D Eb G") },
+            { 18,  "mMaj7",         "major-minor", 0,                                    HChord("C Eb G B") },     // minor major 7th = major minor 7th
+            { 199, "m9Maj7",        "major-minor", "add9",                               HChord("C Eb G B D") },
+/* 40 */    { 200, "5",             "pedal", "add5",                                     HChord("C G") },
+            { 201, "m11b5",         "minor-11th", "altb5",                               HChord("C Eb Gb Bb D F") },
+            { 202, "dim7add#7",     "diminished-seventh", "add#7",                       HChord() }, // HChord("C Eb Gb Bbb") },
       };
 
 //---------------------------------------------------------
@@ -522,11 +535,14 @@ QString Harmony::harmonyName() const
             else
                   // not in table, fallback to using HChord.name()
                   s = hc.name(_rootTpc);
+            s += " ";
             } // end if (degreeList ...
       else {
             s = tpc2name(_rootTpc, germanNames);
-            if (_descr)
+            if (_descr) {
+                  s += " ";
                   s += _descr->name;
+                  }
             }
       if (_baseTpc != INVALID_TPC) {
             s += "/";
@@ -764,7 +780,7 @@ void Harmony::buildText()
       QString txt(harmonyName());
       const char* s = strdup(txt.toAscii().data());
 
-printf("Harmony:buildText(): Harmony <%s>\n", s);
+//    printf("Harmony:buildText(): Harmony <%s>\n", s);
 
       QTextCursor cursor(doc());
       cursor.setPosition(0);
@@ -776,16 +792,6 @@ printf("Harmony:buildText(): Harmony <%s>\n", s);
       cursor.insertText(QString(*s++));
       if (s == 0)
             return;
-
-      QTextCharFormat sf(f);
-#if 0
-      double extraMag = 1.0;
-      double mag = _spatium * extraMag / (SPATIUM20 * DPI);
-      QFont font("MScore1");
-      font.setPointSizeF(20.0 * mag);
-      sf.setFont(font);
-#endif
-      sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
 
       if ((*s == '#') || (*s == 'b')) {
 #if 1
@@ -799,6 +805,11 @@ printf("Harmony:buildText(): Harmony <%s>\n", s);
 #endif
             ++s;
             }
+      if (*s == ' ')
+            ++s;
+
+      QTextCharFormat sf(f);
+      sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
       bool useSymbols = score()->style()->chordNamesUseSymbols;
 
       if (*s == 0)
