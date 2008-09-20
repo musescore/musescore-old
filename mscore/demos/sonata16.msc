@@ -880,7 +880,7 @@
   <rights>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;">Copyright 2004 W.Schweer</p></body></html>
     </rights>
   <siglist>
@@ -935,14 +935,18 @@ p, li { white-space: pre-wrap; }
       <barLineSpan>0</barLineSpan>
       </Staff>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">16 </p></body></html>
       </name>
     <Instrument>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Slur id="1">
@@ -1179,8 +1183,10 @@ p, li { white-space: pre-wrap; }
     <up>1</up>
     </Slur>
   <Slur id="46">
+    <track>0</track>
     </Slur>
   <Slur id="47">
+    <track>0</track>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -4263,7 +4269,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-1437</tick>
+        <tick>-1436</tick>
         </LayoutBreak>
       <Chord>
         <tick>144480</tick>
@@ -4468,7 +4474,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-3357</tick>
+        <tick>-3356</tick>
         </LayoutBreak>
       <Chord>
         <tick>150240</tick>
@@ -4824,7 +4830,7 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
-        <tick>-5277</tick>
+        <tick>-5276</tick>
         </LayoutBreak>
       <Chord>
         <tick>156000</tick>

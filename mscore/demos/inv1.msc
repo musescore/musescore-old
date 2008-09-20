@@ -905,8 +905,12 @@
       </Staff>
     <trackName>Part_1</trackName>
     <Instrument>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Staff id="1">

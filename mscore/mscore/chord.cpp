@@ -309,8 +309,10 @@ void Chord::add(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
             Duration d  = duration().shift(-1);
-            tr->chord1()->setDuration(d);
-            tr->chord2()->setDuration(d);
+            if (tr->chord1())
+                  tr->chord1()->setDuration(d);
+            if (tr->chord2())
+                  tr->chord2()->setDuration(d);
             _tremolo = tr;
             }
       else if (e->type() == GLISSANDO)
@@ -1192,20 +1194,16 @@ qreal Chord::downPos() const
 
 //---------------------------------------------------------
 //   centerX
+//    return x position for attributes
 //---------------------------------------------------------
 
 qreal Chord::centerX() const
       {
-      qreal x;
-      if (_up) {
-            const Note* upnote = upNote();
-            x  = upnote->pos().x();
-            x += upnote->headWidth() * .5;
-            }
-      else {
-            const Note* downnote = downNote();
-            x = downnote->pos().x();
-            x += downnote->headWidth() * .5;
+      const Note* note = isUp() ? upNote() : downNote();
+      qreal x = note->pos().x();
+      x += note->headWidth() * .5;
+      if (note->mirror()) {
+            x += note->headWidth() * (isUp() ? -1.0 : 1.0);
             }
       return x;
       }

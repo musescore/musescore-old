@@ -307,6 +307,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   notes.prepend(in->second);
             mirror = true;
             }
+      bool moveLeft = false;
       int nNotes  = notes.size();
       for (int i = 0; i < nNotes; ++i) {
             Note* note  = notes[i];
@@ -375,6 +376,9 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   }
 
             note->setMirror(mirror);
+//          if (chord->isUp() && mirror)
+            if (mirror)
+                  moveLeft = true;
             note->setAccidentalSubtype(accidental);
             move1 = move;
             ll    = line;
@@ -393,7 +397,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             if (!ac)
                   continue;
             int line    = note->line();
-            bool mirror = note->mirror();
             if ((line - ll2) <= 4) {
                   if (accCol == 0 || ((line - ll3) <= 4))
                         ++accCol;
@@ -405,7 +408,8 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             double x = -point(score()->style()->prefixNoteDistance) * ac->mag();
             x  -= ac->width() + ac->bbox().x();
             x  *= (accCol + 1);
-            if (mirror)
+//            if (note->mirror && chord->isUp())
+            if (moveLeft && ((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
                   x -= note->headWidth();
             ac->setPos(x, 0);
             ll3 = ll2;

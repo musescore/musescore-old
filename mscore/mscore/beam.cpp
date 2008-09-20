@@ -83,10 +83,10 @@ static BeamHint endBeamList[] = {
       BeamHint(0,  0,  2,  4, 1, 4 ),
       BeamHint(1, 32,  2,  4, 1, 8 ),
       BeamHint(1, 32,  2,  4, 3, 8 ),
-      
+
       BeamHint(0,  0,  3, 4,  1, 4 ),
       BeamHint(0,  0,  3, 4,  1, 2 ),
-      
+
       BeamHint(1, 16,  3, 4,  1, 4 ),
       BeamHint(1, 16,  3, 4,  1, 2 ),
 
@@ -116,7 +116,7 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32,  4,  4, 7, 8 ),
 
       BeamHint(0,  0,  5,  4, 3, 4 ),
-      
+
       BeamHint(0,  0,  6,  4, 3, 4 ),
       //BeamHint(1,  8,  6,  4, 1, 4 ),     // for promenade demo (ws)    //Moved custom beaming to promenade file (db)
 
@@ -136,12 +136,12 @@ static BeamHint endBeamList[] = {
       BeamHint(0,  0, 12, 8,  3, 8 ),
       BeamHint(0,  0, 12, 8,  3, 4 ),
       BeamHint(0,  0, 12, 8,  9, 8 ),
-      
+
       BeamHint(0,  0, 15, 8,  3, 8 ),
       BeamHint(0,  0, 15, 8,  3, 4 ),
       BeamHint(0,  0, 15, 8,  9, 8 ),
       BeamHint(0,  0, 15, 8,  6, 4 ),
-      
+
       BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
       BeamHint(0,  0,  4, 16, 1, 8 ),
 
@@ -457,7 +457,7 @@ QString Beam::xmlType(ChordRest* cr) const
 //   layout1
 //---------------------------------------------------------
 
-void Beam::layout1(ScoreLayout* /*layout*/)
+void Beam::layout1(ScoreLayout* layout)
       {
       //delete old segments
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
@@ -520,6 +520,10 @@ void Beam::layout1(ScoreLayout* /*layout*/)
                   maxTickLen = tl;
             }
       _up = upCount >= 0;
+
+      // done twice for beamed chords:
+      foreach(ChordRest* cr, elements)
+            cr->layoutAttributes(layout);
       }
 
 //---------------------------------------------------------

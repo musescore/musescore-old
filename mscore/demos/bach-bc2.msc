@@ -906,15 +906,19 @@
       </Staff>
     <trackName>Trumpet             </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Trumpet</p></body></html>
       </name>
     <Instrument>
-      <midiProgram>42</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="42"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -930,16 +934,19 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Flute</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Flute</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>1</midiChannel>
-      <midiProgram>74</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="74"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -955,16 +962,19 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Oboe                </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Oboe</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>2</midiChannel>
-      <midiProgram>68</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="68"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -980,16 +990,19 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violin</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violin</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>3</midiChannel>
-      <midiProgram>40</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="40"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -1005,17 +1018,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violino 1.  di ripieno  </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 1.</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>4</midiChannel>
-      <midiProgram>40</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="40"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -1031,17 +1047,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violino 2.  di ripieno</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violino 2.</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>5</midiChannel>
-      <midiProgram>40</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="40"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -1057,17 +1076,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Viola  di ripieno    </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Viola</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>6</midiChannel>
-      <midiProgram>41</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="41"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -1083,17 +1105,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violone  di ripieno  </trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violone</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">di ripieno</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>7</midiChannel>
-      <midiProgram>42</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="42"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Part>
@@ -1109,17 +1134,20 @@ p, li { white-space: pre-wrap; }
       </Staff>
     <trackName>Violoncello  e Cembalo</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Violoncello</p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">e Cembalo</p></body></html>
       </name>
     <Instrument>
-      <midiChannel>8</midiChannel>
-      <midiProgram>43</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="43"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Excerpt>
@@ -52612,5 +52640,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

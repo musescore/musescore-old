@@ -291,7 +291,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                   //
                   // check for collision with staff line
                   //
-                  if (y >= staffTopY-.1) {
+                  if (y >= staffTopY+.1) {
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4)

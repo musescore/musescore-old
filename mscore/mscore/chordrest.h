@@ -54,8 +54,6 @@ class ChordRest : public Element {
 
       int _dots;
 
-      void layoutAttributes(ScoreLayout*);
-
    public:
       ChordRest(Score*);
       ChordRest &operator=(const ChordRest&);
@@ -109,6 +107,7 @@ class ChordRest : public Element {
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }
       void setLen(int ticks);
+      void layoutAttributes(ScoreLayout*);
       };
 
 #endif

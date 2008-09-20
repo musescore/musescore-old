@@ -1276,7 +1276,7 @@ void Score::addAccidental(int idx)
       {
       foreach(Element* el, *sel->elements()) {
             if (el->type() == NOTE)
-                  addAccidental((Note*)el, idx);
+                  addAccidental(static_cast<Note*>(el), idx);
             }
       }
 
@@ -2168,7 +2168,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
                   e->setTick(tick);
                   e->setTrack(e->track() + trackOffset);
                   undoAddElement(e);
-printf("add elem %s\n", e->name());
+// printf("add elem %s\n", e->name());
                   e->setSelected(false);
                   if (e->type() == REST)
                         select(e, Qt::ShiftModifier, 0);
@@ -2182,7 +2182,7 @@ printf("add elem %s\n", e->name());
                   }
             if (ns->isEmpty()) {
                   dm->cmdRemoveEmptySegment(ns);
-printf("remove empty segment %s in copy!\n", ns->subTypeName());
+// printf("remove empty segment %s in copy!\n", ns->subTypeName());
                   }
             }
       }
