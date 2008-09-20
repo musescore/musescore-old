@@ -1,3 +1,9 @@
+20.9 (ws)
+      - add "sff" to dynamcis
+      - layout fixes for articulation symbols (x position was wrong for chords with
+        mirrored note heads)
+      - layout fixes for articulation signs (wrong x position for chords with
+        mirrored note heads)
 19.9 (ws)
       - musicXml chord import fixes
 16.9 (ws)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
+<museScore version="1.9">
   <Mag>1</Mag>
   <xoff>3.15026</xoff>
   <yoff>3.8575</yoff>
@@ -891,9 +891,13 @@
       </Staff>
     <trackName>Voice</trackName>
     <Instrument>
-      <midiProgram>52</midiProgram>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="52"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Staff id="1">
@@ -939,11 +943,26 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Note pitch="71" tpc="19" ticks="960"/>
-      <Note pitch="71" tpc="19" ticks="480"/>
-      <Note pitch="69" tpc="17" ticks="480"/>
-      <Note pitch="71" tpc="19" ticks="480"/>
-      <Note pitch="69" tpc="17" ticks="480"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       <Lyrics>
         <data>Lei</data>
         <syllabic>begin</syllabic>
@@ -1039,7 +1058,10 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="960"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -1060,11 +1082,26 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="3">
-      <Note pitch="67" tpc="15" ticks="960"/>
-      <Note pitch="64" tpc="18" ticks="480"/>
-      <Note pitch="67" tpc="15" ticks="480"/>
-      <Note pitch="66" tpc="20" ticks="480"/>
-      <Note pitch="64" tpc="18" ticks="480"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
       <Lyrics>
         <data>still</data>
         <subtype>Lyric</subtype>
@@ -1160,7 +1197,10 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
-      <Note pitch="62" tpc="16" ticks="960"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -1182,12 +1222,30 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="5">
-      <Note pitch="69" tpc="17" ticks="480"/>
-      <Note pitch="68" tpc="22" ticks="480"/>
-      <Note pitch="69" tpc="17" ticks="480"/>
-      <Note pitch="72" tpc="14" ticks="480"/>
-      <Note pitch="71" tpc="19" ticks="480"/>
-      <Note pitch="69" tpc="17" ticks="480"/>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       <Lyrics>
         <data>weih</data>
         <syllabic>begin</syllabic>
@@ -1301,7 +1359,10 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="960"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -1323,12 +1384,30 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="7">
-      <Note pitch="69" tpc="17" ticks="720"/>
-      <Note pitch="64" tpc="18" ticks="240"/>
-      <Note pitch="64" tpc="18" ticks="480"/>
-      <Note pitch="66" tpc="20" ticks="480"/>
-      <Note pitch="64" tpc="18" ticks="480"/>
-      <Note pitch="66" tpc="20" ticks="480"/>
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
       <Lyrics>
         <data>Freu</data>
         <syllabic>begin</syllabic>
@@ -1374,7 +1453,10 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="960"/>
+      <Chord>
+        <ticklen>960</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -1385,5 +1467,5 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

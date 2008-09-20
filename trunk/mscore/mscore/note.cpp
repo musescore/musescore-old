@@ -225,8 +225,12 @@ void Note::changeAccidental(int accType)
       _userAccidental = ACC_NONE;
       int acc1  = Accidental::subtype2value(accType);
       int line  = tpc2line(_tpc);
+
       _tpc      = line2tpc(line, acc1);
-      _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
+      int newPitch    = tpc2pitch(_tpc);
+      while (newPitch < 0)
+            newPitch += 12;
+      _pitch = newPitch + (_pitch / 12) * 12;
 
       // compute the "normal" accidental of this note in
       // measure context:
@@ -577,7 +581,6 @@ void Note::endDrag()
       int clef    = chord()->staff()->clef()->clef(chord()->tick());
       int key     = staff()->keymap()->key(chord()->tick());
       int npitch = line2pitch(_line, clef, key);
-printf("line %d  pitch %d\n", _line, npitch);
       setPitch(npitch);
       }
 

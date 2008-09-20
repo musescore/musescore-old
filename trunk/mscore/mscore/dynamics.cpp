@@ -59,6 +59,7 @@ Dyn dynList[] = {
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "fp",     QString(fp,  2)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sf",     QString(sfz, 2)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfz",    QString(sfz, 3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sff",    QString(sffz, 3)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sffz",   QString(sffz, 4)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfp",    QString(sfp, 3)),
       Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfpp",   QString(sfp, 4)),
