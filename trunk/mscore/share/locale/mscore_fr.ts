@@ -1954,7 +1954,7 @@ echec :</translation>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="620"/>
+        <location filename="../../mscore/harmony.cpp" line="623"/>
         <source>Harmony Properties...</source>
         <translation>Propriétés du nom d&apos;accord</translation>
     </message>
@@ -2549,7 +2549,7 @@ echec :</translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="2012"/>
+        <location filename="../../mscore/measure.cpp" line="2016"/>
         <source>Measure Properties...</source>
         <translation>Propriétés de la mesure...</translation>
     </message>
@@ -5275,6 +5275,11 @@ Sauver cette partition ? </translation>
         <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5392,12 +5397,12 @@ Sauver cette partition ? </translation>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="876"/>
+        <location filename="../../mscore/note.cpp" line="879"/>
         <source>Note Properties...</source>
         <translation>Propriétés de la note...</translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="879"/>
+        <location filename="../../mscore/note.cpp" line="882"/>
         <source>Tuplet Properties...</source>
         <translation>Propriétés du tuplet...</translation>
     </message>

@@ -1952,7 +1952,7 @@ failed: </source>
 <context>
     <name>Harmony</name>
     <message>
-        <location filename="../../mscore/harmony.cpp" line="620"/>
+        <location filename="../../mscore/harmony.cpp" line="623"/>
         <source>Harmony Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2545,7 +2545,7 @@ failed: </source>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="2012"/>
+        <location filename="../../mscore/measure.cpp" line="2016"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5269,11 +5269,6 @@ Save Current Score?</source>
         <source>Parts...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5391,12 +5386,12 @@ Save Current Score?</source>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="876"/>
+        <location filename="../../mscore/note.cpp" line="879"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="879"/>
+        <location filename="../../mscore/note.cpp" line="882"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>

@@ -258,6 +258,7 @@ class MuseScore : public QMainWindow {
    private slots:
       void autoSaveTimerTimeout();
       void helpBrowser();
+      void helpBrowser1();
       void about();
       void aboutQt();
       void openRecentMenu();
