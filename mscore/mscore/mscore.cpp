@@ -725,7 +725,8 @@ MuseScore::MuseScore()
       mb->addSeparator();
       QMenu* menuHelp = mb->addMenu(tr("&Help"));
 
-      menuHelp->addAction(tr("Manual"),  this, SLOT(helpBrowser()), Qt::Key_F1);
+      menuHelp->addAction(tr("Local Manual"),  this, SLOT(helpBrowser()), Qt::Key_F1);
+      menuHelp->addAction(tr("Online Manual"), this, SLOT(helpBrowser1()));
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
       menuHelp->addSeparator();
@@ -1012,16 +1013,11 @@ void MuseScore::navigatorVisible(bool flag)
 
 //---------------------------------------------------------
 //   helpBrowser
+//    show local help
 //---------------------------------------------------------
 
 void MuseScore::helpBrowser()
       {
-#if 0
-      QSettings s;
-      localeName = s.value("language", "system").toString();
-      if (localeName == "system")
-            localeName = QLocale::system().name();
-#endif
       QString lang(localeName.left(2));
       if (debugMode) {
             printf("open manual for language <%s>\n", qPrintable(lang));
@@ -1044,15 +1040,27 @@ void MuseScore::helpBrowser()
       p = p.replace(" ", "%20");    // HACK: why does'nt fromLocalFile() do this?
       QUrl url(QUrl::fromLocalFile(p));
       QDesktopServices::openUrl(url);
-#if 0
-      // on windows openUrl() always returns false
-      if (!QDesktopServices::openUrl(url)) {
-            QMessageBox::critical(0,
-               tr("MuseScore: Error"),
-               tr("Failed to open help file:\n") + url.toString()
-               );
-            }
-#endif
+      }
+
+//---------------------------------------------------------
+//   helpBrowser1
+//    show online help
+//---------------------------------------------------------
+
+void MuseScore::helpBrowser1()
+      {
+      QString lang(localeName.left(2));
+      if (debugMode)
+            printf("open online manual for language <%s>\n", qPrintable(lang));
+      QString help("http://musescore.org/en/handbook");
+      if (lang == "de")
+            help = "http://musescore.org/de/handbuch";
+      else if (lang == "es")
+            help = "http://musescore.org/es/manual";
+      else if (lang == "fr")
+            help = "http://musescore.org/fr/manuel";
+      QUrl url(help);
+      QDesktopServices::openUrl(url);
       }
 
 //---------------------------------------------------------
@@ -1608,9 +1616,8 @@ int main(int argc, char* argv[])
       _spatiumMag = 1.0;
 
       mscoreGlobalShare = getSharePath();
-      if (debugMode) {
-            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
-            }
+      if (debugMode)
+            printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 
       //
       // set translator before preferences are read to get
@@ -1618,8 +1625,13 @@ int main(int argc, char* argv[])
       //
       QSettings s;
       localeName = s.value("language", "system").toString();
-      if (localeName == "system")
+      if (debugMode)
+            printf("configured localeName <%s>\n", qPrintable(localeName));
+      if (localeName.toLower() == "system") {
             localeName = QLocale::system().name();
+            if (debugMode)
+                  printf("real localeName <%s>\n", qPrintable(localeName));
+            }
 
       QTranslator translator;
       QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
