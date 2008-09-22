@@ -1057,7 +1057,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             _staves.push_back(s);
 
             if (track->isDrumTrack()) {
-                  s->clef()->setClef(0, CLEF_PERC);
+                  s->clefList()->setClef(0, CLEF_PERC);
                   part->setDrumset(smDrumset);
                   }
             else {
@@ -1069,13 +1069,13 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                         part->insertStaff(ss);
                         _staves.push_back(ss);
 
-                        s->clef()->setClef(0, CLEF_G);
+                        s->clefList()->setClef(0, CLEF_G);
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
-                        ss->clef()->setClef(0, CLEF_F);
+                        ss->clefList()->setClef(0, CLEF_F);
                         }
                   else {
-                        s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
+                        s->clefList()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
                         }
                   }
             if (track->name().isEmpty()) {

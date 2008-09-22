@@ -380,7 +380,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
 
       int key   = staff(staffIdx)->keymap()->key(tick);
-      int clef  = staff(staffIdx)->clef()->clef(tick);
+      int clef  = staff(staffIdx)->clefList()->clef(tick);
       int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
 
@@ -888,7 +888,7 @@ void Score::deleteItem(Element* el)
                   break;
 
             case ACCIDENTAL:
-                  addAccidental((Note*)(el->parent()), ACC_NONE);
+                  addAccidental(static_cast<Note*>(el->parent()), ACC_NONE);
                   break;
 
             case BAR_LINE:
@@ -952,7 +952,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   undoChangeTempo(i->first, i->second, TEvent());
             }
       foreach(Staff* staff, _staves) {
-            ClefList* cl = staff->clef();
+            ClefList* cl = staff->clefList();
             KeyList*  kl = staff->keymap();
             for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
                   if (i->first >= tick && (i->first < tick2) && i->first != 0)

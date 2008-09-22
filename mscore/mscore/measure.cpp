@@ -324,7 +324,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   }
             int move     = note->staffMove();
             int staffIdx = note->staffIdx() + move;
-            int clef     = score()->staff(staffIdx)->clef()->clef(tick);
+            int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
 
             //
             // compute accidental
@@ -2837,3 +2837,32 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                   }
             }
       }
+
+//---------------------------------------------------------
+//   setPitchTpc
+//    calculate pitch and tpc of note given the note line
+//    position in staff
+//---------------------------------------------------------
+
+void Measure::setPitchTpc(Note* note) const
+      {
+      int l    = note->line();
+      int acc  = -1;
+
+      int tick = note->chord()->tick();
+      int clef = note->staff()->clef(tick);
+      int key  = note->staff()->key(tick);
+
+      printf("tick %d key %d\n", tick, key);
+
+      int p1 = line2pitch(l, clef, key);
+      int p2 = line2pitch(l, clef, 0);
+
+      printf("pitch %d %d\n", p1, p2);
+
+      note->setPitch(line2pitch(l, clef, key));
+
+      int line  = tpc2line(note->tpc());
+      note->setTpc(line2tpc(line, acc));
+      }
+

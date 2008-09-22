@@ -762,7 +762,7 @@ void ExportLy::writeScore()
             foreach(Staff* staff, *part->staves()) {
 		      os << "\n";
 
-                  switch(staff->clef()->clef(0)) {
+                  switch(staff->clefList()->clef(0)) {
 		            case CLEF_G:
 		                  relativ = "'";
 		                  prevpitch=12*5;
@@ -814,7 +814,7 @@ void ExportLy::writeScore()
       		indent();
 
 
-                  writeClef(staff->clef()->clef(0));
+                  writeClef(staff->clefList()->clef(0));
                   writeKeySig(staff->keymap()->key(0));
                   //done also in write measure,
                   // -- because there can be new keysigs unterwegs?

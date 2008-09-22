@@ -262,7 +262,7 @@ Sym::Sym(const char* name, const QChar& c, int fid)
                   }
             }
       if (i == sizeof(ctable)/sizeof(*ctable)) {
-            printf("sym not found\n");
+            printf("sym <%s> 0x%x not found\n", name, c.unicode());
             _bbox = QFontMetricsF(*_font).boundingRect(_code);
             w     = QFontMetricsF(*_font).width(_code);
             }

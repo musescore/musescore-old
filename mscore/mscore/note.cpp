@@ -218,19 +218,24 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
-      if (_userAccidental && accType == ACC_NONE) {
-            _userAccidental = ACC_NONE;
-            return;
+      if (accType == ACC_NONE) {
+            if ((_userAccidental != ACC_NONE)) {
+                  _userAccidental = ACC_NONE;
+                  return;
+                  }
+            if (_accidental && _accidental->subtype() == ACC_NATURAL) {
+printf("tpcAlter %d  accType %d  user %d\n", tpc2alter(_tpc), accType, _userAccidental);
+printf("   alt: pitch %d  tpc %d\n", pitch(), tpc());
+                  chord()->measure()->setPitchTpc(this);
+printf("   neu: pitch %d  tpc %d\n", pitch(), tpc());
+                  return;
+                  }
             }
       _userAccidental = ACC_NONE;
       int acc1  = Accidental::subtype2value(accType);
       int line  = tpc2line(_tpc);
-
       _tpc      = line2tpc(line, acc1);
-      int newPitch    = tpc2pitch(_tpc);
-      while (newPitch < 0)
-            newPitch += 12;
-      _pitch = newPitch + (_pitch / 12) * 12;
+      _pitch    = line2pitch(_line, staff()->clefList()->clef(chord()->tick()), acc1);
 
       // compute the "normal" accidental of this note in
       // measure context:
@@ -578,7 +583,7 @@ void Note::endDrag()
 
       _line      += _lineOffset;
       _lineOffset = 0;
-      int clef    = chord()->staff()->clef()->clef(chord()->tick());
+      int clef    = chord()->staff()->clefList()->clef(chord()->tick());
       int key     = staff()->keymap()->key(chord()->tick());
       int npitch = line2pitch(_line, clef, key);
       setPitch(npitch);

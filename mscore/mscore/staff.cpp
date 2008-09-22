@@ -149,7 +149,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _score        = s;
       _rstaff       = rs;
       _part         = p;
-      _clef         = new ClefList;
+      _clefList     = new ClefList;
       _keymap       = new KeyList;
       (*_keymap)[0] = 0;                  // default to C major
       _show         = true;
@@ -164,8 +164,17 @@ Staff::Staff(Score* s, Part* p, int rs)
 
 Staff::~Staff()
       {
-      delete _clef;
+      delete _clefList;
       delete _keymap;
+      }
+
+//---------------------------------------------------------
+//   Staff::clef
+//---------------------------------------------------------
+
+int Staff::clef(int tick) const
+      {
+      return _clefList->clef(tick);
       }
 
 //---------------------------------------------------------
@@ -174,7 +183,7 @@ Staff::~Staff()
 
 int Staff::key(int tick) const
       {
-      return _clef->clef(tick);
+      return _keymap->key(tick);
       }
 
 //---------------------------------------------------------
@@ -188,7 +197,7 @@ void Staff::write(Xml& xml) const
             xml.tag("lines", lines());
       if (small())
             xml.tag("small", small());
-      _clef->write(xml, "cleflist");
+      _clefList->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets) {
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
@@ -213,7 +222,7 @@ void Staff::read(QDomElement e)
             else if (tag == "small")
                   setSmall(e.text().toInt());
             else if (tag == "cleflist")
-                  _clef->read(e, _score);
+                  _clefList->read(e, _score);
             else if (tag == "keylist")
                   _keymap->read(e, _score);
             else if (tag == "bracket") {
@@ -329,7 +338,7 @@ void Staff::changeKeySig(int tick, int st)
 
 void Staff::changeClef(int tick, int st)
       {
-      int ot = _clef->clef(tick);
+      int ot = _clefList->clef(tick);
       if (ot == st)
             return;                 // no change
 
@@ -340,16 +349,16 @@ void Staff::changeClef(int tick, int st)
             part()->setUseDrumset(true);
 
       int oval = NO_CLEF;
-      iClefEvent ki = _clef->find(tick);
-      if (ki != _clef->end()) {
+      iClefEvent ki = _clefList->find(tick);
+      if (ki != _clefList->end()) {
             oval = ki->second;
-            _clef->erase(ki);
+            _clefList->erase(ki);
             }
 
-      bool removeFlag = st == _clef->clef(tick);
+      bool removeFlag = st == _clefList->clef(tick);
       int nval = NO_CLEF;
       if (!removeFlag) {
-            (*_clef)[tick] = st;
+            (*_clefList)[tick] = st;
             nval = st;
             }
       _score->undoOp(UndoOp::ChangeClef, this, tick, oval, nval);

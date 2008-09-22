@@ -1,4 +1,10 @@
+22.9 (ws)
+      - fix calculation of tied notes length
+      - musicXML chord import fixes (C^#59 C^omit5)
+      - use only odd side page margins if twosided is not set
+      - changed page layout algo to better honor bottom margins
 21.9 (ws)
+      ======== Version 0.9.3 released =============
       - added "Online Manual" to help menu to access the manual pages on the
         mscore web pages
 20.9 (ws)

@@ -401,7 +401,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
             case UndoOp::ChangeClef:
                   {
-                  ClefList* kl = i->staff->clef();
+                  ClefList* kl = i->staff->clefList();
                   if (undo) {
                         // remove new value if there is any
                         if (i->val3 != NO_CLEF) {

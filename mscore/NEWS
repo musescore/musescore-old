@@ -1,4 +1,6 @@
-Release 0.9.3 (svn):
+Release 0.9.4 (svn):
+
+Release 0.9.3:
       - "concert pitch" view
       - midi articulation
       - integrated plugin script debugger

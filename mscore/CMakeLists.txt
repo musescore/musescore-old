@@ -50,7 +50,7 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR  "0")
 SET(Mscore_VERSION_MINOR  "9")
-SET(Mscore_VERSION_PATCH  "3")
+SET(Mscore_VERSION_PATCH  "4")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
@@ -70,7 +70,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 ##  look for Qt4
 ##
 
-set(QT_MIN_VERSION "4.3.0")
+set(QT_MIN_VERSION "4.4.0")
 set(QT_USE_QTXML     TRUE)
 set(QT_USE_QTSVG     TRUE)
 set(QT_USE_QTNETWORK TRUE)
@@ -78,7 +78,7 @@ set(QT_USE_QTUITOOLS TRUE)
 # only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 
-find_package(Qt4 "4.3")
+find_package(Qt4 "4.4")
 
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required."
@@ -251,9 +251,9 @@ include (InstallRequiredSystemLibraries)
   set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "i386")
 
   if (USE_GLOBAL_FLUID)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS  "libqt4-core (>= 4.3), libqt4-gui (>= 4.3), libfluidsynth-dev (>= 1.0.0)")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS  "libqt4-core (>= 4.4), libqt4-gui (>= 4.4), libfluidsynth-dev (>= 1.0.0)")
   else (USE_GLOBAL_FLUID)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.3), libqt4-gui (>= 4.3)")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.4), libqt4-gui (>= 4.4)")
   endif (USE_GLOBAL_FLUID)
 
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER   "tsmithe@ubuntu.com")

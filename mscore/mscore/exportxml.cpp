@@ -782,7 +782,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       int tick   = note->chord()->tick();
       Staff* i   = note->staff();
-      int offset = clefTable[i->clef()->clef(tick)].yOffset;
+      int offset = clefTable[i->clefList()->clef(tick)].yOffset;
 
       int step   = (note->line() - offset + 700) % 7;
       c          = table1[step];
@@ -2267,7 +2267,7 @@ foreach(Element* el, *(score->gel())) {
                                           // at line beginning
                                           int ti = el->tick();
                                           int ct = ((Clef*)el)->subtype();
-                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end()) {
                                                 clef(sstaff, ct);
@@ -2327,7 +2327,7 @@ foreach(Element* el, *(score->gel())) {
                                           // these have already been output
                                           int ti = el->tick();
                                           int ct = ((Clef*)el)->subtype();
-                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end() && el->tick() != m->tick()) {
                                                 clef(sstaff, ct);

@@ -482,6 +482,8 @@ const ChordDescription Harmony::chordList[] = {
 /* 40 */    { 200, "5",             "pedal", "add5",                                     HChord("C G") },
             { 201, "m11b5",         "minor-11th", "altb5",                               HChord("C Eb Gb Bb D F") },
             { 202, "dim7add#7",     "diminished-seventh", "add#7",                       HChord() }, // HChord("C Eb Gb Bbb") },
+            { 203, "#59",           "augmented-seventh", "add9",                         HChord("C E Ab D") },
+            { 204, "omit5",         "major", "sub5",                                     HChord("C E") },
       };
 
 //---------------------------------------------------------
