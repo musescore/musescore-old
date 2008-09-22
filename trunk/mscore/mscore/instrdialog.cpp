@@ -206,7 +206,7 @@ void InstrumentsDialog::genPartList()
                   sli->staff    = s;
                   sli->setPartIdx(s->rstaff());
                   sli->staffIdx = s->idx();
-                  sli->setClef(s->clef()->clef(0));
+                  sli->setClef(s->clefList()->clef(0));
                   }
             partiturList->setItemExpanded(pli, true);
             }
@@ -521,7 +521,7 @@ void MuseScore::editInstrList()
                         sli->staff = staff;
                         staff->setRstaff(rstaff);
                         // ++rstaff;
-                        staff->clef()->setClef(0, sli->clef());
+                        staff->clefList()->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
                         if (cidx == 0) {
@@ -557,7 +557,7 @@ void MuseScore::editInstrList()
                               sli->staff = staff;
                               staff->setRstaff(rstaff);
                               ++rstaff;
-                              staff->clef()->setClef(0, sli->clef());
+                              staff->clefList()->setClef(0, sli->clef());
 
                               cs->undoInsertStaff(staff, staffIdx);
 

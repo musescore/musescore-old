@@ -66,7 +66,7 @@ class Staff {
       Score* _score;
       Part* _part;
       int _rstaff;            ///< Index in Part.
-      ClefList* _clef;
+      ClefList* _clefList;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
@@ -77,11 +77,8 @@ class Staff {
    public:
       Staff(Score*, Part*, int);
       ~Staff();
-      int key(int tick) const;
       bool isTop() const             { return _rstaff == 0; }
       QString trackName() const;
-//      const QTextDocument& longName() const;
-//      const QTextDocument& shortName() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n;    }
@@ -98,9 +95,12 @@ class Staff {
       void addBracket(BracketItem);
 
       KeyList* keymap() const        { return _keymap; }
-      ClefList* clef() const         { return _clef;   }
+      ClefList* clefList() const     { return _clefList;   }
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int st);
+      int clef(int tick) const;
+      int key(int tick) const;
+
       bool show() const              { return _show;   }
       void setShow(bool val)         { _show = val;    }
       bool small() const             { return _small;  }

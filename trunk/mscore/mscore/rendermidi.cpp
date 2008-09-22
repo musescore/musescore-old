@@ -249,11 +249,17 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                   Note* note = chord->noteList()->front();
                   if (note->tieBack())
                         continue;
-                  while (note->tieFor()) {
-                        if (note->tieFor()->endNote() == 0)
-                              break;
-                        len += note->chord()->tickLen();
-                        note = note->tieFor()->endNote();
+                  bool tiedNote = false;
+                  int lastNoteLen = len;
+                  if (note->tieFor()) {
+                        tiedNote = true;
+                        while (note->tieFor()) {
+                              if (note->tieFor()->endNote() == 0)
+                                    break;
+                              note = note->tieFor()->endNote();
+                              lastNoteLen = note->chord()->tickLen();
+                              len += lastNoteLen;
+                              }
                         }
 
                   if (!sv.isEmpty()) {
@@ -289,12 +295,18 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                               sl += ssl;
                               len -= ssl;
                               }
+                        if (len < 0)
+                              len = 1;
                         }
+                  if (tiedNote)
+                        len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
+                  else
+                        len = (len * gateTime) / 100 - 1;
                   collectChord(events,
                      instr,
                      pitchOffset + ottavaShift,
                      chord, tick + tickOffset,
-                     (len * gateTime) / 100 - 1
+                     len
                      );
                   lv.clear();
                   sv.clear();

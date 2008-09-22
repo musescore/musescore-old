@@ -278,7 +278,7 @@ void Score::cmdRemove(Element* e)
                   {
                   Clef* clef    = (Clef*)e;
                   Staff* staff  = clef->staff();
-                  ClefList* cl  = staff->clef();
+                  ClefList* cl  = staff->clefList();
                   int tick      = clef->tick();
                   iClefEvent ki = cl->find(tick);
                   if (ki == cl->end()) {

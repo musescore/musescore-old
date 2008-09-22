@@ -328,7 +328,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   sli->staff = staff;
                   staff->setRstaff(rstaff);
                   ++rstaff;
-                  staff->clef()->setClef(0, sli->clef());
+                  staff->clefList()->setClef(0, sli->clef());
                   staff->setLines(t->staffLines[cidx]);
                   staff->setSmall(t->smallStaff[cidx]);
                   if (cidx == 0) {

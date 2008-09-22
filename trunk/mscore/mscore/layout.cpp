@@ -157,7 +157,7 @@ Element* Score::searchNote(int tick, int track) const
 
 int Score::clefOffset(int tick, Staff* staff) const
       {
-      return clefTable[staff->clef()->clef(tick)].yOffset;
+      return clefTable[staff->clefList()->clef(tick)].yOffset;
       }
 
 //---------------------------------------------------------
@@ -222,7 +222,6 @@ void ScoreLayout::doLayout()
       curSystem   = 0;
       firstSystem = true;
       for (curPage = 0; curMeasure; curPage++) {
-
             getCurPage();
             MeasureBase* om = curMeasure;
             if (!layoutPage())
@@ -356,7 +355,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                   }
             bool needClef = isFirstSystem || _score->style()->genClef;
             if (needClef) {
-                  int idx = staff->clef()->clef(tick);
+                  int idx = staff->clefList()->clef(tick);
                   if (!hasClef) {
                         //
                         // create missing clef
@@ -432,17 +431,21 @@ void ScoreLayout::getCurPage()
 bool ScoreLayout::layoutPage()
       {
       Page* page = _pages[curPage];
+      const double slb = point(score()->style()->staffLowerBorder);
+      const double sub = point(score()->style()->staffUpperBorder);
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
-      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder);
+      qreal ey = page->loHeight() - page->bm() - slb;
 
       page->clear();
       qreal y = page->tm();
 
       int rows = 0;
       bool firstSystemOnPage = true;
+
+      double nettoHeight = 0.0;
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
@@ -470,12 +473,14 @@ bool ScoreLayout::layoutPage()
                   curMeasure = curMeasure->next();
                   ++curSystem;
                   y += bh + score()->style()->boxSystemDistance.point();
+                  nettoHeight += bh;
                   if (y > ey)
                         break;
+                  nettoHeight += score()->style()->boxSystemDistance.point();
                   }
             else {
                   if (firstSystemOnPage) {
-                        y += point(score()->style()->staffUpperBorder);
+                        y += sub;
                         }
                   int cs          = curSystem;
                   MeasureBase* cm = curMeasure;
@@ -501,6 +506,7 @@ bool ScoreLayout::layoutPage()
                   firstSystem = false;
                   firstSystemOnPage = false;
                   y += h;
+                  nettoHeight += h;
                   if (sl.back()->pageBreak())
                         break;
                   }
@@ -509,17 +515,18 @@ bool ScoreLayout::layoutPage()
 
       //-----------------------------------------------------------------------
       // if remaining y space on page is greater (pageHeight*pageFillLimit)
-      // then insert space between staffs to fill page
+      // then increase system distance to fill page
       //-----------------------------------------------------------------------
 
       double restHeight = ey - y; //  + systemDistance;
-      double ph = page->height()
-            - point(score()->style()->staffLowerBorder + score()->style()->staffUpperBorder);
+
+      double ph = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
       if (restHeight > (ph * (1.0 - score()->style()->pageFillLimit)))
             return true;
 
-      double dist = restHeight / (rows - 1);
+      double systemDistance = score()->style()->systemDistance.point();
+      double extraDist = (ph - nettoHeight + systemDistance) / (rows - 1);
       y = 0;
       int n = page->systems()->size();
       for (int i = 0; i < n;) {
@@ -531,7 +538,7 @@ bool ScoreLayout::layoutPage()
                   break;
             System* nsystem = page->systems()->at(i);
             if (nsystem->pos().y() != yy)
-                  y += dist;                    // next system row
+                  y += extraDist;               // next system row
             }
       return true;
       }
@@ -768,7 +775,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         m->layout(this, ww);
                         }
                   else if (mb->type() == HBOX) {
-                        ww = ((Box*)mb)->boxWidth().point();
+                        ww = static_cast<Box*>(mb)->boxWidth().point();
                         mb->layout(this);
                         }
                   pos.rx() += ww;

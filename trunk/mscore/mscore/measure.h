@@ -203,6 +203,7 @@ class Measure : public MeasureBase {
       void setRepeatFlags(int val);
       int findAccidental(Note*);
       void exchangeVoice(int, int, int, int);
+      void setPitchTpc(Note*) const;
       };
 
 #endif

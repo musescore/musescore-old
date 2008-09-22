@@ -1600,7 +1600,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               clef = CLEF_C1;
                         }
                   Staff* part = score->staff(staff + clefno);
-                  ClefList* ct = part->clef();
+                  ClefList* ct = part->clefList();
                   (*ct)[tick] = clef;
                   if (tick) {
                         // dont generate symbol for tick 0

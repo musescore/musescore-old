@@ -482,4 +482,3 @@ void PageSettings::pageWidthChanged(double)
       {
       pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
       }
-

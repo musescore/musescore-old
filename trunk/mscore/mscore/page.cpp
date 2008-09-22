@@ -60,25 +60,25 @@ Page::Page(ScoreLayout* s)
 double Page::tm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return (isOdd() ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
+      return ((!pf->twosided || isOdd()) ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
       }
 
 double Page::bm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return (isOdd() ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
+      return ((!pf->twosided || isOdd()) ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
       }
 
 double Page::lm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return (isOdd() ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
+      return ((!pf->twosided || isOdd()) ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
       }
 
 double Page::rm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return (isOdd() ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
+      return ((!pf->twosided || isOdd()) ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
       }
 
 double Page::loWidth() const

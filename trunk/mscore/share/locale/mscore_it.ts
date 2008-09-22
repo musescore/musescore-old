@@ -2523,12 +2523,12 @@ fallito: </translation>
 <context>
     <name>MagBox</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="805"/>
+        <location filename="../../mscore/mscore.cpp" line="806"/>
         <source>Mag</source>
         <translation>Lente</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="806"/>
+        <location filename="../../mscore/mscore.cpp" line="807"/>
         <source>Zoom Canvas</source>
         <translation>Finestra d&apos;Ingrandimento</translation>
     </message>
@@ -3130,17 +3130,17 @@ fallito: </translation>
         <translation>&amp;Aiuto</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="729"/>
+        <location filename="../../mscore/mscore.cpp" line="730"/>
         <source>&amp;About</source>
         <translation>&amp;A Proposito di</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="730"/>
+        <location filename="../../mscore/mscore.cpp" line="731"/>
         <source>About&amp;Qt</source>
         <translation>A Proposito di &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1039"/>
+        <location filename="../../mscore/mscore.cpp" line="1035"/>
         <source>MuseScore: Open Help</source>
         <translation>MuseScore: Apertura Aiuto</translation>
     </message>
@@ -3185,17 +3185,12 @@ fallito: </translation>
         <translation>Interruzioni...</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="728"/>
-        <source>Manual</source>
-        <translation>Manuale</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="1927"/>
+        <location filename="../../mscore/mscore.cpp" line="1939"/>
         <source>note entry mode</source>
         <translation>Modalità Inserimento Note</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1931"/>
+        <location filename="../../mscore/mscore.cpp" line="1943"/>
         <source>edit mode</source>
         <translation>Modalità di Modifica</translation>
     </message>
@@ -4615,7 +4610,7 @@ fallito: </translation>
         <translation>Interruzioni</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1935"/>
+        <location filename="../../mscore/mscore.cpp" line="1947"/>
         <source>play</source>
         <translation>Riproduci</translation>
     </message>
@@ -4935,7 +4930,7 @@ fallito: </translation>
         <translation>Azzera la Modalità Gruppo delle Battute Selezionate</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1037"/>
+        <location filename="../../mscore/mscore.cpp" line="1033"/>
         <source>MuseScore online manual not found at: </source>
         <translation>Manuale In-Linea di MuseScore non trovato a:</translation>
     </message>
@@ -5152,18 +5147,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Arpeggio/Glissando</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1051"/>
-        <source>MuseScore: Error</source>
-        <translation>MuseScore: Errore</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="1052"/>
-        <source>Failed to open help file:
-</source>
-        <translation>Fallita apertura File di Guida:
-</translation>
-    </message>
-    <message>
         <location filename="../../mscore/style.cpp" line="139"/>
         <source>Glissando</source>
         <translation>Glissando</translation>
@@ -5284,8 +5267,13 @@ Desideri Salvare lo Spartito?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
+        <location filename="../../mscore/mscore.cpp" line="728"/>
+        <source>Local Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="729"/>
+        <source>Online Manual</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6479,7 +6467,7 @@ Desideri Salvare lo Spartito?</translation>
         <translation>MuseScore: Caricamento Fallito:</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1833"/>
+        <location filename="../../mscore/mscore.cpp" line="1845"/>
         <source>Quit</source>
         <translation>Esci</translation>
     </message>
@@ -6504,7 +6492,7 @@ Desideri Salvare lo Spartito?</translation>
         <translation>MuseScore: Carica Midi</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1831"/>
+        <location filename="../../mscore/mscore.cpp" line="1843"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7910,17 +7898,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>magTable</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="791"/>
+        <location filename="../../mscore/mscore.cpp" line="792"/>
         <source>PgeWidth</source>
         <translation>Larghezza Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="792"/>
+        <location filename="../../mscore/mscore.cpp" line="793"/>
         <source>Page</source>
         <translation>Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="793"/>
+        <location filename="../../mscore/mscore.cpp" line="794"/>
         <source>DblPage</source>
         <translation>Affianca Pagine</translation>
     </message>

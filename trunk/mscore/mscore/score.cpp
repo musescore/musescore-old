@@ -548,7 +548,7 @@ void Score::insertTime(int tick, int len)
             len = -len;
             tempomap->removeTime(tick, len);
             foreach(Staff* staff, _staves) {
-                  staff->clef()->removeTime(tick, len);
+                  staff->clefList()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
                   }
             foreach(Element* el, _gel) {
@@ -576,7 +576,7 @@ void Score::insertTime(int tick, int len)
             //
             tempomap->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
-                  staff->clef()->insertTime(tick, len);
+                  staff->clefList()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
                   }
             foreach(Element* el, _gel) {
@@ -716,7 +716,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                                       *tick = segment->tick();
                                                 if (pitch) {
                                                       Staff* s = _staves[i];
-                                                      int clef = s->clef()->clef(*tick);
+                                                      int clef = s->clefList()->clef(*tick);
                                                       *pitch = y2pitch(pppp.y()-staff->bbox().y(), clef);
                                                       }
                                                 if (offset)
@@ -751,7 +751,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                     if (tick)
                                           *tick = segment->tick();
                                     if (pitch) {
-                                          int clef = staff(*rst)->clef()->clef(*tick);
+                                          int clef = staff(*rst)->clefList()->clef(*tick);
                                           *pitch = y2pitch(pppp.y(), clef);
                                           }
                                     if (offset) {
