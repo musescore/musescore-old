@@ -1,4 +1,5 @@
 23.9 (ws)
+      - fix crash when shift+drag a note head
       - delete natural symbol now works
       - fix play in "concert pitch"
 22.9 (ws)
