@@ -270,7 +270,7 @@ int Score::prevSeg1(int tick, int& track)
 //    key -7 ... +7
 //---------------------------------------------------------
 
-int pitchKeyAdjust(int note, int key)
+int pitchKeyAdjust(int step, int key)
       {
       static int ptab[15][7] = {
 //             c  d  e  f  g   a  b
@@ -290,7 +290,7 @@ int pitchKeyAdjust(int note, int key)
             {  1, 3, 5, 6, 8, 10, 11 },     // Fis
             {  1, 3, 5, 6, 8, 10, 12 },     // Cis
             };
-      return ptab[key+7][note];
+      return ptab[key+7][step];
       }
 
 //---------------------------------------------------------
@@ -322,6 +322,7 @@ int line2pitch(int line, int clef, int key)
       l       = l % 7;
 
       int pitch = pitchKeyAdjust(l, key) + octave * 12;
+
       if (pitch > 127)
             pitch = 127;
       else if (pitch < 0)

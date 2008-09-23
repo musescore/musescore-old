@@ -37,7 +37,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
 
       setupUi(this);
       // note that rootGroup button identifiers map conveniently
-      // onto all possible tpc2line return values: don't change
+      // onto all possible tpc2step return values: don't change
       rootGroup = new QButtonGroup(this);
       rootGroup->addButton(rootC,   0);
       rootGroup->addButton(rootD,   1);
@@ -148,8 +148,8 @@ void ChordEdit::setHarmony(const Harmony* h)
 
 void ChordEdit::setRoot(int val)
       {
-//      printf("ChordEdit::setRoot(val=%d) tpc2line=%d tpc2stepname=%s tpc2alter=%d\n",
-//             val, tpc2line(val), qPrintable(tpc2stepName(val)), tpc2alter(val));
+//      printf("ChordEdit::setRoot(val=%d) tpc2step=%d tpc2stepname=%s tpc2alter=%d\n",
+//             val, tpc2step(val), qPrintable(tpc2stepName(val)), tpc2alter(val));
 
       QAbstractButton* button = NULL;
       int id = 0;
@@ -166,7 +166,7 @@ void ChordEdit::setRoot(int val)
             }
 
       // translate tpc to button nr
-      id = tpc2line(val);
+      id = tpc2step(val);
       button = rootGroup->button(id);
       if (button)
             button->setChecked(true);
@@ -241,7 +241,7 @@ const ChordDescription* ChordEdit::extension()
 
 int ChordEdit::root()
       {
-      int tpc = line2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId() - 3);
+      int tpc = step2tpc(rootGroup->checkedId(), accidentalsGroup->checkedId() - 3);
 //      printf("ChordEdit::root() rootid=%d accid=%d -> tpc=%d\n",
 //             rootGroup->checkedId(), accidentalsGroup->checkedId() - 3, tpc);
       return tpc;

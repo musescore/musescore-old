@@ -96,8 +96,8 @@ static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave,
 
       //                        a  b  c  d  e  f  g
       static int table1[7]  = { 5, 6, 0, 1, 2, 3, 4 };
-      int line = table1[istep];
-      int tpc  = line2tpc(line, alter);
+      int tpc  = step2tpc(table1[istep], alter);
+      // alternativ: tpc = step2tpc((istep + 5) % 7, alter);      // rotate istep 5 steps
       n->setTpc(tpc);
       }
 

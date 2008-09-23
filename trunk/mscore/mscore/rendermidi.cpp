@@ -188,7 +188,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
       {
       Part* prt         = part(staffIdx);
       Instrument* instr = prt->instrument();
-      int pitchOffset   = instr->pitchOffset;
+      int pitchOffset   = _style->concertPitch ? 0 : instr->pitchOffset;
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura

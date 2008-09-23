@@ -201,9 +201,9 @@ class Measure : public MeasureBase {
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val);
-      int findAccidental(Note*);
+      int findAccidental(Note*) const;
+      int findAccidental2(Note*) const;
       void exchangeVoice(int, int, int, int);
-      void setPitchTpc(Note*) const;
       };
 
 #endif
