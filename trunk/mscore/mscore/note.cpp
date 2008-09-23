@@ -406,15 +406,17 @@ void Note::draw(QPainter& p) const
       if (!_hidden)
             symbols[_head].draw(p, mag());
 
-      int dots = chord()->dots();
-      if (dots) {
-            double y = 0;
-            // do not draw dots on line
-            if (_line >= 0 && (_line & 1) == 0)
-                  y = -_spatium *.5 * mag();
+      if (chord()) {
+            int dots = chord()->dots();
+            if (dots) {
+                  double y = 0;
+                  // do not draw dots on line
+                  if (_line >= 0 && (_line & 1) == 0)
+                        y = -_spatium *.5 * mag();
 
-            for (int i = 1; i <= dots; ++i)
-                  symbols[dotSym].draw(p, mag(), symbols[_head].width(mag()) + point(score()->style()->dotNoteDistance) * i, y);
+                  for (int i = 1; i <= dots; ++i)
+                        symbols[dotSym].draw(p, mag(), symbols[_head].width(mag()) + point(score()->style()->dotNoteDistance) * i, y);
+                  }
             }
       }
 

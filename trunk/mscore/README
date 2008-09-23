@@ -21,7 +21,7 @@ Features:
       - print or create pdf files
 
 Requirements:
-      - qt4 gui lib version qt4.3.x
+      - qt4 gui lib version qt4.4.x
 
         Note that many linux distributions split packages into a user
         and developer package and that you need to install both.
