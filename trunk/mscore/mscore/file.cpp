@@ -183,14 +183,14 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;"
+         tr("All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;"
             "MuseScore Files (*.mscz *.msc);;"
-            "MusicXml Files (*.xml *.mxl);;"
-            "Midi Files (*.mid *.kar);;"
+            "MusicXML Files (*.xml *.mxl);;"
+            "MIDI Files (*.mid *.kar);;"
             "Muse Data Files (*.md);;"
-            "Lilypond Files <experimental> (*.ly);;"
+            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
-            "All files (*)"
+            "All Files (*)"
             )
          );
       if (fn.isEmpty())
@@ -332,9 +332,9 @@ bool Score::saveAs()
 
       fl.append(tr("Compressed MuseScore Format (*.mscz)"));
       fl.append(tr("MuseScore Format (*.msc)"));
-      fl.append(tr("MusicXml Format (*.xml)"));
-      fl.append(tr("Compressed MusicXml Format (*.mxl)"));
-      fl.append(tr("Standard Midi File (*.mid)"));
+      fl.append(tr("MusicXML Format (*.xml)"));
+      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
+      fl.append(tr("Standard MIDI File (*.mid)"));
       fl.append(tr("PDF File (*.pdf)"));
       fl.append(tr("Postscript File (*.ps)"));
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
@@ -441,7 +441,7 @@ bool Score::saveAs()
 
 QString MuseScore::createDefaultName() const
       {
-      QString name(tr("untitled"));
+      QString name(tr("Untitled"));
       int n;
       for (n = 1; ; ++n) {
             bool nameExists = false;
@@ -786,7 +786,7 @@ void Score::loadStyle()
          0, QWidget::tr("MuseScore: Load Style"),
          QString("."),
             QWidget::tr("MuseScore Styles (*.mss);;"
-            "All files (*)"
+            "All Files (*)"
             )
          );
       if (fn.isEmpty())
@@ -794,7 +794,7 @@ void Score::loadStyle()
       QFile f(fn);
       if (!f.open(QIODevice::ReadOnly)) {
             QMessageBox::warning(0,
-               QWidget::tr("MuseScore: load Style failed:"),
+               QWidget::tr("MuseScore: Load Style failed:"),
                QString(strerror(errno)),
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             }
@@ -816,7 +816,7 @@ bool Score::loadStyle(QFile* qf)
             error.sprintf("error reading style file %s at line %d column %d: %s\n",
                qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
             QMessageBox::warning(0,
-               QWidget::tr("MuseScore: load Style failed:"),
+               QWidget::tr("MuseScore: Load Style failed:"),
                error,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return true;
@@ -864,7 +864,7 @@ void Score::saveStyle()
       QString name = QFileDialog::getSaveFileName(
          0, tr("MuseScore: Save Style"),
          ".",
-         tr("MuseScore style file (*.mss)")
+         tr("MuseScore Style File (*.mss)")
          );
       if (name.isEmpty())
             return;

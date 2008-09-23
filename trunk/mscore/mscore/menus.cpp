@@ -432,7 +432,7 @@ void MuseScore::showPalette(bool visible)
             nh->setSym(xcircledheadSym);
             sp->addObject(6, nh, QString("xcircle"));
 
-            paletteBox->addPalette(tr("NoteHeads"), sp);
+            paletteBox->addPalette(tr("Note Heads"), sp);
 
             //-----------------------------------
             //    Tremolo
@@ -566,7 +566,7 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("auto-beam"));
             sp->addObject(3,  ik, tr("auto beam"));
 
-            paletteBox->addPalette(tr("Beam properties"), sp);
+            paletteBox->addPalette(tr("Beam Properties"), sp);
 
 
             //-----------------------------------
@@ -751,7 +751,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
 
       popup->addAction(getAction("instruments"));
 
-      QMenu* measures = popup->addMenu(tr("Measures..."));
+      QMenu* measures = popup->addMenu(tr("Measures"));
       measures->addAction(getAction("append-measure"));
       measures->addAction(getAction("append-measures"));
       measures->addAction(getAction("insert-measure"));
@@ -770,7 +770,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       popup->addAction(tr("Note Attributes..."), this, SLOT(noteAttributesMenu()));
       popup->addAction(tr("Accidentals..."),     this, SLOT(accidentalsMenu()));
 
-      QMenu* text = popup->addMenu(tr("Text..."));
+      QMenu* text = popup->addMenu(tr("Text"));
       text->addAction(getAction("title-text"));
       text->addAction(getAction("subtitle-text"));
       text->addAction(getAction("composer-text"));
