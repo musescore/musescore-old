@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.1917</Mag>
-  <xoff>-4.02167</xoff>
-  <yoff>-22.4367</yoff>
+  <xoff>-182.88</xoff>
+  <yoff>-170.815</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -482,6 +482,11 @@
     <SlurSegment no="0">
       <o1 x="-0.44919" y="-0.38502"/>
       <o4 x="-0.962549" y="-3.43309"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="61">
+    <SlurSegment no="0">
+      <o4 x="-0.906268" y="1.00696"/>
       </SlurSegment>
     </Slur>
   <Staff id="1">
@@ -1602,8 +1607,8 @@ p, li { white-space: pre-wrap; }
           </Note>
         <Note>
           <track>1</track>
-          <pitch>98</pitch>
-          <tpc>16</tpc>
+          <pitch>94</pitch>
+          <tpc>12</tpc>
           </Note>
         </Chord>
       <Rest>
@@ -2065,6 +2070,7 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <pitch>71</pitch>
           <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
           </Note>
         </Chord>
       </Measure>
@@ -2494,8 +2500,20 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="61"/>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <tick>51360</tick>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
+        <Slur type="stop" number="61"/>
         <Note>
-          <pitch>35</pitch>
+          <pitch>47</pitch>
           <tpc>7</tpc>
           <userAccidental>2</userAccidental>
           </Note>
@@ -2519,6 +2537,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>52080</tick>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="55"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -2531,11 +2552,18 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="56"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note pitch="57" tpc="17"/>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
         </Chord>
       <Chord>
         <tick>52560</tick>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="56"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -2555,6 +2583,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>53040</tick>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="57"/>
         <Note>
           <pitch>56</pitch>
@@ -2600,6 +2631,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>54000</tick>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="59"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -2612,11 +2646,14 @@ p, li { white-space: pre-wrap; }
         <Slur type="start" number="60"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note pitch="56" tpc="10"/>
+        <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <tick>54480</tick>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="60"/>
         <Note pitch="58" tpc="12"/>
         <Note pitch="61" tpc="9"/>
@@ -2695,7 +2732,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
-        <Note pitch="59" tpc="7"/>
+        <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <track>1</track>
@@ -2703,8 +2740,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <track>1</track>
-          <pitch>59</pitch>
-          <tpc>7</tpc>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          <userAccidental>5</userAccidental>
           </Note>
         </Chord>
       </Measure>
@@ -2745,6 +2783,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="63">
       <Rest>
+        <offset x="0.0832482" y="-0.998978"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -2763,7 +2802,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note pitch="71" tpc="7"/>
+        <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <tick>60000</tick>
@@ -2792,7 +2831,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>60240</tick>
         <ticklen>240</ticklen>
-        <Note pitch="71" tpc="7"/>
+        <Note pitch="72" tpc="14"/>
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Chord>
@@ -2833,7 +2872,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
-        <Note pitch="71" tpc="7"/>
+        <Note pitch="72" tpc="14"/>
         </Chord>
       <Chord>
         <tick>60960</tick>
@@ -2862,7 +2901,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>61200</tick>
         <ticklen>240</ticklen>
-        <Note pitch="71" tpc="7"/>
+        <Note pitch="72" tpc="14"/>
         <Note pitch="75" tpc="11"/>
         </Chord>
       </Measure>
@@ -2872,7 +2911,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="56" tpc="10"/>
+        <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <track>1</track>
@@ -2906,8 +2945,8 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note>
           <track>1</track>
-          <pitch>57</pitch>
-          <tpc>17</tpc>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -5378,39 +5417,64 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="41" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="39" tpc="11"/>
         </Chord>
       </Measure>
     <Measure number="54">
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="37" tpc="9"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="35" tpc="7"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <BeamMode>mid</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="34" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="32" tpc="10"/>
         </Chord>
       </Measure>
     <Measure number="55">
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <offset x="-0.460204" y="4.8431"/>
+          </Attribute>
         <StemDirection>down</StemDirection>
         <Note pitch="42" tpc="8"/>
         </Chord>
@@ -6364,5 +6428,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>5</cursorTrack>
   </museScore>

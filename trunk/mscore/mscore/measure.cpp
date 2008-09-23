@@ -348,7 +348,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                         // accidentals in appoggiatura and acciaccatura
                         // are not valid for the whole measure
                         //
-                        if (chord->noteType() == NOTE_NORMAL)
+//                        if (chord->noteType() == NOTE_NORMAL)
                               tversatz[line] = accVal;
                         switch(accVal) {
                               case -2: accidental = ACC_FLAT2;  break;
@@ -376,7 +376,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   }
 
             note->setMirror(mirror);
-//          if (chord->isUp() && mirror)
             if (mirror)
                   moveLeft = true;
             note->setAccidentalSubtype(accidental);
@@ -408,7 +407,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             double x = -point(score()->style()->prefixNoteDistance) * ac->mag();
             x  -= ac->width() + ac->bbox().x();
             x  *= (accCol + 1);
-//            if (note->mirror && chord->isUp())
             if (moveLeft && ((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
                   x -= note->headWidth();
             ac->setPos(x, 0);
@@ -484,8 +482,8 @@ int Measure::findAccidental(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-                  if (chord->noteType() != NOTE_NORMAL)
-                        continue;
+//                  if (chord->noteType() != NOTE_NORMAL)
+//                        continue;
 
 
                   Drumset* drumset = 0;
@@ -532,7 +530,7 @@ int Measure::findAccidental(Note* note) const
                                                       return 0;
                                                 }
                                           }
-                                    if (chord->noteType() == NOTE_NORMAL)
+//                                    if (chord->noteType() == NOTE_NORMAL)
                                           tversatz[line] = accVal;
                                     }
                               else {
@@ -567,8 +565,8 @@ int Measure::findAccidental2(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-                  if (chord->noteType() != NOTE_NORMAL)
-                        continue;
+//                  if (chord->noteType() != NOTE_NORMAL)
+//                        continue;
 
 
                   Drumset* drumset = 0;
@@ -599,7 +597,7 @@ int Measure::findAccidental2(Note* note) const
                               return tversatz[line];
                         int accVal = ((tpc + 1) / 7) - 2;
                         if (accVal != tversatz[line]) {
-                              if (chord->noteType() == NOTE_NORMAL)
+//                              if (chord->noteType() == NOTE_NORMAL)
                                     tversatz[line] = accVal;
                               }
                         }

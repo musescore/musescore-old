@@ -218,10 +218,12 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
-      static const int lt[7] = { 3, 2, 1, 0, 6, 5, 4 };
-      int step   = lt[_line % 7];
-      int tick   = chord()->tick();
-      int clef   = staff()->clef(tick);
+      int tick = chord()->tick();
+      int clef = staff()->clef(tick);
+      int step = clefTable[clef].pitchOffset - _line;
+      while (step < 0)        // ??
+            step += 7;
+      step = step % 7;
       Measure* m = chord()->measure();
 
       if (accType == ACC_NONE) {
@@ -237,9 +239,10 @@ void Note::changeAccidental(int accType)
                   }
             }
       _userAccidental = ACC_NONE;
-      int acc1  = Accidental::subtype2value(accType);
-      _tpc      = step2tpc(step, acc1);
-      _pitch    = line2pitch(_line, clef, 0) + acc1;
+
+      int acc  = Accidental::subtype2value(accType);
+      _tpc     = step2tpc(step, acc);
+      _pitch   = line2pitch(_line, clef, 0) + acc;
 
       // compute the "normal" accidental of this note in
       // measure context:
@@ -248,8 +251,10 @@ void Note::changeAccidental(int accType)
       // if the accidentals differ, this which means acc1 is
       // redundant and is set as an editorial accidental
 
-      if (accType != type2)
+      if (accType != type2) {
+            printf("user acc %d  -- %d\n", accType, type2);
             _userAccidental = accType;    // editorial accidental
+            }
       }
 
 //---------------------------------------------------------
