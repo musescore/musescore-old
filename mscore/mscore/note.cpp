@@ -218,28 +218,31 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
+      static const int lt[7] = { 3, 2, 1, 0, 6, 5, 4 };
+      int step   = lt[_line % 7];
+      int tick   = chord()->tick();
+      int clef   = staff()->clef(tick);
+      Measure* m = chord()->measure();
+
       if (accType == ACC_NONE) {
             if ((_userAccidental != ACC_NONE)) {
                   _userAccidental = ACC_NONE;
                   return;
                   }
             if (_accidental && _accidental->subtype() == ACC_NATURAL) {
-printf("tpcAlter %d  accType %d  user %d\n", tpc2alter(_tpc), accType, _userAccidental);
-printf("   alt: pitch %d  tpc %d\n", pitch(), tpc());
-                  chord()->measure()->setPitchTpc(this);
-printf("   neu: pitch %d  tpc %d\n", pitch(), tpc());
+                  int acc  = m->findAccidental2(this);
+                  _pitch   = line2pitch(_line, clef, 0) + acc;
+                  _tpc     = step2tpc(step, acc);
                   return;
                   }
             }
       _userAccidental = ACC_NONE;
       int acc1  = Accidental::subtype2value(accType);
-      int line  = tpc2line(_tpc);
-      _tpc      = line2tpc(line, acc1);
-      _pitch    = line2pitch(_line, staff()->clefList()->clef(chord()->tick()), acc1);
+      _tpc      = step2tpc(step, acc1);
+      _pitch    = line2pitch(_line, clef, 0) + acc1;
 
       // compute the "normal" accidental of this note in
       // measure context:
-      Measure* m = chord()->measure();
       int type2  = m->findAccidental(this);
 
       // if the accidentals differ, this which means acc1 is

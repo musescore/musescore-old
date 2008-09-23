@@ -44,12 +44,12 @@ extern int computeWindow(const QList<Note*>& notes, int start, int end);
 extern int tpc(int idx, int pitch, int opt);
 extern int pitch2line(int pitch);
 extern QString tpc2name(int tpc, bool germanNames);
-extern int line2tpc(int line, int prefix);
+extern int step2tpc(const QString& stepName, int alter);
+extern int step2tpc(int step, int alter);
 extern int tpc2pitch(int tpc);
-extern int tpc2line(int tpc);
+extern int tpc2step(int tpc);
 extern int tpc2alter(int tpc);
 extern QString tpc2stepName(int tpc);
-extern int step2tpc(const QString& step, int alter);
 extern int transposeTpc(int tpc, int semitones);
 
 #endif

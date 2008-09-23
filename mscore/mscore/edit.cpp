@@ -380,7 +380,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
 
       int key   = staff(staffIdx)->keymap()->key(tick);
-      int clef  = staff(staffIdx)->clefList()->clef(tick);
+      int clef  = staff(staffIdx)->clef(tick);
       int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
 

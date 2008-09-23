@@ -29,42 +29,42 @@
 #include "staff.h"
 #include "chord.h"
 
-//    TPC - tonal pitch classes
-//    "line of fifth's" LOF
-
-static const int spellings[] = {
-//     bb  b   -   #  ##
-       0,  7, 14, 21, 28,  // C
-       2,  9, 16, 23, 30,  // D
-       4, 11, 18, 25, 32,  // E
-      -1,  6, 13, 20, 27,  // F
-       1,  8, 15, 22, 29,  // G
-       3, 10, 17, 24, 31,  // A
-       5, 12, 19, 26, 33,  // B
-       };
-
 //---------------------------------------------------------
-//   line2tpc
-//    prefix -2 < 2
+//   step2tpc
+//    alter =  -2 <= 2   (bb b - # ##)
 //---------------------------------------------------------
 
-int line2tpc(int line, int prefix)
+int step2tpc(int step, int alter)
       {
-      int i = line * 5 + 2 + prefix;
+      //    TPC - tonal pitch classes
+      //    "line of fifth's" LOF
+
+      static const int spellings[] = {
+      //     bb  b   -   #  ##
+             0,  7, 14, 21, 28,  // C
+             2,  9, 16, 23, 30,  // D
+             4, 11, 18, 25, 32,  // E
+            -1,  6, 13, 20, 27,  // F
+             1,  8, 15, 22, 29,  // G
+             3, 10, 17, 24, 31,  // A
+             5, 12, 19, 26, 33,  // B
+             };
+
+      int i = step * 5 + 2 + alter;
       if (i < 0 || (i >= int(sizeof(spellings)/sizeof(*spellings))))
-            abort();
-      return spellings[line * 5 + 2 + prefix];
+            return INVALID_TPC;
+      return spellings[i];
       };
 
 //---------------------------------------------------------
 //   step2tpc
 //---------------------------------------------------------
 
-int step2tpc(const QString& step, int alter)
+int step2tpc(const QString& stepName, int alter)
       {
-      if (step.isEmpty())
+      if (stepName.isEmpty())
             return INVALID_TPC;
-      char c = step[0].toLower().toAscii();
+      char c = stepName[0].toLower().toAscii();
       int r = -1;
       switch (c) {
             case 'c': r = 0; break;
@@ -75,9 +75,7 @@ int step2tpc(const QString& step, int alter)
             case 'a': r = 5; break;
             case 'b': r = 6; break;
             }
-      if (r < 0 || r > 6)
-            return INVALID_TPC;
-      return spellings[r * 5 + alter + 2];
+      return step2tpc(r, alter);
       }
 
 //---------------------------------------------------------
@@ -89,7 +87,7 @@ int tpc2pitch(int tpc)
       tpc += 1;
 
       static int pitches[] = {
-//line:     F   C   G   D   A   E   B
+//step:     F   C   G   D   A   E   B
             3, -2,  5,  0,  7,  2,  9,     // bb
             4, -1,  6,  1,  8,  3, 10,     // b
             5,  0,  7,  2,  9,  4, 11,     // -
@@ -104,13 +102,15 @@ int tpc2pitch(int tpc)
       }
 
 //---------------------------------------------------------
-//   tpc2line
+//   tpc2step
 //---------------------------------------------------------
 
-int tpc2line(int tpc)
+int tpc2step(int tpc)
       {
-      static const int lines[7] = { 3, 0, 4, 1, 5, 2, 6 };
-      return lines[(tpc+1) % 7];
+      // 14 - C
+      // 15 % 7 = 1
+      static const int steps[7] = { 3, 0, 4, 1, 5, 2, 6 };
+      return steps[(tpc+1) % 7];
       }
 
 //---------------------------------------------------------
@@ -120,7 +120,7 @@ int tpc2line(int tpc)
 int pitch2line(int pitch)
       {
       int tpc = pitch2tpc(pitch);
-      return tpc2line(tpc) + (pitch / 12) * 7;
+      return tpc2step(tpc) + (pitch / 12) * 7;
       }
 
 //---------------------------------------------------------
