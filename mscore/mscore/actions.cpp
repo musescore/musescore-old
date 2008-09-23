@@ -32,7 +32,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file open"),
          Qt::CTRL+Qt::Key_O,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Open"),
+         QT_TR_NOOP("Open..."),
          QT_TR_NOOP("Load Score from File"),
          &fileOpenIcon
          ),
@@ -52,7 +52,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file save as"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save As"),
+         QT_TR_NOOP("Save As..."),
          QT_TR_NOOP("Save Score to named File"),
          &fileSaveIcon
          ),
@@ -82,7 +82,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("print"),
          Qt::CTRL+Qt::Key_P,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Print"),
+         QT_TR_NOOP("Print..."),
          QT_TR_NOOP("Print Score"),
          &printIcon
          ),
@@ -208,8 +208,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pitch spell"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Pitch spell"),
-         QT_TR_NOOP("Pitch spell")
+         QT_TR_NOOP("Pitch Spell"),
+         QT_TR_NOOP("Pitch Spell")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -543,7 +543,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("more stretch"),
          Qt::SHIFT + Qt::Key_Plus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add more stretch"),
+         QT_TR_NOOP("Add More Stretch"),
          QT_TR_NOOP("Add more stretch to selected measure")
          ),
       Shortcut(
@@ -552,7 +552,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("less stretch"),
          Qt::SHIFT + Qt::Key_Minus,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Add less stretch"),
+         QT_TR_NOOP("Add Less Stretch"),
          QT_TR_NOOP("Add less stretch to selected measure")
          ),
       Shortcut(
@@ -825,34 +825,34 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-hbox",
-         QT_TR_NOOP("Insert horizontal Frame"),
+         QT_TR_NOOP("Insert Horizontal Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert horizontal Frame")
+         QT_TR_NOOP("Insert Horizontal Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-vbox",
-         QT_TR_NOOP("Insert vertical Frame"),
+         QT_TR_NOOP("Insert Vertical Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Insert vertical Frame")
+         QT_TR_NOOP("Insert Vertical Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-hbox",
-         QT_TR_NOOP("Append horizontal Frame"),
+         QT_TR_NOOP("Append Horizontal Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append horizontal Frame")
+         QT_TR_NOOP("Append Horizontal Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-vbox",
-         QT_TR_NOOP("Append vertical Frame"),
+         QT_TR_NOOP("Append Vertical Frame"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Append vertical Frame")
+         QT_TR_NOOP("Append Vertical Frame")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1570,7 +1570,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("load style"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Load Style"),
+         QT_TR_NOOP("Load Style..."),
          QT_TR_NOOP("Load Style"),
          &fileOpenIcon
          ),
@@ -1580,7 +1580,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("save style"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save Style"),
+         QT_TR_NOOP("Save Style..."),
          QT_TR_NOOP("Save Style"),
          &fileSaveIcon
          ),
@@ -1623,56 +1623,56 @@ Shortcut MuseScore::sc[] = {
       Shortcut (
          STATE_NORMAL,
          "voice-x12",
-         QT_TR_NOOP("exchange voice 1-2"),
+         QT_TR_NOOP("Exchange Voice 1-2"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 1-2"),
-         QT_TR_NOOP("exchange voice 1-2")
+         QT_TR_NOOP("Exchange Voice 1-2"),
+         QT_TR_NOOP("Exchange Voice 1-2")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x13",
-         QT_TR_NOOP("exchange voice 1-3"),
+         QT_TR_NOOP("Exchange Voice 1-3"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 1-3"),
-         QT_TR_NOOP("exchange voice 1-3")
+         QT_TR_NOOP("Exchange Voice 1-3"),
+         QT_TR_NOOP("Exchange Voice 1-3")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x14",
-         QT_TR_NOOP("exchange voice 1-4"),
+         QT_TR_NOOP("Exchange Voice 1-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 1-4"),
-         QT_TR_NOOP("exchange voice 1-4")
+         QT_TR_NOOP("Exchange Voice 1-4"),
+         QT_TR_NOOP("Exchange Voice 1-4")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x23",
-         QT_TR_NOOP("exchange voice 2-3"),
+         QT_TR_NOOP("Exchange Voice 2-3"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 2-3"),
-         QT_TR_NOOP("exchange voice 2-3")
+         QT_TR_NOOP("Exchange Voice 2-3"),
+         QT_TR_NOOP("Exchange Voice 2-3")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x24",
-         QT_TR_NOOP("exchange voice 2-4"),
+         QT_TR_NOOP("Exchange Voice 2-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 2-4"),
-         QT_TR_NOOP("exchange voice 2-4")
+         QT_TR_NOOP("Exchange Voice 2-4"),
+         QT_TR_NOOP("Exchange Voice 2-4")
          ),
       Shortcut (
          STATE_NORMAL,
          "voice-x34",
-         QT_TR_NOOP("exchange voice 3-4"),
+         QT_TR_NOOP("Exchange Voice 3-4"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("exchange voice 3-4"),
-         QT_TR_NOOP("exchange voice 3-4")
+         QT_TR_NOOP("Exchange Voice 3-4"),
+         QT_TR_NOOP("Exchange Voice 3-4")
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1699,7 +1699,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("edit score meta data"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Meta Data"),
+         QT_TR_NOOP("Meta Data..."),
          QT_TR_NOOP("Meta Data")
          ),
       Shortcut(
