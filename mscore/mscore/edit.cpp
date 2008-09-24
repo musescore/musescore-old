@@ -538,6 +538,8 @@ void Score::cmdAddStaccato()
             printf("no note selected\n");
             return;
             }
+      printf("not impl.: cmdAddStaccato\n");
+
 //      Note* note    = (Note*)(e);
 //      Chord* chord  = note->chord();
 //      int staffIdx  = chord->staffIdx();
@@ -557,7 +559,7 @@ void Score::cmdAddTie()
             return;
             }
 
-      Note* note    = (Note*)(e);
+      Note* note    = static_cast<Note*>(e);
       Chord* chord  = note->chord();
       int staffIdx  = chord->staffIdx();
       ChordRest* el = nextChordRest(chord);
@@ -566,7 +568,7 @@ void Score::cmdAddTie()
                   printf("addTie: no next chord found\n");
             return;
             }
-      NoteList* nl = ((Chord*)el)->noteList();
+      NoteList* nl = static_cast<Chord*>(el)->noteList();
       Note* note2 = 0;
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
             if (i->second->pitch() == note->pitch()) {

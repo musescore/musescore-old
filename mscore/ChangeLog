@@ -1,3 +1,6 @@
+24.9 (ws)
+      - changed ui for entering ties in note entry mode:
+            Example: enter "g+g" to create two connected notes instead of "+gg"
 23.9 (ws)
       - fix crash when shift+drag a note head
       - delete natural symbol now works
