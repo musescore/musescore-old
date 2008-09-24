@@ -595,9 +595,35 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 
 void Score::setNote(int tick, int track, int pitch, int len)
       {
-      bool addTie    = _padState.tie;
-      Tie* tie       = 0;
-      Note* note     = 0;
+      Tie* tie   = 0;
+      Note* note = 0;
+
+      if (_padState.tie) {
+            _padState.tie = !_padState.tie;
+            //
+            // look for suitable first note of tie
+            //
+            Segment* seg = tick2segment(tick);
+            while (seg && seg->prev1()) {
+                  seg = seg->prev1();
+                  if (seg->subtype() != Segment::SegChordRest)
+                        continue;
+                  if (!seg->element(track))
+                        continue;
+                  NoteList* nl = static_cast<Chord*>(seg->element(track))->noteList();
+                  for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                        Note* n = i->second;
+                        if (n->pitch() == pitch) { // can only connect with note of equal pitch
+                              tie = new Tie(this);
+                              tie->setStartNote(n);
+                              tie->setTrack(track);
+                              n->setTieFor(tie);
+                              break;
+                              }
+                        }
+                  break;
+                  }
+            }
 
       while (len) {
             int stick = tick;
@@ -688,12 +714,6 @@ void Score::setNote(int tick, int track, int pitch, int len)
             //
             //  Note does not fit on current measure, create Tie to
             //  next part of note
-            tie = new Tie(this);
-            tie->setStartNote(note);
-            tie->setTrack(note->track());
-            note->setTieFor(tie);
-            }
-      if (note && addTie) {
             tie = new Tie(this);
             tie->setStartNote(note);
             tie->setTrack(note->track());
