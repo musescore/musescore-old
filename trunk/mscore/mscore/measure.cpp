@@ -1946,13 +1946,22 @@ printf("drop staffList\n");
 
             case LAYOUT_BREAK:
                   {
-                  LayoutBreak* lb = (LayoutBreak*)e;
-                  if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
-                     || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
-                        //
-                        // if break already set
-                        //
-                        delete lb;
+                  LayoutBreak* lb = static_cast<LayoutBreak*>(e);
+                  if (_pageBreak || _lineBreak) {
+                        if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
+                           || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
+                              //
+                              // if break already set
+                              //
+                              delete lb;
+                              break;
+                              }
+                        foreach(Element* elem, _el) {
+                              if (elem->type() == LAYOUT_BREAK) {
+                                    score()->undoChangeElement(elem, e);
+                                    break;
+                                    }
+                              }
                         break;
                         }
                   lb->setTrack(-1);       // this are system elements

@@ -159,6 +159,7 @@ class Note : public Element {
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
+
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 

@@ -723,6 +723,108 @@ void Score::setNote(int tick, int track, int pitch, int len)
       }
 
 //---------------------------------------------------------
+//   makeGap
+//    make time gap after ChordRest cr by removing/shortening
+//    next chord/rest
+//
+//   return size of actual gap
+//---------------------------------------------------------
+
+int Score::makeGap(ChordRest* cr, int len)
+      {
+printf("make gap %d\n", len);
+      Segment* segment = cr->segment()->next1();
+      int track  = cr->track();
+      int gapLen = 0;
+      int tick   = cr->tick() + cr->tickLen();
+      while (segment) {
+            if (segment->subtype() != Segment::SegChordRest)
+                  break;
+            Element* element = segment->element(track);
+            if (element == 0)
+                  continue;
+            ChordRest* cr1 = static_cast<ChordRest*>(element);
+            int l = cr1->tickLen();
+            if (l == 0 && element->type() == REST)    // whole measure rest?
+                  l = segment->measure()->tickLen();
+            gapLen += l;
+            if (gapLen <= len) {
+                  undoRemoveElement(element);
+                  if (segment->isEmpty())
+                        undoRemoveElement(segment);
+                  if (gapLen == len)
+                        break;
+                  }
+            else {
+                  int restLen = gapLen - len;
+                  tick += len;
+
+                  ChordRest* newcr;
+                  if (cr1->type() == REST) {
+                        Rest* rest = new Rest(this);
+                        newcr = rest;
+                        }
+                  else {
+                        Chord* oc = static_cast<Chord*>(cr1);
+                        Chord* chord = new Chord(this);
+                        chord->setTrack(oc->track());
+
+                        NoteList* nl = oc->noteList();
+                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                              Note* n = i->second;
+                              Note* nn = new Note(this);
+                              nn->setPitch(n->pitch());
+                              nn->setTpc(n->tpc());
+                              chord->add(nn);
+                              }
+                        newcr = chord;
+                        }
+
+                  newcr->setLen(restLen);
+                  newcr->setTick(tick);
+
+                  Measure* measure = cr1->measure();
+                  Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+                  if (seg == 0) {
+                        seg = cr1->measure()->createSegment(Segment::SegChordRest, tick);
+                        undoAddElement(seg);
+                        }
+                  newcr->setParent(seg);
+                  Segment* oseg = cr1->segment();
+                  undoRemoveElement(cr1);
+                  if (oseg->isEmpty())
+                        undoRemoveElement(oseg);
+                  undoAddElement(newcr);
+                  gapLen = len;
+                  break;
+                  }
+            segment = segment->next1();
+            }
+      return gapLen;
+      }
+
+//---------------------------------------------------------
+//   changeCRlen
+//---------------------------------------------------------
+
+void Score::changeCRlen(ChordRest* cr, int len)
+      {
+      if (len == cr->tickLen())
+            return;
+      if (cr->tickLen() > len) {
+            int restLen = cr->tickLen() - len;
+            undoChangeChordRestLen(cr, len);
+            setRest(cr->tick() + len, restLen, cr->track());
+            }
+      else {
+            int gap = makeGap(cr, len - cr->tickLen());
+            int l = cr->tickLen() + gap;
+            if (cr->tickLen() != l)
+                  undoChangeChordRestLen(cr, l);
+            }
+      }
+
+//---------------------------------------------------------
 //   setRest
 //---------------------------------------------------------
 
@@ -1616,9 +1718,9 @@ void Score::cmd(const QString& cmd)
                   cmdAddTie();
             else if (cmd == "add-slur")
                   cmdAddSlur();
-	    else if (cmd == "add-staccato")
+	      else if (cmd == "add-staccato")
                   addArticulation(5);
-	    else if (cmd == "add-trill")
+	      else if (cmd == "add-trill")
                   addArticulation(19);
             else if (cmd == "add-hairpin")
                   cmdAddHairpin(false);

@@ -123,10 +123,11 @@ bool SlurSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
       {
       if (slurTie()->type() != SLUR)
             return false;
-      Slur* sl = (Slur*) slurTie();
+      Slur* sl = static_cast<Slur*>(slurTie());
 
       if (ev->key() == Qt::Key_X) {
             sl->setSlurDirection(sl->isUp() ? DOWN : UP);
+            sl->layout(score()->layout());
             return true;
             }
       if (!((ev->modifiers() & Qt::ShiftModifier)
