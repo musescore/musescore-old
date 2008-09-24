@@ -503,12 +503,14 @@ bool ScoreLayout::layoutPage()
                         page->appendSystem(system);
                         system->setYpos(y);
                         }
-                  firstSystem = false;
+                  firstSystem       = false;
                   firstSystemOnPage = false;
                   y += h;
                   nettoHeight += h;
-                  if (sl.back()->pageBreak())
+                  if (sl.back()->pageBreak()) {
+                        ++rows;
                         break;
+                        }
                   }
             ++rows;
             }

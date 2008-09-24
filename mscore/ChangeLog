@@ -1,4 +1,7 @@
 24.9 (ws)
+      - fix "x" (flip direction) command in slur edit mode
+      - implement drop of layout break symbol on layout break symbol
+      - allow only one layout break symbol per measure
       - changed ui for entering ties in note entry mode:
             Example: enter "g+g" to create two connected notes instead of "+gg"
 23.9 (ws)

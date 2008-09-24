@@ -135,3 +135,25 @@ const QString LayoutBreak::subtypeName() const
             }
       }
 
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool LayoutBreak::acceptDrop(Viewer*, const QPointF&, int type, int st) const
+      {
+      if (type == LAYOUT_BREAK && st != subtype())
+            return true;
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* LayoutBreak::drop(const QPointF& p1, const QPointF& p2, Element* e)
+      {
+      score()->undoChangeElement(this, e);
+      return e;
+      }
+
+

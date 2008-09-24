@@ -223,7 +223,7 @@ void Score::padToggle(int n)
                         ChordRest* cr = static_cast<ChordRest*>(el);
                         int tick      = cr->tick();
                         int len       = _padState.tickLen;
-                        if (cr->type() == CHORD && ((Chord*)cr)->noteType() != NOTE_NORMAL) {
+                        if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
                               //
                               // handle appoggiatura and acciaccatura
                               //
@@ -243,7 +243,8 @@ void Score::padToggle(int n)
                                     if (_padState.rest)
                                           setRest(tick, _is.track, len, _padState.dots);
                                     else
-                                          setNote(tick, _is.track, _padState.pitch, len);
+                                          // setNote(tick, _is.track, _padState.pitch, len);
+                                          changeCRlen(cr, len);
                                     }
                               }
                         }

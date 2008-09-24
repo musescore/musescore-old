@@ -646,7 +646,7 @@ void Score::cmdFlipStemDirection()
       {
       Element* el = sel->element();
       if (el && el->type() == NOTE) {
-            Chord* chord = ((Note*)el)->chord();
+            Chord* chord = static_cast<Note*>(el)->chord();
 
             if (chord->stemDirection() == AUTO)
                   chord->setStemDirection(chord->up() ? DOWN : UP);
@@ -661,7 +661,7 @@ void Score::cmdFlipStemDirection()
                         ChordRest* cr = elements[i];
                         if (!set) {
                               if (cr->type() == CHORD) {
-                                    Chord* chord = (Chord*)cr;
+                                    Chord* chord = static_cast<Chord*>(cr);
                                     if (chord->stemDirection() != dir) {
                                           chord->setStemDirection(dir);
                                           undoOp(UndoOp::SetStemDirection, chord, int(dir));
@@ -671,7 +671,7 @@ void Score::cmdFlipStemDirection()
                               }
                         else {
                               if (cr->type() == CHORD) {
-                                    Chord* chord = (Chord*)cr;
+                                    Chord* chord = static_cast<Chord*>(cr);
                                     if (chord->stemDirection() != AUTO) {
                                           chord->setStemDirection(AUTO);
                                           undoOp(UndoOp::SetStemDirection, chord, int(AUTO));
@@ -686,7 +686,7 @@ void Score::cmdFlipStemDirection()
                   }
             }
       else if (el && el->type() == SLUR_SEGMENT) {
-            SlurTie* slur = ((SlurSegment*) el)->slurTie();
+            SlurTie* slur = static_cast<SlurSegment*>(el)->slurTie();
             slur->setSlurDirection(slur->isUp() ? DOWN : UP);
             undoOp(UndoOp::FlipSlurDirection, slur);
             }

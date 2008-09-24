@@ -376,6 +376,7 @@ class Score : public QObject {
       void undoChangeNoteHead(Note*, int group);
       void undoChangePitch(Note* note, int pitch);
       void undoChangeBeamMode(ChordRest* cr, int mode);
+      void undoChangeChordRestLen(ChordRest* cr, int len);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeCopyright(const QString&);
@@ -387,6 +388,9 @@ class Score : public QObject {
       void undoInsertStaff(Staff* staff, int idx);
 
       void setNote(int tick, int track, int pitch, int len);
+      void changeCRlen(ChordRest* cr, int len);
+      int makeGap(ChordRest*, int len);
+
       void setTupletChordRest(ChordRest* cr, int pitch, int len);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);

@@ -94,7 +94,8 @@ static const char* undoName[] = {
       "TransposeHarmony",
       "ExchangeVoice",
       "ChangeConcertPitch",
-      "ChangeInstrumentShort", "ChangeInstrumentLong"
+      "ChangeInstrumentShort", "ChangeInstrumentLong",
+      "ChangeChordRestLen"
       };
 
 static bool UNDO = false;
@@ -645,6 +646,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->s = s;
                   }
                   break;
+            case UndoOp::ChangeChordRestLen:
+                  {
+                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
+                  int oldLen = cr->tickLen();
+                  cr->setLen(i->val1);
+                  i->val1 = oldLen;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -892,6 +901,21 @@ void Score::undoChangeBeamMode(ChordRest* cr, int mode)
       i.type     = UndoOp::ChangeBeamMode;
       i.element1 = cr;
       i.val1     = int(mode);
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeChordRestLen
+//---------------------------------------------------------
+
+void Score::undoChangeChordRestLen(ChordRest* cr, int len)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeChordRestLen;
+      i.element1 = cr;
+      i.val1     = len;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
