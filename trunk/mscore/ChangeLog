@@ -1,3 +1,10 @@
+25.9 (ws)
+      - fix measure delete: also remove tuplets
+      - note input changes; when entering an 1/8 note at the place of an 1/4 note
+        the 1/4 note is reduced to an 1/8 note to make room for the new note
+        instead of first replacing the note with an 1/4 rest.
+      - fix moving of end bar line after automatically appending a new measure during
+        note input
 24.9 (ws)
       - fix "x" (flip direction) command in slur edit mode
       - implement drop of layout break symbol on layout break symbol

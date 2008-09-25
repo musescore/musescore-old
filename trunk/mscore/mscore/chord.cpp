@@ -219,6 +219,43 @@ Chord::Chord(Score* s)
       _stemSlash     = 0;
       }
 
+Chord::Chord(const Chord& c)
+   : ChordRest(c)
+      {
+      for (ciNote i = c.notes.begin(); i != c.notes.end(); ++i)
+            add(new Note(*(i->second)));
+
+      foreach(const LedgerLine* ll, c._ledgerLines) {
+            LedgerLine* l = new LedgerLine(*ll);
+            l->setParent(this);
+            l->setTrack(track());
+            _ledgerLines.append(new LedgerLine(*ll));
+            }
+
+      _stem          = 0;
+      _hook          = 0;
+      _glissando     = 0;
+      _arpeggio      = 0;
+      _stemSlash     = 0;
+
+      if (c._stem)
+            add(new Stem(*(c._stem)));
+      if (c._hook)
+            add(new Hook(*(c._hook)));
+      if (c._glissando)
+            add(new Glissando(*(c._glissando)));
+      if (c._arpeggio)
+            add(new Arpeggio(*(c._arpeggio)));
+      if (c._stemSlash) {
+            _stemSlash = new StemSlash(*(c._stemSlash));
+            _stemSlash->setParent(this);
+            _stemSlash->setTrack(track());
+            }
+      _stemDirection = c._stemDirection;
+      _tremolo       = 0;
+      _noteType      = c._noteType;
+      }
+
 //---------------------------------------------------------
 //   ~Chord
 //---------------------------------------------------------

@@ -56,6 +56,7 @@ class ChordRest : public Element {
 
    public:
       ChordRest(Score*);
+      ChordRest(const ChordRest&);
       ChordRest &operator=(const ChordRest&);
       virtual ElementType type() const = 0;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates

@@ -66,7 +66,7 @@ class Stem : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement e);
       virtual void resetUserOffsets() {  _userLen = Spatium(0.0); }
-      Spatium userLen() const { return _userLen; }
+      Spatium userLen() const         { return _userLen; }
       };
 
 //---------------------------------------------------------
@@ -159,6 +159,7 @@ class Chord : public ChordRest {
 
    public:
       Chord(Score*);
+      Chord(const Chord&);
       ~Chord();
       Chord &operator=(const Chord&);
 
