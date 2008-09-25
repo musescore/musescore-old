@@ -389,7 +389,7 @@ class Score : public QObject {
 
       void setNote(int tick, int track, int pitch, int len);
       void changeCRlen(ChordRest* cr, int len);
-      int makeGap(ChordRest*, int len);
+      int makeGap(int tick, int track, int len);
 
       void setTupletChordRest(ChordRest* cr, int pitch, int len);
 

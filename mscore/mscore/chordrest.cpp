@@ -62,6 +62,26 @@ ChordRest::ChordRest(Score* s)
       _small    = false;
       _beamMode = BEAM_AUTO;
       _dots     = 0;
+      _up       = true;
+      }
+
+ChordRest::ChordRest(const ChordRest& cr)
+   : Element(cr)
+      {
+      _beam     = 0;
+      _tuplet   = 0;
+      _up       = cr._up;
+      _small    = cr._small;
+      _beamMode = cr._beamMode;
+      _dots     = cr._dots;
+      _duration = cr._duration;
+
+      foreach(Articulation* a, cr.articulations) {            // make deep copy
+            Articulation* na = new Articulation(*a);
+            na->setParent(this);
+            na->setTrack(track());
+            articulations.append(na);
+            }
       }
 
 //---------------------------------------------------------

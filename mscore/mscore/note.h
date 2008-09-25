@@ -106,6 +106,7 @@ class Note : public Element {
 
    public:
       Note(Score*);
+      Note(const Note&);
       Note &operator=(const Note&);
       ~Note();
       virtual Note* clone() const { return new Note(*this); }

@@ -101,6 +101,32 @@ Note::Note(Score* s)
       _head           = noteHeads[0][2];
       }
 
+Note::Note(const Note& n)
+   : Element(n)
+      {
+      _subchannel     = n._subchannel;
+      _pitch          = n._pitch;
+      _tpc            = n._tpc;
+      _line           = n._line;
+      _staffMove      = n._staffMove;
+      _userAccidental = n._userAccidental;
+      _accidental     = 0;
+      if (n._accidental)
+            add(new Accidental(*(n._accidental)));
+      _head           = n._head;
+      _headGroup      = n._headGroup;
+      _mirror         = n._mirror;
+
+      foreach(Element* e, n._el)
+            add(e->clone());
+
+      _tieFor         = 0;
+      _tieBack        = 0;
+
+      _lineOffset     = n._lineOffset;
+      _hidden         = n._hidden;
+      }
+
 //---------------------------------------------------------
 //   setPitch
 //---------------------------------------------------------
@@ -273,7 +299,7 @@ void Note::add(Element* e)
                   break;
             case TIE:
                   {
-                  Tie* tie = (Tie*)e;
+                  Tie* tie = static_cast<Tie*>(e);
 	      	tie->setStartNote(this);
                   tie->setTrack(track());
       		setTieFor(tie);
@@ -282,7 +308,7 @@ void Note::add(Element* e)
                   }
                   break;
             case ACCIDENTAL:
-                  _accidental = (Accidental*)e;
+                  _accidental = static_cast<Accidental*>(e);
                   _accidental->setMag(mag());
                   break;
             default:

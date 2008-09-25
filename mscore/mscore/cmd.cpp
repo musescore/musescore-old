@@ -626,56 +626,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
             }
 
       while (len) {
-            int stick = tick;
-            Measure* measure = tick2measure(stick);
-            if (measure == 0 || (stick >= (measure->tick() + measure->tickLen()))) {
-                  measure = (Measure*)appendMeasure(MEASURE);
-                  if (measure == 0) {
-                        printf("append measure failed\n");
-                        return;
-                        }
-                  setLayoutAll(true);
-                  }
-            setLayout(measure);
-            Segment* segment = measure->first();
-            int noteLen      = 0;
-            while (segment) {
-                  for (; segment; segment = segment->next()) {
-                        if (segment->tick() >= stick)
-                              break;
-                        }
-                  if (segment == 0 || segment->tick() != stick) {
-                        Segment* newSegment = new Segment(measure, stick);
-                        newSegment->setSubtype(Segment::SegChordRest);
-                        measure->insert(newSegment, segment);
-                        segment = newSegment;
-                        }
-                  Element* element = segment->element(track);
-                  int l = 0;
-                  if (element && element->isChordRest()) {
-                        ChordRest* cr = (ChordRest*)element;
-                        l             = cr->tickLen();
-                        if (l == 0 && element->type() == REST)    // whole measure rest?
-                              l = measure->tickLen();
-                        undoRemoveElement(element);
-                        if (segment->isEmpty())
-                              undoRemoveElement(segment);
-                        }
-                  segment = segment->next();
-                  if (l == 0) {
-                        if (segment == 0)
-                              l = measure->tick() + measure->tickLen() - stick;
-                        else
-                              l = segment->tick() - stick;
-                        }
-                  len     -= l;
-                  noteLen += l;
-                  stick   += l;
-                  if (len <= 0)
-                        break;
-                  }
-            if (len < 0)
-                  noteLen += len;
+            int gap = makeGap(tick, track, len);
+            len    -= gap;
 
             note = new Note(this);
             note->setPitch(pitch);
@@ -690,9 +642,10 @@ void Score::setNote(int tick, int track, int pitch, int len)
             Chord* chord = new Chord(this);
             chord->setTick(tick);
             chord->setTrack(track);
-            chord->setLen(noteLen);
+            chord->setLen(gap);
             chord->add(note);
 
+            Measure* measure = tick2measure(tick);
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
@@ -705,10 +658,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             select(note, 0, 0);
             spell(note);
 
-            tick += noteLen;
-
-            if (len < 0)
-                  setRest(tick, -len, track);
+            tick += gap;
             if (len <= 0)
                   break;
             //
@@ -727,16 +677,54 @@ void Score::setNote(int tick, int track, int pitch, int len)
 //    make time gap after ChordRest cr by removing/shortening
 //    next chord/rest
 //
-//   return size of actual gap
+//    gap does not exceed end of measure
+//
+//    return size of actual gap
 //---------------------------------------------------------
 
-int Score::makeGap(ChordRest* cr, int len)
+int Score::makeGap(int tick, int track, int len)
       {
-printf("make gap %d\n", len);
-      Segment* segment = cr->segment()->next1();
-      int track  = cr->track();
+      Measure* measure = tick2measure(tick);
+      if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
+            bool createEndBar    = false;
+            bool endBarGenerated = false;
+
+            MeasureBase* lastMb = _measures.last();
+            if (lastMb && (lastMb->type() == MEASURE)) {
+                  Measure* lastMeasure = static_cast<Measure*>(lastMb);
+                  if (lastMeasure->endBarLineType() == END_BAR) {
+                        if (!lastMeasure->endBarLineGenerated()) {
+                              undoChangeEndBarLineType(lastMeasure, NORMAL_BAR);
+                              createEndBar = true;
+                              // move end Bar to last Measure;
+                              }
+                        else {
+                              createEndBar = true;
+                              endBarGenerated = true;
+                              lastMeasure->setEndBarLineType(NORMAL_BAR, endBarGenerated);
+                              }
+                        }
+                  }
+            measure = static_cast<Measure*>(appendMeasure(MEASURE));
+            if (measure == 0) {
+                  printf("append measure failed\n");
+                  return 0;
+                  }
+            if (createEndBar) {
+                  Measure* lastMeasure = static_cast<Measure*>(_measures.last());
+                  lastMeasure->setEndBarLineType(END_BAR, endBarGenerated);
+                  }
+            setLayoutAll(true);
+            }
+      setLayout(measure);
+      Segment* segment = measure->first();
+      for (; segment; segment = segment->next()) {
+            if (segment->subtype() != Segment::SegChordRest)
+                  continue;
+            if (segment->tick() >= tick)
+                  break;
+            }
       int gapLen = 0;
-      int tick   = cr->tick() + cr->tickLen();
       while (segment) {
             if (segment->subtype() != Segment::SegChordRest)
                   break;
@@ -759,34 +747,18 @@ printf("make gap %d\n", len);
                   int restLen = gapLen - len;
                   tick += len;
 
-                  ChordRest* newcr;
-                  if (cr1->type() == REST) {
-                        Rest* rest = new Rest(this);
-                        newcr = rest;
-                        }
-                  else {
-                        Chord* oc = static_cast<Chord*>(cr1);
-                        Chord* chord = new Chord(this);
-                        chord->setTrack(oc->track());
-
-                        NoteList* nl = oc->noteList();
-                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                              Note* n = i->second;
-                              Note* nn = new Note(this);
-                              nn->setPitch(n->pitch());
-                              nn->setTpc(n->tpc());
-                              chord->add(nn);
-                              }
-                        newcr = chord;
-                        }
-
+                  //
+                  // clone chord rest
+                  //
+                  ChordRest* newcr = static_cast<ChordRest*>(cr1->clone());
+                  newcr->setTrack(track);
                   newcr->setLen(restLen);
                   newcr->setTick(tick);
 
                   Measure* measure = cr1->measure();
                   Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
                   if (seg == 0) {
-                        seg = cr1->measure()->createSegment(Segment::SegChordRest, tick);
+                        seg = measure->createSegment(Segment::SegChordRest, tick);
                         undoAddElement(seg);
                         }
                   newcr->setParent(seg);
@@ -798,7 +770,7 @@ printf("make gap %d\n", len);
                   gapLen = len;
                   break;
                   }
-            segment = segment->next1();
+            segment = segment->next();
             }
       return gapLen;
       }
@@ -812,15 +784,68 @@ void Score::changeCRlen(ChordRest* cr, int len)
       if (len == cr->tickLen())
             return;
       if (cr->tickLen() > len) {
+            //
+            // make shorter and fill with rest
+            //
             int restLen = cr->tickLen() - len;
             undoChangeChordRestLen(cr, len);
             setRest(cr->tick() + len, restLen, cr->track());
             }
       else {
-            int gap = makeGap(cr, len - cr->tickLen());
-            int l = cr->tickLen() + gap;
-            if (cr->tickLen() != l)
-                  undoChangeChordRestLen(cr, l);
+            Measure* m = cr->measure();
+            int tick = cr->tick() + cr->tickLen();
+
+            if (tick == m->tick() + m->tickLen()) {
+                  //
+                  //  gap starts in next measure
+                  //  must create ties for chord notes
+                  //
+                  int gap  = makeGap(tick, cr->track(), len - cr->tickLen());
+                  ChordRest* newcr;
+                  if (cr->type() == REST) {
+                        Rest* rest = new Rest(this);
+                        newcr = rest;
+                        }
+                  else {
+                        Chord* oc = static_cast<Chord*>(cr);
+                        Chord* chord = new Chord(this);
+
+                        NoteList* nl = oc->noteList();
+                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                              Note* n = i->second;
+                              Note* nn = new Note(this);
+                              nn->setPitch(n->pitch());
+                              nn->setTpc(n->tpc());
+                              chord->add(nn);
+
+                              Tie* tie = new Tie(this);
+                              tie->setStartNote(n);
+                              tie->setEndNote(nn);
+                              tie->setTrack(n->track());
+
+                              undoAddElement(tie);
+                              }
+                        newcr = chord;
+                        }
+                  newcr->setTrack(cr->track());
+                  newcr->setLen(gap);
+                  newcr->setTick(tick);
+                  Measure* measure = tick2measure(tick);
+                  Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+                  if (seg == 0) {
+                        seg = measure->createSegment(Segment::SegChordRest, tick);
+                        undoAddElement(seg);
+                        }
+                  newcr->setParent(seg);
+                  undoAddElement(newcr);
+                  }
+            else {
+                  int gap  = makeGap(tick, cr->track(), len - cr->tickLen());
+                  if (gap) {
+                        int l = cr->tickLen() + gap;
+                        undoChangeChordRestLen(cr, l);
+                        }
+                  }
             }
       }
 

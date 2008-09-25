@@ -922,6 +922,8 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 
 void Measure::add(Element* el)
       {
+      _dirty = true;
+
       el->setParent(this);
       int t = el->tick();
       ElementType type = el->type();
@@ -1022,6 +1024,8 @@ void Measure::add(Element* el)
 
 void Measure::remove(Element* el)
       {
+      _dirty = true;
+
       switch(el->type()) {
             case SEGMENT:
                   remove(static_cast<Segment*>(el));

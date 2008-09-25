@@ -1018,7 +1018,7 @@ void Score::cmdDeleteSelection()
             for (MeasureBase* mb = is; mb && mb != ie; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
 
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx) {
                         bool rmFlag = false;
@@ -1042,6 +1042,12 @@ void Score::cmdDeleteSelection()
                                     undoRemoveElement(s);
                                     }
                               }
+                        //
+                        // remove tuplets
+                        //
+                        foreach(Tuplet* t, *m->tuplets())
+                              undoRemoveElement(t);
+
                         //
                         // add whole measure rest
                         //
