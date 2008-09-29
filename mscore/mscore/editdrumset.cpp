@@ -21,6 +21,9 @@
 #include "editdrumset.h"
 #include "mscore.h"
 #include "xml.h"
+#include "utils.h"
+
+enum { COL_PITCH, COL_NOTE, COL_NAME };
 
 //---------------------------------------------------------
 //   EditDrumset
@@ -70,8 +73,9 @@ void EditDrumset::updateList()
       pitchList->clear();
       for (int i = 0; i < 128; ++i) {
             QTreeWidgetItem* item = new QTreeWidgetItem(pitchList);
-            item->setText(0, QString("%1").arg(i));
-            item->setText(1, nDrumset.name(i));
+            item->setText(COL_PITCH, QString("%1").arg(i));
+            item->setText(COL_NOTE, pitch2string(i));
+            item->setText(COL_NAME, nDrumset.name(i));
             item->setData(0, Qt::UserRole, i);
             }
       }
@@ -84,7 +88,7 @@ void EditDrumset::nameChanged(const QString& name)
       {
       QTreeWidgetItem* item = pitchList->currentItem();
       if (item)
-            item->setText(1, name);
+            item->setText(COL_NAME, name);
       }
 
 //---------------------------------------------------------

@@ -707,6 +707,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || type == NOTE
          || type == TREMOLO
          || type == IMAGE
+         || type == CHORD
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
 	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE4)
@@ -903,6 +904,16 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   }
                   break;
 
+            case CHORD:
+                  {
+printf("drop chord on note\n");
+                  Chord* c      = static_cast<Chord*>(e);
+                  Note* n       = c->upNote();
+                  int headGroup = n->headGroup();
+                  int len = score()->padState()->tickLen;
+                  score()->setNote(tick(), c->track(), n->pitch(), len, headGroup);
+                  }
+                  break;
 
             default:
                   return ch->drop(p1, p2, e);

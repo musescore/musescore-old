@@ -167,7 +167,8 @@ class Chord : public ChordRest {
       virtual ElementType type() const { return CHORD; }
 
       virtual void write(Xml& xml) const;
-      virtual void read(QDomElement, int staff);
+//      virtual void read(QDomElement, int staff);
+      virtual void read(QDomElement);
       virtual void setSelected(bool f);
       virtual void dump() const;
 

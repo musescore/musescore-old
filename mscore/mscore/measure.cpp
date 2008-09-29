@@ -2386,7 +2386,8 @@ void Measure::read(QDomElement e, int idx)
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);             // only for reading tuplets
-                  chord->read(e, idx);
+                  // chord->read(e, idx);
+                  chord->read(e);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();

@@ -398,10 +398,16 @@ void Palette::paintEvent(QPaintEvent*)
                               sy  = gy + (gh - sh) * .5 - el->bbox().y();
                         double sx  = gx + (gw - sw) * .5 - el->bbox().x();
 
-                        el->setPos(sx, sy);
-                        QPointF pt(el->pos());
-                        p.translate(pt);
-                        el->draw(p);
+                        QList<const Element*> elist;
+                        el->collectElements(elist);
+                        p.translate(QPointF(sx, sy));
+                        foreach(const Element* e, elist) {
+                              p.save();
+                              p.translate(e->pos());
+                              p.setPen(QPen(e->curColor()));
+                              e->draw(p);
+                              p.restore();
+                              }
                         p.restore();
                         }
                   else {

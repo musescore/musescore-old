@@ -387,7 +387,8 @@ class Score : public QObject {
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
 
-      void setNote(int tick, int track, int pitch, int len);
+      void setNote(int tick, int track, int pitch, int len, int headGroup = 0,
+         Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, int len);
       int makeGap(int tick, int track, int len);
 

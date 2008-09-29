@@ -143,8 +143,8 @@ void ISynth::play(const MidiOutEvent& e)
             }
 
       if (err)
-            fprintf(stderr, "FluidSynth: channel %d dataA %d dataB %d: %s\n",
-               channel, e.a, e.b, fluid_synth_error(_fluidsynth));
+            fprintf(stderr, "FluidSynth error: event 0x%2x channel %d dataA %d dataB %d: %s\n",
+               e.type & 0xff, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
       }
 
 //---------------------------------------------------------

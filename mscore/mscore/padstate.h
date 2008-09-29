@@ -40,6 +40,7 @@ struct PadState {
       bool tie;
       NoteType noteType;
       BeamMode beamMode;
+      int drumNote;
 
 //    0 - no prefix
 //    1 - sharp
@@ -65,6 +66,7 @@ struct PadState {
             tie      = false;
             noteType = NOTE_NORMAL;
             beamMode = BEAM_AUTO;
+            drumNote = -1;
             }
       };
 

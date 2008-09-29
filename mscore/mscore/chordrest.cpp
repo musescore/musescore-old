@@ -99,6 +99,8 @@ bool ChordRest::isUp() const
 
 QPointF ChordRest::canvasPos() const
       {
+      if (parent() == 0)
+            return QPointF(x(), 0.0);
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
