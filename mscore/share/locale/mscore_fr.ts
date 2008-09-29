@@ -1237,7 +1237,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="145"/>
         <source>Note</source>
-        <translation type="unfinished">Note</translation>
+        <translation>Note</translation>
     </message>
 </context>
 <context>
@@ -1883,7 +1883,7 @@ echec :</translation>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
         <source>Title:</source>
-        <translation type="unfinished">Titre :</translation>
+        <translation>Titre :</translation>
     </message>
 </context>
 <context>
@@ -5166,17 +5166,17 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sous...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imrprimer...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1556"/>
@@ -5191,87 +5191,87 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Etirer plus</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Retrécir</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Insérer un cadre horizontal</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Insérer un cadre vertical</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="848"/>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un cadre horizontal</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="856"/>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une cadre vertical</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1573"/>
         <source>Load Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger un style</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger un style</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1631"/>
         <source>Exchange Voice 1-2</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 1-2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1640"/>
         <source>Exchange Voice 1-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 1-3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1649"/>
         <source>Exchange Voice 1-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 1-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1658"/>
         <source>Exchange Voice 2-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 2-3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1667"/>
         <source>Exchange Voice 2-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 2-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1676"/>
         <source>Exchange Voice 3-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les voix 3-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1702"/>
         <source>Meta Data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadonnées</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="195"/>
         <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers supportés (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;Fichiers MuseScore (*.mscz *.msc);;Fichiers MusicXml(*.xml *.mxl);;Fichiers Midi (*.mid *.kar);;Fichiers Muse Data (*.md);;Fichiers Lilypond &lt;experimental&gt; (*.ly);;Fichiers BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="444"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>sans titre</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="160"/>
@@ -5281,22 +5281,22 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Têtes de note</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="625"/>
         <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Accroches</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesures</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Texte</translation>
+        <translation>Texte</translation>
     </message>
 </context>
 <context>
@@ -6516,12 +6516,12 @@ Sauver cette partition ? </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="791"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Styles MuseScore (*.mss);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="819"/>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Echec du chargement de style :</translation>
     </message>
 </context>
 <context>
@@ -6797,22 +6797,22 @@ positionner le tempo.</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>MusicXml (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
+        <translation>MusicXml Compressé (*.mxl)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier Midi Standard (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="868"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier style MuseScore (*.mss)</translation>
     </message>
 </context>
 <context>

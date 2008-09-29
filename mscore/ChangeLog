@@ -1,6 +1,8 @@
 28.9 (ws)
       - make sure a drum part outputs midi always on channel 10
       - implement a special drum palette to easy input of drum notes (unfinished)
+     (db)
+      - fix translations that broke after English menu changes
 25.9 (ws)
       - fix measure delete: also remove tuplets
       - note input changes; when entering an 1/8 note at the place of an 1/4 note
@@ -14,7 +16,9 @@
       - allow only one layout break symbol per measure
       - changed ui for entering ties in note entry mode:
             Example: enter "g+g" to create two connected notes instead of "+gg"
-23.9 (ws)
+23.9 (db)
+      - menu "grammar" fixes (capitalization and ellipses)
+     (ws)
       - fix crash when shift+drag a note head
       - delete natural symbol now works
       - fix play in "concert pitch"

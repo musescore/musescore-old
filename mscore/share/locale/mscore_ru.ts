@@ -5164,17 +5164,17 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Напечатать...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="213"/>
@@ -5214,12 +5214,12 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="1573"/>
         <source>Load Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить стиль...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить стиль...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1631"/>
@@ -5274,7 +5274,7 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Головки нот</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="625"/>
@@ -5284,12 +5284,12 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Такты</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
 </context>
 <context>
@@ -6787,7 +6787,7 @@ set tempo.</source>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл MusicXML (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
@@ -6797,12 +6797,12 @@ set tempo.</source>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Стандартный файл MIDI (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="868"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл стиля MuseScore (*.mss)</translation>
     </message>
 </context>
 <context>

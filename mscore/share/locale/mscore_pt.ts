@@ -5161,42 +5161,42 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar como...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="213"/>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de notas</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Esticar mais</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Esticar menos</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir Frame horizontal</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir Frama vertical</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="848"/>
@@ -5216,7 +5216,7 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar estilo...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1631"/>
@@ -5261,7 +5261,7 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/file.cpp" line="444"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>sem título</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="160"/>
@@ -5271,7 +5271,7 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Cabeças das notas</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="625"/>
@@ -5281,12 +5281,12 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Compassos</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>
@@ -6505,12 +6505,12 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/file.cpp" line="791"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilos MuseScore (*.mss);;Todos os ficheiros (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="819"/>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Abertura de estilo falhou:</translation>
     </message>
 </context>
 <context>
@@ -6783,7 +6783,7 @@ definir o tempo.</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formato MusicXML (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
@@ -6793,12 +6793,12 @@ definir o tempo.</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formato MIDI (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="868"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ficheiro de estilo MuseScore (*.mss)</translation>
     </message>
 </context>
 <context>

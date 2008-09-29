@@ -1237,7 +1237,7 @@ fehlgeschlagen: </translation>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="145"/>
         <source>Note</source>
-        <translation type="unfinished">Note</translation>
+        <translation>Note</translation>
     </message>
 </context>
 <context>
@@ -1885,7 +1885,7 @@ zu Notenzeile</translation>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
         <source>Title:</source>
-        <translation type="unfinished">Titel:</translation>
+        <translation>Titel:</translation>
     </message>
 </context>
 <context>
@@ -5168,42 +5168,42 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern unter...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="213"/>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorzeichenwahl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>stärker Dehnen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>stärker Stauchen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontalen Rahmen einfügen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikalen Rahmen einfügen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="848"/>
@@ -5213,17 +5213,17 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="856"/>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Verikalen Rahmen anhängen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1573"/>
         <source>Load Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Stilvorlage laden...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil Speichern...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1631"/>
@@ -5268,7 +5268,7 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="444"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>ohneName</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="160"/>
@@ -5278,22 +5278,22 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Notenköpfe</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="625"/>
         <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Balken</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Takte</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Text</translation>
+        <translation>Text</translation>
     </message>
 </context>
 <context>
@@ -6513,12 +6513,12 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="791"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Stile (*.mss);;Alle Dateien(*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="819"/>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Stil laden fehlgeschlagen:</translation>
     </message>
 </context>
 <context>
@@ -6794,22 +6794,22 @@ Tempo gesetzt werden soll.</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MusicXML Format (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Komprimiertes MusicXML (*mxl)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MIDI-Datei (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="868"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Stilfile (*.mss)</translation>
     </message>
 </context>
 <context>

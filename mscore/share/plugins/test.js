@@ -52,7 +52,7 @@ function run()
       print("staves:      ", score.nstaves);
       print("division:    ", division);
       mb = new QMessageBox();
-      mb.setWindowTitle("MuseScore: Testplugin");
+      mb.setWindowTitle("MuseScore: Test Plugin");
       mb.text = "Hello MuseScore!";
       mb.exec();
       }
@@ -63,7 +63,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.test',
+      menu: 'Plugins.Test',
       init: init,
       run:  run
       };
