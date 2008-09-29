@@ -117,7 +117,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -142,12 +142,41 @@
      </column>
      <column>
       <property name="text" >
+       <string>Note</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
        <string>Name</string>
       </property>
      </column>
+     <item>
+      <property name="text" >
+       <string/>
+      </property>
+      <property name="text" >
+       <string/>
+      </property>
+      <property name="text" >
+       <string/>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>
+  <zorder>label</zorder>
+  <zorder>name</zorder>
+  <zorder>label_2</zorder>
+  <zorder>noteHead</zorder>
+  <zorder>label_3</zorder>
+  <zorder>staffLine</zorder>
+  <zorder>widget</zorder>
+  <zorder>label_4</zorder>
+  <zorder>stemDirection</zorder>
+  <zorder>label_5</zorder>
+  <zorder>voice</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>pitchList</zorder>
  </widget>
  <customwidgets>
   <customwidget>

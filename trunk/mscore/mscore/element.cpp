@@ -61,6 +61,7 @@
 #include "canvas.h"
 #include "glissando.h"
 #include "articulation.h"
+#include "chord.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1240,6 +1241,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case SYMBOL:
                   el = new Symbol(score);
+                  break;
+            case CHORD:
+                  el = new Chord(score);
                   break;
             default:
                   printf("Element::create(): cannot create element type %d\n", type);

@@ -30,6 +30,8 @@
 #include "icons.h"
 #include "stafftext.h"
 #include "articulation.h"
+#include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -113,6 +115,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == STAFF_TEXT)
          || (type == BAR_LINE)
          || (type == BREATH)
+         || (type == CHORD)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -164,6 +167,19 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   s->setTick(tick());
                   score()->undoAddElement(s);
                   score()->setLayoutAll(true);
+                  }
+                  break;
+
+            case CHORD:
+                  {
+                  Chord* c = static_cast<Chord*>(e);
+                  Note* n  = c->upNote();
+                  int headGroup = n->headGroup();
+                  int len = score()->padState()->tickLen;
+                  Direction dir = c->stemDirection();
+printf("Direction %d\n", int(dir));
+                  score()->setNote(tick(), c->track(), n->pitch(), len, headGroup, dir);
+                  printf("drop chord on rest\n");
                   }
                   break;
 

@@ -593,11 +593,13 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
  Set note (\a pitch, \a len) at position \a tick / \a staff / \a voice.
 */
 
-void Score::setNote(int tick, int track, int pitch, int len)
+void Score::setNote(int tick, int track, int pitch, int len, int headGroup,
+   Direction stemDirection)
       {
       Tie* tie   = 0;
       Note* note = 0;
 
+printf("setNote dir %d\n", int(stemDirection));
       if (_padState.tie) {
             _padState.tie = !_padState.tie;
             //
@@ -645,8 +647,11 @@ void Score::setNote(int tick, int track, int pitch, int len)
             chord->setLen(gap);
             chord->add(note);
 
+            chord->setStemDirection(stemDirection);
+            note->setHeadGroup(headGroup);
+
             Measure* measure = tick2measure(tick);
-            chord->setStemDirection(preferences.stemDir[track % VOICES]);
+//            chord->setStemDirection(preferences.stemDir[track % VOICES]);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {

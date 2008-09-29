@@ -601,7 +601,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             y += l;
             double h2 = l * .5;
             double w  = upnote->headWidth() * .7;
-            _stemSlash->setLine(QLineF(QPointF(x - w, y + h2), QPointF(x + w, y - h2)));
+            _stemSlash->setLine(QLineF(QPointF(x + w, y + h2), QPointF(x - w, y - h2)));
             }
 
       //-----------------------------------------
@@ -675,6 +675,21 @@ void Chord::layout(ScoreLayout* layout)
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 
+      if (!segment()) {
+            //
+            // hack for use in palette
+            //
+            for (iNote in = notes.begin(); in != notes.end(); ++in) {
+                  Note* note = in->second;
+                  note->layout(layout);
+
+                  double x = 0.0;
+                  double y = note->line() * _spatium * .5;
+                  note->setPos(x, y);
+                  }
+            return;
+            }
+
       //-----------------------------------------
       //  process notes
       //    - position
@@ -699,7 +714,7 @@ void Chord::layout(ScoreLayout* layout)
                   maxMove = move;
             double y = s->staff(staffIdx() + move)->bbox().y();
             y        -= s->staff(staffIdx())->bbox().y();
-            y        += in->second->line() * _spatium * .5 * staffMag;
+            y        += note->line() * _spatium * .5 * staffMag;
 
             bool stemUp = isUp();
             if (note->staffMove() == -1) {
@@ -1062,7 +1077,8 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, int /*staffIdx*/)
+// void Chord::read(QDomElement e, int /*staffIdx*/)
+void Chord::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

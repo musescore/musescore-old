@@ -1483,7 +1483,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
             QByteArray a = data->data(mimeSymbolFormat);
 
-// printf("DRAG<%s>\n", a.data());
+printf("DRAG<%s>\n", a.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -1554,6 +1554,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case ICON:
                   case NOTE:
                   case SYMBOL:
+                  case CHORD:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1676,6 +1677,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
+                  case CHORD:
                         {
                         Element* el = elementAt(pos);
                         if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
@@ -1819,6 +1821,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case REPEAT_MEASURE:
                   case ICON:
                   case NOTE:
+                  case CHORD:
                         {
                         Element* el = elementAt(pos);
                         if (!el) {

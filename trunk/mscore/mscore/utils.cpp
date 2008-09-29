@@ -397,3 +397,25 @@ void selectStavesMessage()
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 
+static const char* vall[] = {
+            "c","c#","d","d#","e","f","f#","g","g#","a","a#","h"
+            };
+static const char* valu[] = {
+            "C","C#","D","D#","E","F","F#","G","G#","A","A#","H"
+            };
+
+//---------------------------------------------------------
+//   pitch2string
+//---------------------------------------------------------
+
+QString pitch2string(int v)
+      {
+      if (v < 0 || v > 127)
+            return QString("----");
+      int octave = (v / 12) - 2;
+      int i = v % 12;
+      QString s(octave < 0 ? valu[i] : vall[i]);
+      return QString("%1%2").arg(octave < 0 ? valu[i] : vall[i]).arg(octave);
+      }
+
+

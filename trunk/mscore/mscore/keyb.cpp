@@ -261,6 +261,7 @@ void Score::setPadState(Element* e)
       int len       = -1;
       _padState.tie = false;
 
+      _padState.drumNote = -1;
       if (e->type() == NOTE) {
             Note* note          = static_cast<Note*>(e);
             Chord* chord        = note->chord();
@@ -273,6 +274,8 @@ void Score::setPadState(Element* e)
             _padState.tie       = note->tieFor();
             _padState.noteType  = note->noteType();
             _padState.beamMode  = chord->beamMode();
+            if (chord->measure()->staff()->part()->instrument->useDrumset)
+                  _padState.drumNote = note->pitch();
             }
       else if (e->type() == REST) {
             Rest* rest = static_cast<Rest*>(e);
@@ -287,9 +290,9 @@ void Score::setPadState(Element* e)
             _padState.beamMode = rest->beamMode();
             }
       else {
-            _padState.rest   = false;
-            _padState.len    = 0;
-            _padState.prefix = 0;
+            _padState.rest     = false;
+            _padState.len      = 0;
+            _padState.prefix   = 0;
             _padState.noteType = NOTE_INVALID;
             _padState.beamMode = BEAM_INVALID;
             }

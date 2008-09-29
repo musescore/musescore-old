@@ -782,37 +782,19 @@ fluid_synth_noteon(fluid_synth_t* synth, int chan, int key, int vel)
 /*
  * fluid_synth_noteoff
  */
-int
-fluid_synth_noteoff(fluid_synth_t* synth, int chan, int key)
-{
-  int i;
-  fluid_voice_t* voice;
-  int status = FLUID_FAILED;
+int fluid_synth_noteoff(fluid_synth_t* synth, int chan, int key)
+      {
+      int status = FLUID_FAILED;
 
-  for (i = 0; i < synth->polyphony; i++) {
-    voice = synth->voice[i];
-    if (_ON(voice) && (voice->chan == chan) && (voice->key == key)) {
-      if (synth->verbose) {
-	int used_voices = 0;
-	int k;
-	for (k = 0; k < synth->polyphony; k++) {
-	  if (!_AVAILABLE(synth->voice[k])) {
-	    used_voices++;
-	  }
-	}
-	FLUID_LOG(FLUID_INFO, "noteoff\t%d\t%d\t%d\t%05d\t%.3f\t%.3f\t%.3f\t%d",
-		 voice->chan, voice->key, 0, voice->id,
-		 (float) (voice->start_time + voice->ticks) / 44100.0f,
-		 (fluid_curtime() - synth->start) / 1000.0f,
-		 (float) voice->ticks / 44100.0f,
-		 used_voices);
-      } /* if verbose */
-      fluid_voice_noteoff(voice);
-      status = FLUID_OK;
-    } /* if voice on */
-  } /* for all voices */
-  return status;
-}
+      for (int i = 0; i < synth->polyphony; i++) {
+            fluid_voice_t* voice = synth->voice[i];
+            if (_ON(voice) && (voice->chan == chan) && (voice->key == key)) {
+                  fluid_voice_noteoff(voice);
+                  status = FLUID_OK;
+                  } /* if voice on */
+            } /* for all voices */
+      return status;
+      }
 
 /*
  * fluid_synth_damp_voices

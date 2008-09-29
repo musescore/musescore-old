@@ -52,6 +52,7 @@ extern void selectNoteMessage();
 extern void selectNoteRestMessage();
 extern void selectNoteSlurMessage();
 extern void selectStavesMessage();
+extern QString pitch2string(int v);
 
 
 #endif

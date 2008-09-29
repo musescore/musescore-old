@@ -1618,16 +1618,27 @@ void Score::rebuildMidiMapping()
       int idx     = 0;
       foreach(Part* part, _parts) {
             Instrument* i = part->instrument();
+            bool drum = i->useDrumset;
+
             foreach(Channel* a, i->channel) {
                   MidiMapping mm;
-                  mm.port    = port;
-                  mm.channel = channel;
-                  if (channel == 15) {
-                        channel = 0;
-                        ++port;
+                  if (drum) {
+                        mm.port    = port;
+                        mm.channel = 9;
                         }
-                  else
-                        ++channel;
+                  else {
+                        mm.port    = port;
+                        mm.channel = channel;
+                        if (channel == 15) {
+                              channel = 0;
+                              ++port;
+                              }
+                        else {
+                              ++channel;
+                              if (channel == 9)
+                                    ++channel;
+                              }
+                        }
                   mm.part         = part;
                   mm.articulation = a;
                   _midiMapping.append(mm);
