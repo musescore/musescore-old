@@ -1235,7 +1235,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="145"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota</translation>
     </message>
 </context>
 <context>
@@ -1881,7 +1881,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Título:</translation>
     </message>
 </context>
 <context>
@@ -5161,52 +5161,52 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar Como...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="213"/>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nomenclatura de Tono</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Estirar Más</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contraer Más</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Insertar Marco Horizontal</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Insertar Marco Vertical</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="848"/>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir Marco Horizontal</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="856"/>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir Marco Vertical</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1573"/>
@@ -5281,12 +5281,12 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Compases</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>

@@ -1892,7 +1892,7 @@ fallito: </translation>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
         <source>Title:</source>
-        <translation type="unfinished">Titolo:</translation>
+        <translation>Titolo:</translation>
     </message>
 </context>
 <context>
@@ -5174,17 +5174,17 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva come</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Stampa...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1556"/>
@@ -5194,77 +5194,77 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="213"/>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifica Altezza Nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumenta la Spaziatura</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuisci la Spaziatura</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="832"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci Casella Orizzontale</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>>Inserisci Casella Verticale</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="848"/>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Appendi Casella Orizzontale</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="856"/>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Appendi Casella Verticale</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1573"/>
         <source>Load Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica Stile...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Stile...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1631"/>
         <source>Exchange Voice 1-2</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 1-2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1640"/>
         <source>Exchange Voice 1-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 1-3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1649"/>
         <source>Exchange Voice 1-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 1-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1658"/>
         <source>Exchange Voice 2-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 2-3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1667"/>
         <source>Exchange Voice 2-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 2-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1676"/>
         <source>Exchange Voice 3-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia Voce 3-4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1702"/>
@@ -5279,7 +5279,7 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="444"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>Senza Titolo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="160"/>
@@ -5289,22 +5289,22 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa Note</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="625"/>
         <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Proprietà Gruppo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="810"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Battute</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="829"/>
         <source>Text</source>
-        <translation type="unfinished">Testo</translation>
+        <translation>Testo</translation>
     </message>
 </context>
 <context>
@@ -6524,12 +6524,12 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="791"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Stili di MuseScore (*.mss);;Tutti i Files (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="819"/>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Caricamento Stile Fallito:</translation>
     </message>
 </context>
 <context>
@@ -6808,22 +6808,22 @@ impostare il Tempo.</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="335"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formato MusicXml (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="336"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Formato MusicXml Compresso (*.mml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="337"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Standard Midi File (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="868"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">File di Stile di MuseScore (*.mss)</translation>
     </message>
 </context>
 <context>
