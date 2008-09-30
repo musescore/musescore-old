@@ -36,6 +36,8 @@
 #include "slur.h"
 #include "tuplet.h"
 #include "text.h"
+#include "staff.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   Canvas::keyPressEvent
@@ -274,7 +276,7 @@ void Score::setPadState(Element* e)
             _padState.tie       = note->tieFor();
             _padState.noteType  = note->noteType();
             _padState.beamMode  = chord->beamMode();
-            if (chord->measure()->staff()->part()->instrument->useDrumset)
+            if (chord->measure()->staff()->part()->instrument()->useDrumset)
                   _padState.drumNote = note->pitch();
             }
       else if (e->type() == REST) {
