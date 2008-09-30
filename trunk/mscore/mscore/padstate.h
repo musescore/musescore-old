@@ -23,6 +23,8 @@
 
 #include "globals.h"
 
+struct Drumset;
+
 //---------------------------------------------------------
 //   PadState
 //    keyboard & pad note entry state
@@ -41,6 +43,7 @@ struct PadState {
       NoteType noteType;
       BeamMode beamMode;
       int drumNote;
+      Drumset* drumset;
 
 //    0 - no prefix
 //    1 - sharp
@@ -67,6 +70,7 @@ struct PadState {
             noteType = NOTE_NORMAL;
             beamMode = BEAM_AUTO;
             drumNote = -1;
+            drumset  = 0;
             }
       };
 

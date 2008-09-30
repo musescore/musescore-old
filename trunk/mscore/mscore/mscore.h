@@ -42,13 +42,13 @@ class MeasureListEditor;
 class Score;
 class PageSettings;
 class PaletteBox;
+class Palette;
 class Xml;
 class MagBox;
 class NewWizard;
-class Palette;
 class ExcerptsDialog;
 class QScriptEmbeddedDebugger;
-
+struct Drumset;
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
@@ -221,6 +221,9 @@ class MuseScore : public QMainWindow {
       NewWizard* newWizard;
 
       PaletteBox* paletteBox;
+      Palette* drumPalette;
+      Drumset* drumset;             // drumset associated with drumPalette
+
       bool _midiinEnabled;
       bool _speakerEnabled;
       QString lastOpenPath;
@@ -333,6 +336,7 @@ class MuseScore : public QMainWindow {
       QString createDefaultName() const;
       void startAutoSave();
 //      void setTabText(int idx, const QString& s) { tab->setTabText(idx, s); }
+      void updateDrumset();
       };
 
 //---------------------------------------------------------
