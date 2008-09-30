@@ -458,9 +458,9 @@ TextStyle* TextB::style() const
                      subtype(), qPrintable(doc()->toPlainText()));
                   break;
             }
-      if (st != -1)
-            return score()->textStyle(st);
-      return 0;
+      if (st == -1)
+            st = TEXT_STYLE_STAFF;
+      return score()->textStyle(st);
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,5 @@
+30.9 (ws)
+      - fix musicXML import bug which crashes mscore when saving in native format
 28.9 (ws)
       - make sure a drum part outputs midi always on channel 10
       - implement a special drum palette to easy input of drum notes (unfinished)
