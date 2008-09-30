@@ -126,6 +126,7 @@ class Palette : public QWidget {
       void setSelected(int idx)    { selectedIdx = idx;  }
       bool readOnly() const        { return _readOnly;   }
       void setReadOnly(bool val)   { _readOnly = val;    }
+      void setMag(qreal val)       { extraMag = val;     }
       };
 
 #endif

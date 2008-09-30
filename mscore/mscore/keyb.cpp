@@ -264,6 +264,7 @@ void Score::setPadState(Element* e)
       _padState.tie = false;
 
       _padState.drumNote = -1;
+      _padState.drumset  = 0;
       if (e->type() == NOTE) {
             Note* note          = static_cast<Note*>(e);
             Chord* chord        = note->chord();
@@ -276,8 +277,11 @@ void Score::setPadState(Element* e)
             _padState.tie       = note->tieFor();
             _padState.noteType  = note->noteType();
             _padState.beamMode  = chord->beamMode();
-            if (chord->measure()->staff()->part()->instrument()->useDrumset)
+            Instrument* instr   = note->staff()->part()->instrument();
+            if (instr->useDrumset) {
                   _padState.drumNote = note->pitch();
+                  _padState.drumset  = instr->drumset;
+                   }
             }
       else if (e->type() == REST) {
             Rest* rest = static_cast<Rest*>(e);
@@ -357,5 +361,6 @@ void Score::setPadState()
             _padState.tickLen += ((_padState.len * 3)/4);
       else if (_padState.dots)
             printf("too many dots: %d\n", _padState.dots);
+
       }
 
