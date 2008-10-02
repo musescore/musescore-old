@@ -116,6 +116,7 @@ void MuseScore::showPalette(bool visible)
             drumPalette->showStaff(true);
             updateDrumset();
             paletteBox->addPalette(tr("Drums"), drumPalette);
+            connect(drumPalette, SIGNAL(boxClicked(int)), SLOT(drumPaletteSelected(int)));
 
             //-----------------------------------
             //    clefs
@@ -397,7 +398,7 @@ void MuseScore::showPalette(bool visible)
             //    Fingering
             //-----------------------------------
 
-            sp = new Palette(2, 6, 1.5);
+            sp = new Palette(3, 6, 1.5);
             sp->setGrid(28, 30);
             sp->setDrawGrid(true);
 
@@ -406,8 +407,16 @@ void MuseScore::showPalette(bool visible)
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
-                  sp->addObject(i, k, QString("fingering %1").arg(finger[i]));
+                  sp->addObject(i, k, tr("fingering %1").arg(finger[i]));
                   }
+            const char stringnumber[] = "0123456";
+            for (unsigned i = 0; i < strlen(stringnumber); ++i) {
+                  Text* k = new Text(gscore);
+                  k->setSubtype(TEXT_STRING_NUMBER);
+                  k->setText(QString(stringnumber[i]));
+                  sp->addObject(i+strlen(finger), k, tr("string number %1").arg(stringnumber[i]));
+                  }
+
             paletteBox->addPalette(tr("Fingering"), sp);
 
             //-----------------------------------
@@ -1239,61 +1248,96 @@ void MuseScore::updateDrumset()
       {
       if (cs == 0 || paletteBox == 0)
             return;
-#if 0
+
       PadState* padState = cs->padState();
-      if (padState->drummap != drumset) {
-            if (drumMap) {
+      Drumset* ds        = padState->drumset;
+      if (ds != drumset) {
+            drumset = ds;
+            drumPalette->clear();
+            if (drumset) {
+                  int drumInstruments = 0;
+                  for (int pitch = 0; pitch < 128; ++pitch) {
+                        if (drumset->isValid(pitch))
+                              ++drumInstruments;
+                        }
+                  static const int columns = 4;
+                  int rows = (drumInstruments + columns - 1) / columns;
+                  drumPalette->setRowsColumns(rows, columns);
+                  int i = 0;
+                  for (int pitch = 0; pitch < 128; ++pitch) {
+                        if (!ds->isValid(pitch))
+                              continue;
+                        bool up;
+                        int line      = ds->line(pitch);
+                        int noteHead  = ds->noteHead(pitch);
+                        int voice     = ds->voice(pitch);
+                        Direction dir = ds->stemDirection(pitch);
+                        if (dir == UP)
+                              up = true;
+                        else if (dir == DOWN)
+                              up = false;
+                        else
+                              up = line > 4;
+
+                        Chord* chord = new Chord(gscore);
+                        chord->setTickLen(division);
+                        chord->setDuration(Duration::V_QUARTER);
+                        chord->setStemDirection(dir);
+                        chord->setTrack(voice);
+                        Note* note = new Note(gscore);
+                        note->setParent(chord);
+                        note->setTrack(voice);
+                        note->setPitch(pitch);
+                        note->setLine(line);
+                        note->setPos(0.0, _spatium * .5 * line);
+                        note->setHeadGroup(noteHead);
+                        chord->add(note);
+                        Stem* stem = new Stem(gscore);
+                        stem->setLen(Spatium(up ? -3.0 : 3.0));
+                        chord->setStem(stem);
+                        stem->setPos(note->stemPos(up));
+                        drumPalette->addObject(i,  chord, drumset->name(pitch));
+                        ++i;
+                        }
                   }
             }
-      Drumset* ds = padState->drumset;
-            int drumInstruments = 0;
-            for (int pitch = 0; pitch < 128; ++pitch) {
-                  if (ds->isValid(pitch))
-                        ++drumInstruments;
-                  }
-            static const int columns = 4;
-            int rows = (drumInstruments + columns - 1) / columns;
-            Palette* dr = new Palette(rows, columns, 0.8);
-            dr->setSelectable(true);
-            dr->setGrid(42, 60);
-            dr->showStaff(true);
+      if (drumset) {
             int i = 0;
+            drumPalette->setSelected(-1);
             for (int pitch = 0; pitch < 128; ++pitch) {
-                  if (!ds->isValid(pitch))
-                        continue;
-                  bool up;
-                  int line      = ds->line(pitch);
-                  int noteHead  = ds->noteHead(pitch);
-                  int voice     = ds->voice(pitch);
-                  Direction dir = ds->stemDirection(pitch);
-                  if (dir == UP)
-                        up = true;
-                  else if (dir == DOWN)
-                        up = false;
-                  else
-                        up = line > 4;
-
-                  Chord* chord = new Chord(gscore);
-                  chord->setTickLen(division);
-                  chord->setDuration(Duration::V_QUARTER);
-                  chord->setStemDirection(dir);
-                  chord->setTrack(voice);
-                  Note* note = new Note(gscore);
-                  note->setParent(chord);
-                  note->setTrack(voice);
-                  note->setPitch(pitch);
-                  note->setLine(line);
-                  note->setPos(0.0, _spatium * .5 * line);
-                  note->setHeadGroup(noteHead);
-                  chord->add(note);
-                  Stem* stem = new Stem(gscore);
-                  stem->setLen(Spatium(up ? -3.0 : 3.0));
-                  chord->setStem(stem);
-                  stem->setPos(note->stemPos(up));
-                  dr->addObject(i,  chord, ds->name(pitch));
-                  ++i;
+                  if (drumset->isValid(pitch)) {
+                        if (pitch == padState->drumNote) {
+                              drumPalette->setSelected(i);
+                              break;
+                              }
+                        ++i;
+                        }
                   }
-            paletteBox->addPalette(tr("Drums"), dr);
-#endif
+            }
+      drumPalette->update();
+      }
+
+//---------------------------------------------------------
+//   drumPaletteSelected
+//---------------------------------------------------------
+
+void MuseScore::drumPaletteSelected(int idx)
+      {
+      if (cs == 0)
+            return;
+      PadState* padState = cs->padState();
+      Drumset* ds        = padState->drumset;
+      if (ds == 0)
+            return;
+      int i = 0;
+      for (int pitch = 0; pitch < 128; ++pitch) {
+            if (!drumset->isValid(pitch))
+                  continue;
+            if (i == idx) {
+                  padState->drumNote = pitch;
+                  break;
+                  }
+            ++i;
+            }
       }
 

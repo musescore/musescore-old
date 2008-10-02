@@ -451,8 +451,8 @@ TextStyle* TextB::style() const
             case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
             case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
             case TEXT_TEXTLINE:         st = TEXT_STYLE_TEXTLINE; break;
-            case TEXT_UNKNOWN:
-                  break;
+            case TEXT_STRING_NUMBER:    st = TEXT_STYLE_STRING_NUMBER; break;
+            case TEXT_UNKNOWN:          break;
             default:
                   printf("unknown text subtype %d <%s>\n",
                      subtype(), qPrintable(doc()->toPlainText()));
@@ -494,6 +494,7 @@ const QString TextB::subtypeName() const
             case TEXT_VOLTA:            return "Volta";
             case TEXT_FRAME:            return "Frame";
             case TEXT_TEXTLINE:         return "TextLine";
+            case TEXT_STRING_NUMBER:    return "StringNumber";
             default:
                   printf("unknown text subtype %d\n", subtype());
                   break;
@@ -556,6 +557,8 @@ void TextB::setSubtype(const QString& s)
             st = TEXT_FRAME;
       else if (s == "TextLine")
             st = TEXT_TEXTLINE;
+      else if (s == "StringNumber")
+            st = TEXT_STRING_NUMBER;
       else
             printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);
@@ -650,6 +653,7 @@ void TextB::setStyle(const TextStyle* s)
       textBase()->setPaddingWidth(s->paddingWidth);
       textBase()->setFrameColor(s->frameColor);
       textBase()->setFrameRound(s->frameRound);
+      textBase()->setCircle(s->circle);
       }
 
 //---------------------------------------------------------

@@ -289,7 +289,7 @@
       <instrument>
          <name>Guitar</name>
          <short-name>Guit.</short-name>
-         <transposition>-12</transposition>
+         <clef>3</clef>
          <channel>
             <program>24</program>
             </channel>
@@ -297,7 +297,7 @@
       <instrument>
          <name>Electric Guitar</name>
          <short-name>El. Guit.</short-name>
-         <transposition>-12</transposition>
+         <clef>3</clef>
          <channel>
             <program>27</program>
             </channel>

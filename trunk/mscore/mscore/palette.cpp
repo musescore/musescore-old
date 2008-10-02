@@ -110,7 +110,9 @@ void Palette::setGrid(int hh, int vv)
 
 QSize Palette::sizeHint() const
       {
-      return QSize(columns * hgrid, rows * vgrid);
+      return QSize();
+
+//      return QSize(columns * hgrid, rows * vgrid);
       }
 
 //---------------------------------------------------------
@@ -123,6 +125,9 @@ void Palette::setRowsColumns(int r, int c)
       rows    = r;
       columns = c;
       setFixedSize(columns * hgrid, rows * vgrid);
+
+      if (parent() && parent()->parent() && strcmp(parent()->parent()->metaObject()->className(), "QScrollArea") == 0)
+            static_cast<QScrollArea*>(parent()->parent())->setMaximumHeight(rows * vgrid + 4);
 
       Element** nsymbols = new Element*[rows*columns];
       QString* nnames    = new QString[rows*columns];
@@ -165,6 +170,7 @@ void Palette::mousePressEvent(QMouseEvent* ev)
             if (i != selectedIdx) {
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
+                  emit boxClicked(i);
                   }
             }
       }

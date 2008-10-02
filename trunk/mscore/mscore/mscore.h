@@ -299,6 +299,7 @@ class MuseScore : public QMainWindow {
       void cmd(QAction*);
       void clipboardChanged();
       void pluginTriggered(int);
+      void drumPaletteSelected(int);
 
    public slots:
       void setCurrentScore(int);
