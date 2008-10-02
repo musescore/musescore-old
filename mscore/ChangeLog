@@ -1,3 +1,9 @@
+2.10 (ws)
+      - applied patches from Seth Yastrov:
+            - added circled numbers to fingering palette (for use in guitar fingering)
+            - changed guitar in instruments setup: use 8vb treble clef instead of
+              -12 transposition
+      - more code for drum palette
 30.9 (ws)
       - fix musicXML import bug which crashes mscore when saving in native format
 28.9 (ws)

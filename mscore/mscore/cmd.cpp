@@ -65,6 +65,7 @@
 #include "metaedit.h"
 #include "chordedit.h"
 #include "layoutbreak.h"
+#include "drumset.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -433,25 +434,30 @@ void Score::cmdAddPitch(int note, bool addFlag)
       int key = 0;
       if (!preferences.alternateNoteEntryMethod)
             key = staff(_is.track / VOICES)->keymap()->key(_is.pos);
-      int pitch = pitchKeyAdjust(note, key);
-
-      int delta = _padState.pitch - (octave*12 + pitch);
-      if (delta > 6)
-            _padState.pitch = (octave+1)*12 + pitch;
-      else if (delta < -6)
-            _padState.pitch = (octave-1)*12 + pitch;
-      else
-            _padState.pitch = octave*12 + pitch;
-      if (_padState.pitch < 0)
-            _padState.pitch = 0;
-      if (_padState.pitch > 127)
-            _padState.pitch = 127;
+      int pitch;
+      if (_padState.drumNote != -1) {
+            pitch = _padState.drumNote;
+            }
+      else {
+            pitch = pitchKeyAdjust(note, key);
+            int delta = _padState.pitch - (octave*12 + pitch);
+            if (delta > 6)
+                  _padState.pitch = (octave+1)*12 + pitch;
+            else if (delta < -6)
+                  _padState.pitch = (octave-1)*12 + pitch;
+            else
+                  _padState.pitch = octave*12 + pitch;
+            if (_padState.pitch < 0)
+                  _padState.pitch = 0;
+            if (_padState.pitch > 127)
+                  _padState.pitch = 127;
+            }
 
       if (addFlag) {
             // add note to chord
             Note* on = getSelectedNote();
             if (on) {
-                  Note* n = addNote(on->chord(), _padState.pitch);
+                  Note* n = addNote(on->chord(), pitch);
                   select(n, 0, 0);
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
@@ -462,9 +468,20 @@ void Score::cmdAddPitch(int note, bool addFlag)
             int len = _padState.tickLen;
             ChordRest* cr = _is.cr;
             if (cr && cr->tuplet())
-                  setTupletChordRest(cr, _padState.pitch, len);
+                  setTupletChordRest(cr, pitch, len);
             else {
-                  setNote(_is.pos, _is.track, _padState.pitch, len);
+                  Direction stemDirection = AUTO;
+                  int headGroup           = 0;
+                  int track               = _is.track;
+                  if (_padState.drumNote != -1) {
+                        int pitch     = _padState.drumNote;
+                        Drumset* ds   = _padState.drumset;
+                        headGroup     = ds->noteHead(pitch);
+                        stemDirection = ds->stemDirection(pitch);
+                        track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
+printf("track %d\n", track);
+                        }
+                  setNote(_is.pos, track, pitch, len, headGroup, stemDirection);
                   }
             if (_is.slur) {
                   Element* e = searchNote(_is.pos, _is.track);
@@ -593,13 +610,11 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
  Set note (\a pitch, \a len) at position \a tick / \a staff / \a voice.
 */
 
-void Score::setNote(int tick, int track, int pitch, int len, int headGroup,
-   Direction stemDirection)
+void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Direction stemDirection)
       {
       Tie* tie   = 0;
       Note* note = 0;
 
-printf("setNote dir %d\n", int(stemDirection));
       if (_padState.tie) {
             _padState.tie = !_padState.tie;
             //
@@ -690,6 +705,7 @@ printf("setNote dir %d\n", int(stemDirection));
 int Score::makeGap(int tick, int track, int len)
       {
       Measure* measure = tick2measure(tick);
+      int voice = track % VOICES;
       if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
             bool createEndBar    = false;
             bool endBarGenerated = false;
@@ -734,8 +750,11 @@ int Score::makeGap(int tick, int track, int len)
             if (segment->subtype() != Segment::SegChordRest)
                   break;
             Element* element = segment->element(track);
-            if (element == 0)
-                  continue;
+            if (element == 0) {
+                  if (voice == 0)
+                        continue;
+                  return len;
+                  }
             ChordRest* cr1 = static_cast<ChordRest*>(element);
             int l = cr1->tickLen();
             if (l == 0 && element->type() == REST)    // whole measure rest?
@@ -2137,8 +2156,9 @@ void Score::cmd(const QString& cmd)
 void Score::cmdPaste()
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
-      if (ms == 0)
+      if (ms == 0) {
             return;
+            }
       if (sel->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
             QByteArray data(ms->data(mimeSymbolFormat));
             QDomDocument doc;
@@ -2162,6 +2182,8 @@ void Score::cmdPaste()
                   if (sel->element())
                         addRefresh(sel->element()->abbox());
                   }
+            else
+                  printf("cannot read type\n");
             }
       else if (sel->state() == SEL_STAFF && ms->hasFormat(mimeStaffListFormat)) {
             int tickStart  = sel->tickStart;
@@ -2192,6 +2214,20 @@ void Score::cmdPaste()
             docName = "--";
             pasteStaff(doc.documentElement(), measure, sel->staffStart);
             }
+      if (sel->state() == SEL_SINGLE && ms->hasFormat(mimeStaffListFormat)) {
+            Element* e = sel->element();
+            if (e->type() != NOTE && e->type() != REST)
+                  printf("cannot paste to %s\n", e->name());
+            if (e->type() == NOTE)
+                  e = static_cast<Note*>(e)->chord();
+            // TODO: paste staffList to tick position
+//            int tick     = e->tick();
+//            int staffIdx = e->staffIdx();
+//            pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
+            }
+
+      else
+            printf("cannot paste selState %d\n", sel->state());
       }
 
 //---------------------------------------------------------

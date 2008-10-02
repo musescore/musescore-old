@@ -583,6 +583,12 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                               mimeData->setData(mimeType, score()->sel->mimeData());
                               drag->setMimeData(mimeData);
                               _score->endCmd();
+                              //
+                              //  also set into the clipboard
+                              //
+                              QMimeData* clip = new QMimeData();
+                              clip->setData(mimeType, score()->sel->mimeData());
+                              QApplication::clipboard()->setMimeData(clip);
                               drag->start(Qt::CopyAction);
                               }
                         break;

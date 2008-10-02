@@ -214,21 +214,27 @@
       <instrument>
          <name>Gitarre</name>
          <short-name>Git.</short-name>
-         <transposition>-12</transposition>
-         <midiprogram>24</midiprogram>
+         <clef>3</clef>
+         <channel>
+            <program>24</program>
+            </channel>
          </instrument>
       <instrument>
          <name>El. Gitarre</name>
          <short-name>El. Git.</short-name>
-         <transposition>-12</transposition>
-         <midiprogram>27</midiprogram>
+         <clef>3</clef>
+         <channel>
+            <program>27</program>
+            </channel>
          </instrument>
       <instrument>
          <name>Bass Gitarre</name>
          <short-name>B. Guit.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
-         <midiprogram>33</midiprogram>
+         <channel>
+            <program>33</program>
+            </channel>
          </instrument>
       </instrument-group>
 

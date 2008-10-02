@@ -103,6 +103,7 @@ class Palette : public QWidget {
    signals:
       void droppedElement(Element*);
       void startDragElement(Element*);
+      void boxClicked(int);
 
    public:
       Palette(QWidget* parent = 0);
