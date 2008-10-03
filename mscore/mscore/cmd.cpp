@@ -467,8 +467,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
             // insert note
             int len = _padState.tickLen;
             ChordRest* cr = _is.cr;
-            if (cr && cr->tuplet())
+            if (cr && cr->tuplet()) {
                   setTupletChordRest(cr, pitch, len);
+                  len = len * cr->tuplet()->normalNotes() / cr->tuplet()->actualNotes();
+            }
             else {
                   Direction stemDirection = AUTO;
                   int headGroup           = 0;
@@ -496,6 +498,7 @@ printf("track %d\n", track);
                   setLayoutAll(true);
                   }
             _is.pos += len;
+            _is.cr = nextChordRest(cr);
             }
       }
 
