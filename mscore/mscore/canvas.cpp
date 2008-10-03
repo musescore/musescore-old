@@ -1132,10 +1132,23 @@ void Canvas::setShadowNote(const QPointF& p)
       if (m == 0)
             return;
 
-      System* s = m->system();
-      shadowNote->setLine(line);
+      System* system    = m->system();
+      SysStaff* sstaff  = system->staff(staffIdx);
+      Staff* staff      = score()->staff(staffIdx);
+      Instrument* instr = staff->part()->instrument();
+      int notehead      = 0;
 
-      double y = seg->canvasPos().y() + s->staff(staffIdx)->y();
+      if (instr->useDrumset) {
+            Drumset* ds  = instr->drumset;
+            PadState* ps = score()->padState();
+            int pitch    = ps->drumNote;
+            line         = ds->line(pitch);
+            notehead     = ds->noteHead(pitch);
+            }
+      shadowNote->setLine(line);
+      shadowNote->setHeadGroup(notehead);
+
+      double y = seg->canvasPos().y() + sstaff->y();
       y += line * _spatium * .5;
 
       shadowNote->setPos(seg->canvasPos().x(), y);
@@ -1489,7 +1502,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
             QByteArray a = data->data(mimeSymbolFormat);
 
-printf("DRAG<%s>\n", a.data());
+// printf("DRAG<%s>\n", a.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -1503,6 +1516,7 @@ printf("DRAG<%s>\n", a.data());
 
             int type = Element::readType(e, &dragOffset);
             dragOffset *= PDPI/DPI;
+//            dragOffset = QPoint(0.0, 0.0);
 
             Element* el = 0;
             switch(type) {

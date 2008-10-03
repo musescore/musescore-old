@@ -1,4 +1,5 @@
 3.10 (ws)
+      - drum part note entry with mouse
       - added mscore_nl.ts template for translation
 2.10 (ws)
       - applied patches from Seth Yastrov:

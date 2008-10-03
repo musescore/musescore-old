@@ -247,8 +247,12 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
             QMimeData* mimeData = new QMimeData;
             if (symbols[currentIdx]) {
                   Element* el = symbols[currentIdx];
+                  QRect ir = idxRect(currentIdx);
+                  QPoint sp = dragStartPosition - ir.topLeft();
+
                   qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-                  QPointF spos(dragStartPosition / mag);
+// printf("pos %d %d   %f %f  mag %f\n", sp.x(), sp.y(), el->pos().x(), el->pos().y(), mag);
+                  QPointF spos = QPointF(sp) / mag;
                   QPointF rpos(spos - el->pos());
                   rpos /= mag;
 
@@ -307,7 +311,7 @@ void Palette::addObject(int idx, Element* s, const QString& name)
       names[idx]   = name;
       update();
       if (s && s->type() == ICON) {
-            Icon* icon = (Icon*)s;
+            Icon* icon = static_cast<Icon*>(s);
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
       }
@@ -376,7 +380,10 @@ void Palette::paintEvent(QPaintEvent*)
                   if (!el)
                         continue;
                   if (el->type() != ICON) {
+                        // hack:
                         el->layout(&layout);
+                        el->setPos(0.0, 0.0);   // HACK
+
                         if (staff) {
                               qreal y = r.y() + vgrid / 2 - dy;
                               qreal x = r.x() + 7;
