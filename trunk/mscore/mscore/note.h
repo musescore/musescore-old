@@ -73,7 +73,7 @@ class NoteHead : public Symbol {
 class Note : public Element {
       Q_DECLARE_TR_FUNCTIONS(Note)
 
-      static int noteHeads[HEAD_GROUPS][4];
+//      static int noteHeads[HEAD_GROUPS][4];
       static int smallNoteHeads[HEAD_GROUPS][4];
 
       int _subchannel;        ///< articulation
@@ -196,6 +196,7 @@ class Note : public Element {
 
 class ShadowNote : public Element {
       int _line;
+      int _headGroup;
 
    public:
       ShadowNote(Score*);
@@ -205,7 +206,11 @@ class ShadowNote : public Element {
       void setLine(int n)               { _line = n;      }
       virtual QRectF bbox() const;
       virtual void draw(QPainter& p) const;
+      int headGroup() const           { return _headGroup; }
+      void setHeadGroup(int val)      { _headGroup = val;  }
       };
+
+extern const int noteHeads[HEAD_GROUPS][4];
 
 #endif
 

@@ -45,8 +45,9 @@
 #include "system.h"
 #include "tuplet.h"
 #include "articulation.h"
+#include "drumset.h"
 
-int Note::noteHeads[HEAD_GROUPS][4] = {
+const int noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,  wholecrossedheadSym },
       { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,  wholediamondheadSym},
@@ -633,6 +634,7 @@ ShadowNote::ShadowNote(Score* s)
    : Element(s)
       {
       _line = 1000;
+      _headGroup = 0;
       }
 
 //---------------------------------------------------------
@@ -652,11 +654,19 @@ void ShadowNote::draw(QPainter& p) const
 //      if (c.intersects(r)) {
             p.translate(ap);
             qreal lw = point(score()->style()->ledgerLineWidth);
-            QPen pen(preferences.selectColor[score()->padState()->voice].light(160));
+            PadState* ps = score()->padState();
+            int voice;
+            if (ps->drumNote != -1 && ps->drumset)
+                  voice = ps->drumset->voice(ps->drumNote);
+            else
+                  voice = ps->voice;
+
+            QPen pen(preferences.selectColor[voice].light(160));
             pen.setWidthF(lw);
             p.setPen(pen);
 
-            symbols[quartheadSym].draw(p);
+//            symbols[quartheadSym].draw(p);
+            symbols[noteHeads[_headGroup][2]].draw(p);
 
             double x1 = symbols[quartheadSym].width(mag())*.5 - _spatium;
             double x2 = x1 + 2 * _spatium;

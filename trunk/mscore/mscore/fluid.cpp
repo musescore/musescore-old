@@ -118,6 +118,8 @@ void ISynth::play(const MidiOutEvent& e)
                         err = fluid_synth_noteoff(_fluidsynth, channel, e.a);
                         if (midiOutputTrace)
                               printf("MidiOut: %2d:%2d NoteOff %3d\n", e.port, ch, e.a);
+                        if (channel == 9)       // hack: drum noteoff
+                              err = 0;
                         }
                   else {
                         err = fluid_synth_noteon(_fluidsynth, channel, e.a, e.b);

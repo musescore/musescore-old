@@ -48,6 +48,7 @@
 #include "system.h"
 #include "navigate.h"
 #include "articulation.h"
+#include "drumset.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -379,15 +380,28 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (m == 0)
             return;
 
-      int key   = staff(staffIdx)->keymap()->key(tick);
-      int clef  = staff(staffIdx)->clef(tick);
+      Staff* st = staff(staffIdx);
+      int key   = st->keymap()->key(tick);
+      int clef  = st->clef(tick);
       int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
+      Instrument* instr = st->part()->instrument();
 
-      int voice = _padState.voice;
-      int track = staffIdx * VOICES + voice;
+      int voice               = _padState.voice;
+      int track               = staffIdx * VOICES + voice;
+      int headGroup           = 0;
+      Direction stemDirection = AUTO;
+
+      if (instr->useDrumset) {
+            Drumset* ds   = instr->drumset;
+            pitch         = _padState.drumNote;
+            voice         = ds->voice(pitch);
+            headGroup     = ds->noteHead(pitch);
+            stemDirection = ds->stemDirection(pitch);
+            }
 
       ChordRest* cr = (ChordRest*)segment->element(track);
+
       bool addToChord = false;
       if (!replace && cr && (cr->tickLen() == len) && (cr->type() == CHORD) && !_padState.rest) {
             const NoteList* nl = ((Chord*)cr)->noteList();
@@ -409,7 +423,7 @@ void Score::putNote(const QPointF& pos, bool replace)
                         setTupletChordRest(cr, pitch, len);
                         }
                   else {
-                        setNote(tick, track, pitch, len);
+                        setNote(tick, track, pitch, len, headGroup, stemDirection);
                         }
                   }
             }
@@ -422,7 +436,7 @@ void Score::putNote(const QPointF& pos, bool replace)
                   if (_padState.rest)
                         setRest(tick, track, len, _padState.dots);
                   else
-                        setNote(tick, track, pitch, len);
+                        setNote(tick, track, pitch, len, headGroup, stemDirection);
                   }
             }
       setInputTrack(staffIdx * VOICES + voice);
