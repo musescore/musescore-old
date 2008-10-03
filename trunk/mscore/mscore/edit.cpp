@@ -1012,9 +1012,11 @@ void Score::cmdDeleteSelection()
                   MeasureBase* mb = _measures.last();
                   while (mb && mb->type() != MEASURE)
                         mb = mb->prev();
-                  Measure* lastMeasure = static_cast<Measure*>(mb);
-                  if (lastMeasure->endBarLineType() == NORMAL_BAR) {
-                        lastMeasure->setEndBarLineType(END_BAR, false);
+                  if (mb) {
+                        Measure* lastMeasure = static_cast<Measure*>(mb);
+                        if (lastMeasure->endBarLineType() == NORMAL_BAR) {
+                              lastMeasure->setEndBarLineType(END_BAR, false);
+                              }
                         }
                   }
             }

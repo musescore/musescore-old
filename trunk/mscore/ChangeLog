@@ -1,6 +1,9 @@
 3.10 (ws)
       - drum part note entry with mouse
       - added mscore_nl.ts template for translation
+     (sy)
+      - fix tuplet input with keyboard
+      - fix segfault when deleting entire score, caused by trying to create end barline
 2.10 (ws)
       - applied patches from Seth Yastrov:
             - added circled numbers to fingering palette (for use in guitar fingering)
