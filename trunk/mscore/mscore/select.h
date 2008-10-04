@@ -60,7 +60,6 @@ class Selection {
       int tickEnd;            // selection end time tick
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF
-      QRectF lasso;
 
       QList<Element*>* elements()      { return &_el; }
       void add(Element*);
@@ -76,6 +75,7 @@ class Selection {
       void dump();
       QString mimeType() const;
       QByteArray mimeData() const;
+      void setRange(int a, int b, int c, int d);
       };
 
 #endif
