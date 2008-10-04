@@ -1,3 +1,6 @@
+4.10 (ws)
+      - its now possible to lasso select part of a measure (cut/copy/paste operations
+        are still missing)
 3.10 (ws)
       - drum part note entry with mouse
       - added mscore_nl.ts template for translation

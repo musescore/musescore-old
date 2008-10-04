@@ -626,7 +626,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                      s.arg(sz.width()).arg(sz.height()), 3000);
                   }
                   _score->addRefresh(lasso->abbox());
-                  lassoSelect();
+                  _score->lassoSelect(lasso->abbox());
                   break;
 
             case EDIT:
@@ -747,6 +747,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
                   setState(NORMAL);
                   _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
                   lasso->setbbox(QRectF());
+                  _score->lassoSelectEnd(lasso->abbox());
                   break;
 
             case DRAG_OBJ:
@@ -1268,76 +1269,87 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   p.drawRect(grip[i]);
                   }
             }
-      if (_score->sel->state() == SEL_STAFF || _score->sel->state() == SEL_SYSTEM) {
-            int sstart = _score->sel->tickStart;
-            int send   = _score->sel->tickEnd;
+      Selection* sel = _score->selection();
 
-            Measure* sm = _score->tick2measure(sstart);
-            Measure* em = _score->tick2measure(send);
-            if (em && em->tick() != send) {       // hack for last measure
-                  em = 0;
-                  }
+      if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
+            int sstart = sel->tickStart;
+            int send   = sel->tickEnd;
+
+            Segment* ss = _score->tick2segment(sstart);
+            Segment* es = _score->tick2segment(send);
 
             p.setBrush(Qt::NoBrush);
 
-            if (_score->sel->state() == SEL_SYSTEM) {
-                  QPen pen(QColor(Qt::blue));
-                  pen.setWidthF(2.0 / p.matrix().m11());
+            QPen pen(QColor(Qt::blue));
+            pen.setWidthF(2.0 / p.matrix().m11());
+
+            if (sel->state() == SEL_SYSTEM)
                   pen.setStyle(Qt::DotLine);
-                  p.setPen(pen);
-                  for (MeasureBase* m = sm; m && (m != em); m = m->next()) {
-                        double x1 = m->abbox().x();
-                        double x2 = x1 + m->abbox().width();
-                        double y1 = m->abbox().y() - _spatium;
-                        double y2 = y1 + m->abbox().height() + 2 * _spatium;
-
-                        // is this measure start of selection?
-                        if (m == sm) {
-                              x1 -= _spatium;
-                              p.drawLine(QLineF(x1, y1, x1, y2));
-                              }
-                        // is this measure end of selection?
-                        if (((m->tick() + m->tickLen()) >= send) || (m->next() == em)) {
-                              x2 += _spatium;
-                              p.drawLine(QLineF(x2, y1, x2, y2));
-                              p.drawLine(QLineF(x1, y1, x2, y1));
-                              p.drawLine(QLineF(x1, y2, x2, y2));
-                              break;
-                              }
-                        p.drawLine(QLineF(x1, y1, x2, y1));
-                        p.drawLine(QLineF(x1, y2, x2, y2));
-                        }
-                  }
-            else {
-                  QPen pen(QColor(Qt::blue));
-                  pen.setWidthF(2.0 / p.matrix().m11());
+            else
                   pen.setStyle(Qt::SolidLine);
-                  p.setPen(pen);
-                  for (MeasureBase* m = sm; m && (m != em); m = m->next()) {
-                        QRectF bb     = m->abbox();
-                        double x1     = bb.x();
-                        double x2     = x1 + bb.width();
-                        SysStaff* ss1 = m->system()->staff(_score->sel->staffStart);
-                        double y1     = ss1->y() - _spatium + bb.y();
-                        SysStaff* ss2 = m->system()->staff(_score->sel->staffEnd-1);
-                        double y2     = ss2->y() + ss2->bbox().height() + _spatium + bb.y();
 
-                        // is this measure start of selection?
-                        if (m == sm) {
-                              x1 -= _spatium;
-                              p.drawLine(QLineF(x1, y1, x1, y2));
-                              }
-                        // is this measure end of selection?
-                        if (((m->tick() + m->tickLen()) >= send) || (m->next() == em)) {
-                              x2 += _spatium;
-                              p.drawLine(QLineF(x2, y1, x2, y2));
+                  {
+                  p.setPen(pen);
+                  double x2      = ss->canvasPos().x() - _spatium;
+                  int staffStart = sel->staffStart;
+                  int staffEnd   = sel->staffEnd;
+
+                  System* system2    = ss->measure()->system();
+                  QPointF pt    = ss->canvasPos();
+                  double y      = pt.y();
+                  SysStaff* ss1 = system2->staff(staffStart);
+                  SysStaff* ss2 = system2->staff(staffEnd - 1);
+                  double y1     = ss1->y() - 2 * _spatium + y;
+                  double y2     = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+                  p.drawLine(QLineF(x2, y1, x2, y2));
+                  System* system1;
+                  double x1;
+
+                  for (Segment* s = ss->next1(); s && (s != es); s = s->next1()) {
+                        if (s->subtype() != Segment::SegChordRest)
+                              continue;
+                        system1 = system2;
+                        system2 = s->measure()->system();
+
+                        if (system2 != system1) {
+                              x1  = x2;
+                              x2  += _spatium * 2;
                               p.drawLine(QLineF(x1, y1, x2, y1));
                               p.drawLine(QLineF(x1, y2, x2, y2));
-                              break;
+
+                              if (s && (s != es)) {
+                                    pt  = s->canvasPos();
+                                    x2  = pt.x() + _spatium * 2;
+                                    x1  = x2 - 2 * _spatium;
+                                    y   = pt.y();
+                                    ss1 = system2->staff(staffStart);
+                                    ss2 = system2->staff(staffEnd - 1);
+                                    y1  = ss1->y() - 2 * _spatium + y;
+                                    y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+
+                                    p.drawLine(QLineF(x1, y1, x2, y1));
+                                    p.drawLine(QLineF(x1, y2, x2, y2));
+                                    }
+                              else {
+                                    p.drawLine(QLineF(x2, y1, x2, y2));
+                                    }
                               }
-                        p.drawLine(QLineF(x1, y1, x2, y1));
-                        p.drawLine(QLineF(x1, y2, x2, y2));
+                        else {
+                              x1  = x2;
+                              pt  = s->canvasPos();
+                              x2  = pt.x() + _spatium * 2;
+                              y   = pt.y();
+                              ss1 = system2->staff(staffStart);
+                              ss2 = system2->staff(staffEnd - 1);
+                              y1  = ss1->y() - 2 * _spatium + y;
+                              y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+
+                              p.drawLine(QLineF(x1, y1, x2, y1));
+                              p.drawLine(QLineF(x1, y2, x2, y2));
+                              }
                         }
+                  if (system2 == system1)
+                        p.drawLine(QLineF(x2, y1, x2, y2));
                   }
             }
 

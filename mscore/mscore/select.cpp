@@ -288,19 +288,72 @@ void Score::select(Element* obj, int state, int staff)
 //   lassoSelect
 //---------------------------------------------------------
 
-void Canvas::lassoSelect()
+void Score::lassoSelect(const QRectF& bbox)
       {
-      _score->select(0, 0, 0);
-      QRectF lr(lasso->abbox().normalized());
+      select(0, 0, 0);
+      QRectF lr(bbox.normalized());
       QList<const Element*> el = _layout->items(lr);
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
             if (lr.contains(e->abbox())) {
                   if (e->type() != MEASURE)
-                        _score->select(const_cast<Element*>(e), Qt::ShiftModifier, 0);
+                        select(const_cast<Element*>(e), Qt::ShiftModifier, 0);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   setRange
+//---------------------------------------------------------
+
+void Selection::setRange(int a, int b, int c, int d)
+      {
+      tickStart = a;
+      tickEnd   = b;
+      staffStart = c;
+      staffEnd   = d;
+      }
+
+//---------------------------------------------------------
+//   lassoSelectEnd
+//---------------------------------------------------------
+
+void Score::lassoSelectEnd(const QRectF& /*bbox*/)
+      {
+      int noteRestCount = 0;
+      int startTick  = MAXINT;
+      int endTick  = 0;
+      int startStaff  = MAXINT;
+      int endStaff  = 0;
+
+      foreach(const Element* e, *(sel->elements())) {
+            if (e->type() == NOTE || e->type() == REST) {
+                  ++noteRestCount;
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  if (e->tick() < startTick)
+                        startTick = e->tick();
+                  if (e->tick() > endTick)
+                        endTick = e->tick();
+                  int idx = e->staffIdx();
+                  if (idx < startStaff)
+                        startStaff = idx;
+                  if (idx > endStaff)
+                        endStaff = idx;
+                  }
+            }
+      Segment* seg = tick2segment(endTick);
+      if (seg) {
+            seg = seg->next1();
+            if (seg)
+                  endTick = seg->tick();
+            }
+      if (noteRestCount > 1) {
+            sel->setState(SEL_STAFF);
+            sel->setRange(startTick, endTick, startStaff, endStaff+1);
+            }
+      updateAll = true;
       }
 
 //---------------------------------------------------------

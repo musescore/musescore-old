@@ -618,6 +618,9 @@ class Score : public QObject {
       void setWorkNumber(const QString& s)     { _workNumber = s;        }
       void setWorkTitle(const QString& s)      { _workTitle = s;         }
       void setSource(const QString& s)         { _source = s;            }
+
+      void lassoSelect(const QRectF&);
+      void lassoSelectEnd(const QRectF&);
       };
 
 extern Score* gscore;
