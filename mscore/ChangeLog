@@ -2,6 +2,7 @@
       - make canvas follow playback
       - fix behavior of Open Recent menu: unsaved scores no longer appear,
         and newly saved scores appear immediately.
+      - rewind playback position after reaching end of piece
 4.10 (ws)
       - its now possible to lasso select part of a measure (cut/copy/paste operations
         are still missing)
