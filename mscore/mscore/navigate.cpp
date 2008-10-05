@@ -283,7 +283,7 @@ void Score::adjustCanvasPosition(Element* el)
             return;
 
       QPointF pos(m->canvasPos());
-      qreal mag = canvas()->xMag();
+      qreal mag = canvas()->xMag() * DPI / PDPI;
       qreal x   = canvas()->xoffset() / mag;
       qreal y   = canvas()->yoffset() / mag;
 
