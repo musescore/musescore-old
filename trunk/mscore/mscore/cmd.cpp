@@ -2271,29 +2271,30 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        if (eee.tagName() == "Chord") {
-                              Chord* chord = new Chord(this);
-                              chord->setTrack(curTrack);
-                              chord->setTick(curTick);      // set default tick position
-                              // chord->setParent(this);       // only for reading tuplets
-                              chord->read(eee);
-                              NoteList* nl = chord->noteList();
-                              for (iNote i = nl->begin(); i != nl->end(); ++i)
-                                    i->second->setSelected(false);
+                        if (eee.tagName() == "Chord" || eee.tagName() == "Rest") {
+                              ChordRest* cr;
+                              if (eee.tagName() == "Chord")
+                                    cr = new Chord(this);
+                              else
+                                    cr = new Rest(this);
 
-                              int voice = chord->voice();
-                              chord->setTrack(dstStaffIdx * VOICES + voice);
-                              curTick  = chord->tick() + chord->tickLen();
-                              int tick = chord->tick() - tickStart + dstTick;
-                              chord->setTick(tick);
+                              cr->setTrack(curTrack);
+                              cr->setTick(curTick);      // set default tick position
+                              // chord->setParent(this);       // only for reading tuplets
+                              cr->read(eee);
+                              int voice = cr->voice();
+                              cr->setTrack(dstStaffIdx * VOICES + voice);
+                              curTick  = cr->tick() + cr->tickLen();
+                              int tick = cr->tick() - tickStart + dstTick;
+                              cr->setTick(tick);
                               Measure* measure = tick2measure(tick);
                               Segment* s = measure->findSegment(Segment::SegChordRest, tick);
                               if (s == 0) {
                                     s = measure->createSegment(Segment::SegChordRest, tick);
                                     undoAddElement(s);
                                     }
-                              chord->setParent(s);
-                              undoAddElement(chord);
+                              cr->setParent(s);
+                              undoAddElement(cr);
                               }
                         else {
                               domError(eee);
@@ -2301,6 +2302,9 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               }
                         }
                   }
+            sel->setState(SEL_STAFF);
+            sel->setRange(dstTick, dstTick+tickLen, dstStaffStart, dstStaffStart+staves);
+            updateSelectedElements();
             }
       layout()->connectTies();
       }
