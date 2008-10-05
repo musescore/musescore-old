@@ -5310,6 +5310,11 @@ Aktuelle Partitur sichern? </translation>
         <source>String Number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5427,12 +5432,12 @@ Aktuelle Partitur sichern? </translation>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="931"/>
+        <location filename="../../mscore/note.cpp" line="941"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="934"/>
+        <location filename="../../mscore/note.cpp" line="944"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5660,7 +5665,7 @@ Aktuelle Partitur sichern? </translation>
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="760"/>
+        <location filename="../../mscore/palette.cpp" line="767"/>
         <source>Palettes</source>
         <translation>Paletten</translation>
     </message>
@@ -6662,7 +6667,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Datei lesen</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1313"/>
+        <location filename="../../mscore/cmd.cpp" line="1330"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6693,7 +6698,7 @@ failed: </source>
         <translation>MuseScore: Öffne Datei</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1164"/>
+        <location filename="../../mscore/cmd.cpp" line="1181"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
@@ -6702,7 +6707,7 @@ Bitte zuerst eine Note oder Pause auswählen, an der
 die Texteingabe starten soll</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1372"/>
+        <location filename="../../mscore/cmd.cpp" line="1389"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Kein Takt ausgewählt:

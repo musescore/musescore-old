@@ -1979,9 +1979,9 @@ if (debugMode)
       else if (etype == MEASURE_LIST || etype == STAFF_LIST) {
             _score->startCmd();
             System* s = measure->system();
-            int idx = s->y2staff(pos.y());
+            int idx   = s->y2staff(pos.y());
             if (idx != -1)
-                  score()->pasteStaff(doc.documentElement(), measure, idx);
+                  score()->pasteStaff(doc.documentElement(), measure->tick(), idx);
             event->acceptProposedAction();
             _score->setLayoutAll(true);
             _score->endCmd();

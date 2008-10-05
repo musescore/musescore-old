@@ -1,4 +1,7 @@
-5.10 (sy)
+5.10  (ws)
+      - added portmidi code to build system for upcoming windows midi input
+      - uncomplete new code for cut/copy/paste
+      (sy)
       - make canvas follow playback
       - fix behavior of Open Recent menu: unsaved scores no longer appear,
         and newly saved scores appear immediately.

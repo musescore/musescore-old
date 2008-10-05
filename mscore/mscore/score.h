@@ -253,6 +253,8 @@ class Score : public QObject {
       void cmdExchangeVoice(int, int);
       void cmdPaste();
 
+      void updateSelectedElements();
+
    public slots:
       void doUndo();
       void doRedo();
@@ -391,6 +393,7 @@ class Score : public QObject {
          Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, int len);
       int makeGap(int tick, int track, int len);
+      int makeGap1(int tick, int staff, int len);
 
       void setTupletChordRest(ChordRest* cr, int pitch, int len);
 
@@ -581,7 +584,7 @@ class Score : public QObject {
       void setCopyright(QTextDocument*);
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
-      void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
+      void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events, int tickOffset);
       void toEList(EventMap* events, bool expandRepeats, int tickOffset, int staffIdx);

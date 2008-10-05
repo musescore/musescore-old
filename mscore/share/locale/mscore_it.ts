@@ -5302,11 +5302,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Testo</translation>
     </message>
     <message>
-        <location filename="../../mscore/actions.cpp" line="1556"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="410"/>
         <source>fingering %1</source>
         <translation type="unfinished"></translation>
@@ -5438,12 +5433,12 @@ Desideri Salvare lo Spartito?</translation>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="931"/>
+        <location filename="../../mscore/note.cpp" line="941"/>
         <source>Note Properties...</source>
         <translation>Proprietà Note...</translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="934"/>
+        <location filename="../../mscore/note.cpp" line="944"/>
         <source>Tuplet Properties...</source>
         <translation>Proprietà Gruppi Irregolari...</translation>
     </message>
@@ -5671,7 +5666,7 @@ Desideri Salvare lo Spartito?</translation>
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="760"/>
+        <location filename="../../mscore/palette.cpp" line="767"/>
         <source>Palettes</source>
         <translation>Palette</translation>
     </message>
@@ -6668,7 +6663,7 @@ Desideri Salvare lo Spartito?</translation>
 <context>
     <name>Score</name>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1313"/>
+        <location filename="../../mscore/cmd.cpp" line="1330"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6706,7 +6701,7 @@ fallito: </translation>
         <translation>MuseScore: Apri File</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1164"/>
+        <location filename="../../mscore/cmd.cpp" line="1181"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
@@ -6715,7 +6710,7 @@ seleziona la Nota o resto dove vuoi
 iniziare l&apos;inserimento del Testo</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1372"/>
+        <location filename="../../mscore/cmd.cpp" line="1389"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Nessuna Battuta selezionata:

@@ -5303,6 +5303,11 @@ Save Current Score?</source>
         <source>String Number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1556"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5420,12 +5425,12 @@ Save Current Score?</source>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="931"/>
+        <location filename="../../mscore/note.cpp" line="941"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="934"/>
+        <location filename="../../mscore/note.cpp" line="944"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5653,7 +5658,7 @@ Save Current Score?</source>
 <context>
     <name>PaletteBox</name>
     <message>
-        <location filename="../../mscore/palette.cpp" line="760"/>
+        <location filename="../../mscore/palette.cpp" line="767"/>
         <source>Palettes</source>
         <translation>Paletes</translation>
     </message>
@@ -6649,7 +6654,7 @@ Save Current Score?</source>
 <context>
     <name>Score</name>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1164"/>
+        <location filename="../../mscore/cmd.cpp" line="1181"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start text entry</source>
@@ -6657,7 +6662,7 @@ start text entry</source>
 Por favor, seleccione uma nota ou pausa no local desejado</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1313"/>
+        <location filename="../../mscore/cmd.cpp" line="1330"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6665,7 +6670,7 @@ first create some staves</source>
 Por favor, use o painel de instrumentos para criar uma pauta</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1372"/>
+        <location filename="../../mscore/cmd.cpp" line="1389"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Nenhum compasso seleccionado:

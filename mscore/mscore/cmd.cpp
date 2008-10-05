@@ -698,8 +698,8 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
 
 //---------------------------------------------------------
 //   makeGap
-//    make time gap after ChordRest cr by removing/shortening
-//    next chord/rest
+//    make time gap at tick by removing/shortening
+//    chord/rest
 //
 //    gap does not exceed end of measure
 //
@@ -801,6 +801,19 @@ int Score::makeGap(int tick, int track, int len)
             segment = segment->next();
             }
       return gapLen;
+      }
+
+//---------------------------------------------------------
+//   makeGap1
+//    make time gap at tick by removing/shortening
+//    chord/rest
+//
+//    return size of actual gap
+//---------------------------------------------------------
+
+int Score::makeGap1(int tick, int staff, int len)
+      {
+      return makeGap(tick, staff * VOICES, len);
       }
 
 //---------------------------------------------------------
@@ -2161,6 +2174,7 @@ void Score::cmdPaste()
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0) {
+            printf("no application mime data\n");
             return;
             }
       if (sel->state() == SEL_SINGLE && ms->hasFormat(mimeSymbolFormat)) {
@@ -2189,23 +2203,26 @@ void Score::cmdPaste()
             else
                   printf("cannot read type\n");
             }
-      else if (sel->state() == SEL_STAFF && ms->hasFormat(mimeStaffListFormat)) {
-            int tickStart  = sel->tickStart;
+      else if ((sel->state() == SEL_STAFF || sel->state() == SEL_SINGLE)
+         && ms->hasFormat(mimeStaffListFormat)) {
+            int tick = sel->tickStart;
+            int staffIdx = sel->staffStart;
 
-            Measure* measure = 0;
-            for (MeasureBase* e = _measures.first(); e; e = e->next()) {
-                  if (e->type() != MEASURE)
-                        continue;
-                  if (e->tick() == tickStart) {
-                        measure = (Measure*)e;
-                        break;
+            if (sel->state() == SEL_SINGLE) {
+printf("paste list to single element\n");
+                  Element* e = sel->element();
+                  if (e->type() != NOTE && e->type() != REST) {
+                        printf("cannot paste to %s\n", e->name());
+                        return;
                         }
+                  if (e->type() == NOTE)
+                        e = static_cast<Note*>(e)->chord();
+                  tick     = e->tick();
+                  staffIdx = e->staffIdx();
                   }
-            if (measure->tick() != tickStart) {
-                  printf("  cannot find measure\n");
-                  return;
-                  }
+
             QByteArray data(ms->data(mimeStaffListFormat));
+printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2216,20 +2233,8 @@ void Score::cmdPaste()
                   return;
                   }
             docName = "--";
-            pasteStaff(doc.documentElement(), measure, sel->staffStart);
+            pasteStaff(doc.documentElement(), tick, staffIdx);
             }
-      if (sel->state() == SEL_SINGLE && ms->hasFormat(mimeStaffListFormat)) {
-            Element* e = sel->element();
-            if (e->type() != NOTE && e->type() != REST)
-                  printf("cannot paste to %s\n", e->name());
-            if (e->type() == NOTE)
-                  e = static_cast<Note*>(e)->chord();
-            // TODO: paste staffList to tick position
-//            int tick     = e->tick();
-//            int staffIdx = e->staffIdx();
-//            pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
-            }
-
       else
             printf("cannot paste selState %d\n", sel->state());
       }
@@ -2238,42 +2243,62 @@ void Score::cmdPaste()
 //   pasteStaff
 //---------------------------------------------------------
 
-void Score::pasteStaff(QDomElement e, Measure* measure, int dstStaffStart)
+void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
       {
       curTick = 0;
-      int srcStaffStart = -1;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "StaffList") {
                   domError(e);
                   continue;
                   }
+            int tickStart     = e.attribute("tick","0").toInt();
+            int tickLen       = e.attribute("len", "0").toInt();
+            int srcStaffStart = e.attribute("staff", "0").toInt();
+            int staves        = e.attribute("staves", "0").toInt();
+
+            for (int i = 0; i < staves; ++i) {
+                  int staffIdx = i + dstStaffStart;
+                  int gap = makeGap1(dstTick, staffIdx, tickLen);
+                  if (gap != tickLen)
+                        printf("cannot make gap %d (got %d) staff %d\n", tickLen, gap, staffIdx);
+                  }
+
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() != "Staff") {
                         domError(ee);
                         continue;
                         }
-                  Measure* m = measure;
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
-                  if (srcStaffStart == -1)
-                        srcStaffStart = srcStaffIdx;
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        if (eee.tagName() != "Measure") {
+                        if (eee.tagName() == "Chord") {
+                              Chord* chord = new Chord(this);
+                              chord->setTrack(curTrack);
+                              chord->setTick(curTick);      // set default tick position
+                              // chord->setParent(this);       // only for reading tuplets
+                              chord->read(eee);
+                              NoteList* nl = chord->noteList();
+                              for (iNote i = nl->begin(); i != nl->end(); ++i)
+                                    i->second->setSelected(false);
+
+                              int voice = chord->voice();
+                              chord->setTrack(dstStaffIdx * VOICES + voice);
+                              curTick  = chord->tick() + chord->tickLen();
+                              int tick = chord->tick() - tickStart + dstTick;
+                              chord->setTick(tick);
+                              Measure* measure = tick2measure(tick);
+                              Segment* s = measure->findSegment(Segment::SegChordRest, tick);
+                              if (s == 0) {
+                                    s = measure->createSegment(Segment::SegChordRest, tick);
+                                    undoAddElement(s);
+                                    }
+                              chord->setParent(s);
+                              undoAddElement(chord);
+                              }
+                        else {
                               domError(eee);
                               continue;
                               }
-                        Measure* sm = new Measure(this);
-                        sm->read(eee, srcStaffIdx);
-                        if (dstStaffIdx < nstaves())
-                              cmdReplaceElements(sm, m, srcStaffIdx, dstStaffIdx);
-                        delete sm;
-                        MeasureBase* mb = m;
-                        do {
-                              mb = mb->next();
-                              } while (mb && mb->type() != MEASURE);
-                        m = (Measure*)mb;
-                        if (m == 0)
-                              break;
                         }
                   }
             }
