@@ -1,3 +1,5 @@
+5.10 (sy)
+      - make canvas follow playback
 4.10 (ws)
       - its now possible to lasso select part of a measure (cut/copy/paste operations
         are still missing)
