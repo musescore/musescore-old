@@ -610,6 +610,7 @@ void Seq::processMidi()
                   }
             if (playPos == events.constEnd())
                   driver->stopTransport();
+                  rewindStart();
             }
       }
 
@@ -664,6 +665,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   }
             if (playPos == events.constEnd()) {
                   driver->stopTransport();
+                  rewindStart();
                   }
             }
       else
