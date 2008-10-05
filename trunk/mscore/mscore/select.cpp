@@ -44,6 +44,7 @@
 #include "barline.h"
 #include "xml.h"
 #include "lyrics.h"
+#include "values.h"
 
 //---------------------------------------------------------
 //   element
@@ -166,6 +167,62 @@ void Score::deselect(Element* obj)
       }
 
 //---------------------------------------------------------
+//   updateSelectedElements
+//---------------------------------------------------------
+
+void Score::updateSelectedElements()
+      {
+      setUpdateAll();
+      QList<Element*>* el = sel->elements();
+      foreach(Element* e, *el)
+            e->setSelected(false);
+      el->clear();
+
+      //
+      //  select all elements in range
+      //
+      int startTrack = sel->staffStart * VOICES;
+      int endTrack   = sel->staffEnd * VOICES;
+      if (sel->state() == SEL_SYSTEM) {
+            startTrack = 0;
+            endTrack = nstaves() * VOICES;
+            }
+
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            int ms = mb->tick();
+            int me = ms + mb->tickLen();
+            if (me < sel->tickStart)
+                  continue;
+            if (ms >= sel->tickEnd)
+                  break;
+            if (mb->type() == MEASURE) {
+                  Measure* m = (Measure*)mb;
+                  for (int st = startTrack; st < endTrack; ++st) {
+                        for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                              if (segment->tick() < sel->tickStart)
+                                    continue;
+                              if (segment->tick() >= sel->tickEnd)
+                                    break;
+                              Element* e = segment->element(st);
+                              if (!e)
+                                    continue;
+                              e->setSelected(true);
+                              sel->elements()->append(e);
+                              }
+                        }
+                  }
+//            for (int st = sbar; st < ebar; ++st) {
+//                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+//TODO                        if (el->lyrics()) {
+//                              el->lyrics()->setSelected(true);
+//                              sel->elements()->push_back(el->lyrics());
+//                              }
+//                        }
+//                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   select
 //    staff is valid, if obj is of type MEASURE
 //---------------------------------------------------------
@@ -223,55 +280,29 @@ void Score::select(Element* obj, int state, int staff)
                   sel->staffEnd   = nstaves();
                   }
             if (sel->state() != selState) {
-                  sel->deselectAll(this);
                   sel->setState(selState);
                   emit selectionChanged(int(sel->state()));
                   }
-            //
-            //  select all elements in range
-            //
-            int startTrack = staffStart * VOICES;
-            int endTrack   = staffEnd * VOICES;
-            if (sel->state() == SEL_SYSTEM) {
-                  startTrack = 0;
-                  endTrack = nstaves() * VOICES;
-                  }
-
-            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-                  int ms = mb->tick();
-                  int me = ms + mb->tickLen();
-                  if (me < tickStart)
-                        continue;
-                  if (ms >= tickEnd)
-                        break;
-                  if (mb->type() == MEASURE) {
-                        Measure* m = (Measure*)mb;
-                        for (int st = startTrack; st < endTrack; ++st) {
-                              for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                    if (segment->tick() < tickStart)
-                                          continue;
-                                    if (segment->tick() >= tickEnd)
-                                          break;
-                                    Element* e = segment->element(st);
-                                    if (!e)
-                                          continue;
-                                    e->setSelected(true);
-                                    sel->elements()->append(e);
-                                    }
-                              }
-                        }
-//                  for (int st = sbar; st < ebar; ++st) {
-//                        for (Segment* segment = m->first(); segment; segment = segment->next()) {
-//TODO                              if (el->lyrics()) {
-//                                    el->lyrics()->setSelected(true);
-//                                    sel->elements()->push_back(el->lyrics());
-//                                    }
-//                              }
-//                        }
-                  }
+            updateSelectedElements();
             _padState.len = 0;
             return;
             }
+      if ((obj->type() == NOTE || obj->type() == REST) && (sel->state() == SEL_STAFF)) {
+            if (obj->type() == NOTE)
+                  obj = obj->parent();
+            ChordRest* cr = static_cast<ChordRest*>(obj);
+            if (cr->tick() < sel->tickStart)
+                  sel->tickStart = cr->tick();
+            if (cr->tick() > sel->tickEnd)
+                  sel->tickEnd = cr->tick();
+            if (cr->staffIdx() < sel->staffStart)
+                  sel->staffStart = cr->staffIdx();
+            if (cr->staffIdx() > sel->staffEnd)
+                  sel->staffEnd = cr->staffIdx();
+            updateSelectedElements();
+            return;
+            }
+
       refresh |= obj->abbox();
       if (obj->selected()) {
             sel->remove(obj);
@@ -322,10 +353,10 @@ void Selection::setRange(int a, int b, int c, int d)
 void Score::lassoSelectEnd(const QRectF& /*bbox*/)
       {
       int noteRestCount = 0;
-      int startTick  = MAXINT;
-      int endTick  = 0;
-      int startStaff  = MAXINT;
-      int endStaff  = 0;
+      int startTick     = 0x7fffffff;
+      int endTick       = 0;
+      int startStaff    = 0x7fffffff;
+      int endStaff      = 0;
 
       foreach(const Element* e, *(sel->elements())) {
             if (e->type() == NOTE || e->type() == REST) {
@@ -507,17 +538,22 @@ QByteArray Selection::staffMimeData() const
       xml.header();
       xml.noSlurs = true;
 
-      xml.stag("StaffList");
+      int ticks  = tickEnd - tickStart;
+      int staves = staffEnd - staffStart;
+      xml.stag(QString("StaffList tick=\"%1\" len=\"%2\" staff=\"%3\" staves=\"%4\"").arg(tickStart).arg(ticks).arg(staffStart).arg(staves));
+      Segment* seg1 = _score->tick2segment(tickStart);
+      Segment* seg2 = _score->tick2segment(tickEnd);
+
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
-            for (MeasureBase* m = _score->layout()->first(); m; m = m->next()) {
-                  int ms = m->tick();
-                  int me = ms + m->tickLen();
-                  if (me <= tickStart)
-                        continue;
-                  if (ms >= tickEnd)
-                        break;
-                  m->write(xml, staffIdx, staffIdx == 0);
+            int startTrack = staffIdx * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
+                  for (int track = startTrack; track < endTrack; ++track) {
+                        Element* e = seg->element(track);
+                        if (e && !e->generated())
+                              e->write(xml);
+                        }
                   }
             xml.etag();
             }
