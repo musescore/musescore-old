@@ -299,9 +299,9 @@ bool Score::saveFile(bool autosave)
       // step 3
       // rename old file into backup
       //
-      QString name(info.filePath());
       if (info.suffix().isEmpty())
-            name += QString(".mscz");
+            info.setFile(info.filePath() + QString(".mscz"));
+      QString name(info.filePath());
       dir.rename(name, backupName);
 
       //

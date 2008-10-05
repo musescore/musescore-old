@@ -77,10 +77,15 @@ static unsigned int startMag = 3;   // 100%, synchronize with canvas default
 
 const char* eventRecordFile;
 
-struct ProjectItem {
+class ProjectItem {
+   public:
       QString name;
       bool current;
       bool loaded;
+      Score* score;
+
+      /// Get path. If score is new and then saved, the path will be correct
+      QString getName() const { return score ? score->filePath() : name; }
       };
 
 QList<ProjectItem*> projectList;
@@ -1083,7 +1088,7 @@ void MuseScore::selectScore(QAction* action)
       ProjectItem* item = (ProjectItem*)action->data().value<void*>();
       if (item) {
             Score* score = new Score();
-            score->read(item->name);
+            score->read(item->getName());
             appendScore(score);
             tab->setCurrentIndex(scoreList.size() - 1);
             }
@@ -1117,7 +1122,7 @@ void MuseScore::appendScore(Score* score)
       QString name(score->filePath());
 
       for (int i = 0; i < projectList.size(); ++i) {
-            if (projectList[i]->name == name) {
+            if (projectList[i]->getName() == name) {
                   delete projectList[i];
                   projectList.removeAt(i);
                   break;
@@ -1128,7 +1133,7 @@ void MuseScore::appendScore(Score* score)
             delete item;
             }
       ProjectItem* item = new ProjectItem;
-      item->name = name;
+      item->score = score;
       projectList.prepend(item);
       getAction("file-close")->setEnabled(scoreList.size() > 1);
       }
@@ -1179,7 +1184,7 @@ void MuseScore::saveScoreList()
             bool loaded  = false;
             bool current = false;
             for (int k = 0; k < n; ++k) {
-                  if (scoreList[k]->filePath() == projectList[i]->name) {
+                  if (scoreList[k]->filePath() == projectList[i]->getName()) {
                         loaded = true;
                         if (scoreList[k] == cs)
                               current = true;
@@ -1193,7 +1198,7 @@ void MuseScore::saveScoreList()
                   s += "*";
             else
                   s += " ";
-            s += projectList[i]->name;
+            s += projectList[i]->getName();
             settings.setValue(QString("recent-%1").arg(i), s);
             }
       }
@@ -1214,6 +1219,7 @@ void MuseScore::loadScoreList()
                   item->name    = buffer.mid(1);
                   item->current = (buffer[0] == '+');
                   item->loaded  = (buffer[0] != ' ');
+                  item->score = 0;
                   projectList.append(item);
                   }
             }
@@ -1228,7 +1234,10 @@ void MuseScore::openRecentMenu()
       openRecent->clear();
       for (int i = 0; i < projectList.size(); ++i) {
             const ProjectItem* item = projectList[i];
-            QFileInfo fi(item->name);
+            // do not list "generated" pieces
+            if (item->score && item->score->created())
+                  continue;
+            QFileInfo fi(item->getName());
             QAction* action = openRecent->addAction(fi.completeBaseName());
             action->setData(QVariant::fromValue<void*>((void*)item));
             }
