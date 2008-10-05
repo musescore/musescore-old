@@ -451,6 +451,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   _padState.pitch = 0;
             if (_padState.pitch > 127)
                   _padState.pitch = 127;
+            pitch = _padState.pitch;
             }
 
       if (addFlag) {
