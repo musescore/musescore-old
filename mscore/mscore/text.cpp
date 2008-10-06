@@ -738,6 +738,8 @@ void TextB::writeProperties(Xml& xml) const
 
       if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
+      if (subtype() == TEXT_MEASURE_NUMBER)
+            return;
       textBase()->writeProperties(xml);
       }
 
@@ -801,6 +803,8 @@ bool TextB::readProperties(QDomElement e)
 
 bool TextB::startEdit(Viewer* view, const QPointF& p)
       {
+      if (subtype() == TEXT_MEASURE_NUMBER)
+            return false;
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
       editMode = true;
