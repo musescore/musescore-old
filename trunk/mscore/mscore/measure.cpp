@@ -1005,6 +1005,8 @@ void Measure::add(Element* el)
             case HARMONY:
             case MARKER:
             case STAFF_TEXT:
+                  if (el->subtype() == TEXT_MEASURE_NUMBER)
+                        _noText = static_cast<Text*>(el);
                   _el.append(el);
                   break;
 
@@ -1593,7 +1595,7 @@ void Measure::setNoText(const QString& s)
             if (_noText == 0) {
                   _noText = new Text(score());
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
-                  _noText->setParent(this);
+                   add(_noText);
                   }
             _noText->setText(s);
             }

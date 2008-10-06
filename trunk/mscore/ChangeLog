@@ -1,3 +1,9 @@
+6.10 (sy)
+      - make Save As .mscz or .msc change the current score filename, rather
+        than previous behavior where it would save a copy, and even if it is
+        not a "created" (from midi, etc) file.
+      - measure number fixes: dragging no longer results in a duplicate object,
+        you can no longer edit them, and the offsets are now saved
 5.10  (ws)
       - added portmidi code to build system for upcoming windows midi input
       - uncomplete new code for cut/copy/paste

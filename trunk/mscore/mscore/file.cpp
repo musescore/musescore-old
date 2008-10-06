@@ -357,10 +357,10 @@ bool Score::saveAs()
                   fn.append(".mscz");
             QFileInfo fi(fn);
             rv = saveCompressedFile(fi, false);
-            if (rv && created()) {
+            if (rv) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
-//                  tab->setTabText(tab->currentIndex(), name());
+                  mscore->dirtyChanged(this);
                   setCreated(false);
                   }
             }
@@ -370,10 +370,10 @@ bool Score::saveAs()
                   fn.append(".msc");
             QFileInfo fi(fn);
             rv = saveFile(fi, false);
-            if (rv && created()) {
+            if (rv) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
-//                  tab->setTabText(tab->currentIndex(), name());
+                  mscore->dirtyChanged(this);
                   setCreated(false);
                   }
             }

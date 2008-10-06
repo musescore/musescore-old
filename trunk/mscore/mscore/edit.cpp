@@ -801,6 +801,9 @@ void Score::deleteItem(Element* el)
                         undoChangeCopyright(QString(""));
                         break;
                         }
+                  else if (el->subtype() == TEXT_MEASURE_NUMBER) {
+                        break;
+                        }
 
             case SYMBOL:
             case COMPOUND:
