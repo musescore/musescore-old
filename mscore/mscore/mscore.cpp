@@ -1183,6 +1183,9 @@ void MuseScore::saveScoreList()
       for (int i = pn - 1; i >= 0; --i) {
             bool loaded  = false;
             bool current = false;
+            // do not save "generated" pieces
+            if (projectList[i]->score && projectList[i]->score->created())
+                  continue;
             for (int k = 0; k < n; ++k) {
                   if (scoreList[k]->filePath() == projectList[i]->getName()) {
                         loaded = true;
