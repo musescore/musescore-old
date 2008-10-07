@@ -58,6 +58,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         "file-save-a-copy",
+         QT_TR_NOOP("file save a copy"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Save a Copy..."),
+         QT_TR_NOOP("Save Score to named File, but keep current name")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-close",
          QT_TR_NOOP("file close"),
          Qt::CTRL+Qt::Key_W,

@@ -342,6 +342,8 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet()))
                                     beamEnd = true;
                               }
+                        else if (le->tuplet() != cr->tuplet())
+                              beamEnd = true;
                         // end beam if note tye changed (grace notes)
                         else if (le->segment()->subtype() != cr->segment()->subtype())
                               beamEnd = true;
