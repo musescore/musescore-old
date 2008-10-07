@@ -144,7 +144,7 @@ bool MuseScore::checkDirty(Score* s)
                               return true;
                         }
                   else {
-                        if (!s->saveAs())
+                        if (!s->saveAs(false))
                               return true;
                         }
 
@@ -321,11 +321,12 @@ bool Score::saveFile(bool autosave)
 
 /**
  Save the current score using a different name or type.
- Handles the GUI's file-save-as action.
+ Handles the GUI's file-save-as and file-save-a-copy actions.
+ The saveCopy flag, if true, does not change the name of the active score nor marks it clean.
  Return true if OK and false on error.
  */
 
-bool Score::saveAs()
+bool Score::saveAs(bool saveCopy)
       {
       QString selectedFilter;
       QStringList fl;
@@ -341,9 +342,13 @@ bool Score::saveAs()
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
       fl.append(tr("Lilypond Format (*.ly)"));
 
+      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
+                                           tr("MuseScore: Save As");
+      QString saveDirectory = saveCopy ? preferences.lastSaveCopyDirectory :
+                                         preferences.lastSaveDirectory;
       QString fn = QFileDialog::getSaveFileName(
-         0, tr("MuseScore: Save As"),
-         preferences.lastSaveDirectory,
+         0, saveDialogTitle,
+         saveDirectory,
          fl.join(";;"),
          &selectedFilter
          );
@@ -351,28 +356,21 @@ bool Score::saveAs()
             return false;
 
       bool rv = false;
-      if (selectedFilter == fl[0]) {
-            // save as mscore *.mscz file
-            if (!fn.endsWith(".mscz"))
+      if (selectedFilter == fl[0] || selectedFilter == fl[1]) {
+            // save as mscore *.msc(z) file
+            if (selectedFilter == fl[0] && !fn.endsWith(".mscz"))
                   fn.append(".mscz");
-            QFileInfo fi(fn);
-            rv = saveCompressedFile(fi, false);
-            if (rv) {
-                  fileInfo()->setFile(fn);
-                  mscore->setWindowTitle("MuseScore: " + name());
-                  mscore->dirtyChanged(this);
-                  setCreated(false);
-                  }
-            }
-      else if (selectedFilter == fl[1]) {
-            // save as mscore *.msc file
-            if (!fn.endsWith(".msc"))
+            else if (selectedFilter == fl[1] && !fn.endsWith(".msc"))
                   fn.append(".msc");
             QFileInfo fi(fn);
-            rv = saveFile(fi, false);
-            if (rv) {
+            if (selectedFilter == fl[0])
+                  rv = saveCompressedFile(fi, false);
+            else
+                  rv = saveFile(fi, false);
+            if (rv && !saveCopy) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
+                  setDirty(false);
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   }
@@ -427,11 +425,14 @@ bool Score::saveAs()
             }
 
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
-      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")))
+      if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")) && !saveCopy)
             setDirty(false);
 
       QFileInfo fi(fn);
-      preferences.lastSaveDirectory = fi.absolutePath();
+      if (saveCopy)
+            preferences.lastSaveCopyDirectory = fi.absolutePath();
+      else
+            preferences.lastSaveDirectory = fi.absolutePath();
       return rv;
       }
 

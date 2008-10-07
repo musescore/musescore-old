@@ -197,6 +197,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             preferences.write();
       QSettings s;
       s.setValue("lastSaveDirectory",  preferences.lastSaveDirectory);
+      s.setValue("lastSaveCopyDirectory",  preferences.lastSaveCopyDirectory);
 
       //
       // close all toplevel windows
@@ -313,7 +314,7 @@ MuseScore::MuseScore()
          << "rehearsalmark-text" << "copyright-text"
          << "lyrics" << "fingering" << "system-text" << "staff-text" << "tempo"
          << "cut" << "copy" << "paste"
-         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
+         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-save-a-copy" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
          << "rewind" << "play" << "pause" <<"repeat"
@@ -525,6 +526,7 @@ MuseScore::MuseScore()
       menuFile->addSeparator();
       menuFile->addAction(getAction("file-save"));
       menuFile->addAction(getAction("file-save-as"));
+      menuFile->addAction(getAction("file-save-a-copy"));
       menuFile->addAction(getAction("file-close"));
 
       menuFile->addSeparator();
@@ -1884,7 +1886,11 @@ void MuseScore::cmd(QAction* a)
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
             if (cs)
-                  cs->saveAs();
+                  cs->saveAs(false);
+            }
+      else if (cmd == "file-save-a-copy") {
+            if (cs)
+                  cs->saveAs(true);
             }
       else if (cmd == "file-new")
             newFile();

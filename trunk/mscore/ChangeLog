@@ -1,3 +1,7 @@
+7.10 (sy)
+      - add "Save a Copy" menu item, which, unlike "Save As", never changes the
+        active score filename
+      - don't continue a beam after the last note of a tuplet.
 6.10 (sy)
       - make Save As .mscz or .msc change the current score filename, rather
         than previous behavior where it would save a copy, and even if it is

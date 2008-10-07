@@ -158,6 +158,7 @@ void Preferences::init()
       imagePath                = "~/mscore/images";
       workingDirectory         = ".";
       lastSaveDirectory        = ".";
+      lastSaveCopyDirectory    = ".";
       showSplashScreen         = true;
       rewind.type              = -1;
       rewind.type              = -1;
@@ -233,6 +234,7 @@ void Preferences::write()
       s.setValue("imagePath",          imagePath);
       s.setValue("workingDirectory",   workingDirectory);
       s.setValue("lastSaveDirectory",  lastSaveDirectory);
+      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
       s.setValue("showSplashScreen",   showSplashScreen);
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
       s.setValue("playRepeats",        playRepeats);
@@ -320,9 +322,10 @@ void Preferences::read()
       imagePath          = s.value("imagePath", "~/mscore/images").toString();
       workingDirectory   = s.value("workingDirectory", ".").toString();
       lastSaveDirectory  = s.value("lastSaveDirectory", ".").toString();
-      showSplashScreen   = s.value("showSplashScreen", true).toBool();
-      midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
-      playRepeats        = s.value("playRepeats", true).toBool();
+      lastSaveCopyDirectory    = s.value("lastSaveCopyDirectory", ".").toString();
+      showSplashScreen         = s.value("showSplashScreen", true).toBool();
+      midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();
+      playRepeats              = s.value("playRepeats", true).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
       midiPorts                = s.value("midiPorts", 1).toInt();
       midiAutoConnect          = s.value("midiAutoConnect", true).toBool();
