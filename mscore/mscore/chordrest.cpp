@@ -115,7 +115,7 @@ QPointF ChordRest::canvasPos() const
 //   properties
 //---------------------------------------------------------
 
-QList<Prop> ChordRest::properties(Xml& xml) const
+QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
       {
       QList<Prop> pl = Element::properties(xml);
       //
@@ -146,10 +146,12 @@ QList<Prop> ChordRest::properties(Xml& xml) const
             }
       if (_small)
             pl.append(Prop("small", _small));
-      Duration d;
-      d.setVal(tickLen());
-      if (_duration != d)
-            pl.append(Prop("durationType", _duration.name()));
+      if (!clipboardmode) {
+            Duration d;
+            d.setVal(tickLen());
+            if (_duration != d)
+                  pl.append(Prop("durationType", _duration.name()));
+            }
       return pl;
       }
 
@@ -157,9 +159,9 @@ QList<Prop> ChordRest::properties(Xml& xml) const
 //   writeProperties
 //---------------------------------------------------------
 
-void ChordRest::writeProperties(Xml& xml) const
+void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
       {
-      QList<Prop> pl = properties(xml);
+      QList<Prop> pl = properties(xml, clipboardmode);
       xml.prop(pl);
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);

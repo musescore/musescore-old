@@ -249,7 +249,7 @@ class Element {
       int tick() const                { return _tick;         }
       void setTick(int t)             { _tick = t;            }
       virtual int tickLen() const     { return _duration;     }
-      virtual void setTickLen(int t)  { _duration = t;        }
+      virtual void setTickLen(int t) const  { _duration = t;        }
 
       virtual void space(double& min, double& extra) const {
             min   = width();

@@ -960,12 +960,21 @@ Note* Chord::selectedNote() const
 //   Chord::write
 //---------------------------------------------------------
 
-void Chord::write(Xml& xml) const
+void Chord::write(Xml& xml, bool clipboardmode) const
       {
-      ciNote in = notes.begin();
+      int oldTickLen = tickLen();
+      int totalLen   = oldTickLen;
+      if (clipboardmode) {
+            const Chord* c = this;
+            while (c->downNote()->tieFor()) {
+                  c = c->downNote()->tieFor()->endNote()->chord();
+                  totalLen += c->tickLen();
+                  }
+            }
+      setTickLen(totalLen);   // set temporary new tickLen
 
       xml.stag("Chord");
-      ChordRest::writeProperties(xml);
+      ChordRest::writeProperties(xml, clipboardmode);
       if (_noteType != NOTE_NORMAL) {
             switch(_noteType) {
                   case NOTE_INVALID:
@@ -995,8 +1004,9 @@ void Chord::write(Xml& xml) const
             case DOWN: xml.tag("StemDirection", QVariant("down")); break;
             case AUTO: break;
             }
+      ciNote in = notes.begin();
       for (; in != notes.end(); ++in)
-            in->second->write(xml);
+            in->second->write(xml, clipboardmode);
       if (_arpeggio)
             _arpeggio->write(xml);
       if (_glissando)
@@ -1004,7 +1014,9 @@ void Chord::write(Xml& xml) const
       if (_tremolo)
             _tremolo->write(xml);
       xml.etag();
-      xml.curTick = tick() + tickLen();
+      xml.curTick = tick() + totalLen;
+      if (clipboardmode)
+            setTickLen(oldTickLen);
       }
 
 //---------------------------------------------------------
@@ -1234,6 +1246,20 @@ NoteList::iterator NoteList::add(Note* n)
 qreal Chord::upPos() const
       {
       return upNote()->pos().y();
+      }
+
+//---------------------------------------------------------
+//   isTied
+//    Check if chord is the middle or end of a sequence
+//    of tied chords.
+//
+//    Assume that if a chord is tied, all notes have
+//    a tie.
+//---------------------------------------------------------
+
+bool Chord::isTied() const
+      {
+      return upNote()->tieBack() != 0;
       }
 
 //---------------------------------------------------------

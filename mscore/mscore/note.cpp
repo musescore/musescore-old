@@ -481,7 +481,7 @@ bool Note::isSimple(Xml& xml) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml) const
+void Note::write(Xml& xml, bool clipboardmode) const
       {
       if (isSimple(xml)) {
             xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\"").arg(pitch()).arg(tpc()));
@@ -501,8 +501,10 @@ void Note::write(Xml& xml) const
                   _accidental->write(xml);
 
             _el.write(xml);
-            if (_tieFor)
-                  _tieFor->write(xml);
+            if (!clipboardmode) {
+                  if (_tieFor)
+                        _tieFor->write(xml);
+                  }
             if (_staffMove)
                   xml.tag("move", _staffMove);
             if (_headGroup != 0)

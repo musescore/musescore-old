@@ -158,7 +158,8 @@ class Note : public Element {
 
       virtual void draw(QPainter&) const;
       virtual void read(QDomElement);
-      virtual void write(Xml& xml) const;
+      void write(Xml& xml, bool clipboardmode) const;
+      virtual void write(Xml& xml) const { write(xml, false); }
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;

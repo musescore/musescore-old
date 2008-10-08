@@ -190,6 +190,7 @@ if (MINGW)
       osdabzip
       ${QT_mingw_LIBRARIES}
       portaudio
+      portmidi
       )
 
    install(TARGETS mscore RUNTIME DESTINATION bin)
