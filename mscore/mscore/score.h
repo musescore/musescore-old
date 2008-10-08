@@ -29,6 +29,7 @@
 #include "undo.h"
 #include "input.h"
 #include "padstate.h"
+#include "globals.h"
 
 class System;
 class TextStyle;
@@ -253,7 +254,7 @@ class Score : public QObject {
       void cmdExchangeVoice(int, int);
       void cmdPaste();
 
-      void updateSelectedElements();
+      void updateSelectedElements(SelState);
 
    public slots:
       void doUndo();
@@ -403,7 +404,7 @@ class Score : public QObject {
       bool setRest(int tick, int track, int len, bool useDots);
       Canvas* canvas() const;
 
-      void select(Element* obj, int state, int staff);
+      void select(Element* obj, SelectType, int staff);
       void deselect(Element* obj);
 
       void searchSelectedElements();

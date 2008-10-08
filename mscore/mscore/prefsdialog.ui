@@ -25,14 +25,6 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>787</width>
-        <height>549</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>General</string>
       </attribute>
@@ -355,6 +347,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>nl Dutch</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>pt Portuguese</string>
              </property>
             </item>
@@ -415,14 +412,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab2" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Canvas</string>
       </attribute>
@@ -639,14 +628,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab3" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Colors</string>
       </attribute>
@@ -765,14 +746,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab4" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Note Entry</string>
       </attribute>
@@ -1008,14 +981,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>I/O</string>
       </attribute>
@@ -1469,14 +1434,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Import" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Import</string>
       </attribute>
@@ -1541,14 +1498,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Export" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Export</string>
       </attribute>
@@ -1588,14 +1537,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab6" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>StemDir</string>
       </attribute>
@@ -1775,14 +1716,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>721</width>
-        <height>590</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Shortcuts</string>
       </attribute>

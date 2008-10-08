@@ -60,8 +60,10 @@ void Score::transpose()
             // select all
             //
             sel->setState(SEL_SYSTEM);
-            sel->tickStart  = 0;
-            sel->tickEnd    = _layout->last()->tick() + _layout->last()->tickLen();
+            sel->setStartSegment(tick2segment(0));
+            sel->setEndSegment(
+               tick2segment(_layout->last()->tick() + _layout->last()->tickLen())
+               );
             sel->staffStart = 0;
             sel->staffEnd   = nstaves();
             }
@@ -91,51 +93,38 @@ void Score::transpose()
             startTrack = 0;
             endTrack   = nstaves() * VOICES;
             }
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-            int ms = mb->tick();
-            int me = ms + mb->tickLen();
-            if (me < sel->tickStart)
-                  continue;
-            if (ms >= sel->tickEnd)
-                  break;
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
-            for (int st = startTrack; st < endTrack; ++st) {
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        if (segment->tick() < sel->tickStart)
-                              continue;
-                        if (segment->tick() >= sel->tickEnd)
-                              break;
-                        Element* e = segment->element(st);
-                        if (!e || e->type() != CHORD)
-                              continue;
-                        Chord* chord = (Chord*)e;
-                        NoteList* notes = chord->noteList();
+      for (int st = startTrack; st < endTrack; ++st) {
+            for (Segment* segment = sel->startSegment(); segment != sel->endSegment(); segment = segment->next()) {
+                  Element* e = segment->element(st);
+                  if (!e || e->type() != CHORD)
+                        continue;
+                  Chord* chord = static_cast<Chord*>(e);
+                  NoteList* notes = chord->noteList();
 
-                        // we have to operate on a list copy because
-                        // change pitch changes chord->noteList():
-                        QList<Note*> nl;
-                        for (iNote i = notes->begin(); i != notes->end(); ++i)
-                              nl.append(i->second);
-                        foreach(Note* note, nl)
-                              undoChangePitch(note, note->pitch() + diff);
-                        }
-                  }
-            if (td.getTransposeChordNames()) {
-                  foreach (Element* e, *mb->el()) {
-                        if (e->type() != HARMONY)
-                              continue;
-                        Harmony* harmony = static_cast<Harmony*>(e);
-                        undoTransposeHarmony(harmony, diff);
-                        }
+                  // we have to operate on a list copy because
+                  // change pitch changes chord->noteList():
+                  QList<Note*> nl;
+                  for (iNote i = notes->begin(); i != notes->end(); ++i)
+                        nl.append(i->second);
+                  foreach(Note* note, nl)
+                        undoChangePitch(note, note->pitch() + diff);
                   }
             }
+/* TODO
+      if (td.getTransposeChordNames()) {
+            foreach (Element* e, *mb->el()) {
+                  if (e->type() != HARMONY)
+                        continue;
+                  Harmony* harmony = static_cast<Harmony*>(e);
+                  undoTransposeHarmony(harmony, diff);
+                  }
+            }
+*/
       if (transposeKeys) {
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
                   KeyList* km = staff(staffIdx)->keymap();
-                  for (iKeyEvent ke = km->lower_bound(sel->tickStart);
-                     ke != km->lower_bound(sel->tickEnd); ++ke) {
+                  for (iKeyEvent ke = km->lower_bound(sel->tickStart());
+                     ke != km->lower_bound(sel->tickEnd()); ++ke) {
                         int oKey  = ke->second;
                         int tick  = ke->first;
                         int nKey  = transposeKey(oKey, diff);

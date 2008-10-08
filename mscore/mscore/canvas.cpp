@@ -189,7 +189,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       if (obj->type() == TEXT && obj->subtype() == TEXT_TUPLET) {
             obj = obj->parent();
             if (!obj->selected())
-                  obj->score()->select(obj, 0, 0);
+                  obj->score()->select(obj, SELECT_SINGLE, 0);
             }
 
       QMenu* popup = new QMenu(this);
@@ -383,8 +383,16 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   // when clicked "a little bit" above or below it, getStaff
                   // may not find the staff and return -1, which would cause
                   // select() to crash
-                  if (_score->dragStaff >= 0)
-                        _score->select(dragObject, keyState, _score->dragStaff);
+                  if (_score->dragStaff >= 0) {
+                        SelectType st = SELECT_SINGLE;
+                        if (keyState == Qt::NoModifier)
+                              st = SELECT_SINGLE;
+                        else if (keyState & Qt::ShiftModifier)
+                              st = SELECT_RANGE;
+                        else if (keyState & Qt::ControlModifier)
+                              st = SELECT_ADD;
+                        _score->select(dragObject, st, _score->dragStaff);
+                        }
                   seq->stopNotes();       // stop now because we dont get a mouseRelease event
                   if (type == MEASURE) {
                         measurePopup(ev->globalPos(), (Measure*)dragObject);
@@ -419,13 +427,21 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         // when clicked "a little bit" above or below it, getStaff
                         // may not find the staff and return -1, which would cause
                         // select() to crash
-                        if (_score->dragStaff >= 0)
-                              _score->select(dragObject, keyState, _score->dragStaff);
+                        if (_score->dragStaff >= 0) {
+                              SelectType st = SELECT_SINGLE;
+                              if (keyState == Qt::NoModifier)
+                                    st = SELECT_SINGLE;
+                              else if (keyState & Qt::ShiftModifier)
+                                    st = SELECT_RANGE;
+                              else if (keyState & Qt::ControlModifier)
+                                    st = SELECT_ADD;
+                              _score->select(dragObject, st, _score->dragStaff);
+                              }
                         else
                               dragObject = 0;
                         }
                   else {
-                        _score->select(0, 0, 0);
+                        _score->select(0, SELECT_SINGLE, 0);
                         // shift+drag selects "lasso mode"
                         if (!(keyState & Qt::ShiftModifier)) {
                               dragCanvasState = true;
@@ -474,8 +490,16 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               // when clicked "a little bit" above or below it, getStaff
                               // may not find the staff and return -1, which would cause
                               // select() to crash
-                              if (_score->dragStaff >= 0)
-                                    _score->select(dragObject, keyState, _score->dragStaff);
+                              if (_score->dragStaff >= 0) {
+                                    SelectType st = SELECT_SINGLE;
+                                    if (keyState == Qt::NoModifier)
+                                          st = SELECT_SINGLE;
+                                    else if (keyState & Qt::ShiftModifier)
+                                          st = SELECT_RANGE;
+                                    else if (keyState & Qt::ControlModifier)
+                                          st = SELECT_ADD;
+                                    _score->select(dragObject, st, _score->dragStaff);
+                                    }
                               else
                                     dragObject = 0;
                               }
@@ -759,7 +783,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
 
             case NORMAL:
                   if (!dragObject)
-                        _score->select(0, 0, 0);      // deselect all
+                        _score->select(0, SELECT_SINGLE, 0);      // deselect all
                   break;
 
             default:
@@ -1272,11 +1296,8 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       Selection* sel = _score->selection();
 
       if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
-            int sstart = sel->tickStart;
-            int send   = sel->tickEnd;
-
-            Segment* ss = _score->tick2segment(sstart);
-            Segment* es = _score->tick2segment(send);
+            Segment* ss = sel->startSegment();
+            Segment* es = sel->endSegment();
 
             p.setBrush(Qt::NoBrush);
 
@@ -1288,56 +1309,36 @@ void Canvas::paint(const QRect& rr, QPainter& p)
             else
                   pen.setStyle(Qt::SolidLine);
 
-                  {
-                  p.setPen(pen);
-                  double x2      = ss->canvasPos().x() - _spatium;
-                  int staffStart = sel->staffStart;
-                  int staffEnd   = sel->staffEnd;
+            p.setPen(pen);
+            double x2      = ss->canvasPos().x() - _spatium;
+            int staffStart = sel->staffStart;
+            int staffEnd   = sel->staffEnd;
 
-                  System* system2    = ss->measure()->system();
-                  QPointF pt    = ss->canvasPos();
-                  double y      = pt.y();
-                  SysStaff* ss1 = system2->staff(staffStart);
-                  SysStaff* ss2 = system2->staff(staffEnd - 1);
-                  double y1     = ss1->y() - 2 * _spatium + y;
-                  double y2     = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
-                  p.drawLine(QLineF(x2, y1, x2, y2));
-                  System* system1;
-                  double x1;
+            System* system2 = ss->measure()->system();
+            QPointF pt      = ss->canvasPos();
+            double y        = pt.y();
+            SysStaff* ss1   = system2->staff(staffStart);
+            SysStaff* ss2   = system2->staff(staffEnd - 1);
+            double y1       = ss1->y() - 2 * _spatium + y;
+            double y2       = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+            p.drawLine(QLineF(x2, y1, x2, y2));
+            System* system1 = system2;
+            double x1;
 
-                  for (Segment* s = ss->next1(); s && (s != es); s = s->next1()) {
-                        if (s->subtype() != Segment::SegChordRest)
-                              continue;
-                        system1 = system2;
-                        system2 = s->measure()->system();
+            for (Segment* s = ss; s && (s != es); s = s->nextCR()) {
+                  system1 = system2;
+                  system2 = s->measure()->system();
 
-                        if (system2 != system1) {
-                              x1  = x2;
-                              x2  += _spatium * 2;
-                              p.drawLine(QLineF(x1, y1, x2, y1));
-                              p.drawLine(QLineF(x1, y2, x2, y2));
+                  if (system2 != system1) {
+                        x1  = x2;
+                        x2  += _spatium * 2;
+                        p.drawLine(QLineF(x1, y1, x2, y1));
+                        p.drawLine(QLineF(x1, y2, x2, y2));
 
-                              if (s && (s != es)) {
-                                    pt  = s->canvasPos();
-                                    x2  = pt.x() + _spatium * 2;
-                                    x1  = x2 - 2 * _spatium;
-                                    y   = pt.y();
-                                    ss1 = system2->staff(staffStart);
-                                    ss2 = system2->staff(staffEnd - 1);
-                                    y1  = ss1->y() - 2 * _spatium + y;
-                                    y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
-
-                                    p.drawLine(QLineF(x1, y1, x2, y1));
-                                    p.drawLine(QLineF(x1, y2, x2, y2));
-                                    }
-                              else {
-                                    p.drawLine(QLineF(x2, y1, x2, y2));
-                                    }
-                              }
-                        else {
-                              x1  = x2;
+                        if (s && (s != es)) {
                               pt  = s->canvasPos();
                               x2  = pt.x() + _spatium * 2;
+                              x1  = x2 - 2 * _spatium;
                               y   = pt.y();
                               ss1 = system2->staff(staffStart);
                               ss2 = system2->staff(staffEnd - 1);
@@ -1347,10 +1348,26 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                               p.drawLine(QLineF(x1, y1, x2, y1));
                               p.drawLine(QLineF(x1, y2, x2, y2));
                               }
+                        else {
+                              p.drawLine(QLineF(x2, y1, x2, y2));
+                              }
                         }
-                  if (system2 == system1)
-                        p.drawLine(QLineF(x2, y1, x2, y2));
+                  else {
+                        x1  = x2;
+                        pt  = s->canvasPos();
+                        x2  = pt.x() + _spatium * 2;
+                        y   = pt.y();
+                        ss1 = system2->staff(staffStart);
+                        ss2 = system2->staff(staffEnd - 1);
+                        y1  = ss1->y() - 2 * _spatium + y;
+                        y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+
+                        p.drawLine(QLineF(x1, y1, x2, y1));
+                        p.drawLine(QLineF(x1, y2, x2, y2));
+                        }
                   }
+            if (system2 == system1)
+                  p.drawLine(QLineF(x2, y1, x2, y2));
             }
 
       p.setMatrixEnabled(false);
@@ -1827,7 +1844,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         Element* dropElement = el->drop(pos, dragOffset, dragElement);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
-                              _score->select(dropElement, 0, 0);
+                              _score->select(dropElement, SELECT_SINGLE, 0);
                               _score->addRefresh(dropElement->abbox());
                               }
                         }
@@ -1866,7 +1883,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         Element* dropElement = el->drop(pos, dragOffset, dragElement);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
-                              _score->select(dropElement, 0, 0);
+                              _score->select(dropElement, SELECT_SINGLE, 0);
                               _score->addRefresh(dropElement->abbox());
                               }
                         event->acceptProposedAction();

@@ -265,7 +265,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   break;
             }
       cmdAdd(e);
-      select(e, 0, 0);
+      select(e, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -459,7 +459,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             Note* on = getSelectedNote();
             if (on) {
                   Note* n = addNote(on->chord(), pitch);
-                  select(n, 0, 0);
+                  select(n, SELECT_SINGLE, 0);
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
                   }
@@ -563,7 +563,7 @@ void Score::cmdAddInterval(int val)
       if (pitch < 0)
             pitch = 0;
       Note* n = addNote(on->chord(), pitch);
-      select(n, 0, 0);
+      select(n, SELECT_SINGLE, 0);
       _padState.pitch = n->pitch();
       }
 
@@ -603,7 +603,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       chord->setParent(seg);
 
       undoAddElement(chord);
-      select(note, 0, 0);
+      select(note, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -679,7 +679,7 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
                   }
             chord->setParent(seg);
             undoAddElement(chord);
-            select(note, 0, 0);
+            select(note, SELECT_SINGLE, 0);
             spell(note);
 
             tick += gap;
@@ -755,8 +755,10 @@ int Score::makeGap(int tick, int track, int len)
                   break;
             Element* element = segment->element(track);
             if (element == 0) {
-                  if (voice == 0)
+                  if (voice == 0) {
+                        segment = segment->next();
                         continue;
+                        }
                   return len;
                   }
             ChordRest* cr1 = static_cast<ChordRest*>(element);
@@ -813,7 +815,15 @@ int Score::makeGap(int tick, int track, int len)
 
 int Score::makeGap1(int tick, int staff, int len)
       {
-      return makeGap(tick, staff * VOICES, len);
+      int gap = 0;
+      while (len) {
+            int l = makeGap(tick + gap, staff * VOICES, len);
+            if (l == 0)
+                  break;
+            len -= l;
+            gap += l;
+            }
+      return gap;
       }
 
 //---------------------------------------------------------
@@ -963,7 +973,7 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       else {
             rest = setRest(tick, len, track);
             }
-      select(rest, 0, 0);
+      select(rest, SELECT_SINGLE, 0);
       if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track);
       layoutAll = true;
@@ -1008,7 +1018,7 @@ void Score::cmdAddChordName()
       s->setTick(el->tick());
       undoAddElement(s);
       layoutAll = true;
-      select(s, 0, 0);
+      select(s, SELECT_SINGLE, 0);
       canvas()->startEdit(s);
       }
 
@@ -1078,7 +1088,7 @@ void Score::cmdAddChordName2()
             for (int i = 0; i < h->numberOfDegrees(); i++)
                   s->addDegree(h->degree(i));
             s->buildText();
-            select(s, 0, 0);
+            select(s, SELECT_SINGLE, 0);
             undoAddElement(s);
             layoutAll = true;
             }
@@ -1202,7 +1212,7 @@ void Score::cmdAddText(int subtype)
       if (s) {
             undoAddElement(s);
             layoutAll = true;
-            select(s, 0, 0);
+            select(s, SELECT_SINGLE, 0);
             canvas()->startEdit(s);
             }
       else
@@ -1390,7 +1400,7 @@ void Score::insertMeasures(int n, int type)
 		return;
             }
 
-	int tick  = sel->tickStart;
+	int tick  = sel->startSegment()->tick();
 	int ticks = sigmap->ticksMeasure(tick);
 
 	for (int ino = 0; ino < n; ++ino) {
@@ -1426,7 +1436,7 @@ void Score::insertMeasures(int n, int type)
                   undoFixTicks();
                   }
             }
-      select(0,0,0);
+      select(0, SELECT_SINGLE, 0);
 	layoutAll = true;
       }
 
@@ -1605,8 +1615,8 @@ void Score::cmdAddStretch(double val)
       {
       if (sel->state() != SEL_SYSTEM && sel->state() != SEL_STAFF)
             return;
-      int startTick = sel->tickStart;
-      int endTick   = sel->tickEnd;
+      int startTick = sel->startSegment()->tick();
+      int endTick   = sel->endSegment()->tick();
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
@@ -1643,8 +1653,8 @@ void Score::cmdResetBeamMode()
             printf("no system or staff selected\n");
             return;
             }
-      int startTick = sel->tickStart;
-      int endTick   = sel->tickEnd;
+      int startTick = sel->startSegment()->tick();
+      int endTick   = sel->endSegment()->tick();
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
@@ -1713,7 +1723,7 @@ void Score::cmd(const QString& cmd)
       else if (cmd == "escape") {
             if (noteEntryMode())
                   setNoteEntry(false);
-            select(0, 0, 0);
+            select(0, SELECT_SINGLE, 0);
             end();
             }
       else if (cmd == "pause")
@@ -1758,11 +1768,11 @@ void Score::cmd(const QString& cmd)
 		      insertMeasures(1, VBOX);
             else if (cmd == "append-hbox") {
 		      MeasureBase* mb = appendMeasure(HBOX);
-                  select(mb, 0, 0);
+                  select(mb, SELECT_SINGLE, 0);
                   }
             else if (cmd == "append-vbox") {
 		      MeasureBase* mb = appendMeasure(VBOX);
-                  select(mb, 0, 0);
+                  select(mb, SELECT_SINGLE, 0);
                   }
             else if (cmd == "page-prev") {
                   pagePrev();
@@ -1829,7 +1839,7 @@ void Score::cmd(const QString& cmd)
                                     _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
-                              select(e, 0, 0);
+                              select(e, SELECT_SINGLE, 0);
                               }
                         }
                   setLayoutAll(false);
@@ -1843,7 +1853,7 @@ void Score::cmd(const QString& cmd)
                                     _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
-                              select(e, 0, 0);
+                              select(e, SELECT_SINGLE, 0);
                               }
                         }
                   setLayoutAll(false);
@@ -1857,7 +1867,7 @@ void Score::cmd(const QString& cmd)
                                     _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
-                              select(e, 0, 0);
+                              select(e, SELECT_SINGLE, 0);
                               }
                         }
                   setLayoutAll(false);
@@ -1871,7 +1881,7 @@ void Score::cmd(const QString& cmd)
                                     _padState.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
-                              select(e, 0, 0);
+                              select(e, SELECT_SINGLE, 0);
                               }
                         }
                   setLayoutAll(false);
@@ -2012,6 +2022,7 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "copy") {
                   QString mimeType = sel->mimeType();
+printf("copy mime type <%s>\n", qPrintable(mimeType));
                   if (!mimeType.isEmpty()) {
                         QMimeData* mimeData = new QMimeData;
                         mimeData->setData(mimeType, sel->mimeData());
@@ -2052,10 +2063,10 @@ void Score::cmd(const QString& cmd)
                   MeasureBase* mb = _measures.last();
                   if (mb) {   // check for empty score
                         sel->setState(SEL_SYSTEM);
-                        sel->tickStart  = 0;
-                        sel->tickEnd    = _measures.last()->tick() + _measures.last()->tickLen();
-                        sel->staffStart = 0;
-                        sel->staffEnd   = nstaves();
+                        sel->setRange(tick2segment(0),
+                                      tick2segment(_measures.last()->tick() + _measures.last()->tickLen()),
+                                      0,
+                                      nstaves());
                         }
                   }
             else if (cmd == "transpose")
@@ -2154,7 +2165,7 @@ void Score::cmd(const QString& cmd)
                   if (ev.chord) {
                         Note* on = getSelectedNote();
                         Note* n = addNote(on->chord(), ev.pitch);
-                        select(n, 0, 0);
+                        select(n, SELECT_SINGLE, 0);
                         }
                   else {
                         setNote(_is.pos, _is.track, ev.pitch, len);
@@ -2205,7 +2216,7 @@ void Score::cmdPaste()
             }
       else if ((sel->state() == SEL_STAFF || sel->state() == SEL_SINGLE)
          && ms->hasFormat(mimeStaffListFormat)) {
-            int tick = sel->tickStart;
+            int tick = sel->startSegment()->tick();
             int staffIdx = sel->staffStart;
 
             if (sel->state() == SEL_SINGLE) {
@@ -2235,8 +2246,12 @@ printf("paste <%s>\n", data.data());
             docName = "--";
             pasteStaff(doc.documentElement(), tick, staffIdx);
             }
-      else
-            printf("cannot paste selState %d\n", sel->state());
+      else {
+            printf("cannot paste selState %d staffList %d\n",
+               sel->state(), ms->hasFormat(mimeStaffListFormat));
+            foreach(QString s, ms->formats())
+                  printf("  format %s\n", qPrintable(s));
+            }
       }
 
 //---------------------------------------------------------
@@ -2302,9 +2317,14 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               }
                         }
                   }
-            sel->setState(SEL_STAFF);
-            sel->setRange(dstTick, dstTick+tickLen, dstStaffStart, dstStaffStart+staves);
-            updateSelectedElements();
+            Segment* s1 = tick2segment(dstTick);
+            Segment* s2 = tick2segment(dstTick + tickLen);
+            sel->setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
+            updateSelectedElements(SEL_STAFF);
+            if (sel->state() != SEL_STAFF) {
+                  sel->setState(SEL_STAFF);
+                  emit selectionChanged(int(sel->state()));
+                  }
             }
       layout()->connectTies();
       }
@@ -2319,7 +2339,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
       // TODO: handle special cases: sm->tickLen() != ds->tickLen()
       //
 
-      select(0, 0, 0);
+      select(0, SELECT_SINGLE, 0);
       //
       // clear staff in destination Measure
       //
@@ -2392,12 +2412,12 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
 // printf("add elem %s\n", e->name());
                   e->setSelected(false);
                   if (e->type() == REST)
-                        select(e, Qt::ShiftModifier, 0);
+                        select(e, SELECT_RANGE, 0);
                   else {
                         Chord* c = (Chord*)e;
                         NoteList* nl = c->noteList();
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              select(in->second, Qt::ShiftModifier, 0);
+                              select(in->second, SELECT_RANGE, 0);
                               }
                         }
                   }
@@ -2431,7 +2451,7 @@ void Score::move(const QString& cmd)
                         el = ((Chord*)el)->upNote();
                         mscore->play(el);
                         }
-                  select(el, 0, 0);
+                  select(el, SELECT_SINGLE, 0);
                   adjustCanvasPosition(el);
                   if (noteEntryMode()) {
                         _is.pos = tick;

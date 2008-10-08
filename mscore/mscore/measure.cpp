@@ -2020,7 +2020,7 @@ printf("drop staffList\n");
                   //
                   // see also cmdDeleteSelection()
                   //
-                  _score->select(0, 0, 0);
+                  _score->select(0, SELECT_SINGLE, 0);
                   bool rmFlag = false;
                   for (Segment* s = first(); s; s = s->next()) {
                         if (s->subtype() == Segment::SegEndBarLine
@@ -2060,7 +2060,7 @@ printf("drop staffList\n");
                         if (el->type() == SLUR && el->staffIdx() == staffIdx)
                               _score->undoRemoveElement(el);
                         }
-                  _score->select(rm, 0, 0);
+                  _score->select(rm, SELECT_SINGLE, 0);
                   }
                   break;
 
@@ -2107,7 +2107,7 @@ void Measure::propertyAction(const QString& s)
             setIrregular(im.isIrregular());     // TODO: shall we make this undoable?
             setRepeatCount(im.repeatCount());
             score()->setDirty();
-            score()->select(0, 0, 0);
+            score()->select(0, SELECT_SINGLE, 0);
             SigList* sl = score()->sigmap;
 
             SigEvent oev = sl->timesig(tick());
@@ -2135,7 +2135,7 @@ void Measure::propertyAction(const QString& s)
                   }
             adjustToLen(oldLen, newLen);
             score()->fixTicks();
-            score()->select(this, 0, 0);
+            score()->select(this, SELECT_SINGLE, 0);
             }
       }
 

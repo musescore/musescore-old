@@ -98,6 +98,8 @@ class Segment : public Element {
       Segment* next1() const;
       Segment* prev1() const;
 
+      Segment* nextCR() const;
+
       Element* element(int track) const { return _elist[track];    }
       void removeElement(int track);
       void setElement(int track, Element* el);
