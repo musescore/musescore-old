@@ -395,6 +395,9 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (instr->useDrumset) {
             Drumset* ds   = instr->drumset;
             pitch         = _padState.drumNote;
+printf("pitch %d\n", pitch);
+            if (pitch < 0)
+                  return;
             voice         = ds->voice(pitch);
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
