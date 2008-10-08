@@ -1,7 +1,7 @@
 /* pmwin.c -- PortMidi os-dependent code */
 
 /* This file only needs to implement:
-       pm_init(), which calls various routines to register the 
+       pm_init(), which calls various routines to register the
            available midi devices,
        Pm_GetDefaultInputDeviceID(), and
        Pm_GetDefaultOutputDeviceID().
@@ -45,6 +45,9 @@ void pm_init(void)
 #ifdef DEBUG
     printf("registered pm_term with cleanup DLL\n");
 #endif
+
+#if 0
+      // ??WS
 #else
     atexit(pm_exit);
 #ifdef DEBUG
@@ -92,14 +95,14 @@ PmDeviceID Pm_GetDefaultOutputDeviceID() {
     return 0;
 }
 
-#include "stdio.h" 
+#include "stdio.h"
 
 void *pm_alloc(size_t s) {
-    return malloc(s); 
+    return malloc(s);
 }
 
 
-void pm_free(void *ptr) { 
-    free(ptr); 
+void pm_free(void *ptr) {
+    free(ptr);
 }
 

@@ -565,7 +565,6 @@ void Selection::updateState()
 
 QString Selection::mimeType() const
       {
-printf("selection mimeType %d\n", _state);
       switch (_state) {
             default:
             case SEL_NONE:
@@ -630,9 +629,20 @@ QByteArray Selection::staffMimeData() const
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
+                  if (seg->subtype() == Segment::SegEndBarLine)
+                        continue;
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* e = seg->element(track);
-                        if (e && !e->generated())
+                        if (e == 0 || e->generated())
+                              continue;
+                        if (e->type() == CHORD) {
+                              Chord* c = static_cast<Chord*>(e);
+                              if (c->isTied()) {
+                                    continue;
+                                    }
+                              c->write(xml, true);
+                              }
+                        else
                               e->write(xml);
                         }
                   }

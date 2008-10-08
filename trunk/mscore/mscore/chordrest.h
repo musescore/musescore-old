@@ -62,9 +62,10 @@ class ChordRest : public Element {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
-      void writeProperties(Xml& xml) const;
+      void writeProperties(Xml& xml, bool clipboardmode=false) const;
       bool readProperties(QDomElement);
-      virtual QList<Prop> properties(Xml&) const;
+      QList<Prop> properties(Xml&, bool clipboardmode) const;
+      virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
 
       Segment* segment() const                  { return (Segment*)parent(); }
       Measure* measure() const                  { return (Measure*)(parent()->parent()); }

@@ -199,6 +199,10 @@ if (BUILD_SCRIPT_DEBUG)
       set (subdirs ${subdirs} scriptdebug)
 endif (BUILD_SCRIPT_DEBUG)
 
+if (MINGW)
+      set (subdirs ${subdirs} portmidi)
+endif (MINGW)
+
 subdirs(${subdirs})
 
 

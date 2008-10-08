@@ -2022,7 +2022,6 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "copy") {
                   QString mimeType = sel->mimeType();
-printf("copy mime type <%s>\n", qPrintable(mimeType));
                   if (!mimeType.isEmpty()) {
                         QMimeData* mimeData = new QMimeData;
                         mimeData->setData(mimeType, sel->mimeData());
@@ -2220,7 +2219,6 @@ void Score::cmdPaste()
             int staffIdx = sel->staffStart;
 
             if (sel->state() == SEL_SINGLE) {
-printf("paste list to single element\n");
                   Element* e = sel->element();
                   if (e->type() != NOTE && e->type() != REST) {
                         printf("cannot paste to %s\n", e->name());
@@ -2233,7 +2231,7 @@ printf("paste list to single element\n");
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-printf("paste <%s>\n", data.data());
+// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2294,14 +2292,15 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                     cr = new Rest(this);
 
                               cr->setTrack(curTrack);
-                              cr->setTick(curTick);      // set default tick position
-                              // chord->setParent(this);       // only for reading tuplets
+                              cr->setTick(curTick);         // set default tick position
+                              // chord->setParent(this);    // only for reading tuplets
                               cr->read(eee);
                               int voice = cr->voice();
                               cr->setTrack(dstStaffIdx * VOICES + voice);
                               curTick  = cr->tick() + cr->tickLen();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
+
                               Measure* measure = tick2measure(tick);
                               Segment* s = measure->findSegment(Segment::SegChordRest, tick);
                               if (s == 0) {
@@ -2309,7 +2308,54 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                     undoAddElement(s);
                                     }
                               cr->setParent(s);
-                              undoAddElement(cr);
+                              int measureEnd = measure->tick() + measure->tickLen();
+                              if (cr->tick() + cr->tickLen() > measureEnd) {
+                                    if (cr->type() == CHORD) {
+                                          // split Chord
+                                          Chord* c = static_cast<Chord*>(cr);
+                                          int rest = c->tickLen();
+                                          int len  = measureEnd - c->tick();
+                                          rest -= len;
+                                          c->setLen(len);
+                                          undoAddElement(c);
+                                          while (rest) {
+                                                Chord* c2 = static_cast<Chord*>(c->clone());
+                                                int tick = c->tick() + c->tickLen();
+                                                c2->setTick(tick);
+                                                measure = tick2measure(tick);
+                                                len = measure->tickLen() > rest ? rest : measure->tickLen();
+                                                rest -= len;
+                                                s     = measure->findSegment(Segment::SegChordRest, tick);
+                                                if (s == 0) {
+                                                      s = measure->createSegment(Segment::SegChordRest, tick);
+                                                      undoAddElement(s);
+                                                      }
+                                                c2->setParent(s);
+                                                undoAddElement(c2);
+
+                                                NoteList* nl1 = c->noteList();
+                                                NoteList* nl2 = c2->noteList();
+                                                iNote i1      = nl1->begin();
+                                                iNote i2      = nl2->begin();
+
+                                                for (; i1 != nl1->end(); i1++, i2++) {
+                                                      Tie* tie = new Tie(this);
+                                                      tie->setStartNote(i1->second);
+                                                      tie->setEndNote(i2->second);
+                                                      tie->setTrack(c->track());
+                                                      i1->second->setTieFor(tie);
+                                                      i2->second->setTieBack(tie);
+                                                      }
+                                                c = c2;
+                                                }
+                                          }
+                                    else {
+                                          // split Rest
+                                          }
+                                    }
+                              else {
+                                    undoAddElement(cr);
+                                    }
                               }
                         else {
                               domError(eee);

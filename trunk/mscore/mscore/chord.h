@@ -166,8 +166,8 @@ class Chord : public ChordRest {
       virtual Chord* clone() const     { return new Chord(*this); }
       virtual ElementType type() const { return CHORD; }
 
-      virtual void write(Xml& xml) const;
-//      virtual void read(QDomElement, int staff);
+      void write(Xml& xml, bool clipboardmode) const;
+      virtual void write(Xml& xml) const { write(xml, false); }
       virtual void read(QDomElement);
       virtual void setSelected(bool f);
       virtual void dump() const;
@@ -220,6 +220,7 @@ class Chord : public ChordRest {
       virtual void setTrack(int val);
 
       void computeUp();
+      bool isTied() const;
       };
 
 #endif
