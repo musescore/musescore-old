@@ -1,4 +1,6 @@
-7.10 (sy)
+7.10 (ws)
+      - rework of selection code
+     (sy)
       - add "Save a Copy" menu item, which, unlike "Save As", never changes the
         active score filename
       - don't continue a beam after the last note of a tuplet.

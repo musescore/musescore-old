@@ -413,7 +413,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (addToChord) {
             if (cr->type() == CHORD) {
                   Note* note = addNote((Chord*)cr, pitch);
-                  select(note, 0, 0);
+                  select(note, SELECT_SINGLE, 0);
 //                  if (seq && mscore->playEnabled()) {
 //                        seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
 //                        }
@@ -603,7 +603,7 @@ void Score::cmdAddTie()
       note->setTieFor(tie);
       _layout->connectTies();
       layoutAll = true;
-      select(tie, 0, 0);
+      select(tie, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -636,7 +636,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->layout(layout());
       cmdAdd(pin);
       if (!noteEntryMode())
-            select(pin, 0, 0);
+            select(pin, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -775,7 +775,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
 #endif
       undoAddElement(s);
       addRefresh(s->abbox());
-      select(s, 0, 0);
+      select(s, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -993,12 +993,12 @@ void Score::cmdRemoveTime(int tick, int len)
 void Score::cmdDeleteSelection()
       {
       if (sel->state() == SEL_SYSTEM) {
-            MeasureBase* is = tick2measure(sel->tickStart);
+            MeasureBase* is = sel->startSegment()->measure();
             bool createEndBar = false;
             if (is->next()) {
-                  MeasureBase* ie = tick2measure(sel->tickEnd);
+                  MeasureBase* ie = sel->endSegment()->measure();
                   if (ie) {
-                        if (ie->tick() < sel->tickEnd) {
+                        if (ie->tick() < sel->endSegment()->tick()) {
                               // if last measure is selected
                               deleteItem(ie);
                               createEndBar = true;
@@ -1029,9 +1029,9 @@ void Score::cmdDeleteSelection()
             //
             int sstaff = sel->staffStart;
             int estaff = sel->staffEnd;
-            select(0, 0, 0);
-            Measure* is = tick2measure(sel->tickStart);
-            Measure* ie = tick2measure(sel->tickEnd);
+            select(0, SELECT_SINGLE, 0);
+            Measure* is = sel->startSegment()->measure();
+            Measure* ie = sel->endSegment() ? sel->endSegment()->measure() : 0;
             if (is == ie)
                   ie = 0;
             for (MeasureBase* mb = is; mb && mb != ie; mb = mb->next()) {
@@ -1089,7 +1089,7 @@ void Score::cmdDeleteSelection()
                   }
             for (MeasureBase* m = is; m && m != ie; m = m->next()) {
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx)
-                        select(m, Qt::ShiftModifier, staffIdx);
+                        select(m, SELECT_ADD, staffIdx);
                   }
             layoutAll = true;
             return;
@@ -1103,7 +1103,7 @@ void Score::cmdDeleteSelection()
                   }
             }
       sel->elements()->clear();
-      select(0, 0, 0);
+      select(0, SELECT_SINGLE, 0);
       layoutAll = true;
       }
 
@@ -1165,7 +1165,7 @@ printf("create Harmony tick %d\n", cn->tick());
             undoAddElement(cn);
             }
 
-      select(cn, 0, 0);
+      select(cn, SELECT_SINGLE, 0);
       canvas()->startEdit(cn);
       ((Harmony*)editObject)->moveCursorToEnd();
 
@@ -1224,7 +1224,7 @@ void Score::addLyrics()
       lyrics->setParent(segment);
       lyrics->setNo(no);
       undoAddElement(lyrics);
-      select(lyrics, 0, 0);
+      select(lyrics, SELECT_SINGLE, 0);
       canvas()->startEdit(lyrics);
       setLayoutAll(true);
       }
@@ -1300,7 +1300,7 @@ void Score::cmdTuplet(int n)
                   }
             }
       if (cr) {
-            select(cr, 0, 0);
+            select(cr, SELECT_SINGLE, 0);
             setNoteEntry(true);
             }
       }
@@ -1440,8 +1440,8 @@ void Score::cmdExchangeVoice(int s, int d)
             selectStavesMessage();
             return;
             }
-      int t1 = selection()->tickStart;
-      int t2 = selection()->tickEnd;
+      int t1 = selection()->startSegment()->tick();
+      int t2 = selection()->endSegment()->tick();
 
       Measure* m1 = tick2measure(t1);
       Measure* m2 = tick2measure(t2);

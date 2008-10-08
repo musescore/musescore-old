@@ -1946,6 +1946,10 @@ void MuseScore::setState(int val)
                   s->action->setEnabled(cs && !cs->undoEmpty());
             else if (strcmp(s->xml, "redo") == 0)
                   s->action->setEnabled(cs && !cs->redoEmpty());
+            else if (strcmp(s->xml, "cut") == 0)
+                  s->action->setEnabled(cs && cs->selection()->state());
+            else if (strcmp(s->xml, "copy") == 0)
+                  s->action->setEnabled(cs && cs->selection()->state());
             else
                   s->action->setEnabled(s->state & val);
             }

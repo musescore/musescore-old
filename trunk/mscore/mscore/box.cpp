@@ -287,7 +287,7 @@ bool HBox::acceptDrop(Viewer*, const QPointF&, int, int) const
 Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
       {
       e->setParent(this);
-      score()->select(e, 0, 0);
+      score()->select(e, SELECT_SINGLE, 0);
       score()->cmdAdd(e);
       return e;
       }
@@ -321,7 +321,7 @@ void HBox::propertyAction(const QString& cmd)
             s->setSubtype(TEXT_FRAME);
             s->setParent(this);
             score()->undoAddElement(s);
-            score()->select(s, 0, 0);
+            score()->select(s, SELECT_SINGLE, 0);
             score()->canvas()->startEdit(s);
             score()->setLayoutAll(true);
             }
@@ -398,7 +398,7 @@ void VBox::propertyAction(const QString& cmd)
       if (s) {
             s->setParent(this);
             score()->undoAddElement(s);
-            score()->select(s, 0, 0);
+            score()->select(s, SELECT_SINGLE, 0);
             if (s->type() == TEXT)
                   score()->canvas()->startEdit(s);
             score()->setLayoutAll(true);

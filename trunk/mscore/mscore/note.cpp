@@ -756,12 +756,12 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         atr = 0;
                         // if attribute is already there, remove
                         // score()->cmdRemove(oa); // unexpected behaviour?
-                        score()->select(oa, 0, 0);
+                        score()->select(oa, SELECT_SINGLE, 0);
                         }
                   else {
                         atr->setParent(ch);
                         atr->setTrack(track());
-                        score()->select(atr, 0, 0);
+                        score()->select(atr, SELECT_SINGLE, 0);
                         score()->cmdAdd(atr);
                         }
                   return atr;
@@ -770,7 +770,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
             case SYMBOL:
             case IMAGE:
                   e->setParent(this);
-                  score()->select(e, 0, 0);
+                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
 

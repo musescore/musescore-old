@@ -1357,7 +1357,7 @@ void ShowElementBase::selectedClicked(bool val)
       {
       QRectF r(el->abbox());
       if (val)
-            el->score()->select(el, Qt::ShiftModifier, 0);
+            el->score()->select(el, SELECT_ADD, 0);
       else
             el->score()->deselect(el);
       el->score()->addRefresh(r | el->abbox());

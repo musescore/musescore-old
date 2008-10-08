@@ -107,6 +107,10 @@ enum NoteType {
       NOTE_INVALID
       };
 
+enum SelectType {
+      SELECT_SINGLE, SELECT_RANGE, SELECT_ADD
+      };
+
 static const int VOICES = 4;
 static const int MAX_STAVES = 4;
 

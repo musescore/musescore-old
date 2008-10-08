@@ -39,6 +39,7 @@ class Page;
 class System;
 class ChordRest;
 class Element;
+class Segment;
 
 //---------------------------------------------------------
 //   Selection
@@ -47,17 +48,17 @@ class Element;
 class Selection {
       Score* _score;
       SelState _state;
-      QList<Element*> _el;        // valid in mode SEL_SINGLE and SEL_MULT
+      QList<Element*> _el;          // valid in mode SEL_SINGLE and SEL_MULT
+      Segment* _startSegment;
+      Segment* _endSegment;         // next segment after selection
 
       QByteArray staffMimeData() const;
 
    public:
-      Selection(Score* s)       { _score = s;    }
+      Selection(Score*);
       SelState state() const    { return _state; }
-      void setState(SelState s) { _state = s;    }
+      void setState(SelState s) { _state = s;  }
 
-      int tickStart;          // selection start time tick
-      int tickEnd;            // selection end time tick
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF
 
@@ -75,7 +76,14 @@ class Selection {
       void dump();
       QString mimeType() const;
       QByteArray mimeData() const;
-      void setRange(int a, int b, int c, int d);
+
+      Segment* startSegment() const    { return _startSegment; }
+      Segment* endSegment() const      { return _endSegment;   }
+      void setStartSegment(Segment* s) { _startSegment = s; }
+      void setEndSegment(Segment* s)   { _endSegment = s; }
+      void setRange(Segment* a, Segment* b, int c, int d);
+      int tickStart() const;
+      int tickEnd() const;
       };
 
 #endif

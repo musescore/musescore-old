@@ -135,7 +135,7 @@ Segment* Segment::next1() const
             if (m == 0)
                   return 0;
             if (m->type() == MEASURE)
-                  return ((Measure*)m)->first();
+                  return static_cast<Measure*>(m)->first();
             }
       }
 
@@ -158,8 +158,23 @@ Segment* Segment::prev1() const
             if (m == 0)
                   return 0;
             if (m->type() == MEASURE)
-                  return ((Measure*)m)->last();
+                  return static_cast<Measure*>(m)->last();
             }
+      }
+
+//---------------------------------------------------------
+//   nextCR
+//    get next ChordRest Segment
+//---------------------------------------------------------
+
+Segment* Segment::nextCR() const
+      {
+      Segment* seg = next1();
+      for (; seg; seg = seg->next1()) {
+            if (seg->subtype() == Segment::SegChordRest)
+                  return seg;
+            }
+      return 0;
       }
 
 //---------------------------------------------------------

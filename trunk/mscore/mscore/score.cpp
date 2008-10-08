@@ -237,7 +237,6 @@ Score::Score()
       sel               = new Selection(this);
       _dirty            = false;
       _saved            = false;
-      sel->setState(SEL_NONE);
       editObject        = 0;
       origDragObject    = 0;
       _dragObject       = 0;
@@ -1040,7 +1039,7 @@ void Score::startEdit(Element* element)
       editObject->setSelected(false);
       origEditObject->resetMode();
       undoChangeElement(origEditObject, editObject);
-      select(editObject, 0, 0);
+      select(editObject, SELECT_SINGLE, 0);
       updateAll = true;
       if (editObject->isTextB())
             canvas()->setEditText((TextB*)editObject);
@@ -1154,9 +1153,9 @@ void Score::setNoteEntry(bool val)
                               note = chord->upNote();
                         }
                   if (note)
-                        select(note, 0, 0);
+                        select(note, SELECT_SINGLE, 0);
                   else
-                        select(_is.cr, 0, 0);
+                        select(_is.cr, SELECT_SINGLE, 0);
                   }
             else if (rest)
                   _is.cr = rest;
