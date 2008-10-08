@@ -2231,7 +2231,7 @@ void Score::cmdPaste()
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-// printf("paste <%s>\n", data.data());
+printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2319,10 +2319,12 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                           c->setLen(len);
                                           undoAddElement(c);
                                           while (rest) {
-                                                Chord* c2 = static_cast<Chord*>(c->clone());
                                                 int tick = c->tick() + c->tickLen();
-                                                c2->setTick(tick);
                                                 measure = tick2measure(tick);
+                                                if (measure->tick() != tick)  // last measure
+                                                      break;
+                                                Chord* c2 = static_cast<Chord*>(c->clone());
+                                                c2->setTick(tick);
                                                 len = measure->tickLen() > rest ? rest : measure->tickLen();
                                                 rest -= len;
                                                 s     = measure->findSegment(Segment::SegChordRest, tick);
@@ -2351,6 +2353,28 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                           }
                                     else {
                                           // split Rest
+                                          Rest* r  = static_cast<Rest*>(cr);
+                                          int rest = r->tickLen();
+                                          int len  = measureEnd - r->tick();
+                                          rest    -= len;
+                                          r->setLen(len);
+                                          undoAddElement(r);
+                                          while (rest) {
+                                                Rest* r2 = static_cast<Rest*>(r->clone());
+                                                int tick = r->tick() + r->tickLen();
+                                                r2->setTick(tick);
+                                                measure = tick2measure(tick);
+                                                len = measure->tickLen() > rest ? rest : measure->tickLen();
+                                                rest -= len;
+                                                s     = measure->findSegment(Segment::SegChordRest, tick);
+                                                if (s == 0) {
+                                                      s = measure->createSegment(Segment::SegChordRest, tick);
+                                                      undoAddElement(s);
+                                                      }
+                                                r2->setParent(s);
+                                                undoAddElement(r2);
+                                                r = r2;
+                                                }
                                           }
                                     }
                               else {
