@@ -1,6 +1,9 @@
 8.10 (ws)
       - spanish translation update from Carlos Sanchiavedraz
      (sy)
+      - changed behavior of "Open" commands for opening already loaded files:
+        make "Open Recent" switch to the tab without reloading the file, and
+        make "Open" reload the file, replacing the old tab
       - fix regression caused by measure number changes
       - make appendMeasure call undoFixTicks, so measure numbers are shown properly
         after measures are appended

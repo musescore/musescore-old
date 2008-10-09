@@ -1089,6 +1089,13 @@ void MuseScore::selectScore(QAction* action)
       {
       ProjectItem* item = (ProjectItem*)action->data().value<void*>();
       if (item) {
+            int n = scoreList.size();
+            for (int i = 0; i < n; ++i) {
+                  if (scoreList[i]->filePath() == item->getName()) {
+                        tab->setCurrentIndex(i);
+                        return;
+                        }
+                  }
             Score* score = new Score();
             score->read(item->getName());
             appendScore(score);
@@ -1125,6 +1132,8 @@ void MuseScore::appendScore(Score* score)
 
       for (int i = 0; i < projectList.size(); ++i) {
             if (projectList[i]->getName() == name) {
+                  if (projectList[i]->score)
+                        removeTab(scoreList.indexOf(projectList[i]->score));
                   delete projectList[i];
                   projectList.removeAt(i);
                   break;
@@ -1189,7 +1198,7 @@ void MuseScore::saveScoreList()
             if (projectList[i]->score && projectList[i]->score->created())
                   continue;
             for (int k = 0; k < n; ++k) {
-                  if (scoreList[k]->filePath() == projectList[i]->getName()) {
+                  if (projectList[i]->score && scoreList[k] == projectList[i]->score) {
                         loaded = true;
                         if (scoreList[k] == cs)
                               current = true;
