@@ -1,5 +1,9 @@
 8.10 (ws)
       - spanish translation update from Carlos Sanchiavedraz
+     (sy)
+      - fix regression caused by measure number changes
+      - make appendMeasure call undoFixTicks, so measure numbers are shown properly
+        after measures are appended
 7.10 (ws)
       - rework of selection code
      (sy)
