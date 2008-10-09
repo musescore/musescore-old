@@ -6,6 +6,8 @@
 #     webpages are created in subdirectory "html"
 #     startpage is html/index.html
 #
+#     requires ImageMagick ("convert")
+#
 
 echo "Render test for MuseScore"
 
@@ -154,7 +156,7 @@ function genFiles() {
             rm mops.png
             fi
       mscore -S xmltest.mss -r 100 $1.xml -o mops.png
-      convert -trim mops.png $TESTDIR/mscore/$1.png
+      convert -trim mops-1.png $TESTDIR/mscore/$1.png
       genHtml $1
       }
 
