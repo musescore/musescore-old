@@ -2247,6 +2247,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
+            if (_noText)
+                  _noText->write(xml);
             }
 
       foreach(Tuplet* tuplet, _tuplets) {
@@ -2296,6 +2298,9 @@ void Measure::write(Xml& xml) const
       if (_irregular)
             xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
+
+      if (_noText)
+            _noText->write(xml);
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
