@@ -1293,7 +1293,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         chord->setTrack(staffIdx * VOICES + voice);
-                        chord->setTickLen(len);
+                        chord->setLen(len);
                         Segment* s = measure->getSegment(chord);
                         s->add(chord);
 
@@ -1396,7 +1396,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
-                  chord->setTickLen(len);
+                  chord->setLen(len);
             	foreach (MNote* n, notes) {
                         foreach(NoteEvent* mn, n->mc->notes()) {
                   		Note* note = new Note(this);

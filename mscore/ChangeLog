@@ -1,3 +1,5 @@
+9.10 (ws)
+      - fix midi import regression: chord duration type was not set
 8.10 (ws)
       - spanish translation update from Carlos Sanchiavedraz
      (sy)
