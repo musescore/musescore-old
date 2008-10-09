@@ -1005,7 +1005,7 @@ void Measure::add(Element* el)
             case HARMONY:
             case MARKER:
             case STAFF_TEXT:
-                  if (el->subtype() == TEXT_MEASURE_NUMBER)
+                  if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
                         _noText = static_cast<Text*>(el);
                   else
                         _el.append(el);
@@ -1069,6 +1069,8 @@ void Measure::remove(Element* el)
             case IMAGE:
             case HARMONY:
             case STAFF_TEXT:
+                  if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
+                        break;
                   if (!_el.remove(el)) {
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
