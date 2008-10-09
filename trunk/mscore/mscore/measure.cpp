@@ -1007,7 +1007,8 @@ void Measure::add(Element* el)
             case STAFF_TEXT:
                   if (el->subtype() == TEXT_MEASURE_NUMBER)
                         _noText = static_cast<Text*>(el);
-                  _el.append(el);
+                  else
+                        _el.append(el);
                   break;
 
             default:
@@ -1595,7 +1596,7 @@ void Measure::setNoText(const QString& s)
             if (_noText == 0) {
                   _noText = new Text(score());
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
-                   add(_noText);
+                  _noText->setParent(this);
                   }
             _noText->setText(s);
             }

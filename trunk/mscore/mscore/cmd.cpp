@@ -1319,6 +1319,7 @@ MeasureBase* Score::appendMeasure(int type)
                   Segment* s = measure->getSegment(rest);
                   s->add(rest);
                   }
+            undoFixTicks();
             }
       undoOp(UndoOp::InsertMeasure, mb);
       mb->setNext(0);
