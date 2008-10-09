@@ -1120,6 +1120,12 @@ void MuseScore::selectionChanged(int state)
 
 void MuseScore::appendScore(Score* score)
       {
+      for (int i = 0; i < scoreList.size(); ++i) {
+            if (scoreList[i]->filePath() == score->filePath()) {
+                  removeTab(i);
+                  break;
+                  }
+            }
       connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
       scoreList.push_back(score);
       tab->addTab(score->name());
@@ -1129,11 +1135,8 @@ void MuseScore::appendScore(Score* score)
       removeTabButton->setVisible(showTabBar);
 
       QString name(score->filePath());
-
       for (int i = 0; i < projectList.size(); ++i) {
             if (projectList[i]->getName() == name) {
-                  if (projectList[i]->score)
-                        removeTab(scoreList.indexOf(projectList[i]->score));
                   delete projectList[i];
                   projectList.removeAt(i);
                   break;
