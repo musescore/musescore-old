@@ -390,10 +390,8 @@ printf("select: TODO\n");
             updateSelectedElements(selState);
             _padState.len = 0;
             }
-      if (sel->state() != selState) {
-            sel->setState(selState);
-            emit selectionChanged(int(sel->state()));
-            }
+      sel->setState(selState);
+      emit selectionChanged(int(sel->state()));
       }
 
 //---------------------------------------------------------
