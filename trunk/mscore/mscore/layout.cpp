@@ -528,7 +528,7 @@ bool ScoreLayout::layoutPage()
             return true;
 
       double systemDistance = score()->style()->systemDistance.point();
-      double extraDist = (ph - nettoHeight + systemDistance) / (rows - 1);
+      double extraDist = (rows > 1) ? ((ph - nettoHeight + systemDistance) / (rows - 1.0)) : 0.0;
       y = 0;
       int n = page->systems()->size();
       for (int i = 0; i < n;) {

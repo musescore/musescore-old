@@ -2556,7 +2556,7 @@ fehlgeschlagen: </translation>
 <context>
     <name>Measure</name>
     <message>
-        <location filename="../../mscore/measure.cpp" line="2091"/>
+        <location filename="../../mscore/measure.cpp" line="2094"/>
         <source>Measure Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3049,12 +3049,12 @@ fehlgeschlagen: </translation>
         <translation>Note zufügen</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1961"/>
+        <location filename="../../mscore/mscore.cpp" line="1973"/>
         <source>note entry mode</source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1965"/>
+        <location filename="../../mscore/mscore.cpp" line="1977"/>
         <source>edit mode</source>
         <translation>Editieren</translation>
     </message>
@@ -4564,7 +4564,7 @@ fehlgeschlagen: </translation>
         <translation>Umbrüche</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1969"/>
+        <location filename="../../mscore/mscore.cpp" line="1981"/>
         <source>play</source>
         <translation>Wiedergabe</translation>
     </message>
@@ -5447,12 +5447,12 @@ Aktuelle Partitur sichern? </translation>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="941"/>
+        <location filename="../../mscore/note.cpp" line="944"/>
         <source>Note Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="944"/>
+        <location filename="../../mscore/note.cpp" line="947"/>
         <source>Tuplet Properties...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5947,57 +5947,37 @@ Aktuelle Partitur sichern? </translation>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="674"/>
-        <source>Selection Color Voice 1</source>
-        <translation>Farbe für Stimme 1 </translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="664"/>
-        <source>Selection Color Voice 2</source>
-        <translation>Farbe für Stimme 2</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="654"/>
-        <source>Selection Color Voice 3</source>
-        <translation>Farbe für Stimme 3</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="644"/>
-        <source>Selection Color Voice 4</source>
-        <translation>Farbe für Stimme 4</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1541"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1573"/>
         <source>StemDir</source>
         <translation>Halsrichtung</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1708"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1740"/>
         <source>Down</source>
         <translation>Tief</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1701"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1733"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1694"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1726"/>
         <source>Up</source>
         <translation>Hoch</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1472"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1504"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1076"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1108"/>
         <source>Sound Font</source>
         <translation>Soundfont</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1547"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1579"/>
         <source>Voice 1</source>
         <translation>Stimme 1</translation>
     </message>
@@ -6052,77 +6032,77 @@ Aktuelle Partitur sichern? </translation>
         <translation>Antialiased zeichnen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1102"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1134"/>
         <source>JACK Audio Server</source>
         <translation>JACK Audio Server</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1161"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1193"/>
         <source>ALSA Audio</source>
         <translation>ALSA-Audio</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1185"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1217"/>
         <source>default</source>
         <translation>standard</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1222"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1254"/>
         <source>48000</source>
         <translation>48000</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1279"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1311"/>
         <source>4096</source>
         <translation>4096</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1284"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1316"/>
         <source>2048</source>
         <translation>2048</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1289"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1321"/>
         <source>1024</source>
         <translation>1024</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1294"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1326"/>
         <source>512</source>
         <translation>512</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1299"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1331"/>
         <source>256</source>
         <translation>256</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1304"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1336"/>
         <source>128</source>
         <translation>128</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1309"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1341"/>
         <source>64</source>
         <translation>64</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1245"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1277"/>
         <source>Fragments:</source>
         <translation>Fragmente:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1268"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1300"/>
         <source>Period Size:</source>
         <translation>Periodengröße:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1196"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1228"/>
         <source>Sample Rate:</source>
         <translation>Abtastrate:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1354"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1386"/>
         <source>Device:</source>
         <translation>Gerät:</translation>
     </message>
@@ -6152,62 +6132,62 @@ Aktuelle Partitur sichern? </translation>
         <translation>Splashbild zeigen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1720"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1752"/>
         <source>Shortcuts</source>
         <translation>Abkürzungen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1752"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1784"/>
         <source>Action</source>
         <translation>Aktion</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1757"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1789"/>
         <source>Shortcut</source>
         <translation>Abkürzung</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1821"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1853"/>
         <source>Reset to Default</source>
         <translation>Auf Normalwert Zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1780"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1812"/>
         <source>Clear</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1787"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1819"/>
         <source>Define...</source>
         <translation>Festlegen...</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="839"/>
+        <location filename="../../mscore/prefsdialog.ui" line="871"/>
         <source>enable midi remote control</source>
         <translation>Midifernsteuerung einschalten</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="842"/>
+        <location filename="../../mscore/prefsdialog.ui" line="874"/>
         <source>Midi Remote Control</source>
         <translation>Midifernsteuerung</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="900"/>
+        <location filename="../../mscore/prefsdialog.ui" line="932"/>
         <source>Record</source>
         <translation>Aufnehmen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="927"/>
+        <location filename="../../mscore/prefsdialog.ui" line="959"/>
         <source>Rewind</source>
         <translation>Zurückspulen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="860"/>
+        <location filename="../../mscore/prefsdialog.ui" line="892"/>
         <source>Stop</source>
         <translation>Stopp</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="954"/>
+        <location filename="../../mscore/prefsdialog.ui" line="986"/>
         <source>Play</source>
         <translation>Wiedergabe</translation>
     </message>
@@ -6222,62 +6202,62 @@ Aktuelle Partitur sichern? </translation>
         <translation>Bilderpfad:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="961"/>
+        <location filename="../../mscore/prefsdialog.ui" line="993"/>
         <source>is active</source>
         <translation>ist aktiv</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="971"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1003"/>
         <source>record</source>
         <translation>Aufnahme</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1207"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1239"/>
         <source>192000</source>
         <translation>192000</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1212"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1244"/>
         <source>96000</source>
         <translation>96000</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1217"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1249"/>
         <source>88200</source>
         <translation>88200</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1227"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1259"/>
         <source>44100</source>
         <translation>44100</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1232"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1264"/>
         <source>32000</source>
         <translation>32000</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1237"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1269"/>
         <source>22050</source>
         <translation>22050</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="820"/>
+        <location filename="../../mscore/prefsdialog.ui" line="852"/>
         <source>Export Midi</source>
         <translation>Midi exportieren</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="829"/>
+        <location filename="../../mscore/prefsdialog.ui" line="861"/>
         <source>Expand Repeats</source>
         <translation>Wiederholungen expandieren</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1322"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1354"/>
         <source>Portaudio</source>
         <translation>Portaudio</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1334"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1366"/>
         <source>Api:</source>
         <translation>Api:</translation>
     </message>
@@ -6287,72 +6267,72 @@ Aktuelle Partitur sichern? </translation>
         <translation>Instrumentenliste:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="750"/>
+        <location filename="../../mscore/prefsdialog.ui" line="782"/>
         <source>Note Entry</source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="756"/>
+        <location filename="../../mscore/prefsdialog.ui" line="788"/>
         <source>Enable midi input</source>
         <translation>Midieingabe ermöglichen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="763"/>
+        <location filename="../../mscore/prefsdialog.ui" line="795"/>
         <source>Play notes when editing</source>
         <translation>Noten beim editieren spielen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="770"/>
+        <location filename="../../mscore/prefsdialog.ui" line="802"/>
         <source>Alternate input method</source>
         <translation>Alternative Eingabemethode</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1590"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1622"/>
         <source>Voice 2</source>
         <translation>Stimme 2</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1633"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1665"/>
         <source>Voice 3</source>
         <translation>Stimme 3</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1676"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1708"/>
         <source>Voice 4</source>
         <translation>Stimme 4</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="985"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1017"/>
         <source>I/O</source>
         <translation>I/O</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="991"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1023"/>
         <source>Use midi output</source>
         <translation>Midiausgabe benutzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1006"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1038"/>
         <source>Ports</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1039"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1071"/>
         <source>Auto Connect</source>
         <translation>Automatisch verbinden</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1062"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1094"/>
         <source>Use internal synthesizer</source>
         <translation>Internen Synthesizer benutzen</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1120"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1152"/>
         <source>Left-Port:</source>
         <translation>Linker Port:</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1142"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1174"/>
         <source>Right-Port:</source>
         <translation>Rechter Port:</translation>
     </message>
@@ -6368,7 +6348,7 @@ Aktuelle Partitur sichern? </translation>
 in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1417"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1449"/>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
         <translation>ACHTUNG: Änderungen auf dieser Seite erfordern den Neustart von MuseSore.</translation>
     </message>
@@ -6388,42 +6368,42 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="788"/>
+        <location filename="../../mscore/prefsdialog.ui" line="820"/>
         <source>When pressing F in note entry mode the created note pitch depends on the current key signature. In G-major a fis is created. If the alternate input method is enabled, the current key signature is irrelevant. Pressing F always creates a f note.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1438"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1470"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1444"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1476"/>
         <source>Style used for import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1453"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1485"/>
         <source>build in style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1462"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1494"/>
         <source>use style file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1502"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1534"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1508"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1540"/>
         <source>PNG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/prefsdialog.ui" line="1517"/>
+        <location filename="../../mscore/prefsdialog.ui" line="1549"/>
         <source>screen shot function</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6482,6 +6462,11 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>nl Dutch</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/prefsdialog.ui" line="657"/>
+        <source>Selection Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -6526,7 +6511,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Fehler beim Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1859"/>
+        <location filename="../../mscore/mscore.cpp" line="1871"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
@@ -6546,7 +6531,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Midi Laden</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1857"/>
+        <location filename="../../mscore/mscore.cpp" line="1869"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6687,7 +6672,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>MuseScore: Datei lesen</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1340"/>
+        <location filename="../../mscore/cmd.cpp" line="1342"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -6727,7 +6712,7 @@ Bitte zuerst eine Note oder Pause auswählen, an der
 die Texteingabe starten soll</translation>
     </message>
     <message>
-        <location filename="../../mscore/cmd.cpp" line="1399"/>
+        <location filename="../../mscore/cmd.cpp" line="1401"/>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Kein Takt ausgewählt:

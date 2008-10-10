@@ -1559,8 +1559,8 @@ void MuseScore::removeTab(int i)
 
 int main(int argc, char* argv[])
       {
-      // feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-      // feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+//      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+//      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 
       Harmony::initHarmony();
       QApplication app(argc, argv);
