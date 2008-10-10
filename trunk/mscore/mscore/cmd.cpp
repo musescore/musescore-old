@@ -2317,7 +2317,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                           Chord* c = static_cast<Chord*>(cr);
                                           int rest = c->tickLen();
                                           int len  = measureEnd - c->tick();
-                                          rest -= len;
+                                          rest    -= len;
                                           c->setLen(len);
                                           undoAddElement(c);
                                           while (rest) {

@@ -637,10 +637,7 @@ QByteArray Selection::staffMimeData() const
                               continue;
                         if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e);
-                              if ((seg != seg1) && c->isTied()) {
-                                    continue;
-                                    }
-                              c->write(xml, true);
+                              c->write(xml, true, _startSegment->tick(), _endSegment->tick());
                               }
                         else
                               e->write(xml);

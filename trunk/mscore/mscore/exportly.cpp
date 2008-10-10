@@ -17,29 +17,11 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
-
 /**
- Lilypond export.
+ Lilypond export. Olav's in-progress-copy
+ For NEWS and TODOS: see end of file
+ Still too many problems for exportly to be usable.
  */
-
-/*NEW:
-1. dotted 16th notes
-2. Relative pitches
-3. More grace-note types
-4. Slurs and beams in grace-notes
-5. Some adjustments in articulations
-6. separation of staffs/voices from score-block.
-7. completed the clef-secton.
-Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
-*/
-
-/* TODO
-1. Voltas
-2. Slurs: existing slurcheck does not work. Have to look at exportxml.cpp to find a way.
-3. Tuplets
-4. Segno etc.                      -----"-------
-*/
-
 #include "config.h"
 #include "score.h"
 #include "part.h"
@@ -60,6 +42,7 @@ Points 2 and 6, and also in a smaller degree 5, enhances human readability of li
 #include "tuplet.h"
 #include "articulation.h"
 #include "barline.h"
+#include "volta.h"
 #include <string.h>
 
 
@@ -68,54 +51,67 @@ Points 2 and 6, and also in a smaller degree 5, enhances human readability of li
 //---------------------------------------------------------
 
 class ExportLy {
-      Score* score;
-      QFile f;
-      QTextStream os;
-      int level;        // indent level
-      int curTicks;
-      bool slur;
-      Direction stemDirection;
-      QString  voiceid[32];
-      int indx;
-      bool graceswitch;
-      int prevpitch, chordpitch, oktavdiff;
+  Score* score;
+  QFile f;
+  QTextStream os;
+  int level;        // indent level
+  int curTicks;
+  bool slur;
+  Direction stemDirection;
+  QString  voiceid[32];
+  int indx;
+  bool graceswitch;
+  int prevpitch, chordpitch, oktavdiff;
+  int measurenumber, lastind, taktnr;
+  bool repeatactive;
+  bool firstalt,secondalt;
+  enum voltatype {startending, endending, startrepeat, endrepeat, bothrepeat, endbar, none};
+  struct  voltareg { voltatype voltart; int barno; };
+  struct voltareg  voltarray[255];
+  int tupletcount;
+  bool pianostaff;
 
-      void indent();
-      int getLen(int ticks, int* dots);
-      void writeLen(int);
-      QString tpc2name(int tpc);
-      void checkSlur(int, int);
 
-      void writeScore();
-      void writeMeasure(Measure*, int);
-      void writeKeySig(int);
-      void writeTimeSig(TimeSig*);
-      void writeClef(int);
-      void writeChord(Chord*);
-      void writeRest(int, int, int);
-      void writeBarline(Measure* m);
+  void indent();
+  int getLen(int ticks, int* dots);
+  void writeLen(int);
+  QString tpc2name(int tpc);
+  void checkSlur(int, int);
 
-   public:
-      ExportLy(Score* s) {
-            score  = s;
-            level  = 0;
-            curTicks = division;
-            slur   = false;
-            stemDirection = AUTO;
-            }
-      bool write(const QString& name);
-      };
+  void writeScore();
+  void writeMeasure(Measure*, int);
+  void writeKeySig(int);
+  void writeTimeSig(TimeSig*);
+  void writeClef(int);
+  void writeChord(Chord*);
+  void writeRest(int, int, int);
+  void findVolta();
+  void writeBarline(Measure* m);
+  int  voltacheckbar(Measure * meas, int i);
+  void writevolta(int measurenumber, int lastind);
+  void findtuplets(Note* note);
+
+public:
+  ExportLy(Score* s) {
+    score  = s;
+    level  = 0;
+    curTicks = division;
+    slur   = false;
+    stemDirection = AUTO;
+  }
+  bool write(const QString& name);
+};
+
+
+
 
 //---------------------------------------------------------
 // abs num value
 //---------------------------------------------------------
-
 int numval(int num)
-      {
-      if (num < 0)
-            return -num;
-      return num;
-      }
+{  if (num <0) return -num;
+  return num;
+}
 
 //---------------------------------------------------------
 //   indent
@@ -127,6 +123,197 @@ void ExportLy::indent()
             os << "    ";
       }
 
+
+
+
+//-------------------------------------
+// Find tuplets
+//-------------------------------------
+
+void ExportLy::findtuplets(Note* note)
+
+{
+
+  Tuplet* t = note->chord()->tuplet();
+  int actNotes = 1;
+  int nrmNotes = 1;
+
+  if (t)
+    {
+      if (tupletcount == 0)
+	{
+	  actNotes = t->actualNotes();
+	  nrmNotes = t->normalNotes();
+	  printf("tuplet found. actual: %d, normal: %d\n", actNotes, nrmNotes);
+	  tupletcount=actNotes;
+	  printf("tupletcount set: %d\n", tupletcount);
+	  os << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
+	}
+      else if (tupletcount>1)
+	{
+	  tupletcount--;
+	  printf("tupletcount %d\n", tupletcount);
+	}
+    }
+}
+//-----------------end of check-tuplets
+
+
+int ExportLy::voltacheckbar(Measure* meas, int i)
+{
+  printf("at volta-checkbarline\n");
+
+  int blt = meas->endBarLineType();
+  printf("endbarlinetype: %d\n", blt);
+  switch(blt)
+    {
+    case START_REPEAT:
+      i++;
+      printf("start-repeat-bar taktnr. %d i: %d \n", taktnr, i);
+      voltarray[i].voltart=startrepeat;
+      voltarray[i].barno=taktnr;
+      printf("startrepeat: voltart: %d barno: %d\n", voltarray[i].voltart, voltarray[i].barno);
+      break;
+    case END_REPEAT:
+      i++;
+      printf("endrepeat %d\n", taktnr);
+      voltarray[i].voltart=endrepeat;
+      voltarray[i].barno=taktnr;
+      break;
+    case END_START_REPEAT:
+      i++;
+      printf("both repeats %d\n", taktnr);
+      voltarray[i].voltart=bothrepeat;
+      voltarray[i].barno=taktnr;
+      break;
+    case END_BAR:
+      i++;
+      printf("endbar %d\n", taktnr);
+      voltarray[i].voltart=endbar;
+      voltarray[i].barno=taktnr;
+      break;
+    default:
+      printf("no important barline %d\n", taktnr);
+      break;
+    }//switch
+  return i;
+}//end voltacheckbarline
+
+//---------------------------------------------------------
+//   findVolta -- find and register volta and repeats in entire piece
+//---------------------------------------------------------
+
+void  ExportLy::findVolta()
+
+{
+  taktnr=0;
+  lastind=0;
+  int i=0;
+
+  for (i=0; i<255; i++)
+    {
+      voltarray[i].voltart=none;
+      voltarray[i].barno=0;
+    }
+
+  i=0;
+
+  for (MeasureBase * m=score->layout()->first(); m; m=m->next())
+    {// for all measures
+      if (m->type() !=MEASURE )
+	continue;
+
+      //hvis det derimot er en takt:
+
+      ++taktnr;
+
+      foreach (Element* el, *(m->score()->gel()))
+	//walk thru all elements of measure
+	{
+	  if (el->type() == VOLTA)
+	    {
+	      Volta* v = (Volta*) el;
+
+	      if (v->tick() == m->tick()) //hvis det er først i takten
+		{
+		  i++;
+		  printf("i: %d\n", i);
+		  if (v->subtype() == Volta::VOLTA_CLOSED)
+		    {//lilypond developers have "never seen" last ending closed.
+		      //So they are reluctant to implement it. Final ending is always "open" in lilypond.
+		      printf("left volta closed\n");
+		    }
+		  else if (v->subtype() == Volta::VOLTA_OPEN)
+		    {
+		      printf("left volta open\n");
+		    }
+		  voltarray[i].voltart = startending;
+		  voltarray[i].barno=taktnr-1; //sist i forrige takt
+		  printf("left starvolta, taktnr %d\n", taktnr);
+		}
+
+	      if (v->tick2() == m->tick() + m->tickLen()) // hvis det er sist i takten.
+		{
+		  i++;
+		  printf("i: %d\n", i);
+		  voltarray[i].voltart = endending;
+		  voltarray[i].barno=taktnr;//sist i denne takten
+		  if (v->subtype() == Volta::VOLTA_CLOSED)
+		    {// se comment above.
+		      printf("right, Volta closed\n");
+		    }
+		  else if (v->subtype() == Volta::VOLTA_OPEN)
+		    {
+		      printf("right, volta open\n");
+		    }
+
+		}
+	    }
+	}// for all elements
+
+      i=voltacheckbar((Measure *) m, i);
+
+    }//for all measures
+
+  lastind=i;
+
+#define TEST
+#ifdef TEST
+
+  for (i=0; i<=lastind; i++)
+    {
+      printf("utskrift av voltarray fra i=0: %d\n", i);
+      switch (voltarray[i].voltart)
+	{
+	case startending:
+	  printf(" startending taktnr: %d\n", voltarray[i].barno);
+	  break;
+	case endending:
+	  printf(" endending taktnr: %d\n", voltarray[i].barno);
+	  break;
+	case startrepeat:
+	  printf("i: %d, startrepeat taktnr: %d\n", i, voltarray[i].barno);
+	  break;
+	case endrepeat:
+	  printf("endrepeat taktnr %d\n", voltarray[i].barno);
+	  break;
+	case bothrepeat:
+	  printf("bothrepeat taktnr %d\n", voltarray[i].barno);
+	  break;
+	case none:
+	  printf("none taktnr %d\n",  voltarray[i].barno);
+	  break;
+	default:
+	  printf("other taktnr %d\n", voltarray[i].barno);
+	  break;
+	}
+    }
+
+#endif
+
+}// end findvolta
+
+
 //---------------------------------------------------------
 //   exportLilypond
 //---------------------------------------------------------
@@ -137,55 +324,57 @@ bool Score::saveLilypond(const QString& name)
       return em.write(name);
       }
 
+
 //---------------------------------------------------------
 //   barline : start-, end-, both-repeats, endbar, doublebar.
 //   stolen from exportxml
 //---------------------------------------------------------
 
-void ExportLy::writeBarline(Measure* m)
-      {
-      printf("at barline.\n");
+void ExportLy::writeBarline(Measure* m) //always right barline at end-of-measure.
+// nearly obsolete: replace with voltachecking
+{
 
-      int bst = m->endBarLineType();
-      switch(bst) {
-            case NORMAL_BAR:
-                  printf("normal bar\n");
-                  break;
-            case START_REPEAT:
-                  printf("start-repeat-bar\n");
-                  os << "\\bar \"|:\"";
-                  break;
-            case DOUBLE_BAR:
-                  printf("double bar\n");
-                  os << "\\bar \"||\"";
-                  break;
-            case END_REPEAT:
-                  printf("endrepeat \n");
-                  os << "\\bar \":|\"";
-                  break;
-            case BROKEN_BAR:
-                  printf("brokenbar\n");
-                  os << "\\bar \"| |:\"";
-                  break;
-            case END_BAR:
-                  printf("endbar\n");
-                  os << "\\bar \"|.\"";
-                  break;
-            case END_START_REPEAT:
-                  printf("both repeats bar\n");
-                  os << "\\bar \":|:\"";
-                  break;
-            default:
-                  printf("other barline %d\n", bst);
-                  break;
-            }
-//            }
-//       if (volta)
-//             ending(xml, volta, false);
-//       if (bst == END_REPEAT || bst == END_START_REPEAT)
-//             xml.tagE("repeat direction=\"backward\"");
-//       xml.etag();
-      }
+  printf("at writebarline.\n");
+  int bst = m->endBarLineType();
+  switch(bst)
+    {
+    case NORMAL_BAR:
+      printf("normal bar\n");
+      break;
+    case START_REPEAT:
+      printf("start-repeat-bar\n");
+      //	os << "\\bar \"|:\"";
+      // os << "\\repeat volta 2 { "; done by voltachekcing.
+      break;
+    case DOUBLE_BAR:
+      printf("double bar\n");
+      indent();
+      os << "\\bar \"||\"";
+      break;
+    case END_REPEAT:
+      printf("endrepeat \n");
+      if ((repeatactive==true) or (firstalt==true) or (secondalt==true))
+	repeatactive=false; // os << " } %end of volta \n"; done by voltachecking.
+      else
+	os << "\\bar \":|\"";
+      break;
+    case BROKEN_BAR:
+      printf("brokenbar\n");
+      os << "\\bar \"| |:\"";
+      break;
+    case END_BAR:
+      printf("endbar\n");
+      os << "\\bar \"|.\"";
+      break;
+    case END_START_REPEAT:
+      printf("both repeats bar\n");
+      //	os << "\\bar \":|:\"";
+      break;
+    default:
+      printf("other barline %d\n", bst);
+      break;
+    }
+}
 
 
 //---------------------------------------------------------
@@ -193,27 +382,27 @@ void ExportLy::writeBarline(Measure* m)
 //---------------------------------------------------------
 
 void ExportLy::writeClef(int clef)
-      {
-      os << "\\clef ";
-      switch(clef) {
-            case CLEF_G:      os << "treble";       break;
-            case CLEF_F:      os << "bass";         break;
-            case CLEF_G1:     os << "\"treble^8\""; break;
-            case CLEF_G2:     os << "\"treble^15\"";break;
-            case CLEF_G3:     os << "\"treble_8\""; break;
-            case CLEF_F8:     os << "\"bass_8\"";   break;
-            case CLEF_F15:    os << "\"bass_15\"";  break;
-            case CLEF_F_B:    os << "bass";         break;
-            case CLEF_F_C:    os << "bass";         break;
-            case CLEF_C1:     os <<  "soprano";     break;
-            case CLEF_C2:     os <<  "mezzo-soprano";break;
-            case CLEF_C3:     os <<  "alto";        break;
-            case CLEF_C4:     os <<  "tenor";       break;
-            case CLEF_TAB:    os <<  "tab";         break;
-            case CLEF_PERC:   os <<  "percussion";  break;
-            }
-      os << " ";
-      }
+{
+  os << "\\clef ";
+  switch(clef) {
+  case CLEF_G:      os << "treble";       break;
+  case CLEF_F:      os << "bass";         break;
+  case CLEF_G1:     os << "\"treble^8\""; break;
+  case CLEF_G2:     os << "\"treble^15\"";break;
+  case CLEF_G3:     os << "\"treble_8\""; break;
+  case CLEF_F8:     os << "\"bass_8\"";   break;
+  case CLEF_F15:    os << "\"bass_15\"";  break;
+  case CLEF_F_B:    os << "bass";         break;
+  case CLEF_F_C:    os << "bass";         break;
+  case CLEF_C1:     os <<  "soprano";     break;
+  case CLEF_C2:     os <<  "mezzo-soprano";break;
+  case CLEF_C3:     os <<  "alto";        break;
+  case CLEF_C4:     os <<  "tenor";       break;
+  case CLEF_TAB:    os <<  "tab";         break;
+  case CLEF_PERC:   os <<  "percussion";  break;
+  }
+  os << " ";
+}
 
 //---------------------------------------------------------
 //   writeTimeSig
@@ -280,283 +469,315 @@ QString ExportLy::tpc2name(int tpc)
 
 
 //---------------------------------------------------------
-//   writeChord   48
+//   writeChord
 //---------------------------------------------------------
 
 void ExportLy::writeChord(Chord* c)
-      {
-      bool graceslur=false;
-      int  purepitch;
-      QString purename;
-
-      // only the stem direction of the first chord in a
-      // beamed chord group is relevant
-      if (c->beam() == 0 || c->beam()->getElements().front() == c) {
-            Direction d = c->stemDirection();
-            if (d != stemDirection) {
-                  stemDirection = d;
-                  if (d == UP)
-                        os << "\\stemUp ";
-                  else if (d == DOWN)
-                        os << "\\stemDown ";
-                  else if (d == AUTO) {
-                        if (graceswitch == true)
-                              os << "] ";
-                        os << "\\stemNeutral ";
-                        }
-                  }
-            }
-
-      NoteList* nl = c->noteList();
-
-      if (nl->size() > 1)
-            os << "<";
-
-      for (iNote i = nl->begin();;) {
-            Note* n = i->second;
-            NoteType gracen;
-
-            gracen = n->noteType();
-            /*OLAV: her må vi vel sjekke om noten er en grace*/
-            switch(gracen) {
-                  case NOTE_INVALID:
-                  case NOTE_NORMAL:
-                        if (graceswitch) {
-                              graceswitch = false;
-                              graceslur   = true;
-                              os << " } "; //end of grace
-                              }
-                        break;
-                  case NOTE_ACCIACCATURA:
-                  case NOTE_APPOGGIATURA:
-                  case NOTE_GRACE4:
-                  case NOTE_GRACE16:
-                  case NOTE_GRACE32:
-                        if (!graceswitch) {
-                              os << "\\grace{";
-                              graceswitch = true;
-                              }
-                        else if (graceswitch==true) {
-                              os << "[( ";
-                              }
-                        break;
-                  } //end of switch
-
-            os << tpc2name(n->tpc());
-
-            purepitch = n->pitch();
-            purename = tpc2name(n->tpc());
-
-            if (purename.contains("eses")==1)
-                  purepitch=purepitch+2;
-            else if (purename.contains("es")==1)
-                  purepitch=purepitch+1;
-            else if (purename.contains("isis")==1)
-                  purepitch=purepitch-2;
-            else if (purename.contains("is")==1)
-                  purepitch=purepitch-1;
-
-            oktavdiff=prevpitch - purepitch;
-
-            int oktreit = (numval(oktavdiff) / 12);
-            int oktavmod = (numval(oktavdiff) % 12);
-            if (oktavmod < 6)
-                  oktreit=oktreit-1;
-
-            // printf("oktreit = %d, oktavdiff= %d, oktavmod= %d\n", oktreit, oktavdiff, oktavmod);
-
-            if (oktavdiff < -5) {
-                  os << "'";
-                  }
-            else if (oktavdiff > 6)  {
-                  os << ",";
-                  }
-
-            while (oktreit > 0) {
-                  --oktreit;
-                  if (oktavdiff < -6) {
-                        os << "'";
-                        }
-                  else if (oktavdiff > 6)  {
-                        os << ",";
-                        }
-                  }
-
-            prevpitch=n->pitch();
-
-            if (i == nl->begin())
-                  chordpitch=prevpitch;
+{
+  bool graceslur=false;
+  int  purepitch;
+  QString purename;
 
 
-            ++i; //antall noter i akkorden: vi går til neste
-            if (i == nl->end())
-                  break;
-            os << " ";
-            } //end of notelist: ferdig med akkorden
+  // only the stem direction of the first chord in a
+  // beamed chord group is relevant
+  if (c->beam() == 0 || c->beam()->getElements().front() == c)
+    {
+      Direction d = c->stemDirection();
+      if (d != stemDirection) {
+	stemDirection = d;
+	if (d == UP)
+	  os << "\\stemUp ";
+	else if (d == DOWN)
+	  os << "\\stemDown ";
+	else if (d == AUTO)
+	  {
+	    if (graceswitch == true) os << "] ";
+	    os << "\\stemNeutral ";
+	  }
+      }
+    }
 
-      if (nl->size() > 1)
-            os << ">";
+  NoteList* nl = c->noteList();
 
-      prevpitch=chordpitch;
+  if (nl->size() > 1)
+    os << "<";
 
-      writeLen(c->tickLen());
+  for (iNote i = nl->begin();;)
+    {
+      Note* n = i->second;
+      NoteType gracen;
 
-      if (graceslur) {
-            os << " ) "; //slur skulle vært avslutta etter hovednoten.
-            graceslur=false;
-            }
+      gracen = n->noteType();
+      /*OLAV: her må vi vel sjekke om noten er en grace*/
+      switch(gracen)
+	{
+	case NOTE_INVALID:
+	case NOTE_NORMAL: if (graceswitch==true)
+	    {
+	      graceswitch=false;
+	      graceslur=true;
+	      os << " } "; //end of grace
+	    }
+	  break;
+	case NOTE_ACCIACCATURA:
+	case NOTE_APPOGGIATURA:
+	case NOTE_GRACE4:
+	case NOTE_GRACE16:
+	case NOTE_GRACE32:
+	  if (graceswitch==false)
+	    {
+	      os << "\\grace{";
+	      graceswitch=true;
+	    }
+	  else
+	    if (graceswitch==true)
+	      {
+		os << "[( ";
+	      }
+	  break;
+	} //end of switch(gracen)
 
-      foreach(Articulation* a, *c->getArticulations()) {
-            switch(a->subtype()) {
-                  case UfermataSym:
-                        os << "\\fermata";
-                        break;
-                  case DfermataSym:
-                        os << "_\\fermata";
-                        break;
-                  case ThumbSym:
-                        os << "\\thumb";
-                        break;
-                  case SforzatoaccentSym:
-                        os << "->";
-                        break;
-                  case EspressivoSym:
-                        os << "\\espressivo";
-                        break;
-                  case StaccatoSym:
-                        os << "-.";
-                        break;
-                  case UstaccatissimoSym:
-                        os << "-|";
-                        break;
-                  case DstaccatissimoSym:
-                        os << "_|";
-                        break;
-                  case TenutoSym:
-                        os << "--";
-                        break;
-                  case UportatoSym:
-                        os << "-_";
-                        break;
-                  case DportatoSym:
-                        os << "__";
-                        break;
-                  case UmarcatoSym:
-                        os << "-^";
-                        break;
-                  case DmarcatoSym:
-                        os << "_^";
-                        break;
-                  case OuvertSym:
-                        os << "\\open";
-                        break;
-                  case PlusstopSym:
-                        os << "-+";
-                        break;
-                  case UpbowSym:
-                        os << "\\upbow";
-                        break;
-                  case DownbowSym:
-                        os << "\\downbow";
-                        break;
-                  case ReverseturnSym:
-                        os << "\\reverseturn";
-                        break;
-                  case TurnSym:
-                        os << "\\turn";
-                        break;
-                  case TrillSym:
-                        os << "\\trill";
-                        break;
-                  case PrallSym:
-                        os << "\\prall";
-                        break;
-                  case MordentSym:
-                        os << "\\mordent";
-                        break;
-                  case PrallPrallSym:
-                        os << "\\prallprall";
-                        break;
-                  case PrallMordentSym:
-                        os << "\\prallmordent";
-                        break;
-                  case UpPrallSym:
-                        os << "\\prallup";
-                        break;
-                  case DownPrallSym:
-                        os << "\\pralldown";
-                        break;
-                  case UpMordentSym:
-                        os << "\\upmordent";
-                        break;
-                  case DownMordentSym:
-                        os << "\\downmordent";
-                        break;
-#if 0 // TODO: this are now Repeat() elements
-                  case SegnoSym:
-                        os << "\\segno";
-                        break;
-                  case CodaSym:
-                        os << "\\coda";
-                        break;
-                  case VarcodaSym:
-                        os << "\\varcoda";
-                        break;
-#endif
-                  default:
-                        printf("unsupported note attribute %d\n", a->subtype());
-                        break;
-                  }
-            }
+      //her må vi finne ut om vi begynner på en tuplet
+      findtuplets(n);
 
-      checkSlur(c->tick(), c->staffIdx() * VOICES + c->voice());
+      os << tpc2name(n->tpc());
 
+      purepitch = n->pitch();
+      purename = tpc2name(n->tpc());
+
+      if      (purename.contains("eses")==1) purepitch=purepitch+2;
+      else if (purename.contains("es")==1) purepitch=purepitch+1;
+      else if (purename.contains("isis")==1) purepitch=purepitch-2;
+      else if (purename.contains("is")==1) purepitch=purepitch-1;
+
+      oktavdiff=prevpitch - purepitch;
+
+      int oktreit = (numval(oktavdiff) / 12);
+      int oktavmod = (numval(oktavdiff) % 12);
+      if (oktavmod < 6) oktreit=oktreit-1;
+
+      if (oktavdiff < -5) {os << "'"; }
+      else if (oktavdiff > 6)  {os << ",";}
+
+
+      while (oktreit > 0)
+	{
+	  --oktreit;
+	  if (oktavdiff < -5) {os << "'"; }
+	  else if (oktavdiff > 6)  {os << ",";}
+	}
+
+      prevpitch=n->pitch();
+
+      if (i == nl->begin()) chordpitch=prevpitch;
+
+
+      ++i; //antall noter i akkorden: vi går til neste
+      if (i == nl->end())
+	break;
       os << " ";
-      }// end of writechord
+    } //end of notelist: ferdig med akkorden
+
+  if (nl->size() > 1)
+    os << ">"; //slutt på akkorden
+
+  if (tupletcount==1)
+    {
+      os << " } ";
+      tupletcount=0;
+    }
+
+  prevpitch=chordpitch;
+
+  writeLen(c->tickLen());
+
+  if (graceslur==true)
+    {
+      os << " ) "; //slur skulle vært avslutta etter hovednoten.
+      graceslur=false;
+    }
+
+  foreach(Articulation* a, *c->getArticulations()) {
+    switch(a->subtype()) {
+    case UfermataSym:
+      os << "\\fermata";
+      break;
+    case DfermataSym:
+      os << "_\\fermata";
+      break;
+    case ThumbSym:
+      os << "\\thumb";
+      break;
+    case SforzatoaccentSym:
+      os << "->";
+      break;
+    case EspressivoSym:
+      os << "\\espressivo";
+      break;
+    case StaccatoSym:
+      os << "-.";
+      break;
+    case UstaccatissimoSym:
+      os << "-|";
+      break;
+    case DstaccatissimoSym:
+      os << "_|";
+      break;
+    case TenutoSym:
+      os << "--";
+      break;
+    case UportatoSym:
+      os << "-_";
+      break;
+    case DportatoSym:
+      os << "__";
+      break;
+    case UmarcatoSym:
+      os << "-^";
+      break;
+    case DmarcatoSym:
+      os << "_^";
+      break;
+    case OuvertSym:
+      os << "\\open";
+      break;
+    case PlusstopSym:
+      os << "-+";
+      break;
+    case UpbowSym:
+      os << "\\upbow";
+      break;
+    case DownbowSym:
+      os << "\\downbow";
+      break;
+    case ReverseturnSym:
+      os << "\\reverseturn";
+      break;
+    case TurnSym:
+      os << "\\turn";
+      break;
+    case TrillSym:
+      os << "\\trill";
+      break;
+    case PrallSym:
+      os << "\\prall";
+      break;
+    case MordentSym:
+      os << "\\mordent";
+      break;
+    case PrallPrallSym:
+      os << "\\prallprall";
+      break;
+    case PrallMordentSym:
+      os << "\\prallmordent";
+      break;
+    case UpPrallSym:
+      os << "\\prallup";
+      break;
+    case DownPrallSym:
+      os << "\\pralldown";
+      break;
+    case UpMordentSym:
+      os << "\\upmordent";
+      break;
+    case DownMordentSym:
+      os << "\\downmordent";
+      break;
+#if 0 // TODO: this are now Repeat() elements
+    case SegnoSym:
+      os << "\\segno";
+      break;
+    case CodaSym:
+      os << "\\coda";
+      break;
+    case VarcodaSym:
+      os << "\\varcoda";
+      break;
+#endif
+    default:
+      printf("unsupported note attribute %d\n", a->subtype());
+      break;
+    }
+  }
+
+  checkSlur(c->tick(), c->staffIdx() * VOICES + c->voice());
+
+  os << " ";
+}// end of writechord
+
 
 //---------------------------------------------------------
 //   getLen
 //---------------------------------------------------------
 
 int ExportLy::getLen(int l, int* dots)
-//mangler tuplets!
+//triplets added, lacking functions for tuplets in general
+//I don't know any better method than defining each possible
+//notelength. How could this be reduced to one simple algorithm?
+
       {
       int len  = 4;
 
-      if (l == 6 * division) {
-            len  = 1;
-            *dots = 1;
-            }
-      else if (l == 5 * division) {
-            len = 1;
-            *dots = 2;
-            }
+      if      (l == 6 * division)
+	{
+	  len  = 1;
+	  *dots = 1;
+	}
+      else if (l == 5 * division)
+	{
+	  len = 1;
+	  *dots = 2;
+	}
       else if (l == 4 * division)
             len = 1;
-      else if (l == 3 * division) {
-            len = 2;
-            *dots = 1;
-            }
+      else if (l == 3 * division) // dotted half
+	{
+	  len = 2;
+	  *dots = 1;
+	}
       else if (l == 2 * division)
             len = 2;
       else if (l == division)
             len = 4;
+      else if (l == division *3 /2)
+	{
+	  len=4;
+	  *dots=1;
+	}
       else if (l == division / 2)
             len = 8;
+      else if (l == division*3 /4) //dotted 8th
+	{
+	  len = 8;
+	  *dots=1;
+	}
       else if (l == division / 4)
             len = 16;
       else if (l == division / 8)
             len = 32;
-      else if (l == division * 3 /8) { //dotted 16th.
-            len = 16;
-            *dots = 1;
-            }
+      else if (l == division * 3 /8) //dotted 16th.
+	{
+	  len = 16;
+	  *dots = 1;
+	}
       else if (l == division / 16)
             len = 64;
       else if (l == division /32)
-            len = 128;
-      else
-            printf("unsupported len %d (%d,%d)\n", l, l/division, l % division);
+	    len = 128;
+      //triplets, lily uses nominal value surrounded by \times 2/3 {  }
+      //so we set len equal to nominal value
+      else if (l == division * 4 /3)
+	len = 2;
+      else if (l == division * 2 /3)
+	len = 4;
+      else if (l == division /3)
+	len = 8;
+      else if (l == division /3*2)
+	len = 16;
+      else if (l == division /3*4)
+	len = 32;
+      else printf("unsupported len %d (%d,%d)\n", l, l/division, l % division);
       return len;
       }
 
@@ -603,129 +824,279 @@ void ExportLy::writeRest(int tick, int l, int type)
       os << " ";
       }
 
+
+
+
+//--------------------------------------------------------
+//
+//   writevolta
+//
+//--------------------------------------------------------
+
+void ExportLy::writevolta(int measurenumber, int lastind)
+
+{
+  bool utgang=false;
+  int i=0;
+
+  while ((voltarray[i].barno < measurenumber) and (i<=lastind))
+    {
+      //find the present measure
+      i++;
+      printf("i:%d, measurenumber:%d, array.barno:%d, array.voltart: %d\n",i,measurenumber,voltarray[i].barno,voltarray[i].voltart);
+    }
+
+  if (measurenumber==voltarray[i].barno)
+    {
+      while (utgang==false)
+	{
+	  if (voltarray[i].voltart==startrepeat)  //mscore's startrepeat is lily's startvolta.
+	    {
+	      printf("startrepeat funnet i array\n");
+	      indent();
+	      os << "\\repeat volta 2 {";
+	      firstalt=false;
+	      secondalt=false;
+	    }
+
+	  if ((voltarray[i].voltart==endrepeat) and (firstalt==false))
+	    {
+	      printf("endrepeat funnet i array\n");
+	      os << "} % end of reprise\n";
+	    }
+
+	  if ((voltarray[i].voltart==bothrepeat) and (firstalt==false))
+	    {
+	      printf("bothrepeat funnet i array\n");
+	      os << "} % end of reprise\n";
+	      indent();
+	      os << "\\repeat volta 2 {";
+	      firstalt=false;
+	      secondalt=false;
+	    }
+
+	  if (voltarray[i].voltart==startending)
+	    {printf("startending funnet i array\n");
+	      if (firstalt==false)
+		{
+		  os << "} % end of reprise except alternate endings\n";
+		  indent();
+		  os << "\\alternative{ {  ";
+		  firstalt=true;
+		}
+	      else
+		{ indent();
+		  os << "{ %start alt2\n";
+		  indent();
+		  firstalt=false;
+		  secondalt=true;
+		}
+	    }
+
+
+	  if (voltarray[i].voltart==endending)
+	    {
+	      printf("end-of-ending funnet i array\n");
+	      if (firstalt)
+		{
+		  os << "} %close alt1\n";
+		  secondalt=true;
+		}
+	      else
+		{
+		  os << "} %close alt2\n";
+		  indent();
+		  os << "} %close alternatives\n";
+		  secondalt=false;
+		  firstalt=true;
+		}
+	    }
+
+	  if (voltarray[i+1].barno==measurenumber)
+	    {
+	      i++;
+	      printf("i++:%d, measurenumber:%d, array.barno:%d, array.voltart: %d\n",
+		     i,measurenumber,voltarray[i].barno,voltarray[i].voltart);
+	    }
+	  else utgang=true;
+	}// end of while utgang false;
+    }// if barno=measurenumber
+}// end writevolta
+
+
+
+
 //---------------------------------------------------------
 //   writeMeasure
 //---------------------------------------------------------
 
+
 void ExportLy::writeMeasure(Measure* m, int staffIdx)
-      {
-      bool voiceActive[4];
+
+{
+
+  bool voiceActive[4];
+  int i=0;
+
+  measurenumber=m->no()+1;
+  printf("measurenumber: %d\n", measurenumber);
+
+  if (measurenumber==1)
+    {
+      i=0;
+      printf("Vi er i første takt\n");
+      //   a)finner startrepeat: avlys søket
+      //   b)finner endrepeat: skriv \volta 2{ og sett brytere for leting etter alternativer og endrepeat.
+
+      while ((voltarray[i].voltart != startrepeat) and (voltarray[i].voltart != endrepeat)
+	     and (voltarray[i].voltart !=bothrepeat) and (i<=lastind))
+	{
+	  i++;
+	}
+      if (i<=lastind)
+	{
+	  if ((voltarray[i].voltart==endrepeat) or (voltarray[i].voltart==bothrepeat))
+	    {
+	      printf("starter med volta i første takt\n");
+	      indent();
+	      os << "\\repeat volta 2 { \n";
+	      repeatactive=true;
+	    }
+	}
+    }
+
+  indent();
+
+  for (int voice = 0; voice < VOICES; ++voice)
+    {
+      voiceActive[voice] = false;
+
+      for(Segment* s = m->first(); s; s = s->next()) {
+	Element* e = s->element(staffIdx * VOICES + voice);
+	if (e) {
+	  voiceActive[voice] = true;
+	  break;
+	}
+      }
+    }
+
+  int activeVoices = 0;
+
+  for (int voice = 0; voice < VOICES; ++voice)
+    {
+      if (voiceActive[voice])
+	++activeVoices;
+    }
+
+  if (activeVoices > 1)
+    {
+      indent();
+      os << "<<"; //nope, to be done in score-block.
+    }
+
+  int nvoices = activeVoices;
+
+  for (int voice = 0; voice < VOICES; ++voice)
+    {// for all voices
+
+      if (!voiceActive[voice])
+	continue;
+
+      if (activeVoices > 1)
+	{
+	  indent();
+	  os << "{ ";
+	}
+
+      int tick = m->tick();
+
+      for(Segment* s = m->first(); s; s = s->next())
+	{// for all segments
+	  Element* e = s->element(staffIdx * VOICES + voice);
+	  if (e == 0 || e->generated())
+	    continue;
+	  switch(e->type()) {
+	  case CLEF:
+	    writeClef(e->subtype());
+	    break;
+	  case TIMESIG:
+	    {
+	      writeTimeSig((TimeSig*)e);
+	      os << "\n\n";
+	      indent();
+	      break;
+	    }
+	  case KEYSIG:
+	    writeKeySig(e->subtype());
+	    break;
+	  case CHORD:
+	    {
+	      if (voice) {
+		int ntick = e->tick() - tick;
+		if (ntick > 0)
+		  writeRest(tick, ntick, 2);
+		tick += ntick;
+	      }
+	      writeChord((Chord*)e);
+	      tick += e->tickLen();
+	    }
+	    break;
+	  case REST:
+	    {
+	      int l = e->tickLen();
+	      if (l == 0) {
+		l = ((Rest*)e)->segment()->measure()->tickLen();
+		writeRest(e->tick(), l, 1);
+	      }
+	      else
+		writeRest(e->tick(), l, 0);
+	      tick += l;
+	    }
+	    break;
+	  case BAR_LINE: //We never arrive here!!??
+	    printf("barline?????\n");
+	    //		writeBarline(m);
+	    break;
+	  case BREATH:
+	    os << "\\breathe ";
+	    break;
+	  default:
+	    printf("Export Lilypond: unsupported element <%s>\n", e->name());
+	    break;
+	  }
+	} //end for all segments
+
+      if (activeVoices > 1)
+	{
+	  os << "}\n";
+	  indent();
+	}
+
+      --nvoices;
+
+      if (nvoices == 0)
+	break;
 
       indent();
+      os << "\\\\";
 
-      for (int voice = 0; voice < VOICES; ++voice) {
-            voiceActive[voice] = false;
+    }// end for all voices
 
-            for(Segment* s = m->first(); s; s = s->next()) {
-                  Element* e = s->element(staffIdx * VOICES + voice);
-                  if (e) {
-                        voiceActive[voice] = true;
-                        break;
-                        }
-                  }
-            }
 
-      int activeVoices = 0;
+  if (activeVoices > 1)
+    {
+      os << ">>";
+      --level;
+    }
 
-      for (int voice = 0; voice < VOICES; ++voice) {
-            if (voiceActive[voice])
-                  ++activeVoices;
-            }
+  writevolta(measurenumber, lastind);
 
-      if (activeVoices > 1) {
-            os << "<<\n";
-            ++level;
-            indent();
-            }
+  //hvordan vet jeg at jeg er sist i takten her?
+  printf("at end-of-measure: barline\n");
+  writeBarline(m);
+  os << " | % " << m->no()+1; //barcheck og taktnr
 
-      int nvoices = activeVoices;
-
-      for (int voice = 0; voice < VOICES; ++voice) {
-            if (!voiceActive[voice])
-                  continue;
-            if (activeVoices > 1) {
-                  indent();
-                  os << "{ ";
-                  }
-
-            int tick = m->tick();
-
-            for(Segment* s = m->first(); s; s = s->next()) {
-                  Element* e = s->element(staffIdx * VOICES + voice);
-                  if (e == 0 || e->generated())
-                        continue;
-                  switch(e->type()) {
-                        case CLEF:
-                              writeClef(e->subtype());
-                              break;
-                        case TIMESIG:
-                              {
-                              writeTimeSig((TimeSig*)e);
-                              os << "\n\n";
-                              indent();
-                              break;
-                              }
-                        case KEYSIG:
-                              writeKeySig(e->subtype());
-                              break;
-                        case CHORD:
-                              {
-                              if (voice) {
-                                    int ntick = e->tick() - tick;
-                                    if (ntick > 0)
-                                          writeRest(tick, ntick, 2);
-                                    tick += ntick;
-                                    }
-                              writeChord((Chord*)e);
-                              tick += e->tickLen();
-                              }
-                              break;
-                        case REST:
-                              {
-                              int l = e->tickLen();
-                              if (l == 0) {
-                                    l = ((Rest*)e)->segment()->measure()->tickLen();
-                                    writeRest(e->tick(), l, 1);
-                                    }
-                              else
-                                    writeRest(e->tick(), l, 0);
-                              tick += l;
-                              }
-                              break;
-                        case BAR_LINE: //We never arrive here!!??
-                              printf("barline\n");
-                              //		writeBarline(m);
-                              break;
-                        case BREATH:
-                              os << "\\breathe ";
-                              break;
-                        default:
-                              printf("Export Lilypond: unsupported element <%s>\n", e->name());
-                              break;
-                        }
-                  } //end for segment
-
-            if (activeVoices > 1) {
-                  os << "}\n";
-                  indent();
-                  }
-
-            --nvoices;
-
-            if (nvoices == 0)
-	            break;
-            os << "\\\\\n";
-            indent();
-	      }// end for all voices
-
-      if (activeVoices > 1) {
-            os << ">>";
-            --level;
-            }
-      printf("at end-of-measure: barline\n");
-      writeBarline(m);
-      os << " | % " << m->no()+1; //barcheck og taktnummer
-      }//end write measure
+} //end write measure
 
 
 //---------------------------------------------------------
@@ -733,116 +1104,137 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
 //---------------------------------------------------------
 
 void ExportLy::writeScore()
+{
+  firstalt=false;
+  secondalt=false;
+  tupletcount=0;
+
+
+  char  cpartnum;
+  const char* relativ;
+  QString  partname[32], partshort[32];
+  chordpitch=41;
+  repeatactive=false;
+
+  int staffIdx = 0;
+  int np = score->parts()->size();
+  graceswitch=false;
+
+  if (np > 1)
+    {
+
+    }
+
+  foreach(Part* part, *score->parts()) {
+    int n = part->staves()->size();
+
+    partname[staffIdx] =  part->longName();
+    partshort[staffIdx] = part->shortName();
+
+    if (n > 1)
       {
-      char  cpartnum;
-      const char* relativ;
-      QString  partname[32], partshort[32];
-      chordpitch=41;
-
-      int staffIdx = 0;
-      int np = score->parts()->size();
-      graceswitch=false;
-
-      if (np > 1) {
-
-            }
-      foreach(Part* part, *score->parts()) {
-            int n = part->staves()->size();
-
-            partname[staffIdx] =  part->longName();
-            partshort[staffIdx] = part->shortName();
-
-            if (n > 1) {
-                  //OLAV TODO: må lagres for score-block på slutten isteden:
-                  os << "\\new PianoStaff <<\n";
-	            ++level;
-		      indent();
-	            }
-
-            foreach(Staff* staff, *part->staves()) {
-		      os << "\n";
-
-                  switch(staff->clef(0)) {
-		            case CLEF_G:
-		                  relativ = "'";
-		                  prevpitch=12*5;
-		                  break;
-                        case CLEF_TAB:
-                        case CLEF_PERC:
-                        case CLEF_G3:
-                        case CLEF_F:
-                              relativ="";
-                              prevpitch=12*4;
-                              break;
-                        case CLEF_G1:
-                        case CLEF_G2:
-                              relativ="''";
-                              prevpitch=12*6;
-                              break;
-            		case CLEF_F_B:
-            		case CLEF_F_C:
-            		case CLEF_F8:
-            		      relativ=",";
-            		      prevpitch=12*3;
-            		      break;
-            		case CLEF_F15:
-            		      relativ=",,";
-            		      prevpitch=12*2;
-            		      break;
-            		case CLEF_C1:
-            		case CLEF_C2:
-            		case CLEF_C3:
-            		case CLEF_C4:
-            		      relativ="'";
-            		      prevpitch=12*5;
-            		      break;
-            	      }
-
-		      cpartnum = staffIdx + 65;
-      		voiceid[staffIdx] = partshort[staffIdx];
-      		voiceid[staffIdx].append(cpartnum);
-      		voiceid[staffIdx].prepend("A");
-      		voiceid[staffIdx].remove(QRegExp("[0-9]"));
-
-      		voiceid[staffIdx].remove(QChar('.'));
-      		voiceid[staffIdx].remove(QChar(' '));
-
-      		os << voiceid[staffIdx]  << " = \\relative c" << relativ <<  "\n";
-      		os << "{\n";
-
-      		++level;
-      		indent();
-
-
-                  writeClef(staff->clef(0));
-                  writeKeySig(staff->keymap()->key(0));
-                  //done also in write measure,
-                  // -- because there can be new keysigs unterwegs?
-
-                  for (MeasureBase* m = score->layout()->first(); m; m = m->next()) {
-                        if (m->type() != MEASURE)
-		                  continue;
-
-		            os << "\n";
-		                  writeMeasure((Measure*)m, staffIdx);
-		            }
-
-		      os << "\n";
-
-		      level=0;
-		      indent();
-		      os << "}%etter siste takt\n";
-
-		      ++staffIdx;
-	            }
-            voiceid[staffIdx]="laststaff";
-            if (n > 1) {
-	            --level;
-      	      indent();
-	            os << "laststaff\n";
-	            }
-            }
+	//OLAV TODO: må lagres for score-block på slutten isteden:
+	//	os << "\\new PianoStaff <<\n";
+	pianostaff=true;
+	//	++level;
+	//	indent();
       }
+
+    foreach(Staff* staff, *part->staves())
+      {
+
+	os << "\n";
+
+	switch(staff->clef(0)) {
+	case CLEF_G:
+	  relativ="'";
+	  prevpitch=12*5;
+	  break;
+	case CLEF_TAB:
+	case CLEF_PERC:
+	case CLEF_G3:
+	case CLEF_F:
+	  relativ="";
+	  prevpitch=12*4;
+	  break;
+	case CLEF_G1:
+	case CLEF_G2:
+	  relativ="''";
+	  prevpitch=12*6;
+	  break;
+	case CLEF_F_B:
+	case CLEF_F_C:
+	case CLEF_F8:
+	  relativ=",";
+	  prevpitch=12*3;
+	  break;
+	case CLEF_F15:
+	  relativ=",,";
+	  prevpitch=12*2;
+	  break;
+	case CLEF_C1:
+	case CLEF_C2:
+	case CLEF_C3:
+	case CLEF_C4:
+	  relativ="'";
+	  prevpitch=12*5;
+	  break;
+	}
+
+	cpartnum = staffIdx + 65;
+	voiceid[staffIdx] = partshort[staffIdx];
+	voiceid[staffIdx].append(cpartnum);
+	voiceid[staffIdx].prepend("A");
+	voiceid[staffIdx].remove(QRegExp("[0-9]"));
+	voiceid[staffIdx].remove(QChar('.'));
+	voiceid[staffIdx].remove(QChar(' '));
+
+	os << voiceid[staffIdx]  << " = \\relative c" << relativ <<  "\n";
+	os << "{\n";
+
+	++level;
+	indent();
+
+
+	writeClef(staff->clef(0));
+	writeKeySig(staff->keymap()->key(0));
+	// ^^^^ done also in write measure,
+	// -- because there can be new keysigs unterwegs?
+	// But it makes output file look dirty.
+
+	findVolta();
+	/*find all voltas and repeat-barlines prior to writing anything.
+	  If first repeat sign is end-repeat, there is an "implicit" start-repeat sign at the
+	  beginning of the first bar, and we have to insert "\volta 2" { before we start writing
+	  any content.*/
+
+	for (MeasureBase* m = score->layout()->first(); m; m = m->next())
+	  {
+	    if (m->type() != MEASURE)
+	      continue;
+
+	    os << "\n";
+
+	    writeMeasure((Measure*)m, staffIdx);
+	  }
+
+
+	os << "\n";
+
+	level=0;
+	indent();
+	os << "}%etter siste takt\n";
+
+	++staffIdx;
+      }
+    voiceid[staffIdx]="laststaff";
+    if (n > 1) {
+      --level;
+      indent();
+      //      os << "laststaff\n";
+    }
+  }
+}
 
 //---------------------------------------------------------
 //   write
@@ -850,6 +1242,7 @@ void ExportLy::writeScore()
 
 bool ExportLy::write(const QString& name)
       {
+	pianostaff=false;
       f.setFileName(name);
       if (!f.open(QIODevice::WriteOnly))
             return false;
@@ -875,8 +1268,9 @@ bool ExportLy::write(const QString& name)
             case 10: os << "\"a6\""; break;
             case 29: os << "\"11x17\""; break;
             }
-      if (pf->landscape)
-            os << " 'landscape";
+
+      if (pf->landscape) os << " 'landscape";
+
       os << ")\n\n";
 
       double lw = pf->width() - pf->evenLeftMargin - pf->evenRightMargin;
@@ -931,6 +1325,11 @@ bool ExportLy::write(const QString& name)
       // score-block ut fra data vi har samlet før:
       os << "\n\\score { \\relative << \n";
 
+      if (pianostaff)
+	{
+	  os << "\\context PianoStaff <<";
+	}
+
       indx=0;
       ++level;
       indent();
@@ -946,40 +1345,97 @@ bool ExportLy::write(const QString& name)
 	  ++indx;
 	}
 
-      os << ">>\n";
+      if (pianostaff)
+	{
+	  --level;
+	  indent();
+	  os << ">>\n";
+	  pianostaff=false;
+	}
 
+      --level;
+      indent();
+      os << ">>\n";
+      --level;
+      indent();
       os <<"}\n";
 
       f.close();
       return f.error() == QFile::NoError;
       }
 
+
+
 //---------------------------------------------------------
 //   checkSlur
 //---------------------------------------------------------
 
 void ExportLy::checkSlur(int tick, int track)
-      {
-	printf("kommet inn i sjekk-slur\n");
+{
+  for (const MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
+    if (mb->type() != MEASURE)
+      continue;
+    Measure* m = (Measure*) mb;
+    foreach(Element* e, *m->el()) {
+      if (e->type() != SLUR)
+	{
+	  continue;
+	}
+      Slur* s = (Slur*)e;
+      if ((s->tick() == tick) && (s->track() == track))
+	{
+	  os << "(";
+	  printf("startSlur %d-%d  %d-%d\n", tick, track, s->tick2(), s->track2());
+	}
+      if ((s->tick2() == tick) && (s->track2() == track))
+	{
+	  os << ")";
+	  printf("endSlur %d-%d  %d-%d\n", s->tick(), s->track(), tick, track);
+	}
+    }
+  }
+}
 
-	for (const MeasureBase* mb = score->layout()->first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*) mb;
-            foreach(Element* e, *m->el()) {
-                  if (e->type() != SLUR) {
-		            continue;
-	                  }
-	            Slur* s = (Slur*)e;
-	            if ((s->tick() == tick) && (s->track() == track)) {
-		            os << "(";
-		            printf("startSlur %d-%d  %d-%d\n", tick, track, s->tick2(), s->track2());
-	                  }
-                  if ((s->tick2() == tick) && (s->track2() == track)) {
-                        os << ")";
-                        printf("endSlur %d-%d  %d-%d\n", s->tick(), s->track(), tick, track);
-                        }
-                  }
-            }
-      }
 
+
+/* NEW 10.oct.2008:
+- voltas and endings
+- dotted 8ths and 4ths. Problem: Do I have to calculate each and every notelength:
+  is it not possible to find a general algorithm?
+- triplets, but not general tuplets. Same problem as in previous point.
+- PianoStaff reactivated.*/
+
+
+/*NEW:
+1. dotted 16th notes
+2. Relative pitches
+3. More grace-note types
+4. Slurs and beams in grace-notes
+5. Some adjustments in articulations
+6. separation of staffs/voices from score-block. Unfinished for pianostaffs/GrandStaffs and voices on one staff.
+7. completed the clef-secton.
+Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
+*/
+
+/* TODO: projects
+1. Piano staffs/GrandStaffs, system brackets and braces.
+2. Slurs: existing slurcheck does not work. Have to look at exportxml.cpp to find a way.
+3. General tuplets
+4. Segno etc.                      -----"-------
+5. complete separation of voices on the same staff, recombination in score-block. requires more
+   extensive re-writing, evt. buffering of other than first voice for later export to outputstream.
+   Present use of local polyphony causes to many crashes between voices. And does not permit use of
+   partcombine.
+6. Clean up now nearly obsolete writeBarlines();
+7.
+
+*/
+
+/*TODO: bugs
+1. octave-shift problems. Reason: calculates distance in scale half-steps, should
+   have calculated graphical position on staff.
+2. \stemUp \stemDown : sometimes correct sometimes not??? Maybe I have not understood
+   Lily's rules for the use of these commands?
+   Lily's own stem direction algorithms are good enough. Until a better idea comes
+   along: drop export of stem direction and leave it to LilyPond.
+*/

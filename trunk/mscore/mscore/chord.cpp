@@ -960,7 +960,7 @@ Note* Chord::selectedNote() const
 //   Chord::write
 //---------------------------------------------------------
 
-void Chord::write(Xml& xml, bool clipboardmode) const
+void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) const
       {
       int oldTickLen = tickLen();
       int totalLen   = oldTickLen;
@@ -1006,7 +1006,7 @@ void Chord::write(Xml& xml, bool clipboardmode) const
             }
       ciNote in = notes.begin();
       for (; in != notes.end(); ++in)
-            in->second->write(xml, clipboardmode);
+            in->second->write(xml, clipboardmode, startTick, endTick);
       if (_arpeggio)
             _arpeggio->write(xml);
       if (_glissando)
@@ -1246,20 +1246,6 @@ NoteList::iterator NoteList::add(Note* n)
 qreal Chord::upPos() const
       {
       return upNote()->pos().y();
-      }
-
-//---------------------------------------------------------
-//   isTied
-//    Check if chord is the middle or end of a sequence
-//    of tied chords.
-//
-//    Assume that if a chord is tied, all notes have
-//    a tie.
-//---------------------------------------------------------
-
-bool Chord::isTied() const
-      {
-      return upNote()->tieBack() != 0;
       }
 
 //---------------------------------------------------------

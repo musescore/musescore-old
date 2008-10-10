@@ -481,7 +481,7 @@ bool Note::isSimple(Xml& xml) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml, bool clipboardmode) const
+void Note::write(Xml& xml, bool clipboardmode, int startTick, int endTick) const
       {
       if (isSimple(xml)) {
             xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\"").arg(pitch()).arg(tpc()));
@@ -501,8 +501,9 @@ void Note::write(Xml& xml, bool clipboardmode) const
                   _accidental->write(xml);
 
             _el.write(xml);
-            if (!clipboardmode) {
-                  if (_tieFor)
+            if (_tieFor) {
+                  // in clipboardmode write tie only if the next note is < endTick
+                  if (!clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
                         _tieFor->write(xml);
                   }
             if (_staffMove)
