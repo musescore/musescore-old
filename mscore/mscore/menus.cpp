@@ -1335,6 +1335,9 @@ void MuseScore::drumPaletteSelected(int idx)
                   continue;
             if (i == idx) {
                   padState->drumNote = pitch;
+                  padState->voice    = ds->voice(pitch);
+                  printf("drumNote %d voice %d\n", pitch, padState->voice);
+                  cs->setPadState();
                   break;
                   }
             ++i;

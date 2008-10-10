@@ -491,6 +491,7 @@
       </SlurSegment>
     </Slur>
   <Slur id="62">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.560774" y="-0.301955"/>
       <o2 x="0.086273" y="-0.388228"/>
@@ -499,6 +500,7 @@
       </SlurSegment>
     </Slur>
   <Slur id="63">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.690184" y="-0.474501"/>
       <o2 x="0" y="-0.301955"/>
@@ -507,6 +509,7 @@
       </SlurSegment>
     </Slur>
   <Slur id="64">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.603911" y="-0.345092"/>
       <o2 x="0.086273" y="-0.301955"/>
@@ -515,6 +518,7 @@
       </SlurSegment>
     </Slur>
   <Slur id="65">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.129409" y="0.560774"/>
       <o4 x="-6.93889e-18" y="-0.992139"/>
@@ -522,6 +526,7 @@
     <up>1</up>
     </Slur>
   <Slur id="66">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.258819" y="0.474501"/>
       <o2 x="0.215682" y="0.86273"/>
@@ -531,6 +536,7 @@
     <up>1</up>
     </Slur>
   <Slur id="67">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.086273" y="0.560774"/>
       <o4 x="0.0431365" y="-0.690184"/>
@@ -538,6 +544,7 @@
     <up>1</up>
     </Slur>
   <Slur id="68">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.0431365" y="0.301955"/>
       <o4 x="-0.0431365" y="-0.73332"/>
@@ -545,6 +552,7 @@
     <up>1</up>
     </Slur>
   <Slur id="69">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.086273" y="0.431365"/>
       <o2 x="0.086273" y="0.690184"/>
@@ -554,6 +562,7 @@
     <up>1</up>
     </Slur>
   <Slur id="70">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.215682" y="0.690184"/>
       <o4 x="0.0431365" y="-0.647047"/>
@@ -561,6 +570,7 @@
     <up>1</up>
     </Slur>
   <Slur id="71">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.431365" y="-3.70974"/>
       <o2 x="-4.22737" y="-2.45878"/>
@@ -569,11 +579,13 @@
       </SlurSegment>
     </Slur>
   <Slur id="72">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.172546" y="-1.59605"/>
       </SlurSegment>
     </Slur>
   <Slur id="73">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.172546" y="0.474501"/>
       <o4 x="0.0431365" y="-0.73332"/>
@@ -581,6 +593,7 @@
     <up>1</up>
     </Slur>
   <Slur id="74">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.172546" y="0.690184"/>
       <o4 x="0" y="-1.25096"/>
@@ -588,6 +601,7 @@
     <up>1</up>
     </Slur>
   <Slur id="75">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.168" y="0.444"/>
       <o4 x="-0.012" y="-0.648"/>
@@ -595,6 +609,7 @@
     <up>1</up>
     </Slur>
   <Slur id="76">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.172546" y="0.388228"/>
       <o4 x="0" y="-0.690184"/>
@@ -602,6 +617,7 @@
     <up>1</up>
     </Slur>
   <Slur id="77">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0" y="0.431365"/>
       <o4 x="0.0431365" y="-1.12155"/>
@@ -609,6 +625,7 @@
     <up>1</up>
     </Slur>
   <Slur id="78">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.215682" y="0.560774"/>
       <o4 x="-6.93889e-18" y="-0.86273"/>
@@ -616,15 +633,18 @@
     <up>1</up>
     </Slur>
   <Slur id="79">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-2.37251" y="-0.86273"/>
       <o3 x="3.01955" y="-0.388228"/>
       </SlurSegment>
     </Slur>
   <Slur id="80">
+    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="81">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.129409" y="-0.560774"/>
       <o2 x="-1.85487" y="-3.88228"/>
@@ -632,7 +652,22 @@
       </SlurSegment>
     </Slur>
   <Slur id="82">
+    <track>0</track>
     <up>1</up>
+    </Slur>
+  <Slur id="83">
+    <SlurSegment no="0">
+      <o1 x="0.100696" y="-2.11462"/>
+      <o4 x="-1.40975" y="-1.61114"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur id="84">
+    <SlurSegment no="0">
+      <o1 x="0.302089" y="-1.91323"/>
+      <o4 x="-1.20836" y="-2.01393"/>
+      </SlurSegment>
+    <up>2</up>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -849,6 +884,10 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="5">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -1004,6 +1043,10 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="10">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>mf</subtype>
         <offset x="-1.2471" y="0.0308628"/>
@@ -1212,6 +1255,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="15">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="0.108607" y="-0.918572"/>
@@ -1486,6 +1533,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="20">
       <stretch>0.2</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>120</ticklen>
         <Attribute>
@@ -1686,6 +1737,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="26">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-0.508605" y="0.278388"/>
@@ -1872,6 +1927,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="31">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note pitch="56" tpc="10"/>
@@ -2001,6 +2060,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="36">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>120</ticklen>
         <Slur type="start" number="22"/>
@@ -2266,6 +2329,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="41">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -2376,6 +2443,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="47">
       <stretch>0.7</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>pp</subtype>
         <offset x="-2.90705" y="-0.588076"/>
@@ -2635,6 +2706,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="53">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -2805,6 +2880,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="58">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -2939,6 +3018,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="63">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <offset x="0.0832482" y="-0.998978"/>
         <ticklen>240</ticklen>
@@ -3225,6 +3308,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="68">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3448,14 +3535,14 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="73">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
-        <Note>
-          <selected>1</selected>
-          <pitch>58</pitch>
-          <tpc>12</tpc>
-          </Note>
+        <Note pitch="58" tpc="12"/>
         </Chord>
       <Rest>
         <offset x="0.302089" y="3.92716"/>
@@ -3501,6 +3588,16 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>72480</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="77">
       <LayoutBreak>
@@ -3511,8 +3608,22 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="57" tpc="17"/>
         </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>72960</tick>
+        <ticklen>720</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="78">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3542,6 +3653,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="83">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3571,6 +3686,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="88">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3595,6 +3714,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="92">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3624,6 +3747,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="97">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3652,6 +3779,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="102">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3686,6 +3817,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="108">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3715,6 +3850,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="113">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3744,6 +3883,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="118">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3773,6 +3916,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="123">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -6373,6 +6520,7 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>69120</tick>
         <ticklen>960</ticklen>
+        <Slur type="start" number="83"/>
         <StemDirection>down</StemDirection>
         <Note>
           <track>5</track>
@@ -6396,11 +6544,13 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>70080</tick>
         <ticklen>960</ticklen>
+        <Slur type="start" number="84"/>
+        <Slur type="stop" number="83"/>
         <StemDirection>down</StemDirection>
         <Note>
           <track>5</track>
-          <pitch>42</pitch>
-          <tpc>8</tpc>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -6411,18 +6561,27 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
         <Note pitch="66" tpc="8"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Note pitch="56" tpc="10"/>
         <Note pitch="59" tpc="7"/>
         <Note pitch="63" tpc="11"/>
@@ -6431,6 +6590,7 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>71040</tick>
         <ticklen>960</ticklen>
+        <Slur type="stop" number="84"/>
         <StemDirection>down</StemDirection>
         <Note>
           <track>5</track>
@@ -6742,5 +6902,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>
