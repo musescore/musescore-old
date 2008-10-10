@@ -2233,7 +2233,7 @@ void Score::cmdPaste()
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-printf("paste <%s>\n", data.data());
+// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2347,6 +2347,11 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                                       tie->setStartNote(i1->second);
                                                       tie->setEndNote(i2->second);
                                                       tie->setTrack(c->track());
+                                                      Tie* tie2 = i1->second->tieFor();
+                                                      if (tie2) {
+                                                            i2->second->setTieFor(i1->second->tieFor());
+                                                            tie2->setStartNote(i2->second);
+                                                            }
                                                       i1->second->setTieFor(tie);
                                                       i2->second->setTieBack(tie);
                                                       }
