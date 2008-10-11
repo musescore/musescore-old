@@ -266,12 +266,8 @@ ChordRest* Score::prevMeasure(ChordRest* element)
 //   adjustCanvasPosition
 //---------------------------------------------------------
 
-void Score::adjustCanvasPosition(Element* el)
+void Score::adjustCanvasPosition(Element* el, bool playBack)
       {
-      QPointF p(el->canvasPos());
-      QRectF r(canvas()->vGeometry());
-      if (r.contains(p))
-            return;
       Measure* m;
       if (el->type() == NOTE)
             m = ((Note*)el)->chord()->segment()->measure();
@@ -282,31 +278,97 @@ void Score::adjustCanvasPosition(Element* el)
       else
             return;
 
-      QPointF pos(m->canvasPos());
+      System* sys = m->system();
+      
+      QPointF p(el->canvasPos());
+      QRectF r(canvas()->vGeometry());
+      QRectF mRect(m->abbox());
+      QRectF sysRect(sys->abbox());
+      
+      const qreal BORDER_X = _spatium * 3;
+      const qreal BORDER_Y = _spatium * 3;
+      
+      // only try to track measure if not during playback
+      if (!playBack)
+            sysRect = mRect;
+      qreal top = sysRect.top() - BORDER_Y;
+      qreal bottom = sysRect.bottom() + BORDER_Y;
+      qreal left = mRect.left() - BORDER_X;
+      qreal right = mRect.right() + BORDER_X;
+
+      QRectF showRect(left, top, right - left, bottom - top);
+      
+      // canvas is not as wide as measure, track note instead
+      if (r.width() < showRect.width()) {
+            showRect.setX(p.x());
+            showRect.setWidth(el->width());
+            }
+            
+      // canvas is not as tall as system
+      if (r.height() < showRect.height()) {
+            if (sys->staves()->size() == 1 || !playBack) {
+                  // track note if single staff
+                  showRect.setY(p.y());
+                  showRect.setHeight(el->height());
+                  }
+            else {
+                  // let user control height
+                  showRect.setY(r.y());
+                  showRect.setHeight(1);
+                  }
+            }
+      
+      if (r.contains(showRect))
+            return;
+            
+//       qDebug() << "showRect" << showRect << "\tcanvas" << r;
+
       qreal mag = canvas()->xMag() * DPI / PDPI;
-      qreal x   = canvas()->xoffset() / mag;
-      qreal y   = canvas()->yoffset() / mag;
+      qreal x   = - canvas()->xoffset() / mag;
+      qreal y   = - canvas()->yoffset() / mag;
+      
+      qreal oldX = x, oldY = y;
 
-      //TODO handle special cases:
-      //    - canvas smaller than measure
-
-      const qreal BORDER = _spatium * 3; // 20.0 / mag;
-      if (p.x() < r.x()) {
-            // move right
-            // move left edge of measure to left edge of canvas
-            x = BORDER - pos.x();
+      if (showRect.left() < r.left()) {
+//             qDebug() << "left < r.left";
+            x = showRect.left() - BORDER_X;
             }
-      else if (p.x() > (r.x() + r.width())) {
-            // move left
-            // move right edge of measure to right edge of canvas
-            x = - (pos.x() + m->width()) + canvas()->width() / mag - BORDER;
+      else if (showRect.left() > r.right()) {
+//             qDebug() << "left > r.right";
+            x = showRect.right() - canvas()->width() / mag + BORDER_X;
             }
-      if (p.y() < r.y())
-            y = BORDER - pos.y();
-      else if (p.y() > (r.y() + r.height()))
-            y = - (pos.y() + m->height()) + canvas()->height() / mag - BORDER;
+      else if (r.width() >= showRect.width() && showRect.right() > r.right()) {
+//             qDebug() << "r.width >= width && right > r.right";
+            x = showRect.left() - BORDER_X;
+            }
+      if (showRect.top() < r.top()) {
+//             qDebug() << "top < r.top";
+            y = showRect.top() - BORDER_Y;
+            }
+      else if (showRect.top() > r.bottom()) {
+//             qDebug() << "top > r.bottom";
+            y = showRect.bottom() - canvas()->height() / mag + BORDER_Y;
+            }
+      else if (r.height() >= showRect.height() && showRect.bottom() > r.bottom()) {
+//             qDebug() << "r.height >= height && bottom > r.bottom";
+            y = showRect.top() - BORDER_Y;
+            }
 
-      canvas()->setOffset(x * mag, y * mag);
+      // align to page borders if extends beyond
+      Page* page = sys->page();
+      if (x < page->x() || r.width() >= page->width())
+            x = page->x();
+      else if (r.width() < page->width() && r.width() + x > page->width() + page->x())
+            x = (page->width() + page->x()) - r.width();
+      if (y < page->y() || r.height() >= page->height())
+            y = page->y();
+      else if (r.height() < page->height() && r.height() + y > page->height())
+            y = (page->height() + page->y()) - r.height();
+      
+      // hack: don't update if we haven't changed the offset
+      if (oldX == x && oldY == y)
+            return;
+      canvas()->setOffset(-x * mag, -y * mag);
       canvas()->updateNavigator(false);
       updateAll = true;
       }

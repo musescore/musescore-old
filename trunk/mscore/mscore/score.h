@@ -189,6 +189,10 @@ class Score : public QObject {
                         ///< saves will not overwrite the backup file.
       int _playPos;     ///< sequencer seek position
 
+      bool _foundPlayPosAfterRepeats; ///< Temporary used during playback rendering
+                                      ///< indicating if playPos after expanded repeats
+                                      ///< has been calculated.
+
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
 
@@ -470,7 +474,7 @@ class Score : public QObject {
       void setNoteEntry(bool on);
 
       void colorItem(Element*);
-      void adjustCanvasPosition(Element*);
+      void adjustCanvasPosition(Element* el, bool playBack);
       Element* dragObject() const    { return _dragObject; }
       void setDragObject(Element* e) { _dragObject = e; }
       void midiNoteReceived(int pitch, bool);
