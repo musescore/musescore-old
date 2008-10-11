@@ -440,14 +440,17 @@ void Note::draw(QPainter& p) const
 
       if (chord()) {
             int dots = chord()->dots();
+            double x = chord()->dotPosX() - pos().x();
             if (dots) {
+                  double d = point(score()->style()->dotNoteDistance);
                   double y = 0;
                   // do not draw dots on line
-                  if (_line >= 0 && (_line & 1) == 0)
+//                  if (_line >= 0 && (_line & 1) == 0)
+                  if ((_line & 1) == 0)
                         y = -_spatium *.5 * mag();
 
                   for (int i = 1; i <= dots; ++i)
-                        symbols[dotSym].draw(p, mag(), symbols[_head].width(mag()) + point(score()->style()->dotNoteDistance) * i, y);
+                        symbols[dotSym].draw(p, mag(), x + d * i, y);
                   }
             }
       }
@@ -481,7 +484,7 @@ bool Note::isSimple(Xml& xml) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml, bool clipboardmode, int startTick, int endTick) const
+void Note::write(Xml& xml, bool clipboardmode, int /*startTick*/, int endTick) const
       {
       if (isSimple(xml)) {
             xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\"").arg(pitch()).arg(tpc()));

@@ -133,6 +133,10 @@ void EditStyle::getValues()
       lstyle->concertPitch           = concertPitch->isChecked();
       lstyle->createMultiMeasureRests = createMultiMeasureRests->isChecked();
       lstyle->hideEmptyStaves         = hideEmptyStaves->isChecked();
+
+      lstyle->propertyDistanceHead   = Spatium(propertyDistanceHead->value());
+      lstyle->propertyDistanceStem   = Spatium(propertyDistanceStem->value());
+      lstyle->propertyDistance       = Spatium(propertyDistance->value());
       }
 
 //---------------------------------------------------------
@@ -209,5 +213,9 @@ void EditStyle::setValues()
       concertPitch->setChecked(lstyle->concertPitch);
       createMultiMeasureRests->setChecked(lstyle->createMultiMeasureRests);
       hideEmptyStaves->setChecked(lstyle->hideEmptyStaves);
+
+      propertyDistanceHead->setValue(lstyle->propertyDistanceHead.val());
+      propertyDistanceStem->setValue(lstyle->propertyDistanceStem.val());
+      propertyDistance->setValue(lstyle->propertyDistance.val());
       }
 

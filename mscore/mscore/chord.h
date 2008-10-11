@@ -151,6 +151,7 @@ class Chord : public ChordRest {
       Tremolo* _tremolo;
       Glissando* _glissando;
       NoteType _noteType;     ///< mark grace notes: acciaccatura and appoggiatura
+      double _dotPosX;
 
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
@@ -220,6 +221,8 @@ class Chord : public ChordRest {
       virtual void setTrack(int val);
 
       void computeUp();
+      double dotPosX() const              { return _dotPosX; }
+      void setDotPosX(double val)         { _dotPosX = val;  }
       };
 
 #endif

@@ -392,6 +392,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int accCol = 0;
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
+
             Accidental* ac = note->accidental();
             if (!ac)
                   continue;

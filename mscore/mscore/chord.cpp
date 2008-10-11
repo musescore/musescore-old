@@ -701,6 +701,7 @@ void Chord::layout(ScoreLayout* layout)
       double lx = 0.0;
       System* s = segment()->measure()->system();
       double staffMag = staff()->mag();
+      _dotPosX = 0.0;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
             note->layout(layout);
@@ -726,6 +727,9 @@ void Chord::layout(ScoreLayout* layout)
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
             note->setPos(x, y);
+            double xx = x + headWidth;
+            if (xx > _dotPosX)
+                  _dotPosX = xx;
 
             Accidental* accidental = note->accidental();
             if (accidental) {
