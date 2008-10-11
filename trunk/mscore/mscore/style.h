@@ -176,6 +176,7 @@ struct Style {
       Spatium dotNoteDistance;
       Spatium dotRestDistance;
       Spatium dotDotDistance;
+
       Spatium propertyDistanceHead;  // note property to note head
       Spatium propertyDistanceStem;  // note property to note stem
       Spatium propertyDistance;      // note property to note property
