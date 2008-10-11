@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.1917</Mag>
-  <xoff>-182.88</xoff>
-  <yoff>-170.815</yoff>
+  <xoff>-433.768</xoff>
+  <yoff>-149.437</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -656,6 +656,7 @@
     <up>1</up>
     </Slur>
   <Slur id="83">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.100696" y="-2.11462"/>
       <o4 x="-1.40975" y="-1.61114"/>
@@ -663,6 +664,7 @@
     <up>2</up>
     </Slur>
   <Slur id="84">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.302089" y="-1.91323"/>
       <o4 x="-1.20836" y="-2.01393"/>
@@ -3553,6 +3555,27 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="56" tpc="10"/>
         </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>69120</tick>
+        <ticklen>960</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>69600</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <track>1</track>
+          <selected>1</selected>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="74">
       <Chord>
@@ -3565,12 +3588,137 @@ p, li { white-space: pre-wrap; }
         <StemDirection>down</StemDirection>
         <Note pitch="58" tpc="12"/>
         </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>70080</tick>
+        <ticklen>720</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="75">
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
         <Note pitch="59" tpc="7"/>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>71040</tick>
+        <ticklen>960</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <track>2</track>
+        <tick>71040</tick>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Chord>
+        <track>2</track>
+        <ticklen>240</ticklen>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>2</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>2</track>
+        <tick>71280</tick>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <track>2</track>
+          </Attribute>
+        <Note>
+          <track>2</track>
+          <pitch>71</pitch>
+          <tpc>7</tpc>
+          </Note>
+        <Note>
+          <track>2</track>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>2</track>
+        <ticklen>240</ticklen>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>2</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>2</track>
+        <tick>71520</tick>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <track>2</track>
+          </Attribute>
+        <Note>
+          <track>2</track>
+          <pitch>71</pitch>
+          <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <track>2</track>
+          <pitch>73</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>2</track>
+        <ticklen>240</ticklen>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>2</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>2</track>
+        <tick>71760</tick>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <track>2</track>
+          </Attribute>
+        <Note>
+          <track>2</track>
+          <pitch>71</pitch>
+          <tpc>7</tpc>
+          </Note>
+        <Note>
+          <track>2</track>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="76">
@@ -3616,6 +3764,15 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <pitch>65</pitch>
           <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         </Chord>
       </Measure>

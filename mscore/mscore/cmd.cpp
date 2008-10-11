@@ -427,8 +427,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
       int octave = _padState.pitch / 12;
       if (!noteEntryMode())
             setNoteEntry(true);
-      if (_is.cr == 0) {
-            printf("cannot enter notes here\n");
+      if (_is.cr == 0 && _padState.voice == 0) {
+            printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
       int key = 0;
@@ -482,7 +482,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
                         headGroup     = ds->noteHead(pitch);
                         stemDirection = ds->stemDirection(pitch);
                         track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
-printf("track %d\n", track);
                         }
                   setNote(_is.pos, track, pitch, len, headGroup, stemDirection);
                   }
@@ -709,8 +708,12 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
 int Score::makeGap(int tick, int track, int len)
       {
       Measure* measure = tick2measure(tick);
-      int voice = track % VOICES;
+//      int voice = track % VOICES;
       if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
+            //
+            // we are at the end of the score:
+            // append a new measure
+            //
             bool createEndBar    = false;
             bool endBarGenerated = false;
 
@@ -749,11 +752,23 @@ int Score::makeGap(int tick, int track, int len)
             if (segment->tick() >= tick)
                   break;
             }
-      int gapLen = 0;
+      int gapLen;
+      if (segment == 0) {
+            gapLen = (measure->tick() + measure->tickLen()) - tick;
+            return gapLen > len ? len : gapLen;
+            }
+      gapLen = segment->tick() - tick;
       while (segment) {
-            if (segment->subtype() != Segment::SegChordRest)
-                  break;
+            if (segment->subtype() != Segment::SegChordRest) {
+                  segment = segment->next();
+                  continue;
+                  }
             Element* element = segment->element(track);
+            if (element == 0) {
+                  segment = segment->next();
+                  continue;
+                  }
+#if 0
             if (element == 0) {
                   if (voice == 0) {
                         segment = segment->next();
@@ -761,6 +776,7 @@ int Score::makeGap(int tick, int track, int len)
                         }
                   return len;
                   }
+#endif
             ChordRest* cr1 = static_cast<ChordRest*>(element);
             int l = cr1->tickLen();
             if (l == 0 && element->type() == REST)    // whole measure rest?
@@ -802,7 +818,14 @@ int Score::makeGap(int tick, int track, int len)
                   }
             segment = segment->next();
             }
-      return gapLen;
+      if (segment == 0)
+            gapLen = (measure->tick() + measure->tickLen()) - tick;
+printf("return gapLen %d len %d\n", gapLen, len);
+
+      if (gapLen == 0)
+            abort();
+
+      return gapLen > len ? len : gapLen;
       }
 
 //---------------------------------------------------------

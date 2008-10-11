@@ -848,6 +848,9 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
                                           i     -= 1;
                                           *rst   = i;
                                           *tick  = segment->tick();
+                                          //
+                                          // TODO: restrict to reasonable values (pitch 0-127)
+                                          //
                                           *line  = lrint((pppp.y()-staff->bbox().y())/_spatium * 2);
                                           *seg   = segment;
                                           return m;
