@@ -1130,6 +1130,7 @@ void Canvas::moveCursor(Segment* segment)
       _score->addRefresh(cursor->abbox());
       cursor->setPos(x - _spatium, y - _spatium);
       cursor->setHeight(y2 - y + 6.0 * _spatium);
+      cursor->setTick(segment->tick());
       _score->addRefresh(cursor->abbox());
       }
 

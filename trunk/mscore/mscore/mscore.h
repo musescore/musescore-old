@@ -164,6 +164,7 @@ class MuseScore : public QMainWindow {
       Q_OBJECT
 
       int _state;
+      int _prevState;         // state before playback
 
       QList<Score*> scoreList;
       Score* cs;              // current score
