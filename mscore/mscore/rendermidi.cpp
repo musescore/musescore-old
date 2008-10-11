@@ -192,6 +192,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
+      
+      // for the purpose of knowing whether to find the playPos after repeats
+      bool playExpandRepeats = getAction("repeat")->isChecked();
 
       for (int voice = 0; voice < VOICES; ++voice) {
             int track = staffIdx * VOICES + voice;
@@ -210,6 +213,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 
                   int gateTime    = _style->gateTime;  // 100 - legato (100%)
                   int tick        = chord->tick();
+                  if (playExpandRepeats && !_foundPlayPosAfterRepeats && tick == playPos()) {
+                        setPlayPos(tick + tickOffset);
+                        _foundPlayPosAfterRepeats = true;
+                        }
                   int ottavaShift = 0;
                   foreach(Element* e, *m->score()->gel()) {
                         if (e->type() == OTTAVA) {
@@ -342,6 +349,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 void Score::toEList(EventMap* events, int offset)
       {
       bool expandRepeats = getAction("repeat")->isChecked();
+      _foundPlayPosAfterRepeats = false;
       updateChannel();
       int staffIdx   = 0;
       foreach(Part* part, _parts) {

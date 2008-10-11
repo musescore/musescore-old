@@ -763,7 +763,7 @@ void Seq::heartBeat()
       if (note) {
             foreach(Viewer* v, cs->getViewer())
                   v->moveCursor(note->chord()->segment());
-            cs->adjustCanvasPosition(note);
+            cs->adjustCanvasPosition(note, true);
             if (pp)
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
             }

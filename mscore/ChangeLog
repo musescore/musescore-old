@@ -1,3 +1,8 @@
+11.10 (sy)
+      - fix playback when starting from after repeats when repeats are enabled
+      - improvements to follow playback: try to keep entire system in view,
+        don't run off the page edges, let user move the canvas up/down when the
+        system height is larger than the canvas (good for scores with many staves)
 9.10 (ws)
       - fix midi import regression: chord duration type was not set
 8.10 (ws)

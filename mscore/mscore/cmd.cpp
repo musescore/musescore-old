@@ -2529,7 +2529,7 @@ void Score::move(const QString& cmd)
                         mscore->play(el);
                         }
                   select(el, SELECT_SINGLE, 0);
-                  adjustCanvasPosition(el);
+                  adjustCanvasPosition(el, false);
                   if (noteEntryMode()) {
                         _is.pos = tick;
                         }
