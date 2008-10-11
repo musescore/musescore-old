@@ -135,7 +135,7 @@ void Score::endCmd()
 */
 void Score::end()
       {
-      if (noteEntryMode())
+      if (noteEntryMode() && mscore->state() != STATE_PLAY)
             canvas()->moveCursor();
 
       if (layoutAll) {
