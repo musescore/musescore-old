@@ -345,7 +345,8 @@ void Seq::pause()
 
 void MuseScore::seqStarted()
       {
-      _prevState = _state;
+      if (_state != STATE_PLAY)  // don't get stuck in play mode
+           _prevState = _state;
       setState(STATE_PLAY);
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(true);
