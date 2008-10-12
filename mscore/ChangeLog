@@ -1,6 +1,10 @@
 12.10 (ws)
       - updated russian translation from Alexandre Prokoudine
       (sy)
+      - do not deselect when dragging canvas
+      - do not middle mouse drag/drop selected elements when drag is started on
+        an empty part of the canvas
+      - make middle-mouse drag canvas work in note entry mode
       - fix wrong-instrument bugs: last instrument played in another tab would
         sound when note is inserted or clicked, and when playing a piano part
 11.10 (ws)
