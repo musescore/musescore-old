@@ -1,6 +1,7 @@
 11.10 (ws)
       - align dots in dotted chords vertical
       (sy)
+      - fix regression in editing hbox and vbox: would not show initially at the correct spot.
       - restore previous state after playback, if it was note entry mode, this is
         indicated and the cursor is shown in the correct place
       - fix playback when starting from after repeats when repeats are enabled
