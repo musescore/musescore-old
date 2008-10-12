@@ -75,6 +75,7 @@ Canvas::Canvas(QWidget* parent)
       navigator        = 0;
       _score           = 0;
       dragCanvasState  = false;
+      draggedCanvas    = false;
       _bgColor         = Qt::darkBlue;
       _fgColor         = Qt::white;
       fgPixmap         = 0;
@@ -441,10 +442,10 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               dragObject = 0;
                         }
                   else {
-                        _score->select(0, SELECT_SINGLE, 0);
                         // shift+drag selects "lasso mode"
                         if (!(keyState & Qt::ShiftModifier)) {
                               dragCanvasState = true;
+                              draggedCanvas = false;
                               setCursor(Qt::SizeAllCursor);
                               }
                         update();
@@ -453,8 +454,10 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   break;
 
             case NOTE_ENTRY:
-                  if (keyState & Qt::ControlModifier) {
+                  if (keyState & Qt::ControlModifier || ev->button() == Qt::MidButton) {
                         dragCanvasState = true;
+                        // don't deselect when dragging in note entry mode
+                        draggedCanvas = true;
                         setCursor(Qt::SizeAllCursor);
                         }
                   else
@@ -538,7 +541,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
-      if (QApplication::mouseButtons() == Qt::MidButton) {
+      if (QApplication::mouseButtons() == Qt::MidButton && dragObject) {
             QString mimeType = _score->sel->mimeType();
             if (!mimeType.isEmpty()) {
                   QDrag* drag = new QDrag(this);
@@ -585,6 +588,8 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             	update(r);
                   }
             updateNavigator(false);
+            if (!draggedCanvas)
+                  draggedCanvas = true;
             return;
             }
 
@@ -738,6 +743,8 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
             dragCanvasState = false;
             setCursor(QCursor(Qt::ArrowCursor));
             mousePressed = false;
+            if (!draggedCanvas)
+                  _score->select(0, SELECT_SINGLE, 0);
             _score->endCmd();
             return;
             }
