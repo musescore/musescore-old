@@ -185,6 +185,8 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
             _last = nb;
       if (ob == _first)
             _first = nb;
+      if (nb->type() == HBOX || nb->type() == VBOX)
+            nb->setSystem(ob->system());
       foreach(Element* e, *nb->el())
             e->setParent(nb);
       }
