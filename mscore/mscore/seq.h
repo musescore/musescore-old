@@ -110,6 +110,8 @@ class Seq : public QObject {
 
       QList<Event*> eventList;
 
+      void initInstruments();
+
       void collectEvents();
       void collectMeasureEvents(Measure*, int staffIdx);
 

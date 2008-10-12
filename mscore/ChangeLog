@@ -1,3 +1,6 @@
+12.10 (sy)
+      - fix wrong-instrument bugs: last instrument played would sound when
+        note is inserted or clicked, and when playing a piano part
 11.10 (ws)
       - align dots in dotted chords vertical
       (sy)

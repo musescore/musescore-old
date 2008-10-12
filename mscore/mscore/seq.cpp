@@ -104,6 +104,7 @@ void Seq::setScore(Score* s)
             }
       cs = s;
       playlistChanged = true;
+      initInstruments();
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       }
 
@@ -688,15 +689,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       }
 
 //---------------------------------------------------------
-//   collectEvents
+//   initInstruments
 //---------------------------------------------------------
-
-void Seq::collectEvents()
-      {
-      foreach(Event* e, events)
-            delete e;
-
-      events.clear();
+void Seq::initInstruments()
+{
       foreach(Part* part, *cs->parts()) {
             const Instrument* instr = part->instrument();
 
@@ -719,6 +715,19 @@ void Seq::collectEvents()
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   collectEvents
+//---------------------------------------------------------
+
+void Seq::collectEvents()
+      {
+      foreach(Event* e, events)
+            delete e;
+
+      events.clear();
+      initInstruments();
 
       cs->toEList(&events, 0);
 
