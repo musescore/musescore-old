@@ -304,12 +304,11 @@ void Channel::updateInitList() const
                   init[i] = 0;
                   }
             }
-      if (program) {
-            ControllerEvent* e = new ControllerEvent();
-            e->setController(CTRL_PROGRAM);
-            e->setValue(program);
-            init[A_PROGRAM] = e;
-            }
+      ControllerEvent* e = new ControllerEvent();
+      e->setController(CTRL_PROGRAM);
+      e->setValue(program);
+      init[A_PROGRAM] = e;
+
       if (hbank != -1) {
             ControllerEvent* e = new ControllerEvent();
             e->setController(CTRL_HBANK);
@@ -322,7 +321,7 @@ void Channel::updateInitList() const
             e->setValue(lbank);
             init[A_LBANK] = e;
             }
-      ControllerEvent* e = new ControllerEvent();
+      e = new ControllerEvent();
       e->setController(CTRL_VOLUME);
       e->setValue(volume);
       init[A_VOLUME] = e;
