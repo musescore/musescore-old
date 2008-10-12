@@ -1,4 +1,6 @@
-12.10 (sy)
+12.10 (ws)
+      - updated russian translation from Alexandre Prokoudine
+      (sy)
       - fix wrong-instrument bugs: last instrument played in another tab would
         sound when note is inserted or clicked, and when playing a piano part
 11.10 (ws)
