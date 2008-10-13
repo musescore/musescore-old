@@ -63,6 +63,8 @@ void Box::layout(ScoreLayout* layout)
 
 void Box::draw(QPainter& p) const
       {
+      if (score() && score()->printing())
+            return;
       if (selected() || editMode || dropTarget()) {
             QPen pen(QColor(Qt::blue));
             pen.setWidthF(2.0 / p.matrix().m11());
