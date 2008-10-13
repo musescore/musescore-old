@@ -570,14 +570,14 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             double stretch = 0.0;
 
             if (curMeasure->type() == HBOX) {
-                  ww = ((Box*)curMeasure)->boxWidth().point();
+                  ww = static_cast<Box*>(curMeasure)->boxWidth().point();
                   if (!isFirstMeasure)
                         continueFlag = true;    //try to put another system on current row
                   }
             else if (curMeasure->type() == MEASURE) {
-                  Measure* m = (Measure*)curMeasure;
+                  Measure* m = static_cast<Measure*>(curMeasure);
                   if (isFirstMeasure)
-                        processSystemHeader((Measure*)curMeasure, isFirstSystem);
+                        processSystemHeader(m, isFirstSystem);
 
                   //
                   // remove generated elements

@@ -86,6 +86,7 @@ MStaff::MStaff()
       distance     = .0;
       userDistance = .0;
       lines        = 0;
+      hasVoices    = false;
       }
 
 MStaff::~MStaff()
@@ -2397,7 +2398,6 @@ void Measure::read(QDomElement e, int idx)
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);             // only for reading tuplets
-                  // chord->read(e, idx);
                   chord->read(e);
                   Segment* s = getSegment(chord);
                   s->add(chord);
@@ -2922,3 +2922,31 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                   }
             }
       }
+
+//---------------------------------------------------------
+//   checkMultiVoices
+//---------------------------------------------------------
+
+/**
+ Check for more than on voice in this measure and staff and
+ set MStaff->hasVoices
+*/
+
+void Measure::checkMultiVoices(int staffIdx)
+      {
+printf("checkMultiVoices\n");
+      int strack = staffIdx * VOICES + 1;
+      int etrack = staffIdx * VOICES + VOICES;
+      staves[staffIdx]->hasVoices = false;
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            for (int track = strack; track < etrack; ++track) {
+                  if (s->element(track)) {
+                        staves[staffIdx]->hasVoices = true;
+                        return;
+                        }
+                  }
+            }
+      }
+

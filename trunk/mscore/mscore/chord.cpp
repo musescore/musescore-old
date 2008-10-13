@@ -902,6 +902,12 @@ void Chord::computeUp()
             return;
             }
 
+      int si = staffIdx();
+      if (measure()->mstaff(si)->hasVoices) {
+            _up = score()->style()->stemDir[voice()] == UP;
+            return;
+            }
+
       Note* upnote = upNote();
       if (notes.size() == 1) {
             if (upnote->staffMove() > 0)

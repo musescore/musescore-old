@@ -1,4 +1,10 @@
-13.10 (sy)
+13.10 (ws)
+      - added a flag to MStaff to indicate a measure/staff has more than one voice. In this
+        "multi voice context" stem direction is taken from the "stem direction" table
+        instead calculated from vertical note position.
+      - moved "stem direction settings for multi voice context" from preferences to style
+      - change output order of musicXml elements: output "tie type" just after "duration"
+      (sy)
       - fix wrong instrument sounds when inserting/clicking notes after adding
         instruments with instruments dialog
 12.10 (ws)

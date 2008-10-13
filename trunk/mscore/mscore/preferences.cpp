@@ -51,42 +51,6 @@ QString appStyleSheet(
       );
 
 //---------------------------------------------------------
-//   buttons2stemDir
-//    convert checked button to StemDirection
-//---------------------------------------------------------
-
-static Direction buttons2stemDir(QRadioButton *up, QRadioButton *down)
-      {
-      if (up->isChecked()) {
-            return UP;
-            }
-      else if (down->isChecked()) {
-            return DOWN;
-            }
-      else {
-            return AUTO;                // default to "auto"
-            }
-      }
-
-//---------------------------------------------------------
-//   stemDir2button
-//    convert StemDirection to checked button
-//---------------------------------------------------------
-
-static void stemDir2button(Direction dir, QRadioButton *up, QRadioButton *down, QRadioButton *aut)
-      {
-      if (dir == UP) {
-            up->setChecked(true);
-            }
-      else if (dir == DOWN) {
-            down->setChecked(true);
-            }
-      else {
-            aut->setChecked(true);      // default to "auto"
-            }
-      }
-
-//---------------------------------------------------------
 //   Preferences
 //---------------------------------------------------------
 
@@ -121,10 +85,6 @@ void Preferences::init()
       fgColor.setRgb(50, 50, 50);
       lPort              = "";
       rPort              = "";
-      stemDir[0]         = AUTO;
-      stemDir[1]         = AUTO;
-      stemDir[2]         = AUTO;
-      stemDir[3]         = AUTO;
       showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
@@ -213,10 +173,6 @@ void Preferences::write()
       s.setValue("lPort",              lPort);
       s.setValue("rPort",              rPort);
       s.setValue("soundFont",          soundFont);
-      s.setValue("stemDirection1",     stemDir[0]);
-      s.setValue("stemDirection2",     stemDir[1]);
-      s.setValue("stemDirection3",     stemDir[2]);
-      s.setValue("stemDirection4",     stemDir[3]);
       s.setValue("showNavigator",      showNavigator);
       s.setValue("showStatusBar",      showStatusBar);
       s.setValue("showPlayPanel",      showPlayPanel);
@@ -292,10 +248,6 @@ void Preferences::read()
 #else
       soundFont       = s.value("soundFont", ":/data/piano1.sf2").toString();
 #endif
-      stemDir[0]      = (Direction)s.value("stemDirection1", AUTO).toInt();
-      stemDir[1]      = (Direction)s.value("stemDirection2", AUTO).toInt();
-      stemDir[2]      = (Direction)s.value("stemDirection3", AUTO).toInt();
-      stemDir[3]      = (Direction)s.value("stemDirection4", AUTO).toInt();
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
@@ -473,11 +425,6 @@ void PreferenceDialog::updateValues(Preferences* p)
             jackRPort->setEnabled(false);
             jackLPort->setEnabled(false);
             }
-
-      stemDir2button(p->stemDir[0], upRadioButton1, downRadioButton1, autoRadioButton1);
-      stemDir2button(p->stemDir[1], upRadioButton2, downRadioButton2, autoRadioButton2);
-      stemDir2button(p->stemDir[2], upRadioButton3, downRadioButton3, autoRadioButton3);
-      stemDir2button(p->stemDir[3], upRadioButton4, downRadioButton4, autoRadioButton4);
 
       navigatorShow->setChecked(p->showNavigator);
       playPanelShow->setChecked(p->showPlayPanel);
@@ -838,11 +785,6 @@ void PreferenceDialog::apply()
             preferences.lPort       = jackLPort->currentText();
             preferences.rPort       = jackRPort->currentText();
             }
-      preferences.stemDir[0] = buttons2stemDir(upRadioButton1, downRadioButton1);
-      preferences.stemDir[1] = buttons2stemDir(upRadioButton2, downRadioButton2);
-      preferences.stemDir[2] = buttons2stemDir(upRadioButton3, downRadioButton3);
-      preferences.stemDir[3] = buttons2stemDir(upRadioButton4, downRadioButton4);
-
       preferences.showNavigator  = navigatorShow->isChecked();
       preferences.showPlayPanel  = playPanelShow->isChecked();
       preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());

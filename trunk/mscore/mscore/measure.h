@@ -54,6 +54,8 @@ struct MStaff {
       double distance;
       double userDistance;
       StaffLines*  lines;
+      bool hasVoices;         ///< indicates that MStaff contains more than one voice,
+                              ///< this changes some layout rules
 
       MStaff();
       ~MStaff();
@@ -121,6 +123,7 @@ class Measure : public MeasureBase {
 
       System* system() const               { return (System*)parent(); }
       QList<MStaff*>* staffList()          { return &staves;      }
+      MStaff* mstaff(int staffIdx)         { return staves[staffIdx]; }
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
       QList<Beam*>* beamList()             { return &_beamList;   }
       QList<Tuplet*>* tuplets()            { return &_tuplets;    }
@@ -204,6 +207,7 @@ class Measure : public MeasureBase {
       int findAccidental(Note*) const;
       int findAccidental2(Note*) const;
       void exchangeVoice(int, int, int, int);
+      void checkMultiVoices(int staffIdx);
       };
 
 #endif

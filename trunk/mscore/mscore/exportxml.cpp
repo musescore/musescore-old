@@ -1340,6 +1340,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
           // duration
             xml.tag("duration", note->chord()->tickLen());
 
+            if (note->tieBack())
+                  xml.tagE("tie type=\"stop\"");
+            if (note->tieFor())
+                  xml.tagE("tie type=\"start\"");
+
           // voice
             // for a single-staff part, staff is 0, which needs to be corrected
             // to calculate the correct voice number
@@ -1405,11 +1410,6 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   else
                         xml.tag("accidental", s);
                   }
-
-            if (note->tieBack())
-                  xml.tagE("tie type=\"stop\"");
-            if (note->tieFor())
-                  xml.tagE("tie type=\"start\"");
 
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)
