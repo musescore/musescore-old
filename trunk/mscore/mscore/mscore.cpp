@@ -1298,6 +1298,7 @@ void MuseScore::setCurrentScore(int idx)
       setWindowTitle("MuseScore: " + cs->name());
       canvas->setScore(cs, cs->layout());
       seq->setScore(cs);
+      seq->initInstruments();
       if (playPanel)
             playPanel->setScore(cs);
 

@@ -1,3 +1,6 @@
+13.10 (sy)
+      - fix wrong instrument sounds when inserting/clicking notes after adding
+        instruments with instruments dialog
 12.10 (ws)
       - updated russian translation from Alexandre Prokoudine
       (sy)
