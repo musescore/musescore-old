@@ -59,7 +59,6 @@ struct Preferences {
       QString soundFont;      // sound font used by synthesizer
       QString lPort;          // audio port left
       QString rPort;          // audio port right
-      Direction stemDir[VOICES];
       bool showNavigator;
       bool showPlayPanel;
       bool showStatusBar;

@@ -217,8 +217,8 @@ void Segment::add(Element* el)
             printf("element <%s> has invalid track\n", el->name());
             abort();
             }
-
       int staffIdx = track / VOICES;
+
       switch(el->type()) {
             case LYRICS:
                   {
@@ -251,6 +251,10 @@ void Segment::add(Element* el)
                   if (_elist[track])
                         printf("Segment::add() there is already an element at %d track %d\n",
                            tick(), track);
+                  if (track % VOICES) {
+printf("has voices\n");
+                        measure()->mstaff(staffIdx)->hasVoices = true;
+                        }
 
             default:
                   _elist[track] = el;
@@ -302,6 +306,7 @@ void Segment::remove(Element* el)
                   if (cr->tuplet())
                         cr->tuplet()->remove(cr);
                   _elist[track] = 0;
+                  measure()->checkMultiVoices(cr->staffIdx());
                   }
                   break;
 

@@ -33,6 +33,23 @@ EditStyle::EditStyle(QWidget* parent)
       lstyle = new Style;
       setModal(true);
       setupUi(this);
+
+      stemGroups[0] = new QButtonGroup(this);
+      stemGroups[0]->addButton(voice1Up);
+      stemGroups[0]->addButton(voice1Down);
+
+      stemGroups[1] = new QButtonGroup(this);
+      stemGroups[1]->addButton(voice2Up);
+      stemGroups[1]->addButton(voice2Down);
+
+      stemGroups[2] = new QButtonGroup(this);
+      stemGroups[2]->addButton(voice3Up);
+      stemGroups[2]->addButton(voice3Down);
+
+      stemGroups[3] = new QButtonGroup(this);
+      stemGroups[3]->addButton(voice4Up);
+      stemGroups[3]->addButton(voice4Down);
+
       pageList->setCurrentRow(0);
       connect(buttonOk, SIGNAL(clicked()), this, SLOT(ok()));
       connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
@@ -137,6 +154,11 @@ void EditStyle::getValues()
       lstyle->propertyDistanceHead   = Spatium(propertyDistanceHead->value());
       lstyle->propertyDistanceStem   = Spatium(propertyDistanceStem->value());
       lstyle->propertyDistance       = Spatium(propertyDistance->value());
+
+      lstyle->stemDir[0] = voice1Up->isChecked() ? UP : DOWN;
+      lstyle->stemDir[1] = voice2Up->isChecked() ? UP : DOWN;
+      lstyle->stemDir[2] = voice3Up->isChecked() ? UP : DOWN;
+      lstyle->stemDir[3] = voice4Up->isChecked() ? UP : DOWN;
       }
 
 //---------------------------------------------------------
@@ -217,5 +239,15 @@ void EditStyle::setValues()
       propertyDistanceHead->setValue(lstyle->propertyDistanceHead.val());
       propertyDistanceStem->setValue(lstyle->propertyDistanceStem.val());
       propertyDistance->setValue(lstyle->propertyDistance.val());
+
+      voice1Up->setChecked(lstyle->stemDir[0] == UP);
+      voice2Up->setChecked(lstyle->stemDir[1] == UP);
+      voice3Up->setChecked(lstyle->stemDir[2] == UP);
+      voice4Up->setChecked(lstyle->stemDir[3] == UP);
+
+      voice1Down->setChecked(lstyle->stemDir[0] != UP);
+      voice2Down->setChecked(lstyle->stemDir[1] != UP);
+      voice3Down->setChecked(lstyle->stemDir[2] != UP);
+      voice4Down->setChecked(lstyle->stemDir[3] != UP);
       }
 

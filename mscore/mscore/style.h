@@ -214,6 +214,8 @@ struct Style {
       bool createMultiMeasureRests;
       bool hideEmptyStaves;
 
+      Direction stemDir[VOICES];
+
       //---------------------------------------------------------
       //   PlayStyle
       //---------------------------------------------------------

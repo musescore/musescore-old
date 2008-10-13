@@ -234,6 +234,8 @@ Style defaultStyle = {
       false,            // create multi measure rests
       false,            // hide empty staves
 
+      { UP, DOWN, UP, DOWN }, // stem direction in multi voice context
+
       // play style
       70,               // gateTime
       100,              // tenutoGateTime
@@ -558,6 +560,11 @@ void Style::load(QDomElement e, int version)
                   staccatoGateTime = i;
             else if (tag == "slurGateTime")
                   slurGateTime = i;
+            else if (tag == "stemDir") {
+                  int voice = e.attribute("voice", "1").toInt() - 1;
+                  if (voice >= 0 && voice < VOICES)
+                        stemDir[voice] = val == "up" ? UP : DOWN;
+                  }
             else
                   domError(e);
             }
@@ -654,6 +661,15 @@ void Style::save(Xml& xml)
             xml.tag("createMultiMeasureRests", createMultiMeasureRests);
       if (hideEmptyStaves)
             xml.tag("hideEmptyStaves", hideEmptyStaves);
+
+      if (stemDir[0] != UP)
+            xml.tag("stemDir voice=\"1\"", "down");
+      if (stemDir[1] != UP)
+            xml.tag("stemDir voice=\"2\"", "up");
+      if (stemDir[2] != UP)
+            xml.tag("stemDir voice=\"3\"", "down");
+      if (stemDir[3] != UP)
+            xml.tag("stemDir voice=\"4\"", "up");
 
       xml.tag("gateTime",               gateTime);
       xml.tag("tenutoGateTime",         tenutoGateTime);
