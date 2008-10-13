@@ -398,8 +398,8 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             if (!ac)
                   continue;
             int line    = note->line();
-            if ((line - ll2) <= 4) {
-                  if (accCol == 0 || ((line - ll3) <= 4))
+            if (qAbs(line - ll2) <= 4) {
+                  if (accCol == 0 || (qAbs(line - ll3) <= 4))
                         ++accCol;
                   else
                         --accCol;
@@ -2934,7 +2934,6 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
 
 void Measure::checkMultiVoices(int staffIdx)
       {
-printf("checkMultiVoices\n");
       int strack = staffIdx * VOICES + 1;
       int etrack = staffIdx * VOICES + VOICES;
       staves[staffIdx]->hasVoices = false;
