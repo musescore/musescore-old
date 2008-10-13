@@ -650,6 +650,8 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
       // Experimental:
       //  shorten ledger line to avoid collisions with accidentals
       //
+
+      x -= len.point() * .5;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
             if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidental()) {
@@ -658,7 +660,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
                   }
             }
       h->setLen(len);
-      h->setPos(x + ho - len.point() * .5, _spatium * .5 * line * staffMag);
+      h->setPos(x + ho, _spatium * .5 * line * staffMag);
       _ledgerLines.push_back(h);
       }
 

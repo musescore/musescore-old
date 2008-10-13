@@ -251,10 +251,8 @@ void Segment::add(Element* el)
                   if (_elist[track])
                         printf("Segment::add() there is already an element at %d track %d\n",
                            tick(), track);
-                  if (track % VOICES) {
-printf("has voices\n");
+                  if (track % VOICES)
                         measure()->mstaff(staffIdx)->hasVoices = true;
-                        }
 
             default:
                   _elist[track] = el;
