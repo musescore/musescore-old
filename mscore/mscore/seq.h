@@ -110,8 +110,6 @@ class Seq : public QObject {
 
       QList<Event*> eventList;
 
-      void initInstruments();
-
       void collectEvents();
       void collectMeasureEvents(Measure*, int staffIdx);
 
@@ -178,6 +176,7 @@ class Seq : public QObject {
       void setController(int, int, int);
       void sendEvent(const MidiOutEvent&);
       void setScore(Score* s);
+      void initInstruments();
 
       const MidiPatch* getPatchInfo(int port, int ch, const MidiPatch* p);
       Driver* getDriver()  { return driver; }

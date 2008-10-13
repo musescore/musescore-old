@@ -104,7 +104,6 @@ void Seq::setScore(Score* s)
             }
       cs = s;
       playlistChanged = true;
-      initInstruments();
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       }
 

@@ -35,6 +35,7 @@
 #include "editinstrument.h"
 #include "drumset.h"
 #include "slur.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -619,6 +620,7 @@ void MuseScore::editInstrList()
       cs->setLayoutAll(true);
       cs->endCmd();
       cs->rebuildMidiMapping();
+      seq->initInstruments();
       }
 
 //---------------------------------------------------------
