@@ -37,6 +37,8 @@
 #include "stafftext.h"
 #include "repeat.h"
 #include "articulation.h"
+#include "arpeggio.h"
+#include "durationtype.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -149,7 +151,15 @@ void Score::collectChord(EventMap* events, Instrument* instr,
    int pitchOffset, Chord* chord, int tick, int len)
       {
       NoteList* nl = chord->noteList();
-      for (iNote in = nl->begin(); in != nl->end(); ++in) {
+      Arpeggio* arpeggio = chord->arpeggio();
+
+      int arpeggioOffset = 0;
+      static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
+      if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= len)
+            arpeggioOffset = arpeggioNoteDistance;
+
+      int i = 0;
+      for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
             Note* note = in->second;
             if (note->hidden())       // do not play overlapping notes
                   continue;
@@ -167,7 +177,7 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             ev->setNote(note);
             ev->setChannel(channel);
             ev->setPort(port);
-            events->insertMulti(tick, ev);
+            events->insertMulti(tick + i * arpeggioOffset, ev);
 
             ev = new NoteOn();
             ev->setPitch(pitch);
@@ -269,13 +279,22 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                               }
                         }
 
+                  int apl = 0;
+                  if (!lv.isEmpty()) {
+                        foreach(Chord* c, lv) {
+                              apl += c->tickLen();
+                              }
+                        // treat appogiatura as acciaccatura if it exceeds the note length
+                        if (apl >= len)
+                              sv = lv;
+                        }
                   if (!sv.isEmpty()) {
                         //
                         // move acciaccatura's in front of
                         // main note
                         //
                         int sl  = len / 4;
-                        int ssl = len / (2 * sv.size());
+                        int ssl = sl / sv.size();
                         foreach(Chord* c, sv) {
                               collectChord(events, instr,
                                  pitchOffset + ottavaShift,
@@ -300,10 +319,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                                  ssl * gateTime / 100 - 1
                                  );
                               sl += ssl;
-                              len -= ssl;
                               }
-                        if (len < 0)
-                              len = 1;
+                        len -= sl;
+                        tick += sl;
                         }
                   if (tiedNote)
                         len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
