@@ -344,8 +344,9 @@ void Score::clear()
       sigmap->clear();
       sigmap->add(0, 4, 4);
       tempomap->clear();
-      _layout->systems()->clear();
-      _layout->pages().clear();
+
+      _layout->clear();
+
       sel->clear();
       _showInvisible = true;
       }
@@ -1669,4 +1670,154 @@ int Score::midiChannel(int idx) const
       {
       return _midiMapping[idx].channel;
       }
+
+//---------------------------------------------------------
+//   searchPage
+//---------------------------------------------------------
+
+Page* Score::searchPage(const QPointF& p) const
+      {
+      const QList<Page*>& pages = layout()->pages();
+      for (int i = 0; i < pages.size(); ++i) {
+            if (pages[i]->contains(p))
+                  return pages[i];
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   getPosition
+//    return true if valid position found
+//---------------------------------------------------------
+
+bool Score::getPosition(Position* pos, const QPointF& p) const
+      {
+      const Page* page = searchPage(p);
+      if (page == 0)
+            return false;
+      //
+      //    search system
+      //
+      QPointF pp               = p - page->pos();  // transform to page relative
+      const QList<System*>* sl = page->systems();
+      int n                    = sl->size();
+      System* system           = 0;
+      double y2;
+      for (int i = 0; i < n; ++i) {
+            System* s = (*sl)[i];
+            if ((i+1) == n)
+                  y2 = page->height();
+            else  {
+                  System* ns = (*sl)[i+1];
+                  double sy2 = s->y() + s->bbox().height();
+                  y2         = sy2 + (ns->y() - sy2) * .5;
+                  }
+            if (pp.y() < y2) {
+                  system = s;
+                  break;
+                  }
+            }
+      if (system == 0) {
+            printf("no system\n");
+            return false;
+            }
+
+      //
+      //    search measure
+      //
+      QPointF ppp  = pp - system->pos();   // system relative
+      pos->measure = 0;
+      foreach(MeasureBase* mb, system->measures()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            if (ppp.x() < (mb->x() + mb->bbox().width())) {
+                  pos->measure = static_cast<Measure*>(mb);
+                  break;
+                  }
+            }
+      if (pos->measure == 0) {
+            printf("no measure\n");
+            return false;
+            }
+
+      //
+      //    search staff
+      //
+      double sy1         = 0;
+      pos->staffIdx      = 0;
+      SysStaff* sstaff   = 0;
+      for (; pos->staffIdx < nstaves(); ++pos->staffIdx) {
+            double sy2;
+            SysStaff* ss = system->staff(pos->staffIdx);
+            if ((pos->staffIdx+1) != nstaves()) {
+                  SysStaff* nstaff = system->staff(pos->staffIdx+1);
+                  double s1y2 = ss->bbox().y() + ss->bbox().height();
+                  sy2         = s1y2 + (nstaff->bbox().y() - s1y2) * .5;
+                  }
+            else
+                  sy2 = y2 - system->pos().y();   // system->height();
+            if (ppp.y() < sy2) {
+                  sstaff = ss;
+                  break;
+                  }
+            sy1 = sy2;
+            }
+      if (sstaff == 0) {
+            printf("no sys staff\n");
+            return false;
+            }
+
+      //
+      //    search segment
+      //
+      QPointF pppp     = ppp - pos->measure->pos();
+      double x         = pppp.x();
+      Segment* segment = 0;
+      for (segment = pos->measure->first(); segment;) {
+            while (segment && segment->subtype() != Segment::SegChordRest)
+                  segment = segment->next();
+            if (segment == 0)
+                  break;
+            Segment* ns = segment->next();
+            while (ns && ns->subtype() != Segment::SegChordRest)
+                  ns = ns->next();
+            double x1 = segment->x();
+            double x2;
+            int ntick;
+            if (ns) {
+                  x2    = ns->x();
+                  ntick = ns->tick();
+                  }
+            else {
+                  x2    = pos->measure->bbox().width();
+                  ntick = pos->measure->tick() + pos->measure->tickLen();
+                  }
+            double d  = x2 - x1;
+            if (x < (x1 + d * .3)) {
+                  x = x1;
+                  pos->tick = segment->tick();
+                  break;
+                  }
+            if (x < (x1 + d)) {
+                  x = x1 + d * .5;
+                  pos->tick = segment->tick() + (ntick - segment->tick()) / 2;
+                  break;
+                  }
+            segment = ns;
+            }
+
+      if (segment == 0) {
+            printf("no segment+\n");
+            return false;
+            }
+      //
+      // TODO: restrict to reasonable values (pitch 0-127)
+      //
+      pos->line = lrint((pppp.y() - sstaff->bbox().y()) / _spatium * 2.0);
+      double y  = pos->measure->canvasPos().y() + sstaff->y();
+      y += pos->line * _spatium * .5;
+      pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
+      return true;
+      }
+
 

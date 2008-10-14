@@ -615,6 +615,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 
 void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Direction stemDirection)
       {
+// printf("setNote at %d len %d track %d\n", tick, len, track);
       Tie* tie   = 0;
       Note* note = 0;
 
@@ -708,7 +709,6 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
 int Score::makeGap(int tick, int track, int len)
       {
       Measure* measure = tick2measure(tick);
-//      int voice = track % VOICES;
       if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
             //
             // we are at the end of the score:
@@ -745,19 +745,57 @@ int Score::makeGap(int tick, int track, int len)
             setLayoutAll(true);
             }
       setLayout(measure);
-      Segment* segment = measure->first();
-      for (; segment; segment = segment->next()) {
-            if (segment->subtype() != Segment::SegChordRest)
+
+
+      Segment* startSegment = 0;    // if present must be shortened
+      Segment* segment      = 0;    // segment must be shortened or removed
+
+      for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+            if (seg->subtype() != Segment::SegChordRest)
                   continue;
-            if (segment->tick() >= tick)
-                  break;
+            if (seg->element(track)) {
+                  if (seg->tick() < tick)
+                        startSegment = seg;
+                  else if (seg->tick() >= tick) {
+                        segment = seg;
+                        break;
+                        }
+                  }
             }
-      int gapLen;
-      if (segment == 0) {
-            gapLen = (measure->tick() + measure->tickLen()) - tick;
+      if ((segment == 0) && (startSegment == 0)) {
+            //
+            // if voice > 0 there may be no ChordRest
+            //
+            int gapLen = (measure->tick() + measure->tickLen()) - tick;
             return gapLen > len ? len : gapLen;
             }
-      gapLen = segment->tick() - tick;
+
+      int gapLen = 0;
+      if (startSegment) {
+            ChordRest* cr = static_cast<ChordRest*>(startSegment->element(track));
+            int len = cr->tickLen();
+            if (len == 0)
+                  len = measure->tickLen();
+            if ((cr->tick() + len) > tick) {
+                  int restLen = tick - cr->tick();
+                  //
+                  // clone chord rest
+                  //
+                  ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
+                  newcr->setTrack(track);
+                  newcr->setLen(restLen);
+                  newcr->setTick(cr->tick());
+                  newcr->setParent(cr->parent());
+                  undoRemoveElement(cr);
+                  undoAddElement(newcr);
+                  gapLen = cr->tick() + len - tick;
+                  }
+            }
+      else
+            gapLen = segment->tick() - tick;
+      if (gapLen >= len)
+            return len;
+
       while (segment) {
             if (segment->subtype() != Segment::SegChordRest) {
                   segment = segment->next();
@@ -768,15 +806,6 @@ int Score::makeGap(int tick, int track, int len)
                   segment = segment->next();
                   continue;
                   }
-#if 0
-            if (element == 0) {
-                  if (voice == 0) {
-                        segment = segment->next();
-                        continue;
-                        }
-                  return len;
-                  }
-#endif
             ChordRest* cr1 = static_cast<ChordRest*>(element);
             int l = cr1->tickLen();
             if (l == 0 && element->type() == REST)    // whole measure rest?
@@ -820,7 +849,6 @@ int Score::makeGap(int tick, int track, int len)
             }
       if (segment == 0)
             gapLen = (measure->tick() + measure->tickLen()) - tick;
-printf("return gapLen %d len %d\n", gapLen, len);
 
       if (gapLen == 0)
             abort();

@@ -1,3 +1,6 @@
+14.10 (ws)
+      - Extended note entry with mouse: more time positions are now allowed for
+        note positioning. Some regressions are expected, especially with tuplets.
 13.10 (ws)
       - added a flag to MStaff to indicate a measure/staff has more than one voice. In this
         "multi voice context" stem direction is taken from the "stem direction" table

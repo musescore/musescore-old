@@ -80,9 +80,10 @@ class ScoreLayout : public Element {
       void setSpatium(double v)               { _spatium = v; }
       PageFormat* pageFormat() const          { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
-      QList<Page*> pages() const              { return _pages; }
+      const QList<Page*>& pages() const       { return _pages; }
       QList<System*>* systems()               { return &_systems; }
       bool needLayout() const                 { return _needLayout; }
+      void clear();
 
       MeasureBase* first() const;
       MeasureBase* last()  const;

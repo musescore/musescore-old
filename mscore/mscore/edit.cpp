@@ -373,12 +373,15 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
-      int tick, line = -1;
-      int staffIdx = -1;
-      Segment* segment;
-      Measure* m = pos2measure2(pos, &tick, &staffIdx, &line, &segment);
-      if (m == 0)
+      Position p;
+      if (!getPosition(&p, pos)) {
+            printf("cannot put note here, get position failed\n");
             return;
+            }
+
+      int tick     = p.tick;
+      int staffIdx = p.staffIdx;
+      int line     = p.line;
 
       Staff* st = staff(staffIdx);
       int key   = st->keymap()->key(tick);
@@ -395,7 +398,6 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (instr->useDrumset) {
             Drumset* ds   = instr->drumset;
             pitch         = _padState.drumNote;
-printf("pitch %d\n", pitch);
             if (pitch < 0)
                   return;
             voice         = ds->voice(pitch);
@@ -403,7 +405,10 @@ printf("pitch %d\n", pitch);
             stemDirection = ds->stemDirection(pitch);
             }
 
-      ChordRest* cr = (ChordRest*)segment->element(track);
+      Segment* segment = p.measure->tick2segment(tick);
+      ChordRest* cr    = 0;
+      if (segment)
+            cr = (ChordRest*)segment->element(track);
 
       bool addToChord = false;
       if (!replace && cr && (cr->tickLen() == len) && (cr->type() == CHORD) && !_padState.rest) {
