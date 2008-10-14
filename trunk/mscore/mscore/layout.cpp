@@ -1130,3 +1130,14 @@ bool ScoreLayout::doReLayout()
 #endif
       return true;
       }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void ScoreLayout::clear()
+      {
+      _pages.clear();
+      _systems.clear();
+      }
+

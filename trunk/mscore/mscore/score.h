@@ -129,6 +129,18 @@ struct MidiInputEvent {
       };
 
 //---------------------------------------------------------
+//   Position
+//---------------------------------------------------------
+
+struct Position {
+      Measure* measure;
+      int tick;
+      int staffIdx;
+      int line;
+      QPointF pos;
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -629,6 +641,9 @@ class Score : public QObject {
 
       void lassoSelect(const QRectF&);
       void lassoSelectEnd(const QRectF&);
+
+      Page* searchPage(const QPointF&) const;
+      bool getPosition(Position* pos, const QPointF&) const;
       };
 
 extern Score* gscore;
