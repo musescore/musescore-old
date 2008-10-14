@@ -1,6 +1,10 @@
 14.10 (ws)
       - Extended note entry with mouse: more time positions are now allowed for
         note positioning. Some regressions are expected, especially with tuplets.
+      (sy)
+      - fix bug: acciaccaturas play the main note simultaneously with the grace notes 
+      - made appogiaturas longer than main note play back as acciaccaturas
+      - midi realization of arpeggios (no down arpeggio yet)
 13.10 (ws)
       - added a flag to MStaff to indicate a measure/staff has more than one voice. In this
         "multi voice context" stem direction is taken from the "stem direction" table
