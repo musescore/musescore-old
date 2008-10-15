@@ -62,7 +62,15 @@ bool ISynth::init(int sampleRate)
             //
             p = ":/data/piano1.sf2";
             }
-      return loadSoundFont(p);
+      bool rv = loadSoundFont(p);
+      if (!rv) {
+            QString s = QString("Loading Soundfont\n"
+                                "\"%1\"\n"
+                                "failed.\n"
+                                "Sequencer will be disabled.").arg(p);
+            QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
+            }
+      return rv;
       }
 
 //---------------------------------------------------------
@@ -80,7 +88,7 @@ bool ISynth::loadSoundFont(const QString& sfont)
       fontId = fluid_synth_sfload(_fluidsynth, sfont, true);
 #endif
       if (fontId == -1) {
-            fprintf(stderr, "ISynth: %s", fluid_synth_error(_fluidsynth));
+            fprintf(stderr, "ISynth: %s\n", fluid_synth_error(_fluidsynth));
             return false;
             }
       fluid_synth_set_gain(_fluidsynth, 0.2);

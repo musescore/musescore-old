@@ -228,8 +228,10 @@ void MuseScore::preferencesChanged()
                   printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
             canvas->setForeground(pm);
             }
-      transportId->setChecked(seq->isRunning());
-      transportTools->setShown(seq->isRunning());
+
+      transportTools->setEnabled(!noSeq);
+      playId->setEnabled(!noSeq);
+
       getAction("midi-on")->setEnabled(preferences.enableMidiInput);
       _statusBar->setShown(preferences.showStatusBar);
       }
@@ -708,6 +710,7 @@ MuseScore::MuseScore()
 
       transportId = getAction("toggle-transport");
       transportId->setCheckable(true);
+      transportId->setChecked(true);
       menuDisplay->addAction(transportId);
       connect(transportId, SIGNAL(toggled(bool)), transportTools, SLOT(setVisible(bool)));
 
@@ -721,12 +724,6 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       a->setChecked(preferences.showStatusBar);
       menuDisplay->addAction(a);
-
-      // if we have no sequencer, disable transport and play panel
-      if (!seq->isRunning()) {
-            transportId->setEnabled(false);
-            playId->setEnabled(false);
-            }
 
       menuDisplay->addSeparator();
       visibleId = menuDisplay->addAction(tr("Show Invisible"), this, SLOT(showInvisibleClicked()));

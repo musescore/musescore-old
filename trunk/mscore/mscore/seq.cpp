@@ -187,7 +187,12 @@ bool Seq::init()
             }
 #endif
       if (driver == 0) {
-            printf("no audio driver\n");
+#if 0
+            QString s = QString("Init audio driver failed.\n"
+                                "Sequencer will be disabled.");
+            QMessageBox::critical(0, "MuseScore: Init Audio Driver", s);
+#endif
+            printf("init audio driver failed\n");
             return false;
             }
       if (!driver->start()) {
