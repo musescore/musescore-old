@@ -2147,6 +2147,7 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
 
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
+                  Segment::SegmentType st = Segment::SegChordRest;
                   cr = new Chord(score);
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
@@ -2158,7 +2159,8 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                               nt = NOTE_ACCIACCATURA;
                         ((Chord*)cr)->setNoteType(nt);
                         cr->setTick(tick - (division / 2));
-                        cr->setTickLen(division / 2); // to get a hook
+                        cr->setLen(division / 2); // to get a hook
+                        st = Segment::SegGrace;
                         }
                   else {
                         cr->setTickLen(ticks);
@@ -2166,7 +2168,7 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                               durationType.setType(Duration::V_QUARTER);
                         cr->setDuration(durationType);
                         }
-                  Segment* s = measure->getSegment(cr);
+                  Segment* s = measure->getSegment(st, cr->tick());
                   s->add(cr);
                   }
 
