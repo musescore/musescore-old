@@ -23,7 +23,7 @@
 
 #include "globals.h"
 #include "symbol.h"
-#include "durationtype.h"
+#include "duration.h"
 
 class Score;
 class ScoreLayout;
@@ -39,16 +39,14 @@ class Articulation;
 //    chords and rests can be part of a beam
 //---------------------------------------------------------
 
-class ChordRest : public Element {
+class ChordRest : public DurationElement {
       QList<Slur*> _slurFor;
       QList<Slur*> _slurBack;
-      Duration _duration;
 
    protected:
       QList<Articulation*> articulations;
       Beam* _beam;
       BeamMode _beamMode;
-      Tuplet* _tuplet;
       bool _up;
       bool _small;
 
@@ -73,10 +71,8 @@ class ChordRest : public Element {
       void setBeamMode(BeamMode m)              { _beamMode = m; }
       BeamMode beamMode() const                 { return _beamMode; }
       void setBeam(Beam* b)                     { _beam = b; }
-      Beam* beam() const                        { return _beam; }
-      void setTuplet(Tuplet* t)                 { _tuplet = t; }
-      Tuplet* tuplet() const                    { return _tuplet; }
-      int beams() const                         { return _duration.hooks(); }
+      virtual Beam* beam() const                { return _beam; }
+      int beams() const                         { return duration().hooks(); }
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
@@ -102,9 +98,6 @@ class ChordRest : public Element {
       void removeSlurBack(Slur*);
       const QList<Slur*> slurFor() const        { return _slurFor; }
       const QList<Slur*> slurBack() const       { return _slurBack; }
-
-      Duration duration() const                 { return _duration; }
-      virtual void setDuration(Duration t)      { _duration = t; }
 
       void setDots(int n)                       { _dots = n; }
       int dots() const                          { return _dots; }

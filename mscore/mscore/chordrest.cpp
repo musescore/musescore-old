@@ -36,6 +36,27 @@
 #include "barline.h"
 #include "articulation.h"
 
+
+//---------------------------------------------------------
+//   DurationElement
+//---------------------------------------------------------
+
+DurationElement::DurationElement(Score* s)
+   : Element(s)
+      {
+      _tuplet = 0;
+      }
+
+//---------------------------------------------------------
+//   DurationElement
+//---------------------------------------------------------
+
+DurationElement::DurationElement(const DurationElement& e)
+   : Element(e)
+      {
+      _duration = e._duration;
+      }
+
 //---------------------------------------------------------
 //   hasArticulation
 //---------------------------------------------------------
@@ -55,10 +76,9 @@ Articulation* ChordRest::hasArticulation(const Articulation* a)
 //---------------------------------------------------------
 
 ChordRest::ChordRest(Score* s)
-   : Element(s)
+   : DurationElement(s)
       {
       _beam     = 0;
-      _tuplet   = 0;
       _small    = false;
       _beamMode = BEAM_AUTO;
       _dots     = 0;
@@ -66,15 +86,13 @@ ChordRest::ChordRest(Score* s)
       }
 
 ChordRest::ChordRest(const ChordRest& cr)
-   : Element(cr)
+   : DurationElement(cr)
       {
       _beam     = 0;
-      _tuplet   = 0;
       _up       = cr._up;
       _small    = cr._small;
       _beamMode = cr._beamMode;
       _dots     = cr._dots;
-      _duration = cr._duration;
 
       foreach(Articulation* a, cr.articulations) {            // make deep copy
             Articulation* na = new Articulation(*a);
@@ -137,8 +155,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
                   }
             pl.append(Prop("BeamMode", s));
             }
-      if (_tuplet) {
-            int idx = measure()->tuplets()->indexOf(_tuplet);
+      if (tuplet()) {
+            int idx = measure()->tuplets()->indexOf(tuplet());
             if (idx == -1)
                   printf("ChordRest::writeProperties(): tuplet not found\n");
             else
@@ -149,8 +167,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
       if (!clipboardmode) {
             Duration d;
             d.setVal(tickLen());
-            if (_duration != d)
-                  pl.append(Prop("durationType", _duration.name()));
+            if (duration() != d)
+                  pl.append(Prop("durationType", duration().name()));
             }
       return pl;
       }
@@ -214,14 +232,14 @@ bool ChordRest::readProperties(QDomElement e)
             // to measure; after inserting Chord or Rest into Measure
             // parent is Segment
             Measure* m = (Measure*)parent();
-            _tuplet = 0;
+            setTuplet(0);
             foreach(Tuplet* t, *m->tuplets()) {
                   if (t->id() == i) {
-                        _tuplet = t;
+                        setTuplet(t);
                         break;
                         }
                   }
-            if (_tuplet == 0)
+            if (tuplet() == 0)
                   printf("Tuplet id %d not found\n", i);
             else
                   setTickLen(tickLen());  // set right symbol + dots

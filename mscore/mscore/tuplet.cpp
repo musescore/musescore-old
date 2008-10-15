@@ -35,7 +35,7 @@
 //---------------------------------------------------------
 
 Tuplet::Tuplet(Score* s)
-  : Element(s)
+  : DurationElement(s)
       {
       _numberType  = SHOW_NUMBER;
       _bracketType = AUTO_BRACKET;
@@ -44,7 +44,7 @@ Tuplet::Tuplet(Score* s)
       }
 
 //---------------------------------------------------------
-//   Tuplet
+//   ~Tuplet
 //---------------------------------------------------------
 
 Tuplet::~Tuplet()
@@ -52,10 +52,8 @@ Tuplet::~Tuplet()
       //
       // delete all references
       //
-      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
-            ChordRest* cr = i->second;
-            cr->setTuplet(0);
-            }
+      foreach(DurationElement* e, _elements)
+            e->setTuplet(0);
       }
 
 //---------------------------------------------------------
@@ -105,14 +103,16 @@ void Tuplet::layout(ScoreLayout* layout)
       // find out main direction
       //
       int up = 1;
-      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
-            ChordRest* cr = i->second;
-            if (cr->type() == CHORD) {
-                  Chord* c = (Chord*) cr;
+      foreach(const DurationElement* e, _elements) {
+            if (e->type() == CHORD) {
+                  const Chord* c = static_cast<const Chord*>(e);
                   if (c->stemDirection() != AUTO)
                         up += c->stemDirection() == UP ? 1000 : -1000;
                   else
                         up += c->up() ? 1 : -1;
+                  }
+            else if (e->type() == TUPLET) {
+                  // TODO
                   }
             }
       bool isUp = up > 0;
@@ -120,11 +120,13 @@ void Tuplet::layout(ScoreLayout* layout)
       //
       // set all elements to main direction
       //
-      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i)
-            i->second->setUp(up);
+      foreach(DurationElement* e, _elements) {
+            if (e->type() == CHORD || e->type() == REST)
+                  static_cast<ChordRest*>(e)->setUp(up);
+            }
 
-      const ChordRest* cr1 = _elements.front();
-      const ChordRest* cr2 = _elements.back();
+      const DurationElement* cr1 = _elements.front();
+      const DurationElement* cr2 = _elements.back();
       if (cr1->beam()) {
             if (_bracketType == AUTO_BRACKET)
                   _hasBracket = false;
@@ -138,7 +140,7 @@ void Tuplet::layout(ScoreLayout* layout)
       QPointF p1, p2;
       if (isUp) {
             if (cr1->type() == CHORD) {
-                  Chord* chord1 = (Chord*)cr1;
+                  const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
                   if (stem)
                         p1 = QPointF(stem->abbox().topLeft());
@@ -151,7 +153,7 @@ void Tuplet::layout(ScoreLayout* layout)
                   }
 
             if (cr2->type() == CHORD) {
-                  Chord* chord2 = (Chord*)cr2;
+                  const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem    = chord2->stem();
                   p2            = QPointF(stem->abbox().topLeft());
                   }
@@ -165,7 +167,7 @@ void Tuplet::layout(ScoreLayout* layout)
             }
       else {
             if (cr1->type() == CHORD) {
-                  Chord* chord1 = (Chord*)cr1;
+                  const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
                   QPointF p(stem->abbox().bottomLeft());
                   p1 = p;
@@ -176,7 +178,7 @@ void Tuplet::layout(ScoreLayout* layout)
                   }
 
             if (cr2->type() == CHORD) {
-                  Chord* chord2 = (Chord*)cr2;
+                  const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem = chord2->stem();
                   QPointF p(stem->abbox().bottomLeft());
                   p2 = p;
@@ -372,8 +374,8 @@ void Tuplet::read(QDomElement e)
 void Tuplet::add(Element* e)
       {
 #if 1
-      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
-            if (i->second == e) {
+      foreach(DurationElement* el, _elements) {
+            if (el == e) {
                   printf("Tuplet::add: already there\n");
 //                  abort();
                   }
@@ -381,11 +383,12 @@ void Tuplet::add(Element* e)
 #endif
       switch(e->type()) {
             case TEXT:
-                  _number = (Text*)e;
+                  _number = static_cast<Text*>(e);
                   break;
             case CHORD:
             case REST:
-                  _elements.add((ChordRest*)e);
+            case TUPLET:
+                  _elements.append(static_cast<DurationElement*>(e));
                   break;
             default:
                   printf("Tuplet::add() unknown element\n");
@@ -406,16 +409,12 @@ void Tuplet::remove(Element* e)
                   break;
             case CHORD:
             case REST:
-                  for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
-                        if (i->second == e) {
-                              _elements.erase(i);
-                              return;
-                              }
-                        }
-                  printf("Tuplet()::remove: element %p at %d not found\n", e, e->tick());
+            case TUPLET:
+                  if (!_elements.removeOne(static_cast<DurationElement*>(e)))
+                        printf("Tuplet::remove: cannot find element\n");
                   break;
             default:
-                  printf("Tuplet::remove() unknown element\n");
+                  printf("Tuplet::remove: unknown element\n");
                   break;
             }
       }

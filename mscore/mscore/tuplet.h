@@ -21,8 +21,7 @@
 #ifndef __TUPLET_H__
 #define __TUPLET_H__
 
-#include "chordlist.h"
-#include "element.h"
+#include "duration.h"
 #include "ui_tupletdialog.h"
 #include "ui_tupletproperties.h"
 
@@ -39,7 +38,7 @@ class Text;
 //    a tuplet note has len of _baseLen * _normalNotes / _actualNotes
 //------------------------------------------------------------------------
 
-class Tuplet : public Element {
+class Tuplet : public DurationElement {
    public:
       enum { SHOW_NUMBER, SHOW_RELATION, NO_TEXT };
       enum { AUTO_BRACKET, SHOW_BRACKET, SHOW_NO_BRACKET };
@@ -47,7 +46,7 @@ class Tuplet : public Element {
    private:
       Q_DECLARE_TR_FUNCTIONS(Tuplet)
 
-      ChordRestList _elements;
+      QList<DurationElement*> _elements;
       int _numberType;
       int _bracketType;
       bool _hasBracket;
@@ -69,10 +68,10 @@ class Tuplet : public Element {
    public:
       Tuplet(Score*);
       ~Tuplet();
-      virtual Tuplet* clone() const { return new Tuplet(*this); }
+      virtual Tuplet* clone() const    { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
       virtual QRectF bbox() const;
-      virtual bool isMovable() const { return true; }
+      virtual bool isMovable() const   { return true; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -93,7 +92,7 @@ class Tuplet : public Element {
       int actualNotes() const       { return _actualNotes;  }
       int normalLen() const         { return _baseLen / _normalNotes; }
       int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
-      ChordRestList* elements()     { return &_elements; }
+      QList<DurationElement*>* elements()   { return &_elements; }
 
       virtual void layout(ScoreLayout*);
       Text* number() const { return _number; }

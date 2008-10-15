@@ -1238,15 +1238,13 @@ void TupletView::setElement(Element* e)
       tb.normalNotes->setValue(tuplet->normalNotes());
       tb.actualNotes->setValue(tuplet->actualNotes());
       tb.number->setEnabled(tuplet->number());
-      ChordRestList* el = tuplet->elements();
       tb.elements->clear();
-      for (iChordRest i = el->begin(); i != el->end(); ++i) {
+      foreach(DurationElement* e, *tuplet->elements()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
-            ChordRest* cr = i->second;
-            item->setText(0, cr->name());
-            item->setText(1, QString("%1").arg(cr->tick()));
-            item->setText(2, QString("%1").arg(cr->tickLen()));
-            void* p = (void*) cr;
+            item->setText(0, e->name());
+            item->setText(1, QString("%1").arg(e->tick()));
+            item->setText(2, QString("%1").arg(e->tickLen()));
+            void* p = (void*) e;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             tb.elements->addTopLevelItem(item);
             }
