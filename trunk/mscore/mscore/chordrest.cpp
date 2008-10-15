@@ -55,6 +55,7 @@ DurationElement::DurationElement(const DurationElement& e)
    : Element(e)
       {
       _duration = e._duration;
+      _tuplet   = e._tuplet;
       }
 
 //---------------------------------------------------------

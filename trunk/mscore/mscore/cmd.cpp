@@ -1010,7 +1010,10 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       if (useDots) {
             rest = new Rest(this);
             rest->setTick(tick);
-            rest->setLen(len);      // set duration type & dots
+            if (measure->tickLen() == len)
+                  rest->setLen(0);
+            else
+                  rest->setLen(len);      // set duration type & dots
             rest->setTrack(track);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);

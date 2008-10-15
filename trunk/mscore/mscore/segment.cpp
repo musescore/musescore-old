@@ -242,7 +242,7 @@ void Segment::add(Element* el)
             case CHORD:
             case REST:
                   {
-                  ChordRest* cr = (ChordRest*)el;
+                  ChordRest* cr = static_cast<ChordRest*>(el);
                   if (cr->tuplet()) {
                         cr->tuplet()->add(cr);
                         cr->tuplet()->setTrack(track);      // debug

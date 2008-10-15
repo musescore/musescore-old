@@ -520,7 +520,7 @@ MuseScore::MuseScore()
       //    Menu File
       //---------------------
 
-      QMenu* menuFile = mb->addMenu(tr("&Score"));
+      QMenu* menuFile = mb->addMenu(tr("&File"));
       menuFile->setObjectName("Score");
 
       menuFile->addAction(getAction("file-new"));
