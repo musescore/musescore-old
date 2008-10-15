@@ -115,6 +115,8 @@ void Score::changeRest(Rest* rest, int /*tick*/, int len)
 Rest* Score::addRest(int tick, int len, int track)
       {
       Measure* measure = tick2measure(tick);
+      if (measure->tickLen() == len)      // whole measure rest?
+            len = 0;
       Rest* rest = new Rest(this, tick, len);
       rest->setTrack(track);
       Segment::SegmentType st = Segment::segmentType(rest->type());
@@ -1033,73 +1035,35 @@ void Score::cmdDeleteSelection()
                   }
             }
       else if (sel->state() == SEL_STAFF) {
-            //
-            // see also measure->drop() REPEAT_MEASURE
-            //
-            int sstaff = sel->staffStart;
-            int estaff = sel->staffEnd;
-            select(0, SELECT_SINGLE, 0);
-            Measure* is = sel->startSegment()->measure();
-            Measure* ie = sel->endSegment() ? sel->endSegment()->measure() : 0;
-            if (is == ie)
-                  ie = 0;
-            for (MeasureBase* mb = is; mb && mb != ie; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
+            Segment* s1 = sel->startSegment();
+            Segment* s2 = sel->endSegment();
+            int track1  = sel->staffStart * VOICES;
+            int track2  = sel->staffEnd * VOICES;
+            for (Segment* s = s1; s != s2; s = s->next1()) {
+                  if (s->subtype() != Segment::SegChordRest)
                         continue;
-                  Measure* m = static_cast<Measure*>(mb);
-
-                  for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx) {
-                        bool rmFlag = false;
-                        for (Segment* s = m->first(); s; s = s->next()) {
-                              if (s->subtype() == Segment::SegEndBarLine
-                                 || s->subtype() == Segment::SegTimeSigAnnounce
-                                 || s->subtype() == Segment::SegStartRepeatBarLine)
-                                    continue;
-                              if (s->subtype() == Segment::SegChordRest)
-                                    rmFlag = true;
-                              if (rmFlag) {
-                                    int strack = staffIdx * VOICES;
-                                    int etrack = strack + VOICES;
-                                    for (int track = strack; track < etrack; ++track) {
-                                          Element* el = s->element(track);
-                                          if (el)
-                                                undoRemoveElement(el);
-                                          }
-                                    }
-                              if (s->isEmpty()) {
-                                    undoRemoveElement(s);
-                                    }
-                              }
-                        //
-                        // remove tuplets
-                        //
-                        foreach(Tuplet* t, *m->tuplets())
-                              undoRemoveElement(t);
-
-                        //
-                        // add whole measure rest
-                        //
-
-                        Segment* seg  = m->findSegment(Segment::SegChordRest, m->tick());
-                        if (seg == 0) {
-                              seg = m->createSegment(Segment::SegChordRest, m->tick());
-                              undoAddElement(seg);
-                              }
-                        Rest* rest = new Rest(this, m->tick(), 0);
-                        rest->setTrack(staffIdx * VOICES);
-                        rest->setParent(seg);
-                        undoAddElement(rest);
-                        foreach(Element* el, *m->el()) {
-                              if (el->type() == SLUR && el->staffIdx() == staffIdx)
-                                    undoRemoveElement(el);
-                              }
+                  for (int track = track1; track < track2; ++track) {
+                        if (track % VOICES == 0)
+                              continue;
+                        if (s->element(track))
+                              undoRemoveElement(s->element(track));
                         }
+                  }
 
+            for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
+                  int tick   = s1->tick();
+                  int gapLen = s2->tick() - tick;
+
+                  while (gapLen) {
+                        Measure* m = tick2measure(tick);
+                        int maxGap = m->tick() + m->tickLen() - tick;
+                        int len = gapLen > maxGap ? maxGap : gapLen;
+                        setRest(tick, staffIdx * VOICES, len, false);
+                        gapLen -= len;
+                        tick   += len;
+                        }
                   }
-            for (MeasureBase* m = is; m && m != ie; m = m->next()) {
-                  for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx)
-                        select(m, SELECT_ADD, staffIdx);
-                  }
+
             layoutAll = true;
             return;
             }
