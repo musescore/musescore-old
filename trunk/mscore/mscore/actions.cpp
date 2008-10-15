@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -224,7 +224,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval1",
          QT_TR_NOOP("enter unison above"),
-         Qt::Key_1,
+         Qt::ALT + Qt::Key_1,
          Qt::WindowShortcut,
          QT_TR_NOOP("Unison above"),
          QT_TR_NOOP("Enter Unison above")
@@ -233,7 +233,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval2",
          QT_TR_NOOP("enter second above"),
-         Qt::Key_2,
+         Qt::ALT + Qt::Key_2,
          Qt::WindowShortcut,
          QT_TR_NOOP("Second above"),
          QT_TR_NOOP("Enter Second above")
@@ -242,7 +242,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval3",
          QT_TR_NOOP("enter third above"),
-         Qt::Key_3,
+         Qt::ALT + Qt::Key_3,
          Qt::WindowShortcut,
          QT_TR_NOOP("Third above"),
          QT_TR_NOOP("Enter Third above")
@@ -251,7 +251,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval4",
          QT_TR_NOOP("enter fourth above"),
-         Qt::Key_4,
+         Qt::ALT + Qt::Key_4,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fourth above"),
          QT_TR_NOOP("Enter Fourth above")
@@ -260,7 +260,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval5",
          QT_TR_NOOP("enter fifth above"),
-         Qt::Key_5,
+         Qt::ALT + Qt::Key_5,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fifth above"),
          QT_TR_NOOP("Enter Fifth above")
@@ -269,7 +269,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval6",
          QT_TR_NOOP("enter sixth above"),
-         Qt::Key_6,
+         Qt::ALT + Qt::Key_6,
          Qt::WindowShortcut,
          QT_TR_NOOP("Sixth above"),
          QT_TR_NOOP("Enter Sixth above")
@@ -278,7 +278,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval7",
          QT_TR_NOOP("enter seventh above"),
-         Qt::Key_7,
+         Qt::ALT + Qt::Key_7,
          Qt::WindowShortcut,
          QT_TR_NOOP("Seventh above"),
          QT_TR_NOOP("Enter Seventh above")
@@ -287,7 +287,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval8",
          QT_TR_NOOP("enter octave above"),
-         Qt::Key_8,
+         Qt::ALT + Qt::Key_8,
          Qt::WindowShortcut,
          QT_TR_NOOP("Octave above"),
          QT_TR_NOOP("Enter Octave above")
@@ -296,7 +296,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "interval9",
          QT_TR_NOOP("enter ninth above"),
-         Qt::Key_9,
+         Qt::ALT + Qt::Key_9,
          Qt::WindowShortcut,
          QT_TR_NOOP("Ninth above"),
          QT_TR_NOOP("Enter Ninth above")
@@ -939,7 +939,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-1",
          QT_TR_NOOP("pad note 1/1"),
-         Qt::ALT + Qt::Key_6,
+         Qt::Key_7,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/1"),
          QT_TR_NOOP("1/1"),
@@ -949,7 +949,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-2",
          QT_TR_NOOP("pad note 1/2"),
-         Qt::ALT + Qt::Key_7,
+         Qt::Key_6,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/2"),
          QT_TR_NOOP("1/2"),
@@ -959,7 +959,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-4",
          QT_TR_NOOP("pad note 1/4"),
-         Qt::ALT + Qt::Key_1,
+         Qt::Key_5,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/4"),
          QT_TR_NOOP("1/4"),
@@ -969,7 +969,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-8",
          QT_TR_NOOP("pad note 1/8"),
-         Qt::ALT + Qt::Key_2,
+         Qt::Key_4,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/8"),
          QT_TR_NOOP("1/8"),
@@ -979,7 +979,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-16",
          QT_TR_NOOP("pad note 1/16"),
-         Qt::ALT + Qt::Key_3,
+         Qt::Key_3,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/16"),
          QT_TR_NOOP("1/16"),
@@ -989,7 +989,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-32",
          QT_TR_NOOP("pad note 1/32"),
-         Qt::ALT + Qt::Key_4,
+         Qt::Key_2,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/32"),
          QT_TR_NOOP("1/32"),
@@ -999,7 +999,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-64",
          QT_TR_NOOP("pad note 1/64"),
-         Qt::ALT + Qt::Key_5,
+         Qt::Key_1,
          Qt::WindowShortcut,
          QT_TR_NOOP("1/64"),
          QT_TR_NOOP("1/64"),

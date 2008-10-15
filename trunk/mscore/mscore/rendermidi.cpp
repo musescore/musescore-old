@@ -155,7 +155,7 @@ void Score::collectChord(EventMap* events, Instrument* instr,
 
       int arpeggioOffset = 0;
       static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-      if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= len)
+      if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= unsigned(len))
             arpeggioOffset = arpeggioNoteDistance;
 
       int i = 0;
@@ -202,7 +202,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
-      
+
       // for the purpose of knowing whether to find the playPos after repeats
       bool playExpandRepeats = getAction("repeat")->isChecked();
 

@@ -1296,20 +1296,17 @@ void Score::cmdTuplet(int n)
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
       cmdCreateTuplet(cr, tuplet);
-      ChordRestList* cl = tuplet->elements();
-      iChordRest i = cl->begin();
-      cr = 0;
-      if (i != cl->end()) {
-            if (i->second->type() == REST)
-                  cr  = i->second;
-            else {
-                  ++i;
-                  if (i != cl->end())
-                        cr = i->second;
-                  }
-            }
-      if (cr) {
-            select(cr, SELECT_SINGLE, 0);
+
+      QList<DurationElement*>* cl = tuplet->elements();
+
+      int ne = cl->size();
+      DurationElement* el = 0;
+      if (ne && (*cl)[0]->type() == REST)
+            el  = (*cl)[0];
+      else if (ne > 1)
+            el = (*cl)[1];
+      if (el) {
+            select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
             }
       }
@@ -1504,20 +1501,21 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //    make gap for new note/rest
       //---------------------------------------------------
 
-      ChordRestList* crl = tuplet->elements();
-      iChordRest i = crl->begin();
-      for (; i != crl->end(); ++i) {
-            if (i->second == cr)
+      QList<DurationElement*>* crl = tuplet->elements();
+      int n = crl->size();
+      int i = 0;
+      for (; i < n; ++i) {
+            if ((*crl)[i] == cr)
                   break;
             }
-      if (i == crl->end()) {
+      if (i == n) {
             printf("setTupletChordRest: cr not found in tuplet\n");
             return;
             }
       int remaining = len;
-      iChordRest ii = i;
-      for (; ii != crl->end(); ++ii) {
-            remaining -= ii->second->duration().ticks();
+      int ii = i;
+      for (; ii < n; ++ii) {
+            remaining -= (*crl)[ii]->duration().ticks();
             if (remaining <= 0)
                   break;
             }
@@ -1530,11 +1528,10 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       Measure* measure = cr->measure();
       setLayout(measure);
 
-      for (; ii != crl->end(); ++ii) {
-            ChordRest* cr = ii->second;
-            undoRemoveElement(cr);
-            measure->cmdRemoveEmptySegment(cr->segment());
-            remaining -= cr->duration().ticks();
+      for (; ii < n; ++ii) {
+            DurationElement* el = (*crl)[ii];
+            undoRemoveElement(el);
+            remaining -= el->duration().ticks();
             if (remaining <= 0)
                   break;
             }
