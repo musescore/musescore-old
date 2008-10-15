@@ -1,4 +1,7 @@
 15.10 (ws)
+      - show popup error message if soundfont cannot be loaded
+      - show play panel in disabled state if sequencer is not available
+        instead of hiding it
       - preparations for better tuplet handling
       - changed order of note duration icons in toolbar to match shortcuts
       - changed shortcuts for note duration and intervals
