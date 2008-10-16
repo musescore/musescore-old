@@ -67,28 +67,37 @@ Preferences::Preferences()
 
 void Preferences::init()
       {
+      // set fallback defaults:
+
+      cursorBlink        = false;
+      bgUseColor         = true;
+      fgUseColor         = false;
+      bgWallpaper        = QString();
+      fgWallpaper        = ":/data/paper3.png";
+      fgColor.setRgb(50, 50, 50);
+      bgColor.setRgb(0x76, 0x76, 0x6e);
+
       selectColor[0] = Qt::blue;
       selectColor[1] = Qt::green;
       selectColor[2] = Qt::yellow;
       selectColor[3] = Qt::magenta;
       dropColor      = Qt::red;
-
-      // set fallback defaults:
-
-      cursorBlink        = false;
-      fgUseColor         = false;
-      bgUseColor         = true;
-      fgWallpaper        = ":/data/paper3.png";
       enableMidiInput    = true;
       playNotes          = true;
-      bgColor.setRgb(0x76, 0x76, 0x6e);
-      fgColor.setRgb(50, 50, 50);
+
+#ifdef USE_GLOBAL_FLUID
+      soundFont          = INSTPREFIX "/piano1.sf2";
+#else
+      soundFont          = ":/data/piano1.sf2";
+#endif
+
       lPort              = "";
       rPort              = "";
       showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
       playPanelPos       = QPoint(100, 300);
+
 #ifdef __MINGW32__
       useAlsaAudio       = false;
       useJackAudio       = false;
@@ -104,23 +113,16 @@ void Preferences::init()
       alsaFragments      = 3;
       portaudioDevice    = -1;
 
-#ifdef USE_GLOBAL_FLUID
-      soundFont          = INSTPREFIX "/piano1.sf2";
-#else
-      soundFont          = ":/data/piano1.sf2";
-#endif
-
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/demo.msc";
-      instrumentList           = ":/data/instruments.xml";
       imagePath                = "~/mscore/images";
       workingDirectory         = ".";
       lastSaveDirectory        = ".";
       lastSaveCopyDirectory    = ".";
       showSplashScreen         = true;
-      rewind.type              = -1;
+
       rewind.type              = -1;
       play.type                = -1;
       stop.type                = -1;
@@ -134,8 +136,11 @@ void Preferences::init()
       len6.type                = -1;
       len12.type               = -1;
       len24.type               = -1;
+
       midiExpandRepeats        = true;
       playRepeats              = true;
+      instrumentList           = ":/data/instruments.xml";
+
       alternateNoteEntryMethod = false;
       useMidiOutput            = false;
       midiPorts                = 1;
@@ -158,59 +163,66 @@ void Preferences::write()
       QSettings s;
 
       s.setValue("cursorBlink",        cursorBlink);
-      s.setValue("fgUseColor",         fgUseColor);
       s.setValue("bgUseColor",         bgUseColor);
-      s.setValue("fgColor",            fgColor);
-      s.setValue("fgWallpaper",        fgWallpaper);
-      s.setValue("bgColor",            bgColor);
+      s.setValue("fgUseColor",         fgUseColor);
       s.setValue("bgWallpaper",        bgWallpaper);
+      s.setValue("fgWallpaper",        fgWallpaper);
+      s.setValue("fgColor",            fgColor);
+      s.setValue("bgColor",            bgColor);
+
       s.setValue("selectColor1",       selectColor[0]);
       s.setValue("selectColor2",       selectColor[1]);
       s.setValue("selectColor3",       selectColor[2]);
       s.setValue("selectColor4",       selectColor[3]);
+      s.setValue("dropColor",          dropColor);
       s.setValue("enableMidiInput",    enableMidiInput);
       s.setValue("playNotes",          playNotes);
+
+      s.setValue("soundFont",          soundFont);
       s.setValue("lPort",              lPort);
       s.setValue("rPort",              rPort);
-      s.setValue("soundFont",          soundFont);
       s.setValue("showNavigator",      showNavigator);
-      s.setValue("showStatusBar",      showStatusBar);
       s.setValue("showPlayPanel",      showPlayPanel);
+      s.setValue("showStatusBar",      showStatusBar);
 
       s.setValue("useAlsaAudio",       useAlsaAudio);
       s.setValue("useJackAudio",       useJackAudio);
       s.setValue("usePortaudioAudio",  usePortaudioAudio);
+
       s.setValue("alsaDevice",         alsaDevice);
       s.setValue("alsaSampleRate",     alsaSampleRate);
       s.setValue("alsaPeriodSize",     alsaPeriodSize);
       s.setValue("alsaFragments",      alsaFragments);
       s.setValue("portaudioDevice",    portaudioDevice);
+
       s.setValue("layoutBreakColor",   layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
-      s.setValue("imagePath",          imagePath);
-      s.setValue("workingDirectory",   workingDirectory);
-      s.setValue("lastSaveDirectory",  lastSaveDirectory);
-      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
-      s.setValue("showSplashScreen",   showSplashScreen);
-      s.setValue("midiExpandRepeats",  midiExpandRepeats);
-      s.setValue("playRepeats",        playRepeats);
-      s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
-      s.setValue("useMidiOutput",      useMidiOutput);
-      s.setValue("midiPorts",          midiPorts);
-      s.setValue("midiAutoConnect",    midiAutoConnect);
-      s.setValue("proximity",          proximity);
-      s.setValue("autoSave",           autoSave);
-      s.setValue("autoSaveTime",       autoSaveTime);
-      s.setValue("pngScreenShot",      pngScreenShot);
-      s.setValue("language",           language);
-
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
             case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
             case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
             }
-      s.setValue("startScore", startScore);
+      s.setValue("startScore",         startScore);
+      s.setValue("imagePath",          imagePath);
+      s.setValue("workingDirectory",   workingDirectory);
+      s.setValue("lastSaveDirectory",  lastSaveDirectory);
+      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
+      s.setValue("showSplashScreen",   showSplashScreen);
+
+      s.setValue("midiExpandRepeats",  midiExpandRepeats);
+      s.setValue("playRepeats",        playRepeats);
       s.setValue("instrumentList", instrumentList);
+
+      s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
+      s.setValue("useMidiOutput",      useMidiOutput);
+      s.setValue("midiPorts",          midiPorts);
+      s.setValue("midiAutoConnect",    midiAutoConnect);
+      s.setValue("rtcTicks",           rtcTicks);
+      s.setValue("proximity",          proximity);
+      s.setValue("autoSave",           autoSave);
+      s.setValue("autoSaveTime",       autoSaveTime);
+      s.setValue("pngScreenShot",      pngScreenShot);
+      s.setValue("language",           language);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -228,12 +240,13 @@ void Preferences::read()
       QSettings s;
 
       cursorBlink     = s.value("cursorBlink", false).toBool();
-      fgUseColor      = s.value("fgUseColor", false).toBool();
       bgUseColor      = s.value("bgUseColor", true).toBool();
-      fgColor         = s.value("fgColor", QColor(50,50,50)).value<QColor>();
-      fgWallpaper     = s.value("fgWallpaper", ":/data/paper3.png").toString();
-      bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
+      fgUseColor      = s.value("fgUseColor", false).toBool();
       bgWallpaper     = s.value("bgWallpaper").toString();
+      fgWallpaper     = s.value("fgWallpaper", ":/data/paper3.png").toString();
+      fgColor         = s.value("fgColor", QColor(50,50,50)).value<QColor>();
+      bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
+
       selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();
       selectColor[1]  = s.value("selectColor2", QColor(Qt::green)).value<QColor>();
       selectColor[2]  = s.value("selectColor3", QColor(Qt::yellow)).value<QColor>();
