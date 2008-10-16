@@ -1,3 +1,5 @@
+16.10 (ws)
+      - fixed crash when transposing whole score
 15.10 (ws)
       - show popup error message if soundfont cannot be loaded
       - show play panel in disabled state if sequencer is not available
