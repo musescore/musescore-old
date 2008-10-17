@@ -664,11 +664,11 @@ void Style::save(Xml& xml)
 
       if (stemDir[0] != UP)
             xml.tag("stemDir voice=\"1\"", "down");
-      if (stemDir[1] != UP)
+      if (stemDir[1] != DOWN)
             xml.tag("stemDir voice=\"2\"", "up");
       if (stemDir[2] != UP)
             xml.tag("stemDir voice=\"3\"", "down");
-      if (stemDir[3] != UP)
+      if (stemDir[3] != DOWN)
             xml.tag("stemDir voice=\"4\"", "up");
 
       xml.tag("gateTime",               gateTime);
