@@ -1718,7 +1718,7 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
                   }
             }
       if (system == 0) {
-            printf("no system\n");
+//            printf("no system\n");
             return false;
             }
 
@@ -1736,7 +1736,7 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
                   }
             }
       if (pos->measure == 0) {
-            printf("no measure\n");
+//            printf("no measure\n");
             return false;
             }
 
@@ -1763,7 +1763,7 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
             sy1 = sy2;
             }
       if (sstaff == 0) {
-            printf("no sys staff\n");
+//            printf("no sys staff\n");
             return false;
             }
 
@@ -1807,7 +1807,7 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
             }
 
       if (segment == 0) {
-            printf("no segment+\n");
+//            printf("no segment+\n");
             return false;
             }
       //

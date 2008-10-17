@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: chordrest.h,v 1.4 2006/03/03 21:47:11 wschweer Exp $
+//  $Id: layoutbreak.h,v 1.1 2006/03/27 14:16:24 wschweer Exp $
 //
 //  Copyright (C) 2008 Werner Schweer and others
 //
@@ -18,36 +18,28 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __DURATION_H__
-#define __DURATION_H__
+#ifndef __SPACER_H__
+#define __SPACER_H__
 
 #include "element.h"
-#include "durationtype.h"
-
-class Tuplet;
-class Beam;
 
 //---------------------------------------------------------
-//   DurationElement
+//   Spacer
 //---------------------------------------------------------
 
-class DurationElement : public Element {
-      Duration _duration;
-      Tuplet* _tuplet;
+class Spacer : public Element {
+      Spatium height;
+      QPainterPath path;
+
+      virtual void draw(QPainter&) const;
+      virtual void layout(ScoreLayout*);
 
    public:
-      DurationElement(Score* s);
-      DurationElement(const DurationElement& e);
-
-      Duration duration() const                    { return _duration; }
-      virtual void setDuration(const Duration t)   { _duration = t; }
-
-      void setTuplet(Tuplet* t)                    { _tuplet = t; }
-      Tuplet* tuplet() const                       { return _tuplet; }
-      virtual Beam* beam() const                   { return 0; }
+      Spacer(Score*);
+      virtual Spacer* clone() const { return new Spacer(*this); }
+      virtual ElementType type() const { return SPACER; }
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
       };
 
 #endif
-
-
-

@@ -137,6 +137,7 @@ Rest* Score::addRest(int tick, int len, int track)
 
 Rest* Score::setRest(int tick, int len, int track)
       {
+printf("setRest %d len %d\n", tick, len);
       Rest* rest = 0;
       if (len / (division*4)) {
             rest = addRest(tick, division*4, track);
