@@ -1,3 +1,6 @@
+17.10 (ws)
+      - changed buildin score font type form *.otf to *.ttf. The *ttf fonts seem to
+        work better on windows.
 16.10 (ws)
       - fixed crash when transposing whole score
 15.10 (ws)

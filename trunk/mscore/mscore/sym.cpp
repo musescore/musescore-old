@@ -29,7 +29,7 @@
 QVector<Sym> symbols(lastSym);
 
 #ifdef __MINGW32__
-#define CTABLE_HACK
+// #define CTABLE_HACK
 #endif
 
 #ifdef CTABLE_HACK

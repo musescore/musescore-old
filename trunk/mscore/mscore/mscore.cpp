@@ -1708,12 +1708,12 @@ int main(int argc, char* argv[])
       //
       //  load internal fonts
       //
-      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore_20.otf")) {
+      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore_20.ttf")) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             if (!debugMode)
                   exit(-1);
             }
-      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore1_20.otf")) {
+      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore1_20.ttf")) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             if (!debugMode)
                   exit(-1);
