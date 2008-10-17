@@ -500,7 +500,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       //
 #ifdef USE_PORTAUDIO
       if (usePortaudio) {
-            Portaudio* audio = (Portaudio*)seq->getDriver();
+            Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
             QStringList apis = audio->apiList();
             portaudioApi->addItems(apis);
             QStringList devices = audio->deviceList(0);
@@ -522,7 +522,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 #ifdef USE_PORTAUDIO
 void PreferenceDialog::portaudioApiActivated(int idx)
       {
-      Portaudio* audio = (Portaudio*)seq->getDriver();
+      Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
       QStringList devices = audio->deviceList(idx);
       portaudioDevice->clear();
       portaudioDevice->addItems(devices);
@@ -798,9 +798,9 @@ void PreferenceDialog::apply()
             preferences.lPort       = jackLPort->currentText();
             preferences.rPort       = jackRPort->currentText();
             }
-      preferences.showNavigator  = navigatorShow->isChecked();
-      preferences.showPlayPanel  = playPanelShow->isChecked();
-      preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());
+      preferences.showNavigator      = navigatorShow->isChecked();
+      preferences.showPlayPanel      = playPanelShow->isChecked();
+      preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
 
       preferences.useAlsaAudio       = alsaDriver->isChecked();
       preferences.useJackAudio       = jackDriver->isChecked();
@@ -811,7 +811,7 @@ void PreferenceDialog::apply()
       preferences.alsaFragments      = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
 #ifdef USE_PORTAUDIO
-      Portaudio* audio = (Portaudio*)seq->getDriver();
+      Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
       preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
          portaudioDevice->currentIndex());
 #endif

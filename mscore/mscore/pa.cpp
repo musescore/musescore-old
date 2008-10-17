@@ -93,9 +93,9 @@ bool Portaudio::init()
       /* Open an audio I/O stream. */
       struct PaStreamParameters out;
 
-      out.device = idx;
-      out.channelCount = 2;
-      out.sampleFormat = paFloat32;
+      out.device           = idx;
+      out.channelCount     = 2;
+      out.sampleFormat     = paFloat32;
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 
@@ -107,7 +107,11 @@ bool Portaudio::init()
             (void*)this);
 
       if (err != paNoError) {
-            printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
+            // fall back to default device:
+            out.device = -1;
+            err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
+            if (err != paNoError)
+                  printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
             return false;
             }
       synth = new ISynth();
