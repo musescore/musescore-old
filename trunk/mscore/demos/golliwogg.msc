@@ -68,6 +68,8 @@
     <smallClefMag>0.8</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <stemDir voice="2">up</stemDir>
+    <stemDir voice="4">up</stemDir>
     <gateTime>70</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>40</staccatoGateTime>
@@ -134,6 +136,7 @@
     <trackName>Piano</trackName>
     <Instrument>
       <Channel>
+        <program value="0"/>
         <controller ctrl="7" value="100"/>
         <controller ctrl="10" value="64"/>
         <controller ctrl="93" value="30"/>
@@ -678,12 +681,14 @@
     <up>2</up>
     </Slur>
   <Slur id="85">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-2.51741" y="-2.41671"/>
       <o3 x="5.23621" y="-1.51045"/>
       </SlurSegment>
     </Slur>
   <Slur id="86">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.604179" y="-1.30905"/>
       <o2 x="-3.52437" y="-2.41671"/>
@@ -691,9 +696,11 @@
       </SlurSegment>
     </Slur>
   <Slur id="87">
+    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="88">
+    <track>0</track>
     <up>1</up>
     </Slur>
   <HairPin>
@@ -702,6 +709,7 @@
     <tick2>75840</tick2>
     </HairPin>
   <Slur id="89">
+    <track>0</track>
     <tick>0</tick>
     <SlurSegment no="0">
       <o1 x="0" y="0.402786"/>
@@ -710,14 +718,23 @@
     <up>1</up>
     </Slur>
   <Slur id="90">
+    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0" y="-1.40975"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="91">
+    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.201393" y="-1.30905"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="92">
+    <SlurSegment no="0">
+      <o1 x="0.201393" y="-0.201393"/>
+      <o4 x="1.38778e-17" y="-0.906268"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
@@ -3274,6 +3291,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="67">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <LayoutBreak>
         <subtype>line</subtype>
         <track>-1</track>
@@ -4208,6 +4229,54 @@ p, li { white-space: pre-wrap; }
         <Note pitch="59" tpc="7"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
+      <Rest>
+        <track>1</track>
+        <selected>1</selected>
+        <tick>81600</tick>
+        <ticklen>360</ticklen>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <ticklen>120</ticklen>
+        <BeamMode>no</BeamMode>
+        <Slur type="start" number="92"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <offset x="0.402786" y="-5.43761"/>
+          <track>1</track>
+          </Attribute>
+        <Slur type="stop" number="92"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          <offset x="0.503482" y="-6.14248"/>
+          <track>1</track>
+          </Attribute>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="87">
       <LayoutBreak>
@@ -4228,6 +4297,7 @@ p, li { white-space: pre-wrap; }
           <pitch>59</pitch>
           <tpc>7</tpc>
           <Tie>
+            <track>1</track>
             </Tie>
           </Note>
         <Note>
@@ -4235,6 +4305,7 @@ p, li { white-space: pre-wrap; }
           <pitch>61</pitch>
           <tpc>9</tpc>
           <Tie>
+            <track>1</track>
             <up>1</up>
             </Tie>
           </Note>
@@ -7737,5 +7808,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>2</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>

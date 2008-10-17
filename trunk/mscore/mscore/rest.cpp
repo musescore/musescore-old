@@ -260,7 +260,7 @@ void Rest::remove(Element* e)
 
 void Rest::setDuration(Duration dt)
       {
-      ChordRest::setDuration(dt);
+      DurationElement::setDuration(dt);
       setYoff(2.0 * mag());
       switch(dt.val()) {
             case Duration::V_LONG:

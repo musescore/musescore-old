@@ -1346,7 +1346,7 @@ void Chord::setTrack(int val)
 
 void Chord::setDuration(Duration t)
       {
-      ChordRest::setDuration(t);
+      DurationElement::setDuration(t);
       NoteList* nl = noteList();
       for (iNote in = nl->begin(); in != nl->end(); ++in)
             in->second->setType(t);

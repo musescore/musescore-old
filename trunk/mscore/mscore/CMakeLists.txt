@@ -149,7 +149,7 @@ add_executable ( mscore
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
-      fifo.cpp
+      fifo.cpp spacer.cpp
       ${AUDIO}
       )
 
