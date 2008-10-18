@@ -535,6 +535,8 @@ void MuseScore::newFile()
             score->fileInfo()->setFile(createDefaultName());
             newWizard->createInstruments(score);
             }
+      if (!newWizard->title().isEmpty())
+            score->fileInfo()->setFile(newWizard->title());
       for (int i = 0; i < measures; ++i) {
             Measure* measure = new Measure(score);
             score->measures()->add(measure);
