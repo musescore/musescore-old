@@ -7,6 +7,7 @@
         it moves 10.0, and with Ctrl it moves 1.0, with Alt it moves 0.1
       - added keyboard shortcut Ctrl+E to enter edit mode on the selected element
       - made Esc keep the selection when exiting edit or note entry mode
+      - use title from new wizard as filename for new piece
 16.10 (ws)
       - fixed crash when transposing whole score
 15.10 (ws)
