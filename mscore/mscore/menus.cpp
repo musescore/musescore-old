@@ -56,6 +56,7 @@
 #include "articulation.h"
 #include "chord.h"
 #include "drumset.h"
+#include "spacer.h"
 
 //---------------------------------------------------------
 //   showPalette
@@ -553,7 +554,11 @@ void MuseScore::showPalette(bool visible)
             lb->setSubtype(LAYOUT_BREAK_PAGE);
             sp->addObject(1, lb, tr("break page"));
 
-            paletteBox->addPalette(tr("Breaks"), sp);
+            Spacer* spacer = new Spacer(gscore);
+            spacer->setSpace(Spatium(3));
+            sp->addObject(2, spacer, tr("staff spacer"));
+
+            paletteBox->addPalette(tr("Breaks/Spacer"), sp);
 
             //-----------------------------------
             //    beam properties

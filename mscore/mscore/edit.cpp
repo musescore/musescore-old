@@ -838,6 +838,7 @@ void Score::deleteItem(Element* el)
             case TREMOLO:
             case GLISSANDO:
             case STAFF_TEXT:
+            case SPACER:
                   cmdRemove(el);
                   break;
 

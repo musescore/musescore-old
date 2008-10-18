@@ -31,7 +31,14 @@
 Spacer::Spacer(Score* score)
    : Element(score)
       {
-      height = Spatium(0);
+      _space = Spatium(0);
+      }
+
+Spacer::Spacer(const Spacer& s)
+   : Element(s)
+      {
+      _space = s._space;
+      path   = s.path;
       }
 
 //---------------------------------------------------------
@@ -58,15 +65,25 @@ void Spacer::draw(QPainter& p) const
 //   layout
 //---------------------------------------------------------
 
-void Spacer::layout(ScoreLayout* layout)
+void Spacer::layout(ScoreLayout*)
       {
+      path = QPainterPath();
+      double a = _spatium;
+      double b = _spatium * .5;
+      double h = _space.point();
+
+      path.lineTo(a, 0.0);
+      path.moveTo(b, 0.0);
+      path.lineTo(b, h);
+      path.moveTo(0.0, h);
+      path.lineTo(a, h);
       }
 
 //---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Spacer::acceptDrop(Viewer*, const QPointF&, int type, int st) const
+bool Spacer::acceptDrop(Viewer*, const QPointF&, int, int) const
       {
       return false;
       }
@@ -75,9 +92,78 @@ bool Spacer::acceptDrop(Viewer*, const QPointF&, int type, int st) const
 //   drop
 //---------------------------------------------------------
 
-Element* Spacer::drop(const QPointF& p1, const QPointF& p2, Element* e)
+Element* Spacer::drop(const QPointF&, const QPointF&, Element* e)
       {
       return e;
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Spacer::startEdit(Viewer*, const QPointF&)
+      {
+      return true;
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Spacer::editDrag(int, const QPointF& delta)
+      {
+      _space += delta.y();
+      if (_space.val() < 2.0)
+            _space = Spatium(2.0);
+      score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Spacer::updateGrips(int* grips, QRectF* grip) const
+      {
+      *grips   = 1;
+      QPointF p(_spatium * .5, point(_space));
+      grip[0].translate(canvasPos() + p);
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Spacer::bbox() const
+      {
+      return QRectF(-_spatium * .2, -_spatium * .2, _spatium * 1.4, _space.point() + 0.4 * _spatium);
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Spacer::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      xml.tag("space", _space.val());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Spacer::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "space")
+                  _space = Spatium(val.toDouble());
+            else if (Element::readProperties(e))
+                  domError(e);
+            }
       }
 
 

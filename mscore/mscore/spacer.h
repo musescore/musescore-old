@@ -28,18 +28,27 @@
 //---------------------------------------------------------
 
 class Spacer : public Element {
-      Spatium height;
+      Spatium _space;
       QPainterPath path;
-
-      virtual void draw(QPainter&) const;
-      virtual void layout(ScoreLayout*);
 
    public:
       Spacer(Score*);
-      virtual Spacer* clone() const { return new Spacer(*this); }
+      Spacer(const Spacer&);
+      virtual Spacer* clone() const    { return new Spacer(*this); }
       virtual ElementType type() const { return SPACER; }
+
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      void setSpace(const Spatium& sp) { _space = sp;   }
+      Spatium space() const            { return _space; }
+      virtual void layout(ScoreLayout*);
+      virtual void draw(QPainter&) const;
+      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual QRectF bbox() const;
       };
 
 #endif

@@ -41,6 +41,7 @@ class Score;
 class Viewer;
 class System;
 class Note;
+class Spacer;
 
 //---------------------------------------------------------
 //   MStaff
@@ -52,10 +53,10 @@ class Note;
 
 struct MStaff {
       double distance;
-      double userDistance;
       StaffLines*  lines;
       bool hasVoices;         ///< indicates that MStaff contains more than one voice,
                               ///< this changes some layout rules
+      Spacer* _vspacer;
 
       MStaff();
       ~MStaff();
@@ -136,8 +137,8 @@ class Measure : public MeasureBase {
       void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }
-      virtual double distance(int i) const     { return staves[i]->distance; }
-      virtual double userDistance(int i) const { return staves[i]->userDistance; }
+      virtual double distance(int i) const      { return staves[i]->distance; }
+      virtual Spatium userDistance(int i) const;
 
       int size() const                 { return _size;       }
       virtual int tickLen() const;
