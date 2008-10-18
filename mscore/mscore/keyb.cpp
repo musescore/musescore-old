@@ -115,8 +115,10 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             return;
             }
       QPointF delta;
-      qreal val = 1.0;
+      qreal val = 10.0;
       if (ev->modifiers() & Qt::ControlModifier)
+            val = 1.0;
+      else if (ev->modifiers() & Qt::AltModifier)
             val = 0.1;
       switch (ev->key()) {
             case Qt::Key_Left:

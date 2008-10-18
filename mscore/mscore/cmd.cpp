@@ -1778,7 +1778,6 @@ void Score::cmd(const QString& cmd)
       else if (cmd == "escape") {
             if (noteEntryMode())
                   setNoteEntry(false);
-            select(0, SELECT_SINGLE, 0);
             end();
             }
       else if (cmd == "pause")
@@ -2198,6 +2197,13 @@ void Score::cmd(const QString& cmd)
                                           }
                                     }
                               }
+                        }
+                  }
+            else if (cmd == "edit-element") {
+                  Element* e = selection()->element();
+                  if (e) {
+                        setLayoutAll(false);
+                        canvas()->startEdit(e);
                         }
                   }
             else if (cmd == "")

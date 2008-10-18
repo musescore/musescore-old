@@ -1729,6 +1729,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Toggle Page Break"),
          QT_TR_NOOP("Toggle Page Break")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "edit-element",
+         QT_TR_NOOP("edit element"),
+         Qt::CTRL+Qt::Key_E,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Edit Element"),
+         QT_TR_NOOP("Edit Element")
+         ),
       Shortcut(0, 0, 0),
       };
 
