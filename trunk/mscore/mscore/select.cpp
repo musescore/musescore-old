@@ -431,11 +431,11 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
 
 void Score::lassoSelectEnd(const QRectF& /*bbox*/)
       {
-      int noteRestCount = 0;
-      Segment* startSegment  = 0;
-      Segment* endSegment    = 0;
-      int startStaff    = 0x7fffffff;
-      int endStaff      = 0;
+      int noteRestCount     = 0;
+      Segment* startSegment = 0;
+      Segment* endSegment   = 0;
+      int startStaff        = 0x7fffffff;
+      int endStaff          = 0;
 
       foreach(const Element* e, *(sel->elements())) {
             if (e->type() == NOTE || e->type() == REST) {

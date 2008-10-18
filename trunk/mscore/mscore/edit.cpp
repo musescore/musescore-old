@@ -137,7 +137,7 @@ Rest* Score::addRest(int tick, int len, int track)
 
 Rest* Score::setRest(int tick, int len, int track)
       {
-printf("setRest %d len %d\n", tick, len);
+// printf("setRest %d len %d\n", tick, len);
       Rest* rest = 0;
       if (len / (division*4)) {
             rest = addRest(tick, division*4, track);
@@ -1053,7 +1053,13 @@ void Score::cmdDeleteSelection()
 
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
                   int tick   = s1->tick();
-                  int gapLen = s2->tick() - tick;
+                  int gapLen;
+                  if (s2)
+                        gapLen = s2->tick() - tick;
+                  else {
+                        MeasureBase* m = measures()->last();
+                        gapLen = m->tick() + m->tickLen() - tick;
+                        }
 
                   while (gapLen) {
                         Measure* m = tick2measure(tick);
