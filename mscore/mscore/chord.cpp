@@ -588,6 +588,8 @@ void Chord::layoutStem(ScoreLayout* layout)
             stemLen *= -1.0;
 
       if (hasStem) {
+//            if (!_stem)
+//                  setStem(new Stem(score()));
             _stem->setLen(stemLen);
             _stem->setPos(npos);
             }

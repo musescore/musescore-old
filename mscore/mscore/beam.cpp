@@ -304,7 +304,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   Element* e = segment->element(track);
                   if (e == 0)
                         continue;
-                  if (e->type() == CLEF) {
+                  if (segment->subtype() == Segment::SegClef) {
                         if (beam) {
                               beam->layout1(layout);
                               beam = 0;
@@ -317,7 +317,34 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         }
                   if (!e->isChordRest())
                         continue;
-                  ChordRest* cr = (ChordRest*) e;
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  if (segment->subtype() == Segment::SegGrace) {
+                        Segment* nseg = segment->next();
+                        if (nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
+                              Beam* b = new Beam(score());
+                              b->setTrack(track);
+                              b->setParent(this);
+                              _beamList.push_back(b);
+                              cr->setBeam(b);
+                              b->add(cr);
+                              Segment* s = nseg;
+                              for (;;) {
+                                    nseg = s;
+                                    ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
+                                    cr->setBeam(b);
+                                    b->add(cr);
+                                    s = nseg->next();
+                                    if (!s || (s->subtype() != Segment::SegGrace) || !s->element(track))
+                                          break;
+                                    }
+                              b->layout1(layout);
+                              segment = nseg;
+                              }
+                        else {
+                              cr->layoutStem1(layout);
+                              }
+                        continue;
+                        }
                   BeamMode bm   = cr->beamMode();
                   int len       = cr->duration().ticks();
 
@@ -343,9 +370,6 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     beamEnd = true;
                               }
                         else if (le->tuplet() != cr->tuplet())
-                              beamEnd = true;
-                        // end beam if note tye changed (grace notes)
-                        else if (le->segment()->subtype() != cr->segment()->subtype())
                               beamEnd = true;
                         else if (bm == BEAM_BEGIN)
                               beamEnd = true;
@@ -393,7 +417,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     }
                               else {
                                     beam = new Beam(score());
-                                    beam->setTrack(a1->track());
+                                    beam->setTrack(track);
                                     beam->setParent(this);
                                     _beamList.push_back(beam);
                                     a1->setBeam(beam);

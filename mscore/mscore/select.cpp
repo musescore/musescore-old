@@ -213,6 +213,13 @@ void Score::updateSelectedElements(SelState state)
             sel->staffStart = 0;
             sel->staffEnd = nstaves();
             }
+      // assert:
+      if (sel->staffStart < 0 || sel->staffStart >= nstaves() || sel->staffEnd < 0 || sel->staffEnd > nstaves()
+         || sel->staffStart >= sel->staffEnd) {
+            printf("updateSelectedElements: bad staff selection %d - %d\n", sel->staffStart, sel->staffEnd);
+            sel->staffStart = 0;
+            sel->staffEnd   = 1;
+            }
       int startTrack = sel->staffStart * VOICES;
       int endTrack   = sel->staffEnd * VOICES;
 
