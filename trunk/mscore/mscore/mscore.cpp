@@ -331,6 +331,7 @@ MuseScore::MuseScore()
          << "edit-meta"
          << "harmony-properties"
          << "system-break" << "page-break"
+         << "edit-element"
          ;
 
       foreach(const QString s, sl) {
