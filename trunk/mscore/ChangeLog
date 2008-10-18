@@ -1,4 +1,5 @@
 18.10 (ws)
+      - beaming of notes with grace notes now possible
       - fixed crash when deleting lasso selection of last measure
 17.10 (ws)
       - changed buildin score font type form *.otf to *.ttf. The *ttf fonts seem to
