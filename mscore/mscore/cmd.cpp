@@ -965,7 +965,7 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
       int stick = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0 || (measure->tick() + measure->tickLen()) == tick) {
-            printf("setRest:  ...measure not found\n");
+            printf("setRest(%d,%d,%d,%d):  ...measure not found (%p)\n", tick, track, len, useDots, measure);
             return false;
             }
       setLayout(measure);
@@ -1026,9 +1026,8 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             rest = setRest(tick, len, track);
             }
       select(rest, SELECT_SINGLE, 0);
-      if (noteLen - len > 0) {
+      if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track);
-            }
       layoutAll = true;
       return true;
       }
