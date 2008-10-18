@@ -1603,6 +1603,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case NOTE:
                   case SYMBOL:
                   case CHORD:
+                  case SPACER:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1726,6 +1727,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case REPEAT_MEASURE:
                   case ICON:
                   case CHORD:
+                  case SPACER:
                         {
                         Element* el = elementAt(pos);
                         if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
@@ -1870,6 +1872,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case ICON:
                   case NOTE:
                   case CHORD:
+                  case SPACER:
                         {
                         Element* el = elementAt(pos);
                         if (!el) {

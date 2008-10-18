@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: system.cpp,v 1.41 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -311,8 +311,10 @@ void System::layout2(ScoreLayout* layout)
                   setDistance(staffIdx, score()->style()->staffDistance);
                   }
             double dist = 0.0;
-            foreach(MeasureBase* m, ml)
+            foreach(MeasureBase* m, ml) {
                   dist = std::max(dist, m->distance(staffIdx));
+                  dist = std::max(dist, m->userDistance(staffIdx).point());
+                  }
             if (dist > distance(staffIdx))
                   setDistance(staffIdx, dist);
             SysStaff* s = _staves[staffIdx];

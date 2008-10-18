@@ -95,7 +95,7 @@ class MeasureBase : public Element {
       void setPageBreak(bool v)              { _pageBreak = v;    }
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
       virtual double distance(int) const     { return 0.0; }
-      virtual double userDistance(int) const { return 0.0; }
+      virtual Spatium userDistance(int) const { return Spatium(0.0); }
       virtual void add(Element*);
       virtual void remove(Element*);
       void setDirty()                        { _dirty = true; }

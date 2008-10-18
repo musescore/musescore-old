@@ -1,4 +1,6 @@
 18.10 (ws)
+      - Implemented vertical spacer elements. Drag from "breaks/spacer" palette
+        onto measure. Height can be adjusted in edit mode.
       - beaming of notes with grace notes now possible
       - fixed crash when deleting lasso selection of last measure
 17.10 (ws)

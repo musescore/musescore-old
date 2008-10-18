@@ -62,6 +62,7 @@
 #include "glissando.h"
 #include "articulation.h"
 #include "chord.h"
+#include "spacer.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1139,6 +1140,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = MARKER;
             else if (e.tagName() == "Icon")
                   type = ICON;
+            else if (e.tagName() == "Spacer")
+                  type = SPACER;
             else {
                   domError(e);
                   break;
@@ -1244,6 +1247,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case CHORD:
                   el = new Chord(score);
+                  break;
+            case SPACER:
+                  el = new Spacer(score);
                   break;
             default:
                   printf("Element::create(): cannot create element type %d\n", type);

@@ -76,6 +76,7 @@
 #include "utils.h"
 #include "glissando.h"
 #include "articulation.h"
+#include "spacer.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -84,15 +85,17 @@
 MStaff::MStaff()
       {
       distance     = .0;
-      userDistance = .0;
       lines        = 0;
       hasVoices    = false;
+      _vspacer     = 0;
       }
 
 MStaff::~MStaff()
       {
       if (lines)
             delete lines;
+      if (_vspacer)
+            delete _vspacer;
       }
 
 //---------------------------------------------------------
@@ -102,9 +105,9 @@ MStaff::~MStaff()
 Measure::Measure(Score* s)
    : MeasureBase(s)
       {
-      _first  = 0;
-      _last   = 0;
-      _size   = 0;
+      _first   = 0;
+      _last    = 0;
+      _size    = 0;
 
       int n = _score->nstaves();
       for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
@@ -721,6 +724,11 @@ void Measure::layout2(ScoreLayout* layout)
                         system()->layoutLyrics(layout, l, s, staffIdx);
                         }
                   }
+            if (staves[staffIdx]->_vspacer) {
+                  staves[staffIdx]->_vspacer->layout(layout);
+                  double y = system()->staff(staffIdx)->y();
+                  staves[staffIdx]->_vspacer->setPos(_spatium * .5, y + 4 * _spatium);
+                  }
             }
 
       layoutBeams(layout);
@@ -935,6 +943,10 @@ void Measure::add(Element* el)
 //            printf("measure %p(%d): add %s %p\n", this, _no, el->name(), el);
 
       switch (type) {
+            case SPACER:
+printf("add spacer %d\n", el->staffIdx());
+                  staves[el->staffIdx()]->_vspacer = static_cast<Spacer*>(el);
+                  break;
             case BEAM:
                   _el.push_back(el);
                   break;
@@ -1032,6 +1044,9 @@ void Measure::remove(Element* el)
       _dirty = true;
 
       switch(el->type()) {
+            case SPACER:
+                  staves[el->staffIdx()]->_vspacer = 0;
+                  break;
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
                   break;
@@ -1835,6 +1850,7 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
             case LAYOUT_BREAK:
             case REPEAT_MEASURE:
             case MEASURE:
+            case SPACER:
                   viewer->setDropRectangle(r);
                   return true;
 
@@ -1895,6 +1911,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
       // determine staff
       System* s = system();
       int staffIdx = s->y2staff(p.y());
+printf("drop staff idx %d\n", staffIdx);
       if (staffIdx == -1 || e->systemFlag()) {
             staffIdx = 0;
             }
@@ -1979,6 +1996,15 @@ printf("drop staffList\n");
                   lb->setParent(this);
                   score()->cmdAdd(lb);
                   return lb;
+                  }
+
+            case SPACER:
+                  {
+                  Spacer* spacer = static_cast<Spacer*>(e);
+                  spacer->setTrack(staffIdx * VOICES);
+                  spacer->setParent(this);
+                  score()->cmdAdd(spacer);
+                  return spacer;
                   }
 
             case BAR_LINE:
@@ -2255,6 +2281,10 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   _noText->write(xml);
             }
 
+      MStaff* mstaff = staves[staff];
+      if (mstaff->_vspacer)
+            xml.tag("vspacer", mstaff->_vspacer->space().val());
+
       foreach(Tuplet* tuplet, _tuplets) {
             if (tuplet->staffIdx() == staff) {
                   int id = _tuplets.indexOf(tuplet);
@@ -2356,7 +2386,6 @@ void Measure::read(QDomElement e, int idx)
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
             s->distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
-            s->userDistance = 0.0;
             staves.append(s);
             }
 
@@ -2619,6 +2648,14 @@ void Measure::read(QDomElement e, int idx)
                   slur->read(e);
                   score()->layout()->add(slur);
                   }
+            else if (tag == "vspacer") {
+                  if (staves[idx]->_vspacer == 0) {
+                        Spacer* spacer = new Spacer(score());
+                        spacer->setTrack(idx * VOICES);
+                        add(spacer);
+                        }
+                  staves[idx]->_vspacer->setSpace(Spatium(val.toDouble()));
+                  }
             else
                   domError(e);
             }
@@ -2674,6 +2711,8 @@ void Measure::collectElements(QList<const Element*>& el) const
       foreach(const MStaff* ms, staves) {
             if (ms->lines)
                   el.append(ms->lines);
+            if (ms->_vspacer)
+                  el.append(ms->_vspacer);
             }
 
       int staves = score()->nstaves();
@@ -2947,5 +2986,14 @@ void Measure::checkMultiVoices(int staffIdx)
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   userDistance
+//---------------------------------------------------------
+
+Spatium Measure::userDistance(int i) const
+      {
+      return staves[i]->_vspacer ? staves[i]->_vspacer->space() : Spatium(0);
       }
 
