@@ -560,7 +560,12 @@ void Chord::layoutStem(ScoreLayout* layout)
 
             // stems in the "wrong" direction are shorter than one octave:
             if (stemLen.val() < 0.0)
-                  stemLen = Spatium(2.5 * staffMag);
+                  if (hookIdx == 0)
+                        stemLen = Spatium(2.5 * staffMag);
+                  else if (hookIdx <= 2)
+                        stemLen = Spatium(3.0 * staffMag);  // 16th and 8th
+                  else
+                        stemLen = Spatium(3.5 * staffMag);  // 32nd, 64th, ...
 
             else if (stemLen < normalLen)
                   stemLen = normalLen;
