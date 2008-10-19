@@ -119,7 +119,8 @@ static SymCode pSymbols[] = {
 TextPalette::TextPalette(QWidget* parent)
    : QWidget(parent)
       {
-      setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
+//      setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
+      setWindowFlags(Qt::Tool);
       setupUi(this);
       QGridLayout* gl = new QGridLayout;
       gl->setMargin(5);

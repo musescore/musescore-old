@@ -1,4 +1,6 @@
-19.10 (sy)
+19.10 (ws)
+      - make character palette (F2) moveable in windows version
+      (sy)
       - lengthened stems for hooked notes when "short stems" are used in multi-voice measures
 18.10 (ws)
       - Implemented vertical spacer elements. Drag from "breaks/spacer" palette
