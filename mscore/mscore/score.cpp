@@ -302,6 +302,8 @@ void Score::addViewer(Viewer* v)
 
 Canvas* Score::canvas() const
       {
+      if (viewer.isEmpty())
+            return 0;
       return static_cast<Canvas*>(viewer[0]);
       }
 

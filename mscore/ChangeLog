@@ -1,4 +1,5 @@
 20.10 (ws)
+      - page settings: "Space" spinbox minimum value set from 0.101 to 0.001
       - new italian translation from Contardi Angelo
       - tried to fix tenor clef
       - fixed bug in volta edit mode

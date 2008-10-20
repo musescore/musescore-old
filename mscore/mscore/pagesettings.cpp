@@ -193,6 +193,7 @@ void PageSettings::setValues(ScoreLayout* lo)
       QString s;
       pageWidth->blockSignals(true);
       pageHeight->blockSignals(true);
+
       if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin * INCH);
             oddPageBottomMargin->setValue(pf->oddBottomMargin * INCH);
