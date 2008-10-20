@@ -227,8 +227,9 @@ bool Score::needLayout() const
 Score::Score()
       {
       info.setFile("");
-      _layout           = new ScoreLayout(this);
-      _style            = new Style(defaultStyle);
+
+      _style  = new Style(defaultStyle);
+      _layout = new ScoreLayout(this);
 
       // deep copy of defaultTextStyles:
       for (int i = 0; i < TEXT_STYLES; ++i)
@@ -251,6 +252,8 @@ Score::Score()
       cmdActive         = false;
       _playlistDirty    = false;
       rights            = 0;
+      _state            = STATE_NORMAL;
+
       clear();
       }
 
@@ -286,15 +289,11 @@ void Score::setStyle(const Style& s)
 void Score::addViewer(Viewer* v)
       {
       viewer.push_back(v);
-      }
-
-//---------------------------------------------------------
-//   clearViewer
-//---------------------------------------------------------
-
-void Score::clearViewer()
-      {
-      viewer.clear();
+      if (viewer.size() == 1) {
+            Canvas* c = canvas();
+            c->setScore(this, _layout);
+            _layout->setPaintDevice(c);
+            }
       }
 
 //---------------------------------------------------------
@@ -303,7 +302,7 @@ void Score::clearViewer()
 
 Canvas* Score::canvas() const
       {
-      return  mscore->getCanvas();
+      return static_cast<Canvas*>(viewer[0]);
       }
 
 //---------------------------------------------------------
@@ -1082,7 +1081,7 @@ void Score::endEdit()
       else if (tp == HARMONY)
             harmonyEndEdit();
       layoutAll = true;
-      mscore->setState(STATE_NORMAL);
+      setState(STATE_NORMAL);
       editObject = 0;
       }
 
@@ -1186,7 +1185,7 @@ void Score::setNoteEntry(bool val)
                   }
             }
       canvas()->setState(_is.noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
-      mscore->setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
+      setState(_is.noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
       }
 
 //---------------------------------------------------------
@@ -1818,6 +1817,17 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
       y += pos->line * _spatium * .5;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
       return true;
+      }
+
+//---------------------------------------------------------
+//   setState
+//---------------------------------------------------------
+
+void Score::setState(int s)
+      {
+      if (s != _state)
+            emit stateChanged(s);
+      _state = s;
       }
 
 

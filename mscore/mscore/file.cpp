@@ -164,7 +164,7 @@ void MuseScore::clearScore()
       setDefaultStyle();
       cs->clear();
       cs->sel->clear();
-      canvas->clearScore();
+      cs->canvas()->clearScore();
       }
 
 //---------------------------------------------------------
@@ -196,6 +196,7 @@ void MuseScore::loadFile()
       if (fn.isEmpty())
             return;
       Score* score = new Score();
+      score->addViewer(new Canvas);
       score->read(fn);
       appendScore(score);
       lastOpenPath = score->fileInfo()->path();
@@ -485,6 +486,7 @@ void MuseScore::newFile()
       char ks = newWizard->keysig();
 
       Score* score = new Score;
+      score->addViewer(new Canvas);
       score->setCreated(true);
 
       //
@@ -645,8 +647,8 @@ void MuseScore::newFile()
       if (!copyright.isEmpty())
             score->setCopyright(copyright);
 
-      appendScore(score);
       score->rebuildMidiMapping();
+      appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
       }
 
@@ -909,9 +911,9 @@ bool Score::saveFile(QIODevice* f, bool autosave)
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
 
-      xml.tag("Mag",  mag());
-      xml.tag("xoff", xoffset() / DPMM);
-      xml.tag("yoff", yoffset() / DPMM);
+      xml.tag("Mag",  canvas()->mag());
+      xml.tag("xoff", canvas()->xoffset() / DPMM);
+      xml.tag("yoff", canvas()->yoffset() / DPMM);
 
       if (::symbolPalette)
             ::symbolPalette->write(xml, "Symbols");
@@ -1053,6 +1055,8 @@ bool Score::read(QDomElement e)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
 
+      double xoff = 0;
+      double yoff = 0;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
@@ -1071,18 +1075,16 @@ bool Score::read(QDomElement e)
                   else if (tag == "tempolist")
                         tempomap->read(ee, this);
                   else if (tag == "Mag")
-                        setMag(val.toDouble());
+                        canvas()->setMag(val.toDouble());
                   else if (tag == "xoff") {
-                        if (_mscVersion < 105)
-                              setXoffset(val.toDouble());
-                        else
-                              setXoffset(val.toDouble() * DPMM);
+                        xoff = val.toDouble();
+                        if (_mscVersion >= 105)
+                              xoff *= DPMM;
                         }
                   else if (tag == "yoff") {
-                        if (_mscVersion < 105)
-                              setYoffset(val.toDouble());
-                        else
-                              setYoffset(val.toDouble() * DPMM);
+                        yoff = val.toDouble();
+                        if (_mscVersion >= 105)
+                              yoff *= DPMM;
                         }
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
@@ -1198,6 +1200,7 @@ bool Score::read(QDomElement e)
 
       searchSelectedElements();
       _fileDivision = division;
+      canvas()->setOffset(xoff, yoff);
       return false;
       }
 

@@ -944,7 +944,6 @@ void Measure::add(Element* el)
 
       switch (type) {
             case SPACER:
-printf("add spacer %d\n", el->staffIdx());
                   staves[el->staffIdx()]->_vspacer = static_cast<Spacer*>(el);
                   break;
             case BEAM:

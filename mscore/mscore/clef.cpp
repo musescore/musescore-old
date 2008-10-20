@@ -50,10 +50,10 @@ const ClefInfo clefTable[] = {
 /*NC*/      ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
 /*NC*/      ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
 
-/*NC*/      ClefInfo("C",   1,  0, -10,  35, "Soprano Clef"),        // CLEF_C1
+/*NC*/      ClefInfo("C",   1,  0, -9,   35, "Soprano Clef"),        // CLEF_C1
 /*NC*/      ClefInfo("C",   2,  0,  -8,  37, "Mezzo-soprano Clef"),  // CLEF_C2
             ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
-/*NC*/      ClefInfo("C",   4,  0,  -4,  41, "Tenor Clef"),          // CLEF_C4
+/*NC*/      ClefInfo("C",   4,  0,  -8,  41, "Tenor Clef"),          // CLEF_C4
 
 /*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature"),
       ClefInfo("PERC", 2,   0,  0,  45, "Percussion"),

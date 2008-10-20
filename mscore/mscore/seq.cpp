@@ -350,9 +350,9 @@ void Seq::pause()
 
 void MuseScore::seqStarted()
       {
-      if (_state != STATE_PLAY)  // don't get stuck in play mode
-           _prevState = _state;
-      setState(STATE_PLAY);
+      if (cs->state() != STATE_PLAY)  // don't get stuck in play mode
+           cs->setPrevState(cs->state());
+      cs->setState(STATE_PLAY);
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(true);
       cs->end();
@@ -366,11 +366,11 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
-      setState(_prevState);
+      cs->setState(cs->prevState());
       // TODO: there should really be some sort of signal to the viewers
       // instead of the state change being handled here
       bool cursorOn = false;
-      if (_state == STATE_NOTE_ENTRY)
+      if (cs->state() == STATE_NOTE_ENTRY)
             cursorOn = true;
       foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(cursorOn);

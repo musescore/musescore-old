@@ -1,3 +1,10 @@
+20.10 (ws)
+      - new italian translation from Contardi Angelo
+      - tried to fix tenor clef
+      - fixed bug in volta edit mode
+      - moved "state" from MuseScore to Score class; every Score() now has its own
+        Canvas(), to preserves edit states. This fixes some crashes when switching
+        scores while one score is in edit mode.
 19.10 (ws)
       - make character palette (F2) moveable in windows version
       (sy)

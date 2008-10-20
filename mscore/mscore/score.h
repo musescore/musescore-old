@@ -72,18 +72,15 @@ struct SigEvent;
 
 extern bool showRubberBand;
 
-//---------------------------------------------------------
-//   ScoreView
-//---------------------------------------------------------
+//
+// MuseScore _state
+//
 
-class ScoreView {
-   public:
-      qreal _mag, _xoffset, _yoffset;
-      ScoreView() {
-            _mag     = 1.0;
-            _xoffset = 0.0;
-            _yoffset = 0.0;
-            }
+enum {
+      STATE_NORMAL     = 1,
+      STATE_NOTE_ENTRY = 2,
+      STATE_EDIT       = 4,
+      STATE_PLAY       = 8
       };
 
 //---------------------------------------------------------
@@ -178,7 +175,6 @@ class Score : public QObject {
 
       QList<Viewer*> viewer;
 
-      ScoreView scoreView;
       ScoreLayout* _layout;
 
       bool _showInvisible;
@@ -283,6 +279,7 @@ class Score : public QObject {
    signals:
       void selectionChanged(int);
       void dirtyChanged(Score*);
+      void stateChanged(int);
 
    public:
       bool cmdActive;
@@ -300,13 +297,15 @@ class Score : public QObject {
       //    state information
       //---------------------------------------------------
 
-      Selection* sel;
+      int _state;
+      int _prevState;               ///< state before playback
 
+      Selection* sel;
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
       QString oldInstrumentName;    ///< valid while editing instrument names
 
-      System* dragSystem;     ///< Valid if DRAG_STAFF.
+      System* dragSystem;           ///< Valid if DRAG_STAFF.
       int dragStaff;
 
       void cmdAppendMeasures(int);
@@ -364,7 +363,6 @@ class Score : public QObject {
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
       void addViewer(Viewer* v);
-      void clearViewer();
 
       void undoOp(QList<int>);
       void undoOp(UndoOp::UndoType type, MeasureBase* m);
@@ -497,13 +495,6 @@ class Score : public QObject {
       void read(QString name);
 
       void setSpatium(double v);
-
-      double mag() const         { return scoreView._mag;     }
-      void setMag(double val)    { scoreView._mag = val;      }
-      qreal xoffset() const      { return scoreView._xoffset; }
-      qreal yoffset() const      { return scoreView._yoffset; }
-      void setXoffset(qreal val) { scoreView._xoffset = val;  }
-      void setYoffset(qreal val) { scoreView._yoffset = val;  }
 
       bool showInvisible() const { return _showInvisible; }
       void setShowInvisible(bool v);
@@ -644,6 +635,11 @@ class Score : public QObject {
 
       Page* searchPage(const QPointF&) const;
       bool getPosition(Position* pos, const QPointF&) const;
+
+      void setState(int s);
+      int state() const        { return _state; }
+      void setPrevState(int s) { _prevState = s; }
+      int prevState() const    { return _prevState; }
       };
 
 extern Score* gscore;

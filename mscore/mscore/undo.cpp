@@ -675,12 +675,12 @@ void Score::endUndoRedo(Undo* undo)
       if (!noteEntryMode()) {
             // no input state
             canvas()->setState(Canvas::NORMAL);
-            mscore->setState(STATE_NORMAL);
+            setState(STATE_NORMAL);
             }
       else {
             // input state
             canvas()->setState(Canvas::NOTE_ENTRY);
-            mscore->setState(STATE_NOTE_ENTRY);
+            setState(STATE_NOTE_ENTRY);
             }
 
       *sel = undo->selection;

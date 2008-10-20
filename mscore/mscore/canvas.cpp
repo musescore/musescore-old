@@ -82,8 +82,6 @@ Canvas::Canvas(QWidget* parent)
       bgPixmap         = 0;
       lasso            = new Lasso(_score);
 
-//      setOffset(30, 30);
-
       state            = NORMAL;
       cursor           = 0;
       shadowNote       = 0;
@@ -97,6 +95,30 @@ Canvas::Canvas(QWidget* parent)
 
       if (debugMode)
             setMouseTracking(true);
+
+      if (preferences.bgUseColor)
+            setBackground(preferences.bgColor);
+      else {
+            QPixmap* pm = new QPixmap(preferences.bgWallpaper);
+            setBackground(pm);
+            }
+      if (preferences.fgUseColor)
+            setForeground(preferences.fgColor);
+      else {
+            QPixmap* pm = new QPixmap(preferences.fgWallpaper);
+            if (pm == 0 || pm->isNull())
+                  printf("no valid pixmap %s\n", qPrintable(preferences.fgWallpaper));
+            setForeground(pm);
+            }
+      }
+
+//---------------------------------------------------------
+//   navigatorVisible
+//---------------------------------------------------------
+
+bool Canvas::navigatorVisible() const
+      {
+      return navigator && navigator->isVisible();
       }
 
 //---------------------------------------------------------
@@ -116,7 +138,6 @@ void Canvas::setScore(Score* s, ScoreLayout* l)
             cursor->setScore(_score);
             shadowNote->setScore(_score);
             }
-      Viewer::setScore(s);
       _layout = l;
       if (navigator) {
             navigator->setScore(_score);
@@ -582,7 +603,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             //
             // this is necessary at least for qt4.1:
             //
-            if ((dx > 0 || dy < 0) && navigator->isVisible()) {
+            if ((dx > 0 || dy < 0) && navigatorVisible()) {
 	            QRect r(navigator->geometry());
             	r.translate(dx, dy);
             	update(r);
@@ -806,36 +827,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
       }
 
 //---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void Canvas::setMag(double nmag)
-      {
-      nmag *= PDPI / DPI;
-
-      qreal m = mag();
-      if (nmag == m)
-            return;
-      double deltamag = nmag / m;
-      setOffset(xoffset() * deltamag, yoffset() * deltamag);
-
-      _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m21(), nmag, _matrix.dx(), _matrix.dy());
-      imatrix = _matrix.inverted();
-
-      update();
-      updateNavigator(false);
-      }
-
-//---------------------------------------------------------
-//   mag
-//---------------------------------------------------------
-
-qreal Canvas::mag() const
-      {
-      return _matrix.m11() *  DPI/PDPI;
-      }
-
-//---------------------------------------------------------
 //   setBackground
 //---------------------------------------------------------
 
@@ -942,7 +933,7 @@ void Canvas::setState(State action)
                   break;
             case 8:     // NORMAL - EDIT
                   state = action;
-                  mscore->setState(STATE_EDIT);
+                  score()->setState(STATE_EDIT);
                   break;
             case  9:     // EDIT      - NORMAL
             case 11:     // DRAG_EDIT - NORMAL
@@ -1029,21 +1020,6 @@ void Canvas::dataChanged(const QRectF& r)
 void Canvas::redraw(const QRectF& fr)
       {
       update(_matrix.mapRect(fr).toRect());  // generate paint event
-      }
-
-//---------------------------------------------------------
-//   resetStaffOffsets
-//---------------------------------------------------------
-
-void Canvas::resetStaffOffsets()
-      {
-/*      for (iSystem i = _score->systems->begin(); i != _score->systems->end(); ++i) {
-            for (int staff = 0; staff < _score->staves(); ++staff)
-                  (*i)->staff(staff)->setUserOff(0.0);
-            }
-      _score->layout();
-      redraw();
-*/
       }
 
 //---------------------------------------------------------
@@ -1396,7 +1372,7 @@ void Canvas::setViewRect(const QRectF& r)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
 
-      if ((dx > 0 || dy < 0) && navigator->isVisible()) {
+      if ((dx > 0 || dy < 0) && navigatorVisible()) {
 		QRect r(navigator->geometry());
             r.translate(dx, dy);
             update(r);
@@ -2068,7 +2044,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
             imatrix = _matrix.inverted();
             scroll(dx, dy, QRect(0, 0, width(), height()));
 
-            if ((dx > 0 || dy < 0) && navigator->isVisible()) {
+            if ((dx > 0 || dy < 0) && navigatorVisible()) {
 	            QRect r(navigator->geometry());
             	r.translate(dx, dy);
             	update(r);
@@ -2107,7 +2083,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
       //
       // this is necessary at least for qt4.1:
       //
-      if ((dy < 0 || dx > 0) && navigator->isVisible()) {
+      if ((dy < 0 || dx > 0) && navigatorVisible()) {
 		QRect r(navigator->geometry());
 		r.translate(dx, dy);
 		update(r);
@@ -2304,6 +2280,35 @@ void Canvas::paintLasso(QPainter& p, double mag)
       _matrix = omatrix;
       imatrix = _matrix.inverted();
       p.end();
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Canvas::setMag(double nmag)
+      {
+      qreal m = mag();
+      if (nmag == m)
+            return;
+      double deltamag = nmag / m;
+      nmag *= (PDPI/DPI);
+
+      _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m21(), nmag,
+         _matrix.dx() * deltamag, _matrix.dy() * deltamag);
+      imatrix = _matrix.inverted();
+
+      update();
+      updateNavigator(false);
+      }
+
+//---------------------------------------------------------
+//   mag
+//---------------------------------------------------------
+
+qreal Canvas::mag() const
+      {
+      return _matrix.m11() *  DPI/PDPI;
       }
 
 //---------------------------------------------------------

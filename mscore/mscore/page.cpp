@@ -138,7 +138,7 @@ void Page::layout(ScoreLayout* layout)
             }
 
       // add copyright to page
-      if (mscore->state() == STATE_EDIT) {      // for special case: edit copyright
+      if (score()->state() == STATE_EDIT) {      // for special case: edit copyright
             if (_copyright)
                   _copyright->layout(layout);
             }

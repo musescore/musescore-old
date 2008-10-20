@@ -150,7 +150,7 @@ bool LayoutBreak::acceptDrop(Viewer*, const QPointF&, int type, int st) const
 //   drop
 //---------------------------------------------------------
 
-Element* LayoutBreak::drop(const QPointF& p1, const QPointF& p2, Element* e)
+Element* LayoutBreak::drop(const QPointF& /*p1*/, const QPointF& /*p2*/, Element* e)
       {
       score()->undoChangeElement(this, e);
       return e;
