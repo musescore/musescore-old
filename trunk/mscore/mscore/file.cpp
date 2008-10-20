@@ -1200,7 +1200,8 @@ bool Score::read(QDomElement e)
 
       searchSelectedElements();
       _fileDivision = division;
-      canvas()->setOffset(xoff, yoff);
+      if (!viewer.isEmpty())
+            canvas()->setOffset(xoff, yoff);
       return false;
       }
 
