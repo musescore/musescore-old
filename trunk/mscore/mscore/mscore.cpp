@@ -164,16 +164,6 @@ static void printVersion(const char* prog)
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
-      // TODO: end edit mode
-      if (cs) {
-            //
-            // remember "global" values:
-            //
-            cs->setMag(canvas->mag());
-            cs->setXoffset(canvas->xoffset());
-            cs->setYoffset(canvas->yoffset());
-            cs->clearViewer();
-            }
       for (QList<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
             Score* score = *i;
             if (checkDirty(score)) {
@@ -214,19 +204,22 @@ void MuseScore::closeEvent(QCloseEvent* ev)
 
 void MuseScore::preferencesChanged()
       {
-      if (preferences.bgUseColor)
-            canvas->setBackground(preferences.bgColor);
-      else {
-            QPixmap* pm = new QPixmap(preferences.bgWallpaper);
-            canvas->setBackground(pm);
-            }
-      if (preferences.fgUseColor)
-            canvas->setForeground(preferences.fgColor);
-      else {
-            QPixmap* pm = new QPixmap(preferences.fgWallpaper);
-            if (pm == 0 || pm->isNull())
-                  printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
-            canvas->setForeground(pm);
+      for (int i = 0; i < tab->count(); ++i) {
+            Canvas* canvas = static_cast<Canvas*>(tab->widget(i));
+            if (preferences.bgUseColor)
+                  canvas->setBackground(preferences.bgColor);
+            else {
+                  QPixmap* pm = new QPixmap(preferences.bgWallpaper);
+                  canvas->setBackground(pm);
+                  }
+            if (preferences.fgUseColor)
+                  canvas->setForeground(preferences.fgColor);
+            else {
+                  QPixmap* pm = new QPixmap(preferences.fgWallpaper);
+                  if (pm == 0 || pm->isNull())
+                        printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
+                  canvas->setForeground(pm);
+                  }
             }
 
       transportTools->setEnabled(!noSeq);
@@ -237,7 +230,7 @@ void MuseScore::preferencesChanged()
       }
 
 //---------------------------------------------------------
-//   Score
+//   MuseScore
 //---------------------------------------------------------
 
 MuseScore::MuseScore()
@@ -332,6 +325,7 @@ MuseScore::MuseScore()
          << "harmony-properties"
          << "system-break" << "page-break"
          << "edit-element"
+         << "mag"
          ;
 
       foreach(const QString s, sl) {
@@ -347,24 +341,16 @@ MuseScore::MuseScore()
       mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
-      tab = new TabBar;
-      tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-      QHBoxLayout* hbox = new QHBoxLayout;
-      hbox->addWidget(tab);
-      hbox->addStretch(100);
-
+      tab = new QTabWidget;
+      tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       removeTabButton = new QToolButton;
       removeTabButton->setIcon(QIcon(QPixmap(":/data/tab_remove.png")));
-      hbox->addWidget(removeTabButton);
+      tab->setCornerWidget(removeTabButton);
       connect(removeTabButton, SIGNAL(clicked()), SLOT(removeTab()));
 
-      canvas = new Canvas;
-      canvas->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      layout->addLayout(hbox);
-      layout->addWidget(canvas);
+      layout->addWidget(tab);
 
       connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
-      connect(tab, SIGNAL(doubleClick(int)), SLOT(removeTab(int)));
 
       QAction* whatsThis = QWhatsThis::createAction(this);
 
@@ -430,9 +416,7 @@ MuseScore::MuseScore()
       a->setChecked(preferences.playRepeats);
       transportTools->addAction(a);
 
-      a = getAction("mag");
-      fileTools->addAction(a);
-      connect(a, SIGNAL(triggered()), canvas, SLOT(magCanvas()));
+      fileTools->addAction(getAction("mag"));
 
       mag = new MagBox;
       connect(mag, SIGNAL(magChanged(double)), SLOT(magChanged(double)));
@@ -660,7 +644,6 @@ MuseScore::MuseScore()
 
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
       menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
-      menuLayout->addAction(tr("Set Normal Staff Distances"),  canvas, SLOT(resetStaffOffsets()));
       menuLayout->addAction(getAction("stretch+"));
       menuLayout->addAction(getAction("stretch-"));
 
@@ -755,7 +738,6 @@ MuseScore::MuseScore()
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
       connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
-      setState(STATE_NORMAL);
       autoSaveTimer = new QTimer(this);
       autoSaveTimer->setSingleShot(true);
       connect(autoSaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveTimerTimeout()));
@@ -873,7 +855,7 @@ void MagBox::indexChanged(int idx)
 
 double MagBox::txt2mag(const QString& s)
       {
-      Canvas* canvas = mscore->getCanvas();
+      Canvas* canvas = mscore->currentScore()->canvas();
       double cw      = canvas->fsize().width();
       double ch      = canvas->fsize().height();
 
@@ -977,7 +959,8 @@ QValidator::State MagValidator::validate(QString& input, int& /*pos*/) const
 
 void MuseScore::magChanged(double mag)
       {
-      canvas->setMag(mag);
+      if (cs)
+            cs->canvas()->setMag(mag);
       }
 
 //---------------------------------------------------------
@@ -986,7 +969,8 @@ void MuseScore::magChanged(double mag)
 
 void MuseScore::setMag(double val)
       {
-      canvas->setMag(val);
+      if (cs)
+            cs->canvas()->setMag(val);
       mag->setMag(val);
       }
 
@@ -996,10 +980,12 @@ void MuseScore::setMag(double val)
 
 void MuseScore::incMag()
       {
-      qreal _mag = canvas->mag() * 1.7;
-      if (_mag > 16.0)
-            _mag = 16.0;
-      setMag(_mag);
+      if (cs) {
+            qreal _mag = cs->canvas()->mag() * 1.7;
+            if (_mag > 16.0)
+                  _mag = 16.0;
+            setMag(_mag);
+            }
       }
 
 //---------------------------------------------------------
@@ -1008,10 +994,12 @@ void MuseScore::incMag()
 
 void MuseScore::decMag()
       {
-      qreal nmag = canvas->mag() / 1.7;
-      if (nmag < 0.05)
-            nmag = 0.05;
-      setMag(nmag);
+      if (cs) {
+            qreal nmag = cs->canvas()->mag() / 1.7;
+            if (nmag < 0.05)
+                  nmag = 0.05;
+            setMag(nmag);
+            }
       }
 
 //---------------------------------------------------------
@@ -1035,12 +1023,12 @@ void MuseScore::helpBrowser()
             printf("open manual for language <%s>\n", qPrintable(lang));
             }
 
-      QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/") + lang + QString("/index.html"));
+      QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
             if (debugMode) {
                   printf("cannot open doc <%s>\n", qPrintable(mscoreHelp.filePath()));
                   }
-            mscoreHelp.setFile(mscoreGlobalShare + QString("man/en/index.html"));
+            mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
             if (!mscoreHelp.isReadable()) {
                   QString info(tr("MuseScore online manual not found at: "));
                   info += mscoreHelp.filePath();
@@ -1100,6 +1088,7 @@ void MuseScore::selectScore(QAction* action)
                         }
                   }
             Score* score = new Score();
+            score->addViewer(new Canvas);
             score->read(item->getName());
             appendScore(score);
             tab->setCurrentIndex(scoreList.size() - 1);
@@ -1123,6 +1112,9 @@ void MuseScore::selectionChanged(int state)
 
 void MuseScore::appendScore(Score* score)
       {
+      if (score->getViewer().isEmpty())
+            score->addViewer(new Canvas);
+
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
@@ -1130,12 +1122,14 @@ void MuseScore::appendScore(Score* score)
                   }
             }
       connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
+      connect(score, SIGNAL(stateChanged(int)), SLOT(changeState(int)));
       scoreList.push_back(score);
-      tab->addTab(score->name());
 
-      bool showTabBar = scoreList.size() > 1;
-      tab->setVisible(showTabBar);
-      removeTabButton->setVisible(showTabBar);
+      tab->addTab(score->canvas(), score->name());
+
+//      bool showTabBar = scoreList.size() > 1;
+//      tab->setVisible(showTabBar);
+//      removeTabButton->setVisible(showTabBar);
 
       QString name(score->filePath());
       for (int i = 0; i < projectList.size(); ++i) {
@@ -1273,33 +1267,16 @@ void MuseScore::setCurrentScore(int idx)
             tab->setCurrentIndex(idx);  // will call setCurrentScore() again
             return;
             }
-      if (cs) {
-            //
-            // remember "global" values:
-            //
-            cs->setMag(canvas->mag());
-            cs->setXoffset(canvas->xoffset());
-            cs->setYoffset(canvas->yoffset());
-            cs->clearViewer();
-            }
-
       cs = scoreList[idx];
-      cs->clearViewer();
-      cs->addViewer(canvas);
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
-
       getAction("file-save")->setEnabled(cs->isSavable());
-
       visibleId->setChecked(cs->showInvisible());
-
-      cs->setSpatium(cs->layout()->spatium());
-      setMag(cs->mag());
-      canvas->setOffset(cs->xoffset(), cs->yoffset());
+      setMag(cs->canvas()->mag());
+      navigatorId->setChecked(cs->canvas()->navigatorVisible());
 
       setWindowTitle("MuseScore: " + cs->name());
-      canvas->setScore(cs, cs->layout());
       seq->setScore(cs);
       seq->initInstruments();
       if (playPanel)
@@ -1311,6 +1288,7 @@ void MuseScore::setCurrentScore(int idx)
       a->setChecked(cs->style()->concertPitch);
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+      changeState(cs->state());
       }
 
 //---------------------------------------------------------
@@ -1375,7 +1353,7 @@ void MuseScore::showPageSettings()
 
 void MuseScore::pageSettingsChanged()
       {
-      canvas->updateNavigator(true);
+      cs->canvas()->updateNavigator(true);
       cs->setLayoutAll(true);
       cs->end();
       }
@@ -1553,8 +1531,8 @@ void MuseScore::removeTab(int i)
       setCurrentScore(i);
       bool showTabBar = scoreList.size() > 1;
       getAction("file-close")->setEnabled(showTabBar);
-      tab->setVisible(showTabBar);
-      removeTabButton->setVisible(showTabBar);
+//      tab->setVisible(showTabBar);
+//      removeTabButton->setVisible(showTabBar);
       }
 
 //---------------------------------------------------------
@@ -1761,11 +1739,12 @@ int main(int argc, char* argv[])
                         foreach(const ProjectItem* item, projectList) {
                               if (item->loaded) {
                                     Score* score = new Score();
+                                    score->addViewer(new Canvas);
                                     scoreCreated = true;
                                     score->read(item->name);
+                                    mscore->appendScore(score);
                                     if (item->current)
                                           currentScore = idx;
-                                    mscore->appendScore(score);
                                     ++idx;
                                     }
                               }
@@ -1774,6 +1753,7 @@ int main(int argc, char* argv[])
                         break;
                   case SCORE_SESSION:
                         Score* score = new Score();
+                        score->addViewer(new Canvas);
                         scoreCreated = true;
                         score->read(preferences.startScore);
                         mscore->appendScore(score);
@@ -1786,6 +1766,7 @@ int main(int argc, char* argv[])
                   --argc;
                   if (!name.isEmpty()) {
                         Score* score = new Score();
+                        score->addViewer(new Canvas);
                         scoreCreated = true;
                         score->read(name);
                         mscore->appendScore(score);
@@ -1796,6 +1777,7 @@ int main(int argc, char* argv[])
       if (!scoreCreated) {
             // start with empty score:
             Score* score = new Score();
+            score->addViewer(new Canvas);
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
             mscore->appendScore(score);
@@ -1808,7 +1790,7 @@ int main(int argc, char* argv[])
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
 
-      mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
+//?      mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
 
       if (converterMode) {
             QString fn(outFileName);
@@ -1868,7 +1850,11 @@ void MuseScore::cmd(QAction* a)
 
       QString cmd(a->data().toString());
       Shortcut* sc = getShortcut(cmd.toAscii().data());
-      if (sc == 0 || (sc->state & _state) == 0) {
+      if (sc == 0) {
+            printf("unknown action <%s>\n", qPrintable(cmd));
+            return;
+            }
+      if (cs && (sc->state & cs->state()) == 0) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: invalid command"),
                QString("command %1 not valid in current state").arg(cmd),
@@ -1950,10 +1936,11 @@ void MuseScore::clipboardChanged()
       }
 
 //---------------------------------------------------------
-//   setState
+//   changeState
+//    score state has changed
 //---------------------------------------------------------
 
-void MuseScore::setState(int val)
+void MuseScore::changeState(int val)
       {
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
@@ -1991,7 +1978,6 @@ void MuseScore::setState(int val)
             }
       QAction* a = getAction("note-input");
       a->setChecked(val == STATE_NOTE_ENTRY);
-      _state = val;
       }
 
 //---------------------------------------------------------

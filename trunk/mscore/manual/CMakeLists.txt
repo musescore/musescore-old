@@ -18,4 +18,10 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-
+install(FILES
+      MuseScore-en.pdf
+      MuseScore-de.pdf
+      MuseScore-es.pdf
+      MuseScore-fr.pdf
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
+      )

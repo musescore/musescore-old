@@ -20,6 +20,7 @@
 
 install(FILES
       instruments_de.xml
+      instruments_it.xml
       instruments.xml
       pianoa5demo.msc
       violina5demo.msc

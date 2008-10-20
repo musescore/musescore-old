@@ -49,7 +49,7 @@ Navigator::Navigator(QWidget* parent)
 
 void MuseScore::showNavigator(bool visible)
       {
-      canvas->showNavigator(visible);
+      cs->canvas()->showNavigator(visible);
       navigatorId->setChecked(visible);
       }
 

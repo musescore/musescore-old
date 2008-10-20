@@ -135,7 +135,7 @@ void Score::endCmd()
 */
 void Score::end()
       {
-      if (noteEntryMode() && mscore->state() != STATE_PLAY)
+      if (noteEntryMode() && _state != STATE_PLAY)
             canvas()->moveCursor();
 
       if (layoutAll) {
@@ -1779,6 +1779,8 @@ void Score::cmd(const QString& cmd)
                   setNoteEntry(false);
             end();
             }
+      else if (cmd == "mag")
+            canvas()->magCanvas();
       else if (cmd == "pause")
             seq->pause();
       else if (cmd == "play")

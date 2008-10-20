@@ -107,7 +107,7 @@ ScoreLayout::ScoreLayout(Score* score)
       _pages.clear();
       _needLayout = false;
       _pageFormat = new PageFormat;
-      _paintDevice = _score->canvas();
+      _paintDevice = 0;
       startLayout = 0;
       }
 

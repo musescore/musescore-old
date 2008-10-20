@@ -53,17 +53,6 @@ extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
 
-//
-// MuseScore _state
-//
-
-enum {
-      STATE_NORMAL     = 1,
-      STATE_NOTE_ENTRY = 2,
-      STATE_EDIT       = 4,
-      STATE_PLAY       = 8
-      };
-
 //---------------------------------------------------------
 //   AboutBoxDialog
 //---------------------------------------------------------
@@ -105,25 +94,6 @@ class MeasuresDialog : public QDialog, public Ui::MeasuresDialogBase {
       };
 
 //---------------------------------------------------------
-//   TabBar
-//---------------------------------------------------------
-
-class TabBar : public QTabBar {
-      Q_OBJECT
-
-      virtual void mouseDoubleClickEvent(QMouseEvent* ev) {
-            emit doubleClick(currentIndex());
-            QTabBar::mouseDoubleClickEvent(ev);
-            }
-   signals:
-      void doubleClick(int);
-
-   public:
-      TabBar() : QTabBar() {}
-      };
-
-
-//---------------------------------------------------------
 //   Shortcut
 //    hold the basic values for configurable shortcuts
 //---------------------------------------------------------
@@ -163,17 +133,13 @@ struct Command {
 class MuseScore : public QMainWindow {
       Q_OBJECT
 
-      int _state;
-      int _prevState;         // state before playback
-
       QList<Score*> scoreList;
       Score* cs;              // current score
 
       QQueue<Command> commandQueue;
 
-      Canvas* canvas;
       QVBoxLayout* layout;
-      TabBar* tab;
+      QTabWidget* tab;
       QToolButton* removeTabButton;
 
       QMenu* menuDisplay;
@@ -308,10 +274,10 @@ class MuseScore : public QMainWindow {
       void showPalette(bool);
       void showNavigator(bool);
       void dirtyChanged(Score*);
+      void changeState(int);
 
    public:
       MuseScore();
-      Canvas* getCanvas() { return canvas; }
       bool checkDirty(Score*);
       void clearScore();
       PlayPanel* getPlayPanel() const { return playPanel; }
@@ -323,8 +289,6 @@ class MuseScore : public QMainWindow {
       bool midiinEnabled() const;
       bool playEnabled() const;
       Score* currentScore() const { return cs; }
-      void setState(int);
-      int state() const { return _state; }
       static Shortcut sc[];
       static Shortcut scSeq[];
       void incMag();
@@ -337,7 +301,6 @@ class MuseScore : public QMainWindow {
       void loadPlugins();
       QString createDefaultName() const;
       void startAutoSave();
-//      void setTabText(int idx, const QString& s) { tab->setTabText(idx, s); }
       void updateDrumset();
       };
 

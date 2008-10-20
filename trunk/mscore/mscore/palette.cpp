@@ -190,7 +190,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
       QMimeData* mimeData = new QMimeData;
       Element* element    = symbols[i];
-      Viewer* viewer      = score->getViewer().front();
+      Viewer* viewer      = score->canvas();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
       QPointF pt;
 

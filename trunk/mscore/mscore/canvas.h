@@ -131,9 +131,6 @@ class Canvas : public QFrame, public Viewer {
       void cmdCut();
       void cmdCopy();
       void cmdPaste();
-      void magCanvas();
-
-      void resetStaffOffsets();
       void setViewRect(const QRectF&);
 
    public:
@@ -181,6 +178,8 @@ class Canvas : public QFrame, public Viewer {
       QRectF lassoRect() const { return _lassoRect; }
       void setLassoRect(const QRectF& r) { _lassoRect = r; }
       void paintLasso(QPainter& p, double mag);
+      bool navigatorVisible() const;
+      void magCanvas();
       };
 
 extern int searchStaff(const Element* element);

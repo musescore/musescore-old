@@ -127,7 +127,7 @@ void VoltaSegment::propertyAction(const QString& s)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
+bool VoltaSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
       {
       if ((ev->modifiers() & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
@@ -167,8 +167,9 @@ bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
                         tick2 = m2->tick() + m2->tickLen();
                         line()->setTick2(tick2);
                         line()->layout(score()->layout());
-                        if (line()->lineSegments().size() != segments)
+                        if (line()->lineSegments().size() != segments) {
                               score()->changeLineSegment(true);
+                              }
                         }
                   }
             line()->setTick(tick1);
