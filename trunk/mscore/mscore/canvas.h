@@ -108,6 +108,7 @@ class Canvas : public QFrame, public Viewer {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
 
+
       void contextItem(Element*);
 
       void lassoSelect();

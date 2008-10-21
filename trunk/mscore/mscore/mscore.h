@@ -302,6 +302,7 @@ class MuseScore : public QMainWindow {
       QString createDefaultName() const;
       void startAutoSave();
       void updateDrumset();
+      void updateMag();
       };
 
 //---------------------------------------------------------
@@ -329,7 +330,7 @@ class MagBox : public QComboBox {
    signals:
       void magChanged(double);
 
-   private slots:
+   public slots:
       void indexChanged(int idx);
 
    public:
