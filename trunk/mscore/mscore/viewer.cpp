@@ -35,6 +35,8 @@ Viewer::Viewer()
       _score     = 0;
       dropTarget = 0;
       _editText  = 0;
+      _matrix    = QMatrix(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
+      imatrix    = _matrix.inverted();
       };
 
 //---------------------------------------------------------

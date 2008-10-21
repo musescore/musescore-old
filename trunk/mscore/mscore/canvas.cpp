@@ -2289,6 +2289,8 @@ void Canvas::paintLasso(QPainter& p, double mag)
 void Canvas::setMag(double nmag)
       {
       qreal m = mag();
+// printf("change mag %f -> %f\n", m, nmag);
+
       if (nmag == m)
             return;
       double deltamag = nmag / m;
