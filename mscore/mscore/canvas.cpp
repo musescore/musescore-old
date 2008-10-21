@@ -336,6 +336,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
 
 void Canvas::resizeEvent(QResizeEvent*)
       {
+      mscore->updateMag();
       if (navigator) {
             navigator->move(0, height() - navigator->height());
             updateNavigator(false);
@@ -2343,4 +2344,5 @@ qreal Canvas::yoffset() const
       {
       return _matrix.dy() * DPI / PDPI;
       }
+
 

@@ -781,6 +781,11 @@ void MuseScore::autoSaveTimerTimeout()
 //    list of strings shown in QComboBox "MagBox"
 //---------------------------------------------------------
 
+enum { MAG_PAGE_WIDTH = 9,
+       MAG_PAGE = 10,
+       MAG_DBL_PAGE = 11
+      };
+
 static const char* magTable[] = {
      "25%", "50%", "75%", "100%", "150%", "200%", "400%", "800%", "1600%",
       QT_TRANSLATE_NOOP("magTable","PgeWidth"),
@@ -868,12 +873,12 @@ double MagBox::txt2mag(const QString& s)
             if (ts != s)
                   continue;
             switch(i) {
-                  case 9:      // page width
+                  case MAG_PAGE_WIDTH:      // page width
                         nmag *= cw / (pf->width() * DPI);
                         canvas->setOffset(0.0, 0.0);
                         found = true;
                         break;
-                  case 10:     // page
+                  case MAG_PAGE:     // page
                         {
                         double mag1 = cw  / (pf->width() * DPI);
                         double mag2 = ch / (pf->height() * DPI);
@@ -882,7 +887,7 @@ double MagBox::txt2mag(const QString& s)
                         found = true;
                         }
                         break;
-                  case 11:    // double page
+                  case MAG_DBL_PAGE:    // double page
                         {
                         double mag1 = cw / (pf->width()*2*DPI+50.0);
                         double mag2 = ch / (pf->height() * DPI);
@@ -2112,5 +2117,20 @@ void MuseScore::dirtyChanged(Score* score)
       if (score->dirty())
             label += "*";
       tab->setTabText(idx, label);
+      }
+
+//---------------------------------------------------------
+//   updateMag
+//    This is called if geometry of canvas changes.
+//    Resize score if size is set to PageWidth etc.
+//---------------------------------------------------------
+
+void MuseScore::updateMag()
+      {
+      if (!cs)
+            return;
+      int idx = mag->currentIndex();
+      if (idx == MAG_PAGE_WIDTH || idx == MAG_PAGE || idx == MAG_DBL_PAGE)
+            mscore->mag->indexChanged(mag->currentIndex());
       }
 
