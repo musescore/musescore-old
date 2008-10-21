@@ -5382,11 +5382,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/bu/actions.cpp" line="1566"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/bu/actions.cpp" line="1736"/>
         <source>edit element</source>
         <translation type="unfinished"></translation>
@@ -5658,102 +5653,102 @@ Desideri Salvare lo Spartito?</translation>
 <context>
     <name>PageSettingsBase</name>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="16"/>
+        <location filename="../../mscore/pagesettings.ui" line="13"/>
         <source>MuseScore: Page Settings</source>
         <translation>MuseScore: Impostazioni Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="36"/>
+        <location filename="../../mscore/pagesettings.ui" line="31"/>
         <source>Preview</source>
         <translation>Anteprima</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="64"/>
+        <location filename="../../mscore/pagesettings.ui" line="59"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="71"/>
+        <location filename="../../mscore/pagesettings.ui" line="66"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="78"/>
+        <location filename="../../mscore/pagesettings.ui" line="73"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="95"/>
+        <location filename="../../mscore/pagesettings.ui" line="90"/>
         <source>Page Size</source>
         <translation>Dimensione Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="137"/>
+        <location filename="../../mscore/pagesettings.ui" line="128"/>
         <source>Two Sided</source>
         <translation>Fronte-Retro</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="144"/>
+        <location filename="../../mscore/pagesettings.ui" line="135"/>
         <source>Landscape</source>
         <translation>Orizzontale</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="151"/>
+        <location filename="../../mscore/pagesettings.ui" line="142"/>
         <source>Height</source>
         <translation>Altezza</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="164"/>
+        <location filename="../../mscore/pagesettings.ui" line="155"/>
         <source>Width</source>
         <translation>Larghezza</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="183"/>
+        <location filename="../../mscore/pagesettings.ui" line="174"/>
         <source>Scaling</source>
         <translation>Unità di Spaziatura</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="195"/>
+        <location filename="../../mscore/pagesettings.ui" line="186"/>
         <source>Space</source>
         <translation>spazio</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="243"/>
+        <location filename="../../mscore/pagesettings.ui" line="235"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="250"/>
+        <location filename="../../mscore/pagesettings.ui" line="242"/>
         <source>inch</source>
         <translation>pollici</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="269"/>
+        <location filename="../../mscore/pagesettings.ui" line="261"/>
         <source>Even Page Margins</source>
         <translation>Margini Pagine Pari</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="468"/>
+        <location filename="../../mscore/pagesettings.ui" line="444"/>
         <source>Bottom Margin</source>
         <translation>Inferiore</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="481"/>
+        <location filename="../../mscore/pagesettings.ui" line="457"/>
         <source>Top Margin</source>
         <translation>Superiore</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="494"/>
+        <location filename="../../mscore/pagesettings.ui" line="470"/>
         <source>Right Margin</source>
         <translation>Destro</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="507"/>
+        <location filename="../../mscore/pagesettings.ui" line="483"/>
         <source>Left Margin</source>
         <translation>Sinistro</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="396"/>
+        <location filename="../../mscore/pagesettings.ui" line="380"/>
         <source>Odd Page Margins</source>
         <translation>Margini Pagine Dispari</translation>
     </message>

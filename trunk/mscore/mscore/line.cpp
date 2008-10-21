@@ -61,33 +61,29 @@ QPointF LineSegment::gripAnchor(int grip) const
       QPointF sp(sbb.topLeft() + _system->canvasPos());
 
       System* s;  // dummy
-      switch(_segmentType) {
-            case SEGMENT_SINGLE:
-                  if (grip == 0)
-                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
-                  else if (grip == 1)
-                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
-                  return QPointF();
-            case SEGMENT_BEGIN:
-                  if (grip == 0)
-                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
-                  else if (grip == 1) {
-                        double x = sbb.width() + _system->canvasPos().x();
-                        return QPointF(x, sp.y());
-                        }
-            case SEGMENT_MIDDLE:
-                  if (grip == 0)
+      QPointF p1(line()->tick2pos(grip, line()->tick(), staffIdx, &s));
+      QPointF p2(sbb.x() + sbb.width() + _system->canvasPos().x(), sp.y());
+      QPointF p3(line()->tick2pos(grip, line()->tick2(), staffIdx, &s));
+
+      if (grip == 0) {
+            switch(_segmentType) {
+                  case SEGMENT_SINGLE:
+                  case SEGMENT_BEGIN:
+                        return p1;
+                  case SEGMENT_MIDDLE:
+                  case SEGMENT_END:
                         return sp;
-                  else if (grip == 1) {
-                        double x = sbb.width() + _system->canvasPos().x();
-                        return QPointF(x, sp.y());
-                        }
-            case SEGMENT_END:
-                  if (grip == 0)
-                        return sp;
-                  else if (grip == 1)
-                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
-                  break;
+                  }
+            }
+      else {
+            switch(_segmentType) {
+                  case SEGMENT_SINGLE:
+                  case SEGMENT_END:
+                        return p3;
+                  case SEGMENT_BEGIN:
+                  case SEGMENT_MIDDLE:
+                        return p2;
+                  }
             }
       return QPointF();
       }
@@ -113,6 +109,7 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
               || (_segmentType == SEGMENT_END && curGrip == 1)
          )) {
+            int segments = line()->lineSegments().size();
             int track = line()->track();
             int tick1 = line()->tick();
             int tick2 = line()->tick2();
@@ -124,16 +121,11 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
                               tick1 = t1;
                         }
                   else if (curGrip == 1) {
-                        int segments = line()->lineSegments().size();
                         int t2 = score()->prevSeg1(tick2, track);
                         if (t2 >= 0)
                               tick2 = t2;
                         if (tick1 > tick2)
                               return true;
-                        line()->setTick2(tick2);
-                        line()->layout(score()->layout());
-                        if (line()->lineSegments().size() != segments)
-                              score()->changeLineSegment(true);
                         }
                   }
             else if (ev->key() == Qt::Key_Right) {
@@ -145,18 +137,17 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
                               return true;
                         }
                   else if (curGrip == 1) {
-                        int segments = line()->lineSegments().size();
                         int t2 = score()->nextSeg1(tick2, track);
                         if (t2 >= 0)
                               tick2 = t2;
-                        line()->setTick2(tick2);
-                        line()->layout(score()->layout());
-                        if (line()->lineSegments().size() != segments)
-                              score()->changeLineSegment(true);
                         }
                   }
             line()->setTick(tick1);
             line()->setTick2(tick2);
+
+            line()->layout(score()->layout());
+            if (line()->lineSegments().size() != segments)
+                  score()->changeLineSegment(curGrip == 1);
             return true;
             }
       return false;

@@ -5374,11 +5374,6 @@ Sauver cette partition ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/bu/actions.cpp" line="1566"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mscore/bu/actions.cpp" line="1736"/>
         <source>edit element</source>
         <translation type="unfinished"></translation>
@@ -5650,102 +5645,102 @@ Sauver cette partition ? </translation>
 <context>
     <name>PageSettingsBase</name>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="16"/>
+        <location filename="../../mscore/pagesettings.ui" line="13"/>
         <source>MuseScore: Page Settings</source>
         <translation>MuseScore : Paramètres de la page</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="36"/>
+        <location filename="../../mscore/pagesettings.ui" line="31"/>
         <source>Preview</source>
         <translation>Aperçu</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="64"/>
+        <location filename="../../mscore/pagesettings.ui" line="59"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="71"/>
+        <location filename="../../mscore/pagesettings.ui" line="66"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="78"/>
+        <location filename="../../mscore/pagesettings.ui" line="73"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="95"/>
+        <location filename="../../mscore/pagesettings.ui" line="90"/>
         <source>Page Size</source>
         <translation>Taille de la page</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="137"/>
+        <location filename="../../mscore/pagesettings.ui" line="128"/>
         <source>Two Sided</source>
         <translation>Deux cotés</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="144"/>
+        <location filename="../../mscore/pagesettings.ui" line="135"/>
         <source>Landscape</source>
         <translation>Paysage</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="151"/>
+        <location filename="../../mscore/pagesettings.ui" line="142"/>
         <source>Height</source>
         <translation>Hauteur</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="164"/>
+        <location filename="../../mscore/pagesettings.ui" line="155"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="183"/>
+        <location filename="../../mscore/pagesettings.ui" line="174"/>
         <source>Scaling</source>
         <translation>Echelle</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="195"/>
+        <location filename="../../mscore/pagesettings.ui" line="186"/>
         <source>Space</source>
         <translation>Espace</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="243"/>
+        <location filename="../../mscore/pagesettings.ui" line="235"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="250"/>
+        <location filename="../../mscore/pagesettings.ui" line="242"/>
         <source>inch</source>
         <translation>pouce</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="269"/>
+        <location filename="../../mscore/pagesettings.ui" line="261"/>
         <source>Even Page Margins</source>
         <translation>Marges des pages paires</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="468"/>
+        <location filename="../../mscore/pagesettings.ui" line="444"/>
         <source>Bottom Margin</source>
         <translation>Marge bas</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="481"/>
+        <location filename="../../mscore/pagesettings.ui" line="457"/>
         <source>Top Margin</source>
         <translation>Marge haut</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="494"/>
+        <location filename="../../mscore/pagesettings.ui" line="470"/>
         <source>Right Margin</source>
         <translation>Marge droite</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="507"/>
+        <location filename="../../mscore/pagesettings.ui" line="483"/>
         <source>Left Margin</source>
         <translation>Marge gauche</translation>
     </message>
     <message>
-        <location filename="../../mscore/pagesettings.ui" line="396"/>
+        <location filename="../../mscore/pagesettings.ui" line="380"/>
         <source>Odd Page Margins</source>
         <translation>Marges des pages impaires</translation>
     </message>

@@ -58,7 +58,7 @@ enum ElementType {
       IMAGE,
 /*18*/TIE,
       ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, MARKER, JUMP,
-      TUPLET, VSPACER,
+      TUPLET,
       TEMPO_TEXT,
       STAFF_TEXT,
       HARMONY,
@@ -422,21 +422,6 @@ class Cursor : public Element {
       void blink()                     { _blink = !_blink; }
       void noBlinking()                { _blink = true; }
       virtual void setHeight(qreal v)  { _h = v; }
-      };
-
-//---------------------------------------------------------
-//   VSpacer
-//---------------------------------------------------------
-
-class VSpacer : public Element {
-   protected:
-      double height;
-
-   public:
-      VSpacer(Score*, double h);
-      virtual VSpacer* clone() const { return new VSpacer(*this); }
-      virtual ElementType type() const { return VSPACER; }
-      virtual void draw(QPainter&) const;
       };
 
 //---------------------------------------------------------

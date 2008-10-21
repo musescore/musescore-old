@@ -81,7 +81,7 @@ const char* elementNames[] = {
       "Image",
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Marker", "Jump",
-      "Tuplet", "VSpacer",
+      "Tuplet",
       "TempoText", "StaffText",
       "Harmony",
       "Volta",
@@ -989,30 +989,6 @@ void RubberBand::draw(QPainter& p) const
       }
 
 //---------------------------------------------------------
-//   VSpacer
-//---------------------------------------------------------
-
-VSpacer::VSpacer(Score* s, double h)
-   : Element(s)
-      {
-      height = h;
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void VSpacer::draw(QPainter&) const
-      {
-//      int lw       = lrint(.5 * tf->mag() * _spatium);
-//      int len      = lrint(height * tf->mag() * _spatium);
-//      QPoint _pos  = tf->fpos2ipoint(QPointF(0, 0));
-
-//      p.setPen(QPen(QColor(Qt::blue), lw));
-//TODO      p.drawLine(_pos.x(), _pos.y(), _pos.x(), _pos.y() + height);
-      }
-
-//---------------------------------------------------------
 //   mimeData
 //---------------------------------------------------------
 
@@ -1098,8 +1074,6 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = HAIRPIN;
             else if (e.tagName() == "Tuplet")
                   type = TUPLET;
-            else if (e.tagName() == "VSpacer")
-                  type = VSPACER;
             else if (e.tagName() == "Segment")
                   type = SEGMENT;
             else if (e.tagName() == "StaffText")

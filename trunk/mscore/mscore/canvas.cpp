@@ -1041,8 +1041,9 @@ bool Canvas::startEdit(Element* element, int startGrip)
             _score->editObject->updateGrips(&grips, grip);
             if (startGrip == -1)
                   curGrip = grips-1;
-            else
+            else if (startGrip >= 0)
                   curGrip = startGrip;
+            // startGrip == -2  -> do not change curGrip
 
             update();         // DEBUG
             return true;

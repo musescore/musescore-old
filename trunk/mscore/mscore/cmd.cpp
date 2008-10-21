@@ -471,7 +471,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr && cr->tuplet()) {
                   setTupletChordRest(cr, pitch, len);
                   len = len * cr->tuplet()->normalNotes() / cr->tuplet()->actualNotes();
-            }
+                  }
             else {
                   Direction stemDirection = AUTO;
                   int headGroup           = 0;
@@ -2512,7 +2512,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
       foreach(Tuplet* tuplet, *sm->tuplets()) {
             tuplet->setParent(dm);
             tuplet->setTrack(tuplet->track() + trackOffset);
-            tuplet->elements()->clear();
+            tuplet->clear();
             undoAddElement(tuplet);
             }
 
