@@ -187,7 +187,7 @@ int Score::nextSeg(int tick, int track)
                   break;
             }
       if (seg == 0) {
-            printf("no seg found\n");
+//            printf("no seg found\n");
             return -1;
             }
       return seg->tick();
@@ -221,7 +221,7 @@ int Score::nextSeg1(int tick, int& track)
                   }
             }
       if (seg == 0) {
-            printf("no seg found\n");
+//            printf("no seg found\n");
             return -1;
             }
       return seg->tick();
@@ -256,7 +256,7 @@ int Score::prevSeg1(int tick, int& track)
                   }
             }
       if (seg == 0) {
-            printf("no seg found\n");
+//            printf("no seg found\n");
             return -1;
             }
       return seg->tick();

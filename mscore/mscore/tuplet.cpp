@@ -373,14 +373,11 @@ void Tuplet::read(QDomElement e)
 
 void Tuplet::add(Element* e)
       {
-#if 1
       foreach(DurationElement* el, _elements) {
-            if (el == e) {
+            if (el == e)
                   printf("Tuplet::add: already there\n");
-//                  abort();
-                  }
             }
-#endif
+
       switch(e->type()) {
             case TEXT:
                   _number = static_cast<Text*>(e);
@@ -388,7 +385,17 @@ void Tuplet::add(Element* e)
             case CHORD:
             case REST:
             case TUPLET:
-                  _elements.append(static_cast<DurationElement*>(e));
+                  {
+                  int i;
+                  for (i = 0; i < _elements.size(); ++i) {
+                        if (_elements[i]->tick() > e->tick()) {
+                              _elements.insert(i, static_cast<DurationElement*>(e));
+                              break;
+                              }
+                        }
+                  if (i == _elements.size())
+                        _elements.append(static_cast<DurationElement*>(e));
+                  }
                   break;
             default:
                   printf("Tuplet::add() unknown element\n");

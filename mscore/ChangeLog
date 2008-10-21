@@ -1,3 +1,6 @@
+21.10 (ws)
+      - fix tuplet regression
+      - small fixes for hairpin edit mode
 20.10 (ws)
       - page settings: "Space" spinbox minimum value set from 0.101 to 0.001
       - new italian translation from Contardi Angelo

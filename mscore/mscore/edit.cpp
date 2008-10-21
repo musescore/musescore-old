@@ -1140,7 +1140,6 @@ void Score::chordTab(bool back)
       if (!cn) {
             cn = new Harmony(this);
             cn->setTick(segment->tick());
-printf("create Harmony tick %d\n", cn->tick());
             cn->setTrack(track);
             cn->setParent(measure);
             undoAddElement(cn);
@@ -1160,7 +1159,7 @@ printf("create Harmony tick %d\n", cn->tick());
 
 void Score::changeLineSegment(bool last)
       {
-      LineSegment* segment = (LineSegment*)editObject;
+      LineSegment* segment = static_cast<LineSegment*>(editObject);
 
       LineSegment* newSegment;
       if (last)
@@ -1172,7 +1171,7 @@ void Score::changeLineSegment(bool last)
       endCmd();
 
       startCmd();
-      canvas()->startEdit(newSegment);
+      canvas()->startEdit(newSegment, -2);      // do not change curGrip
       layoutAll = true;
       }
 
@@ -1269,7 +1268,7 @@ void Score::cmdTuplet(int n)
       tuplet->setParent(measure);
       cmdCreateTuplet(cr, tuplet);
 
-      QList<DurationElement*>* cl = tuplet->elements();
+      const QList<DurationElement*>* cl = tuplet->elements();
 
       int ne = cl->size();
       DurationElement* el = 0;
@@ -1442,6 +1441,8 @@ void Score::cmdExchangeVoice(int s, int d)
 
 void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       {
+// printf("setTupletChordRest %d %d\n", pitch, len);
+
       Tuplet* tuplet = cr->tuplet();
       int bl         = tuplet->baseLen();
 
@@ -1473,7 +1474,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //    make gap for new note/rest
       //---------------------------------------------------
 
-      QList<DurationElement*>* crl = tuplet->elements();
+      const QList<DurationElement*>* crl = tuplet->elements();
       int n = crl->size();
       int i = 0;
       for (; i < n; ++i) {
@@ -1511,7 +1512,6 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //---------------------------------------------------
       //    set new note/rest
       //---------------------------------------------------
-
       Duration dt;
       dt.setVal(len);
 
