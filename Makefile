@@ -112,7 +112,7 @@ testdist:
 	cd mscore-${VERSION}; make release
 
 revision:
-	svn info -r HEAD | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
+	svnversion -n | cut -c 1-4 > mscore/mscore/revision.h
 
 install:
 	cd build; make install
@@ -125,12 +125,12 @@ unix:
 	if test ! -d linux;                          \
          then                                      \
             mkdir linux;                           \
-            cd unixBuild;                          \
+            cd linux
             cmake -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
             make -j${CPUS} -f Makefile;            \
             make package;                          \
          else                                      \
-            echo "build directory unixBuild does alread exist, please remove first";  \
+            echo "build directory linux does alread exist, please remove first";  \
          fi
 
 
