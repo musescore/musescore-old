@@ -78,14 +78,14 @@ set(QT_USE_QTUITOOLS TRUE)
 # only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 
-find_package(Qt4 "4.4")
+find_package(Qt4 "4.5")
 
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required."
-         "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
-         "If you have QT4 installed, make sure qmake is found in your PATH."
+         " Cmake tries to detect QT4 by searching for 'qmake' in your PATH."
+         "If you have QT4 installed, make sure qmake is found in your PATH. "
          "If you compiled QT4 yourself make sure your new qmake ist found"
-         "_first_ in your PATH."
+         " _first_ in your PATH."
          )
 else (NOT QT4_FOUND)
       message("Qt lib found at ${QT_LIBRARY_DIR}")

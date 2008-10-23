@@ -1262,7 +1262,8 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
       if (state == EDIT || state == DRAG_EDIT) {
             qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
+            // QPen pen(Qt::blue);
+            QPen pen(Qt::black);
             pen.setWidthF(lw);
             p.setPen(pen);
             for (int i = 0; i < grips; ++i) {

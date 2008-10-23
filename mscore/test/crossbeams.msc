@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.8">
-  <Mag>1</Mag>
-  <xoff>-4.86833</xoff>
-  <yoff>15.0283</yoff>
+<museScore version="1.9">
+  <Mag>0.960273</Mag>
+  <xoff>-4.02167</xoff>
+  <yoff>10.795</yoff>
   <Symbols>
     <rows>11</rows>
     <columns>16</columns>
@@ -898,24 +898,54 @@
       </Staff>
     <trackName>Piano</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">Piano</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'helvetica'; font-size:11pt;">Piano</span></p></body></html>
       </name>
     <Instrument>
-      <chorus>30</chorus>
-      <reverb>30</reverb>
+      <Channel name="normal">
+        <program value="0"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
       </Instrument>
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <Note pitch="60" tpc="14" ticks="240"/>
-      <Note pitch="62" tpc="16" ticks="240"/>
-      <Note pitch="64" tpc="18" ticks="240"/>
-      <Note pitch="65" tpc="13" ticks="240"/>
+      <Beam id="1">
+        </Beam>
+      <Beam id="2">
+        </Beam>
+      <Beam id="3">
+        <y1>541.655</y1>
+        <y2>541.655</y2>
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>3</Beam>
         <Note>
           <pitch>60</pitch>
           <tpc>14</tpc>
@@ -924,24 +954,70 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>3</Beam>
         <Note>
           <pitch>62</pitch>
           <tpc>16</tpc>
           <move>1</move>
           </Note>
         </Chord>
-      <Note pitch="64" tpc="18" ticks="120"/>
-      <Note pitch="65" tpc="13" ticks="120"/>
-      <Note pitch="67" tpc="15" ticks="120"/>
-      <Note pitch="69" tpc="17" ticks="120"/>
-      <Note pitch="71" tpc="19" ticks="120"/>
-      <Note pitch="72" tpc="14" ticks="120"/>
-      </Measure>
-    <Measure number="2">
-      <Note pitch="60" tpc="14" ticks="120"/>
-      <Note pitch="62" tpc="16" ticks="120"/>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <Beam id="1">
+        </Beam>
+      <Beam id="2">
+        </Beam>
+      <Beam id="3">
+        <y1>559.168</y1>
+        <y2>559.168</y2>
+        </Beam>
+      <Beam id="4">
+        <y1>145.994</y1>
+        <y2>145.994</y2>
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>3</Beam>
         <Note>
           <pitch>59</pitch>
           <tpc>19</tpc>
@@ -950,18 +1026,36 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>3</Beam>
         <Note>
           <pitch>57</pitch>
           <tpc>17</tpc>
           <move>1</move>
           </Note>
         </Chord>
-      <Note pitch="67" tpc="15" ticks="120"/>
-      <Note pitch="72" tpc="14" ticks="120"/>
-      <Note pitch="74" tpc="16" ticks="120"/>
-      <Note pitch="76" tpc="18" ticks="120"/>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>4</Beam>
         <Note>
           <pitch>53</pitch>
           <tpc>13</tpc>
@@ -970,29 +1064,64 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>4</Beam>
         <Note>
           <pitch>55</pitch>
           <tpc>15</tpc>
           <move>1</move>
           </Note>
         </Chord>
-      <Note pitch="53" tpc="13" ticks="120"/>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>4</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>4</Beam>
         <Note>
           <pitch>52</pitch>
           <tpc>18</tpc>
           <move>1</move>
           </Note>
         </Chord>
-      <Note pitch="74" tpc="16" ticks="120"/>
-      <Note pitch="72" tpc="14" ticks="120"/>
-      <Note pitch="71" tpc="19" ticks="120"/>
-      <Note pitch="69" tpc="17" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
       </Measure>
     <Measure number="3">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
+      <Beam id="1">
+        <y1>544.786</y1>
+        <y2>481.218</y2>
+        </Beam>
+      <Beam id="2">
+        <y1>561.11</y1>
+        <y2>520.427</y2>
+        </Beam>
       <Chord>
         <ticklen>360</ticklen>
+        <Beam>2</Beam>
         <Note>
           <pitch>57</pitch>
           <tpc>17</tpc>
@@ -1001,11 +1130,15 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>2</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="72" tpc="14"/>
         <Note pitch="78" tpc="20"/>
         </Chord>
-      <Note pitch="60" tpc="14" ticks="120"/>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
       <Rest>
         <ticklen>120</ticklen>
         </Rest>
@@ -1014,6 +1147,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>360</ticklen>
+        <Beam>1</Beam>
         <StemDirection>up</StemDirection>
         <Note>
           <pitch>55</pitch>
@@ -1023,6 +1157,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
+        <Beam>1</Beam>
         <Note pitch="65" tpc="13"/>
         <Note pitch="71" tpc="19"/>
         <Note pitch="74" tpc="16"/>
