@@ -947,7 +947,12 @@ void Measure::add(Element* el)
                   staves[el->staffIdx()]->_vspacer = static_cast<Spacer*>(el);
                   break;
             case BEAM:
-                  _el.push_back(el);
+                  {
+                  Beam* b = static_cast<Beam*>(el);
+                  _beamList.append(b);
+                  foreach(ChordRest* cr, b->getElements())
+                        cr->setBeam(b);
+                  }
                   break;
             case SEGMENT:
                   {
@@ -1051,12 +1056,23 @@ void Measure::remove(Element* el)
                   break;
             case TUPLET:
                   {
-                  int idx = _tuplets.indexOf((Tuplet*)el);
+                  int idx = _tuplets.indexOf(static_cast<Tuplet*>(el));
                   if (idx == -1) {
                         printf("Measure remove: Tuplet not found\n");
                         return;
                         }
                   _tuplets.removeAt(idx);
+                  }
+                  break;
+
+            case BEAM:
+                  {
+                  int idx = _beamList.indexOf(static_cast<Beam*>(el));
+                  if (idx == -1) {
+                        printf("Measure remove: Beam not found\n");
+                        return;
+                        }
+                  _beamList.removeAt(idx);
                   }
                   break;
 
@@ -2284,10 +2300,17 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       if (mstaff->_vspacer)
             xml.tag("vspacer", mstaff->_vspacer->space().val());
 
-      foreach(Tuplet* tuplet, _tuplets) {
+      foreach(const Tuplet* tuplet, _tuplets) {
             if (tuplet->staffIdx() == staff) {
-                  int id = _tuplets.indexOf(tuplet);
+                  int id = _tuplets.indexOf(const_cast<Tuplet*>(tuplet));
                   tuplet->write(xml, id);
+                  }
+            }
+      foreach(const Beam* beam, _beamList) {
+            if (beam->staffIdx() == staff) {
+                  int id = _beamList.indexOf(const_cast<Beam*>(beam));
+                  beam->setId(id);
+                  beam->write(xml);
                   }
             }
 
@@ -2345,6 +2368,13 @@ void Measure::write(Xml& xml) const
                   if (staffIdx == tuplet->staffIdx()) {
                         int id = _tuplets.indexOf(tuplet);
                         tuplet->write(xml, id);
+                        }
+                  }
+            foreach(const Beam* beam, _beamList) {
+                  if (beam->staffIdx() == staffIdx) {
+                        int id = _beamList.indexOf(const_cast<Beam*>(beam));
+                        beam->setId(id);
+                        beam->write(xml);
                         }
                   }
             for (int track = staffIdx * VOICES; track < staffIdx * VOICES + VOICES; ++track) {
@@ -2654,6 +2684,12 @@ void Measure::read(QDomElement e, int idx)
                         add(spacer);
                         }
                   staves[idx]->_vspacer->setSpace(Spatium(val.toDouble()));
+                  }
+            else if (tag == "Beam") {
+                  Beam* beam = new Beam(score());
+                  beam->setTrack(score()->curTrack);
+                  beam->read(e);
+                  add(beam);
                   }
             else
                   domError(e);

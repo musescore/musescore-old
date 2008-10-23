@@ -1,3 +1,5 @@
+23.10 (ws)
+      - implemented editable beams
 21.10 (ws)
       - resize score if canvas geometry is changed (example: palette on/off)
         and mag is set to "page width" or similar.

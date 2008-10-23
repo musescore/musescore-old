@@ -84,23 +84,38 @@ class Beam : public Element {
       BeamSegmentList beamSegments;
       bool _up;
 
+      bool _userModified;
+      QPointF _p1, _p2;
+      mutable int _id;          // used temporarily on write()
+
       void layoutCrossStaff(ScoreLayout* layout);
 
    public:
       Beam(Score* s);
+      Beam(const Beam&);
       ~Beam();
       virtual Beam* clone() const         { return new Beam(*this); }
       virtual ElementType type() const    { return BEAM; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      virtual bool startEdit(Viewer*, const QPointF&) { return false; }
+
+      virtual bool isMovable() const                  { return false; }
+      virtual bool startEdit(Viewer*, const QPointF&) { return true; }
+      virtual void editDrag(int, const QPointF&);
+      virtual void updateGrips(int*, QRectF*) const;
+
+      virtual void write(Xml& xml) const;
+      virtual void read(QDomElement);
+
+      virtual void resetUserOffsets()     {  _userModified = false;    }
 
       Measure* measure() const            { return (Measure*)parent(); }
 
       void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
 
-      QList<ChordRest*> getElements()     { return elements; }
-      void add(ChordRest* a)              { elements.append(a); }
+      const QList<ChordRest*>& getElements() { return elements; }
+      void clear()                           { elements.clear(); }
+      void add(ChordRest* a)                 { elements.append(a); }
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);
@@ -108,6 +123,8 @@ class Beam : public Element {
       virtual void draw(QPainter&) const;
       bool up() const                     { return _up; }
       void setUp(bool v)                  { _up = v; }
+      void setId(int i) const             { _id = i; }
+      int id() const                      { return _id; }
       };
 
 #endif

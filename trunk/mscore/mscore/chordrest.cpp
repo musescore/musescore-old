@@ -190,6 +190,8 @@ void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
             foreach(Slur* s, _slurBack)
                   xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
             }
+      if (_beam)
+            xml.tag("Beam", _beam->id() + 1);
       xml.curTick = tick() + tickLen();
       }
 
@@ -244,6 +246,18 @@ bool ChordRest::readProperties(QDomElement e)
                   printf("Tuplet id %d not found\n", i);
             else
                   setTickLen(tickLen());  // set right symbol + dots
+            }
+      else if (tag == "Beam") {
+            Measure* m = static_cast<Measure*>(parent());
+            foreach(Beam* b, *m->beamList()) {
+                  if (b->id() == (i-1)) {
+                        setBeam(b);
+                        b->add(this);
+                        break;
+                        }
+                  }
+            if (beam() == 0)
+                  printf("Beam id %d not found\n", i);
             }
       else if (tag == "small")
             _small = i;

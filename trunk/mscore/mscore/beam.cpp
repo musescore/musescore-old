@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: beam.cpp,v 1.41 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  beam tables from GNU LilyPond music typesetter
 //  (c) 2000--2007 Jan Nieuwenhuizen <janneke@gnu.org>
@@ -199,7 +199,23 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
 Beam::Beam(Score* s)
    : Element(s)
       {
-      _up = true;
+      _up           = true;
+      _userModified = false;
+      }
+
+//---------------------------------------------------------
+//   Beam
+//---------------------------------------------------------
+
+Beam::Beam(const Beam& b)
+   : Element(b)
+      {
+      elements      = b.elements;
+      beamSegments  = b.beamSegments;
+      _up           = b._up;
+      _userModified = b._userModified;
+      _p1           = b._p1;
+      _p2           = b._p2;
       }
 
 //---------------------------------------------------------
@@ -293,8 +309,7 @@ void Beam::move(double x, double y)
 void Measure::layoutBeams1(ScoreLayout* layout)
       {
       foreach(Beam* beam, _beamList)
-            delete beam;
-      _beamList.clear();
+            beam->clear();
 
       int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
@@ -310,6 +325,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               beam = 0;
                               }
                         if (a1) {
+                              a1->setBeam(0);
                               a1->layoutStem1(layout);
                               a1 = 0;
                               }
@@ -321,10 +337,12 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();
                         if (nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
-                              Beam* b = new Beam(score());
-                              b->setTrack(track);
-                              b->setParent(this);
-                              _beamList.push_back(b);
+                              Beam* b = cr->beam();
+                              if (b == 0) {
+                                    b = new Beam(score());
+                                    b->setTrack(track);
+                                    add(b);
+                                    }
                               cr->setBeam(b);
                               b->add(cr);
                               Segment* s = nseg;
@@ -341,12 +359,13 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               segment = nseg;
                               }
                         else {
+                              cr->setBeam(0);
                               cr->layoutStem1(layout);
                               }
                         continue;
                         }
-                  BeamMode bm   = cr->beamMode();
-                  int len       = cr->duration().ticks();
+                  BeamMode bm = cr->beamMode();
+                  int len     = cr->duration().ticks();
 
                   if ((len >= division) || (bm == BEAM_NO)) {
                         if (beam) {
@@ -354,6 +373,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               beam = 0;
                               }
                         if (a1) {
+                              a1->setBeam(0);
                               a1->layoutStem1(layout);
                               a1 = 0;
                               }
@@ -402,9 +422,11 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               beam = 0;
                               }
                         if (a1) {
+                              a1->setBeam(0);
                               a1->layoutStem1(layout);
                               a1 = 0;
                               }
+                        cr->setBeam(0);
                         cr->layoutStem1(layout);
                         }
                   else if (cr) {
@@ -412,14 +434,16 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               a1 = cr;
                         else {
                               if (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype())) {
-                                    a1->layoutStem1(layout);
+                                    a1->layoutStem1(layout);      //?
                                     a1 = cr;
                                     }
                               else {
-                                    beam = new Beam(score());
-                                    beam->setTrack(track);
-                                    beam->setParent(this);
-                                    _beamList.push_back(beam);
+                                    beam = a1->beam();
+                                    if (beam == 0) {
+                                          beam = new Beam(score());
+                                          beam->setTrack(track);
+                                          add(beam);
+                                          }
                                     a1->setBeam(beam);
                                     beam->add(a1);
                                     cr->setBeam(beam);
@@ -431,8 +455,16 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   }
             if (beam)
                   beam->layout1(layout);
-            else if (a1)
+            else if (a1) {
+                  a1->setBeam(0);
                   a1->layoutStem1(layout);
+                  }
+            }
+      foreach(Beam* beam, _beamList) {
+            if (beam->getElements().isEmpty()) {
+printf("delete beam %p\n", beam);
+                  delete beam;
+                  }
             }
       }
 
@@ -489,19 +521,6 @@ void Beam::layout1(ScoreLayout* layout)
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
             delete *i;
       beamSegments.clear();
-
-#if 0
-      //
-      // delete stem & hook for all chords
-      //
-      foreach(ChordRest* cr, elements) {
-            if (cr->type() == CHORD) {
-                  Chord* chord = (Chord*)cr;
-                  chord->setStem(0);
-                  chord->setHook(0);
-                  }
-            }
-#endif
 
       //---------------------------------------------------
       //   calculate direction of beam
@@ -572,7 +591,6 @@ void Beam::layout(ScoreLayout* layout)
       //   currently we use the "majority" method
       //---------------------------------------------------
 
-//      int upCount    = 0;
       int maxTickLen = 0;
       const ChordRest* a1  = elements.front();
       const ChordRest* a2  = elements.back();
@@ -592,11 +610,6 @@ void Beam::layout(ScoreLayout* layout)
                   // if only one stem direction is manually set it
                   // determines if beams are up or down
                   //
-/*                  if (chord->stemDirection() != AUTO)
-                        upCount += chord->stemDirection() == UP ? 1000 : -1000;
-                  else
-                        upCount += chord->up() ? 1 : -1;
-*/
                   if (chord->staffMove()) {
                         if (firstMove == 0)
                               move = chord->staffMove() * -1;
@@ -716,8 +729,8 @@ void Beam::layout(ScoreLayout* layout)
       setMag(isGrace ? graceMag : 1.0);
 
       double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
-      double min = 1000.0;
-      double max = -1000.0;
+      double min      = 1000.0;
+      double max      = -1000.0;
 
       foreach(ChordRest* cr, elements) {
             if (cr->type() != CHORD)
@@ -748,6 +761,13 @@ void Beam::layout(ScoreLayout* layout)
       p2.ry() += diff;
 
       //---------------------------------------------------
+      if (_userModified) {
+            p1.setY(_p1.y());
+            p2.setY(_p2.y());
+            slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
+            }
+      _p1 = p1;
+      _p2 = p2;
 
       BeamSegment* bs = new BeamSegment;
       beamSegments.push_back(bs);
@@ -961,8 +981,9 @@ void Beam::layoutCrossStaff(ScoreLayout*)
 
       double ys = (x2 - x1) * slope;
 
-      QPointF p1 = QPointF(x1, p1s.y());
-      QPointF p2 = QPointF(x2, p1.y() + ys);
+      QPointF p1, p2;
+      p1 = QPointF(x1, p1s.y());
+      p2 = QPointF(x2, p1.y() + ys);
 
       double yo1 =  100000;    //minimum staff 0
       double yu2 =  -100000;   //maximum staff 1
@@ -992,6 +1013,13 @@ void Beam::layoutCrossStaff(ScoreLayout*)
       p2.ry() += moveY;
 
       //---------------------------------------------------
+      if (_userModified) {
+            p1.setY(_p1.y());
+            p2.setY(_p2.y());
+            slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
+            }
+      _p1 = p1;
+      _p2 = p2;
 
       double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
                         + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
@@ -1151,6 +1179,69 @@ QRectF Beam::bbox() const
             r |= QRectF(bs->p2, QSizeF(1.0, 1.0));
             }
       return r;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Beam::write(Xml& xml) const
+      {
+      xml.stag(QString("Beam id=\"%1\"").arg(_id + 1));
+      Element::writeProperties(xml);
+      if (_userModified) {
+            xml.tag("y1", _p1.y());
+            xml.tag("y2", _p2.y());
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Beam::read(QDomElement e)
+      {
+      _id = e.attribute("id").toInt() - 1;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "y1") {
+                  _userModified = true;
+                  _p1 = QPointF(0.0, val.toDouble());
+                  }
+            else if (tag == "y2") {
+                  _userModified = true;
+                  _p2 = QPointF(0.0, val.toDouble());
+                  }
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Beam::editDrag(int grip, const QPointF& delta)
+      {
+      QPointF d(0.0, delta.y());
+      if (grip == 0)
+            _p1 += d;
+      _p2 += d;
+      _userModified = true;
+      score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Beam::updateGrips(int* grips, QRectF* grip) const
+      {
+      *grips = 2;
+      grip[0].translate(canvasPos() + _p1);
+      grip[1].translate(canvasPos() + _p2);
       }
 
 
