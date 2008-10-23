@@ -610,7 +610,7 @@ void Note::read(QDomElement e)
 QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
-      _lineOffset = lrint(s.y() * 2 / _spatium);
+      _lineOffset = lrint(s.y() * 2.0 / _spatium);
       score()->setLayoutStart(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }

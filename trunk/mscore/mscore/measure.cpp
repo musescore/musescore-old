@@ -285,7 +285,7 @@ static void initLineList(char* ll, int key)
 
 //---------------------------------------------------------
 //   layoutChord
-//    only called from layoutNoteHeads
+//    only called from layout0
 //---------------------------------------------------------
 
 void Measure::layoutChord(Chord* chord, char* tversatz)
@@ -396,7 +396,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int accCol = 0;
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
-
             Accidental* ac = note->accidental();
             if (!ac)
                   continue;

@@ -707,10 +707,9 @@ void Chord::layout(ScoreLayout* layout)
       int minMove = 1;
       int maxMove = -1;
 
-      double lx = 0.0;
-      System* s = segment()->measure()->system();
+      double lx       = 0.0;
       double staffMag = staff()->mag();
-      _dotPosX = 0.0;
+      _dotPosX        = 0.0;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
             note->layout(layout);
@@ -722,9 +721,8 @@ void Chord::layout(ScoreLayout* layout)
                   minMove = move;
             if (move > maxMove)
                   maxMove = move;
-            double y = s->staff(staffIdx() + move)->bbox().y();
-            y        -= s->staff(staffIdx())->bbox().y();
-            y        += note->line() * _spatium * .5 * staffMag;
+
+            double y = note->line() * _spatium * .5 * staffMag;
 
             bool stemUp = isUp();
             if (note->staffMove() == -1) {
@@ -735,6 +733,7 @@ void Chord::layout(ScoreLayout* layout)
                   }
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
+
             note->setPos(x, y);
             double xx = x + headWidth;
             if (xx > _dotPosX)

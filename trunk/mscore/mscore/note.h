@@ -109,7 +109,7 @@ class Note : public Element {
       Note(const Note&);
       Note &operator=(const Note&);
       ~Note();
-      virtual Note* clone() const { return new Note(*this); }
+      virtual Note* clone() const      { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
