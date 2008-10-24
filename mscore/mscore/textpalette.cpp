@@ -248,7 +248,10 @@ void TextPalette::setCharFormat(const QTextCharFormat& cf)
       format = cf;
       QFont f(cf.font());
       typefaceFamily->setCurrentFont(f);
-      typefaceSize->setValue(f.pointSizeF());
+      double ps = f.pointSizeF();
+      if (ps == -1.0)
+            ps = f.pixelSize() * PPI / DPI;
+      typefaceSize->setValue(ps);
       typefaceItalic->setChecked(cf.fontItalic());
       typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
       typefaceUnderline->setChecked(cf.fontUnderline());

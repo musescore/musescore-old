@@ -5393,11 +5393,6 @@ Save Current Score?</source>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/bu/actions.cpp" line="1566"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5907,67 +5902,67 @@ Save Current Score?</source>
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="543"/>
+        <location filename="../../mscore/preferences.cpp" line="548"/>
         <source>Normal State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="548"/>
+        <location filename="../../mscore/preferences.cpp" line="553"/>
         <source>Play State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="627"/>
+        <location filename="../../mscore/preferences.cpp" line="632"/>
         <source>Choose Notepaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="646"/>
+        <location filename="../../mscore/preferences.cpp" line="651"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="643"/>
+        <location filename="../../mscore/preferences.cpp" line="648"/>
         <source>Choose Background Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="659"/>
+        <location filename="../../mscore/preferences.cpp" line="664"/>
         <source>Choose Synthesizer Sound Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="662"/>
+        <location filename="../../mscore/preferences.cpp" line="667"/>
         <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="677"/>
+        <location filename="../../mscore/preferences.cpp" line="682"/>
         <source>Choose Image Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="692"/>
+        <location filename="../../mscore/preferences.cpp" line="697"/>
         <source>Choose WorkingDirectory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="707"/>
+        <location filename="../../mscore/preferences.cpp" line="712"/>
         <source>Choose default Instrument List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="710"/>
+        <location filename="../../mscore/preferences.cpp" line="715"/>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="723"/>
+        <location filename="../../mscore/preferences.cpp" line="728"/>
         <source>Choose score to start with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="726"/>
+        <location filename="../../mscore/preferences.cpp" line="731"/>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation type="unfinished"></translation>
     </message>

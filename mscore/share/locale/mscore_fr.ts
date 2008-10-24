@@ -5398,11 +5398,6 @@ Sauver cette partition ? </translation>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/bu/actions.cpp" line="1566"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5912,67 +5907,67 @@ Sauver cette partition ? </translation>
 <context>
     <name>PreferenceDialog</name>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="543"/>
+        <location filename="../../mscore/preferences.cpp" line="548"/>
         <source>Normal State</source>
         <translation>Etat normal</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="548"/>
+        <location filename="../../mscore/preferences.cpp" line="553"/>
         <source>Play State</source>
         <translation>Etat de lecture</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="627"/>
+        <location filename="../../mscore/preferences.cpp" line="632"/>
         <source>Choose Notepaper</source>
         <translation>Choisir le papier à musique</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="646"/>
+        <location filename="../../mscore/preferences.cpp" line="651"/>
         <source>Images (*.jpg *.gif *.png)</source>
         <translation>Images (*.jpg *.gif *.png)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="643"/>
+        <location filename="../../mscore/preferences.cpp" line="648"/>
         <source>Choose Background Wallpaper</source>
         <translation>Choisir l&apos;arrière plan</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="659"/>
+        <location filename="../../mscore/preferences.cpp" line="664"/>
         <source>Choose Synthesizer Sound Font</source>
         <translation>Choisir une SoundFont pour le synthétiseur</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="662"/>
+        <location filename="../../mscore/preferences.cpp" line="667"/>
         <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
         <translation>Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="677"/>
+        <location filename="../../mscore/preferences.cpp" line="682"/>
         <source>Choose Image Path</source>
         <translation>Choisir le chemin de l&apos;image</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="692"/>
+        <location filename="../../mscore/preferences.cpp" line="697"/>
         <source>Choose WorkingDirectory</source>
         <translation>Choisir un répertoire de travail</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="707"/>
+        <location filename="../../mscore/preferences.cpp" line="712"/>
         <source>Choose default Instrument List</source>
         <translation>Choisir la liste des instruments par défaut</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="710"/>
+        <location filename="../../mscore/preferences.cpp" line="715"/>
         <source>Instrument List (*.xml);;All (*)</source>
         <translation>Liste d&apos;instruments (*.xml);;All (*)</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="723"/>
+        <location filename="../../mscore/preferences.cpp" line="728"/>
         <source>Choose score to start with</source>
         <translation>Choisir la partition de démarrage</translation>
     </message>
     <message>
-        <location filename="../../mscore/preferences.cpp" line="726"/>
+        <location filename="../../mscore/preferences.cpp" line="731"/>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>Fichiers MuseScore file (*.msc *.mscz);;All (*)</translation>
     </message>
