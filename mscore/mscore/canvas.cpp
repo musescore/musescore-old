@@ -195,8 +195,10 @@ Canvas::~Canvas()
 void Canvas::canvasPopup(const QPoint& pos)
       {
       QMenu* popup = mscore->genCreateMenu();
-      popup->popup(pos);
       setState(NORMAL);
+      _score->setLayoutAll(true);
+      _score->end();
+      popup->popup(pos);
       }
 
 //---------------------------------------------------------
@@ -782,6 +784,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
       mousePressed = false;
 
       seq->stopNotes();
+
       if (state == EDIT)
             return;
       if (state == MAG) {
@@ -790,7 +793,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
             setState(NORMAL);
             return;
             }
-
       switch (state) {
             case DRAG_EDIT:
                   setState(EDIT);
