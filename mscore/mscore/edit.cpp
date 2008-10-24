@@ -670,7 +670,11 @@ void Score::cmdSetBeamMode(int mode)
 void Score::cmdFlipStemDirection()
       {
       Element* el = sel->element();
-      if (el && el->type() == NOTE) {
+      if (el == 0) {
+            selectNoteSlurMessage();
+            return;
+            }
+      if (el->type() == NOTE) {
             Chord* chord = static_cast<Note*>(el)->chord();
 
             if (chord->stemDirection() == AUTO)
@@ -710,14 +714,15 @@ void Score::cmdFlipStemDirection()
                   undoOp(UndoOp::SetStemDirection, chord, int(dir));
                   }
             }
-      else if (el && el->type() == SLUR_SEGMENT) {
+      else if (el->type() == SLUR_SEGMENT) {
             SlurTie* slur = static_cast<SlurSegment*>(el)->slurTie();
             slur->setSlurDirection(slur->isUp() ? DOWN : UP);
             undoOp(UndoOp::FlipSlurDirection, slur);
             }
-      else {
-            selectNoteSlurMessage();
-            return;
+      else if (el->type() == BEAM) {
+            Beam* beam = static_cast<Beam*>(el);
+            beam->setBeamDirection(beam->isUp() ? DOWN : UP);
+            undoOp(UndoOp::FlipBeamDirection, beam);
             }
       layoutAll = true;
       }

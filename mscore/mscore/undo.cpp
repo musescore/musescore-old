@@ -54,6 +54,7 @@
 #include "harmony.h"
 #include "pitchspelling.h"
 #include "part.h"
+#include "beam.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -72,7 +73,7 @@ static const char* undoName[] = {
       "SortStaves",        "ToggleInvisible",
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
-      "SetStemDirection",  "FlipSlurDirection",
+      "SetStemDirection",  "FlipSlurDirection", "FlipBeamDirection",
       "ChangeKeySig",
       "ChangeClef",
       "ChangeSig",
@@ -344,6 +345,12 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   SlurTie* slur = (SlurTie*)(i->element1);
                   slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+                  }
+                  break;
+            case UndoOp::FlipBeamDirection:
+                  {
+                  Beam* beam = static_cast<Beam*>(i->element1);
+                  beam->setBeamDirection(beam->isUp() ? DOWN : UP);
                   }
                   break;
             case UndoOp::ChangeSubtype:

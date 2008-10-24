@@ -626,9 +626,12 @@ void Note::endDrag()
 
       _line      += _lineOffset;
       _lineOffset = 0;
-      int clef    = chord()->staff()->clefList()->clef(chord()->tick());
-      int key     = staff()->keymap()->key(chord()->tick());
-      int npitch = line2pitch(_line, clef, key);
+
+      int staffIdx = chord()->staffIdx() + _staffMove;
+      Staff* staff = score()->staff(staffIdx);
+      int clef     = staff->clefList()->clef(chord()->tick());
+      int key      = staff->keymap()->key(chord()->tick());
+      int npitch   = line2pitch(_line, clef, key);
       setPitch(npitch);
       }
 

@@ -25,6 +25,7 @@
 #include "element.h"
 
 class Viewer;
+class Chord;
 
 //---------------------------------------------------------
 //   BeamHint
@@ -82,13 +83,14 @@ typedef BeamSegmentList::const_iterator ciBeamSegment;
 class Beam : public Element {
       QList<ChordRest*> elements;
       BeamSegmentList beamSegments;
+      Direction _direction;
       bool _up;
 
       bool _userModified;
       QPointF _p1, _p2;
       mutable int _id;          // used temporarily on write()
 
-      void layoutCrossStaff(ScoreLayout* layout);
+      void layoutCrossStaff(int, int, Chord*, Chord*);
 
    public:
       Beam(Score* s);
@@ -96,7 +98,7 @@ class Beam : public Element {
       ~Beam();
       virtual Beam* clone() const         { return new Beam(*this); }
       virtual ElementType type() const    { return BEAM; }
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 
       virtual bool isMovable() const                  { return false; }
       virtual bool startEdit(Viewer*, const QPointF&) { return true; }
@@ -106,7 +108,7 @@ class Beam : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      virtual void resetUserOffsets()     {  _userModified = false;    }
+      virtual void resetUserOffsets();
 
       Measure* measure() const            { return (Measure*)parent(); }
 
@@ -125,6 +127,9 @@ class Beam : public Element {
       void setUp(bool v)                  { _up = v; }
       void setId(int i) const             { _id = i; }
       int id() const                      { return _id; }
+
+      void setBeamDirection(Direction d)  { _direction = d; }
+      bool isUp();
       };
 
 #endif
