@@ -1,4 +1,5 @@
 24.10 (ws)
+      - fixed: line disappeared when right click with mouse in line edit mode
       - fixed "disappearing play panel"
       - fixes for cross staff beams
 23.10 (ws)
