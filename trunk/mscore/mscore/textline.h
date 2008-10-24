@@ -63,6 +63,7 @@ class TextLine : public SLine {
       Spatium _lineWidth;
       Qt::PenStyle _lineStyle;
       bool _hookUp;
+      bool _hook;
       QColor _lineColor;
 
    protected:
@@ -95,6 +96,8 @@ class TextLine : public SLine {
       void setHookUp(bool v)               { _hookUp = v;             }
       QColor lineColor() const             { return _lineColor;       }
       void setLineColor(const QColor& c)   { _lineColor = c;          }
+      bool hook() const                    { return _hook;            }
+      void setHook(bool v)                 { _hook = v;               }
       };
 
 //---------------------------------------------------------

@@ -125,11 +125,13 @@ void TextLineSegment::draw(QPainter& p) const
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
 
-      double hh = textLine()->hookHeight().point();
-      if (textLine()->hookUp())
-            hh *= -1;
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
-            p.drawLine(QLineF(pp2, QPointF(pp2.x(), hh)));
+      if (textLine()->hook()) {
+            double hh = textLine()->hookHeight().point();
+            if (textLine()->hookUp())
+                  hh *= -1;
+            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
+                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), hh)));
+                  }
             }
       }
 
@@ -185,6 +187,7 @@ TextLine::TextLine(Score* s)
       _lineWidth  = Spatium(0.15);
       _lineStyle  = Qt::SolidLine;
       _hookUp     = false;
+      _hook       = true;
       _lineColor  = Qt::black;
       textBase()->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
       }
@@ -198,6 +201,7 @@ TextLine::TextLine(const TextLine& e)
       _lineStyle  = e._lineStyle;
       _hookUp     = e._hookUp;
       _lineColor  = e._lineColor;
+      _hook       = e._hook;
       }
 
 //---------------------------------------------------------
@@ -225,10 +229,12 @@ void TextLine::layout(ScoreLayout* layout)
 void TextLine::write(Xml& xml) const
       {
       xml.stag(name());
-      xml.tag("hookHeight", _hookHeight.val());
+      if (_hook) {
+            xml.tag("hookHeight", _hookHeight.val());
+            xml.tag("hookUp", _hookUp);
+            }
       xml.tag("lineWidth", _lineWidth.val());
       xml.tag("lineStyle", _lineStyle);
-      xml.tag("hookUp", _hookUp);
       xml.tag("lineColor", _lineColor);
 
       SLine::writeProperties(xml);
@@ -245,14 +251,18 @@ void TextLine::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             const QString& text = e.text();
-            if (tag == "hookHeight")
+            if (tag == "hookHeight") {
                   _hookHeight = Spatium(text.toDouble());
+                  _hook = true;
+                  }
             else if (tag == "lineWidth")
                   _lineWidth = Spatium(text.toDouble());
             else if (tag == "lineStyle")
                   _lineStyle = Qt::PenStyle(text.toInt());
-            else if (tag == "hookUp")
+            else if (tag == "hookUp") {
                   _hookUp = text.toInt();
+                  _hook   = true;
+                  }
             else if (tag == "lineColor")
                   _lineColor = readColor(e);
             else if (_text->readProperties(e))
@@ -308,7 +318,9 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       tl = l;
       lineWidth->setValue(tl->lineWidth().val());
       hookHeight->setValue(tl->hookHeight().val());
+      hook->setChecked(tl->hook());
       up->setChecked(tl->hookUp());
+
       lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
       text->setText(tl->text());
       linecolor->setColor(tl->lineColor());
@@ -337,11 +349,10 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
 void LineProperties::accept()
       {
       tl->setLineWidth(Spatium(lineWidth->value()));
-      if (hook->isChecked())
-            tl->setHookHeight(Spatium(hookHeight->value()));
-      else
-            tl->setHookHeight(Spatium(0.0));
+      tl->setHookHeight(Spatium(hookHeight->value()));
       tl->setHookUp(up->isChecked());
+      tl->setHook(hook->isChecked());
+
       tl->setLineStyle(Qt::PenStyle(lineStyle->currentIndex() + 1));
       tl->setLineColor(linecolor->color());
       TextBase* tb = tl->textBase();
