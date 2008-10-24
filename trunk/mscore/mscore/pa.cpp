@@ -89,6 +89,7 @@ bool Portaudio::init()
       PaDeviceIndex idx = preferences.portaudioDevice;
       if (idx < 0)
             idx = Pa_GetDefaultOutputDevice();
+printf("pa: default output device %d\n", idx);
 
       /* Open an audio I/O stream. */
       struct PaStreamParameters out;
@@ -170,6 +171,8 @@ QStringList Portaudio::deviceList(int apiIdx)
 
 int Portaudio::deviceIndex(int apiIdx, int apiDevIdx)
       {
+      printf("pa: api %d dev %d = %d\n", apiIdx, apiDevIdx,
+         Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, apiDevIdx));
       return Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, apiDevIdx);
       }
 
@@ -305,5 +308,47 @@ void Portaudio::midiRead()
 #ifdef USE_ALSA
       midiDriver->read();
 #endif
+      }
+
+//---------------------------------------------------------
+//   currentApi
+//---------------------------------------------------------
+
+int Portaudio::currentApi() const
+      {
+      PaDeviceIndex idx = preferences.portaudioDevice;
+      if (idx < 0)
+            idx = Pa_GetDefaultOutputDevice();
+
+      for (int api = 0; api < Pa_GetHostApiCount(); ++api) {
+            const PaHostApiInfo* info = Pa_GetHostApiInfo(api);
+            for (int k = 0; k < info->deviceCount; ++k) {
+                  PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
+                  if (i == idx)
+                        return api;
+                  }
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   currentDevice
+//---------------------------------------------------------
+
+int Portaudio::currentDevice() const
+      {
+      PaDeviceIndex idx = preferences.portaudioDevice;
+      if (idx < 0)
+            idx = Pa_GetDefaultOutputDevice();
+
+      for (int api = 0; api < Pa_GetHostApiCount(); ++api) {
+            const PaHostApiInfo* info = Pa_GetHostApiInfo(api);
+            for (int k = 0; k < info->deviceCount; ++k) {
+                  PaDeviceIndex i = Pa_HostApiDeviceIndexToDeviceIndex(api, k);
+                  if (i == idx)
+                        return k;
+                  }
+            }
+      return -1;
       }
 

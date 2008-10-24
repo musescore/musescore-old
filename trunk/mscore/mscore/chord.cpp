@@ -822,7 +822,7 @@ void Chord::layout(ScoreLayout* layout)
                   for (int i = -2; i >= uppos; i -= 2)
                         addLedgerLine(x1, staffIdx() + 1, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x2, staffIdx() * 1, i);
+                        addLedgerLine(x2, staffIdx() + 1, i);
                   }
             }
 

@@ -501,10 +501,15 @@ void PreferenceDialog::updateValues(Preferences* p)
 #ifdef USE_PORTAUDIO
       if (usePortaudio) {
             Portaudio* audio = static_cast<Portaudio*>(seq->getDriver());
+
             QStringList apis = audio->apiList();
             portaudioApi->addItems(apis);
+            portaudioApi->setCurrentIndex(audio->currentApi());
+
             QStringList devices = audio->deviceList(0);
             portaudioDevice->addItems(devices);
+            portaudioDevice->setCurrentIndex(audio->currentDevice());
+
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
             }
 #endif
