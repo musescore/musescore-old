@@ -244,4 +244,14 @@ void Dynamic::layout(ScoreLayout* l)
             }
       }
 
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Dynamic::endEdit()
+      {
+      Text::endEdit();
+      setSubtype(0);
+      }
+
 
