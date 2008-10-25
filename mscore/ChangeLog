@@ -1,4 +1,6 @@
 25.10 (ws)
+      - fix crash when last measure has a volta and is followed by a horizontal
+        frame
       - make dynamics text editable
       - fix "reset positions" for stems
       - make repeat expansion more robust

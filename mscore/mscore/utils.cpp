@@ -96,13 +96,18 @@ Measure* Score::tick2measure(int tick) const
       for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
-            Measure* m = (Measure*)mb;
+            Measure* m = static_cast<Measure*>(mb);
             int st = m->tick();
             int l  = m->tickLen();
             if (tick >= st && tick < (st+l))
                   return m;
             // hack:
-            if (m->next() == 0 && tick <= (st+l))
+            MeasureBase* nmb;
+            for (nmb = mb->next(); nmb; nmb = nmb->next()) {
+                  if (nmb->type() == MEASURE)
+                        break;
+                  }
+            if (nmb == 0)
                   return m;
             }
       printf("tick2measure %d not found\n", tick);
