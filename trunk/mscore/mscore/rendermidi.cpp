@@ -449,6 +449,7 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
       QStack<RepeatLoop> rstack;
       int tickOffset = 0;
       int overallRepeatCount = 0;
+      int repeatEnd = -1;
 
       MeasureBase* fm = layout()->first();
       for (MeasureBase* mb = fm; mb;) {
@@ -456,11 +457,12 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                   mb = mb->next();
                   continue;
                   }
-            Measure* m = (Measure*)mb;
+            Measure* m = static_cast<Measure*>(mb);
             if (
                   (m->repeatFlags() & RepeatStart)
                && (rstack.isEmpty() || (rstack.top().m != m))
                && (rstack.isEmpty() || (rstack.top().type != RepeatLoop::LOOP_JUMP))
+               && (repeatEnd == -1)
                )
                   rstack.push(RepeatLoop(m));
 
@@ -498,14 +500,23 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                   else if (m->repeatFlags() & RepeatEnd) {
                         // this is a end repeat without start repeat:
                         //    repeat from beginning
-                        ++overallRepeatCount;
-                        if (overallRepeatCount < m->repeatCount()) {
-                              mb = layout()->first();
-                              tickOffset += m->tick() + m->tickLen() - mb->tick();
-                              continue;
+                        //
+                        // dont repeat inside a repeat
+
+                        if (repeatEnd < 0 || repeatEnd == m->tick()) {
+                              ++overallRepeatCount;
+                              if (overallRepeatCount < m->repeatCount()) {
+                                    repeatEnd = m->tick();
+                                    mb = layout()->first();
+                                    tickOffset += m->tick() + m->tickLen() - mb->tick();
+                                    continue;
+                                    }
+                              else {
+                                    overallRepeatCount = 0;
+                                    repeatEnd = -1;
+                                    }
                               }
-                        else
-                              overallRepeatCount = 0;
+
                         }
                   }
             else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {
@@ -513,7 +524,17 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                         //
                         // increment repeat count
                         //
-                        if (++rstack.top().count < m->repeatCount()) {
+                        // CHECK for nested repeats:
+                        //    repeat a repeat inside a repeat only on first
+                        //    pass of outer reapeat (?!?)
+                        //
+                        bool nestedRepeat = false;
+                        int n = rstack.size();
+                        if (n > 1 && rstack[n-2].type == RepeatLoop::LOOP_REPEAT) {
+                              if (rstack[n-2].count)
+                                    nestedRepeat = true;
+                              }
+                        if (!nestedRepeat && (++rstack.top().count < m->repeatCount())) {
                               //
                               // goto start of loop, fix tickOffset
                               //
