@@ -221,11 +221,14 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
       {
       Measure* m = score()->tick2measure(tick);
       double x = m->canvasPos().x();
-      if (m->tick() < tick)
+      if (m->tick() < tick)         // true if this is the last measure
             x += m->width();
 
       System* s = m->system();
 
+      //
+      // for grip 1 we need the end of the previous measure as reference
+      //
       if ((grip == 1) && (m == s->measures().front()) && m->tick() == tick) {
             MeasureBase* mb = m;
             do {
@@ -244,6 +247,7 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
                   return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
                   }
             }
+
       *system = s;
       return QPointF(x, s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
       }
