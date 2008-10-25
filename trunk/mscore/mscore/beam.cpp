@@ -338,7 +338,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();
-                        if (nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
+                        if (nseg && nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
                               Beam* b = cr->beam();
                               if (b == 0) {
                                     b = new Beam(score());
