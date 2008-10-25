@@ -66,6 +66,8 @@ class Dynamic : public Text {
       virtual void read(QDomElement);
 
       virtual QLineF dragAnchor() const;
+
+      virtual void endEdit();
       };
 
 #endif
