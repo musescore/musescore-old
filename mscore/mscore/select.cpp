@@ -644,6 +644,10 @@ QByteArray Selection::staffMimeData() const
                               Chord* c = static_cast<Chord*>(e);
                               c->write(xml, true, _startSegment->tick(), _endSegment->tick());
                               }
+                        else if (e->type() == REST) {
+                              Rest* r = static_cast<Rest*>(e);
+                              r->write(xml, true);
+                              }
                         else
                               e->write(xml);
                         }

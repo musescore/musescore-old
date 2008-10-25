@@ -190,7 +190,7 @@ void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
             foreach(Slur* s, _slurBack)
                   xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
             }
-      if (_beam)
+      if (!clipboardmode && _beam)
             xml.tag("Beam", _beam->id() + 1);
       xml.curTick = tick() + tickLen();
       }
