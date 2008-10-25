@@ -48,7 +48,8 @@ class Rest : public ChordRest {
       virtual ElementType type() const { return REST; }
 
       virtual void draw(QPainter&) const;
-      virtual void write(Xml& xml) const;
+      void write(Xml& xml, bool clipboarMode) const;
+      virtual void write(Xml& xml) const { write(xml, false); }
       virtual void read(QDomElement);
       virtual void add(Element*);
       virtual void remove(Element*);

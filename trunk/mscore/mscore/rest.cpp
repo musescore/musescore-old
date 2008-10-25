@@ -193,10 +193,10 @@ printf("Direction %d\n", int(dir));
 //   write Rest
 //---------------------------------------------------------
 
-void Rest::write(Xml& xml) const
+void Rest::write(Xml& xml, bool clipboardMode) const
       {
       xml.stag("Rest");
-      ChordRest::writeProperties(xml);
+      ChordRest::writeProperties(xml, clipboardMode);
       if (_staffMove)
             xml.tag("move", _staffMove);
       xml.etag();
