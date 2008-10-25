@@ -1,4 +1,5 @@
 25.10 (ws)
+      - fix "reset positions" for stems
       - make repeat expansion more robust
       - in nested repeats repeat inner repeat only on first pass of
         outer repeat

@@ -148,6 +148,16 @@ void Stem::editDrag(int, const QPointF& delta)
       }
 
 //---------------------------------------------------------
+//   resetUserOffsets
+//---------------------------------------------------------
+
+void Stem::resetUserOffsets()
+      {
+      _userLen = Spatium(0.0);
+      setUserOff(QPointF());
+      }
+
+//---------------------------------------------------------
 //   StemSlash
 //---------------------------------------------------------
 
@@ -1382,3 +1392,4 @@ QPointF LedgerLine::canvasPos() const
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
+
