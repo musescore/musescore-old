@@ -1,3 +1,7 @@
+25.10 (ws)
+      - make repeat expansion more robust
+      - in nested repeats repeat inner repeat only on first pass of
+        outer repeat
 24.10 (ws)
       - fixes for TextLine properties
       - fixed: line disappeared when right click with mouse in line edit mode
