@@ -153,32 +153,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ChordBase</name>
     <message>
-        <location filename="../../mscore/chord.ui" line="13"/>
+        <location filename="../../mscore/slursegment.ui" line="16"/>
         <source>Form</source>
         <translation>Diálogo</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="34"/>
+        <location filename="../../mscore/slursegment.ui" line="28"/>
         <source>Chord</source>
         <translation>Acorde</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="75"/>
+        <location filename="../../mscore/slursegment.ui" line="51"/>
         <source>Stem</source>
         <translation>Plica</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="82"/>
+        <location filename="../../mscore/slursegment.ui" line="58"/>
         <source>Hook</source>
         <translation>Corchete</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="121"/>
+        <location filename="../../mscore/slursegment.ui" line="88"/>
         <source>Grace Note</source>
         <translation>Apoyatura</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="128"/>
+        <location filename="../../mscore/slursegment.ui" line="95"/>
         <source>Stem Direction</source>
         <translation>Dirección de la Plica</translation>
     </message>
@@ -188,9 +188,14 @@ p, li { white-space: pre-wrap; }
         <translation>Notas:</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="173"/>
+        <location filename="../../mscore/slursegment.ui" line="128"/>
         <source>Help Lines:</source>
         <translation>Líneas Adicionales:</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/slursegment.ui" line="121"/>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6504,30 +6509,30 @@ Save Current Score?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="395"/>
+        <location filename="../../mscore/utils.cpp" line="400"/>
         <source>MuseScore:</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="372"/>
+        <location filename="../../mscore/utils.cpp" line="377"/>
         <source>please select a single note and retry operation
 </source>
         <translation>seleccione por favor una nota e intente de nuevo la operación</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="380"/>
+        <location filename="../../mscore/utils.cpp" line="385"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation>seleccione por favor una nota o un silencio e intente de nuevo la operación</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="388"/>
+        <location filename="../../mscore/utils.cpp" line="393"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation>seleccione por favor una nota o una ligadura de expresión e intente de nuevo la operación</translation>
     </message>
     <message>
-        <location filename="../../mscore/utils.cpp" line="396"/>
+        <location filename="../../mscore/utils.cpp" line="401"/>
         <source>please select one or more staves and retry operation
 </source>
         <translation>seleccione por favor uno o más pentagramas e intente de nuevo la operación</translation>

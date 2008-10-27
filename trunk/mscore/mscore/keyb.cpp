@@ -209,49 +209,52 @@ void Score::padToggle(int n)
                   break;
             }
       setPadState();
-      if (n >= PAD_NOTE1 && n <= PAD_DOTDOT) {
-            if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
-                  _padState.dots = 0;
-                  //
-                  // if in "note enter" mode, reset
-                  // rest flag
-                  //
-                  if (noteEntryMode())
-                        _padState.rest = false;
+      if (n < PAD_NOTE1 || n > PAD_DOTDOT)
+            return;
+
+      if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
+            _padState.dots = 0;
+            //
+            // if in "note enter" mode, reset
+            // rest flag
+            //
+            if (noteEntryMode())
+                  _padState.rest = false;
+            }
+
+      if (noteEntryMode() || sel->state() != SEL_SINGLE)
+            return;
+
+      Element* el = sel->element();
+      if (el->type() == NOTE)
+            el = el->parent();
+      if (!el->isChordRest())
+            return;
+
+      ChordRest* cr = static_cast<ChordRest*>(el);
+      int tick      = cr->tick();
+      int len       = _padState.tickLen;
+      if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
+            //
+            // handle appoggiatura and acciaccatura
+            //
+            Chord* c = static_cast<Chord*>(cr);
+            cr->setTickLen(len);
+            for (iNote in = c->noteList()->begin(); in != c->noteList()->end(); ++in) {
+                  Note* n = in->second;
+                  n->setTickLen(len);
                   }
-            if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
-                  Element* el = sel->element();
-                  if (el->type() == NOTE)
-                        el = el->parent();
-                  if (el->isChordRest()) {
-                        ChordRest* cr = static_cast<ChordRest*>(el);
-                        int tick      = cr->tick();
-                        int len       = _padState.tickLen;
-                        if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
-                              //
-                              // handle appoggiatura and acciaccatura
-                              //
-                              Chord* c = static_cast<Chord*>(cr);
-                              cr->setTickLen(len);
-                              for (iNote in = c->noteList()->begin(); in != c->noteList()->end(); ++in) {
-                                    Note* n = in->second;
-                                    n->setTickLen(len);
-                                    }
-                              }
-                        else {
-                              if (cr->tuplet()) {
-                                    int pitch = _padState.rest ? -1 : _padState.pitch;
-                                    setTupletChordRest(cr, pitch, len);
-                                    }
-                              else {
-                                    if (_padState.rest)
-                                          setRest(tick, _is.track, len, _padState.dots);
-                                    else
-                                          // setNote(tick, _is.track, _padState.pitch, len);
-                                          changeCRlen(cr, len);
-                                    }
-                              }
-                        }
+            }
+      else {
+            if (cr->tuplet()) {
+                  int pitch = _padState.rest ? -1 : _padState.pitch;
+                  setTupletChordRest(cr, pitch, len);
+                  }
+            else {
+                  if (_padState.rest)
+                        setRest(tick, _is.track, len, _padState.dots);
+                  else
+                        changeCRlen(cr, len);
                   }
             }
       }

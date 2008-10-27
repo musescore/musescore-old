@@ -692,6 +692,8 @@ void Score::endUndoRedo(Undo* undo)
 
       *sel = undo->selection;
       sel->update();
+      getAction("undo")->setEnabled(!undoEmpty());
+      getAction("redo")->setEnabled(!redoEmpty());
       }
 
 //---------------------------------------------------------

@@ -39,7 +39,7 @@ namespace Awl {
       //   mousePressEvent
       //---------------------------------------------------------
 
-      void ColorLabel::mousePressEvent(QMouseEvent* ev)
+      void ColorLabel::mousePressEvent(QMouseEvent*)
             {
             QColor c = QColorDialog::getColor(_color, this);
             if (c.isValid()) {

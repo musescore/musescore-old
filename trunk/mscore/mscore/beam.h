@@ -117,7 +117,7 @@ class Beam : public Element {
 
       const QList<ChordRest*>& getElements() { return elements; }
       void clear()                           { elements.clear(); }
-      void add(ChordRest* a)                 { elements.append(a); }
+      void add(ChordRest* a);
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);

@@ -44,6 +44,7 @@ class Duration {
       void setType(DurationType t)          { _val = t; }
 
       int ticks() const;
+      int ticks(int) const;
       bool operator==(const Duration& t) const { return t._val == _val; }
       bool operator!=(const Duration& t) const { return t._val != _val; }
       static const int types = 12;

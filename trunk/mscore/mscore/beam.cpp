@@ -252,6 +252,16 @@ QPointF Beam::canvasPos() const
       }
 
 //---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void Beam::add(ChordRest* a)
+      {
+      a->setBeam(this);
+      elements.append(a);
+      }
+
+//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
@@ -343,15 +353,14 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               if (b == 0) {
                                     b = new Beam(score());
                                     b->setTrack(track);
+                                    b->setGenerated(true);
                                     add(b);
                                     }
-                              cr->setBeam(b);
                               b->add(cr);
                               Segment* s = nseg;
                               for (;;) {
                                     nseg = s;
                                     ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
-                                    cr->setBeam(b);
                                     b->add(cr);
                                     s = nseg->next();
                                     if (!s || (s->subtype() != Segment::SegGrace) || !s->element(track))
@@ -407,7 +416,6 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               a1   = 0;
                               }
                         else {
-                              cr->setBeam(beam);
                               beam->add(cr);
                               cr = 0;
 
@@ -443,12 +451,11 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     beam = a1->beam();
                                     if (beam == 0) {
                                           beam = new Beam(score());
+                                          beam->setGenerated(true);
                                           beam->setTrack(track);
                                           add(beam);
                                           }
-                                    a1->setBeam(beam);
                                     beam->add(a1);
-                                    cr->setBeam(beam);
                                     beam->add(cr);
                                     a1 = 0;
                                     }
@@ -464,7 +471,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
             }
       foreach(Beam* beam, _beamList) {
             if (beam->getElements().isEmpty()) {
-printf("delete beam %p\n", beam);
+                  remove(beam);
                   delete beam;
                   }
             }
@@ -1182,6 +1189,7 @@ void Beam::editDrag(int grip, const QPointF& delta)
             _p1 += d;
       _p2 += d;
       _userModified = true;
+      setGenerated(false);
       score()->setLayoutAll(true);
       }
 
@@ -1215,5 +1223,6 @@ void Beam::resetUserOffsets()
       {
       _direction = AUTO;
       _userModified = false;
+      setGenerated(true);
       }
 

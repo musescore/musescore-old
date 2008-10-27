@@ -1378,14 +1378,14 @@ void Score::spell()
             for(MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
                   for (Segment* s = m->first(); s; s = s->next()) {
                         int strack = i * VOICES;
                         int etrack = strack + VOICES;
                         for (int track = strack; track < etrack; ++track) {
                               Element* e = s->element(track);
                               if (e && e->type() == CHORD) {
-                                    Chord* chord = (Chord*) e;
+                                    Chord* chord = static_cast<Chord*>(e);
                                     const NoteList* nl = chord->noteList();
                                     for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                                           Note* note = in->second;
@@ -1421,7 +1421,7 @@ Note* prevNote(Note* n)
                   for (int track = startTrack; track >= endTrack; --track) {
                         Element* e = seg->element(track);
                         if (e && e->type() == CHORD)
-                              return ((Chord*)e)->upNote();
+                              return static_cast<Chord*>(e)->upNote();
                         }
                   }
             seg = seg->prev1();

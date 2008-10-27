@@ -123,6 +123,7 @@ class Segment : public Element {
       void removeGeneratedElements();
       bool isEmpty() const               { return empty; }
       void fixStaffIdx();
+      bool isChordRest() const           { return subtype() == Segment::SegChordRest; }
       };
 
 #endif

@@ -1,3 +1,7 @@
+27.10 (ws)
+      - implemented "delete tuplet"
+      - fixed some regressions: crash on copy/paste of tuplets
+      - added chords aug7, aug9, aug13 as alternatives for 7+, 9+, 13+
 25.10 (ws)
       - fix crash when last measure has a volta and is followed by a horizontal
         frame

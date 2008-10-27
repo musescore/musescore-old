@@ -90,7 +90,7 @@ struct UndoOp {
             ExchangeVoice,
             ChangeConcertPitch,
             ChangeInstrumentShort, ChangeInstrumentLong,
-            ChangeChordRestLen
+            ChangeChordRestLen, ChangeBeam
             };
       UndoType type;
       Element* element1;

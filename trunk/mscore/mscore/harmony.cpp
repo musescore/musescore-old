@@ -484,6 +484,9 @@ const ChordDescription Harmony::chordList[] = {
             { 202, "dim7add#7",     "diminished-seventh", "add#7",                       HChord() }, // HChord("C Eb Gb Bbb") },
             { 203, "#59",           "augmented-seventh", "add9",                         HChord("C E Ab D") },
             { 204, "omit5",         "major", "sub5",                                     HChord("C E") },
+            { 205, "aug7",          "augmented-seventh", 0,                              HChord("C E Ab") },        // augmented 7th
+            { 206, "aug9",          "augmented-ninth", 0,                                HChord("C E Ab Bb D") },   // augmented 9th
+            { 207, "aug13",         "dominant-13th", "alt#5",                            HChord("C E G# Bb D A") },
       };
 
 //---------------------------------------------------------

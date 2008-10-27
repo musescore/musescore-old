@@ -235,6 +235,7 @@ void MuseData::readNote(Part* part, const QString& s)
                         tuplet = new Tuplet(score);
                         tuplet->setTrack(gstaff * VOICES);
                         tuplet->setBaseLen(ticks * a / b);
+                        tuplet->setTick(tick);
 
                         ntuplet = a;
                         tuplet->setNormalNotes(b);
