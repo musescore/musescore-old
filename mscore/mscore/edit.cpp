@@ -864,9 +864,8 @@ void Score::deleteItem(Element* el)
 
             case NOTE:
                   {
-                  Chord* chord = (Chord*)(el->parent());
-                  int notes = chord->noteList()->size();
-                  if (notes > 1) {
+                  Chord* chord = static_cast<Chord*>(el->parent());
+                  if (chord->noteList()->size() > 1) {
                         undoRemoveElement(el);
                         break;
                         }
@@ -876,8 +875,10 @@ void Score::deleteItem(Element* el)
 
             case CHORD:
                   {
-                  Chord* chord = (Chord*) el;
-                  undoRemoveElement(chord);
+                  Chord* chord = static_cast<Chord*>(el);
+                  removeChordRest(chord, false);
+
+                  // replace with rest
                   if ((el->voice() == 0) && (chord->noteType() == NOTE_NORMAL)) {
                         //
                         // voice 0 chords are always replaced by rests
@@ -892,7 +893,8 @@ void Score::deleteItem(Element* el)
                               rest->setTuplet(tuplet);
                               }
                         }
-                  else {
+                  else  {
+                        // remove segment if empty
                         Segment* seg = chord->segment();
                         if (seg->isEmpty())
                               undoRemoveElement(seg);
@@ -906,7 +908,7 @@ void Score::deleteItem(Element* el)
                   //    e.g. voice 0 rests cannot be removed
                   //
                   {
-                  Rest* rest = (Rest*)el;
+                  Rest* rest = static_cast<Rest*>(el);
                   if (rest->tuplet() && rest->tuplet()->elements()->empty())
                         undoRemoveElement(rest->tuplet());
                   if (el->voice() != 0) {
@@ -941,6 +943,9 @@ void Score::deleteItem(Element* el)
                               undoRemoveElement(seg);
                         }
                   }
+                  break;
+            case TUPLET:
+                  cmdDeleteTuplet(static_cast<Tuplet*>(el), true);
                   break;
 
             default:
@@ -1269,6 +1274,7 @@ void Score::cmdTuplet(int n)
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
       tuplet->setTrack(cr->track());
+      tuplet->setTick(cr->tick());
       Measure* measure = cr->measure();
       tuplet->setParent(measure);
       cmdCreateTuplet(cr, tuplet);
@@ -1613,5 +1619,66 @@ void Score::cmdEnterRest()
             _is.pos += _padState.tickLen;
             }
       _padState.rest = false;  // continue with normal note entry
+      }
+
+//---------------------------------------------------------
+//   removeChordRest
+//    remove chord or rest
+//    remove associated segment if empty
+//    remove beam
+//---------------------------------------------------------
+
+void Score::removeChordRest(ChordRest* cr, bool clearSegment)
+      {
+      undoRemoveElement(cr);
+      if (clearSegment) {
+            Segment* seg = static_cast<Segment*>(cr->parent());
+            if (seg->isEmpty())
+                  undoRemoveElement(seg);
+            }
+      if (cr->beam()) {
+            Beam* beam = cr->beam();
+            if (beam->generated()) {
+                  beam->parent()->remove(beam);
+                  delete beam;
+                  }
+            else {
+                  undoRemoveElement(beam);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdDeleteTuplet
+//    remove tuplet and replace with rest
+//---------------------------------------------------------
+
+void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
+      {
+      Measure* measure = tuplet->measure();
+      foreach(DurationElement* de, *tuplet->elements()) {
+            if (de->type() == CHORD || de->type() == REST)
+                  removeChordRest(static_cast<ChordRest*>(de), true);
+            else if (de->type() == TUPLET)
+                  cmdDeleteTuplet(static_cast<Tuplet*>(de), replaceWithRest);
+            else
+                  printf("cmdDeleteTuplet: unknown type %s\n", de->name());
+            }
+      undoRemoveElement(tuplet);
+      int len  = tuplet->tickLen();
+      if (!replaceWithRest)
+            return;
+
+      int tick = tuplet->tick();
+      Rest* rest = new Rest(this, tick, len);
+      rest->setTrack(tuplet->track());
+      Segment::SegmentType st = Segment::SegChordRest;
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoAddElement(seg);
+            }
+      rest->setParent(seg);
+      undoAddElement(rest);
       }
 

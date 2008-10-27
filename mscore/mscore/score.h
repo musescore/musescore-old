@@ -66,6 +66,7 @@ class Excerpt;
 class EventMap;
 class Harmony;
 struct Channel;
+class Tuplet;
 
 struct Style;
 struct SigEvent;
@@ -267,6 +268,7 @@ class Score : public QObject {
       void cmdPaste();
 
       void updateSelectedElements(SelState);
+      void removeChordRest(ChordRest* cr, bool clearSegment);
 
    public slots:
       void doUndo();
@@ -640,6 +642,8 @@ class Score : public QObject {
       int state() const        { return _state; }
       void setPrevState(int s) { _prevState = s; }
       int prevState() const    { return _prevState; }
+
+      void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
       };
 
 extern Score* gscore;

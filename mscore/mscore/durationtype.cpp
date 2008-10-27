@@ -129,6 +129,15 @@ int Duration::ticks() const
             }
       }
 
+int Duration::ticks(int dots) const
+      {
+      int t = ticks();
+      for (int i = 0; i < dots; ++i) {
+            t += (t << (i+1));
+            }
+      return t;
+      }
+
 //---------------------------------------------------------
 //   name
 //---------------------------------------------------------

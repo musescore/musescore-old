@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# svn info -r HEAD | grep Revision | cut -f 2 -d ' ' > revision.h
-

@@ -375,7 +375,7 @@ void Tuplet::add(Element* e)
       {
       foreach(DurationElement* el, _elements) {
             if (el == e)
-                  printf("Tuplet::add: already there\n");
+                  printf("Tuplet::add: %s already there\n", el->name());
             }
 
       switch(e->type()) {
@@ -396,6 +396,10 @@ void Tuplet::add(Element* e)
                   if (i == _elements.size())
                         _elements.append(static_cast<DurationElement*>(e));
                   }
+
+                  // the tick position of a tuplet is the tick position of its
+                  // first element:
+                  setTick(_elements.front()->tick());
                   break;
             default:
                   printf("Tuplet::add() unknown element\n");
@@ -473,6 +477,7 @@ void Score::tupletDialog()
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setBaseLen(baseLen);
       tuplet->setTrack(cr->track());
+      tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
 
       Measure* measure = cr->measure();

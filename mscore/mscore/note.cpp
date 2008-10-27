@@ -925,7 +925,6 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case CHORD:
                   {
-printf("drop chord on note\n");
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
@@ -950,8 +949,11 @@ bool Note::genPropertyMenu(QMenu* popup) const
       QAction* a = popup->addAction(tr("Note Properties..."));
       a->setData("props");
       if (chord()->tuplet()) {
-            a = popup->addAction(tr("Tuplet Properties..."));
+            QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
+            a = menuTuplet->addAction(tr("Tuplet Properties..."));
             a->setData("tupletProps");
+            a = menuTuplet->addAction(tr("Delete Tuplet"));
+            a->setData("tupletDelete");
             }
       return true;
       }
@@ -976,6 +978,8 @@ void Note::propertyAction(const QString& s)
             TupletProperties vp(chord()->tuplet());
             vp.exec();
             }
+      else if (s == "tupletDelete")
+            score()->cmdDeleteTuplet(chord()->tuplet(), true);
       else
             Element::propertyAction(s);
       }

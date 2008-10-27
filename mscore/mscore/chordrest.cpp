@@ -166,9 +166,7 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
       if (_small)
             pl.append(Prop("small", _small));
       if (!clipboardmode) {
-            Duration d;
-            d.setVal(tickLen());
-            if (duration() != d)
+            if (tickLen() != duration().ticks(_dots))
                   pl.append(Prop("durationType", duration().name()));
             }
       return pl;
@@ -537,5 +535,14 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   return 0;
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   setBeam
+//---------------------------------------------------------
+
+void ChordRest::setBeam(Beam* b)
+      {
+      _beam = b;
       }
 

@@ -101,7 +101,8 @@ class Tuplet : public DurationElement {
       void write(Xml&, int) const;
 
       virtual void draw(QPainter&) const;
-      int id() const  { return _id; }
+      int id() const                  { return _id; }
+      virtual int tickLen() const     { return _baseLen * _normalNotes; }
       };
 
 

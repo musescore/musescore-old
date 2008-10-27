@@ -1054,25 +1054,22 @@ void Measure::remove(Element* el)
                   remove(static_cast<Segment*>(el));
                   break;
             case TUPLET:
-                  {
-                  int idx = _tuplets.indexOf(static_cast<Tuplet*>(el));
-                  if (idx == -1) {
+                  if (!_tuplets.removeOne(static_cast<Tuplet*>(el))) {
                         printf("Measure remove: Tuplet not found\n");
                         return;
                         }
-                  _tuplets.removeAt(idx);
-                  }
                   break;
 
             case BEAM:
                   {
-                  int idx = _beamList.indexOf(static_cast<Beam*>(el));
-                  if (idx == -1) {
+                  Beam* b = static_cast<Beam*>(el);
+                  foreach(ChordRest* cr, b->getElements())
+                        cr->setBeam(0);
+                  }
+                  if (!_beamList.removeOne(static_cast<Beam*>(el))) {
                         printf("Measure remove: Beam not found\n");
                         return;
                         }
-                  _beamList.removeAt(idx);
-                  }
                   break;
 
             case LAYOUT_BREAK:

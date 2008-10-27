@@ -2314,6 +2314,7 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                   tuplet->setTrack((staff + relStaff) * VOICES);
                   tuplet->setNormalNotes(normalNotes);
                   tuplet->setActualNotes(actualNotes);
+                  tuplet->setTick(tick);
                   // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
                   // avoid rounding errors:
                   int bl = duration * actualNotes / normalNotes;
