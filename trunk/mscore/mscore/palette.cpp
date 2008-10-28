@@ -31,6 +31,8 @@
 #include "image.h"
 #include "xml.h"
 #include "canvas.h"
+#include "note.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   Palette
@@ -176,6 +178,20 @@ void Palette::mousePressEvent(QMouseEvent* ev)
       }
 
 //---------------------------------------------------------
+//   applyDrop
+//---------------------------------------------------------
+
+static void applyDrop(Score* score, Viewer* viewer, Element* target, Element* e)
+      {
+      QPointF pt;
+      if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
+            Element* ne = e->clone();
+            target->drop(pt, pt, ne);
+            score->canvas()->setDropTarget(0);     // acceptDrop sets dropTarget
+            }
+      }
+
+//---------------------------------------------------------
 //   mouseDoubleClickEvent
 //---------------------------------------------------------
 
@@ -184,24 +200,43 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       int i               = idx(ev->pos());
       Score* score        = mscore->currentScore();
       Selection* sel      = score->selection();
-      QList<Element*>* el = sel->elements();
-      if (el->isEmpty())
+
+      if (sel->state() == SEL_NONE)
             return;
 
+      QList<Element*>* el = sel->elements();
       QMimeData* mimeData = new QMimeData;
       Element* element    = symbols[i];
       Viewer* viewer      = score->canvas();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
-      QPointF pt;
 
       score->startCmd();
-      foreach(Element* e, *el) {
-            if (e->acceptDrop(viewer, pt, element->type(), element->subtype())) {
-                  Element* ne = element->clone();
-                  e->drop(pt, pt, ne);
-                  score->canvas()->setDropTarget(0);     // acceptDrop sets dropTarget
+      if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
+            foreach(Element* e, *el)
+                  applyDrop(score, viewer, e, element);
+            }
+      else if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
+            int track1 = sel->staffStart * VOICES;
+            int track2 = sel->staffEnd * VOICES;
+            for (Segment* s = sel->startSegment(); s && s != sel->endSegment(); s = s->next1()) {
+                  for (int track = track1; track < track2; ++track) {
+                        Element* e = s->element(track);
+                        if (e == 0)
+                              continue;
+                        if (e->type() == CHORD) {
+                              Chord* chord = static_cast<Chord*>(e);
+                              NoteList* nl = chord->noteList();
+                              for (iNote i = nl->begin(); i != nl->end(); ++i)
+                                    applyDrop(score, viewer, i->second, element);
+
+                              }
+                        else
+                              applyDrop(score, viewer, e, element);
+                        }
                   }
             }
+      else
+            printf("unknown selection state\n");
       score->endCmd();
       }
 

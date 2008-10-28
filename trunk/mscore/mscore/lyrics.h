@@ -62,6 +62,7 @@ class Lyrics : public Text {
       void setEndTick(int tick)     { _endTick = tick;    }
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak
       QList<Line*>* separatorList() { return &_separator; }
+      virtual void paste();
       };
 
 #endif

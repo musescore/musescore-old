@@ -178,7 +178,7 @@ class TextB : public Element {
 
       void setAbove(bool val);
       qreal basePosition() const;
-      void paste();
+      virtual void paste();
       };
 
 //---------------------------------------------------------

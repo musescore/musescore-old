@@ -496,4 +496,29 @@ void Lyrics::layout(ScoreLayout* l)
       setPos(x, y);
       }
 
+//---------------------------------------------------------
+//   paste
+//---------------------------------------------------------
+
+void Lyrics::paste()
+      {
+#ifdef __MINGW32__
+      QClipboard::Mode mode = QClipboard::Clipboard;
+#else
+      QClipboard::Mode mode = QClipboard::Selection;
+#endif
+      QString txt = QApplication::clipboard()->text(mode);
+      QStringList sl = txt.split(" ", QString::SkipEmptyParts);
+      if (sl.isEmpty())
+            return;
+      cursor->insertText(sl[0]);
+      layout(0);
+      bool lo = (subtype() == TEXT_INSTRUMENT_SHORT) || (subtype() == TEXT_INSTRUMENT_LONG);
+      score()->setLayoutAll(lo);
+      score()->setUpdateAll();
+      score()->end();
+      txt = txt.mid(sl[0].size() + 1);
+      QApplication::clipboard()->setText(txt, mode);
+      score()->lyricsTab(false, true);
+      }
 

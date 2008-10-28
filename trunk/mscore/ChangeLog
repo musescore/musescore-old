@@ -1,3 +1,9 @@
+28.10 (ws)
+      - extend functionality when pasting text in lyrics mode: only the first word
+        ist pasted and removed from clipboard and then the cursor moves to next
+        note/chord staying in lyrics mode
+      - extend select operations: double click on palette now also works for
+        ranges
 27.10 (ws)
       - implemented "delete tuplet"
       - fixed some regressions: crash on copy/paste of tuplets
