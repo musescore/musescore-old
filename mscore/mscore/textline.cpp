@@ -105,13 +105,13 @@ void TextLineSegment::draw(QPainter& p) const
 
       QPointF pp2(pos2());
 
-      qreal w = 0.0;
+      qreal l = 0.0;
       if (_text) {
             QRectF bb(_text->bbox());
-            w = bb.width();
+            l = _text->pos().x() + bb.width();
             }
 
-      QPointF pp1(w + textlineTextDistance, 0.0);
+      QPointF pp1(l + textlineTextDistance, 0.0);
 
       QPen pen(p.pen());
       pen.setWidthF(textlineLineWidth);
@@ -164,10 +164,6 @@ void TextLineSegment::layout(ScoreLayout* l)
                   _text->setParent(this);
                   }
             _text->layout(l);
-            QRectF bb(_text->bbox());
-            qreal textlineLineWidth = _spatium * .15;
-            qreal h = bb.height() * .5 - textlineLineWidth * .5;
-            _text->setPos(0.0, -h);
             }
       else if (_text) {
             delete _text;
@@ -322,15 +318,9 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       up->setChecked(tl->hookUp());
 
       lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
-      text->setText(tl->text());
+      text->setHtml(tl->getHtml());
       linecolor->setColor(tl->lineColor());
       TextBase* tb = tl->textBase();
-      QFont font(tb->defaultFont());
-      textFont->setCurrentFont(font);
-
-      textSize->setValue(font.pixelSize() * PPI / DPI);
-      italic->setChecked(font.italic());
-      bold->setChecked(font.bold());
       if (tb->frameWidth()) {
             frame->setChecked(true);
             frameWidth->setValue(tb->frameWidth());
@@ -356,11 +346,6 @@ void LineProperties::accept()
       tl->setLineStyle(Qt::PenStyle(lineStyle->currentIndex() + 1));
       tl->setLineColor(linecolor->color());
       TextBase* tb = tl->textBase();
-      QFont f(textFont->currentFont());
-      f.setBold(bold->isChecked());
-      f.setItalic(italic->isChecked());
-      f.setPixelSize(lrint(textSize->value() * DPI / PPI));
-      tb->setDefaultFont(f);
       if (frame->isChecked()) {
             tb->setFrameWidth(frameWidth->value());
             tb->setPaddingWidth(frameMargin->value());
@@ -369,7 +354,8 @@ void LineProperties::accept()
             }
       else
             tb->setFrameWidth(0.0);
-      tl->setText(text->text());
+      tl->setHtml(text->toHtml());
 
       QDialog::accept();
       }
+

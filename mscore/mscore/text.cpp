@@ -610,8 +610,15 @@ void TextB::layout(ScoreLayout* layout)
       QPointF p;
       if (_align & ALIGN_BOTTOM)
             p.setY(-th);
-      else if (_align & ALIGN_VCENTER)
-            p.setY(-(th * .5));
+      else if (_align & ALIGN_VCENTER) {
+            if (subtype() == TEXT_TEXTLINE) {
+                  TextLineSegment* tls = (TextLineSegment*)parent();
+                  TextLine* tl = (TextLine*)(tls->line());
+                  qreal textlineLineWidth = tl->lineWidth().point();
+                  p.setY(-(th * .5 + textlineLineWidth * .5));
+            } else
+                  p.setY(-(th * .5));
+            }
       else if (_align & ALIGN_BASELINE)
             p.setY(-basePosition());
       if (_align & ALIGN_RIGHT)
@@ -1017,7 +1024,7 @@ void TextB::endEdit()
       if (subtype() == TEXT_TEXTLINE) {
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
-            tl->setText(getText());
+            tl->setHtml(getHtml());
             }
       }
 

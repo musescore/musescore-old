@@ -134,13 +134,13 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT, 0, 0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "TextLine"), ff,  12, false, false, false,
-         ALIGN_HCENTER, 0, 0, OS, 0, 0, true),
+         ALIGN_LEFT | ALIGN_VCENTER, 0, 0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Glissando"), ff, 8, false, true, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "String Number"), ff,  8, false, false, false,
-         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.20, 0.20, 0, Qt::black, true, false),
+         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.20, 0.0, 0, Qt::black, true, false),
       };
 
 #undef MM

@@ -4,6 +4,11 @@
       (sy)
       - tried changing sizing policy of palette to see if this
         allows people to resize it.
+      - made TextLine accept formatted text
+      - made TextLine text stay in place when editing, it also accepts other
+        alignments than Center now. if you changed the style of TextLine in your
+        score before, the alignment must be changed to Left and Center for the old
+        behavior. the changes take effect after saving and reloading the score
 28.10 (ws)
       - fix: when transposing several selected measures, only the first measure was
         transposed
