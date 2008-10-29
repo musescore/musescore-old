@@ -22,6 +22,9 @@
 #include "mscore.h"
 #include "xml.h"
 #include "utils.h"
+#include "chord.h"
+#include "score.h"
+#include "note.h"
 
 enum { COL_PITCH, COL_NOTE, COL_NAME };
 
@@ -45,6 +48,12 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       nDrumset = *ds;
       setupUi(this);
 
+      drumNote->setGrid(70, 80);
+      drumNote->setRowsColumns(1, 1);
+      drumNote->showStaff(true);
+      drumNote->setDrawGrid(true);
+      drumNote->setReadOnly(true);
+
       updateList();
 
       noteHead->addItem(tr("invalid"));
@@ -62,6 +71,10 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
          SLOT(itemChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(name, SIGNAL(textChanged(const QString&)), SLOT(nameChanged(const QString&)));
+      connect(noteHead, SIGNAL(currentIndexChanged(int)), SLOT(valueChanged()));
+      connect(staffLine, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
+      connect(voice, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
+      connect(stemDirection, SIGNAL(currentIndexChanged(int)), SLOT(valueChanged()));
       }
 
 //---------------------------------------------------------
@@ -148,8 +161,13 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
             nDrumset.drum[pitch].line          = staffLine->value();
             nDrumset.drum[pitch].voice         = voice->value();
             nDrumset.drum[pitch].stemDirection = Direction(stemDirection->currentIndex());
-            previous->setText(1, nDrumset.name(pitch));
+            previous->setText(COL_NAME, nDrumset.name(pitch));
             }
+      name->blockSignals(true);
+      staffLine->blockSignals(true);
+      voice->blockSignals(true);
+      stemDirection->blockSignals(true);
+      noteHead->blockSignals(true);
 
       int pitch = current->data(0, Qt::UserRole).toInt();
       name->setText(nDrumset.name(pitch));
@@ -158,6 +176,71 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
       stemDirection->setCurrentIndex(int(nDrumset.stemDirection(pitch)));
       int nh = nDrumset.noteHead(pitch);
       noteHead->setCurrentIndex(nh + 1);
+
+      name->blockSignals(false);
+      staffLine->blockSignals(false);
+      voice->blockSignals(false);
+      stemDirection->blockSignals(false);
+      noteHead->blockSignals(false);
+
+      updateExample();
+      }
+
+//---------------------------------------------------------
+//   valueChanged
+//---------------------------------------------------------
+
+void EditDrumset::valueChanged()
+      {
+      int pitch = pitchList->currentItem()->data(0, Qt::UserRole).toInt();
+      nDrumset.drum[pitch].name          = name->text();
+      nDrumset.drum[pitch].notehead      = noteHead->currentIndex() - 1;
+      nDrumset.drum[pitch].line          = staffLine->value();
+      nDrumset.drum[pitch].voice         = voice->value();
+      nDrumset.drum[pitch].stemDirection = Direction(stemDirection->currentIndex());
+      updateExample();
+      }
+
+//---------------------------------------------------------
+//   updateExample
+//---------------------------------------------------------
+
+void EditDrumset::updateExample()
+      {
+      int pitch = pitchList->currentItem()->data(0, Qt::UserRole).toInt();
+      if (!nDrumset.isValid(pitch)) {
+            drumNote->addObject(0,  0, "");
+            return;
+            }
+      int line      = nDrumset.line(pitch);
+      int noteHead  = nDrumset.noteHead(pitch);
+      int voice     = nDrumset.voice(pitch);
+      Direction dir = nDrumset.stemDirection(pitch);
+      bool up;
+      if (dir == UP)
+            up = true;
+      else if (dir == DOWN)
+            up = false;
+      else
+            up = line > 4;
+      Chord* chord = new Chord(gscore);
+      chord->setTickLen(division);
+      chord->setDuration(Duration::V_QUARTER);
+      chord->setStemDirection(dir);
+      chord->setTrack(voice);
+      Note* note = new Note(gscore);
+      note->setParent(chord);
+      note->setTrack(voice);
+      note->setPitch(pitch);
+      note->setLine(line);
+      note->setPos(0.0, _spatium * .5 * line);
+      note->setHeadGroup(noteHead);
+      chord->add(note);
+      Stem* stem = new Stem(gscore);
+      stem->setLen(Spatium(up ? -3.0 : 3.0));
+      chord->setStem(stem);
+      stem->setPos(note->stemPos(up));
+      drumNote->addObject(0,  chord, nDrumset.name(pitch));
       }
 
 //---------------------------------------------------------

@@ -126,6 +126,8 @@ void MuseScore::showPalette(bool visible)
             Palette* sp = new Palette(4, 4, 0.8);
             sp->setGrid(42, 60);
             sp->showStaff(true);
+            sp->setYOffset(6.0);
+
             for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
@@ -139,6 +141,8 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette(5, 3, .8);
             sp->setGrid(56, 45);
             sp->showStaff(true);
+            sp->setYOffset(6.0);
+
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
@@ -158,8 +162,8 @@ void MuseScore::showPalette(bool visible)
             //    Time
             //-----------------------------------
 
-            sp = new Palette(4, 3);
-            sp->setGrid(56, 45);
+            sp = new Palette(3, 4, .8);
+            sp->setGrid(42, 38);
             sp->showStaff(true);
 
       	sp->addObject(0,   new TimeSig(gscore, 2, 2), "2/2");
@@ -180,8 +184,8 @@ void MuseScore::showPalette(bool visible)
             //    Bar Lines
             //-----------------------------------
 
-            sp = new Palette(2, 4);
-            sp->setGrid(42, 50);
+            sp = new Palette(2, 4, .8);
+            sp->setGrid(42, 38);
             sp->showStaff(true);
 
             struct {
@@ -350,12 +354,12 @@ void MuseScore::showPalette(bool visible)
             paletteBox->addPalette(tr("Brackets"), sp);
 
             //-----------------------------------
-            //    Attributes
+            //    Attributes, Ornaments
             //-----------------------------------
 
             unsigned nn = NOTE_ATTRIBUTES;
             sp = new Palette((nn + 3) / 4, 4);
-            sp->setGrid(42, 30);
+            sp->setGrid(42, 27);
 
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
@@ -383,7 +387,8 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(2, 4, .9);
-            sp->setGrid(42, 42);
+            sp->setGrid(42, 28);
+            sp->setYOffset(-12.0);
 
             static const char* dynS[] = {
                   "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
@@ -1341,7 +1346,7 @@ void MuseScore::drumPaletteSelected(int idx)
             if (i == idx) {
                   padState->drumNote = pitch;
                   padState->voice    = ds->voice(pitch);
-                  printf("drumNote %d voice %d\n", pitch, padState->voice);
+//                  printf("drumNote %d voice %d\n", pitch, padState->voice);
                   cs->setPadState();
                   break;
                   }

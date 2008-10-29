@@ -78,6 +78,7 @@ class Palette : public QWidget {
       bool _drawGrid;
       bool _selectable;
       bool _readOnly;
+      qreal _yOffset;
 
       bool staff;
 
@@ -128,6 +129,7 @@ class Palette : public QWidget {
       bool readOnly() const        { return _readOnly;   }
       void setReadOnly(bool val)   { _readOnly = val;    }
       void setMag(qreal val)       { extraMag = val;     }
+      void setYOffset(qreal val)   { _yOffset = val;     }
       };
 
 #endif

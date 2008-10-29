@@ -1,4 +1,5 @@
 29.10 (ws)
+      - implement "example note" in drumset editor
       - make tuplet brackets editable
       (sy)
       - tried changing sizing policy of palette to see if this
