@@ -83,6 +83,8 @@ class TextLine : public SLine {
 
       void setText(const QString& s)       { _text->setText(s, 0);    }
       QString text() const                 { return _text->getText(); }
+      void setHtml(const QString& s)       { _text->setHtml(s);       }
+      QString getHtml() const              { return _text->getHtml(); }
       TextBase** textBasePtr()             { return &_text;           }
       TextBase*  textBase()                { return _text;            }
       void setTextBase(TextBase* b)        { _text = b;               }
