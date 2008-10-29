@@ -139,7 +139,8 @@ void Note::setPitch(int val)
       else if (val < 0)
             val = 0;
       _pitch = val;
-      _tpc = pitch2tpc(_pitch);
+      int key = (staff() && chord()) ? staff()->key(chord()->tick()) : 0;
+      _tpc = pitch2tpc(_pitch, key);
       }
 
 //---------------------------------------------------------

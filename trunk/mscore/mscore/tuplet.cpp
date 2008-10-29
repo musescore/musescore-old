@@ -37,10 +37,13 @@
 Tuplet::Tuplet(Score* s)
   : DurationElement(s)
       {
-      _numberType  = SHOW_NUMBER;
-      _bracketType = AUTO_BRACKET;
-      _number      = 0;
-      _hasBracket  = false;
+      _numberType   = SHOW_NUMBER;
+      _bracketType  = AUTO_BRACKET;
+      _number       = 0;
+      _hasBracket   = false;
+      _userModified = false;
+      _p1           = QPointF();
+      _p2           = QPointF();
       }
 
 //---------------------------------------------------------
@@ -137,7 +140,6 @@ void Tuplet::layout(ScoreLayout* layout)
             _hasBracket = _bracketType != SHOW_NO_BRACKET;
             }
 
-      QPointF p1, p2;
       if (isUp) {
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
@@ -200,6 +202,15 @@ void Tuplet::layout(ScoreLayout* layout)
       QPointF mp(parent()->canvasPos());
       p1 -= mp;
       p2 -= mp;
+
+      if (_userModified) {
+            p1.rx() += _p1.x();
+            p1.setY(_p1.y());
+            p2.rx() += _p2.x();
+            p2.setY(_p2.y());
+            }
+      _p1.setY(p1.y());
+      _p2.setY(p2.y());
 
       // center number
       qreal x3 = 0.0, y3 = 0.0;
@@ -327,6 +338,10 @@ void Tuplet::write(Xml& xml, int id) const
       xml.tag("actualNotes", _actualNotes);
       if (_number)
             _number->write(xml, "Number");
+      if (_userModified) {
+            xml.tag("p1", _p1);
+            xml.tag("p2", _p2);
+            }
       xml.etag();
       }
 
@@ -361,6 +376,14 @@ void Tuplet::read(QDomElement e)
                   _number->setParent(this);
                   _number->read(e);
                   _number->setSubtype(TEXT_TUPLET);   // override read
+                  }
+            else if (tag == "p1") {
+                  _userModified = true;
+                  _p1 = readPoint(e);
+                  }
+            else if (tag == "p2") {
+                  _userModified = true;
+                  _p2 = readPoint(e);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
@@ -570,5 +593,52 @@ void TupletProperties::accept()
       else if (noBracket->isChecked())
             tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
       QDialog::accept();
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Tuplet::startEdit(Viewer*, const QPointF&)
+      {
+      return _hasBracket;
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Tuplet::editDrag(int grip, const QPointF& d)
+      {
+      if (grip == 0)
+            _p1 += d;
+      else
+            _p2 += d;
+      _userModified = true;
+      setGenerated(false);
+      score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Tuplet::updateGrips(int* grips, QRectF*grip) const
+      {
+      *grips = 2;
+      grip[0].translate(canvasPos() + p1);
+      grip[1].translate(canvasPos() + p2);
+      }
+
+//---------------------------------------------------------
+//   resetUserOffsets
+//---------------------------------------------------------
+
+void Tuplet::resetUserOffsets()
+      {
+      _userModified = false;
+      _p1           = QPointF();
+      _p2           = QPointF();
+      setGenerated(true);
       }
 

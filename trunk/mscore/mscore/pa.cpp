@@ -89,7 +89,6 @@ bool Portaudio::init()
       PaDeviceIndex idx = preferences.portaudioDevice;
       if (idx < 0)
             idx = Pa_GetDefaultOutputDevice();
-printf("pa: default output device %d\n", idx);
 
       /* Open an audio I/O stream. */
       struct PaStreamParameters out;
@@ -171,8 +170,6 @@ QStringList Portaudio::deviceList(int apiIdx)
 
 int Portaudio::deviceIndex(int apiIdx, int apiDevIdx)
       {
-      printf("pa: api %d dev %d = %d\n", apiIdx, apiDevIdx,
-         Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, apiDevIdx));
       return Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, apiDevIdx);
       }
 

@@ -1239,7 +1239,7 @@ void TupletView::setElement(Element* e)
       tb.actualNotes->setValue(tuplet->actualNotes());
       tb.number->setEnabled(tuplet->number());
       tb.elements->clear();
-      foreach(DurationElement* e, *tuplet->elements()) {
+      foreach(DurationElement* e, tuplet->elements()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, e->name());
             item->setText(1, QString("%1").arg(e->tick()));

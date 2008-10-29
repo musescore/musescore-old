@@ -81,7 +81,7 @@ typedef BeamSegmentList::const_iterator ciBeamSegment;
 //---------------------------------------------------------
 
 class Beam : public Element {
-      QList<ChordRest*> elements;
+      QList<ChordRest*> _elements;
       BeamSegmentList beamSegments;
       Direction _direction;
       bool _up;
@@ -115,8 +115,8 @@ class Beam : public Element {
       void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
 
-      const QList<ChordRest*>& getElements() { return elements; }
-      void clear()                           { elements.clear(); }
+      const QList<ChordRest*>& elements() { return _elements;  }
+      void clear()                        { _elements.clear(); }
       void add(ChordRest* a);
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;

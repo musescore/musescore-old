@@ -687,7 +687,7 @@ void Score::cmdFlipStemDirection()
             Beam* beam = chord->beam();
             if (beam) {
                   bool set = false;
-                  QList<ChordRest*> elements = beam->getElements();
+                  QList<ChordRest*> elements = beam->elements();
                   for (int i = 0; i < elements.size(); ++i) {
                         ChordRest* cr = elements[i];
                         if (!set) {
@@ -911,7 +911,7 @@ void Score::deleteItem(Element* el)
                   //
                   {
                   Rest* rest = static_cast<Rest*>(el);
-                  if (rest->tuplet() && rest->tuplet()->elements()->empty())
+                  if (rest->tuplet() && rest->tuplet()->elements().empty())
                         undoRemoveElement(rest->tuplet());
                   if (el->voice() != 0) {
                         undoRemoveElement(el);
@@ -1281,14 +1281,14 @@ void Score::cmdTuplet(int n)
       tuplet->setParent(measure);
       cmdCreateTuplet(cr, tuplet);
 
-      const QList<DurationElement*>* cl = tuplet->elements();
+      const QList<DurationElement*>& cl = tuplet->elements();
 
-      int ne = cl->size();
+      int ne = cl.size();
       DurationElement* el = 0;
-      if (ne && (*cl)[0]->type() == REST)
-            el  = (*cl)[0];
+      if (ne && cl[0]->type() == REST)
+            el  = cl[0];
       else if (ne > 1)
-            el = (*cl)[1];
+            el = cl[1];
       if (el) {
             select(el, SELECT_SINGLE, 0);
             setNoteEntry(true);
@@ -1487,11 +1487,11 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //    make gap for new note/rest
       //---------------------------------------------------
 
-      const QList<DurationElement*>* crl = tuplet->elements();
-      int n = crl->size();
+      const QList<DurationElement*>& crl = tuplet->elements();
+      int n = crl.size();
       int i = 0;
       for (; i < n; ++i) {
-            if ((*crl)[i] == cr)
+            if (crl[i] == cr)
                   break;
             }
       if (i == n) {
@@ -1501,7 +1501,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       int remaining = len;
       int ii = i;
       for (; ii < n; ++ii) {
-            remaining -= (*crl)[ii]->duration().ticks();
+            remaining -= crl[ii]->duration().ticks();
             if (remaining <= 0)
                   break;
             }
@@ -1515,7 +1515,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       setLayout(measure);
 
       for (; ii < n; ++ii) {
-            DurationElement* el = (*crl)[ii];
+            DurationElement* el = crl[ii];
             undoRemoveElement(el);
             remaining -= el->duration().ticks();
             if (remaining <= 0)
@@ -1658,7 +1658,7 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
 void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       {
       Measure* measure = tuplet->measure();
-      foreach(DurationElement* de, *tuplet->elements()) {
+      foreach(DurationElement* de, tuplet->elements()) {
             if (de->type() == CHORD || de->type() == REST)
                   removeChordRest(static_cast<ChordRest*>(de), true);
             else if (de->type() == TUPLET)

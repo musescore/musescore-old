@@ -1277,7 +1277,7 @@ void Score::checkTuplets()
                   continue;
             Measure* m = (Measure*)mb;
             foreach(Tuplet* t, *m->tuplets()) {
-                  if (t->elements()->empty()) {
+                  if (t->elements().empty()) {
                         printf("empty tuplet: removing\n");
                         m->tuplets()->removeAll(t);
                         }

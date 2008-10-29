@@ -18,15 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 //
-// Lilypond export. 
-// For HISTORY, NEWS and TODOS: see end of file 
+// Lilypond export.
+// For HISTORY, NEWS and TODOS: see end of file
 // Still too many problems for exportly to be usable.
 
 // Works on inv1.msc and the tarrega-study in demos. Provided you
 // delete a quarter-rest in the last measure before repeatsign, in
 // staff 1, voice 2. Seems like this voice/bar has one quarter too many?
 
-// 
+//
 // Some revisions by olagunde@start.no
 //
 // In my code I use emacs c++ mode for formatting. In addition I hit
@@ -82,7 +82,7 @@ class ExportLy {
   bool slur;
   bool graceswitch;
   int prevpitch, staffpitch, chordpitch, oktavdiff;
-  int measurenumber, lastind, taktnr; 
+  int measurenumber, lastind, taktnr;
   bool repeatactive;
   bool firstalt,secondalt;
   enum voltatype {startending, endending, startrepeat, endrepeat, bothrepeat, doublebar, brokenbar, endbar, none};
@@ -94,18 +94,18 @@ class ExportLy {
   bool started[MAX_SLURS];
   int findSlur(const Slur* s) const;
   QString voicename[VOICES], partshort[32];
-  char *relativ, *staffrelativ;
+  const char *relativ, *staffrelativ;
   bool voiceActive[VOICES];
   QString  partname[32];
   QString cleannote, prevnote;
 
-  
+
   void indent();
   int getLen(int ticks, int* dots);
   void writeLen(int);
   QString tpc2name(int tpc);
   QString tpc2purename(int tpc);
-  
+
   void writeScore();
   void writeVoiceMeasure(Measure*, Staff*, int, int);
   void writeKeySig(int);
@@ -124,7 +124,7 @@ class ExportLy {
   void doSlurStart(Chord* chord);
   void doSlurStop(Chord* chord);
 
-  
+
 public:
   ExportLy(Score* s) {
     score  = s;
@@ -164,30 +164,30 @@ void ExportLy::indent()
 void ExportLy::findTuplets(Note* note)
 
 {
-  
+
   Tuplet* t = note->chord()->tuplet();
   int actNotes = 1;
   int nrmNotes = 1;
 
-  if (t) 
+  if (t)
     {
-      if (tupletcount == 0) 
+      if (tupletcount == 0)
 	{
 	  actNotes = t->actualNotes();
 	  nrmNotes = t->normalNotes();
 	  tupletcount=actNotes;
-	  os << "\\times " <<  nrmNotes << "/" << actNotes << "{" ; 
+	  os << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
 	}
       else if (tupletcount>1)
 	{
 	  tupletcount--;
-	} 
+	}
     }
 }//end of check-tuplets
 
 
 //-----------------------------------------------------
-//  voltaCheckBar 
+//  voltaCheckBar
 //
 // supplements findVolta and called from there: check barlinetypes in
 // addition to endings
@@ -195,14 +195,14 @@ void ExportLy::findTuplets(Note* note)
 int ExportLy::voltaCheckBar(Measure* meas, int i)
 {
 
-  int blt = meas->endBarLineType(); 
+  int blt = meas->endBarLineType();
 
-  switch(blt) 
+  switch(blt)
     {
     case START_REPEAT:
       i++;
       voltarray[i].voltart=startrepeat;
-      voltarray[i].barno=taktnr; 
+      voltarray[i].barno=taktnr;
       break;
     case END_REPEAT:
       i++;
@@ -229,7 +229,7 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
       voltarray[i].barno=taktnr;
     default:
       break;
-    }//switch 
+    }//switch
   return i;
 }//end voltacheckbarline
 
@@ -252,30 +252,30 @@ void  ExportLy::findVolta()
       voltarray[i].voltart=none;
       voltarray[i].barno=0;
     }
-  
+
   i=0;
 
   for (MeasureBase * m=score->layout()->first(); m; m=m->next())
     {// for all measures
       if (m->type() !=MEASURE )
 	continue;
-      
+
       //hvis det derimot er en takt:
-      
+
       ++taktnr;
-      
-      foreach(Element* el, *(m->score()->gel())) 
+
+      foreach(Element* el, *(m->score()->gel()))
 	//walk thru all elements of measure
 	{
-	  if (el->type() == VOLTA) 
+	  if (el->type() == VOLTA)
 	    {
 	      Volta* v = (Volta*) el;
-              
+
 	      if (v->tick() == m->tick()) //hvis det er først i takten
 		{
 		  i++;
 		  //  if (v->subtype() == Volta::VOLTA_CLOSED)
-		  // 		    {//lilypond developers have "never seen" last ending closed. 
+		  // 		    {//lilypond developers have "never seen" last ending closed.
 		  // 		      //So they are reluctant to implement it. Final ending is always "open" in lilypond.
 		  // 		    }
 		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN)
@@ -284,19 +284,19 @@ void  ExportLy::findVolta()
 		  voltarray[i].voltart = startending;
 		  voltarray[i].barno=taktnr-1; //register as last element i previous measure
 		}
-	      
+
 	      if (v->tick2() == m->tick() + m->tickLen()) // if it is at the end of measure
-		{ 
+		{
 		  i++;
 		  voltarray[i].voltart = endending;
 		  voltarray[i].barno=taktnr;//last element of this measure
-		  // 		  if (v->subtype() == Volta::VOLTA_CLOSED) 
+		  // 		  if (v->subtype() == Volta::VOLTA_CLOSED)
 		  // 		    {// se comment above.
 		  // 		    }
-		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN) 
+		  // 		  else if (v->subtype() == Volta::VOLTA_OPEN)
 		  // 		    {// se comment above.
 		  // 		    }
-		  
+
 		}
 	    }
 	}// for all elements
@@ -449,7 +449,7 @@ int ExportLy::findSlur(const Slur* s) const
 void ExportLy::doSlurStart(Chord* chord)
 {
   // search for slurre(s) starting at this chord
-  foreach(const Slur* s, chord->slurFor()) 
+  foreach(const Slur* s, chord->slurFor())
     {
       // check if on slur list (i.e. stop already seen)
       int i = findSlur(s);
@@ -480,12 +480,12 @@ void ExportLy::doSlurStart(Chord* chord)
 
 //---------------------------------------------------------
 //   doSlurStop
-//   From exportxml.cpp: 
+//   From exportxml.cpp:
 //-------------------------------------------
 void ExportLy::doSlurStop(Chord* chord)
 {
   // search for slurre(s) stopping at this chord but not on slur list yet
-  foreach(const Slur* s, chord->slurBack()) 
+  foreach(const Slur* s, chord->slurBack())
     {
       // check if on slur list
       int i = findSlur(s);
@@ -503,11 +503,11 @@ void ExportLy::doSlurStop(Chord* chord)
       }
     }
   // search slur list for already started slur(s) stopping at this chord
-  for (int i = 0; i < 8; ++i) 
+  for (int i = 0; i < 8; ++i)
     {
       if (slurre[i])
 	{
-	  if  (slurre[i]->endElement() == chord) 
+	  if  (slurre[i]->endElement() == chord)
 	    {
 	      if (started[i]) {
 		slurre[i] = 0;
@@ -524,15 +524,15 @@ void ExportLy::doSlurStop(Chord* chord)
 //-------------------------
 void ExportLy::checkSlur(Chord* chord)
 {
-  //init array:      
-  for (int i = 0; i < 8; ++i) 
+  //init array:
+  for (int i = 0; i < 8; ++i)
     {
       slurre[i] = 0;
       started[i] = false;
     }
   doSlurStop(chord);
   doSlurStart(chord);
-}  
+}
 
 
 //-----------------------------------
@@ -542,9 +542,9 @@ void ExportLy::checkSlur(Chord* chord)
 
 void ExportLy::writeArticulation(Chord* c)
 {
-  foreach(Articulation* a, *c->getArticulations()) 
+  foreach(Articulation* a, *c->getArticulations())
     {
-      switch(a->subtype()) 
+      switch(a->subtype())
 	{
 	case UfermataSym:
 	  os << "\\fermata";
@@ -651,7 +651,7 @@ void ExportLy::writeArticulation(Chord* c)
 
 
 //---------------------------------------------------------
-//   writeChord   
+//   writeChord
 //---------------------------------------------------------
 
 void ExportLy::writeChord(Chord* c)
@@ -663,11 +663,11 @@ void ExportLy::writeChord(Chord* c)
   // only the stem direction of the first chord in a beamed chord
   // group is relevant OG: -- for Mscore that is, causes trouble for
   // lily when tested on inv1.msc
-  // 
-  if (c->beam() == 0 || c->beam()->getElements().front() == c) 
+  //
+  if (c->beam() == 0 || c->beam()->elements().front() == c)
     {
       Direction d = c->stemDirection();
-      if (d != stemDirection) 
+      if (d != stemDirection)
 	{
 	  stemDirection = d;
 	  if ((d == UP) and (graceswitch == true))
@@ -688,16 +688,16 @@ void ExportLy::writeChord(Chord* c)
   if (nl->size() > 1)
     os << "<"; //start of chord
 
-  for (iNote i = nl->begin();;) 
+  for (iNote i = nl->begin();;)
     {
       Note* n = i->second;
       NoteType gracen;
-      
+
       gracen = n->noteType();
-      switch(gracen) 
+      switch(gracen)
 	{
 	case NOTE_INVALID:
-	case NOTE_NORMAL: if (graceswitch==true)  
+	case NOTE_NORMAL: if (graceswitch==true)
 	    {
 	      graceswitch=false;
 	      graceslur=true;
@@ -708,44 +708,44 @@ void ExportLy::writeChord(Chord* c)
 	case NOTE_APPOGGIATURA:
 	case NOTE_GRACE4:
 	case NOTE_GRACE16:
-	case NOTE_GRACE32: 	
-	  if (graceswitch==false)  
-	    { 
-	      os << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp. 
-	      graceswitch=true; 
+	case NOTE_GRACE32:
+	  if (graceswitch==false)
+	    {
+	      os << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
+	      graceswitch=true;
 	    }
-	  else 
+	  else
 	    if (graceswitch==true)
 	      {
 		os << "[( "; //grace always beamed and slurred
 	      }
-	  break;                   
+	  break;
 	} //end of switch(gracen)
 
 
       findTuplets(n);
 
       os << tpc2name(n->tpc());
- 
+
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());  //with -es or -is
       prevnote=cleannote;             //without -es or -is
-      cleannote=tpc2purename(n->tpc());//without -es or -is 
-      
+      cleannote=tpc2purename(n->tpc());//without -es or -is
+
       if (purename.contains("eses")==1)  purepitch=purepitch+2;
       else if (purename.contains("es")==1)  purepitch=purepitch+1;
-      else if (purename.contains("isis")==1) purepitch=purepitch-2; 
+      else if (purename.contains("isis")==1) purepitch=purepitch-2;
       else if (purename.contains("is")==1) purepitch=purepitch-1;
-      
+
       oktavdiff=prevpitch - purepitch;
       //      int oktreit = (numval(oktavdiff) / 12);
       int oktreit=numval(oktavdiff);
-      
-      while (oktreit > 0) 
-	{ 
+
+      while (oktreit > 0)
+	{
 	  if ((oktavdiff < -6) or ((prevnote=="b") and (oktavdiff < -5)))
 	    { //up
-		os << "'"; 
+		os << "'";
 		oktavdiff=oktavdiff+12;
 	    }
 	    else if ((oktavdiff > 6)  or ((prevnote=="f") and (oktavdiff > 5)))
@@ -758,7 +758,7 @@ void ExportLy::writeChord(Chord* c)
 
       prevpitch=purepitch;
 
-      if (i == nl->begin()) chordpitch=prevpitch; 
+      if (i == nl->begin()) chordpitch=prevpitch;
       //^^^^^^remember pitch of first chordnote to write next chord-or-note relative to.
       ++i; //number of notes in chord, we progress to next chordnote
       if (i == nl->end())
@@ -781,7 +781,7 @@ void ExportLy::writeChord(Chord* c)
       graceslur=false;
     }
 
-  writeArticulation(c);      
+  writeArticulation(c);
   checkSlur(c);
 
   os << " ";
@@ -796,12 +796,12 @@ int ExportLy::getLen(int l, int* dots)
 {
   int len  = 4;
 
-  if      (l == 6 * division) 
+  if      (l == 6 * division)
     {
       len  = 1;
       *dots = 1;
     }
-  else if (l == 5 * division) 
+  else if (l == 5 * division)
     {
       len = 1;
       *dots = 2;
@@ -840,15 +840,15 @@ int ExportLy::getLen(int l, int* dots)
     }
   else if (l == division / 16)
     len = 64;
-  else if (l == division /32) 
+  else if (l == division /32)
     len = 128;
   //triplets, lily uses nominal value surrounded by \times 2/3 {  }
   //so we set len equal to nominal value
-  else if (l == division * 4 /3) 
+  else if (l == division * 4 /3)
     len = 2;
-  else if (l == division * 2 /3) 
+  else if (l == division * 2 /3)
     len = 4;
-  else if (l == division /3) 
+  else if (l == division /3)
     len = 8;
   else if (l == division /3*2)
     len = 16;
@@ -909,31 +909,31 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 {
   bool utgang=false;
   int i=0;
-  
-  while ((voltarray[i].barno < measurenumber) and (i<=lastind)) 
+
+  while ((voltarray[i].barno < measurenumber) and (i<=lastind))
     {
       //find the present measure
       i++;
     }
-  
+
   if (measurenumber==voltarray[i].barno)
     {
-      while (utgang==false) 
+      while (utgang==false)
 	{
 	  switch(voltarray[i].voltart)
 	    {
-	    case startrepeat: 
+	    case startrepeat:
 	      indent();
 	      os << "\\repeat volta 2 {";
 	      firstalt=false;
 	      secondalt=false;
 	      break;
-	    case endrepeat: 
+	    case endrepeat:
 	      if ((repeatactive==true) and (secondalt==false))
 		{
-		  os << "} % end of repeatactive\n";		
+		  os << "} % end of repeatactive\n";
 		  // repeatactive=false;
-		} 
+		}
 	      indent();
 	      break;
 	    case bothrepeat:
@@ -951,8 +951,8 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	      indent();
 	      os << "\\bar \"||\"";
 	      break;
-	      // 	    case brokenbar:      
-	      // 	      indent(); 
+	      // 	    case brokenbar:
+	      // 	      indent();
 	      // 	      os << "\\bar \"| |:\"";
 	      // 	      break;
 	    case startending:
@@ -963,40 +963,41 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 		  os << "\\alternative{ {  ";
 		  firstalt=true;
 		}
-	      else 
-		{ 
+	      else
+		{
 		  os << "{ ";
 		  indent();
 		  firstalt=false;
 		  secondalt=true;
-		}      
+		}
 	      break;
 	    case endending:
-	      if (firstalt) 
+	      if (firstalt)
 		{
 		  os << "} %close alt1\n";
 		  secondalt=true;
 		  repeatactive=true;
 		}
-	      else 
+	      else
 		{
 		  os << "} } %close alternatives\n";
 		  secondalt=false;
 		  firstalt=true;
 		  repeatactive=false;
-		} 
+		}
 	      break;
 	    case endbar:
 	      os << "\\bar \"|.\"";
 	      break;
+          default:
 	    case none: printf("strange voltarraycontents?\n");
 	      break;
 	    }//end switch
-	  
-	  if (voltarray[i+1].barno==measurenumber) 
+
+	  if (voltarray[i+1].barno==measurenumber)
 	    {
 	      i++;
-	    } 
+	    }
 	  else utgang=true;
 	}// end of while utgang false;
     }// if barno=measurenumber
@@ -1008,7 +1009,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 //---------------------------------------------------------
 //   writeVoiceMeasure
 //---------------------------------------------------------
-void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voice) 
+void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voice)
 {
   int i=0;
   char cvoicenum;
@@ -1053,7 +1054,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
       switch(voice)
 	{
 	case 0: break;
-	case 1: 
+	case 1:
 	  os <<"\\voiceTwo" <<"\n\n";
 	  break;
 	case 2:
@@ -1063,16 +1064,16 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	  os <<"\\voiceFour" <<"\n\n";
 	  break;
 	}
-	
+
 
       //check for implicit startrepeat before first measure:
       i=0;
-      while ((voltarray[i].voltart != startrepeat) and (voltarray[i].voltart != endrepeat) 
+      while ((voltarray[i].voltart != startrepeat) and (voltarray[i].voltart != endrepeat)
 	     and (voltarray[i].voltart !=bothrepeat) and (i<=lastind))
 	{
 	  i++;
 	}
-      
+
       if (i<=lastind)
 	{
 	  if ((voltarray[i].voltart==endrepeat) or (voltarray[i].voltart==bothrepeat))
@@ -1084,18 +1085,18 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	}
     }// if start of first measure
   indent();
-  
-  int tick = m->tick(); 
-  
-  for(Segment* s = m->first(); s; s = s->next()) 
+
+  int tick = m->tick();
+
+  for(Segment* s = m->first(); s; s = s->next())
     {
       // for all segments in measure. What is a segment??
       Element* e = s->element(staffIdx * VOICES + voice);
-      
-      if (!(e == 0 || e->generated()))  voiceActive[voice] = true; 
+
+      if (!(e == 0 || e->generated()))  voiceActive[voice] = true;
       else  continue;
 
-      switch(e->type()) 
+      switch(e->type())
 	{
 	case CLEF:
 	  writeClef(e->subtype());
@@ -1150,7 +1151,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
     } //end for all segments
 
   if (voiceActive[voice] == false)   os << "s1";
-  writeVolta(measurenumber, lastind); 
+  writeVolta(measurenumber, lastind);
   //  writeBarline(m);
   os << " | % " << m->no()+1 << "\n" ; //barcheck and barnumber
 } //end write VoiceMeasure
@@ -1161,7 +1162,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 //---------------------------------------------------------
 
 void ExportLy::writeScore()
-{ 
+{
   firstalt=false;
   secondalt=false;
   tupletcount=0;
@@ -1174,8 +1175,8 @@ void ExportLy::writeScore()
   int voice=0;
   cleannote="c";
   prevnote="c";
-    
-  if (np > 1) 
+
+  if (np > 1)
     {
       //Number of parts, to be used when we implement braces and brackets.
     }
@@ -1183,61 +1184,61 @@ void ExportLy::writeScore()
   //get start time signature:
   score->sigmap->timesig(0, timeabove, timebelow);
 
-  foreach(Part* part, *score->parts()) 
+  foreach(Part* part, *score->parts())
     {
       int n = part->staves()->size();
-      partname[staffIdx]  = part->longName();	   
+      partname[staffIdx]  = part->longName();
       partshort[staffIdx] = part->shortName();
-      if (n > 1) 
+      if (n > 1)
 	{//number of staffs. At the moment any collection of staffs,
 	  //e.g. a symphonic score, is treated as one pianostaff.
 	  pianostaff=true;
 	}
-      
+
       foreach(Staff* staff, *part->staves())
 	{
-	  
+
 	  os << "\n";
-	  
-	  switch(staff->clef(0)) 
+
+	  switch(staff->clef(0))
 	    {
-	    case CLEF_G:  
+	    case CLEF_G:
 	      relativ="'";
 	      staffpitch=12*5;
 	      break;
-	    case CLEF_TAB:              
-	    case CLEF_PERC: 
-	    case CLEF_G3: 
-	    case CLEF_F:  
+	    case CLEF_TAB:
+	    case CLEF_PERC:
+	    case CLEF_G3:
+	    case CLEF_F:
 	      relativ="";
 	      staffpitch=12*4;
 	      break;
-	    case CLEF_G1: 
-	    case CLEF_G2: 
-	      relativ="''"; 
+	    case CLEF_G1:
+	    case CLEF_G2:
+	      relativ="''";
 	      staffpitch=12*6;
 	      break;
-	    case CLEF_F_B: 
-	    case CLEF_F_C: 
-	    case CLEF_F8: 
-	      relativ=",";  
+	    case CLEF_F_B:
+	    case CLEF_F_C:
+	    case CLEF_F8:
+	      relativ=",";
 	      staffpitch=12*3;
 	      break;
-	    case CLEF_F15: 
+	    case CLEF_F15:
 	      relativ=",,";
 	      staffpitch=12*2;
 	      break;
-	    case CLEF_C1: 
-	    case CLEF_C2: 
-	    case CLEF_C3: 
-	    case CLEF_C4: 
-	      relativ="'";  
+	    case CLEF_C1:
+	    case CLEF_C2:
+	    case CLEF_C3:
+	    case CLEF_C4:
+	      relativ="'";
 	      staffpitch=12*5;
 	      break;
-	    }      
+	    }
 
 	  staffrelativ=relativ;
-	
+
 	  cpartnum = staffIdx + 65;
 	  staffid[staffIdx] = partshort[staffIdx];
 	  staffid[staffIdx].append("part");
@@ -1246,17 +1247,17 @@ void ExportLy::writeScore()
 	  staffid[staffIdx].remove(QRegExp("[0-9]"));
 	  staffid[staffIdx].remove(QChar('.'));
 	  staffid[staffIdx].remove(QChar(' '));
-	  
+
 	  findVolta();
 
-	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false; 
-	
-	  for (voice = 0; voice < VOICES; ++voice) 
-	    { 
+	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
+
+	  for (voice = 0; voice < VOICES; ++voice)
+	    {
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
 	      for (MeasureBase* m = score->layout()->first(); m; m = m->next())
-		{ 
+		{
 		  if (m->type() != MEASURE)
 		    continue;
 		  writeVoiceMeasure((Measure*)m, staff, staffIdx, voice);
@@ -1267,12 +1268,12 @@ void ExportLy::writeScore()
 	    }
 
 	  int voiceno=0;
-	  
+
 	  for (voice = 0; voice < VOICES; ++voice)
 	    if (voiceActive) voiceno++;
-	  
-	  if (voiceno>1) 
-	    {     
+
+	  if (voiceno>1)
+	    {
 	      level=0;
 	      indent();
 	      os << staffid[staffIdx] << " = \\simultaneous{\n";
@@ -1280,12 +1281,12 @@ void ExportLy::writeScore()
 	      indent();
 	      os << "\\override Staff.NoteCollision  #'merge-differently-headed = ##t\n";
 	      indent();
-              os << "\\override Staff.NoteCollision  #'merge-differently-dotted = ##t\n";    
+              os << "\\override Staff.NoteCollision  #'merge-differently-dotted = ##t\n";
 	      ++level;
 	      for (voice = 0; voice < VOICES; ++voice)
 		{
 		  if (voiceActive[voice])
-		    {		      
+		    {
 		      indent();
 		      os << "\\context Voice = \"" << voicename[voice] << "\" \\" << voicename[voice]  << "\n";
 		    }
@@ -1294,19 +1295,19 @@ void ExportLy::writeScore()
 	      level=0;
 	      indent();
 	    }
-	  
+
 	  ++staffIdx;
 	}// end of foreach staff
       staffid[staffIdx]="laststaff";
       if (n > 1) {
-	--level;	      
+	--level;
 	indent();
       }
-    }      
+    }
 }// end of writeScore
 
 
-//------------------- 
+//-------------------
 // score-block: combining parts and voices, drawing brackets and braces, at end of lilypond file
 //-------------------
 void ExportLy::writeScoreBlock()
@@ -1330,7 +1331,7 @@ void ExportLy::writeScoreBlock()
     {
       ++level;
       indent();
-      os << "\\context Staff = O" << staffid[indx] << "G" << "  << \n"; 
+      os << "\\context Staff = O" << staffid[indx] << "G" << "  << \n";
       ++level;
       indent();
       os << "\\context Voice = O" << staffid[indx] << "G \\" << staffid[indx] << "\n";
@@ -1341,7 +1342,7 @@ void ExportLy::writeScoreBlock()
     }
 
   if (pianostaff)
-    { 
+    {
       --level;
       indent();
       os << ">>\n";
@@ -1375,11 +1376,11 @@ bool ExportLy::write(const QString& name)
     "%=============================================\n"
     "\n"
     "\\version \"2.10.5\"\n\n";     // target lilypond version
-	
+
   //---------------------------------------------------
   //    Page format
   //---------------------------------------------------
-	
+
   PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
   switch(pf->size) {
@@ -1442,10 +1443,10 @@ bool ExportLy::write(const QString& name)
   }
   indent();
   os << "}\n";
-    
+
 
   writeScore();
-      
+
   writeScoreBlock();
 
   f.close();
@@ -1457,7 +1458,7 @@ bool ExportLy::write(const QString& name)
 
 /* NEW 26. oct. 2008
   - voice separation and recombination in score-block for easier editing of Lilypondfile.
-    todo/unresolved: writes voices 2-4 in Lilypond file even if voice is empty. 
+    todo/unresolved: writes voices 2-4 in Lilypond file even if voice is empty.
   - better finding of correct octave when jumping intervals of fifths or more.
 */
 
@@ -1465,7 +1466,7 @@ bool ExportLy::write(const QString& name)
 /* NEW 10.oct.2008:
    - rudimentary handling of slurs.
    - voltas and endings
-   - dotted 8ths and 4ths. Problem: Do I have to calculate each and every notelength: 
+   - dotted 8ths and 4ths. Problem: Do I have to calculate each and every notelength:
    is it not possible to find a general algorithm?
    - triplets, but not general tuplets. Same problem as in previous point.
    - PianoStaff reactivated.*/
@@ -1485,14 +1486,14 @@ bool ExportLy::write(const QString& name)
 
 /*----------------------TODOS------------------------------------*/
 
-/* TODO: PROJECTS  
+/* TODO: PROJECTS
    - Pickup bar
    - avoid empty output in voices 2-4. Does not affect visual endresult.
    1. Dynamics
    2. Segno etc.                -----"-------
    3. Piano staffs/GrandStaffs, system brackets and braces.
    - Lyrics
-   4. General tuplets 
+   4. General tuplets
    - etc.etc.etc.etc........
 */
 

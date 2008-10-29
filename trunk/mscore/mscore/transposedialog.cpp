@@ -94,7 +94,7 @@ void Score::transpose()
             endTrack   = nstaves() * VOICES;
             }
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* segment = sel->startSegment(); segment && segment != sel->endSegment(); segment = segment->next()) {
+            for (Segment* segment = sel->startSegment(); segment && segment != sel->endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
                         continue;
