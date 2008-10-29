@@ -604,6 +604,7 @@ void MuseScore::newFile()
             tick += ticks;
             }
       score->fixTicks();
+      score->select(score->measures()->first(), SELECT_SINGLE, 0);
 
       QString title     = newWizard->title();
       QString subtitle  = newWizard->subtitle();

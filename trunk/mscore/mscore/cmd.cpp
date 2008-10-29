@@ -1350,7 +1350,7 @@ void Score::upDown(bool up, bool octave)
             undoChangePitch(oNote, newPitch);
 
             // play new note with velocity 80 for 0.3 sec:
-            mscore->play(oNote, newPitch);
+            mscore->play(oNote);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
@@ -1977,6 +1977,19 @@ void Score::cmd(const QString& cmd)
                   move(cmd);
                   setLayoutAll(false);
                   }
+            else if (cmd == "select-next-chord"
+               || cmd == "select-prev-chord"
+               || cmd == "select-next-measure"
+               || cmd == "select-prev-measure"
+               || cmd == "select-begin-line"
+               || cmd == "select-end-line"
+               || cmd == "select-begin-score"
+               || cmd == "select-end-score"
+               || cmd == "select-staff-above"
+               || cmd == "select-staff-below") {
+                  selectMove(cmd);
+                  setLayoutAll(false);
+                  }
 
             else if (cmd == "note-c")
                   cmdAddPitch(0, false);
@@ -2601,6 +2614,8 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int srcStaffIdx, int ds
 void Score::move(const QString& cmd)
       {
       ChordRest* cr = sel->lastChordRest();
+      if (sel->activeCR())
+            cr = sel->activeCR();
       if (cr) {
             Element* el = 0;
             if (cmd == "next-chord")
@@ -2626,4 +2641,56 @@ void Score::move(const QString& cmd)
             }
       }
 
+//---------------------------------------------------------
+//   selectMove
+//---------------------------------------------------------
 
+void Score::selectMove(const QString& cmd)
+      {
+      ChordRest* cr = sel->lastChordRest();
+      if (sel->activeCR())
+            cr = sel->activeCR();
+      if (cr) {
+            ChordRest* el = 0;
+            if (cmd == "select-next-chord")
+                  el = nextChordRest(cr);
+            else if (cmd == "select-prev-chord")
+                  el = prevChordRest(cr);
+            else if (cmd == "select-next-measure")
+                  el = nextMeasure(cr, true);
+            else if (cmd == "select-prev-measure")
+                  el = prevMeasure(cr);
+            else if (cmd == "select-begin-line") {
+                  Measure* measure = cr->segment()->measure()->system()->firstMeasure();
+                  if (!measure)
+                        return;
+                  el = measure->first()->nextChordRest(cr->track());
+                  }
+            else if (cmd == "select-end-line") {
+                  Measure* measure = cr->segment()->measure()->system()->lastMeasure();
+                  if (!measure)
+                        return;
+                  el = measure->last()->nextChordRest(cr->track(), true);
+                  }
+            else if (cmd == "select-begin-score") {
+                  Measure* measure = layout()->first()->system()->firstMeasure();
+                  if (!measure)
+                        return;
+                  el = measure->first()->nextChordRest(cr->track());
+                  }
+            else if (cmd == "select-end-score") {
+                  Measure* measure = layout()->last()->system()->lastMeasure();
+                  if (!measure)
+                        return;
+                  el = measure->last()->nextChordRest(cr->track(), true);
+                  }
+            else if (cmd == "select-staff-above")
+                  el = upStaff(cr);
+            else if (cmd == "select-staff-below")
+                  el = downStaff(cr);
+            if (el) {
+                  select(el, SELECT_RANGE, el->staffIdx());
+                  adjustCanvasPosition(el, false);
+                  }
+            }
+      }

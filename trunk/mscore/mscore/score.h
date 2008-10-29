@@ -211,8 +211,8 @@ class Score : public QObject {
       QString _workTitle;
       QString _source;
 
-      ChordRest* nextMeasure(ChordRest*);
-      ChordRest* prevMeasure(ChordRest*);
+      ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
+      ChordRest* prevMeasure(ChordRest* element);
       void cmdSetBeamMode(int);
       void cmdFlipStemDirection();
       Note* getSelectedNote();
@@ -224,12 +224,15 @@ class Score : public QObject {
       Note* upAltCtrl(Note*) const;
       Note* downAlt(Element*);
       Note* downAltCtrl(Note*) const;
+      ChordRest* upStaff(ChordRest* cr);
+      ChordRest* downStaff(ChordRest* cr);
       void moveUp(Note*);
       void moveDown(Note*);
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
       void checkUndoOp();
       void move(const QString& cmd);
+      void selectMove(const QString& cmd);
 
       void collectChord(EventMap*, Instrument*,
          int pitchOffset, Chord*, int tick, int gateTime);

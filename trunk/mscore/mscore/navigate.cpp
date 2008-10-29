@@ -207,10 +207,57 @@ Note* Score::downAltCtrl(Note* note) const
       }
 
 //---------------------------------------------------------
+//   upStaff
+//---------------------------------------------------------
+
+ChordRest* Score::upStaff(ChordRest* cr)
+      {
+      Segment* segment = cr->segment();
+
+      if (cr->staffIdx() == 0)
+            return cr;
+
+      for (int track = (cr->staffIdx() - 1) * VOICES; track >= 0; --track) {
+            Element* el = segment->element(track);
+            if (!el)
+                  continue;
+            if (el->type() == NOTE)
+                  el = static_cast<Note*>(el)->chord();
+            if (el->isChordRest())
+                  return static_cast<ChordRest*>(el);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   downStaff
+//---------------------------------------------------------
+
+ChordRest* Score::downStaff(ChordRest* cr)
+      {
+      Segment* segment = cr->segment();
+      int tracks = nstaves() * VOICES;
+
+      if (cr->staffIdx() == nstaves() - 1)
+            return cr;
+
+      for (int track = (cr->staffIdx() + 1) * VOICES; track < tracks; --track) {
+            Element* el = segment->element(track);
+            if (!el)
+                  continue;
+            if (el->type() == NOTE)
+                  el = static_cast<Note*>(el)->chord();
+            if (el->isChordRest())
+                  return static_cast<ChordRest*>(el);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   nextMeasure
 //---------------------------------------------------------
 
-ChordRest* Score::nextMeasure(ChordRest* element)
+ChordRest* Score::nextMeasure(ChordRest* element, bool selectBehavior)
       {
       if (!element)
             return 0;
@@ -218,11 +265,31 @@ ChordRest* Score::nextMeasure(ChordRest* element)
       MeasureBase* measure = element->measure()->next();
       while (measure && measure->type() != MEASURE)
             measure = measure->next();
-      if (!measure)
-            return 0;
+
+      int endTick = element->measure()->last()->nextChordRest(element->track(), true)->tick();
+      bool last = false;
+
+      bool range = sel->state() == SEL_STAFF;
+      if (range) {
+            if (element->tick() != endTick && sel->endSegment()->tick() <= endTick) {
+                  measure = element->measure();
+                  last = true;
+                  }
+            else if (element->tick() == endTick && sel->isEndActive())
+                  last = true;
+            }
+      else if (element->tick() != endTick && selectBehavior) {
+            measure = element->measure();
+            last = true;
+            }
+      if (!measure) {
+            measure = element->measure();
+            last = true;
+            }
       int staff = element->staffIdx();
 
-      for (Segment* seg = ((Measure*)measure)->first(); seg; seg = seg->next()) {
+      Segment* startSeg = last ? ((Measure*)measure)->last() : ((Measure*)measure)->first();
+      for (Segment* seg = startSeg; seg; seg = last ? seg->prev() : seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
@@ -246,11 +313,25 @@ ChordRest* Score::prevMeasure(ChordRest* element)
       MeasureBase* measure = element->measure()->prev();
       while (measure && measure->type() != MEASURE)
             measure = measure->prev();
-      if (!measure)
-            return 0;
+
+      int startTick = element->measure()->first()->nextChordRest(element->track())->tick();
+      bool last = false;
+
+      bool range = sel->state() == SEL_STAFF;
+      if (range && sel->isEndActive() && sel->startSegment()->tick() <= startTick)
+            last = true;
+      else if (element->tick() != startTick) {
+            measure = element->measure();
+            }
+      if (!measure) {
+            measure = element->measure();
+            last = false;
+            }
+
       int staff = element->staffIdx();
 
-      for (Segment* seg = ((Measure*)measure)->first(); seg; seg = seg->next()) {
+      Segment* startSeg = last ? ((Measure*)measure)->last() : ((Measure*)measure)->first();
+      for (Segment* seg = startSeg; seg; seg = last ? seg->prev() : seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
@@ -273,6 +354,8 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
             m = ((Note*)el)->chord()->segment()->measure();
       else if (el->type() == REST)
             m = ((Rest*)el)->segment()->measure();
+      else if (el->type() == CHORD)
+            m = ((Chord*)el)->segment()->measure();
       else if (el->type() == SEGMENT)
             m = ((Segment*)el)->measure();
       else
