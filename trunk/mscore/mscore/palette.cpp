@@ -802,7 +802,7 @@ PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(tr("Palettes"), parent)
       {
       setObjectName("palette-box");
-      setFixedWidth(168);
+      setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);

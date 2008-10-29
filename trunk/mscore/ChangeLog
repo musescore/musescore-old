@@ -1,5 +1,8 @@
 29.10 (ws)
       - make tuplet brackets editable
+      (sy)
+      - tried changing sizing policy of palette to see if this
+        allows people to resize it.
 28.10 (ws)
       - fix: when transposing several selected measures, only the first measure was
         transposed
