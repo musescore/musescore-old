@@ -1030,11 +1030,11 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
       {
       Tuplet* t = cr->tuplet();
       if (!t) return;
-      if (cr == t->elements()->front()) {
+      if (cr == t->elements().front()) {
             notations.tag(xml);
             xml.tagE("tuplet type=\"start\" bracket=\"%s\"", t->hasBracket() ? "yes" : "no");
             }
-      if (cr == t->elements()->back()) {
+      if (cr == t->elements().back()) {
             notations.tag(xml);
             xml.tagE("tuplet type=\"stop\"");
             }

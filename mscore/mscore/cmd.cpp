@@ -589,13 +589,13 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       undoAddElement(seg);
 
       Note* note = new Note(this);
-      note->setPitch(pitch);
       note->setTrack(track);
 
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTrack(track);
       chord->add(note);
+      note->setPitch(pitch);
 
       chord->setLen(len);
       chord->setStemDirection(UP);
@@ -652,8 +652,8 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             len    -= gap;
 
             note = new Note(this);
-            note->setPitch(pitch);
             note->setTrack(track);
+            note->setPitch(pitch);
 
             mscore->play(note);
 
@@ -1317,10 +1317,10 @@ void Score::upDown(bool up, bool octave)
             if (e->type() != NOTE)
                   continue;
             Note* note = static_cast<Note*>(e);
-//            while (note->tieBack())
-//                  note = note->tieBack()->startNote();
             if (layoutStart == 0)
                   layoutStart = note->chord()->segment()->measure();
+            else if (layoutStart != note->chord()->segment()->measure())
+                  layoutAll = true;
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
                   iElement ii;
                   for (ii = el.begin(); ii != el.end(); ++ii) {

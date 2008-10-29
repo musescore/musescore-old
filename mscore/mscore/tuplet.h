@@ -55,6 +55,9 @@ class Tuplet : public DurationElement {
       int _normalNotes;
       int _actualNotes;
 
+      bool _userModified;
+      QPointF p1, p2;
+      QPointF _p1, _p2;
       int _id;          // used during read
 
       Text* _number;
@@ -76,6 +79,10 @@ class Tuplet : public DurationElement {
       virtual void add(Element*);
       virtual void remove(Element*);
 
+      virtual bool startEdit(Viewer*, const QPointF&);
+      virtual void editDrag(int, const QPointF&);
+      virtual void updateGrips(int*, QRectF*) const;
+
       Measure* measure() const      { return (Measure*)parent(); }
 
       int numberType() const        { return _numberType;   }
@@ -92,13 +99,15 @@ class Tuplet : public DurationElement {
       int actualNotes() const       { return _actualNotes;  }
       int normalLen() const         { return _baseLen / _normalNotes; }
       int noteLen() const           { return _baseLen * _normalNotes / _actualNotes; }
-      const QList<DurationElement*>* elements() const   { return &_elements; }
+      const QList<DurationElement*>& elements() const   { return _elements; }
       void clear()                  { _elements.clear(); }
       virtual void layout(ScoreLayout*);
       Text* number() const { return _number; }
 
       virtual void read(QDomElement);
       void write(Xml&, int) const;
+
+      virtual void resetUserOffsets();
 
       virtual void draw(QPainter&) const;
       int id() const                  { return _id; }

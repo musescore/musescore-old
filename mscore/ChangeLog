@@ -1,4 +1,8 @@
+29.10 (ws)
+      - make tuplet brackets editable
 28.10 (ws)
+      - fix: when transposing several selected measures, only the first measure was
+        transposed
       - extend functionality when pasting text in lyrics mode: only the first word
         ist pasted and removed from clipboard and then the cursor moves to next
         note/chord staying in lyrics mode

@@ -813,7 +813,7 @@ void Score::undoRemoveElement(Element* element)
             foreach(Slur* slur, cr->slurBack()) {
                   undoRemoveElement(slur);
                   }
-            if (cr->tuplet() && cr->tuplet()->elements()->empty())
+            if (cr->tuplet() && cr->tuplet()->elements().empty())
                   undoRemoveElement(cr->tuplet());
             }
       checkUndoOp();

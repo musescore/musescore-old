@@ -154,7 +154,7 @@ static BeamHint endBeamList[] = {
 static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
       {
       if (cr->tuplet()) {
-            if (cr->tuplet()->elements()->front() == cr) {
+            if (cr->tuplet()->elements().front() == cr) {
                   return true;
                   }
             return false;
@@ -211,7 +211,7 @@ Beam::Beam(Score* s)
 Beam::Beam(const Beam& b)
    : Element(b)
       {
-      elements      = b.elements;
+      _elements     = b._elements;
       beamSegments  = b.beamSegments;
       _direction    = b._direction;
       _up           = b._up;
@@ -229,7 +229,7 @@ Beam::~Beam()
       //
       // delete all references from chords
       //
-      foreach(ChordRest* cr, elements)
+      foreach(ChordRest* cr, _elements)
             cr->setBeam(0);
       for (iBeamSegment i = beamSegments.begin();
          i != beamSegments.end(); ++i) {
@@ -258,7 +258,7 @@ QPointF Beam::canvasPos() const
 void Beam::add(ChordRest* a)
       {
       a->setBeam(this);
-      elements.append(a);
+      _elements.append(a);
       }
 
 //---------------------------------------------------------
@@ -267,9 +267,7 @@ void Beam::add(ChordRest* a)
 
 void Beam::remove(ChordRest* a)
       {
-      int idx = elements.indexOf(a);
-      if (idx != -1)
-            elements.removeAt(idx);
+      _elements.removeOne(a);
       }
 
 //---------------------------------------------------------
@@ -395,7 +393,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   if (beam) {
                         // end beam if there are chords/rests missing
                         // in voice:
-                        ChordRest* le = beam->getElements().back();
+                        ChordRest* le = beam->elements().back();
                         if (le->tick() + le->tickLen() != cr->tick()) {
                               if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet()))
                                     beamEnd = true;
@@ -426,7 +424,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     }
                               }
                         }
-                  if (cr && cr->tuplet() && (cr->tuplet()->elements()->back() == cr)) {
+                  if (cr && cr->tuplet() && (cr->tuplet()->elements().back() == cr)) {
                         if (beam) {
                               beam->layout1(layout);
                               beam = 0;
@@ -470,7 +468,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   }
             }
       foreach(Beam* beam, _beamList) {
-            if (beam->getElements().isEmpty()) {
+            if (beam->elements().isEmpty()) {
                   remove(beam);
                   delete beam;
                   }
@@ -510,11 +508,11 @@ void Measure::layoutBeams(ScoreLayout* layout)
 
 QString Beam::xmlType(ChordRest* cr) const
       {
-      if (cr == elements.front())
+      if (cr == _elements.front())
             return QString("begin");
-      if (cr == elements.back())
+      if (cr == _elements.back())
             return QString("end");
-      int idx = elements.indexOf(cr);
+      int idx = _elements.indexOf(cr);
       if (idx == -1)
             printf("Beam::xmlType(): cannot find ChordRest\n");
       return QString("continue");
@@ -533,7 +531,7 @@ void Beam::layout1(ScoreLayout* layout)
 
       if (_direction == AUTO) {
             int upCount = 0;
-            foreach(ChordRest* cr, elements) {
+            foreach(ChordRest* cr, _elements) {
                   if (cr->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(cr);
                         //
@@ -552,7 +550,7 @@ void Beam::layout1(ScoreLayout* layout)
             _up = _direction == UP;
 
       // done twice for beamed chords:
-      foreach(ChordRest* cr, elements)
+      foreach(ChordRest* cr, _elements)
             cr->layoutAttributes(layout);
       }
 
@@ -577,13 +575,13 @@ void Beam::layout(ScoreLayout* layout)
       //---------------------------------------------------
 
       int maxTickLen       = 0;
-      const ChordRest* a1  = elements.front();
-      const ChordRest* a2  = elements.back();
+      const ChordRest* a1  = _elements.front();
+      const ChordRest* a2  = _elements.back();
       Chord* c1            = 0;
       Chord* c2            = 0;
       int move             = 0;
 
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             if (cr->type() == CHORD) {
                   c2 = static_cast<Chord*>(cr);
                   if (c1 == 0)
@@ -607,10 +605,10 @@ void Beam::layout(ScoreLayout* layout)
       //------------------------------------------------------------
 
       bool concave = false;
-      for (int i = 0; i < elements.size() - 2; ++i) {
-            int l1 = elements[i]->line(_up);
-            int l  = elements[i+1]->line(_up);
-            int l2 = elements[i+2]->line(_up);
+      for (int i = 0; i < _elements.size() - 2; ++i) {
+            int l1 = _elements[i]->line(_up);
+            int l  = _elements[i+1]->line(_up);
+            int l2 = _elements[i+2]->line(_up);
 
             concave = ((l1 < l2) && ((l < l1) || (l > l2)))
                     || ((l1 > l2) && ((l > l1) || (l < l2)));
@@ -618,8 +616,8 @@ void Beam::layout(ScoreLayout* layout)
                   break;
             }
 
-      int l1 = elements.front()->line(_up);
-      int l2 = elements.back()->line(_up);
+      int l1 = _elements.front()->line(_up);
+      int l2 = _elements.back()->line(_up);
 
       int cut     = 0;
       qreal slope = 0.0;
@@ -680,7 +678,7 @@ void Beam::layout(ScoreLayout* layout)
       //    adjust beam position if necessary
       //
       bool isGrace = false;
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord  = static_cast<Chord*>(cr);
@@ -702,7 +700,7 @@ void Beam::layout(ScoreLayout* layout)
       double min      = 1000.0;
       double max      = -1000.0;
 
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord  = static_cast<Chord*>(cr);
@@ -786,7 +784,7 @@ void Beam::layout(ScoreLayout* layout)
             Chord* nn1 = 0;
             Chord* nn2 = 0;
             bool nn1r = false;
-            foreach(ChordRest* cr, elements) {
+            foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = (Chord*)(cr);
@@ -825,7 +823,7 @@ void Beam::layout(ScoreLayout* layout)
                         nn2 = chord;
                   else {
                         nn1 = chord;
-                        nn1r = cr == elements.front();
+                        nn1r = cr == _elements.front();
                         }
                   }
             if (nn2) {
@@ -853,7 +851,7 @@ void Beam::layout(ScoreLayout* layout)
       //    stem Pos() is relative to Chord
       //---------------------------------------------------
 
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord = static_cast<Chord*>(cr);
@@ -898,7 +896,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             slope      = (_p2.y() - _p1.y()) / (p2x - p1x);
             double y2  = _p1.y() + parent()->canvasPos().y();
 
-            foreach(ChordRest* cr, elements) {
+            foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
                   Chord* c  = static_cast<Chord*>(cr);
@@ -913,7 +911,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             //       = 1     staff 2 - 1
 
             _up = move == 1;
-            foreach(ChordRest* cr, elements) {
+            foreach(ChordRest* cr, _elements) {
                   if (move == 1)
                         cr->setUp(cr->staffMove() == 0);
                   else if (move == -1)
@@ -947,7 +945,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       double yo1 =  100000;    //minimum staff 0
       double yu2 =  -100000;   //maximum staff 1
 
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             _up = cr->up();
             if (cr->type() != CHORD)
                   continue;
@@ -1029,7 +1027,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             Chord* nn1 = 0;
             Chord* nn2 = 0;
             bool nn1r = false;
-            foreach(ChordRest* cr, elements) {
+            foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = (Chord*)(cr);
@@ -1069,7 +1067,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                         nn2 = chord;
                   else {
                         nn1 = chord;
-                        nn1r = cr == elements.front();
+                        nn1r = cr == _elements.front();
                         }
                   }
             if (nn2) {
@@ -1097,7 +1095,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       //    stem Pos() is relative to Chord
       //---------------------------------------------------
 
-      foreach(ChordRest* cr, elements) {
+      foreach(ChordRest* cr, _elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord = (Chord*)(cr);

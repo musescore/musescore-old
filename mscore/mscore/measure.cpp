@@ -949,7 +949,7 @@ void Measure::add(Element* el)
                   {
                   Beam* b = static_cast<Beam*>(el);
                   _beamList.append(b);
-                  foreach(ChordRest* cr, b->getElements())
+                  foreach(ChordRest* cr, b->elements())
                         cr->setBeam(b);
                   }
                   break;
@@ -990,7 +990,12 @@ void Measure::add(Element* el)
                   }
                   break;
             case TUPLET:
-                  _tuplets.append((Tuplet*)el);
+                  {
+                  Tuplet* tuplet = static_cast<Tuplet*>(el);
+                  _tuplets.append(tuplet);
+                  foreach(DurationElement* cr, tuplet->elements())
+                        cr->setTuplet(tuplet);
+                  }
                   break;
             case LAYOUT_BREAK:
                   for (iElement i = _el.begin(); i != _el.end(); ++i) {
@@ -1054,22 +1059,27 @@ void Measure::remove(Element* el)
                   remove(static_cast<Segment*>(el));
                   break;
             case TUPLET:
-                  if (!_tuplets.removeOne(static_cast<Tuplet*>(el))) {
+                  {
+                  Tuplet* tuplet = static_cast<Tuplet*>(el);
+                  foreach(DurationElement* cr, tuplet->elements())
+                        cr->setTuplet(0);
+                  if (!_tuplets.removeOne(tuplet)) {
                         printf("Measure remove: Tuplet not found\n");
                         return;
                         }
+                  }
                   break;
 
             case BEAM:
                   {
                   Beam* b = static_cast<Beam*>(el);
-                  foreach(ChordRest* cr, b->getElements())
+                  foreach(ChordRest* cr, b->elements())
                         cr->setBeam(0);
-                  }
-                  if (!_beamList.removeOne(static_cast<Beam*>(el))) {
+                  if (!_beamList.removeOne(b)) {
                         printf("Measure remove: Beam not found\n");
                         return;
                         }
+                  }
                   break;
 
             case LAYOUT_BREAK:
