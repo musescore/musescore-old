@@ -53,7 +53,7 @@
     <widget class="QSpinBox" name="staffLine" />
    </item>
    <item rowspan="3" row="2" column="3" >
-    <widget class="Palette" native="1" name="widget" >
+    <widget class="Palette" native="1" name="drumNote" >
      <property name="minimumSize" >
       <size>
        <width>120</width>
@@ -164,19 +164,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>label</zorder>
-  <zorder>name</zorder>
-  <zorder>label_2</zorder>
-  <zorder>noteHead</zorder>
-  <zorder>label_3</zorder>
-  <zorder>staffLine</zorder>
-  <zorder>widget</zorder>
-  <zorder>label_4</zorder>
-  <zorder>stemDirection</zorder>
-  <zorder>label_5</zorder>
-  <zorder>voice</zorder>
-  <zorder>buttonBox</zorder>
-  <zorder>pitchList</zorder>
  </widget>
  <customwidgets>
   <customwidget>

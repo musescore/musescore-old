@@ -53,6 +53,8 @@ Palette::Palette(QWidget* parent)
       selectedIdx   = -1;
       rows          = 0;
       columns       = 0;
+      _yOffset      = 0;
+
       setGrid(50, 60);
       setRowsColumns(1, 1);
 
@@ -342,6 +344,9 @@ void Palette::leaveEvent(QEvent*)
 
 void Palette::addObject(int idx, Element* s, const QString& name)
       {
+      // TODO: delete symbol
+      if (symbols[idx])
+            delete symbols[idx];
       symbols[idx] = s;
       names[idx]   = name;
       update();
@@ -445,6 +450,8 @@ void Palette::paintEvent(QPaintEvent*)
                         else
                               sy  = gy + (gh - sh) * .5 - el->bbox().y();
                         double sx  = gx + (gw - sw) * .5 - el->bbox().x();
+
+                        sy += _yOffset / mag;
 
                         QList<const Element*> elist;
                         el->collectElements(elist);
