@@ -22,6 +22,7 @@
 #include "segment.h"
 #include "element.h"
 #include "chord.h"
+#include "note.h"
 #include "score.h"
 #include "beam.h"
 #include "tuplet.h"
@@ -173,6 +174,25 @@ Segment* Segment::nextCR() const
       for (; seg; seg = seg->next1()) {
             if (seg->subtype() == Segment::SegChordRest)
                   return seg;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   nextChordRest
+//    get the next ChordRest, start at this segment
+//---------------------------------------------------------
+
+ChordRest* Segment::nextChordRest(int track, bool backwards) const {
+      for (const Segment* seg = this; seg; seg = backwards ? seg->prev1() : seg->next1()) {
+            Element* el = seg->element(track);
+            if (!el)
+                  continue;
+            if (el->type() == NOTE) {
+                  el = ((Note*)el)->chord();
+                  }
+            if (el->isChordRest())
+                  return static_cast<ChordRest*>(el);
             }
       return 0;
       }

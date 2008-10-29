@@ -52,6 +52,37 @@
             </channel>
          </instrument>
       <instrument>
+           <name>Soprano Recorder</name>
+           <short-name>S.</short-name>
+           <clef>1</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Alto Recorder</name>
+           <short-name>A.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Tenor Recorder</name>
+           <short-name>T.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Bass Recorder</name>
+           <short-name>B.</short-name>
+           <transposition>12</transposition>
+           <clef>4</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
          <name>Oboe</name>
          <short-name>Ob.</short-name>
          <channel>
@@ -393,9 +424,10 @@
       <instrument>
          <name>Organ</name>
          <short-name>Or.</short-name>
-         <staves>2</staves>
+         <staves>3</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
          <bracket>1</bracket>
          <channel>
             <program>19</program>
@@ -404,24 +436,28 @@
       <instrument>
          <name>Rock Organ</name>
          <short-name>Rk. Org.</short-name>
-         <staves>2</staves>
+         <staves>3</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
          <bracket>1</bracket>
          <channel>
             <program>18</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Accordian</name>
+         <name>Accordion</name>
          <short-name>Acc.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
          <channel>
             <program>21</program>
             </channel>
          </instrument>
       </instrument-group>
 
-   <instrument-group name="PluckedStrings">
+   <instrument-group name="Plucked Strings">
       <instrument>
          <name>Harp</name>
          <short-name>Hrp.</short-name>

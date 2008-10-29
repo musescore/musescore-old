@@ -51,6 +51,7 @@ class Selection {
       QList<Element*> _el;          // valid in mode SEL_SINGLE and SEL_MULT
       Segment* _startSegment;
       Segment* _endSegment;         // next segment after selection
+      Segment* _activeSegment;
 
       QByteArray staffMimeData() const;
 
@@ -62,6 +63,8 @@ class Selection {
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF
 
+      int activeTrack;  
+
       QList<Element*>* elements()      { return &_el; }
       void add(Element*);
       void append(Element* el)         { _el.append(el); }
@@ -69,8 +72,8 @@ class Selection {
       void remove(Element*);
       QRectF clear();
       Element* element() const;
-      ChordRest* firstChordRest() const;
-      ChordRest* lastChordRest() const;
+      ChordRest* firstChordRest(int track = -1) const;
+      ChordRest* lastChordRest(int track = -1) const;
       void update();
       void updateState();
       void dump();
@@ -82,6 +85,11 @@ class Selection {
       void setStartSegment(Segment* s) { _startSegment = s; }
       void setEndSegment(Segment* s)   { _endSegment = s; }
       void setRange(Segment* a, Segment* b, int c, int d);
+      Segment* activeSegment() const   { return _activeSegment; }
+      void setActiveSegment(Segment* s) { _activeSegment = s; }
+      ChordRest* activeCR() const;
+      bool isStartActive() const;
+      bool isEndActive() const;
       int tickStart() const;
       int tickEnd() const;
       };

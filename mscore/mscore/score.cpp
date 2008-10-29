@@ -1138,13 +1138,22 @@ void Score::setNoteEntry(bool val)
             Element* el = sel->element();
             Note* note = 0;
             Rest* rest = 0;
+            Chord* c = 0;
+            if (sel->activeCR())
+                  el = sel->activeCR();
             if (el) {
                   if (el->type() == NOTE)
                         note = static_cast<Note*>(el);
                   else if (el->type() == REST)
                         rest = static_cast<Rest*>(el);
+                  else if (el->type() == CHORD)
+                        c = static_cast<Chord*>(el);
                   }
-            if (rest == 0 && note == 0) {
+            if (c) {
+                  _is.cr = c;
+                  select(_is.cr, SELECT_SINGLE, 0);
+                  }
+            else if (rest == 0 && note == 0) {
                   int track = _is.track;
                   if (track == -1)
                         track = 0;

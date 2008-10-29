@@ -4,6 +4,19 @@
         note/chord staying in lyrics mode
       - extend select operations: double click on palette now also works for
         ranges
+      (sy)
+      - add keyboard selection shortcuts:
+            - Shift+Left/Right to select the next/prev note
+            - Ctrl+Shift+Left/Right to select next/prev measure
+            - Shift+Home/End to select to the beginning/end of line
+            - Ctrl+Shift+Home/End to select to beginning/end of score
+            - Shift+Up/Down to select the staff above/below
+      - select first measure when creating new scores
+      - fix bug selecting range with last note of score
+      - fix moving note up/down or navigating left/right with keyboard
+        plays notes at wrong pitch if there is a tranposition
+      - added Recorders, added another stave for Organs (for foot pedal) and
+        Accordions (for other hand) to instruments.xml
 27.10 (ws)
       - implemented "delete tuplet"
       - fixed some regressions: crash on copy/paste of tuplets

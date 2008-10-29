@@ -711,6 +711,96 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("right+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL,
+         "select-prev-chord",
+         QT_TR_NOOP("add previous chord to selection"),
+         Qt::SHIFT+Qt::Key_Left,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("left+shift"),
+         QT_TR_NOOP("left+shift")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-prev-measure",
+         QT_TR_NOOP("select to beginning of measure"),
+         Qt::CTRL+Qt::SHIFT+Qt::Key_Left,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("left+ctrl"),
+         QT_TR_NOOP("left+ctrl")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-next-chord",
+         QT_TR_NOOP("add next chord to selection"),
+         Qt::SHIFT+Qt::Key_Right,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("right+shift"),
+         QT_TR_NOOP("right+shift")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-next-measure",
+         QT_TR_NOOP("select to end of measure"),
+         Qt::CTRL+Qt::SHIFT+Qt::Key_Right,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("right+ctrl+shift"),
+         QT_TR_NOOP("right+ctrl+shift")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-begin-line",
+         QT_TR_NOOP("select to beginning of line"),
+         Qt::SHIFT+Qt::Key_Home,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("shift+home"),
+         QT_TR_NOOP("shift+home")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-end-line",
+         QT_TR_NOOP("select to end of line"),
+         Qt::SHIFT+Qt::Key_End,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("shift+end"),
+         QT_TR_NOOP("shift+end")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-begin-score",
+         QT_TR_NOOP("select to beginning of score"),
+         Qt::CTRL+Qt::SHIFT+Qt::Key_Home,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("ctrl+shift+home"),
+         QT_TR_NOOP("ctrl+shift+home")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "select-end-score",
+         QT_TR_NOOP("select to end of score"),
+         Qt::CTRL+Qt::SHIFT+Qt::Key_End,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("ctrl+shift+end"),
+         QT_TR_NOOP("ctrl+shift+end")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "select-staff-above",
+         QT_TR_NOOP("add staff above to selection"),
+         Qt::SHIFT+Qt::Key_Up,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("add staff above to selection"),
+         QT_TR_NOOP("add staff above to selection")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "select-staff-below",
+         QT_TR_NOOP("add staff below to selection"),
+         Qt::SHIFT+Qt::Key_Down,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("add staff below to selection"),
+         QT_TR_NOOP("add staff below to selection")
+         ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "page-prev",
          QT_TR_NOOP("page-prev"),

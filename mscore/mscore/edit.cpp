@@ -89,7 +89,9 @@ ChordRest* Score::getSelectedChordRest() const
 int Score::pos()
       {
       Element* el = sel->element();
-      if (el && (el->type() == REST || el->type() == NOTE)) {
+      if (sel->activeCR())
+            el = sel->activeCR();
+      if (el && (el->type() == REST || el->type() == NOTE || el->type() == CHORD)) {
             if (el->type() == NOTE)
                   el = el->parent();
             return el->tick();

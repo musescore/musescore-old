@@ -592,6 +592,32 @@ int System::snapNote(int tick, const QPointF p, int staff) const
       }
 
 //---------------------------------------------------------
+//   firstMeasure
+//---------------------------------------------------------
+
+Measure* System::firstMeasure() const {
+      for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            return static_cast<Measure*>(mb);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   lastMeasure
+//---------------------------------------------------------
+
+Measure* System::lastMeasure() const {
+      for (MeasureBase* mb = ml.back(); mb; mb = mb->prev()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            return static_cast<Measure*>(mb);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   prevMeasure
 //---------------------------------------------------------
 

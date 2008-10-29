@@ -133,6 +133,9 @@ class System : public Element {
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
 
+      Measure* firstMeasure() const;
+      Measure* lastMeasure() const;
+
       MeasureBase* prevMeasure(const MeasureBase*) const;
       MeasureBase* nextMeasure(const MeasureBase*) const;
 

@@ -294,6 +294,10 @@ MuseScore::MuseScore()
          << "pitch-up-octave" << "pitch-down-octave"
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
+         << "select-next-chord" << "select-prev-chord" << "select-next-measure" << "select-prev-measure"
+         << "select-begin-line" << "select-end-line"
+         << "select-begin-score" << "select-end-score"
+         << "select-staff-above" << "select-staff-below"
          << "next-measure" << "prev-measure" << "print" << "undo" << "redo"
          << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
          << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
@@ -2065,7 +2069,8 @@ void MuseScore::play(Element* e) const
       {
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
-            play(e, note->pitch());
+            Part* part = note->staff()->part();
+            play(e, note->pitch() + part->pitchOffset());
             }
       }
 
