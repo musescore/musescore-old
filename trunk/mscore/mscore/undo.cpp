@@ -1394,44 +1394,60 @@ void Score::removeElement(Element* element)
             return;
             }
       parent->remove(element);
-      if (element->type() == CLEF) {
-            Clef* clef   = (Clef*)element;
-            int tick     = clef->tick();
-            int staffIdx = clef->staffIdx();
 
-            //-----------------------------------------------
-            //   move notes
-            //-----------------------------------------------
+      switch(element->type()) {
+            case CHORD:
+            case REST:
+                  {
+                  ChordRest* cr = static_cast<ChordRest*>(element);
+                  cr->setBeam(0);
+                  }
+                  break;
+            case CLEF:
+                  {
+                  Clef* clef   = static_cast<Clef*>(element);
+                  int tick     = clef->tick();
+                  int staffIdx = clef->staffIdx();
 
-            bool endFound = false;
-            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* measure = (Measure*)mb;
-                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                        int startTrack = staffIdx * VOICES;
-                        int endTrack   = startTrack + VOICES;
-                        for (int track = startTrack; track < endTrack; ++track) {
-                              Element* ie = segment->element(track);
-                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
-                                    endFound = true;
-                                    break;
+                  //-----------------------------------------------
+                  //   move notes
+                  //-----------------------------------------------
+
+                  bool endFound = false;
+                  for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* measure = static_cast<Measure*>(mb);
+                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                              int startTrack = staffIdx * VOICES;
+                              int endTrack   = startTrack + VOICES;
+                              for (int track = startTrack; track < endTrack; ++track) {
+                                    Element* ie = segment->element(track);
+                                    if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                                          endFound = true;
+                                          break;
+                                          }
                                     }
+                              if (endFound)
+                                    break;
                               }
                         if (endFound)
                               break;
                         }
-                  if (endFound)
-                        break;
                   }
-            }
-      else if (element->type() == KEYSIG) {
-            layoutAll = true;
-            }
-      else if (element->type() == SLUR) {
-            Slur* s = (Slur*)element;
-            ((ChordRest*)s->startElement())->removeSlurFor(s);
-            ((ChordRest*)s->endElement())->removeSlurBack(s);
+                  break;
+            case KEYSIG:
+                  layoutAll = true;
+                  break;
+            case SLUR:
+                  {
+                  Slur* s = static_cast<Slur*>(element);
+                  static_cast<ChordRest*>(s->startElement())->removeSlurFor(s);
+                  static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
+                  }
+                  break;
+            default:
+                  break;
             }
       }
 

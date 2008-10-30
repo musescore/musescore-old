@@ -2406,7 +2406,8 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               int tick = tuplet->tick() - tickStart + dstTick;
                               tuplet->setTick(tick);
                               Measure* measure = tick2measure(tick);
-                              measure->add(tuplet);
+                              tuplet->setParent(measure);
+                              undoAddElement(tuplet);
                               }
                         else if (eee.tagName() == "Chord" || eee.tagName() == "Rest") {
                               ChordRest* cr;
