@@ -427,7 +427,8 @@ void Note::setType(Duration t)
 void Note::setHeadGroup(int val)
       {
       _headGroup = val;
-      _head = noteHeads[_headGroup][chord()->duration().headType()];
+      if(chord())
+    	  _head = noteHeads[_headGroup][chord()->duration().headType()];
       }
 
 //---------------------------------------------------------

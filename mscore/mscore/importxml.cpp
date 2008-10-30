@@ -1876,6 +1876,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int actualNotes = 1;
       int normalNotes = 1;
       int tremolo = 0;
+      int headGroup = 0;
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -2176,8 +2177,21 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                               domError(ee);
                         }
                   }
-            else if (tag == "notehead")
-                  domNotImplemented(e);
+            else if (tag == "notehead") {
+                  if(s=="slash"){
+                	  headGroup = 5;
+                  }else if (s=="triangle"){
+                	  headGroup = 3;
+                  }else if (s=="diamond"){
+                	  headGroup = 4;
+                  }else if (s=="x"){
+                	  headGroup = 1;
+                  }else if (s=="circle-x"){
+                	  headGroup = 6;
+				  }else{
+					  printf("unknown notehead %s\n", s.toLatin1().data());
+					  }
+                  }
             else if (tag == "instrument")
                   domNotImplemented(e);
             else if (tag == "cue")
@@ -2218,6 +2232,7 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
       else {
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
+            note->setHeadGroup(headGroup);
 
             int track = (staff + relStaff) * VOICES + voice;
             note->setTrack(track);
@@ -2264,11 +2279,13 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
                   s->add(cr);
                   }
 
+
             // pitch must be set before adding note to chord as note
             // is inserted into pitch sorted list (ws)
 
             xmlSetPitch(note, tick, c, alter, octave, accidental);
             cr->add(note);
+
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             if (accidental && editorial)
