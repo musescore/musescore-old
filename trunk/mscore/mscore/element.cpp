@@ -413,6 +413,7 @@ bool Element::readProperties(QDomElement e)
       int i = val.toInt();
 //      setTrack(score()->curTrack);
 
+      setTick(score()->curTick);
       if (tag == "tick") {
             setTick(score()->fileDivision(i));
             score()->curTick = _tick;
