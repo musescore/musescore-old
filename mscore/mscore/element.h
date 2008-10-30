@@ -195,6 +195,9 @@ class Element {
       bool isChordRest() const {
             return type() == REST || type() == CHORD;
             }
+      bool isDurationElement() const {
+            return isChordRest() || (type() == TUPLET);
+            }
       bool isSLine() const {
             return type() == HAIRPIN || type() == OTTAVA || type() == PEDAL
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;

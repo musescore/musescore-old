@@ -85,7 +85,7 @@ class Measure : public MeasureBase {
       int _repeatFlags;       ///< or'd RepeatType's
 
       QList<MStaff*>  staves;
-      QList<Beam*>    _beamList;
+      QList<Beam*>    _beams;
       QList<Tuplet*>  _tuplets;
 
       int    _no;             ///< Measure number, counting from zero
@@ -126,7 +126,7 @@ class Measure : public MeasureBase {
       QList<MStaff*>* staffList()          { return &staves;      }
       MStaff* mstaff(int staffIdx)         { return staves[staffIdx]; }
       StaffLines* staffLines(int staffIdx) { return staves[staffIdx]->lines; }
-      QList<Beam*>* beamList()             { return &_beamList;   }
+      QList<Beam*>* beams()                { return &_beams;      }
       QList<Tuplet*>* tuplets()            { return &_tuplets;    }
 
       int    no() const                { return _no;          }

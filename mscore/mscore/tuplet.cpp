@@ -171,8 +171,10 @@ void Tuplet::layout(ScoreLayout* layout)
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
-                  QPointF p(stem->abbox().bottomLeft());
-                  p1 = p;
+                  if (stem)
+                        p1 = QPointF(stem->abbox().bottomLeft());
+                  else
+                        p1 = QPointF();
                   }
             else {
                   QPointF p(cr1->abbox().bottomLeft());
@@ -182,8 +184,10 @@ void Tuplet::layout(ScoreLayout* layout)
             if (cr2->type() == CHORD) {
                   const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem = chord2->stem();
-                  QPointF p(stem->abbox().bottomLeft());
-                  p2 = p;
+                  if (stem)
+                        p2 = QPointF(stem->abbox().bottomLeft());
+                  else
+                        p2 = QPointF();
                   }
             else  {
                   QPointF p(cr2->abbox().bottomRight());
@@ -328,9 +332,9 @@ void Tuplet::draw(QPainter& p) const
 //   write
 //---------------------------------------------------------
 
-void Tuplet::write(Xml& xml, int id) const
+void Tuplet::write(Xml& xml) const
       {
-      xml.stag(QString("Tuplet id=\"%1\"").arg(id));
+      xml.stag(QString("Tuplet id=\"%1\"").arg(_id));
       xml.tag("numberType", _numberType);
       xml.tag("bracketType", _bracketType);
       xml.tag("baseLen", _baseLen);

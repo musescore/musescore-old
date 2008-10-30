@@ -45,6 +45,7 @@
 #include "xml.h"
 #include "lyrics.h"
 #include "values.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   Selection
@@ -735,6 +736,7 @@ QByteArray Selection::staffMimeData() const
       Xml xml(&buffer);
       xml.header();
       xml.noSlurs = true;
+      xml.clipboardmode = true;
 
       int ticks  = tickEnd() - tickStart();
       int staves = staffEnd - staffStart;
@@ -753,13 +755,21 @@ QByteArray Selection::staffMimeData() const
                         Element* e = seg->element(track);
                         if (e == 0 || e->generated())
                               continue;
+                        if (e->isChordRest()) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              Tuplet* tuplet = cr->tuplet();
+                              if (tuplet && tuplet->elements().front() == cr) {
+                                    tuplet->setId(xml.tupletId++);
+                                    tuplet->write(xml);
+                                    }
+                              }
                         if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e);
-                              c->write(xml, true, _startSegment->tick(), _endSegment->tick());
+                              c->write(xml, _startSegment->tick(), _endSegment->tick());
                               }
                         else if (e->type() == REST) {
                               Rest* r = static_cast<Rest*>(e);
-                              r->write(xml, true);
+                              r->write(xml);
                               }
                         else
                               e->write(xml);

@@ -1,4 +1,8 @@
-30.10 (sy)
+30.10
+      - fix crash when copy/paste tuplets
+      - Tuplets are now written to xml just before any reference to them without
+        considering measure boundaries
+      (sy)
       - added a simple Line element to palette, which is basically a
         TextLine with capability of hiding the text and changing the
         end-points in the y-axis

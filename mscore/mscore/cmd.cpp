@@ -813,6 +813,8 @@ int Score::makeGap(int tick, int track, int len)
 // printf("  segment\n");
             while (segment && (!segment->isChordRest() || segment->element(track) == 0))
                   segment = segment->next();
+            if (segment == 0)
+                  break;
             ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
             int l          = cr->tickLen();
             if (l == 0 && cr->type() == REST)    // whole measure rest?
@@ -2392,8 +2394,21 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
+                  QList<Tuplet*> tuplets;
+                  QList<Beam*> beams;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        if (eee.tagName() == "Chord" || eee.tagName() == "Rest") {
+                        if (eee.tagName() == "Tuplet") {
+                              Tuplet* tuplet = new Tuplet(this);
+                              tuplet->setTrack(curTrack);
+                              tuplet->read(eee);
+                              tuplets.append(tuplet);
+
+                              int tick = tuplet->tick() - tickStart + dstTick;
+                              tuplet->setTick(tick);
+                              Measure* measure = tick2measure(tick);
+                              measure->add(tuplet);
+                              }
+                        else if (eee.tagName() == "Chord" || eee.tagName() == "Rest") {
                               ChordRest* cr;
                               if (eee.tagName() == "Chord")
                                     cr = new Chord(this);
@@ -2401,14 +2416,32 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                     cr = new Rest(this);
 
                               cr->setTrack(curTrack);
+
                               cr->setTick(curTick);         // set default tick position
-                              // chord->setParent(this);    // only for reading tuplets
-                              cr->read(eee);
+                              cr->read(eee, tuplets, beams);
                               int voice = cr->voice();
-                              cr->setTrack(dstStaffIdx * VOICES + voice);
+                              int track = dstStaffIdx * VOICES + voice;
+                              cr->setTrack(track);
+
                               curTick  = cr->tick() + cr->tickLen();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
+
+                              if (cr->type() == CHORD) {
+                                    // set note track
+                                    // check if staffMove moves a note to a
+                                    // nonexistant staff
+                                    //
+                                    Chord* c = static_cast<Chord*>(cr);
+                                    NoteList* nl = c->noteList();
+                                    for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                                          Note* n = i->second;
+                                          n->setTrack(track);
+                                          int nn = (track / VOICES) + n->staffMove();
+                                          if (nn < 0 || nn >= nstaves())
+                                                n->setStaffMove(0);
+                                          }
+                                    }
 
                               Measure* measure = tick2measure(tick);
                               Segment* s = measure->findSegment(Segment::SegChordRest, tick);

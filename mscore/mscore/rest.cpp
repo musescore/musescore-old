@@ -193,10 +193,10 @@ printf("Direction %d\n", int(dir));
 //   write Rest
 //---------------------------------------------------------
 
-void Rest::write(Xml& xml, bool clipboardMode) const
+void Rest::write(Xml& xml) const
       {
       xml.stag("Rest");
-      ChordRest::writeProperties(xml, clipboardMode);
+      ChordRest::writeProperties(xml);
       if (_staffMove)
             xml.tag("move", _staffMove);
       xml.etag();
@@ -206,7 +206,7 @@ void Rest::write(Xml& xml, bool clipboardMode) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomElement e)
+void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -216,7 +216,7 @@ void Rest::read(QDomElement e)
                   setTickLen(i);
             else if (tag == "move")
                   _staffMove = i;
-            else if (!ChordRest::readProperties(e))
+            else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
       if (!duration().isValid()) {

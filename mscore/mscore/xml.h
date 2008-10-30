@@ -44,10 +44,14 @@ class Xml : public QTextStream {
       void putLevel();
 
    public:
-      int curTick;      // used to optimize output
+      int curTick;            // used to optimize output
       int curTrack;
-      int trackDiff;    // saved track is curTrack-trackDiff
-      bool noSlurs;     // dont write slur info in ChordRest; used for drag&drop
+      int trackDiff;          // saved track is curTrack-trackDiff
+      bool noSlurs;           // dont write slur info in ChordRest; used for drag&drop
+      bool clipboardmode;     // used to modify write() behaviour
+
+      int tupletId;
+      int beamId;
 
       Xml(QIODevice*);
       Xml();
