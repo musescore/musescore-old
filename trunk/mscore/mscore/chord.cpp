@@ -988,11 +988,11 @@ Note* Chord::selectedNote() const
 //   Chord::write
 //---------------------------------------------------------
 
-void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) const
+void Chord::write(Xml& xml, int startTick, int endTick) const
       {
       int oldTickLen = tickLen();
       int totalLen   = oldTickLen;
-      if (clipboardmode) {
+      if (xml.clipboardmode) {
             const Chord* c = this;
             while (c->downNote()->tieFor()) {
                   c = c->downNote()->tieFor()->endNote()->chord();
@@ -1002,7 +1002,7 @@ void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) cons
       setTickLen(totalLen);   // set temporary new tickLen
 
       xml.stag("Chord");
-      ChordRest::writeProperties(xml, clipboardmode);
+      ChordRest::writeProperties(xml);
       if (_noteType != NOTE_NORMAL) {
             switch(_noteType) {
                   case NOTE_INVALID:
@@ -1034,7 +1034,7 @@ void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) cons
             }
       ciNote in = notes.begin();
       for (; in != notes.end(); ++in)
-            in->second->write(xml, clipboardmode, startTick, endTick);
+            in->second->write(xml, startTick, endTick);
       if (_arpeggio)
             _arpeggio->write(xml);
       if (_glissando)
@@ -1043,7 +1043,7 @@ void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) cons
             _tremolo->write(xml);
       xml.etag();
       xml.curTick = tick() + totalLen;
-      if (clipboardmode)
+      if (xml.clipboardmode)
             setTickLen(oldTickLen);
       }
 
@@ -1051,7 +1051,7 @@ void Chord::write(Xml& xml, bool clipboardmode, int startTick, int endTick) cons
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, int /*staffIdx*/)
+void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
       Note* note = new Note(score());
       int ptch   = e.attribute("pitch", "-1").toInt();
@@ -1098,7 +1098,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
                   }
             else if (tag == "move")
                   note->setStaffMove(i);
-            else if (!ChordRest::readProperties(e))
+            else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
       if (ptch != -1)
@@ -1117,8 +1117,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
 //   Chord::read
 //---------------------------------------------------------
 
-// void Chord::read(QDomElement e, int /*staffIdx*/)
-void Chord::read(QDomElement e)
+void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -1177,7 +1176,7 @@ void Chord::read(QDomElement e)
                   _stem->read(e);
                   add(_stem);
                   }
-            else if (!ChordRest::readProperties(e))
+            else if (!ChordRest::readProperties(e, tuplets, beams))
                   domError(e);
             }
       int len = tickLen();

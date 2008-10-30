@@ -199,7 +199,7 @@ void Clef::layout(ScoreLayout*)
                   break;
             }
       addElement(symbol, .0, .0);
-      setUserOff(QPointF(xoff, yoff));
+      setUserOff(QPointF(xoff, yoff * mag()));
       }
 
 //---------------------------------------------------------

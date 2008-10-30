@@ -88,7 +88,7 @@ class Beam : public Element {
 
       bool _userModified;
       QPointF _p1, _p2;
-      mutable int _id;          // used temporarily on write()
+      mutable int _id;          // used in read()/write()
 
       void layoutCrossStaff(int, int, Chord*, Chord*);
 

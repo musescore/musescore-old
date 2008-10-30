@@ -58,7 +58,7 @@ class Tuplet : public DurationElement {
       bool _userModified;
       QPointF p1, p2;
       QPointF _p1, _p2;
-      int _id;          // used during read
+      mutable int _id;          // used during read/write
 
       Text* _number;
       QPointF bracketL[4];
@@ -105,12 +105,13 @@ class Tuplet : public DurationElement {
       Text* number() const { return _number; }
 
       virtual void read(QDomElement);
-      void write(Xml&, int) const;
+      void write(Xml&) const;
 
       virtual void resetUserOffsets();
 
       virtual void draw(QPainter&) const;
       int id() const                  { return _id; }
+      void setId(int i) const         { _id = i; }
       virtual int tickLen() const     { return _baseLen * _normalNotes; }
       };
 

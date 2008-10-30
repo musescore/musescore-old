@@ -31,10 +31,13 @@ QString docName;
 Xml::Xml()
       {
       stack.clear();
-      curTick   = 0;
-      curTrack  = -1;
-      trackDiff = 0;
-      noSlurs   = false;
+      curTick       = 0;
+      curTrack      = -1;
+      trackDiff     = 0;
+      noSlurs       = false;
+      clipboardmode = false;
+      tupletId      = 1;
+      beamId        = 1;
       }
 
 Xml::Xml(QIODevice* device)
@@ -42,10 +45,13 @@ Xml::Xml(QIODevice* device)
       {
       setCodec("utf8");
       stack.clear();
-      curTick   = 0;
-      curTrack  = -1;
-      trackDiff = 0;
-      noSlurs   = false;
+      curTick       = 0;
+      curTrack      = -1;
+      trackDiff     = 0;
+      noSlurs       = false;
+      clipboardmode = false;
+      tupletId      = 1;
+      beamId        = 1;
       }
 
 //---------------------------------------------------------

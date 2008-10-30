@@ -318,7 +318,7 @@ void Beam::move(double x, double y)
 
 void Measure::layoutBeams1(ScoreLayout* layout)
       {
-      foreach(Beam* beam, _beamList)
+      foreach(Beam* beam, _beams)
             beam->clear();
 
       int tracks = _score->nstaves() * VOICES;
@@ -467,7 +467,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   a1->layoutStem1(layout);
                   }
             }
-      foreach(Beam* beam, _beamList) {
+      foreach(Beam* beam, _beams) {
             if (beam->elements().isEmpty()) {
                   remove(beam);
                   delete beam;
@@ -486,7 +486,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
       int nstaves = _score->nstaves();
       int tracks = nstaves * VOICES;
 
-      foreach(Beam* beam, _beamList)
+      foreach(Beam* beam, _beams)
             beam->layout(layout);
 
       for (int track = 0; track < tracks; ++track) {
@@ -1144,7 +1144,7 @@ QRectF Beam::bbox() const
 
 void Beam::write(Xml& xml) const
       {
-      xml.stag(QString("Beam id=\"%1\"").arg(_id + 1));
+      xml.stag(QString("Beam id=\"%1\"").arg(_id));
       Element::writeProperties(xml);
       if (_userModified) {
             xml.tag("y1", _p1.y());
@@ -1159,7 +1159,7 @@ void Beam::write(Xml& xml) const
 
 void Beam::read(QDomElement e)
       {
-      _id = e.attribute("id").toInt() - 1;
+      _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

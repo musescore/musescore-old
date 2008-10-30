@@ -156,13 +156,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
                   }
             pl.append(Prop("BeamMode", s));
             }
-      if (tuplet()) {
-            int idx = measure()->tuplets()->indexOf(tuplet());
-            if (idx == -1)
-                  printf("ChordRest::writeProperties(): tuplet not found\n");
-            else
-                  pl.append(Prop("Tuplet", idx));
-            }
+      if (tuplet())
+            pl.append(Prop("Tuplet", tuplet()->id()));
       if (_small)
             pl.append(Prop("small", _small));
       if (!clipboardmode) {
@@ -176,9 +171,9 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
 //   writeProperties
 //---------------------------------------------------------
 
-void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
+void ChordRest::writeProperties(Xml& xml) const
       {
-      QList<Prop> pl = properties(xml, clipboardmode);
+      QList<Prop> pl = properties(xml);
       xml.prop(pl);
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
@@ -188,8 +183,8 @@ void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
             foreach(Slur* s, _slurBack)
                   xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
             }
-      if (!clipboardmode && _beam)
-            xml.tag("Beam", _beam->id() + 1);
+      if (!xml.clipboardmode && _beam)
+            xml.tag("Beam", _beam->id());
       xml.curTick = tick() + tickLen();
       }
 
@@ -197,7 +192,8 @@ void ChordRest::writeProperties(Xml& xml, bool clipboardmode) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e)
+bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
+   const QList<Beam*>& beams)
       {
       if (Element::readProperties(e))
             return true;
@@ -229,12 +225,8 @@ bool ChordRest::readProperties(QDomElement e)
             add(atr);
             }
       else if (tag == "Tuplet") {
-            // while reading Measure, parent of Chord or Rest is set
-            // to measure; after inserting Chord or Rest into Measure
-            // parent is Segment
-            Measure* m = (Measure*)parent();
             setTuplet(0);
-            foreach(Tuplet* t, *m->tuplets()) {
+            foreach(Tuplet* t, tuplets) {
                   if (t->id() == i) {
                         setTuplet(t);
                         break;
@@ -246,9 +238,8 @@ bool ChordRest::readProperties(QDomElement e)
                   setTickLen(tickLen());  // set right symbol + dots
             }
       else if (tag == "Beam") {
-            Measure* m = static_cast<Measure*>(parent());
-            foreach(Beam* b, *m->beamList()) {
-                  if (b->id() == (i-1)) {
+            foreach(Beam* b, beams) {
+                  if (b->id() == i) {
                         setBeam(b);
                         b->add(this);
                         break;

@@ -60,8 +60,9 @@ class ChordRest : public DurationElement {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
-      void writeProperties(Xml& xml, bool clipboardmode=false) const;
-      bool readProperties(QDomElement);
+      virtual void read(QDomElement, const QList<Tuplet*>&, const QList<Beam*>&) = 0;
+      void writeProperties(Xml& xml) const;
+      bool readProperties(QDomElement e, const QList<Tuplet*>&, const QList<Beam*>&);
       QList<Prop> properties(Xml&, bool clipboardmode) const;
       virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
 

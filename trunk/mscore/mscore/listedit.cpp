@@ -349,7 +349,7 @@ void PageListEditor::updateList(Score* s)
                                           }
                                     }
                               }
-                        foreach(Beam* beam, *measure->beamList())
+                        foreach(Beam* beam, *measure->beams())
 					new ElementItem(mi, beam);
                         foreach(Tuplet* tuplet, *measure->tuplets()) {
 					ElementItem* item = new ElementItem(mi, tuplet);
@@ -552,7 +552,7 @@ void MeasureView::setElement(Element* e)
 
       mb.segments->setValue(m->size());
       mb.staves->setValue(m->staffList()->size());
-      mb.beams->setValue(m->beamList()->size());
+      mb.beams->setValue(m->beams()->size());
       mb.tuplets->setValue(m->tuplets()->size());
       mb.measureNo->setValue(m->no());
       mb.noOffset->setValue(m->noOffset());

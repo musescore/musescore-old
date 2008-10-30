@@ -331,6 +331,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
 
             //
+
             // compute accidental
             //
             int tpc        = note->tpc();
@@ -948,7 +949,7 @@ void Measure::add(Element* el)
             case BEAM:
                   {
                   Beam* b = static_cast<Beam*>(el);
-                  _beamList.append(b);
+                  _beams.append(b);
                   foreach(ChordRest* cr, b->elements())
                         cr->setBeam(b);
                   }
@@ -1075,7 +1076,7 @@ void Measure::remove(Element* el)
                   Beam* b = static_cast<Beam*>(el);
                   foreach(ChordRest* cr, b->elements())
                         cr->setBeam(0);
-                  if (!_beamList.removeOne(b)) {
+                  if (!_beams.removeOne(b)) {
                         printf("Measure remove: Beam not found\n");
                         return;
                         }
@@ -1713,7 +1714,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       for (int i = 0; i < staves.size(); ++i)
             staves[i]->lines->setTrack(i * VOICES);
 
-      // BeamList   _beamList;
+      // BeamList   _beams;
       // TupletList _tuplets;
       // barLine
       // TODO
@@ -2306,20 +2307,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       if (mstaff->_vspacer)
             xml.tag("vspacer", mstaff->_vspacer->space().val());
 
-      foreach(const Tuplet* tuplet, _tuplets) {
-            if (tuplet->staffIdx() == staff) {
-                  int id = _tuplets.indexOf(const_cast<Tuplet*>(tuplet));
-                  tuplet->write(xml, id);
-                  }
-            }
-      foreach(const Beam* beam, _beamList) {
-            if (beam->staffIdx() == staff) {
-                  int id = _beamList.indexOf(const_cast<Beam*>(beam));
-                  beam->setId(id);
-                  beam->write(xml);
-                  }
-            }
-
       foreach (const Element* el, _el) {
             if ((el->staffIdx() == staff) || (el->systemFlag() && writeSystemElements)) {
                   el->write(xml);
@@ -2330,6 +2317,22 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
                   if (e && !e->generated()) {
+                        if (e->isDurationElement()) {
+                              DurationElement* de = static_cast<DurationElement*>(e);
+                              Tuplet* tuplet = de->tuplet();
+                              if (tuplet && tuplet->elements().front() == de) {
+                                    tuplet->setId(xml.tupletId++);
+                                    tuplet->write(xml);
+                                    }
+                              if (de->isChordRest()) {
+                                    ChordRest* cr = static_cast<ChordRest*>(de);
+                                    Beam* beam = cr->beam();
+                                    if (beam && beam->elements().front() == cr) {
+                                          beam->setId(xml.beamId++);
+                                          beam->write(xml);
+                                          }
+                                    }
+                              }
                         e->write(xml);
                         }
                   }
@@ -2370,23 +2373,26 @@ void Measure::write(Xml& xml) const
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);
                   }
-            foreach(Tuplet* tuplet, _tuplets) {
-                  if (staffIdx == tuplet->staffIdx()) {
-                        int id = _tuplets.indexOf(tuplet);
-                        tuplet->write(xml, id);
-                        }
-                  }
-            foreach(const Beam* beam, _beamList) {
-                  if (beam->staffIdx() == staffIdx) {
-                        int id = _beamList.indexOf(const_cast<Beam*>(beam));
-                        beam->setId(id);
-                        beam->write(xml);
-                        }
-                  }
             for (int track = staffIdx * VOICES; track < staffIdx * VOICES + VOICES; ++track) {
                   for (Segment* segment = first(); segment; segment = segment->next()) {
                         Element* e = segment->element(track);
                         if (e && !e->generated()) {
+                              if (e->isDurationElement()) {
+                                    DurationElement* de = static_cast<DurationElement*>(e);
+                                    Tuplet* tuplet = de->tuplet();
+                                    if (tuplet && tuplet->elements().front() == de) {
+                                          tuplet->setId(xml.tupletId++);
+                                          tuplet->write(xml);
+                                          }
+                                    if (de->isChordRest()) {
+                                          ChordRest* cr = static_cast<ChordRest*>(de);
+                                          Beam* beam = cr->beam();
+                                          if (beam && beam->elements().front() == cr) {
+                                                beam->setId(xml.beamId++);
+                                                beam->write(xml);
+                                                }
+                                          }
+                                    }
                               e->write(xml);
                               }
                         }
@@ -2461,8 +2467,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->setParent(this);             // only for reading tuplets
-                  chord->read(e);
+                  chord->read(e, _tuplets, _beams);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
@@ -2480,8 +2485,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->setParent(this);             // only for reading tuplets
-                  chord->readNote(e, idx);
+                  chord->readNote(e, _tuplets, _beams);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
@@ -2490,8 +2494,7 @@ void Measure::read(QDomElement e, int idx)
                   Rest* rest = new Rest(score());
                   rest->setTrack(score()->curTrack);
                   rest->setTick(score()->curTick);    // set default tick position
-                  rest->setParent(this);              // only for reading tuplets
-                  rest->read(e);
+                  rest->read(e, _tuplets, _beams);
                   Segment* s = getSegment(rest);
                   s->add(rest);
                   score()->curTick = rest->tick() + rest->tickLen();
@@ -2795,7 +2798,7 @@ void Measure::collectElements(QList<const Element*>& el) const
             if ((e->track() == -1) || e->staff()->show())
                   el.append(e);
             }
-      foreach(Beam* b, _beamList) {
+      foreach(Beam* b, _beams) {
             if (b->staff()->show())
                   el.append(b);
             }
