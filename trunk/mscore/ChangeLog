@@ -8,6 +8,8 @@
         end-points in the y-axis
       - MusicXML import/export of TextLines (including lines without text)
       - fix loading of TextLines (and possibly other elements) starting at same tick
+      (la)
+      - add minimal support for notehead import/export in musicXML
 29.10 (ws)
       - implement "example note" in drumset editor
       - make tuplet brackets editable

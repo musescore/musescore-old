@@ -1363,6 +1363,18 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
 
+            if (note->headGroup()==5){
+            	xml.tag("notehead", "slash");
+            }else if (note->headGroup()==3){
+            	xml.tag("notehead", "triangle");
+            }else if(note->headGroup()==4){
+            	xml.tag("notehead", "diamond");
+            }else if(note->headGroup()==1){
+            	xml.tag("notehead", "x");
+            }else if(note->headGroup()==6){
+            	xml.tag("notehead", "circle-x");
+            }
+
             // accidental
             // Note: in Binchois.xml two accidentals have parentheses which are encoded
             // as editorial="yes". Wikipedia calls this a cautionary accidental.
