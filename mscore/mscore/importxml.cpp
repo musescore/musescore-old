@@ -52,6 +52,7 @@
 #include "barline.h"
 #include "lyrics.h"
 #include "volta.h"
+#include "textline.h"
 #include "keysig.h"
 #include "pitchspelling.h"
 #include "layoutbreak.h"
@@ -329,6 +330,8 @@ void MusicXml::import(Score* s)
       tie    = 0;
       for (int i = 0; i < MAX_SLURS; ++i)
             slur[i] = 0;
+      for (int i = 0; i < MAX_BRACKETS; ++i)
+            bracket[i] = 0;
       tuplet = 0;
       ottava = 0;
       trill = 0;
@@ -1097,6 +1100,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       bool segno = false;
       int ottavasize = 0;
       bool pedalLine = false;
+      int number = 1;
+      QString lineEnd;
+      qreal endLength = 0;
+      QString lineType;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
@@ -1139,8 +1146,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else if (dirType == "dashes")
                               domNotImplemented(ee);
-                        else if (dirType == "bracket")
-                              domNotImplemented(ee);
+                        else if (dirType == "bracket") {
+                              type      = ee.attribute(QString("type"));
+                              number    = ee.attribute(QString("number"), "1").toInt();
+                              lineEnd   = ee.attribute(QString("line-end"), "none");
+                              endLength = ee.attribute(QString("end-length"), "0").toDouble() * 0.1;
+                              lineType  = ee.attribute(QString("line-type"), "solid");
+                              }
                         else if (dirType == "metronome")
                               domNotImplemented(ee);
                         else if (dirType == "octave-shift") {
@@ -1403,6 +1415,86 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   addWedge(0, tick, rx, ry, above, 1);
             else
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
+            }
+      else if (dirType == "bracket") {
+            int n = number-1;
+            TextLine* b = bracket[n];
+            if (type == "start") {
+                  if (b) {
+                        printf("overlapping bracket with same number?\n");
+                        delete b;
+                        bracket[n] = 0;
+                        }
+                  else {
+                        b = new TextLine(score);
+
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        // store for later to set in segment
+                        b->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                        b->setMxmlOff(offset);
+
+                        // TODO: MuseScore doesn't support hooks at beginning of lines
+
+                        // hack: assume there was a words element before the bracket
+                        if (!txt.isEmpty()) {
+                              b->setText(txt);
+                              }
+                        b->setHasText(!txt.isEmpty());
+
+                        if (lineType == "solid")
+                              b->setLineStyle(Qt::SolidLine);
+                        else if (lineType == "dashed")
+                              b->setLineStyle(Qt::DashLine);
+                        else if (lineType == "dotted")
+                              b->setLineStyle(Qt::DotLine);
+                        else
+                              printf("unsupported line-type: %s\n", lineType.toLatin1().data());
+
+                        b->setTrack((staff + rstaff) * VOICES);
+                        b->setTick(tick);
+                        bracket[n] = b;
+                        }
+                  }
+            else if (type == "stop") {
+                  if (!b) {
+                        printf("bracket stop without start, number %d\n", number);
+                        }
+                  else {
+                        b->setTick2(tick);
+                        // TODO: MuseScore doesn't support lines which start and end on different staves
+                        QPointF userOff = b->userOff();
+                        b->add(b->createLineSegment());
+                        b->layout(score->layout());
+                        b->setUserOff(QPointF()); // restore the offset
+                        b->setMxmlOff2(offset);
+                        LineSegment* ls1 = b->lineSegments().front();
+                        LineSegment* ls2 = b->lineSegments().back();
+                        // what does placement affect?
+                        //yoffset += (placement == "above" ? 0.0 : 5.0);
+                        ls1->setUserOff(userOff);
+                        // userOff2 is relative to userOff, so subtract
+                        ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset) - userOff);
+                        if (lineEnd == "up") {
+                              b->setHook(true);
+                              b->setHookUp(true);
+                              }
+                        else if (lineEnd == "down") {
+                              b->setHook(true);
+                              b->setHookUp(false);
+                              }
+                        else if (lineEnd == "none") {
+                              b->setHook(false);
+                              }
+                        else {
+                              printf("unsupported line-end type: %s\n", lineEnd.toLatin1().data());
+                              }
+                        if (endLength != 0)
+                              b->setHookHeight(Spatium(endLength));
+                        score->layout()->add(b);
+                        bracket[n] = 0;
+                        }
+                  }
             }
       else if (dirType == "octave-shift") {
             if (type == "down") {

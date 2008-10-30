@@ -296,6 +296,12 @@ void MuseScore::showPalette(bool visible)
             textLine->setLen(l);
             sp->addObject(12, textLine, tr("text line"));
 
+            TextLine* line = new TextLine(gscore);
+            line->setLen(l);
+            line->setHasText(false);
+            line->setHook(false);
+            sp->addObject(13, line, tr("line"));
+
             paletteBox->addPalette(tr("Lines"), sp);
 
             //-----------------------------------

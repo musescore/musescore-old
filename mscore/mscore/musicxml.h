@@ -40,6 +40,7 @@ class Ottava;
 class Trill;
 class Pedal;
 class Volta;
+class TextLine;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -66,6 +67,7 @@ struct MusicXmlPartGroup {
 const int MAX_LYRICS      = 8;
 const int MAX_PART_GROUPS = 8;
 const int MAX_SLURS       = 8;
+const int MAX_BRACKETS    = 8;
 
 //---------------------------------------------------------
 //   MusicXml
@@ -80,6 +82,8 @@ class MusicXml {
       std::vector<int> voicelist[MAX_STAVES];
 
       Slur* slur[MAX_SLURS];
+      
+      TextLine* bracket[MAX_BRACKETS];
 
       Tie* tie;
       int voice;

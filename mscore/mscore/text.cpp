@@ -1025,6 +1025,7 @@ void TextB::endEdit()
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
             tl->setHtml(getHtml());
+            tl->setHasText(!doc()->isEmpty());
             }
       }
 
