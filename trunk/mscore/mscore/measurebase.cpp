@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "measurebase.h"
+#include "measure.h"
 #include "staff.h"
 
 //---------------------------------------------------------
@@ -75,3 +76,32 @@ void MeasureBase::remove(Element* el)
       }
 
 
+//---------------------------------------------------------
+//   nextMeasure
+//---------------------------------------------------------
+
+Measure* MeasureBase::nextMeasure()
+      {
+      MeasureBase* m = this;
+      while (m) {
+            m = m->next();
+            if (m->type() == MEASURE)
+                  return static_cast<Measure*>(m);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   prevMeasure
+//---------------------------------------------------------
+
+Measure* MeasureBase::prevMeasure()
+      {
+      MeasureBase* m = this;
+      while (m) {
+            m = m->prev();
+            if (m->type() == MEASURE)
+                  return static_cast<Measure*>(m);
+            }
+      return 0;
+      }

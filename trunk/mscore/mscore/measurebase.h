@@ -30,6 +30,7 @@
 
 class Score;
 class System;
+class Measure;
 
 //---------------------------------------------------------
 //   MeasureWidth
@@ -80,6 +81,9 @@ class MeasureBase : public Element {
       void setNext(MeasureBase* e)           { _next = e;      }
       MeasureBase* prev() const              { return _prev;   }
       void setPrev(MeasureBase* e)           { _prev = e;      }
+
+      Measure* nextMeasure();
+      Measure* prevMeasure();
 
       virtual void write(Xml&, int, bool) const = 0;
 

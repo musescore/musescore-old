@@ -8,6 +8,9 @@
         end-points in the y-axis
       - MusicXML import/export of TextLines (including lines without text)
       - fix loading of TextLines (and possibly other elements) starting at same tick
+      - when shifting a line end into the next system, the new segment will start
+        at the same y offset as the previous segment
+      - when adding a line to last measure in system, no longer goes into next system
       (la)
       - add minimal support for notehead import/export in musicXML
 29.10 (ws)
