@@ -237,7 +237,7 @@ void SLine::setTick2(int t)
 //   tick2pos
 //---------------------------------------------------------
 
-QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
+QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
       if (seg == 0) {
@@ -257,6 +257,12 @@ QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
             seg = m->last();
             }
       System* sys = seg->measure()->system();
+
+      // do not go into next system when tick2 is start of system
+      if (grip == 1 && sys->firstMeasure()->tick() == seg->tick()) {
+            seg = sys->firstMeasure()->prevMeasure()->last();
+            sys = seg->measure()->system();
+            }
       *system     = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
       }
@@ -300,8 +306,13 @@ void SLine::layout(ScoreLayout* layout)
       if (segmentsNeeded != segCount) {
             if (segmentsNeeded > segCount) {
                   int n = segmentsNeeded - segCount;
-                  for (int i = 0; i < n; ++i)
-                        add(createLineSegment());
+                  for (int i = 0; i < n; ++i) {
+                        LineSegment* ls = createLineSegment();
+                        add(ls);
+                        // set user offset to previous segment's offset
+                        if (segCount > 0)
+                              ls->setUserOff(QPointF(0, segments[segCount+i-1]->userOff().y()));
+                        }
                   }
             else {
                   int n = segCount - segmentsNeeded;
