@@ -204,6 +204,9 @@ class ExportMusicXml {
       SlurHandler sh;
       int tick;
       Attributes attr;
+      TextLine* bracket[MAX_BRACKETS];
+
+      int findBracket(const TextLine* tl) const;
       void chord(Chord* chord, int staff, const LyricsList* ll);
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
@@ -223,6 +226,7 @@ class ExportMusicXml {
       void hairpin(Hairpin* hp, int staff, int tick);
       void ottava(Ottava* ot, int staff, int tick);
       void pedal(Pedal* pd, int staff, int tick);
+      void textLine(TextLine* tl, int staff, int tick);
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       void tempoText(TempoText* text, int staff);
@@ -521,6 +525,9 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                         case PEDAL:
                               exp->pedal((Pedal*) dir, sstaff, da->getTick());
                               break;
+                        case TEXTLINE:
+                              exp->textLine((TextLine*) dir, sstaff, da->getTick());
+                              break;
                         default:
                               printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
                                       elementNames[dir->type()], da->getTick());
@@ -570,6 +577,9 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                               break;
                         case PEDAL:
                               exp->pedal((Pedal*) dir, sstaff, da->getTick());
+                              break;
+                        case TEXTLINE:
+                              exp->textLine((TextLine*) dir, sstaff, da->getTick());
                               break;
                         default:
                               printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
@@ -670,44 +680,17 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
             DirectionsAnchor* da = 0;
             switch(dir->type()) {
                   case HAIRPIN:
-                        {
-                        Hairpin* hp = (Hairpin*) dir;
-                        da = findMatchInPart(hp->tick(), hp->staff(), cs, p, strack, etrack);
-                        if (da) {
-                              da->setDirect(dir);
-                              storeAnchor(da);
-                              }
-                        da = findMatchInPart(hp->tick2(), hp->staff(), cs, p, strack, etrack);
-                        if (da) {
-                              da->setDirect(dir);
-                              storeAnchor(da);
-                              }
-                        }
-                        break;
                   case OTTAVA:
-                        {
-                        Ottava* ot = (Ottava*) dir;
-                        da = findMatchInPart(ot->tick(), ot->staff(), cs, p, strack, etrack);
-                        if (da) {
-                              da->setDirect(dir);
-                              storeAnchor(da);
-                              }
-                        da = findMatchInPart(ot->tick2(), ot->staff(), cs, p, strack, etrack);
-                        if (da) {
-                              da->setDirect(dir);
-                              storeAnchor(da);
-                              }
-                        }
-                        break;
                   case PEDAL:
+                  case TEXTLINE:
                         {
-                        Pedal* pd = (Pedal*) dir;
-                        da = findMatchInPart(pd->tick(), pd->staff(), cs, p, strack, etrack);
+                        SLine* sl = (SLine*) dir;
+                        da = findMatchInPart(sl->tick(), sl->staff(), cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
                               }
-                        da = findMatchInPart(pd->tick2(), pd->staff(), cs, p, strack, etrack);
+                        da = findMatchInPart(sl->tick2(), sl->staff(), cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
@@ -1691,6 +1674,92 @@ void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
       }
 
 //---------------------------------------------------------
+//   findBracket -- get index of bracket in bracket table
+//   return -1 if not found
+//---------------------------------------------------------
+
+int ExportMusicXml::findBracket(const TextLine* tl) const
+      {
+      for (int i = 0; i < MAX_BRACKETS; ++i)
+            if (bracket[i] == tl) return i;
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   textLine
+//---------------------------------------------------------
+
+void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
+      {
+      QString rest;
+      QPointF p;
+
+      QString lineEnd = "none";
+      QString type;
+      int offs;
+      int n = 0;
+      if (tl->tick() == tick) {
+            QString lineType;
+            switch (tl->lineStyle()) {
+                  case Qt::SolidLine:
+                        lineType = "solid";
+                        break;
+                  case Qt::DashLine:
+                        lineType = "dashed";
+                        break;
+                  case Qt::DotLine:
+                        lineType = "dotted";
+                        break;
+                  default:
+                        lineType = "solid";
+                  }
+            rest += QString(" line-type=\"%1\"").arg(lineType);
+            p = tl->lineSegments().first()->userOff();
+            offs = tl->mxmlOff();
+            type = "start";
+            }
+      else {
+            if (tl->hook()) {
+                  lineEnd = tl->hookUp() ? "up" : "down";
+                  rest += QString(" end-length=\"%1\"").arg(tl->hookHeight().val() * 10);
+                  }
+            // userOff2 is relative to userOff in MuseScore
+            p = tl->lineSegments().last()->userOff2() + tl->lineSegments().first()->userOff();
+            offs = tl->mxmlOff2();
+            type = "stop";
+            }
+
+      n = findBracket(tl);
+      if (n >= 0)
+            bracket[n] = 0;
+      else {
+            n = findBracket(0);
+            bracket[n] = tl;
+            }
+
+      if (p.x() != 0)
+            rest += QString(" default-x=\"%1\"").arg(p.x() * 10);
+      if (p.y() != 0)
+            rest += QString(" default-y=\"%1\"").arg(p.y() * -10);
+
+      attr.doAttr(xml, false);
+      xml.stag(QString("direction placement=\"%1\"").arg((p.y() > 0.0) ? "below" : "above"));
+      if (tl->hasText()) {
+            xml.stag("direction-type");
+            xml.tag("words", tl->text());
+            xml.etag();
+            }
+      xml.stag("direction-type");
+      xml.tagE(QString("bracket type=\"%1\" number=\"%2\" line-end=\"%3\"%4").arg(type, QString::number(n + 1), lineEnd, rest));
+      xml.etag();
+      if (offs)
+            xml.tag("offset", offs);
+      if (staff)
+            xml.tag("staff", staff);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //   dynamic
 //---------------------------------------------------------
 
@@ -2033,6 +2102,9 @@ foreach(Element* el, *(score->gel())) {
       printf("\n");
       }
 */
+
+      for (int i = 0; i < MAX_BRACKETS; ++i)
+            bracket[i] = 0;
 
       xml.setDevice(dev);
       xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";

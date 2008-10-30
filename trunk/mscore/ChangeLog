@@ -1,3 +1,8 @@
+30.10 (sy)
+      - added a simple Line element to palette, which is basically a
+        TextLine with capability of hiding the text and changing the
+        end-points in the y-axis
+      - MusicXML import/export of TextLines (including lines without text)
 29.10 (ws)
       - implement "example note" in drumset editor
       - make tuplet brackets editable

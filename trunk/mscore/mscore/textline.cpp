@@ -106,12 +106,12 @@ void TextLineSegment::draw(QPainter& p) const
       QPointF pp2(pos2());
 
       qreal l = 0.0;
-      if (_text) {
+      if (_text && textLine()->hasText()) {
             QRectF bb(_text->bbox());
-            l = _text->pos().x() + bb.width();
+            l = _text->pos().x() + bb.width() + textlineTextDistance;
             }
 
-      QPointF pp1(l + textlineTextDistance, 0.0);
+      QPointF pp1(l, 0.0);
 
       QPen pen(p.pen());
       pen.setWidthF(textlineLineWidth);
@@ -130,7 +130,7 @@ void TextLineSegment::draw(QPainter& p) const
             if (textLine()->hookUp())
                   hh *= -1;
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
-                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), hh)));
+                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), pp2.y() + hh)));
                   }
             }
       }
@@ -144,9 +144,10 @@ QRectF TextLineSegment::bbox() const
       QPointF pp1;
       QPointF pp2(pos2());
 
-      qreal h1 = _text ? _text->height() : 20.0;
-      QRectF r(.0, -h1, pp2.x(), 2 * h1);
-      return r;
+      qreal h1 = _text ? _text->height() / 2 : 10.0;
+      if (!textLine()->hasText() && pp2.y() != 0)
+            return QRectF(pp1, pp2).normalized();
+      return QRectF(.0, -h1, pp2.x(), h1 * 2);
       }
 
 //---------------------------------------------------------
@@ -155,9 +156,12 @@ QRectF TextLineSegment::bbox() const
 
 void TextLineSegment::layout(ScoreLayout* l)
       {
+      TextLine* tl = (TextLine*)line();
+      if (!tl->hasText())
+            return;
+      _userOff2.setY(0);
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
             if (_text == 0) {
-                  TextLine* tl = (TextLine*)line();
                   _text = new TextC(tl->textBasePtr(), score());
                   _text->setSubtype(TEXT_TEXTLINE);
                   _text->setMovable(false);
@@ -185,6 +189,8 @@ TextLine::TextLine(Score* s)
       _hookUp     = false;
       _hook       = true;
       _lineColor  = Qt::black;
+      _hasText    = true;
+      _mxmlOff2   = 0;
       textBase()->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
       }
 
@@ -198,6 +204,8 @@ TextLine::TextLine(const TextLine& e)
       _hookUp     = e._hookUp;
       _lineColor  = e._lineColor;
       _hook       = e._hook;
+      _hasText    = e._hasText;
+      _mxmlOff2   = e._mxmlOff2;
       }
 
 //---------------------------------------------------------
@@ -234,7 +242,8 @@ void TextLine::write(Xml& xml) const
       xml.tag("lineColor", _lineColor);
 
       SLine::writeProperties(xml);
-      _text->writeProperties(xml);
+      if (_hasText)
+            _text->writeProperties(xml);
       xml.etag();
       }
 
@@ -244,6 +253,8 @@ void TextLine::write(Xml& xml) const
 
 void TextLine::read(QDomElement e)
       {
+      _hook    = false;
+      _hasText = false;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             const QString& text = e.text();
@@ -262,7 +273,7 @@ void TextLine::read(QDomElement e)
             else if (tag == "lineColor")
                   _lineColor = readColor(e);
             else if (_text->readProperties(e))
-                  ;
+                  _hasText = true;
             else if (!SLine::readProperties(e))
                   domError(e);
             }
@@ -355,6 +366,7 @@ void LineProperties::accept()
       else
             tb->setFrameWidth(0.0);
       tl->setHtml(text->toHtml());
+      tl->setHasText(!text->document()->isEmpty());
 
       QDialog::accept();
       }

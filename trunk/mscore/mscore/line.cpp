@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "line.h"
+#include "textline.h"
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
@@ -170,7 +171,13 @@ QPointF LineSegment::pos2anchor(const QPointF& pos, int* tick) const
 
 void LineSegment::editDrag(int curGrip, const QPointF& d)
       {
-      QPointF delta(d.x() / _spatium, 0);    // only x-axis move
+      QPointF delta(d.x() / _spatium, 0);
+
+      if (line()->type() == TEXTLINE) {
+            TextLine* tl = static_cast<TextLine*>(line());
+            if (!tl->hasText())
+                  delta.setY(d.y() / _spatium);
+            }
 
       if (curGrip == 0) {
             _userOff  += delta;

@@ -65,6 +65,8 @@ class TextLine : public SLine {
       bool _hookUp;
       bool _hook;
       QColor _lineColor;
+      bool _hasText;
+      int _mxmlOff2;
 
    protected:
       TextBase* _text;
@@ -100,6 +102,10 @@ class TextLine : public SLine {
       void setLineColor(const QColor& c)   { _lineColor = c;          }
       bool hook() const                    { return _hook;            }
       void setHook(bool v)                 { _hook = v;               }
+      bool hasText() const                 { return _hasText;         }
+      void setHasText(bool v)              { _hasText = v;            }
+      int mxmlOff2() const                 { return _mxmlOff2;        }
+      void setMxmlOff2(int o)              { _mxmlOff2 = o;           }
       };
 
 //---------------------------------------------------------
