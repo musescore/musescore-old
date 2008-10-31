@@ -55,6 +55,7 @@ class Viewer {
       TextB* _editText;
 
       QMatrix _matrix, imatrix;
+      int _magIdx();
 
    public:
       Viewer();

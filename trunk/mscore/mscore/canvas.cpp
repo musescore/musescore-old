@@ -54,6 +54,7 @@
 #include "repeatflag.h"
 #include "barline.h"
 #include "system.h"
+#include "magbox.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -338,7 +339,12 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
 
 void Canvas::resizeEvent(QResizeEvent*)
       {
-      mscore->updateMag();
+      int idx = score()->magIdx();
+      if (idx == MAG_PAGE_WIDTH || idx == MAG_PAGE || idx == MAG_DBL_PAGE) {
+            double m = mscore->getMag(this);
+            setMag(m);
+            }
+
       if (navigator) {
             navigator->move(0, height() - navigator->height());
             updateNavigator(false);
@@ -2294,7 +2300,6 @@ void Canvas::paintLasso(QPainter& p, double mag)
 void Canvas::setMag(double nmag)
       {
       qreal m = mag();
-// printf("change mag %f -> %f\n", m, nmag);
 
       if (nmag == m)
             return;

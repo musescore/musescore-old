@@ -53,6 +53,7 @@
 #include "staff.h"
 #include "driver.h"
 #include "harmony.h"
+#include "magbox.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -72,8 +73,6 @@ QTextStream cout(stdout);
 QTextStream eout(stderr);
 
 QString mscoreGlobalShare;
-
-static unsigned int startMag = 3;   // 100%, synchronize with canvas default
 
 const char* eventRecordFile;
 
@@ -423,7 +422,7 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("mag"));
 
       mag = new MagBox;
-      connect(mag, SIGNAL(magChanged(double)), SLOT(magChanged(double)));
+      connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
       fileTools->addWidget(mag);
       addToolBarBreak();
 
@@ -781,237 +780,6 @@ void MuseScore::autoSaveTimerTimeout()
       }
 
 //---------------------------------------------------------
-//   magTable
-//    list of strings shown in QComboBox "MagBox"
-//---------------------------------------------------------
-
-enum { MAG_PAGE_WIDTH = 9,
-       MAG_PAGE = 10,
-       MAG_DBL_PAGE = 11
-      };
-
-static const char* magTable[] = {
-     "25%", "50%", "75%", "100%", "150%", "200%", "400%", "800%", "1600%",
-      QT_TRANSLATE_NOOP("magTable","PgeWidth"),
-      QT_TRANSLATE_NOOP("magTable","Page"),
-      QT_TRANSLATE_NOOP("magTable","DblPage"),
-     };
-
-//---------------------------------------------------------
-//   MagBox
-//---------------------------------------------------------
-
-MagBox::MagBox(QWidget* parent)
-   : QComboBox(parent)
-      {
-      setEditable(true);
-      setInsertPolicy(QComboBox::InsertAtBottom);
-      setToolTip(tr("Mag"));
-      setWhatsThis(tr("Zoom Canvas"));
-      setValidator(new MagValidator(this));
-
-      for (unsigned int i =  0; i < sizeof(magTable)/sizeof(*magTable); ++i) {
-            QString ts(QCoreApplication::translate("magTable", magTable[i]));
-            addItem(ts, i);
-            if (i == startMag)
-                  setCurrentIndex(i);
-            }
-      connect(this, SIGNAL(currentIndexChanged(int)), SLOT(indexChanged(int)));
-      }
-
-//---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void MagBox::setMag(double val)
-      {
-      for (int i = 0; i < count(); ++i) {
-            if (txt2mag(itemText(i)) == val) {
-                  setCurrentIndex(i);
-                  return;
-                  }
-            }
-      blockSignals(true);
-      setCurrentIndex(count()-1);
-      setItemText(count()-1, QString("%1%").arg(val * 100));
-      blockSignals(false);
-      }
-
-//---------------------------------------------------------
-//   indexChanged
-//---------------------------------------------------------
-
-void MagBox::indexChanged(int idx)
-      {
-      int mn = sizeof(magTable)/sizeof(*magTable);
-      double mag = txt2mag(itemText(idx));
-      if (idx > mn) {
-            setItemText(idx-1, QString("%1%").arg(mag*100.0));
-            blockSignals(true);
-            setCurrentIndex(idx-1);
-            removeItem(idx);
-            blockSignals(false);
-            --idx;
-            }
-      else if (idx == mn)
-            setItemText(idx, QString("%1%").arg(mag*100.0));
-      emit magChanged(mag);
-      }
-
-//---------------------------------------------------------
-//   txt2mag
-//---------------------------------------------------------
-
-double MagBox::txt2mag(const QString& s)
-      {
-      Canvas* canvas = mscore->currentScore()->canvas();
-      double cw      = canvas->fsize().width();
-      double ch      = canvas->fsize().height();
-
-      PageFormat* pf = mscore->currentScore()->pageFormat();
-      double nmag    = canvas->mag();
-      int mn         = sizeof(magTable)/sizeof(*magTable);
-      bool found     = false;
-      for (int i = 0; i < mn; ++i) {
-            QString ts(QCoreApplication::translate("magTable", magTable[i]));
-            if (ts != s)
-                  continue;
-            switch(i) {
-                  case MAG_PAGE_WIDTH:      // page width
-                        nmag *= cw / (pf->width() * DPI);
-                        canvas->setOffset(0.0, 0.0);
-                        found = true;
-                        break;
-                  case MAG_PAGE:     // page
-                        {
-                        double mag1 = cw  / (pf->width() * DPI);
-                        double mag2 = ch / (pf->height() * DPI);
-                        nmag  *= (mag1 > mag2) ? mag2 : mag1;
-                        canvas->setOffset(0.0, 0.0);
-                        found = true;
-                        }
-                        break;
-                  case MAG_DBL_PAGE:    // double page
-                        {
-                        double mag1 = cw / (pf->width()*2*DPI+50.0);
-                        double mag2 = ch / (pf->height() * DPI);
-                        nmag  *= (mag1 > mag2) ? mag2 : mag1;
-                        canvas->setOffset(0.0, 0.0);
-                        found = true;
-                        }
-                        break;
-                  }
-            if (found)
-                  break;
-            }
-
-      if (!found) {
-            QString d;
-            for (int i = 0; i < s.size(); ++i) {
-                  QChar c = s[i];
-                  if (c.isDigit() || c == '.')
-                        d.append(c);
-                  }
-            bool ok;
-            double nnmag = d.toDouble(&ok);
-            if (ok)
-                  nmag = nnmag / 100;
-            else
-                  printf("bad mag entry <%s>\n", s.toLatin1().data());
-            }
-      return nmag;
-      }
-
-//---------------------------------------------------------
-//   MagValidator
-//---------------------------------------------------------
-
-MagValidator::MagValidator(QObject* parent)
-   : QValidator(parent)
-      {
-      }
-
-//---------------------------------------------------------
-//   validate
-//---------------------------------------------------------
-
-QValidator::State MagValidator::validate(QString& input, int& /*pos*/) const
-      {
-      QComboBox* cb = (QComboBox*)parent();
-      int mn = sizeof(magTable)/sizeof(*magTable);
-      for (int i = 0; i < mn; ++i) {
-            if (input == cb->itemText(i))
-                  return QValidator::Acceptable;
-            }
-      QString d;
-      for (int i = 0; i < input.size(); ++i) {
-            QChar c = input[i];
-            if (c.isDigit() || c == '.')
-                  d.append(c);
-            else if (c != '%')
-                  return QValidator::Invalid;
-            }
-      if (d.isEmpty())
-            return QValidator::Intermediate;
-      bool ok;
-      double nmag = d.toDouble(&ok);
-      if (!ok)
-            return QValidator::Invalid;
-      if (nmag < 25.0 || nmag > 1600.0)
-            return QValidator::Intermediate;
-      return QValidator::Acceptable;
-      }
-
-//---------------------------------------------------------
-//   magChanged
-//---------------------------------------------------------
-
-void MuseScore::magChanged(double mag)
-      {
-      if (cs)
-            cs->canvas()->setMag(mag);
-      }
-
-//---------------------------------------------------------
-//   MuseScore
-//---------------------------------------------------------
-
-void MuseScore::setMag(double val)
-      {
-      if (cs)
-            cs->canvas()->setMag(val);
-      mag->setMag(val);
-      }
-
-//---------------------------------------------------------
-//   incMag
-//---------------------------------------------------------
-
-void MuseScore::incMag()
-      {
-      if (cs) {
-            qreal _mag = cs->canvas()->mag() * 1.7;
-            if (_mag > 16.0)
-                  _mag = 16.0;
-            setMag(_mag);
-            }
-      }
-
-//---------------------------------------------------------
-//   decMag
-//---------------------------------------------------------
-
-void MuseScore::decMag()
-      {
-      if (cs) {
-            qreal nmag = cs->canvas()->mag() / 1.7;
-            if (nmag < 0.05)
-                  nmag = 0.05;
-            setMag(nmag);
-            }
-      }
-
-//---------------------------------------------------------
 //   navigatorVisible
 //---------------------------------------------------------
 
@@ -1282,7 +1050,13 @@ void MuseScore::setCurrentScore(int idx)
       getAction("redo")->setEnabled(!cs->redoEmpty());
       getAction("file-save")->setEnabled(cs->isSavable());
       visibleId->setChecked(cs->showInvisible());
-      setMag(cs->canvas()->mag());
+      if (cs->magIdx() == MAG_FREE)
+            mag->setMag(cs->mag());
+      else
+            mag->setMagIdx(cs->magIdx());
+      double m = getMag(cs->canvas());
+      cs->canvas()->setMag(m);
+
       navigatorId->setChecked(cs->canvas()->navigatorVisible());
 
       setWindowTitle("MuseScore: " + cs->name());
@@ -2125,17 +1899,64 @@ void MuseScore::dirtyChanged(Score* score)
       }
 
 //---------------------------------------------------------
-//   updateMag
-//    This is called if geometry of canvas changes.
-//    Resize score if size is set to PageWidth etc.
+//   magChanged
 //---------------------------------------------------------
 
-void MuseScore::updateMag()
+void MuseScore::magChanged(int idx)
       {
-      if (!cs)
-            return;
-      int idx = mag->currentIndex();
-      if (idx == MAG_PAGE_WIDTH || idx == MAG_PAGE || idx == MAG_DBL_PAGE)
-            mscore->mag->indexChanged(mag->currentIndex());
+      if (cs) {
+            if (idx == MAG_FREE)
+                  cs->setMag(mag->getMag(cs->canvas()));
+            else
+                  cs->setMagIdx(idx);
+            }
+      }
+
+//---------------------------------------------------------
+//   incMag
+//---------------------------------------------------------
+
+void MuseScore::incMag()
+      {
+      if (cs) {
+            qreal _mag = cs->canvas()->mag() * 1.7;
+            if (_mag > 16.0)
+                  _mag = 16.0;
+            setMag(_mag);
+            }
+      }
+
+//---------------------------------------------------------
+//   decMag
+//---------------------------------------------------------
+
+void MuseScore::decMag()
+      {
+      if (cs) {
+            qreal nmag = cs->canvas()->mag() / 1.7;
+            if (nmag < 0.05)
+                  nmag = 0.05;
+            setMag(nmag);
+            }
+      }
+
+//---------------------------------------------------------
+//   getMag
+//---------------------------------------------------------
+
+double MuseScore::getMag(Canvas* canvas) const
+      {
+      return mag->getMag(canvas);
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void MuseScore::setMag(double d)
+      {
+      mag->setMag(d);
+      if (cs)
+            cs->canvas()->setMag(d);
       }
 

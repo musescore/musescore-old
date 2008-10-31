@@ -83,7 +83,8 @@ double KeySig::yoffset() const
             int clefOffset = clefTable[clef].yOffset;
             while (clefOffset >= 7)
                   clefOffset -= 7;
-            while (clefOffset < -3)
+//            while (clefOffset < -3)
+            while (clefOffset < -2)
                   clefOffset += 7;
 // printf("clefOffset %d -> %d\n", clefTable[clef].yOffset, clefOffset);
             return double(clefOffset / 2.0);

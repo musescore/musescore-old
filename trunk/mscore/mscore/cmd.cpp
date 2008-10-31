@@ -1320,10 +1320,10 @@ void Score::upDown(bool up, bool octave)
       layoutAll = false;
       layoutStart = 0;        // DEBUG
       ElementList el;
-      foreach(Element* e, *sel->elements()) {
-            if (e->type() != NOTE)
-                  continue;
-            Note* note = static_cast<Note*>(e);
+
+      QList<Note*> nl = sel->noteList();
+
+      foreach(Note* note, nl) {
             if (layoutStart == 0)
                   layoutStart = note->chord()->segment()->measure();
             else if (layoutStart != note->chord()->segment()->measure())

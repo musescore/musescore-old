@@ -84,7 +84,7 @@ enum {
       CLEF_F, CLEF_F8, CLEF_F15, CLEF_F_B, CLEF_F_C,
       CLEF_C1, CLEF_C2, CLEF_C3, CLEF_C4,
       CLEF_TAB, CLEF_PERC,
-      CLEF_C5
+      CLEF_C5, CLEF_G4, CLEF_MAX
       };
 
 

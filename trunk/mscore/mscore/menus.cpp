@@ -123,12 +123,12 @@ void MuseScore::showPalette(bool visible)
             //    clefs
             //-----------------------------------
 
-            Palette* sp = new Palette(4, 4, 0.8);
-            sp->setGrid(42, 60);
+            Palette* sp = new Palette(4, 5, 0.8);
+            sp->setGrid(33, 58);
             sp->showStaff(true);
             sp->setYOffset(6.0);
 
-            for (int i = 0; i < 16; ++i) {
+            for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
