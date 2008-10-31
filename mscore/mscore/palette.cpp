@@ -425,9 +425,9 @@ void Palette::paintEvent(QPaintEvent*)
                         el->setPos(0.0, 0.0);   // HACK
 
                         if (staff) {
-                              qreal y = r.y() + vgrid / 2 - dy;
-                              qreal x = r.x() + 7;
-                              qreal w = hgrid - 14;
+                              qreal y = r.y() + vgrid * .5 - dy + _yOffset;
+                              qreal x = r.x() + 3;
+                              qreal w = hgrid - 6;
                               for (int i = 0; i < 5; ++i) {
                                     qreal yy = y + PALETTE_SPATIUM * i * extraMag;
                                     p.drawLine(QLineF(x, yy, x + w, yy));

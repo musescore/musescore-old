@@ -62,6 +62,7 @@
 #include "mididriver.h"
 #include "excerpt.h"
 #include "stafftext.h"
+#include "magbox.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1841,4 +1842,17 @@ void Score::setState(int s)
       _state = s;
       }
 
+void Score::setMag(double d)
+      {
+      _magIdx = MAG_FREE;
+      canvas()->setMag(_mag);
+      }
+
+void Score::setMagIdx(int idx)
+      {
+      _magIdx = idx;
+      double mag = mscore->getMag(canvas());
+printf("set mag idx %d %f\n", idx, mag);
+      canvas()->setMag(mag);
+      }
 

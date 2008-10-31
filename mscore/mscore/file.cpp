@@ -68,6 +68,7 @@
 #include "keysig.h"
 #include "zip.h"
 #include "unzip.h"
+#include "magbox.h"
 
 //---------------------------------------------------------
 //   load
@@ -912,7 +913,10 @@ bool Score::saveFile(QIODevice* f, bool autosave)
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
 
-      xml.tag("Mag",  canvas()->mag());
+      if (_magIdx == MAG_FREE)
+            xml.tag("Mag", _mag);
+      else
+            xml.tag("MagIdx", _magIdx);
       xml.tag("xoff", canvas()->xoffset() / DPMM);
       xml.tag("yoff", canvas()->yoffset() / DPMM);
 
@@ -1075,8 +1079,12 @@ bool Score::read(QDomElement e)
                         sigmap->read(ee, division, _fileDivision);
                   else if (tag == "tempolist")
                         tempomap->read(ee, this);
-                  else if (tag == "Mag")
-                        canvas()->setMag(val.toDouble());
+                  else if (tag == "Mag") {
+                        _mag = val.toDouble();
+                        _magIdx = MAG_FREE;
+                        }
+                  else if (tag == "MagIdx")
+                        _magIdx = i;
                   else if (tag == "xoff") {
                         xoff = val.toDouble();
                         if (_mscVersion >= 105)

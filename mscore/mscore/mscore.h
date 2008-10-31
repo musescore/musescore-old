@@ -255,7 +255,7 @@ class MuseScore : public QMainWindow {
       void resetUserStretch();
       void showLayoutBreakPalette();
       void resetUserOffsets();
-      void magChanged(double);
+      void magChanged(int);
       void showPageSettings();
       void pageSettingsChanged();
       void showInvisibleClicked();
@@ -293,7 +293,6 @@ class MuseScore : public QMainWindow {
       static Shortcut scSeq[];
       void incMag();
       void decMag();
-      void setMag(double);
       void readSettings();
       void writeSettings();
       void play(Element* e) const;
@@ -302,39 +301,7 @@ class MuseScore : public QMainWindow {
       QString createDefaultName() const;
       void startAutoSave();
       void updateDrumset();
-      void updateMag();
-      };
-
-//---------------------------------------------------------
-//   MagValidator
-//---------------------------------------------------------
-
-class MagValidator : public QValidator {
-      Q_OBJECT
-
-      virtual State validate(QString&, int&) const;
-
-   public:
-      MagValidator(QObject* parent = 0);
-      };
-
-//---------------------------------------------------------
-//   MagBox
-//---------------------------------------------------------
-
-class MagBox : public QComboBox {
-      Q_OBJECT
-
-      double txt2mag(const QString&);
-
-   signals:
-      void magChanged(double);
-
-   public slots:
-      void indexChanged(int idx);
-
-   public:
-      MagBox(QWidget* parent = 0);
+      double getMag(Canvas*) const;
       void setMag(double);
       };
 

@@ -40,6 +40,7 @@ class System;
 class ChordRest;
 class Element;
 class Segment;
+class Note;
 
 //---------------------------------------------------------
 //   Selection
@@ -63,7 +64,7 @@ class Selection {
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF
 
-      int activeTrack;  
+      int activeTrack;
 
       QList<Element*>* elements()      { return &_el; }
       void add(Element*);
@@ -92,6 +93,7 @@ class Selection {
       bool isEndActive() const;
       int tickStart() const;
       int tickEnd() const;
+      QList<Note*> noteList() const;
       };
 
 #endif

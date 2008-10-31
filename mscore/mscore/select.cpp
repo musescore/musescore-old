@@ -782,3 +782,39 @@ QByteArray Selection::staffMimeData() const
       return buffer.buffer();
       }
 
+//---------------------------------------------------------
+//   noteList
+//---------------------------------------------------------
+
+QList<Note*> Selection::noteList() const
+      {
+      QList<Note*>nl;
+
+      if (_state == SEL_SINGLE || _state == SEL_MULT) {
+            foreach(Element* e, _el) {
+                  if (e->type() == NOTE)
+                        nl.append(static_cast<Note*>(e));
+                  }
+            }
+      else if (_state == SEL_STAFF || _state == SEL_SYSTEM) {
+            for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
+                  int startTrack = staffIdx * VOICES;
+                  int endTrack   = startTrack + VOICES;
+                  for (Segment* seg = _startSegment; seg && seg != _endSegment; seg = seg->next1()) {
+                        if (seg->subtype() != Segment::SegChordRest)
+                              continue;
+                        for (int track = startTrack; track < endTrack; ++track) {
+                              Element* e = seg->element(track);
+                              if (e == 0 || e->type() != CHORD)
+                                    continue;
+                              Chord* c = static_cast<Chord*>(e);
+                              NoteList* notes = c->noteList();
+                              for(iNote i = notes->begin(); i != notes->end(); ++i)
+                                    nl.append(i->second);
+                              }
+                        }
+                  }
+            }
+      return nl;
+      }
+

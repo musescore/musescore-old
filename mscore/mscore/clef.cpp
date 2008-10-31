@@ -38,27 +38,31 @@
 // checked
 
 const ClefInfo clefTable[] = {
-      ClefInfo("G",   2,  0,   0,  45, "Treble Clef (G Clef)"),
-      ClefInfo("G",   2,  1,   7,  52, "Treble Clef 8va"),
-      ClefInfo("G",   2,  2,  14,  59, "Treble Clef 15ma"),
-      ClefInfo("G",   2, -1,  -7,  38, "Treble Clef 8va bassa"),
-      ClefInfo("F",   4,  0, -12,  33, "Bass Clef (F Clef)"),
+//               MusicXml
+//             name line octave  yoffset pitchoffset  name
+      ClefInfo("G",   2,  0,          0,  45,        "Treble Clef (G Clef)"),
+      ClefInfo("G",   2,  1,          7,  52,        "Treble Clef 8va"),
+      ClefInfo("G",   2,  2,         14,  59,        "Treble Clef 15ma"),
+      ClefInfo("G",   2, -1,         -7,  38,        "Treble Clef 8va bassa"),
 
-      ClefInfo("F",   4, -1, -19,  26, "Bass Clef 8va bassa"),
-      ClefInfo("F",   4, -2, -26,  19, "Bass Clef 15mb bassa"),
+      ClefInfo("F",   4,  0,        -12,  33,        "Bass Clef (F Clef)"),
+      ClefInfo("F",   4, -1,        -19,  26,        "Bass Clef 8va bassa"),
+      ClefInfo("F",   4, -2,        -26,  19,        "Bass Clef 15mb bassa"),
+      ClefInfo("F",   4,  0,        -10,  35,        "Baritone Clef"),
+      ClefInfo("F",   2,  0,        -14,  31,        "Subbass Clef"),
 
-/*NC*/      ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
-/*NC*/      ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
+      ClefInfo("C",   1,  0,         -2,  35,        "Soprano Clef"),        // CLEF_C1
+      ClefInfo("C",   2,  0,         -4,  37,        "Mezzo-soprano Clef"),  // CLEF_C2
+      ClefInfo("C",   3,  0,         -6,  39,        "Alto Clef"),           // CLEF_C3
+      ClefInfo("C",   4,  0,         -8,  41,        "Tenor Clef"),          // CLEF_C4
 
-/*NC*/      ClefInfo("C",   1,  0, -9,   35, "Soprano Clef"),        // CLEF_C1
-/*NC*/      ClefInfo("C",   2,  0,  -8,  37, "Mezzo-soprano Clef"),  // CLEF_C2
-            ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
-/*NC*/      ClefInfo("C",   4,  0,  -8,  41, "Tenor Clef"),          // CLEF_C4
+      ClefInfo("TAB", 5,  0,          0,   0,        "Tablature"),
+      ClefInfo("PERC",2, 0,           0,  45,        "Percussion"),
 
-/*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature"),
-      ClefInfo("PERC", 2,   0,  0,  45, "Percussion"),
+//      ClefInfo("C",   3,  0,         -7,  38,        "C Clef on third space"),    // CLEF_C5
 
-      ClefInfo("C",   3,  0,  -7,   38, "C Clef on third space"),           // CLEF_C5
+      ClefInfo("C",   4,  0,         -10,  43,       "Baritone Clef"),            // CLEF_C5
+      ClefInfo("G",   2,  0,          2,   43,       "French Violin Clef"),       // CLEF_G4
       };
 
 //---------------------------------------------------------
@@ -164,10 +168,13 @@ void Clef::layout(ScoreLayout*)
                   addElement(number, .8 * _spatium, 4.5 * _spatium);
                   }
                   break;
-            case CLEF_F_B:
-            case CLEF_F_C:
+            case CLEF_F_B:                            // baritone clef
                   symbol->setSym(bassclefSym);
-                  yoff = 1.0;
+                  yoff = 2.0;
+                  break;
+            case CLEF_F_C:                            // subbass clef
+                  symbol->setSym(bassclefSym);
+                  yoff = 0.0;
                   break;
             case CLEF_C1:
                   symbol->setSym(altoclefSym);
@@ -187,7 +194,7 @@ void Clef::layout(ScoreLayout*)
                   break;
             case CLEF_C5:
                   symbol->setSym(altoclefSym);
-                  yoff = 2.5;
+                  yoff = 0.0;
                   break;
             case CLEF_TAB:
                   symbol->setSym(tabclefSym);
@@ -196,6 +203,10 @@ void Clef::layout(ScoreLayout*)
             case CLEF_PERC:
                   symbol->setSym(percussionclefSym);
                   yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
+                  break;
+            case CLEF_G4:
+                  symbol->setSym(trebleclefSym);
+                  yoff = 4.0;
                   break;
             }
       addElement(symbol, .0, .0);
