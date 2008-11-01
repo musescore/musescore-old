@@ -833,7 +833,6 @@ void Score::deleteItem(Element* el)
             case VOLTA:
             case LAYOUT_BREAK:
             case CLEF:
-            case KEYSIG:
             case IMAGE:
             case TIE:
             case TEMPO_TEXT:
@@ -846,6 +845,7 @@ void Score::deleteItem(Element* el)
             case GLISSANDO:
             case STAFF_TEXT:
             case SPACER:
+            case KEYSIG:
                   cmdRemove(el);
                   break;
 

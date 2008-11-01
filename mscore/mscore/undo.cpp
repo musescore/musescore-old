@@ -389,19 +389,19 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   KeyList* kl = i->staff->keymap();
                   if (undo) {
                         // remove new value if there is any
-                        if (i->val3 != -1000) {
+                        if (i->val3 != NO_KEY) {
                               iKeyEvent ik = kl->find(i->val1);
                               kl->erase(ik);
                               }
-                        if (i->val2 != -1000)
+                        if (i->val2 != NO_KEY)
                               (*kl)[i->val1] = i->val2;
                         }
                   else {
-                        if (i->val2 != -1000) {
+                        if (i->val2 != NO_KEY) {
                               iKeyEvent ik = kl->find(i->val1);
                               kl->erase(ik);
                               }
-                        if (i->val3 != -1000)
+                        if (i->val3 != NO_KEY)
                               (*kl)[i->val1] = i->val3;
                         }
                   }

@@ -30,7 +30,7 @@
 int KeyList::key(int tick) const
       {
       if (empty())
-            return NO_KEY;
+            return 0;
       ciKeyEvent i = upper_bound(tick);
       if (i == begin())
             return 0;
