@@ -236,11 +236,10 @@ QLineF Dynamic::dragAnchor() const
 void Dynamic::layout(ScoreLayout* l)
       {
       Text::layout(l);
-      if (tick() != -1) {
+      if (tick() != -1 && parent()) {
             double y = 0.0;
             double x = measure()->tick2pos(tick());
             setPos(ipos() + QPointF(x, y));
-            // setPos(x, y);
             }
       }
 
