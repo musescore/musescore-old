@@ -1,4 +1,6 @@
 1.11 (ws)
+      - articulations can now be moved up/down if (single) selected
+      - adding a new articulations with double click on palette are now selected
       - fix dynamics palette
       - fix wrong flag position after un-beaming
       - forgot to save dots along with duration type (note head type)

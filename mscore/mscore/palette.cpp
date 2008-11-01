@@ -188,7 +188,9 @@ static void applyDrop(Score* score, Viewer* viewer, Element* target, Element* e)
       QPointF pt;
       if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
             Element* ne = e->clone();
-            target->drop(pt, pt, ne);
+            ne = target->drop(pt, pt, ne);
+            if (ne)
+                  score->select(ne, SELECT_SINGLE, 0);
             score->canvas()->setDropTarget(0);     // acceptDrop sets dropTarget
             }
       }

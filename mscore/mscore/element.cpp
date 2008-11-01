@@ -183,7 +183,7 @@ Element::Element(Score* s)
 
 Element::Element(const Element& e)
       {
-      _parent     = 0;
+      _parent     = e._parent;
       _selected   = e._selected;
       _selectable = e._selectable;
       _dropTarget = e._dropTarget;
