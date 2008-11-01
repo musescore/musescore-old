@@ -161,8 +161,11 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
       if (_small)
             pl.append(Prop("small", _small));
       if (!clipboardmode) {
-            if (tickLen() != duration().ticks(_dots))
+            if (tickLen() != duration().ticks(_dots)) {
+                  if (_dots)
+                        pl.append(Prop("dots", _dots));
                   pl.append(Prop("durationType", duration().name()));
+                  }
             }
       return pl;
       }
@@ -281,6 +284,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             d.setVal(val);
             setDuration(d);
             }
+      else if (tag == "dots")
+            _dots = i;
       else
             return false;
       return true;

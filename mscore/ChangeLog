@@ -1,4 +1,5 @@
 1.11 (ws)
+      - forgot to save dots along with duration type (note head type)
       - fix delete of first key signature
 31.10 (ws)
       - save/restore special mag values (PageWidth, DblPage...)
