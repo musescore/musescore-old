@@ -287,6 +287,8 @@ void Segment::add(Element* el)
 
 void Segment::remove(Element* el)
       {
+// printf("Segment::remove %s\n", el->name());
+
       int track = el->track();
 
       switch(el->type()) {

@@ -229,6 +229,8 @@ Score::Score()
       {
       info.setFile("");
 
+      _magIdx = MAG_100;
+      _mag    = 1.0;
       _style  = new Style(defaultStyle);
       _layout = new ScoreLayout(this);
 
@@ -1852,7 +1854,6 @@ void Score::setMagIdx(int idx)
       {
       _magIdx = idx;
       double mag = mscore->getMag(canvas());
-printf("set mag idx %d %f\n", idx, mag);
       canvas()->setMag(mag);
       }
 

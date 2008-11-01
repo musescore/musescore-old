@@ -84,7 +84,7 @@ double KeySig::yoffset() const
             while (clefOffset >= 7)
                   clefOffset -= 7;
 //            while (clefOffset < -3)
-            while (clefOffset < -2)
+            while (clefOffset < 0)
                   clefOffset += 7;
 // printf("clefOffset %d -> %d\n", clefTable[clef].yOffset, clefOffset);
             return double(clefOffset / 2.0);
@@ -141,7 +141,7 @@ void KeySig::layout(ScoreLayout*)
             case 0:
                   break;
             default:
-                  printf("illegal t2 key %d (t1=%d)\n", t2, t1);
+                  printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
                   break;
             }
 
@@ -164,7 +164,7 @@ void KeySig::layout(ScoreLayout*)
             case 0:
                   break;
             default:
-                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
+                  printf("illegal t1 key %d (t2=%d) subtype 0x%04x\n", t1, t2, subtype());
                   break;
             }
       }

@@ -354,7 +354,7 @@ void Score::cmdRemove(Element* e)
                   iKeyEvent nki = ki;
                   ++nki;
                   kl->erase(ki);
-                  undoOp(UndoOp::ChangeKeySig, staff, tick, oval, -1000);
+                  undoOp(UndoOp::ChangeKeySig, staff, tick, oval, NO_KEY);
 
                   undoRemoveElement(ks);
 
@@ -365,7 +365,7 @@ void Score::cmdRemove(Element* e)
                   if (nki->second != oval)
                         break;
 
-                  undoOp(UndoOp::ChangeKeySig, staff, nki->first, oval, -1000);
+                  undoOp(UndoOp::ChangeKeySig, staff, nki->first, oval, NO_KEY);
 
                   tick = nki->first;
                   for (MeasureBase* mb = measure; mb; mb = mb->next()) {

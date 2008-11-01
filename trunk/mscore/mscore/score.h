@@ -147,8 +147,8 @@ class Score : public QObject {
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
 
-      double _mag;
       int _magIdx;
+      double _mag;
 
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
@@ -651,10 +651,10 @@ class Score : public QObject {
 
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);
 
-      double mag() const      { return _mag;    }
       int magIdx() const      { return _magIdx; }
-      void setMag(double d);
       void setMagIdx(int val);
+      double mag()            { return _mag; }
+      void setMag(double d);
       };
 
 extern Score* gscore;
