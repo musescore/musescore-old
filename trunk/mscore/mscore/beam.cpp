@@ -386,6 +386,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               a1->layoutStem1(layout);
                               a1 = 0;
                               }
+                        cr->setBeam(0);
                         cr->layoutStem1(layout);
                         continue;
                         }
@@ -442,6 +443,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               a1 = cr;
                         else {
                               if (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype())) {
+                                    a1->setBeam(0);
                                     a1->layoutStem1(layout);      //?
                                     a1 = cr;
                                     }
