@@ -96,7 +96,7 @@ static const char* undoName[] = {
       "ExchangeVoice",
       "ChangeConcertPitch",
       "ChangeInstrumentShort", "ChangeInstrumentLong",
-      "ChangeChordRestLen"
+      "ChangeChordRestLen", "MoveElement"
       };
 
 static bool UNDO = false;
@@ -661,6 +661,13 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = oldLen;
                   }
                   break;
+            case UndoOp::MoveElement:
+                  {
+                  QPointF po = i->element1->userOff();
+                  i->element1->setUserOff(i->pt);
+                  i->pt = po;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -1062,6 +1069,21 @@ void Score::undoInsertStaff(Staff* staff, int idx)
       i.type = UndoOp::InsertStaff;
       i.staff = staff;
       i.val1  = idx;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoMove
+//---------------------------------------------------------
+
+void Score::undoMove(Element* e, const QPointF& pt)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::MoveElement;
+      i.element1 = e;
+      i.pt       = pt;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

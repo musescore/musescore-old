@@ -1775,6 +1775,15 @@ void Score::cmdResetBeamMode()
       }
 
 //---------------------------------------------------------
+//   cmdMove
+//---------------------------------------------------------
+
+void Score::cmdMove(Element* e, QPointF delta)
+      {
+      undoMove(e, e->userOff() + delta);
+      }
+
+//---------------------------------------------------------
 //   cmd
 //---------------------------------------------------------
 
@@ -1849,7 +1858,17 @@ void Score::cmd(const QString& cmd)
                   return;
                   }
             startCmd();
-            if (cmd == "append-measure")
+
+            //
+            // Hack for moving articulations while selected
+            //
+            Element* el = sel->element();
+            if (el && el->type() == ATTRIBUTE && cmd == "pitch-up")
+                  cmdMove(el, QPointF(0.0, -.25));
+            else if (el && el->type() == ATTRIBUTE && cmd == "pitch-down")
+                  cmdMove(el, QPointF(0.0, .25));
+
+            else if (cmd == "append-measure")
                   appendMeasures(1, MEASURE);
             else if (cmd == "insert-measure")
 		      insertMeasures(1, MEASURE);

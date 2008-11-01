@@ -275,6 +275,7 @@ class Score : public QObject {
 
       void updateSelectedElements(SelState);
       void removeChordRest(ChordRest* cr, bool clearSegment);
+      void cmdMove(Element* e, QPointF delta);
 
    public slots:
       void doUndo();
@@ -411,6 +412,7 @@ class Score : public QObject {
       void undoInsertPart(Part* part, int idx);
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
+      void undoMove(Element* e, const QPointF& pt);
 
       void setNote(int tick, int track, int pitch, int len, int headGroup = 0,
          Direction stemDirection = AUTO);

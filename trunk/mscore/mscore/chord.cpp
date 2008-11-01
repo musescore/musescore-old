@@ -395,12 +395,8 @@ void Chord::remove(Element* e)
                   printf("Chord::remove() note %p not found!\n", e);
             }
       else if (e->type() == ATTRIBUTE) {
-            int idx = articulations.indexOf((Articulation*)e);
-            if (idx == -1)
+            if (!articulations.removeOne(static_cast<Articulation*>(e)))
                   printf("Chord::remove(): attribute not found\n");
-            else {
-                  articulations.removeAt(idx);
-                  }
             }
       else if (e->type() == ARPEGGIO)
             _arpeggio = 0;

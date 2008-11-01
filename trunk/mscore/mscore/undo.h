@@ -90,7 +90,8 @@ struct UndoOp {
             ExchangeVoice,
             ChangeConcertPitch,
             ChangeInstrumentShort, ChangeInstrumentLong,
-            ChangeChordRestLen
+            ChangeChordRestLen,
+            MoveElement
             };
       UndoType type;
       Element* element1;
@@ -108,6 +109,7 @@ struct UndoOp {
       SigEvent sig1, sig2;
       TEvent t1, t2;
       QString s;
+      QPointF pt;
 
       const char* name() const;
       };

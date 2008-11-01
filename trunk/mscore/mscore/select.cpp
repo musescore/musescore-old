@@ -105,14 +105,15 @@ Element* Selection::element() const
 //---------------------------------------------------------
 //   activeCR
 //---------------------------------------------------------
+
 ChordRest* Selection::activeCR() const
       {
-            if (!_activeSegment)
-                  return 0;
-            if (_activeSegment == _startSegment)
-                  return firstChordRest(activeTrack);
-            else
-                  return lastChordRest(activeTrack);
+      if (!_activeSegment)
+            return 0;
+      if (_activeSegment == _startSegment)
+            return firstChordRest(activeTrack);
+      else
+            return lastChordRest(activeTrack);
       }
 
 //---------------------------------------------------------
