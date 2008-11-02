@@ -247,7 +247,7 @@ void InstrumentsDialog::on_partiturList_itemSelectionChanged()
 //   on_instrumentList
 //---------------------------------------------------------
 
-void InstrumentsDialog::on_instrumentList_itemActivated(QTreeWidgetItem*, int)
+void InstrumentsDialog::on_instrumentList_itemDoubleClicked(QTreeWidgetItem*, int)
       {
       on_addButton_clicked();
       }

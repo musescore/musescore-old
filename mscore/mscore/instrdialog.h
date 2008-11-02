@@ -44,7 +44,7 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
 
    private slots:
       void on_instrumentList_itemSelectionChanged();
-      void on_instrumentList_itemActivated(QTreeWidgetItem* item, int);
+      void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
       void on_partiturList_itemSelectionChanged();
       void on_addButton_clicked();
       void on_removeButton_clicked();

@@ -20,11 +20,11 @@
 //
 // Lilypond export.
 // For HISTORY, NEWS and TODOS: see end of file
-// 
+//
 
 // Works reasonably well on the following files in "demos":
 // adeste.msc, Estudio-No1-Tarrega.msc, inv1.msc, inv4.msc, inv6.msc.
-// Problems in Tarrega: staff1, voice2, last bar before repeatsign 
+// Problems in Tarrega: staff1, voice2, last bar before repeatsign
 // seems to contain 5/4?!
 
 //
@@ -359,7 +359,7 @@ void ExportLy::writeClef(int clef)
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
   sig->getSig(&n, &z1, &z2, &z3, &z4);
- 
+
   timebelow=n;
   os << "\\time " << z1 << "/" << n << " ";
 }
@@ -747,7 +747,7 @@ void ExportLy::writeChord(Chord* c)
 	      }
 	  oktreit=oktreit-12;
 	}
-      
+
       prevpitch=purepitch;
 
       if (i == nl->begin()) chordpitch=prevpitch;
@@ -763,7 +763,7 @@ void ExportLy::writeChord(Chord* c)
     os << ">"; //endofchord sign
   prevpitch=chordpitch;
   writeLen(c->tickLen());
-  if (tie) 
+  if (tie)
     {
       os << "~";
       tie=false;
@@ -772,7 +772,7 @@ void ExportLy::writeChord(Chord* c)
   if (tupletcount==1) {os << " } "; tupletcount=0; }
   if (graceslur==true)
     {
-      os << " ) "; 
+      os << " ) ";
       graceslur=false;
     }
 
@@ -1105,7 +1105,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	    int nombarlen=z1*division;
 	    if (n==8) nombarlen=nombarlen/2;
 	    if ((barlen<nombarlen) and (measurenumber==1))
-	      { 
+	      {
 		pickup=true;
 		int punkt=0;
 		int partial=getLen(barlen, &punkt);
@@ -1114,13 +1114,13 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 		  {
 		  case 0: os << "\\partial " << partial << "\n";
 		    break;
-		  case 1: 
+		  case 1:
 		    {
 		      partial=(partial*2);
 		      os << "\\partial " << partial << "*3 \n";
 		    }
 		    break;
-		  case 2: 
+		  case 2:
 		    {
 		      partial=partial*4;
 		      os << "\\partial " << partial << "*7 \n";
@@ -1137,12 +1137,12 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	  {
 	    //	    if (voice) //only write rests as part of chord for second etc. voice.
 	    //  {
-	
+
 		int ntick = e->tick() - tick;
 		if (ntick > 0)
 		  {
 		    printf("write silent rest, barno %d\n", measurenumber);
-		  writeRest(tick, ntick, 2);  
+		  writeRest(tick, ntick, 2);
 		  curTicks=-1;
 		  }
 		tick += ntick;
@@ -1181,7 +1181,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
       printf("ticks: %d, mticks: %d, barlen: %d barno: %d\n", tick, measuretick, barlen, measurenumber);
     } //end for all segments
 
- 
+
   if (voiceActive[voice] == false)  //fill empty  bar with silent rest
     {
       if ((pickup) and (measurenumber==1))
@@ -1193,13 +1193,13 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	    {
 	    case 0: os << "s" << partial << " ";
 	      break;
-	    case 1: 
+	    case 1:
 	      {
 		partial=(partial*2);
 		os << "s" << partial << "*3 ";
 	      }
 	      break;
-	    case 2: 
+	    case 2:
 	      {
 		partial=partial*4;
 		os << "s" << partial << "*7 ";
@@ -1207,7 +1207,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
 	      }
 	    } //end switch (punkt)
 	}//end if pickup
-      else 
+      else
 	{
 	  os << "s1";
 	  curTicks=-1;
@@ -1217,9 +1217,9 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffIdx, int voi
       {
 	printf("underskudd i activvoice measure %d\n", measurenumber);
 	int negative=barlen-measuretick;
-	writeRest(tick, negative, 2);  
+	writeRest(tick, negative, 2);
 	curTicks=-1;
-      }    
+      }
 
   writeVolta(measurenumber, lastind);
   os << " | % " << m->no()+1 << "\n" ; //barcheck and barnumber
@@ -1264,7 +1264,7 @@ void ExportLy::writeScore()
 
       foreach(Staff* staff, *part->staves())
 	{
-	  
+
 	  os << "\n";
 
 	  switch(staff->clef(0))
@@ -1316,7 +1316,7 @@ void ExportLy::writeScore()
 	  staffid[staffIdx].remove(QChar(' '));
 
 	  findVolta();
-	  
+
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
 
 	  for (voice = 0; voice < VOICES; ++voice)
@@ -1324,7 +1324,7 @@ void ExportLy::writeScore()
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
 	      for (MeasureBase* m = score->layout()->first(); m; m = m->next())
-		{	      
+		{
 		  if (m->type() != MEASURE)
 		    continue;
 		  writeVoiceMeasure((Measure*)m, staff, staffIdx, voice);
@@ -1391,7 +1391,7 @@ void ExportLy::writeScoreBlock()
       indent();
       os << "\\context PianoStaff <<\n";
       indent();
-      os << "\\set PianoStaff.instrumentName=\"Piano\" \n"; 
+      os << "\\set PianoStaff.instrumentName=\"Piano\" \n";
     }
 
   indx=0;
@@ -1404,12 +1404,12 @@ void ExportLy::writeScoreBlock()
       ++level;
       indent();
       os << "\\context Voice = O" << staffid[indx] << "G \\" << staffid[indx] << "\n";
-      if (pianostaff) 
+      if (pianostaff)
 	{
 	  indent();
 	  os << "\\set Staff.instrumentName = #\"\"\n";
 	  indent();
-	  os << "\\set Staff.shortInstrumentName = #\"\"\n";   
+	  os << "\\set Staff.shortInstrumentName = #\"\"\n";
 	}
       --level;
       indent();
@@ -1534,6 +1534,7 @@ bool ExportLy::write(const QString& name)
    --pickupbar (But not irregular bars in general.)
    --ties
    --management of incomplete bars in voices 2-4.
+*/
 
 /* NEW 26. oct. 2008
   - voice separation and recombination in score-block for easier editing of Lilypondfile.
@@ -1580,13 +1581,13 @@ bool ExportLy::write(const QString& name)
   - Piano-staff only works for piano alone, and messes things up if
   piano is part of a larger score. Solution: Awaiting implementaton of braces
   and brackets.
-  
+
   - in voices other than first, there are empty spaces which in
     Lilypond should be written as silent rests. But mscore does not
     have any segments or elements there, which causes difficulties. I
     will have to construct Lilypond elements from empty ticks...
 
-  
+
   - \stemUp \stemDown : sometimes correct sometimes not??? Maybe I
   have not understood Lily's rules for the use of these commands?
   Lily's own stem direction algorithms are good enough. Until a better
