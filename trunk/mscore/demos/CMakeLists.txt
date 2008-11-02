@@ -33,6 +33,7 @@ install(FILES
       scales.msc
       sonata16.msc
       italian-1.msc
+      golliwogg.msc
       Estudio-No1-Tarrega.msc
       PlanxtyCarolan.msc
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos

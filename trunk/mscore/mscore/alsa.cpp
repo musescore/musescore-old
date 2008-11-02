@@ -60,7 +60,7 @@ AlsaDriver::AlsaDriver(QString s, unsigned rate,
 
 bool AlsaDriver::init()
       {
-      if (snd_pcm_open (&_play_handle, _name.toLatin1().data(), SND_PCM_STREAM_PLAYBACK, 0) < 0) {
+      if (snd_pcm_open(&_play_handle, _name.toLatin1().data(), SND_PCM_STREAM_PLAYBACK, 0) < 0) {
             _play_handle = 0;
             fprintf (stderr, "Alsa_driver: Cannot open PCM device %s for playback.\n",
                _name.toLatin1().data());
