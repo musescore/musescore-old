@@ -2173,7 +2173,7 @@ Element* Canvas::elementNear(const QPointF& p)
             return 0;
       qSort(ll.begin(), ll.end(), elementLower);
 
-#if 0
+#if 1
       printf("elementNear ========= %f %f\n", _spatium, w);
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
