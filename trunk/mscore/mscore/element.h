@@ -477,6 +477,9 @@ class Line : public Element {
 class Compound : public Element {
       QList<Element*> elemente;
 
+   protected:
+      const QList<Element*>& getElemente() const { return elemente; }
+
    public:
       Compound(Score*);
       virtual ElementType type() const = 0;
@@ -487,7 +490,6 @@ class Compound : public Element {
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
       virtual QRectF bbox() const;
-      virtual void setMag(double val);
       };
 
 //---------------------------------------------------------
