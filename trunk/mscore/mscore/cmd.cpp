@@ -2401,6 +2401,8 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
 
             for (int i = 0; i < staves; ++i) {
                   int staffIdx = i + dstStaffStart;
+                  if (staffIdx >= nstaves())
+                        break;
                   int gap = makeGap1(dstTick, staffIdx, tickLen);
                   if (gap != tickLen)
                         printf("cannot make gap %d (got %d) staff %d\n", tickLen, gap, staffIdx);
@@ -2413,6 +2415,9 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
+printf("srcStaffIDx %d  dstStaffIdx %d  staves %d\n", srcStaffIdx, dstStaffIdx, nstaves());
+                  if (dstStaffIdx >= nstaves())
+                        break;
                   QList<Tuplet*> tuplets;
                   QList<Beam*> beams;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
