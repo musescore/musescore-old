@@ -515,7 +515,7 @@ void initSymbols()
 
       symbols[wholediamondheadSym]        = Sym("whole diamond head",       0xe12e, 0);
       symbols[halfdiamondheadSym]         = Sym("half diamond head",        0xe12f, 0);
-      symbols[diamondheadSym]             = Sym("diamond head",             0xe120, 0);
+      symbols[diamondheadSym]             = Sym("diamond head",             0xe130, 0);
 
       symbols[wholetriangleheadSym]       = Sym("whole triangle head",      0xe131, 0);
       symbols[halftriangleheadSym]        = Sym("half triangle head",       0xe132, 0);
