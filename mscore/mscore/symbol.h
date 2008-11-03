@@ -41,8 +41,8 @@ class Symbol : public BSymbol {
       virtual ElementType type() const  { return SYMBOL; }
       virtual QLineF dragAnchor() const;
 
-      void setSym(int);
-      int sym() const { return _sym;  }
+      void setSym(int s) { _sym  = s;    }
+      int sym() const    { return _sym;  }
 
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;

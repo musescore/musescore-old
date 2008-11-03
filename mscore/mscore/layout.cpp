@@ -320,13 +320,14 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                         continue;
                   switch (el->type()) {
                         case KEYSIG:
-                              hasKeysig = (KeySig*)el;
+                              hasKeysig = static_cast<KeySig*>(el);
                               hasKeysig->setSubtype(keyIdx);
                               hasKeysig->setMag(staff->mag());
                               break;
                         case CLEF:
-                              hasClef = (Clef*)el;
+                              hasClef = static_cast<Clef*>(el);
                               hasClef->setMag(staff->mag());
+                              hasClef->setSmall(false);
                               break;
                         default:
                               break;
@@ -364,6 +365,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                         hasClef->setTrack(i * VOICES);
                         hasClef->setTick(tick);
                         hasClef->setGenerated(true);
+                        hasClef->setSmall(false);
                         hasClef->setMag(staff->mag());
                         Segment* s = m->getSegment(hasClef);
                         s->add(hasClef);
@@ -596,8 +598,14 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
                                           seg->setElement(track, 0);
                                     }
-                              if ((el->type() == CLEF) && (!isFirstMeasure || (seg != m->first()))) {
-                                    el->setMag(el->staff()->mag() * score()->style()->smallClefMag);
+                              if (el->type() == CLEF) {
+                                    Clef* clef = static_cast<Clef*>(el);
+                                    if (!isFirstMeasure || (seg != m->first()))
+                                          clef->setSmall(true);
+                                    else
+                                          clef->setSmall(false);
+                                    double staffMag = score()->staff(staffIdx)->mag();
+                                    clef->setMag(staffMag);
                                     }
                               }
                         }

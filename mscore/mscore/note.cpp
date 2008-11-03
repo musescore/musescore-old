@@ -403,7 +403,6 @@ void Note::setAccidentalSubtype(int pre)
                   add(_accidental);
                   }
             _accidental->setSubtype(pre);
-            _accidental->setMag(mag());
             }
       else if (_accidental) {
             delete _accidental;

@@ -838,7 +838,6 @@ void Compound::addElement(Element* e, double x, double y)
       {
       e->setPos(x, y);
       e->setParent(this);
-      e->setMag(mag());
       elemente.push_back(e);
       }
 
@@ -887,17 +886,6 @@ void Compound::clear()
       for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             delete *i;
       elemente.clear();
-      }
-
-//---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void Compound::setMag(double val)
-      {
-      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
-            (*i)->setMag(val);
-      Element::setMag(val);
       }
 
 //---------------------------------------------------------

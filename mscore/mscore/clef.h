@@ -43,9 +43,11 @@ static const int NO_CLEF = -1000;
 */
 
 class Clef : public Compound {
+      bool _small;
 
    public:
       Clef(Score*);
+      Clef(const Clef&);
       Clef(Score*, int i);
       virtual Clef* clone() const      { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
@@ -56,6 +58,9 @@ class Clef : public Compound {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout(ScoreLayout*);
       virtual void space(double& min, double& extra) const;
+
+      bool small() const                        { return _small; }
+      void setSmall(bool val);
       };
 
 //---------------------------------------------------------

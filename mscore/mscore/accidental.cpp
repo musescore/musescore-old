@@ -141,3 +141,14 @@ int Accidental::value2subtype(int v)
       return 0;
       }
 
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Accidental::setMag(double v)
+      {
+      Element::setMag(v);
+      foreach(Element* e, getElemente())
+            e->setMag(v);
+      }
+

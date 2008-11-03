@@ -1,3 +1,5 @@
+3.11 (ws)
+      - fix vertical position of small clefs
 1.11 (ws)
       - articulations can now be moved up/down if (single) selected
       - adding a new articulations with double click on palette are now selected

@@ -423,7 +423,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   else if (sel->state() == SEL_SINGLE) {
                         Element* oe = sel->element();
-                        if (oe->type() == NOTE || e->type() == REST || e->type() == CHORD) {
+                        if (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD) {
                               if (oe->type() == NOTE)
                                     oe = oe->parent();
                               ChordRest* ocr = static_cast<ChordRest*>(oe);
