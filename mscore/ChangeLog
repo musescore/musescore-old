@@ -1,4 +1,6 @@
 3.11 (ws)
+      - more clef fixes
+      - new test file "clefs.msc"
       - fix vertical position of small clefs
 1.11 (ws)
       - articulations can now be moved up/down if (single) selected

@@ -52,18 +52,18 @@ const ClefInfo clefTable[] = {
       ClefInfo("F",   4,  0,        -10,  35,        "Baritone Clef"),
       ClefInfo("F",   2,  0,        -14,  31,        "Subbass Clef"),
 
-      ClefInfo("C",   1,  0,         -2,  35,        "Soprano Clef"),        // CLEF_C1
-      ClefInfo("C",   2,  0,         -4,  37,        "Mezzo-soprano Clef"),  // CLEF_C2
+      ClefInfo("C",   1,  0,         -2,  43,        "Soprano Clef"),        // CLEF_C1
+      ClefInfo("C",   2,  0,         -4,  41,        "Mezzo-soprano Clef"),  // CLEF_C2
       ClefInfo("C",   3,  0,         -6,  39,        "Alto Clef"),           // CLEF_C3
-      ClefInfo("C",   4,  0,         -8,  41,        "Tenor Clef"),          // CLEF_C4
+      ClefInfo("C",   4,  0,         -8,  37,        "Tenor Clef"),          // CLEF_C4
 
       ClefInfo("TAB", 5,  0,          0,   0,        "Tablature"),
       ClefInfo("PERC",2, 0,           0,  45,        "Percussion"),
 
 //      ClefInfo("C",   3,  0,         -7,  38,        "C Clef on third space"),    // CLEF_C5
 
-      ClefInfo("C",   4,  0,         -10,  43,       "Baritone Clef"),            // CLEF_C5
-      ClefInfo("G",   2,  0,          2,   43,       "French Violin Clef"),       // CLEF_G4
+      ClefInfo("C",   5,  0,         -10,  35,       "Baritone Clef"),            // CLEF_C5
+      ClefInfo("G",   1,  0,          2,   47,       "French Violin Clef"),       // CLEF_G4
       };
 
 //---------------------------------------------------------
