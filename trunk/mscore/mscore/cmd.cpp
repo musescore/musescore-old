@@ -162,7 +162,8 @@ void Score::end()
       layoutAll  = false;
       updateAll  = false;
       layoutStart = 0;
-      setPadState();
+      if (!noteEntryMode())
+            setPadState();
       }
 
 //---------------------------------------------------------
@@ -439,7 +440,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             }
       int key = 0;
       if (!preferences.alternateNoteEntryMethod)
-            key = staff(_is.track / VOICES)->keymap()->key(_is.pos);
+            key = staff(_is.track / VOICES)->keymap()->key(_is.pos());
       int pitch;
       if (_padState.drumNote != -1) {
             pitch = _padState.drumNote;
@@ -489,10 +490,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
                         stemDirection = ds->stemDirection(pitch);
                         track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
                         }
-                  setNote(_is.pos, track, pitch, len, headGroup, stemDirection);
+                  setNote(_is.pos(), track, pitch, len, headGroup, stemDirection);
                   }
             if (_is.slur) {
-                  Element* e = searchNote(_is.pos, _is.track);
+                  Element* e = searchNote(_is.pos(), _is.track);
                   if (e) {
                         if (e->type() == NOTE)
                               e = e->parent();
@@ -503,8 +504,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
                         }
                   setLayoutAll(true);
                   }
-            _is.pos += len;
+            _is.setPos(_is.pos() + len);
             _is.cr = nextChordRest(cr);
+            emit posChanged(_is.pos());
             }
       }
 
@@ -520,7 +522,8 @@ void Score::cmdAddInterval(int val)
 
       setNoteEntry(true);
       ChordRest* cr = _is.cr;
-      _is.pos += cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
+      _is.setPos(_is.pos() + cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen());
+      emit posChanged(_is.pos());
 
       Staff* staff = on->staff();
       int key = staff->keymap()->key(on->chord()->tick());
@@ -998,12 +1001,19 @@ void Score::changeCRlen(ChordRest* cr, int len)
 
 bool Score::setRest(int tick, int track, int len, bool useDots)
       {
+// printf("setRest at %d len %d\n", tick, len);
       int stick = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0 || (measure->tick() + measure->tickLen()) == tick) {
             printf("setRest(%d,%d,%d,%d):  ...measure not found (%p)\n", tick, track, len, useDots, measure);
             return false;
             }
+      int measureEndTick = measure->tick() + measure->tickLen();
+      if (tick + len > measureEndTick)
+            len -= (tick + len) - measureEndTick;
+      if (len <= 0)
+            return false;
+
       setLayout(measure);
       Segment* segment = measure->first();
       int noteLen      = 0;
@@ -2297,8 +2307,9 @@ void Score::cmd(const QString& cmd)
                         select(n, SELECT_SINGLE, 0);
                         }
                   else {
-                        setNote(_is.pos, _is.track, ev.pitch, len);
-                        _is.pos += len;
+                        setNote(_is.pos(), _is.track, ev.pitch, len);
+                        _is.setPos(_is.pos() + len);
+                        emit posChanged(_is.pos());
                         }
                   }
             layoutAll = true;
@@ -2690,16 +2701,20 @@ void Score::move(const QString& cmd)
             else if (cmd == "prev-measure")
                   el = prevMeasure(cr);
             if (el) {
-                  int tick = el->tick();
+                  // int tick = el->tick();
                   if (el->type() == CHORD) {
-                        el = ((Chord*)el)->upNote();
+                        el = static_cast<Chord*>(el)->upNote();
                         mscore->play(el);
                         }
                   select(el, SELECT_SINGLE, 0);
                   adjustCanvasPosition(el, false);
-                  if (noteEntryMode()) {
-                        _is.pos = tick;
+
+/* set in select  if (noteEntryMode()) {
+                        _is.setPos(tick);
+                        emit posChanged(_is.pos());
                         }
+                  */
+
                   }
             }
       }

@@ -185,6 +185,7 @@ class MuseScore : public QMainWindow {
       QWidget* layoutBreakPalette;
       QStatusBar* _statusBar;
       QLabel* _modeText;
+      QLabel* _positionLabel;
       NewWizard* newWizard;
 
       PaletteBox* paletteBox;
@@ -275,6 +276,7 @@ class MuseScore : public QMainWindow {
       void showNavigator(bool);
       void dirtyChanged(Score*);
       void changeState(int);
+      void setPos(int tick);
 
    public:
       MuseScore();

@@ -454,7 +454,8 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
       setInputTrack(staffIdx * VOICES + voice);
       _padState.pitch = pitch;
-      _is.pos         = tick + len;
+      _is.setPos(tick + len);
+      emit posChanged(_is.pos());
       }
 
 //---------------------------------------------------------
@@ -1617,8 +1618,9 @@ void Score::cmdEnterRest()
             setTupletChordRest(cr, -1, _padState.tickLen);
             }
       else {
-            setRest(_is.pos, _is.track, _padState.tickLen, _padState.dots);
-            _is.pos += _padState.tickLen;
+            setRest(_is.pos(), _is.track, _padState.tickLen, _padState.dots);
+            _is.setPos(_is.pos() + _padState.tickLen);
+            emit posChanged(_is.pos());
             }
       _padState.rest = false;  // continue with normal note entry
       }

@@ -271,13 +271,21 @@ MuseScore::MuseScore()
       drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
 
+      _positionLabel = new QLabel;
+      _positionLabel->setText("001:01:000");
+      _positionLabel->setAutoFillBackground(true);
+      QPalette p(_positionLabel->palette());
+      p.setColor(QPalette::Window, QColor(176, 190, 242));
+      _positionLabel->setPalette(p);
+
       _modeText = new QLabel;
       _modeText->setAutoFillBackground(true);
-      QPalette p(_modeText->palette());
       p.setColor(QPalette::Window, QColor(176, 190, 242));
       _modeText->setPalette(p);
       _statusBar = new QStatusBar;
       _statusBar->addPermanentWidget(_modeText, 0);
+      _statusBar->addPermanentWidget(_positionLabel, 0);
+
       setStatusBar(_statusBar);
 
       QAction* a;
@@ -1045,7 +1053,12 @@ void MuseScore::setCurrentScore(int idx)
             tab->setCurrentIndex(idx);  // will call setCurrentScore() again
             return;
             }
+      if (cs) {
+            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
+            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
+            }
       cs = scoreList[idx];
+      cs->canvas()->setFocus(Qt::OtherFocusReason);
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
@@ -1072,6 +1085,7 @@ void MuseScore::setCurrentScore(int idx)
       a->setChecked(cs->style()->concertPitch);
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+      connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
       changeState(cs->state());
       }
 
@@ -1592,8 +1606,6 @@ int main(int argc, char* argv[])
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);
 
-//?      mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
-
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();
@@ -1977,5 +1989,24 @@ void MuseScore::setMag(double d)
       mag->setMag(d);
       if (cs)
             cs->canvas()->setMag(d);
+      }
+
+//---------------------------------------------------------
+//   setPos
+//    set position label
+//---------------------------------------------------------
+
+void MuseScore::setPos(int t)
+      {
+      if (cs == 0)
+            return;
+      SigList* s = cs->sigmap;
+      int bar, beat, tick;
+      s->tickValues(t, &bar, &beat, &tick);
+      _positionLabel->setText(QString("%1:%2:%3")
+         .arg(bar + 1,  3, 10, QLatin1Char('0'))
+         .arg(beat + 1, 2, 10, QLatin1Char('0'))
+         .arg(tick,     3, 10, QLatin1Char('0'))
+         );
       }
 

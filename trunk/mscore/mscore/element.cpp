@@ -920,8 +920,12 @@ void Cursor::draw(QPainter& p) const
       {
       if (!(_on && _blink))
             return;
+      double x = pos().x();
+      if (_seg)
+            x = _seg->canvasPos().x() - _spatium;
+
       int v = track() == -1 ? 0 : voice();
-      p.fillRect(abbox(), QBrush(preferences.selectColor[v]));
+      p.fillRect(QRectF(x, pos().y(), _bbox.width(), _bbox.height()), QBrush(preferences.selectColor[v]));
       }
 
 //---------------------------------------------------------

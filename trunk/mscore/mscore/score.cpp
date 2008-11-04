@@ -1141,7 +1141,7 @@ void Score::setNoteEntry(bool val)
             Element* el = sel->element();
             Note* note = 0;
             Rest* rest = 0;
-            Chord* c = 0;
+            Chord* c   = 0;
             if (sel->activeCR())
                   el = sel->activeCR();
             if (el) {
@@ -1160,7 +1160,7 @@ void Score::setNoteEntry(bool val)
                   int track = _is.track;
                   if (track == -1)
                         track = 0;
-                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos, track));
+                  _is.cr = static_cast<ChordRest*>(searchNote(_is.pos(), track));
                   if (_is.cr == 0) {
                         printf("no note or rest selected 1\n");
                         return;
@@ -1180,7 +1180,9 @@ void Score::setNoteEntry(bool val)
                   _is.cr = rest;
             else
                   _is.cr = note->chord();
-            _is.pos   = _is.cr->tick();
+            _is.setPos(_is.cr->tick());
+            emit posChanged(_is.pos());
+
             setInputTrack(_is.cr->track());
             _is.noteEntryMode = true;
             canvas()->moveCursor();

@@ -1,4 +1,7 @@
 4.11 (ws)
+      - changed behaviour in note entry mode: do not change note palette state when
+        moving position with cursor right/left.
+      - show current position in status page: measure:beat:ticks
       - Did some sanity checks for DPI and PDPI. Maybe this helps to find the
         windows "blank screen" bug.
 3.11 (ws)
