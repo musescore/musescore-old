@@ -40,6 +40,7 @@ class Score;
 class Sym;
 class ScoreLayout;
 class Viewer;
+class Segment;
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -412,6 +413,7 @@ class Cursor : public Element {
       bool _blink;
       bool _on;
       double _h;
+      Segment* _seg;
 
    public:
       Cursor(Score*, Viewer*);
@@ -425,6 +427,8 @@ class Cursor : public Element {
       void blink()                     { _blink = !_blink; }
       void noBlinking()                { _blink = true; }
       virtual void setHeight(qreal v)  { _h = v; }
+      void setSegment(Segment* s)      { _seg = s; }
+      Segment* segment() const         { return _seg;  }
       };
 
 //---------------------------------------------------------

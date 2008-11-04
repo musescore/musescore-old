@@ -303,7 +303,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _is.track = e->track();
                         selState = SEL_SINGLE;
                         }
-                  setPadState(e);
+                  if (e->type() == NOTE || e->type() == REST) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        if (e->type() == NOTE)
+                              cr = static_cast<ChordRest*>(e->parent());
+                        _is.setPos(cr->tick());
+                        _is.cr = cr;
+                        emit posChanged(_is.pos());
+                        }
                   }
             }
       else if (type == SELECT_ADD) {
@@ -666,7 +673,8 @@ void Selection::updateState()
                   setState(SEL_SINGLE);
                   Element* e = element();
                   if (e->type() == NOTE || e->type() == REST) {
-                        e->score()->setPadState(e);
+                        if (!e->score()->noteEntryMode())
+                              e->score()->setPadState(e);
                         if (e->type() == NOTE)
                               e = e->parent();
                         e->score()->setInputTrack(e->track());

@@ -1084,9 +1084,11 @@ void Canvas::moveCursor()
             track = 0;
 
       double d = _spatium * .5;
+
       if (track == cursor->track() && cursor->tick() == _score->inputPos()) {
             _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
+//            return;
             }
 
       cursor->setTrack(track);
@@ -1100,6 +1102,7 @@ void Canvas::moveCursor()
 printf("zero SYSTEM\n");
                   return;
                   }
+            cursor->setSegment(segment);
             double x = segment->canvasPos().x();
             double y = system->bboxStaff(cursor->staffIdx()).y() + system->canvasPos().y();
 
@@ -1109,8 +1112,7 @@ printf("zero SYSTEM\n");
             _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
             }
-      // _score->appendMeasures(1);
-      // printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
+//      printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
       }
 
 void Canvas::moveCursor(Segment* segment)
@@ -1200,12 +1202,11 @@ void Canvas::paintEvent(QPaintEvent* ev)
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());
+//            if (score()->noteEntryMode())
+//                  moveCursor();
             }
       else
             region = ev->region();
-
-//      if (score()->noteEntryMode())
-//            moveCursor();
 
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
@@ -2173,7 +2174,7 @@ Element* Canvas::elementNear(const QPointF& p)
             return 0;
       qSort(ll.begin(), ll.end(), elementLower);
 
-#if 1
+#if 0
       printf("elementNear ========= %f %f\n", _spatium, w);
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());

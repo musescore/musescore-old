@@ -28,20 +28,24 @@ class ChordRest;
 //   InputState
 //---------------------------------------------------------
 
-struct InputState {
+class InputState {
+      int _pos;
+
+   public:
       int track;
-      int pos;
       bool noteEntryMode;
       Slur* slur;
       ChordRest* cr;
 
       InputState() {
             track         = 0;
-            pos           = 0;
+            _pos          = 0;
             noteEntryMode = false;
             slur          = 0;
             cr            = 0;
             }
+      int pos() const      { return _pos; }
+      void setPos(int val) { _pos = val; }
       };
 
 #endif

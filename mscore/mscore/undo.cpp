@@ -685,6 +685,7 @@ void Score::endUndoRedo(Undo* undo)
       setDirty(true);
 
       _is = undo->inputState;
+      emit posChanged(_is.pos());
 
       if (!noteEntryMode()) {
             // no input state
@@ -699,6 +700,7 @@ void Score::endUndoRedo(Undo* undo)
 
       *sel = undo->selection;
       sel->update();
+
       getAction("undo")->setEnabled(!undoEmpty());
       getAction("redo")->setEnabled(!redoEmpty());
       }

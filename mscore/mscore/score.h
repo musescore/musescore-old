@@ -289,6 +289,7 @@ class Score : public QObject {
       void selectionChanged(int);
       void dirtyChanged(Score*);
       void stateChanged(int);
+      void posChanged(int);
 
    public:
       bool cmdActive;
@@ -587,7 +588,7 @@ class Score : public QObject {
       void setPlayPos(int val)      { _playPos = val;   }
 
       bool noteEntryMode() const    { return _is.noteEntryMode; }
-      int inputPos() const          { return _is.pos;   }
+      int inputPos() const          { return _is.pos();   }
       int inputTrack() const        { return _is.track; }
       void setInputTrack(int);
 

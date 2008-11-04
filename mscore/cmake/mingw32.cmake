@@ -29,9 +29,9 @@ set (QT_QTUITOOLS_INCLUDE_DIR ${CROSSQT}/include/QtUiTools)
 set (QT_QTSCRIPT_INCLUDE_DIR ${CROSSQT}/include/QtScript)
 set (QT_LIBRARY_DIR           ${CROSSQT}/lib)
 
-set (QT_MOC_EXECUTABLE        "/usr/qt4/bin/moc")
-set (QT_UIC_EXECUTABLE        "/usr/qt4/bin/uic")
-set (QT_RCC_EXECUTABLE        "/usr/qt4/bin/rcc")
+set (QT_MOC_EXECUTABLE        "/usr/bin/moc-qt4")
+set (QT_UIC_EXECUTABLE        "/usr/bin/uic-qt4")
+set (QT_RCC_EXECUTABLE        "/usr/bin/rcc")
 set (QT_QTCORE_LIBRARY        "mops")
 
 set (QT_INCLUDES ${QT_INCLUDE_DIR} ${QT_QT_INCLUDE_DIR}
