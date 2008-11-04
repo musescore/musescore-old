@@ -20,6 +20,7 @@
 
 // #include <signal.h>
 #include <fenv.h>
+
 #include "config.h"
 
 #include "mscore.h"
@@ -1384,30 +1385,7 @@ int main(int argc, char* argv[])
             }
       argc -= optind;
       ++argc;
-
-      pdev = new QPrinter(QPrinter::HighResolution);
-      QWidget wi(0);
-
-      PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = pdev->logicalDpiX();      // logical drawing resolution
-      DPMM = DPI / INCH;  // dots/mm
-
-      if (debugMode) {
-            printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
-               DPI, pdev->physicalDpiX(),
-               PDPI, wi.physicalDpiX(),
-               DPMM);
-            QStringList sl(QCoreApplication::libraryPaths());
-            foreach(QString s, sl)
-                  printf("LibraryPath: <%s>\n", qPrintable(s));
-            }
-
-
-      // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
-      //   staff has 5 lines = 4 * _spatium
-      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
-      _spatiumMag = 1.0;
-
+/**/
       mscoreGlobalShare = getSharePath();
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
@@ -1501,9 +1479,44 @@ int main(int argc, char* argv[])
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
-      //-------------------------------
-      //  load scores
-      //-------------------------------
+      pdev = new QPrinter(QPrinter::HighResolution);
+      QWidget wi(0);
+
+      PDPI = wi.logicalDpiX();         // physical resolution
+      DPI  = pdev->logicalDpiX();      // logical drawing resolution
+
+
+      // sanity checks for DPI and PDPI
+
+      if (DPI == 0 || isnan(DPI)) {
+            QMessageBox::critical(0, "MuseScore Error",
+               QString("Invalid printer DPI value \"%1\"").arg(DPI));
+            DPI = 300.0;
+            }
+
+      if (PDPI == 0 || isnan(PDPI)) {
+            QMessageBox::critical(0, "MuseScore Error",
+               QString("Invalid widget DPI value \"%1\"").arg(PDPI));
+            PDPI = 300.0;
+            }
+
+      DPMM = DPI / INCH;               // dots/mm
+
+      if (debugMode) {
+            printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
+               DPI, pdev->physicalDpiX(),
+               PDPI, wi.physicalDpiX(),
+               DPMM);
+            QStringList sl(QCoreApplication::libraryPaths());
+            foreach(QString s, sl)
+                  printf("LibraryPath: <%s>\n", qPrintable(s));
+            }
+
+
+      // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
+      //   staff has 5 lines = 4 * _spatium
+      _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
+      _spatiumMag = 1.0;
 
       initSymbols();
       genIcons();
@@ -1512,6 +1525,10 @@ int main(int argc, char* argv[])
       mscore = new MuseScore();
       gscore = new Score;
       mscore->readSettings();
+
+      //-------------------------------
+      //  load scores
+      //-------------------------------
 
       int currentScore = 0;
       int idx = 0;

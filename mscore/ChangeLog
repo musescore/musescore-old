@@ -1,3 +1,6 @@
+4.11 (ws)
+      - Did some sanity checks for DPI and PDPI. Maybe this helps to find the
+        windows "blank screen" bug.
 3.11 (ws)
       - more clef fixes
       - new test file "clefs.msc"
