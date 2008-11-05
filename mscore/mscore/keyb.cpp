@@ -327,8 +327,6 @@ void Score::setPadState(Element* e)
 
 void Score::setPadState()
       {
-      printf("setPadState\n");
-
       getAction("pad-rest")->setChecked(_padState.rest);
       getAction("pad-dot")->setChecked(_padState.dots == 1);
       getAction("pad-dotdot")->setChecked(_padState.dots == 2);
