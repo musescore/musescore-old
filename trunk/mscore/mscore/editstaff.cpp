@@ -89,7 +89,17 @@ void EditStaff::apply()
       staff->setSmall(small->isChecked());
       part->setShortName(*shortName->document());
       part->setLongName(*longName->document());
-      staff->score()->layout()->setInstrumentNames();
+      Score* score = staff->score();
+      score->layout()->setInstrumentNames();
+      MeasureBaseList* ml = score->measures();
+      int staffIdx = score->staffIdx(staff);
+      for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            MStaff* mstaff = static_cast<Measure*>(mb)->mstaff(staffIdx);
+            mstaff->lines->setLines(staff->lines());
+            }
+
       }
 
 //---------------------------------------------------------

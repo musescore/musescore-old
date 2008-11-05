@@ -1,4 +1,7 @@
 5.11 (ws)
+      - support 3-line staff (in the height of a normal 5 line staff, used
+        for drum notation)
+      - changing staff line count now take immediate effect
       - fix another tuplet entry crash
       - better behaviour of delete command in note entry mode
       - setting page scaling in inch fixed
