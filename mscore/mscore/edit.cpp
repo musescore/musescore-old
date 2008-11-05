@@ -1098,6 +1098,7 @@ void Score::cmdDeleteSelection()
             }
       sel->elements()->clear();
       select(0, SELECT_SINGLE, 0);
+      updateEntryMode();
       layoutAll = true;
       }
 
@@ -1518,6 +1519,8 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       for (; ii < n; ++ii) {
             DurationElement* el = crl[ii];
             undoRemoveElement(el);
+            --n;
+            --ii;
             remaining -= el->duration().ticks();
             if (remaining <= 0)
                   break;
@@ -1526,6 +1529,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       //---------------------------------------------------
       //    set new note/rest
       //---------------------------------------------------
+
       Duration dt;
       dt.setVal(len);
 
@@ -1551,6 +1555,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             undoAddElement(chord);
             tuplet->add(chord);
             chord->setTuplet(tuplet);
+            select(note, SELECT_SINGLE, cr->track());
             }
       else {
             Rest* rest = new Rest(this);
@@ -1567,6 +1572,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             undoAddElement(rest);
             rest->setTuplet(tuplet);
             tuplet->add(rest);
+            select(rest, SELECT_SINGLE, cr->track());
             }
 
       //---------------------------------------------------
@@ -1684,5 +1690,33 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
             }
       rest->setParent(seg);
       undoAddElement(rest);
+      }
+
+//---------------------------------------------------------
+//   updateEntryMode
+//    given the tick position and staffIdx,
+//    select current ChordRest
+//
+//   called after cmdDeleteSelection
+//---------------------------------------------------------
+
+void Score::updateEntryMode()
+      {
+      _is.cr = 0;
+      if (!noteEntryMode()) {
+            return;
+            }
+      if (_is.cr == 0) {
+            Segment* segment = tick2segment(_is.pos());
+            Element* e       = segment->element(_is.track);
+            if (e->isChordRest())
+                  _is.cr = static_cast<ChordRest*>(e);
+            }
+      if (_is.cr->type() == REST) {
+            select(_is.cr, SELECT_SINGLE, 0);
+            }
+      else if (_is.cr->type() == CHORD) {
+            select(static_cast<Chord*>(_is.cr)->downNote(), SELECT_SINGLE, 0);
+            }
       }
 

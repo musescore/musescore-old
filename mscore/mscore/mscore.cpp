@@ -1502,14 +1502,12 @@ int main(int argc, char* argv[])
 
       // sanity checks for DPI and PDPI
 
-//      if (DPI == 0 || isnan(DPI)) {
       if (DPI == 0) {
             QMessageBox::critical(0, "MuseScore Error",
                QString("Invalid printer DPI value \"%1\"").arg(DPI));
             DPI = 300.0;
             }
 
-//      if (PDPI == 0 || isnan(PDPI)) {
       if (PDPI == 0) {
             QMessageBox::critical(0, "MuseScore Error",
                QString("Invalid widget DPI value \"%1\"").arg(PDPI));
