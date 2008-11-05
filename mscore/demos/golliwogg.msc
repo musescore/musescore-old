@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <MagIdx>10</MagIdx>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <xoff>-349.6</xoff>
+  <yoff>-130.049</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -440,8 +440,10 @@ p, li { white-space: pre-wrap; }
   <Slur id="44">
     <track>0</track>
     <SlurSegment no="0">
-      <o1 x="0.0764446" y="0.764446"/>
-      <o4 x="0.0764446" y="0.99378"/>
+      <o1 x="0.617419" y="0.696824"/>
+      <o2 x="0.74384" y="-0.270487"/>
+      <o3 x="1.01433" y="-0.405731"/>
+      <o4 x="0.00882278" y="0.926158"/>
       </SlurSegment>
     </Slur>
   <Slur id="45">
@@ -1300,7 +1302,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <BarLine/>
       </Measure>
@@ -1548,7 +1550,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="10">
@@ -1868,7 +1870,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="14">
@@ -2140,7 +2142,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="50" tpc="16"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="18">
@@ -2823,7 +2825,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="33">
@@ -2865,7 +2867,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="34">
@@ -3263,7 +3265,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>240</ticklen>
@@ -3917,7 +3919,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>0</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         <tick>57600</tick>
         </Clef>
       </Measure>
@@ -5773,7 +5775,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="94">
@@ -5902,7 +5904,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="50" tpc="16"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="98">
@@ -6468,7 +6470,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="110">
@@ -6570,7 +6572,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="55" tpc="15"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <track>1</track>
@@ -6909,7 +6911,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>240</ticklen>
@@ -7167,7 +7169,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <BarLine/>
       </Measure>
@@ -8144,7 +8146,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="26">
@@ -8263,7 +8265,6 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>156</Beam>
-        <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="157">
@@ -8285,7 +8286,6 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>157</Beam>
-        <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
       </Measure>
@@ -8309,7 +8309,6 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>158</Beam>
-        <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="159">
@@ -8333,11 +8332,11 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Slur type="stop" number="44"/>
         <Beam>159</Beam>
-        <Note pitch="67" tpc="15"/>
+        <Note pitch="63" tpc="11"/>
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="30">
@@ -8507,11 +8506,13 @@ p, li { white-space: pre-wrap; }
         <Note pitch="34" tpc="12"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="34">
       <Beam id="168">
+        <y1>-31.8308</y1>
+        <y2>-128.764</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8536,6 +8537,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="169">
+        <y1>-33.497</y1>
+        <y2>-106.223</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8558,6 +8561,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="35">
       <Beam id="170">
+        <y1>-32.0038</y1>
+        <y2>-111.859</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8578,6 +8583,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="171">
+        <y1>-32.0038</y1>
+        <y2>-111.859</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8600,6 +8607,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="36">
       <Beam id="172">
+        <y1>-15.7991</y1>
+        <y2>-96.6422</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8620,6 +8629,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="173">
+        <y1>-31.5344</y1>
+        <y2>-96.6422</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8642,6 +8653,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="37">
       <Beam id="174">
+        <y1>-21.8731</y1>
+        <y2>-91.007</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8662,6 +8675,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Beam id="175">
+        <y1>-34.3374</y1>
+        <y2>-103.471</y2>
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
@@ -8677,7 +8692,7 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.604179" y="-6.14248"/>
+          <offset x="0.739423" y="-7.90065"/>
           </Attribute>
         <Slur type="stop" number="47"/>
         <Beam>175</Beam>
@@ -8863,7 +8878,7 @@ p, li { white-space: pre-wrap; }
           <track>5</track>
           <tick>36960</tick>
           <pitch>59</pitch>
-          <tpc>19</tpc>
+          <tpc>7</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -10426,7 +10441,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -10460,7 +10475,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="81">
@@ -11168,7 +11183,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         </Rest>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="106">
@@ -11343,7 +11358,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       </Measure>
     <Measure number="110">
@@ -11520,7 +11535,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="34" tpc="12"/>
         </Chord>
       <Clef>
-        <offset x="0" y="2.4"/>
+        <offset x="0" y="3"/>
         </Clef>
       </Measure>
     <Measure number="114">
@@ -11727,7 +11742,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Clef>
         <subtype>4</subtype>
-        <offset x="0" y="0.8"/>
+        <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <track>5</track>
@@ -11944,5 +11959,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
