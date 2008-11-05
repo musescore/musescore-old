@@ -616,6 +616,8 @@ QRectF StaffLines::bbox() const
                   return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
             case 1:
                   return QRectF(0.0,  -lw*.5, _width, 4 * _spatium + lw);
+            case 2:
+                  return QRectF(0.0, -lw*.5, _width, l * _spatium * 2.0 + lw);
             default:
                   return QRectF(0.0, -lw*.5, _width, l * _spatium + lw);
             }
@@ -657,6 +659,13 @@ void StaffLines::draw(QPainter& p) const
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
                   break;
+            case 3:
+                  for (int i = 0; i < lines(); ++i) {
+                        qreal y = _pos.y() + i * _spatium * mag() * 2.0;
+                        p.drawLine(QLineF(x1, y, x2, y));
+                        }
+                  break;
+
             default:
                   for (int i = 0; i < lines(); ++i) {
                         qreal y = _pos.y() + i * _spatium * mag();
@@ -680,6 +689,7 @@ double StaffLines::y1() const
                   return y + _pos.y() + 1 * _spatium * mag();
             case 2:
                   return y + _pos.y() + 1 * _spatium * mag();
+            case 3:
             default:
                   return y + _pos.y();
             }
@@ -697,6 +707,7 @@ double StaffLines::y2() const
                   return y + _pos.y() + 3 * _spatium * mag();
             case 2:
                   return y + _pos.y() + 3 * _spatium * mag();
+            case 3:
             default:
                   return y + _pos.y() + 4 * _spatium * mag();
             }
