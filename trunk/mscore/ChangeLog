@@ -1,3 +1,5 @@
+5.11 (ws)
+      - setting page scaling in inch fixed
 4.11 (ws)
       - changed behaviour in note entry mode: do not change note palette state when
         moving position with cursor right/left.

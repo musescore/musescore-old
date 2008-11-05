@@ -306,8 +306,8 @@ void PageSettings::twosidedToggled(bool flag)
 
 void PageSettings::apply()
       {
-      double f  = mmButton->isChecked() ? 1.0/INCH : 1.0;
-      double f1 = mmButton->isChecked() ? DPMM : DPI;
+      double f  = mmUnit ? 1.0/INCH : 1.0;
+      double f1 = mmUnit ? DPMM : DPI;
 
       cs->pageFormat()->size             = pageGroup->currentIndex();
       cs->pageFormat()->_width           = pageWidth->value() * f;
@@ -364,7 +364,7 @@ void PageSettings::pageFormatSelected(int pf)
 
 void PageSettings::otmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->oddTopMargin = val;
       preview->layout();
@@ -376,7 +376,7 @@ void PageSettings::otmChanged(double val)
 
 void PageSettings::olmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->oddLeftMargin = val;
       preview->layout();
@@ -388,7 +388,7 @@ void PageSettings::olmChanged(double val)
 
 void PageSettings::ormChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->oddRightMargin = val;
       preview->layout();
@@ -400,7 +400,7 @@ void PageSettings::ormChanged(double val)
 
 void PageSettings::obmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->oddBottomMargin = val;
       preview->layout();
@@ -412,7 +412,7 @@ void PageSettings::obmChanged(double val)
 
 void PageSettings::etmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->evenTopMargin = val;
       preview->layout();
@@ -424,7 +424,7 @@ void PageSettings::etmChanged(double val)
 
 void PageSettings::elmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->evenLeftMargin = val;
       preview->layout();
@@ -436,7 +436,7 @@ void PageSettings::elmChanged(double val)
 
 void PageSettings::ermChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->evenRightMargin = val;
       preview->layout();
@@ -448,7 +448,7 @@ void PageSettings::ermChanged(double val)
 
 void PageSettings::ebmChanged(double val)
       {
-      if (mmButton->isChecked())
+      if (mmUnit)
             val /= INCH;
       preview->lo()->pageFormat()->evenBottomMargin = val;
       preview->layout();
@@ -460,8 +460,7 @@ void PageSettings::ebmChanged(double val)
 
 void PageSettings::spatiumChanged(double val)
       {
-      if (mmButton->isChecked())
-            val *= DPMM;
+      val *= mmUnit ? DPMM : DPI;
       preview->lo()->setSpatium(val);
       preview->layout();
       }

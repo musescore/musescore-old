@@ -2426,7 +2426,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
-printf("srcStaffIDx %d  dstStaffIdx %d  staves %d\n", srcStaffIdx, dstStaffIdx, nstaves());
+// printf("srcStaffIDx %d  dstStaffIdx %d  staves %d\n", srcStaffIdx, dstStaffIdx, nstaves());
                   if (dstStaffIdx >= nstaves())
                         break;
                   QList<Tuplet*> tuplets;
