@@ -1,4 +1,6 @@
 5.11 (ws)
+      - fix another tuplet entry crash
+      - better behaviour of delete command in note entry mode
       - setting page scaling in inch fixed
 4.11 (ws)
       - changed behaviour in note entry mode: do not change note palette state when

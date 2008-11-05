@@ -276,7 +276,7 @@ void Score::updateSelectedElements(SelState state)
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
-// printf("select element <%s> type %d(state %d) staff %d\n",
+//printf("select element <%s> type %d(state %d) staff %d\n",
 //   e ? e->name() : "", type, sel->state(), e ? e->staffIdx() : -1);
 
       SelState selState = sel->state();

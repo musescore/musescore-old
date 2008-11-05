@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: canvas.cpp,v 1.80 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1308,53 +1308,43 @@ void Canvas::paint(const QRect& rr, QPainter& p)
             SysStaff* ss2   = system2->staff(staffEnd - 1);
             double y1       = ss1->y() - 2 * _spatium + y;
             double y2       = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+
+            // drag vertical start line
             p.drawLine(QLineF(x2, y1, x2, y2));
+
             System* system1 = system2;
             double x1;
 
-            for (Segment* s = ss; s && (s != es); s = s->nextCR()) {
-                  system1 = system2;
-                  system2 = s->measure()->system();
+            for (Segment* s = ss; s && (s != es);) {
+                  Segment* ns = s->nextCR();
+                  system1  = system2;
+                  system2  = s->measure()->system();
+                  pt       = s->canvasPos();
+                  x1  = x2;
+                  x2  = pt.x() + _spatium * 2;
 
-                  if (system2 != system1) {
-                        x1  = x2;
-                        x2  += _spatium * 2;
-                        p.drawLine(QLineF(x1, y1, x2, y1));
-                        p.drawLine(QLineF(x1, y2, x2, y2));
-
-                        if (s && (s != es)) {
-                              pt  = s->canvasPos();
-                              x2  = pt.x() + _spatium * 2;
-                              x1  = x2 - 2 * _spatium;
-                              y   = pt.y();
-                              ss1 = system2->staff(staffStart);
-                              ss2 = system2->staff(staffEnd - 1);
-                              y1  = ss1->y() - 2 * _spatium + y;
-                              y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
-
-                              p.drawLine(QLineF(x1, y1, x2, y1));
-                              p.drawLine(QLineF(x1, y2, x2, y2));
-                              }
-                        else {
-                              p.drawLine(QLineF(x2, y1, x2, y2));
-                              }
+                  // HACK for whole measure rest:
+                  if (ns == 0 || ns == es) {    // last segment?
+                        Element* e = s->element(staffStart * VOICES);
+                        if (e && e->type() == REST && e->tickLen() == 0)
+                              x2 = s->measure()->abbox().right() - _spatium;
                         }
-                  else {
-                        x1  = x2;
-                        pt  = s->canvasPos();
-                        x2  = pt.x() + _spatium * 2;
-                        y   = pt.y();
-                        ss1 = system2->staff(staffStart);
-                        ss2 = system2->staff(staffEnd - 1);
-                        y1  = ss1->y() - 2 * _spatium + y;
-                        y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
 
-                        p.drawLine(QLineF(x1, y1, x2, y1));
-                        p.drawLine(QLineF(x1, y2, x2, y2));
-                        }
+                  if (system2 != system1)
+                        x1  = x2 - 2 * _spatium;
+                  y   = pt.y();
+                  ss1 = system2->staff(staffStart);
+                  ss2 = system2->staff(staffEnd - 1);
+                  y1  = ss1->y() - 2 * _spatium + y;
+                  y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
+                  p.drawLine(QLineF(x1, y1, x2, y1));
+                  p.drawLine(QLineF(x1, y2, x2, y2));
+                  s = ns;
                   }
-            if (system2 == system1)
-                  p.drawLine(QLineF(x2, y1, x2, y2));
+            //
+            // draw vertical end line
+            //
+            p.drawLine(QLineF(x2, y1, x2, y2));
             }
 
       p.setMatrixEnabled(false);

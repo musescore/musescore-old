@@ -343,6 +343,7 @@ class Score : public QObject {
       void transpose();
 
       void cmdEnterRest();
+      void updateEntryMode();
 
       Rest* addRest(int tick, int len, int track);
       void lyricsEndEdit();
