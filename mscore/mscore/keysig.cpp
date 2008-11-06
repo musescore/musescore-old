@@ -67,29 +67,17 @@ QPointF KeySig::canvasPos() const
 //   add
 //---------------------------------------------------------
 
-void KeySig::addLayout(Sym* s, double x, double y)
+void KeySig::addLayout(int sym, double x, int line)
       {
-      _bbox |= s->bbox(mag()).translated(x * _spatium * mag(), y * _spatium * mag());
-      }
-
-//---------------------------------------------------------
-//   yoffset
-//---------------------------------------------------------
-
-double KeySig::yoffset() const
-      {
-      if (staff()) {
-            int clef       = staff()->clefList()->clef(tick());
-            int clefOffset = clefTable[clef].yOffset;
-            while (clefOffset >= 7)
-                  clefOffset -= 7;
-//            while (clefOffset < -3)
-            while (clefOffset < 0)
-                  clefOffset += 7;
-// printf("clefOffset %d -> %d\n", clefTable[clef].yOffset, clefOffset);
-            return double(clefOffset / 2.0);
-            }
-      return .0;
+      double y = double(line) * .5;
+      QPointF pt(x, y);
+      pt *= _spatium * mag();
+      KeySym* ks = new KeySym;
+      ks->sym = sym;
+      ks->pos = pt;
+      keySymbols.append(ks);
+      Sym* s = &symbols[sym];
+      _bbox |= s->bbox(mag()).translated(pt);
       }
 
 //---------------------------------------------------------
@@ -98,47 +86,42 @@ double KeySig::yoffset() const
 
 void KeySig::layout(ScoreLayout*)
       {
-      Sym* ss     = &symbols[sharpSym];
-      Sym* fs     = &symbols[flatSym];
-      Sym* ns     = &symbols[naturalSym];
-      double yoff = yoffset();
-      _bbox       = QRectF(0, 0, 0, 0);
+      foreach(KeySym* ks, keySymbols)
+            delete ks;
+      keySymbols.clear();
 
+      int yoff = 0;
+      int clef = 0;
+      if (staff()) {
+            clef = staff()->clefList()->clef(tick());
+            yoff = clefTable[clef].yOffset;
+            }
+
+      _bbox    = QRectF(0, 0, 0, 0);
       char t1  = subtype() & 0xff;
       char t2  = (subtype() & 0xff00) >> 8;
       qreal xo = 0.0;
 
+
       switch(t2) {
-            case 7:
-                  xo += 1.0;
-                  addLayout(ns, 6.0, yoff + 2.0);
-            case 6:
-                  xo += 1.0;
-                  addLayout(ns, 5.0, yoff + 0.5);
-            case 5:
-                  xo += 1.0;
-                  addLayout(ns, 4.0, yoff + 2.5);
-            case 4:
-                  xo += 1.0;
-                  addLayout(ns, 3.0, yoff + 1.0);
-            case 3:
-                  xo += 1.0;
-                  addLayout(ns, 2.0, yoff - 0.5);
-            case 2:
-                  xo += 1.0;
-                  addLayout(ns, 1.0, yoff + 1.5);
-            case 1:
-                  xo += 1.5;
-                  addLayout(ns, 0.0, yoff * _spatium);
+            case 7:   addLayout(naturalSym, 6.0, clefTable[clef].lines[6]);
+            case 6:   addLayout(naturalSym, 5.0, clefTable[clef].lines[5]);
+            case 5:   addLayout(naturalSym, 4.0, clefTable[clef].lines[4]);
+            case 4:   addLayout(naturalSym, 3.0, clefTable[clef].lines[3]);
+            case 3:   addLayout(naturalSym, 2.0, clefTable[clef].lines[2]);
+            case 2:   addLayout(naturalSym, 1.0, clefTable[clef].lines[1]);
+            case 1:   addLayout(naturalSym, 0.0, clefTable[clef].lines[0]);
+                  xo = double(t2) + .5;
                   break;
-            case -7:    addLayout(ns, 6.0, yoff + 3.5); xo += 1.0;
-            case -6:    addLayout(ns, 5.0, yoff + 1.5); xo += 1.0;
-            case -5:    addLayout(ns, 4.0, yoff + 3);   xo += 1.0;
-            case -4:    addLayout(ns, 3.0, yoff + 1);   xo += 1.0;
-            case -3:    addLayout(ns, 2.0, yoff + 2.5); xo += 1.0;
-            case -2:    addLayout(ns, 1.0, yoff + .5);  xo += 1.0;
-            case -1:    addLayout(ns, 0.0, yoff + 2.0); xo += 1.5;
+            case -7:  addLayout(naturalSym, 6.0, clefTable[clef].lines[13]);
+            case -6:  addLayout(naturalSym, 5.0, clefTable[clef].lines[12]);
+            case -5:  addLayout(naturalSym, 4.0, clefTable[clef].lines[11]);
+            case -4:  addLayout(naturalSym, 3.0, clefTable[clef].lines[10]);
+            case -3:  addLayout(naturalSym, 2.0, clefTable[clef].lines[9]);
+            case -2:  addLayout(naturalSym, 1.0, clefTable[clef].lines[8]);
+            case -1:  addLayout(naturalSym, 0.0, clefTable[clef].lines[7]);
             case 0:
+                  xo = double(-t2) + .5;
                   break;
             default:
                   printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
@@ -146,21 +129,21 @@ void KeySig::layout(ScoreLayout*)
             }
 
       switch(t1) {
-            case 7:     addLayout(ss, xo + 6.0, yoff + 2.0);
-            case 6:     addLayout(ss, xo + 5.0, yoff + .5);
-            case 5:     addLayout(ss, xo + 4.0, yoff + 2.5);
-            case 4:     addLayout(ss, xo + 3.0, yoff + 1);
-            case 3:     addLayout(ss, xo + 2.0, yoff - .5);
-            case 2:     addLayout(ss, xo + 1.0, yoff + 1.5);
-            case 1:     addLayout(ss, xo + 0.0, yoff);
-                        break;
-            case -7:    addLayout(fs, xo + 6.0, yoff + 3.5);
-            case -6:    addLayout(fs, xo + 5.0, yoff + 1.5);
-            case -5:    addLayout(fs, xo + 4.0, yoff + 3);
-            case -4:    addLayout(fs, xo + 3.0, yoff + 1);
-            case -3:    addLayout(fs, xo + 2.0, yoff + 2.5);
-            case -2:    addLayout(fs, xo + 1.0, yoff + .5);
-            case -1:    addLayout(fs, xo + 0.0, yoff + 2.0);
+            case 7:  addLayout(sharpSym, xo + 6.0, clefTable[clef].lines[6]);
+            case 6:  addLayout(sharpSym, xo + 5.0, clefTable[clef].lines[5]);
+            case 5:  addLayout(sharpSym, xo + 4.0, clefTable[clef].lines[4]);
+            case 4:  addLayout(sharpSym, xo + 3.0, clefTable[clef].lines[3]);
+            case 3:  addLayout(sharpSym, xo + 2.0, clefTable[clef].lines[2]);
+            case 2:  addLayout(sharpSym, xo + 1.0, clefTable[clef].lines[1]);
+            case 1:  addLayout(sharpSym, xo + 0.0, clefTable[clef].lines[0]);
+                     break;
+            case -7: addLayout(flatSym, xo + 6.0, clefTable[clef].lines[13]);
+            case -6: addLayout(flatSym, xo + 5.0, clefTable[clef].lines[12]);
+            case -5: addLayout(flatSym, xo + 4.0, clefTable[clef].lines[11]);
+            case -4: addLayout(flatSym, xo + 3.0, clefTable[clef].lines[10]);
+            case -3: addLayout(flatSym, xo + 2.0, clefTable[clef].lines[9]);
+            case -2: addLayout(flatSym, xo + 1.0, clefTable[clef].lines[8]);
+            case -1: addLayout(flatSym, xo + 0.0, clefTable[clef].lines[7]);
             case 0:
                   break;
             default:
@@ -175,60 +158,8 @@ void KeySig::layout(ScoreLayout*)
 
 void KeySig::draw(QPainter& p) const
       {
-      double yoff = yoffset();
-      Sym* ss     = &symbols[sharpSym];
-      Sym* fs     = &symbols[flatSym];
-      Sym* ns     = &symbols[naturalSym];
-
-      char t1     = subtype() & 0xff;
-      char t2     = (subtype() & 0xff00) >> 8;
-      qreal xo    = 0.0;
-      double ld   = _spatium * mag();
-
-      switch(t2) {
-            case 7: ns->draw(p, mag(), 6.0 * ld, (yoff + 2.0) * ld); xo += 1.0;
-            case 6: ns->draw(p, mag(), 5.0 * ld, (yoff + 0.5) * ld); xo += 1.0;
-            case 5: ns->draw(p, mag(), 4.0 * ld, (yoff + 2.5) * ld); xo += 1.0;
-            case 4: ns->draw(p, mag(), 3.0 * ld, (yoff + 1.0) * ld); xo += 1.0;
-            case 3: ns->draw(p, mag(), 2.0 * ld, (yoff - 0.5) * ld); xo += 1.0;
-            case 2: ns->draw(p, mag(), 1.0 * ld, (yoff + 1.5) * ld); xo += 1.0;
-            case 1: ns->draw(p, mag(), 0.0, yoff * ld);              xo += 1.5;
-                  break;
-            case -7: ns->draw(p, mag(), 6.0 * ld, (yoff + 3.5) * ld); xo += 1.0;
-            case -6: ns->draw(p, mag(), 5.0 * ld, (yoff + 1.5) * ld); xo += 1.0;
-            case -5: ns->draw(p, mag(), 4.0 * ld, (yoff + 3.0) * ld); xo += 1.0;
-            case -4: ns->draw(p, mag(), 3.0 * ld, (yoff + 1.0) * ld); xo += 1.0;
-            case -3: ns->draw(p, mag(), 2.0 * ld, (yoff + 2.5) * ld); xo += 1.0;
-            case -2: ns->draw(p, mag(), 1.0 * ld, (yoff + 0.5) * ld); xo += 1.0;
-            case -1: ns->draw(p, mag(), 0.0 * ld, (yoff + 2.0) * ld); xo += 1.5;
-            case 0:
-                  break;
-            default:
-                  printf("KeySig::draw(): illegal t2 key %d (t1=%d)\n", t2, t1);
-                  break;
-            }
-
-      switch(t1) {
-            case 7:     ss->draw(p, mag(), (xo + 6.0) * ld, (yoff + 2.0) * ld);
-            case 6:     ss->draw(p, mag(), (xo + 5.0) * ld, (yoff + 0.5) * ld);
-            case 5:     ss->draw(p, mag(), (xo + 4.0) * ld, (yoff + 2.5) * ld);
-            case 4:     ss->draw(p, mag(), (xo + 3.0) * ld, (yoff + 1.0) * ld);
-            case 3:     ss->draw(p, mag(), (xo + 2.0) * ld, (yoff - 0.5) * ld);
-            case 2:     ss->draw(p, mag(), (xo + 1.0) * ld, (yoff + 1.5) * ld);
-            case 1:     ss->draw(p, mag(), (xo + 0.0) * ld, (yoff)       * ld);
-                  break;
-            case -7:    fs->draw(p, mag(), (xo + 6.0) * ld, (yoff + 3.5) * ld);
-            case -6:    fs->draw(p, mag(), (xo + 5.0) * ld, (yoff + 1.5) * ld);
-            case -5:    fs->draw(p, mag(), (xo + 4.0) * ld, (yoff + 3.0) * ld);
-            case -4:    fs->draw(p, mag(), (xo + 3.0) * ld, (yoff + 1.0) * ld);
-            case -3:    fs->draw(p, mag(), (xo + 2.0) * ld, (yoff + 2.5) * ld);
-            case -2:    fs->draw(p, mag(), (xo + 1.0) * ld, (yoff + 0.5) * ld);
-            case -1:    fs->draw(p, mag(), (xo + 0.0) * ld, (yoff + 2.0) * ld);
-            case 0:
-                  break;
-            default:
-                  printf("KeySig::draw(): illegal t1 key %d (t2=%d)\n", t1, t2);
-                  break;
+      foreach(const KeySym* ks, keySymbols) {
+            symbols[ks->sym].draw(p, mag(), ks->pos.x(), ks->pos.y());
             }
       }
 

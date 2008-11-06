@@ -34,10 +34,14 @@ class Segment;
  The KeySig class represents a Key Signature on a staff
 */
 
-class KeySig : public Element {
-      void addLayout(Sym*, double x, double y);
+struct KeySym {
+      int sym;
+      QPointF pos;
+      };
 
-      double yoffset() const;
+class KeySig : public Element {
+      QList<KeySym*> keySymbols;
+      void addLayout(int sym, double x, int y);
 
    public:
       KeySig(Score*);
