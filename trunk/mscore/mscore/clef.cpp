@@ -41,29 +41,62 @@
 const ClefInfo clefTable[] = {
 //               MusicXml
 //             name line octave  yoffset pitchoffset  name
-      ClefInfo("G",   2,  0,          0,  45,        "Treble Clef (G Clef)"),
-      ClefInfo("G",   2,  1,          7,  52,        "Treble Clef 8va"),
-      ClefInfo("G",   2,  2,         14,  59,        "Treble Clef 15ma"),
-      ClefInfo("G",   2, -1,         -7,  38,        "Treble Clef 8va bassa"),
+      { "G",   2,  0,   0, 45,
+            { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
+            "Treble Clef (G Clef)"
+            },
+      { "G",   2,  1,   7, 52,
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
+            "Treble Clef 8va"},
+      { "G",   2,  2,  14, 59,
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
+            "Treble Clef 15ma"},
+      { "G",   2, -1,  -7, 38,
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
+            "Treble Clef 8va bassa"},
+      { "F",   4,  0, -12, 33,
+            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
+            "Bass Clef (F Clef)"},
+      { "F",   4, -1, -19, 26,
+            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
+            "Bass Clef 8va bassa"},
+      { "F",   4, -2, -26, 19,
+            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
+            "Bass Clef 15mb bassa"},
 
-      ClefInfo("F",   4,  0,        -12,  33,        "Bass Clef (F Clef)"),
-      ClefInfo("F",   4, -1,        -19,  26,        "Bass Clef 8va bassa"),
-      ClefInfo("F",   4, -2,        -26,  19,        "Bass Clef 15mb bassa"),
-      ClefInfo("F",   4,  0,        -10,  35,        "Baritone Clef"),
-      ClefInfo("F",   2,  0,        -14,  31,        "Subbass Clef"),
+      { "F",   4,  0, -10, 35,
+            { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
+            "Baritone Clef"},
+      { "F",   2,  0, -14, 31,
+            { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
+            "Subbass Clef"},
 
-      ClefInfo("C",   1,  0,         -2,  43,        "Soprano Clef"),        // CLEF_C1
-      ClefInfo("C",   2,  0,         -4,  41,        "Mezzo-soprano Clef"),  // CLEF_C2
-      ClefInfo("C",   3,  0,         -6,  39,        "Alto Clef"),           // CLEF_C3
-      ClefInfo("C",   4,  0,         -8,  37,        "Tenor Clef"),          // CLEF_C4
+      { "C",   1,  0,  -2, 43,
+            { 5, 1, 4, 0, 3, -1, 2, 2, -1, 3, 0, 4, 1, 5 },
+            "Soprano Clef"},        // CLEF_C1
+      { "C",   2,  0,  -4, 41,
+            { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 },
+            "Mezzo-soprano Clef"},  // CLEF_C2
+      { "C",   3,  0,  -6, 39,
+            { 1, 4, 0, 3, 6, 2, 5, 5, 2, 6, 3, 7, 4, 8 },
+            "Alto Clef"},           // CLEF_C3
+      { "C",   4,  0,  -8, 37,
+            { 6, 2, 5, 1, 4, 0, 3, 3, 0, 4, 1, 5, 2, 6 },
+            "Tenor Clef"},          // CLEF_C4
 
-      ClefInfo("TAB", 5,  0,          0,   0,        "Tablature"),
-      ClefInfo("PERC",2, 0,           0,  45,        "Percussion"),
+      { "TAB", 5,  0,   0,  0,
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
+            "Tablature"},
+      { "PERC",2,  0,   0, 45,
+            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
+            "Percussion"},
 
-//      ClefInfo("C",   3,  0,         -7,  38,        "C Clef on third space"),    // CLEF_C5
-
-      ClefInfo("C",   5,  0,         -10,  35,       "Baritone Clef"),            // CLEF_C5
-      ClefInfo("G",   1,  0,          2,   47,       "French Violin Clef"),       // CLEF_G4
+      { "C",   5,  0, -10, 35,
+            { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
+            "Baritone Clef"},            // CLEF_C5
+      { "G",   1,  0,   2, 47,
+            { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
+            "French Violin Clef"},       // CLEF_G4
       };
 
 //---------------------------------------------------------

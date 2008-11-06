@@ -1,3 +1,5 @@
+6.11 (ws)
+      - key signature updates; accidental position now from table
 5.11 (ws)
       - support 3-line staff (in the height of a normal 5 line staff, used
         for drum notation)

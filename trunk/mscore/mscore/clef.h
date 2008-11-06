@@ -77,11 +77,8 @@ struct ClefInfo {
       int octChng;            ///< Octave change for musicXml.
       int yOffset;
       int pitchOffset;        ///< Pitch offset for line 0.
+      char lines[14];
       const char* name;
-      ClefInfo(const char* s, int l, int oc, int yo, int po, const char* n)
-         : sign(s), line(l), octChng(oc), yOffset(yo), pitchOffset(po), name(n)
-            {
-            }
       };
 
 enum {
