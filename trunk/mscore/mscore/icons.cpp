@@ -73,6 +73,9 @@ QIcon grace4Icon, grace16Icon, grace32Icon;
 QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
       double mag = (size/20.0) * 0.6 * (_spatium / (SPATIUM20 * DPI)) * PDPI / DPI;
+
+      double mag1 = double(preferences.iconHeight) / double(ICON_HEIGHT);
+      mag = mag * mag1;
       QRectF bb = sc.bbox(mag);
       qreal w   = bb.width();
       qreal h   = bb.height();
@@ -97,48 +100,52 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
 
 void genIcons()
       {
-      noteIcon           = symIcon(symbols[wholeheadSym]);
-      note2Icon          = symIcon(symbols[note2Sym]);
-      note4Icon          = symIcon(symbols[note4Sym]);
-      note8Icon          = symIcon(symbols[note8Sym]);
-      note16Icon         = symIcon(symbols[note16Sym]);
-      note32Icon         = symIcon(symbols[note32Sym]);
-      note64Icon         = symIcon(symbols[note64Sym]);
-      naturalIcon        = symIcon(symbols[naturalSym], 30);
-      sharpIcon          = symIcon(symbols[sharpSym], 30);
-      sharpsharpIcon     = symIcon(symbols[sharpsharpSym], 30);
-      flatIcon           = symIcon(symbols[flatSym], 30);
-      flatflatIcon       = symIcon(symbols[flatflatSym], 30);
-      quartrestIcon      = symIcon(symbols[quartrestSym], 30);
-      dotIcon            = symIcon(symbols[dotSym], 30);
-      dotdotIcon         = symIcon(symbols[dotdotSym], 30);
-      sforzatoaccentIcon = symIcon(symbols[sforzatoaccentSym]);
-      staccatoIcon       = symIcon(symbols[staccatoSym]);
-      tenutoIcon         = symIcon(symbols[tenutoSym]);
-      plusIcon           = symIcon(symbols[plusSym], 30);
-      clefIcon           = symIcon(symbols[trebleclefSym], 17);
-      staccatoIcon       = symIcon(symbols[dotSym], 30);   //":/data/staccato.svg");
+      int iw = preferences.noteEntryIconWidth;
+      int ih = preferences.noteEntryIconHeight;
+
+      noteIcon           = symIcon(symbols[wholeheadSym], 20, iw, ih);
+      note2Icon          = symIcon(symbols[note2Sym], 20, iw, ih);
+      note4Icon          = symIcon(symbols[note4Sym], 20, iw, ih);
+      note8Icon          = symIcon(symbols[note8Sym], 20, iw, ih);
+      note16Icon         = symIcon(symbols[note16Sym], 20, iw, ih);
+      note32Icon         = symIcon(symbols[note32Sym], 20, iw, ih);
+      note64Icon         = symIcon(symbols[note64Sym], 20, iw, ih);
+      naturalIcon        = symIcon(symbols[naturalSym], 30, iw, ih);
+      sharpIcon          = symIcon(symbols[sharpSym], 30, iw, ih);
+      sharpsharpIcon     = symIcon(symbols[sharpsharpSym], 30, iw, ih);
+      flatIcon           = symIcon(symbols[flatSym], 30, iw, ih);
+      flatflatIcon       = symIcon(symbols[flatflatSym], 30, iw, ih);
+      quartrestIcon      = symIcon(symbols[quartrestSym], 30, iw, ih);
+      dotIcon            = symIcon(symbols[dotSym], 30, iw, ih);
+      dotdotIcon         = symIcon(symbols[dotdotSym], 30, iw, ih);
+      sforzatoaccentIcon = symIcon(symbols[sforzatoaccentSym], 20, iw, ih);
+      staccatoIcon       = symIcon(symbols[staccatoSym], 20, iw, ih);
+      tenutoIcon         = symIcon(symbols[tenutoSym], 20, iw, ih);
+      plusIcon           = symIcon(symbols[plusSym], 30, iw, ih);
+      clefIcon           = symIcon(symbols[trebleclefSym], 17, iw, ih);
+      staccatoIcon       = symIcon(symbols[dotSym], 30, iw, ih);   //":/data/staccato.svg");
 
       acciaccaturaIcon   = QIcon(":/data/acciaccatura.svg");
       appoggiaturaIcon   = QIcon(":/data/appoggiatura.svg");
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
+
       for (int i = 0; i < VOICES; ++i) {
-            QPixmap image(ICON_WIDTH, ICON_HEIGHT);
+            QPixmap image(iw, ih);
             QColor c(preferences.selectColor[i].light(180));
             image.fill(c);
             QPainter painter(&image);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.setPen(QPen(Qt::black));
-            painter.drawText(QRect(0, 0, ICON_WIDTH, ICON_HEIGHT), Qt::AlignCenter, vtext[i]);
+            painter.drawText(QRect(0, 0, iw, ih), Qt::AlignCenter, vtext[i]);
             painter.end();
             voiceIcons[i].addPixmap(image);
 
             painter.begin(&image);
             c = QColor(preferences.selectColor[i].light(140));
-            painter.fillRect(0, 0, ICON_WIDTH, ICON_HEIGHT, c);
+            painter.fillRect(0, 0, iw, ih, c);
             painter.setPen(QPen(Qt::black));
-            painter.drawText(QRect(0, 0, ICON_WIDTH, ICON_HEIGHT), Qt::AlignCenter, vtext[i]);
+            painter.drawText(QRect(0, 0, iw, ih), Qt::AlignCenter, vtext[i]);
             painter.end();
             voiceIcons[i].addPixmap(image, QIcon::Normal, QIcon::On);
             }
@@ -149,21 +156,21 @@ void genIcons()
       pasteIcon.addPixmap(QPixmap(editpaste_xpm));
       printIcon.addPixmap(QPixmap(fileprint_xpm));
 
-      undoIcon     = QIcon(":/data/undo.svg");
-      redoIcon     = QIcon(":/data/redo.svg");
-      midiinIcon   = QIcon(":/data/midiin.svg");
-      speakerIcon  = QIcon(":/data/speaker.svg");
-      startIcon    = QIcon(":/data/start.svg");
-      playIcon     = QIcon(":/data/play.svg");
-      pauseIcon    = QIcon(":/data/pause.svg");
-      sbeamIcon    = QIcon(":/data/sbeam.svg");
-      mbeamIcon    = QIcon(":/data/mbeam.svg");
-      nbeamIcon    = QIcon(":/data/nbeam.svg");
-      beam32Icon   = QIcon(":/data/beam32.svg");
-      abeamIcon    = QIcon(":/data/abeam.svg");
-      fileOpenIcon = QIcon(":/data/fileopen.svg");
-      fileNewIcon  = QIcon(":/data/filenew.svg");
-      fileSaveIcon = QIcon(":/data/filesave.svg");
+      undoIcon       = QIcon(":/data/undo.svg");
+      redoIcon       = QIcon(":/data/redo.svg");
+      midiinIcon     = QIcon(":/data/midiin.svg");
+      speakerIcon    = QIcon(":/data/speaker.svg");
+      startIcon      = QIcon(":/data/start.svg");
+      playIcon       = QIcon(":/data/play.svg");
+      pauseIcon      = QIcon(":/data/pause.svg");
+      sbeamIcon      = QIcon(":/data/sbeam.svg");
+      mbeamIcon      = QIcon(":/data/mbeam.svg");
+      nbeamIcon      = QIcon(":/data/nbeam.svg");
+      beam32Icon     = QIcon(":/data/beam32.svg");
+      abeamIcon      = QIcon(":/data/abeam.svg");
+      fileOpenIcon   = QIcon(":/data/fileopen.svg");
+      fileNewIcon    = QIcon(":/data/filenew.svg");
+      fileSaveIcon   = QIcon(":/data/filesave.svg");
       fileSaveAsIcon = QIcon(":/data/filesaveas.svg");
       exitIcon       = QIcon(":/data/exit.svg");
       viewmagIcon    = QIcon(":/data/viewmag.xpm");

@@ -212,8 +212,8 @@ void MuseScore::showPalette(bool visible)
             //    Lines
             //-----------------------------------
 
-            sp = new Palette(7, 2);
-            sp->setGrid(84, 30);
+            sp = new Palette(7, 2, .8);
+            sp->setGrid(84, 23);
 
             double l = _spatium * 7;
 
@@ -365,7 +365,7 @@ void MuseScore::showPalette(bool visible)
 
             unsigned nn = NOTE_ATTRIBUTES;
             sp = new Palette((nn + 3) / 4, 4);
-            sp->setGrid(42, 27);
+            sp->setGrid(42, 25);
 
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);

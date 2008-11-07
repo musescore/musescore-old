@@ -33,6 +33,7 @@ class PaletteBoxButton : public QPushButton {
       Q_OBJECT
 
       virtual void paintEvent(QPaintEvent*);
+      virtual void changeEvent(QEvent*);
 
    public:
       PaletteBoxButton(QWidget*, QWidget* parent = 0);

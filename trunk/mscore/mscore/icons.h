@@ -67,7 +67,7 @@ class Sym;
 static const int ICON_HEIGHT = 24;
 static const int ICON_WIDTH  = 16;
 
-extern QIcon symIcon(const Sym&, int size=20, int width=ICON_WIDTH, int height=ICON_HEIGHT);
+extern QIcon symIcon(const Sym&, int size, int width, int height);
 extern QIcon noteEntryIcon;
 
 #endif
