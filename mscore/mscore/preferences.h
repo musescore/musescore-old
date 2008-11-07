@@ -96,6 +96,9 @@ struct Preferences {
       int autoSaveTime;
       bool pngScreenShot;
       QString language;
+      int iconWidth, iconHeight;
+      int noteEntryIconWidth, noteEntryIconHeight;
+      QString applicationFont;
 
       bool dirty;
 
@@ -149,6 +152,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       };
 
 extern Preferences preferences;
-extern QString appStyleSheet;
+extern QString appStyleSheet();
 extern bool useALSA, useJACK, usePortaudio;
 #endif

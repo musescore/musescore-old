@@ -236,7 +236,7 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
-      setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
+      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
       se                    = 0;    // script engine
@@ -445,22 +445,17 @@ MuseScore::MuseScore()
 
       entryTools = addToolBar(tr("Note Entry"));
       entryTools->setObjectName("entry-tools");
-      entryTools->setIconSize(QSize(ICON_WIDTH, ICON_HEIGHT));
+      entryTools->setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
       a = getAction("note-input");
       a->setCheckable(true);
       entryTools->addAction(a);
 
       QStringList sl1;
-//      sl1 << "pad-note-1" << "pad-note-2" << "pad-note-4" << "pad-note-8"
-//         << "pad-note-16" << "pad-note-32" << "pad-note-64" << "pad-dot" << "pad-dotdot"
-//         << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
-//         << "pad-nat" << "pad-flat"  <<"pad-flat2"; //  << "pad-staccato";
-
       sl1 << "pad-note-64" << "pad-note-32" << "pad-note-16" << "pad-note-8"
          << "pad-note-4" << "pad-note-2" << "pad-note-1" << "pad-dot" << "pad-dotdot"
          << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
-         << "pad-nat" << "pad-flat"  <<"pad-flat2"; //  << "pad-staccato";
+         << "pad-nat" << "pad-flat"  <<"pad-flat2";
 
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
@@ -1344,11 +1339,10 @@ int main(int argc, char* argv[])
 
       Harmony::initHarmony();
       QApplication app(argc, argv);
-
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
-      qApp->setStyleSheet(appStyleSheet);
+//      qApp->setStyleSheet(appStyleSheet());
       qApp->setWindowIcon(windowIcon);
 
       setDefaultStyle();
@@ -1441,6 +1435,7 @@ int main(int argc, char* argv[])
             }
 
       preferences.read();
+
       QSplashScreen* sc = 0;
       if (!converterMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
@@ -1458,6 +1453,8 @@ int main(int argc, char* argv[])
             sc->show();
             app.processEvents();
             }
+
+      qApp->setStyleSheet(appStyleSheet());
 
       //
       //  load internal fonts

@@ -39,16 +39,31 @@ extern void readShortcuts();
 
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
-QString appStyleSheet(
-      "PaletteBoxButton  { font-size: 8pt; background-color: rgb(215, 215, 215) }\n"
+//---------------------------------------------------------
+//   appStyleSheet
+//---------------------------------------------------------
+
+QString appStyleSheet()
+      {
+      QFont fff;
+      if (preferences.applicationFont.isEmpty())
+            fff = QApplication::font();
+      else
+            fff.fromString(preferences.applicationFont);
+      return QString(
+      "* { font-size: %1pt; font-family: \"%2\"}\n"
+//      "PaletteBoxButton  { font-size: 8px; background-color: rgb(215, 215, 215) }\n"
+      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#timeLabel  { font-size: 28pt; font-family: \"San Serif\" }\n"
       "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"San Serif\" }\n"
       "PlayPanel QLabel#relTempo   { font-size: 10pt; font-family: \"San Serif\" }\n"
-      "AboutBoxDialog QLabel#titleLabel    { font-size: 28pt  }\n"
-      );
+      "AboutBoxDialog QLabel#titleLabel    { font-size: 28pt  }\n")
+         .arg(fff.pointSize())
+         .arg(fff.family());
+      }
 
 //---------------------------------------------------------
 //   Preferences
@@ -151,6 +166,11 @@ void Preferences::init()
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
       language                 = "system";
+      iconWidth                = 24;
+      iconHeight               = 24;
+      noteEntryIconWidth       = ICON_WIDTH;
+      noteEntryIconHeight      = ICON_HEIGHT;
+      applicationFont          = "";
       };
 
 //---------------------------------------------------------
@@ -223,6 +243,12 @@ void Preferences::write()
       s.setValue("autoSaveTime",       autoSaveTime);
       s.setValue("pngScreenShot",      pngScreenShot);
       s.setValue("language",           language);
+      s.setValue("iconHeight",          iconHeight);
+      s.setValue("iconWidth",           iconWidth);
+      s.setValue("noteEntryIconHeight", noteEntryIconHeight);
+      s.setValue("noteEntryIconWidth",  noteEntryIconWidth);
+      if (!applicationFont.isEmpty())
+            s.setValue("applicationFont", applicationFont);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -299,6 +325,11 @@ void Preferences::read()
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
       pngScreenShot            = s.value("pngScreenShot", true).toBool();
       language                 = s.value("language", "system").toString();
+      iconHeight               = s.value("iconHeight", 24).toInt();
+      iconWidth                = s.value("iconHeight", 24).toInt();
+      noteEntryIconHeight      = s.value("noteEntryIconHeight", ICON_HEIGHT).toInt();
+      noteEntryIconWidth       = s.value("noteEntryIconWidth", ICON_WIDTH).toInt();
+      applicationFont          = s.value("applicationFont", "").toString();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -481,7 +512,16 @@ void PreferenceDialog::updateValues(Preferences* p)
                   break;
                   }
             }
-
+      iconHeight->setValue(p->iconHeight);
+      iconWidth->setValue(p->iconWidth);
+      noteEntryIconHeight->setValue(p->noteEntryIconHeight);
+      noteEntryIconWidth->setValue(p->noteEntryIconWidth);
+      {
+      QFont ff;
+      ff.fromString(p->applicationFont);
+      applicationFont->setCurrentFont(ff);
+      applicationFontSize->setValue(ff.pointSize());
+      }
       //
       // initialize local shortcut table
       //    we need a deep copy to be able to rewind all
@@ -858,7 +898,14 @@ void PreferenceDialog::apply()
             QStringList sl = lang.split(" ");
             lang = sl[0];
             }
-      preferences.language = lang;
+      preferences.language            = lang;
+      preferences.iconHeight          = iconHeight->value();
+      preferences.iconWidth           = iconWidth->value();
+      preferences.noteEntryIconHeight = noteEntryIconHeight->value();
+      preferences.noteEntryIconWidth  = noteEntryIconWidth->value();
+      QFont fff = applicationFont->currentFont();
+      fff.setPointSize(applicationFontSize->value());
+      preferences.applicationFont     = fff.toString();
 
 #if 0
       QString localeName = QLocale::system().name();
@@ -875,6 +922,9 @@ void PreferenceDialog::apply()
             mscore->update();
             }
 #endif
+
+      qApp->setStyleSheet(appStyleSheet());
+      genIcons();
 
       emit preferencesChanged();
       preferences.write();

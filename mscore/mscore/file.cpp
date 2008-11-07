@@ -1307,11 +1307,14 @@ void Score::printFile()
 
       pdev->setDocName(name());
       pdev->setDoubleSidedPrinting(pageFormat()->twosided);
+      pdev->setOutputFormat(QPrinter::NativeFormat);
 
 #ifndef __MINGW32__
       // when setting this on windows platform, pd.exec() does not
       // show dialog
       pdev->setOutputFileName(info.path() + "/" + name() + ".pdf");
+#else
+      pdev->setOutputFileName("");
 #endif
 
       QPrintDialog pd(pdev, 0);

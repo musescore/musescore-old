@@ -790,6 +790,16 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   changeEvent
+//---------------------------------------------------------
+
+void PaletteBoxButton::changeEvent(QEvent* ev)
+      {
+      if (ev->type() == QEvent::FontChange)
+            setFixedHeight(QFontMetrics(font()).height() + 2);
+      }
+
+//---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
