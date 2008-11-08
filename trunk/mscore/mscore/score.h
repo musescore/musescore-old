@@ -149,6 +149,7 @@ class Score : public QObject {
 
       int _magIdx;
       double _mag;
+      double _xoff, _yoff;
 
       QQueue<MidiInputEvent> midiInputQueue;
       QList<MidiMapping> _midiMapping;
@@ -659,6 +660,10 @@ class Score : public QObject {
       void setMagIdx(int val);
       double mag()            { return _mag; }
       void setMag(double d);
+      double xoff() const     { return _xoff; }
+      double yoff() const     { return _yoff; }
+      void setXoff(double v)  { _xoff = v;    }
+      void setYoff(double v)  { _yoff = v;    }
       };
 
 extern Score* gscore;

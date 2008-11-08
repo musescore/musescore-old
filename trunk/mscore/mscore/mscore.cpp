@@ -1049,6 +1049,8 @@ void MuseScore::setCurrentScore(int idx)
             return;
             }
       if (cs) {
+            cs->setXoff(cs->canvas()->xoffset());
+            cs->setYoff(cs->canvas()->yoffset());
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
             }
@@ -1065,6 +1067,8 @@ void MuseScore::setCurrentScore(int idx)
             mag->setMagIdx(cs->magIdx());
       double m = getMag(cs->canvas());
       cs->canvas()->setMag(m);
+      cs->canvas()->setOffset(cs->xoff(), cs->yoff());
+
 
       navigatorId->setChecked(cs->canvas()->navigatorVisible());
 
@@ -1982,8 +1986,9 @@ double MuseScore::getMag(Canvas* canvas) const
 void MuseScore::setMag(double d)
       {
       mag->setMag(d);
+      mag->setMagIdx(MAG_FREE);
       if (cs)
-            cs->canvas()->setMag(d);
+            cs->setMag(d);
       }
 
 //---------------------------------------------------------

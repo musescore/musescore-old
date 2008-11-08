@@ -44,6 +44,8 @@ class Element;
 class Page;
 class DoubleLabel;
 class Score;
+class BSymbol;
+class ElementItem;
 
 class ShowNoteWidget;
 // class QSplitter;
@@ -82,6 +84,7 @@ class PageListEditor : public QWidget {
       ShowElementBase* lyricsView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
+      void addSymbol(ElementItem* parent, BSymbol* bs);
 
    protected:
       Score* cs;

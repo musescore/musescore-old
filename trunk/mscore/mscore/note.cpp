@@ -293,9 +293,17 @@ void Note::add(Element* e)
       {
 	e->setParent(this);
       switch(e->type()) {
-            case TEXT:
             case SYMBOL:
             case IMAGE:
+                  {
+                  BSymbol* b = static_cast<BSymbol*>(e);
+                  foreach(Element* ee, b->getLeafs())
+                        ee->setParent(b);
+                  e->setMag(mag());
+                  _el.append(e);
+                  }
+                  break;
+            case TEXT:
                   e->setMag(mag());
                   _el.append(e);
                   break;
@@ -1039,7 +1047,7 @@ void Note::collectElements(QList<const Element*>& elist) const
       if (_tieFor)
             _tieFor->collectElements(elist);
       foreach(Element* e, _el)
-            elist.append(e);
+            e->collectElements(elist);
       if (_accidental)
             elist.append(_accidental);
       }

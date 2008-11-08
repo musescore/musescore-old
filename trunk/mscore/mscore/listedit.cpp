@@ -245,6 +245,20 @@ void PageListEditor::layoutScore()
       }
 
 //---------------------------------------------------------
+//   addSymbol
+//---------------------------------------------------------
+
+void PageListEditor::addSymbol(ElementItem* parent, BSymbol* bs)
+      {
+      const QList<Element*>el = bs->getLeafs();
+      ElementItem* i = new ElementItem(parent, bs);
+      if (!el.isEmpty()) {
+            foreach(Element* g, el)
+                  addSymbol(i, static_cast<BSymbol*>(g));
+            }
+      }
+
+//---------------------------------------------------------
 //   updateList
 //---------------------------------------------------------
 
@@ -331,8 +345,14 @@ void PageListEditor::updateList(Score* s)
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
                                                       }
-                                                foreach(Element* f, *note->el())
-                                                      new ElementItem(ni, f);
+                                                foreach(Element* f, *note->el()) {
+                                                      if (f->type() == SYMBOL || f->type() == IMAGE) {
+                                                            BSymbol* bs = static_cast<BSymbol*>(f);
+                                                            addSymbol(ni, bs);
+                                                            }
+                                                      else
+                                                            new ElementItem(ni, f);
+                                                      }
                                                 if (note->tieFor()) {
                                                       Tie* tie = note->tieFor();
                                                       ElementItem* ti = new ElementItem(ni, tie);
