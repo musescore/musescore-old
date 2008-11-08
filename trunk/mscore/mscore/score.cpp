@@ -1849,6 +1849,7 @@ void Score::setState(int s)
 void Score::setMag(double d)
       {
       _magIdx = MAG_FREE;
+      _mag    = d;
       canvas()->setMag(_mag);
       }
 

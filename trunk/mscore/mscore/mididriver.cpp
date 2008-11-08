@@ -348,7 +348,7 @@ void AlsaMidiDriver::getOutputPollFd(struct pollfd** p, int* n)
 
 void AlsaMidiDriver::read()
       {
-      static int active;
+      static int active = 0;
 
       snd_seq_event_t* ev;
       for (;;) {
