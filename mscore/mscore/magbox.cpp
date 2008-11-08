@@ -172,7 +172,7 @@ void MagBox::setMag(double val)
       blockSignals(true);
       setCurrentIndex(MAG_FREE);
       freeMag = val;
-      addItem(QString("%1%").arg(freeMag * 100, MAG_FREE));
+      setItemText(MAG_FREE, QString("%1%").arg(freeMag * 100));
       blockSignals(false);
       }
 

@@ -29,12 +29,24 @@
 //---------------------------------------------------------
 
 class BSymbol : public Element {
+      QList<Element*> _leafs;
 
    public:
       BSymbol(Score* s) : Element(s) {}
+      BSymbol(const BSymbol&);
+
       BSymbol &operator=(const BSymbol&);
 
+      virtual void add(Element*);
+      virtual void remove(Element*);
+      virtual void collectElements(QList<const Element*>& el) const;
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+      virtual void layout(ScoreLayout*);
+      virtual QRectF drag(const QPointF& pos);
       virtual bool isMovable() const { return true; }
+
+      const QList<Element*>& getLeafs() const { return _leafs; }
       };
 
 #endif

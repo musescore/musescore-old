@@ -52,6 +52,7 @@ class Canvas : public QFrame, public Viewer {
    private:
       Navigator* navigator;
       ScoreLayout* _layout;
+      int level;
 
       State state;
       bool dragCanvasState;

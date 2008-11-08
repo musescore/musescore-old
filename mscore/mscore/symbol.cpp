@@ -26,6 +26,119 @@
 #include "measure.h"
 #include "layout.h"
 #include "page.h"
+#include "score.h"
+#include "viewer.h"
+#include "image.h"
+
+//---------------------------------------------------------
+//   BSymbol
+//---------------------------------------------------------
+
+BSymbol::BSymbol(const BSymbol& s)
+   : Element(s)
+      {
+      _leafs = s._leafs;
+      foreach(Element* e, _leafs)
+            e->setParent(this);
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void BSymbol::add(Element* e)
+      {
+      if (e->type() == SYMBOL || e->type() == IMAGE) {
+            e->setParent(this);
+            _leafs.append(e);
+            BSymbol* b = static_cast<BSymbol*>(e);
+            foreach(Element* ee, b->getLeafs())
+                  ee->setParent(b);
+            }
+      else
+            printf("BSymbol::add: unsupported type %s\n", e->name());
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void BSymbol::remove(Element* e)
+      {
+      if (e->type() == SYMBOL || e->type() == IMAGE) {
+            if (!_leafs.removeOne(e))
+                  printf("BSymbol::remove: element <%s> not found\n", e->name());
+            }
+      else
+            printf("BSymbol::remove: unsupported type %s\n", e->name());
+      }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void BSymbol::collectElements(QList<const Element*>& el) const
+      {
+      el.append(this);
+      foreach (Element* e, _leafs)
+            e->collectElements(el);
+      }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool BSymbol::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+      {
+      if (type == SYMBOL || type == IMAGE) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* BSymbol::drop(const QPointF&, const QPointF&, Element* el)
+      {
+      if (el->type() == SYMBOL || el->type() == IMAGE) {
+            el->setParent(this);
+            score()->undoAddElement(el);
+            return el;
+            }
+      else
+            delete el;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void BSymbol::layout(ScoreLayout* l)
+      {
+      foreach(Element* e, _leafs)
+            e->layout(l);
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+QRectF BSymbol::drag(const QPointF& pos)
+      {
+      QRectF r(abbox());
+      foreach(const Element* e, _leafs)
+            r |= e->abbox();
+      setUserOff(pos / _spatium);
+      r |= abbox();
+      foreach(const Element* e, _leafs)
+            r |= e->abbox();
+      return r;
+      }
+
 
 //---------------------------------------------------------
 //   Symbol
@@ -75,6 +188,7 @@ void Symbol::layout(ScoreLayout* layout)
       else if (_align & ALIGN_HCENTER)
             p.setX(-(w * .5));
       setPos(p + o);
+      BSymbol::layout(layout);
       }
 
 //---------------------------------------------------------
@@ -104,6 +218,8 @@ void Symbol::write(Xml& xml) const
       xml.stag("Symbol");
       xml.tag("name", symbols[_sym].name());
       Element::writeProperties(xml);
+      foreach(const Element* e, getLeafs())
+            e->write(xml);
       xml.etag();
       }
 
@@ -132,6 +248,34 @@ void Symbol::read(QDomElement e)
                         s = 0;
                         }
                   }
+            else if (tag == "Symbol") {
+                  Symbol* s = new Symbol(score());
+                  s->read(e);
+                  add(s);
+                  }
+            else if (tag == "Image") {
+                  // look ahead for image type
+                  QString path;
+                  QDomElement ee = e.firstChildElement("path");
+                  if (!ee.isNull())
+                        path = ee.text();
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        ) {
+                        image = new RasterImage(score());
+                        }
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->read(e);
+                        add(image);
+                        }
+                  }
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -150,14 +294,15 @@ void Symbol::read(QDomElement e)
 QLineF Symbol::dragAnchor() const
       {
       if (parent()->type() == MEASURE) {
-            Measure* measure = (Measure*)parent();
+            Measure* measure = static_cast<Measure*>(parent());
             Segment* segment = measure->tick2segment(tick());
             System* s        = measure->system();
             double y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
             QPointF anchor(segment->abbox().x(), y);
             return QLineF(canvasPos(), anchor);
             }
-      else
+      else {
             return QLineF(canvasPos(), parent()->canvasPos());
+            }
       }
 

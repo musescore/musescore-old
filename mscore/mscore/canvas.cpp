@@ -71,6 +71,7 @@ Canvas::Canvas(QWidget* parent)
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
 
+      level            = 0;
       dragElement      = 0;
       dragObject       = 0;
       navigator        = 0;
@@ -375,6 +376,17 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       bool b1 = ev->button() == Qt::LeftButton;
       bool b3 = ev->button() == Qt::RightButton;
+
+      if (ev->buttons() != ev->button()) {
+            if (ev->buttons() == (Qt::LeftButton | Qt::RightButton)) {
+                  ++level;
+                  mouseReleaseEvent(ev);
+                  b1 = true;
+                  b3 = false;
+                  }
+            else
+                  return;
+            }
 
       if (state == MAG) {
             if (b1)
@@ -767,8 +779,10 @@ void Canvas::updateGrips()
 //   mouseReleaseEvent
 //---------------------------------------------------------
 
-void Canvas::mouseReleaseEvent(QMouseEvent* /*ev*/)
+void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
+      if (ev->buttons() == 0)
+            level = 0;
       if (dragCanvasState) {
             dragCanvasState = false;
             setCursor(QCursor(Qt::ArrowCursor));
@@ -1643,8 +1657,9 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 void Canvas::dragSymbol(const QPointF& pos)
       {
       const QList<const Element*> el = elementsAt(pos);
-      if (!el.isEmpty() && el[0]->type() == NOTE) {
-            if (el[0]->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
+      const Element* e = el.isEmpty() ? 0 : el[0];
+      if (e && (e->type() == NOTE || e->type() == SYMBOL || e->type() == IMAGE)) {
+            if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
                   return;
             else {
                   setDropTarget(0);
@@ -2169,7 +2184,7 @@ Element* Canvas::elementNear(const QPointF& p)
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
-      return const_cast<Element*>(ll.at(0));
+      return const_cast<Element*>(ll.at(level % ll.size()));
       }
 
 //---------------------------------------------------------

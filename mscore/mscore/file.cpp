@@ -1060,8 +1060,6 @@ bool Score::read(QDomElement e)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
 
-      double xoff = 0;
-      double yoff = 0;
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
@@ -1086,14 +1084,14 @@ bool Score::read(QDomElement e)
                   else if (tag == "MagIdx")
                         _magIdx = i;
                   else if (tag == "xoff") {
-                        xoff = val.toDouble();
+                        _xoff = val.toDouble();
                         if (_mscVersion >= 105)
-                              xoff *= DPMM;
+                              _xoff *= DPMM;
                         }
                   else if (tag == "yoff") {
-                        yoff = val.toDouble();
+                        _yoff = val.toDouble();
                         if (_mscVersion >= 105)
-                              yoff *= DPMM;
+                              _yoff *= DPMM;
                         }
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
@@ -1209,8 +1207,6 @@ bool Score::read(QDomElement e)
 
       searchSelectedElements();
       _fileDivision = division;
-      if (!viewer.isEmpty())
-            canvas()->setOffset(xoff, yoff);
       return false;
       }
 

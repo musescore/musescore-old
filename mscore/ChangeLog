@@ -1,4 +1,6 @@
 8.11 (ws)
+      - implement drag/drop of symbol onto symbol
+      - fixes for mag/offset
       - first implementation of midi input for windows
 7.11 (ws)
       - made application font and icon size configurable.
