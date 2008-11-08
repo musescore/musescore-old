@@ -228,7 +228,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_1,
          Qt::WindowShortcut,
          QT_TR_NOOP("Unison above"),
-         QT_TR_NOOP("Enter Unison above")
+         QT_TR_NOOP("Enter Unison Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -237,7 +237,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_2,
          Qt::WindowShortcut,
          QT_TR_NOOP("Second above"),
-         QT_TR_NOOP("Enter Second above")
+         QT_TR_NOOP("Enter Second Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -246,7 +246,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_3,
          Qt::WindowShortcut,
          QT_TR_NOOP("Third above"),
-         QT_TR_NOOP("Enter Third above")
+         QT_TR_NOOP("Enter Third Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -255,7 +255,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_4,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fourth above"),
-         QT_TR_NOOP("Enter Fourth above")
+         QT_TR_NOOP("Enter Fourth Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -264,7 +264,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_5,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fifth above"),
-         QT_TR_NOOP("Enter Fifth above")
+         QT_TR_NOOP("Enter Fifth Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -273,7 +273,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_6,
          Qt::WindowShortcut,
          QT_TR_NOOP("Sixth above"),
-         QT_TR_NOOP("Enter Sixth above")
+         QT_TR_NOOP("Enter Sixth Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -282,7 +282,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_7,
          Qt::WindowShortcut,
          QT_TR_NOOP("Seventh above"),
-         QT_TR_NOOP("Enter Seventh above")
+         QT_TR_NOOP("Enter Seventh Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -291,7 +291,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_8,
          Qt::WindowShortcut,
          QT_TR_NOOP("Octave above"),
-         QT_TR_NOOP("Enter Octave above")
+         QT_TR_NOOP("Enter Octave Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -300,7 +300,7 @@ Shortcut MuseScore::sc[] = {
          Qt::ALT + Qt::Key_9,
          Qt::WindowShortcut,
          QT_TR_NOOP("Ninth above"),
-         QT_TR_NOOP("Enter Ninth above")
+         QT_TR_NOOP("Enter Ninth Above")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -309,7 +309,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_2,
          Qt::WindowShortcut,
          QT_TR_NOOP("Second below"),
-         QT_TR_NOOP("Enter Second below")
+         QT_TR_NOOP("Enter Second Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -318,7 +318,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_3,
          Qt::WindowShortcut,
          QT_TR_NOOP("Third below"),
-         QT_TR_NOOP("Enter Third below")
+         QT_TR_NOOP("Enter Third Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -327,7 +327,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_4,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fourth below"),
-         QT_TR_NOOP("Enter Fourth below")
+         QT_TR_NOOP("Enter Fourth Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -336,7 +336,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_5,
          Qt::WindowShortcut,
          QT_TR_NOOP("Fifth below"),
-         QT_TR_NOOP("Enter Fifth below")
+         QT_TR_NOOP("Enter Fifth Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -345,7 +345,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_6,
          Qt::WindowShortcut,
          QT_TR_NOOP("Sixth below"),
-         QT_TR_NOOP("Enter Sixth below")
+         QT_TR_NOOP("Enter Sixth Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -354,7 +354,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_7,
          Qt::WindowShortcut,
          QT_TR_NOOP("Seventh below"),
-         QT_TR_NOOP("Enter Seventh below")
+         QT_TR_NOOP("Enter Seventh Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -363,7 +363,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_8,
          Qt::WindowShortcut,
          QT_TR_NOOP("Octave below"),
-         QT_TR_NOOP("Enter Octave below")
+         QT_TR_NOOP("Enter Octave Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -372,7 +372,7 @@ Shortcut MuseScore::sc[] = {
          Qt::SHIFT + Qt::Key_9,
          Qt::WindowShortcut,
          QT_TR_NOOP("Ninth below"),
-         QT_TR_NOOP("Enter Ninth below")
+         QT_TR_NOOP("Enter Ninth Below")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
