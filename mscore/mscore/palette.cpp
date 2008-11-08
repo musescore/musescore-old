@@ -784,6 +784,7 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
    : QPushButton(parent)
       {
       setCheckable(true);
+      setFlat(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
       setFixedHeight(QFontMetrics(font()).height() + 2);

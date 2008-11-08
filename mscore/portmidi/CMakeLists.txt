@@ -26,6 +26,8 @@ add_library (
       pm_win/pmwinmm.c
       pm_win/pmwin.c
 	pm_common/portmidi.c
+      porttime/porttime.c
+      porttime/ptwinmm.c
   )
 
 include_directories(

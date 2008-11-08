@@ -94,7 +94,7 @@ QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
 if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
-      set (AUDIO pa.cpp)
+      set (AUDIO pa.cpp pm.cpp)
 else (MINGW)
       set (AUDIO "")
       if (USE_PORTAUDIO)
@@ -187,6 +187,7 @@ if (MINGW)
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
+      winmm
       )
 
    install(TARGETS mscore RUNTIME DESTINATION bin)

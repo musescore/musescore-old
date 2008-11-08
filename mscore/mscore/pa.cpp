@@ -32,6 +32,8 @@
 #endif
 
 #include <portaudio.h>
+#include "mididriver.h"
+#include "pm.h"
 
 PaStream* stream;
 
@@ -123,12 +125,15 @@ bool Portaudio::init()
             }
 #ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver(seq);
-      if (!midiDriver->init()) {
+#endif
+#ifdef USE_PORTMIDI
+      midiDriver = new PortMidiDriver(seq);
+#endif
+      if (midiDriver && !midiDriver->init()) {
             delete midiDriver;
             midiDriver = 0;
             return false;
             }
-#endif
       return true;
       }
 
@@ -302,9 +307,8 @@ void Portaudio::process(int n, float* l, float* r, int stride)
 
 void Portaudio::midiRead()
       {
-#ifdef USE_ALSA
-      midiDriver->read();
-#endif
+      if (midiDriver)
+            midiDriver->read();
       }
 
 //---------------------------------------------------------

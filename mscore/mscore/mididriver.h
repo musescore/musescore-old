@@ -56,7 +56,6 @@ class Port {
       friend class AlsaMidiDriver;
       };
 
-#ifdef USE_ALSA
 //---------------------------------------------------------
 //   MidiDriver
 //---------------------------------------------------------
@@ -79,6 +78,7 @@ class MidiDriver {
       virtual void write(const MidiOutEvent&) = 0;
       };
 
+#ifdef USE_ALSA
 //---------------------------------------------------------
 //   AlsaMidi
 //---------------------------------------------------------
