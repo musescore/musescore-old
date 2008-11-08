@@ -33,9 +33,9 @@ static unsigned int startMag = MAG_100;
 
 static const char* magTable[] = {
      "25%", "50%", "75%", "100%", "150%", "200%", "400%", "800%", "1600%",
-      QT_TRANSLATE_NOOP("magTable","PgeWidth"),
-      QT_TRANSLATE_NOOP("magTable","Page"),
-      QT_TRANSLATE_NOOP("magTable","DblPage"),
+      QT_TRANSLATE_NOOP("magTable","Page Width"),
+      QT_TRANSLATE_NOOP("magTable","Whole Page"),
+      QT_TRANSLATE_NOOP("magTable","Two Pages"),
       ""
      };
 
@@ -49,7 +49,7 @@ MagBox::MagBox(QWidget* parent)
       freeMag = 1.0;
       setEditable(true);
       setInsertPolicy(QComboBox::InsertAtBottom);
-      setToolTip(tr("Mag"));
+      setToolTip(tr("Magnification"));
       setWhatsThis(tr("Zoom Canvas"));
       setValidator(new MagValidator(this));
 

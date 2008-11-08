@@ -998,7 +998,7 @@
           </font>
          </property>
          <property name="text" >
-          <string>When pressing F in note entry mode the created note pitch depends on the current key signature. In G-major a fis is created. If the alternate input method is enabled, the current key signature is irrelevant. Pressing F always creates a f note.</string>
+          <string>If you use the standard input method then pressing then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</string>
          </property>
          <property name="wordWrap" >
           <bool>true</bool>
