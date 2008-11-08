@@ -24,9 +24,7 @@
 #include "config.h"
 #include "mididriver.h"
 
-#ifdef USE_PORTMIDI
 #include "portmidi/pm_common/portmidi.h"
-#endif
 
 class Seq;
 
