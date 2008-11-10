@@ -155,6 +155,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _show         = true;
       _lines        = 5;
       _small        = false;
+      _slashStyle   = false;
       _barLineSpan  = 1;
       }
 
@@ -197,6 +198,8 @@ void Staff::write(Xml& xml) const
             xml.tag("lines", lines());
       if (small())
             xml.tag("small", small());
+      if (slashStyle())
+            xml.tag("slashStyle", slashStyle());
       _clefList->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets) {
@@ -221,6 +224,8 @@ void Staff::read(QDomElement e)
                   setLines(e.text().toInt());
             else if (tag == "small")
                   setSmall(e.text().toInt());
+            else if (tag == "slashStyle")
+                  setSlashStyle(e.text().toInt());
             else if (tag == "cleflist")
                   _clefList->read(e, _score);
             else if (tag == "keylist")

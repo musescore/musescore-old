@@ -73,6 +73,7 @@ class Staff {
       bool _show;             ///< derived from part->show()
       int _lines;
       bool _small;
+      bool _slashStyle;
 
    public:
       Staff(Score*, Part*, int);
@@ -94,22 +95,24 @@ class Staff {
       int bracketLevels() const      { return _brackets.size(); }
       void addBracket(BracketItem);
 
-      KeyList* keymap() const        { return _keymap; }
-      ClefList* clefList() const     { return _clefList;   }
+      KeyList* keymap() const        { return _keymap;      }
+      ClefList* clefList() const     { return _clefList;    }
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int st);
       int clef(int tick) const;
       int key(int tick) const;
 
-      bool show() const              { return _show;   }
-      void setShow(bool val)         { _show = val;    }
-      bool small() const             { return _small;  }
-      void setSmall(bool val)        { _small = val;   }
-      int lines() const              { return _lines;  }
-      void setLines(int val)         { _lines = val;   }
+      bool show() const              { return _show;        }
+      bool slashStyle() const        { return _slashStyle;  }
+      void setShow(bool val)         { _show = val;         }
+      bool small() const             { return _small;       }
+      void setSmall(bool val)        { _small = val;        }
+      void setSlashStyle(bool val)   { _slashStyle = val;   }
+      int lines() const              { return _lines;       }
+      void setLines(int val)         { _lines = val;        }
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val);
-      Score* score() const           { return _score; }
+      Score* score() const           { return _score;       }
       double mag() const;
       double height() const;
       };

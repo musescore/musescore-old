@@ -58,6 +58,7 @@ struct MStaff {
                               ///< this changes some layout rules
       Spacer* _vspacer;
       bool _visible;
+      bool _slashStyle;
 
       MStaff();
       ~MStaff();
@@ -211,6 +212,7 @@ class Measure : public MeasureBase {
       void exchangeVoice(int, int, int, int);
       void checkMultiVoices(int staffIdx);
       bool visible(int staffIdx) const;
+      bool slashStyle(int staffIdx) const;
       };
 
 #endif

@@ -56,6 +56,9 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
             item = new QTableWidgetItem();
             item->setCheckState(ms->_visible ? Qt::Checked : Qt::Unchecked);
             staves->setItem(staffIdx, 1, item);
+            item = new QTableWidgetItem();
+            item->setCheckState(ms->_slashStyle ? Qt::Checked : Qt::Unchecked);
+            staves->setItem(staffIdx, 2, item);
             }
       staves->verticalHeader()->hide();
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
@@ -68,7 +71,6 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
 void MeasureProperties::bboxClicked(QAbstractButton* button)
       {
       QDialogButtonBox::ButtonRole br = buttonBox->buttonRole(button);
-printf("button %d\n", int(br));
       switch(br) {
             case QDialogButtonBox::ApplyRole:
                   apply();
@@ -95,6 +97,16 @@ printf("button %d\n", int(br));
 bool MeasureProperties::visible(int staffIdx)
       {
       QTableWidgetItem* item = staves->item(staffIdx, 1);
+      return item->checkState() == Qt::Checked;
+      }
+
+//---------------------------------------------------------
+//   slashStyle
+//---------------------------------------------------------
+
+bool MeasureProperties::slashStyle(int staffIdx)
+      {
+      QTableWidgetItem* item = staves->item(staffIdx, 2);
       return item->checkState() == Qt::Checked;
       }
 
@@ -138,6 +150,7 @@ void MeasureProperties::apply()
       for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
             MStaff* ms = m->mstaff(staffIdx);
             ms->_visible = visible(staffIdx);
+            ms->_slashStyle = slashStyle(staffIdx);
             }
 
       m->setIrregular(isIrregular());     // TODO: shall we make this undoable?

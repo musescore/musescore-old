@@ -44,6 +44,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       transposition->setValue(part->pitchOffset());
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
+      slashStyle->setChecked(staff->slashStyle());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
@@ -87,6 +88,7 @@ void EditStaff::apply()
       part->setPitchOffset(transposition->value());
       staff->setLines(lines->value());
       staff->setSmall(small->isChecked());
+      staff->setSlashStyle(slashStyle->isChecked());
       part->setShortName(*shortName->document());
       part->setLongName(*longName->document());
       Score* score = staff->score();

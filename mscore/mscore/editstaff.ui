@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>654</width>
-    <height>425</height>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -21,8 +21,8 @@
      <property name="flat" >
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
        <layout class="QHBoxLayout" >
         <item>
          <widget class="QLabel" name="label" >
@@ -74,7 +74,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" >
+      <item>
        <widget class="QCheckBox" name="small" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
@@ -84,6 +84,13 @@
         </property>
         <property name="text" >
          <string>Small</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="slashStyle" >
+        <property name="text" >
+         <string>Slash Style</string>
         </property>
        </widget>
       </item>

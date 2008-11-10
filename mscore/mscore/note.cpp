@@ -48,13 +48,14 @@
 #include "drumset.h"
 
 const int noteHeads[HEAD_GROUPS][4] = {
-      { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
-      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,  wholecrossedheadSym },
-      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,  wholediamondheadSym},
-      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym, wholetriangleheadSym},
-      { wholediamond2headSym, halfdiamond2headSym, diamond2headSym, wholediamond2headSym },
-      { wholeslashheadSym,    halfslashheadSym,   quartslashheadSym, wholeslashheadSym },
-      { xcircledheadSym,      xcircledheadSym,    xcircledheadSym,   xcircledheadSym },
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym},
+      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym },
+      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym},
+      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym,   wholetriangleheadSym},
+      { wholediamond2headSym, halfdiamond2headSym, diamond2headSym,   wholediamond2headSym },
+
+      { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym },
+      { xcircledheadSym,      xcircledheadSym,     xcircledheadSym,   xcircledheadSym },
       };
 
 //---------------------------------------------------------
@@ -387,7 +388,12 @@ QPointF Note::stemPos(bool upFlag) const
             }
       if (_mirror)
             upFlag = !upFlag;
+      //
+      // TODO: implement table for all note heads
+      //
       qreal yo = _spatium * .2 * mag();
+      if (_headGroup == 5)
+            yo = _spatium * 1.0 * mag();
       if (upFlag) {
             x += symbols[_head].width(mag()) - sw;
             y -= yo;
