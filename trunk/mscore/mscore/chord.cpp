@@ -458,25 +458,26 @@ QRectF Chord::bbox() const
 
 void Chord::layoutStem1(ScoreLayout* layout)
       {
+      int istaff      = staffIdx();
       double _spatium = layout->spatium();
-      System* s      = segment()->measure()->system();
+      System* s       = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
-      double sy      = s->staff(staffIdx())->bbox().y();
+      double sy      = s->staff(istaff)->bbox().y();
       Note* upnote   = upNote();
       Note* downnote = downNote();
 
-      double uppos   = s->staff(staffIdx() + upnote->staffMove())->bbox().y();
+      double uppos   = s->staff(istaff + upnote->staffMove())->bbox().y();
             uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
 
-      double downpos = s->staff(staffIdx() + downnote->staffMove())->bbox().y();
+      double downpos = s->staff(istaff + downnote->staffMove())->bbox().y();
             downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
 
       //-----------------------------------------
       //  process stem
       //-----------------------------------------
 
-      bool hasStem = duration().hasStem();
+      bool hasStem = duration().hasStem() && !measure()->slashStyle(istaff);
       int hookIdx  = duration().hooks();
 
       if (hasStem) {
@@ -549,7 +550,6 @@ void Chord::layoutStem(ScoreLayout* layout)
       Spatium stemLen;
       Spatium normalLen(3.5 * staffMag);  // stem length is one octave
 
-      bool hasStem = duration().hasStem();
       int hookIdx  = duration().hooks();
 
       if (_noteType != NOTE_NORMAL) {
@@ -598,14 +598,10 @@ void Chord::layoutStem(ScoreLayout* layout)
       if (up())
             stemLen *= -1.0;
 
-      if (hasStem) {
-//            if (!_stem)
-//                  setStem(new Stem(score()));
+      if (_stem) {
             _stem->setLen(stemLen);
             _stem->setPos(npos);
             }
-      else
-            setStem(0);
 
       if (_stemSlash) {
             double x = _stem->pos().x();

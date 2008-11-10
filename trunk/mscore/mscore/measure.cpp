@@ -89,6 +89,7 @@ MStaff::MStaff()
       hasVoices    = false;
       _vspacer     = 0;
       _visible     = true;
+      _slashStyle  = false;
       }
 
 MStaff::~MStaff()
@@ -2275,6 +2276,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             xml.tag("vspacer", mstaff->_vspacer->space().val());
       if (!mstaff->_visible)
             xml.tag("visible", mstaff->_visible);
+      if (mstaff->_slashStyle)
+            xml.tag("slashStyle", mstaff->_slashStyle);
 
       foreach (const Element* el, _el) {
             if ((el->staffIdx() == staff) || (el->systemFlag() && writeSystemElements)) {
@@ -2665,6 +2668,8 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "visible")
                   staves[idx]->_visible = val.toInt();
+            else if (tag == "slashStyle")
+                  staves[idx]->_slashStyle = val.toInt();
             else if (tag == "Beam") {
                   Beam* beam = new Beam(score());
                   beam->setTrack(score()->curTrack);
@@ -2721,6 +2726,15 @@ void Measure::read(QDomElement e)
 bool Measure::visible(int staffIdx) const
       {
       return score()->staff(staffIdx)->show() && staves[staffIdx]->_visible;
+      }
+
+//---------------------------------------------------------
+//   slashStyle
+//---------------------------------------------------------
+
+bool Measure::slashStyle(int staffIdx) const
+      {
+      return score()->staff(staffIdx)->slashStyle() || staves[staffIdx]->_slashStyle;
       }
 
 //---------------------------------------------------------

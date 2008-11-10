@@ -35,16 +35,17 @@ class MeasureProperties : public QDialog, private Ui::MeasurePropertiesBase {
       Measure* m;
 
       void apply();
+      SigEvent sig() const;
+      bool isIrregular() const;
+      int repeatCount() const;
+      bool visible(int staffIdx);
+      bool slashStyle(int staffIdx);
 
    private slots:
       void bboxClicked(QAbstractButton* button);
 
    public:
       MeasureProperties(Measure*, QWidget* parent = 0);
-      SigEvent sig() const;
-      bool isIrregular() const;
-      int repeatCount() const;
-      bool visible(int staffIdx);
       };
 
 #endif

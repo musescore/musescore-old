@@ -49,7 +49,12 @@
         </column>
         <column>
          <property name="text" >
-          <string>visible</string>
+          <string>Visible</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>SlashStyle</string>
          </property>
         </column>
        </widget>
