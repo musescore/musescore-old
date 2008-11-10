@@ -8,14 +8,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>293</height>
+    <width>726</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MuseScore: Measure Properties</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_2" >
+   <item>
+    <widget class="QGroupBox" name="groupBox_3" >
+     <property name="title" >
+      <string>Staves</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <widget class="QTableWidget" name="staves" >
+        <property name="alternatingRowColors" >
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode" >
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <property name="selectionBehavior" >
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid" >
+         <bool>false</bool>
+        </property>
+        <property name="cornerButtonEnabled" >
+         <bool>false</bool>
+        </property>
+        <column>
+         <property name="text" >
+          <string>Staff</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>visible</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
@@ -84,7 +125,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>40</width>
           <height>20</height>
@@ -132,25 +173,12 @@
     </widget>
    </item>
    <item>
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="dialogButtonBox" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -159,7 +187,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>dialogButtonBox</sender>
+   <sender>buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>MeasurePropertiesBase</receiver>
    <slot>accept()</slot>
@@ -175,7 +203,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>dialogButtonBox</sender>
+   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>MeasurePropertiesBase</receiver>
    <slot>reject()</slot>

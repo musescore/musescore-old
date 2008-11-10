@@ -88,6 +88,7 @@ MStaff::MStaff()
       lines        = 0;
       hasVoices    = false;
       _vspacer     = 0;
+      _visible     = true;
       }
 
 MStaff::~MStaff()
@@ -1349,9 +1350,9 @@ again:
                   }
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  Staff* staff = score()->staff(staffIdx);
+//                  Staff* staff = score()->staff(staffIdx);
                   spaces[seg][staffIdx].setValid(false);
-                  if (!staff->show())
+                  if (!visible(staffIdx))
                         continue;
 
                   double min   = 0.0;
@@ -2154,41 +2155,7 @@ void Measure::propertyAction(const QString& s)
       {
       if (s == "props") {
             MeasureProperties im(this);
-            if (!im.exec())
-                  return;
-
-            setIrregular(im.isIrregular());     // TODO: shall we make this undoable?
-            setRepeatCount(im.repeatCount());
-            score()->setDirty();
-            score()->select(0, SELECT_SINGLE, 0);
-            SigList* sl = score()->sigmap;
-
-            SigEvent oev = sl->timesig(tick());
-            SigEvent newEvent = im.sig();
-            if (oev == newEvent)
-                  return;
-
-            int oldLen = oev.ticks;
-            int newLen = newEvent.ticks;
-
-            SigEvent oldEvent;
-            iSigEvent i = sl->find(tick());
-            if (i != sl->end())
-                  oldEvent = i->second;
-
-            score()->undoChangeSig(tick(), oldEvent, newEvent);
-
-            //
-            // change back to nominal values if there is
-            // not already another TimeSig
-            //
-            i = sl->find(tick() + oldLen);
-            if (i == sl->end()) {
-                  score()->undoChangeSig(tick() + newLen, SigEvent(), oev);
-                  }
-            adjustToLen(oldLen, newLen);
-            score()->fixTicks();
-            score()->select(this, SELECT_SINGLE, 0);
+            im.exec();
             }
       }
 
@@ -2306,6 +2273,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       MStaff* mstaff = staves[staff];
       if (mstaff->_vspacer)
             xml.tag("vspacer", mstaff->_vspacer->space().val());
+      if (!mstaff->_visible)
+            xml.tag("visible", mstaff->_visible);
 
       foreach (const Element* el, _el) {
             if ((el->staffIdx() == staff) || (el->systemFlag() && writeSystemElements)) {
@@ -2694,6 +2663,8 @@ void Measure::read(QDomElement e, int idx)
                         }
                   staves[idx]->_vspacer->setSpace(Spatium(val.toDouble()));
                   }
+            else if (tag == "visible")
+                  staves[idx]->_visible = val.toInt();
             else if (tag == "Beam") {
                   Beam* beam = new Beam(score());
                   beam->setTrack(score()->curTrack);
@@ -2744,6 +2715,15 @@ void Measure::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   visible
+//---------------------------------------------------------
+
+bool Measure::visible(int staffIdx) const
+      {
+      return score()->staff(staffIdx)->show() && staves[staffIdx]->_visible;
+      }
+
+//---------------------------------------------------------
 //   collectElements
 //---------------------------------------------------------
 
@@ -2752,18 +2732,21 @@ void Measure::collectElements(QList<const Element*>& el) const
       MeasureBase::collectElements(el);
       el.append(this);     // to make measure clickable
 
-      foreach(const MStaff* ms, staves) {
+      int nstaves = score()->nstaves();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            if (!visible(staffIdx))
+                  continue;
+            MStaff* ms = staves[staffIdx];
             if (ms->lines)
                   el.append(ms->lines);
             if (ms->_vspacer)
                   el.append(ms->_vspacer);
             }
 
-      int staves = score()->nstaves();
-      int tracks = staves * VOICES;
+      int tracks = nstaves * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  if (!score()->staff(staffIdx)->show())
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  if (!visible(staffIdx))
                         continue;
                   LyricsList* ll = s->lyricsList(staffIdx);
                   foreach(Lyrics* l, *ll) {
@@ -2772,9 +2755,10 @@ void Measure::collectElements(QList<const Element*>& el) const
                         }
                   }
             for (int track = 0; track < tracks; ++track) {
-                  Staff* staff = score()->staff(track / VOICES);
-                  if (!staff->show())
+                  if (!visible(track/VOICES)) {
+                        track += VOICES - 1;
                         continue;
+                        }
                   Element* e = s->element(track);
                   if (e == 0)
                         continue;
@@ -2795,15 +2779,15 @@ void Measure::collectElements(QList<const Element*>& el) const
                   }
             }
       foreach(Element* e, _el) {
-            if ((e->track() == -1) || e->staff()->show())
+            if ((e->track() == -1) || visible(e->staffIdx()))
                   el.append(e);
             }
       foreach(Beam* b, _beams) {
-            if (b->staff()->show())
+            if (visible(b->staffIdx()))
                   el.append(b);
             }
       foreach(Tuplet* tuplet, _tuplets) {
-            if (tuplet->staff()->show())
+            if (visible(tuplet->staffIdx()))
                   el.append(tuplet);
             }
 

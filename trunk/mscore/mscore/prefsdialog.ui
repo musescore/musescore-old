@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>882</width>
-    <height>704</height>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -31,42 +31,8 @@
          <property name="flat" >
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <property name="margin" >
-           <number>3</number>
-          </property>
-          <property name="spacing" >
-           <number>3</number>
-          </property>
-          <item row="2" column="1" >
-           <widget class="QLineEdit" name="sessionScore" />
-          </item>
-          <item row="1" column="0" >
-           <widget class="QRadioButton" name="newSession" >
-            <property name="text" >
-             <string>start with new score</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2" >
-           <widget class="QToolButton" name="startWithButton" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-            <property name="icon" >
-             <iconset resource="mscore.qrc" >
-              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" >
-           <widget class="QRadioButton" name="scoreSession" >
-            <property name="text" >
-             <string>start with score:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
+         <layout class="QVBoxLayout" name="verticalLayout_3" >
+          <item>
            <widget class="QRadioButton" name="lastSession" >
             <property name="text" >
              <string>continue last session</string>
@@ -76,7 +42,39 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0" >
+          <item>
+           <widget class="QRadioButton" name="newSession" >
+            <property name="text" >
+             <string>start with new score</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2" >
+            <item>
+             <widget class="QRadioButton" name="scoreSession" >
+              <property name="text" >
+               <string>start with score:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="sessionScore" />
+            </item>
+            <item>
+             <widget class="QToolButton" name="startWithButton" >
+              <property name="text" >
+               <string>...</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="mscore.qrc" >
+                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QCheckBox" name="showSplashScreen" >
             <property name="text" >
              <string>show splash screen</string>

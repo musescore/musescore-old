@@ -786,6 +786,7 @@ void Seq::heartBeat()
             cs->adjustCanvasPosition(note, true);
             if (pp)
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
+            mscore->setPos(note->chord()->tick());
             }
       cs->end();
       }
@@ -862,6 +863,7 @@ void Seq::seek(int tick)
       msg.data = tick;
       msg.id   = SEQ_SEEK;
       guiToSeq(msg);
+      mscore->setPos(tick);
       }
 
 //---------------------------------------------------------
