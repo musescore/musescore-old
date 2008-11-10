@@ -113,12 +113,16 @@ void Seq::setScore(Score* s)
 
 void Seq::selectionChanged(int mode)
       {
-      int tick = cs->pos();
-      if (mode != SEL_SINGLE || state == STOP || cs == 0 || driver == 0) {
-            cs->setPlayPos(tick);
+      if (cs == 0 || driver == 0)
             return;
-            }
-      if (tick != -1)
+
+      int tick = cs->pos();
+      if (tick == -1)
+            return;
+
+      if (mode != SEL_SINGLE || state == STOP)
+            cs->setPlayPos(tick);
+      else
             seek(tick);
       }
 

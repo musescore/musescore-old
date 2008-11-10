@@ -108,7 +108,7 @@ Element* Selection::element() const
 
 ChordRest* Selection::activeCR() const
       {
-      if (!_activeSegment)
+      if ((_state != SEL_STAFF && _state != SEL_SYSTEM) || !_activeSegment)
             return 0;
       if (_activeSegment == _startSegment)
             return firstChordRest(activeTrack);

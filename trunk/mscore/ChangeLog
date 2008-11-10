@@ -3,6 +3,7 @@
       (sy)
       - fix crash adding simple Line to end of score
       - make sure Line start tick != end tick when doing Shift+Left on end handle
+      - fix regression: playback crashes when nothing has yet been selected
 8.11 (ws)
       - implement drag/drop of symbol onto symbol
       - fixes for mag/offset
