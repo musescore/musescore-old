@@ -125,7 +125,7 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
                         int t2 = score()->prevSeg1(tick2, track);
                         if (t2 >= 0)
                               tick2 = t2;
-                        if (tick1 > tick2)
+                        if (tick1 >= tick2)
                               return true;
                         }
                   }

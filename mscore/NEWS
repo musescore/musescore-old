@@ -16,6 +16,8 @@ Release 0.9.4 (svn):
 
       - New vertical spacer elements allow to adjust staff distance.
 
+      - New line element allows to add arbitrary lines to the score.
+
       - Use configured note stem directions in a multi voice context.
 
       - Added portmidi midi driver implements midi input for windows.
