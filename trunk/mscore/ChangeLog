@@ -1,5 +1,8 @@
 10.11 (ws)
       - implement visibility flag for staves, measure resolution
+      (sy)
+      - fix crash adding simple Line to end of score
+      - make sure Line start tick != end tick when doing Shift+Left on end handle
 8.11 (ws)
       - implement drag/drop of symbol onto symbol
       - fixes for mag/offset
