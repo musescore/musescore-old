@@ -57,6 +57,7 @@ struct MStaff {
       bool hasVoices;         ///< indicates that MStaff contains more than one voice,
                               ///< this changes some layout rules
       Spacer* _vspacer;
+      bool _visible;
 
       MStaff();
       ~MStaff();
@@ -209,6 +210,7 @@ class Measure : public MeasureBase {
       int findAccidental2(Note*) const;
       void exchangeVoice(int, int, int, int);
       void checkMultiVoices(int staffIdx);
+      bool visible(int staffIdx) const;
       };
 
 #endif

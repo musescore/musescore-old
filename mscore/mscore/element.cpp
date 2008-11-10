@@ -910,6 +910,7 @@ Cursor::Cursor(Score* s, Viewer* v)
       _on       = false;
       _blink    = true;
       _h        = 6 * _spatium;
+      _seg      = 0;
       }
 
 //---------------------------------------------------------

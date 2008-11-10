@@ -1,4 +1,38 @@
 Release 0.9.4 (svn):
+      - New method to select unvisible elements covered by other elements:
+        Press left mouse button to select topmost elements and then click right
+        mouse button (while left mouse button is down) to cyclic select elements
+        at the current mouse position.
+
+      - You can now drop a symbol onto another symbol (called the base symbol).
+        The dropped symbol is then anchored to the base symbol which means that its
+        position is always relativ to the base symbol. In this was a symbol can
+        be composed from different other symbols. If you move the base symbol, all
+        other symbols anchored to this base symbol are also moving.
+
+      - Extend functionality when pasting text in lyrics mode: only the first word
+        ist pasted and removed from clipboard and then the cursor moves to next
+        note/chord staying in lyrics mode.
+
+      - New vertical spacer elements allow to adjust staff distance.
+
+      - Use configured note stem directions in a multi voice context.
+
+      - Added portmidi midi driver implements midi input for windows.
+
+      - Canvas is now moved to follow playback.
+
+      - Ties are now entered in a more natural way in note entry mode:
+        Example: enter "g+g" to create two connected notes instead of "+gg"
+
+      - Enhanced note entry mode:
+        Example: when entering an 1/8 note at the place of an 1/4 note
+        the 1/4 note is reduced to an 1/8 note to make room for the new note
+        instead of first replacing the note with an 1/4 rest.
+
+      - Selection and copy/paste is not restricted to measure boundaries any more.
+
+      - As usual lots of bug fixes and some render enhancements.
 
 Release 0.9.3:
       - "concert pitch" view

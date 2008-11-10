@@ -43,6 +43,59 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       int n  = m->repeatCount();
       count->setValue(n);
       count->setEnabled(m->repeatFlags() & RepeatEnd);
+
+      Score* score = m->score();
+      int rows = score->nstaves();
+      staves->setRowCount(rows);
+
+      for (int staffIdx = 0; staffIdx < rows; ++staffIdx) {
+            // Staff* staff = score->staff(staffIdx);
+            QTableWidgetItem* item = new QTableWidgetItem(QString("%1").arg(staffIdx+1));
+            staves->setItem(staffIdx, 0, item);
+            MStaff* ms = m->mstaff(staffIdx);
+            item = new QTableWidgetItem();
+            item->setCheckState(ms->_visible ? Qt::Checked : Qt::Unchecked);
+            staves->setItem(staffIdx, 1, item);
+            }
+      staves->verticalHeader()->hide();
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
+      }
+
+//---------------------------------------------------------
+//   bboxClicked
+//---------------------------------------------------------
+
+void MeasureProperties::bboxClicked(QAbstractButton* button)
+      {
+      QDialogButtonBox::ButtonRole br = buttonBox->buttonRole(button);
+printf("button %d\n", int(br));
+      switch(br) {
+            case QDialogButtonBox::ApplyRole:
+                  apply();
+                  break;
+
+            case QDialogButtonBox::AcceptRole:
+                  apply();
+                  // fall through
+
+            case QDialogButtonBox::RejectRole:
+                  close();
+                  break;
+
+            default:
+                  printf("EditStaff: unknown button %d\n", int(br));
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   visible
+//---------------------------------------------------------
+
+bool MeasureProperties::visible(int staffIdx)
+      {
+      QTableWidgetItem* item = staves->item(staffIdx, 1);
+      return item->checkState() == Qt::Checked;
       }
 
 //---------------------------------------------------------
@@ -72,5 +125,54 @@ bool MeasureProperties::isIrregular() const
 int MeasureProperties::repeatCount() const
       {
       return count->value();
+      }
+
+//---------------------------------------------------------
+//   apply
+//---------------------------------------------------------
+
+void MeasureProperties::apply()
+      {
+      Score* score = m->score();
+
+      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
+            MStaff* ms = m->mstaff(staffIdx);
+            ms->_visible = visible(staffIdx);
+            }
+
+      m->setIrregular(isIrregular());     // TODO: shall we make this undoable?
+      m->setRepeatCount(repeatCount());
+      score->setDirty();
+      score->select(0, SELECT_SINGLE, 0);
+      SigList* sl = score->sigmap;
+
+      SigEvent oev = sl->timesig(m->tick());
+      SigEvent newEvent = sig();
+      if (!(oev == newEvent)) {
+            int oldLen = oev.ticks;
+            int newLen = newEvent.ticks;
+
+            SigEvent oldEvent;
+            iSigEvent i = sl->find(m->tick());
+            if (i != sl->end())
+                  oldEvent = i->second;
+
+            score->undoChangeSig(m->tick(), oldEvent, newEvent);
+
+            //
+            // change back to nominal values if there is
+            // not already another TimeSig
+            //
+            i = sl->find(m->tick() + oldLen);
+            if (i == sl->end()) {
+                  score->undoChangeSig(m->tick() + newLen, SigEvent(), oev);
+                  }
+            m->adjustToLen(oldLen, newLen);
+            score->fixTicks();
+            score->select(m, SELECT_SINGLE, 0);
+            }
+      score->setLayoutAll(true);
+      score->end();
+      qApp->processEvents();
       }
 

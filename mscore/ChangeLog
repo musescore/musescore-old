@@ -1,3 +1,5 @@
+10.11 (ws)
+      - implement visibility flag for staves, measure resolution
 8.11 (ws)
       - implement drag/drop of symbol onto symbol
       - fixes for mag/offset
