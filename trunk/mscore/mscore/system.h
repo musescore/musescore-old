@@ -51,6 +51,8 @@ class MeasureBase;
 class SysStaff {
       QRectF _bbox;           ///< Bbox of StaffLines.
       Spatium _distance;      ///< distance to next staff
+      bool _show;             ///< derived from Staff or false if empty
+                              ///< staff is hidden
 
    public:
       int idx;
@@ -66,6 +68,9 @@ class SysStaff {
       double distance() const        { return point(_distance); }
       void setDistance(double v)     { _distance.set(v); }
       void setDistance(Spatium v)    { _distance = v; }
+
+      bool show() const              { return _show; }
+      void setShow(bool v)           { _show = v; }
 
       SysStaff();
       ~SysStaff();

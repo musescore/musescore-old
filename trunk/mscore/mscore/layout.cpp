@@ -40,6 +40,7 @@
 #include "repeat.h"
 #include "box.h"
 #include "system.h"
+#include "part.h"
 #include "utils.h"
 
 // #define PROFILE_LAYOUT
@@ -299,7 +300,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
       int nstaves = _score->nstaves();
       for (int i = 0; i < nstaves; ++i) {
             Staff* staff   = _score->staff(i);
-            if (!staff->show())
+            if (!m->system()->staff(i)->show())
                   continue;
 
             KeySig* hasKeysig = 0;
@@ -556,7 +557,6 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       System* system = getNextSystem(isFirstSystem, false);
 
       system->setInstrumentNames();
-      system->layout(this);
       minWidth            = system->leftMargin();
       double systemWidth  = w;
 
@@ -564,6 +564,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       int nstaves = _score->nstaves();
       bool isFirstMeasure = true;
+      Measure* firstMeasure = 0;
 
       for (; curMeasure; curMeasure = curMeasure->next()) {
             System* oldSystem = curMeasure->system();
@@ -579,7 +580,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
                   if (isFirstMeasure)
-                        processSystemHeader(m, isFirstSystem);
+                        firstMeasure = m;
 
                   //
                   // remove generated elements
@@ -637,6 +638,46 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   break;
                   }
             }
+
+      //
+      //    hide empty staves
+      //
+      int staves = system->staves()->size();
+      int staffIdx = 0;
+      foreach (Part* p, *score()->parts()) {
+            int nstaves = p->nstaves();
+            bool hidePart = false;
+
+            if (score()->style()->hideEmptyStaves) {
+                  hidePart = true;
+                  for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
+                        foreach(MeasureBase* m, system->measures()) {
+                              if (m->type() != MEASURE)
+                                    continue;
+                              if (!((Measure*)m)->isMeasureRest(i)) {
+                                    hidePart = false;
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+
+            for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
+                  SysStaff* s = system->staff(i);
+                  Staff* staff = score()->staff(i);
+                  if (hidePart && staves > 1)
+                        s->setShow(false);
+                  else
+                        s->setShow(staff->show());
+                  }
+            staffIdx += nstaves;
+            }
+
+      if (firstMeasure)
+            processSystemHeader(firstMeasure, isFirstSystem);
+
+      system->layout(this);
+
       return continueFlag && curMeasure;
       }
 

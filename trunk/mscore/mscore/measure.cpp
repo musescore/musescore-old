@@ -2725,6 +2725,8 @@ void Measure::read(QDomElement e)
 
 bool Measure::visible(int staffIdx) const
       {
+      if (system() && !system()->staff(staffIdx)->show())
+            return false;
       return score()->staff(staffIdx)->show() && staves[staffIdx]->_visible;
       }
 
@@ -2921,6 +2923,18 @@ bool Measure::createEndBarLines()
                         }
                   bl->setGenerated(_endBarLineGenerated);
                   bl->setSpan(staff->barLineSpan());
+                  if (!system()->staff(staffIdx + bl->span() - 1)->show()) {
+                        //
+                        // if the barline ends on an invisible staff
+                        // find last visible staff in barline
+                        //
+                        for (int j = staffIdx + bl->span() - 2; j >= staffIdx; --j) {
+                              if (system()->staff(j)->show()) {
+                                    bl->setSpan(j - staffIdx + 1);
+                                    break;
+                                    }
+                              }
+                        }
                   }
             }
 
@@ -3028,6 +3042,36 @@ void Measure::checkMultiVoices(int staffIdx)
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   isMeasureRest
+//---------------------------------------------------------
+
+/**
+ Check if the measure is filled by a full-measure rest on
+ this staff
+*/
+
+bool Measure::isMeasureRest(int staffIdx)
+      {
+      int strack = staffIdx * VOICES;
+      int etrack = staffIdx * VOICES + VOICES;
+      staves[staffIdx]->hasVoices = false;
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            for (int track = strack; track < etrack; ++track) {
+                  Element* e = s->element(staffIdx * VOICES);
+                  if (e && e->type() == REST) {
+                        Rest* r = static_cast<Rest*>(e);
+                        Duration d = r->duration();
+                        if (d.val() == Duration::V_MEASURE)
+                              return true;
+                        }
+                  }
+            }
+      return false;
       }
 
 //---------------------------------------------------------

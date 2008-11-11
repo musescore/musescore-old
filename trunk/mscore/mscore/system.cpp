@@ -53,6 +53,7 @@ SysStaff::SysStaff()
       {
       idx             = 0;
       instrumentName  = 0;
+      _show           = true;
       }
 
 //---------------------------------------------------------
@@ -158,9 +159,9 @@ void System::layout(ScoreLayout* layout)
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* s = score()->staff(staffIdx);
-            if (!s->show())
-                  continue;
             SysStaff* ss = _staves[staffIdx];
+            if (!ss->show())
+                  continue;
 
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {
@@ -216,7 +217,7 @@ void System::layout(ScoreLayout* layout)
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* s  = _staves[staffIdx];
             Staff* staff = score()->staff(staffIdx);
-            if (!staff->show()) {
+            if (!s->show()) {
                   s->setbbox(QRectF());
                   continue;
                   }
@@ -242,11 +243,10 @@ void System::layout(ScoreLayout* layout)
       //---------------------------------------------------
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            Staff* s = score()->staff(staffIdx);
-            if (!s->show())
+            SysStaff* ss = _staves[staffIdx];
+            if (!ss->show())
                   continue;
 
-            SysStaff* ss = _staves[staffIdx];
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
                   xo += bracketWidth[i] + _spatium * .25;
@@ -261,6 +261,18 @@ void System::layout(ScoreLayout* layout)
                         // instruments dialog
                         //
                         b->setSpan(nstaves - staffIdx);
+                        }
+                  if (!_staves[staffIdx + b->span() - 1]->show()) {
+                        //
+                        // if the bracket ends on an invisible staff
+                        // find last visible staff in bracket
+                        //
+                        for (int j = staffIdx + b->span() - 2; j >= staffIdx; --j) {
+                              if (_staves[j]->show()) {
+                                    b->setSpan(j - staffIdx + 1);
+                                    break;
+                                    }
+                              }
                         }
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
                   b->setPos(_leftMargin - xo, sy);
@@ -318,7 +330,7 @@ void System::layout2(ScoreLayout* layout)
             if (dist > distance(staffIdx))
                   setDistance(staffIdx, dist);
             SysStaff* s = _staves[staffIdx];
-            if (!staff->show()) {
+            if (!s->show()) {
                   s->setbbox(QRectF());
                   continue;
                   }
@@ -354,10 +366,9 @@ void System::layout2(ScoreLayout* layout)
             bracketWidth[i] = 0.0;
 
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            Staff* s = score()->staff(staffIdx);
-            if (!s->show())
-                  continue;
             SysStaff* ss = _staves[staffIdx];
+            if (!ss->show())
+                  continue;
 
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
@@ -772,9 +783,8 @@ void System::collectElements(QList<const Element*>& el) const
             return;
       if (barLine)
             el.append(barLine);
-      int staffIdx = 0;
       foreach(SysStaff* st, _staves) {
-            if (!score()->staff(staffIdx++)->show())
+            if (!st->show())
                   continue;
             foreach(Bracket* b, st->brackets) {
                   if (b)
