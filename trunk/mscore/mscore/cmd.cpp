@@ -1113,14 +1113,30 @@ void Score::cmdAddChordName()
             }
       if (el->type() == NOTE)
             el = el->parent();
-      Harmony* s = new Harmony(this);
-      s->setTrack(el->track());
-      s->setParent(((Chord*)el)->measure());
-      s->setTick(el->tick());
-      undoAddElement(s);
+
+      ChordRest* cr = dynamic_cast<ChordRest*>(el);
+      Measure* measure = cr->measure();
+      Harmony* s = 0;
+
+      foreach(Element* element, *measure->el()) {
+            if ((element->type() == HARMONY) && (element->tick() == el->tick())) {
+                  s = dynamic_cast<Harmony*>(element);
+                  break;
+                  }
+            }
+
+      if (s == 0) {
+            s = new Harmony(this);
+            s->setTrack(el->track());
+            s->setParent(measure);
+            s->setTick(el->tick());
+            undoAddElement(s);
+            }
+
       layoutAll = true;
       select(s, SELECT_SINGLE, 0);
       canvas()->startEdit(s);
+      adjustCanvasPosition(s, false);
       }
 
 //---------------------------------------------------------

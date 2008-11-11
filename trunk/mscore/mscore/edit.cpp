@@ -1161,6 +1161,7 @@ void Score::chordTab(bool back)
 
       select(cn, SELECT_SINGLE, 0);
       canvas()->startEdit(cn);
+      adjustCanvasPosition(cn, false);
       ((Harmony*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);

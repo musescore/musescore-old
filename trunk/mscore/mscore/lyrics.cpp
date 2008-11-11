@@ -236,6 +236,7 @@ void Score::lyricsTab(bool back, bool end)
 
       select(lyrics, SELECT_SINGLE, 0);
       canvas()->startEdit(lyrics);
+      adjustCanvasPosition(lyrics, false);
       if (end)
             ((Lyrics*)editObject)->moveCursorToEnd();
       else
@@ -317,6 +318,7 @@ void Score::lyricsMinus()
 
       select(lyrics, SELECT_SINGLE, 0);
       canvas()->startEdit(lyrics);
+      adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
@@ -403,6 +405,7 @@ void Score::lyricsUnderscore()
 
       select(lyrics, SELECT_SINGLE, 0);
       canvas()->startEdit(lyrics);
+      adjustCanvasPosition(lyrics, false);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
       setLayoutAll(true);
@@ -432,6 +435,7 @@ void Score::lyricsReturn()
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
       canvas()->startEdit(lyrics);
+      adjustCanvasPosition(lyrics, false);
 
       setLayoutAll(true);
       }
