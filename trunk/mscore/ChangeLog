@@ -1,3 +1,5 @@
+10.12 (sy)
+      - reverted yesterday's change regarding create chord name editing existing one
 10.11 (ws)
       - implement visibility flag for staves, measure resolution
       (sy)
