@@ -34,6 +34,8 @@ class ChordProperties : public QDialog, public Ui::ChordPropertyBase {
       ChordProperties(QWidget* parent = 0);
       bool small() const;
       void setSmall(bool val);
+      bool noStem() const;
+      void setNoStem(bool val);
       };
 
 #endif

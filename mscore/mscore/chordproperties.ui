@@ -12,7 +12,7 @@
   <property name="windowTitle" >
    <string>Chord Properties</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
     <widget class="QCheckBox" name="smallCheckBox" >
      <property name="text" >
@@ -21,14 +21,21 @@
     </widget>
    </item>
    <item>
-    <spacer>
+    <widget class="QCheckBox" name="noStemCheckBox" >
+     <property name="text" >
+      <string>no stem</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>44</height>
       </size>
      </property>
     </spacer>
@@ -39,7 +46,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
