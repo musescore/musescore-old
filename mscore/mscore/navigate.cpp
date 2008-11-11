@@ -27,6 +27,8 @@
 #include "chord.h"
 #include "system.h"
 #include "segment.h"
+#include "lyrics.h"
+#include "harmony.h"
 #include "utils.h"
 #include "input.h"
 #include "measure.h"
@@ -358,6 +360,10 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
             m = ((Chord*)el)->segment()->measure();
       else if (el->type() == SEGMENT)
             m = ((Segment*)el)->measure();
+      else if (el->type() == LYRICS)
+            m = ((Lyrics*)el)->measure();
+      else if (el->type() == HARMONY)
+            m = ((Harmony*)el)->measure();
       else
             return;
 

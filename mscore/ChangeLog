@@ -5,6 +5,8 @@
       - make sure Line start tick != end tick when doing Shift+Left on end handle
       - fix regression: playback crashes when nothing has yet been selected
       - fix crash when pressing Shift+K on rest (defaults to C chord)
+      - move canvas when entering lyrics/chords
+      - create chord name now edits existing one if present, like Shift+K
 8.11 (ws)
       - implement drag/drop of symbol onto symbol
       - fixes for mag/offset
