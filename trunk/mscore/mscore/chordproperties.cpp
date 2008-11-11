@@ -48,3 +48,21 @@ void ChordProperties::setSmall(bool val)
       smallCheckBox->setChecked(val);
       }
 
+//---------------------------------------------------------
+//   noStem
+//---------------------------------------------------------
+
+bool ChordProperties::noStem() const
+      {
+      return noStemCheckBox->isChecked();
+      }
+
+//---------------------------------------------------------
+//   setNoStem
+//---------------------------------------------------------
+
+void ChordProperties::setNoStem(bool val)
+      {
+      noStemCheckBox->setChecked(val);
+      }
+

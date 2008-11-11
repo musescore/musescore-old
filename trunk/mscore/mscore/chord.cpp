@@ -227,6 +227,7 @@ Chord::Chord(Score* s)
       _glissando     = 0;
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
+      _noStem        = false;
       }
 
 Chord::Chord(const Chord& c)
@@ -477,7 +478,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       //  process stem
       //-----------------------------------------
 
-      bool hasStem = duration().hasStem() && !measure()->slashStyle(istaff);
+      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
       int hookIdx  = duration().hooks();
 
       if (hasStem) {
@@ -1017,6 +1018,8 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
                         break;
                   }
             }
+      if (_noStem)
+            xml.tag("noStem", _noStem);
       if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().point() != 0.0)))
             _stem->write(xml);
       switch(_stemDirection) {
@@ -1143,6 +1146,8 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
                   else
                         _stemDirection = Direction(i);
                   }
+            else if (tag == "noStem")
+                  _noStem = i;
             else if (tag == "Arpeggio") {
                   _arpeggio = new Arpeggio(score());
                   _arpeggio->setTrack(track());

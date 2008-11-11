@@ -982,11 +982,17 @@ void Note::propertyAction(const QString& s)
       if (s == "props") {
             ChordProperties vp;
             vp.setSmall(chord()->small());
+            vp.setNoStem(chord()->noStem());
             int rv = vp.exec();
             if (rv) {
                   bool val = vp.small();
                   if (val != chord()->small())
                         score()->undoChangeChordRestSize(chord(), val);
+                  val = vp.noStem();
+                  if (val != chord()->noStem()) {
+                        // TODO: undo
+                        chord()->setNoStem(val);
+                        }
                   }
             }
       else if (s == "tupletProps") {
