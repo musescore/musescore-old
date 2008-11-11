@@ -1156,13 +1156,17 @@ void Score::cmdAddChordName2()
       if (el->type() == NOTE)
             el = el->parent();
 
-      Chord* chord = dynamic_cast<Chord*>(el);
-      int rootTpc = chord->downNote()->tpc();
-      Measure* measure = chord->measure();
+      ChordRest* cr = dynamic_cast<ChordRest*>(el);
+      int rootTpc = 14;
+      if (el->type() == CHORD) {
+            Chord* chord = dynamic_cast<Chord*>(el);
+            rootTpc = chord->downNote()->tpc();
+            }
+      Measure* measure = cr->measure();
       Harmony* s = 0;
 
       foreach(Element* element, *measure->el()) {
-            if ((element->type() == HARMONY) && (element->tick() == chord->tick())) {
+            if ((element->type() == HARMONY) && (element->tick() == el->tick())) {
                   s = dynamic_cast<Harmony*>(element);
                   break;
                   }
