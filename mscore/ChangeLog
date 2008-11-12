@@ -1,3 +1,6 @@
+10.13 (sy)
+      - fix regression: some elements (such as repeats) do not have correct tick
+        when dragged to score or are saved incorrectly, due to my commit of 30.10, r1217.
 10.12 (sy)
       - reverted yesterday's change regarding create chord name editing existing one
       - implement hide empty staves

@@ -260,8 +260,11 @@ QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
 
       // do not go into next system when tick2 is start of system
       if (grip == 1 && sys->firstMeasure()->tick() == seg->tick()) {
-            seg = sys->firstMeasure()->prevMeasure()->last();
-            sys = seg->measure()->system();
+            Measure* m = sys->firstMeasure()->prevMeasure();
+            if (m) {
+                  seg = m->last();
+                  sys = seg->measure()->system();
+                  }
             }
       *system     = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
@@ -402,11 +405,17 @@ void SLine::writeProperties(Xml& xml) const
 
 bool SLine::readProperties(QDomElement e)
       {
+      setTick(-1);
+
       if (Element::readProperties(e))
             return true;
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
+
+      if (tick() < 0)
+            setTick(score()->curTick);
+
       if (tag == "tick2")
             _tick2 = score()->fileDivision(i);
       else if (tag == "Segment") {
