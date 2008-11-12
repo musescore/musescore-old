@@ -182,7 +182,7 @@
              </palette>
             </property>
             <property name="text" >
-             <string>Attention: requires a restart of MuseScore.</string>
+             <string>Attention: changing the language requires a restart of MuseScore.</string>
             </property>
            </widget>
           </item>
@@ -996,7 +996,7 @@
           </font>
          </property>
          <property name="text" >
-          <string>If you use the standard input method then pressing then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</string>
+          <string>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</string>
          </property>
          <property name="wordWrap" >
           <bool>true</bool>
