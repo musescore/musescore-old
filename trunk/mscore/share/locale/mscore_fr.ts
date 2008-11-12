@@ -160,7 +160,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attributs de la note :</translation>
     </message>
 </context>
 <context>
@@ -1347,19 +1347,19 @@ echec :</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished">Articulations, Ornements</translation>
+        <translation>Articulations, Ornements</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished">Voix</translation>
+        <translation>Voix</translation>
     </message>
     <message>
         <source>articulation - note head distance</source>
-        <translation type="unfinished"></translation>
+        <translation>articulation - distance de la tête de note</translation>
     </message>
     <message>
         <source>articulation - note stem distance</source>
-        <translation type="unfinished"></translation>
+        <translation>articulation - distance de la tige de note</translation>
     </message>
     <message>
         <source>articulation - articulation distance</source>
@@ -3812,7 +3812,7 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>break page</source>
-        <translation>saud de page</translation>
+        <translation>saut de page</translation>
     </message>
     <message>
         <source>start beam</source>
@@ -4192,7 +4192,7 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation>Imrprimer...</translation>
+        <translation>Imprimer...</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -4268,7 +4268,7 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>Drums</source>
-        <translation type="unfinished"></translation>
+        <translation>Percussions</translation>
     </message>
     <message>
         <source>Note Heads</source>
@@ -4304,7 +4304,7 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer une copie...</translation>
     </message>
     <message>
         <source>Save Score to named File, but keep current name</source>
@@ -4320,15 +4320,15 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>staff spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>espace entre portées</translation>
     </message>
     <message>
         <source>Breaks/Spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauts/Espace</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <source></source>

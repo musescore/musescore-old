@@ -1877,6 +1877,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int normalNotes = 1;
       int tremolo = 0;
       int headGroup = 0;
+      bool noStem = false;
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -1910,8 +1911,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         sd = UP;
                   else if (s == "down")
                         sd = DOWN;
-                  else if (s == "none")  // ?
-                        ;
+                  else if (s == "none")
+                	    noStem = true;
                   else if (s == "double")
                         ;
                   else
@@ -2285,6 +2286,8 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
 
             xmlSetPitch(note, tick, c, alter, octave, accidental);
             cr->add(note);
+
+            ((Chord*)cr)->setNoStem(noStem);
 
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
