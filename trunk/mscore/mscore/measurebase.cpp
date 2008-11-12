@@ -82,11 +82,11 @@ void MeasureBase::remove(Element* el)
 
 Measure* MeasureBase::nextMeasure()
       {
-      MeasureBase* m = this;
+      MeasureBase* m = next();
       while (m) {
-            m = m->next();
             if (m->type() == MEASURE)
                   return static_cast<Measure*>(m);
+            m = m->next();
             }
       return 0;
       }
@@ -97,11 +97,11 @@ Measure* MeasureBase::nextMeasure()
 
 Measure* MeasureBase::prevMeasure()
       {
-      MeasureBase* m = this;
+      MeasureBase* m = prev();
       while (m) {
-            m = m->prev();
             if (m->type() == MEASURE)
                   return static_cast<Measure*>(m);
+            m = m->prev();
             }
       return 0;
       }
