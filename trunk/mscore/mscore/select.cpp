@@ -55,6 +55,9 @@ Selection::Selection(Score* s)
       {
       _score = s;
       _state = SEL_NONE;
+      _startSegment = 0;
+      _endSegment = 0;
+      _activeSegment = 0;
       }
 
 //---------------------------------------------------------
@@ -79,7 +82,8 @@ int Selection::tickEnd() const
 //   isStartActive
 //---------------------------------------------------------
 
-bool Selection::isStartActive() const {
+bool Selection::isStartActive() const
+      {
       return activeSegment() && activeSegment()->tick() == startSegment()->tick();
       }
 
@@ -464,6 +468,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               }
                         else {
 printf("select: TODO\n");
+                              select(0, SELECT_SINGLE, 0);
+                              return;
                               }
                         }
                   else if (sel->state() == SEL_STAFF) {

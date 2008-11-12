@@ -1,4 +1,6 @@
 Release 0.9.4 (svn):
+      - MuseScore has now been translated to Dutch.
+
       - New method to select unvisible elements covered by other elements:
         Press left mouse button to select topmost elements and then click right
         mouse button (while left mouse button is down) to cyclic select elements
