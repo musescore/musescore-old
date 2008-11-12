@@ -785,11 +785,10 @@ void Beam::layout(ScoreLayout* layout)
 
             Chord* nn1 = 0;
             Chord* nn2 = 0;
-            bool nn1r = false;
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
                         continue;
-                  Chord* chord = (Chord*)(cr);
+                  Chord* chord = static_cast<Chord*>(cr);
                   int tl = chord->tickLen();
                   if (tl > l) {
                         if (nn2) {
@@ -803,33 +802,41 @@ void Beam::layout(ScoreLayout* layout)
                               }
                         else if (nn1) {
                               // create broken segment
+                              bool toRight;
+                              if (nn1 == _elements[0])
+                                    toRight = true;
+                              else {
+                                    Duration d = nn1->duration();
+                                    d = d.shift(-1);
+                                    int rtick = nn1->tick() - nn1->measure()->tick();
+// printf("beam rtick %d ticks %d modulo %d\n",
+//     rtick, d.ticks(), rtick % d.ticks());
+                                    if (rtick % d.ticks())
+                                          toRight = false;
+                                    else
+                                          toRight = true;
+                                    }
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(_up, false).x();
-                              double x3 = x2 + beamMinLen;
-
-                              if (!nn1r) {
-                                    double tmp = x3;
-                                    x3 = x2;
-                                    x2 = tmp;
-                                    }
+                              double x3 = x2;
+                              if (toRight)
+                                   x3 += beamMinLen;
+                              else
+                                    x3 -= beamMinLen;
                               bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                               bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                               }
-                        nn1r = false;
                         nn1 = nn2 = 0;
                         continue;
                         }
-                  nn1r = false;
                   if (nn1)
                         nn2 = chord;
-                  else {
+                  else
                         nn1 = chord;
-                        nn1r = cr == _elements.front();
-                        }
                   }
             if (nn2) {
-                  // create short segment
+                  // create short segment at end of beam
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x2 = nn1->stemPos(_up, false).x();
@@ -838,7 +845,7 @@ void Beam::layout(ScoreLayout* layout)
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
            else if (nn1) {
-                  // create broken segment
+                  // create broken segment at end of beam
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(_up, false).x();
