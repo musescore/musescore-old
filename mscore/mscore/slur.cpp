@@ -1010,10 +1010,11 @@ void Tie::layout(ScoreLayout* layout)
       else
             up = _slurDirection == UP ? true : false;
       qreal w   = startNote()->headWidth();
+      qreal xo1 = w * 1.12;
       qreal h   = w * 0.3;
       qreal yo  = up ? -h : h;
 
-      QPointF off1(w, yo);
+      QPointF off1(xo1, yo);
       QPointF off2(0.0, yo);
 
       QPointF ppos(canvasPos());

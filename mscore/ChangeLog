@@ -11,6 +11,7 @@
       - slurs between two tied notes go on the stem side by default, to avoid confusion
       - slurs from grace notes to main notes always connect to the notehead
         rather than the stem
+      - start of tie no longer touches notehead
 12.nov (ws)
       - tried to fix direction of fractional beams
       (sy)
