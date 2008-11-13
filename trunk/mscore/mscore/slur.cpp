@@ -680,8 +680,18 @@ void Slur::layout(ScoreLayout* layout)
                         // long slurs are always above
                         up = true;
                         }
-                  else
-                        up = !(cr1->isUp());
+                  else if (cr1->isUp() != cr2->isUp()) {
+                        // slurs go above if start and end note have different stem directions
+                        up = true;
+                        }
+                  else {
+                        if (m1->mstaff(cr1->staffIdx())->hasVoices) {
+                              // in polyphonic passage, slurs go on the stem side
+                              up = cr1->isUp();
+                              }
+                        else
+                              up = !(cr1->isUp());
+                        }
                   }
                   break;
             }
@@ -882,7 +892,12 @@ void Tie::layout(ScoreLayout* layout)
       System* s2  = m2->system();
 
       if (_slurDirection == AUTO)
-            up = !c1->isUp();
+            if (m1->mstaff(c1->staffIdx())->hasVoices) {
+                  // in polyphonic passage, ties go on the stem side
+                  up = c1->isUp();
+                  }
+            else
+                  up = !(c1->isUp());
       else
             up = _slurDirection == UP ? true : false;
       qreal w   = startNote()->headWidth();

@@ -1,5 +1,8 @@
 12.nov (ws)
       - tried to fix direction of fractional beams
+      (sy)
+      - slurs/ties are placed on the stem side in polyphonic measures
+      - slurs go above if the start and end note have different stem directions
 10.13 (sy)
       - fix regression: some elements (such as repeats) do not have correct tick
         when dragged to score or are saved incorrectly, due to my commit of 30.10, r1217.
