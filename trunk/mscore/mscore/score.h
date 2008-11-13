@@ -664,6 +664,8 @@ class Score : public QObject {
       double yoff() const     { return _yoff; }
       void setXoff(double v)  { _xoff = v;    }
       void setYoff(double v)  { _yoff = v;    }
+
+      void setPos(int tick);
       };
 
 extern Score* gscore;
