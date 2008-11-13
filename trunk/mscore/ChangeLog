@@ -1,6 +1,16 @@
 13.nov (ws)
       - some progress for drum entry
       - lyric hyphens are now of constant len and much shorter
+      (sy)
+      - slurs going on the beam side are now aligned to the stem rather than
+        the middle of the notehead
+      - slurs on the stem side of stemmed notes start half of a staff space
+        from the end of the stem
+      - slurs spanning notes with mixed stem directions are always above
+        (yesterday's change did not check intervening notes)
+      - slurs between two tied notes go on the stem side by default, to avoid confusion
+      - slurs from grace notes to main notes always connect to the notehead
+        rather than the stem
 12.nov (ws)
       - tried to fix direction of fractional beams
       (sy)
