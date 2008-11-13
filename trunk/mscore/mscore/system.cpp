@@ -689,7 +689,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
                   if (sysIdx1 == sysIdx2) {
                         // single segment
                         line->setPos(p1);
-                        double len = seg->canvasPos().x() - l->canvasPos().x() - lw + 2. * _spatium;
+                        double len = seg->canvasPos().x() - l->canvasPos().x() - lw + 2 * _spatium;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i == sysIdx1) {
@@ -716,6 +716,11 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
       //
       int verse   = l->no();
       Segment* ns = s;
+
+      // TODO: then next two values should be style parameters
+      const double maxl = 0.8 * _spatium;   // lyrics hyphen length
+      const Spatium hlw(0.1);               // hyphen line width
+
       while ((ns = ns->next1())) {
             LyricsList* nll = ns->lyricsList(staffIdx);
             if (!nll)
@@ -730,7 +735,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             Line* line;
             if (sl->isEmpty()) {
                   line = new Line(l->score(), false);
-                  line->setLineWidth(Spatium(0.1));
+                  line->setLineWidth(hlw);
                   l->add(line);
                   }
             else {
@@ -751,16 +756,11 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
                   x2 = system->canvasPos().x() + system->bbox().width();
                   }
 
-            len = x2 - x1 - 2 * _spatium - w;
-            double xo = _spatium;
-            if (len < 0.0) {                // set minimum len
-                  len       = _spatium * .5;
-                  double gap = x2 - x1 - w - len;
-                  if (gap < 0.0)
-                        xo = 0.0;
-                  else
-                        xo = gap * .5;
-                  }
+            double gap = x2 - x1 - w;
+            len        = gap;
+            if (len > maxl)
+                  len = maxl;
+            double xo = (gap - len) * .5;
 
             line->setPos(QPointF(x + xo, y));
             Spatium sp;

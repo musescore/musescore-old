@@ -653,7 +653,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                         if (l == 0)
                               continue;
                         lyrics = l;
-                        lyrics->layout(score()->layout());
+                        lyrics->layout(layout);
                         }
                   if (lyrics) {
                         double y = lyrics->ipos().y() + lyrics->lineHeight()
