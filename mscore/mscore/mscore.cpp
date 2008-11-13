@@ -1998,7 +1998,7 @@ void MuseScore::setMag(double d)
 
 void MuseScore::setPos(int t)
       {
-      if (cs == 0)
+      if (cs == 0 || t < 0)
             return;
       SigList* s = cs->sigmap;
       int bar, beat, tick;

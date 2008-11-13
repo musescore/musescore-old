@@ -269,6 +269,8 @@ QRect Palette::idxRect(int i)
       {
       if (i == -1)
             return QRect();
+      if (columns == 0)
+            return QRect();
       int cc = i % columns;
       int cr = i / columns;
       return QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);

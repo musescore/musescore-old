@@ -682,7 +682,6 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             note->setHeadGroup(headGroup);
 
             Measure* measure = tick2measure(tick);
-//            chord->setStemDirection(preferences.stemDir[track % VOICES]);
             Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {

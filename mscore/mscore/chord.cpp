@@ -249,6 +249,7 @@ Chord::Chord(const Chord& c)
       _arpeggio      = 0;
       _stemSlash     = 0;
 
+      _noStem = c._noStem;
       if (c._stem)
             add(new Stem(*(c._stem)));
       if (c._hook)
@@ -479,7 +480,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       //-----------------------------------------
 
       bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
-      int hookIdx  = duration().hooks();
+      int hookIdx  = hasStem ? duration().hooks() : 0;
 
       if (hasStem) {
             if (!_stem)
@@ -551,7 +552,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       Spatium stemLen;
       Spatium normalLen(3.5 * staffMag);  // stem length is one octave
 
-      int hookIdx  = duration().hooks();
+      int hookIdx  = _stem ? duration().hooks() : 0;
 
       if (_noteType != NOTE_NORMAL) {
             // stemLen = Spatium(2.5 * mag());
@@ -1106,6 +1107,17 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
             setDuration(dt);
             }
       add(note);
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Chord::read(QDomElement e)
+      {
+      QList<Tuplet*> tl;
+      QList<Beam*> bl;
+      read(e, tl, bl);
       }
 
 //---------------------------------------------------------

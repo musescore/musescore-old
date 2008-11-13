@@ -293,7 +293,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   }
             if (e == 0) {
                   selState = SEL_NONE;
-                  _padState.len = 0;
+                  if (!noteEntryMode())
+                        _padState.len = 0;
                   updateAll = true;
                   }
             else {

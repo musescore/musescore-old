@@ -172,14 +172,15 @@ Element* Rest::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case CHORD:
                   {
-                  Chord* c = static_cast<Chord*>(e);
-                  Note* n  = c->upNote();
+                  Chord* c      = static_cast<Chord*>(e);
+                  Note* n       = c->upNote();
                   int headGroup = n->headGroup();
-                  int len = score()->padState()->tickLen;
+                  int len       = score()->padState()->tickLen;
                   Direction dir = c->stemDirection();
-printf("Direction %d\n", int(dir));
-                  score()->setNote(tick(), c->track(), n->pitch(), len, headGroup, dir);
-                  printf("drop chord on rest\n");
+                  int t         = track() + n->voice();
+                  score()->select(0, SELECT_SINGLE, 0);
+                  score()->setNote(tick(), t, n->pitch(), len, headGroup, dir);
+                  score()->setPos(tick() + len);
                   }
                   break;
 

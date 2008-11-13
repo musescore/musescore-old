@@ -1710,14 +1710,27 @@ void Score::updateEntryMode()
       if (_is.cr == 0) {
             Segment* segment = tick2segment(_is.pos());
             Element* e       = segment->element(_is.track);
-            if (e->isChordRest())
+            if (e && e->isChordRest())
                   _is.cr = static_cast<ChordRest*>(e);
+            else
+                  printf("no CR at %d track %d\n", _is.pos(), _is.track);
             }
-      if (_is.cr->type() == REST) {
-            select(_is.cr, SELECT_SINGLE, 0);
+      if (_is.cr) {
+            if (_is.cr->type() == REST)
+                  select(_is.cr, SELECT_SINGLE, 0);
+            else if (_is.cr->type() == CHORD)
+                  select(static_cast<Chord*>(_is.cr)->downNote(), SELECT_SINGLE, 0);
             }
-      else if (_is.cr->type() == CHORD) {
-            select(static_cast<Chord*>(_is.cr)->downNote(), SELECT_SINGLE, 0);
-            }
+      }
+
+//---------------------------------------------------------
+//   setPos
+//---------------------------------------------------------
+
+void Score::setPos(int tick)
+      {
+      _is.setPos(tick);
+      emit posChanged(tick);
+      updateEntryMode();
       }
 
