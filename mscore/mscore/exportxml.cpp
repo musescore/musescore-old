@@ -1740,8 +1740,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
                   lineEnd = tl->hookUp() ? "up" : "down";
                   rest += QString(" end-length=\"%1\"").arg(tl->hookHeight().val() * 10);
                   }
-            // userOff2 is relative to userOff in MuseScore
-            p = tl->lineSegments().last()->userOff2() + tl->lineSegments().first()->userOff();
+            p = tl->lineSegments().last()->userOff2();
             offs = tl->mxmlOff2();
             type = "stop";
             }
