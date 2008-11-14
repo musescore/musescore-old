@@ -836,6 +836,10 @@ p, li { white-space: pre-wrap; }
         <source>small</source>
         <translation>petit</translation>
     </message>
+    <message>
+        <source>no stem</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1089,6 +1093,10 @@ echec :</translation>
     <message>
         <source>Edit Drumset...</source>
         <translation>Editer le set de batterie...</translation>
+    </message>
+    <message>
+        <source>Slash Style</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2074,12 +2082,12 @@ echec :</translation>
 <context>
     <name>MagBox</name>
     <message>
-        <source>Mag</source>
-        <translation type="unfinished">Mag</translation>
-    </message>
-    <message>
         <source>Zoom Canvas</source>
         <translation>Zoom</translation>
+    </message>
+    <message>
+        <source>Magnification</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2223,6 +2231,22 @@ echec :</translation>
     <message>
         <source>Repeat Count</source>
         <translation>Nombre de répétitions :</translation>
+    </message>
+    <message>
+        <source>Staves</source>
+        <translation type="unfinished">Portées</translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished">Portée</translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SlashStyle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2485,47 +2509,15 @@ echec :</translation>
         <translation>entrer un unisson au dessus</translation>
     </message>
     <message>
-        <source>Unison above</source>
-        <translation>Unisson au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Unison above</source>
-        <translation>Entrer un unisson au dessus</translation>
-    </message>
-    <message>
         <source>enter second above</source>
         <translation>entrer une seconde au dessus</translation>
-    </message>
-    <message>
-        <source>Second above</source>
-        <translation>Seconde au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Second above</source>
-        <translation>Entrer une seconde au dessus</translation>
     </message>
     <message>
         <source>enter third above</source>
         <translation>entrer une tierce au dessus</translation>
     </message>
     <message>
-        <source>Third above</source>
-        <translation>Tierce au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Third above</source>
-        <translation>Entrer une tierce au dessus</translation>
-    </message>
-    <message>
         <source>enter fourth above</source>
-        <translation>Entrer une quarte au dessus</translation>
-    </message>
-    <message>
-        <source>Fourth above</source>
-        <translation>Quarte au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Fourth above</source>
         <translation>Entrer une quarte au dessus</translation>
     </message>
     <message>
@@ -2533,156 +2525,52 @@ echec :</translation>
         <translation>entrer une quinte au dessus</translation>
     </message>
     <message>
-        <source>Fifth above</source>
-        <translation>Qute au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Fifth above</source>
-        <translation>Entrer une quinte au dessus</translation>
-    </message>
-    <message>
         <source>enter sixth above</source>
         <translation>entrer une sixte au dessus</translation>
-    </message>
-    <message>
-        <source>Sixth above</source>
-        <translation>Sixte au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Sixth above</source>
-        <translation>Entrer une sixte au dessus</translation>
     </message>
     <message>
         <source>enter seventh above</source>
         <translation>entrer une septième au dessus</translation>
     </message>
     <message>
-        <source>Seventh above</source>
-        <translation>Septième au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Seventh above</source>
-        <translation>Entrer une septième au dessus</translation>
-    </message>
-    <message>
         <source>enter octave above</source>
         <translation>entrer une octave au dessus</translation>
-    </message>
-    <message>
-        <source>Octave above</source>
-        <translation>Octave au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Octave above</source>
-        <translation>Entrer une octave au dessus</translation>
     </message>
     <message>
         <source>enter ninth above</source>
         <translation>entrer une neuvième au dessus</translation>
     </message>
     <message>
-        <source>Ninth above</source>
-        <translation>Neuvième au dessus</translation>
-    </message>
-    <message>
-        <source>Enter Ninth above</source>
-        <translation>Entrer une neuvième au dessus</translation>
-    </message>
-    <message>
         <source>enter second below</source>
         <translation>entrer une seconde en dessous</translation>
-    </message>
-    <message>
-        <source>Second below</source>
-        <translation>Seconde en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Second below</source>
-        <translation>Entrer une seconde en dessous</translation>
     </message>
     <message>
         <source>enter third below</source>
         <translation>entrer une tierce en dessous</translation>
     </message>
     <message>
-        <source>Third below</source>
-        <translation>Tierce en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Third below</source>
-        <translation>Entrer une tierce en dessous</translation>
-    </message>
-    <message>
         <source>enter fourth below</source>
         <translation>entrer une quarte en dessous</translation>
-    </message>
-    <message>
-        <source>Fourth below</source>
-        <translation>Quarte en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Fourth below</source>
-        <translation>Entrer une quarte en dessous</translation>
     </message>
     <message>
         <source>enter fifth below</source>
         <translation>entrer une quinte en dessous</translation>
     </message>
     <message>
-        <source>Fifth below</source>
-        <translation>Quinte en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Fifth below</source>
-        <translation>Entrer une quinte en dessous</translation>
-    </message>
-    <message>
         <source>enter sixth below</source>
         <translation>entrer une sixte en dessous</translation>
-    </message>
-    <message>
-        <source>Sixth below</source>
-        <translation>Sixte en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Sixth below</source>
-        <translation>Entrer une sixte en dessous</translation>
     </message>
     <message>
         <source>enter seventh below</source>
         <translation>entrer une septième en dessous</translation>
     </message>
     <message>
-        <source>Seventh below</source>
-        <translation>Septième en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Seventh below</source>
-        <translation>Entrer une septième en dessous</translation>
-    </message>
-    <message>
         <source>enter octave below</source>
         <translation>entrer une octave en dessous</translation>
     </message>
     <message>
-        <source>Octave below</source>
-        <translation>Octave en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Octave below</source>
-        <translation>Entrer une octave en dessous</translation>
-    </message>
-    <message>
         <source>enter ninth below</source>
         <translation>entrer une neuvième en dessous</translation>
-    </message>
-    <message>
-        <source>Ninth below</source>
-        <translation>Neuvième en dessous</translation>
-    </message>
-    <message>
-        <source>Enter Ninth below</source>
-        <translation>Entrer une neuvième en dessous</translation>
     </message>
     <message>
         <source>enter note a</source>
@@ -4406,6 +4294,142 @@ Sauver cette partition ? </translation>
         <source>line</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unison Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter unison above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter second above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter third above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fourth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fourth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fifth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fifth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sixth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter sixth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seventh Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter seventh above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Octave Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter octave above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ninth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter ninth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter second below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter third below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fourth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fourth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fifth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fifth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sixth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter sixth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seventh Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter seventh below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Octave Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter octave below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ninth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter ninth below</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4882,6 +4906,10 @@ Sauver cette partition ? </translation>
         <source>MuseScore file (*.msc);;All (*)</source>
         <translation>Fichiers MuseScore file (*.msc *.mscz);;All (*)</translation>
     </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished">defaut</translation>
+    </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
@@ -4958,10 +4986,6 @@ Sauver cette partition ? </translation>
         <translation>Enregistrement automatique</translation>
     </message>
     <message>
-        <source>Saver every</source>
-        <translation>Enregistrer toutes les </translation>
-    </message>
-    <message>
         <source>minutes</source>
         <translation>minutes</translation>
     </message>
@@ -5028,10 +5052,6 @@ Sauver cette partition ? </translation>
     <message>
         <source>Alternate input method</source>
         <translation>Méthode d&apos;entrée alternative</translation>
-    </message>
-    <message>
-        <source>When pressing F in note entry mode the created note pitch depends on the current key signature. In G-major a fis is created. If the alternate input method is enabled, the current key signature is irrelevant. Pressing F always creates a f note.</source>
-        <translation>En pressant F en mode de saisie des notes, la hauteur de la note créée depend de l&apos;armature. En Sol majeur un Fa dièse est créé. Si la methode de saisie alternative est activée, l&apos;armature n&apos;est pas considérée. En pressant F on obtient un Fa.</translation>
     </message>
     <message>
         <source>Export Midi</source>
@@ -5306,15 +5326,55 @@ Sauver cette partition ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attention: requires a restart of MuseScore.</source>
-        <translation>Attention : ceci nécessite un redémarrage de MuseScore</translation>
-    </message>
-    <message>
         <source>nl Dutch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Selection Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention: changing the language requires a restart of MuseScore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Largeur</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Hauteur</translation>
+    </message>
+    <message>
+        <source>Note Entry:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6532,16 +6592,16 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>magTable</name>
     <message>
-        <source>PgeWidth</source>
-        <translation>Largeur de la page</translation>
+        <source>Page Width</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page</source>
-        <translation>Page</translation>
+        <source>Whole Page</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>DblPage</source>
-        <translation>Double page</translation>
+        <source>Two Pages</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
