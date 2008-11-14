@@ -171,6 +171,7 @@ void Preferences::init()
       noteEntryIconWidth       = ICON_WIDTH;
       noteEntryIconHeight      = ICON_HEIGHT;
       applicationFont          = "";
+      style                    = "";
       };
 
 //---------------------------------------------------------
@@ -249,6 +250,8 @@ void Preferences::write()
       s.setValue("noteEntryIconWidth",  noteEntryIconWidth);
       if (!applicationFont.isEmpty())
             s.setValue("applicationFont", applicationFont);
+      if (!style.isEmpty())
+            s.setValue("style", style);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -330,6 +333,7 @@ void Preferences::read()
       noteEntryIconHeight      = s.value("noteEntryIconHeight", ICON_HEIGHT).toInt();
       noteEntryIconWidth       = s.value("noteEntryIconWidth", ICON_WIDTH).toInt();
       applicationFont          = s.value("applicationFont", "").toString();
+      style                    = s.value("style", "").toString();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -533,6 +537,19 @@ void PreferenceDialog::updateValues(Preferences* p)
             localShortcuts[s->xml] = ns;
             }
       updateSCListView();
+
+      QStringList sl = QStyleFactory::keys();
+      styleCombo->addItem(tr("default"));
+      styleCombo->addItems(sl);
+      int idx = 1;
+      foreach(QString s, sl) {
+            if (s == p->style)
+                  break;
+            ++idx;
+            }
+      if (idx >= sl.size())
+            idx = 0;
+      styleCombo->setCurrentIndex(idx);
 
 
       //
@@ -924,6 +941,14 @@ void PreferenceDialog::apply()
 #endif
 
       qApp->setStyleSheet(appStyleSheet());
+
+      if (styleCombo->currentIndex() != 0) {
+            QString s = styleCombo->currentText();
+            QApplication::setStyle(s);
+            preferences.style = s;
+            }
+      else
+            preferences.style = QString();
       genIcons();
 
       emit preferencesChanged();

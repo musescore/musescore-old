@@ -558,7 +558,7 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Select Key Signature:"));
 
-      sp = new Palette(5, 3, .8);
+      sp = new Palette(.8);
       sp->setGrid(56, 45);
       sp->setSelectable(true);
       sp->showStaff(true);

@@ -36,7 +36,7 @@ TimeDialog::TimeDialog(QWidget* parent)
       frame->setLayout(l);
       QScrollArea* timePalette = new QScrollArea;
       l->addWidget(timePalette);
-      sp = new Palette(4, 4);
+      sp = new Palette();
       timePalette->setWidget(sp);
       sp->setGrid(60, 60);
       sp->showStaff(true);
@@ -68,8 +68,8 @@ void TimeDialog::addClicked()
 
       // look for free slot:
 
-      int nr = sp->getRows();
-      int nc = sp->getColumns();
+      int nr = sp->rows();
+      int nc = sp->columns();
       for (int r = 0; r < nr; ++r) {
             for (int c = 0; c < nc; ++c) {
                   int idx = r * nc + c;
@@ -81,8 +81,8 @@ void TimeDialog::addClicked()
                         }
                   }
             }
+
       // extend palette:
-      sp->setRowsColumns(nr+1, nc);
       sp->addObject(nr * nc, ts, "");
       }
 

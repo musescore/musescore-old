@@ -1459,6 +1459,8 @@ int main(int argc, char* argv[])
             }
 
       qApp->setStyleSheet(appStyleSheet());
+      if (!preferences.style.isEmpty())
+            QApplication::setStyle(preferences.style);
 
       //
       //  load internal fonts

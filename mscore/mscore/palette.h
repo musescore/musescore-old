@@ -59,6 +59,30 @@ class PaletteBox : public QDockWidget {
       void addPalette(const QString& s, QWidget*);
       };
 
+
+//---------------------------------------------------------
+//   PaletteCell
+//---------------------------------------------------------
+
+struct PaletteCell {
+      Element* element;
+      QString name;
+      };
+
+
+//---------------------------------------------------------
+//   PaletteScrollArea
+//---------------------------------------------------------
+
+class PaletteScrollArea : public QScrollArea {
+      Q_OBJECT
+
+      virtual void resizeEvent(QResizeEvent*);
+
+   public:
+      PaletteScrollArea(QWidget* w, QWidget* parent = 0);
+      };
+
 //---------------------------------------------------------
 //   Palette
 //---------------------------------------------------------
@@ -66,11 +90,8 @@ class PaletteBox : public QDockWidget {
 class Palette : public QWidget {
       Q_OBJECT
 
-      Element** symbols;
-      QIcon** icons;
-      int* subtypes;
-      QString* names;
-      int rows, columns;
+      QList<PaletteCell*> cells;
+
       int hgrid, vgrid;
       int currentIdx;
       int selectedIdx;
@@ -90,7 +111,6 @@ class Palette : public QWidget {
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void leaveEvent(QEvent*);
       virtual bool event(QEvent*);
-      virtual QSize sizeHint() const;
 
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
@@ -109,17 +129,14 @@ class Palette : public QWidget {
 
    public:
       Palette(QWidget* parent = 0);
-      Palette(int rows, int columns, qreal mag = 1.0);
+      Palette(qreal mag);
       ~Palette();
       void addObject(int idx, Element*, const QString& name);
       void addObject(int idx, int sym);
       void setGrid(int, int);
-      void showStaff(bool);
-      int getRows() const { return rows; }
-      int getColumns() const { return columns; }
-      void setRowsColumns(int r, int c);
-      Element* element(int idx) { return symbols[idx]; }
-      void setDrawGrid(bool val) { _drawGrid = val; }
+      void showStaff(bool val)     { staff = val; }
+      Element* element(int idx)    { return cells[idx]->element; }
+      void setDrawGrid(bool val)   { _drawGrid = val; }
       void write(Xml&, const char*) const;
       void read(QDomElement);
       void clear();
@@ -131,6 +148,9 @@ class Palette : public QWidget {
       void setReadOnly(bool val)   { _readOnly = val;    }
       void setMag(qreal val)       { extraMag = val;     }
       void setYOffset(qreal val)   { _yOffset = val;     }
+      int columns() const { return width() / hgrid; }
+      int rows() const;
+      int resizeWidth(int);
       };
 
 #endif

@@ -49,7 +49,6 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       setupUi(this);
 
       drumNote->setGrid(70, 80);
-      drumNote->setRowsColumns(1, 1);
       drumNote->showStaff(true);
       drumNote->setDrawGrid(true);
       drumNote->setReadOnly(true);
