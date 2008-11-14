@@ -1473,8 +1473,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         // what does placement affect?
                         //yoffset += (placement == "above" ? 0.0 : 5.0);
                         ls1->setUserOff(userOff);
-                        // userOff2 is relative to userOff, so subtract
-                        ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset) - userOff);
+                        ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
                         if (lineEnd == "up") {
                               b->setHook(true);
                               b->setHookUp(true);
