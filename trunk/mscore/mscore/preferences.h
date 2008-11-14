@@ -99,6 +99,7 @@ struct Preferences {
       int iconWidth, iconHeight;
       int noteEntryIconWidth, noteEntryIconHeight;
       QString applicationFont;
+      QString style;
 
       bool dirty;
 

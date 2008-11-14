@@ -96,6 +96,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QStylePainter>
 #include <QtGui/QStyleOptionButton>
+#include <QtGui/QStyleFactory>
 #include <QtGui/QWizard>
 #include <QtGui/QRadioButton>
 #include <QtGui/QDirModel>

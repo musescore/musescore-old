@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>882</width>
-    <height>711</height>
+    <width>991</width>
+    <height>715</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -29,7 +29,7 @@
           <string>Program Start</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3" >
           <item>
@@ -90,7 +90,10 @@
           <string>Language</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
+         </property>
+         <property name="checkable" >
+          <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout" >
           <item>
@@ -144,6 +147,12 @@
           </item>
           <item>
            <widget class="QLabel" name="restartWarning_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="palette" >
              <palette>
               <active>
@@ -184,9 +193,19 @@
             <property name="text" >
              <string>Attention: changing the language requires a restart of MuseScore.</string>
             </property>
+            <property name="textFormat" >
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="wordWrap" >
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
+         <zorder>language</zorder>
+         <zorder>textBrowser</zorder>
+         <zorder>restartWarning_2</zorder>
+         <zorder>label_34</zorder>
         </widget>
        </item>
        <item row="1" column="0" colspan="2" >
@@ -195,7 +214,7 @@
           <string>Paths</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout" >
           <property name="margin" >
@@ -270,13 +289,13 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2" >
+       <item row="2" column="0" >
         <widget class="QGroupBox" name="groupBox" >
          <property name="title" >
           <string>Windows</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout" >
           <property name="margin" >
@@ -343,13 +362,25 @@
          </layout>
         </widget>
        </item>
+       <item row="2" column="1" >
+        <widget class="QGroupBox" name="groupBox_14" >
+         <property name="title" >
+          <string>Style</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
+          <item>
+           <widget class="QComboBox" name="styleCombo" />
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item row="3" column="0" >
         <widget class="QGroupBox" name="autoSave" >
          <property name="title" >
           <string>Auto Save</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="checkable" >
           <bool>true</bool>
@@ -364,7 +395,7 @@
           <item>
            <widget class="QLabel" name="label_25" >
             <property name="text" >
-             <string>Saver every</string>
+             <string>Save every</string>
             </property>
            </widget>
           </item>
@@ -407,7 +438,7 @@
           <string>Icons</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_3" >
           <item row="0" column="0" colspan="2" >
@@ -513,9 +544,6 @@
           </item>
           <item row="3" column="1" >
            <layout class="QFormLayout" name="formLayout_5" >
-            <property name="fieldGrowthPolicy" >
-             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-            </property>
             <item row="0" column="1" >
              <widget class="QSpinBox" name="noteEntryIconHeight" >
               <property name="minimum" >
@@ -550,7 +578,7 @@
           <string>Application Font</string>
          </property>
          <property name="flat" >
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout" >
           <item>

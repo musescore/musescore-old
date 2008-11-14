@@ -47,48 +47,39 @@ Palette::Palette(QWidget* parent)
       {
       extraMag      = 1.0;
       staff         = false;
-      symbols       = 0;
-      names         = 0;
       currentIdx    = -1;
       selectedIdx   = -1;
-      rows          = 0;
-      columns       = 0;
       _yOffset      = 0;
-
-      setGrid(50, 60);
-      setRowsColumns(1, 1);
-
-      _drawGrid   = false;
-      _selectable = false;
-      _readOnly   = true;
+      hgrid         = 50;
+      vgrid         = 60;
+      _drawGrid     = false;
+      _selectable   = false;
+      _readOnly     = true;
       setMouseTracking(true);
+      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+//      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
       }
 
-Palette::Palette(int r, int c, qreal mag)
+Palette::Palette(qreal mag)
       {
       extraMag      = mag;
       staff         = false;
-      symbols       = 0;
-      names         = 0;
       currentIdx    = -1;
       selectedIdx   = -1;
-      rows          = 0;
-      columns       = 0;
-      setGrid(50, 60);
-      setRowsColumns(r, c);
-
-      _drawGrid   = false;
-      _selectable = false;
-      _readOnly   = true;
+      hgrid         = 50;
+      vgrid         = 60;
+      _drawGrid     = false;
+      _selectable   = false;
+      _readOnly     = true;
       setMouseTracking(true);
+      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+//      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
       }
 
 Palette::~Palette()
       {
-      if (symbols)
-            delete[] symbols;
-      if (names)
-            delete[] names;
+      foreach(PaletteCell* cell, cells)
+            delete cell;
       }
 
 //---------------------------------------------------------
@@ -103,63 +94,6 @@ void Palette::setGrid(int hh, int vv)
       {
       hgrid = hh;
       vgrid = vv;
-      if (columns == 0 || rows == 0)
-            return;
-      setFixedSize(columns * hgrid, rows * vgrid);
-      }
-
-//---------------------------------------------------------
-//   sizeHint
-//---------------------------------------------------------
-
-QSize Palette::sizeHint() const
-      {
-      return QSize();
-
-//      return QSize(columns * hgrid, rows * vgrid);
-      }
-
-//---------------------------------------------------------
-//   setRowsColumns
-//---------------------------------------------------------
-
-void Palette::setRowsColumns(int r, int c)
-      {
-      int n   = rows * columns;
-      rows    = r;
-      columns = c;
-      setFixedSize(columns * hgrid, rows * vgrid);
-
-      if (parent() && parent()->parent() && strcmp(parent()->parent()->metaObject()->className(), "QScrollArea") == 0)
-            static_cast<QScrollArea*>(parent()->parent())->setMaximumHeight(rows * vgrid + 4);
-
-      Element** nsymbols = new Element*[rows*columns];
-      QString* nnames    = new QString[rows*columns];
-
-      for (int i = 0; i < r*c; ++i) {
-            nsymbols[i]  = 0;
-            }
-      for (int i = 0; i < n; ++i) {
-            nsymbols[i]  = symbols[i];
-            nnames[i]    = names[i];
-            }
-      // TODO: delete symbols
-
-      if (symbols)
-            delete[] symbols;
-      if (names)
-            delete[] names;
-      symbols  = nsymbols;
-      names    = nnames;
-      }
-
-//---------------------------------------------------------
-//   showStaff
-//---------------------------------------------------------
-
-void Palette::showStaff(bool flag)
-      {
-      staff = flag;
       }
 
 //---------------------------------------------------------
@@ -210,7 +144,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
       QList<Element*>* el = sel->elements();
       QMimeData* mimeData = new QMimeData;
-      Element* element    = symbols[i];
+      Element* element    = cells[i]->element;
       Viewer* viewer      = score->canvas();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
@@ -256,9 +190,14 @@ int Palette::idx(const QPoint& p) const
       int row = y / vgrid;
       int col = x / hgrid;
 
-      if (row < 0 || row >= rows || col < 0 || col >= columns)
+      int nc = columns();
+      if (col > nc)
             return -1;
-      return row * columns + col;
+
+      int idx = row * nc + col;
+      if (idx >= cells.size())
+            return -1;
+      return idx;
       }
 
 //---------------------------------------------------------
@@ -269,10 +208,10 @@ QRect Palette::idxRect(int i)
       {
       if (i == -1)
             return QRect();
-      if (columns == 0)
+      if (columns() == 0)
             return QRect();
-      int cc = i % columns;
-      int cr = i / columns;
+      int cc = i % columns();
+      int cr = i / columns();
       return QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
       }
 
@@ -286,8 +225,8 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
          && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
             QDrag* drag = new QDrag(this);
             QMimeData* mimeData = new QMimeData;
-            if (symbols[currentIdx]) {
-                  Element* el = symbols[currentIdx];
+            if (cells[currentIdx]) {
+                  Element* el = cells[currentIdx]->element;
                   QRect ir = idxRect(currentIdx);
                   QPoint sp = dragStartPosition - ir.topLeft();
 
@@ -308,8 +247,7 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   else {
                         Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
                         if (action == Qt::MoveAction) {
-                              symbols[srcIdx] = 0;
-                              names[srcIdx] = QString();
+                              cells[srcIdx] = 0;
                               }
                         }
                   }
@@ -320,7 +258,7 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   r = idxRect(currentIdx);
             currentIdx = idx(ev->pos());
             if (currentIdx != -1) {
-                  if (symbols[currentIdx] == 0)
+                  if (cells[currentIdx] == 0)
                         currentIdx = -1;
                   else
                         r |= idxRect(currentIdx);
@@ -348,11 +286,19 @@ void Palette::leaveEvent(QEvent*)
 
 void Palette::addObject(int idx, Element* s, const QString& name)
       {
-      // TODO: delete symbol
-      if (symbols[idx])
-            delete symbols[idx];
-      symbols[idx] = s;
-      names[idx]   = name;
+      PaletteCell* cell = new PaletteCell;
+
+      if (idx < cells.size()) {
+            if (cells[idx])
+                  delete cells[idx];
+            }
+      else {
+            for (int i = cells.size(); i <= idx; ++i)
+                  cells.append(0);
+            }
+      cells[idx]     = cell;
+      cell->element  = s;
+      cell->name     = name;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -391,10 +337,10 @@ void Palette::paintEvent(QPaintEvent*)
 
       if (_drawGrid) {
             p.setPen(Qt::gray);
-            for (int row = 1; row < rows; ++row)
-                  p.drawLine(0, row*vgrid, columns*hgrid, row*vgrid);
-            for (int column = 1; column < columns; ++column)
-                  p.drawLine(hgrid*column, 0, hgrid*column, rows*vgrid);
+            for (int row = 1; row < rows(); ++row)
+                  p.drawLine(0, row*vgrid, columns()*hgrid, row*vgrid);
+            for (int column = 1; column < columns(); ++column)
+                  p.drawLine(hgrid*column, 0, hgrid*column, rows()*vgrid);
             }
 
       qreal dy = lrint(2 * PALETTE_SPATIUM * extraMag);
@@ -406,79 +352,78 @@ void Palette::paintEvent(QPaintEvent*)
       QPen pen(QColor(Qt::black));
       pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM * extraMag);
 
-      for (int row = 0; row < rows; ++row) {
-            for (int column = 0; column < columns; ++column) {
-                  int idx = row * columns + column;
+      int c = columns();
+      for (int idx = 0; idx < cells.size(); ++idx) {
+            QRect r = idxRect(idx);
+            p.setPen(pen);
+            if (idx == selectedIdx) {
+                  if (idx == currentIdx)
+                        p.fillRect(r, QColor(220, 220, 200));
+                  else
+                        p.fillRect(r, QColor(200, 200, 180));
+                  }
+            else if (idx == currentIdx)
+                  p.fillRect(r, p.background().color().light(118));
+            if (cells[idx] == 0)
+                  continue;
+            Element* el = cells[idx]->element;
+            if (el->type() != ICON) {
+                  int row    = idx / c;
+                  int column = idx % c;
+                  // hack:
+                  el->layout(&layout);
+                  el->setPos(0.0, 0.0);   // HACK
 
-                  QRect r = idxRect(idx);
-                  p.setPen(pen);
-                  if (idx == selectedIdx) {
-                        if (idx == currentIdx)
-                              p.fillRect(r, QColor(220, 220, 200));
-                        else
-                              p.fillRect(r, QColor(200, 200, 180));
+                  if (staff) {
+                        qreal y = r.y() + vgrid * .5 - dy + _yOffset;
+                        qreal x = r.x() + 3;
+                        qreal w = hgrid - 6;
+                        for (int i = 0; i < 5; ++i) {
+                              qreal yy = y + PALETTE_SPATIUM * i * extraMag;
+                              p.drawLine(QLineF(x, yy, x + w, yy));
+                              }
                         }
-                  else if (idx == currentIdx)
-                        p.fillRect(r, p.background().color().light(118));
-                  Element* el = symbols[idx];
-                  if (!el)
-                        continue;
-                  if (el->type() != ICON) {
-                        // hack:
-                        el->layout(&layout);
-                        el->setPos(0.0, 0.0);   // HACK
+                  p.save();
+                  p.scale(mag, mag);
 
-                        if (staff) {
-                              qreal y = r.y() + vgrid * .5 - dy + _yOffset;
-                              qreal x = r.x() + 3;
-                              qreal w = hgrid - 6;
-                              for (int i = 0; i < 5; ++i) {
-                                    qreal yy = y + PALETTE_SPATIUM * i * extraMag;
-                                    p.drawLine(QLineF(x, yy, x + w, yy));
-                                    }
-                              }
+                  double gw = hgrid / mag;
+                  double gh = vgrid / mag;
+                  double gx = column * gw;
+                  double gy = row    * gh;
+
+                  double sw = el->width();
+                  double sh = el->height();
+                  double sy;
+
+                  if (staff)
+                        sy = gy + gh * .5 - 2.0 * _spatium;
+                  else
+                        sy  = gy + (gh - sh) * .5 - el->bbox().y();
+                  double sx  = gx + (gw - sw) * .5 - el->bbox().x();
+
+                  sy += _yOffset / mag;
+
+                  QList<const Element*> elist;
+                  el->collectElements(elist);
+                  p.translate(QPointF(sx, sy));
+                  foreach(const Element* e, elist) {
                         p.save();
-                        p.scale(mag, mag);
-
-                        double gw = hgrid / mag;
-                        double gh = vgrid / mag;
-                        double gx = column * gw;
-                        double gy = row    * gh;
-
-                        double sw = el->width();
-                        double sh = el->height();
-                        double sy;
-
-                        if (staff)
-                              sy = gy + gh * .5 - 2.0 * _spatium;
-                        else
-                              sy  = gy + (gh - sh) * .5 - el->bbox().y();
-                        double sx  = gx + (gw - sw) * .5 - el->bbox().x();
-
-                        sy += _yOffset / mag;
-
-                        QList<const Element*> elist;
-                        el->collectElements(elist);
-                        p.translate(QPointF(sx, sy));
-                        foreach(const Element* e, elist) {
-                              p.save();
-                              p.translate(e->pos());
-                              p.setPen(QPen(e->curColor()));
-                              e->draw(p);
-                              p.restore();
-                              }
+                        p.translate(e->pos());
+                        p.setPen(QPen(e->curColor()));
+                        e->draw(p);
                         p.restore();
                         }
-                  else {
-                        int x      = column * hgrid;
-                        int y      = row    * vgrid;
-                        QIcon icon = ((Icon*)el)->icon();
-                        int border = 2;
-                        int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
-                        p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2,
-                           icon.pixmap(size, QIcon::Normal, QIcon::On)
-                           );
-                        }
+                  p.restore();
+                  }
+            else {
+                  int x      = r.x();
+                  int y      = r.y();
+                  QIcon icon = ((Icon*)el)->icon();
+                  int border = 2;
+                  int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
+                  p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2,
+                     icon.pixmap(size, QIcon::Normal, QIcon::On)
+                     );
                   }
             }
       }
@@ -497,14 +442,16 @@ bool Palette::event(QEvent* ev)
             int row = y / vgrid;
             int col = x / hgrid;
 
-            if (row < 0 || row >= rows)
+            if (row < 0 || row >= rows())
                   return false;
-            if (col < 0 || col >= columns)
+            if (col < 0 || col >= columns())
                   return false;
-            int idx = row * columns + col;
-            if (symbols[idx] == 0)
+            int idx = row * columns() + col;
+            if (idx >= cells.size())
                   return false;
-            QToolTip::showText(he->globalPos(), names[idx], this);
+            if (cells[idx] == 0)
+                  return false;
+            QToolTip::showText(he->globalPos(), cells[idx]->name, this);
             return false;
             }
       return QWidget::event(ev);
@@ -556,10 +503,10 @@ void Palette::dragMoveEvent(QDragMoveEvent* ev)
       if (i == -1)
             return;
 
-      int n = rows * columns;
+      int n = rows() * columns();
       int ii = i;
       for (; ii < n; ++ii) {
-            if (symbols[ii] == 0)
+            if (cells[ii] == 0)
                   break;
             }
       if (ii == n)
@@ -656,14 +603,12 @@ void Palette::dropEvent(QDropEvent* event)
             if (i == -1)
                   return;
 
-            int n = rows * columns;
+            int n = rows() * columns();
             int ii = i;
             for (; ii < n; ++ii) {
-                  if (symbols[ii] == 0)
+                  if (cells[ii] == 0)
                         break;
                   }
-            if (ii == n)
-                  setRowsColumns(rows + 1, columns);
             addObject(ii, e, name);
             emit droppedElement(e);
             if (event->source() == this) {
@@ -682,17 +627,17 @@ void Palette::dropEvent(QDropEvent* event)
 void Palette::write(Xml& xml, const char* name) const
       {
       xml.stag(QString(name));
-      int n = rows * columns;
+      int n = rows() * columns();
       int i = 0;
-      xml.tag("rows", rows);
-      xml.tag("columns", columns);
+      xml.tag("rows", rows());
+      xml.tag("columns", columns());
       for (i = 0; i < n; ++i) {
-            if (symbols[i] == 0)
+            if (cells[i] == 0)
                   continue;
             xml.tag("idx", i);
-            if (!names[i].isEmpty())
-                  xml.tag("name", names[i]);
-            symbols[i]->write(xml);
+            if (!cells[i]->name.isEmpty())
+                  xml.tag("name", cells[i]->name);
+            cells[i]->element->write(xml);
             }
       xml.etag();
       }
@@ -705,8 +650,6 @@ void Palette::read(QDomElement e)
       {
       int idx = 0;
       QString name = "";
-      int r = 0;
-      int c = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "idx") {
@@ -717,11 +660,9 @@ void Palette::read(QDomElement e)
                   name = e.text();
                   }
             else if (tag == "rows")
-                  r = e.text().toInt();
-            else if (tag == "columns") {
-                  c = e.text().toInt();
-                  setRowsColumns(r, c);
-                  }
+                  ;
+            else if (tag == "columns")
+                  ;
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
@@ -764,18 +705,9 @@ void Palette::read(QDomElement e)
 
 void Palette::clear()
       {
-      int n = rows * columns;
-
-      for (int i = 0; i < n; ++i) {
-            if (symbols[i])
-                  delete symbols[i];
-            }
-      delete[] symbols;
-      delete[] names;
-      rows    = 0;
-      columns = 0;
-      symbols = 0;
-      names   = 0;
+      foreach(PaletteCell* cell, cells)
+            delete cell;
+      cells.clear();
       }
 
 //---------------------------------------------------------
@@ -786,7 +718,7 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
    : QPushButton(parent)
       {
       setCheckable(true);
-      setFlat(true);
+//      setFlat(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
       setFixedHeight(QFontMetrics(font()).height() + 2);
@@ -809,11 +741,6 @@ void PaletteBoxButton::changeEvent(QEvent* ev)
 void PaletteBoxButton::paintEvent(QPaintEvent* e)
       {
       QPushButton::paintEvent(e);
-      QPixmap pm = QPixmap(isChecked() ? ":/data/minus.svg" : ":/data/plus.svg");
-      int x = 5;
-      int y = (height() - pm.height()) / 2;
-      QPainter p(this);
-      p.drawPixmap(x, y, pm);
       }
 
 //---------------------------------------------------------
@@ -840,7 +767,50 @@ PaletteBox::PaletteBox(QWidget* parent)
 
 QSize PaletteBox::sizeHint() const
       {
-      return QSize(180, 10);
+//      return QSize(180, 10);
+      return QSize();
+      }
+
+//---------------------------------------------------------
+//   PaletteScrollArea
+//---------------------------------------------------------
+
+PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
+   : QScrollArea(parent)
+      {
+      setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+      setWidget(w);
+//      QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      QSizePolicy policy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+//      policy.setHeightForWidth(true);
+//      setSizePolicy(policy);
+//      setWidgetResizable(true);
+      }
+
+//---------------------------------------------------------
+//   resizeEvent
+//---------------------------------------------------------
+
+void PaletteScrollArea::resizeEvent(QResizeEvent* re)
+      {
+      Palette* palette = static_cast<Palette*>(widget());
+      int h = palette->resizeWidth(width());
+      setMaximumHeight(h+8);
+      QScrollArea::resizeEvent(re);
+      }
+
+//---------------------------------------------------------
+//   resizeWidth
+//---------------------------------------------------------
+
+int Palette::resizeWidth(int w)
+      {
+      int c = w / hgrid;
+      int r = (cells.size() + c - 1) / c;
+      int h = r * vgrid;
+      setFixedSize(w, h);
+      return h;
       }
 
 //---------------------------------------------------------
@@ -849,12 +819,7 @@ QSize PaletteBox::sizeHint() const
 
 void PaletteBox::addPalette(const QString& s, QWidget* w)
       {
-      QScrollArea* sa = new QScrollArea;
-      sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-      sa->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-      sa->setWidget(w);
-      sa->setMaximumHeight(w->height()+4);
-
+      PaletteScrollArea* sa = new PaletteScrollArea(w);
       sa->setVisible(false);
       PaletteBoxButton* b = new PaletteBoxButton(sa);
       b->setText(s);
@@ -881,8 +846,8 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
 void Palette::actionToggled(bool /*val*/)
       {
       selectedIdx = -1;
-      for (int n = 0; n < (rows * columns); ++n) {
-            Element* e = symbols[n];
+      for (int n = 0; n < (rows() * columns()); ++n) {
+            Element* e = cells[n]->element;
             if (e && e->type() == ICON) {
                   if (((Icon*)e)->action()->isChecked()) {
                         selectedIdx = n;
@@ -891,5 +856,17 @@ void Palette::actionToggled(bool /*val*/)
                   }
             }
       update();
+      }
+
+//---------------------------------------------------------
+//   rows
+//---------------------------------------------------------
+
+int Palette::rows() const
+      {
+      int c = columns();
+      if (c == 0)
+            return 0;
+      return (cells.size() + c - 1) / c;
       }
 

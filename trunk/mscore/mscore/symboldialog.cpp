@@ -38,7 +38,7 @@ static const int COLUMNS = 16;
 
 void createSymbolPalette()
       {
-      symbolPalette = new Palette(ROWS, COLUMNS);
+      symbolPalette = new Palette();
       symbolPalette->addObject(0, wholerestSym);
       symbolPalette->addObject(1, halfrestSym);
       symbolPalette->addObject(2, outsidewholerestSym);
