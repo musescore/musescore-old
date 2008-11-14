@@ -66,6 +66,7 @@ Palette::Palette(qreal mag)
       staff         = false;
       currentIdx    = -1;
       selectedIdx   = -1;
+      _yOffset      = 0;
       hgrid         = 50;
       vgrid         = 60;
       _drawGrid     = false;
@@ -406,6 +407,7 @@ void Palette::paintEvent(QPaintEvent*)
                   QList<const Element*> elist;
                   el->collectElements(elist);
                   p.translate(QPointF(sx, sy));
+// printf("%f %f\n", sx, sy);
                   foreach(const Element* e, elist) {
                         p.save();
                         p.translate(e->pos());
