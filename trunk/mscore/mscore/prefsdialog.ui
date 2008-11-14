@@ -105,6 +105,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>cz Czech</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>de German</string>
              </property>
             </item>
@@ -202,10 +207,6 @@
            </widget>
           </item>
          </layout>
-         <zorder>language</zorder>
-         <zorder>textBrowser</zorder>
-         <zorder>restartWarning_2</zorder>
-         <zorder>label_34</zorder>
         </widget>
        </item>
        <item row="1" column="0" colspan="2" >
