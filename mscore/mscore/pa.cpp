@@ -132,7 +132,11 @@ bool Portaudio::init()
       if (midiDriver && !midiDriver->init()) {
             delete midiDriver;
             midiDriver = 0;
+#ifdef USE_PORTMIDI
+            return true;                  // return OK for audio driver; midi is only input
+#else
             return false;
+#endif
             }
       return true;
       }

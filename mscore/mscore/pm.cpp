@@ -100,8 +100,10 @@ PortMidiDriver::PortMidiDriver(Seq* s)
 
 PortMidiDriver::~PortMidiDriver()
       {
-      if (inputStream)
+      if (inputStream) {
+            Pt_Stop();
             Pm_Close(inputStream);
+            }
       }
 
 //---------------------------------------------------------
@@ -111,9 +113,11 @@ PortMidiDriver::~PortMidiDriver()
 
 bool PortMidiDriver::init()
       {
-printf("PortMidiDriver::init\n");
       inputId  = Pm_GetDefaultInputDeviceID();
       outputId = Pm_GetDefaultOutputDeviceID();
+
+      if (inputId == pmNoDevice)
+            return false;
 
       static const int INPUT_BUFFER_SIZE = 100;
       static const int DRIVER_INFO = 0;
@@ -121,13 +125,15 @@ printf("PortMidiDriver::init\n");
 
       Pt_Start(20, 0, 0);      // timer started, 20 millisecond accuracy
 
-      Pm_OpenInput(&inputStream,
+      PmError error = Pm_OpenInput(&inputStream,
          inputId,
          DRIVER_INFO, INPUT_BUFFER_SIZE,
          ((long (*)(void*)) Pt_Time),
          TIME_INFO);
-      if (inputStream == 0) {
-            printf("PortMidi: open input failed\n");
+      if (error != pmNoError) {
+            const char* p = Pm_GetErrorText(error);
+            printf("PortMidi: open input (id=%d) failed: %s\n", int(inputId), p);
+            Pt_Stop();
             return false;
             }
 
