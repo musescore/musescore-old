@@ -7,6 +7,7 @@ echo "      $1/share/locale/mscore_it.ts \\"
 echo "      $1/share/locale/mscore_es.ts \\"
 echo "      $1/share/locale/mscore_fr.ts \\"
 echo "      $1/share/locale/mscore_nl.ts \\"
+echo "      $1/share/locale/mscore_cz.ts \\"
 echo "      $1/share/locale/mscore_pt.ts"
 
 echo "FORMS = \\"
