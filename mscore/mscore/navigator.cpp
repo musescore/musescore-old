@@ -168,7 +168,11 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
             QPoint delta = ev->pos() - startMove;
             viewRect.translate(delta);
             startMove = ev->pos();
-            emit viewRectMoved(imatrix.mapRect(viewRect));
+
+            setViewRect(matrix.inverted().mapRect(viewRect));
+
+            // viewRect is now within bounds
+            emit viewRectMoved(matrix.inverted().mapRect(viewRect));
             }
       }
 
