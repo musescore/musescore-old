@@ -167,27 +167,7 @@ void Symbol::setAbove(bool val)
 
 void Symbol::layout(ScoreLayout* layout)
       {
-      QPointF o(QPointF(_xoff, _yoff));
-      if (_offsetType == OFFSET_SPATIUM)
-            o *= layout->spatium();
-      else
-            o *= DPI;
-      if (parent())
-            o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
-      double h = height();
-      double w = width();
-      QPointF p;
-      if (_align & ALIGN_BOTTOM)
-            p.setY(-h);
-      else if (_align & ALIGN_VCENTER)
-            p.setY(-(h * .5));
-      else if (_align & ALIGN_BASELINE)
-            p.setY(0.0);
-      if (_align & ALIGN_RIGHT)
-            p.setX(-w);
-      else if (_align & ALIGN_HCENTER)
-            p.setX(-(w * .5));
-      setPos(p + o);
+      Element::layout(layout);
       BSymbol::layout(layout);
       }
 

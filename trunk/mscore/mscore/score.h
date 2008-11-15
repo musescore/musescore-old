@@ -620,6 +620,8 @@ class Score : public QObject {
       Score* createExcerpt(Excerpt*);
       MeasureBaseList* measures()  { return &_measures; }
 
+      bool checkHasMeasures() const;
+
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
       void setLayout(Measure* m);

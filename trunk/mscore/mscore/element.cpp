@@ -333,7 +333,10 @@ void Element::layout(ScoreLayout* layout)
       {
       QPointF o(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
-            o *= layout->spatium();
+            if (layout)
+                  o *= layout->spatium();
+            else
+                  o *= _spatium;
       else
             o *= DPI;
       if (parent())
@@ -345,8 +348,8 @@ void Element::layout(ScoreLayout* layout)
             p.setY(-h);
       else if (_align & ALIGN_VCENTER)
             p.setY(-(h * .5));
-      else if (_align & ALIGN_BASELINE)   // undefined
-            p.setY(-h);
+      else if (_align & ALIGN_BASELINE)
+            p.setY(baseLine());
       if (_align & ALIGN_RIGHT)
             p.setX(-w);
       else if (_align & ALIGN_HCENTER)

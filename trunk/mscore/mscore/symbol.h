@@ -50,6 +50,8 @@ class Symbol : public BSymbol {
       virtual QRectF bbox() const;
       virtual void layout(ScoreLayout*);
       void setAbove(bool);
+
+      virtual qreal baseLine() const { return 0.0; }
       };
 
 #endif

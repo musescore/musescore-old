@@ -598,34 +598,16 @@ void TextB::layout(ScoreLayout* layout)
       if (parent() == 0)
             return;
 
-      QPointF o(QPointF(_xoff, _yoff));
-      if (_offsetType == OFFSET_SPATIUM)
-            o *= _spatium;
-      else
-            o *= DPI;
-      o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
+      Element::layout(layout);
 
-      double th = height();
-      double tw = width();
-      QPointF p;
-      if (_align & ALIGN_BOTTOM)
-            p.setY(-th);
-      else if (_align & ALIGN_VCENTER) {
-            if (subtype() == TEXT_TEXTLINE) {
-                  TextLineSegment* tls = (TextLineSegment*)parent();
-                  TextLine* tl = (TextLine*)(tls->line());
-                  qreal textlineLineWidth = tl->lineWidth().point();
-                  p.setY(-(th * .5 + textlineLineWidth * .5));
-            } else
-                  p.setY(-(th * .5));
+      if (_align & ALIGN_VCENTER && subtype() == TEXT_TEXTLINE) {
+            // special case: vertically centered text with TextLine needs to
+            // take into account the line width
+            TextLineSegment* tls = (TextLineSegment*)parent();
+            TextLine* tl = (TextLine*)(tls->line());
+            qreal textlineLineWidth = tl->lineWidth().point();
+            setYpos(pos().y() - textlineLineWidth * .5);
             }
-      else if (_align & ALIGN_BASELINE)
-            p.setY(-basePosition());
-      if (_align & ALIGN_RIGHT)
-            p.setX(-tw);
-      else if (_align & ALIGN_HCENTER)
-            p.setX(-(tw * .5));
-      setPos(p + o);
       }
 
 //---------------------------------------------------------

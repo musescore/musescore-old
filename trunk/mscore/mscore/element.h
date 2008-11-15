@@ -189,6 +189,7 @@ class Element {
       virtual bool contains(const QPointF& p) const;
       bool intersects(const QRectF& r) const;
       virtual QPainterPath shape() const;
+      virtual qreal baseLine() const          { return -height();       }
 
       virtual ElementType type() const = 0;
       int subtype() const                     { return _subtype;        }

@@ -372,33 +372,35 @@ double curTime()
 
 void selectNoteMessage()
       {
-      QMessageBox::critical(0,
+      QMessageBox::information(0,
          QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note and retry operation\n"),
+         QMessageBox::tr("No note selected:\n"
+                         "Please select a single note and retry operation\n"),
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 void selectNoteRestMessage()
       {
-      QMessageBox::critical(0,
+      QMessageBox::information(0,
          QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note or rest and retry operation\n"),
+         QMessageBox::tr("No note or rest selected:\n"
+                         "Please select a single note or rest and retry operation\n"),
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 void selectNoteSlurMessage()
       {
-      QMessageBox::critical(0,
+      QMessageBox::information(0,
          QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select a single note or slur and retry operation\n"),
+         QMessageBox::tr("Please select a single note or slur and retry operation\n"),
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 
 void selectStavesMessage()
       {
-      QMessageBox::critical(0,
+      QMessageBox::information(0,
          QMessageBox::tr("MuseScore:"),
-         QMessageBox::tr("please select one or more staves and retry operation\n"),
+         QMessageBox::tr("Please select one or more staves and retry operation\n"),
          QMessageBox::Ok, QMessageBox::NoButton);
       }
 

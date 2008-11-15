@@ -1860,3 +1860,14 @@ void Score::setMagIdx(int idx)
       canvas()->setMag(mag);
       }
 
+bool Score::checkHasMeasures() const
+      {
+      Page* page = _layout->pages().front();
+      const QList<System*>* sl = page->systems();
+      if (sl == 0 || sl->empty() || sl->front()->measures().empty()) {
+            printf("first create measure, then repeat operation\n");
+            return false;
+            }
+      return true;
+      }
+

@@ -1,6 +1,11 @@
 15.nov (ws)
       - added two new wallpapers from Toby Smithe
       - updated russian translation from Alexandre Prokoudine
+      (sy)
+      - some refactoring to remove duplicate code in cmdAddText, cmdAddChordName,
+        cmdAddChordName2, cmdAddHairpin, addTempo, TextB::layout, Symbol::layout
+      - made add hairpin keyboard command create hairpin extending to next note,
+        not a half note long as before, also work with rests
 14.nov (ws)
       - variable palette geometry
       - configurable application style
