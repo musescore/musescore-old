@@ -167,27 +167,8 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
       if (moving) {
             QPoint delta = ev->pos() - startMove;
             viewRect.translate(delta);
-
-            if (viewRect.x() < 0) {
-                  double dx = -viewRect.x() / matrix.m11();
-                  viewRect.moveLeft(0);
-                  if (matrix.dx() < 5.0)
-                        matrix.translate(dx, 0.0);
-                  redraw = true;
-                  }
-            if (viewRect.right() > width()) {
-                  double dx = (rect().right() - viewRect.right()) / matrix.m11();
-                  viewRect.moveRight(width());
-                  matrix.translate(dx, 0.0);
-                  redraw = true;
-                  }
-            if (viewRect.y() < 0)
-                  viewRect.moveTop(0);
-            else if (viewRect.bottom() > height())
-                  viewRect.moveBottom(height());
             startMove = ev->pos();
-            emit viewRectMoved(matrix.inverted().mapRect(viewRect));
-            update();
+            emit viewRectMoved(imatrix.mapRect(viewRect));
             }
       }
 
