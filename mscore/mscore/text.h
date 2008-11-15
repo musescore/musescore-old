@@ -155,7 +155,7 @@ class TextB : public Element {
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual bool edit(Viewer*, int, QKeyEvent*);
       virtual void endEdit();
-      void addSymbol(const SymCode&);
+      void addSymbol(const SymCode&, QTextCursor* c = 0);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
       virtual void write(Xml& xml) const;
@@ -179,6 +179,8 @@ class TextB : public Element {
       void setAbove(bool val);
       qreal basePosition() const;
       virtual void paste();
+
+      bool replaceSpecialChars();
       };
 
 //---------------------------------------------------------

@@ -21,6 +21,8 @@
 #ifndef __SYM_H__
 #define __SYM_H__
 
+#include "style.h"
+
 extern void initSymbols();
 extern double _spatiumMag;
 
@@ -31,8 +33,15 @@ extern double _spatiumMag;
 struct SymCode {
       QChar code;
       int style;
-      SymCode(QChar c, int s) : code(c), style(s) {}
+      const char* text;
+      bool show;
+      SymCode(QChar c, int s, const char* t = 0, bool show = true)
+         : code(c), style(s), text(t), show(show) {}
       };
+
+extern QMap<const char*, SymCode*> charReplaceMap;
+
+extern SymCode pSymbols[];
 
 //---------------------------------------------------------
 //   Sym

@@ -1,6 +1,11 @@
 14.nov (ws)
       - variable palette geometry
       - configurable application style
+      (sy)
+      - add fractions to text palette symbols
+      - automatic conversion of simple fractions ("1/2", etc) and
+        copyright symbol "(C)" into symbols in Text elements
+        after hitting Space, Return, or Tab
 13.nov (ws)
       - some progress for drum entry
       - lyric hyphens are now of constant len and much shorter
