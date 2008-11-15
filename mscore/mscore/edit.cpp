@@ -515,12 +515,10 @@ void Score::cmdAddSlur()
             _is.slur = 0;
             return;
             }
-      Element* e = sel->element();
-      if (!e || e->type() != NOTE) {
-            printf("no note selected\n");
+      Note* note = getSelectedNote();
+      if (!note)
             return;
-            }
-      ChordRest* cr1 = ((Note*)e)->chord();
+      ChordRest* cr1 = note->chord();
       ChordRest* cr2 = nextChordRest(cr1);
 
       if (cr2 == 0) {
@@ -561,11 +559,9 @@ void Score::cmdAddSlur()
 
 void Score::cmdAddStaccato()
       {
-      Element* e = sel->element();
-      if (!e || e->type() !=NOTE) {
-            printf("no note selected\n");
+      Note* note = getSelectedNote();
+      if (!note)
             return;
-            }
       printf("not impl.: cmdAddStaccato\n");
 
 //      Note* note    = (Note*)(e);
@@ -581,13 +577,9 @@ void Score::cmdAddStaccato()
 
 void Score::cmdAddTie()
       {
-      Element* e = sel->element();
-      if (!e || e->type() != NOTE) {
-            printf("no note selected\n");
+      Note* note = getSelectedNote();
+      if (!note)
             return;
-            }
-
-      Note* note    = static_cast<Note*>(e);
       Chord* chord  = note->chord();
       int staffIdx  = chord->staffIdx();
       ChordRest* el = nextChordRest(chord);
@@ -627,25 +619,24 @@ void Score::cmdAddTie()
 
 void Score::cmdAddHairpin(bool decrescendo)
       {
-      Element* el = sel->element();
-      if (!el) {
-            printf("selState != single\n");
+      ChordRest* cr = getSelectedChordRest();
+      if (!cr)
             return;
-            }
 
-      if (el->type() != NOTE) {
-            printf("please select note and try again\n");
-            return;
-            }
-      el = el->parent();
+      int tick1 = cr->tick();
 
-      int tick1 = el->tick();
-      int tick2 = tick1 + 2 * division;
+      ChordRest* cr2 = nextChordRest(cr);
+      int tick2;
+      if (cr2)
+            tick2 = cr2->tick();
+      else
+            tick2 = cr->measure()->tick() + cr->measure()->tickLen();
+
       Hairpin* pin = new Hairpin(this);
       pin->setTick(tick1);
       pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
-      pin->setTrack(el->track());
+      pin->setTrack(cr->track());
       pin->setParent(_layout);
       pin->layout(layout());
       cmdAdd(pin);

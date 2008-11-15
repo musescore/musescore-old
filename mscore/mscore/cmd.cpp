@@ -1090,35 +1090,16 @@ void Score::cmdAddChordName()
             endEdit();
             endCmd();
             }
-      Page* page = _layout->pages().front();
-      const QList<System*>* sl = page->systems();
-      if (sl == 0 || sl->empty()) {
-            printf("first create measure, then repeat operation\n");
+      if (!checkHasMeasures())
             return;
-            }
-      const QList<MeasureBase*>& ml = sl->front()->measures();
-      if (ml.empty()) {
-            printf("first create measure, then repeat operation\n");
+      ChordRest* cr = getSelectedChordRest();
+      if (!cr)
             return;
-            }
-      Element* el = sel->element();
-      if (!el || (el->type() != NOTE && el->type() != REST)) {
-            QMessageBox::information(0, "MuseScore: Text Entry",
-               tr("No note or rest selected:\n"
-               "please select a note or rest were you want to\n"
-               "start text entry"));
-            endCmd();
-            return;
-            }
-      if (el->type() == NOTE)
-            el = el->parent();
-
-      ChordRest* cr = dynamic_cast<ChordRest*>(el);
       Measure* measure = cr->measure();
       Harmony* s = new Harmony(this);
-      s->setTrack(el->track());
+      s->setTrack(cr->track());
       s->setParent(measure);
-      s->setTick(el->tick());
+      s->setTick(cr->tick());
       undoAddElement(s);
 
       layoutAll = true;
@@ -1137,40 +1118,21 @@ void Score::cmdAddChordName2()
             endEdit();
             endCmd();
             }
-      Page* page = _layout->pages().front();
-      const QList<System*>* sl = page->systems();
-      if (sl == 0 || sl->empty()) {
-            printf("first create measure, then repeat operation\n");
+      if (!checkHasMeasures())
             return;
-            }
-      const QList<MeasureBase*>& ml = sl->front()->measures();
-      if (ml.empty()) {
-            printf("first create measure, then repeat operation\n");
+      ChordRest* cr = getSelectedChordRest();
+      if (!cr)
             return;
-            }
-      Element* el = sel->element();
-      if (!el || (el->type() != NOTE && el->type() != REST)) {
-            QMessageBox::information(0, "MuseScore: Text Entry",
-               tr("No note or rest selected:\n"
-               "please select a note or rest were you want to\n"
-               "start text entry"));
-            endCmd();
-            return;
-            }
-      if (el->type() == NOTE)
-            el = el->parent();
-
-      ChordRest* cr = dynamic_cast<ChordRest*>(el);
       int rootTpc = 14;
-      if (el->type() == CHORD) {
-            Chord* chord = dynamic_cast<Chord*>(el);
+      if (cr->type() == CHORD) {
+            Chord* chord = dynamic_cast<Chord*>(cr);
             rootTpc = chord->downNote()->tpc();
             }
       Measure* measure = cr->measure();
       Harmony* s = 0;
 
       foreach(Element* element, *measure->el()) {
-            if ((element->type() == HARMONY) && (element->tick() == el->tick())) {
+            if ((element->type() == HARMONY) && (element->tick() == cr->tick())) {
                   s = dynamic_cast<Harmony*>(element);
                   break;
                   }
@@ -1178,9 +1140,9 @@ void Score::cmdAddChordName2()
       bool created = false;
       if (s == 0) {
             s = new Harmony(this);
-            s->setTrack(el->track());
+            s->setTrack(cr->track());
             s->setParent(measure);
-            s->setTick(el->tick());
+            s->setTick(cr->tick());
             s->setRootTpc(rootTpc);
             created = true;
             }
@@ -1217,17 +1179,11 @@ void Score::cmdAddText(int subtype)
             endEdit();
             endCmd();
             }
+      if (!checkHasMeasures())
+            return;
       Page* page = _layout->pages().front();
       const QList<System*>* sl = page->systems();
-      if (sl == 0 || sl->empty()) {
-            printf("first create measure, then repeat operation\n");
-            return;
-            }
       const QList<MeasureBase*>& ml = sl->front()->measures();
-      if (ml.empty()) {
-            printf("first create measure, then repeat operation\n");
-            return;
-            }
       Text* s = 0;
       switch(subtype) {
             case TEXT_TITLE:
@@ -1272,48 +1228,34 @@ void Score::cmdAddText(int subtype)
             case TEXT_CHORD:
             case TEXT_REHEARSAL_MARK:
                   {
-                  Element* el = sel->element();
-                  if (!el || (el->type() != NOTE && el->type() != REST)) {
-                        QMessageBox::information(0, "MuseScore: Text Entry",
-                        tr("No note or rest selected:\n"
-                           "please select a note or rest were you want to\n"
-                           "start text entry"));
+                  ChordRest* cr = getSelectedChordRest();
+                  if (!cr)
                         break;
-                        }
-                  if (el->type() == NOTE)
-                        el = el->parent();
                   s = new Text(this);
-                  s->setTrack(subtype == TEXT_SYSTEM ? 0 : el->track());
+                  s->setTrack(subtype == TEXT_SYSTEM ? 0 : cr->track());
                   s->setSubtype(subtype);
-                  s->setParent(((ChordRest*)el)->measure());
-                  s->setTick(el->tick());
+                  s->setParent(cr->measure());
+                  s->setTick(cr->tick());
                   }
                   break;
             case TEXT_STAFF:
             case TEXT_SYSTEM:
                   {
-                  Element* el = sel->element();
-                  if (!el || (el->type() != NOTE && el->type() != REST)) {
-                        QMessageBox::information(0, "MuseScore: Text Entry",
-                        tr("No note or rest selected:\n"
-                           "please select a note or rest were you want to\n"
-                           "start text entry"));
+                  ChordRest* cr = getSelectedChordRest();
+                  if (!cr)
                         break;
-                        }
-                  if (el->type() == NOTE)
-                        el = el->parent();
                   s = new StaffText(this);
                   if (subtype == TEXT_SYSTEM) {
                         s->setTrack(0);
                         s->setSystemFlag(true);
                         }
                   else {
-                        s->setTrack(el->track());
+                        s->setTrack(cr->track());
                         s->setSystemFlag(false);
                         }
                   s->setSubtype(subtype);
-                  s->setParent(((ChordRest*)el)->measure());
-                  s->setTick(el->tick());
+                  s->setParent(cr->measure());
+                  s->setTick(cr->tick());
                   }
                   break;
             }

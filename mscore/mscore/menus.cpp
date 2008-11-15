@@ -1194,18 +1194,11 @@ void MuseScore::fingeringMenu()
 
 void Score::addTempo()
       {
-      Element* e = sel->element();
-      if (!e || (e->type() != NOTE && e->type() != REST)) {
-            QMessageBox::information(0, "MuseScore: Text Entry",
-               tr("No note or rest selected:\n"
-                  "please select a note or rest were you want to\n"
-                  "set tempo."));
+      ChordRest* cr = getSelectedChordRest();
+      if (!cr)
             return;
-            }
-      if (e->type() == NOTE)
-            e = e->parent();
-      Measure* m = ((ChordRest*)e)->segment()->measure();
-      int tick = e->tick();
+      Measure* m = cr->segment()->measure();
+      int tick = cr->tick();
       if (editTempo == 0)
             editTempo = new EditTempo(0);
       int rv = editTempo->exec();
@@ -1214,7 +1207,7 @@ void Score::addTempo()
             tempomap->addTempo(tick, bps);
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
-            tt->setTrack(e->track());
+            tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);
             tt->setParent(m);
