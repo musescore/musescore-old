@@ -28,6 +28,112 @@
 
 QVector<Sym> symbols(lastSym);
 
+QMap<const char*, SymCode*> charReplaceMap;
+
+SymCode pSymbols[] = {
+      SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp
+      SymCode(0xe112, TEXT_STYLE_DYNAMICS1),    // flat
+      SymCode(0xe102, TEXT_STYLE_DYNAMICS1),    // note2_Sym
+      SymCode(0xe0fc, TEXT_STYLE_DYNAMICS1),    // note4_Sym
+      SymCode(0xe0f8, TEXT_STYLE_DYNAMICS1),    // note8_Sym
+      SymCode(0xe0f9, TEXT_STYLE_DYNAMICS1),    // note16_Sym
+      SymCode(0xe0fa, TEXT_STYLE_DYNAMICS1),    // note32_Sym
+      SymCode(0xe0fb, TEXT_STYLE_DYNAMICS1),    // note64_Sym
+      SymCode(0xe168, TEXT_STYLE_DYNAMICS1),    // coda
+      SymCode(0xe169, TEXT_STYLE_DYNAMICS1),    // varcoda
+      SymCode(0xe167, TEXT_STYLE_DYNAMICS1),    // segno
+      SymCode(0, 0),
+      SymCode(0, 0),
+      SymCode(0, 0),
+      SymCode(0, 0),
+      SymCode(0xa9, -1, "(C)"),
+      SymCode(0x00c0, -1),
+      SymCode(0x00c1, -1),
+      SymCode(0x00c2, -1),
+      SymCode(0x00c3, -1),
+      SymCode(0x00c4, -1),
+      SymCode(0x00c5, -1),
+      SymCode(0x00c6, -1),
+      SymCode(0x00c7, -1),
+      SymCode(0x00c8, -1),
+      SymCode(0x00c9, -1),
+      SymCode(0x00ca, -1),
+      SymCode(0x00cb, -1),
+      SymCode(0x00cc, -1),
+      SymCode(0x00cd, -1),
+      SymCode(0x00ce, -1),
+      SymCode(0x00cf, -1),
+
+      SymCode(0x00d0, -1),
+      SymCode(0x00d1, -1),
+      SymCode(0x00d2, -1),
+      SymCode(0x00d3, -1),
+      SymCode(0x00d4, -1),
+      SymCode(0x00d5, -1),
+      SymCode(0x00d6, -1),
+      SymCode(0x00d7, -1),
+      SymCode(0x00d8, -1),
+      SymCode(0x00d9, -1),
+      SymCode(0x00da, -1),
+      SymCode(0x00db, -1),
+      SymCode(0x00dc, -1),
+      SymCode(0x00dd, -1),
+      SymCode(0x00de, -1),
+      SymCode(0x00df, -1),
+
+      SymCode(0x00e0, -1),
+      SymCode(0x00e1, -1),
+      SymCode(0x00e2, -1),
+      SymCode(0x00e3, -1),
+      SymCode(0x00e4, -1),
+      SymCode(0x00e5, -1),
+      SymCode(0x00e6, -1),
+      SymCode(0x00e7, -1),
+      SymCode(0x00e8, -1),
+      SymCode(0x00e9, -1),
+      SymCode(0x00ea, -1),
+      SymCode(0x00eb, -1),
+      SymCode(0x00ec, -1),
+      SymCode(0x00ed, -1),
+      SymCode(0x00ee, -1),
+      SymCode(0x00ef, -1),
+
+      SymCode(0x00f0, -1),
+      SymCode(0x00f1, -1),
+      SymCode(0x00f2, -1),
+      SymCode(0x00f3, -1),
+      SymCode(0x00f4, -1),
+      SymCode(0x00f5, -1),
+      SymCode(0x00f6, -1),
+      SymCode(0x00f7, -1),
+      SymCode(0x00f8, -1),
+      SymCode(0x00f9, -1),
+      SymCode(0x00fa, -1),
+      SymCode(0x00fb, -1),
+      SymCode(0x00fc, -1),
+      SymCode(0x00fd, -1),
+      SymCode(0x00fe, -1),
+      SymCode(0x00ff, -1),
+
+      SymCode(0x00BC, -1, "1/4"),
+      SymCode(0x00BD, -1, "1/2"),
+      SymCode(0x00BE, -1, "3/4"),
+      SymCode(0x2153, -1, "1/3"),
+      SymCode(0x2154, -1, "2/3"),
+      SymCode(0x2155, -1, "1/5"),
+      SymCode(0x2156, -1, "2/5"),
+      SymCode(0x2157, -1, "3/5"),
+      SymCode(0x2158, -1, "4/5"),
+      SymCode(0x2159, -1, "1/6"),
+      SymCode(0x215A, -1, "5/6"),
+      SymCode(0x215B, -1, "1/8"),
+      SymCode(0x215C, -1, "3/8"),
+      SymCode(0x215D, -1, "5/8"),
+      SymCode(0x215E, -1, "7/8"),
+
+      SymCode(-1, -1)    // indicates end
+      };
+
 #ifdef __MINGW32__
 // #define CTABLE_HACK
 #endif
@@ -666,5 +772,14 @@ void initSymbols()
       symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, 0);
       symbols[dotdotSym]                  = Sym("dot dot",    0xe0fe, 0);
 //      Sym::writeCtable();
+
+
+      if (charReplaceMap.isEmpty()) {
+            for (unsigned i = 0; pSymbols[i].code != -1; ++i) {
+                  if (pSymbols[i].code == 0 || pSymbols[i].text == 0)
+                        continue;
+                  charReplaceMap.insert(pSymbols[i].text, &pSymbols[i]);
+                  }
+            }
       }
 

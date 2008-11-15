@@ -977,6 +977,9 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   cursor->insertText(ev->text());
                   break;
             }
+      if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
+            replaceSpecialChars();
+            }
       if (palette) {
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
@@ -984,6 +987,26 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
       layout(0);
       score()->addRefresh(abbox().adjusted(-w, -w, w, w));
       return true;
+      }
+
+//---------------------------------------------------------
+//   replaceSpecialChars
+//---------------------------------------------------------
+
+bool TextB::replaceSpecialChars() {
+      QTextCursor startCur = *cursor;
+      foreach (const char* s, charReplaceMap.keys()) {
+            QTextCursor cur = doc()->find(s, cursor->position() - 1 - strlen(s),
+                  QTextDocument::FindWholeWords);
+            if (cur.isNull())
+                  continue;
+            // do not go beyond the cursor
+            if (cur.selectionEnd() > cursor->selectionEnd())
+                  continue;
+            addSymbol(*charReplaceMap.value(s), &cur);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -1085,20 +1108,22 @@ double TextB::lineHeight() const
 //   addSymbol
 //---------------------------------------------------------
 
-void TextB::addSymbol(const SymCode& s)
+void TextB::addSymbol(const SymCode& s, QTextCursor* cur)
       {
+      if (cur == 0)
+            cur = cursor;
 // printf("Text: addSymbol(%x)\n", s.code);
-      QTextCharFormat oFormat = cursor->charFormat();
+      QTextCharFormat oFormat = cur->charFormat();
       if (s.style >= 0) {
-            QTextCharFormat oFormat = cursor->charFormat();
+            QTextCharFormat oFormat = cur->charFormat();
             QTextCharFormat nFormat(oFormat);
             nFormat.setFontFamily(score()->textStyle(s.style)->font().family());
-            cursor->setCharFormat(nFormat);
-            cursor->insertText(s.code);
-            cursor->setCharFormat(oFormat);
+            cur->setCharFormat(nFormat);
+            cur->insertText(s.code);
+            cur->setCharFormat(oFormat);
             }
       else
-            cursor->insertText(s.code);
+            cur->insertText(s.code);
       score()->setLayoutAll(true);
       score()->end();
       }
