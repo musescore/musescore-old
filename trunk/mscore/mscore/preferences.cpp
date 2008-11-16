@@ -1072,6 +1072,9 @@ QAction* getAction(const char* id)
                   a->setToolTip(s->descr);
                   a->setWhatsThis(s->descr);
                   }
+            if (!s->key.isEmpty())
+                  a->setToolTip(a->toolTip() +
+                        " (" + s->key.toString(QKeySequence::NativeText) + ")" );
             if (!s->text.isEmpty())
                   a->setText(s->text);
             if (s->icon)
