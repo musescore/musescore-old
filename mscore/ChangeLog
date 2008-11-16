@@ -6,6 +6,8 @@
         cmdAddChordName2, cmdAddHairpin, addTempo, TextB::layout, Symbol::layout
       - made add hairpin keyboard command create hairpin extending to next note,
         not a half note long as before, also work with rests
+      - toolbar button tooltips display shortcut in parentheses to help
+        users discover shortcuts
 14.nov (ws)
       - variable palette geometry
       - configurable application style
