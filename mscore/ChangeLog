@@ -4,6 +4,9 @@
       - optimize slur position for staccato/tenuto notes
       - "reset positions" now also resets slur editing
       - add action for "reset positions", shortcut Ctrl+R
+      (sy)
+      - add preferences options for replacing fractions and copyright symbol
+      - copyright symbol is only replaced in copyright text
 15.nov (ws)
       - added two new wallpapers from Toby Smithe
       - updated russian translation from Alexandre Prokoudine

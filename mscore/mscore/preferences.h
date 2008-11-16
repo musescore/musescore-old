@@ -100,6 +100,8 @@ struct Preferences {
       int noteEntryIconWidth, noteEntryIconHeight;
       QString applicationFont;
       QString style;
+      bool replaceFractions;
+      bool replaceCopyrightSymbol;
 
       bool dirty;
 

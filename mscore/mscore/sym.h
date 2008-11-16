@@ -26,6 +26,12 @@
 extern void initSymbols();
 extern double _spatiumMag;
 
+enum SymbolType {
+      SYMBOL_UNKNOWN,
+      SYMBOL_COPYRIGHT,
+      SYMBOL_FRACTION
+      };
+
 //---------------------------------------------------------
 //   SymCode
 //---------------------------------------------------------
@@ -34,9 +40,10 @@ struct SymCode {
       QChar code;
       int style;
       const char* text;
+      SymbolType type;
       bool show;
-      SymCode(QChar c, int s, const char* t = 0, bool show = true)
-         : code(c), style(s), text(t), show(show) {}
+      SymCode(QChar c, int s, const char* t = 0, SymbolType type = SYMBOL_UNKNOWN, bool show = true)
+         : code(c), style(s), text(t), type(type), show(show) {}
       };
 
 extern QMap<const char*, SymCode*> charReplaceMap;

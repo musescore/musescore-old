@@ -840,6 +840,53 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_4" >
+      <attribute name="title" >
+       <string>Text</string>
+      </attribute>
+      <widget class="QGroupBox" name="groupBox_15" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>511</width>
+         <height>351</height>
+        </rect>
+       </property>
+       <property name="title" >
+        <string>Autocorrection</string>
+       </property>
+       <property name="flat" >
+        <bool>true</bool>
+       </property>
+       <widget class="QCheckBox" name="replaceFractions" >
+        <property name="geometry" >
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>451</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text" >
+         <string>Replace 1/2 ... with ½ ...</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="replaceCopyrightSymbol" >
+        <property name="geometry" >
+         <rect>
+          <x>20</x>
+          <y>70</y>
+          <width>421</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text" >
+         <string>Replace (C) ... with © ... in Copyright Text</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
      <widget class="QWidget" name="tab3" >
       <attribute name="title" >
        <string>Colors</string>
