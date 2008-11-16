@@ -1658,7 +1658,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "repeat",
          QT_TR_NOOP("play repeats on"),
-         Qt::CTRL+Qt::Key_R,
+         0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Repeat"),
          QT_TR_NOOP("play repeats on/off"),
@@ -1828,6 +1828,15 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TR_NOOP("Edit Element"),
          QT_TR_NOOP("Edit Element")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "reset-positions",
+         QT_TR_NOOP("reset positions"),
+         Qt::CTRL+Qt::Key_R,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Reset Positions"),
+         QT_TR_NOOP("Reset Positions")
          ),
       Shortcut(0, 0, 0),
       };

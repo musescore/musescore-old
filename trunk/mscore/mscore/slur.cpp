@@ -621,6 +621,24 @@ void SlurTie::collectElements(QList<const Element*>& el) const
       }
 
 //---------------------------------------------------------
+//   resetUserOffsets
+//---------------------------------------------------------
+
+void SlurTie::resetUserOffsets()
+      {
+      setUserOff(QPointF());
+      }
+
+void SlurSegment::resetUserOffsets()
+      {
+      setUserOff(QPointF());
+      for (int i = 0; i < 4; ++i)
+            ups[i].off = QPointF();
+      struct UP ups[4];
+      parent()->resetUserOffsets();
+      }
+
+//---------------------------------------------------------
 //   Slur
 //---------------------------------------------------------
 

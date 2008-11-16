@@ -1226,6 +1226,20 @@ void Canvas::paintEvent(QPaintEvent* ev)
       foreach(const QRect& r, vector)
             paint(r, p);
 
+#if 0
+      foreach (const Page* page, _layout->pages()) {
+            QRect pr = _matrix.mapRect(page->abbox()).toRect();
+            int o = pr.width() / 100;
+            int x = pr.x();
+            int y = pr.y();
+            int w = pr.width();
+            int h = pr.height();
+            QColor dc(80, 80, 80, 120);
+            p.fillRect(QRect(x+w, y+o, o, h), dc);
+            p.fillRect(QRect(x+o, y+h, w, o), dc);
+            }
+#endif
+
       p.setMatrix(_matrix);
       p.setClipping(false);
 
