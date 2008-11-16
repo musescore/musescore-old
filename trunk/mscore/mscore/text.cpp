@@ -32,6 +32,7 @@
 #include "symbol.h"
 #include "layout.h"
 #include "textline.h"
+#include "preferences.h"
 
 TextPalette* palette;
 
@@ -978,6 +979,19 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
 bool TextB::replaceSpecialChars() {
       QTextCursor startCur = *cursor;
       foreach (const char* s, charReplaceMap.keys()) {
+            SymCode sym = *charReplaceMap.value(s);
+            switch (sym.type) {
+                  case SYMBOL_COPYRIGHT:
+                        if (!preferences.replaceCopyrightSymbol || subtype() != TEXT_COPYRIGHT)
+                              continue;
+                        break;
+                  case SYMBOL_FRACTION:
+                        if (!preferences.replaceFractions)
+                              continue;
+                        break;
+                  default:
+                        ;
+                  }
             QTextCursor cur = doc()->find(s, cursor->position() - 1 - strlen(s),
                   QTextDocument::FindWholeWords);
             if (cur.isNull())
@@ -985,7 +999,7 @@ bool TextB::replaceSpecialChars() {
             // do not go beyond the cursor
             if (cur.selectionEnd() > cursor->selectionEnd())
                   continue;
-            addSymbol(*charReplaceMap.value(s), &cur);
+            addSymbol(sym, &cur);
             return true;
             }
       return false;

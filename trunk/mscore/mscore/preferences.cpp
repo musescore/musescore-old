@@ -172,6 +172,9 @@ void Preferences::init()
       noteEntryIconHeight      = ICON_HEIGHT;
       applicationFont          = "";
       style                    = "";
+
+      replaceCopyrightSymbol = true;
+      replaceFractions = true;
       };
 
 //---------------------------------------------------------
@@ -252,6 +255,9 @@ void Preferences::write()
             s.setValue("applicationFont", applicationFont);
       if (!style.isEmpty())
             s.setValue("style", style);
+
+      s.setValue("replaceFractions", replaceFractions);
+      s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -334,6 +340,9 @@ void Preferences::read()
       noteEntryIconWidth       = s.value("noteEntryIconWidth", ICON_WIDTH).toInt();
       applicationFont          = s.value("applicationFont", "").toString();
       style                    = s.value("style", "").toString();
+
+      replaceFractions = s.value("replaceFractions", true).toBool();
+      replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -446,6 +455,9 @@ void PreferenceDialog::updateValues(Preferences* p)
       bgWallpaperButton->setChecked(!p->bgUseColor);
       fgColorButton->setChecked(p->fgUseColor);
       fgWallpaperButton->setChecked(!p->fgUseColor);
+
+      replaceFractions->setChecked(p->replaceFractions);
+      replaceCopyrightSymbol->setChecked(p->replaceCopyrightSymbol);
 
       enableMidiInput->setChecked(p->enableMidiInput);
       playNotes->setChecked(p->playNotes);
@@ -923,6 +935,9 @@ void PreferenceDialog::apply()
       QFont fff = applicationFont->currentFont();
       fff.setPointSize(applicationFontSize->value());
       preferences.applicationFont     = fff.toString();
+
+      preferences.replaceFractions       = replaceFractions->isChecked();
+      preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
 
 #if 0
       QString localeName = QLocale::system().name();
