@@ -629,11 +629,8 @@ void Palette::dropEvent(QDropEvent* event)
 void Palette::write(Xml& xml, const char* name) const
       {
       xml.stag(QString(name));
-      int n = rows() * columns();
-      int i = 0;
-      xml.tag("rows", rows());
-      xml.tag("columns", columns());
-      for (i = 0; i < n; ++i) {
+      int n = cells.size();
+      for (int i = 0; i < n; ++i) {
             if (cells[i] == 0)
                   continue;
             xml.tag("idx", i);

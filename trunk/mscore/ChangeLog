@@ -1,4 +1,6 @@
 16.nov (ws)
+      - fix crash when saving palettes
+      - optimize slur position for staccato/tenuto notes
       - "reset positions" now also resets slur editing
       - add action for "reset positions", shortcut Ctrl+R
 15.nov (ws)
