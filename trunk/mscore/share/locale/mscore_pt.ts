@@ -4425,6 +4425,10 @@ Save Current Score?</source>
         <source>Enter ninth below</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5372,6 +5376,10 @@ Save Current Score?</source>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5380,25 +5388,24 @@ Save Current Score?</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <source>please select a single note and retry operation
+        <source>No note selected:
+Please select a single note and retry operation
 </source>
-        <translation>Por favor, escolha uma só nota e volte a tentar
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or rest and retry operation
+        <source>No note or rest selected:
+Please select a single note or rest and retry operation
 </source>
-        <translation>Por favor, escolha uma só nota ou pausa e volte a tentar
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or slur and retry operation
+        <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Por favor, escolha uma só nota ou ligadura de expressão e volte a tentar
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select one or more staves and retry operation
+        <source>Please select one or more staves and retry operation
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -5539,13 +5546,6 @@ Save Current Score?</source>
 <context>
     <name>Score</name>
     <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-start text entry</source>
-        <translation>Nenhuma nota ou pause seleccionada:
-Por favor, seleccione uma nota ou pausa no local desejado</translation>
-    </message>
-    <message>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -5580,14 +5580,6 @@ Falhou:  </translation>
     <message>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Ler ficheiro</translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-set tempo.</source>
-        <translation>Nenhuma nota ou pausa seleccionada:
-Por favor, seleccione a nota ou pausa para a qual deseja
-definir o tempo.</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>

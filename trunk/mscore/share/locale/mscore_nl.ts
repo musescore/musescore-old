@@ -4429,6 +4429,10 @@ Save Current Score?</source>
         <source>Enter ninth below</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5377,6 +5381,10 @@ Save Current Score?</source>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5385,24 +5393,26 @@ Save Current Score?</source>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <source>please select a single note and retry operation
+        <source>No note selected:
+Please select a single note and retry operation
 </source>
-        <translation>Selecteer één enkele noot en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or rest and retry operation
+        <source>No note or rest selected:
+Please select a single note or rest and retry operation
 </source>
-        <translation>Selecteer één enkele rust en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or slur and retry operation
+        <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Selecteer één enkele noot of boog en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select one or more staves and retry operation
+        <source>Please select one or more staves and retry operation
 </source>
-        <translation>Selecteer één enkele notenbalk en probeer het opnieuw</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5541,14 +5551,6 @@ Save Current Score?</source>
 <context>
     <name>Score</name>
     <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-start text entry</source>
-        <translation>Geen noot of rust geselecteerd:
-Selecteer eerst een noot of een rust
-voordat u tekst kunt plaatsen</translation>
-    </message>
-    <message>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
@@ -5663,14 +5665,6 @@ failed: </source>
     <message>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Lees Bestand</translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-set tempo.</source>
-        <translation>Geen noot of rust geselecteerd:
-selecteer eerst een noot of een rust wanneer u een 
-tempoaanduiding wilt plaatsen.</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>

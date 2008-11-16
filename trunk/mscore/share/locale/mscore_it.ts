@@ -4438,6 +4438,10 @@ Desideri Salvare lo Spartito?</translation>
         <source>Enter ninth below</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5385,6 +5389,10 @@ Desideri Salvare lo Spartito?</translation>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5393,28 +5401,26 @@ Desideri Salvare lo Spartito?</translation>
         <translation>MuseScore:</translation>
     </message>
     <message>
-        <source>please select a single note and retry operation
+        <source>No note selected:
+Please select a single note and retry operation
 </source>
-        <translation>per favore, seleziona una sola nota e ripeti l&apos;operazione
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or rest and retry operation
+        <source>No note or rest selected:
+Please select a single note or rest and retry operation
 </source>
-        <translation>per favore, seleziona una sola nota o pausa e ripeti l&apos;operazione
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select a single note or slur and retry operation
+        <source>Please select a single note or slur and retry operation
 </source>
-        <translation>per favore, seleziona una sola nota o legatura e ripeti l&apos;operazione
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>please select one or more staves and retry operation
+        <source>Please select one or more staves and retry operation
 </source>
-        <translation>occorre selezionare uno o più Pentagrammi e ripetere l&apos;operazione
-</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5585,26 +5591,10 @@ fallito: </translation>
         <translation>MuseScore: Apertura File</translation>
     </message>
     <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-start text entry</source>
-        <translation>Nessuna Nota o Pausa selezionata:
-selezionare la Nota o Pausa di inizio
-del Testo</translation>
-    </message>
-    <message>
         <source>No Measure selected:
 please select a measure and try again</source>
         <translation>Nessuna Battuta selezionata:
 selezionare una Battuta e riprovare</translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-please select a note or rest were you want to
-set tempo.</source>
-        <translation>Nessuna Nota o Pausa selezionata:
-selezionare la Nota o la Pausa nel punto
-in cui occorre impostare il Tempo.</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>

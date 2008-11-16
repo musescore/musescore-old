@@ -1,4 +1,5 @@
 16.nov (ws)
+      - added galician translation from Xosé
       - fix crash when saving palettes
       - optimize slur position for staccato/tenuto notes
       - "reset positions" now also resets slur editing
