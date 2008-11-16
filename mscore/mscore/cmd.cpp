@@ -1599,12 +1599,10 @@ void Score::toggleInvisible(Element* obj)
 
 void Score::resetUserOffsets()
       {
-      startCmd();
       QList<Element*> el = *sel->elements();
       for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->resetUserOffsets();
       layoutAll = true;
-      endCmd();
       }
 
 //---------------------------------------------------------
@@ -2238,6 +2236,8 @@ void Score::cmd(const QString& cmd)
                         canvas()->startEdit(e);
                         }
                   }
+            else if (cmd == "reset-positions")
+                  resetUserOffsets();
             else if (cmd == "")
                   ;
             else

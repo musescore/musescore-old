@@ -81,6 +81,7 @@ class SlurSegment : public Element {
       void dump() const;
       void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
       void setSystem(System* s)                   { _system = s;       }
+      virtual void resetUserOffsets();
       };
 
 //---------------------------------------------------------
@@ -129,6 +130,7 @@ class SlurTie : public Element {
       void setEndElement(Element* e)      { _endElement = e;      }
       Element* startElement() const       { return _startElement; }
       Element* endElement() const         { return _endElement;   }
+      virtual void resetUserOffsets();
       };
 
 //---------------------------------------------------------

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <MagIdx>10</MagIdx>
-  <xoff>-349.6</xoff>
-  <yoff>-130.049</yoff>
-  <Spatium>1.76389</Spatium>
+  <Mag>2.38161</Mag>
+  <xoff>-1517.76</xoff>
+  <yoff>-324.147</yoff>
+  <Spatium>2.2</Spatium>
   <Division>480</Division>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>9</akkoladeDistance>
-    <systemDistance>5</systemDistance>
+    <systemDistance>9</systemDistance>
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>4</systemFrameDistance>
@@ -29,7 +29,7 @@
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
     <minNoteDistance>0.4</minNoteDistance>
-    <measureSpacing>1.2</measureSpacing>
+    <measureSpacing>1.5</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
@@ -173,18 +173,8 @@ p, li { white-space: pre-wrap; }
   <Slur id="4">
     <track>0</track>
     </Slur>
-  <HairPin>
-    <track>0</track>
-    <tick>2040</tick>
-    <tick2>3000</tick2>
-    <Segment>
-      <off1 x="0.736687" y="1.38516"/>
-      <off2 x="-18" y="0"/>
-      </Segment>
-    </HairPin>
   <Slur id="5">
     <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="6">
     <track>0</track>
@@ -297,7 +287,7 @@ p, li { white-space: pre-wrap; }
     <tick>3000</tick>
     <tick2>3600</tick2>
     <Segment>
-      <off1 x="1.50356" y="1.50356"/>
+      <off1 x="1.09934" y="1.56131"/>
       <off2 x="-2.54288" y="0"/>
       </Segment>
     </HairPin>
@@ -335,31 +325,35 @@ p, li { white-space: pre-wrap; }
   <Slur id="29">
     <track>0</track>
     <SlurSegment no="0">
-      <o1 x="-0.500868" y="-0.294628"/>
-      <o4 x="-0.913347" y="-3.3293"/>
+      <offset x="0.185029" y="1.44322"/>
+      <o1 x="-0.796914" y="-1.4048"/>
+      <o2 x="-0.0370057" y="0.25904"/>
+      <o3 x="0.370057" y="0.222034"/>
+      <o4 x="-0.0252097" y="-1.59003"/>
       </SlurSegment>
+    <up>2</up>
     </Slur>
   <Slur id="30">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.471405" y="-0.235702"/>
-      <o4 x="-0.913347" y="-3.38822"/>
+      <o4 x="0.122813" y="0.0903176"/>
       </SlurSegment>
     </Slur>
   <Slur id="31">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.500868" y="-0.20624"/>
-      <o4 x="-0.942809" y="-3.62392"/>
+      <o4 x="-0.017666" y="0.113658"/>
       </SlurSegment>
     </Slur>
   <Slur id="32">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.500868" y="-0.324091"/>
-      <o2 x="0.0294628" y="0.0883884"/>
+      <o2 x="0.0294628" y="0.125394"/>
       <o3 x="0.176777" y="0.0294628"/>
-      <o4 x="-1.97401" y="-3.71231"/>
+      <o4 x="-0.530787" y="0.432331"/>
       </SlurSegment>
     </Slur>
   <Slur id="33">
@@ -790,11 +784,6 @@ p, li { white-space: pre-wrap; }
       <o1 x="1.00696" y="-2.61811"/>
       <o4 x="-0.201393" y="-2.61811"/>
       </SlurSegment>
-    <SlurSegment no="1">
-      <offset x="-1.81254" y="-1.81254"/>
-      <o1 x="-1.81254" y="-1.20836"/>
-      <o4 x="0.503482" y="-0.704875"/>
-      </SlurSegment>
     <up>2</up>
     </Slur>
   <Slur id="95">
@@ -969,10 +958,6 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>106560</tick>
     <tick2>106560</tick2>
-    <Segment>
-      <off1 x="-0.068777" y="0.275108"/>
-      <off2 x="14.1681" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
@@ -1094,6 +1079,15 @@ p, li { white-space: pre-wrap; }
     <Segment>
       <off1 x="0.210717" y="1.54526"/>
       <off2 x="0" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <track>0</track>
+    <tick>2040</tick>
+    <tick2>2880</tick2>
+    <Segment>
+      <off1 x="0.736687" y="1.38516"/>
+      <off2 x="-16.5271" y="0"/>
       </Segment>
     </HairPin>
   <Staff id="1">
@@ -1307,15 +1301,11 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="4">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <stretch>1.8</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
-      <Dynamic>
-        <subtype>sff</subtype>
-        <offset x="-0.33446" y="0.890611"/>
-        <tick>3600</tick>
-        </Dynamic>
+        </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1324,6 +1314,11 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-size:12pt; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-4.18464" y="0.979271"/>
         <tick>3000</tick>
+        </Dynamic>
+      <Dynamic>
+        <subtype>sff</subtype>
+        <offset x="-0.911922" y="1.0061"/>
+        <tick>3600</tick>
         </Dynamic>
       <Rest>
         <tick>2880</tick>
@@ -1373,10 +1368,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="5">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -1384,16 +1375,16 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Dynamic>
-        <subtype>p</subtype>
-        <offset x="0.123394" y="-0.821812"/>
-        </Dynamic>
-      <Dynamic>
         <subtype>f</subtype>
         <offset x="-1.59803" y="-10.3043"/>
         <tick>5520</tick>
         </Dynamic>
-      <Rest>
+      <Dynamic>
+        <subtype>p</subtype>
+        <offset x="0.123394" y="0.275367"/>
         <tick>4800</tick>
+        </Dynamic>
+      <Rest>
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="7">
@@ -1463,6 +1454,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="8">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-0.762747" y="-10.3528"/>
@@ -1513,10 +1508,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Dynamic>
         <subtype>pp</subtype>
         <offset x="-0.108687" y="-0.31778"/>
@@ -1554,14 +1545,6 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="10">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
-      <Dynamic>
-        <subtype>mf</subtype>
-        <offset x="-3.77582" y="-1.40436"/>
-        </Dynamic>
       <StaffText>
         <subtype>Staff</subtype>
         <offset x="-2.46037" y="-2.187"/>
@@ -1572,6 +1555,10 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-style:italic;">très net et très sec</span></p></body></html>
           </html-data>
         </StaffText>
+      <Dynamic>
+        <subtype>mf</subtype>
+        <offset x="-1.06175" y="0.328027"/>
+        </Dynamic>
       <Beam id="11">
         </Beam>
       <Chord>
@@ -1693,6 +1680,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="11">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="13">
         </Beam>
       <Chord>
@@ -1874,10 +1865,10 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="14">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-0.601762" y="0.695415"/>
@@ -1928,10 +1919,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="15">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="0.0402633" y="-0.0984476"/>
@@ -2146,6 +2133,10 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="18">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.523039" y="0.713017"/>
@@ -2241,10 +2232,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Beam id="26">
         </Beam>
       <Chord>
@@ -2324,11 +2311,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="20">
-      <stretch>0.2</stretch>
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="28">
         </Beam>
       <Chord>
@@ -2383,7 +2365,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="21">
-      <stretch>0.2</stretch>
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
@@ -2393,7 +2374,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
-      <stretch>0.2</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-1.12661" y="1.54928"/>
@@ -2444,7 +2428,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="23">
-      <stretch>0.2</stretch>
       <Beam id="32">
         </Beam>
       <Chord>
@@ -2482,7 +2465,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="24">
-      <stretch>0.2</stretch>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-1.37202" y="-0.67915"/>
@@ -2557,10 +2539,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <stretch>1.1</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -2589,10 +2572,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="26">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-0.508605" y="0.278388"/>
@@ -2680,6 +2659,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="28">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-0.290642" y="0.204575"/>
@@ -2772,10 +2755,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-1.03856" y="-0.0575538"/>
@@ -2805,10 +2784,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="31">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note pitch="56" tpc="10"/>
@@ -2817,6 +2792,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="32">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note pitch="55" tpc="15"/>
@@ -2917,10 +2896,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="35">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
@@ -2958,10 +2937,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="36">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="44">
         </Beam>
       <Chord>
@@ -3158,6 +3133,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="39">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
@@ -3230,10 +3209,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="40">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Rest>
         <ticklen>120</ticklen>
         </Rest>
@@ -3281,10 +3256,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="41">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3320,6 +3291,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="43">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3385,16 +3360,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="47">
-      <stretch>0.7</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
         <track>-1</track>
@@ -3463,7 +3433,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="48">
-      <stretch>0.7</stretch>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3513,7 +3482,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="49">
-      <stretch>0.7</stretch>
       <Dynamic>
         <subtype>pp</subtype>
         <offset x="-0.95287" y="-1.44339"/>
@@ -3562,7 +3530,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="50">
-      <stretch>0.7</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3612,7 +3583,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="51">
-      <stretch>0.7</stretch>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3639,9 +3609,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="52">
-      <LayoutBreak>
-        <track>-1</track>
-        </LayoutBreak>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -3668,15 +3635,15 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="53">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="54">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -3800,10 +3767,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="57">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3848,10 +3815,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="58">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -3915,6 +3878,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="60">
+      <stretch>1.4</stretch>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -3924,6 +3888,10 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="61">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -3954,10 +3922,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="62">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Chord>
         <ticklen>720</ticklen>
         <dots>1</dots>
@@ -3997,10 +3961,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="63">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <offset x="0.0832482" y="-0.998978"/>
         <ticklen>240</ticklen>
@@ -4100,6 +4060,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="64">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -4203,6 +4167,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="66">
+      <stretch>1.6</stretch>
       <Chord>
         <ticklen>720</ticklen>
         <dots>1</dots>
@@ -4227,11 +4192,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="67">
-      <stretch>0.7</stretch>
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -4325,10 +4289,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="68">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -4411,6 +4371,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="70">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="77" tpc="13"/>
@@ -4511,10 +4475,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="72">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Beam id="58">
         </Beam>
       <Chord>
@@ -4593,10 +4553,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="73">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
+      <stretch>1.2</stretch>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -4637,6 +4594,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="74">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
@@ -4810,6 +4771,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="76">
+      <stretch>1.2</stretch>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -4839,9 +4801,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="77">
-      <LayoutBreak>
-        <track>-1</track>
-        </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
@@ -5054,6 +5013,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="80">
+      <stretch>1.6</stretch>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-1.81228" y="-0.439932"/>
@@ -5082,6 +5042,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="81">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.535134" y="0.256855"/>
@@ -5173,10 +5137,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="82">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Beam id="64">
         </Beam>
       <Chord>
@@ -5217,10 +5177,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="83">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
@@ -5246,6 +5202,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="84">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
@@ -5430,10 +5390,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="87">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
+      <stretch>1.3</stretch>
       <Chord>
         <ticklen>960</ticklen>
         <Slur type="start" number="94"/>
@@ -5461,11 +5418,6 @@ p, li { white-space: pre-wrap; }
             <tick>82560</tick>
             <SlurSegment no="0">
               <offset x="0.402786" y="0.100696"/>
-              </SlurSegment>
-            <SlurSegment no="1">
-              <o1 x="-2.41671" y="-0.201393"/>
-              <o2 x="0.302089" y="0.704875"/>
-              <o3 x="0.201393" y="0.704875"/>
               </SlurSegment>
             <up>2</up>
             </Tie>
@@ -5660,7 +5612,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="90">
       <KeySig>
-        <subtype>64253</subtype>
+        <subtype>253</subtype>
         </KeySig>
       <Beam id="70">
         </Beam>
@@ -5694,10 +5646,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="91">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Beam id="72">
         </Beam>
       <Chord>
@@ -5841,10 +5789,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="96">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Beam id="80">
         </Beam>
       <Chord>
@@ -5876,10 +5824,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="97">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="82">
         </Beam>
       <Chord>
@@ -5985,6 +5929,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="99">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="85">
         </Beam>
       <Chord>
@@ -6085,16 +6033,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="101">
-      <LayoutBreak>
-        <track>-1</track>
-        </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
         <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
     <Measure number="102">
-      <stretch>0.8</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
         <track>-1</track>
@@ -6145,7 +6089,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="103">
-      <stretch>0.8</stretch>
       <Beam id="91">
         </Beam>
       <Chord>
@@ -6183,7 +6126,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="104">
-      <stretch>0.8</stretch>
+      <stretch>1.2</stretch>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.623861" y="0.169398"/>
@@ -6251,7 +6194,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="105">
-      <stretch>0.8</stretch>
+      <stretch>1.2</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -6281,7 +6228,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="106">
-      <stretch>0.8</stretch>
       <Beam id="94">
         </Beam>
       <Chord>
@@ -6328,11 +6274,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="107">
-      <stretch>0.6</stretch>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
@@ -6501,6 +6442,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="111">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Slur type="stop" number="112"/>
@@ -6533,10 +6478,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="112">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-1.95766" y="-0.280202"/>
@@ -6561,10 +6502,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="113">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
@@ -6637,6 +6574,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="114">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="100">
         </Beam>
       <Chord>
@@ -6706,6 +6647,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="116">
+      <stretch>1.7</stretch>
       <Beam id="102">
         </Beam>
       <Chord>
@@ -6742,10 +6684,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="117">
-      <LayoutBreak>
-        <subtype>line</subtype>
+      <Text>
+        <subtype>MeasureNumber</subtype>
         <track>-1</track>
-        </LayoutBreak>
+        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <BeamMode>no</BeamMode>
@@ -6775,10 +6717,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="118">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="105">
         </Beam>
       <Chord>
@@ -6835,6 +6773,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="119">
+      <stretch>1.6</stretch>
       <Beam id="107">
         </Beam>
       <Chord>
@@ -6884,6 +6823,10 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="120">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>120</ticklen>
         </Rest>
@@ -6940,19 +6883,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="122">
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="123">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -6971,6 +6906,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="124">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -7841,7 +7780,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <vspacer>8.26247</vspacer>
       <Beam id="141">
         </Beam>
       <Chord>
@@ -10720,7 +10658,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="90">
       <KeySig>
-        <subtype>64253</subtype>
+        <subtype>253</subtype>
         </KeySig>
       <Rest>
         <ticklen>0</ticklen>

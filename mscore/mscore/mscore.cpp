@@ -337,7 +337,7 @@ MuseScore::MuseScore()
          << "harmony-properties"
          << "system-break" << "page-break"
          << "edit-element"
-         << "mag"
+         << "mag" << "reset-positions"
          ;
 
       foreach(const QString s, sl) {
@@ -650,7 +650,8 @@ MuseScore::MuseScore()
       menuLayout->setObjectName("Layout");
 
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
-      menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
+
+      menuLayout->addAction(getAction("reset-positions"));
       menuLayout->addAction(getAction("stretch+"));
       menuLayout->addAction(getAction("stretch-"));
 
@@ -1096,16 +1097,6 @@ void MuseScore::resetUserStretch()
       {
       if (cs)
             cs->resetUserStretch();
-      }
-
-//---------------------------------------------------------
-//   resetUserOffsets
-//---------------------------------------------------------
-
-void MuseScore::resetUserOffsets()
-      {
-      if (cs)
-            cs->resetUserOffsets();
       }
 
 //---------------------------------------------------------

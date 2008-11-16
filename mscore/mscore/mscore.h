@@ -255,7 +255,6 @@ class MuseScore : public QMainWindow {
       void cmdInsertMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();
-      void resetUserOffsets();
       void magChanged(int);
       void showPageSettings();
       void pageSettingsChanged();
