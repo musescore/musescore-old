@@ -130,6 +130,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>gl Galician</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>it Italian</string>
              </property>
             </item>
