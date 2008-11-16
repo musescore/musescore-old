@@ -33,6 +33,7 @@
 #include "viewer.h"
 #include "navigate.h"
 #include "canvas.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -479,19 +480,19 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       {
       ChordRest* cr;
       if (e->type() == NOTE)
-            cr = ((Note*)e)->chord();
+            cr = static_cast<Note*>(e)->chord();
       else
-            cr = (Chord*)e;
+            cr = static_cast<ChordRest*>(e);
       s = cr->measure()->system();
 
       //-----------------------------------------
       //    off
       //-----------------------------------------
 
-      qreal xo = cr->width() / 2.0;
+      qreal xo = cr->width() * .5;
       qreal yo = 0.0;
       if (cr->type() == CHORD) {
-            Chord* c = (Chord*)cr;
+            Chord* c = static_cast<Chord*>(cr);
             Stem* stem = c->stem();
             Beam* beam = c->beam();
 
@@ -502,8 +503,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                   sc = (Chord*)startElement();
 
             bool startIsGrace = false;
-            if (sc->type() == CHORD
-                && sc->noteType() != NOTE_NORMAL)
+            if (sc->type() == CHORD && sc->noteType() != NOTE_NORMAL)
                   startIsGrace = true;
             bool mainNoteOfGraceSlur = false;
             if (startIsGrace && c == endElement() && c->noteType() == NOTE_NORMAL)
@@ -511,6 +511,17 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
 
             if (up) {
                   yo = c->upNote()->pos().y() - c->upNote()->headHeight();
+                  //
+                  // handle special case of tenuto and staccato;
+                  // should be generalized
+                  //
+                  QList<Articulation*>* al = c->getArticulations();
+                  if (al->size() == 1) {
+                        Articulation* a = al->at(0);
+                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym) {
+                              yo = a->y() - _spatium * .5;
+                              }
+                        }
                   if (c->isUp() && stem) {
                         if (beam && !mainNoteOfGraceSlur)
                               yo = c->downNote()->pos().y() - stem->height() - _spatium;
@@ -523,6 +534,17 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                   }
             else {
                   yo = c->downNote()->pos().y() + c->downNote()->headHeight();
+                  //
+                  // handle special case of tenuto and staccato;
+                  // should be generalized
+                  //
+                  QList<Articulation*>* al = c->getArticulations();
+                  if (al->size() == 1) {
+                        Articulation* a = al->at(0);
+                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym) {
+                              yo = a->y() + a->height() + _spatium * .5;
+                              }
+                        }
                   if (!c->isUp() && stem) {
                         if (beam && !mainNoteOfGraceSlur)
                               yo = c->upNote()->pos().y() + stem->height() + _spatium;
@@ -539,9 +561,9 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                         // to the stem rather than the middle of the notehead
                         xo = stem->pos().x();
                         if (cr == startElement())
-                              xo += stem->width() / 2;
+                              xo += stem->width() * .5;
                         else
-                              xo -= stem->width() / 2;
+                              xo -= stem->width() * .5;
                         }
                   else {
                         if (cr == startElement()) {
@@ -634,7 +656,6 @@ void SlurSegment::resetUserOffsets()
       setUserOff(QPointF());
       for (int i = 0; i < 4; ++i)
             ups[i].off = QPointF();
-      struct UP ups[4];
       parent()->resetUserOffsets();
       }
 

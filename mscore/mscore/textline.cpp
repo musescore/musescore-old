@@ -144,7 +144,7 @@ QRectF TextLineSegment::bbox() const
       QPointF pp1;
       QPointF pp2(pos2());
 
-      qreal h1 = _text ? _text->height() / 2 : 10.0;
+      qreal h1 = _text ? _text->height() * .5 : 10.0;
       if (!textLine()->hasText() && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
       return QRectF(.0, -h1, pp2.x(), h1 * 2);

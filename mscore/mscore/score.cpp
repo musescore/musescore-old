@@ -1023,7 +1023,7 @@ int Measure::snap(int tick, const QPointF p) const
             else  if (s->next()->tick() == tick)
                   x += dx / 3.0;
             else
-                  x += dx / 2.0;
+                  x += dx * .5;
             if (p.x() < x)
                   break;
             }
@@ -1271,14 +1271,14 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
             if (ns == 0)
                   break;
             double x  = s->x();
-            double nx = x + (ns->x() - x) / 2;
+            double nx = x + (ns->x() - x) * .5;
 #if 0
             if (s->tick() == tick)
                   x += dx / 3.0 * 2.0;
             else  if (ns->tick() == tick)
                   x += dx / 3.0;
             else
-                  x += dx / 2.0;
+                  x += dx * .5;
 #endif
             if (p.x() < nx)
                   break;
