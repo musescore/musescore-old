@@ -72,7 +72,11 @@ double Bracket::width() const
 
 void Bracket::layout(ScoreLayout* layout)
       {
-      double _spatium = layout->spatium();
+      double _spatium;
+      if (layout)
+            _spatium = layout->spatium();
+      else
+            _spatium = ::_spatium;
       path = QPainterPath();
       if (h2 == 0.0)
             return;
@@ -101,8 +105,10 @@ void Bracket::layout(ScoreLayout* layout)
 
             QFont f(s->family, lrint(2.0 * _spatium));
 
-            qreal o   = _spatium * .27;
+            qreal o   = _spatium * .17;
             qreal slw = point(score()->style()->staffLineWidth);
+
+            path.setFillRule(Qt::WindingFill);
 
             path.addText(QPointF(0.0, -o), f, QString(up));
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
@@ -221,37 +227,7 @@ void Bracket::editDrag(int, const QPointF& delta)
       qreal dy = delta.y();
       yoff += dy;
 
-      qreal h = h2 + yoff * .5;
-
-      path = QPainterPath();
-      if (subtype() == BRACKET_AKKOLADE) {
-            qreal w         = point(score()->style()->akkoladeWidth);
-            const double X1 =  2.0 * w;
-            const double X2 = -0.7096 * w;
-            const double X3 = -1.234 * w;
-            const double X4 =  1.734 * w;
-
-            path.moveTo(0, h);
-            path.cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
-            path.cubicTo(X3,  h + h * .5025, X4,  h + h * .2413, 0, h);
-            path.cubicTo(X1,  h - h * .3359, X2,  h - h * .5089, w, 0);
-            path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
-            }
-      else if (subtype() == BRACKET_NORMAL) {
-            qreal w = point(score()->style()->bracketWidth);
-
-            TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
-            QChar up     = symbols[brackettipsUp].code();
-            QChar down   = symbols[brackettipsDown].code();
-
-            QFont f(s->family, lrint(2.0 * _spatium));
-            qreal o = _spatium * .27;
-            qreal slw = point(score()->style()->staffLineWidth);
-
-            path.addText(QPointF(0.0, -o), f, QString(up));
-            path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
-            path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
-            }
+      layout(0);
       }
 
 //---------------------------------------------------------
