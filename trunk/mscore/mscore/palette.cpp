@@ -336,11 +336,12 @@ void Palette::paintEvent(QPaintEvent*)
       // draw grid
       //
 
+      int c = columns();
       if (_drawGrid) {
             p.setPen(Qt::gray);
             for (int row = 1; row < rows(); ++row)
-                  p.drawLine(0, row*vgrid, columns()*hgrid, row*vgrid);
-            for (int column = 1; column < columns(); ++column)
+                  p.drawLine(0, row*vgrid, c * hgrid, row*vgrid);
+            for (int column = 1; column < c; ++column)
                   p.drawLine(hgrid*column, 0, hgrid*column, rows()*vgrid);
             }
 
@@ -353,7 +354,6 @@ void Palette::paintEvent(QPaintEvent*)
       QPen pen(QColor(Qt::black));
       pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM * extraMag);
 
-      int c = columns();
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
@@ -505,7 +505,7 @@ void Palette::dragMoveEvent(QDragMoveEvent* ev)
       if (i == -1)
             return;
 
-      int n = rows() * columns();
+      int n = cells.size();
       int ii = i;
       for (; ii < n; ++ii) {
             if (cells[ii] == 0)
@@ -605,7 +605,7 @@ void Palette::dropEvent(QDropEvent* event)
             if (i == -1)
                   return;
 
-            int n = rows() * columns();
+            int n = cells.size();
             int ii = i;
             for (; ii < n; ++ii) {
                   if (cells[ii] == 0)
@@ -845,10 +845,11 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
 void Palette::actionToggled(bool /*val*/)
       {
       selectedIdx = -1;
-      for (int n = 0; n < (rows() * columns()); ++n) {
+      int nn = cells.size();
+      for (int n = 0; n < nn; ++n) {
             Element* e = cells[n]->element;
             if (e && e->type() == ICON) {
-                  if (((Icon*)e)->action()->isChecked()) {
+                  if (static_cast<Icon*>(e)->action()->isChecked()) {
                         selectedIdx = n;
                         break;
                         }
