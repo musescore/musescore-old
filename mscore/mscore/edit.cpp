@@ -663,60 +663,62 @@ void Score::cmdSetBeamMode(int mode)
 
 void Score::cmdFlipStemDirection()
       {
-      Element* el = sel->element();
-      if (el == 0) {
+      QList<Element*>* el = sel->elements();
+      if (el->isEmpty()) {
             selectNoteSlurMessage();
             return;
             }
-      if (el->type() == NOTE) {
-            Chord* chord = static_cast<Note*>(el)->chord();
+      foreach(Element* e, *el) {
+            if (e->type() == NOTE) {
+                  Chord* chord = static_cast<Note*>(e)->chord();
 
-            if (chord->stemDirection() == AUTO)
-                  chord->setStemDirection(chord->up() ? DOWN : UP);
-            else
-                  chord->setStemDirection(chord->stemDirection() == UP ? DOWN : UP);
-            Direction dir = chord->stemDirection();
-            Beam* beam = chord->beam();
-            if (beam) {
-                  bool set = false;
-                  QList<ChordRest*> elements = beam->elements();
-                  for (int i = 0; i < elements.size(); ++i) {
-                        ChordRest* cr = elements[i];
-                        if (!set) {
-                              if (cr->type() == CHORD) {
-                                    Chord* chord = static_cast<Chord*>(cr);
-                                    if (chord->stemDirection() != dir) {
-                                          chord->setStemDirection(dir);
-                                          undoOp(UndoOp::SetStemDirection, chord, int(dir));
-                                          }
-                                    set = true;
-                                    }
-                              }
-                        else {
-                              if (cr->type() == CHORD) {
-                                    Chord* chord = static_cast<Chord*>(cr);
-                                    if (chord->stemDirection() != AUTO) {
-                                          chord->setStemDirection(AUTO);
-                                          undoOp(UndoOp::SetStemDirection, chord, int(AUTO));
+                  if (chord->stemDirection() == AUTO)
+                        chord->setStemDirection(chord->up() ? DOWN : UP);
+                  else
+                        chord->setStemDirection(chord->stemDirection() == UP ? DOWN : UP);
+                  Direction dir = chord->stemDirection();
+                  Beam* beam = chord->beam();
+                  if (beam) {
+                        bool set = false;
+                        QList<ChordRest*> elements = beam->elements();
+                        for (int i = 0; i < elements.size(); ++i) {
+                              ChordRest* cr = elements[i];
+                              if (!set) {
+                                    if (cr->type() == CHORD) {
+                                          Chord* chord = static_cast<Chord*>(cr);
+                                          if (chord->stemDirection() != dir) {
+                                                chord->setStemDirection(dir);
+                                                undoOp(UndoOp::SetStemDirection, chord, int(dir));
+                                                }
+                                          set = true;
                                           }
                                     }
+                              else {
+                                    if (cr->type() == CHORD) {
+                                          Chord* chord = static_cast<Chord*>(cr);
+                                          if (chord->stemDirection() != AUTO) {
+                                                chord->setStemDirection(AUTO);
+                                                undoOp(UndoOp::SetStemDirection, chord, int(AUTO));
+                                                }
+                                          }
+                                    }
                               }
+
                         }
-
+                  else {
+                        undoOp(UndoOp::SetStemDirection, chord, int(dir));
+                        }
                   }
-            else {
-                  undoOp(UndoOp::SetStemDirection, chord, int(dir));
+            else if (e->type() == SLUR_SEGMENT) {
+                  SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();
+                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+                  undoOp(UndoOp::FlipSlurDirection, slur);
                   }
-            }
-      else if (el->type() == SLUR_SEGMENT) {
-            SlurTie* slur = static_cast<SlurSegment*>(el)->slurTie();
-            slur->setSlurDirection(slur->isUp() ? DOWN : UP);
-            undoOp(UndoOp::FlipSlurDirection, slur);
-            }
-      else if (el->type() == BEAM) {
-            Beam* beam = static_cast<Beam*>(el);
-            beam->setBeamDirection(beam->isUp() ? DOWN : UP);
-            undoOp(UndoOp::FlipBeamDirection, beam);
+            else if (e->type() == BEAM) {
+                  Beam* beam = static_cast<Beam*>(e);
+                  beam->setBeamDirection(beam->isUp() ? DOWN : UP);
+                  undoOp(UndoOp::FlipBeamDirection, beam);
+                  }
             }
       layoutAll = true;
       }
@@ -1511,6 +1513,8 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       for (; ii < n; ++ii) {
             DurationElement* el = crl[ii];
             undoRemoveElement(el);
+            if (el->isChordRest())
+                  measure->cmdRemoveEmptySegment(static_cast<Segment*>(el->parent()));
             --n;
             --ii;
             remaining -= el->duration().ticks();
