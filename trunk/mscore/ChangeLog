@@ -1,6 +1,9 @@
 17.nov (ws)
       - fixed bug in tuplet entry
       - fix another palette related crash
+      (sy)
+      - fix square bracket tips not connected to bracket, visible at
+        higher zoom levels
 16.nov (ws)
       - added galician translation from Xosé
       - fix crash when saving palettes
