@@ -2123,6 +2123,7 @@ foreach(Element* el, *(score->gel())) {
             bracket[i] = 0;
 
       xml.setDevice(dev);
+      xml.setCodec("utf8");
       xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
       xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
       xml.stag("score-partwise");
