@@ -78,6 +78,7 @@ extern bool showRubberBand;
 //
 
 enum {
+      STATE_DISABLED   = 0,
       STATE_NORMAL     = 1,
       STATE_NOTE_ENTRY = 2,
       STATE_EDIT       = 4,

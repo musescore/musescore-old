@@ -20,6 +20,9 @@ I did some changes to the files to better fit for MuseScore:
 test1.msc
       single staff, single voice, c-scale
 
+test3.msc
+      displaced note heads
+
 test7.msc
       - piano and trumpet staff
       - flat symbol in instrument name

@@ -1838,6 +1838,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Reset Positions"),
          QT_TR_NOOP("Reset Positions")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "inspector",
+         QT_TR_NOOP("show inspector"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Inspector"),
+         QT_TR_NOOP("Inspector")
+         ),
       Shortcut(0, 0, 0),
       };
 

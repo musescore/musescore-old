@@ -34,10 +34,13 @@ TimeDialog::TimeDialog(QWidget* parent)
       setWindowTitle(tr("MuseScore: TimeSignature"));
       QLayout* l = new QVBoxLayout();
       frame->setLayout(l);
-      QScrollArea* timePalette = new QScrollArea;
-      l->addWidget(timePalette);
       sp = new Palette();
-      timePalette->setWidget(sp);
+      PaletteScrollArea* timePalette = new PaletteScrollArea(sp);
+      QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      timePalette->setSizePolicy(policy);
+      timePalette->setRestrictHeight(false);
+
+      l->addWidget(timePalette);
       sp->setGrid(60, 60);
       sp->showStaff(true);
 
@@ -66,23 +69,7 @@ void TimeDialog::addClicked()
       {
       TimeSig* ts = new TimeSig(0, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
 
-      // look for free slot:
-
-      int nr = sp->rows();
-      int nc = sp->columns();
-      for (int r = 0; r < nr; ++r) {
-            for (int c = 0; c < nc; ++c) {
-                  int idx = r * nc + c;
-                  Element* e = sp->element(idx);
-                  if (e == 0) {
-                        // free slot found
-                        sp->addObject(idx, ts, "");
-                        return;
-                        }
-                  }
-            }
-
       // extend palette:
-      sp->addObject(nr * nc, ts, "");
+      sp->addObject(ts, "");
       }
 

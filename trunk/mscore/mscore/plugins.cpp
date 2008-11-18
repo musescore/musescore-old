@@ -86,6 +86,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             if (!found) {
                   if (i == 0) {
                         curMenu = new QMenu(m, menuBar());
+                        curMenu->setObjectName("Plugin");
                         menuBar()->insertMenu(menuBar()->actions().back(), (QMenu*)curMenu);
                         }
                   else if (i + 1 == n) {

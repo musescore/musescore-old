@@ -337,7 +337,7 @@ MuseScore::MuseScore()
          << "harmony-properties"
          << "system-break" << "page-break"
          << "edit-element"
-         << "mag" << "reset-positions"
+         << "mag" << "reset-positions" << "inspector"
          ;
 
       foreach(const QString s, sl) {
@@ -435,7 +435,7 @@ MuseScore::MuseScore()
       fileTools->addWidget(mag);
       addToolBarBreak();
 
-      QToolBar* cpitchTools = addToolBar(tr("Concert Pitch"));
+      cpitchTools = addToolBar(tr("Concert Pitch"));
       cpitchTools->setObjectName("pitch-tools");
       cpitchTools->addAction(getAction("concert-pitch"));
 
@@ -515,7 +515,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuFile = mb->addMenu(tr("&File"));
-      menuFile->setObjectName("Score");
+      menuFile->setObjectName("File");
 
       menuFile->addAction(getAction("file-new"));
       menuFile->addAction(getAction("file-open"));
@@ -538,7 +538,7 @@ MuseScore::MuseScore()
       //    Menu Edit
       //---------------------
 
-      QMenu* menuEdit = mb->addMenu(tr("&Edit"));
+      menuEdit = mb->addMenu(tr("&Edit"));
       menuEdit->setObjectName("Edit");
       menuEdit->addAction(getAction("undo"));
       menuEdit->addAction(getAction("redo"));
@@ -567,7 +567,7 @@ MuseScore::MuseScore()
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("edit-meta"));
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Inspector..."), this, SLOT(startPageListEditor()));
+      menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
 
@@ -575,7 +575,7 @@ MuseScore::MuseScore()
       //    Menu Create
       //---------------------
 
-      QMenu* menuCreate = genCreateMenu(mb);
+      menuCreate = genCreateMenu(mb);
       mb->setObjectName("Create");
       mb->addMenu(menuCreate);
 
@@ -583,7 +583,7 @@ MuseScore::MuseScore()
       //    Menu Notes
       //---------------------
 
-      QMenu* menuNotes = mb->addMenu(qApp->translate("MenuNotes", "Notes"));
+      menuNotes = mb->addMenu(qApp->translate("MenuNotes", "Notes"));
       menuNotes->setObjectName("Notes");
 
       menuNotes->addAction(getAction("note-input"));
@@ -646,7 +646,7 @@ MuseScore::MuseScore()
       //    Menu Layout
       //---------------------
 
-      QMenu* menuLayout = mb->addMenu(tr("&Layout"));
+      menuLayout = mb->addMenu(tr("&Layout"));
       menuLayout->setObjectName("Layout");
 
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
@@ -663,7 +663,7 @@ MuseScore::MuseScore()
       //    Menu Style
       //---------------------
 
-      QMenu* menuStyle = mb->addMenu(tr("&Style"));
+      menuStyle = mb->addMenu(tr("&Style"));
       menuStyle->setObjectName("Style");
       menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
       menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
@@ -727,6 +727,7 @@ MuseScore::MuseScore()
 
       mb->addSeparator();
       QMenu* menuHelp = mb->addMenu(tr("&Help"));
+      menuHelp->setObjectName("Help");
 
       menuHelp->addAction(tr("Local Manual"),  this, SLOT(helpBrowser()), Qt::Key_F1);
       menuHelp->addAction(tr("Online Manual"), this, SLOT(helpBrowser1()));
@@ -1045,6 +1046,29 @@ void MuseScore::openRecentMenu()
 
 void MuseScore::setCurrentScore(int idx)
       {
+      bool enable = idx != -1;
+      if (paletteBox)
+            paletteBox->setEnabled(enable);
+      transportTools->setEnabled(enable);
+      cpitchTools->setEnabled(enable);
+      mag->setEnabled(enable);
+      entryTools->setEnabled(enable);
+
+      QList<QObject*> ol = menuBar()->children();
+      foreach(QObject* o, ol) {
+            QMenu* menu = qobject_cast<QMenu*>(o);
+            if (!menu)
+                  continue;
+            QString s(menu->objectName());
+            if (s == "File" || s == "Help" || s == "Edit")
+                  continue;
+            menu->setEnabled(enable);
+            }
+      if (!enable) {
+            changeState(STATE_DISABLED);
+            return;
+            }
+
       if (tab->currentIndex() != idx) {
             tab->setCurrentIndex(idx);  // will call setCurrentScore() again
             return;
@@ -1152,9 +1176,10 @@ void MuseScore::pageSettingsChanged()
 
 void MuseScore::startPageListEditor()
       {
-      if (pageListEdit == 0) {
+      if (!cs)
+            return;
+      if (pageListEdit == 0)
             pageListEdit = new PageListEditor(this);
-            }
       pageListEdit->updateList(cs);
       pageListEdit->show();
       }
@@ -1188,7 +1213,7 @@ void MuseScore::editStyle()
 
 void MuseScore::showPlayPanel(bool visible)
       {
-      if (noSeq)
+      if (cs == 0 || noSeq)
             return;
 
       if (playPanel == 0) {
@@ -1306,21 +1331,21 @@ void MuseScore::removeTab()
 void MuseScore::removeTab(int i)
       {
       int n = scoreList.size();
-      if (n <= 1)
+      if (n <= 0)
             return;
-      QList<Score*>::iterator ii = scoreList.begin() + i;
-      if (checkDirty(*ii))
+      Score* score = scoreList[i];
+      if (checkDirty(score))
             return;
-      scoreList.erase(ii);
+      scoreList.removeAt(i);
       tab->removeTab(i);
       cs = 0;
       if (i >= (n-1))
             i = 0;
+      if (scoreList.isEmpty())
+            i = -1;
       setCurrentScore(i);
       bool showTabBar = scoreList.size() > 1;
       getAction("file-close")->setEnabled(showTabBar);
-//      tab->setVisible(showTabBar);
-//      removeTabButton->setVisible(showTabBar);
       }
 
 //---------------------------------------------------------
@@ -1436,15 +1461,18 @@ int main(int argc, char* argv[])
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
             sc->setWindowFlags(Qt::FramelessWindowHint);
+#if 0
             QSize s(pm.size());
             QBitmap bm(s);
             bm.clear();
             QPainter p;
             p.begin(&bm);
             p.setBrush(Qt::SolidPattern);
-            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
+//            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
+            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/20, s.width()/20);
             p.end();
             sc->setMask(bm);
+#endif
             sc->show();
             app.processEvents();
             }
@@ -1557,6 +1585,7 @@ int main(int argc, char* argv[])
                                     }
                               }
                         break;
+                  case EMPTY_SESSION:
                   case NEW_SESSION:
                         break;
                   case SCORE_SESSION:
@@ -1582,7 +1611,7 @@ int main(int argc, char* argv[])
                   }
             }
 
-      if (!scoreCreated) {
+      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
             // start with empty score:
             Score* score = new Score();
             score->addViewer(new Canvas);
@@ -1590,7 +1619,8 @@ int main(int argc, char* argv[])
             score->setCreated(true);
             mscore->appendScore(score);
             }
-
+      if (mscore->noScore())
+            currentScore = -1;
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
 
@@ -1716,6 +1746,8 @@ void MuseScore::cmd(QAction* a)
             cmdAppendMeasures();
       else if (cmd == "insert-measures")
             cmdInsertMeasures();
+      else if (cmd == "inspector")
+            startPageListEditor();
       else {
             if (cs)
                   cs->cmd(cmd);
@@ -1748,6 +1780,8 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(int val)
       {
+//      printf("changeState %d\n", val);
+
       foreach (Shortcut* s, shortcuts) {
             if (!s->action)
                   continue;
@@ -1761,8 +1795,22 @@ void MuseScore::changeState(int val)
                   s->action->setEnabled(cs && cs->selection()->state());
             else
                   s->action->setEnabled(s->state & val);
+            if (val == STATE_DISABLED) {
+                  const char* names[] = { "file-open", "file-new", "quit", 0 };
+                  for (const char** p = names; *p; ++p) {
+                        if (strcmp(*p, s->xml) == 0)
+                              s->action->setEnabled(true);
+                        }
+                  }
             }
       switch(val) {
+            case STATE_DISABLED:
+                  _modeText->setText(tr("no score"));
+                  _modeText->show();
+                  if (pageListEdit)
+                        pageListEdit->hide();
+
+                  break;
             case STATE_NORMAL:
                   _modeText->hide();
                   break;

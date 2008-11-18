@@ -43,12 +43,15 @@ class Score;
 class PageSettings;
 class PaletteBox;
 class Palette;
+class PaletteScrollArea;
+class TimeDialog;
 class Xml;
 class MagBox;
 class NewWizard;
 class ExcerptsDialog;
 class QScriptEmbeddedDebugger;
 struct Drumset;
+
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
@@ -156,6 +159,7 @@ class MuseScore : public QMainWindow {
       QAction* inputId;
 
       PreferenceDialog* preferenceDialog;
+      QToolBar* cpitchTools;
       QToolBar* fileTools;
       QToolBar* transportTools;
       QToolBar* entryTools;
@@ -164,6 +168,11 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;
+      QMenu* menuEdit;
+      QMenu* menuCreate;
+      QMenu* menuNotes;
+      QMenu* menuLayout;
+      QMenu* menuStyle;
 
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
@@ -172,17 +181,18 @@ class MuseScore : public QMainWindow {
       PageSettings* pageSettings;
 
       QWidget* symbolDialog;
-      QWidget* clefPalette;
-      QWidget* keyPalette;
-      QWidget* timePalette;
-      QWidget* linePalette;
-      QWidget* bracketPalette;
-      QWidget* barPalette;
-      QWidget* fingeringPalette;
-      QWidget* noteAttributesPalette;
-      QWidget* accidentalsPalette;
-      QWidget* dynamicsPalette;
-      QWidget* layoutBreakPalette;
+
+      PaletteScrollArea* clefPalette;
+      PaletteScrollArea* keyPalette;
+      TimeDialog* timePalette;
+      PaletteScrollArea* linePalette;
+      PaletteScrollArea* bracketPalette;
+      PaletteScrollArea* barPalette;
+      PaletteScrollArea* fingeringPalette;
+      PaletteScrollArea* noteAttributesPalette;
+      PaletteScrollArea* accidentalsPalette;
+      PaletteScrollArea* dynamicsPalette;
+      PaletteScrollArea* layoutBreakPalette;
       QStatusBar* _statusBar;
       QLabel* _modeText;
       QLabel* _positionLabel;
@@ -190,7 +200,7 @@ class MuseScore : public QMainWindow {
 
       PaletteBox* paletteBox;
       Palette* drumPalette;
-      Drumset* drumset;             // drumset associated with drumPalette
+      Drumset* drumset;                   // drumset associated with drumPalette
 
       bool _midiinEnabled;
       bool _speakerEnabled;
@@ -225,6 +235,7 @@ class MuseScore : public QMainWindow {
       void newFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
+      void startPageListEditor();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -238,7 +249,6 @@ class MuseScore : public QMainWindow {
       void startPreferenceDialog();
       void showMixer(bool);
       void startExcerptsDialog();
-      void startPageListEditor();
       void preferencesChanged();
       void editStyle();
       void editTextStyle();
@@ -304,6 +314,7 @@ class MuseScore : public QMainWindow {
       void updateDrumset();
       double getMag(Canvas*) const;
       void setMag(double);
+      bool noScore() const { return scoreList.isEmpty(); }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

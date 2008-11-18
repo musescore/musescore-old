@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <Mag>2.38161</Mag>
-  <xoff>-1517.76</xoff>
-  <yoff>-324.147</yoff>
+  <MagIdx>9</MagIdx>
+  <xoff>-1604.2</xoff>
+  <yoff>0.211667</yoff>
   <Spatium>2.2</Spatium>
   <Division>480</Division>
   <Style>
@@ -324,89 +324,41 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur id="29">
     <track>0</track>
-    <SlurSegment no="0">
-      <offset x="0.185029" y="1.44322"/>
-      <o1 x="-0.796914" y="-1.4048"/>
-      <o2 x="-0.0370057" y="0.25904"/>
-      <o3 x="0.370057" y="0.222034"/>
-      <o4 x="-0.0252097" y="-1.59003"/>
-      </SlurSegment>
     <up>2</up>
     </Slur>
   <Slur id="30">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.471405" y="-0.235702"/>
-      <o4 x="0.122813" y="0.0903176"/>
-      </SlurSegment>
     </Slur>
   <Slur id="31">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.500868" y="-0.20624"/>
-      <o4 x="-0.017666" y="0.113658"/>
-      </SlurSegment>
     </Slur>
   <Slur id="32">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.500868" y="-0.324091"/>
-      <o2 x="0.0294628" y="0.125394"/>
-      <o3 x="0.176777" y="0.0294628"/>
-      <o4 x="-0.530787" y="0.432331"/>
-      </SlurSegment>
     </Slur>
   <Slur id="33">
     <track>0</track>
     <SlurSegment no="0">
-      <o1 x="-0.53033" y="-0.294628"/>
-      <o4 x="-0.972272" y="-3.38822"/>
+      <o1 x="-0.25904" y="-0.148023"/>
+      <o4 x="0.148023" y="1.81328"/>
       </SlurSegment>
     </Slur>
   <Slur id="34">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.648181" y="-0.383016"/>
-      <o4 x="-0.883884" y="-3.47661"/>
-      </SlurSegment>
     </Slur>
   <Slur id="35">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.441942" y="-0.20624"/>
-      <o4 x="-0.883884" y="-3.53554"/>
-      </SlurSegment>
     </Slur>
   <Slur id="36">
     <track>0</track>
-    <SlurSegment no="0">
-      <offset x="0.0589256" y="-0.176777"/>
-      <o1 x="-0.589256" y="-0.353554"/>
-      <o4 x="-1.88562" y="-3.65339"/>
-      </SlurSegment>
     </Slur>
   <Slur id="37">
     <track>0</track>
-    <SlurSegment no="0">
-      <offset x="0.0883884" y="-0.147314"/>
-      <o1 x="-0.589256" y="-0.294628"/>
-      <o4 x="-0.913347" y="-3.41768"/>
-      </SlurSegment>
     </Slur>
   <Slur id="38">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.559793" y="-0.235702"/>
-      <o4 x="-0.854421" y="-3.41768"/>
-      </SlurSegment>
     </Slur>
   <Slur id="39">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.589256" y="-0.324091"/>
-      <o3 x="0.0294628" y="-0.147314"/>
-      <o4 x="-0.795495" y="-0.383016"/>
-      </SlurSegment>
     </Slur>
   <Slur id="40">
     <track>0</track>
@@ -421,14 +373,11 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur id="42">
     <track>0</track>
-    <SlurSegment no="0">
-      <offset x="-0.0764446" y="0.535112"/>
-      </SlurSegment>
     </Slur>
   <Slur id="43">
     <track>0</track>
     <SlurSegment no="0">
-      <o4 x="-0.458667" y="1.45245"/>
+      <o4 x="-0.454005" y="1.19176"/>
       </SlurSegment>
     </Slur>
   <Slur id="44">
@@ -483,147 +432,64 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur id="55">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.6417" y="-0.32085"/>
-      <o4 x="-0.994634" y="-3.2085"/>
-      </SlurSegment>
     </Slur>
   <Slur id="56">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.51336" y="-0.352935"/>
-      <o4 x="-0.962549" y="-3.43309"/>
-      </SlurSegment>
     </Slur>
   <Slur id="57">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.481275" y="-0.224595"/>
-      <o4 x="-0.89838" y="-3.49726"/>
-      </SlurSegment>
     </Slur>
   <Slur id="58">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.609615" y="-0.352935"/>
-      <o2 x="0" y="-0.44919"/>
-      <o3 x="0.06417" y="-0.57753"/>
-      <o4 x="-2.02135" y="-3.59352"/>
-      </SlurSegment>
     </Slur>
   <Slur id="59">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.609615" y="-0.32085"/>
-      <o4 x="-0.89838" y="-3.49726"/>
-      </SlurSegment>
+    <up>2</up>
     </Slur>
   <Slur id="60">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.44919" y="-0.38502"/>
-      <o4 x="-0.962549" y="-3.43309"/>
-      </SlurSegment>
     </Slur>
   <Slur id="61">
     <track>0</track>
-    <SlurSegment no="0">
-      <o4 x="-0.906268" y="1.00696"/>
-      </SlurSegment>
     </Slur>
   <Slur id="62">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.560774" y="-0.301955"/>
-      <o2 x="0.086273" y="-0.388228"/>
-      <o3 x="0.086273" y="-0.345092"/>
-      <o4 x="-0.73332" y="-3.01955"/>
-      </SlurSegment>
     </Slur>
   <Slur id="63">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.690184" y="-0.474501"/>
-      <o2 x="0" y="-0.301955"/>
-      <o3 x="-0.0431365" y="-0.690184"/>
-      <o4 x="-0.819593" y="-2.80387"/>
-      </SlurSegment>
     </Slur>
   <Slur id="64">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.603911" y="-0.345092"/>
-      <o2 x="0.086273" y="-0.301955"/>
-      <o3 x="0" y="-0.215682"/>
-      <o4 x="-0.776457" y="-3.49405"/>
-      </SlurSegment>
     </Slur>
   <Slur id="65">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.129409" y="0.560774"/>
-      <o4 x="-6.93889e-18" y="-0.992139"/>
-      </SlurSegment>
-    <up>1</up>
+    <up>2</up>
     </Slur>
   <Slur id="66">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.258819" y="0.474501"/>
-      <o2 x="0.215682" y="0.86273"/>
-      <o3 x="0.172546" y="0.560774"/>
-      <o4 x="-1.25096" y="-0.819593"/>
-      </SlurSegment>
-    <up>1</up>
+    <up>2</up>
     </Slur>
   <Slur id="67">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.086273" y="0.560774"/>
-      <o4 x="0.0431365" y="-0.690184"/>
-      </SlurSegment>
-    <up>1</up>
+    <up>2</up>
     </Slur>
   <Slur id="68">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="0.0431365" y="0.301955"/>
-      <o4 x="-0.0431365" y="-0.73332"/>
-      </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="69">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.086273" y="0.431365"/>
-      <o2 x="0.086273" y="0.690184"/>
-      <o3 x="-0.172546" y="0.603911"/>
-      <o4 x="-1.20782" y="-0.86273"/>
-      </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="70">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="-0.215682" y="0.690184"/>
-      <o4 x="0.0431365" y="-0.647047"/>
-      </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="71">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="0.431365" y="-3.70974"/>
-      <o2 x="-4.22737" y="-2.45878"/>
-      <o3 x="5.04697" y="-4.27051"/>
-      <o4 x="-0.73332" y="0.215682"/>
-      </SlurSegment>
     </Slur>
   <Slur id="72">
     <track>0</track>
-    <SlurSegment no="0">
-      <o1 x="0.172546" y="-1.59605"/>
-      </SlurSegment>
     </Slur>
   <Slur id="73">
     <track>0</track>
@@ -743,27 +609,13 @@ p, li { white-space: pre-wrap; }
   <Slur id="89">
     <track>0</track>
     <tick>0</tick>
-    <SlurSegment no="0">
-      <o1 x="0" y="0.402786"/>
-      <o4 x="0.100696" y="-1.00696"/>
-      </SlurSegment>
-    <up>1</up>
+    <up>2</up>
     </Slur>
   <Slur id="90">
     <track>0</track>
-    <SlurSegment no="0">
-      <o4 x="0" y="-1.40975"/>
-      </SlurSegment>
-    <up>1</up>
+    <up>2</up>
     </Slur>
   <Slur id="91">
-    <track>0</track>
-    <SlurSegment no="0">
-      <o4 x="0.201393" y="-1.30905"/>
-      </SlurSegment>
-    <up>1</up>
-    </Slur>
-  <Slur id="92">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.201393" y="-0.201393"/>
@@ -771,14 +623,14 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="93">
+  <Slur id="92">
     <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.402786" y="-0.906268"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="94">
+  <Slur id="93">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.00696" y="-2.61811"/>
@@ -786,27 +638,27 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>2</up>
     </Slur>
-  <Slur id="95">
+  <Slur id="94">
     <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.201393" y="-1.40975"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="96">
+  <Slur id="95">
     <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.302089" y="-1.10766"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="97">
+  <Slur id="96">
     <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.068777" y="0.550216"/>
       </SlurSegment>
     </Slur>
-  <Slur id="98">
+  <Slur id="97">
     <track>0</track>
     <SlurSegment no="0">
       <o2 x="0" y="-0.412662"/>
@@ -814,7 +666,7 @@ p, li { white-space: pre-wrap; }
       <o4 x="-0.068777" y="0.481439"/>
       </SlurSegment>
     </Slur>
-  <Slur id="99">
+  <Slur id="98">
     <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.481439" y="-0.068777"/>
@@ -822,16 +674,16 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="100">
+  <Slur id="99">
     <track>0</track>
     </Slur>
-  <Slur id="101">
+  <Slur id="100">
     <track>0</track>
     <SlurSegment no="0">
       <offset x="0.068777" y="0.618993"/>
       </SlurSegment>
     </Slur>
-  <Slur id="102">
+  <Slur id="101">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.618993" y="-0.343885"/>
@@ -839,7 +691,7 @@ p, li { white-space: pre-wrap; }
       <o3 x="0.068777" y="0.412662"/>
       </SlurSegment>
     </Slur>
-  <Slur id="103">
+  <Slur id="102">
     <track>0</track>
     <SlurSegment no="0">
       <offset x="-0.756547" y="0.275108"/>
@@ -849,7 +701,7 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>2</up>
     </Slur>
-  <Slur id="104">
+  <Slur id="103">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.03166" y="-0.275108"/>
@@ -857,6 +709,9 @@ p, li { white-space: pre-wrap; }
       <o3 x="0.550216" y="-0.343885"/>
       <o4 x="0.068777" y="0.68777"/>
       </SlurSegment>
+    </Slur>
+  <Slur id="104">
+    <track>0</track>
     </Slur>
   <Slur id="105">
     <track>0</track>
@@ -869,20 +724,17 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur id="108">
     <track>0</track>
-    </Slur>
-  <Slur id="109">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.068777" y="0.481439"/>
       </SlurSegment>
     </Slur>
-  <Slur id="110">
+  <Slur id="109">
     <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.618993" y="1.30676"/>
       </SlurSegment>
     </Slur>
-  <Slur id="111">
+  <Slur id="110">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.65065" y="2.47597"/>
@@ -890,7 +742,7 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>1</up>
     </Slur>
-  <Slur id="112">
+  <Slur id="111">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.7882" y="-5.15828"/>
@@ -898,7 +750,7 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     <up>2</up>
     </Slur>
-  <Slur id="113">
+  <Slur id="112">
     <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.16921" y="-3.71396"/>
@@ -1026,7 +878,7 @@ p, li { white-space: pre-wrap; }
       <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
-  <Slur id="114">
+  <Slur id="113">
     <track>0</track>
     <tick>0</tick>
     <SlurSegment no="0">
@@ -1090,6 +942,11 @@ p, li { white-space: pre-wrap; }
       <off2 x="-16.5271" y="0"/>
       </Segment>
     </HairPin>
+  <Slur id="114">
+    <track>0</track>
+    <tick>0</tick>
+    <up>2</up>
+    </Slur>
   <Staff id="1">
     <VBox>
       <height>1.35925</height>
@@ -2390,7 +2247,7 @@ p, li { white-space: pre-wrap; }
           <subtype>sforzato</subtype>
           <offset x="-0.136687" y="0.205031"/>
           </Attribute>
-        <Slur type="start" number="114"/>
+        <Slur type="start" number="113"/>
         <Beam>30</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -2399,7 +2256,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="stop" number="114"/>
+        <Slur type="stop" number="113"/>
         <Beam>30</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -2757,7 +2614,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Dynamic>
         <subtype>p</subtype>
-        <offset x="-1.03856" y="-0.0575538"/>
+        <offset x="-0.868308" y="0.850456"/>
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
@@ -4371,6 +4228,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="70">
+      <stretch>1.4</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
         <track>-1</track>
@@ -4594,6 +4452,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="74">
+      <stretch>1.3</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
         <track>-1</track>
@@ -4801,6 +4660,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="77">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
@@ -4833,10 +4696,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="78">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Dynamic>
         <subtype>pp</subtype>
         <offset x="4.09263" y="-0.315959"/>
@@ -4907,7 +4766,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Slur type="start" number="90"/>
+        <Slur type="start" number="114"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
         <Note>
@@ -4926,7 +4785,7 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <tick>74400</tick>
           </Attribute>
-        <Slur type="stop" number="90"/>
+        <Slur type="stop" number="114"/>
         <Beam>61</Beam>
         <Note>
           <track>1</track>
@@ -4945,7 +4804,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <ticklen>240</ticklen>
-        <Slur type="start" number="91"/>
+        <Slur type="start" number="90"/>
         <acciaccatura/>
         <StemDirection>up</StemDirection>
         <Note>
@@ -4965,7 +4824,7 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <tick>74640</tick>
           </Attribute>
-        <Slur type="stop" number="91"/>
+        <Slur type="stop" number="90"/>
         <Beam>61</Beam>
         <Note>
           <track>1</track>
@@ -5014,6 +4873,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="80">
       <stretch>1.6</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-1.81228" y="-0.439932"/>
@@ -5042,10 +4905,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="81">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.535134" y="0.256855"/>
@@ -5137,6 +4996,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="82">
+      <stretch>1.1</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="64">
         </Beam>
       <Chord>
@@ -5202,10 +5066,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="84">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
@@ -5269,7 +5129,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <ticklen>120</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="93"/>
+        <Slur type="start" number="92"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -5292,7 +5152,7 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <tick>81120</tick>
           </Attribute>
-        <Slur type="stop" number="93"/>
+        <Slur type="stop" number="92"/>
         <Beam>66</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -5320,6 +5180,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="86">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
@@ -5339,7 +5203,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <ticklen>120</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="92"/>
+        <Slur type="start" number="91"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -5362,7 +5226,7 @@ p, li { white-space: pre-wrap; }
           <track>1</track>
           <tick>82080</tick>
           </Attribute>
-        <Slur type="stop" number="92"/>
+        <Slur type="stop" number="91"/>
         <Beam>67</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -5393,7 +5257,7 @@ p, li { white-space: pre-wrap; }
       <stretch>1.3</stretch>
       <Chord>
         <ticklen>960</ticklen>
-        <Slur type="start" number="94"/>
+        <Slur type="start" number="93"/>
         <StemDirection>down</StemDirection>
         <Note pitch="54" tpc="8"/>
         </Chord>
@@ -5434,13 +5298,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="88">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
-        <Slur type="stop" number="94"/>
+        <Slur type="stop" number="93"/>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -5474,7 +5334,7 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <ticklen>120</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="95"/>
+        <Slur type="start" number="94"/>
         <Note>
           <track>2</track>
           <tick>83880</tick>
@@ -5496,7 +5356,7 @@ p, li { white-space: pre-wrap; }
           <track>2</track>
           <tick>84000</tick>
           </Attribute>
-        <Slur type="stop" number="95"/>
+        <Slur type="stop" number="94"/>
         <Beam>68</Beam>
         <Note>
           <track>2</track>
@@ -5561,7 +5421,7 @@ p, li { white-space: pre-wrap; }
         <track>2</track>
         <ticklen>120</ticklen>
         <BeamMode>no</BeamMode>
-        <Slur type="start" number="96"/>
+        <Slur type="start" number="95"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>2</track>
@@ -5584,7 +5444,7 @@ p, li { white-space: pre-wrap; }
           <track>2</track>
           <tick>84960</tick>
           </Attribute>
-        <Slur type="stop" number="96"/>
+        <Slur type="stop" number="95"/>
         <Beam>69</Beam>
         <Note>
           <track>2</track>
@@ -5611,6 +5471,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="90">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <KeySig>
         <subtype>253</subtype>
         </KeySig>
@@ -5677,10 +5541,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="92">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="74">
         </Beam>
       <Chord>
@@ -5727,6 +5587,10 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="94">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="76">
         </Beam>
       <Chord>
@@ -5789,10 +5653,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="96">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="80">
         </Beam>
       <Chord>
@@ -5824,6 +5684,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="97">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="82">
         </Beam>
       <Chord>
@@ -5929,10 +5793,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="99">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="85">
         </Beam>
       <Chord>
@@ -6033,16 +5893,16 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="101">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
     <Measure number="102">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="89">
         </Beam>
       <Chord>
@@ -6051,7 +5911,7 @@ p, li { white-space: pre-wrap; }
           <subtype>sforzato</subtype>
           <offset x="-0.068777" y="1.37554"/>
           </Attribute>
-        <Slur type="start" number="97"/>
+        <Slur type="start" number="96"/>
         <Beam>89</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6060,7 +5920,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="stop" number="97"/>
+        <Slur type="stop" number="96"/>
         <Beam>89</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6127,6 +5987,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="104">
       <stretch>1.2</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.623861" y="0.169398"/>
@@ -6146,7 +6010,7 @@ p, li { white-space: pre-wrap; }
           <offset x="0.068777" y="0.825324"/>
           <tick>98880</tick>
           </Attribute>
-        <Slur type="start" number="98"/>
+        <Slur type="start" number="97"/>
         <Beam>92</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -6155,7 +6019,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="stop" number="98"/>
+        <Slur type="stop" number="97"/>
         <Beam>92</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -6195,10 +6059,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="105">
       <stretch>1.2</stretch>
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
@@ -6207,7 +6067,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>dmarcato</subtype>
           </Attribute>
-        <Slur type="start" number="99"/>
+        <Slur type="start" number="98"/>
         <Note pitch="62" tpc="16"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
@@ -6219,7 +6079,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>umarcato</subtype>
           </Attribute>
-        <Slur type="stop" number="99"/>
+        <Slur type="stop" number="98"/>
         <Note pitch="82" tpc="12"/>
         <Note pitch="94" tpc="12"/>
         </Chord>
@@ -6232,14 +6092,14 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Slur type="start" number="100"/>
+        <Slur type="start" number="99"/>
         <Beam>94</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="stop" number="100"/>
+        <Slur type="stop" number="99"/>
         <Beam>94</Beam>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -6257,7 +6117,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="start" number="101"/>
+        <Slur type="start" number="100"/>
         <Beam>95</Beam>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -6267,13 +6127,17 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="stop" number="101"/>
+        <Slur type="stop" number="100"/>
         <Beam>95</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
       </Measure>
     <Measure number="107">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
@@ -6316,10 +6180,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="108">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-1.81485" y="0.50456"/>
@@ -6328,14 +6188,14 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Slur type="start" number="108"/>
+        <Slur type="start" number="107"/>
         <Beam>96</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="stop" number="108"/>
+        <Slur type="stop" number="107"/>
         <Beam>96</Beam>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -6353,7 +6213,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="start" number="109"/>
+        <Slur type="start" number="108"/>
         <Beam>97</Beam>
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
@@ -6363,7 +6223,7 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
-        <Slur type="stop" number="109"/>
+        <Slur type="stop" number="108"/>
         <Beam>97</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
@@ -6383,7 +6243,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="start" number="110"/>
+        <Slur type="start" number="109"/>
         <Beam>98</Beam>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
@@ -6403,7 +6263,7 @@ p, li { white-space: pre-wrap; }
           <subtype>sforzato</subtype>
           <offset x="0.343885" y="-7.56547"/>
           </Attribute>
-        <Slur type="stop" number="110"/>
+        <Slur type="stop" number="109"/>
         <Beam>98</Beam>
         <Note pitch="67" tpc="15"/>
         <Note pitch="70" tpc="12"/>
@@ -6415,14 +6275,18 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="110">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="-1.76943" y="0.0636826"/>
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
+        <Slur type="start" number="111"/>
         <Slur type="start" number="112"/>
-        <Slur type="start" number="113"/>
         <StemDirection>down</StemDirection>
         <Note pitch="57" tpc="17"/>
         <Note pitch="61" tpc="21"/>
@@ -6431,7 +6295,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>104640</tick>
         <ticklen>960</ticklen>
-        <Slur type="start" number="111"/>
+        <Slur type="start" number="110"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -6442,14 +6306,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="111">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>960</ticklen>
+        <Slur type="stop" number="111"/>
         <Slur type="stop" number="112"/>
-        <Slur type="stop" number="113"/>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>56</pitch>
@@ -6466,7 +6326,7 @@ p, li { white-space: pre-wrap; }
         <track>1</track>
         <tick>105600</tick>
         <ticklen>960</ticklen>
-        <Slur type="stop" number="111"/>
+        <Slur type="stop" number="110"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -6502,6 +6362,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="113">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>down</StemDirection>
@@ -6574,10 +6438,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="114">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Beam id="100">
         </Beam>
       <Chord>
@@ -6648,6 +6508,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="116">
       <stretch>1.7</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="102">
         </Beam>
       <Chord>
@@ -6684,10 +6548,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="117">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <BeamMode>no</BeamMode>
@@ -6774,6 +6634,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="119">
       <stretch>1.6</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Beam id="107">
         </Beam>
       <Chord>
@@ -6823,10 +6687,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="120">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>120</ticklen>
         </Rest>
@@ -6865,6 +6725,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="121">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>240</ticklen>
         </Rest>
@@ -6906,10 +6770,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="124">
-      <Text>
-        <subtype>MeasureNumber</subtype>
-        <track>-1</track>
-        </Text>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -6933,6 +6793,10 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="126">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -10260,7 +10124,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="78">
       <Dynamic>
         <subtype>p</subtype>
-        <offset x="-1.34498" y="-11.4801"/>
+        <offset x="-1.51523" y="-11.0261"/>
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
@@ -11098,8 +10962,8 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>umarcato</subtype>
           </Attribute>
+        <Slur type="start" number="101"/>
         <Slur type="start" number="102"/>
-        <Slur type="start" number="103"/>
         <Note pitch="46" tpc="12"/>
         <Note pitch="53" tpc="13"/>
         <Note pitch="58" tpc="12"/>
@@ -11112,8 +10976,8 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>dmarcato</subtype>
           </Attribute>
+        <Slur type="stop" number="101"/>
         <Slur type="stop" number="102"/>
-        <Slur type="stop" number="103"/>
         <Note pitch="34" tpc="12"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -11276,7 +11140,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="start" number="104"/>
+        <Slur type="start" number="103"/>
         <Beam>238</Beam>
         <Note pitch="55" tpc="15"/>
         <Note pitch="58" tpc="12"/>
@@ -11290,7 +11154,7 @@ p, li { white-space: pre-wrap; }
           <subtype>sforzato</subtype>
           <offset x="0.618993" y="-6.94648"/>
           </Attribute>
-        <Slur type="stop" number="104"/>
+        <Slur type="stop" number="103"/>
         <Beam>238</Beam>
         <Note pitch="63" tpc="11"/>
         </Chord>
@@ -11304,13 +11168,13 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Slur type="start" number="105"/>
+        <Slur type="start" number="104"/>
         <Beam>239</Beam>
         <Note pitch="47" tpc="19"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="stop" number="105"/>
+        <Slur type="stop" number="104"/>
         <Beam>239</Beam>
         <Note pitch="49" tpc="21"/>
         </Chord>
@@ -11346,7 +11210,7 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Slur type="start" number="106"/>
+        <Slur type="start" number="105"/>
         <Beam>241</Beam>
         <Note>
           <pitch>46</pitch>
@@ -11356,7 +11220,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="stop" number="106"/>
+        <Slur type="stop" number="105"/>
         <Beam>241</Beam>
         <Note>
           <pitch>48</pitch>
@@ -11400,13 +11264,13 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
-        <Slur type="start" number="107"/>
+        <Slur type="start" number="106"/>
         <Beam>243</Beam>
         <Note pitch="46" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Slur type="stop" number="107"/>
+        <Slur type="stop" number="106"/>
         <Beam>243</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
@@ -11897,5 +11761,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

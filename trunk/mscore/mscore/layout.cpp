@@ -696,6 +696,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
    bool isFirstSystem, double* h)
       {
+      bool raggedRight = layoutDebug;
+
       *h = 0.0;
       QList<System*> sl;
 
@@ -712,13 +714,12 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       // dont stretch last system row, if minWidth is <= lastSystemFillLimit
       //
       if (curMeasure == 0 && ((minWidth / rowWidth) <= score()->style()->lastSystemFillLimit))
-            rowWidth = minWidth;
+            raggedRight = true;
 
       //-------------------------------------------------------
       //    Round II
       //    stretch measures
       //    "nm" measures fit on this line of score
-      //    "minWidth"   is the minimum width they use
       //-------------------------------------------------------
 
       bool needRelayout = false;
@@ -817,7 +818,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             minWidth += system->leftMargin();
             }
 
-      double rest = (layoutDebug ? 0.0 : rowWidth - minWidth) / totalWeight;
+      double rest = (raggedRight ? 0.0 : rowWidth - minWidth) / totalWeight;
       double xx   = 0.0;
 
       foreach(System* system, sl) {
@@ -827,7 +828,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   mb->setPos(pos);
                   double ww = 0.0;
                   if (mb->type() == MEASURE) {
-                        Measure* m    = (Measure*)mb;
+                        Measure* m    = static_cast<Measure*>(mb);
                         double weight = m->tickLen() * m->userStretch();
                         ww            = m->layoutWidth().stretchable + rest * weight;
                         m->layout(this, ww);

@@ -167,7 +167,7 @@ class Measure : public MeasureBase {
       void removeMStaff(MStaff* staff, int idx);
 
       void layoutBeams1(ScoreLayout*);
-      void layoutChord(Chord* chord, char*);
+      void layoutChords(Segment* segment, int startTrack, char* tversatz);
       void layout0(int staff);
 
       virtual void moveTicks(int diff);

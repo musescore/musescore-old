@@ -222,6 +222,7 @@ void Preferences::write()
       s.setValue("layoutBreakColor",   layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
       switch(sessionStart) {
+            case EMPTY_SESSION:  s.setValue("sessionStart", "empty"); break;
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
             case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
             case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
@@ -351,6 +352,8 @@ void Preferences::read()
             sessionStart = NEW_SESSION;
       else if (ss == "score")
             sessionStart = SCORE_SESSION;
+      else if (ss == "empty")
+            sessionStart = EMPTY_SESSION;
 
       startScore     = s.value("startScore", ":/data/demo.msc").toString();
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
@@ -504,6 +507,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       alsaFragments->setValue(p->alsaFragments);
       drawAntialiased->setChecked(p->antialiasedDrawing);
       switch(p->sessionStart) {
+            case EMPTY_SESSION:  emptySession->setChecked(true); break;
             case LAST_SESSION:   lastSession->setChecked(true); break;
             case NEW_SESSION:    newSession->setChecked(true); break;
             case SCORE_SESSION:  scoreSession->setChecked(true); break;
@@ -895,6 +899,8 @@ void PreferenceDialog::apply()
             preferences.sessionStart = NEW_SESSION;
       else if (scoreSession->isChecked())
             preferences.sessionStart = SCORE_SESSION;
+      else if (emptySession->isChecked())
+            preferences.sessionStart = EMPTY_SESSION;
       preferences.startScore         = sessionScore->text();
       preferences.imagePath          = imagePath->text();
       preferences.workingDirectory   = workingDirectory->text();
