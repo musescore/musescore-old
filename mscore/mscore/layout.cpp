@@ -557,6 +557,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       System* system = getNextSystem(isFirstSystem, false);
 
       system->setInstrumentNames();
+      system->layout(this);
       minWidth            = system->leftMargin();
       double systemWidth  = w;
 
@@ -579,8 +580,10 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (isFirstMeasure)
+                  if (isFirstMeasure) {
+                        processSystemHeader(m, isFirstSystem);
                         firstMeasure = m;
+                        }
 
                   //
                   // remove generated elements
@@ -642,6 +645,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       //
       //    hide empty staves
       //
+      bool showChanged = false;
       int staves = system->staves()->size();
       int staffIdx = 0;
       foreach (Part* p, *score()->parts()) {
@@ -665,18 +669,23 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
                   SysStaff* s = system->staff(i);
                   Staff* staff = score()->staff(i);
+                  bool oldShow = s->show();
                   if (hidePart && staves > 1)
                         s->setShow(false);
                   else
                         s->setShow(staff->show());
+                  if (oldShow != s->show())
+                        showChanged = true;
                   }
             staffIdx += nstaves;
             }
 
-      if (firstMeasure)
-            processSystemHeader(firstMeasure, isFirstSystem);
-
-      system->layout(this);
+      // relayout if stave's show status has changed
+      if (showChanged) {
+            system->layout(this);
+            if (firstMeasure)
+                  processSystemHeader(firstMeasure, isFirstSystem);
+            }
 
       return continueFlag && curMeasure;
       }
