@@ -565,7 +565,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       int nstaves = _score->nstaves();
       bool isFirstMeasure = true;
-      Measure* firstMeasure = 0;
+      MeasureBase* firstMeasure = curMeasure;
 
       for (; curMeasure; curMeasure = curMeasure->next()) {
             System* oldSystem = curMeasure->system();
@@ -580,10 +580,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
             else if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (isFirstMeasure) {
+                  if (isFirstMeasure)
                         processSystemHeader(m, isFirstSystem);
-                        firstMeasure = m;
-                        }
 
                   //
                   // remove generated elements
@@ -682,9 +680,9 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       // relayout if stave's show status has changed
       if (showChanged) {
-            system->layout(this);
-            if (firstMeasure)
-                  processSystemHeader(firstMeasure, isFirstSystem);
+            minWidth = 0;
+            curMeasure = firstMeasure;
+            return layoutSystem1(minWidth, w, isFirstSystem);
             }
 
       return continueFlag && curMeasure;
