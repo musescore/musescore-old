@@ -1435,7 +1435,7 @@ int main(int argc, char* argv[])
       if (!converterMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
-            sc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+            sc->setWindowFlags(Qt::FramelessWindowHint);
             QSize s(pm.size());
             QBitmap bm(s);
             bm.clear();
