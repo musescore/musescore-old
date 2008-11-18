@@ -850,11 +850,10 @@ void MuseScore::symbolMenu()
 void MuseScore::clefMenu()
       {
       if (clefPalette == 0) {
-            QScrollArea* sa = new QScrollArea;
-            sa->setWindowTitle(tr("MuseScore: Clefs"));
-            clefPalette = sa;
             Palette* sp = new Palette();
-            sa->setWidget(sp);
+            clefPalette = new PaletteScrollArea(sp);
+            clefPalette->setRestrictHeight(false);
+            clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
             sp->setGrid(60, 80);
             sp->showStaff(true);
             for (int i = 0; i < 16; ++i) {
@@ -873,11 +872,11 @@ void MuseScore::clefMenu()
 void MuseScore::keyMenu()
       {
       if (keyPalette == 0) {
-            keyPalette = new QScrollArea;
-            keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
             Palette* sp = new Palette();
+            keyPalette = new PaletteScrollArea(sp);
+            keyPalette->setRestrictHeight(false);
+            keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
             sp->setGrid(80, 60);
-            ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
@@ -919,10 +918,10 @@ void MuseScore::timeMenu()
 void MuseScore::lineMenu()
       {
       if (linePalette == 0) {
-            linePalette = new QScrollArea;
-            linePalette->setWindowTitle(tr("MuseScore: Lines"));
             Palette* sp = new Palette();
-            ((QScrollArea*)linePalette)->setWidget(sp);
+            linePalette = new PaletteScrollArea(sp);
+            linePalette->setRestrictHeight(false);
+            linePalette->setWindowTitle(tr("MuseScore: Lines"));
             sp->setGrid(100, 30);
 
             double l = _spatium * 8;
@@ -930,12 +929,12 @@ void MuseScore::lineMenu()
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
-            sp->addObject(0, gabel0, tr("crescendo"));
+            sp->addObject(gabel0, tr("crescendo"));
 
             Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
             gabel1->setLen(l);
-            sp->addObject(1, gabel1, tr("diminuendo"));
+            sp->addObject(gabel1, tr("diminuendo"));
 
             Volta* volta = new Volta(gscore);
             volta->setLen(l);
@@ -946,7 +945,7 @@ void MuseScore::lineMenu()
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
 
-            sp->addObject(4, volta, tr("prima volta"));
+            sp->addObject(volta, tr("prima volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -955,7 +954,7 @@ void MuseScore::lineMenu()
             il.append(2);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
-            sp->addObject(5, volta, tr("seconda volta"));
+            sp->addObject(volta, tr("seconda volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -964,7 +963,7 @@ void MuseScore::lineMenu()
             il.append(3);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
-            sp->addObject(6, volta, tr("terza volta"));
+            sp->addObject(volta, tr("terza volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -973,40 +972,50 @@ void MuseScore::lineMenu()
             il.append(2);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_OPEN);
-            sp->addObject(7, volta, tr("seconda volta"));
+            sp->addObject(volta, tr("seconda volta"));
 
             //--------
 
             Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
             ottava->setLen(l);
-            sp->addObject(8, ottava, tr("8va"));
+            sp->addObject(ottava, tr("8va"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
-            sp->addObject(9, ottava, tr("15ma"));
+            sp->addObject(ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
             ottava->setLen(l);
-            sp->addObject(10, ottava, tr("8vb"));
+            sp->addObject(ottava, tr("8vb"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
-            sp->addObject(11, ottava, tr("15mb"));
+            sp->addObject(ottava, tr("15mb"));
 
             //-------
 
             Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
-            sp->addObject(12, pedal, tr("pedal"));
+            sp->addObject(pedal, tr("pedal"));
 
             Trill* trill = new Trill(gscore);
             trill->setLen(l);
-            sp->addObject(13, trill, tr("trill line"));
+            sp->addObject(trill, tr("trill line"));
 
+            TextLine* textLine = new TextLine(gscore);
+            textLine->setText("VII");
+            textLine->setLen(l);
+            sp->addObject(textLine, tr("text line"));
+
+            TextLine* line = new TextLine(gscore);
+            line->setLen(l);
+            line->setHasText(false);
+            line->setHook(false);
+            sp->addObject(line, tr("line"));
             }
       linePalette->show();
       linePalette->raise();
@@ -1019,10 +1028,10 @@ void MuseScore::lineMenu()
 void MuseScore::bracketMenu()
       {
       if (bracketPalette == 0) {
-            bracketPalette = new QScrollArea;
-            bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
             Palette* sp = new Palette();
-            ((QScrollArea*)bracketPalette)->setWidget(sp);
+            bracketPalette = new PaletteScrollArea(sp);
+            bracketPalette->setRestrictHeight(false);
+            bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
             sp->setGrid(40, 80);
 
             Bracket* b1 = new Bracket(gscore);
@@ -1047,13 +1056,12 @@ void MuseScore::bracketMenu()
 void MuseScore::noteAttributesMenu()
       {
       if (noteAttributesPalette == 0) {
-            noteAttributesPalette = new QScrollArea;
-            noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
-
-            unsigned nn = NOTE_ATTRIBUTES;
             Palette* sp = new Palette();
+            noteAttributesPalette = new PaletteScrollArea(sp);
+            noteAttributesPalette->setRestrictHeight(false);
+            noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
+            unsigned nn = NOTE_ATTRIBUTES;
             sp->setGrid(42, 30);
-            ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
 
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
@@ -1072,10 +1080,10 @@ void MuseScore::noteAttributesMenu()
 void MuseScore::accidentalsMenu()
       {
       if (accidentalsPalette == 0) {
-            accidentalsPalette = new QScrollArea;
-            accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
             Palette* sp = new Palette();
-            ((QScrollArea*)accidentalsPalette)->setWidget(sp);
+            accidentalsPalette = new PaletteScrollArea(sp);
+            accidentalsPalette->setRestrictHeight(false);
+            accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
             sp->setGrid(60, 60);
 
             for (int i = 0; i < 16; ++i) {
@@ -1095,10 +1103,10 @@ void MuseScore::accidentalsMenu()
 void MuseScore::dynamicsMenu()
       {
       if (dynamicsPalette == 0) {
-            dynamicsPalette = new QScrollArea;
-            dynamicsPalette->setWindowTitle(tr("MuseScore: Dynamics"));
             Palette* sp = new Palette();
-            ((QScrollArea*)dynamicsPalette)->setWidget(sp);
+            dynamicsPalette = new PaletteScrollArea(sp);
+            dynamicsPalette->setRestrictHeight(false);
+            dynamicsPalette->setWindowTitle(tr("MuseScore: Dynamics"));
             sp->setGrid(90, 40);
 
             for (int i = 0; i < 27; ++i) {
@@ -1129,10 +1137,10 @@ void MuseScore::dynamicsMenu()
 void MuseScore::barMenu()
       {
       if (barPalette == 0) {
-            barPalette = new QScrollArea;
-            barPalette->setWindowTitle(tr("MuseScore: Barlines"));
             Palette* sp = new Palette();
-            ((QScrollArea*)barPalette)->setWidget(sp);
+            barPalette = new PaletteScrollArea(sp, 0);
+            barPalette->setRestrictHeight(false);
+            barPalette->setWindowTitle(tr("MuseScore: Barlines"));
             sp->setGrid(60, 60);
             sp->showStaff(true);
 
@@ -1154,7 +1162,6 @@ void MuseScore::barMenu()
                   b->setSubtype(t[i].type);
                   sp->addObject(i,  b, t[i].name);
                   }
-
             }
       barPalette->show();
       barPalette->raise();
@@ -1167,11 +1174,10 @@ void MuseScore::barMenu()
 void MuseScore::fingeringMenu()
       {
       if (fingeringPalette == 0) {
-            QScrollArea* sa = new QScrollArea;
-            sa->setWindowTitle(tr("MuseScore: Fingering"));
-            fingeringPalette = sa;
             Palette* sp = new Palette(1.5);
-            sa->setWidget(sp);
+            fingeringPalette = new PaletteScrollArea(sp);
+            fingeringPalette->setRestrictHeight(false);
+            fingeringPalette->setWindowTitle(tr("MuseScore: Fingering"));
             sp->setGrid(50, 50);
 
             const char finger[] = "012345pimac";
@@ -1232,11 +1238,10 @@ void Score::addMetronome()
 void MuseScore::showLayoutBreakPalette()
       {
       if (layoutBreakPalette == 0) {
-            QScrollArea* sa = new QScrollArea;
-            sa->setWindowTitle(tr("MuseScore: Layout Breaks"));
-            layoutBreakPalette = sa;
             Palette* sp = new Palette();
-            sa->setWidget(sp);
+            layoutBreakPalette = new PaletteScrollArea(sp);
+            layoutBreakPalette->setRestrictHeight(false);
+            layoutBreakPalette->setWindowTitle(tr("MuseScore: Layout Breaks"));
             sp->setGrid(80, 80);
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
@@ -1269,8 +1274,6 @@ void MuseScore::updateDrumset()
                         if (drumset->isValid(pitch))
                               ++drumInstruments;
                         }
-                  static const int columns = 4;
-                  int rows = (drumInstruments + columns - 1) / columns;
                   int i = 0;
                   for (int pitch = 0; pitch < 128; ++pitch) {
                         if (!ds->isValid(pitch))

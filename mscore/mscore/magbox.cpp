@@ -79,11 +79,6 @@ void MagBox::indexChanged(int idx)
 
 double MagBox::getMag(Canvas* canvas)
       {
-      double cw      = canvas->fsize().width();
-      double ch      = canvas->fsize().height();
-      PageFormat* pf = mscore->currentScore()->pageFormat();
-      double nmag    = canvas->mag();
-
       switch(currentIndex()) {
             case MAG_25:      return 0.25;
             case MAG_50:      return 0.5;
@@ -94,7 +89,17 @@ double MagBox::getMag(Canvas* canvas)
             case MAG_400:     return 4.0;
             case MAG_800:     return 8.0;
             case MAG_1600:    return 16.0;
+            default:          break;
+            }
 
+      double cw      = canvas->fsize().width();
+      double ch      = canvas->fsize().height();
+      double nmag    = canvas->mag();
+      Score* score   = mscore->currentScore();
+      if (score == 0)
+            return 1.0;
+      PageFormat* pf = score->pageFormat();
+      switch(currentIndex()) {
             case MAG_PAGE_WIDTH:      // page width
                   nmag *= cw / (pf->width() * DPI);
                   canvas->setOffset(0.0, 0.0);

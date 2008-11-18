@@ -27,7 +27,7 @@
 struct Shortcut;
 
 enum SessionStart {
-      LAST_SESSION, NEW_SESSION, SCORE_SESSION
+      EMPTY_SESSION, LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };
 
 //---------------------------------------------------------

@@ -1,6 +1,13 @@
-18.nov (db)
+18.nov (ws)
+      - better layout of displaced note heads (test3.msc)
+      - last score can now be removed
+      - implement new start option: start with no score
+      - removed round corners from splash screen
+      (db)
       - new splash screen
 17.nov (ws)
+      - fix layout if first note in a chord has a grace note (distance grace note - note
+        was too large)
       - fixed bug in tuplet entry
       - fix another palette related crash
       (sy)

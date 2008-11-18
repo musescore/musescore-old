@@ -286,106 +286,142 @@ static void initLineList(char* ll, int key)
       }
 
 //---------------------------------------------------------
-//   layoutChord
+//   layoutChords
 //    only called from layout0
 //---------------------------------------------------------
 
-void Measure::layoutChord(Chord* chord, char* tversatz)
+void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       {
+      int staffIdx = startTrack/VOICES;
+      Staff* staff = score()->staff(staffIdx);
+      Style* style    = score()->style();
+      double staffMag = staff->mag();
       Drumset* drumset = 0;
-      if (chord->staff()->part()->useDrumset())
-            drumset = chord->staff()->part()->drumset();
-      NoteList* nl     = chord->noteList();
-      int tick         = chord->tick();
-      int ll           = 1000;      // line distance to previous note head
-      int move1        = nl->front()->staffMove();
-
+      if (staff->part()->useDrumset())
+            drumset = staff->part()->drumset();
       QList<Note*> notes;
+      int tick = segment->tick();
 
-      bool mirror;          // notehead position relative to stem
-      if (chord->isUp()) {
-            for (iNote in = nl->begin(); in != nl->end(); ++in)
-                  notes.append(in->second);
-            mirror = false;
+      int endTrack = startTrack + VOICES;
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (!e)
+                 continue;
+            if (e->type() == CHORD) {
+                  Chord* chord = static_cast<Chord*>(e);
+                  double m = staffMag;
+                  if (chord->small())
+                        m *= style->smallNoteMag;
+                  if (chord->noteType() != NOTE_NORMAL)
+                        m *= score()->style()->graceNoteMag;
+                  chord->setMag(m);
+                  NoteList* nl = chord->noteList();
+                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                        Note* note = in->second;
+                        notes.append(note);
+
+                        int pitch = note->pitch();
+                        if (drumset) {
+                              if (!drumset->isValid(pitch)) {
+                                    printf("unmapped drum note %d\n", pitch);
+                                    }
+                              else {
+                                    note->setHeadGroup(drumset->noteHead(pitch));
+                                    note->setLine(drumset->line(pitch));
+                                    continue;
+                                    }
+                              }
+                        //
+                        // compute accidental
+                        //
+                        int tpc        = note->tpc();
+                        int line       = tpc2step(tpc) + (pitch/12) * 7;
+                        int tpcPitch   = tpc2pitch(tpc);
+                        if (tpcPitch < 0)
+                              line += 7;
+                        else
+                              line -= (tpcPitch/12)*7;
+
+                        int accidental = 0;
+                        if (note->userAccidental())
+                              accidental = note->userAccidental();
+                        else  {
+                              int accVal = ((tpc + 1) / 7) - 2;
+                              accidental = ACC_NONE;
+                              if (accVal != tversatz[line]) {
+                                    tversatz[line] = accVal;
+                                    switch(accVal) {
+                                          case -2: accidental = ACC_FLAT2;  break;
+                                          case -1: accidental = ACC_FLAT;   break;
+                                          case  1: accidental = ACC_SHARP;  break;
+                                          case  2: accidental = ACC_SHARP2; break;
+                                          case  0: accidental = ACC_NATURAL; break;
+                                          default: printf("bad accidental\n"); break;
+                                          }
+                                    }
+                              }
+                        note->setAccidentalSubtype(accidental);
+
+                        //
+                        // calculate the real note line depending on clef
+                        //
+                        int move     = note->staffMove();
+                        int staffIdx = note->staffIdx() + move;
+                        int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
+                        line = 127 - line - 82 + clefTable[clef].yOffset;
+                        note->setLine(line);
+                        }
+                  chord->computeUp();
+                  }
+            else
+                  e->setMag(staffMag);
+            }
+
+      if (drumset || notes.isEmpty())
+            return;
+
+      int startIdx, endIdx, incIdx;
+      if (notes[0]->chord()->isUp() || mstaff(staffIdx)->hasVoices) {
+            startIdx = 0;
+            incIdx   = 1;
+            endIdx   = notes.size();
             }
       else {
-            for (iNote in = nl->begin(); in != nl->end(); ++in)
-                  notes.prepend(in->second);
-            mirror = true;
+            startIdx = notes.size() - 1;
+            incIdx   = -1;
+            endIdx   = -1;
             }
       bool moveLeft = false;
-      int nNotes  = notes.size();
-      for (int i = 0; i < nNotes; ++i) {
-            Note* note  = notes[i];
-            int pitch   = note->pitch();
-            if (drumset) {
-                  if (!drumset->isValid(pitch)) {
-                        printf("unmapped drum note %d\n", pitch);
-                        }
-                  else {
-                        note->setHeadGroup(drumset->noteHead(pitch));
-                        note->setLine(drumset->line(pitch));
-                        continue;
-                        }
+      int ll        = 1000;      // line distance to previous note head
+      bool isLeft   = notes[startIdx]->chord()->isUp();
+      int move1     = notes[startIdx]->staffMove();
+      bool mirror   = false;
+      for (int idx = startIdx; idx != endIdx; idx += incIdx) {
+            Note* note = notes[idx];
+            int move   = note->staffMove();
+            int line   = note->line();
+
+            bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
+            if ((note->chord()->isUp() != isLeft) || conflict)
+                  isLeft = !isLeft;
+            int nmirror = note->chord()->isUp() != isLeft;
+            if (conflict && (nmirror == mirror) && (ll != line)) {
+                  Note* note = notes[idx];
+                  note->chord()->setXpos(note->headWidth());
+                  moveLeft = true;
                   }
-            int move     = note->staffMove();
-            int staffIdx = note->staffIdx() + move;
-            int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
-
-            //
-
-            // compute accidental
-            //
-            int tpc        = note->tpc();
-            int line       = tpc2step(tpc) + (pitch/12) * 7;
-            int tpcPitch   = tpc2pitch(tpc);
-            if (tpcPitch < 0)
-                  line += 7;
             else
-                  line -= (tpcPitch/12)*7;
+                  note->chord()->setXpos(0);
 
-            int accidental = 0;
-            if (note->userAccidental())
-                  accidental = note->userAccidental();
-            else  {
-                  int accVal = ((tpc + 1) / 7) - 2;
-                  accidental = ACC_NONE;
-                  if (accVal != tversatz[line]) {
-                        //
-                        // accidentals in appoggiatura and acciaccatura
-                        // are not valid for the whole measure
-                        //
-//                        if (chord->noteType() == NOTE_NORMAL)
-                              tversatz[line] = accVal;
-                        switch(accVal) {
-                              case -2: accidental = ACC_FLAT2;  break;
-                              case -1: accidental = ACC_FLAT;   break;
-                              case  1: accidental = ACC_SHARP;  break;
-                              case  2: accidental = ACC_SHARP2; break;
-                              case  0: accidental = ACC_NATURAL; break;
-                              default: printf("bad accidental\n"); break;
-                              }
-                        }
-                  }
-
-            //
-            // calculate the real note line depending on clef
-            //
-            line = 127 - line - 82 + clefTable[clef].yOffset;
-            note->setLine(line);
-
-            if (mirror || ((qAbs(ll - line) < 2) && move1 == move))
-                  mirror = !mirror;
-
-            if ((nNotes >= 3) && (i == (nNotes-1)) && mirror && !notes[i-2]->mirror()) {
-                  notes[i-1]->setMirror(true);
-                  mirror = false;
-                  }
-
+            mirror = nmirror;
             note->setMirror(mirror);
             if (mirror)
                   moveLeft = true;
-            note->setAccidentalSubtype(accidental);
+
+//            if ((nNotes >= 3) && (i == (nNotes-1)) && mirror && !notes[i-2]->mirror()) {
+//                  notes[i-1]->setMirror(true);
+//                  mirror = false;
+//                  }
             move1 = move;
             ll    = line;
             }
@@ -397,6 +433,7 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       int ll2    = -1000;      // line distance to previous accidental
       int ll3    = -1000;
       int accCol = 0;
+      int nNotes = notes.size();
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
@@ -414,13 +451,23 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             double x = -point(score()->style()->prefixNoteDistance) * ac->mag();
             x  -= ac->width() + ac->bbox().x();
             x  *= (accCol + 1);
+            Chord* chord = note->chord();
             if (moveLeft && ((note->mirror() && chord->isUp()) || (!note->mirror() && !chord->isUp())))
                   x -= note->headWidth();
             ac->setPos(x, 0);
             ll3 = ll2;
             ll2 = line;
             }
-      chord->computeUp();
+#if 0
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (!e)
+                 continue;
+            if (e->type() == CHORD) {
+                  static_cast<Chord*>(e)->computeUp();
+                  }
+            }
+#endif
       }
 
 //---------------------------------------------------------
@@ -437,9 +484,7 @@ void Measure::layout0(int staffIdx)
       {
       char tversatz[74];      // list of already set accidentals for this measure
 
-      Style* style    = score()->style();
       Staff* staff    = _score->staff(staffIdx);
-      double staffMag = staff->mag();
       int key         = staff->keymap()->key(tick());
 
       initLineList(tversatz, key);
@@ -447,25 +492,7 @@ void Measure::layout0(int staffIdx)
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                   continue;
-            int startTrack = staffIdx * VOICES;
-            int endTrack   = startTrack + VOICES;
-            for (int track = startTrack; track < endTrack; ++track) {
-                  Element* e = segment->element(track);
-                  if (!e)
-                        continue;
-                  if (e->type() == CHORD) {
-                        Chord* chord = static_cast<Chord*>(e);
-                        double m = staffMag;
-                        if (chord->small())
-                              m *= style->smallNoteMag;
-                        if (chord->noteType() != NOTE_NORMAL)
-                              m *= score()->style()->graceNoteMag;
-                        chord->setMag(m);
-                        layoutChord(chord, tversatz);
-                        }
-                  else
-                        e->setMag(staffMag);
-                  }
+            layoutChords(segment, staffIdx * VOICES, tversatz);
             }
       }
 
@@ -1261,7 +1288,9 @@ static double sff(double x, double xMin)
 //---------------------------------------------------------
 
 /**
- Return width of measure, taking into account \a stretch.
+ Return width of measure (in MeasureWidth), taking into account \a stretch.
+ In the layout process this method is called twice, first with stretch==1
+ to find out the minimal width of the measure.
 */
 
 void Measure::layoutX(ScoreLayout* layout, double stretch)
@@ -1269,21 +1298,9 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
       if (!_dirty && (stretch == 1.0))
             return;
 
-      int nstaves = _score->nstaves();
-      int tracks  = nstaves * VOICES;
-
-      int segs = size();
-
-      if (nstaves == 0 || segs == 0) {
-            _mw = MeasureWidth(1.0, 0.0);
-            _dirty = false;
-            return;
-            }
-
-      Style* style = score()->style();
-
       //-----------------------------------------------------------------------
       //    remove empty segments
+      //    ** this should not be necessary **
       //-----------------------------------------------------------------------
 
 again:
@@ -1295,12 +1312,17 @@ again:
                   }
             }
 
-      segs = size();
-      if (segs == 0) {
+      int nstaves = _score->nstaves();
+      int segs    = size();
+
+      if (nstaves == 0 || segs == 0) {
             _mw = MeasureWidth(1.0, 0.0);
             _dirty = false;
             return;
             }
+
+      int tracks   = nstaves * VOICES;
+      Style* style = score()->style();
 
       //-----------------------------------------------------------------------
       //    fill array of Spaces for all segments and staves
@@ -1323,7 +1345,10 @@ again:
             //
             double additionalMin   = 0.0;
             double additionalExtra = 0.0;
-            if (!notesSeg && s->next() && s->next()->subtype() == Segment::SegChordRest) {
+            if (!notesSeg && s->next()
+               && (s->next()->subtype() == Segment::SegChordRest
+                  || s->next()->subtype() == Segment::SegGrace)
+               ) {
                   additionalMin = point(style->clefKeyRightMargin);
                   notesSeg = true;
                   }
@@ -1351,7 +1376,6 @@ again:
                   }
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-//                  Staff* staff = score()->staff(staffIdx);
                   spaces[seg][staffIdx].setValid(false);
                   if (!visible(staffIdx))
                         continue;
@@ -1366,8 +1390,6 @@ again:
                         el->layout(layout);
                         double min1, extra1;
                         el->space(min1, extra1);
-//                        if (s->subtype() == Segment::SegGrace)
-//                              printf("seg %d ======%f %f\n", seg, min1, extra1);
                         if (min1 > min)
                               min = min1;
                         if (extra1 > extra)
@@ -1534,8 +1556,7 @@ printf("\n");
             double str = 1.0;
             double d;
 
-            // grace notes will not be stretched
-            if (ticks[i] > 0 && (types[i-1] != Segment::SegGrace)) {
+            if (types[i-1] == Segment::SegChordRest) {
                   if (minTick > 0)
                         str += .6 * log2(double(ticks[i]) / double(minTick));
                   stretchList[i] = str;

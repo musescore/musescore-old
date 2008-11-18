@@ -283,6 +283,16 @@ void Palette::leaveEvent(QEvent*)
 
 //---------------------------------------------------------
 //   addObject
+//    append element to palette
+//---------------------------------------------------------
+
+void Palette::addObject(Element* s, const QString& name)
+      {
+      addObject(cells.size(), s, name);
+      }
+
+//---------------------------------------------------------
+//   addObject
 //---------------------------------------------------------
 
 void Palette::addObject(int idx, Element* s, const QString& name)
@@ -633,7 +643,6 @@ void Palette::write(Xml& xml, const char* name) const
       for (int i = 0; i < n; ++i) {
             if (cells[i] == 0)
                   continue;
-            xml.tag("idx", i);
             if (!cells[i]->name.isEmpty())
                   xml.tag("name", cells[i]->name);
             cells[i]->element->write(xml);
@@ -686,12 +695,14 @@ void Palette::read(QDomElement e)
                   if (image) {
                         image->read(e);
                         addObject(idx, image, name);
+                        ++idx;
                         }
                   }
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(0);
                   s->read(e);
                   addObject(idx, s, name);
+                  ++idx;
                   }
             else
                   domError(e);
@@ -780,11 +791,7 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
       setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       setWidget(w);
-//      QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      QSizePolicy policy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-//      policy.setHeightForWidth(true);
-//      setSizePolicy(policy);
-//      setWidgetResizable(true);
+      _restrictHeight = true;
       }
 
 //---------------------------------------------------------
@@ -795,7 +802,8 @@ void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       {
       Palette* palette = static_cast<Palette*>(widget());
       int h = palette->resizeWidth(width());
-      setMaximumHeight(h+8);
+      if (_restrictHeight)
+            setMaximumHeight(h+8);
       QScrollArea::resizeEvent(re);
       }
 

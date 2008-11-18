@@ -76,11 +76,14 @@ struct PaletteCell {
 
 class PaletteScrollArea : public QScrollArea {
       Q_OBJECT
+      bool _restrictHeight;
 
       virtual void resizeEvent(QResizeEvent*);
 
    public:
       PaletteScrollArea(QWidget* w, QWidget* parent = 0);
+      bool restrictHeight() const      { return _restrictHeight; }
+      void setRestrictHeight(bool val) { _restrictHeight = val;  }
       };
 
 //---------------------------------------------------------
@@ -131,6 +134,7 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       Palette(qreal mag);
       ~Palette();
+      void addObject(Element*, const QString& name);
       void addObject(int idx, Element*, const QString& name);
       void addObject(int idx, int sym);
       void setGrid(int, int);
