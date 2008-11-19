@@ -674,7 +674,6 @@ bool Score::saveCompressedFile(QFileInfo& info, bool autosave)
             return false;
             }
       bool rv = saveCompressedFile(&fp, info, autosave);
-//      fp.close();
       return rv;
       }
 
@@ -706,6 +705,18 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       xml.stag("rootfiles");
       xml.stag(QString("rootfile full-path=\"%1\"").arg(fn));
       xml.etag();
+      int idx = 1;
+      foreach(ImagePath* ip, imagePathList) {
+            if (!ip->isUsed())
+                  continue;
+            QString srcPath = ip->path();
+            QFileInfo fi(srcPath);
+            QString suffix = fi.suffix();
+            QString dstPath = QString("Pictures/pic%1.%2").arg(idx).arg(suffix);
+            xml.tag("file", dstPath);
+            ++idx;
+            }
+
       xml.etag();
       xml.etag();
       cbuf.seek(0);
@@ -713,6 +724,37 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       if (ec != Zip::Ok) {
             printf("Cannot add container.xml to zipfile '%s'\n", qPrintable(info.filePath()));
             return false;
+            }
+
+      // save images
+      idx = 1;
+      foreach(ImagePath* ip, imagePathList) {
+            if (!ip->isUsed())
+                  continue;
+            QString srcPath = ip->path();
+            QFileInfo fi(srcPath);
+            QString suffix = fi.suffix();
+            QString dstPath = QString("Pictures/pic%1.%2").arg(idx).arg(suffix);
+            QBuffer cbuf;
+            QByteArray ba;
+            if (!ip->loaded()) {
+                  QFile inFile(srcPath);
+                  inFile.open(QIODevice::ReadOnly);
+                  ba = inFile.readAll();
+                  cbuf.setBuffer(&ba);
+                  inFile.close();
+                  }
+            else {
+                  cbuf.setBuffer(&(ip->buffer().buffer()));
+                  }
+            cbuf.open(QIODevice::ReadWrite);
+            ec = uz.createEntry(dstPath, cbuf, dt);
+            if (ec != Zip::Ok) {
+                  printf("Cannot add <%s> to zipfile as <%s>\n", qPrintable(srcPath), qPrintable(dstPath));
+                  }
+            cbuf.close();
+            ip->setPath(dstPath);   // image now has local path
+            ++idx;
             }
 
       QBuffer dbuf;
@@ -753,34 +795,6 @@ bool Score::saveFile(QFileInfo& info, bool autosave)
       bool rv = saveFile(&fp, autosave);
       fp.close();
       return rv;
-      }
-
-//---------------------------------------------------------
-//   StaffLines::write
-//---------------------------------------------------------
-
-void StaffLines::write(Xml& xml) const
-      {
-      xml.stag("Staff");
-      if (lines() != 5)
-            xml.tag("lines", lines());
-      Element::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   StaffLines::read
-//---------------------------------------------------------
-
-void StaffLines::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "lines")
-                  setLines(e.text().toInt());
-            else if (!Element::readProperties(e))
-                  domError(e);
-            }
       }
 
 //---------------------------------------------------------
@@ -920,9 +934,6 @@ bool Score::saveFile(QIODevice* f, bool autosave)
       xml.tag("xoff", canvas()->xoffset() / DPMM);
       xml.tag("yoff", canvas()->yoffset() / DPMM);
 
-      if (::symbolPalette)
-            ::symbolPalette->write(xml, "Symbols");
-
       write(xml, autosave);
       xml.etag();
 #if 0
@@ -984,15 +995,36 @@ bool Score::loadCompressedMsc(QString name)
                         continue;
                         }
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                        if (eee.tagName() == "rootfile") {
+                        QString tag(eee.tagName());
+                        QString val(ee.text());
+
+                        if (tag == "rootfile") {
                               if (rootfile.isEmpty())
                                     rootfile = eee.attribute(QString("full-path"));
+                              }
+                        else if (tag == "file") {
+                              ImagePath* ip = new ImagePath(val);
+                              imagePathList.append(ip);
                               }
                         else
                               domError(eee);
                         }
                   }
             }
+      //
+      // load images
+      //
+      foreach(ImagePath* ip, imagePathList) {
+            QBuffer& dbuf = ip->buffer();
+            dbuf.open(QIODevice::WriteOnly);
+            ec = uz.extractFile(ip->path(), &dbuf);
+            if (ec != UnZip::Ok) {
+                  printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+                  }
+            else
+                  ip->setLoaded(true);
+            }
+
       if (rootfile.isEmpty()) {
             printf("can't find rootfile in: %s\n", qPrintable(name));
             return true;
@@ -1145,11 +1177,8 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "showInvisible")
                         _showInvisible = i;
-                  else if (tag == "Symbols") {
-                        if (::symbolPalette == 0)
-                              createSymbolPalette();
-                        ::symbolPalette->read(ee);
-                        }
+                  else if (tag == "Symbols")    // obsolete
+                        ;
                   else if (tag == "cursorTrack") {
                         if (i >= 0)
                               setInputTrack(i);

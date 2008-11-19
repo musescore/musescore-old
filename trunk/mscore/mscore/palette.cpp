@@ -57,7 +57,6 @@ Palette::Palette(QWidget* parent)
       _readOnly     = true;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-//      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
       }
 
 Palette::Palette(qreal mag)
@@ -74,7 +73,6 @@ Palette::Palette(qreal mag)
       _readOnly     = true;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-//      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
       }
 
 Palette::~Palette()
@@ -105,7 +103,7 @@ void Palette::mousePressEvent(QMouseEvent* ev)
       {
       dragStartPosition = ev->pos();
       if (_selectable) {
-            int i = idx(ev->pos());
+            int i = idx(dragStartPosition);
             if (i != selectedIdx) {
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
@@ -282,20 +280,27 @@ void Palette::leaveEvent(QEvent*)
       }
 
 //---------------------------------------------------------
-//   addObject
+//   append
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::addObject(Element* s, const QString& name)
+void Palette::append(Element* s, const QString& name)
       {
-      addObject(cells.size(), s, name);
+      add(cells.size(), s, name);
+      }
+
+void Palette::append(int symIdx)
+      {
+      Symbol* s = new Symbol(0);
+      s->setSym(symIdx);
+      append(s, ::symbols[symIdx].name());
       }
 
 //---------------------------------------------------------
-//   addObject
+//   add
 //---------------------------------------------------------
 
-void Palette::addObject(int idx, Element* s, const QString& name)
+void Palette::add(int idx, Element* s, const QString& name)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -318,14 +323,14 @@ void Palette::addObject(int idx, Element* s, const QString& name)
       }
 
 //---------------------------------------------------------
-//   addObject
+//   add
 //---------------------------------------------------------
 
-void Palette::addObject(int idx, int symIdx)
+void Palette::add(int idx, int symIdx)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
-      addObject(idx, s, ::symbols[symIdx].name());
+      add(idx, s, ::symbols[symIdx].name());
       }
 
 //---------------------------------------------------------
@@ -621,7 +626,7 @@ void Palette::dropEvent(QDropEvent* event)
                   if (cells[ii] == 0)
                         break;
                   }
-            addObject(ii, e, name);
+            add(ii, e, name);
             emit droppedElement(e);
             if (event->source() == this) {
                   event->setDropAction(Qt::MoveAction);
@@ -694,15 +699,13 @@ void Palette::read(QDomElement e)
                         }
                   if (image) {
                         image->read(e);
-                        addObject(idx, image, name);
-                        ++idx;
+                        append(image, name);
                         }
                   }
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(0);
                   s->read(e);
-                  addObject(idx, s, name);
-                  ++idx;
+                  append(s, name);
                   }
             else
                   domError(e);
@@ -769,16 +772,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       mainWidget->setLayout(vbox);
       vbox->addStretch(1);
       setWidget(mainWidget);
-      }
-
-//---------------------------------------------------------
-//   PaletteBox::sizeHint
-//---------------------------------------------------------
-
-QSize PaletteBox::sizeHint() const
-      {
-//      return QSize(180, 10);
-      return QSize();
+      dirty = false;
       }
 
 //---------------------------------------------------------
@@ -844,6 +838,15 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
       {
       emit paletteVisible(false);
       QWidget::closeEvent(ev);
+      }
+
+//---------------------------------------------------------
+//   saveIfDirty
+//---------------------------------------------------------
+
+void PaletteBox::saveIfDirty() const
+      {
+      printf("save palette box\n");
       }
 
 //---------------------------------------------------------

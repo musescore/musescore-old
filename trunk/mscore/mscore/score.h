@@ -140,6 +140,28 @@ struct Position {
       };
 
 //---------------------------------------------------------
+//   ImagePath
+//---------------------------------------------------------
+
+class ImagePath {
+      QString _path;
+      int _references;  // > 0 if image is used in score
+      QBuffer _buffer;
+      bool _loaded;     // true if buffer contains image data
+
+   public:
+      ImagePath(const QString& p);
+      void dereference();
+      void reference();
+      const QString& path() const      { return _path;     }
+      QBuffer& buffer()                { return _buffer;   }
+      void setLoaded(bool val)         { _loaded = val;    }
+      bool loaded() const              { return _loaded;   }
+      void setPath(const QString& val) { _path = val;      }
+      bool isUsed() const              { return _references > 0;  }
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -147,6 +169,8 @@ class Score : public QObject {
       Q_OBJECT
       Q_PROPERTY (int nstaves READ nstaves)
       Q_PROPERTY (QString name READ name)
+
+      QList<ImagePath*> imagePathList;
 
       int _magIdx;
       double _mag;
@@ -669,6 +693,8 @@ class Score : public QObject {
       void setYoff(double v)  { _yoff = v;    }
 
       void setPos(int tick);
+
+      ImagePath* addImage(const QString&);      // add image to imagePathList
       };
 
 extern Score* gscore;

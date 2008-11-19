@@ -443,8 +443,11 @@ void VBox::add(Element* e)
             e->setParent(this);
             _hboxList.append((HBox*)e);
             }
-      else
+      else {
             MeasureBase::add(e);
+            if (e->type() == IMAGE)
+                  static_cast<Image*>(e)->reference();
+            }
       }
 
 //---------------------------------------------------------
@@ -459,8 +462,11 @@ void VBox::remove(Element* e)
                   printf("VBox(%p)::remove(%s,%p) not found\n", this, e->name(), e);
             _hboxList.removeAt(idx);
             }
-      else
+      else {
             MeasureBase::remove(e);
+            if (e->type() == IMAGE)
+                  static_cast<Image*>(e)->dereference();
+            }
       }
 
 //---------------------------------------------------------

@@ -565,16 +565,16 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i+1);
-            sp->addObject(i,  k, tr(keyNames[i*2]));
+            sp->append(k, tr(keyNames[i*2]));
             }
       for (int i = -7; i < 0; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i & 0xff);
-            sp->addObject(14 + i,  k, tr(keyNames[(7 + i) * 2 + 1]));
+            sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
             }
       KeySig* k = new KeySig(gscore);
       k->setSubtype(0);
-      sp->addObject(14,  k, keyNames[14]);
+      sp->append(k, keyNames[14]);
       sp->setSelected(14);
 
       QGridLayout* grid = new QGridLayout;

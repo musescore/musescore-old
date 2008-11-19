@@ -75,7 +75,6 @@ struct Preferences {
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
-      QString imagePath;
       QString workingDirectory;
       QString lastSaveDirectory;
       QString lastSaveCopyDirectory;
@@ -134,7 +133,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectFgWallpaper();
       void selectBgWallpaper();
       void selectSoundFont();
-      void selectImagePath();
       void selectWorkingDirectory();
       void selectInstrumentList();
       void selectStartWith();

@@ -2473,10 +2473,6 @@ fallou:</translation>
         <translation>Voces</translation>
     </message>
     <message>
-        <source>Inspector...</source>
-        <translation>Inspector...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Preferencias...</translation>
     </message>
@@ -4434,6 +4430,18 @@ Gardar esta partitura?</translation>
         <source>reset positions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4891,10 +4899,6 @@ Gardar esta partitura?</translation>
         <translation>Fontes de son (*.sf2 *.SF2);;All (*)</translation>
     </message>
     <message>
-        <source>Choose Image Path</source>
-        <translation>Escoller o camiño ás imaxes</translation>
-    </message>
-    <message>
         <source>Choose WorkingDirectory</source>
         <translation>Escoller o directorio de traballo</translation>
     </message>
@@ -4996,10 +5000,6 @@ Gardar esta partitura?</translation>
     <message>
         <source>Paths</source>
         <translation>Camiños</translation>
-    </message>
-    <message>
-        <source>Image Path:</source>
-        <translation>Camiño ás imaxes:</translation>
     </message>
     <message>
         <source>Instrument List:</source>
@@ -5383,6 +5383,30 @@ Gardar esta partitura?</translation>
     </message>
     <message>
         <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Texto</translation>
+    </message>
+    <message>
+        <source>Autocorrection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
