@@ -238,6 +238,7 @@ MuseScore::MuseScore()
       {
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
+      setAcceptDrops(true);
       cs                    = 0;
       se                    = 0;    // script engine
       debugger              = 0;
@@ -929,7 +930,6 @@ void MuseScore::appendScore(Score* score)
       ProjectItem* item = new ProjectItem;
       item->score = score;
       projectList.prepend(item);
-      getAction("file-close")->setEnabled(scoreList.size() > 1);
       }
 
 //---------------------------------------------------------
@@ -1111,6 +1111,48 @@ void MuseScore::setCurrentScore(int idx)
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
       changeState(cs->state());
+      }
+
+//---------------------------------------------------------
+//   dragEnterEvent
+//---------------------------------------------------------
+
+void MuseScore::dragEnterEvent(QDragEnterEvent* event)
+      {
+      const QMimeData* data = event->mimeData();
+      if (data->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (debugMode)
+                  printf("drag Url: %s\n", u.toString().toLatin1().data());
+            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+               u.path().toLatin1().data());
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  event->acceptProposedAction();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   dropEvent
+//---------------------------------------------------------
+
+void MuseScore::dropEvent(QDropEvent* event)
+      {
+      const QMimeData* data = event->mimeData();
+      if (data->hasUrls()) {
+            foreach(QUrl u, event->mimeData()->urls()) {
+                  if (u.scheme() == "file") {
+                        Score* score = new Score();
+                        score->addViewer(new Canvas);
+                        score->read(u.path());
+                        appendScore(score);
+                        }
+                  }
+            tab->setCurrentIndex(scoreList.size() - 1);
+            event->acceptProposedAction();
+            }
       }
 
 //---------------------------------------------------------
@@ -1344,8 +1386,6 @@ void MuseScore::removeTab(int i)
       if (scoreList.isEmpty())
             i = -1;
       setCurrentScore(i);
-      bool showTabBar = scoreList.size() > 1;
-      getAction("file-close")->setEnabled(showTabBar);
       }
 
 //---------------------------------------------------------
