@@ -525,7 +525,8 @@ void Score::cmdAddInterval(int val)
 
       setNoteEntry(true);
       ChordRest* cr = _is.cr;
-      _is.setPos(_is.pos() + cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen());
+      int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
+      _is.setPos(_is.pos() + len);
       emit posChanged(_is.pos());
 
       Staff* staff = on->staff();
