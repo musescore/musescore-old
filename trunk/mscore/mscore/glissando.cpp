@@ -50,7 +50,7 @@ void Glissando::layout(ScoreLayout*)
       Segment* s = chord->segment();
       s = s->prev1();
       while (s) {
-            if (s->subtype() == Segment::SegChordRest && s->element(track()))
+            if (s->subtype() == Segment::SegChordRest || s->subtype() == Segment::SegGrace && s->element(track()))
                   break;
             s = s->prev1();
             }
@@ -64,19 +64,26 @@ void Glissando::layout(ScoreLayout*)
             return;
             }
       Note* anchor1 = static_cast<Chord*>(cr)->upNote();
-      QPointF p1    = anchor1->canvasPos();
-      QPointF p2    = anchor2->canvasPos();
 
-      double xo = _spatium * .5;
-      double x1 = anchor1->headWidth() - (p2.x() - p1.x()) + xo;
-      double y2 = anchor2->pos().y();
-      double y1 = (p1.y() - p2.y()) + y2;
-      double x2 = anchor2->pos().x() - xo;
-      bool up   = p2.y() < p1.y();
       setPos(0.0, 0.0);
 
-      double yo = up ? _spatium * .5 : -_spatium * .5;
-      line = QLineF(x1, y1 - yo, x2, y2 + yo);
+      QPointF cp1    = anchor1->canvasPos();
+      QPointF cp2    = anchor2->canvasPos();
+
+      // construct line from notehead to notehead
+      double x1 = (anchor1->headWidth()) - (cp2.x() - cp1.x());
+      double y1 = anchor1->pos().y();
+      double x2 = anchor2->pos().x();
+      double y2 = anchor2->pos().y();
+      QLineF fullLine(x1, y1, x2, y2);
+
+      // shorten line on each side by offsets
+      double xo = _spatium * .5;
+      double yo = _spatium * .5;
+      QPointF p1 = fullLine.pointAt(xo / fullLine.length());
+      QPointF p2 = fullLine.pointAt(1 - (yo / fullLine.length()));
+
+      line = QLineF(p1, p2);
       }
 
 //---------------------------------------------------------

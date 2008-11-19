@@ -1224,7 +1224,7 @@ void Chord::space(double& min, double& extra) const
       if (_arpeggio)
             extra = _arpeggio->width() + _spatium * .5;
       if (_glissando)
-            extra += _spatium * 2.5;
+            extra += _spatium * .5;
 
       for (ciNote i = notes.begin(); i != notes.end(); ++i) {
             Note* note = i->second;

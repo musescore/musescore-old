@@ -4,6 +4,8 @@
       - fixed crash when entering intervals ([Alt]+<number>)
       (sy)
       - implement opening files by drag & drop onto main window
+      - improved glissando layout
+      - glissando from grace note now works
 18.nov (ws)
       - better layout of displaced note heads (test3.msc)
       - last score can now be removed
