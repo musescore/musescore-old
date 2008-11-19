@@ -1,4 +1,6 @@
 19.nov (ws)
+      - Save used images (pasted to the score) in *.mscz file.
+        Removed "image path" hack. See demo "demos/schnee.mscz".
       - fixed crash when entering intervals ([Alt]+<number>)
       (sy)
       - implement opening files by drag & drop onto main window

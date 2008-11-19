@@ -1048,12 +1048,16 @@ void Measure::add(Element* el)
 
             case JUMP:
                   _repeatFlags |= RepeatJump;
+                  _el.append(el);
+                  break;
+
+            case IMAGE:
+                  static_cast<Image*>(el)->reference();
 
             case DYNAMIC:
             case SYMBOL:
             case TEXT:
             case TEMPO_TEXT:
-            case IMAGE:
             case HARMONY:
             case MARKER:
             case STAFF_TEXT:
@@ -1128,13 +1132,17 @@ void Measure::remove(Element* el)
 
             case JUMP:
                   _repeatFlags &= ~RepeatJump;
+                  goto marker;
 
+            case IMAGE:
+                  static_cast<Image*>(el)->dereference();
+
+marker:
             case MARKER:
             case DYNAMIC:
             case TEMPO_TEXT:
             case TEXT:
             case SYMBOL:
-            case IMAGE:
             case HARMONY:
             case STAFF_TEXT:
                   if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)

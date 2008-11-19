@@ -31,8 +31,27 @@
 Image::Image(Score* s)
    : BSymbol(s)
       {
-      _dirty = false;
+      _ip              = 0;
+      _dirty           = false;
       _lockAspectRatio = true;
+      }
+
+//---------------------------------------------------------
+//   reference
+//---------------------------------------------------------
+
+void Image::reference()
+      {
+      _ip->reference();
+      }
+
+//---------------------------------------------------------
+//   dereference
+//---------------------------------------------------------
+
+void Image::dereference()
+      {
+      _ip->dereference();
       }
 
 //---------------------------------------------------------
@@ -58,7 +77,7 @@ void Image::write(Xml& xml) const
       {
       xml.stag("Image");
       Element::writeProperties(xml);
-      xml.tag("path", _path);
+      xml.tag("path", path());
       xml.tag("size", sz / DPMM);
       if (!_lockAspectRatio)
             xml.tag("lockAspectRatio", _lockAspectRatio);
@@ -93,13 +112,7 @@ void Image::read(QDomElement e)
 
 void Image::setPath(const QString& ss)
       {
-      QString s(ss);
-      if (s.startsWith(preferences.imagePath)) {
-            s = s.mid(preferences.imagePath.size());
-            if (s[0] == '/')
-                  s = s.mid(1);
-            }
-      _path = s;
+      _ip = score()->addImage(ss);
       }
 
 //---------------------------------------------------------
@@ -108,10 +121,7 @@ void Image::setPath(const QString& ss)
 
 QString Image::path() const
       {
-      QFileInfo fi(_path);
-      if (fi.isAbsolute())
-            return _path;
-      return preferences.imagePath + '/' + _path;
+      return _ip->path();
       }
 
 //---------------------------------------------------------
@@ -286,7 +296,10 @@ void RasterImage::draw(QPainter& p) const
 void RasterImage::setPath(const QString& s)
       {
       Image::setPath(s);
-      doc.load(path());
+      if (_ip->loaded())
+            doc.loadFromData(_ip->buffer().buffer());
+      else
+            doc.load(path());
       if (!doc.isNull()) {
             sz = doc.size() * 0.4 * DPI / PDPI;
             _dirty = true;

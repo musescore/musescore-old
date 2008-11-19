@@ -45,18 +45,18 @@ TimeDialog::TimeDialog(QWidget* parent)
       sp->showStaff(true);
 
       Score* cs = 0;
-	sp->addObject(0,   new TimeSig(cs, 2, 2), "2/2");
-	sp->addObject(1,   new TimeSig(cs, 4, 2), "2/4");
-	sp->addObject(2,   new TimeSig(cs, 4, 3), "3/4");
-	sp->addObject(3,   new TimeSig(cs, 4, 4), "4/4");
-	sp->addObject(4,   new TimeSig(cs, 4, 5), "5/4");
-	sp->addObject(5,   new TimeSig(cs, 4, 6), "6/4");
-	sp->addObject(6,   new TimeSig(cs, 8, 3), "3/8");
-	sp->addObject(7,   new TimeSig(cs, 8, 6), "6/8");
-	sp->addObject(8,   new TimeSig(cs, 8, 9), "9/8");
-	sp->addObject(9,   new TimeSig(cs, 8, 12), "12/8");
-	sp->addObject(10,  new TimeSig(cs, TSIG_FOUR_FOUR), "4/4 common time");
-	sp->addObject(11,  new TimeSig(cs, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
+	sp->append(new TimeSig(cs, 2, 2), "2/2");
+	sp->append(new TimeSig(cs, 4, 2), "2/4");
+	sp->append(new TimeSig(cs, 4, 3), "3/4");
+	sp->append(new TimeSig(cs, 4, 4), "4/4");
+	sp->append(new TimeSig(cs, 4, 5), "5/4");
+	sp->append(new TimeSig(cs, 4, 6), "6/4");
+	sp->append(new TimeSig(cs, 8, 3), "3/8");
+	sp->append(new TimeSig(cs, 8, 6), "6/8");
+	sp->append(new TimeSig(cs, 8, 9), "9/8");
+	sp->append(new TimeSig(cs, 8, 12), "12/8");
+	sp->append(new TimeSig(cs, TSIG_FOUR_FOUR), "4/4 common time");
+	sp->append(new TimeSig(cs, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       }
@@ -70,6 +70,6 @@ void TimeDialog::addClicked()
       TimeSig* ts = new TimeSig(0, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
 
       // extend palette:
-      sp->addObject(ts, "");
+      sp->append(ts, "");
       }
 

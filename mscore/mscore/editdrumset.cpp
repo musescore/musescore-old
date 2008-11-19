@@ -208,7 +208,7 @@ void EditDrumset::updateExample()
       {
       int pitch = pitchList->currentItem()->data(0, Qt::UserRole).toInt();
       if (!nDrumset.isValid(pitch)) {
-            drumNote->addObject(0,  0, "");
+            drumNote->add(0,  0, "");
             return;
             }
       int line      = nDrumset.line(pitch);
@@ -239,7 +239,7 @@ void EditDrumset::updateExample()
       stem->setLen(Spatium(up ? -3.0 : 3.0));
       chord->setStem(stem);
       stem->setPos(note->stemPos(up));
-      drumNote->addObject(0,  chord, nDrumset.name(pitch));
+      drumNote->add(0,  chord, nDrumset.name(pitch));
       }
 
 //---------------------------------------------------------

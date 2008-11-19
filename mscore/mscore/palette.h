@@ -48,7 +48,8 @@ class PaletteBox : public QDockWidget {
 
       QList<QWidget*> widgets;
       QVBoxLayout* vbox;
-      virtual QSize sizeHint() const;
+      bool dirty;
+
       virtual void closeEvent(QCloseEvent*);
 
    signals:
@@ -57,6 +58,7 @@ class PaletteBox : public QDockWidget {
    public:
       PaletteBox(QWidget* parent = 0);
       void addPalette(const QString& s, QWidget*);
+      void saveIfDirty() const;
       };
 
 
@@ -134,9 +136,12 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       Palette(qreal mag);
       ~Palette();
-      void addObject(Element*, const QString& name);
-      void addObject(int idx, Element*, const QString& name);
-      void addObject(int idx, int sym);
+
+      void append(Element*, const QString& name);
+      void add(int idx, Element*, const QString& name);
+      void add(int idx, int sym);
+      void append(int sym);
+
       void setGrid(int, int);
       void showStaff(bool val)     { staff = val; }
       Element* element(int idx)    { return cells[idx]->element; }

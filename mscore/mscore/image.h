@@ -25,6 +25,7 @@
 #include "bsymbol.h"
 
 class Viewer;
+class ImagePath;
 
 //---------------------------------------------------------
 //   Image
@@ -32,7 +33,7 @@ class Viewer;
 
 class Image : public BSymbol {
    protected:
-      QString _path;
+      ImagePath* _ip;
       mutable QImage buffer;        ///< cached rendering
       QSizeF sz;
       bool _lockAspectRatio;
@@ -59,6 +60,8 @@ class Image : public BSymbol {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+      void reference();
+      void dereference();
       };
 
 //---------------------------------------------------------

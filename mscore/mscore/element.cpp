@@ -716,6 +716,35 @@ double StaffLines::y2() const
       }
 
 //---------------------------------------------------------
+//   StaffLines::write
+//---------------------------------------------------------
+
+void StaffLines::write(Xml& xml) const
+      {
+      xml.stag("Staff");
+      if (lines() != 5)
+            xml.tag("lines", lines());
+      Element::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   StaffLines::read
+//---------------------------------------------------------
+
+void StaffLines::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "lines")
+                  setLines(e.text().toInt());
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
+
+
+//---------------------------------------------------------
 //   Line
 //---------------------------------------------------------
 

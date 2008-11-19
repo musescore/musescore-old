@@ -4006,10 +4006,6 @@ Save Current Score?</source>
         <translation>Stemmen</translation>
     </message>
     <message>
-        <source>Inspector...</source>
-        <translation>Inspecteer...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Voorkeursinstellingen...</translation>
     </message>
@@ -4431,6 +4427,18 @@ Save Current Score?</source>
     </message>
     <message>
         <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4887,10 +4895,6 @@ Save Current Score?</source>
         <translation></translation>
     </message>
     <message>
-        <source>Choose Image Path</source>
-        <translation>Kies Afbeeldingen Dir</translation>
-    </message>
-    <message>
         <source>Choose WorkingDirectory</source>
         <translation>Kies Werkmap</translation>
     </message>
@@ -4952,10 +4956,6 @@ Save Current Score?</source>
     <message>
         <source>Paths</source>
         <translation>Paden</translation>
-    </message>
-    <message>
-        <source>Image Path:</source>
-        <translation>Afbeeldingen Pad:</translation>
     </message>
     <message>
         <source>Instrument List:</source>
@@ -5383,6 +5383,30 @@ Save Current Score?</source>
     </message>
     <message>
         <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Tekst</translation>
+    </message>
+    <message>
+        <source>Autocorrection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

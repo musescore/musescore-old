@@ -82,27 +82,27 @@ void MuseScore::showPalette(bool visible)
             Icon* ik = new Icon(gscore);
             ik->setSubtype(ICON_ACCIACCATURA);
             ik->setAction(getAction("pad-acciaccatura"));
-            notePalette->addObject(0,  ik, tr("acciaccatura"));
+            notePalette->append(ik, tr("acciaccatura"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_APPOGGIATURA);
             ik->setAction(getAction("pad-appoggiatura"));
-            notePalette->addObject(1,  ik, tr("appoggiatura"));
+            notePalette->append(ik, tr("appoggiatura"));
 
 	      ik = new Icon(gscore);
             ik->setSubtype(ICON_GRACE4);
             ik->setAction(getAction("pad-grace4"));
-            notePalette->addObject(2,  ik, tr("grace-4"));
+            notePalette->append(ik, tr("grace-4"));
 
 	      ik = new Icon(gscore);
             ik->setSubtype(ICON_GRACE16);
             ik->setAction(getAction("pad-grace16"));
-            notePalette->addObject(3,  ik, tr("grace-16"));
+            notePalette->append(ik, tr("grace-16"));
 
 	      ik = new Icon(gscore);
             ik->setSubtype(ICON_GRACE32);
             ik->setAction(getAction("pad-grace32"));
-            notePalette->addObject(4,  ik, tr("grace-32"));
+            notePalette->append(ik, tr("grace-32"));
 
             paletteBox->addPalette(qApp->translate("NotePalette", "Notes"), notePalette);
 
@@ -130,7 +130,7 @@ void MuseScore::showPalette(bool visible)
 
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->addObject(i,  k, tr(clefTable[i].name));
+                  sp->append(k, tr(clefTable[i].name));
                   }
             paletteBox->addPalette(tr("Clefs"), sp);
 
@@ -146,16 +146,16 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->addObject(i,  k, tr(keyNames[i*2]));
+                  sp->append(k, tr(keyNames[i*2]));
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->addObject(14 + i,  k, tr(keyNames[(7 + i) * 2 + 1]));
+                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->addObject(14,  k, keyNames[14]);
+            sp->append(k, keyNames[14]);
             paletteBox->addPalette(tr("Keys"), sp);
 
             //-----------------------------------
@@ -166,18 +166,18 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(42, 38);
             sp->showStaff(true);
 
-      	sp->addObject(0,   new TimeSig(gscore, 2, 2), "2/2");
-      	sp->addObject(1,   new TimeSig(gscore, 4, 2), "2/4");
-      	sp->addObject(2,   new TimeSig(gscore, 4, 3), "3/4");
-      	sp->addObject(3,   new TimeSig(gscore, 4, 4), "4/4");
-      	sp->addObject(4,   new TimeSig(gscore, 4, 5), "5/4");
-      	sp->addObject(5,   new TimeSig(gscore, 4, 6), "6/4");
-      	sp->addObject(6,   new TimeSig(gscore, 8, 3), "3/8");
-      	sp->addObject(7,   new TimeSig(gscore, 8, 6), "6/8");
-      	sp->addObject(8,   new TimeSig(gscore, 8, 9), "9/8");
-      	sp->addObject(9,   new TimeSig(gscore, 8, 12), "12/8");
-      	sp->addObject(10,  new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
-      	sp->addObject(11,  new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
+      	sp->append(new TimeSig(gscore, 2, 2), "2/2");
+      	sp->append(new TimeSig(gscore, 4, 2), "2/4");
+      	sp->append(new TimeSig(gscore, 4, 3), "3/4");
+      	sp->append(new TimeSig(gscore, 4, 4), "4/4");
+      	sp->append(new TimeSig(gscore, 4, 5), "5/4");
+      	sp->append(new TimeSig(gscore, 4, 6), "6/4");
+      	sp->append(new TimeSig(gscore, 8, 3), "3/8");
+      	sp->append(new TimeSig(gscore, 8, 6), "6/8");
+      	sp->append(new TimeSig(gscore, 8, 9), "9/8");
+      	sp->append(new TimeSig(gscore, 8, 12), "12/8");
+      	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
+      	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
             paletteBox->addPalette(tr("Time"), sp);
 
             //-----------------------------------
@@ -204,7 +204,7 @@ void MuseScore::showPalette(bool visible)
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
-                  sp->addObject(i,  b, t[i].name);
+                  sp->append(b, t[i].name);
                   }
             paletteBox->addPalette(tr("Bar Lines"), sp);
 
@@ -220,12 +220,12 @@ void MuseScore::showPalette(bool visible)
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
-            sp->addObject(0, gabel0, tr("crescendo"));
+            sp->append(gabel0, tr("crescendo"));
 
             Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
             gabel1->setLen(l);
-            sp->addObject(1, gabel1, tr("diminuendo"));
+            sp->append(gabel1, tr("diminuendo"));
 
             Volta* volta = new Volta(gscore);
             volta->setLen(l);
@@ -234,7 +234,7 @@ void MuseScore::showPalette(bool visible)
             QList<int> il;
             il.append(1);
             volta->setEndings(il);
-            sp->addObject(2, volta, tr("prima volta"));
+            sp->append(volta, tr("prima volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -243,7 +243,7 @@ void MuseScore::showPalette(bool visible)
             il.clear();
             il.append(2);
             volta->setEndings(il);
-            sp->addObject(3, volta, tr("seconda volta"));
+            sp->append(volta, tr("seconda volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -252,7 +252,7 @@ void MuseScore::showPalette(bool visible)
             il.clear();
             il.append(3);
             volta->setEndings(il);
-            sp->addObject(4, volta, tr("terza volta"));
+            sp->append(volta, tr("terza volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -261,46 +261,46 @@ void MuseScore::showPalette(bool visible)
             il.clear();
             il.append(2);
             volta->setEndings(il);
-            sp->addObject(5, volta, tr("seconda volta 2"));
+            sp->append(volta, tr("seconda volta 2"));
 
             Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
             ottava->setLen(l);
-            sp->addObject(6, ottava, tr("8va"));
+            sp->append(ottava, tr("8va"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
-            sp->addObject(7, ottava, tr("15ma"));
+            sp->append(ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
             ottava->setLen(l);
-            sp->addObject(8, ottava, tr("8vb"));
+            sp->append(ottava, tr("8vb"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
-            sp->addObject(9, ottava, tr("15mb"));
+            sp->append(ottava, tr("15mb"));
 
             Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
-            sp->addObject(10, pedal, tr("pedal"));
+            sp->append(pedal, tr("pedal"));
 
             Trill* trill = new Trill(gscore);
             trill->setLen(l);
-            sp->addObject(11, trill, tr("trill line"));
+            sp->append(trill, tr("trill line"));
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setText("VII");
             textLine->setLen(l);
-            sp->addObject(12, textLine, tr("text line"));
+            sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
             line->setLen(l);
             line->setHasText(false);
             line->setHook(false);
-            sp->addObject(13, line, tr("line"));
+            sp->append(line, tr("line"));
 
             paletteBox->addPalette(tr("Lines"), sp);
 
@@ -315,13 +315,13 @@ void MuseScore::showPalette(bool visible)
                   Arpeggio* a = new Arpeggio(gscore);
                   a->setSubtype(i);
                   a->setHeight(_spatium * 4);
-                  sp->addObject(i, a, tr("arpeggio"));
+                  sp->append(a, tr("arpeggio"));
                   }
             for (int i = 0; i < 2; ++i) {
                   Glissando* a = new Glissando(gscore);
                   a->setSubtype(i);
                   a->setSize(QSizeF(_spatium * 2, _spatium * 4));
-                  sp->addObject(i + 3, a, tr("glissando"));
+                  sp->append(a, tr("glissando"));
                   }
             paletteBox->addPalette(tr("Arpeggio/Glissando"), sp);
 
@@ -335,7 +335,7 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 2; ++i) {
                   Breath* a = new Breath(gscore);
                   a->setSubtype(i);
-                  sp->addObject(i, a, tr("breath"));
+                  sp->append(a, tr("breath"));
                   }
 
             paletteBox->addPalette(tr("Breath"), sp);
@@ -354,8 +354,8 @@ void MuseScore::showPalette(bool visible)
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
 
-            sp->addObject(0, b1, "Bracket");
-            sp->addObject(1, b2, "Akkolade");
+            sp->append(b1, "Bracket");
+            sp->append(b2, "Akkolade");
 
             paletteBox->addPalette(tr("Brackets"), sp);
 
@@ -370,7 +370,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
-                  sp->addObject(i, s, s->subtypeName());
+                  sp->append(s, s->subtypeName());
                   }
             paletteBox->addPalette(tr("Articulations, Ornaments"), sp);
 
@@ -384,7 +384,7 @@ void MuseScore::showPalette(bool visible)
             for (int i = 1; i < 11; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->addObject(i-1, s, s->name());
+                  sp->append(s, s->name());
                   }
             paletteBox->addPalette(tr("Accidentals"), sp);
 
@@ -402,7 +402,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < sizeof(dynS)/sizeof(*dynS); ++i) {
                   Dynamic* dynamic = new Dynamic(gscore);
                   dynamic->setSubtype(dynS[i]);
-                  sp->addObject(i, dynamic, dynamic->subtypeName());
+                  sp->append(dynamic, dynamic->subtypeName());
                   }
             paletteBox->addPalette(tr("Dynamics"), sp);
 
@@ -419,14 +419,14 @@ void MuseScore::showPalette(bool visible)
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
-                  sp->addObject(i, k, tr("fingering %1").arg(finger[i]));
+                  sp->append(k, tr("fingering %1").arg(finger[i]));
                   }
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_STRING_NUMBER);
                   k->setText(QString(stringnumber[i]));
-                  sp->addObject(i+strlen(finger), k, tr("string number %1").arg(stringnumber[i]));
+                  sp->append(k, tr("string number %1").arg(stringnumber[i]));
                   }
 
             paletteBox->addPalette(tr("Fingering"), sp);
@@ -441,31 +441,31 @@ void MuseScore::showPalette(bool visible)
 
             NoteHead* nh = new NoteHead(gscore);
             nh->setSym(halfheadSym);
-            sp->addObject(0, nh, QString("normal"));
+            sp->append(nh, QString("normal"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfcrossedheadSym);
-            sp->addObject(1, nh, QString("crossed"));
+            sp->append(nh, QString("crossed"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfdiamondheadSym);
-            sp->addObject(2, nh, QString("diamond"));
+            sp->append(nh, QString("diamond"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halftriangleheadSym);
-            sp->addObject(3, nh, QString("triangle"));
+            sp->append(nh, QString("triangle"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfdiamond2headSym);
-            sp->addObject(4, nh, QString("diamond2"));
+            sp->append(nh, QString("diamond2"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfslashheadSym);
-            sp->addObject(5, nh, QString("slash"));
+            sp->append(nh, QString("slash"));
 
             nh = new NoteHead(gscore);
             nh->setSym(xcircledheadSym);
-            sp->addObject(6, nh, QString("xcircle"));
+            sp->append(nh, QString("xcircle"));
 
             paletteBox->addPalette(tr("Note Heads"), sp);
 
@@ -484,7 +484,7 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 6; ++i) {
                   Tremolo* tremolo = new Tremolo(gscore);
                   tremolo->setSubtype(i);
-                  sp->addObject(i, tremolo, tremoloName[i]);
+                  sp->append(tremolo, tremoloName[i]);
                   }
             paletteBox->addPalette(tr("Tremolo"), sp);
 
@@ -497,55 +497,55 @@ void MuseScore::showPalette(bool visible)
             sp->setDrawGrid(true);
 
             RepeatMeasure* rm = new RepeatMeasure(gscore);
-            sp->addObject(0, rm, tr("repeat measure"));
+            sp->append(rm, tr("repeat measure"));
 
             Marker* mk = new Marker(gscore);
             mk->setMarkerType(MARKER_SEGNO);
-            sp->addObject(1, mk, tr("Segno"));
+            sp->append(mk, tr("Segno"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_CODA);
-            sp->addObject(2, mk, tr("Coda"));
+            sp->append(mk, tr("Coda"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_VARCODA);
-            sp->addObject(3, mk, tr("VarCoda"));
+            sp->append(mk, tr("VarCoda"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_CODETTA);
-            sp->addObject(4, mk, tr("Codetta"));
+            sp->append(mk, tr("Codetta"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_FINE);
-            sp->addObject(5, mk, tr("Fine"));
+            sp->append(mk, tr("Fine"));
 
             Jump* jp = new Jump(gscore);
             jp->setJumpType(JUMP_DC);
-            sp->addObject(6, jp, tr("da Capo"));
+            sp->append(jp, tr("da Capo"));
 
             jp = new Jump(gscore);
             jp->setJumpType(JUMP_DC_AL_FINE);
-            sp->addObject(7, jp, tr("da Capo al Fine"));
+            sp->append(jp, tr("da Capo al Fine"));
 
             jp = new Jump(gscore);
             jp->setJumpType(JUMP_DC_AL_CODA);
-            sp->addObject(8, jp, tr("da Capo al Coda"));
+            sp->append(jp, tr("da Capo al Coda"));
 
             jp = new Jump(gscore);
             jp->setJumpType(JUMP_DS_AL_CODA);
-            sp->addObject(9, jp, tr("D.S al Coda"));
+            sp->append(jp, tr("D.S al Coda"));
 
             jp = new Jump(gscore);
             jp->setJumpType(JUMP_DS_AL_FINE);
-            sp->addObject(10, jp, tr("D.S al Fine"));
+            sp->append(jp, tr("D.S al Fine"));
 
             jp = new Jump(gscore);
             jp->setJumpType(JUMP_DS);
-            sp->addObject(11, jp, tr("D.S"));
+            sp->append(jp, tr("D.S"));
 
             mk = new Marker(gscore);
             mk->setMarkerType(MARKER_TOCODA);
-            sp->addObject(12, mk, tr("To Coda"));
+            sp->append(mk, tr("To Coda"));
 
             paletteBox->addPalette(tr("Repeats"), sp);
 
@@ -559,15 +559,15 @@ void MuseScore::showPalette(bool visible)
 
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
-            sp->addObject(0, lb, tr("break line"));
+            sp->append(lb, tr("break line"));
 
             lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_PAGE);
-            sp->addObject(1, lb, tr("break page"));
+            sp->append(lb, tr("break page"));
 
             Spacer* spacer = new Spacer(gscore);
             spacer->setSpace(Spatium(3));
-            sp->addObject(2, spacer, tr("staff spacer"));
+            sp->append(spacer, tr("staff spacer"));
 
             paletteBox->addPalette(tr("Breaks/Spacer"), sp);
 
@@ -583,27 +583,27 @@ void MuseScore::showPalette(bool visible)
             ik = new Icon(gscore);
             ik->setSubtype(ICON_SBEAM);
             ik->setAction(getAction("beam-start"));
-            sp->addObject(0,  ik, tr("start beam"));
+            sp->append(ik, tr("start beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_MBEAM);
             ik->setAction(getAction("beam-mid"));
-            sp->addObject(1,  ik, tr("middle of beam"));
+            sp->append(ik, tr("middle of beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_NBEAM);
             ik->setAction(getAction("no-beam"));
-            sp->addObject(2,  ik, tr("no beam"));
+            sp->append(ik, tr("no beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_BEAM32);
             ik->setAction(getAction("beam32"));
-            sp->addObject(3,  ik, tr("start subbeam"));
+            sp->append(ik, tr("start subbeam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_AUTOBEAM);
             ik->setAction(getAction("auto-beam"));
-            sp->addObject(3,  ik, tr("auto beam"));
+            sp->append(ik, tr("auto beam"));
 
             paletteBox->addPalette(tr("Beam Properties"), sp);
 
@@ -615,164 +615,164 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette();
             sp->setGrid(42, 45);
             sp->setDrawGrid(true);
-            sp->addObject(0, wholerestSym);
-            sp->addObject(1, halfrestSym);
-            sp->addObject(2, outsidewholerestSym);
-            sp->addObject(3, outsidehalfrestSym);
-            sp->addObject(4, longarestSym);
-            sp->addObject(5, breverestSym);
-            sp->addObject(6, quartrestSym);
-            sp->addObject(7, eighthrestSym);
-            sp->addObject(8, clasquartrestSym);
-            sp->addObject(9, sixteenthrestSym);
-            sp->addObject(10, thirtysecondrestSym);
-            sp->addObject(11, sixtyfourthrestSym);
-            sp->addObject(12, hundredtwentyeighthrestSym);
-            sp->addObject(16, zeroSym);
-            sp->addObject(17, oneSym);
-            sp->addObject(18, twoSym);
-            sp->addObject(19, threeSym);
-            sp->addObject(20, fourSym);
-            sp->addObject(21, fiveSym);
-            sp->addObject(22, sixSym);
-            sp->addObject(23, sevenSym);
-            sp->addObject(24, eightSym);
-            sp->addObject(25, nineSym);
-            sp->addObject(31, sharpSym);
-            sp->addObject(32, naturalSym);
-            sp->addObject(33, flatSym);
-            sp->addObject(34, flatflatSym);
-            sp->addObject(35, sharpsharpSym);
-            sp->addObject(36, rightparenSym);
-            sp->addObject(37, leftparenSym);
-            sp->addObject(38, dotSym);
-            sp->addObject(39, brevisheadSym);
-            sp->addObject(40, wholeheadSym);
-            sp->addObject(41, halfheadSym);
-            sp->addObject(42, quartheadSym);
-            sp->addObject(43, wholediamondheadSym);
-            sp->addObject(44, halfdiamondheadSym);
-            sp->addObject(45, diamondheadSym);
-            sp->addObject(46, wholetriangleheadSym);
-            sp->addObject(47, halftriangleheadSym);
-            sp->addObject(48, triangleheadSym);
-            sp->addObject(49, wholeslashheadSym);
-            sp->addObject(50, halfslashheadSym);
-            sp->addObject(51, quartslashheadSym);
-            sp->addObject(52, wholecrossedheadSym);
-            sp->addObject(53, halfcrossedheadSym);
-            sp->addObject(54, crossedheadSym);
-            sp->addObject(55, xcircledheadSym);
+            sp->append(wholerestSym);
+            sp->append(halfrestSym);
+            sp->append(outsidewholerestSym);
+            sp->append(outsidehalfrestSym);
+            sp->append(longarestSym);
+            sp->append(breverestSym);
+            sp->append(quartrestSym);
+            sp->append(eighthrestSym);
+            sp->append(clasquartrestSym);
+            sp->append(sixteenthrestSym);
+            sp->append(thirtysecondrestSym);
+            sp->append(sixtyfourthrestSym);
+            sp->append(hundredtwentyeighthrestSym);
+            sp->append(zeroSym);
+            sp->append(oneSym);
+            sp->append(twoSym);
+            sp->append(threeSym);
+            sp->append(fourSym);
+            sp->append(fiveSym);
+            sp->append(sixSym);
+            sp->append(sevenSym);
+            sp->append(eightSym);
+            sp->append(nineSym);
+            sp->append(sharpSym);
+            sp->append(naturalSym);
+            sp->append(flatSym);
+            sp->append(flatflatSym);
+            sp->append(sharpsharpSym);
+            sp->append(rightparenSym);
+            sp->append(leftparenSym);
+            sp->append(dotSym);
+            sp->append(brevisheadSym);
+            sp->append(wholeheadSym);
+            sp->append(halfheadSym);
+            sp->append(quartheadSym);
+            sp->append(wholediamondheadSym);
+            sp->append(halfdiamondheadSym);
+            sp->append(diamondheadSym);
+            sp->append(wholetriangleheadSym);
+            sp->append(halftriangleheadSym);
+            sp->append(triangleheadSym);
+            sp->append(wholeslashheadSym);
+            sp->append(halfslashheadSym);
+            sp->append(quartslashheadSym);
+            sp->append(wholecrossedheadSym);
+            sp->append(halfcrossedheadSym);
+            sp->append(crossedheadSym);
+            sp->append(xcircledheadSym);
 
-            sp->addObject(57, ufermataSym);
-            sp->addObject(58, dfermataSym);
-            sp->addObject(59, thumbSym);
-            sp->addObject(60, sforzatoaccentSym);
-            sp->addObject(61, staccatoSym);
-            sp->addObject(62, ustaccatissimoSym);
-            sp->addObject(63, dstaccatissimoSym);
-            sp->addObject(64, tenutoSym);
-            sp->addObject(65, uportatoSym);
-            sp->addObject(66, dportatoSym);
-            sp->addObject(67, umarcatoSym);
-            sp->addObject(68, dmarcatoSym);
-            sp->addObject(69, ouvertSym);
-            sp->addObject(70, plusstopSym);
-            sp->addObject(71, upbowSym);
-            sp->addObject(72, downbowSym);
-            sp->addObject(73, reverseturnSym);
-            sp->addObject(74, turnSym);
-            sp->addObject(75, trillSym);
-            sp->addObject(76, upedalheelSym);
-            sp->addObject(77, dpedalheelSym);
-            sp->addObject(78, upedaltoeSym);
-            sp->addObject(79, dpedaltoeSym);
-            sp->addObject(80, flageoletSym);
-            sp->addObject(81, segnoSym);
-            sp->addObject(82, codaSym);
-            sp->addObject(83, rcommaSym);
-            sp->addObject(84, lcommaSym);
-            sp->addObject(85, arpeggioSym);
-            sp->addObject(86, trillelementSym);
-            sp->addObject(87, arpeggioarrowdownSym);
-            sp->addObject(88, arpeggioarrowupSym);
-            sp->addObject(89, trilelementSym);
-            sp->addObject(90, prallSym);
-            sp->addObject(91, mordentSym);
-            sp->addObject(92, prallprallSym);
-            sp->addObject(93, prallmordentSym);
-            sp->addObject(94, upprallSym);
-            sp->addObject(95, downprallSym);
-            sp->addObject(96, upmordentSym);
-            sp->addObject(97, downmordentSym);
-            sp->addObject(98, lineprallSym);
-            sp->addObject(99, pralldownSym);
-            sp->addObject(101, prallupSym);
-            sp->addObject(102, eighthflagSym);
-            sp->addObject(103, sixteenthflagSym);
-            sp->addObject(104, thirtysecondflagSym);
-            sp->addObject(105, sixtyfourthflagSym);
-            sp->addObject(106, deighthflagSym);
-            sp->addObject(107, gracedashSym);
-            sp->addObject(108, dgracedashSym);
-            sp->addObject(109, dsixteenthflagSym);
-            sp->addObject(110, dthirtysecondflagSym);
-            sp->addObject(111, dsixtyfourthflagSym);
-            sp->addObject(112, stemSym);
-            sp->addObject(113, dstemSym);
-            sp->addObject(114, altoclefSym);
-            sp->addObject(115, caltoclefSym);
-            sp->addObject(116, bassclefSym);
-            sp->addObject(117, cbassclefSym);
-            sp->addObject(118, trebleclefSym);
-            sp->addObject(119, ctrebleclefSym);
-            sp->addObject(120, percussionclefSym);
-            sp->addObject(121, cpercussionclefSym);
-            sp->addObject(122, tabclefSym);
-            sp->addObject(123, ctabclefSym);
-            sp->addObject(124, fourfourmeterSym);
-            sp->addObject(125, allabreveSym);
-            sp->addObject(126, pedalasteriskSym);
-            sp->addObject(127, pedaldashSym);
-            sp->addObject(128, pedaldotSym);
-            sp->addObject(129, pedalPSym);
-            sp->addObject(130, pedaldSym);
-            sp->addObject(131, pedaleSym);
-            sp->addObject(132, pedalPedSym);
-            sp->addObject(133, accDiscantSym);
-            sp->addObject(134, accDotSym);
-            sp->addObject(135, accFreebaseSym);
-            sp->addObject(136, accStdbaseSym);
-            sp->addObject(137, accBayanbaseSym);
-            sp->addObject(138, accSBSym);
-            sp->addObject(139, accBBSym);
-            sp->addObject(140, accOldEESym);
-            sp->addObject(141, accOldEESSym);
-            sp->addObject(142, wholedoheadSym);
-            sp->addObject(143, halfdoheadSym);
-            sp->addObject(144, doheadSym);
-            sp->addObject(145, wholereheadSym);
-            sp->addObject(146, halfreheadSym);
-            sp->addObject(147, reheadSym);
-            sp->addObject(148, wholemeheadSym);
-            sp->addObject(149, halfmeheadSym);
-            sp->addObject(150, meheadSym);
-            sp->addObject(151, wholefaheadSym);
-            sp->addObject(152, halffauheadSym);
-            sp->addObject(152, fauheadSym);
-            sp->addObject(153, halffadheadSym);
-            sp->addObject(154, fadheadSym);
-            sp->addObject(155, wholelaheadSym);
-            sp->addObject(156, halflaheadSym);
-            sp->addObject(157, laheadSym);
-            sp->addObject(158, wholeteheadSym);
-            sp->addObject(159, halfteheadSym);
-            sp->addObject(160, letterfSym);
-            sp->addObject(161, lettermSym);
-            sp->addObject(162, letterpSym);
-            sp->addObject(163, letterrSym);
-            sp->addObject(164, lettersSym);
-            sp->addObject(165, letterzSym);
+            sp->append(ufermataSym);
+            sp->append(dfermataSym);
+            sp->append(thumbSym);
+            sp->append(sforzatoaccentSym);
+            sp->append(staccatoSym);
+            sp->append(ustaccatissimoSym);
+            sp->append(dstaccatissimoSym);
+            sp->append(tenutoSym);
+            sp->append(uportatoSym);
+            sp->append(dportatoSym);
+            sp->append(umarcatoSym);
+            sp->append(dmarcatoSym);
+            sp->append(ouvertSym);
+            sp->append(plusstopSym);
+            sp->append(upbowSym);
+            sp->append(downbowSym);
+            sp->append(reverseturnSym);
+            sp->append(turnSym);
+            sp->append(trillSym);
+            sp->append(upedalheelSym);
+            sp->append(dpedalheelSym);
+            sp->append(upedaltoeSym);
+            sp->append(dpedaltoeSym);
+            sp->append(flageoletSym);
+            sp->append(segnoSym);
+            sp->append(codaSym);
+            sp->append(rcommaSym);
+            sp->append(lcommaSym);
+            sp->append(arpeggioSym);
+            sp->append(trillelementSym);
+            sp->append(arpeggioarrowdownSym);
+            sp->append(arpeggioarrowupSym);
+            sp->append(trilelementSym);
+            sp->append(prallSym);
+            sp->append(mordentSym);
+            sp->append(prallprallSym);
+            sp->append(prallmordentSym);
+            sp->append(upprallSym);
+            sp->append(downprallSym);
+            sp->append(upmordentSym);
+            sp->append(downmordentSym);
+            sp->append(lineprallSym);
+            sp->append(pralldownSym);
+            sp->append(prallupSym);
+            sp->append(eighthflagSym);
+            sp->append(sixteenthflagSym);
+            sp->append(thirtysecondflagSym);
+            sp->append(sixtyfourthflagSym);
+            sp->append(deighthflagSym);
+            sp->append(gracedashSym);
+            sp->append(dgracedashSym);
+            sp->append(dsixteenthflagSym);
+            sp->append(dthirtysecondflagSym);
+            sp->append(dsixtyfourthflagSym);
+            sp->append(stemSym);
+            sp->append(dstemSym);
+            sp->append(altoclefSym);
+            sp->append(caltoclefSym);
+            sp->append(bassclefSym);
+            sp->append(cbassclefSym);
+            sp->append(trebleclefSym);
+            sp->append(ctrebleclefSym);
+            sp->append(percussionclefSym);
+            sp->append(cpercussionclefSym);
+            sp->append(tabclefSym);
+            sp->append(ctabclefSym);
+            sp->append(fourfourmeterSym);
+            sp->append(allabreveSym);
+            sp->append(pedalasteriskSym);
+            sp->append(pedaldashSym);
+            sp->append(pedaldotSym);
+            sp->append(pedalPSym);
+            sp->append(pedaldSym);
+            sp->append(pedaleSym);
+            sp->append(pedalPedSym);
+            sp->append(accDiscantSym);
+            sp->append(accDotSym);
+            sp->append(accFreebaseSym);
+            sp->append(accStdbaseSym);
+            sp->append(accBayanbaseSym);
+            sp->append(accSBSym);
+            sp->append(accBBSym);
+            sp->append(accOldEESym);
+            sp->append(accOldEESSym);
+            sp->append(wholedoheadSym);
+            sp->append(halfdoheadSym);
+            sp->append(doheadSym);
+            sp->append(wholereheadSym);
+            sp->append(halfreheadSym);
+            sp->append(reheadSym);
+            sp->append(wholemeheadSym);
+            sp->append(halfmeheadSym);
+            sp->append(meheadSym);
+            sp->append(wholefaheadSym);
+            sp->append(halffauheadSym);
+            sp->append(fauheadSym);
+            sp->append(halffadheadSym);
+            sp->append(fadheadSym);
+            sp->append(wholelaheadSym);
+            sp->append(halflaheadSym);
+            sp->append(laheadSym);
+            sp->append(wholeteheadSym);
+            sp->append(halfteheadSym);
+            sp->append(letterfSym);
+            sp->append(lettermSym);
+            sp->append(letterpSym);
+            sp->append(letterrSym);
+            sp->append(lettersSym);
+            sp->append(letterzSym);
             paletteBox->addPalette(tr("Symbols"), sp);
             }
       paletteBox->setShown(visible);
@@ -858,7 +858,7 @@ void MuseScore::clefMenu()
             sp->showStaff(true);
             for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->addObject(i,  k, tr(clefTable[i].name));
+                  sp->append(k, tr(clefTable[i].name));
                   }
             }
       clefPalette->show();
@@ -881,19 +881,19 @@ void MuseScore::keyMenu()
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->addObject(i * 2,  k, keyNames[i*2]);
+                  sp->append(k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->addObject((7 + i) * 2 + 1,  k, keyNames[(7 + i) * 2 + 1]);
+                  sp->append(k, keyNames[(7 + i) * 2 + 1]);
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->addObject(14,  k, keyNames[14]);
+            sp->append(k, keyNames[14]);
             k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->addObject(15,  k, keyNames[14]);
+            sp->append(k, keyNames[14]);
             }
       keyPalette->show();
       keyPalette->raise();
@@ -929,12 +929,12 @@ void MuseScore::lineMenu()
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
-            sp->addObject(gabel0, tr("crescendo"));
+            sp->append(gabel0, tr("crescendo"));
 
             Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
             gabel1->setLen(l);
-            sp->addObject(gabel1, tr("diminuendo"));
+            sp->append(gabel1, tr("diminuendo"));
 
             Volta* volta = new Volta(gscore);
             volta->setLen(l);
@@ -945,7 +945,7 @@ void MuseScore::lineMenu()
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
 
-            sp->addObject(volta, tr("prima volta"));
+            sp->append(volta, tr("prima volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -954,7 +954,7 @@ void MuseScore::lineMenu()
             il.append(2);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
-            sp->addObject(volta, tr("seconda volta"));
+            sp->append(volta, tr("seconda volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -963,7 +963,7 @@ void MuseScore::lineMenu()
             il.append(3);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_CLOSED);
-            sp->addObject(volta, tr("terza volta"));
+            sp->append(volta, tr("terza volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
@@ -972,50 +972,50 @@ void MuseScore::lineMenu()
             il.append(2);
             volta->setEndings(il);
             volta->setSubtype(Volta::VOLTA_OPEN);
-            sp->addObject(volta, tr("seconda volta"));
+            sp->append(volta, tr("seconda volta"));
 
             //--------
 
             Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
             ottava->setLen(l);
-            sp->addObject(ottava, tr("8va"));
+            sp->append(ottava, tr("8va"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
-            sp->addObject(ottava, tr("15ma"));
+            sp->append(ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
             ottava->setLen(l);
-            sp->addObject(ottava, tr("8vb"));
+            sp->append(ottava, tr("8vb"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
-            sp->addObject(ottava, tr("15mb"));
+            sp->append(ottava, tr("15mb"));
 
             //-------
 
             Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
-            sp->addObject(pedal, tr("pedal"));
+            sp->append(pedal, tr("pedal"));
 
             Trill* trill = new Trill(gscore);
             trill->setLen(l);
-            sp->addObject(trill, tr("trill line"));
+            sp->append(trill, tr("trill line"));
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setText("VII");
             textLine->setLen(l);
-            sp->addObject(textLine, tr("text line"));
+            sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
             line->setLen(l);
             line->setHasText(false);
             line->setHook(false);
-            sp->addObject(line, tr("line"));
+            sp->append(line, tr("line"));
             }
       linePalette->show();
       linePalette->raise();
@@ -1041,8 +1041,8 @@ void MuseScore::bracketMenu()
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
 
-            sp->addObject(0, b1, "Bracket");
-            sp->addObject(1, b2, "Akkolade");
+            sp->append(b1, "Bracket");
+            sp->append(b2, "Akkolade");
 
             }
       bracketPalette->show();
@@ -1066,7 +1066,7 @@ void MuseScore::noteAttributesMenu()
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
-                  sp->addObject(i, s, s->subtypeName());
+                  sp->append(s, s->subtypeName());
                   }
             }
       noteAttributesPalette->show();
@@ -1089,7 +1089,7 @@ void MuseScore::accidentalsMenu()
             for (int i = 0; i < 16; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->addObject(i, s, s->name());
+                  sp->append(s, s->name());
                   }
             }
       accidentalsPalette->show();
@@ -1112,7 +1112,7 @@ void MuseScore::dynamicsMenu()
             for (int i = 0; i < 27; ++i) {
                   Dynamic* dynamic = new Dynamic(gscore);
                   dynamic->setSubtype(i + 1);
-                  sp->addObject(i, dynamic, dynamic->subtypeName());
+                  sp->append(dynamic, dynamic->subtypeName());
                   }
 
             const char* expr[] = {
@@ -1123,7 +1123,7 @@ void MuseScore::dynamicsMenu()
                   Dynamic* d = new Dynamic(gscore);
                   d->setSubtype(0);
                   d->setText(expr[i]);
-                  sp->addObject(27+i, d,  expr[i]);
+                  sp->append(d,  expr[i]);
                   }
             }
       dynamicsPalette->show();
@@ -1160,7 +1160,7 @@ void MuseScore::barMenu()
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
-                  sp->addObject(i,  b, t[i].name);
+                  sp->append(b, t[i].name);
                   }
             }
       barPalette->show();
@@ -1187,7 +1187,7 @@ void MuseScore::fingeringMenu()
                   k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
-                  sp->addObject(i, k, QString("fingering %1").arg(finger[i]));
+                  sp->append(k, QString("fingering %1").arg(finger[i]));
                   }
             }
       fingeringPalette->show();
@@ -1245,10 +1245,10 @@ void MuseScore::showLayoutBreakPalette()
             sp->setGrid(80, 80);
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
-            sp->addObject(0, lb, tr("break line"));
+            sp->append(lb, tr("break line"));
             lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_PAGE);
-            sp->addObject(1, lb, tr("break page"));
+            sp->append(lb, tr("break page"));
             }
       layoutBreakPalette->show();
       layoutBreakPalette->raise();
@@ -1307,7 +1307,7 @@ void MuseScore::updateDrumset()
                         stem->setLen(Spatium(up ? -3.0 : 3.0));
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
-                        drumPalette->addObject(i,  chord, drumset->name(pitch));
+                        drumPalette->append(chord, drumset->name(pitch));
                         ++i;
                         }
                   }

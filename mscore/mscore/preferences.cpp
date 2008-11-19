@@ -132,7 +132,6 @@ void Preferences::init()
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/demo.msc";
-      imagePath                = "~/mscore/images";
       workingDirectory         = ".";
       lastSaveDirectory        = ".";
       lastSaveCopyDirectory    = ".";
@@ -228,7 +227,6 @@ void Preferences::write()
             case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
             }
       s.setValue("startScore",         startScore);
-      s.setValue("imagePath",          imagePath);
       s.setValue("workingDirectory",   workingDirectory);
       s.setValue("lastSaveDirectory",  lastSaveDirectory);
       s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
@@ -320,7 +318,6 @@ void Preferences::read()
       portaudioDevice    = s.value("portaudioDevice", -1).toInt();
       layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
-      imagePath          = s.value("imagePath", "~/mscore/images").toString();
       workingDirectory   = s.value("workingDirectory", ".").toString();
       lastSaveDirectory  = s.value("lastSaveDirectory", ".").toString();
       lastSaveCopyDirectory    = s.value("lastSaveCopyDirectory", ".").toString();
@@ -418,7 +415,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(imagePathButton,        SIGNAL(clicked()), SLOT(selectImagePath()));
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
@@ -513,7 +509,6 @@ void PreferenceDialog::updateValues(Preferences* p)
             case SCORE_SESSION:  scoreSession->setChecked(true); break;
             }
       sessionScore->setText(p->startScore);
-      imagePath->setText(p->imagePath);
       workingDirectory->setText(p->workingDirectory);
       showSplashScreen->setChecked(p->showSplashScreen);
       expandRepeats->setChecked(p->midiExpandRepeats);
@@ -745,21 +740,6 @@ void PreferenceDialog::selectSoundFont()
       }
 
 //---------------------------------------------------------
-//   selectImagePath
-//---------------------------------------------------------
-
-void PreferenceDialog::selectImagePath()
-      {
-      QString s = QFileDialog::getExistingDirectory(
-         this,
-         tr("Choose Image Path"),
-         imagePath->text()
-         );
-      if (!s.isNull())
-            imagePath->setText(s);
-      }
-
-//---------------------------------------------------------
 //   selectWorkingDirectory
 //---------------------------------------------------------
 
@@ -902,7 +882,6 @@ void PreferenceDialog::apply()
       else if (emptySession->isChecked())
             preferences.sessionStart = EMPTY_SESSION;
       preferences.startScore         = sessionScore->text();
-      preferences.imagePath          = imagePath->text();
       preferences.workingDirectory   = workingDirectory->text();
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();

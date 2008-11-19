@@ -1846,6 +1846,10 @@ void Score::setState(int s)
       _state = s;
       }
 
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
 void Score::setMag(double d)
       {
       _magIdx = MAG_FREE;
@@ -1853,12 +1857,20 @@ void Score::setMag(double d)
       canvas()->setMag(_mag);
       }
 
+//---------------------------------------------------------
+//   setMagIdx
+//---------------------------------------------------------
+
 void Score::setMagIdx(int idx)
       {
       _magIdx = idx;
       double mag = mscore->getMag(canvas());
       canvas()->setMag(mag);
       }
+
+//---------------------------------------------------------
+//   checkHasMeasures
+//---------------------------------------------------------
 
 bool Score::checkHasMeasures() const
       {
@@ -1869,5 +1881,49 @@ bool Score::checkHasMeasures() const
             return false;
             }
       return true;
+      }
+
+//---------------------------------------------------------
+//   ImagePath
+//---------------------------------------------------------
+
+ImagePath::ImagePath(const QString& p)
+   : _path(p), _references(0), _loaded(false)
+      {
+      }
+
+//---------------------------------------------------------
+//   addImage
+//---------------------------------------------------------
+
+ImagePath* Score::addImage(const QString& s)
+      {
+      foreach(ImagePath* p, imagePathList) {
+            if (p->path() == s)
+                  return p;
+            }
+      ImagePath* p = new ImagePath(s);
+      imagePathList.append(p);
+      return p;
+      }
+
+//---------------------------------------------------------
+//   dereference
+//    decrement usage count of image in score
+//---------------------------------------------------------
+
+void ImagePath::dereference()
+      {
+      --_references;
+      }
+
+//---------------------------------------------------------
+//   reference
+//    increment usage count of image in score
+//---------------------------------------------------------
+
+void ImagePath::reference()
+      {
+      ++_references;
       }
 

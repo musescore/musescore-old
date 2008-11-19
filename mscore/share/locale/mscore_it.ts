@@ -3745,10 +3745,6 @@ fallito: </translation>
         <translation>Doppio Punto</translation>
     </message>
     <message>
-        <source>Inspector...</source>
-        <translation>Ispezione Oggetto...</translation>
-    </message>
-    <message>
         <source>4/4 common time</source>
         <translation>4/4 Tempo comune</translation>
     </message>
@@ -4442,6 +4438,18 @@ Desideri Salvare lo Spartito?</translation>
         <source>reset positions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4887,10 +4895,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Campioni Sinori (*.sf2 *.SF2);;All (*)</translation>
     </message>
     <message>
-        <source>Choose Image Path</source>
-        <translation>Scegli il Percorso dell&apos;Immagine</translation>
-    </message>
-    <message>
         <source>Normal State</source>
         <translation>Modifica</translation>
     </message>
@@ -5142,10 +5146,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Percorsi</translation>
     </message>
     <message>
-        <source>Image Path:</source>
-        <translation>Percorso Immagine:</translation>
-    </message>
-    <message>
         <source>is active</source>
         <translation>è attivo</translation>
     </message>
@@ -5391,6 +5391,30 @@ Desideri Salvare lo Spartito?</translation>
     </message>
     <message>
         <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Testo</translation>
+    </message>
+    <message>
+        <source>Autocorrection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

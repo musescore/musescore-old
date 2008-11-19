@@ -26,9 +26,6 @@
 class Palette;
 class Element;
 
-extern Palette* symbolPalette;
-extern void createSymbolPalette();
-
 //---------------------------------------------------------
 //   SymbolDialog
 //---------------------------------------------------------
@@ -37,6 +34,7 @@ class SymbolDialog : public QWidget, Ui::SymbolDialogBase {
       Q_OBJECT
 
       Palette* sp;
+      void createSymbolPalette();
 
    private slots:
       void elementDropped(Element*);

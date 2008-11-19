@@ -3807,10 +3807,6 @@ Sauver cette partition ? </translation>
         <translation>Voix</translation>
     </message>
     <message>
-        <source>Inspector...</source>
-        <translation>Inspecteur d&apos;objets...</translation>
-    </message>
-    <message>
         <source>Preferences...</source>
         <translation>Préférences...</translation>
     </message>
@@ -4434,6 +4430,18 @@ Sauver cette partition ? </translation>
         <source>reset positions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4887,10 +4895,6 @@ Sauver cette partition ? </translation>
         <translation>Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
     </message>
     <message>
-        <source>Choose Image Path</source>
-        <translation>Choisir le chemin de l&apos;image</translation>
-    </message>
-    <message>
         <source>Choose WorkingDirectory</source>
         <translation>Choisir un répertoire de travail</translation>
     </message>
@@ -4952,10 +4956,6 @@ Sauver cette partition ? </translation>
     <message>
         <source>Paths</source>
         <translation>Chemins</translation>
-    </message>
-    <message>
-        <source>Image Path:</source>
-        <translation>Chemin de l&apos;image :</translation>
     </message>
     <message>
         <source>Instrument List:</source>
@@ -5383,6 +5383,30 @@ Sauver cette partition ? </translation>
     </message>
     <message>
         <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Texte</translation>
+    </message>
+    <message>
+        <source>Autocorrection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
