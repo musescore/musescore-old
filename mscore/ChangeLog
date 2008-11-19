@@ -1,4 +1,6 @@
-19.nov (sy)
+19.nov (ws)
+      - fixed crash when entering intervals ([Alt]+<number>)
+      (sy)
       - implement opening files by drag & drop onto main window
 18.nov (ws)
       - better layout of displaced note heads (test3.msc)
