@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <Mag>1</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+  <Mag>1.07558</Mag>
+  <xoff>36.1237</xoff>
+  <yoff>-20.0242</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -102,12 +102,6 @@
       <bracket type="-1" span="2"/>
       </Staff>
     <trackName>Violin</trackName>
-    <shortName>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">V1n.</p></body></html>
-      </shortName>
     <Instrument>
       <Channel>
         <program value="40"/>
@@ -160,7 +154,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <BarLine/>
       </Measure>
-    <Measure number="1">
+    <Measure number="2">
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
@@ -179,7 +173,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <BarLine/>
       </Measure>
-    <Measure number="1">
+    <Measure number="3">
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
@@ -203,7 +197,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <BarLine/>
       </Measure>
-    <Measure number="1">
+    <Measure number="4">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
@@ -224,10 +222,279 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <BarLine>
-        <subtype>5</subtype>
-        </BarLine>
+      <BarLine/>
+      </Measure>
+    <Measure number="5">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>8160</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="75" tpc="23"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>9120</tick>
+          </Glissando>
+        </Chord>
+      <BarLine/>
+      </Measure>
+    <Measure number="6">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="77" tpc="13"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>10080</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>11040</tick>
+          </Glissando>
+        </Chord>
+      <BarLine/>
+      </Measure>
+    <Measure number="7">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>12000</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>12960</tick>
+          </Glissando>
+        </Chord>
+      <BarLine/>
+      </Measure>
+    <Measure number="8">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="89" tpc="13"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>9840</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="89" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="79" tpc="15"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>10560</tick>
+          </Glissando>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <BarLine/>
+      </Measure>
+    <Measure number="9">
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="88" tpc="18"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>9840</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="88" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="79" tpc="15"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>10560</tick>
+          </Glissando>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="10">
+      <Beam id="1">
+        </Beam>
+      <Chord>
+        <ticklen>360</ticklen>
+        <dots>1</dots>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="83" tpc="19"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>9840</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>360</ticklen>
+        <dots>1</dots>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <Note pitch="83" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="79" tpc="15"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>9840</tick>
+          </Glissando>
+        </Chord>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="11">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
+      <Rest>
+        <ticklen>960</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="12">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <track>-1</track>
+        </Text>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <ticklen>960</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Chord>
+        <ticklen>240</ticklen>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <tick>23040</tick>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>23040</tick>
+          </Glissando>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <acciaccatura/>
+        <StemDirection>up</StemDirection>
+        <Note pitch="84" tpc="14"/>
+        </Chord>
+      <Chord>
+        <tick>23520</tick>
+        <ticklen>480</ticklen>
+        <Note pitch="76" tpc="18"/>
+        <Glissando>
+          <text>gliss.</text>
+          <tick>23520</tick>
+          </Glissando>
+        </Chord>
+      <Rest>
+        <ticklen>960</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="14">
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="15">
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
