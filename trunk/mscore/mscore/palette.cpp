@@ -366,17 +366,20 @@ void Palette::paintEvent(QPaintEvent*)
       // draw symbols
       //
 
-      QPen pen(QColor(Qt::black));
+      QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
       pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM * extraMag);
 
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
             if (idx == selectedIdx) {
+                  p.fillRect(r, palette().brush(QPalette::Normal, QPalette::Highlight).color());
+#if 0
                   if (idx == currentIdx)
                         p.fillRect(r, QColor(220, 220, 200));
                   else
                         p.fillRect(r, QColor(200, 200, 180));
+#endif
                   }
             else if (idx == currentIdx)
                   p.fillRect(r, p.background().color().light(118));
@@ -426,7 +429,10 @@ void Palette::paintEvent(QPaintEvent*)
                   foreach(const Element* e, elist) {
                         p.save();
                         p.translate(e->pos());
-                        p.setPen(QPen(e->curColor()));
+                        if (idx == selectedIdx)
+                              p.setPen(QPen(palette().brush(QPalette::Normal, QPalette::HighlightedText).color()));
+                        else
+                              p.setPen(QPen(palette().brush(QPalette::Normal, QPalette::Text).color()));
                         e->draw(p);
                         p.restore();
                         }
@@ -728,13 +734,17 @@ void Palette::clear()
 //---------------------------------------------------------
 
 PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
-   : QPushButton(parent)
+   : QToolButton(parent)
       {
       setCheckable(true);
-//      setFlat(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
       setFixedHeight(QFontMetrics(font()).height() + 2);
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+      QMenu* menu = new QMenu;
+      QAction* action = menu->addAction(tr("Delete Palette"));
+      setMenu(menu);
+      connect(action, SIGNAL(triggered()), SLOT(deleteTriggered()));
       }
 
 //---------------------------------------------------------
@@ -753,7 +763,7 @@ void PaletteBoxButton::changeEvent(QEvent* ev)
 
 void PaletteBoxButton::paintEvent(QPaintEvent* e)
       {
-      QPushButton::paintEvent(e);
+      QToolButton::paintEvent(e);
       }
 
 //---------------------------------------------------------
@@ -821,13 +831,35 @@ int Palette::resizeWidth(int w)
 void PaletteBox::addPalette(const QString& s, QWidget* w)
       {
       PaletteScrollArea* sa = new PaletteScrollArea(w);
+      PaletteBoxButton* b   = new PaletteBoxButton(sa);
+
       sa->setVisible(false);
-      PaletteBoxButton* b = new PaletteBoxButton(sa);
       b->setText(s);
-      int slot = widgets.size() * 2;
-      vbox->insertWidget(slot, b);
-      vbox->insertWidget(slot+1, sa, 1000);
-      widgets.append(w);
+      int slotIdx = vbox->count() - 1;
+      vbox->insertWidget(slotIdx, b);
+      vbox->insertWidget(slotIdx+1, sa, 1000);
+      b->setId(slotIdx);
+      connect(b, SIGNAL(deletePalette(int)), SLOT(deletePalette(int)));
+      }
+
+//---------------------------------------------------------
+//   deletePalette
+//---------------------------------------------------------
+
+void PaletteBox::deletePalette(int slot)
+      {
+      QLayoutItem* item = vbox->itemAt(slot);
+      vbox->removeItem(item);
+      item->widget()->deleteLater();      // this is the button widget
+      delete item;
+      item = vbox->itemAt(slot);
+      vbox->removeItem(item);
+      delete item->widget();
+      delete item;
+
+      for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+            static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+      dirty = true;
       }
 
 //---------------------------------------------------------

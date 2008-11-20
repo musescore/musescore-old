@@ -47,7 +47,7 @@ TextBase::TextBase()
 
       _frameWidth   = 0.0;
       _paddingWidth = 0.0;
-      _frameColor   = QColor(Qt::black);
+      _frameColor   = preferences.defaultColor;
       _frameRound   = 25;
       _circle       = false;
 
@@ -145,7 +145,7 @@ void TextBase::writeProperties(Xml& xml) const
             xml.tag("frameWidth", _frameWidth);
       if (_paddingWidth != 0.0)
             xml.tag("paddingWidth", _paddingWidth);
-      if (_frameColor != QColor(Qt::black))
+      if (_frameColor != preferences.defaultColor)
             xml.tag("frameColor", _frameColor);
       if (_frameRound != 25)
             xml.tag("frameRound", _frameRound);

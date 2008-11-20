@@ -153,7 +153,7 @@ void Element::init()
       _visible    = true;
       _generated  = false;
       _track      = -1;
-      _color      = Qt::black;
+      _color      = preferences.defaultColor;
       _mxmlOff    = 0;
       _pos.setX(0.0);
       _pos.setY(0.0);
@@ -227,16 +227,19 @@ Staff* Element::staff() const
 
 QColor Element::curColor() const
       {
+      // the default element color is always interpreted as black in
+      // printing
       if (score() && score()->printing())
-            return _color;
+            return (_color == preferences.defaultColor) ? Qt::black : _color;
+
+      if (_dropTarget)
+            return preferences.dropColor;
       if (_selected) {
             if (track() == -1)
                   return preferences.selectColor[0];
             else
                   return preferences.selectColor[voice()];
             }
-      if (_dropTarget)
-            return preferences.dropColor;
       if (!_visible)
             return Qt::gray;
       return _color;
@@ -387,7 +390,7 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("tick", _tick));
       if (_duration != -1)
             pl.append(Prop("ticklen", _duration));
-      if (_color != Qt::black)
+      if (_color != preferences.defaultColor)
             pl.append(Prop("color", _color));
       if (_systemFlag)
             pl.append(Prop("systemFlag", _systemFlag));
@@ -436,12 +439,8 @@ bool Element::readProperties(QDomElement e)
             setTrack(i);
       else if (tag == "selected")
             setSelected(i);
-      else if (tag == "color") {
-            int r = e.attribute("r", "0").toInt();
-            int g = e.attribute("g", "0").toInt();
-            int b = e.attribute("b", "0").toInt();
-            _color.setRgb(r, g, b);
-            }
+      else if (tag == "color")
+            _color = readColor(e);
       else if (tag == "systemFlag") {
             _systemFlag = i;
             if (_systemFlag)

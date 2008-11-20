@@ -830,9 +830,8 @@ void Chord::layout(ScoreLayout* layout)
                   }
             }
 
-      // LedgerLine does not use layout() method
-      // foreach(LedgerLine* l, _ledgerLines)
-      //      l->layout(layout);
+      foreach(LedgerLine* l, _ledgerLines)
+            l->layout(layout);
 
       //-----------------------------------------
       //  articulation
@@ -1383,8 +1382,8 @@ void Chord::setDuration(Duration t)
 LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
-      setLineWidth(score()->style()->ledgerLineWidth);
-      setLen(Spatium(2));
+      setLineWidth(score()->style()->ledgerLineWidth * mag());
+      setLen(Spatium(2.0) * mag());
       }
 
 //---------------------------------------------------------

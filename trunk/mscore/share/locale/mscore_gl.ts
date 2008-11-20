@@ -4743,6 +4743,13 @@ Gardar esta partitura?</translation>
     </message>
 </context>
 <context>
+    <name>PaletteBoxButton</name>
+    <message>
+        <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
@@ -5122,26 +5129,6 @@ Gardar esta partitura?</translation>
         <translation>Cores</translation>
     </message>
     <message>
-        <source>Selection Color</source>
-        <translation>Cor da selección</translation>
-    </message>
-    <message>
-        <source>Voice 1</source>
-        <translation>Voz 1</translation>
-    </message>
-    <message>
-        <source>Voice 2</source>
-        <translation>Voz 2</translation>
-    </message>
-    <message>
-        <source>Voice 3</source>
-        <translation>Voz 3</translation>
-    </message>
-    <message>
-        <source>Voice 4</source>
-        <translation>Voz 4</translation>
-    </message>
-    <message>
         <source>Note Entry</source>
         <translation>Entrada de notas</translation>
     </message>
@@ -5407,6 +5394,34 @@ Gardar esta partitura?</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score element colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default foreground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

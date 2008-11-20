@@ -1626,7 +1626,10 @@ printf("\n");
                         if (!_irregular && (e->tickLen() == 0)) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
-                              e->setXpos((stretch - s->x() - e->width()) * .5);
+                              if (seg == 1)
+                                    e->setXpos((stretch - e->width()) * .5 - style->barNoteDistance.point());
+                              else
+                                    e->setXpos((stretch - s->x() - e->width()) * .5 - _spatium * .5);
                               }
                         else if (e->voice() == 1) {          // TODO: check ??
                               e->move(0.0, -3 * _spatium);
@@ -1649,8 +1652,10 @@ printf("\n");
                               e->setPos(- e->bbox().x() - xo + point(style->timesigLeftMargin), y);
                         else if (t == KEYSIG)
                               e->setPos(- e->bbox().x() - xo + point(style->keysigLeftMargin), y);
-                        else  if (s->subtype() == Segment::SegEndBarLine)
-                              e->setPos(0.0, y);
+                        else  if (s->subtype() == Segment::SegEndBarLine) {
+                              // align right
+                              e->setPos(width[seg] - e->width(), y);
+                              }
                         else
                               e->setPos(- e->bbox().x() - xo, y);
                         }

@@ -53,6 +53,7 @@ struct Preferences {
       QColor fgColor;
       QColor bgColor;
       QColor selectColor[VOICES];
+      QColor defaultColor;
       QColor dropColor;
       bool enableMidiInput;
       bool playNotes;         // play notes on click

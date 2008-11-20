@@ -1,3 +1,11 @@
+20.nov (ws)
+      - updated dutch translation from Jaap Plaisier
+      - made default color for score elements (black) configurable. On print, this
+        default color is always mapped to black. This should make an inverted color
+        scheme possible (white on black).
+      - fix ledger line paint problem; bounding box was not calculated
+      - proper scale ledger lines in a small staff
+      - better layout for whole measure rests
 19.nov (ws)
       - Save used images (pasted to the score) in *.mscz file.
         Removed "image path" hack. See demo "demos/schnee.mscz".

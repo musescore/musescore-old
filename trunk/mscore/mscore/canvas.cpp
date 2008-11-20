@@ -1253,7 +1253,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
             }
       if (dragElement) {
             p.translate(dragElement->canvasPos());
-            p.setPen(Qt::black);
+            p.setPen(preferences.defaultColor);
             dragElement->draw(p);
             }
       }
@@ -1300,7 +1300,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       if (state == EDIT || state == DRAG_EDIT) {
             qreal lw = 2.0/p.matrix().m11();
             // QPen pen(Qt::blue);
-            QPen pen(Qt::black);
+            QPen pen(preferences.defaultColor);
             pen.setWidthF(lw);
             p.setPen(pen);
             for (int i = 0; i < grips; ++i) {

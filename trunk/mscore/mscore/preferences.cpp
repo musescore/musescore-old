@@ -97,6 +97,8 @@ void Preferences::init()
       selectColor[2] = Qt::yellow;
       selectColor[3] = Qt::magenta;
       dropColor      = Qt::red;
+      defaultColor   = Qt::black;
+
       enableMidiInput    = true;
       playNotes          = true;
 
@@ -198,6 +200,7 @@ void Preferences::write()
       s.setValue("selectColor3",       selectColor[2]);
       s.setValue("selectColor4",       selectColor[3]);
       s.setValue("dropColor",          dropColor);
+      s.setValue("defaultColor",       defaultColor);
       s.setValue("enableMidiInput",    enableMidiInput);
       s.setValue("playNotes",          playNotes);
 
@@ -285,6 +288,9 @@ void Preferences::read()
       selectColor[1]  = s.value("selectColor2", QColor(Qt::green)).value<QColor>();
       selectColor[2]  = s.value("selectColor3", QColor(Qt::yellow)).value<QColor>();
       selectColor[3]  = s.value("selectColor4", QColor(Qt::magenta)).value<QColor>();
+      defaultColor    = s.value("defaultColor", QColor(Qt::black)).value<QColor>();
+      dropColor       = s.value("dropColor",    QColor(Qt::red)).value<QColor>();
+
       enableMidiInput = s.value("enableMidiInput", true).toBool();
       playNotes       = s.value("playNotes", true).toBool();
       lPort           = s.value("lPort").toString();
@@ -449,6 +455,8 @@ void PreferenceDialog::updateValues(Preferences* p)
       selectColorLabel2->setColor(p->selectColor[1]);
       selectColorLabel3->setColor(p->selectColor[2]);
       selectColorLabel4->setColor(p->selectColor[3]);
+      selectColorDefault->setColor(p->defaultColor);
+      selectColorDrop->setColor(p->dropColor);
 
       bgColorButton->setChecked(p->bgUseColor);
       bgWallpaperButton->setChecked(!p->bgUseColor);
@@ -837,6 +845,8 @@ void PreferenceDialog::apply()
       preferences.selectColor[1] = selectColorLabel2->color();
       preferences.selectColor[2] = selectColorLabel3->color();
       preferences.selectColor[3] = selectColorLabel4->color();
+      preferences.dropColor      = selectColorDrop->color();
+      preferences.defaultColor   = selectColorDefault->color();
 
       preferences.cursorBlink = cursorBlink->isChecked();
       preferences.fgWallpaper = fgWallpaper->text();
