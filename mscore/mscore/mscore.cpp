@@ -1662,7 +1662,6 @@ int main(int argc, char* argv[])
       if (mscore->noScore())
             currentScore = -1;
       mscore->setCurrentScore(currentScore);
-      mscore->showNavigator(preferences.showNavigator);
 
       mscore->showPlayPanel(preferences.showPlayPanel);
       if (mscore->getPlayPanel())
