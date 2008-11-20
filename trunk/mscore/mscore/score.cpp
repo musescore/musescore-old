@@ -231,6 +231,8 @@ Score::Score()
 
       _magIdx = MAG_100;
       _mag    = 1.0;
+      _xoff   = 0.0;
+      _yoff   = 0.0;
       _style  = new Style(defaultStyle);
       _layout = new ScoreLayout(this);
 
