@@ -124,9 +124,9 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             Palette* sp = new Palette(0.8);
-            sp->setGrid(33, 58);
+            sp->setGrid(33, 62);
             sp->showStaff(true);
-            sp->setYOffset(6.0);
+            sp->setYOffset(1.0);
 
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);

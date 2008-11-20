@@ -29,14 +29,23 @@ class Xml;
 //   PaletteBoxButton
 //---------------------------------------------------------
 
-class PaletteBoxButton : public QPushButton {
+class PaletteBoxButton : public QToolButton {
       Q_OBJECT
+
+      int id;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void changeEvent(QEvent*);
 
+   private slots:
+      void deleteTriggered() { emit deletePalette(id); }
+
+   signals:
+      void deletePalette(int);
+
    public:
       PaletteBoxButton(QWidget*, QWidget* parent = 0);
+      void setId(int v) { id = v; }
       };
 
 //---------------------------------------------------------
@@ -46,11 +55,13 @@ class PaletteBoxButton : public QPushButton {
 class PaletteBox : public QDockWidget {
       Q_OBJECT
 
-      QList<QWidget*> widgets;
       QVBoxLayout* vbox;
       bool dirty;
 
       virtual void closeEvent(QCloseEvent*);
+
+   private slots:
+      void deletePalette(int);
 
    signals:
       void paletteVisible(bool);

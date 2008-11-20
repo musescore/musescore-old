@@ -275,25 +275,25 @@ QRectF BarLine::bbox() const
       {
       qreal y1, y2;
       getY(&y1, &y2);
-      Spatium w = score()->style()->barWidth;
+      Spatium w = score()->style()->barWidth * mag();
       qreal dw  = 0.0;
 
       switch(subtype()) {
             case DOUBLE_BAR:
-                  w  = score()->style()->doubleBarWidth * 2 + score()->style()->doubleBarDistance;
+                  w  = (score()->style()->doubleBarWidth * 2 + score()->style()->doubleBarDistance) * mag();
                   dw = point(w);
                   break;
             case START_REPEAT:
             case END_REPEAT:
-                  w  += score()->style()->endBarWidth + 2 * score()->style()->endBarDistance;
+                  w  += (score()->style()->endBarWidth + 2 * score()->style()->endBarDistance) * mag();
                   dw = point(w) + symbols[dotSym].width(mag());
                   break;
             case END_BAR:
-                  w += score()->style()->endBarWidth + score()->style()->endBarDistance;
+                  w += (score()->style()->endBarWidth + score()->style()->endBarDistance) * mag();
                   dw = point(w);
                   break;
             case  END_START_REPEAT:
-                  w  += score()->style()->endBarWidth + 3 * score()->style()->endBarDistance;
+                  w  += (score()->style()->endBarWidth + 3 * score()->style()->endBarDistance) * mag();
                   dw = point(w) + 2 * symbols[dotSym].width(mag());
                   break;
             case BROKEN_BAR:

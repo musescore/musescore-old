@@ -4750,6 +4750,13 @@ Save Current Score?</source>
     </message>
 </context>
 <context>
+    <name>PaletteBoxButton</name>
+    <message>
+        <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
@@ -4967,10 +4974,6 @@ Save Current Score?</source>
     <message>
         <source>Sound Font</source>
         <translation>Sound Font</translation>
-    </message>
-    <message>
-        <source>Voice 1</source>
-        <translation>Голос 1</translation>
     </message>
     <message>
         <source>General</source>
@@ -5213,18 +5216,6 @@ Save Current Score?</source>
         <translation>Альтернативный способ ввода</translation>
     </message>
     <message>
-        <source>Voice 2</source>
-        <translation>Голос 2</translation>
-    </message>
-    <message>
-        <source>Voice 3</source>
-        <translation>Голос 3</translation>
-    </message>
-    <message>
-        <source>Voice 4</source>
-        <translation>Голос 4</translation>
-    </message>
-    <message>
         <source>I/O</source>
         <translation>I/O</translation>
     </message>
@@ -5341,10 +5332,6 @@ Save Current Score?</source>
         <translation>nl Нидерландский</translation>
     </message>
     <message>
-        <source>Selection Color</source>
-        <translation>Цвет выделения</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Внимание: после смены языка придется перезапустить MuseScore.</translation>
     </message>
@@ -5414,6 +5401,34 @@ Save Current Score?</source>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score element colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default foreground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

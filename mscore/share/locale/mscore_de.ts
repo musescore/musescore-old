@@ -4745,6 +4745,13 @@ Aktuelle Partitur sichern? </translation>
     </message>
 </context>
 <context>
+    <name>PaletteBoxButton</name>
+    <message>
+        <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
@@ -4962,10 +4969,6 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <source>Sound Font</source>
         <translation>Soundfont</translation>
-    </message>
-    <message>
-        <source>Voice 1</source>
-        <translation>Stimme 1</translation>
     </message>
     <message>
         <source>General</source>
@@ -5208,18 +5211,6 @@ Aktuelle Partitur sichern? </translation>
         <translation>Alternative Eingabemethode</translation>
     </message>
     <message>
-        <source>Voice 2</source>
-        <translation>Stimme 2</translation>
-    </message>
-    <message>
-        <source>Voice 3</source>
-        <translation>Stimme 3</translation>
-    </message>
-    <message>
-        <source>Voice 4</source>
-        <translation>Stimme 4</translation>
-    </message>
-    <message>
         <source>I/O</source>
         <translation>I/O</translation>
     </message>
@@ -5337,10 +5328,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Selection Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5410,6 +5397,34 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score element colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default foreground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
