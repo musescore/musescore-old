@@ -10,6 +10,7 @@
       - fix regression: score sometimes would show blank canvas when opening files,
         due to uninitialized score x and y offset
       - fix: canvas does not pan vertically to follow playback when at high zoom levels
+      - fix: navigator is shown for opened scores if set to show in preferences
 19.nov (ws)
       - Save used images (pasted to the score) in *.mscz file.
         Removed "image path" hack. See demo "demos/schnee.mscz".

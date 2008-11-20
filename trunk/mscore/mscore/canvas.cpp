@@ -112,6 +112,7 @@ Canvas::Canvas(QWidget* parent)
                   printf("no valid pixmap %s\n", qPrintable(preferences.fgWallpaper));
             setForeground(pm);
             }
+      showNavigator(preferences.showNavigator);
       }
 
 //---------------------------------------------------------
