@@ -402,8 +402,8 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
                   }
             else {
                   // let user control height
-                  showRect.setY(r.y());
-                  showRect.setHeight(1);
+//                   showRect.setY(r.y());
+//                   showRect.setHeight(1);
                   }
             }
       
@@ -430,7 +430,7 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
 //             qDebug() << "r.width >= width && right > r.right";
             x = showRect.left() - BORDER_X;
             }
-      if (showRect.top() < r.top()) {
+      if (showRect.top() < r.top() && showRect.bottom() < r.bottom()) {
 //             qDebug() << "top < r.top";
             y = showRect.top() - BORDER_Y;
             }
