@@ -581,12 +581,12 @@ void initSymbols()
       symbols[eightSym]                   = Sym("eight",              0x38, 0);
       symbols[nineSym]                    = Sym("nine",               0x39, 0);
 
-      symbols[letterfSym]                 = Sym("f",                  0x66, 1);
-      symbols[lettermSym]                 = Sym("m",                  0x6d, 1);
-      symbols[letterpSym]                 = Sym("p",                  0x70, 1);
-      symbols[letterrSym]                 = Sym("r",                  0x72, 1);
-      symbols[lettersSym]                 = Sym("s",                  0x73, 1);
-      symbols[letterzSym]                 = Sym("z",                  0x7a, 1);
+      symbols[letterfSym]                 = Sym("f",                  0x66, 0);
+      symbols[lettermSym]                 = Sym("m",                  0x6d, 0);
+      symbols[letterpSym]                 = Sym("p",                  0x70, 0);
+      symbols[letterrSym]                 = Sym("r",                  0x72, 0);
+      symbols[lettersSym]                 = Sym("s",                  0x73, 0);
+      symbols[letterzSym]                 = Sym("z",                  0x7a, 0);
 
       symbols[wholerestSym]               = Sym("whole rest",               0xe100, 0);
       symbols[halfrestSym]                = Sym("half rest",                0xe101, 0);
@@ -664,9 +664,9 @@ void initSymbols()
 
       symbols[flageoletSym]               = Sym("flageolet",                0xe176, 0);
 
-      symbols[segnoSym]                   = Sym("segno",                    0xe167, 1);
-      symbols[codaSym]                    = Sym("coda",                     0xe168, 1);
-      symbols[varcodaSym]                 = Sym("varcoda",                  0xe169, 1);
+      symbols[segnoSym]                   = Sym("segno",                    0xe177, 0);
+      symbols[codaSym]                    = Sym("coda",                     0xe178, 0);
+      symbols[varcodaSym]                 = Sym("varcoda",                  0xe179, 0);
 
       symbols[rcommaSym]                  = Sym("rcomma",                   0xe17a, 0);
       symbols[lcommaSym]                  = Sym("lcomma",                   0xe17b, 0);
@@ -764,13 +764,14 @@ void initSymbols()
 
 
       // used for GUI:
-      symbols[note2Sym]                   = Sym("note 1/2",   0xe0ff, 0);
-      symbols[note4Sym]                   = Sym("note 1/4",   0xe0fc, 0);
-      symbols[note8Sym]                   = Sym("note 1/8",   0xe0f8, 0);
-      symbols[note16Sym]                  = Sym("note 1/16",  0xe0f9, 0);
-      symbols[note32Sym]                  = Sym("note 1/32",  0xe0fa, 0);
-      symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, 0);
-      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fe, 0);
+      symbols[note2Sym]                   = Sym("note 1/2",   0xe1b5, 0);
+      symbols[note4Sym]                   = Sym("note 1/4",   0xe1b6, 0);
+      symbols[note8Sym]                   = Sym("note 1/8",   0xe1b7, 0);
+      symbols[note16Sym]                  = Sym("note 1/16",  0xe1b8, 0);
+      symbols[note32Sym]                  = Sym("note 1/32",  0xe1b9, 0);
+      symbols[note64Sym]                  = Sym("note 1/64",  0xe1ba, 0);
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fe, 0);  // TODO
+
 //      Sym::writeCtable();
 
 
