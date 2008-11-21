@@ -770,7 +770,7 @@ void initSymbols()
       symbols[note16Sym]                  = Sym("note 1/16",  0xe1b8, 0);
       symbols[note32Sym]                  = Sym("note 1/32",  0xe1b9, 0);
       symbols[note64Sym]                  = Sym("note 1/64",  0xe1ba, 0);
-      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fe, 0);  // TODO
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe1bd, 0);
 
 //      Sym::writeCtable();
 
