@@ -455,6 +455,26 @@ fet_beginchar ("128th (down)", "d7");
 	y_mirror_char;
 fet_endchar;
 
+%----------------------------------------------------------
+%     duration dot dot
+%----------------------------------------------------------
+
+save dot_diam;
+2 dot_diam# = staff_space# - stafflinethickness#;
+define_whole_blacker_pixels (dot_diam);
+
+fet_beginchar ("duration dot dot", "dotdot");
+	pickup pencircle scaled dot_diam;
+
+	lft x0 = 0;
+	top y0 = vround (.5 dot_diam);
+
+	drawdot z0;
+	drawdot z0 + (staff_space / 2, 0);
+
+	set_char_box (0, dot_diam#, .5 dot_diam#, .5 dot_diam#);
+fet_endchar;
+
 
 fet_endgroup ("mscore");
 
