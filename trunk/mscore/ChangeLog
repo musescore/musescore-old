@@ -1,3 +1,5 @@
+21.nov (ws)
+      - removed shortcut for trill ("T") which conflicts with time palette.
 20.nov (ws)
       - updated dutch translation from Jaap Plaisier
       - made default color for score elements (black) configurable. On print, this

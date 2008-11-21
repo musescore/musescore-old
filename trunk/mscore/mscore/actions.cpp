@@ -542,7 +542,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-trill",
          QT_TR_NOOP("add trill"),
-	   Qt::Key_T,
+	   0,
          Qt::WindowShortcut,
          QT_TR_NOOP("trill"),
          QT_TR_NOOP("trill")
