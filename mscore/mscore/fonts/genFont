@@ -47,7 +47,11 @@ TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
    rm -rf $TMP
 
 /usr/bin/python gen-emmentaler-scripts --dir=./out
+/usr/bin/python gen-mscore1-scripts --dir=./out
 cd ./out && /usr/bin/fontforge -script emmentaler-20.pe
+cd ..
+cd ./out && /usr/bin/fontforge -script mscore1-20.pe
 
 # fontforge feta20.pfb
 mv emmentaler-20.ttf ../mscore-20.ttf
+mv mscore1-20.ttf ..

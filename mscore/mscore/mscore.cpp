@@ -1529,12 +1529,12 @@ int main(int argc, char* argv[])
             if (!debugMode)
                   exit(-1);
             }
-/*      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore1_20.ttf")) {
+      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore1-20.ttf")) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             if (!debugMode)
                   exit(-1);
             }
-*/
+
       seq = new Seq();
       if (converterMode)
             noSeq = true;

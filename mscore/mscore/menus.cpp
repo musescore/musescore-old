@@ -394,7 +394,7 @@ void MuseScore::showPalette(bool visible)
 
             sp = new Palette(.9);
             sp->setGrid(42, 28);
-            sp->setYOffset(-12.0);
+//            sp->setYOffset(-12.0);
 
             static const char* dynS[] = {
                   "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
