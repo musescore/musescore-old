@@ -386,6 +386,11 @@ void MuseScore::showPalette(bool visible)
                   s->setSubtype(i);
                   sp->append(s, s->name());
                   }
+            for (int i = 16; i < 26; ++i) {
+                  Accidental* s = new Accidental(gscore);
+                  s->setSubtype(i);
+                  sp->append(s, s->name());
+                  }
             paletteBox->addPalette(tr("Accidentals"), sp);
 
             //-----------------------------------
@@ -394,7 +399,7 @@ void MuseScore::showPalette(bool visible)
 
             sp = new Palette(.9);
             sp->setGrid(42, 28);
-//            sp->setYOffset(-12.0);
+            sp->setYOffset(-12.0);
 
             static const char* dynS[] = {
                   "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
@@ -1086,7 +1091,7 @@ void MuseScore::accidentalsMenu()
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
             sp->setGrid(60, 60);
 
-            for (int i = 0; i < 16; ++i) {
+            for (int i = 0; i < 16+6+4; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
                   sp->append(s, s->name());

@@ -125,11 +125,25 @@ enum {
       neomenssemiminimarestSym,
       neomensfusarestSym,
       neomenssemifusarestSym,
+
       sharpSym,
+      sharpslashSym,
+      sharpslash2Sym,
+      sharpslash3Sym,
+      sharpslash4Sym,
+
       naturalSym,
       flatSym,
+
+      flatslashSym,
+      flatslash2Sym,
+      mirroredflat2Sym,
+      mirroredflatSym,
+      mirroredflatslashSym,
       flatflatSym,
+      flatflatslashSym,
       sharpsharpSym,
+
       rightparenSym,
       leftparenSym,
       dotSym,

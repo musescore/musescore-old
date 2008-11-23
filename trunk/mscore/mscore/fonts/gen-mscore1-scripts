@@ -41,13 +41,13 @@ notice += "resulting document to be covered by the GNU General Public License.";
 
 SetFontNames("%(name)s-%(design_size)d", "%(name)s", "%(name)s %(design_size)d", "%(design_size)d", notice, "2.11.65");
 
-# MergeFonts("feta%(design_size)d.pfb");
+MergeFonts("mscore1-%(design_size)d.pfb");
 # MergeFonts("parmesan%(design_size)d.pfb");
 
 # load nummer/din after setting PUA.
-#i = 0;
-#while (i < CharCnt())
-# Select(i);
+i = 0;
+while (i < CharCnt())
+ Select(i);
 # crashes fontforge, use PUA for now -- jcn
 # SetUnicodeValue(i + 0xF0000, 0);
 /*
@@ -61,13 +61,13 @@ PRIVATE AREA
    assigned to the Linux zone is currently maintained by  H.  Peter  Anvin
    <Peter.Anvin@linux.org>.
 */
-# SetUnicodeValue(i + 0xE000, 0);
-# ++i;
-#endloop
+ SetUnicodeValue(i + 0xE300, 0);
+ ++i;
+endloop
 
 
 MergeFonts("feta-alphabet%(design_size)d.pfb");
-# MergeKern("feta-alphabet%(design_size)d.tfm");
+MergeKern("feta-alphabet%(design_size)d.tfm");
 
 # LoadTableFromFile("LILF", "%(filename)s-%(design_size)d.subfonts");
 # LoadTableFromFile("LILC", "feta%(design_size)d.otf-table");
@@ -82,10 +82,7 @@ Generate("%(filename)s-%(design_size)d.ttf");
     path = os.path.join (outdir, basename + '.pe')
     open (path, 'w').write (script)
 
-#    subfonts = ['feta%(design_size)d',
-#          'parmesan%(design_size)d',
-#          'feta-alphabet%(design_size)d']
-    subfonts = ['feta-alphabet%(design_size)d']
+    subfonts = ['mscore1-%(design_size)d', 'feta-alphabet%(design_size)d']
 
     ns = []
     for s in subfonts:
