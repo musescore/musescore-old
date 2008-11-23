@@ -287,6 +287,10 @@
          <midiprogram>52</midiprogram>
          </instrument>
       <instrument>
+         <name>Alt</name>
+         <midiprogram>52</midiprogram>
+         </instrument>
+      <instrument>
          <name>Countertenor</name>
          <midiprogram>52</midiprogram>
          </instrument>

@@ -369,6 +369,12 @@
             <program>52</program>
             </channel>
          </instrument>
+       <instrument>
+         <name>Alto</name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
       <instrument>
          <name>Countertenor</name>
          <channel>
