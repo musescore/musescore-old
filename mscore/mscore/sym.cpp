@@ -31,19 +31,19 @@ QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
-      SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp
-      SymCode(0xe112, TEXT_STYLE_DYNAMICS1),    // flat
-      SymCode(0xe102, TEXT_STYLE_DYNAMICS1),    // note2_Sym
-      SymCode(0xe0fc, TEXT_STYLE_DYNAMICS1),    // note4_Sym
-      SymCode(0xe0f8, TEXT_STYLE_DYNAMICS1),    // note8_Sym
-      SymCode(0xe0f9, TEXT_STYLE_DYNAMICS1),    // note16_Sym
-      SymCode(0xe0fa, TEXT_STYLE_DYNAMICS1),    // note32_Sym
-      SymCode(0xe0fb, TEXT_STYLE_DYNAMICS1),    // note64_Sym
-      SymCode(0xe168, TEXT_STYLE_DYNAMICS1),    // coda
-      SymCode(0xe169, TEXT_STYLE_DYNAMICS1),    // varcoda
-      SymCode(0xe167, TEXT_STYLE_DYNAMICS1),    // segno
-      SymCode(0, 0),
-      SymCode(0, 0),
+      SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp          TODO
+      SymCode(0xe112, TEXT_STYLE_DYNAMICS1),    // flat           TODO
+      SymCode(0xe404, TEXT_STYLE_DYNAMICS1),    // note2_Sym
+      SymCode(0xe405, TEXT_STYLE_DYNAMICS1),    // note4_Sym
+      SymCode(0xe406, TEXT_STYLE_DYNAMICS1),    // note8_Sym
+      SymCode(0xe407, TEXT_STYLE_DYNAMICS1),    // note16_Sym
+      SymCode(0xe408, TEXT_STYLE_DYNAMICS1),    // note32_Sym
+      SymCode(0xe409, TEXT_STYLE_DYNAMICS1),    // note64_Sym
+      SymCode(0xe40a, TEXT_STYLE_DYNAMICS1),    // dot
+      SymCode(0xe40b, TEXT_STYLE_DYNAMICS1),    // dotdot
+      SymCode(0xe468, TEXT_STYLE_DYNAMICS1),    // coda           TODO
+      SymCode(0xe469, TEXT_STYLE_DYNAMICS1),    // varcoda        TODO
+      SymCode(0xe467, TEXT_STYLE_DYNAMICS1),    // segno          TODO
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),
@@ -604,10 +604,20 @@ void initSymbols()
       symbols[sixtyfourthrestSym]         = Sym("64' rest",                 0xe10c, 0);
       symbols[hundredtwentyeighthrestSym] = Sym("128' rest",                0xe10d, 0);
       symbols[sharpSym]                   = Sym("sharp",                    0xe10e, 0);
+      symbols[sharpslashSym]              = Sym("sharp slash",              0xe10f, 0);
+      symbols[sharpslash2Sym]             = Sym("sharp slash2",             0xe110, 0);
+      symbols[sharpslash3Sym]             = Sym("sharp slash3",             0xe111, 0);
+      symbols[sharpslash4Sym]             = Sym("sharp slash4",             0xe112, 0);
 
       symbols[naturalSym]                 = Sym("natural",                  0xe113, 0);
       symbols[flatSym]                    = Sym("flat",                     0xe114, 0);
+      symbols[flatslashSym]               = Sym("flat slash",               0xe115, 0);
+      symbols[flatslash2Sym]              = Sym("flat slash2",              0xe116, 0);
+      symbols[mirroredflat2Sym]           = Sym("mirrored flat2",           0xe117, 0);
+      symbols[mirroredflatSym]            = Sym("mirrored flat",            0xe118, 0);
+      symbols[mirroredflatslashSym]       = Sym("mirrored flat slash",      0xe119, 0);
       symbols[flatflatSym]                = Sym("flat flat",                0xe11a, 0);
+      symbols[flatflatslashSym]           = Sym("flat flat slash",          0xe11b, 0);
       symbols[sharpsharpSym]              = Sym("sharp sharp",              0xe11c, 0);
 
       symbols[rightparenSym]              = Sym("right parenthesis",        0xe11d, 0);
@@ -764,13 +774,13 @@ void initSymbols()
 
 
       // used for GUI:
-      symbols[note2Sym]                   = Sym("note 1/2",   0xe1b5, 0);
-      symbols[note4Sym]                   = Sym("note 1/4",   0xe1b6, 0);
-      symbols[note8Sym]                   = Sym("note 1/8",   0xe1b7, 0);
-      symbols[note16Sym]                  = Sym("note 1/16",  0xe1b8, 0);
-      symbols[note32Sym]                  = Sym("note 1/32",  0xe1b9, 0);
-      symbols[note64Sym]                  = Sym("note 1/64",  0xe1ba, 0);
-      symbols[dotdotSym]                  = Sym("dot dot",    0xe1bd, 0);
+      symbols[note2Sym]                   = Sym("note 1/2",   0xe404, 1);
+      symbols[note4Sym]                   = Sym("note 1/4",   0xe405, 1);
+      symbols[note8Sym]                   = Sym("note 1/8",   0xe406, 1);
+      symbols[note16Sym]                  = Sym("note 1/16",  0xe407, 1);
+      symbols[note32Sym]                  = Sym("note 1/32",  0xe408, 1);
+      symbols[note64Sym]                  = Sym("note 1/64",  0xe409, 1);
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe40b, 1);
 
 //      Sym::writeCtable();
 

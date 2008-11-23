@@ -41,6 +41,7 @@ fet_beginchar ("Half note", "no1");
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
       oben  := unten + (0, 3.5 staff_space);
+
       draw unten -- oben;
 fet_endchar;
 
@@ -61,6 +62,7 @@ fet_beginchar ("Quart note", "no2");
       %
 
       pickup pencircle scaled stemthickness;
+
       hw := width - .5 stemthickness;
 
       pair unten;
@@ -68,6 +70,7 @@ fet_beginchar ("Quart note", "no2");
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
       oben  := unten + (0, 3.5 staff_space);
       draw unten -- oben;
+
       fet_endchar;
 
 
@@ -199,7 +202,10 @@ fet_beginchar ("Quart note", "no4");
       aaa = hip_width# + stemthickness# / 2 + right_upflag_space#;
       bbb = foot_depth# + foot_thickness# / 2;
       ccc = stemthickness# / 2;
-	set_char_box (0, aaa, bbb, ccc);
+
+%	set_char_box (
+%	   black_notehead_width#,
+%         aaa, bbb, ccc);
 
 	draw_flag (oben, flare, (hip_width, foot_depth),
 		   hip_depth_ratio, foot_width_ratio,
@@ -245,9 +251,9 @@ fet_beginchar ("1/16 note", "no8");
 	define_pixels (hip_width, foot_depth);
 	define_whole_vertical_pixels (flagspace);
 
-	set_char_box (0,
-		      hip_width# + stemthickness# / 2 + right_upflag_space#,
-		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+%	set_char_box (0,
+%		      hip_width# + stemthickness# / 2 + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
 
 	draw_flag (oben + (0, -flagspace), flare, (hip_width, foot_depth),
 		   hip_depth_ratio, foot_width_ratio,
@@ -298,8 +304,8 @@ fet_beginchar ("1/32 note", "no16");
 	define_pixels (hip_width, foot_depth);
 	define_whole_vertical_pixels (flagspace);
 
-	set_char_box (0, hip_width# + right_upflag_space#,
-		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+%	set_char_box (0, hip_width# + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
 
 	draw_flag (oben + (0, -2 flagspace), flare, (hip_width, foot_depth),
 		   hip_depth_ratio, foot_width_ratio,
@@ -352,8 +358,8 @@ fet_beginchar ("1/64 note", "no32");
 	define_pixels (hip_width, foot_depth);
 	define_whole_vertical_pixels (flagspace);
 
-	set_char_box (0, hip_width# + right_upflag_space#,
-		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
+%	set_char_box (0, hip_width# + right_upflag_space#,
+%		      total_depth# + foot_thickness# / 2, stemthickness# / 2);
 
 	draw_flag (oben + (0, -(flag_count - 1) * flagspace), flare,
 		   (hip_width, foot_depth),
@@ -368,6 +374,8 @@ fet_beginchar ("1/64 note", "no32");
 		  hip_thickness, foot_thickness);
 
       fet_endchar;
+
+if 1 = 2:
 
 %----------------------------------------------------------
 %     128th Flag (up)
@@ -455,8 +463,10 @@ fet_beginchar ("128th (down)", "d7");
 	y_mirror_char;
 fet_endchar;
 
+fi;
+
 %----------------------------------------------------------
-%     duration dot dot
+%     duration dot
 %----------------------------------------------------------
 
 save dot_diam;
@@ -469,10 +479,28 @@ fet_beginchar ("duration dot dot", "dotdot");
 	lft x0 = 0;
 	top y0 = vround (.5 dot_diam);
 
-	drawdot z0;
-	drawdot z0 + (staff_space / 2, 0);
+	drawdot z0 + (0, staff_space / 2);
 
 	set_char_box (0, dot_diam#, .5 dot_diam#, .5 dot_diam#);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     duration dot dot
+%----------------------------------------------------------
+
+define_whole_blacker_pixels (dot_diam);
+
+fet_beginchar ("duration dot dot", "dotdot");
+	pickup pencircle scaled dot_diam;
+
+	lft x0 = 0;
+	top y0 = vround (.5 dot_diam);
+
+	drawdot z0 + (0, staff_space / 2);
+	drawdot z0 + (staff_space / 2, staff_space / 2);
+
+	set_char_box (0, dot_diam# * 2 + staff_space# / 2, .5 dot_diam#, .5 dot_diam#);
 fet_endchar;
 
 

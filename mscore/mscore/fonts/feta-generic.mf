@@ -42,7 +42,7 @@ if test = 0:
 	input feta-pendaal;
 	input feta-haak;
 	input feta-accordion;
-      input mscore;
+%      input mscore;
 else:
 	input feta-test-generic.mf;
 fi

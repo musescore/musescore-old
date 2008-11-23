@@ -11,6 +11,9 @@ MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input feta20.mf;"
 mv feta20.log out
 MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input feta-alphabet20.mf;"
 mv feta-alphabet20.log out
+mv feta-alphabet20.tfm out
+MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input mscore1-20.mf;"
+mv mscore1-20.log out
 
 /usr/bin/python ./mf-to-table.py \
    --global-lisp=./out/feta20.otf-gtable \
@@ -26,8 +29,16 @@ mv feta-alphabet20.log out
    --enc ./out/feta-alphabet20.enc \
    out/feta-alphabet20.log
 
+/usr/bin/python ./mf-to-table.py \
+   --global-lisp=./out/mscore1-20.otf-gtable \
+   --lisp=./out/mscore1-20.lisp \
+   --outdir=./out \
+   --enc ./out/mscore1-20.enc \
+   out/mscore1-20.log
+
 # cat out/feta20.lisp out/parmesan20.lisp out/feta-alphabet20.lisp > out/feta20.otf-table
 cat out/feta20.lisp out/feta-alphabet20.lisp > out/feta20.otf-table
+# cat out/mscore1-20.lisp > out/mscore1-20.otf-table
 
 cd ./out && mpost -progname=mpost -ini ../mf2pt1.mp \\dump
 cd ..
@@ -43,6 +54,13 @@ TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
    && ( cd $TMP \
    && ln -s ../mf2pt1.mem . \
    && MFINPUTS=../..:..:: /usr/bin/perl ../../mf2pt1.pl --rounding=0.0001 --family=feta-alphabet20 --fullname=feta-alphabet20 --name=feta-alphabet20 feta-alphabet20.mf ) \
+   && mv $TMP/*pfb ./out; \
+   rm -rf $TMP
+
+TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
+   && ( cd $TMP \
+   && ln -s ../mf2pt1.mem . \
+   && MFINPUTS=../..:..:: /usr/bin/perl ../../mf2pt1.pl --rounding=0.0001 --family=feta-alphabet20 --fullname=mscore1-20 --name=mscore1-20 mscore1-20.mf ) \
    && mv $TMP/*pfb ./out; \
    rm -rf $TMP
 

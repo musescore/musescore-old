@@ -1,3 +1,5 @@
+23.nov (ws)
+      - added more accidentals
 22.nov (sy)
       - fix regression: midi output driver would not play past the first note,
         caused by rewind playback after reaching end change on 5.oct

@@ -44,6 +44,18 @@ Accidental::Accidental(Score* sc)
 //    8 - (double sharp)   13 - [double sharp]
 //    9 - (double flat)    14 - [double flat]
 //    10 - (natural)       15 - [natural]
+//
+//    16 - flat-slash
+//    17 - flat-slash2
+//    18 - mirrored-flat2
+//    19 - mirrored-flat
+//    20 - mirrored-flat-slash
+//    21 - flat-flat-slash
+//
+//    22 - sharp-slash
+//    23 - sharp-slash2
+//    24 - sharp-slash3
+//    25 - sharp-slash4
 //---------------------------------------------------------
 
 void Accidental::setSubtype(int i)
@@ -93,6 +105,18 @@ void Accidental::setSubtype(int i)
             case 13: s->setSym(sharpsharpSym); break;
             case 14: s->setSym(flatflatSym);   break;
             case 15: s->setSym(naturalSym);    break;
+
+            case 16: s->setSym(flatslashSym);         break;
+            case 17: s->setSym(flatslash2Sym);        break;
+            case 18: s->setSym(mirroredflat2Sym);     break;
+            case 19: s->setSym(mirroredflatSym);      break;
+            case 20: s->setSym(mirroredflatslashSym); break;
+            case 21: s->setSym(flatflatslashSym);     break;
+
+            case 22: s->setSym(sharpslashSym); break;
+            case 23: s->setSym(sharpslash2Sym); break;
+            case 24: s->setSym(sharpslash3Sym); break;
+            case 25: s->setSym(sharpslash4Sym); break;
             }
       addElement(s, 0.0, 0.0);
       setMag(mag());
@@ -114,6 +138,8 @@ int Accidental::subtype2value(int st)
             0,  // ACC_NAT
             1, -1, 2, -2, 0,  // () brackets
             1, -1, 2, -2, 0,  // [] brackets
+            0, 0, 0, 0, 0, 0,  // special flats
+            0, 0, 0, 0        // spacial sharps
             };
 
       if (st < 0 || st >= int(sizeof(preTab)/sizeof(*preTab)))

@@ -83,7 +83,7 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS),
 
-/*12*/
+/*13*/
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tempo"), ff, 12, true, false, false,
          ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
 
