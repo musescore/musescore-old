@@ -624,9 +624,10 @@ void Seq::processMidi()
                         break;
                   playEvent(playPos.value());
                   }
-            if (playPos == events.constEnd())
+            if (playPos == events.constEnd()) {
                   driver->stopTransport();
                   rewindStart();
+                  }
             }
       }
 

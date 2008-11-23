@@ -1,3 +1,6 @@
+22.nov (sy)
+      - fix regression: midi output driver would not play past the first note,
+        caused by rewind playback after reaching end change on 5.oct
 21.nov (ws)
       - removed shortcut for trill ("T") which conflicts with time palette.
 20.nov (ws)
