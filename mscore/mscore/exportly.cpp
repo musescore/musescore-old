@@ -187,14 +187,15 @@ void ExportLy::anchorList()
   printf("nr 0. ticks %d", anchors[0].tick);
   printf(" instruct->type %d\n", anchors[0].instruct->type());
     for (ix=0; ix<nextAnchor; ix++)
-      {if anchors[ix]!=NULL
-	if (1 < anchors[ix].tick < 654000)
-	  {
-	    printf("i: %d, instructticks: %d  ", ix, anchors[ix].tick);
-	    printf("instructiontype: %d ", anchors[ix].instruct->type());
-	    if (anchors[ix].start==true) printf(" true "); else printf(" false ");
-	    printf("elementticks: %d \n", anchors[ix].anchor->tick());
-	  }
+      {
+	if (!(anchors[ix].instruct==NULL))
+	  if (1 < anchors[ix].tick < 654000)
+	    {
+	      printf("i: %d, instructticks: %d  ", ix, anchors[ix].tick);
+	      printf("instructiontype: %d ", anchors[ix].instruct->type());
+	      if (anchors[ix].start==true) printf(" true "); else printf(" false ");
+	      printf("elementticks: %d \n", anchors[ix].anchor->tick());
+	    }
       }
     printf("end of ankerlistetest\n");
 }  
@@ -1700,14 +1701,14 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	}
       handleElement(e, staffInd, true); //check for instructions anchored to element e.
       //check for instructions anchored to start of next element
-      Element * nextel;
-      Segment* nextseg;
-      nextseg=s->next();
-      if(nextseg) 
-	{
-	  nextel=nextseg->element(staffInd * VOICES + voice);
-	  handleElement(nextel, staffInd, false); 
-	}
+//       Element * nextel;
+//       Segment* nextseg;
+//       nextseg=s->next();
+//       if(nextseg) 
+// 	{ printf("nextseg \n");
+// 	  nextel=nextseg->element(staffInd * VOICES + voice);
+// 	  handleElement(nextel, staffInd, false); 
+// 	}
     } //end for all segments
 
 
@@ -1773,24 +1774,25 @@ void ExportLy::writeScore()
   int voice=0;
   cleannote="c";
   prevnote="c";
-  nextAnchor=0;
-  initAnchors();
-  resetAnchor(anker);
-
+ 
   if (np > 1)
     {
-      //Number of staffs in each part, to be used when we implement braces and brackets.
+      //Number of parts???
     }
 
   foreach(Part* part, *score->parts())
     {
+      nextAnchor=0;
+      initAnchors();
+      resetAnchor(anker);
       int n = part->staves()->size();
       partname[staffInd]  = part->longName();
       partshort[staffInd] = part->shortName();
       curTicks=-1;
       pickup=false;
+
       if (n > 1)
-	{//number of staffs per instrument.
+	{//number of staffs per part?
 	  pianostaff=true;
 	}
       
@@ -1798,11 +1800,11 @@ void ExportLy::writeScore()
       printf("staves: %d, np: %d\n", staves, np);
       int strack = score->staffIdx(part) * VOICES;
       printf("strack: %d\n", strack);
-      int etrack = strack + np * VOICES;
+      int etrack = strack + n* VOICES;
       printf("etrack: %d\n", etrack);
       buildInstructionList(part, strack, etrack);
       
-      //     anchorList(); 
+      anchorList(); 
       
       foreach(Staff* staff, *part->staves())
 	{
