@@ -1540,6 +1540,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             Note* note = new Note(this);
             note->setPitch(pitch);
             note->setTrack(cr->track());
+            mscore->play(note);
             Chord* chord = new Chord(this);
             chord->setTick(tick);
             chord->add(note);
@@ -1556,6 +1557,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             tuplet->add(chord);
             chord->setTuplet(tuplet);
             select(note, SELECT_SINGLE, cr->track());
+            spell(note);
             }
       else {
             Rest* rest = new Rest(this);
