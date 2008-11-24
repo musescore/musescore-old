@@ -1,5 +1,8 @@
 23.nov (ws)
       - added more accidentals
+      (sy)
+      - fix: delete measure would not fill measure with whole-measure rest
+        in different time signatures (for example, 6/8)
 22.nov (sy)
       - fix regression: midi output driver would not play past the first note,
         caused by rewind playback after reaching end change on 5.oct
