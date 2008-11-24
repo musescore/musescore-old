@@ -99,7 +99,7 @@ class Segment : public Element {
       Segment* next1() const;
       Segment* prev1() const;
 
-      Segment* nextCR() const;
+      Segment* nextCR(int track = -1) const;
 
       ChordRest* nextChordRest(int track, bool backwards = false) const;
 

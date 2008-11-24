@@ -431,7 +431,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         sel->staffStart = e->staffIdx();
                         sel->staffEnd   = sel->staffStart + 1;
                         sel->setStartSegment(cr->segment());
-                        sel->setEndSegment(cr->segment()->nextCR());
+                        sel->setEndSegment(cr->segment()->nextCR(cr->track()));
                         }
                   else if (sel->state() == SEL_SINGLE) {
                         Element* oe = sel->element();
@@ -442,7 +442,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               sel->staffStart = oe->staffIdx();
                               sel->staffEnd   = sel->staffStart + 1;
                               sel->setStartSegment(ocr->segment());
-                              sel->setEndSegment(ocr->segment()->nextCR());
+                              sel->setEndSegment(ocr->segment()->nextCR(ocr->track()));
                               if (!sel->endSegment())
                                     sel->setEndSegment(ocr->segment()->next());
 
@@ -457,14 +457,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                                     activeIsFirst = true;
                                     }
                               else if (tick >= sel->tickEnd())
-                                    sel->setEndSegment(cr->segment()->nextCR());
+                                    sel->setEndSegment(cr->segment()->nextCR(cr->track()));
                               else {
                                     if (sel->activeSegment() == sel->startSegment()) {
                                           sel->setStartSegment(cr->segment());
                                           activeIsFirst = true;
                                           }
                                     else
-                                          sel->setEndSegment(cr->segment()->nextCR());
+                                          sel->setEndSegment(cr->segment()->nextCR(cr->track()));
                                     }
                               }
                         else {
@@ -489,7 +489,7 @@ printf("select: TODO\n");
                         else if (tick >= sel->tickEnd()) {
                               if (sel->activeSegment() == sel->startSegment())
                                     sel->setStartSegment(sel->endSegment());
-                              sel->setEndSegment(cr->segment()->nextCR());
+                              sel->setEndSegment(cr->segment()->nextCR(cr->track()));
                               }
                         else {
                               if (sel->activeSegment() == sel->startSegment()) {
@@ -497,7 +497,7 @@ printf("select: TODO\n");
                                     activeIsFirst = true;
                                     }
                               else
-                                    sel->setEndSegment(cr->segment()->nextCR());
+                                    sel->setEndSegment(cr->segment()->nextCR(cr->track()));
                               }
                         }
                   else {
@@ -572,6 +572,7 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
       Segment* endSegment   = 0;
       int startStaff        = 0x7fffffff;
       int endStaff          = 0;
+      int endTrack          = 0;
 
       foreach(const Element* e, *(sel->elements())) {
             if (e->type() == NOTE || e->type() == REST) {
@@ -581,8 +582,10 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
                   Segment* seg = static_cast<const ChordRest*>(e)->segment();
                   if ((startSegment == 0) || (e->tick() < startSegment->tick()))
                         startSegment = seg;
-                  if ((endSegment == 0) || (e->tick() > endSegment->tick()))
+                  if ((endSegment == 0) || (e->tick() > endSegment->tick())) {
                         endSegment = seg;
+                        endTrack = e->track();
+                        }
                   int idx = e->staffIdx();
                   if (idx < startStaff)
                         startStaff = idx;
@@ -591,7 +594,7 @@ void Score::lassoSelectEnd(const QRectF& /*bbox*/)
                   }
             }
       if (noteRestCount > 0) {
-            endSegment = endSegment->nextCR();
+            endSegment = endSegment->nextCR(endTrack);
             sel->setRange(startSegment, endSegment, startStaff, endStaff+1);
             if (sel->state() != SEL_STAFF) {
                   sel->setState(SEL_STAFF);
