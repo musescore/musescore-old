@@ -789,7 +789,7 @@ void Beam::layout(ScoreLayout* layout)
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(cr);
-                  int tl = chord->tickLen();
+                  int tl = chord->duration().ticks();
                   if (tl > l) {
                         if (nn2) {
                               // create short segment

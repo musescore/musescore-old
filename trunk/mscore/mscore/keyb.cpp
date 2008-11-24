@@ -273,7 +273,7 @@ void Score::setPadState(Element* e)
       if (e->type() == NOTE) {
             Note* note          = static_cast<Note*>(e);
             Chord* chord        = note->chord();
-            len                 = chord->duration().ticks();
+            len                 = chord->duration().ticks(chord->dots());
             Accidental* prefix  = note->accidental();
             _padState.prefix    = prefix ? prefix->subtype() : 0;
             _padState.rest      = false;
@@ -285,7 +285,7 @@ void Score::setPadState(Element* e)
             }
       else if (e->type() == REST) {
             Rest* rest = static_cast<Rest*>(e);
-            len        = rest->duration().ticks();
+            len        = rest->duration().ticks(rest->dots());
 
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
