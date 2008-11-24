@@ -153,7 +153,7 @@ class TextB : public Element {
       virtual void draw(QPainter&) const;
 
       virtual bool startEdit(Viewer*, const QPointF&);
-      virtual bool edit(Viewer*, int, QKeyEvent*);
+      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);
       void setCharFormat(const QTextCharFormat&);

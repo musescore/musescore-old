@@ -252,7 +252,10 @@ int SigList::bar2tick(int bar, int beat, int tick) const
       if (empty() || e == begin()) {
             fprintf(stderr, "SigList::bar2tick(): not found(%d,%d,%d) not found\n",
                bar, beat, tick);
-            abort();
+            if (empty())
+                  fprintf(stderr, "   list is empty\n");
+            // abort();
+            return 0;
             }
       --e;
       int ticksB = ticks_beat(e->second.denominator);

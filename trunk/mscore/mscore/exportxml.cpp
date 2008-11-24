@@ -1390,6 +1390,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                         acc -= 10;
                         editorial = true;
                         }
+                  /*
+                        MusicXML accidental names include:
+                        sharp,natural, flat, double-sharp, sharp-sharp, flat-flat,
+                        natural-sharp, natural-flat, quarter-flat, quarter-sharp,
+                        three-quarters-flat, and three-quarters-sharp
+                    */
                   QString s;
                   switch(acc) {
                         case ACC_SHARP:   s = "sharp";        break;

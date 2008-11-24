@@ -41,7 +41,7 @@ class VoltaSegment : public LineSegment {
       virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
-      virtual bool edit(Viewer*, int, QKeyEvent*);
+      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
       virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;

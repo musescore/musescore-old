@@ -161,6 +161,17 @@ bool Canvas::event(QEvent* ev)
                   return true;
                   }
             }
+      if (ev->type() == QEvent::InputMethod) {
+            QInputMethodEvent* ie = static_cast<QInputMethodEvent*>(ev);
+            if (state != EDIT && state != DRAG_EDIT)
+                  return false;
+            Element* e = _score->editObject;
+            if (e->edit(this, curGrip, 0, 0, ie->commitString())) {
+                  updateGrips();
+                  _score->end();
+                  return true;
+                  }
+            }
       return QWidget::event(ev);
       }
 

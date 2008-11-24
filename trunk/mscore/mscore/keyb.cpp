@@ -45,10 +45,13 @@
 
 void Canvas::keyPressEvent(QKeyEvent* ev)
       {
-      int key = ev->key();
+      int key                         = ev->key();
+      Qt::KeyboardModifiers modifiers = ev->modifiers();
+      QString s                       = ev->text();
+
       if (debugMode) {
             printf("key key:%x modifiers:%x text:<%s>\n", key,
-               int(ev->modifiers()), qPrintable(ev->text()));
+               int(modifiers), qPrintable(s));
             }
 
       if (state != EDIT && state != DRAG_EDIT) {
@@ -71,14 +74,14 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
-                  if (e->edit(this, curGrip, ev))
+                  if (e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         _score->lyricsTab(true, true);
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (e->edit(this, curGrip, ev))
+                  if (e->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         _score->lyricsTab(false, false);
@@ -108,7 +111,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   return;
                   }
             }
-      if (e->edit(this, curGrip, ev)) {
+      if (e->edit(this, curGrip, key, modifiers, s)) {
             updateGrips();
             ev->accept();
             _score->end();

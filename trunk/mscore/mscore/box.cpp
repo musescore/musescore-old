@@ -87,7 +87,7 @@ bool Box::startEdit(Viewer*, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Box::edit(Viewer*, int, QKeyEvent*)
+bool Box::edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s)
       {
       return false;
       }

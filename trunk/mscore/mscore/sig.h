@@ -40,7 +40,7 @@ struct SigEvent {
       void write(Xml&, int) const;
 
       SigEvent() { nominator = 0; }
-      SigEvent(int z, int n);                 ///< set regular event
+      SigEvent(int z, int n);                         ///< set regular event
       SigEvent(int z1, int n1, int z2, int n2);       ///< set irregular event
       bool operator==(const SigEvent& e) const;
       bool valid() const { return nominator > 0; }

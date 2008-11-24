@@ -310,21 +310,13 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                   }
             int etick = segment->tick();
             if (etick >= tick) {
-                  TimeSig* ts = (TimeSig*)(segment->element(0));
-                  if (ts == 0) {
-                        printf("empty SegTimeSig\n");
-                        if (debugMode)
-                              abort();
-                        return;
-                        }
-                  if ((etick > tick) && (ts->subtype() != timeSigSubtype))
+                  iSigEvent i = sigmap->find(segment->tick());
+                  if ((etick > tick) && (i->second.nominator != z || i->second.denominator != n))
                         break;
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         Element* e = segment->element(staffIdx * VOICES);
                         if (e)
                               undoRemoveElement(e);
-                        else
-                              printf("     +++no TimeSig in Staff\n");
                         }
                   undoRemoveElement(segment);
                   if (etick > tick)
@@ -803,12 +795,23 @@ void Score::deleteItem(Element* el)
       switch(el->type()) {
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
+                        TextC* in = static_cast<TextC*>(el);
+                        UndoOp i;
+                        i.type = UndoOp::ChangeInstrumentLong;
+                        i.part = in->staff()->part();
+                        i.s    = in->getHtml();
+                        undoList.back()->push_back(i);
                         el->staff()->part()->setLongName(QString());
                         _layout->setInstrumentNames();
-                        layoutAll = true;
                         break;
                         }
                   else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
+                        TextC* in = static_cast<TextC*>(el);
+                        UndoOp i;
+                        i.type = UndoOp::ChangeInstrumentShort;
+                        i.part = in->staff()->part();
+                        i.s    = in->getHtml();
+                        undoList.back()->push_back(i);
                         el->staff()->part()->setShortName(QString());
                         _layout->setInstrumentNames();
                         break;
@@ -844,6 +847,7 @@ void Score::deleteItem(Element* el)
             case STAFF_TEXT:
             case SPACER:
             case KEYSIG:
+            case TIMESIG:
                   cmdRemove(el);
                   break;
 
@@ -1032,8 +1036,11 @@ void Score::cmdDeleteSelection()
                               } while (ie != is);
                         }
                   }
-            else
+            else {
+                  createEndBar = true;
                   deleteItem(is);
+                  }
+
             if (createEndBar) {
                   MeasureBase* mb = _measures.last();
                   while (mb && mb->type() != MEASURE)
