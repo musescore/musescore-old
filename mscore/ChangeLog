@@ -1,4 +1,13 @@
-24.nov (sy)
+24.nov
+      (ws)
+      - implement delete time signature
+      - fix: crash when importing midifile without time signature
+      - implement input of diacritial symbols (linux)
+      - fix auto beaming; rules were not applied for two beamed notes;
+      - keep end bar line after deleting last measure
+      - make "delete instrument name" undoable
+      - fix: object inspector changed text properties
+      (sy)
       - update dot state in pad when selecting a note/rest
       - corrected some beaming problems with dotted notes
 23.nov (ws)

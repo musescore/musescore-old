@@ -1499,6 +1499,7 @@ bool Score::importMidi(const QString& name)
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly))
             return false;
+
       MidiFile mf;
       if (!mf.read(&fp)) {
             QMessageBox::warning(0,
@@ -1515,7 +1516,6 @@ bool Score::importMidi(const QString& name)
             id.exec();
             shortestNote = id.shortestNote();
             }
-printf("shortest note %d\n", shortestNote);
       mf.setShortestNote(shortestNote);
 
       _saved = false;

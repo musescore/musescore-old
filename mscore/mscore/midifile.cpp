@@ -211,6 +211,8 @@ bool MidiFile::read(QIODevice* in)
       _error = "";
       _tracks.clear();
       _siglist.clear();
+      _siglist.add(0, 4, 4);   // default time signature
+
       curPos    = 0;
 
       char tmp[4];

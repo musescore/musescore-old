@@ -120,18 +120,18 @@ bool SlurSegment::startEdit(Viewer*, const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
+bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (slurTie()->type() != SLUR)
             return false;
       Slur* sl = static_cast<Slur*>(slurTie());
 
-      if (ev->key() == Qt::Key_X) {
+      if (key == Qt::Key_X) {
             sl->setSlurDirection(sl->isUp() ? DOWN : UP);
             sl->layout(score()->layout());
             return true;
             }
-      if (!((ev->modifiers() & Qt::ShiftModifier)
+      if (!((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
               || (_segmentType == SEGMENT_END && curGrip == 3)
@@ -143,9 +143,9 @@ bool SlurSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
       Element* e    = curGrip == 0 ? sl->startElement() : sl->endElement();
       Element* e1   = curGrip == 0 ? sl->endElement() : sl->startElement();
 
-      if (ev->key() == Qt::Key_Left)
+      if (key == Qt::Key_Left)
             cr = prevChordRest((ChordRest*)e);
-      else if (ev->key() == Qt::Key_Right)
+      else if (key == Qt::Key_Right)
             cr = nextChordRest((ChordRest*)e);
 
       if (cr == 0 || cr == (ChordRest*)e1)

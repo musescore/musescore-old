@@ -2607,7 +2607,7 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
-                  t->setTrack(score()->curTrack);
+                  t->setTrack(-1);
                   t->setTick(score()->curTick);
                   t->read(e);
                   add(t);

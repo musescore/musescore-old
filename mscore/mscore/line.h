@@ -48,7 +48,7 @@ class LineSegment : public Element {
       virtual bool isMovable() const { return true; }
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
-      virtual bool edit(Viewer*, int, QKeyEvent*);
+      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int*, QRectF*) const;

@@ -1290,9 +1290,9 @@ void Element::editDrag(int, const QPointF& delta)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Element::edit(Viewer*, int, QKeyEvent* ev)
+bool Element::edit(Viewer*, int, int key, Qt::KeyboardModifiers, const QString&)
       {
-      if (ev->key() ==  Qt::Key_Home) {
+      if (key ==  Qt::Key_Home) {
             setUserOff(QPoint());
             return true;
             }

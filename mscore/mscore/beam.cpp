@@ -181,12 +181,12 @@ static bool endBeam(int tsZ, int tsN, ChordRest* cr, int p)
                         continue;
                   }
 
-/*   printf("endBeam(pos %d len %d  ts %d/%d: table-note: %d/%d  table-pos:%d/%d\n",
+/*   printf("  endBeam(pos %d len %d  ts %d/%d: table-note: %d/%d  table-pos:%d/%d\n",
       p, l,
       tsZ, tsN,
       h.noteLenZ, h.noteLenN,
       h.posZ, h.posN);
-  */
+*/
             return true;
             }
       return false;
@@ -442,7 +442,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         if (a1 == 0)
                               a1 = cr;
                         else {
-                              if (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype())) {
+                              int z, n;
+                              _score->sigmap->timesig(cr->tick(), z, n);
+                              if (endBeam(z, n, cr, cr->tick() - tick())
+                                 || (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype()))) {
                                     a1->setBeam(0);
                                     a1->layoutStem1(layout);      //?
                                     a1 = cr;

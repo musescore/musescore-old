@@ -109,6 +109,7 @@ class Canvas : public QFrame, public Viewer {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
 
+      virtual void keyPressEvent(QKeyEvent*);
 
       void contextItem(Element*);
 
@@ -129,7 +130,6 @@ class Canvas : public QFrame, public Viewer {
       void cursorBlink();
 
    public slots:
-      virtual void keyPressEvent(QKeyEvent*);
       void cmdCut();
       void cmdCopy();
       void cmdPaste();

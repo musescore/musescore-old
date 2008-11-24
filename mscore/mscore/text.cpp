@@ -828,7 +828,7 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
+bool TextB::edit(Viewer* view, int grip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
             printf("TextB::edit\n");
@@ -837,7 +837,6 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
       qreal w = 8.0 / view->matrix().m11();
       score()->addRefresh(abbox().adjusted(-w, -w, w, w));
 
-      int key = ev->key();
       if (key == Qt::Key_F2) {
             if (palette == 0)
                   palette = new TextPalette(score()->canvas());
@@ -851,7 +850,7 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   }
             return true;
             }
-      if (ev->modifiers() == Qt::ControlModifier) {
+      if (modifiers == Qt::ControlModifier) {
             switch (key) {
                   case Qt::Key_B:   // toggle bold face
                         {
@@ -905,7 +904,7 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
             if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
             }
-      QTextCursor::MoveMode mm = (ev->modifiers() & Qt::ShiftModifier)
+      QTextCursor::MoveMode mm = (modifiers & Qt::ShiftModifier)
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
             case Qt::Key_Return:
@@ -955,9 +954,7 @@ bool TextB::edit(Viewer* view, int, QKeyEvent* ev)
                   break;
 
             default:
-      if (debugMode)
-            printf("   TextB::edit insert <%s>\n", qPrintable(ev->text()));
-                  cursor->insertText(ev->text());
+                  cursor->insertText(s);
                   break;
             }
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {

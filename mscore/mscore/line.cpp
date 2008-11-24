@@ -103,9 +103,9 @@ bool LineSegment::startEdit(Viewer*, const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
+bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
-      if ((ev->modifiers() & Qt::ShiftModifier)
+      if ((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
               || (_segmentType == SEGMENT_END && curGrip == 1)
@@ -115,7 +115,7 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
             int tick1 = line()->tick();
             int tick2 = line()->tick2();
 
-            if (ev->key() == Qt::Key_Left) {
+            if (key == Qt::Key_Left) {
                   if (curGrip == 0) {
                         int t1 = score()->prevSeg1(tick1, track);
                         if (t1 >= 0)
@@ -129,7 +129,7 @@ bool LineSegment::edit(Viewer*, int curGrip, QKeyEvent* ev)
                               return true;
                         }
                   }
-            else if (ev->key() == Qt::Key_Right) {
+            else if (key == Qt::Key_Right) {
                   if (curGrip == 0) {
                         int t1 = score()->nextSeg1(tick1, track);
                         if (t1 >= 0)
