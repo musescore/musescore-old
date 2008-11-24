@@ -117,8 +117,6 @@ void Score::changeRest(Rest* rest, int /*tick*/, int len)
 Rest* Score::addRest(int tick, int len, int track)
       {
       Measure* measure = tick2measure(tick);
-      if (measure->tickLen() == len)      // whole measure rest?
-            len = 0;
       Rest* rest = new Rest(this, tick, len);
       rest->setTrack(track);
       Segment::SegmentType st = Segment::segmentType(rest->type());
@@ -140,7 +138,13 @@ Rest* Score::addRest(int tick, int len, int track)
 Rest* Score::setRest(int tick, int len, int track)
       {
 // printf("setRest %d len %d\n", tick, len);
+
       Rest* rest = 0;
+
+      Measure* measure = tick2measure(tick);
+      if (measure->tickLen() == len)      // whole measure rest?
+            return addRest(tick, 0, track);
+
       if (len / (division*4)) {
             rest = addRest(tick, division*4, track);
             int nlen =  len % (division*4);
