@@ -168,12 +168,15 @@ Segment* Segment::prev1() const
 //    get next ChordRest Segment
 //---------------------------------------------------------
 
-Segment* Segment::nextCR() const
+Segment* Segment::nextCR(int track) const
       {
       Segment* seg = next1();
       for (; seg; seg = seg->next1()) {
-            if (seg->subtype() == Segment::SegChordRest)
+            if (seg->subtype() == Segment::SegChordRest) {
+                  if (track != -1 && !seg->element(track))
+                        continue;
                   return seg;
+                  }
             }
       return 0;
       }
