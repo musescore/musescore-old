@@ -5,6 +5,7 @@
         in different time signatures (for example, 6/8)
       - fix: range selection may not extend to full duration of the last note in the
         selection if there are intervening segments, in another staff, for example
+      - tuplet note entry now plays the note and spells it correctly
 22.nov (sy)
       - fix regression: midi output driver would not play past the first note,
         caused by rewind playback after reaching end change on 5.oct
