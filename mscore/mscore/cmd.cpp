@@ -1618,6 +1618,7 @@ void Score::resetUserStretch()
             }
       setDirty();
       layoutAll = true;
+      end();
       }
 
 //---------------------------------------------------------
