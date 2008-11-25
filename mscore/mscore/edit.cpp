@@ -325,16 +325,27 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             segment = nseg;
             }
 
+      // record old tickLens, since they will be modified when time is added/removed
+      QVector<int> tickLens;
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            tickLens.append(m->tickLen());
+            }
+
       //---------------------------------------------
       // modify measures
       //---------------------------------------------
 
+      int j = 0;
       for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
             int newLen = sigmap->ticksMeasure(m->tick());
-            int oldLen = m->tickLen();
+            int oldLen = tickLens[j];
+            ++j;
             if (newLen == oldLen)
                   continue;
             m->adjustToLen(oldLen, newLen);

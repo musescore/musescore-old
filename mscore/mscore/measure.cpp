@@ -1564,7 +1564,7 @@ printf("\n");
             double str = 1.0;
             double d;
 
-            if (types[i-1] == Segment::SegChordRest) {
+            if (ticks[i] > 0 && (types[i-1] == Segment::SegChordRest)) {
                   if (minTick > 0)
                         str += .6 * log2(double(ticks[i]) / double(minTick));
                   stretchList[i] = str;
