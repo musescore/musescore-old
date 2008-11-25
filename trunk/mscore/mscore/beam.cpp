@@ -444,8 +444,13 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         else {
                               int z, n;
                               _score->sigmap->timesig(cr->tick(), z, n);
-                              if (endBeam(z, n, cr, cr->tick() - tick())
-                                 || (bm == BEAM_BEGIN || (a1->segment()->subtype() != cr->segment()->subtype()))) {
+                              if (bm != BEAM_MID
+                                 &&
+                                   (endBeam(z, n, cr, cr->tick() - tick())
+                                   || bm == BEAM_BEGIN
+                                   || (a1->segment()->subtype() != cr->segment()->subtype())
+                                   )
+                                 ) {
                                     a1->setBeam(0);
                                     a1->layoutStem1(layout);      //?
                                     a1 = cr;
