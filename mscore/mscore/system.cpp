@@ -675,7 +675,7 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             int sysIdx2  = systems->indexOf(s2);
 
             double lw = l->bbox().right();            // lyrics width
-            QPointF p1(lw, l->basePosition());
+            QPointF p1(lw, l->baseLine());
 
             int segIdx = 0;
             for (int i = sysIdx1; i <= sysIdx2; ++i, ++segIdx) {

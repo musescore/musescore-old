@@ -1,4 +1,8 @@
-25.nov (sy)
+25.nov (ws)
+      - fix dragging of dynamics text
+      - fix text baseline alignement
+      - fix horizontal alignment of text
+      (sy)
       - fix: change time sig does not adjust lengths of existing measures properly
 24.nov
       (ws)

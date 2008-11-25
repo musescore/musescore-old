@@ -224,9 +224,13 @@ QPointF Dynamic::canvasPos() const
 
 QLineF Dynamic::dragAnchor() const
       {
-      QPointF cp = canvasPos();
-      QPointF anchor = cp - (userOff() * _spatium);
-      return QLineF(cp, anchor);
+      Measure* m      = measure();
+      System*  system = m->system();
+      double yp       = system->staff(staffIdx())->y() + system->y();
+      double xp       = m->tick2pos(tick()) + m->canvasPos().x();
+
+      QPointF cp     = canvasPos()  + QPointF(0.0, baseLine());
+      return QLineF(cp, QPointF(xp, yp));
       }
 
 //---------------------------------------------------------
@@ -235,11 +239,10 @@ QLineF Dynamic::dragAnchor() const
 
 void Dynamic::layout(ScoreLayout* l)
       {
-      Text::layout(l);
+      Text::layout(l);  // process alignment
       if (tick() != -1 && parent()) {
-            double y = 0.0;
-            double x = measure()->tick2pos(tick());
-            setPos(ipos() + QPointF(x, y));
+            double xp = measure()->tick2pos(tick());
+            setPos(ipos() + QPointF(xp, 0));
             }
       }
 

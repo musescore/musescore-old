@@ -177,7 +177,7 @@ class TextB : public Element {
       void setDefaultFont(QFont f) { textBase()->setDefaultFont(f);    }
 
       void setAbove(bool val);
-      qreal basePosition() const;
+      virtual qreal baseLine() const;
       virtual void paste();
 
       bool replaceSpecialChars();
