@@ -352,7 +352,7 @@ void Element::layout(ScoreLayout* layout)
       else if (_align & ALIGN_VCENTER)
             p.setY(-(h * .5));
       else if (_align & ALIGN_BASELINE)
-            p.setY(baseLine());
+            p.setY(-baseLine());
       if (_align & ALIGN_RIGHT)
             p.setX(-w);
       else if (_align & ALIGN_HCENTER)

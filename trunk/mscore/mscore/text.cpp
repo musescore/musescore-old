@@ -95,9 +95,14 @@ void TextBase::setText(const QString& s, Align align)
       _doc->clear();
       QTextCursor cursor(_doc);
       cursor.movePosition(QTextCursor::Start);
-      if (align & ALIGN_HCENTER) {
+      if (align & (ALIGN_HCENTER | ALIGN_RIGHT)) {
+            Qt::Alignment a;
+            if (align & ALIGN_HCENTER)
+                  a = Qt::AlignHCenter;
+            else if (align & ALIGN_RIGHT)
+                  a = Qt::AlignRight;
             QTextBlockFormat bf = cursor.blockFormat();
-            bf.setAlignment(Qt::AlignHCenter);
+            bf.setAlignment(a);
             cursor.setBlockFormat(bf);
             }
       QTextCharFormat tf = cursor.charFormat();
@@ -199,7 +204,8 @@ void TextBase::layout(ScoreLayout*)
       if (!_doc->isModified())
             return;
       _doc->documentLayout()->setPaintDevice(pdev);
-      _doc->setTextWidth(-1.0);
+//      _doc->setTextWidth(-1.0);
+      _doc->setTextWidth(_doc->idealWidth());   // to make alignment work
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -599,7 +605,7 @@ void TextB::layout(ScoreLayout* layout)
       if (parent() == 0)
             return;
 
-      Element::layout(layout);
+      Element::layout(layout);      // process alignment
 
       if (_align & ALIGN_VCENTER && subtype() == TEXT_TEXTLINE) {
             // special case: vertically centered text with TextLine needs to
@@ -1063,11 +1069,11 @@ QPainterPath TextB::shape() const
       }
 
 //---------------------------------------------------------
-//   basePosition
+//   baseLine
 //    returns ascent of first text line in first block
 //---------------------------------------------------------
 
-qreal TextB::basePosition() const
+qreal TextB::baseLine() const
       {
       for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
@@ -1212,7 +1218,7 @@ QLineF TextB::dragAnchor() const
       else if (_align & ALIGN_VCENTER)
             y = (th * .5);
       else if (_align & ALIGN_BASELINE)
-            y = basePosition();
+            y = baseLine();
       if (_align & ALIGN_RIGHT)
             x = tw;
       else if (_align & ALIGN_HCENTER)

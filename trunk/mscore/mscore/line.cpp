@@ -300,9 +300,8 @@ void SLine::layout(ScoreLayout* layout)
       QPointF p2 = tick2pos(1, _tick2, staffI, &s2);
 
       QList<System*>* systems = layout->systems();
-
       int sysIdx1        = systems->indexOf(s1);
-      int sysIdx2        = systems->indexOf(s2, sysIdx1);
+      int sysIdx2        = systems->indexOf(s2);
       int segmentsNeeded = sysIdx2 - sysIdx1 + 1;
 
       int segCount       = segments.size();
