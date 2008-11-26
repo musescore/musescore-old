@@ -162,6 +162,9 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 void Score::padToggle(int n)
       {
       switch (n) {
+            case PAD_NOTE0:
+                  _padState.len = division * 8;
+                  break;
             case PAD_NOTE1:
                   _padState.len = division * 4;
                   break;
@@ -212,10 +215,10 @@ void Score::padToggle(int n)
                   break;
             }
       setPadState();
-      if (n < PAD_NOTE1 || n > PAD_DOTDOT)
+      if (n < PAD_NOTE0 || n > PAD_DOTDOT)
             return;
 
-      if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
+      if (n >= PAD_NOTE0 && n <= PAD_NOTE64) {
             _padState.dots = 0;
             //
             // if in "note enter" mode, reset
@@ -335,6 +338,7 @@ void Score::setPadState()
       getAction("pad-dotdot")->setChecked(_padState.dots == 2);
       getAction("pad-tie")->setChecked(_padState.tie);
 
+      getAction("note-breve")->setChecked(_padState.len == division * 8);
       getAction("pad-note-1")->setChecked(_padState.len == division * 4);
       getAction("pad-note-2")->setChecked(_padState.len == division*2);
       getAction("pad-note-4")->setChecked(_padState.len == division);

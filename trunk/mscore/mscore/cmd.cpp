@@ -1614,11 +1614,10 @@ void Score::resetUserStretch()
       {
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() == MEASURE)
-                  ((Measure*)m)->setUserStretch(1.0);
+                  static_cast<Measure*>(m)->setUserStretch(1.0);
             }
       setDirty();
       layoutAll = true;
-      end();
       }
 
 //---------------------------------------------------------
@@ -2008,6 +2007,8 @@ void Score::cmd(const QString& cmd)
                   cmdAddPitch(5, true);
             else if (cmd == "chord-b")
                   cmdAddPitch(6, true);
+            else if (cmd == "note-breve")
+                  padToggle(PAD_NOTE0);
             else if (cmd == "pad-note-1")
                   padToggle(PAD_NOTE1);
             else if (cmd == "pad-note-2")
@@ -2240,6 +2241,8 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "reset-positions")
                   resetUserOffsets();
+            else if (cmd == "reset-stretch")
+                  resetUserStretch();
             else if (cmd == "")
                   ;
             else
@@ -2311,10 +2314,12 @@ void Score::cmdPaste()
             }
       else if ((sel->state() == SEL_STAFF || sel->state() == SEL_SINGLE)
          && ms->hasFormat(mimeStaffListFormat)) {
-            int tick = sel->startSegment()->tick();
-            int staffIdx = sel->staffStart;
-
-            if (sel->state() == SEL_SINGLE) {
+            int tick, staffIdx;
+            if (sel->state() == SEL_STAFF) {
+                  tick = sel->startSegment()->tick();
+                  int staffIdx = sel->staffStart;
+                  }
+            else if (sel->state() == SEL_SINGLE) {
                   Element* e = sel->element();
                   if (e->type() != NOTE && e->type() != REST) {
                         printf("cannot paste to %s\n", e->name());

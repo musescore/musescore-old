@@ -182,7 +182,7 @@ Style defaultStyle = {
       Spatium(1.5),   // barNoteDistance
       Spatium(1.0),   // noteBarDistance
 
-      1.3,              // measureSpacing
+      1.2,              // measureSpacing
 
       Spatium(0.08),    // staff line width
       Spatium(0.08),    // ledgerLineWidth;
