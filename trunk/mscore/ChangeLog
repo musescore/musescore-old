@@ -2,6 +2,8 @@
       - add breve note head to palette
       - cross beam fixes
       - fix changing time signature
+      (sy)
+      - add reload score action
 25.nov (ws)
       - fix dragging of dynamics text
       - fix text baseline alignement

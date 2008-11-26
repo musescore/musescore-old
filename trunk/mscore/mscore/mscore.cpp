@@ -322,7 +322,8 @@ MuseScore::MuseScore()
          << "rehearsalmark-text" << "copyright-text"
          << "lyrics" << "fingering" << "system-text" << "staff-text" << "tempo"
          << "cut" << "copy" << "paste"
-         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-save-a-copy" << "file-close"
+         << "file-open" << "file-new" << "file-save" << "file-save-as"
+         << "file-save-a-copy" << "file-reload" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
          << "rewind" << "play" << "pause" <<"repeat"
@@ -527,6 +528,9 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("file-save"));
       menuFile->addAction(getAction("file-save-as"));
       menuFile->addAction(getAction("file-save-a-copy"));
+      menuFile->addSeparator();
+      menuFile->addAction(getAction("file-reload"));
+      menuFile->addSeparator();
       menuFile->addAction(getAction("file-close"));
 
       menuFile->addSeparator();
@@ -864,18 +868,11 @@ void MuseScore::selectScore(QAction* action)
       {
       ProjectItem* item = (ProjectItem*)action->data().value<void*>();
       if (item) {
-            int n = scoreList.size();
-            for (int i = 0; i < n; ++i) {
-                  if (scoreList[i]->filePath() == item->getName()) {
-                        tab->setCurrentIndex(i);
-                        return;
-                        }
-                  }
             Score* score = new Score();
             score->addViewer(new Canvas);
             score->read(item->getName());
             appendScore(score);
-            tab->setCurrentIndex(scoreList.size() - 1);
+            tab->setCurrentIndex(scoreList.indexOf(score));
             }
       }
 
@@ -899,14 +896,18 @@ void MuseScore::appendScore(Score* score)
       if (score->getViewer().isEmpty())
             score->addViewer(new Canvas);
 
+      connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
+      connect(score, SIGNAL(stateChanged(int)), SLOT(changeState(int)));
+
       for (int i = 0; i < scoreList.size(); ++i) {
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
-                  break;
+                  scoreList.insert(i, score);
+                  tab->insertTab(i, score->canvas(), score->name());
+                  return;
                   }
             }
-      connect(score, SIGNAL(dirtyChanged(Score*)), SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(stateChanged(int)), SLOT(changeState(int)));
+
       scoreList.push_back(score);
 
       tab->addTab(score->canvas(), score->name());
@@ -1142,15 +1143,18 @@ void MuseScore::dropEvent(QDropEvent* event)
       {
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
+            Score* lastScore = 0;
             foreach(QUrl u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score();
                         score->addViewer(new Canvas);
                         score->read(u.path());
                         appendScore(score);
+                        lastScore = score;
                         }
                   }
-            tab->setCurrentIndex(scoreList.size() - 1);
+            if (lastScore)
+                  tab->setCurrentIndex(scoreList.indexOf(lastScore));
             event->acceptProposedAction();
             }
       }
@@ -1750,6 +1754,17 @@ void MuseScore::cmd(QAction* a)
             loadFile();
       else if (cmd == "file-save")
             saveFile();
+      else if (cmd == "file-reload") {
+            if (cs && !cs->created() && !checkDirty(cs)) {
+                  Score* score = new Score();
+                  score->addViewer(new Canvas);
+                  score->read(cs->filePath());
+                  // hack: so we don't get another checkDirty in appendScore
+                  cs->setDirty(false);
+                  appendScore(score);
+                  setCurrentScore(scoreList.indexOf(score));
+                  }
+            }
       else if (cmd == "file-close")
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {

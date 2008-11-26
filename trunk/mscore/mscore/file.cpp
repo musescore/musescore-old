@@ -201,7 +201,7 @@ void MuseScore::loadFile()
       score->read(fn);
       appendScore(score);
       lastOpenPath = score->fileInfo()->path();
-      tab->setCurrentIndex(scoreList.size() - 1);
+      tab->setCurrentIndex(scoreList.indexOf(score));
       }
 
 //---------------------------------------------------------
