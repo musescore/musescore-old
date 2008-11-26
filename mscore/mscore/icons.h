@@ -27,6 +27,7 @@ enum {
       };
 
 extern void genIcons();
+extern QIcon brevisIcon;
 extern QIcon noteIcon;
 extern QIcon note2Icon;
 extern QIcon note4Icon;

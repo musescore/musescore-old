@@ -423,7 +423,7 @@ void TextB::setSubtype(int val)
 
 void TextB::setAbove(bool val)
       {
-      setYoff(val ? -2.0 : 7.0);
+      // setYoff(val ? -2.0 : 7.0);
       }
 
 //---------------------------------------------------------

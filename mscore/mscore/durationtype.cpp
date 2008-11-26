@@ -187,6 +187,8 @@ int Duration::headType() const
                   headType = 0;
                   break;
             case V_BREVE:
+                  headType = 3;
+                  break;
             case V_LONG:      // not impl.
                   headType = 3;
                   break;

@@ -1028,6 +1028,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "note-breve",
+         QT_TR_NOOP("note breve"),
+         Qt::Key_8,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("2/1"),
+         QT_TR_NOOP("2/1"),
+         &brevisIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-1",
          QT_TR_NOOP("pad note 1/1"),
          Qt::Key_7,
@@ -1846,6 +1856,15 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TR_NOOP("Inspector"),
          QT_TR_NOOP("Inspector")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "reset-stretch",
+         QT_TR_NOOP("reset measure stretch"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Reset Stretch"),
+         QT_TR_NOOP("Reset Stretch")
          ),
       Shortcut(0, 0, 0),
       };

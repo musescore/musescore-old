@@ -1190,11 +1190,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   domError(e);
             } // for (e = e.firstChildElement(); ...
 
-//WS      if (placement == "above")
-//            ry -= 2;
-//      else
-//            ry += 2;
-
 /*
       printf(" tempo=%s txt=%s coda=%d segno=%d sndCapo=%s sndCoda=%s"
              " sndDacapo=%s sndDalsegno=%s sndFine=%s sndSegno=%s\n",
@@ -2438,9 +2433,13 @@ printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
 //                  tuplet->add(cr);
                   }
             else if (tupletType == "stop") {
-                  cr->setTuplet(tuplet);
-                  tuplet->add(cr);
-                  tuplet = 0;
+                  if (tuplet) {
+                        cr->setTuplet(tuplet);
+                        tuplet->add(cr);
+                        tuplet = 0;
+                        }
+                  else
+                        printf("MusicXML::import: tuplet stop without tuplet start\n");
                   }
             else
                   printf("unknown tuplet type %s\n", tupletType.toLatin1().data());

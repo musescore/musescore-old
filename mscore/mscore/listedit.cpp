@@ -703,6 +703,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.upFlag->setChecked(chord->up());
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
       crb.isUpFlag->setChecked(chord->isUp());
+      crb.dots->setValue(chord->dots());
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
@@ -935,6 +936,8 @@ void ShowRestWidget::setElement(Element* e)
       crb.upFlag->setChecked(rest->up());
       crb.beamMode->setCurrentIndex(int(rest->beamMode()));
       crb.attributes->clear();
+      crb.dots->setValue(rest->dots());
+
       foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);

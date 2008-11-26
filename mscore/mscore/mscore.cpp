@@ -454,8 +454,8 @@ MuseScore::MuseScore()
 
       QStringList sl1;
       sl1 << "pad-note-64" << "pad-note-32" << "pad-note-16" << "pad-note-8"
-         << "pad-note-4" << "pad-note-2" << "pad-note-1" << "pad-dot" << "pad-dotdot"
-         << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
+         << "pad-note-4" << "pad-note-2" << "pad-note-1" << "note-breve" << "pad-dot"
+         << "pad-dotdot" << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
          << "pad-nat" << "pad-flat"  <<"pad-flat2";
 
       foreach(const QString s, sl1) {
@@ -656,7 +656,7 @@ MuseScore::MuseScore()
       menuLayout->addAction(getAction("stretch+"));
       menuLayout->addAction(getAction("stretch-"));
 
-      menuLayout->addAction(tr("Reset Stretch"), this, SLOT(resetUserStretch()));
+      menuLayout->addAction(getAction("reset-stretch"));
       menuLayout->addAction(getAction("reset-beammode"));
       menuLayout->addAction(tr("Breaks..."), this, SLOT(showLayoutBreakPalette()));
 
@@ -1153,16 +1153,6 @@ void MuseScore::dropEvent(QDropEvent* event)
             tab->setCurrentIndex(scoreList.size() - 1);
             event->acceptProposedAction();
             }
-      }
-
-//---------------------------------------------------------
-//   resetUserStretch
-//---------------------------------------------------------
-
-void MuseScore::resetUserStretch()
-      {
-      if (cs)
-            cs->resetUserStretch();
       }
 
 //---------------------------------------------------------

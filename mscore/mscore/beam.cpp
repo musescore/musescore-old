@@ -906,12 +906,13 @@ void Beam::layout(ScoreLayout* layout)
 
 void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       {
+// printf("layoutCrossStaff\n");
       qreal slope = 0.0;
       if (_userModified) {
             double p1x = c1->upNote()->canvasPos().x();
             double p2x = c2->upNote()->canvasPos().x();
             slope      = (_p2.y() - _p1.y()) / (p2x - p1x);
-            double y2  = _p1.y() + parent()->canvasPos().y();
+            double y2  = _p1.y() + (c1->upNote()->canvasPos() - c1->upNote()->pos()).y();
 
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
@@ -929,10 +930,12 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
 
             _up = move == 1;
             foreach(ChordRest* cr, _elements) {
+                  bool up = cr->up();
                   if (move == 1)
-                        cr->setUp(cr->staffMove() == 0);
+                        up = cr->staffMove() == 0;
                   else if (move == -1)
-                        cr->setUp(cr->staffMove() != 0);
+                        up = cr->staffMove() != 0;
+                  cr->setUp(up);
                   }
             }
 
@@ -959,41 +962,46 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       p1 = QPointF(x1, p1s.y());
       p2 = QPointF(x2, p1.y() + ys);
 
-      double yo1 =  100000;    //minimum staff 0
-      double yu2 =  -100000;   //maximum staff 1
-
-      foreach(ChordRest* cr, _elements) {
-            _up = cr->up();
-            if (cr->type() != CHORD)
-                  continue;
-            double y = cr->stemPos(_up, false).y();
-            if (cr->staffMove() == 0) {
-                 if (y < yo1)
-                        yo1 = y;
-                  }
-            else if (cr->staffMove() == 1) {
-                  if (y > yu2)
-                        yu2 = y;
-                  }
-            else
-                  printf("staff move %d not supported\n", cr->staffMove());
-            }
-
-      double moveY = (yu2 - yo1) * .5;
-      if (c1->staffMove() == 1)
-            moveY *= -1;
-
-      p1.ry() += moveY;
-      p2.ry() += moveY;
-
-      //---------------------------------------------------
       if (_userModified) {
             p1.setY(_p1.y());
             p2.setY(_p2.y());
             slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
             }
-      _p1 = p1;
-      _p2 = p2;
+      else {
+            double yu2, yo1;
+            yu2 = -100000;   //maximum staff 0
+            yo1 = 100000;    //minimum staff 1
+
+            foreach(ChordRest* cr, _elements) {
+                  if (cr->type() != CHORD)
+                        continue;
+                  _up = cr->up();
+// printf("  up %d %f %f\n", _up,
+//   cr->stemPos(true, false).y(),
+//   cr->stemPos(false, false).y());
+
+                  double y = cr->stemPos(!_up, false).y();
+                  if (cr->staffMove() == 0) {
+                        if (y < yo1)
+                              yo1 = y;
+                        }
+                  else if (cr->staffMove() == -1) {
+                        if (y > yu2)
+                              yu2 = y;
+                        }
+                  else if (cr->staffMove() == 1) {
+                        if (y > yu2)
+                              yu2 = y;
+                        }
+                  }
+            double mY = yo1 + (yu2 - yo1) * .5;
+
+// printf(" = %f   %f %f\n", mY, yu2, yo1);
+            p1.ry() = mY;
+            p2.ry() = mY;
+            _p1 = p1;
+            _p2 = p2;
+            }
 
       double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
                         + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
