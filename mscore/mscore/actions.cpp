@@ -68,6 +68,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         "file-reload",
+         QT_TR_NOOP("file reload"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Reload"),
+         QT_TR_NOOP("Reload Score from File")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-close",
          QT_TR_NOOP("file close"),
          Qt::CTRL+Qt::Key_W,
