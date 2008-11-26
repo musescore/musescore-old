@@ -236,6 +236,8 @@ Note* Score::addNote(Chord* chord, int pitch)
 
 void Score::changeTimeSig(int tick, int timeSigSubtype)
       {
+      undoFixTicks();
+
       int oz, on;
       sigmap->timesig(tick, oz, on);
 
@@ -352,7 +354,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             }
       if (nSig.valid())
             addTimeSig(tick, timeSigSubtype);
-      fixTicks();
+      undoFixTicks();
       }
 
 //---------------------------------------------------------
