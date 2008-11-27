@@ -22,10 +22,13 @@ install(FILES
       instruments_de.xml
       instruments_it.xml
       instruments.xml
+      Choir_SATB.mscz
+      Choir_SATB_with_Piano.mscz
+      Hymn.mscz
+      leadsheet.msc
+      Piano.mscz
       pianoa5demo.msc
       violina5demo.msc
-      a4piano.msc
-      leadsheet.msc
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 
