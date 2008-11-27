@@ -85,7 +85,7 @@ const TextStyle defaultTextStyleArray[] = {
 
 /*13*/
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT),

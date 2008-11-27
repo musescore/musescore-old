@@ -2007,6 +2007,8 @@ void Score::cmd(const QString& cmd)
                   cmdAddPitch(5, true);
             else if (cmd == "chord-b")
                   cmdAddPitch(6, true);
+            else if (cmd == "note-longa")
+                  padToggle(PAD_NOTE00);
             else if (cmd == "note-breve")
                   padToggle(PAD_NOTE0);
             else if (cmd == "pad-note-1")

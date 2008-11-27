@@ -30,6 +30,7 @@
 #include "data/editpaste.xpm"
 #include "data/fileprint.xpm"
 
+QIcon longaUpIcon;
 QIcon brevisIcon;
 QIcon noteIcon;
 QIcon note2Icon;
@@ -104,6 +105,7 @@ void genIcons()
       int iw = preferences.noteEntryIconWidth;
       int ih = preferences.noteEntryIconHeight;
 
+      longaUpIcon        = symIcon(symbols[longaupSym], 20, iw, ih);
       brevisIcon         = symIcon(symbols[brevisheadSym], 20, iw, ih);
       noteIcon           = symIcon(symbols[wholeheadSym], 20, iw, ih);
       note2Icon          = symIcon(symbols[note2Sym], 20, iw, ih);

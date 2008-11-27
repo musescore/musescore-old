@@ -669,6 +669,9 @@ void Score::cmdRemovePart(Part* part)
       int sidx   = staffIdx(part);
       int n      = part->nstaves();
       int eidx   = sidx + n;
+
+// printf("cmdRemovePart %d-%d\n", sidx, eidx);
+
 //      int strack = sidx * VOICES;
 //      int etrack = eidx * VOICES;
 

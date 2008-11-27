@@ -40,9 +40,10 @@ class TempoText : public Text  {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
       virtual void layout(ScoreLayout*);
-
-      double tempo() const    { return _tempo; }
-      void setTempo(double v) { _tempo = v; }
+      QLineF dragAnchor() const;
+      Measure* measure() const { return (Measure*)parent(); }
+      double tempo() const     { return _tempo; }
+      void setTempo(double v)  { _tempo = v; }
       };
 
 //---------------------------------------------------------

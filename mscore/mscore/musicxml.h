@@ -82,7 +82,7 @@ class MusicXml {
       std::vector<int> voicelist[MAX_STAVES];
 
       Slur* slur[MAX_SLURS];
-      
+
       TextLine* bracket[MAX_BRACKETS];
 
       Tie* tie;
@@ -127,6 +127,7 @@ class MusicXml {
       void xmlLyric(Measure* measure, int staff, QDomElement e);
       void xmlNote(Measure*, int stave, QDomElement node);
       void xmlHarmony(QDomElement node, int tick, Measure* m);
+      void xmlClef(QDomElement, int staffIdx, Measure*);
 
    public:
       MusicXml(QDomDocument* d);

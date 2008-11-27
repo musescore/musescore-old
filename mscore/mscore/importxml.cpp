@@ -1642,62 +1642,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (e.tagName() == "clef") {
-                  int clef   = 0;
-                  int clefno = e.attribute(QString("number"), "1").toInt() - 1;
-                  QString c;
-                  int i = 0;
-                  int line = -1;
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "sign")
-                              c = ee.text();
-                        else if (ee.tagName() == "line")
-                              line = ee.text().toInt();
-                        else if (ee.tagName() == "clef-octave-change") {
-                              i = ee.text().toInt();
-                              if (i && !(c == "F" || c == "G"))
-                                    printf("clef-octave-change only implemented for F and G key\n");
-                              }
-                        else
-                              domError(ee);
-                        }
-                  if (c == "G" && i == 0)
-                        clef = 0;
-                  else if (c == "G" && i == 1)
-                        clef = 1;
-                  else if (c == "G" && i == 2)
-                        clef = 2;
-                  else if (c == "G" && i == -1)
-                        clef = 3;
-                  else if (c == "F" && i == 0)
-                        clef = 4;
-                  else if (c == "F" && i == -1)
-                        clef = 5;
-                  else if (c == "F" && i == -2)
-                        clef = 6;
-                  else if (c == "C") {
-                        if (line == 4)
-                              clef = CLEF_C4;
-                        else if (line == 3)
-                              clef = CLEF_C3;
-                        else if (line == 2)
-                              clef = CLEF_C2;
-                        else if (line == 1)
-                              clef = CLEF_C1;
-                        }
-                  Staff* part = score->staff(staff + clefno);
-                  ClefList* ct = part->clefList();
-                  (*ct)[tick] = clef;
-                  if (tick) {
-                        // dont generate symbol for tick 0
-                        Clef* clefs = new Clef(score, clef);
-                        clefs->setTick(tick);
-                        clefs->setTrack((staff + clefno) * VOICES);
-                        Segment* s = measure->getSegment(clefs);
-                        s->add(clefs);
-                        ++clefno;
-                        }
-                  }
+            else if (e.tagName() == "clef")
+                  xmlClef(e, staff, measure);
             else if (e.tagName() == "staves") {
                   int staves = e.text().toInt();
                   Part* part = score->part(staff);
@@ -1892,6 +1838,19 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
+            else if (tag == "unpitched") {
+                  //
+                  // TODO: check semantic
+                  //
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "display-step")          // A-G
+                              step = ee.text();
+                        else if (ee.tagName() == "display-octave")   // 0-9 4=middle C
+                              octave = ee.text().toInt();
+                        else
+                              domError(ee);
+                        }
+                  }
             else if (tag == "duration")
                   duration = s.toInt();
             else if (tag == "type")
@@ -1948,7 +1907,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                  staff, relStaff, voicelist[relStaff].size(), VOICES);
                         else {
                               voicelist[relStaff].push_back(voice);
-printf(" append %d to voicelist[%d]\n", voice, relStaff);
+// printf(" append %d to voicelist[%d]\n", voice, relStaff);
                               voice = voicelist[relStaff].size() -1;
                               }
                         }
@@ -2173,19 +2132,18 @@ printf(" append %d to voicelist[%d]\n", voice, relStaff);
                         }
                   }
             else if (tag == "notehead") {
-                  if(s=="slash"){
-                	  headGroup = 5;
-                  }else if (s=="triangle"){
-                	  headGroup = 3;
-                  }else if (s=="diamond"){
-                	  headGroup = 4;
-                  }else if (s=="x"){
-                	  headGroup = 1;
-                  }else if (s=="circle-x"){
-                	  headGroup = 6;
-				  }else{
-					  printf("unknown notehead %s\n", s.toLatin1().data());
-					  }
+                  if (s == "slash")
+                	      headGroup = 5;
+                  else if (s == "triangle")
+                	      headGroup = 3;
+                  else if (s == "diamond")
+                	      headGroup = 4;
+                  else if (s == "x")
+                	      headGroup = 1;
+                  else if (s == "circle-x")
+                	      headGroup = 6;
+                  else
+			     printf("unknown notehead %s\n", qPrintable(s));
                   }
             else if (tag == "instrument")
                   domNotImplemented(e);
@@ -2670,5 +2628,71 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             }
       ha->setVisible(printObject == "yes");
       measure->add(ha);
+      }
+
+//---------------------------------------------------------
+//   xmlClef
+//---------------------------------------------------------
+
+void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
+      {
+      int clef   = 0;
+      int clefno = e.attribute(QString("number"), "1").toInt() - 1;
+      QString c;
+      int i = 0;
+      int line = -1;
+      for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+            if (ee.tagName() == "sign")
+                  c = ee.text();
+            else if (ee.tagName() == "line")
+                  line = ee.text().toInt();
+            else if (ee.tagName() == "clef-octave-change") {
+                  i = ee.text().toInt();
+                  if (i && !(c == "F" || c == "G"))
+                        printf("clef-octave-change only implemented for F and G key\n");
+                  }
+            else
+                  domError(ee);
+            }
+      if (c == "G" && i == 0)
+            clef = CLEF_G;
+      else if (c == "G" && i == 1)
+            clef = CLEF_G1;
+      else if (c == "G" && i == 2)
+            clef = CLEF_G2;
+      else if (c == "G" && i == -1)
+            clef = CLEF_G3;
+      else if (c == "F" && i == 0)
+            clef = CLEF_F;
+      else if (c == "F" && i == -1)
+            clef = CLEF_F8;
+      else if (c == "F" && i == -2)
+            clef = CLEF_F15;
+      else if (c == "C") {
+            if (line == 4)
+                  clef = CLEF_C4;
+            else if (line == 3)
+                  clef = CLEF_C3;
+            else if (line == 2)
+                  clef = CLEF_C2;
+            else if (line == 1)
+                  clef = CLEF_C1;
+            }
+      else if (c == "percussion")
+            clef = CLEF_PERC;
+      else
+            printf("ImportMusicXML: unknown clef <%s>\n", qPrintable(c));
+      Staff* part = score->staff(staffIdx + clefno);
+      ClefList* ct = part->clefList();
+      (*ct)[tick] = clef;
+      if (tick) {
+            // dont generate symbol for tick 0
+            Clef* clefs = new Clef(score, clef);
+            clefs->setTick(tick);
+            clefs->setTrack((staffIdx + clefno) * VOICES);
+            Segment* s = measure->getSegment(clefs);
+            s->add(clefs);
+            ++clefno;   // ??
+            }
       }
 

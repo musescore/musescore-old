@@ -1037,6 +1037,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "note-longa",
+         QT_TR_NOOP("note breve"),
+         Qt::Key_9,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("4/1"),
+         QT_TR_NOOP("4/1"),
+         &longaUpIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-breve",
          QT_TR_NOOP("note breve"),
          Qt::Key_8,

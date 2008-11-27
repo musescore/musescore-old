@@ -363,6 +363,8 @@ void TextC::setStyle(const TextStyle* s)
       _ryoff         = s->ryoff;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+
+      setSystemFlag(s->systemFlag);
       if (s->systemFlag)
             setTrack(-1);
       }
@@ -642,8 +644,7 @@ void TextB::setStyle(const TextStyle* s)
       _ryoff         = s->ryoff;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-      if (s->systemFlag)
-            setSystemFlag(true);
+      setSystemFlag(s->systemFlag);
 
       textBase()->setFrameWidth(s->frameWidth);
       textBase()->setPaddingWidth(s->paddingWidth);

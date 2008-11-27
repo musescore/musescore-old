@@ -134,7 +134,9 @@ static void applyDrop(Score* score, Viewer* viewer, Element* target, Element* e)
 
 void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       {
-      int i               = idx(ev->pos());
+      int i = idx(ev->pos());
+      if (i == -1)
+            return;
       Score* score        = mscore->currentScore();
       Selection* sel      = score->selection();
 

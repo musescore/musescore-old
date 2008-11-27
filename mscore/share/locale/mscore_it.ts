@@ -883,6 +883,10 @@ licato secondo la Licenza GNU Pubblica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</tran
         <source>isUp</source>
         <translation>In su</translation>
     </message>
+    <message>
+        <source>Dots:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DynamicBase</name>
@@ -4450,6 +4454,38 @@ Desideri Salvare lo Spartito?</translation>
         <source>Inspector</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>file reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload Score from File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4/1</source>
+        <translation type="unfinished">4/1</translation>
+    </message>
+    <message>
+        <source>2/1</source>
+        <translation type="unfinished">2/1</translation>
+    </message>
+    <message>
+        <source>..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset measure stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4577,10 +4613,6 @@ Desideri Salvare lo Spartito?</translation>
     <message>
         <source>Mirror Head</source>
         <translation>Rifletti Testa</translation>
-    </message>
-    <message>
-        <source>Dots</source>
-        <translation>Puntature</translation>
     </message>
     <message>
         <source>Move</source>

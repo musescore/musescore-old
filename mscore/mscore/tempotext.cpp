@@ -127,15 +127,31 @@ void TempoProperties::saveValues()
       }
 
 //---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF TempoText::dragAnchor() const
+      {
+      Measure* m      = measure();
+      System*  system = m->system();
+      double yp       = system->y(); // system->staff(staffIdx())->y() + system->y();
+      double xp       = m->tick2pos(tick()) + m->canvasPos().x();
+      QPointF cp      = canvasPos()  + QPointF(0.0, baseLine());
+      return QLineF(cp, QPointF(xp, yp));
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void TempoText::layout(ScoreLayout* l)
       {
+      if (tick() == -1)
+            return;
       Text::layout(l);
-      Measure* m = (Measure*)parent();
-      double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
-      double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+      Measure* m = measure();
+      double y   = 0;  // track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
+      double x   = m->tick2pos(tick());
       setPos(ipos() + QPointF(x, y));
       }
 

@@ -406,8 +406,9 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
             int nstaves = _score->nstaves();
             for (int i = system->staves()->size(); i < nstaves; ++i)
                   system->insertStaff(i);
-            for (int i = nstaves; i < system->staves()->size(); ++i)
-                  system->removeStaff(nstaves);
+            int dn = system->staves()->size() - nstaves;
+            for (int i = 0; i < dn; ++i)
+                  system->removeStaff(system->staves()->size()-1);
             }
       return system;
       }
@@ -556,8 +557,12 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
+      double xo = 0;
+      if (curMeasure->type() == HBOX)
+            xo = curMeasure->width();
+
       system->setInstrumentNames();
-      system->layout(this);
+      system->layout(this, xo);
       minWidth            = system->leftMargin();
       double systemWidth  = w;
 
@@ -724,7 +729,6 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
       bool needRelayout = false;
 
-
       foreach(System* system, sl) {
             //
             //    add cautionary time signatures if needed
@@ -822,18 +826,24 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       double xx   = 0.0;
 
       foreach(System* system, sl) {
-            QPointF pos(system->leftMargin(), 0);
+            QPointF pos;
 
+            bool firstMeasure = true;
             foreach(MeasureBase* mb, system->measures()) {
-                  mb->setPos(pos);
                   double ww = 0.0;
                   if (mb->type() == MEASURE) {
+                        if (firstMeasure) {
+                              pos.rx() += system->leftMargin();
+                              firstMeasure = false;
+                              }
+                        mb->setPos(pos);
                         Measure* m    = static_cast<Measure*>(mb);
                         double weight = m->tickLen() * m->userStretch();
                         ww            = m->layoutWidth().stretchable + rest * weight;
                         m->layout(this, ww);
                         }
                   else if (mb->type() == HBOX) {
+                        mb->setPos(pos);
                         ww = static_cast<Box*>(mb)->boxWidth().point();
                         mb->layout(this);
                         }

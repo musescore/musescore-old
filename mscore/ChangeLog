@@ -1,3 +1,11 @@
+27.nov (ws)
+      - fixed crash when double click into empty palette cell
+      - fix: layout bug if system starts with a horizontal frame
+      - set system flag to TempoText(); export tempo text to parts
+      - adding longa note head to palette;
+      - recognize percussion clef on musicXML import
+      - fix crash in instrument list dialog when removing piano (multi staff part) from
+        instrument list
 26.nov (ws)
       - add breve note head to palette
       - cross beam fixes
