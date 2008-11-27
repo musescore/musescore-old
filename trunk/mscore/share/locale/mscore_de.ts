@@ -875,6 +875,10 @@ p, li { white-space: pre-wrap; }
         <source>isUp</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dots:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DynamicBase</name>
@@ -4444,6 +4448,38 @@ Aktuelle Partitur sichern? </translation>
         <source>Inspector</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>file reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload Score from File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4/1</source>
+        <translation type="unfinished">4/1</translation>
+    </message>
+    <message>
+        <source>2/1</source>
+        <translation type="unfinished">2/1</translation>
+    </message>
+    <message>
+        <source>..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset measure stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4571,10 +4607,6 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <source>Mirror Head</source>
         <translation>Kopf gespiegelt</translation>
-    </message>
-    <message>
-        <source>Dots</source>
-        <translation>Punkte</translation>
     </message>
     <message>
         <source>Move</source>

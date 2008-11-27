@@ -455,7 +455,8 @@ MuseScore::MuseScore()
 
       QStringList sl1;
       sl1 << "pad-note-64" << "pad-note-32" << "pad-note-16" << "pad-note-8"
-         << "pad-note-4" << "pad-note-2" << "pad-note-1" << "note-breve" << "pad-dot"
+         << "pad-note-4" << "pad-note-2" << "pad-note-1" << "note-breve" << "note-longa"
+         << "pad-dot"
          << "pad-dotdot" << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
          << "pad-nat" << "pad-flat"  <<"pad-flat2";
 

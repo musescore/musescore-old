@@ -132,18 +132,23 @@ SysStaff* System::removeStaff(int idx)
 
 //---------------------------------------------------------
 //   layout
+//    If first MeasureBase is a HBOX, then xo1 is the
+//    width of this box.
 //---------------------------------------------------------
 
 /**
  Layout the System.
 */
 
-void System::layout(ScoreLayout* layout)
+void System::layout(ScoreLayout* layout, double xo1)
       {
       if (isVbox())                 // ignore vbox
             return;
       static const Spatium instrumentNameOffset(1.0);
       int nstaves  = _staves.size();
+
+      if (nstaves != score()->nstaves())
+            printf("System::layout: nstaves %d != %d\n", nstaves, score()->nstaves());
 
       //---------------------------------------------------
       //  find x position of staves
@@ -158,7 +163,7 @@ void System::layout(ScoreLayout* layout)
             bracketWidth[i] = 0.0;
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            Staff* s = score()->staff(staffIdx);
+            Staff* s     = score()->staff(staffIdx);
             SysStaff* ss = _staves[staffIdx];
             if (!ss->show())
                   continue;
@@ -209,6 +214,7 @@ void System::layout(ScoreLayout* layout)
       //  layout  SysStaff and StaffLines
       //---------------------------------------------------
 
+      // xoff2 += xo1;
       _leftMargin = xoff2;
 
       for (int i = 0; i < bracketLevels; ++i)
@@ -222,7 +228,7 @@ void System::layout(ScoreLayout* layout)
                   continue;
                   }
             double staffMag = staff->mag();
-            s->setbbox(QRectF(_leftMargin, 0.0, 0.0, 4 * _spatium * staffMag));
+            s->setbbox(QRectF(_leftMargin + xo1, 0.0, 0.0, 4 * _spatium * staffMag));
             }
 
       if (nstaves > 1 && barLine == 0) {
@@ -235,7 +241,7 @@ void System::layout(ScoreLayout* layout)
             barLine = 0;
             }
       if (barLine) {
-            barLine->setPos(_leftMargin, score()->style()->barWidth.point() * .25);
+            barLine->setPos(_leftMargin + xo1, score()->style()->barWidth.point() * .25);
             }
 
       //---------------------------------------------------
@@ -275,7 +281,7 @@ void System::layout(ScoreLayout* layout)
                               }
                         }
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
-                  b->setPos(_leftMargin - xo, sy);
+                  b->setPos(_leftMargin - xo + xo1, sy);
                   b->setHeight(ey - sy);
                   }
             }
@@ -290,7 +296,7 @@ void System::layout(ScoreLayout* layout)
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
                   double d  = instrumentNameOffset.point() + s->instrumentName->bbox().width();
-                  s->instrumentName->setXpos(xoff2 - d);
+                  s->instrumentName->setXpos(xoff2 - d + xo1);
                   }
             idx += nstaves;
             }

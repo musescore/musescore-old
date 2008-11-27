@@ -113,7 +113,7 @@ class System : public Element {
 
       Page* page() const                 { return (Page*)parent(); }
 
-      virtual void layout(ScoreLayout*);
+      virtual void layout(ScoreLayout*, double xoffset);
       void layout2(ScoreLayout*);         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 

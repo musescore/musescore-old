@@ -624,6 +624,9 @@ void initSymbols()
       symbols[leftparenSym]               = Sym("left parenthesis",         0xe11e, 0);
       symbols[dotSym]                     = Sym("dot",                      0xe127, 0);
 
+      symbols[longaupSym]                 = Sym("longa up",                 0xe128, 0);
+      symbols[longadownSym]               = Sym("longa down",               0xe129, 0);
+
       symbols[brevisheadSym]              = Sym("brevis head",              0xe12a, 0);
       symbols[wholeheadSym]               = Sym("whole head",               0xe12b, 0);
       symbols[halfheadSym]                = Sym("half head",                0xe12c, 0);

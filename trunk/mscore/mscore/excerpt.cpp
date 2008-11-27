@@ -92,9 +92,9 @@ bool Excerpt::operator!=(const Excerpt& e) const
 
 Score* Score::createExcerpt(Excerpt* excerpt)
       {
-      Score* s = new Score();
+      Score* s      = new Score();
       QFileInfo* fi = s->fileInfo();
-      QString name = fileInfo()->path() + "/" + excerpt->name() + ".msc";
+      QString name  = fileInfo()->path() + "/" + excerpt->name() + ".msc";
       fi->setFile(name);
 
       QBuffer buffer;

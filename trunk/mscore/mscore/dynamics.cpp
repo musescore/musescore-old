@@ -228,8 +228,7 @@ QLineF Dynamic::dragAnchor() const
       System*  system = m->system();
       double yp       = system->staff(staffIdx())->y() + system->y();
       double xp       = m->tick2pos(tick()) + m->canvasPos().x();
-
-      QPointF cp     = canvasPos()  + QPointF(0.0, baseLine());
+      QPointF cp      = canvasPos()  + QPointF(0.0, baseLine());
       return QLineF(cp, QPointF(xp, yp));
       }
 

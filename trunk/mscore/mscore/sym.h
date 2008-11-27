@@ -147,6 +147,8 @@ enum {
       rightparenSym,
       leftparenSym,
       dotSym,
+      longaupSym,
+      longadownSym,
       brevisheadSym,
       wholeheadSym,
       halfheadSym,

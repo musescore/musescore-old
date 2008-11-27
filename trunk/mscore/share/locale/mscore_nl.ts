@@ -876,6 +876,10 @@ p, li { white-space: pre-wrap; }
         <source>Beam Mode:</source>
         <translation>Waardestreep Modus:</translation>
     </message>
+    <message>
+        <source>Dots:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DynamicBase</name>
@@ -4441,6 +4445,38 @@ Save Current Score?</source>
         <source>Inspector</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>file reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload Score from File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4/1</source>
+        <translation type="unfinished">4/1</translation>
+    </message>
+    <message>
+        <source>2/1</source>
+        <translation type="unfinished">2/1</translation>
+    </message>
+    <message>
+        <source>..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reset measure stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4609,10 +4645,6 @@ Save Current Score?</source>
     <message>
         <source>Tie Back</source>
         <translation>Boog Achterwaarts</translation>
-    </message>
-    <message>
-        <source>Dots</source>
-        <translation>Punten</translation>
     </message>
     <message>
         <source>Accidental</source>
