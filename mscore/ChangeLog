@@ -4,6 +4,8 @@
       - fix changing time signature
       (sy)
       - add reload score action
+      - fix MusicXml importer voice mapper when staff >= 4
+        (e.g. in ActorPrelude.xml, harp part has staffIdx 16)
 25.nov (ws)
       - fix dragging of dynamics text
       - fix text baseline alignement

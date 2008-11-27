@@ -1932,8 +1932,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         int v = 0;
                         for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
                               if (*i == voice) {
-                                    int d = relStaff + staff - s;
-                                    relStaff -= d;
+                                    int d = relStaff - s;
+                                    relStaff = s;
                                     move += d;
                                     voice = v;
 //                                    printf(" found at s=%d", s);
@@ -1943,13 +1943,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         }
                   if (!found) {
-                        if (voicelist[staff+relStaff].size() >= unsigned(VOICES))
+                        if (voicelist[relStaff].size() >= unsigned(VOICES))
                               printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
-                                 staff, relStaff, voicelist[staff+relStaff].size(), VOICES);
+                                 staff, relStaff, voicelist[relStaff].size(), VOICES);
                         else {
-                              voicelist[staff+relStaff].push_back(voice);
-printf(" append %d to voicelist[%d]\n", voice, staff+relStaff);
-                              voice = voicelist[staff+relStaff].size() -1;
+                              voicelist[relStaff].push_back(voice);
+printf(" append %d to voicelist[%d]\n", voice, relStaff);
+                              voice = voicelist[relStaff].size() -1;
                               }
                         }
 //                  printf(" after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
