@@ -800,7 +800,7 @@ bool TextB::readProperties(QDomElement e)
 
 bool TextB::startEdit(Viewer* view, const QPointF& p)
       {
-      if (subtype() == TEXT_MEASURE_NUMBER)
+      if ((type() == TEXT) && (subtype() == TEXT_MEASURE_NUMBER))
             return false;
       cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);

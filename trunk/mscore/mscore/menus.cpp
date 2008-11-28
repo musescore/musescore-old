@@ -68,7 +68,6 @@ void MuseScore::showPalette(bool visible)
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
 
-#if 1
             QFile f(dataPath + "/" + "mscore-palette.xml");
             if (f.exists()) {
                   paletteBox->read(&f);
@@ -76,7 +75,6 @@ void MuseScore::showPalette(bool visible)
                   a->setChecked(visible);
                   return;
                   }
-#endif
 
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
@@ -1112,7 +1110,7 @@ void MuseScore::dynamicsMenu()
 
             for (int i = 0; i < 27; ++i) {
                   Dynamic* dynamic = new Dynamic(gscore);
-                  dynamic->setSubtype(i + 1);
+                  dynamic->setSubtype(dynList[i + 1].tag);
                   sp->append(dynamic, dynamic->subtypeName());
                   }
 
@@ -1122,8 +1120,7 @@ void MuseScore::dynamicsMenu()
                   };
             for (unsigned int i = 0; i < sizeof(expr) / sizeof(*expr); ++i) {
                   Dynamic* d = new Dynamic(gscore);
-                  d->setSubtype(0);
-                  d->setText(expr[i]);
+                  d->setSubtype(expr[i]);
                   sp->append(d,  expr[i]);
                   }
             }

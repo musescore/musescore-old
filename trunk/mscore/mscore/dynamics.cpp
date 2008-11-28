@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: dynamics.cpp,v 1.23 2006/03/28 14:58:58 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,48 +28,36 @@
 #include "style.h"
 #include "layout.h"
 
-static const QChar pp[]     = { 0x70, 0x70, 0x70, 0x70, 0x70, 0x70};
-static const QChar mp[]     = { 0x6d, 0x70 };               // mp
-static const QChar mf[]     = { 0x6d, 0x66 };               // mf
-static const QChar ff[]     = { 0x66, 0x66, 0x66, 0x66, 0x66, 0x66};
-static const QChar fp[]     = { 0x66, 0x70 };               // fp
-static const QChar sfz[]    = { 0x73, 0x66, 0x7a };         // sfz
-static const QChar sffz[]   = { 0x73, 0x66, 0x66, 0x7a };   // sffz
-static const QChar sfp[]    = { 0x73, 0x66, 0x70, 0x70};    // sfpp
-static const QChar rfz[]    = { 0x72, 0x66, 0x7a };         // rfz
-static const QChar fz[]     = { 0x66, 0x7a };               // fz
-static const QChar z[]      = { 0x7a };                     // z
-
 Dyn dynList[] = {
-      Dyn(TEXT_STYLE_DYNAMICS,   -1,  "other-dynamics", QString("")),
-      Dyn(TEXT_STYLE_DYNAMICS1,   1,  "pppppp", QString(pp, 6)),
-      Dyn(TEXT_STYLE_DYNAMICS1,   5,  "ppppp",  QString(pp, 5)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  10,  "pppp",   QString(pp, 4)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  30,  "ppp",    QString(pp, 3)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  50,  "pp",     QString(pp, 2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  60,  "p",      QString(pp, 1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  70,  "mp",     QString(mp,  2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  80,  "mf",     QString(mf,  2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  90,  "f",      QString(ff,  1)),
-      Dyn(TEXT_STYLE_DYNAMICS1, 100,  "ff",     QString(ff,  2)),
-      Dyn(TEXT_STYLE_DYNAMICS1, 110,  "fff",    QString(ff,  3)),
-      Dyn(TEXT_STYLE_DYNAMICS1, 120,  "ffff",   QString(ff,  4)),
-      Dyn(TEXT_STYLE_DYNAMICS1, 125,  "fffff",  QString(ff,  5)),
-      Dyn(TEXT_STYLE_DYNAMICS1, 127,  "ffffff", QString(ff,  6)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "fp",     QString(fp,  2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sf",     QString(sfz, 2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfz",    QString(sfz, 3)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sff",    QString(sffz, 3)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sffz",   QString(sffz, 4)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfp",    QString(sfp, 3)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "sfpp",   QString(sfp, 4)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "rfz",    QString(rfz, 3)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "rf",     QString(rfz, 2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "fz",     QString(fz,  2)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "m",      QString(mp,  1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "r",      QString(rfz, 1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "s",      QString(sfz, 1)),
-      Dyn(TEXT_STYLE_DYNAMICS1,  -1,  "z",      QString(z,   1)),
+      Dyn( -1,  "other-dynamics"),
+      Dyn(  1,  "pppppp"),
+      Dyn(  5,  "ppppp"),
+      Dyn( 10,  "pppp"),
+      Dyn( 30,  "ppp"),
+      Dyn( 50,  "pp"),
+      Dyn( 60,  "p"),
+      Dyn( 70,  "mp"),
+      Dyn( 80,  "mf"),
+      Dyn( 90,  "f"),
+      Dyn(100,  "ff"),
+      Dyn(110,  "fff"),
+      Dyn(120,  "ffff"),
+      Dyn(125,  "fffff"),
+      Dyn(127,  "ffffff"),
+      Dyn( -1,  "fp"),
+      Dyn( -1,  "sf"),
+      Dyn( -1,  "sfz"),
+      Dyn( -1,  "sff"),
+      Dyn( -1,  "sffz"),
+      Dyn( -1,  "sfp"),
+      Dyn( -1,  "sfpp"),
+      Dyn( -1,  "rfz"),
+      Dyn( -1,  "rf"),
+      Dyn( -1,  "fz"),
+      Dyn( -1,  "m"),
+      Dyn( -1,  "r"),
+      Dyn( -1,  "s"),
+      Dyn( -1,  "z"),
       };
 
 //---------------------------------------------------------
@@ -94,9 +82,9 @@ Dynamic::Dynamic(const Dynamic& d)
 void Dynamic::setSubtype(int idx)
       {
       Element::setSubtype(idx);
-      setStyle(score()->textStyle(dynList[idx].textStyle));
+      setStyle(score()->textStyle(TEXT_STYLE_DYNAMICS));
       if (idx != 0)
-            setText(dynList[idx].str);
+            setText(dynList[idx].tag);
       }
 
 //---------------------------------------------------------
@@ -182,14 +170,20 @@ void Dynamic::read(QDomElement e)
 
 void Dynamic::setSubtype(const QString& tag)
       {
+      QString d("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\"font-family:'Times New Roman'; font-weight:400; font-style:italic;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-style:normal; font-size:12pt;\"><span style=\"font-family:'MScore1'; font-size:20pt;\">%1</span></p></body></html></data>\n");
+
+      setSubtype(0);
       int n = sizeof(dynList)/sizeof(*dynList);
       for (int i = 0; i < n; ++i) {
             if (dynList[i].tag == tag) {
-                  setSubtype(i);
+                  setHtml(d.arg(tag));
                   return;
                   }
             }
-      setSubtype(0);
       setText(tag);
       }
 
@@ -255,4 +249,13 @@ void Dynamic::endEdit()
       setSubtype(0);
       }
 
+//---------------------------------------------------------
+//   resetUserOffsets
+//---------------------------------------------------------
+
+void Dynamic::resetUserOffsets()
+      {
+      Text::resetUserOffsets();
+      setSubtype(subtype());        // (re) apply style
+      }
 

@@ -176,10 +176,13 @@ void TextStyleDialog::nameSelected(int n)
             centerH->setChecked(true);
       else
             leftH->setChecked(true);
+
       if (s->align & ALIGN_BOTTOM)
             bottomV->setChecked(true);
       else if (s->align & ALIGN_VCENTER)
             centerV->setChecked(true);
+      else if (s->align & ALIGN_BASELINE)
+            baselineV->setChecked(true);
       else
             topV->setChecked(true);
 

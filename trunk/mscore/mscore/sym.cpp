@@ -31,19 +31,19 @@ QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
-      SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp          TODO
-      SymCode(0xe112, TEXT_STYLE_DYNAMICS1),    // flat           TODO
-      SymCode(0xe404, TEXT_STYLE_DYNAMICS1),    // note2_Sym
-      SymCode(0xe405, TEXT_STYLE_DYNAMICS1),    // note4_Sym
-      SymCode(0xe406, TEXT_STYLE_DYNAMICS1),    // note8_Sym
-      SymCode(0xe407, TEXT_STYLE_DYNAMICS1),    // note16_Sym
-      SymCode(0xe408, TEXT_STYLE_DYNAMICS1),    // note32_Sym
-      SymCode(0xe409, TEXT_STYLE_DYNAMICS1),    // note64_Sym
-      SymCode(0xe40a, TEXT_STYLE_DYNAMICS1),    // dot
-      SymCode(0xe40b, TEXT_STYLE_DYNAMICS1),    // dotdot
-      SymCode(0xe468, TEXT_STYLE_DYNAMICS1),    // coda           TODO
-      SymCode(0xe469, TEXT_STYLE_DYNAMICS1),    // varcoda        TODO
-      SymCode(0xe467, TEXT_STYLE_DYNAMICS1),    // segno          TODO
+      SymCode(0xe10e, TEXT_STYLE_DYNAMICS),    // sharp          TODO
+      SymCode(0xe112, TEXT_STYLE_DYNAMICS),    // flat           TODO
+      SymCode(0xe404, TEXT_STYLE_DYNAMICS),    // note2_Sym
+      SymCode(0xe405, TEXT_STYLE_DYNAMICS),    // note4_Sym
+      SymCode(0xe406, TEXT_STYLE_DYNAMICS),    // note8_Sym
+      SymCode(0xe407, TEXT_STYLE_DYNAMICS),    // note16_Sym
+      SymCode(0xe408, TEXT_STYLE_DYNAMICS),    // note32_Sym
+      SymCode(0xe409, TEXT_STYLE_DYNAMICS),    // note64_Sym
+      SymCode(0xe40a, TEXT_STYLE_DYNAMICS),    // dot
+      SymCode(0xe40b, TEXT_STYLE_DYNAMICS),    // dotdot
+      SymCode(0xe468, TEXT_STYLE_DYNAMICS),    // coda           TODO
+      SymCode(0xe469, TEXT_STYLE_DYNAMICS),    // varcoda        TODO
+      SymCode(0xe467, TEXT_STYLE_DYNAMICS),    // segno          TODO
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),

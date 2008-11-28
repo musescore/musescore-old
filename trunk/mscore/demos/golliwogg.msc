@@ -2,7 +2,7 @@
 <museScore version="1.9">
   <Mag>1.31233</Mag>
   <xoff>0.211667</xoff>
-  <yoff>-202.407</yoff>
+  <yoff>-227.032</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -73,6 +73,24 @@
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
     </Style>
+  <TextStyle name="Dynamics">
+    <family>Times New Roman</family>
+    <size>12</size>
+    <bold>0</bold>
+    <italic>1</italic>
+    <underline>0</underline>
+    <align>16</align>
+    <offsetType>1</offsetType>
+    <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
+    <xoffset>0</xoffset>
+    <yoffset>8.5</yoffset>
+    <rxoffset>0</rxoffset>
+    <ryoffset>0</ryoffset>
+    <frameWidth>0</frameWidth>
+    <paddingWidth>0</paddingWidth>
+    <frameRound>25</frameRound>
+    <frameColor r="0" g="0" b="0"/>
+    </TextStyle>
   <showInvisible>1</showInvisible>
   <page-layout>
     <pageFormat>A4</pageFormat>
@@ -87,7 +105,7 @@
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;">
-<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;"></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MScore1';">f</p></body></html>
     </rights>
   <siglist>
     <sig tick="0">
@@ -268,28 +286,16 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>5520</tick>
     <tick2>5640</tick2>
-    <Segment>
-      <off1 x="0.0683437" y="-9.77483"/>
-      <off2 x="0.916221" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>6960</tick>
     <tick2>7080</tick2>
-    <Segment>
-      <off1 x="0.201393" y="-10.0696"/>
-      <off2 x="0.804371" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>3000</tick>
     <tick2>3600</tick2>
-    <Segment>
-      <off1 x="3.42583" y="1.56131"/>
-      <off2 x="-4.86937" y="0"/>
-      </Segment>
     </HairPin>
   <Slur id="21">
     <track>0</track>
@@ -861,115 +867,67 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>102720</tick>
     <tick2>103080</tick2>
-    <Segment>
-      <off1 x="0.206331" y="1.30676"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>103200</tick>
     <tick2>103440</tick2>
-    <Segment>
-      <off1 x="-0.068777" y="1.30676"/>
-      <off2 x="1.58187" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>103920</tick>
     <tick2>104400</tick2>
-    <Segment>
-      <off1 x="0.343885" y="1.16921"/>
-      <off2 x="1.65065" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>104640</tick>
     <tick2>105600</tick2>
-    <Segment>
-      <off1 x="0.206331" y="0.618993"/>
-      <off2 x="-4.95194" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>105600</tick>
     <tick2>106560</tick2>
-    <Segment>
-      <off1 x="-0.894101" y="0.550216"/>
-      <off2 x="-3.78274" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>98880</tick>
     <tick2>99360</tick2>
-    <Segment>
-      <off1 x="1.10043" y="0.481439"/>
-      <off2 x="-0.962878" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>7920</tick>
     <tick2>8400</tick2>
-    <Segment>
-      <off1 x="0" y="0"/>
-      <off2 x="-0.132" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>10920</tick>
     <tick2>11040</tick2>
-    <Segment>
-      <off1 x="0" y="1.16184"/>
-      <off2 x="1.91362" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>12000</tick>
     <tick2>12480</tick2>
-    <Segment>
-      <off1 x="-1.87155e-07" y="-11.6867"/>
-      <off2 x="-3.00712" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>12960</tick>
     <tick2>13200</tick2>
-    <Segment>
-      <off1 x="0.205031" y="0.956812"/>
-      <off2 x="3.14381" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>13920</tick>
     <tick2>14160</tick2>
-    <Segment>
-      <off1 x="0.0683437" y="0.820124"/>
-      <off2 x="2.32369" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>14400</tick>
     <tick2>15600</tick2>
-    <Segment>
-      <off1 x="1.02516" y="1.02516"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <Slur id="113">
     <track>0</track>
@@ -985,10 +943,6 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>18600</tick>
     <tick2>18720</tick2>
-    <Segment>
-      <off1 x="-1.16184" y="1.91362"/>
-      <off2 x="2.52872" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
@@ -996,46 +950,30 @@ p, li { white-space: pre-wrap; }
     <tick>19200</tick>
     <tick2>19920</tick2>
     <Segment>
-      <off1 x="-0.136687" y="-11.0717"/>
-      <off2 x="2.05031" y="0"/>
+      <off1 x="0.568259" y="-11.9334"/>
+      <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>22080</tick>
     <tick2>22560</tick2>
-    <Segment>
-      <off1 x="0.341719" y="-0.0683437"/>
-      <off2 x="0.820124" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>24120</tick>
     <tick2>24360</tick2>
-    <Segment>
-      <off1 x="-0.177411" y="2.1662"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>24480</tick>
     <tick2>24720</tick2>
-    <Segment>
-      <off1 x="0.388128" y="2.34361"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>2040</tick>
-    <tick2>2880</tick2>
-    <Segment>
-      <off1 x="0.736687" y="1.38516"/>
-      <off2 x="-16.5271" y="0"/>
-      </Segment>
+    <tick2>2400</tick2>
     </HairPin>
   <Slur id="114">
     <track>0</track>
@@ -1072,104 +1010,66 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>25920</tick>
     <tick2>26040</tick2>
-    <Segment>
-      <off1 x="1.06447" y="0.975761"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>26400</tick>
     <tick2>26640</tick2>
-    <Segment>
-      <off1 x="0.532233" y="0.975761"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>30840</tick>
     <tick2>31200</tick2>
-    <Segment>
-      <off1 x="0.709644" y="0.79835"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>31680</tick>
     <tick2>32040</tick2>
-    <Segment>
-      <off1 x="-0.177411" y="1.5967"/>
-      <off2 x="1.06447" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>32160</tick>
     <tick2>32400</tick2>
-    <Segment>
-      <off1 x="0.532233" y="1.5967"/>
-      <off2 x="0.975761" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>50160</tick>
     <tick2>51600</tick2>
-    <Segment>
-      <off1 x="-0.266116" y="-10.6446"/>
-      <off2 x="0.271368" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>119280</tick>
     <tick2>119760</tick2>
-    <Segment>
-      <off1 x="0.189419" y="1.42064"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>120480</tick>
     <tick2>120900</tick2>
-    <Segment>
-      <off1 x="0.378839" y="0.947097"/>
-      <off2 x="0.852387" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>117360</tick>
     <tick2>117840</tick2>
-    <Segment>
-      <off1 x="0" y="0.852387"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>114360</tick>
     <tick2>114720</tick2>
-    <Segment>
-      <off1 x="0.378839" y="1.32594"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <Slur id="118">
+    <track>0</track>
     <tick>0</tick>
     <SlurSegment no="0">
       <o1 x="0.662968" y="-0.473548"/>
       </SlurSegment>
     </Slur>
   <Slur id="119">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="1.04181" y="-0.0947097"/>
       <o4 x="-0.189419" y="1.32594"/>
@@ -1209,12 +1109,16 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </Text>
       </VBox>
+    <HBox>
+      <width>5</width>
+      </HBox>
     <Measure number="1">
       <Tempo>
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-3.72577" y="-2.8195"/>
-        <track>-1</track>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -1223,7 +1127,11 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </Tempo>
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <KeySig>
         <subtype>253</subtype>
@@ -1344,12 +1252,13 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <Dynamic>
-        <subtype>f</subtype>
-        <offset x="-4.09141" y="0.962685"/>
-        <tick>2040</tick>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <Rest>
-        <tick>1920</tick>
         <ticklen>120</ticklen>
         </Rest>
       <Beam id="4">
@@ -1384,25 +1293,27 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="4">
       <Dynamic>
-        <subtype>sff</subtype>
-        <offset x="-0.911922" y="1.0061"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <tick>3600</tick>
         </Dynamic>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <track>-1</track>
+        </LayoutBreak>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-size:12pt; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-5.05409" y="1.04291"/>
-        <tick>3000</tick>
-        </Dynamic>
-      <LayoutBreak>
-        <subtype>line</subtype>
-        <track>-1</track>
-        </LayoutBreak>
-      <Rest>
+        <offset x="-0.947098" y="0.0947098"/>
         <tick>2880</tick>
+        </Dynamic>
+      <Rest>
         <ticklen>120</ticklen>
         </Rest>
       <Beam id="5">
@@ -1460,13 +1371,20 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.59803" y="-10.3043"/>
         <tick>5520</tick>
         </Dynamic>
       <Dynamic>
-        <subtype>p</subtype>
-        <offset x="0.123394" y="0.275367"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <tick>4800</tick>
         </Dynamic>
       <Rest>
@@ -1508,7 +1426,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="7">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.739578" y="-10.0652"/>
         <tick>6000</tick>
         </Dynamic>
@@ -1544,12 +1466,20 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="8">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.762747" y="-10.3528"/>
         <tick>7440</tick>
         </Dynamic>
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.54705" y="-10.5658"/>
         <tick>6960</tick>
         </Dynamic>
@@ -1594,8 +1524,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="9">
       <Dynamic>
-        <subtype>pp</subtype>
-        <offset x="-0.108687" y="-0.31778"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <Rest>
         <ticklen>240</ticklen>
@@ -1645,8 +1578,11 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </StaffText>
       <Dynamic>
-        <subtype>mf</subtype>
-        <offset x="-1.06175" y="0.328027"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;mf&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <Beam id="11">
         </Beam>
@@ -1883,7 +1819,6 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-0.856262" y="0.8485"/>
         <tick>11280</tick>
         </Dynamic>
       <Beam id="15">
@@ -1951,7 +1886,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="14">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.601762" y="0.695415"/>
         </Dynamic>
       <Beam id="17">
@@ -2005,8 +1944,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>p</subtype>
-        <offset x="0.0402633" y="-0.0984476"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <Beam id="19">
         </Beam>
@@ -2051,8 +1993,12 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="16">
       <Dynamic>
-        <subtype>f</subtype>
-        <offset x="-0.920038" y="0.355211"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.568259" y="0"/>
         </Dynamic>
       <Beam id="21">
         </Beam>
@@ -2219,8 +2165,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="18">
       <Dynamic>
-        <subtype>f</subtype>
-        <offset x="-0.579925" y="1.85074"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
       <Beam id="24">
         </Beam>
@@ -2397,9 +2346,19 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         <track>-1</track>
         </Text>
+      <Dynamic>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.662968" y="0"/>
+        <tick>18960</tick>
+        </Dynamic>
       <Beam id="28">
         </Beam>
       <Chord>
+        <tick>18240</tick>
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
@@ -2463,7 +2422,11 @@ p, li { white-space: pre-wrap; }
     <Measure number="22">
       <stretch>0.8</stretch>
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.12661" y="1.54928"/>
         </Dynamic>
       <Beam id="30">
@@ -2552,13 +2515,21 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <stretch>0.8</stretch>
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.37202" y="-0.67915"/>
         <tick>22800</tick>
         </Dynamic>
       <Dynamic>
-        <subtype>f</subtype>
-        <offset x="-0.887749" y="-0.484398"/>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.793039" y="-1.24208"/>
         <tick>22080</tick>
         </Dynamic>
       <Beam id="33">
@@ -2659,7 +2630,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.508605" y="0.278388"/>
         </Dynamic>
       <Beam id="35">
@@ -2746,7 +2721,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="28">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.73417" y="0.381986"/>
         </Dynamic>
       <Beam id="37">
@@ -2839,7 +2818,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="30">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.868308" y="0.850456"/>
         </Dynamic>
       <Chord>
@@ -2880,7 +2863,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="32">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="1.87686" y="0.364833"/>
         </Dynamic>
       <Chord>
@@ -2896,12 +2883,20 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="33">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.70111" y="0.426328"/>
         <tick>30840</tick>
         </Dynamic>
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.14074" y="0.525918"/>
         <tick>31440</tick>
         </Dynamic>
@@ -2949,7 +2944,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="34">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.59327" y="1.24645"/>
         </Dynamic>
       <Beam id="42">
@@ -3475,15 +3474,20 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.90705" y="-0.588076"/>
         </Dynamic>
       <Tempo>
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-17.8196" y="-1.47019"/>
-        <track>-1</track>
         <tick>44400</tick>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -3591,7 +3595,11 @@ p, li { white-space: pre-wrap; }
     <Measure number="49">
       <stretch>0.8</stretch>
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.95287" y="-1.44339"/>
         </Dynamic>
       <Rest>
@@ -3785,7 +3793,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="55">
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.803105" y="0.343011"/>
         </Dynamic>
       <Rest>
@@ -4080,7 +4092,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.53483" y="-0.427843"/>
         <tick>59760</tick>
         </Dynamic>
@@ -4186,7 +4202,11 @@ p, li { white-space: pre-wrap; }
     <Measure number="64">
       <stretch>0.7</stretch>
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.10718" y="-0.0784628"/>
         <tick>60720</tick>
         </Dynamic>
@@ -4320,7 +4340,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="67">
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.60109" y="-0.455052"/>
         <tick>63600</tick>
         </Dynamic>
@@ -4977,14 +5001,19 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="4.09263" y="-0.315959"/>
         </Dynamic>
       <Tempo>
         <tempo>1</tempo>
         <subtype>Tempo</subtype>
         <offset x="0.100696" y="-2.31602"/>
-        <track>1</track>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -5134,7 +5163,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="79">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.38877" y="-0.455608"/>
         <tick>75360</tick>
         </Dynamic>
@@ -5153,7 +5186,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="80">
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.81228" y="-0.439932"/>
         <tick>76080</tick>
         </Dynamic>
@@ -5181,7 +5218,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="81">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.535134" y="0.879777"/>
         </Dynamic>
       <Beam id="62">
@@ -5739,7 +5780,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="90">
       <Dynamic>
-        <subtype>pp</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.53086" y="0.0156844"/>
         </Dynamic>
       <KeySig>
@@ -6260,11 +6305,19 @@ p, li { white-space: pre-wrap; }
     <Measure number="104">
       <stretch>0.8</stretch>
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.623861" y="0.169398"/>
         </Dynamic>
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="0.73089" y="-0.0774949"/>
         <tick>99360</tick>
         </Dynamic>
@@ -6451,7 +6504,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.81485" y="0.50456"/>
         </Dynamic>
       <Beam id="96">
@@ -6545,7 +6602,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="110">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.76943" y="0.0636826"/>
         </Dynamic>
       <Chord>
@@ -6604,7 +6665,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="112">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.95766" y="-0.280202"/>
         </Dynamic>
       <Chord>
@@ -6843,7 +6908,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.53234" y="0.254676"/>
         </Dynamic>
       <Beam id="105">
@@ -6952,12 +7021,20 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="120">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.67837" y="0.840384"/>
         <tick>114360</tick>
         </Dynamic>
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.39951" y="0.349385"/>
         <tick>114960</tick>
         </Dynamic>
@@ -7001,7 +7078,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="121">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-3.97146" y="0.324477"/>
         <tick>115440</tick>
         </Dynamic>
@@ -7046,7 +7127,11 @@ p, li { white-space: pre-wrap; }
         <track>-1</track>
         </Text>
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-4.1467" y="0.156626"/>
         <tick>117360</tick>
         </Dynamic>
@@ -7087,7 +7172,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="125">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-4.15892" y="0.949204"/>
         <tick>119280</tick>
         </Dynamic>
@@ -7123,7 +7212,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="126">
       <Dynamic>
-        <subtype>f</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-3.6117" y="0.637633"/>
         <tick>120480</tick>
         </Dynamic>
@@ -7166,7 +7259,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="127">
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-5.05791" y="0.353504"/>
         <tick>121200</tick>
         </Dynamic>
@@ -7191,7 +7288,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="128">
       <Dynamic>
-        <subtype>ff</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;ff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.555904" y="0.304776"/>
         </Dynamic>
       <Chord>
@@ -7583,7 +7684,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="10">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.73024" y="-1.40933"/>
         </Dynamic>
       <Beam id="124">
@@ -8045,24 +8150,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="20">
-      <Dynamic>
-        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;sff&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.27031" y="-11.4217"/>
-        <selected>1</selected>
-        <tick>18960</tick>
-        </Dynamic>
       <Beam id="143">
         </Beam>
       <Chord>
-        <tick>18240</tick>
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
-          <tick>18240</tick>
           </Attribute>
         <Beam>143</Beam>
         <StemDirection>down</StemDirection>
@@ -10660,7 +10753,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="78">
       <Dynamic>
-        <subtype>p</subtype>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.51523" y="-11.0261"/>
         </Dynamic>
       <Chord>
@@ -12349,5 +12446,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>4</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
