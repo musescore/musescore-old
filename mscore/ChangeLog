@@ -1,4 +1,6 @@
 28.nov (ws)
+      - cleanup for dynamics; remove DYNAMIC1 text style
+      - fix: dynamic "p" not editable
       - fix: in relayout() measure bounding box height was set to zero; measure
         could not be selected any more
 27.nov (ws)

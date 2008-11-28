@@ -1938,11 +1938,8 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.endGroup();
-      if (paletteBox && paletteBox->dirty()) {
+      if (paletteBox && paletteBox->dirty())
             paletteBox->write(dataPath + "/" + "mscore-palette.xml");
-            }
-      else
-            printf("do not save palettes\n");
       }
 
 //---------------------------------------------------------

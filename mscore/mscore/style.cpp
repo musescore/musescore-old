@@ -105,9 +105,6 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS, 0.0, 0.0, true),
-
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tuplets"), ff,  8, false, false, false,
          ALIGN_CENTER),
 

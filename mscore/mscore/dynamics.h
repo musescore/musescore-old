@@ -28,13 +28,11 @@
 //---------------------------------------------------------
 
 struct Dyn {
-      int textStyle;
       int velocity;           ///< associated midi velocity (0-127, -1 = none)
-      const QString str;
       const char* tag;
 
-      Dyn(int style, int velo, const char* t, const QString& s)
-         : textStyle(style), velocity(velo), str(s), tag(t) {}
+      Dyn(int velo, const char* t)
+         : velocity(velo), tag(t) {}
       };
 
 //---------------------------------------------------------
@@ -68,6 +66,8 @@ class Dynamic : public Text {
       virtual QLineF dragAnchor() const;
 
       virtual void endEdit();
+      virtual void resetUserOffsets();
       };
 
+extern Dyn dynList[];
 #endif

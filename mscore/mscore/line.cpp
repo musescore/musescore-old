@@ -405,6 +405,10 @@ void SLine::writeProperties(Xml& xml) const
 
 bool SLine::readProperties(QDomElement e)
       {
+      foreach(LineSegment* seg, segments)
+            delete seg;
+      segments.clear();
+
       setTick(-1);
 
       if (Element::readProperties(e))
