@@ -192,6 +192,7 @@ TextLine::TextLine(Score* s)
       _hasText    = true;
       _mxmlOff2   = 0;
       textBase()->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
+      setLen(_spatium * 7);   // for use in palettes
       }
 
 TextLine::TextLine(const TextLine& e)

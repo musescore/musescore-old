@@ -224,7 +224,7 @@ void Symbol::read(QDomElement e)
                         }
                   if (s == -1) {
                         printf("unknown symbol <%s>, symbols %d\n",
-                           val.toLocal8Bit().data(), symbols.size());
+                           qPrintable(val), symbols.size());
                         s = 0;
                         }
                   }

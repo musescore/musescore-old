@@ -1123,7 +1123,7 @@ bool ScoreLayout::doReLayout()
                   }
             minWidth += ww;
             }
-      if (minWidth > sysWidth)       // measure do not fit: do full layout
+      if (minWidth > sysWidth)            // measure does not fit: do full layout
             return false;
 
       //
@@ -1139,7 +1139,7 @@ bool ScoreLayout::doReLayout()
             ww *= stretch;
             if (ww < point(score()->style()->minMeasureWidth))
                   ww = point(score()->style()->minMeasureWidth);
-            if ((minWidth + ww) <= sysWidth)  // if another measure fits, do full layout
+            if ((minWidth + ww) <= sysWidth)    // if another measure fits, do full layout
                   return false;
             }
       //
@@ -1159,17 +1159,23 @@ bool ScoreLayout::doReLayout()
 
       double rest = (sysWidth - minWidth) / totalWeight;
 
-      QPointF pos(system->leftMargin(), 0);
+      bool firstMeasure = true;
+      QPointF pos;
       foreach(MeasureBase* mb, system->measures()) {
-            mb->setPos(pos);
             double ww = 0.0;
             if (mb->type() == MEASURE) {
+                  if (firstMeasure) {
+                        pos.rx() += system->leftMargin();
+                        firstMeasure = false;
+                        }
+                  mb->setPos(pos);
                   Measure* m    = static_cast<Measure*>(mb);
                   double weight = m->tickLen() * m->userStretch();
                   ww            = m->layoutWidth().stretchable + rest * weight;
                   m->layout(this, ww);
                   }
             else if (mb->type() == HBOX) {
+                  mb->setPos(pos);
                   ww = static_cast<Box*>(mb)->boxWidth().point();
                   mb->layout(this);
                   }

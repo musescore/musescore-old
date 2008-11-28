@@ -35,6 +35,7 @@ Ottava::Ottava(Score* s)
    : TextLine(s)
       {
       setSubtype(0);
+      setLen(_spatium * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------

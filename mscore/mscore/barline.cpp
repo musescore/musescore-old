@@ -39,6 +39,7 @@ BarLine::BarLine(Score* s)
       setSubtype(NORMAL_BAR);
       _span = 1;
       yoff  = 0.0;
+      setHeight(point(Spatium(4))); // for use in palettes
       }
 
 //---------------------------------------------------------

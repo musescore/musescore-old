@@ -26,7 +26,7 @@
 #include "score.h"
 #include "note.h"
 
-enum { COL_PITCH, COL_NOTE, COL_NAME };
+enum { COL_PITCH, COL_NOTE, COL_SHORTCUT, COL_NAME };
 
 //---------------------------------------------------------
 //   EditDrumset
@@ -87,6 +87,12 @@ void EditDrumset::updateList()
             QTreeWidgetItem* item = new QTreeWidgetItem(pitchList);
             item->setText(COL_PITCH, QString("%1").arg(i));
             item->setText(COL_NOTE, pitch2string(i));
+            if (nDrumset.shortcut(i) == 0)
+                  item->setText(COL_SHORTCUT, "");
+            else {
+                  QString s(QChar(nDrumset.shortcut(i)));
+                  item->setText(COL_SHORTCUT, s);
+                  }
             item->setText(COL_NAME, nDrumset.name(i));
             item->setData(0, Qt::UserRole, i);
             }
@@ -159,6 +165,10 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
             nDrumset.drum[pitch].notehead      = noteHead->currentIndex() - 1;
             nDrumset.drum[pitch].line          = staffLine->value();
             nDrumset.drum[pitch].voice         = voice->value();
+            if (shortcut->currentIndex() == 7)
+                  nDrumset.drum[pitch].shortcut = 0;
+            else
+                  nDrumset.drum[pitch].shortcut = "ABCDEFG"[shortcut->currentIndex()];
             nDrumset.drum[pitch].stemDirection = Direction(stemDirection->currentIndex());
             previous->setText(COL_NAME, nDrumset.name(pitch));
             }
@@ -175,6 +185,10 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
       stemDirection->setCurrentIndex(int(nDrumset.stemDirection(pitch)));
       int nh = nDrumset.noteHead(pitch);
       noteHead->setCurrentIndex(nh + 1);
+      if (nDrumset.shortcut(pitch) == 0)
+            shortcut->setCurrentIndex(7);
+      else
+            shortcut->setCurrentIndex(nDrumset.shortcut(pitch) - 'A');
 
       name->blockSignals(false);
       staffLine->blockSignals(false);

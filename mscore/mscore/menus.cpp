@@ -67,6 +67,17 @@ void MuseScore::showPalette(bool visible)
       QAction* a = getAction("toggle-palette");
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
+
+#if 1
+            QFile f(dataPath + "/" + "mscore-palette.xml");
+            if (f.exists()) {
+                  paletteBox->read(&f);
+                  paletteBox->setShown(visible);
+                  a->setChecked(visible);
+                  return;
+                  }
+#endif
+
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
@@ -115,9 +126,11 @@ void MuseScore::showPalette(bool visible)
             drumPalette->setSelectable(true);
             drumPalette->setGrid(42, 60);
             drumPalette->showStaff(true);
-            updateDrumset();
+            drumPalette->setDrumPalette(true);
+
+//            updateDrumset();
             paletteBox->addPalette(tr("Drums"), drumPalette);
-            connect(drumPalette, SIGNAL(boxClicked(int)), SLOT(drumPaletteSelected(int)));
+//            connect(drumPalette, SIGNAL(boxClicked(int)), SLOT(drumPaletteSelected(int)));
 
             //-----------------------------------
             //    clefs
@@ -202,7 +215,6 @@ void MuseScore::showPalette(bool visible)
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
-                  b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
                   sp->append(b, t[i].name);
                   }
@@ -215,20 +227,15 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette(.8);
             sp->setGrid(84, 23);
 
-            double l = _spatium * 7;
-
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
-            gabel0->setLen(l);
             sp->append(gabel0, tr("crescendo"));
 
             Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
-            gabel1->setLen(l);
             sp->append(gabel1, tr("diminuendo"));
 
             Volta* volta = new Volta(gscore);
-            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("1.");
             QList<int> il;
@@ -237,7 +244,6 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("prima volta"));
 
             volta = new Volta(gscore);
-            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("2.");
             il.clear();
@@ -246,7 +252,6 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("seconda volta"));
 
             volta = new Volta(gscore);
-            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_CLOSED);
             volta->setText("3.");
             il.clear();
@@ -255,7 +260,6 @@ void MuseScore::showPalette(bool visible)
             sp->append(volta, tr("terza volta"));
 
             volta = new Volta(gscore);
-            volta->setLen(l);
             volta->setSubtype(Volta::VOLTA_OPEN);
             volta->setText("2.");
             il.clear();
@@ -265,39 +269,31 @@ void MuseScore::showPalette(bool visible)
 
             Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
-            ottava->setLen(l);
             sp->append(ottava, tr("8va"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(1);
-            ottava->setLen(l);
             sp->append(ottava, tr("15ma"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(2);
-            ottava->setLen(l);
             sp->append(ottava, tr("8vb"));
 
             ottava = new Ottava(gscore);
             ottava->setSubtype(3);
-            ottava->setLen(l);
             sp->append(ottava, tr("15mb"));
 
             Pedal* pedal = new Pedal(gscore);
-            pedal->setLen(l);
             sp->append(pedal, tr("pedal"));
 
             Trill* trill = new Trill(gscore);
-            trill->setLen(l);
             sp->append(trill, tr("trill line"));
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setText("VII");
-            textLine->setLen(l);
             sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
-            line->setLen(l);
             line->setHasText(false);
             line->setHook(false);
             sp->append(line, tr("line"));
@@ -314,13 +310,13 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 3; ++i) {
                   Arpeggio* a = new Arpeggio(gscore);
                   a->setSubtype(i);
-                  a->setHeight(_spatium * 4);
+                  // a->setHeight(_spatium * 4);
                   sp->append(a, tr("arpeggio"));
                   }
             for (int i = 0; i < 2; ++i) {
                   Glissando* a = new Glissando(gscore);
                   a->setSubtype(i);
-                  a->setSize(QSizeF(_spatium * 2, _spatium * 4));
+                  // a->setSize(QSizeF(_spatium * 2, _spatium * 4));
                   sp->append(a, tr("glissando"));
                   }
             paletteBox->addPalette(tr("Arpeggio/Glissando"), sp);
@@ -351,8 +347,8 @@ void MuseScore::showPalette(bool visible)
             b1->setSubtype(BRACKET_NORMAL);
             Bracket* b2 = new Bracket(gscore);
             b2->setSubtype(BRACKET_AKKOLADE);
-            b1->setHeight(_spatium * 7);
-            b2->setHeight(_spatium * 7);
+            // b1->setHeight(_spatium * 7);
+            // b2->setHeight(_spatium * 7);
 
             sp->append(b1, "Bracket");
             sp->append(b2, "Akkolade");
@@ -1265,7 +1261,7 @@ void MuseScore::showLayoutBreakPalette()
 
 void MuseScore::updateDrumset()
       {
-      if (cs == 0 || paletteBox == 0)
+      if (cs == 0 || paletteBox == 0 || drumPalette == 0)
             return;
 
       PadState* padState = cs->padState();
@@ -1313,6 +1309,7 @@ void MuseScore::updateDrumset()
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
                         drumPalette->append(chord, drumset->name(pitch));
+
                         ++i;
                         }
                   }

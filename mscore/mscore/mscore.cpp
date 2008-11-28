@@ -64,6 +64,7 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
+QString dataPath;
 int division = 480;     // 480 midi ticks represent a quarter note
 
 QPrinter* pdev;
@@ -1397,8 +1398,11 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
-//      qApp->setStyleSheet(appStyleSheet());
       qApp->setWindowIcon(windowIcon);
+
+      dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+      QDir dataPathDir;
+      dataPathDir.mkpath(dataPath);
 
       setDefaultStyle();
 
@@ -1934,6 +1938,11 @@ void MuseScore::writeSettings()
       settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.setValue("state", saveState());
       settings.endGroup();
+      if (paletteBox && paletteBox->dirty()) {
+            paletteBox->write(dataPath + "/" + "mscore-palette.xml");
+            }
+      else
+            printf("do not save palettes\n");
       }
 
 //---------------------------------------------------------

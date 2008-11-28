@@ -35,6 +35,7 @@ Glissando::Glissando(Score* s)
       {
       _text = "gliss.";
       _showText = true;
+      setSize(QSizeF(_spatium * 2, _spatium * 4));    // for use in palettes
       }
 
 //---------------------------------------------------------

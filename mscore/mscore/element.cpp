@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: element.cpp,v 1.79 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -63,14 +63,14 @@
 #include "articulation.h"
 #include "chord.h"
 #include "spacer.h"
+#include "mscore.h"
 
 extern bool debugMode;
 extern bool showInvisible;
 
-// for debugging:
 const char* elementNames[] = {
       "Symbol", "Text", "SlurSegment", "BarLine",
-      "StemSlash", "Line", "SystemBracket",
+      "StemSlash", "Line", "Bracket",
       "Arpeggio",
       "Accidental",
       "Note",
@@ -1042,6 +1042,32 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
       }
 
 //---------------------------------------------------------
+//   name2type
+//---------------------------------------------------------
+
+int Element::name2type(const QString& s)
+      {
+      int n = sizeof(elementNames)/sizeof(*elementNames);
+      for (int i = 0; i < n; ++i) {
+            if (s == elementNames[i])
+                  return i;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   name2Element
+//---------------------------------------------------------
+
+Element* Element::name2Element(const QString& s, Score* sc)
+      {
+      int type = Element::name2type(s);
+      if (type == -1)
+            return 0;
+      return Element::create(type, sc);
+      }
+
+//---------------------------------------------------------
 //   readType
 //    return -1 if no valid type found
 //---------------------------------------------------------
@@ -1051,107 +1077,9 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
       int type = -1;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            //
-            // DEBUG:
-            // check names; remove non needed elements
-            //
             if (e.tagName() == "dragOffset")
                   *dragOffset = readPoint(e);
-            else if (e.tagName() == "Dynamic")
-                  type = DYNAMIC;
-            else if (e.tagName() == "Symbol")
-                  type = SYMBOL;
-            else if (e.tagName() == "Text")
-                  type = TEXT;
-            else if (e.tagName() == "StaffLines")
-                  type = STAFF_LINES;
-            else if (e.tagName() == "Slur")
-                  type = SLUR_SEGMENT;
-            else if (e.tagName() == "Note")
-                  type = NOTE;
-            else if (e.tagName() == "BarLine")
-                  type = BAR_LINE;
-            else if (e.tagName() == "Stem")
-                  type = STEM;
-            else if (e.tagName() == "Bracket")
-                  type = BRACKET;
-            else if (e.tagName() == "Accidental")
-                  type = ACCIDENTAL;
-            else if (e.tagName() == "Clef")
-                  type = CLEF;
-            else if (e.tagName() == "KeySig")
-                  type = KEYSIG;
-            else if (e.tagName() == "TimeSig")
-                  type = TIMESIG;
-            else if (e.tagName() == "Chord")
-                  type = CHORD;
-            else if (e.tagName() == "Rest")
-                  type = REST;
-            else if (e.tagName() == "Tie")
-                  type = TIE;
-            else if (e.tagName() == "Slur")
-                  type = SLUR;
-            else if (e.tagName() == "Measure")
-                  type = MEASURE;
-            else if (e.tagName() == "Attribute")
-                  type = ATTRIBUTE;
-            else if (e.tagName() == "Page")
-                  type = PAGE;
-            else if (e.tagName() == "Beam")
-                  type = BEAM;
-            else if (e.tagName() == "Hook")
-                  type = HOOK;
-            else if (e.tagName() == "Lyric")
-                  type = LYRICS;
-            else if (e.tagName() == "System")
-                  type = SYSTEM;
-            else if (e.tagName() == "HairPin")
-                  type = HAIRPIN;
-            else if (e.tagName() == "Tuplet")
-                  type = TUPLET;
-            else if (e.tagName() == "Segment")
-                  type = SEGMENT;
-            else if (e.tagName() == "StaffText")
-                  type = STAFF_TEXT;
-            else if (e.tagName() == "TempoText")
-                  type = TEMPO_TEXT;
-            else if (e.tagName() == "Volta")
-                  type = VOLTA;
-            else if (e.tagName() == "Ottava")
-                  type = OTTAVA;
-            else if (e.tagName() == "TextLine")
-                  type = TEXTLINE;
-            else if (e.tagName() == "Pedal")
-                  type = PEDAL;
-            else if (e.tagName() == "Trill")
-                  type = TRILL;
-            else if (e.tagName() == "LayoutBreak")
-                  type = LAYOUT_BREAK;
-            else if (e.tagName() == "LedgerLine")
-                  type = LEDGER_LINE;
-            else if (e.tagName() == "Image")
-                  type = IMAGE;
-            else if (e.tagName() == "Breath")
-                  type = BREATH;
-            else if (e.tagName() == "Glissando")
-                  type = GLISSANDO;
-            else if (e.tagName() == "Arpeggio")
-                  type = ARPEGGIO;
-            else if (e.tagName() == "NoteHead")
-                  type = NOTEHEAD;
-            else if (e.tagName() == "Tremolo")
-                  type = TREMOLO;
-            else if (e.tagName() == "RepeatMeasure")
-                  type = REPEAT_MEASURE;
-            else if (e.tagName() == "Jump")
-                  type = JUMP;
-            else if (e.tagName() == "Marker")
-                  type = MARKER;
-            else if (e.tagName() == "Icon")
-                  type = ICON;
-            else if (e.tagName() == "Spacer")
-                  type = SPACER;
-            else {
+            else if ((type = name2type(e.tagName())) == -1) {
                   domError(e);
                   break;
                   }
@@ -1316,4 +1244,33 @@ void Element::remove(Element* e)
       {
       printf("cannot remove %s from %s\n", e->name(), name());
       }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Icon::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      xml.tag("action", _action->data().toString());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Icon::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "action") {
+                  _action = getAction(qPrintable(e.text()));
+                  }
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
+
 

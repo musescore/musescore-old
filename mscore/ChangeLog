@@ -1,3 +1,6 @@
+28.nov (ws)
+      - fix: in relayout() measure bounding box height was set to zero; measure
+        could not be selected any more
 27.nov (ws)
       - fixed crash when double click into empty palette cell
       - fix: layout bug if system starts with a horizontal frame

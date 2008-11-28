@@ -352,6 +352,8 @@ class Element {
                 || type() == STAFF_TEXT
                 || type() == TEMPO_TEXT;
             }
+      static int name2type(const QString&);
+      static Element* name2Element(const QString&, Score*);
       };
 
 //---------------------------------------------------------
@@ -529,6 +531,8 @@ class Icon : public Element {
       void setAction(QAction* a)         { _action = a;    }
       QIcon icon() const                 { return _action->icon();   }
       QAction* action() const            { return _action; }
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
       };
 
 #endif

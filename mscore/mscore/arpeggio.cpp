@@ -28,6 +28,7 @@
 Arpeggio::Arpeggio(Score* s)
   : Element(s)
       {
+      setHeight(_spatium * 4);      // for use in palettes
       }
 
 //---------------------------------------------------------

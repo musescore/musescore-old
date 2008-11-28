@@ -85,6 +85,7 @@ Pedal::Pedal(Score* s)
    : SLine(s)
       {
       symbol = pedalPedSym;
+      setLen(_spatium * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------
