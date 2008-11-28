@@ -661,8 +661,9 @@ void Measure::layout(ScoreLayout* layout, double width)
             }
 
       // height of boundingRect will be set in system->layout2()
+      // keep old value for relayout
 
-      setbbox(QRectF(0.0, 0.0, width, 0.0));
+      setbbox(QRectF(0.0, 0.0, width, height()));
       layoutX(layout, width);
 
       //---------------------------------------------------

@@ -37,7 +37,7 @@
 Bracket::Bracket(Score* s)
    : Element(s)
       {
-      h2       = 0.0;
+      h2       = 3.5 * _spatium;
       _span    = 1;
       _level   = 0;
       yoff     = 0.0;

@@ -445,8 +445,20 @@ void Score::cmdAddPitch(int note, bool addFlag)
       if (!preferences.alternateNoteEntryMethod)
             key = staff(_is.track / VOICES)->keymap()->key(_is.pos());
       int pitch;
-      if (_padState.drumNote != -1) {
-            pitch = _padState.drumNote;
+      Drumset* ds = _padState.drumset;
+      if (ds) {
+            int note1 = "CDEFGAB"[note];
+            pitch = -1;
+            for (int i = 0; i < 127; ++i) {
+                  if (!ds[i].isValid(i))
+                        continue;
+                  if (ds->shortcut(i) && (ds->shortcut(i) == note1)) {
+                        pitch = i;
+                        break;
+                        }
+                  }
+            if (pitch == -1)
+                  return;
             }
       else {
             pitch = pitchKeyAdjust(note, key);
@@ -2319,7 +2331,7 @@ void Score::cmdPaste()
             int tick, staffIdx;
             if (sel->state() == SEL_STAFF) {
                   tick = sel->startSegment()->tick();
-                  int staffIdx = sel->staffStart;
+                  // int staffIdx = sel->staffStart;
                   }
             else if (sel->state() == SEL_SINGLE) {
                   Element* e = sel->element();

@@ -189,6 +189,7 @@ Volta::Volta(Score* s)
       {
       _text = "1.";
       _endings.append(1);
+      setLen(_spatium * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------

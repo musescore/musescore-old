@@ -97,6 +97,7 @@ Hairpin::Hairpin(Score* s)
       {
       setOffsetType(OFFSET_SPATIUM);
       setYoff(7.0);
+      setLen(_spatium * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------

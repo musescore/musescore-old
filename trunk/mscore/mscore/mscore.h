@@ -317,10 +317,12 @@ class MuseScore : public QMainWindow {
       double getMag(Canvas*) const;
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
+      void setDrumPalette(Palette* p) { drumPalette = p; }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
+extern QString dataPath;
 
 extern Shortcut* getShortcut(const char* id);
 extern QAction* getAction(const char*);

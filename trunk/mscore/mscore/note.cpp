@@ -77,7 +77,6 @@ void NoteHead::write(Xml& xml) const
       xml.tag("name", symbols[_sym].name());
       Element::writeProperties(xml);
       xml.etag();
-      Element::write(xml);
       }
 
 //---------------------------------------------------------

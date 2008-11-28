@@ -39,6 +39,8 @@ void Drumset::save(Xml& xml)
             xml.tag("voice", voice(i));
             xml.tag("name", name(i));
             xml.tag("stem", int(stemDirection(i)));
+            if (shortcut(i))
+                  xml.tag("shortcut", shortcut(i));
             xml.etag();
             }
       }
@@ -54,7 +56,6 @@ void Drumset::load(QDomElement e)
             printf("load drumset: invalid pitch %d\n", pitch);
             return;
             }
-
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -70,6 +71,8 @@ void Drumset::load(QDomElement e)
                   drum[pitch].name = val;
             else if (tag == "stem")
                   drum[pitch].stemDirection = Direction(i);
+            else if (tag == "shortcut")
+                  drum[pitch].shortcut = i;
             else
                   domError(e);
             }
@@ -98,6 +101,7 @@ void initDrumset()
       for (int i = 0; i < 128; ++i) {
             smDrumset->drum[i].notehead = -1;   // invalid entry
             smDrumset->drum[i].line     = 0;
+            smDrumset->drum[i].shortcut = 0;
             }
       smDrumset->drum[35].name     = "Acoustic Bass Drum";
       smDrumset->drum[35].notehead = HEAD_NORMAL;
@@ -110,6 +114,7 @@ void initDrumset()
       smDrumset->drum[36].line     = 7;
       smDrumset->drum[36].stemDirection = DOWN;
       smDrumset->drum[36].voice    = 1;
+      smDrumset->drum[36].shortcut = Qt::Key_C;
 
       smDrumset->drum[37].name     = "Side Stick";
       smDrumset->drum[37].notehead = HEAD_CROSS;   // Side Stick
@@ -194,6 +199,7 @@ void initDrumset()
       smDrumset->drum[51].line     = 0;
       smDrumset->drum[51].stemDirection = UP;
       smDrumset->drum[51].voice    = 0;
+      smDrumset->drum[51].shortcut = Qt::Key_D;
 
       smDrumset->drum[52].name     = "China";
       smDrumset->drum[52].notehead = HEAD_CROSS;   // China

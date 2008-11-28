@@ -24,6 +24,7 @@
 class Element;
 class Sym;
 class Xml;
+class Palette;
 
 //---------------------------------------------------------
 //   PaletteBoxButton
@@ -56,7 +57,7 @@ class PaletteBox : public QDockWidget {
       Q_OBJECT
 
       QVBoxLayout* vbox;
-      bool dirty;
+      bool _dirty;
 
       virtual void closeEvent(QCloseEvent*);
 
@@ -68,10 +69,12 @@ class PaletteBox : public QDockWidget {
 
    public:
       PaletteBox(QWidget* parent = 0);
-      void addPalette(const QString& s, QWidget*);
-      void saveIfDirty() const;
+      void addPalette(const QString& s, Palette*);
+      bool dirty() const      { return _dirty; }
+      void setDirty(bool val) { _dirty = val; }
+      void write(const QString& path);
+      bool read(QFile*);
       };
-
 
 //---------------------------------------------------------
 //   PaletteCell
@@ -117,6 +120,7 @@ class Palette : public QWidget {
       bool _selectable;
       bool _readOnly;
       qreal _yOffset;
+      bool _drumPalette;
 
       bool staff;
 
@@ -127,6 +131,7 @@ class Palette : public QWidget {
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void leaveEvent(QEvent*);
       virtual bool event(QEvent*);
+//      virtual QSize sizeHint() const;
 
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
@@ -157,7 +162,7 @@ class Palette : public QWidget {
       void showStaff(bool val)     { staff = val; }
       Element* element(int idx)    { return cells[idx]->element; }
       void setDrawGrid(bool val)   { _drawGrid = val; }
-      void write(Xml&, const char*) const;
+      void write(Xml&, const QString& name) const;
       void read(QDomElement);
       void clear();
       void setSelectable(bool val) { _selectable = val;  }
@@ -171,6 +176,8 @@ class Palette : public QWidget {
       int columns() const { return width() / hgrid; }
       int rows() const;
       int resizeWidth(int);
+      bool drumPalette() const      { return _drumPalette; }
+      void setDrumPalette(bool val) { _drumPalette = val; }
       };
 
 #endif

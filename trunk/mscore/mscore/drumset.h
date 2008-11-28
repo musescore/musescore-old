@@ -35,6 +35,7 @@ struct DrumInstrument {
       int line;               ///< place notehead onto this line
       int voice;
       Direction stemDirection;
+      int shortcut;           ///< accelerator key (CDEFGAB)
       };
 
 //---------------------------------------------------------
@@ -52,6 +53,7 @@ struct Drumset {
       int voice(int pitch) const               { return drum[pitch].voice;          }
       Direction stemDirection(int pitch) const { return drum[pitch].stemDirection;  }
       const QString& name(int pitch) const     { return drum[pitch].name;           }
+      int shortcut(int pitch) const            { return drum[pitch].shortcut;       }
       void save(Xml&);
       void load(QDomElement);
       void clear();

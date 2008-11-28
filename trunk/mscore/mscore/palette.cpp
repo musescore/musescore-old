@@ -33,6 +33,7 @@
 #include "canvas.h"
 #include "note.h"
 #include "chord.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   Palette
@@ -55,6 +56,7 @@ Palette::Palette(QWidget* parent)
       _drawGrid     = false;
       _selectable   = false;
       _readOnly     = true;
+      _drumPalette  = false;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
       }
@@ -71,6 +73,7 @@ Palette::Palette(qreal mag)
       _drawGrid     = false;
       _selectable   = false;
       _readOnly     = true;
+      _drumPalette  = false;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
       }
@@ -322,8 +325,21 @@ void Palette::add(int idx, Element* s, const QString& name)
             Icon* icon = static_cast<Icon*>(s);
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
+      updateGeometry();
       }
+#if 0
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
 
+QSize Palette::sizeHint() const
+      {
+      int n = cells.size();
+      int c = columns();
+      int rows = (n+c-1) / c;
+      return QSize(hgrid * c, vgrid * rows);
+      }
+#endif
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
@@ -385,9 +401,11 @@ void Palette::paintEvent(QPaintEvent*)
                   }
             else if (idx == currentIdx)
                   p.fillRect(r, p.background().color().light(118));
-            if (cells[idx] == 0)
+            if (cells.isEmpty() || cells[idx] == 0)
                   continue;
             Element* el = cells[idx]->element;
+            if (el == 0)
+                  continue;
             if (el->type() != ICON) {
                   int row    = idx / c;
                   int column = idx % c;
@@ -649,16 +667,34 @@ void Palette::dropEvent(QDropEvent* event)
 //   write
 //---------------------------------------------------------
 
-void Palette::write(Xml& xml, const char* name) const
+void Palette::write(Xml& xml, const QString& name) const
       {
-      xml.stag(QString(name));
-      int n = cells.size();
-      for (int i = 0; i < n; ++i) {
-            if (cells[i] == 0)
-                  continue;
-            if (!cells[i]->name.isEmpty())
-                  xml.tag("name", cells[i]->name);
-            cells[i]->element->write(xml);
+      xml.stag(QString("Palette name=\"%1\"").arg(name));
+      xml.tag("gridWidth", hgrid);
+      xml.tag("gridHeight", vgrid);
+      if (extraMag != 1.0)
+            xml.tag("mag", extraMag);
+      if (_drawGrid)
+            xml.tag("grid", _drawGrid);
+      if (staff)
+            xml.tag("showStaff", staff);
+      if (_yOffset != 0.0)
+            xml.tag("yoffset", _yOffset);
+      if (_drumPalette)
+            xml.tag("drumPalette", _drumPalette);
+
+      if (!_drumPalette) {
+            int n = cells.size();
+            for (int i = 0; i < n; ++i) {
+                  if (cells[i] == 0)
+                        continue;
+                  if (!cells[i]->name.isEmpty())
+                        xml.stag(QString("Cell name=\"%1\"").arg(cells[i]->name));
+                  else
+                        xml.stag("Cell");
+                  cells[i]->element->write(xml);
+                  xml.etag();
+                  }
             }
       xml.etag();
       }
@@ -669,51 +705,64 @@ void Palette::write(Xml& xml, const char* name) const
 
 void Palette::read(QDomElement e)
       {
-      int idx = 0;
-      QString name = "";
+      QString name = e.attribute("name", "");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "idx") {
-                  idx = e.text().toInt();
-                  name = "";
-                  }
-            else if (tag == "name") {
-                  name = e.text();
-                  }
-            else if (tag == "rows")
-                  ;
-            else if (tag == "columns")
-                  ;
-            else if (tag == "Image") {
-                  // look ahead for image type
-                  QString path;
+            QString text(e.text());
+            if (tag == "gridWidth")
+                  hgrid = text.toDouble();
+            else if (tag == "gridHeight")
+                  vgrid = text.toDouble();
+            else if (tag == "mag")
+                  extraMag = text.toDouble();
+            else if (tag == "grid")
+                  _drawGrid = text.toInt();
+            else if (tag == "showStaff")
+                  staff = text.toInt();
+            else if (tag == "yoffset")
+                  _yOffset = text.toDouble();
+            else if (tag == "drumPalette")
+                  _drumPalette = text.toInt();
+            else if (tag == "Cell") {
+                  QString name = e.attribute("name", "");
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-                        if (tag == "path") {
-                              path = ee.text();
-                              break;
+                        if (tag == "Image") {
+                              // look ahead for image type
+                              QString path;
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    if (tag == "path") {
+                                          path = eee.text();
+                                          break;
+                                          }
+                                    }
+                              Image* image = 0;
+                              if (path.endsWith(".svg"))
+                                    image = new SvgImage(gscore);
+                              else if (path.endsWith(".jpg")
+                                 || path.endsWith(".png")
+                                 || path.endsWith(".xpm")
+                                    )
+                                    image = new RasterImage(gscore);
+                              else {
+                                    printf("unknown image format <%s>\n", path.toLatin1().data());
+                                    }
+                              if (image) {
+                                    image->read(ee);
+                                    append(image, name);
+                                    }
+                              }
+                        else {
+                              Element* element = Element::name2Element(tag, gscore);
+                              if (element == 0)
+                                    domError(ee);
+                              else {
+                                    element->read(ee);
+                                    append(element, name);
+                                    }
                               }
                         }
-                  Image* image = 0;
-                  if (path.endsWith(".svg"))
-                        image = new SvgImage(0);
-                  else if (path.endsWith(".jpg")
-                     || path.endsWith(".png")
-                     || path.endsWith(".xpm")
-                        )
-                        image = new RasterImage(0);
-                  else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
-                        }
-                  if (image) {
-                        image->read(e);
-                        append(image, name);
-                        }
-                  }
-            else if (tag == "Symbol") {
-                  Symbol* s = new Symbol(0);
-                  s->read(e);
-                  append(s, name);
                   }
             else
                   domError(e);
@@ -784,7 +833,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       mainWidget->setLayout(vbox);
       vbox->addStretch(1);
       setWidget(mainWidget);
-      dirty = false;
+      _dirty = false;
       }
 
 //---------------------------------------------------------
@@ -830,7 +879,7 @@ int Palette::resizeWidth(int w)
 //   addPalette
 //---------------------------------------------------------
 
-void PaletteBox::addPalette(const QString& s, QWidget* w)
+void PaletteBox::addPalette(const QString& s, Palette* w)
       {
       PaletteScrollArea* sa = new PaletteScrollArea(w);
       PaletteBoxButton* b   = new PaletteBoxButton(sa);
@@ -842,6 +891,12 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       vbox->insertWidget(slotIdx+1, sa, 1000);
       b->setId(slotIdx);
       connect(b, SIGNAL(deletePalette(int)), SLOT(deletePalette(int)));
+
+      if (w->drumPalette()) {
+            mscore->setDrumPalette(w);
+            mscore->updateDrumset();
+            connect(w, SIGNAL(boxClicked(int)), mscore, SLOT(drumPaletteSelected(int)));
+            }
       }
 
 //---------------------------------------------------------
@@ -861,7 +916,7 @@ void PaletteBox::deletePalette(int slot)
 
       for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
             static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
-      dirty = true;
+      _dirty = true;
       }
 
 //---------------------------------------------------------
@@ -872,15 +927,6 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
       {
       emit paletteVisible(false);
       QWidget::closeEvent(ev);
-      }
-
-//---------------------------------------------------------
-//   saveIfDirty
-//---------------------------------------------------------
-
-void PaletteBox::saveIfDirty() const
-      {
-      printf("save palette box\n");
       }
 
 //---------------------------------------------------------
@@ -914,4 +960,71 @@ int Palette::rows() const
             return 0;
       return (cells.size() + c - 1) / c;
       }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void PaletteBox::write(const QString& path)
+      {
+      QFile f(path);
+      if (!f.open(QIODevice::WriteOnly)) {
+            printf("cannot write modified palettes\n");
+            return;
+            }
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      for (int i = 0; i < (vbox->count() - 1); i += 2) {
+            PaletteBoxButton* b = static_cast<PaletteBoxButton*>(vbox->itemAt(i)->widget());
+            PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(i + 1)->widget());
+            Palette* p = static_cast<Palette*>(sa->widget());
+            p->write(xml, b->text());
+            }
+      xml.etag();
+      f.close();
+      }
+
+//---------------------------------------------------------
+//   read
+//    return false on error
+//---------------------------------------------------------
+
+bool PaletteBox::read(QFile* qf)
+      {
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(qf, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading palettes file %s at line %d column %d: %s\n",
+               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load Palettes failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return false;
+            }
+      docName = qf->fileName();
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  // QString version = e.attribute(QString("version"));
+                  // QStringList sl = version.split('.');
+                  // int versionId = sl[0].toInt() * 100 + sl[1].toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Palette") {
+                              Palette* p = new Palette();
+                              QString name = ee.attribute("name", "");
+                              p->read(ee);
+                              addPalette(name, p);
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            }
+      return true;
+      }
+
 
