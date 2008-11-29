@@ -1113,6 +1113,7 @@ void MuseScore::setCurrentScore(int idx)
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
+      setPos(cs->inputPos());
       changeState(cs->state());
       }
 
@@ -2096,9 +2097,9 @@ void MuseScore::setPos(int t)
       SigList* s = cs->sigmap;
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
-      _positionLabel->setText(QString("%1:%2:%3")
-         .arg(bar + 1,  3, 10, QLatin1Char('0'))
-         .arg(beat + 1, 2, 10, QLatin1Char('0'))
+      _positionLabel->setText(QString("Bar %1 Beat %2.%3")
+         .arg(bar + 1,  3, 10, QLatin1Char(' '))
+         .arg(beat + 1, 2, 10, QLatin1Char(' '))
          .arg(tick,     3, 10, QLatin1Char('0'))
          );
       }
