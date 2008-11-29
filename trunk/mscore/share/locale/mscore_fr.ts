@@ -1008,6 +1008,46 @@ echec :</translation>
         <source>Note</source>
         <translation>Note</translation>
     </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished">Raccourci</translation>
+    </message>
+    <message>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>--</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
@@ -3939,10 +3979,6 @@ Sauver cette partition ? </translation>
         <translation>Traducteur</translation>
     </message>
     <message>
-        <source>Dynamics1</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>System</source>
         <translation>Système</translation>
     </message>
@@ -5519,6 +5555,10 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Style failed:</source>
         <translation>MuseScore : Echec du chargement de style :</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

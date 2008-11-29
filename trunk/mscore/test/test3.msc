@@ -1,634 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <Mag>1.18098</Mag>
-  <xoff>2.38585</xoff>
-  <yoff>1.40883</yoff>
-  <Symbols>
-    <name>whole rest</name>
-    <Symbol>
-      <name>whole rest</name>
-      </Symbol>
-    <name>half rest</name>
-    <Symbol>
-      <name>half rest</name>
-      </Symbol>
-    <name>outside whole rest</name>
-    <Symbol>
-      <name>outside whole rest</name>
-      </Symbol>
-    <name>outside half rest</name>
-    <Symbol>
-      <name>outside half rest</name>
-      </Symbol>
-    <name>longa rest</name>
-    <Symbol>
-      <name>longa rest</name>
-      </Symbol>
-    <name>breve rest</name>
-    <Symbol>
-      <name>breve rest</name>
-      </Symbol>
-    <name>quart rest</name>
-    <Symbol>
-      <name>quart rest</name>
-      </Symbol>
-    <name>eight rest</name>
-    <Symbol>
-      <name>eight rest</name>
-      </Symbol>
-    <name>clas quart rest</name>
-    <Symbol>
-      <name>clas quart rest</name>
-      </Symbol>
-    <name>16&apos; rest</name>
-    <Symbol>
-      <name>16&apos; rest</name>
-      </Symbol>
-    <name>32&apos;  rest</name>
-    <Symbol>
-      <name>32&apos;  rest</name>
-      </Symbol>
-    <name>64&apos; rest</name>
-    <Symbol>
-      <name>64&apos; rest</name>
-      </Symbol>
-    <name>128&apos; rest</name>
-    <Symbol>
-      <name>128&apos; rest</name>
-      </Symbol>
-    <name>zero</name>
-    <Symbol>
-      <name>zero</name>
-      </Symbol>
-    <name>one</name>
-    <Symbol>
-      <name>one</name>
-      </Symbol>
-    <name>two</name>
-    <Symbol>
-      <name>two</name>
-      </Symbol>
-    <name>three</name>
-    <Symbol>
-      <name>three</name>
-      </Symbol>
-    <name>four</name>
-    <Symbol>
-      <name>four</name>
-      </Symbol>
-    <name>five</name>
-    <Symbol>
-      <name>five</name>
-      </Symbol>
-    <name>six</name>
-    <Symbol>
-      <name>six</name>
-      </Symbol>
-    <name>seven</name>
-    <Symbol>
-      <name>seven</name>
-      </Symbol>
-    <name>eight</name>
-    <Symbol>
-      <name>eight</name>
-      </Symbol>
-    <name>nine</name>
-    <Symbol>
-      <name>nine</name>
-      </Symbol>
-    <name>sharp</name>
-    <Symbol>
-      <name>sharp</name>
-      </Symbol>
-    <name>natural</name>
-    <Symbol>
-      <name>natural</name>
-      </Symbol>
-    <name>flat</name>
-    <Symbol>
-      <name>flat</name>
-      </Symbol>
-    <name>flat flat</name>
-    <Symbol>
-      <name>flat flat</name>
-      </Symbol>
-    <name>sharp sharp</name>
-    <Symbol>
-      <name>sharp sharp</name>
-      </Symbol>
-    <name>right parenthesis</name>
-    <Symbol>
-      <name>right parenthesis</name>
-      </Symbol>
-    <name>left parenthesis</name>
-    <Symbol>
-      <name>left parenthesis</name>
-      </Symbol>
-    <name>dot</name>
-    <Symbol>
-      <name>dot</name>
-      </Symbol>
-    <name>brevis head</name>
-    <Symbol>
-      <name>brevis head</name>
-      </Symbol>
-    <name>whole head</name>
-    <Symbol>
-      <name>whole head</name>
-      </Symbol>
-    <name>half head</name>
-    <Symbol>
-      <name>half head</name>
-      </Symbol>
-    <name>quart head</name>
-    <Symbol>
-      <name>quart head</name>
-      </Symbol>
-    <name>whole diamond head</name>
-    <Symbol>
-      <name>whole diamond head</name>
-      </Symbol>
-    <name>half diamond head</name>
-    <Symbol>
-      <name>half diamond head</name>
-      </Symbol>
-    <name>diamond head</name>
-    <Symbol>
-      <name>diamond head</name>
-      </Symbol>
-    <name>whole triangle head</name>
-    <Symbol>
-      <name>whole triangle head</name>
-      </Symbol>
-    <name>half triangle head</name>
-    <Symbol>
-      <name>half triangle head</name>
-      </Symbol>
-    <name>triangle head</name>
-    <Symbol>
-      <name>triangle head</name>
-      </Symbol>
-    <name>whole slash head</name>
-    <Symbol>
-      <name>whole slash head</name>
-      </Symbol>
-    <name>half slash head</name>
-    <Symbol>
-      <name>half slash head</name>
-      </Symbol>
-    <name>quart slash head</name>
-    <Symbol>
-      <name>quart slash head</name>
-      </Symbol>
-    <name>whole cross head</name>
-    <Symbol>
-      <name>whole cross head</name>
-      </Symbol>
-    <name>half cross head</name>
-    <Symbol>
-      <name>half cross head</name>
-      </Symbol>
-    <name>cross head</name>
-    <Symbol>
-      <name>cross head</name>
-      </Symbol>
-    <name>x circle head</name>
-    <Symbol>
-      <name>x circle head</name>
-      </Symbol>
-    <name>ufermata</name>
-    <Symbol>
-      <name>ufermata</name>
-      </Symbol>
-    <name>dfermata</name>
-    <Symbol>
-      <name>dfermata</name>
-      </Symbol>
-    <name>thumb</name>
-    <Symbol>
-      <name>thumb</name>
-      </Symbol>
-    <name>sforza to accent</name>
-    <Symbol>
-      <name>sforza to accent</name>
-      </Symbol>
-    <name>staccato</name>
-    <Symbol>
-      <name>staccato</name>
-      </Symbol>
-    <name>ustaccatissimo</name>
-    <Symbol>
-      <name>ustaccatissimo</name>
-      </Symbol>
-    <name>dstacattissimo</name>
-    <Symbol>
-      <name>dstacattissimo</name>
-      </Symbol>
-    <name>tenuto</name>
-    <Symbol>
-      <name>tenuto</name>
-      </Symbol>
-    <name>uportato</name>
-    <Symbol>
-      <name>uportato</name>
-      </Symbol>
-    <name>dportato</name>
-    <Symbol>
-      <name>dportato</name>
-      </Symbol>
-    <name>umarcato</name>
-    <Symbol>
-      <name>umarcato</name>
-      </Symbol>
-    <name>dmarcato</name>
-    <Symbol>
-      <name>dmarcato</name>
-      </Symbol>
-    <name>ouvert</name>
-    <Symbol>
-      <name>ouvert</name>
-      </Symbol>
-    <name>plus stop</name>
-    <Symbol>
-      <name>plus stop</name>
-      </Symbol>
-    <name>up bow</name>
-    <Symbol>
-      <name>up bow</name>
-      </Symbol>
-    <name>down bow</name>
-    <Symbol>
-      <name>down bow</name>
-      </Symbol>
-    <name>reverse turn</name>
-    <Symbol>
-      <name>reverse turn</name>
-      </Symbol>
-    <name>turn</name>
-    <Symbol>
-      <name>turn</name>
-      </Symbol>
-    <name>trill</name>
-    <Symbol>
-      <name>trill</name>
-      </Symbol>
-    <name>upedal heel</name>
-    <Symbol>
-      <name>upedal heel</name>
-      </Symbol>
-    <name>dpedalheel</name>
-    <Symbol>
-      <name>dpedalheel</name>
-      </Symbol>
-    <name>upedal toe</name>
-    <Symbol>
-      <name>upedal toe</name>
-      </Symbol>
-    <name>dpedal toe</name>
-    <Symbol>
-      <name>dpedal toe</name>
-      </Symbol>
-    <name>flageolet</name>
-    <Symbol>
-      <name>flageolet</name>
-      </Symbol>
-    <name>segno</name>
-    <Symbol>
-      <name>segno</name>
-      </Symbol>
-    <name>coda</name>
-    <Symbol>
-      <name>coda</name>
-      </Symbol>
-    <name>rcomma</name>
-    <Symbol>
-      <name>rcomma</name>
-      </Symbol>
-    <name>lcomma</name>
-    <Symbol>
-      <name>lcomma</name>
-      </Symbol>
-    <name>arpeggio</name>
-    <Symbol>
-      <name>arpeggio</name>
-      </Symbol>
-    <name>trillelement</name>
-    <Symbol>
-      <name>trillelement</name>
-      </Symbol>
-    <name>arpeggio arrow down</name>
-    <Symbol>
-      <name>arpeggio arrow down</name>
-      </Symbol>
-    <name>arpeggio arrow up</name>
-    <Symbol>
-      <name>arpeggio arrow up</name>
-      </Symbol>
-    <name>trill element</name>
-    <Symbol>
-      <name>trill element</name>
-      </Symbol>
-    <name>prall</name>
-    <Symbol>
-      <name>prall</name>
-      </Symbol>
-    <name>mordent</name>
-    <Symbol>
-      <name>mordent</name>
-      </Symbol>
-    <name>prall prall</name>
-    <Symbol>
-      <name>prall prall</name>
-      </Symbol>
-    <name>prall mordent</name>
-    <Symbol>
-      <name>prall mordent</name>
-      </Symbol>
-    <name>up prall</name>
-    <Symbol>
-      <name>up prall</name>
-      </Symbol>
-    <name>down prall</name>
-    <Symbol>
-      <name>down prall</name>
-      </Symbol>
-    <name>up mordent</name>
-    <Symbol>
-      <name>up mordent</name>
-      </Symbol>
-    <name>down mordent</name>
-    <Symbol>
-      <name>down mordent</name>
-      </Symbol>
-    <name>line prall</name>
-    <Symbol>
-      <name>line prall</name>
-      </Symbol>
-    <name>prall down</name>
-    <Symbol>
-      <name>prall down</name>
-      </Symbol>
-    <name>prall up</name>
-    <Symbol>
-      <name>prall up</name>
-      </Symbol>
-    <name>eight flag</name>
-    <Symbol>
-      <name>eight flag</name>
-      </Symbol>
-    <name>sixteenth flag</name>
-    <Symbol>
-      <name>sixteenth flag</name>
-      </Symbol>
-    <name>thirtysecond flag</name>
-    <Symbol>
-      <name>thirtysecond flag</name>
-      </Symbol>
-    <name>sixtyfour flag</name>
-    <Symbol>
-      <name>sixtyfour flag</name>
-      </Symbol>
-    <name>deight flag</name>
-    <Symbol>
-      <name>deight flag</name>
-      </Symbol>
-    <name>grace dash</name>
-    <Symbol>
-      <name>grace dash</name>
-      </Symbol>
-    <name>dgrace dash</name>
-    <Symbol>
-      <name>dgrace dash</name>
-      </Symbol>
-    <name>dsixteenth flag</name>
-    <Symbol>
-      <name>dsixteenth flag</name>
-      </Symbol>
-    <name>dthirtysecond flag</name>
-    <Symbol>
-      <name>dthirtysecond flag</name>
-      </Symbol>
-    <name>dsixtyfourth flag</name>
-    <Symbol>
-      <name>dsixtyfourth flag</name>
-      </Symbol>
-    <name>stem</name>
-    <Symbol>
-      <name>stem</name>
-      </Symbol>
-    <name>dstem</name>
-    <Symbol>
-      <name>dstem</name>
-      </Symbol>
-    <name>alto clef</name>
-    <Symbol>
-      <name>alto clef</name>
-      </Symbol>
-    <name>calto clef</name>
-    <Symbol>
-      <name>calto clef</name>
-      </Symbol>
-    <name>bass clef</name>
-    <Symbol>
-      <name>bass clef</name>
-      </Symbol>
-    <name>cbass clef</name>
-    <Symbol>
-      <name>cbass clef</name>
-      </Symbol>
-    <name>trebleclef</name>
-    <Symbol>
-      <name>trebleclef</name>
-      </Symbol>
-    <name>ctrebleclef</name>
-    <Symbol>
-      <name>ctrebleclef</name>
-      </Symbol>
-    <name>percussion clef</name>
-    <Symbol>
-      <name>percussion clef</name>
-      </Symbol>
-    <name>cpercussion clef</name>
-    <Symbol>
-      <name>cpercussion clef</name>
-      </Symbol>
-    <name>tab clef</name>
-    <Symbol>
-      <name>tab clef</name>
-      </Symbol>
-    <name>ctab clef</name>
-    <Symbol>
-      <name>ctab clef</name>
-      </Symbol>
-    <name>four four meter</name>
-    <Symbol>
-      <name>four four meter</name>
-      </Symbol>
-    <name>allabreve</name>
-    <Symbol>
-      <name>allabreve</name>
-      </Symbol>
-    <name>pedalasterisk</name>
-    <Symbol>
-      <name>pedalasterisk</name>
-      </Symbol>
-    <name>pedaldash</name>
-    <Symbol>
-      <name>pedaldash</name>
-      </Symbol>
-    <name>pedaldot</name>
-    <Symbol>
-      <name>pedaldot</name>
-      </Symbol>
-    <name>pedalP</name>
-    <Symbol>
-      <name>pedalP</name>
-      </Symbol>
-    <name>pedald</name>
-    <Symbol>
-      <name>pedald</name>
-      </Symbol>
-    <name>pedale</name>
-    <Symbol>
-      <name>pedale</name>
-      </Symbol>
-    <name>pedal ped</name>
-    <Symbol>
-      <name>pedal ped</name>
-      </Symbol>
-    <name>acc discant</name>
-    <Symbol>
-      <name>acc discant</name>
-      </Symbol>
-    <name>acc dot</name>
-    <Symbol>
-      <name>acc dot</name>
-      </Symbol>
-    <name>acc freebase</name>
-    <Symbol>
-      <name>acc freebase</name>
-      </Symbol>
-    <name>acc stdbase</name>
-    <Symbol>
-      <name>acc stdbase</name>
-      </Symbol>
-    <name>acc bayanbase</name>
-    <Symbol>
-      <name>acc bayanbase</name>
-      </Symbol>
-    <name>acc sb</name>
-    <Symbol>
-      <name>acc sb</name>
-      </Symbol>
-    <name>acc bb</name>
-    <Symbol>
-      <name>acc bb</name>
-      </Symbol>
-    <name>acc old ee</name>
-    <Symbol>
-      <name>acc old ee</name>
-      </Symbol>
-    <name>acc old ees</name>
-    <Symbol>
-      <name>acc old ees</name>
-      </Symbol>
-    <name>whole do head</name>
-    <Symbol>
-      <name>whole do head</name>
-      </Symbol>
-    <name>half do head</name>
-    <Symbol>
-      <name>half do head</name>
-      </Symbol>
-    <name>do head</name>
-    <Symbol>
-      <name>do head</name>
-      </Symbol>
-    <name>whole re head</name>
-    <Symbol>
-      <name>whole re head</name>
-      </Symbol>
-    <name>half re head</name>
-    <Symbol>
-      <name>half re head</name>
-      </Symbol>
-    <name>re head</name>
-    <Symbol>
-      <name>re head</name>
-      </Symbol>
-    <name>whole me head</name>
-    <Symbol>
-      <name>whole me head</name>
-      </Symbol>
-    <name>half me head</name>
-    <Symbol>
-      <name>half me head</name>
-      </Symbol>
-    <name>me head</name>
-    <Symbol>
-      <name>me head</name>
-      </Symbol>
-    <name>whole fa head</name>
-    <Symbol>
-      <name>whole fa head</name>
-      </Symbol>
-    <name>fau head</name>
-    <Symbol>
-      <name>fau head</name>
-      </Symbol>
-    <name>half fad head</name>
-    <Symbol>
-      <name>half fad head</name>
-      </Symbol>
-    <name>fad head</name>
-    <Symbol>
-      <name>fad head</name>
-      </Symbol>
-    <name>whole la head</name>
-    <Symbol>
-      <name>whole la head</name>
-      </Symbol>
-    <name>half la head</name>
-    <Symbol>
-      <name>half la head</name>
-      </Symbol>
-    <name>la head</name>
-    <Symbol>
-      <name>la head</name>
-      </Symbol>
-    <name>whole te head</name>
-    <Symbol>
-      <name>whole te head</name>
-      </Symbol>
-    <name>half te head</name>
-    <Symbol>
-      <name>half te head</name>
-      </Symbol>
-    <name>f</name>
-    <Symbol>
-      <name>f</name>
-      </Symbol>
-    <name>m</name>
-    <Symbol>
-      <name>m</name>
-      </Symbol>
-    <name>p</name>
-    <Symbol>
-      <name>p</name>
-      </Symbol>
-    <name>r</name>
-    <Symbol>
-      <name>r</name>
-      </Symbol>
-    <name>s</name>
-    <Symbol>
-      <name>s</name>
-      </Symbol>
-    <name>z</name>
-    <Symbol>
-      <name>z</name>
-      </Symbol>
-    </Symbols>
+  <Mag>2.06053</Mag>
+  <xoff>-149.511</xoff>
+  <yoff>-95.2424</yoff>
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Style>
@@ -744,6 +118,10 @@ p, li { white-space: pre-wrap; }
         </Channel>
       </Instrument>
     </Part>
+  <Slur id="1">
+    <track>0</track>
+    <up>2</up>
+    </Slur>
   <Staff id="1">
     <VBox>
       <height>10</height>
@@ -837,7 +215,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <StemDirection>up</StemDirection>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Chord>
@@ -863,8 +240,8 @@ p, li { white-space: pre-wrap; }
         <Beam>2</Beam>
         <Note>
           <track>1</track>
-          <pitch>59</pitch>
-          <tpc>19</tpc>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -879,7 +256,98 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
+        <tick>3360</tick>
         <ticklen>480</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <Chord>
+        <ticklen>1920</ticklen>
+        <Slur type="start" number="1"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <track>1</track>
+        <tick>3840</tick>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Beam id="3">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Beam id="4">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
         <Note>
           <track>1</track>
           <pitch>67</pitch>
@@ -887,16 +355,87 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       </Measure>
-    <Measure number="3">
-      <Rest>
-        <ticklen>1920</ticklen>
-        </Rest>
-      </Measure>
     <Measure number="4">
+      <Chord>
+        <ticklen>960</ticklen>
+        <Slur type="stop" number="1"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <selected>1</selected>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
       <Rest>
-        <ticklen>1920</ticklen>
+        <offset x="0.19326" y="1.76804"/>
+        <ticklen>480</ticklen>
+        <small>1</small>
+        </Rest>
+      <Beam id="5">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <tick>5760</tick>
+        <ticklen>240</ticklen>
+        <Beam>5</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>5</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>5</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Beam>5</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <ticklen>240</ticklen>
+        <Note>
+          <track>1</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0.177314" y="1.77314"/>
+        <track>1</track>
+        <tick>7200</tick>
+        <ticklen>480</ticklen>
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

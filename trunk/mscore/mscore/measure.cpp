@@ -307,11 +307,14 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             Element* e = segment->element(track);
             if (!e)
                  continue;
+            ChordRest* cr = static_cast<ChordRest*>(e);
+            double m = staffMag;
+            if (cr->small())
+                  m *= style->smallNoteMag;
+            cr->setMag(m);
+
             if (e->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
-                  double m = staffMag;
-                  if (chord->small())
-                        m *= style->smallNoteMag;
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->style()->graceNoteMag;
                   chord->setMag(m);
@@ -373,8 +376,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         }
                   chord->computeUp();
                   }
-            else
-                  e->setMag(staffMag);
             }
 
       if (drumset || notes.isEmpty())
@@ -385,6 +386,16 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
+            for (int i = 0; i < endIdx-1; ++i) {
+                  if ((notes[i]->line() == notes[i+1]->line())
+                     && (notes[i]->track() != notes[i+1]->track())
+                     && (!notes[i]->chord()->isUp() && notes[i+1]->chord()->isUp())
+                     ) {
+                        Note* n = notes[i];
+                        notes[i] = notes[i+1];
+                        notes[i+1] = n;
+                        }
+                  }
             }
       else {
             startIdx = notes.size() - 1;
@@ -396,16 +407,19 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       bool isLeft   = notes[startIdx]->chord()->isUp();
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
+      int lastTicks = -1;
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
             int move   = note->staffMove();
             int line   = note->line();
+            int ticks  = note->chord()->tickLen();
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             if ((note->chord()->isUp() != isLeft) || conflict)
                   isLeft = !isLeft;
-            int nmirror = note->chord()->isUp() != isLeft;
-            if (conflict && (nmirror == mirror) && (ll != line)) {
+            int nmirror   = note->chord()->isUp() != isLeft;
+            bool sameNote = (ll == line) && (ticks == lastTicks);
+            if (conflict && (nmirror == mirror) && !sameNote) {
                   Note* note = notes[idx];
                   note->chord()->setXpos(note->headWidth());
                   moveLeft = true;
@@ -424,6 +438,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 //                  }
             move1 = move;
             ll    = line;
+            lastTicks = ticks;
             }
 
       //---------------------------------------------------
@@ -458,16 +473,6 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             ll3 = ll2;
             ll2 = line;
             }
-#if 0
-      for (int track = startTrack; track < endTrack; ++track) {
-            Element* e = segment->element(track);
-            if (!e)
-                 continue;
-            if (e->type() == CHORD) {
-                  static_cast<Chord*>(e)->computeUp();
-                  }
-            }
-#endif
       }
 
 //---------------------------------------------------------

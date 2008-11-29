@@ -1,3 +1,6 @@
+29.nov (ws)
+      - fix note head layout in multi voice context
+      - fix small rests
 28.nov (ws)
       - cleanup for dynamics; remove DYNAMIC1 text style
       - fix: dynamic "p" not editable

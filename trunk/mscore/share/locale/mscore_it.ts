@@ -1017,6 +1017,46 @@ fallito: </translation>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished">Scorciatoia</translation>
+    </message>
+    <message>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished">La</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished">Do</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished">Re</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished">Mi</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished">Fa</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished">Sol</translation>
+    </message>
+    <message>
+        <source>--</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
@@ -3931,10 +3971,6 @@ Desideri Salvare lo Spartito?</translation>
         <translation>Traduttore</translation>
     </message>
     <message>
-        <source>Dynamics1</source>
-        <translation>Dinamica 1</translation>
-    </message>
-    <message>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
@@ -5527,6 +5563,10 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Style failed:</source>
         <translation>MuseScore: Caricamento Stile Fallito:</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

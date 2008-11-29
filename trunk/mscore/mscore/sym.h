@@ -38,12 +38,12 @@ enum SymbolType {
 
 struct SymCode {
       QChar code;
-      int style;
+      int fontId;
       const char* text;
       SymbolType type;
       bool show;
-      SymCode(QChar c, int s, const char* t = 0, SymbolType type = SYMBOL_UNKNOWN, bool show = true)
-         : code(c), style(s), text(t), type(type), show(show) {}
+      SymCode(QChar c, int id, const char* t = 0, SymbolType type = SYMBOL_UNKNOWN, bool show = true)
+         : code(c), fontId(id), text(t), type(type), show(show) {}
       };
 
 extern QMap<const char*, SymCode*> charReplaceMap;
@@ -298,5 +298,6 @@ enum {
 extern const Sym* findSymbol(QChar code, int fontId);
 extern QString symToHtml(const Sym&);
 extern QString symToHtml(const Sym&, const Sym&);
+extern QFont fontId2font(int id);
 #endif
 

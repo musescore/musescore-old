@@ -55,17 +55,10 @@ TextPalette::TextPalette(QWidget* parent)
             tb->setFixedSize(40, 40);
 
             SymCode sc(pSymbols[i]);
-            if (sc.style == -1)
+            if (sc.fontId == -1)
                   tb->setText(sc.code);
             else {
-                  int id = 2;
-                  TextStyle* style = &defaultTextStyles[sc.style];
-                  QString family = style->family;
-                  if (family == "MScore")
-                        id = 0;
-                  else if (family == "MScore1")
-                        id = 1;
-                  Sym sym("", sc.code, id);
+                  Sym sym("", sc.code, sc.fontId);
                   QIcon icon = symIcon(sym, 25, 35, 35);
                   tb->setIconSize(QSize(35, 35));
                   tb->setIcon(icon);

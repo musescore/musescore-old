@@ -1016,6 +1016,46 @@ failed: </source>
         <source>Note</source>
         <translation>Нота</translation>
     </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished">Комбинация</translation>
+    </message>
+    <message>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished">Ля</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished">До</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished">Ре</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished">Ми</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished">Фа</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished">Соль</translation>
+    </message>
+    <message>
+        <source>--</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
@@ -3930,10 +3970,6 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dynamics1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>System</source>
         <translation>Система</translation>
     </message>
@@ -5526,6 +5562,10 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: load midi</source>
         <translation>MuseScore: Загрузка MIDI</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

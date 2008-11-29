@@ -1114,10 +1114,10 @@ void TextB::addSymbol(const SymCode& s, QTextCursor* cur)
             cur = cursor;
 // printf("Text: addSymbol(%x)\n", s.code);
       QTextCharFormat oFormat = cur->charFormat();
-      if (s.style >= 0) {
+      if (s.fontId >= 0) {
             QTextCharFormat oFormat = cur->charFormat();
             QTextCharFormat nFormat(oFormat);
-            nFormat.setFontFamily(score()->textStyle(s.style)->font().family());
+            nFormat.setFontFamily(fontId2font(s.fontId).family());
             cur->setCharFormat(nFormat);
             cur->insertText(s.code);
             cur->setCharFormat(oFormat);
