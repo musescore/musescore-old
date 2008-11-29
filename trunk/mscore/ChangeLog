@@ -1,4 +1,6 @@
 29.nov (ws)
+      - refine the rule when two notes share the same note head (test3.msc)
+      - fix another copy/paste crash (src is a range and destination a single note/rest)
       - no whole measure rest in 4/2 and 8/2
       - fix longa
       - fix note head layout in multi voice context
