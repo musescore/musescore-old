@@ -2331,7 +2331,7 @@ void Score::cmdPaste()
             int tick, staffIdx;
             if (sel->state() == SEL_STAFF) {
                   tick = sel->startSegment()->tick();
-                  // int staffIdx = sel->staffStart;
+                  staffIdx = sel->staffStart;
                   }
             else if (sel->state() == SEL_SINGLE) {
                   Element* e = sel->element();

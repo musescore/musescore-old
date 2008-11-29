@@ -965,6 +965,7 @@ void ScoreLayout::connectTies()
 
 void ScoreLayout::searchHiddenNotes()
       {
+#if 0
       // TODO: should be coded more efficient
 
       int staves = _score->nstaves();
@@ -1021,6 +1022,7 @@ void ScoreLayout::searchHiddenNotes()
                         }
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

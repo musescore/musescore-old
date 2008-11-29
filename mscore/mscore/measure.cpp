@@ -288,6 +288,7 @@ static void initLineList(char* ll, int key)
 //---------------------------------------------------------
 //   layoutChords
 //    only called from layout0
+//    - calculate displaced note heads
 //---------------------------------------------------------
 
 void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
@@ -407,26 +408,38 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       bool isLeft   = notes[startIdx]->chord()->isUp();
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
-      int lastTicks = -1;
+      int lastHead  = -1;
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
             int move   = note->staffMove();
             int line   = note->line();
             int ticks  = note->chord()->tickLen();
+            int head   = note->noteHead();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
             if ((note->chord()->isUp() != isLeft) || conflict)
                   isLeft = !isLeft;
             int nmirror   = note->chord()->isUp() != isLeft;
-            bool sameNote = (ll == line) && (ticks == lastTicks);
-            if (conflict && (nmirror == mirror) && !sameNote) {
+            bool sameHead = (ll == line) && (head == lastHead);
+
+            if (conflict && (nmirror == mirror) && !sameHead) {
                   Note* note = notes[idx];
-                  note->chord()->setXpos(note->headWidth());
+                  note->chord()->setXpos(note->headWidth() - point(score()->style()->stemWidth) * note->mag());
                   moveLeft = true;
                   }
             else
                   note->chord()->setXpos(0);
-
+            if (conflict && (nmirror == mirror) && sameHead) {
+                  if (ticks > notes[idx-1]->chord()->tickLen()) {
+                        notes[idx-1]->setHidden(true);
+                        note->setHidden(false);
+                        }
+                  else {
+                        note->setHidden(true);
+                        }
+                  }
+            else
+                  note->setHidden(false);
             mirror = nmirror;
             note->setMirror(mirror);
             if (mirror)
@@ -436,9 +449,9 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 //                  notes[i-1]->setMirror(true);
 //                  mirror = false;
 //                  }
-            move1 = move;
-            ll    = line;
-            lastTicks = ticks;
+            move1    = move;
+            ll       = line;
+            lastHead = head;
             }
 
       //---------------------------------------------------

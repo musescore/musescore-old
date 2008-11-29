@@ -1477,7 +1477,7 @@ void Score::cmdExchangeVoice(int s, int d)
 
       Measure* m1 = tick2measure(t1);
       Measure* m2 = tick2measure(t2);
-      printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2);
+printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2);
       for (;;) {
             undoExchangeVoice(m1, s, d, selection()->staffStart, selection()->staffEnd);
             MeasureBase* mb = m1->next();

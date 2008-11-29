@@ -1477,7 +1477,9 @@ int main(int argc, char* argv[])
       if (debugMode)
             cout << "load translator <" << lp << ">\n";
 
-      translator.load(lp);
+      if (!translator.load(lp) && debugMode)
+            cout << "load translatro <" << lp << "> failed\n";
+
       app.installTranslator(&translator);
 
       QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
