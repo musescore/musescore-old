@@ -908,7 +908,7 @@ void Chord::computeUp()
             _up = true;
             return;
             }
-      if (tickLen() >= division*4) {
+      if (!duration().hasStem()) {
             _up = true;
             return;
             }

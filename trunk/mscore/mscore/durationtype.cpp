@@ -71,7 +71,7 @@ int headType(int tickLen, Duration* type, int* dots)
                   return getDots(ticks, remain, dots);
                   }
             }
-      printf("1: no duration type for ticks %d\n", tickLen);
+printf("1: no duration type for ticks %d\n", tickLen);
       *type = Duration(Duration::V_QUARTER);
       *dots = 0;
       return 0;
@@ -189,7 +189,7 @@ int Duration::headType() const
             case V_BREVE:
                   headType = 3;
                   break;
-            case V_LONG:      // not impl.
+            case V_LONG:
                   headType = 3;
                   break;
             default:
@@ -241,6 +241,7 @@ bool Duration::hasStem() const
             case V_EIGHT:
             case V_QUARTER:
             case V_HALF:
+            case V_LONG:
                   return true;
             default:
                   return false;

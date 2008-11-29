@@ -48,10 +48,10 @@
 #include "drumset.h"
 
 const int noteHeads[HEAD_GROUPS][4] = {
-      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym},
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym },
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym },
-      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym},
-      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym,   wholetriangleheadSym},
+      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,    wholediamondheadSym },
+      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym,   wholetriangleheadSym },
       { wholediamond2headSym, halfdiamond2headSym, diamond2headSym,   wholediamond2headSym },
 
       { wholeslashheadSym,    halfslashheadSym,    quartslashheadSym, wholeslashheadSym },

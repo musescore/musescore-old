@@ -142,10 +142,32 @@ Rest* Score::setRest(int tick, int len, int track)
       Rest* rest = 0;
 
       Measure* measure = tick2measure(tick);
-      if (measure->tickLen() == len)      // whole measure rest?
+
+      //
+      // set whole measure rest if
+      //    - rest covers whole measure
+      //    - len < brevis
+
+      if (measure->tickLen() == len && (len < (division * 8)))    // whole measure rest?
             return addRest(tick, 0, track);
 
-      if (len / (division*4)) {
+      if (len / (division * 16)) {                                // longa
+            rest = addRest(tick, division * 16, track);
+            int nlen =  len % (division * 16);
+            if (nlen) {
+                  setRest(tick + division * 16, nlen, track);
+                  tick += nlen;
+                  }
+            }
+      else if (len / (division * 8)) {                            // brevis
+            rest = addRest(tick, division*8, track);
+            int nlen =  len % (division*8);
+            if (nlen) {
+                  setRest(tick + division*8, nlen, track);
+                  tick += nlen;
+                  }
+            }
+      else if (len / (division*4)) {
             rest = addRest(tick, division*4, track);
             int nlen =  len % (division*4);
             if (nlen) {

@@ -1,4 +1,6 @@
 29.nov (ws)
+      - no whole measure rest in 4/2 and 8/2
+      - fix longa
       - fix note head layout in multi voice context
       - fix small rests
 28.nov (ws)

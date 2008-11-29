@@ -341,6 +341,7 @@ void Score::setPadState()
       getAction("pad-dotdot")->setChecked(_padState.dots == 2);
       getAction("pad-tie")->setChecked(_padState.tie);
 
+      getAction("note-longa")->setChecked(_padState.len == division * 16);
       getAction("note-breve")->setChecked(_padState.len == division * 8);
       getAction("pad-note-1")->setChecked(_padState.len == division * 4);
       getAction("pad-note-2")->setChecked(_padState.len == division*2);
