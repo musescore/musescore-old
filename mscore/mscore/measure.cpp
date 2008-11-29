@@ -1629,7 +1629,7 @@ printf("\n");
                         //
                         // center symbol if its a whole measure rest
                         //
-                        if (!_irregular && (e->tickLen() == 0)) {
+                        if (!_irregular && ((e->tickLen() == 0) || (e->tickLen() == tickLen()))) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
                               if (seg == 1)
