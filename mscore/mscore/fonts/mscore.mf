@@ -16,6 +16,8 @@ save outer_path;
 path outer_path;
 
 save black_notehead_width;
+save stemHeight;
+stemHeight := 3 staff_space;
 
 %----------------------------------------------------------
 %     half note with stem
@@ -40,7 +42,7 @@ fet_beginchar ("Half note", "no1");
       pair unten;
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
-      oben  := unten + (0, 3.5 staff_space);
+      oben  := unten + (0, stemHeight);
 
       draw unten -- oben;
 fet_endchar;
@@ -68,7 +70,7 @@ fet_beginchar ("Quart note", "no2");
       pair unten;
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
-      oben  := unten + (0, 3.5 staff_space);
+      oben  := unten + (0, stemHeight);
       draw unten -- oben;
 
       fet_endchar;
@@ -182,7 +184,7 @@ fet_beginchar ("Quart note", "no4");
       pair unten;
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
-      oben  := unten + (0, 3.5 staff_space);
+      oben  := unten + (0, stemHeight);
       draw unten -- oben;
 
 
@@ -231,7 +233,7 @@ fet_beginchar ("1/16 note", "no8");
       pair unten;
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
-      oben  := unten + (0, 3.5 staff_space);
+      oben  := unten + (0, stemHeight);
       draw unten -- oben;
 
 
@@ -282,7 +284,7 @@ fet_beginchar ("1/32 note", "no16");
       pair unten;
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
-      oben  := unten + (0, 3.5 staff_space);
+      oben  := unten + (0, stemHeight);
       draw unten -- oben;
 
 
@@ -501,6 +503,244 @@ fet_beginchar ("duration dot dot", "dotdot");
 	drawdot z0 + (staff_space / 2, staff_space / 2);
 
 	set_char_box (0, dot_diam# * 2 + staff_space# / 2, .5 dot_diam#, .5 dot_diam#);
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     accidentals
+%----------------------------------------------------------
+
+save sharp_beamheight;
+sharp_beamheight# := 0.3 staff_space# + stafflinethickness#;
+
+%
+% The beams of most sharps have horizontal endings (as if drawn with
+% a square pen).  [Wanske] does not mention this, so we'll just ignore
+% this fact.
+%
+
+def draw_meta_sharp (expr width, offset) =
+	save beamwidth, beamslope;
+	save ne, nw_dist;
+	pair ne, nw_dist;
+
+	beamwidth := width;
+
+	define_whole_vertical_blacker_pixels (sharp_beamheight);
+
+	clearxy;
+
+	beamslope = sharp_beamheight / beamwidth;
+
+	pickup pencircle scaled 2 blot_diameter;
+
+	rt x2 - lft x1 = beamwidth;
+	z2 = z1 + whatever * (beamwidth, sharp_beamheight);
+	.5 [z1, z3] = (.5 w, offset);
+	x3 = x2;
+	top y2 - bot y3 = sharp_beamheight;
+	x4 = x1;
+	top y1 - bot y4 = sharp_beamheight;
+
+	ne = unitvector (z2 - z1);
+	nw_dist = (ne rotated 90) * blot_diameter;
+
+	fill lft z1{up}
+	     ... (z1 + nw_dist){ne}
+	     -- (z2 + nw_dist){ne}
+	     ... rt z2{down}
+	     -- rt z3{down}
+	     ... (z3 - nw_dist){-ne}
+	     -- (z4 - nw_dist){-ne}
+	     ... lft z4{up}
+	     -- cycle;
+
+	labels (1, 2, 3, 4);
+enddef;
+
+%
+% Dedicated to my mom.    (3/10/97)
+%
+% Mamma, ik hou van je; kom je alsjeblieft terug?
+%    -- HW
+%
+%
+% TODO: remove crook_fatness
+% TODO: document, simplify!
+%
+
+def draw_meta_flat (expr xcenter, w, crook_fatness) =
+	save crook_thinness;
+	save bottom_overshoot, bot_crook_dir;
+	save top_stem_thick, bottom_stem_thick, hair, smaller_hole;
+	save top_crook_thinness;
+	save zwiep;
+	save center;
+	pair center, bot_crook_dir;
+	save clearing;
+
+	clearxy;
+
+	% the stem shouldn't reach the top staff line.
+	%% TODO: should take from height.
+	%
+	% TODO: parameterize this
+	%
+	if w >= 0.75 staff_space:
+		smaller_hole = 0.35 stafflinethickness;
+	else:
+		smaller_hole = 0;
+	fi;
+	clearing           = 1.7 stafflinethickness;
+	crook_thinness     = .7 stafflinethickness + .06 staff_space;
+	top_crook_thinness = 1 stafflinethickness + .065 staff_space;
+	bottom_overshoot   = stafflinethickness;
+
+	bottom_stem_thick# = 0.06 staff_space# + 0.6 stafflinethickness#;
+	top_stem_thick#    = 0.1 staff_space# + 1.2 stafflinethickness#;
+	define_whole_blacker_pixels (bottom_stem_thick, top_stem_thick);
+
+	if odd (top_stem_thick - bottom_stem_thick):
+		top_stem_thick := top_stem_thick - 1;
+	fi;
+
+      center = (xcenter, 0);
+
+	x1l = hround (xcenter - .5 top_stem_thick);
+	y1  = vround (2 staff_space - clearing);
+	x2l = hround (xcenter - .5 bottom_stem_thick);
+	y2  = -.5 staff_space - .5 stafflinethickness;
+
+	penpos1 (top_stem_thick, 0);
+	penpos2 (bottom_stem_thick, 0);
+
+	y3l = vfloor ((staff_space - stafflinethickness) / 2);
+	z3l = whatever [z2r, z1r];
+	z3r = .3 [z2r, z1r] + (smaller_hole, 0);
+	x3r := hceiling x3r;
+
+	% we insert z3l to get better conversion with mf2pt1
+      save pathC;
+      path pathC;
+	pathC := simple_serif (z1r, z1l, 30)
+	     -- z2l
+	     -- z2r
+	     -- z3l
+	     -- cycle;
+      pathC := pathC shifted (0, .5 staff_space);
+      fill pathC;
+
+	z10 = whatever [z2r, z1r] + (smaller_hole, 0);
+	y10 = -1/10 staff_space;
+	x10 := hceiling x10;
+
+	x11 = xcenter + bottom_overshoot / 3;
+	y11 = -vround (.5 (staff_space + stafflinethickness)
+		       + bottom_overshoot);
+
+	penpos4 (whatever, 53);
+
+	y4l - y4r = top_crook_thinness;
+	y5r = .15 staff_space;
+	x5l = hround (w + xcenter);
+	y4 = staff_space / 2;
+	x4r = .45 [x5r, x3r];
+	y4l := vround y4l;
+
+	penpos5 (crook_fatness, -175);
+
+	bot_crook_dir = unitvector ((x5l, 0) - z11);
+	z8 = z11 + whatever * bot_crook_dir;
+	y8 = -staff_space / 2;
+
+	z7 = z8
+	     + whatever * bot_crook_dir
+	     + crook_thinness * (bot_crook_dir rotated 90);
+	x7 = .1 [x3r, x8];
+
+      save pathA, pathB;
+      path pathA, pathB;
+
+	pathA := z3r{z3r - z10}
+	       .. z4r{right}
+	       .. z5r{down}
+	       .. z7{-bot_crook_dir}
+	       & z7
+	       .. z10{z3r - z10}
+	       -- cycle;
+
+	pathB := z2l{down}
+	     .. z11{right}
+	     .. z8{bot_crook_dir}
+	     .. z5l{up}
+	     .. z4l{left}
+	     .. z3l
+	     -- cycle;
+      pathA := pathA shifted (0, staff_space / 2);
+      pathB := pathB shifted (0, staff_space / 2);
+      unfill pathA;
+      fill pathB;
+enddef;
+
+
+
+%----------------------------------------------------------
+%     sharp
+%----------------------------------------------------------
+
+fet_beginchar ("Sharp", "sharp");
+	save stem, stemx, stemwidth;
+	save outer_space, interbeam;
+
+      save moveUp;
+      moveUp := .5 staff_space;
+
+	stemwidth# := stafflinethickness# + .05 staff_space#;
+	define_whole_blacker_pixels (stemwidth);
+
+	interbeam := 1.05 staff_space_rounded;
+
+	set_char_box (0, 1.1 staff_space#,
+		      1.5 staff_space#, 1.5 staff_space#);
+
+	stem := 7 / 16 * w;
+	stemx := hround stem;
+	outer_space := hround ((w - stemx - stemwidth) / 2);
+
+	w := 2 outer_space + stemx + stemwidth;
+	d := d - feta_space_shift;
+
+	draw_meta_sharp (w, -.5 interbeam + moveUp);
+	draw_meta_sharp (w, -.5 interbeam + vround interbeam + moveUp);
+
+	pickup pencircle scaled stemwidth;
+
+	lft x5 = lft x6 = outer_space;
+	lft x7 = lft x8 = outer_space + stemx;
+	bot y5 = -d + moveUp;
+	top y6 = vround (1.5 staff_space - stem * beamslope) + moveUp;
+	bot y7 = -top y6 + feta_space_shift + 2* moveUp;
+	top y8 = h + moveUp;
+
+	labels (5, 6, 7, 8);
+
+	draw_gridline (z5, z6, stemwidth);
+	draw_gridline (z7, z8, stemwidth);
+
+fet_endchar;
+
+
+%----------------------------------------------------------
+%     flat
+%----------------------------------------------------------
+
+fet_beginchar ("Flat", "flat");
+	set_char_box (1.2 stafflinethickness#, .8 staff_space#,
+		      0.6 staff_space#, 1.9 staff_space#);
+
+	draw_meta_flat (0, w, 0.31 staff_space);
+	penlabels (range 0 thru 11);
+
 fet_endchar;
 
 

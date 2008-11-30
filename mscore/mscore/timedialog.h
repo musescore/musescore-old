@@ -24,6 +24,7 @@
 #include "ui_timedialog.h"
 
 class Palette;
+class PaletteScrollArea;
 
 //---------------------------------------------------------
 //   TimeDialog

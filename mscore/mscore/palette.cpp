@@ -325,21 +325,10 @@ void Palette::add(int idx, Element* s, const QString& name)
             Icon* icon = static_cast<Icon*>(s);
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
-      updateGeometry();
+      if (columns())
+            resizeWidth(width());
       }
-#if 0
-//---------------------------------------------------------
-//   sizeHint
-//---------------------------------------------------------
 
-QSize Palette::sizeHint() const
-      {
-      int n = cells.size();
-      int c = columns();
-      int rows = (n+c-1) / c;
-      return QSize(hgrid * c, vgrid * rows);
-      }
-#endif
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------

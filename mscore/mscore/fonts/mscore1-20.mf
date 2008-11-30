@@ -16,7 +16,6 @@ staffsize# := design_size * pt#;
 mode_setup;
 
 input feta-macros;
-
 input feta-params;
 
 font_x_height staff_space#;

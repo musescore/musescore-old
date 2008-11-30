@@ -131,7 +131,6 @@ class Palette : public QWidget {
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void leaveEvent(QEvent*);
       virtual bool event(QEvent*);
-//      virtual QSize sizeHint() const;
 
       virtual void dragEnterEvent(QDragEnterEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
@@ -173,7 +172,7 @@ class Palette : public QWidget {
       void setReadOnly(bool val)   { _readOnly = val;    }
       void setMag(qreal val)       { extraMag = val;     }
       void setYOffset(qreal val)   { _yOffset = val;     }
-      int columns() const { return width() / hgrid; }
+      int columns() const          { return width() / hgrid; }
       int rows() const;
       int resizeWidth(int);
       bool drumPalette() const      { return _drumPalette; }
