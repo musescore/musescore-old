@@ -326,9 +326,13 @@ void Measure::layoutBeams1(ScoreLayout* layout)
             ChordRest* a1 = 0;      // start of (potential) beam
             Beam* beam    = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
+                  if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                        continue;
                   Element* e = segment->element(track);
                   if (e == 0)
                         continue;
+#if 0
+                  // stop beam at clef
                   if (segment->subtype() == Segment::SegClef) {
                         if (beam) {
                               beam->layout1(layout);
@@ -341,8 +345,9 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               }
                         continue;
                         }
-                  if (!e->isChordRest())
-                        continue;
+#endif
+//                  if (!e->isChordRest())
+//                        continue;
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();
@@ -396,8 +401,9 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         // in voice:
                         ChordRest* le = beam->elements().back();
                         if (le->tick() + le->tickLen() != cr->tick()) {
-                              if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet()))
+                              if ((le->tuplet() == 0 && cr->tuplet() == 0) || (le->tuplet() != cr->tuplet())) {
                                     beamEnd = true;
+                                    }
                               }
                         else if (le->tuplet() != cr->tuplet())
                               beamEnd = true;
@@ -429,14 +435,25 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         if (beam) {
                               beam->layout1(layout);
                               beam = 0;
+
+                              cr->setBeam(0);
+                              cr->layoutStem1(layout);
                               }
-                        if (a1) {
-                              a1->setBeam(0);
-                              a1->layoutStem1(layout);
+                        else if (a1) {
+                              beam = new Beam(score());
+                              beam->setGenerated(true);
+                              beam->setTrack(track);
+                              add(beam);
+                              beam->add(a1);
+                              beam->add(cr);
                               a1 = 0;
+                              beam->layout1(layout);
+                              beam = 0;
                               }
-                        cr->setBeam(0);
-                        cr->layoutStem1(layout);
+                        else {
+                              cr->setBeam(0);
+                              cr->layoutStem1(layout);
+                              }
                         }
                   else if (cr) {
                         if (a1 == 0)

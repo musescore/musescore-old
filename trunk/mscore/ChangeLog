@@ -1,4 +1,5 @@
 30.nov (ws)
+      - fix: could not beam duole
       - font fixes
 29.nov (ws)
       - refine the rule when two notes share the same note head (test3.msc)
