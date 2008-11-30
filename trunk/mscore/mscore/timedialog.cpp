@@ -22,6 +22,7 @@
 #include "timesig.h"
 #include "palette.h"
 #include "mscore.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   TimeDialog
@@ -44,7 +45,7 @@ TimeDialog::TimeDialog(QWidget* parent)
       sp->setGrid(60, 60);
       sp->showStaff(true);
 
-      Score* cs = 0;
+      Score* cs = gscore;
 	sp->append(new TimeSig(cs, 2, 2), "2/2");
 	sp->append(new TimeSig(cs, 4, 2), "2/4");
 	sp->append(new TimeSig(cs, 4, 3), "3/4");
@@ -68,7 +69,6 @@ TimeDialog::TimeDialog(QWidget* parent)
 void TimeDialog::addClicked()
       {
       TimeSig* ts = new TimeSig(0, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
-
       // extend palette:
       sp->append(ts, "");
       }

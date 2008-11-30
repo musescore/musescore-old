@@ -31,8 +31,8 @@ QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
-      SymCode(0xe10e, 1),    // sharp          TODO
-      SymCode(0xe112, 1),    // flat           TODO
+      SymCode(0xe40c, 1),    // sharp
+      SymCode(0xe40d, 1),    // flat
       SymCode(0xe404, 1),    // note2_Sym
       SymCode(0xe405, 1),    // note4_Sym
       SymCode(0xe406, 1),    // note8_Sym
