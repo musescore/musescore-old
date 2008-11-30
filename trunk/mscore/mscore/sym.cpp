@@ -41,9 +41,9 @@ SymCode pSymbols[] = {
       SymCode(0xe409, 1),    // note64_Sym
       SymCode(0xe40a, 1),    // dot
       SymCode(0xe40b, 1),    // dotdot
-      SymCode(0xe468, 1),    // coda           TODO
-      SymCode(0xe469, 1),    // varcoda        TODO
-      SymCode(0xe467, 1),    // segno          TODO
+      SymCode(0xe40e, 1),    // coda
+      SymCode(0xe40f, 1),    // varcoda
+      SymCode(0xe410, 1),    // segno
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),
