@@ -43,9 +43,9 @@ fet_beginchar ("Half note", "no1");
       pair oben;
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
       oben  := unten + (0, stemHeight);
-
       draw unten -- oben;
-fet_endchar;
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
 
 %----------------------------------------------------------
 %     quarter note with stem
@@ -72,7 +72,7 @@ fet_beginchar ("Quart note", "no2");
 	unten := directionpoint up of pat + (-.5 stemthickness, 0);
       oben  := unten + (0, stemHeight);
       draw unten -- oben;
-
+      currentpicture := currentpicture shifted (0, .5 staff_space);
       fet_endchar;
 
 
@@ -213,6 +213,7 @@ fet_beginchar ("Quart note", "no4");
 		   hip_depth_ratio, foot_width_ratio,
 		   hip_thickness, foot_thickness, 1);
 
+      currentpicture := currentpicture shifted (0, .5 staff_space);
       fet_endchar;
 
 %----------------------------------------------------------
@@ -264,6 +265,7 @@ fet_beginchar ("1/16 note", "no8");
 	add_flag (flagspace, flare, .97, 1.00, 1.25,
 		  hip_thickness, foot_thickness);
 
+      currentpicture := currentpicture shifted (0, .5 staff_space);
       fet_endchar;
 
 %----------------------------------------------------------
@@ -318,6 +320,7 @@ fet_beginchar ("1/32 note", "no16");
 	add_flag (flagspace, flare, .95, 1.05, 1.25,
 		  hip_thickness, foot_thickness);
 
+      currentpicture := currentpicture shifted (0, .5 staff_space);
       fet_endchar;
 
 %----------------------------------------------------------
@@ -375,6 +378,7 @@ fet_beginchar ("1/64 note", "no32");
 	add_flag (flagspace, flare, .95, 1.05, 1.25,
 		  hip_thickness, foot_thickness);
 
+      currentpicture := currentpicture shifted (0, .5 staff_space);
       fet_endchar;
 
 if 1 = 2:
@@ -591,25 +595,25 @@ def draw_meta_flat (expr xcenter, w, crook_fatness) =
 	else:
 		smaller_hole = 0;
 	fi;
-	clearing           = 1.7 stafflinethickness;
-	crook_thinness     = .7 stafflinethickness + .06 staff_space;
+	clearing = 1.7 stafflinethickness;
+	crook_thinness = .7 stafflinethickness + .06 staff_space;
 	top_crook_thinness = 1 stafflinethickness + .065 staff_space;
-	bottom_overshoot   = stafflinethickness;
+	bottom_overshoot = stafflinethickness;
 
 	bottom_stem_thick# = 0.06 staff_space# + 0.6 stafflinethickness#;
-	top_stem_thick#    = 0.1 staff_space# + 1.2 stafflinethickness#;
+	top_stem_thick# = 0.1 staff_space# + 1.2 stafflinethickness#;
 	define_whole_blacker_pixels (bottom_stem_thick, top_stem_thick);
 
 	if odd (top_stem_thick - bottom_stem_thick):
 		top_stem_thick := top_stem_thick - 1;
 	fi;
 
-      center = (xcenter, 0);
+	center = (xcenter, 0);
 
 	x1l = hround (xcenter - .5 top_stem_thick);
-	y1  = vround (2 staff_space - clearing);
+	y1 = vround (2 staff_space - clearing);
 	x2l = hround (xcenter - .5 bottom_stem_thick);
-	y2  = -.5 staff_space - .5 stafflinethickness;
+	y2 = -.5 staff_space - .5 stafflinethickness;
 
 	penpos1 (top_stem_thick, 0);
 	penpos2 (bottom_stem_thick, 0);
@@ -620,15 +624,11 @@ def draw_meta_flat (expr xcenter, w, crook_fatness) =
 	x3r := hceiling x3r;
 
 	% we insert z3l to get better conversion with mf2pt1
-      save pathC;
-      path pathC;
-	pathC := simple_serif (z1r, z1l, 30)
+	fill simple_serif (z1r, z1l, 30)
 	     -- z2l
 	     -- z2r
 	     -- z3l
 	     -- cycle;
-      pathC := pathC shifted (0, .5 staff_space);
-      fill pathC;
 
 	z10 = whatever [z2r, z1r] + (smaller_hole, 0);
 	y10 = -1/10 staff_space;
@@ -658,10 +658,7 @@ def draw_meta_flat (expr xcenter, w, crook_fatness) =
 	     + crook_thinness * (bot_crook_dir rotated 90);
 	x7 = .1 [x3r, x8];
 
-      save pathA, pathB;
-      path pathA, pathB;
-
-	pathA := z3r{z3r - z10}
+	unfill z3r{z3r - z10}
 	       .. z4r{right}
 	       .. z5r{down}
 	       .. z7{-bot_crook_dir}
@@ -669,20 +666,14 @@ def draw_meta_flat (expr xcenter, w, crook_fatness) =
 	       .. z10{z3r - z10}
 	       -- cycle;
 
-	pathB := z2l{down}
+	fill z2l{down}
 	     .. z11{right}
 	     .. z8{bot_crook_dir}
 	     .. z5l{up}
 	     .. z4l{left}
 	     .. z3l
 	     -- cycle;
-      pathA := pathA shifted (0, staff_space / 2);
-      pathB := pathB shifted (0, staff_space / 2);
-      unfill pathA;
-      fill pathB;
-enddef;
-
-
+      enddef;
 
 %----------------------------------------------------------
 %     sharp
@@ -727,8 +718,8 @@ fet_beginchar ("Sharp", "sharp");
 	draw_gridline (z5, z6, stemwidth);
 	draw_gridline (z7, z8, stemwidth);
 
-fet_endchar;
-
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
 
 %----------------------------------------------------------
 %     flat
@@ -740,8 +731,181 @@ fet_beginchar ("Flat", "flat");
 
 	draw_meta_flat (0, w, 0.31 staff_space);
 	penlabels (range 0 thru 11);
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
 
+%----------------------------------------------------------
+%     segno
+%----------------------------------------------------------
+
+fet_beginchar ("Segno", "segno");
+	save thin, thick, ball_diam, darkness, pointheight;
+	save wd, ht, thick_nibangle, ball_nib_thick;
+	save turndir;
+	pair turndir;
+
+	ht# = 3 staff_space#;
+	wd# = 2 staff_space#;
+	darkness = .08 staff_space + 0.4 linethickness;
+
+	set_char_box (wd# / 2, wd# / 2, ht# / 2, ht# / 2);
+
+	thick_nibangle = 30;
+	thick = 3 darkness;
+	thin = darkness;
+	ball_nib_thick = 2.7 darkness;
+	ball_diam = ball_nib_thick + (w - ball_nib_thick) / 10;
+	pointheight = 2 linethickness;
+
+	y3l = h;
+	2 x3 = x2 + x4;
+	x4 = 0;
+	y4 = y2;
+	y2l = .6 h;
+	x2l = -b;
+	z1 = (0, 0);
+
+	penpos1 (thick, 2 thick_nibangle);
+	penpos2 (thick, thick_nibangle);
+	penpos3 (thin, -90);
+	penpos4 (ball_nib_thick, 180 - thick_nibangle);
+
+	save swoosh, ploop;
+	path swoosh, ploop;
+
+	swoosh := z1l{curl 0}
+		  .. z2l
+		  .. z3l{right}
+		  .. {down}z4l
+		  -- z4r
+		  .. z3r{left}
+		  .. z2r{down};
+	fill swoosh
+	     .. (swoosh scaled -1)
+	     .. cycle;
+
+	y5r = y4;
+	x5r = x4l - ball_diam / 2;
+	z6r = z5r;
+
+	penpos5 (1.6 ball_diam / 2, 100);
+	penpos6 (ball_diam / 2, 240);
+
+	ploop := z4l{down}
+		 .. z5l
+		 .. z6l
+		 -- cycle;
+	fill ploop;
+	fill ploop scaled -1;
+
+	penpos7 (2 thin, 0);
+	z7l = (-b, -d);
+	penpos8 (2 thin, 0);
+	z8r = (w, h);
+
+	penstroke z7e
+		  -- z8e;
+
+	pickup pencircle scaled 2 thin;
+	drawdot (-x2r, pointheight);
+	drawdot (x2r, -pointheight);
+
+	penlabels (range 1 thru 8);
+
+      currentpicture := currentpicture shifted (0, 1.5 staff_space);
+      fet_endchar;
+
+%----------------------------------------------------------
+%     coda
+%----------------------------------------------------------
+
+fet_beginchar ("Coda", "coda");
+	save stickout, thin, thick, codawidth, codaheight;
+
+	stickout# = 0.35 staff_space#;
+	codawidth# = 2/3 staff_space#;
+	codaheight# = staff_space#;
+	define_pixels (codawidth, codaheight);
+
+	set_char_box (codawidth# + stickout#, codawidth# + stickout#,
+		      codaheight# + stickout#, codaheight# + stickout#);
+
+	thin = 1.2 linethickness;
+	0.1 (codaheight - 2 thin) = (codawidth - 2 thick);
+
+	penpos1 (thick, 0);
+	penpos2 (thin, -90);
+	penpos3 (thick, -180);
+	penpos4 (thin, -270);
+
+	x1l = -codawidth;
+	y2l = codaheight;
+	y1 = 0;
+	x2 = 0;
+	z3 = -z1;
+	z4 = -z2;
+
+	penlabels (1, 2, 3, 4);
+
+	fill z1l{up}
+	     .. z2l{right}
+	     .. z3l{down}
+	     .. z4l{left}
+	     .. cycle;
+	unfill z1r{up}
+	       .. z2r{right}
+	       .. z3r{down}
+	       .. z4r{left}
+	       .. cycle;
+
+	draw_gridline ((0, -h), (0, h), thin);
+	draw_gridline ((-w, 0), (w, 0), thin);
+
+      currentpicture := currentpicture shifted (0, 1.5 staff_space);
 fet_endchar;
+
+
+%----------------------------------------------------------
+%     varied coda
+%----------------------------------------------------------
+
+fet_beginchar ("Varied Coda", "varcoda");
+	save thin, thick, codawidth, codaheight;
+	thin# = 1.2 linethickness#;
+	thick# = 1.0 linethickness# + 0.25 staff_space#;
+	codawidth# = 2/3 staff_space#;
+	codaheight# = staff_space#;
+	define_pixels (thin, thick, codawidth, codaheight);
+
+	set_char_box (codawidth# + thick#, codawidth# + thick#,
+		      codaheight# + thick#, codaheight# + thick#);
+
+      save moveUp;
+      moveUp := 1.5 staff_space;
+
+	x1 = -codawidth + thick - .5 blot_diameter;
+	y1 = y2 - thin;
+	x2 = codawidth - thick + .5 blot_diameter;
+	y2 = codaheight;
+	draw_square_block (z1, z2);
+
+	x3 = -codawidth;
+	y3 = -codaheight;
+	x4 = x3 + thick;
+	y4 = y2;
+	draw_block (z3, z4);
+
+	labels (1, 2, 3, 4);
+
+	addto currentpicture also currentpicture scaled -1;
+
+	draw_gridline ((0, -h), (0, h), thin);
+	draw_gridline ((-w, 0), (w, 0), thin);
+
+      save moveUp;
+      moveUp := 1.5 staff_space;
+      currentpicture := currentpicture shifted (0, moveUp);
+      fet_endchar;
 
 
 fet_endgroup ("mscore");

@@ -104,14 +104,7 @@ def draw_outside_ellipse (expr ellipticity, tilt, superness, slant) =
 	pat := pat scaled scaling shifted (w / 2, .5 (h - d));
 
 	width := hround width;
-
-      pat := pat shifted (0, staff_space / 2);
-
-	if test_outlines = 1:
-		draw pat;
-	else:
-		fill pat;
-	fi;
+	fill pat;
 enddef;
 
 
@@ -137,14 +130,7 @@ begingroup
 	scaling# = height# / (2 ypart (top_point));
 	define_pixels (scaling);
 	pat := pat scaled scaling shifted (w / 2, .5 (h - d));
-
-      pat := pat shifted (0, staff_space / 2);
-
-	if test_outlines = 1:
-		draw pat;
-	else:
-		unfill pat;
-	fi
+	unfill pat;
 endgroup;
 enddef;
 
@@ -182,10 +168,8 @@ enddef;
 
 fet_beginchar ("Brevis notehead", "sM1");
 	draw_brevis;
-
-	draw_staff (-2, 2, 0);
-fet_endchar;
-
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
 
 fet_beginchar ("Whole notehead", "s0");
 	draw_outside_ellipse (1.80 - puff_up_factor / 3.0, 0, 0.707, 0);
@@ -193,18 +177,15 @@ fet_beginchar ("Whole notehead", "s0");
 			       0.68, 2 stafflinethickness#);
 
 	whole_notehead_width# := charwd;
-
-	draw_staff (-2, 2, 0);
-fet_endchar;
-
+      currentpicture := currentpicture shifted (0, .5 staff_space);
+      fet_endchar;
 
 fet_beginchar ("Half notehead", "s1");
 	draw_outside_ellipse (1.53 - puff_up_factor / 3.0, 34, 0.66, 0.17);
 	undraw_inside_ellipse (3.25, 33, 0.81, 2.5 stafflinethickness#);
 
 	half_notehead_width# := charwd;
-
-	draw_staff (-2, 2, 0);
+      currentpicture := currentpicture shifted (0, .5 staff_space);
 fet_endchar;
 
 
@@ -212,8 +193,7 @@ fet_beginchar ("Quart notehead", "s2");
 	% used to have 32. With 31, they are slightly bolder.
 	draw_outside_ellipse (1.49 - puff_up_factor / 3.0, 31, 0.707, 0);
 	black_notehead_width# := charwd;
-
-	draw_staff (-2, 2, 0);
+      currentpicture := currentpicture shifted (0, .5 staff_space);
 fet_endchar;
 
 
