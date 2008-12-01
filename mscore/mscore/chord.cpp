@@ -1137,8 +1137,8 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*
                   note->read(e);
                   notes.add(note);
                   }
-            else if (tag == "GraceNote")
-                  _noteType = NOTE_APPOGGIATURA;
+//            else if (tag == "GraceNote")
+//                  _noteType = NOTE_APPOGGIATURA;
             else if (tag == "appoggiatura")
                   _noteType = NOTE_APPOGGIATURA;
             else if (tag == "acciaccatura")

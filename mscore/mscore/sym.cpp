@@ -31,19 +31,19 @@ QVector<Sym> symbols(lastSym);
 QMap<const char*, SymCode*> charReplaceMap;
 
 SymCode pSymbols[] = {
-      SymCode(0xe40c, 1),    // sharp
-      SymCode(0xe40d, 1),    // flat
-      SymCode(0xe404, 1),    // note2_Sym
-      SymCode(0xe405, 1),    // note4_Sym
-      SymCode(0xe406, 1),    // note8_Sym
-      SymCode(0xe407, 1),    // note16_Sym
-      SymCode(0xe408, 1),    // note32_Sym
-      SymCode(0xe409, 1),    // note64_Sym
-      SymCode(0xe40a, 1),    // dot
-      SymCode(0xe40b, 1),    // dotdot
-      SymCode(0xe40e, 1),    // coda
-      SymCode(0xe40f, 1),    // varcoda
-      SymCode(0xe410, 1),    // segno
+      SymCode(0xe10c, 1),    // sharp
+      SymCode(0xe10d, 1),    // flat
+      SymCode(0xe104, 1),    // note2_Sym
+      SymCode(0xe105, 1),    // note4_Sym
+      SymCode(0xe106, 1),    // note8_Sym
+      SymCode(0xe107, 1),    // note16_Sym
+      SymCode(0xe108, 1),    // note32_Sym
+      SymCode(0xe109, 1),    // note64_Sym
+      SymCode(0xe10a, 1),    // dot
+      SymCode(0xe10b, 1),    // dotdot
+      SymCode(0xe167, 1),    // coda
+      SymCode(0xe168, 1),    // varcoda
+      SymCode(0xe169, 1),    // segno
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),
@@ -480,7 +480,7 @@ void initSymbols()
 
       symbols[segnoSym]                   = Sym("segno",                    0xe177, 0);
       symbols[codaSym]                    = Sym("coda",                     0xe178, 0);
-      symbols[varcodaSym]                 = Sym("varcoda",                  0xe179, 0);
+      symbols[varcodaSym]                 = Sym("varied coda",              0xe179, 0);
 
       symbols[rcommaSym]                  = Sym("rcomma",                   0xe17a, 0);
       symbols[lcommaSym]                  = Sym("lcomma",                   0xe17b, 0);
@@ -492,7 +492,8 @@ void initSymbols()
       symbols[prallSym]                   = Sym("prall",                    0xe183, 0);
       symbols[mordentSym]                 = Sym("mordent",                  0xe184, 0);
       symbols[prallprallSym]              = Sym("prall prall",              0xe185, 0);
-/*100*/      symbols[prallmordentSym]            = Sym("prall mordent",     0xe186, 0);
+/*100*/
+      symbols[prallmordentSym]            = Sym("prall mordent",            0xe186, 0);
       symbols[upprallSym]                 = Sym("up prall",                 0xe187, 0);
       symbols[upmordentSym]               = Sym("up mordent",               0xe188, 0);
       symbols[pralldownSym]               = Sym("prall down",               0xe189, 0);
@@ -578,13 +579,13 @@ void initSymbols()
 
 
       // used for GUI:
-      symbols[note2Sym]                   = Sym("note 1/2",   0xe404, 1);
-      symbols[note4Sym]                   = Sym("note 1/4",   0xe405, 1);
-      symbols[note8Sym]                   = Sym("note 1/8",   0xe406, 1);
-      symbols[note16Sym]                  = Sym("note 1/16",  0xe407, 1);
-      symbols[note32Sym]                  = Sym("note 1/32",  0xe408, 1);
-      symbols[note64Sym]                  = Sym("note 1/64",  0xe409, 1);
-      symbols[dotdotSym]                  = Sym("dot dot",    0xe40b, 1);
+      symbols[note2Sym]                   = Sym("note 1/2",   0xe104, 1);
+      symbols[note4Sym]                   = Sym("note 1/4",   0xe105, 1);
+      symbols[note8Sym]                   = Sym("note 1/8",   0xe106, 1);
+      symbols[note16Sym]                  = Sym("note 1/16",  0xe107, 1);
+      symbols[note32Sym]                  = Sym("note 1/32",  0xe108, 1);
+      symbols[note64Sym]                  = Sym("note 1/64",  0xe109, 1);
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe10b, 1);
 
 //      Sym::writeCtable();
 

@@ -304,10 +304,12 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int tick = segment->tick();
 
       int endTrack = startTrack + VOICES;
+      int voices   = 0;
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e)
                  continue;
+            ++voices;
             ChordRest* cr = static_cast<ChordRest*>(e);
             double m = staffMag;
             if (cr->small())
@@ -383,7 +385,12 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             return;
 
       int startIdx, endIdx, incIdx;
-      if (notes[0]->chord()->isUp() || mstaff(staffIdx)->hasVoices) {
+
+//      if (notes.size() > 1)
+//            printf("chord %d %d voices %d\n", notes[0]->chord()->isUp(), notes[1]->chord()->isUp(), multiVoice);
+
+      if (notes[0]->chord()->isUp() || voices > 1) {
+//      if (false) {
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
@@ -897,11 +904,16 @@ ChordRest* Measure::findChordRest(int tick, int track)
 //   tick2segment
 //---------------------------------------------------------
 
-Segment* Measure::tick2segment(int tick) const
+Segment* Measure::tick2segment(int tick, bool grace) const
       {
       for (Segment* s = first(); s; s = s->next()) {
-            if ((s->subtype() == Segment::SegChordRest) && (s->tick() == tick))
-                  return s;
+            if (s->tick() == tick) {
+                  Segment::SegmentType t = Segment::SegmentType(s->subtype());
+                  if (grace && (t == Segment::SegChordRest || t == Segment::SegGrace))
+                        return s;
+                  if (t == Segment::SegChordRest)
+                        return s;
+                  }
             }
       return 0;
       }
@@ -1009,9 +1021,11 @@ void Measure::add(Element* el)
                   int st = el->subtype();
                   if (st == Segment::SegGrace) {
                         Segment* s;
-                        for (s = first(); s && s->tick() < t; s = s->next()) {
-                              }
-                        for (; s && s->subtype() != Segment::SegChordRest; s = s->next()) {
+                        for (s = first(); s && s->tick() < t; s = s->next())
+                              ;
+                        if (s && s->subtype() != Segment::SegEndBarLine) {
+                              for (; s && s->subtype() != Segment::SegChordRest; s = s->next())
+                                    ;
                               }
                         insert(static_cast<Segment*>(el), s);
                         break;

@@ -110,16 +110,33 @@ void Score::transpose()
                         undoChangePitch(note, note->pitch() + diff);
                   }
             }
-/* TODO
+
       if (td.getTransposeChordNames()) {
-            foreach (Element* e, *mb->el()) {
-                  if (e->type() != HARMONY)
-                        continue;
-                  Harmony* harmony = static_cast<Harmony*>(e);
-                  undoTransposeHarmony(harmony, diff);
+            Measure* sm = sel->startSegment()->measure();
+            Measure* em = sel->endSegment()->measure();
+            int stick = sel->startSegment()->tick();
+            int etick = sel->endSegment()->tick();
+
+            for (Measure* m = sm;;) {
+                  foreach (Element* e, *m->el()) {
+                        if (e->type() != HARMONY || e->tick() < stick)
+                              continue;
+                        Harmony* harmony = static_cast<Harmony*>(e);
+                        if (harmony->tick() >= etick)
+                              break;
+                        undoTransposeHarmony(harmony, diff);
+                        }
+                  if (m == em)
+                        break;
+                  MeasureBase* mb = m->next();
+                  while (mb && (mb->type() != MEASURE))
+                        mb = mb->next();
+                  if (mb == 0)
+                        break;
+                  m = static_cast<Measure*>(mb);
                   }
             }
-*/
+
       if (transposeKeys) {
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
                   KeyList* km = staff(staffIdx)->keymap();

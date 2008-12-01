@@ -179,7 +179,7 @@ class Measure : public MeasureBase {
       void insertStaves(int s, int e);
 
       double tick2pos(int) const;
-      Segment* tick2segment(int) const;
+      Segment* tick2segment(int, bool grace = false) const;
 
       void sortStaves(QList<int>& dst);
 

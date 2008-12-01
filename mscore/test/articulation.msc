@@ -104,13 +104,13 @@
       </Staff>
     <trackName>Violins 1</trackName>
     <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Violins 1</p></body></html>
       </name>
     <shortName>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">V1ns. 1</p></body></html>
@@ -170,11 +170,14 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
+        <track>-1</track>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:12pt;"></span><span style=" font-size:12pt; font-weight:400;">=120</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'MScore1'; font-size:12pt; font-weight:400;"></span><span style=" font-size:12pt; font-weight:400;"> =120</span></p></body></html>
           </html-data>
         </Tempo>
       <Chord>
@@ -198,7 +201,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="2">
       <StaffText>
-        <articulationChange name="pizzicato"/>
+        <channelSwitch name="pizzicato"/>
         <subtype>Staff</subtype>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -226,7 +229,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <StaffText>
-        <articulationChange name="normal"/>
+        <channelSwitch name="normal"/>
         <subtype>Staff</subtype>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -258,5 +261,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>

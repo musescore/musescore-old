@@ -861,7 +861,7 @@ fet_beginchar ("Coda", "coda");
 	draw_gridline ((0, -h), (0, h), thin);
 	draw_gridline ((-w, 0), (w, 0), thin);
 
-      currentpicture := currentpicture shifted (0, 1.5 staff_space);
+      currentpicture := currentpicture shifted (0, 1 staff_space);
 fet_endchar;
 
 
@@ -903,7 +903,7 @@ fet_beginchar ("Varied Coda", "varcoda");
 	draw_gridline ((-w, 0), (w, 0), thin);
 
       save moveUp;
-      moveUp := 1.5 staff_space;
+      moveUp := 1 staff_space;
       currentpicture := currentpicture shifted (0, moveUp);
       fet_endchar;
 

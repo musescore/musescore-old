@@ -1784,19 +1784,25 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
             return false;
             }
 
+
       //
       //    search segment
       //
       QPointF pppp     = ppp - pos->measure->pos();
       double x         = pppp.x();
       Segment* segment = 0;
+      pos->tick        = -1;
+
+      int track = pos->staffIdx * VOICES;
       for (segment = pos->measure->first(); segment;) {
-            while (segment && segment->subtype() != Segment::SegChordRest)
+            while (segment
+               && ((segment->subtype() != Segment::SegChordRest) || (!segment->element(track)))) {
                   segment = segment->next();
+                  }
             if (segment == 0)
                   break;
             Segment* ns = segment->next();
-            while (ns && ns->subtype() != Segment::SegChordRest)
+            while (ns && ((ns->subtype() != Segment::SegChordRest) || (!ns->element(track))))
                   ns = ns->next();
             double x1 = segment->x();
             double x2;

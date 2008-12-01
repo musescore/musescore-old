@@ -641,6 +641,7 @@ void Score::cmdAddTie()
       _layout->connectTies();
       layoutAll = true;
       select(tie, SELECT_SINGLE, 0);
+      getAction("add-tie")->setChecked(false);
       }
 
 //---------------------------------------------------------
