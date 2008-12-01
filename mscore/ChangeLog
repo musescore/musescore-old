@@ -1,5 +1,7 @@
 1.dec  (ws)
-      - copy/paste grace notes
+      - dont change cursor position, when entering chord note in note entry mode
+      - implement copy/paste of tempo text
+      - copy/paste grace notes in range selection
       - fix transpose of harmony elements (chord names)
       - restrict note time positions while inputting notes with mouse
       - fix behaviour of tie button

@@ -405,8 +405,10 @@ void Chord::remove(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tremolo = static_cast<Tremolo*>(e);
             Duration d       = duration().shift(1);
-            tremolo->chord1()->setDuration(d);
-            tremolo->chord2()->setDuration(d);
+            if (tremolo->chord1())
+                  tremolo->chord1()->setDuration(d);
+            if (tremolo->chord2())
+                  tremolo->chord2()->setDuration(d);
             _tremolo = 0;
             }
       else if (e->type() == GLISSANDO)
