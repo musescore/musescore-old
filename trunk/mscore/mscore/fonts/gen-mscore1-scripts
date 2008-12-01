@@ -45,24 +45,23 @@ MergeFonts("mscore1-%(design_size)d.pfb");
 # MergeFonts("parmesan%(design_size)d.pfb");
 
 # load nummer/din after setting PUA.
+# 256 + 14 - Segno
+# 256 + 15 - Coda
+# 256 + 16 - VarCoda
+
 i = 0;
 while (i < CharCnt())
- Select(i);
-# crashes fontforge, use PUA for now -- jcn
-# SetUnicodeValue(i + 0xF0000, 0);
-/*
-PRIVATE AREA
-   In the BMP, the range 0xe000 to 0xf8ff will never be  assigned  to  any
-   characters  by  the standard and is reserved for private usage. For the
-   Linux community, this private area has been subdivided further into the
-   range  0xe000  to 0xefff which can be used individually by any end-user
-   and the Linux zone in the range 0xf000 to 0xf8ff where  extensions  are
-   coordinated  among  all  Linux  users.  The  registry of the characters
-   assigned to the Linux zone is currently maintained by  H.  Peter  Anvin
-   <Peter.Anvin@linux.org>.
-*/
- SetUnicodeValue(i + 0xE300, 0);
- ++i;
+      Select(i);
+      if (i == 0x10e)
+            SetUnicodeValue(0xE167, 0);
+      elseif (i == 0x10f)
+            SetUnicodeValue(0xE168, 0);
+      elseif (i == 0x110)
+            SetUnicodeValue(0xE169, 0);
+      else
+            SetUnicodeValue(i + 0xE000, 0);
+      endif
+      ++i;
 endloop
 
 

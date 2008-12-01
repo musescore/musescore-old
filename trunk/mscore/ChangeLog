@@ -1,4 +1,10 @@
+1.dec  (ws)
+      - copy/paste grace notes
+      - fix transpose of harmony elements (chord names)
+      - restrict note time positions while inputting notes with mouse
+      - fix behaviour of tie button
 30.nov (ws)
+      - allow beams over clefs
       - fix: could not beam duole
       - font fixes
 29.nov (ws)

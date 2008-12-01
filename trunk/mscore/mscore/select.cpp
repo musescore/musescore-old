@@ -263,7 +263,7 @@ void Score::updateSelectedElements(SelState state)
       int endTrack   = sel->staffEnd * VOICES;
 
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* s = sel->startSegment(); s && (s != sel->endSegment()); s = s->nextCR()) {
+            for (Segment* s = sel->startSegment(); s && (s != sel->endSegment()); s = s->next1()) {
                   Element* e = s->element(st);
                   if (!e)
                         continue;
@@ -324,12 +324,12 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   int tick  = m->tick();
                   int etick = tick + m->tickLen();
                   if (sel->state() == SEL_NONE) {
-                        sel->setStartSegment(m->tick2segment(tick));
+                        sel->setStartSegment(m->tick2segment(tick, true));
                         sel->setEndSegment(tick2segment(etick));
                         }
                   else if (sel->state() == SEL_SYSTEM) {
                         if (tick < sel->tickStart()) {
-                              sel->setStartSegment(m->tick2segment(tick));
+                              sel->setStartSegment(m->tick2segment(tick, true));
                               }
                         else if (etick >= sel->tickEnd())
                               sel->setEndSegment(tick2segment(etick));
@@ -367,7 +367,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   if (sel->state() == SEL_NONE) {
                         sel->staffStart = staffIdx;
                         sel->staffEnd = staffIdx + 1;
-                        sel->setStartSegment(m->tick2segment(tick));
+                        sel->setStartSegment(m->tick2segment(tick, true));
                         sel->setEndSegment(tick2segment(etick));
                         }
                   else if (sel->state() == SEL_STAFF) {
@@ -376,14 +376,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         else if (staffIdx >= sel->staffEnd)
                               sel->staffEnd = staffIdx + 1;
                         if (tick < sel->tickStart()) {
-                              sel->setStartSegment(m->tick2segment(tick));
+                              sel->setStartSegment(m->tick2segment(tick, true));
                               activeIsFirst = true;
                               }
                         else if (etick >= sel->tickEnd())
                               sel->setEndSegment(tick2segment(etick));
                         else {
                               if (sel->activeSegment() == sel->startSegment()) {
-                                    sel->setStartSegment(m->tick2segment(tick));
+                                    sel->setStartSegment(m->tick2segment(tick, true));
                                     activeIsFirst = true;
                                     }
                               else
@@ -769,6 +769,8 @@ QByteArray Selection::staffMimeData() const
             int endTrack   = startTrack + VOICES;
             for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
                   if (seg->subtype() == Segment::SegEndBarLine)
+                        continue;
+                  if (seg->subtype() == Segment::SegTimeSig)
                         continue;
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* e = seg->element(track);

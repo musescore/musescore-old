@@ -521,6 +521,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             _is.setPos(_is.pos() + len);
             _is.cr = nextChordRest(cr);
+//            _padState.tie = false;
             emit posChanged(_is.pos());
             }
       }
@@ -645,7 +646,8 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
       Note* note = 0;
 
       if (_padState.tie) {
-            _padState.tie = !_padState.tie;
+            _padState.tie = 0;
+            getAction("pad-tie")->setChecked(false);
             //
             // look for suitable first note of tie
             //
@@ -2053,8 +2055,10 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_BEAM32);
             else if (cmd == "pad-tie") {
                   _padState.tie = !_padState.tie;
-                  if (!noteEntryMode() && sel->state() == SEL_SINGLE)
+                  if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
                         cmdAddTie();
+                        _padState.tie = false;
+                        }
                   }
             else if (cmd == "pad-sharp2") {
                   _padState.prefix = _padState.prefix != 3 ? 3 : 0;
@@ -2454,14 +2458,26 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                                     }
 
                               Measure* measure = tick2measure(tick);
-                              Segment* s = measure->findSegment(Segment::SegChordRest, tick);
-                              if (s == 0) {
-                                    s = measure->createSegment(Segment::SegChordRest, tick);
+
+                              Segment* s;
+                              bool isGrace = false;
+                              if ((cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL)) {
+                                    s = measure->createSegment(Segment::SegGrace, tick);
                                     undoAddElement(s);
+                                    isGrace = true;
+                                    }
+                              else {
+                                    Segment::SegmentType st;
+                                    st = Segment::segmentType(cr->type());
+                                    s  = measure->findSegment(st, tick);
+                                    if (!s) {
+                                          s = measure->createSegment(st, tick);
+                                          undoAddElement(s);
+                                          }
                                     }
                               cr->setParent(s);
                               int measureEnd = measure->tick() + measure->tickLen();
-                              if (cr->tick() + cr->tickLen() > measureEnd) {
+                              if (!isGrace && (cr->tick() + cr->tickLen() > measureEnd)) {
                                     if (cr->type() == CHORD) {
                                           // split Chord
                                           Chord* c = static_cast<Chord*>(cr);
