@@ -146,10 +146,10 @@ QLineF TempoText::dragAnchor() const
 
 void TempoText::layout(ScoreLayout* l)
       {
-      if (tick() == -1)
+      Measure* m = measure();
+      if (m == 0 || tick() == -1)
             return;
       Text::layout(l);
-      Measure* m = measure();
       double y   = 0;  // track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
       double x   = m->tick2pos(tick());
       setPos(ipos() + QPointF(x, y));

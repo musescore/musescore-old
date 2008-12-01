@@ -484,6 +484,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   select(n, SELECT_SINGLE, 0);
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
+                  // reset position
+                  _is.setPos(_is.pos() + on->chord()->tickLen());
                   }
             }
       else {

@@ -64,6 +64,7 @@
 #include "chord.h"
 #include "spacer.h"
 #include "mscore.h"
+#include "tempotext.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -82,7 +83,7 @@ const char* elementNames[] = {
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Marker", "Jump",
       "Tuplet",
-      "TempoText", "StaffText",
+      "Tempo", "StaffText",
       "Harmony",
       "Volta",
       "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment", "TextLineSegment",
@@ -1187,6 +1188,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case SPACER:
                   el = new Spacer(score);
+                  break;
+            case TEMPO_TEXT:
+                  el = new TempoText(score);
                   break;
             default:
                   printf("Element::create(): cannot create element type %d\n", type);

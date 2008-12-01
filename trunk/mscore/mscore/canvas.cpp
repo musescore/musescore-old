@@ -1610,6 +1610,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case ACCIDENTAL:
                   case DYNAMIC:
                   case TEXT:
+                  case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:
@@ -1737,6 +1738,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case ATTRIBUTE:
                   case ACCIDENTAL:
                   case TEXT:
+                  case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:
@@ -1881,6 +1883,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case ATTRIBUTE:
                   case ACCIDENTAL:
                   case TEXT:
+                  case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
                   case TREMOLO:

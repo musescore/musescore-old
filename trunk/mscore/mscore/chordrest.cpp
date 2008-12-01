@@ -35,7 +35,7 @@
 #include "breath.h"
 #include "barline.h"
 #include "articulation.h"
-
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -524,6 +524,17 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
 
             case CLEF:
                   staff()->changeClef(tick(), e->subtype());
+                  break;
+
+            case TEMPO_TEXT:
+                  {
+                  TempoText* tt = static_cast<TempoText*>(e);
+                  score()->tempomap->addTempo(tick(), tt->tempo());
+                  tt->setTick(tick());
+                  tt->setTrack(0);
+                  tt->setParent(m);
+                  score()->undoAddElement(tt);
+                  }
                   break;
 
             default:
