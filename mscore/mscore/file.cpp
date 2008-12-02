@@ -1376,9 +1376,20 @@ void Score::print(QPrinter* printer)
 
       const QList<Page*> pl = _layout->pages();
       int pages = pl.size();
-      for (int n = 0; n < pages; ++n) {
-            if (n)
+
+      int fromPage = printer->fromPage() - 1;
+      int toPage   = printer->toPage() - 1;
+      if (fromPage == -1)
+            fromPage = 0;
+      if (toPage == -1)
+            toPage = pages;
+
+      bool firstPage = true;
+      for (int n = fromPage; n < toPage; ++n) {
+            if (!firstPage) {
                   printer->newPage();
+                  }
+            firstPage = false;
             const Page* page = pl.at(n);
             page->collectElements(el);
             for (int i = 0; i < el.size(); ++i) {

@@ -63,6 +63,7 @@ class PaletteBox : public QDockWidget {
 
    private slots:
       void deletePalette(int);
+      void setDirty() { _dirty = true; }
 
    signals:
       void paletteVisible(bool);
@@ -71,7 +72,6 @@ class PaletteBox : public QDockWidget {
       PaletteBox(QWidget* parent = 0);
       void addPalette(const QString& s, Palette*);
       bool dirty() const      { return _dirty; }
-      void setDirty(bool val) { _dirty = val; }
       void write(const QString& path);
       bool read(QFile*);
       };
@@ -84,7 +84,6 @@ struct PaletteCell {
       Element* element;
       QString name;
       };
-
 
 //---------------------------------------------------------
 //   PaletteScrollArea
@@ -115,6 +114,8 @@ class Palette : public QWidget {
       int currentIdx;
       int selectedIdx;
       QPoint dragStartPosition;
+      int dragSrcIdx;
+
       qreal extraMag;
       bool _drawGrid;
       bool _selectable;
@@ -143,9 +144,9 @@ class Palette : public QWidget {
       void actionToggled(bool val);
 
    signals:
-      void droppedElement(Element*);
       void startDragElement(Element*);
       void boxClicked(int);
+      void changed();
 
    public:
       Palette(QWidget* parent = 0);
@@ -169,7 +170,7 @@ class Palette : public QWidget {
       int getSelectedIdx() const   { return selectedIdx; }
       void setSelected(int idx)    { selectedIdx = idx;  }
       bool readOnly() const        { return _readOnly;   }
-      void setReadOnly(bool val)   { _readOnly = val;    }
+      void setReadOnly(bool val);
       void setMag(qreal val)       { extraMag = val;     }
       void setYOffset(qreal val)   { _yOffset = val;     }
       int columns() const          { return width() / hgrid; }

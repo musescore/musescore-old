@@ -1,3 +1,8 @@
+2.dec (ws)
+      - implement print page range (print from-to)
+      - palette elements are now movable via drag/drop; palettes ares saved/restored
+        in special xml file at ~/.local/share/data/MusE/MuseScore/mscore-palette.xml (linux)
+      - fix update of dot button in note entry toolbar
 1.dec  (ws)
       - dont change cursor position, when entering chord note in note entry mode
       - implement copy/paste of tempo text

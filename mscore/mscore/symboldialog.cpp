@@ -213,17 +213,17 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       sp->setDrawGrid(true);
       sp->setSelectable(true);
 
-      connect(sp, SIGNAL(droppedElement(Element*)), SLOT(elementDropped(Element*)));
+      connect(sp, SIGNAL(changed()), SLOT(setDirty()));
       connect(sp, SIGNAL(startDragElement(Element*)), SLOT(startDragElement(Element*)));
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteElement()));
       sa->setWidget(sp);
       }
 
 //---------------------------------------------------------
-//   elementDropped
+//   setDirty
 //---------------------------------------------------------
 
-void SymbolDialog::elementDropped(Element*)
+void SymbolDialog::setDirty()
       {
       preferences.dirty = true;
       }

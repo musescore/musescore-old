@@ -59,6 +59,8 @@ Palette::Palette(QWidget* parent)
       _drumPalette  = false;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+
+      setReadOnly(false);
       }
 
 Palette::Palette(qreal mag)
@@ -76,12 +78,24 @@ Palette::Palette(qreal mag)
       _drumPalette  = false;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+
+      setReadOnly(false);
       }
 
 Palette::~Palette()
       {
       foreach(PaletteCell* cell, cells)
             delete cell;
+      }
+
+//---------------------------------------------------------
+//   setReadOnly
+//---------------------------------------------------------
+
+void Palette::setReadOnly(bool val)
+      {
+      _readOnly = val;
+      setAcceptDrops(!val);
       }
 
 //---------------------------------------------------------
@@ -243,16 +257,13 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   mimeData->setData(mimeSymbolFormat, el->mimeData(rpos));
                   drag->setMimeData(mimeData);
 
-                  int srcIdx = currentIdx;
+                  dragSrcIdx = currentIdx;
                   emit startDragElement(el);
                   if (_readOnly) {
                         drag->start(Qt::CopyAction);
                         }
                   else {
-                        Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
-                        if (action == Qt::MoveAction) {
-                              cells[srcIdx] = 0;
-                              }
+                        /*Qt::DropAction action = */drag->start(Qt::CopyAction | Qt::MoveAction);
                         }
                   }
             }
@@ -629,26 +640,40 @@ void Palette::dropEvent(QDropEvent* event)
                   s->read(el);
                   e = s;
                   }
+            else {
+                  e = Element::create(type, gscore);
+                  if (e)
+                        e->read(el);
+                  }
             }
       if (e) {
-            int i = idx(event->pos());
-            if (i == -1)
-                  return;
-
-            int n = cells.size();
-            int ii = i;
-            for (; ii < n; ++ii) {
-                  if (cells[ii] == 0)
-                        break;
-                  }
-            add(ii, e, name);
-            emit droppedElement(e);
+            bool ok = false;
             if (event->source() == this) {
+                  int i = idx(event->pos());
+                  if (i == -1) {
+                        append(e, name);
+                        // TODO: delete src cell
+                        cells[dragSrcIdx] = 0;
+                        ok = true;
+                        }
+                  else if (dragSrcIdx != i) {
+                        PaletteCell* c = cells[dragSrcIdx];
+                        cells[dragSrcIdx] = cells[i];
+                        cells[i] = c;
+                        delete e;
+                        ok = true;
+                        }
                   event->setDropAction(Qt::MoveAction);
-                  event->accept();
                   }
-            else
+            else {
+                  append(e, name);
+                  ok = true;
+                  }
+            if (ok) {
                   event->acceptProposedAction();
+                  update();
+                  emit changed();
+                  }
             }
       }
 
@@ -675,8 +700,10 @@ void Palette::write(Xml& xml, const QString& name) const
       if (!_drumPalette) {
             int n = cells.size();
             for (int i = 0; i < n; ++i) {
-                  if (cells[i] == 0)
+                  if (cells[i] == 0) {
+                        xml.tagE("Cell");
                         continue;
+                        }
                   if (!cells[i]->name.isEmpty())
                         xml.stag(QString("Cell name=\"%1\"").arg(cells[i]->name));
                   else
@@ -713,42 +740,46 @@ void Palette::read(QDomElement e)
             else if (tag == "drumPalette")
                   _drumPalette = text.toInt();
             else if (tag == "Cell") {
-                  QString name = e.attribute("name", "");
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        if (tag == "Image") {
-                              // look ahead for image type
-                              QString path;
-                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
-                                    QString tag(eee.tagName());
-                                    if (tag == "path") {
-                                          path = eee.text();
-                                          break;
+                  if (e.firstChildElement().isNull())
+                        append(0, "");
+                  else {
+                        QString name = e.attribute("name", "");
+                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                              QString tag(ee.tagName());
+                              if (tag == "Image") {
+                                    // look ahead for image type
+                                    QString path;
+                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                          QString tag(eee.tagName());
+                                          if (tag == "path") {
+                                                path = eee.text();
+                                                break;
+                                                }
+                                          }
+                                    Image* image = 0;
+                                    if (path.endsWith(".svg"))
+                                          image = new SvgImage(gscore);
+                                    else if (path.endsWith(".jpg")
+                                       || path.endsWith(".png")
+                                       || path.endsWith(".xpm")
+                                          )
+                                          image = new RasterImage(gscore);
+                                    else {
+                                          printf("unknown image format <%s>\n", path.toLatin1().data());
+                                          }
+                                    if (image) {
+                                          image->read(ee);
+                                          append(image, name);
                                           }
                                     }
-                              Image* image = 0;
-                              if (path.endsWith(".svg"))
-                                    image = new SvgImage(gscore);
-                              else if (path.endsWith(".jpg")
-                                 || path.endsWith(".png")
-                                 || path.endsWith(".xpm")
-                                    )
-                                    image = new RasterImage(gscore);
                               else {
-                                    printf("unknown image format <%s>\n", path.toLatin1().data());
-                                    }
-                              if (image) {
-                                    image->read(ee);
-                                    append(image, name);
-                                    }
-                              }
-                        else {
-                              Element* element = Element::name2Element(tag, gscore);
-                              if (element == 0)
-                                    domError(ee);
-                              else {
-                                    element->read(ee);
-                                    append(element, name);
+                                    Element* element = Element::name2Element(tag, gscore);
+                                    if (element == 0)
+                                          domError(ee);
+                                    else {
+                                          element->read(ee);
+                                          append(element, name);
+                                          }
                                     }
                               }
                         }
@@ -880,6 +911,7 @@ void PaletteBox::addPalette(const QString& s, Palette* w)
       vbox->insertWidget(slotIdx+1, sa, 1000);
       b->setId(slotIdx);
       connect(b, SIGNAL(deletePalette(int)), SLOT(deletePalette(int)));
+      connect(w, SIGNAL(changed()), SLOT(setDirty()));
 
       if (w->drumPalette()) {
             mscore->setDrumPalette(w);
