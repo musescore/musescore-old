@@ -231,8 +231,10 @@ void Score::padToggle(int n)
                   _padState.rest = false;
             }
 
-      if (noteEntryMode() || sel->state() != SEL_SINGLE)
+      if (noteEntryMode() || sel->state() != SEL_SINGLE) {
+            setPadState();    // updates dot state
             return;
+            }
 
       Element* el = sel->element();
       if (el->type() == NOTE)
