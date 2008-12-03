@@ -91,7 +91,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file new"),
          Qt::CTRL+Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TR_NOOP("New"),
+         QT_TR_NOOP("New..."),
          QT_TR_NOOP("Create new score"),
          &fileNewIcon
          ),
@@ -1041,8 +1041,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("note longa"),
          Qt::Key_9,
          Qt::WindowShortcut,
-         QT_TR_NOOP("4/1"),
-         QT_TR_NOOP("4/1"),
+         QT_TR_NOOP("Longa"),
+         QT_TR_NOOP("Longa"),
          &longaUpIcon
          ),
       Shortcut(
@@ -1051,8 +1051,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("note breve"),
          Qt::Key_8,
          Qt::WindowShortcut,
-         QT_TR_NOOP("2/1"),
-         QT_TR_NOOP("2/1"),
+         QT_TR_NOOP("Double whole note (breve)"),
+         QT_TR_NOOP("Double whole note (breve)"),
          &brevisIcon
          ),
       Shortcut(
@@ -1061,8 +1061,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/1"),
          Qt::Key_7,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/1"),
-         QT_TR_NOOP("1/1"),
+         QT_TR_NOOP("Whole note (semibreve)"),
+         QT_TR_NOOP("Whole note (semibreve)"),
          &noteIcon
          ),
       Shortcut(
@@ -1071,8 +1071,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/2"),
          Qt::Key_6,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/2"),
-         QT_TR_NOOP("1/2"),
+         QT_TR_NOOP("Half note (minim)"),
+         QT_TR_NOOP("Half note (minim)"),
          &note2Icon
          ),
       Shortcut(
@@ -1081,8 +1081,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/4"),
          Qt::Key_5,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/4"),
-         QT_TR_NOOP("1/4"),
+         QT_TR_NOOP("Quarter note (crochet)"),
+         QT_TR_NOOP("Quarter note (crochet)"),
          &note4Icon
          ),
       Shortcut(
@@ -1091,8 +1091,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/8"),
          Qt::Key_4,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/8"),
-         QT_TR_NOOP("1/8"),
+         QT_TR_NOOP("Eighth note (quaver)"),
+         QT_TR_NOOP("Eighth note (quaver)"),
          &note8Icon
          ),
       Shortcut(
@@ -1101,8 +1101,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/16"),
          Qt::Key_3,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/16"),
-         QT_TR_NOOP("1/16"),
+         QT_TR_NOOP("16th note (semiquaver)"),
+         QT_TR_NOOP("16th note (semiquaver)"),
          &note16Icon
          ),
       Shortcut(
@@ -1111,8 +1111,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/32"),
          Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/32"),
-         QT_TR_NOOP("1/32"),
+         QT_TR_NOOP("32nd note (demi-semiquaver)"),
+         QT_TR_NOOP("32nd note (demi-semiquaver)"),
          &note32Icon
          ),
       Shortcut(
@@ -1121,8 +1121,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad note 1/64"),
          Qt::Key_1,
          Qt::WindowShortcut,
-         QT_TR_NOOP("1/64"),
-         QT_TR_NOOP("1/64"),
+         QT_TR_NOOP("64th note (semi-demi-semiquaver)"),
+         QT_TR_NOOP("64th note (semi-demi-semiquaver)"),
          &note64Icon
          ),
       Shortcut(
@@ -1131,18 +1131,18 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("pad dot"),
          Qt::Key_Period,
          Qt::WindowShortcut,
-         QT_TR_NOOP("dot"),
-         QT_TR_NOOP("dot"),
+         QT_TR_NOOP("Dot"),
+         QT_TR_NOOP("Dot"),
          &dotIcon
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dotdot",
-         QT_TR_NOOP("pad dot dot"),
+         QT_TR_NOOP("pad double dot"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP(".."),
-         QT_TR_NOOP("dot dot"),
+         QT_TR_NOOP("Double dot"),
+         QT_TR_NOOP("Double dot"),
          &dotdotIcon
          ),
       Shortcut(

@@ -135,7 +135,7 @@ void Articulation::setSubtype(const QString& s)
 bool Articulation::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Articulation Properties..."));
       a->setData("props");
       return true;
       }
