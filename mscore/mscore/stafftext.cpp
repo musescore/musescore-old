@@ -75,7 +75,7 @@ void StaffText::read(QDomElement e)
 bool StaffText::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Staff Text Properties..."));
       a->setData("props");
       return true;
       }

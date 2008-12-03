@@ -296,7 +296,7 @@ LineSegment* TextLine::createLineSegment()
 
 bool TextLineSegment::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(tr("Properties..."));
+      QAction* a = popup->addAction(tr("Line Properties..."));
       a->setData("props");
       return true;
       }

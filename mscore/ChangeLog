@@ -3,6 +3,9 @@
       - palette elements are now movable via drag/drop; palettes ares saved/restored
         in special xml file at ~/.local/share/data/MusE/MuseScore/mscore-palette.xml (linux)
       - fix update of dot button in note entry toolbar
+      (db)
+      - Added short names for vocal parts in instrument lists
+      - Minor UI text improvements / copy edits (English)
 1.dec  (ws)
       - dont change cursor position, when entering chord note in note entry mode
       - implement copy/paste of tempo text

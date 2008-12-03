@@ -353,36 +353,42 @@
          </instrument>
       <instrument>
          <name>Soprano</name>
+         <short-name>S.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Mezzo-soprano</name>
+         <short-name>Messo.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Contralto</name>
+         <short-name>CAlt.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Alto</name>
+         <short-name>A</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Countertenor</name>
+         <short-name>CTen.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Tenor</name>
+         <short-name>T.</short-name>
          <clef>3</clef>
          <channel>
             <program>52</program>
@@ -390,6 +396,7 @@
          </instrument>
       <instrument>
          <name>Baritone</name>
+         <short-name>Bar.</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>
@@ -397,6 +404,7 @@
          </instrument>
       <instrument>
          <name>Bass</name>
+         <short-name>B.</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>
@@ -480,14 +488,14 @@
    <instrument-group name="Strings">
       <instrument>
          <name>Violin</name>
-         <short-name>V1n.</short-name>
+         <short-name>Vln.</short-name>
          <channel>
             <program>40</program>
             </channel>
          </instrument>
       <instrument>
          <name>Violins 1</name>
-         <short-name>V1ns. 1</short-name>
+         <short-name>Vlns. 1</short-name>
          <channel>
            <program value="48"/>
             </channel>
@@ -500,14 +508,14 @@
          </instrument>
       <instrument>
          <name>Violins 2</name>
-         <short-name>V1ns. 2</short-name>
+         <short-name>Vlns. 2</short-name>
          <channel>
             <program>48</program>
             </channel>
          </instrument>
       <instrument>
          <name>Viola</name>
-         <short-name>V1a.</short-name>
+         <short-name>Vla.</short-name>
          <clef>11</clef>
          <channel>
             <program>41</program>
@@ -515,7 +523,7 @@
          </instrument>
       <instrument>
          <name>Violas</name>
-         <short-name>V1as.</short-name>
+         <short-name>Vlas.</short-name>
          <clef>11</clef>
          <channel>
             <program>49</program>

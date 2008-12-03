@@ -135,8 +135,8 @@ bool MuseScore::checkDirty(Score* s)
       {
       if (s->dirty()) {
             QMessageBox::StandardButton n = QMessageBox::warning(this, tr("MuseScore"),
-               tr("The score \"%1\"contains unsaved data\n"
-               "Save Current Score?").arg(s->name()),
+               tr("Save changes to the score \"%1\"\n"
+               "before closing?").arg(s->name()),
                QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                QMessageBox::Save);
             if (n == QMessageBox::Save) {
@@ -339,7 +339,7 @@ bool Score::saveAs(bool saveCopy)
       fl.append(tr("Compressed MusicXML Format (*.mxl)"));
       fl.append(tr("Standard MIDI File (*.mid)"));
       fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("Postscript File (*.ps)"));
+      fl.append(tr("PostScript File (*.ps)"));
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
       fl.append(tr("Lilypond Format (*.ly)"));

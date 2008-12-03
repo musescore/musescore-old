@@ -353,36 +353,42 @@
          </instrument>
       <instrument>
          <name>Soprano</name>
+         <short-name>S.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Mezzo-soprano</name>
+         <short-name>Mezzo.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Contralto</name>
+         <short-name>CAlt.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
        <instrument>
          <name>Alto</name>
+         <short-name>A.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Countertenor</name>
+         <short-name>CTen.</short-name>
          <channel>
             <program>52</program>
             </channel>
          </instrument>
       <instrument>
          <name>Tenor</name>
+         <short-name>T.</short-name>
          <clef>3</clef>
          <channel>
             <program>52</program>
@@ -390,6 +396,7 @@
          </instrument>
       <instrument>
          <name>Baritone</name>
+         <short-name>Bar.</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>
@@ -397,6 +404,7 @@
          </instrument>
       <instrument>
          <name>Bass</name>
+         <short-name>B.</short-name>
          <clef>4</clef>
          <channel>
             <program>52</program>

@@ -739,7 +739,7 @@ void PreferenceDialog::selectSoundFont()
          this,
          tr("Choose Synthesizer Sound Font"),
          soundFont->text(),
-         tr("Sound Fonds (*.sf2 *.SF2);;All (*)")
+         tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
          );
       if (!s.isNull()) {
             sfChanged = soundFont->text() != s;
