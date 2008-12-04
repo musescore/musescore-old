@@ -931,6 +931,7 @@ void Score::deleteItem(Element* el)
                         if (tuplet) {
                               tuplet->add(rest);
                               rest->setTuplet(tuplet);
+                              rest->setDuration(chord->duration());
                               }
                         }
                   else  {

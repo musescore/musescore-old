@@ -1,4 +1,8 @@
 4.dec (ws)
+      - pick right sharp and flat symbols when reading instrument templates
+      - fix deleting notes in tuplet
+      - fix tremolo through stem
+      - fix midi import; sometimes an extra empty staff was created
       - fix crash in drum staff note entry mode
 3.dec (ws)
       - new functions: move palettes up/down; insert new palette
