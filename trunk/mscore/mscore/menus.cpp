@@ -70,10 +70,11 @@ void MuseScore::showPalette(bool visible)
 
             QFile f(dataPath + "/" + "mscore-palette.xml");
             if (f.exists()) {
-                  paletteBox->read(&f);
-                  paletteBox->setShown(visible);
-                  a->setChecked(visible);
-                  return;
+                  if (paletteBox->read(&f)) {
+                        paletteBox->setShown(visible);
+                        a->setChecked(visible);
+                        return;
+                        }
                   }
 
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
@@ -83,9 +84,9 @@ void MuseScore::showPalette(bool visible)
             //    notes
             //-----------------------------------
 
-            notePalette = new Palette(1.0);
+            notePalette = new Palette;
+            notePalette->setName(tr("Notes"));
             notePalette->setGrid(27, 40);
-            notePalette->showStaff(false);
             notePalette->setDrawGrid(true);
 
             Icon* ik = new Icon(gscore);
@@ -113,91 +114,93 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("pad-grace32"));
             notePalette->append(ik, tr("grace-32"));
 
-            paletteBox->addPalette(qApp->translate("NotePalette", "Notes"), notePalette);
+            paletteBox->addPalette(notePalette);
 
             //-----------------------------------
             //    drums
             //-----------------------------------
 
-            drumPalette = new Palette();
+            drumPalette = new Palette;
+            drumPalette->setName(tr("Drums"));
             drumPalette->setMag(0.8);
             drumPalette->setSelectable(true);
             drumPalette->setGrid(42, 60);
-            drumPalette->showStaff(true);
             drumPalette->setDrumPalette(true);
 
-//            updateDrumset();
-            paletteBox->addPalette(tr("Drums"), drumPalette);
-//            connect(drumPalette, SIGNAL(boxClicked(int)), SLOT(drumPaletteSelected(int)));
+            paletteBox->addPalette(drumPalette);
 
             //-----------------------------------
             //    clefs
             //-----------------------------------
 
-            Palette* sp = new Palette(0.8);
+            Palette* sp = new Palette;
+            sp->setName(tr("Clefs"));
+            sp->setMag(0.8);
             sp->setGrid(33, 62);
-            sp->showStaff(true);
             sp->setYOffset(1.0);
 
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name));
+                  sp->append(k, tr(clefTable[i].name), true);
                   }
-            paletteBox->addPalette(tr("Clefs"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    key signatures
             //-----------------------------------
 
-            sp = new Palette(.8);
+            sp = new Palette;
+            sp->setName(tr("Keys"));
+            sp->setMag(0.8);
             sp->setGrid(56, 45);
-            sp->showStaff(true);
             sp->setYOffset(6.0);
 
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->append(k, tr(keyNames[i*2]));
+                  sp->append(k, tr(keyNames[i*2]), true);
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
+                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]), true);
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14]);
-            paletteBox->addPalette(tr("Keys"), sp);
+            sp->append(k, keyNames[14], true);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Time
             //-----------------------------------
 
-            sp = new Palette(.8);
+            sp = new Palette;
+            sp->setName(tr("Time"));
+            sp->setMag(.8);
             sp->setGrid(42, 38);
-            sp->showStaff(true);
 
-      	sp->append(new TimeSig(gscore, 2, 2), "2/2");
-      	sp->append(new TimeSig(gscore, 4, 2), "2/4");
-      	sp->append(new TimeSig(gscore, 4, 3), "3/4");
-      	sp->append(new TimeSig(gscore, 4, 4), "4/4");
-      	sp->append(new TimeSig(gscore, 4, 5), "5/4");
-      	sp->append(new TimeSig(gscore, 4, 6), "6/4");
-      	sp->append(new TimeSig(gscore, 8, 3), "3/8");
-      	sp->append(new TimeSig(gscore, 8, 6), "6/8");
-      	sp->append(new TimeSig(gscore, 8, 9), "9/8");
-      	sp->append(new TimeSig(gscore, 8, 12), "12/8");
-      	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
-      	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
-            paletteBox->addPalette(tr("Time"), sp);
+      	sp->append(new TimeSig(gscore, 2, 2), "2/2", true);
+      	sp->append(new TimeSig(gscore, 4, 2), "2/4", true);
+      	sp->append(new TimeSig(gscore, 4, 3), "3/4", true);
+      	sp->append(new TimeSig(gscore, 4, 4), "4/4", true);
+      	sp->append(new TimeSig(gscore, 4, 5), "5/4", true);
+      	sp->append(new TimeSig(gscore, 4, 6), "6/4", true);
+      	sp->append(new TimeSig(gscore, 8, 3), "3/8", true);
+      	sp->append(new TimeSig(gscore, 8, 6), "6/8", true);
+      	sp->append(new TimeSig(gscore, 8, 9), "9/8", true);
+      	sp->append(new TimeSig(gscore, 8, 12), "12/8", true);
+      	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"), true);
+      	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"), true);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Bar Lines
             //-----------------------------------
 
-            sp = new Palette(.8);
+            sp = new Palette;
+            sp->setName(tr("Bar Lines"));
+            sp->setMag(0.8);
             sp->setGrid(42, 38);
-            sp->showStaff(true);
 
             struct {
                   BarType type;
@@ -214,15 +217,17 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name);
+                  sp->append(b, t[i].name, true);
                   }
-            paletteBox->addPalette(tr("Bar Lines"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Lines
             //-----------------------------------
 
-            sp = new Palette(.8);
+            sp = new Palette;
+            sp->setName(tr("Lines"));
+            sp->setMag(.8);
             sp->setGrid(84, 23);
 
             Hairpin* gabel0 = new Hairpin(gscore);
@@ -296,13 +301,14 @@ void MuseScore::showPalette(bool visible)
             line->setHook(false);
             sp->append(line, tr("line"));
 
-            paletteBox->addPalette(tr("Lines"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Arpeggios
             //-----------------------------------
 
             sp = new Palette();
+            sp->setName(tr("Arpeggio/Glissando"));
             sp->setGrid(27, 60);
 
             for (int i = 0; i < 3; ++i) {
@@ -317,13 +323,14 @@ void MuseScore::showPalette(bool visible)
                   // a->setSize(QSizeF(_spatium * 2, _spatium * 4));
                   sp->append(a, tr("glissando"));
                   }
-            paletteBox->addPalette(tr("Arpeggio/Glissando"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Symbols: Breath
             //-----------------------------------
 
             sp = new Palette();
+            sp->setName(tr("Breath"));
             sp->setGrid(42, 40);
 
             for (int i = 0; i < 2; ++i) {
@@ -332,13 +339,15 @@ void MuseScore::showPalette(bool visible)
                   sp->append(a, tr("breath"));
                   }
 
-            paletteBox->addPalette(tr("Breath"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Brackets
             //-----------------------------------
 
-            sp = new Palette(.7);
+            sp = new Palette;
+            sp->setName(tr("Brackets"));
+            sp->setMag(0.7);
             sp->setGrid(42, 60);
 
             Bracket* b1 = new Bracket(gscore);
@@ -351,14 +360,15 @@ void MuseScore::showPalette(bool visible)
             sp->append(b1, "Bracket");
             sp->append(b2, "Akkolade");
 
-            paletteBox->addPalette(tr("Brackets"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Attributes, Ornaments
             //-----------------------------------
 
             unsigned nn = NOTE_ATTRIBUTES;
-            sp = new Palette();
+            sp = new Palette;
+            sp->setName(tr("Articulations, Ornaments"));
             sp->setGrid(42, 25);
 
             for (unsigned i = 0; i < nn; ++i) {
@@ -366,13 +376,14 @@ void MuseScore::showPalette(bool visible)
                   s->setSubtype(i);
                   sp->append(s, s->subtypeName());
                   }
-            paletteBox->addPalette(tr("Articulations, Ornaments"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Accidentals
             //-----------------------------------
 
-            sp = new Palette();
+            sp = new Palette;
+            sp->setName(tr("Accidentals"));
             sp->setGrid(33, 36);
 
             for (int i = 1; i < 11; ++i) {
@@ -385,13 +396,15 @@ void MuseScore::showPalette(bool visible)
                   s->setSubtype(i);
                   sp->append(s, s->name());
                   }
-            paletteBox->addPalette(tr("Accidentals"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Dynamics
             //-----------------------------------
 
-            sp = new Palette(.9);
+            sp = new Palette;
+            sp->setName(tr("Dynamics"));
+            sp->setMag(0.9);
             sp->setGrid(42, 28);
             sp->setYOffset(-12.0);
 
@@ -403,13 +416,15 @@ void MuseScore::showPalette(bool visible)
                   dynamic->setSubtype(dynS[i]);
                   sp->append(dynamic, dynamic->subtypeName());
                   }
-            paletteBox->addPalette(tr("Dynamics"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Fingering
             //-----------------------------------
 
-            sp = new Palette(1.5);
+            sp = new Palette;
+            sp->setName(tr("Fingering"));
+            sp->setMag(1.5);
             sp->setGrid(28, 30);
             sp->setDrawGrid(true);
 
@@ -428,13 +443,15 @@ void MuseScore::showPalette(bool visible)
                   sp->append(k, tr("string number %1").arg(stringnumber[i]));
                   }
 
-            paletteBox->addPalette(tr("Fingering"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Noteheads
             //-----------------------------------
 
-            sp = new Palette(1.3);
+            sp = new Palette;
+            sp->setName(tr("NoteHeads"));
+            sp->setMag(1.3);
             sp->setGrid(33, 36);
             sp->setDrawGrid(true);
 
@@ -466,13 +483,14 @@ void MuseScore::showPalette(bool visible)
             nh->setSym(xcircledheadSym);
             sp->append(nh, QString("xcircle"));
 
-            paletteBox->addPalette(tr("Note Heads"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Tremolo
             //-----------------------------------
 
-            sp = new Palette(1.0);
+            sp = new Palette;
+            sp->setName(tr("Tremolo"));
             sp->setGrid(27, 40);
             sp->setDrawGrid(true);
             const char* tremoloName[] = {
@@ -485,13 +503,15 @@ void MuseScore::showPalette(bool visible)
                   tremolo->setSubtype(i);
                   sp->append(tremolo, tremoloName[i]);
                   }
-            paletteBox->addPalette(tr("Tremolo"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Repeats
             //-----------------------------------
 
-            sp = new Palette(0.65);
+            sp = new Palette;
+            sp->setName(tr("Repeats"));
+            sp->setMag(0.65);
             sp->setGrid(84, 28);
             sp->setDrawGrid(true);
 
@@ -546,13 +566,15 @@ void MuseScore::showPalette(bool visible)
             mk->setMarkerType(MARKER_TOCODA);
             sp->append(mk, tr("To Coda"));
 
-            paletteBox->addPalette(tr("Repeats"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    breaks
             //-----------------------------------
 
-            sp = new Palette(.7);
+            sp = new Palette;
+            sp->setName(tr("Breaks/Spacer"));
+            sp->setMag(.7);
             sp->setGrid(42, 36);
             sp->setDrawGrid(true);
 
@@ -568,16 +590,16 @@ void MuseScore::showPalette(bool visible)
             spacer->setSpace(Spatium(3));
             sp->append(spacer, tr("staff spacer"));
 
-            paletteBox->addPalette(tr("Breaks/Spacer"), sp);
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    beam properties
             //-----------------------------------
 
-            sp = new Palette(1.0);
+            sp = new Palette;
+            sp->setName(tr("Beam Properties"));
             sp->setGrid(27, 40);
             sp->setDrawGrid(true);
-            sp->showStaff(false);
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_SBEAM);
@@ -604,14 +626,14 @@ void MuseScore::showPalette(bool visible)
             ik->setAction(getAction("auto-beam"));
             sp->append(ik, tr("auto beam"));
 
-            paletteBox->addPalette(tr("Beam Properties"), sp);
-
+            paletteBox->addPalette(sp);
 
             //-----------------------------------
             //    Symbols
             //-----------------------------------
 
-            sp = new Palette();
+            sp = new Palette;
+            sp->setName(tr("Symbols"));
             sp->setGrid(42, 45);
             sp->setDrawGrid(true);
             sp->append(wholerestSym);
@@ -772,7 +794,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(letterrSym);
             sp->append(lettersSym);
             sp->append(letterzSym);
-            paletteBox->addPalette(tr("Symbols"), sp);
+            paletteBox->addPalette(sp);
             }
       paletteBox->setShown(visible);
       a->setChecked(visible);
@@ -849,15 +871,14 @@ void MuseScore::symbolMenu()
 void MuseScore::clefMenu()
       {
       if (clefPalette == 0) {
-            Palette* sp = new Palette();
+            Palette* sp = new Palette;
             clefPalette = new PaletteScrollArea(sp);
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
             sp->setGrid(60, 80);
-            sp->showStaff(true);
             for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name));
+                  sp->append(k, tr(clefTable[i].name), true);
                   }
             }
       clefPalette->show();
@@ -876,23 +897,22 @@ void MuseScore::keyMenu()
             keyPalette->setRestrictHeight(false);
             keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
             sp->setGrid(80, 60);
-            sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->append(k, keyNames[i*2]);
+                  sp->append(k, keyNames[i*2], true);
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->append(k, keyNames[(7 + i) * 2 + 1]);
+                  sp->append(k, keyNames[(7 + i) * 2 + 1], true);
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14]);
+            sp->append(k, keyNames[14], true);
             k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14]);
+            sp->append(k, keyNames[14], true);
             }
       keyPalette->show();
       keyPalette->raise();
@@ -1140,7 +1160,6 @@ void MuseScore::barMenu()
             barPalette->setRestrictHeight(false);
             barPalette->setWindowTitle(tr("MuseScore: Barlines"));
             sp->setGrid(60, 60);
-            sp->showStaff(true);
 
             struct {
                   BarType type;
@@ -1158,7 +1177,7 @@ void MuseScore::barMenu()
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name);
+                  sp->append(b, t[i].name, true);
                   }
             }
       barPalette->show();
@@ -1172,7 +1191,8 @@ void MuseScore::barMenu()
 void MuseScore::fingeringMenu()
       {
       if (fingeringPalette == 0) {
-            Palette* sp = new Palette(1.5);
+            Palette* sp = new Palette;
+            sp->setMag(1.5);
             fingeringPalette = new PaletteScrollArea(sp);
             fingeringPalette->setRestrictHeight(false);
             fingeringPalette->setWindowTitle(tr("MuseScore: Fingering"));
@@ -1236,7 +1256,7 @@ void Score::addMetronome()
 void MuseScore::showLayoutBreakPalette()
       {
       if (layoutBreakPalette == 0) {
-            Palette* sp = new Palette();
+            Palette* sp = new Palette;
             layoutBreakPalette = new PaletteScrollArea(sp);
             layoutBreakPalette->setRestrictHeight(false);
             layoutBreakPalette->setWindowTitle(tr("MuseScore: Layout Breaks"));
@@ -1305,7 +1325,7 @@ void MuseScore::updateDrumset()
                         stem->setLen(Spatium(up ? -3.0 : 3.0));
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
-                        drumPalette->append(chord, drumset->name(pitch));
+                        drumPalette->append(chord, drumset->name(pitch), true);
 
                         ++i;
                         }
@@ -1346,7 +1366,6 @@ void MuseScore::drumPaletteSelected(int idx)
             if (i == idx) {
                   padState->drumNote = pitch;
                   padState->voice    = ds->voice(pitch);
-//                  printf("drumNote %d voice %d\n", pitch, padState->voice);
                   cs->setPadState();
                   break;
                   }

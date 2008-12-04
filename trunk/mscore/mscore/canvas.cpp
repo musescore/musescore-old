@@ -1184,8 +1184,11 @@ void Canvas::setShadowNote(const QPointF& p)
             Drumset* ds  = instr->drumset;
             PadState* ps = score()->padState();
             int pitch    = ps->drumNote;
-            line         = ds->line(pitch);
-            notehead     = ds->noteHead(pitch);
+            if (pitch >= 0 && ds->isValid(pitch)) {
+                  line     = ds->line(pitch);
+                  notehead = ds->noteHead(pitch);
+printf("line %d  notehead %d  pitch %d\n", line, notehead, pitch);
+                  }
             }
       shadowNote->setLine(line);
       shadowNote->setHeadGroup(notehead);

@@ -438,9 +438,13 @@ void Note::setType(Duration t)
 
 void Note::setHeadGroup(int val)
       {
+      if (val >= HEAD_GROUPS) {
+            printf("wrong head group %d\n", val);
+            val = 0;
+            }
       _headGroup = val;
-      if(chord())
-    	  _head = noteHeads[_headGroup][chord()->duration().headType()];
+      if (chord())
+            _head = noteHeads[_headGroup][chord()->duration().headType()];
       }
 
 //---------------------------------------------------------
@@ -459,7 +463,6 @@ void Note::draw(QPainter& p) const
                   double d = point(score()->style()->dotNoteDistance);
                   double y = 0;
                   // do not draw dots on line
-//                  if (_line >= 0 && (_line & 1) == 0)
                   if ((_line & 1) == 0)
                         y = -_spatium *.5 * mag();
 
@@ -660,6 +663,15 @@ ShadowNote::ShadowNote(Score* s)
       _headGroup = 0;
       }
 
+void ShadowNote::setHeadGroup(int val)
+      {
+      if (val >= HEAD_GROUPS) {
+            printf("wrong head group %d\n", val);
+            abort();
+            }
+      _headGroup = val;
+      }
+
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
@@ -694,13 +706,15 @@ void ShadowNote::draw(QPainter& p) const
             double x1 = symbols[quartheadSym].width(mag())*.5 - _spatium;
             double x2 = x1 + 2 * _spatium;
 
-            for (int i = -2; i >= _line; i -= 2) {
-                  double y = _spatium * .5 * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-            for (int i = 10; i <= _line; i += 2) {
-                  double y = _spatium * .5 * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
+            if (_line < 100 && _line > -100) {
+                  for (int i = -2; i >= _line; i -= 2) {
+                        double y = _spatium * .5 * (i - _line);
+                        p.drawLine(QLineF(x1, y, x2, y));
+                        }
+                  for (int i = 10; i <= _line; i += 2) {
+                        double y = _spatium * .5 * (i - _line);
+                        p.drawLine(QLineF(x1, y, x2, y));
+                        }
                   }
             p.translate(-ap);
 //            }
@@ -716,12 +730,13 @@ QRectF ShadowNote::bbox() const
       double x  = b.width()/2 - _spatium;
       double lw = point(score()->style()->ledgerLineWidth);
 
-      QRectF r(0, -lw/2.0, 2 * _spatium, lw);
-
-      for (int i = -2; i >= _line; i -= 2)
-            b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
-      for (int i = 10; i <= _line; i += 2)
-            b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
+      if (_line < 100 && _line > -100) {
+            QRectF r(0, -lw/2.0, 2 * _spatium, lw);
+            for (int i = -2; i >= _line; i -= 2)
+                  b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
+            for (int i = 10; i <= _line; i += 2)
+                  b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
+            }
       return b;
       }
 

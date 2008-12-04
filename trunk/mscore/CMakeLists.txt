@@ -35,6 +35,11 @@ set(STATIC_SCRIPT_BINDINGS FALSE)         # this requires qt 4.5
 if (MINGW)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
+if (APPLE)
+      set (BUILD_SCRIPT_INTERFACE FALSE)
+      set (BUILD_SCRIPT_DEBUG FALSE)
+endif (APPLE)
+
 if (BUILD_SCRIPT_DEBUG)
       set (HAS_SCRIPT_DEBUG TRUE)
 endif (BUILD_SCRIPT_DEBUG)
@@ -75,6 +80,7 @@ set(QT_USE_QTXML     TRUE)
 set(QT_USE_QTSVG     TRUE)
 set(QT_USE_QTNETWORK TRUE)
 set(QT_USE_QTUITOOLS TRUE)
+set(QT_USE_QTDESIGNER TRUE)
 # only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 

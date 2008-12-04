@@ -558,23 +558,23 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Select Key Signature:"));
 
-      sp = new Palette(.8);
+      sp = new Palette;
+      sp->setMag(.8);
       sp->setGrid(56, 45);
       sp->setSelectable(true);
-      sp->showStaff(true);
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i+1);
-            sp->append(k, tr(keyNames[i*2]));
+            sp->append(k, tr(keyNames[i*2]),true);
             }
       for (int i = -7; i < 0; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i & 0xff);
-            sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
+            sp->append(k, tr(keyNames[(7 + i) * 2 + 1]), true);
             }
       KeySig* k = new KeySig(gscore);
       k->setSubtype(0);
-      sp->append(k, keyNames[14]);
+      sp->append(k, keyNames[14], true);
       sp->setSelected(14);
 
       QGridLayout* grid = new QGridLayout;

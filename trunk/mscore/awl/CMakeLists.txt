@@ -72,7 +72,7 @@ set_target_properties( awl
       "-include ${PROJECT_BINARY_DIR}/all.h"
    )
 
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
 QT4_WRAP_CPP (mocs2
       aslider.h
       knob.h
@@ -107,4 +107,4 @@ set_target_properties( awlplugin
 
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
 
-endif (NOT MINGW)
+endif (NOT MINGW AND NOT APPLE)

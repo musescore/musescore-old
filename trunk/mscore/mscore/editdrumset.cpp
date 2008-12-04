@@ -49,7 +49,6 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       setupUi(this);
 
       drumNote->setGrid(70, 80);
-      drumNote->showStaff(true);
       drumNote->setDrawGrid(true);
       drumNote->setReadOnly(true);
 
@@ -222,7 +221,7 @@ void EditDrumset::updateExample()
       {
       int pitch = pitchList->currentItem()->data(0, Qt::UserRole).toInt();
       if (!nDrumset.isValid(pitch)) {
-            drumNote->add(0,  0, "");
+            drumNote->add(0,  0, "", false);
             return;
             }
       int line      = nDrumset.line(pitch);
@@ -253,7 +252,7 @@ void EditDrumset::updateExample()
       stem->setLen(Spatium(up ? -3.0 : 3.0));
       chord->setStem(stem);
       stem->setPos(note->stemPos(up));
-      drumNote->add(0,  chord, nDrumset.name(pitch));
+      drumNote->add(0,  chord, nDrumset.name(pitch), true);
       }
 
 //---------------------------------------------------------
