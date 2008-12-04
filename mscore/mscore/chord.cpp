@@ -357,11 +357,13 @@ void Chord::add(Element* e)
             _arpeggio = static_cast<Arpeggio*>(e);
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
-            Duration d  = duration().shift(-1);
-            if (tr->chord1())
-                  tr->chord1()->setDuration(d);
-            if (tr->chord2())
-                  tr->chord2()->setDuration(d);
+            if (tr->twoNotes()) {
+                  Duration d  = duration().shift(-1);
+                  if (tr->chord1())
+                        tr->chord1()->setDuration(d);
+                  if (tr->chord2())
+                        tr->chord2()->setDuration(d);
+                  }
             _tremolo = tr;
             }
       else if (e->type() == GLISSANDO)
@@ -404,11 +406,13 @@ void Chord::remove(Element* e)
             _arpeggio = 0;
       else if (e->type() == TREMOLO) {
             Tremolo* tremolo = static_cast<Tremolo*>(e);
-            Duration d       = duration().shift(1);
-            if (tremolo->chord1())
-                  tremolo->chord1()->setDuration(d);
-            if (tremolo->chord2())
-                  tremolo->chord2()->setDuration(d);
+            if (tremolo->twoNotes()) {
+                  Duration d       = duration().shift(1);
+                  if (tremolo->chord1())
+                        tremolo->chord1()->setDuration(d);
+                  if (tremolo->chord2())
+                        tremolo->chord2()->setDuration(d);
+                  }
             _tremolo = 0;
             }
       else if (e->type() == GLISSANDO)

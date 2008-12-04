@@ -1044,8 +1044,9 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
       //  create instruments
       //---------------------------------------------------
 
-      int ntracks = staffIdx;
-      foreach (MidiTrack* track, *tracks) {
+      int ntracks = tracks->size();
+      for (int i = 0; i < ntracks; ++i) {
+            MidiTrack* track = tracks->at(i);
             int staffIdx = track->staffIdx();
             if (staffIdx == -1)
                   continue;
@@ -1055,13 +1056,12 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
             Staff* s = new Staff(this, part, 0);
             part->insertStaff(s);
             _staves.push_back(s);
-
             if (track->isDrumTrack()) {
                   s->clefList()->setClef(0, CLEF_PERC);
                   part->setDrumset(smDrumset);
                   }
             else {
-                  if ((staffIdx < (ntracks-1)) && (tracks->at(staffIdx+1)->outChannel() == track->outChannel()
+                  if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
                      && ((program & 0xff) == 0))) {
                         // assume that the current track and the next track
                         // form a piano part
@@ -1073,6 +1073,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
                         ss->clefList()->setClef(0, CLEF_F);
+                        ++i;
                         }
                   else {
                         s->clefList()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);

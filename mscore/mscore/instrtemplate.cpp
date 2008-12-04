@@ -129,11 +129,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                               QString name = de1.attribute(QString("name"));
                               if (name == "flat") {
                                     n += "b";
-                                    cursor.insertText(QString(0xe112), sf);
+                                    cursor.insertText(QString(0xe10d), sf);
                                     }
                               else if (name == "sharp") {
                                     n += "#";
-                                    cursor.insertText(QString(0xe10e), sf);
+                                    cursor.insertText(QString(0xe10c), sf);
                                     }
                               }
                         QDomText t = ee.toText();
@@ -156,9 +156,9 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                         if (tag == "symbol") {
                               QString name = de1.attribute(QString("name"));
                               if (name == "flat")
-                                    cursor.insertText(QString(0xe112), sf);
+                                    cursor.insertText(QString(0xe10d), sf);
                               else if (name == "sharp")
-                                    cursor.insertText(QString(0xe10e), sf);
+                                    cursor.insertText(QString(0xe10c), sf);
                               }
                         QDomText t = ee.toText();
                         if (!t.isNull()) {
