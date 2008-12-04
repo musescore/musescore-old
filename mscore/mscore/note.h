@@ -208,7 +208,7 @@ class ShadowNote : public Element {
       virtual QRectF bbox() const;
       virtual void draw(QPainter& p) const;
       int headGroup() const           { return _headGroup; }
-      void setHeadGroup(int val)      { _headGroup = val;  }
+      void setHeadGroup(int val);
       };
 
 extern const int noteHeads[HEAD_GROUPS][4];

@@ -4516,6 +4516,10 @@ Aktuelle Partitur sichern? </translation>
         <source>reset measure stretch</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>

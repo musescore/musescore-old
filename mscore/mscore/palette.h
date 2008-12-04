@@ -26,9 +26,33 @@ class Sym;
 class Xml;
 class Palette;
 
+#include "ui_palette.h"
+
+//---------------------------------------------------------
+//   PaletteProperties
+//---------------------------------------------------------
+
+class PaletteProperties : public QDialog, private Ui::PaletteProperties {
+      Q_OBJECT
+
+      Palette* palette;
+      virtual void accept();
+
+   public:
+      PaletteProperties(Palette* p, QWidget* parent = 0);
+      };
+
 //---------------------------------------------------------
 //   PaletteBoxButton
 //---------------------------------------------------------
+
+enum PaletteCommand {
+      PALETTE_DELETE,
+      PALETTE_EDIT,
+      PALETTE_UP,
+      PALETTE_DOWN,
+      PALETTE_NEW
+      };
 
 class PaletteBoxButton : public QToolButton {
       Q_OBJECT
@@ -39,10 +63,14 @@ class PaletteBoxButton : public QToolButton {
       virtual void changeEvent(QEvent*);
 
    private slots:
-      void deleteTriggered() { emit deletePalette(id); }
+      void deleteTriggered()     { emit paletteCmd(PALETTE_DELETE, id);  }
+      void propertiesTriggered() { emit paletteCmd(PALETTE_EDIT, id);    }
+      void upTriggered()         { emit paletteCmd(PALETTE_UP, id);      }
+      void downTriggered()       { emit paletteCmd(PALETTE_DOWN, id);    }
+      void newTriggered()        { emit paletteCmd(PALETTE_NEW, id);     }
 
    signals:
-      void deletePalette(int);
+      void paletteCmd(int, int);
 
    public:
       PaletteBoxButton(QWidget*, QWidget* parent = 0);
@@ -62,7 +90,7 @@ class PaletteBox : public QDockWidget {
       virtual void closeEvent(QCloseEvent*);
 
    private slots:
-      void deletePalette(int);
+      void paletteCmd(int, int);
       void setDirty() { _dirty = true; }
 
    signals:
@@ -70,7 +98,7 @@ class PaletteBox : public QDockWidget {
 
    public:
       PaletteBox(QWidget* parent = 0);
-      void addPalette(const QString& s, Palette*);
+      void addPalette(Palette*);
       bool dirty() const      { return _dirty; }
       void write(const QString& path);
       bool read(QFile*);
@@ -83,6 +111,7 @@ class PaletteBox : public QDockWidget {
 struct PaletteCell {
       Element* element;
       QString name;
+      bool drawStaff;
       };
 
 //---------------------------------------------------------
@@ -108,6 +137,7 @@ class PaletteScrollArea : public QScrollArea {
 class Palette : public QWidget {
       Q_OBJECT
 
+      QString _name;
       QList<PaletteCell*> cells;
 
       int hgrid, vgrid;
@@ -122,8 +152,6 @@ class Palette : public QWidget {
       bool _readOnly;
       qreal _yOffset;
       bool _drumPalette;
-
-      bool staff;
 
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);
@@ -150,34 +178,38 @@ class Palette : public QWidget {
 
    public:
       Palette(QWidget* parent = 0);
-      Palette(qreal mag);
       ~Palette();
 
-      void append(Element*, const QString& name);
-      void add(int idx, Element*, const QString& name);
-      void add(int idx, int sym);
-      void append(int sym);
+      void append(Element*, const QString& name, bool drawStaff = false);
+      void add(int idx, Element*, const QString& name, bool drawStaff = false);
+      void append(int sym, bool drawStaff = false);
 
       void setGrid(int, int);
-      void showStaff(bool val)     { staff = val; }
-      Element* element(int idx)    { return cells[idx]->element; }
-      void setDrawGrid(bool val)   { _drawGrid = val; }
+      Element* element(int idx)      { return cells[idx]->element; }
+      void setDrawGrid(bool val)     { _drawGrid = val; }
+      bool drawGrid() const          { return _drawGrid; }
       void write(Xml&, const QString& name) const;
       void read(QDomElement);
       void clear();
-      void setSelectable(bool val) { _selectable = val;  }
-      bool selectable() const      { return _selectable; }
-      int getSelectedIdx() const   { return selectedIdx; }
-      void setSelected(int idx)    { selectedIdx = idx;  }
-      bool readOnly() const        { return _readOnly;   }
+      void setSelectable(bool val)   { _selectable = val;  }
+      bool selectable() const        { return _selectable; }
+      int getSelectedIdx() const     { return selectedIdx; }
+      void setSelected(int idx)      { selectedIdx = idx;  }
+      bool readOnly() const          { return _readOnly;   }
       void setReadOnly(bool val);
-      void setMag(qreal val)       { extraMag = val;     }
-      void setYOffset(qreal val)   { _yOffset = val;     }
-      int columns() const          { return width() / hgrid; }
+      void setMag(qreal val)         { extraMag = val;     }
+      qreal mag() const              { return extraMag;    }
+      void setYOffset(qreal val)     { _yOffset = val;     }
+      qreal yOffset() const          { return _yOffset;        }
+      int columns() const            { return width() / hgrid; }
       int rows() const;
       int resizeWidth(int);
-      bool drumPalette() const      { return _drumPalette; }
-      void setDrumPalette(bool val) { _drumPalette = val; }
+      bool drumPalette() const       { return _drumPalette; }
+      void setDrumPalette(bool val)  { _drumPalette = val;  }
+      QString name() const           { return _name;        }
+      void setName(const QString& s) { _name = s;           }
+      int gridWidth() const          { return hgrid;        }
+      int gridHeight() const         { return vgrid;        }
       };
 
 #endif

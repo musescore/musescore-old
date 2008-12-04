@@ -22,7 +22,7 @@
 #define __ALLQT_H__
 
 #include <stdio.h>
-#include <values.h>
+#include <limits.h>
 #include <map>
 #include <cmath>
 #include <errno.h>
@@ -76,7 +76,7 @@
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QSpinBox>
 #ifndef __MINGW32__
-#include <QtGui/QX11Info>
+// #include <QtGui/QX11Info>
 #endif
 #include <QtGui/QFontDatabase>
 #include <QtGui/QApplication>

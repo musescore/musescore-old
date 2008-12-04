@@ -47,26 +47,6 @@ Palette::Palette(QWidget* parent)
    : QWidget(parent)
       {
       extraMag      = 1.0;
-      staff         = false;
-      currentIdx    = -1;
-      selectedIdx   = -1;
-      _yOffset      = 0;
-      hgrid         = 50;
-      vgrid         = 60;
-      _drawGrid     = false;
-      _selectable   = false;
-      _readOnly     = true;
-      _drumPalette  = false;
-      setMouseTracking(true);
-      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-
-      setReadOnly(false);
-      }
-
-Palette::Palette(qreal mag)
-      {
-      extraMag      = mag;
-      staff         = false;
       currentIdx    = -1;
       selectedIdx   = -1;
       _yOffset      = 0;
@@ -300,23 +280,36 @@ void Palette::leaveEvent(QEvent*)
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::append(Element* s, const QString& name)
+void Palette::append(Element* s, const QString& name, bool staff)
       {
-      add(cells.size(), s, name);
+      PaletteCell* cell = new PaletteCell;
+
+      cells.append(cell);
+      cell->element   = s;
+      cell->name      = name;
+      cell->drawStaff = staff;
+
+      update();
+      if (s && s->type() == ICON) {
+            Icon* icon = static_cast<Icon*>(s);
+            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+            }
+      if (columns())
+            resizeWidth(width());
       }
 
-void Palette::append(int symIdx)
+void Palette::append(int symIdx, bool staff)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
-      append(s, ::symbols[symIdx].name());
+      append(s, ::symbols[symIdx].name(), staff);
       }
 
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
-void Palette::add(int idx, Element* s, const QString& name)
+void Palette::add(int idx, Element* s, const QString& name, bool staff)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -328,9 +321,10 @@ void Palette::add(int idx, Element* s, const QString& name)
             for (int i = cells.size(); i <= idx; ++i)
                   cells.append(0);
             }
-      cells[idx]     = cell;
-      cell->element  = s;
-      cell->name     = name;
+      cells[idx]      = cell;
+      cell->element   = s;
+      cell->name      = name;
+      cell->drawStaff = staff;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -338,17 +332,6 @@ void Palette::add(int idx, Element* s, const QString& name)
             }
       if (columns())
             resizeWidth(width());
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void Palette::add(int idx, int symIdx)
-      {
-      Symbol* s = new Symbol(0);
-      s->setSym(symIdx);
-      add(idx, s, ::symbols[symIdx].name());
       }
 
 //---------------------------------------------------------
@@ -406,6 +389,7 @@ void Palette::paintEvent(QPaintEvent*)
             Element* el = cells[idx]->element;
             if (el == 0)
                   continue;
+            bool drawStaff = cells[idx]->drawStaff;
             if (el->type() != ICON) {
                   int row    = idx / c;
                   int column = idx % c;
@@ -413,7 +397,7 @@ void Palette::paintEvent(QPaintEvent*)
                   el->layout(&layout);
                   el->setPos(0.0, 0.0);   // HACK
 
-                  if (staff) {
+                  if (drawStaff) {
                         qreal y = r.y() + vgrid * .5 - dy + _yOffset;
                         qreal x = r.x() + 3;
                         qreal w = hgrid - 6;
@@ -434,7 +418,7 @@ void Palette::paintEvent(QPaintEvent*)
                   double sh = el->height();
                   double sy;
 
-                  if (staff)
+                  if (drawStaff)
                         sy = gy + gh * .5 - 2.0 * _spatium;
                   else
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
@@ -690,8 +674,6 @@ void Palette::write(Xml& xml, const QString& name) const
             xml.tag("mag", extraMag);
       if (_drawGrid)
             xml.tag("grid", _drawGrid);
-      if (staff)
-            xml.tag("showStaff", staff);
       if (_yOffset != 0.0)
             xml.tag("yoffset", _yOffset);
       if (_drumPalette)
@@ -708,6 +690,8 @@ void Palette::write(Xml& xml, const QString& name) const
                         xml.stag(QString("Cell name=\"%1\"").arg(cells[i]->name));
                   else
                         xml.stag("Cell");
+                  if (cells[i]->drawStaff)
+                        xml.tag("staff", cells[i]->drawStaff);
                   cells[i]->element->write(xml);
                   xml.etag();
                   }
@@ -733,8 +717,6 @@ void Palette::read(QDomElement e)
                   extraMag = text.toDouble();
             else if (tag == "grid")
                   _drawGrid = text.toInt();
-            else if (tag == "showStaff")
-                  staff = text.toInt();
             else if (tag == "yoffset")
                   _yOffset = text.toDouble();
             else if (tag == "drumPalette")
@@ -744,9 +726,12 @@ void Palette::read(QDomElement e)
                         append(0, "");
                   else {
                         QString name = e.attribute("name", "");
+                        bool drawStaff = false;
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                               QString tag(ee.tagName());
-                              if (tag == "Image") {
+                              if (tag == "staff")
+                                    drawStaff = ee.text().toInt();
+                              else if (tag == "Image") {
                                     // look ahead for image type
                                     QString path;
                                     for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
@@ -769,7 +754,7 @@ void Palette::read(QDomElement e)
                                           }
                                     if (image) {
                                           image->read(ee);
-                                          append(image, name);
+                                          append(image, name, drawStaff);
                                           }
                                     }
                               else {
@@ -778,7 +763,7 @@ void Palette::read(QDomElement e)
                                           domError(ee);
                                     else {
                                           element->read(ee);
-                                          append(element, name);
+                                          append(element, name, drawStaff);
                                           }
                                     }
                               }
@@ -813,9 +798,24 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
       setFixedHeight(QFontMetrics(font()).height() + 2);
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QMenu* menu = new QMenu;
-      QAction* action = menu->addAction(tr("Delete Palette"));
-      setMenu(menu);
+      QAction* action;
+
+      action = menu->addAction(tr("Palette Properties"));
+      connect(action, SIGNAL(triggered()), SLOT(propertiesTriggered()));
+
+      action = menu->addAction(tr("Insert new Palette"));
+      connect(action, SIGNAL(triggered()), SLOT(newTriggered()));
+
+      action = menu->addAction(tr("Move Palette Up"));
+      connect(action, SIGNAL(triggered()), SLOT(upTriggered()));
+
+      action = menu->addAction(tr("Move Palette Down"));
+      connect(action, SIGNAL(triggered()), SLOT(downTriggered()));
+
+      menu->addSeparator();
+      action = menu->addAction(tr("Delete Palette"));
       connect(action, SIGNAL(triggered()), SLOT(deleteTriggered()));
+      setMenu(menu);
       }
 
 //---------------------------------------------------------
@@ -889,7 +889,11 @@ void PaletteScrollArea::resizeEvent(QResizeEvent* re)
 int Palette::resizeWidth(int w)
       {
       int c = w / hgrid;
+      if (c <= 0)
+            c = 1;
       int r = (cells.size() + c - 1) / c;
+      if (r <= 0)
+            r = 1;
       int h = r * vgrid;
       setFixedSize(w, h);
       return h;
@@ -899,18 +903,18 @@ int Palette::resizeWidth(int w)
 //   addPalette
 //---------------------------------------------------------
 
-void PaletteBox::addPalette(const QString& s, Palette* w)
+void PaletteBox::addPalette(Palette* w)
       {
       PaletteScrollArea* sa = new PaletteScrollArea(w);
       PaletteBoxButton* b   = new PaletteBoxButton(sa);
 
       sa->setVisible(false);
-      b->setText(s);
+      b->setText(w->name());
       int slotIdx = vbox->count() - 1;
       vbox->insertWidget(slotIdx, b);
       vbox->insertWidget(slotIdx+1, sa, 1000);
       b->setId(slotIdx);
-      connect(b, SIGNAL(deletePalette(int)), SLOT(deletePalette(int)));
+      connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
       connect(w, SIGNAL(changed()), SLOT(setDirty()));
 
       if (w->drumPalette()) {
@@ -921,22 +925,93 @@ void PaletteBox::addPalette(const QString& s, Palette* w)
       }
 
 //---------------------------------------------------------
-//   deletePalette
+//   paletteCmd
 //---------------------------------------------------------
 
-void PaletteBox::deletePalette(int slot)
+void PaletteBox::paletteCmd(int cmd, int slot)
       {
       QLayoutItem* item = vbox->itemAt(slot);
-      vbox->removeItem(item);
-      item->widget()->deleteLater();      // this is the button widget
-      delete item;
-      item = vbox->itemAt(slot);
-      vbox->removeItem(item);
-      delete item->widget();
-      delete item;
+      PaletteBoxButton* b = static_cast<PaletteBoxButton*>(item->widget());
 
-      for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
-            static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+      switch(cmd) {
+            case PALETTE_DELETE:
+                  {
+                  vbox->removeItem(item);
+                  b->deleteLater();      // this is the button widget
+                  delete item;
+                  item = vbox->itemAt(slot);
+                  vbox->removeItem(item);
+                  delete item->widget();
+                  delete item;
+                  for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+                        static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+                  }
+                  break;
+            case PALETTE_NEW:
+                  {
+                  Palette* p = new Palette;
+                  PaletteScrollArea* sa = new PaletteScrollArea(p);
+                  PaletteBoxButton* b   = new PaletteBoxButton(sa);
+                  sa->setVisible(false);
+                  p->setName("new Palette");
+                  b->setText(p->name());
+                  vbox->insertWidget(slot, b);
+                  vbox->insertWidget(slot+1, sa, 1000);
+                  connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
+                  connect(p, SIGNAL(changed()), SLOT(setDirty()));
+                  for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+                        static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+                  }
+                  // fall through
+
+            case PALETTE_EDIT:
+                  {
+                  PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(slot+1)->widget());
+                  Palette* palette = static_cast<Palette*>(sa->widget());
+                  QLayoutItem* item = vbox->itemAt(slot);
+                  b = static_cast<PaletteBoxButton*>(item->widget());
+
+                  PaletteProperties pp(palette, 0);
+                  int rv = pp.exec();
+                  if (rv == 1) {
+                        _dirty = true;
+                        b->setText(palette->name());
+                        palette->update();
+                        }
+                  }
+                  break;
+            case PALETTE_UP:
+                  if (slot) {
+                        QLayoutItem* i1 = vbox->itemAt(slot);
+                        QLayoutItem* i2 = vbox->itemAt(slot+1);
+                        vbox->removeItem(i1);
+                        vbox->removeItem(i2);
+                        vbox->insertWidget(slot-2, i2->widget());
+                        vbox->insertWidget(slot-2, i1->widget());
+                        delete i1;
+                        delete i2;
+                        for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+                              static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+                        }
+                  break;
+
+            case PALETTE_DOWN:
+                  if (slot < (vbox->count() - 3)) {
+                        QLayoutItem* i1 = vbox->itemAt(slot);
+                        QLayoutItem* i2 = vbox->itemAt(slot+1);
+                        vbox->removeItem(i1);
+                        vbox->removeItem(i2);
+                        vbox->insertWidget(slot+2, i2->widget());
+                        vbox->insertWidget(slot+2, i1->widget());
+                        delete i1;
+                        delete i2;
+                        for (int i = 0; i < (vbox->count() - 1) / 2; ++i)
+                              static_cast<PaletteBoxButton*>(vbox->itemAt(i * 2)->widget())->setId(i*2);
+                        }
+                  break;
+
+            }
+
       _dirty = true;
       }
 
@@ -1037,8 +1112,9 @@ bool PaletteBox::read(QFile* qf)
                         if (tag == "Palette") {
                               Palette* p = new Palette();
                               QString name = ee.attribute("name", "");
+                              p->setName(name);
                               p->read(ee);
-                              addPalette(name, p);
+                              addPalette(p);
                               }
                         else
                               domError(ee);
@@ -1048,4 +1124,34 @@ bool PaletteBox::read(QFile* qf)
       return true;
       }
 
+//---------------------------------------------------------
+//   PaletteProperties
+//---------------------------------------------------------
+
+PaletteProperties::PaletteProperties(Palette* p, QWidget* parent)
+   : QDialog(parent)
+      {
+      palette = p;
+      setupUi(this);
+      name->setText(palette->name());
+      cellWidth->setValue(palette->gridWidth());
+      cellHeight->setValue(palette->gridHeight());
+      showGrid->setChecked(palette->drawGrid());
+      elementOffset->setValue(palette->yOffset());
+      mag->setValue(palette->mag());
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void PaletteProperties::accept()
+      {
+      palette->setName(name->text());
+      palette->setGrid(cellWidth->value(), cellHeight->value());
+      palette->setDrawGrid(showGrid->isChecked());
+      palette->setYOffset(elementOffset->value());
+      palette->setMag(mag->value());
+      QDialog::accept();
+      }
 

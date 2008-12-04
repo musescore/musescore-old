@@ -1,3 +1,12 @@
+4.dec (ws)
+      - fix crash in drum staff note entry mode
+3.dec (ws)
+      - new functions: move palettes up/down; insert new palette
+      - new palette properties dialog
+      - disable script interface for mac os x build
+      - use sys/time.h for mac os x
+      - removed "#include <QtGui/QX11Info>" from all.h
+      - replaced values.h with limits.h in all.h
 2.dec (ws)
       - implement print page range (print from-to)
       - palette elements are now movable via drag/drop; palettes ares saved/restored
