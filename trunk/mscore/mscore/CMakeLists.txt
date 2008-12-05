@@ -92,10 +92,10 @@ QT4_WRAP_CPP (mocs
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
-if (MINGW)
+if (APPLE OR MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
       set (AUDIO pa.cpp pm.cpp)
-else (MINGW)
+else (APPLE OR MINGW)
       set (AUDIO "")
       if (USE_PORTAUDIO)
             set (AUDIO ${AUDIO} pa.cpp)
@@ -107,7 +107,7 @@ else (MINGW)
             set (AUDIO ${AUDIO} alsa.cpp midiseq.cpp rtctimer.cpp
                thread.cpp mididriver.cpp)
       endif (USE_ALSA)
-endif (MINGW)
+endif (APPLE OR MINGW)
 
 add_executable ( mscore
       ${qrc_files}

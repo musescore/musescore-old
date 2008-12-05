@@ -635,10 +635,9 @@ void Score::cmdAddTie()
 
       Tie* tie = new Tie(this);
       tie->setStartNote(note);
-      tie->setEndNote(note);
+      tie->setEndNote(note2);
       tie->setTrack(staffIdx * VOICES);
-      note->setTieFor(tie);
-      _layout->connectTies();
+      undoAddElement(tie);
       layoutAll = true;
       select(tie, SELECT_SINGLE, 0);
       getAction("add-tie")->setChecked(false);

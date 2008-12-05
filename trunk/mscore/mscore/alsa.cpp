@@ -22,9 +22,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <sys/time.h>
-
 #include "config.h"
+
+#ifdef USE_ALSA
+#include <sys/time.h>
 #include "alsa.h"
 #include "score.h"
 #include "mscore.h"
@@ -33,7 +34,6 @@
 #include "alsamidi.h"
 #include "utils.h"
 
-#ifdef USE_ALSA
 //---------------------------------------------------------
 //   AlsaDriver
 //---------------------------------------------------------

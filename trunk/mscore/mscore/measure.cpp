@@ -2989,6 +2989,10 @@ bool Measure::createEndBarLines()
                         changed = true;
                         }
                   bl->setGenerated(_endBarLineGenerated);
+
+                  //TODO: crash when exchange staves in a piano system,
+                  //      staffIdx >= staves
+
                   bl->setSpan(staff->barLineSpan());
                   if (!system()->staff(staffIdx + bl->span() - 1)->show()) {
                         //
@@ -3050,7 +3054,15 @@ void Measure::sortStaves(QList<int>& dst)
                   continue;
             int voice    = e->voice();
             int staffIdx = e->staffIdx();
-            e->setTrack(dst[staffIdx] * VOICES + voice);
+            int idx = dst.indexOf(staffIdx);
+            e->setTrack(idx * VOICES + voice);
+            }
+
+      foreach(Beam* beam, _beams) {
+            int staffIdx = beam->staffIdx();
+            int voice    = beam->voice();
+            int idx = dst.indexOf(staffIdx);
+            beam->setTrack(idx * VOICES + voice);
             }
       }
 

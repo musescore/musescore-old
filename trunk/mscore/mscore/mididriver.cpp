@@ -26,7 +26,6 @@
 
 #include "config.h"
 #include "mididriver.h"
-#include "alsa.h"
 #include "preferences.h"
 #include "mscore.h"
 #include "midifile.h"
@@ -34,7 +33,6 @@
 #include "seq.h"
 #include "midiseq.h"
 #include "utils.h"
-#include "alsamidi.h"
 
 //---------------------------------------------------------
 //   Port
@@ -97,6 +95,9 @@ bool Port::operator<(const Port& p) const
       }
 
 #ifdef USE_ALSA
+#include "alsa.h"
+#include "alsamidi.h"
+
 static const unsigned int inCap  = SND_SEQ_PORT_CAP_SUBS_READ;
 static const unsigned int outCap = SND_SEQ_PORT_CAP_SUBS_WRITE;
 
