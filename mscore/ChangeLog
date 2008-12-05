@@ -1,3 +1,8 @@
+5.dec (ws)
+      - make "add tie" undoable
+      - fix sorting staves
+      - also move beams when sorting staves (as beams are now editable and therefore
+        persistent)
 4.dec (ws)
       - pick right sharp and flat symbols when reading instrument templates
       - fix deleting notes in tuplet
