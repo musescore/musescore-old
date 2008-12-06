@@ -1853,6 +1853,8 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
                         }
                   xml.tag("syllabic", s);
                   xml.tag("text", (*i)->getText());
+                  if((*i)->endTick() > 0)
+                	  xml.tagE("extend");
                   xml.etag();
                   }
             }
