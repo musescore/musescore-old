@@ -1314,6 +1314,7 @@ void Score::cmdTuplet(int n)
             }
 
       int baseLen    = cr->tickLen() / normalNotes;
+
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);

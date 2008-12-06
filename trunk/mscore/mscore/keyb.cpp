@@ -281,10 +281,12 @@ void Score::setPadState(Element* e)
 
       _padState.drumNote = -1;
       _padState.drumset  = 0;
+
       if (e->type() == NOTE) {
             Note* note          = static_cast<Note*>(e);
             Chord* chord        = note->chord();
-            len                 = chord->duration().ticks(chord->dots());
+            len = chord->duration().ticks(chord->dots());
+
             Accidental* prefix  = note->accidental();
             _padState.prefix    = prefix ? prefix->subtype() : 0;
             _padState.rest      = false;
@@ -301,6 +303,7 @@ void Score::setPadState(Element* e)
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
 
+printf("setPadState %p %s len %d\n", e, e->name(), len);
             _padState.prefix   = 0;
             _padState.rest     = true;
             _padState.voice    = rest->voice();
@@ -330,6 +333,7 @@ void Score::setPadState(Element* e)
       Duration d;
       headType(len, &d, &(_padState.dots));
       _padState.len = d.ticks();
+      setPadState();
       }
 
 //---------------------------------------------------------
