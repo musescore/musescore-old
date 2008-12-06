@@ -1382,8 +1382,8 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
             cr->setTuplet(tuplet);
             cr->setTrack(track);
             Note* note = new Note(this);
-            int pitch = getSelectedNote()->pitch();
-            note->setPitch(pitch);
+            note->setPitch(getSelectedNote()->pitch());
+            note->setTpc(getSelectedNote()->tpc());
             note->setTrack(track);
             cr->add(note);
             }
