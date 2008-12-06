@@ -234,10 +234,10 @@ Style defaultStyle = {
       { UP, DOWN, UP, DOWN }, // stem direction in multi voice context
 
       // play style
-      70,               // gateTime
+      85,               // gateTime
       100,              // tenutoGateTime
-      40,               // staccatoGateTime
-      90                // slurGateTime
+      50,               // staccatoGateTime
+      100               // slurGateTime
       };
 
 //---------------------------------------------------------
