@@ -2,6 +2,8 @@
       - retain spelling of source note after creating a tuplet
       - changed gate times for midi rendering (David Bolton)
       - update note duration toolbar after creating a tuplet
+      (la)
+      - add lyrics extension ("extend") musicXML export
 5.dec (ws)
       - make "add tie" undoable
       - fix sorting staves
