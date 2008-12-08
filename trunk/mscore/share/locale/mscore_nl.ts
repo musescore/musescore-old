@@ -159,10 +159,6 @@ p, li { white-space: pre-wrap; }
         <source>Help Lines:</source>
         <translation>Hulplijnen</translation>
     </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -878,7 +874,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dots:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten:</translation>
     </message>
 </context>
 <context>
@@ -993,7 +989,7 @@ failed: </source>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation>Stand.Stem</translation>
+        <translation>Standaard Stem:</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1009,43 +1005,43 @@ failed: </source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished">Snelkoppeling</translation>
+        <translation>Snelkoppeling</translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelkoppeling:</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">G</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>--</source>
-        <translation type="unfinished"></translation>
+        <translation>--</translation>
     </message>
 </context>
 <context>
@@ -3751,7 +3747,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>(2+2)/4 alla breve</source>
-        <translation type="unfinished"></translation>
+        <translation>(2+2)/4 alla breve</translation>
     </message>
     <message>
         <source>Time</source>
@@ -3767,19 +3763,19 @@ Save Current Score?</source>
     </message>
     <message>
         <source>prima volta</source>
-        <translation type="unfinished"></translation>
+        <translation>prima volta</translation>
     </message>
     <message>
         <source>seconda volta</source>
-        <translation type="unfinished"></translation>
+        <translation>seconda volta</translation>
     </message>
     <message>
         <source>terza volta</source>
-        <translation type="unfinished"></translation>
+        <translation>terza volta</translation>
     </message>
     <message>
         <source>seconda volta 2</source>
-        <translation type="unfinished"></translation>
+        <translation>seconda volta 2</translation>
     </message>
     <message>
         <source>8va</source>
@@ -3871,7 +3867,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Segno</source>
-        <translation type="unfinished"></translation>
+        <translation>Segno</translation>
     </message>
     <message>
         <source>Coda</source>
@@ -3879,7 +3875,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>VarCoda</source>
-        <translation type="unfinished"></translation>
+        <translation>VarCoda</translation>
     </message>
     <message>
         <source>Codetta</source>
@@ -3887,35 +3883,35 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine</translation>
     </message>
     <message>
         <source>da Capo</source>
-        <translation type="unfinished"></translation>
+        <translation>da Capo</translation>
     </message>
     <message>
         <source>da Capo al Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>da Capo al Fine</translation>
     </message>
     <message>
         <source>da Capo al Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>da Capo al Coda</translation>
     </message>
     <message>
         <source>D.S al Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S al Coda</translation>
     </message>
     <message>
         <source>D.S al Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S al Fine</translation>
     </message>
     <message>
         <source>D.S</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S</translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>To Coda</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3939,7 +3935,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>start subbeam</source>
-        <translation type="unfinished"></translation>
+        <translation>begin waardestreep</translation>
     </message>
     <message>
         <source>Beam Properties</source>
@@ -4155,11 +4151,11 @@ Save Current Score?</source>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenten Lang</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenten Kort</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
@@ -4466,56 +4462,48 @@ Save Current Score?</source>
         <translation>posities terug zetten</translation>
     </message>
     <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
         <source>no score</source>
-        <translation type="unfinished"></translation>
+        <translation>geen partituur</translation>
     </message>
     <message>
         <source>show inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>toon inspecteur</translation>
     </message>
     <message>
         <source>Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspecteur</translation>
     </message>
     <message>
         <source>file reload</source>
-        <translation type="unfinished"></translation>
+        <translation>bestand herladen</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Herlaad</translation>
     </message>
     <message>
         <source>Reload Score from File</source>
-        <translation type="unfinished"></translation>
+        <translation>Herlaad Partituur van Bestand</translation>
     </message>
     <message>
         <source>note breve</source>
-        <translation type="unfinished"></translation>
+        <translation>noot breve</translation>
     </message>
     <message>
         <source>4/1</source>
-        <translation type="unfinished">4/1</translation>
+        <translation>4/1</translation>
     </message>
     <message>
         <source>2/1</source>
-        <translation type="unfinished">2/1</translation>
+        <translation>2/1</translation>
     </message>
     <message>
         <source>..</source>
-        <translation type="unfinished"></translation>
+        <translation>..</translation>
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation type="unfinished"></translation>
+        <translation>terug zetten uitrekken maat</translation>
     </message>
 </context>
 <context>
@@ -4818,7 +4806,7 @@ Save Current Score?</source>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder Palet</translation>
     </message>
 </context>
 <context>
@@ -5010,11 +4998,11 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Program Start</source>
-        <translation>Programma Start</translation>
+        <translation>Programma Start op met</translation>
     </message>
     <message>
         <source>start with new score</source>
-        <translation>start met een nieuw partituur</translation>
+        <translation>nieuw partituur</translation>
     </message>
     <message>
         <source>...</source>
@@ -5022,15 +5010,15 @@ Save Current Score?</source>
     </message>
     <message>
         <source>start with score:</source>
-        <translation>start met partituur:</translation>
+        <translation>met partituur:</translation>
     </message>
     <message>
         <source>continue last session</source>
-        <translation>continu met laatste sessie</translation>
+        <translation>laatste sessie</translation>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>toon opstartscherm</translation>
+        <translation>laat opstartscherm zien</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -5350,7 +5338,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>build in style</source>
-        <translation>bouwen in stijl</translation>
+        <translation>bouw stijl in</translation>
     </message>
     <message>
         <source>use style file:</source>
@@ -5366,7 +5354,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>screen shot functie</translation>
+        <translation>schermopname functie</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -5382,7 +5370,7 @@ Save Current Score?</source>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation>Zet terug naar Standaard</translation>
+        <translation>Zet terug naar Standaardwaarden</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -5466,35 +5454,35 @@ Save Current Score?</source>
     </message>
     <message>
         <source>start empty</source>
-        <translation type="unfinished"></translation>
+        <translation>leeg blad</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Partituur element kleuren</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard voorgrondkleur</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer kleur voor stem 1</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer kleur voor stem 2</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer kleur voor stem 3</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer kleur voor stem 4</translation>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Op Doel geplaatst element</translation>
     </message>
 </context>
 <context>
@@ -5564,7 +5552,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Laden Paletten mislukt:</translation>
     </message>
 </context>
 <context>
