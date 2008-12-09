@@ -541,8 +541,8 @@ void Score::cmdAddInterval(int val)
       setNoteEntry(true);
       ChordRest* cr = _is.cr;
       int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
-      _is.setPos(_is.pos() + len);
-      emit posChanged(_is.pos());
+//      _is.setPos(_is.pos() + len);
+//      emit posChanged(_is.pos());
 
       Staff* staff = on->staff();
       int key = staff->keymap()->key(on->chord()->tick());
@@ -592,6 +592,7 @@ void Score::cmdAddInterval(int val)
       Note* n = addNote(on->chord(), pitch);
       select(n, SELECT_SINGLE, 0);
       _padState.pitch = n->pitch();
+      _is.setPos(_is.pos() + on->chord()->tickLen());
       }
 
 //---------------------------------------------------------

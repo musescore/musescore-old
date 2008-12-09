@@ -1,4 +1,5 @@
 9.dec (ws)
+      - do not move position when entering interval (alt+num)
       - fix: could not select articulation symbols attached to rests (fermata),
         bounding box calculation of rests included articulations
 8.dec (tb)
