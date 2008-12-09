@@ -36,6 +36,30 @@
 #include "clef.h"
 
 //---------------------------------------------------------
+//   needsStaff
+//    should a staff been drawn if e is used as icon in
+//    a palette
+//---------------------------------------------------------
+
+static bool needsStaff(Element* e)
+      {
+      if (e == 0)
+            return false;
+      switch(e->type()) {
+            case CHORD:
+            case BAR_LINE:
+            case CLEF:
+            case KEYSIG:
+            case TIMESIG:
+            case REST:
+            case ACCIDENTAL:
+                  return true;
+            default:
+                  return false;
+            }
+      }
+
+//---------------------------------------------------------
 //   Palette
 //---------------------------------------------------------
 
@@ -54,12 +78,10 @@ Palette::Palette(QWidget* parent)
       vgrid         = 60;
       _drawGrid     = false;
       _selectable   = false;
-      _readOnly     = true;
       _drumPalette  = false;
       setMouseTracking(true);
       setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-
-      setReadOnly(false);
+      setReadOnly(true);
       }
 
 Palette::~Palette()
@@ -280,14 +302,14 @@ void Palette::leaveEvent(QEvent*)
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::append(Element* s, const QString& name, bool staff)
+void Palette::append(Element* s, const QString& name)
       {
       PaletteCell* cell = new PaletteCell;
 
       cells.append(cell);
       cell->element   = s;
       cell->name      = name;
-      cell->drawStaff = staff;
+      cell->drawStaff = needsStaff(s);
 
       update();
       if (s && s->type() == ICON) {
@@ -298,18 +320,18 @@ void Palette::append(Element* s, const QString& name, bool staff)
             resizeWidth(width());
       }
 
-void Palette::append(int symIdx, bool staff)
+void Palette::append(int symIdx)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
-      append(s, ::symbols[symIdx].name(), staff);
+      append(s, ::symbols[symIdx].name());
       }
 
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
-void Palette::add(int idx, Element* s, const QString& name, bool staff)
+void Palette::add(int idx, Element* s, const QString& name)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -324,7 +346,7 @@ void Palette::add(int idx, Element* s, const QString& name, bool staff)
       cells[idx]      = cell;
       cell->element   = s;
       cell->name      = name;
-      cell->drawStaff = staff;
+      cell->drawStaff = needsStaff(s);
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -574,7 +596,6 @@ void Palette::dropEvent(QDropEvent* event)
                   qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
                   s->setPath(u.path());
                   s->setSize(QSizeF(hgrid / mag, hgrid / mag));
-//                  s->setAnchor(ANCHOR_PARENT);
                   e = s;
                   name = s->path();
                   }
@@ -635,8 +656,7 @@ void Palette::dropEvent(QDropEvent* event)
             if (event->source() == this) {
                   int i = idx(event->pos());
                   if (i == -1) {
-                        append(e, name);
-                        // TODO: delete src cell
+                        cells.append(cells[dragSrcIdx]);
                         cells[dragSrcIdx] = 0;
                         ok = true;
                         }
@@ -682,7 +702,7 @@ void Palette::write(Xml& xml, const QString& name) const
       if (!_drumPalette) {
             int n = cells.size();
             for (int i = 0; i < n; ++i) {
-                  if (cells[i] == 0) {
+                  if (cells[i] == 0 || cells[i]->element == 0) {
                         xml.tagE("Cell");
                         continue;
                         }
@@ -754,7 +774,8 @@ void Palette::read(QDomElement e)
                                           }
                                     if (image) {
                                           image->read(ee);
-                                          append(image, name, drawStaff);
+                                          append(image, name);
+                                          cells.back()->drawStaff = drawStaff;
                                           }
                                     }
                               else {
@@ -763,7 +784,8 @@ void Palette::read(QDomElement e)
                                           domError(ee);
                                     else {
                                           element->read(ee);
-                                          append(element, name, drawStaff);
+                                          append(element, name);
+                                          cells.back()->drawStaff = drawStaff;
                                           }
                                     }
                               }
@@ -789,15 +811,18 @@ void Palette::clear()
 //   PaletteBoxButton
 //---------------------------------------------------------
 
-PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
+PaletteBoxButton::PaletteBoxButton(QWidget* w, Palette* p, QWidget* parent)
    : QToolButton(parent)
       {
+      palette = p;
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
       setFixedHeight(QFontMetrics(font()).height() + 2);
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QMenu* menu = new QMenu;
+      connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));
+
       QAction* action;
 
       action = menu->addAction(tr("Palette Properties"));
@@ -812,10 +837,32 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
       action = menu->addAction(tr("Move Palette Down"));
       connect(action, SIGNAL(triggered()), SLOT(downTriggered()));
 
+      editAction = menu->addAction(tr("Enable Editing"));
+      editAction->setCheckable(true);
+      connect(editAction, SIGNAL(triggered(bool)), SLOT(enableEditing(bool)));
+
       menu->addSeparator();
       action = menu->addAction(tr("Delete Palette"));
       connect(action, SIGNAL(triggered()), SLOT(deleteTriggered()));
       setMenu(menu);
+      }
+
+//---------------------------------------------------------
+//   beforePulldown
+//---------------------------------------------------------
+
+void PaletteBoxButton::beforePulldown()
+      {
+      editAction->setChecked(!palette->readOnly());
+      }
+
+//---------------------------------------------------------
+//   enableEditing
+//---------------------------------------------------------
+
+void PaletteBoxButton::enableEditing(bool val)
+      {
+      palette->setReadOnly(!val);
       }
 
 //---------------------------------------------------------
@@ -906,7 +953,7 @@ int Palette::resizeWidth(int w)
 void PaletteBox::addPalette(Palette* w)
       {
       PaletteScrollArea* sa = new PaletteScrollArea(w);
-      PaletteBoxButton* b   = new PaletteBoxButton(sa);
+      PaletteBoxButton* b   = new PaletteBoxButton(sa, w);
 
       sa->setVisible(false);
       b->setText(w->name());
@@ -951,7 +998,7 @@ void PaletteBox::paletteCmd(int cmd, int slot)
                   {
                   Palette* p = new Palette;
                   PaletteScrollArea* sa = new PaletteScrollArea(p);
-                  PaletteBoxButton* b   = new PaletteBoxButton(sa);
+                  PaletteBoxButton* b   = new PaletteBoxButton(sa, p);
                   sa->setVisible(false);
                   p->setName("new Palette");
                   b->setText(p->name());

@@ -141,7 +141,7 @@ void MuseScore::showPalette(bool visible)
 
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name), true);
+                  sp->append(k, tr(clefTable[i].name));
                   }
             paletteBox->addPalette(sp);
 
@@ -158,16 +158,16 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->append(k, tr(keyNames[i*2]), true);
+                  sp->append(k, tr(keyNames[i*2]));
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]), true);
+                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14], true);
+            sp->append(k, keyNames[14]);
             paletteBox->addPalette(sp);
 
             //-----------------------------------
@@ -179,18 +179,18 @@ void MuseScore::showPalette(bool visible)
             sp->setMag(.8);
             sp->setGrid(42, 38);
 
-      	sp->append(new TimeSig(gscore, 2, 2), "2/2", true);
-      	sp->append(new TimeSig(gscore, 4, 2), "2/4", true);
-      	sp->append(new TimeSig(gscore, 4, 3), "3/4", true);
-      	sp->append(new TimeSig(gscore, 4, 4), "4/4", true);
-      	sp->append(new TimeSig(gscore, 4, 5), "5/4", true);
-      	sp->append(new TimeSig(gscore, 4, 6), "6/4", true);
-      	sp->append(new TimeSig(gscore, 8, 3), "3/8", true);
-      	sp->append(new TimeSig(gscore, 8, 6), "6/8", true);
-      	sp->append(new TimeSig(gscore, 8, 9), "9/8", true);
-      	sp->append(new TimeSig(gscore, 8, 12), "12/8", true);
-      	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"), true);
-      	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"), true);
+      	sp->append(new TimeSig(gscore, 2, 2), "2/2");
+      	sp->append(new TimeSig(gscore, 4, 2), "2/4");
+      	sp->append(new TimeSig(gscore, 4, 3), "3/4");
+      	sp->append(new TimeSig(gscore, 4, 4), "4/4");
+      	sp->append(new TimeSig(gscore, 4, 5), "5/4");
+      	sp->append(new TimeSig(gscore, 4, 6), "6/4");
+      	sp->append(new TimeSig(gscore, 8, 3), "3/8");
+      	sp->append(new TimeSig(gscore, 8, 6), "6/8");
+      	sp->append(new TimeSig(gscore, 8, 9), "9/8");
+      	sp->append(new TimeSig(gscore, 8, 12), "12/8");
+      	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
+      	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("(2+2)/4 alla breve"));
             paletteBox->addPalette(sp);
 
             //-----------------------------------
@@ -217,7 +217,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name, true);
+                  sp->append(b, t[i].name);
                   }
             paletteBox->addPalette(sp);
 
@@ -878,7 +878,7 @@ void MuseScore::clefMenu()
             sp->setGrid(60, 80);
             for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name), true);
+                  sp->append(k, tr(clefTable[i].name));
                   }
             }
       clefPalette->show();
@@ -900,19 +900,19 @@ void MuseScore::keyMenu()
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->append(k, keyNames[i*2], true);
+                  sp->append(k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->append(k, keyNames[(7 + i) * 2 + 1], true);
+                  sp->append(k, keyNames[(7 + i) * 2 + 1]);
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14], true);
+            sp->append(k, keyNames[14]);
             k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14], true);
+            sp->append(k, keyNames[14]);
             }
       keyPalette->show();
       keyPalette->raise();
@@ -1177,7 +1177,7 @@ void MuseScore::barMenu()
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name, true);
+                  sp->append(b, t[i].name);
                   }
             }
       barPalette->show();
@@ -1325,7 +1325,7 @@ void MuseScore::updateDrumset()
                         stem->setLen(Spatium(up ? -3.0 : 3.0));
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
-                        drumPalette->append(chord, drumset->name(pitch), true);
+                        drumPalette->append(chord, drumset->name(pitch));
 
                         ++i;
                         }

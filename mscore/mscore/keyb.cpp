@@ -303,7 +303,6 @@ void Score::setPadState(Element* e)
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
 
-printf("setPadState %p %s len %d\n", e, e->name(), len);
             _padState.prefix   = 0;
             _padState.rest     = true;
             _padState.voice    = rest->voice();

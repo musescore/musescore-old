@@ -1,3 +1,6 @@
+9.dec (ws)
+      - fix: could not select articulation symbols attached to rests (fermata),
+        bounding box calculation of rests included articulations
 8.dec (tb)
       - adjustments to dutch locale
 6.dec (ws)

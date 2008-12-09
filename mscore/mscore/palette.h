@@ -57,6 +57,9 @@ enum PaletteCommand {
 class PaletteBoxButton : public QToolButton {
       Q_OBJECT
 
+      Palette* palette;
+      QAction* editAction;
+
       int id;
 
       virtual void paintEvent(QPaintEvent*);
@@ -68,12 +71,14 @@ class PaletteBoxButton : public QToolButton {
       void upTriggered()         { emit paletteCmd(PALETTE_UP, id);      }
       void downTriggered()       { emit paletteCmd(PALETTE_DOWN, id);    }
       void newTriggered()        { emit paletteCmd(PALETTE_NEW, id);     }
+      void beforePulldown();
+      void enableEditing(bool);
 
    signals:
       void paletteCmd(int, int);
 
    public:
-      PaletteBoxButton(QWidget*, QWidget* parent = 0);
+      PaletteBoxButton(QWidget*, Palette*, QWidget* parent = 0);
       void setId(int v) { id = v; }
       };
 
@@ -180,9 +185,9 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      void append(Element*, const QString& name, bool drawStaff = false);
-      void add(int idx, Element*, const QString& name, bool drawStaff = false);
-      void append(int sym, bool drawStaff = false);
+      void append(Element*, const QString& name);
+      void add(int idx, Element*, const QString& name);
+      void append(int sym);
 
       void setGrid(int, int);
       Element* element(int idx)      { return cells[idx]->element; }
