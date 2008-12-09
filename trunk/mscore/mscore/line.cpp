@@ -373,6 +373,12 @@ void SLine::layout(ScoreLayout* layout)
 void SLine::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
+      if (parent() == 0) {
+            // when used as icon
+            LineSegment* s = segments.front();
+            xml.tag("length", s->pos2().x());
+            return;
+            }
       xml.tag("tick2", _tick2);
 //      xml.tag("track", track());
       //
@@ -436,6 +442,8 @@ bool SLine::readProperties(QDomElement e)
             }
       else if (e.tagName() == "track")
             setTrack(e.text().toInt());
+      else if (e.tagName() == "length")
+            setLen(e.text().toDouble());
       else
             return false;
       return true;

@@ -320,8 +320,8 @@ void Rest::layout(ScoreLayout* l)
 QRectF Rest::bbox() const
       {
       QRectF b = symbols[_sym].bbox(mag());
-      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
-            b |= (*i)->bbox().translated((*i)->pos());
+//      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
+//            b |= (*i)->bbox().translated((*i)->pos());
       return b;
       }
 
