@@ -1727,6 +1727,34 @@ void Measure::removeStaves(int sStaff, int eStaff)
                   s->removeStaff(staff);
                   }
             }
+      foreach(Element* e, _el) {
+            if (e->track() == -1)
+                  continue;
+            int voice = e->voice();
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= eStaff) {
+                  staffIdx -= eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+      foreach(Beam* e, _beams) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= eStaff) {
+                  int voice    = e->voice();
+                  staffIdx -= eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+      foreach(Tuplet* e, _tuplets) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= eStaff) {
+                  int voice    = e->voice();
+                  staffIdx -= eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+      for (int i = 0; i < staves.size(); ++i)
+            staves[i]->lines->setTrack(i * VOICES);
       }
 
 //---------------------------------------------------------
@@ -1735,11 +1763,39 @@ void Measure::removeStaves(int sStaff, int eStaff)
 
 void Measure::insertStaves(int sStaff, int eStaff)
       {
+      foreach(Element* e, _el) {
+            if (e->track() == -1)
+                  continue;
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff) {
+                  int voice = e->voice();
+                  staffIdx += eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+      foreach(Beam* e, _beams) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff) {
+                  int voice    = e->voice();
+                  staffIdx += eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
+      foreach(Tuplet* e, _tuplets) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff) {
+                  int voice    = e->voice();
+                  staffIdx += eStaff - sStaff;
+                  e->setTrack(staffIdx * VOICES + voice);
+                  }
+            }
       for (Segment* s = _first; s; s = s->next()) {
             for (int staff = sStaff; staff < eStaff; ++staff) {
                   s->insertStaff(staff);
                   }
             }
+      for (int i = 0; i < staves.size(); ++i)
+            staves[i]->lines->setTrack(i * VOICES);
       }
 
 //---------------------------------------------------------
@@ -1762,15 +1818,19 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       foreach(Element* e, _el) {
             if (e->track() == -1)
                   continue;
-            int voice = e->voice();
             int staffIdx = e->staffIdx();
-            if (staffIdx >= sStaff && staffIdx < eStaff) {
+            if (staffIdx >= sStaff && staffIdx < eStaff)
                   _score->undoRemoveElement(e);
-                  }
-            else if (staffIdx >= eStaff) {
-                  staffIdx -= eStaff - sStaff;
-                  e->setTrack(staffIdx * VOICES + voice);
-                  }
+            }
+      foreach(Beam* e, _beams) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff && staffIdx < eStaff)
+                  _score->undoRemoveElement(e);
+            }
+      foreach(Tuplet* e, _tuplets) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx >= sStaff && staffIdx < eStaff)
+                  _score->undoRemoveElement(e);
             }
 
       _score->undoOp(UndoOp::RemoveStaves, this, sStaff, eStaff);
@@ -1783,8 +1843,6 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       for (int i = 0; i < staves.size(); ++i)
             staves[i]->lines->setTrack(i * VOICES);
 
-      // BeamList   _beams;
-      // TupletList _tuplets;
       // barLine
       // TODO
       }
@@ -1870,17 +1928,6 @@ void Measure::removeMStaff(MStaff* /*staff*/, int idx)
 //---------------------------------------------------------
 
 void Measure::insertStaff(Staff* staff, int staffIdx)
-      {
-      insertStaff1(staff, staffIdx);
-      Rest* rest = new Rest(score(), tick(), _score->sigmap->ticksMeasure(tick()));
-      rest->setTrack(staffIdx * VOICES);
-      }
-
-//---------------------------------------------------------
-//   insertStaff1
-//---------------------------------------------------------
-
-void Measure::insertStaff1(Staff* staff, int staffIdx)
       {
       for (Segment* s = _first; s; s = s->next())
             s->insertStaff(staffIdx);

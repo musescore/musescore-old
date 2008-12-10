@@ -822,10 +822,8 @@ void Score::removeStaff(Staff* staff)
 //   sortStaves
 //---------------------------------------------------------
 
-void Score::sortStaves(QList<int> dst)
+void Score::sortStaves(QList<int>& dst)
       {
-printf("sort staves\n");
-
       _layout->systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
@@ -850,11 +848,11 @@ printf("sort staves\n");
             }
       foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
-                  Slur* slur    = (Slur*)e;
-                  int staffIdx  = slur->staffIdx();
-                  int voice     = slur->voice();
-                  int staffIdx2 = slur->track() / VOICES;
-                  int voice2    = slur->track() % VOICES;
+                  Slur* slur    = static_cast<Slur*>(e);
+                  int staffIdx  = slur->startElement()->staffIdx();
+                  int voice     = slur->startElement()->voice();
+                  int staffIdx2 = slur->endElement()->staffIdx();
+                  int voice2    = slur->endElement()->voice();
                   slur->setTrack(dst[staffIdx] * VOICES + voice);
                   slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
                   }

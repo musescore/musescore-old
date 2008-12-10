@@ -162,7 +162,6 @@ class Measure : public MeasureBase {
       int snapNote(int tick, const QPointF p, int staff) const;
 
       void insertStaff(Staff*, int staff);
-      void insertStaff1(Staff*, int);
       void insertMStaff(MStaff* staff, int idx);
       void removeMStaff(MStaff* staff, int idx);
 

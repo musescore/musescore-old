@@ -37,5 +37,7 @@ install(FILES
       mscore_cz.ts
       mscore_gl.ts
       mscore_gl.qm
+      mscore_tr.ts
+      mscore_tr.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )

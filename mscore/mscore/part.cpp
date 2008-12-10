@@ -246,8 +246,8 @@ void Part::setStaves(int n)
             for (MeasureBase* mb = _score->layout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = (Measure*)mb;
-                  m->insertStaff1(staff, staffIdx);
+                  Measure* m = static_cast<Measure*>(mb);
+                  m->insertStaff(staff, staffIdx);
                   }
             ++staffIdx;
             }

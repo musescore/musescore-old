@@ -401,7 +401,7 @@ class Score : public QObject {
 
       void addViewer(Viewer* v);
 
-      void undoOp(QList<int>);
+      void undoOp(QList<int>&);
       void undoOp(UndoOp::UndoType type, MeasureBase* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
@@ -529,7 +529,7 @@ class Score : public QObject {
       const QList<Part*>* parts() const  { return &_parts; }
       void appendPart(Part* p);
       void updateStaffIndex();
-      void sortStaves(QList<int> dst);
+      void sortStaves(QList<int>& dst);
       void read(QString name);
 
       void setSpatium(double v);

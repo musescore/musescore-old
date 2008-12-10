@@ -160,6 +160,11 @@
               <string>ru Russian</string>
              </property>
             </item>
+            <item>
+             <property name="text" >
+              <string>tr Turkey</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
@@ -219,6 +224,8 @@
            </widget>
           </item>
          </layout>
+         <zorder>language</zorder>
+         <zorder>restartWarning_2</zorder>
         </widget>
        </item>
        <item row="1" column="0" colspan="2" >

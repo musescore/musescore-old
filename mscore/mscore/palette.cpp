@@ -52,7 +52,7 @@ static bool needsStaff(Element* e)
             case KEYSIG:
             case TIMESIG:
             case REST:
-            case ACCIDENTAL:
+//            case ACCIDENTAL:
                   return true;
             default:
                   return false;

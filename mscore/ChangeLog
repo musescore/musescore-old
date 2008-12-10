@@ -1,4 +1,7 @@
-10.dec (tb)
+10.dec (ws)
+      - fix crash when deleting staff; implement proper beam and tuplet handling
+      - fix page size list in page settings
+      (tb)
       - adding Turkish translation made by halil kirazlı
 9.dec (ws)
       - do not move position when entering interval (alt+num)
