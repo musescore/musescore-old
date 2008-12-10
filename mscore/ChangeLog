@@ -1,3 +1,5 @@
+10.dec (tb)
+      - adding Turkish translation made by halil kirazlı
 9.dec (ws)
       - do not move position when entering interval (alt+num)
       - fix: could not select articulation symbols attached to rests (fermata),
