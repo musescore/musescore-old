@@ -40,8 +40,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Articulation</name>
     <message>
-        <source>Properties...</source>
-        <translation>Свойства...</translation>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2429,10 +2429,6 @@ failed: </source>
         <translation>Кнопки пульта управления</translation>
     </message>
     <message>
-        <source>dot</source>
-        <translation>Точка</translation>
-    </message>
-    <message>
         <source>tie</source>
         <translation>Лига</translation>
     </message>
@@ -2687,34 +2683,6 @@ failed: </source>
     <message>
         <source>B</source>
         <translation>Си</translation>
-    </message>
-    <message>
-        <source>1/1</source>
-        <translation>1/1</translation>
-    </message>
-    <message>
-        <source>1/2</source>
-        <translation>1/2</translation>
-    </message>
-    <message>
-        <source>1/4</source>
-        <translation>1/4</translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation>1/8</translation>
-    </message>
-    <message>
-        <source>1/16</source>
-        <translation>1/16</translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation>1/32</translation>
-    </message>
-    <message>
-        <source>1/64</source>
-        <translation>1/64</translation>
     </message>
     <message>
         <source>rewind to start position</source>
@@ -3357,10 +3325,6 @@ failed: </source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Создать</translation>
-    </message>
-    <message>
         <source>Create new score</source>
         <translation>Создать новую партитуру</translation>
     </message>
@@ -3781,14 +3745,6 @@ failed: </source>
         <translation>Транспозиция</translation>
     </message>
     <message>
-        <source>pad dot dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dot dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>4/4 common time</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3870,11 +3826,6 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore online manual not found at: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The score &quot;%1&quot;contains unsaved data
-Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4222,10 +4173,6 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note Heads</source>
-        <translation>Головки нот</translation>
-    </message>
-    <message>
         <source>Beam Properties</source>
         <translation>Свойства группы</translation>
     </message>
@@ -4506,23 +4453,76 @@ Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>4/1</source>
-        <translation type="unfinished">4/1</translation>
-    </message>
-    <message>
-        <source>2/1</source>
-        <translation type="unfinished">2/1</translation>
-    </message>
-    <message>
-        <source>..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>reset measure stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save changes to the score &quot;%1&quot;
+before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Ноты</translation>
+    </message>
+    <message>
+        <source>NoteHeads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4703,13 +4703,6 @@ Save Current Score?</source>
     </message>
 </context>
 <context>
-    <name>NotePalette</name>
-    <message>
-        <source>Notes</source>
-        <translation>Ноты</translation>
-    </message>
-</context>
-<context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
@@ -4825,6 +4818,61 @@ Save Current Score?</source>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteProperties</name>
+    <message>
+        <source>MuseScore: Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cell Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>w:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4965,10 +5013,6 @@ Save Current Score?</source>
         <translation>Выберите фон рабочего поля</translation>
     </message>
     <message>
-        <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
-        <translation>Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
-    </message>
-    <message>
         <source>Choose Synthesizer Sound Font</source>
         <translation>Выберите Sound Font для синтезатора</translation>
     </message>
@@ -5003,6 +5047,10 @@ Save Current Score?</source>
     <message>
         <source>default</source>
         <translation type="unfinished">По умолчанию</translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5503,6 +5551,10 @@ Save Current Score?</source>
         <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5744,10 +5796,6 @@ please select a measure and try again</source>
         <translation>Файл PDF (*.pdf)</translation>
     </message>
     <message>
-        <source>Postscript File (*.ps)</source>
-        <translation>Файл Postscript (*.ps)</translation>
-    </message>
-    <message>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>PNG Bitmap Graphic (*.png)</translation>
     </message>
@@ -5800,6 +5848,10 @@ please select a measure and try again</source>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
         <translation>Ничего не выделено. Транспонировать всю партитуру?</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6040,8 +6092,8 @@ please select a measure and try again</source>
 <context>
     <name>StaffText</name>
     <message>
-        <source>Properties...</source>
-        <translation>Свойства...</translation>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6169,8 +6221,8 @@ please select a measure and try again</source>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <source>Properties...</source>
-        <translation>Свойства...</translation>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -33,8 +33,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Articulation</name>
     <message>
-        <source>Properties...</source>
-        <translation>Eigenschappen</translation>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -158,6 +158,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Help Lines:</source>
         <translation>Hulplijnen</translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2399,10 +2403,6 @@ failed: </source>
         <translation>nieuw bestand</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Nieuw</translation>
-    </message>
-    <message>
         <source>Create new score</source>
         <translation>Creëer een nieuw Partituur</translation>
     </message>
@@ -3107,72 +3107,32 @@ failed: </source>
         <translation>noteer 1/1 noot</translation>
     </message>
     <message>
-        <source>1/1</source>
-        <translation>1/1</translation>
-    </message>
-    <message>
         <source>pad note 1/2</source>
         <translation>noteer 1/2 noot</translation>
-    </message>
-    <message>
-        <source>1/2</source>
-        <translation>1/2</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
         <translation>noteer 1/4 noot</translation>
     </message>
     <message>
-        <source>1/4</source>
-        <translation>1/4</translation>
-    </message>
-    <message>
         <source>pad note 1/8</source>
         <translation>noteer 1/8 noot</translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation>1/8</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
         <translation>noteer 1/16 noot</translation>
     </message>
     <message>
-        <source>1/16</source>
-        <translation>1/16</translation>
-    </message>
-    <message>
         <source>pad note 1/32</source>
         <translation>noteer 1/32 noot</translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation>1/32</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
         <translation>noteer 1/64 noot</translation>
     </message>
     <message>
-        <source>1/64</source>
-        <translation>1/64</translation>
-    </message>
-    <message>
         <source>pad dot</source>
         <translation>polster punt</translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation>punt</translation>
-    </message>
-    <message>
-        <source>pad dot dot</source>
-        <translation>polster punt punt</translation>
-    </message>
-    <message>
-        <source>dot dot</source>
-        <translation>dubbele punt</translation>
     </message>
     <message>
         <source>pad tie</source>
@@ -3653,11 +3613,6 @@ Toonhoogte</translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>The score &quot;%1&quot;contains unsaved data
-Save Current Score?</source>
-        <translation>The score &quot;%1&quot;contains unsaved dataHuidige document opslaan?</translation>
-    </message>
-    <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: Laad Partituur</translation>
     </message>
@@ -3852,10 +3807,6 @@ Save Current Score?</source>
     <message>
         <source>string number %1</source>
         <translation>snaar nummer %1</translation>
-    </message>
-    <message>
-        <source>Note Heads</source>
-        <translation>Notenhoofden</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -4490,20 +4441,81 @@ Save Current Score?</source>
         <translation>noot breve</translation>
     </message>
     <message>
-        <source>4/1</source>
-        <translation>4/1</translation>
-    </message>
-    <message>
-        <source>2/1</source>
-        <translation>2/1</translation>
-    </message>
-    <message>
-        <source>..</source>
-        <translation>..</translation>
-    </message>
-    <message>
         <source>reset measure stretch</source>
         <translation>terug zetten uitrekken maat</translation>
+    </message>
+    <message>
+        <source>Save changes to the score &quot;%1&quot;
+before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NoteHeads</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4684,13 +4696,6 @@ Save Current Score?</source>
     </message>
 </context>
 <context>
-    <name>NotePalette</name>
-    <message>
-        <source>Notes</source>
-        <translation>Voorslag Noten</translation>
-    </message>
-</context>
-<context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
@@ -4807,6 +4812,61 @@ Save Current Score?</source>
     <message>
         <source>Delete Palette</source>
         <translation>Verwijder Palet</translation>
+    </message>
+    <message>
+        <source>Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteProperties</name>
+    <message>
+        <source>MuseScore: Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Cell Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>w:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4958,10 +5018,6 @@ Save Current Score?</source>
         <translation>Kies Synthesizer Sound Font</translation>
     </message>
     <message>
-        <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Choose WorkingDirectory</source>
         <translation>Kies Werkmap</translation>
     </message>
@@ -4984,6 +5040,10 @@ Save Current Score?</source>
     <message>
         <source>default</source>
         <translation>standaard</translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5484,6 +5544,10 @@ Save Current Score?</source>
         <source>Drop Target</source>
         <translation>Op Doel geplaatst element</translation>
     </message>
+    <message>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5718,10 +5782,6 @@ failed: </source>
         <translation>PDF Bestand (*.pdf)</translation>
     </message>
     <message>
-        <source>Postscript File (*.ps)</source>
-        <translation>Postscript Bestand (*.ps)</translation>
-    </message>
-    <message>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>PNG Bitmap Grafisch (*.png)</translation>
     </message>
@@ -5782,6 +5842,10 @@ failed: </source>
     <message>
         <source>MuseScore: Save a Copy</source>
         <translation>MuseScore: Sla een kopie op</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6022,8 +6086,8 @@ failed: </source>
 <context>
     <name>StaffText</name>
     <message>
-        <source>Properties...</source>
-        <translation>Eigenschappen</translation>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6151,8 +6215,8 @@ failed: </source>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <source>Properties...</source>
-        <translation>Eigenschappen</translation>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

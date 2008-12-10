@@ -32,8 +32,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Articulation</name>
     <message>
-        <source>Properties...</source>
-        <translation type="unfinished">Eigenschaften...</translation>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3095,64 +3095,32 @@ fehlgeschlagen: </translation>
         <translation>Pad 1/1 Note</translation>
     </message>
     <message>
-        <source>1/1</source>
-        <translation>1/1</translation>
-    </message>
-    <message>
         <source>pad note 1/2</source>
         <translation>Pad 1/2 Note</translation>
-    </message>
-    <message>
-        <source>1/2</source>
-        <translation>1/2</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
         <translation>Pad 1/4 Note</translation>
     </message>
     <message>
-        <source>1/4</source>
-        <translation>1/4</translation>
-    </message>
-    <message>
         <source>pad note 1/8</source>
         <translation>Pad 1/8 Note</translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation>1/8</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
         <translation>Pad 1/16 Note</translation>
     </message>
     <message>
-        <source>1/16</source>
-        <translation>1/16</translation>
-    </message>
-    <message>
         <source>pad note 1/32</source>
         <translation>Pad 1/32 Note</translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation>1/32</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
         <translation>Pad 1/64 Note</translation>
     </message>
     <message>
-        <source>1/64</source>
-        <translation>1/64</translation>
-    </message>
-    <message>
         <source>pad dot</source>
         <translation>Pad Punkt</translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation>Punkt</translation>
     </message>
     <message>
         <source>pad tie</source>
@@ -3333,10 +3301,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>Close</source>
         <translation>Schließen</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Neu</translation>
     </message>
     <message>
         <source>Create new score</source>
@@ -3775,14 +3739,6 @@ fehlgeschlagen: </translation>
         <translation>Transponieren</translation>
     </message>
     <message>
-        <source>pad dot dot</source>
-        <translation>Pad Punkt Punkt</translation>
-    </message>
-    <message>
-        <source>dot dot</source>
-        <translation>Puntk Punkt</translation>
-    </message>
-    <message>
         <source>4/4 common time</source>
         <translation>4/4</translation>
     </message>
@@ -3865,12 +3821,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>MuseScore online manual not found at: </source>
         <translation>MuseScore Online-Handbuch nicht gefunden unter:</translation>
-    </message>
-    <message>
-        <source>The score &quot;%1&quot;contains unsaved data
-Save Current Score?</source>
-        <translation>Die Partitur &quot;%1&quot; enthält ungesicherte Daten!
-Aktuelle Partitur sichern? </translation>
     </message>
     <message>
         <source>15ma</source>
@@ -4197,10 +4147,6 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note Heads</source>
-        <translation>Notenköpfe</translation>
-    </message>
-    <message>
         <source>Beam Properties</source>
         <translation>Balken</translation>
     </message>
@@ -4501,23 +4447,76 @@ Aktuelle Partitur sichern? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>4/1</source>
-        <translation type="unfinished">4/1</translation>
-    </message>
-    <message>
-        <source>2/1</source>
-        <translation type="unfinished">2/1</translation>
-    </message>
-    <message>
-        <source>..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>reset measure stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save changes to the score &quot;%1&quot;
+before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Noten</translation>
+    </message>
+    <message>
+        <source>NoteHeads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4698,13 +4697,6 @@ Aktuelle Partitur sichern? </translation>
     </message>
 </context>
 <context>
-    <name>NotePalette</name>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished">Noten</translation>
-    </message>
-</context>
-<context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
@@ -4820,6 +4812,61 @@ Aktuelle Partitur sichern? </translation>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteProperties</name>
+    <message>
+        <source>MuseScore: Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Name:</translation>
+    </message>
+    <message>
+        <source>Cell Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>w:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4960,10 +5007,6 @@ Aktuelle Partitur sichern? </translation>
         <translation>Wähle Hintergrundtapete</translation>
     </message>
     <message>
-        <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
-        <translation>Soundfonts (*.sf2 *.SF2);;All(*)</translation>
-    </message>
-    <message>
         <source>Choose Synthesizer Sound Font</source>
         <translation>Wähle Soundfont für Synthesizer</translation>
     </message>
@@ -4998,6 +5041,10 @@ Aktuelle Partitur sichern? </translation>
     <message>
         <source>default</source>
         <translation type="unfinished">standard</translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5499,6 +5546,10 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5743,10 +5794,6 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation type="unfinished">PDF-Datei (*.pdf)</translation>
     </message>
     <message>
-        <source>Postscript File (*.ps)</source>
-        <translation type="unfinished">Postscript-Datei (*.ps)</translation>
-    </message>
-    <message>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation type="unfinished">PNG Bitmap Grafik (*.png)</translation>
     </message>
@@ -5794,6 +5841,10 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6035,8 +6086,8 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
 <context>
     <name>StaffText</name>
     <message>
-        <source>Properties...</source>
-        <translation type="unfinished">Eigenschaften...</translation>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6164,8 +6215,8 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <source>Properties...</source>
-        <translation>Eigenschaften...</translation>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1475,16 +1475,21 @@ int main(int argc, char* argv[])
       QTranslator translator;
       QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
       if (debugMode)
-            cout << "load translator <" << lp << ">\n";
+            printf("load translator <%s>\n", qPrintable(lp));
 
       if (!translator.load(lp) && debugMode)
-            cout << "load translatro <" << lp << "> failed\n";
+            printf("load translator <%s> failed\n", qPrintable(lp));
 
       app.installTranslator(&translator);
 
       QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-      QTranslator qtTranslator(0);
-      qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir);
+      QTranslator qtTranslator;
+      if (debugMode)
+            printf("load translator <qt_%s>\n", qPrintable(localeName));
+
+      if (!qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir))
+            printf("load translator <qt_%s> failed\n", qPrintable(localeName));
+
       app.installTranslator(&qtTranslator);
 
       //

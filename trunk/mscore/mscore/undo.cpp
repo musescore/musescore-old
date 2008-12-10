@@ -299,7 +299,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         removeMeasure(i->measure);
                   break;
             case UndoOp::SortStaves:
-                  sortStaves(i->si);
+                  sortStaves(i->di);
                   break;
             case UndoOp::ToggleInvisible:
                   i->element1->setVisible(!i->element1->visible());
@@ -548,8 +548,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   Volta* volta = (Volta*)i->element1;
                   QList<int> l = volta->endings();
-                  volta->setEndings(i->si);
-                  i->si = l;
+                  volta->setEndings(i->di);
+                  i->di = l;
                   }
                   break;
             case UndoOp::ChangeVoltaText:
@@ -1171,12 +1171,12 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m, int a, int b)
       undoList.back()->push_back(i);
       }
 
-void Score::undoOp(QList<int> si)
+void Score::undoOp(QList<int>& di)
       {
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::SortStaves;
-      i.si   = si;
+      i.di   = di;
       undoList.back()->push_back(i);
       }
 
@@ -1284,7 +1284,7 @@ void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
       UndoOp i;
       i.type = UndoOp::ChangeVoltaEnding;
       i.element1 = volta;
-      i.si   = l;
+      i.di   = l;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

@@ -136,6 +136,7 @@ void PageSettings::setScore(Score* s)
       sl->setPageFormat(*pf);
       sl->setSpatium(ml->spatium());
 
+      pageGroup->clear();
       for (int i = 0; true; ++i) {
             if (paperSizes[i].name == 0)
                   break;

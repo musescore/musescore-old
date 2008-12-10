@@ -32,8 +32,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Articulation</name>
     <message>
-        <source>Properties...</source>
-        <translation>Propriétés...</translation>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2397,10 +2397,6 @@ echec :</translation>
         <translation>nouveau fichier</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Nouvelle partition</translation>
-    </message>
-    <message>
         <source>Create new score</source>
         <translation>Créer une nouvelle partition</translation>
     </message>
@@ -3053,72 +3049,32 @@ echec :</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/1</source>
-        <translation>1/1</translation>
-    </message>
-    <message>
         <source>pad note 1/2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/2</source>
-        <translation>1/2</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/4</source>
-        <translation>1/4</translation>
-    </message>
-    <message>
         <source>pad note 1/8</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation>1/8</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/16</source>
-        <translation>1/16</translation>
-    </message>
-    <message>
         <source>pad note 1/32</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation>1/32</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1/64</source>
-        <translation>1/64</translation>
-    </message>
-    <message>
         <source>pad dot</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation>point</translation>
-    </message>
-    <message>
-        <source>pad dot dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dot dot</source>
-        <translation>point point</translation>
     </message>
     <message>
         <source>pad tie</source>
@@ -3499,12 +3455,6 @@ echec :</translation>
     <message>
         <source>MuseScore</source>
         <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>The score &quot;%1&quot;contains unsaved data
-Save Current Score?</source>
-        <translation>La partition &quot;%1&quot; contient des données non sauvegardées.
-Sauver cette partition ? </translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -4195,10 +4145,6 @@ Sauver cette partition ? </translation>
         <translation>Percussions</translation>
     </message>
     <message>
-        <source>Note Heads</source>
-        <translation>Têtes de note</translation>
-    </message>
-    <message>
         <source>Beam Properties</source>
         <translation>Accroches</translation>
     </message>
@@ -4499,23 +4445,76 @@ Sauver cette partition ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>4/1</source>
-        <translation type="unfinished">4/1</translation>
-    </message>
-    <message>
-        <source>2/1</source>
-        <translation type="unfinished">2/1</translation>
-    </message>
-    <message>
-        <source>..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>reset measure stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save changes to the score &quot;%1&quot;
+before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Notes</translation>
+    </message>
+    <message>
+        <source>NoteHeads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4696,13 +4695,6 @@ Sauver cette partition ? </translation>
     </message>
 </context>
 <context>
-    <name>NotePalette</name>
-    <message>
-        <source>Notes</source>
-        <translation>Notes</translation>
-    </message>
-</context>
-<context>
     <name>PageBase</name>
     <message>
         <source>Form</source>
@@ -4818,6 +4810,61 @@ Sauver cette partition ? </translation>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Palette Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteProperties</name>
+    <message>
+        <source>MuseScore: Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nom :</translation>
+    </message>
+    <message>
+        <source>Cell Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>w:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4970,10 +5017,6 @@ Sauver cette partition ? </translation>
         <translation>Choisir une SoundFont pour le synthétiseur</translation>
     </message>
     <message>
-        <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
-        <translation>Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
-    </message>
-    <message>
         <source>Choose WorkingDirectory</source>
         <translation>Choisir un répertoire de travail</translation>
     </message>
@@ -4996,6 +5039,10 @@ Sauver cette partition ? </translation>
     <message>
         <source>default</source>
         <translation type="unfinished">defaut</translation>
+    </message>
+    <message>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5496,6 +5543,10 @@ Sauver cette partition ? </translation>
         <source>Drop Target</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5740,10 +5791,6 @@ echec</translation>
         <translation>Fichier PDF  (*.pdf)</translation>
     </message>
     <message>
-        <source>Postscript File (*.ps)</source>
-        <translation>Fichier Postscript (*.ps)</translation>
-    </message>
-    <message>
         <source>PNG Bitmap Graphic (*.png)</source>
         <translation>PNG Bitmap Graphic (*.png)</translation>
     </message>
@@ -5791,6 +5838,10 @@ echec</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6032,8 +6083,8 @@ echec</translation>
 <context>
     <name>StaffText</name>
     <message>
-        <source>Properties...</source>
-        <translation>Propriétés...</translation>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6161,8 +6212,8 @@ echec</translation>
 <context>
     <name>TextLineSegment</name>
     <message>
-        <source>Properties...</source>
-        <translation>Propriétés...</translation>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

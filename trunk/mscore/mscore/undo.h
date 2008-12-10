@@ -103,7 +103,7 @@ struct UndoOp {
       System* system;
       MeasureBase* measure;
       Segment* segment;
-      QList<int> si;
+      QList<int> di;
       int val1, val2, val3, val4;
       QColor color;
       SigEvent sig1, sig2;
