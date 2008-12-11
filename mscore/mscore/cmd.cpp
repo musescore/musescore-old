@@ -539,8 +539,8 @@ void Score::cmdAddInterval(int val)
             return;
 
       setNoteEntry(true);
-      ChordRest* cr = _is.cr;
-      int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
+//      ChordRest* cr = _is.cr;
+//      int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
 //      _is.setPos(_is.pos() + len);
 //      emit posChanged(_is.pos());
 
@@ -1601,8 +1601,16 @@ void Score::addArticulation(Element* el, Articulation* atr)
 void Score::toggleInvisible(Element* obj)
       {
       obj->setVisible(!obj->visible());
+      obj->setGenerated(false);
       undoOp(UndoOp::ToggleInvisible, obj);
       refresh |= obj->abbox();
+      if (obj->type() == BAR_LINE) {
+            Element* e = obj->parent();
+            if (e->type() == SEGMENT && e->subtype() == Segment::SegEndBarLine) {
+                  Measure* m = static_cast<Segment*>(e)->measure();
+                  m->setEndBarLineType(obj->subtype(), false, obj->visible(), obj->color());
+                  }
+            }
       }
 
 //---------------------------------------------------------

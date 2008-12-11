@@ -99,6 +99,8 @@ class Measure : public MeasureBase {
 
       int _endBarLineType;
       bool _endBarLineGenerated;
+      bool _endBarLineVisible;
+      QColor _endBarLineColor;
 
       void push_back(Segment* e);
       void push_front(Segment* e);
@@ -195,7 +197,7 @@ class Measure : public MeasureBase {
       Segment* createSegment(Segment::SegmentType st, int t);
 
       bool createEndBarLines();
-      void setEndBarLineType(int val, bool g);
+      void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
       int endBarLineType() const { return _endBarLineType; }
       bool setStartRepeatBarLine(bool);
       bool endBarLineGenerated() const { return _endBarLineGenerated; }

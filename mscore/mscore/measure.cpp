@@ -2544,8 +2544,7 @@ void Measure::read(QDomElement e, int idx)
                         s->add(barLine);
                         }
                   else {
-                        setEndBarLineType(barLine->subtype(), false);
-                        _endBarLineGenerated = false;
+                        setEndBarLineType(barLine->subtype(), false, barLine->visible(), barLine->color());
                         delete barLine;
                         }
                   }
@@ -3036,6 +3035,8 @@ bool Measure::createEndBarLines()
                         changed = true;
                         }
                   bl->setGenerated(_endBarLineGenerated);
+                  bl->setVisible(_endBarLineVisible);
+                  bl->setColor(_endBarLineColor);
 
                   //TODO: crash when exchange staves in a piano system,
                   //      staffIdx >= staves
@@ -3063,10 +3064,12 @@ bool Measure::createEndBarLines()
 //   setEndBarLineType
 //---------------------------------------------------------
 
-void Measure::setEndBarLineType(int val, bool g)
+void Measure::setEndBarLineType(int val, bool g, bool visible, QColor color)
       {
-      _endBarLineType = val;
+      _endBarLineType      = val;
       _endBarLineGenerated = g;
+      _endBarLineVisible   = visible;
+      _endBarLineColor     = color;
       }
 
 //---------------------------------------------------------

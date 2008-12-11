@@ -233,13 +233,8 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(false);
 
-#if 1
       QAction* a = popup->addAction(obj->userName());
       a->setEnabled(false);
-#else
-      QAction* a = popup->addSeparator();
-      a->setText(obj->userName());
-#endif
 
       popup->addAction(getAction("cut"));
       popup->addAction(getAction("copy"));
