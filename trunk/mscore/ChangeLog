@@ -1,3 +1,5 @@
+11.dec (ws)
+      - fix visible attribute of bar line
 10.dec (ws)
       - fix crash when deleting staff; implement proper beam and tuplet handling
       - fix page size list in page settings

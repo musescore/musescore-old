@@ -246,13 +246,9 @@ void BarLine::draw(QPainter& p) const
 
 void BarLine::write(Xml& xml) const
       {
-      if (subtype() == NORMAL_BAR)
-            xml.tagE("BarLine");
-      else {
-            xml.stag("BarLine");
-            Element::writeProperties(xml);
-            xml.etag();
-            }
+      xml.stag("BarLine");
+      Element::writeProperties(xml);
+      xml.etag();
       }
 
 //---------------------------------------------------------

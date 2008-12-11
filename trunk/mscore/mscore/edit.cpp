@@ -1457,8 +1457,16 @@ void Score::colorItem(Element* element)
             if (e->color() != c) {
                   QColor color = e->color();
                   e->setColor(c);
+                  e->setGenerated(false);
                   undoOp(UndoOp::ChangeColor, e, color);
                   refresh |= e->abbox();
+                  if (e->type() == BAR_LINE) {
+                        Element* ep = e->parent();
+                        if (ep->type() == SEGMENT && ep->subtype() == Segment::SegEndBarLine) {
+                              Measure* m = static_cast<Segment*>(ep)->measure();
+                              m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
+                              }
+                        }
                   }
             }
       sel->deselectAll(this);
