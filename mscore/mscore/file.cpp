@@ -1329,7 +1329,14 @@ void Score::checkTuplets()
 
 void Score::printFile()
       {
-      pdev->setPageSize(paperSizes[pageFormat()->size].qtsize);
+      pdev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
+printf("paper size %d\n", pdev->paperSize());
+
+      if (pdev->paperSize() == QPrinter::Custom) {
+            pdev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
+               QPrinter::Inch);
+            printf("paper size %f %f\n", pageFormat()->_width, pageFormat()->_height);
+            }
       pdev->setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       pdev->setCreator("MuseScore Version: " VERSION);
       pdev->setFullPage(true);
