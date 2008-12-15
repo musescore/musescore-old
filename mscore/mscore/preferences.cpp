@@ -33,6 +33,7 @@
 #include "sym.h"
 #include "palette.h"
 #include "pa.h"
+#include "page.h"
 
 extern void writeShortcuts();
 extern void readShortcuts();
@@ -174,8 +175,14 @@ void Preferences::init()
       applicationFont          = "";
       style                    = "";
 
-      replaceCopyrightSymbol = true;
-      replaceFractions = true;
+      replaceCopyrightSymbol  = true;
+      replaceFractions        = true;
+
+      paperSize               = QPrinter::A4;     // default paper size
+      paperWidth              = 1.0;
+      paperHeight             = 1.0;
+      landscape               = false;
+      twosided                = true;
       };
 
 //---------------------------------------------------------
@@ -260,6 +267,11 @@ void Preferences::write()
 
       s.setValue("replaceFractions", replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
+      s.setValue("paperSize", paperSize);
+      s.setValue("paperWidth", paperWidth);
+      s.setValue("paperHeight", paperHeight);
+      s.setValue("landscape", landscape);
+      s.setValue("twosided", twosided);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -347,6 +359,11 @@ void Preferences::read()
 
       replaceFractions = s.value("replaceFractions", true).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", true).toBool();
+      paperSize              = QPrinter::PageSize(s.value("paperSize", QPrinter::A4).toInt());
+      paperWidth             = s.value("paperWidth", 1.0).toDouble();
+      paperHeight            = s.value("paperHeight", 1.0).toDouble();
+      landscape              = s.value("landscape", false).toBool();
+      twosided               = s.value("twosided", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -432,6 +449,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(useMidiOutput, SIGNAL(clicked()), SLOT(useMidiOutputClicked()));
       connect(useSynthesizer, SIGNAL(clicked()), SLOT(useSynthesizerClicked()));
       connect(resetToDefault, SIGNAL(clicked()), SLOT(resetAllValues()));
+
+      connect(paperHeight, SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
+      connect(paperWidth,  SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
       }
 
 //---------------------------------------------------------
@@ -593,6 +613,44 @@ void PreferenceDialog::updateValues(Preferences* p)
       enableMidiInput->setEnabled(false);
       rcGroup->setEnabled(false);
 #endif
+      pageGroup->clear();
+      for (int i = 0; true; ++i) {
+            if (paperSizes[i].name == 0)
+                  break;
+            pageGroup->addItem(QString(paperSizes[i].name));
+            }
+      //
+      // score settings
+      //
+      bool mm = true;
+      const char* suffix = mm ? "mm" : "in";
+      pageGroup->setCurrentIndex(p->paperSize);
+      paperWidth->setSuffix(suffix);
+      paperHeight->setSuffix(suffix);
+      paperWidth->blockSignals(true);
+      paperHeight->blockSignals(true);
+
+      double pw = p->paperWidth;
+      double ph = p->paperHeight;
+      if (p->paperSize != QPrinter::Custom) {
+            pw = paperSizes[p->paperSize].w;
+            ph = paperSizes[p->paperSize].h;
+            }
+      if (p->landscape) {
+            paperWidth->setValue(pw * INCH);
+            paperHeight->setValue(pw * INCH);
+            }
+      else {
+            paperWidth->setValue(pw * INCH);
+            paperHeight->setValue(ph * INCH);
+            }
+
+      paperWidth->blockSignals(false);
+      paperHeight->blockSignals(false);
+
+      twosided->setChecked(p->twosided);
+      landscape->setChecked(p->landscape);
+
       sfChanged = false;
       }
 
@@ -934,6 +992,14 @@ void PreferenceDialog::apply()
       preferences.replaceFractions       = replaceFractions->isChecked();
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
 
+      bool mmUnit = true;
+      double f  = mmUnit ? 1.0/INCH : 1.0;
+      preferences.twosided    = twosided->isChecked();
+      preferences.landscape   = landscape->isChecked();
+      preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
+      preferences.paperHeight = paperHeight->value() * f;
+      preferences.paperWidth  = paperWidth->value()  * f;
+
 #if 0
       QString localeName = QLocale::system().name();
       if (localeName != lang) {
@@ -1140,5 +1206,14 @@ void PreferenceDialog::resetAllValues()
             localShortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
       updateSCListView();
+      }
+
+//---------------------------------------------------------
+//   paperSizeChanged
+//---------------------------------------------------------
+
+void PreferenceDialog::paperSizeChanged(double)
+      {
+      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
       }
 

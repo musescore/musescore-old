@@ -102,6 +102,10 @@ struct Preferences {
       QString style;
       bool replaceFractions;
       bool replaceCopyrightSymbol;
+      QPrinter::PageSize paperSize;
+      double paperWidth, paperHeight;     // only valid if paperSize is QPrinter::Custom
+      bool landscape;
+      bool twosided;
 
       bool dirty;
 
@@ -145,6 +149,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void useMidiOutputClicked();
       void useSynthesizerClicked();
       void resetAllValues();
+      void paperSizeChanged(double);
 
    signals:
       void preferencesChanged();

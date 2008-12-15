@@ -1,5 +1,10 @@
-15.dec (tb)
-      - updated dutch translation from Jaap Plaisier 
+15.dec (ws)
+      - use sharp/flat symbols in chord names if "use symbols" for chord names is enabled
+        in style
+      - added page size preference (unfinished)
+      - fixed measure repeat symbol
+      (tb)
+      - updated dutch translation from Jaap Plaisier
 12.dec (ws)
       - fix printing of custom page sizes
       - updated russian translation from Alexandre Prokoudine
