@@ -776,6 +776,8 @@ void Harmony::buildText()
       static const QChar augmented(0x2b);
       static const QChar diminished(0xb0);
       static const QChar halfDiminished(0xf8);
+      static const QChar sharp(0xe10c);
+      static const QChar flat(0xe10d);
 
       if (_rootTpc == INVALID_TPC)
             return;
@@ -790,6 +792,8 @@ void Harmony::buildText()
       QTextCursor cursor(doc());
       cursor.setPosition(0);
       QTextCharFormat f = cursor.charFormat();
+      QTextCharFormat noteSymbolFormat(f);
+      noteSymbolFormat.setFont(QFont("MScore1"));
 
       if (*s == 0)
             return;
@@ -798,16 +802,17 @@ void Harmony::buildText()
       if (s == 0)
             return;
 
+      bool useSymbols = score()->style()->chordNamesUseSymbols;
+
       if ((*s == '#') || (*s == 'b')) {
-#if 1
-            cursor.insertText(QString(*s), f);
-#else
-            cursor.setCharFormat(sf);
-            if (*s == '#')
-                  cursor.insertText(QString(symbols[sharpSym].code()));
-            else
-                  cursor.insertText(QString(symbols[flatSym].code()));
-#endif
+            if (useSymbols)
+                  cursor.insertText(QString(*s), f);
+            else {
+                  if (*s == '#')
+                        cursor.insertText(QString(sharp), noteSymbolFormat);
+                  else
+                        cursor.insertText(QString(flat), noteSymbolFormat);
+                  }
             ++s;
             }
       if (*s == ' ')
@@ -815,7 +820,6 @@ void Harmony::buildText()
 
       QTextCharFormat sf(f);
       sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-      bool useSymbols = score()->style()->chordNamesUseSymbols;
 
       if (*s == 0)
             return;

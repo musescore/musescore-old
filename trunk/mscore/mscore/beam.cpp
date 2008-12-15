@@ -331,23 +331,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   Element* e = segment->element(track);
                   if (e == 0)
                         continue;
-#if 0
-                  // stop beam at clef
-                  if (segment->subtype() == Segment::SegClef) {
-                        if (beam) {
-                              beam->layout1(layout);
-                              beam = 0;
-                              }
-                        if (a1) {
-                              a1->setBeam(0);
-                              a1->layoutStem1(layout);
-                              a1 = 0;
-                              }
+                  if (!e->isChordRest()) {
+                        // can be RepeatMeasure
                         continue;
                         }
-#endif
-//                  if (!e->isChordRest())
-//                        continue;
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();
