@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -34,7 +35,7 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Articulatie Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -161,7 +162,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Noten Attributen:</translation>
     </message>
 </context>
 <context>
@@ -4447,75 +4448,76 @@ Toonhoogte</translation>
     <message>
         <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewaar de wijzigingen van de &quot;%1&quot;
+voor dat u afsluit?</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw...</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation type="unfinished"></translation>
+        <translation>noot longa</translation>
     </message>
     <message>
         <source>Longa</source>
-        <translation type="unfinished"></translation>
+        <translation>Longa</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbele hele noot (twee hele noten)</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hele noot (semibreve)</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
+        <translation>Halve noot (minim)</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwartnoot (crochet)</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtste noot (quaver)</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>16e noot (semiquaver)</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>32e noot (demi-semiquaver)</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>64e noot (semi-demi-semiquaver)</translation>
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt</translation>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>dubbele punt</translation>
     </message>
     <message>
         <source>Double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbele punt</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Noten</translation>
     </message>
     <message>
         <source>NoteHeads</source>
-        <translation type="unfinished"></translation>
+        <translation>Notenkoppen</translation>
     </message>
 </context>
 <context>
@@ -4815,58 +4817,58 @@ before closing?</source>
     </message>
     <message>
         <source>Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Palet Eigenschappen</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw Palet invoegen</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats Palet naar Omhoog</translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats Palet naar Beneden</translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerken Toestaan</translation>
     </message>
 </context>
 <context>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Palet Eigenschappen</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cell Grootte:</translation>
     </message>
     <message>
         <source>w:</source>
-        <translation type="unfinished"></translation>
+        <translation>breed:</translation>
     </message>
     <message>
         <source>h:</source>
-        <translation type="unfinished"></translation>
+        <translation>hoog:</translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Raster Tonen</translation>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Element Compensatie</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal:</translation>
     </message>
 </context>
 <context>
@@ -5043,7 +5045,7 @@ before closing?</source>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFont Bestanden (*.sf2 *.SF2);;All (*)</translation>
     </message>
 </context>
 <context>
@@ -5546,7 +5548,7 @@ before closing?</source>
     </message>
     <message>
         <source>tr Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>tr Turkey</translation>
     </message>
 </context>
 <context>
@@ -5845,7 +5847,7 @@ failed: </source>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation>PostScript File (*.ps)</translation>
     </message>
 </context>
 <context>
@@ -6087,7 +6089,7 @@ failed: </source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Notenbalktekst Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -6216,7 +6218,7 @@ failed: </source>
     <name>TextLineSegment</name>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn Eigenschappen...</translation>
     </message>
 </context>
 <context>
