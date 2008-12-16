@@ -996,7 +996,7 @@ bool Score::loadCompressedMsc(QString name)
                         }
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         QString tag(eee.tagName());
-                        QString val(ee.text());
+                        QString val(eee.text());
 
                         if (tag == "rootfile") {
                               if (rootfile.isEmpty())
