@@ -325,6 +325,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
       for (int track = 0; track < tracks; ++track) {
             ChordRest* a1 = 0;      // start of (potential) beam
             Beam* beam    = 0;
+            Beam* oldBeam = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                         continue;
@@ -392,10 +393,9 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     beamEnd = true;
                                     }
                               }
-                        else if (le->tuplet() != cr->tuplet())
+                        if ((le->tuplet() != cr->tuplet()) || (bm == BEAM_BEGIN)) {
                               beamEnd = true;
-                        else if (bm == BEAM_BEGIN)
-                              beamEnd = true;
+                              }
                         else if (bm != BEAM_MID) {
                               int z, n;
                               _score->sigmap->timesig(cr->tick(), z, n);
@@ -427,10 +427,14 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                               cr->layoutStem1(layout);
                               }
                         else if (a1) {
-                              beam = new Beam(score());
-                              beam->setGenerated(true);
-                              beam->setTrack(track);
-                              add(beam);
+                              beam = a1->beam();
+                              if (beam == 0 || (beam == oldBeam)) {
+                                    beam = new Beam(score());
+                                    beam->setTrack(track);
+                                    beam->setGenerated(true);
+                                    add(beam);
+                                    }
+                              oldBeam = beam;
                               beam->add(a1);
                               beam->add(cr);
                               a1 = 0;
@@ -461,12 +465,13 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                                     }
                               else {
                                     beam = a1->beam();
-                                    if (beam == 0) {
+                                    if (beam == 0 || (beam == oldBeam)) {
                                           beam = new Beam(score());
                                           beam->setGenerated(true);
                                           beam->setTrack(track);
                                           add(beam);
                                           }
+                                    oldBeam = beam;
                                     beam->add(a1);
                                     beam->add(cr);
                                     a1 = 0;

@@ -1,3 +1,6 @@
+16.dec (ws)
+      - fix for autobeamer; "begin beam" did not always work
+      - fix path for embedded images
 15.dec (ws)
       - use sharp/flat symbols in chord names if "use symbols" for chord names is enabled
         in style
@@ -270,7 +273,7 @@
       - fix delete of first key signature
       (olavgun)
       - Lilypond export: mangages pickupbar, and incomplete measures in voices 2-4 (demo: adeste.msc)
-      - Lilypond export: ties 
+      - Lilypond export: ties
 31.10 (ws)
       - save/restore special mag values (PageWidth, DblPage...)
       - more clef fixes
@@ -328,7 +331,7 @@
       - fixed some regressions: crash on copy/paste of tuplets
       - added chords aug7, aug9, aug13 as alternatives for 7+, 9+, 13+
 26.10 (olavgun)
-      - Lilypond export: Better procedure to find correct octave. 
+      - Lilypond export: Better procedure to find correct octave.
       - Lilypond export: Complete separation of voices for recombination in scoreblock, for easier hand-editing of lilypond-file: unresolved issue: prints voices to lilypond-file even if empty. No visual consequences.
 25.10 (ws)
       - fix crash when last measure has a volta and is followed by a horizontal
