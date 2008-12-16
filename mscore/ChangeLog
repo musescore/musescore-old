@@ -5,6 +5,9 @@
       - fixed measure repeat symbol
       (tb)
       - updated dutch translation from Jaap Plaisier
+      (db)
+      - Corrections to promenade and sonata16 demos
+      - Added cornet and flugelhorn to instrument lists
 12.dec (ws)
       - fix printing of custom page sizes
       - updated russian translation from Alexandre Prokoudine
@@ -19,6 +22,8 @@
       - do not move position when entering interval (alt+num)
       - fix: could not select articulation symbols attached to rests (fermata),
         bounding box calculation of rests included articulations
+      (olavgun)
+      - Lilypond export: some improvement to triplets and an octave correction for single note after chord.
 8.dec (tb)
       - adjustments to dutch locale
 6.dec (ws)
@@ -113,6 +118,8 @@
       (sy)
       - update dot state in pad when selecting a note/rest
       - corrected some beaming problems with dotted notes
+      (olavgun)
+      -Lilypond export: Preliminary support for dynamic signs and staff-text
 23.nov (ws)
       - added more accidentals
       (sy)
@@ -261,6 +268,9 @@
       - fix wrong flag position after un-beaming
       - forgot to save dots along with duration type (note head type)
       - fix delete of first key signature
+      (olavgun)
+      - Lilypond export: mangages pickupbar, and incomplete measures in voices 2-4 (demo: adeste.msc)
+      - Lilypond export: ties 
 31.10 (ws)
       - save/restore special mag values (PageWidth, DblPage...)
       - more clef fixes
@@ -317,6 +327,9 @@
       - implemented "delete tuplet"
       - fixed some regressions: crash on copy/paste of tuplets
       - added chords aug7, aug9, aug13 as alternatives for 7+, 9+, 13+
+26.10 (olavgun)
+      - Lilypond export: Better procedure to find correct octave. 
+      - Lilypond export: Complete separation of voices for recombination in scoreblock, for easier hand-editing of lilypond-file: unresolved issue: prints voices to lilypond-file even if empty. No visual consequences.
 25.10 (ws)
       - fix crash when last measure has a volta and is followed by a horizontal
         frame
