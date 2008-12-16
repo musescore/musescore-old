@@ -2,10 +2,10 @@
 <museScore version="1.0">
 
    <Articulation name="staccato">
-      <gateTime>70%</gateTime>
+      <gateTime>85%</gateTime>
       </Articulation>
    <Articulation name="staccato">
-      <gateTime>40%</gateTime>
+      <gateTime>50%</gateTime>
       </Articulation>
    <Articulation name="tenuto">
       <gateTime>100%</gateTime>
@@ -242,6 +242,22 @@
          <short-name>Mt. Tpt.</short-name>
          <channel>
             <program>59</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Cornet</name>
+         <short-name>B<symbol name="flat"/> Cnt.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Flugelhorn</name>
+         <short-name>Flghn.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
             </channel>
          </instrument>
       <instrument>

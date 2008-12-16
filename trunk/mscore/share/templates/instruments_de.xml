@@ -182,6 +182,22 @@
          <midiprogram>59</midiprogram>
          </instrument>
       <instrument>
+         <name>B<symbol name="flat"/> Kornett</name>
+         <short-name>B<symbol name="flat"/> Knt.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Flügelhorn</name>
+         <short-name>Flh.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
          <name>Trombone</name>
          <short-name>Trb.</short-name>
          <clef>4</clef>
