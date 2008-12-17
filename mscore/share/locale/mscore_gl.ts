@@ -5547,6 +5547,22 @@ before closing?</source>
         <source>tr Turkey</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished">Partitura</translation>
+    </message>
+    <message>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two Sided</source>
+        <translation type="unfinished">Dúas caras</translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished">Apaisada</translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>

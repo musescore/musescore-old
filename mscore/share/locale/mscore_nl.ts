@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="nl">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -5549,6 +5548,22 @@ voor dat u afsluit?</translation>
     <message>
         <source>tr Turkey</source>
         <translation>tr Turkey</translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished">Partituur</translation>
+    </message>
+    <message>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two Sided</source>
+        <translation type="unfinished">Dubbelzijdig</translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished">Liggend</translation>
     </message>
 </context>
 <context>

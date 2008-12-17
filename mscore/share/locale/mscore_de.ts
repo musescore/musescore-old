@@ -5550,6 +5550,22 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>tr Turkey</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two Sided</source>
+        <translation type="unfinished">Zweiseitig</translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished">Querformat</translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
