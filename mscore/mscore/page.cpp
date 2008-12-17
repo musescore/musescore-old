@@ -269,7 +269,9 @@ void Page::collectElements(QList<const Element*>& el) const
 
 PageFormat::PageFormat()
       {
-      size             = 0;   // A4
+      size             = preferences.paperSize;
+      _width           = preferences.paperWidth;
+      _height          = preferences.paperHeight;
       evenLeftMargin   = 10.0 / INCH;
       evenRightMargin  = 10.0 / INCH;
       evenTopMargin    = 10.0 / INCH;

@@ -100,16 +100,14 @@ MeasureBase* ScoreLayout::last()  const
 ScoreLayout::ScoreLayout(Score* score)
    : Element(score)
       {
-      _spatium     = ::_spatium;
-      _pageFormat  = new PageFormat;
-      _paintDevice = 0;
+      _spatium = ::_spatium;
 
       _systems.clear();
       _pages.clear();
-      _needLayout = false;
-      _pageFormat = new PageFormat;
+      _needLayout  = false;
+      _pageFormat  = new PageFormat;
       _paintDevice = 0;
-      startLayout = 0;
+      startLayout  = 0;
       }
 
 ScoreLayout::~ScoreLayout()

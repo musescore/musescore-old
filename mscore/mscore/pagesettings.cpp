@@ -272,7 +272,6 @@ void PageSettings::mmClicked()
 
 void PageSettings::landscapeToggled(bool flag)
       {
-printf("set landscape %d\n", flag);
       preview->lo()->pageFormat()->landscape = flag;
       preview->layout();
       setValues(preview->lo());

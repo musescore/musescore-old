@@ -1,4 +1,5 @@
 17.dec (ws)
+      - use page size preference when creating new score
       - fix pdf export for scores with custom page sizes
       - fix for page settings / custom page size; also show right width/height after
         change of landscape/portrait
