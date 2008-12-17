@@ -150,6 +150,8 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void useSynthesizerClicked();
       void resetAllValues();
       void paperSizeChanged(double);
+      void pageFormatSelected(int);
+      void landscapeToggled(bool);
 
    signals:
       void preferencesChanged();

@@ -452,6 +452,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       connect(paperHeight, SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
       connect(paperWidth,  SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
+      connect(pageGroup,   SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
+      connect(landscape,   SIGNAL(toggled(bool)), SLOT(landscapeToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -637,7 +639,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             ph = paperSizes[p->paperSize].h;
             }
       if (p->landscape) {
-            paperWidth->setValue(pw * INCH);
+            paperWidth->setValue(ph * INCH);
             paperHeight->setValue(pw * INCH);
             }
       else {
@@ -1216,4 +1218,41 @@ void PreferenceDialog::paperSizeChanged(double)
       {
       pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
       }
+
+//---------------------------------------------------------
+//   landscapeToggled
+//---------------------------------------------------------
+
+void PreferenceDialog::landscapeToggled(bool flag)
+      {
+      }
+
+//---------------------------------------------------------
+//   pageFormatSelected
+//---------------------------------------------------------
+
+void PreferenceDialog::pageFormatSelected(int pf)
+      {
+      paperWidth->blockSignals(true);
+      paperHeight->blockSignals(true);
+
+      double pw = paperWidth->value();
+      double ph = paperHeight->value();
+      if (pf != QPrinter::Custom) {
+            pw = paperSizes[pf].w;
+            ph = paperSizes[pf].h;
+            }
+      if (landscape->isChecked()) {
+            paperWidth->setValue(ph * INCH);
+            paperHeight->setValue(pw * INCH);
+            }
+      else {
+            paperWidth->setValue(pw * INCH);
+            paperHeight->setValue(ph * INCH);
+            }
+
+      paperWidth->blockSignals(false);
+      paperHeight->blockSignals(false);
+      }
+
 
