@@ -1330,8 +1330,6 @@ void Score::checkTuplets()
 void Score::printFile()
       {
       pdev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
-printf("paper size %d\n", pdev->paperSize());
-
       if (pdev->paperSize() == QPrinter::Custom) {
             pdev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
@@ -1421,7 +1419,12 @@ void Score::print(QPrinter* printer)
 bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
       QPrinter p(QPrinter::HighResolution);
-      p.setPageSize(paperSizes[pageFormat()->size].qtsize);
+      p.setPaperSize(paperSizes[pageFormat()->size].qtsize);
+      if (p.paperSize() == QPrinter::Custom) {
+            p.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
+               QPrinter::Inch);
+            }
+
       p.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       p.setCreator("MuseScore Version: " VERSION);
       p.setFullPage(true);
