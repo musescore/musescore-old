@@ -1,3 +1,6 @@
+17.dec (ws)
+      - fix for page settings / custom page size; also show right width/height after
+        change of landscape/portrait
 16.dec (ws)
       - fix for autobeamer; "begin beam" did not always work
       - fix path for embedded images

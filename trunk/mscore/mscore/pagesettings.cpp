@@ -175,6 +175,8 @@ void PageSettings::setValues(ScoreLayout* lo)
       evenPageLeftMargin->blockSignals(true);
       evenPageRightMargin->blockSignals(true);
       spatiumEntry->blockSignals(true);
+      pageWidth->blockSignals(true);
+      pageHeight->blockSignals(true);
 
       const char* suffix = mm ? "mm" : "in";
       oddPageTopMargin->setSuffix(suffix);
@@ -192,8 +194,6 @@ void PageSettings::setValues(ScoreLayout* lo)
       PageFormat* pf = lo->pageFormat();
 
       QString s;
-      pageWidth->blockSignals(true);
-      pageHeight->blockSignals(true);
 
       if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin * INCH);
@@ -207,14 +207,8 @@ void PageSettings::setValues(ScoreLayout* lo)
             evenPageRightMargin->setValue(pf->evenRightMargin * INCH);
 
             spatiumEntry->setValue(lo->spatium()/DPMM);
-            if (pf->landscape) {
-                  pageWidth->setValue(pf->height() * INCH);
-                  pageHeight->setValue(pf->width() * INCH);
-                  }
-            else {
-                  pageWidth->setValue(pf->width() * INCH);
-                  pageHeight->setValue(pf->height()* INCH);
-                  }
+            pageHeight->setValue(pf->height() * INCH);
+            pageWidth->setValue(pf->width() * INCH);
             }
       else {
             oddPageTopMargin->setValue(pf->oddTopMargin);
@@ -228,18 +222,9 @@ void PageSettings::setValues(ScoreLayout* lo)
             evenPageRightMargin->setValue(pf->evenRightMargin);
 
             spatiumEntry->setValue(lo->spatium()/DPI);
-            if (pf->landscape) {
-                  pageWidth->setValue(pf->height());
-                  pageHeight->setValue(pf->width());
-                  }
-            else {
-                  pageWidth->setValue(pf->width());
-                  pageHeight->setValue(pf->height());
-                  }
+            pageWidth->setValue(pf->width());
+            pageHeight->setValue(pf->height());
             }
-      pageWidth->blockSignals(false);
-      pageHeight->blockSignals(false);
-
       evenPageTopMargin->setEnabled(pf->twosided);
       evenPageBottomMargin->setEnabled(pf->twosided);
       evenPageLeftMargin->setEnabled(pf->twosided);
@@ -248,6 +233,8 @@ void PageSettings::setValues(ScoreLayout* lo)
       landscape->setChecked(pf->landscape);
       twosided->setChecked(pf->twosided);
 
+      pageWidth->blockSignals(false);
+      pageHeight->blockSignals(false);
       oddPageTopMargin->blockSignals(false);
       oddPageBottomMargin->blockSignals(false);
       oddPageLeftMargin->blockSignals(false);
@@ -285,6 +272,7 @@ void PageSettings::mmClicked()
 
 void PageSettings::landscapeToggled(bool flag)
       {
+printf("set landscape %d\n", flag);
       preview->lo()->pageFormat()->landscape = flag;
       preview->layout();
       setValues(preview->lo());
@@ -470,16 +458,36 @@ void PageSettings::spatiumChanged(double val)
 //   pageHeightChanged
 //---------------------------------------------------------
 
-void PageSettings::pageHeightChanged(double)
+void PageSettings::pageHeightChanged(double val)
       {
-      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
+      double val2 = pageWidth->value();
+      if (mmUnit) {
+            val /= INCH;
+            val2 /= INCH;
+            }
+      int pf = paperSizeNameToIndex("Custom");
+      pageGroup->setCurrentIndex(pf);
+      preview->lo()->pageFormat()->size = pf;
+      preview->lo()->pageFormat()->_height = val;
+      preview->lo()->pageFormat()->_width = val2;
+      preview->layout();
       }
 
 //---------------------------------------------------------
 //   pageWidthChanged
 //---------------------------------------------------------
 
-void PageSettings::pageWidthChanged(double)
+void PageSettings::pageWidthChanged(double val)
       {
-      pageGroup->setCurrentIndex(paperSizeNameToIndex("Custom"));
+      double val2 = pageHeight->value();
+      if (mmUnit) {
+            val /= INCH;
+            val2 /= INCH;
+            }
+      int pf = paperSizeNameToIndex("Custom");
+      pageGroup->setCurrentIndex(pf);
+      preview->lo()->pageFormat()->size = pf;
+      preview->lo()->pageFormat()->_width = val;
+      preview->lo()->pageFormat()->_height = val2;
+      preview->layout();
       }

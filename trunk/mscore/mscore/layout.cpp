@@ -184,6 +184,7 @@ void ScoreLayout::doLayout()
                   startLayout = 0;
                   return;
                   }
+            startLayout = 0;
             }
 
       if (first() == 0) {
