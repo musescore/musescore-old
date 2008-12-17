@@ -1,21 +1,23 @@
 <!DOCTYPE TS><TS>
+<defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&quot;के बारे में&quot; सूचीपेटी</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">विवरण: ०.९.० 
+</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">संशोधन: ६२८</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -26,102 +28,102 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>सर्वाधिकार १९९९-२००८ वेर्नर स्च्वीर एवं अन्य. नए विवरण और सूचना  हेतु वेबसाइट देखें. GNU सार्वजानिक लाईसेन्स के अधीन प्रकाशित.</translation>
     </message>
 </context>
 <context>
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>आलंकारिक गुणधर्म</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: आलंकारिक गुणधर्म</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रणाल</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Midi कार्य </translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य</translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पृष्ट</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">बार लाइन</translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">सबटाइप  :</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर: ढांचा गुणधर्म</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>गुंजाईश</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">बायें:</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मिमी.</translation>
     </message>
     <message>
         <source>right:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">दाहिने:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे:</translation>
     </message>
 </context>
 <context>
     <name>Canvas</name>
     <message>
         <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">वस्तु  निरीक्षक </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Drumset बनाना/बदलना </translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति गुणधर्म</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">विभाग </translation>
     </message>
 </context>
 <context>
@@ -1456,7 +1458,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1624,40 +1626,40 @@ failed: </source>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मींड गुणधर्म</translation>
     </message>
 </context>
 <context>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: मींड गुणधर्म </translation>
     </message>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ दिखाइए</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>पाठ:</translation>
     </message>
 </context>
 <context>
     <name>GreendotButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation>रिकार्ड</translation>
     </message>
 </context>
 <context>
     <name>HBox</name>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ जोडें </translation>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hबॉक्स गुणधर्म </translation>
     </message>
 </context>
 <context>
@@ -1683,18 +1685,18 @@ failed: </source>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>सामंजस्य गुणधर्म</translation>
     </message>
 </context>
 <context>
     <name>Image</name>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रतिबिंब</translation>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रतिबिंब गुणधर्म</translation>
     </message>
 </context>
 <context>
@@ -1962,7 +1964,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>Frame</source>
@@ -2152,7 +2154,7 @@ failed: </source>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">विभाग गुणधर्म </translation>
     </message>
 </context>
 <context>
@@ -2350,35 +2352,35 @@ failed: </source>
     <name>MuseScore</name>
     <message>
         <source>Symbols1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रतीक1</translation>
     </message>
     <message>
         <source>Symbols3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रतीक3</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">शीर्षक</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">उपशीर्षक</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">संगीतकार</translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कवि/कवयित्री</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">लिरिक्स</translation>
     </message>
     <message>
         <source>Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">अंगुलियों का ढंग</translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
@@ -2410,7 +2412,7 @@ failed: </source>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">सर्वाधिकार</translation>
     </message>
     <message>
         <source>Measure Number</source>
@@ -2602,7 +2604,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -4612,7 +4614,7 @@ before closing?</source>
     <name>Note</name>
     <message>
         <source>Note Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वर गुणधर्म </translation>
     </message>
     <message>
         <source>Tuplet...</source>
@@ -5289,7 +5291,7 @@ before closing?</source>
     </message>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">रिकार्ड</translation>
     </message>
     <message>
         <source>Record</source>
@@ -5544,6 +5546,14 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>hi_IN Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt_BR Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Score</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5632,7 +5642,7 @@ Please select a single note or rest and retry operation
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">रिकार्ड</translation>
     </message>
 </context>
 <context>
@@ -5730,11 +5740,11 @@ Please select a single note or rest and retry operation
     <name>Score</name>
     <message>
         <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: स्थानांतरण</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">आपने कुछ भी चुनाव नहीं किया| क्या संपूर्ण स्वरलिपि का स्थानांतरण करें ?</translation>
     </message>
     <message>
         <source>No staves found:
@@ -6091,26 +6101,26 @@ failed: </source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति पाठ गुणधर्म...</translation>
     </message>
 </context>
 <context>
     <name>StaffTextProperties</name>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: स्वरलिपि पंक्ति पाठ गुणधर्म</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प्रणाल</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Midi कार्य</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य</translation>
     </message>
 </context>
 <context>
@@ -6139,22 +6149,22 @@ failed: </source>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: लय पाठ गुणधर्म</translation>
     </message>
     <message>
         <source>Tempo:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">लय:</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">बीपीऍम </translation>
     </message>
 </context>
 <context>
     <name>TempoText</name>
     <message>
         <source>Tempo Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">लय गुणधर्म</translation>
     </message>
 </context>
 <context>
@@ -6169,7 +6179,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -6723,33 +6733,33 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">जोडें </translation>
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vबॉक्स गुणधर्म </translation>
     </message>
 </context>
 <context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">वोल्टा गुणधर्म</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
+        <translation>पुनःरावृति सूची</translation>
     </message>
 </context>
 <context>
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">वोल्टा गुणधर्म</translation>
     </message>
 </context>
 <context>

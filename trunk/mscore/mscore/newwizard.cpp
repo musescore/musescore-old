@@ -562,6 +562,11 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       sp->setMag(.8);
       sp->setGrid(56, 45);
       sp->setSelectable(true);
+
+      QVBoxLayout* layout = new QVBoxLayout;
+      layout->addWidget(sp);
+      setLayout(layout);
+
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);
             k->setSubtype(i+1);
@@ -577,9 +582,7 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       sp->append(k, keyNames[14]);
       sp->setSelected(14);
 
-      QGridLayout* grid = new QGridLayout;
-      grid->addWidget(sp, 0, 0);
-      setLayout(grid);
+      sp->resizeWidth(300);
       }
 
 //---------------------------------------------------------

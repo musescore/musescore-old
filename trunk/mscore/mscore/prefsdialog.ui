@@ -158,6 +158,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>hi_IN Hindi</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>it Italian</string>
              </property>
             </item>
@@ -169,6 +174,11 @@
             <item>
              <property name="text" >
               <string>pt Portuguese</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>pt_BR Brasilian Portuguese</string>
              </property>
             </item>
             <item>

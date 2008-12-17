@@ -5559,6 +5559,14 @@ before closing?</source>
         <source>Landscape</source>
         <translation type="unfinished">Paisagem</translation>
     </message>
+    <message>
+        <source>hi_IN Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt_BR Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
