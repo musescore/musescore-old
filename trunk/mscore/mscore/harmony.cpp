@@ -236,7 +236,7 @@ void HChord::print() const
 
 void HChord::add(const QList<HDegree>& degreeList)
       {
-printf("HChord::add   ");print();
+// printf("HChord::add   ");print();
       // convert degrees to semitones
       static const int degreeTable[] = {
             // 1  2  3  4  5  6   7
@@ -280,7 +280,7 @@ printf("HChord::add   ");print();
             else
                   printf("degree type %d not supported\n", d.type());
 
-printf("  HCHord::added  "); print();
+// printf("  HCHord::added  "); print();
             }
       }
 
@@ -861,7 +861,21 @@ void Harmony::buildText()
             }
       if (slash) {
             cursor.insertText(QString('/'), f);
-            cursor.insertText(QString(slash), f);
+            cursor.insertText(QString(*slash++), f);
+
+            if ((*slash == '#') || (*slash == 'b')) {
+                  if (useSymbols)
+                        cursor.insertText(QString(*slash), f);
+                  else {
+                        if (*slash == '#')
+                              cursor.insertText(QString(sharp), noteSymbolFormat);
+                        else
+                              cursor.insertText(QString(flat), noteSymbolFormat);
+                        }
+                  ++slash;
+                  }
+            if (*slash)
+                  cursor.insertText(QString(slash), f);
             }
       }
 

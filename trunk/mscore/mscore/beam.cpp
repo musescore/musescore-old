@@ -327,15 +327,10 @@ void Measure::layoutBeams1(ScoreLayout* layout)
             Beam* beam    = 0;
             Beam* oldBeam = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
-                  if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
-                        continue;
                   Element* e = segment->element(track);
-                  if (e == 0)
+                  if (((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                     || e == 0 || !e->isChordRest())
                         continue;
-                  if (!e->isChordRest()) {
-                        // can be RepeatMeasure
-                        continue;
-                        }
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   if (segment->subtype() == Segment::SegGrace) {
                         Segment* nseg = segment->next();

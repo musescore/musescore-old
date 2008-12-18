@@ -770,6 +770,7 @@ static bool chordsHaveTie (Chord* c1, Chord* c2)
 //---------------------------------------------------------
 //   directionMixture
 //---------------------------------------------------------
+
 static bool isDirectionMixture (Chord* c1, Chord* c2)
       {
       bool up = c1->isUp();
@@ -781,8 +782,10 @@ static bool isDirectionMixture (Chord* c1, Chord* c2)
                   Chord* c = 0;
                   if (e->type() == NOTE)
                         c = static_cast<Note*>(e)->chord();
-                  if (e->type() == CHORD)
+                  else if (e->type() == CHORD)
                         c = static_cast<Chord*>(e);
+                  else
+                        continue;
                   if (c && c->isUp() != up)
                         return true;
                   }
