@@ -1,3 +1,8 @@
+18.dec (ws)
+      - fix display of sharp/flat in a slash chord name
+      - change chord name layout: align chord name to base line
+      - fixed crash when pressing "+" in note entry mode and then adding note with mouse
+        in next measure (and a rest beween first and second note).
 17.dec (ws)
       - added brazilian portuguese translation from israelzeu703
       - use page size preference when creating new score

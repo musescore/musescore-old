@@ -115,7 +115,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Chordname"), ff,  12, false, false, false,
-         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,

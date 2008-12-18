@@ -657,10 +657,11 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             Segment* seg = tick2segment(tick);
             while (seg && seg->prev1()) {
                   seg = seg->prev1();
-                  if (seg->subtype() != Segment::SegChordRest)
+                  if (seg->subtype() != Segment::SegChordRest || !seg->element(track))
                         continue;
-                  if (!seg->element(track))
-                        continue;
+                  Element* e = seg->element(track);
+                  if (e->type() != CHORD)
+                        break;
                   NoteList* nl = static_cast<Chord*>(seg->element(track))->noteList();
                   for (iNote i = nl->begin(); i != nl->end(); ++i) {
                         Note* n = i->second;

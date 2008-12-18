@@ -624,9 +624,6 @@ int Measure::findAccidental2(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-//                  if (chord->noteType() != NOTE_NORMAL)
-//                        continue;
-
 
                   Drumset* drumset = 0;
                   if (chord->staff()->part()->useDrumset())
