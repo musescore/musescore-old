@@ -1954,6 +1954,8 @@ void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
                   }
             s->brackets[dstCol] = s->brackets[srcCol];
             s->brackets[srcCol] = 0;
+            while (!s->brackets.isEmpty() && (s->brackets.last() == 0))
+                  s->brackets.removeLast();
             }
       }
 

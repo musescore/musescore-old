@@ -104,6 +104,7 @@ void EditStyle::getValues()
       lstyle->lyricsMinBottomDistance = Spatium(lyricsMinBottomDistance->value());
       lstyle->systemBoxDistance       = Spatium(systemFrameDistance->value());
       lstyle->boxSystemDistance       = Spatium(frameSystemDistance->value());
+      lstyle->bracketDistance         = Spatium(bracketDistance->value());
 
       lstyle->measureSpacing         = measureSpacing->value();
       lstyle->minNoteDistance        = Spatium(minNoteDistance->value());
@@ -187,6 +188,7 @@ void EditStyle::setValues()
       lyricsMinBottomDistance->setValue(lstyle->lyricsMinBottomDistance.val());
       systemFrameDistance->setValue(lstyle->systemBoxDistance.val());
       frameSystemDistance->setValue(lstyle->boxSystemDistance.val());
+      bracketDistance->setValue(lstyle->bracketDistance.val());
 
       measureSpacing->setValue(lstyle->measureSpacing);
       minNoteDistance->setValue(lstyle->minNoteDistance.val());
