@@ -145,6 +145,9 @@ void System::layout(ScoreLayout* layout, double xo1)
       if (isVbox())                 // ignore vbox
             return;
       static const Spatium instrumentNameOffset(1.0);
+
+      Style* style = score()->style();
+
       int nstaves  = _staves.size();
 
       if (nstaves != score()->nstaves())
@@ -218,7 +221,7 @@ void System::layout(ScoreLayout* layout, double xo1)
       _leftMargin = xoff2;
 
       for (int i = 0; i < bracketLevels; ++i)
-            _leftMargin += bracketWidth[i];
+            _leftMargin += bracketWidth[i] + style->bracketDistance.point();
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* s  = _staves[staffIdx];
@@ -233,7 +236,7 @@ void System::layout(ScoreLayout* layout, double xo1)
 
       if (nstaves > 1 && barLine == 0) {
             barLine = new Line(score(), true);
-            barLine->setLineWidth(score()->style()->barWidth);
+            barLine->setLineWidth(style->barWidth);
             barLine->setParent(this);
             }
       else if (nstaves <= 1 && barLine) {
@@ -241,7 +244,7 @@ void System::layout(ScoreLayout* layout, double xo1)
             barLine = 0;
             }
       if (barLine) {
-            barLine->setPos(_leftMargin + xo1, score()->style()->barWidth.point() * .25);
+            barLine->setPos(_leftMargin + xo1, style->barWidth.point() * .25);
             }
 
       //---------------------------------------------------
@@ -255,7 +258,7 @@ void System::layout(ScoreLayout* layout, double xo1)
 
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i] + _spatium * .25;
+                  xo += bracketWidth[i] + style->bracketDistance.point();
                   Bracket*   b = ss->brackets[i];
                   if (b == 0)
                         continue;

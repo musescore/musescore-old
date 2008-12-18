@@ -166,7 +166,7 @@ Style defaultStyle = {
       Spatium(0.30),  // doubleBarDistance;
       Spatium(0.30),  // endBarDistance
       Spatium(0.35),  // system bracket width
-      Spatium(0.3),   // system bracket distance
+      Spatium(0.25),  // system bracket distance
 
       Spatium(0.5),   // clefLeftMargin;
       Spatium(0.5),   // keysig left margin

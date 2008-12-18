@@ -74,6 +74,8 @@ void Staff::setBracket(int idx, int val)
                   _brackets.append(BracketItem());
             }
       _brackets[idx]._bracket = val;
+      while (!_brackets.isEmpty() && (_brackets.last()._bracket == NO_BRACKET))
+            _brackets.removeLast();
       }
 
 //---------------------------------------------------------

@@ -1,4 +1,5 @@
 18.dec (ws)
+      - implement style value "bracket distance"
       - system brackets can now be moved to different column in edit mode with
         Shift+right and Shift+left
       - fix display of sharp/flat in a slash chord name
