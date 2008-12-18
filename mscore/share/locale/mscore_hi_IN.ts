@@ -1,10 +1,11 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="hi">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished">&quot;के बारे में&quot; सूचीपेटी</translation>
+        <translation>&quot;के बारे में&quot; सूचीपेटी</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -12,12 +13,11 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished">विवरण: ०.९.० 
-</translation>
+        <translation>विवरण: ०.९.० </translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished">संशोधन: ६२८</translation>
+        <translation>संशोधन: ६२८</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -28,7 +28,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) सर्वाधिकार १९९९-२००८ वेर्नर स्च्वीर एवं अन्य. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;नए विवरण और सूचना  हेतु वेबसाइट देखें. http://www.musescore.org &lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;GNU सार्वजानिक लाईसेन्स के अधीन प्रकाशित.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt; </translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;© सर्वाधिकार १९९९-२००८ वेर्नर स्च्वीर एवं अन्य. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;नए विवरण और सूचना  हेतु वेबसाइट देखें. http://www.musescore.org &lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;GNU सार्वजानिक लाईसेन्स के अधीन प्रकाशित.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt; </translation>
     </message>
 </context>
 <context>
@@ -42,15 +42,15 @@ p, li { white-space: pre-wrap; }
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished">म्यूजस्कोर: आलंकारिक गुणधर्म</translation>
+        <translation>म्यूजस्कोर: आलंकारिक गुणधर्म</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">प्रणाल</translation>
+        <translation>चैनल/प्रणाल</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished">Midi कार्य </translation>
+        <translation>Midi कार्य </translation>
     </message>
     <message>
         <source>normal</source>
@@ -61,22 +61,22 @@ p, li { white-space: pre-wrap; }
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">पृष्ट</translation>
+        <translation>पृष्ट/फॉर्म</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished">बार लाइन</translation>
+        <translation>बार लाइन</translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation type="unfinished">सबटाइप :</translation>
+        <translation>सबटाइप :</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>म्यूजस्कोर: ढांचा गुणधर्म</translation>
+        <translation>म्यूजस्कोर: फ्रेम (ढांचा) गुणधर्म</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -84,81 +84,81 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>left:</source>
-        <translation type="unfinished">बायें:</translation>
+        <translation>बायें:</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">मिमी.</translation>
+        <translation>मिमी.</translation>
     </message>
     <message>
         <source>right:</source>
-        <translation type="unfinished">दाहिने:</translation>
+        <translation>दाहिने:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation type="unfinished">ऊपर:</translation>
+        <translation>ऊपर:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation type="unfinished">नीचे:</translation>
+        <translation>नीचे:</translation>
     </message>
 </context>
 <context>
     <name>Canvas</name>
     <message>
         <source>Object Inspector</source>
-        <translation type="unfinished">वस्तु  निरीक्षक </translation>
+        <translation>वस्तु  निरीक्षक </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
+        <translation>स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished">Drumset बनाना/बदलना </translation>
+        <translation>Drumset बनाना/बदलना </translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">स्वरलिपि पंक्ति गुणधर्म</translation>
+        <translation>स्वरलिपि पंक्ति गुणधर्म</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished">विभाग </translation>
+        <translation>विभाग </translation>
     </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">पृष्ट</translation>
+        <translation>पृष्ट /फॉर्म</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">स्वरसंघात</translation>
+        <translation>स्वरसंघात/कॉर्ड</translation>
     </message>
     <message>
         <source>Stem</source>
-        <translation type="unfinished">तना</translation>
+        <translation>स्टेम/तना</translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished">खूँटी</translation>
+        <translation>खूँटी/हुक</translation>
     </message>
     <message>
         <source>Grace Note</source>
-        <translation type="unfinished">कण स्वर</translation>
+        <translation>कण स्वर</translation>
     </message>
     <message>
         <source>Stem Direction</source>
-        <translation type="unfinished">तना-दिशा</translation>
+        <translation>स्टेम/तना-दिशा</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">लेख:</translation>
+        <translation>लेख/नोट्स:</translation>
     </message>
     <message>
         <source>Help Lines:</source>
-        <translation type="unfinished">सहायक पंक्तियाँ :</translation>
+        <translation>सहायक पंक्तियाँ :</translation>
     </message>
     <message>
         <source>Note Attributes:</source>
@@ -169,659 +169,659 @@ p, li { white-space: pre-wrap; }
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished">म्यूजस्कोर: सामंजस्य गुणधर्म</translation>
+        <translation>म्यूजस्कोर: सामंजस्य (हार्मनी) गुणधर्म</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished">पाठलेबल</translation>
+        <translation>पाठलेबल</translation>
     </message>
     <message>
         <source>Root</source>
-        <translation type="unfinished">मूल</translation>
+        <translation>मूल</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">स</translation>
+        <translation>स</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">ग</translation>
+        <translation>ग</translation>
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation type="unfinished">२ अर्धस्वर नीचे</translation>
+        <translation>२ अर्धस्वर नीचे</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">म</translation>
+        <translation>म</translation>
     </message>
     <message>
         <source>b (flat)</source>
-        <translation type="unfinished">१ अर्धस्वर नीचे </translation>
+        <translation>१ अर्धस्वर नीचे </translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">प</translation>
+        <translation>प</translation>
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation type="unfinished">विकृत स्वर नही </translation>
+        <translation>विकृत स्वर नही </translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">ध</translation>
+        <translation>ध</translation>
     </message>
     <message>
         <source># (sharp)</source>
-        <translation type="unfinished">१ अर्धस्वर ऊपर</translation>
+        <translation>१ अर्धस्वर ऊपर</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">नि</translation>
+        <translation>नि</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation type="unfinished">२ अर्धस्वर ऊपर</translation>
+        <translation>२ अर्धस्वर ऊपर</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">रे</translation>
+        <translation>रे</translation>
     </message>
     <message>
         <source>Extension</source>
-        <translation type="unfinished">प्रसार</translation>
+        <translation>प्रसार/एक्सटेंसन</translation>
     </message>
     <message>
         <source>Maj</source>
-        <translation type="unfinished">मेज</translation>
+        <translation>मेज</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished">२ </translation>
+        <translation>२ </translation>
     </message>
     <message>
         <source>Maj7</source>
-        <translation type="unfinished">मेज७</translation>
+        <translation>मेज७</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation type="unfinished">मेज९</translation>
+        <translation>मेज९</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished">६</translation>
+        <translation>६</translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished">६९</translation>
+        <translation>६९</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished">एम्</translation>
+        <translation>एम्</translation>
     </message>
     <message>
         <source>m7</source>
-        <translation type="unfinished">एम्7</translation>
+        <translation>एम्7</translation>
     </message>
     <message>
         <source>m7b5</source>
-        <translation type="unfinished">एम्7बी5</translation>
+        <translation>एम्7बी5</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished">७</translation>
+        <translation>७</translation>
     </message>
     <message>
         <source>sus</source>
-        <translation type="unfinished">sus</translation>
+        <translation>sus</translation>
     </message>
     <message>
         <source>7Sus</source>
-        <translation type="unfinished">7Sus</translation>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
-        <translation type="unfinished">m6</translation>
+        <translation>m6</translation>
     </message>
     <message>
         <source>m9</source>
-        <translation type="unfinished">m9</translation>
+        <translation>m9</translation>
     </message>
     <message>
         <source>mMaj7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>dim</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished">३ {9?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished">३ {13?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other:</source>
-        <translation type="unfinished">अन्य:</translation>
+        <translation>अन्य:</translation>
     </message>
     <message>
         <source>5b</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>aug</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj13#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>maug</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m7#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m69</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj7Lyd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>m9b5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">३ {5?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>(blues)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished">३ {7#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished">३ {13#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished">३ {9#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished">३ {7#9?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished">३ {13#9?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#9#11</source>
-        <translation type="unfinished">३ {13#9#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13b5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9b5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9b5b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13b5#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7b5#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished">३ {7#5?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation type="unfinished">३ {13#5?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation type="unfinished">३ {7#5#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation type="unfinished">३ {13#5#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished">३ {9#5?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation type="unfinished">३ {9#5#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished">३ {7#5#9?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation type="unfinished">३ {13#5#9#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation type="unfinished">३ {7#5#9#11?}</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7alt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9sus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9susb13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9sus#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13susb9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13susb9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13susb5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9susb5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9susb5b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13susb5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13susb5#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7susb5#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5#9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>13sus#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7sus#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished">४</translation>
+        <translation>४</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">जोड़ना</translation>
+        <translation>जोड़ना</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">मिटाना</translation>
+        <translation>मिटाना</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished">भारी स्वर/विपरीतता</translation>
+        <translation>भारी स्वर/विपरीतता (इन्वर्सन )</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished">कोई नहीं </translation>
+        <translation>कोई नहीं </translation>
     </message>
     <message>
         <source>/C</source>
-        <translation type="unfinished">/स</translation>
+        <translation>/स</translation>
     </message>
     <message>
         <source>/Db</source>
-        <translation type="unfinished">रे॒</translation>
+        <translation>रे॒</translation>
     </message>
     <message>
         <source>/D</source>
-        <translation type="unfinished">/रे</translation>
+        <translation>/रे</translation>
     </message>
     <message>
         <source>/Eb</source>
-        <translation type="unfinished">/ग॒</translation>
+        <translation>/ग॒</translation>
     </message>
     <message>
         <source>/E</source>
-        <translation type="unfinished">/ग</translation>
+        <translation>/ग</translation>
     </message>
     <message>
         <source>/F</source>
-        <translation type="unfinished">/म</translation>
+        <translation>/म</translation>
     </message>
     <message>
         <source>/F#</source>
-        <translation type="unfinished">/मे</translation>
+        <translation>/मे</translation>
     </message>
     <message>
         <source>/G</source>
-        <translation type="unfinished">/प</translation>
+        <translation>/प</translation>
     </message>
     <message>
         <source>/Ab</source>
-        <translation type="unfinished">/ध॒</translation>
+        <translation>/ध॒</translation>
     </message>
     <message>
         <source>/A</source>
-        <translation type="unfinished">/ध</translation>
+        <translation>/ध</translation>
     </message>
     <message>
         <source>/Bb</source>
-        <translation type="unfinished">/नि॒</translation>
+        <translation>/नि॒</translation>
     </message>
     <message>
         <source>/B</source>
-        <translation type="unfinished">/ नि</translation>
+        <translation>/ नि</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">१</translation>
+        <translation>१</translation>
     </message>
     <message>
         <source>3</source>
@@ -832,50 +832,50 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished">स्वरसंघात गुणधर्म</translation>
+        <translation>स्वरसंघात (कॉर्ड) गुणधर्म</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished">छोटा</translation>
+        <translation>छोटा</translation>
     </message>
     <message>
         <source>no stem</source>
-        <translation>तना नहीं</translation>
+        <translation>तना (स्टेम) नहीं</translation>
     </message>
 </context>
 <context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">पृष्ट</translation>
+        <translation>पृष्ट (फॉर्म )</translation>
     </message>
     <message>
         <source>ChordRest</source>
-        <translation type="unfinished">स्वरसंघात रेस्ट</translation>
+        <translation>स्वरसंघात कॉर्डरेस्ट</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">बीम</translation>
+        <translation>बीम</translation>
     </message>
     <message>
         <source>Tuplet</source>
-        <translation type="unfinished">स्वरयुगल </translation>
+        <translation>स्वरयुगल  (टुप्लेट )</translation>
     </message>
     <message>
         <source>Attributes:</source>
-        <translation type="unfinished">लक्षण:</translation>
+        <translation>लक्षण:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">ऊपर</translation>
+        <translation>ऊपर</translation>
     </message>
     <message>
         <source>isUp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Beam Mode:</source>
-        <translation type="unfinished">बीम मोड:</translation>
+        <translation>बीम मोड:</translation>
     </message>
     <message>
         <source>Dots:</source>
@@ -886,11 +886,11 @@ p, li { white-space: pre-wrap; }
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">पृष्ठ </translation>
+        <translation>पृष्ठ (फॉर्म)</translation>
     </message>
     <message>
         <source>Dynamic</source>
-        <translation type="unfinished">गतिक</translation>
+        <translation>गतिक (डैनामिक)</translation>
     </message>
     <message>
         <source>SubType:</source>
@@ -901,57 +901,57 @@ p, li { white-space: pre-wrap; }
     <name>EditDrumset</name>
     <message>
         <source>invalid</source>
-        <translation type="unfinished">अमान्य</translation>
+        <translation>अमान्य</translation>
     </message>
     <message>
         <source>Normal Head</source>
-        <translation type="unfinished">सामान्य शीर्ष</translation>
+        <translation>सामान्य शीर्ष</translation>
     </message>
     <message>
         <source>Cross Head</source>
-        <translation type="unfinished">तिर्यक शीर्ष</translation>
+        <translation>तिर्यक शीर्ष</translation>
     </message>
     <message>
         <source>Diamond Head</source>
-        <translation type="unfinished">हीरक शीर्ष</translation>
+        <translation>हीरक शीर्ष</translation>
     </message>
     <message>
         <source>Triangle Head</source>
-        <translation type="unfinished">त्रिकोण शीर्ष</translation>
+        <translation>त्रिकोण शीर्ष</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished">भरो</translation>
+        <translation>भरो</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">बचाओ</translation>
+        <translation>बचाओ</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
-        <translation type="unfinished">म्यूजस्कोर: Drumset भरो</translation>
+        <translation>म्यूजस्कोर: Drumset भरो</translation>
     </message>
     <message>
         <source>MuseScore drumset (*.drm)</source>
-        <translation type="unfinished">म्यूजस्कोर drumset (*.drm)</translation>
+        <translation>म्यूजस्कोर drumset (*.drm)</translation>
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished">म्यूजस्कोर: Drumset बचाओ</translation>
+        <translation>म्यूजस्कोर: Drumset बचाओ</translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished">फाइल खोलो</translation>
+        <translation>फाइल खोलो</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished">विफल</translation>
+        <translation>विफल</translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished">म्यूजस्कोर: फाइल खोलो</translation>
+        <translation>म्यूजस्कोर: फाइल खोलो</translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
@@ -962,224 +962,224 @@ failed: </source>
     <name>EditDrumsetBase</name>
     <message>
         <source>MuseScore: Edit Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर: Drumset बदलें</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>नाम:</translation>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation type="unfinished"></translation>
+        <translation>नोट शीर्ष:</translation>
     </message>
     <message>
         <source>Staff Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वर पंक्ति:</translation>
     </message>
     <message>
         <source>Stem Direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>स्टेम दिशा:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वतः (ऑटो)</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>नीचे</translation>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation type="unfinished"></translation>
+        <translation>डिफौल्ट वौइस्:</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>पिच</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वर</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>नाम</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>शोर्ट कट </translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>शोर्ट कट :</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>ध</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>नि</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>स</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>रे</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>ग</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>म</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>प</translation>
     </message>
     <message>
         <source>--</source>
-        <translation type="unfinished"></translation>
+        <translation>--</translation>
     </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर:  संगीत वाद्य बदलें</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>संगीत वाद्य प्रोपर्टिस</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>नाम</translation>
     </message>
     <message>
         <source>Short Name</source>
-        <translation type="unfinished"></translation>
+        <translation>छोटा नाम</translation>
     </message>
     <message>
         <source>min. Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>min. पिच</translation>
     </message>
     <message>
         <source>max. Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>max. पिच</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>ट्रांस्पोस</translation>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi प्रोग्राम</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वरलिपि पंक्तियाँ</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर:  Staff/Part बदलें</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वरलिपि पंक्ति गुणधर्म</translation>
     </message>
     <message>
         <source>Lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>पंक्तियाँ :</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>छोटा</translation>
     </message>
     <message>
         <source>Slash Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Slash Style</translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Part प्रोपर्टिस</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>बड़ा संगीत वाद्य नाम:</translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>छोटा संगीत वाद्य नाम:</translation>
     </message>
     <message>
         <source>Play Transposition (Semitones)</source>
-        <translation type="unfinished"></translation>
+        <translation>Play Transposition (Semitones)</translation>
     </message>
     <message>
         <source>Use Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>Drumset उपयोग करें</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Drumset बदलें</translation>
     </message>
 </context>
 <context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation type="unfinished"></translation>
+        <translation>म्यूजस्कोर: Style बदलें</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>स्कोर</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>पेज</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Numbers</translation>
     </message>
     <message>
         <source>Beams</source>
-        <translation type="unfinished"></translation>
+        <translation>बीम</translation>
     </message>
     <message>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sizes</translation>
     </message>
     <message>
         <source>Hairpins</source>
-        <translation type="unfinished"></translation>
+        <translation>Hairpins</translation>
     </message>
     <message>
         <source>Chordnames</source>
-        <translation type="unfinished"></translation>
+        <translation>Chordnames</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
@@ -1458,7 +1458,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">पाठ:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
@@ -1508,7 +1508,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">३ {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>selected</source>
@@ -1703,11 +1703,11 @@ failed: </source>
     <name>ImageProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कॉर्ड प्रोपर्टिस</translation>
     </message>
     <message>
         <source>lock aspect ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>आस्पेक्ट रेशियो बंद</translation>
     </message>
 </context>
 <context>
@@ -1722,27 +1722,27 @@ failed: </source>
     </message>
     <message>
         <source>1/4</source>
-        <translation type="unfinished">३ {1/4?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation type="unfinished">३ {1/8?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation type="unfinished">३ {1/16?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation type="unfinished">३ {1/32?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation type="unfinished">३ {1/64?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation type="unfinished">३ {1/128?}</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1776,7 +1776,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">३ {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -1808,7 +1808,7 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">३ {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load</source>
@@ -1842,7 +1842,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">३ {0?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -1870,7 +1870,7 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">३ {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staves</source>
@@ -1964,7 +1964,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">पाठ:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Frame</source>
@@ -2604,7 +2604,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">म्यूजस्कोर</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -4937,7 +4937,7 @@ before closing?</source>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished">३ {001.01?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -4945,7 +4945,7 @@ before closing?</source>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished">३ {0:00:00?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -5291,7 +5291,7 @@ before closing?</source>
     </message>
     <message>
         <source>record</source>
-        <translation type="unfinished">रिकार्ड</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Record</source>
@@ -5359,31 +5359,31 @@ before closing?</source>
     </message>
     <message>
         <source>192000</source>
-        <translation type="unfinished">३ {192000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>96000</source>
-        <translation type="unfinished">३ {96000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>88200</source>
-        <translation type="unfinished">३ {88200?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>48000</source>
-        <translation type="unfinished">३ {48000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished">३ {44100?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished">३ {32000?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished">३ {22050?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fragments:</source>
@@ -5395,31 +5395,31 @@ before closing?</source>
     </message>
     <message>
         <source>4096</source>
-        <translation type="unfinished">३ {4096?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2048</source>
-        <translation type="unfinished">३ {2048?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1024</source>
-        <translation type="unfinished">३ {1024?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>512</source>
-        <translation type="unfinished">३ {512?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="unfinished">३ {256?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>128</source>
-        <translation type="unfinished">३ {128?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>64</source>
-        <translation type="unfinished">३ {64?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Portaudio</source>
@@ -5545,30 +5545,6 @@ before closing?</source>
         <source>tr Turkey</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Two Sided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5642,7 +5618,7 @@ Please select a single note or rest and retry operation
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished">रिकार्ड</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5733,7 +5709,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">३ {1?}</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6179,7 +6155,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">पाठ:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset:</source>
