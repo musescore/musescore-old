@@ -555,7 +555,7 @@ void System::remove(Element* el)
                   if (staff->brackets[i] == el) {
                         staff->brackets[i] = 0;
                         el->staff()->setBracket(i, NO_BRACKET);
-                        // TODO: remove empty bracket levels
+// TODO: remove empty bracket levels
 //TODO                        score()->layout();
                         return;
                         }

@@ -34,10 +34,9 @@ enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
 //---------------------------------------------------------
 
 class Bracket : public Element {
-      int _span;
       qreal h2;
 
-      int _level;
+      int _column, _span;
 
       QPainterPath path;
       qreal yoff;
@@ -47,10 +46,10 @@ class Bracket : public Element {
       virtual Bracket* clone() const { return new Bracket(*this); }
       virtual ElementType type() const { return BRACKET; }
 
-      int span() const      { return _span; }
-      void setSpan(int val) { _span = val; }
-      int level() const     { return _level; }
-      void setLevel(int v)  { _level = v; }
+      int span() const       { return _span; }
+      void setSpan(int val)  { _span = val; }
+      int level() const      { return _column; }
+      void setLevel(int v)   { _column = v; }
       System* system() const { return (System*)parent(); }
 
       virtual QRectF bbox() const;
@@ -63,6 +62,7 @@ class Bracket : public Element {
       virtual void layout(ScoreLayout*);
 
       virtual bool startEdit(Viewer*, const QPointF&);
+      virtual bool edit(Viewer*, int, int, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();

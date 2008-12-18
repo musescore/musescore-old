@@ -795,6 +795,9 @@ void Harmony::buildText()
       QTextCharFormat noteSymbolFormat(f);
       noteSymbolFormat.setFont(QFont("MScore1"));
 
+      QTextCharFormat snoteSymbolFormat(noteSymbolFormat);
+      snoteSymbolFormat.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+
       if (*s == 0)
             return;
 
@@ -856,8 +859,21 @@ void Harmony::buildText()
             }
       const char* slash = *ss == '/' ? ss+1 : 0;
       if (ss - s > 0) {
-            while (s < ss)
-                  cursor.insertText(QString(*s++), sf);
+            while (s < ss) {
+                  if ((*s == '#') || (*s == 'b')) {
+                        if (useSymbols)
+                              cursor.insertText(QString(*s), sf);
+                        else {
+                              if (*s == '#')
+                                    cursor.insertText(QString(sharp), snoteSymbolFormat);
+                              else
+                                    cursor.insertText(QString(flat), snoteSymbolFormat);
+                              }
+                        ++s;
+                        }
+                  else
+                        cursor.insertText(QString(*s++), sf);
+                  }
             }
       if (slash) {
             cursor.insertText(QString('/'), f);

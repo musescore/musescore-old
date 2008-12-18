@@ -39,7 +39,7 @@ Bracket::Bracket(Score* s)
       {
       h2       = 3.5 * _spatium;
       _span    = 1;
-      _level   = 0;
+      _column   = 0;
       yoff     = 0.0;
       }
 
@@ -140,8 +140,8 @@ void Bracket::write(Xml& xml) const
                   xml.stag("Bracket");
                   break;
             }
-      if (_level)
-            xml.tag("level", _level);
+      if (_column)
+            xml.tag("level", _column);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -165,7 +165,7 @@ void Bracket::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "level")
-                  _level = val.toInt();
+                  _column = val.toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -268,7 +268,7 @@ void Bracket::endEditDrag()
       h2 = (ey - sy) * .5;
 
       int span = staffIdx2 - staffIdx1 + 1;
-      staff()->setBracketSpan(_level, span);
+      staff()->setBracketSpan(_column, span);
       }
 
 //---------------------------------------------------------
@@ -302,5 +302,51 @@ Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
             }
       delete e;
       return 0;
+      }
+
+//---------------------------------------------------------
+//   edit
+//    return true if event is accepted
+//---------------------------------------------------------
+
+bool Bracket::edit(Viewer*, int, int key, Qt::KeyboardModifiers modifiers, const QString&)
+      {
+      if (modifiers & Qt::ShiftModifier) {
+            if (key == Qt::Key_Left) {
+                  int bt = staff()->bracket(_column);
+                  // search empty level
+                  int oldColumn = _column;
+                  staff()->setBracket(_column, NO_BRACKET);
+                  for (;;) {
+                        ++_column;
+                        if (staff()->bracket(_column) == NO_BRACKET)
+                              break;
+                        }
+                  staff()->setBracket(_column, bt);
+                  staff()->setBracketSpan(_column, _span);
+                  score()->moveBracket(staffIdx(), oldColumn, _column);
+                  score()->setLayoutAll(true);
+                  return true;
+                  }
+            else if (key == Qt::Key_Right) {
+                  if (_column) {
+                        int l = _column - 1;
+                        for (; l >= 0; --l) {
+                              if (staff()->bracket(l) == NO_BRACKET) {
+                                    int bt = staff()->bracket(_column);
+                                    staff()->setBracket(_column, -1);
+                                    staff()->setBracket(l, bt);
+                                    staff()->setBracketSpan(l, _span);
+                                    score()->moveBracket(staffIdx(), _column, l);
+                                    _column = l;
+                                    score()->setLayoutAll(true);
+                                    break;
+                                    }
+                              }
+                        }
+                  return true;
+                  }
+            }
+      return false;
       }
 
