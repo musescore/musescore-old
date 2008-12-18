@@ -695,6 +695,7 @@ class Score : public QObject {
       void setPos(int tick);
 
       ImagePath* addImage(const QString&);      // add image to imagePathList
+      void moveBracket(int staffIdx, int srcCol, int dstCol);
       };
 
 extern Score* gscore;

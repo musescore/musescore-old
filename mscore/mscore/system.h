@@ -53,7 +53,6 @@ class SysStaff {
       Spatium _distance;      ///< distance to next staff
       bool _show;             ///< derived from Staff or false if empty
                               ///< staff is hidden
-
    public:
       int idx;
       QList<Bracket*> brackets;

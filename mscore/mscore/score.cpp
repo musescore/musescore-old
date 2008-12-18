@@ -1935,3 +1935,25 @@ void ImagePath::reference()
       ++_references;
       }
 
+//---------------------------------------------------------
+//   moveBracket
+//    columns are counted from right to left
+//---------------------------------------------------------
+
+void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
+      {
+      foreach(System* system, *_layout->systems()) {
+            if (system->isVbox())
+                  continue;
+            if (staffIdx >= system->staves()->size())
+                  continue;
+            SysStaff* s = system->staff(staffIdx);
+            if (dstCol+1 > s->brackets.size()) {
+                  for (int i = s->brackets.size(); i <= dstCol; ++i)
+                        s->brackets.append(0);
+                  }
+            s->brackets[dstCol] = s->brackets[srcCol];
+            s->brackets[srcCol] = 0;
+            }
+      }
+

@@ -1,4 +1,6 @@
 18.dec (ws)
+      - system brackets can now be moved to different column in edit mode with
+        Shift+right and Shift+left
       - fix display of sharp/flat in a slash chord name
       - change chord name layout: align chord name to base line
       - fixed crash when pressing "+" in note entry mode and then adding note with mouse
