@@ -1,4 +1,6 @@
-18.dec (ws)
+18.dec (tb)
+      - updating Hindi translation from Balvihar Grindia
+       (ws)
       - implement style value "bracket distance"
       - system brackets can now be moved to different column in edit mode with
         Shift+right and Shift+left
