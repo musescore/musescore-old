@@ -5,6 +5,7 @@
       - renamed template files replacing "_" with " "
       (la)
 	    - correct issue on full measure rest in musicXML export
+	    - improve support of octave-shift in musicXML import
       (db)
       - changed gateTime numbers in template files to match new default
       - removed pageFormat tag from leadsheet, piano, and choir templates. 
