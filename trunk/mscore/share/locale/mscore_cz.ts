@@ -1443,6 +1443,14 @@ failed: </source>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Bracket Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>

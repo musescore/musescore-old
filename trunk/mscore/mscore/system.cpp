@@ -62,8 +62,10 @@ SysStaff::SysStaff()
 
 SysStaff::~SysStaff()
       {
-      foreach(Bracket* b, brackets)
-            delete b;
+      foreach(Bracket* b, brackets) {
+            if (b)
+                  delete b;
+            }
       brackets.clear();
       if (instrumentName) {
             delete instrumentName;
@@ -160,7 +162,12 @@ void System::layout(ScoreLayout* layout, double xo1)
 
       double xoff2 = 0.0;         // x offset for instrument name
 
-      int bracketLevels = score()->staff(0)->bracketLevels();
+      int bracketLevels = 0;
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            int n = score()->staff(staffIdx)->bracketLevels();
+            if (n > bracketLevels)
+                  bracketLevels = n;
+            }
       double bracketWidth[bracketLevels];
       for (int i = 0; i < bracketLevels; ++i)
             bracketWidth[i] = 0.0;
@@ -256,14 +263,13 @@ void System::layout(ScoreLayout* layout, double xo1)
             if (!ss->show())
                   continue;
 
-            double xo = 0.0;
+            double xo = xo1;
             for (int i = 0; i < bracketLevels; ++i) {
                   xo += bracketWidth[i] + style->bracketDistance.point();
-                  Bracket*   b = ss->brackets[i];
+                  Bracket* b = ss->brackets[i];
                   if (b == 0)
                         continue;
 
-                  qreal sy = ss->bbox().top();
                   if (b->span() >= (nstaves - staffIdx)) {
                         //
                         // this may happen if a system was removed in
@@ -283,9 +289,8 @@ void System::layout(ScoreLayout* layout, double xo1)
                                     }
                               }
                         }
-                  qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
-                  b->setPos(_leftMargin - xo + xo1, sy);
-                  b->setHeight(ey - sy);
+                  // right align bracket
+                  b->setXpos(_leftMargin - xo + bracketWidth[i] - b->width());
                   }
             }
 
@@ -316,13 +321,13 @@ void System::layout2(ScoreLayout* layout)
       if (isVbox())                 // ignore vbox
             return;
 
-      int staves = _staves.size();
+      int nstaves = _staves.size();
 
       qreal y = 0.0;
       int lastStaffIdx = 0;   // last visible staff
-      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
-            if ((staffIdx + 1) == staves) {
+            if ((staffIdx + 1) == nstaves) {
                   setDistance(staffIdx, score()->style()->systemDistance);
                   }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
@@ -355,8 +360,8 @@ void System::layout2(ScoreLayout* layout)
                   m->setHeight(systemHeight);
             }
 
-      double staffY[staves];
-      for (int i = 0; i < staves; ++i)
+      double staffY[nstaves];
+      for (int i = 0; i < nstaves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
       if (barLine) {
@@ -366,27 +371,18 @@ void System::layout2(ScoreLayout* layout)
             }
 
       //---------------------------------------------------
-      //  layout brackets
+      //  layout brackets vertical position
       //---------------------------------------------------
 
-      int bracketLevels = score()->staff(0)->bracketLevels();
-      double bracketWidth[bracketLevels];
-      for (int i = 0; i < bracketLevels; ++i)
-            bracketWidth[i] = 0.0;
-
-      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* ss = _staves[staffIdx];
             if (!ss->show())
                   continue;
 
-            double xo = 0.0;
-            for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i] + _spatium * .25;
-                  Bracket*   b = ss->brackets[i];
+            foreach(Bracket* b, ss->brackets) {
                   if (b == 0)
                         continue;
-
-                  int restStaves = staves - staffIdx;
+                  int restStaves = nstaves - staffIdx;
                   if (b->span() >= restStaves) {
                         //
                         // this may happen if a system was removed in
@@ -396,7 +392,7 @@ void System::layout2(ScoreLayout* layout)
                         }
                   qreal sy = ss->bbox().top();
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
-                  b->setPos(b->ipos().x(), sy);
+                  b->setYpos(sy);
                   b->setHeight(ey - sy);
                   b->layout(layout);
                   }
@@ -531,8 +527,10 @@ void System::add(Element* el)
             }
       else if (el->type() == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
-            Bracket* b   = (Bracket*)el;
+            Bracket* b   = static_cast<Bracket*>(el);
             int level = b->level();
+            while (level >= ss->brackets.size())
+                  ss->brackets.append(0);
             ss->brackets[level] = b;
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
@@ -558,7 +556,6 @@ void System::remove(Element* el)
                   if (staff->brackets[i] == el) {
                         staff->brackets[i] = 0;
                         el->staff()->setBracket(i, NO_BRACKET);
-// TODO: remove empty bracket levels
 //TODO                        score()->layout();
                         return;
                         }

@@ -1487,7 +1487,7 @@ int main(int argc, char* argv[])
       if (debugMode)
             printf("load translator <qt_%s>\n", qPrintable(localeName));
 
-      if (!qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir))
+      if (!qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
             printf("load translator <qt_%s> failed\n", qPrintable(localeName));
 
       app.installTranslator(&qtTranslator);

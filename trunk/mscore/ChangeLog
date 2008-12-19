@@ -1,5 +1,10 @@
-19.dec (la)
-	  - correct issue on full measure rest in musicXML export	
+19.dec (ws)
+      - fixed crash when undo delete bracket
+      - right align system brackets
+      - fixed crash when moving system brackets
+      - renamed template files replacing "_" with " "
+      (la)
+	  - correct issue on full measure rest in musicXML export
 18.dec (tb)
       - updating Hindi translation from Balvihar Grindia
        (ws)
