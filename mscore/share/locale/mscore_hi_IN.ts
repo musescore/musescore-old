@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="hi">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -1415,11 +1414,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
     <message>
         <source>Voice 2</source>
@@ -1439,10 +1438,18 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Bracket Distance:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1458,15 +1465,15 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1515,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {0?}</translation>
     </message>
     <message>
         <source>selected</source>
@@ -1536,11 +1543,11 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">अमान्य</translation>
     </message>
     <message>
         <source>Time</source>
@@ -1591,7 +1598,7 @@ failed: </source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मिटाना</translation>
     </message>
     <message>
         <source>New</source>
@@ -1603,7 +1610,7 @@ failed: </source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नाम:</translation>
     </message>
     <message>
         <source>Title:</source>
@@ -1619,7 +1626,7 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
 </context>
 <context>
@@ -1722,27 +1729,27 @@ failed: </source>
     </message>
     <message>
         <source>1/4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/4?}</translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/8?}</translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/16?}</translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/32?}</translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/64?}</translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1/128?}</translation>
     </message>
 </context>
 <context>
@@ -1761,11 +1768,11 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -1776,11 +1783,11 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {0?}</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">जोड़ना</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1788,11 +1795,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -1808,23 +1815,23 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">१</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">भरो</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">बचाओ</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -1842,11 +1849,11 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {0?}</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">जोड़ना</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1854,11 +1861,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
     <message>
         <source>Add Above</source>
@@ -1870,11 +1877,11 @@ failed: </source>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">१</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्तियाँ</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -1885,7 +1892,7 @@ failed: </source>
     <name>InstrumentsDialog</name>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्तियाँ</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -1907,7 +1914,7 @@ failed: </source>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">विफल</translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -1964,7 +1971,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>Frame</source>
@@ -2028,15 +2035,15 @@ failed: </source>
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">खूँटी/हुक</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -2244,11 +2251,11 @@ failed: </source>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्तियाँ</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -2307,11 +2314,11 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -2440,7 +2447,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -2604,7 +2611,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -2636,7 +2643,7 @@ failed: </source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">बचाओ</translation>
     </message>
     <message>
         <source>Save Score to File</source>
@@ -3052,7 +3059,7 @@ failed: </source>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ध</translation>
     </message>
     <message>
         <source>Enter Note A</source>
@@ -3064,7 +3071,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नि</translation>
     </message>
     <message>
         <source>Enter Note B</source>
@@ -3076,7 +3083,7 @@ failed: </source>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स</translation>
     </message>
     <message>
         <source>Enter Note C</source>
@@ -3088,7 +3095,7 @@ failed: </source>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">रे</translation>
     </message>
     <message>
         <source>Enter Note D</source>
@@ -3100,7 +3107,7 @@ failed: </source>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ग</translation>
     </message>
     <message>
         <source>Enter Note E</source>
@@ -3112,7 +3119,7 @@ failed: </source>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म</translation>
     </message>
     <message>
         <source>Enter Note F</source>
@@ -3124,7 +3131,7 @@ failed: </source>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">प</translation>
     </message>
     <message>
         <source>Enter Note G</source>
@@ -3972,7 +3979,7 @@ failed: </source>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ट्रांस्पोस</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -4637,11 +4644,11 @@ before closing?</source>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वर</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पिच</translation>
     </message>
     <message>
         <source>Head</source>
@@ -4700,7 +4707,7 @@ before closing?</source>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पेज</translation>
     </message>
     <message>
         <source>Page No.:</source>
@@ -4730,11 +4737,11 @@ before closing?</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
     <message>
         <source>Page Size</source>
@@ -4766,7 +4773,7 @@ before closing?</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मिमी.</translation>
     </message>
     <message>
         <source>inch</source>
@@ -4839,7 +4846,7 @@ before closing?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नाम:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -4937,7 +4944,7 @@ before closing?</source>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {001.01?}</translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -4945,7 +4952,7 @@ before closing?</source>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {0:00:00?}</translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -5291,7 +5298,7 @@ before closing?</source>
     </message>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">रिकार्ड</translation>
     </message>
     <message>
         <source>Record</source>
@@ -5359,31 +5366,31 @@ before closing?</source>
     </message>
     <message>
         <source>192000</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {192000?}</translation>
     </message>
     <message>
         <source>96000</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {96000?}</translation>
     </message>
     <message>
         <source>88200</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {88200?}</translation>
     </message>
     <message>
         <source>48000</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {48000?}</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {44100?}</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {32000?}</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {22050?}</translation>
     </message>
     <message>
         <source>Fragments:</source>
@@ -5395,31 +5402,31 @@ before closing?</source>
     </message>
     <message>
         <source>4096</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {4096?}</translation>
     </message>
     <message>
         <source>2048</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {2048?}</translation>
     </message>
     <message>
         <source>1024</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {1024?}</translation>
     </message>
     <message>
         <source>512</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {512?}</translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {256?}</translation>
     </message>
     <message>
         <source>128</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {128?}</translation>
     </message>
     <message>
         <source>64</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">३ {64?}</translation>
     </message>
     <message>
         <source>Portaudio</source>
@@ -5471,7 +5478,7 @@ before closing?</source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">शोर्ट कट </translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -5543,6 +5550,30 @@ before closing?</source>
     </message>
     <message>
         <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hi_IN Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pt_BR Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished">स्कोर</translation>
+    </message>
+    <message>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two Sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Landscape</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5618,7 +5649,7 @@ Please select a single note or rest and retry operation
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">रिकार्ड</translation>
     </message>
 </context>
 <context>
@@ -5644,7 +5675,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठलेबल</translation>
     </message>
     <message>
         <source>Cycles</source>
@@ -5686,7 +5717,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">छोटा</translation>
     </message>
 </context>
 <context>
@@ -5709,7 +5740,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">१</translation>
     </message>
 </context>
 <context>
@@ -5749,11 +5780,11 @@ please select a measure and try again</source>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">विफल</translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">म्यूजस्कोर: फाइल खोलो</translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
@@ -5802,7 +5833,7 @@ failed: </source>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">फाइल खोलो</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
@@ -5924,11 +5955,11 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -5959,15 +5990,15 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वतः (ऑटो)</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
 </context>
 <context>
@@ -6058,7 +6089,7 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ऊपर</translation>
     </message>
     <message>
         <source>Direction:</source>
@@ -6066,11 +6097,11 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वतः (ऑटो)</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नीचे</translation>
     </message>
 </context>
 <context>
@@ -6118,7 +6149,7 @@ failed: </source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मिटाना</translation>
     </message>
 </context>
 <context>
@@ -6155,7 +6186,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">पाठ:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -6195,7 +6226,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरलिपि पंक्ति</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -6289,7 +6320,7 @@ failed: </source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">मिमी.</translation>
     </message>
     <message>
         <source>frame color</source>
@@ -6328,7 +6359,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">नि</translation>
     </message>
     <message>
         <source>I</source>
@@ -6456,11 +6487,11 @@ failed: </source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ओके (OK)</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">कैंसल (Cancel)</translation>
     </message>
 </context>
 <context>
@@ -6497,7 +6528,7 @@ failed: </source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">जोड़ना</translation>
     </message>
 </context>
 <context>
@@ -6576,7 +6607,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">स्वरयुगल  (टुप्लेट )</translation>
     </message>
     <message>
         <source>has number</source>

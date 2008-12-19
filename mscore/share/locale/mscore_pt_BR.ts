@@ -1444,6 +1444,14 @@ failed: </source>
         <source>Voice 4</source>
         <translation>Voz 4</translation>
     </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">Sistema</translation>
+    </message>
+    <message>
+        <source>System Bracket Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>

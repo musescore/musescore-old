@@ -1445,6 +1445,14 @@ echec :</translation>
         <source>Voice 4</source>
         <translation type="unfinished">Voix 4</translation>
     </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished">Système</translation>
+    </message>
+    <message>
+        <source>System Bracket Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
