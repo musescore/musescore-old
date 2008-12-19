@@ -76,7 +76,7 @@
  set line and user accidental.
  */
 
-static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave, int /*accidental*/)
+static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave, int /*accidental*/, Ottava* ottava, int track)
       {
 //      printf("xmlSetPitch(n=%p, tick=%d, st=%c, alter=%d, octave=%d, accidental=%d)",
 //             n, tick, step, alter, octave, accidental);
@@ -93,6 +93,10 @@ static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave,
             pitch = 0;
       if (pitch > 127)
             pitch = 127;
+
+      if (ottava != 0 && ottava->track() == track)
+    	      pitch -= ottava->pitchShift();
+
       n->setPitch(pitch);
 
       //                        a  b  c  d  e  f  g
@@ -1401,7 +1405,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             }
       else if (dirType == "wedge") {
-            bool above = placement == "above";
+            bool above = (placement == "above");
             if (type == "crescendo")
                   addWedge(0, tick, rx, ry, above, 0);
             else if (type == "stop")
@@ -2236,7 +2240,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // pitch must be set before adding note to chord as note
             // is inserted into pitch sorted list (ws)
 
-            xmlSetPitch(note, tick, c, alter, octave, accidental);
+            xmlSetPitch(note, tick, c, alter, octave, accidental, ottava, track);
             cr->add(note);
 
             ((Chord*)cr)->setNoStem(noStem);
