@@ -4,7 +4,11 @@
       - fixed crash when moving system brackets
       - renamed template files replacing "_" with " "
       (la)
-	  - correct issue on full measure rest in musicXML export
+	    - correct issue on full measure rest in musicXML export
+      (db)
+      - changed gateTime numbers in template files to match new default
+      - removed pageFormat tag from leadsheet, piano, and choir templates. 
+        New scores based on these templates now adopt the default page size set by the user
 18.dec (tb)
       - updating Hindi translation from Balvihar Grindia
        (ws)
