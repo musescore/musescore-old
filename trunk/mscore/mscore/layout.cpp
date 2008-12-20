@@ -561,9 +561,11 @@ int ScoreLayout::countEmptyMeasures(Measure* m)
       {
       int n = 0;
       while (m->isEmpty()) {
-            ++n;
             MeasureBase* mb = m->next();
-            if (!mb || (mb->type() != MEASURE) || m->breakMultiMeasureRest())
+            if (m->breakMultiMeasureRest() && n)
+                  break;
+            ++n;
+            if (!mb || (mb->type() != MEASURE))
                   break;
             m = static_cast<Measure*>(mb);
             }
