@@ -600,7 +600,10 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   Measure* m = static_cast<Measure*>(curMeasure);
                   if (score()->style()->createMultiMeasureRests) {
                         int n = countEmptyMeasures(static_cast<Measure*>(curMeasure));
-                        m->setMultiMeasure(n);
+                        if (n > 1)
+                              m->setMultiMeasure(n);
+                        else
+                              m->setMultiMeasure(0);
                         }
                   else
                         m->setMultiMeasure(0);
