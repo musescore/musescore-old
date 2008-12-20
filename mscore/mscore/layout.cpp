@@ -560,10 +560,10 @@ bool ScoreLayout::layoutPage()
 int ScoreLayout::countEmptyMeasures(Measure* m)
       {
       int n = 0;
-      while (!m->breakMultiMeasureRest() && m->isEmpty()) {
+      while (m->isEmpty()) {
             ++n;
             MeasureBase* mb = m->next();
-            if (!mb || (mb->type() != MEASURE))
+            if (!mb || (mb->type() != MEASURE) || m->breakMultiMeasureRest())
                   break;
             m = static_cast<Measure*>(mb);
             }

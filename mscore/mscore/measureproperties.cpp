@@ -40,6 +40,7 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       nominalZ->setValue(ev.nominator2);
       nominalN->setValue(ev.denominator2);
       irregular->setChecked(m->irregular());
+      breakMultiMeasureRest->setChecked(m->breakMultiMeasureRest());
       int n  = m->repeatCount();
       count->setValue(n);
       count->setEnabled(m->repeatFlags() & RepeatEnd);
@@ -154,6 +155,8 @@ void MeasureProperties::apply()
             }
 
       m->setIrregular(isIrregular());     // TODO: shall we make this undoable?
+      m->setBreakMultiMeasureRest(breakMultiMeasureRest->isChecked());
+
       m->setRepeatCount(repeatCount());
       score->setDirty();
       score->select(0, SELECT_SINGLE, 0);
