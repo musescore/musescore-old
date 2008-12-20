@@ -136,7 +136,7 @@ void MuseScore::showPalette(bool visible)
             Palette* sp = new Palette;
             sp->setName(tr("Clefs"));
             sp->setMag(0.8);
-            sp->setGrid(33, 62);
+            sp->setGrid(33, 65);
             sp->setYOffset(1.0);
 
             for (int i = 0; i < CLEF_MAX; ++i) {

@@ -73,7 +73,7 @@ Palette::Palette(QWidget* parent)
       extraMag      = 1.0;
       currentIdx    = -1;
       selectedIdx   = -1;
-      _yOffset      = 0;
+      _yOffset      = 0.0;
       hgrid         = 50;
       vgrid         = 60;
       _drawGrid     = false;
@@ -246,17 +246,13 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
             QDrag* drag = new QDrag(this);
             QMimeData* mimeData = new QMimeData;
             if (cells[currentIdx]) {
-                  Element* el = cells[currentIdx]->element;
-                  QRect ir = idxRect(currentIdx);
-                  QPoint sp = dragStartPosition - ir.topLeft();
+                  Element* el  = cells[currentIdx]->element;
+                  QRect ir     = idxRect(currentIdx);
+                  qreal mag    = PALETTE_SPATIUM * extraMag / _spatium;
+                  QPointF spos = QPointF(dragStartPosition) / mag;
+                  spos        -= QPointF(cells[currentIdx]->x, cells[currentIdx]->y);
 
-                  qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-// printf("pos %d %d   %f %f  mag %f\n", sp.x(), sp.y(), el->pos().x(), el->pos().y(), mag);
-                  QPointF spos = QPointF(sp) / mag;
-                  QPointF rpos(spos - el->pos());
-                  rpos /= mag;
-
-                  mimeData->setData(mimeSymbolFormat, el->mimeData(rpos));
+                  mimeData->setData(mimeSymbolFormat, el->mimeData(spos));
                   drag->setMimeData(mimeData);
 
                   dragSrcIdx = currentIdx;
@@ -310,7 +306,6 @@ void Palette::append(Element* s, const QString& name)
       cell->element   = s;
       cell->name      = name;
       cell->drawStaff = needsStaff(s);
-
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -395,15 +390,8 @@ void Palette::paintEvent(QPaintEvent*)
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
-            if (idx == selectedIdx) {
+            if (idx == selectedIdx)
                   p.fillRect(r, palette().brush(QPalette::Normal, QPalette::Highlight).color());
-#if 0
-                  if (idx == currentIdx)
-                        p.fillRect(r, QColor(220, 220, 200));
-                  else
-                        p.fillRect(r, QColor(200, 200, 180));
-#endif
-                  }
             else if (idx == currentIdx)
                   p.fillRect(r, p.background().color().light(118));
             if (cells.isEmpty() || cells[idx] == 0)
@@ -415,7 +403,7 @@ void Palette::paintEvent(QPaintEvent*)
             if (el->type() != ICON) {
                   int row    = idx / c;
                   int column = idx % c;
-                  // hack:
+
                   el->layout(&layout);
                   el->setPos(0.0, 0.0);   // HACK
 
@@ -448,17 +436,19 @@ void Palette::paintEvent(QPaintEvent*)
 
                   sy += _yOffset / mag;
 
+                  p.translate(QPointF(sx, sy));
+                  // el->setPos(sx, sy);
+                  cells[idx]->x = sx;
+                  cells[idx]->y = sy;
+
+                  p.setPen(QPen(palette().brush(QPalette::Normal,
+                     (idx == selectedIdx) ? QPalette::HighlightedText : QPalette::Text).color()));
+
                   QList<const Element*> elist;
                   el->collectElements(elist);
-                  p.translate(QPointF(sx, sy));
-// printf("%f %f\n", sx, sy);
                   foreach(const Element* e, elist) {
                         p.save();
                         p.translate(e->pos());
-                        if (idx == selectedIdx)
-                              p.setPen(QPen(palette().brush(QPalette::Normal, QPalette::HighlightedText).color()));
-                        else
-                              p.setPen(QPen(palette().brush(QPalette::Normal, QPalette::Text).color()));
                         e->draw(p);
                         p.restore();
                         }
@@ -467,8 +457,8 @@ void Palette::paintEvent(QPaintEvent*)
             else {
                   int x      = r.x();
                   int y      = r.y();
-                  QIcon icon = ((Icon*)el)->icon();
-                  int border = 2;
+                  QIcon icon = static_cast<Icon*>(el)->icon();
+                  static const int border = 2;
                   int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
                   p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2,
                      icon.pixmap(size, QIcon::Normal, QIcon::On)
