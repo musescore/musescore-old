@@ -210,8 +210,12 @@ struct Style {
       bool useGermanNoteNames;
       bool chordNamesUseSymbols;
 
-      bool concertPitch;      // display transposing instruments in concert pitch
+      bool concertPitch;            // display transposing instruments in concert pitch
+
       bool createMultiMeasureRests;
+      int minEmptyMeasures;         // minimum number of empty measures for multi measure rest
+      Spatium minMMRestWidth;       // minimum width of multi measure rest
+
       bool hideEmptyStaves;
 
       Direction stemDir[VOICES];

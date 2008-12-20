@@ -71,15 +71,17 @@ void Rest::draw(QPainter& p) const
       {
       Measure* m = measure();
       if (m && m->multiMeasure()) {
+            double mw = score()->style()->minMMRestWidth.point();
+
             int n = m->multiMeasure();
             QPen pen(p.pen());
             double pw = _spatium * .7;
             pen.setWidthF(pw);
             p.setPen(pen);
-            double w = m->width();
-            double y = _spatium;
-            double x1 = -w * .5 + _spatium * 4;
-            double x2 = w * .5 - _spatium;
+            double w  = m->width() * .5;
+            double y  = _spatium;
+            double x1 = -w + mw;
+            double x2 =  w - _spatium;
             p.drawLine(x1, y, x2, y);
 
             pen.setWidthF(_spatium * .2);
@@ -91,7 +93,7 @@ void Rest::draw(QPainter& p) const
 
             p.setFont(symbols[allabreveSym].font());
             y = -_spatium * 6.5;
-            x1 = _spatium * 2;
+            x1 = mw * .5;
             p.drawText(QRectF(x1, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
                QString("%1").arg(n));
             }
@@ -350,7 +352,7 @@ QRectF Rest::bbox() const
       Measure* m = measure();
       if (m && m->multiMeasure()) {
             double h = _spatium * 6.5;
-            double w = _spatium * 4;
+            double w = score()->style()->minMMRestWidth.point();
             return QRectF(-w * .5, -h + 2 * _spatium, w, h);
             }
       else {
