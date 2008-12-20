@@ -91,7 +91,8 @@ void Rest::draw(QPainter& p) const
 
             p.setFont(symbols[allabreveSym].font());
             y = -_spatium * 6.5;
-            p.drawText(QRectF(0.0, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
+            x1 = _spatium * 2;
+            p.drawText(QRectF(x1, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
                QString("%1").arg(n));
             }
       else {
