@@ -1558,9 +1558,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             docName = "--";
             QDomElement e = doc.documentElement();
 
+            dragOffset = QPoint();
             int type = Element::readType(e, &dragOffset);
-            dragOffset *= PDPI/DPI;
-//            dragOffset = QPoint(0.0, 0.0);
 
             Element* el = 0;
             switch(type) {

@@ -117,6 +117,7 @@ struct PaletteCell {
       Element* element;
       QString name;
       bool drawStaff;
+      double x, y;
       };
 
 //---------------------------------------------------------
@@ -172,6 +173,7 @@ class Palette : public QWidget {
 
       int idx(const QPoint&) const;
       QRect idxRect(int);
+      void layoutCell(PaletteCell*);
 
    private slots:
       void actionToggled(bool val);

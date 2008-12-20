@@ -2,10 +2,6 @@
       MuseScore Score Typesetter
 =================================================================
 
-MuseScore is distributed under the GNU General Public License (GPL).
-Please check out the file COPYING in this directory for more
-details.
-
 Features:
       - WYSIWYG design, notes are entered on a "virtual notepaper"
       - TrueType font(s) for printing & display allows for high quality
@@ -19,6 +15,11 @@ Features:
       - integrated sequencer and software synthesizer to
         play the score
       - print or create pdf files
+
+Licence:
+      MuseScore is distributed under the GNU General Public License (GPL).
+      Please read the file COPYING in this directory for more
+      details.
 
 Requirements:
       - qt4 gui lib version qt4.4.x
@@ -52,6 +53,7 @@ Installation:
             sudo make install
 
 User Documentation:
+      Look at the handbook section at http://www.musescore.org
 
 Program Documentation:
 
@@ -96,5 +98,5 @@ Test:
 =================================================================
 
       Werner Schweer; ws@seh.de
-      http://www.musescore.net/
+      http://www.musescore.org/
 
