@@ -1,4 +1,5 @@
 20.dec (ws)
+      - new measure property: break multi measure rest
       - first experimental implementation of "multi measure rests".
 19.dec (ws)
       - fixed crash when undo delete bracket
