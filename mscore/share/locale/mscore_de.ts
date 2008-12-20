@@ -75,7 +75,7 @@ p, li { white-space: pre-wrap; }
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Rahmen Eigenschaften</translation>
+        <translation>MuseScore: Eigenschaften Rahmen</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -1062,7 +1062,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: Instrumente Eigenschaften editieren</translation>
+        <translation>MuseScore: Eigenschaften Instrumente ändern</translation>
     </message>
     <message>
         <source>Transpose</source>
@@ -1101,7 +1101,7 @@ fehlgeschlagen: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Notenzeile/Instrument Eigenschaften</translation>
+        <translation>MuseScore: Eigenschaften Notenzeile/Instrument</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -2167,7 +2167,7 @@ fehlgeschlagen: </translation>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation>Eigenschaften Takte...</translation>
+        <translation>Eigenschaften Takt...</translation>
     </message>
 </context>
 <context>
@@ -6126,7 +6126,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Eigenschaften Notenzeilen Text...</translation>
+        <translation>Eigenschaften Notenzeilentext...</translation>
     </message>
 </context>
 <context>
@@ -6174,7 +6174,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation>MuseScore: Eigenschaften Tempo Text</translation>
+        <translation>MuseScore: Eigenschaften Tempotext</translation>
     </message>
     <message>
         <source>Tempo:</source>
@@ -6769,7 +6769,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Volta Eigenschaften</translation>
+        <translation>Eigenschaften Volta</translation>
     </message>
     <message>
         <source>Text:</source>
