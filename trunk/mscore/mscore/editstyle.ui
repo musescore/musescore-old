@@ -102,31 +102,85 @@
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Seite_5" >
-      <layout class="QGridLayout" name="gridLayout_2" >
-       <item row="0" column="0" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>579</width>
+        <height>393</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6" >
+       <item>
         <widget class="QCheckBox" name="concertPitch" >
          <property name="text" >
           <string>Display in Concert Pitch</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <spacer name="horizontalSpacer" >
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
+       <item>
+        <widget class="QGroupBox" name="multiMeasureRests" >
+         <property name="title" >
+          <string>Create Multi Measure Rests</string>
          </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>355</width>
-           <height>20</height>
-          </size>
+         <property name="flat" >
+          <bool>true</bool>
          </property>
-        </spacer>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <property name="checked" >
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5" >
+          <item>
+           <layout class="QFormLayout" name="formLayout_3" >
+            <item row="2" column="0" >
+             <widget class="QLabel" name="label_16" >
+              <property name="text" >
+               <string>Minumum width of measure:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" >
+             <widget class="QDoubleSpinBox" name="minMeasureWidth" >
+              <property name="suffix" >
+               <string>sp</string>
+              </property>
+              <property name="minimum" >
+               <double>2.000000000000000</double>
+              </property>
+              <property name="value" >
+               <double>4.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="label_15" >
+              <property name="text" >
+               <string>Minimum Number of empty measures:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QSpinBox" name="minEmptyMeasures" />
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
-       <item row="3" column="0" >
+       <item>
+        <widget class="QCheckBox" name="hideEmptyStaves" >
+         <property name="text" >
+          <string>Hide Empty Staves</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -134,28 +188,22 @@
          <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
-           <height>334</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" >
-        <widget class="QCheckBox" name="createMultiMeasureRests" >
-         <property name="text" >
-          <string>Create Multi Measure Rests</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" >
-        <widget class="QCheckBox" name="hideEmptyStaves" >
-         <property name="text" >
-          <string>Hide Empty Staves</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>579</width>
+        <height>393</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label" >
@@ -589,6 +637,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_8" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>579</width>
+        <height>393</height>
+       </rect>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_3" >
        <item>
         <widget class="QGroupBox" name="groupBox_2" >
@@ -638,6 +694,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>579</width>
+        <height>393</height>
+       </rect>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_4" >
        <item>
         <widget class="QGroupBox" name="groupBox_3" >
@@ -814,6 +878,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page1" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
@@ -919,6 +991,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_26" >
@@ -1021,6 +1101,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" name="gridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_38" >
@@ -1184,6 +1272,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_8" >
@@ -1244,6 +1340,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
         <widget class="QCheckBox" name="useGermanNoteNames" >
@@ -1288,6 +1392,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_6" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QGridLayout" name="gridLayout_3" >
        <item row="0" column="0" >
         <widget class="QLabel" name="label_35" >
@@ -1356,6 +1468,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_7" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout" >
        <item>
         <widget class="QGroupBox" name="groupBox" >

@@ -149,7 +149,9 @@ void EditStyle::getValues()
       lstyle->useGermanNoteNames     = useGermanNoteNames->isChecked();
       lstyle->chordNamesUseSymbols   = chordNamesUseSymbols->isChecked();
       lstyle->concertPitch           = concertPitch->isChecked();
-      lstyle->createMultiMeasureRests = createMultiMeasureRests->isChecked();
+      lstyle->createMultiMeasureRests = multiMeasureRests->isChecked();
+      lstyle->minEmptyMeasures        = minEmptyMeasures->value();
+      lstyle->minMMRestWidth          = Spatium(minMeasureWidth->value());
       lstyle->hideEmptyStaves         = hideEmptyStaves->isChecked();
 
       lstyle->propertyDistanceHead   = Spatium(propertyDistanceHead->value());
@@ -235,7 +237,10 @@ void EditStyle::setValues()
       useGermanNoteNames->setChecked(lstyle->useGermanNoteNames);
       chordNamesUseSymbols->setChecked(lstyle->chordNamesUseSymbols);
       concertPitch->setChecked(lstyle->concertPitch);
-      createMultiMeasureRests->setChecked(lstyle->createMultiMeasureRests);
+
+      multiMeasureRests->setChecked(lstyle->createMultiMeasureRests);
+      minEmptyMeasures->setValue(lstyle->minEmptyMeasures);
+      minMeasureWidth->setValue(lstyle->minMMRestWidth.val());
       hideEmptyStaves->setChecked(lstyle->hideEmptyStaves);
 
       propertyDistanceHead->setValue(lstyle->propertyDistanceHead.val());

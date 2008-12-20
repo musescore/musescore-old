@@ -229,6 +229,9 @@ Style defaultStyle = {
       false,            // use symbols in chord names
       false,            // display in concert pitch
       false,            // create multi measure rests
+      2,                // minimum number of empty measures for multi measure rest
+      Spatium(4),       // minimum width of multi measure rest
+
       false,            // hide empty staves
 
       { UP, DOWN, UP, DOWN }, // stem direction in multi voice context
@@ -547,6 +550,10 @@ void Style::load(QDomElement e, int version)
                   concertPitch = i;
             else if (tag == "createMultiMeasureRests")
                   createMultiMeasureRests = i;
+            else if (tag == "minEmptyMeasures")
+                  minEmptyMeasures = i;
+            else if (tag == "minMMRestWidth")
+                  minMMRestWidth = Spatium(d);
             else if (tag == "hideEmptyStaves")
                   hideEmptyStaves = i;
             else if (tag == "gateTime")
@@ -656,6 +663,10 @@ void Style::save(Xml& xml)
             xml.tag("displayInConcertPitch", concertPitch);
       if (createMultiMeasureRests)
             xml.tag("createMultiMeasureRests", createMultiMeasureRests);
+
+      xml.tag("minEmptyMeasures", minEmptyMeasures);
+      xml.tag("minMMRestWidth", minMMRestWidth.val());
+
       if (hideEmptyStaves)
             xml.tag("hideEmptyStaves", hideEmptyStaves);
 
