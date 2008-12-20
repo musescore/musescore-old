@@ -53,8 +53,11 @@ void ScoreLayout::rebuildBspTree()
       {
       QRectF r;
       QList<const Element*> el;
-      for (const MeasureBase* m = first(); m; m = m->next())
+      for (const MeasureBase* m = first(); m; m = m->next()) {
+            if (m->type() == MEASURE && static_cast<const Measure*>(m)->multiMeasure() < 0)
+                  continue;
             m->collectElements(el);
+            }
       foreach(const Page* page, _pages) {
             r |= page->abbox();
             page->collectElements(el);
@@ -549,6 +552,25 @@ bool ScoreLayout::layoutPage()
       }
 
 //---------------------------------------------------------
+//   countEmptyMeasures
+//    search for empty measures; return number if empty
+//    measures in sequence
+//---------------------------------------------------------
+
+int ScoreLayout::countEmptyMeasures(Measure* m)
+      {
+      int n = 0;
+      while (!m->breakMultiMeasureRest() && m->isEmpty()) {
+            ++n;
+            MeasureBase* mb = m->next();
+            if (!mb || (mb->type() != MEASURE))
+                  break;
+            m = static_cast<Measure*>(mb);
+            }
+      return n;
+      }
+
+//---------------------------------------------------------
 //   layoutSystem1
 //---------------------------------------------------------
 
@@ -571,7 +593,17 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       bool isFirstMeasure = true;
       MeasureBase* firstMeasure = curMeasure;
 
-      for (; curMeasure; curMeasure = curMeasure->next()) {
+      for (; curMeasure;) {
+            if (curMeasure->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(curMeasure);
+                  if (score()->style()->createMultiMeasureRests) {
+                        int n = countEmptyMeasures(static_cast<Measure*>(curMeasure));
+                        m->setMultiMeasure(n);
+                        }
+                  else
+                        m->setMultiMeasure(0);
+                  }
+
             System* oldSystem = curMeasure->system();
             curMeasure->setSystem(system);
             double ww      = 0.0;
@@ -642,6 +674,22 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   curMeasure = curMeasure->next();
                   break;
                   }
+            if (curMeasure->type() == MEASURE) {
+                  int skip = static_cast<Measure*>(curMeasure)->multiMeasure();
+                  if (skip) {
+                        curMeasure = curMeasure->next();
+                        --skip;
+                        while (skip && curMeasure) {
+                              static_cast<Measure*>(curMeasure)->setMultiMeasure(-1);
+                              --skip;
+                              curMeasure = curMeasure->next();
+                              }
+                        }
+                  else
+                        curMeasure = curMeasure->next();
+                  }
+            else
+                  curMeasure = curMeasure->next();
             }
 
       //
