@@ -126,7 +126,11 @@ Measure::Measure(Score* s)
       _lineBreak   = false;
       _pageBreak   = false;
       _no          = 0;
-      _irregular   = false;
+
+      _irregular             = false;
+      _breakMultiMeasureRest = false;
+      _multiMeasure          = 0;
+
       _repeatCount = 2;
       _repeatFlags = 0;
       _noOffset    = 0;
@@ -2376,6 +2380,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tag("endRepeat", _repeatCount);
             if (_irregular)
                   xml.tagE("irregular");
+            if (_breakMultiMeasureRest)
+                  xml.tagE("breakMultiMeasureRest");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
             if (_noText)
@@ -2445,6 +2451,8 @@ void Measure::write(Xml& xml) const
             xml.tag("endRepeat", _repeatCount);
       if (_irregular)
             xml.tagE("irregular");
+      if (_breakMultiMeasureRest)
+            xml.tagE("breakMultiMeasureRest");
       xml.tag("stretch", _userStretch);
 
       if (_noText)
@@ -2714,6 +2722,8 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "irregular")
                   _irregular = true;
+            else if (tag == "breakMultiMeasureRest")
+                  _breakMultiMeasureRest = true;
             else if (tag == "Tuplet") {
                   Tuplet* tuplet = new Tuplet(score());
                   tuplet->setTrack(score()->curTrack);
@@ -2815,6 +2825,8 @@ void Measure::read(QDomElement e)
                   }
             else if (tag == "irregular")
                   _irregular = true;
+            else if (tag == "breakMultiMeasureRest")
+                  _breakMultiMeasureRest = true;
             else if (tag == "stretch")
                   _userStretch = val.toDouble();
             else if (tag == "Text") {
@@ -3207,5 +3219,27 @@ bool Measure::isMeasureRest(int staffIdx)
 Spatium Measure::userDistance(int i) const
       {
       return staves[i]->_vspacer ? staves[i]->_vspacer->space() : Spatium(0);
+      }
+
+//---------------------------------------------------------
+//   isEmpty
+//---------------------------------------------------------
+
+bool Measure::isEmpty() const
+      {
+      int n = 0;
+      const Segment* s = _first;
+      bool empty = true;
+      for (int i = 0; i < _size; ++i) {
+            if (s->subtype() == Segment::SegChordRest) {
+                  for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+                        if (s->element(staffIdx) && s->element(staffIdx)->type() != REST)
+                              empty = false;
+                        }
+                  ++n;
+                  }
+            s = s->next();
+            }
+      return empty && (n < 2);
       }
 

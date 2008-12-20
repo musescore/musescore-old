@@ -1,3 +1,5 @@
+20.dec (ws)
+      - first experimental implementation of "multi measure rests".
 19.dec (ws)
       - fixed crash when undo delete bracket
       - right align system brackets
@@ -8,7 +10,7 @@
 	    - improve support of octave-shift in musicXML import
       (db)
       - changed gateTime numbers in template files to match new default
-      - removed pageFormat tag from leadsheet, piano, and choir templates. 
+      - removed pageFormat tag from leadsheet, piano, and choir templates.
         New scores based on these templates now adopt the default page size set by the user
 18.dec (tb)
       - updating Hindi translation from Balvihar Grindia

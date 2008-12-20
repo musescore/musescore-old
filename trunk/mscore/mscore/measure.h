@@ -96,6 +96,11 @@ class Measure : public MeasureBase {
 
       double _userStretch;
       bool _irregular;        ///< Irregular measure, do not count
+      bool _breakMultiMeasureRest;
+      int _multiMeasure;      // set from layout();
+                              //   0 - normal measure
+                              // > 0 - multi measure rest;
+                              // < 0 - skipped measure
 
       int _endBarLineType;
       bool _endBarLineGenerated;
@@ -149,7 +154,6 @@ class Measure : public MeasureBase {
       Segment* first() const           { return _first;      }
       Segment* last() const            { return _last;       }
       void remove(Segment*);
-      bool empty()                     { return _first == 0; }
 
       double userStretch() const       { return _userStretch; }
       void setUserStretch(double v)    { _userStretch = v;  }
@@ -215,6 +219,11 @@ class Measure : public MeasureBase {
       bool isMeasureRest(int staffIdx);
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
+      bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest; }
+      void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
+      bool isEmpty() const;
+      int multiMeasure() const                { return _multiMeasure; }
+      void setMultiMeasure(int val)           { _multiMeasure = val;  }
       };
 
 #endif

@@ -160,14 +160,21 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
+      <item row="2" column="0" >
        <widget class="QLabel" name="label_5" >
         <property name="text" >
          <string>Repeat Count</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
+      <item row="0" column="1" >
+       <widget class="QCheckBox" name="breakMultiMeasureRest" >
+        <property name="text" >
+         <string>break multi measure rest</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
        <widget class="QSpinBox" name="count" >
         <property name="minimum" >
          <number>1</number>
