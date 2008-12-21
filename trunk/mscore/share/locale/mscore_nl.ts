@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -1447,11 +1448,11 @@ toonhoogte</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Systeem</translation>
+        <translation>Systeem</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Systeem Groep Afstand:</translation>
     </message>
 </context>
 <context>
@@ -5559,27 +5560,27 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished">Partituur</translation>
+        <translation>Partituur</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard papierformaat</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation type="unfinished">Dubbelzijdig</translation>
+        <translation>Dubbelzijdig</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Liggend</translation>
+        <translation>Liggend</translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
