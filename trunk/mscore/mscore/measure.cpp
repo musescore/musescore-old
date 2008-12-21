@@ -1660,10 +1660,23 @@ printf("\n");
                         if (!_irregular && ((e->tickLen() == 0) || (e->tickLen() == tickLen()))) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
-                              if (seg == 1)
-                                    e->setXpos((stretch - e->width()) * .5 - style->barNoteDistance.point());
-                              else
-                                    e->setXpos((stretch - s->x() - e->width()) * .5 - _spatium * .5);
+                              double xx = 0;
+                              if (_multiMeasure > 0) {
+                                    Rest* rest = static_cast<Rest*>(e);
+                                    if (seg == 1) {
+                                          rest->setMMWidth(xpos[segs] - 2 * s->x());
+                                          }
+                                    else {
+                                          rest->setMMWidth(xpos[segs] - s->x() - style->barNoteDistance.point() );
+                                          }
+                                    }
+                              else {
+                                    if (seg == 1)
+                                          xx = (stretch - e->width()) * .5 - style->barNoteDistance.point();
+                                    else
+                                          xx = (stretch - s->x() - e->width()) * .5 - _spatium * .5;
+                                    }
+                              e->setXpos(xx);
                               }
                         else if (e->voice() == 1) {          // TODO: check ??
                               e->move(0.0, -3 * _spatium);

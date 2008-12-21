@@ -71,29 +71,28 @@ void Rest::draw(QPainter& p) const
       {
       Measure* m = measure();
       if (m && m->multiMeasure()) {
-            double mw = score()->style()->minMMRestWidth.point();
-
             int n = m->multiMeasure();
+
             QPen pen(p.pen());
             double pw = _spatium * .7;
             pen.setWidthF(pw);
             p.setPen(pen);
-            double w  = m->width() * .5;
+
+            double w  = _mmWidth;
             double y  = _spatium;
-            double x1 = -w + mw;
-            double x2 =  w - _spatium;
-            p.drawLine(x1, y, x2, y);
+            double x1 = 0.0;
+            double x2 =  w;
+            pw *= .5;
+            p.drawLine(x1 + pw, y, x2 - pw, y);
 
             pen.setWidthF(_spatium * .2);
             p.setPen(pen);
-            x1 -= pw * .5;
-            x2 += pw * .5;
             p.drawLine(x1, y-_spatium, x1, y+_spatium);
             p.drawLine(x2, y-_spatium, x2, y+_spatium);
 
             p.setFont(symbols[allabreveSym].font());
             y = -_spatium * 6.5;
-            x1 = mw * .5;
+            x1 = x1 + (x2 - x1) * .5;
             p.drawText(QRectF(x1, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
                QString("%1").arg(n));
             }

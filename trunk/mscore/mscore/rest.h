@@ -34,6 +34,7 @@ class Rest : public ChordRest {
       int _sym;
 
       int dotline;            // depends on rest symbol
+      double _mmWidth;        // width of multi measure rest
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -64,6 +65,8 @@ class Rest : public ChordRest {
       void setStaffMove(int val)    { _staffMove = val; }
 
       virtual void setDuration(Duration t);
+      void setMMWidth(double val)   { _mmWidth = val; }
+      double mmWidth() const        { return _mmWidth; }
       };
 
 #endif
