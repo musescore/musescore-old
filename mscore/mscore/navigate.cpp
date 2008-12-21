@@ -52,9 +52,11 @@ ChordRest* nextChordRest(ChordRest* cr)
             seg = seg->next1();
             if (!seg)
                   break;
+            if (seg->measure()->multiMeasure() < 0)
+                  continue;
             Element* e = seg->element(track);
             if (e && e->isChordRest())
-                  return (ChordRest*) e;
+                  return static_cast<ChordRest*>(e);
             }
       return 0;
       }
@@ -75,9 +77,11 @@ ChordRest* prevChordRest(ChordRest* cr)
             seg = seg->prev1();
             if (!seg)
                   break;
+            if (seg->measure()->multiMeasure() < 0)
+                  continue;
             Element* e = seg->element(track);
             if (e && e->isChordRest())
-                  return (ChordRest*) e;
+                  return static_cast<ChordRest*>(e);
             }
       return 0;
       }
@@ -94,11 +98,11 @@ Note* Score::upAlt(Element* element)
             if (_is.track <= 0)
                   return 0;
             --(_is.track);
-            re = searchNote(((Rest*)element)->tick(), _is.track);
+            re = searchNote(element->tick(), _is.track);
             }
-      else {
+      else if (element->type() == NOTE) {
             // find segment
-            Chord* chord     = ((Note*) element)->chord();
+            Chord* chord     = static_cast<Note*>(element)->chord();
             Segment* segment = chord->segment();
 
             // collect all notes for this segment in noteList:
@@ -109,7 +113,7 @@ Note* Score::upAlt(Element* element)
                   Element* el = segment->element(track);
                   if (!el || el->type() != CHORD)
                         continue;
-                  NoteList* nl = ((Chord*)el)->noteList();
+                  NoteList* nl = static_cast<Chord*>(el)->noteList();
                   for (riNote in   = nl->rbegin(); in != nl->rend(); ++in) {
                         Note* note = in->second;
                         iNote ii = rnl.add(note);
@@ -157,11 +161,11 @@ Note* Score::downAlt(Element* element)
             if ((_is.track + 1) >= staves * VOICES)
                   return 0;
             ++(_is.track);
-            re = searchNote(((Rest*)element)->tick(), _is.track);
+            re = searchNote(element->tick(), _is.track);
             }
-      else {
+      else if (element->type() == NOTE) {
             // find segment
-            Chord* chord     = ((Note*) element)->chord();
+            Chord* chord     = static_cast<Note*>(element)->chord();
             Segment* segment = chord->segment();
 
             // collect all notes for this segment in noteList:
@@ -172,7 +176,7 @@ Note* Score::downAlt(Element* element)
                   Element* el = segment->element(track);
                   if (!el || el->type() != CHORD)
                         continue;
-                  NoteList* nl = ((Chord*)el)->noteList();
+                  NoteList* nl = static_cast<Chord*>(el)->noteList();
                   for (riNote in   = nl->rbegin(); in != nl->rend(); ++in) {
                         Note* note = in->second;
                         iNote ii = rnl.add(note);
@@ -192,7 +196,7 @@ Note* Score::downAlt(Element* element)
       if (re == 0)
             return 0;
       if (re->type() == CHORD)
-            re = ((Chord*)re)->noteList()->back();
+            re = static_cast<Chord*>(re)->noteList()->back();
       return (Note*)re;
       }
 
@@ -204,7 +208,7 @@ Note* Score::downAlt(Element* element)
 Note* Score::downAltCtrl(Note* note) const
       {
       Chord* chord = note->chord();
-      NoteList* nl  = chord->noteList();
+      NoteList* nl = chord->noteList();
       return nl->begin()->second;
       }
 
@@ -264,9 +268,11 @@ ChordRest* Score::nextMeasure(ChordRest* element, bool selectBehavior)
       if (!element)
             return 0;
 
-      MeasureBase* measure = element->measure()->next();
-      while (measure && measure->type() != MEASURE)
-            measure = measure->next();
+      MeasureBase* mb = element->measure()->next();
+      while (mb && ((mb->type() != MEASURE) || (mb->type() == MEASURE && static_cast<Measure*>(mb)->multiMeasure() < 0)))
+            mb = mb->next();
+
+      Measure* measure = static_cast<Measure*>(mb);
 
       int endTick = element->measure()->last()->nextChordRest(element->track(), true)->tick();
       bool last = false;
@@ -290,14 +296,14 @@ ChordRest* Score::nextMeasure(ChordRest* element, bool selectBehavior)
             }
       int staff = element->staffIdx();
 
-      Segment* startSeg = last ? ((Measure*)measure)->last() : ((Measure*)measure)->first();
+      Segment* startSeg = last ? measure->last() : measure->first();
       for (Segment* seg = startSeg; seg; seg = last ? seg->prev() : seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
 
                   if (pel && pel->isChordRest())
-                        return (ChordRest*)pel;
+                        return static_cast<ChordRest*>(pel);
                   }
             }
       return 0;
@@ -312,9 +318,11 @@ ChordRest* Score::prevMeasure(ChordRest* element)
       if (!element)
             return 0;
 
-      MeasureBase* measure = element->measure()->prev();
-      while (measure && measure->type() != MEASURE)
-            measure = measure->prev();
+      MeasureBase* mb = element->measure()->prev();
+      while (mb && ((mb->type() != MEASURE) || (mb->type() == MEASURE && static_cast<Measure*>(mb)->multiMeasure() < 0)))
+            mb = mb->prev();
+
+      Measure* measure = static_cast<Measure*>(mb);
 
       int startTick = element->measure()->first()->nextChordRest(element->track())->tick();
       bool last = false;
@@ -332,14 +340,14 @@ ChordRest* Score::prevMeasure(ChordRest* element)
 
       int staff = element->staffIdx();
 
-      Segment* startSeg = last ? ((Measure*)measure)->last() : ((Measure*)measure)->first();
+      Segment* startSeg = last ? measure->last() : measure->first();
       for (Segment* seg = startSeg; seg; seg = last ? seg->prev() : seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
 
                   if (pel && pel->isChordRest())
-                        return (ChordRest*)pel;
+                        return static_cast<ChordRest*>(pel);
                   }
             }
       return 0;
@@ -353,30 +361,30 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
       {
       Measure* m;
       if (el->type() == NOTE)
-            m = ((Note*)el)->chord()->segment()->measure();
+            m = static_cast<Note*>(el)->chord()->segment()->measure();
       else if (el->type() == REST)
-            m = ((Rest*)el)->segment()->measure();
+            m = static_cast<Rest*>(el)->segment()->measure();
       else if (el->type() == CHORD)
-            m = ((Chord*)el)->segment()->measure();
+            m = static_cast<Chord*>(el)->segment()->measure();
       else if (el->type() == SEGMENT)
-            m = ((Segment*)el)->measure();
+            m = static_cast<Segment*>(el)->measure();
       else if (el->type() == LYRICS)
-            m = ((Lyrics*)el)->measure();
+            m = static_cast<Lyrics*>(el)->measure();
       else if (el->type() == HARMONY)
-            m = ((Harmony*)el)->measure();
+            m = static_cast<Harmony*>(el)->measure();
       else
             return;
 
       System* sys = m->system();
-      
+
       QPointF p(el->canvasPos());
       QRectF r(canvas()->vGeometry());
       QRectF mRect(m->abbox());
       QRectF sysRect(sys->abbox());
-      
+
       const qreal BORDER_X = _spatium * 3;
       const qreal BORDER_Y = _spatium * 3;
-      
+
       // only try to track measure if not during playback
       if (!playBack)
             sysRect = mRect;
@@ -386,13 +394,13 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
       qreal right = mRect.right() + BORDER_X;
 
       QRectF showRect(left, top, right - left, bottom - top);
-      
+
       // canvas is not as wide as measure, track note instead
       if (r.width() < showRect.width()) {
             showRect.setX(p.x());
             showRect.setWidth(el->width());
             }
-            
+
       // canvas is not as tall as system
       if (r.height() < showRect.height()) {
             if (sys->staves()->size() == 1 || !playBack) {
@@ -406,16 +414,16 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
 //                   showRect.setHeight(1);
                   }
             }
-      
+
       if (r.contains(showRect))
             return;
-            
+
 //       qDebug() << "showRect" << showRect << "\tcanvas" << r;
 
       qreal mag = canvas()->xMag() * DPI / PDPI;
       qreal x   = - canvas()->xoffset() / mag;
       qreal y   = - canvas()->yoffset() / mag;
-      
+
       qreal oldX = x, oldY = y;
 
       if (showRect.left() < r.left()) {
@@ -453,7 +461,7 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
             y = page->y();
       else if (r.height() < page->height() && r.height() + y > page->height())
             y = (page->height() + page->y()) - r.height();
-      
+
       // hack: don't update if we haven't changed the offset
       if (oldX == x && oldY == y)
             return;
