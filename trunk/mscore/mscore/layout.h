@@ -65,7 +65,7 @@ class ScoreLayout : public Element {
       MeasureBase* curMeasure;
       bool doReLayout();
       void rebuildBspTree();
-      int countEmptyMeasures(Measure*);
+      Measure* skipEmptyMeasures(Measure*);
 
    public:
       ScoreLayout(Score*);
