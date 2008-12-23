@@ -1,5 +1,8 @@
 23.dec (ws)
       - fix printing of multi measure rests
+	(olavgun)
+      - lilypond export of longa and brevis, and of dynamic signs "sff"
+	and "crescendo".
 22.dec (ws)
       - update text elements after changing text style
         (does not work for lyrics for yet unknown reasons)
