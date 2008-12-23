@@ -552,14 +552,15 @@ bool ScoreLayout::layoutPage()
       }
 
 //---------------------------------------------------------
-//   countEmptyMeasures
+//   skipEmptyMeasures
 //    search for empty measures; return number if empty
 //    measures in sequence
 //---------------------------------------------------------
 
-int ScoreLayout::countEmptyMeasures(Measure* m)
+Measure* ScoreLayout::skipEmptyMeasures(Measure* m)
       {
-      int n = 0;
+      Measure* sm = m;
+      int n       = 0;
       while (m->isEmpty()) {
             MeasureBase* mb = m->next();
             if (m->breakMultiMeasureRest() && n)
@@ -569,7 +570,17 @@ int ScoreLayout::countEmptyMeasures(Measure* m)
                   break;
             m = static_cast<Measure*>(mb);
             }
-      return n;
+      m = sm;
+      if (n >= score()->style()->minEmptyMeasures) {
+            for (int i = 0; i < (n-1); ++i) {
+                  m->setMultiMeasure(-1);
+                  m = static_cast<Measure*>(m->next());
+                  }
+            m->setMultiMeasure(n);
+            }
+      else
+            m->setMultiMeasure(0);
+      return m;
       }
 
 //---------------------------------------------------------
@@ -598,13 +609,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       for (; curMeasure;) {
             if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (score()->style()->createMultiMeasureRests) {
-                        int n = countEmptyMeasures(static_cast<Measure*>(curMeasure));
-                        if (n >= score()->style()->minEmptyMeasures)
-                              m->setMultiMeasure(n);
-                        else
-                              m->setMultiMeasure(0);
-                        }
+                  if (score()->style()->createMultiMeasureRests)
+                        curMeasure = skipEmptyMeasures(m);
                   else
                         m->setMultiMeasure(0);
                   }
@@ -678,20 +684,6 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   system->setPageBreak(curMeasure->pageBreak());
                   curMeasure = curMeasure->next();
                   break;
-                  }
-            if (curMeasure->type() == MEASURE) {
-                  int skip = static_cast<Measure*>(curMeasure)->multiMeasure();
-                  if (skip) {
-                        curMeasure = curMeasure->next();
-                        --skip;
-                        while (skip && curMeasure) {
-                              static_cast<Measure*>(curMeasure)->setMultiMeasure(-1);
-                              --skip;
-                              curMeasure = curMeasure->next();
-                              }
-                        }
-                  else
-                        curMeasure = curMeasure->next();
                   }
             else
                   curMeasure = curMeasure->next();
