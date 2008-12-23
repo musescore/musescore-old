@@ -263,7 +263,7 @@ void System::layout(ScoreLayout* layout, double xo1)
             if (!ss->show())
                   continue;
 
-            double xo = xo1;
+            double xo = -xo1;
             for (int i = 0; i < bracketLevels; ++i) {
                   xo += bracketWidth[i] + style->bracketDistance.point();
                   Bracket* b = ss->brackets[i];
