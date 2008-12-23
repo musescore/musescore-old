@@ -840,7 +840,7 @@ void Measure::layout2(ScoreLayout* layout)
             for (int track = 0; track < tracks; ++track) {
                   Element* el = s->element(track);
                   if (el && (el->type() == CHORD)) {
-                        Chord* a = (Chord*)el;
+                        Chord* a = static_cast<Chord*>(el);
                         const NoteList* nl = a->noteList();
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                               Tie* tie = in->second->tieFor();

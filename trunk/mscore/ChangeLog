@@ -1,4 +1,9 @@
-21.dec (tb)
+23.dec (ws)
+      - fix printing of multi measure rests
+22.dec (ws)
+      - update text elements after changing text style
+        (does not work for lyrics for yet unknown reasons)
+      (tb)
       - updating Dutch translation by Jaap Plaisier
 20.dec (ws)
       - new measure property: break multi measure rest

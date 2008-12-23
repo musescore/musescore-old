@@ -181,6 +181,7 @@ class TextB : public Element {
       virtual void paste();
 
       bool replaceSpecialChars();
+      void styleChanged();
       };
 
 //---------------------------------------------------------

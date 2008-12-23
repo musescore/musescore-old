@@ -1376,8 +1376,15 @@ void Score::print(QPrinter* printer)
       QList<const Element*> el;
       foreach (const Element* element, _gel)
             element->collectElements(el);
-      for (MeasureBase* m = _measures.first(); m; m = m->next())
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
             m->collectElements(el);
+            }
 
       const QList<Page*> pl = _layout->pages();
       int pages = pl.size();
@@ -1469,6 +1476,12 @@ bool Score::saveSvg(const QString& saveName)
             page->collectElements(el);
             foreach(System* system, *page->systems()) {
                   foreach(MeasureBase* m, system->measures()) {
+                        // skip multi measure rests
+                        if (m->type() == MEASURE) {
+                              Measure* mm = static_cast<Measure*>(m);
+                              if (mm->multiMeasure() < 0)
+                                    continue;
+                              }
                         m->collectElements(el);
                         }
                   }
@@ -1526,8 +1539,15 @@ bool Score::savePng(const QString& name)
             QList<const Element*> eel;
             foreach (const Element* element, _gel)
                   element->collectElements(eel);
-            for (MeasureBase* m = _measures.first(); m; m = m->next())
+            for (MeasureBase* m = _measures.first(); m; m = m->next()) {
+                  // skip multi measure rests
+                  if (m->type() == MEASURE) {
+                        Measure* mm = static_cast<Measure*>(m);
+                        if (mm->multiMeasure() < 0)
+                              continue;
+                        }
                   m->collectElements(eel);
+                  }
 
             for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
                   const Page* page = pl.at(pageNumber);

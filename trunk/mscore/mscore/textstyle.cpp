@@ -311,6 +311,7 @@ void TextStyleDialog::apply()
       saveStyle(current);
       cs->setTextStyles(styles);
       cs->setLayoutAll(true);
+      cs->textStyleChanged();
       cs->endCmd();
       cs->setDirty(true);
       }

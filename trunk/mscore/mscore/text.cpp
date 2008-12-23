@@ -243,9 +243,6 @@ void TextBase::layout(ScoreLayout*)
 
 void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       {
-//      p.setRenderHint(QPainter::Antialiasing, true);
-//      p.setRenderHint(QPainter::TextAntialiasing, true);
-
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
       if (cursor) {
@@ -257,6 +254,7 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
             }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
+
 
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
       _doc->documentLayout()->draw(&p, c);
@@ -300,6 +298,15 @@ TextB::TextB(const TextB& e)
 
       editMode  = e.editMode;
       cursorPos = e.cursorPos;
+      }
+
+//---------------------------------------------------------
+//   styleChanged
+//---------------------------------------------------------
+
+void TextB::styleChanged()
+      {
+      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
