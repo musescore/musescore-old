@@ -1957,3 +1957,36 @@ void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
             }
       }
 
+//---------------------------------------------------------
+//   textStyleChanged
+//    called whenever the text style changed
+//---------------------------------------------------------
+
+void Score::textStyleChanged()
+      {
+      foreach(Element* e, _gel) {
+            if (e->type() == TEXT)
+                  e->setSubtype(e->subtype());
+            }
+      for(MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            foreach(Element* e, *mb->el()) {
+                  if (e->type() == TEXT)
+                        e->setSubtype(e->subtype());
+                  }
+            if (mb->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(mb);
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                              LyricsList* ll = s->lyricsList(staffIdx);
+                              foreach(Lyrics* l, *ll) {
+                                    if (l) {
+                                          l->setSubtype(TEXT_LYRIC);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      setLayoutAll(true);
+      }
+
