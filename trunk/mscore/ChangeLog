@@ -1,3 +1,5 @@
+26.dec (ws)
+      - Fix bug when changing time signature (4/4->3/4 + undo)
 23.dec (ws)
       - fix printing of multi measure rests
 	(olavgun)
