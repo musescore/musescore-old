@@ -2359,7 +2359,7 @@ void Measure::adjustToLen(int ol, int nl)
                         }
                   }
             }
-      score()->undoChangeMeasureLen(this, nl);
+      score()->undoChangeMeasureLen(this, ol, nl);
       if (diff < 0) {
             //
             //  CHECK: do not remove all slurs

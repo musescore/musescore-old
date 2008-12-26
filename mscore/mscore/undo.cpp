@@ -496,12 +496,12 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeMeasureLen:
                   {
                   Measure* m = (Measure*)i->measure;
-                  int ol     = m->tickLen();
+                  int ol     = i->val2;
                   int nl     = i->val1;
                   m->setTickLen(nl);
 
                   //
-                  // move EndBarLin and TimeSigAnnounce
+                  // move EndBarLine and TimeSigAnnounce
                   // to end of measure:
                   //
                   int staves = nstaves();
@@ -517,6 +517,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                               }
                         }
                   i->val1 = ol;
+                  i->val2 = nl;
                   }
                   break;
 
@@ -837,13 +838,14 @@ void Score::undoRemoveElement(Element* element)
 //   undoChangeMeasureLen
 //---------------------------------------------------------
 
-void Score::undoChangeMeasureLen(Measure* m, int tick)
+void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
       {
       checkUndoOp();
       UndoOp i;
       i.type     = UndoOp::ChangeMeasureLen;
       i.measure  = m;
-      i.val1     = tick;
+      i.val1     = newTicks;
+      i.val2     = oldTicks;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
