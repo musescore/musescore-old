@@ -270,7 +270,8 @@ class Score : public QObject {
       void padToggle(int n);
       void insertMeasures(int, int);
 
-      void cmdAddPitch(int, bool);
+      void cmdAddPitch(int note, bool addFlag);
+      void cmdAddPitch1(int pitch, bool addFlag);
       void cmdAddInterval(int);
 
       void printFile();

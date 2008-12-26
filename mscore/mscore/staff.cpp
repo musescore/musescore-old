@@ -169,6 +169,8 @@ Staff::~Staff()
       {
       delete _clefList;
       delete _keymap;
+      _keymap = 0;      // DEBUG
+      _clefList = 0;
       }
 
 //---------------------------------------------------------

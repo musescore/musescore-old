@@ -442,6 +442,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             return;
             }
       int key = 0;
+
       if (!preferences.alternateNoteEntryMethod)
             key = staff(_is.track / VOICES)->keymap()->key(_is.pos());
       int pitch;
@@ -475,7 +476,15 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   _padState.pitch = 127;
             pitch = _padState.pitch;
             }
+      cmdAddPitch1(pitch, addFlag);
+      }
 
+//---------------------------------------------------------
+//   cmdAddPitch1
+//---------------------------------------------------------
+
+void Score::cmdAddPitch1(int pitch, bool addFlag)
+      {
       if (addFlag) {
             // add note to chord
             Note* on = getSelectedNote();
@@ -523,7 +532,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   }
             _is.setPos(_is.pos() + len);
             _is.cr = nextChordRest(cr);
-//            _padState.tie = false;
             emit posChanged(_is.pos());
             }
       }
@@ -2288,7 +2296,12 @@ void Score::cmd(const QString& cmd)
             startCmd();
             while (!midiInputQueue.isEmpty()) {
                   MidiInputEvent ev = midiInputQueue.dequeue();
+
+                  cmdAddPitch1(ev.pitch, ev.chord);
+#if 0
                   int len = _padState.tickLen;
+
+
                   if (ev.chord) {
                         Note* on = getSelectedNote();
                         Note* n = addNote(on->chord(), ev.pitch);
@@ -2299,6 +2312,7 @@ void Score::cmd(const QString& cmd)
                         _is.setPos(_is.pos() + len);
                         emit posChanged(_is.pos());
                         }
+#endif
                   }
             layoutAll = true;
             endCmd();
