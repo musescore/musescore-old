@@ -114,11 +114,10 @@ void ISynth::process(unsigned n, float* l, float* r, int stride)
 
 void ISynth::play(const MidiOutEvent& e)
       {
-      int ch = e.type & 0xf;
+      int ch      = e.type & 0xf;
       int channel = e.port * 16 + ch;
 // printf("note %d %d %d\n", channel, pitch, velo);
 
-//                        midiOutputTrace = true;
       int err = 0;
       switch(e.type & 0xf0) {
             case ME_NOTEON:
@@ -146,9 +145,10 @@ void ISynth::play(const MidiOutEvent& e)
                   break;
 
             case ME_PROGRAM:
-                  err = fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, e.a);
+                  // if e.b == 1 then a drum instrument is requested and we set lbank to 128
+                  err = fluid_synth_program_select(_fluidsynth, channel, fontId, e.b ? 128 : lbank, e.a);
                   if (midiOutputTrace)
-                        printf("MidiOut: %2d:%2d Prog    %3d %3d\n", e.port, ch, lbank, e.a);
+                        printf("MidiOut: %2d:%2d Prog    %3d %3d drum %d\n", e.port, ch, lbank, e.a, e.b);
                   break;
             }
 
@@ -157,15 +157,33 @@ void ISynth::play(const MidiOutEvent& e)
                e.type & 0xff, channel, e.a, e.b, fluid_synth_error(_fluidsynth));
       }
 
+#if 0
+//---------------------------------------------------------
+//   program
+//---------------------------------------------------------
+
+void ISynth::program(int channel, int program, bool drum)
+      {
+      int lbank = drum ? 128 : ((program & 0xff00) >> 8);
+      program &= 0xff;
+
+      int err = fluid_synth_program_select(_fluidsynth, channel, fontId, lbank, program);
+      if (midiOutputTrace)
+            printf("MidiOut: %d Prog %3d Drum: %d\n", channel, program, drum);
+      if (err)
+            fprintf(stderr, "FluidSynth error: program channel %d program %d drum %d: %s\n",
+               channel, program, drum, fluid_synth_error(_fluidsynth));
+      }
+#endif
+
 //---------------------------------------------------------
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* ISynth::getPatchInfo(int port, int ch, const MidiPatch* p) const
+const MidiPatch* ISynth::getPatchInfo(bool onlyDrums, const MidiPatch* p) const
       {
       if (_fluidsynth == 0)
             return 0;
-      ch = port * 16 + ch;
       if (p == 0) {
             // get font at font stack index 0
             fluid_font = fluid_synth_get_sfont(_fluidsynth, 0);
@@ -177,15 +195,13 @@ const MidiPatch* ISynth::getPatchInfo(int port, int ch, const MidiPatch* p) cons
 
       while ((*fluid_font->iteration_next)(fluid_font, &preset)) {
             patch.hbank = fluid_sfont_get_id(fluid_font);
-            int bank = (*preset.get_banknum)(&preset);
-            if (ch == 9 && bank != 128) // show only drums for channel 10
+            int bank    = (*preset.get_banknum)(&preset);
+            if (onlyDrums && bank != 128)
                   continue;
-            if (bank == 128)
-                  bank = 127;
-            patch.typ   = 0;
             patch.name  = (*preset.get_name)(&preset);
-            patch.lbank = bank;
+            patch.lbank = -1;
             patch.prog  = (*preset.get_num)(&preset);
+            patch.drum  = onlyDrums;
             return &patch;
             }
       return 0;

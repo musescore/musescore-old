@@ -445,10 +445,10 @@ void Seq::stopTransport()
       foreach(const Event* e, activeNotes) {
             if (e->type() != ME_NOTEON)
                   continue;
-            NoteOn* no = (NoteOn*)e;
+            const NoteOn* no = static_cast<const NoteOn*>(e);
             MidiOutEvent e;
-            e.port = no->port();
-            e.type = ME_NOTEON | no->channel();
+            e.port = cs->midiPort(no->channel());
+            e.type = ME_NOTEON | cs->midiChannel(no->channel());
             e.a    = no->pitch();
             e.b    = 0;
             driver->putEvent(e);
@@ -476,6 +476,43 @@ void Seq::startTransport()
       state     = PLAY;
       }
 
+#if 0
+//---------------------------------------------------------
+//   program
+//---------------------------------------------------------
+
+void Driver::program(int channel, int program, bool /*drum*/)
+      {
+      int ch   = channel % 16;
+      int port = channel / 16;
+
+      int hb = (program >> 16) & 0xff;
+      int lb = (program >> 8) & 0xff;
+      int pr = program & 0xff;
+      if (hb != 0xff) {
+            MidiOutEvent e;
+            e.port = port;
+            e.type = ME_CONTROLLER | ch;
+            e.a    = CTRL_HBANK;
+            e.b    = hb;
+            putEvent(e);
+            }
+      if (lb != 0xff) {
+            MidiOutEvent e;
+            e.port = port;
+            e.type = ME_CONTROLLER | ch;
+            e.a    = CTRL_LBANK;
+            e.b    = lb;
+            putEvent(e);
+            }
+      MidiOutEvent e;
+      e.port = port;
+      e.type = ME_PROGRAM | ch;
+      e.a    = pr;
+      putEvent(e);
+      }
+#endif
+
 //---------------------------------------------------------
 //   playEvent
 //    send one event to the synthesizer
@@ -486,10 +523,11 @@ void Seq::playEvent(const Event* event)
       int type = event->type();
       if (type == ME_NOTEON) {
             NoteOn* n = (NoteOn*) event;
+
             int channel = n->channel();
             MidiOutEvent e;
-            e.port = n->port();
-            e.type = ME_NOTEON | channel;
+            e.port = cs->midiPort(channel);
+            e.type = ME_NOTEON | cs->midiChannel(channel);
             e.a    = n->pitch();
             e.b    = n->velo();
 
@@ -522,40 +560,11 @@ void Seq::playEvent(const Event* event)
                   }
             }
       else if (type == ME_CONTROLLER)  {
-            ControllerEvent* c = (ControllerEvent*)event;
-            if (c->controller() == CTRL_PROGRAM) {
-                  int hb = (c->value() >> 16) & 0xff;
-                  int lb = (c->value() >> 8) & 0xff;
-                  int pr = c->value() & 0xff;
-                  if (hb != 0xff) {
-                        MidiOutEvent e;
-                        e.port = c->port();
-                        e.type = ME_CONTROLLER | c->channel();
-                        e.a    = CTRL_HBANK;
-                        e.b    = hb;
+            const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
+            QList<MidiOutEvent> ol;
+            if (c->midiOutEvent(&ol, cs)) {
+                  foreach(MidiOutEvent e, ol)
                         driver->putEvent(e);
-                        }
-                  if (lb != 0xff) {
-                        MidiOutEvent e;
-                        e.port = c->port();
-                        e.type = ME_CONTROLLER | c->channel();
-                        e.a    = CTRL_LBANK;
-                        e.b    = lb;
-                        driver->putEvent(e);
-                        }
-                  MidiOutEvent e;
-                  e.port = c->port();
-                  e.type = ME_PROGRAM | c->channel();
-                  e.a    = pr;
-                  driver->putEvent(e);
-                  }
-            else {
-                  MidiOutEvent e;
-                  e.port = c->port();
-                  e.type = ME_CONTROLLER | c->channel();
-                  e.a    = c->controller();
-                  e.b    = c->value();
-                  driver->putEvent(e);
                   }
             }
       else {
@@ -700,24 +709,21 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 //---------------------------------------------------------
 //   initInstruments
 //---------------------------------------------------------
+
 void Seq::initInstruments()
-{
+      {
       foreach(Part* part, *cs->parts()) {
             const Instrument* instr = part->instrument();
 
             foreach(const Channel* a, instr->channel) {
-                  int idx     = a->channel;
-                  int channel = cs->midiChannel(idx);
-                  int port    = cs->midiPort(idx);
-
                   foreach(Event* e, a->init) {
                         if (e == 0)
                               continue;
-                        MidiOutEvent event;
-                        if (e->midiOutEvent(&event)) {
-                              event.port = port;
-                              event.type |= channel;
-                              sendEvent(event);
+                        e->setChannel(a->channel);
+                        QList<MidiOutEvent> el;
+                        if (e->midiOutEvent(&el, cs)) {
+                              foreach(MidiOutEvent event, el)
+                                    sendEvent(event);
                               }
                         else
                               printf("unknown event\n");
@@ -736,7 +742,7 @@ void Seq::collectEvents()
             delete e;
 
       events.clear();
-      initInstruments();
+//      initInstruments();
 
       cs->toEList(&events, 0);
 
@@ -886,7 +892,7 @@ void Seq::startNote(Channel* a, int pitch, int velo)
 
       foreach(const Event* event, eventList) {
             NoteOn* n = (NoteOn*)event;
-            if (n->port() == port && n->channel() == channel && n->pitch() == pitch) {
+            if (n->channel() == a->channel && n->pitch() == pitch) {
                   MidiOutEvent ev;
                   ev.port = port;
                   ev.type = ME_NOTEON | channel;
@@ -907,8 +913,7 @@ void Seq::startNote(Channel* a, int pitch, int velo)
 
       if (!active) {
             NoteOn* e = new NoteOn;
-            e->setChannel(channel);
-            e->setPort(port);
+            e->setChannel(a->channel);
             e->setPitch(pitch);
             e->setVelo(velo);
             eventList.append(e);
@@ -930,9 +935,11 @@ void Seq::stopNotes()
       {
       foreach(const Event* event, eventList) {
             NoteOn* n = (NoteOn*)event;
+            int port    = cs->midiPort(n->channel());
+            int channel = cs->midiChannel(n->channel());
             MidiOutEvent ev;
-            ev.port = n->port();
-            ev.type = ME_NOTEON | n->channel();
+            ev.port = port;
+            ev.type = ME_NOTEON | channel;
             ev.a    = n->pitch();
             ev.b    = 0;
             sendEvent(ev);
@@ -1095,10 +1102,10 @@ void Seq::guiToSeq(const SeqMsg& msg)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* Seq::getPatchInfo(int port, int ch, const MidiPatch* p)
+const MidiPatch* Seq::getPatchInfo(bool onlyDrums, const MidiPatch* p)
       {
       if (driver)
-            return driver->getPatchInfo(port, ch, p);
+            return driver->getPatchInfo(onlyDrums, p);
       return 0;
       }
 

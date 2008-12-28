@@ -40,7 +40,7 @@ struct Channel;
 //---------------------------------------------------------
 
 struct MidiPatch {
-      signed char typ;                     // 1 - GM  2 - GS  4 - XG
+      bool drum;
       signed char hbank, lbank, prog;
       const char* name;
       };
@@ -178,7 +178,7 @@ class Seq : public QObject {
       void setScore(Score* s);
       void initInstruments();
 
-      const MidiPatch* getPatchInfo(int port, int ch, const MidiPatch* p);
+      const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p);
       Driver* getDriver()  { return driver; }
       };
 

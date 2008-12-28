@@ -21,6 +21,8 @@
 #include "midifile.h"
 #include "xml.h"
 #include "driver.h"
+#include "score.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   NoteEvent::write
@@ -206,29 +208,69 @@ void ControllerEvent::write(MidiFile* mf) const
 //   midiOutEvent
 //---------------------------------------------------------
 
-bool ControllerEvent::midiOutEvent(MidiOutEvent* e)
+bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, Score* cs) const
       {
+      int port = cs->midiPort(channel());
+      int ch   = cs->midiChannel(channel());
       switch(controller()) {
             case CTRL_PROGRAM:
-                  e->type = ME_PROGRAM;
-                  e->a     = value();
+                  {
+                  int hb = (value() >> 16) & 0xff;
+                  int lb = (value() >> 8) & 0xff;
+                  int pr = value() & 0xff;
+                  if (hb != 0xff) {
+                        MidiOutEvent e;
+                        e.port = port;
+                        e.type = ME_CONTROLLER | ch;
+                        e.a    = CTRL_HBANK;
+                        e.b    = hb;
+                        el->append(e);
+                        }
+                  if (lb != 0xff) {
+                        MidiOutEvent e;
+                        e.port = port;
+                        e.type = ME_CONTROLLER | ch;
+                        e.a    = CTRL_LBANK;
+                        e.b    = lb;
+                        el->append(e);
+                        }
+                  MidiOutEvent e;
+                  e.port = port;
+                  e.type = ME_PROGRAM | ch;
+                  e.a    = pr;
+                  e.b    = cs->midiMapping()->at(channel()).part->useDrumset();
+                  el->append(e);
+                  }
                   return true;
             case CTRL_PITCH:
                   {
-                  e->type = ME_PITCHBEND;
-                  int v   = value() + 8192;
-                  e->a    = v & 0x7f;
-                  e->b    = (v >> 7) & 0x7f;
+                  MidiOutEvent e;
+                  e.port = port;
+                  e.type = ME_PITCHBEND | ch;
+                  int v  = value() + 8192;
+                  e.a    = v & 0x7f;
+                  e.b    = (v >> 7) & 0x7f;
+                  el->append(e);
                   }
                   return true;
             case CTRL_PRESS:
-                  e->type = ME_AFTERTOUCH;
-                  e->a    = value();
+                  {
+                  MidiOutEvent e;
+                  e.port = port;
+                  e.type = ME_AFTERTOUCH | ch;
+                  e.a    = value();
+                  el->append(e);
+                  }
                   return true;
             default:
-                  e->type = ME_CONTROLLER;
-                  e->a    = controller();
-                  e->b    = value();
+                  {
+                  MidiOutEvent e;
+                  e.port = port;
+                  e.type = ME_CONTROLLER | ch;
+                  e.a    = controller();
+                  e.b    = value();
+                  el->append(e);
+                  }
                   return true;
             }
       return false;

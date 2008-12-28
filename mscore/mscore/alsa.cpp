@@ -781,10 +781,10 @@ void AlsaAudio::midiRead()
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* AlsaAudio::getPatchInfo(int port, int ch, const MidiPatch* p)
+const MidiPatch* AlsaAudio::getPatchInfo(bool onlyDrums, const MidiPatch* p)
       {
       if (synth)
-            return synth->getPatchInfo(port, ch, p);
+            return synth->getPatchInfo(onlyDrums, p);
       return 0;
       }
 

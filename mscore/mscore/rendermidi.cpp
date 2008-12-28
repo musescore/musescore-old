@@ -166,8 +166,6 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             if (note->tieBack())
                   continue;
             int idx = instr->channel[note->subchannel()]->channel;
-            int channel = midiChannel(idx);
-            int port    = midiPort(idx);
             NoteOn* ev = new NoteOn();
             int pitch = note->pitch() + pitchOffset;
             if (pitch > 127)
@@ -175,16 +173,14 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             ev->setPitch(pitch);
             ev->setVelo(60);
             ev->setNote(note);
-            ev->setChannel(channel);
-            ev->setPort(port);
+            ev->setChannel(idx);
             events->insertMulti(tick + i * arpeggioOffset, ev);
 
             ev = new NoteOn();
             ev->setPitch(pitch);
             ev->setVelo(0);
             ev->setNote(note);
-            ev->setChannel(channel);
-            ev->setPort(port);
+            ev->setChannel(idx);
             events->insertMulti(tick + len, ev);
             }
       }

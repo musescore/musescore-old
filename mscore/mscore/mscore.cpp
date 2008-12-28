@@ -905,14 +905,18 @@ void MuseScore::appendScore(Score* score)
             if (scoreList[i]->filePath() == score->filePath()) {
                   removeTab(i);
                   scoreList.insert(i, score);
+                  tab->blockSignals(true);
                   tab->insertTab(i, score->canvas(), score->name());
+                  tab->blockSignals(false);
                   return;
                   }
             }
 
       scoreList.push_back(score);
 
+      tab->blockSignals(true);
       tab->addTab(score->canvas(), score->name());
+      tab->blockSignals(false);
 
 //      bool showTabBar = scoreList.size() > 1;
 //      tab->setVisible(showTabBar);
@@ -1073,8 +1077,9 @@ void MuseScore::setCurrentScore(int idx)
             }
 
       if (tab->currentIndex() != idx) {
-            tab->setCurrentIndex(idx);  // will call setCurrentScore() again
-            return;
+            tab->blockSignals(true);
+            tab->setCurrentIndex(idx);
+            tab->blockSignals(false);
             }
       if (cs) {
             cs->setXoff(cs->canvas()->xoffset());
@@ -1376,7 +1381,9 @@ void MuseScore::removeTab(int i)
       if (checkDirty(score))
             return;
       scoreList.removeAt(i);
+      tab->blockSignals(true);
       tab->removeTab(i);
+      tab->blockSignals(false);
       cs = 0;
       if (i >= (n-1))
             i = 0;

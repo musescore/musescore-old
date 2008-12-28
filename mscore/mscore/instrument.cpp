@@ -108,7 +108,7 @@ void Instrument::write(Xml& xml) const
 
 void Instrument::read(QDomElement e)
       {
-      int program = 0;
+      int program = -1;
       int chorus = 30;
       int reverb = 30;
       int volume = 100;
@@ -196,7 +196,7 @@ Channel::Channel()
       for(int i = 0; i < A_INIT_COUNT; ++i)
             init.append(0);
       channel  = -1;
-      program  = 0;
+      program  = -1;
       hbank    = -1;
       lbank    = -1;
       volume   = 100;
@@ -304,19 +304,22 @@ void Channel::updateInitList() const
                   init[i] = 0;
                   }
             }
-      ControllerEvent* e = new ControllerEvent();
-      e->setController(CTRL_PROGRAM);
-      e->setValue(program);
-      init[A_PROGRAM] = e;
+      ControllerEvent* e;
+      if (program != -1) {
+            e = new ControllerEvent();
+            e->setController(CTRL_PROGRAM);
+            e->setValue(program);
+            init[A_PROGRAM] = e;
+            }
 
       if (hbank != -1) {
-            ControllerEvent* e = new ControllerEvent();
+            e = new ControllerEvent();
             e->setController(CTRL_HBANK);
             e->setValue(hbank);
             init[A_HBANK] = e;
             }
       if (lbank != -1) {
-            ControllerEvent* e = new ControllerEvent();
+            e = new ControllerEvent();
             e->setController(CTRL_LBANK);
             e->setValue(lbank);
             init[A_LBANK] = e;

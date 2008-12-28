@@ -239,34 +239,33 @@ else (MINGW)
 endif (MINGW)
 
 if (NOT MINGW)
-
 #======================================
 #     target smf2xml
 #======================================
 
-      add_executable(
-            smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
-            )
+#      add_executable(
+#            smf2xml smf2xml.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+#            )
 
-      target_link_libraries( smf2xml
-            ${QT_LIBRARIES}
-            )
-      set_target_properties( smf2xml
-            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-            )
+#      target_link_libraries( smf2xml
+#            ${QT_LIBRARIES}
+#            )
+#      set_target_properties( smf2xml
+#            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+#            )
 
 #======================================
 #     target xml2smf
 #======================================
 
-      add_executable(
-            xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
-            )
+#      add_executable(
+#            xml2smf xml2smf.cpp midifile.cpp event.cpp xml.cpp sig.cpp drumset.cpp
+#            )
 
-      target_link_libraries( xml2smf
-            ${QT_LIBRARIES}
-            )
-      set_target_properties( xml2smf
-            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-            )
+#      target_link_libraries( xml2smf
+#            ${QT_LIBRARIES}
+#            )
+#      set_target_properties( xml2smf
+#            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+#            )
 endif (NOT MINGW)
