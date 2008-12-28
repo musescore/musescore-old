@@ -54,7 +54,7 @@ class ISynth : public Synth {
       virtual bool loadSoundFont(const QString&);
       virtual void process(unsigned, float*, float*, int);
       virtual void play(const MidiOutEvent&);
-      virtual const MidiPatch* getPatchInfo(int port, int ch, const MidiPatch* p) const;
+      virtual const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p) const;
       };
 
 #endif

@@ -406,10 +406,10 @@ void JackAudio::process(int n, float* l, float* r, int stride)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const MidiPatch* JackAudio::getPatchInfo(int port, int ch, const MidiPatch* p)
+const MidiPatch* JackAudio::getPatchInfo(bool onlyDrums, const MidiPatch* p)
       {
       if (synth)
-            return synth->getPatchInfo(port, ch, p);
+            return synth->getPatchInfo(onlyDrums, p);
       return 0;
       }
 

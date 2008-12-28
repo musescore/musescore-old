@@ -39,6 +39,7 @@ PartEdit::PartEdit(QWidget* parent)
       connect(reverb,   SIGNAL(valueChanged(double,int)), SLOT(reverbChanged(double)));
       connect(mute,     SIGNAL(toggled(bool)),     SLOT(muteChanged(bool)));
       connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloToggled(bool)));
+      connect(drumset,  SIGNAL(toggled(bool)),     SLOT(drumsetToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -60,6 +61,7 @@ void PartEdit::setPart(Part* p, Channel* a)
       chorus->setValue(a->chorus);
       pan->setValue(a->pan);
       patch->setCurrentIndex(a->program);
+      drumset->setChecked(p->useDrumset());
       }
 
 //---------------------------------------------------------
@@ -94,8 +96,9 @@ void InstrumentListEditor::closeEvent(QCloseEvent* ev)
 //   updateAll
 //---------------------------------------------------------
 
-void InstrumentListEditor::updateAll(Score* cs)
+void InstrumentListEditor::updateAll(Score* score)
       {
+      cs = score;
       QList<MidiMapping>* mm = cs->midiMapping();
 
       int n = mm->size() - vb->count();
@@ -110,15 +113,7 @@ void InstrumentListEditor::updateAll(Score* cs)
             PartEdit* pe = new PartEdit;
             connect(pe, SIGNAL(soloChanged()), SLOT(updateSolo()));
             connect(this, SIGNAL(soloChanged()), pe, SLOT(updateSolo()));
-
             vb->addWidget(pe);
-            const MidiPatch* p = 0;
-            for (;;) {
-                  p = seq->getPatchInfo(0, 0, p);
-                  if (p == 0)
-                        break;
-                  pe->patch->addItem(p->name);
-                  }
             --n;
             }
       QString s;
@@ -127,6 +122,13 @@ void InstrumentListEditor::updateAll(Score* cs)
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
             pe->setPart(m.part, m.articulation);
+            const MidiPatch* p = 0;
+            for (;;) {
+                  p = seq->getPatchInfo(m.part->useDrumset(), p);
+                  if (p == 0)
+                        break;
+                  pe->patch->addItem(p->name);
+                  }
             ++idx;
             }
       }
@@ -151,7 +153,7 @@ void PartEdit::patchChanged(int n)
       {
       const MidiPatch* p = 0;
       for (int idx = 0;; ++idx) {
-            p = seq->getPatchInfo(0, 0, p);
+            p = seq->getPatchInfo(part->useDrumset(), p);
             if (p == 0)
                   break;
             if (idx == n) {
@@ -262,6 +264,24 @@ void PartEdit::soloToggled(bool val)
                   }
             }
       emit soloChanged();
+      }
+
+//---------------------------------------------------------
+//   drumsetToggled
+//---------------------------------------------------------
+
+void PartEdit::drumsetToggled(bool val)
+      {
+      part->setUseDrumset(val);
+      patch->clear();
+      const MidiPatch* p = 0;
+      for (;;) {
+            p = seq->getPatchInfo(val, p);
+            if (p == 0)
+                  break;
+            patch->addItem(p->name);
+            }
+      patch->setCurrentIndex(channel->program);
       }
 
 //---------------------------------------------------------

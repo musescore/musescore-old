@@ -25,6 +25,7 @@ class Note;
 class MidiFile;
 class Xml;
 class MidiOutEvent;
+class Score;
 
 //---------------------------------------------------------
 //   Midi Events
@@ -123,7 +124,7 @@ enum {
       CTRL_PROGRAM   = 0x40001,
       CTRL_PITCH     = 0x40002,
       CTRL_PRESS     = 0x40003,
-      CTRL_POLYAFTER = 0x40004
+      CTRL_POLYAFTER = 0x40004,
       };
 
 //---------------------------------------------------------
@@ -131,25 +132,23 @@ enum {
 //---------------------------------------------------------
 
 class Event {
-      int _port;
       int _ontime;
 
    public:
-      Event()               { _ontime = -1; _port = 0; }
+      Event()               { _ontime = -1; }
       Event(int t)          { _ontime = t;  }
       virtual ~Event()  {}
       virtual int type() const = 0;
 
       int ontime() const    { return _ontime; }
       void setOntime(int v) { _ontime = v;    }
-      int port() const      { return _port;   }
-      void setPort(int v)   { _port = v;      }
 
       virtual bool isChannelEvent() const = 0;
+      virtual void setChannel(int )       {}
       virtual void write(MidiFile*) const {}
       virtual void write(Xml&) const {}
       virtual void read(QDomElement) {}
-      virtual bool midiOutEvent(MidiOutEvent*) { return false; }
+      virtual bool midiOutEvent(QList<MidiOutEvent>*, Score*) const { return false; }
       virtual Event* clone() const = 0;
       };
 
@@ -158,7 +157,7 @@ class Event {
 //---------------------------------------------------------
 
 class ChannelEvent : public Event {
-      int _channel;
+      int _channel;     // mscore channel number, not midi channel
 
    protected:
       int _a;
@@ -173,7 +172,7 @@ class ChannelEvent : public Event {
 
       bool isChannelEvent() const { return true;     }
       int channel() const         { return _channel; }
-      void setChannel(int c)      { _channel = c;    }
+      virtual void setChannel(int c) { _channel = c;    }
       int dataA() const           { return _a;       }
       int dataB() const           { return _b;       }
       void setDataA(int v)        { _a = v;          }
@@ -188,7 +187,7 @@ class NoteOnOff : public ChannelEvent {
       Note* _note;
 
    public:
-      NoteOnOff()          { _note = 0; }
+      NoteOnOff()                   { _note = 0; }
       NoteOnOff(int t, int c, int p, int v)
          : ChannelEvent(t, c, p, v) { _note = 0; }
       virtual int type() const = 0;
@@ -301,7 +300,7 @@ class ControllerEvent : public ChannelEvent {
       void setValue(int v)                { _b = v; }
       virtual void write(MidiFile*) const;
       virtual void write(Xml&) const;
-      virtual bool midiOutEvent(MidiOutEvent*);
+      virtual bool midiOutEvent(QList<MidiOutEvent>*, Score*) const;
       };
 
 //---------------------------------------------------------
