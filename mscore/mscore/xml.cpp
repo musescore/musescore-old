@@ -316,6 +316,12 @@ void domError(QDomElement e)
       QString s = domElementPath(e);
       if (!docName.isEmpty())
             fprintf(stderr, "<%s>:", qPrintable(docName));
+      int ln = e.lineNumber();
+      if (ln != -1)
+            fprintf(stderr, "line:%d ", ln);
+      int col = e.columnNumber();
+      if (col != -1)
+            fprintf(stderr, "col:%d ", col);
       fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())

@@ -48,6 +48,7 @@ struct InstrumentTemplate {
       char maxPitch;
       char transpose;          // for transposing instruments
       bool useDrumset;
+      Drumset* drumset;
       QList<NamedEventList> midiActions;
       QList<Channel*> channel;
 

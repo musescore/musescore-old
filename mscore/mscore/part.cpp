@@ -66,7 +66,7 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       setPitchOffset(t->transpose);
       if (t->useDrumset) {
             setUseDrumset(true);
-            setDrumset(new Drumset(*smDrumset));
+            setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
             }
       _instrument.midiActions   = t->midiActions;
       foreach(Channel* a, _instrument.channel)
