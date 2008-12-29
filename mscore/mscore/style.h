@@ -155,6 +155,7 @@ struct Style {
       Spatium timesigLeftMargin;
       Spatium clefKeyRightMargin;
       Spatium stemWidth;
+      Spatium beginRepeatLeftMargin;
 
       Spatium minNoteDistance;
       Spatium barNoteDistance;
