@@ -38,6 +38,8 @@ struct DrumInstrument {
       int shortcut;           ///< accelerator key (CDEFGAB)
       };
 
+static const int DRUM_INSTRUMENTS = 128;
+
 //---------------------------------------------------------
 //   Drumset
 //    defines note heads and line position for all
@@ -45,7 +47,7 @@ struct DrumInstrument {
 //---------------------------------------------------------
 
 struct Drumset {
-      DrumInstrument drum[128];
+      DrumInstrument drum[DRUM_INSTRUMENTS];
 
       bool isValid(int pitch) const            { return drum[pitch].notehead != -1; }
       int noteHead(int pitch) const            { return drum[pitch].notehead;       }

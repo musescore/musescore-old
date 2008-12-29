@@ -196,6 +196,9 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
                   transpose = i;
             else if (tag == "drumset")
                   useDrumset = i;
+            else if (tag == "Drum") {
+                  // read instrument of drumset
+                  }
             else if (tag == "midiAction") {
                   NamedEventList a;
                   a.read(de);

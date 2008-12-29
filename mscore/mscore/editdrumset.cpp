@@ -73,6 +73,7 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       connect(staffLine, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
       connect(voice, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
       connect(stemDirection, SIGNAL(currentIndexChanged(int)), SLOT(valueChanged()));
+      connect(shortcut, SIGNAL(currentIndexChanged(int)), SLOT(shortcutChanged()));
       }
 
 //---------------------------------------------------------
@@ -97,6 +98,22 @@ void EditDrumset::updateList()
             }
       }
 
+void EditDrumset::updateList2()
+      {
+      for (int i = 0; i < pitchList->topLevelItemCount(); ++i) {
+            QTreeWidgetItem* item = pitchList->topLevelItem(i);
+            int pitch = item->data(0, Qt::UserRole).toInt();
+            if (nDrumset.shortcut(pitch) == 0)
+                  item->setText(COL_SHORTCUT, "");
+            else {
+                  QString s(QChar(nDrumset.shortcut(pitch)));
+                  item->setText(COL_SHORTCUT, s);
+                  }
+            item->setText(COL_NAME, nDrumset.name(pitch));
+            item->setData(0, Qt::UserRole, pitch);
+            }
+      }
+
 //---------------------------------------------------------
 //   nameChanged
 //---------------------------------------------------------
@@ -106,6 +123,42 @@ void EditDrumset::nameChanged(const QString& name)
       QTreeWidgetItem* item = pitchList->currentItem();
       if (item)
             item->setText(COL_NAME, name);
+      }
+
+//---------------------------------------------------------
+//   shortcutChanged
+//---------------------------------------------------------
+
+void EditDrumset::shortcutChanged()
+      {
+      QTreeWidgetItem* item = pitchList->currentItem();
+      if (!item)
+            return;
+
+      int pitch = item->data(COL_PITCH, Qt::UserRole).toInt();
+      int sc;
+      if (shortcut->currentIndex() == 7)
+            sc = 0;
+      else
+            sc = "ABCDEFG"[shortcut->currentIndex()];
+
+      if (QString(QChar(nDrumset.drum[pitch].shortcut)) != shortcut->currentText()) {
+            //
+            // remove conflicting shortcuts
+            //
+            for (int i = 0; i < DRUM_INSTRUMENTS; ++i) {
+                  if (i == pitch)
+                        continue;
+                  if (nDrumset.drum[i].shortcut == sc)
+                        nDrumset.drum[i].shortcut = 0;
+                  }
+            nDrumset.drum[pitch].shortcut = sc;
+            if (shortcut->currentIndex() == 7)
+                  item->setText(COL_SHORTCUT, "");
+            else
+                  item->setText(COL_SHORTCUT, shortcut->currentText());
+            }
+      updateList2();
       }
 
 //---------------------------------------------------------
@@ -204,12 +257,19 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
 
 void EditDrumset::valueChanged()
       {
-      int pitch = pitchList->currentItem()->data(0, Qt::UserRole).toInt();
+      int pitch = pitchList->currentItem()->data(COL_PITCH, Qt::UserRole).toInt();
       nDrumset.drum[pitch].name          = name->text();
       nDrumset.drum[pitch].notehead      = noteHead->currentIndex() - 1;
       nDrumset.drum[pitch].line          = staffLine->value();
       nDrumset.drum[pitch].voice         = voice->value();
       nDrumset.drum[pitch].stemDirection = Direction(stemDirection->currentIndex());
+      if (QString(QChar(nDrumset.drum[pitch].shortcut)) != shortcut->currentText()) {
+            printf("shortcut changed\n");
+            if (shortcut->currentText().isEmpty())
+                  nDrumset.drum[pitch].shortcut = 0;
+            else
+                  nDrumset.drum[pitch].shortcut = shortcut->currentText().at(0).toAscii();
+            }
       updateExample();
       }
 

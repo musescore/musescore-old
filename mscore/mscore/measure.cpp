@@ -129,6 +129,7 @@ Measure::Measure(Score* s)
 
       _irregular             = false;
       _breakMultiMeasureRest = false;
+      _breakMMRest           = false;
       _multiMeasure          = 0;
 
       _repeatCount = 2;
@@ -518,7 +519,13 @@ void Measure::layout0(int staffIdx)
 
       initLineList(tversatz, key);
 
+      _breakMMRest = false;
       for (Segment* segment = first(); segment; segment = segment->next()) {
+            if (segment->subtype() == Segment::SegKeySig
+               || segment->subtype() == Segment::SegStartRepeatBarLine
+               || segment->subtype() == Segment::SegTimeSig) {
+                  _breakMMRest = true;
+                  }
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                   continue;
             layoutChords(segment, staffIdx * VOICES, tversatz);

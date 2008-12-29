@@ -40,12 +40,14 @@ class EditDrumset : public QDialog, private Ui::EditDrumsetBase {
       void load();
       void save();
       void updateList();
+      void updateList2();
       void updateExample();
 
    private slots:
       void bboxClicked(QAbstractButton* button);
       void itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous);
       void nameChanged(const QString&);
+      void shortcutChanged();
       void valueChanged();
 
    public:
