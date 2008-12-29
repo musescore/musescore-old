@@ -239,6 +239,7 @@ bool ControllerEvent::midiOutEvent(QList<MidiOutEvent>* el, Score* cs) const
                   e.type = ME_PROGRAM | ch;
                   e.a    = pr;
                   e.b    = cs->midiMapping()->at(channel()).part->useDrumset();
+printf("map %d drumset %d\n", channel(), e.b);
                   el->append(e);
                   }
                   return true;
