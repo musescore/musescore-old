@@ -1,5 +1,6 @@
 28.dec (ws)
       - changed handling of drums
+      - new PDF for English handbook
 26.dec (ws)
       - allow tuplet entry with midi keyboard
       - Fix bug when changing time signature (4/4->3/4 + undo)
