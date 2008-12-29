@@ -96,7 +96,9 @@ class Measure : public MeasureBase {
 
       double _userStretch;
       bool _irregular;        ///< Irregular measure, do not count
-      bool _breakMultiMeasureRest;
+      bool _breakMultiMeasureRest;  ///< set by user
+      bool _breakMMRest;            ///< set by layout
+
       int _multiMeasure;      // set from layout();
                               //   0 - normal measure
                               // > 0 - multi measure rest;
@@ -219,7 +221,7 @@ class Measure : public MeasureBase {
       bool isMeasureRest(int staffIdx);
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
-      bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest; }
+      bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest | _breakMMRest; }
       void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
       bool isEmpty() const;
       int multiMeasure() const                { return _multiMeasure; }

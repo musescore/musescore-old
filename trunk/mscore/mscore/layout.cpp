@@ -213,7 +213,7 @@ void ScoreLayout::doLayout()
                   mb->setDirty();
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
                   m->layout0(staffIdx);
                   }
             }

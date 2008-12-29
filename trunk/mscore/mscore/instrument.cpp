@@ -113,6 +113,7 @@ void Instrument::read(QDomElement e)
       int reverb = 30;
       int volume = 100;
       int pan    = 60;
+      bool customDrumset = false;
 
       foreach(Channel* a, channel)
             delete a;
@@ -133,8 +134,14 @@ void Instrument::read(QDomElement e)
                         drumset = new Drumset(*smDrumset);
                   }
             else if (tag == "Drum") {
+                  // if we see on of this tags, a custom drumset will
+                  // be created
                   if (drumset == 0)
                         drumset = new Drumset(*smDrumset);
+                  if (!customDrumset) {
+                        drumset->clear();
+                        customDrumset = true;
+                        }
                   drumset->load(e);
                   }
             else if (tag == "MidiAction") {

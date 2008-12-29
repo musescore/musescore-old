@@ -160,7 +160,6 @@ bool LoadMusicXml::loader(QFile* qf)
             col.setNum(column);
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
-            printf("error: %s\n", error.toLatin1().data());
             return true;
             }
       docName = qf->fileName();
