@@ -1330,7 +1330,6 @@ void MuseScore::updateDrumset()
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
                         drumPalette->append(chord, drumset->name(pitch));
-
                         ++i;
                         }
                   }

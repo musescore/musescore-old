@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>570</width>
-    <height>284</height>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -71,7 +71,7 @@
       <item row="0" column="4" >
        <widget class="QLabel" name="label_10" >
         <property name="text" >
-         <string>Fingering</string>
+         <string>Subelements:</string>
         </property>
        </widget>
       </item>
@@ -171,12 +171,39 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2" >
+      <item row="6" column="0" colspan="2" >
        <widget class="QCheckBox" name="mirror" >
         <property name="text" >
          <string>Mirror Head</string>
         </property>
        </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>S-Channel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" >
+       <widget class="QSpinBox" name="subchannel" />
+      </item>
+      <item row="6" column="2" colspan="2" >
+       <widget class="QCheckBox" name="hidden" >
+        <property name="text" >
+         <string>Hidden</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" >
+       <widget class="QLabel" name="label_8" >
+        <property name="text" >
+         <string>User-Acc</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" >
+       <widget class="QSpinBox" name="userAccidental" />
       </item>
      </layout>
     </widget>

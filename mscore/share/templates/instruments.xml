@@ -305,6 +305,18 @@
    <instrument-group name="Percussion">
       <instrument>
          <name>Drumset</name>
+         <description>Drumset 3 lines</description>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <stafflines>3</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Drumset</name>
+         <description>Drumset 5 lines</description>
          <short-name>Drm.</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
