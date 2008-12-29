@@ -98,6 +98,7 @@ double converterDpi = 300;
 static const char* outFileName;
 static const char* styleFile;
 static QString localeName;
+bool useFactorySettings = false;
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -958,6 +959,7 @@ static void usage(const char* prog, const char*)
         "   -o file   export to 'file'; format depends on file extension\n"
         "   -r dpi    set output resolution for image export\n"
         "   -S style  load style file\n"
+        "   -F        use factory settings\n"
         );
       }
 
@@ -1014,6 +1016,8 @@ void MuseScore::saveScoreList()
 
 void MuseScore::loadScoreList()
       {
+      if (useFactorySettings)
+            return;
       QSettings s;
       for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
             QString buffer = s.value(QString("recent-%1").arg(i)).toString();
@@ -1415,7 +1419,7 @@ int main(int argc, char* argv[])
       setDefaultStyle();
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:D")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmiIOo:r:S:DF")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1452,6 +1456,9 @@ int main(int argc, char* argv[])
                   case 'D':
                         scriptDebug = true;
                         break;
+                  case 'F':
+                        useFactorySettings = true;
+                        break;
 
                   default:
                         usage(argv[0], "bad argument");
@@ -1469,8 +1476,12 @@ int main(int argc, char* argv[])
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
-      QSettings s;
-      localeName = s.value("language", "system").toString();
+      if (useFactorySettings)
+            localeName = "system";
+      else {
+            QSettings s;
+            localeName = s.value("language", "system").toString();
+            }
       if (debugMode)
             printf("configured localeName <%s>\n", qPrintable(localeName));
       if (localeName.toLower() == "system") {
@@ -1508,7 +1519,8 @@ int main(int argc, char* argv[])
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
 
-      preferences.read();
+      if (!useFactorySettings)
+            preferences.read();
 
       QSplashScreen* sc = 0;
       if (!converterMode && preferences.showSplashScreen) {
@@ -1963,6 +1975,8 @@ void MuseScore::writeSettings()
 
 void MuseScore::readSettings()
       {
+      if (useFactorySettings)
+            return;
       QSettings settings;
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 500)).toSize());

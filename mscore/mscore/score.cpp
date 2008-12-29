@@ -1793,7 +1793,8 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
       Segment* segment = 0;
       pos->tick        = -1;
 
-      int track = pos->staffIdx * VOICES;
+      int track = pos->staffIdx * VOICES; // + _padState.voice;
+
       for (segment = pos->measure->first(); segment;) {
             while (segment
                && ((segment->subtype() != Segment::SegChordRest) || (!segment->element(track)))) {
@@ -1828,6 +1829,8 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
                   }
             segment = ns;
             }
+
+      printf("pos tick %d\n", pos->tick);
 
       if (segment == 0) {
 //            printf("no segment+\n");

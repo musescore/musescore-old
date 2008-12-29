@@ -1182,7 +1182,6 @@ void Canvas::setShadowNote(const QPointF& p)
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
                   notehead = ds->noteHead(pitch);
-printf("line %d  notehead %d  pitch %d\n", line, notehead, pitch);
                   }
             }
       shadowNote->setLine(line);
