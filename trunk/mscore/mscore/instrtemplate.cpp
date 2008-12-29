@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "style.h"
 #include "sym.h"
+#include "drumset.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
 
@@ -40,6 +41,7 @@ InstrumentTemplate::InstrumentTemplate()
       shortName.setDefaultTextOption(to);
       name.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_LONG].font());
       shortName.setDefaultFont(defaultTextStyleArray[TEXT_STYLE_INSTRUMENT_SHORT].font());
+      drumset = 0;
       }
 
 //---------------------------------------------------------
@@ -75,8 +77,10 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("maxPitch", maxPitch);
       if (transpose)
             xml.tag("transposition", transpose);
-      if (useDrumset)
+      if (useDrumset) {
             xml.tag("drumset", useDrumset);
+            drumset->save(xml);
+            }
       foreach(const NamedEventList& a, midiActions)
             a.write(xml, "MidiAction");
       foreach(const Channel* a, channel)
@@ -88,8 +92,9 @@ void InstrumentTemplate::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void InstrumentTemplate::read(const QString& g, QDomElement de)
+void InstrumentTemplate::read(const QString& g, QDomElement e)
       {
+      bool customDrumset = false;
       group  = g;
       staves = 1;
       for (int i = 0; i < MAX_STAVES; ++i) {
@@ -109,10 +114,9 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
       QFont font("MScore1");
       font.setPointSizeF(12.0 * mag);     // TODO: get from style
 
-      for (QDomNode e = de.firstChildElement(); !e.isNull(); e = e.nextSibling()) {
-            QDomElement de = e.toElement();
-            QString tag(de.tagName());
-            QString val(de.text());
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
             int i = val.toInt();
 
             if (tag == "name") {
@@ -169,19 +173,19 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
             else if (tag == "staves")
                   staves = i;
             else if (tag == "clef") {
-                  int idx = de.attribute("staff", "1").toInt() - 1;
+                  int idx = e.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   clefIdx[idx] = i;
                   }
             else if (tag == "stafflines") {
-                  int idx = de.attribute("staff", "1").toInt() - 1;
+                  int idx = e.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   staffLines[idx] = i;
                   }
             else if (tag == "smallStaff") {
-                  int idx = de.attribute("staff", "1").toInt() - 1;
+                  int idx = e.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   smallStaff[idx] = i;
@@ -197,20 +201,28 @@ void InstrumentTemplate::read(const QString& g, QDomElement de)
             else if (tag == "drumset")
                   useDrumset = i;
             else if (tag == "Drum") {
-                  // read instrument of drumset
+                  // if we see on of this tags, a custom drumset will
+                  // be created
+                  if (drumset == 0)
+                        drumset = new Drumset(*smDrumset);
+                  if (!customDrumset) {
+                        drumset->clear();
+                        customDrumset = true;
+                        }
+                  drumset->load(e);
                   }
             else if (tag == "midiAction") {
                   NamedEventList a;
-                  a.read(de);
+                  a.read(e);
                   midiActions.append(a);
                   }
             else if (tag == "channel") {
                   Channel* a = new Channel();
-                  a->read(de);
+                  a->read(e);
                   channel.append(a);
                   }
             else
-                  domError(de);
+                  domError(e);
             }
       if (channel.isEmpty()) {
             Channel* a      = new Channel();

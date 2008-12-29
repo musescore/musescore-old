@@ -1,4 +1,6 @@
 29.dec (ws)
+      - default drummap can now be defined in instrument template file "instruments.xml"
+        for every instrument; look for instrument "triangle"
       - edit drum map: complete implementation of shortcuts
 28.dec (ws)
       - changed handling of drums
