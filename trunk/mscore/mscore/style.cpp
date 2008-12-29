@@ -174,6 +174,7 @@ Style defaultStyle = {
       Spatium(1.75),  // clef/key/sig right margin
 
       Spatium(0.13),  // stemWidth = 1.3 * staffLineWidth
+      Spatium(1.0),   // beginRepeatLeftMargin
 
       Spatium(0.4),   // minNoteDistance
       Spatium(1.5),   // barNoteDistance
@@ -442,6 +443,8 @@ void Style::load(QDomElement e, int version)
                   clefKeyRightMargin = Spatium(d);
             else if (tag == "stemWidth")
                   stemWidth = Spatium(d);
+            else if (tag == "beginRepeatLeftMargin")
+                  beginRepeatLeftMargin = Spatium(d);
             else if (tag == "minNoteDistance")
                   minNoteDistance = Spatium(d);
             else if (tag == "spacing16")        // obsolete
@@ -607,6 +610,7 @@ void Style::save(Xml& xml)
       xml.tag("timesigLeftMargin",      timesigLeftMargin.val());
       xml.tag("clefKeyRightMargin",     clefKeyRightMargin.val());
       xml.tag("stemWidth",              stemWidth.val());
+      xml.tag("beginRepeatLeftMargin",  beginRepeatLeftMargin.val());
       xml.tag("minNoteDistance",        minNoteDistance.val());
 
       xml.tag("measureSpacing",         measureSpacing);

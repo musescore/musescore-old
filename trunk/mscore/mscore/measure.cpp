@@ -1423,6 +1423,8 @@ again:
                   // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = point(Spatium(1.0));
                   }
+            else if (s->subtype() == Segment::SegStartRepeatBarLine)
+                  additionalExtra = point(style->beginRepeatLeftMargin);
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   spaces[seg][staffIdx].setValid(false);
@@ -1709,6 +1711,11 @@ printf("\n");
                         else  if (s->subtype() == Segment::SegEndBarLine) {
                               // align right
                               e->setPos(width[seg] - e->width(), y);
+                              }
+                        else  if (s->subtype() == Segment::SegStartRepeatBarLine) {
+                              // align right
+                              // e->setPos(_spatium, y);
+                              e->setPos(0.0, y);
                               }
                         else
                               e->setPos(- e->bbox().x() - xo, y);

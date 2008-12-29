@@ -124,6 +124,7 @@ void EditStyle::getValues()
       lstyle->keysigLeftMargin       = Spatium(keysigLeftMargin->value());
       lstyle->timesigLeftMargin      = Spatium(timesigLeftMargin->value());
       lstyle->clefKeyRightMargin     = Spatium(clefKeyRightMargin->value());
+      lstyle->beginRepeatLeftMargin  = Spatium(beginRepeatLeftMargin->value());
 
       lstyle->beamWidth              = Spatium(beamWidth->value());
       lstyle->beamDistance           = beamDistance->value();
@@ -211,6 +212,7 @@ void EditStyle::setValues()
       keysigLeftMargin->setValue(lstyle->keysigLeftMargin.val());
       timesigLeftMargin->setValue(lstyle->timesigLeftMargin.val());
       clefKeyRightMargin->setValue(lstyle->clefKeyRightMargin.val());
+      beginRepeatLeftMargin->setValue(lstyle->beginRepeatLeftMargin.val());
 
       beamWidth->setValue(lstyle->beamWidth.val());
       beamDistance->setValue(lstyle->beamDistance);
