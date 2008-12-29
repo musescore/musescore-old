@@ -834,24 +834,24 @@ void ShowNoteWidget::setElement(Element* e)
       nb.pitch->setValue(note->pitch());
       nb.line->setValue(note->line());
       nb.move->setValue(note->staffMove());
-//      nb.dots->setValue(note->dots());
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
       nb.head->setValue(note->noteHead());
       nb.headGroup->setValue(note->headGroup());
+      nb.hidden->setChecked(note->hidden());
+      nb.subchannel->setValue(note->subchannel());
 
       nb.tieFor->setEnabled(note->tieFor());
       nb.tieBack->setEnabled(note->tieBack());
       nb.accidental->setEnabled(note->accidental());
+      nb.userAccidental->setValue(note->userAccidental());
 
-#if 0 // TODO
-      foreach(Text* text, note->fingering()) {
+      foreach(Element* text, *note->el()) {
             QString s;
             s.setNum(long(text), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
             nb.fingering->addItem(item);
             }
-#endif
       }
 
 //---------------------------------------------------------

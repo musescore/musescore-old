@@ -53,6 +53,7 @@ void InstrumentTemplate::write(Xml& xml) const
       xml.stag("Instrument");
       xml.tag("name", name.toPlainText());            // TODO
       xml.tag("short-name", shortName.toPlainText()); // TODO
+      xml.tag("description", trackName);
       if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
             if (staffLines[0] != 5)
@@ -114,13 +115,13 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
       QFont font("MScore1");
       font.setPointSizeF(12.0 * mag);     // TODO: get from style
 
+      QString sName;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
 
             if (tag == "name") {
-                  QString n;
                   QTextCursor cursor(&name);
                   QTextCharFormat f = cursor.charFormat();
                   QTextCharFormat sf(f);
@@ -132,21 +133,20 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                         if (tag == "symbol") {
                               QString name = de1.attribute(QString("name"));
                               if (name == "flat") {
-                                    n += "b";
+                                    sName += "b";
                                     cursor.insertText(QString(0xe10d), sf);
                                     }
                               else if (name == "sharp") {
-                                    n += "#";
+                                    sName += "#";
                                     cursor.insertText(QString(0xe10c), sf);
                                     }
                               }
                         QDomText t = ee.toText();
                         if (!t.isNull()) {
-                              n += t.data();
+                              sName += t.data();
                               cursor.insertText(t.data(), f);
                               }
                         }
-                  trackName = n;
                   }
             else if (tag == "short-name") {
                   QTextCursor cursor(&shortName);
@@ -170,6 +170,8 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                               }
                         }
                   }
+            else if (tag == "description")
+                  trackName = val;
             else if (tag == "staves")
                   staves = i;
             else if (tag == "clef") {
@@ -234,6 +236,8 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             a ->pan         = 60;
             channel.append(a);
             }
+      if (trackName.isEmpty())
+            trackName = sName;
       }
 
 //---------------------------------------------------------
