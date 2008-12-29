@@ -40,6 +40,8 @@ extern void readShortcuts();
 
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
+extern bool useFactorySettings;
+
 //---------------------------------------------------------
 //   appStyleSheet
 //---------------------------------------------------------
@@ -1092,6 +1094,8 @@ void writeShortcuts()
 
 void readShortcuts()
       {
+      if (useFactorySettings)
+            return;
       QSettings s;
       s.beginGroup("Shortcuts");
       int n = s.value("n", 0).toInt();

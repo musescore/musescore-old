@@ -50,6 +50,8 @@
 #include "tremolo.h"
 #include "articulation.h"
 
+extern bool useFactorySettings;
+
 //---------------------------------------------------------
 //   ElementItem
 //---------------------------------------------------------
@@ -212,12 +214,14 @@ PageListEditor::PageListEditor(QWidget* parent)
       connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       list->resizeColumnToContents(0);
-      QSettings settings;
-      settings.beginGroup("Inspector");
-      split->restoreState(settings.value("splitter").toByteArray());
-      resize(settings.value("size", QSize(1000, 500)).toSize());
-      move(settings.value("pos", QPoint(10, 10)).toPoint());
-      settings.endGroup();
+      if (!useFactorySettings) {
+            QSettings settings;
+            settings.beginGroup("Inspector");
+            split->restoreState(settings.value("splitter").toByteArray());
+            resize(settings.value("size", QSize(1000, 500)).toSize());
+            move(settings.value("pos", QPoint(10, 10)).toPoint());
+            settings.endGroup();
+            }
       }
 
 //---------------------------------------------------------

@@ -58,6 +58,8 @@
 #include "drumset.h"
 #include "spacer.h"
 
+extern bool useFactorySettings;
+
 //---------------------------------------------------------
 //   showPalette
 //---------------------------------------------------------
@@ -68,12 +70,14 @@ void MuseScore::showPalette(bool visible)
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
 
-            QFile f(dataPath + "/" + "mscore-palette.xml");
-            if (f.exists()) {
-                  if (paletteBox->read(&f)) {
-                        paletteBox->setShown(visible);
-                        a->setChecked(visible);
-                        return;
+            if (!useFactorySettings) {
+                  QFile f(dataPath + "/" + "mscore-palette.xml");
+                  if (f.exists()) {
+                        if (paletteBox->read(&f)) {
+                              paletteBox->setShown(visible);
+                              a->setChecked(visible);
+                              return;
+                              }
                         }
                   }
 
