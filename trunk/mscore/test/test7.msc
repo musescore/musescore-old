@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <Mag>0.873269</Mag>
-  <xoff>5.50333</xoff>
-  <yoff>10.795</yoff>
-  <Spatium>2</Spatium>
+  <Mag>0.99482</Mag>
+  <xoff>46.3057</xoff>
+  <yoff>8.7938</yoff>
+  <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
@@ -28,6 +28,7 @@
     <timesigLeftMargin>0.5</timesigLeftMargin>
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.5</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
@@ -68,6 +69,8 @@
     <smallClefMag>0.8</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <minEmptyMeasures>2</minEmptyMeasures>
+    <minMMRestWidth>4</minMMRestWidth>
     <gateTime>70</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>40</staccatoGateTime>
@@ -142,7 +145,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">B<span style=" font-family:'MScore1';"></span> Trumpet</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'helvetica'; font-size:11pt;">B<span style=" font-family:'MScore1';"></span> Trumpet</p></body></html>
       </name>
     <shortName>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -178,15 +181,14 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>2</tempo>
         <subtype>Tempo</subtype>
-        <offset x="-0.740834" y="-0.634997"/>
-        <track>-1</track>
+        <offset x="0.122327" y="-0.519909"/>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;"><span style=" font-family:'MScore1';"></span> =120</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;"><span style=" font-family:'MScore1';"></span> =120</p></body></html>
           </html-data>
         </Tempo>
       <Beam id="1">
@@ -294,5 +296,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

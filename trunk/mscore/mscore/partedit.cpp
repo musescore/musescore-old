@@ -178,6 +178,7 @@ void PartEdit::patchChanged(int n)
                         }
                   event.type = ME_PROGRAM | part->score()->midiChannel(idx);
                   event.a    = channel->program;
+                  event.b    = part->useDrumset();
                   seq->sendEvent(event);
                   return;
                   }
