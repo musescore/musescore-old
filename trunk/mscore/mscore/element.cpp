@@ -65,6 +65,8 @@
 #include "spacer.h"
 #include "mscore.h"
 #include "tempotext.h"
+#include "harmony.h"
+#include "lyrics.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1192,8 +1194,15 @@ Element* Element::create(int type, Score* score)
             case TEMPO_TEXT:
                   el = new TempoText(score);
                   break;
+            case HARMONY:
+                  el = new Harmony(score);
+                  break;
+            case LYRICS:
+                  el = new Lyrics(score);
+                  break;
             default:
-                  printf("Element::create(): cannot create element type %d\n", type);
+                  printf("Element::create(): cannot create element type %s\n",
+                     elementNames[type]);
                   break;
             }
       return el;

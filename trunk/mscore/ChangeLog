@@ -1,4 +1,5 @@
 30.dec (ws)
+      - fixed copy/paste lyrics and chord symbols
       - fix crash when starting empty and then create new score
 29.dec (ws)
       - new style parameter: begin repeat barline left margin

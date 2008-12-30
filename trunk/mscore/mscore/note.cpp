@@ -756,6 +756,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || type == TREMOLO
          || type == IMAGE
          || type == CHORD
+         || type == HARMONY
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
 	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE4)
@@ -811,7 +812,19 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
-
+            case HARMONY:
+                  e->setParent(chord()->measure());
+                  e->setTick(chord()->tick());
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->undoAddElement(e);
+                  return e;
+            case LYRICS:
+                  e->setParent(chord()->segment());
+                  e->setTick(chord()->tick());
+                  e->setTrack(chord()->staffIdx() * VOICES);
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->undoAddElement(e);
+                  return e;
             case ACCIDENTAL:
                   {
                   Accidental* a = (Accidental*)e;
