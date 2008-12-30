@@ -1,3 +1,5 @@
+30.dec (ws)
+      - fix crash when starting empty and then create new score
 29.dec (ws)
       - new style parameter: begin repeat barline left margin
       - default drummap can now be defined in instrument template file "instruments.xml"
