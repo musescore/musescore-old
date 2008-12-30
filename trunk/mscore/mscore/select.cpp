@@ -58,6 +58,8 @@ Selection::Selection(Score* s)
       _startSegment = 0;
       _endSegment = 0;
       _activeSegment = 0;
+      staffStart = 0;
+      staffEnd   = 0;
       }
 
 //---------------------------------------------------------

@@ -652,6 +652,7 @@ void MuseScore::newFile()
       score->rebuildMidiMapping();
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
+      setCurrentScore(scoreList.size() - 1);
       }
 
 //---------------------------------------------------------
