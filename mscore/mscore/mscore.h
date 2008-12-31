@@ -327,6 +327,7 @@ extern QString dataPath;
 extern Shortcut* getShortcut(const char* id);
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
+extern Shortcut* midiActionMap[128];
 
 #endif
 

@@ -772,12 +772,12 @@ void Harmony::read(QDomElement e)
 void Harmony::buildText()
       {
       static const QChar majorSym(0x25b3);
-      static const QChar minor(0x2d);
-      static const QChar augmented(0x2b);
-      static const QChar diminished(0xb0);
-      static const QChar halfDiminished(0xf8);
-      static const QChar sharp(0xe10c);
-      static const QChar flat(0xe10d);
+//      static const QChar minorSym(0x2d);
+//      static const QChar augmentedSym(0x2b);
+//      static const QChar diminishedSym(0xb0);
+//      static const QChar halfDiminishedSym(0xf8);
+      static const QChar sharpSym(0xe10c);
+      static const QChar flatSym(0xe10d);
 
       if (_rootTpc == INVALID_TPC)
             return;
@@ -812,9 +812,9 @@ void Harmony::buildText()
                   cursor.insertText(QString(*s), f);
             else {
                   if (*s == '#')
-                        cursor.insertText(QString(sharp), noteSymbolFormat);
+                        cursor.insertText(QString(sharpSym), noteSymbolFormat);
                   else
-                        cursor.insertText(QString(flat), noteSymbolFormat);
+                        cursor.insertText(QString(flatSym), noteSymbolFormat);
                   }
             ++s;
             }
@@ -865,9 +865,9 @@ void Harmony::buildText()
                               cursor.insertText(QString(*s), sf);
                         else {
                               if (*s == '#')
-                                    cursor.insertText(QString(sharp), snoteSymbolFormat);
+                                    cursor.insertText(QString(sharpSym), snoteSymbolFormat);
                               else
-                                    cursor.insertText(QString(flat), snoteSymbolFormat);
+                                    cursor.insertText(QString(flatSym), snoteSymbolFormat);
                               }
                         ++s;
                         }
@@ -884,9 +884,9 @@ void Harmony::buildText()
                         cursor.insertText(QString(*slash), f);
                   else {
                         if (*slash == '#')
-                              cursor.insertText(QString(sharp), noteSymbolFormat);
+                              cursor.insertText(QString(sharpSym), noteSymbolFormat);
                         else
-                              cursor.insertText(QString(flat), noteSymbolFormat);
+                              cursor.insertText(QString(flatSym), noteSymbolFormat);
                         }
                   ++slash;
                   }

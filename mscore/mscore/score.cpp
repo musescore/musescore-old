@@ -1830,8 +1830,6 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
             segment = ns;
             }
 
-      printf("pos tick %d\n", pos->tick);
-
       if (segment == 0) {
 //            printf("no segment+\n");
             return false;

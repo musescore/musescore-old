@@ -737,8 +737,6 @@ QByteArray Selection::mimeData() const
             case SEL_MULT:
                   break;
             case SEL_STAFF:
-                  a = staffMimeData();
-                  break;
             case SEL_SYSTEM:
                   a = staffMimeData();
                   break;
@@ -796,6 +794,28 @@ QByteArray Selection::staffMimeData() const
                               }
                         else
                               e->write(xml);
+                        if ((track % VOICES) == 0) {
+                              int staffIdx = track / VOICES;
+                              LyricsList* ll = seg->lyricsList(staffIdx);
+                              foreach(Lyrics* l, *ll)
+                                    l->write(xml);
+                              }
+                        }
+                  }
+            for (MeasureBase* mb = seg1->measure(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = static_cast<Measure*>(mb);
+                  if (seg2 && m->tick() >= seg2->tick())
+                        break;
+                  foreach(Element* e, *m->el()) {
+                        if (e->type() == HARMONY) {
+                              if (e->tick() < seg1->tick())
+                                    continue;
+                              if (seg2 && (e->tick() >= seg2->tick()))
+                                    continue;
+                              e->write(xml);
+                              }
                         }
                   }
             xml.etag();
