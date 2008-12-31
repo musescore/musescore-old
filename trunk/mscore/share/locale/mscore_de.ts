@@ -1456,6 +1456,18 @@ zu Notenzeile</translation>
         <source>System Bracket Distance:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -2302,6 +2314,10 @@ fehlgeschlagen: </translation>
     <message>
         <source>SlashStyle</source>
         <translation>Slash-Stil</translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4704,6 +4720,22 @@ before closing?</source>
         <source>note head group</source>
         <translation>Notenkopfgruppe</translation>
     </message>
+    <message>
+        <source>Subelements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S-Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User-Acc</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -4936,6 +4968,10 @@ before closing?</source>
     <message>
         <source>midi sound for part</source>
         <translation>Midi Soundfont für Part</translation>
+    </message>
+    <message>
+        <source>drumset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

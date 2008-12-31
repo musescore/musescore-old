@@ -1453,6 +1453,18 @@ fallou:</translation>
         <source>System Bracket Distance:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -2299,6 +2311,10 @@ fallou:</translation>
     <message>
         <source>Repeat Count</source>
         <translation>Número de repeticións</translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4701,6 +4717,22 @@ before closing?</source>
         <source>Mirror Head</source>
         <translation>Reflectir a cabeza</translation>
     </message>
+    <message>
+        <source>Subelements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S-Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User-Acc</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -4933,6 +4965,10 @@ before closing?</source>
     <message>
         <source>midi sound for part</source>
         <translation>son midi para a parte</translation>
+    </message>
+    <message>
+        <source>drumset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
