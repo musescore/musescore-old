@@ -91,6 +91,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(extensionGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(extOtherCombo, SIGNAL(currentIndexChanged(int)), SLOT(chordChanged()));
+      connect(accidentalsGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(bassNote, SIGNAL(currentIndexChanged(int)), SLOT(chordChanged()));
       connect(extOther, SIGNAL(toggled(bool)), SLOT(otherToggled(bool)));
       connect(addButton, SIGNAL(clicked()), SLOT(addButtonClicked()));
