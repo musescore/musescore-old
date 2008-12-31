@@ -67,6 +67,7 @@
 #include "tempotext.h"
 #include "harmony.h"
 #include "lyrics.h"
+#include "rest.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1187,6 +1188,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case CHORD:
                   el = new Chord(score);
+                  break;
+            case REST:
+                  el = new Rest(score);
                   break;
             case SPACER:
                   el = new Spacer(score);

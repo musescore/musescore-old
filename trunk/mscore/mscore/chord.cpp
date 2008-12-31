@@ -488,6 +488,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
       int hookIdx  = hasStem ? duration().hooks() : 0;
 
+printf("chord %p hasStem %d stem %p\n", this, hasStem, _stem);
       if (hasStem) {
             if (!_stem)
                   setStem(new Stem(score()));

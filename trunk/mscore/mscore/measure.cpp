@@ -77,6 +77,7 @@
 #include "glissando.h"
 #include "articulation.h"
 #include "spacer.h"
+#include "duration.h"
 
 //---------------------------------------------------------
 //   MStaff
