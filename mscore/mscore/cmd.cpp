@@ -2365,7 +2365,6 @@ void Score::cmdPaste()
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-// printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -2431,8 +2430,7 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               tuplet->read(eee);
                               tuplets.append(tuplet);
 
-                              int tick = tuplet->tick() - tickStart + dstTick;
-                              tuplet->setTick(tick);
+                              int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
                               undoAddElement(tuplet);
