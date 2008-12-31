@@ -1,6 +1,8 @@
 30.dec (ws)
       - fixed copy/paste lyrics and chord symbols
       - fix crash when starting empty and then create new score
+      (db)
+      - new PDFs for handbook (all six languages)
 29.dec (ws)
       - new style parameter: begin repeat barline left margin
       - default drummap can now be defined in instrument template file "instruments.xml"
@@ -8,15 +10,16 @@
       - edit drum map: complete implementation of shortcuts
 28.dec (ws)
       - changed handling of drums
+      (db)
       - new PDF for English handbook
 26.dec (ws)
       - allow tuplet entry with midi keyboard
       - Fix bug when changing time signature (4/4->3/4 + undo)
 23.dec (ws)
       - fix printing of multi measure rests
-	(olavgun)
+      (olavgun)
       - lilypond export of longa and brevis, and of dynamic signs "sff"
-	and "crescendo".
+         and "crescendo".
 22.dec (ws)
       - update text elements after changing text style
         (does not work for lyrics for yet unknown reasons)
@@ -31,8 +34,8 @@
       - fixed crash when moving system brackets
       - renamed template files replacing "_" with " "
       (la)
-	    - correct issue on full measure rest in musicXML export
-	    - improve support of octave-shift in musicXML import
+      - correct issue on full measure rest in musicXML export
+      - improve support of octave-shift in musicXML import
       (db)
       - changed gateTime numbers in template files to match new default
       - removed pageFormat tag from leadsheet, piano, and choir templates.
