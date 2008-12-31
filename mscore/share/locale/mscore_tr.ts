@@ -1456,6 +1456,18 @@ yapılamadı:</translation>
         <source>System Bracket Distance:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -2302,6 +2314,10 @@ yapılamadı:</translation>
     <message>
         <source>Repeat Count</source>
         <translation>Sayımı Tekrarla</translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4705,6 +4721,22 @@ kaydetmek ister misiniz?</translation>
         <source>Mirror Head</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Subelements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S-Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User-Acc</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -4937,6 +4969,10 @@ kaydetmek ister misiniz?</translation>
     <message>
         <source>midi sound for part</source>
         <translation>bu parça için midi ses</translation>
+    </message>
+    <message>
+        <source>drumset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

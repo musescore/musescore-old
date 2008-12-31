@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="nl">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -1454,6 +1453,18 @@ toonhoogte</translation>
         <source>System Bracket Distance:</source>
         <translation>Systeem Groep Afstand:</translation>
     </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -2298,6 +2309,10 @@ failed: </source>
     <message>
         <source>SlashStyle</source>
         <translation>Schuine Stijl</translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4704,6 +4719,22 @@ voor dat u afsluit?</translation>
         <source>Mirror Head</source>
         <translation>Hoofd</translation>
     </message>
+    <message>
+        <source>Subelements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S-Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User-Acc</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -4936,6 +4967,10 @@ voor dat u afsluit?</translation>
     <message>
         <source>midi sound for part</source>
         <translation>midi geluid voor een deel</translation>
+    </message>
+    <message>
+        <source>drumset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

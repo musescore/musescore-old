@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TextLabel</translation>
     </message>
     <message>
         <source>Root</source>
@@ -1461,6 +1461,18 @@ failed: </source>
         <source>System Bracket Distance:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -2022,7 +2034,7 @@ failed: </source>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Строка</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -2306,6 +2318,10 @@ failed: </source>
     </message>
     <message>
         <source>SlashStyle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break multi measure rest</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2854,11 +2870,11 @@ failed: </source>
     </message>
     <message>
         <source>enter octave above</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить октаву вверх</translation>
     </message>
     <message>
         <source>enter octave below</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить октаву вниз</translation>
     </message>
     <message>
         <source>enter note a</source>
@@ -3914,7 +3930,7 @@ failed: </source>
     </message>
     <message>
         <source>Measure Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер такта</translation>
     </message>
     <message>
         <source>Page Number Odd</source>
@@ -3926,7 +3942,7 @@ failed: </source>
     </message>
     <message>
         <source>Translator</source>
-        <translation type="unfinished"></translation>
+        <translation>Переводчик</translation>
     </message>
     <message>
         <source>System</source>
@@ -4668,7 +4684,7 @@ before closing?</source>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Строка</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -4677,10 +4693,6 @@ before closing?</source>
     <message>
         <source>Head</source>
         <translation>Головка</translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation>Аппликатура</translation>
     </message>
     <message>
         <source>TPC</source>
@@ -4709,6 +4721,26 @@ before closing?</source>
     <message>
         <source>note head group</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subelements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S-Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User-Acc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fingering</source>
+        <translation type="unfinished">Аппликатура</translation>
     </message>
 </context>
 <context>
@@ -4942,6 +4974,10 @@ before closing?</source>
     <message>
         <source>midi sound for part</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>drumset</source>
+        <translation>Набор ударных</translation>
     </message>
 </context>
 <context>
@@ -5566,27 +5602,27 @@ before closing?</source>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished">Партитура</translation>
+        <translation>Партитура</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат листа по умолчанию</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation type="unfinished">Двухсторонняя печать</translation>
+        <translation>Двухсторонняя печать</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Альбом</translation>
+        <translation>Альбом</translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>hi_IN Хинди</translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>pt_BR Португальский (Бразилия)</translation>
     </message>
 </context>
 <context>
@@ -5675,11 +5711,11 @@ Please select a single note or rest and retry operation
     <name>RepeatPropertiesBase</name>
     <message>
         <source>MuseScore: Repeat Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Свойства повтора</translation>
     </message>
     <message>
         <source>repTypeName</source>
-        <translation type="unfinished"></translation>
+        <translation>repTypeName</translation>
     </message>
     <message>
         <source>Set specials for</source>
@@ -5687,23 +5723,23 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <source>Cycles</source>
-        <translation type="unfinished"></translation>
+        <translation>Циклов:</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished">Число</translation>
+        <translation>Число:</translation>
     </message>
     <message>
         <source>Destination number</source>
-        <translation type="unfinished"></translation>
+        <translation>Конечное число:</translation>
     </message>
     <message>
         <source>Cycles to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизводимых циклов</translation>
     </message>
     <message>
         <source>cycle numbers, example: 1,3,5</source>
@@ -5936,7 +5972,7 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation type="unfinished"></translation>
+        <translation>Объявление тактового размера</translation>
     </message>
 </context>
 <context>
@@ -5985,7 +6021,7 @@ please select a measure and try again</source>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>авто</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -6035,7 +6071,7 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">авто</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -6592,7 +6628,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер затакта</translation>
     </message>
 </context>
 <context>
