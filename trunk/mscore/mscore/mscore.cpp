@@ -91,6 +91,7 @@ class ProjectItem {
 
 QList<ProjectItem*> projectList;
 
+Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
 bool converterMode = false;
 double converterDpi = 300;
@@ -1172,17 +1173,6 @@ void MuseScore::dropEvent(QDropEvent* event)
       }
 
 //---------------------------------------------------------
-//   midiNoteReceived
-//---------------------------------------------------------
-
-void MuseScore::midiNoteReceived(int pitch, bool chord)
-      {
-      QWidget* w = QApplication::activeModalWidget();
-      if (cs && w == 0)
-            cs->midiNoteReceived(pitch, chord);
-      }
-
-//---------------------------------------------------------
 //   showInvisibleClicked
 //---------------------------------------------------------
 
@@ -1335,21 +1325,32 @@ void MuseScore::midiinToggled(bool val)
       }
 
 //---------------------------------------------------------
-//   speakerToggled
-//---------------------------------------------------------
-
-void MuseScore::speakerToggled(bool val)
-      {
-      _speakerEnabled = val;
-      }
-
-//---------------------------------------------------------
 //   midiinEnabled
 //---------------------------------------------------------
 
 bool MuseScore::midiinEnabled() const
       {
       return preferences.enableMidiInput && _midiinEnabled;
+      }
+
+//---------------------------------------------------------
+//   midiNoteReceived
+//---------------------------------------------------------
+
+void MuseScore::midiNoteReceived(int pitch, bool chord)
+      {
+      QWidget* w = QApplication::activeModalWidget();
+      if (cs && w == 0)
+            cs->midiNoteReceived(pitch, chord);
+      }
+
+//---------------------------------------------------------
+//   speakerToggled
+//---------------------------------------------------------
+
+void MuseScore::speakerToggled(bool val)
+      {
+      _speakerEnabled = val;
       }
 
 //---------------------------------------------------------
@@ -1404,6 +1405,9 @@ int main(int argc, char* argv[])
       {
 //      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+
+      for (int i = 0; i < 128; ++i)
+            midiActionMap[i] = 0;
 
       Harmony::initHarmony();
       QApplication app(argc, argv);

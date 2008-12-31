@@ -67,6 +67,7 @@
 #include "layoutbreak.h"
 #include "drumset.h"
 #include "beam.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -2293,29 +2294,17 @@ void Score::cmd(const QString& cmd)
             if (!noteEntryMode())
                   return;
 
-            startCmd();
             while (!midiInputQueue.isEmpty()) {
                   MidiInputEvent ev = midiInputQueue.dequeue();
-
-                  cmdAddPitch1(ev.pitch, ev.chord);
-#if 0
-                  int len = _padState.tickLen;
-
-
-                  if (ev.chord) {
-                        Note* on = getSelectedNote();
-                        Note* n = addNote(on->chord(), ev.pitch);
-                        select(n, SELECT_SINGLE, 0);
-                        }
+                  if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
+                        midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
                   else {
-                        setNote(_is.pos(), _is.track, ev.pitch, len);
-                        _is.setPos(_is.pos() + len);
-                        emit posChanged(_is.pos());
+                        startCmd();
+                        cmdAddPitch1(ev.pitch, ev.chord);
+                        layoutAll = true;
+                        endCmd();
                         }
-#endif
                   }
-            layoutAll = true;
-            endCmd();
             }
       }
 
@@ -2579,6 +2568,30 @@ void Score::pasteStaff(QDomElement e, int dstTick, int dstStaffStart)
                               else {
                                     undoAddElement(cr);
                                     }
+                              }
+                        else if (eee.tagName() == "Lyrics") {
+                              Lyrics* lyrics = new Lyrics(this);
+                              lyrics->setTrack(curTrack);
+                              lyrics->read(eee);
+                              int tick = lyrics->tick() - tickStart + dstTick;
+                              lyrics->setTick(tick);
+                              Segment* segment = tick2segment(tick);
+                              if (segment) {
+                                    lyrics->setParent(segment);
+                                    undoAddElement(lyrics);
+                                    }
+                              else
+                                    printf("no segment found for lyrics\n");
+                              }
+                        else if (eee.tagName() == "Harmony") {
+                              Harmony* harmony = new Harmony(this);
+                              harmony->setTrack(curTrack);
+                              harmony->read(eee);
+                              int tick = harmony->tick() - tickStart + dstTick;
+                              harmony->setTick(tick);
+                              Measure* m = tick2measure(tick);
+                              harmony->setParent(m);
+                              undoAddElement(harmony);
                               }
                         else {
                               domError(eee);
