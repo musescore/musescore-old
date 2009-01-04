@@ -1,3 +1,6 @@
+4.1.2009 (ws)
+      - after loading of new score "cs" (currentScore) was not always set
+        which crashes mscore
 31.dec (ws)
       - fixed copy/paste of tuplets
       - updated russian translation from Alexandre Prokoudine

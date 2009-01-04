@@ -876,7 +876,7 @@ void MuseScore::selectScore(QAction* action)
             score->addViewer(new Canvas);
             score->read(item->getName());
             appendScore(score);
-            tab->setCurrentIndex(scoreList.indexOf(score));
+            setCurrentScore(scoreList.indexOf(score));
             }
       }
 
@@ -1166,8 +1166,7 @@ void MuseScore::dropEvent(QDropEvent* event)
                         lastScore = score;
                         }
                   }
-            if (lastScore)
-                  tab->setCurrentIndex(scoreList.indexOf(lastScore));
+            setCurrentScore(scoreList.indexOf(lastScore));
             event->acceptProposedAction();
             }
       }

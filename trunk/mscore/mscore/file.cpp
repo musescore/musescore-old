@@ -201,7 +201,7 @@ void MuseScore::loadFile()
       score->read(fn);
       appendScore(score);
       lastOpenPath = score->fileInfo()->path();
-      tab->setCurrentIndex(scoreList.indexOf(score));
+      setCurrentScore(scoreList.indexOf(score));
       }
 
 //---------------------------------------------------------
@@ -651,7 +651,6 @@ void MuseScore::newFile()
 
       score->rebuildMidiMapping();
       appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
       setCurrentScore(scoreList.size() - 1);
       }
 
