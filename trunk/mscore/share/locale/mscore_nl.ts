@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -1455,15 +1456,15 @@ toonhoogte</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimum breedte van de maten:</translation>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimum aantal lege maten:</translation>
     </message>
     <message>
         <source>begin repeat left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>linkermarge bij begin herhaling</translation>
     </message>
 </context>
 <context>
@@ -2312,7 +2313,7 @@ failed: </source>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
+        <translation>pauze rust bij meerdere maten </translation>
     </message>
 </context>
 <context>
@@ -4721,19 +4722,19 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Subelements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Subelementen:</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>S-Kanaal</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbergen</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4970,7 +4971,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>drumset</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
