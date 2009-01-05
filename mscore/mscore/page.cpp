@@ -409,7 +409,7 @@ void PageFormat::read(QDomElement e)
 //    sizes are given in units of 1/10 spatium; t
 //---------------------------------------------------------
 
-void MusicXML::readMusicXML(QDomElement e)
+void PageFormat::readMusicXML(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
