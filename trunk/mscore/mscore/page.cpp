@@ -332,8 +332,7 @@ double PageFormat::height() const
 //         </page-margins>
 //      </page-layout>
 //
-//    sizes are given in units of 1/10 spatium; this allows
-//    to reuse this code with MusicXml routines
+//    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
 void PageFormat::read(QDomElement e)
@@ -386,6 +385,80 @@ void PageFormat::read(QDomElement e)
             else if (tag == "page-width") {
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * .5 / PPI;
+                  }
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   read
+//  <page-layout>
+//	  <page-height>
+//	  <page-width>
+//      <pageFormat>A6</pageFormat>
+//      <landscape>1</landscape>
+//      <page-margins>
+//         <left-margin>28.3465</left-margin>
+//         <right-margin>28.3465</right-margin>
+//         <top-margin>28.3465</top-margin>
+//         <bottom-margin>56.6929</bottom-margin>
+//         </page-margins>
+//      </page-layout>
+//
+//    sizes are given in units of 1/10 spatium; t
+//---------------------------------------------------------
+
+void MusicXML::readMusicXML(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            int i = val.toInt();
+            if (tag == "pageFormat") {
+                  size = paperSizeNameToIndex(val);
+                  }
+            else if (tag == "landscape")
+                  landscape = i;
+            else if (tag == "page-margins") {
+                  QString type = e.attribute("type","both");
+                  double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+//                        double val = ee.text().toDouble() * (18/4)/ PPI  * .1;
+                        double val = ee.text().toDouble() * 0.45 / PPI;
+                        if (tag == "left-margin")
+                              lm = val;
+                        else if (tag == "right-margin")
+                              rm = val;
+                        else if (tag == "top-margin")
+                              tm = val;
+                        else if (tag == "bottom-margin")
+                              bm = val;
+                        else
+                              domError(ee);
+                        }
+                  twosided = type == "odd" || type == "even";
+                  if (type == "odd" || type == "both") {
+                        oddLeftMargin   = lm;
+                        oddRightMargin  = rm;
+                        oddTopMargin    = tm;
+                        oddBottomMargin = bm;
+                        }
+                  if (type == "even" || type == "both") {
+                        evenLeftMargin   = lm;
+                        evenRightMargin  = rm;
+                        evenTopMargin    = tm;
+                        evenBottomMargin = bm;
+                        }
+                  }
+            else if (tag == "page-height") {
+                  size = paperSizeNameToIndex("Custom");
+                  _height = val.toDouble() * 0.45 / PPI;
+                  }
+            else if (tag == "page-width") {
+                  size = paperSizeNameToIndex("Custom");
+                  _width = val.toDouble() * 0.45 / PPI;
                   }
             else
                   domError(e);
