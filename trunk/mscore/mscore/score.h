@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: score.h,v 1.21 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -448,6 +448,7 @@ class Score : public QObject {
       void changeCRlen(ChordRest* cr, int len);
       int makeGap(int tick, int track, int len);
       int makeGap1(int tick, int staff, int len);
+      void cloneCR(ChordRest* cr, int tick, int len, int track);
 
       void setTupletChordRest(ChordRest* cr, int pitch, int len);
 

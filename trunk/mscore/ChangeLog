@@ -1,4 +1,6 @@
-5.1.2009 (tb)
+5.1.2009
+      - create more than one rest instead of dotted rest
+      (tb)
       - updating Dutch translation by Jaap Plaisier
 4.1.2009 (ws)
       - after loading of new score "cs" (currentScore) was not always set

@@ -1978,11 +1978,13 @@ void MuseScore::writeSettings()
 
 void MuseScore::readSettings()
       {
-      if (useFactorySettings)
+      if (useFactorySettings) {
+            resize(QSize(800, 600));
             return;
+            }
       QSettings settings;
       settings.beginGroup("MainWindow");
-      resize(settings.value("size", QSize(950, 500)).toSize());
+      resize(settings.value("size", QSize(950, 800)).toSize());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: edit.cpp,v 1.85 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -117,6 +117,8 @@ void Score::changeRest(Rest* rest, int /*tick*/, int len)
 Rest* Score::addRest(int tick, int len, int track)
       {
       Measure* measure = tick2measure(tick);
+      if (measure->tickLen() == len && (len < (division * 8)))    // whole measure rest?
+            len = 0;
       Rest* rest = new Rest(this, tick, len);
       rest->setTrack(track);
       Segment::SegmentType st = Segment::segmentType(rest->type());
@@ -137,99 +139,36 @@ Rest* Score::addRest(int tick, int len, int track)
 
 Rest* Score::setRest(int tick, int len, int track)
       {
-// printf("setRest %d len %d\n", tick, len);
-
-      Rest* rest = 0;
-
       Measure* measure = tick2measure(tick);
-
+      Duration d;
+      int dots;
+      headType(len, &d, &dots);
       //
       // set whole measure rest if
       //    - rest covers whole measure
       //    - len < brevis
+      if (dots == 0 || (measure->tickLen() == len && (len < (division * 8))))
+            return addRest(tick, len, track);
 
-      if (measure->tickLen() == len && (len < (division * 8)))    // whole measure rest?
-            return addRest(tick, 0, track);
-
-      if (len / (division * 16)) {                                // longa
-            rest = addRest(tick, division * 16, track);
-            int nlen =  len % (division * 16);
-            if (nlen) {
-                  setRest(tick + division * 16, nlen, track);
-                  tick += nlen;
+      Rest* rest = 0;
+      if (((measure->tick() - tick) % d.ticks()) == 0) {
+            rest = addRest(tick, d.ticks(), track);
+            while(dots > 0) {
+                  tick += d.ticks();
+                  d = d.shift(1);
+                  addRest(tick, d.ticks(), track);
+                  --dots;
                   }
             }
-      else if (len / (division * 8)) {                            // brevis
-            rest = addRest(tick, division*8, track);
-            int nlen =  len % (division*8);
-            if (nlen) {
-                  setRest(tick + division*8, nlen, track);
-                  tick += nlen;
+      else {
+            int ticks = d.ticks();
+            while(dots > 0) {
+                  d = d.shift(1);
+                  addRest(tick, d.ticks(), track);
+                  tick += d.ticks();
+                  --dots;
                   }
-            }
-      else if (len / (division*4)) {
-            rest = addRest(tick, division*4, track);
-            int nlen =  len % (division*4);
-            if (nlen) {
-                  setRest(tick + division*4, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division*2)) {
-            rest = addRest(tick, division*2, track);
-            int nlen =  len % (division*2);
-            if (nlen) {
-                  setRest(tick + division*2, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / division) {
-            rest = addRest(tick, division, track);
-            int nlen =  len % (division);
-            if (nlen) {
-                  setRest(tick + division, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division/2)) {
-            rest = addRest(tick, division/2, track);
-            int nlen = len % (division/2);
-            if (nlen) {
-                  setRest(tick + division/2, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division/4)) {
-            rest = addRest(tick, division/4, track);
-            int nlen = len % (division/4);
-            if (nlen) {
-                  setRest(tick + division/4, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division/8)) {
-            rest = addRest(tick, division/8, track);
-            int nlen = len % (division/8);
-            if (nlen) {
-                  setRest(tick + division/8, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division/16)) {
-            rest = addRest(tick, division/16, track);
-            int nlen = len % (division/16);
-            if (nlen) {
-                  setRest(tick + division/16, nlen, track);
-                  tick += nlen;
-                  }
-            }
-      else if (len / (division/32)) {
-            rest = addRest(tick, division/32, track);
-            int nlen = len % (division/32);
-            if (nlen) {
-                  setRest(tick + division/32, nlen, track);
-                  tick += nlen;
-                  }
+            rest = addRest(tick, ticks, track);
             }
       return rest;
       }

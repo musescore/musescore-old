@@ -435,7 +435,6 @@ void Score::cmdRemove(Element* e)
 
 void Score::cmdAddPitch(int note, bool addFlag)
       {
-      int octave = _padState.pitch / 12;
       if (!noteEntryMode())
             setNoteEntry(true);
       if (_is.cr == 0 && _padState.voice == 0) {
@@ -463,8 +462,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   return;
             }
       else {
-            pitch = pitchKeyAdjust(note, key);
-            int delta = _padState.pitch - (octave*12 + pitch);
+            int octave = _padState.pitch / 12;
+            pitch      = pitchKeyAdjust(note, key);
+            int delta  = _padState.pitch - (octave*12 + pitch);
             if (delta > 6)
                   _padState.pitch = (octave+1)*12 + pitch;
             else if (delta < -6)
@@ -500,7 +500,7 @@ void Score::cmdAddPitch1(int pitch, bool addFlag)
             }
       else {
             // insert note
-            int len = _padState.tickLen;
+            int len       = _padState.tickLen;
             ChordRest* cr = _is.cr;
             if (cr && cr->tuplet()) {
                   setTupletChordRest(cr, pitch, len);
@@ -548,10 +548,6 @@ void Score::cmdAddInterval(int val)
             return;
 
       setNoteEntry(true);
-//      ChordRest* cr = _is.cr;
-//      int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
-//      _is.setPos(_is.pos() + len);
-//      emit posChanged(_is.pos());
 
       Staff* staff = on->staff();
       int key = staff->keymap()->key(on->chord()->tick());
@@ -736,6 +732,40 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
       }
 
 //---------------------------------------------------------
+//   cloneCR
+//---------------------------------------------------------
+
+void Score::cloneCR(ChordRest* cr, int tick, int restLen, int track)
+      {
+      undoRemoveElement(cr);
+      if (cr->tick() != tick) {
+            Segment* oseg = cr->segment();
+            if (oseg->isEmpty())
+                  undoRemoveElement(oseg);
+            }
+
+      if (cr->type() == REST) {
+            setRest(tick, restLen, track);
+            return;
+            }
+      ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
+      newcr->setTrack(track);
+      newcr->setLen(restLen);
+      newcr->setTick(tick);
+
+      if (cr->tick() != tick) {
+            Measure* measure = cr->measure();
+            Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(Segment::SegChordRest, tick);
+                  undoAddElement(seg);
+                  }
+            newcr->setParent(seg);
+            }
+      undoAddElement(newcr);
+      }
+
+//---------------------------------------------------------
 //   makeGap
 //    make time gap at tick by removing/shortening
 //    chord/rest
@@ -815,25 +845,13 @@ int Score::makeGap(int tick, int track, int len)
             int len = cr->tickLen();
             if (len == 0)
                   len = measure->tickLen();
-//            if (cr->tuplet())
-//                  len = cr->tuplet()->tickLen();
-//            int ll = tick - cr->tick() + len;
-//            if (ll >= len)
-//                  return ll;
 
             if ((cr->tick() + len) > tick) {
-// printf("have start segment at %d\n", startSegment->tick());
                   int restLen = tick - cr->tick();
                   //
                   // clone chord rest
                   //
-                  ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
-                  newcr->setTrack(track);
-                  newcr->setLen(restLen);
-                  newcr->setTick(cr->tick());
-                  newcr->setParent(cr->parent());
-                  undoRemoveElement(cr);
-                  undoAddElement(newcr);
+                  cloneCR(cr, cr->tick(), restLen, track);
                   gapLen = cr->tick() + len - tick;
                   }
             }
@@ -849,7 +867,7 @@ int Score::makeGap(int tick, int track, int len)
             if (segment == 0)
                   break;
             ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
-            int l          = cr->tickLen();
+            int l         = cr->tickLen();
             if (l == 0 && cr->type() == REST)    // whole measure rest?
                   l = measure->tickLen();
             else if (cr->tuplet())
@@ -873,22 +891,7 @@ int Score::makeGap(int tick, int track, int len)
                   //
                   // clone chord rest
                   //
-                  ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
-                  newcr->setTrack(track);
-                  newcr->setLen(restLen);
-                  newcr->setTick(tick);
-
-                  Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
-                  if (seg == 0) {
-                        seg = measure->createSegment(Segment::SegChordRest, tick);
-                        undoAddElement(seg);
-                        }
-                  newcr->setParent(seg);
-                  Segment* oseg = cr->segment();
-                  undoRemoveElement(cr);
-                  if (oseg->isEmpty())
-                        undoRemoveElement(oseg);
-                  undoAddElement(newcr);
+                  cloneCR(cr, tick, restLen, track);
                   gapLen = len;
                   break;
                   }
