@@ -397,7 +397,9 @@ void MusicXml::scorePartwise(QDomElement ee)
                               QString str = ee.text();
                               if (type == "composer")
                                     composer = str;
-                              else if (type == "poet")
+                              else if (type == "poet") //not in dtd ?
+                                    poet = str;
+                              else if (type == "lyricist")
                                     poet = str;
                               else if (type == "translator")
                                     translator = str;
@@ -434,8 +436,9 @@ void MusicXml::scorePartwise(QDomElement ee)
                               _spatium = DPMM * (millimeter * 10.0 / tenths);
                               score->setSpatium(_spatium);
                               }
-                        else if (tag == "page-layout")
-                              score->pageFormat()->read(ee);
+                        else if (tag == "page-layout"){
+                              score->pageFormat()->readMusicXML(ee);
+						      }
                         else if (tag == "system-layout") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
@@ -503,6 +506,8 @@ void MusicXml::scorePartwise(QDomElement ee)
             il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
             }
       }
+
+
 
 //---------------------------------------------------------
 //   partGroupStart
@@ -647,8 +652,8 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
 
       for (;!e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
-                  // OK? (ws)
-                  // part->setLongName(e.text());
+                  // OK? (ws) Yes it should be ok.part-name is display in front of staff in finale. (la)
+                  part->setLongName(e.text());
                   // part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation")
