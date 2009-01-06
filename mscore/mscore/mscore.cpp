@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: mscore.cpp,v 1.105 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -55,6 +55,7 @@
 #include "driver.h"
 #include "harmony.h"
 #include "magbox.h"
+#include "voiceselector.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -100,6 +101,26 @@ static const char* outFileName;
 static const char* styleFile;
 static QString localeName;
 bool useFactorySettings = false;
+
+//---------------------------------------------------------
+//   NoteButton
+//---------------------------------------------------------
+
+NoteButton::NoteButton(QWidget* parent)
+   : QToolButton(parent)
+      {
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize NoteButton::sizeHint() const
+      {
+      int w = preferences.noteEntryIconWidth;
+      int h = preferences.noteEntryIconHeight;
+      return QSize(w, h);
+      }
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -464,10 +485,13 @@ MuseScore::MuseScore()
          << "pad-nat" << "pad-flat"  <<"pad-flat2";
 
       foreach(const QString s, sl1) {
+            NoteButton* nb = new NoteButton;
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             ag->addAction(a);
-            entryTools->addAction(a);
+            nb->setDefaultAction(a);
+            entryTools->addWidget(nb);
+            // entryTools->addAction(a);
             if (s == "pad-tie" || s == "pad-rest")
                   entryTools->addSeparator();
             }
@@ -487,28 +511,9 @@ MuseScore::MuseScore()
       entryTools->addAction(a);
       entryTools->addSeparator();
 
-      QStringList sl2;
-      sl2 << "voice-1" << "voice-2" << "voice-3" << "voice-4";
-      QActionGroup* vag = new QActionGroup(this);
-      vag->setExclusive(true);
-      int i = 0;
-      foreach(const QString s, sl2) {
-            QAction* a = getAction(s.toLatin1().data());
-            a->setCheckable(true);
-            vag->addAction(a);
-            QToolButton* tb = new QToolButton(this);
-            tb->setDefaultAction(a);
-            tb->setToolButtonStyle(Qt::ToolButtonIconOnly);
-            tb->setAutoFillBackground(true);
-            QPalette pal = tb->palette();
-            QColor c(preferences.selectColor[i].light(180));
-            pal.setColor(QPalette::Window, preferences.selectColor[i].light(180));
-            pal.setColor(QPalette::Button, preferences.selectColor[i].light(150));
-            tb->setPalette(pal);
-            entryTools->addWidget(tb);
-            ++i;
-            }
-      connect(vag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
+      VoiceSelector* vw = new VoiceSelector;
+      entryTools->addWidget(vw);
+      connect(vw, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
       //---------------------
       //    Menus
