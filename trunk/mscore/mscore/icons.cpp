@@ -76,7 +76,7 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
       double mag = (size/20.0) * 0.6 * (_spatium / (SPATIUM20 * DPI)) * PDPI / DPI;
 
-      double mag1 = double(preferences.iconHeight) / double(ICON_HEIGHT);
+      double mag1 = double(preferences.noteEntryIconHeight) / double(ICON_HEIGHT);
       mag = mag * mag1;
       QRectF bb = sc.bbox(mag);
       qreal w   = bb.width();
