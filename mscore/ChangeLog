@@ -1,3 +1,7 @@
+7.jan
+      - new flag: Display->ShowFrames
+      - align tempo text to text baseline
+      - text layout cleanups
 5.1.2009
       - create more than one rest instead of dotted rest
       (tb)

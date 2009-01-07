@@ -1885,6 +1885,24 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Reset Stretch"),
          QT_TR_NOOP("Reset Stretch")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "show-invisible",
+         QT_TR_NOOP("show invisible"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Show Invisible"),
+         QT_TR_NOOP("Show Invisible")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "show-frames",
+         QT_TR_NOOP("show frames"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Show Frames"),
+         QT_TR_NOOP("Show Frames")
+         ),
       Shortcut(0, 0, 0),
       };
 

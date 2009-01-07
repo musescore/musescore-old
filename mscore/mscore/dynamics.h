@@ -50,8 +50,6 @@ class Dynamic : public Text {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Measure* measure() const         { return (Measure*)parent(); }
 
-      virtual void layout(ScoreLayout*);
-
       virtual void setSubtype(int val);
       virtual void setSubtype(const QString&);
       virtual const QString subtypeName() const;
@@ -62,8 +60,6 @@ class Dynamic : public Text {
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-
-      virtual QLineF dragAnchor() const;
 
       virtual void endEdit();
       virtual void resetUserOffsets();

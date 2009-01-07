@@ -1131,6 +1131,8 @@ bool Score::read(QDomElement e)
                         _fileDivision = i;
                   else if (tag == "showInvisible")
                         _showInvisible = i;
+                  else if (tag == "showFrames")
+                        _showFrames = i;
                   else if (tag == "Style")
                         _style->load(ee, _mscVersion);
                   else if (tag == "TextStyle") {
@@ -1177,6 +1179,8 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "showInvisible")
                         _showInvisible = i;
+                  else if (tag == "showFrames")
+                        _showFrames = i;
                   else if (tag == "Symbols")    // obsolete
                         ;
                   else if (tag == "cursorTrack") {

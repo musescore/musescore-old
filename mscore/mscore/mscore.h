@@ -166,7 +166,6 @@ class MuseScore : public QMainWindow {
 
       QAction* playId;
       QAction* navigatorId;
-      QAction* visibleId;
       QAction* transportId;
       QAction* inputId;
 
@@ -282,7 +281,6 @@ class MuseScore : public QMainWindow {
       void magChanged(int);
       void showPageSettings();
       void pageSettingsChanged();
-      void showInvisibleClicked();
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);

@@ -804,20 +804,6 @@ void Measure::layout2(ScoreLayout* layout)
 
       foreach(Element* element, _el) {
             element->layout(layout);
-            if (element->type() != HARMONY
-               && element->type() != TEMPO_TEXT
-               && element->type() != DYNAMIC
-               && element->type() != STAFF_TEXT) {
-                  double x = 0.0;
-                  double y = 0.0;
-                  int track = element->track();
-                  if (track != -1)
-                        y = system()->staff(track / VOICES)->y();
-                  if (element->tick() != -1)
-                        x = tick2pos(element->tick());
-                  QPointF o(x, y);
-                  element->setPos(element->ipos() + o);
-                  }
             }
 
       //
@@ -1103,6 +1089,7 @@ void Measure::add(Element* el)
             case HARMONY:
             case MARKER:
             case STAFF_TEXT:
+            case HBOX:
                   if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
                         _noText = static_cast<Text*>(el);
                   else
@@ -1187,6 +1174,7 @@ marker:
             case SYMBOL:
             case HARMONY:
             case STAFF_TEXT:
+            case HBOX:
                   if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
                         break;
                   if (!_el.remove(el)) {
@@ -2073,19 +2061,15 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
+Element* Measure::drop(const QPointF& p, const QPointF& dragOffset, Element* e)
       {
       // determine staff
       System* s = system();
       int staffIdx = s->y2staff(p.y());
-printf("drop staff idx %d\n", staffIdx);
       if (staffIdx == -1 || e->systemFlag()) {
             staffIdx = 0;
             }
       Staff* staff = score()->staff(staffIdx);
-
-      // convert p from canvas to measure relative position and take x coordinate
-      QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
 
       switch(e->type()) {
             case MEASURE_LIST:
@@ -2108,6 +2092,12 @@ printf("drop staffList\n");
 
             case SYMBOL:
                   e->setParent(this);
+                  e->setTrack(staffIdx * VOICES);
+                  e->layout(score()->layout());
+                  {
+                  QPointF uo(p - e->canvasPos() - dragOffset);
+                  e->setUserOff(uo / _spatium);
+                  }
                   score()->cmdAdd(e);
                   break;
 

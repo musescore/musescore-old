@@ -42,8 +42,6 @@ class StaffText : public Text  {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      virtual void layout(ScoreLayout*);
-
       QString channelName() const                { return _channelName;      }
       QString midiActionName() const             { return _midiActionName;   }
       void setChannelName(const QString& s)      { _channelName = s;         }

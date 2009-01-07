@@ -130,6 +130,7 @@ void TempoProperties::saveValues()
 //   dragAnchor
 //---------------------------------------------------------
 
+#if 0
 QLineF TempoText::dragAnchor() const
       {
       Measure* m      = measure();
@@ -154,4 +155,4 @@ void TempoText::layout(ScoreLayout* l)
       double x   = m->tick2pos(tick());
       setPos(ipos() + QPointF(x, y));
       }
-
+#endif

@@ -213,33 +213,6 @@ QPointF Dynamic::canvasPos() const
       }
 
 //---------------------------------------------------------
-//   dragAnchor
-//---------------------------------------------------------
-
-QLineF Dynamic::dragAnchor() const
-      {
-      Measure* m      = measure();
-      System*  system = m->system();
-      double yp       = system->staff(staffIdx())->y() + system->y();
-      double xp       = m->tick2pos(tick()) + m->canvasPos().x();
-      QPointF cp      = canvasPos()  + QPointF(0.0, baseLine());
-      return QLineF(cp, QPointF(xp, yp));
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Dynamic::layout(ScoreLayout* l)
-      {
-      Text::layout(l);  // process alignment
-      if (tick() != -1 && parent()) {
-            double xp = measure()->tick2pos(tick());
-            setPos(ipos() + QPointF(xp, 0));
-            }
-      }
-
-//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 

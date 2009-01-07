@@ -85,7 +85,7 @@ const TextStyle defaultTextStyleArray[] = {
 
 /*13*/
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true),
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT),
@@ -157,7 +157,7 @@ Style defaultStyle = {
       Spatium(2),     // lyricsDistance
       Spatium(2),     // lyricsMinBottomDistance
       Spatium(7.0),   // dist. between system and vertical box
-      Spatium(7.0),   // dist. between vertical box and next system
+      Spatium(1.0),   // dist. between vertical box and next system
 
       Spatium(4.0),   // minMeasureWidth  12.0
       Spatium(0.16),  // barWidth;

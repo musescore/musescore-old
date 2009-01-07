@@ -1844,7 +1844,6 @@ void Canvas::dropEvent(QDropEvent* event)
                   case SYMBOL:
                   case IMAGE:
                         {
-                        // Symbol* s = (Symbol*)dragElement;
                         Element* el = elementAt(pos);
                         if (el == 0) {
                               int staffIdx = -1;

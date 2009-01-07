@@ -41,10 +41,10 @@ Box::Box(Score* score)
       editMode      = false;
       _boxWidth     = Spatium(5.0);
       _boxHeight    = Spatium(10.0);
-      _leftMargin   = 0.0;
-      _rightMargin  = 0.0;
-      _topMargin    = 0.0;
-      _bottomMargin = 0.0;
+      _leftMargin   = 5.0;
+      _rightMargin  = 5.0;
+      _topMargin    = 5.0;
+      _bottomMargin = 5.0;
       }
 
 //---------------------------------------------------------
@@ -65,8 +65,12 @@ void Box::draw(QPainter& p) const
       {
       if (score() && score()->printing())
             return;
-      if (selected() || editMode || dropTarget()) {
-            QPen pen(QColor(Qt::blue));
+      if (selected() || editMode || dropTarget() || score()->showFrames()) {
+            QPen pen;
+            if (selected() || editMode || dropTarget())
+                  pen = QPen(QColor(Qt::blue));
+            else
+                  pen = QPen(QColor(Qt::gray));
             pen.setWidthF(2.0 / p.matrix().m11());
             p.setPen(pen);
             p.drawRect(bbox());
@@ -87,7 +91,7 @@ bool Box::startEdit(Viewer*, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Box::edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s)
+bool Box::edit(Viewer*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const QString&)
       {
       return false;
       }
@@ -269,7 +273,17 @@ void HBox::collectElements(QList<const Element*>& el) const
 
 void HBox::layout(ScoreLayout* layout)
       {
-      setbbox(QRectF(0.0, 0.0, boxWidth().point(), system()->height()));
+      if (parent() && parent()->type() == VBOX) {
+            VBox* vb = static_cast<VBox*>(parent());
+            double x = vb->leftMargin() * DPMM;
+            double y = vb->topMargin() * DPMM;
+            double w = boxWidth().point();
+            double h = vb->height() - vb->topMargin() * DPMM - vb->bottomMargin() * DPMM;
+            setbbox(QRectF(x, y, w, h));
+            }
+      else {
+            setbbox(QRectF(0.0, 0.0, boxWidth().point(), system()->height()));
+            }
       Box::layout(layout);
       }
 
@@ -392,6 +406,8 @@ void VBox::propertyAction(const QString& cmd)
             }
       else if (cmd == "insert-hbox") {
             s = new HBox(score());
+            double w = width() - leftMargin() * DPMM - rightMargin() * DPMM;
+            static_cast<HBox*>(s)->setBoxWidth(Spatium(w / _spatium));
             }
       else {
             printf("VBox::propertyAction: %s unknown\n", qPrintable(cmd));
@@ -421,16 +437,6 @@ void VBox::layout(ScoreLayout* layout)
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), boxHeight().point()));
       Box::layout(layout);
-      int n    = _hboxList.size();
-      if (n) {
-            double w = (system()->width() - 2.0 * leftMargin() * DPMM) / n;
-            for (int i = 0; i < _hboxList.size(); ++i) {
-                  HBox* hb = _hboxList[i];
-                  hb->setPos(leftMargin() * DPMM + (i * w), topMargin() * DPMM);
-                  hb->setbbox(QRectF(0.0, 0.0, w,
-                     boxHeight().point() - (topMargin() + bottomMargin()) * DPMM));
-                  }
-            }
       }
 
 //---------------------------------------------------------
@@ -439,15 +445,9 @@ void VBox::layout(ScoreLayout* layout)
 
 void VBox::add(Element* e)
       {
-      if (e->type() == HBOX) {
-            e->setParent(this);
-            _hboxList.append((HBox*)e);
-            }
-      else {
-            MeasureBase::add(e);
-            if (e->type() == IMAGE)
-                  static_cast<Image*>(e)->reference();
-            }
+      MeasureBase::add(e);
+      if (e->type() == IMAGE)
+            static_cast<Image*>(e)->reference();
       }
 
 //---------------------------------------------------------
@@ -456,28 +456,8 @@ void VBox::add(Element* e)
 
 void VBox::remove(Element* e)
       {
-      if (e->type() == HBOX) {
-            int idx = _hboxList.indexOf((HBox*)e);
-            if (idx == -1)
-                  printf("VBox(%p)::remove(%s,%p) not found\n", this, e->name(), e);
-            _hboxList.removeAt(idx);
-            }
-      else {
-            MeasureBase::remove(e);
-            if (e->type() == IMAGE)
-                  static_cast<Image*>(e)->dereference();
-            }
+      MeasureBase::remove(e);
+      if (e->type() == IMAGE)
+            static_cast<Image*>(e)->dereference();
       }
-
-//---------------------------------------------------------
-//   collectElements
-//---------------------------------------------------------
-
-void VBox::collectElements(QList<const Element*>& el) const
-      {
-      foreach(Element* e, _hboxList)
-            e->collectElements(el);
-      MeasureBase::collectElements(el);
-      }
-
 
