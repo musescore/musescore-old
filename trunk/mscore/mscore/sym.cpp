@@ -131,7 +131,8 @@ SymCode pSymbols[] = {
       SymCode(0x215D, -1, "5/8", SYMBOL_FRACTION),
       SymCode(0x215E, -1, "7/8", SYMBOL_FRACTION),
 
-      SymCode(0x203F, -1),    // curved ligature to connect two syllables
+      // SymCode(0x203F, -1),    // curved ligature to connect two syllables
+      SymCode(0x35c, -1),    // curved ligature to connect two syllables
 
       SymCode(-1, -1)    // indicates end
       };
