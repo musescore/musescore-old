@@ -208,6 +208,7 @@ class Score : public QObject {
       ScoreLayout* _layout;
 
       bool _showInvisible;
+      bool _showFrames;
 
       EditTempo* editTempo;
       Element* origDragObject;
@@ -537,7 +538,9 @@ class Score : public QObject {
       void setSpatium(double v);
 
       bool showInvisible() const { return _showInvisible; }
+      bool showFrames() const { return _showFrames; }
       void setShowInvisible(bool v);
+      void setShowFrames(bool v);
 
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);

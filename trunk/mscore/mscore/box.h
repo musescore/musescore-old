@@ -100,7 +100,6 @@ class HBox : public Box {
 //---------------------------------------------------------
 
 class VBox : public Box {
-      QList<HBox*> _hboxList;
 
    public:
       VBox(Score* score) : Box(score) {}
@@ -115,7 +114,6 @@ class VBox : public Box {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void collectElements(QList<const Element*>& el) const;
       };
 
 #endif

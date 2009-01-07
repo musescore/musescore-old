@@ -355,6 +355,7 @@ void Score::clear()
 
       sel->clear();
       _showInvisible = true;
+      _showFrames = true;
       }
 
 //---------------------------------------------------------
@@ -458,6 +459,7 @@ void Score::write(Xml& xml, bool autosave)
                   _textStyles[i]->write(xml);
             }
       xml.tag("showInvisible", _showInvisible);
+      xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
       if (rights) {
             xml.stag("rights");
@@ -1315,6 +1317,17 @@ void Score::setShowInvisible(bool v)
       {
       _showInvisible = v;
       updateAll      = true;
+      end();
+      }
+
+//---------------------------------------------------------
+//   setShowFrames
+//---------------------------------------------------------
+
+void Score::setShowFrames(bool v)
+      {
+      _showFrames = v;
+      updateAll   = true;
       end();
       }
 

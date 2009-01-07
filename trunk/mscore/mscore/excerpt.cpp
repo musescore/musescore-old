@@ -156,6 +156,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
                   _textStyles[i]->write(xml);
             }
       xml.tag("showInvisible", _showInvisible);
+      xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
       if (rights) {
             xml.stag("rights");

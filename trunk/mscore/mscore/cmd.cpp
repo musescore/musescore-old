@@ -1852,6 +1852,16 @@ void Score::cmd(const QString& cmd)
             MetaEditDialog med(this, 0);
             med.exec();
             }
+      else if (cmd == "show-invisible") {
+            setShowInvisible(getAction(cmd.toLatin1().data())->isChecked());
+            updateAll = true;
+            end();
+            }
+      else if (cmd == "show-frames") {
+            setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
+            updateAll = true;
+            end();
+            }
       else {
             if (cmdActive) {
                   printf("Score::cmd(): cmd already active\n");

@@ -141,10 +141,7 @@ class Harmony : public Text {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      virtual void layout(ScoreLayout*);
-
       virtual void endEdit();
-      virtual QLineF dragAnchor() const;
 
       int baseTpc() const                  { return _baseTpc;      }
       void setBaseTpc(int val)             { _baseTpc = val;       }

@@ -33,6 +33,7 @@
 #include "layout.h"
 #include "textline.h"
 #include "preferences.h"
+#include "system.h"
 
 TextPalette* palette;
 
@@ -623,6 +624,12 @@ void TextB::layout(ScoreLayout* layout)
             TextLine* tl = (TextLine*)(tls->line());
             qreal textlineLineWidth = tl->lineWidth().point();
             setYpos(pos().y() - textlineLineWidth * .5);
+            }
+      if (parent()->type() == MEASURE) {
+            Measure* m = static_cast<Measure*>(parent());
+            double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
+            double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+            setPos(ipos() + QPointF(x, y));
             }
       }
 
@@ -1216,7 +1223,18 @@ void TextB::paste()
 
 QLineF TextB::dragAnchor() const
       {
-      QPointF p1(parent()->abbox().topLeft());
+      QPointF p1;
+
+      if (parent()->type() == MEASURE) {
+            Measure* m     = static_cast<Measure*>(parent());
+            System* system = m->system();
+            double yp      = system->staff(staffIdx())->y() + system->y();
+            double xp      = m->tick2pos(tick()) + m->canvasPos().x();
+            p1 = QPointF(xp, yp);
+            }
+      else {
+            p1 = QPointF(parent()->abbox().topLeft());
+            }
       double tw = width();
       double th = height();
       double x  = 0.0;
@@ -1231,21 +1249,6 @@ QLineF TextB::dragAnchor() const
             x = tw;
       else if (_align & ALIGN_HCENTER)
             x = (tw * .5);
-#if 0
-      if (anchor() == ANCHOR_SEGMENT) {
-            Measure* m   = (Measure*) parent();
-            if (m->type() != MEASURE)
-                  abort();
-            Segment* seg = m->tick2segment(tick());
-            if (seg)                            // DEBUG
-                  p1.rx() += seg->x();
-            return QLineF(p1, QPointF(x, y) + canvasPos());
-            }
-      else if (anchor() == ANCHOR_PARENT) {
-            }
-#endif
-            return QLineF(p1, abbox().topLeft());
-//            }
-//      return QLineF(p1, QPointF(x, y) + canvasPos());
+      return QLineF(p1, abbox().topLeft() + QPointF(x, y));
       }
 

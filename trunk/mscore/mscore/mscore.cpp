@@ -497,8 +497,9 @@ MuseScore::MuseScore()
             }
 
       sl1.clear();
-      sl1 << "pad-appoggiatura" << "pad-acciaccatura" << "pad-grace4" <<"pad-grace16" << "pad-grace32" ;
-      sl1 << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam";
+      sl1 << "pad-appoggiatura" << "pad-acciaccatura" << "pad-grace4" <<"pad-grace16" << "pad-grace32"
+          << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam"
+          << "show-invisible" << "show-frames";
 
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
@@ -732,8 +733,8 @@ MuseScore::MuseScore()
       menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
-      visibleId = menuDisplay->addAction(tr("Show Invisible"), this, SLOT(showInvisibleClicked()));
-      visibleId->setCheckable(true);
+      menuDisplay->addAction(getAction("show-invisible"));
+      menuDisplay->addAction(getAction("show-frames"));
 
       //---------------------
       //    Menu Help
@@ -1103,7 +1104,8 @@ void MuseScore::setCurrentScore(int idx)
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
       getAction("file-save")->setEnabled(cs->isSavable());
-      visibleId->setChecked(cs->showInvisible());
+      getAction("show-invisible")->setChecked(cs->showInvisible());
+      getAction("show-frames")->setChecked(cs->showFrames());
       if (cs->magIdx() == MAG_FREE)
             mag->setMag(cs->mag());
       else
@@ -1174,16 +1176,6 @@ void MuseScore::dropEvent(QDropEvent* event)
             setCurrentScore(scoreList.indexOf(lastScore));
             event->acceptProposedAction();
             }
-      }
-
-//---------------------------------------------------------
-//   showInvisibleClicked
-//---------------------------------------------------------
-
-void MuseScore::showInvisibleClicked()
-      {
-      if (cs)
-            cs->setShowInvisible(visibleId->isChecked());
       }
 
 //---------------------------------------------------------

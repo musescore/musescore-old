@@ -3989,7 +3989,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Artikulationen,Ornamente</translation>
+        <translation>Artikulation</translation>
     </message>
     <message>
         <source>display in concert pitch</source>
@@ -4221,7 +4221,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Breaks/Spacer</source>
-        <translation>Umbrüche/Abstandshalter</translation>
+        <translation>Umbruch/Abstände</translation>
     </message>
     <message>
         <source>&amp;File</source>

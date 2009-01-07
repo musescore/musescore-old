@@ -121,6 +121,12 @@ void BSymbol::layout(ScoreLayout* l)
       {
       foreach(Element* e, _leafs)
             e->layout(l);
+      if (parent() && parent()->type() == MEASURE) {
+            Measure* m = static_cast<Measure*>(parent());
+            double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
+            double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+            setPos(ipos() + QPointF(x, y));
+            }
       }
 
 //---------------------------------------------------------
