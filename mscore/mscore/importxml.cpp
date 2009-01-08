@@ -1758,7 +1758,13 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
                         printf("unknown syllabic %s\n", qPrintable(e.text()));
                   }
             else if (e.tagName() == "text")
-                  l->setText(e.text());
+                  l->setText(l->getText()+e.text());
+            else if (e.tagName() == "elision")
+                  if (e.text().isEmpty()){
+                	  l->setText(l->getText()+" ");
+                  }else{
+                	  l->setText(l->getText()+e.text());
+                  }
             else if (e.tagName() == "extend")
                   ;
             else if (e.tagName() == "end-line")

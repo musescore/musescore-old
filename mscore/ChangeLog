@@ -1,3 +1,6 @@
+8.jan
+      (la)
+      - add support for elision in musicXML import
 7.jan
       - new flag: Display->ShowFrames
       - align tempo text to text baseline
