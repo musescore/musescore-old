@@ -1002,14 +1002,14 @@ void Score::readStaff(QDomElement e)
                   }
             else if (tag == "HBox") {
                   HBox* hbox = new HBox(this);
-                  hbox->setTick(curTick);
                   hbox->read(e);
+                  hbox->setTick(curTick);
                   _layout->add(hbox);
                   }
             else if (tag == "VBox") {
                   VBox* vbox = new VBox(this);
-                  vbox->setTick(curTick);
                   vbox->read(e);
+                  vbox->setTick(curTick);
                   _layout->add(vbox);
                   }
             else
