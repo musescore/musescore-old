@@ -1,4 +1,7 @@
 9.jan
+      - when moving rests raster vertical position with _spatium;
+        whole rests and half rests outside the staff are drawn with
+        ledger lines
       - updated spanish translation from Carlos Sanchiavedraz
       - extended frames/text functionality; see demo "schnee.mscz"
       - cleanups for qt4.5
