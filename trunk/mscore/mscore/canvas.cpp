@@ -500,6 +500,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         update();
                         }
                   _score->setLayoutAll(false);
+                  _score->end();    // update
                   break;
 
             case NOTE_ENTRY:
@@ -2172,7 +2173,7 @@ Element* Canvas::elementAt(const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   elementAt
+//   elementNear
 //---------------------------------------------------------
 
 Element* Canvas::elementNear(const QPointF& p)

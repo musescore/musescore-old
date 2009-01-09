@@ -68,4 +68,5 @@ var mscorePlugin = {
       run:  run
       };
 
-return mscorePlugin;
+mscorePlugin;
+

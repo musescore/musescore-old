@@ -471,7 +471,7 @@ MuseScore::MuseScore()
 
       entryTools = addToolBar(tr("Note Entry"));
       entryTools->setObjectName("entry-tools");
-      entryTools->setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
+      entryTools->setIconSize(QSize(preferences.noteEntryIconWidth, preferences.noteEntryIconHeight));
 
       a = getAction("note-input");
       a->setCheckable(true);
@@ -1593,7 +1593,7 @@ int main(int argc, char* argv[])
 
       if (DPI == 0) {
             QMessageBox::critical(0, "MuseScore Error",
-               QString("Invalid printer DPI value \"%1\"").arg(DPI));
+               QString("Invalid printer DPI value; no printer installed?"));
             DPI = 300.0;
             }
 
@@ -1672,8 +1672,16 @@ int main(int argc, char* argv[])
                         Score* score = new Score();
                         score->addViewer(new Canvas);
                         scoreCreated = true;
-                        score->read(name);
-                        mscore->appendScore(score);
+                        if (!score->read(name)) {
+                              QMessageBox::warning(0,
+                                    QWidget::tr("MuseScore"),
+                                    QWidget::tr("reading file <")
+                                       + name + "> failed: " +
+                                    QString(strerror(errno)),
+                                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                              }
+                        else
+                              mscore->appendScore(score);
                         }
                   }
             }
@@ -1739,6 +1747,8 @@ int main(int argc, char* argv[])
       mscore->show();
       if (sc)
             sc->finish(mscore);
+      if (debugMode)
+            printf("start event loop...\n");
       return qApp->exec();
       }
 

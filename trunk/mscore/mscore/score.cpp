@@ -246,7 +246,6 @@ Score::Score()
       _dirty            = false;
       _saved            = false;
       editObject        = 0;
-      origDragObject    = 0;
       _dragObject       = 0;
       keyState          = 0;
       editTempo         = 0;
@@ -377,13 +376,14 @@ void Score::renumberMeasures()
 
 //---------------------------------------------------------
 //   read
+//    return false on error
 //---------------------------------------------------------
 
 /**
  Import file \a name.
  */
 
-void Score::read(QString name)
+bool Score::read(QString name)
       {
       _mscVersion = MSCVERSION;
       _saved = false;
@@ -399,24 +399,28 @@ void Score::read(QString name)
             importCompressedMusicXml(name);
       else if (cs.toLower() == "mid" || cs.toLower() == "kar") {
             if (!importMidi(name))
-                  return;
+                  return false;
             }
       else if (cs == "md") {
             if (!importMuseData(name))
-                  return;
+                  return false;
             }
       else if (cs == "ly") {
             if (!importLilypond(name))
-                  return;
+                  return false;
             }
       else if (cs.toLower() == "mgu" || cs.toLower() == "sgu") {
             if (!importBB(name))
-                  return;
+                  return false;
             }
-      else if (cs.toLower() == "msc")
-            loadMsc(name);
-      else
-            loadCompressedMsc(name);
+      else if (cs.toLower() == "msc") {
+            if (!loadMsc(name))
+                  return false;
+            }
+      else {
+            if (!loadCompressedMsc(name))
+                  return false;
+            }
 
       renumberMeasures();
       if (_mscVersion < 103) {
@@ -438,6 +442,7 @@ void Score::read(QString name)
       updateChannel();
       _layout->doLayout();
       layoutAll = false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1100,12 +1105,9 @@ void Score::endEdit()
 
 void Score::startDrag(Element* e)
       {
-      origDragObject  = e;
-      _dragObject     = e->clone();
-      undoChangeElement(origDragObject, _dragObject);
-      sel->clear();
-      sel->add(_dragObject);
-      layout()->removeBsp(origDragObject);
+      _dragObject = e;
+      _startDragPosition = e->userOff();
+      layout()->removeBsp(e);
       }
 
 //---------------------------------------------------------
@@ -1125,11 +1127,9 @@ void Score::drag(const QPointF& delta)
 void Score::endDrag()
       {
       _dragObject->endDrag();
-      if (origDragObject) {
-            sel->clear();
-            sel->add(_dragObject);
-            origDragObject = 0;
-            }
+      QPointF npos = _dragObject->userOff();
+      _dragObject->setUserOff(_startDragPosition);
+      undoMove(_dragObject, npos);
       layoutAll = true;
       _dragObject = 0;
       }

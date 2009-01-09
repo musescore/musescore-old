@@ -36,6 +36,21 @@ MeasureBase::MeasureBase(Score* score)
       _dirty     = true;
       }
 
+MeasureBase::MeasureBase(const MeasureBase& m)
+   : Element(m)
+      {
+      _next      = m._next;
+      _prev      = m._prev;
+      _mw        = m._mw;
+      _dirty     = m._dirty;
+      _lineBreak = m._lineBreak;
+      _pageBreak = m._pageBreak;
+
+      foreach(Element* e, m._el) {
+            add(e->clone());
+            }
+      }
+
 //---------------------------------------------------------
 //   collectElements
 //---------------------------------------------------------
@@ -43,7 +58,7 @@ MeasureBase::MeasureBase(Score* score)
 void MeasureBase::collectElements(QList<const Element*>& el) const
       {
       foreach(Element* e, _el)
-            el.append(e);
+            e->collectElements(el);
       el.append(this);
       }
 

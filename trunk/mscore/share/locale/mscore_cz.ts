@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name>AboutBox</name>
     <message>
@@ -2754,7 +2756,7 @@ failed: </source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>copy</source>
@@ -4537,6 +4539,18 @@ before closing?</source>
         <source>NoteHeads</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>show invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Frames</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5547,11 +5561,11 @@ before closing?</source>
         <source>Autocorrection</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
