@@ -110,6 +110,27 @@ void Rest::draw(QPainter& p) const
       }
 
 //---------------------------------------------------------
+//   setUserOffset
+//    - raster vertical position in spatium units
+//    - half rests and whole rests outside the staff are
+//      replaced by special symbols with ledger lines
+//---------------------------------------------------------
+
+void Rest::setUserOffset(double x, double y)
+      {
+      int line = lrint(y  / _spatium);
+      if (_sym == wholerestSym && (line <= -2 || line >= 4))
+            _sym = outsidewholerestSym;
+      else if (_sym == outsidewholerestSym && (line > -2 && line < 4))
+            _sym = wholerestSym;
+      else if (_sym == halfrestSym && (line <= -3 || line >= 3))
+            _sym = outsidehalfrestSym;
+      else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
+            _sym = halfrestSym;
+      setUserOff(QPointF(x / _spatium, double(line)));
+      }
+
+//---------------------------------------------------------
 //   drag
 //---------------------------------------------------------
 
@@ -122,7 +143,7 @@ QRectF Rest::drag(const QPointF& s)
       qreal xoff = (fabs(s.x()) > xDragRange) ? xDragRange : fabs(s.x());
       if (s.x() < 0)
             xoff *= -1;
-      setUserOff(QPointF(xoff, s.y()) / _spatium);
+      setUserOffset(xoff, s.y());
       return abbox() | r;
       }
 
@@ -254,6 +275,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>
             headType(tickLen(), &dt, &_dots);
             setDuration(dt);
             }
+      setUserOffset(userOff().x() * _spatium, userOff().y() * _spatium);
       }
 
 //---------------------------------------------------------
@@ -290,6 +312,9 @@ void Rest::remove(Element* e)
 
 void Rest::setDuration(Duration dt)
       {
+      // symbols[outsidewholerestSym]        = Sym("outside whole rest",       0xe102, 0);
+      // symbols[outsidehalfrestSym]         = Sym("outside half rest",        0xe103, 0);
+
       DurationElement::setDuration(dt);
       setYoff(2.0 * mag());
       switch(dt.val()) {

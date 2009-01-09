@@ -41,6 +41,7 @@ class Rest : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
+      void setUserOffset(double x, double y);
 
    public:
       Rest(Score*);
