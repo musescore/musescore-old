@@ -262,10 +262,8 @@ void Preferences::write()
       s.setValue("iconWidth",           iconWidth);
       s.setValue("noteEntryIconHeight", noteEntryIconHeight);
       s.setValue("noteEntryIconWidth",  noteEntryIconWidth);
-      if (!applicationFont.isEmpty())
-            s.setValue("applicationFont", applicationFont);
-      if (!style.isEmpty())
-            s.setValue("style", style);
+      s.setValue("applicationFont", applicationFont);
+      s.setValue("style", style);
 
       s.setValue("replaceFractions", replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
@@ -1227,7 +1225,7 @@ void PreferenceDialog::paperSizeChanged(double)
 //   landscapeToggled
 //---------------------------------------------------------
 
-void PreferenceDialog::landscapeToggled(bool flag)
+void PreferenceDialog::landscapeToggled(bool /*flag*/)
       {
       }
 

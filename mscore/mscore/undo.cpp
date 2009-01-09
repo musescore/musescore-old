@@ -1415,7 +1415,9 @@ void Score::removeElement(Element* element)
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
 
-      if (element->type() == MEASURE || element->type() == HBOX || element->type() == VBOX) {
+      if (element->type() == MEASURE
+         || (element->type() == HBOX && parent->type() != VBOX)
+         || element->type() == VBOX) {
             _layout->remove(element);
             return;
             }

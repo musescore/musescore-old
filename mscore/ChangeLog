@@ -1,3 +1,6 @@
+9.jan
+      - extended frames/text functionality; see demo "schnee.mscz"
+      - cleanups for qt4.5
 8.jan
       (la)
       - add support for elision in musicXML import

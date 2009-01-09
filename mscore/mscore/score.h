@@ -211,8 +211,8 @@ class Score : public QObject {
       bool _showFrames;
 
       EditTempo* editTempo;
-      Element* origDragObject;
       Element* _dragObject;
+      QPointF _startDragPosition;
 
       QList<Part*> _parts;
       QList<Staff*> _staves;
@@ -533,7 +533,7 @@ class Score : public QObject {
       void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
-      void read(QString name);
+      bool read(QString name);
 
       void setSpatium(double v);
 

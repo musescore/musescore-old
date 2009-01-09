@@ -51,6 +51,7 @@ TextBase::TextBase()
       _frameColor   = preferences.defaultColor;
       _frameRound   = 25;
       _circle       = false;
+      _layoutWidth  = -1;
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
@@ -72,8 +73,9 @@ TextBase::TextBase(const TextBase& t)
       _circle       = t._circle;
       frame         = t.frame;
       _bbox         = t._bbox;
+      _layoutWidth  = t._layoutWidth;
       _doc->documentLayout()->setPaintDevice(pdev);
-      layout(0);
+      layout(_layoutWidth);
       }
 
 //---------------------------------------------------------
@@ -200,13 +202,21 @@ bool TextBase::readProperties(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void TextBase::layout(ScoreLayout*)
+void TextBase::layout(double w)
       {
+      _layoutWidth = w;
       if (!_doc->isModified())
             return;
       _doc->documentLayout()->setPaintDevice(pdev);
-//      _doc->setTextWidth(-1.0);
-      _doc->setTextWidth(_doc->idealWidth());   // to make alignment work
+      if (w <= 0.0)
+            w = _doc->idealWidth();
+      else {
+            QTextOption to = _doc->defaultTextOption();
+            to.setUseDesignMetrics(true);
+            to.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+            _doc->setDefaultTextOption(to);
+            }
+      _doc->setTextWidth(w);   // to make alignment work
 
       if (_frameWidth > 0.0) {
             frame = QRectF();
@@ -255,7 +265,6 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
             }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
-
 
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
       _doc->documentLayout()->draw(&p, c);
@@ -431,7 +440,7 @@ void TextB::setSubtype(int val)
 //   setAbove
 //---------------------------------------------------------
 
-void TextB::setAbove(bool val)
+void TextB::setAbove(bool /*val*/)
       {
       // setYoff(val ? -2.0 : 7.0);
       }
@@ -609,7 +618,11 @@ bool TextB::isEmpty() const
 
 void TextB::layout(ScoreLayout* layout)
       {
-      textBase()->layout(layout);
+      if (parent() && parent()->type() == HBOX) {
+            textBase()->layout(parent()->width());
+            }
+      else
+            textBase()->layout(-1.0);
       setbbox(textBase()->bbox());
 
       if (parent() == 0)
@@ -849,7 +862,7 @@ bool TextB::startEdit(Viewer* view, const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool TextB::edit(Viewer* view, int grip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
             printf("TextB::edit\n");

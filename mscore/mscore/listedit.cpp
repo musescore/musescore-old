@@ -263,6 +263,19 @@ void PageListEditor::addSymbol(ElementItem* parent, BSymbol* bs)
       }
 
 //---------------------------------------------------------
+//   addMeasureBaseToList
+//---------------------------------------------------------
+
+static void addMeasureBaseToList(ElementItem* mi, MeasureBase* mb)
+      {
+      foreach(Element* e, *mb->el()) {
+            ElementItem* mmi = new ElementItem(mi, e);
+            if (e->type() == HBOX || e->type() == VBOX)
+                  addMeasureBaseToList(mmi, static_cast<MeasureBase*>(e));
+            }
+      }
+
+//---------------------------------------------------------
 //   updateList
 //---------------------------------------------------------
 
@@ -312,8 +325,7 @@ void PageListEditor::updateList(Score* s)
                   foreach (MeasureBase* mb, system->measures()) {
                         ElementItem* mi = new ElementItem(si, mb);
 
-                        foreach(Element* e, *mb->el())
-                              new ElementItem(mi, e);
+                        addMeasureBaseToList(mi, mb);
 
                         if (mb->type() != MEASURE)
                               continue;

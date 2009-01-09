@@ -45,15 +45,33 @@ void MuseScore::registerPlugin(const QString& pluginPath)
 
       QScriptEngine se(0);
       QScriptValue val  = se.evaluate(f.readAll(), pluginPath);
+      if (se.hasUncaughtException()) {
+            QScriptValue sv = se.uncaughtException();
+#if 0
+            printf("Load plugin <%s>: line %d: %s\n",
+               qPrintable(pluginPath),
+               se.uncaughtExceptionLineNumber(),
+               qPrintable(sv.toString())
+#endif
+            QMessageBox::critical(0, "MuseScore Error",
+               QString("Error loading plugin\n"
+                  "\"%1\" line %2:\n"
+                  "%3").arg(pluginPath)
+                     .arg(se.uncaughtExceptionLineNumber())
+                     .arg(sv.toString())
+               );
+            return;
+            }
+
       f.close();
       QScriptValue init = val.property("init");
       if (!init.isFunction()) {
-            printf("Load plugin: no init function found\n");
+            printf("Load plugin <%s>: no init function found\n", qPrintable(pluginPath));
             return;
             }
       QScriptValue run = val.property("run");
       if (!run.isFunction()) {
-            printf("Load plugin: no run function found\n");
+            printf("Load plugin <%s>: no run function found\n", qPrintable(pluginPath));
             return;
             }
       int pluginIdx = plugins.size();

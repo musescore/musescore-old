@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -4548,6 +4550,18 @@ before closing?</source>
     </message>
     <message>
         <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>show invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Frames</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5560,11 +5574,11 @@ before closing?</source>
         <source>Autocorrection</source>
         <translation>Автозамена</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation>Заменять 1/2 на ½</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>Заменять (C) на © в уведомлении об авторских правах</translation>
     </message>

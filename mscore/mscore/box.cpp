@@ -71,9 +71,10 @@ void Box::draw(QPainter& p) const
                   pen = QPen(QColor(Qt::blue));
             else
                   pen = QPen(QColor(Qt::gray));
-            pen.setWidthF(2.0 / p.matrix().m11());
+            double w = 2.0 / p.matrix().m11();
+            pen.setWidthF(w);
             p.setPen(pen);
-            p.drawRect(bbox());
+            p.drawRect(bbox().adjusted(w, w, -w, -w));
             }
       }
 
@@ -104,8 +105,14 @@ void Box::editDrag(int, const QPointF& d)
       {
       if (type() == VBOX)
             _boxHeight += d.y();
-      else
+      else {
             _boxWidth += d.x();
+            foreach(Element* e, _el) {
+                  if (e->type() == TEXT) {
+                        static_cast<Text*>(e)->setModified(true);  // force relayout
+                        }
+                  }
+            }
       score()->setLayoutAll(true);
       }
 
@@ -159,6 +166,7 @@ void Box::write(Xml& xml) const
             xml.tag("topMargin", _topMargin);
       if (_bottomMargin != 0.0)
             xml.tag("bottomMargin", _bottomMargin);
+      Element::writeProperties(xml);
       foreach (const Element* el, _el)
             el->write(xml);
       xml.etag();
@@ -240,7 +248,17 @@ void Box::read(QDomElement e)
                         add(image);
                         }
                   }
-            else
+            else if (tag == "HBox") {
+                  HBox* hb = new HBox(score());
+                  hb->read(e);
+                  add(hb);
+                  }
+            else if (tag == "VBox") {
+                  VBox* vb = new VBox(score());
+                  vb->read(e);
+                  add(vb);
+                  }
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -259,15 +277,6 @@ HBox::~HBox()
       }
 
 //---------------------------------------------------------
-//   collectElements
-//---------------------------------------------------------
-
-void HBox::collectElements(QList<const Element*>& el) const
-      {
-      MeasureBase::collectElements(el);
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -279,7 +288,8 @@ void HBox::layout(ScoreLayout* layout)
             double y = vb->topMargin() * DPMM;
             double w = boxWidth().point();
             double h = vb->height() - vb->topMargin() * DPMM - vb->bottomMargin() * DPMM;
-            setbbox(QRectF(x, y, w, h));
+            setPos(x, y);
+            setbbox(QRectF(0.0, 0.0, w, h));
             }
       else {
             setbbox(QRectF(0.0, 0.0, boxWidth().point(), system()->height()));
@@ -341,6 +351,26 @@ void HBox::propertyAction(const QString& cmd)
             score()->canvas()->startEdit(s);
             score()->setLayoutAll(true);
             }
+      }
+
+//---------------------------------------------------------
+//   isMovable
+//---------------------------------------------------------
+
+bool HBox::isMovable() const
+      {
+      return parent() && (parent()->type() == VBOX);
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+QRectF HBox::drag(const QPointF& pos)
+      {
+      QRectF r(abbox());
+      setUserOff(QPointF(pos.x() / _spatium, 0.0));
+      return abbox() | r;
       }
 
 //---------------------------------------------------------

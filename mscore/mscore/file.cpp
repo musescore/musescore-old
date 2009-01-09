@@ -948,7 +948,7 @@ bool Score::saveFile(QIODevice* f, bool autosave)
 
 //---------------------------------------------------------
 //   loadCompressedMsc
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
 bool Score::loadCompressedMsc(QString name)
@@ -964,7 +964,7 @@ bool Score::loadCompressedMsc(QString name)
       UnZip uz;
       UnZip::ErrorCode ec = uz.openArchive(name);
       if (ec != UnZip::Ok)
-            return true;
+            return false;
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
@@ -979,7 +979,7 @@ bool Score::loadCompressedMsc(QString name)
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", qPrintable(error));
-            return true;
+            return false;
             }
 
       // extract first rootfile
@@ -1027,7 +1027,7 @@ bool Score::loadCompressedMsc(QString name)
 
       if (rootfile.isEmpty()) {
             printf("can't find rootfile in: %s\n", qPrintable(name));
-            return true;
+            return false;
             }
 
       QBuffer dbuf;
@@ -1041,7 +1041,7 @@ bool Score::loadCompressedMsc(QString name)
             ln.setNum(line);
             QString error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", qPrintable(error));
-            return true;
+            return false;
             }
       dbuf.close();
       docName = info.completeBaseName();
@@ -1050,7 +1050,7 @@ bool Score::loadCompressedMsc(QString name)
 
 //---------------------------------------------------------
 //   loadMsc
-//    return true if file not found or error loading
+//    return false if file not found or error loading
 //---------------------------------------------------------
 
 bool Score::loadMsc(QString name)
@@ -1064,7 +1064,7 @@ bool Score::loadMsc(QString name)
             }
       QFile f(name);
       if (!f.open(QIODevice::ReadOnly))
-            return true;
+            return false;
 
       QDomDocument doc;
       int line, column;
@@ -1077,7 +1077,7 @@ bool Score::loadMsc(QString name)
                f.fileName().toLatin1().data(), line, column, err.toLatin1().data());
 
             QMessageBox::critical(mscore, tr("MuseScore: Read File"), s);
-            return true;
+            return false;
             }
       f.close();
       docName = f.fileName();
@@ -1086,6 +1086,7 @@ bool Score::loadMsc(QString name)
 
 //---------------------------------------------------------
 //   read
+//    return false on error
 //---------------------------------------------------------
 
 bool Score::read(QDomElement e)
@@ -1245,7 +1246,7 @@ bool Score::read(QDomElement e)
 
       searchSelectedElements();
       _fileDivision = division;
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------

@@ -56,6 +56,7 @@ class TextBase {
       QColor _frameColor;
       int _frameRound;
       bool _circle;
+      double _layoutWidth;
 
       QRectF frame;
       QRectF _bbox;
@@ -82,7 +83,7 @@ class TextBase {
       QFont defaultFont() const             { return _doc->defaultFont(); }
       void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
       void clear()                          { _doc->clear();              }
-      void layout(ScoreLayout*);
+      void layout(double w);
       QRectF bbox() const                   { return _bbox; }
       void draw(QPainter&, QTextCursor*) const;
       void setText(const QString&, Align);
@@ -90,6 +91,7 @@ class TextBase {
       QString getHtml() const;
       void setHtml(const QString& s);
       bool isEmpty() const                  { return _doc->isEmpty(); }
+      void setModified(bool v)              { _doc->setModified(v);   }
       };
 
 //---------------------------------------------------------
@@ -197,6 +199,7 @@ class Text : public TextB {
       ~Text();
       virtual Text* clone() const           { return new Text(*this); }
       virtual TextBase* textBase() const    { return _tb; }
+      void setModified(bool v)              { _tb->setModified(v); }
       };
 
 //---------------------------------------------------------

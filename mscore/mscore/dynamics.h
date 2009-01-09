@@ -56,7 +56,6 @@ class Dynamic : public Text {
 
       virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& pos);
-      virtual void endDrag();
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

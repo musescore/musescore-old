@@ -153,12 +153,14 @@ QFont fontId2font(int fontId)
       int size = lrint(20.0 * DPI / PPI);
       if (fontId == 0) {
             _font = QFont("MScore");
+            _font.setStyleStrategy(QFont::NoFontMerging);
             }
       else if (fontId == 1) {
             _font = QFont("MScore1");
             }
       else if (fontId == 2) {
             _font = QFont("Times New Roman");
+            _font.setStyleStrategy(QFont::NoFontMerging);
             size = lrint(8 * DPI / PPI);
             }
       else {

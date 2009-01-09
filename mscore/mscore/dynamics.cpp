@@ -110,33 +110,6 @@ QRectF Dynamic::drag(const QPointF& pos)
       }
 
 //---------------------------------------------------------
-//   endDrag
-//    bind to nearest tick position
-//---------------------------------------------------------
-
-void Dynamic::endDrag()
-      {
-#if 0       // TODO
-      int ntick;
-      int stfi = staffIdx();
-      MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stfi, 0, 0, 0);
-      if (mb && mb->type() == MEASURE) {
-            Measure* measure = (Measure*)mb;
-            QPointF op = canvasPos();
-            setTick(ntick);
-            setTrack(stfi * VOICES);
-            if (measure != parent()) {
-                  ((Measure*)parent())->remove(this);
-                  measure->add(this);
-                  }
-            setUserOff((op - layoutPos()) / _spatium);
-            }
-      else
-            printf("Dynamic::endDrag(): measure not found\n");
-#endif
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 

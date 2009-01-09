@@ -100,9 +100,24 @@ def to_bp (expr num) =
 	decimal (num * bp_per_pixel)
 enddef;
 
-
-% breapth, width, depth, height
+% set_char_box() conventions:
+%
+% * breapth: Ignored (as far as I know).  Should be set to 0.
+%
+% * width: Should cover the horizontal range of the custos that is to
+%   be printed in the staff.  If the custos has an appendage that is
+%   supposed to reach beyond the right end of the staff, the width
+%   should be set such that the appendage is outside of the char box.
+%
+% * depth: Should match the bottom edge of the custos.  Affects
+%   vertical collision handling.
+%
+% * height: Should match the top edge of the custos.  Affects vertical
+%   collision handling.
+%
+%  breapth, width, depth, height
 %     breapth	x-depth
+
 def set_char_box (expr b_sharp, w_sharp, d_sharp, h_sharp) =
 	save scharbp, scharht, scharwd, schardp;
 

@@ -86,13 +86,13 @@ class HBox : public Box {
       virtual QString userName() const { return QWidget::tr("Horizontal Frame"); }
 
       virtual void layout(ScoreLayout*);
-      virtual void collectElements(QList<const Element*>& el) const;
-
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+      virtual bool isMovable() const;
+      virtual QRectF drag(const QPointF& s);
       };
 
 //---------------------------------------------------------

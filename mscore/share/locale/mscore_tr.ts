@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -4543,6 +4545,18 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>show invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Frames</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5311,11 +5325,11 @@ kaydetmek ister misiniz?</translation>
         <source>Autocorrection</source>
         <translation>Otomatik Düzeltme</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation>1/2 ... yi ½ ... ile değiştir</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>Telif hakkı metninde (C) ... yi © ... ile değiştir</translation>
     </message>
