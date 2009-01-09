@@ -178,16 +178,6 @@ void Box::write(Xml& xml) const
 
 void Box::read(QDomElement e)
       {
-      score()->curTick = tick();
-
-      int curTickPos = 0;
-      int ct = e.attribute("tick", "-1").toInt();
-      if (ct >= 0) {
-            curTickPos = ct;
-            setTick(curTickPos);
-            }
-      score()->curTick = tick();
-
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -213,13 +203,11 @@ void Box::read(QDomElement e)
                   _bottomMargin = val.toDouble();
             else if (tag == "Text") {
                   Text* t = new Text(score());
-                  t->setTick(curTickPos);
                   t->read(e);
                   add(t);
                   }
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(score());
-                  s->setTick(curTickPos);
                   s->read(e);
                   add(s);
                   }

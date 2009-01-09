@@ -378,11 +378,12 @@ QList<Prop> Element::properties(Xml& xml) const
             }
       if (!_userOff.isNull())
             pl.append(Prop("offset", _userOff));
-      if (track() != xml.curTrack) {
+      if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
-            if (track() == -1)
+/*            if (track() == -1)
                   t = -1;
             else
+                  */
                   t = track() + xml.trackDiff;
             pl.append(Prop("track", t));
             }
