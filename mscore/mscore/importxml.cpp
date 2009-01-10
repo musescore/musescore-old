@@ -504,6 +504,8 @@ void MusicXml::scorePartwise(QDomElement ee)
                   stavesSpan += il->at(pg->start + j)->nstaves();
             // and add bracket
             il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
+                  if(pg->barlineSpan)
+                	  il->at(pg->start)->staff(0)->setBarLineSpan(pg->span);
             }
       }
 
@@ -519,7 +521,7 @@ void MusicXml::scorePartwise(QDomElement ee)
  to generate the brackets.
  */
 
-static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p, QString s)
+static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p, QString s, bool barlineSpan)
       {
 //      printf("partGroupStart number=%d part=%d symbol=%s\n", n, p, s.toLatin1().data());
       if (n < 0 || n >= MAX_PART_GROUPS) {
@@ -547,6 +549,7 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
       MusicXmlPartGroup* pg = new MusicXmlPartGroup;
       pg->span = 0;
       pg->start = p;
+      pg->barlineSpan = barlineSpan,
       pg->type = bracketType;
       pgs[n] = pg;
       }
@@ -594,6 +597,7 @@ static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int
 void MusicXml::xmlPartList(QDomElement e)
       {
       int scoreParts = 0;
+      bool barlineSpan = false;
       MusicXmlPartGroup* partGroups[MAX_PART_GROUPS];
       for (int i = 0; i < MAX_PART_GROUPS; ++i)
             partGroups[i] = 0;
@@ -610,11 +614,14 @@ void MusicXml::xmlPartList(QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "group-symbol")
                               symbol = ee.text();
-                        else
+                        else if(ee.tagName() == "group-barline"){
+							   if(ee.text() == "yes")
+								   barlineSpan = true;
+                        }else
                               domError(ee);
                         }
                   if (type == "start")
-                        partGroupStart(partGroups, number, scoreParts, symbol);
+                        partGroupStart(partGroups, number, scoreParts, symbol, barlineSpan);
                   else if (type == "stop")
                         partGroupStop(partGroups, number, scoreParts, partGroupList);
                   else
@@ -656,8 +663,9 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
                   part->setLongName(e.text());
                   // part->setTrackName(e.text());
                   }
-            else if (e.tagName() == "part-abbreviation")
-                  ;
+            else if (e.tagName() == "part-abbreviation") {
+            	  part->setShortName(e.text());
+                  }
             else if (e.tagName() == "score-instrument") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "instrument-name") {
@@ -1660,6 +1668,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   if (st && staves == 2) {
                         st->setBracket(0, BRACKET_AKKOLADE);
                         st->setBracketSpan(0, 2);
+                        st->setBarLineSpan(2); //seems to be default in musicXML
                         }
                   // set key signature
                   int key = score->staff(staff)->keymap()->key(tick);
