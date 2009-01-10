@@ -1,5 +1,8 @@
 10.jan
+      (ws)
       - changed order of voice numbers in voice selector
+      (la)
+      - add support for part-abbreviation and barline span in musicXML import
 9.jan
       - when moving rests raster vertical position with _spatium;
         whole rests and half rests outside the staff are drawn with
