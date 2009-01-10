@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
   <Mag>1.31233</Mag>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <xoff>-536.872</xoff>
+  <yoff>5.64067</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -14,7 +14,7 @@
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>4</systemFrameDistance>
-    <frameSystemDistance>7</frameSystemDistance>
+    <frameSystemDistance>0</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -28,6 +28,7 @@
     <timesigLeftMargin>0.5</timesigLeftMargin>
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.4</minNoteDistance>
     <measureSpacing>1.5</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
@@ -68,6 +69,8 @@
     <smallClefMag>0.8</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <minEmptyMeasures>2</minEmptyMeasures>
+    <minMMRestWidth>4</minMMRestWidth>
     <gateTime>70</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>40</staccatoGateTime>
@@ -92,6 +95,7 @@
     <frameColor r="0" g="0" b="0"/>
     </TextStyle>
   <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
@@ -1283,6 +1287,7 @@ p, li { white-space: pre-wrap; }
     <up>2</up>
     </Slur>
   <Slur id="122">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.284129" y="-4.54607"/>
       <o2 x="-0.18942" y="-1.04181"/>
@@ -1292,6 +1297,7 @@ p, li { white-space: pre-wrap; }
     <up>1</up>
     </Slur>
   <Slur id="123">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.473549" y="-0.852388"/>
       <o4 x="1.32594" y="3.59897"/>
@@ -1301,6 +1307,7 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     </Slur>
   <Slur id="124">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="3.69368" y="2.46245"/>
       <o3 x="-2.36774" y="-6.25084"/>
@@ -1308,10 +1315,13 @@ p, li { white-space: pre-wrap; }
       </SlurSegment>
     </Slur>
   <Slur id="125">
+    <track>0</track>
     </Slur>
   <Slur id="126">
+    <track>0</track>
     </Slur>
   <Slur id="127">
+    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.0947098" y="1.32594"/>
       <o2 x="-5.87201" y="-0.473549"/>
@@ -1320,10 +1330,13 @@ p, li { white-space: pre-wrap; }
     <up>2</up>
     </Slur>
   <Slur id="128">
+    <track>0</track>
     </Slur>
   <Slur id="129">
+    <track>0</track>
     </Slur>
   <Slur id="130">
+    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.568259" y="2.46245"/>
       <o3 x="2.08361" y="1.51536"/>
@@ -1340,12 +1353,12 @@ p, li { white-space: pre-wrap; }
     <tick>83040</tick>
     <tick2>83760</tick2>
     <Segment>
-      <off1 x="0" y="-0.757678"/>
-      <off2 x="0" y="0"/>
-      </Segment>
-    <Segment>
       <off1 x="11.1758" y="-1.23123"/>
       <off2 x="-11.081" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="0" y="-1.23123"/>
+      <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -1369,6 +1382,7 @@ p, li { white-space: pre-wrap; }
       </Segment>
     </HairPin>
   <Slur id="131">
+    <track>0</track>
     <tick>0</tick>
     </Slur>
   <HairPin>
@@ -1406,20 +1420,23 @@ p, li { white-space: pre-wrap; }
     <tick>91200</tick>
     <tick2>92400</tick2>
     <Segment>
-      <off1 x="0.757678" y="1.8942"/>
-      <off2 x="-1.79949" y="0"/>
-      </Segment>
-    <Segment>
       <off1 x="7.29265" y="0"/>
       <off2 x="-7.29265" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
   <Staff id="1">
     <VBox>
-      <height>1.35925</height>
+      <height>10.5461</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -1429,7 +1446,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -1439,7 +1455,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -1450,6 +1465,10 @@ p, li { white-space: pre-wrap; }
       </VBox>
     <HBox>
       <width>5</width>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
       </HBox>
     <Measure number="1">
       <Tempo>
@@ -1496,7 +1515,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-1.02516" y="-0.341719"/>
-            <track>-1</track>
             <tick>0</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1559,7 +1577,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-1.36688" y="-0.820127"/>
-            <track>-1</track>
             <tick>960</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1636,7 +1653,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1705,7 +1721,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="5">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Rest>
         <ticklen>0</ticklen>
@@ -1910,7 +1925,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="10">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <StaffText>
         <subtype>Staff</subtype>
@@ -1947,7 +1961,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.341719" y="-3.00713"/>
-            <track>-1</track>
             <tick>8640</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1984,7 +1997,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.683439" y="-1.70861"/>
-            <track>-1</track>
             <tick>9120</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2005,7 +2017,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Rest>
-        <offset x="0.24" y="6.12"/>
+        <offset x="0.24" y="6"/>
         <track>1</track>
         <tick>8640</tick>
         <ticklen>240</ticklen>
@@ -2028,7 +2040,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.12" y="6.48"/>
+        <offset x="0.12" y="6"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -2067,7 +2079,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0" y="-3.41719"/>
-            <track>-1</track>
             <tick>9600</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2088,7 +2099,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.341719" y="-1.23019"/>
-            <track>-1</track>
             <tick>9720</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2125,7 +2135,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="-0.12" y="6.48"/>
+        <offset x="-0.12" y="6"/>
         <track>1</track>
         <tick>9600</tick>
         <ticklen>240</ticklen>
@@ -2142,7 +2152,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.36" y="7.68"/>
+        <offset x="0.36" y="8"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -2288,7 +2298,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="15">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
+        <offset x="0.473549" y="-2.17832"/>
+        <selected>1</selected>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2359,7 +2370,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0" y="-1.7086"/>
-            <track>-1</track>
             <tick>14400</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2380,7 +2390,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.820127" y="-2.187"/>
-            <track>-1</track>
             <tick>14520</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2444,7 +2453,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.478407" y="-3.62223"/>
-            <track>-1</track>
             <tick>15360</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2483,7 +2491,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.2527" y="-4.97643"/>
-            <track>-1</track>
             <tick>15840</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -2564,7 +2571,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Rest>
-        <offset x="0.24" y="6.12"/>
+        <offset x="0.24" y="6"/>
         <track>1</track>
         <tick>16320</tick>
         <ticklen>240</ticklen>
@@ -2587,7 +2594,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.12" y="6.48"/>
+        <offset x="0.12" y="6"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -2655,7 +2662,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="0.24" y="6.48"/>
+        <offset x="0.24" y="6"/>
         <track>1</track>
         <tick>17280</tick>
         <ticklen>240</ticklen>
@@ -2672,7 +2679,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.386493" y="8.03646"/>
+        <offset x="0.386493" y="8"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -2692,7 +2699,6 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2975,7 +2981,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="26">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3200,7 +3205,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="31">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>960</ticklen>
@@ -3355,7 +3359,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Rest>
-        <offset x="0.177411" y="-0.709644"/>
+        <offset x="0.177411" y="-1"/>
         <track>1</track>
         <tick>32640</tick>
         <ticklen>480</ticklen>
@@ -3384,7 +3388,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="36">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3604,7 +3607,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="0.302089" y="2.61811"/>
+        <offset x="0.302089" y="3"/>
         <ticklen>480</ticklen>
         </Rest>
       <Beam id="49">
@@ -3740,7 +3743,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="41">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3876,7 +3878,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="46">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <Rest>
         <ticklen>0</ticklen>
@@ -3886,7 +3887,6 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -4140,7 +4140,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="52">
       <stretch>0.8</stretch>
       <LayoutBreak>
-        <track>-1</track>
         </LayoutBreak>
       <Rest>
         <ticklen>480</ticklen>
@@ -4170,7 +4169,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="53">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Rest>
         <ticklen>0</ticklen>
@@ -4362,7 +4360,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="58">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Rest>
         <ticklen>240</ticklen>
@@ -4509,7 +4506,6 @@ p, li { white-space: pre-wrap; }
       <stretch>0.7</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -4542,7 +4538,7 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </Tempo>
       <Rest>
-        <offset x="0.0832482" y="-0.998978"/>
+        <offset x="0.0832482" y="-1"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -4632,7 +4628,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.42065" y="3.12542"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -4650,7 +4645,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.42065" y="2.65187"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -4942,7 +4936,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="68">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Rest>
         <ticklen>240</ticklen>
@@ -5256,7 +5249,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5287,7 +5279,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Rest>
-        <offset x="0.302089" y="3.92716"/>
+        <offset x="0.302089" y="4"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -5402,7 +5394,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="-2.41671"/>
+        <offset x="0" y="-2"/>
         <track>2</track>
         <tick>71040</tick>
         <ticklen>240</ticklen>
@@ -5570,7 +5562,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="77">
       <LayoutBreak>
-        <track>-1</track>
         </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
@@ -5604,7 +5595,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="78">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5960,7 +5950,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="83">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>960</ticklen>
@@ -6039,7 +6028,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="2.01393"/>
+        <offset x="0" y="2"/>
         <track>1</track>
         <tick>80640</tick>
         <ticklen>360</ticklen>
@@ -6107,7 +6096,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="0" y="2.01393"/>
+        <offset x="0" y="2"/>
         <track>1</track>
         <tick>81600</tick>
         <ticklen>360</ticklen>
@@ -6169,7 +6158,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="87">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
@@ -6216,7 +6204,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="88">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -6251,7 +6238,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="-1.00696"/>
+        <offset x="0" y="-1"/>
         <track>2</track>
         <tick>83520</tick>
         <ticklen>360</ticklen>
@@ -6344,7 +6331,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.201393" y="-1.00696"/>
+        <offset x="0.201393" y="-1"/>
         <track>2</track>
         <tick>84480</tick>
         <ticklen>360</ticklen>
@@ -6501,7 +6488,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="92">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="74">
         </Beam>
@@ -6693,7 +6679,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="97">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="82">
         </Beam>
@@ -6780,7 +6765,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Rest>
-        <offset x="0.201393" y="6.14248"/>
+        <offset x="0.201393" y="6"/>
         <track>1</track>
         <tick>93120</tick>
         <ticklen>240</ticklen>
@@ -6803,7 +6788,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.402786" y="6.54527"/>
+        <offset x="0.402786" y="7"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -6862,7 +6847,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="0.402786" y="6.54527"/>
+        <offset x="0.402786" y="7"/>
         <track>1</track>
         <tick>94080</tick>
         <ticklen>240</ticklen>
@@ -6879,7 +6864,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.302089" y="7.75362"/>
+        <offset x="0.302089" y="8"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -6939,7 +6924,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="101">
       <LayoutBreak>
-        <track>-1</track>
         </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
@@ -6950,7 +6934,6 @@ p, li { white-space: pre-wrap; }
       <stretch>0.8</stretch>
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="89">
         </Beam>
@@ -7234,7 +7217,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="108">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -7427,7 +7409,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="113">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>960</ticklen>
@@ -7451,7 +7432,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.604179" y="3.12159"/>
+        <offset x="0.604179" y="3"/>
         <track>2</track>
         <tick>107520</tick>
         <ticklen>240</ticklen>
@@ -7638,7 +7619,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="118">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -7747,7 +7727,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.302089" y="5.84039"/>
+        <offset x="0.302089" y="6"/>
         <track>1</track>
         <ticklen>480</ticklen>
         </Rest>
@@ -7901,7 +7881,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="124">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Rest>
         <ticklen>0</ticklen>
@@ -8072,7 +8051,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.43522" y="-5.05745"/>
-            <track>-1</track>
             <tick>0</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -8135,7 +8113,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.136688" y="-3.96395"/>
-            <track>-1</track>
             <tick>960</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -8432,7 +8409,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-2.73024" y="-1.40933"/>
+        <offset x="0.0163432" y="-24.1397"/>
         </Dynamic>
       <Beam id="125">
         </Beam>
@@ -8698,7 +8675,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.273376" y="1.84528"/>
-            <track>-1</track>
             <tick>14400</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -8745,7 +8721,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.683439" y="2.11866"/>
-            <track>-1</track>
             <tick>15120</tick>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -9084,7 +9059,6 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="0.12" y="0"/>
-            <track>-1</track>
             <tick>22320</tick>
             </Accidental>
           </Note>
@@ -9819,7 +9793,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="63" tpc="11"/>
         </Chord>
       <Rest>
-        <offset x="0.402785" y="5.94109"/>
+        <offset x="0.402785" y="6"/>
         <ticklen>480</ticklen>
         </Rest>
       <Beam id="179">
@@ -10116,7 +10090,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-0.692136" y="1.10742"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10127,7 +10100,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="2.01746"/>
+        <offset x="0" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10140,7 +10113,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.252182" y="2.01746"/>
+        <offset x="0.252182" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10156,7 +10129,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.276854" y="-3.32225"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10183,7 +10155,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.0840608" y="1.9334"/>
+        <offset x="0.0840608" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10196,7 +10168,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.0216075" y="2.01272"/>
+        <offset x="0.0216075" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10223,7 +10195,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.168122" y="2.10152"/>
+        <offset x="0.168122" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10236,7 +10208,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.504365" y="1.9334"/>
+        <offset x="0.504365" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10254,7 +10226,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-0.276854" y="1.45349"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10294,7 +10265,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.0840608" y="2.18558"/>
+        <offset x="0.0840608" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10307,7 +10278,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.504365" y="2.18558"/>
+        <offset x="0.504365" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10325,7 +10296,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="51">
       <Rest>
-        <offset x="0.420304" y="2.10152"/>
+        <offset x="0.420304" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="185">
@@ -10344,7 +10315,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-0.899777" y="1.10742"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10403,7 +10373,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="37" tpc="9"/>
         </Chord>
       <Rest>
-        <offset x="0.100696" y="3.82646"/>
+        <offset x="0.100696" y="4"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -10434,7 +10404,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.624014" y="2.18405"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10458,7 +10427,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.624014" y="2.34005"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10500,7 +10468,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.676015" y="2.13205"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10523,7 +10490,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.780018" y="2.18405"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10545,7 +10511,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.676015" y="2.08005"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10570,7 +10535,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.40403" y="3.01607"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10581,7 +10545,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.155291" y="1.97996"/>
+        <offset x="0.155291" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10590,7 +10554,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0" y="2.05761"/>
+        <offset x="0" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10606,7 +10570,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.364008" y="-2.91207"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10629,7 +10592,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0.0388228" y="2.01879"/>
+        <offset x="0.0388228" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10638,7 +10601,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0" y="2.05761"/>
+        <offset x="0" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10661,7 +10624,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="0" y="2.05761"/>
+        <offset x="0" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10670,7 +10633,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="-0.27176" y="1.97996"/>
+        <offset x="-0.27176" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10717,7 +10680,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="-0.0388228" y="2.13526"/>
+        <offset x="-0.0388228" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10730,7 +10693,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="42" tpc="8"/>
         </Chord>
       <Rest>
-        <offset x="-0.0388228" y="2.09643"/>
+        <offset x="-0.0388228" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Chord>
@@ -10748,7 +10711,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="59">
       <Rest>
-        <offset x="0.465874" y="2.13526"/>
+        <offset x="0.465874" y="2"/>
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="188">
@@ -10766,7 +10729,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.330592" y="5.17919"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10807,7 +10769,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.41601" y="-3.12007"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10838,11 +10799,11 @@ p, li { white-space: pre-wrap; }
         <Note pitch="37" tpc="9"/>
         </Chord>
       <Rest>
-        <offset x="0.402786" y="3.52437"/>
+        <offset x="0.402786" y="4"/>
         <ticklen>240</ticklen>
         </Rest>
       <Rest>
-        <offset x="0.906268" y="3.22229"/>
+        <offset x="0.906268" y="3"/>
         <ticklen>480</ticklen>
         </Rest>
       <Chord>
@@ -10869,7 +10830,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="61">
       <Rest>
-        <offset x="0.302089" y="3.22229"/>
+        <offset x="0.302089" y="3"/>
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="189">
@@ -10885,7 +10846,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.378839" y="4.8302"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10906,7 +10866,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.284129" y="5.01962"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10925,7 +10884,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.284129" y="5.01962"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10948,12 +10906,12 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0" y="2.01393"/>
+        <offset x="0" y="2"/>
         <track>5</track>
         <ticklen>240</ticklen>
         </Rest>
       <Rest>
-        <offset x="0.201393" y="0.671354"/>
+        <offset x="0.201393" y="1"/>
         <track>5</track>
         <ticklen>480</ticklen>
         </Rest>
@@ -10971,7 +10929,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.284129" y="5.30375"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -11001,7 +10958,6 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.18942" y="5.11433"/>
-            <track>-1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -11014,7 +10970,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="63">
       <Rest>
-        <offset x="0" y="-3.42368"/>
+        <offset x="0" y="-3"/>
         <ticklen>240</ticklen>
         <Slur type="stop" number="120"/>
         </Rest>
@@ -11299,7 +11255,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="71">
       <Rest>
-        <offset x="0.201393" y="-3.22229"/>
+        <offset x="0.201393" y="-3"/>
         <ticklen>240</ticklen>
         </Rest>
       <Beam id="195">
@@ -11359,7 +11315,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="59" tpc="7"/>
         </Chord>
       <Rest>
-        <offset x="0.100696" y="-3.22229"/>
+        <offset x="0.100696" y="-3"/>
         <ticklen>480</ticklen>
         <Slur type="stop" number="121"/>
         </Rest>
@@ -11487,7 +11443,7 @@ p, li { white-space: pre-wrap; }
         <tick>71280</tick>
         </Dynamic>
       <Rest>
-        <offset x="-0.100696" y="-4.02786"/>
+        <offset x="-0.100696" y="-4"/>
         <tick>71040</tick>
         <ticklen>240</ticklen>
         </Rest>
@@ -11628,7 +11584,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.100696" y="-3.72577"/>
+        <offset x="0.100696" y="-4"/>
         <track>6</track>
         <tick>73920</tick>
         <ticklen>240</ticklen>
@@ -11825,7 +11781,6 @@ p, li { white-space: pre-wrap; }
         <actualNotes>3</actualNotes>
         <Number>
           <subtype>Tuplet</subtype>
-          <track>-1</track>
           <tick>77760</tick>
           <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -13211,7 +13166,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.302089" y="8.65989"/>
+        <offset x="0.302089" y="9"/>
         <track>5</track>
         <ticklen>480</ticklen>
         </Rest>
@@ -13463,5 +13418,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>4</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
