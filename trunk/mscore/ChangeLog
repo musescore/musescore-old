@@ -1,3 +1,5 @@
+10.jan
+      - changed order of voice numbers in voice selector
 9.jan
       - when moving rests raster vertical position with _spatium;
         whole rests and half rests outside the staff are drawn with

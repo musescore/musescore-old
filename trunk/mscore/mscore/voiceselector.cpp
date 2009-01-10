@@ -81,7 +81,8 @@ VoiceSelector::VoiceSelector(QWidget* parent)
       vwl->setContentsMargins(0, 0, 0, 0);
 
       QStringList sl2;
-      sl2 << "voice-1" << "voice-2" << "voice-3" << "voice-4";
+      sl2 << "voice-1" << "voice-3" << "voice-2" << "voice-4";
+      int v[4] = { 0, 2, 1, 3 };
       QActionGroup* vag = new QActionGroup(this);
       vag->setExclusive(true);
       int i = 0;
@@ -89,7 +90,7 @@ VoiceSelector::VoiceSelector(QWidget* parent)
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             vag->addAction(a);
-            VoiceButton* tb = new VoiceButton(i);
+            VoiceButton* tb = new VoiceButton(v[i]);
             tb->setDefaultAction(a);
             vwl->addWidget(tb, i/2, i%2, 1, 1);
             ++i;
