@@ -1,3 +1,8 @@
+12.jan
+      (la)
+      - add support for transpose element in musicXML import 
+        (measure attribute diatonic and chromatic in musicXML / 
+        part attr in musescore but only chromatic)
 10.jan
       (ws)
       - changed order of voice numbers in voice selector
