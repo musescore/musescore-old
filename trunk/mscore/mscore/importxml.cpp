@@ -1683,7 +1683,19 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
             else if (e.tagName() == "transpose")
-                  domNotImplemented(e);
+                  //domNotImplemented(e);
+            	for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+            		if (ee.tagName() == "diatonic"){
+            		      // Not used in mscore ?
+						  }
+            		else if (ee.tagName() == "chromatic") {
+            			  int tr = ee.text().toInt();
+            			  Part* part = score->part(staff);
+            			  part->setPitchOffset(tr);
+						  }
+            		else
+            			  domError(ee);
+					}
             else
                   domError(e);
             }
