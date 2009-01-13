@@ -18,8 +18,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions -fno-rtti -fvisibility=hidden")
-# set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+# set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-rtti -fvisibility=hidden")
+# set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
 set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
@@ -36,7 +36,7 @@ add_custom_command(
 add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
    COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -fno-exceptions -Wall
+     -g -Wextra -Wall
      -I${QT_INCLUDE_DIR}
      -o all.h.pch all.h
    DEPENDS ${PROJECT_BINARY_DIR}/all.h
@@ -145,7 +145,7 @@ add_executable ( mscore
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
-      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp
+      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       ${AUDIO}
       )
 

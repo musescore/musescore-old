@@ -99,7 +99,6 @@ class ScoreLayout : public Element {
 
       void setInstrumentNames();
       void connectTies();
-      void searchHiddenNotes();
 
       virtual void add(Element*);
       virtual void remove(Element*);

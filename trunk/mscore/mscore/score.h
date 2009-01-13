@@ -551,6 +551,7 @@ class Score : public QObject {
       bool importMuseData(const QString& name);
       bool importLilypond(const QString& name);
       bool importBB(const QString& name);
+      bool importCapella(const QString& name);
       bool saveFile(QFileInfo& info, bool autosave);
       bool saveFile(QIODevice* f, bool autosave);
       bool saveCompressedFile(QFileInfo&, bool autosave);

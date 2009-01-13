@@ -43,8 +43,6 @@
 #include "part.h"
 #include "utils.h"
 
-// #define PROFILE_LAYOUT
-
 //---------------------------------------------------------
 //   rebuildBspTree
 //---------------------------------------------------------
@@ -171,21 +169,15 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 void ScoreLayout::doLayout()
       {
-#ifdef PROFILE_LAYOUT
-      unsigned long long ta = cycles();
-#endif
-
       ::_spatium  = _spatium;        // needed for preview
       _spatiumMag = _spatium / (DPI * SPATIUM20);
       _needLayout = false;
 
       if (startLayout) {
             startLayout->setDirty();
-            if (doReLayout()) {
-                  startLayout = 0;
-                  return;
-                  }
             startLayout = 0;
+            if (doReLayout())
+                  return;
             }
 
       if (first() == 0) {
@@ -199,26 +191,29 @@ void ScoreLayout::doLayout()
             page->setNo(0);
             page->setPos(0.0, 0.0);
 
-            //---------------------------------------------------
-            //    clear bspTree
-            //---------------------------------------------------
-
             QRectF r = page->abbox();
-            bspTree.initialize(r, 0);
+            bspTree.initialize(r, 0);     // clear bspTree
             return;
             }
+
+      //-----------------------------------------------------------------------
+      //    pass 0:  layout chords
+      //             set line & accidental & mirror for notes depending
+      //             on context
+      //-----------------------------------------------------------------------
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                   mb->setDirty();
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = static_cast<Measure*>(mb);
-                  m->layout0(staffIdx);
+                  if (mb->type() == MEASURE) {
+                        Measure* m = static_cast<Measure*>(mb);
+                        m->layout0(staffIdx);
+                        }
                   }
             }
+
       //-----------------------------------------
-      //    pass I:  process pages
+      //    pass 1:  process pages
       //-----------------------------------------
 
       curMeasure  = first();
@@ -236,14 +231,12 @@ void ScoreLayout::doLayout()
             }
 
       //---------------------------------------------------
-      //   pass II:  place ties & slurs & hairpins & beams
+      //   pass 2:  place ties & slurs & hairpins & beams
       //---------------------------------------------------
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
-            m->layout2(this);
+            if (mb->type() == MEASURE)
+                  static_cast<Measure*>(mb)->layout2(this);
             }
 
       foreach(Element* el, *score()->gel())
@@ -258,37 +251,13 @@ void ScoreLayout::doLayout()
             Page* page = _pages.takeLast();
             delete page;
             }
-
       n = _systems.size() - curSystem;
       for (int i = 0; i < n; ++i) {
             System* system = _systems.takeLast();
             delete system;
             }
-#ifdef PROFILE_LAYOUT
-      unsigned long long td = cycles();
-#endif
-      searchHiddenNotes();
-
-      //---------------------------------------------------
-      //    rebuild bspTree
-      //---------------------------------------------------
-
-#ifdef PROFILE_LAYOUT
-      unsigned long long tb = cycles();
-#endif
 
       rebuildBspTree();
-
-#ifdef PROFILE_LAYOUT
-      unsigned long long tc = cycles();
-      long totalTime = (tc -ta)/10000LL;
-      long layoutTime = (tb - ta) / 10000LL;
-      long bspTime    = (tc - tb) / 10000LL;
-      long searchTime = (tb -td) /  10000LL;
-
-      printf("doLayout %ld  layout: %ld  bsp: %ld  %ld%%  search %ld\n",
-         totalTime, layoutTime, bspTime, bspTime * 100 / layoutTime, searchTime);
-#endif
       }
 
 //---------------------------------------------------------
@@ -604,7 +573,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       int nstaves = _score->nstaves();
       bool isFirstMeasure = true;
-      MeasureBase* firstMeasure = curMeasure;
+//      MeasureBase* firstMeasure = curMeasure;
 
       for (; curMeasure;) {
             if (curMeasure->type() == MEASURE) {
@@ -696,10 +665,10 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       int staves = system->staves()->size();
       int staffIdx = 0;
       foreach (Part* p, *score()->parts()) {
-            int nstaves = p->nstaves();
+            int nstaves   = p->nstaves();
             bool hidePart = false;
 
-            if (score()->style()->hideEmptyStaves) {
+            if (score()->style()->hideEmptyStaves && (staves > 1)) {
                   hidePart = true;
                   for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
                         foreach(MeasureBase* m, system->measures()) {
@@ -714,26 +683,25 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
 
             for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
-                  SysStaff* s = system->staff(i);
+                  SysStaff* s  = system->staff(i);
                   Staff* staff = score()->staff(i);
                   bool oldShow = s->show();
-                  if (hidePart && staves > 1)
-                        s->setShow(false);
-                  else
-                        s->setShow(staff->show());
-                  if (oldShow != s->show())
+                  s->setShow(hidePart ? false : staff->show());
+                  if (oldShow != s->show()) {
                         showChanged = true;
+                        }
                   }
             staffIdx += nstaves;
             }
-
+#if 0 // DEBUG: endless recursion can happen if number of measures change
       // relayout if stave's show status has changed
       if (showChanged) {
             minWidth = 0;
             curMeasure = firstMeasure;
-            return layoutSystem1(minWidth, w, isFirstSystem);
+            bool val = layoutSystem1(minWidth, w, isFirstSystem);
+            return val;
             }
-
+#endif
       return continueFlag && curMeasure;
       }
 
@@ -1004,72 +972,6 @@ void ScoreLayout::connectTies()
       }
 
 //---------------------------------------------------------
-//   searchHiddenNotes
-//---------------------------------------------------------
-
-void ScoreLayout::searchHiddenNotes()
-      {
-#if 0
-      // TODO: should be coded more efficient
-
-      int staves = _score->nstaves();
-      int tracks = staves * VOICES;
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  if (s->subtype() != Segment::SegChordRest)
-                        continue;
-                  for (int track = 0; track < tracks; ++track) {
-                        Element* el = s->element(track);
-                        if (el == 0 || el->type() != CHORD)
-                              continue;
-                        NoteList* nl = ((Chord*)el)->noteList();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in)
-                              in->second->setHidden(false);
-                        }
-                  }
-            }
-      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  if (s->subtype() != Segment::SegChordRest)
-                        continue;
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        for (int voice = 0; voice < VOICES; ++voice) {
-                              Element* el = s->element(staffIdx * VOICES + voice);
-                              if (el == 0 || el->type() != CHORD)
-                                    continue;
-                              NoteList* nl = ((Chord*)el)->noteList();
-                              for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
-                                    for (int v2 = voice; v2 < VOICES; ++v2) {
-                                          Element* e = s->element(staffIdx * VOICES + v2);
-                                          if (e == 0 || e->type() != CHORD)
-                                                continue;
-                                          NoteList* nl2 = ((Chord*)e)->noteList();
-                                          for (iNote in2 = nl2->begin(); in2 != nl2->end(); ++in2) {
-                                                Note* note2 = in2->second;
-                                                if (note2->hidden())
-                                                      continue;
-                                                if (note2->pitch() == note->pitch()) {
-                                                      if (e->tickLen() > el->tickLen())
-                                                            note->setHidden(true);
-                                                      }
-                                                }
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            }
-#endif
-      }
-
-//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -1134,10 +1036,6 @@ void ScoreLayout::reLayout(Measure* m)
 
 bool ScoreLayout::doReLayout()
       {
-#ifdef PROFILE_LAYOUT
-      unsigned long long ta = cycles();
-#endif
-
       if (startLayout->type() == MEASURE) {
             for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
                   static_cast<Measure*>(startLayout)->layout0(staffIdx);
@@ -1233,20 +1131,7 @@ bool ScoreLayout::doReLayout()
                   static_cast<Measure*>(mb)->layout2(this);
             }
 
-#ifdef PROFILE_LAYOUT
-      unsigned long long tb = cycles();
-#endif
-
       rebuildBspTree();
-
-#ifdef PROFILE_LAYOUT
-      unsigned long long tc = cycles();
-      long totalTime = (tc -ta)/10000LL;
-      long layoutTime = (tb - ta) / 10000LL;
-      long bspTime    = (tc - tb) / 10000LL;
-      printf("reLayout %ld  layout: %ld  bsp: %ld  %ld%%\n",
-         totalTime, layoutTime, bspTime, bspTime * 100 / layoutTime);
-#endif
       return true;
       }
 
