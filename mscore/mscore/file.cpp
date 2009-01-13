@@ -1241,7 +1241,6 @@ bool Score::read(QDomElement e)
             connectSlurs();
 
       _layout->connectTies();
-//      _layout->searchHiddenNotes();
       _layout->setInstrumentNames();
 
       searchSelectedElements();

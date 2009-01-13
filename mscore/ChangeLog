@@ -1,7 +1,9 @@
+13.jan (ws)
+      - first code for capella import
 12.jan
       (la)
-      - add support for transpose element in musicXML import 
-        (measure attribute diatonic and chromatic in musicXML / 
+      - add support for transpose element in musicXML import
+        (measure attribute diatonic and chromatic in musicXML /
         part attr in musescore but only chromatic)
 10.jan
       (ws)

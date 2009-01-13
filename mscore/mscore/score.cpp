@@ -417,6 +417,10 @@ bool Score::read(QString name)
             if (!loadMsc(name))
                   return false;
             }
+      else if (cs.toLower() == "cap") {
+            if (!importCapella(name))
+                  return false;
+            }
       else {
             if (!loadCompressedMsc(name))
                   return false;
@@ -1225,42 +1229,6 @@ void Score::midiNoteReceived(int pitch, bool chord)
             cmd(emptyCmd);
       }
 
-#if 0
-//---------------------------------------------------------
-//   snapNote
-//    p - absolute position
-//---------------------------------------------------------
-
-int Score::snapNote(int tick, const QPointF p, int staff) const
-      {
-      foreach(const Page* page, _layout->pages()) {
-            if (!page->contains(p))
-                  continue;
-            QPointF rp = p - page->pos();  // transform to page relative
-            const QList<System*>* sl = page->systems();
-            double y = 0.0;
-            for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
-                  System* system = *is;
-                  ciSystem nis   = is;
-                  ++nis;
-                  if (nis == sl->end()) {
-                        return system->snapNote(tick, rp - system->pos(), staff);
-                        }
-                  System* nsystem = *nis;
-                  double nexty = nsystem->y();
-                  double gap = nexty - (system->y() + system->height());
-                  nexty -= gap/2.0;
-                  if (p.y() >= y && p.y() < nexty) {
-                        return system->snapNote(tick, rp - system->pos(), staff);
-                        }
-                  y = nexty;
-                  }
-            }
-      printf("snapNote: nothing found\n");
-      return tick;
-      }
-#endif
-
 //---------------------------------------------------------
 //   snapNote
 //---------------------------------------------------------
@@ -1276,14 +1244,6 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
                   break;
             double x  = s->x();
             double nx = x + (ns->x() - x) * .5;
-#if 0
-            if (s->tick() == tick)
-                  x += dx / 3.0 * 2.0;
-            else  if (ns->tick() == tick)
-                  x += dx / 3.0;
-            else
-                  x += dx * .5;
-#endif
             if (p.x() < nx)
                   break;
             s = ns;

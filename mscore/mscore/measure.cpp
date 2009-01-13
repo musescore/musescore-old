@@ -392,11 +392,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
 
       int startIdx, endIdx, incIdx;
 
-//      if (notes.size() > 1)
-//            printf("chord %d %d voices %d\n", notes[0]->chord()->isUp(), notes[1]->chord()->isUp(), multiVoice);
-
       if (notes[0]->chord()->isUp() || voices > 1) {
-//      if (false) {
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
@@ -601,8 +597,7 @@ int Measure::findAccidental(Note* note) const
                                                       return 0;
                                                 }
                                           }
-//                                    if (chord->noteType() == NOTE_NORMAL)
-                                          tversatz[line] = accVal;
+                                    tversatz[line] = accVal;
                                     }
                               else {
                                     if (note == note1)
@@ -664,10 +659,8 @@ int Measure::findAccidental2(Note* note) const
                         if (note == note1)
                               return tversatz[line];
                         int accVal = ((tpc + 1) / 7) - 2;
-                        if (accVal != tversatz[line]) {
-//                              if (chord->noteType() == NOTE_NORMAL)
-                                    tversatz[line] = accVal;
-                              }
+                        if (accVal != tversatz[line])
+                              tversatz[line] = accVal;
                         }
                   }
             }
@@ -3213,7 +3206,7 @@ bool Measure::isMeasureRest(int staffIdx)
       {
       int strack = staffIdx * VOICES;
       int etrack = staffIdx * VOICES + VOICES;
-      staves[staffIdx]->hasVoices = false;
+//??      staves[staffIdx]->hasVoices = false;
       for (Segment* s = first(); s; s = s->next()) {
             if (s->subtype() != Segment::SegChordRest)
                   continue;
