@@ -145,7 +145,6 @@ class Measure : public MeasureBase {
       void   setIrregular(bool val)    { _irregular = val;    }
       int    noOffset() const          { return _noOffset;    }
       Text* noText() const             { return _noText;      }
-      void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }
       virtual double distance(int i) const      { return staves[i]->distance; }
