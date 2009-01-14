@@ -157,29 +157,54 @@
          <name>B<symbol name="flat"/> Trompete</name>
          <short-name>B<symbol name="flat"/> Tpt.</short-name>
          <transposition>-2</transposition>
-         <midiprogram>56</midiprogram>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>D Trompete</name>
          <short-name>D Tpt.</short-name>
          <transposition>2</transposition>
-         <midiprogram>56</midiprogram>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>C Trompete</name>
          <short-name>C Tpt.</short-name>
-         <midiprogram>56</midiprogram>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Trompete</name>
          <short-name>E<symbol name="flat"/> Tpt.</short-name>
          <transposition>3</transposition>
-         <midiprogram>56</midiprogram>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Muted Trumpet</name>
          <short-name>Mt. Tpt.</short-name>
-         <midiprogram>59</midiprogram>
+         <channel>
+            <program>59</program>
+            </channel>
+         <channel name="ohne Dämpfer">
+           <program value="56"/>
+           </channel>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Kornett</name>
@@ -188,6 +213,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Flügelhorn</name>
@@ -196,6 +224,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="Dämpfer">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Trombone</name>
@@ -401,64 +432,143 @@
       <instrument>
          <name>Violin</name>
          <short-name>V1n.</short-name>
-         <midiprogram>40</midiprogram>
+         <channel>
+            <program>40</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violin 1</name>
          <short-name>V1n. 1</short-name>
-         <midiprogram>48</midiprogram>
+         <channel>
+            <program>48</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violin 2</name>
          <short-name>V1n. 2</short-name>
-         <midiprogram>48</midiprogram>
+         <channel>
+            <program>48</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Viola</name>
          <short-name>V1a.</short-name>
          <clef>11</clef>
-         <midiprogram>41</midiprogram>
+         <channel>
+            <program>41</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
        <instrument>
           <name>Violas</name>
           <short-name>V1as.</short-name>
           <clef>11</clef>
-          <midiprogram>49</midiprogram>
+          <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
           </instrument>
       <instrument>
          <name>Violoncello</name>
          <short-name>Vlc.</short-name>
          <clef>4</clef>
-         <midiprogram>42</midiprogram>
+         <channel>
+            <program>42</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
        <instrument>
           <name>Violoncellos</name>
           <short-name>Vlcs.</short-name>
           <clef>4</clef>
-          <midiprogram>49</midiprogram>
+          <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
           </instrument>
        <instrument>
           <name>Double Bass</name>
           <short-name>D.B.</short-name>
          <transposition>-12</transposition>
           <clef>4</clef>
-          <midiprogram>32</midiprogram>
+          <channel>
+            <program>32</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
           </instrument>
       <instrument>
          <name>Kontrabass</name>
          <short-name>C.B.</short-name>
          <transposition>-12</transposition>
          <clef>4</clef>
-         <midiprogram>43</midiprogram>
+         <channel>
+            <program>43</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
         <instrument>
           <name>Contrabasses</name>
           <short-name>Cbs.</short-name>
          <transposition>-12</transposition>
           <clef>4</clef>
-          <midiprogram>49</midiprogram>
+          <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
           </instrument>
       </instrument-group>
 
    </museScore>
-

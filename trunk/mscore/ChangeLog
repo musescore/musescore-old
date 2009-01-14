@@ -1,5 +1,8 @@
 14.jan (ws)
       - fix measure number layout
+      (db)
+      - MIDI channel switches for pizzicato and tremolo on all string instruments
+      - MIDI channel switches for muted trumpet on all trumpets (plus cornet and flugelhorn)
 13.jan (ws)
       - first code for capella import
 12.jan
@@ -429,7 +432,9 @@
       - added chords aug7, aug9, aug13 as alternatives for 7+, 9+, 13+
 26.10 (olavgun)
       - Lilypond export: Better procedure to find correct octave.
-      - Lilypond export: Complete separation of voices for recombination in scoreblock, for easier hand-editing of lilypond-file: unresolved issue: prints voices to lilypond-file even if empty. No visual consequences.
+      - Lilypond export: Complete separation of voices for recombination in 
+        scoreblock, for easier hand-editing of lilypond-file: unresolved issue: 
+        prints voices to lilypond-file even if empty. No visual consequences.
 25.10 (ws)
       - fix crash when last measure has a volta and is followed by a horizontal
         frame

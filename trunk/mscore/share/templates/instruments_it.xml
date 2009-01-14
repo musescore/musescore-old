@@ -213,6 +213,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>D Trumpet</name>
@@ -221,6 +224,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>C Trumpet</name>
@@ -228,6 +234,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Trumpet</name>
@@ -236,6 +245,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Muted Trumpet</name>
@@ -243,6 +255,9 @@
          <channel>
             <program>59</program>
             </channel>
+         <channel name="senza sordina">
+           <program value="56"/>
+           </channel>
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Cornetta</name>
@@ -251,6 +266,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Flicorno</name>
@@ -259,6 +277,9 @@
          <channel>
             <program>56</program>
             </channel>
+         <channel name="sordina">
+           <program value="59"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Trombone</name>
@@ -509,6 +530,12 @@
          <channel>
             <program>40</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violins 1</name>
@@ -529,6 +556,12 @@
          <channel>
             <program>48</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Viola</name>
@@ -537,6 +570,12 @@
          <channel>
             <program>41</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violas</name>
@@ -545,6 +584,12 @@
          <channel>
             <program>49</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violoncello</name>
@@ -553,6 +598,12 @@
          <channel>
             <program>42</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Violoncellos</name>
@@ -561,6 +612,12 @@
          <channel>
             <program>49</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Double Bass</name>
@@ -570,6 +627,12 @@
          <channel>
             <program>32</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       <instrument>
          <name>Contrabass</name>
@@ -579,6 +642,12 @@
          <channel>
             <program>43</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
        <instrument>
          <name>Contrabasses</name>
@@ -588,6 +657,12 @@
          <channel>
             <program>49</program>
             </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
          </instrument>
       </instrument-group>
 
