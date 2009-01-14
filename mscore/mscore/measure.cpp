@@ -816,7 +816,20 @@ void Measure::layout2(ScoreLayout* layout)
             else if ((pn % score()->style()->measureNumberInterval) == 0)
                   ns = s;
             }
-      setNoText(ns);
+      if (!ns.isEmpty()) {
+            if (_noText == 0) {
+                  _noText = new Text(score());
+                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
+                  _noText->setParent(this);
+                  _noText->setTrack(-1);
+                  _noText->setTick(-1);
+                  }
+            _noText->setText(s);
+            }
+      else if (_noText) {
+            delete _noText;
+            _noText = 0;
+            }
       if (_noText) {
             // style changes immediately affect all measure numbers
             _noText->setSubtype(TEXT_MEASURE_NUMBER);
@@ -1083,8 +1096,11 @@ void Measure::add(Element* el)
             case MARKER:
             case STAFF_TEXT:
             case HBOX:
-                  if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
+                  if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER) {
                         _noText = static_cast<Text*>(el);
+                        _noText->setTrack(-1);
+                        _noText->setTick(-1);
+                        }
                   else
                         _el.append(el);
                   break;
@@ -1703,26 +1719,6 @@ printf("\n");
                               e->setPos(- e->bbox().x() - xo, y);
                         }
                   }
-            }
-      }
-
-//---------------------------------------------------------
-//   setNoText
-//---------------------------------------------------------
-
-void Measure::setNoText(const QString& s)
-      {
-      if (!s.isEmpty()) {
-            if (_noText == 0) {
-                  _noText = new Text(score());
-                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
-                  _noText->setParent(this);
-                  }
-            _noText->setText(s);
-            }
-      else if (_noText) {
-            delete _noText;
-            _noText = 0;
             }
       }
 

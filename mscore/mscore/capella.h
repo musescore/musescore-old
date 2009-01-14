@@ -28,6 +28,114 @@ static const char* timeNames[] = { "1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "
 
 class Capella;
 
+enum {T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
+      T_PAGE_BKGR
+      };
+
+enum BEAM_MODE { AUTO_BEAM, FORCE_BEAM, SPLIT_BEAM };
+
+//---------------------------------------------------------
+//   CapellaObj
+//---------------------------------------------------------
+
+class CapellaObj {
+   protected:
+      Capella* cap;
+
+   public:
+      CapellaObj(Capella* c) { cap = c; }
+      };
+
+//---------------------------------------------------------
+//   NoteObj
+//---------------------------------------------------------
+
+class NoteObj {
+      int _type;
+
+   public:
+      NoteObj(int t) { _type = t; }
+      int type() const  { return _type; }
+      };
+
+//---------------------------------------------------------
+//   CapClef
+//---------------------------------------------------------
+
+class CapClef : public NoteObj, public CapellaObj {
+      enum FORM { FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
+                  FORM_NULL, CLEF_UNCHANGED
+                  };
+      enum LINE {LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
+      enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
+
+      FORM form;
+      LINE line;
+      OCT  oct;
+
+   public:
+      CapClef(Capella* c) : NoteObj(T_CLEF), CapellaObj(c) {}
+      void read();
+      const char* name() {
+            static const char* formName[] = { "G", "C", "F", "=", " ", "*" };
+            return formName[form];
+            }
+      };
+
+//---------------------------------------------------------
+//   CapKey
+//---------------------------------------------------------
+
+class CapKey : public NoteObj, public CapellaObj {
+      int signature;
+
+   public:
+      CapKey(Capella* c) : NoteObj(T_KEY), CapellaObj(c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   CapMeter
+//---------------------------------------------------------
+
+class CapMeter : public NoteObj, public CapellaObj {
+      unsigned char numerator;
+      int log2Denom;
+      bool allaBreve;
+
+   public:
+      CapMeter(Capella* c) : NoteObj(T_METER), CapellaObj(c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   CapExplicitBarline
+//---------------------------------------------------------
+
+class CapExplicitBarline : public NoteObj, public CapellaObj {
+      enum {BAR_SINGLE, BAR_DOUBLE, BAR_END,
+            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
+
+      int type;
+      int barMode;      // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
+
+   public:
+      CapExplicitBarline(Capella* c) : NoteObj(T_IMPL_BARLINE), CapellaObj(c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   CapVoice
+//---------------------------------------------------------
+
+struct CapVoice {
+      unsigned char y0Lyrics;
+      unsigned char dyLyrics;
+      QFont lyricsFont;
+      unsigned char stemDir;
+      QList<NoteObj*> objects;
+      };
+
 //---------------------------------------------------------
 //   CapStaff
 //---------------------------------------------------------
@@ -40,6 +148,38 @@ struct CapStaff {
       int topDistX;
       int btmDistX;
       QColor color;
+      };
+
+//---------------------------------------------------------
+//   struct CapStaffLayout
+//---------------------------------------------------------
+
+struct CapStaffLayout {
+      unsigned char barlineMode;
+      unsigned char noteLines;
+      bool bSmall;
+      int topDist;
+      int btmDist;
+      int groupDist;
+      unsigned char barlineFrom;
+      unsigned char barlineTo;
+
+      int form, line, oct;          // clef
+
+      // Schlagzeuginformation
+      bool bPercussion;             // use drum channel
+      bool bSoundMapIn;
+      bool bSoundMapOut;
+      char soundMapIn[128];         // Tabelle für MIDI-Töne iMin...iMin+n-1
+      char soundMapOut[128];        // Tabelle für MIDI-Töne iMin...iMin+n-1
+
+      int sound, volume, transp;
+
+      char* descr;
+      char* name;
+      char* abbrev;
+      char* intermediateName;
+      char* intermediateAbbrev;
       };
 
 //---------------------------------------------------------
@@ -59,18 +199,6 @@ struct CapSystem {
       int instrNotation;            // 0 = keine Instrumentenbezeichnung
                                     // 1 = abgekürzt, 2 = vollständig
       QList<CapStaff*> staves;
-      };
-
-//---------------------------------------------------------
-//   CapellaObj
-//---------------------------------------------------------
-
-class CapellaObj {
-   protected:
-      Capella* cap;
-
-   public:
-      CapellaObj(Capella* c) { cap = c; }
       };
 
 //---------------------------------------------------------
@@ -193,7 +321,7 @@ struct CNote {
 //   ChordObj
 //---------------------------------------------------------
 
-class ChordObj : public BasicDurationalObj {
+class ChordObj : public BasicDurationalObj, public NoteObj {
       unsigned char beamMode;
       char notationStave;
       char stemDir;
@@ -210,15 +338,13 @@ class ChordObj : public BasicDurationalObj {
    public:
       ChordObj(Capella*);
       void read();
-
-      enum { AUTO_BEAM, FORCE_BEAM, SPLIT_BEAM };
       };
 
 //---------------------------------------------------------
 //   RestObj
 //---------------------------------------------------------
 
-class RestObj : public BasicDurationalObj {
+class RestObj : public BasicDurationalObj, public NoteObj {
       bool bVerticalCentered;
       unsigned fullMeasures;  // >0, multi measure rest (counting measures)
       int vertShift;
@@ -226,6 +352,14 @@ class RestObj : public BasicDurationalObj {
    public:
       RestObj(Capella*);
       void read();
+      };
+
+//---------------------------------------------------------
+//   CapFont
+//---------------------------------------------------------
+
+struct CapFont {
+      QString face;
       };
 
 //---------------------------------------------------------
@@ -266,22 +400,30 @@ class Capella {
       unsigned btmPageMargins;
 
       QList<CapSystem*> systems;
+      QList<CapFont*> fonts;
+      QList<CapStaffLayout*> staves;      // staff layout
+
+      int smallLineDist;            // layout
+      int normalLineDist;
+      int topDist;
+      int interDist;
+      unsigned char txtAlign;       // Stimmenbezeichnungen 0=links, 1=zentriert, 2=rechts
+      unsigned char adjustVert;     // 0=nein, 1=außer letzte Seite, 3=alle Seiten
+      bool redundantKeys;
+      bool modernDoubleNote;
+      bool bSystemSeparators;
+      int nUnnamed;
+      QFont namesFont;
 
       void readSimpleTextObj();
       void readSlurObj();
       void readTextObj();
-      void readExplicitBarline();
-      void readMeter();
-      void readKey();
-      void readClef();
-      void readChord();
-      void readRest();
-      void readVoice(CapStaff*);
+      void readVoice(CapStaff*, int);
       void readStaff(CapSystem*);
       void readSystem();
 
    protected:
-      void readStaveLayout();
+      void readStaveLayout(CapStaffLayout*, int);
       void readLayout();
 
    public:
@@ -304,7 +446,7 @@ class Capella {
       void readExtra();
       void readDrawObjectArray();
       void read(void* p, qint64 len);
-      void readFont();
+      QFont readFont();
       };
 
 
