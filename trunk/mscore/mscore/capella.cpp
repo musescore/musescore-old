@@ -21,10 +21,18 @@
 //
 //    Capella 2000 import filter
 //
-
 #include <assert.h>
 #include "score.h"
 #include "capella.h"
+#include "part.h"
+#include "staff.h"
+#include "rest.h"
+#include "layout.h"
+#include "chord.h"
+#include "note.h"
+#include "utils.h"
+#include "lyrics.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -306,7 +314,7 @@ void ChordObj::read()
       assert(notationStave >= -1 && notationStave <= 1);
 
       if (flags & 0x04) {
-            stemDir = cap->readChar();
+            stemDir     = cap->readChar();
             dStemLength = cap->readChar();
             }
       if (flags & 0x08) {
@@ -325,20 +333,25 @@ void ChordObj::read()
       if (flags & 0x40) {
             unsigned nVerses = cap->readUnsigned();
             for (unsigned int i = 0; i < nVerses; ++i) {
-                  Verse v;
-                  unsigned char b = cap->readByte();
-                  v.leftAlign = b & 1;
-                  v.extender  = b & 2;
-                  v.hyphen    = b & 4;
-                  if (b & 9)
-                        v.verseNumber = cap->readString();
-                  if (b & 16)
-                        v.text = cap->readString();
-                  verse.append(v);
+                  bool bVerse = cap->readByte();
+                  if (bVerse) {
+                        Verse v;
+                        unsigned char b = cap->readByte();
+                        v.leftAlign = b & 1;
+                        v.extender  = b & 2;
+                        v.hyphen    = b & 4;
+                        v.num       = i;
+                        if (b & 8)
+                              v.verseNumber = cap->readString();
+                        if (b & 16)
+                              v.text = cap->readString();
+printf("         Verse(%d) <%s><%s>\n", i, qPrintable(v.verseNumber), qPrintable(v.text));
+                        verse.append(v);
+                        }
                   }
             }
-printf("         Chord %s\n", timeNames[t]);
       unsigned nNotes = cap->readUnsigned();
+printf("         Chord %s flags 0x%02x notes %d\n", timeNames[t], flags, nNotes);
       for (unsigned int i = 0; i < nNotes; ++i) {
             CNote n;
             n.explAlteration = 0;
@@ -696,7 +709,7 @@ printf("         Expl.Barline type %d mode %d\n", type, barMode);
 //   readVoice
 //---------------------------------------------------------
 
-void Capella::readVoice(CapStaff*, int idx)
+void Capella::readVoice(CapStaff* cs, int idx)
       {
 printf("      Voice %d\n", idx);
       if (readChar() != 'C')
@@ -770,6 +783,7 @@ printf("      Voice %d\n", idx);
                         abort();
                  }
             }
+      cs->voices.append(v);
       }
 
 //---------------------------------------------------------
@@ -831,6 +845,36 @@ void Capella::readSystem()
       for (unsigned i = 0; i < nStaves; i++)
             readStaff(s);
       systems.append(s);
+      }
+
+//---------------------------------------------------------
+//   toTicks
+//---------------------------------------------------------
+
+int BasicDurationalObj::ticks() const
+      {
+      if (noDuration)
+            return 0;
+      int len;
+      switch (t) {
+            case D1:          len = 4 * division; break;
+            case D2:          len = 2 * division; break;
+            case D4:          len = division; break;
+            case D8:          len = division >> 1; break;
+            case D16:         len = division >> 2; break;
+            case D32:         len = division >> 3; break;
+            case D64:         len = division >> 4; break;
+            case D128:        len = division >> 5; break;
+            case D256:        len = division >> 6; break;
+            case D_BREVE:     len = division * 8; break;
+            }
+      int slen = len;
+      int dots = nDots;
+      while (dots--) {
+            slen >>= 1;
+            len += slen;
+            }
+      return len;
       }
 
 //---------------------------------------------------------
@@ -929,8 +973,121 @@ bool Score::importCapella(const QString& name)
       fp.close();
 
       _saved = false;
-      // convertCapella(&cf);
+      convertCapella(&cf);
       _created = true;
       return true;
+      }
+
+//---------------------------------------------------------
+//   convertCapella
+//---------------------------------------------------------
+
+void Score::convertCapella(Capella* cap)
+      {
+      if (cap->systems.isEmpty())
+            return;
+
+      int staves   = cap->systems[0]->staves.size();
+      CapStaff* cs = cap->systems[0]->staves[0];
+      sigmap->add(0, cs->numerator, 1 << cs->log2Denom);
+
+      Part* part = new Part(this);
+      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            Staff* s = new Staff(this, part, 0);
+            part->insertStaff(s);
+            _staves.push_back(s);
+            }
+      int tick = 0;
+      foreach(CapSystem* csys, cap->systems) {
+            int oldTick = tick;
+            int staffIdx = 0;
+            foreach(CapStaff* cstaff, csys->staves) {
+                  tick = oldTick;
+                  int voice = 0;
+                  foreach(CapVoice* cvoice, cstaff->voices) {
+                        foreach(NoteObj* no, cvoice->objects) {
+                              switch(no->type()) {
+                                    case T_REST:
+                                          {
+                                          RestObj* o = static_cast<RestObj*>(no);
+                                          int ticks = o->ticks();
+                                          if (!o->invisible) {
+                                                Measure* m = getCreateMeasure(tick);
+                                                Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                                                Rest* rest = new Rest(this);
+                                                rest->setTick(tick);
+                                                rest->setLen(ticks);
+                                                rest->setTrack(staffIdx * VOICES + voice);
+                                                s->add(rest);
+                                                }
+                                          tick += ticks;
+                                          }
+                                          break;
+                                    case T_CHORD:
+                                          {
+                                          ChordObj* o = static_cast<ChordObj*>(no);
+                                          int ticks = o->ticks();
+                                          Measure* m = getCreateMeasure(tick);
+                                          Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                                          Chord* chord = new Chord(this);
+                                          chord->setTick(tick);
+                                          chord->setLen(ticks);
+                                          chord->setTrack(staffIdx * VOICES + voice);
+                                          s->add(chord);
+                                          foreach(CNote n, o->notes) {
+                                                Note* note = new Note(this);
+                                                int pitch = line2pitch(-n.pitch, 0, 0);
+                                                note->setPitch(pitch);
+
+                                                chord->add(note);
+                                                }
+                                          foreach(Verse v, o->verse) {
+                                                Lyrics* l = new Lyrics(this);
+                                                l->setTrack(staffIdx * VOICES + voice);
+                                                l->setText(v.text);
+                                                if (v.hyphen)
+                                                      l->setSyllabic(Lyrics::BEGIN);
+                                                l->setNo(v.num);
+                                                s->add(l);
+                                                }
+                                          tick += ticks;
+                                          }
+                                          break;
+                                    case T_CLEF:
+                                          {
+                                          CapClef* o = static_cast<CapClef*>(no);
+                                          printf("%d:%d <Clef> %s\n", tick, staffIdx, o->name());
+                                          }
+                                          break;
+                                    case T_KEY:
+                                          printf("%d:%d <Key>\n", tick, staffIdx);
+                                          break;
+                                    case T_METER:
+                                          {
+                                          CapMeter* o = static_cast<CapMeter*>(no);
+                                          TimeSig* ts = new TimeSig(this);
+                                          ts->setSig(1 << o->log2Denom, o->numerator);
+                                          ts->setTick(tick);
+                                          ts->setTrack(staffIdx * VOICES + voice);
+                                          Measure* m = getCreateMeasure(tick);
+                                          Segment* s = m->getSegment(Segment::SegTimeSig, tick);
+                                          s->add(ts);
+                                          // TODO: update sigmap
+                                          }
+                                          break;
+                                    case T_EXPL_BARLINE:
+                                          printf("<Barline>\n");
+                                          break;
+                                    case T_PAGE_BKGR:
+                                          printf("<PageBreak>\n");
+                                          break;
+                                    }
+                              }
+                        ++voice;
+                        }
+                  ++staffIdx;
+                  }
+            }
+      _parts.push_back(part);
       }
 

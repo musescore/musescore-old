@@ -67,6 +67,7 @@ class EventMap;
 class Harmony;
 struct Channel;
 class Tuplet;
+class Capella;
 
 struct Style;
 struct SigEvent;
@@ -258,8 +259,12 @@ class Score : public QObject {
       ChordRest* downStaff(ChordRest* cr);
       void moveUp(Note*);
       void moveDown(Note*);
+
+      void convertMidi(MidiFile*, int);
+      void convertCapella(Capella* cap);
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
+
       void checkUndoOp();
       void move(const QString& cmd);
       void selectMove(const QString& cmd);
@@ -546,7 +551,6 @@ class Score : public QObject {
       bool loadCompressedMsc(QString name);
       void importMusicXml(const QString&);
       void importCompressedMusicXml(const QString&);
-      void convertMidi(MidiFile*, int);
       bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
       bool importLilypond(const QString& name);
@@ -703,6 +707,7 @@ class Score : public QObject {
       ImagePath* addImage(const QString&);      // add image to imagePathList
       void moveBracket(int staffIdx, int srcCol, int dstCol);
       void textStyleChanged();
+      Measure* getCreateMeasure(int tick);
       };
 
 extern Score* gscore;

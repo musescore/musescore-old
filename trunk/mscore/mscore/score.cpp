@@ -1964,3 +1964,25 @@ void Score::textStyleChanged()
       setLayoutAll(true);
       }
 
+//---------------------------------------------------------
+//   getCreateMeasure
+//    - return Measure for tick
+//    - create new Measure(s) if there is no measure for
+//      this tick
+//---------------------------------------------------------
+
+Measure* Score::getCreateMeasure(int tick)
+      {
+      MeasureBase* last = _measures.last();
+      int lastTick = last ? last->tick() + last->tickLen() : 0;
+      while (tick >= lastTick) {
+            Measure* m = new Measure(this);
+            m->setTick(lastTick);
+            int ticks = sigmap->ticksMeasure(lastTick);
+            m->setTickLen(ticks);
+            _layout->add(m);
+            lastTick += ticks;
+            }
+      return tick2measure(tick);
+      }
+
