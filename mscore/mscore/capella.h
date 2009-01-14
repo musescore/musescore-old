@@ -99,11 +99,11 @@ class CapKey : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 class CapMeter : public NoteObj, public CapellaObj {
+   public:
       unsigned char numerator;
       int log2Denom;
       bool allaBreve;
 
-   public:
       CapMeter(Capella* c) : NoteObj(T_METER), CapellaObj(c) {}
       void read();
       };
@@ -144,10 +144,12 @@ struct CapStaff {
       unsigned char numerator;
       int log2Denom;
       bool allaBreve;
+
       unsigned char iLayout;
       int topDistX;
       int btmDistX;
       QColor color;
+      QList<CapVoice*> voices;
       };
 
 //---------------------------------------------------------
@@ -283,7 +285,6 @@ class BasicDurationalObj : public CapellaObj {
       bool noDuration;
       bool postGrace;
       bool bSmall;
-      bool invisible;
       bool notBlack;
       QColor color;
       TIMESTEP t;
@@ -295,6 +296,8 @@ class BasicDurationalObj : public CapellaObj {
    public:
       BasicDurationalObj(Capella* c);
       void read();
+      int ticks() const;
+      bool invisible;
       };
 
 //---------------------------------------------------------
@@ -305,6 +308,7 @@ struct Verse {
       bool leftAlign;
       bool extender;
       bool hyphen;
+      int num;
       QString verseNumber;
       QString text;
       };
@@ -332,12 +336,12 @@ class ChordObj : public BasicDurationalObj, public NoteObj {
       bool rightTie;
       char beamShift;
       char beamSlope;
-      QList<Verse> verse;
-      QList<CNote> notes;
 
    public:
       ChordObj(Capella*);
       void read();
+      QList<Verse> verse;
+      QList<CNote> notes;
       };
 
 //---------------------------------------------------------
@@ -399,7 +403,6 @@ class Capella {
       unsigned rightPageMargins;
       unsigned btmPageMargins;
 
-      QList<CapSystem*> systems;
       QList<CapFont*> fonts;
       QList<CapStaffLayout*> staves;      // staff layout
 
@@ -447,8 +450,9 @@ class Capella {
       void readDrawObjectArray();
       void read(void* p, qint64 len);
       QFont readFont();
-      };
 
+      QList<CapSystem*> systems;
+      };
 
 #endif
 
