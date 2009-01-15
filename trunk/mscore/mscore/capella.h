@@ -80,6 +80,7 @@ class CapClef : public NoteObj, public CapellaObj {
             static const char* formName[] = { "G", "C", "F", "=", " ", "*" };
             return formName[form];
             }
+      int clef() const;
       };
 
 //---------------------------------------------------------
@@ -87,11 +88,11 @@ class CapClef : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 class CapKey : public NoteObj, public CapellaObj {
-      int signature;
 
    public:
       CapKey(Capella* c) : NoteObj(T_KEY), CapellaObj(c) {}
       void read();
+      int signature;
       };
 
 //---------------------------------------------------------
@@ -134,6 +135,7 @@ struct CapVoice {
       QFont lyricsFont;
       unsigned char stemDir;
       QList<NoteObj*> objects;
+      int voiceNo;
       };
 
 //---------------------------------------------------------
@@ -141,7 +143,7 @@ struct CapVoice {
 //---------------------------------------------------------
 
 struct CapStaff {
-      unsigned char numerator;
+      unsigned char numerator;      // default time signature
       int log2Denom;
       bool allaBreve;
 
@@ -207,13 +209,20 @@ struct CapSystem {
 //   BasicDrawObj
 //---------------------------------------------------------
 
+enum { CAP_GROUP, CAP_TRANSPOSABLE, CAP_METAFILE, CAP_SIMPLE_TEXT, CAP_TEXT, CAP_RECT_ELLIPSE,
+      CAP_LINE, CAP_POLYGON, CAP_WAVY_LINE, CAP_SLUR, CAP_NOTE_LINES, CAP_WEDGE, CAP_VOLTA,
+      CAP_BRACKET, CAP_GUITAR, CAP_TRILL
+      };
+
 class BasicDrawObj : public CapellaObj {
       unsigned char modeX, modeY, distY, flags;
       int nRefNote;
       short range;
 
    public:
-      BasicDrawObj(Capella* c) : CapellaObj(c) {}
+      int type;
+
+      BasicDrawObj(int t, Capella* c) : CapellaObj(c) { type = t; }
       void read();
       };
 
@@ -228,7 +237,130 @@ class BasicRectObj : public BasicDrawObj {
       int height;
 
    public:
-      BasicRectObj(Capella* c) : BasicDrawObj(c) {}
+      BasicRectObj(int t, Capella* c) : BasicDrawObj(t, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   GroupObj
+//---------------------------------------------------------
+
+class GroupObj : public BasicDrawObj {
+   public:
+      GroupObj(Capella* c) : BasicDrawObj(CAP_GROUP, c) {}
+      void read();
+
+      QPoint relPos;
+      QList<BasicDrawObj*> objects;
+      };
+
+//---------------------------------------------------------
+//   TransposableObj
+//---------------------------------------------------------
+
+class TransposableObj : public BasicDrawObj {
+   public:
+      TransposableObj(Capella* c) : BasicDrawObj(CAP_TRANSPOSABLE, c) {}
+      void read();
+
+      QPoint relPos;
+      char b;
+      QList<BasicDrawObj*> variants;
+      };
+
+//---------------------------------------------------------
+//   MetafileObj
+//---------------------------------------------------------
+
+class MetafileObj : public BasicDrawObj {
+   public:
+      MetafileObj(Capella* c) : BasicDrawObj(CAP_METAFILE, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   RectEllipseObj
+//---------------------------------------------------------
+
+class RectEllipseObj : public BasicDrawObj {    // special
+   public:
+      RectEllipseObj(Capella* c) : BasicDrawObj(CAP_RECT_ELLIPSE, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   PolygonObj
+//---------------------------------------------------------
+
+class PolygonObj : public BasicDrawObj {
+   public:
+      PolygonObj(Capella* c) : BasicDrawObj(CAP_POLYGON, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   LineObj
+//---------------------------------------------------------
+
+class LineObj : public BasicDrawObj {
+
+   public:
+      LineObj(Capella* c) : BasicDrawObj(CAP_LINE, c) {}
+      LineObj(int t, Capella* c) : BasicDrawObj(t, c) {}
+      void read();
+
+      QPoint pt1, pt2;
+      QColor color;
+      char lineWidth;
+      };
+
+//---------------------------------------------------------
+//   WavyLineObj
+//---------------------------------------------------------
+
+class WavyLineObj : public LineObj {
+   public:
+      WavyLineObj(Capella* c) : LineObj(CAP_WAVY_LINE, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   NotelinesObj
+//---------------------------------------------------------
+
+class NotelinesObj : public BasicDrawObj {
+   public:
+      NotelinesObj(Capella* c) : BasicDrawObj(CAP_NOTE_LINES, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   VoltaObj
+//---------------------------------------------------------
+
+class VoltaObj : public BasicDrawObj {
+   public:
+      VoltaObj(Capella* c) : BasicDrawObj(CAP_VOLTA, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   GuitarObj
+//---------------------------------------------------------
+
+class GuitarObj : public BasicDrawObj {
+   public:
+      GuitarObj(Capella* c) : BasicDrawObj(CAP_GUITAR, c) {}
+      void read();
+      };
+
+//---------------------------------------------------------
+//   TrillObj
+//---------------------------------------------------------
+
+class TrillObj : public BasicDrawObj {
+   public:
+      TrillObj(Capella* c) : BasicDrawObj(CAP_TRILL, c) {}
       void read();
       };
 
@@ -242,7 +374,7 @@ class SlurObj : public BasicDrawObj {
       unsigned char nEnd, nMid, nDotDist, nDotWidth;
 
    public:
-      SlurObj(Capella* c) : BasicDrawObj(c) {}
+      SlurObj(Capella* c) : BasicDrawObj(CAP_SLUR, c) {}
       void read();
       };
 
@@ -254,7 +386,7 @@ class TextObj : public BasicRectObj {
       char* text;
 
    public:
-      TextObj(Capella* c) : BasicRectObj(c) { text = 0;}
+      TextObj(Capella* c) : BasicRectObj(CAP_TEXT, c) { text = 0;}
       ~TextObj() { if (text) delete text; }
       void read();
       };
@@ -270,9 +402,36 @@ class SimpleTextObj : public BasicDrawObj {
       QFont font;
 
    public:
-      SimpleTextObj(Capella* c) : BasicDrawObj(c) { text = 0;}
+      SimpleTextObj(Capella* c) : BasicDrawObj(CAP_SIMPLE_TEXT, c) { text = 0;}
       ~SimpleTextObj() { if (text) delete text; }
       void read();
+      };
+
+//---------------------------------------------------------
+//   BracketObj
+//---------------------------------------------------------
+
+class BracketObj : public LineObj {
+
+   public:
+      BracketObj(Capella* c) : LineObj(CAP_BRACKET, c) {}
+      void read();
+
+      char orientation, number;
+      };
+
+//---------------------------------------------------------
+//   WedgeObj
+//---------------------------------------------------------
+
+class WedgeObj : public LineObj {
+
+   public:
+      WedgeObj(Capella* c) : LineObj(CAP_WEDGE, c) {}
+      void read();
+
+      int height;
+      bool decresc;
       };
 
 //---------------------------------------------------------
@@ -350,12 +509,12 @@ class ChordObj : public BasicDurationalObj, public NoteObj {
 
 class RestObj : public BasicDurationalObj, public NoteObj {
       bool bVerticalCentered;
-      unsigned fullMeasures;  // >0, multi measure rest (counting measures)
       int vertShift;
 
    public:
       RestObj(Capella*);
       void read();
+      unsigned fullMeasures;  // >0, multi measure rest (counting measures)
       };
 
 //---------------------------------------------------------
@@ -364,6 +523,15 @@ class RestObj : public BasicDurationalObj, public NoteObj {
 
 struct CapFont {
       QString face;
+      };
+
+//---------------------------------------------------------
+//   CapBracket
+//---------------------------------------------------------
+
+struct CapBracket {
+      int from, to;
+      bool curly;
       };
 
 //---------------------------------------------------------
@@ -418,7 +586,6 @@ class Capella {
       int nUnnamed;
       QFont namesFont;
 
-      void readSimpleTextObj();
       void readSlurObj();
       void readTextObj();
       void readVoice(CapStaff*, int);
@@ -447,11 +614,13 @@ class Capella {
       unsigned readUnsigned();
       char* readString();
       void readExtra();
-      void readDrawObjectArray();
+      QList<BasicDrawObj*> readDrawObjectArray();
       void read(void* p, qint64 len);
       QFont readFont();
+      QPoint readPoint();
 
       QList<CapSystem*> systems;
+      QList<CapBracket> brackets;
       };
 
 #endif

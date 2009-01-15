@@ -270,7 +270,7 @@ void Staff::changeKeySig(int tick, int st)
       bool removeFlag = st == _keymap->key(tick);
       int nval = -1000;
       if (!removeFlag) {
-            (*_keymap)[tick] = st;
+            setKey(tick, st);
             nval = st;
             }
       _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, nval);
@@ -476,5 +476,23 @@ double Staff::height() const
 double Staff::mag() const
       {
       return _small ? score()->style()->smallStaffMag : 1.0;
+      }
+
+//---------------------------------------------------------
+//   setKey
+//---------------------------------------------------------
+
+void Staff::setKey(int tick, int st)
+      {
+      (*_keymap)[tick] = st;
+      }
+
+//---------------------------------------------------------
+//   setClef
+//---------------------------------------------------------
+
+void Staff::setClef(int tick, int clef)
+      {
+      (*_clefList)[tick] = clef;
       }
 

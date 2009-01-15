@@ -175,9 +175,10 @@ void ScoreLayout::doLayout()
 
       if (startLayout) {
             startLayout->setDirty();
-            startLayout = 0;
-            if (doReLayout())
+            if (doReLayout()) {
+                  startLayout = 0;
                   return;
+                  }
             }
 
       if (first() == 0) {

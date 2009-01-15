@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.9">
-  <MagIdx>9</MagIdx>
-  <xoff>8.52549</xoff>
-  <yoff>-1.74471</yoff>
+  <Mag>1.0955</Mag>
+  <xoff>-5.62659</xoff>
+  <yoff>7.31208</yoff>
   <Spatium>2</Spatium>
   <Division>480</Division>
   <Style>
-    <staffUpperBorder>0</staffUpperBorder>
+    <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
-    <akkoladeDistance>5.5</akkoladeDistance>
+    <akkoladeDistance>7.5</akkoladeDistance>
     <systemDistance>5.2</systemDistance>
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>7</systemFrameDistance>
-    <frameSystemDistance>7</frameSystemDistance>
+    <frameSystemDistance>0</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -28,6 +28,7 @@
     <timesigLeftMargin>0.5</timesigLeftMargin>
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.05</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
@@ -76,6 +77,7 @@
     <slurGateTime>90</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
@@ -103,6 +105,7 @@
         <key tick="0" idx="-1"/>
         </keylist>
       <bracket type="1" span="2"/>
+      <barLineSpan>2</barLineSpan>
       </Staff>
     <Staff>
       <cleflist>
@@ -126,9 +129,12 @@
   <Staff id="1">
     <VBox>
       <height>10</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -138,7 +144,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -148,7 +153,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -161,15 +165,14 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
-        <offset x="-0.594152" y="-1.93099"/>
-        <track>-1</track>
+        <offset x="0.117259" y="0.203243"/>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;"><span style=" font-family:'MScore1';"> </span>=80</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;"><span style=" font-family:'MScore1'; font-size:14pt;"></span><span style=" font-size:14pt;"> = 80</span></p></body></html>
           </html-data>
         </Tempo>
       <KeySig>
@@ -323,7 +326,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="6">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="6">
         </Beam>
@@ -531,7 +533,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="12">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>240</ticklen>
@@ -680,7 +681,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="18">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="16">
         </Beam>
@@ -773,7 +773,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="23">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="18">
         </Beam>
@@ -947,7 +946,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="23">
         </Beam>
@@ -1121,7 +1119,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="33">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="28">
         </Beam>
@@ -1288,7 +1285,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="38">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="33">
         </Beam>
@@ -1428,7 +1424,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="38">
         </Beam>
@@ -1576,7 +1571,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="48">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="43">
         </Beam>
@@ -2986,5 +2980,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

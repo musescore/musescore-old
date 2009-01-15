@@ -68,6 +68,7 @@ class Harmony;
 struct Channel;
 class Tuplet;
 class Capella;
+class CapVoice;
 
 struct Style;
 struct SigEvent;
@@ -262,6 +263,7 @@ class Score : public QObject {
 
       void convertMidi(MidiFile*, int);
       void convertCapella(Capella* cap);
+      int readCapVoice(CapVoice* cvoice, int staffIdx, int tick);
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
 
