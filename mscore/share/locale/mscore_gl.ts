@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS version="1.1" language="gl">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -36,14 +35,14 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades da articulación...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Propiedades</translation>
+        <translation>MuseScore: Propiedades das articulacións</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -880,7 +879,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dots:</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntillos:</translation>
     </message>
 </context>
 <context>
@@ -1012,43 +1011,43 @@ fallou:</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished">Atallo</translation>
+        <translation>Atallo</translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atallo:</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>si</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">sol</translation>
+        <translation>sol</translation>
     </message>
     <message>
         <source>--</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -1449,23 +1448,23 @@ fallou:</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Sistema</translation>
+        <translation>Sistema</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia das chaves ao sistema:</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Largura mínima dos compases:</translation>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número mínimo de compases baleiros:</translation>
     </message>
     <message>
         <source>begin repeat left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>marxe esquerda dos comezos das repeticións</translation>
     </message>
 </context>
 <context>
@@ -2316,7 +2315,7 @@ fallou:</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
+        <translation>rachar compás de espera</translation>
     </message>
 </context>
 <context>
@@ -4440,120 +4439,121 @@ fallou:</translation>
     </message>
     <message>
         <source>reset positions</source>
-        <translation type="unfinished"></translation>
+        <translation>reiniciar as posicións</translation>
     </message>
     <message>
         <source>no score</source>
-        <translation type="unfinished"></translation>
+        <translation>non hai partitura</translation>
     </message>
     <message>
         <source>show inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar o inspector</translation>
     </message>
     <message>
         <source>Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspector</translation>
     </message>
     <message>
         <source>file reload</source>
-        <translation type="unfinished"></translation>
+        <translation>volver a cargar o ficheiro</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Recargar</translation>
     </message>
     <message>
         <source>Reload Score from File</source>
-        <translation type="unfinished"></translation>
+        <translation>Recargar a partitura desde o ficheiro</translation>
     </message>
     <message>
         <source>note breve</source>
-        <translation type="unfinished"></translation>
+        <translation>cadrada</translation>
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>desfacer o ancheamento do compás</translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation type="unfinished"></translation>
+        <translation>longa</translation>
     </message>
     <message>
         <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar os cambios feitos na partitura
+&quot;%1&quot; antes de fechar?</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova...</translation>
     </message>
     <message>
         <source>Longa</source>
-        <translation type="unfinished"></translation>
+        <translation>Longa</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadrada</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Redonda</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
+        <translation>Branca</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
+        <translation>Negra</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Corchea</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Semicorchea</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusa</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Semifusa</translation>
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntillo</translation>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>dobre puntillo</translation>
     </message>
     <message>
         <source>Double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble puntillo</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished">Notas</translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <source>NoteHeads</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <source>show invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar o invisíbel</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar as molduras</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar as molduras</translation>
     </message>
 </context>
 <context>
@@ -4733,19 +4733,19 @@ before closing?</source>
     </message>
     <message>
         <source>Subelements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Subelementos:</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal S</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Acochado</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuario-Acc</translation>
     </message>
 </context>
 <context>
@@ -4864,62 +4864,62 @@ before closing?</source>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar a paleta</translation>
     </message>
     <message>
         <source>Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades da paleta</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir unha paleta nova</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir a paleta</translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixar a paleta</translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar a edición</translation>
     </message>
 </context>
 <context>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Propiedades da paleta</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño das celas:</translation>
     </message>
     <message>
         <source>w:</source>
-        <translation type="unfinished"></translation>
+        <translation>lar.:</translation>
     </message>
     <message>
         <source>h:</source>
-        <translation type="unfinished"></translation>
+        <translation>alt.:</translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar unha grella</translation>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Separación dos elementos</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala:</translation>
     </message>
 </context>
 <context>
@@ -4982,7 +4982,7 @@ before closing?</source>
     </message>
     <message>
         <source>drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>batería</translation>
     </message>
 </context>
 <context>
@@ -5100,7 +5100,7 @@ before closing?</source>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiros SoundFont (*.sf2 *.SF2);;Todos (*)</translation>
     </message>
 </context>
 <context>
@@ -5547,87 +5547,87 @@ before closing?</source>
     </message>
     <message>
         <source>cz Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>cz Checo</translation>
     </message>
     <message>
         <source>start empty</source>
-        <translation type="unfinished"></translation>
+        <translation>comezar en branco</translation>
     </message>
     <message>
         <source>gl Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>gl Galician</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Autocorrection</source>
-        <translation type="unfinished"></translation>
+        <translation>Autocorrección</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <source>Replace 1/2 ... with &#xbd; ...</source>
+        <translation>Substituir 1/2 ... por ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
+        <translation>Substituir (C) ... por © ... no texto con copyright</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores dos elementos da partitura</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondo por omisión</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Voz 1</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Voz 2</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Voz 3</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Voz 4</translation>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Destino de soltar</translation>
     </message>
     <message>
         <source>tr Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>tr Turquía</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished">Partitura</translation>
+        <translation>Partitura</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño do papel por omisión</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation type="unfinished">Dúas caras</translation>
+        <translation>Dúas caras</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Apaisada</translation>
+        <translation>Apaisado</translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>hi_IN Hindi</translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>pt_BR Portugués do Brasil</translation>
     </message>
 </context>
 <context>
@@ -5640,23 +5640,27 @@ before closing?</source>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai nengunha nota seleccionada:
+Seleccione unha nota e tente a operación de novo</translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Non se seleccionou nengunha nota ou silencio:
+Seleccione unha nota ou silencio e tente a operación de novo</translation>
     </message>
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione unha nota ou ligadura e tente a operación de novo
+</translation>
     </message>
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione un ou máis pentagramas e tente a operación de novo
+</translation>
     </message>
 </context>
 <context>
@@ -5695,7 +5699,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Fallou a carga das paletas:</translation>
     </message>
 </context>
 <context>
@@ -5925,7 +5929,7 @@ fallou:</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro PostScript (*.ps)</translation>
     </message>
 </context>
 <context>
@@ -6167,7 +6171,7 @@ fallou:</translation>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades do texto do pentagrama...</translation>
     </message>
 </context>
 <context>
@@ -6296,7 +6300,7 @@ fallou:</translation>
     <name>TextLineSegment</name>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades da liña...</translation>
     </message>
 </context>
 <context>
