@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS version="1.1" language="ms">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -4546,15 +4545,15 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>show invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>toon onzichtbaar</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation type="unfinished"></translation>
+        <translation>toon frames</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon Frames</translation>
     </message>
 </context>
 <context>
@@ -5564,11 +5563,11 @@ voor dat u afsluit?</translation>
         <translation>Automatischecorrectie</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
+        <source>Replace 1/2 ... with &#xbd; ...</source>
         <translation>Vervang 1/2 ... met ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
         <translation>Vervang (C) ... met © ... in Copyright Tekst</translation>
     </message>
     <message>
