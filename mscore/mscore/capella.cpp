@@ -33,6 +33,8 @@
 #include "utils.h"
 #include "lyrics.h"
 #include "timesig.h"
+#include "clef.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -79,16 +81,6 @@ void Capella::readTextObj()
       }
 
 //---------------------------------------------------------
-//   readSimpleTextObj
-//---------------------------------------------------------
-
-void Capella::readSimpleTextObj()
-      {
-      SimpleTextObj* txt = new SimpleTextObj(this);
-      txt->read();
-      }
-
-//---------------------------------------------------------
 //   SlurObj::read
 //---------------------------------------------------------
 
@@ -127,12 +119,24 @@ printf("read textObj len %d <%s>\n", size, txt);
 void SimpleTextObj::read()
       {
       BasicDrawObj::read();
-      relPos.setX(cap->readInt());
-      relPos.setY(cap->readInt());
-      align = cap->readByte();
-      font  = cap->readFont();
-      text  = cap->readString();
-      printf("read SimpletextObj <%s>\n", text);
+      relPos = cap->readPoint();
+      align  = cap->readByte();
+      font   = cap->readFont();
+      text   = cap->readString();
+      printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
+      }
+
+//---------------------------------------------------------
+//   LineObj::read
+//---------------------------------------------------------
+
+void LineObj::read()
+      {
+      BasicDrawObj::read();
+      pt1 = cap->readPoint();
+      pt2 = cap->readPoint();
+      color = cap->readColor();
+      lineWidth = cap->readByte();
       }
 
 //---------------------------------------------------------
@@ -146,30 +150,208 @@ void Capella::readSlurObj()
       }
 
 //---------------------------------------------------------
+//   BracketObj::read
+//---------------------------------------------------------
+
+void BracketObj::read()
+      {
+      LineObj::read();
+      orientation = cap->readByte();
+      number      = cap->readByte();
+      }
+
+//---------------------------------------------------------
+//   GroupObj::read
+//---------------------------------------------------------
+
+void GroupObj::read()
+      {
+      BasicDrawObj::read();
+      relPos = cap->readPoint();
+      objects = cap->readDrawObjectArray();
+      }
+
+//---------------------------------------------------------
+//   TransposableObj::read
+//---------------------------------------------------------
+
+void TransposableObj::read()
+      {
+      BasicDrawObj::read();
+      b = cap->readByte();
+      assert(b == 12 || b == 21);
+      variants = cap->readDrawObjectArray();
+      assert(variants.size() == b);
+      }
+
+//---------------------------------------------------------
+//   MetafileObj::read
+//---------------------------------------------------------
+
+void MetafileObj::read()
+      {
+      BasicDrawObj::read();
+      unsigned size = cap->readUnsigned();
+      char enhMetaFileBits[size];
+      cap->read(enhMetaFileBits, size);
+      }
+
+void RectEllipseObj::read()
+      {
+      /**/
+      abort();
+      }
+
+void PolygonObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+void WavyLineObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+void NotelinesObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+void VoltaObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+void GuitarObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+void TrillObj::read()
+      {
+      BasicDrawObj::read();
+      abort();
+      }
+
+//---------------------------------------------------------
 //   readDrawObjectArray
 //---------------------------------------------------------
 
-void Capella::readDrawObjectArray()
+QList<BasicDrawObj*> Capella::readDrawObjectArray()
       {
+      QList<BasicDrawObj*> ol;
       int n = readUnsigned();       // draw obj array
       for (int i = 0; i < n; ++i) {
             unsigned char type = readByte();
             switch (type) {
-                  case  3:
-                        readSimpleTextObj();
+                  case  0: {
+                        GroupObj* o = new GroupObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
                         break;
-                  case  4:
-                        readTextObj();
+                  case  1: {
+                        TransposableObj* o = new TransposableObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
                         break;
-                  case 9:
-                        readSlurObj();
+                  case  2: {
+                        MetafileObj* o = new MetafileObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  3: {
+                        SimpleTextObj* o = new SimpleTextObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  4: {
+                        TextObj* o = new TextObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  5: {
+                        RectEllipseObj* o = new RectEllipseObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case 6: {
+                        LineObj* o = new LineObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  7: {
+                        PolygonObj* o = new PolygonObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  8: {
+                        WavyLineObj* o = new WavyLineObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case 9: {
+                        SlurObj* o = new SlurObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  10: {
+                        NotelinesObj* o = new NotelinesObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case 11: {
+                        WedgeObj* o = new WedgeObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  12: {
+                        VoltaObj* o = new VoltaObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case 13: {
+                        BracketObj* o = new BracketObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  14: {
+                        GuitarObj* o = new GuitarObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
+                        break;
+                  case  15: {
+                        TrillObj* o = new TrillObj(this);
+                        o->read();
+                        ol.append(o);
+                        }
                         break;
                   default:
-printf("readDrawObjectArray type %d\n", type);
+printf("readDrawObjectArray bad type %d\n", type);
                         abort();
                         break;
                   }
             }
+      return ol;
       }
 
 //---------------------------------------------------------
@@ -474,8 +656,7 @@ char* Capella::readString()
       {
       unsigned len = readUnsigned();
       char* buffer = new char[len + 1];
-      curPos += len;
-      f->read(buffer, len);
+      read(buffer, len);
       buffer[len] = 0;
       return buffer;
       }
@@ -629,13 +810,15 @@ void Capella::readLayout()
             staves.append(sl);
             }
 
-      // Systemklammern:
+      // system brackets:
       unsigned n = readUnsigned();  // number of brackets
       for (unsigned int i = 0; i < n; i++) {
-            int from   = readInt();
-            int to     = readInt();
-            bool curly = readByte();
-            printf("Bracket%d %d-%d curly %d\n", i, from, to, curly);
+            CapBracket b;
+            b.from   = readInt();
+            b.to     = readInt();
+            b.curly = readByte();
+            printf("Bracket%d %d-%d curly %d\n", i, b.from, b.to, b.curly);
+            brackets.append(b);
             }
       }
 
@@ -664,6 +847,35 @@ printf("         Clef %s\n", name());
       }
 
 //---------------------------------------------------------
+//   clef
+//---------------------------------------------------------
+
+int CapClef::clef() const
+      {
+#if 0
+      enum FORM { FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
+                  FORM_NULL, CLEF_UNCHANGED
+                  };
+      enum LINE {LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
+      enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
+#endif
+      switch(form) {
+            case FORM_G:
+                  return CLEF_G;
+            case FORM_C:
+                  return CLEF_C2;
+            case FORM_F:
+                  return CLEF_F;
+            case FORM_PERCUSSION:
+                  return CLEF_PERC;
+            case FORM_NULL:
+            case CLEF_UNCHANGED:
+                  return -1;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
 //   CapKey::read
 //---------------------------------------------------------
 
@@ -685,6 +897,18 @@ void CapMeter::read()
       log2Denom       = (d & 0x7f) - 1;
       allaBreve       = d & 0x80;
 printf("         Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void WedgeObj::read()
+      {
+      LineObj::read();
+      char b = cap->readByte();
+      height = b & 0x7f;
+      decresc = b & 0x80;
       }
 
 //---------------------------------------------------------
@@ -720,6 +944,7 @@ printf("      Voice %d\n", idx);
             };
 
       CapVoice* v   = new CapVoice;
+      v->voiceNo    = idx;
       v->y0Lyrics   = readByte();
       v->dyLyrics   = readByte();
       v->lyricsFont = readFont();
@@ -801,7 +1026,6 @@ void Capella::readStaff(CapSystem* system)
       unsigned char d = readByte();
       staff->log2Denom = (d & 0x7f) - 1;
       staff->allaBreve = d & 0x80;
-printf("      Staff meter %d/%d allaBreve %d\n", staff->numerator, staff->log2Denom, staff->allaBreve);
 
       staff->iLayout = readByte();
       staff->topDistX = readInt();
@@ -809,6 +1033,7 @@ printf("      Staff meter %d/%d allaBreve %d\n", staff->numerator, staff->log2De
       staff->color = readColor();
       readExtra();
 
+printf("      Staff iLayout %d\n", staff->iLayout);
       // Stimmen
       unsigned nVoices = readUnsigned();
       for (unsigned i = 0; i < nVoices; i++)
@@ -875,6 +1100,17 @@ int BasicDurationalObj::ticks() const
             len += slen;
             }
       return len;
+      }
+
+//---------------------------------------------------------
+//   readPoint
+//---------------------------------------------------------
+
+QPoint Capella::readPoint()
+      {
+      int x = readInt();
+      int y = readInt();
+      return QPoint(x, y);
       }
 
 //---------------------------------------------------------
@@ -979,6 +1215,137 @@ bool Score::importCapella(const QString& name)
       }
 
 //---------------------------------------------------------
+//   readCapVoice
+//---------------------------------------------------------
+
+int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
+      {
+      int voice = cvoice->voiceNo;
+      foreach(NoteObj* no, cvoice->objects) {
+            switch(no->type()) {
+                  case T_REST:
+                        {
+                        Measure* m = getCreateMeasure(tick);
+                        RestObj* o = static_cast<RestObj*>(no);
+                        int ticks  = o->ticks();
+                        int ft     = m->tickLen();
+                        if (o->fullMeasures) {
+                              printf("full measure rests %d, invisible %d len %d %d\n",
+                                 o->fullMeasures, o->invisible, ticks, ft);
+                              ticks = ft * o->fullMeasures;
+                              if (!o->invisible) {
+                                    for (unsigned i = 0; i < o->fullMeasures; ++i) {
+                                          Measure* m = getCreateMeasure(tick + i * ft);
+                                          Segment* s = m->getSegment(Segment::SegChordRest, tick + i * ft);
+                                          Rest* rest = new Rest(this);
+                                          rest->setTick(tick + i * ft);
+                                          rest->setLen(0);
+                                          rest->setTrack(staffIdx * VOICES + voice);
+                                          s->add(rest);
+                                          }
+                                    }
+                              }
+                        if (!o->invisible) {
+                              Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                              Rest* rest = new Rest(this);
+                              rest->setTick(tick);
+                              rest->setLen(ticks);
+                              rest->setTrack(staffIdx * VOICES + voice);
+                              s->add(rest);
+                              }
+                        tick += ticks;
+                        }
+                        break;
+                  case T_CHORD:
+                        {
+                        ChordObj* o = static_cast<ChordObj*>(no);
+                        int ticks = o->ticks();
+                        Measure* m = getCreateMeasure(tick);
+                        Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                        Chord* chord = new Chord(this);
+                        chord->setTick(tick);
+                        chord->setLen(ticks);
+                        chord->setTrack(staffIdx * VOICES + voice);
+                        s->add(chord);
+                        int clef = staff(staffIdx)->clef(tick);
+                        int off  = clefTable[clef].yOffset;
+
+
+                        foreach(CNote n, o->notes) {
+                              Note* note = new Note(this);
+                              int step   = n.pitch + off + 7 * 7 - 4;
+                              int tpc    = step2tpc(step % 7, n.alteration);
+                              int oktave = step / 7;
+                              int pitch  = tpc2pitch(tpc) + oktave * 12;
+                              note->setPitch(pitch);
+                              note->setTpc(tpc);
+
+                              chord->add(note);
+                              }
+                        foreach(Verse v, o->verse) {
+                              Lyrics* l = new Lyrics(this);
+                              l->setTrack(staffIdx * VOICES + voice);
+                              l->setText(v.text);
+                              if (v.hyphen)
+                                    l->setSyllabic(Lyrics::BEGIN);
+                              l->setNo(v.num);
+                              s->add(l);
+                              }
+                        tick += ticks;
+                        }
+                        break;
+                  case T_CLEF:
+                        {
+                        CapClef* o = static_cast<CapClef*>(no);
+                        // printf("%d:%d <Clef> %s\n", tick, staffIdx, o->name());
+                        int clef = staff(staffIdx)->clef(tick);
+                        int nclef = o->clef();
+                        if (nclef == -1)
+                              break;
+                        if (nclef != clef) {
+                              staff(staffIdx)->setClef(tick, nclef);
+                              }
+                        }
+                        break;
+                  case T_KEY:
+                        {
+                        CapKey* o = static_cast<CapKey*>(no);
+                        // printf("%d:%d <Key> %d\n", tick, staffIdx, o->signature);
+                        int key = staff(staffIdx)->key(tick);
+                        if (key != o->signature)
+                              staff(staffIdx)->setKey(tick, o->signature);
+                        }
+                        break;
+                  case T_METER:
+                        {
+                        CapMeter* o = static_cast<CapMeter*>(no);
+                        if (o->log2Denom > 7)
+                              break;
+                        TimeSig* ts = new TimeSig(this);
+                        ts->setSig(1 << o->log2Denom, o->numerator);
+                        ts->setTick(tick);
+                        ts->setTrack(staffIdx * VOICES + voice);
+                        Measure* m = getCreateMeasure(tick);
+                        Segment* s = m->getSegment(Segment::SegTimeSig, tick);
+                        s->add(ts);
+                        SigEvent se = sigmap->timesig(tick);
+                        SigEvent ne(o->numerator, 1 << o->log2Denom);
+                        if (!(se == ne))
+                              sigmap->add(tick, ne);
+                        }
+                        break;
+                  case T_EXPL_BARLINE:
+                        printf("<Barline>\n");
+                        break;
+                  case T_PAGE_BKGR:
+                        printf("<PageBreak>\n");
+                        break;
+                  }
+            }
+      return tick;
+      }
+
+//---------------------------------------------------------
 //   convertCapella
 //---------------------------------------------------------
 
@@ -989,7 +1356,8 @@ void Score::convertCapella(Capella* cap)
 
       int staves   = cap->systems[0]->staves.size();
       CapStaff* cs = cap->systems[0]->staves[0];
-      sigmap->add(0, cs->numerator, 1 << cs->log2Denom);
+      if (cs->log2Denom <= 7)
+            sigmap->add(0, cs->numerator, 1 << cs->log2Denom);
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
@@ -997,93 +1365,26 @@ void Score::convertCapella(Capella* cap)
             part->insertStaff(s);
             _staves.push_back(s);
             }
-      int tick = 0;
+      foreach(CapBracket cb, cap->brackets) {
+            Staff* staff = _staves.value(cb.from);
+            if (staff == 0) {
+                  printf("bad bracket 'from' value\n");
+                  continue;
+                  }
+            staff->setBracket(0, cb.curly ? 1 : 0);
+            staff->setBracketSpan(0, cb.to - cb.from + 1);
+            }
+      int mtick = 0;
       foreach(CapSystem* csys, cap->systems) {
-            int oldTick = tick;
+            int oldTick  = mtick;
             int staffIdx = 0;
             foreach(CapStaff* cstaff, csys->staves) {
-                  tick = oldTick;
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {
-                        foreach(NoteObj* no, cvoice->objects) {
-                              switch(no->type()) {
-                                    case T_REST:
-                                          {
-                                          RestObj* o = static_cast<RestObj*>(no);
-                                          int ticks = o->ticks();
-                                          if (!o->invisible) {
-                                                Measure* m = getCreateMeasure(tick);
-                                                Segment* s = m->getSegment(Segment::SegChordRest, tick);
-                                                Rest* rest = new Rest(this);
-                                                rest->setTick(tick);
-                                                rest->setLen(ticks);
-                                                rest->setTrack(staffIdx * VOICES + voice);
-                                                s->add(rest);
-                                                }
-                                          tick += ticks;
-                                          }
-                                          break;
-                                    case T_CHORD:
-                                          {
-                                          ChordObj* o = static_cast<ChordObj*>(no);
-                                          int ticks = o->ticks();
-                                          Measure* m = getCreateMeasure(tick);
-                                          Segment* s = m->getSegment(Segment::SegChordRest, tick);
-                                          Chord* chord = new Chord(this);
-                                          chord->setTick(tick);
-                                          chord->setLen(ticks);
-                                          chord->setTrack(staffIdx * VOICES + voice);
-                                          s->add(chord);
-                                          foreach(CNote n, o->notes) {
-                                                Note* note = new Note(this);
-                                                int pitch = line2pitch(-n.pitch, 0, 0);
-                                                note->setPitch(pitch);
-
-                                                chord->add(note);
-                                                }
-                                          foreach(Verse v, o->verse) {
-                                                Lyrics* l = new Lyrics(this);
-                                                l->setTrack(staffIdx * VOICES + voice);
-                                                l->setText(v.text);
-                                                if (v.hyphen)
-                                                      l->setSyllabic(Lyrics::BEGIN);
-                                                l->setNo(v.num);
-                                                s->add(l);
-                                                }
-                                          tick += ticks;
-                                          }
-                                          break;
-                                    case T_CLEF:
-                                          {
-                                          CapClef* o = static_cast<CapClef*>(no);
-                                          printf("%d:%d <Clef> %s\n", tick, staffIdx, o->name());
-                                          }
-                                          break;
-                                    case T_KEY:
-                                          printf("%d:%d <Key>\n", tick, staffIdx);
-                                          break;
-                                    case T_METER:
-                                          {
-                                          CapMeter* o = static_cast<CapMeter*>(no);
-                                          TimeSig* ts = new TimeSig(this);
-                                          ts->setSig(1 << o->log2Denom, o->numerator);
-                                          ts->setTick(tick);
-                                          ts->setTrack(staffIdx * VOICES + voice);
-                                          Measure* m = getCreateMeasure(tick);
-                                          Segment* s = m->getSegment(Segment::SegTimeSig, tick);
-                                          s->add(ts);
-                                          // TODO: update sigmap
-                                          }
-                                          break;
-                                    case T_EXPL_BARLINE:
-                                          printf("<Barline>\n");
-                                          break;
-                                    case T_PAGE_BKGR:
-                                          printf("<PageBreak>\n");
-                                          break;
-                                    }
-                              }
+                        int tick = readCapVoice(cvoice, staffIdx, oldTick);
                         ++voice;
+                        if (tick > mtick)
+                              mtick = tick;
                         }
                   ++staffIdx;
                   }

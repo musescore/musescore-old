@@ -44,7 +44,7 @@ int ticks_measure(int z, int n)
       {
       int m = (division * 4 * z) / n;
       if ((division * 4 * z) % n) {
-            fprintf(stderr, "Mscore: ticks_measure(): bad divisor %d\n", n);
+            fprintf(stderr, "Mscore: ticks_measure(%d, %d): bad divisor\n", z, n);
             abort();
             }
       return m;
