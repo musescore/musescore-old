@@ -1,5 +1,7 @@
 15.jan (tb)
       - updating Dutch and Galician translation by Jaap Plaisier and Xosé
+       (la)
+       - respect harmony graphical order in musicXML export
 14.jan (ws)
       - fix measure number layout
       (db)

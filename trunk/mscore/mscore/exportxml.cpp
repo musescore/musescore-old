@@ -2094,6 +2094,16 @@ void ExportMusicXml::work(const MeasureBase* measure)
             }
       }
 
+
+//---------------------------------------------------------
+//   elementRighter // used for harmony order
+//---------------------------------------------------------
+
+static bool elementRighter(const Element* e1, const Element* e2)
+      {
+      return e1->x() < e2->x();
+      }
+
 //---------------------------------------------------------
 //  write
 //---------------------------------------------------------
@@ -2398,14 +2408,22 @@ foreach(Element* el, *(score->gel())) {
 
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
-                                    foreach(Element* he, *m->el()) {
+                            	  QList<Element*> list;
+
+                            	  foreach(Element* he, *m->el()) {
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
                                              && (he->tick() == el->tick())) {
-                                                attr.doAttr(xml, false);
-                                                harmony((Harmony*)he);
+                                                 list << he;
                                                 }
                                           }
-                                    }
+
+								  qSort(list.begin(), list.end(), elementRighter);
+
+								  foreach (Element* hhe, list){
+								        attr.doAttr(xml, false);
+									    harmony((Harmony*)hhe);
+									 }
+							       }
 
                               if (tick != el->tick()) {
                                     attr.doAttr(xml, false);
