@@ -2516,8 +2516,10 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       // type:
 
       // placement:
-      // double rx = e.attribute("relative-x", "0").toDouble();
-      // double dy = e.attribute("default-y", "0").toDouble();
+      double rx = e.attribute("relative-x", "0").toDouble()*0.1;
+      double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
+
+      //double dy = e.attribute("default-y", "0").toDouble()*-0.1;
 
       QString printObject(e.attribute("print-object", "yes"));
       QString printFrame(e.attribute("print-frame"));
@@ -2527,7 +2529,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       QList<HDegree> degreeList;
 
       Harmony* ha = new Harmony(measure->score());
-
+      ha->setUserOff(QPointF(rx, ry));
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "root") {
