@@ -51,7 +51,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             printf("Load plugin <%s>: line %d: %s\n",
                qPrintable(pluginPath),
                se.uncaughtExceptionLineNumber(),
-               qPrintable(sv.toString())
+               qPrintable(sv.toString()));
 #endif
             QMessageBox::critical(0, "MuseScore Error",
                QString("Error loading plugin\n"

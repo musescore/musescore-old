@@ -35,7 +35,6 @@ Ottava::Ottava(Score* s)
    : TextLine(s)
       {
       setSubtype(0);
-      setLen(_spatium * 7);   // for use in palettes
       }
 
 //---------------------------------------------------------
@@ -76,6 +75,5 @@ void Ottava::setSubtype(int val)
 
 LineSegment* Ottava::createLineSegment()
       {
-      LineSegment* seg = new OttavaSegment(score());
-      return seg;
+      return new OttavaSegment(score());
       }

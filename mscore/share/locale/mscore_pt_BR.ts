@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1984,32 +2005,8 @@ failed: </source>
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Texto:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Frame</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Encaixado</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Circulado</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Frame:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Margem:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2056,12 +2053,36 @@ failed: </source>
         <translation>Cima</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Baixo</translation>
+        <source>Begin</source>
+        <translation type="unfinished">Início</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Altura</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished">Fim</translation>
     </message>
 </context>
 <context>
@@ -4689,10 +4710,6 @@ before closing?</source>
         <translation>Indíce de cabeças</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Dedilhação</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation>TPC</translation>
     </message>
@@ -5563,14 +5580,6 @@ before closing?</source>
         <translation>Autocorreção</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>Corrigir 1/2 ... com ½ ...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Corrigir (C) ... com © ... no texto de Direitos autorais</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Cor dos elementos da partituras</translation>
     </message>
@@ -5625,6 +5634,14 @@ before closing?</source>
     <message>
         <source>Landscape</source>
         <translation type="unfinished">Paisagem</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5693,6 +5710,18 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Carregar Paletas falhou</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
