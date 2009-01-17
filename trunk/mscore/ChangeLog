@@ -1,4 +1,13 @@
-16.jan (db)
+17.jan (ws)
+      - extended TextLine properties
+16.jan (ws)
+      - derive Pedal() from TextLine() which now allows editing of
+        several properties for pedal line element
+      - extend text line: allow symbol instead of text
+      - text line: text and line are now treated as one object; this effects
+        selection and dragging
+      - text style changes for chord names are now immediatly applied
+      (db)
       - Corrected barline span for templates with piano
 15.jan (tb)
       - updating Dutch and Galician translation by Jaap Plaisier and Xosé
@@ -438,8 +447,8 @@
       - added chords aug7, aug9, aug13 as alternatives for 7+, 9+, 13+
 26.10 (olavgun)
       - Lilypond export: Better procedure to find correct octave.
-      - Lilypond export: Complete separation of voices for recombination in 
-        scoreblock, for easier hand-editing of lilypond-file: unresolved issue: 
+      - Lilypond export: Complete separation of voices for recombination in
+        scoreblock, for easier hand-editing of lilypond-file: unresolved issue:
         prints voices to lilypond-file even if empty. No visual consequences.
 25.10 (ws)
       - fix crash when last measure has a volta and is followed by a horizontal

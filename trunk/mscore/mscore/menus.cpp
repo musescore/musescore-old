@@ -297,12 +297,14 @@ void MuseScore::showPalette(bool visible)
             sp->append(trill, tr("trill line"));
 
             TextLine* textLine = new TextLine(gscore);
-            textLine->setText("VII");
+            textLine->setBeginText("VII");
+            textLine->setHasBeginText(true);
+            textLine->setEndHook(true);
+            textLine->setEndHookHeight(Spatium(1.5));
+
             sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
-            line->setHasText(false);
-            line->setHook(false);
             sp->append(line, tr("line"));
 
             paletteBox->addPalette(sp);
@@ -1030,14 +1032,16 @@ void MuseScore::lineMenu()
             sp->append(trill, tr("trill line"));
 
             TextLine* textLine = new TextLine(gscore);
-            textLine->setText("VII");
+            textLine->setBeginText("VII");
             textLine->setLen(l);
             sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
             line->setLen(l);
-            line->setHasText(false);
-            line->setHook(false);
+            line->setHasBeginText(false);
+            line->setHasContinueText(false);
+            line->setBeginHook(false);
+            line->setEndHook(false);
             sp->append(line, tr("line"));
             }
       linePalette->show();

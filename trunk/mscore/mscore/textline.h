@@ -43,10 +43,12 @@ class TextLineSegment : public LineSegment {
       TextLine* textLine() const             { return (TextLine*)parent(); }
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
-      void collectElements(QList<const Element*>& el) const;
+
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void layout(ScoreLayout*);
+      virtual void setSelected(bool f);
+
       TextC* text() const { return _text; }
 
       virtual bool genPropertyMenu(QMenu*) const;
@@ -59,53 +61,73 @@ class TextLineSegment : public LineSegment {
 //---------------------------------------------------------
 
 class TextLine : public SLine {
-      Spatium _hookHeight;
       Spatium _lineWidth;
-      Qt::PenStyle _lineStyle;
-      bool _hookUp;
-      bool _hook;
       QColor _lineColor;
-      bool _hasText;
+      Qt::PenStyle _lineStyle;
+
+      bool _beginHook, _endHook;
+      Spatium _beginHookHeight, _endHookHeight;
+
+      bool _hasBeginText, _hasContinueText;
+
+      int _beginSymbol, _continueSymbol, _endSymbol;  // -1: no symbol
+      QPointF _beginSymbolOffset, _continueSymbolOffset, _endSymbolOffset;
+
       int _mxmlOff2;
 
    protected:
-      TextBase* _text;
+      TextBase* _beginText;
+      TextBase* _continueText;
       friend class TextLineSegment;
 
    public:
       TextLine(Score* s);
       TextLine(const TextLine&);
-      ~TextLine();
+      ~TextLine() {}
+
       virtual TextLine* clone() const      { return new TextLine(*this); }
       virtual ElementType type() const     { return TEXTLINE; }
-      virtual void layout(ScoreLayout*);
       virtual LineSegment* createLineSegment();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      void setText(const QString& s)       { _text->setText(s, 0);    }
-      QString text() const                 { return _text->getText(); }
-      void setHtml(const QString& s)       { _text->setHtml(s);       }
-      QString getHtml() const              { return _text->getHtml(); }
-      TextBase** textBasePtr()             { return &_text;           }
-      TextBase*  textBase()                { return _text;            }
-      void setTextBase(TextBase* b)        { _text = b;               }
-      Spatium hookHeight() const           { return _hookHeight;      }
-      void setHookHeight(const Spatium& v) { _hookHeight = v;         }
-      Spatium lineWidth() const            { return _lineWidth;       }
-      void setLineWidth(const Spatium& v)  { _lineWidth = v;          }
-      Qt::PenStyle lineStyle() const       { return _lineStyle;       }
-      void setLineStyle(Qt::PenStyle v)    { _lineStyle = v;          }
-      bool hookUp() const                  { return _hookUp;          }
-      void setHookUp(bool v)               { _hookUp = v;             }
-      QColor lineColor() const             { return _lineColor;       }
-      void setLineColor(const QColor& c)   { _lineColor = c;          }
-      bool hook() const                    { return _hook;            }
-      void setHook(bool v)                 { _hook = v;               }
-      bool hasText() const                 { return _hasText;         }
-      void setHasText(bool v)              { _hasText = v;            }
-      int mxmlOff2() const                 { return _mxmlOff2;        }
-      void setMxmlOff2(int o)              { _mxmlOff2 = o;           }
+      bool hasBeginText() const               { return _hasBeginText;         }
+      void setHasBeginText(bool v)            { _hasBeginText = v;            }
+      bool hasContinueText() const            { return _hasContinueText;      }
+      void setHasContinueText(bool v)         { _hasContinueText = v;         }
+      void setBeginText(const QString& s)     { _beginText->setText(s, 0);    }
+      QString beginText() const               { return _beginText->getText(); }
+      bool beginHook() const                  { return _beginHook;            }
+      bool endHook() const                    { return _endHook;              }
+      void setBeginHook(bool v)               { _beginHook = v;               }
+      void setEndHook(bool v)                 { _endHook = v;                 }
+      TextBase* beginTextBase() const         { return _beginText;            }
+      TextBase* continueTextBase() const      { return _continueText;         }
+      TextBase** beginTextBasePtr()           { return &_beginText;           }
+      TextBase** continueTextBasePtr()        { return &_continueText;        }
+      void setBeginSymbol(int v)              { _beginSymbol = v;             }
+      void setContinueSymbol(int v)           { _continueSymbol = v;          }
+      void setEndSymbol(int v)                { _endSymbol = v;               }
+      void setBeginHookHeight(Spatium v)      { _beginHookHeight = v;         }
+      void setEndHookHeight(Spatium v)        { _endHookHeight = v;           }
+      Spatium beginHookHeight() const         { return _beginHookHeight;      }
+      Spatium endHookHeight() const           { return _endHookHeight;        }
+
+      Spatium lineWidth() const               { return _lineWidth;            }
+      QColor lineColor() const                { return _lineColor;            }
+      Qt::PenStyle lineStyle() const          { return _lineStyle;            }
+      void setLineWidth(const Spatium& v)     { _lineWidth = v;               }
+      void setLineColor(const QColor& v)      { _lineColor = v;               }
+      void setLineStyle(Qt::PenStyle v)       { _lineStyle = v;               }
+      int beginSymbol() const                 { return _beginSymbol;          }
+      int continueSymbol() const              { return _continueSymbol;       }
+      int endSymbol() const                   { return _endSymbol;            }
+      QPointF beginSymbolOffset() const       { return _beginSymbolOffset;    }
+      QPointF continueSymbolOffset() const    { return _continueSymbolOffset; }
+      QPointF endSymbolOffset() const         { return _endSymbolOffset;      }
+      void setBeginSymbolOffset(QPointF v)    { _beginSymbolOffset = v;       }
+      void setContinueSymbolOffset(QPointF v) { _continueSymbolOffset = v;    }
+      void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
       };
 
 //---------------------------------------------------------
@@ -119,6 +141,12 @@ class LineProperties : public QDialog, public Ui::LinePropertiesDialog {
 
    public slots:
       virtual void accept();
+      void beginTextClicked();
+      void continueTextClicked();
+      void beginTextToggled(bool);
+      void beginSymbolToggled(bool);
+      void continueTextToggled(bool);
+      void continueSymbolToggled(bool);
 
    public:
       LineProperties(TextLine*, QWidget* parent = 0);

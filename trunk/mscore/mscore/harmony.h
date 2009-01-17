@@ -140,6 +140,7 @@ class Harmony : public Text {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+      virtual void layout(ScoreLayout*);
 
       virtual void endEdit();
 

@@ -1437,6 +1437,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         bracket[n] = 0;
                         }
                   else {
+#if 0 // TODO
                         b = new TextLine(score);
 
                         // what does placement affect?
@@ -1465,6 +1466,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         b->setTrack((staff + rstaff) * VOICES);
                         b->setTick(tick);
                         bracket[n] = b;
+#endif
                         }
                   }
             else if (type == "stop") {
@@ -1472,6 +1474,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("bracket stop without start, number %d\n", number);
                         }
                   else {
+#if 0 // TODO
                         b->setTick2(tick);
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         QPointF userOff = b->userOff();
@@ -1503,6 +1506,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               b->setHookHeight(Spatium(endLength));
                         score->layout()->add(b);
                         bracket[n] = 0;
+#endif
                         }
                   }
             }

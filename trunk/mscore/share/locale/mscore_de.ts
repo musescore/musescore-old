@@ -2055,7 +2055,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation>Fähnchen</translation>
+        <translation>Haken</translation>
     </message>
     <message>
         <source>Up</source>

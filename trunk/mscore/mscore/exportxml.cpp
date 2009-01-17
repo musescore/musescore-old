@@ -1714,6 +1714,8 @@ int ExportMusicXml::findBracket(const TextLine* tl) const
 
 void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       {
+#if 0       // TODO
+
       QString rest;
       QPointF p;
 
@@ -1779,6 +1781,8 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       if (staff)
             xml.tag("staff", staff);
       xml.etag();
+#endif
+
       }
 
 //---------------------------------------------------------
