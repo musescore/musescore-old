@@ -128,6 +128,8 @@ class TextLine : public SLine {
       void setBeginSymbolOffset(QPointF v)    { _beginSymbolOffset = v;       }
       void setContinueSymbolOffset(QPointF v) { _continueSymbolOffset = v;    }
       void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
+      void setMxmlOff2(int v)                 { _mxmlOff2 = v;                }
+      int mxmlOff2() const                    { return _mxmlOff2;             }
       };
 
 //---------------------------------------------------------

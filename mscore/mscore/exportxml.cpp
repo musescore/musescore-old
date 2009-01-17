@@ -1714,8 +1714,6 @@ int ExportMusicXml::findBracket(const TextLine* tl) const
 
 void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       {
-#if 0       // TODO
-
       QString rest;
       QPointF p;
 
@@ -1744,9 +1742,16 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
             type = "start";
             }
       else {
-            if (tl->hook()) {
-                  lineEnd = tl->hookUp() ? "up" : "down";
-                  rest += QString(" end-length=\"%1\"").arg(tl->hookHeight().val() * 10);
+            if (tl->endHook()) {
+                  double h = tl->endHookHeight().val();
+                  if (h < 0.0) {
+                        lineEnd = "up";
+                        h *= -1.0;
+                        }
+                  else {
+                        lineEnd = "down";
+                        }
+                  rest += QString(" end-length=\"%1\"").arg(h * 10);
                   }
             p = tl->lineSegments().last()->userOff2();
             offs = tl->mxmlOff2();
@@ -1768,9 +1773,9 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
 
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((p.y() > 0.0) ? "below" : "above"));
-      if (tl->hasText()) {
+      if (tl->hasBeginText()) {
             xml.stag("direction-type");
-            xml.tag("words", tl->text());
+            xml.tag("words", tl->beginText());
             xml.etag();
             }
       xml.stag("direction-type");
@@ -1781,8 +1786,6 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
       if (staff)
             xml.tag("staff", staff);
       xml.etag();
-#endif
-
       }
 
 //---------------------------------------------------------

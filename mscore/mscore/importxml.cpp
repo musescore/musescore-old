@@ -1437,7 +1437,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         bracket[n] = 0;
                         }
                   else {
-#if 0 // TODO
                         b = new TextLine(score);
 
                         // what does placement affect?
@@ -1450,9 +1449,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 
                         // hack: assume there was a words element before the bracket
                         if (!txt.isEmpty()) {
-                              b->setText(txt);
+                              b->setBeginText(txt);
                               }
-                        b->setHasText(!txt.isEmpty());
+                        b->setHasBeginText(!txt.isEmpty());
 
                         if (lineType == "solid")
                               b->setLineStyle(Qt::SolidLine);
@@ -1466,7 +1465,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         b->setTrack((staff + rstaff) * VOICES);
                         b->setTick(tick);
                         bracket[n] = b;
-#endif
                         }
                   }
             else if (type == "stop") {
@@ -1474,7 +1472,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("bracket stop without start, number %d\n", number);
                         }
                   else {
-#if 0 // TODO
                         b->setTick2(tick);
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         QPointF userOff = b->userOff();
@@ -1488,25 +1485,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         //yoffset += (placement == "above" ? 0.0 : 5.0);
                         ls1->setUserOff(userOff);
                         ls2->setUserOff2(QPointF(rx + xoffset, ry + yoffset));
-                        if (lineEnd == "up") {
-                              b->setHook(true);
-                              b->setHookUp(true);
-                              }
-                        else if (lineEnd == "down") {
-                              b->setHook(true);
-                              b->setHookUp(false);
-                              }
-                        else if (lineEnd == "none") {
-                              b->setHook(false);
-                              }
-                        else {
-                              printf("unsupported line-end type: %s\n", lineEnd.toLatin1().data());
-                              }
+                        b->setEndHook(lineEnd != "none");
                         if (endLength != 0)
-                              b->setHookHeight(Spatium(endLength));
+                              b->setEndHookHeight(Spatium(lineEnd == "up" ? endLength : -endLength));
                         score->layout()->add(b);
                         bracket[n] = 0;
-#endif
                         }
                   }
             }
