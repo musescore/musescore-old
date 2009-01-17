@@ -422,7 +422,6 @@ bool Element::readProperties(QDomElement e)
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
-//      setTrack(score()->curTrack);
 
       if (tag == "tick") {
             setTick(score()->fileDivision(i));
