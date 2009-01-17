@@ -28,6 +28,7 @@
     <timesigLeftMargin>0.5</timesigLeftMargin>
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.4</minNoteDistance>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
@@ -68,12 +69,15 @@
     <smallClefMag>0.8</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <minEmptyMeasures>2</minEmptyMeasures>
+    <minMMRestWidth>4</minMMRestWidth>
     <gateTime>85</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>50</staccatoGateTime>
     <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
   <page-layout>
     <page-margins type="both">
       <left-margin>56.6929</left-margin>
@@ -231,6 +235,7 @@ p, li { white-space: pre-wrap; }
         <key tick="0" idx="0"/>
         </keylist>
       <bracket type="1" span="4"/>
+      <barLineSpan>2</barLineSpan>
       </Staff>
     <Staff>
       <cleflist>
@@ -328,7 +333,9 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -396,7 +403,9 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="3">
@@ -464,7 +473,9 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="4">
@@ -532,7 +543,9 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="5">
@@ -600,7 +613,9 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="6">
@@ -668,8 +683,10 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
+      <BarLine>
+        <tick>23040</tick>
+        </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>16</cursorTrack>
   </museScore>
