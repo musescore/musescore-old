@@ -74,8 +74,8 @@ class LineSegment : public Element {
 
 //---------------------------------------------------------
 //   SLine
-//    virtual base class for Ottava, Pedal, Hairpin and
-//    Trill
+//    virtual base class for Ottava, Pedal, Hairpin,
+//    Trill and TextLine
 //---------------------------------------------------------
 
 class SLine : public Element {

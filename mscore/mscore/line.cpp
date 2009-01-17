@@ -175,7 +175,7 @@ void LineSegment::editDrag(int curGrip, const QPointF& d)
 
       if (line()->type() == TEXTLINE) {
             TextLine* tl = static_cast<TextLine*>(line());
-            if (!tl->hasText())
+            if (!tl->hasBeginText())
                   delta.setY(d.y() / _spatium);
             }
 
@@ -415,7 +415,8 @@ bool SLine::readProperties(QDomElement e)
             delete seg;
       segments.clear();
 
-      setTick(-1);
+      // setTick(-1);
+      setTick(0);
 
       if (Element::readProperties(e))
             return true;

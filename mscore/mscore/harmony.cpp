@@ -1129,4 +1129,13 @@ printf("remove empty harmony %d\n", harmony->tick());
             }
       }
 
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Harmony::layout(ScoreLayout* l)
+      {
+      setSubtype(TEXT_CHORD);    // apply style changes
+      Text::layout(l);
+      }
 
