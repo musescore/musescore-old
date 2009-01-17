@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS version="1.1" language="de">
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1990,32 +2012,8 @@ fehlgeschlagen: </translation>
         <translation>Text</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Text:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Rahmen</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Kasten</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Kreis</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Rahmen:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation>sp</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Rand:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2062,12 +2060,36 @@ fehlgeschlagen: </translation>
         <translation>Hoch</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Tief</translation>
+        <source>Begin</source>
+        <translation>Anfang</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Höhe:</translation>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation>Symbol</translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation>Ped (Pedal)</translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Fortsetzung</translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation>Ende</translation>
     </message>
 </context>
 <context>
@@ -2319,7 +2341,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrtaktpause beenden</translation>
     </message>
 </context>
 <context>
@@ -4703,10 +4725,6 @@ before closing?</source>
         <translation>Kopf</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Fingersatz</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation>TPC</translation>
     </message>
@@ -5570,14 +5588,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <translation>Autokorrektur</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>1/2 ... durch ½ ... ersetzen</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>(C) ... durch © ... im Copyright Text ersetzen</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Farbe der Partiturelemente</translation>
     </message>
@@ -5632,6 +5642,14 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>pt_BR Brasilianisches Portugiesisch</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5706,6 +5724,18 @@ Bitte wählen sie eine Note oder Pause aus und versuchen es nochmal.
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Fehler beim Laden der Paletten:</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

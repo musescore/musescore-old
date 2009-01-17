@@ -1,6 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="ms">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1984,32 +2006,8 @@ failed: </source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Tekst:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kader</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Omkaderd</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Omcirkeld</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Kader:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marge:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2056,12 +2054,36 @@ failed: </source>
         <translation>Boven</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Onder</translation>
+        <source>Begin</source>
+        <translation type="unfinished">Begin</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Hoogte:</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished">Einde</translation>
     </message>
 </context>
 <context>
@@ -4693,10 +4715,6 @@ voor dat u afsluit?</translation>
         <translation>hoofd index</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Vingerzettingen</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation></translation>
     </message>
@@ -5563,14 +5581,6 @@ voor dat u afsluit?</translation>
         <translation>Automatischecorrectie</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with &#xbd; ...</source>
-        <translation>Vervang 1/2 ... met ½ ...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
-        <translation>Vervang (C) ... met © ... in Copyright Tekst</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>leeg blad</translation>
     </message>
@@ -5629,6 +5639,14 @@ voor dat u afsluit?</translation>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
         <translation></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5699,6 +5717,18 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Laden Paletten mislukt:</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

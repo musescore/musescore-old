@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1991,10 +2012,6 @@ failed: </source>
         <translation>Текст</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Текст:</translation>
-    </message>
-    <message>
         <source>dot</source>
         <translation>Точка</translation>
     </message>
@@ -2007,28 +2024,8 @@ failed: </source>
         <translation>MuseScore: Свойства линии</translation>
     </message>
     <message>
-        <source>Frame</source>
-        <translation>Рамка</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Рамка:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Поле:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2067,12 +2064,36 @@ failed: </source>
         <translation>Вверх</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Вниз</translation>
+        <source>Begin</source>
+        <translation type="unfinished">Начало</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Высота:</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished">Конец</translation>
     </message>
 </context>
 <context>
@@ -4752,10 +4773,6 @@ before closing?</source>
         <source>User-Acc</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Fingering</source>
-        <translation type="unfinished">Аппликатура</translation>
-    </message>
 </context>
 <context>
     <name>PageBase</name>
@@ -5575,14 +5592,6 @@ before closing?</source>
         <translation>Автозамена</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>Заменять 1/2 на ½</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Заменять (C) на © в уведомлении об авторских правах</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Цвета элементов партитуры</translation>
     </message>
@@ -5637,6 +5646,14 @@ before closing?</source>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>pt_BR Португальский (Бразилия)</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5705,6 +5722,18 @@ Please select a single note or rest and retry operation
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Не удалось загрузить палитры:</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="gl">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1986,32 +2008,8 @@ fallou:</translation>
         <translation>Texto</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Texto:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Moldura</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Rectángulo</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Círculo</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Moldura:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation>sp</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Marxe:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2058,12 +2056,36 @@ fallou:</translation>
         <translation>Arriba</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Abaixo</translation>
+        <source>Begin</source>
+        <translation type="unfinished">Comezo</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Altura:</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished">Fin</translation>
     </message>
 </context>
 <context>
@@ -4692,10 +4714,6 @@ before closing?</source>
         <translation>índice da cabeza</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Dixitación</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation>TPC</translation>
     </message>
@@ -5566,14 +5584,6 @@ before closing?</source>
         <translation>Autocorrección</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with &#xbd; ...</source>
-        <translation>Substituir 1/2 ... por ½ ...</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
-        <translation>Substituir (C) ... por © ... no texto con copyright</translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation>Cores dos elementos da partitura</translation>
     </message>
@@ -5628,6 +5638,14 @@ before closing?</source>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>pt_BR Portugués do Brasil</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5700,6 +5718,18 @@ Seleccione unha nota ou silencio e tente a operación de novo</translation>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Fallou a carga das paletas:</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

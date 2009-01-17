@@ -41,58 +41,24 @@ TextLineSegment::TextLineSegment(Score* s)
 TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
-      _text = 0;
+      _text = seg._text;
       }
+
+//---------------------------------------------------------
+//   setSelected
+//---------------------------------------------------------
 
 void TextLineSegment::setSelected(bool f)
       {
       Element::setSelected(f);
-      if (_text && textLine()->hasBeginText())
-            _text->setSelected(f);
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void TextLineSegment::add(Element*)
-      {
-#if 0  // TODO
-      if (e->type() != TEXT) {
-            printf("TextLineSegment: add illegal element\n");
-            return;
+      if (_text) {
+            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+                  if (textLine()->hasBeginText())
+                        _text->setSelected(f);
+                  }
+            else if (textLine()->hasContinueText())
+                  _text->setSelected(f);
             }
-      _text = (TextC*)e;
-      _text->setParent(this);
-      TextLine* tl = (TextLine*)line();
-
-      TextBase* tb = 0;
-      if (_text->otb()) {
-            tb = _text->otb();
-            _text->setOtb(0);
-            }
-      else {
-            tb = new TextBase(*tl->textBase());
-            }
-      tl->setTextBase(tb);
-      _text->baseChanged();
-#endif
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void TextLineSegment::remove(Element*)
-      {
-#if 0 // TODO
-      if (e != _text) {
-            printf("TextLineSegment: cannot remove %s %p %p\n", e->name(), e, _text);
-            return;
-            }
-      _text->setOtb(_text->textBase());
-      _text = 0;
-#endif
       }
 
 //---------------------------------------------------------
@@ -575,11 +541,19 @@ void LineProperties::continueTextClicked()
       printf("continueText...\n");
       }
 
+//---------------------------------------------------------
+//   beginTextToggled
+//---------------------------------------------------------
+
 void LineProperties::beginTextToggled(bool val)
       {
       if (val)
             beginSymbolRb->setChecked(false);
       }
+
+//---------------------------------------------------------
+//   beginSymbolToggled
+//---------------------------------------------------------
 
 void LineProperties::beginSymbolToggled(bool val)
       {
@@ -587,11 +561,19 @@ void LineProperties::beginSymbolToggled(bool val)
             beginTextRb->setChecked(false);
       }
 
+//---------------------------------------------------------
+//   continueTextToggled
+//---------------------------------------------------------
+
 void LineProperties::continueTextToggled(bool val)
       {
       if (val)
             continueSymbolRb->setChecked(false);
       }
+
+//---------------------------------------------------------
+//   continueSymbolToggled
+//---------------------------------------------------------
 
 void LineProperties::continueSymbolToggled(bool val)
       {

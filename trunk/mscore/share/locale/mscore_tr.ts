@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1990,32 +2011,8 @@ yapılamadı:</translation>
         <translation>Metin</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Metin:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Çerçeve</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Kutu Halinde</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Çember Halinde</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Çerçeve:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Kenar Boşluğu:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2062,12 +2059,36 @@ yapılamadı:</translation>
         <translation>Yukarı</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>Aşağı</translation>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Boy:</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4696,10 +4717,6 @@ kaydetmek ister misiniz?</translation>
         <translation>nota-başı indeksi</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Parmak Yöntemi</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5326,14 +5343,6 @@ kaydetmek ister misiniz?</translation>
         <translation>Otomatik Düzeltme</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>1/2 ... yi ½ ... ile değiştir</translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Telif hakkı metninde (C) ... yi © ... ile değiştir</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Renkler</translation>
     </message>
@@ -5633,6 +5642,14 @@ kaydetmek ister misiniz?</translation>
         <source>pt_BR Brasilian Portuguese</source>
         <translation type="unfinished"></translation>
     </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
@@ -5706,6 +5723,18 @@ Lütfen bir nota veya es seçin ve son yaptığınız işlemi tekrarlayın
     <message>
         <source>MuseScore: Load Palettes failed:</source>
         <translation>MuseScore: Palet Yükleme başarısız:</translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

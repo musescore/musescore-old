@@ -241,16 +241,14 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case TEXTLINE:
                   {
                   SLine* line = static_cast<SLine*>(e);
-#if 0
                   if (e->type() == TEXTLINE) {
                         TextLine* tl = static_cast<TextLine*>(e);
-                        if (!tl->hasText()) {
+                        if (!tl->hasBeginText()) {
                               Segment* seg = tick2segment(tick);
                               if (seg && seg->nextCR())
                                     tick2 = seg->nextCR()->tick();
                               }
                         }
-#endif
                   line->setTick(tick);
                   line->setTick2(tick2);
                   line->layout(layout());

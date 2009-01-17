@@ -44,8 +44,6 @@ class TextLineSegment : public LineSegment {
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
 
-      virtual void add(Element*);
-      virtual void remove(Element*);
       virtual void layout(ScoreLayout*);
       virtual void setSelected(bool f);
 
@@ -101,10 +99,14 @@ class TextLine : public SLine {
       bool endHook() const                    { return _endHook;              }
       void setBeginHook(bool v)               { _beginHook = v;               }
       void setEndHook(bool v)                 { _endHook = v;                 }
+
       TextBase* beginTextBase() const         { return _beginText;            }
+      void setBeginTextBase(TextBase* v)      { _beginText = v;               }
       TextBase* continueTextBase() const      { return _continueText;         }
+      void setContinueTextBase(TextBase* v)   { _continueText = v;            }
       TextBase** beginTextBasePtr()           { return &_beginText;           }
       TextBase** continueTextBasePtr()        { return &_continueText;        }
+
       void setBeginSymbol(int v)              { _beginSymbol = v;             }
       void setContinueSymbol(int v)           { _continueSymbol = v;          }
       void setEndSymbol(int v)                { _endSymbol = v;               }

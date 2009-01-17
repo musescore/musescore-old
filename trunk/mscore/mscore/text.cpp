@@ -1071,14 +1071,6 @@ void TextB::endEdit()
 
       if (subtype() == TEXT_COPYRIGHT)
             score()->undoChangeCopyright(doc()->toHtml("UTF-8"));
-#if 0 // TODO
-      if (subtype() == TEXT_TEXTLINE) {
-            TextLineSegment* tls = (TextLineSegment*)parent();
-            TextLine* tl = (TextLine*)(tls->line());
-            tl->setHtml(getHtml());
-            tl->setHasText(!doc()->isEmpty());
-            }
-#endif
       }
 
 //---------------------------------------------------------

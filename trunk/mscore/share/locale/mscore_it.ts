@@ -1,6 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AboutBox</name>
     <message>
@@ -1442,7 +1463,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Giu</translation>
     </message>
     <message>
         <source>Voice 2</source>
@@ -1995,32 +2016,8 @@ fallito: </translation>
         <translation>Testo</translation>
     </message>
     <message>
-        <source>Text:</source>
-        <translation>Testo:</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cornice</translation>
-    </message>
-    <message>
-        <source>Boxed</source>
-        <translation>Rettangolare</translation>
-    </message>
-    <message>
-        <source>Circled</source>
-        <translation>Circolare</translation>
-    </message>
-    <message>
-        <source>Frame:</source>
-        <translation>Cornice:</translation>
-    </message>
-    <message>
         <source>sp</source>
         <translation>spazi</translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation>Margine:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2067,12 +2064,36 @@ fallito: </translation>
         <translation>In su</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>In giu</translation>
+        <source>Begin</source>
+        <translation type="unfinished">Begin</translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation>Altezza:</translation>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished">End</translation>
     </message>
 </context>
 <context>
@@ -4708,10 +4729,6 @@ before closing?</source>
         <translation>Testa</translation>
     </message>
     <message>
-        <source>Fingering</source>
-        <translation>Diteggiatura</translation>
-    </message>
-    <message>
         <source>TPC</source>
         <translation>TPC</translation>
     </message>
@@ -5574,14 +5591,6 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Score element colors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5635,6 +5644,14 @@ before closing?</source>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5703,6 +5720,18 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Import Capella</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
