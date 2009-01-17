@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.9">
+<museScore version="1.10">
   <Mag>1.31233</Mag>
-  <xoff>-536.872</xoff>
-  <yoff>5.64067</yoff>
+  <xoff>-6.96208</xoff>
+  <yoff>-0.757803</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -1353,8 +1353,8 @@ p, li { white-space: pre-wrap; }
     <tick>83040</tick>
     <tick2>83760</tick2>
     <Segment>
-      <off1 x="11.1758" y="-1.23123"/>
-      <off2 x="-11.081" y="0"/>
+      <off1 x="0" y="-1.23123"/>
+      <off2 x="0" y="0"/>
       </Segment>
     <Segment>
       <off1 x="0" y="-1.23123"/>
@@ -1419,14 +1419,6 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>91200</tick>
     <tick2>92400</tick2>
-    <Segment>
-      <off1 x="7.29265" y="0"/>
-      <off2 x="-7.29265" y="0"/>
-      </Segment>
-    <Segment>
-      <off1 x="0" y="0"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </HairPin>
   <Staff id="1">
     <VBox>
@@ -4628,6 +4620,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.42065" y="3.12542"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -4645,6 +4638,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.42065" y="2.65187"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10129,6 +10123,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.276854" y="-3.32225"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10226,6 +10221,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="-0.276854" y="1.45349"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10570,6 +10566,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.364008" y="-2.91207"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10769,6 +10766,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.41601" y="-3.12007"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -13418,5 +13416,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

@@ -415,8 +415,7 @@ bool SLine::readProperties(QDomElement e)
             delete seg;
       segments.clear();
 
-      // setTick(-1);
-      setTick(0);
+//      setTick(-1);
 
       if (Element::readProperties(e))
             return true;
@@ -424,8 +423,8 @@ bool SLine::readProperties(QDomElement e)
       QString val(e.text());
       int i = val.toInt();
 
-      if (tick() < 0)
-            setTick(score()->curTick);
+//      if (tick() < 0)
+//            setTick(score()->curTick);
 
       if (tag == "tick2")
             _tick2 = score()->fileDivision(i);
