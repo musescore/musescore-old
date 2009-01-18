@@ -1,4 +1,5 @@
 18.jan (ws)
+      - make note play len on note entry configurable
       - do not play notes on up/down if there is more than one selected
         and they are at different tick positions (this scared the cat :-)
       - fix note entry mode; rest len was calculated wrong

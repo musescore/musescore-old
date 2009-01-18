@@ -2000,7 +2000,7 @@ void MuseScore::readSettings()
 
 //---------------------------------------------------------
 //   play
-//    play note for 300 msec
+//    play note for preferences.defaultPlayDuration
 //---------------------------------------------------------
 
 void MuseScore::play(Element* e) const
@@ -2018,7 +2018,8 @@ void MuseScore::play(Element* e, int pitch) const
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
             Instrument* i = part->instrument();
-            seq->startNote(i->channel[note->subchannel()], pitch, 80, 300);
+            seq->startNote(i->channel[note->subchannel()], pitch, 80,
+               preferences.defaultPlayDuration);
             }
       }
 

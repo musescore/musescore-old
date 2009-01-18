@@ -72,9 +72,6 @@ Seq::Seq()
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
       heartBeatTimer->stop();
-      playTimer = new QTimer(this);
-      playTimer->setSingleShot(true);
-      connect(playTimer, SIGNAL(timeout()), this, SLOT(stopNotes()));
       connect(this, SIGNAL(toGui(int)), this, SLOT(seqMessage(int)), Qt::QueuedConnection);
       }
 
@@ -923,7 +920,7 @@ void Seq::startNote(Channel* a, int pitch, int velo)
 void Seq::startNote(Channel* a, int pitch, int velo, int duration)
       {
       startNote(a, pitch, velo);
-      playTimer->start(duration);
+      QTimer::singleShot(duration, this, SLOT(stopNotes()));
       }
 
 //---------------------------------------------------------

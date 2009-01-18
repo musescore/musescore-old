@@ -106,7 +106,6 @@ class Seq : public QObject {
       float _volume;
 
       QTimer* heartBeatTimer;
-      QTimer* playTimer;
 
       QList<Event*> eventList;
 
