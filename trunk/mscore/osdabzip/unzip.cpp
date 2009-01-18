@@ -761,7 +761,8 @@ UnZip::ErrorCode UnzipPrivate::seekToCentralDirectory()
 				break;
 			}
 
-			offset -= UNZIP_EOCD_SIZE;
+			// TODO: This is very slow and only a temporary bug fix. Need some pattern matching algorithm here.
+			offset -= 1;      // UNZIP_EOCD_SIZE;
 			if (offset <= 0)
 				return UnZip::InvalidArchive;
 
