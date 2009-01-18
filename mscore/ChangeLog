@@ -3,6 +3,8 @@
       - do not play notes on up/down if there is more than one selected
         and they are at different tick positions (this scared the cat :-)
       - fix note entry mode; rest len was calculated wrong
+      (olavgun)
+      - exportly: no longer export of empty voices.
 17.jan (ws)
       - extended TextLine properties
 16.jan (ws)
