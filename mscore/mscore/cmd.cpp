@@ -684,6 +684,7 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
 
       while (len) {
             int gap = makeGap(tick, track, len);
+// printf("  gap is %d, rest %d\n", gap, len - gap);
             len    -= gap;
 
             note = new Note(this);
@@ -737,13 +738,14 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
 
 void Score::cloneCR(ChordRest* cr, int tick, int restLen, int track)
       {
+// printf("cloneCR %d len %d  into %d len %d\n", cr->tick(), cr->tickLen(), tick, restLen);
+
       undoRemoveElement(cr);
       if (cr->tick() != tick) {
             Segment* oseg = cr->segment();
             if (oseg->isEmpty())
                   undoRemoveElement(oseg);
             }
-
       if (cr->type() == REST) {
             setRest(tick, restLen, track);
             return;
@@ -857,11 +859,12 @@ int Score::makeGap(int tick, int track, int len)
             }
       else
             gapLen = segment->tick() - tick;
-      if (gapLen >= len)
+      if (gapLen >= len) {
+//            printf("  gapLen %d\n", gapLen);
             return len;
+            }
 
       while (segment) {
-// printf("  segment\n");
             while (segment && (!segment->isChordRest() || segment->element(track) == 0))
                   segment = segment->next();
             if (segment == 0)
@@ -877,6 +880,7 @@ int Score::makeGap(int tick, int track, int len)
                   if (cr->tuplet())
                         cmdDeleteTuplet(cr->tuplet(), false);
                   else {
+// printf("  remove cr at %d len %d\n", cr->tick(), cr->tickLen());
                         undoRemoveElement(cr);
                         if (segment->isEmpty())
                               undoRemoveElement(segment);
@@ -887,7 +891,6 @@ int Score::makeGap(int tick, int track, int len)
             else {
                   int restLen = gapLen - len;
                   tick += len;
-
                   //
                   // clone chord rest
                   //
@@ -1034,7 +1037,7 @@ void Score::changeCRlen(ChordRest* cr, int len)
 
 bool Score::setRest(int tick, int track, int len, bool useDots)
       {
-// printf("setRest at %d len %d\n", tick, len);
+// printf("setRest at %d len %d useDots %d\n", tick, len, useDots);
       int stick = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0 || (measure->tick() + measure->tickLen()) == tick) {
@@ -1536,7 +1539,7 @@ void Score::insertMeasures(int n, int type)
 
 void Score::addArticulation(int attr)
       {
-printf("add articulation %d\n", attr);
+// printf("add articulation %d\n", attr);
       foreach(Element* el, *sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
