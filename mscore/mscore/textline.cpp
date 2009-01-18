@@ -393,11 +393,11 @@ void TextLineSegment::propertyAction(const QString& s)
 static void populateLineSymbolComboBox(QComboBox* cb)
       {
       cb->clear();
-      cb->addItem(cb->tr("Ped (Pedal)"), pedalPedSym);
-      cb->addItem(cb->tr("* (Pedal)"), pedalasteriskSym);
-      cb->addItem(cb->tr(". (Pedal)"), pedaldotSym);
-      cb->addItem(cb->tr("dash (Pedal)"), pedaldashSym);
-      cb->addItem(cb->tr("tr (Trill)"), trillSym);
+      cb->addItem(QComboBox::tr("Ped (Pedal)"), pedalPedSym);
+      cb->addItem(QComboBox::tr("* (Pedal)"), pedalasteriskSym);
+      cb->addItem(QComboBox::tr(". (Pedal)"), pedaldotSym);
+      cb->addItem(QComboBox::tr("dash (Pedal)"), pedaldashSym);
+      cb->addItem(QComboBox::tr("tr (Trill)"), trillSym);
       }
 
 static void setLineSymbolComboBox(QComboBox* cb, int sym)
