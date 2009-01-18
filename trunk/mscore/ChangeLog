@@ -1,3 +1,5 @@
+18.jan (ws)
+      - fix note entry mode; rest len was calculated wrong
 17.jan (ws)
       - extended TextLine properties
 16.jan (ws)

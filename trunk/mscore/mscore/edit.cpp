@@ -139,36 +139,42 @@ Rest* Score::addRest(int tick, int len, int track)
 
 Rest* Score::setRest(int tick, int len, int track)
       {
+// printf("setRest %d %d\n", tick, len);
       Measure* measure = tick2measure(tick);
-      Duration d;
-      int dots;
-      headType(len, &d, &dots);
+
       //
       // set whole measure rest if
       //    - rest covers whole measure
       //    - len < brevis
-      if (dots == 0 || (measure->tickLen() == len && (len < (division * 8))))
+      if ((measure->tickLen() == len) && (len < (division * 8)))
             return addRest(tick, len, track);
 
+      QList<int> restList;
+      while (len > 0) {
+            Duration dt;
+            for (int i = 0; i < Duration::types - 1; ++i) {
+                  dt.setType(Duration::DurationType(i));
+                  int ticks = dt.ticks();
+                  if ((len - ticks) >= 0) {
+                        restList.append(ticks);
+                        len -= ticks;
+                        break;
+                        }
+                  }
+            }
       Rest* rest = 0;
-      if (((measure->tick() - tick) % d.ticks()) == 0) {
-            rest = addRest(tick, d.ticks(), track);
-            while(dots > 0) {
-                  tick += d.ticks();
-                  d = d.shift(1);
-                  addRest(tick, d.ticks(), track);
-                  --dots;
+      if (((measure->tick() - tick) % restList[0]) == 0) {
+            foreach(int len, restList) {
+                  rest = addRest(tick, len, track);
+                  tick += len;
                   }
             }
       else {
-            int ticks = d.ticks();
-            while(dots > 0) {
-                  d = d.shift(1);
-                  addRest(tick, d.ticks(), track);
-                  tick += d.ticks();
-                  --dots;
+            for (int i = restList.size() - 1; i >= 0; --i) {
+                  int len = restList[i];
+                  rest = addRest(tick, len, track);
+                  tick += len;
                   }
-            rest = addRest(tick, ticks, track);
             }
       return rest;
       }
