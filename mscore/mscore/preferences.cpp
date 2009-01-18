@@ -185,6 +185,8 @@ void Preferences::init()
       paperHeight             = 1.0;
       landscape               = false;
       twosided                = true;
+
+      defaultPlayDuration     = 300;      // ms
       };
 
 //---------------------------------------------------------
@@ -272,6 +274,7 @@ void Preferences::write()
       s.setValue("paperHeight", paperHeight);
       s.setValue("landscape", landscape);
       s.setValue("twosided", twosided);
+      s.setValue("defaultPlayDuration", defaultPlayDuration);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -364,6 +367,7 @@ void Preferences::read()
       paperHeight            = s.value("paperHeight", 1.0).toDouble();
       landscape              = s.value("landscape", false).toBool();
       twosided               = s.value("twosided", true).toBool();
+      defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -652,6 +656,8 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       twosided->setChecked(p->twosided);
       landscape->setChecked(p->landscape);
+
+      defaultPlayDuration->setValue(p->defaultPlayDuration);
 
       sfChanged = false;
       }
@@ -1001,6 +1007,8 @@ void PreferenceDialog::apply()
       preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
       preferences.paperHeight = paperHeight->value() * f;
       preferences.paperWidth  = paperWidth->value()  * f;
+
+      preferences.defaultPlayDuration = defaultPlayDuration->value();
 
 #if 0
       QString localeName = QLocale::system().name();
