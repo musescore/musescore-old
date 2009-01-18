@@ -27,6 +27,7 @@
 // programming education in the "Programming for Poets" course.
 // Olav.
 
+
 #include "arpeggio.h"
 #include "articulation.h"
 #include "barline.h"
@@ -54,6 +55,7 @@
 #include "slur.h"
 #include "staff.h"
 #include <string.h>
+#include <sstream>
 #include "style.h"
 #include "sym.h"
 #include "tempotext.h"
@@ -65,7 +67,6 @@
 const int MAX_SLURS = 8;
 
 
-
 //---------------------------------------------------------
 //   ExportLy
 //---------------------------------------------------------
@@ -74,10 +75,10 @@ class ExportLy {
   Score* score;
   QFile f;
   QTextStream os;
+  //  QTextStream voicebf(QString, QIODevice::OpenMode);
   int level;        // indent level
   int curTicks;
   Direction stemDirection;
-  QString  staffid[32];
   int indx;
   int timeabove, timebelow;
   int  n, z1, z2, z3, z4; //timesignatures
@@ -97,11 +98,20 @@ class ExportLy {
   const Slur* slurre[MAX_SLURS];
   bool started[MAX_SLURS];
   int findSlur(const Slur* s) const;
-  QString voicename[VOICES], partshort[32];
   const char *relativ, *staffrelativ;
   bool voiceActive[VOICES];
-  QString  partname[32];
+
+  typedef struct staffnameinfo
+  { 
+    QString voicename[VOICES];
+    QString  staffid, partname, partshort;
+    bool simultaneousvoices;
+  };
+    
+  struct staffnameinfo staffname[32];
+  
   QString cleannote, prevnote;
+
   struct InstructionAnchor 
   {
     Element* instruct;  // the element containing the instruction
@@ -113,6 +123,10 @@ class ExportLy {
   int nextAnchor;
   struct InstructionAnchor anker;
   struct InstructionAnchor anchors[512];
+  
+  QString voicebuffer;
+  QTextStream out;
+  
   void storeAnchor(struct InstructionAnchor);
   void initAnchors();
   void removeAnchor(int);
@@ -134,11 +148,12 @@ class ExportLy {
   //from xml's class directionhandler:
   void buildInstructionList(Part* p, int strack, int etrack);
   void buildInstructionList(Measure* m, int strack, int etrack);
-  void handleElement(Element* el, int sstaff, bool start);
+  void handleElement(Element* el, bool start);
   void instructionJump(Jump*);
   void instructionMarker(Marker*);
  
-  void indent();
+  void indent(); //buffer-string
+  void indentF(); //file
   int getLen(int ticks, int* dots);
   void writeLen(int);
   QString tpc2name(int tpc);
@@ -162,7 +177,6 @@ class ExportLy {
   void checkSlur(Chord* chord);
   void doSlurStart(Chord* chord);
   void doSlurStop(Chord* chord);
-  void anchorList();
 
 public:
   ExportLy(Score* s) 
@@ -185,26 +199,7 @@ int numval(int num)
   return num;
 }
 
-void ExportLy::anchorList()
-{ 
-  // for debugging.
-  int ix=1;
-  printf("start of acnhor-list\n");
-  printf("nr 0. ticks %d", anchors[0].tick);
-  printf(" instruct->type %d\n", anchors[0].instruct->type());
-    for (ix=0; ix<nextAnchor; ix++)
-      {
-	if (!(anchors[ix].instruct==NULL))
-	  if (1 < anchors[ix].tick < 654000)
-	    {
-	      printf("i: %d, instructticks: %d  ", ix, anchors[ix].tick);
-	      printf("instructiontype: %d ", anchors[ix].instruct->type());
-	      if (anchors[ix].start==true) printf(" true "); else printf(" false ");
-	      printf("elementticks: %d \n", anchors[ix].anchor->tick());
-	    }
-      }
-    printf("end of ankerlistetest\n");
-}  
+
 
 
 void ExportLy::instructionJump(Jump* jp)
@@ -255,7 +250,7 @@ void ExportLy::instructionJump(Jump* jp)
   else
     printf("jump type=%d not implemented\n", jtp);
   
-  os << "\\mark " << "\" << words << \" ";
+  out << "\\mark " << "\" << words << \" ";
 }
 
 
@@ -292,9 +287,9 @@ void ExportLy::instructionMarker(Marker* m)
   else
     printf("marker type=%d not implemented\n", mtp);
   if (words=="")  
-    os << "\\mark \\markup { \\musicglyph #\"scripts." << type<<"\"}";
+    out << "\\mark \\markup { \\musicglyph #\"scripts." << type<<"\"}";
   else
-    os << "\\mark \"" << words << "\"";
+    out << "\\mark \"" << words << "\"";
 
 }
 
@@ -308,9 +303,9 @@ void ExportLy::symbol(Symbol* sym)
       {
       QString name = symbols[sym->sym()].name();
       if (name == "pedal ped")
-	os << " \\sustainOn ";
+	out << " \\sustainOn ";
       else if (name == "pedalasterisk")
-	os << " \\sustainOff ";
+	out << " \\sustainOff ";
       else {
             printf("ExportLy::symbol(): %s not supported", name.toLatin1().data());
             return;
@@ -324,7 +319,7 @@ void ExportLy::symbol(Symbol* sym)
 
 void ExportLy::tempoText(TempoText* text)
       {
-	os << "^\\markup {" << text->getText() << "}";
+	out << "^\\markup {" << text->getText() << "}";
       }
 
 
@@ -336,7 +331,7 @@ void ExportLy::tempoText(TempoText* text)
 void ExportLy::words(Text* text)
       {
 	//todo: find mscore-position of text, and position accordingly in lily.
-	os << "^\\markup {" << text->getText() << "}";
+	out << "^\\markup {" << text->getText() << "}";
       }
 
 
@@ -352,11 +347,11 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
 	if (hp->tick() == tick)
 	  {
 	    if (art == 0) //diminuendo
-	      os << "\\< ";
+	      out << "\\< ";
 	    if (art == 1) //crescendo
-	      os << "\\> ";
+	      out << "\\> ";
 	  }
-	else   os << "\\! ";
+	else   out << "\\! ";
       }
 //---------------------------------------------------------
 //   ottava
@@ -566,7 +561,7 @@ void ExportLy::storeAnchor(struct InstructionAnchor a)
 //   handleElement -- handle all instructions attached to one specific element
 //---------------------------------------------------------
 
-void ExportLy::handleElement(Element* el, int sstaff, bool start)
+void ExportLy::handleElement(Element* el, bool start)
 {
   int i = 0;
   for (i = 0; i<=nextAnchor; i++)//run thru filled part of list
@@ -821,10 +816,21 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 }
 
 //---------------------------------------------------------
-//   indent
+//   indent  -- buffer
 //---------------------------------------------------------
 
 void ExportLy::indent()
+{
+  for (int i = 0; i < level; ++i)
+    out << "    ";
+}
+
+
+//---------------------------------------------------------
+//   indent  -- file
+//---------------------------------------------------------
+
+void ExportLy::indentF()
 {
   for (int i = 0; i < level; ++i)
     os << "    ";
@@ -853,7 +859,7 @@ void ExportLy::findTuplets(Note* note)
 	  baselength = t->baseLen();
 	  thislength=note->chord()->tickLen();
 	  tupletcount=nrmNotes * baselength - thislength;
-	  os << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
+	  out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
 	}
       else if (tupletcount>1)
 	{
@@ -889,7 +895,7 @@ void ExportLy::findTuplets(Rest* rest)
 	  baselength = t->baseLen();
 	  thislength=rest->tickLen();
 	  tupletcount=nrmNotes * baselength - thislength;
-	  os << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
+	  out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
 	}
       else if (tupletcount>1)
 	{
@@ -1041,25 +1047,25 @@ bool Score::saveLilypond(const QString& name)
 
 void ExportLy::writeClef(int clef)
 {
-  os << "\\clef ";
+  out << "\\clef ";
   switch(clef) {
-  case CLEF_G:      os << "treble";       break;
-  case CLEF_F:      os << "bass";         break;
-  case CLEF_G1:     os << "\"treble^8\""; break;
-  case CLEF_G2:     os << "\"treble^15\"";break;
-  case CLEF_G3:     os << "\"treble_8\""; break;
-  case CLEF_F8:     os << "\"bass_8\"";   break;
-  case CLEF_F15:    os << "\"bass_15\"";  break;
-  case CLEF_F_B:    os << "bass";         break;
-  case CLEF_F_C:    os << "bass";         break;
-  case CLEF_C1:     os <<  "soprano";     break;
-  case CLEF_C2:     os <<  "mezzo-soprano";break;
-  case CLEF_C3:     os <<  "alto";        break;
-  case CLEF_C4:     os <<  "tenor";       break;
-  case CLEF_TAB:    os <<  "tab";         break;
-  case CLEF_PERC:   os <<  "percussion";  break;
+  case CLEF_G:      out << "treble";       break;
+  case CLEF_F:      out << "bass";         break;
+  case CLEF_G1:     out << "\"treble^8\""; break;
+  case CLEF_G2:     out << "\"treble^15\"";break;
+  case CLEF_G3:     out << "\"treble_8\""; break;
+  case CLEF_F8:     out << "\"bass_8\"";   break;
+  case CLEF_F15:    out << "\"bass_15\"";  break;
+  case CLEF_F_B:    out << "bass";         break;
+  case CLEF_F_C:    out << "bass";         break;
+  case CLEF_C1:     out <<  "soprano";     break;
+  case CLEF_C2:     out <<  "mezzo-soprano";break;
+  case CLEF_C3:     out <<  "alto";        break;
+  case CLEF_C4:     out <<  "tenor";       break;
+  case CLEF_TAB:    out <<  "tab";         break;
+  case CLEF_PERC:   out <<  "percussion";  break;
   }
-  os << " ";
+  out << " ";
 }
 
 //---------------------------------------------------------
@@ -1069,9 +1075,8 @@ void ExportLy::writeClef(int clef)
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
   sig->getSig(&n, &z1, &z2, &z3, &z4);
-
   timebelow=n;
-  os << "\\time " << z1 << "/" << n << " ";
+  out << "\\time " << z1 << "/" << n << " ";
 }
 
 //---------------------------------------------------------
@@ -1083,27 +1088,27 @@ void ExportLy::writeKeySig(int st)
   st = char(st & 0xff);
   if (st == 0)
     return;
-  os << "\\key ";
+  out << "\\key ";
   switch(st) {
-  case 6:  os << "fis"; break;
-  case 5:  os << "h";   break;
-  case 4:  os << "e";   break;
-  case 3:  os << "a";   break;
-  case 2:  os << "d";   break;
-  case 1:  os << "g";   break;
-  case 0:  os << "c";   break;
-  case -7: os << "ces"; break;
-  case -6: os << "ges"; break;
-  case -5: os << "des"; break;
-  case -4: os << "as";  break;
-  case -3: os << "es";  break;
-  case -2: os << "bes"; break;
-  case -1: os << "f";   break;
+  case 6:  out << "fis"; break;
+  case 5:  out << "h";   break;
+  case 4:  out << "e";   break;
+  case 3:  out << "a";   break;
+  case 2:  out << "d";   break;
+  case 1:  out << "g";   break;
+  case 0:  out << "c";   break;
+  case -7: out << "ces"; break;
+  case -6: out << "ges"; break;
+  case -5: out << "des"; break;
+  case -4: out << "as";  break;
+  case -3: out << "es";  break;
+  case -2: out << "bes"; break;
+  case -1: out << "f";   break;
   default:
     printf("illegal key %d\n", st);
     break;
   }
-  os << " \\major \n";
+  out << " \\major \n";
 }
 
 //---------------------------------------------------------
@@ -1166,15 +1171,15 @@ void ExportLy::doSlurStart(Chord* chord)
       if (i >= 0) {
 	slurre[i] = 0;
 	started[i] = false;
-	if (s->slurDirection() == UP) os << "^";
-	os << "(";
+	if (s->slurDirection() == UP) out << "^";
+	out << "(";
       }
       else {
 	i = findSlur(0);
 	if (i >= 0) {
 	  slurre[i] = s;
 	  started[i] = true;
-	  os << "(";
+	  out << "(";
 	}
 	else
 	  printf("no free slur slot");
@@ -1199,7 +1204,7 @@ void ExportLy::doSlurStop(Chord* chord)
 	if (i >= 0) {
 	  slurre[i] = s;
 	  started[i] = false;
-	  os << ")";
+	  out << ")";
 	}
 	else
 	  printf("no free slur slot");
@@ -1214,7 +1219,7 @@ void ExportLy::doSlurStop(Chord* chord)
 	      if (started[i]) {
 		slurre[i] = 0;
 		started[i] = false;
-		os << ")";
+		out << ")";
 	      }
 	    }
 	}
@@ -1249,88 +1254,88 @@ void ExportLy::writeArticulation(Chord* c)
       switch(a->subtype())
 	{
 	case UfermataSym:
-	  os << "\\fermata";
+	  out << "\\fermata";
 	  break;
 	case DfermataSym:
-	  os << "_\\fermata";
+	  out << "_\\fermata";
 	  break;
 	case ThumbSym:
-	  os << "\\thumb";
+	  out << "\\thumb";
 	  break;
 	case SforzatoaccentSym:
-	  os << "->";
+	  out << "->";
 	  break;
 	case EspressivoSym:
-	  os << "\\espressivo";
+	  out << "\\espressivo";
 	  break;
 	case StaccatoSym:
-	  os << "-.";
+	  out << "-.";
 	  break;
 	case UstaccatissimoSym:
-	  os << "-|";
+	  out << "-|";
 	  break;
 	case DstaccatissimoSym:
-	  os << "_|";
+	  out << "_|";
 	  break;
 	case TenutoSym:
-	  os << "--";
+	  out << "--";
 	  break;
 	case UportatoSym:
-	  os << "-_";
+	  out << "-_";
 	  break;
 	case DportatoSym:
-	  os << "__";
+	  out << "__";
 	  break;
 	case UmarcatoSym:
-	  os << "-^";
+	  out << "-^";
 	  break;
 	case DmarcatoSym:
-	  os << "_^";
+	  out << "_^";
 	  break;
 	case OuvertSym:
-	  os << "\\open";
+	  out << "\\open";
 	  break;
 	case PlusstopSym:
-	  os << "-+";
+	  out << "-+";
 	  break;
 	case UpbowSym:
-	  os << "\\upbow";
+	  out << "\\upbow";
 	  break;
 	case DownbowSym:
-	  os << "\\downbow";
+	  out << "\\downbow";
 	  break;
 	case ReverseturnSym:
-	  os << "\\reverseturn";
+	  out << "\\reverseturn";
 	  break;
 	case TurnSym:
-	  os << "\\turn";
+	  out << "\\turn";
 	  break;
 	case TrillSym:
-	  os << "\\trill";
+	  out << "\\trill";
 	  break;
 	case PrallSym:
-	  os << "\\prall";
+	  out << "\\prall";
 	  break;
 	case MordentSym:
-	  os << "\\mordent";
+	  out << "\\mordent";
 	  break;
 	case PrallPrallSym:
-	  os << "\\prallprall";
+	  out << "\\prallprall";
 	  break;
 	case PrallMordentSym:
-	  os << "\\prallmordent";
+	  out << "\\prallmordent";
 	  break;
 	case UpPrallSym:
-	  os << "\\prallup";
+	  out << "\\prallup";
 	  break;
 	case DownPrallSym:
-	  os << "\\pralldown";
+	  out << "\\pralldown";
 	  break;
 	case UpMordentSym:
-	  os << "\\upmordent";
+	  out << "\\upmordent";
 	  break;
 	case DownMordentSym:
-	  os << "\\downmordent";
+	  out << "\\downmordent";
 	  break;
 	default:
 	  printf("unsupported note attribute %d\n", a->subtype());
@@ -1363,13 +1368,13 @@ void ExportLy::writeChord(Chord* c)
 	{
 	  stemDirection = d;
 	  if ((d == UP) and (graceswitch == true))
-	    os << "\\stemUp ";
+	    out << "\\stemUp ";
 	  else if ((d == DOWN)  and (graceswitch == true))
-	    os << "\\stemDown ";
+	    out << "\\stemDown ";
 	  else if (d == AUTO)
 	    {
-	      if (graceswitch == true) os << "] ";
-	      os << "\\stemNeutral ";
+	      if (graceswitch == true) out << "] ";
+	      out << "\\stemNeutral ";
 	    }
 	}
     }
@@ -1379,7 +1384,7 @@ void ExportLy::writeChord(Chord* c)
 
   if (nl->size() > 1)
     {
-    os << "<"; 
+    out << "<"; 
     }
 
   j=0;
@@ -1396,7 +1401,7 @@ void ExportLy::writeChord(Chord* c)
 	    {
 	      graceswitch=false;
 	      graceslur=true;
-	      os << " } "; //end of grace
+	      out << " } "; //end of grace
 	    }
 	  break;
 	case NOTE_ACCIACCATURA:
@@ -1406,13 +1411,13 @@ void ExportLy::writeChord(Chord* c)
 	case NOTE_GRACE32:
 	  if (graceswitch==false)
 	    {
-	      os << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
+	      out << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
 	      graceswitch=true;
 	    }
 	  else
 	    if (graceswitch==true)
 	      {
-		os << "[( "; //grace always beamed and slurred
+		out << "[( "; //grace always beamed and slurred
 	      }
 	  break;
 	} //end of switch(gracen)
@@ -1420,7 +1425,7 @@ void ExportLy::writeChord(Chord* c)
 
       findTuplets(n); //probably causes trouble here, Must be put outside of notelist.
 
-      os << tpc2name(n->tpc());
+      out << tpc2name(n->tpc());
       if (n->tieFor()) tie=true;
       purepitch = n->pitch();
       purename = tpc2name(n->tpc());  //with -es or -is
@@ -1439,12 +1444,12 @@ void ExportLy::writeChord(Chord* c)
 	{
 	  if ((oktavdiff < -6) or ((prevnote=="b") and (oktavdiff < -5)))
 	    { //up
-		os << "'";
+		out << "'";
 		oktavdiff=oktavdiff+12;
 	    }
 	    else if ((oktavdiff > 6)  or ((prevnote=="f") and (oktavdiff > 5)))
 	      {//down
-		os << ",";
+		out << ",";
 		oktavdiff=oktavdiff-12;
 	      }
 	  oktreit=oktreit-12;
@@ -1464,12 +1469,12 @@ void ExportLy::writeChord(Chord* c)
       ++i; //number of notes in chord, we progress to next chordnote
       if (i == nl->end())
 	break;
-      os << " ";
+      out << " ";
     } //end of notelist = end of chord
 
   if (nl->size() > 1)
     {
-    os << ">"; //endofchord sign
+    out << ">"; //endofchord sign
     cleannote=chordnote;
     //if this is a chord, use first note of chord as previous note
     //instead of actually previous note.
@@ -1489,26 +1494,26 @@ void ExportLy::writeChord(Chord* c)
 
   if (tie)
     {
-      os << "~";
+      out << "~";
       tie=false;
     }
 
   if (tupletcount==-1) 
     {
-      os << " } "; 
+      out << " } "; 
       tupletcount=0;
     }
 
   if (graceslur==true)
     {
-      os << " ) ";
+      out << " ) ";
       graceslur=false;
     }
 
   writeArticulation(c);
   checkSlur(c);
 
-  os << " ";
+  out << " ";
 }// end of writechord
 
 
@@ -1577,11 +1582,11 @@ int ExportLy::getLen(int l, int* dots)
   //so we set len equal to nominal value
   else if (l == division * 4 /3)
     len = 2;
-  else if (l == division * 2 /3)
+  else if (l == (division * 2)/3)
     len = 4;
   else if (l == division /3)
     len = 8;
-  else if (l == division /3*2)
+  else if (l == division /(3*2))
     len = 16;
   else if (l == division /3*4)
     len = 32;
@@ -1603,21 +1608,21 @@ void ExportLy::writeLen(int ticks)
       switch (len)
 	{
 	case -4:
-	  os << "2*5 ";
+	  out << "2*5 ";
 	  break;
 	case -3:
-	  os << "1.*2 ";
+	  out << "1.*2 ";
 	  break;
 	case -2://longa
-	  os << "\\longa ";
+	  out << "\\longa ";
 	    break;
 	case -1: //brevis
-	  os << "\\breve";
+	  out << "\\breve";
 	  break;
 	default:
-	  os << len;
+	  out << len;
 	  for (int i = 0; i < dots; ++i)
-	    os << ".";
+	    out << ".";
 	  break;
 	}
       curTicks = ticks;
@@ -1635,25 +1640,25 @@ void ExportLy::writeRest(int l, int type)
 { 
   if (type == 1) //whole measure rest
     { 
-      os << "R";
+      out << "R";
       writeLen(l);
      }
   else if (type == 2) //invisible rest
     {
-      os << "s";
+      out << "s";
       writeLen(l);
     }
   else //normal rest
     {
-      os << "r";
+      out << "r";
       writeLen(l);
     }
-  os << " ";
+  out << " ";
 }
   
 
 //--------------------------------------------------------
-//   writeVoltrra
+//   writeVolta
 //--------------------------------------------------------
 void ExportLy::writeVolta(int measurenumber, int lastind)
 {
@@ -1674,14 +1679,14 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	    {
 	    case startrepeat:
 	      indent();
-	      os << "\\repeat volta 2 {";
+	      out << "\\repeat volta 2 {";
 	      firstalt=false;
 	      secondalt=false;
 	      break;
 	    case endrepeat:
 	      if ((repeatactive==true) and (secondalt==false))
 		{
-		  os << "} % end of repeatactive\n";
+		  out << "} % end of repeatactive\n";
 		  // repeatactive=false;
 		}
 	      indent();
@@ -1689,9 +1694,9 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	    case bothrepeat:
 	      if (firstalt==false)
 		{
-		  os << "} % end of repeat\n";
+		  out << "} % end of repeat\n";
 		  indent();
-		  os << "\\repeat volta 2 {";
+		  out << "\\repeat volta 2 {";
 		  firstalt=false;
 		  secondalt=false;
 		  repeatactive=true;
@@ -1699,23 +1704,23 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	      break;
 	    case doublebar:
 	      indent();
-	      os << "\\bar \"||\"";
+	      out << "\\bar \"||\"";
 	      break;
 	      // 	    case brokenbar:
 	      // 	      indent();
-	      // 	      os << "\\bar \"| |:\"";
+	      // 	      out << "\\bar \"| |:\"";
 	      // 	      break;
 	    case startending:
 	      if (firstalt==false)
 		{
-		  os << "} % end of repeat except alternate endings\n";
+		  out << "} % end of repeat except alternate endings\n";
 		  indent();
-		  os << "\\alternative{ {  ";
+		  out << "\\alternative{ {  ";
 		  firstalt=true;
 		}
 	      else
 		{
-		  os << "{ ";
+		  out << "{ ";
 		  indent();
 		  firstalt=false;
 		  secondalt=true;
@@ -1724,20 +1729,20 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 	    case endending:
 	      if (firstalt)
 		{
-		  os << "} %close alt1\n";
+		  out << "} %close alt1\n";
 		  secondalt=true;
 		  repeatactive=true;
 		}
 	      else
 		{
-		  os << "} } %close alternatives\n";
+		  out << "} } %close alternatives\n";
 		  secondalt=false;
 		  firstalt=true;
 		  repeatactive=false;
 		}
 	      break;
 	    case endbar:
-	      os << "\\bar \"|.\"";
+	      out << "\\bar \"|.\"";
 	      break;
           default:
 	    case none: printf("strange voltarraycontents?\n");
@@ -1758,10 +1763,14 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
 //---------------------------------------------------------
 //   writeVoiceMeasure
 //---------------------------------------------------------
+
+
 void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voice)
+
 {
   int i=0;
-  char cvoicenum;
+  char cvoicenum, cstaffnum;
+ 
   measurenumber=m->no()+1;
 
   if (measurenumber==1)
@@ -1769,48 +1778,50 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
       level=0;
       indent();
       cvoicenum=voice+65;
+      cstaffnum= staffInd+65;
       //there must be more elegant ways to do this, but whatever...
-      voicename[voice] = partshort[staffInd];
-      voicename[voice].append("voice");
-      voicename[voice].append(cvoicenum);
-      voicename[voice].prepend("A");
-      voicename[voice].remove(QRegExp("[0-9]"));
-      voicename[voice].remove(QChar('.'));
-      voicename[voice].remove(QChar(' '));
+      staffname[staffInd].voicename[voice] = staffname[staffInd].partshort;
+      staffname[staffInd].voicename[voice].append("voice");
+      staffname[staffInd].voicename[voice].append(cstaffnum);
+      staffname[staffInd].voicename[voice].append(cvoicenum);
+      staffname[staffInd].voicename[voice].prepend("A");
+      staffname[staffInd].voicename[voice].remove(QRegExp("[0-9]"));
+      staffname[staffInd].voicename[voice].remove(QChar('.'));
+      staffname[staffInd].voicename[voice].remove(QChar(' '));
 
-      os << voicename[voice];
-      os << " = \\relative c" << relativ <<" \n";
+      out << staffname[staffInd].voicename[voice];
+      out << " = \\relative c" << relativ;
       indent();
-      os << "{\n";
+      out << "{\n";
       level++;
       indent();
       if (voice==0)
 	{
-	  os <<"\\set Staff.instrumentName = #\"" << partname[staffInd] << "\"\n";
+	  out <<"\\set Staff.instrumentName = #\"" << staffname[staffInd].partname << "\"\n";
 	  indent();
-	  os << "\\set Staff.shortInstrumentName = #\"" <<partshort[staffInd] << "\"\n";
+	  out << "\\set Staff.shortInstrumentName = #\"" <<staffname[staffInd].partshort << "\"\n";
 	  indent();
 	  writeClef(staff->clef(0));
 	  writeKeySig(staff->keymap()->key(0));
-	  os << "\n";
+	  out << "\n";
 	  indent();
 	  score->sigmap->timesig(0, z1, n);
-	  os << "\\time " << z1<< "/" << n << " \n";
+	  out << "\\time " << z1<< "/" << n << " \n";
 	  indent();
-	  os << "\n\n";
+	  out << "\n\n";
 	}
 
       switch(voice)
 	{
 	case 0: break;
 	case 1:
-	  os <<"\\voiceTwo" <<"\n\n";
+	  out <<"\\voiceTwo" <<"\n\n";
 	  break;
 	case 2:
-	  os <<"\\voiceThree" <<"\n\n";
+	  out <<"\\voiceThree" <<"\n\n";
 	  break;
 	case 3:
-	  os <<"\\voiceFour" <<"\n\n";
+	  out <<"\\voiceFour" <<"\n\n";
 	  break;
 	}
       //check for implicit startrepeat before first measure:
@@ -1826,7 +1837,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  if ((voltarray[i].voltart==endrepeat) or (voltarray[i].voltart==bothrepeat))
 	    {
 	      indent();
-	      os << "\\repeat volta 2 { \n";
+	      out << "\\repeat volta 2 { \n";
 	      repeatactive=true;
 	    }
 	}
@@ -1854,7 +1865,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	case TIMESIG:
 	  {
 	    writeTimeSig((TimeSig*)e);
-	    os << "\n\n";
+	    out << "\n\n";
 	    barlen=m->tickLen();
 	    int nombarlen=z1*division;
 	    if (n==8) nombarlen=nombarlen/2;
@@ -1866,18 +1877,18 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 		indent();
 		switch(punkt)
 		  {
-		  case 0: os << "\\partial " << partial << "\n";
+		  case 0: out << "\\partial " << partial << "\n";
 		    break;
 		  case 1:
 		    {
 		      partial=(partial*2);
-		      os << "\\partial " << partial << "*3 \n";
+		      out << "\\partial " << partial << "*3 \n";
 		    }
 		    break;
 		  case 2:
 		    {
 		      partial=partial*4;
-		      os << "\\partial " << partial << "*7 \n";
+		      out << "\\partial " << partial << "*7 \n";
 		      break;
 		    }
 		  } //end switch (punkt)
@@ -1917,7 +1928,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 
 	    if (tupletcount==-1) 
 	      {
-		os << " } "; 
+		out << " } "; 
 		tupletcount=0;
 	      }
 	  }
@@ -1926,7 +1937,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  printf("ordinary elements: Marker found\n");
 	  break;
 	case BREATH:
-	  os << "\\breathe ";
+	  out << "\\breathe ";
 	  break;
 	case JUMP:
 	  printf("ordinary elements: Jump found\n");
@@ -1935,7 +1946,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  printf("Export Lilypond: unsupported element <%s>\n", e->name());
 	  break;
 	}
-      handleElement(e, staffInd, true); //check for instructions anchored to element e.
+      handleElement(e, true); //check for instructions anchored to element e.
       //check for instructions anchored to start of next element
 //       Element * nextel;
 //       Segment* nextseg;
@@ -1957,25 +1968,25 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 
 	  switch(punkt)
 	    {
-	    case 0: os << "s" << partial << " ";
+	    case 0: out << "s" << partial << " ";
 	      break;
 	    case 1:
 	      {
 		partial=(partial*2);
-		os << "s" << partial << "*3 ";
+		out << "s" << partial << "*3 ";
 	      }
 	      break;
 	    case 2:
 	      {
 		partial=partial*4;
-		os << "s" << partial << "*7 ";
+		out << "s" << partial << "*7 ";
 		break;
 	      }
 	    } //end switch (punkt)
 	}//end if pickup
       else
 	{
-	  os << "s";
+	  out << "s";
 	  writeLen(barlen);
 	  curTicks=-1;
 	}
@@ -1988,7 +1999,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
       }
 
   writeVolta(measurenumber, lastind);
-  os << " | % " << m->no()+1 << "\n" ; //barcheck and barnumber
+  out << " | % " << m->no()+1 << "\n" ; //barcheck and barnumber
 } //end write VoiceMeasure
 
 
@@ -2011,6 +2022,7 @@ void ExportLy::writeScore()
   cleannote="c";
   prevnote="c";
  
+ 
   if (np > 1)
     {
       //Number of parts???
@@ -2022,8 +2034,8 @@ void ExportLy::writeScore()
       initAnchors();
       resetAnchor(anker);
       int n = part->staves()->size();
-      partname[staffInd]  = part->longName();
-      partshort[staffInd] = part->shortName();
+      staffname[staffInd].partname  = part->longName();
+      staffname[staffInd].partshort = part->shortName();
       curTicks=-1;
       pickup=false;
 
@@ -2037,12 +2049,10 @@ void ExportLy::writeScore()
       int etrack = strack + n* VOICES;
       buildInstructionList(part, strack, etrack);
      
-      //      anchorList(); // for debugging, but needs debugging itself.
-      
       foreach(Staff* staff, *part->staves())
 	{
 
-	  os << "\n";
+	  out << "\n";
 
 	  switch(staff->clef(0))
 	    {
@@ -2084,65 +2094,94 @@ void ExportLy::writeScore()
 	  staffrelativ=relativ;
 
 	  cpartnum = staffInd + 65;
-	  staffid[staffInd] = partshort[staffInd];
-	  staffid[staffInd].append("part");
-	  staffid[staffInd].append(cpartnum);
-	  staffid[staffInd].prepend("A");
-	  staffid[staffInd].remove(QRegExp("[0-9]"));
-	  staffid[staffInd].remove(QChar('.'));
-	  staffid[staffInd].remove(QChar(' '));
+	  staffname[staffInd].staffid = staffname[staffInd].partshort;
+	  staffname[staffInd].staffid.append("part");
+	  staffname[staffInd].staffid.append(cpartnum);
+	  staffname[staffInd].staffid.prepend("A");
+	  staffname[staffInd].staffid.remove(QRegExp("[0-9]"));
+	  staffname[staffInd].staffid.remove(QChar('.'));
+	  staffname[staffInd].staffid.remove(QChar(' '));
 
 	  findVolta();
 
 	  for (voice = 0; voice < VOICES; ++voice)  voiceActive[voice] = false;
 
+	  /*Each voice is traversed from beginning to end
+	    separately. If there was a way of checking whether the
+	    entire voice is empty in a more immediate way, this would
+	    not have been necessary. But I have not found it, so
+	    please tell me if there is. This means that the voice is
+	    not written to the outputstream (os) which is connected to
+	    the output file immediately, but buffered to an
+	    outputstream (out) which is only connected to a string
+	    ("voicebuffer") in memory. If there is no material in the
+	    voice, this string is set to "". If there is material in
+	    the voice, the voicebuffer is appended to the output
+	    stream. The voicebuffer is thereafter set to "". (olav) */
+
 	  for (voice = 0; voice < VOICES; ++voice)
-	    {
+	    { 
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
+
+	      //for all measures in this voice:
 	      for (MeasureBase* m = score->layout()->first(); m; m = m->next())
 		{
 		  if (m->type() != MEASURE)
 		    continue;
-		  writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
+		    writeVoiceMeasure((Measure*)m, staff, staffInd, voice);
 		}
 	      level=0;
 	      indent();
-	      os << "}% end of last bar in partorvoice\n\n";
-	    }
+	      out << "}% end of last bar in partorvoice\n\n";
+	      if (voiceActive[voice])
+		{
+		  os << voicebuffer;
+		}
+	      voicebuffer = " \n";
+	    } // for voice 0 to VOICES
 
 	  int voiceno=0;
 
 	  for (voice = 0; voice < VOICES; ++voice)
-	    if (voiceActive) voiceno++;
+	    {
+	    if (voiceActive[voice]) voiceno++;
+	    printf("voice: %d, voiceno: %d\n", voice, voiceno);
+	    }
 
-	  if (voiceno>1)
+	  if (voiceno == 1) staffname[staffInd].simultaneousvoices=false;
+
+	  if (voiceno>1) //if more than one voice must be combined into one staff.
 	    {
 	      level=0;
 	      indent();
-	      os << staffid[staffInd] << " = \\simultaneous{\n";
+	      out << staffname[staffInd].staffid << " = \\simultaneous{\n";
+	      staffname[staffInd].simultaneousvoices=true;
 	      level++;
 	      indent();
-	      os << "\\override Staff.NoteCollision  #'merge-differently-headed = ##t\n";
+	      out << "\\override Staff.NoteCollision  #'merge-differently-headed = ##t\n";
 	      indent();
-              os << "\\override Staff.NoteCollision  #'merge-differently-dotted = ##t\n";
+              out << "\\override Staff.NoteCollision  #'merge-differently-dotted = ##t\n";
 	      ++level;
 	      for (voice = 0; voice < VOICES; ++voice)
 		{
 		  if (voiceActive[voice])
 		    {
 		      indent();
-		      os << "\\context Voice = \"" << voicename[voice] << "\" \\" << voicename[voice]  << "\n";
+		      out << "\\context Voice = \"" << staffname[staffInd].voicename[voice];
+		      out << "\" \\" << staffname[staffInd].voicename[voice]  << "\n";
 		    }
 		}
-	      os << "} \n";
+	      out << "} \n";
 	      level=0;
 	      indent();
+	      os << voicebuffer;
+	      voicebuffer = " \n";
 	    }
 
 	  ++staffInd;
 	}// end of foreach staff
-      staffid[staffInd]="laststaff";
+      staffname[staffInd].staffid="laststaff";
       if (n > 1) {
 	--level;
 	indent();
@@ -2159,37 +2198,43 @@ void ExportLy::writeScoreBlock()
   level=0;
   os << "\n\\score { \n";
   level++;
-  indent();
+  indentF();
   os << "\\relative << \n";
 
   if (pianostaff)
     {
       ++level;
-      indent();
+      indentF();
       os << "\\context PianoStaff <<\n";
-      indent();
+      indentF();
       os << "\\set PianoStaff.instrumentName=\"Piano\" \n";
     }
 
   indx=0;
 
-  while (staffid[indx]!="laststaff")
+  while (staffname[indx].staffid!="laststaff")
     {
       ++level;
-      indent();
-      os << "\\context Staff = O" << staffid[indx] << "G" << "  << \n";
+      indentF();
+      os << "\\context Staff = O" << staffname[indx].staffid << "G" << "  << \n";
       ++level;
-      indent();
-      os << "\\context Voice = O" << staffid[indx] << "G \\" << staffid[indx] << "\n";
+      indentF();
+      os << "\\context Voice = O" << staffname[indx].staffid << "G \\";
+
+      if (staffname[indx].simultaneousvoices) 
+	os << staffname[indx].staffid << "\n";
+      else 
+	os << staffname[indx].voicename[0] << "\n"; //voices are counted from 0.
+
       if (pianostaff)
 	{
-	  indent();
+	  indentF();
 	  os << "\\set Staff.instrumentName = #\"\"\n";
-	  indent();
+	  indentF();
 	  os << "\\set Staff.shortInstrumentName = #\"\"\n";
 	}
       --level;
-      indent();
+      indentF();
       os << ">>\n";
       ++indx;
     }
@@ -2197,18 +2242,18 @@ void ExportLy::writeScoreBlock()
   if (pianostaff)
     {
       --level;
-      indent();
+      indentF();
       os << ">>\n";
       pianostaff=false;
     }
 
-  indent();
+  indentF();
   os << "\\set Score.hairpinToBarline = ##t\n";
   --level;
-  indent();
+  indentF();
   os << ">>\n";
   --level;
-  indent();
+  indentF();
   os <<"}\n";
 
 }// end scoreblock
@@ -2225,6 +2270,7 @@ bool ExportLy::write(const QString& name)
   if (!f.open(QIODevice::WriteOnly))
     return false;
   os.setDevice(&f);
+  out.setString(&voicebuffer);
   os << "%=============================================\n"
     "%   created by MuseScore Version: " << VERSION << "\n"
     "%=============================================\n"
@@ -2235,7 +2281,7 @@ bool ExportLy::write(const QString& name)
   //    Page format
   //---------------------------------------------------
 
-  os << "#(set-global-staff-size 14)";
+  os << "#(set-global-staff-size 14)\n";
   PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
   switch(pf->size) {
@@ -2276,7 +2322,7 @@ bool ExportLy::write(const QString& name)
     if (e->type() != TEXT)
       continue;
     QString s = ((Text*)e)->getText();
-    indent();
+    indentF();
     switch(e->subtype()) {
     case TEXT_TITLE:
       os << "title = ";
@@ -2297,7 +2343,7 @@ bool ExportLy::write(const QString& name)
     }
     os << "\"" << s << "\"\n";
   }
-  indent();
+  indentF();
   os << "}\n";
 
   writeScore();
@@ -2313,6 +2359,10 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------- NEWS and HISTORY:--------------------  */
+
+/* NEW 18. jan. 2009
+   -- Now avoids export of empty voices. */
+
 /* NEW 23.dec.2008 
    -- export of note of lengths longa and brevis, and some rests longer than whole.*/
 
@@ -2359,21 +2409,26 @@ bool ExportLy::write(const QString& name)
 /*----------------------TODOS------------------------------------*/
 
 /* TODO: PROJECTS
-
-   1  avoid empty output in voices 2-4. Does not affect visual endresult. 
-        Pre-check for empty voices? --- or buffering or back-patching?
    3. Piano staffs/GrandStaffs, system brackets and braces.
    4 Lyrics
    5. Collisions in crowded multi-voice staffs (e.g. cello-suite).
    6. General tuplets
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
-   
+   9. Put in score-block last thing before closing of the relative clause:
+   \set Score.skipBars = ##t
+   \set Score.melismaBusyProperties = #'()
+   \override Score.BarNumber #'break-visibility = #end-of-line-invisible
+   #(set-accidental-style 'modern-cautionary)
+   \set Score.markFormatter = #format-mark-box-letters
+
    - etc.etc.etc.etc........
 */
 
 /*TODO: BUGS
   - massive failure on gollywog and Bilder
+
+  - failure in writing double repeat (left-right) in Berlin21.
   
    - Piano-staff only works for piano alone, and messes things up if
   piano is part of a larger score. Solution: Awaiting implementaton of braces
