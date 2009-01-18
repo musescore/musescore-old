@@ -1320,6 +1320,8 @@ void Score::upDown(bool up, bool octave)
 
       QList<Note*> nl = sel->noteList();
 
+      int tick = -1;
+      bool playNotes = true;
       foreach(Note* note, nl) {
             if (layoutStart == 0)
                   layoutStart = note->chord()->segment()->measure();
@@ -1331,8 +1333,15 @@ void Score::upDown(bool up, bool octave)
                         if (*ii == note)
                               break;
                         }
-                  if (ii == el.end())
+                  if (ii == el.end()) {
                         el.push_back(note);
+                        if (tick == -1)
+                              tick = note->chord()->tick();
+                        else {
+                              if (tick != note->chord()->tick())
+                                    playNotes = false;      // don't scare the cat
+                              }
+                        }
                   }
             }
       if (el.empty())
@@ -1354,7 +1363,8 @@ void Score::upDown(bool up, bool octave)
             undoChangePitch(oNote, newPitch);
 
             // play new note with velocity 80 for 0.3 sec:
-            mscore->play(oNote);
+            if (playNotes)
+                  mscore->play(oNote);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
