@@ -2653,10 +2653,15 @@ void ExportMusicXml::harmony(Harmony* h)
       {
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
+    	    double rx = h->userOff().x()*10;
+    	    QString relative;
+    	    if (rx > 0){
+    	    	relative = QString(" relative-x=\"%1\"").arg(QString::number(rx,'f',2));
+    	    }
             if (h->frameWidth() > 0.0)
-                  xml.stag("harmony print-frame=\"yes\"");
+                  xml.stag(QString("harmony print-frame=\"yes\"").append(relative));
             else
-                  xml.stag("harmony print-frame=\"no\"");
+                  xml.stag(QString("harmony print-frame=\"no\"").append(relative));
             xml.stag("root");
             xml.tag("root-step", tpc2stepName(rootTpc));
             int alter = tpc2alter(rootTpc);
