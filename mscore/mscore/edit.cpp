@@ -1553,7 +1553,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             undoAddElement(chord);
             tuplet->add(chord);
             chord->setTuplet(tuplet);
-            select(note, SELECT_SINGLE, cr->track());
+            select(note, SELECT_SINGLE, cr->track()); // sets _is.cr
             spell(note);
             }
       else {
@@ -1571,7 +1571,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             undoAddElement(rest);
             rest->setTuplet(tuplet);
             tuplet->add(rest);
-            select(rest, SELECT_SINGLE, cr->track());
+            select(rest, SELECT_SINGLE, cr->track()); // sets _is.cr
             }
 
       //---------------------------------------------------

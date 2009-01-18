@@ -531,8 +531,9 @@ void Score::cmdAddPitch1(int pitch, bool addFlag)
                         }
                   setLayoutAll(true);
                   }
-            _is.setPos(_is.pos() + len);
-            _is.cr = nextChordRest(cr);
+//            _is.setPos(_is.pos() + len);
+            _is.cr = nextChordRest(_is.cr);
+            _is.setPos(_is.cr->tick());
             emit posChanged(_is.pos());
             }
       }
@@ -682,6 +683,8 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
                   }
             }
 
+      Chord* firstChord = 0;
+
       while (len) {
             int gap = makeGap(tick, track, len);
 // printf("  gap is %d, rest %d\n", gap, len - gap);
@@ -702,6 +705,8 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             chord->setTrack(track);
             chord->setLen(gap);
             chord->add(note);
+            if (firstChord == 0)
+                  firstChord = chord;
 
             chord->setStemDirection(stemDirection);
             note->setHeadGroup(headGroup);
@@ -729,6 +734,7 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             tie->setTrack(note->track());
             note->setTieFor(tie);
             }
+      _is.cr = firstChord;
       _layout->connectTies();
       }
 
