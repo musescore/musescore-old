@@ -35,6 +35,7 @@
 #include "timesig.h"
 #include "clef.h"
 #include "pitchspelling.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -1300,22 +1301,35 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         int off = 0;
                         if (clef == 4)
                               off = -14;
-                        if (key == -1)
-                              off += 3;
+
+                        static int keyOffsets[15] = {
+                         //   -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7
+                              7,  4, 1, 5, 2, 6, 3, 0, 4, 1, 5, 2, 6, 3, 0
+                              };
+                        off += keyOffsets[key + 7];
 
                         foreach(CNote n, o->notes) {
                               Note* note = new Note(this);
-                              int step   = n.pitch + off + 6 * 7;
-                              // int tpc    = step2tpc(step % 7, n.alteration);
-                              int tpc    = step2tpc(step % 7, 0);
-                              int oktave = step / 7;
-                              int pitch  = tpc2pitch(tpc) + oktave * 12;
-//                              pitch += n.alteration;
-                              if (n.alteration)
-                                    printf("  alteration %d\n", n.alteration);
+                              int l = n.pitch + off + 7 * 6;
+                              int octave = 0;
+                              while (l < 0) {
+                                    l += 7;
+                                    octave--;
+                                    }
+                              octave += l / 7;
+                              l       = l % 7;
+
+                              int pitch = pitchKeyAdjust(l, key) + octave * 12;
+                              pitch += n.alteration;
+
+
+                              if (pitch > 127)
+                                    pitch = 127;
+                              else if (pitch < 0)
+                                    pitch = 0;
 
                               note->setPitch(pitch);
-                              note->setTpc(tpc);
+                              // note->setTpc(tpc);
 
                               chord->add(note);
                               }
@@ -1349,8 +1363,15 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         CapKey* o = static_cast<CapKey*>(no);
                         // printf("%d:%d <Key> %d\n", tick, staffIdx, o->signature);
                         int key = staff(staffIdx)->key(tick);
-                        if (key != o->signature)
+                        if (key != o->signature) {
                               staff(staffIdx)->setKey(tick, o->signature);
+                              KeySig* ks = new KeySig(this);
+                              ks->setTrack(staffIdx * VOICES);
+                              Measure* m = getCreateMeasure(tick);
+                              Segment* s = m->getSegment(Segment::SegKeySig, tick);
+                              s->add(ks);
+                              ks->setSig(key, o->signature);
+                              }
                         }
                         break;
                   case T_METER:
@@ -1358,6 +1379,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         CapMeter* o = static_cast<CapMeter*>(no);
                         if (o->log2Denom > 7)
                               break;
+                        SigEvent se = sigmap->timesig(tick);
+                        SigEvent ne(o->numerator, 1 << o->log2Denom);
+                        if (!(se == ne))
+                              sigmap->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
                         ts->setSig(1 << o->log2Denom, o->numerator);
                         ts->setTick(tick);
@@ -1365,10 +1390,6 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(Segment::SegTimeSig, tick);
                         s->add(ts);
-                        SigEvent se = sigmap->timesig(tick);
-                        SigEvent ne(o->numerator, 1 << o->log2Denom);
-                        if (!(se == ne))
-                              sigmap->add(tick, ne);
                         }
                         break;
                   case T_EXPL_BARLINE:
