@@ -5867,10 +5867,6 @@ seleccione un compás e ténteo de novo</translation>
         <translation>MuseScore: Gardar partitura</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>Ficheiro comprimido do MuseScore (*.mscz);;Ficheiro do MuseScore (*.msc);;</translation>
-    </message>
-    <message>
         <source>Open Temp File
 </source>
         <translation>Abrir ficheiro temporal</translation>
@@ -5968,6 +5964,14 @@ fallou:</translation>
     <message>
         <source>PostScript File (*.ps)</source>
         <translation>Ficheiro PostScript (*.ps)</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

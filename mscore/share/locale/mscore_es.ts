@@ -5890,10 +5890,6 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation type="unfinished">Formato MuseScore Comprimido (*.mscz)</translation>
     </message>
@@ -5953,6 +5949,14 @@ failed: </source>
     <message>
         <source>MuseScore: Write File</source>
         <translation type="unfinished">MuseScore: Escribir Archivo</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

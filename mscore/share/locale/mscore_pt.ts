@@ -5930,10 +5930,6 @@ Falhou:  </translation>
         <translation type="unfinished">MuseScore: Escrever ficheiro</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation type="unfinished">Formato MusicXML (*.xml)</translation>
     </message>
@@ -5955,6 +5951,14 @@ Falhou:  </translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -62,6 +62,7 @@ struct UndoOp {
             ToggleInvisible,
             ChangeColor,
             ChangePitch,
+            ChangeTpc,
             ChangeSubtype,
             ChangeAccidental,
             SetStemDirection,

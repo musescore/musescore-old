@@ -5864,10 +5864,6 @@ lütfen bir ölçü seçin ve tekrar deneyin</translation>
         <translation>MuseScore: Notayı Kaydet</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>Sıkıştırılmış MuseScore Dosyası (*.mscz);; MuseScore Dosyası (*.msc);;</translation>
-    </message>
-    <message>
         <source>Open Temp File
 </source>
         <translation>Geçici Dosya Aç
@@ -5974,6 +5970,14 @@ başarısız:</translation>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
         <translation>Seçili birşey yok. Bütün eserin ötelenmesini ister misiniz?</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.10">
   <Mag>1.31233</Mag>
-  <xoff>-6.96208</xoff>
-  <yoff>-0.757803</yoff>
+  <xoff>0.211667</xoff>
+  <yoff>0.211667</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -910,12 +910,20 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>104640</tick>
     <tick2>105600</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="-1.79949" y="0"/>
+      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>105600</tick>
     <tick2>106560</tick2>
+    <Segment>
+      <off1 x="0.662968" y="0"/>
+      <off2 x="-4.35665" y="0"/>
+      </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
@@ -2291,7 +2299,6 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>MeasureNumber</subtype>
         <offset x="0.473549" y="-2.17832"/>
-        <selected>1</selected>
         </Text>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;

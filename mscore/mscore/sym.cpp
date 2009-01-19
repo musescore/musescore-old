@@ -370,10 +370,6 @@ void initSymbols()
       symbols[clefOneSym]                 = Sym("clef one",   0x31, 2);
       symbols[clefFiveSym]                = Sym("clef five",  0x35, 2);
 
-      symbols[stemSym]                    = Sym("stem",  0xf08f, 0);
-      symbols[stemSym]                    = Sym("stem",  0xf08f, 0);
-      symbols[dstemSym]                   = Sym("dstem", 0xf090, 0);
-
       symbols[plusSym]                    = Sym("plus",               0x2b, 0);
 
       symbols[zeroSym]                    = Sym("zero",               0x30, 0);
@@ -550,31 +546,8 @@ void initSymbols()
       symbols[accFreebaseSym]             = Sym("acc freebase",             0xe1b1, 0);
       symbols[accStdbaseSym]              = Sym("acc stdbase",              0xe1b2, 0);
       symbols[accBayanbaseSym]            = Sym("acc bayanbase",            0xe1b3, 0);
-      symbols[accSBSym]                   = Sym("acc sb",                   0xf0ba, 0);
-      symbols[accBBSym]                   = Sym("acc bb",                   0xf0bb, 0);
-      symbols[accOldEESym]                = Sym("acc old ee",               0xe1b4, 0);
-      symbols[accOldEESSym]               = Sym("acc old ees",              0xf0bd, 0);
-      symbols[wholedoheadSym]             = Sym("whole do head",            0xf0be, 0);
-      symbols[halfdoheadSym]              = Sym("half do head",             0xf0bf, 0);
-      symbols[doheadSym]                  = Sym("do head",                  0xf0c0, 0);
 
-      symbols[wholereheadSym]             = Sym("whole re head",             0xf0c1, 0);
-      symbols[halfreheadSym]              = Sym("half re head",              0xf0c2, 0);
-      symbols[reheadSym]                  = Sym("re head",                   0xf0c3, 0);
-      symbols[wholemeheadSym]             = Sym("whole me head",             0xf0c4, 0);
-      symbols[halfmeheadSym]              = Sym("half me head",              0xf0c5, 0);
-      symbols[meheadSym]                  = Sym("me head",                   0xf0c6, 0);
-      symbols[wholefaheadSym]             = Sym("whole fa head",             0xf0c7, 0);
-      symbols[halffauheadSym]             = Sym("half fau head",             0xf0c8, 0);
-      symbols[fauheadSym]                 = Sym("fau head",                  0xf0c9, 0);
-      symbols[halffadheadSym]             = Sym("half fad head",             0xf0ca, 0);
-      symbols[fadheadSym]                 = Sym("fad head",                  0xf0cb, 0);
-      symbols[wholelaheadSym]             = Sym("whole la head",             0xf0cc, 0);
-      symbols[halflaheadSym]              = Sym("half la head",              0xf0cd, 0);
-      symbols[laheadSym]                  = Sym("la head",                   0xf0ce, 0);
-      symbols[wholeteheadSym]             = Sym("whole te head",             0xf0cf, 0);
-      symbols[halfteheadSym]              = Sym("half te head",              0xf0d0, 0);
-      symbols[teheadSym]                  = Sym("te head",                   0xf0d1, 0);
+      symbols[accOldEESym]                = Sym("acc old ee",               0xe1b4, 0);
 
       symbols[flipSym]                    = Sym("flip stem",  0xe0fd, 0);
 

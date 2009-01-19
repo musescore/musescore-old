@@ -220,10 +220,28 @@ void NotelinesObj::read()
       abort();
       }
 
+//---------------------------------------------------------
+//   VoltaObj::read
+//---------------------------------------------------------
+
 void VoltaObj::read()
       {
       BasicDrawObj::read();
-      abort();
+
+      x0 = cap->readInt();
+      x1 = cap->readInt();
+      y  = cap->readInt();
+      color = cap->readColor();
+
+      unsigned char flags = cap->readByte();
+      bLeft      = (flags & 1) != 0; // links abgeknickt
+      bRight     = (flags & 2) != 0; // rechts abgeknickt
+      bDotted    = (flags & 4) != 0;
+      allNumbers = (flags & 8) != 0;
+
+      unsigned char numbers = cap->readByte();
+      from = numbers & 0x0F;
+      to = (numbers >> 4) & 0x0F;
       }
 
 void GuitarObj::read()
@@ -232,10 +250,18 @@ void GuitarObj::read()
       abort();
       }
 
+//---------------------------------------------------------
+//   TrillObj::read
+//---------------------------------------------------------
+
 void TrillObj::read()
       {
       BasicDrawObj::read();
-      abort();
+      x0 = cap->readInt();
+      x1 = cap->readInt();
+      y  = cap->readInt();
+      color = cap->readColor();
+      trillSign = cap->readByte();
       }
 
 //---------------------------------------------------------
@@ -1134,12 +1160,14 @@ void Capella::read(QFile* fp)
       comment  = readString();
       printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
-      nRel   = readUnsigned();
-      nAbs   = readUnsigned();
+      nRel   = readUnsigned();            // 75
+      nAbs   = readUnsigned();            // 16
       unsigned char b   = readByte();
       bUseReadSize      = b & 1;
       bAllowCompression = b & 2;
       bPrintLandscape   = b & 16;
+
+      printf("  nRel %d  nAbs %d useReadSize %d compresseion %d\n", nRel, nAbs, bUseReadSize, bAllowCompression);
 
       readLayout();
 
@@ -1268,15 +1296,24 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         chord->setTrack(staffIdx * VOICES + voice);
                         s->add(chord);
                         int clef = staff(staffIdx)->clef(tick);
-                        int off  = clefTable[clef].yOffset;
-
+                        int key  = staff(staffIdx)->key(tick);
+                        int off = 0;
+                        if (clef == 4)
+                              off = -14;
+                        if (key == -1)
+                              off += 3;
 
                         foreach(CNote n, o->notes) {
                               Note* note = new Note(this);
-                              int step   = n.pitch + off + 7 * 7 - 4;
-                              int tpc    = step2tpc(step % 7, n.alteration);
+                              int step   = n.pitch + off + 6 * 7;
+                              // int tpc    = step2tpc(step % 7, n.alteration);
+                              int tpc    = step2tpc(step % 7, 0);
                               int oktave = step / 7;
                               int pitch  = tpc2pitch(tpc) + oktave * 12;
+//                              pitch += n.alteration;
+                              if (n.alteration)
+                                    printf("  alteration %d\n", n.alteration);
+
                               note->setPitch(pitch);
                               note->setTpc(tpc);
 

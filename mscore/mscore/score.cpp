@@ -1384,7 +1384,7 @@ void Score::spell()
                               }
                         }
                   }
-            ::spell(notes);
+            spellNotelist(notes);
             }
       }
 

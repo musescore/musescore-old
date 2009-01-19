@@ -5908,10 +5908,6 @@ selezionare una Battuta e riprovare</translation>
         <translation>Nessuna Selezione. Si desidera Trasporre l&apos;INTERO Spartito?</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>File MuseScore Compresso (*.mscz);;File MuseScore (*.msc);;</translation>
-    </message>
-    <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation>Formato MuseScore Compresso (*.mscz)</translation>
     </message>
@@ -5972,6 +5968,14 @@ selezionare una Battuta e riprovare</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

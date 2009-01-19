@@ -5943,10 +5943,6 @@ please select a measure and try again</source>
         <translation>MuseScore: Запись файла</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>Сжатые файлы MuseScore (*.mscz);;Файлы MuseScore (*.msc);;</translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation>Файл MusicXML (*.xml)</translation>
     </message>
@@ -5973,6 +5969,14 @@ please select a measure and try again</source>
     <message>
         <source>PostScript File (*.ps)</source>
         <translation>Файл PostScript (*.ps)</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

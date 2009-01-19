@@ -71,7 +71,7 @@ static const char* undoName[] = {
       "InsertMeasure",     "RemoveMeasure",
       "InsertStaves",      "RemoveStaves",
       "SortStaves",        "ToggleInvisible",
-      "ChangeColor",       "ChangePitch",
+      "ChangeColor",       "ChangePitch", "ChangeTpc",
       "ChangeSubtype",     "AddAccidental",
       "SetStemDirection",  "FlipSlurDirection", "FlipBeamDirection",
       "ChangeKeySig",
@@ -317,6 +317,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   int pitch  = note->pitch();
                   note->changePitch(i->val1);
                   i->val1 = pitch;
+                  }
+                  break;
+            case UndoOp::ChangeTpc:
+                  {
+                  Note* note = (Note*)(i->element1);
+                  int tpc  = note->tpc();
+                  note->setTpc(i->val1);
+                  i->val1 = tpc;
                   }
                   break;
             case UndoOp::ChangeAccidental:
@@ -906,6 +914,21 @@ void Score::undoChangePitch(Note* note, int pitch)
       i.type     = UndoOp::ChangePitch;
       i.element1 = note;
       i.val1     = pitch;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeTpc
+//---------------------------------------------------------
+
+void Score::undoChangeTpc(Note* note, int tpc)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeTpc;
+      i.element1 = note;
+      i.val1     = tpc;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
