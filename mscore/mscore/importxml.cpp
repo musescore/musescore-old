@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: importxml.cpp,v 1.81 2006/04/13 07:36:48 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -73,13 +73,13 @@
 
 /**
  Convert MusicXML \a step / \a alter / \a octave to midi pitch,
- set line and user accidental.
+ set pitch and tpc.
  */
 
-static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave, int /*accidental*/, Ottava* ottava, int track)
+static void xmlSetPitch(Note* n, char step, int alter, int octave, Ottava* ottava, int track)
       {
-//      printf("xmlSetPitch(n=%p, tick=%d, st=%c, alter=%d, octave=%d, accidental=%d)",
-//             n, tick, step, alter, octave, accidental);
+//      printf("xmlSetPitch(n=%p, st=%c, alter=%d, octave=%d)\n",
+//             n, step, alter, octave);
       int istep = step - 'A';
       //                       a  b   c  d  e  f  g
       static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
@@ -95,7 +95,7 @@ static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave,
             pitch = 127;
 
       if (ottava != 0 && ottava->track() == track)
-    	      pitch -= ottava->pitchShift();
+            pitch -= ottava->pitchShift();
 
       n->setPitch(pitch);
 
@@ -2258,7 +2258,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             // pitch must be set before adding note to chord as note
             // is inserted into pitch sorted list (ws)
 
-            xmlSetPitch(note, tick, c, alter, octave, accidental, ottava, track);
+            xmlSetPitch(note, c, alter, octave, ottava, track);
             cr->add(note);
 
             ((Chord*)cr)->setNoStem(noStem);
@@ -2266,7 +2266,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             if (accidental && editorial)
-                  note->changeAccidental(accidental + 5);
+                  note->setUserAccidental(accidental + 5);
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
