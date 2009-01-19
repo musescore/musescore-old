@@ -1,4 +1,6 @@
-19.jan (ws)
+19.jan (lv)
+      - fixed MusicXML import of editorial accidentals
+       (ws)
       - save dialog: if *.msc extension is selected and a name without
         extension entered, save as *.msc instead using the default *.mscz
       - cleanup of symbol palette
