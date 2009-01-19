@@ -28,6 +28,7 @@
 #include "pitchspelling.h"
 #include "staff.h"
 #include "chord.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   step2tpc
@@ -617,7 +618,7 @@ void spell(QList<NoteEvent*>& notes, int key)
 //   spell
 //---------------------------------------------------------
 
-void spell(QList<Note*>& notes)
+void Score::spellNotelist(QList<Note*>& notes)
       {
       int n = notes.size();
 
@@ -636,16 +637,16 @@ void spell(QList<Note*>& notes)
                   tab = tab1;
 
             if (start == 0) {
-                  notes[0]->setTpc(tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
+                  undoChangeTpc(notes[0], tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
                   if (n > 1)
-                        notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
+                        undoChangeTpc(notes[1], tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
                   if (n > 2)
-                        notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
+                        undoChangeTpc(notes[2], tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
                   }
             if ((end - start) >= 6) {
-                  notes[start+3]->setTpc(tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
-                  notes[start+4]->setTpc(tab[(notes[start+4]->pitch() % 12) * 2 + ((opt & 16) >> 4)]);
-                  notes[start+5]->setTpc(tab[(notes[start+5]->pitch() % 12) * 2 + ((opt & 32) >> 5)]);
+                  undoChangeTpc(notes[start+3], tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
+                  undoChangeTpc(notes[start+4], tab[(notes[start+4]->pitch() % 12) * 2 + ((opt & 16) >> 4)]);
+                  undoChangeTpc(notes[start+5], tab[(notes[start+5]->pitch() % 12) * 2 + ((opt & 32) >> 5)]);
                   }
             if (end == n) {
                   int n = end - start;
@@ -653,13 +654,13 @@ void spell(QList<Note*>& notes)
                   switch(n - 6) {
                         case 3:
                               k = end - start - 3;
-                              notes[end-3]->setTpc(tab[(notes[end-3]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                              undoChangeTpc(notes[end-3], tab[(notes[end-3]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         case 2:
                               k = end - start - 2;
-                              notes[end-2]->setTpc(tab[(notes[end-2]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                              undoChangeTpc(notes[end-2], tab[(notes[end-2]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         case 1:
                               k = end - start - 1;
-                              notes[end-1]->setTpc(tab[(notes[end-1]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                              undoChangeTpc(notes[end-1], tab[(notes[end-1]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         }
                   break;
                   }

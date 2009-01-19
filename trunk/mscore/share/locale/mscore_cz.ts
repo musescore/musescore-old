@@ -5855,10 +5855,6 @@ please select a measure and try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open Temp File
 </source>
         <translation type="unfinished"></translation>
@@ -5952,6 +5948,14 @@ failed: </source>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

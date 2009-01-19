@@ -235,15 +235,24 @@ bool MuseScore::saveFile()
 bool Score::saveFile(bool autosave)
       {
       if (created()) {
+            QString selectedFilter;
+            QString f1 = tr("Compressed MuseScore File (*.mscz)");
+            QString f2 = tr("MuseScore File (*.msc)");
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
                QString("./%1.mscz").arg(name()),
-               tr("Compressed MuseScore File (*.mscz);;"
-                  "MuseScore File (*.msc);;")
+               f1 + ";;" + f2,
+               &selectedFilter
                );
             if (fn.isEmpty())
                   return false;
             fileInfo()->setFile(fn);
+// printf("suffix <%s>  filter <%s> f2 <%s>\n",
+//   qPrintable(fileInfo()->suffix()), qPrintable(selectedFilter), qPrintable(f2));
+            if (fileInfo()->suffix() == "") {
+                  if (selectedFilter == f2)
+                        fileInfo()->setFile(fn + ".msc");
+                  }
             setCreated(false);
             }
 

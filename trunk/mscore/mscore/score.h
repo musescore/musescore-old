@@ -438,6 +438,8 @@ class Score : public QObject {
       void undoChangeSubtype(Element* element, int st);
       void undoChangeNoteHead(Note*, int group);
       void undoChangePitch(Note* note, int pitch);
+      void spellNotelist(QList<Note*>& notes);
+      void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, int mode);
       void undoChangeChordRestLen(ChordRest* cr, int len);
       void undoChangeEndBarLineType(Measure*, int);

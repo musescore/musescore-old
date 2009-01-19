@@ -5860,10 +5860,6 @@ en probeer het dan opnieuw</translation>
         <translation>MuseScore: Opslaan Partituur</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>Gecomprimeerd MuseScore Bestand (*.mscz);;MuseScore File (*.msc);;</translation>
-    </message>
-    <message>
         <source>Open Temp File
 </source>
         <translation></translation>
@@ -5966,6 +5962,14 @@ failed: </source>
     <message>
         <source>PostScript File (*.ps)</source>
         <translation>PostScript File (*.ps)</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

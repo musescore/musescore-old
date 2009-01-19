@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="de">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -1390,7 +1391,7 @@ zu Notenzeile</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige klingend</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
@@ -1450,23 +1451,23 @@ zu Notenzeile</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">System</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Abstand Systemklammer</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale Taktbreite</translation>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale Zahl leerer Takte</translation>
     </message>
     <message>
         <source>begin repeat left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Linker Rand Start Wiederholung</translation>
     </message>
 </context>
 <context>
@@ -3993,11 +3994,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>zeige klingend</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige klingend</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -4017,7 +4018,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>klingend</translation>
     </message>
     <message>
         <source>add staccato</source>
@@ -4546,15 +4547,15 @@ before closing?</source>
     </message>
     <message>
         <source>show invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Unsichtbare zeigen</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahmen zeigen</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Rahmen zeigen</translation>
     </message>
 </context>
 <context>
@@ -4730,19 +4731,19 @@ before closing?</source>
     </message>
     <message>
         <source>Subelements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Subelemente:</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>S-Kanal</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckt</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation type="unfinished"></translation>
+        <translation>Anw-Vorz</translation>
     </message>
 </context>
 <context>
@@ -4979,7 +4980,7 @@ before closing?</source>
     </message>
     <message>
         <source>drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>Drumset</translation>
     </message>
 </context>
 <context>
@@ -5621,42 +5622,42 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetze 1/1 ... durch ½ ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetze (C) ... durch © ... in Copyright Text</translation>
     </message>
     <message>
         <source>Default duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standarddauer</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished">Ped (Pedal)</translation>
+        <translation>Ped (Pedal)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>* (Pedal)</translation>
     </message>
     <message>
         <source>. (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>. (Pedal)</translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>dash (Pedal)</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
-        <translation type="unfinished"></translation>
+        <translation>tr (Triller)</translation>
     </message>
 </context>
 <context>
@@ -5734,15 +5735,15 @@ Bitte wählen sie eine Note oder Pause aus und versuchen es nochmal.
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>lese Datei &lt;</translation>
     </message>
     <message>
         <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Import Capella</translation>
     </message>
 </context>
 <context>
@@ -5946,10 +5947,6 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation>MuseScore: Datei schreiben</translation>
     </message>
     <message>
-        <source>Compressed MuseScore File (*.mscz);;MuseScore File (*.msc);;</source>
-        <translation>Komprimierte MuseScore Datei (*.mscz);;MuseScore Datei (*.msc);;</translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML Format (*.xml)</translation>
     </message>
@@ -5972,6 +5969,14 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>PostScript File (*.ps)</source>
         <translation>PostScript Datei (*.ps)</translation>
+    </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation>Komprimierte MuseScore Datei (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.msc)</source>
+        <translation>MuseScore Datei (*.msc)</translation>
     </message>
 </context>
 <context>

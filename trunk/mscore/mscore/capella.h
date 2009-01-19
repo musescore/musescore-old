@@ -342,6 +342,16 @@ class VoltaObj : public BasicDrawObj {
    public:
       VoltaObj(Capella* c) : BasicDrawObj(CAP_VOLTA, c) {}
       void read();
+
+      int x0, x1, y;
+      QColor color;
+
+      bool bLeft;
+      bool bRight;
+      bool bDotted;
+      bool allNumbers;
+
+      int from, to;
       };
 
 //---------------------------------------------------------
@@ -362,6 +372,10 @@ class TrillObj : public BasicDrawObj {
    public:
       TrillObj(Capella* c) : BasicDrawObj(CAP_TRILL, c) {}
       void read();
+
+      int x0, x1, y;
+      QColor color;
+      bool trillSign;
       };
 
 //---------------------------------------------------------
