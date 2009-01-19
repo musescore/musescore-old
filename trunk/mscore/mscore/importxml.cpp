@@ -2511,10 +2511,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       if (offsetType == OFFSET_ABS){
     	  styleYOff = styleYOff * DPMM / _spatium;
       }
-      styleYOff= styleYOff;
 
-
-      double dy = e.attribute("default-y", "0").toDouble()*-0.1;
+      double dy = e.attribute("default-y", QString::number(styleYOff*-10)).toDouble()*-0.1;
 
       QString printObject(e.attribute("print-object", "yes"));
       QString printFrame(e.attribute("print-frame"));
