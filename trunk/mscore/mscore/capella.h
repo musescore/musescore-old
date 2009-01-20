@@ -215,11 +215,12 @@ enum { CAP_GROUP, CAP_TRANSPOSABLE, CAP_METAFILE, CAP_SIMPLE_TEXT, CAP_TEXT, CAP
       };
 
 class BasicDrawObj : public CapellaObj {
+   public:
       unsigned char modeX, modeY, distY, flags;
       int nRefNote;
-      short range;
-
-   public:
+      int nNotes;
+      bool background;
+      int pageRange;
       int type;
 
       BasicDrawObj(int t, Capella* c) : CapellaObj(c) { type = t; }
@@ -385,11 +386,11 @@ class TrillObj : public BasicDrawObj {
 class SlurObj : public BasicDrawObj {
       QPoint bezierPoint[4];
       QColor color;
-      unsigned char nEnd, nMid, nDotDist, nDotWidth;
 
    public:
       SlurObj(Capella* c) : BasicDrawObj(CAP_SLUR, c) {}
       void read();
+      unsigned char nEnd, nMid, nDotDist, nDotWidth;
       };
 
 //---------------------------------------------------------
@@ -471,6 +472,7 @@ class BasicDurationalObj : public CapellaObj {
       void read();
       int ticks() const;
       bool invisible;
+      QList<BasicDrawObj*> objects;
       };
 
 //---------------------------------------------------------
@@ -501,7 +503,6 @@ struct CNote {
 class ChordObj : public BasicDurationalObj, public NoteObj {
       unsigned char beamMode;
       char notationStave;
-      char stemDir;
       char dStemLength;
       unsigned char nTremoloBars;
       unsigned articulation;
@@ -515,6 +516,7 @@ class ChordObj : public BasicDurationalObj, public NoteObj {
       void read();
       QList<Verse> verse;
       QList<CNote> notes;
+      char stemDir;           // -1 down, 0 auto, 1 up, 3 no stem
       };
 
 //---------------------------------------------------------

@@ -1311,6 +1311,12 @@ void Score::checkSlurs()
                         ((ChordRest*)n1)->removeSlurFor(s);
                         ((ChordRest*)n1)->removeSlurBack(s);
                         }
+                  if (n1 == 0)
+                        printf("  start at %d(%d) not found\n", s->tick(), s->track());
+                  if (n2 == 0)
+                        printf("  end at %d(%d) not found\n", s->tick2(), s->track2());
+                  if ((n1 || n2) && (n1==n2))
+                        printf("  start == end\n");
                   int idx = _gel.indexOf(s);
                   _gel.removeAt(idx);
                   }

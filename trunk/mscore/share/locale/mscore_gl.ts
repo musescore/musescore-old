@@ -1,6 +1,73 @@
 <!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
+    <name></name>
+    <message>
+        <source>Treble Clef (G Clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble Clef 15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va bassa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass Clef (F Clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass Clef 8va bassa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass Clef 15mb bassa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baritone Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subbass Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soprano Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alto Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tenor Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tablature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Percussion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>French Violin Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -1469,10 +1536,6 @@ fallou:</translation>
 <context>
     <name>EditTempoBase</name>
     <message>
-        <source>Dialog</source>
-        <translation>Diálogo</translation>
-    </message>
-    <message>
         <source>BPM:</source>
         <translation>BPM:</translation>
     </message>
@@ -1487,6 +1550,10 @@ fallou:</translation>
     <message>
         <source>Cancel</source>
         <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>MuseScore: Tempo Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1946,6 +2013,14 @@ fallou:</translation>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>Instrumentos de MuseScore (*.xml);;Todos os ficheiros (*)</translation>
+    </message>
+    <message>
+        <source>Staff %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2635,10 +2710,6 @@ fallou:</translation>
     <message>
         <source>MuseScore: Load Score</source>
         <translation>MuseScore: Cargar partitura</translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Todos os ficheiros admitidos (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;Ficheiros do MuseScore (*.mscz *.msc);;Ficheiros MusicXML (*.xml *.mxl);;Ficheiros MIDI (*.mid *.kar);;Ficheiros de datos de Muse (*.md);;Ficheiros do LilyPond &lt;experimental&gt; (*.ly);;Ficheiros BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Todos os ficheiros (*)</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -4553,6 +4624,10 @@ before closing?</source>
     <message>
         <source>Show Frames</source>
         <translation>Mostrar as molduras</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

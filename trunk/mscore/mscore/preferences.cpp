@@ -43,6 +43,36 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 extern bool useFactorySettings;
 
 //---------------------------------------------------------
+//   LanguageItem
+//---------------------------------------------------------
+
+struct LanguageItem {
+      QString key;
+      QString name;
+      LanguageItem(const char* k, const char* n) {
+            key = QString::fromUtf8(k);
+            name = QString::fromUtf8(n);
+            }
+      };
+
+LanguageItem languages[] = {
+      LanguageItem("",      "system"),
+      LanguageItem("cz",    "Czech"),
+      LanguageItem("de",    "German"),
+      LanguageItem("en",    "English"),
+      LanguageItem("es",    "Spanish"),
+      LanguageItem("fr",    "French"),
+      LanguageItem("gl",    "Galician"),
+      LanguageItem("hi_IN", "Hindi"),
+      LanguageItem("it",    "Italian"),
+      LanguageItem("nl",    "Dutch"),
+      LanguageItem("pt",    "Portuguese"),
+      LanguageItem("pt_BR", "Brasilian Portuguese"),
+      LanguageItem("ru",    "Russian"),
+      LanguageItem("tr",    "Turkey"),
+      };
+
+//---------------------------------------------------------
 //   appStyleSheet
 //---------------------------------------------------------
 
@@ -658,6 +688,14 @@ void PreferenceDialog::updateValues(Preferences* p)
       landscape->setChecked(p->landscape);
 
       defaultPlayDuration->setValue(p->defaultPlayDuration);
+      language->clear();
+      int curIdx = 0;
+      for(unsigned i = 0; i < sizeof(languages)/sizeof(*languages); ++i) {
+            language->addItem(languages[i].name, i);
+            if (languages[i].key == p->language)
+                  curIdx = i;
+            }
+      language->setCurrentIndex(curIdx);
 
       sfChanged = false;
       }
@@ -983,12 +1021,9 @@ void PreferenceDialog::apply()
                         }
                   }
             }
-      QString lang = language->currentText();
-      if (lang != "system") {
-            QStringList sl = lang.split(" ");
-            lang = sl[0];
-            }
-      preferences.language            = lang;
+      int lang = language->itemData(language->currentIndex()).toInt();
+      preferences.language = lang == 0 ? "system" : languages[lang].key;
+
       preferences.iconHeight          = iconHeight->value();
       preferences.iconWidth           = iconWidth->value();
       preferences.noteEntryIconHeight = noteEntryIconHeight->value();

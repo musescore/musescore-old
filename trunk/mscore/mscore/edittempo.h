@@ -35,6 +35,8 @@ class EditTempo : public QDialog, private Ui::EditTempoBase {
    private slots:
       void selectTempo(int);
       void itemDoubleClicked(QListWidgetItem*);
+      void textChanged(const QString&);
+      void bpmChanged(double);
 
    public:
       EditTempo(QWidget* parent);

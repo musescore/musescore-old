@@ -36,6 +36,7 @@
 #include "clef.h"
 #include "pitchspelling.h"
 #include "keysig.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -110,7 +111,7 @@ void TextObj::read()
       char txt[size+1];
       cap->read(txt, size);
       txt[size] = 0;
-printf("read textObj len %d <%s>\n", size, txt);
+// printf("read textObj len %d <%s>\n", size, txt);
       }
 
 //---------------------------------------------------------
@@ -124,7 +125,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       font   = cap->readFont();
       text   = cap->readString();
-      printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
+//      printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
       }
 
 //---------------------------------------------------------
@@ -392,7 +393,10 @@ void BasicDrawObj::read()
       distY = cap->readByte();
       flags = cap->readByte();
       nRefNote = cap->readInt();
-      range = cap->readWord();
+      short range = cap->readWord();
+      nNotes      = range & 0x0fff;
+      background  = range & 0x1000;
+      pageRange   = (range >> 13) & 0x7;
       }
 
 //---------------------------------------------------------
@@ -448,9 +452,8 @@ void BasicDurationalObj::read()
             if (tuplet & 0xc0)
                   abort();
             }
-      if (c & 0x40) {
-            cap->readDrawObjectArray();
-            }
+      if (c & 0x40)
+            objects = cap->readDrawObjectArray();
       if (c & 0x80)
             abort();
       }
@@ -486,7 +489,7 @@ void RestObj::read()
             fullMeasures = cap->readUnsigned();
       if (bAddVerticalShift)
             vertShift = cap->readInt();
-printf("         Rest %s invisible %d\n", timeNames[t], invisible);
+// printf("         Rest %s invisible %d\n", timeNames[t], invisible);
       }
 
 //---------------------------------------------------------
@@ -554,13 +557,13 @@ void ChordObj::read()
                               v.verseNumber = cap->readString();
                         if (b & 16)
                               v.text = cap->readString();
-printf("         Verse(%d) <%s><%s>\n", i, qPrintable(v.verseNumber), qPrintable(v.text));
+// printf("         Verse(%d) <%s><%s>\n", i, qPrintable(v.verseNumber), qPrintable(v.text));
                         verse.append(v);
                         }
                   }
             }
       unsigned nNotes = cap->readUnsigned();
-printf("         Chord %s flags 0x%02x notes %d\n", timeNames[t], flags, nNotes);
+// printf("         Chord %s flags 0x%02x notes %d\n", timeNames[t], flags, nNotes);
       for (unsigned int i = 0; i < nNotes; ++i) {
             CNote n;
             n.explAlteration = 0;
@@ -578,7 +581,7 @@ printf("         Chord %s flags 0x%02x notes %d\n", timeNames[t], flags, nNotes)
             if (b & 0x40)
                   n.explAlteration = 1;
             n.silent = b & 0x80;
-printf("            Note pitch %d head %d alteration %d\n", n.pitch, n.headType, n.alteration);
+// printf("            Note pitch %d head %d alteration %d\n", n.pitch, n.headType, n.alteration);
             notes.append(n);
             }
       }
@@ -697,7 +700,6 @@ QColor Capella::readColor()
       QColor c;
       unsigned char b = readByte();
       if (b >= 16) {
-            printf("read RGB =====================\n");
             int r = readByte();
             int g = readByte();
             int b = readByte();
@@ -739,7 +741,7 @@ QFont Capella::readFont()
 //   readStaveLayout
 //---------------------------------------------------------
 
-void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
+void Capella::readStaveLayout(CapStaffLayout* sl, int /*idx*/)
       {
       sl->barlineMode = readByte();
       sl->noteLines   = readByte();
@@ -754,7 +756,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
                   }
                   break;
             }
-      printf("StaffLayout %d: noteLines %d\n", idx, sl->noteLines);
+//      printf("StaffLayout %d: noteLines %d\n", idx, sl->noteLines);
 
       sl->bSmall      = readByte();
       sl->topDist      = readInt();
@@ -767,7 +769,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
       sl->form = clef & 7;
       sl->line = (clef >> 3) & 7;
       sl->oct  = (clef >> 6);
-      printf("   clef %x  form %d, line %d, oct %d\n", clef, sl->form, sl->line, sl->oct);
+//      printf("   clef %x  form %d, line %d, oct %d\n", clef, sl->form, sl->line, sl->oct);
 
         // Schlagzeuginformation
       unsigned char b   = readByte();
@@ -791,15 +793,15 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
       sl->sound = readInt();
       sl->volume = readInt();
       sl->transp = readInt();
-      printf("   sound %d vol %d transp %d\n", sl->sound, sl->volume, sl->transp);
+//      printf("   sound %d vol %d transp %d\n", sl->sound, sl->volume, sl->transp);
 
       sl->descr              = readString();
       sl->name               = readString();
       sl->abbrev             = readString();
       sl->intermediateName   = readString();
       sl->intermediateAbbrev = readString();
-      printf("   descr <%s> name <%s>  abbrev <%s> iname <%s> iabrev <%s>\n",
-         sl->descr, sl->name, sl->abbrev, sl->intermediateName, sl->intermediateAbbrev);
+//      printf("   descr <%s> name <%s>  abbrev <%s> iname <%s> iabrev <%s>\n",
+//         sl->descr, sl->name, sl->abbrev, sl->intermediateName, sl->intermediateAbbrev);
       }
 
 //---------------------------------------------------------
@@ -829,7 +831,7 @@ void Capella::readLayout()
       // Musterzeilen
       unsigned nStaveLayouts = readUnsigned();
 
-      printf("%d staves\n", nStaveLayouts);
+//      printf("%d staves\n", nStaveLayouts);
 
       for (unsigned iStave = 0; iStave < nStaveLayouts; iStave++) {
             CapStaffLayout* sl = new CapStaffLayout;
@@ -844,7 +846,7 @@ void Capella::readLayout()
             b.from   = readInt();
             b.to     = readInt();
             b.curly = readByte();
-            printf("Bracket%d %d-%d curly %d\n", i, b.from, b.to, b.curly);
+//            printf("Bracket%d %d-%d curly %d\n", i, b.from, b.to, b.curly);
             brackets.append(b);
             }
       }
@@ -870,7 +872,7 @@ void CapClef::read()
       form            = (FORM) (b & 7);
       line            = (LINE) ((b >> 3) & 7);
       oct             = (OCT)  (b >> 6);
-printf("         Clef %s\n", name());
+// printf("         Clef %s\n", name());
       }
 
 //---------------------------------------------------------
@@ -910,7 +912,7 @@ void CapKey::read()
       {
       unsigned char b = cap->readByte();
       signature = int(b) - 7;
-printf("         Key %d\n", signature);
+// printf("         Key %d\n", signature);
       }
 
 //---------------------------------------------------------
@@ -923,7 +925,7 @@ void CapMeter::read()
       unsigned char d = cap->readByte();
       log2Denom       = (d & 0x7f) - 1;
       allaBreve       = d & 0x80;
-printf("         Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+// printf("         Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
       }
 
 //---------------------------------------------------------
@@ -953,7 +955,7 @@ void CapExplicitBarline::read()
       assert (type <= BAR_REPENDSTART);
       assert (barMode <= 2);
 
-printf("         Expl.Barline type %d mode %d\n", type, barMode);
+// printf("         Expl.Barline type %d mode %d\n", type, barMode);
       }
 
 //---------------------------------------------------------
@@ -962,7 +964,7 @@ printf("         Expl.Barline type %d mode %d\n", type, barMode);
 
 void Capella::readVoice(CapStaff* cs, int idx)
       {
-printf("      Voice %d\n", idx);
+// printf("      Voice %d\n", idx);
       if (readChar() != 'C')
             throw CAP_BAD_VOICE_SIG;
 
@@ -1060,7 +1062,7 @@ void Capella::readStaff(CapSystem* system)
       staff->color = readColor();
       readExtra();
 
-printf("      Staff iLayout %d\n", staff->iLayout);
+// printf("      Staff iLayout %d\n", staff->iLayout);
       // Stimmen
       unsigned nVoices = readUnsigned();
       for (unsigned i = 0; i < nVoices; i++)
@@ -1159,7 +1161,7 @@ void Capella::read(QFile* fp)
       author   = readString();
       keywords = readString();
       comment  = readString();
-      printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
+//      printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
       nRel   = readUnsigned();            // 75
       nAbs   = readUnsigned();            // 16
@@ -1168,7 +1170,7 @@ void Capella::read(QFile* fp)
       bAllowCompression = b & 2;
       bPrintLandscape   = b & 16;
 
-      printf("  nRel %d  nAbs %d useReadSize %d compresseion %d\n", nRel, nAbs, bUseReadSize, bAllowCompression);
+//      printf("  nRel %d  nAbs %d useReadSize %d compresseion %d\n", nRel, nAbs, bUseReadSize, bAllowCompression);
 
       readLayout();
 
@@ -1183,8 +1185,8 @@ void Capella::read(QFile* fp)
 
       unsigned n = readUnsigned();
       for (unsigned int i = 0; i < n; ++i) {
-            char* s = readString();       // names of galerie objects
-            printf("Galerie: <%s>\n", s);
+            /*char* s =*/ readString();       // names of galerie objects
+//            printf("Galerie: <%s>\n", s);
             }
 
       backgroundChord = new ChordObj(this);
@@ -1250,6 +1252,8 @@ bool Score::importCapella(const QString& name)
 int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       {
       int voice = cvoice->voiceNo;
+      int track = staffIdx * VOICES + voice;
+
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
                   case T_REST:
@@ -1279,7 +1283,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               Rest* rest = new Rest(this);
                               rest->setTick(tick);
                               rest->setLen(ticks);
-                              rest->setTrack(staffIdx * VOICES + voice);
+                              rest->setTrack(track);
                               s->add(rest);
                               }
                         tick += ticks;
@@ -1294,7 +1298,21 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         chord->setLen(ticks);
-                        chord->setTrack(staffIdx * VOICES + voice);
+                        chord->setTrack(track);
+                        switch (o->stemDir) {
+                              case -1:    // down
+                                    chord->setStemDirection(DOWN);
+                                    break;
+                              case 1:     // up
+                                    chord->setStemDirection(UP);
+                                    break;
+                              case 3:     // no stem
+                                    chord->setNoStem(true);
+                                    break;
+                              case 0:     // auto
+                              default:
+                                    break;
+                              }
                         s->add(chord);
                         int clef = staff(staffIdx)->clef(tick);
                         int key  = staff(staffIdx)->key(tick);
@@ -1335,7 +1353,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               }
                         foreach(Verse v, o->verse) {
                               Lyrics* l = new Lyrics(this);
-                              l->setTrack(staffIdx * VOICES + voice);
+                              l->setTrack(track);
                               l->setText(v.text);
                               if (v.hyphen)
                                     l->setSyllabic(Lyrics::BEGIN);
@@ -1398,6 +1416,41 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_PAGE_BKGR:
                         printf("<PageBreak>\n");
                         break;
+                  }
+            BasicDurationalObj* d = 0;
+            if (no->type() == T_REST)
+                  d = static_cast<BasicDurationalObj*>(static_cast<RestObj*>(no));
+            else if (no->type() == T_CHORD)
+                  d = static_cast<BasicDurationalObj*>(static_cast<ChordObj*>(no));
+            if (d) {
+                  foreach(BasicDrawObj* o, d->objects) {
+// enum { CAP_GROUP, CAP_TRANSPOSABLE, CAP_METAFILE, CAP_SIMPLE_TEXT, CAP_TEXT, CAP_RECT_ELLIPSE,
+//      CAP_LINE, CAP_POLYGON, CAP_WAVY_LINE, CAP_SLUR, CAP_NOTE_LINES, CAP_WEDGE, CAP_VOLTA,
+//      CAP_BRACKET, CAP_GUITAR, CAP_TRILL
+                        switch (o->type) {
+                              case CAP_SIMPLE_TEXT:
+                                    printf("text\n");
+                                    break;
+                              case CAP_WAVY_LINE:
+                                    printf("wavy line\n");
+                                    break;
+                              case CAP_SLUR:
+                                    {
+                                    SlurObj* so = static_cast<SlurObj*>(o);
+                                    printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
+                                       so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
+                                    Slur* slur = new Slur(this);
+                                    slur->setTick(tick);
+                                    slur->setTrack(track);
+                                    slur->setTick2(tick + 480*2);
+                                    slur->setTrack2(track);
+                                    _layout->add(slur);
+                                    }
+                                    break;
+                              default:
+                                    printf("draw obj %d\n", o->type);
+                              }
+                        }
                   }
             }
       return tick;
