@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name>AboutBox</name>
@@ -2032,35 +2033,35 @@ failed: </source>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished">Begin</translation>
+        <translation>Begin</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation><byte value="x9"/>Symbool</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ped (Pedaal)</translation>
     </message>
     <message>
         <source>x:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>y:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorgaan</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished">Einde</translation>
+        <translation>Einde</translation>
     </message>
 </context>
 <context>
@@ -2268,7 +2269,7 @@ failed: </source>
     </message>
     <message>
         <source>nominal</source>
-        <translation>nominaal</translation>
+        <translation>weergave</translation>
     </message>
     <message>
         <source>/</source>
@@ -2276,7 +2277,7 @@ failed: </source>
     </message>
     <message>
         <source>actual</source>
-        <translation>actueel</translation>
+        <translation>gebruiken</translation>
     </message>
     <message>
         <source>Other</source>
@@ -5619,42 +5620,42 @@ voor dat u afsluit?</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang 1/2 ... met ½ ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>vervang (C) ... met © ... in Copyright Tekst</translation>
     </message>
     <message>
         <source>Default duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard lengte:</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ped (Pedaal)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>* (Pedaal)</translation>
     </message>
     <message>
         <source>. (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>. (Pedaal)</translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>streepje (Pedaal)</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
-        <translation type="unfinished"></translation>
+        <translation>tr (Triller)</translation>
     </message>
 </context>
 <context>
@@ -5728,15 +5729,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>bestand inlezen &lt;</translation>
     </message>
     <message>
         <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Import Capella</translation>
     </message>
 </context>
 <context>
@@ -5965,11 +5966,11 @@ failed: </source>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecomprimeerd MuseScore Bestand (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore File (*.msc)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Bestand (*.msc)</translation>
     </message>
 </context>
 <context>
