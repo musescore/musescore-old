@@ -68,8 +68,7 @@ StaffListItem::StaffListItem()
 void StaffListItem::setPartIdx(int val)
       {
       _partIdx = val;
-      QString s("Staff %1");
-      setText(0, s.arg(_partIdx + 1));
+      setText(0, InstrumentsDialog::tr("Staff %1").arg(_partIdx + 1));
       }
 
 //---------------------------------------------------------
@@ -79,7 +78,7 @@ void StaffListItem::setPartIdx(int val)
 void StaffListItem::setClef(int val)
       {
       _clef = val;
-      setText(1, clefTable[_clef].name);
+      setText(1, InstrumentsDialog::tr(clefTable[_clef].name));
       }
 
 //---------------------------------------------------------
@@ -158,7 +157,7 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
 
-      instrumentList->setHeaderLabels(QStringList("Instrument List"));
+      instrumentList->setHeaderLabels(QStringList(tr("Instrument List")));
       QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
       partiturList->setHeaderLabels(header);
 

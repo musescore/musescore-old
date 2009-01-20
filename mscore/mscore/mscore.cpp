@@ -1957,9 +1957,9 @@ Shortcut::Shortcut(const Shortcut& c)
       context = c.context;
       icon    = c.icon;
       action  = c.action;
-      descr   = qApp->translate("MuseScore", c.descr.toLatin1().data());
-      help    = qApp->translate("MuseScore", c.help.toLatin1().data());
-      text    = qApp->translate("MuseScore", c.text.toLatin1().data());
+      descr   = qApp->translate("MuseScore", c.descr.toUtf8().data());
+      help    = qApp->translate("MuseScore", c.help.toUtf8().data());
+      text    = qApp->translate("MuseScore", c.text.toUtf8().data());
       }
 
 //---------------------------------------------------------

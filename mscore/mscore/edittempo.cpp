@@ -21,47 +21,61 @@
 #include "edittempo.h"
 
 struct TempoVal {
-      const char* name;
+      QString name;
       double bpm;
+
+      TempoVal(const TempoVal& v) {
+            name = v.name;
+            bpm  = v.bpm;
+            }
+      TempoVal(const char* s, int t) {
+            name = QString::fromUtf8(s);
+            bpm  = t;
+            }
       };
 
 static TempoVal tempos[] = {
-      { "Adagio",         60 },
-      { "Allegro",        80 },
-      { "Allegretto",    100 },
-      { "Allegro",       120 },
-      { "Andante",        80 },
-      { "Con brio",      120 },
-      { "Con moto",      120 },
-      { "Grave",          50 },
-      { "Largo",          50 },
-      { "Lento",          60 },
-      { "Maestoso",       70 },
-      { "Moderato",      100 },
-      { "Prestissimo",   180 },
-      { "Presto",        160 },
-      { "Vivace",        120 },
-      { "Vivo",          120 },
-      { "Ballad",         60 },
-      { "Fast",          120 },
-      { "Lively",        120 },
-      { "Moderate",      100 },
-      { "Slow",           60 },
-      { "Very slow",      40 },
-      { "With movement", 120 },
-      { "Entrainant",    120 },
-      { "Lent",           60 },
-      { "Rapide",        120 },
-      { "Regulier",       80 },
-      { "Vif",           120 },
-      { "Vite",          120 },
-      { "Vivement",      160 },
-      { "Bewegt",        100 },
-      { "Langsam",        60 },
-      { "Lebhaft",       120 },
-      { "Mäßig",         100 },
-      { "Schnell",       120 },
+      TempoVal("Adagio",         60),
+      TempoVal("Allegro",        80),
+      TempoVal("Allegretto",    100),
+      TempoVal("Allegro",       120),
+      TempoVal("Andante",        80),
+      TempoVal("Con brio",      120),
+      TempoVal("Con moto",      120),
+      TempoVal("Grave",          50),
+      TempoVal("Largo",          50),
+      TempoVal("Lento",          60),
+      TempoVal("Maestoso",       70),
+      TempoVal("Moderato",      100),
+      TempoVal("Prestissimo",   180),
+      TempoVal("Presto",        160),
+      TempoVal("Vivace",        120),
+      TempoVal("Vivo",          120),
+      TempoVal("Ballad",         60),
+      TempoVal("Fast",          120),
+      TempoVal("Lively",        120),
+      TempoVal("Moderate",      100),
+      TempoVal("Slow",           60),
+      TempoVal("Very slow",      40),
+      TempoVal("With movement", 120),
+      TempoVal("Entrainant",    120),
+      TempoVal("Lent",           60),
+      TempoVal("Rapide",        120),
+      TempoVal("Regulier",       80),
+      TempoVal("Vif",           120),
+      TempoVal("Vite",          120),
+      TempoVal("Vivement",      160),
+      TempoVal("Bewegt",        100),
+      TempoVal("Langsam",        60),
+      TempoVal("Lebhaft",       120),
+      TempoVal("Mäßig",         100),     // utf8!
+      TempoVal("Schnell",       120)
       };
+
+static bool tempoListInit = true;
+static bool tempoListChanged = true;
+
+static QList<TempoVal*> tempoL;
 
 //---------------------------------------------------------
 //   EditTempo
@@ -71,11 +85,20 @@ EditTempo::EditTempo(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      for (unsigned i = 0; i < sizeof(tempos)/sizeof(*tempos); ++i) {
-            QListWidgetItem* item = new QListWidgetItem(tempos[i].name, tempoList);
-            item->setData(Qt::UserRole, i);
+      if (tempoListInit) {
+            tempoListInit = false;
+            for (unsigned i = 0; i < sizeof(tempos)/sizeof(*tempos); ++i) {
+                  tempoL.append(new TempoVal(tempos[i]));
+                  }
+            }
+      int idx = 0;
+      foreach(TempoVal* v, tempoL) {
+            QListWidgetItem* item = new QListWidgetItem(v->name, tempoList);
+            item->setData(Qt::UserRole, idx++);
             }
       selectTempo(3);
+      connect(tempoText, SIGNAL(textChanged(const QString&)), SLOT(textChanged(const QString&)));
+      connect(tempoBPM,  SIGNAL(valueChanged(double)), SLOT(bpmChanged(double)));
       connect(tempoList, SIGNAL(currentRowChanged(int)), SLOT(selectTempo(int)));
       connect(tempoList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(itemDoubleClicked(QListWidgetItem*)));
       }
@@ -97,11 +120,36 @@ void EditTempo::itemDoubleClicked(QListWidgetItem* item)
 
 void EditTempo::selectTempo(int n)
       {
-      if (n < 0 || n >= int(sizeof(tempos)/sizeof(*tempos)))
+      if (n < 0 || n >= tempoL.size())
             return;
-      _text = tempos[n].name;
-      _bpm  = tempos[n].bpm;
+      _text = tempoL[n]->name;
       tempoText->setText(_text);
+      _bpm  = tempoL[n]->bpm;
       tempoBPM->setValue(_bpm);
+      }
+
+//---------------------------------------------------------
+//   textChanged
+//---------------------------------------------------------
+
+void EditTempo::textChanged(const QString& s)
+      {
+      _text = s;
+      int idx = tempoList->currentItem()->data(Qt::UserRole).toInt();
+      tempoL[idx]->name = s;
+      tempoListChanged = true;
+      tempoList->currentItem()->setText(s);
+      }
+
+//---------------------------------------------------------
+//   bpmChanged
+//---------------------------------------------------------
+
+void EditTempo::bpmChanged(double v)
+      {
+      _bpm = v;
+      int idx = tempoList->currentItem()->data(Qt::UserRole).toInt();
+      tempoL[idx]->bpm = v;
+      tempoListChanged = true;
       }
 

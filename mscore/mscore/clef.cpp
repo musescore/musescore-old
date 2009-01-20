@@ -43,60 +43,60 @@ const ClefInfo clefTable[] = {
 //             name line octave  yoffset pitchoffset  name
       { "G",   2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
-            "Treble Clef (G Clef)"
+            QT_TR_NOOP("Treble Clef (G Clef)")
             },
       { "G",   2,  1,   7, 52,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            "Treble Clef 8va"},
+            QT_TR_NOOP("Treble Clef 8va") },
       { "G",   2,  2,  14, 59,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            "Treble Clef 15ma"},
+            QT_TR_NOOP("Treble Clef 15ma") },
       { "G",   2, -1,  -7, 38,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            "Treble Clef 8va bassa"},
+            QT_TR_NOOP("Treble Clef 8va bassa") },
       { "F",   4,  0, -12, 33,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            "Bass Clef (F Clef)"},
+            QT_TR_NOOP("Bass Clef (F Clef)") },
       { "F",   4, -1, -19, 26,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            "Bass Clef 8va bassa"},
+            QT_TR_NOOP("Bass Clef 8va bassa") },
       { "F",   4, -2, -26, 19,
             { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            "Bass Clef 15mb bassa"},
+            QT_TR_NOOP("Bass Clef 15mb bassa") },
 
       { "F",   4,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            "Baritone Clef"},
+            QT_TR_NOOP("Baritone Clef") },
       { "F",   2,  0, -14, 31,
             { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
-            "Subbass Clef"},
+            QT_TR_NOOP("Subbass Clef") },
 
       { "C",   1,  0,  -2, 43,
             { 5, 1, 4, 0, 3, -1, 2, 2, -1, 3, 0, 4, 1, 5 },
-            "Soprano Clef"},        // CLEF_C1
+            QT_TR_NOOP("Soprano Clef") },        // CLEF_C1
       { "C",   2,  0,  -4, 41,
             { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 },
-            "Mezzo-soprano Clef"},  // CLEF_C2
+            QT_TR_NOOP("Mezzo-soprano Clef") },  // CLEF_C2
       { "C",   3,  0,  -6, 39,
             { 1, 4, 0, 3, 6, 2, 5, 5, 2, 6, 3, 7, 4, 8 },
-            "Alto Clef"},           // CLEF_C3
+            QT_TR_NOOP("Alto Clef") },           // CLEF_C3
       { "C",   4,  0,  -8, 37,
             { 6, 2, 5, 1, 4, 0, 3, 3, 0, 4, 1, 5, 2, 6 },
-            "Tenor Clef"},          // CLEF_C4
+            QT_TR_NOOP("Tenor Clef")  },          // CLEF_C4
 
       { "TAB", 5,  0,   0,  0,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
-            "Tablature"},
+            QT_TR_NOOP("Tablature") },
       { "PERC",2,  0,   0, 45,
             { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
-            "Percussion"},
+            QT_TR_NOOP("Percussion") },
 
       { "C",   5,  0, -10, 35,
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            "Baritone Clef"},            // CLEF_C5
+            QT_TR_NOOP("Baritone Clef") },            // CLEF_C5
       { "G",   1,  0,   2, 47,
             { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
-            "French Violin Clef"},       // CLEF_G4
+            QT_TR_NOOP("French Violin Clef") },       // CLEF_G4
       };
 
 //---------------------------------------------------------

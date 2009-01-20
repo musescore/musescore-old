@@ -420,6 +420,7 @@ bool Score::read(QString name)
       else if (cs.toLower() == "cap") {
             if (!importCapella(name))
                   return false;
+            connectSlurs();
             }
       else {
             if (!loadCompressedMsc(name))

@@ -67,7 +67,7 @@ extern QIcon grace4Icon, grace16Icon, grace32Icon;
 class Sym;
 
 static const int ICON_HEIGHT = 24;
-static const int ICON_WIDTH  = 16;
+static const int ICON_WIDTH  = 20;
 
 extern QIcon symIcon(const Sym&, int size, int width, int height);
 extern QIcon noteEntryIcon;

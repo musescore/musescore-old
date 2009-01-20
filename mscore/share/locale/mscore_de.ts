@@ -2,6 +2,73 @@
 <!DOCTYPE TS><TS version="1.1" language="de">
 <defaultcodec></defaultcodec>
 <context>
+    <name></name>
+    <message>
+        <source>Treble Clef (G Clef)</source>
+        <translation>Violinenschlüssel (G)</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va</source>
+        <translation>Violinenschlüssel 8va</translation>
+    </message>
+    <message>
+        <source>Treble Clef 15ma</source>
+        <translation>Violinenschlüssel 15ma</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va bassa</source>
+        <translation>Violinenschlüssel 8va bassa</translation>
+    </message>
+    <message>
+        <source>Bass Clef (F Clef)</source>
+        <translation>Bassschlüssel (F)</translation>
+    </message>
+    <message>
+        <source>Bass Clef 8va bassa</source>
+        <translation>Bassschlüssel 8va bassa</translation>
+    </message>
+    <message>
+        <source>Bass Clef 15mb bassa</source>
+        <translation>Bassschlüssel 15mb bassa</translation>
+    </message>
+    <message>
+        <source>Baritone Clef</source>
+        <translation>Baritonschlüssel</translation>
+    </message>
+    <message>
+        <source>Subbass Clef</source>
+        <translation>Subbassschlüssel</translation>
+    </message>
+    <message>
+        <source>Soprano Clef</source>
+        <translation>Sopranschlüssel</translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano Clef</source>
+        <translation>Mezzosopranschlüssel</translation>
+    </message>
+    <message>
+        <source>Alto Clef</source>
+        <translation>Altschlüssel</translation>
+    </message>
+    <message>
+        <source>Tenor Clef</source>
+        <translation>Tenorschlüssel</translation>
+    </message>
+    <message>
+        <source>Tablature</source>
+        <translation>Tabulatur</translation>
+    </message>
+    <message>
+        <source>Percussion</source>
+        <translation>Schlagzeug</translation>
+    </message>
+    <message>
+        <source>French Violin Clef</source>
+        <translation>Französischer Violinschlüssel</translation>
+    </message>
+</context>
+<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -1473,10 +1540,6 @@ zu Notenzeile</translation>
 <context>
     <name>EditTempoBase</name>
     <message>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -1491,6 +1554,10 @@ zu Notenzeile</translation>
     <message>
         <source>Text:</source>
         <translation>Text:</translation>
+    </message>
+    <message>
+        <source>MuseScore: Tempo Text</source>
+        <translation>MuseScore: Tempotext</translation>
     </message>
 </context>
 <context>
@@ -1950,6 +2017,14 @@ fehlgeschlagen: </translation>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore Instrumente (*.xml);;Alle Dateien (*)</translation>
+    </message>
+    <message>
+        <source>Staff %1</source>
+        <translation>Zeile %1</translation>
+    </message>
+    <message>
+        <source>Instrument List</source>
+        <translation>Instrumentenliste</translation>
     </message>
 </context>
 <context>
@@ -4161,10 +4236,6 @@ fehlgeschlagen: </translation>
         <translation>Metadaten...</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle unterstützte Dateien (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU);;MuseScore (*.mscz *.msc);;MusicXML (*.xml *.mxl);;MIDI (*.mid *.kar);;Muse Data (*.md);;LilyPond &lt;experimentell&gt; (*.ly);;BandInABox &lt;experimentell&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Dateien (*)</translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation>ohneName</translation>
     </message>
@@ -4556,6 +4627,10 @@ before closing?</source>
     <message>
         <source>Show Frames</source>
         <translation>Rahmen zeigen</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation>Alle unterstützten Formate (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore (*.mscz *.msc);;MusicXML (*.xml *.mxl);;MIDI (*.mid *.kar);;Muse Data (*.md);;Capella (*.cap);;LilyPond &lt;experimentell&gt; (*.ly);;BB &lt;experimentell&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle (*)</translation>
     </message>
 </context>
 <context>

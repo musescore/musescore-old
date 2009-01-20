@@ -1,4 +1,9 @@
-20.jan (tb)
+20.jan (ws)
+      - make more strings translatable; fix translation of shortcut names;
+        clef names are now translatable
+      - make language selection in preference dialog translatable
+      - updated tempo text dialog
+      (tb)
       - updated Dutch translation by Jaap Plaisier
 19.jan (lv)
       - fixed MusicXML import of editorial accidentals
