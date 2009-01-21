@@ -533,8 +533,10 @@ void Score::cmdAddPitch1(int pitch, bool addFlag)
                   }
 //            _is.setPos(_is.pos() + len);
             _is.cr = nextChordRest(_is.cr);
-            _is.setPos(_is.cr->tick());
-            emit posChanged(_is.pos());
+            if (_is.cr) {
+                  _is.setPos(_is.cr->tick());
+                  emit posChanged(_is.pos());
+                  }
             }
       }
 
