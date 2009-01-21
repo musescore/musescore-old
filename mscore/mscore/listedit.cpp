@@ -296,8 +296,10 @@ void PageListEditor::updateList(Score* s)
                   SLine* line = (SLine*)el;
                   foreach(LineSegment* ls, line->lineSegments()) {
                         ElementItem* sse = new ElementItem(se, ls);
-                        if (ls->type() == TEXTLINE_SEGMENT)
-                              new ElementItem(sse, ((TextLineSegment*)ls)->text());
+                        if (ls->type() == TEXTLINE_SEGMENT) {
+                              if (static_cast<TextLineSegment*>(ls)->text())
+                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
+                              }
                         }
                   }
             else

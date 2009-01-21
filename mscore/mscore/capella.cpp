@@ -1254,6 +1254,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       int voice = cvoice->voiceNo;
       int track = staffIdx * VOICES + voice;
 
+      //
+      // pass I
+      //
+      int startTick = tick;
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
                   case T_REST:
@@ -1417,6 +1421,13 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         printf("<PageBreak>\n");
                         break;
                   }
+            }
+
+      //
+      // pass II
+      //
+      tick = startTick;
+      foreach(NoteObj* no, cvoice->objects) {
             BasicDurationalObj* d = 0;
             if (no->type() == T_REST)
                   d = static_cast<BasicDurationalObj*>(static_cast<RestObj*>(no));
@@ -1424,9 +1435,6 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   d = static_cast<BasicDurationalObj*>(static_cast<ChordObj*>(no));
             if (d) {
                   foreach(BasicDrawObj* o, d->objects) {
-// enum { CAP_GROUP, CAP_TRANSPOSABLE, CAP_METAFILE, CAP_SIMPLE_TEXT, CAP_TEXT, CAP_RECT_ELLIPSE,
-//      CAP_LINE, CAP_POLYGON, CAP_WAVY_LINE, CAP_SLUR, CAP_NOTE_LINES, CAP_WEDGE, CAP_VOLTA,
-//      CAP_BRACKET, CAP_GUITAR, CAP_TRILL
                         switch (o->type) {
                               case CAP_SIMPLE_TEXT:
                                     printf("text\n");
@@ -1439,18 +1447,38 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     SlurObj* so = static_cast<SlurObj*>(o);
                                     printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
                                        so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
-                                    Slur* slur = new Slur(this);
-                                    slur->setTick(tick);
-                                    slur->setTrack(track);
-                                    slur->setTick2(tick + 480*2);
-                                    slur->setTrack2(track);
-                                    _layout->add(slur);
+                                    Segment* seg = tick2segment(tick);
+                                    int n = so->nNotes;
+                                    int tick2 = -1;
+                                    for (seg = seg->next1(); seg; seg = seg->next1()) {
+                                          if (seg->subtype() != Segment::SegChordRest)
+                                                continue;
+                                          if (seg->element(track))
+                                                --n;
+                                          else
+                                                printf("  %d empty seg\n", n);
+                                          if (n == 0) {
+                                                tick2 = seg->tick();
+                                                break;
+                                                }
+                                          }
+                                    if (tick2 >= 0) {
+                                          Slur* slur = new Slur(this);
+                                          slur->setTick(tick);
+                                          slur->setTrack(track);
+                                          slur->setTick2(tick2);
+                                          slur->setTrack2(track);
+                                          _layout->add(slur);
+                                          }
+                                    else
+                                          printf("second anchor for slur not found\n");
                                     }
                                     break;
                               default:
                                     printf("draw obj %d\n", o->type);
                               }
                         }
+                  tick += d->ticks();
                   }
             }
       return tick;

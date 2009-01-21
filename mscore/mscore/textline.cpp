@@ -27,6 +27,7 @@
 #include "score.h"
 #include "preferences.h"
 #include "sym.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -42,6 +43,24 @@ TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
       _text = seg._text;
+      }
+
+//---------------------------------------------------------
+//   setBeginText
+//---------------------------------------------------------
+
+void TextLine::setBeginText(const QString& s)
+      {
+      _beginText->setText(s, 0);
+      }
+
+//---------------------------------------------------------
+//   beginText
+//---------------------------------------------------------
+
+QString TextLine::beginText() const
+      {
+      return _beginText->getText();
       }
 
 //---------------------------------------------------------
@@ -174,6 +193,7 @@ void TextLineSegment::layout(ScoreLayout* l)
             case SEGMENT_SINGLE:
             case SEGMENT_BEGIN:
                   if (tl->hasBeginText()) {
+                        setAlign(tl->beginTextAlign());
                         if (_text == 0) {
                               _text = new TextC(tl->beginTextBasePtr(), score());
                               _text->setSubtype(TEXT_TEXTLINE);
@@ -190,6 +210,7 @@ void TextLineSegment::layout(ScoreLayout* l)
             case SEGMENT_MIDDLE:
             case SEGMENT_END:
                   if (tl->hasContinueText()) {
+                        setAlign(tl->continueTextAlign());
                         if (_text == 0) {
                               _text = new TextC(tl->continueTextBasePtr(), score());
                               _text->setSubtype(TEXT_TEXTLINE);
@@ -213,10 +234,12 @@ void TextLineSegment::layout(ScoreLayout* l)
 TextLine::TextLine(Score* s)
    : SLine(s)
       {
-      _beginText       = new TextBase;
-      _continueText    = new TextBase;
-      _hasBeginText    = false;
-      _hasContinueText = false;
+      _beginText         = new TextBase;
+      _continueText      = new TextBase;
+      _beginTextAlign    = 0;
+      _continueTextAlign = 0;
+      _hasBeginText      = false;
+      _hasContinueText   = false;
 
       _beginHookHeight = Spatium(1.5);
       _endHookHeight   = Spatium(1.5);
@@ -256,6 +279,8 @@ TextLine::TextLine(const TextLine& e)
       _beginSymbolOffset    = e._beginSymbolOffset;
       _continueSymbolOffset = e._continueSymbolOffset;
       _endSymbolOffset      = e._endSymbolOffset;
+      _beginTextAlign       = e._beginTextAlign;
+      _continueTextAlign    = e._continueTextAlign;
 
       _mxmlOff2   = e._mxmlOff2;
       }
@@ -340,11 +365,18 @@ void TextLine::read(QDomElement e)
             else if (tag == "lineColor")
                   _lineColor = readColor(e);
             else if (tag == "beginText") {
-                  // else if (_text->readProperties(e))
                   _hasBeginText = true;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (!_beginText->readProperties(ee))
+                              domError(e);
+                        }
                   }
             else if (tag == "continueText") {
                   _hasContinueText = true;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (!_continueText->readProperties(ee))
+                              domError(e);
+                        }
                   }
             else if (!SLine::readProperties(e))
                   domError(e);
@@ -467,12 +499,12 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       else
             frame->setChecked(false);
 #endif
-      connect(beginTextTb, SIGNAL(clicked()), SLOT(beginTextClicked()));
-      connect(continueTextTb, SIGNAL(clicked()), SLOT(continueTextClicked()));
       connect(beginTextRb, SIGNAL(toggled(bool)), SLOT(beginTextToggled(bool)));
       connect(beginSymbolRb, SIGNAL(toggled(bool)), SLOT(beginSymbolToggled(bool)));
       connect(continueTextRb, SIGNAL(toggled(bool)), SLOT(continueTextToggled(bool)));
       connect(continueSymbolRb, SIGNAL(toggled(bool)), SLOT(continueSymbolToggled(bool)));
+      connect(beginTextTb, SIGNAL(clicked()), SLOT(beginTextProperties()));
+      connect(continueTextTb, SIGNAL(clicked()), SLOT(continueTextProperties()));
       }
 
 //---------------------------------------------------------
@@ -524,24 +556,6 @@ void LineProperties::accept()
       }
 
 //---------------------------------------------------------
-//   beginTextClicked
-//---------------------------------------------------------
-
-void LineProperties::beginTextClicked()
-      {
-      printf("beginText...\n");
-      }
-
-//---------------------------------------------------------
-//   continueTextClicked
-//---------------------------------------------------------
-
-void LineProperties::continueTextClicked()
-      {
-      printf("continueText...\n");
-      }
-
-//---------------------------------------------------------
 //   beginTextToggled
 //---------------------------------------------------------
 
@@ -579,5 +593,122 @@ void LineProperties::continueSymbolToggled(bool val)
       {
       if (val)
             continueTextRb->setChecked(false);
+      }
+
+//---------------------------------------------------------
+//   beginTextProperties
+//---------------------------------------------------------
+
+void LineProperties::beginTextProperties()
+      {
+      Align a = tl->beginTextAlign();
+      TextProperties t(tl->beginTextBase(), &a, this);
+      tl->setBeginTextAlign(a);
+      t.exec();
+      }
+
+//---------------------------------------------------------
+//   continueTextProperties
+//---------------------------------------------------------
+
+void LineProperties::continueTextProperties()
+      {
+      Align a = tl->continueTextAlign();
+      TextProperties t(tl->continueTextBase(), &a, this);
+      tl->setContinueTextAlign(a);
+      t.exec();
+      }
+
+//---------------------------------------------------------
+//   TextProperties
+//---------------------------------------------------------
+
+TextProperties::TextProperties(TextBase* t, Align* al, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+
+      tb = t;
+      align = al;
+
+      QButtonGroup* g1 = new QButtonGroup(this);
+      g1->addButton(alignLeft);
+      g1->addButton(alignHCenter);
+      g1->addButton(alignRight);
+
+      QButtonGroup* g2 = new QButtonGroup(this);
+      g2->addButton(alignTop);
+      g2->addButton(alignVCenter);
+      g2->addButton(alignBottom);
+
+      QButtonGroup* g3 = new QButtonGroup(this);
+      g3->addButton(circleButton);
+      g3->addButton(boxButton);
+
+      int a = int(*align);
+      if (a & ALIGN_HCENTER)
+            alignHCenter->setChecked(true);
+      else if (a & ALIGN_RIGHT)
+            alignRight->setChecked(true);
+      else
+            alignLeft->setChecked(true);
+
+      if (a & ALIGN_VCENTER)
+            alignVCenter->setChecked(true);
+      else if (a & ALIGN_BOTTOM)
+            alignBottom->setChecked(true);
+      else
+            alignTop->setChecked(true);
+
+      QFont f = tb->defaultFont();
+      fontBold->setChecked(f.bold());
+      fontItalic->setChecked(f.italic());
+      fontUnderline->setChecked(f.underline());
+
+      double ps = double(f.pixelSize());
+      ps = (ps / DPI) * PPI;
+      fontSize->setValue(lrint(ps));
+      f.setPixelSize(lrint(ps));
+      fontSelect->setCurrentFont(f);
+
+      frameWidth->setValue(tb->frameWidth());
+      frame->setChecked(tb->frameWidth() > 0.0);
+      paddingWidth->setValue(tb->paddingWidth());
+      frameColor->setColor(tb->frameColor());
+      frameRound->setValue(tb->frameRound());
+      circleButton->setChecked(tb->circle());
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void TextProperties::accept()
+      {
+      tb->setFrameWidth(frameWidth->value());
+      tb->setPaddingWidth(paddingWidth->value());
+      tb->setFrameColor(frameColor->color());
+      tb->setFrameRound(frameRound->value());
+      tb->setCircle(circleButton->isChecked());
+      QFont f = fontSelect->currentFont();
+      double ps = double(fontSize->value());
+      ps = (ps * DPI)/PPI;
+      f.setPixelSize(lrint(ps));
+      f.setBold(fontBold->isChecked());
+      f.setItalic(fontItalic->isChecked());
+      f.setUnderline(fontUnderline->isChecked());
+      tb->setDefaultFont(f);
+
+      int a = 0;
+      if (alignHCenter->isChecked())
+            a |= ALIGN_HCENTER;
+      if (alignRight->isChecked())
+            a |= ALIGN_RIGHT;
+      if (alignVCenter->isChecked())
+            a |= ALIGN_VCENTER;
+      if (alignBottom->isChecked())
+            a |= ALIGN_BOTTOM;
+      *align = Align(a);
+      QDialog::accept();
       }
 
