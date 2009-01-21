@@ -2,7 +2,7 @@
 //  MusE Score
 //  Linux Music Score Editor
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,10 +21,13 @@
 #define __TEXTLINE_H__
 
 #include "line.h"
-#include "text.h"
 #include "ui_lineproperties.h"
+#include "ui_textproperties.h"
 
 class TextLine;
+class TextBase;
+class TextC;
+class Element;
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -76,6 +79,7 @@ class TextLine : public SLine {
    protected:
       TextBase* _beginText;
       TextBase* _continueText;
+      Align _beginTextAlign, _continueTextAlign;
       friend class TextLineSegment;
 
    public:
@@ -93,8 +97,8 @@ class TextLine : public SLine {
       void setHasBeginText(bool v)            { _hasBeginText = v;            }
       bool hasContinueText() const            { return _hasContinueText;      }
       void setHasContinueText(bool v)         { _hasContinueText = v;         }
-      void setBeginText(const QString& s)     { _beginText->setText(s, 0);    }
-      QString beginText() const               { return _beginText->getText(); }
+      void setBeginText(const QString& s);
+      QString beginText() const;
       bool beginHook() const                  { return _beginHook;            }
       bool endHook() const                    { return _endHook;              }
       void setBeginHook(bool v)               { _beginHook = v;               }
@@ -132,6 +136,10 @@ class TextLine : public SLine {
       void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
       void setMxmlOff2(int v)                 { _mxmlOff2 = v;                }
       int mxmlOff2() const                    { return _mxmlOff2;             }
+      Align beginTextAlign() const            { return _beginTextAlign;       }
+      Align continueTextAlign() const         { return _continueTextAlign;    }
+      void setBeginTextAlign(Align v)         { _beginTextAlign = v;          }
+      void setContinueTextAlign(Align v)      { _continueTextAlign = v;       }
       };
 
 //---------------------------------------------------------
@@ -143,17 +151,33 @@ class LineProperties : public QDialog, public Ui::LinePropertiesDialog {
 
       TextLine* tl;
 
-   public slots:
+   private slots:
       virtual void accept();
-      void beginTextClicked();
-      void continueTextClicked();
       void beginTextToggled(bool);
       void beginSymbolToggled(bool);
       void continueTextToggled(bool);
       void continueSymbolToggled(bool);
+      void beginTextProperties();
+      void continueTextProperties();
 
    public:
       LineProperties(TextLine*, QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   TextProperties
+//---------------------------------------------------------
+
+class TextProperties : public QDialog, public Ui::TextProperties {
+      Q_OBJECT
+      TextBase* tb;
+      Align* align;
+
+   private slots:
+      virtual void accept();
+
+   public:
+      TextProperties(TextBase*, Align*, QWidget* parent = 0);
       };
 
 #endif

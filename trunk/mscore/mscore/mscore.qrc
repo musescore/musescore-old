@@ -8,6 +8,9 @@
       <file>data/text_bold.svg</file>
       <file>data/text_italic.svg</file>
       <file>data/text_left.svg</file>
+      <file>data/text_top.svg</file>
+      <file>data/text_vcenter.svg</file>
+      <file>data/text_bottom.svg</file>
       <file>data/text_right.svg</file>
       <file>data/text_center.svg</file>
       <file>data/text_under.svg</file>

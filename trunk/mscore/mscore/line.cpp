@@ -103,7 +103,7 @@ bool LineSegment::startEdit(Viewer*, const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if ((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)

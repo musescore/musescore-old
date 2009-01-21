@@ -26,6 +26,7 @@
 #include "utils.h"
 #include "layout.h"
 #include "score.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   Ottava
