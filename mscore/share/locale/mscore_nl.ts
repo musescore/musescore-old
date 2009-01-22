@@ -1,70 +1,71 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
     <message>
         <source>Treble Clef (G Clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vioolsleutel (G-Sleutel)</translation>
     </message>
     <message>
         <source>Treble Clef 8va</source>
-        <translation type="unfinished"></translation>
+        <translation>Vioolsleutel 8va</translation>
     </message>
     <message>
         <source>Treble Clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>Vioolsleutel 15va</translation>
     </message>
     <message>
         <source>Treble Clef 8va bassa</source>
-        <translation type="unfinished"></translation>
+        <translation>Vioolsleutel 8va bas</translation>
     </message>
     <message>
         <source>Bass Clef (F Clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bassleutel (F-Sleutel)</translation>
     </message>
     <message>
         <source>Bass Clef 8va bassa</source>
-        <translation type="unfinished"></translation>
+        <translation>Bassleutel 8va</translation>
     </message>
     <message>
         <source>Bass Clef 15mb bassa</source>
-        <translation type="unfinished"></translation>
+        <translation>Bassleutel 15va</translation>
     </message>
     <message>
         <source>Baritone Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Bariton Sleutel</translation>
     </message>
     <message>
         <source>Subbass Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrabassleutel</translation>
     </message>
     <message>
         <source>Soprano Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Sopraansleutel</translation>
     </message>
     <message>
         <source>Mezzo-soprano Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezzo-sopraansleutel</translation>
     </message>
     <message>
         <source>Alto Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Altsleutel</translation>
     </message>
     <message>
         <source>Tenor Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenorsleutel</translation>
     </message>
     <message>
         <source>Tablature</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulatuur </translation>
     </message>
     <message>
         <source>Percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Slagwerk</translation>
     </message>
     <message>
         <source>French Violin Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>franse vioolsleutel</translation>
     </message>
 </context>
 <context>
@@ -1553,7 +1554,7 @@ toonhoogte</translation>
     </message>
     <message>
         <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tempo Tekst</translation>
     </message>
 </context>
 <context>
@@ -2014,11 +2015,11 @@ failed: </source>
     </message>
     <message>
         <source>Staff %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Notenbalk %1</translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenten Lijst</translation>
     </message>
 </context>
 <context>
@@ -4627,7 +4628,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Omdersteunde Bestanden (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;LilyPond Bestanden &lt;experimental&gt; (*.ly);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
     </message>
 </context>
 <context>
