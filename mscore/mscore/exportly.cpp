@@ -85,7 +85,8 @@ class ExportLy {
   int barlen;
   bool slur;
   bool pickup; // must be preserved from voice to voice, but deleted before each new measure....
-  bool graceswitch;
+  bool graceswitch, gracebeam;
+  int gracecount;
   int prevpitch, staffpitch, chordpitch, oktavdiff;
   int measurenumber, lastind, taktnr;
   bool repeatactive;
@@ -382,11 +383,11 @@ void ExportLy::ottava(Ottava* ot, int tick)
                         printf("ottava subtype %d not understood\n", st);
                   }
             if (sz)
-	      os << "#(set-octaviation " << sz << ") ";
+	      out << "#(set-octaviation " << sz << ") ";
             }
       else {
 	if (st == 0)
-	  os << "#(set-octaviation 0)";
+	  out << "#(set-octaviation 0)";
             }
       }
 
@@ -398,11 +399,11 @@ void ExportLy::pedal(Pedal* pd, int tick)
       {
       if (pd->tick() == tick)
 	{
-	  os << "\\override Staff.pedalSustainStyle #\'bracket ";
-	  os << "\\sustainDown ";
+	  out << "\\override Staff.pedalSustainStyle #\'bracket ";
+	  out << "\\sustainDown ";
 	}
       else
-	os << "\\sustainUp ";
+	out << "\\sustainUp ";
       }
 
 
@@ -418,14 +419,14 @@ void ExportLy::dynamic(Dynamic* dyn)
       || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
       || t == "rf" || t == "rfz" || t == "sfz" || t == "sffz" || t == "fz" || t == "sff")
     {
-      os << "\\" << t.toLatin1().data() << " ";
+      out << "\\" << t.toLatin1().data() << " ";
     }
   else if (t == "m" || t == "z")
     {
-      os << "\\"<< t.toLatin1().data() << " ";
+      out << "\\"<< t.toLatin1().data() << " ";
     }
     else
-      os << "_\\markup{"<< t.toLatin1().data() << "} ";
+      out << "_\\markup{"<< t.toLatin1().data() << "} ";
 }//end dynamic
 
 
@@ -1373,14 +1374,16 @@ void ExportLy::writeChord(Chord* c)
 	    out << "\\stemUp ";
 	  else if ((d == DOWN)  and (graceswitch == true))
 	    out << "\\stemDown ";
-	  else if (d == AUTO)
-	    {
-	      if (graceswitch == true) out << "] ";
-	      out << "\\stemNeutral ";
-	    }
+	//   else if (d == AUTO)
+// 	    {
+// 	      if (graceswitch == true) 
+// 		{
+// 		  out << "\\stemNeutral "; // we set this at the end of graces anyway.
+// 		}
+// 	    }
 	}
     }
-
+  
   bool tie=false;
   NoteList* nl = c->noteList();
 
@@ -1403,7 +1406,10 @@ void ExportLy::writeChord(Chord* c)
 	    {
 	      graceswitch=false;
 	      graceslur=true;
-	      out << " } "; //end of grace
+	      gracebeam=false;
+	      if (gracecount > 1) out << " ] "; //single graces are not beamed
+	      out << " } \\stemNeutral "; //end of grace
+	      gracecount=0;
 	    }
 	  break;
 	case NOTE_ACCIACCATURA:
@@ -1415,18 +1421,17 @@ void ExportLy::writeChord(Chord* c)
 	    {
 	      out << "\\grace{\\stemUp "; //as long as general stemdirecton is unsolved: graces always stemUp.
 	      graceswitch=true;
+	      gracebeam=false;
+	      gracecount=0;
 	    }
-	  else
-	    if (graceswitch==true)
-	      {
-		out << "[( "; //grace always beamed and slurred
-	      }
+	  gracecount++;
 	  break;
 	} //end of switch(gracen)
 
 
-      findTuplets(n); //probably causes trouble here, Must be put outside of notelist.
+      findTuplets(n); //probably causes trouble here, Must be put outside of notelist?
 
+      if (gracecount==2) out << " [ ";
       out << tpc2name(n->tpc());
       if (n->tieFor()) tie=true;
       purepitch = n->pitch();
@@ -1493,6 +1498,12 @@ void ExportLy::writeChord(Chord* c)
    //  prevpitch=chordpitch;
 
   writeLen(c->tickLen());
+
+  
+  if (graceswitch)
+    {
+      out << " ( "; //gracenotes always slurred. Remove by hand in lilyfile otherwise.
+    }
 
   if (tie)
     {
@@ -2023,6 +2034,8 @@ void ExportLy::writeScore()
   int voice=0;
   cleannote="c";
   prevnote="c";
+  gracecount=0;
+
 
 
   if (np > 1)
@@ -2246,14 +2259,32 @@ void ExportLy::writeScoreBlock()
       --level;
       indentF();
       os << ">>\n";
-      pianostaff=false;
+      // pianostaff=false;
     }
 
   indentF();
   os << "\\set Score.hairpinToBarline = ##t\n";
+  indentF();
+  os << "\\set Score.skipBars = ##t\n";
+  indentF();
+  os << "\\set Score.melismaBusyProperties = #'()\n";
+  indentF();
+  os << "\\override Score.BarNumber #'break-visibility = #end-of-line-invisible %%every bar is numbered.!!!\n";
+  indentF();
+  os << "%% remove previous line to get barnumbers only at beginning of system.\n";
+  indentF();
+  os << " #(set-accidental-style 'modern-cautionary)\n";
+  indentF();
+  os << "\\set Score.markFormatter = #format-mark-box-letters %%boxed rehearsal-marks\n";
+
   --level;
   indentF();
   os << ">>\n";
+  indentF();
+  if (pianostaff)
+    os << "\\layout {#(layout-set-staff-size 20)}\n";
+  else
+  os << "\\layout {#(layout-set-staff-size 14)}\n";
   --level;
   indentF();
   os <<"}\n";
@@ -2302,14 +2333,14 @@ bool ExportLy::write(const QString& name)
 
   // TODO/O.G.: better choose between standard formats and specified paper
   // dimensions. We normally don't need both.
-
+  
   double lw = pf->width() - pf->evenLeftMargin - pf->evenRightMargin;
-  os << "\\paper {\n"
-    "  line-width    = " << lw * INCH << "\\mm\n"
-    "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n"
-    "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n"
-    "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n"
-    "  }\n\n";
+  os << "\\paper {\n";
+  os <<  "  line-width    = " << lw * INCH << "\\mm\n";
+  os <<  "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n";
+  os <<  "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n";
+  os <<  "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n";
+  os <<  "  }\n\n";
 
 
   //---------------------------------------------------
@@ -2412,23 +2443,19 @@ bool ExportLy::write(const QString& name)
 
 /* TODO: PROJECTS
    3. Piano staffs/GrandStaffs, system brackets and braces.
-   4 Lyrics
+   4. Lyrics
    5. Collisions in crowded multi-voice staffs (e.g. cello-suite).
    6. General tuplets
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
    9. Put in score-block last thing before closing of the relative clause:
-   \set Score.skipBars = ##t
-   \set Score.melismaBusyProperties = #'()
-   \override Score.BarNumber #'break-visibility = #end-of-line-invisible
-   #(set-accidental-style 'modern-cautionary)
-   \set Score.markFormatter = #format-mark-box-letters
 
    - etc.etc.etc.etc........
 */
 
 /*TODO: BUGS
-  - massive failure on gollywog and Bilder
+
+   - massive failure on gollywog and Bilder
 
   - failure in writing double repeat (left-right) in Berlin21.
 
@@ -2441,6 +2468,14 @@ bool ExportLy::write(const QString& name)
   Lily's own stem direction algorithms are good enough. Until a better
   idea comes along: drop export of stem direction and leave it to
   LilyPond.
+  
+ - in Tarrega study: \stemNeutral failure, second voice, first part, from last bar before repeat.
+
+ - metronome marks must be given av \tempo 4 = 60 and not as markups.
+
+ - lacking fermata above rest.
+
+ - Slurred tuplets: slur must end before end-of-tuplet-brace. 
 
  - etc. etc. etc. ad nauseam.
  */
