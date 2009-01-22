@@ -638,6 +638,7 @@ void TextB::layout(ScoreLayout* layout)
             qreal textlineLineWidth = tl->lineWidth().point();
             setYpos(pos().y() - textlineLineWidth * .5);
             }
+
       if (parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
             double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;

@@ -191,7 +191,7 @@ if (NOT MINGW)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
-set (subdirs awl osdabzip mscore share manual demos)
+set (subdirs awl osdabzip rtf2html mscore share manual demos)
 
 if (NOT USE_GLOBAL_FLUID)
       set (subdirs ${subdirs} fluid)
