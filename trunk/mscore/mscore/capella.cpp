@@ -74,16 +74,6 @@ Capella::~Capella()
       }
 
 //---------------------------------------------------------
-//   readTextObj
-//---------------------------------------------------------
-
-void Capella::readTextObj()
-      {
-      TextObj* txt = new TextObj(this);
-      txt->read();
-      }
-
-//---------------------------------------------------------
 //   SlurObj::read
 //---------------------------------------------------------
 
@@ -463,15 +453,6 @@ void BasicRectObj::read()
       width   = cap->readInt();
       yxRatio = cap->readInt();
       height  = (width * yxRatio) / 0x10000;
-      }
-
-//---------------------------------------------------------
-//   BasicDurationalObj
-//---------------------------------------------------------
-
-BasicDurationalObj::BasicDurationalObj(Capella* c)
-   : CapellaObj(c)
-      {
       }
 
 //---------------------------------------------------------
@@ -1545,7 +1526,9 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     TextObj* to = static_cast<TextObj*>(o);
                                     Text* s = new Text(this);
                                     QString ss = rtf2html(QString(to->text));
-printf("string <%s>\n", qPrintable(ss));
+
+printf("string %d:%d w %d ratio %d <%s>\n",
+   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                                     s->setHtml(ss);
                                     MeasureBase* measure = _measures.first();
                                     if (measure->type() != VBOX) {

@@ -51,7 +51,6 @@
 
 QString rtf2html(const QString& iString)
       {
-printf("rtf2html(%s)\n", qPrintable(iString));
       QString oString;
       try {
             std::string str_in = iString.toStdString();
