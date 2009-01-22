@@ -234,14 +234,14 @@ class BasicDrawObj : public CapellaObj {
 //---------------------------------------------------------
 
 class BasicRectObj : public BasicDrawObj {
+   public:
+      BasicRectObj(int t, Capella* c) : BasicDrawObj(t, c) {}
+      void read();
+
       QPoint relPos;
       int width;
       int yxRatio;
       int height;
-
-   public:
-      BasicRectObj(int t, Capella* c) : BasicDrawObj(t, c) {}
-      void read();
       };
 
 //---------------------------------------------------------
@@ -491,7 +491,7 @@ class BasicDurationalObj : public CapellaObj {
       bool isProlonging;
 
    public:
-      BasicDurationalObj(Capella* c);
+      BasicDurationalObj(Capella* c) : CapellaObj(c) {}
       void read();
       int ticks() const;
       bool invisible;
@@ -626,7 +626,6 @@ class Capella {
       QFont namesFont;
 
       void readSlurObj();
-      void readTextObj();
       void readVoice(CapStaff*, int);
       void readStaff(CapSystem*);
       void readSystem();
