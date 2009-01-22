@@ -1,4 +1,6 @@
-22.jan (ws)
+22.jan (lv)
+      - fixed Unicode filename handlng for compressed MusicXML files
+       (ws)
       - added rtf2html to support capella rtf text import
       - "reset to standard position" now sets the score dirty flag
       - fix default position of dynamics in multi stave systems
