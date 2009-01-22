@@ -2585,14 +2585,14 @@ bool Score::saveXml(const QString& name)
 
 bool Score::saveMxl(const QString& name)
       {
-//      printf("Score::saveMxl(%s)\n", name.toLatin1().data());
+//      printf("Score::saveMxl(%s)\n", name.toUtf8().data());
 
       Zip::ErrorCode ec;
       Zip uz;
 
       ec = uz.createArchive(name);
       if (ec != Zip::Ok) {
-            printf("Cannot create zipfile '%s'\n", name.toLatin1().data());
+            printf("Cannot create zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
       QFileInfo fi(name);
@@ -2619,7 +2619,7 @@ bool Score::saveMxl(const QString& name)
       cbuf.seek(0);
       ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
       if (ec != Zip::Ok) {
-            printf("Cannot add container.xml to zipfile '%s'\n", name.toLatin1().data());
+            printf("Cannot add container.xml to zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
 
@@ -2632,13 +2632,13 @@ bool Score::saveMxl(const QString& name)
       dbuf.seek(0);
       ec = uz.createEntry(fn, dbuf, dt);
       if (ec != Zip::Ok) {
-            printf("Cannot add %s to zipfile '%s'\n", fn.toLatin1().data(), name.toLatin1().data());
+            printf("Cannot add %s to zipfile '%s'\n", fn.toUtf8().data(), name.toUtf8().data());
             return false;
             }
 
       ec = uz.closeArchive();
       if (ec != Zip::Ok) {
-            printf("Cannot close zipfile '%s'\n", name.toLatin1().data());
+            printf("Cannot close zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
 

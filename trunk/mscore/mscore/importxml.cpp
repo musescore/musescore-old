@@ -206,13 +206,13 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.formatError(ec);
             return true;
             }
-// printf("ec=%d\n", ec);
+// printf("openArchive ec=%d\n", ec);
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile("META-INF/container.xml", &cbuf);
-//      printf("ec=%d, bufsize=%d\n", ec, cbuf.data().size());
-//      printf("data=%s\n", cbuf.data().data());
+// printf("extractFile ec=%d, bufsize=%d\n", ec, cbuf.data().size());
+// printf("data=%s\n", cbuf.data().data());
 
       QDomDocument container;
       int line, column;
@@ -225,7 +225,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("error: %s\n", error.toLatin1().data());
             return true;
             }
-      // printf("container=%s\n", container.toString().toAscii().data());
+// printf("container=%s\n", container.toString().toUtf8().data());
 
       // extract first rootfile
       QString rootfile = "";
@@ -253,21 +253,21 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
             return true;
             }
-//      else
-//            printf("rootfile=%s\n", rootfile.toLatin1().data());
+// else
+//   printf("rootfile=%s\n", rootfile.toUtf8().data());
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile(rootfile, &dbuf);
-//      printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
-//      printf("data=%s\n", dbuf.data().data());
+// printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
+// printf("data=%s\n", dbuf.data().data());
 
       if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
             col.setNum(column);
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
-printf("error: %s\n", qPrintable(error));
+            printf("error: %s\n", qPrintable(error));
             return true;
             }
       docName = qf->fileName();
