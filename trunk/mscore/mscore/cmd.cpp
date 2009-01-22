@@ -1663,6 +1663,7 @@ void Score::resetUserOffsets()
       for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->resetUserOffsets();
       layoutAll = true;
+      setDirty(true);
       }
 
 //---------------------------------------------------------

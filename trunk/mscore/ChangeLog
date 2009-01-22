@@ -1,4 +1,8 @@
-22.jan (tb)
+22.jan (ws)
+      - added rtf2html to support capella rtf text import
+      - "reset to standard position" now sets the score dirty flag
+      - fix default position of dynamics in multi stave systems
+      (tb)
       - updated Dutch translation by Jaap Plaisier
 21.jan (ws)
       - new text properties dialog, used in text line properties

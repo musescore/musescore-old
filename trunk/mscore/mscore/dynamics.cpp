@@ -88,28 +88,6 @@ void Dynamic::setSubtype(int idx)
       }
 
 //---------------------------------------------------------
-//   isMovable
-//---------------------------------------------------------
-
-bool Dynamic::isMovable() const
-      {
-      dragOffset = QPointF();
-      return true;
-      }
-
-//---------------------------------------------------------
-//   drag
-//---------------------------------------------------------
-
-QRectF Dynamic::drag(const QPointF& pos)
-      {
-      QRectF r(abbox());
-      setUserOff((pos - dragOffset) / _spatium);
-      score()->setLayoutAll(false);
-      return abbox() | r;
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -172,7 +150,7 @@ const QString Dynamic::subtypeName() const
 //---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
-
+#if 0
 QPointF Dynamic::canvasPos() const
       {
       if (!parent())
@@ -184,7 +162,7 @@ QPointF Dynamic::canvasPos() const
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
-
+#endif
 //---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------

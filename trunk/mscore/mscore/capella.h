@@ -23,8 +23,10 @@
 
 enum TIMESTEP { D1, D2, D4, D8, D16, D32, D64, D128, D256, D_BREVE };
 
+#if 0
 static const char* timeNames[] = { "1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "1/64",
       "1/128", "1/256", "breve" };
+#endif
 
 class Capella;
 
@@ -280,26 +282,6 @@ class MetafileObj : public BasicDrawObj {
       };
 
 //---------------------------------------------------------
-//   RectEllipseObj
-//---------------------------------------------------------
-
-class RectEllipseObj : public BasicDrawObj {    // special
-   public:
-      RectEllipseObj(Capella* c) : BasicDrawObj(CAP_RECT_ELLIPSE, c) {}
-      void read();
-      };
-
-//---------------------------------------------------------
-//   PolygonObj
-//---------------------------------------------------------
-
-class PolygonObj : public BasicDrawObj {
-   public:
-      PolygonObj(Capella* c) : BasicDrawObj(CAP_POLYGON, c) {}
-      void read();
-      };
-
-//---------------------------------------------------------
 //   LineObj
 //---------------------------------------------------------
 
@@ -316,6 +298,35 @@ class LineObj : public BasicDrawObj {
       };
 
 //---------------------------------------------------------
+//   RectEllipseObj
+//---------------------------------------------------------
+
+class RectEllipseObj : public LineObj {    // special
+   public:
+      RectEllipseObj(Capella* c) : LineObj(CAP_RECT_ELLIPSE, c) {}
+      void read();
+
+      int radius;
+      bool bFilled;
+      QColor clrFill;
+      };
+
+//---------------------------------------------------------
+//   PolygonObj
+//---------------------------------------------------------
+
+class PolygonObj : public BasicDrawObj {
+   public:
+      PolygonObj(Capella* c) : BasicDrawObj(CAP_POLYGON, c) {}
+      void read();
+
+      bool bFilled;
+      unsigned lineWidth;
+      QColor clrFill;
+      QColor clrLine;
+      };
+
+//---------------------------------------------------------
 //   WavyLineObj
 //---------------------------------------------------------
 
@@ -323,6 +334,9 @@ class WavyLineObj : public LineObj {
    public:
       WavyLineObj(Capella* c) : LineObj(CAP_WAVY_LINE, c) {}
       void read();
+
+      unsigned waveLen;
+      bool adapt;
       };
 
 //---------------------------------------------------------
@@ -333,6 +347,9 @@ class NotelinesObj : public BasicDrawObj {
    public:
       NotelinesObj(Capella* c) : BasicDrawObj(CAP_NOTE_LINES, c) {}
       void read();
+
+      int x0, x1, y;
+      QColor color;
       };
 
 //---------------------------------------------------------
@@ -363,6 +380,11 @@ class GuitarObj : public BasicDrawObj {
    public:
       GuitarObj(Capella* c) : BasicDrawObj(CAP_GUITAR, c) {}
       void read();
+
+      QPoint relPos;
+      QColor color;
+      short flags;
+      int strings;      // 8 Saiten in 8 Halbbytes
       };
 
 //---------------------------------------------------------
@@ -398,12 +420,13 @@ class SlurObj : public BasicDrawObj {
 //---------------------------------------------------------
 
 class TextObj : public BasicRectObj {
-      char* text;
 
    public:
-      TextObj(Capella* c) : BasicRectObj(CAP_TEXT, c) { text = 0;}
-      ~TextObj() { if (text) delete text; }
+      TextObj(Capella* c) : BasicRectObj(CAP_TEXT, c) {}
+      ~TextObj() {}
       void read();
+
+      QString text;
       };
 
 //---------------------------------------------------------
@@ -627,6 +650,7 @@ class Capella {
       QColor readColor();
       int readInt();
       short readWord();
+      int readDWord();
       unsigned readUnsigned();
       char* readString();
       void readExtra();

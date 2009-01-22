@@ -184,6 +184,7 @@ if (MINGW)
       fluid
       awl
       osdabzip
+      rtf2html
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
@@ -225,6 +226,7 @@ else (MINGW)
       ${PORTAUDIO_LIB}
       awl
       osdabzip
+      rtf2html
       )
    if (USE_GLOBAL_FLUID)
          target_link_libraries(mscore ${FLUID_LIB} )

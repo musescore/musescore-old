@@ -37,6 +37,7 @@
 #include "pitchspelling.h"
 #include "keysig.h"
 #include "slur.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -111,6 +112,7 @@ void TextObj::read()
       char txt[size+1];
       cap->read(txt, size);
       txt[size] = 0;
+      text = QString(txt);
 // printf("read textObj len %d <%s>\n", size, txt);
       }
 
@@ -125,7 +127,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       font   = cap->readFont();
       text   = cap->readString();
-//      printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
+printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
       }
 
 //---------------------------------------------------------
@@ -198,28 +200,71 @@ void MetafileObj::read()
       cap->read(enhMetaFileBits, size);
       }
 
+//---------------------------------------------------------
+//   RectEllipseObj::read
+//---------------------------------------------------------
+
 void RectEllipseObj::read()
       {
-      /**/
-      abort();
+      LineObj::read();
+      radius = cap->readInt();
+      bFilled = cap->readByte();
+      clrFill = cap->readColor();
       }
+
+//---------------------------------------------------------
+//   PolygonObj::read
+//---------------------------------------------------------
 
 void PolygonObj::read()
       {
       BasicDrawObj::read();
-      abort();
+
+      unsigned nPoints = cap->readUnsigned();
+      for (unsigned i = 0; i < nPoints; ++i)
+          cap->readPoint();
+
+      bFilled = cap->readByte();
+      lineWidth = cap->readByte();
+      clrFill = cap->readColor();
+      clrLine = cap->readColor();
       }
+
+//---------------------------------------------------------
+//   WavyLineObj::read
+//---------------------------------------------------------
 
 void WavyLineObj::read()
       {
-      BasicDrawObj::read();
-      abort();
+      LineObj::read();
+      waveLen = cap->readByte();
+      adapt = cap->readByte();
       }
+
+//---------------------------------------------------------
+//   NotelinesObj::read
+//---------------------------------------------------------
 
 void NotelinesObj::read()
       {
       BasicDrawObj::read();
-      abort();
+
+      x0 = cap->readInt();
+      x1 = cap->readInt();
+      y  = cap->readInt();
+      color = cap->readColor();
+
+      unsigned char b = cap->readByte();
+      switch (b) {
+            case 1: break; // Einlinienzeile
+            case 2: break; // Standard (5 Linien)
+            default: {
+                  assert(b == 0);
+                  char lines[11];
+                  cap->read(lines, 11);
+                  break;
+                  }
+              }
       }
 
 //---------------------------------------------------------
@@ -246,10 +291,17 @@ void VoltaObj::read()
       to = (numbers >> 4) & 0x0F;
       }
 
+//---------------------------------------------------------
+//   GuitarObj::read
+//---------------------------------------------------------
+
 void GuitarObj::read()
       {
       BasicDrawObj::read();
-      abort();
+      relPos  = cap->readPoint();
+      color   = cap->readColor();
+      flags   = cap->readWord();
+      strings = cap->readDWord();   // 8 Saiten in 8 Halbbytes
       }
 
 //---------------------------------------------------------
@@ -629,6 +681,17 @@ short Capella::readWord()
       {
       short c;
       read(&c, 2);
+      return c;
+      }
+
+//---------------------------------------------------------
+//   readDWord
+//---------------------------------------------------------
+
+int Capella::readDWord()
+      {
+      int c;
+      read(&c, 4);
       return c;
       }
 
@@ -1267,8 +1330,8 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         int ticks  = o->ticks();
                         int ft     = m->tickLen();
                         if (o->fullMeasures) {
-                              printf("full measure rests %d, invisible %d len %d %d\n",
-                                 o->fullMeasures, o->invisible, ticks, ft);
+// printf("full measure rests %d, invisible %d len %d %d\n",
+//    o->fullMeasures, o->invisible, ticks, ft);
                               ticks = ft * o->fullMeasures;
                               if (!o->invisible) {
                                     for (unsigned i = 0; i < o->fullMeasures; ++i) {
@@ -1437,31 +1500,33 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   foreach(BasicDrawObj* o, d->objects) {
                         switch (o->type) {
                               case CAP_SIMPLE_TEXT:
-                                    printf("text\n");
                                     break;
                               case CAP_WAVY_LINE:
-                                    printf("wavy line\n");
                                     break;
                               case CAP_SLUR:
                                     {
                                     SlurObj* so = static_cast<SlurObj*>(o);
-                                    printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
-                                       so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
+// printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
+//   so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
                                     Segment* seg = tick2segment(tick);
-                                    int n = so->nNotes;
                                     int tick2 = -1;
-                                    for (seg = seg->next1(); seg; seg = seg->next1()) {
-                                          if (seg->subtype() != Segment::SegChordRest)
-                                                continue;
-                                          if (seg->element(track))
-                                                --n;
-                                          else
-                                                printf("  %d empty seg\n", n);
-                                          if (n == 0) {
-                                                tick2 = seg->tick();
-                                                break;
+                                    if (seg) {
+                                          int n = so->nNotes;
+                                          for (seg = seg->next1(); seg; seg = seg->next1()) {
+                                                if (seg->subtype() != Segment::SegChordRest)
+                                                      continue;
+                                                if (seg->element(track))
+                                                      --n;
+                                                else
+                                                      printf("  %d empty seg\n", n);
+                                                if (n == 0) {
+                                                      tick2 = seg->tick();
+                                                      break;
+                                                      }
                                                 }
                                           }
+                                    else
+                                          printf("  segment at %d not found\n", tick);
                                     if (tick2 >= 0) {
                                           Slur* slur = new Slur(this);
                                           slur->setTick(tick);
@@ -1472,6 +1537,24 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                           }
                                     else
                                           printf("second anchor for slur not found\n");
+                                    }
+                                    break;
+                              case CAP_TEXT: {
+                                    extern QString rtf2html(const QString&);
+
+                                    TextObj* to = static_cast<TextObj*>(o);
+                                    Text* s = new Text(this);
+                                    QString ss = rtf2html(QString(to->text));
+printf("string <%s>\n", qPrintable(ss));
+                                    s->setHtml(ss);
+                                    MeasureBase* measure = _measures.first();
+                                    if (measure->type() != VBOX) {
+                                          measure = new VBox(this);
+                                          measure->setTick(0);
+                                          addMeasure(measure);
+                                          }
+                                    s->setSubtype(TEXT_TITLE);
+                                    measure->add(s);
                                     }
                                     break;
                               default:
