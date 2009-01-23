@@ -6,6 +6,9 @@
       - fix default position of dynamics in multi stave systems
       (tb)
       - updated Dutch translation by Jaap Plaisier
+      (db)
+      - added Dutch and Galacian handbooks to installer
+      - updated all handbooks
 21.jan (ws)
       - new text properties dialog, used in text line properties
 20.jan (ws)
