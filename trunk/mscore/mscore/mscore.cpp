@@ -366,7 +366,7 @@ MuseScore::MuseScore()
          << "mag" << "reset-positions" << "inspector"
          ;
 
-      foreach(const QString s, sl) {
+      foreach(const QString& s, sl) {
             QAction* a = getAction(s.toLatin1().data());
             addAction(a);
             ag->addAction(a);
@@ -484,7 +484,7 @@ MuseScore::MuseScore()
          << "pad-dotdot" << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
          << "pad-nat" << "pad-flat"  <<"pad-flat2";
 
-      foreach(const QString s, sl1) {
+      foreach(const QString& s, sl1) {
             NoteButton* nb = new NoteButton;
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
@@ -501,7 +501,7 @@ MuseScore::MuseScore()
           << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam"
           << "show-invisible" << "show-frames";
 
-      foreach(const QString s, sl1) {
+      foreach(const QString& s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             ag->addAction(a);
@@ -1164,7 +1164,7 @@ void MuseScore::dropEvent(QDropEvent* event)
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
             Score* lastScore = 0;
-            foreach(QUrl u, event->mimeData()->urls()) {
+            foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score();
                         score->addViewer(new Canvas);
@@ -1611,7 +1611,7 @@ int main(int argc, char* argv[])
                PDPI, wi.physicalDpiX(),
                DPMM);
             QStringList sl(QCoreApplication::libraryPaths());
-            foreach(QString s, sl)
+            foreach(const QString& s, sl)
                   printf("LibraryPath: <%s>\n", qPrintable(s));
             }
 

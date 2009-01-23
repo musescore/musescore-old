@@ -68,6 +68,7 @@
 #include "drumset.h"
 #include "beam.h"
 #include "lyrics.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1368,7 +1369,7 @@ void Score::upDown(bool up, bool octave)
             if (newPitch > 127)
                   newPitch = 127;
 
-            undoChangePitch(oNote, newPitch);
+            undoChangePitch(oNote, newPitch, pitch2tpc(newPitch), 0);
 
             // play new note with velocity 80 for 0.3 sec:
             if (playNotes)
@@ -2415,7 +2416,7 @@ void Score::cmdPaste()
       else {
             printf("cannot paste selState %d staffList %d\n",
                sel->state(), ms->hasFormat(mimeStaffListFormat));
-            foreach(QString s, ms->formats())
+            foreach(const QString& s, ms->formats())
                   printf("  format %s\n", qPrintable(s));
             }
       }

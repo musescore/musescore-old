@@ -560,7 +560,7 @@ void Seq::playEvent(const Event* event)
             const ControllerEvent* c = static_cast<const ControllerEvent*>(event);
             QList<MidiOutEvent> ol;
             if (c->midiOutEvent(&ol, cs)) {
-                  foreach(MidiOutEvent e, ol)
+                  foreach(const MidiOutEvent& e, ol)
                         driver->putEvent(e);
                   }
             }
@@ -719,7 +719,7 @@ void Seq::initInstruments()
                         e->setChannel(a->channel);
                         QList<MidiOutEvent> el;
                         if (e->midiOutEvent(&el, cs)) {
-                              foreach(MidiOutEvent event, el)
+                              foreach(const MidiOutEvent& event, el)
                                     sendEvent(event);
                               }
                         else

@@ -43,7 +43,7 @@ HChord::HChord(const char* s)
             };
       keys = 0;
       QStringList sl = QString(s).split(" ", QString::SkipEmptyParts);
-      foreach(QString s, sl) {
+      foreach(const QString& s, sl) {
             for (int i = 0; i < 12; ++i) {
                   if (s == scaleNames[0][i] || s == scaleNames[1][i]) {
                         operator+=(i);
@@ -244,7 +244,7 @@ void HChord::add(const QList<HDegree>& degreeList)
                0, 2, 4, 5, 7, 9, 11
             };
       // factor in the degrees
-      foreach(const HDegree d, degreeList) {
+      foreach(const HDegree& d, degreeList) {
             int dv  = degreeTable[(d.value() - 1) % 7] + d.alter();
             int dv1 = degreeTable[(d.value() - 1) % 7];
 

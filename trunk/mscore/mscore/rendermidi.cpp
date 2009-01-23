@@ -99,7 +99,7 @@ void Score::updateChannel()
                               //
                               // TODO: optimize
                               //
-                              foreach(ARec ar, alist) {
+                              foreach(const ARec& ar, alist) {
                                     if (ar.tick > c->tick())
                                           break;
                                     sc = ar.channel;
