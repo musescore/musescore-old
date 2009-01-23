@@ -272,8 +272,8 @@ void Segment::add(Element* el)
                         }
                   }
                   if (_elist[track])
-                        printf("Segment::add() there is already an element at %d track %d\n",
-                           tick(), track);
+                        printf("Segment::add(%s) there is already an %s at %d track %d\n",
+                           el->name(), _elist[track]->name(), tick(), track);
                   if (track % VOICES)
                         measure()->mstaff(staffIdx)->hasVoices = true;
 
@@ -382,7 +382,7 @@ void Segment::setTime(int stick)
             if (e)
                   e->setTick(stick);
             }
-      foreach(LyricsList ll, _lyrics) {
+      foreach(const LyricsList& ll, _lyrics) {
             foreach(Lyrics* l, ll) {
                   if (l)
                         l->setTick(stick);

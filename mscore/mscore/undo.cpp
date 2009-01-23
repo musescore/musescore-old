@@ -315,8 +315,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   Note* note = (Note*)(i->element1);
                   int pitch  = note->pitch();
+                  int tpc    = note->tpc();
+                  int userAcc = note->userAccidental();
                   note->changePitch(i->val1);
+                  note->setTpc(i->val2);
+                  note->setUserAccidental(i->val3);
                   i->val1 = pitch;
+                  i->val2 = tpc;
+                  i->val3 = userAcc;
                   }
                   break;
             case UndoOp::ChangeTpc:
@@ -907,13 +913,15 @@ void Score::undoChangeNoteHead(Note* note, int group)
 //   undoChangePitch
 //---------------------------------------------------------
 
-void Score::undoChangePitch(Note* note, int pitch)
+void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental)
       {
       checkUndoOp();
       UndoOp i;
       i.type     = UndoOp::ChangePitch;
       i.element1 = note;
       i.val1     = pitch;
+      i.val2     = tpc;
+      i.val3     = userAccidental;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

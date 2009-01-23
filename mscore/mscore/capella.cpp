@@ -134,16 +134,6 @@ void LineObj::read()
       }
 
 //---------------------------------------------------------
-//   readSlurObj
-//---------------------------------------------------------
-
-void Capella::readSlurObj()
-      {
-      SlurObj* slur = new SlurObj(this);
-      slur->read();
-      }
-
-//---------------------------------------------------------
 //   BracketObj::read
 //---------------------------------------------------------
 
@@ -172,6 +162,7 @@ void GroupObj::read()
 void TransposableObj::read()
       {
       BasicDrawObj::read();
+      relPos = cap->readPoint();
       b = cap->readByte();
       assert(b == 12 || b == 21);
       variants = cap->readDrawObjectArray();
@@ -448,8 +439,7 @@ void BasicDrawObj::read()
 void BasicRectObj::read()
       {
       BasicDrawObj::read();
-      relPos.setX(cap->readInt());
-      relPos.setY(cap->readInt());
+      relPos = cap->readPoint();
       width   = cap->readInt();
       yxRatio = cap->readInt();
       height  = (width * yxRatio) / 0x10000;
@@ -483,7 +473,7 @@ void BasicDurationalObj::read()
             tripartite   = tuplet & 0x10;
             isProlonging = tuplet & 0x20;
             if (tuplet & 0xc0)
-                  abort();
+                  printf("bad tuplet value 0x%02x\n", tuplet);
             }
       if (c & 0x40)
             objects = cap->readDrawObjectArray();
@@ -518,11 +508,8 @@ void RestObj::read()
             printf("RestObj: res. bits 0x%02x\n", b);
             abort();
             }
-      if (bMultiMeasures)
-            fullMeasures = cap->readUnsigned();
-      if (bAddVerticalShift)
-            vertShift = cap->readInt();
-// printf("         Rest %s invisible %d\n", timeNames[t], invisible);
+      fullMeasures = bMultiMeasures ? cap->readUnsigned() : 0;
+      vertShift    = bAddVerticalShift ? cap->readInt() : 0;
       }
 
 //---------------------------------------------------------

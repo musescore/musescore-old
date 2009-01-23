@@ -86,7 +86,7 @@ VoiceSelector::VoiceSelector(QWidget* parent)
       QActionGroup* vag = new QActionGroup(this);
       vag->setExclusive(true);
       int i = 0;
-      foreach(const QString s, sl2) {
+      foreach(const QString& s, sl2) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             vag->addAction(a);

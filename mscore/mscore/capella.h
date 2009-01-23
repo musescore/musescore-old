@@ -625,7 +625,6 @@ class Capella {
       int nUnnamed;
       QFont namesFont;
 
-      void readSlurObj();
       void readVoice(CapStaff*, int);
       void readStaff(CapSystem*);
       void readSystem();

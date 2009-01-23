@@ -617,7 +617,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       styleCombo->addItem(tr("default"));
       styleCombo->addItems(sl);
       int idx = 1;
-      foreach(QString s, sl) {
+      foreach(const QString& s, sl) {
             if (s == p->style)
                   break;
             ++idx;

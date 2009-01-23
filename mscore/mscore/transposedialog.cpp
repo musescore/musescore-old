@@ -28,6 +28,7 @@
 #include "staff.h"
 #include "harmony.h"
 #include "part.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -82,7 +83,9 @@ void Score::transpose()
                   if (e->type() != NOTE)
                         continue;
                   Note* n = static_cast<Note*>(e);
-                  undoChangePitch(n, n->pitch() + diff);
+                  int npitch = n->pitch() + diff;
+                  int tpc    = pitch2tpc(npitch, 0);
+                  undoChangePitch(n, npitch, tpc, 0);
                   }
             return;
             }
@@ -106,8 +109,11 @@ void Score::transpose()
                   QList<Note*> nl;
                   for (iNote i = notes->begin(); i != notes->end(); ++i)
                         nl.append(i->second);
-                  foreach(Note* note, nl)
-                        undoChangePitch(note, note->pitch() + diff);
+                  foreach(Note* note, nl) {
+                        int npitch = note->pitch() + diff;
+                        int tpc    = pitch2tpc(npitch, 0);
+                        undoChangePitch(note, npitch, tpc, 0);
+                        }
                   }
             }
 
@@ -179,8 +185,11 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                         QList<Note*> nl;
                         for (iNote i = notes->begin(); i != notes->end(); ++i)
                               nl.append(i->second);
-                        foreach(Note* note, nl)
-                              undoChangePitch(note, note->pitch() + diff);
+                        foreach(Note* n, nl) {
+                              int npitch = n->pitch() + diff;
+                              int tpc    = pitch2tpc(npitch, 0);
+                              undoChangePitch(n, npitch, tpc, 0);
+                              }
                         }
                   }
 #if 0

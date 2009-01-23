@@ -177,17 +177,17 @@ void MuseScore::pluginTriggered(int idx)
 #if QT_VERSION >= 0x040400
             if (debugMode) {
                   QStringList lp = qApp->libraryPaths();
-                  foreach(QString s, lp)
+                  foreach(const QString& s, lp)
                         printf("lib path <%s>\n", qPrintable(s));
 
                   QStringList sl = se->availableExtensions();
                   printf("available:\n");
-                  foreach(QString s, sl)
+                  foreach(const QString& s, sl)
                         printf("  <%s>\n", qPrintable(s));
 
                   sl = se->importedExtensions();
                   printf("imported:\n");
-                  foreach(QString s, sl)
+                  foreach(const QString& s, sl)
                         printf("  <%s>\n", qPrintable(s));
                   }
 #endif

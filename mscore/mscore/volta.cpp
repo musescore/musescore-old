@@ -287,7 +287,7 @@ void Volta::read(QDomElement e)
                   QString s = e.text();
                   QStringList sl = s.split(",", QString::SkipEmptyParts);
                   _endings.clear();
-                  foreach(QString l, sl) {
+                  foreach(const QString& l, sl) {
                         int i = l.simplified().toInt();
                         _endings.append(i);
                         }

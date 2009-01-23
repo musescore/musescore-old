@@ -526,7 +526,7 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
       else {
             if (debugMode) {
                   printf("dragEnterEvent: formats:\n");
-                  foreach(QString s, event->mimeData()->formats())
+                  foreach(const QString& s, event->mimeData()->formats())
                         printf("   %s\n", s.toLatin1().data());
                   }
             }
