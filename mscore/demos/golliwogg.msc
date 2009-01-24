@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.10">
-  <Mag>1.31233</Mag>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <Mag>1.21662</Mag>
+  <xoff>-742.046</xoff>
+  <yoff>-197.383</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -131,6 +131,9 @@ p, li { white-space: pre-wrap; }
     <tempo tick="71040">1.33333</tempo>
     <tempo tick="72000">1.33333</tempo>
     <tempo tick="73920">1</tempo>
+    <tempo tick="82560">1</tempo>
+    <tempo tick="85440">1</tempo>
+    <tempo tick="87360">1</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -210,7 +213,7 @@ p, li { white-space: pre-wrap; }
   <Slur id="6">
     <track>0</track>
     <SlurSegment no="0">
-      <o1 x="1.11873" y="-0.0508512"/>
+      <o1 x="0.645181" y="0.233278"/>
       <o2 x="0.329087" y="0.220034"/>
       <o3 x="0.302575" y="0.240518"/>
       </SlurSegment>
@@ -249,6 +252,9 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <Slur id="13">
     <track>0</track>
+    <SlurSegment no="0">
+      <o4 x="0" y="-0.473549"/>
+      </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="14">
@@ -942,7 +948,7 @@ p, li { white-space: pre-wrap; }
     <tick2>11040</tick2>
     <Segment>
       <off1 x="0" y="0"/>
-      <off2 x="2.08361" y="0"/>
+      <off2 x="1.89957" y="0"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -951,7 +957,7 @@ p, li { white-space: pre-wrap; }
     <tick>12000</tick>
     <tick2>12480</tick2>
     <Segment>
-      <off1 x="-2.65187" y="-12.1229"/>
+      <off1 x="-2.65187" y="-13.5435"/>
       <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
@@ -994,6 +1000,10 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>18600</tick>
     <tick2>18720</tick2>
+    <Segment>
+      <off1 x="0" y="0.852388"/>
+      <off2 x="2.17094" y="0"/>
+      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
@@ -1001,7 +1011,7 @@ p, li { white-space: pre-wrap; }
     <tick>19200</tick>
     <tick2>19920</tick2>
     <Segment>
-      <off1 x="0.568259" y="-11.9334"/>
+      <off1 x="0.568259" y="-12.8805"/>
       <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
@@ -1203,6 +1213,10 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>37560</tick>
     <tick2>37920</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="2.84936" y="0"/>
+      </Segment>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
@@ -1222,7 +1236,7 @@ p, li { white-space: pre-wrap; }
     <tick>43200</tick>
     <tick2>43680</tick2>
     <Segment>
-      <off1 x="2.55716" y="-13.0699"/>
+      <off1 x="6.34555" y="-14.1117"/>
       <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
@@ -1427,7 +1441,55 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>91200</tick>
     <tick2>92400</tick2>
+    <Segment>
+      <off1 x="0.102161" y="1.73673"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="0" y="0"/>
+      </Segment>
     </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>0</track>
+    <tick>86400</tick>
+    <tick2>86520</tick2>
+    <Segment>
+      <off1 x="0" y="0"/>
+      <off2 x="1.62821" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>81000</tick>
+    <tick2>81600</tick2>
+    <Segment>
+      <off1 x="0.0806563" y="-12.663"/>
+      <off2 x="-2.57799" y="0"/>
+      </Segment>
+    </HairPin>
+  <HairPin>
+    <subtype>1</subtype>
+    <track>1</track>
+    <tick>81960</tick>
+    <tick2>82320</tick2>
+    <Segment>
+      <off1 x="0.967876" y="-12.7437"/>
+      <off2 x="1.76389" y="0"/>
+      </Segment>
+    </HairPin>
+  <Slur id="132">
+    <tick>0</tick>
+    </Slur>
+  <Slur id="133">
+    </Slur>
+  <Slur id="134">
+    <up>1</up>
+    </Slur>
+  <Slur id="135">
+    </Slur>
   <Staff id="1">
     <VBox>
       <height>10.5461</height>
@@ -1659,19 +1721,19 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-size:12pt; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-0.947098" y="0.0947098"/>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <tick>3600</tick>
         </Dynamic>
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <tick>3600</tick>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-size:12pt; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.947098" y="0.0947098"/>
+        <tick>2880</tick>
         </Dynamic>
       <Rest>
-        <tick>2880</tick>
         <ticklen>120</ticklen>
         </Rest>
       <Beam id="5">
@@ -1755,6 +1817,9 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Beam>7</Beam>
         <Note pitch="51" tpc="11"/>
         <Note pitch="58" tpc="12"/>
@@ -1926,6 +1991,14 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>MeasureNumber</subtype>
         </Text>
+      <Dynamic>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;mf&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-4.45136" y="-1.23123"/>
+        </Dynamic>
       <StaffText>
         <subtype>Staff</subtype>
         <offset x="-2.46037" y="-2.187"/>
@@ -1936,14 +2009,6 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-style:italic;">très net et très sec</span></p></body></html>
           </html-data>
         </StaffText>
-      <Dynamic>
-        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;mf&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-3.97781" y="-1.42065"/>
-        </Dynamic>
       <Beam id="11">
         </Beam>
       <Chord>
@@ -2175,7 +2240,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.70478" y="0"/>
+        <offset x="-0.947098" y="0.378839"/>
         <tick>11280</tick>
         </Dynamic>
       <Beam id="15">
@@ -2183,6 +2248,10 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <tick>10560</tick>
         <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          <offset x="0.662968" y="-7.86091"/>
+          </Attribute>
         <Slur type="start" number="18"/>
         <Beam>15</Beam>
         <Note pitch="58" tpc="12"/>
@@ -2248,7 +2317,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-0.601762" y="0.695415"/>
+        <offset x="-0.412342" y="0.221866"/>
         </Dynamic>
       <Beam id="17">
         </Beam>
@@ -2313,6 +2382,11 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
+          <offset x="0.0947098" y="-1.42065"/>
+          </Attribute>
+        <Attribute>
+          <subtype>tenuto</subtype>
+          <offset x="0" y="0.757678"/>
           </Attribute>
         <Slur type="start" number="6"/>
         <Beam>19</Beam>
@@ -2705,7 +2779,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;sff&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-0.662968" y="0"/>
+        <offset x="-1.23123" y="0.852388"/>
         <tick>18960</tick>
         </Dynamic>
       <Beam id="28">
@@ -2782,9 +2856,21 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.12661" y="1.54928"/>
         </Dynamic>
+      <StaffText>
+        <subtype>Staff</subtype>
+        <offset x="0.378839" y="12.1229"/>
+        <tick>20280</tick>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8.8pt; font-style:italic;">cre     -          scen  -     do</span></p></body></html>
+          </html-data>
+        </StaffText>
       <Beam id="30">
         </Beam>
       <Chord>
+        <tick>20160</tick>
         <ticklen>120</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
@@ -3179,6 +3265,9 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
+        <Attribute>
+          <subtype>tenuto</subtype>
+          </Attribute>
         <Note>
           <pitch>56</pitch>
           <tpc>10</tpc>
@@ -3218,11 +3307,14 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="1.87686" y="0.364833"/>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.680304" y="1.21722"/>
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
+        <Attribute>
+          <subtype>tenuto</subtype>
+          </Attribute>
         <Note pitch="55" tpc="15"/>
         <Note pitch="60" tpc="14"/>
         <Note pitch="63" tpc="11"/>
@@ -3878,6 +3970,14 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
+      <Dynamic>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;Century Schoolbook L&apos;; font-style:italic;&quot;&gt;più &lt;/span&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-0.923489" y="0.0602777"/>
+        </Dynamic>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
@@ -4310,8 +4410,8 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MScore1&apos;; font-style:normal;&quot;&gt;&amp;lt;pp&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.85316" y="0.652662"/>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-1.56859" y="0.265253"/>
         </Dynamic>
       <Rest>
         <ticklen>240</ticklen>
@@ -4435,6 +4535,7 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
+        <offset x="4.03282" y="-0.725907"/>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -4444,6 +4545,24 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C<span style=" font-size:11pt;">édez</span></p></body></html>
           </html-data>
         </Tempo>
+      <StaffText>
+        <subtype>Staff</subtype>
+        <offset x="6.69447" y="0.161313"/>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Century Schoolbook L'; font-size:10pt; font-style:italic;">avec une grande émotion</span></p></body></html>
+          </html-data>
+        </StaffText>
+      <Dynamic>
+        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="4.38396" y="-10.222"/>
+        </Dynamic>
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
@@ -6160,6 +6279,19 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
+      <Tempo>
+        <tempo>1</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="0.100696" y="0.829576"/>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Retenu</p></body></html>
+          </html-data>
+        </Tempo>
       <Chord>
         <ticklen>960</ticklen>
         <Slur type="start" number="93"/>
@@ -6399,6 +6531,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;pp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-2.53086" y="0.0156844"/>
         </Dynamic>
+      <Tempo>
+        <tempo>1</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-10.3846" y="0.587607"/>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Tojours retenu        -        -        -        -        -        -        -  //</p></body></html>
+          </html-data>
+        </Tempo>
       <KeySig>
         <subtype>64253</subtype>
         </KeySig>
@@ -6490,6 +6635,19 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>MeasureNumber</subtype>
         </Text>
+      <Tempo>
+        <tempo>1</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="0.23638" y="0.829576"/>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1<span style=" vertical-align:super;">o </span>Tempo</p></body></html>
+          </html-data>
+        </Tempo>
       <Beam id="74">
         </Beam>
       <Chord>
@@ -6696,6 +6854,9 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          </Attribute>
         <Beam>82</Beam>
         <Note pitch="43" tpc="15"/>
         </Chord>
@@ -6705,6 +6866,9 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          </Attribute>
         <Beam>82</Beam>
         <Note pitch="48" tpc="14"/>
         </Chord>
@@ -6712,6 +6876,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
           </Attribute>
         <Beam>82</Beam>
         <Note pitch="50" tpc="16"/>
@@ -6733,12 +6900,18 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          <offset x="0.796606" y="-8.16521"/>
+          </Attribute>
+        <Slur type="start" number="132"/>
         <Beam>83</Beam>
         <StemDirection>up</StemDirection>
         <Note pitch="70" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="132"/>
         <Beam>83</Beam>
         <Note pitch="68" tpc="10"/>
         </Chord>
@@ -6753,6 +6926,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          <offset x="0.80789" y="-6.80936"/>
           </Attribute>
         <Beam>84</Beam>
         <Note pitch="65" tpc="13"/>
@@ -6761,6 +6935,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          <offset x="0.432798" y="-5.74179"/>
           </Attribute>
         <Beam>84</Beam>
         <Note pitch="70" tpc="12"/>
@@ -6800,8 +6975,8 @@ p, li { white-space: pre-wrap; }
         <Note>
           <track>1</track>
           <tick>93840</tick>
-          <pitch>60</pitch>
-          <tpc>14</tpc>
+          <pitch>59</pitch>
+          <tpc>7</tpc>
           </Note>
         <Note>
           <track>1</track>
@@ -6816,11 +6991,17 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          <offset x="0.398303" y="-7.3686"/>
+          </Attribute>
+        <Slur type="start" number="133"/>
         <Beam>85</Beam>
         <Note pitch="68" tpc="10"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="stop" number="133"/>
         <Beam>85</Beam>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -6835,6 +7016,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          <offset x="0.345517" y="-6.67999"/>
           </Attribute>
         <Beam>86</Beam>
         <Note pitch="59" tpc="7"/>
@@ -6843,6 +7025,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          <offset x="0.101095" y="-5.54"/>
           </Attribute>
         <Beam>86</Beam>
         <Note pitch="63" tpc="11"/>
@@ -6886,6 +7069,11 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>120</ticklen>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          <offset x="0" y="0.523865"/>
+          </Attribute>
+        <Slur type="start" number="134"/>
         <Beam>87</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6894,22 +7082,20 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Slur type="stop" number="134"/>
         <Beam>87</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Beam>87</Beam>
-        <Note>
-          <pitch>60</pitch>
-          <tpc>14</tpc>
-          <userAccidental>5</userAccidental>
-          </Note>
+        <Note pitch="60" tpc="14"/>
         </Chord>
       <Beam id="88">
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Slur type="start" number="135"/>
         <Beam>88</Beam>
         <Note pitch="58" tpc="12"/>
         </Chord>
@@ -6918,9 +7104,12 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Slur type="stop" number="135"/>
         <Beam>88</Beam>
         <Note pitch="63" tpc="11"/>
         <Note pitch="70" tpc="12"/>
+        <Arpeggio>
+          </Arpeggio>
         </Chord>
       </Measure>
     <Measure number="101">
@@ -6928,6 +7117,9 @@ p, li { white-space: pre-wrap; }
         </LayoutBreak>
       <Chord>
         <ticklen>960</ticklen>
+        <Attribute>
+          <subtype>dmarcato</subtype>
+          </Attribute>
         <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
@@ -8410,7 +8602,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="0.0163432" y="-24.1397"/>
+        <offset x="-2.46245" y="-1.51536"/>
         </Dynamic>
       <Beam id="125">
         </Beam>
@@ -8437,6 +8629,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Beam>126</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8478,6 +8673,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Beam>128</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8519,6 +8717,9 @@ p, li { white-space: pre-wrap; }
         </Beam>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Beam>130</Beam>
         <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
@@ -8688,6 +8889,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>staccato</subtype>
+          </Attribute>
         <Slur type="stop" number="5"/>
         <Beam>137</Beam>
         <Note pitch="44" tpc="10"/>
@@ -9308,6 +9512,10 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          <offset x="0.378839" y="-8.7133"/>
+          </Attribute>
         <Slur type="stop" number="44"/>
         <Beam>160</Beam>
         <Note pitch="63" tpc="11"/>
@@ -9498,11 +9706,7 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Beam>169</Beam>
         <Note pitch="56" tpc="10"/>
-        <Note>
-          <pitch>58</pitch>
-          <tpc>12</tpc>
-          <userAccidental>2</userAccidental>
-          </Note>
+        <Note pitch="58" tpc="12"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
@@ -9673,7 +9877,20 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Slur type="stop" number="47"/>
         <Beam>176</Beam>
-        <Note pitch="63" tpc="11"/>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.947098" y="3.31484"/>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
+          </Note>
         </Chord>
       </Measure>
     <Measure number="38">
@@ -9683,6 +9900,16 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>59</pitch>
           <tpc>7</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.852388" y="5.96672"/>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
+              </html-data>
+            </Text>
           <Tie>
             <tick>35520</tick>
             <up>2</up>
@@ -9691,6 +9918,16 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.852388" y="5.30375"/>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
+              </html-data>
+            </Text>
           <Tie>
             <up>2</up>
             </Tie>
@@ -9716,6 +9953,16 @@ p, li { white-space: pre-wrap; }
           <tick>35520</tick>
           <pitch>70</pitch>
           <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.852388" y="5.68259"/>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1</p></body></html>
+              </html-data>
+            </Text>
           </Note>
         </Chord>
       <Chord>
@@ -9856,6 +10103,7 @@ p, li { white-space: pre-wrap; }
           <tick>36960</tick>
           <pitch>59</pitch>
           <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
           </Note>
         </Chord>
       </Measure>
@@ -10055,14 +10303,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
-      <Dynamic>
-        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-0.472126" y="-13.0242"/>
-        </Dynamic>
       <Chord>
         <ticklen>480</ticklen>
         <Slur type="start" number="21"/>
@@ -10090,7 +10330,7 @@ p, li { white-space: pre-wrap; }
           <tpc>8</tpc>
           <Text>
             <subtype>Fingering</subtype>
-            <offset x="-0.692136" y="1.10742"/>
+            <offset x="-0.885205" y="1.43846"/>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10121,6 +10361,11 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <tick>44160</tick>
         <ticklen>960</ticklen>
+        <Attribute>
+          <subtype>tenuto</subtype>
+          <offset x="0.700787" y="-5.53253"/>
+          <track>5</track>
+          </Attribute>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -11569,7 +11814,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.51523" y="-11.0261"/>
+        <offset x="-2.07982" y="-14.0104"/>
         </Dynamic>
       <Chord>
         <ticklen>960</ticklen>
@@ -12247,6 +12492,9 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          </Attribute>
         <Beam>218</Beam>
         <Note pitch="31" tpc="15"/>
         </Chord>
@@ -12256,6 +12504,9 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <subtype>staccato</subtype>
           </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
+          </Attribute>
         <Beam>218</Beam>
         <Note pitch="36" tpc="14"/>
         </Chord>
@@ -12263,6 +12514,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
+          </Attribute>
+        <Attribute>
+          <subtype>sforzato</subtype>
           </Attribute>
         <Beam>218</Beam>
         <Note pitch="38" tpc="16"/>
@@ -12277,6 +12531,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>219</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12297,6 +12552,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>220</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12319,6 +12575,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>221</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12339,6 +12596,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>222</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12361,6 +12619,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>223</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12381,6 +12640,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>224</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12403,6 +12663,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>225</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -12423,6 +12684,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>226</Beam>
+        <StemDirection>down</StemDirection>
         <Note pitch="39" tpc="11"/>
         <Note pitch="46" tpc="12"/>
         </Chord>
@@ -13423,5 +13685,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
