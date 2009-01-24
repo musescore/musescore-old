@@ -56,6 +56,8 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
             MStaff* ms = m->mstaff(staffIdx);
             item = new QTableWidgetItem();
             item->setCheckState(ms->_visible ? Qt::Checked : Qt::Unchecked);
+            if (rows == 1)                // cannot be invisible if only one row
+                  item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
             staves->setItem(staffIdx, 1, item);
             item = new QTableWidgetItem();
             item->setCheckState(ms->_slashStyle ? Qt::Checked : Qt::Unchecked);

@@ -1,4 +1,6 @@
 24.jan (ws)
+      - do not allow to make a measure/staff invisible if there is only
+        one staff
       - fix crash when deleting whole score in note entry mode
 22.jan (lv)
       - fixed Unicode filename handlng for compressed MusicXML files
