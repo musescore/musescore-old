@@ -1,4 +1,5 @@
 24.jan (ws)
+      - show start reapeat also in last measure of score
       - another try in fixing translation of shortcut names
       - added patch from Toby Smithe
       - fix slur handling in parts extraction

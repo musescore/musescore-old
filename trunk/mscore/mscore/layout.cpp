@@ -792,6 +792,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               m->setEndBarLineType(END_REPEAT, true);
                         else if (m->endBarLineGenerated())
                               m->setEndBarLineType(NORMAL_BAR, true);
+                        needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
                         }
                   else {
                         MeasureBase* mb = m->next();
