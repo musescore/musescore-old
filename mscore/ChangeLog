@@ -1,3 +1,5 @@
+24.jan (ws)
+      - fix crash when deleting whole score in note entry mode
 22.jan (lv)
       - fixed Unicode filename handlng for compressed MusicXML files
        (ws)

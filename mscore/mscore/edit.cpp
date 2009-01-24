@@ -1702,16 +1702,20 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
 void Score::updateEntryMode()
       {
       _is.cr = 0;
-      if (!noteEntryMode()) {
+      if (!noteEntryMode())
             return;
-            }
       if (_is.cr == 0) {
             Segment* segment = tick2segment(_is.pos());
-            Element* e       = segment->element(_is.track);
-            if (e && e->isChordRest())
-                  _is.cr = static_cast<ChordRest*>(e);
-            else
-                  printf("no CR at %d track %d\n", _is.pos(), _is.track);
+            if (segment) {
+                  Element* e = segment->element(_is.track);
+                  if (e && e->isChordRest())
+                        _is.cr = static_cast<ChordRest*>(e);
+                  else
+                        printf("no CR at %d track %d\n", _is.pos(), _is.track);
+                  }
+            else {
+                  setNoteEntry(false);
+                  }
             }
       if (_is.cr) {
             if (_is.cr->type() == REST)
