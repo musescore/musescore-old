@@ -112,7 +112,10 @@ testdist:
 	cd mscore-${VERSION}; make release
 
 revision:
-	svnversion -n | cut -c 1-4 > mscore/mscore/revision.h
+	@svnversion -n | cut -c 1-4 > mscore/mscore/revision.h
+
+version:
+	@echo ${VERSION}
 
 install:
 	cd build; make install
