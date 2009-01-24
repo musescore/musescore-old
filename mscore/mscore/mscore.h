@@ -124,6 +124,7 @@ class Shortcut {
       QString help;           //! ballon help
       QIcon* icon;
       QAction* action;        //! cached action
+      bool translated;
 
       Shortcut();
       Shortcut(int state, const char* name, const char* d, const QKeySequence& k = QKeySequence(),
