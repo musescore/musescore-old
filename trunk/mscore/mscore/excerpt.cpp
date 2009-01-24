@@ -105,7 +105,12 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       writeExcerpt(excerpt, xml);
       xml << "</museScore>\n";
       buffer.close();
-
+#if 0
+      QFile mops("mops");
+      mops.open(QIODevice::WriteOnly);
+      mops.write(buffer.data());
+      mops.close();
+#endif
       QDomDocument doc;
       int line, column;
       QString err;
@@ -204,6 +209,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
                   int staffIdx2 = slur->endElement()->staffIdx();
                   if (trackOffset[staffIdx1] == HIDDEN || trackOffset[staffIdx2] == HIDDEN)
                         continue;
+                  xml.trackDiff = trackOffset[staffIdx1];
                   slur->setId(slurId++);
                   slur->write(xml);
                   }

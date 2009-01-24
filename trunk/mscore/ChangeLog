@@ -1,4 +1,5 @@
 24.jan (ws)
+      - fix slur handling in parts extraction
       - fix note entry of chords in tuplet with mouse
       - do not allow to make a measure/staff invisible if there is only
         one staff
