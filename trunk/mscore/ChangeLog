@@ -1,4 +1,5 @@
 24.jan (ws)
+      - another try in fixing translation of shortcut names
       - added patch from Toby Smithe
       - fix slur handling in parts extraction
       - fix note entry of chords in tuplet with mouse
