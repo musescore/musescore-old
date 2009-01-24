@@ -114,7 +114,7 @@ testdist:
 revision:
 	@svnversion -n | cut -c 1-4 > mscore/mscore/revision.h
 
-version:
+version: revision
 	@echo ${VERSION}
 
 install:
