@@ -392,7 +392,10 @@ void Score::putNote(const QPointF& pos, bool replace)
             cr = (ChordRest*)segment->element(track);
 
       bool addToChord = false;
-      if (!replace && cr && (cr->tickLen() == len) && (cr->type() == CHORD) && !_padState.rest) {
+      int tl = len;
+      if (_is.cr->tuplet())
+            tl = _is.cr->tickLen();
+      if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_padState.rest) {
             const NoteList* nl = ((Chord*)cr)->noteList();
             Note* note = nl->find(pitch);
             if (note)
@@ -403,24 +406,18 @@ void Score::putNote(const QPointF& pos, bool replace)
             if (cr->type() == CHORD) {
                   Note* note = addNote((Chord*)cr, pitch);
                   select(note, SELECT_SINGLE, 0);
-//                  if (seq && mscore->playEnabled()) {
-//                        seq->startNote(note->staff()->part(), note->pitch(), 60, 1000);
-//                        }
                   }
             else {
-                  if (cr->tuplet()) {
+                  if (cr->tuplet())
                         setTupletChordRest(cr, pitch, len);
-                        }
-                  else {
+                  else
                         setNote(tick, track, pitch, len, headGroup, stemDirection);
-                        }
                   }
             }
       else {
             // replace chord
-            if (cr && cr->tuplet()) {
+            if (cr && cr->tuplet())
                   setTupletChordRest(cr, pitch, len);
-                  }
             else {
                   if (_padState.rest)
                         setRest(tick, track, len, _padState.dots);
