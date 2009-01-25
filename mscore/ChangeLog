@@ -1,3 +1,7 @@
+<<<<<<< .mine
+25.jan (olavgun)
+	- exportly: added brackest and braces for simple scores.
+=======
 24.jan (ws)
       - show start reapeat also in last measure of score
       - another try in fixing translation of shortcut names
@@ -10,6 +14,7 @@
       (db)
       - updated handbooks (incorporates about 50 link fixes)
       - Chapter structure for French handbook
+>>>>>>> .r1477
 22.jan (lv)
       - fixed Unicode filename handlng for compressed MusicXML files
        (ws)
@@ -18,9 +23,15 @@
       - fix default position of dynamics in multi stave systems
       (tb)
       - updated Dutch translation by Jaap Plaisier
+<<<<<<< .mine
+	(olavgun)
+      - exportly: fixed some problems with beams in gracenotes, and some
+	problems caused by the previous exportly update.
+=======
       (db)
       - added Dutch and Galacian handbooks to installer
       - updated all handbooks
+>>>>>>> .r1468
 21.jan (ws)
       - new text properties dialog, used in text line properties
 20.jan (ws)
