@@ -301,7 +301,8 @@ void Seq::start()
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
-            if (events.empty()) {
+
+            if (events.empty() || endTick == 0) {
                   a->setChecked(false);
                   return;
                   }
@@ -463,52 +464,11 @@ void Seq::stopTransport()
 
 void Seq::startTransport()
       {
-      // dont start transport, if we have nothing to play
-      //
-      if (endTick == 0)
-            return;
       if (!pauseState)
             emit toGui('1');
       startTime = curTime() - playTime;
       state     = PLAY;
       }
-
-#if 0
-//---------------------------------------------------------
-//   program
-//---------------------------------------------------------
-
-void Driver::program(int channel, int program, bool /*drum*/)
-      {
-      int ch   = channel % 16;
-      int port = channel / 16;
-
-      int hb = (program >> 16) & 0xff;
-      int lb = (program >> 8) & 0xff;
-      int pr = program & 0xff;
-      if (hb != 0xff) {
-            MidiOutEvent e;
-            e.port = port;
-            e.type = ME_CONTROLLER | ch;
-            e.a    = CTRL_HBANK;
-            e.b    = hb;
-            putEvent(e);
-            }
-      if (lb != 0xff) {
-            MidiOutEvent e;
-            e.port = port;
-            e.type = ME_CONTROLLER | ch;
-            e.a    = CTRL_LBANK;
-            e.b    = lb;
-            putEvent(e);
-            }
-      MidiOutEvent e;
-      e.port = port;
-      e.type = ME_PROGRAM | ch;
-      e.a    = pr;
-      putEvent(e);
-      }
-#endif
 
 //---------------------------------------------------------
 //   playEvent
@@ -739,21 +699,18 @@ void Seq::collectEvents()
             delete e;
 
       events.clear();
-//      initInstruments();
 
       cs->toEList(&events, 0);
+      endTick = 0;
+      if (!events.empty()) {
+            EventMap::const_iterator e = events.constEnd();
+            --e;
+            endTick = e.key();
+            }
 
       PlayPanel* pp = mscore->getPlayPanel();
-      if (pp) {
-            if (events.empty())
-                  pp->setEndpos(0);
-            else {
-                  EventMap::const_iterator e = events.constEnd();
-                  --e;
-                  endTick = e.key();
-                  pp->setEndpos(endTick);
-                  }
-            }
+      if (pp)
+            pp->setEndpos(endTick);
       }
 
 //---------------------------------------------------------

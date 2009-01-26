@@ -1375,13 +1375,17 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               int pitch = pitchKeyAdjust(l, key) + octave * 12;
                               pitch += n.alteration;
 
-
                               if (pitch > 127)
                                     pitch = 127;
                               else if (pitch < 0)
                                     pitch = 0;
 
                               note->setPitch(pitch);
+                              int alter1 = tpc2alter(note->tpc());
+                              int _tpc = pitch2tpc(note->pitch(), 0);
+                              int alter2 = tpc2alter(_tpc);
+
+printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
                               // note->setTpc(tpc);
 
                               chord->add(note);
