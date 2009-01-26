@@ -1,8 +1,9 @@
 26.jan (tb)
+      - fixed: playback suppressed when preferes set to Start Empty
       - updated French translation by Jean-Louis Waltener
       - updated Dutch translation by Jaap Plaisier
 25.jan (olavgun)
-      - exportly: added brackest and braces for simple scores.
+      - exportly: added brackets and braces for simple scores.
 24.jan (ws)
       - show start reapeat also in last measure of score
       - another try in fixing translation of shortcut names
