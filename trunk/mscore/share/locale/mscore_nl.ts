@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="nl">
+<defaultcodec></defaultcodec>
 <context>
     <name></name>
     <message>
@@ -8055,157 +8056,157 @@ failed: </source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="13"/>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tekst Eigenschappen</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="21"/>
         <source>Font:</source>
-        <translation type="unfinished">Font:</translation>
+        <translation>Lettertype:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="28"/>
         <source>font face</source>
-        <translation type="unfinished"></translation>
+        <translation>lettertype gezicht</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="35"/>
         <source>Size:</source>
-        <translation type="unfinished">Grootte:</translation>
+        <translation>Grootte:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="65"/>
         <source>Style:</source>
-        <translation type="unfinished">Stijl:</translation>
+        <translation>Stijl:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="92"/>
         <source>bold</source>
-        <translation type="unfinished">vet</translation>
+        <translation>vet</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="95"/>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="128"/>
         <source>italic</source>
-        <translation type="unfinished">schuin</translation>
+        <translation>schuin</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="131"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="158"/>
         <source>underline</source>
-        <translation type="unfinished">onderstrepen</translation>
+        <translation>onderstrepen</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="161"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="184"/>
         <source>Align:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="318"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="223"/>
         <source>align horizontal center</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontaal centreren</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="246"/>
         <source>align right</source>
-        <translation type="unfinished">rechts</translation>
+        <translation>lijn rechts</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="269"/>
         <source>align top</source>
-        <translation type="unfinished"></translation>
+        <translation>lijn bovenkant</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="292"/>
         <source>align vertical center</source>
-        <translation type="unfinished"></translation>
+        <translation>verticaal centreren</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="315"/>
         <source>align bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>lijn onderkant</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="444"/>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="451"/>
         <source>frame color</source>
-        <translation type="unfinished">kader kleur</translation>
+        <translation>kader kleur</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="371"/>
         <source>Frame</source>
-        <translation type="unfinished">Kader</translation>
+        <translation>Kader</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="382"/>
         <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
+        <translation>teken omcirkeld kader</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="385"/>
         <source>Circle</source>
-        <translation type="unfinished">Cirkel</translation>
+        <translation>Cirkel</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="392"/>
         <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
+        <translation>teken boxed kader</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="395"/>
         <source>Box</source>
-        <translation type="unfinished">Box</translation>
+        <translation>Box</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="406"/>
         <source>Width:</source>
-        <translation type="unfinished">Breedte:</translation>
+        <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="413"/>
         <source>frame line width</source>
-        <translation type="unfinished"></translation>
+        <translation>breedte van de kaderlijn</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="420"/>
         <source>Margin:</source>
-        <translation type="unfinished">Marge:</translation>
+        <translation>Marge:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="427"/>
         <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
+        <translation>kader binnenmarge</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="434"/>
         <source>Round:</source>
-        <translation type="unfinished">Rond:</translation>
+        <translation>Rond:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="463"/>
         <source>align left</source>
-        <translation type="unfinished">links</translation>
+        <translation>lijn links</translation>
     </message>
 </context>
 <context>
