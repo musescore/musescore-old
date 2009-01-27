@@ -3,6 +3,9 @@
       - small change in note entry mode for entering voices > 1. Unfortunately
         this does not solve all problems...
       - capella import: more clefs, time signature changes
+      (db)
+      - latest versions of handbooks
+      - support for hiding text only relevant to old versions (see English PDF versus website)
 26.jan (ws)
       - fixed: playback suppressed when preferes set to Start Empty
       (tb)
