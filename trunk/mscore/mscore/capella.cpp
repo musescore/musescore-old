@@ -1589,5 +1589,6 @@ void Score::convertCapella(Capella* cap)
                   }
             }
       _parts.push_back(part);
+      _layout->connectTies();
       }
 

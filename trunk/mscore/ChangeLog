@@ -1,4 +1,5 @@
 27.jan (ws)
+      - capella import: ties
       - small change in note entry mode for entering voices > 1. Unfortunately
         this does not solve all problems...
       - capella import: more clefs, time signature changes
