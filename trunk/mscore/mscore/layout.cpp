@@ -941,7 +941,6 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
 
 void ScoreLayout::connectTies()
       {
-printf("connect ties\n");
       int tracks = _score->nstaves() * VOICES;
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
