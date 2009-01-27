@@ -1,5 +1,10 @@
-26.jan (tb)
+27.jan (ws)
+      - small change in note entry mode for entering voices > 1. Unfortunately
+        this does not solve all problems...
+      - capella import: more clefs, time signature changes
+26.jan (ws)
       - fixed: playback suppressed when preferes set to Start Empty
+      (tb)
       - updated French translation by Jean-Louis Waltener
       - updated Dutch translation by Jaap Plaisier
 25.jan (olavgun)

@@ -1394,6 +1394,61 @@ void MuseScore::removeTab(int i)
       }
 
 //---------------------------------------------------------
+//   setLocale
+//---------------------------------------------------------
+
+void setMscoreLocale(QString localeName)
+      {
+      static QList<QTranslator*> translatorList;
+
+      foreach(QTranslator* t, translatorList) {
+            qApp->removeTranslator(t);
+            delete t;
+            }
+
+      if (debugMode)
+            printf("configured localeName <%s>\n", qPrintable(localeName));
+      if (localeName.toLower() == "system") {
+            localeName = QLocale::system().name();
+            if (debugMode)
+                  printf("real localeName <%s>\n", qPrintable(localeName));
+            }
+
+      QTranslator* translator = new QTranslator;
+      QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
+      if (debugMode)
+            printf("load translator <%s>\n", qPrintable(lp));
+
+      if (!translator->load(lp) && debugMode)
+            printf("load translator <%s> failed\n", qPrintable(lp));
+
+      qApp->installTranslator(translator);
+      translatorList.append(translator);
+
+      QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+      QTranslator* qtTranslator = new QTranslator;
+      if (debugMode)
+            printf("load translator <qt_%s>\n", qPrintable(localeName));
+
+      if (!qtTranslator->load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
+            printf("load translator <qt_%s> failed\n", qPrintable(localeName));
+
+      qApp->installTranslator(qtTranslator);
+      translatorList.append(qtTranslator);
+
+
+      //
+      // initialize shortcut hash table
+      //
+      shortcuts.clear();
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+      }
+
+//---------------------------------------------------------
 //   main
 //---------------------------------------------------------
 
@@ -1482,42 +1537,8 @@ int main(int argc, char* argv[])
             QSettings s;
             localeName = s.value("language", "system").toString();
             }
-      if (debugMode)
-            printf("configured localeName <%s>\n", qPrintable(localeName));
-      if (localeName.toLower() == "system") {
-            localeName = QLocale::system().name();
-            if (debugMode)
-                  printf("real localeName <%s>\n", qPrintable(localeName));
-            }
 
-      QTranslator translator;
-      QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
-      if (debugMode)
-            printf("load translator <%s>\n", qPrintable(lp));
-
-      if (!translator.load(lp) && debugMode)
-            printf("load translator <%s> failed\n", qPrintable(lp));
-
-      app.installTranslator(&translator);
-
-      QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-      QTranslator qtTranslator;
-      if (debugMode)
-            printf("load translator <qt_%s>\n", qPrintable(localeName));
-
-      if (!qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
-            printf("load translator <qt_%s> failed\n", qPrintable(localeName));
-
-      app.installTranslator(&qtTranslator);
-
-      //
-      // initialize shortcut hash table
-      //
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
+      setMscoreLocale(localeName);
 
       if (!useFactorySettings)
             preferences.read();

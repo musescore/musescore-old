@@ -421,11 +421,11 @@ printf("readDrawObjectArray bad type %d\n", type);
 
 void BasicDrawObj::read()
       {
-      modeX = cap->readByte();      // anchor mode
-      modeY = cap->readByte();
-      distY = cap->readByte();
-      flags = cap->readByte();
-      nRefNote = cap->readInt();
+      modeX       = cap->readByte();      // anchor mode
+      modeY       = cap->readByte();
+      distY       = cap->readByte();
+      flags       = cap->readByte();
+      nRefNote    = cap->readInt();
       short range = cap->readWord();
       nNotes      = range & 0x0fff;
       background  = range & 0x1000;
@@ -439,7 +439,7 @@ void BasicDrawObj::read()
 void BasicRectObj::read()
       {
       BasicDrawObj::read();
-      relPos = cap->readPoint();
+      relPos  = cap->readPoint();
       width   = cap->readInt();
       yxRatio = cap->readInt();
       height  = (width * yxRatio) / 0x10000;
@@ -903,7 +903,6 @@ void CapClef::read()
       form            = (FORM) (b & 7);
       line            = (LINE) ((b >> 3) & 7);
       oct             = (OCT)  (b >> 6);
-// printf("         Clef %s\n", name());
       }
 
 //---------------------------------------------------------
@@ -912,25 +911,25 @@ void CapClef::read()
 
 int CapClef::clef() const
       {
-#if 0
-      enum FORM { FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
-                  FORM_NULL, CLEF_UNCHANGED
-                  };
-      enum LINE {LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
-      enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
-#endif
-      switch(form) {
-            case FORM_G:
-                  return CLEF_G;
-            case FORM_C:
-                  return CLEF_C2;
-            case FORM_F:
-                  return CLEF_F;
-            case FORM_PERCUSSION:
-                  return CLEF_PERC;
-            case FORM_NULL:
-            case CLEF_UNCHANGED:
-                  return -1;
+      int idx = form + (line << 3) + (oct << 5);
+      switch(idx) {
+            case FORM_G + (LINE_2 << 3) + (OCT_NULL << 5):  return CLEF_G;
+            case FORM_G + (LINE_2 << 3) + (OCT_ALTA << 5):  return CLEF_G1;
+            case FORM_G + (LINE_2 << 3) + (OCT_BASSA << 5): return CLEF_G1;
+
+            case FORM_C + (LINE_1 << 3) + (OCT_NULL << 5):  return CLEF_C1;
+            case FORM_C + (LINE_2 << 3) + (OCT_NULL << 5):  return CLEF_C2;
+            case FORM_C + (LINE_3 << 3) + (OCT_NULL << 5):  return CLEF_C3;
+            case FORM_C + (LINE_4 << 3) + (OCT_NULL << 5):  return CLEF_C4;
+            case FORM_C + (LINE_5 << 3) + (OCT_NULL << 5):  return CLEF_C5;
+
+            case FORM_F + (LINE_4 << 3) + (OCT_NULL << 5):  return CLEF_F;
+            case FORM_F + (LINE_4 << 3) + (OCT_BASSA << 5): return CLEF_F8;
+            case FORM_F + (LINE_3 << 3) + (OCT_NULL << 5):  return CLEF_F_B;
+            case FORM_F + (LINE_5 << 3) + (OCT_NULL << 5):  return CLEF_F_C;
+            default:
+                  printf("unknown clef %d %d %d\n", form, line, oct);
+                  break;
             }
       return -1;
       }
@@ -1328,6 +1327,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
+
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(Segment::SegChordRest, tick);
                         Chord* chord = new Chord(this);
@@ -1385,10 +1385,16 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               int _tpc = pitch2tpc(note->pitch(), 0);
                               int alter2 = tpc2alter(_tpc);
 
-printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
+// printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
                               // note->setTpc(tpc);
 
                               chord->add(note);
+                              if (o->rightTie) {
+                                    Tie* tie = new Tie(this);
+                                    tie->setStartNote(note);
+                                    tie->setTrack(track);
+                                    note->setTieFor(tie);
+                                    }
                               }
                         foreach(Verse v, o->verse) {
                               Lyrics* l = new Lyrics(this);
@@ -1405,14 +1411,11 @@ printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
                   case T_CLEF:
                         {
                         CapClef* o = static_cast<CapClef*>(no);
-                        // printf("%d:%d <Clef> %s\n", tick, staffIdx, o->name());
-                        int clef = staff(staffIdx)->clef(tick);
+// printf("%d:%d <Clef> %s line %d oct %d\n", tick, staffIdx, o->name(), o->line, o->oct);
                         int nclef = o->clef();
                         if (nclef == -1)
                               break;
-                        if (nclef != clef) {
-                              staff(staffIdx)->setClef(tick, nclef);
-                              }
+                        staff(staffIdx)->changeClef(tick, nclef);
                         }
                         break;
                   case T_KEY:

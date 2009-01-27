@@ -1022,7 +1022,9 @@ void PreferenceDialog::apply()
                   }
             }
       int lang = language->itemData(language->currentIndex()).toInt();
-      preferences.language = lang == 0 ? "system" : languages[lang].key;
+      QString l = lang == 0 ? "system" : languages[lang].key;
+      bool languageChanged = l != preferences.language;
+      preferences.language = l;
 
       preferences.iconHeight          = iconHeight->value();
       preferences.iconWidth           = iconWidth->value();
@@ -1045,21 +1047,10 @@ void PreferenceDialog::apply()
 
       preferences.defaultPlayDuration = defaultPlayDuration->value();
 
-#if 0
-      QString localeName = QLocale::system().name();
-      if (localeName != lang) {
-            localeName = lang;
-            QTranslator translator;
-            QString lp = mscoreGlobalShare + "locale/" + QString("mscore_") + localeName;
-            translator.load(lp);
-            qApp->installTranslator(&translator);
-            QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-            QTranslator qtTranslator(0);
-            qtTranslator.load(QLatin1String("qt_") + localeName, resourceDir);
-            qApp->installTranslator(&qtTranslator);
+      if (languageChanged) {
+            setMscoreLocale(preferences.language);
             mscore->update();
             }
-#endif
 
       qApp->setStyleSheet(appStyleSheet());
 

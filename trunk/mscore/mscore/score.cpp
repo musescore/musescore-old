@@ -1677,6 +1677,21 @@ Page* Score::searchPage(const QPointF& p) const
       }
 
 //---------------------------------------------------------
+//   getNextCRSegment
+//---------------------------------------------------------
+
+static Segment* getNextCRSegment(Segment* s, int staffIdx)
+      {
+      while (s && ((s->subtype() != Segment::SegChordRest))) {
+            int idx = staffIdx * VOICES;
+            if (s->element(idx) || s->element(idx+1) || s->element(idx+2) || s->element(idx+3))
+                  break;
+            s = s->next();
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
 //   getPosition
 //    return true if valid position found
 //---------------------------------------------------------
@@ -1758,7 +1773,6 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
             return false;
             }
 
-
       //
       //    search segment
       //
@@ -1767,18 +1781,12 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
       Segment* segment = 0;
       pos->tick        = -1;
 
-      int track = pos->staffIdx * VOICES; // + _padState.voice;
-
       for (segment = pos->measure->first(); segment;) {
-            while (segment
-               && ((segment->subtype() != Segment::SegChordRest) || (!segment->element(track)))) {
-                  segment = segment->next();
-                  }
+            segment = getNextCRSegment(segment, pos->staffIdx);
             if (segment == 0)
                   break;
-            Segment* ns = segment->next();
-            while (ns && ((ns->subtype() != Segment::SegChordRest) || (!ns->element(track))))
-                  ns = ns->next();
+            Segment* ns = getNextCRSegment(segment->next(), pos->staffIdx);
+
             double x1 = segment->x();
             double x2;
             int ntick;
