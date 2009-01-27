@@ -1351,9 +1351,19 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         s->add(chord);
                         int clef = staff(staffIdx)->clef(tick);
                         int key  = staff(staffIdx)->key(tick);
-                        int off = 0;
-                        if (clef == 4)
-                              off = -14;
+                        int off;
+                        switch(clef) {
+                              case CLEF_F:    off = -14; break;
+                              case CLEF_F_B:  off = -14; break;
+                              case CLEF_F_C:  off = -14; break;
+                              case CLEF_C1:   off = -7; break;
+                              case CLEF_C2:   off = -7; break;
+                              case CLEF_C3:   off = -7; break;
+                              case CLEF_C4:   off = -7; break;
+                              case CLEF_C5:   off = -7; break;
+                              default:
+                                    off = 0;
+                              }
 
                         static int keyOffsets[15] = {
                          //   -7 -6 -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7
