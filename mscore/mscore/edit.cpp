@@ -360,17 +360,15 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
             }
 
-      int tick     = p.tick;
-      int staffIdx = p.staffIdx;
-      int line     = p.line;
-
-      Staff* st = staff(staffIdx);
-      int key   = st->keymap()->key(tick);
-      int clef  = st->clef(tick);
-      int pitch = line2pitch(line, clef, key);
-      int len   = _padState.tickLen;
-      Instrument* instr = st->part()->instrument();
-
+      int tick                = p.tick;
+      int staffIdx            = p.staffIdx;
+      int line                = p.line;
+      Staff* st               = staff(staffIdx);
+      int key                 = st->keymap()->key(tick);
+      int clef                = st->clef(tick);
+      int pitch               = line2pitch(line, clef, key);
+      int len                 = _padState.tickLen;
+      Instrument* instr       = st->part()->instrument();
       int voice               = _padState.voice;
       int track               = staffIdx * VOICES + voice;
       int headGroup           = 0;
@@ -389,14 +387,14 @@ void Score::putNote(const QPointF& pos, bool replace)
       Segment* segment = p.measure->tick2segment(tick);
       ChordRest* cr    = 0;
       if (segment)
-            cr = (ChordRest*)segment->element(track);
+            cr = static_cast<ChordRest*>(segment->element(track));
 
       bool addToChord = false;
       int tl = len;
       if (_is.cr->tuplet())
             tl = _is.cr->tickLen();
       if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_padState.rest) {
-            const NoteList* nl = ((Chord*)cr)->noteList();
+            const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
             if (note)
                   return;
@@ -404,7 +402,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
       if (addToChord) {
             if (cr->type() == CHORD) {
-                  Note* note = addNote((Chord*)cr, pitch);
+                  Note* note = addNote(static_cast<Chord*>(cr), pitch);
                   select(note, SELECT_SINGLE, 0);
                   }
             else {

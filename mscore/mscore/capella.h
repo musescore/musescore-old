@@ -72,8 +72,6 @@ class CapClef : public NoteObj, public CapellaObj {
       enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
 
       FORM form;
-      LINE line;
-      OCT  oct;
 
    public:
       CapClef(Capella* c) : NoteObj(T_CLEF), CapellaObj(c) {}
@@ -83,6 +81,9 @@ class CapClef : public NoteObj, public CapellaObj {
             return formName[form];
             }
       int clef() const;
+
+      LINE line;
+      OCT  oct;
       };
 
 //---------------------------------------------------------
@@ -524,6 +525,7 @@ struct CNote {
 //---------------------------------------------------------
 
 class ChordObj : public BasicDurationalObj, public NoteObj {
+   public:
       unsigned char beamMode;
       char notationStave;
       char dStemLength;
