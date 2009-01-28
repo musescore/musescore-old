@@ -279,7 +279,7 @@ class Score : public QObject {
       void insertMeasures(int, int);
 
       void cmdAddPitch(int note, bool addFlag);
-      void cmdAddPitch1(int pitch, bool addFlag);
+      Note* cmdAddPitch1(int pitch, bool addFlag);
       void cmdAddInterval(int);
 
       void printFile();
@@ -453,14 +453,14 @@ class Score : public QObject {
       void undoInsertStaff(Staff* staff, int idx);
       void undoMove(Element* e, const QPointF& pt);
 
-      void setNote(int tick, int track, int pitch, int len, int headGroup = 0,
+      Note* setNote(int tick, int track, int pitch, int len, int headGroup = 0,
          Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, int len);
       int makeGap(int tick, int track, int len);
       int makeGap1(int tick, int staff, int len);
       void cloneCR(ChordRest* cr, int tick, int len, int track);
 
-      void setTupletChordRest(ChordRest* cr, int pitch, int len);
+      Element* setTupletChordRest(ChordRest* cr, int pitch, int len);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;

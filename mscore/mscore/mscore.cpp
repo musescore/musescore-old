@@ -322,7 +322,7 @@ MuseScore::MuseScore()
       ag->setExclusive(false);
       QStringList sl;
       sl << "page-prev" << "page-next" << "page-top" << "page-end"
-         << "add-tie" << "add-slur" << "add-hairpin" << "add-hairpin-reverse"
+         << "add-slur" << "add-hairpin" << "add-hairpin-reverse"
          << "escape" << "delete" << "rest" << "pitch-up" << "pitch-down"
          << "pitch-up-octave" << "pitch-down-octave"
          << "move-up" << "move-down" << "up-chord" << "down-chord"
@@ -481,18 +481,19 @@ MuseScore::MuseScore()
       sl1 << "pad-note-64" << "pad-note-32" << "pad-note-16" << "pad-note-8"
          << "pad-note-4" << "pad-note-2" << "pad-note-1" << "note-breve" << "note-longa"
          << "pad-dot"
-         << "pad-dotdot" << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
+         << "pad-dotdot" << "tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
          << "pad-nat" << "pad-flat"  <<"pad-flat2";
 
       foreach(const QString& s, sl1) {
             NoteButton* nb = new NoteButton;
             QAction* a = getAction(s.toLatin1().data());
-            a->setCheckable(true);
+            if (s != "tie")
+                  a->setCheckable(true);
             ag->addAction(a);
             nb->setDefaultAction(a);
             entryTools->addWidget(nb);
             // entryTools->addAction(a);
-            if (s == "pad-tie" || s == "pad-rest")
+            if (s == "tie" || s == "pad-rest")
                   entryTools->addSeparator();
             }
 

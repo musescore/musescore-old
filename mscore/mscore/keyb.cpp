@@ -277,7 +277,6 @@ void Score::padToggle(int n)
 void Score::setPadState(Element* e)
       {
       int len       = -1;
-      _padState.tie = false;
 
       _padState.drumNote = -1;
       _padState.drumset  = 0;
@@ -292,7 +291,6 @@ void Score::setPadState(Element* e)
             _padState.rest      = false;
             _padState.voice     = note->voice();
             _padState.pitch     = note->pitch();
-            _padState.tie       = note->tieFor();
             _padState.noteType  = note->noteType();
             _padState.beamMode  = chord->beamMode();
             }
@@ -344,7 +342,6 @@ void Score::setPadState()
       getAction("pad-rest")->setChecked(_padState.rest);
       getAction("pad-dot")->setChecked(_padState.dots == 1);
       getAction("pad-dotdot")->setChecked(_padState.dots == 2);
-      getAction("pad-tie")->setChecked(_padState.tie);
 
       getAction("note-longa")->setChecked(_padState.len == division * 16);
       getAction("note-breve")->setChecked(_padState.len == division * 8);

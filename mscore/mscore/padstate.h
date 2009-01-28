@@ -39,7 +39,6 @@ struct PadState {
       int voice;
       int pitch;
       int prefix;
-      bool tie;
       NoteType noteType;
       BeamMode beamMode;
       int drumNote;
@@ -66,7 +65,6 @@ struct PadState {
             voice    = 0;
             pitch    = 60;
             prefix   = 0;
-            tie      = false;
             noteType = NOTE_NORMAL;
             beamMode = BEAM_AUTO;
             drumNote = -1;

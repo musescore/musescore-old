@@ -1,3 +1,12 @@
+28.jan (ws)
+      - remove tie if first note of a tie is shortened
+      - fixes for note entry of voices > 0
+      - changed entering ties in note entry mode: pressing "+" now creates
+        the next note and ties it with the current note; this eleminates an
+        substate in note entry mode, allows entry of tied notes with accidentals
+        across bar lines and saves a keystroke. It also should fix a bug
+        with hidden ties unexpectedly get connected later on.
+      - removed redundant keyboard shortcut Shift+S "add tie"
 27.jan (ws)
       - capella import: ties
       - small change in note entry mode for entering voices > 1. Unfortunately
