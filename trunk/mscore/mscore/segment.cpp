@@ -186,7 +186,8 @@ Segment* Segment::nextCR(int track) const
 //    get the next ChordRest, start at this segment
 //---------------------------------------------------------
 
-ChordRest* Segment::nextChordRest(int track, bool backwards) const {
+ChordRest* Segment::nextChordRest(int track, bool backwards) const
+      {
       for (const Segment* seg = this; seg; seg = backwards ? seg->prev1() : seg->next1()) {
             Element* el = seg->element(track);
             if (!el)

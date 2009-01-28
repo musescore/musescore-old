@@ -845,6 +845,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
+#if 0
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-tie",
@@ -854,6 +855,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
+#endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-slur",
@@ -1147,8 +1149,8 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-tie",
-         QT_TR_NOOP("pad tie"),
+         "tie",
+         QT_TR_NOOP("tie"),
          Qt::Key_Plus,
          Qt::WindowShortcut,
          QT_TR_NOOP("tie"),

@@ -140,6 +140,8 @@ Rest* Score::addRest(int tick, int len, int track)
 Rest* Score::setRest(int tick, int len, int track)
       {
 // printf("setRest %d %d\n", tick, len);
+      if (len == 0)
+            return 0;
       Measure* measure = tick2measure(tick);
 
       //
@@ -161,6 +163,10 @@ Rest* Score::setRest(int tick, int len, int track)
                         break;
                         }
                   }
+            }
+      if (restList.isEmpty()) {
+            printf("setRest at %d len %d failed\n", tick, len);
+            return 0;
             }
       Rest* rest = 0;
       if (((measure->tick() - tick) % restList[0]) == 0) {
@@ -549,10 +555,22 @@ void Score::cmdAddStaccato()
 void Score::cmdAddTie()
       {
       Note* note = getSelectedNote();
-      if (!note)
+      if (!note || note->tieFor())
             return;
       Chord* chord  = note->chord();
-      int staffIdx  = chord->staffIdx();
+      if (noteEntryMode()) {
+            Note* n = cmdAddPitch1(note->pitch(), false);
+            if (n) {
+                  Tie* tie = new Tie(this);
+                  tie->setStartNote(note);
+                  tie->setEndNote(n);
+                  tie->setTrack(note->track());
+                  note->setTieFor(tie);
+                  n->setTieBack(tie);
+                  undoAddElement(tie);
+                  }
+            return;
+            }
       ChordRest* el = nextChordRest(chord);
       if (el == 0 || el->type() != CHORD) {
             if (debugMode)
@@ -576,11 +594,10 @@ void Score::cmdAddTie()
       Tie* tie = new Tie(this);
       tie->setStartNote(note);
       tie->setEndNote(note2);
-      tie->setTrack(staffIdx * VOICES);
+      tie->setTrack(note->track());
       undoAddElement(tie);
       layoutAll = true;
-      select(tie, SELECT_SINGLE, 0);
-      getAction("add-tie")->setChecked(false);
+      select(note2, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -1043,6 +1060,8 @@ void Score::cmdDeleteSelection()
                         if (s->element(track))
                               undoRemoveElement(s->element(track));
                         }
+                  if (s->isEmpty())
+                        undoRemoveElement(s);
                   }
 
             for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
@@ -1444,7 +1463,7 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
 //    if pitch == -1 set rest
 //---------------------------------------------------------
 
-void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
+Element* Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       {
 // printf("setTupletChordRest %d %d\n", pitch, len);
 
@@ -1460,7 +1479,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
                   }
             if (i >= 256) {
                   printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
-                  return;
+                  return 0;
                   }
             }
       if (len < bl) {
@@ -1471,7 +1490,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
                   }
             if (i >= 256) {
                   printf("setTuplet: chord/rest does not fit; len %d, baseLen %d\n", len, bl);
-                  return;
+                  return 0;
                   }
             }
 
@@ -1488,7 +1507,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             }
       if (i == n) {
             printf("setTupletChordRest: cr not found in tuplet\n");
-            return;
+            return 0;
             }
       int remaining = len;
       int ii = i;
@@ -1499,7 +1518,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             }
       if (remaining > 0) {
             printf("setTupletChordRest: note/rest does not fit\n");
-            return;
+            return 0;
             }
       remaining = len;
       ii   = i;
@@ -1528,8 +1547,10 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
       int tick = cr->tick();
       int tl   = len * tuplet->normalNotes() / tuplet->actualNotes();
 
+      Element* el = 0;
       if (pitch != -1) {
             Note* note = new Note(this);
+            el = note;
             note->setPitch(pitch);
             note->setTrack(cr->track());
             mscore->play(note);
@@ -1553,6 +1574,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
             }
       else {
             Rest* rest = new Rest(this);
+            el = rest;
             rest->setTrack(cr->track());
             rest->setTick(tick);
             rest->setTickLen(tl);
@@ -1599,6 +1621,7 @@ void Score::setTupletChordRest(ChordRest* cr, int pitch, int len)
                   tick += tl;
                   }
             }
+      return el;
       }
 
 //---------------------------------------------------------

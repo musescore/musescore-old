@@ -485,60 +485,66 @@ void Score::cmdAddPitch(int note, bool addFlag)
 //   cmdAddPitch1
 //---------------------------------------------------------
 
-void Score::cmdAddPitch1(int pitch, bool addFlag)
+Note* Score::cmdAddPitch1(int pitch, bool addFlag)
       {
+      Note* n = 0;
       if (addFlag) {
             // add note to chord
             Note* on = getSelectedNote();
             if (on) {
-                  Note* n = addNote(on->chord(), pitch);
+                  n = addNote(on->chord(), pitch);
                   select(n, SELECT_SINGLE, 0);
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
                   // reset position
                   _is.setPos(_is.pos() + on->chord()->tickLen());
                   }
+            return n;
+            }
+      // insert note
+      int len       = _padState.tickLen;
+      ChordRest* cr = _is.cr;
+      if (cr && cr->tuplet()) {
+            n = (Note*)(setTupletChordRest(cr, pitch, len));
+            len = len * cr->tuplet()->normalNotes() / cr->tuplet()->actualNotes();
             }
       else {
-            // insert note
-            int len       = _padState.tickLen;
-            ChordRest* cr = _is.cr;
-            if (cr && cr->tuplet()) {
-                  setTupletChordRest(cr, pitch, len);
-                  len = len * cr->tuplet()->normalNotes() / cr->tuplet()->actualNotes();
+            Direction stemDirection = AUTO;
+            int headGroup           = 0;
+            int track               = _is.track;
+            if (_padState.drumNote != -1) {
+                  int pitch     = _padState.drumNote;
+                  Drumset* ds   = _padState.drumset;
+                  headGroup     = ds->noteHead(pitch);
+                  stemDirection = ds->stemDirection(pitch);
+                  track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
                   }
-            else {
-                  Direction stemDirection = AUTO;
-                  int headGroup           = 0;
-                  int track               = _is.track;
-                  if (_padState.drumNote != -1) {
-                        int pitch     = _padState.drumNote;
-                        Drumset* ds   = _padState.drumset;
-                        headGroup     = ds->noteHead(pitch);
-                        stemDirection = ds->stemDirection(pitch);
-                        track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
-                        }
-                  setNote(_is.pos(), track, pitch, len, headGroup, stemDirection);
-                  }
-            if (_is.slur) {
-                  Element* e = searchNote(_is.pos(), _is.track);
-                  if (e) {
-                        if (e->type() == NOTE)
-                              e = e->parent();
-                        if (_is.slur->startElement()->tick() == e->tick())
-                              _is.slur->setStartElement(e);
-                        else
-                              _is.slur->setEndElement(e);
-                        }
-                  setLayoutAll(true);
-                  }
-//            _is.setPos(_is.pos() + len);
-            _is.cr = nextChordRest(_is.cr);
-            if (_is.cr) {
-                  _is.setPos(_is.cr->tick());
-                  emit posChanged(_is.pos());
-                  }
+            n = setNote(_is.pos(), track, pitch, len, headGroup, stemDirection);
             }
+      if (_is.slur) {
+            Element* e = searchNote(_is.pos(), _is.track);
+            if (e) {
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  if (_is.slur->startElement()->tick() == e->tick())
+                        _is.slur->setStartElement(e);
+                  else
+                        _is.slur->setEndElement(e);
+                  }
+            setLayoutAll(true);
+            }
+      cr = nextChordRest(_is.cr);
+      if ((cr == 0) && (_is.track % VOICES)) {
+            int track = (_is.track / VOICES) * VOICES;
+            Segment* s = _is.cr->segment()->nextCR(track);
+            cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+            }
+      _is.cr = cr;
+      if (_is.cr) {
+            _is.setPos(_is.cr->tick());
+            emit posChanged(_is.pos());
+            }
+      return n;
       }
 
 //---------------------------------------------------------
@@ -651,49 +657,20 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
  Set note (\a pitch, \a len) at position \a tick / \a staff / \a voice.
 */
 
-void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Direction stemDirection)
+Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Direction stemDirection)
       {
 // printf("setNote at %d len %d track %d\n", tick, len, track);
-      Tie* tie   = 0;
-      Note* note = 0;
-
-      if (_padState.tie) {
-            _padState.tie = 0;
-            getAction("pad-tie")->setChecked(false);
-            //
-            // look for suitable first note of tie
-            //
-            Segment* seg = tick2segment(tick);
-            while (seg && seg->prev1()) {
-                  seg = seg->prev1();
-                  if (seg->subtype() != Segment::SegChordRest || !seg->element(track))
-                        continue;
-                  Element* e = seg->element(track);
-                  if (e->type() != CHORD)
-                        break;
-                  NoteList* nl = static_cast<Chord*>(seg->element(track))->noteList();
-                  for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                        Note* n = i->second;
-                        if (n->pitch() == pitch) { // can only connect with note of equal pitch
-                              tie = new Tie(this);
-                              tie->setStartNote(n);
-                              tie->setTrack(track);
-                              n->setTieFor(tie);
-                              break;
-                              }
-                        }
-                  break;
-                  }
-            }
-
-      Chord* firstChord = 0;
+      Note* note      = 0;
+      Note* firstNote = 0;
+      Tie* tie        = 0;
 
       while (len) {
             int gap = makeGap(tick, track, len);
-// printf("  gap is %d, rest %d\n", gap, len - gap);
             len    -= gap;
 
             note = new Note(this);
+            if (firstNote == 0)
+                  firstNote = note;
             note->setTrack(track);
             note->setPitch(pitch);
 
@@ -708,8 +685,6 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             chord->setTrack(track);
             chord->setLen(gap);
             chord->add(note);
-            if (firstChord == 0)
-                  firstChord = chord;
 
             chord->setStemDirection(stemDirection);
             note->setHeadGroup(headGroup);
@@ -737,8 +712,10 @@ void Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dire
             tie->setTrack(note->track());
             note->setTieFor(tie);
             }
-      _is.cr = firstChord;
-      _layout->connectTies();
+      _is.cr = firstNote ? firstNote->chord() : 0;
+      if (tie)
+            _layout->connectTies();
+      return firstNote;
       }
 
 //---------------------------------------------------------
@@ -756,6 +733,7 @@ void Score::cloneCR(ChordRest* cr, int tick, int restLen, int track)
                   undoRemoveElement(oseg);
             }
       if (cr->type() == REST) {
+// printf("   setRest %d %d\n", tick, restLen);
             setRest(tick, restLen, track);
             return;
             }
@@ -846,8 +824,13 @@ int Score::makeGap(int tick, int track, int len)
             //
             // if voice > 0 there may be no ChordRest
             //
-            int gapLen = (measure->tick() + measure->tickLen()) - tick;
-            return gapLen > len ? len : gapLen;
+            int restLen = (measure->tick() + measure->tickLen()) - tick;
+            int gapLen  = restLen > len ? len : restLen;
+            if (restLen > len) {
+                  setRest(tick + gapLen, restLen - gapLen, track);
+                  // make this rest invisible by default?
+                  }
+            return gapLen;
             }
 
       int gapLen = 0;
@@ -869,7 +852,11 @@ int Score::makeGap(int tick, int track, int len)
       else
             gapLen = segment->tick() - tick;
       if (gapLen >= len) {
-//            printf("  gapLen %d\n", gapLen);
+// printf("  gapLen %d, requested %d\n", gapLen, len);
+            // fill space after requested gap with rest
+            // only for voice 0
+            if ((gapLen > len) && ((track % VOICES) == 0))
+                  setRest(tick + len, gapLen - len, track);
             return len;
             }
 
@@ -951,6 +938,18 @@ void Score::changeCRlen(ChordRest* cr, int len)
             //
             // make shorter and fill with rest
             //
+            if (cr->type() == CHORD) {
+                  //
+                  // remove ties
+                  //
+                  Chord* c = static_cast<Chord*>(cr);
+                  NoteList* nl = c->noteList();
+                  for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                        Note* n = i->second;
+                        if (n->tieFor())
+                              undoRemoveElement(n->tieFor());
+                        }
+                  }
             int restLen = cr->tickLen() - len;
             undoChangeChordRestLen(cr, len);
             setRest(cr->tick() + len, restLen, cr->track());
@@ -1933,8 +1932,8 @@ void Score::cmd(const QString& cmd)
                   pageEnd();
                   setLayoutAll(false);
                   }
-            else if (cmd == "add-tie")
-                  cmdAddTie();
+//            else if (cmd == "add-tie")
+//                  cmdAddTie();
             else if (cmd == "add-slur")
                   cmdAddSlur();
 	      else if (cmd == "add-staccato")
@@ -2110,13 +2109,8 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_BEAM_NO);
             else if (cmd == "beam-32")
                   padToggle(PAD_BEAM32);
-            else if (cmd == "pad-tie") {
-                  _padState.tie = !_padState.tie;
-                  if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
-                        cmdAddTie();
-                        _padState.tie = false;
-                        }
-                  }
+            else if (cmd == "tie")
+                  cmdAddTie();
             else if (cmd == "pad-sharp2") {
                   _padState.prefix = _padState.prefix != 3 ? 3 : 0;
                   addAccidental(_padState.prefix);
