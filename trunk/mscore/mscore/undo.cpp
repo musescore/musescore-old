@@ -126,7 +126,6 @@ Undo::Undo(const InputState& is, const Selection* s)
    : selection(*s)
       {
       inputState = is;
-      pitchSpellNeeded = false;
       }
 
 //---------------------------------------------------------
@@ -162,9 +161,7 @@ void Score::doUndo()
                   oSel.clear();
                   }
             }
-      if (u->pitchSpellNeeded)
-            spell();
-      redoList.append(u); // put item on redo list
+      redoList.append(u);     // put item on redo list
       undoList.removeLast();
       endUndoRedo(u);
       u->inputState = oIs;
@@ -198,8 +195,6 @@ void Score::doRedo()
                   u->selection.clear();
                   }
             }
-      if (u->pitchSpellNeeded)
-            spell();
       undoList.append(u); // put item on undo list
       redoList.removeLast();
       endUndoRedo(u);
@@ -811,15 +806,6 @@ void Score::undoFixTicks()
       i.type = UndoOp::FixTicks;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
-      }
-
-//---------------------------------------------------------
-//   undoSetPitchSpellNeeded
-//---------------------------------------------------------
-
-void Score::undoSetPitchSpellNeeded()
-      {
-      undoList.back()->pitchSpellNeeded = true;
       }
 
 //---------------------------------------------------------

@@ -79,6 +79,10 @@ QString mscoreGlobalShare;
 
 const char* eventRecordFile;
 
+//---------------------------------------------------------
+//   ProjectItem
+//---------------------------------------------------------
+
 class ProjectItem {
    public:
       QString name;
@@ -90,7 +94,7 @@ class ProjectItem {
       QString getName() const { return score ? score->filePath() : name; }
       };
 
-QList<ProjectItem*> projectList;
+static QList<ProjectItem*> projectList;
 
 Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
@@ -927,22 +931,6 @@ void MuseScore::appendScore(Score* score)
       tab->addTab(score->canvas(), score->name());
       tab->blockSignals(false);
 
-//      bool showTabBar = scoreList.size() > 1;
-//      tab->setVisible(showTabBar);
-//      removeTabButton->setVisible(showTabBar);
-
-      QString name(score->filePath());
-      for (int i = 0; i < projectList.size(); ++i) {
-            if (projectList[i]->getName() == name) {
-                  delete projectList[i];
-                  projectList.removeAt(i);
-                  break;
-                  }
-            }
-      if (projectList.size() >= PROJECT_LIST_LEN) {
-            ProjectItem* item = projectList.takeLast();
-            delete item;
-            }
       ProjectItem* item = new ProjectItem;
       item->score = score;
       projectList.prepend(item);
@@ -989,22 +977,29 @@ void MuseScore::saveScoreList()
       {
       QSettings settings;
 
-      int n  = scoreList.size();
-      int pn = projectList.size();
-      for (int i = pn - 1; i >= 0; --i) {
+      int idx = 0;
+static const int PROJECT_LIST_LEN = 6;
+
+      foreach(ProjectItem* item, projectList) {
             bool loaded  = false;
             bool current = false;
             // do not save "generated" pieces
-            if (projectList[i]->score && projectList[i]->score->created())
+            if (item->score == 0)
                   continue;
-            for (int k = 0; k < n; ++k) {
-                  if (projectList[i]->score && scoreList[k] == projectList[i]->score) {
+            if (item->score->created())
+                  continue;
+            foreach(Score* score, scoreList) {
+                  if (score == item->score) {
                         loaded = true;
-                        if (scoreList[k] == cs)
+                        if (score == cs)
                               current = true;
                         break;
                         }
                   }
+            // make sure all loaded scores are in the list but drop
+            // scores if history grows > PROJECT_LIST_LEN
+            if (idx >= PROJECT_LIST_LEN && !loaded)
+                  continue;
             QString s;
             if (current)
                   s += "+";
@@ -1012,8 +1007,9 @@ void MuseScore::saveScoreList()
                   s += "*";
             else
                   s += " ";
-            s += projectList[i]->getName();
-            settings.setValue(QString("recent-%1").arg(i), s);
+            s += item->getName();
+            settings.setValue(QString("recent-%1").arg(idx), s);
+            ++idx;
             }
       }
 
@@ -1027,8 +1023,10 @@ void MuseScore::loadScoreList()
       if (useFactorySettings)
             return;
       QSettings s;
-      for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
+      for (int i = 0;; ++i) {
             QString buffer = s.value(QString("recent-%1").arg(i)).toString();
+            if (buffer.isEmpty())
+                  break;
             int n = buffer.size();
             if (n >= 2) {
                   ProjectItem* item = new ProjectItem;
@@ -1048,8 +1046,7 @@ void MuseScore::loadScoreList()
 void MuseScore::openRecentMenu()
       {
       openRecent->clear();
-      for (int i = 0; i < projectList.size(); ++i) {
-            const ProjectItem* item = projectList[i];
+      foreach(ProjectItem* item, projectList) {
             // do not list "generated" pieces
             if (item->score && item->score->created())
                   continue;
@@ -1613,19 +1610,11 @@ int main(int argc, char* argv[])
 
       // sanity checks for DPI and PDPI
 
-      if (DPI == 0) {
-            QMessageBox::critical(0, "MuseScore Error",
-               QString("Invalid printer DPI value; no printer installed?"));
-            DPI = 300.0;
-            }
-
-      if (PDPI == 0) {
-            QMessageBox::critical(0, "MuseScore Error",
-               QString("Invalid widget DPI value \"%1\"").arg(PDPI));
+      if (DPI == 0)           // this happens on windows if there is no printer installed
+            DPI = 1200.0;
+      if (PDPI == 0)
             PDPI = 300.0;
-            }
-
-      DPMM = DPI / INCH;               // dots/mm
+      DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {
             printf("DPI %f(%d) PDPI %f(%d) DPMM %f\n",
@@ -1636,7 +1625,6 @@ int main(int argc, char* argv[])
             foreach(const QString& s, sl)
                   printf("LibraryPath: <%s>\n", qPrintable(s));
             }
-
 
       // rastral size of font is 20pt = 20/72 inch = 20*DPI/72 dots
       //   staff has 5 lines = 4 * _spatium

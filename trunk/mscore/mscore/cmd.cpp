@@ -266,9 +266,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   dyn->layout(layout());
 
                   double xx = measure->tick2pos(tick);
-                  System* system = measure->system();
-                  double yy = system->staff(staffIdx)->y();
-                  QPointF uo(pos - measure->canvasPos() - QPointF(xx,yy) - dragOffset);
+                  QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
                   uo -= QPointF(0.0, dyn->ipos().y());
                   dyn->setUserOff(uo / _spatium);
                   }
