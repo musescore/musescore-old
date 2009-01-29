@@ -148,22 +148,6 @@ const QString Dynamic::subtypeName() const
       }
 
 //---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-#if 0
-QPointF Dynamic::canvasPos() const
-      {
-      if (!parent())
-            return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
-      }
-#endif
-//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 

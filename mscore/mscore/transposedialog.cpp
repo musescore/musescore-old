@@ -155,7 +155,6 @@ void Score::transpose()
                         }
                   }
             }
-      undoSetPitchSpellNeeded();
       spell();
       }
 
@@ -208,7 +207,6 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
             int nKey  = transposeKey(oKey, diff);
             undoChangeKey(staff(staffIdx), tick, oKey, nKey);
             }
-      undoSetPitchSpellNeeded();
       spell();
       }
 

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: dynamics.h,v 1.11 2006/03/13 21:35:58 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -47,7 +47,6 @@ class Dynamic : public Text {
       Dynamic(const Dynamic&);
       virtual Dynamic* clone() const   { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }
-//      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Measure* measure() const         { return (Measure*)parent(); }
 
       virtual void setSubtype(int val);

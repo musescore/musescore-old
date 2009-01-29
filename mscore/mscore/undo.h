@@ -126,7 +126,6 @@ struct UndoOp {
 struct Undo : public QList<UndoOp> {
       InputState inputState;
       Selection selection;
-      bool pitchSpellNeeded;
 
    public:
       Undo(const InputState&, const Selection*);
