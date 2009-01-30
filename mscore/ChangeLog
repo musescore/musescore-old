@@ -5,6 +5,9 @@
       - fixed startup crash if start options was set to "continue last session"
         and the session contained more than 6 scores
       - fixed drag/drop placement of dynamics on staves > 1
+      (db)
+      - updates to handbooks
+      - updated French translation by Jean-Louis Waltener
 28.jan (ws)
       - remove tie if first note of a tie is shortened
       - fixes for note entry of voices > 0
