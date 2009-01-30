@@ -92,7 +92,8 @@ struct UndoOp {
             ChangeConcertPitch,
             ChangeInstrumentShort, ChangeInstrumentLong,
             ChangeChordRestLen,
-            MoveElement
+            MoveElement,
+            ChangeBracketSpan
             };
       UndoType type;
       Element* element1;

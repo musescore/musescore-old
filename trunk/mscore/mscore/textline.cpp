@@ -188,7 +188,8 @@ QRectF TextLineSegment::bbox() const
 void TextLineSegment::layout(ScoreLayout* l)
       {
       TextLine* tl = (TextLine*)line();
-      _userOff2.setY(0);
+      if (!tl->diagonal())
+            _userOff2.setY(0);
       switch (_segmentType) {
             case SEGMENT_SINGLE:
             case SEGMENT_BEGIN:
@@ -487,6 +488,8 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endHook->setChecked(tl->endHook());
       beginHookHeight->setValue(tl->beginHookHeight().val());
       endHookHeight->setValue(tl->endHookHeight().val());
+
+      diagonal->setChecked(tl->diagonal());
 #if 0
       TextBase* tb = tl->textBase();
       if (tb->frameWidth()) {
@@ -539,6 +542,8 @@ void LineProperties::accept()
       tl->setBeginSymbolOffset(QPointF(beginSymbolX->value(), beginSymbolY->value()));
       tl->setContinueSymbolOffset(QPointF(continueSymbolX->value(), continueSymbolY->value()));
       tl->setEndSymbolOffset(QPointF(endSymbolX->value(), endSymbolY->value()));
+
+      tl->setDiagonal(diagonal->isChecked());
 
 #if 0
       TextBase* tb = tl->textBase();

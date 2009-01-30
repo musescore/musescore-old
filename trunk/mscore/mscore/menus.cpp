@@ -305,6 +305,7 @@ void MuseScore::showPalette(bool visible)
             sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
+            line->setDiagonal(true);
             sp->append(line, tr("line"));
 
             paletteBox->addPalette(sp);

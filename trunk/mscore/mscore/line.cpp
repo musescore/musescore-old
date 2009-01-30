@@ -175,7 +175,7 @@ void LineSegment::editDrag(int curGrip, const QPointF& d)
 
       if (line()->type() == TEXTLINE) {
             TextLine* tl = static_cast<TextLine*>(line());
-            if (!tl->hasBeginText())
+            if (tl->diagonal())
                   delta.setY(d.y() / _spatium);
             }
 
@@ -185,22 +185,6 @@ void LineSegment::editDrag(int curGrip, const QPointF& d)
             }
       else
             _userOff2 += delta;
-      }
-
-//---------------------------------------------------------
-//   endEditDrag
-//---------------------------------------------------------
-
-void LineSegment::endEditDrag()
-      {
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void LineSegment::endEdit()
-      {
       }
 
 //---------------------------------------------------------
@@ -222,6 +206,7 @@ SLine::SLine(Score* s)
       {
       setTick(0);
       _tick2 = 0;
+      _diagonal = false;
       }
 
 //---------------------------------------------------------
@@ -380,7 +365,7 @@ void SLine::writeProperties(Xml& xml) const
             return;
             }
       xml.tag("tick2", _tick2);
-//      xml.tag("track", track());
+      xml.tag("diagonal", _diagonal);
       //
       // check if user has modified the default layout
       //
@@ -415,16 +400,11 @@ bool SLine::readProperties(QDomElement e)
             delete seg;
       segments.clear();
 
-//      setTick(-1);
-
       if (Element::readProperties(e))
             return true;
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
-
-//      if (tick() < 0)
-//            setTick(score()->curTick);
 
       if (tag == "tick2")
             _tick2 = score()->fileDivision(i);
@@ -440,10 +420,12 @@ bool SLine::readProperties(QDomElement e)
                   }
             add(ls);
             }
-      else if (e.tagName() == "track")
-            setTrack(e.text().toInt());
-      else if (e.tagName() == "length")
-            setLen(e.text().toDouble());
+      else if (tag == "track")
+            setTrack(i);
+      else if (tag == "length")
+            setLen(val.toDouble());
+      else if (tag == "diagonal")
+            setDiagonal(i);
       else
             return false;
       return true;

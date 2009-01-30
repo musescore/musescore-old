@@ -70,8 +70,8 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
-      bool _show;             ///< derived from part->show()
       int _lines;
+      bool _show;             ///< derived from part->show()
       bool _small;
       bool _slashStyle;
 

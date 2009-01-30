@@ -1141,14 +1141,14 @@ void MuseScore::dragEnterEvent(QDragEnterEvent* event)
       const QMimeData* data = event->mimeData();
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
-            QUrl u = ul.front();
-            if (debugMode)
-                  printf("drag Url: %s\n", u.toString().toLatin1().data());
-            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
-               u.path().toLatin1().data());
-            if (u.scheme() == "file") {
-                  QFileInfo fi(u.path());
-                  event->acceptProposedAction();
+            foreach(const QUrl& u, ul) {
+                  if (debugMode)
+                        printf("drag Url: %s\n", qPrintable(u.toString()));
+                  if (u.scheme() == "file") {
+                        QFileInfo fi(u.path());
+                        event->acceptProposedAction();
+                        break;
+                        }
                   }
             }
       }

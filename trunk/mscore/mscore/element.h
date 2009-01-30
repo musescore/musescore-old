@@ -96,12 +96,12 @@ class Element {
 
       Element* _parent;
 
-      bool _selected;           ///< set if element is selected
-      bool _selectable;         ///< true if element is selectable
-      mutable bool _dropTarget; ///< true, if element accepts drops
-      bool _generated;          ///< automatically generated Element
-      bool _visible;            ///< visibility attribute
-      bool _systemFlag;         ///< system elements appear on all excerpts
+      bool _selected:1;           ///< set if element is selected
+      bool _selectable:1;         ///< true if element is selectable
+      mutable bool _dropTarget:1; ///< true, if element accepts drops
+      bool _generated:1;          ///< automatically generated Element
+      bool _visible:1;            ///< visibility attribute
+      bool _systemFlag:1;         ///< system elements appear on all excerpts
 
       int _subtype;
 
