@@ -760,7 +760,7 @@ void ExportMidi::writeHeader()
             for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
                   MetaEvent* ev  = new MetaEvent;
                   ev->setOntime(ik->first);
-                  int key       = ik->second;
+                  int key       = ik->second;   // -7 -- +7
                   ev->setMetaType(META_KEY_SIGNATURE);
                   ev->setLen(2);
                   unsigned char* data = new unsigned char[2];
@@ -829,7 +829,8 @@ bool ExportMidi::write(const QString& name)
             track->setOutChannel(channel);
 
             if (staff->isTop()) {
-                  track->insert(new ControllerEvent(0, channel, CTRL_PROGRAM,     part->midiProgram()));
+                  if (part->midiProgram() != -1)
+                        track->insert(new ControllerEvent(0, channel, CTRL_PROGRAM, part->midiProgram()));
                   track->insert(new ControllerEvent(2, channel, CTRL_VOLUME,      part->volume()));
                   track->insert(new ControllerEvent(4, channel, CTRL_PANPOT,      part->pan()));
                   track->insert(new ControllerEvent(6, channel, CTRL_REVERB_SEND, part->reverb()));

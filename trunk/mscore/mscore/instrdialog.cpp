@@ -502,8 +502,24 @@ void MuseScore::editInstrList()
 
       QTreeWidgetItem* item = 0;
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
+            PartListItem* pli = static_cast<PartListItem*>(item);
+            // check if the part contains any remaining staves
+            // mark to remove part if not
+            QTreeWidgetItem* ci = 0;
+            int staves = 0;
+            for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
+                  StaffListItem* sli = static_cast<StaffListItem*>(ci);
+                  if (sli->op != ITEM_DELETE)
+                        ++staves;
+                  }
+            if (staves == 0)
+                  pli->op = ITEM_DELETE;
+            }
+
+      item = 0;
+      for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             rstaff = 0;
-            PartListItem* pli = (PartListItem*)item;
+            PartListItem* pli = static_cast<PartListItem*>(item);
             if (pli->op == ITEM_DELETE) {
                   cs->cmdRemovePart(pli->part);
                   }

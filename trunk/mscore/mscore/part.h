@@ -54,7 +54,7 @@ class Part {
 
       void read(QDomElement);
       void write(Xml& xml) const;
-      int nstaves() const;
+      int nstaves() const                      { return _staves.size(); }
       QList<Staff*>* staves()                  { return &_staves; }
       const QList<Staff*>* staves() const      { return &_staves; }
       Staff* staff(int idx) const;

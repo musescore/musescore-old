@@ -1,4 +1,5 @@
 29.jan (ws)
+      - fix midi export: dont write undefined program -1
       - fixed regression: undo transpose crashed
       - remove warning on startup, when there is no printer installed on
         windows
