@@ -49,8 +49,6 @@ class LineSegment : public Element {
       virtual bool startEdit(Viewer*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
-      virtual void endEditDrag();
-      virtual void endEdit();
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
       virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;
@@ -82,6 +80,7 @@ class SLine : public Element {
    protected:
       QList<LineSegment*> segments;
       int _tick2;
+      bool _diagonal;
 
    public:
       SLine(Score* s);
@@ -102,6 +101,8 @@ class SLine : public Element {
       virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      bool diagonal() const    { return _diagonal; }
+      void setDiagonal(bool v) { _diagonal = v; }
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

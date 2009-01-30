@@ -451,6 +451,7 @@ class Score : public QObject {
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
       void undoMove(Element* e, const QPointF& pt);
+      void undoChangeBracketSpan(Staff* staff, int column, int span);
 
       Note* setNote(int tick, int track, int pitch, int len, int headGroup = 0,
          Direction stemDirection = AUTO);
@@ -711,6 +712,9 @@ class Score : public QObject {
       void moveBracket(int staffIdx, int srcCol, int dstCol);
       void textStyleChanged();
       Measure* getCreateMeasure(int tick);
+
+      void adjustBracketsDel(int sidx, int eidx);
+      void adjustBracketsIns(int sidx, int eidx);
       };
 
 extern Score* gscore;

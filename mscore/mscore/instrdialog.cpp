@@ -584,6 +584,7 @@ void MuseScore::editInstrList()
                                     m->cmdAddStaves(staffIdx, staffIdx+1);
                                     }
 
+                              cs->adjustBracketsIns(staffIdx, staffIdx+1);
                               ++staffIdx;
                               }
                         else {
@@ -655,24 +656,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
             Measure* m = (Measure*)mb;
             m->cmdAddStaves(sidx, eidx);
             }
-      //
-      //    adjust brackets
-      //
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            Staff* staff = _staves[staffIdx];
-            int bl = staff->bracketLevels();
-            for (int i = 0; i < bl; ++i) {
-                  int span = staff->bracketSpan(i);
-                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
-                        continue;
-                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
-                        staff->setBracketSpan(i, span + (eidx-sidx));
-                  else {
-                        printf("TODO: adjust brackets\n");
-                        }
-                  }
-            }
-
+      adjustBracketsIns(sidx, eidx);
       }
 
 //---------------------------------------------------------
@@ -711,23 +695,7 @@ void Score::cmdRemovePart(Part* part)
                   }
             }
 #endif
-      //
-      //    adjust brackets
-      //
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            Staff* staff = _staves[staffIdx];
-            int bl = staff->bracketLevels();
-            for (int i = 0; i < bl; ++i) {
-                  int span = staff->bracketSpan(i);
-                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
-                        continue;
-                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
-                        staff->setBracketSpan(i, span - (eidx-sidx));
-                  else {
-                        printf("TODO: adjust brackets, span %d\n", span);
-                        }
-                  }
-            }
+      adjustBracketsDel(sidx, eidx);
 
       //
       //    adjust measures
@@ -795,6 +763,66 @@ void Score::insertStaff(Staff* staff, int idx)
       }
 
 //---------------------------------------------------------
+//   adjustBracketsDel
+//---------------------------------------------------------
+
+void Score::adjustBracketsDel(int sidx, int eidx)
+      {
+printf("adjustBracketsDel %d %d\n", sidx, eidx);
+
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            for (int i = 0; i < staff->bracketLevels(); ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+                        undoChangeBracketSpan(staff, i, span - (eidx-sidx));
+                        }
+                  else {
+                        printf("TODO: adjust brackets, span %d\n", span);
+                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+                  undoChangeBarLineSpan(staff, span - (eidx-sidx));
+                  }
+            else {
+                  printf("TODO: Del: adjust barLineSpan, span %d\n", span);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustBracketsIns
+//---------------------------------------------------------
+
+void Score::adjustBracketsIns(int sidx, int eidx)
+      {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            int bl = staff->bracketLevels();
+            for (int i = 0; i < bl; ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                        undoChangeBracketSpan(staff, i, span + (eidx-sidx));
+                  else {
+                        printf("TODO: adjust brackets\n");
+                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+                  undoChangeBarLineSpan(staff, span + (eidx-sidx));
+                  }
+            else {
+                  printf("TODO: Ins: adjust barLineSpan, span %d\n", span);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   cmdRemoveStaff
 //---------------------------------------------------------
 
@@ -810,6 +838,7 @@ void Score::cmdRemoveStaff(int staffIdx)
             }
       Staff* s = staff(staffIdx);
       undoRemoveStaff(s, staffIdx);
+      adjustBracketsDel(staffIdx, staffIdx+1);
       }
 
 //---------------------------------------------------------

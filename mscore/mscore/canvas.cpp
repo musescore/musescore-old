@@ -1642,26 +1642,21 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
       else if (data->hasUrls()) {
             QList<QUrl>ul = data->urls();
-            QUrl u = ul.front();
-            if (debugMode)
-                  printf("drag Url: %s\n", u.toString().toLatin1().data());
-//            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
-//               u.path().toLatin1().data());
-            if (u.scheme() == "file") {
-                  QFileInfo fi(u.path());
-                  if (fi.suffix() == "svg"
-                     || fi.suffix() == "jpg"
-                     || fi.suffix() == "png"
-                     || fi.suffix() == "gif"
-                     || fi.suffix() == "xpm"
-                     ) {
-                        event->acceptProposedAction();
+            foreach(const QUrl& u, ul) {
+                  if (debugMode)
+                        printf("drag Url: %s\n", qPrintable(u.toString()));
+                  if (u.scheme() == "file") {
+                        QFileInfo fi(u.path());
+                        if (fi.suffix() == "svg"
+                           || fi.suffix() == "jpg"
+                           || fi.suffix() == "png"
+                           || fi.suffix() == "gif"
+                           || fi.suffix() == "xpm"
+                           ) {
+                              event->acceptProposedAction();
+                              break;
+                              }
                         }
-                  }
-            else {
-                  QString s = QString("drag Url: %1").arg(u.toString());
-                  QMessageBox::warning(0,
-                  "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
                   }
             }
       else {

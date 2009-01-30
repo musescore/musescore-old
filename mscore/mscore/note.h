@@ -73,7 +73,6 @@ class NoteHead : public Symbol {
 class Note : public Element {
       Q_DECLARE_TR_FUNCTIONS(Note)
 
-//      static int noteHeads[HEAD_GROUPS][4];
       static int smallNoteHeads[HEAD_GROUPS][4];
 
       int _subchannel;        ///< articulation

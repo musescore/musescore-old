@@ -748,16 +748,18 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             QBuffer cbuf;
             QByteArray ba;
             if (!ip->loaded()) {
+// printf("load %s\n", qPrintable(srcPath));
                   QFile inFile(srcPath);
                   inFile.open(QIODevice::ReadOnly);
-                  ba = inFile.readAll();
-                  cbuf.setBuffer(&ba);
+                  ip->buffer().setData(inFile.readAll());
                   inFile.close();
+                  ip->setLoaded(true);
                   }
-            else {
-                  cbuf.setBuffer(&(ip->buffer().buffer()));
+            cbuf.setBuffer(&(ip->buffer().buffer()));
+            if (!cbuf.open(QIODevice::ReadOnly)) {
+                  printf("cannot open open buffer cbuf\n");
+                  continue;
                   }
-            cbuf.open(QIODevice::ReadWrite);
             ec = uz.createEntry(dstPath, cbuf, dt);
             if (ec != Zip::Ok) {
                   printf("Cannot add <%s> to zipfile as <%s>\n", qPrintable(srcPath), qPrintable(dstPath));

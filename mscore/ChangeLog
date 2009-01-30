@@ -1,3 +1,7 @@
+30.jan (ws)
+      - fix crash on second save after dropping an image
+      - new line attribute to allow for diagonal lines
+      - fixed crash when removing the last staff of a piano system
 29.jan (ws)
       - fix midi export: dont write undefined program -1
       - fixed regression: undo transpose crashed

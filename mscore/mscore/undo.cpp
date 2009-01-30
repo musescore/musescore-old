@@ -678,6 +678,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->pt = po;
                   }
                   break;
+            case UndoOp::ChangeBracketSpan:
+                  {
+                  int column = i->val1;
+                  int oSpan  = i->staff->bracketSpan(column);
+                  i->staff->setBracketSpan(column, i->val2);
+                  i->val2 = oSpan;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -1334,6 +1342,22 @@ void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
       i.type = UndoOp::ChangeChordRestSize;
       i.element1 = cr;
       i.val1 = small;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeBracketSpan
+//---------------------------------------------------------
+
+void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type  = UndoOp::ChangeBracketSpan;
+      i.staff = staff;
+      i.val1  = column;
+      i.val2  = span;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
