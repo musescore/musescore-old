@@ -136,7 +136,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SubType:</source>
-        <translation>Sous type :</translation>
+        <translation>Sous-type :</translation>
     </message>
 </context>
 <context>
@@ -2332,7 +2332,7 @@ failed: </source>
     </message>
     <message>
         <source>Subtype</source>
-        <translation>Sous type</translation>
+        <translation>Sous-type</translation>
     </message>
 </context>
 <context>
@@ -3383,15 +3383,15 @@ failed: </source>
     </message>
     <message>
         <source>Add Subtitle</source>
-        <translation>Ajouter un sous titre</translation>
+        <translation>Ajouter un sous-titre</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation>Sous titre</translation>
+        <translation>Sous-titre</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
-        <translation>Ajouter un texte pour le sous titre</translation>
+        <translation>Ajouter un texte pour le sous-titre</translation>
     </message>
     <message>
         <source>Add Composer</source>
@@ -4647,7 +4647,7 @@ before closing?</source>
     </message>
     <message>
         <source>Subtitle:</source>
-        <translation>Sous titre :</translation>
+        <translation>Sous-titre :</translation>
     </message>
     <message>
         <source>Composer:</source>
@@ -6063,7 +6063,7 @@ failed: </source>
     </message>
     <message>
         <source>Clef Segment</source>
-        <translation>Clé</translation>
+        <translation>Clef</translation>
     </message>
     <message>
         <source>Key Signature</source>
@@ -6079,7 +6079,7 @@ failed: </source>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Accord/Silence</translation>
+        <translation>Accord / Silence</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -6087,7 +6087,7 @@ failed: </source>
     </message>
     <message>
         <source>End Bar Line</source>
-        <translation>Barre de mesure de fin</translation>
+        <translation>Barre de fin</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
@@ -6099,7 +6099,7 @@ failed: </source>
     </message>
     <message>
         <source>Segment Type:</source>
-        <translation>Type de segment</translation>
+        <translation>Type de segment :</translation>
     </message>
 </context>
 <context>
@@ -6148,11 +6148,11 @@ failed: </source>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>auto</translation>
+        <translation>automatique</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>debut de la barre</translation>
+        <translation>début de la barre</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -6172,7 +6172,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation>Automatique</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6194,11 +6194,11 @@ failed: </source>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>auto</translation>
+        <translation>automatique</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>debut de la barre</translation>
+        <translation>début de la barre</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -6245,7 +6245,7 @@ failed: </source>
     </message>
     <message>
         <source>Tick:</source>
-        <translation>Moment :</translation>
+        <translation>Marque :</translation>
     </message>
 </context>
 <context>
@@ -6290,7 +6290,7 @@ failed: </source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du texte de la portée...</translation>
     </message>
 </context>
 <context>
@@ -6309,7 +6309,7 @@ failed: </source>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">Channel</translation>
+        <translation>Canal</translation>
     </message>
 </context>
 <context>
@@ -6327,7 +6327,7 @@ failed: </source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Flag de système</translation>
+        <translation>Etiquette du système</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -6419,7 +6419,7 @@ failed: </source>
     <name>TextLineSegment</name>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés de la ligne...</translation>
     </message>
 </context>
 <context>
@@ -6434,7 +6434,7 @@ failed: </source>
     </message>
     <message>
         <source>align left</source>
-        <translation>aligné à guache</translation>
+        <translation>aligné à gauche</translation>
     </message>
     <message>
         <source>...</source>
@@ -6510,7 +6510,7 @@ failed: </source>
     </message>
     <message>
         <source>padding width</source>
-        <translation>largeur du padding</translation>
+        <translation>largeur du remplissage</translation>
     </message>
     <message>
         <source>frame rounding</source>
@@ -6541,7 +6541,7 @@ failed: </source>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>I</source>
@@ -6549,7 +6549,7 @@ failed: </source>
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Text Sample</source>
@@ -6593,7 +6593,7 @@ failed: </source>
     </message>
     <message>
         <source>Baseline</source>
-        <translation>Baseline</translation>
+        <translation>Ligne de référence</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -6625,7 +6625,7 @@ failed: </source>
     </message>
     <message>
         <source>MM</source>
-        <translation>MM</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Space</source>
@@ -6721,7 +6721,7 @@ failed: </source>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Entrer la mesure :</translation>
+        <translation>Entrer l&apos;indication de mesure :</translation>
     </message>
     <message>
         <source>Time Signature: </source>
@@ -6741,7 +6741,7 @@ failed: </source>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
-        <translation>Saisir le nombre de mesures :</translation>
+        <translation>Entrer le nombre de mesures :</translation>
     </message>
     <message>
         <source>Measures:</source>
@@ -6752,7 +6752,10 @@ failed: </source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Astuce: Vous pouvez aussi ajouter ou supprimer des mesures après la création de la partition.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Astuce : Vous pouvez aussi ajouter ou supprimer des mesures après la création de la partition.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6793,11 +6796,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>has number</source>
-        <translation type="unfinished"></translation>
+        <translation>a le numéro</translation>
     </message>
     <message>
         <source>has line</source>
-        <translation type="unfinished"></translation>
+        <translation>a la ligne</translation>
     </message>
     <message>
         <source>base len</source>
@@ -6813,19 +6816,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest list:</source>
-        <translation>Liste d&apos;accords/silences :</translation>
+        <translation>Liste d&apos;accords / silences :</translation>
     </message>
     <message>
         <source>Text Element</source>
-        <translation type="unfinished"></translation>
+        <translation>Elément texte</translation>
     </message>
     <message>
         <source>Element</source>
-        <translation>Element</translation>
+        <translation>Elément</translation>
     </message>
     <message>
         <source>Tick</source>
-        <translation type="unfinished"></translation>
+        <translation>Marque</translation>
     </message>
     <message>
         <source>Length</source>
@@ -6844,7 +6847,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>actual notes</source>
-        <translation>notes réélles</translation>
+        <translation>notes réelles</translation>
     </message>
     <message>
         <source>normal notes</source>
@@ -6856,11 +6859,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Number</source>
-        <translation>Chiffre</translation>
+        <translation>Numéro</translation>
     </message>
     <message>
         <source>number</source>
-        <translation>chiffre</translation>
+        <translation>numéro</translation>
     </message>
     <message>
         <source>relation</source>
@@ -6891,11 +6894,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Number</source>
-        <translation>Chiffre</translation>
+        <translation>Numéro</translation>
     </message>
     <message>
         <source>number</source>
-        <translation>chiffre</translation>
+        <translation>numéro</translation>
     </message>
     <message>
         <source>relation</source>
@@ -6926,7 +6929,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés de la VBox...</translation>
     </message>
 </context>
 <context>
@@ -6955,7 +6958,7 @@ p, li { white-space: pre-wrap; }
     <name>magTable</name>
     <message>
         <source>Page Width</source>
-        <translation>Largeur de page</translation>
+        <translation>Largeur de Page</translation>
     </message>
     <message>
         <source>Whole Page</source>
@@ -6963,7 +6966,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Two Pages</source>
-        <translation>Deux pages</translation>
+        <translation>Deux Pages</translation>
     </message>
 </context>
 </TS>
