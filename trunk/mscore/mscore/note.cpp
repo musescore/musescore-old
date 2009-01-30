@@ -462,8 +462,8 @@ void Note::draw(QPainter& p) const
             if (dots) {
                   double d = point(score()->style()->dotNoteDistance);
                   double y = 0;
-                  // do not draw dots on line
-                  if ((_line & 1) == 0)
+                  // do not draw dots on line, except ledger lines
+                  if ((_line >= 0) && (_line < 9) && (_line & 1) == 0)
                         y = -_spatium *.5 * mag();
 
                   for (int i = 1; i <= dots; ++i)
