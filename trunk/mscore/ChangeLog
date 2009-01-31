@@ -1,5 +1,6 @@
 31.jan (ws)
-      - expose style parameter "note dot distance" to gui
+      - expose style parameter "note dot distance" to gui; change default from
+        0.5 to 0.35
       - when deleting notes in tuplets, always replace with rest even for
         voices > 1
       - note entry with mouse: reduce number of possible input positions for

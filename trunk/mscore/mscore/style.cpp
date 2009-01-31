@@ -195,7 +195,7 @@ Style defaultStyle = {
       0.05,             // beamMinSlope
       0.2,              // beamMaxSlope
       division,         //  maxBeamTicks : 1/4 or 1/2 groups
-      Spatium(0.5),     // dotNoteDistance
+      Spatium(0.35),    // dotNoteDistance
       Spatium(0.25),    // dotRestDistance
       Spatium(0.5),     // dotDotDistance
 
