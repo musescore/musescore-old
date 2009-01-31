@@ -1071,13 +1071,19 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             Element* element = segment->element(track);
             int l = 0;
             if (element && element->isChordRest()) {
-                  ChordRest* cr = (ChordRest*) element;
-                  l = cr->tickLen();
-                  if (l == 0)
-                        l = measure->tickLen();
-                  undoRemoveElement(element);
-                  if (segment->isEmpty())
-                        undoRemoveElement(segment);
+                  ChordRest* cr = static_cast<ChordRest*>(element);
+                  if (cr->tuplet()) {
+                        l = cr->tuplet()->tickLen();
+                        cmdDeleteTuplet(cr->tuplet(), false);
+                        }
+                  else {
+                        l = cr->tickLen();
+                        if (l == 0)
+                              l = measure->tickLen();
+                        undoRemoveElement(element);
+                        if (segment->isEmpty())
+                              undoRemoveElement(segment);
+                        }
                   }
             segment = segment->next();
             if (l == 0) {

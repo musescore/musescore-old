@@ -1,4 +1,5 @@
 31.jan (ws)
+      - fixed issue when deleting a measure which contains a tuplet
       - added new demo file "wtc1fuga5.mscz" (J.S.Bach WTC I Fuga V)
       - expose style parameter "note dot distance" to gui; change default from
         0.5 to 0.35
