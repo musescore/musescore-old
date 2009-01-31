@@ -5,24 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>521</width>
-    <height>308</height>
+    <width>529</width>
+    <height>333</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MuseScore: create tuplet</string>
   </property>
   <layout class="QHBoxLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -37,22 +28,13 @@
       <string/>
      </property>
      <property name="pixmap" >
-      <pixmap resource="mscore.qrc" >:/data/bg1.jpg</pixmap>
+      <pixmap>:/data/bg1.jpg</pixmap>
      </property>
     </widget>
    </item>
    <item>
     <layout class="QGridLayout" >
-     <property name="leftMargin" >
-      <number>9</number>
-     </property>
-     <property name="topMargin" >
-      <number>9</number>
-     </property>
-     <property name="rightMargin" >
-      <number>9</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>9</number>
      </property>
      <item row="0" column="0" >
@@ -64,16 +46,7 @@
         <bool>true</bool>
        </property>
        <layout class="QHBoxLayout" >
-        <property name="leftMargin" >
-         <number>9</number>
-        </property>
-        <property name="topMargin" >
-         <number>9</number>
-        </property>
-        <property name="rightMargin" >
-         <number>9</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>9</number>
         </property>
         <item>
@@ -143,16 +116,7 @@
         <property name="spacing" >
          <number>9</number>
         </property>
-        <property name="leftMargin" >
-         <number>6</number>
-        </property>
-        <property name="topMargin" >
-         <number>6</number>
-        </property>
-        <property name="rightMargin" >
-         <number>6</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>6</number>
         </property>
         <item>
@@ -164,16 +128,7 @@
            <bool>true</bool>
           </property>
           <layout class="QVBoxLayout" >
-           <property name="leftMargin" >
-            <number>6</number>
-           </property>
-           <property name="topMargin" >
-            <number>6</number>
-           </property>
-           <property name="rightMargin" >
-            <number>6</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>6</number>
            </property>
            <item>
@@ -212,16 +167,7 @@
            <bool>true</bool>
           </property>
           <layout class="QVBoxLayout" >
-           <property name="leftMargin" >
-            <number>6</number>
-           </property>
-           <property name="topMargin" >
-            <number>6</number>
-           </property>
-           <property name="rightMargin" >
-            <number>6</number>
-           </property>
-           <property name="bottomMargin" >
+           <property name="margin" >
             <number>6</number>
            </property>
            <item>
@@ -260,7 +206,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="standardButtons" >
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
       </widget>
      </item>
