@@ -155,6 +155,8 @@ void EditStyle::getValues()
       lstyle->minMMRestWidth          = Spatium(minMeasureWidth->value());
       lstyle->hideEmptyStaves         = hideEmptyStaves->isChecked();
 
+      lstyle->dotNoteDistance         = Spatium(noteDotDistance->value());
+
       lstyle->propertyDistanceHead   = Spatium(propertyDistanceHead->value());
       lstyle->propertyDistanceStem   = Spatium(propertyDistanceStem->value());
       lstyle->propertyDistance       = Spatium(propertyDistance->value());
@@ -244,6 +246,8 @@ void EditStyle::setValues()
       minEmptyMeasures->setValue(lstyle->minEmptyMeasures);
       minMeasureWidth->setValue(lstyle->minMMRestWidth.val());
       hideEmptyStaves->setChecked(lstyle->hideEmptyStaves);
+
+      noteDotDistance->setValue(lstyle->dotNoteDistance.val());
 
       propertyDistanceHead->setValue(lstyle->propertyDistanceHead.val());
       propertyDistanceStem->setValue(lstyle->propertyDistanceStem.val());
