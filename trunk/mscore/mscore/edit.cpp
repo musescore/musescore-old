@@ -1055,8 +1055,15 @@ void Score::cmdDeleteSelection()
                   for (int track = track1; track < track2; ++track) {
                         if (track % VOICES == 0)
                               continue;
-                        if (s->element(track))
+                        if (s->element(track)) {
+                              Element* e = s->element(track);
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              if (cr->tuplet()) {
+                                    cmdDeleteTuplet(cr->tuplet(), false);
+                                    continue;
+                                    }
                               undoRemoveElement(s->element(track));
+                              }
                         }
                   if (s->isEmpty())
                         undoRemoveElement(s);
