@@ -1168,7 +1168,8 @@ void Canvas::setCursorOn(bool val)
 void Canvas::setShadowNote(const QPointF& p)
       {
       Position pos;
-      if (!score()->getPosition(&pos, p))
+      bool divideSegment = score()->padState()->tickLen >= (division/2);
+      if (!score()->getPosition(&pos, p, divideSegment))
             return;
 
       Staff* staff      = score()->staff(pos.staffIdx);

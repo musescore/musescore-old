@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.10">
   <Mag>1.21662</Mag>
-  <xoff>-742.046</xoff>
-  <yoff>-197.383</yoff>
+  <xoff>-1024.59</xoff>
+  <yoff>-175.975</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -122,18 +122,18 @@ p, li { white-space: pre-wrap; }
     <tempo tick="0">2</tempo>
     <tempo tick="44400">2</tempo>
     <tempo tick="57600">1.33333</tempo>
-    <tempo tick="59520">1.33333</tempo>
+    <tempo tick="59520">2</tempo>
     <tempo tick="61920">1.33333</tempo>
-    <tempo tick="63360">1.33333</tempo>
+    <tempo tick="63360">2</tempo>
     <tempo tick="65760">1.33333</tempo>
-    <tempo tick="67200">1.33333</tempo>
+    <tempo tick="67200">2</tempo>
     <tempo tick="69120">1.33333</tempo>
-    <tempo tick="71040">1.33333</tempo>
+    <tempo tick="71040">2</tempo>
     <tempo tick="72000">1.33333</tempo>
-    <tempo tick="73920">1</tempo>
+    <tempo tick="73920">2</tempo>
     <tempo tick="82560">1</tempo>
     <tempo tick="85440">1</tempo>
-    <tempo tick="87360">1</tempo>
+    <tempo tick="87360">2</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -305,6 +305,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>5520</tick>
     <tick2>5640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.757678" y="-10.6075"/>
       <off2 x="0" y="0"/>
@@ -314,6 +315,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>6960</tick>
     <tick2>7080</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.662968" y="-10.7022"/>
       <off2 x="0" y="0"/>
@@ -323,6 +325,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>3000</tick>
     <tick2>3600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="3.59897" y="0"/>
       <off2 x="-4.16723" y="0"/>
@@ -737,6 +740,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>75360</tick>
     <tick2>75840</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="89">
     <track>0</track>
@@ -900,22 +904,26 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>102720</tick>
     <tick2>103080</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>103200</tick>
     <tick2>103440</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>103920</tick>
     <tick2>104400</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>104640</tick>
     <tick2>105600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-1.79949" y="0"/>
@@ -926,6 +934,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>105600</tick>
     <tick2>106560</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.662968" y="0"/>
       <off2 x="-4.35665" y="0"/>
@@ -935,17 +944,20 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>98880</tick>
     <tick2>99360</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>7920</tick>
     <tick2>8400</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>10920</tick>
     <tick2>11040</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="1.89957" y="0"/>
@@ -956,6 +968,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>12000</tick>
     <tick2>12480</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-2.65187" y="-13.5435"/>
       <off2 x="0" y="0"/>
@@ -966,6 +979,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>12960</tick>
     <tick2>13200</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.568259"/>
       <off2 x="2.55716" y="0"/>
@@ -976,11 +990,13 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>13920</tick>
     <tick2>14160</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>14400</tick>
     <tick2>15600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="1.51536" y="0.284129"/>
       <off2 x="0" y="0"/>
@@ -1000,6 +1016,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>18600</tick>
     <tick2>18720</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.852388"/>
       <off2 x="2.17094" y="0"/>
@@ -1010,6 +1027,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>19200</tick>
     <tick2>19920</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.568259" y="-12.8805"/>
       <off2 x="0" y="0"/>
@@ -1019,6 +1037,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>22080</tick>
     <tick2>22560</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="1.32594" y="-1.42065"/>
       <off2 x="0" y="0"/>
@@ -1028,6 +1047,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>24120</tick>
     <tick2>24360</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.18942" y="1.13652"/>
       <off2 x="0" y="0"/>
@@ -1038,6 +1058,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>24480</tick>
     <tick2>24720</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.284129" y="1.32594"/>
       <off2 x="0" y="0"/>
@@ -1047,6 +1068,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>2040</tick>
     <tick2>2400</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="114">
     <track>0</track>
@@ -1083,6 +1105,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>25920</tick>
     <tick2>26040</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="1.51536" y="0.473549"/>
       <off2 x="0" y="0"/>
@@ -1093,6 +1116,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>26400</tick>
     <tick2>26640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.284129" y="0.473549"/>
       <off2 x="0" y="0"/>
@@ -1102,6 +1126,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>30840</tick>
     <tick2>31200</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.662968" y="0.378839"/>
       <off2 x="0" y="0"/>
@@ -1111,6 +1136,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>31680</tick>
     <tick2>32040</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0947098" y="0.757678"/>
       <off2 x="0" y="0"/>
@@ -1121,6 +1147,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>32160</tick>
     <tick2>32400</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0947098" y="0.947098"/>
       <off2 x="0" y="0"/>
@@ -1131,6 +1158,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>50160</tick>
     <tick2>51600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.284129" y="-12.6911"/>
       <off2 x="0" y="0"/>
@@ -1141,22 +1169,26 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>119280</tick>
     <tick2>119760</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>120480</tick>
     <tick2>120900</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>117360</tick>
     <tick2>117840</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>114360</tick>
     <tick2>114720</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="118">
     <track>0</track>
@@ -1176,6 +1208,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>27120</tick>
     <tick2>27600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.284129" y="0.568259"/>
       <off2 x="3.03071" y="0"/>
@@ -1185,6 +1218,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>33600</tick>
     <tick2>33960</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.0947098" y="0.284129"/>
       <off2 x="0" y="0"/>
@@ -1195,6 +1229,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>34080</tick>
     <tick2>34320</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.284129" y="0.473549"/>
       <off2 x="1.8942" y="0"/>
@@ -1204,6 +1239,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>34800</tick>
     <tick2>35280</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.378839" y="0.662968"/>
       <off2 x="2.46245" y="0"/>
@@ -1213,6 +1249,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>37560</tick>
     <tick2>37920</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="2.84936" y="0"/>
@@ -1223,18 +1260,21 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>40560</tick>
     <tick2>41040</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>42480</tick>
     <tick2>42960</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>43200</tick>
     <tick2>43680</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="6.34555" y="-14.1117"/>
       <off2 x="0" y="0"/>
@@ -1257,6 +1297,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>55920</tick>
     <tick2>56640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.18942" y="-12.5017"/>
       <off2 x="0" y="0"/>
@@ -1266,6 +1307,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>58080</tick>
     <tick2>59280</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.852388" y="-11.2705"/>
       <off2 x="2.936" y="0"/>
@@ -1275,6 +1317,7 @@ p, li { white-space: pre-wrap; }
     <track>1</track>
     <tick>61920</tick>
     <tick2>62400</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.0947098" y="1.61007"/>
       <off2 x="3.12542" y="0"/>
@@ -1285,6 +1328,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>63120</tick>
     <tick2>63360</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.18942" y="1.42065"/>
       <off2 x="0" y="0"/>
@@ -1294,6 +1338,7 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>65760</tick>
     <tick2>66240</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.378839" y="-1.79949"/>
       <off2 x="2.46245" y="0"/>
@@ -1374,6 +1419,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>83040</tick>
     <tick2>83760</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="-1.23123"/>
       <off2 x="0" y="0"/>
@@ -1388,6 +1434,7 @@ p, li { white-space: pre-wrap; }
     <track>2</track>
     <tick>83880</tick>
     <tick2>84240</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="1.98891" y="-12.9752"/>
       <off2 x="-0.284129" y="0"/>
@@ -1398,6 +1445,7 @@ p, li { white-space: pre-wrap; }
     <track>2</track>
     <tick>84840</tick>
     <tick2>85200</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="1.61007" y="-12.7858"/>
       <off2 x="0" y="0"/>
@@ -1412,6 +1460,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>88800</tick>
     <tick2>89040</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-9.87229e-14" y="-12.5017"/>
       <off2 x="4.45136" y="0"/>
@@ -1422,6 +1471,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>89760</tick>
     <tick2>90000</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.568259" y="-12.407"/>
       <off2 x="3.22013" y="0"/>
@@ -1432,6 +1482,7 @@ p, li { white-space: pre-wrap; }
     <track>4</track>
     <tick>90720</tick>
     <tick2>90960</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.568259" y="-12.0281"/>
       <off2 x="2.36774" y="0"/>
@@ -1441,20 +1492,14 @@ p, li { white-space: pre-wrap; }
     <track>0</track>
     <tick>91200</tick>
     <tick2>92400</tick2>
-    <Segment>
-      <off1 x="0.102161" y="1.73673"/>
-      <off2 x="0" y="0"/>
-      </Segment>
-    <Segment>
-      <off1 x="0" y="0"/>
-      <off2 x="0" y="0"/>
-      </Segment>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>86400</tick>
     <tick2>86520</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="1.62821" y="0"/>
@@ -1465,6 +1510,7 @@ p, li { white-space: pre-wrap; }
     <track>1</track>
     <tick>81000</tick>
     <tick2>81600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0806563" y="-12.663"/>
       <off2 x="-2.57799" y="0"/>
@@ -1475,20 +1521,25 @@ p, li { white-space: pre-wrap; }
     <track>1</track>
     <tick>81960</tick>
     <tick2>82320</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.967876" y="-12.7437"/>
       <off2 x="1.76389" y="0"/>
       </Segment>
     </HairPin>
   <Slur id="132">
+    <track>0</track>
     <tick>0</tick>
     </Slur>
   <Slur id="133">
+    <track>0</track>
     </Slur>
   <Slur id="134">
+    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="135">
+    <track>0</track>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -2864,7 +2915,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8.8pt; font-style:italic;">cre     -          scen  -     do</span></p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:9pt; font-style:italic;">cre     -          scen  -     do</span></p></body></html>
           </html-data>
         </StaffText>
       <Beam id="30">
@@ -4644,8 +4695,9 @@ p, li { white-space: pre-wrap; }
         <tick>59520</tick>
         </Dynamic>
       <Tempo>
-        <tempo>1.33333</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -4947,8 +4999,9 @@ p, li { white-space: pre-wrap; }
         <tick>63600</tick>
         </Dynamic>
       <Tempo>
-        <tempo>1.33333</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
+        <selected>1</selected>
         <tick>63360</tick>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
@@ -5196,9 +5249,10 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="71">
       <Tempo>
-        <tempo>1.33333</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="0.378839" y="-3.69368"/>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -5483,9 +5537,10 @@ p, li { white-space: pre-wrap; }
         <offset x="-1.49342" y="0.90268"/>
         </Dynamic>
       <Tempo>
-        <tempo>1.33333</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-0.757678" y="-0.757677"/>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -5725,9 +5780,10 @@ p, li { white-space: pre-wrap; }
         <offset x="4.09263" y="-0.315959"/>
         </Dynamic>
       <Tempo>
-        <tempo>1</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="0.100696" y="-2.31602"/>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -6636,9 +6692,10 @@ p, li { white-space: pre-wrap; }
         <subtype>MeasureNumber</subtype>
         </Text>
       <Tempo>
-        <tempo>1</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="0.23638" y="0.829576"/>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <frameRound>0</frameRound>
         <html-data>
@@ -9956,6 +10013,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.852388" y="5.68259"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -13685,5 +13743,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

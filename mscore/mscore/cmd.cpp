@@ -2405,6 +2405,9 @@ void Score::cmdPaste()
             docName = "--";
             pasteStaff(doc.documentElement(), tick, staffIdx);
             }
+      else if (ms->hasFormat(mimeSymbolListFormat) && sel->state() == SEL_SINGLE) {
+            printf("cannot paste symbol list to element\n");
+            }
       else {
             printf("cannot paste selState %d staffList %d\n",
                sel->state(), ms->hasFormat(mimeStaffListFormat));

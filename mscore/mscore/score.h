@@ -688,7 +688,7 @@ class Score : public QObject {
       void lassoSelectEnd(const QRectF&);
 
       Page* searchPage(const QPointF&) const;
-      bool getPosition(Position* pos, const QPointF&) const;
+      bool getPosition(Position* pos, const QPointF&, bool divideSegment) const;
 
       void setState(int s);
       int state() const        { return _state; }

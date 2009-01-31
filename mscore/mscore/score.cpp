@@ -1696,7 +1696,7 @@ static Segment* getNextCRSegment(Segment* s, int staffIdx)
 //    return true if valid position found
 //---------------------------------------------------------
 
-bool Score::getPosition(Position* pos, const QPointF& p) const
+bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) const
       {
       const Page* page = searchPage(p);
       if (page == 0)
@@ -1799,15 +1799,24 @@ bool Score::getPosition(Position* pos, const QPointF& p) const
                   ntick = pos->measure->tick() + pos->measure->tickLen();
                   }
             double d  = x2 - x1;
-            if (x < (x1 + d * .3)) {
-                  x = x1;
-                  pos->tick = segment->tick();
-                  break;
+            if (divideSegment) {
+                  if (x < (x1 + d * .3)) {
+                        x = x1;
+                        pos->tick = segment->tick();
+                        break;
+                        }
+                  if (x < (x1 + d)) {
+                        x = x1 + d * .5;
+                        pos->tick = segment->tick() + (ntick - segment->tick()) / 2;
+                        break;
+                        }
                   }
-            if (x < (x1 + d)) {
-                  x = x1 + d * .5;
-                  pos->tick = segment->tick() + (ntick - segment->tick()) / 2;
-                  break;
+            else {
+                  if (x < (x1 + d * .5)) {
+                        x = x1;
+                        pos->tick = segment->tick();
+                        break;
+                        }
                   }
             segment = ns;
             }
