@@ -1,3 +1,8 @@
+31.jan (ws)
+      - when deleting notes in tuplets, always replace with rest even for
+        voices > 1
+      - note entry with mouse: reduce number of possible input positions for
+        short notes to ease input
 30.jan (ws)
       - fix crash on second save after dropping an image
       - new line attribute to allow for diagonal lines

@@ -360,8 +360,10 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
+      int len            = _padState.tickLen;
+      bool divideSegment = len >= (division/2);
       Position p;
-      if (!getPosition(&p, pos)) {
+      if (!getPosition(&p, pos, divideSegment)) {
             printf("cannot put note here, get position failed\n");
             return;
             }
@@ -373,7 +375,6 @@ void Score::putNote(const QPointF& pos, bool replace)
       int key                 = st->keymap()->key(tick);
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key);
-      int len                 = _padState.tickLen;
       Instrument* instr       = st->part()->instrument();
       int voice               = _padState.voice;
       int track               = staffIdx * VOICES + voice;
@@ -874,16 +875,13 @@ void Score::deleteItem(Element* el)
                   Chord* chord = static_cast<Chord*>(el);
                   removeChordRest(chord, false);
 
-                  // replace with rest
-                  if ((el->voice() == 0) && (chord->noteType() == NOTE_NORMAL)) {
-                        //
-                        // voice 0 chords are always replaced by rests
-                        //
+                  // replace with rest if voice 0 or if in tuplet
+                  Tuplet* tuplet = chord->tuplet();
+                  if ((el->voice() == 0 || tuplet) && (chord->noteType() == NOTE_NORMAL)) {
                         Rest* rest = new Rest(this, chord->tick(), chord->tickLen());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
                         undoAddElement(rest);
-                        Tuplet* tuplet = chord->tuplet();
                         if (tuplet) {
                               tuplet->add(rest);
                               rest->setTuplet(tuplet);
