@@ -36,6 +36,8 @@ install(FILES
       golliwogg.msc
       Estudio-No1-Tarrega.msc
       PlanxtyCarolan.msc
+      wtc1fuga5.mscz
+      schnee.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos
       )
 
