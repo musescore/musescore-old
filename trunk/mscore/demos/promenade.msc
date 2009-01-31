@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.9">
+<museScore version="1.10">
   <MagIdx>9</MagIdx>
-  <xoff>0.423333</xoff>
-  <yoff>0.423333</yoff>
+  <xoff>0</xoff>
+  <yoff>0</yoff>
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Style>
@@ -28,6 +28,7 @@
     <timesigLeftMargin>0.5</timesigLeftMargin>
     <clefKeyRightMargin>1.75</clefKeyRightMargin>
     <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.3</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
@@ -68,12 +69,15 @@
     <smallClefMag>0.7</smallClefMag>
     <genClef>1</genClef>
     <genKeysig>1</genKeysig>
+    <minEmptyMeasures>2</minEmptyMeasures>
+    <minMMRestWidth>4</minMMRestWidth>
     <gateTime>85</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>50</staccatoGateTime>
     <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
@@ -126,7 +130,7 @@
       </sig>
     </siglist>
   <tempolist fix="1.5">
-    <tempo tick="0">1.5</tempo>
+    <tempo tick="0">1.33333</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -149,12 +153,6 @@
       <barLineSpan>0</barLineSpan>
       </Staff>
     <trackName>Piano</trackName>
-    <name>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          </p></body></html>
-      </name>
     <Instrument>
       <Channel name="normal">
         <program value="0"/>
@@ -225,9 +223,12 @@ p, li { white-space: pre-wrap; }
   <Staff id="1">
     <VBox>
       <height>15.5593</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -237,7 +238,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -247,7 +247,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
-        <track>-1</track>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -256,6 +255,13 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </Text>
       </VBox>
+    <HBox>
+      <width>9.40375</width>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
+      </HBox>
     <Measure number="1">
       <Dynamic>
         <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -264,16 +270,19 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Dynamic>
-      <Text>
-        <subtype>System</subtype>
-        <offset x="-5.60395" y="-2.6212"/>
+      <Tempo>
+        <tempo>1.33333</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-5.03286" y="0"/>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"><span style=" font-family:'Century Schoolbook L'; font-size:9pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</p></body></html>
           </html-data>
-        </Text>
+        </Tempo>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -472,7 +481,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="4">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <TimeSig>
         <subtype>388</subtype>
@@ -560,7 +568,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="5">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <TimeSig>
         <subtype>324</subtype>
@@ -764,7 +771,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="8">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <TimeSig>
         <subtype>388</subtype>
@@ -816,7 +822,8 @@ p, li { white-space: pre-wrap; }
         <Slur type="stop" number="10"/>
         <Note pitch="68" tpc="10"/>
         </Chord>
-      <BarLine/>
+      <BarLine>
+        </BarLine>
       <Beam id="10">
         <track>1</track>
         </Beam>
@@ -847,7 +854,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>480</ticklen>
@@ -857,7 +863,6 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="-0.297076" y="0"/>
-            <track>-1</track>
             </Accidental>
           </Note>
         <Note pitch="68" tpc="10"/>
@@ -1034,7 +1039,6 @@ p, li { white-space: pre-wrap; }
           <Accidental>
             <subtype>2</subtype>
             <offset x="-0.4" y="0"/>
-            <track>-1</track>
             </Accidental>
           </Note>
         <Note pitch="68" tpc="10"/>
@@ -1128,7 +1132,7 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
-        <offset x="0.534913" y="8.29115"/>
+        <offset x="0.534913" y="8"/>
         <track>1</track>
         <ticklen>240</ticklen>
         </Rest>
@@ -1193,7 +1197,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="60" tpc="14"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <BarLine/>
+      <BarLine>
+        </BarLine>
       <Chord>
         <track>1</track>
         <tick>29280</tick>
@@ -1222,7 +1227,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="13">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="17">
         </Beam>
@@ -1589,7 +1593,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="17">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Chord>
         <ticklen>480</ticklen>
@@ -1756,7 +1759,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="20">
       <LayoutBreak>
         <subtype>line</subtype>
-        <track>-1</track>
         </LayoutBreak>
       <Beam id="29">
         </Beam>
@@ -1803,7 +1805,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="21">
       <Text>
         <subtype>MeasureNumber</subtype>
-        <track>-1</track>
         </Text>
       <Beam id="30">
         </Beam>
