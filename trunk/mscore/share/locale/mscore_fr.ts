@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="fr">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -83,7 +84,7 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Révision : 1479</translation>
+        <translation>Révision : 1494</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1435,7 +1436,7 @@ failed: </source>
     </message>
     <message>
         <source>Continue Height</source>
-        <translation>Hauteur de Continuer</translation>
+        <translation>Hauteur du prolongement</translation>
     </message>
     <message>
         <source>use german names</source>
@@ -2134,7 +2135,7 @@ failed: </source>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Continuer</translation>
+        <translation>Prolongement</translation>
     </message>
     <message>
         <source>End</source>
@@ -2142,7 +2143,7 @@ failed: </source>
     </message>
     <message>
         <source>diagonally</source>
-        <translation type="unfinished"></translation>
+        <translation>diagonalement</translation>
     </message>
 </context>
 <context>
@@ -6520,127 +6521,127 @@ failed: </source>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore : Propriétés du texte</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished">Police :</translation>
+        <translation>Police :</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation type="unfinished"></translation>
+        <translation>visuel de la police</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Taille :</translation>
+        <translation>Taille :</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished">Style :</translation>
+        <translation>Style :</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished">gras</translation>
+        <translation>gras</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished">italique</translation>
+        <translation>italique</translation>
     </message>
     <message>
         <source>I</source>
-        <translation type="unfinished">I</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation type="unfinished">souligné</translation>
+        <translation>souligné</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished">S</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligner :</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>align horizontal center</source>
-        <translation type="unfinished"></translation>
+        <translation>aligné horizontalement au centre</translation>
     </message>
     <message>
         <source>align right</source>
-        <translation type="unfinished">aligné à droite</translation>
+        <translation>aligné à droite</translation>
     </message>
     <message>
         <source>align top</source>
-        <translation type="unfinished"></translation>
+        <translation>aligné en haut</translation>
     </message>
     <message>
         <source>align vertical center</source>
-        <translation type="unfinished"></translation>
+        <translation>aligné verticalement au centre</translation>
     </message>
     <message>
         <source>align bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>aligné en bas</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Couleur :</translation>
+        <translation>Couleur :</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished">couleur du cadre</translation>
+        <translation>couleur du cadre</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished">Cadre</translation>
+        <translation>Cadre</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
+        <translation>tracer un cadre circulaire</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished">Cercle</translation>
+        <translation>Cercle</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
+        <translation>tracer un cadre rectangulaire</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished">Boite</translation>
+        <translation>Boite</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation type="unfinished"></translation>
+        <translation>largeur des lignes du cadre</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation type="unfinished">Marge :</translation>
+        <translation>Marge :</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
+        <translation>marge intérieure du cadre</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation type="unfinished">Arrondi :</translation>
+        <translation>Arrondi :</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished">aligné à gauche</translation>
+        <translation>aligné à gauche</translation>
     </message>
 </context>
 <context>
@@ -6679,7 +6680,7 @@ failed: </source>
     </message>
     <message>
         <source>Text Sample</source>
-        <translation>Example de texte</translation>
+        <translation>Exemple de texte</translation>
     </message>
     <message>
         <source>Position</source>
