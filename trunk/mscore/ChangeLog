@@ -1,4 +1,8 @@
+1.feb (ws)
+      - fixed issue with kb note entry of voice > 0
 31.jan (ws)
+      - fixed memory corruption when undoing beam editing
+      - fixed issue when deleting a measure which contains grace notes
       - fixed issue when deleting a measure which contains a tuplet
       - added new demo file "wtc1fuga5.mscz" (J.S.Bach WTC I Fuga V)
       - expose style parameter "note dot distance" to gui; change default from

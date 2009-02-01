@@ -531,10 +531,11 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   }
             setLayoutAll(true);
             }
+      // go to next ChordRest
       cr = nextChordRest(_is.cr);
       if ((cr == 0) && (_is.track % VOICES)) {
+            Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
             int track = (_is.track / VOICES) * VOICES;
-            Segment* s = _is.cr->segment()->nextCR(track);
             cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
       _is.cr = cr;
@@ -1085,12 +1086,19 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
                               undoRemoveElement(segment);
                         }
                   }
-            segment = segment->next();
-            if (l == 0) {
-                  if (segment == 0)
-                        l = measure->tick() + measure->tickLen() - stick;
-                  else
-                        l = segment->tick() - stick;
+            // do not count len of grace note
+            if (segment->subtype() == Segment::SegGrace) {
+                  l = 0;
+                  segment = segment->next();
+                  }
+            else {
+                  segment = segment->next();
+                  if (l == 0) {
+                        if (segment == 0)
+                              l = measure->tick() + measure->tickLen() - stick;
+                        else
+                              l = segment->tick() - stick;
+                        }
                   }
             noteLen += l;
             stick   += l;
