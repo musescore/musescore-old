@@ -46,7 +46,7 @@ ChordRest* nextChordRest(ChordRest* cr)
       if (!cr)
             return 0;
       Segment* seg = cr->segment();
-      int track = cr->staffIdx() * VOICES + cr->voice();
+      int track = cr->track();
 
       for (;;) {
             seg = seg->next1();

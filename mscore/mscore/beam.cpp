@@ -212,7 +212,9 @@ Beam::Beam(const Beam& b)
    : Element(b)
       {
       _elements     = b._elements;
-      beamSegments  = b.beamSegments;
+      foreach(BeamSegment* bs, b.beamSegments)
+            beamSegments.append(new BeamSegment(*bs));
+//      beamSegments  = b.beamSegments;
       _direction    = b._direction;
       _up           = b._up;
       _userModified = b._userModified;

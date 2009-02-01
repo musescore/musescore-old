@@ -190,12 +190,7 @@ ChordRest* Segment::nextChordRest(int track, bool backwards) const
       {
       for (const Segment* seg = this; seg; seg = backwards ? seg->prev1() : seg->next1()) {
             Element* el = seg->element(track);
-            if (!el)
-                  continue;
-            if (el->type() == NOTE) {
-                  el = ((Note*)el)->chord();
-                  }
-            if (el->isChordRest())
+            if (el && el->isChordRest())
                   return static_cast<ChordRest*>(el);
             }
       return 0;
