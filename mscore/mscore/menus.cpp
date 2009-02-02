@@ -301,7 +301,6 @@ void MuseScore::showPalette(bool visible)
             textLine->setHasBeginText(true);
             textLine->setEndHook(true);
             textLine->setEndHookHeight(Spatium(1.5));
-
             sp->append(textLine, tr("text line"));
 
             TextLine* line = new TextLine(gscore);
@@ -729,6 +728,7 @@ void MuseScore::clefMenu()
       {
       if (clefPalette == 0) {
             Palette* sp = new Palette;
+            sp->resize(400, 300);
             clefPalette = new PaletteScrollArea(sp);
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
@@ -750,6 +750,7 @@ void MuseScore::keyMenu()
       {
       if (keyPalette == 0) {
             Palette* sp = new Palette();
+            sp->resize(400, 300);
             keyPalette = new PaletteScrollArea(sp);
             keyPalette->setRestrictHeight(false);
             keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
@@ -795,6 +796,7 @@ void MuseScore::lineMenu()
       {
       if (linePalette == 0) {
             Palette* sp = new Palette();
+            sp->resize(400, 300);
             linePalette = new PaletteScrollArea(sp);
             linePalette->setRestrictHeight(false);
             linePalette->setWindowTitle(tr("MuseScore: Lines"));
@@ -884,15 +886,13 @@ void MuseScore::lineMenu()
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setBeginText("VII");
-            textLine->setLen(l);
+            textLine->setHasBeginText(true);
             sp->append(textLine, tr("text line"));
+            textLine->setEndHook(true);
+            textLine->setEndHookHeight(Spatium(1.5));
 
             TextLine* line = new TextLine(gscore);
-            line->setLen(l);
-            line->setHasBeginText(false);
-            line->setHasContinueText(false);
-            line->setBeginHook(false);
-            line->setEndHook(false);
+            line->setDiagonal(true);
             sp->append(line, tr("line"));
             }
       linePalette->show();
@@ -935,6 +935,7 @@ void MuseScore::noteAttributesMenu()
       {
       if (noteAttributesPalette == 0) {
             Palette* sp = new Palette();
+            sp->resize(400, 300);
             noteAttributesPalette = new PaletteScrollArea(sp);
             noteAttributesPalette->setRestrictHeight(false);
             noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
@@ -959,10 +960,11 @@ void MuseScore::accidentalsMenu()
       {
       if (accidentalsPalette == 0) {
             Palette* sp = new Palette();
+            sp->resize(400, 300);
             accidentalsPalette = new PaletteScrollArea(sp);
             accidentalsPalette->setRestrictHeight(false);
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
-            sp->setGrid(60, 60);
+            sp->setGrid(40, 50);
 
             for (int i = 0; i < 16+6+4; ++i) {
                   Accidental* s = new Accidental(gscore);
@@ -1015,10 +1017,11 @@ void MuseScore::barMenu()
       {
       if (barPalette == 0) {
             Palette* sp = new Palette();
+            sp->resize(300, 200);
             barPalette = new PaletteScrollArea(sp, 0);
             barPalette->setRestrictHeight(false);
             barPalette->setWindowTitle(tr("MuseScore: Barlines"));
-            sp->setGrid(60, 60);
+            sp->setGrid(42, 38);
 
             struct {
                   BarType type;
