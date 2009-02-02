@@ -1,4 +1,6 @@
 2.feb (ws)
+      - resize main palettes to reasonable values
+      - fix main line palette
       - fixed: simple line did not show up in line palette if compiled with
         optimizations (release) due to missing initialization
 1.feb (ws)
