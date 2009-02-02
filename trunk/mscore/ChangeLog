@@ -1,3 +1,6 @@
+2.feb (ws)
+      - fixed: simple line did not show up in line palette if compiled with
+        optimizations (release) due to missing initialization
 1.feb (ws)
       - fixed issue with kb note entry of voice > 0
 31.jan (ws)
