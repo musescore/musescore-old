@@ -162,7 +162,7 @@ QRectF TextLineSegment::bbox() const
 
       if (!textLine()->hasBeginText() && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
-      qreal h1;
+      qreal h1 = textLine()->lineWidth().point();
       int sym = textLine()->beginSymbol();
       if (_text)
             h1 = _text->height() * .5;
