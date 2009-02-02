@@ -439,6 +439,7 @@
     <track>0</track>
     <tick>33120</tick>
     <tick2>33480</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0851621" y="0.510973"/>
       <off2 x="0.144567" y="0"/>
@@ -449,6 +450,7 @@
     <track>0</track>
     <tick>33600</tick>
     <tick2>34080</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.170324" y="0.42581"/>
       <off2 x="0" y="0"/>
@@ -646,6 +648,7 @@
     <track>0</track>
     <tick>51840</tick>
     <tick2>52680</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.9186"/>
       <off2 x="0.92093" y="0"/>
@@ -655,6 +658,7 @@
     <track>1</track>
     <tick>53400</tick>
     <tick2>53640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.564594" y="-0.967876"/>
       <off2 x="0" y="0"/>
@@ -665,6 +669,7 @@
     <track>0</track>
     <tick>55680</tick>
     <tick2>56520</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="112">
     <track>0</track>
@@ -677,6 +682,7 @@
     <track>0</track>
     <tick>60480</tick>
     <tick2>61440</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-2.68605" y="0"/>
@@ -725,6 +731,7 @@
     <track>0</track>
     <tick>8280</tick>
     <tick2>8640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.767442"/>
       <off2 x="0" y="0"/>
@@ -734,6 +741,7 @@
     <track>0</track>
     <tick>9120</tick>
     <tick2>9480</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0806563" y="-0.241969"/>
       <off2 x="0" y="0"/>
@@ -744,6 +752,7 @@
     <track>0</track>
     <tick>10080</tick>
     <tick2>10440</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-0.135684" y="0"/>
@@ -753,44 +762,52 @@
     <track>0</track>
     <tick>10560</tick>
     <tick2>11400</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>13560</tick>
     <tick2>14280</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>14400</tick>
     <tick2>14760</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>15360</tick>
     <tick2>16200</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>16320</tick>
     <tick2>16680</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>19680</tick>
     <tick2>20040</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>20160</tick>
     <tick2>20520</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>20640</tick>
     <tick2>21120</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.230233" y="1.45814"/>
       <off2 x="0" y="0"/>
@@ -801,6 +818,7 @@
     <track>0</track>
     <tick>21240</tick>
     <tick2>21480</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.53488"/>
       <off2 x="0" y="0"/>
@@ -810,6 +828,7 @@
     <track>0</track>
     <tick>21600</tick>
     <tick2>22080</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-0.0678419" y="0"/>
@@ -820,6 +839,7 @@
     <track>0</track>
     <tick>22320</tick>
     <tick2>22560</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="0.997675" y="0"/>
@@ -829,6 +849,7 @@
     <track>0</track>
     <tick>25440</tick>
     <tick2>26160</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.30465"/>
       <off2 x="0" y="0"/>
@@ -839,6 +860,7 @@
     <track>0</track>
     <tick>26400</tick>
     <tick2>26760</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.460465" y="1.22791"/>
       <off2 x="-0.122115" y="0"/>
@@ -848,6 +870,7 @@
     <track>0</track>
     <tick>34800</tick>
     <tick2>35160</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.613954"/>
       <off2 x="0" y="0"/>
@@ -858,6 +881,7 @@
     <track>0</track>
     <tick>35280</tick>
     <tick2>35640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.613954"/>
       <off2 x="0" y="0"/>
@@ -867,6 +891,7 @@
     <track>0</track>
     <tick>42360</tick>
     <tick2>42720</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.230233" y="1.30465"/>
       <off2 x="0" y="0"/>
@@ -876,11 +901,13 @@
     <track>0</track>
     <tick>43680</tick>
     <tick2>44040</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>44640</tick>
     <tick2>45000</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="124">
     <track>0</track>
@@ -991,23 +1018,27 @@
     <track>4</track>
     <tick>71280</tick>
     <tick2>71520</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>71760</tick>
     <tick2>72240</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>73080</tick>
     <tick2>73320</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>73680</tick>
     <tick2>74160</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="154">
     <track>0</track>
@@ -1316,11 +1347,13 @@
     <track>0</track>
     <tick>106560</tick>
     <tick2>109440</tick2>
+    <diagonal>0</diagonal>
     </Trill>
   <Trill>
     <track>0</track>
     <tick>110400</tick>
     <tick2>113280</tick2>
+    <diagonal>0</diagonal>
     </Trill>
   <Slur id="220">
     <track>0</track>
@@ -1515,6 +1548,7 @@
     <track>0</track>
     <tick>128640</tick>
     <tick2>129600</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.642245" y="0.845916"/>
       <off2 x="-1.82086" y="0"/>
@@ -1524,6 +1558,7 @@
     <track>0</track>
     <tick>130560</tick>
     <tick2>131520</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="-0.851972" y="1.17528"/>
       <off2 x="0" y="0"/>
@@ -1710,11 +1745,13 @@
     <track>1</track>
     <tick>134640</tick>
     <tick2>135240</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>135360</tick>
     <tick2>136320</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-2.56576" y="0"/>
@@ -1725,26 +1762,31 @@
     <track>1</track>
     <tick>138240</tick>
     <tick2>139080</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>140760</tick>
     <tick2>141600</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>142800</tick>
     <tick2>143520</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>144720</tick>
     <tick2>145440</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>145920</tick>
     <tick2>146340</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="0.070554" y="0"/>
@@ -1755,6 +1797,7 @@
     <track>0</track>
     <tick>146400</tick>
     <tick2>147120</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.579364"/>
       <off2 x="0" y="0"/>
@@ -1768,6 +1811,7 @@
     <track>0</track>
     <tick>147240</tick>
     <tick2>147360</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0827663" y="0.827663"/>
       <off2 x="0" y="0"/>
@@ -1778,6 +1822,7 @@
     <track>0</track>
     <tick>147600</tick>
     <tick2>148080</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="306">
     <track>0</track>
@@ -1957,6 +2002,7 @@
     <track>5</track>
     <tick>40440</tick>
     <tick2>40680</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.579982" y="-4.23387"/>
       <off2 x="-0.104822" y="0"/>
@@ -1966,6 +2012,7 @@
     <track>5</track>
     <tick>41400</tick>
     <tick2>41640</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.506283" y="-5.20748"/>
       <off2 x="0" y="0"/>
@@ -1994,6 +2041,7 @@
     <track>0</track>
     <tick>164160</tick>
     <tick2>165120</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0723261" y="0.36163"/>
       <off2 x="0" y="0"/>
@@ -2004,16 +2052,19 @@
     <track>0</track>
     <tick>165600</tick>
     <tick2>165960</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>166080</tick>
     <tick2>166920</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>169200</tick>
     <tick2>169440</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.289304" y="0.696489"/>
       <off2 x="0" y="0"/>
@@ -2040,6 +2091,7 @@
     <track>4</track>
     <tick>169680</tick>
     <tick2>170160</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.651496"/>
       <off2 x="0" y="0"/>
@@ -2049,6 +2101,7 @@
     <track>4</track>
     <tick>171000</tick>
     <tick2>171360</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.488622" y="0.977244"/>
       <off2 x="0" y="0"/>
@@ -2066,6 +2119,7 @@
     <track>4</track>
     <tick>173040</tick>
     <tick2>173280</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.244311" y="0.325748"/>
       <off2 x="-0.081437" y="0"/>
@@ -2075,12 +2129,14 @@
     <track>4</track>
     <tick>173520</tick>
     <tick2>173760</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>174000</tick>
     <tick2>174480</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.144652" y="1.59117"/>
       <off2 x="0" y="0"/>
@@ -2090,6 +2146,7 @@
     <track>0</track>
     <tick>180960</tick>
     <tick2>181440</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.216978" y="0.578609"/>
       <off2 x="-2.24211" y="0"/>
@@ -2106,27 +2163,32 @@
     <track>4</track>
     <tick>119280</tick>
     <tick2>119520</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>120240</tick>
     <tick2>120480</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>121200</tick>
     <tick2>121440</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>118320</tick>
     <tick2>118560</tick2>
+    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>122400</tick>
     <tick2>122760</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.578609"/>
       <off2 x="0" y="0"/>
@@ -2137,6 +2199,7 @@
     <track>4</track>
     <tick>42960</tick>
     <tick2>43200</tick2>
+    <diagonal>0</diagonal>
     <Segment>
       <off1 x="2.72157" y="-1.04853"/>
       <off2 x="-3.70926" y="0"/>
@@ -2161,6 +2224,7 @@
     <up>2</up>
     </Slur>
   <Slur id="359">
+    <track>0</track>
     </Slur>
   <Staff id="1">
     <VBox>
@@ -2403,6 +2467,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.17292" y="2.21206"/>
+            <track>2</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -2654,6 +2719,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.791205" y="3.91647"/>
+            <track>2</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -6596,6 +6662,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.690698" y="1.61163"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -6854,6 +6921,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.537209" y="-1.99535"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -6910,6 +6978,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.695391" y="3.20282"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10457,6 +10526,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.0723261" y="-1.73583"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10501,16 +10571,17 @@ p, li { white-space: pre-wrap; }
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
-          <pitch>72</pitch>
-          <tpc>14</tpc>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
           </Note>
         <Note>
           <track>1</track>
-          <pitch>75</pitch>
-          <tpc>11</tpc>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.289304" y="-1.88048"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10613,6 +10684,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.216978" y="-2.53141"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10718,6 +10790,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.433957" y="-3.47165"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -10810,6 +10883,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.289304" y="-2.74839"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -11350,6 +11424,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.578609" y="-1.51885"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -11481,6 +11556,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="1.01257" y="-1.9528"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -14316,6 +14392,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.827663" y="3.22789"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -14407,6 +14484,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.248299" y="-2.56576"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -14565,6 +14643,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.827663" y="2.97959"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -14691,6 +14770,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.413831" y="-2.73129"/>
+            <track>1</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -16564,6 +16644,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.672525" y="3.99559"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -16651,6 +16732,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.830766" y="3.40218"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -18093,6 +18175,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.712085" y="1.62197"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -18201,6 +18284,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.870326" y="1.50329"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -18315,6 +18399,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.791205" y="1.89889"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -18725,6 +18810,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.474723" y="-3.87691"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -24893,6 +24979,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.910429" y="3.39342"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -25011,6 +25098,7 @@ p, li { white-space: pre-wrap; }
           <Text>
             <subtype>Fingering</subtype>
             <offset x="0.910429" y="2.73129"/>
+            <track>5</track>
             <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -25811,5 +25899,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>-1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
