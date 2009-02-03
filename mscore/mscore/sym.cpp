@@ -133,6 +133,7 @@ SymCode pSymbols[] = {
 
       // SymCode(0x203F, -1),    // curved ligature to connect two syllables
       SymCode(0x35c, -1),    // curved ligature to connect two syllables
+      SymCode(0x361, -1),    // curved ligature (top)
 
       SymCode(-1, -1)    // indicates end
       };

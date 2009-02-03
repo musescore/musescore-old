@@ -115,9 +115,10 @@ void SimpleTextObj::read()
       BasicDrawObj::read();
       relPos = cap->readPoint();
       align  = cap->readByte();
-      font   = cap->readFont();
-      text   = cap->readString();
-printf("read SimpletextObj %d <%s> %02x\n", strlen(text), text, text[0]);
+      _font  = cap->readFont();
+      _text  = cap->readString();
+// printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
+//      relPos.x(), relPos.y(), strlen(text), text, text[0]);
       }
 
 //---------------------------------------------------------
@@ -152,6 +153,7 @@ void GroupObj::read()
       {
       BasicDrawObj::read();
       relPos = cap->readPoint();
+printf("read group object\n");
       objects = cap->readDrawObjectArray();
       }
 
@@ -165,6 +167,7 @@ void TransposableObj::read()
       relPos = cap->readPoint();
       b = cap->readByte();
       assert(b == 12 || b == 21);
+printf("read transposable object\n");
       variants = cap->readDrawObjectArray();
       assert(variants.size() == b);
       }
@@ -328,7 +331,7 @@ QList<BasicDrawObj*> Capella::readDrawObjectArray()
                         ol.append(o);
                         }
                         break;
-                  case  3: {
+                  case  CAP_SIMPLE_TEXT: {
                         SimpleTextObj* o = new SimpleTextObj(this);
                         o->read();
                         ol.append(o);
@@ -475,8 +478,9 @@ void BasicDurationalObj::read()
             if (tuplet & 0xc0)
                   printf("bad tuplet value 0x%02x\n", tuplet);
             }
-      if (c & 0x40)
+      if (c & 0x40) {
             objects = cap->readDrawObjectArray();
+            }
       if (c & 0x80)
             abort();
       }
@@ -664,6 +668,17 @@ int Capella::readDWord()
       }
 
 //---------------------------------------------------------
+//   readLong
+//---------------------------------------------------------
+
+int Capella::readLong()
+      {
+      int c;
+      read(&c, 4);
+      return c;
+      }
+
+//---------------------------------------------------------
 //   readUnsigned
 //---------------------------------------------------------
 
@@ -750,22 +765,37 @@ QFont Capella::readFont()
       {
       int index = readUnsigned();
       if (index == 0) {
-            int n = 28;
-            char buffer[n];
-            curPos += n;
-            f->read(buffer, n);
-            readColor();
-            char* face = readString();
-            CapFont* cf = new CapFont;
-            cf->face = face;
-            fonts.append(cf);
-            return QFont(cf->face);
+            int lfHeight           = readLong();
+            int lfWidth            = readLong();
+            int lfEscapement       = readLong();
+            int lfOrientation      = readLong();
+            int lfWeight           = readLong();
+            uchar lfItalic         = readByte();
+            uchar lfUnderline      = readByte();
+            uchar lfStrikeOut      = readByte();
+            uchar lfCharSet        = readByte();
+            uchar lfOutPrecision   = readByte();
+            uchar lfClipPrecision  = readByte();
+            uchar lfQuality        = readByte();
+            uchar lfPitchAndFamily = readByte();
+            QColor color           = readColor();
+            char* face             = readString();
+
+// printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
+            QFont font(face);
+            font.setPointSizeF(lfHeight / 1000.0);
+            font.setItalic(lfItalic);
+            font.setStrikeOut(lfStrikeOut);
+            font.setUnderline(lfUnderline);
+            font.setWeight(lfWeight / 10);
+            fonts.append(font);
+            return font;
             }
       index -= 1;
       if (index >= fonts.size()) {
             printf("illegal font index %d (max %d)\n", index, fonts.size()-1);
             }
-      return QFont(fonts[index]->face);
+      return fonts[index];
       }
 
 //---------------------------------------------------------
@@ -1481,75 +1511,76 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   d = static_cast<BasicDurationalObj*>(static_cast<RestObj*>(no));
             else if (no->type() == T_CHORD)
                   d = static_cast<BasicDurationalObj*>(static_cast<ChordObj*>(no));
-            if (d) {
-                  foreach(BasicDrawObj* o, d->objects) {
-                        switch (o->type) {
-                              case CAP_SIMPLE_TEXT:
-                                    break;
-                              case CAP_WAVY_LINE:
-                                    break;
-                              case CAP_SLUR:
-                                    {
-                                    SlurObj* so = static_cast<SlurObj*>(o);
-// printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
-//   so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
-                                    Segment* seg = tick2segment(tick);
-                                    int tick2 = -1;
-                                    if (seg) {
-                                          int n = so->nNotes;
-                                          for (seg = seg->next1(); seg; seg = seg->next1()) {
-                                                if (seg->subtype() != Segment::SegChordRest)
-                                                      continue;
-                                                if (seg->element(track))
-                                                      --n;
-                                                else
-                                                      printf("  %d empty seg\n", n);
-                                                if (n == 0) {
-                                                      tick2 = seg->tick();
-                                                      break;
-                                                      }
+            if (!d)
+                  continue;
+            foreach(BasicDrawObj* o, d->objects) {
+                  switch (o->type) {
+                        case CAP_SIMPLE_TEXT:
+                              // printf("simple text at %d\n", tick);
+                              break;
+                        case CAP_WAVY_LINE:
+                              break;
+                        case CAP_SLUR:
+                              {
+                              SlurObj* so = static_cast<SlurObj*>(o);
+                              // printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
+                              //   so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
+                              Segment* seg = tick2segment(tick);
+                              int tick2 = -1;
+                              if (seg) {
+                                    int n = so->nNotes;
+                                    for (seg = seg->next1(); seg; seg = seg->next1()) {
+                                          if (seg->subtype() != Segment::SegChordRest)
+                                                continue;
+                                          if (seg->element(track))
+                                                --n;
+                                          else
+                                                printf("  %d empty seg\n", n);
+                                          if (n == 0) {
+                                                tick2 = seg->tick();
+                                                break;
                                                 }
                                           }
-                                    else
-                                          printf("  segment at %d not found\n", tick);
-                                    if (tick2 >= 0) {
-                                          Slur* slur = new Slur(this);
-                                          slur->setTick(tick);
-                                          slur->setTrack(track);
-                                          slur->setTick2(tick2);
-                                          slur->setTrack2(track);
-                                          _layout->add(slur);
-                                          }
-                                    else
-                                          printf("second anchor for slur not found\n");
                                     }
-                                    break;
-                              case CAP_TEXT: {
-                                    extern QString rtf2html(const QString&);
-
-                                    TextObj* to = static_cast<TextObj*>(o);
-                                    Text* s = new Text(this);
-                                    QString ss = rtf2html(QString(to->text));
-
-printf("string %d:%d w %d ratio %d <%s>\n",
-   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
-                                    s->setHtml(ss);
-                                    MeasureBase* measure = _measures.first();
-                                    if (measure->type() != VBOX) {
-                                          measure = new VBox(this);
-                                          measure->setTick(0);
-                                          addMeasure(measure);
-                                          }
-                                    s->setSubtype(TEXT_TITLE);
-                                    measure->add(s);
+                              else
+                                    printf("  segment at %d not found\n", tick);
+                              if (tick2 >= 0) {
+                                    Slur* slur = new Slur(this);
+                                    slur->setTick(tick);
+                                    slur->setTrack(track);
+                                    slur->setTick2(tick2);
+                                    slur->setTrack2(track);
+                                    _layout->add(slur);
                                     }
-                                    break;
-                              default:
-                                    printf("draw obj %d\n", o->type);
+                              else
+                                    printf("second anchor for slur not found\n");
                               }
+                              break;
+                        case CAP_TEXT: {
+                              extern QString rtf2html(const QString&);
+
+                              TextObj* to = static_cast<TextObj*>(o);
+                              Text* s = new Text(this);
+                              QString ss = rtf2html(QString(to->text));
+
+                              printf("string %d:%d w %d ratio %d <%s>\n",
+                                 to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
+                              s->setHtml(ss);
+                              MeasureBase* measure = _measures.first();
+                              if (measure->type() != VBOX) {
+                                    measure = new VBox(this);
+                                    measure->setTick(0);
+                                    addMeasure(measure);
+                                    }
+                              s->setSubtype(TEXT_TITLE);
+                              measure->add(s);
+                              }
+                              break;
+                        default:
+                              printf("draw obj %d\n", o->type);
                         }
-                  tick += d->ticks();
                   }
+            tick += d->ticks();
             }
       return tick;
       }
@@ -1583,6 +1614,30 @@ void Score::convertCapella(Capella* cap)
             staff->setBracket(0, cb.curly ? 1 : 0);
             staff->setBracketSpan(0, cb.to - cb.from + 1);
             }
+
+      foreach(BasicDrawObj* o, cap->backgroundChord->objects) {
+            switch(o->type) {
+                  case CAP_SIMPLE_TEXT:
+                        {
+                        SimpleTextObj* to = static_cast<SimpleTextObj*>(o);
+                        Text* s = new Text(this);
+                        s->setSubtype(TEXT_TITLE);
+                        s->setDefaultFont(to->font());
+                        QString ss = to->text();
+                        s->setText(ss);
+                        MeasureBase* measure = new VBox(this);
+                        measure->setTick(0);
+                        addMeasure(measure);
+                        measure->add(s);
+                        }
+                        break;
+                  default:
+                        printf("page background object type %d\n", o->type);
+                        break;
+                  }
+            }
+
+
       int mtick = 0;
       foreach(CapSystem* csys, cap->systems) {
             int oldTick  = mtick;

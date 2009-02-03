@@ -302,6 +302,9 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                               hasClef->setMag(staff->mag());
                               hasClef->setSmall(false);
                               break;
+                        case TIMESIG:
+                              el->setMag(staff->mag());
+                              break;
                         default:
                               break;
                         }

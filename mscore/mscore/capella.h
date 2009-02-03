@@ -435,15 +435,17 @@ class TextObj : public BasicRectObj {
 //---------------------------------------------------------
 
 class SimpleTextObj : public BasicDrawObj {
-      char* text;
+      char* _text;
       QPoint relPos;
       unsigned char align;
-      QFont font;
+      QFont _font;
 
    public:
-      SimpleTextObj(Capella* c) : BasicDrawObj(CAP_SIMPLE_TEXT, c) { text = 0;}
-      ~SimpleTextObj() { if (text) delete text; }
+      SimpleTextObj(Capella* c) : BasicDrawObj(CAP_SIMPLE_TEXT, c) { _text = 0;}
+      ~SimpleTextObj() { if (_text) delete _text; }
       void read();
+      QString text() const { return QString(_text); }
+      QFont font() const { return _font; }
       };
 
 //---------------------------------------------------------
@@ -598,7 +600,6 @@ class Capella {
       bool bAllowCompression;
       bool bPrintLandscape;
 
-      ChordObj* backgroundChord;
       bool bShowBarCount;           // Taktnumerierung zeigen
       unsigned char barNumberFrame; // 0=kein, 1=Rechteck, 2=Ellipse
       unsigned char nBarDistX;
@@ -612,7 +613,7 @@ class Capella {
       unsigned rightPageMargins;
       unsigned btmPageMargins;
 
-      QList<CapFont*> fonts;
+      QList<QFont> fonts;
       QList<CapStaffLayout*> staves;      // staff layout
 
       int smallLineDist;            // layout
@@ -649,6 +650,7 @@ class Capella {
       char readChar();
       QColor readColor();
       int readInt();
+      int readLong();
       short readWord();
       int readDWord();
       unsigned readUnsigned();
@@ -661,6 +663,7 @@ class Capella {
 
       QList<CapSystem*> systems;
       QList<CapBracket> brackets;
+      ChordObj* backgroundChord;
       };
 
 #endif

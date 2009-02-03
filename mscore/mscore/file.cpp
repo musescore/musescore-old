@@ -1413,13 +1413,13 @@ void Score::print(QPrinter* printer)
 
       int fromPage = printer->fromPage() - 1;
       int toPage   = printer->toPage() - 1;
-      if (fromPage == -1)
+      if (fromPage < 0)
             fromPage = 0;
-      if (toPage == -1)
-            toPage = pages;
+      if ((toPage < 0) || (toPage >= pages))
+            toPage = pages - 1;
 
       bool firstPage = true;
-      for (int n = fromPage; n < toPage; ++n) {
+      for (int n = fromPage; n <= toPage; ++n) {
             if (!firstPage) {
                   printer->newPage();
                   }

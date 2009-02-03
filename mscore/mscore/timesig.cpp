@@ -251,8 +251,10 @@ void TimeSig::layout(ScoreLayout*)
 
             double m = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;
-            pz = QPointF(0.0, 2.0 * _spatium * mag()) * im;
-            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium * mag()) * im;
+//            pz = QPointF(0.0, 2.0 * _spatium * mag()) * im;
+//            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium * mag()) * im;
+            pz = QPointF(0.0, 2.0 * _spatium) * im;
+            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium) * im;
 
             bb |= rz.translated(pz);
             bb |= rn.translated(pn);
@@ -275,7 +277,7 @@ void TimeSig::draw(QPainter& p) const
             symbols[allabreveSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
       else {
             p.setFont(symbols[allabreveSym].font());
-            double m  = _spatium / (DPI * SPATIUM20);
+            double m  = _spatium * mag() / (DPI * SPATIUM20);
             double im = 1.0 / m;
             p.scale(m, m);
             p.drawText(pz, sz);
