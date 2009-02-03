@@ -43,6 +43,8 @@ install(FILES
       mscore_hi_IN.qm
       mscore_pt_BR.ts
       mscore_pt_BR.qm
+      mscore_en_GB.ts
+      mscore_en_GB.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 
