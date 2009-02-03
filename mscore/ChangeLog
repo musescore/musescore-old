@@ -1,4 +1,5 @@
 3.feb (ws)
+      - fixed: disabling midi input for windows did not work
       - updated russian translation from Alexandre Prokoudine
       - added new translation en_GB from Chris Beagles
       (tb)

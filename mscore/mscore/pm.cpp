@@ -200,19 +200,23 @@ void PortMidiDriver::read()
       while (Pm_Poll(inputStream)) {
             int n = Pm_Read(inputStream, buffer, 1);
             if (n > 0) {
-                  int type = Pm_MessageStatus(buffer[0].message);
-                  if (type == ME_NOTEON) {
-                        int pitch = Pm_MessageData1(buffer[0].message);
-                        int velo = Pm_MessageData2(buffer[0].message);
-                        if (velo) {
-                              mscore->midiNoteReceived(pitch, active);
-                              ++active;
+                  if (mscore->midiinEnabled()) {
+                        int type = Pm_MessageStatus(buffer[0].message);
+                        if (type == ME_NOTEON) {
+                              int pitch = Pm_MessageData1(buffer[0].message);
+                              int velo = Pm_MessageData2(buffer[0].message);
+                              if (velo) {
+                                    mscore->midiNoteReceived(pitch, active);
+                                    ++active;
+                                    }
+                              else
+                                    --active;
                               }
-                        else
+                        else if (type == ME_NOTEOFF)
                               --active;
                         }
-                  else if (type == ME_NOTEOFF)
-                        --active;
+                  else
+                        active = 0;
                   }
             }
       }
