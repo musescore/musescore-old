@@ -1,4 +1,7 @@
 3.feb (ws)
+      - fix crash if print page range is for example 1-4 on a 2 page score
+      - fix semantic of print page range: (1-2 now prints page 1 and page 2)
+      - fixed: in a small sized staff time sigs were displayed in full size
       - fixed: disabling midi input for windows did not work
       - updated russian translation from Alexandre Prokoudine
       - added new translation en_GB from Chris Beagles
