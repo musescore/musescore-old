@@ -171,7 +171,7 @@ void MuseScore::showPalette(bool visible)
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14]);
+            sp->append(k, tr(keyNames[14]));
             paletteBox->addPalette(sp);
 
             //-----------------------------------
@@ -758,19 +758,16 @@ void MuseScore::keyMenu()
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
-                  sp->append(k, keyNames[i*2]);
+                  sp->append(k, tr(keyNames[i*2]));
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
-                  sp->append(k, keyNames[(7 + i) * 2 + 1]);
+                  sp->append(k, tr(keyNames[(7 + i) * 2 + 1]));
                   }
             KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
-            sp->append(k, keyNames[14]);
-            k = new KeySig(gscore);
-            k->setSubtype(0);
-            sp->append(k, keyNames[14]);
+            sp->append(k, tr(keyNames[14]));
             }
       keyPalette->show();
       keyPalette->raise();

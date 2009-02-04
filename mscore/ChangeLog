@@ -1,4 +1,5 @@
 4.feb (ws)
+      - fix bracket creation in new wizard (example: score with two pianos)
       - added qt translations to windows package; qt strings like "Ok" "Cancel"
         are now translated if language is available for qt
 3.feb (ws)

@@ -349,23 +349,6 @@ void InstrumentWizard::createInstruments(Score* cs)
                   Measure* m = (Measure*)mb;
                   m->cmdAddStaves(sidx, eidx);
                   }
-            //
-            //    adjust brackets
-            //
-            for (int staffIdx1 = 0; staffIdx1 < cs->staves().size(); ++staffIdx1) {
-                  Staff* staff = cs->staff(staffIdx1);
-                  int bl = staff->bracketLevels();
-                  for (int i = 0; i < bl; ++i) {
-                        int span = staff->bracketSpan(i);
-                        if ((span == 0) || ((staffIdx1 + span) < sidx) || (staffIdx1 > eidx))
-                              continue;
-                        if ((sidx >= staffIdx1) && (eidx <= (staffIdx1 + span)))
-                              staff->setBracketSpan(i, span + (eidx-sidx));
-                        else {
-                              printf("TODO: adjust brackets\n");
-                              }
-                        }
-                  }
             staffIdx += rstaff;
             }
       //
