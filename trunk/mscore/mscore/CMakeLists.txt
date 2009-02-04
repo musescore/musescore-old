@@ -212,6 +212,22 @@ if (MINGW)
       ${CROSSQT}/plugins/imageformats/qsvg4.dll
       ${CROSSQT}/plugins/imageformats/qtiff4.dll
       )
+   install_files ( /locale .qm
+      ${CROSSQT}/translations/qt_ar.qm
+      ${CROSSQT}/translations/qt_de.qm
+      ${CROSSQT}/translations/qt_es.qm
+      ${CROSSQT}/translations/qt_fr.qm
+      ${CROSSQT}/translations/qt_iw.qm
+      ${CROSSQT}/translations/qt_ja_jp.qm
+      ${CROSSQT}/translations/qt_pl.qm
+      ${CROSSQT}/translations/qt_pt.qm
+      ${CROSSQT}/translations/qt_ru.qm
+      ${CROSSQT}/translations/qt_sk.qm
+      ${CROSSQT}/translations/qt_sv.qm
+      ${CROSSQT}/translations/qt_uk.qm
+      ${CROSSQT}/translations/qt_zh_CN.qm
+      ${CROSSQT}/translations/qt_zh_TW.qm
+      )
 
 else (MINGW)
    set_target_properties( mscore

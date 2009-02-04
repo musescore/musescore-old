@@ -56,21 +56,21 @@ struct LanguageItem {
       };
 
 LanguageItem languages[] = {
-      LanguageItem("",      "system"),
-      LanguageItem("cz",    "Czech"),
-      LanguageItem("de",    "German"),
-      LanguageItem("en_GB", "English (GB)"),
-      LanguageItem("en",    "English (US)"),
-      LanguageItem("es",    "Spanish"),
-      LanguageItem("fr",    "French"),
-      LanguageItem("gl",    "Galician"),
-      LanguageItem("hi_IN", "Hindi"),
-      LanguageItem("it",    "Italian"),
-      LanguageItem("nl",    "Dutch"),
-      LanguageItem("pt",    "Portuguese"),
-      LanguageItem("pt_BR", "Brasilian Portuguese"),
-      LanguageItem("ru",    "Russian"),
-      LanguageItem("tr",    "Turkey"),
+      LanguageItem("",      QT_TR_NOOP("system")),
+      LanguageItem("cz",    QT_TR_NOOP("Czech")),
+      LanguageItem("de",    QT_TR_NOOP("German")),
+      LanguageItem("en_GB", QT_TR_NOOP("English (GB)")),
+      LanguageItem("en",    QT_TR_NOOP("English (US)")),
+      LanguageItem("es",    QT_TR_NOOP("Spanish")),
+      LanguageItem("fr",    QT_TR_NOOP("French")),
+      LanguageItem("gl",    QT_TR_NOOP("Galician")),
+      LanguageItem("hi_IN", QT_TR_NOOP("Hindi")),
+      LanguageItem("it",    QT_TR_NOOP("Italian")),
+      LanguageItem("nl",    QT_TR_NOOP("Dutch")),
+      LanguageItem("pt",    QT_TR_NOOP("Portuguese")),
+      LanguageItem("pt_BR", QT_TR_NOOP("Brasilian Portuguese")),
+      LanguageItem("ru",    QT_TR_NOOP("Russian")),
+      LanguageItem("tr",    QT_TR_NOOP("Turkey")),
       };
 
 //---------------------------------------------------------

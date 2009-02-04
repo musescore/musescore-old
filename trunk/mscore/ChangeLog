@@ -1,3 +1,6 @@
+4.feb (ws)
+      - added qt translations to windows package; qt strings like "Ok" "Cancel"
+        are now translated if language is available for qt
 3.feb (ws)
       - fix crash if print page range is for example 1-4 on a 2 page score
       - fix semantic of print page range: (1-2 now prints page 1 and page 2)
