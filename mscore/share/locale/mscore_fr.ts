@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="fr_FR">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -68,69 +69,6 @@
     </message>
 </context>
 <context>
-    <name>@default</name>
-    <message>
-        <source>system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>German</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>English (GB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>English (US)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spanish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Turkey</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -146,19 +84,18 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Révision : 1494</translation>
+        <translation>Révision : 1501</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2008 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visitez http://www.musescore.org pour les nouvelles versions&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;et plus d&apos;informations.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1435,7 +1372,7 @@ failed: </source>
     </message>
     <message>
         <source>Measure Numbers</source>
-        <translation>Numéro des mesures</translation>
+        <translation>Numéros de mesure</translation>
     </message>
     <message>
         <source>all staffs</source>
@@ -1596,14 +1533,6 @@ failed: </source>
     <message>
         <source>begin repeat left margin</source>
         <translation>Marge gauche du début de reprise</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished">Notes</translation>
-    </message>
-    <message>
-        <source>note dot distance</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1819,7 +1748,7 @@ failed: </source>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>Propriétés de la HBox...</translation>
+        <translation>Propriétés du cadre...</translation>
     </message>
 </context>
 <context>
@@ -2994,7 +2923,7 @@ failed: </source>
     </message>
     <message>
         <source>flip direction</source>
-        <translation>Direction de l&apos;inverssion</translation>
+        <translation>Inverser le sens</translation>
     </message>
     <message>
         <source>up</source>
@@ -3270,7 +3199,7 @@ failed: </source>
     </message>
     <message>
         <source>natural</source>
-        <translation>naturel</translation>
+        <translation>bécarre</translation>
     </message>
     <message>
         <source>flat</source>
@@ -3722,19 +3651,19 @@ failed: </source>
     </message>
     <message>
         <source>prima volta</source>
-        <translation>première reprise</translation>
+        <translation>prima volta</translation>
     </message>
     <message>
         <source>seconda volta</source>
-        <translation>deuxième reprise</translation>
+        <translation>seconda volta</translation>
     </message>
     <message>
         <source>terza volta</source>
-        <translation>troisième reprise</translation>
+        <translation>terza volta</translation>
     </message>
     <message>
         <source>seconda volta 2</source>
-        <translation>deuxième reprise 2</translation>
+        <translation>seconda volta</translation>
     </message>
     <message>
         <source>8va</source>
@@ -4631,11 +4560,11 @@ before closing?</source>
     </message>
     <message>
         <source>Longa</source>
-        <translation>Longa</translation>
+        <translation>Longue</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>Carrée</translation>
+        <translation>Brève</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -4667,7 +4596,7 @@ before closing?</source>
     </message>
     <message>
         <source>Dot</source>
-        <translation>Point</translation>
+        <translation>Pointé</translation>
     </message>
     <message>
         <source>pad double dot</source>
@@ -4675,7 +4604,7 @@ before closing?</source>
     </message>
     <message>
         <source>Double dot</source>
-        <translation>Double point</translation>
+        <translation>Double pointé</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -4940,7 +4869,7 @@ before closing?</source>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Deux cotés</translation>
+        <translation>Recto / Verso</translation>
     </message>
     <message>
         <source>Landscape</source>
@@ -5425,7 +5354,7 @@ before closing?</source>
     </message>
     <message>
         <source>I/O</source>
-        <translation>E/S</translation>
+        <translation>E / S</translation>
     </message>
     <message>
         <source>Use midi output</source>
@@ -5717,19 +5646,19 @@ before closing?</source>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Voix 1 sélectionnée</translation>
+        <translation>Voix 1 selectionnée</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Voix 2 sélectionnée</translation>
+        <translation>Voix 2 selectionnée</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Voix 3 sélectionnée</translation>
+        <translation>Voix 3 selectionnée</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Voix 4 sélectionnée</translation>
+        <translation>Voix 4 selectionnée</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -6419,10 +6348,6 @@ failed: </source>
         <source>BPM</source>
         <translation>BPM</translation>
     </message>
-    <message>
-        <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>TempoText</name>
@@ -6459,7 +6384,7 @@ failed: </source>
     </message>
     <message>
         <source>MM</source>
-        <translation>MM</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Space</source>
@@ -7131,7 +7056,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation>Propriétés de la VBox...</translation>
+        <translation>Propriétés du cadre...</translation>
     </message>
 </context>
 <context>
