@@ -1419,21 +1419,28 @@ void setMscoreLocale(QString localeName)
 
       if (!translator->load(lp) && debugMode)
             printf("load translator <%s> failed\n", qPrintable(lp));
+      else {
+            qApp->installTranslator(translator);
+            translatorList.append(translator);
+            }
 
-      qApp->installTranslator(translator);
-      translatorList.append(translator);
-
-      QString resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+      QString resourceDir;
+#ifdef __MINGW32__
+      resourceDir = mscoreGlobalShare + "locale/";
+#else
+      resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#endif
       QTranslator* qtTranslator = new QTranslator;
       if (debugMode)
-            printf("load translator <qt_%s>\n", qPrintable(localeName));
+            printf("load translator <qt_%s> from <%s>\n",
+               qPrintable(localeName), qPrintable(resourceDir));
 
       if (!qtTranslator->load(QLatin1String("qt_") + localeName, resourceDir) && debugMode)
             printf("load translator <qt_%s> failed\n", qPrintable(localeName));
-
-      qApp->installTranslator(qtTranslator);
-      translatorList.append(qtTranslator);
-
+      else {
+            qApp->installTranslator(qtTranslator);
+            translatorList.append(qtTranslator);
+            }
 
       //
       // initialize shortcut hash table
