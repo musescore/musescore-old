@@ -768,28 +768,21 @@ void Score::insertStaff(Staff* staff, int idx)
 
 void Score::adjustBracketsDel(int sidx, int eidx)
       {
-printf("adjustBracketsDel %d %d\n", sidx, eidx);
-
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             Staff* staff = _staves[staffIdx];
             for (int i = 0; i < staff->bracketLevels(); ++i) {
                   int span = staff->bracketSpan(i);
                   if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
                         continue;
-                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                         undoChangeBracketSpan(staff, i, span - (eidx-sidx));
-                        }
-                  else {
-                        printf("TODO: adjust brackets, span %d\n", span);
-                        }
+//                  else {
+//                        printf("TODO: adjust brackets, span %d\n", span);
+//                        }
                   }
             int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
                   undoChangeBarLineSpan(staff, span - (eidx-sidx));
-                  }
-            else {
-                  printf("TODO: Del: adjust barLineSpan, span %d\n", span);
-                  }
             }
       }
 
@@ -808,17 +801,13 @@ void Score::adjustBracketsIns(int sidx, int eidx)
                         continue;
                   if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
                         undoChangeBracketSpan(staff, i, span + (eidx-sidx));
-                  else {
-                        printf("TODO: adjust brackets\n");
-                        }
+//                  else {
+//                        printf("TODO: adjust brackets\n");
+//                        }
                   }
             int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span))) {
+            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
                   undoChangeBarLineSpan(staff, span + (eidx-sidx));
-                  }
-            else {
-                  printf("TODO: Ins: adjust barLineSpan, span %d\n", span);
-                  }
             }
       }
 

@@ -3028,7 +3028,8 @@ bool Measure::createEndBarLines()
                         break;
                         }
                   }
-            if (staff->barLineSpan() == 0) {
+            int span = staff->barLineSpan();
+            if (span == 0) {
                   if (bl) {
                         delete bl;
                         bl = 0;
@@ -3057,8 +3058,8 @@ bool Measure::createEndBarLines()
                   //TODO: crash when exchange staves in a piano system,
                   //      staffIdx >= staves
 
-                  bl->setSpan(staff->barLineSpan());
-                  if (!system()->staff(staffIdx + bl->span() - 1)->show()) {
+                  bl->setSpan(span);
+                  if (!system()->staff(staffIdx + span - 1)->show()) {
                         //
                         // if the barline ends on an invisible staff
                         // find last visible staff in barline

@@ -122,26 +122,6 @@ QString Staff::trackName() const
       return _part->trackName();
       }
 
-#if 0
-//---------------------------------------------------------
-//   longName
-//---------------------------------------------------------
-
-const QTextDocument& Staff::longName() const
-      {
-      return _part->longName();
-      }
-
-//---------------------------------------------------------
-//   shortName
-//---------------------------------------------------------
-
-const QTextDocument& Staff::shortName() const
-      {
-      return _part->shortName();
-      }
-#endif
-
 //---------------------------------------------------------
 //   Staff
 //---------------------------------------------------------
@@ -451,21 +431,11 @@ void Staff::changeClef(int tick, int st)
       }
 
 //---------------------------------------------------------
-//   setBarLineSpan
-//---------------------------------------------------------
-
-void Staff::setBarLineSpan(int val)
-      {
-      _barLineSpan = val;
-      }
-
-//---------------------------------------------------------
 //   height
 //---------------------------------------------------------
 
 double Staff::height() const
       {
-//      return _lines * _spatium * mag();
       return 4 * _spatium * mag();
       }
 
