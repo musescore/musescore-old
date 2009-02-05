@@ -108,7 +108,7 @@ class ExportLy {
 
   struct lybrackets
   {
-    bool brace, brak;
+    bool piano;
     bool bracestart,brakstart, braceend, brakend;
     int braceno, brakno;
   };
@@ -229,8 +229,7 @@ void ExportLy::initBrackets()
 {
   for (int i = 0; i < BRACKSTAVES; ++i)     //init bracket-array
     {
-      lybracks[i].brace=false;
-      lybracks[i].brak=false;
+      lybracks[i].piano=false;
       lybracks[i].bracestart=false;
       lybracks[i].brakstart=false;
       lybracks[i].braceend=false;
@@ -243,8 +242,8 @@ void ExportLy::initBrackets()
 
 
 //----------------------------------------------------------------
-//   brackRegister
-//   register where partGroup Start, and whether brace or bracket.
+//   brackRegister register where partGroup Start, and whether brace,
+//   bracket or pianostaff
 //----------------------------------------------------------------
 
 void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start, bool end)
@@ -254,7 +253,6 @@ void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start,
   switch(bratype) 
     {
     case BRACKET_NORMAL:
-      lybracks[staffnr].brak=true;
       if (start) lybracks[staffnr].brakstart=true;
       //else lybracks[staffnr].brakstart=false;
       if (end) lybracks[staffnr].brakend=true;
@@ -262,13 +260,20 @@ void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start,
       lybracks[staffnr].brakno=brnumber;
       break;
     case BRACKET_AKKOLADE:
-      lybracks[staffnr].brace=true;
       if (start) lybracks[staffnr].bracestart=true;
       //      else lybracks[staffnr].bracestart=false;
       if (end) lybracks[staffnr].braceend=true;
       //      else lybracks[staffnr].braceend=false;
       lybracks[staffnr].braceno=brnumber;
       break;
+    case -1: //piano-staff: lilypond makes rigid distance between
+	     //staffs to allow cross-staff beaming.
+      printf("register pianostaff\n");
+      lybracks[staffnr].piano=true;
+      if (start) lybracks[staffnr].bracestart=true;
+      if (end) {lybracks[staffnr].braceend=true; printf("register pianostaff end\n"); }
+      lybracks[staffnr].braceno=brnumber;
+      break; 
     default:
       printf("bracket subtype %d not understood\n", bratype);
     }
@@ -291,37 +296,53 @@ void ExportLy::findBrackets()
     {
       printf("partnumber: %d\n", partnumber);
       Part* part = il->at(partnumber);
+      printf("staves in part: %d\n", part->nstaves());
+      if (part->nstaves() == 2) pianostaff=true;
       for (int stavno = 0; stavno < part->nstaves(); stavno++) //run thru list of staves in part.
 	{
 	  printf("stavnummer %d\n", stavno);
-	  Staff* st = part->staff(stavno);
-	  if (st) 
+	  if (pianostaff) printf("pianostaff\n");
+	  
+	  if (pianostaff)
 	    {
-	      for (int braclev= 0; braclev < st->bracketLevels(); braclev++) //run thru bracketlevels of staff
+	      if (stavno==0)
 		{
-		  printf("bracketlevel: %d\n", braclev);
-		  if (st->bracket(braclev) != NO_BRACKET) //if bracket
+		  printf("start of pianostaff\n");
+		  brackRegister(groupnumber, -1, partnumber+stavno, true, false);
+		}
+	      if (stavno==1)
+		{
+		  printf("end of pianostaff\n");
+		  brackRegister(groupnumber, -1, partnumber+stavno, false, true);
+		  pianostaff=false;
+		}
+	    }
+	  else //not pianostaff
+	    {
+	      Staff* st = part->staff(stavno);
+	      if (st) 
+		{
+		  for (int braclev= 0; braclev < st->bracketLevels(); braclev++) //run thru bracketlevels of staff
 		    {
-		      //  if (stavno == 0) 
-		      //	{
-			  // found bracket in first staff of part
-		      // if (st->bracketSpan(braclev) != part->nstaves()) 
-		      //    {
-			      groupnumber++;
-			      if (groupnumber < MAXPARTGROUPS) 
-				{
-				  printf("start groupnumber=%d end=%d\n", groupnumber, partnumber - 1 + st->bracketSpan(braclev));
-				  brackRegister(groupnumber, st->bracket(braclev), partnumber, true, false);
-				  brackRegister(groupnumber,st->bracket(braclev), partnumber-1+st->bracketSpan(braclev), false, true); 
-				}
-			      //    }
-			  //	}
-		    }//end of if bracket.
-		}//end of bracket-levels of staff
-	    }//end if staff.
-	}//end of partlist
+		      printf("bracketlevel: %d\n", braclev);
+		      if (st->bracket(braclev) != NO_BRACKET) //if bracket
+			{
+			  groupnumber++;
+			  if (groupnumber < MAXPARTGROUPS) 
+			    { //brackRegister(bracketnumber, brackettype, staffnr, start, end)
+			      printf("start groupnumber=%d end=%d\n", groupnumber, partnumber - 1 + st->bracketSpan(braclev));
+			      brackRegister(groupnumber, st->bracket(braclev), partnumber, true, false);
+			      brackRegister(groupnumber,st->bracket(braclev), partnumber-1+st->bracketSpan(braclev), false, true); 
+			    }
+			}//end of if bracket.
+		    }//end of bracket-levels of staff
+		}//end if staff.
+	    } // end of else:not pianostaff
+	}//end of stafflist
     }//end of parts-list
 }//end of findBrackets;
+  
+
 
 void ExportLy::bracktest()
 {
@@ -1647,6 +1668,9 @@ void ExportLy::writeChord(Chord* c)
       tie=false;
     }
 
+  writeArticulation(c);
+  checkSlur(c);
+
   if (tupletcount==-1)
     {
       out << " } ";
@@ -1659,10 +1683,8 @@ void ExportLy::writeChord(Chord* c)
       graceslur=false;
     }
 
-  writeArticulation(c);
-  checkSlur(c);
-
   out << " ";
+
 }// end of writechord
 
 
@@ -2173,12 +2195,6 @@ void ExportLy::writeScore()
   gracecount=0;
 
 
-
-  if (np > 1)
-    {
-      //Number of parts???
-    }
-
   foreach(Part* part, *score->parts())
     {
       nextAnchor=0;
@@ -2189,11 +2205,6 @@ void ExportLy::writeScore()
       staffname[staffInd].partshort = part->shortName();
       curTicks=-1;
       pickup=false;
-
-      if (n > 1)
-	{//number of staffs per part?
-	  pianostaff=true;
-	}
 
       //      int staves = part->nstaves();
       int strack = score->staffIdx(part) * VOICES;
@@ -2353,31 +2364,31 @@ void ExportLy::writeScoreBlock()
   indentF();
   os << "\\relative << \n";
 
-  if (pianostaff)
-    {
-      ++level;
-      indentF();
-      os << "\\context PianoStaff <<\n";
-      indentF();
-      os << "\\set PianoStaff.instrumentName=\"Piano\" \n";
-    }
 
   indx=0;
 
   while (staffname[indx].staffid!="laststaff")
     {
 
-      if ((lybracks[indx].brak) and (lybracks[indx].brakstart))
+      if (lybracks[indx].brakstart)
 	{
 	  ++level;
 	  indentF();
 	  os << "\\context StaffGroup = " << (char)(lybracks[indx].brakno + 64) << "<< \n";  
 	}
 
-      if ((lybracks[indx].brace) and (lybracks[indx].bracestart))
+      if (lybracks[indx].bracestart)
 	{
 	  ++level;
 	  indentF();
+	  if (lybracks[indx].piano)
+	    {
+	      os << "\\context PianoStaff <<\n";
+	      indentF();
+	      os << "\\set PianoStaff.instrumentName=\"Piano\" \n";
+	      pianostaff=true;
+	    }
+	  else
 	  os << "\\context GrandStaff = " << (char)(lybracks[indx].braceno + 64) << "<< \n";  
 	}
 
@@ -2393,43 +2404,46 @@ void ExportLy::writeScoreBlock()
       else
 	os << staffname[indx].voicename[0] << "\n"; //voices are counted from 0.
 
-      if (pianostaff)
+      if (lybracks[indx].piano)
 	{
 	  indentF();
 	  os << "\\set Staff.instrumentName = #\"\"\n";
 	  indentF();
 	  os << "\\set Staff.shortInstrumentName = #\"\"\n";
 	}
+
       --level;
       indentF();
       os << ">>\n";
       
-      if ((lybracks[indx].brak) and (lybracks[indx].brakend))
+      if (((lybracks[indx].brakstart) and (lybracks[indx].brakend)) or ((lybracks[indx].bracestart) and (lybracks[indx].braceend)))
 	{
-	  --level;
+	  //if bracket or brace starts and ends on same staff: one-staff brace/bracket.
+	  indentF();
+	  os << "\\override StaffGroup.SystemStartBracket #'collapse-height = #1 \n";
+	  indentF();
+	  os << "\\override Score.SystemStartBar #'collapse-height = #1 \n";
+	}
+
+      if (lybracks[indx].brakend)
+	{  --level;
 	  indentF();
 	  os << ">> %end of StaffGroup" << (char)(lybracks[indx].brakno + 64) << "\n";   
 	}
-      if ((lybracks[indx].brace) and (lybracks[indx].braceend))
+      if (lybracks[indx].braceend)
 	{
 	  --level;
 	  indentF();
+	  if (lybracks[indx].piano)
+	  os << ">> %end of PianoStaff" << (char)(lybracks[indx].braceno + 64) << "\n";  
+	  else
 	  os << ">> %end of GrandStaff" << (char)(lybracks[indx].braceno + 64) << "\n";  
 	}
 
       ++indx;
     }
 
-  if (pianostaff)
-    {
-      --level;
-      indentF();
-      os << ">>\n";
-      // pianostaff=false;
-    }
 
-  //  indentF(); 
-  //os << "\\set Score.hairpinToBarline = ##t\n"; //default in Lilypond 2.12. no need to set it anymore.
   indentF();
   os << "\\set Score.skipBars = ##t\n";
   indentF();
@@ -2446,15 +2460,16 @@ void ExportLy::writeScoreBlock()
   --level;
   indentF();
   os << ">>\n";
-  indentF();
-  if (pianostaff)
-    os << "\\layout {#(layout-set-staff-size 20)}\n";
-  else
-  os << "\\layout {#(layout-set-staff-size 14)}\n";
+ 
+  --level;
   --level;
   indentF();
-  os <<"}\n";
+  os <<"}\n\n";
 
+  if (((pianostaff) and (indx==2)) or (indx < 2))
+    os << "#(set-global-staff-size 20)\n";
+  else if (indx > 1)
+    os << "#(set-global-staff-size 14)\n";
 }// end scoreblock
 
 
@@ -2482,7 +2497,7 @@ bool ExportLy::write(const QString& name)
   //    Page format
   //---------------------------------------------------
 
-  os << "#(set-global-staff-size 14)\n";
+
   PageFormat* pf = score->pageFormat();
   os << "#(set-default-paper-size ";
   switch(pf->size) {
@@ -2569,7 +2584,13 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------- NEWS and HISTORY:--------------------  */
-/* NEW 25.jan.2009: -- system brackets and braces for simple scores.
+/* NEW 5.feb.2009:
+   separated grandstaff (variable distance between staffs) from
+   pianostaff: constant distance between staffs to prepare for cross-staff
+   beaming (not implemented). Brackets/braces for single staffs.*/
+
+/* NEW 25.jan.2009: 
+   -- system brackets and braces for simple scores.
    Unsolved complications for multistaff instruments (piano, organ,
    harp), and for bracketing single staffs.*/
 
@@ -2627,28 +2648,23 @@ bool ExportLy::write(const QString& name)
 
 /* TODO: PROJECTS
    3. 
-   4. Lyrics
+   4. Lyrics (low priority in relation to music itself)
    5. Collisions in crowded multi-voice staffs (e.g. cello-suite).
    6. General tuplets
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
    10. fingerings, chordname; rehearsal marks as \mark in all voices.
-
-
+   11. sort out piano-staff and general multistaff-scores.
+   12. correct indentation in score-block.
+   13. cross-staff beaming in pianostaff
    - etc.etc.etc.etc........
 */
 
 /*TODO: BUGS
 
-  - if bracket/brace starts/ends on same staff, special lily commands
-    are needed to make brace/bracket visible.
-
-    - braces and brackets for scores comprising
-      multi-staff-instruments.
-
   - repeated voice/part definition in Brandeburg
 
-  - massive failure on gollywog and Bilder
+  - massive failure on gollywog and Bilder 
 
   - failure in writing double repeat (left-right) in Berlin21.
 
@@ -2663,8 +2679,6 @@ bool ExportLy::write(const QString& name)
  - metronome marks must be given as \tempo 4 = 60 and not as markups.
 
  - lacking fermata above rest.
-
- - Slurred tuplets: slur must end before end-of-tuplet-brace. 
 
  - etc. etc. etc. ad nauseam.
  */
