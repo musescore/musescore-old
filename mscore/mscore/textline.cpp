@@ -78,6 +78,7 @@ void TextLineSegment::draw(QPainter& p) const
       qreal l = 0.0;
       int sym = _segmentType == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
+            QFont f = _text->defaultFont();
             QRectF bb(_text->bbox());
             l = _text->pos().x() + bb.width() + textlineTextDistance;
             p.save();
@@ -212,7 +213,6 @@ void TextLineSegment::layout(ScoreLayout* l)
 void TextLineSegment::clearText()
       {
       if (_text) {
-printf("clear Text %p\n", this);
             delete _text;
             _text = 0;
             }
@@ -404,8 +404,7 @@ void TextLine::read(QDomElement e)
 
 LineSegment* TextLine::createLineSegment()
       {
-      LineSegment* seg = new TextLineSegment(score());
-      return seg;
+      return new TextLineSegment(score());
       }
 
 //---------------------------------------------------------
@@ -524,6 +523,8 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       connect(continueSymbolRb, SIGNAL(toggled(bool)), SLOT(continueSymbolToggled(bool)));
       connect(beginTextTb, SIGNAL(clicked()), SLOT(beginTextProperties()));
       connect(continueTextTb, SIGNAL(clicked()), SLOT(continueTextProperties()));
+
+      QFont f = tl->beginText()->defaultFont();
       }
 
 //---------------------------------------------------------

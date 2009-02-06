@@ -90,7 +90,7 @@ class TextBase {
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement e);
-      QFont defaultFont() const             { return _doc->defaultFont(); }
+      QFont defaultFont() const;
       void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
       void clear()                          { _doc->clear();              }
       void layout(double w);
