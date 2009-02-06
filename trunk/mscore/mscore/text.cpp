@@ -1358,6 +1358,16 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       frameRound->setValue(tb->frameRound());
       circleButton->setChecked(tb->circle());
       boxButton->setChecked(!tb->circle());
+
+      xOffset->setValue(tb->xoff());
+      yOffset->setValue(tb->yoff());
+      rxOffset->setValue(tb->rxoff());
+      ryOffset->setValue(tb->ryoff());
+      mmUnit->setChecked(tb->offsetType() == OFFSET_ABS);
+      spatiumUnit->setChecked(tb->offsetType() == OFFSET_SPATIUM);
+
+      mmToggled(tb->offsetType() == OFFSET_ABS);      // set suffix on spin boxes
+      connect(mmUnit, SIGNAL(toggled(bool)), SLOT(mmToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -1393,7 +1403,24 @@ void TextProperties::accept()
             a |= ALIGN_BOTTOM;
       tb->setAlign(Align(a));
       tb->doc()->setModified(true);       // force relayout
+
+      tb->setXoff(xOffset->value());
+      tb->setYoff(yOffset->value());
+      tb->setRXoff(rxOffset->value());
+      tb->setRYoff(ryOffset->value());
+      tb->setOffsetType(mmUnit->isChecked() ? OFFSET_ABS : OFFSET_SPATIUM);
+
       QDialog::accept();
       }
 
+//---------------------------------------------------------
+//   mmToggled
+//---------------------------------------------------------
+
+void TextProperties::mmToggled(bool val)
+      {
+      QString unit(val ? tr("mm", "millimeter unit") : tr("sp", "spatium unit"));
+      xOffset->setSuffix(unit);
+      yOffset->setSuffix(unit);
+      }
 
