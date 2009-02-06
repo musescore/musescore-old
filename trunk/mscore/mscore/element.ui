@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>645</width>
-    <height>198</height>
+    <height>220</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -16,22 +16,13 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>8</number>
-   </property>
-   <property name="topMargin" >
-    <number>8</number>
-   </property>
-   <property name="rightMargin" >
-    <number>8</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>8</number>
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Element</string>
+      <string comment="do not translate" >Element</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -40,16 +31,7 @@
       <property name="spacing" >
        <number>3</number>
       </property>
-      <property name="leftMargin" >
-       <number>4</number>
-      </property>
-      <property name="topMargin" >
-       <number>4</number>
-      </property>
-      <property name="rightMargin" >
-       <number>4</number>
-      </property>
-      <property name="bottomMargin" >
+      <property name="margin" >
        <number>4</number>
       </property>
       <item>
@@ -57,16 +39,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
@@ -95,7 +68,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>40</width>
             <height>20</height>
@@ -117,43 +90,34 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
          <widget class="QCheckBox" name="selected" >
           <property name="text" >
-           <string>selected</string>
+           <string comment="do not translate" >selected</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="generated" >
           <property name="text" >
-           <string>generated</string>
+           <string comment="do not translate" >generated</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="visible" >
           <property name="text" >
-           <string>visible</string>
+           <string comment="do not translate" >visible</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="systemFlag" >
           <property name="text" >
-           <string>system</string>
+           <string comment="do not translate" >system</string>
           </property>
          </widget>
         </item>
@@ -166,7 +130,7 @@
            </sizepolicy>
           </property>
           <property name="text" >
-           <string>subtype</string>
+           <string comment="do not translate" >subtype</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignRight</set>
@@ -194,7 +158,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>221</width>
             <height>20</height>
@@ -209,22 +173,13 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label" >
           <property name="text" >
-           <string>Voice</string>
+           <string comment="do not translate" >Voice</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -256,7 +211,7 @@
         <item>
          <widget class="QLabel" name="label_9" >
           <property name="text" >
-           <string>Staff</string>
+           <string comment="do not translate" >Staff</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -282,7 +237,7 @@
         <item>
          <widget class="QLabel" name="label_2" >
           <property name="text" >
-           <string>Time</string>
+           <string comment="do not translate" >Time</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -320,7 +275,7 @@
         <item>
          <widget class="QLabel" name="label_8" >
           <property name="text" >
-           <string>Len</string>
+           <string comment="do not translate" >Len</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -349,7 +304,7 @@
         <item>
          <widget class="QLabel" name="label_3" >
           <property name="text" >
-           <string>Color</string>
+           <string comment="do not translate" >Color</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -376,22 +331,13 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label_5" >
           <property name="text" >
-           <string>Pos</string>
+           <string comment="do not translate" >Pos</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -436,7 +382,7 @@
         <item>
          <widget class="QLabel" name="label_10" >
           <property name="text" >
-           <string>CPos</string>
+           <string comment="do not translate" >CPos</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -474,7 +420,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>40</width>
             <height>20</height>
@@ -485,7 +431,7 @@
         <item>
          <widget class="QLabel" name="label_6" >
           <property name="text" >
-           <string>Offset</string>
+           <string comment="do not translate" >Offset</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -546,16 +492,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
@@ -567,7 +504,7 @@
            </sizepolicy>
           </property>
           <property name="text" >
-           <string>BBox</string>
+           <string comment="do not translate" >BBox</string>
           </property>
           <property name="textFormat" >
            <enum>Qt::PlainText</enum>
@@ -647,7 +584,7 @@
         <item>
          <widget class="QLabel" name="label_11" >
           <property name="text" >
-           <string>Mag</string>
+           <string comment="do not translate" >Mag</string>
           </property>
           <property name="alignment" >
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
