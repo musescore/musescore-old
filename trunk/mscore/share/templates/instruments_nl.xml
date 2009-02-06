@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<museScore version="1.0">
+
+   <Articulation name="staccato">
+      <gateTime>85%</gateTime>
+      </Articulation>
+   <Articulation name="staccato">
+      <gateTime>50%</gateTime>
+      </Articulation>
+   <Articulation name="tenuto">
+      <gateTime>100%</gateTime>
+      </Articulation>
+
+   <instrument-group name="Houten Blaasinstrumenten">
+      <instrument>
+         <name>Piccolo</name>
+         <short-name>Picc.</short-name>
+         <transposition>12</transposition>
+         <clef>0</clef>
+         <channel>
+            <program>72</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Fluit</name>
+         <short-name>Fl.</short-name>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Altfluit</name>
+         <short-name>Altfl.</short-name>
+         <transposition>-5</transposition>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Basfluit</name>
+         <short-name>Bsfl.</short-name>
+         <transposition>-12</transposition>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Panfluit</name>
+         <short-name>Panfl.</short-name>
+         <channel>
+            <program>75</program>
+            </channel>
+         </instrument>
+      <instrument>
+           <name>Sopraanfluit</name>
+           <short-name>Sopr.fl.</short-name>
+           <clef>1</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Altfluit</name>
+           <short-name>Altfl.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Tenorfluit</name>
+           <short-name>Tenfl.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Basfluit</name>
+           <short-name>Basfl.</short-name>
+           <transposition>12</transposition>
+           <clef>4</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Hobo</name>
+         <short-name>Ho.</short-name>
+         <channel>
+            <program>68</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Engelse hoorn</name>
+         <short-name>Eng.Hrn.</short-name>
+         <transposition>-7</transposition>
+         <channel>
+            <program>69</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Klarinet</name>
+         <short-name>B<symbol name="flat"/>Kl.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>E<symbol name="flat"/> Klarinet</name>
+         <short-name>E<symbol name="flat"/>Kl.</short-name>
+         <transposition>3</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>A Klarinet</name>
+         <short-name>A Kl.</short-name>
+         <transposition>-3</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bas Klarinet</name>
+         <short-name>Bs.Kl.</short-name>
+         <transposition>-14</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Fagot</name>
+         <short-name>Fag.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>70</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Contrafagot </name>
+         <short-name>Co.fa.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>70</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Saxofoon</name>
+         <short-name>Sax.</short-name>
+         <transposition>-9</transposition>
+         <channel>
+            <program>65</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Sopraan Saxofoon</name>
+         <short-name>Sop.Sax.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>64</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Alt Saxofoon</name>
+         <short-name>Alt.Sax.</short-name>
+         <transposition>-9</transposition>
+         <channel>
+            <program>65</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tenor Saxofoon</name>
+         <short-name>Ten.Sax.</short-name>
+         <transposition>-14</transposition>
+         <clef>0</clef>
+         <channel>
+            <program>66</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bariton Saxofoon</name>
+         <short-name>Bar.Sax.</short-name>
+         <transposition>-21</transposition>
+         <channel>
+            <program>67</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bas Saxofoon</name>
+         <short-name>Bas.Sax.</short-name>
+         <transposition>-26</transposition>
+         <channel>
+            <program>67</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Koperen Blaasinstrumenten">
+      <instrument>
+         <name>Hoorn</name>
+         <short-name>Hrn.</short-name>
+         <transposition>-7</transposition>
+         <channel>
+            <program>60</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Trompet</name>
+         <short-name>B<symbol name="flat"/> Trp.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>D Trompet</name>
+         <short-name>D Trp.</short-name>
+         <transposition>2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>C Trompet</name>
+         <short-name>C Tpr.</short-name>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>E<symbol name="flat"/> Trompet</name>
+         <short-name>E<symbol name="flat"/> Trp.</short-name>
+         <transposition>3</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Gedempte Trompet</name>
+         <short-name>Ged.Trp.</short-name>
+         <channel>
+            <program>59</program>
+            </channel>
+         <channel name="unmuted">
+           <program value="56"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Cornet</name>
+         <short-name>B<symbol name="flat"/> Crn.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Bugel</name>
+         <short-name>Bug.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         <channel name="mute">
+           <program value="59"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Trombone</name>
+         <short-name>Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tenor Trombone</name>
+         <short-name>Ten.Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bas Trombone</name>
+         <short-name>Bas.Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tuba</name>
+         <short-name>Tu.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>58</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tenortuba</name>
+         <short-name>Ten.Tu.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>58</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Slaginstrumenten">
+      <instrument>
+         <name>Drumset</name>
+         <description>Drumset 3 lijnen</description>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <stafflines>3</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Drumset</name>
+         <description>Drumset 5 lijnen</description>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Triangel</name>
+         <short-name>Trgl.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="80">
+            <head>1</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Gedempte Triangle</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="81">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Open Triangle</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Pauken</name>
+         <short-name>Pkn.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>47</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Gitaren">
+      <instrument>
+         <name>Gitaar</name>
+         <short-name>Git.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>24</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Electr. Gitaar</name>
+         <short-name>E.Git.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>27</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bas Gitaar</name>
+         <short-name>B.Git.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>33</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Stemmen">
+      <instrument>
+         <name>Stem</name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Sopraan</name>
+         <short-name>Spr.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Mezzosopraan</name>
+         <short-name>Mz.Spr.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Zangstem</name>
+         <short-name>Zngst.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Alto</name>
+         <short-name>Al</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Contratenor</name>
+         <short-name>Co.ten.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tenor</name>
+         <short-name>Ten.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bariton</name>
+         <short-name>Bar.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bas</name>
+         <short-name>Bas</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Toetsinstrumenten">
+      <instrument>
+         <name>Piano</name>
+         <short-name>Pi.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Klavecimbel </name>
+         <short-name>Klav.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>6</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Orgel</name>
+         <short-name>Org.</short-name>
+         <staves>3</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>19</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Rock Orgel</name>
+         <short-name>Rck.Org.</short-name>
+         <staves>3</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>18</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Accordion</name>
+         <short-name>Acc.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <channel>
+            <program>21</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Tokkelinstrumenten">
+      <instrument>
+         <name>Harp</name>
+         <short-name>Harp</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>46</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Strijkinstrumenten">
+      <instrument>
+         <name>Viool</name>
+         <short-name>Vl.</short-name>
+         <channel>
+            <program>40</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Viool 1</name>
+         <short-name>Vl.1</short-name>
+         <channel>
+           <program value="48"/>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Viool 2</name>
+         <short-name>Vl.2</short-name>
+         <channel>
+            <program>48</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Altviool</name>
+         <short-name>Avl.</short-name>
+         <clef>11</clef>
+         <channel>
+            <program>41</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Violas</name>
+         <short-name>Vlas.</short-name>
+         <clef>11</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Violoncello</name>
+         <short-name>Vlc.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>42</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Violoncello's</name>
+         <short-name>Vlcs.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Dubbele Bas</name>
+         <short-name>Dbl.Bas.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>32</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>Contrabas</name>
+         <short-name>Cntr.Bs.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>43</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+       <instrument>
+         <name>Contrabassen</name>
+         <short-name>Ctr.bss.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         <channel name="pizzicato">
+           <program value="45"/>
+           </channel>
+         <channel name="tremolo">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      </instrument-group>
+
+   </museScore>
