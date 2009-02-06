@@ -51,18 +51,22 @@ void Ottava::setSubtype(int val)
       switch(val) {
             case 0:
                   setBeginText("8va");
+                  setContinueText("(8va)");
                   _pitchShift = 12;
                   break;
             case 1:
                   setBeginText("15ma");
+                  setContinueText("(15ma)");
                   _pitchShift = 24;
                   break;
             case 2:
                   setBeginText("8vb");
+                  setContinueText("(8vb)");
                   _pitchShift = -12;
                   break;
             case 3:
                   setBeginText("15mb");
+                  setContinueText("(15mb)");
                   _pitchShift = -24;
                   break;
             }
