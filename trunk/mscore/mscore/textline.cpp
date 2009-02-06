@@ -75,24 +75,22 @@ void TextLineSegment::draw(QPainter& p) const
       QPointF pp2(pos2());
 
       qreal l = 0.0;
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
-            if (_text) {
-                  QRectF bb(_text->bbox());
-                  l = _text->pos().x() + bb.width() + textlineTextDistance;
-                  p.save();
-                  p.translate(_text->pos());
-                  p.setPen(QPen(_text->curColor()));
-                  _text->draw(p);
-                  p.restore();
-                  }
-            else if (tl->beginSymbol() != -1) {
-                  int sym = tl->beginSymbol();
-                  const QRectF& bb = symbols[sym].bbox();
-                  qreal h = bb.height() * .5;
-                  QPointF o = tl->beginSymbolOffset() * _spatium;
-                  symbols[sym].draw(p, o.x(), h + o.y());
-                  l = bb.width() + textlineTextDistance;
-                  }
+      int sym = _segmentType == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
+      if (_text) {
+            QRectF bb(_text->bbox());
+            l = _text->pos().x() + bb.width() + textlineTextDistance;
+            p.save();
+            p.translate(_text->pos());
+            p.setPen(QPen(_text->curColor()));
+            _text->draw(p);
+            p.restore();
+            }
+      else if (sym != -1) {
+            const QRectF& bb = symbols[sym].bbox();
+            qreal h = bb.height() * .5;
+            QPointF o = tl->beginSymbolOffset() * _spatium;
+            symbols[sym].draw(p, o.x(), h + o.y());
+            l = bb.width() + textlineTextDistance;
             }
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
             if (tl->endSymbol() != -1) {
