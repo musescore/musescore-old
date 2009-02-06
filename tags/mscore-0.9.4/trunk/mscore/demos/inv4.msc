@@ -1,0 +1,2984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.9">
+  <Mag>1.0955</Mag>
+  <xoff>-5.62659</xoff>
+  <yoff>7.31208</yoff>
+  <Spatium>2</Spatium>
+  <Division>480</Division>
+  <Style>
+    <staffUpperBorder>8</staffUpperBorder>
+    <staffLowerBorder>7</staffLowerBorder>
+    <staffDistance>6.5</staffDistance>
+    <akkoladeDistance>7.5</akkoladeDistance>
+    <systemDistance>5.2</systemDistance>
+    <lyricsDistance>2</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>0</frameSystemDistance>
+    <minMeasureWidth>4</minMeasureWidth>
+    <barWidth>0.16</barWidth>
+    <doubleBarWidth>0.16</doubleBarWidth>
+    <endBarWidth>0.3</endBarWidth>
+    <doubleBarDistance>0.3</doubleBarDistance>
+    <endBarDistance>0.3</endBarDistance>
+    <bracketWidth>0.35</bracketWidth>
+    <bracketDistance>0.3</bracketDistance>
+    <clefLeftMargin>0.5</clefLeftMargin>
+    <keysigLeftMargin>0.5</keysigLeftMargin>
+    <timesigLeftMargin>0.5</timesigLeftMargin>
+    <clefKeyRightMargin>1.75</clefKeyRightMargin>
+    <stemWidth>0.13</stemWidth>
+    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
+    <minNoteDistance>0.5</minNoteDistance>
+    <measureSpacing>1.05</measureSpacing>
+    <barNoteDistance>1.5</barNoteDistance>
+    <noteBarDistance>1</noteBarDistance>
+    <staffLineWidth>0.08</staffLineWidth>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <akkoladeWidth>1.6</akkoladeWidth>
+    <prefixDistance>0.13</prefixDistance>
+    <prefixNoteDistance>0.22</prefixNoteDistance>
+    <beamWidth>0.48</beamWidth>
+    <beamDistance>0.5</beamDistance>
+    <beamMinLen>1.25</beamMinLen>
+    <beamMinSlope>0.1</beamMinSlope>
+    <beamMaxSlope>0.2</beamMaxSlope>
+    <maxBeamTicks>480</maxBeamTicks>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <dotRestDistance>0.25</dotRestDistance>
+    <dotDotDistance>0.5</dotDotDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistanceStem>0.5</propertyDistanceStem>
+    <propertyDistance>0.25</propertyDistance>
+    <pageFillLimit>0.59</pageFillLimit>
+    <lastSystemFillLimit>0.5</lastSystemFillLimit>
+    <hairpinHeight>1.2</hairpinHeight>
+    <hairpinContHeight>0.5</hairpinContHeight>
+    <hairpinWidth>0.13</hairpinWidth>
+    <showPageNumber>1</showPageNumber>
+    <showPageNumberOne>0</showPageNumberOne>
+    <pageNumberOddEven>1</pageNumberOddEven>
+    <showMeasureNumber>1</showMeasureNumber>
+    <showMeasureNumberOne>0</showMeasureNumberOne>
+    <measureNumberInterval>5</measureNumberInterval>
+    <measureNumberAllStaffs>0</measureNumberAllStaffs>
+    <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
+    <genClef>1</genClef>
+    <genKeysig>1</genKeysig>
+    <minEmptyMeasures>2</minEmptyMeasures>
+    <minMMRestWidth>4</minMMRestWidth>
+    <gateTime>70</gateTime>
+    <tenutoGateTime>100</tenutoGateTime>
+    <staccatoGateTime>40</staccatoGateTime>
+    <slurGateTime>90</slurGateTime>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>3</nom>
+      <denom>8</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="2">
+    <tempo tick="0">1.33333</tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="-1"/>
+        </keylist>
+      <bracket type="1" span="2"/>
+      <barLineSpan>2</barLineSpan>
+      </Staff>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="4"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="-1"/>
+        </keylist>
+      </Staff>
+    <trackName>Piano</trackName>
+    <Instrument>
+      <Channel name="normal">
+        <program value="0"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <VBox>
+      <height>10</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
+      <Text>
+        <subtype>Title</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Inventio 4</p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>Subtitle</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">BWV 775</p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>Composer</subtype>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J.S.Bach</p></body></html>
+          </html-data>
+        </Text>
+      </VBox>
+    <Measure number="1">
+      <Tempo>
+        <tempo>1.33333</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="0.117259" y="0.203243"/>
+        <systemFlag>1</systemFlag>
+        <frameRound>0</frameRound>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;"><span style=" font-family:'MScore1'; font-size:14pt;"></span><span style=" font-size:14pt;"> = 80</span></p></body></html>
+          </html-data>
+        </Tempo>
+      <KeySig>
+        <subtype>255</subtype>
+        </KeySig>
+      <TimeSig>
+        <subtype>200</subtype>
+        <den>8</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Beam id="1">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>1</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <Beam id="2">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>2</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <Beam id="3">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <StemDirection>up</StemDirection>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>3</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Beam id="4">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>4</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="5">
+      <Beam id="5">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>5</Beam>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="6">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>6</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <Beam id="7">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>7</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="8">
+      <Beam id="8">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>8</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <Beam id="9">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>9</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="10">
+      <Beam id="10">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>10</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="11">
+      <Beam id="11">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>11</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="12">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="13">
+      <Beam id="12">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>12</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="14">
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="15">
+      <Beam id="13">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>13</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <subtype>prall</subtype>
+          <offset x="0.445614" y="-2.22807"/>
+          </Attribute>
+        <Beam>13</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>13</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="16">
+      <Beam id="14">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>14</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="17">
+      <Beam id="15">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>15</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>15</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Beam>15</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>15</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="18">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="16">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>16</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>16</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>16</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="19">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Attribute>
+          <subtype>prall</subtype>
+          </Attribute>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="20">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="21">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="22">
+      <Beam id="17">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>17</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="23">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="18">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>18</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="24">
+      <Beam id="19">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>19</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="25">
+      <Beam id="20">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>20</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="26">
+      <Beam id="21">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>21</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="27">
+      <Beam id="22">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>22</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      </Measure>
+    <Measure number="28">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="23">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>23</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="29">
+      <Beam id="24">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>24</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="30">
+      <Beam id="25">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>25</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="31">
+      <Beam id="26">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>26</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      </Measure>
+    <Measure number="32">
+      <Beam id="27">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>27</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="33">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="28">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>28</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="34">
+      <Beam id="29">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="68" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>29</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="35">
+      <Beam id="30">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>30</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      </Measure>
+    <Measure number="36">
+      <Beam id="31">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>31</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>31</Beam>
+        <Note pitch="80" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>31</Beam>
+        <Note pitch="78" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>31</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>31</Beam>
+        <Note>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="37">
+      <Beam id="32">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>32</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>32</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Attribute>
+          <subtype>prall</subtype>
+          </Attribute>
+        <Beam>32</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>32</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="38">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="33">
+        </Beam>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Beam>33</Beam>
+        <StemDirection>down</StemDirection>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>33</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>33</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>33</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="39">
+      <Beam id="34">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>34</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>34</Beam>
+        <Note pitch="66" tpc="20"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>34</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="40">
+      <Beam id="35">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>35</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="41">
+      <Beam id="36">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="72" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>36</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="42">
+      <Beam id="37">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>37</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>37</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>37</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>37</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="43">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="38">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>38</Beam>
+        <StemDirection>down</StemDirection>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>38</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="44">
+      <Beam id="39">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>39</Beam>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="45">
+      <Beam id="40">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="82" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="81" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="79" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>40</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="46">
+      <Beam id="41">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>41</Beam>
+        <Note pitch="77" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>41</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>41</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="47">
+      <Beam id="42">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>42</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      </Measure>
+    <Measure number="48">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        </Text>
+      <Beam id="43">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>43</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>43</Beam>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Beam>43</Beam>
+        <Note pitch="73" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>43</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="49">
+      <Beam id="44">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>44</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="50">
+      <Beam id="45">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="70" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>45</Beam>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="51">
+      <Beam id="46">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>46</Beam>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>46</Beam>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>46</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>46</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>46</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="52">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Attribute>
+          </Attribute>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
+      </Measure>
+    </Staff>
+  <Staff id="2">
+    <Measure number="1">
+      <KeySig>
+        <subtype>255</subtype>
+        </KeySig>
+      <TimeSig>
+        <subtype>200</subtype>
+        <den>8</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="2">
+      <Rest>
+        <ticklen>0</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="3">
+      <Beam id="47">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>47</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <Beam id="48">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="49" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>48</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="5">
+      <Beam id="49">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>49</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>49</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>49</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <Beam id="50">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>50</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>50</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>50</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <Beam id="51">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>51</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>51</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>51</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="8">
+      <Beam id="52">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>52</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>52</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>52</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <Beam id="53">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>53</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>53</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>53</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="10">
+      <Beam id="54">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>54</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>54</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>54</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="11">
+      <Beam id="55">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>55</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="12">
+      <Beam id="56">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>56</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="13">
+      <Beam id="57">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>57</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="14">
+      <Beam id="58">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>58</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="15">
+      <Beam id="59">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>59</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="16">
+      <Beam id="60">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>60</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="17">
+      <Beam id="61">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>61</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>61</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>61</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>61</Beam>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="18">
+      <Beam id="62">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>62</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="19">
+      <Beam id="63">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>63</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="20">
+      <Beam id="64">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>64</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="21">
+      <Beam id="65">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>65</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="22">
+      <Beam id="66">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>66</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="23">
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="42" tpc="20"/>
+        </Chord>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="24">
+      <Beam id="67">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>67</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="25">
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      <Rest>
+        <ticklen>240</ticklen>
+        </Rest>
+      </Measure>
+    <Measure number="26">
+      <Beam id="68">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>68</Beam>
+        <Note pitch="41" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>68</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>68</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="27">
+      <Beam id="69">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>69</Beam>
+        <Note pitch="47" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>69</Beam>
+        <Note pitch="44" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>69</Beam>
+        <Note pitch="40" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="28">
+      <Beam id="70">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="44" tpc="22"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="47" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>70</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="29">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Attribute>
+          <subtype>prallprall</subtype>
+          </Attribute>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="30">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="31">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="32">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="33">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="34">
+      <Beam id="71">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>71</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>71</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>71</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="35">
+      <Beam id="72">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>72</Beam>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>72</Beam>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>72</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="36">
+      <Beam id="73">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>73</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>73</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>73</Beam>
+        <Note pitch="65" tpc="13"/>
+        </Chord>
+      </Measure>
+    <Measure number="37">
+      <Beam id="74">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>74</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>74</Beam>
+        <Note pitch="64" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>74</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="38">
+      <Beam id="75">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>75</Beam>
+        <Note pitch="51" tpc="11"/>
+        </Chord>
+      </Measure>
+    <Measure number="39">
+      <Beam id="76">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="42" tpc="8"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="51" tpc="11"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>76</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="40">
+      <Beam id="77">
+        </Beam>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Beam>77</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>77</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>77</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>77</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="41">
+      <Beam id="78">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>78</Beam>
+        <Note pitch="36" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>78</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>78</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      </Measure>
+    <Measure number="42">
+      <Beam id="79">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>79</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="43">
+      <Beam id="80">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>80</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      </Measure>
+    <Measure number="44">
+      <Beam id="81">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>81</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>81</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>81</Beam>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      </Measure>
+    <Measure number="45">
+      <Beam id="82">
+        </Beam>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>82</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>82</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>82</Beam>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      </Measure>
+    <Measure number="46">
+      <Beam id="83">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="50" tpc="16"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>83</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      </Measure>
+    <Measure number="47">
+      <Beam id="84">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="49" tpc="9"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>84</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="48">
+      <Beam id="85">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>85</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>85</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>85</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>85</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="49">
+      <Beam id="86">
+        </Beam>
+      <Chord>
+        <ticklen>360</ticklen>
+        <Beam>86</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>86</Beam>
+        <Note pitch="48" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>86</Beam>
+        <Note pitch="46" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>86</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="50">
+      <Beam id="87">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="43" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>87</Beam>
+        <Note pitch="52" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="51">
+      <Beam id="88">
+        </Beam>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>88</Beam>
+        <Note pitch="53" tpc="13"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Beam>88</Beam>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>88</Beam>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Beam>88</Beam>
+        <Note pitch="45" tpc="17"/>
+        </Chord>
+      </Measure>
+    <Measure number="52">
+      <Chord>
+        <ticklen>720</ticklen>
+        <Attribute>
+          <subtype>dfermata</subtype>
+          </Attribute>
+        <Note pitch="38" tpc="16"/>
+        </Chord>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
+      </Measure>
+    </Staff>
+  <cursorTrack>0</cursorTrack>
+  </museScore>

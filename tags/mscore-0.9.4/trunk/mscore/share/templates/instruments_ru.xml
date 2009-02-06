@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<museScore version="1.0">
+
+   <Articulation name="staccato">
+      <gateTime>85%</gateTime>
+      </Articulation>
+   <Articulation name="staccato">
+      <gateTime>50%</gateTime>
+      </Articulation>
+   <Articulation name="tenuto">
+      <gateTime>100%</gateTime>
+      </Articulation>
+
+   <instrument-group name="ÐÐµÑÐµÐ²ÑÐ½Ð½ÑÐµ Ð´ÑÑÐ¾Ð²ÑÐµ">
+      <instrument>
+         <name>Ð¤Ð»ÐµÐ¹ÑÐ°-Ð¿Ð¸ÐºÐºÐ¾Ð»Ð¾</name>
+         <short-name>Picc.</short-name>
+         <transposition>12</transposition>
+         <clef>0</clef>
+         <channel>
+            <program>72</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¤Ð»ÐµÐ¹ÑÐ°</name>
+         <short-name>Fl.</short-name>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»ÑÑÐ¾Ð²Ð°Ñ ÑÐ»ÐµÐ¹ÑÐ°</name>
+         <short-name>Alt. Fl.</short-name>
+         <transposition>-5</transposition>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°ÑÐ¾Ð²Ð°Ñ ÑÐ»ÐµÐ¹ÑÐ°</name>
+         <short-name>Bs. Fl.</short-name>
+         <transposition>-12</transposition>
+         <channel>
+            <program>73</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¤Ð»ÐµÐ¹ÑÐ° ÐÐ°Ð½Ð°</name>
+         <short-name>Pan Fl.</short-name>
+         <channel>
+            <program>75</program>
+            </channel>
+         </instrument>
+      <instrument>
+           <name>Ð¡Ð¾Ð¿ÑÐ°Ð½Ð¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <short-name>S.</short-name>
+           <clef>1</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>ÐÐ»ÑÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <short-name>A.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <short-name>T.</short-name>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+           <name>ÐÐ°ÑÐ¾Ð²Ð°Ñ Ð±Ð»Ð¾ÐºÑÐ»ÐµÐ¹ÑÐ°</name>
+           <short-name>B.</short-name>
+           <transposition>12</transposition>
+           <clef>4</clef>
+           <channel>
+             <program>74</program>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð±Ð¾Ð¹</name>
+         <short-name>Ob.</short-name>
+         <channel>
+            <program>68</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸Ð¹ ÑÐ¾Ð¶Ð¾Ðº</name>
+         <short-name>Eng. Hn.</short-name>
+         <transposition>-7</transposition>
+         <channel>
+            <program>69</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <short-name>B<symbol name="flat"/>Cl.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ Ð¼Ð¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <short-name>E<symbol name="flat"/>Cl.</short-name>
+         <transposition>3</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»Ð°ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ Ð»Ñ</name>
+         <short-name>A Cl.</short-name>
+         <transposition>-3</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°Ñ-ÐºÐ»Ð°ÑÐ½ÐµÑ</name>
+         <short-name>Bs. Cl.</short-name>
+         <transposition>-14</transposition>
+         <channel>
+            <program>71</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¤Ð°Ð³Ð¾Ñ</name>
+         <short-name>Bsn.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>70</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð½ÑÑÐ°ÑÐ°Ð³Ð¾Ñ</name>
+         <short-name>Cbsn.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>70</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¡Ð°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <short-name>Sax.</short-name>
+         <transposition>-9</transposition>
+         <channel>
+            <program>65</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¡Ð°ÐºÑÐ¾ÑÐ¾Ð½-ÑÐ¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <short-name>Sop. Sax.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>64</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»ÑÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <short-name>Alt. Sax.</short-name>
+         <transposition>-9</transposition>
+         <channel>
+            <program>65</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <short-name>Ten. Sax.</short-name>
+         <transposition>-14</transposition>
+         <clef>0</clef>
+         <channel>
+            <program>66</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°ÑÐ¸ÑÐ¾Ð½Ð¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <short-name>Bar. Sax.</short-name>
+         <transposition>-21</transposition>
+         <channel>
+            <program>67</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°ÑÐ¾Ð²ÑÐ¹ ÑÐ°ÐºÑÐ¾ÑÐ¾Ð½</name>
+         <short-name>Bs. Sax.</short-name>
+         <transposition>-26</transposition>
+         <channel>
+            <program>67</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="ÐÐµÐ´Ð½ÑÐµ Ð´ÑÑÐ¾Ð²ÑÐµ">
+      <instrument>
+         <name>ÐÐ°Ð»ÑÐ¾ÑÐ½Ð°</name>
+         <short-name>F Hn.</short-name>
+         <transposition>-7</transposition>
+         <channel>
+            <program>60</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <short-name>B<symbol name="flat"/> Tpt.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ ÑÐµ</name>
+         <short-name>D Tpt.</short-name>
+         <transposition>2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ Ð´Ð¾</name>
+         <short-name>C Tpt.</short-name>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÑÐ±Ð° Ð² ÑÑÑÐ¾Ðµ Ð¼Ð¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <short-name>E<symbol name="flat"/> Tpt.</short-name>
+         <transposition>3</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÑÐ±Ð° Ñ ÑÑÑÐ´Ð¸Ð½Ð¾Ð¹</name>
+         <short-name>Mt. Tpt.</short-name>
+         <channel>
+            <program>59</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾ÑÐ½ÐµÑ Ð² ÑÑÑÐ¾Ðµ ÑÐ¸-Ð±ÐµÐ¼Ð¾Ð»Ñ</name>
+         <short-name>B<symbol name="flat"/> Cnt.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¤Ð»ÑÐ³ÐµÐ»ÑÐ³Ð¾ÑÐ½</name>
+         <short-name>Flghn.</short-name>
+         <transposition>-2</transposition>
+         <channel>
+            <program>56</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <short-name>Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÐµÐ½Ð¾ÑÐ¾Ð²ÑÐ¹ ÑÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <short-name>Ten. Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°ÑÐ¾Ð²ÑÐ¹ ÑÑÐ¾Ð¼Ð±Ð¾Ð½</name>
+         <short-name>Bs. Trb.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>57</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÐ±Ð°</name>
+         <short-name>Tba.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>58</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð­ÑÑÐ¾Ð½Ð¸ÑÐ¼</name>
+         <short-name>Euph.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>58</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="ÐÐµÑÐºÑÑÑÐ¸Ñ">
+      <instrument>
+         <name>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ</name>
+         <description>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ Ð² ÑÑÐ¸ Ð»Ð¸Ð½ÐµÐ¹ÐºÐ¸</description>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <stafflines>3</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ</name>
+         <description>ÐÐ°Ð±Ð¾Ñ ÑÐ´Ð°ÑÐ½ÑÑ Ð² Ð¿ÑÑÑ Ð»Ð¸Ð½ÐµÐµÐº</description>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+         <short-name>Trgl.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="80">
+            <head>1</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>ÐÑÐ¸Ð³Ð»ÑÑÑÐ½Ð½ÑÐ¹ ÑÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="81">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>ÐÑÐºÑÑÑÑÐ¹ ÑÑÐµÑÐ³Ð¾Ð»ÑÐ½Ð¸Ðº</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¸ÑÐ°Ð²ÑÑ</name>
+         <short-name>Tymp.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>47</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="ÐÐ¸ÑÐ°ÑÑ">
+      <instrument>
+         <name>ÐÐ¸ÑÐ°ÑÐ°</name>
+         <short-name>Guit.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>24</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð­Ð»ÐµÐºÑÑÐ¾Ð³Ð¸ÑÐ°ÑÐ°</name>
+         <short-name>El. Guit.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>27</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°Ñ-Ð³Ð¸ÑÐ°ÑÐ°</name>
+         <short-name>B. Guit.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>33</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="ÐÐ¾ÐºÐ°Ð»">
+      <instrument>
+         <name>ÐÐ¾Ð»Ð¾Ñ</name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¡Ð¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <short-name>S.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐµÑÑÐ¾-ÑÐ¾Ð¿ÑÐ°Ð½Ð¾</name>
+         <short-name>Messo.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð½ÑÑÐ°Ð»ÑÑÐ¾</name>
+         <short-name>CAlt.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»ÑÑ</name>
+         <short-name>A</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð½ÑÑÑÐµÐ½Ð¾Ñ</name>
+         <short-name>CTen.</short-name>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð¢ÐµÐ½Ð¾Ñ</name>
+         <short-name>T.</short-name>
+         <clef>3</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°ÑÐ¸ÑÐ¾Ð½</name>
+         <short-name>Bar.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ°Ñ</name>
+         <short-name>B.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>52</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="ÐÐ»Ð°Ð²Ð¸ÑÐ½ÑÐµ">
+      <instrument>
+         <name>Ð¤Ð¾ÑÑÐµÐ¿Ð¸Ð°Ð½Ð¾</name>
+         <short-name>Pno.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»Ð°Ð²Ð¸ÐºÐ¾ÑÐ´</name>
+         <short-name>Hchd.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>6</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÑÐ³Ð°Ð½</name>
+         <short-name>Or.</short-name>
+         <staves>3</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>19</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Ð Ð¾Ðº-Ð¾ÑÐ³Ð°Ð½</name>
+         <short-name>Rk. Org.</short-name>
+         <staves>3</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <clef staff="3">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>18</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐºÐºÐ¾ÑÐ´ÐµÐ¾Ð½</name>
+         <short-name>Acc.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <channel>
+            <program>21</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Ð¡ÑÑÑÐ½Ð½Ð¾-ÑÐ¸Ð¿ÐºÐ¾Ð²ÑÐµ">
+      <instrument>
+         <name>ÐÑÑÐ°</name>
+         <short-name>Hrp.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>46</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Ð¡ÑÑÑÐ½Ð½Ð¾-ÑÐ¼ÑÑÐºÐ¾Ð²ÑÐµ">
+      <instrument>
+         <name>Ð¡ÐºÑÐ¸Ð¿ÐºÐ°</name>
+         <short-name>Vln.</short-name>
+         <channel>
+            <program>40</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐµÑÐ²ÑÐµ ÑÐºÑÐ¸Ð¿ÐºÐ¸</name>
+         <short-name>Vlns. 1</short-name>
+         <channel>
+           <program value="48"/>
+            </channel>
+         <channel name="Ð¿Ð¸ÑÑÐ¸ÐºÐ°ÑÐ¾">
+           <program value="45"/>
+           </channel>
+         <channel name="ÑÑÐµÐ¼Ð¾Ð»Ð¾">
+           <program value="44"/>
+           </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÑÐ¾ÑÑÐµ ÑÐºÑÐ¸Ð¿ÐºÐ¸</name>
+         <short-name>Vlns. 2</short-name>
+         <channel>
+            <program>48</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»ÑÑ</name>
+         <short-name>Vla.</short-name>
+         <clef>11</clef>
+         <channel>
+            <program>41</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ»ÑÑÑ</name>
+         <short-name>Vlas.</short-name>
+         <clef>11</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¸Ð¾Ð»Ð¾Ð½ÑÐµÐ»Ñ</name>
+         <short-name>Vlc.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>42</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¸Ð¾Ð»Ð¾Ð½ÑÐµÐ»Ð¸</name>
+         <short-name>Vlcs.</short-name>
+         <clef>4</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°Ñ</name>
+         <short-name>D.B.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>32</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°Ñ</name>
+         <short-name>C.B.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>43</program>
+            </channel>
+         </instrument>
+       <instrument>
+         <name>ÐÐ¾Ð½ÑÑÐ°Ð±Ð°ÑÑ</name>
+         <short-name>Cbs.</short-name>
+         <transposition>-12</transposition>
+         <clef>4</clef>
+         <channel>
+            <program>49</program>
+            </channel>
+         </instrument>
+      </instrument-group>
+
+   </museScore>
