@@ -22,10 +22,9 @@
 
 #include "line.h"
 #include "ui_lineproperties.h"
-#include "ui_textproperties.h"
 
 class TextLine;
-class TextBase;
+class TextB;
 class TextC;
 class Element;
 
@@ -41,8 +40,8 @@ class TextLineSegment : public LineSegment {
    public:
       TextLineSegment(Score* s);
       TextLineSegment(const TextLineSegment&);
-      virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       virtual TextLineSegment* clone() const { return new TextLineSegment(*this); }
+      virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       TextLine* textLine() const             { return (TextLine*)parent(); }
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
@@ -51,6 +50,7 @@ class TextLineSegment : public LineSegment {
       virtual void setSelected(bool f);
 
       TextC* text() const { return _text; }
+      void clearText();
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
@@ -69,17 +69,14 @@ class TextLine : public SLine {
       bool _beginHook, _endHook;
       Spatium _beginHookHeight, _endHookHeight;
 
-      bool _hasBeginText, _hasContinueText;
-
       int _beginSymbol, _continueSymbol, _endSymbol;  // -1: no symbol
       QPointF _beginSymbolOffset, _continueSymbolOffset, _endSymbolOffset;
 
       int _mxmlOff2;
 
    protected:
-      TextBase* _beginText;
-      TextBase* _continueText;
-      Align _beginTextAlign, _continueTextAlign;
+      TextC* _beginText;
+      TextC* _continueText;
       friend class TextLineSegment;
 
    public:
@@ -87,29 +84,23 @@ class TextLine : public SLine {
       TextLine(const TextLine&);
       ~TextLine() {}
 
-      virtual TextLine* clone() const      { return new TextLine(*this); }
-      virtual ElementType type() const     { return TEXTLINE; }
+      virtual TextLine* clone() const           { return new TextLine(*this); }
+      virtual ElementType type() const          { return TEXTLINE; }
       virtual LineSegment* createLineSegment();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      bool hasBeginText() const               { return _hasBeginText;         }
-      void setHasBeginText(bool v)            { _hasBeginText = v;            }
-      bool hasContinueText() const            { return _hasContinueText;      }
-      void setHasContinueText(bool v)         { _hasContinueText = v;         }
-      void setBeginText(const QString& s);
-      QString beginText() const;
       bool beginHook() const                  { return _beginHook;            }
       bool endHook() const                    { return _endHook;              }
       void setBeginHook(bool v)               { _beginHook = v;               }
       void setEndHook(bool v)                 { _endHook = v;                 }
 
-      TextBase* beginTextBase() const         { return _beginText;            }
-      void setBeginTextBase(TextBase* v)      { _beginText = v;               }
-      TextBase* continueTextBase() const      { return _continueText;         }
-      void setContinueTextBase(TextBase* v)   { _continueText = v;            }
-      TextBase** beginTextBasePtr()           { return &_beginText;           }
-      TextBase** continueTextBasePtr()        { return &_continueText;        }
+      void setBeginText(const QString& s);
+      void setContinueText(const QString& s);
+      TextC* beginText() const                { return _beginText;            }
+      void setBeginText(TextC* v)             { _beginText = v;               }
+      TextC* continueText() const             { return _continueText;         }
+      void setContinueText(TextC* v)          { _continueText = v;            }
 
       void setBeginSymbol(int v)              { _beginSymbol = v;             }
       void setContinueSymbol(int v)           { _continueSymbol = v;          }
@@ -136,10 +127,6 @@ class TextLine : public SLine {
       void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
       void setMxmlOff2(int v)                 { _mxmlOff2 = v;                }
       int mxmlOff2() const                    { return _mxmlOff2;             }
-      Align beginTextAlign() const            { return _beginTextAlign;       }
-      Align continueTextAlign() const         { return _continueTextAlign;    }
-      void setBeginTextAlign(Align v)         { _beginTextAlign = v;          }
-      void setContinueTextAlign(Align v)      { _continueTextAlign = v;       }
       };
 
 //---------------------------------------------------------
@@ -162,22 +149,6 @@ class LineProperties : public QDialog, public Ui::LinePropertiesDialog {
 
    public:
       LineProperties(TextLine*, QWidget* parent = 0);
-      };
-
-//---------------------------------------------------------
-//   TextProperties
-//---------------------------------------------------------
-
-class TextProperties : public QDialog, public Ui::TextProperties {
-      Q_OBJECT
-      TextBase* tb;
-      Align* align;
-
-   private slots:
-      virtual void accept();
-
-   public:
-      TextProperties(TextBase*, Align*, QWidget* parent = 0);
       };
 
 #endif

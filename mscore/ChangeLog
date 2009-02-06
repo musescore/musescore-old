@@ -1,3 +1,7 @@
+6.feb (ws)
+      - moved functionality from text palette (F2) to a context toolbar "edit tools"
+        and to "text properties" dialog
+      ======== Version 0.9.4 released =============
 6.feb (tb)
       - updated Dutch translation and instruments by Jaap Plaisier
 5.feb (ws)

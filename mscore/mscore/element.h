@@ -345,8 +345,6 @@ class Element {
                 || type() == LYRICS
                 || type() == DYNAMIC
                 || type() == HARMONY
-                || type() == OTTAVA_SEGMENT
-                || type() == OTTAVA
                 || type() == MARKER
                 || type() == JUMP
                 || type() == STAFF_TEXT

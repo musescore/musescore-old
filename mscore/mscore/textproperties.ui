@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>449</width>
-    <height>301</height>
+    <height>318</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -346,7 +346,7 @@
         </size>
        </property>
        <property name="toolTip" >
-        <string>frame color</string>
+        <string>text color</string>
        </property>
       </widget>
      </item>
@@ -412,6 +412,9 @@
           <property name="toolTip" >
            <string>frame line width</string>
           </property>
+          <property name="suffix" >
+           <string>mm</string>
+          </property>
          </widget>
         </item>
         <item row="0" column="2" >
@@ -425,6 +428,9 @@
          <widget class="QDoubleSpinBox" name="paddingWidth" >
           <property name="toolTip" >
            <string>frame inner margin</string>
+          </property>
+          <property name="suffix" >
+           <string>mm</string>
           </property>
          </widget>
         </item>

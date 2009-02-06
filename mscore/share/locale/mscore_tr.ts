@@ -4698,7 +4698,7 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5762,20 +5762,20 @@ kaydetmek ister misiniz?</translation>
         <source>pt_BR Brasilian Portuguese</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Default duration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6433,6 +6433,13 @@ başarısız:</translation>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6509,88 +6516,8 @@ başarısız:</translation>
         <translation>Metin</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation>sola dayalı</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>ortalı</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>sağa dayalı</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>kalın</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>italik</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>altı çizili</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>altta</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>üstte</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Boyut:</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>font büyüklüğü</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Aile:</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>font ailesini seçin</translation>
-    </message>
-    <message>
         <source>Frame</source>
         <translation>Çerçeve</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Çember</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Dikdörtgen</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>çerçeve eni</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>çerçeve rengi</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>boşluk eni</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>çerçeve çevresi</translation>
     </message>
 </context>
 <context>
@@ -6609,7 +6536,7 @@ başarısız:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Büyüklük:</translation>
     </message>
     <message>
         <source>Style:</source>
@@ -6718,6 +6645,14 @@ başarısız:</translation>
     <message>
         <source>align left</source>
         <translation type="unfinished">sola dayalı</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
 </context>
 <context>
@@ -6884,6 +6819,13 @@ başarısız:</translation>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
         <translation>Yine bir gülnihal, Aldı bu gönlümü...</translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -30,7 +30,6 @@
 #include "rest.h"
 #include "score.h"
 #include "slur.h"
-#include "padstate.h"
 #include "system.h"
 #include "select.h"
 #include "sig.h"
@@ -296,7 +295,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             if (e == 0) {
                   selState = SEL_NONE;
                   if (!noteEntryMode())
-                        _padState.len = 0;
+                        _is.len = 0;
                   updateAll = true;
                   }
             else {
@@ -314,7 +313,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         if (e->type() == NOTE)
                               cr = static_cast<ChordRest*>(e->parent());
-                        _is.setPos(cr->tick());
+//                        _is.setPos(cr->tick());
                         _is.cr = cr;
                         emit posChanged(_is.pos());
                         }
@@ -343,7 +342,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   updateAll = true;
                   selState = SEL_SYSTEM;
                   updateSelectedElements(selState);
-                  _padState.len = 0;
+                  _is.len = 0;
                   }
             else {
                   if (sel->state() == SEL_STAFF || sel->state() == SEL_SYSTEM) {
@@ -353,7 +352,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   else {
                         refresh |= e->abbox();
                         sel->add(e);
-                        _padState.len = 0;
+                        _is.len = 0;
                         selState = SEL_MULT;
                         }
                   }
@@ -524,7 +523,7 @@ printf("select: TODO\n");
 
             selState = SEL_STAFF;
             updateSelectedElements(selState);
-            _padState.len = 0;
+            _is.len = 0;
             }
 
       sel->setState(selState);

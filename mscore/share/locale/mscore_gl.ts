@@ -4698,7 +4698,7 @@ before closing?</source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5762,20 +5762,20 @@ before closing?</source>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>pt_BR Portugués do Brasil</translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Default duration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6430,6 +6430,13 @@ fallou:</translation>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6506,88 +6513,8 @@ fallou:</translation>
         <translation>Texto</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation>aliñar á esquerda</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>centrar</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>aliñar á dereita</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>negra</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>cursiva</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>subliñar</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>superíndice</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>subíndice</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Tamaño:</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>tamaño do tipo de letra</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Familia:</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>seleccionar a familia tipográfica</translation>
-    </message>
-    <message>
         <source>Frame</source>
         <translation>Moldura</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Círculo</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Rectángulo</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>anchura da moldura</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>cor da moldura</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>anchura do recheo</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>bordos arredondados da moldura</translation>
     </message>
 </context>
 <context>
@@ -6715,6 +6642,14 @@ fallou:</translation>
     <message>
         <source>align left</source>
         <translation type="unfinished">aliñar á esquerda</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
 </context>
 <context>
@@ -6881,6 +6816,13 @@ fallou:</translation>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
         <translation>Bailemos nos ja todas tres, ai amigas,...</translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

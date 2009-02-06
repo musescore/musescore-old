@@ -39,6 +39,17 @@ LineSegment::LineSegment(Score* s)
       _system = 0;
       }
 
+LineSegment::LineSegment(const LineSegment& s)
+   : Element(s)
+      {
+      _p2          = s._p2;
+      _userOff2    = s._userOff2;
+      r1           = s.r1;
+      r2           = s.r2;
+      _segmentType = s._segmentType;
+      _system      = s._system;
+      }
+
 //---------------------------------------------------------
 //   updateGrips
 //---------------------------------------------------------
@@ -207,6 +218,15 @@ SLine::SLine(Score* s)
       setTick(0);
       _tick2 = 0;
       _diagonal = false;
+      }
+
+SLine::SLine(const SLine& s)
+   : Element(s)
+      {
+      _tick2    = s._tick2;
+      _diagonal = s._diagonal;
+      foreach(LineSegment* ls, s.segments)
+            add(ls->clone());
       }
 
 //---------------------------------------------------------
@@ -443,22 +463,6 @@ void SLine::setLen(double l)
       LineSegment* s = segments.front();
       s->setPos(QPointF());
       s->setPos2(QPointF(l, 0));
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void SLine::draw(QPainter& p) const
-      {
-      QList<const Element*> el;
-      collectElements(el);
-      foreach(const Element* e, el) {
-            p.save();
-            p.translate(e->pos());
-            e->draw(p);
-            p.restore();
-            }
       }
 
 //---------------------------------------------------------

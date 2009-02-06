@@ -1773,9 +1773,9 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
 
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((p.y() > 0.0) ? "below" : "above"));
-      if (tl->hasBeginText()) {
+      if (tl->beginText()) {
             xml.stag("direction-type");
-            xml.tag("words", tl->beginText());
+            xml.tag("words", tl->beginText()->getText());
             xml.etag();
             }
       xml.stag("direction-type");

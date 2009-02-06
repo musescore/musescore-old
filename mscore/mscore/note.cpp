@@ -689,7 +689,7 @@ void ShadowNote::draw(QPainter& p) const
 //      if (c.intersects(r)) {
             p.translate(ap);
             qreal lw = point(score()->style()->ledgerLineWidth);
-            PadState* ps = score()->padState();
+            InputState* ps = score()->inputState();
             int voice;
             if (ps->drumNote != -1 && ps->drumset)
                   voice = ps->drumset->voice(ps->drumNote);
@@ -970,7 +970,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
-                  int len       = score()->padState()->tickLen;
+                  int len       = score()->inputState()->tickLen;
                   Direction dir = c->stemDirection();
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);

@@ -66,6 +66,7 @@ QIcon windowIcon;
 
 QIcon acciaccaturaIcon, appoggiaturaIcon;
 QIcon grace4Icon, grace16Icon, grace32Icon;
+QIcon keysIcon;
 
 //---------------------------------------------------------
 //   symIcon
@@ -186,5 +187,6 @@ void genIcons()
       grace4Icon     = QIcon(":/data/grace4.svg");
       grace16Icon    = QIcon(":/data/grace16.svg");
       grace32Icon    = QIcon(":/data/grace32.svg");
+      keysIcon       = QIcon(":/data/keyboard.svg");
       }
 

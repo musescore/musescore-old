@@ -25,7 +25,6 @@
 #include "key.h"
 #include "sig.h"
 #include "clef.h"
-#include "padstate.h"
 #include "score.h"
 #include "slur.h"
 #include "hairpin.h"
@@ -360,7 +359,7 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 
 void Score::putNote(const QPointF& pos, bool replace)
       {
-      int len            = _padState.tickLen;
+      int len            = _is.tickLen;
       bool divideSegment = len >= (division/2);
       Position p;
       if (!getPosition(&p, pos, divideSegment)) {
@@ -376,14 +375,14 @@ void Score::putNote(const QPointF& pos, bool replace)
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key);
       Instrument* instr       = st->part()->instrument();
-      int voice               = _padState.voice;
+      int voice               = _is.voice;
       int track               = staffIdx * VOICES + voice;
       int headGroup           = 0;
       Direction stemDirection = AUTO;
 
       if (instr->useDrumset) {
             Drumset* ds   = instr->drumset;
-            pitch         = _padState.drumNote;
+            pitch         = _is.drumNote;
             if (pitch < 0)
                   return;
             voice         = ds->voice(pitch);
@@ -400,7 +399,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       int tl = len;
       if (_is.cr->tuplet())
             tl = _is.cr->tickLen();
-      if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_padState.rest) {
+      if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
             if (note)
@@ -424,15 +423,15 @@ void Score::putNote(const QPointF& pos, bool replace)
             if (cr && cr->tuplet())
                   setTupletChordRest(cr, pitch, len);
             else {
-                  if (_padState.rest)
-                        setRest(tick, track, len, _padState.dots);
+                  if (_is.rest)
+                        setRest(tick, track, len, _is.dots);
                   else
                         setNote(tick, track, pitch, len, headGroup, stemDirection);
                   }
             }
       setInputTrack(staffIdx * VOICES + voice);
-      _padState.pitch = pitch;
-      _is.setPos(tick + len);
+      _is.pitch = pitch;
+//      _is.setPos(tick + len);
       emit posChanged(_is.pos());
       }
 
@@ -1399,7 +1398,7 @@ void Score::cmdCreateTuplet(ChordRest* cr, Tuplet* tuplet)
 
 void Score::changeVoice(int voice)
       {
-      _padState.voice = voice;
+      _is.voice = voice;
       if (_is.track % VOICES != voice) {
             setInputTrack((_is.track / VOICES) * VOICES + voice);
             layoutAll = true;
@@ -1643,14 +1642,14 @@ void Score::cmdEnterRest()
             }
       ChordRest* cr = _is.cr;
       if (cr->tuplet()) {
-            setTupletChordRest(cr, -1, _padState.tickLen);
+            setTupletChordRest(cr, -1, _is.tickLen);
             }
       else {
-            setRest(_is.pos(), _is.track, _padState.tickLen, _padState.dots);
-            _is.setPos(_is.pos() + _padState.tickLen);
+            setRest(_is.pos(), _is.track, _is.tickLen, _is.dots);
+//            _is.setPos(_is.pos() + _is.tickLen);
             emit posChanged(_is.pos());
             }
-      _padState.rest = false;  // continue with normal note entry
+      _is.rest = false;  // continue with normal note entry
       }
 
 //---------------------------------------------------------
@@ -1754,7 +1753,7 @@ void Score::updateEntryMode()
 
 void Score::setPos(int tick)
       {
-      _is.setPos(tick);
+//      _is.setPos(tick);
       emit posChanged(tick);
       updateEntryMode();
       }

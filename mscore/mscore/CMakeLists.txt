@@ -88,6 +88,7 @@ QT4_WRAP_CPP (mocs
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
+      text.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)

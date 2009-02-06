@@ -23,29 +23,33 @@
 
 class Slur;
 class ChordRest;
+struct Drumset;
 
 //---------------------------------------------------------
 //   InputState
 //---------------------------------------------------------
 
 class InputState {
-      int _pos;
-
    public:
+      int dots;
+      int len;
+      int tickLen;  // len + len * (dot ? .5 : 0)
+      bool rest;
+      int pad;
+      int voice;
+      int pitch;
+      int prefix;
+      NoteType noteType;
+      BeamMode beamMode;
+      int drumNote;
+      Drumset* drumset;
       int track;
       bool noteEntryMode;
       Slur* slur;
       ChordRest* cr;
 
-      InputState() {
-            track         = 0;
-            _pos          = 0;
-            noteEntryMode = false;
-            slur          = 0;
-            cr            = 0;
-            }
-      int pos() const      { return _pos; }
-      void setPos(int val) { _pos = val; }
+      InputState();
+      int pos() const;
       };
 
 #endif

@@ -79,6 +79,7 @@
 // #include <QtGui/QX11Info>
 #endif
 #include <QtGui/QFontDatabase>
+#include <QtGui/QFontComboBox>
 #include <QtGui/QApplication>
 #include <QtGui/QToolTip>
 #include <QtCore/QProcess>

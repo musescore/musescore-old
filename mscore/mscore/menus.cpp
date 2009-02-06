@@ -298,7 +298,6 @@ void MuseScore::showPalette(bool visible)
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setBeginText("VII");
-            textLine->setHasBeginText(true);
             textLine->setEndHook(true);
             textLine->setEndHookHeight(Spatium(1.5));
             sp->append(textLine, tr("text line"));
@@ -883,7 +882,6 @@ void MuseScore::lineMenu()
 
             TextLine* textLine = new TextLine(gscore);
             textLine->setBeginText("VII");
-            textLine->setHasBeginText(true);
             sp->append(textLine, tr("text line"));
             textLine->setEndHook(true);
             textLine->setEndHookHeight(Spatium(1.5));
@@ -1140,7 +1138,7 @@ void MuseScore::updateDrumset()
       if (cs == 0 || paletteBox == 0 || drumPalette == 0)
             return;
 
-      PadState* padState = cs->padState();
+      InputState* padState = cs->inputState();
       Drumset* ds        = padState->drumset;
       if (ds != drumset) {
             drumset = ds;
@@ -1213,7 +1211,7 @@ void MuseScore::drumPaletteSelected(int idx)
       {
       if (cs == 0)
             return;
-      PadState* padState = cs->padState();
+      InputState* padState = cs->inputState();
       Drumset* ds        = padState->drumset;
       if (ds == 0)
             return;

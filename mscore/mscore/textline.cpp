@@ -42,25 +42,7 @@ TextLineSegment::TextLineSegment(Score* s)
 TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
-      _text = seg._text;
-      }
-
-//---------------------------------------------------------
-//   setBeginText
-//---------------------------------------------------------
-
-void TextLine::setBeginText(const QString& s)
-      {
-      _beginText->setText(s, 0);
-      }
-
-//---------------------------------------------------------
-//   beginText
-//---------------------------------------------------------
-
-QString TextLine::beginText() const
-      {
-      return _beginText->getText();
+      _text = 0;  // will be set right in layout()
       }
 
 //---------------------------------------------------------
@@ -72,10 +54,10 @@ void TextLineSegment::setSelected(bool f)
       Element::setSelected(f);
       if (_text) {
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
-                  if (textLine()->hasBeginText())
+                  if (textLine()->beginText())
                         _text->setSelected(f);
                   }
-            else if (textLine()->hasContinueText())
+            else if (textLine()->continueText())
                   _text->setSelected(f);
             }
       }
@@ -94,7 +76,7 @@ void TextLineSegment::draw(QPainter& p) const
 
       qreal l = 0.0;
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
-            if (_text && tl->hasBeginText()) {
+            if (_text) {
                   QRectF bb(_text->bbox());
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
                   p.save();
@@ -160,7 +142,7 @@ QRectF TextLineSegment::bbox() const
       QPointF pp1;
       QPointF pp2(pos2());
 
-      if (!textLine()->hasBeginText() && pp2.y() != 0)
+      if (!_text && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
       qreal h1 = textLine()->lineWidth().point();
       int sym = textLine()->beginSymbol();
@@ -193,15 +175,12 @@ void TextLineSegment::layout(ScoreLayout* l)
       switch (_segmentType) {
             case SEGMENT_SINGLE:
             case SEGMENT_BEGIN:
-                  if (tl->hasBeginText()) {
-                        setAlign(tl->beginTextAlign());
+                  if (tl->beginText()) {
                         if (_text == 0) {
-                              _text = new TextC(tl->beginTextBasePtr(), score());
-                              _text->setSubtype(TEXT_TEXTLINE);
+                              _text = new TextC(*tl->beginText());
                               _text->setMovable(false);
                               _text->setParent(this);
                               }
-                        _text->layout(l);
                         }
                   else if (_text) {
                         delete _text;
@@ -210,21 +189,33 @@ void TextLineSegment::layout(ScoreLayout* l)
                   break;
             case SEGMENT_MIDDLE:
             case SEGMENT_END:
-                  if (tl->hasContinueText()) {
-                        setAlign(tl->continueTextAlign());
+                  if (tl->continueText()) {
                         if (_text == 0) {
-                              _text = new TextC(tl->continueTextBasePtr(), score());
-                              _text->setSubtype(TEXT_TEXTLINE);
+                              _text = new TextC(*tl->continueText());
                               _text->setMovable(false);
                               _text->setParent(this);
                               }
-                        _text->layout(l);
                         }
                   else if (_text) {
                         delete _text;
                         _text = 0;
                         }
                   break;
+            }
+      if (_text)
+            _text->layout(l);
+      }
+
+//---------------------------------------------------------
+//   clearText
+//---------------------------------------------------------
+
+void TextLineSegment::clearText()
+      {
+      if (_text) {
+printf("clear Text %p\n", this);
+            delete _text;
+            _text = 0;
             }
       }
 
@@ -235,12 +226,8 @@ void TextLineSegment::layout(ScoreLayout* l)
 TextLine::TextLine(Score* s)
    : SLine(s)
       {
-      _beginText         = new TextBase;
-      _continueText      = new TextBase;
-      _beginTextAlign    = 0;
-      _continueTextAlign = 0;
-      _hasBeginText      = false;
-      _hasContinueText   = false;
+      _beginText         = 0;
+      _continueText      = 0;
 
       _beginHookHeight = Spatium(1.5);
       _endHookHeight   = Spatium(1.5);
@@ -256,9 +243,6 @@ TextLine::TextLine(Score* s)
       _continueSymbol = -1;
       _endSymbol      = -1;
 
-      _beginText->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
-      _continueText->setDefaultFont(score()->textStyle(TEXT_STYLE_TEXTLINE)->font());
-
       setLen(_spatium * 7);   // for use in palettes
       }
 
@@ -272,18 +256,47 @@ TextLine::TextLine(const TextLine& e)
       _endHook              = e._endHook;
       _beginHookHeight      = e._beginHookHeight;
       _endHookHeight        = e._endHookHeight;
-      _hasBeginText         = e._hasBeginText;
-      _hasContinueText      = e._hasContinueText;
       _beginSymbol          = e._beginSymbol;
       _continueSymbol       = e._continueSymbol;
       _endSymbol            = e._endSymbol;
       _beginSymbolOffset    = e._beginSymbolOffset;
       _continueSymbolOffset = e._continueSymbolOffset;
       _endSymbolOffset      = e._endSymbolOffset;
-      _beginTextAlign       = e._beginTextAlign;
-      _continueTextAlign    = e._continueTextAlign;
+      _mxmlOff2             = e._mxmlOff2;
+      _beginText            = 0;
+      _continueText         = 0;
+      if (e._beginText)
+            _beginText = e._beginText->clone(); // deep copy
+      if (e._continueText)
+            _continueText = e._continueText->clone();
+      }
 
-      _mxmlOff2   = e._mxmlOff2;
+//---------------------------------------------------------
+//   setBeginText
+//---------------------------------------------------------
+
+void TextLine::setBeginText(const QString& s)
+      {
+      if (!_beginText) {
+            _beginText = new TextC(score());
+            _beginText->setSubtype(TEXT_TEXTLINE);
+            _beginText->setParent(this);
+            }
+      _beginText->setText(s);
+      }
+
+//---------------------------------------------------------
+//   setContinueText
+//---------------------------------------------------------
+
+void TextLine::setContinueText(const QString& s)
+      {
+      if (!_continueText) {
+            _continueText = new TextC(score());
+            _continueText->setSubtype(TEXT_TEXTLINE);
+            _continueText->setParent(this);
+            }
+      _continueText->setText(s);
       }
 
 //---------------------------------------------------------
@@ -303,12 +316,12 @@ void TextLine::write(Xml& xml) const
       xml.tag("lineColor", _lineColor);
 
       SLine::writeProperties(xml);
-      if (_hasBeginText) {
+      if (_beginText) {
             xml.stag("beginText");
             _beginText->writeProperties(xml);
             xml.etag();
             }
-      if (_hasContinueText) {
+      if (_continueText) {
             xml.stag("continueText");
             _continueText->writeProperties(xml);
             xml.etag();
@@ -366,14 +379,16 @@ void TextLine::read(QDomElement e)
             else if (tag == "lineColor")
                   _lineColor = readColor(e);
             else if (tag == "beginText") {
-                  _hasBeginText = true;
+                  _beginText = new TextC(score());
+                  _beginText->setSubtype(TEXT_TEXTLINE);
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (!_beginText->readProperties(ee))
                               domError(e);
                         }
                   }
             else if (tag == "continueText") {
-                  _hasContinueText = true;
+                  _continueText = new TextC(score());
+                  _continueText->setSubtype(TEXT_TEXTLINE);
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (!_continueText->readProperties(ee))
                               domError(e);
@@ -412,8 +427,17 @@ bool TextLineSegment::genPropertyMenu(QMenu* popup) const
 void TextLineSegment::propertyAction(const QString& s)
       {
       if (s == "props") {
-            LineProperties lp(textLine(), 0);
-            lp.exec();
+            TextLine* nTl  = textLine()->clone();
+            LineProperties lp(nTl);
+            if (lp.exec()) {
+                  score()->undoChangeElement(textLine(), nTl);
+                  // force new text
+                  foreach(LineSegment* l, nTl->lineSegments()) {
+                        static_cast<TextLineSegment*>(l)->clearText();
+                        }
+                  }
+            else
+                  delete nTl;
             }
       else
             Element::propertyAction(s);
@@ -432,6 +456,10 @@ static void populateLineSymbolComboBox(QComboBox* cb)
       cb->addItem(QComboBox::tr("dash (Pedal)"), pedaldashSym);
       cb->addItem(QComboBox::tr("tr (Trill)"), trillSym);
       }
+
+//---------------------------------------------------------
+//   setLineSymbolComboBox
+//---------------------------------------------------------
 
 static void setLineSymbolComboBox(QComboBox* cb, int sym)
       {
@@ -464,14 +492,14 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
       linecolor->setColor(tl->lineColor());
 
-      beginTextRb->setChecked(tl->hasBeginText());
-      continueTextRb->setChecked(tl->hasContinueText());
+      beginTextRb->setChecked(tl->beginText());
+      continueTextRb->setChecked(tl->continueText());
       beginSymbolRb->setChecked(tl->beginSymbol() != -1);
       continueSymbolRb->setChecked(tl->continueSymbol() != -1);
       endSymbolRb->setChecked(tl->endSymbol() != -1);
 
-      beginText->setText(tl->beginTextBase()->getText());
-      continueText->setText(tl->continueTextBase()->getText());
+      beginText->setText(tl->beginText() ? tl->beginText()->getText() : "");
+      continueText->setText(tl->continueText() ? tl->continueText()->getText() : "");
 
       setLineSymbolComboBox(beginSymbol, tl->beginSymbol());
       setLineSymbolComboBox(continueSymbol, tl->continueSymbol());
@@ -490,18 +518,7 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endHookHeight->setValue(tl->endHookHeight().val());
 
       diagonal->setChecked(tl->diagonal());
-#if 0
-      TextBase* tb = tl->textBase();
-      if (tb->frameWidth()) {
-            frame->setChecked(true);
-            frameWidth->setValue(tb->frameWidth());
-            frameMargin->setValue(tb->paddingWidth());
-            frameColor->setColor(tb->frameColor());
-            frameCircled->setChecked(tb->circle());
-            }
-      else
-            frame->setChecked(false);
-#endif
+
       connect(beginTextRb, SIGNAL(toggled(bool)), SLOT(beginTextToggled(bool)));
       connect(beginSymbolRb, SIGNAL(toggled(bool)), SLOT(beginSymbolToggled(bool)));
       connect(continueTextRb, SIGNAL(toggled(bool)), SLOT(continueTextToggled(bool)));
@@ -524,8 +541,16 @@ void LineProperties::accept()
       tl->setBeginHook(beginHook->isChecked());
       tl->setEndHookHeight(Spatium(endHookHeight->value()));
       tl->setEndHook(endHook->isChecked());
-      tl->setHasBeginText(beginTextRb->isChecked());
-      tl->setHasContinueText(continueTextRb->isChecked());
+
+      if (beginTextRb->isChecked())
+            tl->setBeginText(beginText->text());
+      else
+            tl->setBeginText("");
+
+      if (continueTextRb->isChecked())
+            tl->setContinueText(continueText->text());
+      else
+            tl->setContinueText("");
 
       int sym = beginSymbol->itemData(beginSymbol->currentIndex()).toInt();
       tl->setBeginSymbol(beginSymbolRb->isChecked() ? sym : -1);
@@ -536,27 +561,11 @@ void LineProperties::accept()
       sym = endSymbol->itemData(endSymbol->currentIndex()).toInt();
       tl->setEndSymbol(endSymbolRb->isChecked() ? sym : -1);
 
-      tl->beginTextBase()->setText(beginText->text(), 0);
-      tl->continueTextBase()->setText(continueText->text(), 0);
-
       tl->setBeginSymbolOffset(QPointF(beginSymbolX->value(), beginSymbolY->value()));
       tl->setContinueSymbolOffset(QPointF(continueSymbolX->value(), continueSymbolY->value()));
       tl->setEndSymbolOffset(QPointF(endSymbolX->value(), endSymbolY->value()));
 
       tl->setDiagonal(diagonal->isChecked());
-
-#if 0
-      TextBase* tb = tl->textBase();
-      if (frame->isChecked()) {
-            tb->setFrameWidth(frameWidth->value());
-            tb->setPaddingWidth(frameMargin->value());
-            tb->setFrameColor(frameColor->color());
-            tb->setCircle(frameCircled->isChecked());
-            }
-      else
-            tb->setFrameWidth(0.0);
-#endif
-
       QDialog::accept();
       }
 
@@ -606,10 +615,18 @@ void LineProperties::continueSymbolToggled(bool val)
 
 void LineProperties::beginTextProperties()
       {
-      Align a = tl->beginTextAlign();
-      TextProperties t(tl->beginTextBase(), &a, this);
-      tl->setBeginTextAlign(a);
-      t.exec();
+      TextProperties t(tl->beginText(), this);
+      if (t.exec()) {
+            foreach(LineSegment* ls, tl->lineSegments()) {
+                  if (ls->segmentType() != SEGMENT_SINGLE && ls->segmentType() != SEGMENT_BEGIN)
+                        continue;
+                  TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
+                  if (!tls->text())
+                        continue;
+                  TextC* t = tls->text();
+                  t->setColor(tl->beginText()->color());
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -618,102 +635,17 @@ void LineProperties::beginTextProperties()
 
 void LineProperties::continueTextProperties()
       {
-      Align a = tl->continueTextAlign();
-      TextProperties t(tl->continueTextBase(), &a, this);
-      tl->setContinueTextAlign(a);
-      t.exec();
-      }
-
-//---------------------------------------------------------
-//   TextProperties
-//---------------------------------------------------------
-
-TextProperties::TextProperties(TextBase* t, Align* al, QWidget* parent)
-   : QDialog(parent)
-      {
-      setupUi(this);
-
-      tb = t;
-      align = al;
-
-      QButtonGroup* g1 = new QButtonGroup(this);
-      g1->addButton(alignLeft);
-      g1->addButton(alignHCenter);
-      g1->addButton(alignRight);
-
-      QButtonGroup* g2 = new QButtonGroup(this);
-      g2->addButton(alignTop);
-      g2->addButton(alignVCenter);
-      g2->addButton(alignBottom);
-
-      QButtonGroup* g3 = new QButtonGroup(this);
-      g3->addButton(circleButton);
-      g3->addButton(boxButton);
-
-      int a = int(*align);
-      if (a & ALIGN_HCENTER)
-            alignHCenter->setChecked(true);
-      else if (a & ALIGN_RIGHT)
-            alignRight->setChecked(true);
-      else
-            alignLeft->setChecked(true);
-
-      if (a & ALIGN_VCENTER)
-            alignVCenter->setChecked(true);
-      else if (a & ALIGN_BOTTOM)
-            alignBottom->setChecked(true);
-      else
-            alignTop->setChecked(true);
-
-      QFont f = tb->defaultFont();
-      fontBold->setChecked(f.bold());
-      fontItalic->setChecked(f.italic());
-      fontUnderline->setChecked(f.underline());
-
-      double ps = double(f.pixelSize());
-      ps = (ps / DPI) * PPI;
-      fontSize->setValue(lrint(ps));
-      f.setPixelSize(lrint(ps));
-      fontSelect->setCurrentFont(f);
-
-      frameWidth->setValue(tb->frameWidth());
-      frame->setChecked(tb->frameWidth() > 0.0);
-      paddingWidth->setValue(tb->paddingWidth());
-      frameColor->setColor(tb->frameColor());
-      frameRound->setValue(tb->frameRound());
-      circleButton->setChecked(tb->circle());
-      }
-
-//---------------------------------------------------------
-//   accept
-//---------------------------------------------------------
-
-void TextProperties::accept()
-      {
-      tb->setFrameWidth(frameWidth->value());
-      tb->setPaddingWidth(paddingWidth->value());
-      tb->setFrameColor(frameColor->color());
-      tb->setFrameRound(frameRound->value());
-      tb->setCircle(circleButton->isChecked());
-      QFont f = fontSelect->currentFont();
-      double ps = double(fontSize->value());
-      ps = (ps * DPI)/PPI;
-      f.setPixelSize(lrint(ps));
-      f.setBold(fontBold->isChecked());
-      f.setItalic(fontItalic->isChecked());
-      f.setUnderline(fontUnderline->isChecked());
-      tb->setDefaultFont(f);
-
-      int a = 0;
-      if (alignHCenter->isChecked())
-            a |= ALIGN_HCENTER;
-      if (alignRight->isChecked())
-            a |= ALIGN_RIGHT;
-      if (alignVCenter->isChecked())
-            a |= ALIGN_VCENTER;
-      if (alignBottom->isChecked())
-            a |= ALIGN_BOTTOM;
-      *align = Align(a);
-      QDialog::accept();
+      TextProperties t(tl->continueText(), this);
+      if (t.exec()) {
+            foreach(LineSegment* ls, tl->lineSegments()) {
+                  if (ls->segmentType() != SEGMENT_MIDDLE)
+                        continue;
+                  TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
+                  if (!tls->text())
+                        continue;
+                  TextC* t = tls->text();
+                  t->setColor(tl->continueText()->color());
+                  }
+            }
       }
 

@@ -208,7 +208,6 @@ void MidiFile::writeStatus(int nstat, int c)
 bool MidiFile::read(QIODevice* in)
      {
       fp = in;
-      _error = "";
       _tracks.clear();
       _siglist.clear();
       _siglist.add(0, 4, 4);   // default time signature
@@ -219,10 +218,8 @@ bool MidiFile::read(QIODevice* in)
 
       read(tmp, 4);
       int len = readLong();
-      if (memcmp(tmp, "MThd", 4) || len < 6) {
-            _error = "bad midifile: MThd expected";
-            return false;
-            }
+      if (memcmp(tmp, "MThd", 4) || len < 6)
+            throw(QString("bad midifile: MThd expected"));
 
       _format     = readShort();
       int ntracks = readShort();
@@ -245,7 +242,7 @@ bool MidiFile::read(QIODevice* in)
                         }
                   break;
             default:
-                  _error = QString("midi fileformat %1 not implemented").arg(_format);
+                  throw(QString("midi file format %1 not implemented").arg(_format));
                   return false;
             }
       return true;
@@ -260,10 +257,8 @@ bool MidiFile::readTrack()
       {
       char tmp[4];
       read(tmp, 4);
-      if (memcmp(tmp, "MTrk", 4)) {
-            _error = "bad midifile: MTrk expected";
-            return true;
-            }
+      if (memcmp(tmp, "MTrk", 4))
+            throw(QString("bad midifile: MTrk expected"));
       int len       = readLong();       // len
       qint64 endPos = curPos + len;
       status        = -1;

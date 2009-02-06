@@ -5709,14 +5709,6 @@ before closing?</source>
         <source>Autocorrection</source>
         <translation>Автозамена</translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>Заменять 1/2 на ½</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Заменять (C) на © в уведомлении об авторских правах</translation>
-    </message>
     <message>
         <source>Score element colors</source>
         <translation>Цвета элементов партитуры</translation>
@@ -5780,6 +5772,14 @@ before closing?</source>
     <message>
         <source>ms</source>
         <translation>мс</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6430,6 +6430,13 @@ please select a measure and try again</source>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6502,92 +6509,12 @@ please select a measure and try again</source>
         <translation>MuseScore: Специальные символы</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Кегль:</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Гарнитура:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>Выключка влево</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>Выключка по центру</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>Выключка вправо</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>Полужирное начертание</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>Курсивное начертание</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>Подчёркивание</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>Нижний индекс</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>Верхний индекс</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>Кегль шрифта</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>Выберите шрифтовую гарнитуру</translation>
-    </message>
-    <message>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
         <source>Frame</source>
         <translation>Рамка</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>мм</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>Ширина рамки:</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>Цвет рамки:</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>Ширина полей:</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>Закругление рамки:</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Окружность</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Прямоугольник</translation>
     </message>
 </context>
 <context>
@@ -6715,6 +6642,14 @@ please select a measure and try again</source>
     <message>
         <source>align left</source>
         <translation type="unfinished">Выключка влево</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6880,6 +6815,13 @@ please select a measure and try again</source>
     <name>TextStyleDialog</name>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

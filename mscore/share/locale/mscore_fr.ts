@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="fr_FR">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -69,6 +68,69 @@
     </message>
 </context>
 <context>
+    <name>@default</name>
+    <message>
+        <source>system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (GB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (US)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>French</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Russian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
@@ -87,15 +149,16 @@
         <translation>Révision : 1501</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2008 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visitez http://www.musescore.org pour les nouvelles versions&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;et plus d&apos;informations.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1533,6 +1596,14 @@ failed: </source>
     <message>
         <source>begin repeat left margin</source>
         <translation>Marge gauche du début de reprise</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Notes</translation>
+    </message>
+    <message>
+        <source>note dot distance</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5692,14 +5763,6 @@ before closing?</source>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>Brésilien</translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>Remplacer 1/2 ... par ½ ...</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Remplacer (C) ... par © ... dans le texte de Copyright</translation>
-    </message>
     <message>
         <source>Default duration:</source>
         <translation>Durée par défaut :</translation>
@@ -5707,6 +5770,14 @@ before closing?</source>
     <message>
         <source>ms</source>
         <translation>ms</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6348,12 +6419,23 @@ failed: </source>
         <source>BPM</source>
         <translation>BPM</translation>
     </message>
+    <message>
+        <source>Tempo Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TempoText</name>
     <message>
         <source>Tempo Properties...</source>
         <translation>Propriétés du tempo...</translation>
+    </message>
+</context>
+<context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6433,88 +6515,8 @@ failed: </source>
         <translation>Texte</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation>aligné à gauche</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>centré</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>aligné à droite</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>gras</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>italique</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>souligné</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>indice</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>exposant</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Taille :</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>taille de la police</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Famille :</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>sélectionner la famille de la police</translation>
-    </message>
-    <message>
         <source>Frame</source>
         <translation>Cadre</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Cercle</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Rectangle</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>largeur du cadre</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>couleur du cadre</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>largeur du remplissage</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>arrondi du cadre</translation>
     </message>
 </context>
 <context>
@@ -6642,6 +6644,14 @@ failed: </source>
     <message>
         <source>align left</source>
         <translation>aligné à gauche</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
 </context>
 <context>
@@ -6808,6 +6818,13 @@ failed: </source>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
         <translation>C&apos;est la mère Michelle qui a perdu son chat...</translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

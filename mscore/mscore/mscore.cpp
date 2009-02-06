@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-// #include <signal.h>
 #include <fenv.h>
 
 #include "config.h"
@@ -36,7 +35,6 @@
 #include "seq.h"
 #include "icons.h"
 #include "tempo.h"
-#include "padstate.h"
 #include "sym.h"
 #include "padids.h"
 #include "pagesettings.h"
@@ -68,7 +66,7 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 QString dataPath;
 int division = 480;     // 480 midi ticks represent a quarter note
 
-QPrinter* pdev;
+QPaintDevice* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;
 
@@ -299,6 +297,7 @@ MuseScore::MuseScore()
       drumPalette           = 0;
       drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
+      _textTools            = 0;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");

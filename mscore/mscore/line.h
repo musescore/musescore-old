@@ -56,6 +56,8 @@ class LineSegment : public Element {
 
    public:
       LineSegment(Score* s);
+      LineSegment(const LineSegment&);
+      virtual LineSegment* clone() const = 0;
       virtual void draw(QPainter& p) const = 0;
       SLine* line() const                 { return (SLine*)parent(); }
       const QPointF& userOff2() const     { return _userOff2;  }
@@ -65,7 +67,8 @@ class LineSegment : public Element {
       void setXpos2(qreal x)              { _p2.setX(x); }
       QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
       void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
-      void setSystem(System* s)                   { _system = s;       }
+      LineSegmentType segmentType() const { return _segmentType;       }
+      void setSystem(System* s)           { _system = s;               }
       virtual void resetUserOffsets();
       friend class SLine;
       };
@@ -84,7 +87,8 @@ class SLine : public Element {
 
    public:
       SLine(Score* s);
-      virtual void draw(QPainter& p) const;
+      SLine(const SLine&);
+
       void setTick2(int t);
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);

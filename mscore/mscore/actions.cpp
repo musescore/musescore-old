@@ -845,17 +845,6 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
-#if 0
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
-         "add-tie",
-         QT_TR_NOOP("add tie"),
-         Qt::SHIFT+Qt::Key_S,
-         Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
-         ),
-#endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-slur",
@@ -1904,6 +1893,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TR_NOOP("Show Frames"),
          QT_TR_NOOP("Show Frames")
+         ),
+      Shortcut(
+         STATE_EDIT,
+         "show-keys",
+         QT_TR_NOOP("show keyboard"),
+         Qt::Key_F2,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Show Keyboard"),
+         QT_TR_NOOP("Show Keyboard"),
+         &keysIcon
          ),
       Shortcut(0, 0, 0),
       };

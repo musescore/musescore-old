@@ -102,7 +102,6 @@ class ScoreLayout : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void change(Element* o, Element* n);
 
       friend class Score;
       };

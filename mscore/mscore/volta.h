@@ -36,9 +36,9 @@ class VoltaSegment : public LineSegment {
 
    public:
       VoltaSegment(Score* s) : LineSegment(s) {}
+      virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
       Volta* volta() const                { return (Volta*)parent(); }
       virtual ElementType type() const    { return VOLTA_SEGMENT; }
-      virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);

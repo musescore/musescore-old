@@ -4698,7 +4698,7 @@ before closing?</source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5762,20 +5762,20 @@ before closing?</source>
         <source>pt_BR Brasilian Portuguese</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Default duration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6428,6 +6428,13 @@ selezionare una Battuta e riprovare</translation>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6500,92 +6507,12 @@ selezionare una Battuta e riprovare</translation>
         <translation>MuseScore: Simboli Speciali</translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation>Allineamnto a Sinistra</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>Allineamento Centrale</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>Allineamnto a Destra</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>Grassetto</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>Italico</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Dimensione:</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Famiglia:</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>Sottolineato</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>Pedice</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>Apice</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>Dimensione Carattere</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>Seleziona una Famiglia di Caratteri</translation>
-    </message>
-    <message>
         <source>Text</source>
         <translation>Testo</translation>
     </message>
     <message>
         <source>Frame</source>
         <translation>Cornice</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>Spessore Cornice</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>Colore Cornice</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>Riempimento</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>Arrotondamento Spigoli</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Cerchio</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Rettangolo</translation>
     </message>
 </context>
 <context>
@@ -6713,6 +6640,14 @@ selezionare una Battuta e riprovare</translation>
     <message>
         <source>align left</source>
         <translation type="unfinished">Allineamnto a Sinistra</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
 </context>
 <context>
@@ -6879,6 +6814,13 @@ selezionare una Battuta e riprovare</translation>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
         <translation>Fin che la barca va, lasciala andare...</translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
