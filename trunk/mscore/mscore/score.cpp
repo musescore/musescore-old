@@ -41,7 +41,6 @@
 #include "note.h"
 #include "chord.h"
 #include "rest.h"
-#include "padstate.h"
 #include "slur.h"
 #include "seq.h"
 #include "staff.h"
@@ -63,6 +62,7 @@
 #include "excerpt.h"
 #include "stafftext.h"
 #include "magbox.h"
+#include "textpalette.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -78,6 +78,39 @@ bool noMidi          = false;
 bool midiInputTrace  = false;
 bool midiOutputTrace = false;
 bool showRubberBand  = true;
+
+//---------------------------------------------------------
+//   InputState
+//---------------------------------------------------------
+
+InputState::InputState()
+      {
+      track         = 0;
+      noteEntryMode = false;
+      slur          = 0;
+      cr            = 0;
+      dots          = 0;
+      len           = division;
+      tickLen       = division;
+      rest          = false;
+      pad           = 0;
+      voice         = 0;
+      pitch         = 60;
+      prefix        = 0;
+      noteType      = NOTE_NORMAL;
+      beamMode      = BEAM_AUTO;
+      drumNote      = -1;
+      drumset       = 0;
+      }
+
+//---------------------------------------------------------
+//   pos
+//---------------------------------------------------------
+
+int InputState::pos() const
+      {
+      return cr ? cr->tick() : 0;
+      }
 
 //---------------------------------------------------------
 //   MeasureBaseList
@@ -321,7 +354,7 @@ void Score::clear()
             delete e;
       _excerpts.clear();
 
-      _padState.pitch = 60;
+      _is.pitch = 60;
       info.setFile("");
       _dirty          = false;
       _saved          = false;
@@ -805,7 +838,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
 Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
    Segment** seg) const
       {
-      int voice = _padState.voice;
+      int voice = _is.voice;
 
       foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
@@ -1065,8 +1098,14 @@ void Score::startEdit(Element* element)
       undoChangeElement(origEditObject, editObject);
       select(editObject, SELECT_SINGLE, 0);
       updateAll = true;
-      if (editObject->isTextB())
-            canvas()->setEditText((TextB*)editObject);
+      if (editObject->isTextB()) {
+            TextB* t = static_cast<TextB*>(editObject);
+            canvas()->setEditText(t);
+            mscore->textTools()->setText(t);
+            mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
+            mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
+            }
+
       layout()->removeBsp(origEditObject);
       end();
       }
@@ -1189,13 +1228,13 @@ void Score::setNoteEntry(bool val)
                   _is.cr = rest;
             else
                   _is.cr = note->chord();
-            _is.setPos(_is.cr->tick());
+//            _is.setPos(_is.cr->tick());
             emit posChanged(_is.pos());
 
             setInputTrack(_is.cr->track());
             _is.noteEntryMode = true;
             canvas()->moveCursor();
-            _padState.rest = false;
+            _is.rest = false;
             getAction("pad-rest")->setChecked(false);
             }
       else {

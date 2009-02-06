@@ -998,28 +998,11 @@ void ScoreLayout::add(Element* el)
 void ScoreLayout::remove(Element* el)
       {
       if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            _score->measures()->remove((MeasureBase*)el);
+            _score->measures()->remove(static_cast<MeasureBase*>(el));
             }
       else {
-            int idx = score()->gel()->indexOf(el);
-            if (idx == -1)
+            if (!score()->gel()->removeOne(el))
                   printf("ScoreLayout::remove(): element not found\n");
-            else
-                  score()->gel()->removeAt(idx);
-            }
-      }
-
-//---------------------------------------------------------
-//   change
-//---------------------------------------------------------
-
-void ScoreLayout::change(Element* o, Element* n)
-      {
-      if (n->type() == MEASURE || n->type() == HBOX || n->type() == VBOX)
-            _score->measures()->change((MeasureBase*)o, (MeasureBase*)n);
-      else {
-            remove(o);
-            add(n);
             }
       }
 

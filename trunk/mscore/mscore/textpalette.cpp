@@ -25,6 +25,273 @@
 #include "style.h"
 #include "mscore.h"
 #include "score.h"
+#include "canvas.h"
+
+extern TextPalette* textPalette;
+
+//---------------------------------------------------------
+//   textTools
+//---------------------------------------------------------
+
+TextTools* MuseScore::textTools()
+      {
+      if (!_textTools) {
+            _textTools = new TextTools(this);
+            addDockWidget(Qt::TopDockWidgetArea, _textTools);
+            }
+      return _textTools;
+      }
+
+//---------------------------------------------------------
+//   TextTools
+//---------------------------------------------------------
+
+TextTools::TextTools(QWidget* parent)
+   : QDockWidget(parent)
+      {
+      _textElement = 0;
+      setObjectName("text-tools");
+      setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+
+      QToolBar* tb = new QToolBar(tr("Text Edit"));
+      // tb->setObjectName("text-tools");
+
+#if 0
+      showKeyboard = tb->addAction("K");
+#else
+      showKeyboard = getAction("show-keys");
+      tb->addAction(showKeyboard);
+#endif
+      showKeyboard->setCheckable(true);
+
+      typefaceBold      = tb->addAction(QIcon(":/data/text_bold.svg"), "");
+      typefaceItalic    = tb->addAction(QIcon(":/data/text_italic.svg"), "");
+      typefaceUnderline = tb->addAction(QIcon(":/data/text_under.svg"), "");
+      typefaceBold->setCheckable(true);
+      typefaceItalic->setCheckable(true);
+      typefaceUnderline->setCheckable(true);
+      tb->addSeparator();
+      leftAlign   = tb->addAction(QIcon(":/data/text_left.svg"), "");
+      centerAlign = tb->addAction(QIcon(":/data/text_center.svg"), "");
+      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"), "");
+      leftAlign->setCheckable(true);
+      centerAlign->setCheckable(true);
+      leftAlign->setCheckable(true);
+      typefaceSubscript   = tb->addAction(QIcon(":/data/subscript.svg"), "");
+      typefaceSuperscript = tb->addAction(QIcon(":/data/superscript.svg"), "");
+      typefaceSubscript->setCheckable(true);
+      typefaceSuperscript->setCheckable(true);
+      tb->addSeparator();
+      typefaceFamily = new QFontComboBox(this);
+      tb->addWidget(typefaceFamily);
+      typefaceSize = new QDoubleSpinBox(this);
+      tb->addWidget(typefaceSize);
+
+      setWidget(tb);
+      QWidget* w = new QWidget(this);
+      setTitleBarWidget(w);
+      titleBarWidget()->hide();
+
+      connect(typefaceSize,        SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
+      connect(typefaceFamily,      SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
+      connect(typefaceBold,        SIGNAL(triggered(bool)), SLOT(boldClicked(bool)));
+      connect(typefaceItalic,      SIGNAL(triggered(bool)), SLOT(italicClicked(bool)));
+      connect(typefaceUnderline,   SIGNAL(triggered(bool)), SLOT(underlineClicked(bool)));
+      connect(typefaceSubscript,   SIGNAL(triggered(bool)), SLOT(subscriptClicked(bool)));
+      connect(typefaceSuperscript, SIGNAL(triggered(bool)), SLOT(superscriptClicked(bool)));
+      connect(typefaceFamily,      SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
+      connect(leftAlign,           SIGNAL(triggered()), SLOT(setLeftAlign()));
+      connect(rightAlign,          SIGNAL(triggered()), SLOT(setRightAlign()));
+      connect(centerAlign,         SIGNAL(triggered()), SLOT(setHCenterAlign()));
+      connect(showKeyboard,        SIGNAL(triggered(bool)), SLOT(showKeyboardClicked(bool)));
+      }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
+
+void TextTools::setText(TextB* te)
+      {
+      _textElement = te;
+      }
+
+//---------------------------------------------------------
+//   setCharFormat
+//---------------------------------------------------------
+
+void TextTools::setCharFormat(const QTextCharFormat& cf)
+      {
+      format = cf;
+      QFont f(cf.font());
+      typefaceFamily->setCurrentFont(f);
+      double ps = f.pointSizeF();
+      if (ps == -1.0)
+            ps = f.pixelSize() * PPI / DPI;
+      typefaceSize->setValue(ps);
+      typefaceItalic->setChecked(cf.fontItalic());
+      typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
+      typefaceUnderline->setChecked(cf.fontUnderline());
+      typefaceSubscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSubScript);
+      typefaceSuperscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSuperScript);
+      }
+
+//---------------------------------------------------------
+//   setBlockFormat
+//---------------------------------------------------------
+
+void TextTools::setBlockFormat(const QTextBlockFormat& bf)
+      {
+      bformat = bf;
+      if (bf.alignment() & Qt::AlignHCenter)
+            centerAlign->setChecked(true);
+      else if (bf.alignment() & Qt::AlignLeft)
+            leftAlign->setChecked(true);
+      else if (bf.alignment() & Qt::AlignRight)
+            rightAlign->setChecked(true);
+      }
+
+//---------------------------------------------------------
+//   sizeChanged
+//---------------------------------------------------------
+
+void TextTools::sizeChanged(double value)
+      {
+      format.setFontPointSize(value);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   moveFocus
+//---------------------------------------------------------
+
+void TextTools::moveFocus()
+      {
+      _textElement->score()->canvas()->setFocus();
+      }
+
+//---------------------------------------------------------
+//   fontChanged
+//---------------------------------------------------------
+
+void TextTools::fontChanged(const QFont& f)
+      {
+      format.setFontFamily(f.family());
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   boldClicked
+//---------------------------------------------------------
+
+void TextTools::boldClicked(bool val)
+      {
+      format.setFontWeight(val ? QFont::Bold : QFont::Normal);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   underlineClicked
+//---------------------------------------------------------
+
+void TextTools::underlineClicked(bool val)
+      {
+      format.setFontUnderline(val);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   italicClicked
+//---------------------------------------------------------
+
+void TextTools::italicClicked(bool val)
+      {
+      format.setFontItalic(val);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setHCenterAlign
+//---------------------------------------------------------
+
+void TextTools::setHCenterAlign()
+      {
+      bformat.setAlignment(Qt::AlignHCenter);
+      _textElement->setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setLeftAlign
+//---------------------------------------------------------
+
+void TextTools::setLeftAlign()
+      {
+      bformat.setAlignment(Qt::AlignLeft);
+      _textElement->setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setRightAlign
+//---------------------------------------------------------
+
+void TextTools::setRightAlign()
+      {
+      bformat.setAlignment(Qt::AlignRight);
+      _textElement->setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   subscriptClicked
+//---------------------------------------------------------
+
+void TextTools::subscriptClicked(bool val)
+      {
+      typefaceSuperscript->blockSignals(true);
+      typefaceSuperscript->setChecked(false);
+      typefaceSuperscript->blockSignals(false);
+      format.setVerticalAlignment(val ? QTextCharFormat::AlignSubScript : QTextCharFormat::AlignNormal);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   superscriptClicked
+//---------------------------------------------------------
+
+void TextTools::superscriptClicked(bool val)
+      {
+      typefaceSubscript->blockSignals(true);
+      typefaceSubscript->setChecked(false);
+      typefaceSubscript->blockSignals(false);
+      format.setVerticalAlignment(val ? QTextCharFormat::AlignSuperScript : QTextCharFormat::AlignNormal);
+      _textElement->setCharFormat(format);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   showKeyboardClicked
+//---------------------------------------------------------
+
+void TextTools::showKeyboardClicked(bool val)
+      {
+      if (val) {
+            if (textPalette == 0)
+                  textPalette = new TextPalette(_textElement->score()->canvas());
+            textPalette->setText(_textElement);
+            textPalette->show();
+            }
+      else {
+            if (textPalette)
+                  textPalette->hide();
+            }
+      }
 
 //---------------------------------------------------------
 //   TextPalette
@@ -33,7 +300,6 @@
 TextPalette::TextPalette(QWidget* parent)
    : QWidget(parent)
       {
-//      setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
       setWindowFlags(Qt::Tool);
       setupUi(this);
       QGridLayout* gl = new QGridLayout;
@@ -67,23 +333,7 @@ TextPalette::TextPalette(QWidget* parent)
             sg->addButton(tb, i);
             ++buttonIndex;
             }
-
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
-      connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
-      connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
-      connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
-      connect(typefaceUnderline, SIGNAL(clicked(bool)), SLOT(underlineClicked(bool)));
-      connect(typefaceSubscript, SIGNAL(clicked(bool)), SLOT(subscriptClicked(bool)));
-      connect(typefaceSuperscript, SIGNAL(clicked(bool)), SLOT(superscriptClicked(bool)));
-      connect(typefaceFamily, SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
-      connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
-      connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
-      connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
-      connect(frameWidth, SIGNAL(valueChanged(double)),  SLOT(borderChanged(double)));
-      connect(paddingWidth, SIGNAL(valueChanged(double)), SLOT(paddingChanged(double)));
-      connect(borderRounding, SIGNAL(valueChanged(int)), SLOT(frameRoundChanged(int)));
-      connect(circle, SIGNAL(toggled(bool)), SLOT(circleToggled(bool)));
-      connect(frameColor, SIGNAL(colorChanged(QColor)), SLOT(frameColorChanged(QColor)));
       setFocusPolicy(Qt::NoFocus);
       }
 
@@ -98,228 +348,20 @@ void TextPalette::symbolClicked(int n)
       }
 
 //---------------------------------------------------------
-//   sizeChanged
-//---------------------------------------------------------
-
-void TextPalette::sizeChanged(double value)
-      {
-      format.setFontPointSize(value);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   boldClicked
-//---------------------------------------------------------
-
-void TextPalette::boldClicked(bool val)
-      {
-      format.setFontWeight(val ? QFont::Bold : QFont::Normal);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   underlineClicked
-//---------------------------------------------------------
-
-void TextPalette::underlineClicked(bool val)
-      {
-      format.setFontUnderline(val);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   fontChanged
-//---------------------------------------------------------
-
-void TextPalette::fontChanged(const QFont& f)
-      {
-      format.setFontFamily(f.family());
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   italicClicked
-//---------------------------------------------------------
-
-void TextPalette::italicClicked(bool val)
-      {
-      format.setFontItalic(val);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   setCharFormat
-//---------------------------------------------------------
-
-void TextPalette::setCharFormat(const QTextCharFormat& cf)
-      {
-      format = cf;
-      QFont f(cf.font());
-      typefaceFamily->setCurrentFont(f);
-      double ps = f.pointSizeF();
-      if (ps == -1.0)
-            ps = f.pixelSize() * PPI / DPI;
-      typefaceSize->setValue(ps);
-      typefaceItalic->setChecked(cf.fontItalic());
-      typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
-      typefaceUnderline->setChecked(cf.fontUnderline());
-      }
-
-//---------------------------------------------------------
-//   setBlockFormat
-//---------------------------------------------------------
-
-void TextPalette::setBlockFormat(const QTextBlockFormat& bf)
-      {
-      bformat = bf;
-      if (bf.alignment() & Qt::AlignHCenter)
-            centerAlign->setChecked(true);
-      else if (bf.alignment() & Qt::AlignLeft)
-            leftAlign->setChecked(true);
-      else if (bf.alignment() & Qt::AlignRight)
-            rightAlign->setChecked(true);
-      }
-
-//---------------------------------------------------------
-//   setHCenterAlign
-//---------------------------------------------------------
-
-void TextPalette::setHCenterAlign()
-      {
-      bformat.setAlignment(Qt::AlignHCenter);
-      _textElement->setBlockFormat(bformat);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   setLeftAlign
-//---------------------------------------------------------
-
-void TextPalette::setLeftAlign()
-      {
-      bformat.setAlignment(Qt::AlignLeft);
-      _textElement->setBlockFormat(bformat);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   setRightAlign
-//---------------------------------------------------------
-
-void TextPalette::setRightAlign()
-      {
-      bformat.setAlignment(Qt::AlignRight);
-      _textElement->setBlockFormat(bformat);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   subscriptClicked
-//---------------------------------------------------------
-
-void TextPalette::subscriptClicked(bool val)
-      {
-      typefaceSuperscript->blockSignals(true);
-      typefaceSuperscript->setChecked(false);
-      typefaceSuperscript->blockSignals(false);
-      format.setVerticalAlignment(val ? QTextCharFormat::AlignSubScript : QTextCharFormat::AlignNormal);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
-//   superscriptClicked
-//---------------------------------------------------------
-
-void TextPalette::superscriptClicked(bool val)
-      {
-      typefaceSubscript->blockSignals(true);
-      typefaceSubscript->setChecked(false);
-      typefaceSubscript->blockSignals(false);
-      format.setVerticalAlignment(val ? QTextCharFormat::AlignSuperScript : QTextCharFormat::AlignNormal);
-      _textElement->setCharFormat(format);
-      mscore->activateWindow();
-      }
-
-//---------------------------------------------------------
 //   setText
 //---------------------------------------------------------
 
 void TextPalette::setText(TextB* te)
       {
       _textElement = te;
-
-      frameWidth->setValue(_textElement->frameWidth());
-      paddingWidth->setValue(_textElement->paddingWidth());
-      borderRounding->setValue(_textElement->frameRound());
-      circle->setChecked(_textElement->circle());
-      borderRounding->setEnabled(!_textElement->circle());
-      frameColor->setColor(_textElement->frameColor());
       }
 
 //---------------------------------------------------------
-//   borderChanged
+//   closeEvent
 //---------------------------------------------------------
 
-void TextPalette::borderChanged(double val)
+void TextPalette::closeEvent(QCloseEvent* ev)
       {
-      _textElement->setFrameWidth(val);
-      _textElement->layout(0);
-      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-      _textElement->score()->end();
+      QWidget::closeEvent(ev);
+      getAction("show-keys")->setChecked(false);
       }
-
-//---------------------------------------------------------
-//   paddingChanged
-//---------------------------------------------------------
-
-void TextPalette::paddingChanged(double val)
-      {
-      _textElement->setPaddingWidth(val);
-      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-      _textElement->score()->end();
-      }
-
-//---------------------------------------------------------
-//   frameRoundChanged
-//---------------------------------------------------------
-
-void TextPalette::frameRoundChanged(int val)
-      {
-      _textElement->setFrameRound(val);
-      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-      _textElement->score()->end();
-      }
-
-//---------------------------------------------------------
-//   frameColorChanged
-//---------------------------------------------------------
-
-void TextPalette::frameColorChanged(QColor color)
-      {
-      if (color.isValid()) {
-            _textElement->setFrameColor(color);
-            mscore->activateWindow();
-            _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-            _textElement->score()->end();
-            }
-      }
-
-//---------------------------------------------------------
-//   circleToggled
-//---------------------------------------------------------
-
-void TextPalette::circleToggled(bool val)
-      {
-      _textElement->setCircle(val);
-      mscore->activateWindow();
-      borderRounding->setEnabled(!val);
-      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
-      _textElement->score()->end();
-      }
-

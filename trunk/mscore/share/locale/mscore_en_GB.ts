@@ -245,7 +245,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Edit Drumkit...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -2614,7 +2614,7 @@ failed: </source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>copy</source>
@@ -5711,14 +5711,6 @@ before closing?</source>
         <source>Autocorrection</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Score element colors</source>
         <translation type="unfinished"></translation>
@@ -5773,6 +5765,14 @@ before closing?</source>
     </message>
     <message>
         <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6225,7 +6225,7 @@ failed: </source>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">begin demisemiquaver</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -6418,6 +6418,13 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6494,87 +6501,7 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>align left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6702,6 +6629,14 @@ failed: </source>
     </message>
     <message>
         <source>align left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6868,6 +6803,13 @@ failed: </source>
     <name>TextStyleDialog</name>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

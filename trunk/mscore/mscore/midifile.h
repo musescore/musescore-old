@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -136,7 +136,6 @@ class MidiFile {
       int readLong();
       Event* readEvent();
       bool readTrack();
-      QString _error;
 
       void resetRunningStatus() { status = -1; }
 
@@ -162,7 +161,6 @@ class MidiFile {
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
       void processMeta(Score*, MidiTrack* track, int staffIdx, MetaEvent* e);
-      const QString& error() const    { return _error; }
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
 

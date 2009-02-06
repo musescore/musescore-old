@@ -670,7 +670,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "instrument-name") {
                               // part-name or instrument-name?
-                              if (part->longName().isEmpty())
+                              if (part->longName()->getText().isEmpty())
                                     part->setLongName(ee.text());
                               }
                         else
@@ -1451,7 +1451,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         if (!txt.isEmpty()) {
                               b->setBeginText(txt);
                               }
-                        b->setHasBeginText(!txt.isEmpty());
 
                         if (lineType == "solid")
                               b->setLineStyle(Qt::SolidLine);

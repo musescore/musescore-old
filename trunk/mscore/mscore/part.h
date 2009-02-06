@@ -29,7 +29,7 @@ class Staff;
 class Score;
 class Drumset;
 class InstrumentTemplate;
-class TextBase;
+class TextC;
 
 //---------------------------------------------------------
 //   Part
@@ -39,8 +39,8 @@ class Part {
       Score* _score;
       QString _trackName;           ///< used in tracklist
 
-      TextBase* _longNameBase;
-      TextBase* _shortNameBase;
+      TextC* _longName;
+      TextC* _shortName;
 
       Instrument _instrument;
       QList<Staff*> _staves;
@@ -54,22 +54,20 @@ class Part {
 
       void read(QDomElement);
       void write(Xml& xml) const;
-      int nstaves() const                      { return _staves.size(); }
-      QList<Staff*>* staves()                  { return &_staves; }
-      const QList<Staff*>* staves() const      { return &_staves; }
+      int nstaves() const                       { return _staves.size(); }
+      QList<Staff*>* staves()                   { return &_staves; }
+      const QList<Staff*>* staves() const       { return &_staves; }
       Staff* staff(int idx) const;
-      void setId(const QString& s)             { _id = s; }
-      QString id() const                       { return _id; }
-      QString trackName() const                { return _trackName;  }
-      void setTrackName(const QString& s)      { _trackName = s; }
+      void setId(const QString& s)              { _id = s; }
+      QString id() const                        { return _id; }
+      QString trackName() const                 { return _trackName;  }
+      void setTrackName(const QString& s)       { _trackName = s; }
 
-      QString shortName() const;
-      QString longName()  const;
       QString shortNameHtml() const;
       QString longNameHtml()  const;
 
-      TextBase** longNameBase()                { return &_longNameBase; }
-      TextBase** shortNameBase()               { return &_shortNameBase; }
+      TextC* longName()                         { return _longName; }
+      TextC* shortName()                        { return _shortName; }
       void setLongName(const QString& s);
       void setShortName(const QString& s);
       void setLongNameHtml(const QString& s);

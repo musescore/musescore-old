@@ -36,7 +36,6 @@
 #include "segment.h"
 #include "text.h"
 #include "sig.h"
-#include "padstate.h"
 #include "staff.h"
 #include "part.h"
 #include "style.h"
@@ -244,7 +243,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   SLine* line = static_cast<SLine*>(e);
                   if (e->type() == TEXTLINE) {
                         TextLine* tl = static_cast<TextLine*>(e);
-                        if (!tl->hasBeginText()) {
+                        if (!tl->beginText()) {
                               Segment* seg = tick2segment(tick);
                               if (seg && seg->nextCR())
                                     tick2 = seg->nextCR()->tick();
@@ -436,7 +435,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
       {
       if (!noteEntryMode())
             setNoteEntry(true);
-      if (_is.cr == 0 && _padState.voice == 0) {
+      if (_is.cr == 0 && _is.voice == 0) {
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
@@ -445,7 +444,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
       if (!preferences.alternateNoteEntryMethod)
             key = staff(_is.track / VOICES)->keymap()->key(_is.pos());
       int pitch;
-      Drumset* ds = _padState.drumset;
+      Drumset* ds = _is.drumset;
       if (ds) {
             int note1 = "CDEFGAB"[note];
             pitch = -1;
@@ -461,20 +460,20 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   return;
             }
       else {
-            int octave = _padState.pitch / 12;
+            int octave = _is.pitch / 12;
             pitch      = pitchKeyAdjust(note, key);
-            int delta  = _padState.pitch - (octave*12 + pitch);
+            int delta  = _is.pitch - (octave*12 + pitch);
             if (delta > 6)
-                  _padState.pitch = (octave+1)*12 + pitch;
+                  _is.pitch = (octave+1)*12 + pitch;
             else if (delta < -6)
-                  _padState.pitch = (octave-1)*12 + pitch;
+                  _is.pitch = (octave-1)*12 + pitch;
             else
-                  _padState.pitch = octave*12 + pitch;
-            if (_padState.pitch < 0)
-                  _padState.pitch = 0;
-            if (_padState.pitch > 127)
-                  _padState.pitch = 127;
-            pitch = _padState.pitch;
+                  _is.pitch = octave*12 + pitch;
+            if (_is.pitch < 0)
+                  _is.pitch = 0;
+            if (_is.pitch > 127)
+                  _is.pitch = 127;
+            pitch = _is.pitch;
             }
       cmdAddPitch1(pitch, addFlag);
       }
@@ -495,12 +494,12 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
                   setLayoutAll(false);
                   setLayoutStart(on->chord()->measure());
                   // reset position
-                  _is.setPos(_is.pos() + on->chord()->tickLen());
+                  // _is.setPos(_is.pos() + on->chord()->tickLen());
                   }
             return n;
             }
       // insert note
-      int len       = _padState.tickLen;
+      int len       = _is.tickLen;
       ChordRest* cr = _is.cr;
       if (cr && cr->tuplet()) {
             n = (Note*)(setTupletChordRest(cr, pitch, len));
@@ -510,9 +509,9 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             Direction stemDirection = AUTO;
             int headGroup           = 0;
             int track               = _is.track;
-            if (_padState.drumNote != -1) {
-                  int pitch     = _padState.drumNote;
-                  Drumset* ds   = _padState.drumset;
+            if (_is.drumNote != -1) {
+                  int pitch     = _is.drumNote;
+                  Drumset* ds   = _is.drumset;
                   headGroup     = ds->noteHead(pitch);
                   stemDirection = ds->stemDirection(pitch);
                   track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
@@ -540,7 +539,7 @@ Note* Score::cmdAddPitch1(int pitch, bool addFlag)
             }
       _is.cr = cr;
       if (_is.cr) {
-            _is.setPos(_is.cr->tick());
+            // _is.setPos(_is.cr->tick());
             emit posChanged(_is.pos());
             }
       return n;
@@ -605,8 +604,8 @@ void Score::cmdAddInterval(int val)
             pitch = 0;
       Note* n = addNote(on->chord(), pitch);
       select(n, SELECT_SINGLE, 0);
-      _padState.pitch = n->pitch();
-      _is.setPos(_is.pos() + on->chord()->tickLen());
+      _is.pitch = n->pitch();
+      // _is.setPos(_is.pos() + on->chord()->tickLen());
       }
 
 //---------------------------------------------------------
@@ -1367,7 +1366,7 @@ void Score::upDown(bool up, bool octave)
       if (el.empty())
             return;
 
-      int newPitch = _padState.pitch;
+      int newPitch = _is.pitch;
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
             int pitch   = oNote->pitch();
@@ -1386,7 +1385,7 @@ void Score::upDown(bool up, bool octave)
             if (playNotes)
                   mscore->play(oNote);
             }
-      _padState.pitch = newPitch;
+      _is.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
       }
 
@@ -1850,7 +1849,7 @@ void Score::cmd(const QString& cmd)
       else if (cmd == "note-input") {
             QAction* a = getAction(cmd.toLatin1().data());
             setNoteEntry(a->isChecked());
-//            _padState.rest = false;
+//            _is.rest = false;
             end();
             }
       else if (cmd == "escape") {
@@ -1990,7 +1989,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = upAlt(el);
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = static_cast<Note*>(e)->pitch();
+                                    _is.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, SELECT_SINGLE, 0);
@@ -2004,7 +2003,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = downAlt(el);
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = static_cast<Note*>(e)->pitch();
+                                    _is.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, SELECT_SINGLE, 0);
@@ -2018,7 +2017,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = upAltCtrl(static_cast<Note*>(el));
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = static_cast<Note*>(e)->pitch();
+                                    _is.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, SELECT_SINGLE, 0);
@@ -2032,7 +2031,7 @@ void Score::cmd(const QString& cmd)
                         Element* e = downAltCtrl(static_cast<Note*>(el));
                         if (e) {
                               if (e->type() == NOTE) {
-                                    _padState.pitch = static_cast<Note*>(e)->pitch();
+                                    _is.pitch = static_cast<Note*>(e)->pitch();
                                     mscore->play(e);
                                     }
                               select(e, SELECT_SINGLE, 0);
@@ -2124,24 +2123,24 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "tie")
                   cmdAddTie();
             else if (cmd == "pad-sharp2") {
-                  _padState.prefix = _padState.prefix != 3 ? 3 : 0;
-                  addAccidental(_padState.prefix);
+                  _is.prefix = _is.prefix != 3 ? 3 : 0;
+                  addAccidental(_is.prefix);
                   }
             else if (cmd == "pad-sharp") {
-                  _padState.prefix = _padState.prefix != 1 ? 1 : 0;
-                  addAccidental(_padState.prefix);
+                  _is.prefix = _is.prefix != 1 ? 1 : 0;
+                  addAccidental(_is.prefix);
                   }
             else if (cmd == "pad-nat") {
-                  _padState.prefix = _padState.prefix != 5 ? 5 : 0;
-                  addAccidental(_padState.prefix);
+                  _is.prefix = _is.prefix != 5 ? 5 : 0;
+                  addAccidental(_is.prefix);
                   }
             else if (cmd == "pad-flat") {
-                  _padState.prefix = _padState.prefix != 2 ? 2 : 0;
-                  addAccidental(_padState.prefix);
+                  _is.prefix = _is.prefix != 2 ? 2 : 0;
+                  addAccidental(_is.prefix);
                   }
             else if (cmd == "pad-flat2") {
-                  _padState.prefix = _padState.prefix != 4 ? 4 : 0;
-                  addAccidental(_padState.prefix);
+                  _is.prefix = _is.prefix != 4 ? 4 : 0;
+                  addAccidental(_is.prefix);
                   }
             else if (cmd == "pad-staccato")
                   addArticulation(5);
@@ -2782,7 +2781,7 @@ void Score::move(const QString& cmd)
                   adjustCanvasPosition(el, false);
 
 /* set in select  if (noteEntryMode()) {
-                        _is.setPos(tick);
+                        // _is.setPos(tick);
                         emit posChanged(_is.pos());
                         }
                   */

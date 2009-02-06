@@ -22,7 +22,6 @@
 #include "note.h"
 #include "padids.h"
 #include "sym.h"
-#include "padstate.h"
 #include "note.h"
 #include "score.h"
 #include "rest.h"
@@ -163,46 +162,46 @@ void Score::padToggle(int n)
       {
       switch (n) {
             case PAD_NOTE00:
-                  _padState.len = division * 16;
+                  _is.len = division * 16;
                   break;
             case PAD_NOTE0:
-                  _padState.len = division * 8;
+                  _is.len = division * 8;
                   break;
             case PAD_NOTE1:
-                  _padState.len = division * 4;
+                  _is.len = division * 4;
                   break;
             case PAD_NOTE2:
-                  _padState.len = division * 2;
+                  _is.len = division * 2;
                   break;
             case PAD_NOTE4:
-                  _padState.len = division;
+                  _is.len = division;
                   break;
             case PAD_NOTE8:
-                  _padState.len = division/2;
+                  _is.len = division/2;
                   break;
             case PAD_NOTE16:
-                  _padState.len = division/4;
+                  _is.len = division/4;
                   break;
             case PAD_NOTE32:
-                  _padState.len = division/8;
+                  _is.len = division/8;
                   break;
             case PAD_NOTE64:
-                  _padState.len = division/16;
+                  _is.len = division/16;
                   break;
             case PAD_REST:
-                  _padState.rest = !_padState.rest;
+                  _is.rest = !_is.rest;
                   break;
             case PAD_DOT:
-                  if (_padState.dots == 1)
-                        _padState.dots = 0;
+                  if (_is.dots == 1)
+                        _is.dots = 0;
                   else
-                        _padState.dots = 1;
+                        _is.dots = 1;
                   break;
             case PAD_DOTDOT:
-                  if (_padState.dots == 2)
-                        _padState.dots = 0;
+                  if (_is.dots == 2)
+                        _is.dots = 0;
                   else
-                        _padState.dots = 2;
+                        _is.dots = 2;
                   break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
@@ -222,13 +221,13 @@ void Score::padToggle(int n)
             return;
 
       if (n >= PAD_NOTE00 && n <= PAD_NOTE64) {
-            _padState.dots = 0;
+            _is.dots = 0;
             //
             // if in "note enter" mode, reset
             // rest flag
             //
             if (noteEntryMode())
-                  _padState.rest = false;
+                  _is.rest = false;
             }
 
       if (noteEntryMode() || sel->state() != SEL_SINGLE) {
@@ -244,7 +243,7 @@ void Score::padToggle(int n)
 
       ChordRest* cr = static_cast<ChordRest*>(el);
       int tick      = cr->tick();
-      int len       = _padState.tickLen;
+      int len       = _is.tickLen;
       if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
             //
             // handle appoggiatura and acciaccatura
@@ -258,12 +257,12 @@ void Score::padToggle(int n)
             }
       else {
             if (cr->tuplet()) {
-                  int pitch = _padState.rest ? -1 : _padState.pitch;
+                  int pitch = _is.rest ? -1 : _is.pitch;
                   setTupletChordRest(cr, pitch, len);
                   }
             else {
-                  if (_padState.rest)
-                        setRest(tick, _is.track, len, _padState.dots);
+                  if (_is.rest)
+                        setRest(tick, _is.track, len, _is.dots);
                   else
                         changeCRlen(cr, len);
                   }
@@ -278,8 +277,8 @@ void Score::setPadState(Element* e)
       {
       int len       = -1;
 
-      _padState.drumNote = -1;
-      _padState.drumset  = 0;
+      _is.drumNote = -1;
+      _is.drumset  = 0;
 
       if (e->type() == NOTE) {
             Note* note          = static_cast<Note*>(e);
@@ -287,12 +286,12 @@ void Score::setPadState(Element* e)
             len = chord->duration().ticks(chord->dots());
 
             Accidental* prefix  = note->accidental();
-            _padState.prefix    = prefix ? prefix->subtype() : 0;
-            _padState.rest      = false;
-            _padState.voice     = note->voice();
-            _padState.pitch     = note->pitch();
-            _padState.noteType  = note->noteType();
-            _padState.beamMode  = chord->beamMode();
+            _is.prefix    = prefix ? prefix->subtype() : 0;
+            _is.rest      = false;
+            _is.voice     = note->voice();
+            _is.pitch     = note->pitch();
+            _is.noteType  = note->noteType();
+            _is.beamMode  = chord->beamMode();
             }
       else if (e->type() == REST) {
             Rest* rest = static_cast<Rest*>(e);
@@ -301,35 +300,35 @@ void Score::setPadState(Element* e)
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
 
-            _padState.prefix   = 0;
-            _padState.rest     = true;
-            _padState.voice    = rest->voice();
-            _padState.beamMode = rest->beamMode();
+            _is.prefix   = 0;
+            _is.rest     = true;
+            _is.voice    = rest->voice();
+            _is.beamMode = rest->beamMode();
             }
       else {
-            _padState.rest     = false;
-            _padState.len      = 0;
-            _padState.prefix   = 0;
-            _padState.noteType = NOTE_INVALID;
-            _padState.beamMode = BEAM_INVALID;
+            _is.rest     = false;
+            _is.len      = 0;
+            _is.prefix   = 0;
+            _is.noteType = NOTE_INVALID;
+            _is.beamMode = BEAM_INVALID;
             }
       if (e->type() == NOTE || e->type() == REST) {
             Instrument* instr   = e->staff()->part()->instrument();
             if (instr->useDrumset) {
                   if (e->type() == NOTE)
-                        _padState.drumNote = static_cast<Note*>(e)->pitch();
+                        _is.drumNote = static_cast<Note*>(e)->pitch();
                   else
-                        _padState.drumNote = -1;
-                  _padState.drumset  = instr->drumset;
+                        _is.drumNote = -1;
+                  _is.drumset  = instr->drumset;
                    }
             }
       if (len == -1) {
-            _padState.dots = 0;
+            _is.dots = 0;
             return;
             }
       Duration d;
-      headType(len, &d, &(_padState.dots));
-      _padState.len = d.ticks();
+      headType(len, &d, &(_is.dots));
+      _is.len = d.ticks();
       setPadState();
       }
 
@@ -339,51 +338,51 @@ void Score::setPadState(Element* e)
 
 void Score::setPadState()
       {
-      getAction("pad-rest")->setChecked(_padState.rest);
-      getAction("pad-dot")->setChecked(_padState.dots == 1);
-      getAction("pad-dotdot")->setChecked(_padState.dots == 2);
+      getAction("pad-rest")->setChecked(_is.rest);
+      getAction("pad-dot")->setChecked(_is.dots == 1);
+      getAction("pad-dotdot")->setChecked(_is.dots == 2);
 
-      getAction("note-longa")->setChecked(_padState.len == division * 16);
-      getAction("note-breve")->setChecked(_padState.len == division * 8);
-      getAction("pad-note-1")->setChecked(_padState.len == division * 4);
-      getAction("pad-note-2")->setChecked(_padState.len == division*2);
-      getAction("pad-note-4")->setChecked(_padState.len == division);
-      getAction("pad-note-8")->setChecked(_padState.len == division/2);
-      getAction("pad-note-16")->setChecked(_padState.len == division/4);
-      getAction("pad-note-32")->setChecked(_padState.len == division/8);
-      getAction("pad-note-64")->setChecked(_padState.len == division/16);
+      getAction("note-longa")->setChecked(_is.len == division * 16);
+      getAction("note-breve")->setChecked(_is.len == division * 8);
+      getAction("pad-note-1")->setChecked(_is.len == division * 4);
+      getAction("pad-note-2")->setChecked(_is.len == division*2);
+      getAction("pad-note-4")->setChecked(_is.len == division);
+      getAction("pad-note-8")->setChecked(_is.len == division/2);
+      getAction("pad-note-16")->setChecked(_is.len == division/4);
+      getAction("pad-note-32")->setChecked(_is.len == division/8);
+      getAction("pad-note-64")->setChecked(_is.len == division/16);
 
-      getAction("pad-sharp2")->setChecked(_padState.prefix == 3);
-      getAction("pad-sharp")->setChecked(_padState.prefix == 1);
-      getAction("pad-nat")->setChecked(_padState.prefix == 5);
-      getAction("pad-flat")->setChecked(_padState.prefix == 2);
-      getAction("pad-flat2")->setChecked(_padState.prefix == 4);
-      getAction("pad-staccato")->setChecked(_padState.prefix == 16);
+      getAction("pad-sharp2")->setChecked(_is.prefix == 3);
+      getAction("pad-sharp")->setChecked(_is.prefix == 1);
+      getAction("pad-nat")->setChecked(_is.prefix == 5);
+      getAction("pad-flat")->setChecked(_is.prefix == 2);
+      getAction("pad-flat2")->setChecked(_is.prefix == 4);
+      getAction("pad-staccato")->setChecked(_is.prefix == 16);
 
-      getAction("voice-1")->setChecked(_padState.voice == 0);
-      getAction("voice-2")->setChecked(_padState.voice == 1);
-      getAction("voice-3")->setChecked(_padState.voice == 2);
-      getAction("voice-4")->setChecked(_padState.voice == 3);
+      getAction("voice-1")->setChecked(_is.voice == 0);
+      getAction("voice-2")->setChecked(_is.voice == 1);
+      getAction("voice-3")->setChecked(_is.voice == 2);
+      getAction("voice-4")->setChecked(_is.voice == 3);
 
-      getAction("pad-acciaccatura")->setChecked(_padState.noteType == NOTE_ACCIACCATURA);
-      getAction("pad-appoggiatura")->setChecked(_padState.noteType == NOTE_APPOGGIATURA);
-      getAction("pad-grace4")->setChecked(_padState.noteType == NOTE_GRACE4);
-      getAction("pad-grace16")->setChecked(_padState.noteType == NOTE_GRACE16);
-      getAction("pad-grace32")->setChecked(_padState.noteType == NOTE_GRACE32);
+      getAction("pad-acciaccatura")->setChecked(_is.noteType == NOTE_ACCIACCATURA);
+      getAction("pad-appoggiatura")->setChecked(_is.noteType == NOTE_APPOGGIATURA);
+      getAction("pad-grace4")->setChecked(_is.noteType == NOTE_GRACE4);
+      getAction("pad-grace16")->setChecked(_is.noteType == NOTE_GRACE16);
+      getAction("pad-grace32")->setChecked(_is.noteType == NOTE_GRACE32);
 
-      getAction("beam-start")->setChecked(_padState.beamMode == BEAM_BEGIN);
-      getAction("beam-mid")->setChecked(_padState.beamMode == BEAM_MID);
-      getAction("no-beam")->setChecked(_padState.beamMode == BEAM_NO);
-      getAction("beam32")->setChecked(_padState.beamMode == BEAM_BEGIN32);
-      getAction("auto-beam")->setChecked(_padState.beamMode == BEAM_AUTO);
+      getAction("beam-start")->setChecked(_is.beamMode == BEAM_BEGIN);
+      getAction("beam-mid")->setChecked(_is.beamMode == BEAM_MID);
+      getAction("no-beam")->setChecked(_is.beamMode == BEAM_NO);
+      getAction("beam32")->setChecked(_is.beamMode == BEAM_BEGIN32);
+      getAction("auto-beam")->setChecked(_is.beamMode == BEAM_AUTO);
 
-      _padState.tickLen = _padState.len;
-      if (_padState.dots == 1)
-            _padState.tickLen += _padState.len / 2;
-      else if (_padState.dots == 2)
-            _padState.tickLen += ((_padState.len * 3)/4);
-      else if (_padState.dots)
-            printf("too many dots: %d\n", _padState.dots);
+      _is.tickLen = _is.len;
+      if (_is.dots == 1)
+            _is.tickLen += _is.len / 2;
+      else if (_is.dots == 2)
+            _is.tickLen += ((_is.len * 3)/4);
+      else if (_is.dots)
+            printf("too many dots: %d\n", _is.dots);
       mscore->updateDrumset();
       }
 

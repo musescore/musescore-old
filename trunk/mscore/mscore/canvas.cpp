@@ -1168,7 +1168,7 @@ void Canvas::setCursorOn(bool val)
 void Canvas::setShadowNote(const QPointF& p)
       {
       Position pos;
-      bool divideSegment = score()->padState()->tickLen >= (division/2);
+      bool divideSegment = score()->inputState()->tickLen >= (division/2);
       if (!score()->getPosition(&pos, p, divideSegment))
             return;
 
@@ -1179,8 +1179,7 @@ void Canvas::setShadowNote(const QPointF& p)
 
       if (instr->useDrumset) {
             Drumset* ds  = instr->drumset;
-            PadState* ps = score()->padState();
-            int pitch    = ps->drumNote;
+            int pitch    = score()->inputState()->drumNote;
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
                   notehead = ds->noteHead(pitch);
@@ -1263,9 +1262,14 @@ void Canvas::paintEvent(QPaintEvent* ev)
             p.drawLine(dropAnchor);
             }
       if (dragElement) {
-            p.translate(dragElement->canvasPos());
+            QList<const Element*> el;
+            dragElement->collectElements(el);
             p.setPen(preferences.defaultColor);
-            dragElement->draw(p);
+            foreach(const Element* e, el) {
+                  p.translate(e->canvasPos());
+                  e->draw(p);
+                  p.translate(-e->canvasPos());
+                  }
             }
       }
 
@@ -1571,7 +1575,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case HAIRPIN:
                   case TEXTLINE:
                         el = Element::create(type, score());
-                        ((SLine*)el)->setLen(_spatium * 7);
+                        dynamic_cast<SLine*>(el)->setLen(_spatium * 7);
                         break;
                   case IMAGE:
                         {
@@ -2214,8 +2218,7 @@ Element* Canvas::elementNear(const QPointF& p)
 
 void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
       {
-      for (int i = 0; i < el.size(); ++i) {
-            const Element* e = el.at(i);
+      foreach(const Element* e, el) {
             e->itemDiscovered = 0;
             if (!e->visible()) {
                   if (score()->printing() || !score()->showInvisible())

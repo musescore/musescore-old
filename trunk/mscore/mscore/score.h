@@ -28,7 +28,6 @@
 
 #include "undo.h"
 #include "input.h"
-#include "padstate.h"
 #include "globals.h"
 
 class System;
@@ -183,7 +182,6 @@ class Score : public QObject {
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
 
-      PadState   _padState;
       InputState _is;
 
       QList<Excerpt*> _excerpts;
@@ -630,10 +628,10 @@ class Score : public QObject {
 
       bool noteEntryMode() const    { return _is.noteEntryMode; }
       int inputPos() const          { return _is.pos();   }
-      int inputTrack() const        { return _is.track; }
+      int inputTrack() const        { return _is.track;   }
+      InputState* inputState()      { return &_is;       }
       void setInputTrack(int);
 
-      PadState* padState()          { return &_padState; }
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }
       void setTextStyles(QVector<TextStyle*>&s);

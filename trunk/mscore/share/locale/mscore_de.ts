@@ -5766,14 +5766,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>pt_BR Brasilian Portuguese</source>
         <translation>pt_BR Brasilianisches Portugiesisch</translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Replace 1/2 ... with ½ ...</source>
-        <translation>Ersetze 1/1 ... durch ½ ...</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation>Ersetze (C) ... durch © ... in Copyright Text</translation>
-    </message>
     <message>
         <source>Default duration:</source>
         <translation>Standarddauer</translation>
@@ -5781,6 +5773,14 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     <message>
         <source>ms</source>
         <translation>ms</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace 1/2 ... with ½ ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6435,6 +6435,13 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
 </context>
 <context>
+    <name>TextB</name>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextBase</name>
     <message>
         <source>Form</source>
@@ -6507,92 +6514,12 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation>MuseScore: Spezielle Textsymbole</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation>Größe:</translation>
-    </message>
-    <message>
-        <source>Family:</source>
-        <translation>Familie:</translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation>linksbündig</translation>
-    </message>
-    <message>
-        <source>align center</source>
-        <translation>zentriert</translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation>rechtsbündig</translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation>fett</translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation>kursiv</translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation>unterstrichen</translation>
-    </message>
-    <message>
-        <source>subscript</source>
-        <translation>tiefstellen</translation>
-    </message>
-    <message>
-        <source>superscript</source>
-        <translation>hochstellen</translation>
-    </message>
-    <message>
-        <source>font size</source>
-        <translation>Fontgröße</translation>
-    </message>
-    <message>
-        <source>select font family</source>
-        <translation>Schrift auswählen</translation>
-    </message>
-    <message>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
         <source>Frame</source>
         <translation>Rahmen</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation>mm</translation>
-    </message>
-    <message>
-        <source>frame width</source>
-        <translation>Rahmenbreite</translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation>Rahmenfarbe</translation>
-    </message>
-    <message>
-        <source>padding width</source>
-        <translation>Füllbreite</translation>
-    </message>
-    <message>
-        <source>frame rounding</source>
-        <translation>Rahmenrundung</translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation>Kreis</translation>
-    </message>
-    <message>
-        <source>Rectangle</source>
-        <translation>Rechteck</translation>
     </message>
 </context>
 <context>
@@ -6720,6 +6647,14 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>align left</source>
         <translation>linksbündig</translation>
+    </message>
+    <message>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
     </message>
 </context>
 <context>
@@ -6886,6 +6821,13 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>Ich und du, Muellers Kuh...</source>
         <translation>Ich und du, Müllers Kuh...</translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

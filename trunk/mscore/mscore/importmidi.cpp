@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: midi.cpp,v 1.38 2006/03/22 12:04:14 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1097,7 +1097,7 @@ void Score::convertMidi(MidiFile* mf, int /*shortestNote*/)
 
                   part->setLongName(track->name());
 
-            part->setTrackName(part->longName());
+            part->setTrackName(part->longName()->getText());
             part->setMidiChannel(track->outChannel());
             part->setMidiProgram(track->program & 0x7f);  // only GM
             _parts.push_back(part);
@@ -1503,11 +1503,16 @@ bool Score::importMidi(const QString& name)
             return false;
 
       MidiFile mf;
-      if (!mf.read(&fp)) {
+      try {
+            mf.read(&fp);
+            }
+      catch(QString errorText) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: load midi"),
-               QString("Load failed: ") + mf.error(),
+               QString("Load failed: ") + errorText,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            fp.close();
+            return false;
             }
       fp.close();
 

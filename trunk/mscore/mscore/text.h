@@ -24,6 +24,8 @@
 #include "element.h"
 #include "style.h"
 
+#include "ui_textproperties.h"
+
 class TextPalette;
 class Viewer;
 
@@ -50,12 +52,14 @@ enum {
 //---------------------------------------------------------
 
 class TextBase {
+      int _refCount;
       QTextDocument* _doc;
       double _frameWidth;                 // unit: mm
       double _paddingWidth;               // unit: mm
       QColor _frameColor;
       int _frameRound;
       bool _circle;
+      bool _hasFrame;
       double _layoutWidth;
 
       QRectF frame;
@@ -65,8 +69,14 @@ class TextBase {
       TextBase();
       TextBase(const TextBase&);
 
+      int refCount() const    { return _refCount; }
+      void incRefCount()      { ++_refCount; }
+      void decRefCount()      { --_refCount; }
+
       void setDoc(const QTextDocument& d);
       QTextDocument* doc() const            { return _doc;          }
+      bool hasFrame() const                 { return _hasFrame;     }
+      void setHasFrame(bool val)            { _hasFrame = val;      }
       double frameWidth() const             { return _frameWidth;   }
       double paddingWidth() const           { return _paddingWidth; }
       QColor frameColor() const             { return _frameColor;   }
@@ -184,6 +194,7 @@ class TextB : public Element {
 
       bool replaceSpecialChars();
       void styleChanged();
+      QTextCursor* getCursor() const { return cursor; }
       };
 
 //---------------------------------------------------------
@@ -197,30 +208,46 @@ class Text : public TextB {
       Text(Score*);
       Text(const Text&);
       ~Text();
-      virtual Text* clone() const           { return new Text(*this); }
-      virtual TextBase* textBase() const    { return _tb; }
-      void setModified(bool v)              { _tb->setModified(v); }
+      virtual Text* clone() const        { return new Text(*this); }
+      virtual TextBase* textBase() const { return _tb; }
+
+      virtual bool genPropertyMenu(QMenu* popup) const;
+      virtual void propertyAction(const QString& s);
+
+      void setModified(bool v)           { _tb->setModified(v); }
       };
 
 //---------------------------------------------------------
 //   class Text
+//    shared text
 //---------------------------------------------------------
 
 class TextC : public TextB {
-      TextBase** _tbb;
-      TextBase*  _otb;
+      TextBase*  _tb;
 
    public:
-      TextC(TextBase**, Score*);
+      TextC(Score*);
       TextC(const TextC&);
       ~TextC();
-      virtual TextC* clone() const          { return new TextC(*this); }
-      virtual TextBase* textBase() const    { return *_tbb;            }
-      void setTextBase(TextBase** tb)       { _tbb = tb;               }
-      TextBase* otb()                       { return _otb;             }
-      void setOtb(TextBase* b)              { _otb = b;                }
+      virtual TextC* clone() const;
+      virtual TextBase* textBase() const { return _tb; }
       virtual void setStyle(const TextStyle*);
       void baseChanged();
+      };
+
+//---------------------------------------------------------
+//   TextProperties
+//---------------------------------------------------------
+
+class TextProperties : public QDialog, public Ui::TextProperties {
+      Q_OBJECT
+      TextB* tb;
+
+   private slots:
+      virtual void accept();
+
+   public:
+      TextProperties(TextB*, QWidget* parent = 0);
       };
 
 #endif

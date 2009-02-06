@@ -44,18 +44,6 @@ struct PadState {
       int drumNote;
       Drumset* drumset;
 
-//    0 - no prefix
-//    1 - sharp
-//    2 - flat
-//    3 - double sharp
-//    4 - double flat
-//    5 - natural
-//    6 - (sharp)          11 - [sharp]
-//    7 - (flat)           12 - [flat]
-//    8 - (double sharp)   13 - [double sharp]
-//    9 - (double flat)    14 - [double flat]
-//    10 - (natural)       15 - [natural]
-
       PadState() {
             dots     = 0;
             len      = division;

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: system.cpp,v 1.41 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -467,20 +467,18 @@ void System::setInstrumentName(int staffIdx)
       if (isVbox())                 // ignore vbox
             return;
 
-      Score* cs = score();
-      Staff* s  = cs->staff(staffIdx);
+      Score* cs  = score();
+      Staff* s   = cs->staff(staffIdx);
+      Part* part = s->part();
+
       if (!s->isTop())
             return;
       SysStaff* staff = _staves[staffIdx];
-      if (staff->instrumentName == 0)
-            staff->instrumentName = new TextC(s->part()->longNameBase(), cs);
-      if (_firstSystem) {
-            staff->instrumentName->setSubtype(TEXT_INSTRUMENT_LONG);
-            staff->instrumentName->setTextBase(s->part()->longNameBase());
-            }
-      else {
-            staff->instrumentName->setSubtype(TEXT_INSTRUMENT_SHORT);
-            staff->instrumentName->setTextBase(s->part()->shortNameBase());
+      if (staff->instrumentName == 0) {
+            if (_firstSystem)
+                  staff->instrumentName = new TextC(*part->longName());
+            else
+                  staff->instrumentName = new TextC(*part->shortName());
             }
       staff->instrumentName->setParent(this);
       staff->instrumentName->setTrack(staffIdx * VOICES);

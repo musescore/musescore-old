@@ -33,29 +33,56 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
       TextB* _textElement;
-      QTextCharFormat format;
-      QTextBlockFormat bformat;
+
+      void closeEvent(QCloseEvent* ev);
 
    private slots:
       void symbolClicked(int);
-      void sizeChanged(double value);
-      void boldClicked(bool);
-      void italicClicked(bool);
-      void underlineClicked(bool);
-      void setLeftAlign();
-      void setRightAlign();
-      void setHCenterAlign();
-      void fontChanged(const QFont&);
-      void subscriptClicked(bool);
-      void superscriptClicked(bool);
-      void borderChanged(double);
-      void paddingChanged(double);
-      void frameRoundChanged(int val);
-      void frameColorChanged(QColor);
-      void circleToggled(bool val);
 
    public:
       TextPalette(QWidget* parent);
+      void setText(TextB* te);
+      TextB* text() { return _textElement; }
+      };
+
+//---------------------------------------------------------
+//   TextTools
+//---------------------------------------------------------
+
+class TextTools : public QDockWidget {
+      Q_OBJECT
+
+      TextB* _textElement;
+      QTextCharFormat format;
+      QTextBlockFormat bformat;
+      QDoubleSpinBox* typefaceSize;
+      QFontComboBox* typefaceFamily;
+      QAction* typefaceBold;
+      QAction* typefaceItalic;
+      QAction* typefaceUnderline;
+      QAction* leftAlign;
+      QAction* centerAlign;
+      QAction* rightAlign;
+      QAction* typefaceSubscript;
+      QAction* typefaceSuperscript;
+      QAction* showKeyboard;
+
+   private slots:
+      void sizeChanged(double value);
+      void moveFocus();
+      void fontChanged(const QFont&);
+      void boldClicked(bool);
+      void italicClicked(bool);
+      void underlineClicked(bool);
+      void subscriptClicked(bool);
+      void superscriptClicked(bool);
+      void setLeftAlign();
+      void setRightAlign();
+      void setHCenterAlign();
+      void showKeyboardClicked(bool);
+
+   public:
+      TextTools(QWidget* parent = 0);
       void setText(TextB* te);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);

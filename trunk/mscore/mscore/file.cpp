@@ -41,7 +41,6 @@
 #include "style.h"
 #include "tempo.h"
 #include "select.h"
-#include "padstate.h"
 #include "preferences.h"
 #include "input.h"
 #include "playpanel.h"
@@ -1351,34 +1350,36 @@ void Score::checkTuplets()
 
 void Score::printFile()
       {
-      pdev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
-      if (pdev->paperSize() == QPrinter::Custom) {
-            pdev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
+      QPrinter* printerDev = static_cast<QPrinter*>(pdev);
+
+      printerDev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
+      if (printerDev->paperSize() == QPrinter::Custom) {
+            printerDev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
             printf("paper size %f %f\n", pageFormat()->_width, pageFormat()->_height);
             }
-      pdev->setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-      pdev->setCreator("MuseScore Version: " VERSION);
-      pdev->setFullPage(true);
-      pdev->setColorMode(QPrinter::Color);
+      printerDev->setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev->setCreator("MuseScore Version: " VERSION);
+      printerDev->setFullPage(true);
+      printerDev->setColorMode(QPrinter::Color);
 
-      pdev->setDocName(name());
-      pdev->setDoubleSidedPrinting(pageFormat()->twosided);
-      pdev->setOutputFormat(QPrinter::NativeFormat);
+      printerDev->setDocName(name());
+      printerDev->setDoubleSidedPrinting(pageFormat()->twosided);
+      printerDev->setOutputFormat(QPrinter::NativeFormat);
 
 #ifndef __MINGW32__
       // when setting this on windows platform, pd.exec() does not
       // show dialog
-      pdev->setOutputFileName(info.path() + "/" + name() + ".pdf");
+      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");
 #else
-      pdev->setOutputFileName("");
+      printerDev->setOutputFileName("");
 #endif
 
-      QPrintDialog pd(pdev, 0);
+      QPrintDialog pd(printerDev, 0);
       if (!pd.exec()) {
             return;
             }
-      print(pdev);
+      print(printerDev);
       }
 
 //---------------------------------------------------------
@@ -1472,46 +1473,50 @@ bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
 
 bool Score::saveSvg(const QString& saveName)
       {
-      QRectF r = canvas()->lassoRect();
-      double x = r.x();
-      double y = r.y();
-      double w = r.width();
-      double h = r.height();
-
       QSvgGenerator printer;
+      QPaintDevice* opdev = pdev;
+      pdev = &printer;
+
+      printer.setResolution(DPI);
       printer.setFileName(saveName);
-      printer.setSize(QSize(lrint(w), lrint(h)));
 
       _printing = true;
-      QPainter p(&printer);
+
+      QPainter p(pdev);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
+      double mag = converterDpi / DPI;
+      p.scale(mag, mag);
 
-      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
-      p.setClipping(true);
-
-      QPointF offset(x, y);
-
+      QList<const Element*> eel;
+      foreach (const Element* element, _gel)
+            element->collectElements(eel);
+      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
+            m->collectElements(eel);
+            }
       QList<const Element*> el;
       foreach(const Page* page, _layout->pages()) {
             el.clear();
             page->collectElements(el);
-            foreach(System* system, *page->systems()) {
-                  foreach(MeasureBase* m, system->measures()) {
-                        // skip multi measure rests
-                        if (m->type() == MEASURE) {
-                              Measure* mm = static_cast<Measure*>(m);
-                              if (mm->multiMeasure() < 0)
-                                    continue;
-                              }
-                        m->collectElements(el);
-                        }
-                  }
-            for (int i = 0; i < el.size(); ++i) {
-                  const Element* e = el[i];
+            foreach(const Element* e, eel) {
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - offset);
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(p);
@@ -1521,6 +1526,7 @@ bool Score::saveSvg(const QString& saveName)
 
       _printing = false;
       p.end();
+      pdev = opdev;
       return true;
       }
 

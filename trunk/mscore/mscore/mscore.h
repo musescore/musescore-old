@@ -51,6 +51,7 @@ class NewWizard;
 class ExcerptsDialog;
 class QScriptEmbeddedDebugger;
 struct Drumset;
+class TextTools;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -175,6 +176,7 @@ class MuseScore : public QMainWindow {
       QToolBar* fileTools;
       QToolBar* transportTools;
       QToolBar* entryTools;
+      TextTools* _textTools;
       QToolBar* voiceTools;
       EditStyle* editStyleWin;
       InstrumentsDialog* instrList;
@@ -329,6 +331,7 @@ class MuseScore : public QMainWindow {
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
       void setDrumPalette(Palette* p) { drumPalette = p; }
+      TextTools* textTools();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
