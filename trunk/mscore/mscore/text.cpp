@@ -92,6 +92,14 @@ void TextBase::setDoc(const QTextDocument& d)
       _doc = d.clone(0);
       }
 
+QFont TextBase::defaultFont() const
+      {
+      QTextCursor cursor(_doc);
+      cursor.movePosition(QTextCursor::Start);
+//      return _doc->defaultFont();
+      return cursor.charFormat().font();
+      }
+
 //---------------------------------------------------------
 //   setText
 //---------------------------------------------------------
@@ -396,6 +404,14 @@ void TextC::setStyle(const TextStyle* s)
       setSystemFlag(s->systemFlag);
       if (s->systemFlag)
             setTrack(-1);
+      if (s->frameWidth > 0.0) {
+            textBase()->setFrameWidth(s->frameWidth);
+            textBase()->setHasFrame(true);
+            }
+      textBase()->setPaddingWidth(s->paddingWidth);
+      textBase()->setFrameColor(s->frameColor);
+      textBase()->setFrameRound(s->frameRound);
+      textBase()->setCircle(s->circle);
       }
 
 //---------------------------------------------------------
@@ -882,19 +898,7 @@ bool TextB::edit(Viewer* view, int /*grip*/, int key, Qt::KeyboardModifiers modi
       score()->setLayoutAll(lo);
       qreal w = 8.0 / view->matrix().m11();
       score()->addRefresh(abbox().adjusted(-w, -w, w, w));
-#if 0
-      if (key == Qt::Key_F2) {
-            if (textPalette == 0)
-                  textPalette = new TextPalette(score()->canvas());
-            if (textPalette->isVisible())
-                  textPalette->hide();
-            else {
-                  textPalette->setText(this);
-                  textPalette->show();
-                  }
-            return true;
-            }
-#endif
+
       if (modifiers == Qt::ControlModifier) {
             switch (key) {
                   case Qt::Key_B:   // toggle bold face

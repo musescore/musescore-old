@@ -70,7 +70,8 @@ void Ottava::setSubtype(int val)
                   _pitchShift = -24;
                   break;
             }
-      beginText()->setDefaultFont(score()->textStyle(TEXT_STYLE_DYNAMICS)->font());
+      beginText()->setStyle(score()->textStyle(TEXT_STYLE_OTTAVA));
+      continueText()->setStyle(score()->textStyle(TEXT_STYLE_OTTAVA));
       }
 
 //---------------------------------------------------------
