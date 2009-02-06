@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>895</width>
+    <width>403</width>
     <height>260</height>
    </rect>
   </property>
@@ -16,22 +16,13 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>8</number>
-   </property>
-   <property name="topMargin" >
-    <number>8</number>
-   </property>
-   <property name="rightMargin" >
-    <number>8</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>8</number>
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Chord</string>
+      <string comment="do not translate" >Chord</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -40,16 +31,7 @@
       <property name="spacing" >
        <number>6</number>
       </property>
-      <property name="leftMargin" >
-       <number>8</number>
-      </property>
-      <property name="topMargin" >
-       <number>8</number>
-      </property>
-      <property name="rightMargin" >
-       <number>8</number>
-      </property>
-      <property name="bottomMargin" >
+      <property name="margin" >
        <number>8</number>
       </property>
       <item>
@@ -57,29 +39,20 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
          <widget class="QPushButton" name="stemButton" >
           <property name="text" >
-           <string>Stem</string>
+           <string comment="do not translate" >Stem</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="hookButton" >
           <property name="text" >
-           <string>Hook</string>
+           <string comment="do not translate" >Hook</string>
           </property>
          </widget>
         </item>
@@ -88,7 +61,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>40</width>
             <height>20</height>
@@ -103,29 +76,20 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
-        </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
         <item>
          <widget class="QCheckBox" name="graceNote" >
           <property name="text" >
-           <string>Grace Note</string>
+           <string comment="do not translate" >Grace Note</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label" >
           <property name="text" >
-           <string>Stem Direction</string>
+           <string comment="do not translate" >Stem Direction</string>
           </property>
          </widget>
         </item>
@@ -136,22 +100,10 @@
       </item>
       <item>
        <layout class="QGridLayout" >
-        <property name="leftMargin" >
+        <property name="margin" >
          <number>0</number>
         </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
-         <number>0</number>
-        </property>
-        <property name="horizontalSpacing" >
-         <number>6</number>
-        </property>
-        <property name="verticalSpacing" >
+        <property name="spacing" >
          <number>6</number>
         </property>
         <item row="1" column="1" >
@@ -163,14 +115,14 @@
         <item row="0" column="0" >
          <widget class="QLabel" name="label_2" >
           <property name="text" >
-           <string>Notes:</string>
+           <string comment="do not translate" >Notes:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1" >
          <widget class="QLabel" name="label_3" >
           <property name="text" >
-           <string>Help Lines:</string>
+           <string comment="do not translate" >Help Lines:</string>
           </property>
          </widget>
         </item>

@@ -42,7 +42,8 @@ TextLineSegment::TextLineSegment(Score* s)
 TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
-      _text = 0;  // will be set right in layout()
+      _text = 0;
+      layout(score()->layout());    // set right _text
       }
 
 //---------------------------------------------------------

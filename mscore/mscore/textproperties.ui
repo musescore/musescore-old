@@ -385,8 +385,6 @@
        <property name="toolTip" >
         <string>text color</string>
        </property>
-       <zorder>label_8</zorder>
-       <zorder>horizontalSpacer</zorder>
       </widget>
      </item>
      <item>
@@ -648,6 +646,32 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>fontSelect</tabstop>
+  <tabstop>fontSize</tabstop>
+  <tabstop>fontBold</tabstop>
+  <tabstop>fontItalic</tabstop>
+  <tabstop>fontUnderline</tabstop>
+  <tabstop>alignLeft</tabstop>
+  <tabstop>alignHCenter</tabstop>
+  <tabstop>alignRight</tabstop>
+  <tabstop>alignTop</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>alignVCenter</tabstop>
+  <tabstop>alignBottom</tabstop>
+  <tabstop>xOffset</tabstop>
+  <tabstop>rxOffset</tabstop>
+  <tabstop>yOffset</tabstop>
+  <tabstop>ryOffset</tabstop>
+  <tabstop>mmUnit</tabstop>
+  <tabstop>spatiumUnit</tabstop>
+  <tabstop>frame</tabstop>
+  <tabstop>circleButton</tabstop>
+  <tabstop>boxButton</tabstop>
+  <tabstop>frameWidth</tabstop>
+  <tabstop>paddingWidth</tabstop>
+  <tabstop>frameRound</tabstop>
+ </tabstops>
  <resources>
   <include location="mscore.qrc" />
  </resources>
