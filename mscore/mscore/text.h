@@ -245,6 +245,7 @@ class TextProperties : public QDialog, public Ui::TextProperties {
 
    private slots:
       virtual void accept();
+      void mmToggled(bool);
 
    public:
       TextProperties(TextB*, QWidget* parent = 0);
