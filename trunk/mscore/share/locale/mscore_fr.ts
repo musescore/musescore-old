@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="fr_FR">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -71,63 +72,63 @@
     <name>@default</name>
     <message>
         <source>system</source>
-        <translation type="unfinished"></translation>
+        <translation>Système</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Česky - Tchèque</translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Deutsch - Allemand</translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished"></translation>
+        <translation>English (GB) - Anglais (GB)</translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>English (US) - Anglais (US)</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Español - Espagnol</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Français</translation>
     </message>
     <message>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>Galego - Galicien</translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>हिन्दी - Hindi</translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italiano - Italien</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands - Néerlandais</translation>
     </message>
     <message>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Português - Portuguais</translation>
     </message>
     <message>
         <source>Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Brasileiro - Brésilien</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Русский - Russe</translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Türk - Turc</translation>
     </message>
 </context>
 <context>
@@ -146,7 +147,7 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Révision : 1501</translation>
+        <translation>Révision : 1521</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -158,7 +159,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visetez http://www.musescore.org pour les nouvelles versions et&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;plus d&apos;information.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous la GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1599,11 +1608,11 @@ failed: </source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished">Notes</translation>
+        <translation>Notes</translation>
     </message>
     <message>
         <source>note dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance entre la note et le point</translation>
     </message>
 </context>
 <context>
@@ -3222,35 +3231,35 @@ failed: </source>
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation>Pad - Note 1/1</translation>
+        <translation>Ronde (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation>Pad - Note 1/2</translation>
+        <translation>Blanche (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>Pad - Note 1/4</translation>
+        <translation>Noire (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>Pad - Note 1/8</translation>
+        <translation>Croche (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>Pad - Note 1/16</translation>
+        <translation>Double Croche (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>Pad - Note 1/32</translation>
+        <translation>Triple Croche (pavé numérique)</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>Pad - Note 1/64</translation>
+        <translation>Quadruple Croche (pavé numérique)</translation>
     </message>
     <message>
         <source>pad dot</source>
-        <translation>Pad - Point</translation>
+        <translation>Pointé (pavé numérique)</translation>
     </message>
     <message>
         <source>tie</source>
@@ -3258,7 +3267,7 @@ failed: </source>
     </message>
     <message>
         <source>pad rest</source>
-        <translation>Pad - Silence</translation>
+        <translation>Silence (pavé numérique)</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -3734,7 +3743,7 @@ failed: </source>
     </message>
     <message>
         <source>seconda volta 2</source>
-        <translation>seconda volta</translation>
+        <translation>seconda volta 2</translation>
     </message>
     <message>
         <source>8va</source>
@@ -4118,7 +4127,7 @@ failed: </source>
     </message>
     <message>
         <source>Volta</source>
-        <translation>Reprise</translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <source>Frame</source>
@@ -4610,7 +4619,7 @@ failed: </source>
     </message>
     <message>
         <source>note breve</source>
-        <translation>note breve</translation>
+        <translation>Brève</translation>
     </message>
     <message>
         <source>reset measure stretch</source>
@@ -4618,7 +4627,7 @@ failed: </source>
     </message>
     <message>
         <source>note longa</source>
-        <translation>note longa</translation>
+        <translation>Longue</translation>
     </message>
     <message>
         <source>Save changes to the score &quot;%1&quot;
@@ -4671,7 +4680,7 @@ before closing?</source>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation>Pad - Double point</translation>
+        <translation>Double Pointé (pavé numérique)</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -5613,15 +5622,15 @@ before closing?</source>
     </message>
     <message>
         <source>de German</source>
-        <translation>Allemand</translation>
+        <translation>Deutsch - Allemand</translation>
     </message>
     <message>
         <source>en English</source>
-        <translation>Anglais</translation>
+        <translation>English - Anglais</translation>
     </message>
     <message>
         <source>es Spanish</source>
-        <translation>Espagnol</translation>
+        <translation>Español - Espagnol</translation>
     </message>
     <message>
         <source>fr French</source>
@@ -5629,19 +5638,19 @@ before closing?</source>
     </message>
     <message>
         <source>it Italian</source>
-        <translation>Italien</translation>
+        <translation>Italiano - Italien</translation>
     </message>
     <message>
         <source>pt Portuguese</source>
-        <translation>Portuguais</translation>
+        <translation>Português - Portuguais</translation>
     </message>
     <message>
         <source>ru Russian</source>
-        <translation>Russe</translation>
+        <translation>Русский - Russe</translation>
     </message>
     <message>
         <source>nl Dutch</source>
-        <translation>Néerlandais</translation>
+        <translation>Nederlands - Néerlandais</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -5689,7 +5698,7 @@ before closing?</source>
     </message>
     <message>
         <source>cz Czech</source>
-        <translation>Tchèque</translation>
+        <translation>Česky - Tchèque</translation>
     </message>
     <message>
         <source>start empty</source>
@@ -5697,7 +5706,7 @@ before closing?</source>
     </message>
     <message>
         <source>gl Galician</source>
-        <translation>Galicien</translation>
+        <translation>Galego - Galicien</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5717,19 +5726,19 @@ before closing?</source>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Voix 1 selectionnée</translation>
+        <translation>Voix 1 sélectionnée</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Voix 2 selectionnée</translation>
+        <translation>Voix 2 sélectionnée</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Voix 3 selectionnée</translation>
+        <translation>Voix 3 sélectionnée</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Voix 4 selectionnée</translation>
+        <translation>Voix 4 sélectionnée</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -5737,7 +5746,7 @@ before closing?</source>
     </message>
     <message>
         <source>tr Turkey</source>
-        <translation>Turc</translation>
+        <translation>Türk - Turc</translation>
     </message>
     <message>
         <source>Score</source>
@@ -5757,11 +5766,11 @@ before closing?</source>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation>Hindi</translation>
+        <translation>हिन्दी - Hindi</translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation>Brésilien</translation>
+        <translation>Brasileiro - Brésilien</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -5773,11 +5782,11 @@ before closing?</source>
     </message>
     <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer 1/2 ... par ½ ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer (C) ... par © ... dans le texte de Copyright</translation>
     </message>
 </context>
 <context>
@@ -6409,7 +6418,7 @@ failed: </source>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation>MuseScore : Propriétés du texte de tempo</translation>
+        <translation>MuseScore : Propriétés du tempo</translation>
     </message>
     <message>
         <source>Tempo:</source>
@@ -6421,7 +6430,7 @@ failed: </source>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du tempo</translation>
     </message>
 </context>
 <context>
@@ -6435,7 +6444,7 @@ failed: </source>
     <name>TextB</name>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du texte...</translation>
     </message>
 </context>
 <context>
@@ -6647,11 +6656,11 @@ failed: </source>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>couleur du texte</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
 </context>
 <context>
@@ -6824,7 +6833,7 @@ failed: </source>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le texte</translation>
     </message>
 </context>
 <context>
