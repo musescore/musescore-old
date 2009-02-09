@@ -397,7 +397,7 @@ void Score::putNote(const QPointF& pos, bool replace)
 
       bool addToChord = false;
       int tl = len;
-      if (_is.cr->tuplet())
+      if (_is.cr && _is.cr->tuplet())
             tl = _is.cr->tickLen();
       if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
