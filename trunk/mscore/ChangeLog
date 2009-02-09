@@ -1,4 +1,9 @@
-9.feb (db)
+9.feb (ws)
+      - fixed crash in note entry mode when measure was selected and a note
+        was entered with mouse
+      - better check result of save operation
+      - fixed: temp file was not deleted on windows
+      (db)
       - added Italian handbook, updated Spanish handbook
       - updated version number on splash screen
 7.feb (tb)

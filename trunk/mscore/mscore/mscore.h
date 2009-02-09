@@ -248,7 +248,7 @@ class MuseScore : public QMainWindow {
       void timeMenu();
       void dynamicsMenu();
       void loadFile();
-      bool saveFile();
+      void saveFile();
       void newFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);

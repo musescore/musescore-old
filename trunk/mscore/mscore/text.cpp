@@ -1241,8 +1241,13 @@ void TextB::paste()
 
 bool Text::genPropertyMenu(QMenu* popup) const
       {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Text Properties..."));
+      QAction* a;
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Text Properties..."));
       a->setData("props");
       return true;
       }

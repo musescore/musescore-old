@@ -1728,14 +1728,24 @@ int main(int argc, char* argv[])
                   }
             cs->layout();
 
-            bool rv;
+            bool rv = true;
             if (fn.endsWith(".msc")) {
                   QFileInfo fi(fn);
-                  rv = cs->saveFile(fi, false);
+                  try {
+                        cs->saveFile(fi, false);
+                        }
+                  catch(QString) {
+                        rv = false;
+                        }
                   }
             else if (fn.endsWith(".mscz")) {
                   QFileInfo fi(fn);
-                  rv = cs->saveCompressedFile(fi, false);
+                  try {
+                        cs->saveCompressedFile(fi, false);
+                        }
+                  catch(QString) {
+                        rv = false;
+                        }
                   }
             else if (fn.endsWith(".xml"))
                   rv = cs->saveXml(fn);

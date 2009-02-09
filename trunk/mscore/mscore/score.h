@@ -558,10 +558,10 @@ class Score : public QObject {
       bool importLilypond(const QString& name);
       bool importBB(const QString& name);
       bool importCapella(const QString& name);
-      bool saveFile(QFileInfo& info, bool autosave);
-      bool saveFile(QIODevice* f, bool autosave);
-      bool saveCompressedFile(QFileInfo&, bool autosave);
-      bool saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
+      void saveFile(QFileInfo& info, bool autosave);
+      void saveFile(QIODevice* f, bool autosave);
+      void saveCompressedFile(QFileInfo&, bool autosave);
+      void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       bool saveAs(bool saveCopy = false);
 
       void print(QPrinter* printer);

@@ -212,47 +212,48 @@ void MuseScore::loadFile()
 /**
  Save the current score.
  Handles the GUI's file-save action.
- Return true if OK and false on error.
  */
 
-bool MuseScore::saveFile()
+void MuseScore::saveFile()
       {
-      bool val = cs->saveFile(false);
-      setWindowTitle("MuseScore: " + cs->name());
-      tab->setTabText(tab->currentIndex(), cs->name());
-      return val;
+      if (cs->saveFile(false)) {
+            setWindowTitle("MuseScore: " + cs->name());
+            tab->setTabText(tab->currentIndex(), cs->name());
+            }
       }
 
 /**
  If file has generated name, create a modal file save dialog
  and ask filename.
  Rename old file to backup file (.xxxx.msc,).
- Default is to save score in .msc format,
- but (compressed) MusicXML files are also saved correctly.
+ Default is to save score in .mscz format,
  Return true if OK and false on error.
  */
 
 bool Score::saveFile(bool autosave)
       {
+      QString suffix = info.suffix();
+      if ((suffix != "msc") && (suffix != "mscz")) {
+            QString s = info.filePath();
+            s = s.left(s.size() - suffix.size());
+            suffix = "mscz";
+            s += suffix;
+            info.setFile(s);
+            }
+
       if (created()) {
             QString selectedFilter;
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
             QString f2 = tr("MuseScore File (*.msc)");
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("./%1.mscz").arg(name()),
+               QString("./%1.mscz").arg(info.baseName()),
                f1 + ";;" + f2,
                &selectedFilter
                );
             if (fn.isEmpty())
                   return false;
-            fileInfo()->setFile(fn);
-// printf("suffix <%s>  filter <%s> f2 <%s>\n",
-//   qPrintable(fileInfo()->suffix()), qPrintable(selectedFilter), qPrintable(f2));
-            if (fileInfo()->suffix() == "") {
-                  if (selectedFilter == f2)
-                        fileInfo()->setFile(fn + ".msc");
-                  }
+            info.setFile(fn);
             setCreated(false);
             }
 
@@ -260,43 +261,47 @@ bool Score::saveFile(bool autosave)
       // save but don't overwrite backup again
 
       if (saved()) {
-            bool rv = false;
-            if (fileInfo()->suffix() == "mxl")
-                  rv = saveMxl(fileInfo()->absoluteFilePath());
-            else if (fileInfo()->suffix() == "xml")
-                  rv = saveXml(fileInfo()->absoluteFilePath());
-            else if (fileInfo()->suffix() == "msc")
-                  rv = saveFile(*fileInfo(), autosave);
-            else
-                  rv = saveCompressedFile(*fileInfo(), autosave);
-            if (rv)
-                  setDirty(false);
-            return rv;
+            try {
+                  if (suffix == "msc")
+                        saveFile(info, autosave);
+                  else
+                        saveCompressedFile(info, autosave);
+                  }
+            catch (QString s) {
+                  QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
+                  return false;
+                  }
+            setDirty(false);
+            return true;
             }
       //
       // step 1
-      // save into temporary file
+      // save into temporary file to prevent partially overwriting
+      // the original file in case of "disc full"
       //
 
-      QTemporaryFile temp(info.path() + "/msXXXXXX");
-      temp.setAutoRemove(false);
+      QString tmpName;
+      QTemporaryFile temp(info.path() + "/msXXXXXX." + suffix);
+//      temp.setAutoRemove(false);
       if (!temp.open()) {
             QString s = tr("Open Temp File\n") + temp.fileName() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(mscore, tr("MuseScore: Open File"), s);
+            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
             return false;
             }
-      bool rv = false;
-      if (info.suffix() == "mxl")
-            rv = saveMxl(temp.fileName());
-      else if (info.suffix() == "xml")
-            rv = saveXml(temp.fileName());
-      else if (info.suffix() == "msc")
-            rv = saveFile(&temp, autosave);
       else
-            rv = saveCompressedFile(&temp, info, autosave);
-      if (!rv)
+            tmpName = temp.fileName();
+
+      try {
+            if (suffix == "msc")
+                  saveFile(&temp, autosave);
+            else
+                  saveCompressedFile(&temp, info, autosave);
+            }
+      catch (QString s) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
             return false;
+            }
 
       //
       // step 2
@@ -304,22 +309,35 @@ bool Score::saveFile(bool autosave)
       //
       QDir dir(info.path());
       QString backupName = QString(".") + info.fileName() + QString(",");
-      dir.remove(backupName);
+      if (dir.exists(backupName)) {
+            if (!dir.remove(backupName)) {
+                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
+                     tr("removing old backup file ") + backupName + tr(" failed"));
+                  }
+            }
 
       //
       // step 3
       // rename old file into backup
       //
-      if (info.suffix().isEmpty())
-            info.setFile(info.filePath() + QString(".mscz"));
       QString name(info.filePath());
-      dir.rename(name, backupName);
+      if (dir.exists(name)) {
+            if (!dir.rename(name, backupName)) {
+                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
+                     tr("renaming file <")
+                      + name + tr("> to backup <") + backupName + tr("> failed"));
+                  }
+            }
 
       //
       // step 4
       // rename temp name into file name
       //
-      temp.rename(name);
+      if (!QFile::rename(tmpName, name)) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save File"),
+               tr("renaming <") + tmpName + tr("> to <") + name + tr("> failed"));
+            return false;
+            }
       setDirty(false);
       setSaved(true);
       return true;
@@ -374,10 +392,17 @@ bool Score::saveAs(bool saveCopy)
             else if (selectedFilter == fl[1] && !fn.endsWith(".msc"))
                   fn.append(".msc");
             QFileInfo fi(fn);
-            if (selectedFilter == fl[0])
-                  rv = saveCompressedFile(fi, false);
-            else
-                  rv = saveFile(fi, false);
+            rv = true;
+            try {
+                  if (selectedFilter == fl[0])
+                        saveCompressedFile(fi, false);
+                  else
+                        saveFile(fi, false);
+                  }
+            catch (QString s) {
+                  rv = false;
+                  QMessageBox::critical(mscore, tr("MuseScore: Save As"), s);
+                  }
             if (rv && !saveCopy) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
@@ -665,10 +690,9 @@ void MuseScore::newFile()
 
 //---------------------------------------------------------
 //   saveCompressedFile
-//    return true on success
 //---------------------------------------------------------
 
-bool Score::saveCompressedFile(QFileInfo& info, bool autosave)
+void Score::saveCompressedFile(QFileInfo& info, bool autosave)
       {
       QString ext(".mscz");
 
@@ -679,25 +703,21 @@ bool Score::saveCompressedFile(QFileInfo& info, bool autosave)
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(0, tr("MuseScore: Open File"), s);
-            return false;
+            throw(s);
             }
-      bool rv = saveCompressedFile(&fp, info, autosave);
-      return rv;
+      saveCompressedFile(&fp, info, autosave);
       }
 
 //---------------------------------------------------------
 //   saveCompressedFile
 //---------------------------------------------------------
 
-bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
+void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       {
       Zip uz;
       Zip::ErrorCode ec = uz.createArchive(f);
-      if (ec != Zip::Ok) {
-            printf("Cannot create compressed musescore file\n");
-            return false;
-            }
+      if (ec != Zip::Ok)
+            throw (QString("Cannot create compressed musescore file"));
 
       QDateTime dt;
       if (debugMode)
@@ -730,10 +750,8 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       xml.etag();
       cbuf.seek(0);
       ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
-      if (ec != Zip::Ok) {
-            printf("Cannot add container.xml to zipfile '%s'\n", qPrintable(info.filePath()));
-            return false;
-            }
+      if (ec != Zip::Ok)
+            throw(QString("Cannot add container.xml to zipfile '%1'\n").arg(info.filePath()));
 
       // save images
       idx = 1;
@@ -747,7 +765,6 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             QBuffer cbuf;
             QByteArray ba;
             if (!ip->loaded()) {
-// printf("load %s\n", qPrintable(srcPath));
                   QFile inFile(srcPath);
                   inFile.open(QIODevice::ReadOnly);
                   ip->buffer().setData(inFile.readAll());
@@ -755,14 +772,11 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
                   ip->setLoaded(true);
                   }
             cbuf.setBuffer(&(ip->buffer().buffer()));
-            if (!cbuf.open(QIODevice::ReadOnly)) {
-                  printf("cannot open open buffer cbuf\n");
-                  continue;
-                  }
+            if (!cbuf.open(QIODevice::ReadOnly))
+                  throw(QString("cannot open open buffer cbuf"));
             ec = uz.createEntry(dstPath, cbuf, dt);
-            if (ec != Zip::Ok) {
-                  printf("Cannot add <%s> to zipfile as <%s>\n", qPrintable(srcPath), qPrintable(dstPath));
-                  }
+            if (ec != Zip::Ok)
+                  throw(QString("Cannot add <%1> to zipfile as <%1>\n").arg(srcPath).arg(dstPath));
             cbuf.close();
             ip->setPath(dstPath);   // image now has local path
             ++idx;
@@ -770,19 +784,14 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      bool rv = saveFile(&dbuf, autosave);
+      saveFile(&dbuf, autosave);
       dbuf.seek(0);
       ec = uz.createEntry(fn, dbuf, dt);
-      if (ec != Zip::Ok) {
-            printf("Cannot add %s to zipfile '%s'\n", qPrintable(fn), qPrintable(info.filePath()));
-            return false;
-            }
+      if (ec != Zip::Ok)
+            throw(QString("Cannot add %1 to zipfile '%2'").arg(fn).arg(info.filePath()));
       ec = uz.closeArchive();
-      if (ec != Zip::Ok) {
-            printf("Cannot close zipfile '%s'\n", qPrintable(info.filePath()));
-            return false;
-            }
-      return rv;
+      if (ec != Zip::Ok)
+            throw(QString("Cannot close zipfile '%1'").arg(info.filePath()));
       }
 
 //---------------------------------------------------------
@@ -790,7 +799,7 @@ bool Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::saveFile(QFileInfo& info, bool autosave)
+void Score::saveFile(QFileInfo& info, bool autosave)
       {
       QString ext(".msc");
 
@@ -800,12 +809,10 @@ bool Score::saveFile(QFileInfo& info, bool autosave)
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(0, tr("MuseScore: Open File"), s);
-            return false;
+            throw(s);
             }
-      bool rv = saveFile(&fp, autosave);
+      saveFile(&fp, autosave);
       fp.close();
-      return rv;
       }
 
 //---------------------------------------------------------
@@ -932,7 +939,7 @@ void Score::saveStyle()
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::saveFile(QIODevice* f, bool autosave)
+void Score::saveFile(QIODevice* f, bool autosave)
       {
       Xml xml(f);
       xml.header();
@@ -944,17 +951,8 @@ bool Score::saveFile(QIODevice* f, bool autosave)
             xml.tag("MagIdx", _magIdx);
       xml.tag("xoff", canvas()->xoffset() / DPMM);
       xml.tag("yoff", canvas()->yoffset() / DPMM);
-
       write(xml, autosave);
       xml.etag();
-#if 0
-      if (f->error() != QFile::NoError) {
-            QString s = QString("Write File failed: ") + f->errorString();
-            QMessageBox::critical(this, tr("MuseScore: Write File"), s);
-            return false;
-            }
-#endif
-      return true;
       }
 
 //---------------------------------------------------------
@@ -1477,7 +1475,7 @@ bool Score::saveSvg(const QString& saveName)
       QPaintDevice* opdev = pdev;
       pdev = &printer;
 
-      printer.setResolution(DPI);
+      printer.setResolution(int(DPI));
       printer.setFileName(saveName);
 
       _printing = true;

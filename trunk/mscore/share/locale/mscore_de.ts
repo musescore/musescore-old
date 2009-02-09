@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -66,9 +68,6 @@
         <source>French Violin Clef</source>
         <translation>Französischer Violinschlüssel</translation>
     </message>
-</context>
-<context>
-    <name>@default</name>
     <message>
         <source>system</source>
         <translation type="unfinished">System</translation>
@@ -287,12 +286,43 @@ p, li { white-space: pre-wrap; }
         <translation>Hilfslinien:</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <translation>Noten:</translation>
-    </message>
-    <message>
         <source>Note Attributes:</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Akkord</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Notenhals</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Vorschlagnote</translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Halsrichtung</translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Noten:</translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Hilfslinien:</translation>
     </message>
 </context>
 <context>
@@ -1653,10 +1683,6 @@ zu Notenzeile</translation>
         <translation>Formular</translation>
     </message>
     <message>
-        <source>Element</source>
-        <translation>Element</translation>
-    </message>
-    <message>
         <source>Previous</source>
         <translation>vorheriges</translation>
     </message>
@@ -1669,52 +1695,8 @@ zu Notenzeile</translation>
         <translation>Eltern</translation>
     </message>
     <message>
-        <source>selected</source>
-        <translation>ausgewählt</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <translation>erzeugt</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <translation>sichtbar</translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <translation>Stimme</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Zeit</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation>Farbe</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <translation>Pos</translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Offset</translation>
-    </message>
-    <message>
-        <source>BBox</source>
-        <translation>Rahmen</translation>
-    </message>
-    <message>
         <source> sp</source>
         <translation> spatium</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <translation>Subtyp</translation>
     </message>
     <message>
         <source>0</source>
@@ -1725,20 +1707,84 @@ zu Notenzeile</translation>
         <translation>ungültig</translation>
     </message>
     <message>
-        <source>Staff</source>
-        <translation>Notenzeile</translation>
+        <source>Element</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Element</translation>
     </message>
     <message>
-        <source>CPos</source>
-        <translation>CPos</translation>
+        <source>selected</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">ausgewählt</translation>
     </message>
     <message>
-        <source>Mag</source>
-        <translation>Lupe</translation>
+        <source>generated</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">erzeugt</translation>
+    </message>
+    <message>
+        <source>visible</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">sichtbar</translation>
     </message>
     <message>
         <source>system</source>
-        <translation>System</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">System</translation>
+    </message>
+    <message>
+        <source>subtype</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Subtyp</translation>
+    </message>
+    <message>
+        <source>Voice</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Stimme</translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Notenzeile</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Taktart</translation>
+    </message>
+    <message>
+        <source>Len</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Länge</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Farbe</translation>
+    </message>
+    <message>
+        <source>Pos</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Pos</translation>
+    </message>
+    <message>
+        <source>CPos</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">CPos</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Offset</translation>
+    </message>
+    <message>
+        <source>BBox</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Rahmen</translation>
+    </message>
+    <message>
+        <source>Mag</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Lupe</translation>
     </message>
 </context>
 <context>
@@ -3243,10 +3289,6 @@ fehlgeschlagen: </translation>
         <translation>letzte Seite</translation>
     </message>
     <message>
-        <source>add tie</source>
-        <translation>Bindebogen zufügen</translation>
-    </message>
-    <message>
         <source>add slur</source>
         <translation>Haltebogen zufügen</translation>
     </message>
@@ -4703,6 +4745,18 @@ before closing?</source>
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4824,72 +4878,87 @@ before closing?</source>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Note</source>
-        <translation>Note</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <translation>Kopf gespiegelt</translation>
-    </message>
-    <message>
-        <source>Move</source>
-        <translation>Verschieben</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation>Linie</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <translation>Tonhöhe</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <translation>Kopf</translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <translation>TPC</translation>
-    </message>
-    <message>
-        <source>Tie Forw.</source>
-        <translation>Bindeb. Vor.</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <translation>Bindebogen zurück</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <translation>Vorzeichen</translation>
-    </message>
-    <message>
         <source>head index</source>
         <translation>Kopfindex</translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <translation>HGrp.</translation>
     </message>
     <message>
         <source>note head group</source>
         <translation>Notenkopfgruppe</translation>
     </message>
     <message>
+        <source>Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Note</translation>
+    </message>
+    <message>
+        <source>Pitch</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Tonhöhe</translation>
+    </message>
+    <message>
+        <source>Head</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Kopf</translation>
+    </message>
+    <message>
         <source>Subelements:</source>
-        <translation>Subelemente:</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Subelemente:</translation>
+    </message>
+    <message>
+        <source>TPC</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">TPC</translation>
+    </message>
+    <message>
+        <source>HGrp.</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">HGrp.</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Linie</translation>
+    </message>
+    <message>
+        <source>Tie Forw.</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Bindeb. Vor.</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Verschieben</translation>
+    </message>
+    <message>
+        <source>Tie Back</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Bindebogen zurück</translation>
+    </message>
+    <message>
+        <source>Accidental</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Vorzeichen</translation>
+    </message>
+    <message>
+        <source>Mirror Head</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Kopf gespiegelt</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation>S-Kanal</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">S-Kanal</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation>Versteckt</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Versteckt</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation>Anw-Vorz</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Anw-Vorz</translation>
     </message>
 </context>
 <context>
@@ -5774,11 +5843,11 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>ms</source>
         <translation>ms</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6435,7 +6504,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
 </context>
 <context>
-    <name>TextB</name>
+    <name>Text</name>
     <message>
         <source>Text Properties...</source>
         <translation type="unfinished"></translation>
@@ -6655,6 +6724,48 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>mm</source>
         <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Offset</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">relX:</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">relY:</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Einheit:</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished">Spatium</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished">sp</translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
@@ -65,9 +67,6 @@
         <source>French Violin Clef</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>@default</name>
     <message>
         <source>system</source>
         <translation type="unfinished">sistem</translation>
@@ -282,16 +281,47 @@ p, li { white-space: pre-wrap; }
         <translation>Nota Gövdesi Yönü </translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <translation>Notalar: </translation>
-    </message>
-    <message>
         <source>Help Lines:</source>
         <translation>Yardım Çubukları:</translation>
     </message>
     <message>
         <source>Note Attributes:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Akor</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota-gövdesi</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota-çengeli</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Süs Notası</translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota Gövdesi Yönü </translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Notalar: </translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Yardım Çubukları:</translation>
     </message>
 </context>
 <context>
@@ -1649,10 +1679,6 @@ yapılamadı:</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Element</source>
-        <translation>Öğe</translation>
-    </message>
-    <message>
         <source>Previous</source>
         <translation>Önceki</translation>
     </message>
@@ -1669,71 +1695,91 @@ yapılamadı:</translation>
         <translation type="unfinished">0</translation>
     </message>
     <message>
-        <source>selected</source>
-        <translation>çesildi</translation>
-    </message>
-    <message>
-        <source>generated</source>
-        <translation>oluşturuldu</translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <translation>görünür</translation>
-    </message>
-    <message>
-        <source>system</source>
-        <translation>sistem</translation>
-    </message>
-    <message>
-        <source>subtype</source>
-        <translation>alt tip</translation>
-    </message>
-    <message>
-        <source>Voice</source>
-        <translation>Ses</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Porte</translation>
-    </message>
-    <message>
         <source>invalid</source>
         <translation>geçersiz</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Zaman</translation>
-    </message>
-    <message>
-        <source>Len</source>
-        <translation>Uzakık</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation>Renk</translation>
-    </message>
-    <message>
-        <source>Pos</source>
-        <translation>Pozisyon</translation>
-    </message>
-    <message>
-        <source>CPos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation>Konum (!!!offset!!!)</translation>
     </message>
     <message>
         <source> sp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Element</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Öğe</translation>
+    </message>
+    <message>
+        <source>selected</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">çesildi</translation>
+    </message>
+    <message>
+        <source>generated</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">oluşturuldu</translation>
+    </message>
+    <message>
+        <source>visible</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">görünür</translation>
+    </message>
+    <message>
+        <source>system</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">sistem</translation>
+    </message>
+    <message>
+        <source>subtype</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">alt tip</translation>
+    </message>
+    <message>
+        <source>Voice</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Ses</translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Porte</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Zaman</translation>
+    </message>
+    <message>
+        <source>Len</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Uzakık</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Renk</translation>
+    </message>
+    <message>
+        <source>Pos</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Pozisyon</translation>
+    </message>
+    <message>
+        <source>CPos</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Konum</translation>
+    </message>
+    <message>
         <source>BBox</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mag</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Büyütme</translation>
     </message>
 </context>
@@ -3391,10 +3437,6 @@ yapılamadı:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>add tie</source>
-        <translation>bağ ekle (aynı perde için - ölçü çizgisi araya girmişse kullanın) {tie}</translation>
-    </message>
-    <message>
         <source>add slur</source>
         <translation>bağ ekle (farklı perdeler için - kesintisizliği sağlamak için kullanın) {slur}</translation>
     </message>
@@ -4700,6 +4742,18 @@ kaydetmek ister misiniz?</translation>
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>show keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4821,71 +4875,86 @@ kaydetmek ister misiniz?</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Note</source>
-        <translation>Nota</translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <translation>Perda</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <translation>Nota-başı</translation>
-    </message>
-    <message>
         <source>head index</source>
         <translation>nota-başı indeksi</translation>
-    </message>
-    <message>
-        <source>TPC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HGrp.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>note head group</source>
         <translation>nota-başı grubu</translation>
     </message>
     <message>
-        <source>Line</source>
-        <translation>Çizgi</translation>
+        <source>Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota</translation>
     </message>
     <message>
-        <source>Tie Forw.</source>
-        <translation>İleriyle Bağla</translation>
+        <source>Pitch</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Perde</translation>
     </message>
     <message>
-        <source>Move</source>
-        <translation>Taşı</translation>
-    </message>
-    <message>
-        <source>Tie Back</source>
-        <translation>Geriyle Bağla</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <translation>Arıza</translation>
-    </message>
-    <message>
-        <source>Mirror Head</source>
-        <translation type="unfinished"></translation>
+        <source>Head</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota-başı</translation>
     </message>
     <message>
         <source>Subelements:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TPC</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HGrp.</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Çizgi</translation>
+    </message>
+    <message>
+        <source>Tie Forw.</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">İleriyle Bağla</translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Taşı</translation>
+    </message>
+    <message>
+        <source>Tie Back</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Geriyle Bağla</translation>
+    </message>
+    <message>
+        <source>Accidental</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Arıza</translation>
+    </message>
+    <message>
+        <source>Mirror Head</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S-Channel</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hidden</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User-Acc</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5770,11 +5839,11 @@ kaydetmek ister misiniz?</translation>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6433,7 +6502,7 @@ başarısız:</translation>
     </message>
 </context>
 <context>
-    <name>TextB</name>
+    <name>Text</name>
     <message>
         <source>Text Properties...</source>
         <translation type="unfinished"></translation>
@@ -6653,6 +6722,48 @@ başarısız:</translation>
     <message>
         <source>mm</source>
         <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>Offset</source>
+        <translation type="unfinished">Konum</translation>
+    </message>
+    <message>
+        <source>X:</source>
+        <translation type="unfinished">X:</translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished">göreceX:</translation>
+    </message>
+    <message>
+        <source>Y:</source>
+        <translation type="unfinished">Y:</translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished">göreceY</translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished">Birim:</translation>
+    </message>
+    <message>
+        <source>MM</source>
+        <translation type="unfinished">MM</translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished">Boşluk</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
