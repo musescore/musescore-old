@@ -235,8 +235,9 @@ bool Score::saveFile(bool autosave)
       QString suffix = info.suffix();
       if ((suffix != "msc") && (suffix != "mscz")) {
             QString s = info.filePath();
-            s = s.left(s.size() - suffix.size());
-            suffix = "mscz";
+            if (!suffix.isEmpty())
+                  s = s.left(s.size() - suffix.size() - 1);
+            suffix = ".mscz";
             s += suffix;
             info.setFile(s);
             }
