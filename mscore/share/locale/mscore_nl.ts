@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -70,63 +69,63 @@
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished">systeem</translation>
+        <translation>systeem</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels (GB)</translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels (US)</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished">Nederlands</translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugees</translation>
     </message>
     <message>
         <source>Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Brasiliaans Portugees</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Russisch</translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Turks</translation>
     </message>
 </context>
 <context>
@@ -292,37 +291,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Akkoord</translation>
+        <translation>Akkoord</translation>
     </message>
     <message>
         <source>Stem</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Stok</translation>
+        <translation>Stok</translation>
     </message>
     <message>
         <source>Hook</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Haak</translation>
+        <translation>Haak</translation>
     </message>
     <message>
         <source>Grace Note</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Korte Voorslag</translation>
+        <translation>Korte Voorslag</translation>
     </message>
     <message>
         <source>Stem Direction</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Stokrichting</translation>
+        <translation>Stokrichting</translation>
     </message>
     <message>
         <source>Notes:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Noten:</translation>
+        <translation>Noten:</translation>
     </message>
     <message>
         <source>Help Lines:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Hulplijnen:</translation>
+        <translation>Hulplijnen:</translation>
     </message>
 </context>
 <context>
@@ -1706,82 +1705,82 @@ toonhoogte</translation>
     <message>
         <source>Element</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Element</translation>
+        <translation>Element</translation>
     </message>
     <message>
         <source>selected</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">geselecteerde</translation>
+        <translation>geselecteerde</translation>
     </message>
     <message>
         <source>generated</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">gegenereerde</translation>
+        <translation>gegenereerde</translation>
     </message>
     <message>
         <source>visible</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">zichtbaar</translation>
+        <translation>zichtbaar</translation>
     </message>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">systeem</translation>
+        <translation>systeem</translation>
     </message>
     <message>
         <source>subtype</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Voice</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Stem</translation>
+        <translation>Stem</translation>
     </message>
     <message>
         <source>Staff</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Notenbalk</translation>
+        <translation>Notenbalk</translation>
     </message>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Maatsoorten</translation>
+        <translation>Maatsoorten</translation>
     </message>
     <message>
         <source>Len</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Color</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Kleur</translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <source>Pos</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CPos</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Offset</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Compensatie</translation>
+        <translation>Compensatie</translation>
     </message>
     <message>
         <source>BBox</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Keuze menu</translation>
+        <translation>Keuze menu</translation>
     </message>
 </context>
 <context>
@@ -2233,7 +2232,7 @@ failed: </source>
     </message>
     <message>
         <source>Symbol</source>
-        <translation>	Symbool</translation>
+        <translation><byte value="x9"/>Symbool</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
@@ -4745,15 +4744,15 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"></translation>
+        <translation>Octaaf</translation>
     </message>
     <message>
         <source>show keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>toon toetsenbord</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon Toetsenbord</translation>
     </message>
 </context>
 <context>
@@ -4887,77 +4886,77 @@ voor dat u afsluit?</translation>
     <message>
         <source>Note</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Noot</translation>
+        <translation>Noot</translation>
     </message>
     <message>
         <source>Pitch</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Toonhoogte</translation>
+        <translation>Toonhoogte</translation>
     </message>
     <message>
         <source>Head</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Hoofd</translation>
+        <translation>Hoofd</translation>
     </message>
     <message>
         <source>Subelements:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Subelementen:</translation>
+        <translation>Subelementen:</translation>
     </message>
     <message>
         <source>TPC</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>HGrp.</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">HGrp.</translation>
+        <translation>HGrp.</translation>
     </message>
     <message>
         <source>Line</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Lijn</translation>
+        <translation>Lijn</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Boog Voorwaarts</translation>
+        <translation>Boog Voorwaarts</translation>
     </message>
     <message>
         <source>Move</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Tie Back</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Boog Achterwaarts</translation>
+        <translation>Boog Achterwaarts</translation>
     </message>
     <message>
         <source>Accidental</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Voorteken</translation>
+        <translation>Voorteken</translation>
     </message>
     <message>
         <source>Mirror Head</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Hoofd</translation>
+        <translation>Hoofd</translation>
     </message>
     <message>
         <source>S-Channel</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">S-Kanaal</translation>
+        <translation>S-Kanaal</translation>
     </message>
     <message>
         <source>Hidden</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Verbergen</translation>
+        <translation>Verbergen</translation>
     </message>
     <message>
         <source>User-Acc</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5834,11 +5833,11 @@ voor dat u afsluit?</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
+        <source>Replace 1/2 ... with &#xbd; ...</source>
         <translation>Vervang 1/2 ... met ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
         <translation>vervang (C) ... met © ... in Copyright Tekst</translation>
     </message>
     <message>
@@ -6501,7 +6500,7 @@ failed: </source>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst Eigenschappen</translation>
     </message>
 </context>
 <context>
@@ -6713,53 +6712,53 @@ failed: </source>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>tekst kleur</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Compensatie</translation>
+        <translation>Compensatie</translation>
     </message>
     <message>
         <source>X:</source>
-        <translation type="unfinished">X:</translation>
+        <translation>X:</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished">relX:</translation>
+        <translation>relX:</translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished">relY:</translation>
+        <translation>relY:</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Eenheid:</translation>
+        <translation>Eenheid:</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">MM</translation>
+        <translation>MM</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Tussenuimte</translation>
+        <translation>Tussenuimte</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -6932,7 +6931,7 @@ failed: </source>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst Bewerken</translation>
     </message>
 </context>
 <context>
