@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,5 +21,14 @@
 #ifndef __SCRIPT_H__
 #define __SCRIPT_H__
 
+//---------------------------------------------------------
+//   ScScoreList
+//---------------------------------------------------------
+
+class ScScoreList : public QScriptClass {
+
+   public:
+      ScScoreList(QScriptEngine* se) : QScriptClass(se) {}
+      };
 #endif
 

@@ -1050,10 +1050,11 @@ void MuseScore::fingeringMenu()
       if (fingeringPalette == 0) {
             Palette* sp = new Palette;
             sp->setMag(1.5);
+            sp->resize(300, 200);
             fingeringPalette = new PaletteScrollArea(sp);
             fingeringPalette->setRestrictHeight(false);
             fingeringPalette->setWindowTitle(tr("MuseScore: Fingering"));
-            sp->setGrid(50, 50);
+            sp->setGrid(28, 30);
 
             const char finger[] = "012345pimac";
             Text* k;
@@ -1063,6 +1064,13 @@ void MuseScore::fingeringMenu()
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
                   sp->append(k, QString("fingering %1").arg(finger[i]));
+                  }
+            const char stringnumber[] = "0123456";
+            for (unsigned i = 0; i < strlen(stringnumber); ++i) {
+                  Text* k = new Text(gscore);
+                  k->setSubtype(TEXT_STRING_NUMBER);
+                  k->setText(QString(stringnumber[i]));
+                  sp->append(k, tr("string number %1").arg(stringnumber[i]));
                   }
             }
       fingeringPalette->show();

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
 <context>
     <name></name>
     <message>
@@ -67,6 +65,9 @@
         <source>French Violin Clef</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>@default</name>
     <message>
         <source>system</source>
         <translation type="unfinished">sistem</translation>
@@ -289,39 +290,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Akor</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota-gövdesi</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota-çengeli</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Süs Notası</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nota Gövdesi Yönü </translation>
-    </message>
-    <message>
         <source>Notes:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Notalar: </translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Yardım Çubukları:</translation>
     </message>
 </context>
 <context>
@@ -1704,82 +1674,66 @@ yapılamadı:</translation>
     </message>
     <message>
         <source>Element</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Öğe</translation>
     </message>
     <message>
         <source>selected</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">çesildi</translation>
     </message>
     <message>
         <source>generated</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">oluşturuldu</translation>
     </message>
     <message>
         <source>visible</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">görünür</translation>
     </message>
     <message>
         <source>system</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">sistem</translation>
     </message>
     <message>
         <source>subtype</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">alt tip</translation>
     </message>
     <message>
         <source>Voice</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Ses</translation>
     </message>
     <message>
         <source>Staff</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Porte</translation>
     </message>
     <message>
         <source>Time</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Zaman</translation>
     </message>
     <message>
         <source>Len</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Uzakık</translation>
     </message>
     <message>
         <source>Color</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Renk</translation>
     </message>
     <message>
         <source>Pos</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Pozisyon</translation>
     </message>
     <message>
         <source>CPos</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Konum</translation>
     </message>
     <message>
         <source>BBox</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mag</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Büyütme</translation>
     </message>
 </context>
@@ -4735,10 +4689,6 @@ kaydetmek ister misiniz?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source></source>
         <translation></translation>
     </message>
@@ -4752,6 +4702,10 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4884,77 +4838,62 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Note</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Nota</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Perde</translation>
     </message>
     <message>
         <source>Head</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Nota-başı</translation>
     </message>
     <message>
         <source>Subelements:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TPC</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HGrp.</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Çizgi</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">İleriyle Bağla</translation>
     </message>
     <message>
         <source>Move</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Taşı</translation>
     </message>
     <message>
         <source>Tie Back</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Geriyle Bağla</translation>
     </message>
     <message>
         <source>Accidental</source>
-        <comment>do not translate</comment>
         <translation type="unfinished">Arıza</translation>
     </message>
     <message>
         <source>Mirror Head</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hidden</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5839,11 +5778,11 @@ kaydetmek ister misiniz?</translation>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6088,10 +6027,6 @@ failed: </source>
 başarısız:</translation>
     </message>
     <message>
-        <source>MuseScore: Open File</source>
-        <translation>MuseScore: Dosya Aç</translation>
-    </message>
-    <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
         <translation>Sıkıştırılmış MuseScore Formatı (*.mscz)</translation>
     </message>
@@ -6168,10 +6103,6 @@ başarısız:</translation>
         <translation>MuseScore: Stil Yaz</translation>
     </message>
     <message>
-        <source>MuseScore: Write File</source>
-        <translation>MuseScore: Dosya Yaz</translation>
-    </message>
-    <message>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Dosya Oku</translation>
     </message>
@@ -6188,7 +6119,39 @@ başarısız:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore File (*.msc)</source>
+        <source>MuseScore File (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>removing old backup file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>renaming file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; to backup &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>renaming &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt; to &lt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6507,6 +6470,14 @@ başarısız:</translation>
         <source>Text Properties...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Görünmez Kıl</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Görünür Kıl</translation>
+    </message>
 </context>
 <context>
     <name>TextBase</name>
@@ -6644,26 +6615,6 @@ başarısız:</translation>
         <translation type="unfinished">...</translation>
     </message>
     <message>
-        <source>align horizontal center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right</source>
-        <translation type="unfinished">sağa dayalı</translation>
-    </message>
-    <message>
-        <source>align top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align vertical center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Color:</source>
         <translation type="unfinished">Renk:</translation>
     </message>
@@ -6763,6 +6714,70 @@ başarısız:</translation>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font point size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text on reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset is absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>offset in Space units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable text frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>corner round</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

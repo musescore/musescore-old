@@ -183,8 +183,8 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;"
-            "MuseScore Files (*.mscz *.msc);;"
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;"
+            "MuseScore Files (*.mscz *.mscx *.msc);;"
             "MusicXML Files (*.xml *.mxl);;"
             "MIDI Files (*.mid *.kar);;"
             "Muse Data Files (*.md);;"
@@ -233,11 +233,14 @@ void MuseScore::saveFile()
 bool Score::saveFile(bool autosave)
       {
       QString suffix = info.suffix();
-      if ((suffix != "msc") && (suffix != "mscz")) {
+      if ((suffix != "mscx") && (suffix != "mscz")) {
             QString s = info.filePath();
             if (!suffix.isEmpty())
                   s = s.left(s.size() - suffix.size() - 1);
-            suffix = ".mscz";
+            if (suffix == "msc")
+                  suffix = ".mscx";        // silently change to mscx
+            else
+                  suffix = ".mscz";
             s += suffix;
             info.setFile(s);
             }
@@ -245,7 +248,7 @@ bool Score::saveFile(bool autosave)
       if (created()) {
             QString selectedFilter;
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
-            QString f2 = tr("MuseScore File (*.msc)");
+            QString f2 = tr("MuseScore File (*.mscx)");
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
                QString("./%1.mscz").arg(info.baseName()),
@@ -263,7 +266,7 @@ bool Score::saveFile(bool autosave)
 
       if (saved()) {
             try {
-                  if (suffix == "msc")
+                  if (suffix == "msc" || suffix == "mscx")
                         saveFile(info, autosave);
                   else
                         saveCompressedFile(info, autosave);
@@ -294,7 +297,7 @@ bool Score::saveFile(bool autosave)
             tmpName = temp.fileName();
 
       try {
-            if (suffix == "msc")
+            if (suffix == "msc" || suffix == "mscx")
                   saveFile(&temp, autosave);
             else
                   saveCompressedFile(&temp, info, autosave);

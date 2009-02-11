@@ -137,7 +137,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "String Number"), ff,  8, false, false, false,
-         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.20, 0.0, 0, Qt::black, true, false),
+         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.2, -0.2, 0, Qt::black, true, false),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Ottava"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),

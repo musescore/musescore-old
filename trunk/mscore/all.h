@@ -108,5 +108,6 @@
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptable>
+#include <QtScript/QScriptClass>
 #endif
 

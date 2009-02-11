@@ -446,7 +446,7 @@ bool Score::read(QString name)
             if (!importBB(name))
                   return false;
             }
-      else if (cs.toLower() == "msc") {
+      else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
             if (!loadMsc(name))
                   return false;
             }

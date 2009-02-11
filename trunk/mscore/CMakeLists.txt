@@ -28,9 +28,15 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib
 
+set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(BUILD_SCRIPT_DEBUG TRUE)
-set(STATIC_SCRIPT_BINDINGS FALSE)         # this requires qt 4.5
+
+if (QT45)
+      set(STATIC_SCRIPT_BINDINGS TRUE)
+else (QT45)
+      set(STATIC_SCRIPT_BINDINGS FALSE)
+endif (QT45)
 
 if (MINGW)
       set(USE_GLOBAL_FLUID FALSE)

@@ -20,8 +20,8 @@
 
 #include "mscore.h"
 #include "globals.h"
-#include "score.h"
 #include "script.h"
+#include "score.h"
 #include "config.h"
 #include "qscriptembeddeddebugger.h"
 
@@ -95,25 +95,36 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   QMenu* menu = qobject_cast<QMenu*>(o);
                   if (!menu)
                         continue;
+                  if (debugMode)
+                        printf("check menu <%s><%s>\n", qPrintable(menu->objectName()), qPrintable(m));
                   if (menu->objectName() == m) {
                         curMenu = menu;
                         found = true;
+                        if (debugMode)
+                              printf("  found\n");
                         break;
                         }
                   }
             if (!found) {
                   if (i == 0) {
                         curMenu = new QMenu(m, menuBar());
-                        curMenu->setObjectName("Plugin");
+                        curMenu->setObjectName(m);
                         menuBar()->insertMenu(menuBar()->actions().back(), (QMenu*)curMenu);
+                        if (debugMode)
+                              printf("add Menu <%s>\n", qPrintable(m));
                         }
                   else if (i + 1 == n) {
                         QAction* a = ((QMenu*)curMenu)->addAction(m);
                         connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
                         pluginMapper->setMapping(a, pluginIdx);
+                        if (debugMode)
+                              printf("add action <%s>\n", qPrintable(m));
                         }
-                  else
+                  else {
                         curMenu = ((QMenu*)curMenu)->addMenu(m);
+                        if (debugMode)
+                              printf("add menu <%s>\n", qPrintable(m));
+                        }
                   }
             }
       }
@@ -128,6 +139,8 @@ void MuseScore::loadPlugins()
       connect(pluginMapper, SIGNAL(mapped(int)), SLOT(pluginTriggered(int)));
 
       QDir pluginDir(mscoreGlobalShare + "plugins");
+      if (debugMode)
+            printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
       QDirIterator it(pluginDir, QDirIterator::Subdirectories);
       while (it.hasNext()) {
             it.next();
@@ -193,9 +206,11 @@ void MuseScore::pluginTriggered(int idx)
 #endif
             }
       QScriptValue v = se->newQObject(cs);
-      se->globalObject().setProperty("score", v);
+      se->globalObject().setProperty("curScore", v);
+
       v = se->newVariant(division);
       se->globalObject().setProperty("division", v);
+
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();
       v = se->newVariant(pluginPath);
