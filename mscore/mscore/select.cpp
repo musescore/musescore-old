@@ -796,8 +796,10 @@ QByteArray Selection::staffMimeData() const
                         if ((track % VOICES) == 0) {
                               int staffIdx = track / VOICES;
                               LyricsList* ll = seg->lyricsList(staffIdx);
-                              foreach(Lyrics* l, *ll)
-                                    l->write(xml);
+                              foreach(Lyrics* l, *ll) {
+                                    if (l)
+                                          l->write(xml);
+                                    }
                               }
                         }
                   }

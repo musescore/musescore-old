@@ -1,3 +1,6 @@
+11.feb (ws)
+      - fixed possible crash when copy/paste lyrics
+      - support for new *.mscx file extension
 10.feb (tb)
       - updated Dutch translation by Jaap Plaisier
 9.feb (ws)
