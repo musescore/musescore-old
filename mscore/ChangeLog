@@ -1,3 +1,8 @@
+12.feb (db)
+      - Added Timpani, Glockenspiel, Vibraphone, Marimba, Xylophone, and Tubular Bells
+        to new instrument group called "Pitched Percussion" (translation incomplete)
+      - Removed Tympani from the regular percussion group.
+      - Changed menu item from Notes > Tuplets > Other Tuplets to Notes > Tuplets > Other...
 11.feb (ws)
       - fixed possible crash when copy/paste lyrics
       - support for new *.mscx file extension

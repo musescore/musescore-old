@@ -343,12 +343,55 @@
             <program>0</program>
             </channel>
          </instrument>
+      </instrument-group>
+
+   <instrument-group name="Pitched Percussion">
       <instrument>
-         <name>Tympani</name>
-         <short-name>Tymp.</short-name>
+         <name>Timpano</name>
+         <short-name>Timp.</short-name>
          <clef>4</clef>
          <channel>
             <program>47</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Glockenspiel</name>
+         <short-name>Glk.</short-name>
+         <transposition>24</transposition>
+         <channel>
+            <program>10</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Vibrafono</name>
+         <short-name>Vib.</short-name>
+         <channel>
+            <program>11</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Marimba</name>
+         <short-name>Mrm.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>12</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Xilofono</name>
+         <short-name>Xyl.</short-name>
+         <channel>
+            <program>13</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Campane Tubolari</name>
+         <short-name>C.T.</short-name>
+         <channel>
+            <program>14</program>
             </channel>
          </instrument>
       </instrument-group>
