@@ -84,11 +84,11 @@ class ExportLy {
   Direction stemDirection;
   int indx;
 
-  int timeabove, timebelow;
   int  n, z1, z2, z3, z4; //timesignatures
   int barlen;
   bool slur;
-  bool pickup; // must be preserved from voice to voice, but deleted before each new measure....
+  bool pickup; 
+  bool donefirst; //to prevent doing things in first ordinary bar which are already done in pickupbar
   bool graceswitch, gracebeam;
   int gracecount;
   int prevpitch, staffpitch, chordpitch, oktavdiff;
@@ -218,9 +218,6 @@ int numval(int num)
 }
 
 
-
-
-
 //---------------------------------------------------------
 // initBrackets -- init array of brackets and braces info
 //---------------------------------------------------------
@@ -268,10 +265,9 @@ void ExportLy::brackRegister(int brnumber, int bratype, int staffnr, bool start,
       break;
     case -1: //piano-staff: lilypond makes rigid distance between
 	     //staffs to allow cross-staff beaming.
-      printf("register pianostaff\n");
       lybracks[staffnr].piano=true;
       if (start) lybracks[staffnr].bracestart=true;
-      if (end) {lybracks[staffnr].braceend=true; printf("register pianostaff end\n"); }
+      if (end) lybracks[staffnr].braceend=true;
       lybracks[staffnr].braceno=brnumber;
       break;
     default:
@@ -294,25 +290,18 @@ void ExportLy::findBrackets()
 
   for (int partnumber = 0; partnumber < il->size(); ++partnumber)  //run thru list of parts
     {
-      printf("partnumber: %d\n", partnumber);
       Part* part = il->at(partnumber);
-      printf("staves in part: %d\n", part->nstaves());
       if (part->nstaves() == 2) pianostaff=true;
       for (int stavno = 0; stavno < part->nstaves(); stavno++) //run thru list of staves in part.
 	{
-	  printf("stavnummer %d\n", stavno);
-	  if (pianostaff) printf("pianostaff\n");
-
 	  if (pianostaff)
 	    {
 	      if (stavno==0)
 		{
-		  printf("start of pianostaff\n");
 		  brackRegister(groupnumber, -1, partnumber+stavno, true, false);
 		}
 	      if (stavno==1)
 		{
-		  printf("end of pianostaff\n");
 		  brackRegister(groupnumber, -1, partnumber+stavno, false, true);
 		  pianostaff=false;
 		}
@@ -324,13 +313,11 @@ void ExportLy::findBrackets()
 		{
 		  for (int braclev= 0; braclev < st->bracketLevels(); braclev++) //run thru bracketlevels of staff
 		    {
-		      printf("bracketlevel: %d\n", braclev);
 		      if (st->bracket(braclev) != NO_BRACKET) //if bracket
 			{
 			  groupnumber++;
 			  if (groupnumber < MAXPARTGROUPS)
 			    { //brackRegister(bracketnumber, brackettype, staffnr, start, end)
-			      printf("start groupnumber=%d end=%d\n", groupnumber, partnumber - 1 + st->bracketSpan(braclev));
 			      brackRegister(groupnumber, st->bracket(braclev), partnumber, true, false);
 			      brackRegister(groupnumber,st->bracket(braclev), partnumber-1+st->bracketSpan(braclev), false, true);
 			    }
@@ -1116,6 +1103,14 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
     default:
       break;
     }//switch
+
+  bool rs = meas->repeatFlags() & RepeatStart;
+  if (rs) 
+    {
+      i++;
+      voltarray[i].voltart=startrepeat;
+      voltarray[i].barno=taktnr-1; //set as last element in previous measure.
+    }
   return i;
 }//end voltacheckbarline
 
@@ -1165,7 +1160,6 @@ void  ExportLy::findVolta()
 		  voltarray[i].voltart = startending;
 		  voltarray[i].barno=taktnr-1; //register as last element i previous measure
 		}
-
 	      if (v->tick2() == m->tick() + m->tickLen()) // if it is at the end of measure
 		{
 		  i++;
@@ -1181,13 +1175,12 @@ void  ExportLy::findVolta()
 		}
 	    }
 	}// for all elements
-
       i=voltaCheckBar((Measure *) m, i);
-
     }//for all measures
-
   lastind=i;
 
+  for (i=0; i<lastind; i++)
+    cout << "voltatest: " << voltarray[i].barno << "  " << voltarray[i].voltart <<"\n";
 }// end findvolta
 
 
@@ -1210,23 +1203,23 @@ void ExportLy::writeClef(int clef)
 {
   out << "\\clef ";
   switch(clef) {
-  case CLEF_G:      out << "treble";       break;
-  case CLEF_F:      out << "bass";         break;
-  case CLEF_G1:     out << "\"treble^8\""; break;
-  case CLEF_G2:     out << "\"treble^15\"";break;
-  case CLEF_G3:     out << "\"treble_8\""; break;
-  case CLEF_F8:     out << "\"bass_8\"";   break;
-  case CLEF_F15:    out << "\"bass_15\"";  break;
-  case CLEF_F_B:    out << "bass";         break;
-  case CLEF_F_C:    out << "bass";         break;
-  case CLEF_C1:     out <<  "soprano";     break;
-  case CLEF_C2:     out <<  "mezzo-soprano";break;
-  case CLEF_C3:     out <<  "alto";        break;
-  case CLEF_C4:     out <<  "tenor";       break;
-  case CLEF_TAB:    out <<  "tab";         break;
-  case CLEF_PERC:   out <<  "percussion";  break;
+  case CLEF_G:      out << "treble\n";         break;
+  case CLEF_F:      out << "bass\n";           break;
+  case CLEF_G1:     out << "\"treble^8\"\n";   break;
+  case CLEF_G2:     out << "\"treble^15\"\n";  break;
+  case CLEF_G3:     out << "\"treble_8\"\n";   break;
+  case CLEF_F8:     out << "\"bass_8\"\n";     break;
+  case CLEF_F15:    out << "\"bass_15\"\n";    break;
+  case CLEF_F_B:    out << "bass\n";           break;
+  case CLEF_F_C:    out << "bass\n";           break;
+  case CLEF_C1:     out <<  "soprano\n";       break;
+  case CLEF_C2:     out <<  "mezzo-soprano\n"; break;
+  case CLEF_C3:     out <<  "alto\n";          break;
+  case CLEF_C4:     out <<  "tenor\n";         break;
+  case CLEF_TAB:    out <<  "tab\n";           break;
+  case CLEF_PERC:   out <<  "percussion\n";    break;
   }
-  out << " ";
+
 }
 
 //---------------------------------------------------------
@@ -1235,8 +1228,16 @@ void ExportLy::writeClef(int clef)
 
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
+  int st = sig->subtype();
   sig->getSig(&n, &z1, &z2, &z3, &z4);
-  timebelow=n;
+  //lilypond writes 4/4 as C by default, so only check for cut.
+  if (st == TSIG_ALLA_BREVE) 
+    {
+      z1=2; 
+      n=2;
+      // 2/2 automatically written as alla breve by lily.
+    }
+  indent();
   out << "\\time " << z1 << "/" << n << " ";
 }
 
@@ -1249,6 +1250,7 @@ void ExportLy::writeKeySig(int st)
   st = char(st & 0xff);
   if (st == 0)
     return;
+  indent();
   out << "\\key ";
   switch(st) {
   case 6:  out << "fis"; break;
@@ -1629,8 +1631,7 @@ void ExportLy::writeChord(Chord* c)
 	  chordpitch=prevpitch;
 	  chordnote=cleannote;
 	}
-      //^^^^^^remember pitch of chordnote to write next chordnote relative to.
-
+     
       ++i; //number of notes in chord, we progress to next chordnote
       if (i == nl->end())
 	break;
@@ -1642,10 +1643,9 @@ void ExportLy::writeChord(Chord* c)
     out << ">"; //endofchord sign
     cleannote=chordnote;
     //if this is a chord, use first note of chord as previous note
-    //instead of actually previous note.
+    //instead of actual previous note.
     }
 
-//remember bottom note of chord to write next single, non-chord note relative to:
   j=0;
   prevpitch=pitchlist[0];
    while (pitchlist[j] !=0)
@@ -1944,8 +1944,15 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 
   measurenumber=m->no()+1;
 
-  if (measurenumber==1)
+//   if (m->irregular())
+//     {
+//       printf("irregular measure, number: %d\n", measurenumber);
+//     }
+
+
+  if ((measurenumber==1) and (donefirst==false))
     {
+      donefirst=true;
       level=0;
       indent();
       cvoicenum=voice+65;
@@ -1973,13 +1980,12 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  out << "\\set Staff.shortInstrumentName = #\"" <<staffname[staffInd].partshort << "\"\n";
 	  indent();
 	  writeClef(staff->clef(0));
+	  indent();
+	  out << "%staffkeysig\n";
+	  //done in first measure anyway: ??
 	  writeKeySig(staff->keymap()->key(0));
-	  out << "\n";
-	  indent();
-	  score->sigmap->timesig(0, z1, n);
-	  out << "\\time " << z1<< "/" << n << " \n";
-	  indent();
-	  out << "\n\n";
+// 	  score->sigmap->timesig(0, z1, n);
+// 	  out << "\\time " << z1<< "/" << n << " \n";
 	}
 
       switch(voice)
@@ -2035,6 +2041,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  break;
 	case TIMESIG:
 	  {
+	    out << "%bartimesig: \n";
 	    writeTimeSig((TimeSig*)e);
 	    out << "\n\n";
 	    barlen=m->tickLen();
@@ -2065,8 +2072,12 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 		  } //end switch (punkt)
 	      }
 	    indent();
-	    break;	  }
+	    break;	  
+	  }
 	case KEYSIG:
+	  indent();
+	  out << "%barkeysig: \n";
+	  indent();
 	  writeKeySig(e->subtype());
 	  break;
 	case CHORD:
@@ -2074,7 +2085,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	    int ntick = e->tick() - tick;
 	    if (ntick > 0)
 	      {
-		writeRest(ntick, 2);
+		writeRest(ntick, 2);//invisible rest: s
 		curTicks=-1;
 	      }
 	    tick += ntick;
@@ -2088,12 +2099,15 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 	  {
 	    findTuplets((Rest *) e);
 	    int l = e->tickLen();
-	    if (l == 0) {
-	      l = ((Rest*)e)->segment()->measure()->tickLen();
-	      writeRest(l, 1);
-	    }
+	    int mlen=((Rest*)e)->segment()->measure()->tickLen();
+	    printf("pauselengde: %d, taktlengde %d \n",l, mlen );
+	    if ((l==mlen) or (l==0))
+	      {
+		l = ((Rest*)e)->segment()->measure()->tickLen();
+		writeRest(l, 1); //wholemeasure rest: R
+	      }
 	    else
-	      writeRest(l, 0);
+	      writeRest(l, 0);//ordinary rest: r
 	    tick += l;
 	    measuretick=measuretick+l;
 
@@ -2187,12 +2201,13 @@ void ExportLy::writeScore()
   chordpitch=41;
   repeatactive=false;
   int staffInd = 0;
-  int np = score->parts()->size();
+  //int np = score->parts()->size();
   graceswitch=false;
   int voice=0;
   cleannote="c";
   prevnote="c";
   gracecount=0;
+  donefirst=false;
 
 
   foreach(Part* part, *score->parts())
@@ -2274,7 +2289,7 @@ void ExportLy::writeScore()
 	    not have been necessary. But I have not found it, so
 	    please tell me if there is. This means that the voice is
 	    not written to the outputstream (os) which is connected to
-	    the output file immediately, but buffered to an
+	    the output file, immediately, but buffered to an
 	    outputstream (out) which is only connected to a string
 	    ("voicebuffer") in memory. If there is no material in the
 	    voice, this string is set to "". If there is material in
@@ -2285,6 +2300,7 @@ void ExportLy::writeScore()
 	    {
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
+	      donefirst=false;
 
 	      //for all measures in this voice:
 	      for (MeasureBase* m = score->layout()->first(); m; m = m->next())
@@ -2306,10 +2322,7 @@ void ExportLy::writeScore()
 	  int voiceno=0;
 
 	  for (voice = 0; voice < VOICES; ++voice)
-	    {
 	    if (voiceActive[voice]) voiceno++;
-	    printf("voice: %d, voiceno: %d\n", voice, voiceno);
-	    }
 
 	  if (voiceno == 1) staffname[staffInd].simultaneousvoices=false;
 
@@ -2468,7 +2481,7 @@ void ExportLy::writeScoreBlock()
 
   if (((pianostaff) and (indx==2)) or (indx < 2))
     os << "#(set-global-staff-size 20)\n";
-  else if (indx > 1)
+  else if (indx > 2)
     os << "#(set-global-staff-size 14)\n";
 }// end scoreblock
 
@@ -2584,63 +2597,63 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------- NEWS and HISTORY:--------------------  */
-/* NEW 5.feb.2009:
-   separated grandstaff (variable distance between staffs) from
+
+/* 12.feb.2009. - Removed bug: double instrument definitions in pieces
+   with pickup-measure (prev'ly defined both in measure 0 and measure
+   1). - Removed bug: nonrecognition of startrepeats. -Improved
+   recognition of whole-measure rests.
+   
+   NEW 5.feb.2009: separated grandstaff (variable distance between staffs) from
    pianostaff: constant distance between staffs to prepare for cross-staff
-   beaming (not implemented). Brackets/braces for single staffs.*/
-
-/* NEW 25.jan.2009:
-   -- system brackets and braces for simple scores.
+   beaming (not implemented). Brackets/braces for single staffs.
+   
+   NEW 25.jan.2009: system brackets and braces for simple scores.
    Unsolved complications for multistaff instruments (piano, organ,
-   harp), and for bracketing single staffs.*/
+   harp), and for bracketing single staffs.
 
-/* NEW 22.jan. 2009
+   NEW 22.jan. 2009
    -- fixed a problem with beames on grace-notes, and
-   some faults produced by the previous revision of exportly.*/
+   some faults produced by the previous revision of exportly.
 
-/* NEW 18. jan. 2009
-   -- Now avoids export of empty voices. */
+   NEW 18. jan. 2009
+   -- Now avoids export of empty voices.
 
-/* NEW 23.dec.2008
-   -- export of note of lengths longa and brevis, and some rests longer than whole.*/
-
-/* NEW 9. dec. 2008:
+   NEW 23.dec.2008
+   -- export of note of lengths longa and brevis, and some rests longer than whole.
+   
+   NEW 9. dec. 2008:
    -- Some improvements to triplets and finding the right octave for single note after chord.
-   -- started work on codas and segnos.*/
+   -- started work on codas and segnos.
 
-/* NEW 24. nov. 2008:
-   -- added dynamic signs and staff-text, by stealing from exportxml.cpp.*/
+   NEW 24. nov. 2008:
+   -- added dynamic signs and staff-text, by stealing from exportxml.cpp.
 
-/* NEW 1. nov. 2008
+   NEW 1. nov. 2008
    --pickupbar (But not irregular bars in general.)
    --ties
    --management of incomplete bars in voices 2-4.
-*/
 
-/* NEW 26. oct. 2008
+   NEW 26. oct. 2008
   - voice separation and recombination in score-block for easier editing of Lilypondfile.
     todo/unresolved: writes voices 2-4 in Lilypond file even if voice is empty.
   - better finding of correct octave when jumping intervals of fifths or more.
-*/
 
-
-/* NEW 10.oct.2008:
+  NEW 10.oct.2008:
    - rudimentary handling of slurs.
    - voltas and endings
    - dotted 8ths and 4ths.
    - triplets, but not general tuplets.
-   - PianoStaff reactivated.*/
+   - PianoStaff reactivated.
 
-
-/*NEW:
-  1. dotted 16th notes
-  2. Relative pitches
-  3. More grace-note types
-  4. Slurs and beams in grace-notes
-  5. Some adjustments in articulations
-  6. separation of staffs/voices from score-block. Unfinished for pianostaffs/GrandStaffs and voices on one staff.
-  7. completed the clef-secton.
-  Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
+   NEW:
+   1. dotted 16th notes
+   2. Relative pitches
+   3. More grace-note types
+   4. Slurs and beams in grace-notes
+   5. Some adjustments in articulations
+   6. separation of staffs/voices from score-block. Unfinished for pianostaffs/GrandStaffs and voices on one staff.
+   7. completed the clef-secton.
+   Points 2 and 6, and also in a smaller degree 5, enhances human readability of lilypond-code.
 */
 
 
@@ -2654,31 +2667,21 @@ bool ExportLy::write(const QString& name)
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
    10. fingerings, chordname; rehearsal marks as \mark in all voices.
-   11. sort out piano-staff and general multistaff-scores.
+   11. 
    12. correct indentation in score-block.
    13. cross-staff beaming in pianostaff
+   14. Real multimeasure rests (for now only one-measure rests are exported).
    - etc.etc.etc.etc........
 */
 
 /*TODO: BUGS
-
-  - repeated voice/part definition in Brandeburg
-
+  - unsupported len= 1680. 
+  - no end-bar in Brandenburg.
+  - partial last measures to match pickupmeasure.
   - massive failure on gollywog and Bilder
-
-  - failure in writing double repeat (left-right) in Berlin21.
-
-   - \stemUp \stemDown : sometimes correct sometimes not??? Maybe I
-  have not understood Lily's rules for the use of these commands?
-  Lily's own stem direction algorithms are good enough. Until a better
-  idea comes along: drop export of stem direction and leave it to
-  LilyPond.
-
- - in Tarrega study: \stemNeutral failure, second voice, first part, from last bar before repeat.
-
- - metronome marks must be given as \tempo 4 = 60 and not as markups.
-
- - lacking fermata above rest.
+  - in Tarrega study: \stemNeutral failure, second voice, first part, from last bar before repeat.
+  - metronome marks must be given as \tempo 4 = 60 and not as markups.
+  - lacking fermata above rest.
 
  - etc. etc. etc. ad nauseam.
  */
