@@ -168,8 +168,6 @@ class ImagePath {
 
 class Score : public QObject {
       Q_OBJECT
-      Q_PROPERTY (int nstaves READ nstaves)
-      Q_PROPERTY (QString name READ name)
 
       QList<ImagePath*> imagePathList;
 
@@ -599,7 +597,8 @@ class Score : public QObject {
       QString filePath() const    { return info.filePath(); }
       QFileInfo* fileInfo()       { return &info; }
 
-      Q_INVOKABLE QString name() const { return info.completeBaseName(); }
+      QString name() const           { return info.completeBaseName(); }
+      void setName(const QString& s) { info.setFile(s); }
 
       bool isSavable() const;
       void setDirty(bool val = true);

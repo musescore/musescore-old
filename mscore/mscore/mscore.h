@@ -332,6 +332,7 @@ class MuseScore : public QMainWindow {
       bool noScore() const { return scoreList.isEmpty(); }
       void setDrumPalette(Palette* p) { drumPalette = p; }
       TextTools* textTools();
+      void updateTabNames();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
