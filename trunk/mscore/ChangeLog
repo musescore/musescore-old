@@ -1,4 +1,6 @@
-12.feb (db)
+12.feb (ws)
+      - started some work on the scripting interface
+      (db)
       - Added Timpani, Glockenspiel, Vibraphone, Marimba, Xylophone, and Tubular Bells
         to new instrument group called "Pitched Percussion" (translation incomplete)
       - Removed Tympani from the regular percussion group.

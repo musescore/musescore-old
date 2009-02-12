@@ -936,6 +936,18 @@ void MuseScore::appendScore(Score* score)
       }
 
 //---------------------------------------------------------
+//   updateTabNames
+//---------------------------------------------------------
+
+void MuseScore::updateTabNames()
+      {
+      for (int i = 0; i < tab->count(); ++i) {
+            Canvas* canvas = static_cast<Canvas*>(tab->widget(i));
+            tab->setTabText(i, canvas->score()->name());
+            }
+      }
+
+//---------------------------------------------------------
 //   usage
 //---------------------------------------------------------
 

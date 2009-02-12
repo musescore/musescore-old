@@ -109,5 +109,6 @@
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptable>
 #include <QtScript/QScriptClass>
+#include <QtScript/QScriptClassPropertyIterator>
 #endif
 

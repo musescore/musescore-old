@@ -21,9 +21,591 @@
 #include "mscore.h"
 #include "globals.h"
 #include "script.h"
-#include "score.h"
 #include "config.h"
 #include "qscriptembeddeddebugger.h"
+
+Q_DECLARE_METATYPE(QByteArray*)
+Q_DECLARE_METATYPE(ByteArrayClass*)
+
+class ByteArrayClassPropertyIterator : public QScriptClassPropertyIterator
+      {
+      int m_index, m_last;
+
+   public:
+      ByteArrayClassPropertyIterator(const QScriptValue &object);
+      ~ByteArrayClassPropertyIterator();
+      bool hasNext() const;
+      void next();
+      bool hasPrevious() const;
+      void previous();
+      void toFront();
+      void toBack();
+      QScriptString name() const;
+      uint id() const;
+      };
+
+static qint32 toArrayIndex(const QString &str)
+      {
+      QByteArray bytes = str.toUtf8();
+      char *eptr;
+      quint32 pos = strtoul(bytes.constData(), &eptr, 10);
+      if ((eptr == bytes.constData() + bytes.size()) && (QByteArray::number(pos) == bytes)) {
+            return pos;
+            }
+      return -1;
+      }
+
+ByteArrayClass::ByteArrayClass(QScriptEngine *engine)
+   : QObject(engine), QScriptClass(engine)
+      {
+      qScriptRegisterMetaType<QByteArray>(engine, toScriptValue, fromScriptValue);
+
+      length = engine->toStringHandle(QLatin1String("length"));
+
+      proto = engine->newQObject(new ByteArrayPrototype(this),
+                                      QScriptEngine::QtOwnership,
+                                      QScriptEngine::SkipMethodsInEnumeration
+                                      | QScriptEngine::ExcludeSuperClassMethods
+                                      | QScriptEngine::ExcludeSuperClassProperties);
+      QScriptValue global = engine->globalObject();
+      proto.setPrototype(global.property("Object").property("prototype"));
+
+      ctor = engine->newFunction(construct);
+      ctor.setData(qScriptValueFromValue(engine, this));
+      }
+
+ByteArrayClass::~ByteArrayClass()
+      {
+      }
+
+QScriptClass::QueryFlags ByteArrayClass::queryProperty(const QScriptValue &object,
+   const QScriptString &name, QueryFlags flags, uint *id)
+      {
+      QByteArray *ba = qscriptvalue_cast<QByteArray*>(object.data());
+      if (!ba)
+            return 0;
+      if (name == length) {
+            return flags;
+            }
+      else {
+            qint32 pos = toArrayIndex(name);
+            if (pos == -1)
+                  return 0;
+            *id = pos;
+            if ((flags & HandlesReadAccess) && (pos >= ba->size()))
+                  flags &= ~HandlesReadAccess;
+            return flags;
+            }
+      }
+
+QScriptValue ByteArrayClass::property(const QScriptValue &object,
+   const QScriptString &name, uint id)
+      {
+      QByteArray *ba = qscriptvalue_cast<QByteArray*>(object.data());
+      if (!ba)
+            return QScriptValue();
+      if (name == length) {
+            return QScriptValue(engine(), ba->length());
+            }
+      else {
+            qint32 pos = id;
+            if ((pos < 0) || (pos >= ba->size()))
+                  return QScriptValue();
+            return QScriptValue(engine(), uint(ba->at(pos)) & 255);
+            }
+      return QScriptValue();
+      }
+
+void ByteArrayClass::setProperty(QScriptValue &object,
+   const QScriptString &name, uint id, const QScriptValue &value)
+      {
+      QByteArray *ba = qscriptvalue_cast<QByteArray*>(object.data());
+      if (!ba)
+            return;
+      if (name == length) {
+            ba->resize(value.toInt32());
+            }
+      else {
+            qint32 pos = id;
+            if (pos < 0)
+                  return;
+            if (ba->size() <= pos)
+                  ba->resize(pos + 1);
+            (*ba)[pos] = char(value.toInt32());
+            }
+      }
+
+QScriptValue::PropertyFlags ByteArrayClass::propertyFlags(
+   const QScriptValue &/*object*/, const QScriptString &name, uint /*id*/)
+      {
+      if (name == length) {
+            return QScriptValue::Undeletable | QScriptValue::SkipInEnumeration;
+            }
+      return QScriptValue::Undeletable;
+      }
+
+QScriptClassPropertyIterator *ByteArrayClass::newIterator(const QScriptValue &object)
+      {
+      return new ByteArrayClassPropertyIterator(object);
+      }
+
+QString ByteArrayClass::name() const
+      {
+      return QLatin1String("ByteArray");
+      }
+
+QScriptValue ByteArrayClass::prototype() const
+      {
+      return proto;
+      }
+
+QScriptValue ByteArrayClass::constructor()
+      {
+      return ctor;
+      }
+
+QScriptValue ByteArrayClass::newInstance(int size)
+      {
+      return newInstance(QByteArray(size, /*ch=*/0));
+      }
+
+QScriptValue ByteArrayClass::newInstance(const QByteArray &ba)
+      {
+      QScriptValue data = engine()->newVariant(qVariantFromValue(ba));
+      return engine()->newObject(this, data);
+      }
+
+QScriptValue ByteArrayClass::construct(QScriptContext *ctx, QScriptEngine *)
+      {
+      ByteArrayClass *cls = qscriptvalue_cast<ByteArrayClass*>(ctx->callee().data());
+      if (!cls)
+            return QScriptValue();
+      int size = ctx->argument(0).toInt32();
+      return cls->newInstance(size);
+      }
+
+QScriptValue ByteArrayClass::toScriptValue(QScriptEngine *eng, const QByteArray &ba)
+      {
+      QScriptValue ctor = eng->globalObject().property("ByteArray");
+      ByteArrayClass *cls = qscriptvalue_cast<ByteArrayClass*>(ctor.data());
+      if (!cls)
+            return eng->newVariant(qVariantFromValue(ba));
+      return cls->newInstance(ba);
+      }
+
+void ByteArrayClass::fromScriptValue(const QScriptValue &obj, QByteArray &ba)
+      {
+      ba = qscriptvalue_cast<QByteArray>(obj.data());
+      }
+
+ByteArrayClassPropertyIterator::ByteArrayClassPropertyIterator(const QScriptValue &object)
+   : QScriptClassPropertyIterator(object)
+      {
+      toFront();
+      }
+
+ByteArrayClassPropertyIterator::~ByteArrayClassPropertyIterator()
+      {
+      }
+
+bool ByteArrayClassPropertyIterator::hasNext() const
+      {
+      QByteArray *ba = qscriptvalue_cast<QByteArray*>(object().data());
+      return m_index < ba->size();
+      }
+
+void ByteArrayClassPropertyIterator::next()
+      {
+      m_last = m_index;
+      ++m_index;
+      }
+
+bool ByteArrayClassPropertyIterator::hasPrevious() const
+      {
+      return (m_index > 0);
+      }
+
+void ByteArrayClassPropertyIterator::previous()
+      {
+      --m_index;
+      m_last = m_index;
+      }
+
+void ByteArrayClassPropertyIterator::toFront()
+      {
+      m_index = 0;
+      m_last = -1;
+      }
+
+void ByteArrayClassPropertyIterator::toBack()
+      {
+      QByteArray *ba = qscriptvalue_cast<QByteArray*>(object().data());
+      m_index = ba->size();
+      m_last = -1;
+      }
+
+QScriptString ByteArrayClassPropertyIterator::name() const
+      {
+      return QScriptString();
+      }
+
+uint ByteArrayClassPropertyIterator::id() const
+      {
+      return m_last;
+      }
+
+QByteArray *ByteArrayPrototype::thisByteArray() const
+      {
+      return qscriptvalue_cast<QByteArray*>(thisObject().data());
+      }
+
+void ByteArrayPrototype::chop(int n)
+      {
+      thisByteArray()->chop(n);
+      }
+
+bool ByteArrayPrototype::equals(const QByteArray &other)
+      {
+      return *thisByteArray() == other;
+      }
+
+QByteArray ByteArrayPrototype::left(int len) const
+      {
+      return thisByteArray()->left(len);
+      }
+
+QByteArray ByteArrayPrototype::mid(int pos, int len) const
+      {
+      return thisByteArray()->mid(pos, len);
+      }
+
+QScriptValue ByteArrayPrototype::remove(int pos, int len)
+      {
+      thisByteArray()->remove(pos, len);
+      return thisObject();
+      }
+
+QByteArray ByteArrayPrototype::right(int len) const
+      {
+      return thisByteArray()->right(len);
+      }
+
+QByteArray ByteArrayPrototype::simplified() const
+      {
+      return thisByteArray()->simplified();
+      }
+
+QByteArray ByteArrayPrototype::toBase64() const
+      {
+      return thisByteArray()->toBase64();
+      }
+
+QByteArray ByteArrayPrototype::toLower() const
+      {
+      return thisByteArray()->toLower();
+      }
+
+QByteArray ByteArrayPrototype::toUpper() const
+      {
+      return thisByteArray()->toUpper();
+      }
+
+QByteArray ByteArrayPrototype::trimmed() const
+      {
+      return thisByteArray()->trimmed();
+      }
+
+void ByteArrayPrototype::truncate(int pos)
+      {
+      thisByteArray()->truncate(pos);
+      }
+
+QString ByteArrayPrototype::toLatin1String() const
+      {
+      return QString::fromLatin1(*thisByteArray());
+      }
+
+QScriptValue ByteArrayPrototype::valueOf() const
+      {
+      return thisObject().data();
+      }
+
+//=========================================================
+
+Q_DECLARE_METATYPE(ScorePtr)
+Q_DECLARE_METATYPE(ScorePtr*)
+Q_DECLARE_METATYPE(ScScore*)
+
+//---------------------------------------------------------
+//   ScScorePropertyIterator
+//---------------------------------------------------------
+
+class ScScorePropertyIterator : public QScriptClassPropertyIterator
+      {
+      int m_index, m_last;
+
+   public:
+      ScScorePropertyIterator(const QScriptValue &object);
+      ~ScScorePropertyIterator() {}
+      bool hasNext() const;
+      void next();
+      bool hasPrevious() const;
+      void previous();
+      void toFront();
+      void toBack();
+      QScriptString name() const { return QScriptString(); }
+      uint id() const            { return m_last; }
+      };
+
+//---------------------------------------------------------
+//   ScScore
+//---------------------------------------------------------
+
+ScScore::ScScore(QScriptEngine* engine)
+   : QObject(engine), QScriptClass(engine)
+      {
+      qScriptRegisterMetaType<ScorePtr>(engine, toScriptValue, fromScriptValue);
+
+      scoreName   = engine->toStringHandle(QLatin1String("name"));
+      scoreStaves = engine->toStringHandle(QLatin1String("staves"));
+
+      proto = engine->newQObject(new ScScorePrototype(this),
+         QScriptEngine::QtOwnership,
+         QScriptEngine::SkipMethodsInEnumeration
+          | QScriptEngine::ExcludeSuperClassMethods
+          | QScriptEngine::ExcludeSuperClassProperties);
+      QScriptValue global = engine->globalObject();
+      proto.setPrototype(global.property("Object").property("prototype"));
+
+      ctor = engine->newFunction(construct);
+      ctor.setData(qScriptValueFromValue(engine, this));
+      }
+
+//---------------------------------------------------------
+//   queryProperty
+//---------------------------------------------------------
+
+QScriptClass::QueryFlags ScScore::queryProperty(const QScriptValue &object,
+   const QScriptString& name, QueryFlags flags, uint* /*id*/)
+      {
+      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(object.data());
+      if (!sp)
+            return 0;
+
+      if ((name == scoreName) || (name == scoreStaves))
+            return flags;
+      return 0;   // qscript handles property
+      }
+
+//---------------------------------------------------------
+//   property
+//---------------------------------------------------------
+
+QScriptValue ScScore::property(const QScriptValue& object,
+   const QScriptString& name, uint /*id*/)
+      {
+printf("property <%s>\n", qPrintable(name.toString()));
+      ScorePtr* score = qscriptvalue_cast<ScorePtr*>(object.data());
+      if (!score)
+            return QScriptValue();
+      if (name == scoreName)
+            return QScriptValue(engine(), (*score)->name());
+      else if (name == scoreStaves)
+            return QScriptValue(engine(), (*score)->nstaves());
+      return QScriptValue();
+      }
+
+//---------------------------------------------------------
+//   setProperty
+//---------------------------------------------------------
+
+void ScScore::setProperty(QScriptValue &object,
+   const QScriptString& s, uint /*id*/, const QScriptValue& value)
+      {
+      ScorePtr* score = qscriptvalue_cast<ScorePtr*>(object.data());
+      if (!score)
+            return;
+      if (s == scoreName) {
+            (*score)->setName(value.toString());
+            mscore->updateTabNames();
+            }
+      }
+
+//---------------------------------------------------------
+//   propertyFlags
+//---------------------------------------------------------
+
+QScriptValue::PropertyFlags ScScore::propertyFlags(
+   const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
+      {
+      if (name == scoreName)
+            return QScriptValue::Undeletable;
+      else if (name == scoreStaves)
+            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
+      return QScriptValue::Undeletable;
+      }
+
+QScriptClassPropertyIterator *ScScore::newIterator(const QScriptValue &object)
+      {
+      return new ScScorePropertyIterator(object);
+      }
+
+//---------------------------------------------------------
+//   newInstance
+//---------------------------------------------------------
+
+QScriptValue ScScore::newInstance(const QString& name)
+      {
+      QString s(name);
+      Score* ns = new Score();
+      if (s.isEmpty())
+            s = mscore->createDefaultName();
+      ns->setName(s);
+      mscore->appendScore(ns);
+      return newInstance(ns);
+      }
+
+QScriptValue ScScore::newInstance(const ScorePtr& score)
+      {
+      QScriptValue data = engine()->newVariant(qVariantFromValue(score));
+      return engine()->newObject(this, data);
+      }
+
+//---------------------------------------------------------
+//   construct
+//---------------------------------------------------------
+
+QScriptValue ScScore::construct(QScriptContext *ctx, QScriptEngine *)
+      {
+      ScScore *cls = qscriptvalue_cast<ScScore*>(ctx->callee().data());
+      if (!cls)
+            return QScriptValue();
+      QString s = ctx->argument(0).toString();
+      return cls->newInstance(s);
+      }
+
+QScriptValue ScScore::toScriptValue(QScriptEngine* eng, const ScorePtr& ba)
+      {
+      QScriptValue ctor = eng->globalObject().property("Score");
+      ScScore* cls = qscriptvalue_cast<ScScore*>(ctor.data());
+      if (!cls)
+            return eng->newVariant(qVariantFromValue(ba));
+      return cls->newInstance(ba);
+      }
+
+void ScScore::fromScriptValue(const QScriptValue& obj, ScorePtr& ba)
+      {
+      ba = qscriptvalue_cast<ScorePtr>(obj.data());
+      }
+
+//---------------------------------------------------------
+//   ScScorePropertyIterator
+//---------------------------------------------------------
+
+ScScorePropertyIterator::ScScorePropertyIterator(const QScriptValue &object)
+   : QScriptClassPropertyIterator(object)
+      {
+      toFront();
+      }
+
+bool ScScorePropertyIterator::hasNext() const
+      {
+//      Score* ba = qscriptvalue_cast<Score*>(object().data());
+      return m_index < 1;     // TODO ba->size();
+      }
+
+void ScScorePropertyIterator::next()
+      {
+      m_last = m_index;
+      ++m_index;
+      }
+
+bool ScScorePropertyIterator::hasPrevious() const
+      {
+      return (m_index > 0);
+      }
+
+void ScScorePropertyIterator::previous()
+      {
+      --m_index;
+      m_last = m_index;
+      }
+
+void ScScorePropertyIterator::toFront()
+      {
+      m_index = 0;
+      m_last = -1;
+      }
+
+void ScScorePropertyIterator::toBack()
+      {
+//      ScorePtr* ba = qscriptvalue_cast<ScorePtr*>(object().data());
+      m_index = 0; // ba->size();
+      m_last = -1;
+      }
+
+//---------------------------------------------------------
+//   thisScore
+//---------------------------------------------------------
+
+Score* ScScorePrototype::thisScore() const
+      {
+      return qscriptvalue_cast<Score*>(thisObject().data());
+      }
+
+//---------------------------------------------------------
+//   saveXml
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveXml(const QString& name)
+      {
+      return thisScore()->saveXml(name);
+      }
+
+//---------------------------------------------------------
+//   saveMxl
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveMxl(const QString& name)
+      {
+      return thisScore()->saveMxl(name);
+      }
+
+//---------------------------------------------------------
+//   saveMidi
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveMidi(const QString& name)
+      {
+      return thisScore()->saveMidi(name);
+      }
+
+//---------------------------------------------------------
+//   savePng
+//---------------------------------------------------------
+
+bool ScScorePrototype::savePng(const QString& name)
+      {
+      return thisScore()->savePng(name);
+      }
+
+//---------------------------------------------------------
+//   saveSvg
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveSvg(const QString& name)
+      {
+      return thisScore()->saveSvg(name);
+      }
+
+//---------------------------------------------------------
+//   saveLilypond
+//---------------------------------------------------------
+
+bool ScScorePrototype::saveLilypond(const QString& name)
+      {
+      return thisScore()->saveLilypond(name);
+      }
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -205,7 +787,13 @@ void MuseScore::pluginTriggered(int idx)
                   }
 #endif
             }
-      QScriptValue v = se->newQObject(cs);
+      ByteArrayClass* baClass = new ByteArrayClass(se);
+      se->globalObject().setProperty("ByteArray", baClass->constructor());
+
+      ScScore* scoreClass = new ScScore(se);
+      se->globalObject().setProperty("Score", scoreClass->constructor());
+
+      QScriptValue v = scoreClass->newInstance(cs);
       se->globalObject().setProperty("curScore", v);
 
       v = se->newVariant(division);
