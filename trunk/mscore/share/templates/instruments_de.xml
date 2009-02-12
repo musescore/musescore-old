@@ -280,11 +280,56 @@
          <clef>14</clef>
          <stafflines>1</stafflines>
          </instrument>
+      </instrument-group>
+   
+      <instrument-group name="Pitched Percussion">
       <instrument>
-         <name>Tympani</name>
-         <short-name>Tymp.</short-name>
+         <name>Pauke</name>
+         <short-name>Pk.</short-name>
          <clef>4</clef>
-         <midiprogram>47</midiprogram>
+         <channel>
+            <program>47</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Lyra</name>
+         <short-name>Ly.</short-name>
+         <transposition>24</transposition>
+         <channel>
+            <program>10</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Vibraphon</name>
+         <short-name>Vib.</short-name>
+         <channel>
+            <program>11</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Marimba</name>
+         <short-name>Mrm.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>12</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Xylophon</name>
+         <short-name>Xyl.</short-name>
+         <channel>
+            <program>13</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Röhrenglocken</name>
+         <short-name>Röh.</short-name>
+         <channel>
+            <program>14</program>
+            </channel>
          </instrument>
       </instrument-group>
 

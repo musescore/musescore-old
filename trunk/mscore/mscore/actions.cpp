@@ -957,7 +957,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "duplet",
-         QT_TR_NOOP("duplet"),
+         QT_TR_NOOP("Duplet"),
          Qt::CTRL+Qt::Key_2,
          Qt::WindowShortcut,
          QT_TR_NOOP("Duplet")
@@ -965,7 +965,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "triplet",
-         QT_TR_NOOP("triplet"),
+         QT_TR_NOOP("Triplet"),
          Qt::CTRL+Qt::Key_3,
          Qt::WindowShortcut,
          QT_TR_NOOP("Triplet")
@@ -973,7 +973,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "quadruplet",
-         QT_TR_NOOP("quadruplet"),
+         QT_TR_NOOP("Quadruplet"),
          Qt::CTRL+Qt::Key_4,
          Qt::WindowShortcut,
          QT_TR_NOOP("Quadruplet")
@@ -1024,7 +1024,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Other Tuplets"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Other Tuplets")
+         QT_TR_NOOP("Other...")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,

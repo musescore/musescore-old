@@ -369,12 +369,55 @@
             <program>0</program>
             </channel>
          </instrument>
+      </instrument-group>
+
+   <instrument-group name="Pitched Percussion">
       <instrument>
-         <name>Pauken</name>
-         <short-name>Pkn.</short-name>
+         <name>Pauk</name>
+         <short-name>Pk.</short-name>
          <clef>4</clef>
          <channel>
             <program>47</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Glockenspiel</name>
+         <short-name>Glk.</short-name>
+         <transposition>24</transposition>
+         <channel>
+            <program>10</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Vibrafoon</name>
+         <short-name>Vib.</short-name>
+         <channel>
+            <program>11</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Marimba</name>
+         <short-name>Mrm.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         <channel>
+            <program>12</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Xylofoon</name>
+         <short-name>Xyl.</short-name>
+         <channel>
+            <program>13</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Buisklokken</name>
+         <short-name>Bsk.</short-name>
+         <channel>
+            <program>14</program>
             </channel>
          </instrument>
       </instrument-group>
