@@ -274,11 +274,172 @@
          <drumset>1</drumset>
          </instrument>
       <instrument>
+         <name>Snare Drum</name>
+         <short-name>S.Dr.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="37">
+            <head>1</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Side Stick</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="38">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Acoustic Snare</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Bass Drum</name>
+         <short-name>B.Dr.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="35">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Acoustic Bass Drum</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
          <name>Triangle</name>
          <short-name>Trgl.</short-name>
          <drumset>1</drumset>
          <clef>14</clef>
          <stafflines>1</stafflines>
+         </instrument>
+      <instrument>
+         <name>Cymbal</name>
+         <short-name>Cym.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="49">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Crash Cymbal 1</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="51">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Ride Cymbal 1</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="52">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Chinese Cymbal</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="55">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Splash Cymbal</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="57">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Crash Cymbal 2</name>
+            <stem>2</stem>
+            </Drum>
+         <Drum pitch="59">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Ride Cymbal 2</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Cowbell</name>
+         <short-name>C.Bl.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="56">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Cowbell</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Claves</name>
+         <short-name>Clv.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="75">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Claves</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Maracas</name>
+         <short-name>Mrcs.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="70">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Maracas</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Tambourine</name>
+         <short-name>Tamb.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="54">
+            <head>0</head>
+            <line>4</line>
+            <voice>0</voice>
+            <name>Tambourine</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
          </instrument>
       </instrument-group>
    
