@@ -239,7 +239,10 @@ void ScScorePropertyIterator::toBack()
 
 Score* ScScorePrototype::thisScore() const
       {
-      return qscriptvalue_cast<Score*>(thisObject().data());
+      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(thisObject().data());
+      if (sp)
+            return *sp;
+      return 0;
       }
 
 //---------------------------------------------------------
