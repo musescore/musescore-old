@@ -50,6 +50,7 @@ class SCursor {
       void setSegment(Segment* s) { _segment = s;     }
       Score* score() const        { return _score;    }
       ChordRest* cr() const;
+      void rewind();
       };
 
 //---------------------------------------------------------

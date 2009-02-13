@@ -134,14 +134,12 @@ QScriptClassPropertyIterator *ScChord::newIterator(const QScriptValue &object)
 
 QScriptValue ScChord::newInstance(Score* score)
       {
-printf("ScChord::newInstance(Score)\n");
       Chord* chord = new Chord(score);
       return newInstance(chord);
       }
 
 QScriptValue ScChord::newInstance(const ChordPtr& score)
       {
-printf("ScChord::newInstance(ChordPtr %p)\n", score);
       QScriptValue data = engine()->newVariant(qVariantFromValue(score));
       return engine()->newObject(this, data);
       }
@@ -157,7 +155,6 @@ QScriptValue ScChord::construct(QScriptContext *ctx, QScriptEngine *)
             return QScriptValue();
       QScriptValue v = ctx->argument(0);
       ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-printf("ScChord::construct ptr %p\n", sp);
       if (sp)
             return cls->newInstance(*sp);
       else
@@ -231,11 +228,8 @@ void ScChordPropertyIterator::toBack()
 Chord* ScChordPrototype::thisChord() const
       {
       ChordPtr* cp = qscriptvalue_cast<ChordPtr*>(thisObject().data());
-printf("this chord %p\n", cp);
-      if (cp) {
-            printf("    %p\n", *cp);
+      if (cp)
             return *cp;
-            }
       return 0;
       }
 
