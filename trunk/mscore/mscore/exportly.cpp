@@ -87,7 +87,7 @@ class ExportLy {
   int  n, z1, z2, z3, z4; //timesignatures
   int barlen;
   bool slur;
-  bool pickup; 
+  bool pickup;
   bool donefirst; //to prevent doing things in first ordinary bar which are already done in pickupbar
   bool graceswitch, gracebeam;
   int gracecount;
@@ -1105,7 +1105,7 @@ int ExportLy::voltaCheckBar(Measure* meas, int i)
     }//switch
 
   bool rs = meas->repeatFlags() & RepeatStart;
-  if (rs) 
+  if (rs)
     {
       i++;
       voltarray[i].voltart=startrepeat;
@@ -1231,9 +1231,9 @@ void ExportLy::writeTimeSig(TimeSig* sig)
   int st = sig->subtype();
   sig->getSig(&n, &z1, &z2, &z3, &z4);
   //lilypond writes 4/4 as C by default, so only check for cut.
-  if (st == TSIG_ALLA_BREVE) 
+  if (st == TSIG_ALLA_BREVE)
     {
-      z1=2; 
+      z1=2;
       n=2;
       // 2/2 automatically written as alla breve by lily.
     }
@@ -1631,7 +1631,7 @@ void ExportLy::writeChord(Chord* c)
 	  chordpitch=prevpitch;
 	  chordnote=cleannote;
 	}
-     
+
       ++i; //number of notes in chord, we progress to next chordnote
       if (i == nl->end())
 	break;
@@ -2072,7 +2072,7 @@ void ExportLy::writeVoiceMeasure(Measure* m, Staff* staff, int staffInd, int voi
 		  } //end switch (punkt)
 	      }
 	    indent();
-	    break;	  
+	    break;
 	  }
 	case KEYSIG:
 	  indent();
@@ -2497,6 +2497,7 @@ bool ExportLy::write(const QString& name)
   if (!f.open(QIODevice::WriteOnly))
     return false;
   os.setDevice(&f);
+  os.setCodec("utf8");
   out.setString(&voicebuffer);
   os << "%=============================================\n"
     "%   created by MuseScore Version: " << VERSION << "\n"
@@ -2602,11 +2603,11 @@ bool ExportLy::write(const QString& name)
    with pickup-measure (prev'ly defined both in measure 0 and measure
    1). - Removed bug: nonrecognition of startrepeats. -Improved
    recognition of whole-measure rests.
-   
+
    NEW 5.feb.2009: separated grandstaff (variable distance between staffs) from
    pianostaff: constant distance between staffs to prepare for cross-staff
    beaming (not implemented). Brackets/braces for single staffs.
-   
+
    NEW 25.jan.2009: system brackets and braces for simple scores.
    Unsolved complications for multistaff instruments (piano, organ,
    harp), and for bracketing single staffs.
@@ -2620,7 +2621,7 @@ bool ExportLy::write(const QString& name)
 
    NEW 23.dec.2008
    -- export of note of lengths longa and brevis, and some rests longer than whole.
-   
+
    NEW 9. dec. 2008:
    -- Some improvements to triplets and finding the right octave for single note after chord.
    -- started work on codas and segnos.
@@ -2667,7 +2668,7 @@ bool ExportLy::write(const QString& name)
    7  Use linked list instead of static array for dynamics etcs.
    8. Determine whether text goes above or below staff.
    10. fingerings, chordname; rehearsal marks as \mark in all voices.
-   11. 
+   11.
    12. correct indentation in score-block.
    13. cross-staff beaming in pianostaff
    14. Real multimeasure rests (for now only one-measure rests are exported).
@@ -2675,7 +2676,7 @@ bool ExportLy::write(const QString& name)
 */
 
 /*TODO: BUGS
-  - unsupported len= 1680. 
+  - unsupported len= 1680.
   - no end-bar in Brandenburg.
   - partial last measures to match pickupmeasure.
   - massive failure on gollywog and Bilder
