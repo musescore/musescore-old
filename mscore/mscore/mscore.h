@@ -52,6 +52,7 @@ class ExcerptsDialog;
 class QScriptEmbeddedDebugger;
 struct Drumset;
 class TextTools;
+class ScriptEngine;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -220,7 +221,7 @@ class MuseScore : public QMainWindow {
       bool _speakerEnabled;
       QString lastOpenPath;
       QList<QString> plugins;
-      QScriptEngine* se;
+      ScriptEngine* se;
       QString pluginPath;
       QScriptEmbeddedDebugger* debugger;
 

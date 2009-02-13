@@ -18,93 +18,97 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCRIPT_H__
-#define __SCRIPT_H__
+#ifndef __SCCURSOR_H__
+#define __SCCURSOR_H__
 
-#include "score.h"
+class Score;
+class Chord;
+class Segment;
+class SCursor;
+class ChordRest;
 
-class ScScore;
-class ScSCursor;
-class ByteArrayClass;
+typedef Chord* ChordPtr;
 
 //---------------------------------------------------------
-//   ScriptEngine
+//   SCursor
 //---------------------------------------------------------
 
-class ScriptEngine : public QScriptEngine {
-      Q_OBJECT
-
-      ByteArrayClass* baClass;
-      ScScore* scoreClass;
-      ScSCursor* cursorClass;
+class SCursor {
+      Score* _score;
+      int _staffIdx;
+      int _voice;
+      Segment* _segment;
 
    public:
-      ScriptEngine();
-      ScScore* getScoreClass() const { return scoreClass; }
-      ScSCursor* getCursorClass() const { return cursorClass; }
+      SCursor(Score*);
+      SCursor() {}
+      int staffIdx() const        { return _staffIdx; }
+      int voice() const           { return _voice;    }
+      void setStaffIdx(int v)     { _staffIdx = v;    }
+      void setVoice(int v)        { _voice = v;       }
+      Segment* segment() const    { return _segment;  }
+      void setSegment(Segment* s) { _segment = s;     }
+      Score* score() const        { return _score;    }
+      ChordRest* cr() const;
       };
 
 //---------------------------------------------------------
-//   ByteArrayClass
+//   ScSCursor
 //---------------------------------------------------------
 
-class ByteArrayClass : public QObject, public QScriptClass {
+class ScSCursor : public QObject, public QScriptClass {
       static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const QByteArray &ba);
-      static void fromScriptValue(const QScriptValue &obj, QByteArray &ba);
+      static QScriptValue toScriptValue(QScriptEngine *eng, const SCursor&);
+      static void fromScriptValue(const QScriptValue &obj, SCursor&);
 
-      QScriptString length;
+      QScriptString cursorStaff, cursorVoice;
       QScriptValue proto;
       QScriptValue ctor;
 
    public:
-      ByteArrayClass(QScriptEngine* se);
-      ~ByteArrayClass();
-      QScriptValue constructor();
-      QScriptValue newInstance(int size = 0);
-      QScriptValue newInstance(const QByteArray& ba);
+      ScSCursor(QScriptEngine* se);
+      ~ScSCursor() {}
+
+      QScriptValue constructor() { return ctor; }
+      QScriptValue newInstance(Score*);
+      QScriptValue newInstance(const SCursor&);
       QueryFlags queryProperty(const QScriptValue& object,
          const QScriptString& name, QueryFlags flags, uint* id);
       QScriptValue property(const QScriptValue& obhect,
          const QScriptString& name, uint id);
-      void setProperty(QScriptValue& object, const QScriptString& name,
+      virtual void setProperty(QScriptValue& object, const QScriptString& name,
          uint id, const QScriptValue& value);
       QScriptValue::PropertyFlags propertyFlags(
          const QScriptValue& object, const QScriptString& name, uint id);
       QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
-      QString name() const;
-      QScriptValue prototype() const;
+      QString name() const           { return QLatin1String("Cursor"); }
+      QScriptValue prototype() const { return proto; }
       };
 
 //---------------------------------------------------------
-//   ByteArrayPrototype
+//   ScSCursorPrototype
 //---------------------------------------------------------
 
-class ByteArrayPrototype : public QObject, public QScriptable
+class ScSCursorPrototype : public QObject, public QScriptable
       {
       Q_OBJECT
-      QByteArray *thisByteArray() const;
+      SCursor* thisSCursor() const;
 
    public:
-      ByteArrayPrototype(QObject *parent = 0) : QObject(parent) {}
-      ~ByteArrayPrototype() {}
+      ScSCursorPrototype(QObject *parent = 0) : QObject(parent) {}
+      ~ScSCursorPrototype() {}
 
    public slots:
-      void chop(int n);
-      bool equals(const QByteArray &other);
-      QByteArray left(int len) const;
-      QByteArray mid(int pos, int len = -1) const;
-      QScriptValue remove(int pos, int len);
-      QByteArray right(int len) const;
-      QByteArray simplified() const;
-      QByteArray toBase64() const;
-      QByteArray toLower() const;
-      QByteArray toUpper() const;
-      QByteArray trimmed() const;
-      void truncate(int pos);
-      QString toLatin1String() const;
-      QScriptValue valueOf() const;
+      void rewind();
+      bool eos() const;
+      ChordPtr chord();
+      bool next();
+      void putStaffText(const QString&);
+      bool isChord() const;
       };
 
+Q_DECLARE_METATYPE(SCursor)
+Q_DECLARE_METATYPE(SCursor*)
+Q_DECLARE_METATYPE(ScSCursor*)
 #endif
 

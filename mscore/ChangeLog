@@ -1,5 +1,8 @@
-13.feb (db)
-      - Added new instruments: Snare Drum, Bass Drum, Cymbal, Cowbell, Claves, 
+13.feb (ws)
+      - added test script notenames.js
+      - more scripting code
+      (db)
+      - Added new instruments: Snare Drum, Bass Drum, Cymbal, Cowbell, Claves,
         Maracas, Tambourine (translation incomplete)
       (tb)
       - updated French translation by JLWaltener
