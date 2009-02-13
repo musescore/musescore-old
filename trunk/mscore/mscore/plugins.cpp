@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,6 +23,10 @@
 #include "script.h"
 #include "config.h"
 #include "qscriptembeddeddebugger.h"
+#include "scscore.h"
+#include "scchord.h"
+#include "sccursor.h"
+#include "scnote.h"
 
 Q_DECLARE_METATYPE(QByteArray*)
 Q_DECLARE_METATYPE(ByteArrayClass*)
@@ -330,283 +334,6 @@ QScriptValue ByteArrayPrototype::valueOf() const
       return thisObject().data();
       }
 
-//=========================================================
-
-Q_DECLARE_METATYPE(ScorePtr)
-Q_DECLARE_METATYPE(ScorePtr*)
-Q_DECLARE_METATYPE(ScScore*)
-
-//---------------------------------------------------------
-//   ScScorePropertyIterator
-//---------------------------------------------------------
-
-class ScScorePropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
-
-   public:
-      ScScorePropertyIterator(const QScriptValue &object);
-      ~ScScorePropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
-      };
-
-//---------------------------------------------------------
-//   ScScore
-//---------------------------------------------------------
-
-ScScore::ScScore(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
-      {
-      qScriptRegisterMetaType<ScorePtr>(engine, toScriptValue, fromScriptValue);
-
-      scoreName   = engine->toStringHandle(QLatin1String("name"));
-      scoreStaves = engine->toStringHandle(QLatin1String("staves"));
-
-      proto = engine->newQObject(new ScScorePrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   queryProperty
-//---------------------------------------------------------
-
-QScriptClass::QueryFlags ScScore::queryProperty(const QScriptValue &object,
-   const QScriptString& name, QueryFlags flags, uint* /*id*/)
-      {
-      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(object.data());
-      if (!sp)
-            return 0;
-
-      if ((name == scoreName) || (name == scoreStaves))
-            return flags;
-      return 0;   // qscript handles property
-      }
-
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-QScriptValue ScScore::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
-      {
-printf("property <%s>\n", qPrintable(name.toString()));
-      ScorePtr* score = qscriptvalue_cast<ScorePtr*>(object.data());
-      if (!score)
-            return QScriptValue();
-      if (name == scoreName)
-            return QScriptValue(engine(), (*score)->name());
-      else if (name == scoreStaves)
-            return QScriptValue(engine(), (*score)->nstaves());
-      return QScriptValue();
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScScore::setProperty(QScriptValue &object,
-   const QScriptString& s, uint /*id*/, const QScriptValue& value)
-      {
-      ScorePtr* score = qscriptvalue_cast<ScorePtr*>(object.data());
-      if (!score)
-            return;
-      if (s == scoreName) {
-            (*score)->setName(value.toString());
-            mscore->updateTabNames();
-            }
-      }
-
-//---------------------------------------------------------
-//   propertyFlags
-//---------------------------------------------------------
-
-QScriptValue::PropertyFlags ScScore::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
-      {
-      if (name == scoreName)
-            return QScriptValue::Undeletable;
-      else if (name == scoreStaves)
-            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
-      return QScriptValue::Undeletable;
-      }
-
-QScriptClassPropertyIterator *ScScore::newIterator(const QScriptValue &object)
-      {
-      return new ScScorePropertyIterator(object);
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScScore::newInstance(const QString& name)
-      {
-      QString s(name);
-      Score* ns = new Score();
-      if (s.isEmpty())
-            s = mscore->createDefaultName();
-      ns->setName(s);
-      mscore->appendScore(ns);
-      return newInstance(ns);
-      }
-
-QScriptValue ScScore::newInstance(const ScorePtr& score)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(score));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScScore::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScScore *cls = qscriptvalue_cast<ScScore*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QString s = ctx->argument(0).toString();
-      return cls->newInstance(s);
-      }
-
-QScriptValue ScScore::toScriptValue(QScriptEngine* eng, const ScorePtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Score");
-      ScScore* cls = qscriptvalue_cast<ScScore*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScScore::fromScriptValue(const QScriptValue& obj, ScorePtr& ba)
-      {
-      ba = qscriptvalue_cast<ScorePtr>(obj.data());
-      }
-
-//---------------------------------------------------------
-//   ScScorePropertyIterator
-//---------------------------------------------------------
-
-ScScorePropertyIterator::ScScorePropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScScorePropertyIterator::hasNext() const
-      {
-//      Score* ba = qscriptvalue_cast<Score*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScScorePropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScScorePropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScScorePropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScScorePropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScScorePropertyIterator::toBack()
-      {
-//      ScorePtr* ba = qscriptvalue_cast<ScorePtr*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
-//   thisScore
-//---------------------------------------------------------
-
-Score* ScScorePrototype::thisScore() const
-      {
-      return qscriptvalue_cast<Score*>(thisObject().data());
-      }
-
-//---------------------------------------------------------
-//   saveXml
-//---------------------------------------------------------
-
-bool ScScorePrototype::saveXml(const QString& name)
-      {
-      return thisScore()->saveXml(name);
-      }
-
-//---------------------------------------------------------
-//   saveMxl
-//---------------------------------------------------------
-
-bool ScScorePrototype::saveMxl(const QString& name)
-      {
-      return thisScore()->saveMxl(name);
-      }
-
-//---------------------------------------------------------
-//   saveMidi
-//---------------------------------------------------------
-
-bool ScScorePrototype::saveMidi(const QString& name)
-      {
-      return thisScore()->saveMidi(name);
-      }
-
-//---------------------------------------------------------
-//   savePng
-//---------------------------------------------------------
-
-bool ScScorePrototype::savePng(const QString& name)
-      {
-      return thisScore()->savePng(name);
-      }
-
-//---------------------------------------------------------
-//   saveSvg
-//---------------------------------------------------------
-
-bool ScScorePrototype::saveSvg(const QString& name)
-      {
-      return thisScore()->saveSvg(name);
-      }
-
-//---------------------------------------------------------
-//   saveLilypond
-//---------------------------------------------------------
-
-bool ScScorePrototype::saveLilypond(const QString& name)
-      {
-      return thisScore()->saveLilypond(name);
-      }
-
 //---------------------------------------------------------
 //   registerPlugin
 //---------------------------------------------------------
@@ -736,6 +463,40 @@ void MuseScore::loadPlugins()
       }
 
 //---------------------------------------------------------
+//   ScriptEngine
+//---------------------------------------------------------
+
+ScriptEngine::ScriptEngine()
+   : QScriptEngine()
+      {
+#ifdef HAS_SCRIPT_INTERFACE
+      importExtension("qt.core");
+      importExtension("qt.gui");
+      importExtension("qt.xml");
+      importExtension("qt.network");
+      importExtension("qt.uitools");
+#endif
+
+      baClass = new ByteArrayClass(this);
+      globalObject().setProperty("ByteArray", baClass->constructor());
+
+      scoreClass = new ScScore(this);
+      globalObject().setProperty("Score", scoreClass->constructor());
+
+      cursorClass = new ScSCursor(this);
+      globalObject().setProperty("Cursor", cursorClass->constructor());
+
+      ScChord* chordClass = new ScChord(this);
+      globalObject().setProperty("Chord", chordClass->constructor());
+
+      ScNote* noteClass = new ScNote(this);
+      globalObject().setProperty("Note", noteClass->constructor());
+
+      QScriptValue v = newVariant(division);
+      globalObject().setProperty("division", v);
+      }
+
+//---------------------------------------------------------
 //   pluginTriggered
 //---------------------------------------------------------
 
@@ -751,15 +512,7 @@ void MuseScore::pluginTriggered(int idx)
       if (debugMode)
             printf("Run Plugin <%s>\n", qPrintable(pp));
       if (se == 0) {
-            se = new QScriptEngine(0);
-
-#ifdef HAS_SCRIPT_INTERFACE
-            se->importExtension("qt.core");
-            se->importExtension("qt.gui");
-            se->importExtension("qt.xml");
-            se->importExtension("qt.network");
-            se->importExtension("qt.uitools");
-#endif
+            se = new ScriptEngine();
 
 #ifdef HAS_SCRIPT_DEBUG
             if (scriptDebug) {
@@ -787,17 +540,12 @@ void MuseScore::pluginTriggered(int idx)
                   }
 #endif
             }
-      ByteArrayClass* baClass = new ByteArrayClass(se);
-      se->globalObject().setProperty("ByteArray", baClass->constructor());
-
-      ScScore* scoreClass = new ScScore(se);
-      se->globalObject().setProperty("Score", scoreClass->constructor());
-
-      QScriptValue v = scoreClass->newInstance(cs);
+      QScriptValue v = se->getScoreClass()->newInstance(cs);
       se->globalObject().setProperty("curScore", v);
 
-      v = se->newVariant(division);
-      se->globalObject().setProperty("division", v);
+      SCursor c;
+      v = se->getCursorClass()->newInstance(c);
+      se->globalObject().setProperty("curCursor", v);
 
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();
@@ -812,6 +560,5 @@ void MuseScore::pluginTriggered(int idx)
             return;
             }
       run.call();
+      cs->end();
       }
-
-
