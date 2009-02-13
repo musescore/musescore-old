@@ -51,6 +51,24 @@ ChordRest* SCursor::cr() const
       }
 
 //---------------------------------------------------------
+//   rewind
+//---------------------------------------------------------
+
+void SCursor::rewind()
+      {
+      _segment   = 0;
+      Measure* m = _score->tick2measure(0);
+      if (m) {
+            _segment = m->first();
+            if (_staffIdx >= 0) {
+                  int track = _staffIdx * VOICES + _voice;
+                  while (_segment && ((_segment->subtype() != Segment::SegChordRest) || (_segment->element(track) == 0)))
+                        _segment = _segment->next1();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   ScSCursorPropertyIterator
 //---------------------------------------------------------
 
@@ -270,22 +288,7 @@ SCursor* ScSCursorPrototype::thisSCursor() const
 void ScSCursorPrototype::rewind()
       {
       SCursor* cursor = thisSCursor();
-      Segment* seg = 0;
-      Measure* m = cursor->score()->tick2measure(0);
-printf("ScSCursorPrototype::rewind measure %p\n", m);
-      if (m) {
-            seg = m->first();
-            int staffIdx = cursor->staffIdx();
-            if (staffIdx >= 0) {
-                  int track = staffIdx * VOICES + cursor->voice();
-                  while (seg && (seg->subtype() != Segment::SegChordRest) && (seg->element(track) == 0)) {
-                        seg = seg->next1();
-                        printf("  rewind skip\n");
-                        }
-                  }
-            }
-      cursor->setSegment(seg);
-      printf("rewind\n");
+      cursor->rewind();
       }
 
 //---------------------------------------------------------
@@ -308,7 +311,6 @@ ChordPtr ScSCursorPrototype::chord()
       {
       SCursor* cursor = thisSCursor();
       ChordRest* cr = cursor->cr();
-printf("ScSCursorPrototype::chord %p %d\n", cr, cr && (cr->type() == CHORD));
       if (cr == 0 || cr->type() != CHORD)
             return 0;
       return static_cast<Chord*>(cr);
@@ -339,7 +341,7 @@ bool ScSCursorPrototype::next()
       int staffIdx = cursor->staffIdx();
       if (staffIdx >= 0) {
             int track = staffIdx * VOICES + cursor->voice();
-            while (seg && seg->subtype() != Segment::SegChordRest && seg->element(track) == 0)
+            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
       cursor->setSegment(seg);
