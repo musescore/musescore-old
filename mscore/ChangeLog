@@ -1,3 +1,7 @@
+14.feb (ws)
+      - added separate text styles for even/odd lyrics lines
+      - script debugger can now enabled/disabled with check button in Help menu
+        instead via command line option. Command line option sets default.
 13.feb (ws)
       - added test script notenames.js
       - more scripting code

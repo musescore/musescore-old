@@ -62,7 +62,10 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Poet"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics"), ff, 11, false, false, false,
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics odd lines"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7),
+
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics even lines"), ff, 11, false, true, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Fingering"), ff,  8, false, false, false,

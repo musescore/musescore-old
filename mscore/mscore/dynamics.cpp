@@ -82,7 +82,7 @@ Dynamic::Dynamic(const Dynamic& d)
 void Dynamic::setSubtype(int idx)
       {
       Element::setSubtype(idx);
-      setStyle(score()->textStyle(TEXT_STYLE_DYNAMICS));
+      setStyle(TEXT_STYLE_DYNAMICS);
       if (idx != 0)
             setText(dynList[idx].tag);
       }

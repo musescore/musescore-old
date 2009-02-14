@@ -1328,7 +1328,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else {
                   t = new Text(score);
-                  t->setStyle(score->textStyle(TEXT_STYLE_TECHNIK));
+                  t->setStyle(TEXT_STYLE_TECHNIK);
                   }
             t->setTick(tick);
             if (weight == "bold") {

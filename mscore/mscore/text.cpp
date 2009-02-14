@@ -415,6 +415,15 @@ void TextC::setStyle(const TextStyle* s)
       }
 
 //---------------------------------------------------------
+//   setStyle
+//---------------------------------------------------------
+
+void TextC::setStyle(int idx)
+      {
+      setStyle(score()->textStyle(idx));
+      }
+
+//---------------------------------------------------------
 //   Text
 //---------------------------------------------------------
 
@@ -495,7 +504,7 @@ TextStyle* TextB::style() const
             case TEXT_INSTRUMENT_SHORT: st = TEXT_STYLE_INSTRUMENT_SHORT; break;
             case TEXT_INSTRUMENT_EXCERPT: st = TEXT_STYLE_INSTRUMENT_EXCERPT; break;
             case TEXT_TEMPO:            st = TEXT_STYLE_TEMPO; break;
-            case TEXT_LYRIC:            st = TEXT_STYLE_LYRIC; break;
+            case TEXT_LYRIC:            st = TEXT_STYLE_LYRIC1; break;
             case TEXT_TUPLET:           st = TEXT_STYLE_TUPLET; break;
             case TEXT_SYSTEM:           st = TEXT_STYLE_SYSTEM; break;
             case TEXT_STAFF:            st = TEXT_STYLE_STAFF; break;
@@ -710,6 +719,15 @@ void TextB::setStyle(const TextStyle* s)
       textBase()->setFrameColor(s->frameColor);
       textBase()->setFrameRound(s->frameRound);
       textBase()->setCircle(s->circle);
+      }
+
+//---------------------------------------------------------
+//   setStyle
+//---------------------------------------------------------
+
+void TextB::setStyle(int idx)
+      {
+      setStyle(score()->textStyle(idx));
       }
 
 //---------------------------------------------------------
