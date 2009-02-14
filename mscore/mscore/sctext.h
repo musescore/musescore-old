@@ -34,6 +34,7 @@ class ScText : public QObject, public QScriptClass {
       static QScriptValue toScriptValue(QScriptEngine *eng, const TextPtr& ba);
       static void fromScriptValue(const QScriptValue &obj, TextPtr& ba);
 
+      QScriptString textText, textSize, textDefaultFont;
       QScriptValue proto;
       QScriptValue ctor;
 

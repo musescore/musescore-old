@@ -26,8 +26,10 @@ class Chord;
 class Segment;
 class SCursor;
 class ChordRest;
+class Text;
 
 typedef Chord* ChordPtr;
+typedef Text* TextPtr;
 
 //---------------------------------------------------------
 //   SCursor
@@ -104,7 +106,7 @@ class ScSCursorPrototype : public QObject, public QScriptable
       bool eos() const;
       ChordPtr chord();
       bool next();
-      void putStaffText(const QString&);
+      void putStaffText(TextPtr);
       bool isChord() const;
       };
 

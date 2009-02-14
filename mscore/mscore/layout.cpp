@@ -62,6 +62,11 @@ void ScoreLayout::rebuildBspTree()
             }
       foreach (const Element* element, *score()->gel()) {
             if (element->track() != -1) {
+                  if (element->staffIdx() < 0 || element->staffIdx() >= score()->nstaves()) {
+                        printf("element %s bad staff %d(%d) >= %d\n",
+                           element->name(), element->staffIdx(), element->track(), score()->nstaves());
+                        continue;
+                        }
                   if (!element->staff()->show())
                         continue;
                   }

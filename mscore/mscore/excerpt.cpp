@@ -197,32 +197,32 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             ++didx;
             }
 
-      // to serialize slurs, the get an id; this id is referenced
+      // to serialize slurs, they get an id; this id is referenced
       // in begin-end elements
       int slurId = 0;
 
       xml.trackDiff = 0;
       foreach(Element* el, _gel) {
+            int staffIdx = el->staffIdx();
             if (el->type() == SLUR) {
                   Slur* slur = static_cast<Slur*>(el);
                   int staffIdx1 = slur->startElement()->staffIdx();
                   int staffIdx2 = slur->endElement()->staffIdx();
                   if (trackOffset[staffIdx1] == HIDDEN || trackOffset[staffIdx2] == HIDDEN)
                         continue;
-                  xml.trackDiff = trackOffset[staffIdx1];
+                  xml.trackDiff = staffIdx; // slur staffIdx is always zero
                   slur->setId(slurId++);
-                  slur->write(xml);
                   }
             else {
                   if (el->track() != -1) {
-                        int staffIdx = el->staffIdx();
                         if (trackOffset[staffIdx] == HIDDEN)
                               continue;
                         xml.trackDiff = trackOffset[staffIdx];
                         }
-                  el->write(xml);
                   }
+            el->write(xml);
             }
+      xml.trackDiff = 0;
       bool isFirstStaff = true;
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             Part* part = staff(staffIdx)->part();

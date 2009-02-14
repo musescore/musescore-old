@@ -21,9 +21,11 @@
 #include "sccursor.h"
 #include "scscore.h"
 #include "scnote.h"
+#include "sctext.h"
 #include "chordrest.h"
 #include "chord.h"
 #include "stafftext.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   SCursor
@@ -352,15 +354,13 @@ bool ScSCursorPrototype::next()
 //   putStaffText
 //---------------------------------------------------------
 
-void ScSCursorPrototype::putStaffText(const QString& txt)
+void ScSCursorPrototype::putStaffText(TextPtr s)
       {
       SCursor* cursor = thisSCursor();
-
       ChordRest* cr = cursor->cr();
-      if (!cr)
+      if (!cr || !s)
             return;
-      StaffText* s = new StaffText(cr->score());
-      s->setText(txt);
+      QFont f = s->defaultFont();
       s->setTrack(cr->track());
       s->setSystemFlag(false);
       s->setSubtype(TEXT_STAFF);
