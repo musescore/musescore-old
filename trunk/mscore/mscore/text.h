@@ -146,6 +146,7 @@ class TextB : public Element {
       virtual void resetMode();
       bool isEmpty() const;
       virtual void setStyle(const TextStyle*);
+      virtual void setStyle(int);
 
       double frameWidth() const             { return textBase()->frameWidth();   }
       double paddingWidth() const           { return textBase()->paddingWidth(); }
@@ -232,6 +233,7 @@ class TextC : public TextB {
       virtual TextC* clone() const;
       virtual TextBase* textBase() const { return _tb; }
       virtual void setStyle(const TextStyle*);
+      virtual void setStyle(int);
       void baseChanged();
       };
 

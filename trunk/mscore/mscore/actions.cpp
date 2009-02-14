@@ -1904,6 +1904,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Show Keyboard"),
          &keysIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "script-debug",
+         QT_TR_NOOP("enable script debugger"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Enable Script Debugger"),
+         QT_TR_NOOP("Enable Script Debugger")
+         ),
       Shortcut(0, 0, 0),
       };
 

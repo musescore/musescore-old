@@ -59,6 +59,10 @@
       <file>data/flip.svg</file>
       <file>data/keyboard.svg</file>
       <file>data/noteentry.svg</file>
+      <file alias="images/bookmark.svg">data/bookmark.svg</file>
+      <file alias="images/pending.svg">data/pending.svg</file>
+      <file alias="images/breakpoint.svg">data/breakpoint.svg</file>
+      <file alias="images/location.svg">data/location.svg</file>
    </qresource>
 </RCC>
 

@@ -21,13 +21,12 @@
 //=============================================================================
 
 //
-//    This is ECMAScript code (ECMA-262 aka "Java Script")
+// This is ECMAScript code (ECMA-262 aka "Java Script")
 //
 
 //---------------------------------------------------------
 //    init
-//    this function will be called on startup of
-//    mscore
+//    this function will be called on startup of mscore
 //---------------------------------------------------------
 
 function init()
@@ -35,15 +34,14 @@ function init()
       // print("test script init");
       }
 
-//---------------------------------------------------------
+//-------------------------------------------------------------------
 //    run
 //    this function will be called when activating the
 //    plugin menu entry
 //
 //    global Variables:
-//    pluginPath - contains the plugin path; file separator
-//                 is "/"
-//---------------------------------------------------------
+//    pluginPath - contains the plugin path; file separator is "/"
+//-------------------------------------------------------------------
 
 function run()
       {
@@ -52,12 +50,11 @@ function run()
       cursor.staff = 0;
       cursor.voice = 0;
       cursor.rewind();
+
       while (!cursor.eos()) {
             if (cursor.isChord()) {
-                  var chord = cursor.chord();
-                  var note  = chord.topNote();
-                  var noteName = note.name();
-                  cursor.putStaffText(noteName);
+                  var name = cursor.chord().topNote().noteName();
+                  cursor.putStaffText(name);
                   }
             cursor.next();
             }
@@ -65,7 +62,7 @@ function run()
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed
-//           in the menu structure
+//           in the MuseScore menu structure
 //---------------------------------------------------------
 
 var mscorePlugin = {

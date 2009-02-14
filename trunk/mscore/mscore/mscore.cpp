@@ -366,7 +366,7 @@ MuseScore::MuseScore()
          << "harmony-properties"
          << "system-break" << "page-break"
          << "edit-element"
-         << "mag" << "reset-positions" << "inspector"
+         << "mag" << "reset-positions" << "inspector" << "script-debug"
          ;
 
       foreach(const QString& s, sl) {
@@ -753,6 +753,15 @@ MuseScore::MuseScore()
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
       menuHelp->addSeparator();
+
+      a = getAction("script-debug");
+      a->setCheckable(true);
+      a->setChecked(scriptDebug);
+      menuHelp->addAction(a);
+#ifndef HAS_SCRIPT_DEBUG
+      a->setEnabled(false);
+#endif
+
       menuHelp->addAction(whatsThis);
 
       setCentralWidget(mainWindow);
@@ -1862,7 +1871,6 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "fingering")
             fingeringMenu();
       else if (cmd == "toggle-statusbar") {
-            QAction* a = getAction("toggle-statusbar");
             preferences.showStatusBar = a->isChecked();
             _statusBar->setShown(preferences.showStatusBar);
             preferences.write();
@@ -1873,6 +1881,9 @@ void MuseScore::cmd(QAction* a)
             cmdInsertMeasures();
       else if (cmd == "inspector")
             startPageListEditor();
+      else if (cmd == "script-debug") {
+            scriptDebug = a->isChecked();
+            }
       else {
             if (cs)
                   cs->cmd(cmd);
