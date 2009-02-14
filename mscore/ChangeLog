@@ -1,4 +1,5 @@
 14.feb (ws)
+      - update italian instrument file from César Penagos
       - fixed crash when creating excerpts from staff > 1 and with slurs
       - added separate text styles for even/odd lyrics lines
       - script debugger can now enabled/disabled with check button in Help menu
