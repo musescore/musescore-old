@@ -52,6 +52,10 @@ ScText::ScText(QScriptEngine* engine)
       {
       qScriptRegisterMetaType<TextPtr>(engine, toScriptValue, fromScriptValue);
 
+      textText = engine->toStringHandle(QLatin1String("text"));
+      textSize = engine->toStringHandle(QLatin1String("size"));
+      textDefaultFont = engine->toStringHandle(QLatin1String("defaultFont"));
+
       proto = engine->newQObject(new ScTextPrototype(this),
          QScriptEngine::QtOwnership,
          QScriptEngine::SkipMethodsInEnumeration
@@ -74,7 +78,8 @@ QScriptClass::QueryFlags ScText::queryProperty(const QScriptValue &object,
       TextPtr* sp = qscriptvalue_cast<TextPtr*>(object.data());
       if (!sp)
             return 0;
-
+      if (name == textText || name == textSize || name == textDefaultFont)
+            return flags;
       return 0;   // qscript handles property
       }
 
@@ -85,10 +90,16 @@ QScriptClass::QueryFlags ScText::queryProperty(const QScriptValue &object,
 QScriptValue ScText::property(const QScriptValue& object,
    const QScriptString& name, uint /*id*/)
       {
-printf("property <%s>\n", qPrintable(name.toString()));
-      TextPtr* score = qscriptvalue_cast<TextPtr*>(object.data());
-      if (!score)
+// printf("ScText::property <%s>\n", qPrintable(name.toString()));
+      TextPtr* text = qscriptvalue_cast<TextPtr*>(object.data());
+      if (!text)
             return QScriptValue();
+      if (name == textText)
+            return QScriptValue(engine(), (*text)->getText());
+      else if (name == textSize)
+            return QScriptValue(engine(), (*text)->defaultFont().pixelSize());
+//      else if (name == textDefaultFont)
+//            return QScriptValue(engine(), (*text)->defaultFont());
       return QScriptValue();
       }
 
@@ -97,11 +108,26 @@ printf("property <%s>\n", qPrintable(name.toString()));
 //---------------------------------------------------------
 
 void ScText::setProperty(QScriptValue &object,
-   const QScriptString& s, uint /*id*/, const QScriptValue& value)
+   const QScriptString& name, uint /*id*/, const QScriptValue& value)
       {
-      TextPtr* score = qscriptvalue_cast<TextPtr*>(object.data());
-      if (!score)
+printf("ScText::setProperty <%s>\n", qPrintable(name.toString()));
+      TextPtr* text = qscriptvalue_cast<TextPtr*>(object.data());
+      if (!text)
             return;
+      if (name == textText)
+            (*text)->setText(value.toString());
+      else if (name == textSize) {
+            QFont f = (*text)->defaultFont();
+            double ps = value.toInteger();
+            ps = (ps * DPI)/PPI;
+            f.setPixelSize(lrint(ps));
+            (*text)->setDefaultFont(f);
+            }
+      else if (name == textDefaultFont) {
+            QFont qf = qscriptvalue_cast<QFont>(value.data());
+printf("setFont %d %d\n", qf.pixelSize(), qf.pointSize());
+            (*text)->setDefaultFont(qf);
+            }
       }
 
 //---------------------------------------------------------
@@ -111,12 +137,8 @@ void ScText::setProperty(QScriptValue &object,
 QScriptValue::PropertyFlags ScText::propertyFlags(
    const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
       {
-#if 0
-      if (name == scoreName)
+      if (name == textText || name == textSize || name == textDefaultFont)
             return QScriptValue::Undeletable;
-      else if (name == scoreStaves)
-            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
-#endif
       return QScriptValue::Undeletable;
       }
 
@@ -169,7 +191,7 @@ QScriptValue ScText::toScriptValue(QScriptEngine* eng, const TextPtr& ba)
 
 void ScText::fromScriptValue(const QScriptValue& obj, TextPtr& ba)
       {
-      ba = qscriptvalue_cast<TextPtr>(obj.data());
+      ba = *(qscriptvalue_cast<TextPtr*>(obj.data()));
       }
 
 //---------------------------------------------------------
