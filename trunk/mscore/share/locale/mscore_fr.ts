@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -131,6 +129,26 @@
         <source>Turkey</source>
         <translation>Türk - Turc</translation>
     </message>
+    <message>
+        <source>acc discant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc freebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc stdbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -148,7 +166,6 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1533 révisée JLW 12/02/09 - QT Linguist v4.5 rc1</translatorcomment>
         <translation>Révision : 1533</translation>
     </message>
     <message>
@@ -3180,24 +3197,12 @@ failed: </source>
         <translation>Insérer des mesures...</translation>
     </message>
     <message>
-        <source>duplet</source>
-        <translation>duolet</translation>
-    </message>
-    <message>
         <source>Duplet</source>
         <translation>Duolet</translation>
     </message>
     <message>
-        <source>triplet</source>
-        <translation>triolet</translation>
-    </message>
-    <message>
         <source>Triplet</source>
         <translation>Triolet</translation>
-    </message>
-    <message>
-        <source>quadruplet</source>
-        <translation>quartolet</translation>
     </message>
     <message>
         <source>Quadruplet</source>
@@ -4721,6 +4726,78 @@ avant de fermer ?</translation>
         <source>Ottava</source>
         <translation>Ottava</translation>
     </message>
+    <message>
+        <source>Lyrics odd lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics even lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable script debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Script Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normal</translation>
+    </message>
+    <message>
+        <source>broken</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5791,11 +5868,11 @@ avant de fermer ?</translation>
         <source>ms</source>
         <translation>ms</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
         <translation>Remplacer 1/2 ... par ½ ...</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>Remplacer (C) ... par © ... dans le texte de Copyright</translation>
     </message>

@@ -1,4 +1,7 @@
 15.feb (ws)
+      - more strings are now translatable
+      - save applications settings on windows in *.ini file instead of registry
+        (%APPDATA%\MusE\MuseScore.ini)
       - allow image extension names (*.jpg etc.) in upper and lower case.
       - redesign of "recent scores" list and session management; this should fix
         another startup crash

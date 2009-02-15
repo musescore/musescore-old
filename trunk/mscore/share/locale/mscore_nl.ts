@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="nl">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -129,6 +128,26 @@
     <message>
         <source>Turkey</source>
         <translation>Turks</translation>
+    </message>
+    <message>
+        <source>acc discant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc freebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc stdbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3227,24 +3246,12 @@ failed: </source>
         <translation>Voeg Verticaall Kader toe</translation>
     </message>
     <message>
-        <source>duplet</source>
-        <translation>dutool/duplet</translation>
-    </message>
-    <message>
         <source>Duplet</source>
         <translation>Dutool/Duplet</translation>
     </message>
     <message>
-        <source>triplet</source>
-        <translation>triool</translation>
-    </message>
-    <message>
         <source>Triplet</source>
         <translation>Triplet</translation>
-    </message>
-    <message>
-        <source>quadruplet</source>
-        <translation>kwartool</translation>
     </message>
     <message>
         <source>Quadruplet</source>
@@ -4709,6 +4716,78 @@ voor dat u afsluit?</translation>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
+    </message>
+    <message>
+        <source>Lyrics odd lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics even lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enable script debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Script Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normaal</translation>
+    </message>
+    <message>
+        <source>broken</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 between notes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

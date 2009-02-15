@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: menus.cpp,v 1.46 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -208,20 +208,20 @@ void MuseScore::showPalette(bool visible)
 
             struct {
                   BarType type;
-                  QString name;
+                  const char* name;
                   } t[] = {
-                  { NORMAL_BAR,       "normal" },
-                  { BROKEN_BAR,       "broken" },
-                  { END_BAR,          "End Bar" },
-                  { DOUBLE_BAR,       "Double Bar" },
-                  { START_REPEAT,     "Start Repeat" },
-                  { END_REPEAT,       "End Repeat" },
-                  { END_START_REPEAT, "End-Start Repeat" },
+                  { NORMAL_BAR,       QT_TR_NOOP("normal") },
+                  { BROKEN_BAR,       QT_TR_NOOP("broken") },
+                  { END_BAR,          QT_TR_NOOP("End Bar") },
+                  { DOUBLE_BAR,       QT_TR_NOOP("Double Bar") },
+                  { START_REPEAT,     QT_TR_NOOP("Start Repeat") },
+                  { END_REPEAT,       QT_TR_NOOP("End Repeat") },
+                  { END_START_REPEAT, QT_TR_NOOP("End-Start Repeat") },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name);
+                  sp->append(b, tr(t[i].name));
                   }
             paletteBox->addPalette(sp);
 
@@ -499,14 +499,18 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(27, 40);
             sp->setDrawGrid(true);
             const char* tremoloName[] = {
-                  "1 through stem", "2 through stem", "3 through stem",
-                  "1 between notes", "2 between notes", "3 between notes"
+                  QT_TR_NOOP("1 through stem"),
+                  QT_TR_NOOP("2 through stem"),
+                  QT_TR_NOOP("3 through stem"),
+                  QT_TR_NOOP("1 between notes"),
+                  QT_TR_NOOP("2 between notes"),
+                  QT_TR_NOOP("3 between notes")
                   };
 
             for (int i = 0; i < 6; ++i) {
                   Tremolo* tremolo = new Tremolo(gscore);
                   tremolo->setSubtype(i);
-                  sp->append(tremolo, tremoloName[i]);
+                  sp->append(tremolo, tr(tremoloName[i]));
                   }
             paletteBox->addPalette(sp);
 
@@ -1020,21 +1024,21 @@ void MuseScore::barMenu()
 
             struct {
                   BarType type;
-                  QString name;
+                  const char* name;
                   } t[] = {
-                  { BROKEN_BAR,    "broken" },
-                  { NORMAL_BAR,    "normal" },
-                  { END_BAR,       "End Bar" },
-                  { DOUBLE_BAR,    "Double Bar" },
-                  { START_REPEAT,  "Start Repeat" },
-                  { END_REPEAT,    "End Repeat" },
-                  { END_START_REPEAT, "End-Start Repeat" },
+                  { BROKEN_BAR,       QT_TR_NOOP("broken") },
+                  { NORMAL_BAR,       QT_TR_NOOP("normal") },
+                  { END_BAR,          QT_TR_NOOP("End Bar") },
+                  { DOUBLE_BAR,       QT_TR_NOOP("Double Bar") },
+                  { START_REPEAT,     QT_TR_NOOP("Start Repeat") },
+                  { END_REPEAT,       QT_TR_NOOP("End Repeat") },
+                  { END_START_REPEAT, QT_TR_NOOP("End-Start Repeat") },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
-                  sp->append(b, t[i].name);
+                  sp->append(b, tr(t[i].name));
                   }
             }
       barPalette->show();

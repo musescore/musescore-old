@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="de">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -71,63 +72,83 @@
     <name>@default</name>
     <message>
         <source>system</source>
-        <translation type="unfinished">System</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <source>acc discant</source>
+        <translation>Akkordeon Diskant</translation>
+    </message>
+    <message>
+        <source>acc dot</source>
+        <translation>Akkodeon Punkt</translation>
+    </message>
+    <message>
+        <source>acc freebase</source>
+        <translation>Akkordeon Freebase</translation>
+    </message>
+    <message>
+        <source>acc stdbase</source>
+        <translation>Akkorden Std.Base</translation>
+    </message>
+    <message>
+        <source>acc bayanbase</source>
+        <translation>Akkordeon Bayanbase</translation>
     </message>
 </context>
 <context>
@@ -158,7 +179,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;￼&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;￼p, li { white-space: pre-wrap; }￼&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer und Andere. &lt;/span&gt;&lt;/p&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Informationen und neue Versionen gibt es hier:
+ http://www.musescore.org for new versions and&lt;/p&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;￼&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;￼&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Veröffentlicht unter der  GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -292,7 +314,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Noten:</translation>
+        <translation>Noten:</translation>
     </message>
 </context>
 <context>
@@ -1601,11 +1623,11 @@ zu Notenzeile</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished">Noten</translation>
+        <translation>Noten</translation>
     </message>
     <message>
         <source>note dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Abstand Note-Punkt</translation>
     </message>
 </context>
 <context>
@@ -1678,67 +1700,67 @@ zu Notenzeile</translation>
     </message>
     <message>
         <source>Element</source>
-        <translation type="unfinished">Element</translation>
+        <translation>Element</translation>
     </message>
     <message>
         <source>selected</source>
-        <translation type="unfinished">ausgewählt</translation>
+        <translation>ausgewählt</translation>
     </message>
     <message>
         <source>generated</source>
-        <translation type="unfinished">erzeugt</translation>
+        <translation>erzeugt</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished">sichtbar</translation>
+        <translation>sichtbar</translation>
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished">System</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>subtype</source>
-        <translation type="unfinished">Subtyp</translation>
+        <translation>Subtyp</translation>
     </message>
     <message>
         <source>Voice</source>
-        <translation type="unfinished">Stimme</translation>
+        <translation>Stimme</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">Notenzeile</translation>
+        <translation>Notenzeile</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Taktart</translation>
+        <translation>Taktart</translation>
     </message>
     <message>
         <source>Len</source>
-        <translation type="unfinished">Länge</translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <source>Pos</source>
-        <translation type="unfinished">Pos</translation>
+        <translation>Pos</translation>
     </message>
     <message>
         <source>CPos</source>
-        <translation type="unfinished">CPos</translation>
+        <translation>CPos</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Offset</translation>
+        <translation>Offset</translation>
     </message>
     <message>
         <source>BBox</source>
-        <translation type="unfinished">Rahmen</translation>
+        <translation>Rahmen</translation>
     </message>
     <message>
         <source>Mag</source>
-        <translation type="unfinished">Lupe</translation>
+        <translation>Lupe</translation>
     </message>
 </context>
 <context>
@@ -3535,16 +3557,8 @@ fehlgeschlagen: </translation>
         <translation>None darunter eingeben</translation>
     </message>
     <message>
-        <source>duplet</source>
-        <translation>Duole</translation>
-    </message>
-    <message>
         <source>Duplet</source>
         <translation>Duole</translation>
-    </message>
-    <message>
-        <source>triplet</source>
-        <translation>Triole</translation>
     </message>
     <message>
         <source>Triplet</source>
@@ -4013,10 +4027,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>bass clef</source>
         <translation>Bass-Schlussel</translation>
-    </message>
-    <message>
-        <source>quadruplet</source>
-        <translation>quadruplet</translation>
     </message>
     <message>
         <source>Quadruplet</source>
@@ -4697,19 +4707,91 @@ before closing?</source>
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"></translation>
+        <translation>Ottava</translation>
     </message>
     <message>
         <source>show keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastatur zeigen</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastatur zeigen</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle unterstützten Dateien (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore (*.mscz *.mscx *.msc);;MusicXML (*.xml *.mxl);;MIDI (*.mid *.kar);;Muse Data (*.md);;Capella (*.cap);;LilyPond&lt;experimental&gt; (*.ly);;BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle (*)</translation>
+    </message>
+    <message>
+        <source>Lyrics odd lines</source>
+        <translation>Liedtext ungerade Zeilen</translation>
+    </message>
+    <message>
+        <source>Lyrics even lines</source>
+        <translation>Liedtext gerade Zeilen</translation>
+    </message>
+    <message>
+        <source>Other...</source>
+        <translation>Andere...</translation>
+    </message>
+    <message>
+        <source>enable script debugger</source>
+        <translation>Script Debugger einschalten</translation>
+    </message>
+    <message>
+        <source>Enable Script Debugger</source>
+        <translation>Script Debugger einschalten</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation>normal</translation>
+    </message>
+    <message>
+        <source>broken</source>
+        <translation>gestrichelt</translation>
+    </message>
+    <message>
+        <source>End Bar</source>
+        <translation>Ende Taktstrich</translation>
+    </message>
+    <message>
+        <source>Double Bar</source>
+        <translation>Doppelter Taktstrich</translation>
+    </message>
+    <message>
+        <source>Start Repeat</source>
+        <translation>Anfang Wiederholung</translation>
+    </message>
+    <message>
+        <source>End Repeat</source>
+        <translation>Ende Wiederholung</translation>
+    </message>
+    <message>
+        <source>End-Start Repeat</source>
+        <translation>Anfang/Ende Wiederholung</translation>
+    </message>
+    <message>
+        <source>1 through stem</source>
+        <translation>1 durch den Hals</translation>
+    </message>
+    <message>
+        <source>2 through stem</source>
+        <translation>2 durch den Hals</translation>
+    </message>
+    <message>
+        <source>3 through stem</source>
+        <translation>3 durch den Hals</translation>
+    </message>
+    <message>
+        <source>1 between notes</source>
+        <translation>1 zwischen Noten</translation>
+    </message>
+    <message>
+        <source>2 between notes</source>
+        <translation>2 zwischen Noten</translation>
+    </message>
+    <message>
+        <source>3 between notes</source>
+        <translation>3 zwischen Noten</translation>
     </message>
 </context>
 <context>
@@ -4841,63 +4923,63 @@ before closing?</source>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished">Note</translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished">Tonhöhe</translation>
+        <translation>Tonhöhe</translation>
     </message>
     <message>
         <source>Head</source>
-        <translation type="unfinished">Kopf</translation>
+        <translation>Kopf</translation>
     </message>
     <message>
         <source>Subelements:</source>
-        <translation type="unfinished">Subelemente:</translation>
+        <translation>Subelemente:</translation>
     </message>
     <message>
         <source>TPC</source>
-        <translation type="unfinished">TPC</translation>
+        <translation>TPC</translation>
     </message>
     <message>
         <source>HGrp.</source>
-        <translation type="unfinished">HGrp.</translation>
+        <translation>HGrp.</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">Linie</translation>
+        <translation>Linie</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
-        <translation type="unfinished">Bindeb. Vor.</translation>
+        <translation>Bindeb. Vor.</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished">Verschieben</translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <source>Tie Back</source>
-        <translation type="unfinished">Bindebogen zurück</translation>
+        <translation>Bindebogen zurück</translation>
     </message>
     <message>
         <source>Accidental</source>
-        <translation type="unfinished">Vorzeichen</translation>
+        <translation>Vorzeichen</translation>
     </message>
     <message>
         <source>Mirror Head</source>
-        <translation type="unfinished">Kopf gespiegelt</translation>
+        <translation>Kopf gespiegelt</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation type="unfinished">S-Kanal</translation>
+        <translation>S-Kanal</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished">Versteckt</translation>
+        <translation>Versteckt</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation type="unfinished">Anw-Vorz</translation>
+        <translation>Anw-Vorz</translation>
     </message>
 </context>
 <context>
@@ -5784,11 +5866,11 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetze 1/2 ... mit ½ ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetze (C) ... mit © ... in Copyright Text</translation>
     </message>
 </context>
 <context>
@@ -6122,39 +6204,39 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Datei (*.mscx)</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Datei sichern</translation>
     </message>
     <message>
         <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <translation>alte Backupdatei entfernen</translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation> fehlgeschlagen</translation>
     </message>
     <message>
         <source>renaming file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>umbenennen Datei &lt;</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; nach Backup &lt;</translation>
     </message>
     <message>
         <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; fehlgeschlagen</translation>
     </message>
     <message>
         <source>renaming &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen &lt;</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; nach &lt;</translation>
     </message>
 </context>
 <context>
@@ -6456,7 +6538,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschaften Tempo</translation>
     </message>
 </context>
 <context>
@@ -6470,15 +6552,15 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschaften Text...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Unsichtbar setzen</translation>
+        <translation>Unsichtbar setzen</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Sichtbar setzen</translation>
+        <translation>Sichtbar setzen</translation>
     </message>
 </context>
 <context>
@@ -6670,117 +6752,117 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Textfarbe</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Offset</translation>
+        <translation>Offset</translation>
     </message>
     <message>
         <source>X:</source>
-        <translation type="unfinished">X:</translation>
+        <translation>X:</translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished">relX:</translation>
+        <translation>relX:</translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished">relY:</translation>
+        <translation>relY:</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Einheit:</translation>
+        <translation>Einheit:</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Spatium</translation>
+        <translation>Spatium</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished"></translation>
+        <translation>Fontgröße</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Linke Seite des Textes an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Text an Referenzpunkt zentrieren</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechte Textseite an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Textoberkante an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Text vertikal an Referenzpunkt zentrieren</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Textunterkante an Referenzpunkt ausrichten</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaler Referenzpunktoffset</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
+        <translation>Referenzpunktverschiebung in % der Elternbreite</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikaler Referenzpunktoffset</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
+        <translation>Referenzpunktverschiebung in % der Elternhöhe</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset ist Absolut</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset in Sptium-Einheiten</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Textrahmen zeigen</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation type="unfinished"></translation>
+        <translation>Eckabrundung</translation>
     </message>
 </context>
 <context>
@@ -6953,7 +7035,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Editieren</translation>
     </message>
 </context>
 <context>
