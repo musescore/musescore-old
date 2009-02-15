@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
 
    <Articulation name="staccato">
@@ -98,16 +98,16 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Clarinette en Si<symbol name="flat"/></name>
-         <short-name>Cl. Si<symbol name="flat"/></short-name>
+         <name>Clarinette en Si <symbol name="flat"/></name>
+         <short-name>Cl. Si <symbol name="flat"/></short-name>
          <transposition>-2</transposition>
          <channel>
             <program>71</program>
             </channel>
          </instrument>
       <instrument>
-         <name>Clarinette en Mi<symbol name="flat"/></name>
-         <short-name>Cl. Mi<symbol name="flat"/></short-name>
+         <name>Clarinette en Mi <symbol name="flat"/></name>
+         <short-name>Cl. Mi <symbol name="flat"/></short-name>
          <transposition>3</transposition>
          <channel>
             <program>71</program>
@@ -207,8 +207,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Trumpette en Si<symbol name="flat"/></name>
-         <short-name>Tpt. Si<symbol name="flat"/></short-name>
+         <name>Trompette en Si <symbol name="flat"/></name>
+         <short-name>Tpt. Si <symbol name="flat"/></short-name>
          <transposition>-2</transposition>
          <channel>
             <program>56</program>
@@ -218,7 +218,7 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Trumpette en Ré</name>
+         <name>Trompette en Ré</name>
          <short-name>Tpt. Ré</short-name>
          <transposition>2</transposition>
          <channel>
@@ -229,7 +229,7 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Trumpette en Do</name>
+         <name>Trompette en Do</name>
          <short-name>Tpt. Do</short-name>
          <channel>
             <program>56</program>
@@ -239,8 +239,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Trumpette en Mi<symbol name="flat"/></name>
-         <short-name>Tpt. Mi<symbol name="flat"/></short-name>
+         <name>Trompette en Mi <symbol name="flat"/></name>
+         <short-name>Tpt. Mi <symbol name="flat"/></short-name>
          <transposition>3</transposition>
          <channel>
             <program>56</program>
@@ -250,7 +250,7 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Trumpette en Sourdine</name>
+         <name>Trompette en Sourdine</name>
          <short-name>Tpt. Sd.</short-name>
          <channel>
             <program>59</program>
@@ -260,8 +260,8 @@
            </channel>
          </instrument>
       <instrument>
-         <name>Cornet en Si<symbol name="flat"/></name>
-         <short-name>Cnt. Si<symbol name="flat"/></short-name>
+         <name>Cornet en Si <symbol name="flat"/></name>
+         <short-name>Cnt. Si <symbol name="flat"/></short-name>
          <transposition>-2</transposition>
          <channel>
             <program>56</program>
@@ -346,8 +346,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Snare Drum</name>
-         <short-name>S.Dr.</short-name>
+         <name>Caisse Claire</name>
+         <short-name>C.Cl.</short-name>
          <drumset>1</drumset>
          <Drum pitch="37">
             <head>1</head>
@@ -360,7 +360,7 @@
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Acoustic Snare</name>
+            <name>Caisse Claire Acoustique</name>
             <stem>2</stem>
             </Drum>
          <clef>14</clef>
@@ -370,14 +370,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Bass Drum</name>
-         <short-name>B.Dr.</short-name>
+         <name>Grosse Caisse</name>
+         <short-name>Gr. C.</short-name>
          <drumset>1</drumset>
          <Drum pitch="35">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Acoustic Bass Drum</name>
+            <name>Grosse Caisse Acoustique</name>
             <stem>2</stem>
             </Drum>
          <clef>14</clef>
@@ -411,49 +411,49 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Cymbal</name>
+         <name>Cymbale</name>
          <short-name>Cym.</short-name>
          <drumset>1</drumset>
          <Drum pitch="49">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Crash Cymbal 1</name>
+            <name>Cymbale Crash 1</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="51">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Ride Cymbal 1</name>
+            <name>Cymbale Ride 1</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="52">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Chinese Cymbal</name>
+            <name>Cymbale Chinoise</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="55">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Splash Cymbal</name>
+            <name>Cymbale Splash</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="57">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Crash Cymbal 2</name>
+            <name>Cymbale Crash 2</name>
             <stem>2</stem>
             </Drum>
          <Drum pitch="59">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Ride Cymbal 2</name>
+            <name>Cymbale Ride 2</name>
             <stem>2</stem>
             </Drum>
          <clef>14</clef>
@@ -514,14 +514,14 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Tambourine</name>
+         <name>Tambourin</name>
          <short-name>Tamb.</short-name>
          <drumset>1</drumset>
          <Drum pitch="54">
             <head>0</head>
             <line>4</line>
             <voice>0</voice>
-            <name>Tambourine</name>
+            <name>Tambourin</name>
             <stem>2</stem>
             </Drum>
          <clef>14</clef>
@@ -532,7 +532,7 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Pitched Percussion">
+   <instrument-group name="Percussions Chromatiques">
       <instrument>
          <name>Timbales</name>
          <short-name>Timb.</short-name>
@@ -575,8 +575,8 @@
             </channel>
          </instrument>
       <instrument>
-         <name>Carillon Tubulaire</name>
-         <short-name>C.T.</short-name>
+         <name>Tubular Bells</name>
+         <short-name>T.B.</short-name>
          <channel>
             <program>14</program>
             </channel>

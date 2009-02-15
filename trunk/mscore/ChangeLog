@@ -1,3 +1,6 @@
+15.feb (db)
+      - update French instrument file from JLWaltener
+      - update Dutch translation from Jaap Plaisier
 14.feb (ws)
       - update italian instrument file from César Penagos
       - fixed crash when creating excerpts from staff > 1 and with slurs
