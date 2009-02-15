@@ -1,4 +1,5 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -71,63 +72,63 @@
     <name>@default</name>
     <message>
         <source>system</source>
-        <translation type="unfinished">systeem</translation>
+        <translation>systeem</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsjechisch</translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished">Duits</translation>
+        <translation>Duits</translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished">Engels (GB)</translation>
+        <translation>Engels (GB)</translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished">Engels (US)</translation>
+        <translation>Engels (US)</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished">Spaans</translation>
+        <translation>Spaans</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished">Frans</translation>
+        <translation>Frans</translation>
     </message>
     <message>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>Galiciaans</translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindoestaans</translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italiaans</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished">Nederlands</translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <source>Portuguese</source>
-        <translation type="unfinished">Portugees</translation>
+        <translation>Portugees</translation>
     </message>
     <message>
         <source>Brasilian Portuguese</source>
-        <translation type="unfinished">Brasiliaans Portugees</translation>
+        <translation>Brasiliaans Portugees</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation type="unfinished">Russisch</translation>
+        <translation>Russisch</translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished">Turks</translation>
+        <translation>Turks</translation>
     </message>
 </context>
 <context>
@@ -292,7 +293,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished">Noten:</translation>
+        <translation>Notities:</translation>
     </message>
 </context>
 <context>
@@ -1675,67 +1676,67 @@ toonhoogte</translation>
     </message>
     <message>
         <source>Element</source>
-        <translation type="unfinished">Element</translation>
+        <translation>Element</translation>
     </message>
     <message>
         <source>selected</source>
-        <translation type="unfinished">geselecteerde</translation>
+        <translation>geselecteerde</translation>
     </message>
     <message>
         <source>generated</source>
-        <translation type="unfinished">gegenereerde</translation>
+        <translation>gegenereerde</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished">zichtbaar</translation>
+        <translation>zichtbaar</translation>
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished">systeem</translation>
+        <translation>systeem</translation>
     </message>
     <message>
         <source>subtype</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Voice</source>
-        <translation type="unfinished">Stem</translation>
+        <translation>Stem</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">Notenbalk</translation>
+        <translation>Notenbalk</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Maatsoorten</translation>
+        <translation>Tijd</translation>
     </message>
     <message>
         <source>Len</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <source>Pos</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CPos</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Compensatie</translation>
+        <translation>Compensatie</translation>
     </message>
     <message>
         <source>BBox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mag</source>
-        <translation type="unfinished">Keuze menu</translation>
+        <translation>Keuze menu</translation>
     </message>
 </context>
 <context>
@@ -4707,7 +4708,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.kar *.md *.ly *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;LilyPond Files &lt;experimental&gt; (*.ly);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle Bestanden (*)</translation>
     </message>
 </context>
 <context>
@@ -4738,7 +4739,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation></translation>
+        <translation>Copyright:</translation>
     </message>
     <message>
         <source>Create new score from template</source>
@@ -4840,63 +4841,63 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished">Noot</translation>
+        <translation>Noot</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished">Toonhoogte</translation>
+        <translation>Toonhoogte</translation>
     </message>
     <message>
         <source>Head</source>
-        <translation type="unfinished">Hoofd</translation>
+        <translation>Hoofd</translation>
     </message>
     <message>
         <source>Subelements:</source>
-        <translation type="unfinished">Subelementen:</translation>
+        <translation>Subelementen:</translation>
     </message>
     <message>
         <source>TPC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>HGrp.</source>
-        <translation type="unfinished">HGrp.</translation>
+        <translation>HGrp.</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">Lijn</translation>
+        <translation>Lijn</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
-        <translation type="unfinished">Boog Voorwaarts</translation>
+        <translation>Boog Voorwaarts</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Tie Back</source>
-        <translation type="unfinished">Boog Achterwaarts</translation>
+        <translation>Boog Achterwaarts</translation>
     </message>
     <message>
         <source>Accidental</source>
-        <translation type="unfinished">Voorteken</translation>
+        <translation>Voorteken</translation>
     </message>
     <message>
         <source>Mirror Head</source>
-        <translation type="unfinished">Hoofd</translation>
+        <translation>Hoofd</translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <translation type="unfinished">S-Kanaal</translation>
+        <translation>S-Kanaal</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished">Verbergen</translation>
+        <translation>Verbergen</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker-Acc</translation>
     </message>
 </context>
 <context>
@@ -5782,11 +5783,11 @@ voor dat u afsluit?</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander 1/2 ... in ½ ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander (C) ... in © ... in de Copyright Tekst</translation>
     </message>
 </context>
 <context>
@@ -6116,39 +6117,39 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore Bestand (*.mscx)</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Musescore: Bestand opslaan</translation>
     </message>
     <message>
         <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <translation>verwijder oude reserve bestand</translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation>mislukt</translation>
     </message>
     <message>
         <source>renaming file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>hernoem bestand &lt;</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; naar backup &lt;</translation>
     </message>
     <message>
         <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; mislukt</translation>
     </message>
     <message>
         <source>renaming &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>hernoemen &lt;</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; naar &lt;</translation>
     </message>
 </context>
 <context>
@@ -6464,15 +6465,15 @@ failed: </source>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekst Eigenschappen</translation>
+        <translation>Tekst Eigenschappen...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Maak Onzichtbaar</translation>
+        <translation>Maak Onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Maak Zichtbaar</translation>
+        <translation>Maak Zichtbaar</translation>
     </message>
 </context>
 <context>
@@ -6660,7 +6661,7 @@ failed: </source>
     </message>
     <message>
         <source>align left</source>
-        <translation>lijn links</translation>
+        <translation>uitlijnen links</translation>
     </message>
     <message>
         <source>text color</source>
@@ -6714,67 +6715,67 @@ failed: </source>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished"></translation>
+        <translation>lettertype grootte</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>uitlijnen linkerrand van tekst naar referentiepunt</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>centreer tekst op referentiepunt</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>uitlijnen rechterrand van tekst naar referentiepunt</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>uitlijnen bovenrand van tekst naar referentiepunt</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>centreer tekst verticaal tot referentiepunt</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>uitlijnen onderste rand van tekst naar referentiepunt</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontale compensatie tot referentiepunt</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
+        <translation>compensatie referentiepunt in procenten van de standaard breedte</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>verticale compensatie naar referentiepunt</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijzings punt dat in procenten van standaard hoogte wordt gecompenseerd</translation>
     </message>
     <message>
         <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
+        <translation>compensatie is absoluut</translation>
     </message>
     <message>
         <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
+        <translation>compensatie in ruimte-eenheden</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished"></translation>
+        <translation>tekstframe inschakelen</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation type="unfinished"></translation>
+        <translation>ronde hoeken</translation>
     </message>
 </context>
 <context>
