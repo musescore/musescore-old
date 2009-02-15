@@ -758,6 +758,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || type == IMAGE
          || type == CHORD
          || type == HARMONY
+         || type == DYNAMIC
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
 	   || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_GRACE4)

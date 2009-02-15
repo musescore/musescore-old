@@ -166,6 +166,7 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == BAR_LINE)
          || (type == BREATH)
          || (type == CHORD)
+         || (type == DYNAMIC)
          ) {
             viewer->setDropTarget(this);
             return true;

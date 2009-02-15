@@ -1,4 +1,5 @@
 15.feb (ws)
+      - drag&drop of dynamics to notes/rests
       - more strings are now translatable
       - save applications settings on windows in *.ini file instead of registry
         (%APPDATA%\MusE\MuseScore.ini)
