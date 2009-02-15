@@ -334,6 +334,7 @@ class MuseScore : public QMainWindow {
       void setDrumPalette(Palette* p) { drumPalette = p; }
       TextTools* textTools();
       void updateTabNames();
+      void setCurrentScore(Score*);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

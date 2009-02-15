@@ -563,13 +563,13 @@ class Score : public QObject {
       bool saveAs(bool saveCopy = false);
 
       void print(QPrinter* printer);
-      Q_INVOKABLE bool saveXml(const QString& name);
-      Q_INVOKABLE bool saveMxl(const QString& name);
-      Q_INVOKABLE bool saveMidi(const QString& name);
+      bool saveXml(const QString& name);
+      bool saveMxl(const QString& name);
+      bool saveMidi(const QString& name);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
-      Q_INVOKABLE bool savePng(const QString& name);
-      Q_INVOKABLE bool saveSvg(const QString& name);
-      Q_INVOKABLE bool saveLilypond(const QString& name);
+      bool savePng(const QString& name);
+      bool saveSvg(const QString& name);
+      bool saveLilypond(const QString& name);
 
       ChordRest* getSelectedChordRest() const;
       Element* getSelectedElement() const { return sel->element(); }

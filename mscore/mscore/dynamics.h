@@ -49,6 +49,8 @@ class Dynamic : public Text {
       virtual ElementType type() const { return DYNAMIC; }
       Measure* measure() const         { return (Measure*)parent(); }
 
+      virtual void layout(ScoreLayout*);
+
       virtual void setSubtype(int val);
       virtual void setSubtype(const QString&);
       virtual const QString subtypeName() const;
