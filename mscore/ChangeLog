@@ -1,4 +1,5 @@
 15.feb (ws)
+      - allow image extension names (*.jpg etc.) in upper and lower case.
       - redesign of "recent scores" list and session management; this should fix
         another startup crash
       (db)

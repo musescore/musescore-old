@@ -1589,12 +1589,14 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                                     }
                               }
                         Image* image = 0;
-                        if (path.endsWith(".svg"))
+                        QString lp(path.toLower());
+
+                        if (lp.endsWith(".svg"))
                               image = new SvgImage(score());
-                        else if (path.endsWith(".jpg")
-                           || path.endsWith(".png")
-                           || path.endsWith(".gif")
-                           || path.endsWith(".xpm")
+                        else if (lp.endsWith(".jpg")
+                           || lp.endsWith(".png")
+                           || lp.endsWith(".gif")
+                           || lp.endsWith(".xpm")
                               )
                               image = new RasterImage(score());
                         else {
@@ -1652,11 +1654,12 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                         printf("drag Url: %s\n", qPrintable(u.toString()));
                   if (u.scheme() == "file") {
                         QFileInfo fi(u.path());
-                        if (fi.suffix() == "svg"
-                           || fi.suffix() == "jpg"
-                           || fi.suffix() == "png"
-                           || fi.suffix() == "gif"
-                           || fi.suffix() == "xpm"
+                        QString suffix = fi.suffix().toLower();
+                        if (suffix == "svg"
+                           || suffix == "jpg"
+                           || suffix == "png"
+                           || suffix == "gif"
+                           || suffix == "xpm"
                            ) {
                               event->acceptProposedAction();
                               break;
@@ -1768,11 +1771,12 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             QUrl u = ul.front();
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
-                  if (fi.suffix() != "svg"
-                     && fi.suffix() != "jpg"
-                     && fi.suffix() != "png"
-                     && fi.suffix() != "gif"
-                     && fi.suffix() != "xpm"
+                  QString suffix(fi.suffix().toLower());
+                  if (suffix != "svg"
+                     && suffix != "jpg"
+                     && suffix != "png"
+                     && suffix != "gif"
+                     && suffix != "xpm"
                      )
                         return;
                   //
@@ -1926,12 +1930,13 @@ void Canvas::dropEvent(QDropEvent* event)
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
                   Image* s = 0;
-                  if (fi.suffix() == "svg")
+                  QString suffix = fi.suffix().toLower();
+                  if (suffix == "svg")
                         s = new SvgImage(score());
-                  else if (fi.suffix() == "jpg"
-                     || fi.suffix() == "png"
-                     || fi.suffix() == "gif"
-                     || fi.suffix() == "xpm"
+                  else if (suffix == "jpg"
+                     || suffix == "png"
+                     || suffix == "gif"
+                     || suffix == "xpm"
                         )
                         s = new RasterImage(score());
                   else

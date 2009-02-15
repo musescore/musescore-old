@@ -512,10 +512,11 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
                u.path().toLatin1().data());
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
-                  if (fi.suffix() == "svg"
-                     || fi.suffix() == "jpg"
-                     || fi.suffix() == "png"
-                     || fi.suffix() == "xpm"
+                  QString suffix(fi.suffix().toLower());
+                  if (suffix == "svg"
+                     || suffix == "jpg"
+                     || suffix == "png"
+                     || suffix == "xpm"
                      ) {
                         event->acceptProposedAction();
                         }
@@ -574,11 +575,12 @@ void Palette::dropEvent(QDropEvent* event)
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
                   Image* s = 0;
-                  if (fi.suffix() == "svg")
+                  QString suffix(fi.suffix().toLower());
+                  if (suffix == "svg")
                         s = new SvgImage(0);
-                  else if (fi.suffix() == "jpg"
-                     || fi.suffix() == "png"
-                     || fi.suffix() == "xpm"
+                  else if (suffix == "jpg"
+                     || suffix == "png"
+                     || suffix == "xpm"
                         )
                         s = new RasterImage(0);
                   else
@@ -615,11 +617,12 @@ void Palette::dropEvent(QDropEvent* event)
                               }
                         }
                   Image* image = 0;
-                  if (path.endsWith(".svg"))
+                  QString s(path.toLower());
+                  if (s.endsWith(".svg"))
                         image = new SvgImage(0);
-                  else if (path.endsWith(".jpg")
-                     || path.endsWith(".png")
-                     || path.endsWith(".xpm")
+                  else if (s.endsWith(".jpg")
+                     || s.endsWith(".png")
+                     || s.endsWith(".xpm")
                         )
                         image = new RasterImage(0);
                   else {
@@ -752,11 +755,12 @@ void Palette::read(QDomElement e)
                                                 }
                                           }
                                     Image* image = 0;
-                                    if (path.endsWith(".svg"))
+                                    QString s(path.toLower());
+                                    if (s.endsWith(".svg"))
                                           image = new SvgImage(gscore);
-                                    else if (path.endsWith(".jpg")
-                                       || path.endsWith(".png")
-                                       || path.endsWith(".xpm")
+                                    else if (s.endsWith(".jpg")
+                                       || s.endsWith(".png")
+                                       || s.endsWith(".xpm")
                                           )
                                           image = new RasterImage(gscore);
                                     else {

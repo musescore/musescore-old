@@ -580,16 +580,17 @@ void Note::read(QDomElement e)
                   if (!ee.isNull())
                         path = ee.text();
                   Image* image = 0;
-                  if (path.endsWith(".svg"))
+                  QString s(path.toLower());
+                  if (s.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (path.endsWith(".jpg")
-                     || path.endsWith(".png")
-                     || path.endsWith(".xpm")
+                  else if (s.endsWith(".jpg")
+                     || s.endsWith(".png")
+                     || s.endsWith(".xpm")
                         ) {
                         image = new RasterImage(score());
                         }
                   else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        printf("unknown image format <%s>\n", qPrintable(path));
                         }
                   if (image) {
                         image->setTrack(track());
