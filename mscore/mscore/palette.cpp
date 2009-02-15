@@ -319,7 +319,7 @@ void Palette::append(int symIdx)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
-      append(s, ::symbols[symIdx].name());
+      append(s, tr(::symbols[symIdx].name()));
       }
 
 //---------------------------------------------------------

@@ -542,11 +542,11 @@ void initSymbols()
       symbols[brackettipsUp]              = Sym("bracket ticks up",         0xe1ad, 0);
       symbols[brackettipsDown]            = Sym("bracket ticks down",       0xe1ae, 0);
 
-      symbols[accDiscantSym]              = Sym("acc discant",              0xe1af, 0);
-      symbols[accDotSym]                  = Sym("acc dot",                  0xe1b0, 0);
-      symbols[accFreebaseSym]             = Sym("acc freebase",             0xe1b1, 0);
-      symbols[accStdbaseSym]              = Sym("acc stdbase",              0xe1b2, 0);
-      symbols[accBayanbaseSym]            = Sym("acc bayanbase",            0xe1b3, 0);
+      symbols[accDiscantSym]              = Sym(QT_TR_NOOP("acc discant"),  0xe1af, 0);
+      symbols[accDotSym]                  = Sym(QT_TR_NOOP("acc dot"),      0xe1b0, 0);
+      symbols[accFreebaseSym]             = Sym(QT_TR_NOOP("acc freebase"), 0xe1b1, 0);
+      symbols[accStdbaseSym]              = Sym(QT_TR_NOOP("acc stdbase"),  0xe1b2, 0);
+      symbols[accBayanbaseSym]            = Sym(QT_TR_NOOP("acc bayanbase"),0xe1b3, 0);
 
       symbols[accOldEESym]                = Sym("acc old ee",               0xe1b4, 0);
 

@@ -986,7 +986,7 @@ void MuseScore::saveScoreList()
       settings.setValue("currentScore", scoreList.indexOf(cs));
       int idx = 0;
       foreach(Score* s, scoreList) {
-            settings.setValue(QString("score-%1").arg(idx), s->filePath());
+            settings.setValue(QString("score-%1").arg(idx), s->fileInfo()->absoluteFilePath());
             ++idx;
             }
       }
@@ -1438,6 +1438,7 @@ int main(int argc, char* argv[])
       {
 //      feclearexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+      QSettings::setDefaultFormat(QSettings::IniFormat);
 
       for (int i = 0; i < 128; ++i)
             midiActionMap[i] = 0;
@@ -1657,6 +1658,7 @@ int main(int argc, char* argv[])
                         scoreCreated = true;
                         score->read(preferences.startScore);
                         mscore->appendScore(score);
+                        currentScore = score;
                         break;
                   }
             }
@@ -1678,6 +1680,7 @@ int main(int argc, char* argv[])
                               }
                         else
                               mscore->appendScore(score);
+                        currentScore = score;
                         }
                   }
             }
