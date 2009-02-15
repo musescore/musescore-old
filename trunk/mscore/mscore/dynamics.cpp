@@ -131,7 +131,21 @@ void Dynamic::setSubtype(const QString& tag)
       int n = sizeof(dynList)/sizeof(*dynList);
       for (int i = 0; i < n; ++i) {
             if (dynList[i].tag == tag) {
-                  setHtml(d.arg(tag));
+                  doc()->clear();
+                  QTextCursor cursor(doc());
+                  cursor.movePosition(QTextCursor::Start);
+                  QTextCharFormat tf = cursor.charFormat();
+                  TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
+                  double size = ts->size;
+                  double mag = ::_spatium / (SPATIUM20 * DPI);
+                  double m = size * DPI / PPI;
+                  if (ts->sizeIsSpatiumDependent)
+                        m *= mag;
+                  QFont font("MScore1");
+                  font.setPixelSize(lrint(m));
+                  tf.setFont(font);
+                  cursor.setBlockCharFormat(tf);
+                  cursor.insertText(tag);
                   return;
                   }
             }
@@ -165,5 +179,15 @@ void Dynamic::resetUserOffsets()
       {
       Text::resetUserOffsets();
       setSubtype(subtype());        // (re) apply style
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Dynamic::layout(ScoreLayout* sl)
+      {
+      setSubtype(subtype());  // re-apply style
+      Text::layout(sl);
       }
 

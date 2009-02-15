@@ -75,24 +75,7 @@ QTextStream eout(stderr);
 
 QString mscoreGlobalShare;
 
-const char* eventRecordFile;
-
-//---------------------------------------------------------
-//   ProjectItem
-//---------------------------------------------------------
-
-class ProjectItem {
-   public:
-      QString name;
-      bool current;
-      bool loaded;
-      Score* score;
-
-      /// Get path. If score is new and then saved, the path will be correct
-      QString getName() const { return score ? score->filePath() : name; }
-      };
-
-static QList<ProjectItem*> projectList;
+static QStringList recentScores;
 
 Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
@@ -190,8 +173,7 @@ static void printVersion(const char* prog)
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
-      for (QList<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
-            Score* score = *i;
+      foreach(Score* score, scoreList) {
             if (checkDirty(score)) {
                   ev->ignore();
                   return;
@@ -889,13 +871,13 @@ void MuseScore::aboutQt()
 
 void MuseScore::selectScore(QAction* action)
       {
-      ProjectItem* item = (ProjectItem*)action->data().value<void*>();
-      if (item) {
+      QString a = action->data().toString();
+      if (!a.isEmpty()) {
             Score* score = new Score();
             score->addViewer(new Canvas);
-            score->read(item->getName());
+            score->read(a);
             appendScore(score);
-            setCurrentScore(scoreList.indexOf(score));
+            setCurrentScore(score);
             }
       }
 
@@ -939,9 +921,8 @@ void MuseScore::appendScore(Score* score)
       tab->addTab(score->canvas(), score->name());
       tab->blockSignals(false);
 
-      ProjectItem* item = new ProjectItem;
-      item->score = score;
-      projectList.prepend(item);
+      recentScores.removeAll(score->filePath());
+      recentScores.prepend(score->filePath());
       }
 
 //---------------------------------------------------------
@@ -989,6 +970,8 @@ void MuseScore::editTextStyle()
       dialog.exec();
       }
 
+static const int RECENT_LIST_SIZE = 10;
+
 //---------------------------------------------------------
 //   saveScoreList
 //---------------------------------------------------------
@@ -996,39 +979,14 @@ void MuseScore::editTextStyle()
 void MuseScore::saveScoreList()
       {
       QSettings settings;
+      for (int i = 0; i < RECENT_LIST_SIZE; ++i)
+            settings.setValue(QString("recent-%1").arg(i), recentScores.value(i));
 
+      settings.setValue("scores", scoreList.size());
+      settings.setValue("currentScore", scoreList.indexOf(cs));
       int idx = 0;
-static const int PROJECT_LIST_LEN = 6;
-
-      foreach(ProjectItem* item, projectList) {
-            bool loaded  = false;
-            bool current = false;
-            // do not save "generated" pieces
-            if (item->score == 0)
-                  continue;
-            if (item->score->created())
-                  continue;
-            foreach(Score* score, scoreList) {
-                  if (score == item->score) {
-                        loaded = true;
-                        if (score == cs)
-                              current = true;
-                        break;
-                        }
-                  }
-            // make sure all loaded scores are in the list but drop
-            // scores if history grows > PROJECT_LIST_LEN
-            if (idx >= PROJECT_LIST_LEN && !loaded)
-                  continue;
-            QString s;
-            if (current)
-                  s += "+";
-            else if (loaded)
-                  s += "*";
-            else
-                  s += " ";
-            s += item->getName();
-            settings.setValue(QString("recent-%1").arg(idx), s);
+      foreach(Score* s, scoreList) {
+            settings.setValue(QString("score-%1").arg(idx), s->filePath());
             ++idx;
             }
       }
@@ -1043,20 +1001,8 @@ void MuseScore::loadScoreList()
       if (useFactorySettings)
             return;
       QSettings s;
-      for (int i = 0;; ++i) {
-            QString buffer = s.value(QString("recent-%1").arg(i)).toString();
-            if (buffer.isEmpty())
-                  break;
-            int n = buffer.size();
-            if (n >= 2) {
-                  ProjectItem* item = new ProjectItem;
-                  item->name    = buffer.mid(1);
-                  item->current = (buffer[0] == '+');
-                  item->loaded  = (buffer[0] != ' ');
-                  item->score = 0;
-                  projectList.append(item);
-                  }
-            }
+      for (int i = 0; i < RECENT_LIST_SIZE; ++i)
+            recentScores.append(s.value(QString("recent-%1").arg(i),"").toString());
       }
 
 //---------------------------------------------------------
@@ -1066,13 +1012,12 @@ void MuseScore::loadScoreList()
 void MuseScore::openRecentMenu()
       {
       openRecent->clear();
-      foreach(ProjectItem* item, projectList) {
-            // do not list "generated" pieces
-            if (item->score && item->score->created())
-                  continue;
-            QFileInfo fi(item->getName());
+      foreach(QString s, recentScores) {
+            if (s.isEmpty())
+                  break;
+            QFileInfo fi(s);
             QAction* action = openRecent->addAction(fi.completeBaseName());
-            action->setData(QVariant::fromValue<void*>((void*)item));
+            action->setData(s);
             }
       }
 
@@ -1082,7 +1027,16 @@ void MuseScore::openRecentMenu()
 
 void MuseScore::setCurrentScore(int idx)
       {
-      bool enable = idx != -1;
+      setCurrentScore(scoreList[idx]);
+      }
+
+//---------------------------------------------------------
+//   setCurrentScore
+//---------------------------------------------------------
+
+void MuseScore::setCurrentScore(Score* score)
+      {
+      bool enable = score != 0;
       if (paletteBox)
             paletteBox->setEnabled(enable);
       transportTools->setEnabled(enable);
@@ -1105,6 +1059,7 @@ void MuseScore::setCurrentScore(int idx)
             return;
             }
 
+      int idx = scoreList.indexOf(score);
       if (tab->currentIndex() != idx) {
             tab->blockSignals(true);
             tab->setCurrentIndex(idx);
@@ -1116,7 +1071,7 @@ void MuseScore::setCurrentScore(int idx)
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
             }
-      cs = scoreList[idx];
+      cs = score;
       cs->canvas()->setFocus(Qt::OtherFocusReason);
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
@@ -1191,7 +1146,7 @@ void MuseScore::dropEvent(QDropEvent* event)
                         lastScore = score;
                         }
                   }
-            setCurrentScore(scoreList.indexOf(lastScore));
+            setCurrentScore(lastScore);
             event->acceptProposedAction();
             }
       }
@@ -1407,8 +1362,10 @@ void MuseScore::removeTab(int i)
       if (i >= (n-1))
             i = 0;
       if (scoreList.isEmpty())
-            i = -1;
-      setCurrentScore(i);
+            score = 0;
+      else
+            score = scoreList[i];
+      setCurrentScore(score);
       }
 
 //---------------------------------------------------------
@@ -1670,24 +1627,26 @@ int main(int argc, char* argv[])
       //  load scores
       //-------------------------------
 
-      int currentScore = 0;
-      int idx = 0;
+      Score* currentScore = 0;
       bool scoreCreated = false;
       if (argc < 2) {
             switch (preferences.sessionStart) {
                   case LAST_SESSION:
-                        foreach(const ProjectItem* item, projectList) {
-                              if (item->loaded) {
-                                    Score* score = new Score();
-                                    score->addViewer(new Canvas);
-                                    scoreCreated = true;
-                                    score->read(item->name);
-                                    mscore->appendScore(score);
-                                    if (item->current)
-                                          currentScore = idx;
-                                    ++idx;
-                                    }
+                        {
+                        QSettings settings;
+                        int n = settings.value("scores", 0).toInt();
+                        int c = settings.value("currentScore", 0).toInt();
+                        for (int i = 0; i < n; ++i) {
+                              QString s = settings.value(QString("score-%1").arg(i),"").toString();
+                              Score* score = new Score();
+                              score->addViewer(new Canvas);
+                              scoreCreated = true;
+                              score->read(s);
+                              mscore->appendScore(score);
+                              if (i == c)
+                                    currentScore = score;
                               }
+                        }
                         break;
                   case EMPTY_SESSION:
                   case NEW_SESSION:
@@ -1730,9 +1689,10 @@ int main(int argc, char* argv[])
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
             mscore->appendScore(score);
+            currentScore = score;
             }
       if (mscore->noScore())
-            currentScore = -1;
+            currentScore = 0;
       mscore->setCurrentScore(currentScore);
 
       mscore->showPlayPanel(preferences.showPlayPanel);
@@ -1851,7 +1811,7 @@ void MuseScore::cmd(QAction* a)
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
                   appendScore(score);
-                  setCurrentScore(scoreList.indexOf(score));
+                  setCurrentScore(score);
                   }
             }
       else if (cmd == "file-close")

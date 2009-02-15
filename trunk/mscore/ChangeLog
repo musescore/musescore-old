@@ -1,4 +1,7 @@
-15.feb (db)
+15.feb (ws)
+      - redesign of "recent scores" list and session management; this should fix
+        another startup crash
+      (db)
       - update French instrument file from JLWaltener
       - update Dutch translation from Jaap Plaisier
 14.feb (ws)
