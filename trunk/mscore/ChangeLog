@@ -1,4 +1,6 @@
-16.feb (ws)
+16.feb (tb)
+      - adding danish translation file
+       (ws)
       - change size of dynamics characters (psfz) to make them better mix with
         normal fonts. This may be incompatible with older scores.
       - text style changes update text
