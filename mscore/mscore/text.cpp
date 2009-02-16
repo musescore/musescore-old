@@ -771,34 +771,65 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
       TextStyle* ns = styles[_textStyle];
       TextStyle* os = score()->textStyle(_textStyle);
 
-      if (_align != os->align)
+      bool dirty = false;
+      if (_align == os->align) {
+            dirty = true;
             _align = ns->align;
-      if (_xoff != os->xoff)
+            }
+      if (_xoff == os->xoff) {
             _xoff = ns->xoff;
-      if (_yoff != os->yoff)
+            dirty = true;
+            }
+      if (_yoff == os->yoff) {
             _yoff = ns->yoff;
-      if (_rxoff != os->rxoff)
+            dirty = true;
+            }
+      if (_rxoff == os->rxoff) {
             _rxoff = ns->rxoff;
-      if (_ryoff != os->ryoff)
+            dirty = true;
+            }
+      if (_ryoff == os->ryoff) {
             _ryoff = ns->ryoff;
-      if (_offsetType != os->offsetType)
+            dirty = true;
+            }
+      if (_offsetType == os->offsetType) {
             _offsetType = ns->offsetType;
-      if (_sizeIsSpatiumDependent != os->sizeIsSpatiumDependent)
+            dirty = true;
+            }
+      if (_sizeIsSpatiumDependent == os->sizeIsSpatiumDependent) {
             _sizeIsSpatiumDependent = ns->sizeIsSpatiumDependent;
-      if (frameWidth() != os->frameWidth)
+            dirty = true;
+            }
+      if (frameWidth() == os->frameWidth) {
             setFrameWidth(ns->frameWidth);
-      if (paddingWidth() != os->paddingWidth)
+            dirty = true;
+            }
+      if (paddingWidth() == os->paddingWidth) {
             setPaddingWidth(ns->paddingWidth);
-      if (frameRound() != os->frameRound)
+            dirty = true;
+            }
+      if (frameRound() == os->frameRound) {
             setFrameRound(ns->frameRound);
-      if (frameColor() != os->frameColor)
+            dirty = true;
+            }
+      if (frameColor() == os->frameColor) {
             setFrameColor(ns->frameColor);
-      if (circle() != os->circle)
+            dirty = true;
+            }
+      if (circle() == os->circle) {
             setCircle(ns->circle);
-      if (systemFlag() != os->systemFlag)
+            dirty = true;
+            }
+      if (systemFlag() == os->systemFlag) {
             setSystemFlag(ns->systemFlag);
-      if (defaultFont() != os->font())
+            dirty = true;
+            }
+      if (defaultFont() == os->font()) {
             setDefaultFont(ns->font());
+            dirty = true;
+            }
+      if (dirty)
+            doc()->setModified(true);
       }
 
 //---------------------------------------------------------
