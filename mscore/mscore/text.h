@@ -91,7 +91,7 @@ class TextBase {
       void writeProperties(Xml& xml, TextStyle* ts, bool writeText) const;
       bool readProperties(QDomElement e);
       QFont defaultFont() const;
-      void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
+      void setDefaultFont(QFont f);
       void clear()                          { _doc->clear();              }
       void layout(double w);
       QRectF bbox() const                   { return _bbox; }

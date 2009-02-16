@@ -96,8 +96,18 @@ QFont TextBase::defaultFont() const
       {
       QTextCursor cursor(_doc);
       cursor.movePosition(QTextCursor::Start);
-//      return _doc->defaultFont();
       return cursor.charFormat().font();
+      }
+
+void TextBase::setDefaultFont(QFont f)
+      {
+      _doc->setDefaultFont(f);
+      QTextCursor cursor(_doc);
+      cursor.movePosition(QTextCursor::Start);
+      cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+      QTextCharFormat cf = cursor.charFormat();
+      cf.setFont(f);
+      cursor.setCharFormat(cf);
       }
 
 //---------------------------------------------------------

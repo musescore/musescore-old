@@ -33,7 +33,6 @@
 Lyrics::Lyrics(Score* s)
    : Text(s)
       {
-      setSubtype(LYRICS);
       setTextStyle(TEXT_STYLE_LYRIC1);
       _no        = 0;
       _syllabic  = SINGLE;
@@ -47,17 +46,17 @@ Lyrics::Lyrics(Score* s)
 void Lyrics::write(Xml& xml) const
       {
       xml.stag("Lyrics");
-      xml.tag("data", getText());
       if (_no)
             xml.tag("no", _no);
-      static const char* sl[] = {
-            "single", "begin", "end", "middle"
-            };
-      if (_syllabic != SINGLE)
+      if (_syllabic != SINGLE) {
+            static const char* sl[] = {
+                  "single", "begin", "end", "middle"
+                  };
             xml.tag("syllabic", sl[_syllabic]);
+            }
       if (_endTick)
             xml.tag("endTick", _endTick);
-      Element::writeProperties(xml);
+      Text::writeProperties(xml);
       xml.etag();
       }
 
@@ -71,9 +70,7 @@ void Lyrics::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "data")
-                  setText(val);
-            else if (tag == "no")
+            if (tag == "no")
                   _no = i;
             else if (tag == "syllabic") {
                   if (val == "single")
@@ -89,7 +86,7 @@ void Lyrics::read(QDomElement e)
                   }
             else if (tag == "endTick")
                   _endTick = i;
-            else if (!Element::readProperties(e))
+            else if (!Text::readProperties(e))
                   domError(e);
             }
       }
