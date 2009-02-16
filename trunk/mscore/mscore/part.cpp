@@ -36,9 +36,11 @@
 Part::Part(Score* s)
       {
       _longName  = new TextC(s);
-      _shortName = new TextC(s);
       _longName->setSubtype(TEXT_INSTRUMENT_LONG);
+      _longName->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
+      _shortName = new TextC(s);
       _shortName->setSubtype(TEXT_INSTRUMENT_SHORT);
+      _shortName->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
       _score = s;
       _show  = true;
       }

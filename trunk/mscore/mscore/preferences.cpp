@@ -167,7 +167,7 @@ void Preferences::init()
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
-      startScore               = ":/data/demo.msc";
+      startScore               = ":/data/demo.mscx";
       workingDirectory         = ".";
       lastSaveDirectory        = ".";
       lastSaveCopyDirectory    = ".";
@@ -410,7 +410,7 @@ void Preferences::read()
       else if (ss == "empty")
             sessionStart = EMPTY_SESSION;
 
-      startScore     = s.value("startScore", ":/data/demo.msc").toString();
+      startScore     = s.value("startScore", ":/data/demo.mscx").toString();
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
 
       s.beginGroup("PlayPanel");

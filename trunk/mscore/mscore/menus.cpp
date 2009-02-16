@@ -409,9 +409,9 @@ void MuseScore::showPalette(bool visible)
 
             sp = new Palette;
             sp->setName(tr("Dynamics"));
-            sp->setMag(0.9);
+            sp->setMag(.8);
             sp->setGrid(42, 28);
-            sp->setYOffset(-12.0);
+//            sp->setYOffset(-12.0);
 
             static const char* dynS[] = {
                   "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
@@ -437,6 +437,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < strlen(finger); ++i) {
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
+                  k->setTextStyle(TEXT_STYLE_FINGERING);
                   k->setText(QString(finger[i]));
                   sp->append(k, tr("fingering %1").arg(finger[i]));
                   }
@@ -444,6 +445,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_STRING_NUMBER);
+                  k->setTextStyle(TEXT_STYLE_STRING_NUMBER);
                   k->setText(QString(stringnumber[i]));
                   sp->append(k, tr("string number %1").arg(stringnumber[i]));
                   }
@@ -987,6 +989,7 @@ void MuseScore::dynamicsMenu()
             dynamicsPalette->setRestrictHeight(false);
             dynamicsPalette->setWindowTitle(tr("MuseScore: Dynamics"));
             sp->setGrid(90, 40);
+            sp->resize(300, 200);
 
             for (int i = 0; i < 27; ++i) {
                   Dynamic* dynamic = new Dynamic(gscore);

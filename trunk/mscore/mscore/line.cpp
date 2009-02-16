@@ -199,12 +199,12 @@ void LineSegment::editDrag(int curGrip, const QPointF& d)
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   toDefault
 //---------------------------------------------------------
 
-void LineSegment::resetUserOffsets()
+void LineSegment::toDefault()
       {
-      Element::resetUserOffsets();
+      Element::toDefault();
       setUserOff2(QPointF());
       }
 

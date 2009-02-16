@@ -274,11 +274,12 @@ TextLine::TextLine(const TextLine& e)
 //   setBeginText
 //---------------------------------------------------------
 
-void TextLine::setBeginText(const QString& s)
+void TextLine::setBeginText(const QString& s, int textStyle)
       {
       if (!_beginText) {
             _beginText = new TextC(score());
             _beginText->setSubtype(TEXT_TEXTLINE);
+            _beginText->setTextStyle(textStyle);
             _beginText->setParent(this);
             }
       _beginText->setText(s);
@@ -288,11 +289,12 @@ void TextLine::setBeginText(const QString& s)
 //   setContinueText
 //---------------------------------------------------------
 
-void TextLine::setContinueText(const QString& s)
+void TextLine::setContinueText(const QString& s, int textStyle)
       {
       if (!_continueText) {
             _continueText = new TextC(score());
             _continueText->setSubtype(TEXT_TEXTLINE);
+            _continueText->setTextStyle(textStyle);
             _continueText->setParent(this);
             }
       _continueText->setText(s);

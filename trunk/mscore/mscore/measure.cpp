@@ -820,6 +820,7 @@ void Measure::layout2(ScoreLayout* layout)
             if (_noText == 0) {
                   _noText = new Text(score());
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
+                  _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
                   _noText->setTrack(-1);
                   _noText->setTick(-1);
@@ -830,11 +831,8 @@ void Measure::layout2(ScoreLayout* layout)
             delete _noText;
             _noText = 0;
             }
-      if (_noText) {
-            // style changes immediately affect all measure numbers
-            _noText->setSubtype(TEXT_MEASURE_NUMBER);
+      if (_noText)
             _noText->layout(layout);
-            }
       int tracks = _score->nstaves() * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int track = 0; track < tracks; ++track) {
@@ -2641,6 +2639,7 @@ void Measure::read(QDomElement e, int idx)
                   dyn->setTrack(score()->curTrack);
                   dyn->setTick(score()->curTick);
                   dyn->read(e);
+                  dyn->resetType(); // for backward compatibility
                   add(dyn);
                   score()->curTick = dyn->tick();
                   }
@@ -2665,27 +2664,33 @@ void Measure::read(QDomElement e, int idx)
                   t->read(e);
                   score()->curTick = t->tick();
 
-                  switch(t->subtype()) {
-                        case TEXT_TITLE:
-                        case TEXT_SUBTITLE:
-                        case TEXT_COMPOSER:
-                        case TEXT_POET:
-                              // for backward compatibility:
-                              {
-                              ScoreLayout* layout = score()->layout();
-                              MeasureBase* measure = layout->first();
-                              if (measure->type() != VBOX) {
-                                    measure = new VBox(score());
-                                    measure->setTick(0);
-                                    measure->setNext(layout->first());
-                                    layout->add(measure);
-                                    }
-                              measure->add(t);
+                  int st = t->subtype();
+                  if (st == TEXT_TITLE || st == TEXT_SUBTITLE || st == TEXT_COMPOSER
+                     || st == TEXT_POET) {
+                        if (st == TEXT_TITLE)
+                              t->setTextStyle(TEXT_STYLE_TITLE);
+                        else if (st == TEXT_SUBTITLE)
+                              t->setTextStyle(TEXT_STYLE_SUBTITLE);
+                        else if (st == TEXT_COMPOSER)
+                              t->setTextStyle(TEXT_STYLE_COMPOSER);
+                        else if (st == TEXT_POET)
+                              t->setTextStyle(TEXT_STYLE_POET);
+                        // for backward compatibility:
+                        ScoreLayout* layout = score()->layout();
+                        MeasureBase* measure = layout->first();
+                        if (measure->type() != VBOX) {
+                              measure = new VBox(score());
+                              measure->setTick(0);
+                              measure->setNext(layout->first());
+                              layout->add(measure);
                               }
-                              break;
-                        default:
-                              add(t);
-                              break;
+                        measure->add(t);
+                        }
+                  else if (st == TEXT_MEASURE_NUMBER)
+                        t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                  else {
+                        printf("read text subtype %d\n", st);
+                        add(t);
                         }
                   }
             else if (tag == "Harmony") {

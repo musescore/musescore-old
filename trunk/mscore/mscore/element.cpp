@@ -164,12 +164,14 @@ void Element::init()
       _userOff.setX(0.0);
       _userOff.setY(0.0);
       itemDiscovered = 0;
+
       _align       = ALIGN_LEFT | ALIGN_TOP;
       _xoff        = 0;
       _yoff        = 0;
       _rxoff       = 0;
       _ryoff       = 0;
       _offsetType  = OFFSET_SPATIUM;
+
       _systemFlag  = false;
       }
 
@@ -201,12 +203,14 @@ Element::Element(const Element& e)
       _mag        = e._mag;
       _score      = e._score;
       _pos        = e._pos;
+
       _align      = e._align;
       _xoff       = e._xoff;
       _yoff       = e._yoff;
       _rxoff      = e._rxoff;
       _ryoff      = e._ryoff;
       _offsetType = e._offsetType;
+
       _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
@@ -380,11 +384,7 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("offset", _userOff));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
-/*            if (track() == -1)
-                  t = -1;
-            else
-                  */
-                  t = track() + xml.trackDiff;
+            t = track() + xml.trackDiff;
             pl.append(Prop("track", t));
             }
       if (selected())

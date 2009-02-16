@@ -69,7 +69,7 @@ class LineSegment : public Element {
       void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
       LineSegmentType segmentType() const { return _segmentType;       }
       void setSystem(System* s)           { _system = s;               }
-      virtual void resetUserOffsets();
+      virtual void toDefault();
       friend class SLine;
       };
 

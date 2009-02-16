@@ -643,20 +643,20 @@ void SlurTie::collectElements(QList<const Element*>& el) const
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   toDefault
 //---------------------------------------------------------
 
-void SlurTie::resetUserOffsets()
+void SlurTie::toDefault()
       {
       setUserOff(QPointF());
       }
 
-void SlurSegment::resetUserOffsets()
+void SlurSegment::toDefault()
       {
       setUserOff(QPointF());
       for (int i = 0; i < 4; ++i)
             ups[i].off = QPointF();
-      parent()->resetUserOffsets();
+      parent()->toDefault();
       }
 
 //---------------------------------------------------------

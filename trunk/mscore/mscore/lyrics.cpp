@@ -33,7 +33,8 @@
 Lyrics::Lyrics(Score* s)
    : Text(s)
       {
-      setSubtype(TEXT_LYRIC);
+      setSubtype(LYRICS);
+      setTextStyle(TEXT_STYLE_LYRIC1);
       _no        = 0;
       _syllabic  = SINGLE;
       _endTick   = 0;
@@ -481,7 +482,7 @@ void Score::lyricsEndEdit()
 
 void Lyrics::layout(ScoreLayout* l)
       {
-      Text::setStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+      setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       Text::layout(l);
       double lh             = lineSpacing();
       double noteHeadWidth2 = symbols[quartheadSym].width(mag()) * .5;

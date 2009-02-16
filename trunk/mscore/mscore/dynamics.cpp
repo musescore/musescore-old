@@ -67,6 +67,7 @@ Dyn dynList[] = {
 Dynamic::Dynamic(Score* s)
    : Text(s)
       {
+      setTextStyle(TEXT_STYLE_DYNAMICS);
       }
 
 Dynamic::Dynamic(const Dynamic& d)
@@ -76,27 +77,18 @@ Dynamic::Dynamic(const Dynamic& d)
       }
 
 //---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Dynamic::setSubtype(int idx)
-      {
-      Element::setSubtype(idx);
-      setStyle(TEXT_STYLE_DYNAMICS);
-      if (idx != 0)
-            setText(dynList[idx].tag);
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
-      if (subtype() == 0)
-            xml.tag("data", QVariant(doc()->toHtml("utf8")));
-      Element::writeProperties(xml);
+      Text::writeProperties(xml, false);
+      if (subtype() == 0) {
+            xml.stag("html-data");
+            xml.writeHtml(doc()->toHtml("utf-8"));
+            xml.etag();
+            }
       xml.etag();
       }
 
@@ -107,12 +99,37 @@ void Dynamic::write(Xml& xml) const
 void Dynamic::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "data")
-                  doc()->setHtml(e.text());
-            else if (!Element::readProperties(e))
+            if (!Text::readProperties(e))
                   domError(e);
             }
       setSubtype(subtype());
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void Dynamic::setSubtype(int idx)
+      {
+      Element::setSubtype(idx);
+      if (idx) {
+            Element::setSubtype(idx);
+            doc()->clear();
+            QTextCursor cursor(doc());
+            cursor.movePosition(QTextCursor::Start);
+            QTextCharFormat tf = cursor.charFormat();
+            TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
+            double size = ts->size;
+            double mag = ::_spatium / (SPATIUM20 * DPI);
+            double m = size * DPI / PPI;
+            if (ts->sizeIsSpatiumDependent)
+                  m *= mag;
+            QFont font("MScore1");
+            font.setPixelSize(lrint(m));
+            tf.setFont(font);
+            cursor.setBlockCharFormat(tf);
+            cursor.insertText(dynList[idx].tag);
+            }
       }
 
 //---------------------------------------------------------
@@ -121,34 +138,14 @@ void Dynamic::read(QDomElement e)
 
 void Dynamic::setSubtype(const QString& tag)
       {
-      QString d("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\"font-family:'Times New Roman'; font-weight:400; font-style:italic;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-style:normal; font-size:12pt;\"><span style=\"font-family:'MScore1'; font-size:20pt;\">%1</span></p></body></html></data>\n");
-
-      setSubtype(0);
       int n = sizeof(dynList)/sizeof(*dynList);
       for (int i = 0; i < n; ++i) {
             if (dynList[i].tag == tag) {
-                  doc()->clear();
-                  QTextCursor cursor(doc());
-                  cursor.movePosition(QTextCursor::Start);
-                  QTextCharFormat tf = cursor.charFormat();
-                  TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
-                  double size = ts->size;
-                  double mag = ::_spatium / (SPATIUM20 * DPI);
-                  double m = size * DPI / PPI;
-                  if (ts->sizeIsSpatiumDependent)
-                        m *= mag;
-                  QFont font("MScore1");
-                  font.setPixelSize(lrint(m));
-                  tf.setFont(font);
-                  cursor.setBlockCharFormat(tf);
-                  cursor.insertText(tag);
+                  setSubtype(i);
                   return;
                   }
             }
+      Element::setSubtype(0);
       setText(tag);
       }
 
@@ -172,13 +169,39 @@ void Dynamic::endEdit()
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   resetType
 //---------------------------------------------------------
 
-void Dynamic::resetUserOffsets()
+void Dynamic::resetType()
       {
-      Text::resetUserOffsets();
-      setSubtype(subtype());        // (re) apply style
+      QString tag = getText();
+      int n = sizeof(dynList)/sizeof(*dynList);
+      for (int i = 0; i < n; ++i) {
+            if (dynList[i].tag == tag) {
+                  setSubtype(i);
+                  return;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
+void Dynamic::toDefault()
+      {
+      QString tag = getText();
+      int n = sizeof(dynList)/sizeof(*dynList);
+      int idx = 0;
+      for (int i = 0; i < n; ++i) {
+            if (dynList[i].tag == tag) {
+                  idx = i;
+                  break;
+                  }
+            }
+      Text::toDefault();
+      setTextStyle(TEXT_STYLE_DYNAMICS);
+      setSubtype(idx);
       }
 
 //---------------------------------------------------------

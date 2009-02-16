@@ -20,22 +20,22 @@
 
 install(FILES
       sarabande.xml
-      adeste.msc
-      bach-bc2.msc
-      inv1.msc
-      inv4.msc
-      inv6.msc
-      inv10.msc
-      inv13.msc
-      praeludium1.msc
-      prelude.msc
-      promenade.msc
-      scales.msc
-      sonata16.msc
-      italian-1.msc
-      golliwogg.msc
-      Estudio-No1-Tarrega.msc
-      PlanxtyCarolan.msc
+      adeste.mscx
+      bach-bc2.mscx
+      inv1.mscx
+      inv4.mscx
+      inv6.mscx
+      inv10.mscx
+      inv13.mscx
+      praeludium1.mscx
+      prelude.mscx
+      promenade.mscx
+      scales.mscx
+      sonata16.mscx
+      italian-1.mscx
+      golliwogg.mscx
+      Estudio-No1-Tarrega.mscx
+      PlanxtyCarolan.mscx
       wtc1fuga5.mscz
       schnee.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos

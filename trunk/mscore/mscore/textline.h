@@ -21,6 +21,7 @@
 #define __TEXTLINE_H__
 
 #include "line.h"
+#include "style.h"
 #include "ui_lineproperties.h"
 
 class TextLine;
@@ -95,8 +96,8 @@ class TextLine : public SLine {
       void setBeginHook(bool v)               { _beginHook = v;               }
       void setEndHook(bool v)                 { _endHook = v;                 }
 
-      void setBeginText(const QString& s);
-      void setContinueText(const QString& s);
+      void setBeginText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
+      void setContinueText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
       TextC* beginText() const                { return _beginText;            }
       void setBeginText(TextC* v)             { _beginText = v;               }
       TextC* continueText() const             { return _continueText;         }

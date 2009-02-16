@@ -65,7 +65,7 @@ class Stem : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement e);
-      virtual void resetUserOffsets();
+      virtual void toDefault();
       Spatium userLen() const         { return _userLen; }
       };
 

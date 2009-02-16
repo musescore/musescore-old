@@ -236,11 +236,13 @@ bool Score::saveFile(bool autosave)
       if ((suffix != "mscx") && (suffix != "mscz")) {
             QString s = info.filePath();
             if (!suffix.isEmpty())
-                  s = s.left(s.size() - suffix.size() - 1);
-            if (suffix == "msc")
-                  suffix = ".mscx";        // silently change to mscx
+                  s = s.left(s.size() - suffix.size());
             else
-                  suffix = ".mscz";
+                  s += ".";
+            if (suffix == "msc")
+                  suffix = "mscx";        // silently change to mscx
+            else
+                  suffix = "mscz";
             s += suffix;
             info.setFile(s);
             }
@@ -662,24 +664,28 @@ void MuseScore::newFile()
             if (!title.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_TITLE);
+                  s->setTextStyle(TEXT_STYLE_TITLE);
                   s->setText(title);
                   measure->add(s);
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_SUBTITLE);
+                  s->setTextStyle(TEXT_STYLE_SUBTITLE);
                   s->setText(subtitle);
                   measure->add(s);
                   }
             if (!composer.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_COMPOSER);
+                  s->setTextStyle(TEXT_STYLE_COMPOSER);
                   s->setText(composer);
                   measure->add(s);
                   }
             if (!poet.isEmpty()) {
                   Text* s = new Text(score);
                   s->setSubtype(TEXT_POET);
+                  s->setTextStyle(TEXT_STYLE_POET);
                   s->setText(poet);
                   measure->add(s);
                   }

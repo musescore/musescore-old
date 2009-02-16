@@ -594,7 +594,9 @@ printf("ResolveDegreeList: not found in table\n");
 Harmony::Harmony(Score* score)
    : Text(score)
       {
-      Text::setSubtype(TEXT_CHORD);
+      setSubtype(HARMONY);
+      setTextStyle(TEXT_STYLE_HARMONY);
+
       _rootTpc   = INVALID_TPC;
       _baseTpc   = INVALID_TPC;
       _descr     = 0;

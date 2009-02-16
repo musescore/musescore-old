@@ -50,28 +50,26 @@ void Ottava::setSubtype(int val)
       Element::setSubtype(val);
       switch(val) {
             case 0:
-                  setBeginText("8va");
-                  setContinueText("(8va)");
+                  setBeginText("8va", TEXT_STYLE_OTTAVA);
+                  setContinueText("(8va)", TEXT_STYLE_OTTAVA);
                   _pitchShift = 12;
                   break;
             case 1:
-                  setBeginText("15ma");
-                  setContinueText("(15ma)");
+                  setBeginText("15ma", TEXT_STYLE_OTTAVA);
+                  setContinueText("(15ma)", TEXT_STYLE_OTTAVA);
                   _pitchShift = 24;
                   break;
             case 2:
-                  setBeginText("8vb");
-                  setContinueText("(8vb)");
+                  setBeginText("8vb", TEXT_STYLE_OTTAVA);
+                  setContinueText("(8vb)", TEXT_STYLE_OTTAVA);
                   _pitchShift = -12;
                   break;
             case 3:
-                  setBeginText("15mb");
-                  setContinueText("(15mb)");
+                  setBeginText("15mb", TEXT_STYLE_OTTAVA);
+                  setContinueText("(15mb)", TEXT_STYLE_OTTAVA);
                   _pitchShift = -24;
                   break;
             }
-      beginText()->setStyle(TEXT_STYLE_OTTAVA);
-      continueText()->setStyle(TEXT_STYLE_OTTAVA);
       }
 
 //---------------------------------------------------------

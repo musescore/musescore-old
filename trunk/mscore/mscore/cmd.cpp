@@ -1668,11 +1668,11 @@ void Score::toggleInvisible(Element* obj)
  Called from pulldown menu.
 */
 
-void Score::resetUserOffsets()
+void Score::toDefault()
       {
       QList<Element*> el = *sel->elements();
       for (iElement i = el.begin(); i != el.end(); ++i)
-            (*i)->resetUserOffsets();
+            (*i)->toDefault();
       layoutAll = true;
       setDirty(true);
       }
@@ -2320,7 +2320,7 @@ void Score::cmd(const QString& cmd)
                         }
                   }
             else if (cmd == "reset-positions")
-                  resetUserOffsets();
+                  toDefault();
             else if (cmd == "reset-stretch")
                   resetUserStretch();
             else if (cmd == "")

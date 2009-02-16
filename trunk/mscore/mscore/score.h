@@ -313,7 +313,7 @@ class Score : public QObject {
       void doRedo();
       void processUndoOp(UndoOp*, bool);
 
-      void resetUserOffsets();
+      void toDefault();
       void resetUserStretch();
 
    signals:
@@ -631,12 +631,13 @@ class Score : public QObject {
       InputState* inputState()      { return &_is;       }
       void setInputTrack(int);
 
-      TextStyle* textStyle(int idx) { return _textStyles[idx]; }
+      TextStyle* textStyle(int idx) { return idx < 0 ? 0 : _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }
-      void setTextStyles(QVector<TextStyle*>&s);
+      void setTextStyles(const QVector<TextStyle*>&s);
       bool loadStyle(QFile* qf);
       void loadStyle();
       void saveStyle();
+      void textStyleChanged(const QVector<TextStyle*>&s);
 
       void setCopyright(QTextDocument*);
       void setCopyright(const QString& s);
@@ -707,7 +708,6 @@ class Score : public QObject {
 
       ImagePath* addImage(const QString&);      // add image to imagePathList
       void moveBracket(int staffIdx, int srcCol, int dstCol);
-      void textStyleChanged();
       Measure* getCreateMeasure(int tick);
 
       void adjustBracketsDel(int sidx, int eidx);
