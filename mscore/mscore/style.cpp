@@ -72,10 +72,10 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsLong"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER),
+         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsShort"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER),
+         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsExcerpt"), ff, 18, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0.0, 0.0, OA, 0, 100),
@@ -143,7 +143,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.2, -0.2, 0, Qt::black, true, false),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Ottava"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),
+         ALIGN_LEFT | ALIGN_VCENTER, 0.0, 0.0, OS, 0, 0, true),
 
       };
 
@@ -697,3 +697,4 @@ void Style::save(Xml& xml)
 
       xml.etag();
       }
+

@@ -61,7 +61,9 @@ class Dynamic : public Text {
       virtual void read(QDomElement);
 
       virtual void endEdit();
-      virtual void resetUserOffsets();
+      virtual void toDefault();
+
+      void resetType();
       };
 
 extern Dyn dynList[];

@@ -1328,7 +1328,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else {
                   t = new Text(score);
-                  t->setStyle(TEXT_STYLE_TECHNIK);
+                  t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
             t->setTick(tick);
             if (weight == "bold") {
@@ -2505,8 +2505,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       double rx = e.attribute("relative-x", "0").toDouble()*0.1;
       double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
 
-      double styleYOff = measure->score()->textStyle(TEXT_STYLE_CHORD)->yoff;
-      OffsetType offsetType = measure->score()->textStyle(TEXT_STYLE_CHORD)->offsetType;
+      double styleYOff = measure->score()->textStyle(TEXT_STYLE_HARMONY)->yoff;
+      OffsetType offsetType = measure->score()->textStyle(TEXT_STYLE_HARMONY)->offsetType;
       if (offsetType == OFFSET_ABS){
     	  styleYOff = styleYOff * DPMM / _spatium;
       }

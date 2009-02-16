@@ -21,6 +21,8 @@
 #include "measurebase.h"
 #include "measure.h"
 #include "staff.h"
+#include "lyrics.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   MeasureBase
@@ -120,3 +122,27 @@ Measure* MeasureBase::prevMeasure()
             }
       return 0;
       }
+
+//---------------------------------------------------------
+//   textStyleChanged
+//---------------------------------------------------------
+
+void MeasureBase::textStyleChanged(const QVector<TextStyle*>& style)
+      {
+      foreach(Element* e, _el)
+            e->textStyleChanged(style);
+      if (type() == MEASURE) {
+            Measure* m = static_cast<Measure*>(this);
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
+                        LyricsList* ll = s->lyricsList(staffIdx);
+                        foreach(Lyrics* l, *ll) {
+                              if (l)
+                                    l->textStyleChanged(style);
+                              }
+                        }
+                  }
+            }
+      }
+
+

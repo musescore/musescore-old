@@ -40,6 +40,7 @@ class Sym;
 class ScoreLayout;
 class Viewer;
 class Segment;
+class TextStyle;
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -313,7 +314,7 @@ class Element {
       virtual QList<Prop> properties(Xml&) const;
       virtual void collectElements(QList<const Element*>& el) const { el.append(this); }
 
-      virtual void resetUserOffsets() {  setUserOff(QPointF()); }
+      virtual void toDefault() {  setUserOff(QPointF()); }
 
       static Element* create(int type, Score*);
 
@@ -337,6 +338,7 @@ class Element {
       void setRXoff(double val)             { _rxoff  = val;        }
       void setRYoff(double val)             { _ryoff  = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
+
       bool systemFlag() const               { return _systemFlag;   }
       void setSystemFlag(bool f)            { _systemFlag = f;      }
 
@@ -350,6 +352,9 @@ class Element {
                 || type() == STAFF_TEXT
                 || type() == TEMPO_TEXT;
             }
+      virtual void textStyleChanged(const QVector<TextStyle*>&) {}
+
+
       static int name2type(const QString&);
       static Element* name2Element(const QString&, Score*);
       };

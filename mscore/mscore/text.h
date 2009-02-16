@@ -88,7 +88,7 @@ class TextBase {
       void setFrameRound(int v)             { _frameRound = v;      }
       void setCircle(bool v)                { _circle = v;          }
 
-      void writeProperties(Xml& xml) const;
+      void writeProperties(Xml& xml, TextStyle* ts, bool writeText) const;
       bool readProperties(QDomElement e);
       QFont defaultFont() const;
       void setDefaultFont(QFont f)          { _doc->setDefaultFont(f);    }
@@ -117,7 +117,7 @@ class TextB : public Element {
       QTextCursor* cursor;
       bool setCursor(const QPointF& p);
       int cursorPos;
-      TextStyle* style() const;
+      int _textStyle;
 
    public:
       TextB(Score*);
@@ -128,8 +128,8 @@ class TextB : public Element {
       virtual ElementType type() const        { return TEXT; }
 
       virtual const QString subtypeName() const;
-      virtual void setSubtype(int val);
       virtual void setSubtype(const QString& s);
+      virtual void setSubtype(int val)      { Element::setSubtype(val);    }
 
       virtual bool isMovable() const        { return _movable;             }
       void setMovable(bool val)             { _movable = val;              }
@@ -145,8 +145,6 @@ class TextB : public Element {
 
       virtual void resetMode();
       bool isEmpty() const;
-      virtual void setStyle(const TextStyle*);
-      virtual void setStyle(int);
 
       double frameWidth() const             { return textBase()->frameWidth();   }
       double paddingWidth() const           { return textBase()->paddingWidth(); }
@@ -174,7 +172,7 @@ class TextB : public Element {
       virtual void write(Xml& xml) const;
       virtual void write(Xml& xml, const char*) const;
       virtual void read(QDomElement);
-      void writeProperties(Xml& xml) const;
+      void writeProperties(Xml& xml, bool writeText = true) const;
       bool readProperties(QDomElement node);
       virtual void layout(ScoreLayout*);
       virtual QPainterPath shape() const;
@@ -194,8 +192,11 @@ class TextB : public Element {
       virtual void paste();
 
       bool replaceSpecialChars();
-      void styleChanged();
       QTextCursor* getCursor() const { return cursor; }
+
+      virtual void textStyleChanged(const QVector<TextStyle*>&s);
+      virtual void setTextStyle(int);
+      int textStyle() const                 { return _textStyle; }
       };
 
 //---------------------------------------------------------
@@ -232,8 +233,6 @@ class TextC : public TextB {
       ~TextC();
       virtual TextC* clone() const;
       virtual TextBase* textBase() const { return _tb; }
-      virtual void setStyle(const TextStyle*);
-      virtual void setStyle(int);
       void baseChanged();
       };
 

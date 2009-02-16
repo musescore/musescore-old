@@ -1,4 +1,10 @@
+16.feb (ws)
+      - change size of dynamics characters (psfz) to make them better mix with
+        normal fonts. This may be incompatible with older scores.
+      - text style changes update text
+      - separate subtype from textStyle for Text() objects
 15.feb (ws)
+      - instrument name font size depends on spatium
       - drag&drop of dynamics to notes/rests
       - more strings are now translatable
       - save applications settings on windows in *.ini file instead of registry

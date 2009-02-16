@@ -167,6 +167,7 @@ Marker::Marker(Score* s)
    : Text(s)
       {
       setSubtype(TEXT_REPEAT);
+      setTextStyle(TEXT_STYLE_REPEAT);
       }
 
 //---------------------------------------------------------
@@ -305,6 +306,7 @@ Jump::Jump(Score* s)
    : Text(s)
       {
       setSubtype(TEXT_REPEAT);
+      setTextStyle(TEXT_STYLE_REPEAT);
       }
 
 //---------------------------------------------------------

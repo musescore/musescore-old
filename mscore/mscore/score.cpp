@@ -1531,7 +1531,7 @@ bool Score::isSavable() const
 //   setTextStyles
 //---------------------------------------------------------
 
-void Score::setTextStyles(QVector<TextStyle*>& s)
+void Score::setTextStyles(const QVector<TextStyle*>& s)
       {
       foreach(TextStyle* ts, _textStyles)
             delete ts;
@@ -1993,32 +1993,12 @@ void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
 //    called whenever the text style changed
 //---------------------------------------------------------
 
-void Score::textStyleChanged()
+void Score::textStyleChanged(const QVector<TextStyle*>&style)
       {
-      foreach(Element* e, _gel) {
-            if (e->type() == TEXT)
-                  e->setSubtype(e->subtype());
-            }
-      for(MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            foreach(Element* e, *mb->el()) {
-                  if (e->type() == TEXT)
-                        e->setSubtype(e->subtype());
-                  }
-            if (mb->type() == MEASURE) {
-                  Measure* m = static_cast<Measure*>(mb);
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                              LyricsList* ll = s->lyricsList(staffIdx);
-                              foreach(Lyrics* l, *ll) {
-                                    if (l) {
-                                          l->setSubtype(TEXT_LYRIC);
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            }
-      setLayoutAll(true);
+      foreach(Element* e, _gel)
+            e->textStyleChanged(style);
+      for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
+            mb->textStyleChanged(style);
       }
 
 //---------------------------------------------------------

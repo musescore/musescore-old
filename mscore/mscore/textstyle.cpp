@@ -309,9 +309,9 @@ void TextStyleDialog::apply()
       {
       cs->startCmd();
       saveStyle(current);
+      cs->textStyleChanged(styles);
       cs->setTextStyles(styles);
       cs->setLayoutAll(true);
-      cs->textStyleChanged();
       cs->endCmd();
       cs->setDirty(true);
       }

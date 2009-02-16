@@ -121,13 +121,14 @@ void Page::layout(ScoreLayout* layout)
       int n = no() + 1 + _score->_pageOffset;
       if (score()->style()->showPageNumber && ((n > 1) || score()->style()->showPageNumberOne)) {
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
+            int style   = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
             if (_pageNo == 0) {
                   _pageNo = new Text(score());
                   _pageNo->setParent(this);
                   }
-            // TODO: always set subtype so that style changes take immediate effect
             if (subtype != _pageNo->subtype()) {
                   _pageNo->setSubtype(subtype);
+                  _pageNo->setTextStyle(style);
                   }
             _pageNo->setText(QString("%1").arg(n));
             _pageNo->layout(layout);
@@ -154,6 +155,7 @@ void Page::layout(ScoreLayout* layout)
                   // always set subtype so that style changes
                   // take immediate effect:
                   _copyright->setSubtype(TEXT_COPYRIGHT);
+                  _copyright->setTextStyle(TEXT_STYLE_COPYRIGHT);
                   _copyright->layout(layout);
                   }
             else if (_copyright) {

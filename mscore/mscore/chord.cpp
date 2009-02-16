@@ -148,10 +148,10 @@ void Stem::editDrag(int, const QPointF& delta)
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   toDefault
 //---------------------------------------------------------
 
-void Stem::resetUserOffsets()
+void Stem::toDefault()
       {
       _userLen = Spatium(0.0);
       setUserOff(QPointF());
@@ -1092,7 +1092,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<B
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
-                  f->setTrack(track());
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->read(e);
                   f->setParent(this);
                   note->add(f);

@@ -156,24 +156,26 @@ QString TextBase::getHtml() const
 //   writeProperties
 //---------------------------------------------------------
 
-void TextBase::writeProperties(Xml& xml) const
+void TextBase::writeProperties(Xml& xml, TextStyle* ts, bool writeText) const
       {
       // write all properties which are different from style
 
       if (_hasFrame) {
             xml.tag("frameWidth", _frameWidth);
-            if (_paddingWidth != 0.0)
+            if (ts == 0 || _paddingWidth != ts->paddingWidth)
                   xml.tag("paddingWidth", _paddingWidth);
-            if (_frameColor != preferences.defaultColor)
+            if (ts == 0 || _frameColor != ts->frameColor)
                   xml.tag("frameColor", _frameColor);
-            if (_frameRound != 25)
+            if (ts == 0 || _frameRound != ts->frameRound)
                   xml.tag("frameRound", _frameRound);
-            if (_circle)
+            if (ts == 0 || _circle != ts->circle)
                   xml.tag("circle", _circle);
             }
-      xml.stag("html-data");
-      xml.writeHtml(_doc->toHtml("utf-8"));
-      xml.etag();
+      if (writeText) {
+            xml.stag("html-data");
+            xml.writeHtml(_doc->toHtml("utf-8"));
+            xml.etag();
+            }
       }
 
 //---------------------------------------------------------
@@ -312,6 +314,7 @@ TextB::TextB(Score* s)
       cursorPos  = 0;
       cursor     = 0;
       _movable   = true;
+      _textStyle = -1;
       }
 
 TextB::TextB(const TextB& e)
@@ -321,16 +324,8 @@ TextB::TextB(const TextB& e)
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
       editMode                = e.editMode;
       cursorPos               = e.cursorPos;
+      _textStyle              = e._textStyle;
       cursor                  = 0;
-      }
-
-//---------------------------------------------------------
-//   styleChanged
-//---------------------------------------------------------
-
-void TextB::styleChanged()
-      {
-      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
@@ -385,45 +380,6 @@ void TextC::baseChanged()
       }
 
 //---------------------------------------------------------
-//   setStyle
-//---------------------------------------------------------
-
-void TextC::setStyle(const TextStyle* s)
-      {
-      if (s == 0)
-            return;
-      doc()->setDefaultFont(s->font());
-      _align         = s->align;
-      _xoff          = s->xoff;
-      _yoff          = s->yoff;
-      _rxoff         = s->rxoff;
-      _ryoff         = s->ryoff;
-      _offsetType    = s->offsetType;
-      _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-
-      setSystemFlag(s->systemFlag);
-      if (s->systemFlag)
-            setTrack(-1);
-      if (s->frameWidth > 0.0) {
-            textBase()->setFrameWidth(s->frameWidth);
-            textBase()->setHasFrame(true);
-            }
-      textBase()->setPaddingWidth(s->paddingWidth);
-      textBase()->setFrameColor(s->frameColor);
-      textBase()->setFrameRound(s->frameRound);
-      textBase()->setCircle(s->circle);
-      }
-
-//---------------------------------------------------------
-//   setStyle
-//---------------------------------------------------------
-
-void TextC::setStyle(int idx)
-      {
-      setStyle(score()->textStyle(idx));
-      }
-
-//---------------------------------------------------------
 //   Text
 //---------------------------------------------------------
 
@@ -464,16 +420,6 @@ void TextB::setDoc(const QTextDocument& d)
       }
 
 //---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void TextB::setSubtype(int val)
-      {
-      Element::setSubtype(val);
-      setStyle(style());
-      }
-
-//---------------------------------------------------------
 //   setAbove
 //---------------------------------------------------------
 
@@ -482,6 +428,7 @@ void TextB::setAbove(bool /*val*/)
       // setYoff(val ? -2.0 : 7.0);
       }
 
+#if 0
 //---------------------------------------------------------
 //   style
 //---------------------------------------------------------
@@ -525,6 +472,7 @@ TextStyle* TextB::style() const
             st = TEXT_STYLE_STAFF;
       return score()->textStyle(st);
       }
+#endif
 
 //---------------------------------------------------------
 //   subtypeName
@@ -694,13 +642,13 @@ void TextB::draw(QPainter& p) const
       }
 
 //---------------------------------------------------------
-//   setStyle
+//   setTextStyle
 //---------------------------------------------------------
 
-void TextB::setStyle(const TextStyle* s)
+void TextB::setTextStyle(int idx)
       {
-      if (s == 0)
-            return;
+      _textStyle   = idx;
+      TextStyle* s = score()->textStyle(idx);
       doc()->setDefaultFont(s->font());
       _align         = s->align;
       _xoff          = s->xoff;
@@ -719,15 +667,6 @@ void TextB::setStyle(const TextStyle* s)
       textBase()->setFrameColor(s->frameColor);
       textBase()->setFrameRound(s->frameRound);
       textBase()->setCircle(s->circle);
-      }
-
-//---------------------------------------------------------
-//   setStyle
-//---------------------------------------------------------
-
-void TextB::setStyle(int idx)
-      {
-      setStyle(score()->textStyle(idx));
       }
 
 //---------------------------------------------------------
@@ -770,15 +709,17 @@ void TextB::read(QDomElement e)
 //   writeProperties
 //---------------------------------------------------------
 
-void TextB::writeProperties(Xml& xml) const
+void TextB::writeProperties(Xml& xml, bool writeText) const
       {
       Element::writeProperties(xml);
 
       // write all properties which are different from style
 
-      TextStyle* st = style();
+      TextStyle* st = score()->textStyle(_textStyle);
+      if (_textStyle >= 0)
+            xml.tag("style", _textStyle);
 
-      if (_align != st->align) {
+      if (st == 0 || _align != st->align) {
             if (_align & (ALIGN_RIGHT | ALIGN_HCENTER)) {          // default is ALIGN_LEFT
                   xml.tag("halign", (_align & ALIGN_RIGHT) ? "right" : "center");
                   }
@@ -791,16 +732,16 @@ void TextB::writeProperties(Xml& xml) const
                         xml.tag("valign", "baseline");
                   }
             }
-      if (_xoff != st->xoff)
+      if (st == 0 || _xoff != st->xoff)
             xml.tag("xoffset", _xoff);
-      if (_yoff != st->yoff)
+      if (st == 0 || _yoff != st->yoff)
             xml.tag("yoffset", _yoff);
-      if (_rxoff != st->rxoff)
+      if (st == 0 || _rxoff != st->rxoff)
             xml.tag("rxoffset", _rxoff);
-      if (_ryoff != st->ryoff)
+      if (st == 0 || _ryoff != st->ryoff)
             xml.tag("ryoffset", _ryoff);
 
-      if (_offsetType != st->offsetType) {
+      if (st == 0 || _offsetType != st->offsetType) {
             const char* p = 0;
             switch(_offsetType) {
                   case OFFSET_SPATIUM:                    break;
@@ -810,11 +751,54 @@ void TextB::writeProperties(Xml& xml) const
                   xml.tag("offsetType", p);
             }
 
-      if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
+      if (st == 0 || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent))
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
       if (subtype() == TEXT_MEASURE_NUMBER)
             return;
-      textBase()->writeProperties(xml);
+      textBase()->writeProperties(xml, st, writeText);
+      }
+
+//---------------------------------------------------------
+//   textStyleChanged
+//    do not touch values which are modified by user
+//    (== different from old style)
+//---------------------------------------------------------
+
+void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
+      {
+      if (_textStyle < 0)
+            return;
+      TextStyle* ns = styles[_textStyle];
+      TextStyle* os = score()->textStyle(_textStyle);
+
+      if (_align != os->align)
+            _align = ns->align;
+      if (_xoff != os->xoff)
+            _xoff = ns->xoff;
+      if (_yoff != os->yoff)
+            _yoff = ns->yoff;
+      if (_rxoff != os->rxoff)
+            _rxoff = ns->rxoff;
+      if (_ryoff != os->ryoff)
+            _ryoff = ns->ryoff;
+      if (_offsetType != os->offsetType)
+            _offsetType = ns->offsetType;
+      if (_sizeIsSpatiumDependent != os->sizeIsSpatiumDependent)
+            _sizeIsSpatiumDependent = ns->sizeIsSpatiumDependent;
+      if (frameWidth() != os->frameWidth)
+            setFrameWidth(ns->frameWidth);
+      if (paddingWidth() != os->paddingWidth)
+            setPaddingWidth(ns->paddingWidth);
+      if (frameRound() != os->frameRound)
+            setFrameRound(ns->frameRound);
+      if (frameColor() != os->frameColor)
+            setFrameColor(ns->frameColor);
+      if (circle() != os->circle)
+            setCircle(ns->circle);
+      if (systemFlag() != os->systemFlag)
+            setSystemFlag(ns->systemFlag);
+      if (defaultFont() != os->font())
+            setDefaultFont(ns->font());
       }
 
 //---------------------------------------------------------
@@ -826,7 +810,12 @@ bool TextB::readProperties(QDomElement e)
       QString tag(e.tagName());
       QString val(e.text());
 
-      if (tag == "align")            // obsolete
+      if (tag == "style") {
+            int i = val.toInt();
+            if (i >= 0)
+                  _textStyle = i;
+            }
+      else if (tag == "align")            // obsolete
             _align = Align(val.toInt());
       else if (tag == "halign") {
             if (val == "center")

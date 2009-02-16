@@ -108,7 +108,7 @@ class Beam : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      virtual void resetUserOffsets();
+      virtual void toDefault();
 
       Measure* measure() const            { return (Measure*)parent(); }
 

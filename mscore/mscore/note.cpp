@@ -563,7 +563,7 @@ void Note::read(QDomElement e)
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
-                  f->setTrack(track());
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->read(e);
                   add(f);
                   }

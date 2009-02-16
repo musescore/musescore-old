@@ -438,6 +438,7 @@ bool Score::importBB(const QString& name)
 
       Text* text = new Text(this);
       text->setSubtype(TEXT_TITLE);
+      text->setTextStyle(TEXT_STYLE_TITLE);
       text->setText(bb.title());
 
       MeasureBase* measure = _layout->first();

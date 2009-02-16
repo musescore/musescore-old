@@ -1245,10 +1245,10 @@ bool Beam::isUp()
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   toDefault
 //---------------------------------------------------------
 
-void Beam::resetUserOffsets()
+void Beam::toDefault()
       {
       _direction = AUTO;
       _userModified = false;

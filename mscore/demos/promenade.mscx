@@ -229,6 +229,7 @@
       <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
+        <style>2</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -238,6 +239,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
+        <style>4</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -247,6 +249,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
+        <style>3</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -264,18 +267,16 @@ p, li { white-space: pre-wrap; }
       </HBox>
     <Measure number="1">
       <Dynamic>
-        <data>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-style:normal;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;; font-size:20pt;&quot;&gt;f&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>f</subtype>
+        <selected>1</selected>
+        <style>12</style>
         </Dynamic>
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
         <offset x="-5.03286" y="0"/>
         <systemFlag>1</systemFlag>
-        <frameRound>0</frameRound>
+        <style>14</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -568,6 +569,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="5">
       <Text>
         <subtype>MeasureNumber</subtype>
+        <style>17</style>
         </Text>
       <TimeSig>
         <subtype>324</subtype>
@@ -854,6 +856,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="9">
       <Text>
         <subtype>MeasureNumber</subtype>
+        <style>17</style>
         </Text>
       <Chord>
         <ticklen>480</ticklen>
@@ -1227,6 +1230,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="13">
       <Text>
         <subtype>MeasureNumber</subtype>
+        <style>17</style>
         </Text>
       <Beam id="17">
         </Beam>
@@ -1593,6 +1597,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="17">
       <Text>
         <subtype>MeasureNumber</subtype>
+        <style>17</style>
         </Text>
       <Chord>
         <ticklen>480</ticklen>
@@ -1805,6 +1810,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="21">
       <Text>
         <subtype>MeasureNumber</subtype>
+        <style>17</style>
         </Text>
       <Beam id="30">
         </Beam>

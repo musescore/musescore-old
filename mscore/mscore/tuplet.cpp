@@ -81,6 +81,7 @@ void Tuplet::layout(ScoreLayout* layout)
             if (_number == 0) {
                   _number = new Text(score());
                   _number->setSubtype(TEXT_TUPLET);
+                  _number->setTextStyle(TEXT_STYLE_TUPLET);
                   _number->setParent(this);
                   }
             if (_numberType == SHOW_NUMBER)
@@ -383,6 +384,7 @@ void Tuplet::read(QDomElement e)
                   _number->setParent(this);
                   _number->read(e);
                   _number->setSubtype(TEXT_TUPLET);   // override read
+                  _number->setTextStyle(TEXT_STYLE_TUPLET);
                   }
             else if (tag == "p1") {
                   _userModified = true;
@@ -638,10 +640,10 @@ void Tuplet::updateGrips(int* grips, QRectF*grip) const
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
+//   toDefault
 //---------------------------------------------------------
 
-void Tuplet::resetUserOffsets()
+void Tuplet::toDefault()
       {
       _userModified = false;
       _p1           = QPointF();

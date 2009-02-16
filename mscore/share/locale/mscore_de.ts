@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="de">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -3122,19 +3121,19 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>more stretch</source>
-        <translation>mehr dehnen</translation>
+        <translation>dehnen</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation>Den ausgewählten Takt stärker dehnen</translation>
+        <translation>Den ausgewählten Takt dehnen</translation>
     </message>
     <message>
         <source>less stretch</source>
-        <translation>mehr Stauchen</translation>
+        <translation>stauchen</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation>Den ausgewählen Takt stärker stauchen</translation>
+        <translation>Den ausgewählen Takt stauchen</translation>
     </message>
     <message>
         <source>flip stem</source>
@@ -4618,7 +4617,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation>Taktstretch zurücksetzen</translation>
+        <translation>Takt normal dehnen</translation>
     </message>
     <message>
         <source>note longa</source>
