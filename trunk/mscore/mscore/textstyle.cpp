@@ -22,6 +22,7 @@
 #include "textstyle.h"
 #include "globals.h"
 #include "score.h"
+#include "canvas.h"
 
 static const int INTERNAL_STYLES = 2;     // do not present first two styles to user
 
