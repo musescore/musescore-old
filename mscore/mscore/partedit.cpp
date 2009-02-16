@@ -121,7 +121,6 @@ void InstrumentListEditor::updateAll(Score* score)
       foreach (const MidiMapping& m, *mm) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            pe->setPart(m.part, m.articulation);
             const MidiPatch* p = 0;
             for (;;) {
                   p = seq->getPatchInfo(m.part->useDrumset(), p);
@@ -130,6 +129,7 @@ void InstrumentListEditor::updateAll(Score* score)
                   pe->patch->addItem(p->name);
                   }
             ++idx;
+            pe->setPart(m.part, m.articulation);
             }
       }
 
