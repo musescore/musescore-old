@@ -23,6 +23,8 @@
 #include "staff.h"
 #include "lyrics.h"
 #include "score.h"
+#include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   MeasureBase
@@ -141,6 +143,19 @@ void MeasureBase::textStyleChanged(const QVector<TextStyle*>& style)
                         foreach(Lyrics* l, *ll) {
                               if (l)
                                     l->textStyleChanged(style);
+                              }
+                        }
+                  for (int track = 0; track < score()->nstaves()*VOICES; ++track) {
+                        Element* e = s->element(track);
+                        if ((e == 0) || (e->type() != CHORD))
+                              continue;
+                        Chord* ch = static_cast<Chord*>(e);
+                        NoteList* nl = ch->noteList();
+                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                              ElementList* el = i->second->el();
+                              foreach(Element* e, *el) {
+                                    e->textStyleChanged(style);
+                                    }
                               }
                         }
                   }
