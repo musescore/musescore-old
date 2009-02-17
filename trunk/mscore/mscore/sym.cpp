@@ -367,29 +367,27 @@ void Sym::writeCtable()
 
 void initSymbols()
       {
-      symbols[clefEightSym]               = Sym("clef eight", 0x38, 2);
-      symbols[clefOneSym]                 = Sym("clef one",   0x31, 2);
-      symbols[clefFiveSym]                = Sym("clef five",  0x35, 2);
+      symbols[clefEightSym]               = Sym("clef eight",                 0x38, 2);
+      symbols[clefOneSym]                 = Sym("clef one",                   0x31, 2);
+      symbols[clefFiveSym]                = Sym("clef five",                  0x35, 2);
+      symbols[plusSym]                    = Sym("plus",                       0x2b, 0);
+      symbols[zeroSym]                    = Sym("zero",                       0x30, 0);
+      symbols[oneSym]                     = Sym("one",                        0x31, 0);
+      symbols[twoSym]                     = Sym("two",                        0x32, 0);
+      symbols[threeSym]                   = Sym("three",                      0x33, 0);
+      symbols[fourSym]                    = Sym("four",                       0x34, 0);
+      symbols[fiveSym]                    = Sym("five",                       0x35, 0);
+      symbols[sixSym]                     = Sym("six",                        0x36, 0);
+      symbols[sevenSym]                   = Sym("seven",                      0x37, 0);
+      symbols[eightSym]                   = Sym("eight",                      0x38, 0);
+      symbols[nineSym]                    = Sym("nine",                       0x39, 0);
 
-      symbols[plusSym]                    = Sym("plus",               0x2b, 0);
-
-      symbols[zeroSym]                    = Sym("zero",               0x30, 0);
-      symbols[oneSym]                     = Sym("one",                0x31, 0);
-      symbols[twoSym]                     = Sym("two",                0x32, 0);
-      symbols[threeSym]                   = Sym("three",              0x33, 0);
-      symbols[fourSym]                    = Sym("four",               0x34, 0);
-      symbols[fiveSym]                    = Sym("five",               0x35, 0);
-      symbols[sixSym]                     = Sym("six",                0x36, 0);
-      symbols[sevenSym]                   = Sym("seven",              0x37, 0);
-      symbols[eightSym]                   = Sym("eight",              0x38, 0);
-      symbols[nineSym]                    = Sym("nine",               0x39, 0);
-
-      symbols[letterfSym]                 = Sym("f",                  0x66, 1);
-      symbols[lettermSym]                 = Sym("m",                  0x6d, 1);
-      symbols[letterpSym]                 = Sym("p",                  0x70, 1);
-      symbols[letterrSym]                 = Sym("r",                  0x72, 1);
-      symbols[lettersSym]                 = Sym("s",                  0x73, 1);
-      symbols[letterzSym]                 = Sym("z",                  0x7a, 1);
+      symbols[letterfSym]                 = Sym("f",                          0x66, 1);
+      symbols[lettermSym]                 = Sym("m",                          0x6d, 1);
+      symbols[letterpSym]                 = Sym("p",                          0x70, 1);
+      symbols[letterrSym]                 = Sym("r",                          0x72, 1);
+      symbols[lettersSym]                 = Sym("s",                          0x73, 1);
+      symbols[letterzSym]                 = Sym("z",                          0x7a, 1);
 
       symbols[wholerestSym]               = Sym("whole rest",               0xe100, 0);
       symbols[halfrestSym]                = Sym("half rest",                0xe101, 0);
@@ -503,7 +501,7 @@ void initSymbols()
       symbols[downmordentSym]             = Sym("down mordent",             0xe18b, 0);
       symbols[prallupSym]                 = Sym("prall up",                 0xe18c, 0);
       symbols[lineprallSym]               = Sym("line prall",               0xe18d, 0);
-//=======
+
       symbols[eighthflagSym]              = Sym("eight flag",               0xe190, 0);
       symbols[sixteenthflagSym]           = Sym("sixteenth flag",           0xe191, 0);
       symbols[thirtysecondflagSym]        = Sym("thirtysecond flag",        0xe192, 0);
@@ -549,12 +547,11 @@ void initSymbols()
       symbols[accBayanbaseSym]            = Sym(QT_TR_NOOP("acc bayanbase"),0xe1b3, 0);
 
       symbols[accOldEESym]                = Sym("acc old ee",               0xe1b4, 0);
+      symbols[flipSym]                    = Sym("flip stem",                0xe0fd, 0);
 
-      symbols[flipSym]                    = Sym("flip stem",  0xe0fd, 0);
-
-      symbols[wholediamond2headSym]        = Sym("whole diamond2 head",       0xe147, 0);
-      symbols[halfdiamond2headSym]         = Sym("half diamond2 head",        0xe148, 0);
-      symbols[diamond2headSym]             = Sym("diamond2 head",             0xe149, 0);
+      symbols[wholediamond2headSym]       = Sym("whole diamond2 head",      0xe147, 0);
+      symbols[halfdiamond2headSym]        = Sym("half diamond2 head",       0xe148, 0);
+      symbols[diamond2headSym]            = Sym("diamond2 head",            0xe149, 0);
 
 
       // used for GUI:

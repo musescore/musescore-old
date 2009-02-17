@@ -565,6 +565,12 @@ void Note::read(QDomElement e)
                   f->setSubtype(TEXT_FINGERING);
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->read(e);
+                  // DEBUG:   convert to plain
+#if 0
+                  QString s = f->getText();
+                  f->setText(s);
+#endif
+                  //
                   add(f);
                   }
             else if (tag == "Symbol") {
