@@ -2175,7 +2175,7 @@ foreach(Element* el, *(score->gel())) {
             }
 
       if (score->rights)
-            xml.tag("rights", score->rights->toPlainText());
+            xml.tag("rights", score->rights->getText());
       if (!score->source().isEmpty())
             xml.tag("source", score->source());
       xml.stag("encoding");

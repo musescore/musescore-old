@@ -78,10 +78,6 @@
         <translation>Tsjechisch</translation>
     </message>
     <message>
-        <source>German</source>
-        <translation>Duits</translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation>Engels (GB)</translation>
     </message>
@@ -90,44 +86,8 @@
         <translation>Engels (US)</translation>
     </message>
     <message>
-        <source>Spanish</source>
-        <translation>Spaans</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation>Frans</translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation>Galiciaans</translation>
-    </message>
-    <message>
         <source>Hindi</source>
         <translation>Hindoestaans</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation>Italiaans</translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation>Nederlands</translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation>Portugees</translation>
-    </message>
-    <message>
-        <source>Brasilian Portuguese</source>
-        <translation>Brasiliaans Portugees</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation>Russisch</translation>
-    </message>
-    <message>
-        <source>Turkey</source>
-        <translation>Turks</translation>
     </message>
     <message>
         <source>acc discant</source>
@@ -147,6 +107,50 @@
     </message>
     <message>
         <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Espa&#xc3;&#xb1;ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fran&#xc3;&#xa7;ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6594,24 +6598,8 @@ failed: </source>
         <translation>Rel.:</translation>
     </message>
     <message>
-        <source>Anchor:</source>
-        <translation>Plug:</translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation>Huidige</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Maat</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Notenbalk</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>Segment</translation>
+        <source>TextStyle:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

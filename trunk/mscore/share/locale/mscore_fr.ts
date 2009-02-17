@@ -78,10 +78,6 @@
         <translation>Česky - Tchèque</translation>
     </message>
     <message>
-        <source>German</source>
-        <translation>Deutsch - Allemand</translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation>English (GB) - Anglais (GB)</translation>
     </message>
@@ -90,44 +86,8 @@
         <translation>English (US) - Anglais (US)</translation>
     </message>
     <message>
-        <source>Spanish</source>
-        <translation>Español - Espagnol</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation>Français</translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation>Galego - Galicien</translation>
-    </message>
-    <message>
         <source>Hindi</source>
         <translation>हिन्दी - Hindi</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation>Italiano - Italien</translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation>Nederlands - Néerlandais</translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation>Português - Portuguais</translation>
-    </message>
-    <message>
-        <source>Brasilian Portuguese</source>
-        <translation>Brasileiro - Brésilien</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation>Русский - Russe</translation>
-    </message>
-    <message>
-        <source>Turkey</source>
-        <translation>Türk - Turc</translation>
     </message>
     <message>
         <source>acc discant</source>
@@ -147,6 +107,50 @@
     </message>
     <message>
         <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Espa&#xc3;&#xb1;ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fran&#xc3;&#xa7;ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6607,24 +6611,8 @@ failed: </source>
         <translation>Rel. :</translation>
     </message>
     <message>
-        <source>Anchor:</source>
-        <translation>Ancre :</translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation>Parent</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Mesure</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Portée</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>Segment</translation>
+        <source>TextStyle:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

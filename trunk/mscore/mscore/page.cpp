@@ -146,16 +146,9 @@ void Page::layout(ScoreLayout* layout)
       else {
             if (_score->rights) {
                   if (_copyright == 0) {
-                        _copyright = new Text(score());
+                        _copyright = new TextC(*_score->rights);
                         _copyright->setParent(this);
                         }
-                  if (_copyright->getText() != _score->rights->toHtml()) {
-                        _copyright->setHtml(_score->rights->toHtml());
-                        }
-                  // always set subtype so that style changes
-                  // take immediate effect:
-                  _copyright->setSubtype(TEXT_COPYRIGHT);
-                  _copyright->setTextStyle(TEXT_STYLE_COPYRIGHT);
                   _copyright->layout(layout);
                   }
             else if (_copyright) {
@@ -528,7 +521,7 @@ void Page::add(Element* e)
       {
       if (e->type() == TEXT && e->subtype() == TEXT_COPYRIGHT) {
             e->setParent(this);
-            _copyright = (Text*)e;
+            _copyright = static_cast<TextC*>(e);
             }
       else {
             printf("cannot add %s to %s\n", e->name(), name());
@@ -549,3 +542,4 @@ void Page::remove(Element* e)
             printf("cannot remove %s from %s\n", e->name(), name());
             }
       }
+

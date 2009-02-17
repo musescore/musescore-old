@@ -822,8 +822,6 @@ void Measure::layout2(ScoreLayout* layout)
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
                   _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
-                  _noText->setTrack(-1);
-                  _noText->setTick(-1);
                   }
             _noText->setText(s);
             }
@@ -1096,8 +1094,6 @@ void Measure::add(Element* el)
             case HBOX:
                   if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER) {
                         _noText = static_cast<Text*>(el);
-                        _noText->setTrack(-1);
-                        _noText->setTick(-1);
                         }
                   else
                         _el.append(el);
@@ -2686,10 +2682,11 @@ void Measure::read(QDomElement e, int idx)
                               }
                         measure->add(t);
                         }
-                  else if (st == TEXT_MEASURE_NUMBER)
-                        t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   else {
-                        printf("read text subtype %d\n", st);
+                        if (st == TEXT_MEASURE_NUMBER)
+                              t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                        else
+                              printf("read text subtype %d\n", st);
                         add(t);
                         }
                   }

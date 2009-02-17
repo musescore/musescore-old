@@ -153,6 +153,7 @@
       <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Title</subtype>
+        <style>2</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -162,6 +163,7 @@ p, li { white-space: pre-wrap; }
         </Text>
       <Text>
         <subtype>Composer</subtype>
+        <style>4</style>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -195,10 +197,11 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Lyrics>
-        <data>A</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>0</tick>
+        <style>6</style>
+        <text>A</text>
         </Lyrics>
       </Measure>
     <Measure number="2">
@@ -254,56 +257,65 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Lyrics>
-        <data>des</data>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>480</tick>
+        <style>6</style>
+        <text>des</text>
         </Lyrics>
       <Lyrics>
-        <data>Can</data>
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>Can</text>
         </Lyrics>
       <Lyrics>
-        <data>Er</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>Er</text>
         </Lyrics>
       <Lyrics>
-        <data>te,</data>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>1440</tick>
+        <style>6</style>
+        <text>te,</text>
         </Lyrics>
       <Lyrics>
-        <data>tet</data>
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>tet</text>
         </Lyrics>
       <Lyrics>
-        <data>go</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>go</text>
         </Lyrics>
       <Lyrics>
-        <data>fi</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>1920</tick>
+        <style>6</style>
+        <text>fi</text>
         </Lyrics>
       <Lyrics>
-        <data>nunc</data>
         <no>1</no>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>nunc</text>
         </Lyrics>
       <Lyrics>
-        <data>qui</data>
         <no>2</no>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>qui</text>
         </Lyrics>
       </Measure>
     <Measure number="3">
@@ -337,40 +349,46 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Lyrics>
-        <data>del</data>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>2400</tick>
+        <style>6</style>
+        <text>del</text>
         </Lyrics>
       <Lyrics>
-        <data>hym</data>
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>hym</text>
         </Lyrics>
       <Lyrics>
-        <data>na</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>na</text>
         </Lyrics>
       <Lyrics>
-        <data>es,</data>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>3360</tick>
+        <style>6</style>
+        <text>es,</text>
         </Lyrics>
       <Lyrics>
-        <data>nos</data>
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>nos</text>
         </Lyrics>
       <Lyrics>
-        <data>tus</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>tus</text>
         </Lyrics>
       </Measure>
     <Measure number="4">
@@ -432,76 +450,88 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Lyrics>
-        <data>Lae</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>4320</tick>
+        <style>6</style>
+        <text>Lae</text>
         </Lyrics>
       <Lyrics>
-        <data>Cho</data>
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>Cho</text>
         </Lyrics>
       <Lyrics>
-        <data>di</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>di</text>
         </Lyrics>
       <Lyrics>
-        <data>ti</data>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>4800</tick>
+        <style>6</style>
+        <text>ti</text>
         </Lyrics>
       <Lyrics>
-        <data>rus</data>
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>rus</text>
         </Lyrics>
       <Lyrics>
-        <data>e</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>e</text>
         </Lyrics>
       <Lyrics>
-        <data>tri</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>5280</tick>
+        <style>6</style>
+        <text>tri</text>
         </Lyrics>
       <Lyrics>
-        <data>ang</data>
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>ang</text>
         </Lyrics>
       <Lyrics>
-        <data>ho</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>ho</text>
         </Lyrics>
       <Lyrics>
-        <data>um</data>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>5760</tick>
+        <style>6</style>
+        <text>um</text>
         </Lyrics>
       <Lyrics>
-        <data>el</data>
         <no>1</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>el</text>
         </Lyrics>
       <Lyrics>
-        <data>di</data>
         <no>2</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>di</text>
         </Lyrics>
       </Measure>
     <Measure number="5">
@@ -547,45 +577,52 @@ p, li { white-space: pre-wrap; }
       <BarLine>
         </BarLine>
       <Lyrics>
-        <data>phan</data>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>6240</tick>
+        <style>6</style>
+        <text>phan</text>
         </Lyrics>
       <Lyrics>
-        <data>or</data>
         <no>1</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>or</text>
         </Lyrics>
       <Lyrics>
-        <data>er</data>
         <no>2</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>er</text>
         </Lyrics>
       <Lyrics>
-        <data>tes</data>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>7200</tick>
+        <style>6</style>
+        <text>tes</text>
         </Lyrics>
       <Lyrics>
-        <data>um;</data>
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>7</style>
+        <text>um;</text>
         </Lyrics>
       <Lyrics>
-        <data>na</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
+        <style>6</style>
+        <text>na</text>
         </Lyrics>
       <Lyrics>
-        <data>Ven</data>
         <subtype>Lyric</subtype>
         <tick>7680</tick>
+        <style>6</style>
+        <text>Ven</text>
         </Lyrics>
       </Measure>
     </Staff>

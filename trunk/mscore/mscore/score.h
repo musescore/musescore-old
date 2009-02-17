@@ -68,6 +68,7 @@ struct Channel;
 class Tuplet;
 class Capella;
 class CapVoice;
+class TextC;
 
 struct Style;
 struct SigEvent;
@@ -327,7 +328,7 @@ class Score : public QObject {
       int curTick;            // for read optimizations
       int curTrack;
 
-      QTextDocument* rights;
+      TextC* rights;
 
       int _pageOffset;              ///< Offset for page numbers.
 
@@ -639,7 +640,6 @@ class Score : public QObject {
       void saveStyle();
       void textStyleChanged(const QVector<TextStyle*>&s);
 
-      void setCopyright(QTextDocument*);
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
       void pasteStaff(QDomElement, int dstTick, int staffIdx);

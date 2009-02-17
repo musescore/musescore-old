@@ -46,6 +46,7 @@ TextBase::TextBase()
       _refCount     = 1;
       _doc          = new QTextDocument(0);
       _doc->setUseDesignMetrics(true);
+      _doc->setUndoRedoEnabled(false);
 
       _hasFrame     = false;
       _frameWidth   = 0.35;         // default line width
@@ -79,6 +80,33 @@ TextBase::TextBase(const TextBase& t)
       _layoutWidth  = t._layoutWidth;
       _doc->documentLayout()->setPaintDevice(pdev);
       layout(_layoutWidth);
+      }
+
+//---------------------------------------------------------
+//   isSimpleText
+//    Return true if this is simple text and conforms to
+//    the text style.
+//    This kind of text is reponsive to style changes and
+//    can be saved as simple text string.
+//---------------------------------------------------------
+
+bool TextBase::isSimpleText(TextStyle* style) const
+      {
+      if (_doc->blockCount() > 1)
+            return false;
+      int fragments = 0;
+      QTextBlock b = _doc->begin();
+      QTextCharFormat cf;
+      for (QTextBlock::iterator i = b.begin(); !i.atEnd(); ++i) {
+            if (i.fragment().isValid())
+                  ++fragments;
+            if (fragments > 1)
+                  return false;
+            cf = i.fragment().charFormat();
+            }
+      if (cf.font() == style->font())
+            return true;
+      return false;
       }
 
 //---------------------------------------------------------
@@ -141,6 +169,7 @@ void TextBase::setText(const QString& s, Align align)
 
 void TextBase::setHtml(const QString& s)
       {
+      _doc->clear();
       _doc->setHtml(s);
       }
 
@@ -182,9 +211,13 @@ void TextBase::writeProperties(Xml& xml, TextStyle* ts, bool writeText) const
                   xml.tag("circle", _circle);
             }
       if (writeText) {
-            xml.stag("html-data");
-            xml.writeHtml(_doc->toHtml("utf-8"));
-            xml.etag();
+            if (isSimpleText(ts))
+                  xml.tag("text", _doc->toPlainText());
+            else {
+                  xml.stag("html-data");
+                  xml.writeHtml(_doc->toHtml("utf-8"));
+                  xml.etag();
+                  }
             }
       }
 
@@ -203,6 +236,8 @@ bool TextBase::readProperties(QDomElement e)
             QString s = Xml::htmlToString(e);
             _doc->setHtml(s);
             }
+      else if (tag == "text")
+            _doc->setPlainText(val);
       else if (tag == "html-data") {
             QString s = Xml::htmlToString(e.firstChildElement());
             _doc->setHtml(s);
@@ -781,65 +816,34 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
       TextStyle* ns = styles[_textStyle];
       TextStyle* os = score()->textStyle(_textStyle);
 
-      bool dirty = false;
-      if (_align == os->align) {
-            dirty = true;
+      if (_align == os->align)
             _align = ns->align;
-            }
-      if (_xoff == os->xoff) {
+      if (_xoff == os->xoff)
             _xoff = ns->xoff;
-            dirty = true;
-            }
-      if (_yoff == os->yoff) {
+      if (_yoff == os->yoff)
             _yoff = ns->yoff;
-            dirty = true;
-            }
-      if (_rxoff == os->rxoff) {
+      if (_rxoff == os->rxoff)
             _rxoff = ns->rxoff;
-            dirty = true;
-            }
-      if (_ryoff == os->ryoff) {
+      if (_ryoff == os->ryoff)
             _ryoff = ns->ryoff;
-            dirty = true;
-            }
-      if (_offsetType == os->offsetType) {
+      if (_offsetType == os->offsetType)
             _offsetType = ns->offsetType;
-            dirty = true;
-            }
-      if (_sizeIsSpatiumDependent == os->sizeIsSpatiumDependent) {
+      if (_sizeIsSpatiumDependent == os->sizeIsSpatiumDependent)
             _sizeIsSpatiumDependent = ns->sizeIsSpatiumDependent;
-            dirty = true;
-            }
-      if (frameWidth() == os->frameWidth) {
+      if (frameWidth() == os->frameWidth)
             setFrameWidth(ns->frameWidth);
-            dirty = true;
-            }
-      if (paddingWidth() == os->paddingWidth) {
+      if (paddingWidth() == os->paddingWidth)
             setPaddingWidth(ns->paddingWidth);
-            dirty = true;
-            }
-      if (frameRound() == os->frameRound) {
+      if (frameRound() == os->frameRound)
             setFrameRound(ns->frameRound);
-            dirty = true;
-            }
-      if (frameColor() == os->frameColor) {
+      if (frameColor() == os->frameColor)
             setFrameColor(ns->frameColor);
-            dirty = true;
-            }
-      if (circle() == os->circle) {
+      if (circle() == os->circle)
             setCircle(ns->circle);
-            dirty = true;
-            }
-      if (systemFlag() == os->systemFlag) {
+      if (systemFlag() == os->systemFlag)
             setSystemFlag(ns->systemFlag);
-            dirty = true;
-            }
-      if (defaultFont() == os->font()) {
+      if (textBase()->isSimpleText(os))
             setDefaultFont(ns->font());
-            dirty = true;
-            }
-      if (dirty)
-            doc()->setModified(true);
       }
 
 //---------------------------------------------------------

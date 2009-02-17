@@ -165,7 +165,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
       pageFormat()->write(xml);
       if (rights) {
             xml.stag("rights");
-            xml.writeHtml(rights->toHtml("UTF-8"));
+            xml.writeHtml(rights->getHtml());
             xml.etag();
             }
       if (!_movementNumber.isEmpty())

@@ -69,9 +69,9 @@ class TextBase {
       TextBase();
       TextBase(const TextBase&);
 
-      int refCount() const    { return _refCount; }
-      void incRefCount()      { ++_refCount; }
-      void decRefCount()      { --_refCount; }
+      int refCount() const                  { return _refCount; }
+      void incRefCount()                    { ++_refCount; }
+      void decRefCount()                    { --_refCount; }
 
       void setDoc(const QTextDocument& d);
       QTextDocument* doc() const            { return _doc;          }
@@ -102,6 +102,7 @@ class TextBase {
       void setHtml(const QString& s);
       bool isEmpty() const                  { return _doc->isEmpty(); }
       void setModified(bool v)              { _doc->setModified(v);   }
+      bool isSimpleText(TextStyle*) const;
       };
 
 //---------------------------------------------------------
