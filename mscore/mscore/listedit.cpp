@@ -1121,6 +1121,7 @@ void TextView::setElement(Element* e)
       tb.rxoffset->setValue(te->rxoff());
       tb.ryoffset->setValue(te->ryoff());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
+      tb.textStyle->setValue(te->textStyle());
       }
 
 //---------------------------------------------------------

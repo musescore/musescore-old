@@ -504,11 +504,8 @@ void Score::write(Xml& xml, bool autosave)
       xml.tag("showInvisible", _showInvisible);
       xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
-      if (rights) {
-            xml.stag("rights");
-            xml.writeHtml(rights->toHtml("UTF-8"));
-            xml.etag();
-            }
+      if (rights)
+            rights->write(xml, "copyright");
       if (!_movementNumber.isEmpty())
             xml.tag("movement-number", _movementNumber);
       if (!_movementTitle.isEmpty())
@@ -1544,23 +1541,14 @@ void Score::setTextStyles(const QVector<TextStyle*>& s)
 //   setCopyright
 //---------------------------------------------------------
 
-void Score::setCopyright(QTextDocument* doc)
-      {
-      if (rights) {
-            delete rights;
-            rights = 0;
-            }
-      if (doc)
-            rights = doc->clone();
-      }
-
 void Score::setCopyright(const QString& s)
       {
       if (rights == 0) {
-            rights = new QTextDocument(0);
-            rights->setUseDesignMetrics(true);
+            rights = new TextC(this);
+            rights->setSubtype(TEXT_COPYRIGHT);
+            rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
             }
-      rights->setPlainText(s);
+      rights->setText(s);
       }
 
 //---------------------------------------------------------
@@ -1569,8 +1557,11 @@ void Score::setCopyright(const QString& s)
 
 void Score::setCopyrightHtml(const QString& s)
       {
-      if (rights == 0)
-            rights = new QTextDocument(0);
+      if (rights == 0) {
+            rights = new TextC(this);
+            rights->setSubtype(TEXT_COPYRIGHT);
+            rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
+            }
       rights->setHtml(s);
       }
 
@@ -1999,6 +1990,18 @@ void Score::textStyleChanged(const QVector<TextStyle*>&style)
             e->textStyleChanged(style);
       for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
             mb->textStyleChanged(style);
+      foreach(System* s, *_layout->systems()) {
+            foreach(SysStaff* ss, *s->staves()) {
+                  if (ss->instrumentName)
+                        ss->instrumentName->textStyleChanged(style);
+                  }
+            }
+      if (rights)
+            rights->textStyleChanged(style);
+      foreach(Page* p, _layout->pages()) {
+            if (p->pageNo())
+                  p->pageNo()->textStyleChanged(style);
+            }
       }
 
 //---------------------------------------------------------

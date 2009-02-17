@@ -25,6 +25,7 @@
 
 class System;
 class Text;
+class TextC;
 class Measure;
 class Xml;
 class Score;
@@ -80,7 +81,7 @@ class Page : public Element {
       QList<System*> _systems;
       int _no;                      // page number
       Text* _pageNo;
-      Text* _copyright;
+      TextC* _copyright;
 
    public:
       Page(ScoreLayout*);
@@ -107,7 +108,7 @@ class Page : public Element {
       double loHeight() const;
 
       Text* pageNo() const               { return _pageNo;    }
-      Text* copyright() const            { return _copyright; }
+      TextC* copyright() const           { return _copyright; }
 
       void layout(ScoreLayout*);
 

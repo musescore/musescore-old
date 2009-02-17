@@ -78,10 +78,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>German</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation></translation>
     </message>
@@ -90,43 +86,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>Spanish</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Hindi</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Brasilian Portuguese</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Turkey</source>
         <translation></translation>
     </message>
     <message>
@@ -148,6 +108,50 @@
     <message>
         <source>acc bayanbase</source>
         <translation>Akkordeon Bayanbase</translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Espa&#xc3;&#xb1;ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fran&#xc3;&#xa7;ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6601,24 +6605,8 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation>Rel.:</translation>
     </message>
     <message>
-        <source>Anchor:</source>
-        <translation>Anker:</translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation>Eltern</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Takt</translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation>Notenzeile</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>Segment</translation>
+        <source>TextStyle:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1262,6 +1262,7 @@ void Score::cmdAddText(int subtype)
                   s = new Text(this);
                   s->setParent(page);
                   s->setSubtype(subtype);
+                  s->setTextStyle(TEXT_STYLE_COPYRIGHT);
                   }
                   break;
 

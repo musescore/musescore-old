@@ -1,3 +1,8 @@
+17.feb (ws)
+      - Introduce "simple text", which contains only one text fragment with
+        same font as associated style. This kind of text is saved as simple text
+        string instead of html. "Simple text" changes if the associated text style
+        changes.
 16.feb (tb)
       - adding danish translation file
        (ws)

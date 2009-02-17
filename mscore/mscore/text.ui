@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
-    <height>223</height>
+    <width>824</width>
+    <height>229</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -16,7 +16,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Text</string>
+      <string comment="do not translate" >Text</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -31,7 +31,7 @@
          </sizepolicy>
         </property>
         <property name="text" >
-         <string>Text:</string>
+         <string comment="do not translate" >Text:</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -50,7 +50,7 @@
          </sizepolicy>
         </property>
         <property name="text" >
-         <string>Offset:</string>
+         <string comment="do not translate" >Offset:</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -69,7 +69,7 @@
         <item>
          <widget class="QLabel" name="label_7" >
           <property name="text" >
-           <string>Abs.:</string>
+           <string comment="do not translate" >Abs.:</string>
           </property>
          </widget>
         </item>
@@ -126,7 +126,7 @@
         <item>
          <widget class="QLabel" name="label_6" >
           <property name="text" >
-           <string>Rel.:</string>
+           <string comment="do not translate" >Rel.:</string>
           </property>
          </widget>
         </item>
@@ -149,34 +149,23 @@
       <item row="2" column="0" >
        <widget class="QLabel" name="label_4" >
         <property name="text" >
-         <string>Anchor:</string>
+         <string comment="do not translate" >TextStyle:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1" >
        <layout class="QHBoxLayout" >
         <item>
-         <widget class="QComboBox" name="anchor" >
-          <item>
-           <property name="text" >
-            <string>Parent</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>Measure</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>Staff</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
-            <string>Segment</string>
-           </property>
-          </item>
+         <widget class="QSpinBox" name="textStyle" >
+          <property name="readOnly" >
+           <bool>true</bool>
+          </property>
+          <property name="minimum" >
+           <number>-1</number>
+          </property>
+          <property name="maximum" >
+           <number>9999</number>
+          </property>
          </widget>
         </item>
         <item>
@@ -184,7 +173,7 @@
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>301</width>
             <height>20</height>

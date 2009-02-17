@@ -613,7 +613,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   QString s;
                   if (rights)
-                        s = rights->toHtml("UTF-8");
+                        s = rights->getHtml();
                   setCopyrightHtml(i->s);
                   i->s = s;
                   }

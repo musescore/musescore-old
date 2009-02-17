@@ -2577,7 +2577,7 @@ bool ExportLy::write(const QString& name)
   if (score->rights)
     {
       indentF();
-      os << "copyright = \"" << score->rights->toPlainText() << "\"\n";
+      os << "copyright = \"" << score->rights->getText() << "\"\n";
     }
 
   indentF();

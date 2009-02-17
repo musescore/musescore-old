@@ -133,6 +133,8 @@ void MeasureBase::textStyleChanged(const QVector<TextStyle*>& style)
             e->textStyleChanged(style);
       if (type() == MEASURE) {
             Measure* m = static_cast<Measure*>(this);
+            if (m->noText())
+                  m->noText()->textStyleChanged(style);
             for (Segment* s = m->first(); s; s = s->next()) {
                   for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
                         LyricsList* ll = s->lyricsList(staffIdx);

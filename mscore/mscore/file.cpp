@@ -1172,15 +1172,24 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "page-layout")
                         pageFormat()->read(ee);
-                  else if (tag == "rights") {
+                  else if (tag == "rights") {   // obsolete
                         if (rights == 0) {
-                              rights = new QTextDocument(0);
-                              rights->setUseDesignMetrics(true);
+                              rights = new TextC(this);
+                              rights->setSubtype(TEXT_COPYRIGHT);
+                              rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
                               }
                         if (mscVersion() <= 103)
                               rights->setHtml(val);
                         else
                               rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
+                        }
+                  else if (tag == "copyright") {
+                        if (rights == 0) {
+                              rights = new TextC(this);
+                              rights->setSubtype(TEXT_COPYRIGHT);
+                              rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
+                              rights->read(ee);
+                              }
                         }
                   else if (tag == "movement-number")
                         _movementNumber = val;

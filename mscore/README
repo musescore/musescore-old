@@ -84,8 +84,8 @@ Test:
 
       MuseScore is in beta state. That means you should not use
       it for any mission critical work. It is incomplete and surely has
-      a lot of bugs. Also the save format (*.msc files) will most likely
-      change in future versions.
+      a lot of bugs. Also the save format (*.mscx and *.mscz files) will
+      most likely change in future versions.
 
 =================================================================
       Help needed
