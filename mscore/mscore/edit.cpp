@@ -1647,7 +1647,17 @@ void Score::cmdEnterRest()
       else {
             setRest(_is.pos(), _is.track, _is.tickLen, _is.dots);
 //            _is.setPos(_is.pos() + _is.tickLen);
-            emit posChanged(_is.pos());
+
+            // go to next ChordRest
+            cr = nextChordRest(_is.cr);
+            if ((cr == 0) && (_is.track % VOICES)) {
+                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
+                  int track = (_is.track / VOICES) * VOICES;
+                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+                  }
+            _is.cr = cr;
+            if (_is.cr)
+                  emit posChanged(_is.pos());
             }
       _is.rest = false;  // continue with normal note entry
       }

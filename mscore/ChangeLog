@@ -1,4 +1,5 @@
 17.feb (ws)
+      - fix: advance cursor after entering rest in note entry mode
       - Introduce "simple text", which contains only one text fragment with
         same font as associated style. This kind of text is saved as simple text
         string instead of html. "Simple text" changes if the associated text style
