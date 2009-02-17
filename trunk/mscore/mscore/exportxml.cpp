@@ -217,6 +217,8 @@ class ExportMusicXml {
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void lyrics(const LyricsList* ll);
       void work(const MeasureBase* measure);
+      void calcDivMoveToTick(int t);
+      void calcDivisions();
 
    public:
       ExportMusicXml(Score* s) { score = s; tick = 0; }
@@ -753,6 +755,173 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                         break;
                   }
             }
+      }
+
+// helpers for ::calcDivisions
+
+typedef QList<int> IntVector;
+static IntVector integers;
+static IntVector primes;
+
+// check if all integers can be divided by div
+
+static bool canDivideBy(int div) {
+  bool res = true;
+  for (int i = 0; i < integers.count(); i++) {
+    if ((integers[i] <= 1) || ((integers[i] % div) != 0)) {
+      res = false;
+    }
+  }
+  return res;
+}
+
+// divide all integers by div
+
+static void divideBy(int div) {
+  for (int i = 0; i < integers.count(); i++) {
+    integers[i] /= div;
+  }
+}
+
+static void addInteger(int len) {
+if (!integers.contains(len)) {
+      integers.append(len);
+}
+}
+
+//---------------------------------------------------------
+//   calcDivMoveToTick
+//---------------------------------------------------------
+
+void ExportMusicXml::calcDivMoveToTick(int t)
+      {
+      if (t < tick) {
+            printf("backup %d\n", tick - t);
+            addInteger(tick - t);
+            }
+      else if (t > tick) {
+            printf("forward %d\n", t - tick);
+            addInteger(t - tick);
+            }
+      tick = t;
+      }
+
+//---------------------------------------------------------
+//  calcDivisions
+//---------------------------------------------------------
+
+// Loop over all voices in all staffs and determine a suitable value for divisions.
+
+// Length of time in MusicXML is expressed in "units", which should allow expressing all time values
+// as an integral number of units. Divisions contains the number of units in a quarter note.
+// MuseScore uses 480 midi ticks to represent a quarter note, which expresses all note values
+// plus triplets and quintuplets as integer values. Solution is to collect all time values required,
+// and divide them by the highest common denominator, which is implemented as a series of
+// divisions by prime factors. Initialize the list with 480 to make sure a quarter note can always
+// be written as an integral number of units.
+
+/**
+ */
+
+void ExportMusicXml::calcDivisions()
+      {
+	// init
+	integers.clear();
+	primes.clear();
+	integers.append(480);
+	primes.append(2);
+	primes.append(3);
+	primes.append(5);
+
+      const QList<Part*>* il = score->parts();
+
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
+            tick = 0;
+
+            int staves = part->nstaves();
+            int strack = score->staffIdx(part) * VOICES;
+            int etrack = strack + staves * VOICES;
+/*
+            DirectionsHandler dh(score);
+            dh.buildDirectionsList(part, strack, etrack);
+*/
+            for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+/*
+                  dh.buildDirectionsList(m, false, part, strack, etrack);
+*/
+
+                  for (int st = strack; st < etrack; ++st) {
+                        // sstaff - xml staff number, counting from 1 for this
+                        // instrument
+                        // special number 0 -> dont show staff number in
+                        // xml output (because there is only one staff)
+
+                        int sstaff = (staves > 1) ? st - strack + VOICES : 0;
+                        sstaff /= VOICES;
+                        // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
+
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(st);
+                              if (!el)
+                                    continue;
+                              // must ignore start repeat to prevent spurious backup/forward
+                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
+                                    continue;
+
+                              if (tick != el->tick()) {
+//                                    attr.doAttr(xml, false);
+                                    calcDivMoveToTick(el->tick());
+                                    }
+                              if (el->isChordRest()) {
+                                    printf("chordrest %d\n", el->tickLen());
+                                    addInteger(el->tickLen());
+                                    tick += el->tickLen();
+                                    }
+
+//                              dh.handleElement(this, el, sstaff, true);
+/*
+                              switch (el->type()) {
+                                    case CHORD:
+                                          {
+                                          chord((Chord*)el, sstaff, ll);
+                                          break;
+                                          }
+                                    case REST:
+                                          rest((Rest*)el, sstaff);
+                                          break;
+                                    default:
+//                                          printf("ExportMusicXml::write unknown segment type %s\n", el->name());
+                                          break;
+                                    }
+*/
+//                              dh.handleElement(this, el, sstaff, false);
+                              }
+                        if (!((st + 1) % VOICES)) {
+                              // sstaff may be 0, which causes a failed assertion (and abort)
+                              // in (*i)->staff(ssstaff - 1)
+                              // LVIFIX: find exact cause
+                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
+                              // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
+//                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              }
+                        }
+                  // move to end of measure (in case of incomplete last voice)
+                  calcDivMoveToTick(m->tick() + m->tickLen());
+                  }
+            }
+
+	// do it: divide by all primes as often as possible
+	for (int u = 0; u < primes.count(); u++) {
+		while (canDivideBy(primes[u])) {
+			divideBy(primes[u]);
+		}
+	}
+
+	printf("divisions=%d\n", integers[0]);
       }
 
 //---------------------------------------------------------
@@ -2121,6 +2290,8 @@ static bool elementRighter(const Element* e1, const Element* e2)
 
 void ExportMusicXml::write(QIODevice* dev)
       {
+
+      calcDivisions();
 
 /*
 printf("gel contains:\n");
