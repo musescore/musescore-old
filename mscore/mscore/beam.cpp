@@ -1181,6 +1181,11 @@ void Beam::write(Xml& xml) const
             xml.tag("y1", _p1.y());
             xml.tag("y2", _p2.y());
             }
+      switch(_direction) {
+            case UP:   xml.tag("StemDirection", QVariant("up")); break;
+            case DOWN: xml.tag("StemDirection", QVariant("down")); break;
+            case AUTO: break;
+            }
       xml.etag();
       }
 
@@ -1201,6 +1206,14 @@ void Beam::read(QDomElement e)
             else if (tag == "y2") {
                   _userModified = true;
                   _p2 = QPointF(0.0, val.toDouble());
+                  }
+            else if (tag == "StemDirection") {
+                  if (val == "up")
+                        _direction = UP;
+                  else if (val == "down")
+                        _direction = DOWN;
+                  else
+                        domError(e);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
