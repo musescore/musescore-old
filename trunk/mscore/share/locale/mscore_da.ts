@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="da">
+<!DOCTYPE TS><TS>
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -79,10 +78,6 @@
         <translation>Tjekkisk</translation>
     </message>
     <message>
-        <source>German</source>
-        <translation>Tysk</translation>
-    </message>
-    <message>
         <source>English (GB)</source>
         <translation>Britisk</translation>
     </message>
@@ -91,44 +86,8 @@
         <translation>Amerikansk</translation>
     </message>
     <message>
-        <source>Spanish</source>
-        <translation>Spansk</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation>Fransk</translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation>gælisk</translation>
-    </message>
-    <message>
         <source>Hindi</source>
         <translation>Hindi</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation>Italiensk</translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation>Hollansk</translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation>Portugesisk</translation>
-    </message>
-    <message>
-        <source>Brasilian Portuguese</source>
-        <translation>Brasiliansk</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation>Russisk</translation>
-    </message>
-    <message>
-        <source>Turkey</source>
-        <translation>Tyrkisk</translation>
     </message>
     <message>
         <source>acc discant</source>
@@ -148,6 +107,50 @@
     </message>
     <message>
         <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Espa&#xc3;&#xb1;ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fran&#xc3;&#xa7;ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -388,7 +391,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">2</translation>
     </message>
     <message>
         <source>Maj7</source>
@@ -400,11 +403,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">6</translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">69</translation>
     </message>
     <message>
         <source>m</source>
@@ -420,7 +423,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7</translation>
     </message>
     <message>
         <source>sus</source>
@@ -448,11 +451,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">9</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13</translation>
     </message>
     <message>
         <source>7b9</source>
@@ -528,7 +531,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">5</translation>
     </message>
     <message>
         <source>7+</source>
@@ -556,11 +559,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#11</translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#11</translation>
     </message>
     <message>
         <source>7#11b13</source>
@@ -572,7 +575,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">9#11</translation>
     </message>
     <message>
         <source>9#11b13</source>
@@ -600,11 +603,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#9</translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#9</translation>
     </message>
     <message>
         <source>7#9b13</source>
@@ -612,7 +615,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>13#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#9#11</translation>
     </message>
     <message>
         <source>7#9#11b13</source>
@@ -664,27 +667,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#5</translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#5</translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#5#11</translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#5#11</translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">9#5</translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">9#5#11</translation>
     </message>
     <message>
         <source>7#5b9</source>
@@ -704,15 +707,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#5#9</translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">13#5#9#11</translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">7#5#9#11</translation>
     </message>
     <message>
         <source>7alt</source>
@@ -900,7 +903,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">4</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -908,11 +911,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sæt ind</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
@@ -972,11 +975,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">3</translation>
     </message>
 </context>
 <context>
@@ -1161,7 +1164,7 @@ failed: </source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Genvej</translation>
     </message>
     <message>
         <source>Shortcut:</source>
@@ -1338,7 +1341,7 @@ failed: </source>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stemmer</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
@@ -1683,7 +1686,7 @@ failed: </source>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <source>invalid</source>
@@ -2203,7 +2206,7 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Symbol</source>
@@ -2281,7 +2284,7 @@ failed: </source>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sangtekst</translation>
     </message>
     <message>
         <source>Syllabic:</source>
@@ -2297,7 +2300,7 @@ failed: </source>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slut</translation>
     </message>
     <message>
         <source>Middle</source>
@@ -3923,7 +3926,7 @@ failed: </source>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">forlad</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -3931,7 +3934,7 @@ failed: </source>
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zoom baggrund</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -4535,7 +4538,7 @@ failed: </source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tekst</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
@@ -5857,11 +5860,11 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <source>Replace 1/2 ... with Â½ ...</source>
+        <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <source>Replace (C) ... with Â© ... in Copyright Text</source>
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6065,7 +6068,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1</translation>
     </message>
 </context>
 <context>
@@ -6173,7 +6176,7 @@ fejl:</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tekstformat</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -6587,23 +6590,7 @@ fejl:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Anchor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segment</source>
+        <source>TextStyle:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6681,7 +6668,7 @@ fejl:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -6709,7 +6696,7 @@ fejl:</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Boks:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -6966,7 +6953,7 @@ fejl:</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ramme</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -7050,7 +7037,7 @@ fejl:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sæt ind</translation>
     </message>
 </context>
 <context>
@@ -7262,7 +7249,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sæt ind</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -7277,7 +7264,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tekst</translation>
     </message>
     <message>
         <source>Repeat List:</source>

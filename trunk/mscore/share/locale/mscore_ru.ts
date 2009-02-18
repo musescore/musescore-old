@@ -1729,7 +1729,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нотный стан</translation>
     </message>
     <message>
         <source>Time</source>
