@@ -1178,7 +1178,7 @@ void Score::cmdAddChordName2()
             return;
       int rootTpc = 14;
       if (cr->type() == CHORD) {
-            Chord* chord = dynamic_cast<Chord*>(cr);
+            Chord* chord = static_cast<Chord*>(cr);
             rootTpc = chord->downNote()->tpc();
             }
       Measure* measure = cr->measure();
@@ -1186,7 +1186,7 @@ void Score::cmdAddChordName2()
 
       foreach(Element* element, *measure->el()) {
             if ((element->type() == HARMONY) && (element->tick() == cr->tick())) {
-                  s = dynamic_cast<Harmony*>(element);
+                  s = static_cast<Harmony*>(element);
                   break;
                   }
             }
@@ -2375,14 +2375,16 @@ void Score::cmdPaste()
             docName = "--";
             QDomElement e = doc.documentElement();
             QPointF dragOffset;
-            int type    = Element::readType(e, &dragOffset);
-            if (type != -1) {
+            ElementType type    = Element::readType(e, &dragOffset);
+            if (type != INVALID) {
                   Element* el = Element::create(type, this);
-                  el->read(e);
-                  addRefresh(sel->element()->abbox());   // layout() ?!
-                  sel->element()->drop(QPointF(), QPointF(), el);
-                  if (sel->element())
-                        addRefresh(sel->element()->abbox());
+                  if (el) {
+                        el->read(e);
+                        addRefresh(sel->element()->abbox());   // layout() ?!
+                        sel->element()->drop(QPointF(), QPointF(), el);
+                        if (sel->element())
+                              addRefresh(sel->element()->abbox());
+                        }
                   }
             else
                   printf("cannot read type\n");

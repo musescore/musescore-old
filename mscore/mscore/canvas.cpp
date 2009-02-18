@@ -1564,7 +1564,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             QDomElement e = doc.documentElement();
 
             dragOffset = QPoint();
-            int type = Element::readType(e, &dragOffset);
+            ElementType type = Element::readType(e, &dragOffset);
 
             Element* el = 0;
             switch(type) {
@@ -1575,7 +1575,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case HAIRPIN:
                   case TEXTLINE:
                         el = Element::create(type, score());
-                        dynamic_cast<SLine*>(el)->setLen(_spatium * 7);
+                        static_cast<SLine*>(el)->setLen(_spatium * 7);
                         break;
                   case IMAGE:
                         {

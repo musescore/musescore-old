@@ -532,7 +532,7 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                               break;
                         default:
                               printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
-                                      elementNames[dir->type()], da->getTick());
+                                      Element::name(dir->type()), da->getTick());
                               break;
                         }
                   delete da;
@@ -585,7 +585,7 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                               break;
                         default:
                               printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
-                                      elementNames[dir->type()], da->getTick());
+                                      Element::name(dir->type()), da->getTick());
                               break;
                         }
                   delete da;
@@ -702,7 +702,7 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
                   default:
                         // all others silently ignored
                         // printf("DirectionsHandler::buildDirectionsList: direction type %s not implemented\n",
-                        //        elementNames[dir->type()]);
+                        //        Element::name(dir->type()));
                         break;
                   }
             }
@@ -751,7 +751,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   default:
                         // all others silently ignored
                         // printf("DirectionsHandler::buildDirectionsList: direction type %s not implemented\n",
-                        //        elementNames[dir->type()]);
+                        //        Element::name(dir->type()));
                         break;
                   }
             }
@@ -2297,7 +2297,7 @@ void ExportMusicXml::write(QIODevice* dev)
 printf("gel contains:\n");
 foreach(Element* el, *(score->gel())) {
       printf("%p type=%d(%s) tick=%d track=%d",
-             el, el->type(), elementNames[el->type()], el->tick(), el->track());
+             el, el->type(), Element::name(el->type()), el->tick(), el->track());
       if (el->type() == OTTAVA) {
            Ottava * o = (Ottava *) el;
            printf(" tick2=%d", o->tick2());

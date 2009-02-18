@@ -72,7 +72,7 @@
 extern bool debugMode;
 extern bool showInvisible;
 
-const char* elementNames[] = {
+static const char* elementNames[] = {
       "Symbol", "Text", "SlurSegment", "BarLine",
       "StemSlash", "Line", "Bracket",
       "Arpeggio",
@@ -1046,170 +1046,25 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
       }
 
 //---------------------------------------------------------
-//   name2type
-//---------------------------------------------------------
-
-int Element::name2type(const QString& s)
-      {
-      int n = sizeof(elementNames)/sizeof(*elementNames);
-      for (int i = 0; i < n; ++i) {
-            if (s == elementNames[i])
-                  return i;
-            }
-      return -1;
-      }
-
-//---------------------------------------------------------
-//   name2Element
-//---------------------------------------------------------
-
-Element* Element::name2Element(const QString& s, Score* sc)
-      {
-      int type = Element::name2type(s);
-      if (type == -1)
-            return 0;
-      return Element::create(type, sc);
-      }
-
-//---------------------------------------------------------
 //   readType
 //    return -1 if no valid type found
 //---------------------------------------------------------
 
-int Element::readType(QDomElement& e, QPointF* dragOffset)
+ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
       {
-      int type = -1;
+      ElementType type = INVALID;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "dragOffset")
                   *dragOffset = readPoint(e);
-            else if ((type = name2type(e.tagName())) == -1) {
+            else if ((type = name2type(e.tagName())) == INVALID) {
                   domError(e);
                   break;
                   }
-            if (type >= 0)
+            if (type != INVALID)
                   break;
             }
       return type;
-      }
-
-//---------------------------------------------------------
-//   create
-//    Element factory
-//---------------------------------------------------------
-
-Element* Element::create(int type, Score* score)
-      {
-      Element* el = 0;
-      switch(type) {
-            case VOLTA:
-                  el = new Volta(score);
-                  break;
-            case OTTAVA:
-                  el = new Ottava(score);
-                  break;
-            case TEXTLINE:
-                  el = new TextLine(score);
-                  break;
-            case TRILL:
-                  el = new Trill(score);
-                  break;
-            case PEDAL:
-                  el = new Pedal(score);
-                  break;
-            case HAIRPIN:
-                  el = new Hairpin(score);
-                  break;
-            case CLEF:
-                  el = new Clef(score);
-                  break;
-            case KEYSIG:
-                  el = new KeySig(score);
-                  break;
-            case TIMESIG:
-                  el = new TimeSig(score);
-                  break;
-            case BAR_LINE:
-                  el = new BarLine(score);
-                  break;
-            case ARPEGGIO:
-                  el = new Arpeggio(score);
-                  break;
-            case BREATH:
-                  el = new Breath(score);
-                  break;
-            case GLISSANDO:
-                  el = new Glissando(score);
-                  break;
-            case BRACKET:
-                  el = new Bracket(score);
-                  break;
-            case ATTRIBUTE:
-                  el = new Articulation(score);
-                  break;
-            case ACCIDENTAL:
-                  el = new Accidental(score);
-                  break;
-            case DYNAMIC:
-                  el = new Dynamic(score);
-                  break;
-            case TEXT:
-                  el = new Text(score);
-                  break;
-            case STAFF_TEXT:
-                  el = new StaffText(score);
-                  break;
-            case NOTEHEAD:
-                  el = new NoteHead(score);
-                  break;
-            case TREMOLO:
-                  el = new Tremolo(score);
-                  break;
-            case LAYOUT_BREAK:
-                  el = new LayoutBreak(score);
-                  break;
-            case MARKER:
-                  el = new Marker(score);
-                  break;
-            case JUMP:
-                  el = new Jump(score);
-                  break;
-            case REPEAT_MEASURE:
-                  el = new RepeatMeasure(score);
-                  break;
-            case ICON:
-                  el = new Icon(score);
-                  break;
-            case NOTE:
-                  el = new Note(score);
-                  break;
-            case SYMBOL:
-                  el = new Symbol(score);
-                  break;
-            case CHORD:
-                  el = new Chord(score);
-                  break;
-            case REST:
-                  el = new Rest(score);
-                  break;
-            case SPACER:
-                  el = new Spacer(score);
-                  break;
-            case TEMPO_TEXT:
-                  el = new TempoText(score);
-                  break;
-            case HARMONY:
-                  el = new Harmony(score);
-                  break;
-            case LYRICS:
-                  el = new Lyrics(score);
-                  break;
-            default:
-                  printf("Element::create(): cannot create element type %s\n",
-                     elementNames[type]);
-                  break;
-            }
-      return el;
       }
 
 //---------------------------------------------------------
@@ -1290,4 +1145,195 @@ void Icon::read(QDomElement e)
             }
       }
 
+//---------------------------------------------------------
+//   create
+//    Element factory
+//---------------------------------------------------------
 
+Element* Element::create(ElementType type, Score* score)
+      {
+      switch(type) {
+            case VOLTA:             return new Volta(score);
+            case OTTAVA:            return new Ottava(score);
+            case TEXTLINE:          return new TextLine(score);
+            case TRILL:             return new Trill(score);
+            case PEDAL:             return new Pedal(score);
+            case HAIRPIN:           return new Hairpin(score);
+            case CLEF:              return new Clef(score);
+            case KEYSIG:            return new KeySig(score);
+            case TIMESIG:           return new TimeSig(score);
+            case BAR_LINE:          return new BarLine(score);
+            case ARPEGGIO:          return new Arpeggio(score);
+            case BREATH:            return new Breath(score);
+            case GLISSANDO:         return new Glissando(score);
+            case BRACKET:           return new Bracket(score);
+            case ATTRIBUTE:         return new Articulation(score);
+            case ACCIDENTAL:        return new Accidental(score);
+            case DYNAMIC:           return new Dynamic(score);
+            case TEXT:              return new Text(score);
+            case STAFF_TEXT:        return new StaffText(score);
+            case NOTEHEAD:          return new NoteHead(score);
+            case TREMOLO:           return new Tremolo(score);
+            case LAYOUT_BREAK:      return new LayoutBreak(score);
+            case MARKER:            return new Marker(score);
+            case JUMP:              return new Jump(score);
+            case REPEAT_MEASURE:    return new RepeatMeasure(score);
+            case ICON:              return new Icon(score);
+            case NOTE:              return new Note(score);
+            case SYMBOL:            return new Symbol(score);
+            case CHORD:             return new Chord(score);
+            case REST:              return new Rest(score);
+            case SPACER:            return new Spacer(score);
+            case TEMPO_TEXT:        return new TempoText(score);
+            case HARMONY:           return new Harmony(score);
+            case LYRICS:            return new Lyrics(score);
+            case STEM:              return new Stem(score);
+
+            case SLUR_SEGMENT:
+            case STEM_SLASH:
+            case LINE:
+            case IMAGE:
+            case TIE:
+            case PAGE:
+            case BEAM:
+            case HOOK:
+            case TUPLET:
+            case HAIRPIN_SEGMENT:
+            case OTTAVA_SEGMENT:
+            case PEDAL_SEGMENT:
+            case TRILL_SEGMENT:
+            case TEXTLINE_SEGMENT:
+            case VOLTA_SEGMENT:
+            case LEDGER_LINE:
+            case MEASURE:
+            case STAFF_LINES:
+            case CURSOR:
+            case SELECTION:
+            case LASSO:
+            case SHADOW_NOTE:
+            case RUBBERBAND:
+            case SEGMENT:
+            case SYSTEM:
+            case COMPOUND:
+            case SLUR:
+            case ELEMENT:
+            case ELEMENT_LIST:
+            case STAFF_LIST:
+            case MEASURE_LIST:
+            case LAYOUT:
+            case HBOX:
+            case VBOX:
+            case MAXTYPE:
+            case INVALID:  break;
+            }
+      printf("cannot create type <%s>\n", Element::name(type));
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   name
+//---------------------------------------------------------
+
+const char* Element::name(ElementType type)
+      {
+      switch(type) {
+            case SYMBOL:            return "Symbol";
+            case TEXT:              return "Text";
+            case SLUR_SEGMENT:      return "SlurSegment";
+            case BAR_LINE:          return "BarLine";
+            case STEM_SLASH:        return "StemSlash";
+            case LINE:              return "Line";
+            case BRACKET:           return "Bracket";
+            case ARPEGGIO:          return "Arpeggio";
+            case ACCIDENTAL:        return "Accidental";
+            case NOTE:              return "Note";
+            case STEM:              return "Stem";
+            case CLEF:              return "Clef";
+            case KEYSIG:            return "KeySig";
+            case TIMESIG:           return "TimeSig";
+            case REST:              return "Rest";
+            case BREATH:            return "Breath";
+            case GLISSANDO:         return "Glissando";
+            case REPEAT_MEASURE:    return "RepeatMeasure";
+            case IMAGE:             return "Image";
+            case TIE:               return "Tie";
+            case ATTRIBUTE:         return "Attribute";
+            case DYNAMIC:           return "Dynamic";
+            case PAGE:              return "Page";
+            case BEAM:              return "Beam";
+            case HOOK:              return "Hook";
+            case LYRICS:            return "Lyrics";
+            case MARKER:            return "Marker";
+            case JUMP:              return "Jump";
+            case TUPLET:            return "Tuplet";
+            case TEMPO_TEXT:        return "Tempo";
+            case STAFF_TEXT:        return "StaffText";
+            case HARMONY:           return "Harmony";
+            case VOLTA:             return "Volta";
+            case HAIRPIN_SEGMENT:   return "HairpinSegment";
+            case OTTAVA_SEGMENT:    return "OttavaSegment";
+            case PEDAL_SEGMENT:     return "PedalSegment";
+            case TRILL_SEGMENT:     return "TrillSegment";
+            case TEXTLINE_SEGMENT:  return "TextLineSegment";
+            case VOLTA_SEGMENT:     return "VoltaSegment";
+            case LAYOUT_BREAK:      return "LayoutBreak";
+            case SPACER:            return "Spacer";
+            case LEDGER_LINE:       return "LedgerLine";
+            case NOTEHEAD:          return "NoteHead";
+            case TREMOLO:           return "Tremolo";
+            case MEASURE:           return "Measure";
+            case STAFF_LINES:       return "StaffLines";
+            case CURSOR:            return "Cursor";
+            case SELECTION:         return "Selection";
+            case LASSO:             return "Lasso";
+            case SHADOW_NOTE:       return "ShadowNote";
+            case RUBBERBAND:        return "RubberBand";
+            case HAIRPIN:           return "HairPin";
+            case OTTAVA:            return "Ottava";
+            case PEDAL:             return "Pedal";
+            case TRILL:             return "Trill";
+            case TEXTLINE:          return "TextLine";
+            case SEGMENT:           return "Segment";
+            case SYSTEM:            return "System";
+            case COMPOUND:          return "Compound";
+            case CHORD:             return "Chord";
+            case SLUR:              return "Slur";
+            case ELEMENT:           return "Element";
+            case ELEMENT_LIST:      return "ElementList";
+            case STAFF_LIST:        return "StaffList";
+            case MEASURE_LIST:      return "MeasureList";
+            case LAYOUT:            return "Layout";
+            case HBOX:              return "HBox";
+            case VBOX:              return "VBox";
+            case ICON:              return "Icon";
+            case INVALID:
+            case MAXTYPE:
+                  break;
+            }
+      return "??";
+      }
+
+//---------------------------------------------------------
+//   name2type
+//---------------------------------------------------------
+
+ElementType Element::name2type(const QString& s)
+      {
+      for (int i = 0; i < MAXTYPE; ++i) {
+            if (s == elementNames[i])
+                  return ElementType(i);
+            }
+      return INVALID;
+      }
+
+//---------------------------------------------------------
+//   name2Element
+//---------------------------------------------------------
+
+Element* Element::name2Element(const QString& s, Score* sc)
+      {
+      ElementType type = Element::name2type(s);
+      if (type == INVALID)
+            return 0;
+      return Element::create(type, sc);
+      }

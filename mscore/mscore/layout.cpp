@@ -1049,6 +1049,8 @@ bool ScoreLayout::doReLayout()
                   }
             else if (m->type() == MEASURE) {
                   Measure* measure = static_cast<Measure*>(m);
+                  for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx)
+                        measure->layout0(staffIdx);
                   measure->layoutBeams1(this);
                   measure->layoutX(this, 1.0);
                   ww      = measure->layoutWidth().stretchable;

@@ -299,12 +299,12 @@ void Note::add(Element* e)
                   BSymbol* b = static_cast<BSymbol*>(e);
                   foreach(Element* ee, b->getLeafs())
                         ee->setParent(b);
-                  e->setMag(mag());
+//                  e->setMag(mag());
                   _el.append(e);
                   }
                   break;
             case TEXT:
-                  e->setMag(mag());
+//                  e->setMag(mag());
                   _el.append(e);
                   break;
             case TIE:
@@ -319,7 +319,7 @@ void Note::add(Element* e)
                   break;
             case ACCIDENTAL:
                   _accidental = static_cast<Accidental*>(e);
-                  _accidental->setMag(mag());
+//                  _accidental->setMag(mag());
                   break;
             default:
                   printf("Note::add() not impl. %s\n", e->name());

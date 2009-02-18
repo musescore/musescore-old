@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -66,15 +68,20 @@
         <source>French Violin Clef</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>@default</name>
     <message>
         <source>system</source>
         <translation type="unfinished">Системный</translation>
     </message>
     <message>
         <source>Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86,7 +93,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>EspaÃ±ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FranÃ§ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TÃ¼rkÃ§e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -107,50 +150,6 @@
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Espa&#xc3;&#xb1;ol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fran&#xc3;&#xa7;ais</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Portugu&#xc3;&#xaa;s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -316,8 +315,39 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Chord</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Аккорд</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Штиль</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Хвостик</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Форшлаг</translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Направление штиля</translation>
+    </message>
+    <message>
         <source>Notes:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Ноты:</translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1701,66 +1731,82 @@ failed: </source>
     </message>
     <message>
         <source>Element</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Элемент</translation>
     </message>
     <message>
         <source>selected</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Выбран</translation>
     </message>
     <message>
         <source>generated</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Создан</translation>
     </message>
     <message>
         <source>visible</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Видим</translation>
     </message>
     <message>
         <source>system</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Системный</translation>
     </message>
     <message>
         <source>subtype</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">подтип</translation>
     </message>
     <message>
         <source>Voice</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Голос</translation>
     </message>
     <message>
         <source>Staff</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Нотный стан</translation>
     </message>
     <message>
         <source>Time</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Размер</translation>
     </message>
     <message>
         <source>Len</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Длительность</translation>
     </message>
     <message>
         <source>Color</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Цвет</translation>
     </message>
     <message>
         <source>Pos</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Положение</translation>
     </message>
     <message>
         <source>CPos</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Смещение</translation>
     </message>
     <message>
         <source>BBox</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">BBox</translation>
     </message>
     <message>
         <source>Mag</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Масштаб отображения</translation>
     </message>
 </context>
@@ -4925,62 +4971,77 @@ before closing?</source>
     </message>
     <message>
         <source>Note</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Нота</translation>
     </message>
     <message>
         <source>Pitch</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Высота тона</translation>
     </message>
     <message>
         <source>Head</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Головка</translation>
     </message>
     <message>
         <source>Subelements:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TPC</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HGrp.</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Линия</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie Back</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accidental</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Знак альтерации</translation>
     </message>
     <message>
         <source>Mirror Head</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Зеркалировать головку</translation>
     </message>
     <message>
         <source>S-Channel</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hidden</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User-Acc</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5865,11 +5926,11 @@ before closing?</source>
         <source>ms</source>
         <translation>мс</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6567,22 +6628,6 @@ please select a measure and try again</source>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Text</source>
-        <translation>Текст</translation>
-    </message>
-    <message>
-        <source>Offset:</source>
-        <translation>Смещение:</translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <translation>Текст:</translation>
-    </message>
-    <message>
-        <source>Abs.:</source>
-        <translation>Абс.:</translation>
-    </message>
-    <message>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
@@ -6595,11 +6640,33 @@ please select a measure and try again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Text</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Текст</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Текст:</translation>
+    </message>
+    <message>
+        <source>Offset:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Смещение:</translation>
+    </message>
+    <message>
+        <source>Abs.:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Абс.:</translation>
+    </message>
+    <message>
         <source>Rel.:</source>
-        <translation>Отн.:</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Отн.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
