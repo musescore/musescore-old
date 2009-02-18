@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.10">
   <MagIdx>9</MagIdx>
-  <xoff>0</xoff>
-  <yoff>-18.4198</yoff>
+  <xoff>0.211667</xoff>
+  <yoff>0.211667</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -10126,7 +10126,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <track>1</track>
-        <tick>103800</tick>
         <ticklen>240</ticklen>
         <Beam>195</Beam>
         <Note>
@@ -10140,13 +10139,9 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Rest>
-        <track>1</track>
-        <tick>104160</tick>
-        <ticklen>240</ticklen>
-        </Rest>
       <Chord>
         <track>1</track>
+        <tick>104400</tick>
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>staccato</subtype>
@@ -19626,7 +19621,7 @@ p, li { white-space: pre-wrap; }
           <subtype>staccato</subtype>
           </Attribute>
         <Beam>443</Beam>
-        <Note pitch="60" tpc="14"/>
+        <Note pitch="57" tpc="17"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>

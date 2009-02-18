@@ -48,7 +48,9 @@ class TextStyle;
 */
 
 enum ElementType {
-      SYMBOL, TEXT, SLUR_SEGMENT, BAR_LINE,
+      INVALID = -1,
+      SYMBOL  = 0,
+      TEXT, SLUR_SEGMENT, BAR_LINE,
       STEM_SLASH, LINE, BRACKET,
       ARPEGGIO,
       ACCIDENTAL, NOTE,
@@ -78,10 +80,9 @@ enum ElementType {
       // special types for drag& drop:
       ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
       HBOX, VBOX,
-      ICON
+      ICON,
+      MAXTYPE
       };
-
-extern const char* elementNames[];  // for debugging
 
 //---------------------------------------------------------
 ///   \brief base class of score layout elements
@@ -244,9 +245,8 @@ class Element {
 
       // debug functions
       virtual void dump() const;
-      const char* name() const         { return elementNames[type()]; }
-      virtual QString userName() const { return elementNames[type()]; }
-      static const char* name(int val) { return elementNames[val];    }
+      const char* name() const          { return name(type()); }
+      virtual QString userName() const  { return name(type()); }
       void dumpQPointF(const char*) const;
 
       bool operator>(const Element&) const;
@@ -264,7 +264,7 @@ class Element {
       QColor color() const            { return _color; }
       QColor curColor() const;
       void setColor(const QColor& c)  { _color = c;    }
-      static int readType(QDomElement& node, QPointF*);
+      static ElementType readType(QDomElement& node, QPointF*);
 
       virtual QByteArray mimeData(const QPointF&) const;
 /**
@@ -316,8 +316,6 @@ class Element {
 
       virtual void toDefault() {  setUserOff(QPointF()); }
 
-      static Element* create(int type, Score*);
-
       double mag() const                        { return _mag;   }
       virtual void setMag(double val)           { _mag = val;    }
 
@@ -354,8 +352,9 @@ class Element {
             }
       virtual void textStyleChanged(const QVector<TextStyle*>&) {}
 
-
-      static int name2type(const QString&);
+      static const char* name(ElementType type);
+      static Element* create(ElementType type, Score*);
+      static ElementType name2type(const QString&);
       static Element* name2Element(const QString&, Score*);
       };
 

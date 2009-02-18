@@ -30,6 +30,7 @@ set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(QT45 FALSE)                           # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(BUILD_SCRIPT_DEBUG TRUE)
+set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 
 if (QT45)
       set(STATIC_SCRIPT_BINDINGS TRUE)
@@ -38,8 +39,12 @@ else (QT45)
 endif (QT45)
 
 if (MINGW)
+      set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
+      set(QT45 TRUE)
+      set(STATIC_SCRIPT_BINDINGS TRUE)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
+
 if (APPLE)
       set (BUILD_SCRIPT_INTERFACE FALSE)
       set (BUILD_SCRIPT_DEBUG FALSE)
@@ -253,6 +258,7 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_CONTACT "ws@seh.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
 #      SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "")
+      SET(CPACK_STRIP_FILES "mscore.exe")
   ELSE(MINGW)
       SET(CPACK_STRIP_FILES "mscore")
       SET(CPACK_SOURCE_STRIP_FILES "")

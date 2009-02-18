@@ -473,52 +473,6 @@ void TextB::setAbove(bool /*val*/)
       // setYoff(val ? -2.0 : 7.0);
       }
 
-#if 0
-//---------------------------------------------------------
-//   style
-//---------------------------------------------------------
-
-TextStyle* TextB::style() const
-      {
-      int st = -1;
-      switch (subtype()) {
-            case TEXT_TITLE:            st = TEXT_STYLE_TITLE; break;
-            case TEXT_SUBTITLE:         st = TEXT_STYLE_SUBTITLE; break;
-            case TEXT_COMPOSER:         st = TEXT_STYLE_COMPOSER; break;
-            case TEXT_POET:             st = TEXT_STYLE_POET; break;
-            case TEXT_TRANSLATOR:       st = TEXT_STYLE_TRANSLATOR; break;
-            case TEXT_MEASURE_NUMBER:   st = TEXT_STYLE_MEASURE_NUMBER; break;
-            case TEXT_PAGE_NUMBER_ODD:  st = TEXT_STYLE_PAGE_NUMBER_ODD; break;
-            case TEXT_PAGE_NUMBER_EVEN: st = TEXT_STYLE_PAGE_NUMBER_EVEN; break;
-            case TEXT_COPYRIGHT:        st = TEXT_STYLE_COPYRIGHT; break;
-            case TEXT_FINGERING:        st = TEXT_STYLE_FINGERING; break;
-            case TEXT_INSTRUMENT_LONG:  st = TEXT_STYLE_INSTRUMENT_LONG; break;
-            case TEXT_INSTRUMENT_SHORT: st = TEXT_STYLE_INSTRUMENT_SHORT; break;
-            case TEXT_INSTRUMENT_EXCERPT: st = TEXT_STYLE_INSTRUMENT_EXCERPT; break;
-            case TEXT_TEMPO:            st = TEXT_STYLE_TEMPO; break;
-            case TEXT_LYRIC:            st = TEXT_STYLE_LYRIC1; break;
-            case TEXT_TUPLET:           st = TEXT_STYLE_TUPLET; break;
-            case TEXT_SYSTEM:           st = TEXT_STYLE_SYSTEM; break;
-            case TEXT_STAFF:            st = TEXT_STYLE_STAFF; break;
-            case TEXT_CHORD:            st = TEXT_STYLE_CHORD; break;
-            case TEXT_REHEARSAL_MARK:   st = TEXT_STYLE_REHEARSAL_MARK; break;
-            case TEXT_REPEAT:           st = TEXT_STYLE_REPEAT; break;
-            case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
-            case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
-            case TEXT_TEXTLINE:         st = TEXT_STYLE_TEXTLINE; break;
-            case TEXT_STRING_NUMBER:    st = TEXT_STYLE_STRING_NUMBER; break;
-            case TEXT_UNKNOWN:          break;
-            default:
-                  printf("unknown text subtype %d <%s>\n",
-                     subtype(), qPrintable(doc()->toPlainText()));
-                  break;
-            }
-      if (st == -1)
-            st = TEXT_STYLE_STAFF;
-      return score()->textStyle(st);
-      }
-#endif
-
 //---------------------------------------------------------
 //   subtypeName
 //---------------------------------------------------------

@@ -73,28 +73,24 @@ class NoteHead : public Symbol {
 class Note : public Element {
       Q_DECLARE_TR_FUNCTIONS(Note)
 
-      static int smallNoteHeads[HEAD_GROUPS][4];
-
       int _subchannel;        ///< articulation
-
-      int _pitch;             ///< Note pitch as midi value (0 - 127).
-      int _tpc;               ///< tonal pitch class
-
       int _line;              ///< y-Position; 0 - top line.
-      int _staffMove;         ///< -1, 0, +1, used for crossbeaming
 
-      int _userAccidental;    ///< editorial accidental type (0-15)
+      char _pitch;             ///< Note pitch as midi value (0 - 127).
+      char _tpc;               ///< tonal pitch class
+      char _staffMove;         ///< -1, 0, +1, used for crossbeaming
+      char _userAccidental;    ///< editorial accidental type (0-15)
+
       Accidental* _accidental;
-
-      int _head;              ///< note head symbol number
-      int _headGroup;
-      bool _mirror;           ///< True if note is mirrored at stem.
       ElementList _el;        ///< fingering, other text, symbols or images
-
       Tie* _tieFor;
       Tie* _tieBack;
 
       int _lineOffset;        ///< Used during mouse dragging.
+
+      char _head;              ///< note head symbol number
+      char _headGroup;
+      bool _mirror;           ///< True if note is mirrored at stem.
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads are not shown

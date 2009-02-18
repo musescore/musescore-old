@@ -2686,8 +2686,10 @@ void Measure::read(QDomElement e, int idx)
                         measure->add(t);
                         }
                   else {
-                        if (st == TEXT_MEASURE_NUMBER)
+                        if (st == TEXT_MEASURE_NUMBER) {
                               t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                              t->setTick(-1);   // layout to start of measure
+                              }
                         else
                               printf("read text subtype %d\n", st);
                         add(t);

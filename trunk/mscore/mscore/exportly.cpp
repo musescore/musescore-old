@@ -760,7 +760,7 @@ void ExportLy::handleElement(Element* el, bool start)
 	      break;
 	    default:
 	      printf("InstructionHandler::handleElement: direction type %s at tick %d not implemented\n",
-		     elementNames[instruction->type()], anchors[i].tick);
+		     Element::name(instruction->type()), anchors[i].tick);
 	      break;
 	    }
 	  removeAnchor(i);
@@ -904,7 +904,7 @@ void ExportLy::buildInstructionList(Part* p, int strack, int etrack)
 	default:
 	  // all others silently ignored
 	  // printf("InstructionHandler::buildInstructionList: direction type %s not implemented\n",
-	  //        elementNames[instruction->type()]);
+	  //        Element::name(instruction->type()));
 	  break;
 	}
     }// end foreach element....

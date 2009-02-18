@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
@@ -65,15 +67,20 @@
         <source>French Violin Clef</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>@default</name>
     <message>
         <source>system</source>
         <translation type="unfinished">sistema</translation>
     </message>
     <message>
         <source>Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dansk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nederlands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -85,7 +92,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>EspaÃ±ol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FranÃ§ais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Galego</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deutsch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italiano</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brasilian PortuguÃªs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TÃ¼rkÃ§e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -106,50 +149,6 @@
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dansk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Espa&#xc3;&#xb1;ol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fran&#xc3;&#xa7;ais</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Italiano</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Portugu&#xc3;&#xaa;s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -314,8 +313,39 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Chord</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Acorde</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Plica</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Corchete</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Nota de adorno</translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Invertir a plica</translation>
+    </message>
+    <message>
         <source>Notes:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Notas:</translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Liñas de axuda:</translation>
     </message>
 </context>
 <context>
@@ -1698,66 +1728,82 @@ fallou:</translation>
     </message>
     <message>
         <source>Element</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Elemento</translation>
     </message>
     <message>
         <source>selected</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">seleccionado</translation>
     </message>
     <message>
         <source>generated</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">xerado</translation>
     </message>
     <message>
         <source>visible</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">visíbel</translation>
     </message>
     <message>
         <source>system</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">sistema</translation>
     </message>
     <message>
         <source>subtype</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">subtipo</translation>
     </message>
     <message>
         <source>Voice</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Voz</translation>
     </message>
     <message>
         <source>Staff</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Pentagrama</translation>
     </message>
     <message>
         <source>Time</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Len</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Lon</translation>
     </message>
     <message>
         <source>Color</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Cor</translation>
     </message>
     <message>
         <source>Pos</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Pos</translation>
     </message>
     <message>
         <source>CPos</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">PosC</translation>
     </message>
     <message>
         <source>Offset</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Desprazamento</translation>
     </message>
     <message>
         <source>BBox</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">BBox</translation>
     </message>
     <message>
         <source>Mag</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Aumentar</translation>
     </message>
 </context>
@@ -4922,62 +4968,77 @@ before closing?</source>
     </message>
     <message>
         <source>Note</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Nota</translation>
     </message>
     <message>
         <source>Pitch</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Altura</translation>
     </message>
     <message>
         <source>Head</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Cabeza</translation>
     </message>
     <message>
         <source>Subelements:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Subelementos:</translation>
     </message>
     <message>
         <source>TPC</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">TPC</translation>
     </message>
     <message>
         <source>HGrp.</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">HGrp.</translation>
     </message>
     <message>
         <source>Line</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Liña</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Ligar para diante.</translation>
     </message>
     <message>
         <source>Move</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Mover</translation>
     </message>
     <message>
         <source>Tie Back</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Ligar para tras</translation>
     </message>
     <message>
         <source>Accidental</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Alteración</translation>
     </message>
     <message>
         <source>Mirror Head</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Reflectir a cabeza</translation>
     </message>
     <message>
         <source>S-Channel</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Canal S</translation>
     </message>
     <message>
         <source>Hidden</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Acochado</translation>
     </message>
     <message>
         <source>User-Acc</source>
+        <comment>do not translate</comment>
         <translation type="unfinished">Usuario-Acc</translation>
     </message>
 </context>
@@ -5862,11 +5923,11 @@ before closing?</source>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace 1/2 ... with ½ ...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6567,22 +6628,6 @@ fallou:</translation>
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>Text</source>
-        <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <translation>Texto:</translation>
-    </message>
-    <message>
-        <source>Offset:</source>
-        <translation>Desprazamento:</translation>
-    </message>
-    <message>
-        <source>Abs.:</source>
-        <translation>Abs.:</translation>
-    </message>
-    <message>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
@@ -6595,11 +6640,33 @@ fallou:</translation>
         <translation>Espazo</translation>
     </message>
     <message>
+        <source>Text</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Texto</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Texto:</translation>
+    </message>
+    <message>
+        <source>Offset:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Desprazamento:</translation>
+    </message>
+    <message>
+        <source>Abs.:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Abs.:</translation>
+    </message>
+    <message>
         <source>Rel.:</source>
-        <translation>Rel.:</translation>
+        <comment>do not translate</comment>
+        <translation type="unfinished">Rel.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
+        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
