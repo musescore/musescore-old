@@ -420,18 +420,22 @@ void VBox::propertyAction(const QString& cmd)
       if (cmd == "title-text") {
             s = new Text(score());
             s->setSubtype(TEXT_TITLE);
+            s->setTextStyle(TEXT_STYLE_TITLE);
             }
       else if (cmd == "subtitle-text") {
             s = new Text(score());
             s->setSubtype(TEXT_SUBTITLE);
+            s->setTextStyle(TEXT_STYLE_SUBTITLE);
             }
       else if (cmd == "composer-text") {
             s = new Text(score());
             s->setSubtype(TEXT_COMPOSER);
+            s->setTextStyle(TEXT_STYLE_COMPOSER);
             }
       else if (cmd == "poet-text") {
             s = new Text(score());
             s->setSubtype(TEXT_POET);
+            s->setTextStyle(TEXT_STYLE_POET);
             }
       else if (cmd == "insert-hbox") {
             s = new HBox(score());
