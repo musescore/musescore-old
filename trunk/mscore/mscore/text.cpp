@@ -104,7 +104,7 @@ bool TextBase::isSimpleText(TextStyle* style) const
                   return false;
             cf = i.fragment().charFormat();
             }
-      if (cf.font() == style->font())
+      if (style && (cf.font() == style->font()))
             return true;
       return false;
       }
