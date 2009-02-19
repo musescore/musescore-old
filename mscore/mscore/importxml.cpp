@@ -446,7 +446,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     if (tag == "system-margins")
                                           ;
                                     else if (tag == "system-distance") {
-                                          score->style()->systemDistance = val;
+                                          score->setStyle(ST_systemDistance, StyleVal(val));
                                           printf("system distance %f\n", val.val());
                                           }
                                     else if (tag == "top-system-distance")
@@ -460,7 +460,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     QString tag(eee.tagName());
                                     Spatium val(eee.text().toDouble() / 10.0);
                                     if (tag == "staff-distance")
-                                          score->style()->staffDistance = val;
+                                          score->setStyle(ST_staffDistance, StyleVal(val));
                                     else
                                           domError(eee);
                                     }
@@ -2646,7 +2646,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   }
             else {
                   printf("'kind: <%s> not found in harmony data base\n", qPrintable(kind));
-                  QString s = tpc2name(ha->rootTpc(), score->style()->useGermanNoteNames) + kindText;
+                  QString s = tpc2name(ha->rootTpc(), score->style(ST_useGermanNoteNames).toBool()) + kindText;
                   ha->setText(s);
                   }
             }

@@ -194,7 +194,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
       {
       Part* prt         = part(staffIdx);
       Instrument* instr = prt->instrument();
-      int pitchOffset   = _style->concertPitch ? 0 : instr->pitchOffset;
+      int pitchOffset   = styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
@@ -217,7 +217,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                         continue;
                         }
 
-                  int gateTime    = _style->gateTime;  // 100 - legato (100%)
+                  int gateTime    = _style[ST_gateTime].toInt();  // 100 - legato (100%)
                   int tick        = chord->tick();
                   if (playExpandRepeats && !_foundPlayPosAfterRepeats && tick == playPos()) {
                         setPlayPos(tick + tickOffset);
@@ -238,7 +238,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                               int tick1 = slur->tick();
                               int tick2 = slur->tick2();
                               if (tick >= tick1 && tick < tick2 && slur->track() == track) {
-                                    gateTime = _style->slurGateTime;
+                                    gateTime = _style[ST_slurGateTime].toInt();
                                     }
 
                               }
@@ -246,10 +246,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                   foreach(Articulation* a, *chord->getArticulations()) {
                         switch(a->subtype()) {
                               case TenutoSym:
-                                    gateTime = _style->tenutoGateTime;
+                                    gateTime = _style[ST_tenutoGateTime].toInt();
                                     break;
                               case StaccatoSym:
-                                    gateTime = _style->staccatoGateTime;
+                                    gateTime = _style[ST_staccatoGateTime].toInt();
                                     break;
                               default:
                                     break;

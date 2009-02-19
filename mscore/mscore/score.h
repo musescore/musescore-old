@@ -29,6 +29,7 @@
 #include "undo.h"
 #include "input.h"
 #include "globals.h"
+#include "style.h"
 
 class System;
 class TextStyle;
@@ -70,7 +71,6 @@ class Capella;
 class CapVoice;
 class TextC;
 
-struct Style;
 struct SigEvent;
 
 extern bool showRubberBand;
@@ -185,7 +185,7 @@ class Score : public QObject {
 
       QList<Excerpt*> _excerpts;
 
-      Style* _style;
+      Style _style;
       QVector<TextStyle*> _textStyles;
 
       QFileInfo info;
@@ -382,7 +382,7 @@ class Score : public QObject {
       void harmonyEndEdit();
 
    public:
-      Score();
+      Score(const Style&);
       ~Score();
 
       Score* clone();
@@ -617,8 +617,13 @@ class Score : public QObject {
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
 
-      Style* style() const          { return _style; }
-      void setStyle(const Style& s);
+      const Style& style() const            { return _style;                   }
+      void setStyle(const Style& s)         { _style = s;                      }
+      StyleVal style(STYLE_TYPE type) const { return _style[type];             }
+      Spatium styleS(STYLE_TYPE type) const { return _style[type].toSpatium(); }
+      bool styleB(STYLE_TYPE type) const    { return _style[type].toBool();    }
+      double styleD(STYLE_TYPE type) const  { return _style[type].toDouble();  }
+      void setStyle(STYLE_TYPE t, StyleVal v) { _style[t] = v;                 }
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);

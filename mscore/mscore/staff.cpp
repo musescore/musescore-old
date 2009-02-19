@@ -445,7 +445,7 @@ double Staff::height() const
 
 double Staff::mag() const
       {
-      return _small ? score()->style()->smallStaffMag : 1.0;
+      return _small ? score()->styleD(ST_smallStaffMag) : 1.0;
       }
 
 //---------------------------------------------------------

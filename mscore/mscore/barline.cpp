@@ -92,7 +92,7 @@ void BarLine::getY(double* y1, double* y2) const
 
 void BarLine::draw(QPainter& p) const
       {
-      qreal lw = point(score()->style()->barWidth) * mag();
+      qreal lw = score()->style(ST_barWidth).toSpatium().point() * mag();
       qreal y1, y2;
       getY(&y1, &y2);
 
@@ -121,8 +121,8 @@ void BarLine::draw(QPainter& p) const
 
             case END_BAR:
                   {
-                  qreal lw2 = point(score()->style()->endBarWidth) * mag();
-                  qreal d   = point(score()->style()->endBarDistance) * mag();
+                  qreal lw2 = point(score()->style(ST_endBarWidth).toSpatium()) * mag();
+                  qreal d   = point(score()->style(ST_endBarDistance).toSpatium()) * mag();
 
                   p.drawLine(QLineF(lw * .5, y1, lw * .5, y2));
                   pen.setWidthF(lw2);
@@ -135,8 +135,8 @@ void BarLine::draw(QPainter& p) const
 
             case DOUBLE_BAR:
                   {
-                  lw      = point(score()->style()->doubleBarWidth) * mag();
-                  qreal d = point(score()->style()->doubleBarDistance) * mag();
+                  lw      = point(score()->style(ST_doubleBarWidth).toSpatium()) * mag();
+                  qreal d = point(score()->style(ST_doubleBarDistance).toSpatium()) * mag();
 
                   pen.setWidthF(lw);
                   p.setPen(pen);
@@ -150,9 +150,9 @@ void BarLine::draw(QPainter& p) const
 
             case START_REPEAT:
                   {
-                  qreal lw2  = point(score()->style()->endBarWidth) * mag();
-                  qreal lw22 = point(score()->style()->endBarWidth) * .5 * mag();
-                  qreal d1   = point(score()->style()->endBarDistance) * mag();
+                  qreal lw2  = point(score()->style(ST_endBarWidth).toSpatium()) * mag();
+                  qreal lw22 = point(score()->style(ST_endBarWidth).toSpatium()) * .5 * mag();
+                  qreal d1   = point(score()->style(ST_endBarDistance).toSpatium()) * mag();
                   qreal dotw = symbols[dotSym].width(mag());
                   qreal x2   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
@@ -175,9 +175,9 @@ void BarLine::draw(QPainter& p) const
 
             case END_REPEAT:
                   {
-                  qreal lw2  = point(score()->style()->endBarWidth) * mag();
-                  qreal lw22 = point(score()->style()->endBarWidth) * .5 * mag();
-                  qreal d1   = point(score()->style()->endBarDistance) * mag();
+                  qreal lw2  = point(score()->style(ST_endBarWidth).toSpatium()) * mag();
+                  qreal lw22 = point(score()->style(ST_endBarWidth).toSpatium()) * .5 * mag();
+                  qreal d1   = point(score()->style(ST_endBarDistance).toSpatium()) * mag();
 
                   qreal dotw = symbols[dotSym].width(mag());
                   qreal x0   =  dotw/2;
@@ -202,9 +202,9 @@ void BarLine::draw(QPainter& p) const
 
             case END_START_REPEAT:
                   {
-                  qreal lw2  = point(score()->style()->endBarWidth) * mag();
-                  qreal lw22 = point(score()->style()->endBarWidth) * .5 * mag();
-                  qreal d1   = point(score()->style()->endBarDistance) * mag();
+                  qreal lw2  = point(score()->style(ST_endBarWidth).toSpatium()) * mag();
+                  qreal lw22 = point(score()->style(ST_endBarWidth).toSpatium()) * .5 * mag();
+                  qreal d1   = point(score()->style(ST_endBarDistance).toSpatium()) * mag();
 
                   qreal dotw = symbols[dotSym].width(mag());
                   qreal x0   =  dotw/2;
@@ -272,25 +272,25 @@ QRectF BarLine::bbox() const
       {
       qreal y1, y2;
       getY(&y1, &y2);
-      Spatium w = score()->style()->barWidth * mag();
+      Spatium w = score()->style(ST_barWidth).toSpatium() * mag();
       qreal dw  = 0.0;
 
       switch(subtype()) {
             case DOUBLE_BAR:
-                  w  = (score()->style()->doubleBarWidth * 2 + score()->style()->doubleBarDistance) * mag();
+                  w  = (score()->style(ST_doubleBarWidth).toSpatium() * 2 + score()->style(ST_doubleBarDistance).toSpatium()) * mag();
                   dw = point(w);
                   break;
             case START_REPEAT:
             case END_REPEAT:
-                  w  += (score()->style()->endBarWidth + 2 * score()->style()->endBarDistance) * mag();
+                  w  += (score()->style(ST_endBarWidth).toSpatium() + 2 * score()->style(ST_endBarDistance).toSpatium()) * mag();
                   dw = point(w) + symbols[dotSym].width(mag());
                   break;
             case END_BAR:
-                  w += (score()->style()->endBarWidth + score()->style()->endBarDistance) * mag();
+                  w += (score()->style(ST_endBarWidth).toSpatium() + score()->style(ST_endBarDistance).toSpatium()) * mag();
                   dw = point(w);
                   break;
             case  END_START_REPEAT:
-                  w  += (score()->style()->endBarWidth + 3 * score()->style()->endBarDistance) * mag();
+                  w  += (score()->style(ST_endBarWidth).toSpatium() + 3 * score()->style(ST_endBarDistance).toSpatium()) * mag();
                   dw = point(w) + 2 * symbols[dotSym].width(mag());
                   break;
             case BROKEN_BAR:
@@ -361,7 +361,7 @@ bool BarLine::startEdit(Viewer*, const QPointF&)
 void BarLine::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      qreal lw = point(score()->style()->barWidth);
+      qreal lw = score()->style(ST_barWidth).toSpatium().point();
       qreal y1, y2;
       getY(&y1, &y2);
       grip[0].translate(QPointF(lw * .5, y2) + canvasPos());

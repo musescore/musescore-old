@@ -314,7 +314,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                               break;
                         }
                   }
-            bool needKeysig = keyIdx && (isFirstSystem || _score->style()->genKeysig);
+            bool needKeysig = keyIdx && (isFirstSystem || _score->styleB(ST_genKeysig));
             if (needKeysig && !hasKeysig) {
                   //
                   // create missing key signature
@@ -335,7 +335,7 @@ void ScoreLayout::processSystemHeader(Measure* m, bool isFirstSystem)
                   seg->setElement(track, 0);    // TODO: delete element
                   m->setDirty();
                   }
-            bool needClef = isFirstSystem || _score->style()->genClef;
+            bool needClef = isFirstSystem || _score->styleB(ST_genClef);
             if (needClef) {
                   int idx = staff->clefList()->clef(tick);
                   if (!hasClef) {
@@ -415,8 +415,8 @@ void ScoreLayout::getCurPage()
 bool ScoreLayout::layoutPage()
       {
       Page* page = _pages[curPage];
-      const double slb = point(score()->style()->staffLowerBorder);
-      const double sub = point(score()->style()->staffUpperBorder);
+      const double slb = point(score()->styleS(ST_staffLowerBorder));
+      const double sub = point(score()->styleS(ST_staffUpperBorder));
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -456,11 +456,11 @@ bool ScoreLayout::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += bh + score()->style()->boxSystemDistance.point();
+                  y += bh + score()->styleS(ST_boxSystemDistance).point();
                   nettoHeight += bh;
                   if (y > ey)
                         break;
-                  nettoHeight += score()->style()->boxSystemDistance.point();
+                  nettoHeight += score()->styleS(ST_boxSystemDistance).point();
                   }
             else {
                   if (firstSystemOnPage) {
@@ -508,10 +508,10 @@ bool ScoreLayout::layoutPage()
 
       double ph = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
-      if (restHeight > (ph * (1.0 - score()->style()->pageFillLimit)))
+      if (restHeight > (ph * (1.0 - score()->styleD(ST_pageFillLimit))))
             return true;
 
-      double systemDistance = score()->style()->systemDistance.point();
+      double systemDistance = score()->styleS(ST_systemDistance).point();
       double extraDist = (rows > 1) ? ((ph - nettoHeight + systemDistance) / (rows - 1.0)) : 0.0;
       y = 0;
       int n = page->systems()->size();
@@ -549,7 +549,7 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m)
             m = static_cast<Measure*>(mb);
             }
       m = sm;
-      if (n >= score()->style()->minEmptyMeasures) {
+      if (n >= score()->styleD(ST_minEmptyMeasures)) {
             for (int i = 0; i < (n-1); ++i) {
                   m->setMultiMeasure(-1);
                   m = static_cast<Measure*>(m->next());
@@ -587,7 +587,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       for (; curMeasure;) {
             if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
-                  if (score()->style()->createMultiMeasureRests)
+                  if (score()->styleB(ST_createMultiMeasureRests))
                         curMeasure = skipEmptyMeasures(m);
                   else
                         m->setMultiMeasure(0);
@@ -642,11 +642,11 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
                   m->layoutX(this, 1.0);
                   ww      = m->layoutWidth().stretchable;
-                  stretch = m->userStretch() * score()->style()->measureSpacing;
+                  stretch = m->userStretch() * score()->styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < point(score()->style()->minMeasureWidth))
-                        ww = point(score()->style()->minMeasureWidth);
+                  if (ww < point(score()->styleS(ST_minMeasureWidth)))
+                        ww = point(score()->styleS(ST_minMeasureWidth));
                   isFirstMeasure = false;
                   }
 
@@ -677,7 +677,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             int nstaves   = p->nstaves();
             bool hidePart = false;
 
-            if (score()->style()->hideEmptyStaves && (staves > 1)) {
+            if (score()->styleB(ST_hideEmptyStaves) && (staves > 1)) {
                   hidePart = true;
                   for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
                         foreach(MeasureBase* m, system->measures()) {
@@ -739,7 +739,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       //
       // dont stretch last system row, if minWidth is <= lastSystemFillLimit
       //
-      if (curMeasure == 0 && ((minWidth / rowWidth) <= score()->style()->lastSystemFillLimit))
+      if (curMeasure == 0 && ((minWidth / rowWidth) <= score()->styleD(ST_lastSystemFillLimit)))
             raggedRight = true;
 
       //-------------------------------------------------------
@@ -764,7 +764,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             SigEvent sig1   = _score->sigmap->timesig(tick - 1);
             SigEvent sig2   = _score->sigmap->timesig(tick);
 
-            if (score()->style()->genCourtesyTimesig && !sig1.nominalEqual(sig2)) {
+            if (score()->styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
                   while (lm && lm->type() != MEASURE)
                         lm = lm->prev();
                   if (lm) {
@@ -1054,11 +1054,11 @@ bool ScoreLayout::doReLayout()
                   measure->layoutBeams1(this);
                   measure->layoutX(this, 1.0);
                   ww      = measure->layoutWidth().stretchable;
-                  double stretch = measure->userStretch() * score()->style()->measureSpacing;
+                  double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
 
                   ww *= stretch;
-                  if (ww < point(score()->style()->minMeasureWidth))
-                        ww = point(score()->style()->minMeasureWidth);
+                  if (ww < point(score()->styleS(ST_minMeasureWidth)))
+                        ww = point(score()->styleS(ST_minMeasureWidth));
                   }
             minWidth += ww;
             }
@@ -1073,11 +1073,11 @@ bool ScoreLayout::doReLayout()
             Measure* measure = static_cast<Measure*>(m);
             measure->layoutX(this, 1.0);
             double ww      = measure->layoutWidth().stretchable;
-            double stretch = measure->userStretch() * score()->style()->measureSpacing;
+            double stretch = measure->userStretch() * score()->styleD(ST_measureSpacing);
 
             ww *= stretch;
-            if (ww < point(score()->style()->minMeasureWidth))
-                  ww = point(score()->style()->minMeasureWidth);
+            if (ww < point(score()->styleS(ST_minMeasureWidth)))
+                  ww = point(score()->styleS(ST_minMeasureWidth));
             if ((minWidth + ww) <= sysWidth)    // if another measure fits, do full layout
                   return false;
             }

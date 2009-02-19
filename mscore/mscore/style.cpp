@@ -32,6 +32,99 @@ Style* style;
 double _spatium;
 double _spatiumMag;
 QVector<TextStyle> defaultTextStyles;
+Style defaultStyle;
+
+//---------------------------------------------------------
+//   styleTypes
+//---------------------------------------------------------
+
+StyleType styleTypes[] = {
+      StyleType("staffUpperBorder",        ST_SPATIUM),
+      StyleType("staffLowerBorder",        ST_SPATIUM),
+      StyleType("staffDistance",           ST_SPATIUM),
+      StyleType("accoladeDistance",        ST_SPATIUM),
+      StyleType("systemDistance",          ST_SPATIUM),
+      StyleType("lyricsDistance",          ST_SPATIUM),
+      StyleType("lyricsMinBottomDistance", ST_SPATIUM),
+      StyleType("systemBoxDistance",       ST_SPATIUM),     // dist. between staff and vertical box
+      StyleType("boxSystemDistance",       ST_SPATIUM),     // dist. between vertical box and next system
+      StyleType("minMeasureWidth",         ST_SPATIUM),
+      StyleType("barWidth",                ST_SPATIUM),
+      StyleType("doubleBarWidth",          ST_SPATIUM),
+      StyleType("endBarWidth",             ST_SPATIUM),
+      StyleType("doubleBarDistance",       ST_SPATIUM),
+      StyleType("endBarDistance",          ST_SPATIUM),
+      StyleType("bracketWidth",            ST_SPATIUM),     // system bracket width
+      StyleType("bracketDistance",         ST_SPATIUM),     // system bracket distance
+      StyleType("clefLeftMargin",          ST_SPATIUM),
+      StyleType("keysigLeftMargin",        ST_SPATIUM),
+      StyleType("timesigLeftMargin",       ST_SPATIUM),
+      StyleType("clefKeyRightMargin",      ST_SPATIUM),
+      StyleType("stemWidth",               ST_SPATIUM),
+      StyleType("beginRepeatLeftMargin",   ST_SPATIUM),
+      StyleType("minNoteDistance",         ST_SPATIUM),
+      StyleType("barNoteDistance",         ST_SPATIUM),
+      StyleType("noteBarDistance",         ST_SPATIUM),
+      StyleType("measureSpacing",          ST_DOUBLE),
+      StyleType("staffLineWidth",          ST_SPATIUM),
+      StyleType("ledgerLineWidth",         ST_SPATIUM),
+      StyleType("akkoladeWidth",           ST_SPATIUM),
+      StyleType("prefixDistance",          ST_SPATIUM),
+      StyleType("prefixNoteDistance",      ST_SPATIUM),
+      StyleType("beamWidth",               ST_SPATIUM),
+      StyleType("beamDistance",            ST_DOUBLE),        // in beamWidth units
+      StyleType("beamMinLen",              ST_SPATIUM),           // len for broken beams
+      StyleType("beamMinSlope",            ST_DOUBLE),
+      StyleType("beamMaxSlope",            ST_DOUBLE),
+      StyleType("maxBeamTicks",            ST_INT),
+      StyleType("dotNoteDistance",         ST_SPATIUM),
+      StyleType("dotRestDistance",         ST_SPATIUM),
+      StyleType("dotDotDistance",          ST_SPATIUM),
+      StyleType("propertyDistanceHead",    ST_SPATIUM),  // note property to note head
+      StyleType("propertyDistanceStem",    ST_SPATIUM),  // note property to note stem
+      StyleType("propertyDistance",        ST_SPATIUM),      // note property to note property
+      StyleType("pageFillLimit",           ST_DOUBLE),         // 0-1.0
+      StyleType("lastSystemFillLimit",     ST_DOUBLE),
+      StyleType("hairpinHeight",           ST_SPATIUM),
+      StyleType("hairpinContHeight",       ST_SPATIUM),
+      StyleType("hairpinWidth",            ST_SPATIUM),
+      StyleType("showPageNumber",          ST_BOOL),
+      StyleType("showPageNumberOne",       ST_BOOL),
+      StyleType("pageNumberOddEven",       ST_BOOL),
+      StyleType("showMeasureNumber",       ST_BOOL),
+      StyleType("showMeasureNumberOne",    ST_BOOL),
+      StyleType("measureNumberInterval",   ST_INT),
+      StyleType("measureNumberSystem",     ST_BOOL),
+      StyleType("measureNumberAllStaffs",  ST_BOOL),
+      StyleType("smallNoteMag",            ST_DOUBLE),
+      StyleType("graceNoteMag",            ST_DOUBLE),
+      StyleType("smallStaffMag",           ST_DOUBLE),
+      StyleType("smallClefMag",            ST_DOUBLE),
+      StyleType("genClef",                 ST_BOOL),           // create clef for all systems, not only for first
+      StyleType("genKeysig",               ST_BOOL),         // create key signature for all systems
+      StyleType("genTimesig",              ST_BOOL),
+      StyleType("genCourtesyTimesig",      ST_BOOL),
+      StyleType("useGermanNoteNames",      ST_BOOL),
+      StyleType("chordNamesUseSymbols",    ST_BOOL),
+      StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
+      StyleType("createMultiMeasureRests", ST_BOOL),
+      StyleType("minEmptyMeasures",        ST_INT),         // minimum number of empty measures for multi measure rest
+      StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
+      StyleType("hideEmptyStaves",         ST_BOOL),
+      StyleType("stemDir1",                ST_DIRECTION),
+      StyleType("stemDir2",                ST_DIRECTION),
+      StyleType("stemDir3",                ST_DIRECTION),
+      StyleType("stemDir4",                ST_DIRECTION),
+
+      //---------------------------------------------------------
+      //   PlayStyle
+      //---------------------------------------------------------
+
+      StyleType("gateTime",                ST_INT),           // 0-100%
+      StyleType("tenutoGateTime",          ST_INT),
+      StyleType("staccatoGateTime",        ST_INT),
+      StyleType("slurGateTime",            ST_INT)
+      };
 
 //---------------------------------------------------------
 //   textStyles
@@ -152,103 +245,98 @@ const TextStyle defaultTextStyleArray[] = {
 #undef OS
 
 //---------------------------------------------------------
-//   defaultStyle
+//   Style
 //---------------------------------------------------------
 
-Style defaultStyle = {
-      Spatium(7.0),   // staffUpperBorder
-      Spatium(7.0),   // staffLowerBorder
-      Spatium(6.5),   // staffDistance
-      Spatium(6.5),   // accoladeDistance
-      Spatium(9.25),  // systemDistance
-      Spatium(2),     // lyricsDistance
-      Spatium(2),     // lyricsMinBottomDistance
-      Spatium(7.0),   // dist. between system and vertical box
-      Spatium(1.0),   // dist. between vertical box and next system
+Style::Style()
+   : QVector<StyleVal>(ST_STYLES)
+      {
+      StyleVal values[] = {
+            StyleVal(Spatium(7.0)),
+            StyleVal(Spatium(7.0)),
+            StyleVal(Spatium(6.5)),
+            StyleVal(Spatium(6.5)),
+            StyleVal(Spatium(9.25)),
+            StyleVal(Spatium(2)),
+            StyleVal(Spatium(2)),
+            StyleVal(Spatium(7.0)),
+            StyleVal(Spatium(1.0)),
+            StyleVal(Spatium(4.0)),
+            StyleVal(Spatium(0.16)),
+            StyleVal(Spatium(0.16)),
+            StyleVal(Spatium(0.3)),
+            StyleVal(Spatium(0.30)),
+            StyleVal(Spatium(0.30)),
+            StyleVal(Spatium(0.35)),
+            StyleVal(Spatium(0.25)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(1.75)),
+            StyleVal(Spatium(0.13)),
+            StyleVal(Spatium(1.0)),
+            StyleVal(Spatium(0.4)),
+            StyleVal(Spatium(1.5)),
+            StyleVal(Spatium(1.0)),
+            StyleVal(1.2),
+            StyleVal(Spatium(0.08)),
+            StyleVal(Spatium(0.08)),
+            StyleVal(Spatium(1.6)),
+            StyleVal(Spatium(0.13)),
+            StyleVal(Spatium(0.22)),
+            StyleVal(Spatium(0.48)),
+            StyleVal(0.5),
+            StyleVal(Spatium(1.25)),
+            StyleVal(0.05),
+            StyleVal(0.2),
+            StyleVal(division),
+            StyleVal(Spatium(0.35)),
+            StyleVal(Spatium(0.25)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.25)),
+            StyleVal(0.7),
+            StyleVal(0.3),
+            StyleVal(Spatium(1.2)),
+            StyleVal(Spatium(0.5)),
+            StyleVal(Spatium(0.13)),
+            StyleVal(true),
+            StyleVal(false),
+            StyleVal(true),
+            StyleVal(true),
+            StyleVal(false),
+            StyleVal(5),
+            StyleVal(true),
+            StyleVal(false),
+            StyleVal(0.7),
+            StyleVal(0.7),
+            StyleVal(0.7),
+            StyleVal(0.8),
+            StyleVal(true),
+            StyleVal(true),
+            StyleVal(true),
+            StyleVal(true),
+            StyleVal(false),
+            StyleVal(false),
+            StyleVal(false),
+            StyleVal(false),
+            StyleVal(2),
+            StyleVal(Spatium(4)),
+            StyleVal(false),
+            StyleVal(UP),
+            StyleVal(DOWN),
+            StyleVal(UP),
+            StyleVal(DOWN),
+            StyleVal(85),
+            StyleVal(100),
+            StyleVal(50),
+            StyleVal(100)
+            };
 
-      Spatium(4.0),   // minMeasureWidth  12.0
-      Spatium(0.16),  // barWidth;
-      Spatium(0.16),  // doubleBarWidth;
-      Spatium(0.3),   // endBarWidth
-      Spatium(0.30),  // doubleBarDistance;
-      Spatium(0.30),  // endBarDistance
-      Spatium(0.35),  // system bracket width
-      Spatium(0.25),  // system bracket distance
-
-      Spatium(0.5),   // clefLeftMargin;
-      Spatium(0.5),   // keysig left margin
-      Spatium(0.5),   // timesigLeftMargin
-      Spatium(1.75),  // clef/key/sig right margin
-
-      Spatium(0.13),  // stemWidth = 1.3 * staffLineWidth
-      Spatium(1.0),   // beginRepeatLeftMargin
-
-      Spatium(0.4),   // minNoteDistance
-      Spatium(1.5),   // barNoteDistance
-      Spatium(1.0),   // noteBarDistance
-
-      1.2,              // measureSpacing
-
-      Spatium(0.08),    // staff line width
-      Spatium(0.08),    // ledgerLineWidth;
-      Spatium(1.6),     // akkoladeWidth;
-      Spatium(0.13),    // prefixDistance
-
-      Spatium(0.22),    // prefixNoteDistance
-
-      Spatium(0.48),    // beamWidth
-      0.5,              // beamDistance, units of beamWidth
-      Spatium(1.25),    // beamMinLen, len for broken beams
-      0.05,             // beamMinSlope
-      0.2,              // beamMaxSlope
-      division,         //  maxBeamTicks : 1/4 or 1/2 groups
-      Spatium(0.35),    // dotNoteDistance
-      Spatium(0.25),    // dotRestDistance
-      Spatium(0.5),     // dotDotDistance
-
-      Spatium(0.5),     // propertyDistanceHead
-      Spatium(0.5),     // propertyDistanceStem; note articulation to note stem
-      Spatium(0.25),    // propertyDistance; note articulation to note articulation
-
-      0.7,              // pageFillLimit
-      0.3,              // lastSystemFillLimit
-      Spatium(1.2),     // hairpinHeight
-      Spatium(0.5),     // hairpinContHeight
-      Spatium(0.13),    // hairpinWidth
-
-      true,             // showPageNumber
-      false,            // showPageNumberOne
-      true,             // pageNumberOddEven
-      true,             // showMeasureNumber
-      false,            // showMeasureNumberOne
-      5,                // measureNumberInterval;
-      true,             // measureNumberSystem
-      false,            // showMeasureNumberAllStaffs
-      0.7,              // smallNoteMag
-      0.7,              // graceNoteMag
-      0.7,              // smallStaffMag
-      0.8,              // smallClefMag
-      true,             // genClef
-      true,             // genKeySig
-      true,             // genTimesig
-      true,             // genCourtesyTimesig
-
-      false,            // use german note names
-      false,            // use symbols in chord names
-      false,            // display in concert pitch
-      false,            // create multi measure rests
-      2,                // minimum number of empty measures for multi measure rest
-      Spatium(4),       // minimum width of multi measure rest
-
-      false,            // hide empty staves
-
-      { UP, DOWN, UP, DOWN }, // stem direction in multi voice context
-
-      // play style
-      85,               // gateTime
-      100,              // tenutoGateTime
-      50,               // staccatoGateTime
-      100               // slurGateTime
+      StyleVal* d = data();
+      for (int idx = 0; idx < ST_STYLES; ++idx)
+            d[idx] = values[idx];
       };
 
 //---------------------------------------------------------
@@ -400,7 +488,7 @@ void TextStyle::read(QDomElement e)
 //   load
 //---------------------------------------------------------
 
-void Style::load(QDomElement e, int version)
+void Style::load(QDomElement e, int /*version*/)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -408,293 +496,63 @@ void Style::load(QDomElement e, int version)
             int i    = val.toInt();
             double d = val.toDouble();
 
-            if (tag == "staffUpperBorder")
-                  staffUpperBorder = Spatium(d);
-            else if (tag == "staffLowerBorder")
-                  staffLowerBorder = Spatium(d);
-            else if (tag == "staffDistance")
-                  staffDistance = Spatium(d);
-            else if (tag == "systemDistance")
-                  systemDistance = Spatium(d);
-            else if (tag == "lyricsDistance")
-                  lyricsDistance = Spatium(d);
-            else if (tag == "lyricsMinBottomDistance")
-                  lyricsMinBottomDistance = Spatium(d);
-            else if (tag == "systemFrameDistance")
-                  systemBoxDistance = Spatium(d);
-            else if (tag == "frameSystemDistance")
-                  boxSystemDistance = Spatium(d);
-            else if (tag == "minMeasureWidth")
-                  minMeasureWidth = Spatium(d);
-            else if (tag == "barWidth")
-                  barWidth = Spatium(d);
-            else if (tag == "doubleBarWidth")
-                  doubleBarWidth = Spatium(d);
-            else if (tag == "endBarWidth")
-                  endBarWidth = Spatium(d);
-            else if (tag == "doubleBarDistance")
-                  doubleBarDistance = Spatium(d);
-            else if (tag == "endBarDistance")
-                  endBarDistance = Spatium(d);
-            else if (tag == "bracketWidth")
-                  bracketWidth = Spatium(d);
-            else if (tag == "bracketDistance")
-                  bracketDistance = Spatium(d);
-            else if (tag == "clefLeftMargin")
-                  clefLeftMargin = Spatium(d);
-            else if (tag == "keysigLeftMargin")
-                  keysigLeftMargin = Spatium(d);
-            else if (tag == "timesigLeftMargin")
-                  timesigLeftMargin = Spatium(d);
-            else if (tag == "clefKeyRightMargin")
-                  clefKeyRightMargin = Spatium(d);
-            else if (tag == "stemWidth")
-                  stemWidth = Spatium(d);
-            else if (tag == "beginRepeatLeftMargin")
-                  beginRepeatLeftMargin = Spatium(d);
-            else if (tag == "minNoteDistance")
-                  minNoteDistance = Spatium(d);
-            else if (tag == "spacing16")        // obsolete
-                  ;
-            else if (tag == "spacing8")         // obsolete
-                  ;
-            else if (tag == "spacing4")         // obsolete
-                  ;
-            else if (tag == "spacing2")         // obsolete
-                  ;
-            else if (tag == "measureSpacing")
-                  measureSpacing = d;
-            else if (tag == "barNoteDistance")
-                  barNoteDistance = Spatium(d);
-            else if (tag == "noteBarDistance")
-                  noteBarDistance = Spatium(d);
-            else if (tag == "staffLineWidth")
-                  staffLineWidth = Spatium(d);
-            else if (tag == "ledgerLineWidth")
-                  ledgerLineWidth = Spatium(d);
-            else if (tag == "akkoladeWidth")
-                  akkoladeWidth = Spatium(d);
-            else if (tag == "akkoladeDistance") {
-                  accoladeDistance = Spatium(d);
-                  }
-            else if (tag == "prefixDistance")
-                  prefixDistance = Spatium(d);
-            else if (tag == "prefixNoteDistance")
-                  prefixNoteDistance = Spatium(d);
-            else if (tag == "beamWidth")
-                  beamWidth = Spatium(d);
-            else if (tag == "beamDistance")
-                  beamDistance = d;
-            else if (tag == "beamMinLen")
-                  beamMinLen = Spatium(d);
-            else if (tag == "beamMinSlope")
-                  beamMinSlope = d;
-            else if (tag == "beamMaxSlope")
-                  beamMaxSlope = d;
-            else if (tag == "maxBeamTicks")
-                  maxBeamTicks = i;
-            else if (tag == "dotNoteDistance")
-                  dotNoteDistance = Spatium(d);
-            else if (tag == "dotRestDistance")
-                  dotRestDistance = Spatium(d);
-            else if (tag == "dotDotDistance")
-                  dotDotDistance = Spatium(d);
-            else if (tag == "propertyDistanceHead")
-                  propertyDistanceHead = Spatium(d);
-            else if (tag == "propertyDistanceStem")
-                  propertyDistanceStem = Spatium(d);
-            else if (tag == "propertyDistance")
-                  propertyDistance = Spatium(d);
-            else if (tag == "ticklen2Width")    // obsolete
-                  ;
-            else if (tag == "pageFillLimit") {
-                  pageFillLimit = d;
-                  if (version < 107)
-                        pageFillLimit = 1.0 - pageFillLimit;
-                  }
-            else if (tag == "lastSystemFillLimit")
-                  lastSystemFillLimit = d;
-            else if (tag == "hairpinHeight")
-                  hairpinHeight = Spatium(d);
-            else if (tag == "hairpinContHeight")
-                  hairpinContHeight = Spatium(d);
-            else if (tag == "hairpinWidth")
-                  hairpinWidth = Spatium(d);
-            else if (tag == "showPageNumber")
-                  showPageNumber = i;
-            else if (tag == "showPageNumberOne")
-                  showPageNumberOne = i;
-            else if (tag == "pageNumberOddEven")
-                  pageNumberOddEven = i;
-            else if (tag == "showMeasureNumber")
-                  showMeasureNumber = i;
-            else if (tag == "showMeasureNumberOne")
-                  showMeasureNumberOne = i;
-            else if (tag == "measureNumberInterval")
-                  measureNumberInterval = i;
-            else if (tag == "measureNumberSystem")
-                  measureNumberSystem = i;
-            else if (tag == "measureNumberAllStaffs")
-                  measureNumberAllStaffs = i;
-            else if (tag == "graceNoteMag")
-                  graceNoteMag = d;
-            else if (tag == "smallStaffMag")
-                  smallStaffMag = d;
-            else if (tag == "smallNoteMag")
-                  smallNoteMag = d;
-            else if (tag == "smallClefMag")
-                  smallClefMag = d;
-            else if (tag == "genClef")
-                  genClef = i;
-            else if (tag == "genKeysig")
-                  genKeysig = i;
-            else if (tag == "genTimesig")
-                  genTimesig = i;
-            else if (tag == "genCourtesyTimesig")
-                  genCourtesyTimesig = i;
-            else if (tag == "useGermanNoteNames")
-                  useGermanNoteNames = i;
-            else if (tag == "chordNamesUseSymbols")
-                  chordNamesUseSymbols = i;
-            else if (tag == "displayInConcertPitch")
-                  concertPitch = i;
-            else if (tag == "createMultiMeasureRests")
-                  createMultiMeasureRests = i;
-            else if (tag == "minEmptyMeasures")
-                  minEmptyMeasures = i;
-            else if (tag == "minMMRestWidth")
-                  minMMRestWidth = Spatium(d);
-            else if (tag == "hideEmptyStaves")
-                  hideEmptyStaves = i;
-            else if (tag == "gateTime")
-                  gateTime  = i;
-            else if (tag == "tenutoGateTime")
-                  tenutoGateTime = i;
-            else if (tag == "staccatoGateTime")
-                  staccatoGateTime = i;
-            else if (tag == "slurGateTime")
-                  slurGateTime = i;
-            else if (tag == "stemDir") {
+            if (tag == "stemDir") {
                   int voice = e.attribute("voice", "1").toInt() - 1;
-                  if (voice >= 0 && voice < VOICES)
-                        stemDir[voice] = val == "up" ? UP : DOWN;
+                  switch(voice) {
+                        case 0: tag = "StemDir1"; break;
+                        case 1: tag = "StemDir2"; break;
+                        case 2: tag = "StemDir3"; break;
+                        case 3: tag = "StemDir4"; break;
+                        }
                   }
-            else
+            int idx;
+            for (int idx = 0; idx < ST_STYLES; ++idx) {
+                  if (styleTypes[idx].name() == tag) {
+                        switch(styleTypes[i].valueType()) {
+                              case ST_SPATIUM:   data()[idx] = StyleVal(Spatium(d));   break;
+                              case ST_DOUBLE:    data()[idx] = StyleVal(d);            break;
+                              case ST_BOOL:      data()[idx] = StyleVal(bool(i));      break;
+                              case ST_INT:       data()[idx] = StyleVal(i);            break;
+                              case ST_DIRECTION: data()[idx] = StyleVal(Direction(i)); break;
+                              }
+                        break;
+                        }
+                  }
+            if (idx >= ST_STYLES)
                   domError(e);
             }
       }
 
 //---------------------------------------------------------
-//   save
+//   isDefault
 //---------------------------------------------------------
 
-void Style::save(Xml& xml)
+bool Style::isDefault(int)
+      {
+      return false;
+      }
+
+//---------------------------------------------------------
+//   save
+//    if optimize is true, save only if different to default
+//    style
+//---------------------------------------------------------
+
+void Style::save(Xml& xml, bool optimize)
       {
       xml.stag("Style");
 
-      xml.tag("staffUpperBorder",       staffUpperBorder.val());
-      xml.tag("staffLowerBorder",       staffLowerBorder.val());
-      xml.tag("staffDistance",          staffDistance.val());
-      xml.tag("akkoladeDistance",       accoladeDistance.val());
-
-      xml.tag("systemDistance",         systemDistance.val());
-      xml.tag("lyricsDistance",         lyricsDistance.val());
-      xml.tag("lyricsMinBottomDistance", lyricsMinBottomDistance.val());
-      xml.tag("systemFrameDistance",    systemBoxDistance.val());
-      xml.tag("frameSystemDistance",    boxSystemDistance.val());
-
-      xml.tag("minMeasureWidth",        minMeasureWidth.val());
-      xml.tag("barWidth",               barWidth.val());
-      xml.tag("doubleBarWidth",         doubleBarWidth.val());
-      xml.tag("endBarWidth",            endBarWidth.val());
-      xml.tag("doubleBarDistance",      doubleBarDistance.val());
-      xml.tag("endBarDistance",         endBarDistance.val());
-      xml.tag("bracketWidth",           bracketWidth.val());
-      xml.tag("bracketDistance",        bracketDistance.val());
-
-      xml.tag("clefLeftMargin",         clefLeftMargin.val());
-      xml.tag("keysigLeftMargin",       keysigLeftMargin.val());
-      xml.tag("timesigLeftMargin",      timesigLeftMargin.val());
-      xml.tag("clefKeyRightMargin",     clefKeyRightMargin.val());
-      xml.tag("stemWidth",              stemWidth.val());
-      xml.tag("beginRepeatLeftMargin",  beginRepeatLeftMargin.val());
-      xml.tag("minNoteDistance",        minNoteDistance.val());
-
-      xml.tag("measureSpacing",         measureSpacing);
-
-      xml.tag("barNoteDistance",        barNoteDistance.val());
-      xml.tag("noteBarDistance",        noteBarDistance.val());
-      xml.tag("staffLineWidth",         staffLineWidth.val());
-      xml.tag("ledgerLineWidth",        ledgerLineWidth.val());
-      xml.tag("akkoladeWidth",          akkoladeWidth.val());
-      xml.tag("prefixDistance",         prefixDistance.val());
-      xml.tag("prefixNoteDistance",     prefixNoteDistance.val());
-      xml.tag("beamWidth",              beamWidth.val());
-      xml.tag("beamDistance",           beamDistance);
-      xml.tag("beamMinLen",             beamMinLen.val());
-      xml.tag("beamMinSlope",           beamMinSlope);
-      xml.tag("beamMaxSlope",           beamMaxSlope);
-      xml.tag("maxBeamTicks",           maxBeamTicks);
-      xml.tag("dotNoteDistance",        dotNoteDistance.val());
-      xml.tag("dotRestDistance",        dotRestDistance.val());
-      xml.tag("dotDotDistance",         dotDotDistance.val());
-      xml.tag("propertyDistanceHead",   propertyDistanceHead.val());
-      xml.tag("propertyDistanceStem",   propertyDistanceStem.val());
-      xml.tag("propertyDistance",       propertyDistance.val());
-      xml.tag("pageFillLimit",          pageFillLimit);
-      xml.tag("lastSystemFillLimit",    lastSystemFillLimit);
-      xml.tag("hairpinHeight",          hairpinHeight.val());
-      xml.tag("hairpinContHeight",      hairpinContHeight.val());
-      xml.tag("hairpinWidth",           hairpinWidth.val());
-
-      xml.tag("showPageNumber",         showPageNumber);
-      xml.tag("showPageNumberOne",      showPageNumberOne);
-      xml.tag("pageNumberOddEven",      pageNumberOddEven);
-      xml.tag("showMeasureNumber",      showMeasureNumber);
-      xml.tag("showMeasureNumberOne",   showMeasureNumberOne);
-      xml.tag("measureNumberInterval",  measureNumberInterval);
-      xml.tag("measureNumberAllStaffs", measureNumberAllStaffs);
-      xml.tag("measureNumberSystem",    measureNumberSystem);
-
-      xml.tag("graceNoteMag",           graceNoteMag);
-      xml.tag("smallStaffMag",          smallStaffMag);
-      xml.tag("smallNoteMag",           smallNoteMag);
-      xml.tag("smallClefMag",           smallClefMag);
-      xml.tag("genClef",                genClef);
-      xml.tag("genKeysig",              genKeysig);
-      if (!genTimesig)
-            xml.tag("genTimesig", genTimesig);
-      if (!genCourtesyTimesig)
-            xml.tag("genCourtesyTimesig", genCourtesyTimesig);
-      if (useGermanNoteNames)
-            xml.tag("useGermanNoteNames", useGermanNoteNames);
-      if (chordNamesUseSymbols)
-            xml.tag("chordNamesUseSymbols", chordNamesUseSymbols);
-      if (concertPitch)
-            xml.tag("displayInConcertPitch", concertPitch);
-      if (createMultiMeasureRests)
-            xml.tag("createMultiMeasureRests", createMultiMeasureRests);
-
-      xml.tag("minEmptyMeasures", minEmptyMeasures);
-      xml.tag("minMMRestWidth", minMMRestWidth.val());
-
-      if (hideEmptyStaves)
-            xml.tag("hideEmptyStaves", hideEmptyStaves);
-
-      if (stemDir[0] != UP)
-            xml.tag("stemDir voice=\"1\"", "down");
-      if (stemDir[1] != DOWN)
-            xml.tag("stemDir voice=\"2\"", "up");
-      if (stemDir[2] != UP)
-            xml.tag("stemDir voice=\"3\"", "down");
-      if (stemDir[3] != DOWN)
-            xml.tag("stemDir voice=\"4\"", "up");
-
-      xml.tag("gateTime",               gateTime);
-      xml.tag("tenutoGateTime",         tenutoGateTime);
-      xml.tag("staccatoGateTime",       staccatoGateTime);
-      xml.tag("slurGateTime",           slurGateTime);
-
+      for (int idx = 0; idx < ST_STYLES; ++idx) {
+            if (optimize && isDefault(idx))
+                  continue;
+            switch(styleTypes[idx].valueType()) {
+                  case ST_SPATIUM:   xml.tag(styleTypes[idx].name(), at(idx).toSpatium().val()); break;
+                  case ST_DOUBLE:    xml.tag(styleTypes[idx].name(), at(idx).toDouble()); break;
+                  case ST_BOOL:      xml.tag(styleTypes[idx].name(), at(idx).toBool()); break;
+                  case ST_INT:       xml.tag(styleTypes[idx].name(), at(idx).toInt()); break;
+                  case ST_DIRECTION: xml.tag(styleTypes[idx].name(), int(at(idx).toDirection())); break;
+                  }
+            }
       xml.etag();
       }
 

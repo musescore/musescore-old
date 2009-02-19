@@ -614,7 +614,7 @@ QPointF StaffLines::canvasPos() const
 QRectF StaffLines::bbox() const
       {
       int l    = lines() - 1;
-      qreal lw = point(score()->style()->staffLineWidth);
+      qreal lw = point(score()->styleS(ST_staffLineWidth));
 
       switch(l) {
             case 0:
@@ -641,7 +641,7 @@ void StaffLines::draw(QPainter& p) const
 //      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
       QPen pen(p.pen());
-      pen.setWidthF(point(score()->style()->staffLineWidth) * mag());
+      pen.setWidthF(point(score()->styleS(ST_staffLineWidth)) * mag());
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
             pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);

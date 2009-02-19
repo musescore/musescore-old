@@ -128,115 +128,150 @@ class TextStyle {
       };
 
 //---------------------------------------------------------
+//   StyleValueType
+//---------------------------------------------------------
+
+enum StyleValueType {
+      ST_SPATIUM, ST_DOUBLE, ST_BOOL, ST_INT, ST_DIRECTION
+      };
+
+//---------------------------------------------------------
+//   StyleType
+//---------------------------------------------------------
+
+class StyleType {
+      const char* _name;       // xml name for read()/write()
+      StyleValueType _valueType;
+
+   public:
+      StyleType(const char* n, StyleValueType v) : _name(n), _valueType(v) {}
+      StyleValueType valueType() const { return _valueType; }
+      const char* name() const         { return _name; }
+      };
+
+//---------------------------------------------------------
+//   StyleVal
+//---------------------------------------------------------
+
+class StyleVal {
+      union {
+            double  dbl;
+            bool      b;
+            int       i;
+            Direction d;
+            } v;
+   public:
+      StyleVal()                    {}
+      StyleVal(Spatium val)         { v.dbl = val.val(); }
+      StyleVal(double val)          { v.dbl = val;     }
+      StyleVal(bool val)            { v.b   = val;     }
+      StyleVal(int val)             { v.i   = val;     }
+      StyleVal(Direction val)       { v.d   = val;     }
+
+      Spatium toSpatium() const     { return Spatium(v.dbl); }
+      double toDouble() const       { return v.dbl;  }
+      bool toBool() const           { return v.b;  }
+      int toInt() const             { return v.i;  }
+      Direction toDirection() const { return v.d;  }
+      };
+
+enum STYLE_TYPE {
+      ST_staffUpperBorder,
+      ST_staffLowerBorder,
+      ST_staffDistance,
+      ST_accoladeDistance,
+      ST_systemDistance,
+      ST_lyricsDistance,
+      ST_lyricsMinBottomDistance,
+      ST_systemBoxDistance,
+      ST_boxSystemDistance,
+      ST_minMeasureWidth,
+      ST_barWidth,
+      ST_doubleBarWidth,
+      ST_endBarWidth,
+      ST_doubleBarDistance,
+      ST_endBarDistance,
+      ST_bracketWidth,
+      ST_bracketDistance,
+      ST_clefLeftMargin,
+      ST_keysigLeftMargin,
+      ST_timesigLeftMargin,
+      ST_clefKeyRightMargin,
+      ST_stemWidth,
+      ST_beginRepeatLeftMargin,
+      ST_minNoteDistance,
+      ST_barNoteDistance,
+      ST_noteBarDistance,
+      ST_measureSpacing,
+      ST_staffLineWidth,
+      ST_ledgerLineWidth,
+      ST_akkoladeWidth,
+      ST_prefixDistance,
+      ST_prefixNoteDistance,
+      ST_beamWidth,
+      ST_beamDistance,
+      ST_beamMinLen,
+      ST_beamMinSlope,
+      ST_beamMaxSlope,
+      ST_maxBeamTicks,
+      ST_dotNoteDistance,
+      ST_dotRestDistance,
+      ST_dotDotDistance,
+      ST_propertyDistanceHead,
+      ST_propertyDistanceStem,
+      ST_propertyDistance,
+      ST_pageFillLimit,
+      ST_lastSystemFillLimit,
+      ST_hairpinHeight,
+      ST_hairpinContHeight,
+      ST_hairpinWidth,
+      ST_showPageNumber,
+      ST_showPageNumberOne,
+      ST_pageNumberOddEven,
+      ST_showMeasureNumber,
+      ST_showMeasureNumberOne,
+      ST_measureNumberInterval,
+      ST_measureNumberSystem,
+      ST_measureNumberAllStaffs,
+      ST_smallNoteMag,
+      ST_graceNoteMag,
+      ST_smallStaffMag,
+      ST_smallClefMag,
+      ST_genClef,
+      ST_genKeysig,
+      ST_genTimesig,
+      ST_genCourtesyTimesig,
+      ST_useGermanNoteNames,
+      ST_chordNamesUseSymbols,
+      ST_concertPitch,
+      ST_createMultiMeasureRests,
+      ST_minEmptyMeasures,
+      ST_minMMRestWidth,
+      ST_hideEmptyStaves,
+      ST_stemDir1,
+      ST_stemDir2,
+      ST_stemDir3,
+      ST_stemDir4,
+      ST_gateTime,
+      ST_tenutoGateTime,
+      ST_staccatoGateTime,
+      ST_slurGateTime,
+      ST_STYLES
+      };
+
+//---------------------------------------------------------
 //   Style
 //    this structure contains all style elements
 //---------------------------------------------------------
 
-struct Style {
-      Spatium staffUpperBorder;
-      Spatium staffLowerBorder;
-      Spatium staffDistance;
-      Spatium accoladeDistance;
-      Spatium systemDistance;
-      Spatium lyricsDistance;             // bottom staff to top of lyrics line
-      Spatium lyricsMinBottomDistance;    // min. dist. between bottom of lyrics and next staff
-      Spatium systemBoxDistance;          // dist. between staff and vertical box
-      Spatium boxSystemDistance;          // dist. between vertical box and next system
+class Style : public QVector<StyleVal> {
 
-      Spatium minMeasureWidth;
-      Spatium barWidth;
-      Spatium doubleBarWidth;
-      Spatium endBarWidth;
-      Spatium doubleBarDistance;
-      Spatium endBarDistance;
-      Spatium bracketWidth;         // system bracket width
-      Spatium bracketDistance;      // system bracket distance
-
-      Spatium clefLeftMargin;
-      Spatium keysigLeftMargin;
-      Spatium timesigLeftMargin;
-      Spatium clefKeyRightMargin;
-      Spatium stemWidth;
-      Spatium beginRepeatLeftMargin;
-
-      Spatium minNoteDistance;
-      Spatium barNoteDistance;
-      Spatium noteBarDistance;
-
-      double measureSpacing;
-
-      Spatium staffLineWidth;
-      Spatium ledgerLineWidth;
-      Spatium akkoladeWidth;
-      Spatium prefixDistance;
-      Spatium prefixNoteDistance;
-      Spatium beamWidth;
-      double beamDistance;          // in beamWidth units
-      Spatium beamMinLen;           // len for broken beams
-      double beamMinSlope;
-      double beamMaxSlope;
-      int maxBeamTicks;
-      Spatium dotNoteDistance;
-      Spatium dotRestDistance;
-      Spatium dotDotDistance;
-
-      Spatium propertyDistanceHead;  // note property to note head
-      Spatium propertyDistanceStem;  // note property to note stem
-      Spatium propertyDistance;      // note property to note property
-
-      double pageFillLimit;         // 0-1.0
-      double lastSystemFillLimit;
-
-      Spatium hairpinHeight;
-      Spatium hairpinContHeight;
-      Spatium hairpinWidth;
-
-      bool showPageNumber;
-      bool showPageNumberOne;
-      bool pageNumberOddEven;
-      bool showMeasureNumber;
-      bool showMeasureNumberOne;
-      int measureNumberInterval;
-      bool measureNumberSystem;
-      bool measureNumberAllStaffs;
-
-      double smallNoteMag;
-      double graceNoteMag;
-      double smallStaffMag;
-      double smallClefMag;
-
-      bool genClef;           // create clef for all systems, not only for first
-      bool genKeysig;         // create key signature for all systems
-      bool genTimesig;
-      bool genCourtesyTimesig;
-
-      bool useGermanNoteNames;
-      bool chordNamesUseSymbols;
-
-      bool concertPitch;            // display transposing instruments in concert pitch
-
-      bool createMultiMeasureRests;
-      int minEmptyMeasures;         // minimum number of empty measures for multi measure rest
-      Spatium minMMRestWidth;       // minimum width of multi measure rest
-
-      bool hideEmptyStaves;
-
-      Direction stemDir[VOICES];
-
-      //---------------------------------------------------------
-      //   PlayStyle
-      //---------------------------------------------------------
-
-      int gateTime;           // 0-100%
-      int tenutoGateTime;
-      int staccatoGateTime;
-      int slurGateTime;
-
-
+   public:
+      Style();
       void load(QDomElement e, int version);
-      void save(Xml& xml);
+      void save(Xml& xml, bool optimize);
+      bool isDefault(int);
       };
-
 
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];

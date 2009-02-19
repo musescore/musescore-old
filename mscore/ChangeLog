@@ -1,3 +1,6 @@
+19.feb (ws)
+      - new internal handling of styles parameter
+      - better stem len calculation in beams
 17.feb (ws)
       - fix: advance cursor after entering rest in note entry mode
       - Introduce "simple text", which contains only one text fragment with

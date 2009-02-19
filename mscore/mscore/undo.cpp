@@ -642,10 +642,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeConcertPitch:
                   {
-                  int oval = int(_style->concertPitch);
-                  _style->concertPitch = bool(i->val1);
+                  int oval = int(styleB(ST_concertPitch));
+                  _style[ST_concertPitch] = StyleVal(bool(i->val1));
                   QAction* action = getAction("concert-pitch");
-                  action->setChecked(_style->concertPitch);
+                  action->setChecked(styleB(ST_concertPitch));
                   i->val1 = oval;
                   }
                   break;

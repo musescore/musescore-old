@@ -250,7 +250,6 @@ MuseScore::MuseScore()
       cs                    = 0;
       se                    = 0;    // script engine
       debugger              = 0;
-      editStyleWin          = 0;
       instrList             = 0;
       playPanel             = 0;
       preferenceDialog      = 0;
@@ -873,7 +872,7 @@ void MuseScore::selectScore(QAction* action)
       {
       QString a = action->data().toString();
       if (!a.isEmpty()) {
-            Score* score = new Score();
+            Score* score = new Score(defaultStyle);
             score->addViewer(new Canvas);
             score->read(a);
             appendScore(score);
@@ -1099,7 +1098,7 @@ void MuseScore::setCurrentScore(Score* score)
       cs->setLayoutAll(true);
       cs->end();
       QAction* a = getAction("concert-pitch");
-      a->setChecked(cs->style()->concertPitch);
+      a->setChecked(cs->styleB(ST_concertPitch));
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       connect(cs, SIGNAL(posChanged(int)), SLOT(setPos(int)));
@@ -1139,7 +1138,7 @@ void MuseScore::dropEvent(QDropEvent* event)
             Score* lastScore = 0;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
-                        Score* score = new Score();
+                        Score* score = new Score(defaultStyle);
                         score->addViewer(new Canvas);
                         score->read(u.path());
                         appendScore(score);
@@ -1207,11 +1206,8 @@ void MuseScore::showElementContext(Element* el)
 
 void MuseScore::editStyle()
       {
-      if (editStyleWin == 0) {
-            editStyleWin = new EditStyle(0);
-            }
-      editStyleWin->setScore(cs);
-      editStyleWin->show();
+      EditStyle es(cs, this);
+      es.exec();
       }
 
 //---------------------------------------------------------
@@ -1621,7 +1617,7 @@ int main(int argc, char* argv[])
       initDrumset();
 
       mscore = new MuseScore();
-      gscore = new Score;
+      gscore = new Score(defaultStyle);
       mscore->readSettings();
 
       //-------------------------------
@@ -1639,7 +1635,7 @@ int main(int argc, char* argv[])
                         int c = settings.value("currentScore", 0).toInt();
                         for (int i = 0; i < n; ++i) {
                               QString s = settings.value(QString("score-%1").arg(i),"").toString();
-                              Score* score = new Score();
+                              Score* score = new Score(defaultStyle);
                               score->addViewer(new Canvas);
                               scoreCreated = true;
                               score->read(s);
@@ -1653,7 +1649,7 @@ int main(int argc, char* argv[])
                   case NEW_SESSION:
                         break;
                   case SCORE_SESSION:
-                        Score* score = new Score();
+                        Score* score = new Score(defaultStyle);
                         score->addViewer(new Canvas);
                         scoreCreated = true;
                         score->read(preferences.startScore);
@@ -1667,7 +1663,7 @@ int main(int argc, char* argv[])
                   QString name = QString::fromLocal8Bit(argv[optind++]);
                   --argc;
                   if (!name.isEmpty()) {
-                        Score* score = new Score();
+                        Score* score = new Score(defaultStyle);
                         score->addViewer(new Canvas);
                         scoreCreated = true;
                         if (!score->read(name)) {
@@ -1687,7 +1683,7 @@ int main(int argc, char* argv[])
 
       if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION) {
             // start with empty score:
-            Score* score = new Score();
+            Score* score = new Score(defaultStyle);
             score->addViewer(new Canvas);
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
@@ -1808,7 +1804,7 @@ void MuseScore::cmd(QAction* a)
             saveFile();
       else if (cmd == "file-reload") {
             if (cs && !cs->created() && !checkDirty(cs)) {
-                  Score* score = new Score();
+                  Score* score = new Score(defaultStyle);
                   score->addViewer(new Canvas);
                   score->read(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore

@@ -206,24 +206,13 @@ int Duration::headType() const
 
 int Duration::hooks() const
       {
-      int n = 0;
-      switch(_val) {
-            case V_256TH:
-                  ++n;
-            case V_128TH:
-                  ++n;
-            case V_64TH:
-                  ++n;
-            case V_32ND:
-                  ++n;
-            case V_16TH:
-                  ++n;
-            case V_EIGHT:
-                  ++n;
-                  return n;
-            default:
-                  return 0;
-            }
+      static const int table[] = {
+         // V_LONG, V_BREVE, V_WHOLE, V_HALF, V_QUARTER, V_EIGHT, V_16TH,
+            0,      0,       0,       0,      0,         1,       2,
+         // V_32ND, V_64TH, V_128TH, V_256TH, V_MEASURE, V_INVALID
+            3,      4,       5,       6,      0,         0
+            };
+      return table[_val];
       }
 
 //---------------------------------------------------------

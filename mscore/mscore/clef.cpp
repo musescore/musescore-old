@@ -144,7 +144,7 @@ QPointF Clef::canvasPos() const
 
 void Clef::layout(ScoreLayout*)
       {
-      double smag = _small ? score()->style()->smallClefMag : 1.0;
+      double smag = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
       double msp  = _spatium * smag;
       int val     = subtype();
       double yoff = 0.0;

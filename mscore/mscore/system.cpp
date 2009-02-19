@@ -148,8 +148,6 @@ void System::layout(ScoreLayout* layout, double xo1)
             return;
       static const Spatium instrumentNameOffset(1.0);
 
-      Style* style = score()->style();
-
       int nstaves  = _staves.size();
 
       if (nstaves != score()->nstaves())
@@ -228,7 +226,7 @@ void System::layout(ScoreLayout* layout, double xo1)
       _leftMargin = xoff2;
 
       for (int i = 0; i < bracketLevels; ++i)
-            _leftMargin += bracketWidth[i] + style->bracketDistance.point();
+            _leftMargin += bracketWidth[i] + score()->styleS(ST_bracketDistance).point();
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* s  = _staves[staffIdx];
@@ -243,7 +241,7 @@ void System::layout(ScoreLayout* layout, double xo1)
 
       if (nstaves > 1 && barLine == 0) {
             barLine = new Line(score(), true);
-            barLine->setLineWidth(style->barWidth);
+            barLine->setLineWidth(score()->styleS(ST_barWidth));
             barLine->setParent(this);
             }
       else if (nstaves <= 1 && barLine) {
@@ -251,7 +249,7 @@ void System::layout(ScoreLayout* layout, double xo1)
             barLine = 0;
             }
       if (barLine) {
-            barLine->setPos(_leftMargin + xo1, style->barWidth.point() * .25);
+            barLine->setPos(_leftMargin + xo1, score()->styleS(ST_barWidth).point() * .25);
             }
 
       //---------------------------------------------------
@@ -265,7 +263,7 @@ void System::layout(ScoreLayout* layout, double xo1)
 
             double xo = -xo1;
             for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i] + style->bracketDistance.point();
+                  xo += bracketWidth[i] + score()->styleS(ST_bracketDistance).point();
                   Bracket* b = ss->brackets[i];
                   if (b == 0)
                         continue;
@@ -328,13 +326,13 @@ void System::layout2(ScoreLayout* layout)
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
             if ((staffIdx + 1) == nstaves) {
-                  setDistance(staffIdx, score()->style()->systemDistance);
+                  setDistance(staffIdx, score()->styleS(ST_systemDistance));
                   }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
-                  setDistance(staffIdx, score()->style()->accoladeDistance);
+                  setDistance(staffIdx, score()->styleS(ST_accoladeDistance));
                   }
             else {
-                  setDistance(staffIdx, score()->style()->staffDistance);
+                  setDistance(staffIdx, score()->styleS(ST_staffDistance));
                   }
             double dist = 0.0;
             foreach(MeasureBase* m, ml) {
@@ -365,7 +363,7 @@ void System::layout2(ScoreLayout* layout)
             staffY[i] = staff(i)->bbox().y();
 
       if (barLine) {
-            Spatium lw = score()->style()->barWidth;
+            Spatium lw = score()->styleS(ST_barWidth);
             barLine->setLen(Spatium(systemHeight / _spatium) - lw * .5);
             barLine->layout(layout);
             }

@@ -47,7 +47,7 @@ void Tremolo::draw(QPainter& p) const
       if ((parent() == 0) && (subtype() < 3)) {
             double x = 0.0; // bbox().width() * .25;
             QPen pen(p.pen());
-            pen.setWidthF(score()->style()->stemWidth.point());
+            pen.setWidthF(score()->styleS(ST_stemWidth).point());
             p.setPen(pen);
             p.drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
             }

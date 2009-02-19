@@ -23,6 +23,7 @@
 
 #include "ui_editstyle.h"
 #include "globals.h"
+#include "style.h"
 
 class Score;
 class Style;
@@ -35,7 +36,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       Q_OBJECT
 
       Score* cs;
-      Style* lstyle;    // local copy of style
+      Style lstyle;    // local copy of style
 
       QButtonGroup* stemGroups[VOICES];
 
@@ -47,9 +48,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void apply();
 
    public:
-      EditStyle(QWidget*);
-      ~EditStyle();
-      void setScore(Score*);
+      EditStyle(Score*, QWidget*);
       };
 
 

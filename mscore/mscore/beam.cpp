@@ -287,7 +287,7 @@ void Beam::draw(QPainter& p) const
 
             QPointF ip1 = bs->p1;
             QPointF ip2 = bs->p2;
-            qreal lw2   = point(score()->style()->beamWidth) * .5 * mag();
+            qreal lw2   = score()->style(ST_beamWidth).toSpatium().point() * .5 * mag();
 
             QPolygonF a(4);
             a[0] = QPointF(ip1.x(), ip1.y()-lw2);
@@ -641,18 +641,19 @@ void Beam::layout(ScoreLayout* layout)
       if (!concave) {
             double dx = (a2->pos().x() + a2->segment()->pos().x())
                           - (a1->pos().x() + a1->segment()->pos().x());
+            double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
             if (dx) {
                   slope = (l2 - l1) * _spatium * .5 / dx;
-                  if (fabs(slope) < score()->style()->beamMinSlope) {
+                  if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
                         cut = slope > 0.0 ? 0 : -1;
                         slope = 0;
                         }
-                  else if (slope > score()->style()->beamMaxSlope) {
-                        slope = score()->style()->beamMaxSlope;
+                  else if (slope > maxSlope) {
+                        slope = maxSlope;
                         cut = 1;
                         }
-                  else if (-slope > score()->style()->beamMaxSlope) {
-                        slope = -score()->style()->beamMaxSlope;
+                  else if (-slope > maxSlope) {
+                        slope = -maxSlope;
                         cut = -1;
                         }
                   }
@@ -668,7 +669,7 @@ void Beam::layout(ScoreLayout* layout)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(score()->style()->stemWidth)/2;
+      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium())/2;
       double xoffRight = xoffLeft;
 
       QPointF p1s(a1->stemPos(_up, false));
@@ -701,10 +702,10 @@ void Beam::layout(ScoreLayout* layout)
             isGrace = chord->noteType() != NOTE_NORMAL;
             break;
             }
-      Spatium bw        = score()->style()->beamWidth;
-      double bd         = score()->style()->beamDistance;
-      double beamMinLen = point(score()->style()->beamMinLen);
-      double graceMag   = score()->style()->graceNoteMag;
+      Spatium bw        = score()->style(ST_beamWidth).toSpatium();
+      double bd         = score()->style(ST_beamDistance).toDouble();
+      double beamMinLen = point(score()->style(ST_beamMinLen).toSpatium());
+      double graceMag   = score()->style(ST_graceNoteMag).toDouble();
       if (isGrace) {
             setMag(graceMag);
             bw *= graceMag;
@@ -721,7 +722,8 @@ void Beam::layout(ScoreLayout* layout)
                   continue;
             Chord* chord  = static_cast<Chord*>(cr);
             QPointF npos(chord->stemPos(_up, true));
-            double bd      = (chord->beams() - 1) * beamDist * (_up ? 1.0 : -1.0);
+            // grow beams with factor 0.5
+            double bd      = (chord->beams() - 1) * beamDist * .5 * (_up ? 1.0 : -1.0);
             double y1      = npos.y();
             double y2      = p1.y() + (npos.x() - x1) * slope;
             double stemLen = _up ? (y1 - y2) : (y2 - y1);
@@ -732,13 +734,14 @@ void Beam::layout(ScoreLayout* layout)
                   max = stemLen;
             }
 
-      // adjst beam position
-      double n = 3.0;   // minimum stem len (should be a style parameter)
-      if (fabs(max-min) > _spatium * 2)
+      // adjust beam position
+      double n = 3.0;
+      if (fabs(max-min) > (_spatium * 2.0))
             n = 2.0;    // reduce minimum stem len (heuristic)
+
+      double diff = n * _spatium - min;
       if (isGrace)
             n *= graceMag;
-      double diff = _spatium * n - min;
       if (_up)
             diff = -diff;
       p1.ry() += diff;
@@ -953,7 +956,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(score()->style()->stemWidth)/2;
+      double xoffLeft  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
       double xoffRight = xoffLeft;
 
       QPointF p1s(c1->stemPos(c1->up(), false));
@@ -1008,9 +1011,10 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             _p1 = p1;
             _p2 = p2;
             }
-
-      double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
-                        + score()->style()->beamWidth) * (_up ? 1.0 : -1.0);
+      const Style s(score()->style());
+      double bd(s[ST_beamDistance].toDouble());
+      Spatium bw(s[ST_beamWidth].toSpatium());
+      double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
       BeamSegment* bs = new BeamSegment;
       beamSegments.push_back(bs);
       bs->p1  = p1;
@@ -1079,7 +1083,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(_up, false).x();
-                              double x3 = x2 + point(score()->style()->beamMinLen);
+                              double x3 = x2 + point(score()->style(ST_beamMinLen).toSpatium());
 
                               if (!nn1r) {
                                     double tmp = x3;
@@ -1115,7 +1119,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(_up, false).x();
-                  double x2 = x3 - point(score()->style()->beamMinLen);
+                  double x2 = x3 - point(score()->style(ST_beamMinLen).toSpatium());
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }
