@@ -418,24 +418,28 @@ void VBox::propertyAction(const QString& cmd)
             }
       Element* s = 0;
       if (cmd == "title-text") {
-            s = new Text(score());
-            s->setSubtype(TEXT_TITLE);
-            s->setTextStyle(TEXT_STYLE_TITLE);
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_TITLE);
+            t->setTextStyle(TEXT_STYLE_TITLE);
+            s = t;
             }
       else if (cmd == "subtitle-text") {
-            s = new Text(score());
-            s->setSubtype(TEXT_SUBTITLE);
-            s->setTextStyle(TEXT_STYLE_SUBTITLE);
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_SUBTITLE);
+            t->setTextStyle(TEXT_STYLE_SUBTITLE);
+            s = t;
             }
       else if (cmd == "composer-text") {
-            s = new Text(score());
-            s->setSubtype(TEXT_COMPOSER);
-            s->setTextStyle(TEXT_STYLE_COMPOSER);
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_COMPOSER);
+            t->setTextStyle(TEXT_STYLE_COMPOSER);
+            s = t;
             }
       else if (cmd == "poet-text") {
-            s = new Text(score());
-            s->setSubtype(TEXT_POET);
-            s->setTextStyle(TEXT_STYLE_POET);
+            Text* t = new Text(score());
+            t->setSubtype(TEXT_POET);
+            t->setTextStyle(TEXT_STYLE_POET);
+            s = t;
             }
       else if (cmd == "insert-hbox") {
             s = new HBox(score());
