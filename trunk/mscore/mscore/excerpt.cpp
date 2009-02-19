@@ -92,7 +92,7 @@ bool Excerpt::operator!=(const Excerpt& e) const
 
 Score* Score::createExcerpt(Excerpt* excerpt)
       {
-      Score* s      = new Score();
+      Score* s      = new Score(_style);
       QFileInfo* fi = s->fileInfo();
       QString name  = fileInfo()->path() + "/" + excerpt->name() + ".msc";
       fi->setFile(name);
@@ -155,7 +155,7 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
-      _style->save(xml);
+      _style.save(xml, true);
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
                   _textStyles[i]->write(xml);

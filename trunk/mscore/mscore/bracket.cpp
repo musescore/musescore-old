@@ -60,9 +60,9 @@ double Bracket::width() const
       {
       double w;
       if (subtype() == BRACKET_AKKOLADE)
-            w = point(score()->style()->akkoladeWidth);
+            w = point(score()->style(ST_akkoladeWidth).toSpatium());
       else
-            w = point(score()->style()->bracketWidth + score()->style()->bracketDistance);
+            w = point(score()->style(ST_bracketWidth).toSpatium() + score()->style(ST_bracketDistance).toSpatium());
       return w;
       }
 
@@ -84,7 +84,7 @@ void Bracket::layout(ScoreLayout* layout)
       qreal h = h2 + yoff * .5;
 
       if (subtype() == BRACKET_AKKOLADE) {
-            qreal w         = point(score()->style()->akkoladeWidth);
+            qreal w         = point(score()->style(ST_akkoladeWidth).toSpatium());
             const double X1 =  2.0 * w;
             const double X2 = -0.7096 * w;
             const double X3 = -1.234 * w;
@@ -97,7 +97,7 @@ void Bracket::layout(ScoreLayout* layout)
             path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
             }
       else if (subtype() == BRACKET_NORMAL) {
-            qreal w = point(score()->style()->bracketWidth);
+            qreal w = point(score()->style(ST_bracketWidth).toSpatium());
 
             TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
             QChar up = symbols[brackettipsUp].code();
@@ -106,7 +106,7 @@ void Bracket::layout(ScoreLayout* layout)
             QFont f(s->family, lrint(2.0 * _spatium));
 
             qreal o   = _spatium * .17;
-            qreal slw = point(score()->style()->staffLineWidth);
+            qreal slw = point(score()->style(ST_staffLineWidth).toSpatium());
 
             path.setFillRule(Qt::WindingFill);
 

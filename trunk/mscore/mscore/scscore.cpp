@@ -144,7 +144,7 @@ QScriptValue ScScore::newInstance(const QString& name)
       printf("ScScore::newInstance(name)\n");
 
       QString s(name);
-      Score* ns = new Score();
+      Score* ns = new Score(defaultStyle);
       if (s.isEmpty())
             s = mscore->createDefaultName();
       ns->setName(s);

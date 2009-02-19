@@ -385,7 +385,8 @@ void SLine::writeProperties(Xml& xml) const
             return;
             }
       xml.tag("tick2", _tick2);
-      xml.tag("diagonal", _diagonal);
+      if (_diagonal)
+            xml.tag("diagonal", _diagonal);
       //
       // check if user has modified the default layout
       //

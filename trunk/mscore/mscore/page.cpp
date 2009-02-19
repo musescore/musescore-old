@@ -119,7 +119,7 @@ void Page::layout(ScoreLayout* layout)
 
       // add page number
       int n = no() + 1 + _score->_pageOffset;
-      if (score()->style()->showPageNumber && ((n > 1) || score()->style()->showPageNumberOne)) {
+      if (score()->styleB(ST_showPageNumber) && ((n > 1) || score()->styleB(ST_showPageNumberOne))) {
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
             int style   = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
             if (_pageNo == 0) {

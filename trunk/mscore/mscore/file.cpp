@@ -196,7 +196,7 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score();
+      Score* score = new Score(defaultStyle);
       score->addViewer(new Canvas);
       score->read(fn);
       appendScore(score);
@@ -526,7 +526,7 @@ void MuseScore::newFile()
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       char ks = newWizard->keysig();
 
-      Score* score = new Score;
+      Score* score = new Score(defaultStyle);
       score->addViewer(new Canvas);
       score->setCreated(true);
 
@@ -880,7 +880,7 @@ bool Score::loadStyle(QFile* qf)
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         if (tag == "Style")
-                              _style->load(ee, _mscVersion);
+                              _style.load(ee, _mscVersion);
                         else if (tag == "TextStyle") {
                               QString name = ee.attribute("name");
                               TextStyle* s = 0;
@@ -933,7 +933,7 @@ void Score::saveStyle()
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-      _style->save(xml);
+      _style.save(xml, false);     // save complete style
       foreach(TextStyle* ts, textStyles())
             ts->write(xml);
 
@@ -1154,7 +1154,7 @@ bool Score::read(QDomElement e)
                   else if (tag == "showFrames")
                         _showFrames = i;
                   else if (tag == "Style")
-                        _style->load(ee, _mscVersion);
+                        _style.load(ee, _mscVersion);
                   else if (tag == "TextStyle") {
                         QString name = ee.attribute("name");
                         TextStyle* s = 0;

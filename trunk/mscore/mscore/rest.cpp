@@ -102,7 +102,7 @@ void Rest::draw(QPainter& p) const
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= _dots; ++i) {
                         double x = symbols[_sym].width(mag())
-                                   + point(score()->style()->dotNoteDistance) * i;
+                                   + point(score()->styleS(ST_dotNoteDistance)) * i;
                         symbols[dotSym].draw(p, mag(), x, y);
                         }
                   }
@@ -377,7 +377,7 @@ QRectF Rest::bbox() const
       Measure* m = measure();
       if (m && m->multiMeasure()) {
             double h = _spatium * 6.5;
-            double w = score()->style()->minMMRestWidth.point();
+            double w = score()->styleS(ST_minMMRestWidth).point();
             return QRectF(-w * .5, -h + 2 * _spatium, w, h);
             }
       else {

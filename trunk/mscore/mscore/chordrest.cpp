@@ -319,8 +319,8 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       qreal sy   = _spatium;      // TODO: style parameter: distance to top/bottom line
       qreal sy2  = _spatium * .5; // TODO: style parameter: distance to top/bottom note
 
-      qreal chordTopY = upPos()   - point(score()->style()->propertyDistanceStem) - sy2;
-      qreal chordBotY = downPos() + point(score()->style()->propertyDistanceHead) + sy2;
+      qreal chordTopY = upPos()   - point(score()->styleS(ST_propertyDistanceStem)) - sy2;
+      qreal chordBotY = downPos() + point(score()->styleS(ST_propertyDistanceHead)) + sy2;
       qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - sy;
       qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + sy;
 
@@ -349,7 +349,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                               y -= _spatium * .5;
                         }
                   a->setPos(x, y);
-                  dyTop += (point(score()->style()->propertyDistance) + a->bbox().height());
+                  dyTop += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
                   }
             else if (aa == A_BOTTOM_CHORD) {
                   y = chordBotY + dyBot;
@@ -363,7 +363,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                               y += _spatium * .5;
                         }
                   a->setPos(x, y);
-                  dyBot += (point(score()->style()->propertyDistance) + a->bbox().height());
+                  dyBot += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
                   }
             }
 
@@ -388,12 +388,12 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
             if (aa == A_TOP_STAFF) {
                   y = staffTopY - dyTop;
                   a->setPos(x, y);
-                  dyTop += (point(score()->style()->propertyDistance) + a->bbox().height());
+                  dyTop += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
                   }
             else if (aa == A_BOTTOM_STAFF) {
                   y = staffBotY + dyBot;
                   a->setPos(x, y);
-                  dyBot += (point(score()->style()->propertyDistance) + a->bbox().height());
+                  dyBot += (point(score()->styleS(ST_propertyDistance)) + a->bbox().height());
                   }
             }
       }

@@ -519,7 +519,7 @@ void Harmony::initHarmony()
 
 QString Harmony::harmonyName() const
       {
-      bool germanNames = score()->style()->useGermanNoteNames;
+      bool germanNames = score()->styleB(ST_useGermanNoteNames);
 
       HChord hc = _descr ? _descr->chord : HChord();
       QString s;
@@ -807,7 +807,7 @@ void Harmony::buildText()
       if (s == 0)
             return;
 
-      bool useSymbols = score()->style()->chordNamesUseSymbols;
+      bool useSymbols = score()->styleB(ST_chordNamesUseSymbols);
 
       if ((*s == '#') || (*s == 'b')) {
             if (useSymbols)
@@ -984,7 +984,7 @@ const ChordDescription* Harmony::parseHarmony(const QString& ss, int* root, int*
             printf("harmony is empty %d\n", tick());
             return 0;
             }
-      bool germanNames = score()->style()->useGermanNoteNames;
+      bool germanNames = score()->styleB(ST_useGermanNoteNames);
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
             printf("1:parseHarmony failed <%s>\n", qPrintable(ss));

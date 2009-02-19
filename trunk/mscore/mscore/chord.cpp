@@ -59,7 +59,7 @@ Stem::Stem(Score* s)
 
 void Stem::draw(QPainter& p) const
       {
-      qreal lw = point(score()->style()->stemWidth) * mag();
+      qreal lw = point(score()->style(ST_stemWidth).toSpatium()) * mag();
       QPen pen(p.pen());
       pen.setWidthF(lw);
       p.setPen(pen);
@@ -110,7 +110,7 @@ void Stem::read(QDomElement e)
 
 QRectF Stem::bbox() const
       {
-      double w = point(score()->style()->stemWidth) * mag();
+      double w = point(score()->style(ST_stemWidth).toSpatium()) * mag();
       double l = point(_len + _userLen);
       return QRectF(-w * .5, 0, w, l).normalized();
       }
@@ -172,7 +172,7 @@ StemSlash::StemSlash(Score* s)
 
 void StemSlash::draw(QPainter& p) const
       {
-      qreal lw = point(score()->style()->stemWidth) * mag();
+      qreal lw = point(score()->style(ST_stemWidth).toSpatium()) * mag();
       QPen pen(p.pen());
       pen.setWidthF(lw);
       p.setPen(pen);
@@ -185,7 +185,7 @@ void StemSlash::draw(QPainter& p) const
 
 QRectF StemSlash::bbox() const
       {
-      double w = point(score()->style()->stemWidth) * mag() * .5;
+      double w = point(score()->style(ST_stemWidth).toSpatium()) * mag() * .5;
       QRectF r(line.p1().x(), line.p2().y(),
          line.p2().x()-line.p1().x(),
          line.p1().y()-line.p2().y()
@@ -516,7 +516,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   setHook(new Hook(score()));
             _hook->setMag(mag());
             _hook->setSubtype(hookIdx);
-            qreal lw     = point(score()->style()->stemWidth) * .5;
+            qreal lw     = point(score()->style(ST_stemWidth).toSpatium()) * .5;
             QPointF npos = (up() ? downNote() : upNote())->stemPos(up());
             // set x-pos to get correct boundingRect width for layout
             _hook->setPos(npos + QPointF(lw, 0.0));
@@ -562,7 +562,7 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       if (_noteType != NOTE_NORMAL) {
             // stemLen = Spatium(2.5 * mag());
-            stemLen = normalLen * score()->style()->graceNoteMag;
+            stemLen = normalLen * score()->style(ST_graceNoteMag).toDouble();
             }
       else {
             if (up()) {
@@ -636,7 +636,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             if (!up())
                   hookIdx = -hookIdx;
             _hook->setSubtype(hookIdx);
-            qreal lw  = point(score()->style()->stemWidth) * .5;
+            qreal lw  = point(score()->style(ST_stemWidth).toSpatium()) * .5;
             QPointF p = npos + QPointF(lw, point(_stem->stemLen()));
             _hook->setPos(p);
             }
@@ -658,7 +658,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line)
       LedgerLine* h   = new LedgerLine(score());
       Spatium len     = h->len() * staffMag;
       if (_noteType != NOTE_NORMAL)
-            len *= score()->style()->graceNoteMag;
+            len *= score()->style(ST_graceNoteMag).toDouble();
       h->setParent(this);
       h->setTrack(staffIdx * VOICES);
 
@@ -921,7 +921,12 @@ void Chord::computeUp()
 
       int si = staffIdx();
       if (measure()->mstaff(si)->hasVoices) {
-            _up = score()->style()->stemDir[voice()] == UP;
+            switch(voice()) {
+                  case 0:  _up = score()->style(ST_stemDir1).toBool() == UP; break;
+                  case 1:  _up = score()->style(ST_stemDir2).toBool() == UP; break;
+                  case 2:  _up = score()->style(ST_stemDir3).toBool() == UP; break;
+                  case 3:  _up = score()->style(ST_stemDir4).toBool() == UP; break;
+                  }
             return;
             }
 
@@ -1388,7 +1393,7 @@ void Chord::setDuration(Duration t)
 LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
-      setLineWidth(score()->style()->ledgerLineWidth * mag());
+      setLineWidth(score()->style(ST_ledgerLineWidth).toSpatium() * mag());
       setLen(Spatium(2.0) * mag());
       }
 

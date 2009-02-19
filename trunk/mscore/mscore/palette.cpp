@@ -385,7 +385,7 @@ void Palette::paintEvent(QPaintEvent*)
       //
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM * extraMag);
+      pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * PALETTE_SPATIUM * extraMag);
 
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);

@@ -30,7 +30,6 @@ class Canvas;
 class Element;
 class ToolButton;
 class PreferenceDialog;
-class EditStyle;
 class InstrumentsDialog;
 class Instrument;
 class MidiFile;
@@ -179,7 +178,6 @@ class MuseScore : public QMainWindow {
       QToolBar* entryTools;
       TextTools* _textTools;
       QToolBar* voiceTools;
-      EditStyle* editStyleWin;
       InstrumentsDialog* instrList;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;

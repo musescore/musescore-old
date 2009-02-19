@@ -258,7 +258,7 @@ bool Score::needLayout() const
 //   Score
 //---------------------------------------------------------
 
-Score::Score()
+Score::Score(const Style& s)
       {
       info.setFile("");
 
@@ -266,7 +266,7 @@ Score::Score()
       _mag    = 1.0;
       _xoff   = 0.0;
       _yoff   = 0.0;
-      _style  = new Style(defaultStyle);
+      _style  = s;
       _layout = new ScoreLayout(this);
 
       // deep copy of defaultTextStyles:
@@ -306,17 +306,6 @@ Score::~Score()
       delete sigmap;
       delete sel;
       delete _layout;
-      delete _style;
-      }
-
-//---------------------------------------------------------
-//   setStyle
-//---------------------------------------------------------
-
-void Score::setStyle(const Style& s)
-      {
-      delete _style;
-      _style = new Style(s);
       }
 
 //---------------------------------------------------------
@@ -496,7 +485,7 @@ void Score::write(Xml& xml, bool autosave)
             endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
-      _style->save(xml);
+      _style.save(xml, true);      // save only differences to buildin style
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
                   _textStyles[i]->write(xml);
@@ -1603,7 +1592,7 @@ Score* Score::clone()
                line, column, err.toLatin1().data(), buffer.buffer().data());
             return 0;
             }
-      Score* score = new Score;
+      Score* score = new Score(_style);
       docName = "--";
       score->read(doc.documentElement());
       return score;
