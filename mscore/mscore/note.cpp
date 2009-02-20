@@ -656,7 +656,7 @@ void Note::endDrag()
       int clef     = staff->clefList()->clef(chord()->tick());
       int key      = staff->keymap()->key(chord()->tick());
       int npitch   = line2pitch(_line, clef, key);
-      setPitch(npitch);
+      score()->undoChangePitch(this, npitch, pitch2tpc(npitch), 0);
       }
 
 //---------------------------------------------------------
