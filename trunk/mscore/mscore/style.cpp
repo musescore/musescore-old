@@ -389,6 +389,24 @@ QFont TextStyle::font() const
       }
 
 //---------------------------------------------------------
+//   font
+//---------------------------------------------------------
+
+QFont TextStyle::fontPx() const
+      {
+      double m = size * DPI / PPI;
+
+      QFont f(family);
+      f.setBold(bold);
+      f.setItalic(italic);
+      if (sizeIsSpatiumDependent)
+            m = m * ::_spatium / (SPATIUM20 * DPI);
+      f.setPixelSize(lrint(m));
+      f.setUnderline(underline);
+      return f;
+      }
+
+//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 

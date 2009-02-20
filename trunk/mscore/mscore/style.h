@@ -102,6 +102,7 @@ class TextStyle {
       void write(Xml&) const;
       void read(QDomElement);
       QFont font() const;
+      QFont fontPx() const;
       QRectF bbox(const QString& s) const { return fontMetrics().boundingRect(s); }
       QFontMetricsF fontMetrics() const   { return QFontMetricsF(font()); }
       bool operator!=(const TextStyle& s) const {

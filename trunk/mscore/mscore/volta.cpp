@@ -49,7 +49,7 @@ void VoltaSegment::draw(QPainter& p) const
       if (volta()->subtype() == Volta::VOLTA_CLOSED)
             p.drawLine(QLineF(_p2, p3));
 
-      p.setFont(score()->textStyle(TEXT_STYLE_VOLTA)->font());
+      p.setFont(score()->textStyle(TEXT_STYLE_VOLTA)->fontPx());
       QPointF tp(p0.x() + _spatium * .5, p0.y());
       p.drawText(tp, volta()->text());
       }
