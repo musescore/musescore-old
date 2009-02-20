@@ -1956,6 +1956,14 @@ void Score::cmd(const QString& cmd)
                   cmdDeleteSelection();
             else if (cmd == "rest")
                   cmdEnterRest();
+            else if (cmd == "rest-1")
+                  cmdEnterRest(Duration::V_WHOLE);
+            else if (cmd == "rest-2")
+                  cmdEnterRest(Duration::V_HALF);
+            else if (cmd == "rest-4")
+                  cmdEnterRest(Duration::V_QUARTER);
+            else if (cmd == "rest-8")
+                  cmdEnterRest(Duration::V_EIGHT);
             else if (cmd == "pitch-up")
                   upDown(true, false);
             else if (cmd == "pitch-down")

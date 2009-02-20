@@ -1646,7 +1646,41 @@ void Score::cmdEnterRest()
             }
       else {
             setRest(_is.pos(), _is.track, _is.tickLen, _is.dots);
-//            _is.setPos(_is.pos() + _is.tickLen);
+
+            // go to next ChordRest
+            cr = nextChordRest(_is.cr);
+            if ((cr == 0) && (_is.track % VOICES)) {
+                  Segment* s = tick2segment(_is.cr->tick() + _is.cr->tickLen());
+                  int track = (_is.track / VOICES) * VOICES;
+                  cr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
+                  }
+            _is.cr = cr;
+            if (_is.cr)
+                  emit posChanged(_is.pos());
+            }
+      _is.rest = false;  // continue with normal note entry
+      }
+
+//---------------------------------------------------------
+//   cmdEnterRest
+//---------------------------------------------------------
+
+void Score::cmdEnterRest(Duration::DurationType d)
+      {
+printf("cmdEnterREst %d\n", int(d));
+      if (!noteEntryMode())
+            setNoteEntry(true);
+      if (_is.cr == 0) {
+            printf("cannot enter rest here\n");
+            return;
+            }
+      ChordRest* cr = _is.cr;
+      int ticks = Duration(d).ticks();
+      if (cr->tuplet()) {
+            setTupletChordRest(cr, -1, ticks);
+            }
+      else {
+            setRest(_is.pos(), _is.track, ticks, 0);
 
             // go to next ChordRest
             cr = nextChordRest(_is.cr);

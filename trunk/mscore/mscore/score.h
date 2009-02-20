@@ -30,6 +30,7 @@
 #include "input.h"
 #include "globals.h"
 #include "style.h"
+#include "durationtype.h"
 
 class System;
 class TextStyle;
@@ -375,6 +376,7 @@ class Score : public QObject {
       void transpose();
 
       void cmdEnterRest();
+      void cmdEnterRest(Duration::DurationType d);
       void updateEntryMode();
 
       Rest* addRest(int tick, int len, int track);
