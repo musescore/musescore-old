@@ -187,6 +187,7 @@ bool VoltaSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers mod
 Volta::Volta(Score* s)
    : SLine(s)
       {
+      setSystemFlag(true);
       _text = "1.";
       _endings.append(1);
       setLen(_spatium * 7);   // for use in palettes

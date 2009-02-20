@@ -131,6 +131,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
                   }
             Text* txt = new Text(s);
             txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+            txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
             txt->setText(excerpt->title());
             measure->add(txt);
             }
@@ -215,9 +216,11 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
                   }
             else {
                   if (el->track() != -1) {
-                        if (trackOffset[staffIdx] == HIDDEN)
-                              continue;
-                        xml.trackDiff = trackOffset[staffIdx];
+                        if (el->type() != VOLTA) {                      // HACK
+                              if (trackOffset[staffIdx] == HIDDEN)
+                                    continue;
+                              xml.trackDiff = trackOffset[staffIdx];
+                              }
                         }
                   }
             el->write(xml);

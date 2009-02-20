@@ -1348,6 +1348,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       else if (dirType == "rehearsal") {
             Text* t = new Text(score);
             t->setSubtype(TEXT_REHEARSAL_MARK);
+            t->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
             t->setTick(tick);
             t->setText(rehearsal);
             t->setAbove(placement == "above");

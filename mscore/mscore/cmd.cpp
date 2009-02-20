@@ -1232,8 +1232,10 @@ void Score::cmdAddText(int subtype)
             endEdit();
             endCmd();
             }
-      if (!checkHasMeasures())
+      if (!checkHasMeasures()) {
+            endCmd();
             return;
+            }
       Page* page = _layout->pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
@@ -1243,7 +1245,6 @@ void Score::cmdAddText(int subtype)
             case TEXT_SUBTITLE:
             case TEXT_COMPOSER:
             case TEXT_POET:
-            case TEXT_INSTRUMENT_EXCERPT:
                   {
                   MeasureBase* measure = ml.front();
                   if (measure->type() != VBOX) {
@@ -1253,6 +1254,12 @@ void Score::cmdAddText(int subtype)
 	                  undoOp(UndoOp::InsertMeasure, measure);
                         }
                   s = new Text(this);
+                  switch(subtype) {
+                        case TEXT_TITLE:        s->setTextStyle(TEXT_STYLE_TITLE); break;
+                        case TEXT_SUBTITLE:     s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
+                        case TEXT_COMPOSER:     s->setTextStyle(TEXT_STYLE_COMPOSER); break;
+                        case TEXT_POET:         s->setTextStyle(TEXT_STYLE_POET); break;
+                        }
                   s->setSubtype(subtype);
                   s->setParent(measure);
                   }
@@ -1266,28 +1273,15 @@ void Score::cmdAddText(int subtype)
                   }
                   break;
 
-            case TEXT_TRANSLATOR:
-            case TEXT_MEASURE_NUMBER:
-            case TEXT_PAGE_NUMBER_ODD:
-            case TEXT_PAGE_NUMBER_EVEN:
-            case TEXT_FINGERING:
-            case TEXT_INSTRUMENT_LONG:
-            case TEXT_INSTRUMENT_SHORT:
-            case TEXT_LYRIC:
-            case TEXT_TUPLET:
-            default:
-                  printf("add text type %d not supported\n", subtype);
-                  break;
-
-            case TEXT_CHORD:
             case TEXT_REHEARSAL_MARK:
                   {
                   ChordRest* cr = getSelectedChordRest();
                   if (!cr)
                         break;
                   s = new Text(this);
-                  s->setTrack(subtype == TEXT_SYSTEM ? 0 : cr->track());
+                  s->setTrack(0);
                   s->setSubtype(subtype);
+                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   s->setParent(cr->measure());
                   s->setTick(cr->tick());
                   }
@@ -1302,10 +1296,12 @@ void Score::cmdAddText(int subtype)
                   if (subtype == TEXT_SYSTEM) {
                         s->setTrack(0);
                         s->setSystemFlag(true);
+                        s->setTextStyle(TEXT_STYLE_SYSTEM);
                         }
                   else {
                         s->setTrack(cr->track());
                         s->setSystemFlag(false);
+                        s->setTextStyle(TEXT_STYLE_STAFF);
                         }
                   s->setSubtype(subtype);
                   s->setParent(cr->measure());

@@ -1,3 +1,6 @@
+20.feg (ws)
+      - more debugging for parts
+      - save only style values which differ from default build in style
 19.feb (tb)
       - update French translation file from JLWaltener
       - update Dutch instrument from Jaap Plaisier
