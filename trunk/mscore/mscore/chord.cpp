@@ -105,6 +105,18 @@ void Stem::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   setVisible
+//---------------------------------------------------------
+
+void Stem::setVisible(bool f)
+      {
+      Element::setVisible(f);
+      Chord* chord = static_cast<Chord*>(parent());
+      if (chord && chord->hook() && chord->hook()->visible() != f)
+            chord->hook()->setVisible(f);
+      }
+
+//---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
@@ -282,6 +294,8 @@ Chord::~Chord()
             delete _glissando;
       if (_stemSlash)
             delete _stemSlash;
+      if (_stem)
+            delete _stem;
       }
 
 //---------------------------------------------------------
@@ -293,8 +307,12 @@ void Chord::setHook(Hook* f)
       if (_hook)
             delete _hook;
       _hook = f;
-      if (_hook)
+      if (_hook) {
             _hook->setParent(this);
+            _stem->setMag(mag());
+            if (_stem)        // should always be true
+                  _hook->setVisible(_stem->visible());
+            }
       }
 
 //---------------------------------------------------------
@@ -1031,8 +1049,10 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
             }
       if (_noStem)
             xml.tag("noStem", _noStem);
-      if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().point() != 0.0)))
-            _stem->write(xml);
+      else if (_stem) {
+            if (!_stem->userOff().isNull() || (_stem->userLen().point() != 0.0) || !_stem->visible())
+                  _stem->write(xml);
+            }
       switch(_stemDirection) {
             case UP:   xml.tag("StemDirection", QVariant("up")); break;
             case DOWN: xml.tag("StemDirection", QVariant("down")); break;
