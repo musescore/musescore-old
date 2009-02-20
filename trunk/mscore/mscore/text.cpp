@@ -100,11 +100,25 @@ bool TextBase::isSimpleText(TextStyle* style) const
       for (QTextBlock::iterator i = b.begin(); !i.atEnd(); ++i) {
             if (i.fragment().isValid())
                   ++fragments;
-            if (fragments > 1)
+            if (fragments > 1) {
                   return false;
+                  }
             cf = i.fragment().charFormat();
             }
-      if (style && (cf.font() == style->font()))
+      if (!style)
+            return false;
+      //
+      // the style font has another size than the actual
+      // font used in cf (due to rounding errors?), but
+      // QFontInfo gives the right size
+      //
+      QFontInfo fi(style->font());
+      QFont f(cf.font());
+      if (fi.family() == f.family()
+         && fi.pointSize() == f.pointSize()
+         && fi.bold() == f.bold()
+         && style->font().underline() == f.underline()
+         && fi.italic() == f.italic())
             return true;
       return false;
       }
@@ -200,7 +214,8 @@ void TextBase::writeProperties(Xml& xml, TextStyle* ts, bool writeText) const
       // write all properties which are different from style
 
       if (_hasFrame) {
-            xml.tag("frameWidth", _frameWidth);
+            if (ts == 0 || _frameWidth != ts->frameWidth)
+                  xml.tag("frameWidth", _frameWidth);
             if (ts == 0 || _paddingWidth != ts->paddingWidth)
                   xml.tag("paddingWidth", _paddingWidth);
             if (ts == 0 || _frameColor != ts->frameColor)
@@ -625,8 +640,8 @@ void TextB::layout(ScoreLayout* layout)
 
       if (parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
-            double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
-            double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+            double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
+            double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
             setPos(ipos() + QPointF(x, y));
             }
       }
@@ -649,6 +664,7 @@ void TextB::setTextStyle(int idx)
       _textStyle   = idx;
       TextStyle* s = score()->textStyle(idx);
       doc()->setDefaultFont(s->font());
+
       _align         = s->align;
       _xoff          = s->xoff;
       _yoff          = s->yoff;
@@ -686,7 +702,7 @@ void TextB::write(Xml& xml, const char* name) const
       if (doc()->isEmpty())
             return;
       xml.stag(name);
-      writeProperties(xml);
+      writeProperties(xml, true);
       xml.etag();
       }
 
@@ -714,10 +730,10 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
 
       // write all properties which are different from style
 
-      TextStyle* st = score()->textStyle(_textStyle);
       if (_textStyle >= 0)
             xml.tag("style", _textStyle);
 
+      TextStyle* st = score()->textStyle(_textStyle);
       if (st == 0 || _align != st->align) {
             if (_align & (ALIGN_RIGHT | ALIGN_HCENTER)) {          // default is ALIGN_LEFT
                   xml.tag("halign", (_align & ALIGN_RIGHT) ? "right" : "center");
@@ -812,7 +828,7 @@ bool TextB::readProperties(QDomElement e)
       if (tag == "style") {
             int i = val.toInt();
             if (i >= 0)
-                  _textStyle = i;
+                  setTextStyle(i);
             }
       else if (tag == "align")            // obsolete
             _align = Align(val.toInt());
@@ -1360,10 +1376,8 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       fontUnderline->setChecked(f.underline());
       color->setColor(tb->color());
 
-      double ps = double(f.pixelSize());
-      ps = (ps / DPI) * PPI;
+      double ps = f.pointSizeF();
       fontSize->setValue(lrint(ps));
-      f.setPixelSize(lrint(ps));
       fontSelect->setCurrentFont(f);
 
       frameWidth->setValue(tb->frameWidth());
@@ -1398,9 +1412,8 @@ void TextProperties::accept()
       tb->setFrameRound(frameRound->value());
       tb->setCircle(circleButton->isChecked());
       QFont f = fontSelect->currentFont();
-      double ps = double(fontSize->value());
-      ps = (ps * DPI)/PPI;
-      f.setPixelSize(lrint(ps));
+      double ps = fontSize->value();
+      f.setPointSizeF(ps);
       f.setBold(fontBold->isChecked());
       f.setItalic(fontItalic->isChecked());
       f.setUnderline(fontUnderline->isChecked());

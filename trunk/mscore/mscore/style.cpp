@@ -377,15 +377,13 @@ void setDefaultStyle()
 
 QFont TextStyle::font() const
       {
-      double mag = ::_spatium / (SPATIUM20 * DPI);
-
-      double m = size * DPI / PPI;
-      if (sizeIsSpatiumDependent)
-            m *= mag;
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);
-      f.setPixelSize(lrint(m));
+      if (sizeIsSpatiumDependent)
+            f.setPointSizeF(size * ::_spatium / (SPATIUM20 * DPI));
+      else
+            f.setPointSizeF(size);
       f.setUnderline(underline);
       return f;
       }
@@ -525,8 +523,18 @@ void Style::load(QDomElement e, int /*version*/)
 //   isDefault
 //---------------------------------------------------------
 
-bool Style::isDefault(int)
+bool Style::isDefault(int idx)
       {
+      switch(styleTypes[idx].valueType()) {
+            case ST_DOUBLE:
+            case ST_SPATIUM:
+                  return at(idx).toDouble() == defaultStyle[idx].toDouble();
+            case ST_BOOL:
+                  return at(idx).toBool() == defaultStyle[idx].toBool();
+            case ST_INT:
+            case ST_DIRECTION:
+                  return at(idx).toInt() == defaultStyle[idx].toInt();
+            }
       return false;
       }
 

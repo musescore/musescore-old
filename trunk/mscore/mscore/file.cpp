@@ -225,7 +225,7 @@ void MuseScore::saveFile()
 /**
  If file has generated name, create a modal file save dialog
  and ask filename.
- Rename old file to backup file (.xxxx.msc,).
+ Rename old file to backup file (.xxxx.msc?,).
  Default is to save score in .mscz format,
  Return true if OK and false on error.
  */
@@ -366,7 +366,7 @@ bool Score::saveAs(bool saveCopy)
       QStringList fl;
 
       fl.append(tr("Compressed MuseScore Format (*.mscz)"));
-      fl.append(tr("MuseScore Format (*.msc)"));
+      fl.append(tr("MuseScore Format (*.mscx)"));
       fl.append(tr("MusicXML Format (*.xml)"));
       fl.append(tr("Compressed MusicXML Format (*.mxl)"));
       fl.append(tr("Standard MIDI File (*.mid)"));
@@ -391,11 +391,11 @@ bool Score::saveAs(bool saveCopy)
 
       bool rv = false;
       if (selectedFilter == fl[0] || selectedFilter == fl[1]) {
-            // save as mscore *.msc(z) file
+            // save as mscore *.msc[xz] file
             if (selectedFilter == fl[0] && !fn.endsWith(".mscz"))
                   fn.append(".mscz");
-            else if (selectedFilter == fl[1] && !fn.endsWith(".msc"))
-                  fn.append(".msc");
+            else if (selectedFilter == fl[1] && !fn.endsWith(".mscx"))
+                  fn.append(".mscx");
             QFileInfo fi(fn);
             rv = true;
             try {
@@ -734,7 +734,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       else
             dt = QDateTime::currentDateTime();
 
-      QString fn = info.completeBaseName() + ".msc";
+      QString fn = info.completeBaseName() + ".mscx";
       QBuffer cbuf;
       cbuf.open(QIODevice::ReadWrite);
       Xml xml(&cbuf);
@@ -810,7 +810,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 
 void Score::saveFile(QFileInfo& info, bool autosave)
       {
-      QString ext(".msc");
+      QString ext(".mscx");
 
       if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ext);
@@ -1218,6 +1218,8 @@ bool Score::read(QDomElement e)
                   else if (tag == "Slur") {
                         Slur* slur = new Slur(this);
                         slur->read(ee);
+                        slur->setTrack(-1);     // for backward compatibility
+                        slur->setTick(-1);
                         _layout->add(slur);
                         }
                   else if (tag == "HairPin") {

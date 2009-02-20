@@ -71,7 +71,7 @@ ScNote::ScNote(QScriptEngine* engine)
 //---------------------------------------------------------
 
 QScriptClass::QueryFlags ScNote::queryProperty(const QScriptValue &object,
-   const QScriptString& name, QueryFlags flags, uint* /*id*/)
+   const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
       {
       NotePtr* sp = qscriptvalue_cast<NotePtr*>(object.data());
       if (!sp)
@@ -98,12 +98,12 @@ printf("property <%s>\n", qPrintable(name.toString()));
 //   setProperty
 //---------------------------------------------------------
 
-void ScNote::setProperty(QScriptValue &object,
-   const QScriptString& s, uint /*id*/, const QScriptValue& value)
+void ScNote::setProperty(QScriptValue& /*object*/ , const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
       {
-      NotePtr* score = qscriptvalue_cast<NotePtr*>(object.data());
+/*      NotePtr* score = qscriptvalue_cast<NotePtr*>(object.data());
       if (!score)
             return;
+      */
       }
 
 //---------------------------------------------------------
@@ -111,7 +111,7 @@ void ScNote::setProperty(QScriptValue &object,
 //---------------------------------------------------------
 
 QScriptValue::PropertyFlags ScNote::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
+   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
       {
 #if 0
       if (name == scoreName)

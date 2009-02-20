@@ -63,7 +63,7 @@ void ScoreLayout::rebuildBspTree()
       foreach (const Element* element, *score()->gel()) {
             if (element->track() != -1) {
                   if (element->staffIdx() < 0 || element->staffIdx() >= score()->nstaves()) {
-                        printf("element %s bad staff %d(%d) >= %d\n",
+                        printf("element %s bad staffIdx %d(track:%d) >= staves(%d)\n",
                            element->name(), element->staffIdx(), element->track(), score()->nstaves());
                         continue;
                         }
@@ -549,7 +549,7 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m)
             m = static_cast<Measure*>(mb);
             }
       m = sm;
-      if (n >= score()->styleD(ST_minEmptyMeasures)) {
+      if (n >= score()->styleI(ST_minEmptyMeasures)) {
             for (int i = 0; i < (n-1); ++i) {
                   m->setMultiMeasure(-1);
                   m = static_cast<Measure*>(m->next());
