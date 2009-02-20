@@ -321,8 +321,10 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                         }
                   if (tiedNote)
                         len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
-                  else
+                  else {
+printf("len %d = (len %d * gateTime %d)/100\n", len, (len * gateTime)/100-1, gateTime);
                         len = (len * gateTime) / 100 - 1;
+                        }
                   collectChord(events,
                      instr,
                      pitchOffset + ottavaShift,

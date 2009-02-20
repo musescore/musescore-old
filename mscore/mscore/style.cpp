@@ -251,87 +251,87 @@ const TextStyle defaultTextStyleArray[] = {
 Style::Style()
    : QVector<StyleVal>(ST_STYLES)
       {
-      StyleVal values[] = {
-            StyleVal(Spatium(7.0)),
-            StyleVal(Spatium(7.0)),
-            StyleVal(Spatium(6.5)),
-            StyleVal(Spatium(6.5)),
-            StyleVal(Spatium(9.25)),
-            StyleVal(Spatium(2)),
-            StyleVal(Spatium(2)),
-            StyleVal(Spatium(7.0)),
-            StyleVal(Spatium(1.0)),
-            StyleVal(Spatium(4.0)),
-            StyleVal(Spatium(0.16)),
-            StyleVal(Spatium(0.16)),
-            StyleVal(Spatium(0.3)),
-            StyleVal(Spatium(0.30)),
-            StyleVal(Spatium(0.30)),
-            StyleVal(Spatium(0.35)),
-            StyleVal(Spatium(0.25)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(1.75)),
-            StyleVal(Spatium(0.13)),
-            StyleVal(Spatium(1.0)),
-            StyleVal(Spatium(0.4)),
-            StyleVal(Spatium(1.5)),
-            StyleVal(Spatium(1.0)),
-            StyleVal(1.2),
-            StyleVal(Spatium(0.08)),
-            StyleVal(Spatium(0.08)),
-            StyleVal(Spatium(1.6)),
-            StyleVal(Spatium(0.13)),
-            StyleVal(Spatium(0.22)),
-            StyleVal(Spatium(0.48)),
-            StyleVal(0.5),
-            StyleVal(Spatium(1.25)),
-            StyleVal(0.05),
-            StyleVal(0.2),
-            StyleVal(division),
-            StyleVal(Spatium(0.35)),
-            StyleVal(Spatium(0.25)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.25)),
-            StyleVal(0.7),
-            StyleVal(0.3),
-            StyleVal(Spatium(1.2)),
-            StyleVal(Spatium(0.5)),
-            StyleVal(Spatium(0.13)),
-            StyleVal(true),
-            StyleVal(false),
-            StyleVal(true),
-            StyleVal(true),
-            StyleVal(false),
-            StyleVal(5),
-            StyleVal(true),
-            StyleVal(false),
-            StyleVal(0.7),
-            StyleVal(0.7),
-            StyleVal(0.7),
-            StyleVal(0.8),
-            StyleVal(true),
-            StyleVal(true),
-            StyleVal(true),
-            StyleVal(true),
-            StyleVal(false),
-            StyleVal(false),
-            StyleVal(false),
-            StyleVal(false),
-            StyleVal(2),
-            StyleVal(Spatium(4)),
-            StyleVal(false),
-            StyleVal(UP),
-            StyleVal(DOWN),
-            StyleVal(UP),
-            StyleVal(DOWN),
-            StyleVal(85),
-            StyleVal(100),
-            StyleVal(50),
-            StyleVal(100)
+      StyleVal values[ST_STYLES] = {
+            StyleVal(Spatium(7.0)),               // ST_staffUpperBorder,
+            StyleVal(Spatium(7.0)),               // ST_staffLowerBorder,
+            StyleVal(Spatium(6.5)),               // ST_staffDistance,
+            StyleVal(Spatium(6.5)),               // ST_accoladeDistance,
+            StyleVal(Spatium(9.25)),              // ST_systemDistance,
+            StyleVal(Spatium(2)),                 // ST_lyricsDistance,
+            StyleVal(Spatium(2)),                 // ST_lyricsMinBottomDistance,
+            StyleVal(Spatium(7.0)),               // ST_systemBoxDistance,
+            StyleVal(Spatium(1.0)),               // ST_boxSystemDistance,
+            StyleVal(Spatium(4.0)),               // ST_minMeasureWidth,
+            StyleVal(Spatium(0.16)),              // ST_barWidth,
+            StyleVal(Spatium(0.16)),              // ST_doubleBarWidth,
+            StyleVal(Spatium(0.3)),               // ST_endBarWidth,
+            StyleVal(Spatium(0.30)),              // ST_doubleBarDistance,
+            StyleVal(Spatium(0.30)),              // ST_endBarDistance,
+            StyleVal(Spatium(0.35)),              // ST_bracketWidth,
+            StyleVal(Spatium(0.25)),              // ST_bracketDistance,
+            StyleVal(Spatium(0.5)),               // ST_clefLeftMargin,
+            StyleVal(Spatium(0.5)),               // ST_keysigLeftMargin,
+            StyleVal(Spatium(0.5)),               // ST_timesigLeftMargin,
+            StyleVal(Spatium(1.75)),              // ST_clefKeyRightMargin,
+            StyleVal(Spatium(0.13)),              // ST_stemWidth,
+            StyleVal(Spatium(1.0)),               // ST_beginRepeatLeftMargin,
+            StyleVal(Spatium(0.4)),               // ST_minNoteDistance,
+            StyleVal(Spatium(1.5)),               // ST_barNoteDistance,
+            StyleVal(Spatium(1.0)),               // ST_noteBarDistance,
+            StyleVal(1.2),                        // ST_measureSpacing,
+            StyleVal(Spatium(0.08)),              // ST_staffLineWidth,
+            StyleVal(Spatium(0.08)),              // ST_ledgerLineWidth,
+            StyleVal(Spatium(1.6)),               // ST_akkoladeWidth,
+            StyleVal(Spatium(0.13)),              // ST_prefixDistance,
+            StyleVal(Spatium(0.22)),              // ST_prefixNoteDistance,
+            StyleVal(Spatium(0.48)),              // ST_beamWidth,
+            StyleVal(0.5),                        // ST_beamDistance,
+            StyleVal(Spatium(1.25)),              // ST_beamMinLen,
+            StyleVal(0.05),                       // ST_beamMinSlope,
+            StyleVal(0.2),                        // ST_beamMaxSlope,
+            StyleVal(division),                   // ST_maxBeamTicks,
+            StyleVal(Spatium(0.35)),              // ST_dotNoteDistance,
+            StyleVal(Spatium(0.25)),              // ST_dotRestDistance,
+            StyleVal(Spatium(0.5)),               // ST_dotDotDistance,
+            StyleVal(Spatium(0.5)),               // ST_propertyDistanceHead,
+            StyleVal(Spatium(0.5)),               // ST_propertyDistanceStem,
+            StyleVal(Spatium(0.25)),              // ST_propertyDistance,
+            StyleVal(0.7),                        // ST_pageFillLimit,
+            StyleVal(0.3),                        // ST_lastSystemFillLimit,
+            StyleVal(Spatium(1.2)),               // ST_hairpinHeight,
+            StyleVal(Spatium(0.5)),               // ST_hairpinContHeight,
+            StyleVal(Spatium(0.13)),              // ST_hairpinWidth,
+            StyleVal(true),                       // ST_showPageNumber,
+            StyleVal(false),                      // ST_showPageNumberOne,
+            StyleVal(true),                       // ST_pageNumberOddEven,
+            StyleVal(true),                       // ST_showMeasureNumber,
+            StyleVal(false),                      // ST_showMeasureNumberOne,
+            StyleVal(5),                          // ST_measureNumberInterval,
+            StyleVal(true),                       // ST_measureNumberSystem,
+            StyleVal(false),                      // ST_measureNumberAllStaffs,
+            StyleVal(0.7),                        // ST_smallNoteMag,
+            StyleVal(0.7),                        // ST_graceNoteMag,
+            StyleVal(0.7),                        // ST_smallStaffMag,
+            StyleVal(0.8),                        // ST_smallClefMag,
+            StyleVal(true),                       // ST_genClef,
+            StyleVal(true),                       // ST_genKeysig,
+            StyleVal(true),                       // ST_genTimesig,
+            StyleVal(true),                       // ST_genCourtesyTimesig,
+            StyleVal(false),                      // ST_useGermanNoteNames,
+            StyleVal(false),                      // ST_chordNamesUseSymbols,
+            StyleVal(false),                      // ST_concertPitch,
+            StyleVal(false),                      // ST_createMultiMeasureRests,
+            StyleVal(2),                          // ST_minEmptyMeasures,
+            StyleVal(Spatium(4)),                 // ST_minMMRestWidth,
+            StyleVal(false),                      // ST_hideEmptyStaves,
+            StyleVal(UP),                         // ST_stemDir1,
+            StyleVal(DOWN),                       // ST_stemDir2,
+            StyleVal(UP),                         // ST_stemDir3,
+            StyleVal(DOWN),                       // ST_stemDir4,
+            StyleVal(85),                         // ST_gateTime,
+            StyleVal(100),                        // ST_tenutoGateTime,
+            StyleVal(50),                         // ST_staccatoGateTime,
+            StyleVal(100)                         // ST_slurGateTime,
             };
 
       StyleVal* d = data();
@@ -493,8 +493,6 @@ void Style::load(QDomElement e, int /*version*/)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            int i    = val.toInt();
-            double d = val.toDouble();
 
             if (tag == "stemDir") {
                   int voice = e.attribute("voice", "1").toInt() - 1;
@@ -506,14 +504,14 @@ void Style::load(QDomElement e, int /*version*/)
                         }
                   }
             int idx;
-            for (int idx = 0; idx < ST_STYLES; ++idx) {
+            for (idx = 0; idx < ST_STYLES; ++idx) {
                   if (styleTypes[idx].name() == tag) {
-                        switch(styleTypes[i].valueType()) {
-                              case ST_SPATIUM:   data()[idx] = StyleVal(Spatium(d));   break;
-                              case ST_DOUBLE:    data()[idx] = StyleVal(d);            break;
-                              case ST_BOOL:      data()[idx] = StyleVal(bool(i));      break;
-                              case ST_INT:       data()[idx] = StyleVal(i);            break;
-                              case ST_DIRECTION: data()[idx] = StyleVal(Direction(i)); break;
+                        switch(styleTypes[idx].valueType()) {
+                              case ST_SPATIUM:   data()[idx] = StyleVal(Spatium(val.toDouble()));   break;
+                              case ST_DOUBLE:    data()[idx] = StyleVal(val.toDouble());            break;
+                              case ST_BOOL:      data()[idx] = StyleVal(bool(val.toInt()));         break;
+                              case ST_INT:       data()[idx] = StyleVal(val.toInt());               break;
+                              case ST_DIRECTION: data()[idx] = StyleVal(Direction(val.toInt()));    break;
                               }
                         break;
                         }
