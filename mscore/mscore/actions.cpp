@@ -1913,6 +1913,42 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enable Script Debugger"),
          QT_TR_NOOP("Enable Script Debugger")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "rest-1",
+         QT_TR_NOOP("enter 1/1 rest"),
+         QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_S),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("1/1 rest"),
+         QT_TR_NOOP("enter 1/1 rest")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "rest-2",
+         QT_TR_NOOP("enter 1/2 rest"),
+         QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_M),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("1/2 rest"),
+         QT_TR_NOOP("enter 1/2 rest")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "rest-4",
+         QT_TR_NOOP("enter 1/4 rest"),
+         QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_R),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("1/4 rest"),
+         QT_TR_NOOP("enter 1/4 rest")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "rest-8",
+         QT_TR_NOOP("enter 1/8 rest"),
+         QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_Q),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("1/8 rest"),
+         QT_TR_NOOP("enter 1/8 rest")
+         ),
       Shortcut(0, 0, 0),
       };
 

@@ -1,4 +1,9 @@
-20.feg (ws)
+20.feb (ws)
+      - new shortcuts
+         enter 1/1 rest: SHIFT+R, SHIFT+S
+         enter 1/2 rest: SHIFT+R, SHIFT+M
+         enter 1/4 rest: SHIFT+R, SHIFT+R
+         enter 1/8 rest: SHIFT+R, SHIFT+Q
       - more debugging for parts
       - save only style values which differ from default build in style
 19.feb (tb)

@@ -308,6 +308,7 @@ MuseScore::MuseScore()
       sl << "page-prev" << "page-next" << "page-top" << "page-end"
          << "add-slur" << "add-hairpin" << "add-hairpin-reverse"
          << "escape" << "delete" << "rest" << "pitch-up" << "pitch-down"
+         << "rest-1" << "rest-2" << "rest-4" << "rest-8"
          << "pitch-up-octave" << "pitch-down-octave"
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
