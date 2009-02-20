@@ -1667,7 +1667,6 @@ void Score::cmdEnterRest()
 
 void Score::cmdEnterRest(Duration::DurationType d)
       {
-printf("cmdEnterREst %d\n", int(d));
       if (!noteEntryMode())
             setNoteEntry(true);
       if (_is.cr == 0) {
