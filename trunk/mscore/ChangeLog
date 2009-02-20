@@ -1,4 +1,5 @@
 20.feb (ws)
+      - fix: moving notehead with mouse (pitch change) was not undoable
       - save visibility of note stem; hook visibility follows stem
       - new shortcuts
          enter 1/1 rest: SHIFT+R, SHIFT+S
