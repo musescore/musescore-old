@@ -232,21 +232,6 @@ void MuseScore::saveFile()
 
 bool Score::saveFile(bool autosave)
       {
-      QString suffix = info.suffix();
-      if ((suffix != "mscx") && (suffix != "mscz")) {
-            QString s = info.filePath();
-            if (!suffix.isEmpty())
-                  s = s.left(s.size() - suffix.size());
-            else
-                  s += ".";
-            if (suffix == "msc")
-                  suffix = "mscx";        // silently change to mscx
-            else
-                  suffix = "mscz";
-            s += suffix;
-            info.setFile(s);
-            }
-
       if (created()) {
             QString selectedFilter;
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
@@ -261,6 +246,20 @@ bool Score::saveFile(bool autosave)
                   return false;
             info.setFile(fn);
             setCreated(false);
+            }
+      QString suffix = info.suffix();
+      if ((suffix != "mscx") && (suffix != "mscz")) {
+            QString s = info.filePath();
+            if (!suffix.isEmpty())
+                  s = s.left(s.size() - suffix.size());
+            else
+                  s += ".";
+            if (suffix == "msc")
+                  suffix = "mscx";        // silently change to mscx
+            else
+                  suffix = "mscz";
+            s += suffix;
+            info.setFile(s);
             }
 
       // if file was already saved in this session

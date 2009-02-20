@@ -329,7 +329,7 @@ void System::layout2(ScoreLayout* layout)
                   setDistance(staffIdx, score()->styleS(ST_systemDistance));
                   }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
-                  setDistance(staffIdx, score()->styleS(ST_accoladeDistance));
+                  setDistance(staffIdx, score()->styleS(ST_akkoladeDistance));
                   }
             else {
                   setDistance(staffIdx, score()->styleS(ST_staffDistance));

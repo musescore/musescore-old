@@ -93,12 +93,12 @@ void EditStyle::getValues()
       lstyle[ST_staffUpperBorder]        = StyleVal(Spatium(staffUpperBorder->value()));
       lstyle[ST_staffLowerBorder]        = StyleVal(Spatium(staffLowerBorder->value()));
       lstyle[ST_staffDistance]           = StyleVal(Spatium(staffDistance->value()));
-      lstyle[ST_accoladeDistance]        = StyleVal(Spatium(akkoladeDistance->value()));
+      lstyle[ST_akkoladeDistance]        = StyleVal(Spatium(akkoladeDistance->value()));
       lstyle[ST_systemDistance]          = StyleVal(Spatium(systemDistance->value()));
       lstyle[ST_lyricsDistance]          = StyleVal(Spatium(lyricsDistance->value()));
       lstyle[ST_lyricsMinBottomDistance] = StyleVal(Spatium(lyricsMinBottomDistance->value()));
-      lstyle[ST_systemBoxDistance]       = StyleVal(Spatium(systemFrameDistance->value()));
-      lstyle[ST_boxSystemDistance]       = StyleVal(Spatium(frameSystemDistance->value()));
+      lstyle[ST_systemFrameDistance]     = StyleVal(Spatium(systemFrameDistance->value()));
+      lstyle[ST_frameSystemDistance]     = StyleVal(Spatium(frameSystemDistance->value()));
       lstyle[ST_bracketDistance]         = StyleVal(Spatium(bracketDistance->value()));
       lstyle[ST_measureSpacing]          = StyleVal(measureSpacing->value());
       lstyle[ST_minNoteDistance]         = StyleVal(Spatium(minNoteDistance->value()));
@@ -161,12 +161,12 @@ void EditStyle::setValues()
       staffUpperBorder->setValue(lstyle[ST_staffUpperBorder].toSpatium().val());
       staffLowerBorder->setValue(lstyle[ST_staffLowerBorder].toSpatium().val());
       staffDistance->setValue(lstyle[ST_staffDistance].toSpatium().val());
-      akkoladeDistance->setValue(lstyle[ST_accoladeDistance].toSpatium().val());
+      akkoladeDistance->setValue(lstyle[ST_akkoladeDistance].toSpatium().val());
       systemDistance->setValue(lstyle[ST_systemDistance].toSpatium().val());
       lyricsDistance->setValue(lstyle[ST_lyricsDistance].toSpatium().val());
       lyricsMinBottomDistance->setValue(lstyle[ST_lyricsMinBottomDistance].toSpatium().val());
-      systemFrameDistance->setValue(lstyle[ST_systemBoxDistance].toSpatium().val());
-      frameSystemDistance->setValue(lstyle[ST_boxSystemDistance].toSpatium().val());
+      systemFrameDistance->setValue(lstyle[ST_systemFrameDistance].toSpatium().val());
+      frameSystemDistance->setValue(lstyle[ST_frameSystemDistance].toSpatium().val());
       bracketDistance->setValue(lstyle[ST_bracketDistance].toSpatium().val());
 
       measureSpacing->setValue(lstyle[ST_measureSpacing].toDouble());

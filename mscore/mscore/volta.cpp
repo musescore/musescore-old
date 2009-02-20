@@ -127,7 +127,7 @@ void VoltaSegment::propertyAction(const QString& s)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool VoltaSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool VoltaSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& /*s*/)
       {
       if ((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
