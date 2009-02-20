@@ -1,4 +1,5 @@
 20.feb (ws)
+      - save visibility of note stem; hook visibility follows stem
       - new shortcuts
          enter 1/1 rest: SHIFT+R, SHIFT+S
          enter 1/2 rest: SHIFT+R, SHIFT+M

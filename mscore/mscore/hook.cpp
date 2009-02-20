@@ -20,6 +20,7 @@
 
 #include "hook.h"
 #include "sym.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   Hook
@@ -51,4 +52,17 @@ void Hook::setSubtype(int i)
             case -5:   break;
             }
       }
+
+//---------------------------------------------------------
+//   setVisible
+//---------------------------------------------------------
+
+void Hook::setVisible(bool f)
+      {
+      Element::setVisible(f);
+      Chord* chord = static_cast<Chord*>(parent());
+      if (chord && chord->stem() && chord->stem()->visible() != f)
+            chord->stem()->setVisible(f);
+      }
+
 
