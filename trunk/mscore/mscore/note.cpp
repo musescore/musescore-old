@@ -429,7 +429,7 @@ void Note::setAccidentalSubtype(int pre)
 
 void Note::setType(Duration t)
       {
-      _head = noteHeads[_headGroup][t.headType()];
+      _head = noteHeads[int(_headGroup)][t.headType()];
       }
 
 //---------------------------------------------------------
@@ -444,7 +444,7 @@ void Note::setHeadGroup(int val)
             }
       _headGroup = val;
       if (chord())
-            _head = noteHeads[_headGroup][chord()->duration().headType()];
+            _head = noteHeads[int(_headGroup)][chord()->duration().headType()];
       }
 
 //---------------------------------------------------------

@@ -42,12 +42,12 @@ StyleType styleTypes[] = {
       StyleType("staffUpperBorder",        ST_SPATIUM),
       StyleType("staffLowerBorder",        ST_SPATIUM),
       StyleType("staffDistance",           ST_SPATIUM),
-      StyleType("accoladeDistance",        ST_SPATIUM),
+      StyleType("akkoladeDistance",        ST_SPATIUM),
       StyleType("systemDistance",          ST_SPATIUM),
       StyleType("lyricsDistance",          ST_SPATIUM),
       StyleType("lyricsMinBottomDistance", ST_SPATIUM),
-      StyleType("systemBoxDistance",       ST_SPATIUM),     // dist. between staff and vertical box
-      StyleType("boxSystemDistance",       ST_SPATIUM),     // dist. between vertical box and next system
+      StyleType("systemFrameDistance",     ST_SPATIUM),     // dist. between staff and vertical box
+      StyleType("frameSystemDistance",     ST_SPATIUM),     // dist. between vertical box and next system
       StyleType("minMeasureWidth",         ST_SPATIUM),
       StyleType("barWidth",                ST_SPATIUM),
       StyleType("doubleBarWidth",          ST_SPATIUM),
@@ -255,12 +255,12 @@ Style::Style()
             StyleVal(Spatium(7.0)),               // ST_staffUpperBorder,
             StyleVal(Spatium(7.0)),               // ST_staffLowerBorder,
             StyleVal(Spatium(6.5)),               // ST_staffDistance,
-            StyleVal(Spatium(6.5)),               // ST_accoladeDistance,
+            StyleVal(Spatium(6.5)),               // ST_akkoladeDistance,
             StyleVal(Spatium(9.25)),              // ST_systemDistance,
             StyleVal(Spatium(2)),                 // ST_lyricsDistance,
             StyleVal(Spatium(2)),                 // ST_lyricsMinBottomDistance,
-            StyleVal(Spatium(7.0)),               // ST_systemBoxDistance,
-            StyleVal(Spatium(1.0)),               // ST_boxSystemDistance,
+            StyleVal(Spatium(7.0)),               // ST_systemFrameDistance,
+            StyleVal(Spatium(1.0)),               // ST_frameSystemDistance,
             StyleVal(Spatium(4.0)),               // ST_minMeasureWidth,
             StyleVal(Spatium(0.16)),              // ST_barWidth,
             StyleVal(Spatium(0.16)),              // ST_doubleBarWidth,

@@ -456,11 +456,11 @@ bool ScoreLayout::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += bh + score()->styleS(ST_boxSystemDistance).point();
+                  y += bh + score()->styleS(ST_frameSystemDistance).point();
                   nettoHeight += bh;
                   if (y > ey)
                         break;
-                  nettoHeight += score()->styleS(ST_boxSystemDistance).point();
+                  nettoHeight += score()->styleS(ST_frameSystemDistance).point();
                   }
             else {
                   if (firstSystemOnPage) {
