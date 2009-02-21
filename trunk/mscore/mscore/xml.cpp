@@ -209,6 +209,14 @@ void Xml::tag(const char* name, const QWidget* g)
       tag(name, QRect(g->pos(), g->size()));
       }
 
+void Xml::tag(const char* name, Placement place)
+      {
+      const char* tags[] = {
+            "auto", "above", "below", "left"
+            };
+      tag(name, tags[int(place)]);
+      }
+
 //---------------------------------------------------------
 //   xmlString
 //---------------------------------------------------------
@@ -286,6 +294,25 @@ QSizeF readSize(QDomElement e)
       p.setWidth(e.attribute("w", "0.0").toDouble());
       p.setHeight(e.attribute("h", "0.0").toDouble());
       return p;
+      }
+
+//---------------------------------------------------------
+//   readPlacement
+//---------------------------------------------------------
+
+Placement readPlacement(QDomElement e)
+      {
+      QString s(e.text());
+      if (s == "auto")
+            return PLACE_AUTO;
+      if (s == "above")
+            return PLACE_ABOVE;
+      if (s == "below")
+            return PLACE_BELOW;
+      if (s == "left")
+            return PLACE_LEFT;
+      printf("unknown placement value <%s>\n", qPrintable(s));
+      return PLACE_AUTO;
       }
 
 //---------------------------------------------------------

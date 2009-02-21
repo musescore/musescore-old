@@ -152,6 +152,10 @@
         <source>acc bayanbase</source>
         <translation>Accordéon Bayan</translation>
     </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -2268,10 +2272,6 @@ failed: </source>
         <translation>...</translation>
     </message>
     <message>
-        <source>Symbol</source>
-        <translation>Symbole</translation>
-    </message>
-    <message>
         <source>Ped (Pedal)</source>
         <translation>Ped (pédale)</translation>
     </message>
@@ -2294,6 +2294,22 @@ failed: </source>
     <message>
         <source>diagonally</source>
         <translation>diagonalement</translation>
+    </message>
+    <message>
+        <source>place:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Gauche</translation>
+    </message>
+    <message>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symb.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4849,6 +4865,38 @@ avant de fermer ?</translation>
         <source>3 between notes</source>
         <translation>3 entre les notes</translation>
     </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6216,10 +6264,6 @@ failed: </source>
         <translation>Format MuseScore compressé (*.mscz)</translation>
     </message>
     <message>
-        <source>MuseScore Format (*.msc)</source>
-        <translation>Format MuseScore (*.msc)</translation>
-    </message>
-    <message>
         <source>PDF File (*.pdf)</source>
         <translation>Fichier PDF  (*.pdf)</translation>
     </message>
@@ -6308,6 +6352,10 @@ failed: </source>
     <message>
         <source>&gt; to &lt;</source>
         <translation>&gt; en &lt;</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7361,13 +7409,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Liste des reprises :</translation>
-    </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation>Propriétés de la reprise...</translation>
     </message>
 </context>
 <context>

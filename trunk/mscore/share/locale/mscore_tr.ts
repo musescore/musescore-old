@@ -151,6 +151,10 @@
         <source>acc bayanbase</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -2257,10 +2261,6 @@ yapılamadı:</translation>
         <translation type="unfinished">...</translation>
     </message>
     <message>
-        <source>Symbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ped (Pedal)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2282,6 +2282,22 @@ yapılamadı:</translation>
     </message>
     <message>
         <source>diagonally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>place:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Sol</translation>
+    </message>
+    <message>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symb.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4838,6 +4854,38 @@ kaydetmek ister misiniz?</translation>
         <source>3 between notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6176,10 +6224,6 @@ başarısız:</translation>
         <translation>Sıkıştırılmış MuseScore Formatı (*.mscz)</translation>
     </message>
     <message>
-        <source>MuseScore Format (*.msc)</source>
-        <translation>MuseScore Formatı (*.msc)</translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML Formatı (*xml)</translation>
     </message>
@@ -6297,6 +6341,10 @@ başarısız:</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7348,13 +7396,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Tekrar Listesi:</translation>
-    </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation>Dolap Özellikleri...</translation>
     </message>
 </context>
 <context>

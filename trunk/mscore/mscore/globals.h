@@ -62,7 +62,7 @@ extern qreal DPMM;      // logical dots/mm
 enum Direction { AUTO, UP, DOWN };
 
 enum Placement {
-      PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW
+      PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW, PLACE_LEFT
       };
 
 enum LineSegmentType {

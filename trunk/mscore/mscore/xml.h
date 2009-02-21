@@ -21,6 +21,8 @@
 #ifndef __XML_H__
 #define __XML_H__
 
+#include "globals.h"
+
 //---------------------------------------------------------
 //   Property
 //---------------------------------------------------------
@@ -73,6 +75,7 @@ class Xml : public QTextStream {
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const QWidget*);
+      void tag(const char* name, Placement);
 
       void writeHtml(const QString& s);
 
@@ -89,5 +92,6 @@ extern QSizeF readSize(QDomElement);
 extern QColor readColor(QDomElement e);
 extern void domError(QDomElement node);
 extern void domNotImplemented(QDomElement node);
+extern Placement readPlacement(QDomElement e);
 #endif
 

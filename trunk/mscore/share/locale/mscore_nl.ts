@@ -152,6 +152,10 @@
         <source>acc bayanbase</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -1770,7 +1774,7 @@ toonhoogte</translation>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maatsoorten</translation>
     </message>
     <message>
         <source>Len</source>
@@ -2256,10 +2260,6 @@ failed: </source>
         <translation>...</translation>
     </message>
     <message>
-        <source>Symbol</source>
-        <translation>	Symbool</translation>
-    </message>
-    <message>
         <source>Ped (Pedal)</source>
         <translation>Ped (Pedaal)</translation>
     </message>
@@ -2282,6 +2282,22 @@ failed: </source>
     <message>
         <source>diagonally</source>
         <translation>diagonaal</translation>
+    </message>
+    <message>
+        <source>place:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Links</translation>
+    </message>
+    <message>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symb.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4839,6 +4855,38 @@ voor dat u afsluit?</translation>
         <source>3 between notes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6174,10 +6222,6 @@ failed: </source>
         <translation>Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
     </message>
     <message>
-        <source>MuseScore Format (*.msc)</source>
-        <translation>MuseScore Formaat (*.msc)</translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML Formaat (*.xml)</translation>
     </message>
@@ -6294,6 +6338,10 @@ failed: </source>
     <message>
         <source>&gt; to &lt;</source>
         <translation>&gt; naar &lt;</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7344,13 +7392,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Herhaal Lijst:</translation>
-    </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation>Volta Eigenschappen...</translation>
     </message>
 </context>
 <context>

@@ -2551,6 +2551,10 @@ void Measure::read(QDomElement e, int idx)
                         Segment* s = getSegment(Segment::SegBarLine, barLine->tick());
                         s->add(barLine);
                         }
+                  else if (barLine->subtype() == START_REPEAT) {
+                        Segment* s = getSegment(Segment::SegStartRepeatBarLine, barLine->tick());
+                        s->add(barLine);
+                        }
                   else {
                         setEndBarLineType(barLine->subtype(), false, barLine->visible(), barLine->color());
                         delete barLine;

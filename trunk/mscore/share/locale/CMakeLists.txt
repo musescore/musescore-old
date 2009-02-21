@@ -31,6 +31,8 @@ install(FILES
       mscore_ru.ts
       mscore_es.qm
       mscore_es.ts
+      mscore_fi.qm
+      mscore_fi.ts
       mscore_fr.qm
       mscore_fr.ts
       mscore_nl.qm

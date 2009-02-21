@@ -152,6 +152,10 @@
         <source>acc bayanbase</source>
         <translation type="unfinished">Akkordeon Bayanbase</translation>
     </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -317,12 +321,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Akkord</translation>
     </message>
     <message>
         <source>Stem</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Notenhals</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -332,12 +336,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Grace Note</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorschlagnote</translation>
     </message>
     <message>
         <source>Stem Direction</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Halsrichtung</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -347,7 +351,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Help Lines:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hilfslinien:</translation>
     </message>
 </context>
 <context>
@@ -1734,7 +1738,7 @@ zu Notenzeile</translation>
     <message>
         <source>Element</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Element</translation>
     </message>
     <message>
         <source>selected</source>
@@ -1754,7 +1758,7 @@ zu Notenzeile</translation>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">System</translation>
     </message>
     <message>
         <source>subtype</source>
@@ -1769,12 +1773,12 @@ zu Notenzeile</translation>
     <message>
         <source>Staff</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Notenzeile</translation>
     </message>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Taktart</translation>
     </message>
     <message>
         <source>Len</source>
@@ -1784,7 +1788,7 @@ zu Notenzeile</translation>
     <message>
         <source>Color</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Farbe</translation>
     </message>
     <message>
         <source>Pos</source>
@@ -1799,7 +1803,7 @@ zu Notenzeile</translation>
     <message>
         <source>Offset</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Offset</translation>
     </message>
     <message>
         <source>BBox</source>
@@ -1809,7 +1813,7 @@ zu Notenzeile</translation>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lupe</translation>
     </message>
 </context>
 <context>
@@ -2262,10 +2266,6 @@ fehlgeschlagen: </translation>
         <translation>...</translation>
     </message>
     <message>
-        <source>Symbol</source>
-        <translation>Symbol</translation>
-    </message>
-    <message>
         <source>Ped (Pedal)</source>
         <translation>Ped (Pedal)</translation>
     </message>
@@ -2288,6 +2288,22 @@ fehlgeschlagen: </translation>
     <message>
         <source>diagonally</source>
         <translation>diagonal</translation>
+    </message>
+    <message>
+        <source>place:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished">Links</translation>
+    </message>
+    <message>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symb.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4842,6 +4858,38 @@ before closing?</source>
         <source>3 between notes</source>
         <translation>3 zwischen Noten</translation>
     </message>
+    <message>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4973,12 +5021,12 @@ before closing?</source>
     <message>
         <source>Note</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Note</translation>
     </message>
     <message>
         <source>Pitch</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tonhöhe</translation>
     </message>
     <message>
         <source>Head</source>
@@ -5003,7 +5051,7 @@ before closing?</source>
     <message>
         <source>Line</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Linie</translation>
     </message>
     <message>
         <source>Tie Forw.</source>
@@ -6209,10 +6257,6 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
         <translation>Komprimiertes MuseScore Format (*.mscz)</translation>
     </message>
     <message>
-        <source>MuseScore Format (*.msc)</source>
-        <translation>MuseScore Format (*.msc)</translation>
-    </message>
-    <message>
         <source>PDF File (*.pdf)</source>
         <translation>PDF-Datei (*.pdf)</translation>
     </message>
@@ -6301,6 +6345,10 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>&gt; to &lt;</source>
         <translation>&gt; nach &lt;</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6648,12 +6696,12 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Text</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Text:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -7351,13 +7399,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Wiederholungsliste:</translation>
-    </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation>Eigenschaften Volta</translation>
     </message>
 </context>
 <context>
