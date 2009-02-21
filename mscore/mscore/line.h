@@ -84,6 +84,7 @@ class SLine : public Element {
       QList<LineSegment*> segments;
       int _tick2;
       bool _diagonal;
+      bool _snapToMeasure;
 
    public:
       SLine(Score* s);
@@ -105,8 +106,9 @@ class SLine : public Element {
       virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      bool diagonal() const    { return _diagonal; }
-      void setDiagonal(bool v) { _diagonal = v; }
+      bool diagonal() const         { return _diagonal;   }
+      void setDiagonal(bool v)      { _diagonal = v;      }
+      void setSnapToMeasure(bool v) { _snapToMeasure = v; }
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

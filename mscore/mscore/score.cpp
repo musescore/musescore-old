@@ -467,7 +467,7 @@ bool Score::read(QString name)
       checkTuplets();
       rebuildMidiMapping();
       updateChannel();
-      _layout->doLayout();
+//      _layout->doLayout();
       layoutAll = false;
       return true;
       }

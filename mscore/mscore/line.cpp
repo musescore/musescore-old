@@ -218,6 +218,7 @@ SLine::SLine(Score* s)
       setTick(0);
       _tick2 = 0;
       _diagonal = false;
+      _snapToMeasure = false;
       }
 
 SLine::SLine(const SLine& s)
@@ -225,6 +226,7 @@ SLine::SLine(const SLine& s)
       {
       _tick2    = s._tick2;
       _diagonal = s._diagonal;
+      _snapToMeasure = s._snapToMeasure;
       foreach(LineSegment* ls, s.segments)
             add(ls->clone());
       }
@@ -405,7 +407,6 @@ void SLine::writeProperties(Xml& xml) const
       //
       // write user modified layout
       //
-printf("write segments %d\n", segments.size());
       foreach(LineSegment* seg, segments) {
             xml.stag("Segment");
             xml.tag("off1", seg->userOff());
@@ -421,10 +422,6 @@ printf("write segments %d\n", segments.size());
 
 bool SLine::readProperties(QDomElement e)
       {
-      foreach(LineSegment* seg, segments)
-            delete seg;
-      segments.clear();
-
       if (Element::readProperties(e))
             return true;
       QString tag(e.tagName());
@@ -545,6 +542,9 @@ void SLine::write(Xml& xml) const
 
 void SLine::read(QDomElement e)
       {
+      foreach(LineSegment* seg, segments)
+            delete seg;
+      segments.clear();
       setTrack(0);  // set default track
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!SLine::readProperties(e))

@@ -40,6 +40,7 @@ Volta::Volta(Score* s)
       setBeginHook(true);
       setBeginHookHeight(Spatium(1.9));
       setYoff(-2.0);
+      setSnapToMeasure(true);
       }
 
 //---------------------------------------------------------
@@ -87,6 +88,9 @@ void Volta::setText(const QString& s)
 
 void Volta::read(QDomElement e)
       {
+      foreach(LineSegment* seg, segments)
+            delete seg;
+      segments.clear();
       setTrack(0);  // set default staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
