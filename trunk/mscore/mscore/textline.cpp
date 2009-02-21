@@ -118,6 +118,8 @@ void TextLineSegment::draw(QPainter& p) const
 
       if (selected() && !(score() && score()->printing()))
             pen.setColor(preferences.selectColor[0]);
+      else if (!visible())
+            pen.setColor(Qt::gray);
       else
             pen.setColor(tl->lineColor());
 
@@ -326,6 +328,9 @@ void TextLine::write(Xml& xml) const
 
 void TextLine::read(QDomElement e)
       {
+      foreach(LineSegment* seg, segments)
+            delete seg;
+      segments.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
@@ -450,7 +455,13 @@ LineSegment* TextLine::createLineSegment()
 
 bool TextLineSegment::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(tr("Line Properties..."));
+      QAction* a;
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Line Properties..."));
       a->setData("props");
       return true;
       }
@@ -474,6 +485,8 @@ void TextLineSegment::propertyAction(const QString& s)
             else
                   delete nTl;
             }
+      else if (s == "invisible")
+            score()->toggleInvisible(this);
       else
             Element::propertyAction(s);
       }

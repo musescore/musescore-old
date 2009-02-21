@@ -617,9 +617,8 @@ bool TextB::isEmpty() const
 
 void TextB::layout(ScoreLayout* layout)
       {
-      if (parent() && parent()->type() == HBOX) {
+      if (parent() && parent()->type() == HBOX)
             textBase()->layout(parent()->width());
-            }
       else
             textBase()->layout(-1.0);
       setbbox(textBase()->bbox());

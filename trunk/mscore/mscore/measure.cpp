@@ -552,9 +552,6 @@ int Measure::findAccidental(Note* note) const
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-//                  if (chord->noteType() != NOTE_NORMAL)
-//                        continue;
-
 
                   Drumset* drumset = 0;
                   if (chord->staff()->part()->useDrumset())
@@ -695,32 +692,6 @@ void Measure::layout(ScoreLayout* layout, double width)
 
       setbbox(QRectF(0.0, 0.0, width, height()));
       layoutX(layout, width);
-
-      //---------------------------------------------------
-      //   layout lyrics
-      //---------------------------------------------------
-
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  LyricsList* ll = segment->lyricsList(staffIdx);
-                  if (ll->isEmpty())
-                        continue;
-                  Lyrics* lyrics = 0;
-                  for (iLyrics i = ll->begin(); i != ll->end(); ++i) {
-                        Lyrics* l = *i;
-                        if (l == 0)
-                              continue;
-                        lyrics = l;
-                        lyrics->layout(layout);
-                        }
-                  if (lyrics) {
-                        double y = lyrics->ipos().y() + lyrics->lineHeight()
-                             + point(score()->styleS(ST_lyricsMinBottomDistance));
-                        if (y > staves[staffIdx]->distance)
-                              staves[staffIdx]->distance = y;
-                        }
-                  }
-            }
       }
 
 //---------------------------------------------------------
@@ -1441,17 +1412,14 @@ again:
                               extra = extra1;
                         }
 
+                  Lyrics* lyrics = 0;
                   const LyricsList* ll = s->lyricsList(staffIdx);
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
                               continue;
-#if 1
-                        (*l)->doc()->setTextWidth(-1.0);
-                        double lw = (*l)->doc()->idealWidth() * .5;
-#else
                         (*l)->layout(layout);
-                        double lw = ((*l)->bbox().width() + _spatium * 0) * .5;
-#endif
+                        lyrics = *l;
+                        double lw = ((*l)->bbox().width()) * .5;
                         if (lw > min)
                               min = lw;
                         if (lw > extra)
@@ -1460,6 +1428,12 @@ again:
                         }
                   spaces[seg][staffIdx].setMin(min + additionalMin);
                   spaces[seg][staffIdx].setExtra(extra + additionalExtra);
+                  if (lyrics) {
+                        double y = lyrics->ipos().y() + lyrics->lineHeight()
+                             + point(score()->styleS(ST_lyricsMinBottomDistance));
+                        if (y > staves[staffIdx]->distance)
+                              staves[staffIdx]->distance = y;
+                        }
                   }
             }
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
