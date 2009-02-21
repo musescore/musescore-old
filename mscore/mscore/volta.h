@@ -21,7 +21,7 @@
 #ifndef __VOLTA_H__
 #define __VOLTA_H__
 
-#include "line.h"
+#include "textline.h"
 
 class Score;
 class Xml;
@@ -31,49 +31,42 @@ class Volta;
 //   VoltaSegment
 //---------------------------------------------------------
 
-class VoltaSegment : public LineSegment {
-      Q_DECLARE_TR_FUNCTIONS(Measure)
+class VoltaSegment : public TextLineSegment {
+   protected:
 
    public:
-      VoltaSegment(Score* s) : LineSegment(s) {}
-      virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
-      Volta* volta() const                { return (Volta*)parent(); }
-      virtual ElementType type() const    { return VOLTA_SEGMENT; }
-      virtual void draw(QPainter&) const;
-      virtual QRectF bbox() const;
-      virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(const QString&);
-      virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;
+      VoltaSegment(Score* s) : TextLineSegment(s) {}
+      virtual ElementType type() const     { return VOLTA_SEGMENT; }
+      virtual VoltaSegment* clone() const  { return new VoltaSegment(*this); }
+      Volta* volta() const                 { return (Volta*)parent(); }
       };
 
 //---------------------------------------------------------
 //   Volta
-//    brackets
 //---------------------------------------------------------
 
-class Volta : public SLine {
+class Volta : public TextLine {
       QList<int> _endings;
       QString _text;
 
    public:
-      enum {
-            VOLTA_OPEN, VOLTA_CLOSED
-            };
+      enum { VOLTA_OPEN, VOLTA_CLOSED };
+
       Volta(Score* s);
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
-      virtual void layout(ScoreLayout*);
       virtual LineSegment* createLineSegment();
-      virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
+      virtual void layout(ScoreLayout* layout);
+
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
+      virtual void read(QDomElement e);
 
       QList<int> endings() const           { return _endings; }
       QList<int>& endings()                { return _endings; }
       void setEndings(const QList<int>& l) { _endings = l;    }
-      void setText(const QString& s)       { _text = s;       }
+      void setText(const QString& s);
       QString text() const                 { return _text;    }
+      virtual void setSubtype(int val);
       };
 
 #endif

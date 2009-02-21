@@ -66,6 +66,7 @@ class TextLine : public SLine {
       Spatium _lineWidth;
       QColor _lineColor;
       Qt::PenStyle _lineStyle;
+      Placement _beginTextPlace, _continueTextPlace;
 
       bool _beginHook, _endHook;
       Spatium _beginHookHeight, _endHookHeight;
@@ -88,8 +89,11 @@ class TextLine : public SLine {
       virtual TextLine* clone() const           { return new TextLine(*this); }
       virtual ElementType type() const          { return TEXTLINE; }
       virtual LineSegment* createLineSegment();
+
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+      void writeProperties(Xml& xml) const;
+      bool readProperties(QDomElement node);
 
       bool beginHook() const                  { return _beginHook;            }
       bool endHook() const                    { return _endHook;              }
@@ -102,6 +106,10 @@ class TextLine : public SLine {
       void setBeginText(TextC* v)             { _beginText = v;               }
       TextC* continueText() const             { return _continueText;         }
       void setContinueText(TextC* v)          { _continueText = v;            }
+      Placement beginTextPlace() const        { return _beginTextPlace;       }
+      void setBeginTextPlace(Placement p)     { _beginTextPlace = p;          }
+      Placement continueTextPlace() const     { return _continueTextPlace;    }
+      void setContinueTextPlace(Placement p)  { _continueTextPlace = p;       }
 
       void setBeginSymbol(int v)              { _beginSymbol = v;             }
       void setContinueSymbol(int v)           { _continueSymbol = v;          }

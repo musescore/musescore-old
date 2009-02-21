@@ -72,29 +72,29 @@ QPointF LineSegment::gripAnchor(int grip) const
       QRectF sbb(_system->staff(staffIdx)->bbox());
       QPointF sp(sbb.topLeft() + _system->canvasPos());
 
+      int tck = _system->measures().front()->tick();
+
       System* s;  // dummy
-      QPointF p1(line()->tick2pos(grip, line()->tick(), staffIdx, &s));
-      QPointF p2(sbb.x() + sbb.width() + _system->canvasPos().x(), sp.y());
-      QPointF p3(line()->tick2pos(grip, line()->tick2(), staffIdx, &s));
 
       if (grip == 0) {
             switch(_segmentType) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_BEGIN:
-                        return p1;
+                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
                   case SEGMENT_MIDDLE:
                   case SEGMENT_END:
-                        return sp;
+                        return line()->tick2pos(grip, tck, staffIdx, &s);
+                        // return sp;
                   }
             }
       else {
             switch(_segmentType) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_END:
-                        return p3;
+                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
                   case SEGMENT_BEGIN:
                   case SEGMENT_MIDDLE:
-                        return p2;
+                        return QPointF(sbb.x() + sbb.width() + _system->canvasPos().x(), sp.y());
                   }
             }
       return QPointF();
@@ -271,7 +271,7 @@ QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
                   sys = seg->measure()->system();
                   }
             }
-      *system     = sys;
+      *system = sys;
       return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
       }
 
@@ -392,7 +392,9 @@ void SLine::writeProperties(Xml& xml) const
       //
       bool modified = false;
       foreach(LineSegment* seg, segments) {
-            if (!seg->userOff().isNull() || !seg->userOff2().isNull()) {
+            if (!seg->userOff().isNull()
+               || !seg->userOff2().isNull()
+               || !seg->visible()) {
                   modified = true;
                   break;
                   }
@@ -403,10 +405,12 @@ void SLine::writeProperties(Xml& xml) const
       //
       // write user modified layout
       //
+printf("write segments %d\n", segments.size());
       foreach(LineSegment* seg, segments) {
             xml.stag("Segment");
             xml.tag("off1", seg->userOff());
             xml.tag("off2", seg->userOff2());
+            seg->Element::writeProperties(xml);
             xml.etag();
             }
       }
@@ -436,7 +440,7 @@ bool SLine::readProperties(QDomElement e)
                         ls->setUserOff(readPoint(e));
                   else if (e.tagName() == "off2")
                         ls->setUserOff2(readPoint(e));
-                  else
+                  else if (!ls->Element::readProperties(e))
                         domError(e);
                   }
             add(ls);

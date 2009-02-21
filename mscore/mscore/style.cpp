@@ -221,7 +221,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Volta"), ff, 11, true, false, false,
-         ALIGN_LEFT, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, 0.5, .0, OS, 0, 0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Frame"), ff, 11, true, false, false,
          ALIGN_LEFT, 0, 0, OS, 0, 0, true),

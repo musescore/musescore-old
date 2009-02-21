@@ -79,8 +79,13 @@ void TextLineSegment::draw(QPainter& p) const
       int sym = _segmentType == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
             QFont f = _text->defaultFont();
-            QRectF bb(_text->bbox());
-            l = _text->pos().x() + bb.width() + textlineTextDistance;
+            if (
+               ((_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
+               || ((_segmentType == SEGMENT_MIDDLE || _segmentType == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
+               ) {
+                  QRectF bb(_text->bbox());
+                  l = _text->pos().x() + bb.width() + textlineTextDistance;
+                  }
             p.save();
             p.translate(_text->pos());
             p.setPen(QPen(_text->curColor()));
@@ -228,19 +233,21 @@ TextLine::TextLine(Score* s)
       _beginText         = 0;
       _continueText      = 0;
 
-      _beginHookHeight = Spatium(1.5);
-      _endHookHeight   = Spatium(1.5);
-      _beginHook       = false;
-      _endHook         = false;
+      _beginHookHeight   = Spatium(1.5);
+      _endHookHeight     = Spatium(1.5);
+      _beginHook         = false;
+      _endHook           = false;
 
-      _lineWidth  = Spatium(0.15);
-      _lineStyle  = Qt::SolidLine;
-      _lineColor  = Qt::black;
-      _mxmlOff2   = 0;
+      _lineWidth         = Spatium(0.15);
+      _lineStyle         = Qt::SolidLine;
+      _beginTextPlace    = PLACE_LEFT;
+      _continueTextPlace = PLACE_LEFT;
+      _lineColor         = Qt::black;
+      _mxmlOff2          = 0;
 
-      _beginSymbol    = -1;
-      _continueSymbol = -1;
-      _endSymbol      = -1;
+      _beginSymbol       = -1;
+      _continueSymbol    = -1;
+      _endSymbol         = -1;
 
       setLen(_spatium * 7);   // for use in palettes
       }
@@ -251,6 +258,8 @@ TextLine::TextLine(const TextLine& e)
       _lineWidth            = e._lineWidth;
       _lineColor            = e._lineColor;
       _lineStyle            = e._lineStyle;
+      _beginTextPlace       = e._beginTextPlace;
+      _continueTextPlace    = e._continueTextPlace;
       _beginHook            = e._beginHook;
       _endHook              = e._endHook;
       _beginHookHeight      = e._beginHookHeight;
@@ -307,6 +316,28 @@ void TextLine::setContinueText(const QString& s, int textStyle)
 void TextLine::write(Xml& xml) const
       {
       xml.stag(name());
+      writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void TextLine::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!readProperties(e))
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+void TextLine::writeProperties(Xml& xml) const
+      {
       if (_beginHook)
             xml.tag("beginHookHeight", _beginHookHeight.val());
       if (_endHook)
@@ -315,6 +346,8 @@ void TextLine::write(Xml& xml) const
       xml.tag("lineWidth", _lineWidth.val());
       xml.tag("lineStyle", _lineStyle);
       xml.tag("lineColor", _lineColor);
+      xml.tag("beginTextPlace",    _beginTextPlace);
+      xml.tag("continueTextPlace", _continueTextPlace);
 
       SLine::writeProperties(xml);
       if (_beginText) {
@@ -339,65 +372,67 @@ void TextLine::write(Xml& xml) const
             xml.tag("endSymbol", _endSymbol);
             xml.tag("endSymbolOffset", _endSymbolOffset);
             }
-      xml.etag();
       }
 
 //---------------------------------------------------------
-//   read
+//   readProperties
 //---------------------------------------------------------
 
-void TextLine::read(QDomElement e)
+bool TextLine::readProperties(QDomElement e)
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            const QString& text = e.text();
-            if (tag == "beginHookHeight") {
-                  _beginHookHeight = Spatium(text.toDouble());
-                  _beginHook = true;
-                  }
-            else if (tag == "endHookHeight" || tag == "hookHeight") { // hookHeight is obsolete
-                  _endHookHeight = Spatium(text.toDouble());
-                  _endHook = true;
-                  }
-            else if (tag == "hookUp")           // obsolete
-                  _endHookHeight *= -1.0;
-            else if (tag == "beginSymbol" || tag == "symbol")     // "symbol" is obsolete
-                  _beginSymbol = text.toInt();
-            else if (tag == "continueSymbol")
-                  _continueSymbol = text.toInt();
-            else if (tag == "endSymbol")
-                  _endSymbol = text.toInt();
-            else if (tag == "beginSymbolOffset")
-                  _beginSymbolOffset = readPoint(e);
-            else if (tag == "continueSymbolOffset")
-                  _continueSymbolOffset = readPoint(e);
-            else if (tag == "endSymbolOffset")
-                  _endSymbolOffset = readPoint(e);
-            else if (tag == "lineWidth")
-                  _lineWidth = Spatium(text.toDouble());
-            else if (tag == "lineStyle")
-                  _lineStyle = Qt::PenStyle(text.toInt());
-            else if (tag == "lineColor")
-                  _lineColor = readColor(e);
-            else if (tag == "beginText") {
-                  _beginText = new TextC(score());
-                  _beginText->setSubtype(TEXT_TEXTLINE);
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (!_beginText->readProperties(ee))
-                              domError(e);
-                        }
-                  }
-            else if (tag == "continueText") {
-                  _continueText = new TextC(score());
-                  _continueText->setSubtype(TEXT_TEXTLINE);
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (!_continueText->readProperties(ee))
-                              domError(e);
-                        }
-                  }
-            else if (!SLine::readProperties(e))
-                  domError(e);
+      QString tag(e.tagName());
+      const QString& text = e.text();
+      if (tag == "beginHookHeight") {
+            _beginHookHeight = Spatium(text.toDouble());
+            _beginHook = true;
             }
+      else if (tag == "endHookHeight" || tag == "hookHeight") { // hookHeight is obsolete
+            _endHookHeight = Spatium(text.toDouble());
+            _endHook = true;
+            }
+      else if (tag == "hookUp")           // obsolete
+            _endHookHeight *= -1.0;
+      else if (tag == "beginSymbol" || tag == "symbol")     // "symbol" is obsolete
+            _beginSymbol = text.toInt();
+      else if (tag == "continueSymbol")
+            _continueSymbol = text.toInt();
+      else if (tag == "endSymbol")
+            _endSymbol = text.toInt();
+      else if (tag == "beginSymbolOffset")
+            _beginSymbolOffset = readPoint(e);
+      else if (tag == "continueSymbolOffset")
+            _continueSymbolOffset = readPoint(e);
+      else if (tag == "endSymbolOffset")
+            _endSymbolOffset = readPoint(e);
+      else if (tag == "lineWidth")
+            _lineWidth = Spatium(text.toDouble());
+      else if (tag == "lineStyle")
+            _lineStyle = Qt::PenStyle(text.toInt());
+      else if (tag == "beginTextPlace")
+            _beginTextPlace = readPlacement(e);
+      else if (tag == "continueTextPlace")
+            _continueTextPlace = readPlacement(e);
+      else if (tag == "lineColor")
+            _lineColor = readColor(e);
+      else if (tag == "beginText") {
+            _beginText = new TextC(score());
+            _beginText->setSubtype(TEXT_TEXTLINE);
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (!_beginText->readProperties(ee))
+                        domError(e);
+                  }
+            }
+      else if (tag == "continueText") {
+            _continueText = new TextC(score());
+            _continueText->setSubtype(TEXT_TEXTLINE);
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (!_continueText->readProperties(ee))
+                        domError(e);
+                  }
+            }
+      else if (!SLine::readProperties(e))
+            return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -512,6 +547,9 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endSymbolX->setValue(tl->endSymbolOffset().x());
       endSymbolY->setValue(tl->endSymbolOffset().y());
 
+      beginTextPlace->setCurrentIndex(tl->beginTextPlace());
+      continueTextPlace->setCurrentIndex(tl->continueTextPlace());
+
       beginHook->setChecked(tl->beginHook());
       endHook->setChecked(tl->endHook());
       beginHookHeight->setValue(tl->beginHookHeight().val());
@@ -562,6 +600,9 @@ void LineProperties::accept()
 
       sym = endSymbol->itemData(endSymbol->currentIndex()).toInt();
       tl->setEndSymbol(endSymbolRb->isChecked() ? sym : -1);
+
+      tl->setBeginTextPlace(beginTextPlace->currentIndex() == 0 ? PLACE_LEFT : PLACE_ABOVE);
+      tl->setContinueTextPlace(continueTextPlace->currentIndex() == 0 ? PLACE_LEFT : PLACE_ABOVE);
 
       tl->setBeginSymbolOffset(QPointF(beginSymbolX->value(), beginSymbolY->value()));
       tl->setContinueSymbolOffset(QPointF(continueSymbolX->value(), continueSymbolY->value()));
