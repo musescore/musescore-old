@@ -381,6 +381,8 @@ void SLine::layout(ScoreLayout* layout)
 void SLine::writeProperties(Xml& xml, const SLine* proto) const
       {
       Element::writeProperties(xml, proto);
+      if (_diagonal && (proto == 0 || proto->diagonal() != _diagonal))
+            xml.tag("diagonal", _diagonal);
       if (parent() == 0) {
             // when used as icon
             LineSegment* s = segments.front();
@@ -388,8 +390,6 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
             return;
             }
       xml.tag("tick2", _tick2);
-      if (_diagonal && (proto || proto->diagonal() != _diagonal))
-            xml.tag("diagonal", _diagonal);
       //
       // check if user has modified the default layout
       //

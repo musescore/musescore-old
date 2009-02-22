@@ -552,6 +552,14 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       continueSymbolRb->setChecked(tl->continueSymbol() != -1);
       endSymbolRb->setChecked(tl->endSymbol() != -1);
 
+      bool bt = beginTextRb->isChecked();
+      beginText->setEnabled(bt);
+      beginTextTb->setEnabled(bt);
+      beginTextPlace->setEnabled(bt);
+      beginSymbol->setEnabled(!bt);
+      beginSymbolX->setEnabled(!bt);
+      beginSymbolY->setEnabled(!bt);
+
       beginText->setText(tl->beginText() ? tl->beginText()->getText() : "");
       continueText->setText(tl->continueText() ? tl->continueText()->getText() : "");
 
@@ -582,8 +590,6 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       connect(continueSymbolRb, SIGNAL(toggled(bool)), SLOT(continueSymbolToggled(bool)));
       connect(beginTextTb, SIGNAL(clicked()), SLOT(beginTextProperties()));
       connect(continueTextTb, SIGNAL(clicked()), SLOT(continueTextProperties()));
-
-      QFont f = tl->beginText()->defaultFont();
       }
 
 //---------------------------------------------------------
@@ -639,6 +645,12 @@ void LineProperties::beginTextToggled(bool val)
       {
       if (val)
             beginSymbolRb->setChecked(false);
+      beginText->setEnabled(val);
+      beginTextPlace->setEnabled(val);
+      beginTextTb->setEnabled(val);
+//      beginSymbol->setEnabled(!val);
+//      beginSymbolX->setEnabled(!val);
+//      beginSymbolY->setEnabled(!val);
       }
 
 //---------------------------------------------------------
@@ -649,6 +661,12 @@ void LineProperties::beginSymbolToggled(bool val)
       {
       if (val)
             beginTextRb->setChecked(false);
+//      beginText->setEnabled(!val);
+//      beginTextPlace->setEnabled(!val);
+//      beginTextTb->setEnabled(!val);
+      beginSymbol->setEnabled(val);
+      beginSymbolX->setEnabled(val);
+      beginSymbolY->setEnabled(val);
       }
 
 //---------------------------------------------------------
@@ -677,6 +695,8 @@ void LineProperties::continueSymbolToggled(bool val)
 
 void LineProperties::beginTextProperties()
       {
+      if (!tl->beginText())
+            return;
       TextProperties t(tl->beginText(), this);
       if (t.exec()) {
             foreach(LineSegment* ls, tl->lineSegments()) {
@@ -697,6 +717,8 @@ void LineProperties::beginTextProperties()
 
 void LineProperties::continueTextProperties()
       {
+      if (!tl->continueText())
+            return;
       TextProperties t(tl->continueText(), this);
       if (t.exec()) {
             foreach(LineSegment* ls, tl->lineSegments()) {
