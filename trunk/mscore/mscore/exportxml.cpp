@@ -205,6 +205,7 @@ class ExportMusicXml {
       int tick;
       Attributes attr;
       TextLine* bracket[MAX_BRACKETS];
+      int div;
 
       int findBracket(const TextLine* tl) const;
       void chord(Chord* chord, int staff, const LyricsList* ll);
@@ -221,7 +222,7 @@ class ExportMusicXml {
       void calcDivisions();
 
    public:
-      ExportMusicXml(Score* s) { score = s; tick = 0; }
+      ExportMusicXml(Score* s) { score = s; tick = 0; div = 1; }
       void write(QIODevice* dev);
       void moveToTick(int t);
       void words(Text* text, int staff);
@@ -556,6 +557,12 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                   }
             Element* dir = da->getDirect();
             if (dir && dir->staff() == staff && mstart <= da->getTick() && da->getTick() < mend) {
+                  // disabled, not sure if this behaviour is OK
+                  // it generates backups/forwards to somewhere
+                  // in the middle of notes and rests
+                  // note: when re-enabling calcDivisions() also needs
+                  // to take these backups/forwards into account
+                  /*
                   exp->moveToTick(da->getTick());
                   switch(dir->type()) {
                         case SYMBOL:
@@ -588,6 +595,10 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                                       Element::name(dir->type()), da->getTick());
                               break;
                         }
+                  */
+                  // print warning instead
+                  printf("can't export %s in staff %d at tick %d, no note or rest to attach to\n",
+                         dir->name(), sstaff, da->getTick());
                   delete da;
                   anchors[i] = 0;
                   }
@@ -921,7 +932,8 @@ void ExportMusicXml::calcDivisions()
 		}
 	}
 
-	printf("divisions=%d\n", integers[0]);
+	div = 480 / integers[0];
+	printf("divisions=%d div=%d\n", integers[0], div);
       }
 
 //---------------------------------------------------------
@@ -1090,13 +1102,13 @@ void ExportMusicXml::moveToTick(int t)
       if (t < tick) {
             attr.doAttr(xml, false);
             xml.stag("backup");
-            xml.tag("duration", tick - t);
+            xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
             attr.doAttr(xml, false);
             xml.stag("forward");
-            xml.tag("duration", t - tick);
+            xml.tag("duration", (t - tick) / div);
             xml.etag();
             }
       tick = t;
@@ -1490,7 +1502,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             xml.etag();
 
           // duration
-            xml.tag("duration", note->chord()->tickLen());
+            xml.tag("duration", note->chord()->tickLen() / div);
 
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
@@ -1669,7 +1681,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
           tick += tickLen; // to avoid forward since rest->ticklen=0 in this case.
 		  }
 
-      xml.tag("duration", tickLen);
+      xml.tag("duration", tickLen / div);
 
       // for a single-staff part, staff is 0, which needs to be corrected
       // to calculate the correct voice number
