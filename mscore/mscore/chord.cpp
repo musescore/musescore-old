@@ -630,6 +630,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
 
       if (_stemSlash) {
+            // TODO: does not work for chords
             double x = _stem->pos().x();
             double y = _stem->pos().y();
             double l = stemLen.point() * .5;

@@ -35,13 +35,15 @@ class Spatium {
       double _val;
 
    public:
-      Spatium()                       { _val = 0.0; }
-      explicit Spatium(double v)      { _val = v; }
-      double point() const            { return _val * _spatium; }
-      double val() const              { return _val; }
-      void set(double v)              { _val = v/_spatium; }
-      bool operator>(Spatium a) const { return _val > a._val; }
-      bool operator<(Spatium a) const { return _val < a._val; }
+      Spatium()                        { _val = 0.0; }
+      explicit Spatium(double v)       { _val = v; }
+      double point() const             { return _val * _spatium; }
+      double val() const               { return _val; }
+      void set(double v)               { _val = v/_spatium; }
+      bool operator>(Spatium a) const  { return _val > a._val; }
+      bool operator<(Spatium a) const  { return _val < a._val; }
+      bool operator==(Spatium a) const { return _val == a._val; }
+      bool operator!=(Spatium a) const { return _val != a._val; }
 
       Spatium& operator+=(Spatium a) {
             _val += a._val;
