@@ -6,73 +6,24 @@
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
-    <staffUpperBorder>7</staffUpperBorder>
-    <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>10.5</staffDistance>
     <akkoladeDistance>9.5</akkoladeDistance>
     <systemDistance>8.2</systemDistance>
-    <lyricsDistance>2</lyricsDistance>
-    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
-    <systemFrameDistance>7</systemFrameDistance>
-    <frameSystemDistance>7</frameSystemDistance>
-    <minMeasureWidth>4</minMeasureWidth>
-    <barWidth>0.16</barWidth>
-    <doubleBarWidth>0.16</doubleBarWidth>
-    <endBarWidth>0.3</endBarWidth>
-    <doubleBarDistance>0.3</doubleBarDistance>
-    <endBarDistance>0.3</endBarDistance>
-    <bracketWidth>0.35</bracketWidth>
+    <frameSystemDistance>0</frameSystemDistance>
     <bracketDistance>0.3</bracketDistance>
-    <clefLeftMargin>0.5</clefLeftMargin>
-    <keysigLeftMargin>0.5</keysigLeftMargin>
-    <timesigLeftMargin>0.5</timesigLeftMargin>
-    <clefKeyRightMargin>1.75</clefKeyRightMargin>
-    <stemWidth>0.13</stemWidth>
-    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.1</measureSpacing>
-    <barNoteDistance>1.5</barNoteDistance>
-    <noteBarDistance>1</noteBarDistance>
-    <staffLineWidth>0.08</staffLineWidth>
-    <ledgerLineWidth>0.08</ledgerLineWidth>
-    <akkoladeWidth>1.6</akkoladeWidth>
-    <prefixDistance>0.13</prefixDistance>
-    <prefixNoteDistance>0.22</prefixNoteDistance>
-    <beamWidth>0.48</beamWidth>
-    <beamDistance>0.5</beamDistance>
-    <beamMinLen>1.25</beamMinLen>
     <beamMinSlope>0.1</beamMinSlope>
     <beamMaxSlope>0.15</beamMaxSlope>
-    <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
-    <dotRestDistance>0.25</dotRestDistance>
-    <dotDotDistance>0.5</dotDotDistance>
-    <propertyDistanceHead>0.5</propertyDistanceHead>
-    <propertyDistanceStem>0.5</propertyDistanceStem>
-    <propertyDistance>0.25</propertyDistance>
     <pageFillLimit>0.7</pageFillLimit>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <hairpinHeight>1.2</hairpinHeight>
-    <hairpinContHeight>0.5</hairpinContHeight>
-    <hairpinWidth>0.13</hairpinWidth>
-    <showPageNumber>1</showPageNumber>
-    <showPageNumberOne>0</showPageNumberOne>
-    <pageNumberOddEven>1</pageNumberOddEven>
-    <showMeasureNumber>1</showMeasureNumber>
-    <showMeasureNumberOne>0</showMeasureNumberOne>
-    <measureNumberInterval>5</measureNumberInterval>
-    <measureNumberAllStaffs>0</measureNumberAllStaffs>
-    <measureNumberSystem>1</measureNumberSystem>
+    <smallNoteMag>0.7</smallNoteMag>
     <graceNoteMag>0.7</graceNoteMag>
     <smallStaffMag>0.7</smallStaffMag>
-    <smallNoteMag>0.7</smallNoteMag>
-    <smallClefMag>0.8</smallClefMag>
-    <genClef>1</genClef>
-    <genKeysig>1</genKeysig>
-    <minEmptyMeasures>2</minEmptyMeasures>
-    <minMMRestWidth>4</minMMRestWidth>
+    <stemDir2>1</stemDir2>
+    <stemDir4>1</stemDir4>
     <gateTime>70</gateTime>
-    <tenutoGateTime>100</tenutoGateTime>
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>
     </Style>
@@ -185,123 +136,84 @@
       </Instrument>
     </Part>
   <Slur id="1">
-    <track>0</track>
-    <tick>2160</tick>
     <up>1</up>
     </Slur>
   <Slur id="2">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="3">
-    <track>0</track>
     </Slur>
   <Slur id="4">
-    <track>0</track>
     </Slur>
   <Slur id="5">
-    <track>0</track>
     </Slur>
   <Slur id="6">
-    <track>0</track>
     </Slur>
   <Slur id="7">
-    <track>0</track>
     </Slur>
   <Slur id="8">
-    <track>0</track>
     </Slur>
   <Slur id="9">
-    <track>0</track>
     </Slur>
   <Slur id="10">
-    <track>0</track>
     </Slur>
   <Slur id="11">
-    <track>0</track>
     </Slur>
   <Slur id="12">
-    <track>0</track>
     </Slur>
   <Slur id="13">
-    <track>0</track>
     </Slur>
   <Slur id="14">
-    <track>0</track>
     </Slur>
   <Slur id="15">
-    <track>0</track>
     </Slur>
   <Slur id="16">
-    <track>0</track>
     </Slur>
   <Slur id="17">
-    <track>0</track>
     </Slur>
   <Slur id="18">
-    <track>0</track>
     </Slur>
   <Slur id="19">
-    <track>0</track>
     </Slur>
   <Slur id="20">
-    <track>0</track>
     </Slur>
   <Slur id="21">
-    <track>0</track>
     </Slur>
   <Slur id="22">
-    <track>0</track>
     </Slur>
   <Slur id="23">
-    <track>0</track>
     </Slur>
   <Slur id="24">
-    <track>0</track>
     </Slur>
   <Slur id="25">
-    <track>0</track>
     </Slur>
   <Slur id="26">
-    <track>0</track>
     </Slur>
   <Slur id="27">
-    <track>0</track>
     </Slur>
   <Slur id="28">
-    <track>0</track>
     </Slur>
   <Slur id="29">
-    <track>0</track>
     </Slur>
   <Slur id="30">
-    <track>0</track>
     </Slur>
   <Slur id="31">
-    <track>0</track>
     </Slur>
   <Slur id="32">
-    <track>0</track>
     </Slur>
   <Slur id="33">
-    <track>0</track>
     </Slur>
   <Slur id="34">
-    <track>0</track>
     </Slur>
   <Slur id="35">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="36">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-1.30299" y="-3.42035"/>
       <o3 x="1.71018" y="-1.30299"/>
       </SlurSegment>
     </Slur>
   <Slur id="37">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-2.1988" y="-0.977244"/>
       <o3 x="0.488622" y="-1.71018"/>
@@ -311,138 +223,98 @@
       </SlurSegment>
     </Slur>
   <Slur id="38">
-    <track>0</track>
     </Slur>
   <Slur id="39">
-    <track>0</track>
     </Slur>
   <Slur id="40">
-    <track>0</track>
     </Slur>
   <Slur id="41">
-    <track>0</track>
     </Slur>
   <Slur id="42">
-    <track>0</track>
     </Slur>
   <Slur id="43">
-    <track>0</track>
     </Slur>
   <Slur id="44">
-    <track>0</track>
     </Slur>
   <Slur id="45">
-    <track>0</track>
     </Slur>
   <Slur id="46">
-    <track>0</track>
     </Slur>
   <Slur id="47">
-    <track>0</track>
     </Slur>
   <Slur id="48">
-    <track>0</track>
     </Slur>
   <Slur id="49">
-    <track>0</track>
     </Slur>
   <Slur id="50">
-    <track>0</track>
     <up>2</up>
     </Slur>
   <Slur id="51">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.407185" y="-3.82754"/>
       </SlurSegment>
     </Slur>
   <Slur id="52">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="53">
-    <track>0</track>
     </Slur>
   <Slur id="54">
-    <track>0</track>
     </Slur>
   <Slur id="55">
-    <track>0</track>
     </Slur>
   <Slur id="56">
-    <track>0</track>
     </Slur>
   <Slur id="57">
-    <track>0</track>
     </Slur>
   <Slur id="58">
-    <track>0</track>
     </Slur>
   <Slur id="59">
-    <track>0</track>
     </Slur>
   <Slur id="60">
-    <track>0</track>
     </Slur>
   <Slur id="61">
-    <track>0</track>
     </Slur>
   <Slur id="62">
-    <track>0</track>
     </Slur>
   <Slur id="63">
-    <track>0</track>
     </Slur>
   <Slur id="64">
-    <track>0</track>
     </Slur>
   <Slur id="65">
-    <track>0</track>
     </Slur>
   <Slur id="66">
-    <track>0</track>
     </Slur>
   <Slur id="67">
-    <track>0</track>
     </Slur>
   <Slur id="68">
-    <track>0</track>
     </Slur>
   <Slur id="69">
-    <track>0</track>
     </Slur>
   <Slur id="70">
-    <track>0</track>
     </Slur>
   <Slur id="71">
-    <track>0</track>
     </Slur>
   <Slur id="72">
-    <track>0</track>
     </Slur>
   <Slur id="73">
-    <track>0</track>
     </Slur>
   <Slur id="74">
-    <track>0</track>
     </Slur>
   <Slur id="75">
-    <track>0</track>
     </Slur>
   <Slur id="76">
-    <track>0</track>
     </Slur>
   <Slur id="77">
-    <track>0</track>
     </Slur>
   <HairPin>
     <track>0</track>
     <tick>33120</tick>
     <tick2>33480</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0851621" y="0.510973"/>
       <off2 x="0.144567" y="0"/>
+      <offset x="0.0851621" y="0.510973"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -450,24 +322,20 @@
     <track>0</track>
     <tick>33600</tick>
     <tick2>34080</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.170324" y="0.42581"/>
       <off2 x="0" y="0"/>
+      <offset x="0.170324" y="0.42581"/>
       </Segment>
     </HairPin>
   <Slur id="78">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="79">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-1.07459" y="-0.826604"/>
       </SlurSegment>
     </Slur>
   <Slur id="80">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.0515755" y="-0.309453"/>
       <o2 x="1.75505e-18" y="-0.464179"/>
@@ -476,69 +344,56 @@
       </SlurSegment>
     </Slur>
   <Slur id="81">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.162874" y="1.38443"/>
       <o3 x="0.895807" y="1.38443"/>
       </SlurSegment>
     </Slur>
   <Slur id="82">
-    <track>0</track>
     </Slur>
   <Slur id="83">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.495963" y="2.31449"/>
       </SlurSegment>
     </Slur>
   <Slur id="84">
-    <track>0</track>
     <SlurSegment no="0">
       <o3 x="0.909265" y="-0.743944"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="85">
-    <track>0</track>
     </Slur>
   <Slur id="86">
-    <track>0</track>
     <SlurSegment no="0">
       <o3 x="0.578623" y="-0.886019"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="87">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="9.45289e-18" y="-0.756675"/>
       </SlurSegment>
     </Slur>
   <Slur id="88">
-    <track>0</track>
     </Slur>
   <Slur id="89">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.495963" y="-2.89311"/>
       <o3 x="2.31449" y="-1.40523"/>
       </SlurSegment>
     </Slur>
   <Slur id="90">
-    <track>0</track>
     </Slur>
   <Slur id="91">
-    <track>0</track>
     </Slur>
   <Slur id="92">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.330642" y="-5.12495"/>
       <o3 x="2.31449" y="-2.81045"/>
       </SlurSegment>
     </Slur>
   <Slur id="93">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.330642" y="-0.826604"/>
       <o4 x="-0.218274" y="-2.72779"/>
@@ -548,20 +403,16 @@
       </SlurSegment>
     </Slur>
   <Slur id="94">
-    <track>0</track>
     <SlurSegment no="0">
       <o3 x="0.413302" y="-1.32257"/>
       <o4 x="0.0826604" y="-1.40523"/>
       </SlurSegment>
     </Slur>
   <Slur id="95">
-    <track>0</track>
     </Slur>
   <Slur id="96">
-    <track>0</track>
     </Slur>
   <Slur id="97">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.276922" y="-2.72966"/>
       <o2 x="-0.596322" y="0.0189396"/>
@@ -569,31 +420,25 @@
       </SlurSegment>
     </Slur>
   <Slur id="98">
-    <track>0</track>
     </Slur>
   <Slur id="99">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="100">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.165321" y="-7.85274"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="101">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.144652" y="0.723261"/>
       </SlurSegment>
     </Slur>
   <Slur id="102">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="103">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.570059" y="-3.90898"/>
       <o2 x="-7.32933" y="-2.1988"/>
@@ -602,32 +447,25 @@
     <up>1</up>
     </Slur>
   <Slur id="104">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="105">
-    <track>0</track>
     </Slur>
   <Slur id="106">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="107">
-    <track>0</track>
     </Slur>
   <Slur id="108">
-    <track>0</track>
     <SlurSegment no="0">
       <o3 x="0.570059" y="-2.11736"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="109">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="110">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="-0.0806563" y="-0.483938"/>
       <o2 x="4.67713" y="-0.492329"/>
@@ -636,7 +474,6 @@
       </SlurSegment>
     </Slur>
   <Slur id="111">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.153487" y="0.0767438"/>
       <o4 x="-1.07442" y="0.230233"/>
@@ -648,20 +485,20 @@
     <track>0</track>
     <tick>51840</tick>
     <tick2>52680</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.9186"/>
       <off2 x="0.92093" y="0"/>
+      <offset x="0.306977" y="1.9186"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>1</track>
     <tick>53400</tick>
     <tick2>53640</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.564594" y="-0.967876"/>
       <off2 x="0" y="0"/>
+      <offset x="0.564594" y="-0.967876"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -669,52 +506,37 @@
     <track>0</track>
     <tick>55680</tick>
     <tick2>56520</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="112">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="113">
-    <track>0</track>
     </Slur>
   <HairPin>
     <track>0</track>
     <tick>60480</tick>
     <tick2>61440</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-2.68605" y="0"/>
       </Segment>
     </HairPin>
   <Slur id="114">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="115">
-    <track>0</track>
     </Slur>
   <Slur id="116">
-    <track>0</track>
     </Slur>
   <Slur id="117">
-    <track>0</track>
     </Slur>
   <Slur id="118">
-    <track>0</track>
     </Slur>
   <Slur id="119">
-    <track>0</track>
     </Slur>
   <Slur id="120">
-    <track>0</track>
     </Slur>
   <Slur id="121">
-    <track>0</track>
     </Slur>
   <Slur id="122">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.0772763" y="1.08187"/>
       <o2 x="0.158181" y="3.04161"/>
@@ -724,27 +546,26 @@
     <up>2</up>
     </Slur>
   <Slur id="123">
-    <track>0</track>
     </Slur>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>8280</tick>
     <tick2>8640</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.767442"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.767442"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>9120</tick>
     <tick2>9480</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0806563" y="-0.241969"/>
       <off2 x="0" y="0"/>
+      <offset x="0.0806563" y="-0.241969"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -752,7 +573,6 @@
     <track>0</track>
     <tick>10080</tick>
     <tick2>10440</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-0.135684" y="0"/>
@@ -762,55 +582,48 @@
     <track>0</track>
     <tick>10560</tick>
     <tick2>11400</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>13560</tick>
     <tick2>14280</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>14400</tick>
     <tick2>14760</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>15360</tick>
     <tick2>16200</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>16320</tick>
     <tick2>16680</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>19680</tick>
     <tick2>20040</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>20160</tick>
     <tick2>20520</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>20640</tick>
     <tick2>21120</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.230233" y="1.45814"/>
       <off2 x="0" y="0"/>
+      <offset x="0.230233" y="1.45814"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -818,17 +631,16 @@
     <track>0</track>
     <tick>21240</tick>
     <tick2>21480</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.53488"/>
       <off2 x="0" y="0"/>
+      <offset x="0.306977" y="1.53488"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>21600</tick>
     <tick2>22080</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-0.0678419" y="0"/>
@@ -839,7 +651,6 @@
     <track>0</track>
     <tick>22320</tick>
     <tick2>22560</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="0.997675" y="0"/>
@@ -849,10 +660,10 @@
     <track>0</track>
     <tick>25440</tick>
     <tick2>26160</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.306977" y="1.30465"/>
       <off2 x="0" y="0"/>
+      <offset x="0.306977" y="1.30465"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -860,20 +671,20 @@
     <track>0</track>
     <tick>26400</tick>
     <tick2>26760</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.460465" y="1.22791"/>
       <off2 x="-0.122115" y="0"/>
+      <offset x="0.460465" y="1.22791"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>34800</tick>
     <tick2>35160</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.613954"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.613954"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -881,99 +692,77 @@
     <track>0</track>
     <tick>35280</tick>
     <tick2>35640</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.613954"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.613954"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>42360</tick>
     <tick2>42720</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.230233" y="1.30465"/>
       <off2 x="0" y="0"/>
+      <offset x="0.230233" y="1.30465"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>43680</tick>
     <tick2>44040</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>44640</tick>
     <tick2>45000</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="124">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="125">
-    <track>0</track>
     </Slur>
   <Slur id="126">
-    <track>0</track>
     </Slur>
   <Slur id="127">
-    <track>0</track>
     </Slur>
   <Slur id="128">
-    <track>0</track>
     </Slur>
   <Slur id="129">
-    <track>0</track>
     </Slur>
   <Slur id="130">
-    <track>0</track>
     </Slur>
   <Slur id="131">
-    <track>0</track>
     </Slur>
   <Slur id="132">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.613954" y="0.460465"/>
       <o3 x="0.153488" y="0.537209"/>
       </SlurSegment>
     </Slur>
   <Slur id="133">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.153488" y="0.767442"/>
       <o3 x="0.230233" y="0.460465"/>
       </SlurSegment>
     </Slur>
   <Slur id="134">
-    <track>0</track>
     </Slur>
   <Slur id="135">
-    <track>0</track>
     </Slur>
   <Slur id="136">
-    <track>0</track>
     </Slur>
   <Slur id="137">
-    <track>0</track>
     </Slur>
   <Slur id="138">
-    <track>0</track>
     </Slur>
   <Slur id="139">
-    <track>0</track>
     </Slur>
   <Slur id="140">
-    <track>0</track>
     </Slur>
   <Slur id="141">
-    <track>0</track>
     </Slur>
   <Slur id="142">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.153488" y="-1.30465"/>
       </SlurSegment>
@@ -982,148 +771,107 @@
       </SlurSegment>
     </Slur>
   <Slur id="143">
-    <track>0</track>
     </Slur>
   <Slur id="144">
-    <track>0</track>
     </Slur>
   <Slur id="145">
-    <track>0</track>
     </Slur>
   <Slur id="146">
-    <track>0</track>
     </Slur>
   <Slur id="147">
-    <track>0</track>
     </Slur>
   <Slur id="148">
-    <track>0</track>
     </Slur>
   <Slur id="149">
-    <track>0</track>
     </Slur>
   <Slur id="150">
-    <track>0</track>
     </Slur>
   <Slur id="151">
-    <track>0</track>
     </Slur>
   <Slur id="152">
-    <track>0</track>
     </Slur>
   <Slur id="153">
-    <track>0</track>
     </Slur>
   <HairPin>
     <track>4</track>
     <tick>71280</tick>
     <tick2>71520</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>71760</tick>
     <tick2>72240</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>73080</tick>
     <tick2>73320</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>73680</tick>
     <tick2>74160</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="154">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="155">
-    <track>0</track>
     </Slur>
   <Slur id="156">
-    <track>0</track>
     </Slur>
   <Slur id="157">
-    <track>0</track>
     </Slur>
   <Slur id="158">
-    <track>0</track>
     </Slur>
   <Slur id="159">
-    <track>0</track>
     </Slur>
   <Slur id="160">
-    <track>0</track>
     </Slur>
   <Slur id="161">
-    <track>0</track>
     </Slur>
   <Slur id="162">
-    <track>0</track>
     </Slur>
   <Slur id="163">
-    <track>0</track>
     </Slur>
   <Slur id="164">
-    <track>0</track>
     </Slur>
   <Slur id="165">
-    <track>0</track>
     </Slur>
   <Slur id="166">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.81437" y="2.60598"/>
       </SlurSegment>
     </Slur>
   <Slur id="167">
-    <track>0</track>
     </Slur>
   <Slur id="168">
-    <track>0</track>
     </Slur>
   <Slur id="169">
-    <track>0</track>
     </Slur>
   <Slur id="170">
-    <track>0</track>
     </Slur>
   <Slur id="171">
-    <track>0</track>
     </Slur>
   <Slur id="172">
-    <track>0</track>
     </Slur>
   <Slur id="173">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.153488" y="1.99535"/>
       </SlurSegment>
     </Slur>
   <Slur id="174">
-    <track>0</track>
     </Slur>
   <Slur id="175">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-1.07442" y="-3.60698"/>
       </SlurSegment>
     </Slur>
   <Slur id="176">
-    <track>0</track>
     </Slur>
   <Slur id="177">
-    <track>0</track>
     </Slur>
   <Slur id="178">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.230233" y="-0.460465"/>
       <o3 x="-0.153488" y="-0.767442"/>
@@ -1131,10 +879,8 @@
       </SlurSegment>
     </Slur>
   <Slur id="179">
-    <track>0</track>
     </Slur>
   <Slur id="180">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.153488" y="-0.306977"/>
       <o3 x="0" y="-0.306977"/>
@@ -1142,19 +888,15 @@
       </SlurSegment>
     </Slur>
   <Slur id="181">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="-0.767442" y="-0.460465"/>
       </SlurSegment>
     </Slur>
   <Slur id="182">
-    <track>0</track>
     </Slur>
   <Slur id="183">
-    <track>0</track>
     </Slur>
   <Slur id="184">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0" y="-0.447756"/>
       <o3 x="0" y="-0.312073"/>
@@ -1162,10 +904,8 @@
       </SlurSegment>
     </Slur>
   <Slur id="185">
-    <track>0</track>
     </Slur>
   <Slur id="186">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.153488" y="-0.306977"/>
       <o3 x="-0.0767442" y="-0.383721"/>
@@ -1173,16 +913,13 @@
       </SlurSegment>
     </Slur>
   <Slur id="187">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-1.07442" y="-2.68605"/>
       </SlurSegment>
     </Slur>
   <Slur id="188">
-    <track>0</track>
     </Slur>
   <Slur id="189">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0" y="-0.284936"/>
       <o3 x="0" y="-0.257799"/>
@@ -1190,13 +927,10 @@
       </SlurSegment>
     </Slur>
   <Slur id="190">
-    <track>0</track>
     </Slur>
   <Slur id="191">
-    <track>0</track>
     </Slur>
   <Slur id="192">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.0767442" y="-0.153488"/>
       <o3 x="-0.0767442" y="-0.230233"/>
@@ -1204,56 +938,44 @@
       </SlurSegment>
     </Slur>
   <Slur id="193">
-    <track>0</track>
     </Slur>
   <Slur id="194">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.977244" y="-1.05868"/>
       </SlurSegment>
     </Slur>
   <Slur id="195">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="196">
-    <track>0</track>
     </Slur>
   <Slur id="197">
-    <track>0</track>
     </Slur>
   <Slur id="198">
-    <track>0</track>
     </Slur>
   <Slur id="199">
-    <track>0</track>
     </Slur>
   <Slur id="200">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0767442" y="-2.30233"/>
       </SlurSegment>
     </Slur>
   <Slur id="201">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0" y="-1.76389"/>
       </SlurSegment>
     </Slur>
   <Slur id="202">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0767442" y="-1.3814"/>
       </SlurSegment>
     </Slur>
   <Slur id="203">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0" y="-1.61163"/>
       </SlurSegment>
     </Slur>
   <Slur id="204">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.306977" y="-1.07442"/>
       <o3 x="0.230233" y="-0.537209"/>
@@ -1261,50 +983,40 @@
       </SlurSegment>
     </Slur>
   <Slur id="205">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="-0.0723261" y="-1.22954"/>
       </SlurSegment>
     </Slur>
   <Slur id="206">
-    <track>0</track>
     </Slur>
   <Slur id="207">
-    <track>0</track>
     </Slur>
   <Slur id="208">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.460465" y="-5.14186"/>
       <o3 x="4.60465" y="-0.767442"/>
       </SlurSegment>
     </Slur>
   <Slur id="209">
-    <track>0</track>
     </Slur>
   <Slur id="210">
-    <track>0</track>
     </Slur>
   <Slur id="211">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-2.03593" y="-3.17604"/>
       <o3 x="1.30299" y="-1.30299"/>
       </SlurSegment>
     </Slur>
   <Slur id="212">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.651496" y="-1.05868"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="213">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="214">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-15.1186" y="-2.22558"/>
       <o3 x="16.6535" y="-1.15116"/>
@@ -1315,7 +1027,6 @@
       </SlurSegment>
     </Slur>
   <Slur id="215">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.767442" y="-0.460465"/>
       <o2 x="0.153488" y="0.613954"/>
@@ -1325,7 +1036,6 @@
     <up>1</up>
     </Slur>
   <Slur id="216">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.613472" y="-0.414094"/>
       <o2 x="0.168705" y="0.904871"/>
@@ -1335,48 +1045,36 @@
     <up>1</up>
     </Slur>
   <Slur id="217">
-    <track>0</track>
     </Slur>
   <Slur id="218">
-    <track>0</track>
     </Slur>
   <Slur id="219">
-    <track>0</track>
     </Slur>
   <Trill>
     <track>0</track>
     <tick>106560</tick>
     <tick2>109440</tick2>
-    <diagonal>0</diagonal>
     </Trill>
   <Trill>
     <track>0</track>
     <tick>110400</tick>
     <tick2>113280</tick2>
-    <diagonal>0</diagonal>
     </Trill>
   <Slur id="220">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="221">
-    <track>0</track>
     </Slur>
   <Slur id="222">
-    <track>0</track>
     </Slur>
   <Slur id="223">
-    <track>0</track>
     </Slur>
   <Slur id="224">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.289304" y="-1.01257"/>
       <o3 x="0.144652" y="-0.795587"/>
       </SlurSegment>
     </Slur>
   <Slur id="225">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0" y="1.82086"/>
       </SlurSegment>
@@ -1385,31 +1083,22 @@
       </SlurSegment>
     </Slur>
   <Slur id="226">
-    <track>0</track>
     </Slur>
   <Slur id="227">
-    <track>0</track>
     </Slur>
   <Slur id="228">
-    <track>0</track>
     </Slur>
   <Slur id="229">
-    <track>0</track>
     </Slur>
   <Slur id="230">
-    <track>0</track>
     </Slur>
   <Slur id="231">
-    <track>0</track>
     </Slur>
   <Slur id="232">
-    <track>0</track>
     </Slur>
   <Slur id="233">
-    <track>0</track>
     </Slur>
   <Slur id="234">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-2.89683" y="-0.662132"/>
       <o3 x="0.662132" y="-2.64853"/>
@@ -1417,18 +1106,15 @@
       </SlurSegment>
     </Slur>
   <Slur id="235">
-    <track>0</track>
     <SlurSegment no="0">
       <o3 x="0" y="-1.30187"/>
       <o4 x="-0.165533" y="3.06236"/>
       </SlurSegment>
     </Slur>
   <Slur id="236">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="237">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-1.30187" y="-0.940239"/>
       <o3 x="0" y="-1.3742"/>
@@ -1436,7 +1122,6 @@
     <up>1</up>
     </Slur>
   <Slur id="238">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0135684" y="0"/>
       </SlurSegment>
@@ -1448,54 +1133,42 @@
     <up>2</up>
     </Slur>
   <Slur id="239">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.74224" y="0.546125"/>
       </SlurSegment>
     <up>2</up>
     </Slur>
   <Slur id="240">
-    <track>0</track>
     </Slur>
   <Slur id="241">
-    <track>0</track>
     </Slur>
   <Slur id="242">
-    <track>0</track>
     </Slur>
   <Slur id="243">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-1.15873" y="-0.331066"/>
       <o3 x="0.165533" y="-2.81406"/>
       </SlurSegment>
     </Slur>
   <Slur id="244">
-    <track>0</track>
     </Slur>
   <Slur id="245">
-    <track>0</track>
     </Slur>
   <Slur id="246">
-    <track>0</track>
     </Slur>
   <Slur id="247">
-    <track>0</track>
     </Slur>
   <Slur id="248">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0" y="-0.570059"/>
       </SlurSegment>
     </Slur>
   <Slur id="249">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.570059" y="-1.95449"/>
       </SlurSegment>
     </Slur>
   <Slur id="250">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.579364" y="-2.31746"/>
       </SlurSegment>
@@ -1506,82 +1179,52 @@
     <up>2</up>
     </Slur>
   <Slur id="251">
-    <track>0</track>
     </Slur>
   <Slur id="252">
-    <track>0</track>
     </Slur>
   <Slur id="253">
-    <track>0</track>
     </Slur>
   <Slur id="254">
-    <track>0</track>
     </Slur>
   <Slur id="255">
-    <track>0</track>
     </Slur>
   <Slur id="256">
-    <track>0</track>
     </Slur>
   <Slur id="257">
-    <track>0</track>
     </Slur>
   <Slur id="258">
-    <track>0</track>
     </Slur>
   <Slur id="259">
-    <track>0</track>
     </Slur>
   <Slur id="260">
-    <track>0</track>
     </Slur>
   <Slur id="261">
-    <track>0</track>
     </Slur>
   <Slur id="262">
-    <track>0</track>
     </Slur>
   <Slur id="263">
-    <track>0</track>
     </Slur>
   <Trill>
     <track>0</track>
     <tick>128640</tick>
     <tick2>129600</tick2>
-    <diagonal>0</diagonal>
-    <Segment>
-      <off1 x="-0.642245" y="0.845916"/>
-      <off2 x="-1.82086" y="0"/>
-      </Segment>
     </Trill>
   <Trill>
     <track>0</track>
     <tick>130560</tick>
     <tick2>131520</tick2>
-    <diagonal>0</diagonal>
-    <Segment>
-      <off1 x="-0.851972" y="1.17528"/>
-      <off2 x="0" y="0"/>
-      </Segment>
     </Trill>
   <Slur id="264">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="265">
-    <track>0</track>
     </Slur>
   <Slur id="266">
-    <track>0</track>
     </Slur>
   <Slur id="267">
-    <track>0</track>
     </Slur>
   <Slur id="268">
-    <track>0</track>
     </Slur>
   <Slur id="269">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.910429" y="0.248299"/>
       <o2 x="0.827663" y="0.579364"/>
@@ -1589,7 +1232,6 @@
       </SlurSegment>
     </Slur>
   <Slur id="270">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.993196" y="0.579364"/>
       <o2 x="0.993196" y="0.744897"/>
@@ -1597,7 +1239,6 @@
       </SlurSegment>
     </Slur>
   <Slur id="271">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.81437" y="-1.87305"/>
       <o2 x="-6.5964" y="-3.25748"/>
@@ -1606,7 +1247,6 @@
     <up>1</up>
     </Slur>
   <Slur id="272">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0.570059" y="-1.62874"/>
       <o2 x="-4.47904" y="-1.87305"/>
@@ -1615,72 +1255,52 @@
     <up>1</up>
     </Slur>
   <Slur id="273">
-    <track>0</track>
     </Slur>
   <Slur id="274">
-    <track>0</track>
     </Slur>
   <Slur id="275">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.0827663" y="-0.331065"/>
       </SlurSegment>
     </Slur>
   <Slur id="276">
-    <track>0</track>
     </Slur>
   <Slur id="277">
-    <track>0</track>
     </Slur>
   <Slur id="278">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="1.32426" y="-0.993196"/>
       <o3 x="0.496598" y="-0.827663"/>
       </SlurSegment>
     </Slur>
   <Slur id="279">
-    <track>0</track>
     </Slur>
   <Slur id="280">
-    <track>0</track>
     </Slur>
   <Slur id="281">
-    <track>0</track>
     </Slur>
   <Slur id="282">
-    <track>0</track>
     </Slur>
   <Slur id="283">
-    <track>0</track>
     </Slur>
   <Slur id="284">
-    <track>0</track>
     </Slur>
   <Slur id="285">
-    <track>0</track>
     </Slur>
   <Slur id="286">
-    <track>0</track>
     </Slur>
   <Slur id="287">
-    <track>0</track>
     </Slur>
   <Slur id="288">
-    <track>0</track>
     </Slur>
   <Slur id="289">
-    <track>0</track>
     </Slur>
   <Slur id="290">
-    <track>0</track>
     </Slur>
   <Slur id="291">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="292">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0814103" y="0"/>
       </SlurSegment>
@@ -1689,34 +1309,25 @@
       </SlurSegment>
     </Slur>
   <Slur id="293">
-    <track>0</track>
     </Slur>
   <Slur id="294">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-0.651496" y="-2.36167"/>
       </SlurSegment>
     </Slur>
   <Slur id="295">
-    <track>0</track>
     </Slur>
   <Slur id="296">
-    <track>0</track>
     </Slur>
   <Slur id="297">
-    <track>0</track>
     </Slur>
   <Slur id="298">
-    <track>0</track>
     </Slur>
   <Slur id="299">
-    <track>0</track>
     </Slur>
   <Slur id="300">
-    <track>0</track>
     </Slur>
   <Slur id="301">
-    <track>0</track>
     <SlurSegment no="0">
       <o1 x="0" y="-0.248299"/>
       <o2 x="0.248299" y="-0.496598"/>
@@ -1725,33 +1336,27 @@
       </SlurSegment>
     </Slur>
   <Slur id="302">
-    <track>0</track>
     </Slur>
   <Slur id="303">
-    <track>0</track>
     </Slur>
   <Slur id="304">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="-1.38778e-17" y="-2.81405"/>
       <o3 x="0.248299" y="-1.07596"/>
       </SlurSegment>
     </Slur>
   <Slur id="305">
-    <track>0</track>
     </Slur>
   <HairPin>
     <subtype>1</subtype>
     <track>1</track>
     <tick>134640</tick>
     <tick2>135240</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>135360</tick>
     <tick2>136320</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="-2.56576" y="0"/>
@@ -1762,31 +1367,26 @@
     <track>1</track>
     <tick>138240</tick>
     <tick2>139080</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>140760</tick>
     <tick2>141600</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>142800</tick>
     <tick2>143520</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>144720</tick>
     <tick2>145440</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>145920</tick>
     <tick2>146340</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0"/>
       <off2 x="0.070554" y="0"/>
@@ -1797,24 +1397,25 @@
     <track>0</track>
     <tick>146400</tick>
     <tick2>147120</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.579364"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.579364"/>
       </Segment>
     <Segment>
       <off1 x="0" y="0.579364"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.579364"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>147240</tick>
     <tick2>147360</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0827663" y="0.827663"/>
       <off2 x="0" y="0"/>
+      <offset x="0.0827663" y="0.827663"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -1822,52 +1423,38 @@
     <track>0</track>
     <tick>147600</tick>
     <tick2>148080</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <Slur id="306">
-    <track>0</track>
-    <tick>0</tick>
     </Slur>
   <Slur id="307">
-    <track>0</track>
     </Slur>
   <Slur id="308">
-    <track>0</track>
     </Slur>
   <Slur id="309">
-    <track>0</track>
     </Slur>
   <Slur id="310">
-    <track>0</track>
     </Slur>
   <Slur id="311">
-    <track>0</track>
     </Slur>
   <Slur id="312">
-    <track>0</track>
     </Slur>
   <Slur id="313">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.413831" y="1.73809"/>
       </SlurSegment>
     </Slur>
   <Slur id="314">
-    <track>0</track>
     <up>1</up>
     </Slur>
   <Slur id="315">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.165533" y="0.331065"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="316">
-    <track>0</track>
     </Slur>
   <Slur id="317">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.413831" y="1.57256"/>
       <o1 x="-0.413831" y="-2.15192"/>
@@ -1878,22 +1465,17 @@
       </SlurSegment>
     </Slur>
   <Slur id="318">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.407185" y="-0.895807"/>
       </SlurSegment>
     </Slur>
   <Slur id="319">
-    <track>0</track>
     </Slur>
   <Slur id="320">
-    <track>0</track>
     </Slur>
   <Slur id="321">
-    <track>0</track>
     </Slur>
   <Slur id="322">
-    <track>0</track>
     <SlurSegment no="0">
       <offset x="0.579364" y="-0.165532"/>
       <o1 x="-1.15873" y="-0.579364"/>
@@ -1905,94 +1487,67 @@
       </SlurSegment>
     </Slur>
   <Slur id="323">
-    <track>0</track>
     </Slur>
   <Slur id="324">
-    <track>0</track>
     </Slur>
   <Slur id="325">
-    <track>0</track>
     </Slur>
   <Slur id="326">
-    <track>0</track>
     </Slur>
   <Slur id="327">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0827663" y="-0.910429"/>
       </SlurSegment>
     </Slur>
   <Slur id="328">
-    <track>0</track>
     </Slur>
   <Slur id="329">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0" y="-0.744897"/>
       </SlurSegment>
     </Slur>
   <Slur id="330">
-    <track>0</track>
     </Slur>
   <Slur id="331">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="0.0827663" y="-1.15873"/>
       </SlurSegment>
     </Slur>
   <Slur id="332">
-    <track>0</track>
     </Slur>
   <Slur id="333">
-    <track>0</track>
     </Slur>
   <Slur id="334">
-    <track>0</track>
     </Slur>
   <Slur id="335">
-    <track>0</track>
     </Slur>
   <Slur id="336">
-    <track>0</track>
     </Slur>
   <Slur id="337">
-    <track>0</track>
     </Slur>
   <Slur id="338">
-    <track>0</track>
     </Slur>
   <Slur id="339">
-    <track>0</track>
     </Slur>
   <Slur id="340">
-    <track>0</track>
     </Slur>
   <Slur id="341">
-    <track>0</track>
     </Slur>
   <Slur id="342">
-    <track>0</track>
     </Slur>
   <Slur id="343">
-    <track>0</track>
     </Slur>
   <Slur id="344">
-    <track>0</track>
     </Slur>
   <Slur id="345">
-    <track>0</track>
     </Slur>
   <Slur id="346">
-    <track>0</track>
     </Slur>
   <Slur id="347">
-    <track>0</track>
     </Slur>
   <Slur id="348">
-    <track>0</track>
     </Slur>
   <Slur id="349">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-1.32426" y="-3.80725"/>
       </SlurSegment>
@@ -2002,32 +1557,29 @@
     <track>5</track>
     <tick>40440</tick>
     <tick2>40680</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.579982" y="-4.23387"/>
       <off2 x="-0.104822" y="0"/>
+      <offset x="0.579982" y="-4.23387"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>5</track>
     <tick>41400</tick>
     <tick2>41640</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.506283" y="-5.20748"/>
       <off2 x="0" y="0"/>
+      <offset x="0.506283" y="-5.20748"/>
       </Segment>
     </HairPin>
   <Slur id="350">
-    <track>0</track>
-    <tick>0</tick>
     <SlurSegment no="0">
       <o4 x="-0.252861" y="-0.408873"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="351">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.506283" y="-1.22954"/>
       <o3 x="0.144652" y="-1.01257"/>
@@ -2041,10 +1593,10 @@
     <track>0</track>
     <tick>164160</tick>
     <tick2>165120</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.0723261" y="0.36163"/>
       <off2 x="0" y="0"/>
+      <offset x="0.0723261" y="0.36163"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -2052,27 +1604,23 @@
     <track>0</track>
     <tick>165600</tick>
     <tick2>165960</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>166080</tick>
     <tick2>166920</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>169200</tick>
     <tick2>169440</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.289304" y="0.696489"/>
       <off2 x="0" y="0"/>
+      <offset x="0.289304" y="0.696489"/>
       </Segment>
     </HairPin>
   <Slur id="352">
-    <track>0</track>
-    <tick>0</tick>
     <SlurSegment no="0">
       <o2 x="0.407185" y="-0.81437"/>
       <o3 x="0" y="-0.732933"/>
@@ -2080,7 +1628,6 @@
       </SlurSegment>
     </Slur>
   <Slur id="353">
-    <track>0</track>
     <SlurSegment no="0">
       <o2 x="0.895807" y="-1.05868"/>
       <o3 x="0.081437" y="-0.651496"/>
@@ -2091,25 +1638,23 @@
     <track>4</track>
     <tick>169680</tick>
     <tick2>170160</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.651496"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.651496"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>171000</tick>
     <tick2>171360</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.488622" y="0.977244"/>
       <off2 x="0" y="0"/>
+      <offset x="0.488622" y="0.977244"/>
       </Segment>
     </HairPin>
   <Slur id="354">
-    <track>0</track>
-    <tick>0</tick>
     <SlurSegment no="0">
       <o2 x="0.244311" y="-0.895807"/>
       <o3 x="0" y="-0.651496"/>
@@ -2119,42 +1664,39 @@
     <track>4</track>
     <tick>173040</tick>
     <tick2>173280</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.244311" y="0.325748"/>
       <off2 x="-0.081437" y="0"/>
+      <offset x="0.244311" y="0.325748"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>173520</tick>
     <tick2>173760</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>4</track>
     <tick>174000</tick>
     <tick2>174480</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.144652" y="1.59117"/>
       <off2 x="0" y="0"/>
+      <offset x="0.144652" y="1.59117"/>
       </Segment>
     </HairPin>
   <HairPin>
     <track>0</track>
     <tick>180960</tick>
     <tick2>181440</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0.216978" y="0.578609"/>
       <off2 x="-2.24211" y="0"/>
+      <offset x="0.216978" y="0.578609"/>
       </Segment>
     </HairPin>
   <Slur id="355">
-    <track>0</track>
-    <tick>0</tick>
     <SlurSegment no="0">
       <o3 x="-0.144652" y="-0.940239"/>
       </SlurSegment>
@@ -2163,35 +1705,31 @@
     <track>4</track>
     <tick>119280</tick>
     <tick2>119520</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>120240</tick>
     <tick2>120480</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>121200</tick>
     <tick2>121440</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <track>4</track>
     <tick>118320</tick>
     <tick2>118560</tick2>
-    <diagonal>0</diagonal>
     </HairPin>
   <HairPin>
     <subtype>1</subtype>
     <track>0</track>
     <tick>122400</tick>
     <tick2>122760</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="0" y="0.578609"/>
       <off2 x="0" y="0"/>
+      <offset x="0" y="0.578609"/>
       </Segment>
     </HairPin>
   <HairPin>
@@ -2199,36 +1737,31 @@
     <track>4</track>
     <tick>42960</tick>
     <tick2>43200</tick2>
-    <diagonal>0</diagonal>
     <Segment>
       <off1 x="2.72157" y="-1.04853"/>
       <off2 x="-3.70926" y="0"/>
+      <offset x="2.72157" y="-1.04853"/>
       </Segment>
     </HairPin>
   <Slur id="356">
-    <track>0</track>
-    <tick>0</tick>
     <SlurSegment no="0">
       <o4 x="0" y="-0.81437"/>
       </SlurSegment>
     </Slur>
   <Slur id="357">
-    <track>0</track>
     <up>2</up>
     </Slur>
   <Slur id="358">
-    <track>0</track>
     <SlurSegment no="0">
       <o4 x="-0.651496" y="-3.42035"/>
       </SlurSegment>
     <up>2</up>
     </Slur>
   <Slur id="359">
-    <track>0</track>
     </Slur>
   <Staff id="1">
     <VBox>
-      <height>1.39903</height>
+      <height>10.9343</height>
       <leftMargin>5</leftMargin>
       <rightMargin>5</rightMargin>
       <topMargin>5</topMargin>
@@ -2236,32 +1769,17 @@
       <Text>
         <subtype>Title</subtype>
         <style>2</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Italienisches Konzert</p></body></html>
-          </html-data>
+        <text>Italienisches Konzert</text>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
         <style>3</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">BWV 971</p></body></html>
-          </html-data>
+        <text>BWV 971</text>
         </Text>
       <Text>
         <subtype>Composer</subtype>
         <style>4</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">J. S. Bach</p></body></html>
-          </html-data>
+        <text>J. S. Bach</text>
         </Text>
       </VBox>
     <Measure number="1">
@@ -2273,15 +1791,10 @@ p, li { white-space: pre-wrap; }
       <Tempo>
         <tempo>2.33333</tempo>
         <subtype>Tempo</subtype>
-        <offset x="-1.89716" y="-3.37265"/>
+        <offset x="0.140224" y="-1.54247"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;">Allegro animato</p></body></html>
-          </html-data>
+        <text>Allegro animato</text>
         </Tempo>
       <KeySig>
         <subtype>255</subtype>
@@ -24280,5 +23793,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
