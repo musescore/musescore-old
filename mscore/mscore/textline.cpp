@@ -556,9 +556,19 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       beginText->setEnabled(bt);
       beginTextTb->setEnabled(bt);
       beginTextPlace->setEnabled(bt);
-      beginSymbol->setEnabled(!bt);
-      beginSymbolX->setEnabled(!bt);
-      beginSymbolY->setEnabled(!bt);
+      bt = beginSymbolRb->isChecked();
+      beginSymbol->setEnabled(bt);
+      beginSymbolX->setEnabled(bt);
+      beginSymbolY->setEnabled(bt);
+
+      bt = continueTextRb->isChecked();
+      continueText->setEnabled(bt);
+      continueTextTb->setEnabled(bt);
+      continueTextPlace->setEnabled(bt);
+      bt = continueSymbolRb->isChecked();
+      continueSymbol->setEnabled(bt);
+      continueSymbolX->setEnabled(bt);
+      continueSymbolY->setEnabled(bt);
 
       beginText->setText(tl->beginText() ? tl->beginText()->getText() : "");
       continueText->setText(tl->continueText() ? tl->continueText()->getText() : "");
@@ -648,9 +658,6 @@ void LineProperties::beginTextToggled(bool val)
       beginText->setEnabled(val);
       beginTextPlace->setEnabled(val);
       beginTextTb->setEnabled(val);
-//      beginSymbol->setEnabled(!val);
-//      beginSymbolX->setEnabled(!val);
-//      beginSymbolY->setEnabled(!val);
       }
 
 //---------------------------------------------------------
@@ -661,9 +668,6 @@ void LineProperties::beginSymbolToggled(bool val)
       {
       if (val)
             beginTextRb->setChecked(false);
-//      beginText->setEnabled(!val);
-//      beginTextPlace->setEnabled(!val);
-//      beginTextTb->setEnabled(!val);
       beginSymbol->setEnabled(val);
       beginSymbolX->setEnabled(val);
       beginSymbolY->setEnabled(val);
@@ -677,6 +681,9 @@ void LineProperties::continueTextToggled(bool val)
       {
       if (val)
             continueSymbolRb->setChecked(false);
+      continueText->setEnabled(val);
+      continueTextPlace->setEnabled(val);
+      continueTextTb->setEnabled(val);
       }
 
 //---------------------------------------------------------
@@ -687,6 +694,9 @@ void LineProperties::continueSymbolToggled(bool val)
       {
       if (val)
             continueTextRb->setChecked(false);
+      continueSymbol->setEnabled(val);
+      continueSymbolX->setEnabled(val);
+      continueSymbolY->setEnabled(val);
       }
 
 //---------------------------------------------------------
