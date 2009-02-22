@@ -921,7 +921,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
             double p1x = c1->upNote()->canvasPos().x();
             double p2x = c2->upNote()->canvasPos().x();
             slope      = (_p2.y() - _p1.y()) / (p2x - p1x);
-            double y2  = _p1.y() + (c1->upNote()->canvasPos() - c1->upNote()->pos()).y();
+            double y2  = _p1.y() + c1->upNote()->chord()->canvasPos().y();
 
             foreach(ChordRest* cr, _elements) {
                   if (cr->type() != CHORD)
@@ -1133,7 +1133,7 @@ void Beam::layoutCrossStaff(int maxTickLen, int move, Chord* c1, Chord* c2)
       foreach(ChordRest* cr, _elements) {
             if (cr->type() != CHORD)
                   continue;
-            Chord* chord = (Chord*)(cr);
+            Chord* chord = static_cast<Chord*>(cr);
             _up = cr->up();
 
             Stem* stem = chord->stem();

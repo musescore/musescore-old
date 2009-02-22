@@ -450,7 +450,7 @@
            </sizepolicy>
           </property>
           <property name="suffix" >
-           <string> sp</string>
+           <string comment="do not translate" > sp</string>
           </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
@@ -472,7 +472,7 @@
            </sizepolicy>
           </property>
           <property name="suffix" >
-           <string> sp</string>
+           <string comment="do not translate" > sp</string>
           </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>

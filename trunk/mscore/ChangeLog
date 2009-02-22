@@ -1,4 +1,6 @@
-22.feb (tb)
+22.feb (ws)
+      - fix cross staff beam bug as seen in wtc1fuga4.mscz example measure 12
+      (tb)
       - update Finnish translation by Heino
       - update French translation by JLWaltener
       - update Dutch translatation by Jaap Plaisier

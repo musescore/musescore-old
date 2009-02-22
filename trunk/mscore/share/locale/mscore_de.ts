@@ -1725,7 +1725,7 @@ zu Notenzeile</translation>
     </message>
     <message>
         <source> sp</source>
-        <translation> spatium</translation>
+        <translation> sp</translation>
     </message>
     <message>
         <source>0</source>
