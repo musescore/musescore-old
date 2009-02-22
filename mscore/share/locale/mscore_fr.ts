@@ -154,7 +154,7 @@
     </message>
     <message>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>Suomi - Finnois</translation>
     </message>
 </context>
 <context>
@@ -173,8 +173,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1568 révisée JLW 19/02/09 - QT Linguist v4.5 rc1</translatorcomment>
-        <translation>Révision : 1568</translation>
+        <translatorcomment>r1581 révisée JLW 22/02/09 - QT Linguist v4.5 rc1</translatorcomment>
+        <translation>Révision : 1581</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1466,7 +1466,7 @@ failed: </source>
     </message>
     <message>
         <source>min. right margin</source>
-        <translation>Marge droite min.</translation>
+        <translation>Marge droite minimum</translation>
     </message>
     <message>
         <source>min note distance</source>
@@ -2297,19 +2297,19 @@ failed: </source>
     </message>
     <message>
         <source>place:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement :</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished">Gauche</translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Au dessus</translation>
     </message>
     <message>
         <source>Symb.</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole</translation>
     </message>
 </context>
 <context>
@@ -3053,7 +3053,7 @@ failed: </source>
     </message>
     <message>
         <source>enter rest</source>
-        <translation>entrer une silence</translation>
+        <translation>entrer un silence</translation>
     </message>
     <message>
         <source>rest</source>
@@ -4867,35 +4867,35 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>entrer une pause</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>pause</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>entrer une demi-pause</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>demi-pause</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>entrer un soupir</translation>
     </message>
     <message>
         <source>1/4 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>soupir</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>entrer un demi-soupir</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>demi-soupir</translation>
     </message>
 </context>
 <context>
@@ -6355,7 +6355,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>Format MuseScore (*.mscx)</translation>
     </message>
 </context>
 <context>
