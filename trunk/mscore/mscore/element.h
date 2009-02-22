@@ -208,7 +208,7 @@ class Element {
 
       virtual void draw(QPainter&) const {}
 
-      void writeProperties(Xml& xml) const;
+      void writeProperties(Xml& xml, const Element* proto = 0) const;
       bool readProperties(QDomElement);
 
       virtual void write(Xml&) const;
@@ -311,7 +311,7 @@ class Element {
 
       mutable int itemDiscovered;     ///< helper flag for bsp
 
-      virtual QList<Prop> properties(Xml&) const;
+      virtual QList<Prop> properties(Xml&, const Element* proto = 0) const;
       virtual void collectElements(QList<const Element*>& el) const { el.append(this); }
 
       virtual void toDefault() {  setUserOff(QPointF()); }

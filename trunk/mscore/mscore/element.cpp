@@ -372,7 +372,7 @@ void Element::layout(ScoreLayout* layout)
 //   properties
 //---------------------------------------------------------
 
-QList<Prop> Element::properties(Xml& xml) const
+QList<Prop> Element::properties(Xml& xml, const Element* proto) const
       {
       QList<Prop> pl;
       if (_subtype) {
@@ -397,7 +397,7 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("ticklen", _duration));
       if (_color != preferences.defaultColor)
             pl.append(Prop("color", _color));
-      if (_systemFlag)
+      if (_systemFlag && (proto == 0 || proto->systemFlag() != _systemFlag))
             pl.append(Prop("systemFlag", _systemFlag));
       return pl;
       }
@@ -406,9 +406,9 @@ QList<Prop> Element::properties(Xml& xml) const
 //   writeProperties
 //---------------------------------------------------------
 
-void Element::writeProperties(Xml& xml) const
+void Element::writeProperties(Xml& xml, const Element* proto) const
       {
-      xml.prop(properties(xml));
+      xml.prop(properties(xml, proto));
       if ((_tick != -1) && (_tick != xml.curTick || debugMode))
             xml.curTick = _tick;
       }

@@ -94,7 +94,7 @@ class SLine : public Element {
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);
       bool readProperties(QDomElement node);
-      void writeProperties(Xml& xml) const;
+      void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;
       void setLen(double l);
       virtual void collectElements(QList<const Element*>& el) const;

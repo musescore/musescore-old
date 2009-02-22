@@ -36,11 +36,13 @@ Volta::Volta(Score* s)
       setLineWidth(Spatium(.18));
       setBeginText("1.", TEXT_STYLE_VOLTA);
       setBeginTextPlace(PLACE_ABOVE);
+      setContinueTextPlace(PLACE_ABOVE);
       setOffsetType(OFFSET_SPATIUM);
       setBeginHook(true);
       setBeginHookHeight(Spatium(1.9));
       setYoff(-2.0);
       setSnapToMeasure(true);
+      setSubtype(VOLTA_CLOSED);
       }
 
 //---------------------------------------------------------
@@ -91,7 +93,7 @@ void Volta::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
-      setTrack(0);  // set default staff
+//      setTrack(0);  // set default staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "text")
@@ -116,8 +118,9 @@ void Volta::read(QDomElement e)
 
 void Volta::write(Xml& xml) const
       {
+      Volta proto(score());
       xml.stag(name());
-      TextLine::writeProperties(xml);
+      TextLine::writeProperties(xml, &proto);
       QString s;
       foreach(int i, _endings) {
             if (!s.isEmpty())

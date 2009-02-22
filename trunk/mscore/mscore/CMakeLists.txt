@@ -19,9 +19,9 @@
 #=============================================================================
 
 if (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden -fno-rtti")
+set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
 else (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-rtti")
+set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
 endif (GCC_VISIBILITY)
 
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")

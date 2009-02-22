@@ -339,20 +339,26 @@ void TextLine::read(QDomElement e)
 
 //---------------------------------------------------------
 //   writeProperties
+//    write properties different from prototype
 //---------------------------------------------------------
 
-void TextLine::writeProperties(Xml& xml) const
+void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
       {
-      if (_beginHook)
+      if (_beginHook && (proto == 0 || proto->beginHookHeight() != _beginHookHeight))
             xml.tag("beginHookHeight", _beginHookHeight.val());
-      if (_endHook)
+      if (_endHook && (proto == 0 || proto->endHookHeight() != _endHookHeight))
             xml.tag("endHookHeight", _endHookHeight.val());
 
-      xml.tag("lineWidth", _lineWidth.val());
-      xml.tag("lineStyle", _lineStyle);
-      xml.tag("lineColor", _lineColor);
-      xml.tag("beginTextPlace",    _beginTextPlace);
-      xml.tag("continueTextPlace", _continueTextPlace);
+      if (proto == 0 || proto->lineWidth() != _lineWidth)
+            xml.tag("lineWidth", _lineWidth.val());
+      if (proto == 0 || proto->lineStyle() != _lineStyle)
+            xml.tag("lineStyle", _lineStyle);
+      if (proto == 0 || proto->lineColor() != _lineColor)
+            xml.tag("lineColor", _lineColor);
+      if (proto == 0 || proto->beginTextPlace() != _beginTextPlace)
+            xml.tag("beginTextPlace",    _beginTextPlace);
+      if (proto == 0 || proto->continueTextPlace() != _continueTextPlace)
+            xml.tag("continueTextPlace", _continueTextPlace);
 
       SLine::writeProperties(xml);
       if (_beginText) {

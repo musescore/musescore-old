@@ -22,10 +22,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 if (STATIC_SCRIPT_BINDINGS)
-      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-rtti -DQT_STATICPLUGIN")
+      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -DQT_STATICPLUGIN")
       set(LIBTYPE "STATIC")
 else (STATIC_SCRIPT_BINDINGS)
-      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fno-rtti")
+      set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
       set(LIBTYPE "SHARED")
 endif (STATIC_SCRIPT_BINDINGS)
 
