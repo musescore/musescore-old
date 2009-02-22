@@ -1,3 +1,7 @@
+22.feb (tb)
+      - update Finnish translation by Heino
+      - update French translation by JLWaltener
+      - update Dutch translatation by Jaap Plaisier
 21.feb (ws)
       - added finnish translation from Heino
       - reimplement Volta element as subclass of TextLine

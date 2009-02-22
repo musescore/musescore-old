@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fi_FI">
+<!DOCTYPE TS><TS version="1.1" language="fi_FI">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
@@ -68,73 +67,68 @@
         <source>French Violin Clef</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>@default</name>
     <message>
         <source>system</source>
-        <translation type="unfinished"></translation>
+        <translation>Järjestelmä</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished">Tšekki</translation>
+        <translation>Tšekki</translation>
     </message>
     <message>
-        <source>Dansk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nederlands</source>
-        <translation type="unfinished"></translation>
+        <source>German</source>
+        <translation>Saksa</translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished">Englanti (GB)</translation>
+        <translation>Englanti (GB)</translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished">Englanti (US)</translation>
+        <translation>Englanti (US)</translation>
     </message>
     <message>
-        <source>EspaÃ±ol</source>
-        <translation type="unfinished"></translation>
+        <source>Spanish</source>
+        <translation>Espanja</translation>
     </message>
     <message>
-        <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <source>French</source>
+        <translation>Ranska</translation>
     </message>
     <message>
-        <source>FranÃ§ais</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Galego</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deutsch</source>
-        <translation type="unfinished"></translation>
+        <source>Galician</source>
+        <translation>Galicia</translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished">Hindi</translation>
+        <translation>Hindi</translation>
     </message>
     <message>
-        <source>Italiano</source>
-        <translation type="unfinished"></translation>
+        <source>Italian</source>
+        <translation>Italia</translation>
     </message>
     <message>
-        <source>PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <source>Dutch</source>
+        <translation>Hollanti</translation>
     </message>
     <message>
-        <source>Brasilian PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <source>Portuguese</source>
+        <translation>Portugali</translation>
     </message>
     <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
+        <source>Brasilian Portuguese</source>
+        <translation>Brasilian portugali</translation>
     </message>
     <message>
-        <source>TÃ¼rkÃ§e</source>
-        <translation type="unfinished"></translation>
+        <source>Russian</source>
+        <translation>Venäjä</translation>
+    </message>
+    <message>
+        <source>Turkey</source>
+        <translation>Turkki</translation>
     </message>
     <message>
         <source>acc discant</source>
@@ -226,7 +220,7 @@ p, li { white-space: pre-wrap; }
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BarLine</source>
@@ -234,7 +228,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SubType:</source>
-        <translation type="unfinished">Alatyyppi:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -295,7 +289,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chord</source>
@@ -307,7 +301,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished">Haka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grace Note</source>
@@ -326,39 +320,8 @@ p, li { white-space: pre-wrap; }
         <translation>Nuotin atribuutit:</translation>
     </message>
     <message>
-        <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Sointu</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Varsi</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Haka</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Koristenuotti</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Varren suunta</translation>
-    </message>
-    <message>
         <source>Notes:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nuotit:</translation>
-    </message>
-    <message>
-        <source>Help Lines:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Apuviivat:</translation>
+        <translation>Nuotit:</translation>
     </message>
 </context>
 <context>
@@ -1043,7 +1006,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ChordRest</source>
@@ -1215,31 +1178,31 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">G</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--</source>
@@ -1741,82 +1704,66 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Element</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Elementti</translation>
+        <translation>Elementti</translation>
     </message>
     <message>
         <source>selected</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">valittu</translation>
+        <translation>valittu</translation>
     </message>
     <message>
         <source>generated</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">generoitu</translation>
+        <translation>generoitu</translation>
     </message>
     <message>
         <source>visible</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">näkyvä</translation>
+        <translation>näkyvä</translation>
     </message>
     <message>
         <source>system</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>subtype</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">alatyyppi</translation>
+        <translation>alatyyppi</translation>
     </message>
     <message>
         <source>Voice</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Stemma</translation>
+        <translation>Stemma</translation>
     </message>
     <message>
         <source>Staff</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Viivasto</translation>
+        <translation>Viivasto</translation>
     </message>
     <message>
         <source>Time</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Tahtilajit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Len</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väri</translation>
     </message>
     <message>
         <source>Pos</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPos</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Offset</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Etäisyys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BBox</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mag</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2269,7 +2216,11 @@ failed: </source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation>Symboli</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
@@ -2291,28 +2242,12 @@ failed: </source>
         <source>End</source>
         <translation>Loppu</translation>
     </message>
-    <message>
-        <source>place:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished">Vasemmalle</translation>
-    </message>
-    <message>
-        <source>Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symb.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>LineSegment</source>
@@ -2351,11 +2286,11 @@ failed: </source>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished">Lauluteksti</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Syllabic:</source>
@@ -2367,11 +2302,11 @@ failed: </source>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished">Aloitus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished">Loppu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Middle</source>
@@ -2390,7 +2325,7 @@ failed: </source>
     <name>MagBox</name>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished">Zoomaa kangasta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Magnification</source>
@@ -2426,7 +2361,7 @@ failed: </source>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measure</source>
@@ -2517,7 +2452,7 @@ failed: </source>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>actual</source>
@@ -3097,7 +3032,7 @@ failed: </source>
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Palauta pakkimuoto</translation>
+        <translation>Palauta palkkimuoto</translation>
     </message>
     <message>
         <source>Reset Beam Mode of selected measures</source>
@@ -4281,7 +4216,7 @@ failed: </source>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Viivastokokonaisuus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Staff</source>
@@ -4861,38 +4796,6 @@ ennen sulkemista?</translation>
         <source>3 between notes</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5023,77 +4926,62 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Nuotti</translation>
+        <translation>Nuotti</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Sävelkorkeus</translation>
+        <translation>Sävelkorkeus</translation>
     </message>
     <message>
         <source>Head</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Pää</translation>
+        <translation>Pää</translation>
     </message>
     <message>
         <source>Subelements:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TPC</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HGrp.</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Viiva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie Forw.</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Siirrä</translation>
+        <translation>Siirrä</translation>
     </message>
     <message>
         <source>Tie Back</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accidental</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Tilapäinen etumerkintä</translation>
+        <translation>Tilapäinen etumerkintä</translation>
     </message>
     <message>
         <source>Mirror Head</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S-Channel</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hidden</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Piilotettu</translation>
+        <translation>Piilotettu</translation>
     </message>
     <message>
         <source>User-Acc</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5275,7 +5163,7 @@ ennen sulkemista?</translation>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Part Name</source>
@@ -5378,7 +5266,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished">Keskeytä</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Play</source>
@@ -5978,11 +5866,11 @@ ennen sulkemista?</translation>
         <source>Landscape</source>
         <translation>vaaka</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Replace 1/2 ... with ½ ...</source>
         <translation>korvaa 1/2 ...  muodolla ½ ...</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>korvaa (C) ... muodolla © ... tekijänoikeustekstissä</translation>
     </message>
@@ -5991,7 +5879,7 @@ ennen sulkemista?</translation>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished">Ped (Pedal)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -6049,11 +5937,11 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     <name>QWidget</name>
     <message>
         <source>MuseScore: load failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Lataus epäonnistui:</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Lopeta</translation>
+        <translation>Lopeta</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
@@ -6061,23 +5949,23 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tyylin lataus epäonnistui:</translation>
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: lataa midi</translation>
     </message>
     <message>
         <source>MuseScore: invalid command</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Virheellinen komento</translation>
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore: Paletin lataus epäonnistui:</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -6085,22 +5973,22 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore-tyylit (*.mss);;Kaikki tiedostot (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tyylin lataus epäonnistui:</translation>
     </message>
     <message>
         <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vie Capellaan</translation>
     </message>
 </context>
 <context>
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished">äänitä</translation>
+        <translation>äänitä</translation>
     </message>
 </context>
 <context>
@@ -6153,29 +6041,29 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     <name>Rest</name>
     <message>
         <source>Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Tauko</translation>
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tauon ominaisuudet...</translation>
     </message>
 </context>
 <context>
     <name>RestPropertyBase</name>
     <message>
         <source>Rest Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Tauon ominaisuudet</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished">pieni</translation>
+        <translation>pieni</translation>
     </message>
 </context>
 <context>
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SLine</source>
@@ -6191,7 +6079,7 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">hemidemisemiquaver {1?}</translation>
+        <translation>1</translation>
     </message>
 </context>
 <context>
@@ -6200,82 +6088,89 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivastoja ei löytynyt:
+luo aluksi muutama viivasto käyttämällä
+instrumenttien luonti työkalua</translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation type="unfinished">No Bar selected:
-please select a bar and try again</translation>
+        <translation>Mitään tahtia ei ole valittu:
+valitse tahti ja yritä uudelleen</translation>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tallenna partituuri</translation>
     </message>
     <message>
         <source>Open Temp File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa Temp-tiedosto
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished">
+        <translation>
 epäonnistui:</translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakattu MuseScore-formaatti (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.msc)</source>
+        <translation>MuseScore-formaatti (*.msc)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF-tiedosto (*.pdf)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG-bittikarttagrafiikka (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaalattava vektorigrafiikka</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lilypond-formaatti (*.ly)</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tallenna nimellä</translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished">Avaa tiedosto</translation>
+        <translation>Avaa tiedosto</translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tallenna tyyli</translation>
     </message>
     <message>
         <source>Open Style File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa tyylitiedosto</translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Avaa tyylitiedosto</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished">MuseScore: Kirjoitustyyli</translation>
+        <translation>MuseScore: Kirjoita tyyli</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Lue tiedosto</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Transponoi</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
@@ -6283,98 +6178,94 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakattu MuseScore-tiedosto (*.mscz)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>MusicXML-formaatti (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakattu MusicXML-formaatti (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardi MIDI-tiedosto (*.mid)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation>PostScript-tiedosto (*.ps)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tallenna kopio</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore-tyylitiedosto (*.mss)</translation>
     </message>
     <message>
         <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore-tiedosto (*.mscx)</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tallenna tiedosto</translation>
     </message>
     <message>
         <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <translation>poista vanha varmuuskopio</translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation>epäonnistui</translation>
     </message>
     <message>
         <source>renaming file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>nimeä uudelleen tiedosto &lt;</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; varmuuskopioksi &lt;</translation>
     </message>
     <message>
         <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; epäonnistui</translation>
     </message>
     <message>
         <source>renaming &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>nimeä uudelleen &lt;</translation>
     </message>
     <message>
         <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; nimellä &lt;</translation>
     </message>
 </context>
 <context>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmentti</translation>
     </message>
     <message>
         <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuottiavainsegmentti</translation>
     </message>
     <message>
         <source>Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Etumerkintä</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation type="unfinished">Tahtilaji:</translation>
+        <translation>Tahtilaji</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Aloita toisto</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -6382,11 +6273,11 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Breath Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Hengityssegmentti</translation>
     </message>
     <message>
         <source>End Bar Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopetus tahtiviiva</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
@@ -6394,7 +6285,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Lyrics:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauluteksti:</translation>
     </message>
     <message>
         <source>Segment Type:</source>
@@ -6405,34 +6296,34 @@ epäonnistui:</translation>
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
+        <translation>Pikanäppäin ristiriidassa</translation>
     </message>
     <message>
         <source>Undefined</source>
-        <translation type="unfinished"></translation>
+        <translation>Määrittelemätön</translation>
     </message>
 </context>
 <context>
     <name>ShortcutCaptureDialogBase</name>
     <message>
         <source>Enter shortcut sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Anna pikanäppäinyhdistelmä</translation>
     </message>
     <message>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation type="unfinished"></translation>
+        <translation>Paina enintään 4 näppäimen yhdistelmää!</translation>
     </message>
     <message>
         <source>Old shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanha pikänäppäin:</translation>
     </message>
     <message>
         <source>New shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi pikanäppäin:</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">Tyhjennä</translation>
+        <translation>Tyhjennä</translation>
     </message>
     <message>
         <source>OK</source>
@@ -6463,7 +6354,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished">ei palkkia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>begin 1/32</source>
@@ -6509,7 +6400,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished">ei palkkia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>begin 1/32</source>
@@ -6524,7 +6415,7 @@ epäonnistui:</translation>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Slur</source>
@@ -6558,7 +6449,7 @@ epäonnistui:</translation>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SlurTie</source>
@@ -6596,19 +6487,19 @@ epäonnistui:</translation>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normaali</translation>
+        <translation>normaali</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore:  Viivaston tekstiominaisuudet</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">Peruuta</translation>
+        <translation>Peruuta</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi-toiminto</translation>
     </message>
 </context>
 <context>
@@ -6637,11 +6528,11 @@ epäonnistui:</translation>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tempon tekstiominaisuudet</translation>
     </message>
     <message>
         <source>Tempo:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo:</translation>
     </message>
     <message>
         <source>BPM</source>
@@ -6649,7 +6540,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo-ominaisuudet</translation>
     </message>
 </context>
 <context>
@@ -6678,7 +6569,23 @@ epäonnistui:</translation>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Teksti</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation>Teksti:</translation>
+    </message>
+    <message>
+        <source>Offset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abs.:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type:</source>
@@ -6686,40 +6593,34 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Space</source>
         <translation>Väli</translation>
     </message>
     <message>
-        <source>Text</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Teksti:</translation>
-    </message>
-    <message>
-        <source>Offset:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abs.:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rel.:</source>
-        <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextStyle:</source>
-        <comment>do not translate</comment>
+        <source>Anchor:</source>
+        <translation>Ankkuri:</translation>
+    </message>
+    <message>
+        <source>Parent</source>
+        <translation>Vanhempi</translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation>Tahti</translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation>Viivasto</translation>
+    </message>
+    <message>
+        <source>Segment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6742,150 +6643,150 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished">Kehys</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tekstiominaisuudet</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished">Fontti:</translation>
+        <translation>Fontti:</translation>
     </message>
     <message>
         <source>font face</source>
-        <translation type="unfinished"></translation>
+        <translation>fontin ulkoasu</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Koko:</translation>
+        <translation>Koko:</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished">Tyyli:</translation>
+        <translation>Tyyli:</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished"></translation>
+        <translation>lihavoitu</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished"></translation>
+        <translation>kursiivi</translation>
     </message>
     <message>
         <source>I</source>
-        <translation type="unfinished">I</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>underline</source>
-        <translation type="unfinished"></translation>
+        <translation>alleviivattu</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished">U</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasaa:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Väri:</translation>
+        <translation>Väri:</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished"></translation>
+        <translation>kehysväri</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished">Kehys</translation>
+        <translation>Kehys</translation>
     </message>
     <message>
         <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
+        <translation>piirrä ympyräkehys</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished">Ympyrä</translation>
+        <translation>Ympyrä</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
+        <translation>piirrä laatikkokehys</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished">Laatikko</translation>
+        <translation>Laatikko</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Leveys:</translation>
+        <translation>Leveys:</translation>
     </message>
     <message>
         <source>frame line width</source>
-        <translation type="unfinished"></translation>
+        <translation>kehyksen viivan leveys</translation>
     </message>
     <message>
         <source>Margin:</source>
-        <translation type="unfinished">Marginaali:</translation>
+        <translation>Marginaali:</translation>
     </message>
     <message>
         <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
+        <translation>kehyksen sisämarginaali</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation type="unfinished">Pyöristys:</translation>
+        <translation>Kierros:</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished"></translation>
+        <translation>tasaa vasen</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>tekstin väri</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished">Etäisyys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X:</source>
-        <translation type="unfinished">X:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relX:</source>
-        <translation type="unfinished">suht. X:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y:</source>
-        <translation type="unfinished">Y:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>relY:</source>
-        <translation type="unfinished">suht. Y</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation type="unfinished">Yksikkö:</translation>
+        <translation>Yksikkö:</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation type="unfinished">mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Space</source>
@@ -6894,40 +6795,40 @@ epäonnistui:</translation>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">mm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation type="unfinished"></translation>
+        <translation>fontin pistekoko</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>tasaa tekstin vasen reuna viitepisteeseen</translation>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>keskitä teksti viitekohtaan</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>tasaa tekstin oikea reuna viitepisteeseen</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>tasaa tekstin yläreuna viitepisteeseen</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>keskitä teksti vertikaalisesti viitepisteeseen</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>tasaa tekstin alareuna viitepisteeseen</translation>
     </message>
     <message>
         <source>horizontal offset to reference point</source>
@@ -6939,7 +6840,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>vertical offset to reference point</source>
@@ -6959,7 +6860,7 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>enable text frame</source>
-        <translation type="unfinished"></translation>
+        <translation>salli tekstikehys</translation>
     </message>
     <message>
         <source>corner round</source>
@@ -7136,7 +7037,7 @@ epäonnistui:</translation>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstin muokkaus</translation>
     </message>
 </context>
 <context>
@@ -7150,7 +7051,7 @@ epäonnistui:</translation>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation>Muoto</translation>
     </message>
     <message>
         <source>Create TimeSignature</source>
@@ -7244,11 +7145,11 @@ p, li { white-space: pre-wrap; }
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tupletit</translation>
     </message>
     <message>
         <source>has number</source>
@@ -7280,7 +7181,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Element</source>
-        <translation type="unfinished">Elementti</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tick</source>
@@ -7288,18 +7189,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pituus</translation>
     </message>
 </context>
 <context>
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Luo tupletteja</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>actual notes</source>
@@ -7346,61 +7247,68 @@ p, li { white-space: pre-wrap; }
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Tuplettien ominaisuudet</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero</translation>
     </message>
     <message>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation>numero</translation>
     </message>
     <message>
         <source>relation</source>
-        <translation type="unfinished"></translation>
+        <translation>suhde</translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>ei mitään</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Sulkumerkki</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>automaattinen sulkumerkki</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>sulkumerkki</translation>
     </message>
 </context>
 <context>
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Lisää</translation>
+        <translation>Lisää</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>VBox ominaisuudet...</translation>
     </message>
 </context>
 <context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished">Time Bar Properties</translation>
+        <translation>Maalin ominaisuudet</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Teksti:</translation>
+        <translation>Teksti:</translation>
     </message>
     <message>
         <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toistolista:</translation>
+    </message>
+</context>
+<context>
+    <name>VoltaSegment</name>
+    <message>
+        <source>Volta Properties...</source>
+        <translation>Maalin ominaisuudet...</translation>
     </message>
 </context>
 <context>
