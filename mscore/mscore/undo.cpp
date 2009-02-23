@@ -85,9 +85,12 @@ static const char* undoName[] = {
       "ChangeRepeatFlags",
       "ChangeVoltaEnding", "ChangeVoltaText",
       "ChangeChordRestSize",
+      "ChangeChordNoStem",
+      "ChangeChordRestSpace",
       "ChangeNoteHead",
       "ChangeEndBarLineType",
       "ChangeBarLineSpan",
+      "ChangeUserOffset",
       "SigInsertTime",
       "FixTicks",
       "ChangeBeamMode",
@@ -507,7 +510,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   Measure* m = (Measure*)i->measure;
                   int ol     = i->val2;
                   int nl     = i->val1;
-                  m->setTickLen(nl);
+                  // m->setTickLen(nl);
 
                   //
                   // move EndBarLine and TimeSigAnnounce
@@ -549,14 +552,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
             case UndoOp::ChangeRepeatFlags:
                   {
-                  int tmp = ((Measure*)i->measure)->repeatFlags();
-                  ((Measure*)i->measure)->setRepeatFlags(i->val1);
+                  int tmp = static_cast<Measure*>(i->measure)->repeatFlags();
+                  static_cast<Measure*>(i->measure)->setRepeatFlags(i->val1);
                   i->val1 = tmp;
                   }
                   break;
             case UndoOp::ChangeVoltaEnding:
                   {
-                  Volta* volta = (Volta*)i->element1;
+                  Volta* volta = static_cast<Volta*>(i->element1);
                   QList<int> l = volta->endings();
                   volta->setEndings(i->di);
                   i->di = l;
@@ -564,7 +567,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeVoltaText:
                   {
-                  Volta* volta = (Volta*)i->element1;
+                  Volta* volta = static_cast<Volta*>(i->element1);
                   QString s = volta->text();
                   volta->setText(i->s);
                   i->s = s;
@@ -572,15 +575,34 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeChordRestSize:
                   {
-                  ChordRest* cr = (ChordRest*)i->element1;
+                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
                   bool small = cr->small();
                   cr->setSmall(i->val1);
                   i->val1 = small;
                   }
                   break;
+            case UndoOp::ChangeChordNoStem:
+                  {
+                  Chord* c = static_cast<Chord*>(i->element1);
+                  bool noStem = c->noStem();
+                  c->setNoStem(i->val1);
+                  i->val1 = noStem;
+                  }
+                  break;
+            case UndoOp::ChangeChordRestSpace:
+                  {
+                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
+                  Spatium l = cr->extraLeadingSpace();
+                  Spatium t = cr->extraTrailingSpace();
+                  cr->setExtraLeadingSpace(Spatium(i->d1));
+                  cr->setExtraTrailingSpace(Spatium(i->d2));
+                  i->d1 = l.val();
+                  i->d2 = t.val();
+                  }
+                  break;
             case UndoOp::ChangeNoteHead:
                   {
-                  Note* note = (Note*)i->element1;
+                  Note* note = static_cast<Note*>(i->element1);
                   int headGroup = note->headGroup();
                   note->setHeadGroup(i->val1);
                   i->val1 = headGroup;
@@ -588,7 +610,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeBeamMode:
                   {
-                  ChordRest* cr = (ChordRest*)i->element1;
+                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
                   int mode = int(cr->beamMode());
                   cr->setBeamMode(BeamMode(i->val1));
                   i->val1 = int(mode);
@@ -596,7 +618,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeEndBarLineType:
                   {
-                  Measure* m = (Measure*)i->measure;
+                  Measure* m = static_cast<Measure*>(i->measure);
                   int typ    = m->endBarLineType();
                   m->setEndBarLineType(i->val1, false);
                   i->val1 = typ;
@@ -607,6 +629,13 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   int span = i->staff->barLineSpan();
                   i->staff->setBarLineSpan(i->val1);
                   i->val1 = span;
+                  }
+                  break;
+            case UndoOp::ChangeUserOffset:
+                  {
+                  QPointF p = i->element1->userOff();
+                  i->element1->setUserOff(i->pt);
+                  i->pt   = p;
                   }
                   break;
             case UndoOp::ChangeCopyright:
@@ -996,6 +1025,21 @@ void Score::undoChangeBarLineSpan(Staff* staff, int span)
       }
 
 //---------------------------------------------------------
+//   undoChangeUserOffset
+//---------------------------------------------------------
+
+void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeUserOffset;
+      i.element1 = e;
+      i.pt       = offset;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
 //   undoChangeCopyright
 //---------------------------------------------------------
 
@@ -1342,6 +1386,37 @@ void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
       i.type = UndoOp::ChangeChordRestSize;
       i.element1 = cr;
       i.val1 = small;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeChordNoStem
+//---------------------------------------------------------
+
+void Score::undoChangeChordNoStem(Chord* cr, bool noStem)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeChordNoStem;
+      i.element1 = cr;
+      i.val1     = noStem;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeChordRestSpace
+//---------------------------------------------------------
+
+void Score::undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeChordRestSpace;
+      i.element1 = cr;
+      i.d1 = l.val();
+      i.d2 = t.val();
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

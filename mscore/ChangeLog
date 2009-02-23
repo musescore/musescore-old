@@ -1,3 +1,6 @@
+23.feb (ws)
+      - add two new properties for chord/rests: additionalLeadingSpace and
+        additionalTrailingSpace to fine tune layout
 22.feb (ws)
       - fix cross staff beam bug as seen in wtc1fuga4.mscz example measure 12
       (tb)

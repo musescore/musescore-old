@@ -1283,6 +1283,8 @@ void Chord::space(double& min, double& extra) const
       min = mirror + hw;
       if (up() && _hook)
             min += _hook->width();
+      extra += _extraLeadingSpace.point();
+      min   += _extraTrailingSpace.point();
       }
 
 //---------------------------------------------------------

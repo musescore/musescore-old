@@ -1412,7 +1412,12 @@ void Score::cmdAppendMeasures(int n)
 MeasureBase* Score::appendMeasure(int type)
       {
       MeasureBase* last = _measures.last();
-      int tick = last ? last->tick() + last->tickLen() : 0;
+      int tick = 0;
+      if (last) {
+            tick = last->tick();
+            if (last->type() == MEASURE)
+                  tick += static_cast<Measure*>(last)->tickLen();
+            }
       MeasureBase* mb = 0;
       if (type == MEASURE)
             mb = new Measure(this);
@@ -1526,11 +1531,11 @@ void Score::insertMeasures(int n, int type)
                   m = new VBox(this);
 		m->setTick(tick);
             if (type == MEASURE) {
-      		m->setTickLen(ticks);
+      		Measure* measure = static_cast<Measure*>(m);
 	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
 		      	Rest* rest = new Rest(this, tick, 0);  // whole measure rest
 	      		rest->setTrack(staffIdx * VOICES);
-		      	Segment* s = ((Measure*)m)->getSegment(rest);
+		      	Segment* s = measure->getSegment(rest);
 			      s->add(rest);
 		            }
                   undoFixTicks();
@@ -2147,8 +2152,6 @@ void Score::cmd(const QString& cmd)
                   _is.prefix = _is.prefix != 4 ? 4 : 0;
                   addAccidental(_is.prefix);
                   }
-            else if (cmd == "pad-staccato")
-                  addArticulation(5);
             else if (cmd == "flip")
                   cmdFlipStemDirection();
             else if (cmd == "voice-1")
@@ -2234,10 +2237,10 @@ void Score::cmd(const QString& cmd)
                   MeasureBase* mb = _measures.last();
                   if (mb) {   // check for empty score
                         sel->setState(SEL_SYSTEM);
-                        sel->setRange(tick2segment(0),
-                                      tick2segment(_measures.last()->tick() + _measures.last()->tickLen()),
-                                      0,
-                                      nstaves());
+                        int tick = mb->tick();
+                        if (mb->type() == MEASURE)
+                              tick += static_cast<Measure*>(mb)->tickLen();
+                        sel->setRange(tick2segment(0), tick2segment(tick), 0, nstaves());
                         }
                   }
             else if (cmd == "transpose")

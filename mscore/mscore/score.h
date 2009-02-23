@@ -369,7 +369,6 @@ class Score : public QObject {
       void cmdRemovePart(Part*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int srcStaff, int dstStaff);
       void cmdAddSlur();
-      void cmdAddStaccato();
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
@@ -433,6 +432,8 @@ class Score : public QObject {
       void undoChangeVoltaEnding(Volta* volta, const QList<int>& l);
       void undoChangeVoltaText(Volta* volta, const QString& s);
       void undoChangeChordRestSize(ChordRest* cr, bool small);
+      void undoChangeChordNoStem(Chord* cr, bool noStem);
+      void undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t);
       void undoChangeSubtype(Element* element, int st);
       void undoChangeNoteHead(Note*, int group);
       void undoChangePitch(Note* note, int pitch, int tpc, int userAccidental);
@@ -442,6 +443,7 @@ class Score : public QObject {
       void undoChangeChordRestLen(ChordRest* cr, int len);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
+      void undoChangeUserOffset(Element* e, const QPointF& offset);
       void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);

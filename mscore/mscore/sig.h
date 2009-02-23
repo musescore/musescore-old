@@ -63,10 +63,11 @@ typedef std::map<const int, SigEvent>::iterator iSigEvent;
 typedef std::map<const int, SigEvent>::const_iterator ciSigEvent;
 
 class SigList : public std::map<const int, SigEvent > {
+      unsigned _serial;
       void normalize();
 
    public:
-      SigList() {}
+      SigList();
       void add(int tick, int z, int n);
       void add(int tick, int z, int n, int z2, int n2);
       void add(int tick, int ticks, int z, int n);
@@ -87,6 +88,7 @@ class SigList : public std::map<const int, SigEvent > {
 
       void removeTime(int start, int len);
       void insertTime(int start, int len);
+      int serial() const { return _serial; }
       };
 
 extern int ticks_measure(int Z, int N);

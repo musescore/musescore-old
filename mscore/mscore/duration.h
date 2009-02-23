@@ -35,16 +35,21 @@ class DurationElement : public Element {
       Duration _duration;
       Tuplet* _tuplet;
 
+   protected:
+      mutable int _tickLen;   // is temporary changed in const write() method
+
    public:
       DurationElement(Score* s);
       DurationElement(const DurationElement& e);
 
       Duration duration() const                    { return _duration; }
-      virtual void setDuration(const Duration t)   { _duration = t; }
+      virtual void setDuration(const Duration t)   { _duration = t;    }
 
-      void setTuplet(Tuplet* t)                    { _tuplet = t; }
-      Tuplet* tuplet() const                       { return _tuplet; }
-      virtual Beam* beam() const                   { return 0; }
+      void setTuplet(Tuplet* t)                    { _tuplet = t;      }
+      Tuplet* tuplet() const                       { return _tuplet;   }
+      virtual Beam* beam() const                   { return 0;         }
+      virtual int tickLen() const                  { return _tickLen;  }
+      virtual void setTickLen(int t) const         { _tickLen = t;     }
       };
 
 #endif

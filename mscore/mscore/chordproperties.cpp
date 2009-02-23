@@ -19,50 +19,33 @@
 //=============================================================================
 
 #include "chordproperties.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   ChordProperties
 //---------------------------------------------------------
 
-ChordProperties::ChordProperties(QWidget* parent)
+ChordProperties::ChordProperties(Chord* c, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      chord = c;
+      smallCheckBox->setChecked(chord->small());
+      noStemCheckBox->setChecked(chord->noStem());
+      extraLeadingSpace->setValue(chord->extraLeadingSpace().val());
+      extraTrailingSpace->setValue(chord->extraTrailingSpace().val());
       }
 
 //---------------------------------------------------------
-//   small
+//   accept
 //---------------------------------------------------------
 
-bool ChordProperties::small() const
+void ChordProperties::accept()
       {
-      return smallCheckBox->isChecked();
-      }
-
-//---------------------------------------------------------
-//   setSmall
-//---------------------------------------------------------
-
-void ChordProperties::setSmall(bool val)
-      {
-      smallCheckBox->setChecked(val);
-      }
-
-//---------------------------------------------------------
-//   noStem
-//---------------------------------------------------------
-
-bool ChordProperties::noStem() const
-      {
-      return noStemCheckBox->isChecked();
-      }
-
-//---------------------------------------------------------
-//   setNoStem
-//---------------------------------------------------------
-
-void ChordProperties::setNoStem(bool val)
-      {
-      noStemCheckBox->setChecked(val);
+      chord->setSmall(smallCheckBox->isChecked());
+      chord->setNoStem(noStemCheckBox->isChecked());
+      chord->setExtraLeadingSpace(Spatium(extraLeadingSpace->value()));
+      chord->setExtraTrailingSpace(Spatium(extraTrailingSpace->value()));
+      QDialog::accept();
       }
 

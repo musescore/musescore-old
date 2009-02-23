@@ -23,6 +23,8 @@
 
 #include "ui_chordproperties.h"
 
+class Chord;
+
 //---------------------------------------------------------
 //   ChordProperties
 //---------------------------------------------------------
@@ -30,12 +32,13 @@
 class ChordProperties : public QDialog, public Ui::ChordPropertyBase {
       Q_OBJECT
 
+      Chord* chord;
+
+   public slots:
+      virtual void accept();
+
    public:
-      ChordProperties(QWidget* parent = 0);
-      bool small() const;
-      void setSmall(bool val);
-      bool noStem() const;
-      void setNoStem(bool val);
+      ChordProperties(Chord* c, QWidget* parent = 0);
       };
 
 #endif

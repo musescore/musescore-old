@@ -1019,18 +1019,19 @@ bool Note::genPropertyMenu(QMenu* popup) const
 void Note::propertyAction(const QString& s)
       {
       if (s == "props") {
-            ChordProperties vp;
-            vp.setSmall(chord()->small());
-            vp.setNoStem(chord()->noStem());
+            Chord c(*chord());
+            ChordProperties vp(&c);
             int rv = vp.exec();
             if (rv) {
-                  bool val = vp.small();
-                  if (val != chord()->small())
-                        score()->undoChangeChordRestSize(chord(), val);
-                  val = vp.noStem();
-                  if (val != chord()->noStem()) {
-                        // TODO: undo
-                        chord()->setNoStem(val);
+                  if (c.small() != chord()->small())
+                        score()->undoChangeChordRestSize(chord(), c.small());
+                  if (c.extraLeadingSpace() != chord()->extraLeadingSpace()
+                     || c.extraTrailingSpace() != chord()->extraTrailingSpace()) {
+                        score()->undoChangeChordRestSpace(chord(), c.extraLeadingSpace(),
+                           c.extraTrailingSpace());
+                        }
+                  if (c.noStem() != chord()->noStem()) {
+                        score()->undoChangeChordNoStem(chord(), c.noStem());
                         }
                   }
             }
@@ -1120,4 +1121,16 @@ void Note::setTrack(int val)
       if (_accidental)
             _accidental->setTrack(val);
       }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
+void Note::toDefault()
+      {
+      score()->undoChangeChordRestSpace(chord(), Spatium(0.0), Spatium(0.0));
+      score()->undoChangeUserOffset(this, QPointF());
+      score()->undoChangeUserOffset(chord(), QPointF());
+      }
+
 

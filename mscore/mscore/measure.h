@@ -109,6 +109,9 @@ class Measure : public MeasureBase {
       bool _endBarLineVisible;
       QColor _endBarLineColor;
 
+      mutable int _tickLen;   // cached value
+      mutable unsigned sigSerial;
+
       void push_back(Segment* e);
       void push_front(Segment* e);
       void layoutBeams(ScoreLayout*);
@@ -152,6 +155,8 @@ class Measure : public MeasureBase {
 
       int size() const                 { return _size;       }
       virtual int tickLen() const;
+      virtual void setTick(int t);
+
       Segment* first() const           { return _first;      }
       Segment* last() const            { return _last;       }
       void remove(Segment*);

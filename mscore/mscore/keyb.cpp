@@ -248,12 +248,7 @@ void Score::padToggle(int n)
             //
             // handle appoggiatura and acciaccatura
             //
-            Chord* c = static_cast<Chord*>(cr);
             cr->setTickLen(len);
-            for (iNote in = c->noteList()->begin(); in != c->noteList()->end(); ++in) {
-                  Note* n = in->second;
-                  n->setTickLen(len);
-                  }
             }
       else {
             if (cr->tuplet()) {
@@ -357,7 +352,6 @@ void Score::setPadState()
       getAction("pad-nat")->setChecked(_is.prefix == 5);
       getAction("pad-flat")->setChecked(_is.prefix == 2);
       getAction("pad-flat2")->setChecked(_is.prefix == 4);
-      getAction("pad-staccato")->setChecked(_is.prefix == 16);
 
       getAction("voice-1")->setChecked(_is.voice == 0);
       getAction("voice-2")->setChecked(_is.voice == 1);

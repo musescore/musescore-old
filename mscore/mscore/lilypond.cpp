@@ -263,7 +263,6 @@ void Lilypond::createMeasure()
       if (tick >= measure->tick() + measure->tickLen()) {
             measure = new Measure(score);
             measure->setTick(tick);
-            measure->setTickLen(division * 4);
             score->layout()->add(measure);
             }
       }
@@ -294,7 +293,6 @@ void Lilypond::addNote(const LNote& lnote)
       note->setPitch(lnote.pitch);
       note->setParent(chord);
       note->setTrack(staff->idx() * VOICES);
-      note->setTickLen(lnote.len);
       chord->add(note);
       tick += lnote.len;
       }
@@ -390,7 +388,6 @@ void Lilypond::convert()
 
       measure = new Measure(score);
       measure->setTick(tick);
-      measure->setTickLen(division * 4);
       score->layout()->add(measure);
 
       QChar c = lookup();

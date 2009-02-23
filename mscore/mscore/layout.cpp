@@ -571,7 +571,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       double xo = 0;
       if (curMeasure->type() == HBOX)
-            xo = curMeasure->width();
+            xo = static_cast<Box*>(curMeasure)->boxWidth().point();
 
       system->setInstrumentNames();
       system->layout(this, xo);

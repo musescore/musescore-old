@@ -80,9 +80,12 @@ struct UndoOp {
             ChangeVoltaEnding,
             ChangeVoltaText,
             ChangeChordRestSize,
+            ChangeChordNoStem,
+            ChangeChordRestSpace,
             ChangeNoteHead,
             ChangeEndBarLineType,
             ChangeBarLineSpan,
+            ChangeUserOffset,
             SigInsertTime,
             FixTicks,
             ChangeBeamMode,
@@ -106,7 +109,11 @@ struct UndoOp {
       MeasureBase* measure;
       Segment* segment;
       QList<int> di;
-      int val1, val2, val3, val4;
+      union {
+            struct { int val1, val2, val3, val4; };
+            struct { double d1, d2; };
+            };
+
       QColor color;
       SigEvent sig1, sig2;
       TEvent t1, t2;
