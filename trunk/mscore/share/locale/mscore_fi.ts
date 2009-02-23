@@ -289,7 +289,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Muoto</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -301,7 +301,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation>Haka</translation>
     </message>
     <message>
         <source>Grace Note</source>
@@ -332,7 +332,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstietiketti</translation>
     </message>
     <message>
         <source>Root</source>
@@ -2325,11 +2325,11 @@ failed: </source>
     <name>MagBox</name>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoomaus</translation>
     </message>
     <message>
         <source>Magnification</source>
-        <translation type="unfinished"></translation>
+        <translation>Näyttökoko</translation>
     </message>
 </context>
 <context>
@@ -2620,7 +2620,7 @@ failed: </source>
     </message>
     <message>
         <source>undo last change</source>
-        <translation>kumoa viimeisin muutos</translation>
+        <translation>Kumoa viimeisin muutos</translation>
     </message>
     <message>
         <source>redo</source>
@@ -2632,7 +2632,7 @@ failed: </source>
     </message>
     <message>
         <source>redo last undo</source>
-        <translation>tee uudelleen viimeisin kumous</translation>
+        <translation>Uudista viimeisin kumous</translation>
     </message>
     <message>
         <source>cut</source>
@@ -2744,7 +2744,7 @@ failed: </source>
     </message>
     <message>
         <source>toggle note input mode N</source>
-        <translation>vaihda nuotinsyöttötila N</translation>
+        <translation>Nuotinsyöttötila</translation>
     </message>
     <message>
         <source>pitch spell</source>
@@ -2992,7 +2992,7 @@ failed: </source>
     </message>
     <message>
         <source>rest</source>
-        <translation>tauko</translation>
+        <translation>Tauko</translation>
     </message>
     <message>
         <source>add staccato</source>
@@ -3004,7 +3004,7 @@ failed: </source>
     </message>
     <message>
         <source>flat</source>
-        <translation>alennus</translation>
+        <translation>Alennus</translation>
     </message>
     <message>
         <source>add trill</source>
@@ -3044,7 +3044,7 @@ failed: </source>
     </message>
     <message>
         <source>flip direction</source>
-        <translation>vaihda suuntaa</translation>
+        <translation>Suunnan vaihto</translation>
     </message>
     <message>
         <source>up</source>
@@ -3256,59 +3256,59 @@ failed: </source>
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation type="unfinished">pad note semibreve</translation>
+        <translation>1/1 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation type="unfinished">pad note minim</translation>
+        <translation>1/2 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation type="unfinished">pad note crotchet</translation>
+        <translation>1/4 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation type="unfinished">pad note quaver</translation>
+        <translation>1/8 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation type="unfinished">pad note semiquaver</translation>
+        <translation>1/16 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation type="unfinished">pad note demisemiquaver</translation>
+        <translation>1/32 nuotti</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation type="unfinished">pad note hemidemisemiquaver</translation>
+        <translation>1/64 nuotti</translation>
     </message>
     <message>
         <source>pad dot</source>
-        <translation type="unfinished"></translation>
+        <translation>piste</translation>
     </message>
     <message>
         <source>tie</source>
-        <translation>yhdyskaari</translation>
+        <translation>Yhdyskaari</translation>
     </message>
     <message>
         <source>pad rest</source>
-        <translation type="unfinished"></translation>
+        <translation>tauko</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>kaksoiskorotus</translation>
+        <translation>Kaksoiskorotus</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>korotus</translation>
+        <translation>Korotus</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>luonnollinen</translation>
+        <translation>Palautus</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>kaksoisalennus</translation>
+        <translation>Kaksoisalennus</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -3332,19 +3332,19 @@ failed: </source>
     </message>
     <message>
         <source>voice 1</source>
-        <translation>stemma 1</translation>
+        <translation>Stemma 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation>stemma 2</translation>
+        <translation>Stemma 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation>stemma 3</translation>
+        <translation>Stemma 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation>stemma 4</translation>
+        <translation>Stemma 4</translation>
     </message>
     <message>
         <source>midi input in</source>
@@ -3424,7 +3424,7 @@ failed: </source>
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation>Zoomaa kangasta</translation>
+        <translation>Zoomaus: Klikkaa ensin tästä normaalisti ja sitten paperiin (vasen hiiri suurentaa, oikea pienentää)</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -3580,11 +3580,11 @@ failed: </source>
     </message>
     <message>
         <source>start sequencer play</source>
-        <translation>aloita sekvenserin toiso</translation>
+        <translation>Aloita toisto</translation>
     </message>
     <message>
         <source>toggle pause</source>
-        <translation>vaihda keskeytys</translation>
+        <translation>Keskeytys</translation>
     </message>
     <message>
         <source>Pause</source>
@@ -3612,7 +3612,7 @@ failed: </source>
     </message>
     <message>
         <source>rewind to start position</source>
-        <translation>taaksepäin aloituspisteeseen</translation>
+        <translation>Taaksepäin aloituspisteeseen</translation>
     </message>
     <message>
         <source>seek to end</source>
@@ -3628,7 +3628,7 @@ failed: </source>
     </message>
     <message>
         <source>play repeats on/off</source>
-        <translation>toisto kertaukset päälle/pois</translation>
+        <translation>Kertaukset päälle/pois</translation>
     </message>
     <message>
         <source>load style</source>
@@ -3704,19 +3704,19 @@ failed: </source>
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>vaihda viivaston vaihto</translation>
+        <translation>viivaston vaihto</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>Vaihda Viivaston vaihto</translation>
+        <translation>Viivaston vaihto</translation>
     </message>
     <message>
         <source>toggle page break</source>
-        <translation>vaihda sivunvaihto</translation>
+        <translation>sivunvaihto</translation>
     </message>
     <message>
         <source>Toggle Page Break</source>
-        <translation>Vaihda sivunvaihto</translation>
+        <translation>Sivunvaihto</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -4554,35 +4554,35 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>Kaksoiskokonuotti (breve)</translation>
+        <translation>Kaksoiskokonuotti</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation>Kokonuotti (semibreve)</translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
         <translation>Kokonuotti</translation>
     </message>
     <message>
+        <source>Half note (minim)</source>
+        <translation>1/2 nuotti</translation>
+    </message>
+    <message>
         <source>Quarter note (crochet)</source>
-        <translation>Neljäsosanuotti</translation>
+        <translation>1/4 nuotti</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation>Kahdeksasosanuotti</translation>
+        <translation>1/8 nuotti</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/16 nuotti</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/32 nuotti</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>1/64 nuotti</translation>
     </message>
     <message>
         <source>Dot</source>
@@ -4590,7 +4590,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>kaksoispiste</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -5230,11 +5230,11 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>measure.beat</source>
-        <translation type="unfinished">bar.beat</translation>
+        <translation>tahti.isku</translation>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished">hemidemisemiquaver {001.01?}</translation>
+        <translation>001.01</translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -5242,11 +5242,11 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished">hemidemisemiquaver {0:00:00?}</translation>
+        <translation>0:00:00</translation>
     </message>
     <message>
         <source>actual tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>todellinen tempo</translation>
     </message>
     <message>
         <source>120bpm</source>
@@ -5254,7 +5254,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>relative tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>sunteellinen tempo</translation>
     </message>
     <message>
         <source>100%</source>
@@ -5262,27 +5262,27 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>Takaisin</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskeytä</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Toista</translation>
     </message>
     <message>
         <source>volume</source>
-        <translation type="unfinished"></translation>
+        <translation>voimakkuus</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"></translation>
+        <translation>Voima</translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
 </context>
 <context>
@@ -5344,7 +5344,7 @@ ennen sulkemista?</translation>
     <name>PrefsDialogBase</name>
     <message>
         <source>MuseScore: Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Asetukset</translation>
     </message>
     <message>
         <source>General</source>
@@ -5424,31 +5424,31 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>de German</source>
-        <translation type="unfinished"></translation>
+        <translation>de Saksa</translation>
     </message>
     <message>
         <source>en English</source>
-        <translation type="unfinished"></translation>
+        <translation>en Englanti</translation>
     </message>
     <message>
         <source>es Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>es Espanja</translation>
     </message>
     <message>
         <source>fr French</source>
-        <translation type="unfinished"></translation>
+        <translation>fr Ranska</translation>
     </message>
     <message>
         <source>it Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>it Italia</translation>
     </message>
     <message>
         <source>pt Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>pt Portugali</translation>
     </message>
     <message>
         <source>ru Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>fu Venäjä</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -5740,27 +5740,27 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>cz Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>cz Tšekki</translation>
     </message>
     <message>
         <source>gl Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>gl Galicia</translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>hi_IN Hindi</translation>
     </message>
     <message>
         <source>nl Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>nl Hollanti</translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>pt_BR Brasilian portugali</translation>
     </message>
     <message>
         <source>tr Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>tr Turkki</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
