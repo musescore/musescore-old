@@ -159,7 +159,7 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
             pl.append(Prop("BeamMode", s));
             }
       if (_tickLen)
-            pl.append(Prop("tickLen", _tickLen));
+            pl.append(Prop("ticklen", _tickLen));
       if (tuplet())
             pl.append(Prop("Tuplet", tuplet()->id()));
       if (_small)
@@ -297,6 +297,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             setDuration(d);
             }
       else if (tag == "ticklen")
+            setTickLen(i);
+      else if (tag == "tickLen")    // debug
             setTickLen(i);
       else if (tag == "dots")
             _dots = i;
