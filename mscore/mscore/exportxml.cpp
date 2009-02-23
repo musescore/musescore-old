@@ -547,7 +547,7 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
 //   handleElements -- handle all directions at tick between mstart and mend
 //---------------------------------------------------------
 
-void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int mstart, int mend, int sstaff)
+void DirectionsHandler::handleElements(ExportMusicXml* /*exp*/, Staff* staff, int mstart, int mend, int sstaff)
       {
       int i = 0;
       foreach(DirectionsAnchor* da, anchors) {
@@ -775,31 +775,34 @@ typedef QList<int> IntVector;
 static IntVector integers;
 static IntVector primes;
 
-// check if all integers can be divided by div
+// check if all integers can be divided by d
 
-static bool canDivideBy(int div) {
-  bool res = true;
-  for (int i = 0; i < integers.count(); i++) {
-    if ((integers[i] <= 1) || ((integers[i] % div) != 0)) {
-      res = false;
-    }
-  }
-  return res;
-}
+static bool canDivideBy(int d)
+      {
+      bool res = true;
+      for (int i = 0; i < integers.count(); i++) {
+            if ((integers[i] <= 1) || ((integers[i] % d) != 0)) {
+                  res = false;
+                  }
+            }
+      return res;
+      }
 
-// divide all integers by div
+// divide all integers by d
 
-static void divideBy(int div) {
-  for (int i = 0; i < integers.count(); i++) {
-    integers[i] /= div;
-  }
-}
+static void divideBy(int d)
+      {
+      for (int i = 0; i < integers.count(); i++) {
+            integers[i] /= d;
+            }
+      }
 
-static void addInteger(int len) {
-if (!integers.contains(len)) {
-      integers.append(len);
-}
-}
+static void addInteger(int len)
+      {
+      if (!integers.contains(len)) {
+            integers.append(len);
+            }
+      }
 
 //---------------------------------------------------------
 //   calcDivMoveToTick
@@ -826,10 +829,10 @@ void ExportMusicXml::calcDivMoveToTick(int t)
 
 // Length of time in MusicXML is expressed in "units", which should allow expressing all time values
 // as an integral number of units. Divisions contains the number of units in a quarter note.
-// MuseScore uses 480 midi ticks to represent a quarter note, which expresses all note values
+// MuseScore uses division (480) midi ticks to represent a quarter note, which expresses all note values
 // plus triplets and quintuplets as integer values. Solution is to collect all time values required,
 // and divide them by the highest common denominator, which is implemented as a series of
-// divisions by prime factors. Initialize the list with 480 to make sure a quarter note can always
+// divisions by prime factors. Initialize the list with division to make sure a quarter note can always
 // be written as an integral number of units.
 
 /**
@@ -837,13 +840,13 @@ void ExportMusicXml::calcDivMoveToTick(int t)
 
 void ExportMusicXml::calcDivisions()
       {
-	// init
-	integers.clear();
-	primes.clear();
-	integers.append(480);
-	primes.append(2);
-	primes.append(3);
-	primes.append(5);
+      // init
+      integers.clear();
+      primes.clear();
+      integers.append(division);
+      primes.append(2);
+      primes.append(3);
+      primes.append(5);
 
       const QList<Part*>* il = score->parts();
 
@@ -895,28 +898,13 @@ void ExportMusicXml::calcDivisions()
                                     }
 
 //                              dh.handleElement(this, el, sstaff, true);
-/*
-                              switch (el->type()) {
-                                    case CHORD:
-                                          {
-                                          chord((Chord*)el, sstaff, ll);
-                                          break;
-                                          }
-                                    case REST:
-                                          rest((Rest*)el, sstaff);
-                                          break;
-                                    default:
-//                                          printf("ExportMusicXml::write unknown segment type %s\n", el->name());
-                                          break;
-                                    }
-*/
 //                              dh.handleElement(this, el, sstaff, false);
                               }
                         if (!((st + 1) % VOICES)) {
                               // sstaff may be 0, which causes a failed assertion (and abort)
                               // in (*i)->staff(ssstaff - 1)
                               // LVIFIX: find exact cause
-                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
+//                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
 //                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
                               }
@@ -926,15 +914,15 @@ void ExportMusicXml::calcDivisions()
                   }
             }
 
-	// do it: divide by all primes as often as possible
-	for (int u = 0; u < primes.count(); u++) {
-		while (canDivideBy(primes[u])) {
-			divideBy(primes[u]);
-		}
-	}
+      // do it: divide by all primes as often as possible
+      for (int u = 0; u < primes.count(); u++) {
+            while (canDivideBy(primes[u])) {
+                  divideBy(primes[u]);
+                  }
+            }
 
-	div = 480 / integers[0];
-	printf("divisions=%d div=%d\n", integers[0], div);
+      div = division / integers[0];
+      printf("divisions=%d div=%d\n", integers[0], div);
       }
 
 //---------------------------------------------------------
@@ -1168,6 +1156,7 @@ void ExportMusicXml::keysig(int key)
 
 void ExportMusicXml::clef(int staff, int clef)
       {
+      printf("ExportMusicXml::clef(staff=%d, clef=%d)\n", staff, clef);
       attr.doAttr(xml, true);
       if (staff)
             xml.stag(QString("clef number=\"%1\"").arg(staff));
@@ -2501,7 +2490,7 @@ foreach(Element* el, *(score->gel())) {
                   // output attributes with the first actual measure (pickup or regular)
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                         attr.doAttr(xml, true);
-                        xml.tag("divisions", division);
+                        xml.tag("divisions", division / div);
                         }
                   // output attributes at start of measure: key, time
                   KeySig* ksig = 0;
@@ -2544,6 +2533,8 @@ foreach(Element* el, *(score->gel())) {
                         }
                   // output attribute at start of measure: clef
                   for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        printf("segment %s %s at tick %d\n",
+                               seg->name(), seg->subtypeName().toUtf8().data(), seg->tick());
                         if (seg->tick() > m->tick())
                               break;
                         Element* el = seg->element(strack);
@@ -2565,6 +2556,7 @@ foreach(Element* el, *(score->gel())) {
                                           // at line beginning
                                           int ti = el->tick();
                                           int ct = ((Clef*)el)->subtype();
+                                          printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end()) {

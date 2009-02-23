@@ -1,4 +1,7 @@
-23.feb (ws)
+23.feb (lv)
+      - calculate more sensible MusicXML divisions value
+      - update some MusicXML regression testfiles
+       (ws)
       - more style parameter in style editor
       - make ledger lines thicker
       - add two new properties for chord/rests: additionalLeadingSpace and
