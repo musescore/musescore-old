@@ -1369,7 +1369,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   // HACK for whole measure rest:
                   if (ns == 0 || ns == es) {    // last segment?
                         Element* e = s->element(staffStart * VOICES);
-                        if (e && e->type() == REST && e->tickLen() == 0)
+                        if (e && e->type() == REST && static_cast<Rest*>(e)->tickLen() == 0)
                               x2 = s->measure()->abbox().right() - _spatium;
                         }
 

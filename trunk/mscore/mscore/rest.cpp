@@ -260,6 +260,7 @@ void Rest::write(Xml& xml) const
 
 void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Beam*>& beams)
       {
+      setTickLen(0);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -434,16 +435,30 @@ bool Rest::genPropertyMenu(QMenu* popup) const
 void Rest::propertyAction(const QString& s)
       {
       if (s == "props") {
-            RestProperties vp;
-            vp.setSmall(small());
+            Rest r(*this);
+            RestProperties vp(&r);
             int rv = vp.exec();
             if (rv) {
-                  bool val = vp.small();
-                  if (val != small())
-                        score()->undoChangeChordRestSize(this, val);
+                  if (r.small() != small())
+                        score()->undoChangeChordRestSize(this, r.small());
+                  if (r.extraLeadingSpace() != extraLeadingSpace()
+                     || r.extraTrailingSpace() != extraTrailingSpace()) {
+                        score()->undoChangeChordRestSpace(this, r.extraLeadingSpace(),
+                           r.extraTrailingSpace());
+                        }
                   }
             }
       else
             Element::propertyAction(s);
+      }
+
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+void Rest::space(double& min, double& extra) const
+      {
+      min   = width() + _extraTrailingSpace.point();
+      extra = _extraLeadingSpace.point();
       }
 

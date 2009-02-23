@@ -86,6 +86,7 @@ class MeasureBase : public Element {
       Measure* nextMeasure();
       Measure* prevMeasure();
 
+      virtual int tickLen() const            { return 0;       }
       virtual void write(Xml&, int, bool) const = 0;
 
       virtual void collectElements(QList<const Element*>& el) const;

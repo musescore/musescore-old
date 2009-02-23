@@ -537,16 +537,6 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("flat"),
          &flatIcon
          ),
-       Shortcut(
-          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-staccato",
-         QT_TR_NOOP("staccato"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("staccato"),
-         QT_TR_NOOP("staccato"),
-         &staccatoIcon
-         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-trill",

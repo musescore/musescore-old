@@ -1273,6 +1273,9 @@ bool Score::read(QDomElement e)
       _layout->setInstrumentNames();
 
       searchSelectedElements();
+
+//      _layout->doLayout();
+
       _fileDivision = division;
       return true;
       }

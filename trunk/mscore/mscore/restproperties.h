@@ -23,6 +23,8 @@
 
 #include "ui_restproperties.h"
 
+class Rest;
+
 //---------------------------------------------------------
 //   RestProperties
 //---------------------------------------------------------
@@ -30,10 +32,13 @@
 class RestProperties : public QDialog, public Ui::RestPropertyBase {
       Q_OBJECT
 
+      Rest* rest;
+
+   public slots:
+      virtual void accept();
+
    public:
-      RestProperties(QWidget* parent = 0);
-      bool small() const;
-      void setSmall(bool val);
+      RestProperties(Rest*, QWidget* parent = 0);
       };
 
 #endif

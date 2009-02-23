@@ -618,11 +618,12 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
                   Element* el = seg->element(st);
                   if (!el)
                         continue;
-                  if (el->isChordRest() && el->staff() == stf)
+                  if (el->isChordRest() && el->staff() == stf) {
                         if (   ( start && el->tick() == tick)
                             || (!start && (el->tick() + el->tickLen()) == tick)) {
                               return new DirectionsAnchor(el, start, tick);
                               }
+                        }
                   }
             }
             return 0;

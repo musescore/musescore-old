@@ -108,6 +108,9 @@ MStaff::~MStaff()
 Measure::Measure(Score* s)
    : MeasureBase(s)
       {
+      _tickLen  = -1;
+      sigSerial = 0;
+
       _first   = 0;
       _last    = 0;
       _size    = 0;
@@ -196,9 +199,22 @@ void Measure::dump() const
 
 int Measure::tickLen() const
       {
-      if (Element::tickLen() == -1)
-            _duration = _score->sigmap->ticksMeasure(tick());
-      return Element::tickLen();
+      unsigned ss = _score->getSigmap()->serial();
+      if (_tickLen == -1 || sigSerial != ss) {
+            _tickLen = _score->getSigmap()->ticksMeasure(tick());
+            sigSerial = ss;
+            }
+      return _tickLen;
+      }
+
+//---------------------------------------------------------
+//   setTick
+//---------------------------------------------------------
+
+void Measure::setTick(int t)
+      {
+      Element::setTick(t);
+      _tickLen = -1;          // invalidate cached len
       }
 
 //---------------------------------------------------------
@@ -1551,10 +1567,11 @@ printf("\n");
             else
                   nticks = ntick - seg->tick();
             if (nticks == 0) {
-                  printf("layoutX: nticks==0 tickLen %d <%s> size %d, idx %d, %d %d  %p %p nseg <%s>\n",
-                     tickLen(), seg->name(),
-                     size(), i-1, seg->tick(), nseg ? nseg->tick() : 0, seg, nseg,
-                     nseg ? nseg->name() : "nil");
+                  printf("layoutX: empty measure: tick %d len %d\n", tick(), tickLen());
+                  printf("layoutX: nticks==0 tickLen %d size %d, idx %d, ticks: %d %d\n",
+                     tickLen(),
+                     size(), i-1, seg->tick(), nseg ? nseg->tick() : -1
+                     );
                   }
             else {
                   if (nticks < minTick)
@@ -2568,7 +2585,12 @@ void Measure::read(QDomElement e, int idx)
                   rest->read(e, _tuplets, _beams);
                   Segment* s = getSegment(rest);
                   s->add(rest);
-                  score()->curTick = rest->tick() + rest->tickLen();
+                  int t = rest->tick();
+                  if (rest->tickLen() == 0)
+                        t += tickLen();
+                  else
+                        t += rest->tickLen();
+                  score()->curTick = t;
                   }
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());

@@ -134,7 +134,7 @@ class Element {
       mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
                                 ///< valid after call to layout()
 
-      mutable int _duration;    ///< Note: lazy evaluation
+//      mutable int _duration;    ///< Note: lazy evaluation
 
    public:
       Element(Score*);
@@ -252,9 +252,8 @@ class Element {
       bool operator>(const Element&) const;
 
       int tick() const                { return _tick;         }
-      void setTick(int t)             { _tick = t;            }
-      virtual int tickLen() const     { return _duration;     }
-      virtual void setTickLen(int t) const  { _duration = t;        }
+      virtual void setTick(int t)     { _tick = t;            }
+      virtual int tickLen() const     { return -1;            }
 
       virtual void space(double& min, double& extra) const {
             min   = width();

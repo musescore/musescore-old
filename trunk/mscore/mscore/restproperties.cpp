@@ -19,32 +19,31 @@
 //=============================================================================
 
 #include "restproperties.h"
+#include "rest.h"
 
 //---------------------------------------------------------
 //   RestProperties
 //---------------------------------------------------------
 
-RestProperties::RestProperties(QWidget* parent)
+RestProperties::RestProperties(Rest* r, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      rest = r;
+      smallCheckBox->setChecked(r->small());
+      extraLeadingSpace->setValue(rest->extraLeadingSpace().val());
+      extraTrailingSpace->setValue(rest->extraTrailingSpace().val());
       }
 
 //---------------------------------------------------------
-//   small
+//   accept
 //---------------------------------------------------------
 
-bool RestProperties::small() const
+void RestProperties::accept()
       {
-      return smallCheckBox->isChecked();
+printf("rest accept %f %f\n", extraLeadingSpace->value(), extraTrailingSpace->value());
+      rest->setSmall(smallCheckBox->isChecked());
+      rest->setExtraLeadingSpace(Spatium(extraLeadingSpace->value()));
+      rest->setExtraTrailingSpace(Spatium(extraTrailingSpace->value()));
+      QDialog::accept();
       }
-
-//---------------------------------------------------------
-//   setSmall
-//---------------------------------------------------------
-
-void RestProperties::setSmall(bool val)
-      {
-      smallCheckBox->setChecked(val);
-      }
-

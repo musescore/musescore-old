@@ -671,7 +671,7 @@ void Score::fixTicks()
             int measureTicks = sigmap->ticksMeasure(tick);
 // printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, measureTicks);
             tick += measureTicks;
-            m->setTickLen(measureTicks);
+//            m->setTickLen(measureTicks);
             m->moveTicks(diff);
             }
       }
@@ -2008,7 +2008,6 @@ Measure* Score::getCreateMeasure(int tick)
             Measure* m = new Measure(this);
             m->setTick(lastTick);
             int ticks = sigmap->ticksMeasure(lastTick);
-            m->setTickLen(ticks);
             _layout->add(m);
             lastTick += ticks;
             }

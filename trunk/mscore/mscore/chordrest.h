@@ -49,6 +49,8 @@ class ChordRest : public DurationElement {
       BeamMode _beamMode;
       bool _up;
       bool _small;
+      Spatium _extraLeadingSpace;
+      Spatium _extraTrailingSpace;
 
       int _dots;
 
@@ -104,6 +106,11 @@ class ChordRest : public DurationElement {
       int dots() const                          { return _dots; }
       void setLen(int ticks);
       void layoutAttributes(ScoreLayout*);
+      Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
+      void setExtraLeadingSpace(Spatium v)      { _extraLeadingSpace = v;     }
+      Spatium extraTrailingSpace() const        { return _extraTrailingSpace; }
+      void setExtraTrailingSpace(Spatium v)     { _extraTrailingSpace = v;    }
+      virtual void toDefault();
       };
 
 #endif

@@ -149,7 +149,6 @@ Element::~Element()
 void Element::init()
       {
       _tick       = -1;
-      _duration   = -1;
       _parent     = 0;
       _selected   = false;
       _selectable = true;
@@ -214,7 +213,6 @@ Element::Element(const Element& e)
       _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
-      _duration   = e._duration;
       itemDiscovered = 0;
       }
 
@@ -393,8 +391,6 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("visible", visible()));
       if (_tick != -1 && (_tick != xml.curTick))
             pl.append(Prop("tick", _tick));
-      if (_duration != -1)
-            pl.append(Prop("ticklen", _duration));
       if (_color != preferences.defaultColor)
             pl.append(Prop("color", _color));
       if (_systemFlag && (proto == 0 || proto->systemFlag() != _systemFlag))
@@ -431,8 +427,6 @@ bool Element::readProperties(QDomElement e)
             // do not always call Element::setSubtype():
             this->setSubtype(val);
             }
-      else if (tag == "ticklen")
-            setTickLen(score()->fileDivision(i));
       else if (tag == "offset")
             setUserOff(readPoint(e));
       else if (tag == "visible")

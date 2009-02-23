@@ -179,7 +179,7 @@ class Note : public Element {
       int subchannel() const        { return _subchannel; }
       void setSubchannel(int val)   { _subchannel = val;  }
 
-      virtual void setTickLen(int n) { printf("Note: setTickLen %d\n", n); }
+      virtual void toDefault();
       };
 
 //---------------------------------------------------------

@@ -89,11 +89,13 @@ ChordRest::ChordRest(Score* s)
 ChordRest::ChordRest(const ChordRest& cr)
    : DurationElement(cr)
       {
-      _beam     = 0;
-      _up       = cr._up;
-      _small    = cr._small;
-      _beamMode = cr._beamMode;
-      _dots     = cr._dots;
+      _beam               = 0;
+      _up                 = cr._up;
+      _small              = cr._small;
+      _beamMode           = cr._beamMode;
+      _dots               = cr._dots;
+      _extraLeadingSpace  = cr._extraLeadingSpace;
+      _extraTrailingSpace = cr._extraTrailingSpace;
 
       foreach(Articulation* a, cr.articulations) {            // make deep copy
             Articulation* na = new Articulation(*a);
@@ -156,10 +158,16 @@ QList<Prop> ChordRest::properties(Xml& xml, bool clipboardmode) const
                   }
             pl.append(Prop("BeamMode", s));
             }
+      if (_tickLen)
+            pl.append(Prop("tickLen", _tickLen));
       if (tuplet())
             pl.append(Prop("Tuplet", tuplet()->id()));
       if (_small)
             pl.append(Prop("small", _small));
+      if (_extraLeadingSpace.val() != 0.0)
+            pl.append(Prop("leadingSpace", _extraLeadingSpace.val()));
+      if (_extraTrailingSpace.val() != 0.0)
+            pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
       if (!clipboardmode) {
             if (tickLen() != duration().ticks(_dots)) {
                   if (_dots)
@@ -240,6 +248,10 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             else
                   setTickLen(tickLen());  // set right symbol + dots
             }
+      else if (tag == "leadingSpace")
+            _extraLeadingSpace = Spatium(val.toDouble());
+      else if (tag == "trailingSpace")
+            _extraTrailingSpace = Spatium(val.toDouble());
       else if (tag == "Beam") {
             foreach(Beam* b, beams) {
                   if (b->id() == i) {
@@ -284,6 +296,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
             d.setVal(val);
             setDuration(d);
             }
+      else if (tag == "ticklen")
+            setTickLen(i);
       else if (tag == "dots")
             _dots = i;
       else
@@ -560,5 +574,15 @@ Element* ChordRest::drop(const QPointF& p1, const QPointF& p2, Element* e)
 void ChordRest::setBeam(Beam* b)
       {
       _beam = b;
+      }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
+void ChordRest::toDefault()
+      {
+      score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
+      score()->undoChangeUserOffset(this, QPointF());
       }
 

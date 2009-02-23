@@ -500,7 +500,6 @@ Measure* MuseData::createMeasure()
                   score->sigmap->timesig(st, z, n);
                   score->sigmap->add(st, curTick - st, z, n);
                   score->sigmap->add(curTick, z, n);
-                  m->setTickLen(curTick - st);
                   break;
                   }
             if (curTick < st + l) {
