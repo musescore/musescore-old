@@ -143,6 +143,8 @@ void EditStyle::getValues()
       lstyle[ST_minMMRestWidth]          = StyleVal(Spatium(minMeasureWidth->value()));
       lstyle[ST_hideEmptyStaves]         = StyleVal(hideEmptyStaves->isChecked());
       lstyle[ST_dotNoteDistance]         = StyleVal(Spatium(noteDotDistance->value()));
+      lstyle[ST_dotDotDistance]          = StyleVal(Spatium(dotDotDistance->value()));
+      lstyle[ST_ledgerLineWidth]         = StyleVal(Spatium(ledgerLineWidth->value()));
       lstyle[ST_propertyDistanceHead]    = StyleVal(Spatium(propertyDistanceHead->value()));
       lstyle[ST_propertyDistanceStem]    = StyleVal(Spatium(propertyDistanceStem->value()));
       lstyle[ST_propertyDistance]        = StyleVal(Spatium(propertyDistance->value()));
@@ -223,6 +225,8 @@ void EditStyle::setValues()
       hideEmptyStaves->setChecked(lstyle[ST_hideEmptyStaves].toBool());
 
       noteDotDistance->setValue(lstyle[ST_dotNoteDistance].toSpatium().val());
+      dotDotDistance->setValue(lstyle[ST_dotDotDistance].toSpatium().val());
+      ledgerLineWidth->setValue(lstyle[ST_ledgerLineWidth].toSpatium().val());
 
       propertyDistanceHead->setValue(lstyle[ST_propertyDistanceHead].toSpatium().val());
       propertyDistanceStem->setValue(lstyle[ST_propertyDistanceStem].toSpatium().val());

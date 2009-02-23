@@ -1,4 +1,6 @@
 23.feb (ws)
+      - more style parameter in style editor
+      - make ledger lines thicker
       - add two new properties for chord/rests: additionalLeadingSpace and
         additionalTrailingSpace to fine tune layout
 22.feb (ws)

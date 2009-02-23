@@ -107,7 +107,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Seite_5" >
       <layout class="QVBoxLayout" name="verticalLayout_6" >
@@ -928,7 +928,7 @@
            </spacer>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_5" >
+           <layout class="QFormLayout" name="formLayout_4" >
             <item row="0" column="0" >
              <widget class="QLabel" name="label_22" >
               <property name="text" >
@@ -949,18 +949,45 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="2" >
-             <spacer name="horizontalSpacer_2" >
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="label_23" >
+              <property name="text" >
+               <string>dot dot distance</string>
               </property>
-              <property name="sizeHint" stdset="0" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QDoubleSpinBox" name="dotDotDistance" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-             </spacer>
+              <property name="suffix" >
+               <string>sp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" >
+             <widget class="QLabel" name="label_24" >
+              <property name="text" >
+               <string>ledger line width</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" >
+             <widget class="QDoubleSpinBox" name="ledgerLineWidth" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="suffix" >
+               <string>sp</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
