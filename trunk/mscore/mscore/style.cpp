@@ -280,7 +280,7 @@ Style::Style()
             StyleVal(Spatium(1.0)),               // ST_noteBarDistance,
             StyleVal(1.2),                        // ST_measureSpacing,
             StyleVal(Spatium(0.08)),              // ST_staffLineWidth,
-            StyleVal(Spatium(0.08)),              // ST_ledgerLineWidth,
+            StyleVal(Spatium(0.16)),              // ST_ledgerLineWidth,
             StyleVal(Spatium(1.6)),               // ST_akkoladeWidth,
             StyleVal(Spatium(0.13)),              // ST_prefixDistance,
             StyleVal(Spatium(0.22)),              // ST_prefixNoteDistance,

@@ -434,7 +434,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int move1     = notes[startIdx]->staffMove();
       bool mirror   = false;
       int lastHead  = -1;
-      int lastTicks = -1;
+      // int lastTicks = -1;
       for (int idx = startIdx; idx != endIdx; idx += incIdx) {
             Note* note = notes[idx];
             int move   = note->staffMove();
@@ -446,8 +446,8 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             if ((note->chord()->isUp() != isLeft) || conflict)
                   isLeft = !isLeft;
             int nmirror   = note->chord()->isUp() != isLeft;
-            // bool sameHead = (ll == line) && (head == lastHead);
-            bool sameHead = (ll == line) && (ticks == lastTicks);
+            bool sameHead = (ll == line) && (head == lastHead);
+            // bool sameHead = (ll == line) && (ticks == lastTicks);
 
             if (conflict && (nmirror == mirror) && !sameHead) {
                   Note* note = notes[idx];
@@ -479,7 +479,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             move1    = move;
             ll       = line;
             lastHead = head;
-            lastTicks = ticks;
+            // lastTicks = ticks;
             }
 
       //---------------------------------------------------
