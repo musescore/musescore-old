@@ -60,6 +60,7 @@ class Dynamic : public Text {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
+      virtual bool startEdit(Viewer*, const QPointF&);
       virtual void endEdit();
       virtual void toDefault();
 
