@@ -1,4 +1,11 @@
-25.feb (db)
+26.feb (ws)
+      - add new compile option in toplevel CMakeLists.txt: "MSCORE_UNSTABLE"
+        setting this variable to true activates different text in version string
+        ("mscore -v") and "About" box
+      - renamed template files to "*.mscx"
+      - removed file extension ".msc" for templates, instead add ".mscx"
+      - add new playback parameter to dynamics: "velocity"
+
       - Added prerelease watermark to splash screen
       - Updated Italian handbook
 23.feb (lv)

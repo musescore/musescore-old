@@ -55,6 +55,7 @@
 #include "pitchspelling.h"
 #include "part.h"
 #include "beam.h"
+#include "dynamics.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -91,6 +92,7 @@ static const char* undoName[] = {
       "ChangeEndBarLineType",
       "ChangeBarLineSpan",
       "ChangeUserOffset",
+      "ChanveVelocity",
       "SigInsertTime",
       "FixTicks",
       "ChangeBeamMode",
@@ -638,6 +640,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->pt   = p;
                   }
                   break;
+            case UndoOp::ChangeVelocity:
+                  {
+                  Dynamic* d = static_cast<Dynamic*>(i->element1);
+                  int v = d->velocity();
+                  d->setVelocity(i->val1);
+                  i->val1 = v;
+                  }
+                  break;
             case UndoOp::ChangeCopyright:
                   {
                   QString s;
@@ -1035,6 +1045,21 @@ void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
       i.type     = UndoOp::ChangeUserOffset;
       i.element1 = e;
       i.pt       = offset;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeVelocity
+//---------------------------------------------------------
+
+void Score::undoChangeVelocity(Dynamic* e, int velocity)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeVelocity;
+      i.element1 = e;
+      i.val1     = velocity;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

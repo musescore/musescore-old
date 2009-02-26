@@ -23,6 +23,8 @@
 #cmakedefine USE_PORTAUDIO
 #cmakedefine USE_PORTMIDI
 
+#cmakedefine MSCORE_UNSTABLE
+
 #cmakedefine HAS_MIDI
 #cmakedefine HAS_SCRIPT_DEBUG
 #cmakedefine HAS_SCRIPT_INTERFACE

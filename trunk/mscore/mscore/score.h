@@ -71,6 +71,7 @@ class Tuplet;
 class Capella;
 class CapVoice;
 class TextC;
+class Dynamic;
 
 struct SigEvent;
 
@@ -444,6 +445,7 @@ class Score : public QObject {
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
+      void undoChangeVelocity(Dynamic* e, int velocity);
       void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);

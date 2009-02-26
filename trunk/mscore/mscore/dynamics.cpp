@@ -83,12 +83,8 @@ Dynamic::Dynamic(const Dynamic& d)
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
-      Text::writeProperties(xml, false);
-      if (subtype() == 0) {
-            xml.stag("html-data");
-            xml.writeHtml(doc()->toHtml("utf-8"));
-            xml.etag();
-            }
+      xml.tag("velocity", _velocity);
+      Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }
 
@@ -99,7 +95,9 @@ void Dynamic::write(Xml& xml) const
 void Dynamic::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Text::readProperties(e))
+            if (e.tagName() == "velocity")
+                  _velocity = e.text().toInt();
+            else if (!Text::readProperties(e))
                   domError(e);
             }
       setSubtype(subtype());
@@ -129,6 +127,7 @@ void Dynamic::setSubtype(int idx)
             tf.setFont(font);
             cursor.setBlockCharFormat(tf);
             cursor.insertText(dynList[idx].tag);
+            _velocity = dynList[idx].velocity;
             }
       }
 
@@ -223,4 +222,78 @@ void Dynamic::layout(ScoreLayout* sl)
       setSubtype(subtype());  // re-apply style
       Text::layout(sl);
       }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Dynamic::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Dynamics"));
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Midi Properties..."));
+      a->setData("dynamics");
+      a = popup->addAction(tr("Text Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Dynamic::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            Text* nText = new Text(*this);
+            TextProperties tp(nText, 0);
+            int rv = tp.exec();
+            if (rv) {
+                  score()->undoChangeElement(this, nText);
+                  }
+            else
+                  delete nText;
+            }
+      else if (s == "dynamics") {
+            int oldVelo = _velocity;
+            DynamicProperties dp(this);
+            int rv = dp.exec();
+            if (rv) {
+                  int newVelo = _velocity;
+                  _velocity = oldVelo;
+                  score()->undoChangeVelocity(this, newVelo);
+                  }
+            }
+      else
+            Element::propertyAction(s);
+      }
+
+//---------------------------------------------------------
+//   DynamicProperties
+//---------------------------------------------------------
+
+DynamicProperties::DynamicProperties(Dynamic* d, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      dynamic = d;
+      velocity->setValue(dynamic->velocity());
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void DynamicProperties::accept()
+      {
+      dynamic->setVelocity(velocity->value());
+      QDialog::accept();
+      }
+
+
 

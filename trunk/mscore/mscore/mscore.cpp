@@ -21,14 +21,12 @@
 #include <fenv.h>
 
 #include "config.h"
-
 #include "mscore.h"
 #include "canvas.h"
 #include "style.h"
 #include "score.h"
 #include "instrdialog.h"
 #include "preferences.h"
-#include "config.h"
 #include "icons.h"
 #include "textstyle.h"
 #include "xml.h"
@@ -163,8 +161,13 @@ static void printVersion(const char* prog)
       {
       extern int revision;
 
+#ifdef MSCORE_UNSTABLE
+      cout << prog << ": Linux Music Score Editor\nUnstable Prerelease for Version " << VERSION
+           << "; Build " << revision << endl;
+#else
       cout << prog << ": Linux Music Score Editor; Version " << VERSION
            << "  Build " << revision << endl;
+#endif
       }
 
 //---------------------------------------------------------
@@ -2061,8 +2064,12 @@ AboutBoxDialog::AboutBoxDialog()
       {
       extern int revision;
       setupUi(this);
-      versionLabel->setText("Version: " VERSION);
-      revisionLabel->setText(QString("Revision: %1").arg(revision));
+#ifdef MSCORE_UNSTABLE
+      versionLabel->setText(tr("Unstable Prerelease for Version: ") + VERSION);
+#else
+      versionLabel->setText(tr("Version: ") + VERSION);
+#endif
+      revisionLabel->setText(tr("Revision: %1").arg(revision));
       }
 
 //---------------------------------------------------------

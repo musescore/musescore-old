@@ -86,6 +86,7 @@ struct UndoOp {
             ChangeEndBarLineType,
             ChangeBarLineSpan,
             ChangeUserOffset,
+            ChangeVelocity,
             SigInsertTime,
             FixTicks,
             ChangeBeamMode,
