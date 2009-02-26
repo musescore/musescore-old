@@ -496,7 +496,7 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
 
       QStringList nameFilter;
       nameFilter.append("*.mscz");
-      nameFilter.append("*.msc");
+      nameFilter.append("*.mscx");
 
       model = new QDirModel;
       model->setNameFilters(nameFilter);

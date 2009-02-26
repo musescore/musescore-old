@@ -22,6 +22,7 @@
 #define __DYNAMICS_H__
 
 #include "text.h"
+#include "ui_dynamicproperties.h"
 
 //---------------------------------------------------------
 //   Dyn
@@ -41,6 +42,7 @@ struct Dyn {
 
 class Dynamic : public Text {
       mutable QPointF dragOffset;
+      int _velocity;          // associated midi velocity 0-127
 
    public:
       Dynamic(Score*);
@@ -65,6 +67,26 @@ class Dynamic : public Text {
       virtual void toDefault();
 
       void resetType();
+      int velocity() const    { return _velocity; }
+      void setVelocity(int v) { _velocity = v;    }
+
+      virtual bool genPropertyMenu(QMenu* popup) const;
+      virtual void propertyAction(const QString& s);
+      };
+
+//---------------------------------------------------------
+//   DynamicProperties
+//---------------------------------------------------------
+
+class DynamicProperties : public QDialog, public Ui::DynamicProperties {
+      Q_OBJECT
+      Dynamic* dynamic;
+
+   private slots:
+      virtual void accept();
+
+   public:
+      DynamicProperties(Dynamic*, QWidget* parent = 0);
       };
 
 extern Dyn dynList[];

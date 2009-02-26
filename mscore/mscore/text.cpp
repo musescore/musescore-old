@@ -1293,7 +1293,6 @@ void Text::propertyAction(const QString& s)
             Element::propertyAction(s);
       }
 
-
 //---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------

@@ -26,6 +26,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
+set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
+
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(QT45 FALSE)                           # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
