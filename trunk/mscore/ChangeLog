@@ -1,8 +1,9 @@
 28.feb (ws)
       - more translatable string from palettes
       - clef names should now appear translated
-     (lv)
+       (lv)
       - call doLayout() as required by converterMode
+      - MusicXML regression test updates
 27.feb (ws)
       - make (most) script actions undoable
 26.feb (ws)
