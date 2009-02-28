@@ -145,7 +145,7 @@ void MuseScore::showPalette(bool visible)
 
             for (int i = 0; i < CLEF_MAX; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name));
+                  sp->append(k, qApp->translate("clefTable", clefTable[i].name));
                   }
             paletteBox->addPalette(sp);
 
@@ -362,8 +362,8 @@ void MuseScore::showPalette(bool visible)
             // b1->setHeight(_spatium * 7);
             // b2->setHeight(_spatium * 7);
 
-            sp->append(b1, "Bracket");
-            sp->append(b2, "Akkolade");
+            sp->append(b1, tr("Bracket"));
+            sp->append(b2, tr("Akkolade"));
 
             paletteBox->addPalette(sp);
 
@@ -464,31 +464,31 @@ void MuseScore::showPalette(bool visible)
 
             NoteHead* nh = new NoteHead(gscore);
             nh->setSym(halfheadSym);
-            sp->append(nh, QString("normal"));
+            sp->append(nh, tr("normal", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfcrossedheadSym);
-            sp->append(nh, QString("crossed"));
+            sp->append(nh, tr("crossed", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfdiamondheadSym);
-            sp->append(nh, QString("diamond"));
+            sp->append(nh, tr("diamond", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halftriangleheadSym);
-            sp->append(nh, QString("triangle"));
+            sp->append(nh, tr("triangle", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfdiamond2headSym);
-            sp->append(nh, QString("diamond2"));
+            sp->append(nh, tr("diamond2", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(halfslashheadSym);
-            sp->append(nh, QString("slash"));
+            sp->append(nh, tr("slash", "note head"));
 
             nh = new NoteHead(gscore);
             nh->setSym(xcircledheadSym);
-            sp->append(nh, QString("xcircle"));
+            sp->append(nh, tr("xcircle", "note head"));
 
             paletteBox->addPalette(sp);
 
@@ -740,7 +740,7 @@ void MuseScore::clefMenu()
             sp->setGrid(60, 80);
             for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
-                  sp->append(k, tr(clefTable[i].name));
+                  sp->append(k, qApp->translate("clefTable", clefTable[i].name));
                   }
             }
       clefPalette->show();

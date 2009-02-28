@@ -5,70 +5,6 @@
 <context>
     <name></name>
     <message>
-        <source>Treble Clef (G Clef)</source>
-        <translation>Clef de Sol</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va</source>
-        <translation>Clef de Sol 8va</translation>
-    </message>
-    <message>
-        <source>Treble Clef 15ma</source>
-        <translation>Clef de Sol 15ma</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va bassa</source>
-        <translation>Clef de Sol 8va bassa</translation>
-    </message>
-    <message>
-        <source>Bass Clef (F Clef)</source>
-        <translation>Clef de Fa</translation>
-    </message>
-    <message>
-        <source>Bass Clef 8va bassa</source>
-        <translation>Clef de Fa 8va bassa</translation>
-    </message>
-    <message>
-        <source>Bass Clef 15mb bassa</source>
-        <translation>Clef de Fa 15mb bassa</translation>
-    </message>
-    <message>
-        <source>Baritone Clef</source>
-        <translation>Clef de Fa 3ème ligne (Baryton)</translation>
-    </message>
-    <message>
-        <source>Subbass Clef</source>
-        <translation>Clef de Fa 5ème ligne</translation>
-    </message>
-    <message>
-        <source>Soprano Clef</source>
-        <translation>Clef d&apos;Ut 1ère ligne (Soprano)</translation>
-    </message>
-    <message>
-        <source>Mezzo-soprano Clef</source>
-        <translation>Clef d&apos;Ut 2ème ligne (Mezzo-soprano)</translation>
-    </message>
-    <message>
-        <source>Alto Clef</source>
-        <translation>Clef d&apos;Ut 3ème ligne (Alto)</translation>
-    </message>
-    <message>
-        <source>Tenor Clef</source>
-        <translation>Clef d&apos;Ut 4ème ligne (Ténor)</translation>
-    </message>
-    <message>
-        <source>Tablature</source>
-        <translation>Tablature</translation>
-    </message>
-    <message>
-        <source>Percussion</source>
-        <translation>Percussion</translation>
-    </message>
-    <message>
-        <source>French Violin Clef</source>
-        <translation>Clef de Sol 1ère ligne (Clef française du violon)</translation>
-    </message>
-    <message>
         <source>system</source>
         <translation>Système</translation>
     </message>
@@ -195,6 +131,21 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;plus d&apos;information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous la GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>AboutBoxDialog</name>
+    <message>
+        <source>Unstable Prerelease for Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revision: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1039,6 +990,19 @@ p, li { white-space: pre-wrap; }
         <source>no stem</source>
         <translation>Pas de hampe</translation>
     </message>
+    <message>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1080,6 +1044,29 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>Dynamic</name>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished">Nuances</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Rendre invisible</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Rendre visible</translation>
+    </message>
+    <message>
+        <source>Midi Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Propriétés du texte...</translation>
+    </message>
+</context>
+<context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
@@ -1092,6 +1079,25 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>SubType:</source>
         <translation>Sous-type :</translation>
+    </message>
+</context>
+<context>
+    <name>DynamicProperties</name>
+    <message>
+        <source>MuseScore: Text Properties</source>
+        <translation type="unfinished">MuseScore : Propriétés du texte</translation>
+    </message>
+    <message>
+        <source>Midi Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align left</source>
+        <translation type="unfinished">aligné à gauche</translation>
     </message>
 </context>
 <context>
@@ -1672,6 +1678,14 @@ failed: </source>
         <source>note dot distance</source>
         <translation>Distance entre la note et le point</translation>
     </message>
+    <message>
+        <source>dot dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ledger line width</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1736,10 +1750,6 @@ failed: </source>
     <message>
         <source>invalid</source>
         <translation>invalide</translation>
-    </message>
-    <message>
-        <source> sp</source>
-        <translation>esp</translation>
     </message>
     <message>
         <source>Element</source>
@@ -1820,6 +1830,11 @@ failed: </source>
         <source>Mag</source>
         <comment>do not translate</comment>
         <translation></translation>
+    </message>
+    <message>
+        <source> sp</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished">esp</translation>
     </message>
 </context>
 <context>
@@ -4897,6 +4912,49 @@ avant de fermer ?</translation>
         <source>1/8 rest</source>
         <translation>demi-soupir</translation>
     </message>
+    <message>
+        <source>Bracket</source>
+        <translation type="unfinished">Crochet</translation>
+    </message>
+    <message>
+        <source>Akkolade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <comment>note head</comment>
+        <translation type="unfinished">normal</translation>
+    </message>
+    <message>
+        <source>crossed</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>diamond2</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6174,6 +6232,23 @@ Veuillez sélectionner une note ou un silence et réessayez
         <source>small</source>
         <translation>petit</translation>
     </message>
+    <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished">Propriétés de l&apos;accord</translation>
+    </message>
+    <message>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SLineBase</name>
@@ -6736,6 +6811,14 @@ failed: </source>
     <message>
         <source>Line Properties...</source>
         <translation>Propriétés de la ligne...</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Rendre invisible</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Rendre visible</translation>
     </message>
 </context>
 <context>
@@ -7409,6 +7492,73 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Liste des reprises :</translation>
+    </message>
+</context>
+<context>
+    <name>clefTable</name>
+    <message>
+        <source>Treble Clef (G Clef)</source>
+        <translation type="unfinished">Clef de Sol</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va</source>
+        <translation type="unfinished">Clef de Sol 8va</translation>
+    </message>
+    <message>
+        <source>Treble Clef 15ma</source>
+        <translation type="unfinished">Clef de Sol 15ma</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va bassa</source>
+        <translation type="unfinished">Clef de Sol 8va bassa</translation>
+    </message>
+    <message>
+        <source>Bass Clef (F Clef)</source>
+        <translation type="unfinished">Clef de Fa</translation>
+    </message>
+    <message>
+        <source>Bass Clef 8va bassa</source>
+        <translation type="unfinished">Clef de Fa 8va bassa</translation>
+    </message>
+    <message>
+        <source>Bass Clef 15mb bassa</source>
+        <translation type="unfinished">Clef de Fa 15mb bassa</translation>
+    </message>
+    <message>
+        <source>Baritone Clef</source>
+        <translation type="unfinished">Clef de Fa 3ème ligne (Baryton)</translation>
+    </message>
+    <message>
+        <source>Subbass Clef</source>
+        <translation type="unfinished">Clef de Fa 5ème ligne</translation>
+    </message>
+    <message>
+        <source>Soprano Clef</source>
+        <translation type="unfinished">Clef d&apos;Ut 1ère ligne (Soprano)</translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano Clef</source>
+        <translation type="unfinished">Clef d&apos;Ut 2ème ligne (Mezzo-soprano)</translation>
+    </message>
+    <message>
+        <source>Alto Clef</source>
+        <translation type="unfinished">Clef d&apos;Ut 3ème ligne (Alto)</translation>
+    </message>
+    <message>
+        <source>Tenor Clef</source>
+        <translation type="unfinished">Clef d&apos;Ut 4ème ligne (Ténor)</translation>
+    </message>
+    <message>
+        <source>Tablature</source>
+        <translation type="unfinished">Tablature</translation>
+    </message>
+    <message>
+        <source>Percussion</source>
+        <translation type="unfinished">Percussion</translation>
+    </message>
+    <message>
+        <source>French Violin Clef</source>
+        <translation type="unfinished">Clef de Sol 1ère ligne (Clef française du violon)</translation>
     </message>
 </context>
 <context>

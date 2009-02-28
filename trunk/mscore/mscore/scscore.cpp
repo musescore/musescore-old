@@ -20,6 +20,10 @@
 
 #include "mscore.h"
 #include "scscore.h"
+#include "instrtemplate.h"
+#include "clef.h"
+#include "staff.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   ScScorePropertyIterator
@@ -299,4 +303,47 @@ bool ScScorePrototype::saveLilypond(const QString& name)
       return thisScore()->saveLilypond(name);
       }
 
+//---------------------------------------------------------
+//   appendMeasures
+//---------------------------------------------------------
+
+void ScScorePrototype::appendMeasures(int n)
+      {
+      thisScore()->appendMeasures(n, MEASURE);
+      }
+
+//---------------------------------------------------------
+//   appendPart
+//---------------------------------------------------------
+
+void ScScorePrototype::appendPart(const QString& name)
+      {
+      InstrumentTemplate* t = 0;
+      foreach(InstrumentTemplate* it, instrumentTemplates) {
+            if (it->trackName == name) {
+                  t = it;
+                  break;
+                  }
+            }
+      if (t == 0)
+            return;
+      Part* part = new Part(thisScore());
+      part->initFromInstrTemplate(t);
+      for (int i = 0; i < t->staves; ++i) {
+            Staff* staff = new Staff(thisScore(), part, i);
+            staff->clefList()->setClef(0, t->clefIdx[i]);
+            staff->setLines(t->staffLines[i]);
+            staff->setSmall(t->smallStaff[i]);
+            staff->setRstaff(i);
+            if (i == 0) {
+                  staff->setBracket(0, t->bracket);
+                  staff->setBracketSpan(0, t->staves);
+                  }
+            thisScore()->staves().insert(i, staff);
+            part->staves()->push_back(staff);
+            }
+      thisScore()->insertPart(part, 0);
+      thisScore()->fixTicks();
+      thisScore()->rebuildMidiMapping();
+      }
 

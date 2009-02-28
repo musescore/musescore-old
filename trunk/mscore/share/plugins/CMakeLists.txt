@@ -23,5 +23,6 @@ install(FILES
       test2.js
       test3.js
       notenames.js
+      fonttest.js
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
