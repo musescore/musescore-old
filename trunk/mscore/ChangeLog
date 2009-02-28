@@ -1,3 +1,5 @@
+28.feb (lv)
+      - call doLayout() as required by converterMode
 26.feb (ws)
       - add new compile option in toplevel CMakeLists.txt: "MSCORE_UNSTABLE"
         setting this variable to true activates different text in version string

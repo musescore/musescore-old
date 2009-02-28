@@ -1710,7 +1710,7 @@ int main(int argc, char* argv[])
                   if (f.open(QIODevice::ReadOnly))
                         cs->loadStyle(&f);
                   }
-            cs->layout();
+            cs->layout()->doLayout();
 
             bool rv = true;
             if (fn.endsWith(".msc")) {
