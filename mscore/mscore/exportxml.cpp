@@ -2241,8 +2241,8 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
 //---------------------------------------------------------
 //  work -- write the <work> element
 //  note that order must be work-number, work-title
-//
 //  also write <movement-number> and <movement-title>
+//  data is taken from the score metadata instead of the Text elements
 //---------------------------------------------------------
 
 void ExportMusicXml::work(const MeasureBase* measure)
@@ -2255,21 +2255,10 @@ void ExportMusicXml::work(const MeasureBase* measure)
                   xml.tag("work-title", score->workTitle());
             xml.etag();
             }
-
-      foreach(const Element* element, *measure->el()) {
-            if (element->type() == TEXT) {
-                  const Text* text = (const Text*)element;
-                  if (text->subtype() == TEXT_SUBTITLE)
-                        xml.tag("movement-number", text->getText());
-                  }
-            }
-      foreach(const Element* element, *measure->el()) {
-            if (element->type() == TEXT) {
-                  const Text* text = (const Text*)element;
-                  if (text->subtype() == TEXT_TITLE)
-                        xml.tag("movement-title", text->getText());
-                  }
-            }
+      if (!score->movementNumber().isEmpty())
+            xml.tag("movement-number", score->movementNumber());
+      if (!score->movementTitle().isEmpty())
+            xml.tag("movement-title", score->movementTitle());
       }
 
 

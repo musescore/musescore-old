@@ -290,8 +290,11 @@ void Part::setShow(bool val)
 //    TODO
 //---------------------------------------------------------
 
-void Part::setMidiProgram(int)
+void Part::setMidiProgram(int p)
       {
+      // LVIFIX: check if this is correct
+      // at least it fixes the MIDI program handling in the MusicXML regression test
+      _instrument.channel[0]->program = p;
       }
 
 int Part::volume() const
