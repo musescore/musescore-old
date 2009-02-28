@@ -79,6 +79,8 @@ class ScScorePrototype : public QObject, public QScriptable
       bool savePng(const QString&);
       bool saveSvg(const QString&);
       bool saveLilypond(const QString&);
+      void appendPart(const QString& name);
+      void appendMeasures(int n);
       };
 
 Q_DECLARE_METATYPE(ScorePtr)

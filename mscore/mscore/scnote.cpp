@@ -236,8 +236,26 @@ Note* ScNotePrototype::thisNote() const
 //   noteName
 //---------------------------------------------------------
 
-QString ScNotePrototype::name() const
+QString ScNotePrototype::getName() const
       {
       return pitch2string(thisNote()->pitch());
+      }
+
+//---------------------------------------------------------
+//   getPitch
+//---------------------------------------------------------
+
+int ScNotePrototype::getPitch() const
+      {
+      return thisNote()->pitch();
+      }
+
+//---------------------------------------------------------
+//   setPitch
+//---------------------------------------------------------
+
+void ScNotePrototype::setPitch(int v)
+      {
+      thisNote()->setPitch(v);
       }
 

@@ -1,72 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="nl">
+<!DOCTYPE TS>
+<TS version="2.0" language="nl">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
-    <message>
-        <source>Treble Clef (G Clef)</source>
-        <translation>Vioolsleutel (G-Sleutel)</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va</source>
-        <translation>Vioolsleutel 8va</translation>
-    </message>
-    <message>
-        <source>Treble Clef 15ma</source>
-        <translation>Vioolsleutel 15va</translation>
-    </message>
-    <message>
-        <source>Treble Clef 8va bassa</source>
-        <translation>Vioolsleutel 8va bas</translation>
-    </message>
-    <message>
-        <source>Bass Clef (F Clef)</source>
-        <translation>Bassleutel (F-Sleutel)</translation>
-    </message>
-    <message>
-        <source>Bass Clef 8va bassa</source>
-        <translation>Bassleutel 8va</translation>
-    </message>
-    <message>
-        <source>Bass Clef 15mb bassa</source>
-        <translation>Bassleutel 15va</translation>
-    </message>
-    <message>
-        <source>Baritone Clef</source>
-        <translation>Bariton Sleutel</translation>
-    </message>
-    <message>
-        <source>Subbass Clef</source>
-        <translation>Contrabassleutel</translation>
-    </message>
-    <message>
-        <source>Soprano Clef</source>
-        <translation>Sopraansleutel</translation>
-    </message>
-    <message>
-        <source>Mezzo-soprano Clef</source>
-        <translation>Mezzo-sopraansleutel</translation>
-    </message>
-    <message>
-        <source>Alto Clef</source>
-        <translation>Altsleutel</translation>
-    </message>
-    <message>
-        <source>Tenor Clef</source>
-        <translation>Tenorsleutel</translation>
-    </message>
-    <message>
-        <source>Tablature</source>
-        <translation>Tabulatuur </translation>
-    </message>
-    <message>
-        <source>Percussion</source>
-        <translation>Slagwerk</translation>
-    </message>
-    <message>
-        <source>French Violin Clef</source>
-        <translation>Franse Vioolsleutel</translation>
-    </message>
     <message>
         <source>system</source>
         <translation>systeem</translation>
@@ -92,11 +29,11 @@
         <translation>Engels (US)</translation>
     </message>
     <message>
-        <source>Espa&#xc3;&#xb1;ol</source>
+        <source>EspaÃ±ol</source>
         <translation>Spaans</translation>
     </message>
     <message>
-        <source>Fran&#xc3;&#xa7;ais</source>
+        <source>FranÃ§ais</source>
         <translation>Frans</translation>
     </message>
     <message>
@@ -116,19 +53,19 @@
         <translation>Italiaans</translation>
     </message>
     <message>
-        <source>Portugu&#xc3;&#xaa;s</source>
+        <source>PortuguÃªs</source>
         <translation>Portugees</translation>
     </message>
     <message>
-        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <source>Brasilian PortuguÃªs</source>
         <translation>Braziliaans Portugees</translation>
     </message>
     <message>
-        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
         <translation></translation>
     </message>
     <message>
-        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
+        <source>TÃ¼rkÃ§e</source>
         <translation>Turks</translation>
     </message>
     <message>
@@ -185,6 +122,21 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Zie http://www.musescore.org voor nieuwe versies en&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;meer informatie.&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Gepubliceerd onder de GNU Public Licensie&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>AboutBoxDialog</name>
+    <message>
+        <source>Unstable Prerelease for Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revision: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1029,6 +981,19 @@ p, li { white-space: pre-wrap; }
         <source>no stem</source>
         <translation>zonder stok</translation>
     </message>
+    <message>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1070,6 +1035,29 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>Dynamic</name>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished">Dynamiek</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Maak Onzichtbaar</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Maak Zichtbaar</translation>
+    </message>
+    <message>
+        <source>Midi Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Tekst Eigenschappen...</translation>
+    </message>
+</context>
+<context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
@@ -1082,6 +1070,25 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>SubType:</source>
         <translation>Sub Type:</translation>
+    </message>
+</context>
+<context>
+    <name>DynamicProperties</name>
+    <message>
+        <source>MuseScore: Text Properties</source>
+        <translation type="unfinished">MuseScore: Tekst Eigenschappen</translation>
+    </message>
+    <message>
+        <source>Midi Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>align left</source>
+        <translation type="unfinished">uitlijnen links</translation>
     </message>
 </context>
 <context>
@@ -1661,6 +1668,14 @@ toonhoogte</translation>
         <source>note dot distance</source>
         <translation>noten punt afstand</translation>
     </message>
+    <message>
+        <source>dot dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ledger line width</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -1725,10 +1740,6 @@ toonhoogte</translation>
     <message>
         <source>invalid</source>
         <translation>ongeldig</translation>
-    </message>
-    <message>
-        <source> sp</source>
-        <translation></translation>
     </message>
     <message>
         <source>Element</source>
@@ -1809,6 +1820,11 @@ toonhoogte</translation>
         <source>Mag</source>
         <comment>do not translate</comment>
         <translation>Keuze menu</translation>
+    </message>
+    <message>
+        <source> sp</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4886,6 +4902,49 @@ voor dat u afsluit?</translation>
         <source>1/8 rest</source>
         <translation>1/8 rust</translation>
     </message>
+    <message>
+        <source>Bracket</source>
+        <translation type="unfinished">Afbreken</translation>
+    </message>
+    <message>
+        <source>Akkolade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <comment>note head</comment>
+        <translation type="unfinished">normaal</translation>
+    </message>
+    <message>
+        <source>crossed</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>diamond2</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <comment>note head</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5973,11 +6032,11 @@ voor dat u afsluit?</translation>
         <translation>ms</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with &#xbd; ...</source>
+        <source>Replace 1/2 ... with ½ ...</source>
         <translation>Verander 1/2 ... in ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>Verander (C) ... in © ... in de Copyright Tekst</translation>
     </message>
 </context>
@@ -6159,6 +6218,23 @@ Please select a single note or rest and retry operation
     <message>
         <source>small</source>
         <translation>klein</translation>
+    </message>
+    <message>
+        <source>Chord Properties</source>
+        <translation type="unfinished">Akkoord Eigenschappen</translation>
+    </message>
+    <message>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished">sp</translation>
+    </message>
+    <message>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6721,6 +6797,14 @@ failed: </source>
     <message>
         <source>Line Properties...</source>
         <translation>Lijn Eigenschappen...</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Maak Onzichtbaar</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Maak Zichtbaar</translation>
     </message>
 </context>
 <context>
@@ -7391,6 +7475,73 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Herhaal Lijst:</translation>
+    </message>
+</context>
+<context>
+    <name>clefTable</name>
+    <message>
+        <source>Treble Clef (G Clef)</source>
+        <translation type="unfinished">Vioolsleutel (G-Sleutel)</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va</source>
+        <translation type="unfinished">Vioolsleutel 8va</translation>
+    </message>
+    <message>
+        <source>Treble Clef 15ma</source>
+        <translation type="unfinished">Vioolsleutel 15va</translation>
+    </message>
+    <message>
+        <source>Treble Clef 8va bassa</source>
+        <translation type="unfinished">Vioolsleutel 8va bas</translation>
+    </message>
+    <message>
+        <source>Bass Clef (F Clef)</source>
+        <translation type="unfinished">Bassleutel (F-Sleutel)</translation>
+    </message>
+    <message>
+        <source>Bass Clef 8va bassa</source>
+        <translation type="unfinished">Bassleutel 8va</translation>
+    </message>
+    <message>
+        <source>Bass Clef 15mb bassa</source>
+        <translation type="unfinished">Bassleutel 15va</translation>
+    </message>
+    <message>
+        <source>Baritone Clef</source>
+        <translation type="unfinished">Bariton Sleutel</translation>
+    </message>
+    <message>
+        <source>Subbass Clef</source>
+        <translation type="unfinished">Contrabassleutel</translation>
+    </message>
+    <message>
+        <source>Soprano Clef</source>
+        <translation type="unfinished">Sopraansleutel</translation>
+    </message>
+    <message>
+        <source>Mezzo-soprano Clef</source>
+        <translation type="unfinished">Mezzo-sopraansleutel</translation>
+    </message>
+    <message>
+        <source>Alto Clef</source>
+        <translation type="unfinished">Altsleutel</translation>
+    </message>
+    <message>
+        <source>Tenor Clef</source>
+        <translation type="unfinished">Tenorsleutel</translation>
+    </message>
+    <message>
+        <source>Tablature</source>
+        <translation type="unfinished">Tabulatuur </translation>
+    </message>
+    <message>
+        <source>Percussion</source>
+        <translation type="unfinished">Slagwerk</translation>
+    </message>
+    <message>
+        <source>French Violin Clef</source>
+        <translation type="unfinished">Franse Vioolsleutel</translation>
     </message>
 </context>
 <context>

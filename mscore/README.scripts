@@ -1,0 +1,154 @@
+=====================================================
+      MuseScore Scripting Interface
+=====================================================
+
+MuseScore supports plugin extensions in ECMAScript code (ECMA-262 aka
+"Java Script").
+
+A plugin extension is a file with the file extension ".js".
+All extensions in the plugins directory are registered by MuseScore on
+startup.
+The linux plugin directory is usually located at
+$install-path$/museScore-0.9/plugins.
+On Windows you can find the plugins at ""install-path"\MuseScore 0.9\plugins".
+
+
+A MuseScore plugin script has access to the whole Qt Library, so it is possible
+to create complete guis.
+
+=====================================================
+      Debugging
+=====================================================
+
+A script debugger can be enabled in Menu "Help".
+
+=====================================================
+      Overall structure of a MuseScore scripting
+      plugin.
+=====================================================
+
+Example of a "no operation" plugin:
+
+----------------begin code-----------------------
+function init() {}
+function run() {}
+
+var mscorePlugin = {
+      menu: 'Plugins.test',
+      init: init,
+      run: run
+      };
+----------------end code-----------------------
+
+The global object "mscorePlugin" defines the environment of the plugin.
+The variable "menu" creates a menu entry in MuseScore which triggers
+execution of the plugin. The test plugin above creates an entry "test"
+in the menu "Plugins".
+"init" defines a function, which is called on MuseScore startup, when
+the plugins are registered. The "run" function is executed, when the user
+activates the "test" menu entry.
+
+
+=====================================================
+      Bindings to internal MuseScore data
+=====================================================
+
+Objects
+=====================================
+   Score
+      represents a complete score
+
+            A new score can be created with:
+                  var a = new Score();
+            The new score is appended to mscores list of scores.
+
+         Properties:
+            name        string
+            nstaves     integer
+
+         Functions:
+            bool saveXml(string path);
+            bool saveMxl(string path);
+            bool saveMidi(string path);
+            bool savePng(string path);
+            bool saveSvg(string path);
+            bool saveLilypond(string path);
+            appendPart(string partname)
+            appendMeasure(integer n)      append "n" measure to score
+
+   Cursor
+         create:  var a = Cursor(score);
+
+         Properties:
+            staff       integer
+            voice       integer
+
+         Fuctions:
+            rewind()                position cursor to staff/voice
+            isChord()               return true if cursor points to a chord
+            chord()                 return chord at current position
+            putStaffText(Text)      add staff text at cursor position
+            eos()                   return true if at end of score
+
+   Chord
+         Functions:
+            topNote()
+   Note
+         Properties:
+            pitch       integer     midi pitch value of note
+            name        string      name of note pitch value (read only)
+
+   Text
+         create:   var a = Text(score);
+
+         Properties:
+
+            text           string         the displayed text
+            defaultFont    QFont
+            color          QColor         text foreground color
+
+
+
+Global Variables
+=====================================
+
+      pluginPath  string      path of current active plugin
+                              This path can be used find additional data associated with this
+                              plugin.
+      curScore    Score       current active Score
+      curCursor   Cursor
+      division    integer     number of midi ticks for 1/4 note
+
+=====================================================
+      Example "run" scripts
+=====================================================
+
+1. Create a "hello world" message box
+
+      var mb = new QMessageBox();
+      mb.setWindowTitle("MuseScore: Hello");
+      mb.text = "Hello World!";
+      mb.exec();
+
+2. Create a new Score "Test-Score"
+
+      var score  = new Score();
+      score.name = "Test-Score";
+      score.appendPart("Piano");    // create two staff piano part
+      score.appendMeasures(5);      // append five empty measures
+
+3. Put note name above each chord
+
+      var cursor = new Cursor(curScore);
+      cursor.staff = 0;
+      cursor.voice = 0;
+      cursor.rewind();
+      while (!cursor.eos()) {
+            if (cursor.isChord()) {
+                  var text  = new Text(curScore);
+                  text.text = cursor.chord().topNote().name();
+                  cursor.putStaffText(text);
+                  }
+            cursor.next();
+            }
+

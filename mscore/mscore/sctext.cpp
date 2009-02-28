@@ -55,6 +55,8 @@ ScText::ScText(QScriptEngine* engine)
       textText = engine->toStringHandle(QLatin1String("text"));
       textSize = engine->toStringHandle(QLatin1String("size"));
       textDefaultFont = engine->toStringHandle(QLatin1String("defaultFont"));
+      textColor = engine->toStringHandle(QLatin1String("color"));
+
 
       proto = engine->newQObject(new ScTextPrototype(this),
          QScriptEngine::QtOwnership,
@@ -78,7 +80,8 @@ QScriptClass::QueryFlags ScText::queryProperty(const QScriptValue &object,
       TextPtr* sp = qscriptvalue_cast<TextPtr*>(object.data());
       if (!sp)
             return 0;
-      if (name == textText || name == textSize || name == textDefaultFont)
+      if (name == textText || name == textSize || name == textDefaultFont
+         || name == textColor)
             return flags;
       return 0;   // qscript handles property
       }
@@ -100,6 +103,8 @@ QScriptValue ScText::property(const QScriptValue& object,
             return QScriptValue(engine(), (*text)->defaultFont().pixelSize());
 //      else if (name == textDefaultFont)
 //            return QScriptValue(engine(), (*text)->defaultFont());
+//      else if (name == textColor)
+//            return QScriptValue(engine(), (*text)->color());
       return QScriptValue();
       }
 
@@ -110,7 +115,7 @@ QScriptValue ScText::property(const QScriptValue& object,
 void ScText::setProperty(QScriptValue &object,
    const QScriptString& name, uint /*id*/, const QScriptValue& value)
       {
-printf("ScText::setProperty <%s>\n", qPrintable(name.toString()));
+// printf("ScText::setProperty <%s>\n", qPrintable(name.toString()));
       TextPtr* text = qscriptvalue_cast<TextPtr*>(object.data());
       if (!text)
             return;
@@ -124,9 +129,12 @@ printf("ScText::setProperty <%s>\n", qPrintable(name.toString()));
             (*text)->setDefaultFont(f);
             }
       else if (name == textDefaultFont) {
-            QFont qf = qscriptvalue_cast<QFont>(value.data());
-printf("setFont %d %d\n", qf.pixelSize(), qf.pointSize());
+            QFont qf = value.toVariant().value<QFont>();
             (*text)->setDefaultFont(qf);
+            }
+      else if (name == textColor) {
+            QColor c = value.toVariant().value<QColor>();
+            (*text)->setColor(c);
             }
       }
 
@@ -191,7 +199,8 @@ QScriptValue ScText::toScriptValue(QScriptEngine* eng, const TextPtr& ba)
 
 void ScText::fromScriptValue(const QScriptValue& obj, TextPtr& ba)
       {
-      ba = *(qscriptvalue_cast<TextPtr*>(obj.data()));
+      TextPtr* pba = qscriptvalue_cast<TextPtr*>(obj.data());
+      ba = pba ? *pba : 0;
       }
 
 //---------------------------------------------------------

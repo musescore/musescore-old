@@ -212,8 +212,8 @@ void MuseScore::pluginTriggered(int idx)
             printf("Run Plugin <%s>\n", qPrintable(pp));
       if (se == 0) {
             se = new ScriptEngine();
-#if QT_VERSION >= 0x040400
             if (debugMode) {
+                  // > qt4.4 required
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
                         printf("lib path <%s>\n", qPrintable(s));
@@ -228,7 +228,6 @@ void MuseScore::pluginTriggered(int idx)
                   foreach(const QString& s, sl)
                         printf("  <%s>\n", qPrintable(s));
                   }
-#endif
             }
 #ifdef HAS_SCRIPT_DEBUG
       if (scriptDebug) {
@@ -264,6 +263,11 @@ void MuseScore::pluginTriggered(int idx)
             printf("Run plugin: no run function found\n");
             return;
             }
+
+      foreach(Score* s, scoreList)
+            s->startCmd();
       run.call();
+      foreach(Score* s, scoreList)
+            s->endCmd();
       cs->end();
       }

@@ -46,17 +46,18 @@ function init()
 function run()
       {
       print("script: note names");
-
-      var cursor   = new Cursor(curScore);
+      var cursor = new Cursor(curScore);
       cursor.staff = 0;
       cursor.voice = 0;
-      cursor.rewind();  // set cursor to first chord/rest
+      cursor.rewind();
 
       while (!cursor.eos()) {
             if (cursor.isChord()) {
-                  var name  = cursor.chord().topNote().name();
-                  var text  = new Text(curScore);
-                  text.text = name;
+                  var name         = cursor.chord().topNote().name;
+                  var text         = new Text(curScore);
+                  var font         = new QFont("arial", 33);
+                  text.defaultFont = font;
+                  text.text        = name;
                   cursor.putStaffText(text);
                   }
             cursor.next();
@@ -69,7 +70,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.NoteNames',
+      menu: 'Plugins.FontTest',
       init: init,
       run:  run
       };

@@ -360,13 +360,14 @@ void ScSCursorPrototype::putStaffText(TextPtr s)
       ChordRest* cr = cursor->cr();
       if (!cr || !s)
             return;
+printf("put staff text <%s>\n", qPrintable(s->getText()));
       QFont f = s->defaultFont();
       s->setTrack(cr->track());
       s->setSystemFlag(false);
       s->setSubtype(TEXT_STAFF);
       s->setParent(cr->measure());
       s->setTick(cr->tick());
-      s->score()->addElement(s);
+      s->score()->undoAddElement(s);
       s->score()->setLayoutAll(true);
       }
 

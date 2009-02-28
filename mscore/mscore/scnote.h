@@ -57,17 +57,27 @@ class ScNote : public QObject, public QScriptClass {
       QScriptValue prototype() const { return proto; }
       };
 
+//---------------------------------------------------------
+//   ScNotePrototype
+//---------------------------------------------------------
+
 class ScNotePrototype : public QObject, public QScriptable
       {
       Q_OBJECT
+      Q_PROPERTY(QString name READ getName SCRIPTABLE true)
+      Q_PROPERTY(int pitch READ getPitch WRITE setPitch SCRIPTABLE true)
+
       Note* thisNote() const;
 
    public:
       ScNotePrototype(QObject *parent = 0) : QObject(parent) {}
       ~ScNotePrototype() {}
 
+      QString getName() const;
+      int getPitch() const;
+      void setPitch(int v);
+
    public slots:
-      QString name() const;
       };
 
 Q_DECLARE_METATYPE(NotePtr)

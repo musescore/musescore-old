@@ -1,6 +1,13 @@
-28.feb (lv)
+28.feb (ws)
+      - more translatable string from palettes
+      - clef names should now appear translated
+     (lv)
       - call doLayout() as required by converterMode
+27.feb (ws)
+      - make (most) script actions undoable
 26.feb (ws)
+      - add script test program "fonttest"
+      - fix script test program "notenames"
       - add new compile option in toplevel CMakeLists.txt: "MSCORE_UNSTABLE"
         setting this variable to true activates different text in version string
         ("mscore -v") and "About" box
