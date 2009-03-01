@@ -133,6 +133,7 @@ QScriptClassPropertyIterator *ScNote::newIterator(const QScriptValue &object)
 
 QScriptValue ScNote::newInstance(Score* score)
       {
+// printf("ScNote::newInstance\n");
       Note* note = new Note(score);
       return newInstance(note);
       }
@@ -171,7 +172,8 @@ QScriptValue ScNote::toScriptValue(QScriptEngine* eng, const NotePtr& ba)
 
 void ScNote::fromScriptValue(const QScriptValue& obj, NotePtr& ba)
       {
-      ba = qscriptvalue_cast<NotePtr>(obj.data());
+      NotePtr* np = qscriptvalue_cast<NotePtr*>(obj.data());
+      ba = np ? *np : 0;
       }
 
 //---------------------------------------------------------

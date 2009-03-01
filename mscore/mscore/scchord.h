@@ -68,6 +68,7 @@ class ScChordPrototype : public QObject, public QScriptable
       {
       Q_OBJECT
       Chord* thisChord() const;
+      Q_PROPERTY(int tickLen READ getTickLen WRITE setTickLen SCRIPTABLE true)
 
    public:
       ScChordPrototype(QObject *parent = 0) : QObject(parent) {}
@@ -75,6 +76,9 @@ class ScChordPrototype : public QObject, public QScriptable
 
    public slots:
       NotePtr topNote() const;
+      void addNote(NotePtr note);
+      int getTickLen() const;
+      void setTickLen(int v);
       };
 
 Q_DECLARE_METATYPE(ChordPtr)

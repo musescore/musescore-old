@@ -1397,9 +1397,8 @@ void Score::printFile()
 #endif
 
       QPrintDialog pd(printerDev, 0);
-      if (!pd.exec()) {
+      if (!pd.exec())
             return;
-            }
       print(printerDev);
       }
 
@@ -1430,34 +1429,39 @@ void Score::print(QPrinter* printer)
             m->collectElements(el);
             }
 
-      const QList<Page*> pl = _layout->pages();
-      int pages = pl.size();
+printf("num copies %d\n", printer->numCopies());
+      for (int copy = 0; copy < printer->numCopies(); ++copy) {
+            const QList<Page*> pl = _layout->pages();
+            int pages = pl.size();
 
-      int fromPage = printer->fromPage() - 1;
-      int toPage   = printer->toPage() - 1;
-      if (fromPage < 0)
-            fromPage = 0;
-      if ((toPage < 0) || (toPage >= pages))
-            toPage = pages - 1;
+            int fromPage = printer->fromPage() - 1;
+            int toPage   = printer->toPage() - 1;
+            if (fromPage < 0)
+                  fromPage = 0;
+            if ((toPage < 0) || (toPage >= pages))
+                  toPage = pages - 1;
 
-      bool firstPage = true;
-      for (int n = fromPage; n <= toPage; ++n) {
-            if (!firstPage) {
+            bool firstPage = true;
+            for (int n = fromPage; n <= toPage; ++n) {
+                  if (!firstPage) {
+                        printer->newPage();
+                        }
+                  firstPage = false;
+                  const Page* page = pl.at(n);
+                  page->collectElements(el);
+                  for (int i = 0; i < el.size(); ++i) {
+                        const Element* e = el[i];
+                        if (!e->visible())
+                              continue;
+                        QPointF ap(e->canvasPos() - page->pos());
+                        p.translate(ap);
+                        p.setPen(QPen(e->color()));
+                        e->draw(p);
+                        p.translate(-ap);
+                        }
+                  }
+            if ((copy + 1) < printer->numCopies())
                   printer->newPage();
-                  }
-            firstPage = false;
-            const Page* page = pl.at(n);
-            page->collectElements(el);
-            for (int i = 0; i < el.size(); ++i) {
-                  const Element* e = el[i];
-                  if (!e->visible())
-                        continue;
-                  QPointF ap(e->canvasPos() - page->pos());
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(p);
-                  p.translate(-ap);
-                  }
             }
       p.end();
       _printing = false;

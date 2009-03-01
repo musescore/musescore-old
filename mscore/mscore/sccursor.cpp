@@ -360,7 +360,6 @@ void ScSCursorPrototype::putStaffText(TextPtr s)
       ChordRest* cr = cursor->cr();
       if (!cr || !s)
             return;
-printf("put staff text <%s>\n", qPrintable(s->getText()));
       QFont f = s->defaultFont();
       s->setTrack(cr->track());
       s->setSystemFlag(false);
@@ -369,5 +368,37 @@ printf("put staff text <%s>\n", qPrintable(s->getText()));
       s->setTick(cr->tick());
       s->score()->undoAddElement(s);
       s->score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   addChord
+//---------------------------------------------------------
+
+void ScSCursorPrototype::addChord(ChordPtr c)
+      {
+      SCursor* cursor = thisSCursor();
+      ChordRest* cr   = cursor->cr();
+      int tick        = cr->tick();
+      int staffIdx    = cursor->staffIdx();
+      int voice       = cursor->voice();
+      int len         = c->tickLen();
+      Score* score    = c->score();
+      int track       = staffIdx * VOICES + voice;
+      int gap         = score->makeGap(tick, track, len);
+      if (gap < len) {
+            printf("cannot make gap\n");
+            return;
+            }
+      Measure* measure = score->tick2measure(tick);
+      Segment::SegmentType st = Segment::SegChordRest;
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            score->undoAddElement(seg);
+            }
+      cursor->setSegment(seg);
+      c->setParent(seg);
+      c->setTrack(track);
+      score->undoAddElement(c);
       }
 
