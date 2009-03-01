@@ -24,6 +24,7 @@
 #include "sctext.h"
 #include "chordrest.h"
 #include "chord.h"
+#include "note.h"
 #include "stafftext.h"
 #include "text.h"
 
@@ -382,7 +383,8 @@ void ScSCursorPrototype::addChord(ChordPtr c)
       int staffIdx    = cursor->staffIdx();
       int voice       = cursor->voice();
       int len         = c->tickLen();
-      Score* score    = c->score();
+      Score* score    = cursor->score();
+
       int track       = staffIdx * VOICES + voice;
       int gap         = score->makeGap(tick, track, len);
       if (gap < len) {
@@ -396,6 +398,11 @@ void ScSCursorPrototype::addChord(ChordPtr c)
             seg = measure->createSegment(st, tick);
             score->undoAddElement(seg);
             }
+      c->setScore(score);
+      NoteList* nl = c->noteList();
+      for (iNote in = nl->begin(); in != nl->end(); ++in)
+            in->second->setScore(score);
+
       cursor->setSegment(seg);
       c->setParent(seg);
       c->setTrack(track);
