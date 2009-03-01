@@ -730,6 +730,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                         s = score->workTitle();
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
+                  text->setTextStyle(TEXT_STYLE_TITLE);
                   text->setText(s);
                   if (vbox == 0)
                         vbox = new VBox(score);
@@ -741,6 +742,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
                         s = score->workNumber();
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_SUBTITLE);
+                  text->setTextStyle(TEXT_STYLE_SUBTITLE);
                   text->setText(s);
                   if (vbox == 0)
                         vbox = new VBox(score);
@@ -749,6 +751,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (!composer.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_COMPOSER);
+                  text->setTextStyle(TEXT_STYLE_COMPOSER);
                   text->setText(composer);
                   if (vbox == 0)
                         vbox = new VBox(score);
@@ -757,6 +760,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (!poet.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_POET);
+                  text->setTextStyle(TEXT_STYLE_POET);
                   text->setText(poet);
                   if (vbox == 0)
                         vbox = new VBox(score);
@@ -765,6 +769,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             if (!translator.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TRANSLATOR);
+                  text->setTextStyle(TEXT_STYLE_TRANSLATOR);
                   text->setText(translator);
                   if (vbox == 0)
                         vbox = new VBox(score);

@@ -1,4 +1,6 @@
-1.mar (ws)
+1.mar (lvi)
+      - set text style on MusicXML import
+      (ws)
       - script interface extensions; see testscript test3.js
 28.feb (ws)
       - more translatable string from palettes
