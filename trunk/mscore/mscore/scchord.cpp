@@ -22,6 +22,8 @@
 #include "scchord.h"
 #include "chord.h"
 #include "scscore.h"
+#include "scnote.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   ScChordPropertyIterator
@@ -134,6 +136,7 @@ QScriptClassPropertyIterator *ScChord::newIterator(const QScriptValue &object)
 
 QScriptValue ScChord::newInstance(Score* score)
       {
+// printf("ScChord::newInstance\n");
       Chord* chord = new Chord(score);
       return newInstance(chord);
       }
@@ -172,7 +175,8 @@ QScriptValue ScChord::toScriptValue(QScriptEngine* eng, const ChordPtr& ba)
 
 void ScChord::fromScriptValue(const QScriptValue& obj, ChordPtr& ba)
       {
-      ba = qscriptvalue_cast<ChordPtr>(obj.data());
+      ChordPtr* cp = qscriptvalue_cast<ChordPtr*>(obj.data());
+      ba = cp ? *cp : 0;
       }
 
 //---------------------------------------------------------
@@ -241,5 +245,35 @@ NotePtr ScChordPrototype::topNote() const
       {
       Chord* chord = thisChord();
       return chord->upNote();
+      }
+
+//---------------------------------------------------------
+//   addNote
+//---------------------------------------------------------
+
+void ScChordPrototype::addNote(NotePtr note)
+      {
+      note->setParent(thisChord());
+      note->score()->undoAddElement(note);
+      }
+
+//---------------------------------------------------------
+//   getTickLen
+//---------------------------------------------------------
+
+int ScChordPrototype::getTickLen() const
+      {
+      Chord* chord = thisChord();
+      return chord->tickLen();
+      }
+
+//---------------------------------------------------------
+//   setTickLen
+//---------------------------------------------------------
+
+void ScChordPrototype::setTickLen(int v)
+      {
+      Chord* chord = thisChord();
+      chord->setLen(v);
       }
 

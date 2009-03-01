@@ -47,8 +47,23 @@ function init()
 
 function run()
       {
-      newScore = new Score();
-      newScore.name = "Test-Score";
+      var score = new Score();
+      score.name = "Test-Score";
+      score.appendPart("Piano");    // create two staff piano part
+      score.appendMeasures(5);      // append five empty messages
+      var cursor = new Cursor(score);
+      cursor.staff = 0;
+      cursor.voice = 0;
+      cursor.rewind();
+      for (var i = 0; i < 4; i += 1) {
+            var chord  = new Chord(score);
+            chord.tickLen = 480;
+            var note   = new Note(score);
+            note.pitch = 60 + i;
+            chord.addNote(note);
+            cursor.addChord(chord);
+            cursor.next();
+            }
       }
 
 //---------------------------------------------------------

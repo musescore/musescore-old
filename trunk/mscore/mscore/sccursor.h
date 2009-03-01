@@ -108,6 +108,7 @@ class ScSCursorPrototype : public QObject, public QScriptable
       bool next();
       void putStaffText(TextPtr);
       bool isChord() const;
+      void addChord(ChordPtr);
       };
 
 Q_DECLARE_METATYPE(SCursor)
