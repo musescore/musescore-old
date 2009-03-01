@@ -89,11 +89,21 @@ Objects
             chord()                 return chord at current position
             putStaffText(Text)      add staff text at cursor position
             eos()                   return true if at end of score
+            addChord(Chord)
 
    Chord
+         create:   var a = Chord()
+
+         Properties:
+            tickLen     integer
+
          Functions:
             topNote()
+            addNote(Note)
+
    Note
+         create:   var a = Note()
+
          Properties:
             pitch       integer     midi pitch value of note
             name        string      name of note pitch value (read only)

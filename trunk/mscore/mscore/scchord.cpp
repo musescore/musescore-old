@@ -158,10 +158,7 @@ QScriptValue ScChord::construct(QScriptContext *ctx, QScriptEngine *)
             return QScriptValue();
       QScriptValue v = ctx->argument(0);
       ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-      if (sp)
-            return cls->newInstance(*sp);
-      else
-            return QScriptValue();
+      return cls->newInstance(sp ? *sp : 0);
       }
 
 QScriptValue ScChord::toScriptValue(QScriptEngine* eng, const ChordPtr& ba)
@@ -254,7 +251,13 @@ NotePtr ScChordPrototype::topNote() const
 void ScChordPrototype::addNote(NotePtr note)
       {
       note->setParent(thisChord());
-      note->score()->undoAddElement(note);
+      Score* score = thisChord()->score();
+      if (score) {
+            note->setScore(score);
+            thisChord()->score()->undoAddElement(note);
+            }
+      else
+            thisChord()->add(note);
       }
 
 //---------------------------------------------------------

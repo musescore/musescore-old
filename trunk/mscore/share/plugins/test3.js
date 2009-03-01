@@ -56,9 +56,9 @@ function run()
       cursor.voice = 0;
       cursor.rewind();
       for (var i = 0; i < 4; i += 1) {
-            var chord  = new Chord(score);
+            var chord  = new Chord();
             chord.tickLen = 480;
-            var note   = new Note(score);
+            var note   = new Note();
             note.pitch = 60 + i;
             chord.addNote(note);
             cursor.addChord(chord);
