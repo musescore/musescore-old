@@ -78,7 +78,7 @@ Objects
             appendMeasure(integer n)      append "n" measure to score
 
    Cursor
-         create:  var a = Cursor(score);
+         create:  var a = Cursor(Score score);
 
          Properties:
             staff       integer
@@ -100,7 +100,10 @@ Objects
 
          Functions:
             topNote()
+            note(integer n)         return note at index n; notes are sorted to pitch
             addNote(Note)
+            removeNote(integer n)   remove note at index n
+            integer notes()         return number of notes in chord
 
    Note
          create:   var a = Note()
@@ -162,4 +165,22 @@ Global Variables
                   }
             cursor.next();
             }
+
+4. Remove middle note in all three note chords
+
+      var cursor = new Cursor(curScore);
+      cursor.staff = 0;
+      cursor.voice = 0;
+      cursor.rewind();
+
+      while (!cursor.eos()) {
+            if (cursor.isChord()) {
+                  var chord = cursor.chord();
+                  if (chord.notes() == 3) {
+                        chord.removeNote(1);
+                        }
+                  }
+            cursor.next();
+            }
+
 
