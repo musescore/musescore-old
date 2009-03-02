@@ -33,38 +33,38 @@
 function init()
       {
       // print("test script init");
-      }
+      };
 
-//---------------------------------------------------------
-//    run
-//    this function will be called when activating the
-//    plugin menu entry
-//
-//    global Variables:
-//    pluginPath - contains the plugin path; file separator
-//                 is "/"
-//---------------------------------------------------------
+
+function addNote(cursor, pitch, duration)
+      {
+      var chord     = new Chord();
+      chord.tickLen = duration;
+      var note      = new Note();
+      note.pitch    = pitch;
+
+      chord.addNote(note);
+      cursor.addChord(chord);
+      cursor.next();
+      };
 
 function run()
       {
-      var score = new Score();
-      score.name = "Test-Score";
+      var score   = new Score();
+      score.name  = "Test-Score";
+      score.title = "Test-Score";
       score.appendPart("Piano");    // create two staff piano part
       score.appendMeasures(5);      // append five empty messages
       var cursor = new Cursor(score);
       cursor.staff = 0;
       cursor.voice = 0;
       cursor.rewind();
-      for (var i = 0; i < 4; i += 1) {
-            var chord  = new Chord();
-            chord.tickLen = 480;
-            var note   = new Note();
-            note.pitch = 60 + i;
-            chord.addNote(note);
-            cursor.addChord(chord);
-            cursor.next();
-            }
-      }
+
+      addNote(cursor, 60, 480);
+      addNote(cursor, 62, 480);
+      addNote(cursor, 64, 480);
+      addNote(cursor, 65, 480);
+      };
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed

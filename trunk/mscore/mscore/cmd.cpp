@@ -664,6 +664,7 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
 
       while (len) {
             int gap = makeGap(tick, track, len);
+// printf("setNote:: makeGap %d - %d\n", len, gap);
             len    -= gap;
 
             note = new Note(this);
@@ -767,6 +768,7 @@ int Score::makeGap(int tick, int track, int len)
 // printf("makeGap at %d len %d\n", tick, len);
       Measure* measure = tick2measure(tick);
       if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
+// printf(" at end of score\n");
             //
             // we are at the end of the score:
             // append a new measure
@@ -1945,8 +1947,6 @@ void Score::cmd(const QString& cmd)
                   pageEnd();
                   setLayoutAll(false);
                   }
-//            else if (cmd == "add-tie")
-//                  cmdAddTie();
             else if (cmd == "add-slur")
                   cmdAddSlur();
 	      else if (cmd == "add-staccato")
