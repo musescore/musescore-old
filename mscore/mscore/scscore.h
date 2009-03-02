@@ -67,6 +67,7 @@ class ScScorePrototype : public QObject, public QScriptable
       {
       Q_OBJECT
       Score* thisScore() const;
+      Q_PROPERTY(QString title WRITE setTitle SCRIPTABLE true)
 
    public:
       ScScorePrototype(QObject *parent = 0) : QObject(parent) {}
@@ -81,6 +82,7 @@ class ScScorePrototype : public QObject, public QScriptable
       bool saveLilypond(const QString&);
       void appendPart(const QString& name);
       void appendMeasures(int n);
+      void setTitle(const QString&);
       };
 
 Q_DECLARE_METATYPE(ScorePtr)

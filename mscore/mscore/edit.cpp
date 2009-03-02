@@ -541,7 +541,11 @@ void Score::cmdAddTie()
             return;
       Chord* chord  = note->chord();
       if (noteEntryMode()) {
+            if (_is.pos() == 0)
+                  return;
+// printf("cmdAdd Tie pos %d cr %p\n", _is.pos(), _is.cr);
             Note* n = cmdAddPitch1(note->pitch(), false);
+// printf("cmdAdd Tie %p %p %d-%d\n", note, n, note->chord()->tick(), n->chord()->tick());
             if (n) {
                   Tie* tie = new Tie(this);
                   tie->setStartNote(note);

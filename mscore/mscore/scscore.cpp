@@ -24,6 +24,11 @@
 #include "clef.h"
 #include "staff.h"
 #include "part.h"
+#include "system.h"
+#include "layout.h"
+#include "page.h"
+#include "text.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   ScScorePropertyIterator
@@ -345,5 +350,29 @@ void ScScorePrototype::appendPart(const QString& name)
       thisScore()->insertPart(part, 0);
       thisScore()->fixTicks();
       thisScore()->rebuildMidiMapping();
+      }
+
+//---------------------------------------------------------
+//   setTitle
+//---------------------------------------------------------
+
+void ScScorePrototype::setTitle(const QString& text)
+      {
+      MeasureBaseList* ml = thisScore()->measures();
+      MeasureBase* measure;
+      if (!ml->first() || ml->first()->type() != VBOX) {
+            measure = new VBox(thisScore());
+            measure->setTick(0);
+            thisScore()->addMeasure(measure);
+	      thisScore()->undoOp(UndoOp::InsertMeasure, measure);
+            }
+      else
+            measure = ml->first();
+      Text* s = new Text(thisScore());
+      s->setTextStyle(TEXT_STYLE_TITLE);
+      s->setSubtype(TEXT_TITLE);
+      s->setParent(measure);
+      s->setText(text);
+      thisScore()->undoAddElement(s);
       }
 

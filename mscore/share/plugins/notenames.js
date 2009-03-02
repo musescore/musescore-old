@@ -54,9 +54,8 @@ function run()
 
       while (!cursor.eos()) {
             if (cursor.isChord()) {
-                  var name  = cursor.chord().topNote().name();
                   var text  = new Text(curScore);
-                  text.text = name;
+                  text.text = cursor.chord().topNote().name;
                   cursor.putStaffText(text);
                   }
             cursor.next();

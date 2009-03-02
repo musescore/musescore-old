@@ -63,7 +63,8 @@ Objects
             The new score is appended to mscores list of scores.
 
          Properties:
-            name        string
+            name        string            file name
+            titel       string            title text on score
             nstaves     integer
 
          Functions:
