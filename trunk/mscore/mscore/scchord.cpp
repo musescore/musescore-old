@@ -75,7 +75,7 @@ ScChord::ScChord(QScriptEngine* engine)
 //---------------------------------------------------------
 
 QScriptClass::QueryFlags ScChord::queryProperty(const QScriptValue &object,
-   const QScriptString& name, QueryFlags flags, uint* /*id*/)
+   const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
       {
       ChordPtr* sp = qscriptvalue_cast<ChordPtr*>(object.data());
       if (!sp)
@@ -103,7 +103,7 @@ printf("property <%s>\n", qPrintable(name.toString()));
 //---------------------------------------------------------
 
 void ScChord::setProperty(QScriptValue &object,
-   const QScriptString& s, uint /*id*/, const QScriptValue& value)
+   const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
       {
       ChordPtr* score = qscriptvalue_cast<ChordPtr*>(object.data());
       if (!score)
@@ -115,7 +115,7 @@ void ScChord::setProperty(QScriptValue &object,
 //---------------------------------------------------------
 
 QScriptValue::PropertyFlags ScChord::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
+   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
       {
 /*      if (name == scoreName)
             return QScriptValue::Undeletable;
@@ -279,4 +279,55 @@ void ScChordPrototype::setTickLen(int v)
       Chord* chord = thisChord();
       chord->setLen(v);
       }
+
+//---------------------------------------------------------
+//   removeNote
+//---------------------------------------------------------
+
+void ScChordPrototype::removeNote(int idx)
+      {
+      Chord* chord = thisChord();
+      NoteList* nl = chord->noteList();
+      if (idx < 0 || idx >= int(nl->size()))
+            return;
+      int k = 0;
+      for (iNote i = nl->begin(); i != nl->end(); ++i) {
+            if (k == idx) {
+                  nl->erase(i);
+                  break;
+                  }
+            ++k;
+            }
+      }
+
+//---------------------------------------------------------
+//   notes
+//---------------------------------------------------------
+
+int ScChordPrototype::notes() const
+      {
+      Chord* chord = thisChord();
+      const NoteList* nl = chord->noteList();
+      return nl->size();
+      }
+
+//---------------------------------------------------------
+//   note
+//---------------------------------------------------------
+
+NotePtr ScChordPrototype::note(int idx) const
+      {
+      Chord* chord = thisChord();
+      const NoteList* nl = chord->noteList();
+      if (idx < 0 || idx >= int(nl->size()))
+            return 0;
+      int k = 0;
+      for (ciNote i = nl->begin(); i != nl->end(); ++i) {
+            if (k == idx)
+                  return i->second;
+            ++k;
+            }
+      return 0;
+      }
+
 
