@@ -243,6 +243,7 @@ else (MINGW)
       )
    target_link_libraries(mscore
       ${QT_LIBRARIES}
+      QtUiTools
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${ALSA_LIB}
       ${JACK_LIB}

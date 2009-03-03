@@ -58,6 +58,10 @@ else (STATIC_SCRIPT_BINDINGS)
          )
       install( TARGETS qtscript_uitools DESTINATION bin/script/ )
    else(MINGW)
+      target_link_libraries(
+         qtscript_uitools
+         QtUiTools
+         )
       install( TARGETS qtscript_uitools DESTINATION ${QT_PLUGINS_DIR}/script/ )
    endif(MINGW)
 endif (STATIC_SCRIPT_BINDINGS)

@@ -166,11 +166,16 @@ ScriptEngine::ScriptEngine()
    : QScriptEngine()
       {
 #ifdef HAS_SCRIPT_INTERFACE
-      importExtension("qt.core");
-      importExtension("qt.gui");
-      importExtension("qt.xml");
-      importExtension("qt.network");
-      importExtension("qt.uitools");
+      const char* xts[] = {
+            "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
+            };
+      for (unsigned i = 0; i < sizeof(xts)/sizeof(*xts); ++i) {
+            importExtension(xts[i]);
+            if (hasUncaughtException()) {
+                  QScriptValue val = uncaughtException();
+                  printf("%s\n", qPrintable(val.toString()));
+                  }
+            }
 #endif
 
       baClass = new ByteArrayClass(this);

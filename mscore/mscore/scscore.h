@@ -83,6 +83,8 @@ class ScScorePrototype : public QObject, public QScriptable
       void appendPart(const QString& name);
       void appendMeasures(int n);
       void setTitle(const QString&);
+      void startUndo() { thisScore()->startCmd(); }
+      void endUndo()   { thisScore()->endCmd();   }
       };
 
 Q_DECLARE_METATYPE(ScorePtr)

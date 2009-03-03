@@ -6,75 +6,17 @@
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Style>
-    <staffUpperBorder>7</staffUpperBorder>
-    <staffLowerBorder>7</staffLowerBorder>
-    <staffDistance>6.5</staffDistance>
     <akkoladeDistance>6.4</akkoladeDistance>
     <systemDistance>9.2</systemDistance>
     <lyricsDistance>6.5</lyricsDistance>
-    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
-    <systemFrameDistance>7</systemFrameDistance>
     <frameSystemDistance>7</frameSystemDistance>
-    <minMeasureWidth>4</minMeasureWidth>
-    <barWidth>0.16</barWidth>
-    <doubleBarWidth>0.16</doubleBarWidth>
-    <endBarWidth>0.3</endBarWidth>
-    <doubleBarDistance>0.3</doubleBarDistance>
-    <endBarDistance>0.3</endBarDistance>
-    <bracketWidth>0.35</bracketWidth>
     <bracketDistance>0.3</bracketDistance>
-    <clefLeftMargin>0.5</clefLeftMargin>
-    <keysigLeftMargin>0.5</keysigLeftMargin>
-    <timesigLeftMargin>0.5</timesigLeftMargin>
-    <clefKeyRightMargin>1.75</clefKeyRightMargin>
-    <stemWidth>0.13</stemWidth>
-    <beginRepeatLeftMargin>1</beginRepeatLeftMargin>
     <minNoteDistance>0.5</minNoteDistance>
     <measureSpacing>1.3</measureSpacing>
-    <barNoteDistance>1.5</barNoteDistance>
-    <noteBarDistance>1</noteBarDistance>
-    <staffLineWidth>0.08</staffLineWidth>
     <ledgerLineWidth>0.08</ledgerLineWidth>
-    <akkoladeWidth>1.6</akkoladeWidth>
-    <prefixDistance>0.13</prefixDistance>
-    <prefixNoteDistance>0.22</prefixNoteDistance>
-    <beamWidth>0.48</beamWidth>
-    <beamDistance>0.5</beamDistance>
-    <beamMinLen>1.25</beamMinLen>
-    <beamMinSlope>0.05</beamMinSlope>
-    <beamMaxSlope>0.2</beamMaxSlope>
-    <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
-    <dotRestDistance>0.25</dotRestDistance>
-    <dotDotDistance>0.5</dotDotDistance>
-    <propertyDistanceHead>0.5</propertyDistanceHead>
-    <propertyDistanceStem>0.5</propertyDistanceStem>
-    <propertyDistance>0.25</propertyDistance>
-    <pageFillLimit>0.7</pageFillLimit>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <hairpinHeight>1.2</hairpinHeight>
-    <hairpinContHeight>0.5</hairpinContHeight>
-    <hairpinWidth>0.13</hairpinWidth>
-    <showPageNumber>1</showPageNumber>
-    <showPageNumberOne>0</showPageNumberOne>
-    <pageNumberOddEven>1</pageNumberOddEven>
-    <showMeasureNumber>1</showMeasureNumber>
-    <showMeasureNumberOne>0</showMeasureNumberOne>
-    <measureNumberInterval>5</measureNumberInterval>
-    <measureNumberAllStaffs>0</measureNumberAllStaffs>
-    <measureNumberSystem>1</measureNumberSystem>
-    <graceNoteMag>0.7</graceNoteMag>
-    <smallStaffMag>0.7</smallStaffMag>
-    <smallNoteMag>0.7</smallNoteMag>
     <smallClefMag>0.7</smallClefMag>
-    <genClef>1</genClef>
-    <genKeysig>1</genKeysig>
-    <minEmptyMeasures>2</minEmptyMeasures>
-    <minMMRestWidth>4</minMMRestWidth>
-    <gateTime>85</gateTime>
-    <tenutoGateTime>100</tenutoGateTime>
-    <staccatoGateTime>50</staccatoGateTime>
-    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
@@ -164,57 +106,37 @@
       </Instrument>
     </Part>
   <Slur id="1">
-    <track>0</track>
-    <tick>1440</tick>
     </Slur>
   <Slur id="2">
-    <track>0</track>
-    <tick>2400</tick>
     </Slur>
   <Slur id="3">
-    <track>1</track>
-    <tick>6720</tick>
     <SlurSegment no="0">
       <o4 x="0.267456" y="-1.42643"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="4">
-    <track>1</track>
-    <tick>7680</tick>
     <SlurSegment no="0">
       <o4 x="0.178304" y="-1.42643"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="5">
-    <track>0</track>
-    <tick>12000</tick>
     </Slur>
   <Slur id="6">
-    <track>0</track>
-    <tick>12960</tick>
     <up>2</up>
     </Slur>
   <Slur id="7">
-    <track>1</track>
-    <tick>14880</tick>
     <SlurSegment no="0">
       <o4 x="0.534913" y="-1.33728"/>
       </SlurSegment>
     <up>1</up>
     </Slur>
   <Slur id="8">
-    <track>0</track>
-    <tick>17280</tick>
     </Slur>
   <Slur id="9">
-    <track>0</track>
-    <tick>18240</tick>
     </Slur>
   <Slur id="10">
-    <track>1</track>
-    <tick>20160</tick>
     <SlurSegment no="0">
       <o4 x="0.267456" y="-1.33728"/>
       </SlurSegment>
@@ -230,32 +152,17 @@
       <Text>
         <subtype>Title</subtype>
         <style>2</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;">Bilder einer Ausstellung</p></body></html>
-          </html-data>
+        <text>Bilder einer Ausstellung</text>
         </Text>
       <Text>
         <subtype>Composer</subtype>
         <style>4</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;">Modeste Moussorgsky</p></body></html>
-          </html-data>
+        <text>Modeste Moussorgsky</text>
         </Text>
       <Text>
         <subtype>Subtitle</subtype>
         <style>3</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:400; font-style:normal;">
-<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;">Promenade</p></body></html>
-          </html-data>
+        <text>Promenade</text>
         </Text>
       </VBox>
     <HBox>
@@ -267,6 +174,7 @@ p, li { white-space: pre-wrap; }
       </HBox>
     <Measure number="1">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <selected>1</selected>
         <style>12</style>
@@ -277,12 +185,7 @@ p, li { white-space: pre-wrap; }
         <offset x="-5.03286" y="0"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</p></body></html>
-          </html-data>
+        <text>Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</text>
         </Tempo>
       <TimeSig>
         <subtype>324</subtype>
@@ -957,8 +860,8 @@ p, li { white-space: pre-wrap; }
       <Beam id="13">
         </Beam>
       <Chord>
-        <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <ticklen>240</ticklen>
         <Beam>13</Beam>
         <Note pitch="65" tpc="13"/>
         <Note pitch="68" tpc="10"/>
@@ -1253,8 +1156,8 @@ p, li { white-space: pre-wrap; }
       <Beam id="18">
         </Beam>
       <Chord>
-        <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <ticklen>240</ticklen>
         <Beam>18</Beam>
         <Note pitch="69" tpc="17"/>
         <Note pitch="72" tpc="14"/>
@@ -1456,8 +1359,8 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>39840</tick>
-        <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <ticklen>240</ticklen>
         <Beam>22</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -1545,8 +1448,8 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>42240</tick>
-        <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <ticklen>240</ticklen>
         <Beam>24</Beam>
         <StemDirection>down</StemDirection>
         <Note>
@@ -1572,8 +1475,8 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <tick>43200</tick>
-        <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
+        <ticklen>240</ticklen>
         <Beam>25</Beam>
         <StemDirection>up</StemDirection>
         <Note>
@@ -2025,7 +1928,6 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="2">
@@ -2035,7 +1937,6 @@ p, li { white-space: pre-wrap; }
         <nom1>6</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="3">
@@ -2114,7 +2015,6 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="6">
@@ -2157,7 +2057,6 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="8">

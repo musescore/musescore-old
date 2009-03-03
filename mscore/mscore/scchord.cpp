@@ -286,17 +286,25 @@ void ScChordPrototype::setTickLen(int v)
 
 void ScChordPrototype::removeNote(int idx)
       {
+printf("remove note %d\n", idx);
       Chord* chord = thisChord();
       NoteList* nl = chord->noteList();
       if (idx < 0 || idx >= int(nl->size()))
             return;
-      int k = 0;
-      for (iNote i = nl->begin(); i != nl->end(); ++i) {
-            if (k == idx) {
-                  nl->erase(i);
-                  break;
+      Score* score = chord->score();
+      if (score) {
+            NotePtr n = note(idx);
+            score->undoRemoveElement(n);
+            }
+      else {
+            int k = 0;
+            for (iNote i = nl->begin(); i != nl->end(); ++i) {
+                  if (k == idx) {
+                        nl->erase(i);
+                        break;
+                        }
+                  ++k;
                   }
-            ++k;
             }
       }
 
