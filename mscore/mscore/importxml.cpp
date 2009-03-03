@@ -438,7 +438,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                               }
                         else if (tag == "page-layout"){
                               score->pageFormat()->readMusicXML(ee);
-						      }
+                              }
                         else if (tag == "system-layout") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     QString tag(eee.tagName());
@@ -479,8 +479,28 @@ void MusicXml::scorePartwise(QDomElement ee)
                   score->setMovementNumber(e.text());
             else if (tag == "movement-title")
                   score->setMovementTitle(e.text());
-            else if (tag == "credit")
-                  domNotImplemented(e);
+            else if (tag == "credit") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "credit-words") {
+                              int defaultx    = ee.attribute(QString("default-x")).toInt();
+                              int defaulty    = ee.attribute(QString("default-y")).toInt();
+                              QString justify = ee.attribute(QString("justify"));
+                              QString halign  = ee.attribute(QString("halign"));
+                              QString valign  = ee.attribute(QString("valign"));
+                              QString crwords = ee.text();
+                              printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
+                                     defaultx,
+                                     defaulty,
+                                     justify.toLatin1().data(),
+                                     halign.toLatin1().data(),
+                                     valign.toLatin1().data(),
+                                     crwords.toLatin1().data());
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
             else
                   domError(e);
             }
@@ -615,8 +635,8 @@ void MusicXml::xmlPartList(QDomElement e)
                         if (ee.tagName() == "group-symbol")
                               symbol = ee.text();
                         else if(ee.tagName() == "group-barline"){
-							   if(ee.text() == "yes")
-								   barlineSpan = true;
+                              if(ee.text() == "yes")
+                                    barlineSpan = true;
                         }else
                               domError(ee);
                         }
