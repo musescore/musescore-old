@@ -76,6 +76,8 @@ Objects
             bool saveLilypond(string path);
             appendPart(string partname)
             appendMeasure(integer n)      append "n" measure to score
+            startUndo()                   start undoable operations
+            endUndo()                     end undoable operations
 
    Cursor
          create:  var a = Cursor(Score score);

@@ -1,3 +1,7 @@
+3.mar (ws)
+      - new plugin demo with qt designer generated ui.
+      - To build a working libqtscript_uitools.so qt script plugin for ubuntu it
+        must be linked against the static lib /usr/lib/libQtUiTools.a.
 1.mar (lvi)
       - set text style on MusicXML import
       (ws)

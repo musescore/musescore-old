@@ -43,17 +43,17 @@ rwtestXml() {
       }
 
 rwtestAllDemos() {
-      rwtest ../demos/promenade.msc
-      rwtest ../demos/adeste.msc
-      rwtest ../demos/inv10.msc
-      rwtest ../demos/inv13.msc
-      rwtest ../demos/inv1.msc
-      rwtest ../demos/inv6.msc
-      rwtest ../demos/praeludium1.msc
-      rwtest ../demos/prelude.msc
-      rwtest ../demos/scales.msc
-      rwtest ../demos/sonata16.msc
-      rwtest ../demos/bach-bc2.msc
+      rwtest ../demos/promenade.mscx
+      rwtest ../demos/adeste.mscx
+      rwtest ../demos/inv10.mscx
+      rwtest ../demos/inv13.mscx
+      rwtest ../demos/inv1.mscx
+      rwtest ../demos/inv6.mscx
+      rwtest ../demos/praeludium1.mscx
+      rwtest ../demos/prelude.mscx
+      rwtest ../demos/scales.mscx
+      rwtest ../demos/sonata16.mscx
+      rwtest ../demos/bach-bc2.mscx
       }
 
 rwtestAllMsc() {
