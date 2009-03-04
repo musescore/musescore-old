@@ -48,7 +48,10 @@ class Xml;
 class MagBox;
 class NewWizard;
 class ExcerptsDialog;
-class QScriptEmbeddedDebugger;
+
+class QScriptEmbeddedDebugger;      // qt4.4
+class QScriptEngineDebugger;        // qt4.5
+
 struct Drumset;
 class TextTools;
 class ScriptEngine;
@@ -221,7 +224,12 @@ class MuseScore : public QMainWindow {
       QList<QString> plugins;
       ScriptEngine* se;
       QString pluginPath;
+
+#if QT_VERSION >= 0x040500
+      QScriptEngineDebugger* debugger;
+#else
       QScriptEmbeddedDebugger* debugger;
+#endif
 
       QTimer* autoSaveTimer;
       QSignalMapper* pluginMapper;

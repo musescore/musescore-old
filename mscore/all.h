@@ -110,5 +110,9 @@
 #include <QtScript/QScriptable>
 #include <QtScript/QScriptClass>
 #include <QtScript/QScriptClassPropertyIterator>
+#if QT_VERSION >= 0x040500
+#include <QtScriptTools/QScriptEngineDebugger>
+#endif
+
 #endif
 

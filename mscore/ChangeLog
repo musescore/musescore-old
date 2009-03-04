@@ -1,3 +1,9 @@
+4.mar (ws)
+      - changes for qt4.5
+      - On linux mscore has now compiled in qt library search path. This ensures mscore
+        loads the same qt libs at runtime as used at compile time. This also enables
+        installation of more than one mscore linked with different qt libs without
+        touching the system libs (or changing LD_LIBRARY_PATH).
 3.mar (ws)
       - new plugin demo with qt designer generated ui.
       - To build a working libqtscript_uitools.so qt script plugin for ubuntu it

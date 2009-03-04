@@ -27,6 +27,15 @@ endif (GCC_VISIBILITY)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
+if (NOT MINGW)
+#
+#     set library search path for runtime linker to load the same
+#     qt libraries as we used at compile time
+#
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
+endif (NOT MINGW)
+
+
 SET_SOURCE_FILES_PROPERTIES(revsion.h PROPERTIES GENERATED TRUE)
 
 add_custom_command(
@@ -252,6 +261,10 @@ else (MINGW)
       osdabzip
       rtf2html
       )
+if (QT45)
+   target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
+endif (QT45)
+
    if (USE_GLOBAL_FLUID)
          target_link_libraries(mscore ${FLUID_LIB} )
    else (USE_GLOBAL_FLUID)
