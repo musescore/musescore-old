@@ -30,7 +30,7 @@ else (STATIC_SCRIPT_BINDINGS)
 endif (STATIC_SCRIPT_BINDINGS)
 
 if (GCC_VISIBILITY)
-      set(CMAKE_CXX_FLAGS, ${CMAKE_CXX_FLAGS} "-fvisibility=hidden -fvisibility-inlines-hidden")
+      set(CMAKE_CXX_FLAGS, "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 endif (GCC_VISIBILITY)
 
 include_directories(${QT_INCLUDES})

@@ -21,21 +21,24 @@
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 
+cmake_policy(SET CMP0003 NEW)
+
 # cmake 2.4.3 does not install all.h and does not link against qtsvg
 
 # for debugging the make system uncomment next line:
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
-set(QT45 FALSE)                           # set to true if you use qt >= 4.5.0
+set(QT45 FALSE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
-set(BUILD_SCRIPT_DEBUG TRUE)
+set(BUILD_SCRIPT_DEBUG TRUE)              # only for qt 4.4, qt 4.5 has buildin debugger
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 
 if (QT45)
       set(STATIC_SCRIPT_BINDINGS TRUE)
+      set(BUILD_SCRIPT_DEBUG FALSE)
 else (QT45)
       set(STATIC_SCRIPT_BINDINGS FALSE)
 endif (QT45)
@@ -52,9 +55,9 @@ if (APPLE)
       set (BUILD_SCRIPT_DEBUG FALSE)
 endif (APPLE)
 
-if (BUILD_SCRIPT_DEBUG)
+if (BUILD_SCRIPT_DEBUG OR QT45)
       set (HAS_SCRIPT_DEBUG TRUE)
-endif (BUILD_SCRIPT_DEBUG)
+endif (BUILD_SCRIPT_DEBUG OR QT45)
 
 if (BUILD_SCRIPT_INTERFACE)
       set (HAS_SCRIPT_INTERFACE TRUE)
@@ -122,7 +125,13 @@ FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript
 FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
 FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
 
+if (QT45)
+      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
+endif (QT45)
+
 _QT4_ADJUST_LIB_VARS(QTSCRIPT)
+# _QT4_ADJUST_LIB_VARS(QTSCRIPT_TOOLS)
 
 #for cmake 2.4
 # QT_MODULE_SETUP(SCRIPT)

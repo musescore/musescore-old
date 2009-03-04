@@ -30,7 +30,7 @@ else (STATIC_SCRIPT_BINDINGS)
 endif (STATIC_SCRIPT_BINDINGS)
 
 if (GCC_VISIBILITY)
-      set(CMAKE_CXX_FLAGS, ${CMAKE_CXX_FLAGS} "-fvisibility=hidden -fvisibility-inlines-hidden")
+      set(CMAKE_CXX_FLAGS, "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 endif (GCC_VISIBILITY)
 
 
@@ -94,8 +94,7 @@ set_target_properties(
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 
-if (STATIC_SCRIPT_BINDINGS)
-else (STATIC_SCRIPT_BINDINGS)
+if (NOT STATIC_SCRIPT_BINDINGS)
    if (MINGW)
       target_link_libraries(
          qtscript_network
@@ -105,5 +104,5 @@ else (STATIC_SCRIPT_BINDINGS)
    else(MINGW)
       install( TARGETS qtscript_network DESTINATION ${QT_PLUGINS_DIR}/script/ )
    endif(MINGW)
-endif (STATIC_SCRIPT_BINDINGS)
+endif (NOT STATIC_SCRIPT_BINDINGS)
 

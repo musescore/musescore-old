@@ -18,7 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-#set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden -DQT_STATICPLUGIN")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
@@ -31,7 +30,7 @@ else (STATIC_SCRIPT_BINDINGS)
 endif (STATIC_SCRIPT_BINDINGS)
 
 if (GCC_VISIBILITY)
-      set(CMAKE_CXX_FLAGS, ${CMAKE_CXX_FLAGS} "-fvisibility=hidden -fvisibility-inlines-hidden")
+      set(CMAKE_CXX_FLAGS, "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 endif (GCC_VISIBILITY)
 
 include_directories(${QT_INCLUDES})
