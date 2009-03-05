@@ -25,6 +25,7 @@
 #include "xml.h"
 #include "score.h"
 #include "voltaproperties.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   Volta
@@ -35,14 +36,18 @@ Volta::Volta(Score* s)
       {
       setLineWidth(Spatium(.18));
       setBeginText("1.", TEXT_STYLE_VOLTA);
-      setBeginTextPlace(PLACE_ABOVE);
-      setContinueTextPlace(PLACE_ABOVE);
+
+//      setBeginTextPlace(PLACE_ABOVE);
+//      setContinueTextPlace(PLACE_ABOVE);
+      setBeginTextPlace(PLACE_BELOW);
+      setContinueTextPlace(PLACE_BELOW);
+
       setOffsetType(OFFSET_SPATIUM);
       setBeginHook(true);
       setBeginHookHeight(Spatium(1.9));
       setYoff(-2.0);
-      setSnapToMeasure(true);
-      setSubtype(VOLTA_CLOSED);
+      setEndHookHeight(Spatium(1.9));
+      setAnchor(ANCHOR_MEASURE);
       }
 
 //---------------------------------------------------------
@@ -81,7 +86,15 @@ void Volta::layout(ScoreLayout* layout)
 void Volta::setText(const QString& s)
       {
       setBeginText(s, TEXT_STYLE_VOLTA);
-      _text = s;
+      }
+
+//---------------------------------------------------------
+//   text
+//---------------------------------------------------------
+
+QString Volta::text() const
+      {
+      return beginText()->getText();
       }
 
 //---------------------------------------------------------
@@ -93,10 +106,9 @@ void Volta::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
-//      setTrack(0);  // set default staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "text")
+            if (tag == "text")            // obsolete
                   setText(e.text());
             else if (tag == "endings") {
                   QString s = e.text();
@@ -110,6 +122,8 @@ void Volta::read(QDomElement e)
             else if (!TextLine::readProperties(e))
                   domError(e);
             }
+//      setSubtype(subtype());
+//      printf("readVolta: subtype %d\n", subtype());
       }
 
 //---------------------------------------------------------
@@ -119,6 +133,8 @@ void Volta::read(QDomElement e)
 void Volta::write(Xml& xml) const
       {
       Volta proto(score());
+      proto.setSubtype(subtype());
+
       xml.stag(name());
       TextLine::writeProperties(xml, &proto);
       QString s;

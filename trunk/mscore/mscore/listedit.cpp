@@ -291,9 +291,25 @@ void PageListEditor::updateList(Score* s)
                   foreach(Element* el1, *slur->slurSegments())
                         new ElementItem(se, el1);
                   }
+            else if (el->type() == VOLTA) {
+                  ElementItem* ei = new ElementItem(li, el);
+                  Volta* volta = static_cast<Volta*>(el);
+                  if (volta->beginText())
+                        new ElementItem(ei, volta->beginText());
+                  if (volta->continueText())
+                        new ElementItem(ei, volta->continueText());
+                  SLine* line = static_cast<SLine*>(el);
+                  foreach(LineSegment* ls, line->lineSegments()) {
+                        ElementItem* sse = new ElementItem(ei, ls);
+                        if (ls->type() == TEXTLINE_SEGMENT) {
+                              if (static_cast<TextLineSegment*>(ls)->text())
+                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
+                              }
+                        }
+                  }
             else if (el->isSLine()) {
                   ElementItem* se = new ElementItem(li, el);
-                  SLine* line = (SLine*)el;
+                  SLine* line = static_cast<SLine*>(el);
                   foreach(LineSegment* ls, line->lineSegments()) {
                         ElementItem* sse = new ElementItem(se, ls);
                         if (ls->type() == TEXTLINE_SEGMENT) {
@@ -1103,7 +1119,6 @@ TextView::TextView()
 
 void TextView::textChanged()
       {
-
       emit scoreChanged();
       }
 
@@ -1114,6 +1129,11 @@ void TextView::textChanged()
 void TextView::setElement(Element* e)
       {
       Text* te = (Text*)e;
+      tb.textStyle->clear();
+      foreach(const TextStyle* s, e->score()->textStyles()) {
+            tb.textStyle->addItem(s->name);
+            }
+
       ShowElementBase::setElement(e);
       tb.text->setDocument(te->doc()->clone());
       tb.xoffset->setValue(te->xoff());
@@ -1121,7 +1141,7 @@ void TextView::setElement(Element* e)
       tb.rxoffset->setValue(te->rxoff());
       tb.ryoffset->setValue(te->ryoff());
       tb.offsetType->setCurrentIndex(int(te->offsetType()));
-      tb.textStyle->setValue(te->textStyle());
+      tb.textStyle->setCurrentIndex(te->textStyle());
       }
 
 //---------------------------------------------------------
@@ -1558,17 +1578,44 @@ void VoltaView::segmentClicked(QTreeWidgetItem* item)
       }
 
 //---------------------------------------------------------
+//   beginTextClicked
+//---------------------------------------------------------
+
+void VoltaView::beginTextClicked()
+      {
+      emit elementChanged(static_cast<Volta*>(element())->beginText());
+      }
+
+//---------------------------------------------------------
+//   continueTextClicked
+//---------------------------------------------------------
+
+void VoltaView::continueTextClicked()
+      {
+      emit elementChanged(static_cast<Volta*>(element())->continueText());
+      }
+
+//---------------------------------------------------------
 //   VoltaView
 //---------------------------------------------------------
 
 VoltaView::VoltaView()
    : ShowElementBase()
       {
+      // SLineBase
       QWidget* w = new QWidget;
       lb.setupUi(w);
       layout->addWidget(w);
+
+      // TextLineBase
+      w = new QWidget;
+      tlb.setupUi(w);
+      layout->addWidget(w);
+
       layout->addStretch(10);
       connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      connect(tlb.beginText, SIGNAL(clicked()), SLOT(beginTextClicked()));
+      connect(tlb.continueText, SIGNAL(clicked()), SLOT(continueTextClicked()));
       }
 
 //---------------------------------------------------------
@@ -1580,7 +1627,11 @@ void VoltaView::setElement(Element* e)
       Volta* volta = (Volta*)e;
       ShowElementBase::setElement(e);
 
+      tlb.lineWidth->setValue(volta->lineWidth().val());
       lb.tick2->setValue(volta->tick2());
+      lb.anchor->setCurrentIndex(int(volta->anchor()));
+      lb.diagonal->setChecked(volta->diagonal());
+
       lb.segments->clear();
       const QList<LineSegment*>& el = volta->lineSegments();
       foreach(const Element* e, el) {
@@ -1589,6 +1640,8 @@ void VoltaView::setElement(Element* e)
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             lb.segments->addTopLevelItem(item);
             }
+      tlb.beginText->setEnabled(volta->beginText());
+      tlb.continueText->setEnabled(volta->continueText());
       }
 
 //---------------------------------------------------------

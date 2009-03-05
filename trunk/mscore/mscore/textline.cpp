@@ -142,6 +142,7 @@ void TextLineSegment::draw(QPainter& p) const
 
 //---------------------------------------------------------
 //   bbox
+//    FIXME
 //---------------------------------------------------------
 
 QRectF TextLineSegment::bbox() const
@@ -151,23 +152,40 @@ QRectF TextLineSegment::bbox() const
 
       if (!_text && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
-      qreal h1 = textLine()->lineWidth().point();
+      double y1 = -textLine()->lineWidth().point();
+      double y2 = -y1;
+
       int sym = textLine()->beginSymbol();
-      if (_text)
-            h1 = _text->height() * .5;
-      else if (sym != -1)
-            h1 = symbols[sym].height() * .5;
+      if (_text) {
+            double h = _text->height();
+            if (textLine()->beginTextPlace() == PLACE_ABOVE)
+                  y1 = -h;
+            else if (textLine()->beginTextPlace() == PLACE_BELOW)
+                  y2 = h;
+            else {
+                  y1 = -h * .5;
+                  y2 = h * .5;
+                  }
+            }
+      else if (sym != -1) {
+            y1 = -symbols[sym].height() * .5;
+            y2 = symbols[sym].height() * .5;
+            }
       if (textLine()->endHook()) {
-            double hh = textLine()->endHookHeight().point();
-            if (hh > h1)
-                  h1 = hh;
+            double h = textLine()->endHookHeight().point();
+            if (h > y2)
+                  y2 = h;
+            else if (h < y1)
+                  y1 = h;
             }
       if (textLine()->beginHook()) {
-            double hh = textLine()->beginHookHeight().point();
-            if (hh > h1)
-                  h1 = hh;
+            double h = textLine()->beginHookHeight().point();
+            if (h > y2)
+                  y2 = h;
+            else if (h < y1)
+                  y1 = h;
             }
-      return QRectF(.0, -h1, pp2.x(), h1 * 2);
+      return QRectF(.0, y1, pp2.x(), y2 - y1);
       }
 
 //---------------------------------------------------------
@@ -223,6 +241,15 @@ void TextLineSegment::clearText()
             delete _text;
             _text = 0;
             }
+      }
+
+//---------------------------------------------------------
+//   textStyleChanged
+//---------------------------------------------------------
+
+void TextLineSegment::textStyleChanged(const QVector<TextStyle*>& style)
+      {
+      _text->textStyleChanged(style);
       }
 
 //---------------------------------------------------------
@@ -742,4 +769,17 @@ void LineProperties::continueTextProperties()
                   }
             }
       }
+
+//---------------------------------------------------------
+//   textStyleChanged
+//---------------------------------------------------------
+
+void TextLine::textStyleChanged(const QVector<TextStyle*>& style)
+      {
+      if (continueText())
+            continueText()->textStyleChanged(style);
+      if (beginText())
+            beginText()->textStyleChanged(style);
+      }
+
 

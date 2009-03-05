@@ -799,15 +799,6 @@ void MuseScore::autoSaveTimerTimeout()
       }
 
 //---------------------------------------------------------
-//   navigatorVisible
-//---------------------------------------------------------
-
-void MuseScore::navigatorVisible(bool flag)
-      {
-      navigatorId->setChecked(flag);
-      }
-
-//---------------------------------------------------------
 //   helpBrowser
 //    show local help
 //---------------------------------------------------------

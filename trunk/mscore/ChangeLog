@@ -1,3 +1,8 @@
+5.mar (ws)
+      - Volta open ending got lost when dragged from palette
+      - Volta text style changes now work for existing voltas
+      - Volta text changed size when dragged from palette to score
+      - fix regression: snap volta line to measure
 4.mar (ws)
       - changes for qt4.5
       - On linux mscore has now compiled in qt library search path. This ensures mscore

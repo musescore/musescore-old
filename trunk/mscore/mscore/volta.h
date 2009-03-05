@@ -47,7 +47,6 @@ class VoltaSegment : public TextLineSegment {
 
 class Volta : public TextLine {
       QList<int> _endings;
-      QString _text;
 
    public:
       enum { VOLTA_OPEN, VOLTA_CLOSED };
@@ -65,7 +64,7 @@ class Volta : public TextLine {
       QList<int>& endings()                { return _endings; }
       void setEndings(const QList<int>& l) { _endings = l;    }
       void setText(const QString& s);
-      QString text() const                 { return _text;    }
+      QString text() const;
       virtual void setSubtype(int val);
       };
 
