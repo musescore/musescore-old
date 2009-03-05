@@ -55,6 +55,7 @@ class TextLineSegment : public LineSegment {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+      virtual void textStyleChanged(const QVector<TextStyle*>&);
       };
 
 //---------------------------------------------------------
@@ -136,6 +137,7 @@ class TextLine : public SLine {
       void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
       void setMxmlOff2(int v)                 { _mxmlOff2 = v;                }
       int mxmlOff2() const                    { return _mxmlOff2;             }
+      virtual void textStyleChanged(const QVector<TextStyle*>&);
       };
 
 //---------------------------------------------------------

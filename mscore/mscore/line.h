@@ -51,7 +51,6 @@ class LineSegment : public Element {
       virtual bool edit(Viewer*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
-      virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;
       virtual void layout(ScoreLayout*) {}
 
    public:
@@ -70,6 +69,7 @@ class LineSegment : public Element {
       LineSegmentType segmentType() const { return _segmentType;       }
       void setSystem(System* s)           { _system = s;               }
       virtual void toDefault();
+
       friend class SLine;
       };
 
@@ -84,7 +84,7 @@ class SLine : public Element {
       QList<LineSegment*> segments;
       int _tick2;
       bool _diagonal;
-      bool _snapToMeasure;
+      Anchor _anchor;
 
    public:
       SLine(Score* s);
@@ -106,9 +106,10 @@ class SLine : public Element {
       virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      bool diagonal() const         { return _diagonal;   }
-      void setDiagonal(bool v)      { _diagonal = v;      }
-      void setSnapToMeasure(bool v) { _snapToMeasure = v; }
+      bool diagonal() const         { return _diagonal; }
+      void setDiagonal(bool v)      { _diagonal = v;    }
+      Anchor anchor() const         { return _anchor;   }
+      void setAnchor(Anchor a)      { _anchor = a;      }
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

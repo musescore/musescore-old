@@ -375,13 +375,13 @@ void setDefaultStyle()
 //   font
 //---------------------------------------------------------
 
-QFont TextStyle::font() const
+QFont TextStyle::font(double _spatium) const
       {
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);
       if (sizeIsSpatiumDependent)
-            f.setPointSizeF(size * ::_spatium / (SPATIUM20 * DPI));
+            f.setPointSizeF(size * _spatium / (SPATIUM20 * DPI));
       else
             f.setPointSizeF(size);
       f.setUnderline(underline);

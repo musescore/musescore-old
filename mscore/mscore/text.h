@@ -88,7 +88,7 @@ class TextBase {
       void setFrameRound(int v)             { _frameRound = v;      }
       void setCircle(bool v)                { _circle = v;          }
 
-      void writeProperties(Xml& xml, TextStyle* ts, bool writeText) const;
+      void writeProperties(Xml&, TextStyle*, double spatium, bool writeText) const;
       bool readProperties(QDomElement e);
       QFont defaultFont() const;
       void setDefaultFont(QFont f);
@@ -102,7 +102,7 @@ class TextBase {
       void setHtml(const QString& s);
       bool isEmpty() const                  { return _doc->isEmpty(); }
       void setModified(bool v)              { _doc->setModified(v);   }
-      bool isSimpleText(TextStyle*) const;
+      bool isSimpleText(TextStyle*, double) const;
       };
 
 //---------------------------------------------------------

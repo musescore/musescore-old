@@ -2398,7 +2398,8 @@ void Score::cmdPaste()
             }
       else if ((sel->state() == SEL_STAFF || sel->state() == SEL_SINGLE)
          && ms->hasFormat(mimeStaffListFormat)) {
-            int tick, staffIdx;
+            int tick = -1;
+            int staffIdx = -1;
             if (sel->state() == SEL_STAFF) {
                   tick = sel->startSegment()->tick();
                   staffIdx = sel->staffStart;

@@ -242,7 +242,6 @@ class MuseScore : public QMainWindow {
       virtual void dropEvent(QDropEvent*);
 
       void playVisible(bool flag);
-      void navigatorVisible(bool flag);
       void launchBrowser(const QString whereTo);
 
       void addScore(const QString& name);

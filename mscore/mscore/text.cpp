@@ -90,10 +90,12 @@ TextBase::TextBase(const TextBase& t)
 //    can be saved as simple text string.
 //---------------------------------------------------------
 
-bool TextBase::isSimpleText(TextStyle* style) const
+bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       {
-      if (_doc->blockCount() > 1)
+      if (_doc->blockCount() > 1) {
+            // printf("blocks > 1: %s\n", qPrintable(getText()));
             return false;
+            }
       int fragments = 0;
       QTextBlock b = _doc->begin();
       QTextCharFormat cf;
@@ -105,14 +107,17 @@ bool TextBase::isSimpleText(TextStyle* style) const
                   }
             cf = i.fragment().charFormat();
             }
-      if (!style)
+      if (!style) {
+            // printf("no style: %s\n", qPrintable(getText()));
             return false;
+            }
       //
       // the style font has another size than the actual
       // font used in cf (due to rounding errors?), but
       // QFontInfo gives the right size
       //
-      QFontInfo fi(style->font());
+
+      QFontInfo fi(style->font(spatium));
       QFont f(cf.font());
       if (fi.family() == f.family()
          && fi.pointSize() == f.pointSize()
@@ -120,6 +125,9 @@ bool TextBase::isSimpleText(TextStyle* style) const
          && style->font().underline() == f.underline()
          && fi.italic() == f.italic())
             return true;
+//      printf("bad font: %s %f\n", qPrintable(getText()), spatium);
+//      printf("%s\n", qPrintable(style->font(spatium).toString()));
+//      printf("%s\n", qPrintable(f.toString()));
       return false;
       }
 
@@ -209,7 +217,7 @@ QString TextBase::getHtml() const
 //   writeProperties
 //---------------------------------------------------------
 
-void TextBase::writeProperties(Xml& xml, TextStyle* ts, bool writeText) const
+void TextBase::writeProperties(Xml& xml, TextStyle* ts, double spatium, bool writeText) const
       {
       // write all properties which are different from style
 
@@ -226,7 +234,7 @@ void TextBase::writeProperties(Xml& xml, TextStyle* ts, bool writeText) const
                   xml.tag("circle", _circle);
             }
       if (writeText) {
-            if (isSimpleText(ts))
+            if (isSimpleText(ts, spatium))
                   xml.tag("text", _doc->toPlainText());
             else {
                   xml.stag("html-data");
@@ -769,7 +777,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
       if (subtype() == TEXT_MEASURE_NUMBER)
             return;
-      textBase()->writeProperties(xml, st, writeText);
+      textBase()->writeProperties(xml, st, score()->layout()->spatium(), writeText);
       }
 
 //---------------------------------------------------------
@@ -811,7 +819,7 @@ void TextB::textStyleChanged(const QVector<TextStyle*>& styles)
             setCircle(ns->circle);
       if (systemFlag() == os->systemFlag)
             setSystemFlag(ns->systemFlag);
-      if (textBase()->isSimpleText(os))
+      if (textBase()->isSimpleText(os, score()->layout()->spatium()))
             setDefaultFont(ns->font());
       }
 

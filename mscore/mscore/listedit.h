@@ -36,6 +36,7 @@
 #include "ui_slurtie.h"
 #include "ui_slur.h"
 #include "ui_line.h"
+#include "ui_textline.h"
 #include "ui_linesegment.h"
 #include "ui_lyrics.h"
 
@@ -462,10 +463,13 @@ class TieView : public ShowElementBase {
 class VoltaView : public ShowElementBase {
       Q_OBJECT;
 
+      Ui::TextLineBase tlb;
       Ui::SLineBase lb;
 
    private slots:
       void segmentClicked(QTreeWidgetItem* item);
+      void beginTextClicked();
+      void continueTextClicked();
 
    public:
       VoltaView();

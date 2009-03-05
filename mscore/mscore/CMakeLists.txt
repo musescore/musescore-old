@@ -87,7 +87,7 @@ QT4_WRAP_UI (ui_headers
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
-      dynamicproperties.ui
+      dynamicproperties.ui textline.ui
       )
 
 QT4_WRAP_CPP (mocs

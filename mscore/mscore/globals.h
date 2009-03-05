@@ -58,6 +58,8 @@ extern qreal PDPI;      // physical drawing resolution
 extern qreal DPI;       // logical drawing resolution
 extern qreal DPMM;      // logical dots/mm
 
+enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
+
 // used for stem and slur:
 enum Direction { AUTO, UP, DOWN };
 
