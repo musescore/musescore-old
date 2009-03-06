@@ -1,4 +1,5 @@
 6.mar (ws)
+      - add slur to line palette
       - fixed crash when loading scores with unusual note heads. Changed back
         Note->_head from "char" type to "int"
 5.mar (ws)

@@ -68,6 +68,7 @@
 #include "harmony.h"
 #include "lyrics.h"
 #include "rest.h"
+#include "slur.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1186,6 +1187,7 @@ Element* Element::create(ElementType type, Score* score)
             case HARMONY:           return new Harmony(score);
             case LYRICS:            return new Lyrics(score);
             case STEM:              return new Stem(score);
+            case SLUR:              return new Slur(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1213,7 +1215,6 @@ Element* Element::create(ElementType type, Score* score)
             case SEGMENT:
             case SYSTEM:
             case COMPOUND:
-            case SLUR:
             case ELEMENT:
             case ELEMENT_LIST:
             case STAFF_LIST:

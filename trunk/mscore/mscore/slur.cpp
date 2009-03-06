@@ -254,8 +254,7 @@ void SlurSegment::editDrag(int curGrip, const QPointF& delta)
 
 QRectF SlurSegment::bbox() const
       {
-      QRectF r(path.boundingRect());
-      return r;
+      return path.boundingRect();
       }
 
 //---------------------------------------------------------
@@ -403,6 +402,7 @@ SlurTie::SlurTie(Score* s)
       up             = true;
       _startElement  = 0;
       _endElement    = 0;
+      _len           = 0;
       }
 
 SlurTie::SlurTie(const SlurTie& t)
@@ -412,6 +412,8 @@ SlurTie::SlurTie(const SlurTie& t)
       _slurDirection = t._slurDirection;
       _startElement  = t._startElement;
       _endElement    = t._endElement;
+      _len           = t._len;
+
       delSegments    = t.delSegments;
 
       //
@@ -801,6 +803,27 @@ static bool isDirectionMixture (Chord* c1, Chord* c2)
 
 void Slur::layout(ScoreLayout* layout)
       {
+      if (!parent()) {
+            //
+            // when used in a palette, slur has no parent and
+            // tick and tick2 has no meaning so no layout is
+            // possible and needed
+            //
+            setLen(_spatium * 7);
+            SlurSegment* s;
+            if (segments.isEmpty()) {
+                  s = new SlurSegment(score());
+                  s->setTrack(track());
+                  add(s);
+                  }
+            else {
+                  s = segments.front();
+                  }
+            s->setLineSegmentType(SEGMENT_SINGLE);
+            qreal bow = up ? 1.5 * -_spatium : 1.5 * _spatium;
+            s->layout(layout, QPointF(0, 0), QPointF(_len, 0), bow);
+            return;
+            }
       double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
@@ -956,10 +979,10 @@ double SlurTie::firstNoteRestSegmentX(System* system)
 
 QRectF Slur::bbox() const
       {
-      QRectF r;
-      foreach(SlurSegment* ss, segments)
-            r |= ss->abbox().translated(canvasPos());
-      return r;
+      if (segments.isEmpty())
+            return QRectF();
+      else
+            return segments[0]->bbox();
       }
 
 //---------------------------------------------------------
