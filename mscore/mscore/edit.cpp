@@ -495,6 +495,15 @@ void Score::cmdAddSlur()
       Note* note = getSelectedNote();
       if (!note)
             return;
+      cmdAddSlur(note);
+      }
+
+//---------------------------------------------------------
+//   addSlur
+//---------------------------------------------------------
+
+void Score::cmdAddSlur(Note* note)
+      {
       ChordRest* cr1 = note->chord();
       ChordRest* cr2 = nextChordRest(cr1);
 

@@ -49,7 +49,6 @@ class SlurSegment : public Element {
       LineSegmentType _segmentType;
       System* _system;
 
-      virtual QRectF bbox() const;
       void updatePath();
 
    public:
@@ -58,6 +57,8 @@ class SlurSegment : public Element {
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const   { return SLUR_SEGMENT; }
       virtual bool isMovable() const     { return true; }
+
+      virtual QRectF bbox() const;
 
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
@@ -93,6 +94,7 @@ class SlurTie : public Element {
       Element* _endElement;
 
    protected:
+      double _len;
       bool up;
       QList<SlurSegment*> segments;
       QQueue<SlurSegment*> delSegments;   // "deleted" segments
@@ -131,6 +133,7 @@ class SlurTie : public Element {
       Element* startElement() const       { return _startElement; }
       Element* endElement() const         { return _endElement;   }
       virtual void toDefault();
+      void setLen(double v)               { _len = v; }
       };
 
 //---------------------------------------------------------

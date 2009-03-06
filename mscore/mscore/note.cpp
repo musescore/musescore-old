@@ -780,6 +780,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || (type == CLEF)
          || (type == BAR_LINE)
          || (type == GLISSANDO)
+         || (type == SLUR)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -821,6 +822,12 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
+
+            case SLUR:
+                  delete e;
+                  score()->cmdAddSlur(this);
+                  return 0;
+
             case HARMONY:
                   e->setParent(chord()->measure());
                   e->setTick(chord()->tick());

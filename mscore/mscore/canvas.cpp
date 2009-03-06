@@ -1266,9 +1266,19 @@ void Canvas::paintEvent(QPaintEvent* ev)
             dragElement->collectElements(el);
             p.setPen(preferences.defaultColor);
             foreach(const Element* e, el) {
+                  p.save();
                   p.translate(e->canvasPos());
                   e->draw(p);
-                  p.translate(-e->canvasPos());
+                  p.restore();
+#if 0
+                  if (debugMode) {
+                        //
+                        //  draw bounding box rectangle
+                        //
+                        p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+                        p.drawRect(e->abbox());
+                        }
+#endif
                   }
             }
       }
@@ -1568,6 +1578,10 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
             Element* el = 0;
             switch(type) {
+                  case SLUR:
+                        el = Element::create(type, score());
+                        // static_cast<SLine*>(el)->setLen(_spatium * 7);
+                        break;
                   case VOLTA:
                   case OTTAVA:
                   case TRILL:
@@ -1749,6 +1763,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case ICON:
                   case CHORD:
                   case SPACER:
+                  case SLUR:
                         {
                         Element* el = elementAt(pos);
                         if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype()))
@@ -1760,6 +1775,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                         break;
                   }
             score()->addRefresh(dragElement->abbox());
+            QRectF r(dragElement->abbox());
             dragElement->setPos(pos - dragOffset);
             score()->addRefresh(dragElement->abbox());
             _score->end();
@@ -1895,6 +1911,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case NOTE:
                   case CHORD:
                   case SPACER:
+                  case SLUR:
                         {
                         Element* el = elementAt(pos);
                         if (!el) {

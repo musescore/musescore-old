@@ -234,6 +234,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                         }
                   }
                   break;
+
             case PEDAL:
             case OTTAVA:
             case TRILL:
@@ -257,6 +258,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   ls->setUserOff(uo / _spatium);
                   }
                   break;
+
             case DYNAMIC:
                   {
                   Dynamic* dyn = static_cast<Dynamic*>(e);
@@ -271,7 +273,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   }
                   break;
             default:
-                  break;
+                  return;
             }
       cmdAdd(e);
       select(e, SELECT_SINGLE, 0);
