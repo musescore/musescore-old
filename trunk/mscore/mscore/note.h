@@ -87,8 +87,8 @@ class Note : public Element {
       Tie* _tieBack;
 
       int _lineOffset;        ///< Used during mouse dragging.
+      int  _head;              ///< note head symbol number
 
-      char _head;              ///< note head symbol number
       char _headGroup;
       bool _mirror;           ///< True if note is mirrored at stem.
       bool _hidden;           ///< markes this note as the hidden one if there are

@@ -31,7 +31,7 @@ cmake_policy(SET CMP0003 NEW)
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
-set(QT45 FALSE)                            # set to true if you use qt >= 4.5.0
+set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(BUILD_SCRIPT_DEBUG TRUE)              # only for qt 4.4, qt 4.5 has buildin debugger
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
