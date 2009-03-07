@@ -627,13 +627,11 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     }
                               if (el->type() == CLEF) {
                                     Clef* clef = static_cast<Clef*>(el);
-                                    if (!isFirstMeasure || (seg != m->first()))
-                                          clef->setSmall(true);
-                                    else
-                                          clef->setSmall(false);
-                                    double staffMag = score()->staff(staffIdx)->mag();
-                                    clef->setMag(staffMag);
+                                    clef->setSmall(!isFirstMeasure || (seg != m->first()));
+                                    // clef->setMag(staffMag);
                                     }
+                              double staffMag = score()->staff(staffIdx)->mag();
+                              el->setMag(staffMag);
                               }
                         }
 
