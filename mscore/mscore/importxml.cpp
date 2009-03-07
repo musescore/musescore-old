@@ -489,13 +489,17 @@ void MusicXml::scorePartwise(QDomElement ee)
                               QString halign  = ee.attribute(QString("halign"));
                               QString valign  = ee.attribute(QString("valign"));
                               QString crwords = ee.text();
+                              /*
                               printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
                                      defaultx,
                                      defaulty,
-                                     justify.toLatin1().data(),
-                                     halign.toLatin1().data(),
-                                     valign.toLatin1().data(),
-                                     crwords.toLatin1().data());
+                                     justify.toUtf8().data(),
+                                     halign.toUtf8().data(),
+                                     valign.toUtf8().data(),
+                                     crwords.toUtf8().data());
+                              */
+                              CreditWords* cw = new CreditWords(defaultx, defaulty, justify, halign, valign, crwords);
+                              credits.append(cw);
                               }
                         else
                               domError(ee);
@@ -503,6 +507,18 @@ void MusicXml::scorePartwise(QDomElement ee)
                   }
             else
                   domError(e);
+            }
+
+      // dump the credits
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
+                  w->defaultX,
+                  w->defaultY,
+                  w->justify.toUtf8().data(),
+                  w->hAlign.toUtf8().data(),
+                  w->vAlign.toUtf8().data(),
+                  w->words.toUtf8().data());
             }
 
       // add bracket where required

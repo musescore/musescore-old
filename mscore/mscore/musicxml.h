@@ -71,6 +71,32 @@ const int MAX_SLURS       = 8;
 const int MAX_BRACKETS    = 8;
 
 //---------------------------------------------------------
+//   CreditWords
+//    a single parsed MusicXML credit-words element
+//---------------------------------------------------------
+
+struct CreditWords {
+      int defaultX;
+      int defaultY;
+      QString justify;
+      QString hAlign;
+      QString vAlign;
+      QString words;
+      CreditWords(int a, int b, QString c, QString d, QString e, QString f) {
+            defaultX = a;
+            defaultY = b;
+            justify  = c;
+            hAlign   = d;
+            vAlign   = e;
+            words    = f;
+            }
+      };
+
+typedef  QList<CreditWords*> CreditWordsList;
+typedef  CreditWordsList::iterator iCreditWords;
+typedef  CreditWordsList::const_iterator ciCreditWords;
+
+//---------------------------------------------------------
 //   MusicXml
 //---------------------------------------------------------
 
@@ -105,6 +131,7 @@ class MusicXml {
       QString composer;
       QString poet;
       QString translator;
+      CreditWordsList credits;
 
       std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
