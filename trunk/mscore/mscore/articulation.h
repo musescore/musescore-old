@@ -57,7 +57,7 @@ enum ArticulationIdx {
       DownPrallSym,
       UpMordentSym,
       DownMordentSym,
-      NOTE_ATTRIBUTES
+      ARTICULATIONS
       };
 
 //---------------------------------------------------------
@@ -137,7 +137,6 @@ class ArticulationProperties : public QDialog, public Ui::ArticulationProperties
 
 typedef QList<Articulation*>::iterator iArticulation;
 typedef QList<Articulation*>::const_iterator ciArticulation;
-
 
 #endif
 

@@ -402,8 +402,12 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (!replace && cr && (cr->tickLen() == tl) && (cr->type() == CHORD) && !_is.rest) {
             const NoteList* nl = static_cast<Chord*>(cr)->noteList();
             Note* note = nl->find(pitch);
-            if (note)
+            if (note) {
+                  // remove note from chord
+                  if (nl->size() > 1)
+                        undoRemoveElement(note);
                   return;
+                  }
             addToChord = true;
             }
       if (addToChord) {
@@ -431,7 +435,6 @@ void Score::putNote(const QPointF& pos, bool replace)
             }
       setInputTrack(staffIdx * VOICES + voice);
       _is.pitch = pitch;
-//      _is.setPos(tick + len);
       emit posChanged(_is.pos());
       }
 

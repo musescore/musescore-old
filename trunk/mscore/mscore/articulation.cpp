@@ -25,7 +25,7 @@
 //   Articulation::articulationList
 //---------------------------------------------------------
 
-ArticulationInfo Articulation::articulationList[] = {
+ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
       { ufermataSym,       QString("ufermata"),        A_TOP_STAFF    },
       { dfermataSym,       QString("dfermata"),        A_BOTTOM_STAFF },
       { thumbSym,          QString("thumb"),           A_CHORD        },
@@ -231,7 +231,7 @@ QString Articulation::idx2name(int idx)
 
 int Articulation::name2idx(const QString& s)
       {
-      for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
+      for (int i = 0; i < ARTICULATIONS; ++i) {
             if (articulationList[i].name == s) {
                   return i;
                   }
