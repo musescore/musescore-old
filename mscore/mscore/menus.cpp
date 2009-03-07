@@ -374,7 +374,7 @@ void MuseScore::showPalette(bool visible)
             //    Attributes, Ornaments
             //-----------------------------------
 
-            unsigned nn = NOTE_ATTRIBUTES;
+            unsigned nn = ARTICULATIONS;
             sp = new Palette;
             sp->setName(tr("Articulations, Ornaments"));
             sp->setGrid(42, 25);
@@ -943,7 +943,7 @@ void MuseScore::noteAttributesMenu()
             noteAttributesPalette = new PaletteScrollArea(sp);
             noteAttributesPalette->setRestrictHeight(false);
             noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
-            unsigned nn = NOTE_ATTRIBUTES;
+            unsigned nn = ARTICULATIONS;
             sp->setGrid(42, 30);
 
             for (unsigned i = 0; i < nn; ++i) {

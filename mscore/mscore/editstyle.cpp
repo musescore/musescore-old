@@ -22,6 +22,7 @@
 #include "canvas.h"
 #include "style.h"
 #include "editstyle.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   EditStyle
@@ -52,6 +53,24 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       pageList->setCurrentRow(0);
       connect(buttonOk, SIGNAL(clicked()), this, SLOT(ok()));
       connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
+
+      articulationTable->verticalHeader()->setVisible(false);
+      QStringList headers;
+      headers << tr("Articulation") << tr("Anchor");
+      articulationTable->setHorizontalHeaderLabels(headers);
+      QStringList ci;
+      ci << tr("TopStaff") << tr("BottomStaff") << tr("Chord") << tr("TopChord")
+         << tr("BottomChord");
+
+      for (int i = 0; i < ARTICULATIONS; ++i) {
+            ArticulationInfo* ai = &Articulation::articulationList[i];
+            QTableWidgetItem* item = new QTableWidgetItem(ai->name);
+            articulationTable->setItem(i, 0, item);
+            QComboBox* cb = new QComboBox();
+            cb->addItems(ci);
+            cb->setCurrentIndex(int(ai->anchor));
+            articulationTable->setCellWidget(i, 1, cb);
+            }
       setValues();
       }
 

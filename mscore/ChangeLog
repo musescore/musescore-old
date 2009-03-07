@@ -1,4 +1,8 @@
+7.mar (ws)
+      - retain pitch class (pitch spelling) when changing pitch octave up/down
 6.mar (ws)
+      - note entry with mouse: trying to enter a note at a pitch position which is
+        already occupied by a note removes this note.
       - add slur to line palette
       - fixed crash when loading scores with unusual note heads. Changed back
         Note->_head from "char" type to "int"

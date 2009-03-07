@@ -1371,16 +1371,25 @@ void Score::upDown(bool up, bool octave)
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
             int pitch   = oNote->pitch();
-            if (octave)
+            int newTpc;
+            if (octave)  {
                   newPitch = pitch + (up ? 12 : -12);
-            else
+                  newTpc   = oNote->tpc();
+                  }
+            else {
                   newPitch = up ? pitch+1 : pitch-1;
-            if (newPitch < 0)
+                  newTpc   = pitch2tpc(newPitch);
+                  }
+            if (newPitch < 0) {
                   newPitch = 0;
-            if (newPitch > 127)
+                  newTpc   = pitch2tpc(newPitch);
+                  }
+            else if (newPitch > 127) {
                   newPitch = 127;
+                  newTpc   = pitch2tpc(newPitch);
+                  }
 
-            undoChangePitch(oNote, newPitch, pitch2tpc(newPitch), 0);
+            undoChangePitch(oNote, newPitch, newTpc, 0);
 
             // play new note with velocity 80 for 0.3 sec:
             if (playNotes)

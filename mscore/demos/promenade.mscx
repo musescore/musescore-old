@@ -176,7 +176,6 @@
       <Dynamic>
         <velocity>90</velocity>
         <subtype>f</subtype>
-        <selected>1</selected>
         <style>12</style>
         </Dynamic>
       <Tempo>
@@ -606,15 +605,6 @@
           <track>1</track>
           <pitch>70</pitch>
           <tpc>12</tpc>
-          </Note>
-        </Chord>
-      <Chord>
-        <track>1</track>
-        <ticklen>480</ticklen>
-        <Note>
-          <track>1</track>
-          <pitch>65</pitch>
-          <tpc>13</tpc>
           </Note>
         </Chord>
       </Measure>
@@ -2668,5 +2658,5 @@
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>1</cursorTrack>
   </museScore>
