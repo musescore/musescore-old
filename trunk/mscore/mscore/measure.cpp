@@ -1085,8 +1085,10 @@ void Measure::add(Element* el)
                   if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER) {
                         _noText = static_cast<Text*>(el);
                         }
-                  else
+                  else {
+                        el->setMag(el->staff()->mag());
                         _el.append(el);
+                        }
                   break;
 
             default:

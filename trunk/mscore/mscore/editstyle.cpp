@@ -23,6 +23,8 @@
 #include "style.h"
 #include "editstyle.h"
 #include "articulation.h"
+#include "sym.h"
+#include "icons.h"
 
 //---------------------------------------------------------
 //   EditStyle
@@ -55,8 +57,9 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
 
       articulationTable->verticalHeader()->setVisible(false);
+      articulationTable->setSelectionBehavior(QAbstractItemView::SelectRows);
       QStringList headers;
-      headers << tr("Articulation") << tr("Anchor");
+      headers << tr("Symbol") << tr("Anchor");
       articulationTable->setHorizontalHeaderLabels(headers);
       QStringList ci;
       ci << tr("TopStaff") << tr("BottomStaff") << tr("Chord") << tr("TopChord")
@@ -64,8 +67,10 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
-            QTableWidgetItem* item = new QTableWidgetItem(ai->name);
+
+            QTableWidgetItem* item = new QTableWidgetItem(symIcon(symbols[ai->sym], 50, 25, 25), ai->name);
             articulationTable->setItem(i, 0, item);
+
             QComboBox* cb = new QComboBox();
             cb->addItems(ci);
             cb->setCurrentIndex(int(ai->anchor));

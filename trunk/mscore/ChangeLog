@@ -1,4 +1,5 @@
 7.mar (ws)
+      - fixes for small staves: keysig and dynamics are now also small
       - retain pitch class (pitch spelling) when changing pitch octave up/down
 6.mar (ws)
       - note entry with mouse: trying to enter a note at a pitch position which is

@@ -118,10 +118,11 @@ void Dynamic::setSubtype(int idx)
             QTextCharFormat tf = cursor.charFormat();
             TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
             double size = ts->size;
-            double mag = ::_spatium / (SPATIUM20 * DPI);
             double m = size * DPI / PPI;
             if (ts->sizeIsSpatiumDependent)
-                  m *= mag;
+                  m *= (::_spatium / (SPATIUM20 * DPI));
+            m *= mag();
+
             QFont font("MScore1");
             font.setPixelSize(lrint(m));
             tf.setFont(font);
