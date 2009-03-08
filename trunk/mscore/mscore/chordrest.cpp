@@ -350,7 +350,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
             Articulation* a = *ia;
             qreal y = 0;
-            ArticulationAnchor aa = Articulation::articulationList[a->subtype()].anchor;
+            ArticulationAnchor aa = a->anchor();
             if (aa == A_CHORD)
                   aa = isUp() ? A_BOTTOM_CHORD : A_TOP_CHORD;
             if (aa == A_TOP_CHORD) {
@@ -400,7 +400,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
             Articulation* a = *ia;
             qreal y = 0;
-            ArticulationAnchor aa = Articulation::articulationList[a->subtype()].anchor;
+            ArticulationAnchor aa = a->anchor();
             if (aa == A_TOP_STAFF) {
                   y = staffTopY - dyTop;
                   a->setPos(x, y);
