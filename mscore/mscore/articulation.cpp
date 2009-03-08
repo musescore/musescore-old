@@ -20,40 +20,41 @@
 
 #include "articulation.h"
 #include "sym.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
 //---------------------------------------------------------
 
 ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
-      { ufermataSym,       QString("ufermata"),        A_TOP_STAFF    },
-      { dfermataSym,       QString("dfermata"),        A_BOTTOM_STAFF },
-      { thumbSym,          QString("thumb"),           A_CHORD        },
-      { sforzatoaccentSym, QString("sforzato"),        A_CHORD        },
-      { esprSym,           QString("espressivo"),      A_CHORD        },
-      { staccatoSym,       QString("staccato"),        A_CHORD        },
-      { ustaccatissimoSym, QString("ustaccatissimo"),  A_CHORD        },
-      { dstaccatissimoSym, QString("dstaccatissimo"),  A_CHORD        },
-      { tenutoSym,         QString("tenuto"),          A_CHORD        },
-      { uportatoSym,       QString("uportato"),        A_CHORD        },
-      { dportatoSym,       QString("dportato"),        A_CHORD        },
-      { umarcatoSym,       QString("umarcato"),        A_CHORD        },
-      { dmarcatoSym,       QString("dmarcato"),        A_CHORD        },
-      { ouvertSym,         QString("ouvert"),          A_CHORD        },
-      { plusstopSym,       QString("plusstop"),        A_CHORD        },
-      { upbowSym,          QString("upbow"),           A_TOP_STAFF    },
-      { downbowSym,        QString("downbow"),         A_TOP_STAFF    },
-      { reverseturnSym,    QString("reverseturn"),     A_TOP_STAFF    },
-      { turnSym,           QString("turn"),            A_TOP_STAFF    },
-      { trillSym,          QString("trill"),           A_TOP_STAFF    },
-      { prallSym,          QString("prall"),           A_TOP_STAFF    },
-      { mordentSym,        QString("mordent"),         A_TOP_STAFF    },
-      { prallprallSym,     QString("prallprall"),      A_TOP_STAFF    },
-      { prallmordentSym,   QString("prallmordent"),    A_TOP_STAFF    },
-      { upprallSym,        QString("upprall"),         A_TOP_STAFF    },
-	{ downprallSym,      QString("downprall"),       A_TOP_STAFF    },
-	{ upmordentSym,      QString("upmordent"),       A_TOP_STAFF    },
-	{ downmordentSym,    QString("downmordent"),     A_TOP_STAFF    },
+      { ufermataSym,       QString("ufermata")        },
+      { dfermataSym,       QString("dfermata")        },
+      { thumbSym,          QString("thumb")           },
+      { sforzatoaccentSym, QString("sforzato")        },
+      { esprSym,           QString("espressivo")      },
+      { staccatoSym,       QString("staccato")        },
+      { ustaccatissimoSym, QString("ustaccatissimo")  },
+      { dstaccatissimoSym, QString("dstaccatissimo")  },
+      { tenutoSym,         QString("tenuto")          },
+      { uportatoSym,       QString("uportato")        },
+      { dportatoSym,       QString("dportato")        },
+      { umarcatoSym,       QString("umarcato")        },
+      { dmarcatoSym,       QString("dmarcato")        },
+      { ouvertSym,         QString("ouvert")          },
+      { plusstopSym,       QString("plusstop")        },
+      { upbowSym,          QString("upbow")           },
+      { downbowSym,        QString("downbow")         },
+      { reverseturnSym,    QString("reverseturn")     },
+      { turnSym,           QString("turn")            },
+      { trillSym,          QString("trill")           },
+      { prallSym,          QString("prall")           },
+      { mordentSym,        QString("mordent")         },
+      { prallprallSym,     QString("prallprall")      },
+      { prallmordentSym,   QString("prallmordent")    },
+      { upprallSym,        QString("upprall")         },
+	{ downprallSym,      QString("downprall")       },
+	{ upmordentSym,      QString("upmordent")       },
+	{ downmordentSym,    QString("downmordent")     },
 	};
 
 //---------------------------------------------------------
@@ -237,6 +238,15 @@ int Articulation::name2idx(const QString& s)
                   }
             }
       return -1;
+      }
+
+//---------------------------------------------------------
+//   anchor
+//---------------------------------------------------------
+
+ArticulationAnchor Articulation::anchor() const
+      {
+      return ArticulationAnchor(score()->styleI(STYLE_TYPE(ST_UfermataAnchor + subtype())));
       }
 
 

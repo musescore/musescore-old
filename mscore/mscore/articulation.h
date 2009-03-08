@@ -76,8 +76,6 @@ enum ArticulationAnchor {
 struct ArticulationInfo {
       int sym;
       QString name;
-      ArticulationAnchor anchor;
-
       static int name2index();
       };
 
@@ -107,6 +105,7 @@ class Articulation : public Symbol {
 
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
+      ArticulationAnchor anchor() const;
 
       QString channelName() const           { return _channelName; }
       void setChannelName(const QString& s) { _channelName = s;    }

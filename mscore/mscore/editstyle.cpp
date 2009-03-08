@@ -64,7 +64,6 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       QStringList ci;
       ci << tr("TopStaff") << tr("BottomStaff") << tr("Chord") << tr("TopChord")
          << tr("BottomChord");
-
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
@@ -73,7 +72,6 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
 
             QComboBox* cb = new QComboBox();
             cb->addItems(ci);
-            cb->setCurrentIndex(int(ai->anchor));
             articulationTable->setCellWidget(i, 1, cb);
             }
       setValues();
@@ -176,6 +174,11 @@ void EditStyle::getValues()
       lstyle[ST_stemDir2]                = StyleVal(voice2Up->isChecked() ? UP : DOWN);
       lstyle[ST_stemDir3]                = StyleVal(voice3Up->isChecked() ? UP : DOWN);
       lstyle[ST_stemDir4]                = StyleVal(voice4Up->isChecked() ? UP : DOWN);
+
+      for (int i = 0; i < ARTICULATIONS; ++i) {
+            QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
+            lstyle[STYLE_TYPE(ST_UfermataAnchor + i)] = StyleVal(cb->currentIndex());
+            }
       }
 
 //---------------------------------------------------------
@@ -265,5 +268,10 @@ void EditStyle::setValues()
       voice2Down->setChecked(lstyle[ST_stemDir2].toBool() != UP);
       voice3Down->setChecked(lstyle[ST_stemDir3].toBool() != UP);
       voice4Down->setChecked(lstyle[ST_stemDir4].toBool() != UP);
+
+      for (int i = 0; i < ARTICULATIONS; ++i) {
+            QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
+            cb->setCurrentIndex(lstyle[STYLE_TYPE(ST_UfermataAnchor + i)].toInt());
+            }
       }
 

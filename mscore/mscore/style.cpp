@@ -22,6 +22,7 @@
 #include "style.h"
 #include "xml.h"
 #include "score.h"
+#include "articulation.h"
 
 Style* style;
 //  20 points        font design size
@@ -123,7 +124,40 @@ StyleType styleTypes[] = {
       StyleType("gateTime",                ST_INT),           // 0-100%
       StyleType("tenutoGateTime",          ST_INT),
       StyleType("staccatoGateTime",        ST_INT),
-      StyleType("slurGateTime",            ST_INT)
+      StyleType("slurGateTime",            ST_INT),
+
+      //---------------------------------------------------------
+      //    Articulations
+      //---------------------------------------------------------
+
+      StyleType("UfermataAnchor",          ST_INT),
+      StyleType("DfermataAnchor",          ST_INT),
+      StyleType("ThumbAnchor",             ST_INT),
+      StyleType("SforzatoaccentAnchor",    ST_INT),
+      StyleType("EspressivoAnchor",        ST_INT),
+      StyleType("StaccatoAnchor",          ST_INT),
+      StyleType("UstaccatissimoAnchor",    ST_INT),
+      StyleType("DstaccatissimoAnchor",    ST_INT),
+      StyleType("TenutoAnchor",            ST_INT),
+      StyleType("UportatoAnchor",          ST_INT),
+      StyleType("DportatoAnchor",          ST_INT),
+      StyleType("UmarcatoAnchor",          ST_INT),
+      StyleType("DmarcatoAnchor",          ST_INT),
+      StyleType("OuvertAnchor",            ST_INT),
+      StyleType("PlusstopAnchor",          ST_INT),
+      StyleType("UpbowAnchor",             ST_INT),
+      StyleType("DownbowAnchor",           ST_INT),
+      StyleType("ReverseturnAnchor",       ST_INT),
+      StyleType("TurnAnchor",              ST_INT),
+      StyleType("TrillAnchor",             ST_INT),
+      StyleType("PrallAnchor",             ST_INT),
+      StyleType("MordentAnchor",           ST_INT),
+      StyleType("PrallPrallAnchor",        ST_INT),
+      StyleType("PrallMordentAnchor",      ST_INT),
+      StyleType("UpPrallAnchor",           ST_INT),
+      StyleType("DownPrallAnchor",         ST_INT),
+      StyleType("UpMordentAnchor",         ST_INT),
+      StyleType("DownMordentAnchor",       ST_INT)
       };
 
 //---------------------------------------------------------
@@ -331,7 +365,36 @@ Style::Style()
             StyleVal(85),                         // ST_gateTime,
             StyleVal(100),                        // ST_tenutoGateTime,
             StyleVal(50),                         // ST_staccatoGateTime,
-            StyleVal(100)                         // ST_slurGateTime,
+            StyleVal(100),                        // ST_slurGateTime,
+
+            StyleVal(int(A_TOP_STAFF)),           // ufermata
+            StyleVal(int(A_BOTTOM_STAFF)),        // dfermata
+            StyleVal(int(A_CHORD)),               // thumb
+            StyleVal(int(A_CHORD)),               // sforzatoaccent
+            StyleVal(int(A_CHORD)),               // espr
+            StyleVal(int(A_CHORD)),               // staccato
+            StyleVal(int(A_CHORD)),               // ustaccatissimo
+            StyleVal(int(A_CHORD)),               // dstaccatissimo
+            StyleVal(int(A_CHORD)),               // tenuto
+            StyleVal(int(A_CHORD)),               // uportato
+            StyleVal(int(A_CHORD)),               // dportato
+            StyleVal(int(A_CHORD)),               // umarcato
+            StyleVal(int(A_CHORD)),               // dmarcato
+            StyleVal(int(A_CHORD)),               // ouvert
+            StyleVal(int(A_CHORD)),               // plusstop
+            StyleVal(int(A_TOP_STAFF)),           // upbow
+            StyleVal(int(A_TOP_STAFF)),           // downbow
+            StyleVal(int(A_TOP_STAFF)),           // reverseturn
+            StyleVal(int(A_TOP_STAFF)),           // turn
+            StyleVal(int(A_TOP_STAFF)),           // trill
+            StyleVal(int(A_TOP_STAFF)),           // prall
+            StyleVal(int(A_TOP_STAFF)),           // mordent
+            StyleVal(int(A_TOP_STAFF)),           // prallprall
+            StyleVal(int(A_TOP_STAFF)),           // prallmordent
+            StyleVal(int(A_TOP_STAFF)),           // upprall
+            StyleVal(int(A_TOP_STAFF)),    	  // downprall
+            StyleVal(int(A_TOP_STAFF)),    	  // upmordent
+            StyleVal(int(A_TOP_STAFF)),    	  // downmordent
             };
 
       StyleVal* d = data();

@@ -1,3 +1,5 @@
+8.mar (ws)
+      - added style options to specify anchor for articulation symbols
 7.mar (ws)
       - fixes for small staves: keysig and dynamics are now also small
       - retain pitch class (pitch spelling) when changing pitch octave up/down
