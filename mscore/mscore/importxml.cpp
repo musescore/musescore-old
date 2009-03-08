@@ -509,6 +509,17 @@ void MusicXml::scorePartwise(QDomElement ee)
                   domError(e);
             }
 
+      PageFormat* pf = score->pageFormat();
+      printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
+             pf->width(), pf->height(), score->layout()->spatium(), DPMM, DPI);
+      // page width and height in tenths
+      const double pw  = pf->width() * 10 * DPI / score->layout()->spatium();
+      const double ph  = pf->height() * 10 * DPI / score->layout()->spatium();
+      const int pw1 = (int) (pw / 3);
+      const int pw2 = (int) (pw * 2 / 3);
+      const int ph2 = (int) (ph / 2);
+      printf("page format w=%g h=%g\n", pw, ph);
+      printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
@@ -520,6 +531,57 @@ void MusicXml::scorePartwise(QDomElement ee)
                   w->vAlign.toUtf8().data(),
                   w->words.toUtf8().data());
             }
+      // apply simple heuristics using only default x and y
+      // to recognize the meaning of credit words
+      CreditWords* crwTitle = 0;
+      CreditWords* crwSubTitle = 0;
+      CreditWords* crwComposer = 0;
+      CreditWords* crwPoet = 0;
+      CreditWords* crwCopyRight = 0;
+      // title is highest above middle of the page that is in the middle column
+      // it is done first because subtitle detection depends on the title
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            int defx = w->defaultX;
+            int defy = w->defaultY;
+            if (defy > ph2 && pw1 < defx && defx < pw2) {
+                  // found a possible title
+                  if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
+                  }
+            }
+            // subtitle is highest above middle of the page that is
+            // in the middle column and is not the title
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            int defx = w->defaultX;
+            int defy = w->defaultY;
+            if (defy > ph2 && pw1 < defx && defx < pw2) {
+                  // found a possible subtitle
+                  if ((!crwSubTitle || defy > crwSubTitle->defaultY)
+                      && w != crwTitle)
+                        crwSubTitle = w;
+                  }
+            // composer is above middle of the page and in the right column
+            if (defy > ph2 && pw2 < defx) {
+                  // found composer
+                  if (!crwComposer) crwComposer = w;
+                  }
+            // poet is above middle of the page and in the left column
+            if (defy > ph2 && defx < pw1) {
+                  // found poet
+                  if (!crwPoet) crwPoet = w;
+                  }
+            // copyright is below middle of the page and in the middle column
+            if (defy < ph2 && pw1 < defx && defx < pw2) {
+                  // found copyright
+                  if (!crwCopyRight) crwCopyRight = w;
+                  }
+            } // end for (ciCreditWords ...
+      if (crwTitle) printf("title='%s'\n", crwTitle->words.toUtf8().data());
+      if (crwSubTitle) printf("subtitle='%s'\n", crwSubTitle->words.toUtf8().data());
+      if (crwComposer) printf("composer='%s'\n", crwComposer->words.toUtf8().data());
+      if (crwPoet) printf("poet='%s'\n", crwPoet->words.toUtf8().data());
+      if (crwCopyRight) printf("copyright='%s'\n", crwCopyRight->words.toUtf8().data());
 
       // add bracket where required
       const QList<Part*>* il = score->parts();
