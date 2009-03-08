@@ -23,9 +23,9 @@
     <smallStaffMag>0.7</smallStaffMag>
     <stemDir2>1</stemDir2>
     <stemDir4>1</stemDir4>
-    <gateTime>70</gateTime>
-    <staccatoGateTime>40</staccatoGateTime>
-    <slurGateTime>90</slurGateTime>
+    <gateTime>85</gateTime>
+    <staccatoGateTime>50</staccatoGateTime>
+    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>0</showInvisible>
   <showFrames>1</showFrames>

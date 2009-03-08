@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.10">
   <Mag>1.21662</Mag>
-  <xoff>0.211667</xoff>
-  <yoff>0.211667</yoff>
+  <xoff>-255.542</xoff>
+  <yoff>-14.0641</yoff>
   <Spatium>1.56</Spatium>
   <Division>480</Division>
   <Style>
@@ -14,9 +14,9 @@
     <measureSpacing>1.5</measureSpacing>
     <ledgerLineWidth>0.08</ledgerLineWidth>
     <dotNoteDistance>0.5</dotNoteDistance>
-    <gateTime>70</gateTime>
-    <staccatoGateTime>40</staccatoGateTime>
-    <slurGateTime>90</slurGateTime>
+    <gateTime>85</gateTime>
+    <staccatoGateTime>50</staccatoGateTime>
+    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
@@ -1334,14 +1334,10 @@
         <offset x="-3.72577" y="-2.8195"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Allegro giusto</p></body></html>
-          </html-data>
+        <text>Allegro giusto</text>
         </Tempo>
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <style>12</style>
         </Dynamic>
@@ -1464,6 +1460,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <style>12</style>
         </Dynamic>
@@ -1506,12 +1503,14 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>-1</velocity>
         <subtype>sff</subtype>
         <offset x="0.306481" y="0.510802"/>
         <tick>3600</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>2097184</velocity>
         <offset x="0.637271" y="0.297395"/>
         <tick>2880</tick>
         <style>12</style>
@@ -1519,7 +1518,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:400; font-style:italic;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MScore1'; font-style:normal;"><span style=" font-family:'Times New Roman'; font-size:10.62pt; font-style:italic;">più </span>f</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MScore1'; font-size:11pt; font-style:normal;"><span style=" font-family:'Times New Roman'; font-style:italic;">più </span>f</p></body></html>
           </html-data>
         </Dynamic>
       <Rest>
@@ -1582,12 +1581,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-1.59803" y="-10.3043"/>
         <tick>5520</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <tick>4800</tick>
         <style>12</style>
@@ -1634,6 +1635,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="7">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.739578" y="-10.0652"/>
         <tick>6000</tick>
@@ -1671,12 +1673,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="8">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.762747" y="-10.3528"/>
         <tick>7440</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-1.54705" y="-10.5658"/>
         <tick>6960</tick>
@@ -1723,6 +1727,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="9">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <style>12</style>
         </Dynamic>
@@ -1764,6 +1769,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>80</velocity>
         <subtype>mf</subtype>
         <offset x="-4.45136" y="-1.23123"/>
         <style>12</style>
@@ -2005,6 +2011,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="12">
       <Dynamic>
+        <velocity>-1</velocity>
         <subtype>sff</subtype>
         <offset x="-0.947098" y="0.378839"/>
         <tick>11280</tick>
@@ -2079,6 +2086,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="14">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.412342" y="0.221866"/>
         <style>12</style>
@@ -2134,6 +2142,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <style>12</style>
         </Dynamic>
@@ -2185,6 +2194,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="16">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.568259" y="0"/>
         <style>12</style>
@@ -2262,6 +2272,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="17">
       <Dynamic>
+        <velocity>0</velocity>
         <offset x="-1.43241" y="0.783681"/>
         <tick>15840</tick>
         <style>12</style>
@@ -2356,6 +2367,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="18">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.18942" y="0.662968"/>
         <style>12</style>
@@ -2536,6 +2548,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>-1</velocity>
         <subtype>sff</subtype>
         <offset x="-1.23123" y="0.852388"/>
         <tick>18960</tick>
@@ -2608,6 +2621,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="22">
       <stretch>0.8</stretch>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.12661" y="1.54928"/>
         <style>12</style>
@@ -2711,12 +2725,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <stretch>0.8</stretch>
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-1.37202" y="-0.67915"/>
         <tick>22800</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.793039" y="-1.24208"/>
         <tick>22080</tick>
@@ -2820,6 +2836,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.224476" y="1.13078"/>
         <style>12</style>
@@ -2909,6 +2926,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="28">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.73417" y="0.381986"/>
         <style>12</style>
@@ -3003,6 +3021,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="30">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.868308" y="0.850456"/>
         <style>12</style>
@@ -3048,6 +3067,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="32">
       <Dynamic>
+        <velocity>0</velocity>
         <offset x="-0.0778523" y="1.8298"/>
         <style>12</style>
         <html-data>
@@ -3073,12 +3093,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="33">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-1.70111" y="0.426328"/>
         <tick>30840</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-2.14074" y="0.525918"/>
         <tick>31440</tick>
@@ -3128,6 +3150,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="34">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.8774" y="0.678191"/>
         <style>12</style>
@@ -3220,6 +3243,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.99234" y="0.290656"/>
         <style>12</style>
@@ -3312,6 +3336,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="38">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-1.95998" y="-0.382305"/>
         <style>12</style>
@@ -3497,11 +3522,13 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="40">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.488681" y="0.0314347"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-0.783906" y="0.245762"/>
         <tick>38160</tick>
@@ -3564,6 +3591,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.33711" y="-0.445415"/>
         <tick>38640</tick>
@@ -3605,6 +3633,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="43">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.48806" y="0.0455847"/>
         <tick>40560</tick>
@@ -3646,6 +3675,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="45">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-4.06767" y="-0.069112"/>
         <tick>42480</tick>
@@ -3688,6 +3718,7 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Dynamic>
+        <velocity>0</velocity>
         <offset x="-0.180013" y="0.501714"/>
         <style>12</style>
         <html-data>
@@ -3707,6 +3738,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-2.90705" y="-0.588076"/>
         <style>12</style>
@@ -3718,12 +3750,7 @@ p, li { white-space: pre-wrap; }
         <tick>44400</tick>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Un peu moins vite</p></body></html>
-          </html-data>
+        <text>Un peu moins vite</text>
         </Tempo>
       <KeySig>
         <subtype>250</subtype>
@@ -3825,6 +3852,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="49">
       <stretch>0.8</stretch>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-0.95287" y="-1.44339"/>
         <style>12</style>
@@ -4018,6 +4046,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="55">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-0.803105" y="0.343011"/>
         <style>12</style>
@@ -4116,6 +4145,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="57">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-1.56859" y="0.265253"/>
         <style>12</style>
@@ -4245,12 +4275,7 @@ p, li { white-space: pre-wrap; }
         <offset x="4.03282" y="-0.725907"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Cédez</p></body></html>
-          </html-data>
+        <text>Cédez</text>
         </Tempo>
       <StaffText>
         <subtype>Staff</subtype>
@@ -4264,6 +4289,7 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </StaffText>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="4.38396" y="-10.222"/>
         <style>12</style>
@@ -4332,12 +4358,14 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-1.53483" y="-0.427843"/>
         <tick>59760</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.81696" y="1.34146"/>
         <tick>59520</tick>
@@ -4348,12 +4376,7 @@ p, li { white-space: pre-wrap; }
         <subtype>Tempo</subtype>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">a Tempo</p></body></html>
-          </html-data>
+        <text>a Tempo</text>
         </Tempo>
       <Rest>
         <offset x="0.0832482" y="-1"/>
@@ -4480,6 +4503,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="64">
       <stretch>0.7</stretch>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-2.10718" y="-0.0784628"/>
         <tick>60720</tick>
@@ -4565,6 +4589,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="65">
       <stretch>0.7</stretch>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.48371" y="1.60814"/>
         <tick>61920</tick>
@@ -4575,12 +4600,7 @@ p, li { white-space: pre-wrap; }
         <subtype>Tempo</subtype>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Cédez</p></body></html>
-          </html-data>
+        <text>Cédez</text>
         </Tempo>
       <Rest>
         <tick>61440</tick>
@@ -4634,6 +4654,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="67">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-1.60109" y="-0.455052"/>
         <tick>63600</tick>
@@ -4645,12 +4666,7 @@ p, li { white-space: pre-wrap; }
         <tick>63360</tick>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">a Tempo</p></body></html>
-          </html-data>
+        <text>a Tempo</text>
         </Tempo>
       <Rest>
         <ticklen>240</ticklen>
@@ -4825,6 +4841,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="69">
       <Dynamic>
+        <velocity>80</velocity>
         <subtype>mf</subtype>
         <offset x="-4.20542" y="-1.65941"/>
         <tick>65760</tick>
@@ -4835,12 +4852,7 @@ p, li { white-space: pre-wrap; }
         <subtype>Tempo</subtype>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Cédez</p></body></html>
-          </html-data>
+        <text>Cédez</text>
         </Tempo>
       <Rest>
         <tick>65280</tick>
@@ -4854,6 +4866,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="70">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.535619" y="-1.90118"/>
         <tick>66480</tick>
@@ -4889,12 +4902,7 @@ p, li { white-space: pre-wrap; }
         <offset x="0.378839" y="-3.69368"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">a Tempo</p></body></html>
-          </html-data>
+        <text>a Tempo</text>
         </Tempo>
       <Beam id="56">
         </Beam>
@@ -5060,6 +5068,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.44826" y="1.5831"/>
         <tick>69600</tick>
@@ -5071,12 +5080,7 @@ p, li { white-space: pre-wrap; }
         <tick>69120</tick>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Cédez</p></body></html>
-          </html-data>
+        <text>Cédez</text>
         </Tempo>
       <Chord>
         <ticklen>240</ticklen>
@@ -5161,6 +5165,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="75">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.49342" y="0.90268"/>
         <style>12</style>
@@ -5171,12 +5176,7 @@ p, li { white-space: pre-wrap; }
         <offset x="-0.757678" y="-0.757677"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">a Tempo</p></body></html>
-          </html-data>
+        <text>a Tempo</text>
         </Tempo>
       <Chord>
         <ticklen>960</ticklen>
@@ -5328,12 +5328,7 @@ p, li { white-space: pre-wrap; }
         <offset x="0.0947098" y="-0.0947098"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Cédez</p></body></html>
-          </html-data>
+        <text>Cédez</text>
         </Tempo>
       <Rest>
         <ticklen>480</ticklen>
@@ -5401,6 +5396,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="4.09263" y="-0.315959"/>
         <style>12</style>
@@ -5411,12 +5407,7 @@ p, li { white-space: pre-wrap; }
         <offset x="0.100696" y="-2.31602"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">a Tempo</p></body></html>
-          </html-data>
+        <text>a Tempo</text>
         </Tempo>
       <Chord>
         <ticklen>960</ticklen>
@@ -5560,6 +5551,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="79">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-2.38877" y="-0.455608"/>
         <tick>75360</tick>
@@ -5580,6 +5572,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="80">
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-1.81228" y="-0.439932"/>
         <tick>76080</tick>
@@ -5609,6 +5602,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="81">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.535134" y="0.879777"/>
         <style>12</style>
@@ -5958,12 +5952,7 @@ p, li { white-space: pre-wrap; }
         <offset x="0.100696" y="0.829576"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Retenu</p></body></html>
-          </html-data>
+        <text>Retenu</text>
         </Tempo>
       <Chord>
         <ticklen>960</ticklen>
@@ -6013,6 +6002,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="6.22204" y="-12.9074"/>
         <style>12</style>
@@ -6101,6 +6091,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="89">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="4.94393" y="-12.5634"/>
         <style>12</style>
@@ -6192,6 +6183,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="90">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-2.53086" y="0.0156844"/>
         <style>12</style>
@@ -6202,12 +6194,7 @@ p, li { white-space: pre-wrap; }
         <offset x="-10.3846" y="0.587607"/>
         <systemFlag>1</systemFlag>
         <style>14</style>
-        <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:10.6129pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Tojours retenu        -        -        -        -        -        -        -  //</p></body></html>
-          </html-data>
+        <text>Tojours retenu        -        -        -        -        -        -        -  //</text>
         </Tempo>
       <KeySig>
         <subtype>64253</subtype>
@@ -6556,6 +6543,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="98">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.068948" y="0.643458"/>
         <style>12</style>
@@ -6879,11 +6867,13 @@ p, li { white-space: pre-wrap; }
     <Measure number="104">
       <stretch>0.8</stretch>
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-0.623861" y="0.169398"/>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="0.73089" y="-0.0774949"/>
         <tick>99360</tick>
@@ -7072,6 +7062,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.81485" y="0.50456"/>
         <style>12</style>
@@ -7167,6 +7158,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="110">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.76943" y="0.0636826"/>
         <style>12</style>
@@ -7227,6 +7219,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="112">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-1.95766" y="-0.280202"/>
         <style>12</style>
@@ -7467,6 +7460,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-1.53234" y="0.254676"/>
         <style>12</style>
@@ -7532,7 +7526,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Beam>107</Beam>
-        <Note pitch="82" tpc="12"/>
+        <Note pitch="80" tpc="10"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
@@ -7577,12 +7571,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="120">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-2.67837" y="0.840384"/>
         <tick>114360</tick>
         <style>12</style>
         </Dynamic>
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-2.39951" y="0.349385"/>
         <tick>114960</tick>
@@ -7632,6 +7628,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="121">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-3.97146" y="0.324477"/>
         <tick>115440</tick>
@@ -7677,6 +7674,7 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         </Text>
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-4.1467" y="0.156626"/>
         <tick>117360</tick>
@@ -7718,6 +7716,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="125">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-4.15892" y="0.949204"/>
         <tick>119280</tick>
@@ -7755,6 +7754,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="126">
       <Dynamic>
+        <velocity>90</velocity>
         <subtype>f</subtype>
         <offset x="-3.6117" y="0.637633"/>
         <tick>120480</tick>
@@ -7799,6 +7799,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="127">
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-5.05791" y="0.353504"/>
         <tick>121200</tick>
@@ -7825,6 +7826,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="128">
       <Dynamic>
+        <velocity>100</velocity>
         <subtype>ff</subtype>
         <offset x="-0.555904" y="0.304776"/>
         <style>12</style>
@@ -8221,6 +8223,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="10">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.46245" y="-1.51536"/>
         <style>12</style>
@@ -11344,6 +11347,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="75">
       <Dynamic>
+        <velocity>50</velocity>
         <subtype>pp</subtype>
         <offset x="-0.537478" y="-14.665"/>
         <tick>71280</tick>
@@ -11417,6 +11421,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="76">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.71261" y="-11.0735"/>
         <tick>72240</tick>
@@ -11463,6 +11468,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="78">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-2.07982" y="-14.0104"/>
         <style>12</style>
@@ -11979,6 +11985,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="94">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.379976" y="-12.6885"/>
         <style>12</style>
@@ -12028,6 +12035,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="95">
       <Dynamic>
+        <velocity>60</velocity>
         <subtype>p</subtype>
         <offset x="-0.110053" y="-12.534"/>
         <style>12</style>
