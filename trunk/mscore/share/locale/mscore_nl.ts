@@ -128,15 +128,15 @@ p, li { white-space: pre-wrap; }
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Onstabiele Pre-vrijgave voor Versie:</translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versie:</translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Revisie: %1</translation>
     </message>
 </context>
 <context>
@@ -983,16 +983,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>extra leidende spatie</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>extra trailing spatie</translation>
     </message>
 </context>
 <context>
@@ -1038,23 +1038,23 @@ p, li { white-space: pre-wrap; }
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished">Dynamiek</translation>
+        <translation>Dynamiek</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Maak Onzichtbaar</translation>
+        <translation>Maak Onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Maak Zichtbaar</translation>
+        <translation>Maak Zichtbaar</translation>
     </message>
     <message>
         <source>Midi Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi Eigenschappen...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Tekst Eigenschappen...</translation>
+        <translation>Tekst Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -1076,19 +1076,19 @@ p, li { white-space: pre-wrap; }
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished">MuseScore: Tekst Eigenschappen</translation>
+        <translation>MuseScore: Tekst Eigenschappen</translation>
     </message>
     <message>
         <source>Midi Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi Waarden</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelheid:</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished">uitlijnen links</translation>
+        <translation>uitlijnen links</translation>
     </message>
 </context>
 <context>
@@ -1418,15 +1418,15 @@ toonhoogte</translation>
     </message>
     <message>
         <source>lyrics bottom dist.</source>
-        <translation>woorden ondergrens</translation>
+        <translation>woorden ondergrens.</translation>
     </message>
     <message>
         <source>staff v-frame dist.</source>
-        <translation>notenbalk v-kadergrens</translation>
+        <translation>notenbalk v-kadergrens.</translation>
     </message>
     <message>
         <source>v-frame staff dist.</source>
-        <translation>v-kader notenbalkgrens</translation>
+        <translation>v-kader notenbalkgrens.</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1666,15 +1666,15 @@ toonhoogte</translation>
     </message>
     <message>
         <source>note dot distance</source>
-        <translation>noten punt afstand</translation>
+        <translation>noot punt afstand</translation>
     </message>
     <message>
         <source>dot dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>dubbele punt afstand</translation>
     </message>
     <message>
         <source>ledger line width</source>
-        <translation type="unfinished"></translation>
+        <translation>hulplijn breedte</translation>
     </message>
 </context>
 <context>
@@ -1824,7 +1824,7 @@ toonhoogte</translation>
     <message>
         <source> sp</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1874,7 +1874,7 @@ toonhoogte</translation>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation>Glissando Eigenschappen</translation>
+        <translation>Glissando Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -1933,7 +1933,7 @@ toonhoogte</translation>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Harmonie Eigenschappen</translation>
+        <translation>Harmonie Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -2001,11 +2001,11 @@ toonhoogte</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation>Voeg lege maten in</translation>
+        <translation>Voeg lege maten in:</translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation>Aantal in te voegen maten:</translation>
+        <translation>Aantal in te voegen maten</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2186,7 +2186,7 @@ failed: </source>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation>Sprong Eigenschappen</translation>
+        <translation>Sprong Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -4808,7 +4808,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation>Anderen:</translation>
+        <translation>Anderen...</translation>
     </message>
     <message>
         <source>enable script debugger</source>
@@ -4904,46 +4904,46 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished">Afbreken</translation>
+        <translation>Afbreken</translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>normal</source>
         <comment>note head</comment>
-        <translation type="unfinished">normaal</translation>
+        <translation>normaal</translation>
     </message>
     <message>
         <source>crossed</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>kruis</translation>
     </message>
     <message>
         <source>diamond</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>ruit</translation>
     </message>
     <message>
         <source>triangle</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>driehoek</translation>
     </message>
     <message>
         <source>diamond2</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>ruit2</translation>
     </message>
     <message>
         <source>slash</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>schuin</translation>
     </message>
     <message>
         <source>xcircle</source>
         <comment>note head</comment>
-        <translation type="unfinished"></translation>
+        <translation>kruiscirkel</translation>
     </message>
 </context>
 <context>
@@ -5027,7 +5027,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Select Template File:</source>
-        <translation>Selecteer een voorbeedlbestand</translation>
+        <translation>Selecteer een voorbeedlbestand:</translation>
     </message>
 </context>
 <context>
@@ -5038,7 +5038,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Selecteer Toonsoort</translation>
+        <translation>Selecteer Toonsoort:</translation>
     </message>
 </context>
 <context>
@@ -5112,7 +5112,7 @@ voor dat u afsluit?</translation>
     <message>
         <source>Tie Forw.</source>
         <comment>do not translate</comment>
-        <translation>Boog Voorwaarts</translation>
+        <translation>Boog Voorwaarts.</translation>
     </message>
     <message>
         <source>Move</source>
@@ -6206,7 +6206,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation>Rust Eigenschappen</translation>
+        <translation>Rust Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -6221,20 +6221,20 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished">Akkoord Eigenschappen</translation>
+        <translation>Akkoord Eigenschappen</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>extra toonaangevende ruimte</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>extra spatie</translation>
     </message>
 </context>
 <context>
@@ -6800,11 +6800,11 @@ failed: </source>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Maak Onzichtbaar</translation>
+        <translation>Maak Onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Maak Zichtbaar</translation>
+        <translation>Maak Zichtbaar</translation>
     </message>
 </context>
 <context>
@@ -7481,67 +7481,67 @@ p, li { white-space: pre-wrap; }
     <name>clefTable</name>
     <message>
         <source>Treble Clef (G Clef)</source>
-        <translation type="unfinished">Vioolsleutel (G-Sleutel)</translation>
+        <translation>Vioolsleutel (G-Sleutel)</translation>
     </message>
     <message>
         <source>Treble Clef 8va</source>
-        <translation type="unfinished">Vioolsleutel 8va</translation>
+        <translation>Vioolsleutel 8va</translation>
     </message>
     <message>
         <source>Treble Clef 15ma</source>
-        <translation type="unfinished">Vioolsleutel 15va</translation>
+        <translation>Vioolsleutel 15va</translation>
     </message>
     <message>
         <source>Treble Clef 8va bassa</source>
-        <translation type="unfinished">Vioolsleutel 8va bas</translation>
+        <translation>Vioolsleutel 8va bas</translation>
     </message>
     <message>
         <source>Bass Clef (F Clef)</source>
-        <translation type="unfinished">Bassleutel (F-Sleutel)</translation>
+        <translation>Bassleutel (F-Sleutel)</translation>
     </message>
     <message>
         <source>Bass Clef 8va bassa</source>
-        <translation type="unfinished">Bassleutel 8va</translation>
+        <translation>Bassleutel 8va</translation>
     </message>
     <message>
         <source>Bass Clef 15mb bassa</source>
-        <translation type="unfinished">Bassleutel 15va</translation>
+        <translation>Bassleutel 15va</translation>
     </message>
     <message>
         <source>Baritone Clef</source>
-        <translation type="unfinished">Bariton Sleutel</translation>
+        <translation>Bariton Sleutel</translation>
     </message>
     <message>
         <source>Subbass Clef</source>
-        <translation type="unfinished">Contrabassleutel</translation>
+        <translation>Contrabassleutel</translation>
     </message>
     <message>
         <source>Soprano Clef</source>
-        <translation type="unfinished">Sopraansleutel</translation>
+        <translation>Sopraansleutel</translation>
     </message>
     <message>
         <source>Mezzo-soprano Clef</source>
-        <translation type="unfinished">Mezzo-sopraansleutel</translation>
+        <translation>Mezzo-sopraansleutel</translation>
     </message>
     <message>
         <source>Alto Clef</source>
-        <translation type="unfinished">Altsleutel</translation>
+        <translation>Altsleutel</translation>
     </message>
     <message>
         <source>Tenor Clef</source>
-        <translation type="unfinished">Tenorsleutel</translation>
+        <translation>Tenorsleutel</translation>
     </message>
     <message>
         <source>Tablature</source>
-        <translation type="unfinished">Tabulatuur </translation>
+        <translation>Tabulatuur </translation>
     </message>
     <message>
         <source>Percussion</source>
-        <translation type="unfinished">Slagwerk</translation>
+        <translation>Slagwerk</translation>
     </message>
     <message>
         <source>French Violin Clef</source>
-        <translation type="unfinished">Franse Vioolsleutel</translation>
+        <translation>Franse Vioolsleutel</translation>
     </message>
 </context>
 <context>

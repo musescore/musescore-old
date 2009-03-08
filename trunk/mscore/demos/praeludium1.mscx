@@ -71,10 +71,10 @@
     <genKeysig>1</genKeysig>
     <minEmptyMeasures>2</minEmptyMeasures>
     <minMMRestWidth>4</minMMRestWidth>
-    <gateTime>70</gateTime>
+    <gateTime>85</gateTime>
     <tenutoGateTime>100</tenutoGateTime>
-    <staccatoGateTime>40</staccatoGateTime>
-    <slurGateTime>90</slurGateTime>
+    <staccatoGateTime>50</staccatoGateTime>
+    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>

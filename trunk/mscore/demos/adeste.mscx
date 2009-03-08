@@ -19,9 +19,9 @@
     <beamMaxSlope>0.5</beamMaxSlope>
     <dotNoteDistance>0.5</dotNoteDistance>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <gateTime>70</gateTime>
-    <staccatoGateTime>40</staccatoGateTime>
-    <slurGateTime>90</slurGateTime>
+    <gateTime>85</gateTime>
+    <staccatoGateTime>50</staccatoGateTime>
+    <slurGateTime>100</slurGateTime>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>

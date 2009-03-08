@@ -1,5 +1,10 @@
 8.mar (ws)
       - added style options to specify anchor for articulation symbols
+      (db)
+      - Changed gateTimes in most demo files to match new defaults
+      - Update Italian translation by Antonio Marchionne
+      - Update Dutch translation by Jaap Plaisier
+      - updated handbooks
 7.mar (ws)
       - fixes for small staves: keysig and dynamics are now also small
       - retain pitch class (pitch spelling) when changing pitch octave up/down
@@ -45,7 +50,7 @@
       - renamed template files to "*.mscx"
       - removed file extension ".msc" for templates, instead add ".mscx"
       - add new playback parameter to dynamics: "velocity"
-
+       (db)
       - Added prerelease watermark to splash screen
       - Updated Italian handbook
 23.feb (lv)
