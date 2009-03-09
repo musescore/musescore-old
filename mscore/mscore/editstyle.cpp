@@ -61,6 +61,8 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       QStringList headers;
       headers << tr("Symbol") << tr("Anchor");
       articulationTable->setHorizontalHeaderLabels(headers);
+      articulationTable->setColumnWidth(0, 200);
+      articulationTable->setColumnWidth(1, 150);
       QStringList ci;
       ci << tr("TopStaff") << tr("BottomStaff") << tr("Chord") << tr("TopChord")
          << tr("BottomChord");
@@ -68,6 +70,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
             QTableWidgetItem* item = new QTableWidgetItem(symIcon(symbols[ai->sym], 50, 25, 25), ai->name);
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
             articulationTable->setItem(i, 0, item);
 
             QComboBox* cb = new QComboBox();

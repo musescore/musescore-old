@@ -33,7 +33,6 @@ set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
-set(BUILD_SCRIPT_DEBUG TRUE)              # only for qt 4.4, qt 4.5 has buildin debugger
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 
 if (QT45)
@@ -41,12 +40,14 @@ if (QT45)
       set(BUILD_SCRIPT_DEBUG FALSE)
 else (QT45)
       set(STATIC_SCRIPT_BINDINGS FALSE)
+      set(BUILD_SCRIPT_DEBUG TRUE)
 endif (QT45)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
       set(QT45 TRUE)
       set(STATIC_SCRIPT_BINDINGS TRUE)
+      set(BUILD_SCRIPT_DEBUG FALSE)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
 
