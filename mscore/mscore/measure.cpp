@@ -1086,9 +1086,11 @@ void Measure::add(Element* el)
                         _noText = static_cast<Text*>(el);
                         }
                   else {
-                        el->setMag(el->staff()->mag());
-                        _el.append(el);
-                        }
+                      if (el->staff() != 0 ){
+                      	el->setMag(el->staff()->mag());
+                      }
+                      _el.append(el);
+                      }
                   break;
 
             default:
