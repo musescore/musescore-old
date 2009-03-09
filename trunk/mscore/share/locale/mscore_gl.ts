@@ -1338,6 +1338,37 @@ fallou:</translation>
     </message>
 </context>
 <context>
+    <name>EditStyle</name>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TopStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BottomStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Acorde</translation>
+    </message>
+    <message>
+        <source>TopChord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BottomChord</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
@@ -1674,6 +1705,11 @@ fallou:</translation>
     <message>
         <source>ledger line width</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>space unit</comment>
+        <translation type="unfinished">sp</translation>
     </message>
 </context>
 <context>
@@ -4944,6 +4980,10 @@ before closing?</source>
         <comment>note head</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>slur</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6259,6 +6299,22 @@ Seleccione unha nota ou silencio e tente a operación de novo</translation>
         <source>1</source>
         <translation>1</translation>
     </message>
+    <message>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SEGMENT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MEASURE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>digonal</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Score</name>
@@ -6790,6 +6846,29 @@ fallou:</translation>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextLineBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formulario</translation>
+    </message>
+    <message>
+        <source>TextLine</source>
+        <translation type="unfinished">LiñaDeTexto</translation>
+    </message>
+    <message>
+        <source>line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeginText</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ContinueText</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1346,6 +1346,37 @@ fallito: </translation>
     </message>
 </context>
 <context>
+    <name>EditStyle</name>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TopStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BottomStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Accordo</translation>
+    </message>
+    <message>
+        <source>TopChord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BottomChord</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
@@ -1682,6 +1713,11 @@ fallito: </translation>
     <message>
         <source>ledger line width</source>
         <translation>larghezza della liea</translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <comment>space unit</comment>
+        <translation type="unfinished">spazi</translation>
     </message>
 </context>
 <context>
@@ -4951,6 +4987,10 @@ prima di chiudere?</translation>
         <comment>note head</comment>
         <translation>x cerchiato</translation>
     </message>
+    <message>
+        <source>slur</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -6269,6 +6309,22 @@ selezionare una nota o una pausa e ripetere l&apos;operazione
         <source>1</source>
         <translation>1</translation>
     </message>
+    <message>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SEGMENT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MEASURE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>digonal</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Score</name>
@@ -6803,6 +6859,29 @@ selezionare una battuta e riprovare</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>TextLineBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
+    <message>
+        <source>TextLine</source>
+        <translation type="unfinished">Linea di Testo</translation>
+    </message>
+    <message>
+        <source>line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeginText</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ContinueText</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

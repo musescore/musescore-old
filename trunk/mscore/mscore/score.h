@@ -311,13 +311,11 @@ class Score : public QObject {
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
 
-   public slots:
       void doUndo();
       void doRedo();
       void processUndoOp(UndoOp*, bool);
-
-      void toDefault();
       void resetUserStretch();
+      void toDefault();
 
    signals:
       void selectionChanged(int);
