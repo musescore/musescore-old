@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
@@ -27,7 +27,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>480</divisions>
+        <divisions>1</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -46,7 +46,7 @@
           <step>E</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -61,7 +61,7 @@
           <step>F</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -71,7 +71,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -81,7 +81,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -93,7 +93,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -103,7 +103,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -113,7 +113,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -128,7 +128,7 @@
           <step>E</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -140,7 +140,7 @@
           <step>E</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -155,7 +155,7 @@
           <step>F</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -165,7 +165,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -175,7 +175,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -187,7 +187,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -197,7 +197,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -207,7 +207,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -222,7 +222,7 @@
           <step>E</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>

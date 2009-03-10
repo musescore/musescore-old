@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
@@ -10,8 +10,8 @@
     <creator type="poet">Leon</creator>
     <rights>Public Domain</rights>
     <encoding>
-      <software>MuseScore 0.9.2</software>
-      <encoding-date>2008-03-26</encoding-date>
+      <software>MuseScore 0.7.0</software>
+      <encoding-date>2007-09-10</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -29,7 +29,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>480</divisions>
+        <divisions>16</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -48,7 +48,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>1920</duration>
+        <duration>64</duration>
         <voice>1</voice>
         <type>whole</type>
         <notations>
@@ -64,7 +64,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>32</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -79,7 +79,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>16</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -94,7 +94,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>240</duration>
+        <duration>8</duration>
         <voice>1</voice>
         <type>eighth</type>
         <stem>down</stem>
@@ -110,7 +110,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>120</duration>
+        <duration>4</duration>
         <voice>1</voice>
         <type>16th</type>
         <stem>down</stem>
@@ -126,7 +126,7 @@
           <step>E</step>
           <octave>5</octave>
           </pitch>
-        <duration>60</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>32nd</type>
         <stem>down</stem>
@@ -137,7 +137,7 @@
           <step>F</step>
           <octave>5</octave>
           </pitch>
-        <duration>30</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>64th</type>
         <stem>down</stem>
@@ -145,7 +145,7 @@
         </note>
       <note>
         <rest/>
-        <duration>30</duration>
+        <duration>1</duration>
         <voice>1</voice>
         <type>64th</type>
         </note>
@@ -156,7 +156,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>16</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -171,7 +171,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>16</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -186,7 +186,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>16</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -201,7 +201,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
+        <duration>16</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
