@@ -295,7 +295,6 @@ class Score : public QObject {
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
-      void renumberMeasures();
       void cmdResetBeamMode();
       void connectSlurs();
       void checkSlurs();
@@ -723,6 +722,7 @@ class Score : public QObject {
 
       void adjustBracketsDel(int sidx, int eidx);
       void adjustBracketsIns(int sidx, int eidx);
+      void renumberMeasures();
       };
 
 extern Score* gscore;

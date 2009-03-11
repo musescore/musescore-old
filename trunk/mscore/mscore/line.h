@@ -84,7 +84,7 @@ class SLine : public Element {
       QList<LineSegment*> segments;
       int _tick2;
       bool _diagonal;
-      Anchor _anchor;
+      Anchor _anchor;         // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
    public:
       SLine(Score* s);

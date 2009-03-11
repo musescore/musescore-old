@@ -308,6 +308,7 @@ void Preferences::write()
       s.setValue("landscape", landscape);
       s.setValue("twosided", twosided);
       s.setValue("defaultPlayDuration", defaultPlayDuration);
+      s.setValue("importStyleFile", importStyleFile);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -401,6 +402,7 @@ void Preferences::read()
       landscape              = s.value("landscape", false).toBool();
       twosided               = s.value("twosided", true).toBool();
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
+      importStyleFile        = s.value("importStyleFile", "").toString();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -491,6 +493,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(paperWidth,  SIGNAL(valueChanged(double)), SLOT(paperSizeChanged(double)));
       connect(pageGroup,   SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
       connect(landscape,   SIGNAL(toggled(bool)), SLOT(landscapeToggled(bool)));
+
+      connect(styleFileButton, SIGNAL(clicked()), SLOT(styleFileButtonClicked()));
       }
 
 //---------------------------------------------------------
@@ -691,6 +695,10 @@ void PreferenceDialog::updateValues(Preferences* p)
       landscape->setChecked(p->landscape);
 
       defaultPlayDuration->setValue(p->defaultPlayDuration);
+      importStyleFile->setText(p->importStyleFile);
+      useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
+      useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
+
       language->clear();
       int curIdx = 0;
       for(unsigned i = 0; i < sizeof(languages)/sizeof(*languages); ++i) {
@@ -1050,6 +1058,11 @@ void PreferenceDialog::apply()
 
       preferences.defaultPlayDuration = defaultPlayDuration->value();
 
+      if (useImportStyleFile->isChecked())
+            preferences.importStyleFile = importStyleFile->text();
+      else
+            preferences.importStyleFile.clear();
+
       if (languageChanged) {
             setMscoreLocale(preferences.language);
             mscore->update();
@@ -1292,6 +1305,24 @@ void PreferenceDialog::pageFormatSelected(int pf)
 
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
+      }
+
+//---------------------------------------------------------
+//   styleFileButtonClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::styleFileButtonClicked()
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         0, QWidget::tr("MuseScore: Load Style"),
+         QString("."),
+            QWidget::tr("MuseScore Styles (*.mss);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      importStyleFile->setText(fn);
       }
 
 

@@ -107,6 +107,7 @@ struct Preferences {
       bool landscape;
       bool twosided;
       int defaultPlayDuration;      // len of note play during note entry
+      QString importStyleFile;
 
       bool dirty;
 
@@ -153,6 +154,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void paperSizeChanged(double);
       void pageFormatSelected(int);
       void landscapeToggled(bool);
+      void styleFileButtonClicked();
 
    signals:
       void preferencesChanged();

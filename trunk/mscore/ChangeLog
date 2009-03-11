@@ -1,3 +1,11 @@
+11.mar (ws)
+      - note input with mouse: do not allow a note input position between existing
+        segments if start segment is part or a tuplet. Inserting between segments is
+        not implemented and caused mscore to enter an endless loop.
+      - added "layout stretch" and "measure number offset" to measure property
+        dialog
+      - implement preferences.importStyleFile: choose optional style file for
+        all imports
 10.mar (ws)
       - removed source copy of qscript debugger; the debugger is now part of
         qt4.5
