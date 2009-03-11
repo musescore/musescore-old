@@ -222,9 +222,6 @@ void MuseScore::pluginTriggered(int idx)
       if (se == 0) {
             se = new ScriptEngine();
             if (debugMode) {
-#if QT_VERSION >= 0x040500
-#else
-#endif
                   // > qt4.4 required
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
@@ -242,28 +239,13 @@ void MuseScore::pluginTriggered(int idx)
                   }
             }
 #ifdef HAS_SCRIPT_DEBUG
-#if QT_VERSION >= 0x040500
       if (scriptDebug) {
-            if (debugger == 0)
+            if (debugger == 0) {
                   debugger = new QScriptEngineDebugger();
-            debugger->attachTo(se);
+                  debugger->attachTo(se);
+                  }
             debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
             }
-#else
-      if (scriptDebug) {
-            if (debugger == 0)
-                  debugger = new QScriptEmbeddedDebugger();
-            debugger->attachTo(se);
-            debugger->breakAtFirstStatement();
-            }
-      else {
-            if (debugger) {
-                  debugger->detach();
-                  delete debugger;
-                  debugger = 0;
-                  }
-            }
-#endif
 #endif
       QScriptValue v = se->getScoreClass()->newInstance(cs);
       se->globalObject().setProperty("curScore", v);
@@ -292,3 +274,4 @@ void MuseScore::pluginTriggered(int idx)
             s->endCmd();
       cs->end();
       }
+

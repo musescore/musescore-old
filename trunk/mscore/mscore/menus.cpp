@@ -235,6 +235,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(84, 23);
 
             Slur* slur = new Slur(gscore);
+            slur->setId(0);
             sp->append(slur, tr("slur"));
 
             Hairpin* gabel0 = new Hairpin(gscore);

@@ -1,4 +1,7 @@
-10.mar (lv)
+10.mar (ws)
+      - removed source copy of qscript debugger; the debugger is now part of
+        qt4.5
+      (lv)
       - updated some MusicXML regression testfiles
 8.mar (ws)
       - added style options to specify anchor for articulation symbols

@@ -35,30 +35,22 @@ set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 
-if (QT45)
-      set(STATIC_SCRIPT_BINDINGS TRUE)
-      set(BUILD_SCRIPT_DEBUG FALSE)
-else (QT45)
-      set(STATIC_SCRIPT_BINDINGS FALSE)
-      set(BUILD_SCRIPT_DEBUG TRUE)
-endif (QT45)
+set(STATIC_SCRIPT_BINDINGS FALSE)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
       set(QT45 TRUE)
       set(STATIC_SCRIPT_BINDINGS TRUE)
-      set(BUILD_SCRIPT_DEBUG FALSE)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
 
 if (APPLE)
       set (BUILD_SCRIPT_INTERFACE FALSE)
-      set (BUILD_SCRIPT_DEBUG FALSE)
 endif (APPLE)
 
-if (BUILD_SCRIPT_DEBUG OR QT45)
+if (QT45)
       set (HAS_SCRIPT_DEBUG TRUE)
-endif (BUILD_SCRIPT_DEBUG OR QT45)
+endif (QT45)
 
 if (BUILD_SCRIPT_INTERFACE)
       set (HAS_SCRIPT_INTERFACE TRUE)
@@ -222,10 +214,6 @@ endif (NOT USE_GLOBAL_FLUID)
 if (BUILD_SCRIPT_INTERFACE)
       set (subdirs ${subdirs} scriptgen)
 endif (BUILD_SCRIPT_INTERFACE)
-
-if (BUILD_SCRIPT_DEBUG)
-      set (subdirs ${subdirs} scriptdebug)
-endif (BUILD_SCRIPT_DEBUG)
 
 if (MINGW)
       set (subdirs ${subdirs} portmidi)
