@@ -63,6 +63,7 @@
 #include "stafftext.h"
 #include "magbox.h"
 #include "textpalette.h"
+#include "preferences.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -389,7 +390,8 @@ void Score::renumberMeasures()
       for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
-            Measure* measure = (Measure*)mb;
+            Measure* measure = static_cast<Measure*>(mb);
+            measureNo += measure->noOffset();
             measure->setNo(measureNo);
             if (!measure->irregular())
                   ++measureNo;
@@ -408,45 +410,59 @@ void Score::renumberMeasures()
 bool Score::read(QString name)
       {
       _mscVersion = MSCVERSION;
-      _saved = false;
+      _saved      = false;
       info.setFile(name);
 
       QString cs = info.suffix();
+
+      if (cs == "mscz") {
+            if (!loadCompressedMsc(name))
+                  return false;
+            }
 
       if (cs == "xml") {
             importMusicXml(name);
             connectSlurs();
             }
-      else if (cs == "mxl")
-            importCompressedMusicXml(name);
-      else if (cs.toLower() == "mid" || cs.toLower() == "kar") {
-            if (!importMidi(name))
-                  return false;
-            }
-      else if (cs == "md") {
-            if (!importMuseData(name))
-                  return false;
-            }
-      else if (cs == "ly") {
-            if (!importLilypond(name))
-                  return false;
-            }
-      else if (cs.toLower() == "mgu" || cs.toLower() == "sgu") {
-            if (!importBB(name))
-                  return false;
-            }
       else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
             if (!loadMsc(name))
                   return false;
             }
-      else if (cs.toLower() == "cap") {
-            if (!importCapella(name))
-                  return false;
-            connectSlurs();
-            }
       else {
-            if (!loadCompressedMsc(name))
-                  return false;
+            // import
+            if (!preferences.importStyleFile.isEmpty()) {
+                  QFile f(preferences.importStyleFile);
+                  // silently ignore style file on error
+                  if (f.open(QIODevice::ReadOnly))
+                        loadStyle(&f);
+                  }
+
+            if (cs == "mxl")
+                  importCompressedMusicXml(name);
+            else if (cs.toLower() == "mid" || cs.toLower() == "kar") {
+                  if (!importMidi(name))
+                        return false;
+                  }
+            else if (cs == "md") {
+                  if (!importMuseData(name))
+                        return false;
+                  }
+            else if (cs == "ly") {
+                  if (!importLilypond(name))
+                        return false;
+                  }
+            else if (cs.toLower() == "mgu" || cs.toLower() == "sgu") {
+                  if (!importBB(name))
+                        return false;
+                  }
+            else if (cs.toLower() == "cap") {
+                  if (!importCapella(name))
+                        return false;
+                  connectSlurs();
+                  }
+            else {
+                  printf("unknown file suffix\n");
+                  }
             }
 
       renumberMeasures();
@@ -654,18 +670,19 @@ void Score::insertTime(int tick, int len)
 
 void Score::fixTicks()
       {
-      int bar  = 0;
-      int tick = 0;
+      int number = 0;
+      int tick   = 0;
       for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
                   continue;
                   }
             Measure* m = static_cast<Measure*>(mb);
-            if (m->no() != bar)
-                  m->setNo(bar);
+            number += m->noOffset();
+            if (m->no() != number)
+                  m->setNo(number);
             if (!m->irregular())
-                  ++bar;
+                  ++number;
             int mtick = m->tick();
             int diff  = tick - mtick;
             int measureTicks = sigmap->ticksMeasure(tick);
@@ -1818,7 +1835,12 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
                   ntick = pos->measure->tick() + pos->measure->tickLen();
                   }
             double d  = x2 - x1;
-            if (divideSegment) {
+            int track = pos->staffIdx * VOICES;       // Experimental
+
+            bool isTuplet = segment->element(track) && segment->element(track)->isChordRest()
+               && static_cast<ChordRest*>(segment->element(track))->tuplet();
+
+            if (divideSegment && !isTuplet) {
                   if (x < (x1 + d * .3)) {
                         x = x1;
                         pos->tick = segment->tick();

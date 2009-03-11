@@ -44,6 +44,8 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       int n  = m->repeatCount();
       count->setValue(n);
       count->setEnabled(m->repeatFlags() & RepeatEnd);
+      layoutStretch->setValue(m->userStretch());
+      measureNumberOffset->setValue(m->noOffset());
 
       Score* score = m->score();
       int rows = score->nstaves();
@@ -160,6 +162,9 @@ void MeasureProperties::apply()
       m->setBreakMultiMeasureRest(breakMultiMeasureRest->isChecked());
 
       m->setRepeatCount(repeatCount());
+      m->setUserStretch(layoutStretch->value());
+      m->setNoOffset(measureNumberOffset->value());
+
       score->setDirty();
       score->select(0, SELECT_SINGLE, 0);
       SigList* sl = score->sigmap;
@@ -189,6 +194,7 @@ void MeasureProperties::apply()
             score->fixTicks();
             score->select(m, SELECT_SINGLE, 0);
             }
+      score->renumberMeasures();
       score->setLayoutAll(true);
       score->end();
       qApp->processEvents();

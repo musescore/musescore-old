@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>876</width>
-    <height>686</height>
+    <height>727</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1945,7 +1945,7 @@
          </property>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="QRadioButton" name="useBuildinStyle">
+           <widget class="QRadioButton" name="useImportBuildinStyle">
             <property name="text">
              <string>build in style</string>
             </property>
@@ -1954,14 +1954,14 @@
           <item>
            <layout class="QHBoxLayout">
             <item>
-             <widget class="QCheckBox" name="useStyleFile">
+             <widget class="QRadioButton" name="useImportStyleFile">
               <property name="text">
                <string>use style file:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="styleFile"/>
+             <widget class="QLineEdit" name="importStyleFile"/>
             </item>
             <item>
              <widget class="QToolButton" name="styleFileButton">
