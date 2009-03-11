@@ -419,11 +419,6 @@ bool Score::read(QString name)
             if (!loadCompressedMsc(name))
                   return false;
             }
-
-      if (cs == "xml") {
-            importMusicXml(name);
-            connectSlurs();
-            }
       else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
             if (!loadMsc(name))
                   return false;
@@ -437,7 +432,11 @@ bool Score::read(QString name)
                         loadStyle(&f);
                   }
 
-            if (cs == "mxl")
+            if (cs == "xml") {
+                  importMusicXml(name);
+                  connectSlurs();
+                  }
+            else if (cs == "mxl")
                   importCompressedMusicXml(name);
             else if (cs.toLower() == "mid" || cs.toLower() == "kar") {
                   if (!importMidi(name))
