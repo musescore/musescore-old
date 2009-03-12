@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
@@ -26,7 +26,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>480</divisions>
+        <divisions>1</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -51,7 +51,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -61,7 +61,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -84,7 +84,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -94,7 +94,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -117,7 +117,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -127,7 +127,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -150,7 +150,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -160,7 +160,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -184,7 +184,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
@@ -194,7 +194,7 @@
           <step>C</step>
           <octave>4</octave>
           </pitch>
-        <duration>960</duration>
+        <duration>2</duration>
         <voice>1</voice>
         <type>half</type>
         <stem>up</stem>
