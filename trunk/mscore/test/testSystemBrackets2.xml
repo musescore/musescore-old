@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
@@ -32,7 +32,7 @@
         <instrument-name>Piano 2</instrument-name>
         </score-instrument>
       <midi-instrument id="P2-I3">
-        <midi-channel>1</midi-channel>
+        <midi-channel>2</midi-channel>
         <midi-program>1</midi-program>
         </midi-instrument>
       </score-part>
@@ -41,7 +41,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>480</divisions>
+        <divisions>1</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -65,20 +65,20 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>1920</duration>
+        <duration>4</duration>
         <voice>1</voice>
         <type>whole</type>
         <staff>1</staff>
         </note>
       <backup>
-        <duration>1920</duration>
+        <duration>4</duration>
         </backup>
       <note>
         <pitch>
           <step>G</step>
           <octave>3</octave>
           </pitch>
-        <duration>1920</duration>
+        <duration>4</duration>
         <voice>5</voice>
         <type>whole</type>
         <staff>2</staff>
@@ -88,7 +88,7 @@
   <part id="P2">
     <measure number="1">
       <attributes>
-        <divisions>480</divisions>
+        <divisions>1</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -112,20 +112,20 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>1920</duration>
+        <duration>4</duration>
         <voice>1</voice>
         <type>whole</type>
         <staff>1</staff>
         </note>
       <backup>
-        <duration>1920</duration>
+        <duration>4</duration>
         </backup>
       <note>
         <pitch>
           <step>G</step>
           <octave>3</octave>
           </pitch>
-        <duration>1920</duration>
+        <duration>4</duration>
         <voice>5</voice>
         <type>whole</type>
         <staff>2</staff>
