@@ -1,3 +1,5 @@
+12.mar (lv)
+      - updated some MusicXML regression testfiles
 11.mar (ws)
       - note input with mouse: do not allow a note input position between existing
         segments if start segment is part or a tuplet. Inserting between segments is
