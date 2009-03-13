@@ -1341,31 +1341,31 @@ failed: </source>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbool</translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenste Notenbalk</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderste Notenbalk</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Akkoord</translation>
+        <translation>Akkoord</translation>
     </message>
     <message>
         <source>TopChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenste Akkoord</translation>
     </message>
     <message>
         <source>BottomChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderste Akkoord</translation>
     </message>
 </context>
 <context>
@@ -1710,7 +1710,7 @@ toonhoogte</translation>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -4983,7 +4983,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>slur</source>
-        <translation type="unfinished"></translation>
+        <translation>boog</translation>
     </message>
 </context>
 <context>
@@ -6301,19 +6301,19 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Anchor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig:</translation>
     </message>
     <message>
         <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
+        <translation>SEGMENT</translation>
     </message>
     <message>
         <source>MEASURE</source>
-        <translation type="unfinished"></translation>
+        <translation>MAAT</translation>
     </message>
     <message>
         <source>digonal</source>
-        <translation type="unfinished"></translation>
+        <translation>diagonaal</translation>
     </message>
 </context>
 <context>
@@ -6852,23 +6852,23 @@ failed: </source>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Vorm</translation>
+        <translation>Vorm</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished">TekstLijn</translation>
+        <translation>TekstLijn</translation>
     </message>
     <message>
         <source>line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>lijnbreedte:</translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin Tekst</translation>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervlg Tekst</translation>
     </message>
 </context>
 <context>
