@@ -109,8 +109,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1600 révisée JLW 22/02/09 - QT Linguist v4.5 rc1</translatorcomment>
-        <translation>Révision : 1600</translation>
+        <translatorcomment>r1622 révisée JLW 11/03/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1622</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -126,22 +126,22 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer et autres Contributeurs.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visitez http://www.musescore.org pour les nouvelles versions et&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;plus d&apos;information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous la GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Préversion instable de la future version :</translation>
+        <translation>Préversion instable de la future version : </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Version :</translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <source>Revision: %1</source>
@@ -1352,31 +1352,31 @@ failed: </source>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole</translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Poignée</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut de la portée</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas de la portée</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Accord</translation>
+        <translation>Accord</translation>
     </message>
     <message>
         <source>TopChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut de l&apos;accord</translation>
     </message>
     <message>
         <source>BottomChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas de l&apos;accord</translation>
     </message>
 </context>
 <context>
@@ -1720,7 +1720,7 @@ failed: </source>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>esp</translation>
     </message>
 </context>
 <context>
@@ -2568,7 +2568,7 @@ failed: </source>
     </message>
     <message>
         <source>nominal</source>
-        <translation>symbolique</translation>
+        <translation>nominale</translation>
     </message>
     <message>
         <source>/</source>
@@ -4993,7 +4993,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>slur</source>
-        <translation type="unfinished"></translation>
+        <translation>coulé</translation>
     </message>
 </context>
 <context>
@@ -5054,7 +5054,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Définir un ensemble d&apos;instruments. Chaque instrument est représenté par une ou plusieurs portées.</translation>
+        <translation>Définir un ensemble d&apos;instruments. Chaque instrument est représenté par une ou plusieurs portées</translation>
     </message>
 </context>
 <context>
@@ -5503,11 +5503,11 @@ avant de fermer ?</translation>
     <name>PreferenceDialog</name>
     <message>
         <source>Normal State</source>
-        <translation>Etat normal</translation>
+        <translation>Fenêtre d&apos;édition</translation>
     </message>
     <message>
         <source>Play State</source>
-        <translation>Etat de lecture</translation>
+        <translation>Fenêtre de lecture</translation>
     </message>
     <message>
         <source>Choose Notepaper</source>
@@ -6314,19 +6314,19 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>Anchor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poignée :</translation>
     </message>
     <message>
         <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
+        <translation>SEGMENT</translation>
     </message>
     <message>
         <source>MEASURE</source>
-        <translation type="unfinished"></translation>
+        <translation>MESURE</translation>
     </message>
     <message>
         <source>digonal</source>
-        <translation type="unfinished"></translation>
+        <translation>diagonal</translation>
     </message>
 </context>
 <context>
@@ -6866,23 +6866,23 @@ failed: </source>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished">Ligne de texte</translation>
+        <translation>Ligne de texte</translation>
     </message>
     <message>
         <source>line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur des lignes :</translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte de début</translation>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte du prolongement</translation>
     </message>
 </context>
 <context>
