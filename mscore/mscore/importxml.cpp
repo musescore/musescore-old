@@ -349,6 +349,156 @@ void MusicXml::import(Score* s)
       }
 
 //---------------------------------------------------------
+//   addText
+//---------------------------------------------------------
+
+static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
+      {
+      if (!strTxt.isEmpty()) {
+            Text* text = new Text(s);
+            text->setSubtype(sbtp);
+            text->setTextStyle(stl);
+            text->setText(strTxt);
+            if (vbx == 0)
+                  vbx = new VBox(s);
+            vbx->add(text);
+            }
+      }
+
+//---------------------------------------------------------
+//   doCredits
+//---------------------------------------------------------
+
+/**
+ Create Text elements for the credits read from MusicXML credit-words elements.
+ If no credits are found, create credits from meta data.
+ */
+
+void MusicXml::doCredits()
+      {
+      PageFormat* pf = score->pageFormat();
+      printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
+             pf->width(), pf->height(), score->layout()->spatium(), DPMM, DPI);
+      // page width and height in tenths
+      const double pw  = pf->width() * 10 * DPI / score->layout()->spatium();
+      const double ph  = pf->height() * 10 * DPI / score->layout()->spatium();
+      const int pw1 = (int) (pw / 3);
+      const int pw2 = (int) (pw * 2 / 3);
+      const int ph2 = (int) (ph / 2);
+      printf("page format w=%g h=%g\n", pw, ph);
+      printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
+      // dump the credits
+/*
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
+                  w->defaultX,
+                  w->defaultY,
+                  w->justify.toUtf8().data(),
+                  w->hAlign.toUtf8().data(),
+                  w->vAlign.toUtf8().data(),
+                  w->words.toUtf8().data());
+            }
+*/
+      // apply simple heuristics using only default x and y
+      // to recognize the meaning of credit words
+      CreditWords* crwTitle = 0;
+      CreditWords* crwSubTitle = 0;
+      CreditWords* crwComposer = 0;
+      CreditWords* crwPoet = 0;
+      CreditWords* crwCopyRight = 0;
+      // title is highest above middle of the page that is in the middle column
+      // it is done first because subtitle detection depends on the title
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            int defx = w->defaultX;
+            int defy = w->defaultY;
+            if (defy > ph2 && pw1 < defx && defx < pw2) {
+                  // found a possible title
+                  if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
+                  }
+            }
+            // subtitle is highest above middle of the page that is
+            // in the middle column and is not the title
+      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
+            CreditWords* w = *ci;
+            int defx = w->defaultX;
+            int defy = w->defaultY;
+            if (defy > ph2 && pw1 < defx && defx < pw2) {
+                  // found a possible subtitle
+                  if ((!crwSubTitle || defy > crwSubTitle->defaultY)
+                      && w != crwTitle)
+                        crwSubTitle = w;
+                  }
+            // composer is above middle of the page and in the right column
+            if (defy > ph2 && pw2 < defx) {
+                  // found composer
+                  if (!crwComposer) crwComposer = w;
+                  }
+            // poet is above middle of the page and in the left column
+            if (defy > ph2 && defx < pw1) {
+                  // found poet
+                  if (!crwPoet) crwPoet = w;
+                  }
+            // copyright is below middle of the page and in the middle column
+            if (defy < ph2 && pw1 < defx && defx < pw2) {
+                  // found copyright
+                  if (!crwCopyRight) crwCopyRight = w;
+                  }
+            } // end for (ciCreditWords ...
+      if (crwTitle) printf("title='%s'\n", crwTitle->words.toUtf8().data());
+      if (crwSubTitle) printf("subtitle='%s'\n", crwSubTitle->words.toUtf8().data());
+      if (crwComposer) printf("composer='%s'\n", crwComposer->words.toUtf8().data());
+      if (crwPoet) printf("poet='%s'\n", crwPoet->words.toUtf8().data());
+      if (crwCopyRight) printf("copyright='%s'\n", crwCopyRight->words.toUtf8().data());
+
+      // TODO move to score (for use in musicxml export)
+      bool creditsRead = false;
+      if (crwTitle || crwSubTitle || crwComposer || crwPoet || crwCopyRight)
+            creditsRead = true;
+
+      QString strTitle;
+      QString strSubTitle;
+      QString strComposer;
+      QString strPoet;
+      QString strTranslator;
+      QString strCopyRight;
+
+      if (creditsRead) {
+            if (crwTitle) strTitle = crwTitle->words;
+            if (crwSubTitle) strSubTitle = crwSubTitle->words;
+            if (crwComposer) strComposer = crwComposer->words;
+            if (crwPoet) strPoet = crwPoet->words;
+            }
+      else {
+            if (!(score->movementTitle().isEmpty() && score->workTitle().isEmpty())) {
+                  strTitle = score->movementTitle();
+                  if (strTitle.isEmpty())
+                        strTitle = score->workTitle();
+                  }
+            if (!(score->movementNumber().isEmpty() && score->workNumber().isEmpty())) {
+                  strSubTitle = score->movementNumber();
+                  if (strSubTitle.isEmpty())
+                        strSubTitle = score->workNumber();
+                  }
+            if (!composer.isEmpty()) strComposer = composer;
+            if (!poet.isEmpty()) strPoet = poet;
+            if (!translator.isEmpty()) strTranslator = translator;
+            }
+
+      VBox* vbox  = 0;
+      addText(vbox, score, strTitle, TEXT_TITLE, TEXT_STYLE_TITLE);
+      addText(vbox, score, strSubTitle, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
+      addText(vbox, score, strComposer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
+      addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
+      addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
+      if (vbox) {
+            vbox->setTick(0);
+            score->measures()->add(vbox);
+            }
+      }
+
+//---------------------------------------------------------
 //   scorePartwise
 //---------------------------------------------------------
 
@@ -489,15 +639,6 @@ void MusicXml::scorePartwise(QDomElement ee)
                               QString halign  = ee.attribute(QString("halign"));
                               QString valign  = ee.attribute(QString("valign"));
                               QString crwords = ee.text();
-                              /*
-                              printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
-                                     defaultx,
-                                     defaulty,
-                                     justify.toUtf8().data(),
-                                     halign.toUtf8().data(),
-                                     valign.toUtf8().data(),
-                                     crwords.toUtf8().data());
-                              */
                               CreditWords* cw = new CreditWords(defaultx, defaulty, justify, halign, valign, crwords);
                               credits.append(cw);
                               }
@@ -508,80 +649,6 @@ void MusicXml::scorePartwise(QDomElement ee)
             else
                   domError(e);
             }
-
-      PageFormat* pf = score->pageFormat();
-      printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
-             pf->width(), pf->height(), score->layout()->spatium(), DPMM, DPI);
-      // page width and height in tenths
-      const double pw  = pf->width() * 10 * DPI / score->layout()->spatium();
-      const double ph  = pf->height() * 10 * DPI / score->layout()->spatium();
-      const int pw1 = (int) (pw / 3);
-      const int pw2 = (int) (pw * 2 / 3);
-      const int ph2 = (int) (ph / 2);
-      printf("page format w=%g h=%g\n", pw, ph);
-      printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
-      // dump the credits
-      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
-            CreditWords* w = *ci;
-            printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
-                  w->defaultX,
-                  w->defaultY,
-                  w->justify.toUtf8().data(),
-                  w->hAlign.toUtf8().data(),
-                  w->vAlign.toUtf8().data(),
-                  w->words.toUtf8().data());
-            }
-      // apply simple heuristics using only default x and y
-      // to recognize the meaning of credit words
-      CreditWords* crwTitle = 0;
-      CreditWords* crwSubTitle = 0;
-      CreditWords* crwComposer = 0;
-      CreditWords* crwPoet = 0;
-      CreditWords* crwCopyRight = 0;
-      // title is highest above middle of the page that is in the middle column
-      // it is done first because subtitle detection depends on the title
-      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
-            CreditWords* w = *ci;
-            int defx = w->defaultX;
-            int defy = w->defaultY;
-            if (defy > ph2 && pw1 < defx && defx < pw2) {
-                  // found a possible title
-                  if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
-                  }
-            }
-            // subtitle is highest above middle of the page that is
-            // in the middle column and is not the title
-      for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
-            CreditWords* w = *ci;
-            int defx = w->defaultX;
-            int defy = w->defaultY;
-            if (defy > ph2 && pw1 < defx && defx < pw2) {
-                  // found a possible subtitle
-                  if ((!crwSubTitle || defy > crwSubTitle->defaultY)
-                      && w != crwTitle)
-                        crwSubTitle = w;
-                  }
-            // composer is above middle of the page and in the right column
-            if (defy > ph2 && pw2 < defx) {
-                  // found composer
-                  if (!crwComposer) crwComposer = w;
-                  }
-            // poet is above middle of the page and in the left column
-            if (defy > ph2 && defx < pw1) {
-                  // found poet
-                  if (!crwPoet) crwPoet = w;
-                  }
-            // copyright is below middle of the page and in the middle column
-            if (defy < ph2 && pw1 < defx && defx < pw2) {
-                  // found copyright
-                  if (!crwCopyRight) crwCopyRight = w;
-                  }
-            } // end for (ciCreditWords ...
-      if (crwTitle) printf("title='%s'\n", crwTitle->words.toUtf8().data());
-      if (crwSubTitle) printf("subtitle='%s'\n", crwSubTitle->words.toUtf8().data());
-      if (crwComposer) printf("composer='%s'\n", crwComposer->words.toUtf8().data());
-      if (crwPoet) printf("poet='%s'\n", crwPoet->words.toUtf8().data());
-      if (crwCopyRight) printf("copyright='%s'\n", crwCopyRight->words.toUtf8().data());
 
       // add bracket where required
       const QList<Part*>* il = score->parts();
@@ -821,62 +888,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       lastMeasureLen = 0;
 
       if (!score->measures()->first()) {
-            VBox* vbox  = 0;
-            if (!(score->movementTitle().isEmpty() && score->workTitle().isEmpty())) {
-                  QString s = score->movementTitle();
-                  if (s.isEmpty())
-                        s = score->workTitle();
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_TITLE);
-                  text->setTextStyle(TEXT_STYLE_TITLE);
-                  text->setText(s);
-                  if (vbox == 0)
-                        vbox = new VBox(score);
-                  vbox->add(text);
-                  }
-            if (!(score->movementNumber().isEmpty() && score->workNumber().isEmpty())) {
-                  QString s = score->movementNumber();
-                  if (s.isEmpty())
-                        s = score->workNumber();
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_SUBTITLE);
-                  text->setTextStyle(TEXT_STYLE_SUBTITLE);
-                  text->setText(s);
-                  if (vbox == 0)
-                        vbox = new VBox(score);
-                  vbox->add(text);
-                  }
-            if (!composer.isEmpty()) {
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_COMPOSER);
-                  text->setTextStyle(TEXT_STYLE_COMPOSER);
-                  text->setText(composer);
-                  if (vbox == 0)
-                        vbox = new VBox(score);
-                  vbox->add(text);
-                  }
-            if (!poet.isEmpty()) {
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_POET);
-                  text->setTextStyle(TEXT_STYLE_POET);
-                  text->setText(poet);
-                  if (vbox == 0)
-                        vbox = new VBox(score);
-                  vbox->add(text);
-                  }
-            if (!translator.isEmpty()) {
-                  Text* text = new Text(score);
-                  text->setSubtype(TEXT_TRANSLATOR);
-                  text->setTextStyle(TEXT_STYLE_TRANSLATOR);
-                  text->setText(translator);
-                  if (vbox == 0)
-                        vbox = new VBox(score);
-                  vbox->add(text);
-                  }
-            if (vbox) {
-                  vbox->setTick(tick);
-                  score->measures()->add(vbox);
-                  }
+            doCredits();
             }
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {

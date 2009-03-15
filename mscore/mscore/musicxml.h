@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: musicxml.h,v 1.11 2006/04/05 08:15:12 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -144,7 +144,7 @@ class MusicXml {
 
       void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, int subType);
       void genWedge(int no, int endPos, Measure*, int staff);
-
+      void doCredits();
       void direction(Measure* measure, int staff, QDomElement node);
       void scorePartwise(QDomElement);
       void xmlPartList(QDomElement);
