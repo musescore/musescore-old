@@ -36,9 +36,19 @@ endif (GCC_VISIBILITY)
 
 include_directories(${QT_INCLUDES})
 
+# only for QSsl
+#      qtscript_QSslCertificate.cpp
+#      qtscript_QSslCipher.cpp
+#      qtscript_QSslConfiguration.cpp
+#      qtscript_QSslError.cpp
+#      qtscript_QSslKey.cpp
+#      qtscriptshell_QSslSocket.cpp
+#      qtscript_QSslSocket.cpp
+
 add_library (
       qtscript_network ${LIBTYPE}
       main.cpp
+      qtscript_QSsl.cpp
       qtscript_QAbstractSocket.cpp
       qtscript_QAuthenticator.cpp
       qtscript_QFtp.cpp
@@ -58,12 +68,6 @@ add_library (
       qtscript_QNetworkProxy.cpp
       qtscript_QNetworkReply.cpp
       qtscript_QNetworkRequest.cpp
-      qtscript_QSslCertificate.cpp
-      qtscript_QSslCipher.cpp
-      qtscript_QSslConfiguration.cpp
-      qtscript_QSslError.cpp
-      qtscript_QSslKey.cpp
-      qtscript_QSslSocket.cpp
       qtscript_QTcpServer.cpp
       qtscript_QTcpSocket.cpp
       qtscript_QUdpSocket.cpp
@@ -79,18 +83,25 @@ add_library (
       qtscriptshell_QNetworkAccessManager.cpp
       qtscriptshell_QNetworkCookieJar.cpp
       qtscriptshell_QNetworkReply.cpp
-      qtscriptshell_QSslSocket.cpp
       qtscriptshell_QTcpServer.cpp
       qtscriptshell_QTcpSocket.cpp
       qtscriptshell_QUdpSocket.cpp
       qtscriptshell_QUrlInfo.cpp
+      qtscriptshell_QNetworkProxyFactory.cpp
+      qtscriptshell_QHttpHeader.cpp
+      qtscriptshell_QAbstractNetworkCache.cpp
+      qtscript_QNetworkProxyFactory.cpp
+      qtscript_QNetworkProxyQuery.cpp
+      qtscript_QNetworkCacheMetaData.cpp
+      qtscript_QHttpHeader.cpp
+      qtscript_QAbstractNetworkCache.cpp
       )
 
 set_target_properties(
       qtscript_network
       PROPERTIES
       COMPILE_FLAGS
-         "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+         "-D QT_NO_OPENSSL -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 

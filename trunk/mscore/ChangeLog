@@ -1,6 +1,11 @@
+16.mar (ws)
+      - update core & network part of qtscript bindings
+      - big overhaul of the undo/redo code
 15.mar (lv)
       - MusicXML import of credits
-12.mar (lv)
+12.mar (ws)
+      - removed "cursorBlink" preference
+      (lv)
       - fixed most MusicXML regression testfiles
       (db)
       - update Dutch translation by Jaap Plaisier

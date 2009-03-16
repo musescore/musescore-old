@@ -52,6 +52,8 @@
 #include "harmony.h"
 #include "magbox.h"
 #include "voiceselector.h"
+#include "sig.h"
+#include "undo.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -250,6 +252,7 @@ MuseScore::MuseScore()
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
       setAcceptDrops(true);
+      _undoGroup            = new UndoGroup();
       cs                    = 0;
       se                    = 0;    // script engine
       debugger              = 0;
@@ -319,7 +322,7 @@ MuseScore::MuseScore()
          << "select-begin-line" << "select-end-line"
          << "select-begin-score" << "select-end-score"
          << "select-staff-above" << "select-staff-below"
-         << "next-measure" << "prev-measure" << "print" << "undo" << "redo"
+         << "next-measure" << "prev-measure" << "print"
          << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
          << "insert-hbox" << "insert-vbox" << "append-hbox" << "append-vbox"
          << "duplet" << "triplet" << "quadruplet" << "quintuplet" << "sextuplet"
@@ -423,8 +426,19 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("print"));
       fileTools->addAction(whatsThis);
       fileTools->addSeparator();
-      fileTools->addAction(getAction("undo"));
-      fileTools->addAction(getAction("redo"));
+
+      a = getAction("undo");
+      a->setEnabled(false);
+      connect(_undoGroup, SIGNAL(canUndoChanged(bool)), a, SLOT(setEnabled(bool)));
+      connect(a, SIGNAL(triggered()), SLOT(undo()));
+      fileTools->addAction(a);
+
+      a = getAction("redo");
+      a->setEnabled(false);
+      connect(_undoGroup, SIGNAL(canRedoChanged(bool)), a, SLOT(setEnabled(bool)));
+      connect(a, SIGNAL(triggered()), SLOT(redo()));
+      fileTools->addAction(a);
+
       fileTools->addSeparator();
 
       transportTools = addToolBar(tr("Transport Tools"));
@@ -910,6 +924,7 @@ void MuseScore::appendScore(Score* score)
             }
 
       scoreList.push_back(score);
+      _undoGroup->addStack(score->undo());
 
       tab->blockSignals(true);
       tab->addTab(score->canvas(), score->name());
@@ -1066,10 +1081,9 @@ void MuseScore::setCurrentScore(Score* score)
             disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
             }
       cs = score;
+      _undoGroup->setActiveStack(cs->undo());
       cs->canvas()->setFocus(Qt::OtherFocusReason);
 
-      getAction("undo")->setEnabled(!cs->undoEmpty());
-      getAction("redo")->setEnabled(!cs->redoEmpty());
       getAction("file-save")->setEnabled(cs->isSavable());
       getAction("show-invisible")->setChecked(cs->showInvisible());
       getAction("show-frames")->setChecked(cs->showFrames());
@@ -1349,6 +1363,8 @@ void MuseScore::removeTab(int i)
       tab->blockSignals(true);
       tab->removeTab(i);
       tab->blockSignals(false);
+      delete score;
+
       cs = 0;
       if (i >= (n-1))
             i = 0;
@@ -1876,9 +1892,9 @@ void MuseScore::changeState(int val)
             if (!s->action)
                   continue;
             if (strcmp(s->xml, "undo") == 0)
-                  s->action->setEnabled(cs && !cs->undoEmpty());
+                  s->action->setEnabled((s->state & val) && _undoGroup->canUndo());
             else if (strcmp(s->xml, "redo") == 0)
-                  s->action->setEnabled(cs && !cs->redoEmpty());
+                  s->action->setEnabled((s->state & val) && _undoGroup->canRedo());
             else if (strcmp(s->xml, "cut") == 0)
                   s->action->setEnabled(cs && cs->selection()->state());
             else if (strcmp(s->xml, "copy") == 0)
@@ -2160,5 +2176,26 @@ void MuseScore::setPos(int t)
          .arg(beat + 1, 2, 10, QLatin1Char(' '))
          .arg(tick,     3, 10, QLatin1Char('0'))
          );
+      }
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+void MuseScore::undo()
+      {
+      _undoGroup->undo();
+      if (cs)
+            cs->endUndoRedo();
+      }
+
+//---------------------------------------------------------
+//   redo
+//---------------------------------------------------------
+
+void MuseScore::redo()
+      {
+      _undoGroup->redo();
+      if (cs)
+            cs->endUndoRedo();
       }
 

@@ -46,6 +46,9 @@
 #include "tuplet.h"
 #include "articulation.h"
 #include "drumset.h"
+#include "segment.h"
+#include "measure.h"
+#include "undo.h"
 
 const int noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym },
@@ -697,12 +700,12 @@ void ShadowNote::draw(QPainter& p) const
 //      if (c.intersects(r)) {
             p.translate(ap);
             qreal lw = point(score()->styleS(ST_ledgerLineWidth));
-            InputState* ps = score()->inputState();
+            InputState ps = score()->inputState();
             int voice;
-            if (ps->drumNote != -1 && ps->drumset)
-                  voice = ps->drumset->voice(ps->drumNote);
+            if (ps.drumNote != -1 && ps.drumset)
+                  voice = ps.drumset->voice(ps.drumNote);
             else
-                  voice = ps->voice;
+                  voice = ps.voice;
 
             QPen pen(preferences.selectColor[voice].light(160));
             pen.setWidthF(lw);
@@ -874,7 +877,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                         }
                   delete s;
                   if (group != _headGroup)
-                        score()->undoChangeNoteHead(this, group);
+                        score()->undo()->push(new ChangeNoteHead(this, group));
                   }
                   break;
 
@@ -986,7 +989,7 @@ Element* Note::drop(const QPointF& p1, const QPointF& p2, Element* e)
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
                   int headGroup = n->headGroup();
-                  int len       = score()->inputState()->tickLen;
+                  int len       = score()->inputState().tickLen;
                   Direction dir = c->stemDirection();
                   int t         = track() + n->voice();
                   score()->select(0, SELECT_SINGLE, 0);

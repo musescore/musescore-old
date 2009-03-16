@@ -42,7 +42,7 @@ static QScriptValue qtscript_QSocketNotifier_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSocketNotifier::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -83,7 +83,7 @@ static const char * const qtscript_QSocketNotifier_Type_keys[] = {
 static QString qtscript_QSocketNotifier_Type_toStringHelper(QSocketNotifier::Type value)
 {
     if ((value >= QSocketNotifier::Read) && (value <= QSocketNotifier::Exception))
-        return qtscript_QSocketNotifier_Type_keys[static_cast<int>(value)];
+        return qtscript_QSocketNotifier_Type_keys[static_cast<int>(value)-static_cast<int>(QSocketNotifier::Read)];
     return QString();
 }
 

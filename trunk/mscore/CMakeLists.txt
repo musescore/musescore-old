@@ -26,7 +26,7 @@ cmake_policy(SET CMP0003 NEW)
 # cmake 2.4.3 does not install all.h and does not link against qtsvg
 
 # for debugging the make system uncomment next line:
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 

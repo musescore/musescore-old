@@ -59,674 +59,251 @@
 
 extern Measure* tick2measure(int tick);
 
-//
-// for debugging:
-//    keep in sync with enum UndoOp::UndoType
-//
-static const char* undoName[] = {
-      "RemoveElement",      "AddElement",
-      "InsertPart",        "RemovePart",
-      "InsertStaff",       "RemoveStaff",
-      "InsertSegStaff",    "RemoveSegStaff",
-      "InsertMStaff",      "RemoveMStaff",
-      "InsertMeasure",     "RemoveMeasure",
-      "InsertStaves",      "RemoveStaves",
-      "SortStaves",        "ToggleInvisible",
-      "ChangeColor",       "ChangePitch", "ChangeTpc",
-      "ChangeSubtype",     "AddAccidental",
-      "SetStemDirection",  "FlipSlurDirection", "FlipBeamDirection",
-      "ChangeKeySig",
-      "ChangeClef",
-      "ChangeSig",
-      "ChangeTempo",
-      "ChangeMeasureLen",
-      "ChangeElement",
-      "ChangeKey",
-      "InsertTime",
-      "ChangeRepeatFlags",
-      "ChangeVoltaEnding", "ChangeVoltaText",
-      "ChangeChordRestSize",
-      "ChangeChordNoStem",
-      "ChangeChordRestSpace",
-      "ChangeNoteHead",
-      "ChangeEndBarLineType",
-      "ChangeBarLineSpan",
-      "ChangeUserOffset",
-      "ChanveVelocity",
-      "SigInsertTime",
-      "FixTicks",
-      "ChangeBeamMode",
-      "ChangeCopyright",
-      "TransposeHarmony",
-      "ExchangeVoice",
-      "ChangeConcertPitch",
-      "ChangeInstrumentShort", "ChangeInstrumentLong",
-      "ChangeChordRestLen", "MoveElement"
-      };
-
-static bool UNDO = false;
-
 //---------------------------------------------------------
-//   name
+//   undo
 //---------------------------------------------------------
 
-/**
- Return the UndoOp's name. For debugging only.
-*/
-
-const char* UndoOp::name() const
+void UndoCommand::undo()
       {
-      if (type >= int(sizeof(undoName)/sizeof(*undoName))) {
-            printf("\n illegal undo type %d\n", type);
-            return "???";
-            }
-      return undoName[type];
+      int n = childList.size();
+      for (int i = n-1; i >= 0; --i)
+            childList[i]->undo();
       }
 
 //---------------------------------------------------------
-//   Undo
+//   redo
 //---------------------------------------------------------
 
-Undo::Undo(const InputState& is, const Selection* s)
-   : selection(*s)
+void UndoCommand::redo()
       {
-      inputState = is;
+      int n = childList.size();
+      for (int i = 0; i < n; ++i)
+            childList[i]->undo();
       }
 
 //---------------------------------------------------------
-//   doUndo
+//   UndoStack
 //---------------------------------------------------------
 
-/**
- Undo a user-visible undo action, containing one or more UndoOp's.
-*/
-
-void Score::doUndo()
+UndoStack::UndoStack()
       {
-      if (debugMode)
-            printf("doUndo %d redo: %d\n", undoList.size(), redoList.size());
-      Selection oSel(*sel);
-      InputState oIs(_is);
-      sel->deselectAll(this);
-      if (undoList.isEmpty()) {
-            printf("doUndo: undoList is empty!\n");
-            getAction("undo")->setEnabled(false);
+      group    = 0;
+      curCmd   = 0;
+      curIdx   = 0;
+      cleanIdx = 0;
+      }
+
+//---------------------------------------------------------
+//   UndoStack
+//---------------------------------------------------------
+
+UndoStack::~UndoStack()
+      {
+      if (group)
+            group->removeStack(this);
+      }
+
+//---------------------------------------------------------
+//   beginMacro
+//---------------------------------------------------------
+
+void UndoStack::beginMacro()
+      {
+      if (curCmd) {
+            printf("UndoStack:beginMacro(): alread active\n");
             return;
             }
-      Undo* u = undoList.back();
-      int n = u->size();
-      for (int i = n-1; i >= 0; --i) {
-            UndoOp* op = &(*u)[i];
-            processUndoOp(op, true);
-            if (op->type == UndoOp::ChangeAccidental) {
-                  // HACK:
-                  // selection is not valid anymore because changeAccidental()
-                  // changes the selected Accidental element
-                  // u->selection.clear();
-                  oSel.clear();
-                  }
-            }
-      redoList.append(u);     // put item on redo list
-      undoList.removeLast();
-      endUndoRedo(u);
-      u->inputState = oIs;
-      u->selection  = oSel;
+      curCmd = new UndoCommand();
       }
 
 //---------------------------------------------------------
-//   doRedo
+//   endMacro
 //---------------------------------------------------------
 
-/**
- Redo a user-visible undo action, containing one or more UndoOp's.
-*/
-
-void Score::doRedo()
+void UndoStack::endMacro(bool rollback)
       {
-      if (debugMode)
-            printf("doRedo\n");
-      Selection oSel(*sel);
-      InputState oIs(_is);
-      sel->deselectAll(this);
-      Undo* u = redoList.back();
-      int n = u->size();
-      for (int i = 0; i < n; ++i) {
-            UndoOp* op = &(*u)[i];
-            processUndoOp(op, false);
-            if (op->type == UndoOp::ChangeAccidental) {
-                  // HACK:
-                  // selection is not valid anymore because changeAccidental()
-                  // changes the selected Accidental element
-                  u->selection.clear();
-                  }
+      if (curCmd == 0) {
+            printf("UndoStack:endMacro(): not active\n");
+            return;
             }
-      undoList.append(u); // put item on undo list
-      redoList.removeLast();
-      endUndoRedo(u);
-      u->inputState = oIs;
-      u->selection  = oSel;
+      if (rollback) {
+            delete curCmd;
+            curCmd = 0;
+            return;
+            }
+      bool a = isClean();
+      if (list.size() > curIdx)
+            emit canRedoChanged(false);
+      if (curIdx == 0)
+            emit canUndoChanged(true);
+      while (list.size() > curIdx) {
+            UndoCommand* cmd = list.takeLast();
+            delete cmd;
+            }
+      list.append(curCmd);
+      curCmd = 0;
+      ++curIdx;
+      if (a != isClean())
+            emit cleanChanged(!a);
       }
 
 //---------------------------------------------------------
-//   processUndoOp
+//   push
 //---------------------------------------------------------
 
-/**
- Process a single low-level undo/redo operation.
-*/
-
-void Score::processUndoOp(UndoOp* i, bool undo)
+void UndoStack::push(UndoCommand* cmd)
       {
-      UNDO = true;
-
-      if (debugMode) {
-            printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
-            if (i->type == UndoOp::RemoveElement)
-                  printf("   %s\n", i->element1->name());
+      if (!curCmd) {
+            printf("UndoStack:push(): no active command\n");
+            return;
             }
+      curCmd->appendChild(cmd);
+      cmd->redo();
+      }
 
-      switch (i->type) {
-            case UndoOp::RemoveElement:
-                  if (undo)
-                        addElement(i->element1);
-                  else
-                        removeElement(i->element1);
-                  break;
-            case UndoOp::AddElement:
-                  if (undo)
-                        removeElement(i->element1);
-                  else
-                        addElement(i->element1);
-                  break;
-            case UndoOp::InsertPart:
-                  if (undo)
-                        removePart(i->part);
-                  else
-                        insertPart(i->part, i->val1);
-                  break;
-            case UndoOp::RemovePart:
-                  if (undo)
-                        insertPart(i->part, i->val1);
-                  else
-                        removePart(i->part);
-                  break;
-            case UndoOp::InsertStaff:
-                  if (undo)
-                        removeStaff(i->staff);
-                  else
-                        insertStaff(i->staff, i->val1);
-                  break;
-            case UndoOp::RemoveStaff:
-                  if (undo)
-                        insertStaff(i->staff, i->val1);
-                  else
-                        removeStaff(i->staff);
-                  break;
-            case UndoOp::InsertSegStaff:
-                  if (undo)
-                        i->segment->removeStaff(i->val1);
-                  else
-                        i->segment->insertStaff(i->val1);
-                  break;
-            case UndoOp::RemoveSegStaff:
-                  if (undo)
-                        i->segment->insertStaff(i->val1);
-                  else
-                        i->segment->removeStaff(i->val1);
-                  break;
-            case UndoOp::InsertMStaff:
-                  if (undo)
-                        ((Measure*)i->measure)->removeMStaff(i->mstaff, i->val1);
-                  else
-                        ((Measure*)i->measure)->insertMStaff(i->mstaff, i->val1);
-                  break;
-            case UndoOp::RemoveMStaff:
-                  if (undo)
-                        ((Measure*)i->measure)->insertMStaff(i->mstaff, i->val1);
-                  else
-                        ((Measure*)i->measure)->removeMStaff(i->mstaff, i->val1);
-                  break;
-            case UndoOp::InsertMeasure:
-                  if (undo)
-                        removeMeasure(i->measure);
-                  else
-                        addMeasure(i->measure);
-                  break;
-            case UndoOp::RemoveMeasure:
-                  if (undo)
-                        addMeasure(i->measure);
-                  else
-                        removeMeasure(i->measure);
-                  break;
-            case UndoOp::SortStaves:
-                  sortStaves(i->di);
-                  break;
-            case UndoOp::ToggleInvisible:
-                  i->element1->setVisible(!i->element1->visible());
-                  break;
-            case UndoOp::ChangeColor:
-                  {
-                  QColor color = i->element1->color();
-                  i->element1->setColor(i->color);
-                  i->color = color;
-                  }
-                  break;
-            case UndoOp::ChangePitch:
-                  {
-                  Note* note = (Note*)(i->element1);
-                  int pitch  = note->pitch();
-                  int tpc    = note->tpc();
-                  int userAcc = note->userAccidental();
-                  note->changePitch(i->val1);
-                  note->setTpc(i->val2);
-                  note->setUserAccidental(i->val3);
-                  i->val1 = pitch;
-                  i->val2 = tpc;
-                  i->val3 = userAcc;
-                  }
-                  break;
-            case UndoOp::ChangeTpc:
-                  {
-                  Note* note = (Note*)(i->element1);
-                  int tpc  = note->tpc();
-                  note->setTpc(i->val1);
-                  i->val1 = tpc;
-                  }
-                  break;
-            case UndoOp::ChangeAccidental:
-                  {
-                  Note* note = (Note*)(i->element1);
-                  int pitch  = note->pitch();
-                  int tpc    = note->tpc();
-                  int acc    = note->accidentalSubtype();
-                  note->setPitch(i->val1);
-                  note->setTpc(i->val2);
-                  note->setAccidentalSubtype(i->val3);
-                  i->val1 = pitch;
-                  i->val2 = tpc;
-                  i->val3 = acc;
-                  }
-                  break;
-            case UndoOp::SetStemDirection:
-                  {
-                  Chord* chord = (Chord*)(i->element1);
-                  Direction dir = chord->stemDirection();
-                  chord->setStemDirection((Direction)i->val1);
-                  i->val1 = (int)dir;
-                  }
-                  break;
-            case UndoOp::FlipSlurDirection:
-                  {
-                  SlurTie* slur = (SlurTie*)(i->element1);
-                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
-                  }
-                  break;
-            case UndoOp::FlipBeamDirection:
-                  {
-                  Beam* beam = static_cast<Beam*>(i->element1);
-                  beam->setBeamDirection(beam->isUp() ? DOWN : UP);
-                  }
-                  break;
-            case UndoOp::ChangeSubtype:
-                  {
-                  int st = i->element1->subtype();
-                  i->element1->setSubtype(i->val1);
-                  i->val1 = st;
-                  }
-                  break;
-
-            case UndoOp::ChangeElement:
-                  i->element1->parent()->change(i->element1, i->element2);
-                  {
-                  // swap
-                  Element* e = i->element1;
-                  i->element1 = i->element2;
-                  i->element2 = e;
-                  }
-                  break;
-
-            case UndoOp::InsertStaves:
-                  if (undo)
-                        ((Measure*)i->measure)->removeStaves(i->val1, i->val2);
-                  else
-                        ((Measure*)i->measure)->insertStaves(i->val1, i->val2);
-                  break;
-            case UndoOp::RemoveStaves:
-                  if (undo)
-                        ((Measure*)i->measure)->insertStaves(i->val1, i->val2);
-                  else
-                        ((Measure*)i->measure)->removeStaves(i->val1, i->val2);
-                  break;
-
-            case UndoOp::ChangeKeySig:
-                  {
-                  KeyList* kl = i->staff->keymap();
-                  if (undo) {
-                        // remove new value if there is any
-                        if (i->val3 != NO_KEY) {
-                              iKeyEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
-                              }
-                        if (i->val2 != NO_KEY)
-                              (*kl)[i->val1] = i->val2;
-                        }
-                  else {
-                        if (i->val2 != NO_KEY) {
-                              iKeyEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
-                              }
-                        if (i->val3 != NO_KEY)
-                              (*kl)[i->val1] = i->val3;
-                        }
-                  }
-                  break;
-
-            case UndoOp::ChangeClef:
-                  {
-                  ClefList* kl = i->staff->clefList();
-                  if (undo) {
-                        // remove new value if there is any
-                        if (i->val3 != NO_CLEF) {
-                              iClefEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
-                              }
-                        if (i->val2 != NO_CLEF)
-                              (*kl)[i->val1] = i->val2;
-                        }
-                  else {
-                        if (i->val2 != NO_CLEF) {
-                              iClefEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
-                              }
-                        if (i->val3 != NO_CLEF)
-                              (*kl)[i->val1] = i->val3;
-                        }
-                  }
-                  break;
-            case UndoOp::ChangeKey:
-                  {
-                  KeyList* kl = i->staff->keymap();
-                  if (undo) {
-                        // remove new value if there is any
-                        if (i->val3 != NO_KEY) {
-                              iClefEvent ik = kl->find(i->val1);
-                              if (ik == kl->end())
-                                    printf("UndoOp::ChangeKey1 %d: not found\n", i->val1);
-                              else
-                                    kl->erase(ik);
-                              }
-                        if (i->val2 != NO_KEY)
-                              (*kl)[i->val1] = i->val2;
-                        }
-                  else {
-                        if (i->val2 != NO_KEY) {
-                              iKeyEvent ik = kl->find(i->val1);
-                              if (ik == kl->end())
-                                    printf("UndoOp::ChangeKey2 %d: not found\n", i->val1);
-                              else
-                                    kl->erase(ik);
-                              }
-                        if (i->val3 != NO_KEY)
-                              (*kl)[i->val1] = i->val3;
-                        }
-                  }
-                  break;
-            case UndoOp::ChangeSig:
-                  {
-                  if (undo) {
-                        if (i->sig2.valid())
-                              sigmap->del(i->val1);
-                        if (i->sig1.valid())
-                              sigmap->add(i->val1, i->sig1);
-                        }
-                  else {
-                        if (i->sig1.valid())
-                              sigmap->del(i->val1);
-                        if (i->sig2.valid())
-                              sigmap->add(i->val1, i->sig2);
-                        }
-//                  fixTicks();
-                  }
-                  break;
-            case UndoOp::FixTicks:
-                  fixTicks();
-                  break;
-            case UndoOp::ChangeTempo:
-                  {
-                  if (undo) {
-                        if (i->t2.valid())
-                              tempomap->delTempo(i->val1);
-                        if (i->t1.valid())
-                              tempomap->addTempo(i->val1, i->t1);
-                        }
-                  else {
-                        if (i->t1.valid())
-                              tempomap->delTempo(i->val1);
-                        if (i->t2.valid())
-                              tempomap->addTempo(i->val1, i->t2);
-                        }
-                  }
-                  break;
-            case UndoOp::ChangeMeasureLen:
-                  {
-                  Measure* m = (Measure*)i->measure;
-                  int ol     = i->val2;
-                  int nl     = i->val1;
-                  // m->setTickLen(nl);
-
-                  //
-                  // move EndBarLine and TimeSigAnnounce
-                  // to end of measure:
-                  //
-                  int staves = nstaves();
-                  int endTick = m->tick() + nl;
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        if (segment->subtype() != Segment::SegEndBarLine
-                           && segment->subtype() != Segment::SegTimeSigAnnounce)
-                              continue;
-                        segment->setTick(endTick);
-                        for (int track = 0; track < staves*VOICES; ++track) {
-                              if (segment->element(track))
-                                    segment->element(track)->setTick(endTick);
-                              }
-                        }
-                  i->val1 = ol;
-                  i->val2 = nl;
-                  }
-                  break;
-
-            case UndoOp::InsertTime:
-                  if (undo)
-                        insertTime(i->val1, -i->val2);
-                  else
-                        insertTime(i->val1, i->val2);
-                  break;
-
-            case UndoOp::SigInsertTime:
-                  {
-                  int len = undo ? -i->val2 : i->val2;
-                  if (len < 0)
-                        sigmap->removeTime(i->val1, -len);
-                  else
-                        sigmap->insertTime(i->val1, len);
-                  }
-                  break;
-
-            case UndoOp::ChangeRepeatFlags:
-                  {
-                  int tmp = static_cast<Measure*>(i->measure)->repeatFlags();
-                  static_cast<Measure*>(i->measure)->setRepeatFlags(i->val1);
-                  i->val1 = tmp;
-                  }
-                  break;
-            case UndoOp::ChangeVoltaEnding:
-                  {
-                  Volta* volta = static_cast<Volta*>(i->element1);
-                  QList<int> l = volta->endings();
-                  volta->setEndings(i->di);
-                  i->di = l;
-                  }
-                  break;
-            case UndoOp::ChangeVoltaText:
-                  {
-                  Volta* volta = static_cast<Volta*>(i->element1);
-                  QString s = volta->text();
-                  volta->setText(i->s);
-                  i->s = s;
-                  }
-                  break;
-            case UndoOp::ChangeChordRestSize:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
-                  bool small = cr->small();
-                  cr->setSmall(i->val1);
-                  i->val1 = small;
-                  }
-                  break;
-            case UndoOp::ChangeChordNoStem:
-                  {
-                  Chord* c = static_cast<Chord*>(i->element1);
-                  bool noStem = c->noStem();
-                  c->setNoStem(i->val1);
-                  i->val1 = noStem;
-                  }
-                  break;
-            case UndoOp::ChangeChordRestSpace:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
-                  Spatium l = cr->extraLeadingSpace();
-                  Spatium t = cr->extraTrailingSpace();
-                  cr->setExtraLeadingSpace(Spatium(i->d1));
-                  cr->setExtraTrailingSpace(Spatium(i->d2));
-                  i->d1 = l.val();
-                  i->d2 = t.val();
-                  }
-                  break;
-            case UndoOp::ChangeNoteHead:
-                  {
-                  Note* note = static_cast<Note*>(i->element1);
-                  int headGroup = note->headGroup();
-                  note->setHeadGroup(i->val1);
-                  i->val1 = headGroup;
-                  }
-                  break;
-            case UndoOp::ChangeBeamMode:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
-                  int mode = int(cr->beamMode());
-                  cr->setBeamMode(BeamMode(i->val1));
-                  i->val1 = int(mode);
-                  }
-                  break;
-            case UndoOp::ChangeEndBarLineType:
-                  {
-                  Measure* m = static_cast<Measure*>(i->measure);
-                  int typ    = m->endBarLineType();
-                  m->setEndBarLineType(i->val1, false);
-                  i->val1 = typ;
-                  }
-                  break;
-            case UndoOp::ChangeBarLineSpan:
-                  {
-                  int span = i->staff->barLineSpan();
-                  i->staff->setBarLineSpan(i->val1);
-                  i->val1 = span;
-                  }
-                  break;
-            case UndoOp::ChangeUserOffset:
-                  {
-                  QPointF p = i->element1->userOff();
-                  i->element1->setUserOff(i->pt);
-                  i->pt   = p;
-                  }
-                  break;
-            case UndoOp::ChangeVelocity:
-                  {
-                  Dynamic* d = static_cast<Dynamic*>(i->element1);
-                  int v = d->velocity();
-                  d->setVelocity(i->val1);
-                  i->val1 = v;
-                  }
-                  break;
-            case UndoOp::ChangeCopyright:
-                  {
-                  QString s;
-                  if (rights)
-                        s = rights->getHtml();
-                  setCopyrightHtml(i->s);
-                  i->s = s;
-                  }
-                  break;
-            case UndoOp::TransposeHarmony:
-                  {
-                  Harmony* h = static_cast<Harmony*>(i->element1);
-                  int semitones = i->val1;
-                  if (undo)
-                        semitones = -semitones;
-                  int baseTpc = h->baseTpc();
-                  int rootTpc = h->rootTpc();
-                  h->setBaseTpc(transposeTpc(baseTpc, semitones));
-                  h->setRootTpc(transposeTpc(rootTpc, semitones));
-                  h->buildText();
-                  }
-                  break;
-            case UndoOp::ExchangeVoice:
-                  {
-                  Measure* m = static_cast<Measure*>(i->element1);
-                  if (undo)
-                        m->exchangeVoice(i->val2, i->val1, i->val3, i->val4);
-                  else
-                        m->exchangeVoice(i->val1, i->val2, i->val3, i->val4);
-                  }
-                  break;
-            case UndoOp::ChangeConcertPitch:
-                  {
-                  int oval = int(styleB(ST_concertPitch));
-                  _style[ST_concertPitch] = StyleVal(bool(i->val1));
-                  QAction* action = getAction("concert-pitch");
-                  action->setChecked(styleB(ST_concertPitch));
-                  i->val1 = oval;
-                  }
-                  break;
-            case UndoOp::ChangeInstrumentShort:
-                  {
-                  QString s = i->part->shortNameHtml();
-                  i->part->setShortNameHtml(i->s);
-                  i->s = s;
-                  }
-                  break;
-            case UndoOp::ChangeInstrumentLong:
-                  {
-                  QString s = i->part->longNameHtml();
-                  i->part->setLongNameHtml(i->s);
-                  i->s = s;
-                  }
-                  break;
-            case UndoOp::ChangeChordRestLen:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(i->element1);
-                  int oldLen = cr->tickLen();
-                  cr->setLen(i->val1);
-                  i->val1 = oldLen;
-                  }
-                  break;
-            case UndoOp::MoveElement:
-                  {
-                  QPointF po = i->element1->userOff();
-                  i->element1->setUserOff(i->pt);
-                  i->pt = po;
-                  }
-                  break;
-            case UndoOp::ChangeBracketSpan:
-                  {
-                  int column = i->val1;
-                  int oSpan  = i->staff->bracketSpan(column);
-                  i->staff->setBracketSpan(column, i->val2);
-                  i->val2 = oSpan;
-                  }
-                  break;
+void UndoStack::setClean()
+      {
+      if (cleanIdx != curIdx) {
+            cleanIdx = curIdx;
+            emit cleanChanged(false);
             }
-      UNDO = FALSE;
+      }
+
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+void UndoStack::undo()
+      {
+      if (curIdx) {
+            bool a = true;
+            bool b = canRedo();
+            bool c = isClean();
+            --curIdx;
+            list[curIdx]->undo();
+            if (a != canUndo())
+                  emit canUndoChanged(!a);
+            if (b != canRedo())
+                  emit canRedoChanged(!b);
+            if (c != isClean())
+                  emit cleanChanged(!c);
+            }
+      }
+
+//---------------------------------------------------------
+//   redo
+//---------------------------------------------------------
+
+void UndoStack::redo()
+      {
+      if (canRedo()) {
+            bool a = canUndo();
+            bool b = true;
+            bool c = isClean();
+            list[curIdx++]->redo();
+            if (a != canUndo())
+                  emit canUndoChanged(!a);
+            if (b != canRedo())
+                  emit canRedoChanged(!b);
+            if (c != isClean())
+                  emit cleanChanged(!c);
+            }
+      }
+
+void UndoGroup::undo()
+      {
+      if (_activeStack)
+            _activeStack->undo();
+      }
+
+void UndoGroup::redo()
+      {
+      if (_activeStack)
+            _activeStack->redo();
+      }
+
+//---------------------------------------------------------
+//   UndoGroup
+//---------------------------------------------------------
+
+UndoGroup::UndoGroup()
+      {
+      _activeStack = 0;
+      }
+
+//---------------------------------------------------------
+//   addStack
+//---------------------------------------------------------
+
+void UndoGroup::addStack(UndoStack* stack)
+      {
+      stack->setGroup(this);
+      group.append(stack);
+      connect(stack, SIGNAL(canUndoChanged(bool)), this, SIGNAL(canUndoChanged(bool)));
+      connect(stack, SIGNAL(canRedoChanged(bool)), this, SIGNAL(canRedoChanged(bool)));
+      connect(stack, SIGNAL(cleanChanged(bool)), this, SIGNAL(cleanChanged(bool)));
+      }
+
+//---------------------------------------------------------
+//   removeStack
+//---------------------------------------------------------
+
+void UndoGroup::removeStack(UndoStack* stack)
+      {
+      bool a = canUndo();
+      bool b = canRedo();
+      group.removeOne(stack);
+      if (stack == _activeStack)
+            _activeStack = 0;
+      if (a)
+            emit canUndoChanged(!a);
+      if (b)
+            emit canRedoChanged(!b);
+      }
+
+//---------------------------------------------------------
+//   setActiveStack
+//---------------------------------------------------------
+
+void UndoGroup::setActiveStack(UndoStack* stack)
+      {
+      bool a = canUndo();
+      bool b = canRedo();
+      bool c = isClean();
+      _activeStack = stack;
+      if (a != canUndo())
+            emit canUndoChanged(!a);
+      if (b != canRedo())
+            emit canRedoChanged(!b);
+      if (c != isClean())
+            emit cleanChanged(!c);
+      }
+
+//---------------------------------------------------------
+//   canUndo
+//---------------------------------------------------------
+
+bool UndoGroup::canUndo() const
+      {
+      return _activeStack ? _activeStack->canUndo() : false;
+      }
+
+//---------------------------------------------------------
+//   canRedo
+//---------------------------------------------------------
+
+bool UndoGroup::canRedo() const
+      {
+      return _activeStack ? _activeStack->canRedo() : false;
+      }
+
+//---------------------------------------------------------
+//   isClean
+//---------------------------------------------------------
+
+bool UndoGroup::isClean() const
+      {
+      return _activeStack ? _activeStack->isClean() : false;
       }
 
 //---------------------------------------------------------
@@ -737,11 +314,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
  Common handling for ending undo or redo
 */
 
-void Score::endUndoRedo(Undo* undo)
+void Score::endUndoRedo()
       {
-      setDirty(true);
-
-      _is = undo->inputState;
       emit posChanged(_is.pos());
 
       if (!noteEntryMode()) {
@@ -754,77 +328,40 @@ void Score::endUndoRedo(Undo* undo)
             canvas()->setState(Canvas::NOTE_ENTRY);
             setState(STATE_NOTE_ENTRY);
             }
-
-      *sel = undo->selection;
       sel->update();
-
-      getAction("undo")->setEnabled(!undoEmpty());
-      getAction("redo")->setEnabled(!redoEmpty());
+      layoutAll = true;
+      end();
       }
 
 //---------------------------------------------------------
-//   checkUndoOp
+//   SaveState
 //---------------------------------------------------------
 
-/**
- Abort with error message if not in undo handling
-*/
-
-void Score::checkUndoOp()
+SaveState::SaveState(Score* s)
       {
-      if (!cmdActive) {
-            fprintf(stderr, "undoOp: cmd not started\n");
-            if (debugMode)
-                  abort();
-            undoList.push_back(new Undo(_is, sel));
-            cmdActive = true;
-            }
-      if (UNDO) {
-            fprintf(stderr, "create undo op in undo/redo operation\n");
-            if (debugMode)
-                  abort();
-            }
+      score = s;
+      selection = 0;
       }
 
-//---------------------------------------------------------
-//   undoOp
-//---------------------------------------------------------
-
-void Score::undoOp(UndoOp::UndoType type, Element* object, int val)
+SaveState::~SaveState()
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = type;
-      i.element1 = object;
-      i.val1 = val;
-      undoList.back()->push_back(i);
+      if (selection)
+            delete selection;
       }
 
-//---------------------------------------------------------
-//   undoOp
-//---------------------------------------------------------
-
-void Score::undoOp(UndoOp::UndoType type, Element* object)
+void SaveState::undo()
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = type;
-      i.element1 = object;
-      undoList.back()->push_back(i);
+      score->setInputState(inputState);
+      score->setSelection(new Selection(*selection));
       }
 
-//---------------------------------------------------------
-//   undoAddElement
-//---------------------------------------------------------
-
-void Score::undoAddElement(Element* element)
+void SaveState::redo()
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::AddElement;
-      i.element1 = element;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      inputState = score->inputState();
+      if (!selection)
+            selection = new Selection(*score->selection());
+      else
+            *selection = *(score->selection());
       }
 
 //---------------------------------------------------------
@@ -833,13 +370,7 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoInsertTime(int tick, int len)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::InsertTime;
-      i.val1  = tick;
-      i.val2  = len;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new InsertTime(this, tick, len));
       }
 
 //---------------------------------------------------------
@@ -848,37 +379,7 @@ void Score::undoInsertTime(int tick, int len)
 
 void Score::undoFixTicks()
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::FixTicks;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
-      }
-
-//---------------------------------------------------------
-//   undoRemoveElement
-//---------------------------------------------------------
-
-void Score::undoRemoveElement(Element* element)
-      {
-      if (element->isChordRest()) {
-            // remove any slurs pointing to this chor/rest
-            ChordRest* cr = (ChordRest*)element;
-            foreach(Slur* slur, cr->slurFor()) {
-                  undoRemoveElement(slur);
-                  }
-            foreach(Slur* slur, cr->slurBack()) {
-                  undoRemoveElement(slur);
-                  }
-            if (cr->tuplet() && cr->tuplet()->elements().empty())
-                  undoRemoveElement(cr->tuplet());
-            }
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::RemoveElement;
-      i.element1 = element;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new FixTicks(this));
       }
 
 //---------------------------------------------------------
@@ -887,14 +388,7 @@ void Score::undoRemoveElement(Element* element)
 
 void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeMeasureLen;
-      i.measure  = m;
-      i.val1     = newTicks;
-      i.val2     = oldTicks;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeMeasureLen(m, oldTicks, newTicks));
       }
 
 //---------------------------------------------------------
@@ -903,13 +397,7 @@ void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
 
 void Score::undoChangeElement(Element* oldElement, Element* newElement)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeElement;
-      i.element1 = oldElement;
-      i.element2 = newElement;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeElement(oldElement, newElement));
       }
 
 //---------------------------------------------------------
@@ -918,28 +406,7 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
 
 void Score::undoChangeSubtype(Element* element, int st)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeSubtype;
-      i.element1 = element;
-      i.val1     = st;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
-      }
-
-//---------------------------------------------------------
-//   undoChangeNoteHead
-//---------------------------------------------------------
-
-void Score::undoChangeNoteHead(Note* note, int group)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeNoteHead;
-      i.element1 = note;
-      i.val1     = group;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeSubtype(element, st));
       }
 
 //---------------------------------------------------------
@@ -948,15 +415,7 @@ void Score::undoChangeNoteHead(Note* note, int group)
 
 void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangePitch;
-      i.element1 = note;
-      i.val1     = pitch;
-      i.val2     = tpc;
-      i.val3     = userAccidental;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangePitch(note, pitch, tpc, userAccidental));
       }
 
 //---------------------------------------------------------
@@ -965,28 +424,16 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental)
 
 void Score::undoChangeTpc(Note* note, int tpc)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeTpc;
-      i.element1 = note;
-      i.val1     = tpc;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeTpc(note, tpc));
       }
 
 //---------------------------------------------------------
 //   undoChangeBeamMode
 //---------------------------------------------------------
 
-void Score::undoChangeBeamMode(ChordRest* cr, int mode)
+void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeBeamMode;
-      i.element1 = cr;
-      i.val1     = int(mode);
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeBeamMode(cr, mode));
       }
 
 //---------------------------------------------------------
@@ -995,13 +442,7 @@ void Score::undoChangeBeamMode(ChordRest* cr, int mode)
 
 void Score::undoChangeChordRestLen(ChordRest* cr, int len)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeChordRestLen;
-      i.element1 = cr;
-      i.val1     = len;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeChordRestLen(cr, len));
       }
 
 //---------------------------------------------------------
@@ -1010,13 +451,7 @@ void Score::undoChangeChordRestLen(ChordRest* cr, int len)
 
 void Score::undoChangeEndBarLineType(Measure* m, int subtype)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeEndBarLineType;
-      i.measure  = m;
-      i.val1     = subtype;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeEndBarLineType(m, subtype));
       }
 
 //---------------------------------------------------------
@@ -1025,13 +460,7 @@ void Score::undoChangeEndBarLineType(Measure* m, int subtype)
 
 void Score::undoChangeBarLineSpan(Staff* staff, int span)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = UndoOp::ChangeBarLineSpan;
-      i.staff = staff;
-      i.val1  = span;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeBarLineSpan(staff, span));
       }
 
 //---------------------------------------------------------
@@ -1040,13 +469,7 @@ void Score::undoChangeBarLineSpan(Staff* staff, int span)
 
 void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeUserOffset;
-      i.element1 = e;
-      i.pt       = offset;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeUserOffset(e, offset));
       }
 
 //---------------------------------------------------------
@@ -1055,13 +478,7 @@ void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
 
 void Score::undoChangeVelocity(Dynamic* e, int velocity)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeVelocity;
-      i.element1 = e;
-      i.val1     = velocity;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeVelocity(e, velocity));
       }
 
 //---------------------------------------------------------
@@ -1070,12 +487,7 @@ void Score::undoChangeVelocity(Dynamic* e, int velocity)
 
 void Score::undoChangeCopyright(const QString& s)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = UndoOp::ChangeCopyright;
-      i.s    = s;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeCopyright(this, s));
       }
 
 //---------------------------------------------------------
@@ -1084,13 +496,7 @@ void Score::undoChangeCopyright(const QString& s)
 
 void Score::undoTransposeHarmony(Harmony* h, int semitones)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = UndoOp::TransposeHarmony;
-      i.element1 = h;
-      i.val1     = semitones;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new TransposeHarmony(h, semitones));
       }
 
 //---------------------------------------------------------
@@ -1099,16 +505,7 @@ void Score::undoTransposeHarmony(Harmony* h, int semitones)
 
 void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = UndoOp::ExchangeVoice;
-      i.element1 = measure;
-      i.val1     = val1;
-      i.val2     = val2;
-      i.val3     = staff1;
-      i.val4     = staff2;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ExchangeVoice(measure, val1, val2, staff1, staff2));
       }
 
 //---------------------------------------------------------
@@ -1117,13 +514,7 @@ void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, 
 
 void Score::undoRemovePart(Part* part, int idx)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::RemovePart;
-      i.part = part;
-      i.val1  = idx;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new RemovePart(part, idx));
       }
 
 //---------------------------------------------------------
@@ -1132,13 +523,16 @@ void Score::undoRemovePart(Part* part, int idx)
 
 void Score::undoInsertPart(Part* part, int idx)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::InsertPart;
-      i.part = part;
-      i.val1  = idx;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new InsertPart(part, idx));
+      }
+
+//---------------------------------------------------------
+//   undoInsertMeasure
+//---------------------------------------------------------
+
+void Score::undoInsertMeasure(MeasureBase* m)
+      {
+      _undo->push(new InsertMeasure(m));
       }
 
 //---------------------------------------------------------
@@ -1147,13 +541,7 @@ void Score::undoInsertPart(Part* part, int idx)
 
 void Score::undoRemoveStaff(Staff* staff, int idx)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::RemoveStaff;
-      i.staff = staff;
-      i.val1  = idx;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new RemoveStaff(staff, idx));
       }
 
 //---------------------------------------------------------
@@ -1162,13 +550,7 @@ void Score::undoRemoveStaff(Staff* staff, int idx)
 
 void Score::undoInsertStaff(Staff* staff, int idx)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::InsertStaff;
-      i.staff = staff;
-      i.val1  = idx;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new InsertStaff(staff, idx));
       }
 
 //---------------------------------------------------------
@@ -1177,197 +559,70 @@ void Score::undoInsertStaff(Staff* staff, int idx)
 
 void Score::undoMove(Element* e, const QPointF& pt)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::MoveElement;
-      i.element1 = e;
-      i.pt       = pt;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new MoveElement(e, pt));
       }
 
 //---------------------------------------------------------
-//   undoOp
+//   undoChangeSig
 //---------------------------------------------------------
-
-void Score::undoOp(UndoOp::UndoType type, Element* object, const QColor& color)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = type;
-      i.element1 = object;
-      i.color = color;
-      undoList.back()->push_back(i);
-      }
-
-//---------------------------------------------------------
-//   undoOp
-//---------------------------------------------------------
-
-void Score::undoOp(UndoOp::UndoType type, Segment* seg, int staff)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type    = type;
-      i.segment = seg;
-      i.val1     = staff;
-      undoList.back()->push_back(i);
-      }
-
-#if 0
-void Score::undoOp(UndoOp::UndoType type, Part* part, int idx)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type = type;
-      i.part = part;
-      i.val1  = idx;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(UndoOp::UndoType type, Staff* staff, int idx)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = type;
-      i.staff = staff;
-      i.val1   = idx;
-      undoList.back()->push_back(i);
-      }
-#endif
-
-void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type    = type;
-      i.measure = m;
-      i.mstaff  = s;
-      i.val1     = staff;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(UndoOp::UndoType type, MeasureBase* m)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type    = type;
-      i.measure = m;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(UndoOp::UndoType type, Measure* m, int a, int b)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type    = type;
-      i.measure = m;
-      i.val1    = a;
-      i.val2    = b;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(QList<int>& di)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::SortStaves;
-      i.di   = di;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(UndoOp::UndoType type, int a, int b)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type = type;
-      i.val1 = a;
-      i.val2 = b;
-      undoList.back()->push_back(i);
-      }
-
-void Score::undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type = type;
-      i.staff = staff;
-      i.val1 = tick;
-      i.val2 = oval;
-      i.val3 = nval;
-      undoList.back()->push_back(i);
-      }
 
 void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeSig;
-      i.val1 = tick;
-      i.sig1 = o;
-      i.sig2 = n;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeSig(this, tick, o, n));
       }
+
+//---------------------------------------------------------
+//   undoSigInsertTime
+//---------------------------------------------------------
 
 void Score::undoSigInsertTime(int tick, int len)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::SigInsertTime;
-      i.val1 = tick;
-      i.val2 = len;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new SigInsertTime(this, tick, len));
       }
+
+//---------------------------------------------------------
+//   undoChangeTempo
+//---------------------------------------------------------
 
 void Score::undoChangeTempo(int tick, const TEvent& o, const TEvent& n)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeTempo;
-      i.val1 = tick;
-      i.t1   = o;
-      i.t2   = n;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeTempo(this, tick, o, n));
       }
+
+//---------------------------------------------------------
+//   undoChangeKey
+//---------------------------------------------------------
 
 void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeKey;
-      i.val1 = tick;
-      i.val2 = o;
-      i.val3 = n;
-      i.staff = staff;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeKey(staff, tick, o, n));
       }
+
+//---------------------------------------------------------
+//   undoChangeClef
+//---------------------------------------------------------
 
 void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeClef;
-      i.val1 = tick;
-      i.val2 = o;
-      i.val3 = n;
-      i.staff = staff;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeClef(staff, tick, o, n));
       }
+
+//---------------------------------------------------------
+//   undoChangeKeySig
+//---------------------------------------------------------
+
+void Score::undoChangeKeySig(Staff* staff, int tick, int o, int n)
+      {
+      _undo->push(new ChangeKeySig(staff, tick, o, n));
+      }
+
+//---------------------------------------------------------
+//   undoChangeRepeatFlags
+//---------------------------------------------------------
 
 void Score::undoChangeRepeatFlags(Measure* m, int flags)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeRepeatFlags;
-      i.measure = m;
-      i.val1 = flags;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeRepeatFlags(m, flags));
       }
 
 //---------------------------------------------------------
@@ -1376,13 +631,7 @@ void Score::undoChangeRepeatFlags(Measure* m, int flags)
 
 void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeVoltaEnding;
-      i.element1 = volta;
-      i.di   = l;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeVoltaEnding(volta, l));
       }
 
 //---------------------------------------------------------
@@ -1391,13 +640,7 @@ void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
 
 void Score::undoChangeVoltaText(Volta* volta, const QString& s)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeVoltaText;
-      i.element1 = volta;
-      i.s    = s;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeVoltaText(volta, s));
       }
 
 //---------------------------------------------------------
@@ -1406,13 +649,7 @@ void Score::undoChangeVoltaText(Volta* volta, const QString& s)
 
 void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeChordRestSize;
-      i.element1 = cr;
-      i.val1 = small;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeChordRestSize(cr, small));
       }
 
 //---------------------------------------------------------
@@ -1421,13 +658,7 @@ void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
 
 void Score::undoChangeChordNoStem(Chord* cr, bool noStem)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type     = UndoOp::ChangeChordNoStem;
-      i.element1 = cr;
-      i.val1     = noStem;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeChordNoStem(cr, noStem));
       }
 
 //---------------------------------------------------------
@@ -1436,14 +667,7 @@ void Score::undoChangeChordNoStem(Chord* cr, bool noStem)
 
 void Score::undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeChordRestSpace;
-      i.element1 = cr;
-      i.d1 = l.val();
-      i.d2 = t.val();
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeChordRestSpace(cr, l, t));
       }
 
 //---------------------------------------------------------
@@ -1452,171 +676,1131 @@ void Score::undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t)
 
 void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type  = UndoOp::ChangeBracketSpan;
-      i.staff = staff;
-      i.val1  = column;
-      i.val2  = span;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeBracketSpan(staff, column, span));
       }
 
 //---------------------------------------------------------
-//   addElement
+//   undoChangeAccidental
 //---------------------------------------------------------
 
-/**
- Add \a element to its parent.
-
- Several elements (clef, keysig, timesig) need special handling, as they may cause
- changes throughout the score.
-*/
-
-void Score::addElement(Element* element)
+void Score::undoChangeAccidental(Note* note, int accidental)
       {
-      if (debugMode)
-            printf("   Score::addElement %p %s parent %s\n",
-               element, element->name(), element->parent()->name());
+      _undo->push(new ChangeAccidental(note, note->pitch(), note->tpc(), accidental));
+      }
 
-      if (element->type() == MEASURE
-         || (element->type() == HBOX && element->parent()->type() != VBOX)
-         || element->type() == VBOX
-         ) {
-            _layout->add(element);
-            return;
-            }
+//---------------------------------------------------------
+//   undoToggleInvisible
+//---------------------------------------------------------
 
-      element->parent()->add(element);
+void Score::undoToggleInvisible(Element* e)
+      {
+      _undo->push(new ToggleInvisible(e));
+      }
 
-      if (element->type() == CLEF) {
-            int staffIdx = element->staffIdx();
-            Clef* clef   = (Clef*) element;
-            int tick     = clef->tick();
+//---------------------------------------------------------
+//   undoAddElement
+//---------------------------------------------------------
 
-            //-----------------------------------------------
-            //   move notes
-            //-----------------------------------------------
+void Score::undoAddElement(Element* element)
+      {
+      _undo->push(new AddElement(element));
+      }
 
-            bool endFound = false;
-            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* measure = (Measure*)mb;
-                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                        int startTrack = staffIdx * VOICES;
-                        int endTrack   = startTrack + VOICES;
-                        for (int track = startTrack; track < endTrack; ++track) {
-                              Element* ie = segment->element(track);
-                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
-                                    endFound = true;
-                                    break;
-                                    }
-                              }
-                        if (endFound)
-                              break;
-                        }
-                  if (endFound)
-                        break;
+//---------------------------------------------------------
+//   undoRemoveElement
+//---------------------------------------------------------
+
+void Score::undoRemoveElement(Element* element)
+      {
+      _undo->push(new RemoveElement(element));
+      }
+
+//---------------------------------------------------------
+//   AddElement
+//---------------------------------------------------------
+
+AddElement::AddElement(Element* e)
+      {
+      element = e;
+      }
+
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+void AddElement::undo()
+      {
+      element->score()->removeElement(element);
+      }
+
+//---------------------------------------------------------
+//   redo
+//---------------------------------------------------------
+
+void AddElement::redo()
+      {
+      element->score()->addElement(element);
+      }
+
+//---------------------------------------------------------
+//   RemoveElement
+//---------------------------------------------------------
+
+RemoveElement::RemoveElement(Element* e)
+      {
+      element = e;
+
+      if (element->isChordRest()) {
+            Score* score = element->score();
+            // remove any slurs pointing to this chor/rest
+            ChordRest* cr = (ChordRest*)element;
+            foreach(Slur* slur, cr->slurFor()) {
+                  score->undoRemoveElement(slur);
                   }
-            }
-      else if (element->type() == KEYSIG) {
-            // FIXME: update keymap here (and remove that from Score::changeKeySig)
-            // but only after fixing redo for elements contained in segments
-
-            // fixup all accidentals
-            layoutAll = true;
-            }
-      else if (element->type() == SLUR) {
-            Slur* s = (Slur*)element;
-            ((ChordRest*)s->startElement())->addSlurFor(s);
-            ((ChordRest*)s->endElement())->addSlurBack(s);
+            foreach(Slur* slur, cr->slurBack()) {
+                  score->undoRemoveElement(slur);
+                  }
+            if (cr->tuplet() && cr->tuplet()->elements().empty())
+                  score->undoRemoveElement(cr->tuplet());
             }
       }
 
 //---------------------------------------------------------
-//   removeElement
+//   undo
 //---------------------------------------------------------
 
-/**
- Remove \a element from its parent.
-
- Several elements (clef, keysig, timesig) need special handling, as they may cause
- changes throughout the score.
-*/
-
-void Score::removeElement(Element* element)
+void RemoveElement::undo()
       {
-      Element* parent = element->parent();
+      element->score()->addElement(element);
+      }
 
-      if (debugMode)
-            printf("   Score::removeElement %p %s parent %p %s\n",
-               element, element->name(), parent, parent->name());
+//---------------------------------------------------------
+//   redo
+//---------------------------------------------------------
 
-      // special for MEASURE, HBOX, VBOX
-      // their parent is not static
+void RemoveElement::redo()
+      {
+      element->score()->removeElement(element);
+      }
 
-      if (element->type() == MEASURE
-         || (element->type() == HBOX && parent->type() != VBOX)
-         || element->type() == VBOX) {
-            _layout->remove(element);
-            return;
+//---------------------------------------------------------
+//   ChangeNoteHead
+//---------------------------------------------------------
+
+ChangeNoteHead::ChangeNoteHead(Note* n, int g)
+   : UndoCommand(), note(n), group(g)
+      {
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeNoteHead::flip()
+      {
+      int headGroup = note->headGroup();
+      QRectF r = note->abbox();
+      note->setHeadGroup(group);
+      r |= note->abbox();
+      group = headGroup;
+      note->score()->addRefresh(r);
+      note->score()->end();
+      }
+
+//---------------------------------------------------------
+//   ChangeConcertPitch
+//---------------------------------------------------------
+
+ChangeConcertPitch::ChangeConcertPitch(Score* s, bool v)
+      {
+      score = s;
+      val   = v;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeConcertPitch::flip()
+      {
+      int oval = int(score->styleB(ST_concertPitch));
+      score->setStyle(ST_concertPitch, StyleVal(val));
+      QAction* action = getAction("concert-pitch");
+      action->setChecked(score->styleB(ST_concertPitch));
+      val = oval;
+      }
+
+//---------------------------------------------------------
+//   InsertPart
+//---------------------------------------------------------
+
+InsertPart::InsertPart(Part* p, int i)
+      {
+      part = p;
+      idx  = i;
+      }
+
+void InsertPart::undo()
+      {
+      part->score()->removePart(part);
+      }
+
+void InsertPart::redo()
+      {
+      part->score()->insertPart(part, idx);
+      }
+
+//---------------------------------------------------------
+//   RemovePart
+//---------------------------------------------------------
+
+RemovePart::RemovePart(Part* p, int i)
+      {
+      part = p;
+      idx  = i;
+      }
+
+void RemovePart::undo()
+      {
+      part->score()->insertPart(part, idx);
+      }
+
+void RemovePart::redo()
+      {
+      part->score()->removePart(part);
+      }
+
+//---------------------------------------------------------
+//   InsertStaff
+//---------------------------------------------------------
+
+InsertStaff::InsertStaff(Staff* p, int i)
+      {
+      staff = p;
+      idx  = i;
+      }
+
+void InsertStaff::undo()
+      {
+      staff->score()->removeStaff(staff);
+      }
+
+void InsertStaff::redo()
+      {
+      staff->score()->insertStaff(staff, idx);
+      }
+
+//---------------------------------------------------------
+//   RemoveStaff
+//---------------------------------------------------------
+
+RemoveStaff::RemoveStaff(Staff* p, int i)
+      {
+      staff = p;
+      idx  = i;
+      }
+
+void RemoveStaff::undo()
+      {
+      staff->score()->insertStaff(staff, idx);
+      }
+
+void RemoveStaff::redo()
+      {
+      staff->score()->removeStaff(staff);
+      }
+
+//---------------------------------------------------------
+//   InsertMStaff
+//---------------------------------------------------------
+
+InsertMStaff::InsertMStaff(Measure* m, MStaff* ms, int i)
+      {
+      measure = m;
+      mstaff  = ms;
+      idx     = i;
+      }
+
+void InsertMStaff::undo()
+      {
+      measure->removeMStaff(mstaff, idx);
+      }
+
+void InsertMStaff::redo()
+      {
+      measure->insertMStaff(mstaff, idx);
+      }
+
+//---------------------------------------------------------
+//   RemoveMStaff
+//---------------------------------------------------------
+
+RemoveMStaff::RemoveMStaff(Measure* m, MStaff* ms, int i)
+      {
+      measure = m;
+      mstaff  = ms;
+      idx     = i;
+      }
+
+void RemoveMStaff::undo()
+      {
+      measure->insertMStaff(mstaff, idx);
+      }
+
+void RemoveMStaff::redo()
+      {
+      measure->removeMStaff(mstaff, idx);
+      }
+
+//---------------------------------------------------------
+//   InsertMeasure
+//---------------------------------------------------------
+
+InsertMeasure::InsertMeasure(MeasureBase* m)
+      {
+      measure = m;
+      }
+
+void InsertMeasure::undo()
+      {
+      measure->score()->removeMeasure(measure);
+      }
+
+void InsertMeasure::redo()
+      {
+      measure->score()->addMeasure(measure);
+      }
+
+//---------------------------------------------------------
+//   SortStaves
+//---------------------------------------------------------
+
+SortStaves::SortStaves(Score* s, QList<int> l)
+      {
+      score = s;
+      list  = l;
+      }
+
+void SortStaves::flip()
+      {
+      score->sortStaves(list);
+      }
+
+//---------------------------------------------------------
+//   ToggleInvisible
+//---------------------------------------------------------
+
+ToggleInvisible::ToggleInvisible(Element* e)
+      {
+      element = e;
+      }
+
+void ToggleInvisible::flip()
+      {
+      element->setVisible(!element->visible());
+      }
+
+//---------------------------------------------------------
+//   ChangeColor
+//---------------------------------------------------------
+
+ChangeColor::ChangeColor(Element* e, QColor c)
+      {
+      element = e;
+      color   = c;
+      }
+
+void ChangeColor::flip()
+      {
+      QColor c = element->color();
+      element->setColor(color);
+      color = c;
+      }
+
+//---------------------------------------------------------
+//   ChangePitch
+//---------------------------------------------------------
+
+ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc, int _userAccidental)
+      {
+      note  = _note;
+      pitch = _pitch;
+      tpc   = _tpc;
+      userAccidental = _userAccidental;
+      }
+
+void ChangePitch::flip()
+      {
+      int f_pitch  = note->pitch();
+      int f_tpc    = note->tpc();
+      int f_userAcc = note->userAccidental();
+
+      note->changePitch(pitch);
+      note->setTpc(tpc);
+      note->setUserAccidental(userAccidental);
+
+      pitch          = f_pitch;
+      tpc            = f_tpc;
+      userAccidental = f_userAcc;
+      }
+
+//---------------------------------------------------------
+//   ChangeTpc
+//---------------------------------------------------------
+
+ChangeTpc::ChangeTpc(Note* _note, int _tpc)
+      {
+      note = _note;
+      tpc  = _tpc;
+      }
+
+void ChangeTpc::flip()
+      {
+      int ntpc = note->tpc();
+      note->setTpc(tpc);
+      tpc = ntpc;
+      }
+
+//---------------------------------------------------------
+//   ChangeAccidental
+//---------------------------------------------------------
+
+ChangeAccidental::ChangeAccidental(Note* _note, int _pitch, int _tpc, int _acc)
+      {
+      note  = _note;
+      pitch = _pitch;
+      tpc   = _tpc;
+      acc   = _acc;
+      }
+
+void ChangeAccidental::flip()
+      {
+      int a  = note->pitch();
+      int b  = note->tpc();
+      int c  = note->accidentalSubtype();
+
+      note->setPitch(pitch);
+      note->setTpc(tpc);
+      note->setAccidentalSubtype(acc);
+
+      pitch = a;
+      tpc   = b;
+      acc   = c;
+      }
+
+//---------------------------------------------------------
+//   SetStemDirection
+//---------------------------------------------------------
+
+SetStemDirection::SetStemDirection(Chord* c, Direction d)
+      {
+      chord     = c;
+      direction = d;
+      }
+
+void SetStemDirection::flip()
+      {
+      Direction dir = chord->stemDirection();
+      chord->setStemDirection(direction);
+      direction = dir;
+      }
+
+//---------------------------------------------------------
+//   FlipSlurDirection
+//---------------------------------------------------------
+
+FlipSlurDirection::FlipSlurDirection(SlurTie* s)
+      {
+      slur = s;
+      }
+
+void FlipSlurDirection::flip()
+      {
+      slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+      }
+
+//---------------------------------------------------------
+//   FlipBeamDirection
+//---------------------------------------------------------
+
+FlipBeamDirection::FlipBeamDirection(Beam* b)
+      {
+      beam = b;
+      }
+
+void FlipBeamDirection::flip()
+      {
+      beam->setBeamDirection(beam->isUp() ? DOWN : UP);
+      }
+
+//---------------------------------------------------------
+//   ChangeSubtype
+//---------------------------------------------------------
+
+ChangeSubtype::ChangeSubtype(Element* e, int st)
+      {
+      element = e;
+      subtype = st;
+      }
+
+void ChangeSubtype::flip()
+      {
+      int st = element->subtype();
+      element->setSubtype(subtype);
+      subtype = st;
+      }
+
+//---------------------------------------------------------
+//   ChangeElement
+//---------------------------------------------------------
+
+ChangeElement::ChangeElement(Element* oe, Element* ne)
+      {
+      oldElement = oe;
+      newElement = ne;
+      }
+
+void ChangeElement::flip()
+      {
+      oldElement->parent()->change(oldElement, newElement);
+      // swap
+      Element* e = oldElement;
+      oldElement = newElement;
+      newElement = e;
+      }
+
+//---------------------------------------------------------
+//   InsertStaves
+//---------------------------------------------------------
+
+InsertStaves::InsertStaves(Measure* m, int _a, int _b)
+      {
+      measure = m;
+      a       = _a;
+      b       = _b;
+      }
+
+void InsertStaves::undo()
+      {
+      measure->removeStaves(a, b);
+      }
+
+void InsertStaves::redo()
+      {
+      measure->insertStaves(a, b);
+      }
+
+//---------------------------------------------------------
+//   RemoveStaves
+//---------------------------------------------------------
+
+RemoveStaves::RemoveStaves(Measure* m, int _a, int _b)
+      {
+      measure = m;
+      a       = _a;
+      b       = _b;
+      }
+
+void RemoveStaves::undo()
+      {
+      measure->insertStaves(a, b);
+      }
+
+void RemoveStaves::redo()
+      {
+      measure->removeStaves(a, b);
+      }
+
+//---------------------------------------------------------
+//   ChangeKeySig
+//---------------------------------------------------------
+
+ChangeKeySig::ChangeKeySig(Staff* s, int t, int oks, int nks)
+      {
+      staff     = s;
+      tick      = t;
+      oldKeySig = oks;
+      newKeySig = nks;
+      }
+
+void ChangeKeySig::undo()
+      {
+      KeyList* kl = staff->keymap();
+      // remove new value if there is any
+      if (newKeySig != NO_KEY) {
+            iKeyEvent ik = kl->find(tick);
+            kl->erase(ik);
             }
-      parent->remove(element);
+      if (oldKeySig != NO_KEY)
+            (*kl)[tick] = oldKeySig;
+      }
 
-      switch(element->type()) {
-            case CHORD:
-            case REST:
-                  {
-                  ChordRest* cr = static_cast<ChordRest*>(element);
-                  cr->setBeam(0);
-                  }
-                  break;
-            case CLEF:
-                  {
-                  Clef* clef   = static_cast<Clef*>(element);
-                  int tick     = clef->tick();
-                  int staffIdx = clef->staffIdx();
-
-                  //-----------------------------------------------
-                  //   move notes
-                  //-----------------------------------------------
-
-                  bool endFound = false;
-                  for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-                        if (mb->type() != MEASURE)
-                              continue;
-                        Measure* measure = static_cast<Measure*>(mb);
-                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                              int startTrack = staffIdx * VOICES;
-                              int endTrack   = startTrack + VOICES;
-                              for (int track = startTrack; track < endTrack; ++track) {
-                                    Element* ie = segment->element(track);
-                                    if (ie && ie->type() == CLEF && ie->tick() > tick) {
-                                          endFound = true;
-                                          break;
-                                          }
-                                    }
-                              if (endFound)
-                                    break;
-                              }
-                        if (endFound)
-                              break;
-                        }
-                  }
-                  break;
-            case KEYSIG:
-                  layoutAll = true;
-                  break;
-            case SLUR:
-                  {
-                  Slur* s = static_cast<Slur*>(element);
-                  static_cast<ChordRest*>(s->startElement())->removeSlurFor(s);
-                  static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
-                  }
-                  break;
-            default:
-                  break;
+void ChangeKeySig::redo()
+      {
+      KeyList* kl = staff->keymap();
+      if (oldKeySig != NO_KEY) {
+            iKeyEvent ik = kl->find(tick);
+            kl->erase(ik);
             }
+      if (newKeySig != NO_KEY)
+            (*kl)[tick] = newKeySig;
+      }
+
+//---------------------------------------------------------
+//   ChangeClef
+//---------------------------------------------------------
+
+ChangeClef::ChangeClef(Staff* s, int _tick, int _o, int _n)
+      {
+      staff = s;
+      tick  = _tick;
+      o     = _o;
+      n     = _n;
+      }
+
+void ChangeClef::undo()
+      {
+      ClefList* kl = staff->clefList();
+      // remove new value if there is any
+      if (n != NO_CLEF) {
+            iClefEvent ik = kl->find(tick);
+            kl->erase(ik);
+            }
+      if (o != NO_CLEF)
+            (*kl)[tick] = o;
+      }
+
+void ChangeClef::redo()
+      {
+      ClefList* kl = staff->clefList();
+      if (o != NO_CLEF) {
+            iClefEvent ik = kl->find(tick);
+            kl->erase(ik);
+            }
+      if (n != NO_CLEF)
+            (*kl)[tick] = n;
+      }
+
+//---------------------------------------------------------
+//   ChangeKey
+//---------------------------------------------------------
+
+ChangeKey::ChangeKey(Staff* s, int _tick, int _o, int _n)
+      {
+      staff = s;
+      tick  = _tick;
+      o     = _o;
+      n     = _n;
+      }
+
+void ChangeKey::undo()
+      {
+      KeyList* kl = staff->keymap();
+      // remove new value if there is any
+      if (n != NO_KEY) {
+            iClefEvent ik = kl->find(tick);
+            if (ik == kl->end())
+                  printf("UndoOp::ChangeKey1 %d: not found\n", tick);
+            else
+                  kl->erase(ik);
+            }
+      if (o != NO_KEY)
+            (*kl)[tick] = o;
+      }
+
+void ChangeKey::redo()
+      {
+      KeyList* kl = staff->keymap();
+      if (o != NO_KEY) {
+            iKeyEvent ik = kl->find(tick);
+            if (ik == kl->end())
+                  printf("UndoOp::ChangeKey2 %d: not found\n", tick);
+            else
+                  kl->erase(ik);
+            }
+      if (n != NO_KEY)
+            (*kl)[tick] = n;
+      }
+
+//---------------------------------------------------------
+//   ChangeSig
+//---------------------------------------------------------
+
+ChangeSig::ChangeSig(Score* s, int _tick, const SigEvent& _o, const SigEvent& _n)
+      {
+      score = s;
+      tick  = _tick;
+      o     = _o;
+      n     = _n;
+      }
+
+void ChangeSig::undo()
+      {
+      SigList* sigmap = score->getSigmap();
+      if (n.valid())
+            sigmap->del(tick);
+      if (o.valid())
+            sigmap->add(tick, o);
+      }
+
+void ChangeSig::redo()
+      {
+      SigList* sigmap = score->getSigmap();
+      if (o.valid())
+            sigmap->del(tick);
+      if (n.valid())
+            sigmap->add(tick, n);
+      }
+
+//---------------------------------------------------------
+//   FixTicks
+//---------------------------------------------------------
+
+void FixTicks::flip()
+      {
+      score->fixTicks();
+      }
+
+//---------------------------------------------------------
+//   ChangeTempo
+//---------------------------------------------------------
+
+ChangeTempo::ChangeTempo(Score* s, int t, const TEvent& _o, const TEvent& _n)
+      {
+      score = s;
+      tick  = t;
+      o     = _o;
+      n     = _n;
+      }
+
+void ChangeTempo::undo()
+      {
+      TempoList* tempomap = score->getTempomap();
+      if (n.valid())
+            tempomap->delTempo(tick);
+      if (o.valid())
+            tempomap->addTempo(tick, o);
+      }
+
+void ChangeTempo::redo()
+      {
+      TempoList* tempomap = score->getTempomap();
+      if (o.valid())
+            tempomap->delTempo(tick);
+      if (n.valid())
+            tempomap->addTempo(tick, n);
+      }
+
+//---------------------------------------------------------
+//   ChangeMeasureLen
+//---------------------------------------------------------
+
+ChangeMeasureLen::ChangeMeasureLen(Measure* m, int ot, int nt)
+      {
+      measure  = m;
+      oldTicks = ot;
+      newTicks = nt;
+      }
+
+void ChangeMeasureLen::flip()
+      {
+      int ol = newTicks;
+      int nl = oldTicks;
+
+      //
+      // move EndBarLine and TimeSigAnnounce
+      // to end of measure:
+      //
+      int staves = measure->score()->nstaves();
+      int endTick = measure->tick() + nl;
+      for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+            if (segment->subtype() != Segment::SegEndBarLine
+               && segment->subtype() != Segment::SegTimeSigAnnounce)
+                  continue;
+            segment->setTick(endTick);
+            for (int track = 0; track < staves*VOICES; ++track) {
+                  if (segment->element(track))
+                        segment->element(track)->setTick(endTick);
+                  }
+            }
+      oldTicks = ol;
+      newTicks = nl;
+      }
+
+//---------------------------------------------------------
+//   InsertTime
+//---------------------------------------------------------
+
+InsertTime::InsertTime(Score* s, int t, int l)
+      {
+      score = s;
+      tick  = t;
+      len   = l;
+      }
+
+void InsertTime::flip()
+      {
+      score->insertTime(tick, len);
+      len = -len;
+      }
+
+//---------------------------------------------------------
+//   SigInsertTime
+//---------------------------------------------------------
+
+SigInsertTime::SigInsertTime(Score* s, int t, int l)
+      {
+      score = s;
+      tick  = t;
+      len   = l;
+      }
+
+void SigInsertTime::flip()
+      {
+      SigList* sigmap = score->getSigmap();
+      if (len < 0)
+            sigmap->removeTime(tick, -len);
+      else
+            sigmap->insertTime(tick, len);
+      len = -len;
+      }
+
+//---------------------------------------------------------
+//   ChangeRepeatFlags
+//---------------------------------------------------------
+
+ChangeRepeatFlags::ChangeRepeatFlags(Measure* m, int f)
+      {
+      measure = m;
+      flags   = f;
+      }
+
+void ChangeRepeatFlags::flip()
+      {
+      int tmp = measure->repeatFlags();
+      measure->setRepeatFlags(flags);
+      flags = tmp;
+      }
+
+//---------------------------------------------------------
+//   ChangeVoltaEnding
+//---------------------------------------------------------
+
+ChangeVoltaEnding::ChangeVoltaEnding(Volta* v, const QList<int>& l)
+      {
+      volta = v;
+      list  = l;
+      }
+
+void ChangeVoltaEnding::flip()
+      {
+      QList<int> l = volta->endings();
+      volta->setEndings(list);
+      list = l;
+      }
+
+//---------------------------------------------------------
+//   ChangeVoltaText
+//---------------------------------------------------------
+
+ChangeVoltaText::ChangeVoltaText(Volta* v, const QString& t)
+      {
+      volta = v;
+      text  = t;
+      }
+
+void ChangeVoltaText::flip()
+      {
+      QString s = volta->text();
+      volta->setText(text);
+      text = s;
+      }
+
+//---------------------------------------------------------
+//   ChangeChordRestSize
+//---------------------------------------------------------
+
+ChangeChordRestSize::ChangeChordRestSize(ChordRest* _cr, bool _small)
+      {
+      cr = _cr;
+      small = _small;
+      }
+
+void ChangeChordRestSize::flip()
+      {
+      bool s = cr->small();
+      cr->setSmall(small);
+      small = s;
+      }
+
+//---------------------------------------------------------
+//   ChangeChordNoStem
+//---------------------------------------------------------
+
+ChangeChordNoStem::ChangeChordNoStem(Chord* c, bool f)
+      {
+      chord = c;
+      noStem = f;
+      }
+
+void ChangeChordNoStem::flip()
+      {
+      bool ns = chord->noStem();
+      chord->setNoStem(noStem);
+      noStem = ns;
+      }
+
+//---------------------------------------------------------
+//   ChangeChordRestSpace
+//---------------------------------------------------------
+
+ChangeChordRestSpace::ChangeChordRestSpace(ChordRest* _cr, Spatium _l, Spatium _t)
+      {
+      cr = _cr;
+      l  = _l;
+      t  = _t;
+      }
+
+void ChangeChordRestSpace::flip()
+      {
+      Spatium ol = cr->extraLeadingSpace();
+      Spatium ot = cr->extraTrailingSpace();
+      cr->setExtraLeadingSpace(l);
+      cr->setExtraTrailingSpace(t);
+      l = ol;
+      t = ot;
+      }
+
+//---------------------------------------------------------
+//   ChangeBeamMode
+//---------------------------------------------------------
+
+ChangeBeamMode::ChangeBeamMode(ChordRest* _cr, BeamMode _mode)
+      {
+      cr   = _cr;
+      mode = _mode;
+      }
+
+void ChangeBeamMode::flip()
+      {
+      BeamMode omode = cr->beamMode();
+      cr->setBeamMode(mode);
+      mode = omode;
+      }
+
+//---------------------------------------------------------
+//   ChangeEndBarLineType
+//---------------------------------------------------------
+
+ChangeEndBarLineType::ChangeEndBarLineType(Measure* m, int st)
+      {
+      measure = m;
+      subtype = st;
+      }
+
+void ChangeEndBarLineType::flip()
+      {
+      int typ = measure->endBarLineType();
+      measure->setEndBarLineType(subtype, false);
+      subtype = typ;
+      }
+
+//---------------------------------------------------------
+//   ChangeBarLineSpan
+//---------------------------------------------------------
+
+ChangeBarLineSpan::ChangeBarLineSpan(Staff* _staff, int _span)
+      {
+      staff = _staff;
+      span  = _span;
+      }
+
+void ChangeBarLineSpan::flip()
+      {
+      int nspan = staff->barLineSpan();
+      staff->setBarLineSpan(span);
+      span = nspan;
+      }
+
+//---------------------------------------------------------
+//   ChangeUserOffset
+//---------------------------------------------------------
+
+ChangeUserOffset::ChangeUserOffset(Element* e, const QPointF& o)
+      {
+      element = e;
+      offset  = o;
+      }
+
+void ChangeUserOffset::flip()
+      {
+      QPointF p = element->userOff();
+      element->setUserOff(offset);
+      offset = p;
+      }
+
+//---------------------------------------------------------
+//   ChangeVelocity
+//---------------------------------------------------------
+
+ChangeVelocity::ChangeVelocity(Dynamic* d, int v)
+      {
+      dynamic = d;
+      velocity = v;
+      }
+
+void ChangeVelocity::flip()
+      {
+      int v = dynamic->velocity();
+      dynamic->setVelocity(velocity);
+      velocity = v;
+      }
+
+//---------------------------------------------------------
+//   ChangeCopyright
+//---------------------------------------------------------
+
+ChangeCopyright::ChangeCopyright(Score* s, const QString& t)
+      {
+      score = s;
+      text  = t;
+      }
+
+void ChangeCopyright::flip()
+      {
+      QString s;
+      if (score->copyright())
+            s = score->copyright()->getHtml();
+      score->setCopyrightHtml(text);
+      text = s;
+      }
+
+//---------------------------------------------------------
+//   TransposeHarmony
+//---------------------------------------------------------
+
+TransposeHarmony::TransposeHarmony(Harmony* h, int st)
+      {
+      harmony = h;
+      semitones = st;
+      }
+
+void TransposeHarmony::flip()
+      {
+      int baseTpc = harmony->baseTpc();
+      int rootTpc = harmony->rootTpc();
+      harmony->setBaseTpc(transposeTpc(baseTpc, semitones));
+      harmony->setRootTpc(transposeTpc(rootTpc, semitones));
+      harmony->buildText();
+      semitones = -semitones;
+      }
+
+//---------------------------------------------------------
+//   ExchangeVoice
+//---------------------------------------------------------
+
+ExchangeVoice::ExchangeVoice(Measure* m, int _val1, int _val2, int _staff1, int _staff2)
+      {
+      measure = m;
+      val1    = _val1;
+      val2    = _val2;
+      staff1  = _staff1;
+      staff2  = _staff2;
+      }
+
+void ExchangeVoice::undo()
+      {
+      measure->exchangeVoice(val2, val1, staff1, staff2);
+      }
+
+void ExchangeVoice::redo()
+      {
+      measure->exchangeVoice(val1, val2, staff1, staff2);
+      }
+
+//---------------------------------------------------------
+//   ChangeInstrumentShort
+//---------------------------------------------------------
+
+ChangeInstrumentShort::ChangeInstrumentShort(Part* p, const QString& t)
+      {
+      part = p;
+      text = t;
+      }
+
+void ChangeInstrumentShort::flip()
+      {
+      QString s = part->shortNameHtml();
+      part->setShortNameHtml(text);
+      text = s;
+      }
+
+//---------------------------------------------------------
+//   ChangeInstrumentLong
+//---------------------------------------------------------
+
+ChangeInstrumentLong::ChangeInstrumentLong(Part* p, const QString& t)
+      {
+      part = p;
+      text = t;
+      }
+
+void ChangeInstrumentLong::flip()
+      {
+      QString s = part->longNameHtml();
+      part->setLongNameHtml(text);
+      text = s;
+      }
+
+//---------------------------------------------------------
+//   ChangeChordRestLen
+//---------------------------------------------------------
+
+ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, int l)
+      {
+      cr = c;
+      len = l;
+      }
+
+void ChangeChordRestLen::flip()
+      {
+      int oldLen = cr->tickLen();
+      cr->setLen(len);
+      len = oldLen;
+      }
+
+//---------------------------------------------------------
+//   MoveElement
+//---------------------------------------------------------
+
+MoveElement::MoveElement(Element* e, const QPointF& o)
+      {
+      element = e;
+      offset = o;
+      }
+
+void MoveElement::flip()
+      {
+      QPointF po = element->userOff();
+      element->setUserOff(offset);
+      offset = po;
+      }
+
+//---------------------------------------------------------
+//   ChangeBracketSpan
+//---------------------------------------------------------
+
+ChangeBracketSpan::ChangeBracketSpan(Staff* s, int c, int sp)
+      {
+      staff  = s;
+      column = c;
+      span   = sp;
+      }
+
+void ChangeBracketSpan::flip()
+      {
+      int oSpan  = staff->bracketSpan(column);
+      staff->setBracketSpan(column, span);
+      span = oSpan;
       }
 

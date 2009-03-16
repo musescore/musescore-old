@@ -2596,11 +2596,19 @@ yapılamadı:</translation>
         <translation>bozuk</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Sayımı Tekrarla</translation>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>break multi measure rest</source>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5732,10 +5740,6 @@ kaydetmek ister misiniz?</translation>
     <message>
         <source>Misc.</source>
         <translation>Diğer</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>yanan Kursör</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>

@@ -27,6 +27,7 @@
 #include "rest.h"
 #include "chord.h"
 #include "barline.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   LNote

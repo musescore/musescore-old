@@ -23,6 +23,7 @@ static const char * const qtscript_QLocale_function_names[] = {
     , "setDefault"
     , "system"
     // prototype
+    , "amText"
     , "country"
     , "dateFormat"
     , "dateTimeFormat"
@@ -38,8 +39,12 @@ static const char * const qtscript_QLocale_function_names[] = {
     , "numberOptions"
     , "equals"
     , "percent"
+    , "pmText"
+    , "positiveSign"
     , "readFrom"
     , "setNumberOptions"
+    , "standaloneDayName"
+    , "standaloneMonthName"
     , "timeFormat"
     , "toDate"
     , "toDateTime"
@@ -66,6 +71,7 @@ static const char * const qtscript_QLocale_function_signatures[] = {
     , ""
     // prototype
     , ""
+    , ""
     , "FormatType format"
     , "FormatType format"
     , "int arg__1, FormatType format"
@@ -80,8 +86,12 @@ static const char * const qtscript_QLocale_function_signatures[] = {
     , ""
     , "QLocale other"
     , ""
+    , ""
+    , ""
     , "QDataStream arg__1"
     , "NumberOptions options"
+    , "int arg__1, FormatType format"
+    , "int arg__1, FormatType format"
     , "FormatType format"
     , "String string, FormatType arg__2\nString string, String format"
     , "String string, FormatType format\nString string, String format"
@@ -90,7 +100,7 @@ static const char * const qtscript_QLocale_function_signatures[] = {
     , "String s, int base"
     , "String s, int base"
     , "String s, int base"
-    , "QDate date, FormatType format\nQDate date, String formatStr\nQDateTime dateTime, FormatType format\nQDateTime dateTime, String format\nQTime time, FormatType format\nQTime time, String formatStr\ndouble i, char f, int prec\nfloat i, char f, int prec\nint i\nqlonglong i\nqulonglong i\nshort i\nushort i"
+    , "QDate date, FormatType format\nQDate date, String formatStr\nQDateTime dateTime, FormatType format\nQDateTime dateTime, String format\nQTime time, FormatType format\nQTime time, String formatStr\ndouble i, char f, int prec\nfloat i, char f, int prec\nint i\nqulonglong i\nshort i"
     , "String string, FormatType arg__2\nString string, String format"
     , "String s, int base"
     , "QDataStream arg__1"
@@ -104,7 +114,7 @@ static QScriptValue qtscript_QLocale_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QLocale::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -174,7 +184,7 @@ static const char * const qtscript_QLocale_MeasurementSystem_keys[] = {
 static QString qtscript_QLocale_MeasurementSystem_toStringHelper(QLocale::MeasurementSystem value)
 {
     if ((value >= QLocale::MetricSystem) && (value <= QLocale::ImperialSystem))
-        return qtscript_QLocale_MeasurementSystem_keys[static_cast<int>(value)];
+        return qtscript_QLocale_MeasurementSystem_keys[static_cast<int>(value)-static_cast<int>(QLocale::MetricSystem)];
     return QString();
 }
 
@@ -241,7 +251,7 @@ static const char * const qtscript_QLocale_NumberOption_keys[] = {
 static QString qtscript_QLocale_NumberOption_toStringHelper(QLocale::NumberOption value)
 {
     if ((value >= QLocale::OmitGroupSeparator) && (value <= QLocale::RejectGroupSeparator))
-        return qtscript_QLocale_NumberOption_keys[static_cast<int>(value)];
+        return qtscript_QLocale_NumberOption_keys[static_cast<int>(value)-static_cast<int>(QLocale::OmitGroupSeparator)];
     return QString();
 }
 
@@ -374,17 +384,19 @@ static QScriptValue qtscript_create_QLocale_NumberOptions_class(QScriptEngine *e
 static const QLocale::FormatType qtscript_QLocale_FormatType_values[] = {
     QLocale::LongFormat
     , QLocale::ShortFormat
+    , QLocale::NarrowFormat
 };
 
 static const char * const qtscript_QLocale_FormatType_keys[] = {
     "LongFormat"
     , "ShortFormat"
+    , "NarrowFormat"
 };
 
 static QString qtscript_QLocale_FormatType_toStringHelper(QLocale::FormatType value)
 {
-    if ((value >= QLocale::LongFormat) && (value <= QLocale::ShortFormat))
-        return qtscript_QLocale_FormatType_keys[static_cast<int>(value)];
+    if ((value >= QLocale::LongFormat) && (value <= QLocale::NarrowFormat))
+        return qtscript_QLocale_FormatType_keys[static_cast<int>(value)-static_cast<int>(QLocale::LongFormat)];
     return QString();
 }
 
@@ -402,7 +414,7 @@ static void qtscript_QLocale_FormatType_fromScriptValue(const QScriptValue &valu
 static QScriptValue qtscript_construct_QLocale_FormatType(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QLocale::LongFormat) && (arg <= QLocale::ShortFormat))
+    if ((arg >= QLocale::LongFormat) && (arg <= QLocale::NarrowFormat))
         return qScriptValueFromValue(engine,  static_cast<QLocale::FormatType>(arg));
     return context->throwError(QString::fromLatin1("FormatType(): invalid enum value (%0)").arg(arg));
 }
@@ -426,7 +438,7 @@ static QScriptValue qtscript_create_QLocale_FormatType_class(QScriptEngine *engi
         qtscript_QLocale_FormatType_valueOf, qtscript_QLocale_FormatType_toString);
     qScriptRegisterMetaType<QLocale::FormatType>(engine, qtscript_QLocale_FormatType_toScriptValue,
         qtscript_QLocale_FormatType_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QLocale_FormatType_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QLocale_FormatType_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1400,7 +1412,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 30;
+        _id = 0xBABE0000 + 35;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -1408,18 +1420,25 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QLocale.%0(): this object is not a QLocale")
-            .arg(qtscript_QLocale_function_names[_id+1]));
+            .arg(qtscript_QLocale_function_names[_id+7]));
     }
 
     switch (_id) {
     case 0:
+    if (context->argumentCount() == 0) {
+        QString _q_result = _q_self->amText();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 1:
     if (context->argumentCount() == 0) {
         QLocale::Country _q_result = _q_self->country();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 1:
+    case 2:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->dateFormat();
         return QScriptValue(context->engine(), _q_result);
@@ -1431,7 +1450,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->dateTimeFormat();
         return QScriptValue(context->engine(), _q_result);
@@ -1443,7 +1462,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 3:
+    case 4:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_result = _q_self->dayName(_q_arg0);
@@ -1457,42 +1476,42 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->decimalPoint();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->exponential();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->groupSeparator();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 0) {
         QLocale::Language _q_result = _q_self->language();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         QLocale::MeasurementSystem _q_result = _q_self->measurementSystem();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QString _q_result = _q_self->monthName(_q_arg0);
@@ -1506,28 +1525,28 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->name();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 12:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->negativeSign();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 12:
+    case 13:
     if (context->argumentCount() == 0) {
         QFlags<QLocale::NumberOption> _q_result = _q_self->numberOptions();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 1) {
         QLocale _q_arg0 = qscriptvalue_cast<QLocale>(context->argument(0));
         bool _q_result = _q_self->operator==(_q_arg0);
@@ -1535,14 +1554,28 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 14:
+    case 15:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->percent();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 16:
+    if (context->argumentCount() == 0) {
+        QString _q_result = _q_self->pmText();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 17:
+    if (context->argumentCount() == 0) {
+        QChar _q_result = _q_self->positiveSign();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 18:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator>>(*_q_arg0, *_q_self);
@@ -1550,7 +1583,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 16:
+    case 19:
     if (context->argumentCount() == 1) {
         QFlags<QLocale::NumberOption> _q_arg0 = qscriptvalue_cast<QFlags<QLocale::NumberOption> >(context->argument(0));
         _q_self->setNumberOptions(_q_arg0);
@@ -1558,7 +1591,35 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 17:
+    case 20:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QString _q_result = _q_self->standaloneDayName(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 2) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QLocale::FormatType _q_arg1 = qscriptvalue_cast<QLocale::FormatType>(context->argument(1));
+        QString _q_result = _q_self->standaloneDayName(_q_arg0, _q_arg1);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 21:
+    if (context->argumentCount() == 1) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QString _q_result = _q_self->standaloneMonthName(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 2) {
+        int _q_arg0 = context->argument(0).toInt32();
+        QLocale::FormatType _q_arg1 = qscriptvalue_cast<QLocale::FormatType>(context->argument(1));
+        QString _q_result = _q_self->standaloneMonthName(_q_arg0, _q_arg1);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 22:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->timeFormat();
         return QScriptValue(context->engine(), _q_result);
@@ -1570,7 +1631,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 18:
+    case 23:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QDate _q_result = _q_self->toDate(_q_arg0);
@@ -1593,7 +1654,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 19:
+    case 24:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QDateTime _q_result = _q_self->toDateTime(_q_arg0);
@@ -1616,7 +1677,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 20:
+    case 25:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1637,7 +1698,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 21:
+    case 26:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1658,7 +1719,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 22:
+    case 27:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1698,7 +1759,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 23:
+    case 28:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1734,7 +1795,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 24:
+    case 29:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1774,7 +1835,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 25:
+    case 30:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QDate>() == context->argument(0).toVariant().userType())) {
             QDate _q_arg0 = qscriptvalue_cast<QDate>(context->argument(0));
@@ -1792,7 +1853,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
             double _q_arg0 = context->argument(0).toNumber();
             QString _q_result = _q_self->toString(_q_arg0);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<float>() == context->argument(0).toVariant().userType())) {
+        } else if (context->argument(0).isNumber()) {
             float _q_arg0 = qscriptvalue_cast<float>(context->argument(0));
             QString _q_result = _q_self->toString(_q_arg0);
             return QScriptValue(context->engine(), _q_result);
@@ -1800,20 +1861,12 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
             int _q_arg0 = context->argument(0).toInt32();
             QString _q_result = _q_self->toString(_q_arg0);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<qlonglong>() == context->argument(0).toVariant().userType())) {
-            qlonglong _q_arg0 = qscriptvalue_cast<qlonglong>(context->argument(0));
-            QString _q_result = _q_self->toString(_q_arg0);
-            return QScriptValue(context->engine(), _q_result);
         } else if ((qMetaTypeId<qulonglong>() == context->argument(0).toVariant().userType())) {
             qulonglong _q_arg0 = qscriptvalue_cast<qulonglong>(context->argument(0));
             QString _q_result = _q_self->toString(_q_arg0);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<short>() == context->argument(0).toVariant().userType())) {
+        } else if (context->argument(0).isNumber()) {
             short _q_arg0 = qscriptvalue_cast<short>(context->argument(0));
-            QString _q_result = _q_self->toString(_q_arg0);
-            return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<ushort>() == context->argument(0).toVariant().userType())) {
-            ushort _q_arg0 = qscriptvalue_cast<ushort>(context->argument(0));
             QString _q_result = _q_self->toString(_q_arg0);
             return QScriptValue(context->engine(), _q_result);
         }
@@ -1861,7 +1914,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
             char _q_arg1 = qscriptvalue_cast<char>(context->argument(1));
             QString _q_result = _q_self->toString(_q_arg0, _q_arg1);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<float>() == context->argument(0).toVariant().userType())
+        } else if (context->argument(0).isNumber()
             && (qMetaTypeId<char>() == context->argument(1).toVariant().userType())) {
             float _q_arg0 = qscriptvalue_cast<float>(context->argument(0));
             char _q_arg1 = qscriptvalue_cast<char>(context->argument(1));
@@ -1878,7 +1931,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
             int _q_arg2 = context->argument(2).toInt32();
             QString _q_result = _q_self->toString(_q_arg0, _q_arg1, _q_arg2);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<float>() == context->argument(0).toVariant().userType())
+        } else if (context->argument(0).isNumber()
             && (qMetaTypeId<char>() == context->argument(1).toVariant().userType())
             && context->argument(2).isNumber()) {
             float _q_arg0 = qscriptvalue_cast<float>(context->argument(0));
@@ -1890,7 +1943,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 26:
+    case 31:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QTime _q_result = _q_self->toTime(_q_arg0);
@@ -1913,7 +1966,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 27:
+    case 32:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
 
@@ -1953,7 +2006,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 28:
+    case 33:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator<<(*_q_arg0, *_q_self);
@@ -1961,7 +2014,7 @@ static QScriptValue qtscript_QLocale_prototype_call(QScriptContext *context, QSc
     }
     break;
 
-    case 29:
+    case 34:
     if (context->argumentCount() == 0) {
         QChar _q_result = _q_self->zeroDigit();
         return qScriptValueFromValue(context->engine(), _q_result);
@@ -2083,6 +2136,7 @@ QScriptValue qtscript_create_QLocale_class(QScriptEngine *engine)
         , 0
         // prototype
         , 0
+        , 0
         , 1
         , 1
         , 2
@@ -2097,8 +2151,12 @@ QScriptValue qtscript_create_QLocale_class(QScriptEngine *engine)
         , 0
         , 1
         , 0
+        , 0
+        , 0
         , 1
         , 1
+        , 2
+        , 2
         , 1
         , 2
         , 2
@@ -2115,7 +2173,7 @@ QScriptValue qtscript_create_QLocale_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QLocale*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QLocale*)0));
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 35; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QLocale_prototype_call, function_lengths[i+7]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QLocale_function_names[i+7]),

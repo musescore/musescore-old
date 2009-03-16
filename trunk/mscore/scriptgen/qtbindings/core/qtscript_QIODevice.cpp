@@ -81,7 +81,7 @@ static const char * const qtscript_QIODevice_function_signatures[] = {
     , "char c"
     , "int msecs"
     , "int msecs"
-    , "QByteArray data"
+    , "QByteArray data\nchar data"
 ""
 };
 
@@ -92,7 +92,7 @@ static QScriptValue qtscript_QIODevice_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QIODevice::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -524,9 +524,15 @@ static QScriptValue qtscript_QIODevice_prototype_call(QScriptContext *context, Q
 
     case 27:
     if (context->argumentCount() == 1) {
-        QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
-        qint64 _q_result = _q_self->write(_q_arg0);
-        return qScriptValueFromValue(context->engine(), _q_result);
+        if ((qMetaTypeId<QByteArray>() == context->argument(0).toVariant().userType())) {
+            QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
+            qint64 _q_result = _q_self->write(_q_arg0);
+            return qScriptValueFromValue(context->engine(), _q_result);
+        } else if (qscriptvalue_cast<char*>(context->argument(0))) {
+            char* _q_arg0 = qscriptvalue_cast<char*>(context->argument(0));
+            qint64 _q_result = _q_self->write(_q_arg0);
+            return qScriptValueFromValue(context->engine(), _q_result);
+        }
     }
     break;
 

@@ -133,7 +133,7 @@ static QScriptValue qtscript_QXmlStreamReader_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QXmlStreamReader::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -188,7 +188,7 @@ static const char * const qtscript_QXmlStreamReader_Error_keys[] = {
 static QString qtscript_QXmlStreamReader_Error_toStringHelper(QXmlStreamReader::Error value)
 {
     if ((value >= QXmlStreamReader::NoError) && (value <= QXmlStreamReader::PrematureEndOfDocumentError))
-        return qtscript_QXmlStreamReader_Error_keys[static_cast<int>(value)];
+        return qtscript_QXmlStreamReader_Error_keys[static_cast<int>(value)-static_cast<int>(QXmlStreamReader::NoError)];
     return QString();
 }
 
@@ -273,7 +273,7 @@ static const char * const qtscript_QXmlStreamReader_TokenType_keys[] = {
 static QString qtscript_QXmlStreamReader_TokenType_toStringHelper(QXmlStreamReader::TokenType value)
 {
     if ((value >= QXmlStreamReader::NoToken) && (value <= QXmlStreamReader::ProcessingInstruction))
-        return qtscript_QXmlStreamReader_TokenType_keys[static_cast<int>(value)];
+        return qtscript_QXmlStreamReader_TokenType_keys[static_cast<int>(value)-static_cast<int>(QXmlStreamReader::NoToken)];
     return QString();
 }
 

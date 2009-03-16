@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>766</width>
-    <height>578</height>
+    <height>530</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,9 @@
        </property>
        <property name="pixmap">
         <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

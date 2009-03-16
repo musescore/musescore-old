@@ -52,7 +52,7 @@ static QScriptValue qtscript_QTextBoundaryFinder_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextBoundaryFinder::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -112,7 +112,7 @@ static const char * const qtscript_QTextBoundaryFinder_BoundaryReason_keys[] = {
 static QString qtscript_QTextBoundaryFinder_BoundaryReason_toStringHelper(QTextBoundaryFinder::BoundaryReason value)
 {
     if ((value >= QTextBoundaryFinder::NotAtBoundary) && (value <= QTextBoundaryFinder::EndWord))
-        return qtscript_QTextBoundaryFinder_BoundaryReason_keys[static_cast<int>(value)];
+        return qtscript_QTextBoundaryFinder_BoundaryReason_keys[static_cast<int>(value)-static_cast<int>(QTextBoundaryFinder::NotAtBoundary)];
     return QString();
 }
 
@@ -259,7 +259,7 @@ static const char * const qtscript_QTextBoundaryFinder_BoundaryType_keys[] = {
 static QString qtscript_QTextBoundaryFinder_BoundaryType_toStringHelper(QTextBoundaryFinder::BoundaryType value)
 {
     if ((value >= QTextBoundaryFinder::Grapheme) && (value <= QTextBoundaryFinder::Sentence))
-        return qtscript_QTextBoundaryFinder_BoundaryType_keys[static_cast<int>(value)];
+        return qtscript_QTextBoundaryFinder_BoundaryType_keys[static_cast<int>(value)-static_cast<int>(QTextBoundaryFinder::Grapheme)];
     return QString();
 }
 

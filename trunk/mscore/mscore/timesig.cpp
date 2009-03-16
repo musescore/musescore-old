@@ -28,6 +28,8 @@
 #include "layout.h"
 #include "viewer.h"
 #include "system.h"
+#include "segment.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   TimeSig

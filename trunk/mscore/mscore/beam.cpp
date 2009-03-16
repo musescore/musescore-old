@@ -33,6 +33,7 @@
 #include "layout.h"
 #include "system.h"
 #include "tremolo.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   startBeam

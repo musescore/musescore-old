@@ -31,6 +31,7 @@
 #include "keysig.h"
 #include "segment.h"
 #include "style.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   idx
@@ -253,7 +254,8 @@ void Staff::changeKeySig(int tick, int st)
             setKey(tick, st);
             nval = st;
             }
-      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, nval);
+      _score->undoChangeKeySig(this, tick, oval, nval);
+//      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, nval);
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
@@ -350,7 +352,7 @@ void Staff::changeClef(int tick, int st)
             (*_clefList)[tick] = st;
             nval = st;
             }
-      _score->undoOp(UndoOp::ChangeClef, this, tick, oval, nval);
+      _score->undoChangeClef(this, tick, oval, nval);
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {

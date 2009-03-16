@@ -14,8 +14,6 @@
 #include <qnetworkaccessmanager.h>
 #include <qnetworkrequest.h>
 #include <qobject.h>
-#include <qsslconfiguration.h>
-#include <qsslerror.h>
 #include <qurl.h>
 
 #include "qtscriptshell_QNetworkReply.h"
@@ -36,8 +34,6 @@ static const char * const qtscript_QNetworkReply_function_names[] = {
     , "readBufferSize"
     , "request"
     , "setReadBufferSize"
-    , "setSslConfiguration"
-    , "sslConfiguration"
     , "url"
     , "toString"
 };
@@ -58,8 +54,6 @@ static const char * const qtscript_QNetworkReply_function_signatures[] = {
     , ""
     , ""
     , "qint64 size"
-    , "QSslConfiguration configuration"
-    , ""
     , ""
 ""
 };
@@ -71,7 +65,7 @@ static QScriptValue qtscript_QNetworkReply_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QNetworkReply::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -89,7 +83,6 @@ Q_DECLARE_METATYPE(QNetworkRequest::KnownHeaders)
 Q_DECLARE_METATYPE(QNetworkAccessManager*)
 Q_DECLARE_METATYPE(QNetworkAccessManager::Operation)
 Q_DECLARE_METATYPE(QList<QByteArray>)
-Q_DECLARE_METATYPE(QSslConfiguration)
 Q_DECLARE_METATYPE(QIODevice*)
 
 static QScriptValue qtscript_create_enum_class_helper(
@@ -233,7 +226,7 @@ static QScriptValue qtscript_QNetworkReply_prototype_call(QScriptContext *contex
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 15;
+        _id = 0xBABE0000 + 13;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -335,28 +328,13 @@ static QScriptValue qtscript_QNetworkReply_prototype_call(QScriptContext *contex
     break;
 
     case 12:
-    if (context->argumentCount() == 1) {
-        QSslConfiguration _q_arg0 = qscriptvalue_cast<QSslConfiguration>(context->argument(0));
-        _q_self->setSslConfiguration(_q_arg0);
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 13:
-    if (context->argumentCount() == 0) {
-        QSslConfiguration _q_result = _q_self->sslConfiguration();
-        return qScriptValueFromValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 14:
     if (context->argumentCount() == 0) {
         QUrl _q_result = _q_self->url();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 15: {
+    case 13: {
     QString result = QString::fromLatin1("QNetworkReply");
     return QScriptValue(context->engine(), result);
     }
@@ -416,15 +394,13 @@ QScriptValue qtscript_create_QNetworkReply_class(QScriptEngine *engine)
         , 0
         , 0
         , 1
-        , 1
-        , 0
         , 0
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QNetworkReply*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QNetworkReply*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QIODevice*>()));
-    for (int i = 0; i < 16; ++i) {
+    for (int i = 0; i < 14; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QNetworkReply_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QNetworkReply_function_names[i+1]),

@@ -36,6 +36,8 @@
 #include "dynamics.h"
 #include "lyrics.h"
 #include "articulation.h"
+#include "sig.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   musicalAttribute

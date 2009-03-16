@@ -49,7 +49,7 @@ static QScriptValue qtscript_QUdpSocket_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QUdpSocket::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -283,12 +283,12 @@ static QScriptValue qtscript_QUdpSocket_prototype_call(QScriptContext *context, 
     }
     if (context->argumentCount() == 2) {
         if ((qMetaTypeId<QHostAddress>() == context->argument(0).toVariant().userType())
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())) {
+            && context->argument(1).isNumber()) {
             QHostAddress _q_arg0 = qscriptvalue_cast<QHostAddress>(context->argument(0));
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
             bool _q_result = _q_self->bind(_q_arg0, _q_arg1);
             return QScriptValue(context->engine(), _q_result);
-        } else if ((qMetaTypeId<unsigned short>() == context->argument(0).toVariant().userType())
+        } else if (context->argument(0).isNumber()
             && (qMetaTypeId<QFlags<QUdpSocket::BindFlag> >() == context->argument(1).toVariant().userType())) {
             unsigned short _q_arg0 = qscriptvalue_cast<unsigned short>(context->argument(0));
             QFlags<QUdpSocket::BindFlag> _q_arg1 = qscriptvalue_cast<QFlags<QUdpSocket::BindFlag> >(context->argument(1));

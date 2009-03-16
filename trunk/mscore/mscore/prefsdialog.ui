@@ -796,29 +796,6 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout">
-          <item row="0" column="0" colspan="3">
-           <widget class="QCheckBox" name="cursorBlink">
-            <property name="text">
-             <string>blinking Cursor</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="drawAntialiased">
-            <property name="toolTip">
-             <string>disable antialiased drawing</string>
-            </property>
-            <property name="whatsThis">
-             <string>uncheck this to speed up drawing</string>
-            </property>
-            <property name="text">
-             <string>Draw Antialiased</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_24">
             <property name="text">
@@ -848,6 +825,22 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="drawAntialiased">
+            <property name="toolTip">
+             <string>disable antialiased drawing</string>
+            </property>
+            <property name="whatsThis">
+             <string>uncheck this to speed up drawing</string>
+            </property>
+            <property name="text">
+             <string>Draw Antialiased</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

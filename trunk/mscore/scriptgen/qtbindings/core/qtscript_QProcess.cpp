@@ -89,7 +89,7 @@ static QScriptValue qtscript_QProcess_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QProcess::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -143,7 +143,7 @@ static const char * const qtscript_QProcess_ProcessError_keys[] = {
 static QString qtscript_QProcess_ProcessError_toStringHelper(QProcess::ProcessError value)
 {
     if ((value >= QProcess::FailedToStart) && (value <= QProcess::UnknownError))
-        return qtscript_QProcess_ProcessError_keys[static_cast<int>(value)];
+        return qtscript_QProcess_ProcessError_keys[static_cast<int>(value)-static_cast<int>(QProcess::FailedToStart)];
     return QString();
 }
 
@@ -212,7 +212,7 @@ static const char * const qtscript_QProcess_ProcessChannelMode_keys[] = {
 static QString qtscript_QProcess_ProcessChannelMode_toStringHelper(QProcess::ProcessChannelMode value)
 {
     if ((value >= QProcess::SeparateChannels) && (value <= QProcess::ForwardedChannels))
-        return qtscript_QProcess_ProcessChannelMode_keys[static_cast<int>(value)];
+        return qtscript_QProcess_ProcessChannelMode_keys[static_cast<int>(value)-static_cast<int>(QProcess::SeparateChannels)];
     return QString();
 }
 
@@ -279,7 +279,7 @@ static const char * const qtscript_QProcess_ProcessChannel_keys[] = {
 static QString qtscript_QProcess_ProcessChannel_toStringHelper(QProcess::ProcessChannel value)
 {
     if ((value >= QProcess::StandardOutput) && (value <= QProcess::StandardError))
-        return qtscript_QProcess_ProcessChannel_keys[static_cast<int>(value)];
+        return qtscript_QProcess_ProcessChannel_keys[static_cast<int>(value)-static_cast<int>(QProcess::StandardOutput)];
     return QString();
 }
 
@@ -348,7 +348,7 @@ static const char * const qtscript_QProcess_ProcessState_keys[] = {
 static QString qtscript_QProcess_ProcessState_toStringHelper(QProcess::ProcessState value)
 {
     if ((value >= QProcess::NotRunning) && (value <= QProcess::Running))
-        return qtscript_QProcess_ProcessState_keys[static_cast<int>(value)];
+        return qtscript_QProcess_ProcessState_keys[static_cast<int>(value)-static_cast<int>(QProcess::NotRunning)];
     return QString();
 }
 
@@ -415,7 +415,7 @@ static const char * const qtscript_QProcess_ExitStatus_keys[] = {
 static QString qtscript_QProcess_ExitStatus_toStringHelper(QProcess::ExitStatus value)
 {
     if ((value >= QProcess::NormalExit) && (value <= QProcess::CrashExit))
-        return qtscript_QProcess_ExitStatus_keys[static_cast<int>(value)];
+        return qtscript_QProcess_ExitStatus_keys[static_cast<int>(value)-static_cast<int>(QProcess::NormalExit)];
     return QString();
 }
 
@@ -487,7 +487,7 @@ static QScriptValue qtscript_QProcess_prototype_call(QScriptContext *context, QS
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QProcess.%0(): this object is not a QProcess")
-            .arg(qtscript_QProcess_function_names[_id+1]));
+            .arg(qtscript_QProcess_function_names[_id+4]));
     }
 
     switch (_id) {

@@ -41,7 +41,7 @@ static QScriptValue qtscript_QSslError_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSslError::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -127,7 +127,7 @@ static const char * const qtscript_QSslError_SslError_keys[] = {
 static QString qtscript_QSslError_SslError_toStringHelper(QSslError::SslError value)
 {
     if ((value >= QSslError::UnspecifiedError) && (value <= QSslError::NoSslSupport))
-        return qtscript_QSslError_SslError_keys[static_cast<int>(value)];
+        return qtscript_QSslError_SslError_keys[static_cast<int>(value)-static_cast<int>(QSslError::UnspecifiedError)];
     return QString();
 }
 

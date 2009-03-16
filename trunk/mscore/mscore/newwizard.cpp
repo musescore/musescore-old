@@ -29,6 +29,7 @@
 #include "drumset.h"
 #include "palette.h"
 #include "keysig.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   InstrumentWizard

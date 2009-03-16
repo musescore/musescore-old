@@ -38,6 +38,8 @@
 #include "keysig.h"
 #include "slur.h"
 #include "box.h"
+#include "measure.h"
+#include "sig.h"
 
 //---------------------------------------------------------
 //   errmsg

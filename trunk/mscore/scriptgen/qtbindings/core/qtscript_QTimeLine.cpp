@@ -56,7 +56,7 @@ static QScriptValue qtscript_QTimeLine_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTimeLine::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -97,7 +97,7 @@ static const char * const qtscript_QTimeLine_Direction_keys[] = {
 static QString qtscript_QTimeLine_Direction_toStringHelper(QTimeLine::Direction value)
 {
     if ((value >= QTimeLine::Forward) && (value <= QTimeLine::Backward))
-        return qtscript_QTimeLine_Direction_keys[static_cast<int>(value)];
+        return qtscript_QTimeLine_Direction_keys[static_cast<int>(value)-static_cast<int>(QTimeLine::Forward)];
     return QString();
 }
 
@@ -172,7 +172,7 @@ static const char * const qtscript_QTimeLine_CurveShape_keys[] = {
 static QString qtscript_QTimeLine_CurveShape_toStringHelper(QTimeLine::CurveShape value)
 {
     if ((value >= QTimeLine::EaseInCurve) && (value <= QTimeLine::CosineCurve))
-        return qtscript_QTimeLine_CurveShape_keys[static_cast<int>(value)];
+        return qtscript_QTimeLine_CurveShape_keys[static_cast<int>(value)-static_cast<int>(QTimeLine::EaseInCurve)];
     return QString();
 }
 
@@ -241,7 +241,7 @@ static const char * const qtscript_QTimeLine_State_keys[] = {
 static QString qtscript_QTimeLine_State_toStringHelper(QTimeLine::State value)
 {
     if ((value >= QTimeLine::NotRunning) && (value <= QTimeLine::Running))
-        return qtscript_QTimeLine_State_keys[static_cast<int>(value)];
+        return qtscript_QTimeLine_State_keys[static_cast<int>(value)-static_cast<int>(QTimeLine::NotRunning)];
     return QString();
 }
 

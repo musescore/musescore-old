@@ -2579,10 +2579,6 @@ failed: </source>
         <translation>onregelmatig</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Herhaal Telling</translation>
-    </message>
-    <message>
         <source>Staves</source>
         <translation>Notenbalken</translation>
     </message>
@@ -2601,6 +2597,18 @@ failed: </source>
     <message>
         <source>break multi measure rest</source>
         <translation>pauze rust bij meerdere maten </translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5678,10 +5686,6 @@ voor dat u afsluit?</translation>
     <message>
         <source>Misc.</source>
         <translation>Div.</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>knipperende Cursor</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>

@@ -30,7 +30,7 @@ static QScriptValue qtscript_Qt_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("Qt::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -284,9 +284,11 @@ static const char * const qtscript_Qt_Corner_keys[] = {
 
 static QString qtscript_Qt_Corner_toStringHelper(Qt::Corner value)
 {
-    if ((value >= Qt::TopLeftCorner) && (value <= Qt::BottomRightCorner))
-        return qtscript_Qt_Corner_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("Corner");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_Corner_toScriptValue(QScriptEngine *engine, const Qt::Corner &value)
@@ -303,7 +305,11 @@ static void qtscript_Qt_Corner_fromScriptValue(const QScriptValue &value, Qt::Co
 static QScriptValue qtscript_construct_Qt_Corner(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::TopLeftCorner) && (arg <= Qt::BottomRightCorner))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("Corner");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::Corner>(arg));
     return context->throwError(QString::fromLatin1("Corner(): invalid enum value (%0)").arg(arg));
 }
@@ -353,9 +359,11 @@ static const char * const qtscript_Qt_Axis_keys[] = {
 
 static QString qtscript_Qt_Axis_toStringHelper(Qt::Axis value)
 {
-    if ((value >= Qt::XAxis) && (value <= Qt::ZAxis))
-        return qtscript_Qt_Axis_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("Axis");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_Axis_toScriptValue(QScriptEngine *engine, const Qt::Axis &value)
@@ -372,7 +380,11 @@ static void qtscript_Qt_Axis_fromScriptValue(const QScriptValue &value, Qt::Axis
 static QScriptValue qtscript_construct_Qt_Axis(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::XAxis) && (arg <= Qt::ZAxis))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("Axis");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::Axis>(arg));
     return context->throwError(QString::fromLatin1("Axis(): invalid enum value (%0)").arg(arg));
 }
@@ -867,9 +879,11 @@ static const char * const qtscript_Qt_SizeMode_keys[] = {
 
 static QString qtscript_Qt_SizeMode_toStringHelper(Qt::SizeMode value)
 {
-    if ((value >= Qt::AbsoluteSize) && (value <= Qt::RelativeSize))
-        return qtscript_Qt_SizeMode_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SizeMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_SizeMode_toScriptValue(QScriptEngine *engine, const Qt::SizeMode &value)
@@ -886,7 +900,11 @@ static void qtscript_Qt_SizeMode_fromScriptValue(const QScriptValue &value, Qt::
 static QScriptValue qtscript_construct_Qt_SizeMode(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::AbsoluteSize) && (arg <= Qt::RelativeSize))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SizeMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::SizeMode>(arg));
     return context->throwError(QString::fromLatin1("SizeMode(): invalid enum value (%0)").arg(arg));
 }
@@ -950,6 +968,10 @@ static const Qt::WindowType qtscript_Qt_WindowType_values[] = {
     , Qt::WindowOkButtonHint
     , Qt::WindowCancelButtonHint
     , Qt::CustomizeWindowHint
+    , Qt::WindowStaysOnBottomHint
+    , Qt::WindowCloseButtonHint
+    , Qt::MacWindowToolBarButtonHint
+    , Qt::BypassGraphicsProxyWidget
 };
 
 static const char * const qtscript_Qt_WindowType_keys[] = {
@@ -980,15 +1002,19 @@ static const char * const qtscript_Qt_WindowType_keys[] = {
     , "WindowOkButtonHint"
     , "WindowCancelButtonHint"
     , "CustomizeWindowHint"
+    , "WindowStaysOnBottomHint"
+    , "WindowCloseButtonHint"
+    , "MacWindowToolBarButtonHint"
+    , "BypassGraphicsProxyWidget"
 };
 
 static QString qtscript_Qt_WindowType_toStringHelper(Qt::WindowType value)
 {
-    for (int i = 0; i < 27; ++i) {
-        if (qtscript_Qt_WindowType_values[i] == value)
-            return QString::fromLatin1(qtscript_Qt_WindowType_keys[i]);
-    }
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WindowType");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_WindowType_toScriptValue(QScriptEngine *engine, const Qt::WindowType &value)
@@ -1005,10 +1031,12 @@ static void qtscript_Qt_WindowType_fromScriptValue(const QScriptValue &value, Qt
 static QScriptValue qtscript_construct_Qt_WindowType(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 27; ++i) {
-        if (qtscript_Qt_WindowType_values[i] == arg)
-            return qScriptValueFromValue(engine,  static_cast<Qt::WindowType>(arg));
-    }
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WindowType");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
+        return qScriptValueFromValue(engine,  static_cast<Qt::WindowType>(arg));
     return context->throwError(QString::fromLatin1("WindowType(): invalid enum value (%0)").arg(arg));
 }
 
@@ -1031,7 +1059,7 @@ static QScriptValue qtscript_create_Qt_WindowType_class(QScriptEngine *engine, Q
         qtscript_Qt_WindowType_valueOf, qtscript_Qt_WindowType_toString);
     qScriptRegisterMetaType<Qt::WindowType>(engine, qtscript_Qt_WindowType_toScriptValue,
         qtscript_Qt_WindowType_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 27; ++i) {
+    for (int i = 0; i < 31; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_Qt_WindowType_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_Qt_WindowType_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1087,7 +1115,7 @@ static QScriptValue qtscript_Qt_WindowFlags_toString(QScriptContext *context, QS
 {
     Qt::WindowFlags value = qscriptvalue_cast<Qt::WindowFlags>(context->thisObject());
     QString result;
-    for (int i = 0; i < 27; ++i) {
+    for (int i = 0; i < 31; ++i) {
         if ((value & qtscript_Qt_WindowType_values[i]) == qtscript_Qt_WindowType_values[i]) {
             if (!result.isEmpty())
                 result.append(QString::fromLatin1(","));
@@ -1134,6 +1162,11 @@ static const Qt::ItemDataRole qtscript_Qt_ItemDataRole_values[] = {
     , Qt::AccessibleTextRole
     , Qt::AccessibleDescriptionRole
     , Qt::SizeHintRole
+    , Qt::DisplayPropertyRole
+    , Qt::DecorationPropertyRole
+    , Qt::ToolTipPropertyRole
+    , Qt::StatusTipPropertyRole
+    , Qt::WhatsThisPropertyRole
     , Qt::UserRole
 };
 
@@ -1152,12 +1185,17 @@ static const char * const qtscript_Qt_ItemDataRole_keys[] = {
     , "AccessibleTextRole"
     , "AccessibleDescriptionRole"
     , "SizeHintRole"
+    , "DisplayPropertyRole"
+    , "DecorationPropertyRole"
+    , "ToolTipPropertyRole"
+    , "StatusTipPropertyRole"
+    , "WhatsThisPropertyRole"
     , "UserRole"
 };
 
 static QString qtscript_Qt_ItemDataRole_toStringHelper(Qt::ItemDataRole value)
 {
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 20; ++i) {
         if (qtscript_Qt_ItemDataRole_values[i] == value)
             return QString::fromLatin1(qtscript_Qt_ItemDataRole_keys[i]);
     }
@@ -1178,7 +1216,7 @@ static void qtscript_Qt_ItemDataRole_fromScriptValue(const QScriptValue &value, 
 static QScriptValue qtscript_construct_Qt_ItemDataRole(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 20; ++i) {
         if (qtscript_Qt_ItemDataRole_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<Qt::ItemDataRole>(arg));
     }
@@ -1204,7 +1242,7 @@ static QScriptValue qtscript_create_Qt_ItemDataRole_class(QScriptEngine *engine,
         qtscript_Qt_ItemDataRole_valueOf, qtscript_Qt_ItemDataRole_toString);
     qScriptRegisterMetaType<Qt::ItemDataRole>(engine, qtscript_Qt_ItemDataRole_toScriptValue,
         qtscript_Qt_ItemDataRole_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 20; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_Qt_ItemDataRole_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_Qt_ItemDataRole_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -1228,9 +1266,11 @@ static const char * const qtscript_Qt_SortOrder_keys[] = {
 
 static QString qtscript_Qt_SortOrder_toStringHelper(Qt::SortOrder value)
 {
-    if ((value >= Qt::AscendingOrder) && (value <= Qt::DescendingOrder))
-        return qtscript_Qt_SortOrder_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SortOrder");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_SortOrder_toScriptValue(QScriptEngine *engine, const Qt::SortOrder &value)
@@ -1247,7 +1287,11 @@ static void qtscript_Qt_SortOrder_fromScriptValue(const QScriptValue &value, Qt:
 static QScriptValue qtscript_construct_Qt_SortOrder(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::AscendingOrder) && (arg <= Qt::DescendingOrder))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SortOrder");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::SortOrder>(arg));
     return context->throwError(QString::fromLatin1("SortOrder(): invalid enum value (%0)").arg(arg));
 }
@@ -1809,7 +1853,7 @@ static const char * const qtscript_Qt_FocusReason_keys[] = {
 static QString qtscript_Qt_FocusReason_toStringHelper(Qt::FocusReason value)
 {
     if ((value >= Qt::MouseFocusReason) && (value <= Qt::NoFocusReason))
-        return qtscript_Qt_FocusReason_keys[static_cast<int>(value)];
+        return qtscript_Qt_FocusReason_keys[static_cast<int>(value)-static_cast<int>(Qt::MouseFocusReason)];
     return QString();
 }
 
@@ -2196,7 +2240,7 @@ static const char * const qtscript_Qt_WhiteSpaceMode_keys[] = {
 static QString qtscript_Qt_WhiteSpaceMode_toStringHelper(Qt::WhiteSpaceMode value)
 {
     if ((value >= Qt::WhiteSpaceModeUndefined) && (value <= Qt::WhiteSpaceNoWrap))
-        return qtscript_Qt_WhiteSpaceMode_keys[static_cast<int>(value)];
+        return qtscript_Qt_WhiteSpaceMode_keys[static_cast<int>(value)-static_cast<int>(Qt::WhiteSpaceModeUndefined)];
     return QString();
 }
 
@@ -2348,7 +2392,7 @@ static const char * const qtscript_Qt_EventPriority_keys[] = {
 static QString qtscript_Qt_EventPriority_toStringHelper(Qt::EventPriority value)
 {
     if ((value >= Qt::LowEventPriority) && (value <= Qt::HighEventPriority))
-        return qtscript_Qt_EventPriority_keys[static_cast<int>(value)];
+        return qtscript_Qt_EventPriority_keys[static_cast<int>(value)-static_cast<int>(Qt::LowEventPriority)];
     return QString();
 }
 
@@ -2499,9 +2543,11 @@ static const char * const qtscript_Qt_MaskMode_keys[] = {
 
 static QString qtscript_Qt_MaskMode_toStringHelper(Qt::MaskMode value)
 {
-    if ((value >= Qt::MaskInColor) && (value <= Qt::MaskOutColor))
-        return qtscript_Qt_MaskMode_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("MaskMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_MaskMode_toScriptValue(QScriptEngine *engine, const Qt::MaskMode &value)
@@ -2518,7 +2564,11 @@ static void qtscript_Qt_MaskMode_fromScriptValue(const QScriptValue &value, Qt::
 static QScriptValue qtscript_construct_Qt_MaskMode(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::MaskInColor) && (arg <= Qt::MaskOutColor))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("MaskMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::MaskMode>(arg));
     return context->throwError(QString::fromLatin1("MaskMode(): invalid enum value (%0)").arg(arg));
 }
@@ -2577,7 +2627,7 @@ static const char * const qtscript_Qt_UIEffect_keys[] = {
 static QString qtscript_Qt_UIEffect_toStringHelper(Qt::UIEffect value)
 {
     if ((value >= Qt::UI_General) && (value <= Qt::UI_AnimateToolBox))
-        return qtscript_Qt_UIEffect_keys[static_cast<int>(value)];
+        return qtscript_Qt_UIEffect_keys[static_cast<int>(value)-static_cast<int>(Qt::UI_General)];
     return QString();
 }
 
@@ -2723,7 +2773,7 @@ static const char * const qtscript_Qt_AnchorAttribute_keys[] = {
 static QString qtscript_Qt_AnchorAttribute_toStringHelper(Qt::AnchorAttribute value)
 {
     if ((value >= Qt::AnchorName) && (value <= Qt::AnchorHref))
-        return qtscript_Qt_AnchorAttribute_keys[static_cast<int>(value)];
+        return qtscript_Qt_AnchorAttribute_keys[static_cast<int>(value)-static_cast<int>(Qt::AnchorName)];
     return QString();
 }
 
@@ -3115,9 +3165,11 @@ static const char * const qtscript_Qt_SizeHint_keys[] = {
 
 static QString qtscript_Qt_SizeHint_toStringHelper(Qt::SizeHint value)
 {
-    if ((value >= Qt::MinimumSize) && (value <= Qt::NSizeHints))
-        return qtscript_Qt_SizeHint_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SizeHint");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_SizeHint_toScriptValue(QScriptEngine *engine, const Qt::SizeHint &value)
@@ -3134,7 +3186,11 @@ static void qtscript_Qt_SizeHint_fromScriptValue(const QScriptValue &value, Qt::
 static QScriptValue qtscript_construct_Qt_SizeHint(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::MinimumSize) && (arg <= Qt::NSizeHints))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("SizeHint");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::SizeHint>(arg));
     return context->throwError(QString::fromLatin1("SizeHint(): invalid enum value (%0)").arg(arg));
 }
@@ -3882,7 +3938,7 @@ static const char * const qtscript_Qt_ToolBarAreaSizes_keys[] = {
 static QString qtscript_Qt_ToolBarAreaSizes_toStringHelper(Qt::ToolBarAreaSizes value)
 {
     if ((value >= Qt::NToolBarAreas) && (value <= Qt::NToolBarAreas))
-        return qtscript_Qt_ToolBarAreaSizes_keys[static_cast<int>(value)];
+        return qtscript_Qt_ToolBarAreaSizes_keys[static_cast<int>(value)-static_cast<int>(Qt::NToolBarAreas)];
     return QString();
 }
 
@@ -4123,7 +4179,7 @@ static const char * const qtscript_Qt_WindowFrameSection_keys[] = {
 static QString qtscript_Qt_WindowFrameSection_toStringHelper(Qt::WindowFrameSection value)
 {
     if ((value >= Qt::NoSection) && (value <= Qt::TitleBarArea))
-        return qtscript_Qt_WindowFrameSection_keys[static_cast<int>(value)];
+        return qtscript_Qt_WindowFrameSection_keys[static_cast<int>(value)-static_cast<int>(Qt::NoSection)];
     return QString();
 }
 
@@ -4196,7 +4252,7 @@ static const char * const qtscript_Qt_InputMethodQuery_keys[] = {
 static QString qtscript_Qt_InputMethodQuery_toStringHelper(Qt::InputMethodQuery value)
 {
     if ((value >= Qt::ImMicroFocus) && (value <= Qt::ImCurrentSelection))
-        return qtscript_Qt_InputMethodQuery_keys[static_cast<int>(value)];
+        return qtscript_Qt_InputMethodQuery_keys[static_cast<int>(value)-static_cast<int>(Qt::ImMicroFocus)];
     return QString();
 }
 
@@ -4605,9 +4661,11 @@ static const char * const qtscript_Qt_ConnectionType_keys[] = {
 
 static QString qtscript_Qt_ConnectionType_toStringHelper(Qt::ConnectionType value)
 {
-    if ((value >= Qt::AutoConnection) && (value <= Qt::BlockingQueuedConnection))
-        return qtscript_Qt_ConnectionType_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("ConnectionType");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_ConnectionType_toScriptValue(QScriptEngine *engine, const Qt::ConnectionType &value)
@@ -4624,7 +4682,11 @@ static void qtscript_Qt_ConnectionType_fromScriptValue(const QScriptValue &value
 static QScriptValue qtscript_construct_Qt_ConnectionType(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::AutoConnection) && (arg <= Qt::BlockingQueuedConnection))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("ConnectionType");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::ConnectionType>(arg));
     return context->throwError(QString::fromLatin1("ConnectionType(): invalid enum value (%0)").arg(arg));
 }
@@ -4749,9 +4811,11 @@ static const char * const qtscript_Qt_TransformationMode_keys[] = {
 
 static QString qtscript_Qt_TransformationMode_toStringHelper(Qt::TransformationMode value)
 {
-    if ((value >= Qt::FastTransformation) && (value <= Qt::SmoothTransformation))
-        return qtscript_Qt_TransformationMode_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("TransformationMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_TransformationMode_toScriptValue(QScriptEngine *engine, const Qt::TransformationMode &value)
@@ -4768,7 +4832,11 @@ static void qtscript_Qt_TransformationMode_fromScriptValue(const QScriptValue &v
 static QScriptValue qtscript_construct_Qt_TransformationMode(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::FastTransformation) && (arg <= Qt::SmoothTransformation))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("TransformationMode");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::TransformationMode>(arg));
     return context->throwError(QString::fromLatin1("TransformationMode(): invalid enum value (%0)").arg(arg));
 }
@@ -4815,7 +4883,7 @@ static const char * const qtscript_Qt_DockWidgetAreaSizes_keys[] = {
 static QString qtscript_Qt_DockWidgetAreaSizes_toStringHelper(Qt::DockWidgetAreaSizes value)
 {
     if ((value >= Qt::NDockWidgetAreas) && (value <= Qt::NDockWidgetAreas))
-        return qtscript_Qt_DockWidgetAreaSizes_keys[static_cast<int>(value)];
+        return qtscript_Qt_DockWidgetAreaSizes_keys[static_cast<int>(value)-static_cast<int>(Qt::NDockWidgetAreas)];
     return QString();
 }
 
@@ -4874,6 +4942,8 @@ static const Qt::ApplicationAttribute qtscript_Qt_ApplicationAttribute_values[] 
     , Qt::AA_MSWindowsUseDirect3DByDefault
     , Qt::AA_DontShowIconsInMenus
     , Qt::AA_NativeWindows
+    , Qt::AA_DontCreateNativeWidgetSiblings
+    , Qt::AA_MacPluginApplication
     , Qt::AA_AttributeCount
 };
 
@@ -4882,14 +4952,18 @@ static const char * const qtscript_Qt_ApplicationAttribute_keys[] = {
     , "AA_MSWindowsUseDirect3DByDefault"
     , "AA_DontShowIconsInMenus"
     , "AA_NativeWindows"
+    , "AA_DontCreateNativeWidgetSiblings"
+    , "AA_MacPluginApplication"
     , "AA_AttributeCount"
 };
 
 static QString qtscript_Qt_ApplicationAttribute_toStringHelper(Qt::ApplicationAttribute value)
 {
-    if ((value >= Qt::AA_ImmediateWidgetCreation) && (value <= Qt::AA_AttributeCount))
-        return qtscript_Qt_ApplicationAttribute_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("ApplicationAttribute");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_ApplicationAttribute_toScriptValue(QScriptEngine *engine, const Qt::ApplicationAttribute &value)
@@ -4906,7 +4980,11 @@ static void qtscript_Qt_ApplicationAttribute_fromScriptValue(const QScriptValue 
 static QScriptValue qtscript_construct_Qt_ApplicationAttribute(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::AA_ImmediateWidgetCreation) && (arg <= Qt::AA_AttributeCount))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("ApplicationAttribute");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::ApplicationAttribute>(arg));
     return context->throwError(QString::fromLatin1("ApplicationAttribute(): invalid enum value (%0)").arg(arg));
 }
@@ -4930,7 +5008,7 @@ static QScriptValue qtscript_create_Qt_ApplicationAttribute_class(QScriptEngine 
         qtscript_Qt_ApplicationAttribute_valueOf, qtscript_Qt_ApplicationAttribute_toString);
     qScriptRegisterMetaType<Qt::ApplicationAttribute>(engine, qtscript_Qt_ApplicationAttribute_toScriptValue,
         qtscript_Qt_ApplicationAttribute_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 7; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_Qt_ApplicationAttribute_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_Qt_ApplicationAttribute_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -5194,9 +5272,11 @@ static const char * const qtscript_Qt_CheckState_keys[] = {
 
 static QString qtscript_Qt_CheckState_toStringHelper(Qt::CheckState value)
 {
-    if ((value >= Qt::Unchecked) && (value <= Qt::Checked))
-        return qtscript_Qt_CheckState_keys[static_cast<int>(value)];
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("CheckState");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_CheckState_toScriptValue(QScriptEngine *engine, const Qt::CheckState &value)
@@ -5213,7 +5293,11 @@ static void qtscript_Qt_CheckState_fromScriptValue(const QScriptValue &value, Qt
 static QScriptValue qtscript_construct_Qt_CheckState(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= Qt::Unchecked) && (arg <= Qt::Checked))
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("CheckState");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
         return qScriptValueFromValue(engine,  static_cast<Qt::CheckState>(arg));
     return context->throwError(QString::fromLatin1("CheckState(): invalid enum value (%0)").arg(arg));
 }
@@ -5494,6 +5578,7 @@ static const Qt::ImageConversionFlag qtscript_Qt_ImageConversionFlag_values[] = 
     , Qt::PreferDither
     , Qt::AvoidDither
     , Qt::DitherMode_Mask
+    , Qt::NoOpaqueDetection
 };
 
 static const char * const qtscript_Qt_ImageConversionFlag_keys[] = {
@@ -5509,11 +5594,12 @@ static const char * const qtscript_Qt_ImageConversionFlag_keys[] = {
     , "PreferDither"
     , "AvoidDither"
     , "DitherMode_Mask"
+    , "NoOpaqueDetection"
 };
 
 static QString qtscript_Qt_ImageConversionFlag_toStringHelper(Qt::ImageConversionFlag value)
 {
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 13; ++i) {
         if (qtscript_Qt_ImageConversionFlag_values[i] == value)
             return QString::fromLatin1(qtscript_Qt_ImageConversionFlag_keys[i]);
     }
@@ -5534,7 +5620,7 @@ static void qtscript_Qt_ImageConversionFlag_fromScriptValue(const QScriptValue &
 static QScriptValue qtscript_construct_Qt_ImageConversionFlag(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 13; ++i) {
         if (qtscript_Qt_ImageConversionFlag_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<Qt::ImageConversionFlag>(arg));
     }
@@ -5560,7 +5646,7 @@ static QScriptValue qtscript_create_Qt_ImageConversionFlag_class(QScriptEngine *
         qtscript_Qt_ImageConversionFlag_valueOf, qtscript_Qt_ImageConversionFlag_toString);
     qScriptRegisterMetaType<Qt::ImageConversionFlag>(engine, qtscript_Qt_ImageConversionFlag_toScriptValue,
         qtscript_Qt_ImageConversionFlag_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 13; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_Qt_ImageConversionFlag_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_Qt_ImageConversionFlag_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -5616,7 +5702,7 @@ static QScriptValue qtscript_Qt_ImageConversionFlags_toString(QScriptContext *co
 {
     Qt::ImageConversionFlags value = qscriptvalue_cast<Qt::ImageConversionFlags>(context->thisObject());
     QString result;
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 13; ++i) {
         if ((value & qtscript_Qt_ImageConversionFlag_values[i]) == qtscript_Qt_ImageConversionFlag_values[i]) {
             if (!result.isEmpty())
                 result.append(QString::fromLatin1(","));
@@ -6067,6 +6153,10 @@ static const Qt::WidgetAttribute qtscript_Qt_WidgetAttribute_values[] = {
     , Qt::WA_X11NetWmWindowTypeNotification
     , Qt::WA_X11NetWmWindowTypeCombo
     , Qt::WA_X11NetWmWindowTypeDND
+    , Qt::WA_MacFrameworkScaled
+    , Qt::WA_SetWindowModality
+    , Qt::WA_WState_WindowOpacitySet
+    , Qt::WA_TranslucentBackground
     , Qt::WA_AttributeCount
 };
 
@@ -6170,16 +6260,20 @@ static const char * const qtscript_Qt_WidgetAttribute_keys[] = {
     , "WA_X11NetWmWindowTypeNotification"
     , "WA_X11NetWmWindowTypeCombo"
     , "WA_X11NetWmWindowTypeDND"
+    , "WA_MacFrameworkScaled"
+    , "WA_SetWindowModality"
+    , "WA_WState_WindowOpacitySet"
+    , "WA_TranslucentBackground"
     , "WA_AttributeCount"
 };
 
 static QString qtscript_Qt_WidgetAttribute_toStringHelper(Qt::WidgetAttribute value)
 {
-    for (int i = 0; i < 100; ++i) {
-        if (qtscript_Qt_WidgetAttribute_values[i] == value)
-            return QString::fromLatin1(qtscript_Qt_WidgetAttribute_keys[i]);
-    }
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WidgetAttribute");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_WidgetAttribute_toScriptValue(QScriptEngine *engine, const Qt::WidgetAttribute &value)
@@ -6196,10 +6290,12 @@ static void qtscript_Qt_WidgetAttribute_fromScriptValue(const QScriptValue &valu
 static QScriptValue qtscript_construct_Qt_WidgetAttribute(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 100; ++i) {
-        if (qtscript_Qt_WidgetAttribute_values[i] == arg)
-            return qScriptValueFromValue(engine,  static_cast<Qt::WidgetAttribute>(arg));
-    }
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WidgetAttribute");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
+        return qScriptValueFromValue(engine,  static_cast<Qt::WidgetAttribute>(arg));
     return context->throwError(QString::fromLatin1("WidgetAttribute(): invalid enum value (%0)").arg(arg));
 }
 
@@ -6222,7 +6318,7 @@ static QScriptValue qtscript_create_Qt_WidgetAttribute_class(QScriptEngine *engi
         qtscript_Qt_WidgetAttribute_valueOf, qtscript_Qt_WidgetAttribute_toString);
     qScriptRegisterMetaType<Qt::WidgetAttribute>(engine, qtscript_Qt_WidgetAttribute_toScriptValue,
         qtscript_Qt_WidgetAttribute_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 104; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_Qt_WidgetAttribute_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_Qt_WidgetAttribute_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -6486,11 +6582,11 @@ static const char * const qtscript_Qt_WindowState_keys[] = {
 
 static QString qtscript_Qt_WindowState_toStringHelper(Qt::WindowState value)
 {
-    for (int i = 0; i < 5; ++i) {
-        if (qtscript_Qt_WindowState_values[i] == value)
-            return QString::fromLatin1(qtscript_Qt_WindowState_keys[i]);
-    }
-    return QString();
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WindowState");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    return QString::fromLatin1(menum.valueToKey(value));
 }
 
 static QScriptValue qtscript_Qt_WindowState_toScriptValue(QScriptEngine *engine, const Qt::WindowState &value)
@@ -6507,10 +6603,12 @@ static void qtscript_Qt_WindowState_fromScriptValue(const QScriptValue &value, Q
 static QScriptValue qtscript_construct_Qt_WindowState(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 5; ++i) {
-        if (qtscript_Qt_WindowState_values[i] == arg)
-            return qScriptValueFromValue(engine,  static_cast<Qt::WindowState>(arg));
-    }
+    const QMetaObject *meta = qtscript_Qt_metaObject();
+    int idx = meta->indexOfEnumerator("WindowState");
+    Q_ASSERT(idx != -1);
+    QMetaEnum menum = meta->enumerator(idx);
+    if (menum.valueToKey(arg) != 0)
+        return qScriptValueFromValue(engine,  static_cast<Qt::WindowState>(arg));
     return context->throwError(QString::fromLatin1("WindowState(): invalid enum value (%0)").arg(arg));
 }
 
@@ -6878,7 +6976,7 @@ static const char * const qtscript_Qt_HitTestAccuracy_keys[] = {
 static QString qtscript_Qt_HitTestAccuracy_toStringHelper(Qt::HitTestAccuracy value)
 {
     if ((value >= Qt::ExactHit) && (value <= Qt::FuzzyHit))
-        return qtscript_Qt_HitTestAccuracy_keys[static_cast<int>(value)];
+        return qtscript_Qt_HitTestAccuracy_keys[static_cast<int>(value)-static_cast<int>(Qt::ExactHit)];
     return QString();
 }
 

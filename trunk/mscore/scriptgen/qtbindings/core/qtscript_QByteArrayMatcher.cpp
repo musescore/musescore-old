@@ -21,10 +21,10 @@ static const char * const qtscript_QByteArrayMatcher_function_names[] = {
 };
 
 static const char * const qtscript_QByteArrayMatcher_function_signatures[] = {
-    "\nQByteArray pattern\nQByteArrayMatcher other"
+    "\nQByteArray pattern\nQByteArrayMatcher other\nchar pattern, int length"
     // static
     // prototype
-    , "QByteArray ba, int from"
+    , "QByteArray ba, int from\nchar str, int len, int from"
     , ""
     , "QByteArray pattern"
 ""
@@ -37,12 +37,13 @@ static QScriptValue qtscript_QByteArrayMatcher_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QByteArrayMatcher::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QByteArrayMatcher)
 Q_DECLARE_METATYPE(QByteArrayMatcher*)
+Q_DECLARE_METATYPE(char*)
 
 //
 // QByteArrayMatcher
@@ -77,9 +78,25 @@ static QScriptValue qtscript_QByteArrayMatcher_prototype_call(QScriptContext *co
         return QScriptValue(context->engine(), _q_result);
     }
     if (context->argumentCount() == 2) {
-        QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
+        if ((qMetaTypeId<QByteArray>() == context->argument(0).toVariant().userType())
+            && context->argument(1).isNumber()) {
+            QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        } else if (qscriptvalue_cast<char*>(context->argument(0))
+            && context->argument(1).isNumber()) {
+            char* _q_arg0 = qscriptvalue_cast<char*>(context->argument(0));
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        }
+    }
+    if (context->argumentCount() == 3) {
+        char* _q_arg0 = qscriptvalue_cast<char*>(context->argument(0));
         int _q_arg1 = context->argument(1).toInt32();
-        int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+        int _q_arg2 = context->argument(2).toInt32();
+        int _q_result = _q_self->indexIn(_q_arg0, _q_arg1, _q_arg2);
         return QScriptValue(context->engine(), _q_result);
     }
     break;
@@ -138,6 +155,12 @@ static QScriptValue qtscript_QByteArrayMatcher_static_call(QScriptContext *conte
             QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
             return _q_result;
         }
+    } else if (context->argumentCount() == 2) {
+        char* _q_arg0 = qscriptvalue_cast<char*>(context->argument(0));
+        int _q_arg1 = context->argument(1).toInt32();
+        QByteArrayMatcher _q_cpp_result(_q_arg0, _q_arg1);
+        QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
+        return _q_result;
     }
     break;
 
@@ -152,10 +175,10 @@ static QScriptValue qtscript_QByteArrayMatcher_static_call(QScriptContext *conte
 QScriptValue qtscript_create_QByteArrayMatcher_class(QScriptEngine *engine)
 {
     static const int function_lengths[] = {
-        1
+        2
         // static
         // prototype
-        , 2
+        , 3
         , 0
         , 1
         , 0

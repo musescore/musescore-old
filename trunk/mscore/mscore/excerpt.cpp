@@ -30,6 +30,8 @@
 #include "page.h"
 #include "text.h"
 #include "slur.h"
+#include "sig.h"
+#include "tempo.h"
 
 //---------------------------------------------------------
 //   read

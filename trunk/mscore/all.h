@@ -75,9 +75,6 @@
 #include <QtGui/QItemDelegate>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QSpinBox>
-#ifndef __MINGW32__
-// #include <QtGui/QX11Info>
-#endif
 #include <QtGui/QFontDatabase>
 #include <QtGui/QFontComboBox>
 #include <QtGui/QApplication>
@@ -102,6 +99,9 @@
 #include <QtGui/QRadioButton>
 #include <QtGui/QDirModel>
 #include <QtGui/QHeaderView>
+#include <QtGui/QUndoGroup>
+#include <QtGui/QUndoStack>
+
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
 

@@ -21,6 +21,8 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
+#include "globals.h"
+
 class Slur;
 class ChordRest;
 struct Drumset;

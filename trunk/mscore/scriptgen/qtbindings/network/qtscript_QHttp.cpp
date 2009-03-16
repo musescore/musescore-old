@@ -15,7 +15,6 @@
 #include <qlist.h>
 #include <qnetworkproxy.h>
 #include <qobject.h>
-#include <qsslerror.h>
 #include <qtcpsocket.h>
 
 #include "qtscriptshell_QHttp.h"
@@ -85,7 +84,7 @@ static QScriptValue qtscript_QHttp_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QHttp::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -148,7 +147,7 @@ static const char * const qtscript_QHttp_Error_keys[] = {
 static QString qtscript_QHttp_Error_toStringHelper(QHttp::Error value)
 {
     if ((value >= QHttp::NoError) && (value <= QHttp::ProxyAuthenticationRequiredError))
-        return qtscript_QHttp_Error_keys[static_cast<int>(value)];
+        return qtscript_QHttp_Error_keys[static_cast<int>(value)-static_cast<int>(QHttp::NoError)];
     return QString();
 }
 
@@ -215,7 +214,7 @@ static const char * const qtscript_QHttp_ConnectionMode_keys[] = {
 static QString qtscript_QHttp_ConnectionMode_toStringHelper(QHttp::ConnectionMode value)
 {
     if ((value >= QHttp::ConnectionModeHttp) && (value <= QHttp::ConnectionModeHttps))
-        return qtscript_QHttp_ConnectionMode_keys[static_cast<int>(value)];
+        return qtscript_QHttp_ConnectionMode_keys[static_cast<int>(value)-static_cast<int>(QHttp::ConnectionModeHttp)];
     return QString();
 }
 
@@ -292,7 +291,7 @@ static const char * const qtscript_QHttp_State_keys[] = {
 static QString qtscript_QHttp_State_toStringHelper(QHttp::State value)
 {
     if ((value >= QHttp::Unconnected) && (value <= QHttp::Closing))
-        return qtscript_QHttp_State_keys[static_cast<int>(value)];
+        return qtscript_QHttp_State_keys[static_cast<int>(value)-static_cast<int>(QHttp::Unconnected)];
     return QString();
 }
 
@@ -576,7 +575,7 @@ static QScriptValue qtscript_QHttp_prototype_call(QScriptContext *context, QScri
             int _q_result = _q_self->setHost(_q_arg0, _q_arg1);
             return QScriptValue(context->engine(), _q_result);
         } else if (context->argument(0).isString()
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())) {
+            && context->argument(1).isNumber()) {
             QString _q_arg0 = context->argument(0).toString();
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
             int _q_result = _q_self->setHost(_q_arg0, _q_arg1);
@@ -702,7 +701,7 @@ static QScriptValue qtscript_QHttp_static_call(QScriptContext *context, QScriptE
             _q_cpp_result->__qtscript_self = _q_result;
             return _q_result;
         } else if (context->argument(0).isString()
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())) {
+            && context->argument(1).isNumber()) {
             QString _q_arg0 = context->argument(0).toString();
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
             QtScriptShell_QHttp* _q_cpp_result = new QtScriptShell_QHttp(_q_arg0, _q_arg1);
@@ -713,7 +712,7 @@ static QScriptValue qtscript_QHttp_static_call(QScriptContext *context, QScriptE
     } else if (context->argumentCount() == 3) {
         if (context->argument(0).isString()
             && (qMetaTypeId<QHttp::ConnectionMode>() == context->argument(1).toVariant().userType())
-            && (qMetaTypeId<unsigned short>() == context->argument(2).toVariant().userType())) {
+            && context->argument(2).isNumber()) {
             QString _q_arg0 = context->argument(0).toString();
             QHttp::ConnectionMode _q_arg1 = qscriptvalue_cast<QHttp::ConnectionMode>(context->argument(1));
             unsigned short _q_arg2 = qscriptvalue_cast<unsigned short>(context->argument(2));
@@ -722,7 +721,7 @@ static QScriptValue qtscript_QHttp_static_call(QScriptContext *context, QScriptE
             _q_cpp_result->__qtscript_self = _q_result;
             return _q_result;
         } else if (context->argument(0).isString()
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())
+            && context->argument(1).isNumber()
             && context->argument(2).isQObject()) {
             QString _q_arg0 = context->argument(0).toString();
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));

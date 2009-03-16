@@ -15,12 +15,14 @@ static const char * const qtscript_QNetworkProxy_function_names[] = {
     , "applicationProxy"
     , "setApplicationProxy"
     // prototype
+    , "capabilities"
     , "hostName"
     , "isCachingProxy"
     , "isTransparentProxy"
     , "equals"
     , "password"
     , "port"
+    , "setCapabilities"
     , "setHostName"
     , "setPassword"
     , "setPort"
@@ -40,9 +42,11 @@ static const char * const qtscript_QNetworkProxy_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
     , "QNetworkProxy other"
     , ""
     , ""
+    , "Capabilities capab"
     , "String hostName"
     , "String password"
     , "unsigned short port"
@@ -60,13 +64,15 @@ static QScriptValue qtscript_QNetworkProxy_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QNetworkProxy::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QNetworkProxy)
 Q_DECLARE_METATYPE(QNetworkProxy*)
 Q_DECLARE_METATYPE(QNetworkProxy::ProxyType)
+Q_DECLARE_METATYPE(QNetworkProxy::Capability)
+Q_DECLARE_METATYPE(QFlags<QNetworkProxy::Capability>)
 
 static QScriptValue qtscript_create_enum_class_helper(
     QScriptEngine *engine,
@@ -80,6 +86,23 @@ static QScriptValue qtscript_create_enum_class_helper(
     proto.setProperty(QString::fromLatin1("toString"),
         engine->newFunction(toString), QScriptValue::SkipInEnumeration);
     return engine->newFunction(construct, proto, 1);
+}
+
+static QScriptValue qtscript_create_flags_class_helper(
+    QScriptEngine *engine,
+    QScriptEngine::FunctionSignature construct,
+    QScriptEngine::FunctionSignature valueOf,
+    QScriptEngine::FunctionSignature toString,
+    QScriptEngine::FunctionSignature equals)
+{
+    QScriptValue proto = engine->newObject();
+    proto.setProperty(QString::fromLatin1("valueOf"),
+        engine->newFunction(valueOf), QScriptValue::SkipInEnumeration);
+    proto.setProperty(QString::fromLatin1("toString"),
+        engine->newFunction(toString), QScriptValue::SkipInEnumeration);
+    proto.setProperty(QString::fromLatin1("equals"),
+        engine->newFunction(equals), QScriptValue::SkipInEnumeration);
+    return engine->newFunction(construct, proto);
 }
 
 //
@@ -107,7 +130,7 @@ static const char * const qtscript_QNetworkProxy_ProxyType_keys[] = {
 static QString qtscript_QNetworkProxy_ProxyType_toStringHelper(QNetworkProxy::ProxyType value)
 {
     if ((value >= QNetworkProxy::DefaultProxy) && (value <= QNetworkProxy::FtpCachingProxy))
-        return qtscript_QNetworkProxy_ProxyType_keys[static_cast<int>(value)];
+        return qtscript_QNetworkProxy_ProxyType_keys[static_cast<int>(value)-static_cast<int>(QNetworkProxy::DefaultProxy)];
     return QString();
 }
 
@@ -158,6 +181,159 @@ static QScriptValue qtscript_create_QNetworkProxy_ProxyType_class(QScriptEngine 
 }
 
 //
+// QNetworkProxy::Capability
+//
+
+static const QNetworkProxy::Capability qtscript_QNetworkProxy_Capability_values[] = {
+    QNetworkProxy::TunnelingCapability
+    , QNetworkProxy::ListeningCapability
+    , QNetworkProxy::UdpTunnelingCapability
+    , QNetworkProxy::CachingCapability
+    , QNetworkProxy::HostNameLookupCapability
+};
+
+static const char * const qtscript_QNetworkProxy_Capability_keys[] = {
+    "TunnelingCapability"
+    , "ListeningCapability"
+    , "UdpTunnelingCapability"
+    , "CachingCapability"
+    , "HostNameLookupCapability"
+};
+
+static QString qtscript_QNetworkProxy_Capability_toStringHelper(QNetworkProxy::Capability value)
+{
+    for (int i = 0; i < 5; ++i) {
+        if (qtscript_QNetworkProxy_Capability_values[i] == value)
+            return QString::fromLatin1(qtscript_QNetworkProxy_Capability_keys[i]);
+    }
+    return QString();
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capability_toScriptValue(QScriptEngine *engine, const QNetworkProxy::Capability &value)
+{
+    QScriptValue clazz = engine->globalObject().property(QString::fromLatin1("QNetworkProxy"));
+    return clazz.property(qtscript_QNetworkProxy_Capability_toStringHelper(value));
+}
+
+static void qtscript_QNetworkProxy_Capability_fromScriptValue(const QScriptValue &value, QNetworkProxy::Capability &out)
+{
+    out = qvariant_cast<QNetworkProxy::Capability>(value.toVariant());
+}
+
+static QScriptValue qtscript_construct_QNetworkProxy_Capability(QScriptContext *context, QScriptEngine *engine)
+{
+    int arg = context->argument(0).toInt32();
+    for (int i = 0; i < 5; ++i) {
+        if (qtscript_QNetworkProxy_Capability_values[i] == arg)
+            return qScriptValueFromValue(engine,  static_cast<QNetworkProxy::Capability>(arg));
+    }
+    return context->throwError(QString::fromLatin1("Capability(): invalid enum value (%0)").arg(arg));
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capability_valueOf(QScriptContext *context, QScriptEngine *engine)
+{
+    QNetworkProxy::Capability value = qscriptvalue_cast<QNetworkProxy::Capability>(context->thisObject());
+    return QScriptValue(engine, static_cast<int>(value));
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capability_toString(QScriptContext *context, QScriptEngine *engine)
+{
+    QNetworkProxy::Capability value = qscriptvalue_cast<QNetworkProxy::Capability>(context->thisObject());
+    return QScriptValue(engine, qtscript_QNetworkProxy_Capability_toStringHelper(value));
+}
+
+static QScriptValue qtscript_create_QNetworkProxy_Capability_class(QScriptEngine *engine, QScriptValue &clazz)
+{
+    QScriptValue ctor = qtscript_create_enum_class_helper(
+        engine, qtscript_construct_QNetworkProxy_Capability,
+        qtscript_QNetworkProxy_Capability_valueOf, qtscript_QNetworkProxy_Capability_toString);
+    qScriptRegisterMetaType<QNetworkProxy::Capability>(engine, qtscript_QNetworkProxy_Capability_toScriptValue,
+        qtscript_QNetworkProxy_Capability_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
+    for (int i = 0; i < 5; ++i) {
+        clazz.setProperty(QString::fromLatin1(qtscript_QNetworkProxy_Capability_keys[i]),
+            engine->newVariant(qVariantFromValue(qtscript_QNetworkProxy_Capability_values[i])),
+            QScriptValue::ReadOnly | QScriptValue::Undeletable);
+    }
+    return ctor;
+}
+
+//
+// QNetworkProxy::Capabilities
+//
+
+static QScriptValue qtscript_QNetworkProxy_Capabilities_toScriptValue(QScriptEngine *engine, const QNetworkProxy::Capabilities &value)
+{
+    return engine->newVariant(qVariantFromValue(value));
+}
+
+static void qtscript_QNetworkProxy_Capabilities_fromScriptValue(const QScriptValue &value, QNetworkProxy::Capabilities &out)
+{
+    QVariant var = value.toVariant();
+    if (var.userType() == qMetaTypeId<QNetworkProxy::Capabilities>())
+        out = qvariant_cast<QNetworkProxy::Capabilities>(var);
+    else if (var.userType() == qMetaTypeId<QNetworkProxy::Capability>())
+        out = qvariant_cast<QNetworkProxy::Capability>(var);
+    else
+        out = 0;
+}
+
+static QScriptValue qtscript_construct_QNetworkProxy_Capabilities(QScriptContext *context, QScriptEngine *engine)
+{
+    QNetworkProxy::Capabilities result = 0;
+    if ((context->argumentCount() == 1) && context->argument(0).isNumber()) {
+        result = static_cast<QNetworkProxy::Capabilities>(context->argument(0).toInt32());
+    } else {
+        for (int i = 0; i < context->argumentCount(); ++i) {
+            QVariant v = context->argument(i).toVariant();
+            if (v.userType() != qMetaTypeId<QNetworkProxy::Capability>()) {
+                return context->throwError(QScriptContext::TypeError,
+                    QString::fromLatin1("Capabilities(): argument %0 is not of type Capability").arg(i));
+            }
+            result |= qvariant_cast<QNetworkProxy::Capability>(v);
+        }
+   }
+    return engine->newVariant(qVariantFromValue(result));
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capabilities_valueOf(QScriptContext *context, QScriptEngine *engine)
+{
+    QNetworkProxy::Capabilities value = qscriptvalue_cast<QNetworkProxy::Capabilities>(context->thisObject());
+    return QScriptValue(engine, static_cast<int>(value));
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capabilities_toString(QScriptContext *context, QScriptEngine *engine)
+{
+    QNetworkProxy::Capabilities value = qscriptvalue_cast<QNetworkProxy::Capabilities>(context->thisObject());
+    QString result;
+    for (int i = 0; i < 5; ++i) {
+        if ((value & qtscript_QNetworkProxy_Capability_values[i]) == qtscript_QNetworkProxy_Capability_values[i]) {
+            if (!result.isEmpty())
+                result.append(QString::fromLatin1(","));
+            result.append(QString::fromLatin1(qtscript_QNetworkProxy_Capability_keys[i]));
+        }
+    }
+    return QScriptValue(engine, result);
+}
+
+static QScriptValue qtscript_QNetworkProxy_Capabilities_equals(QScriptContext *context, QScriptEngine *engine)
+{
+    QVariant thisObj = context->thisObject().toVariant();
+    QVariant otherObj = context->argument(0).toVariant();
+    return QScriptValue(engine, ((thisObj.userType() == otherObj.userType()) &&
+                                 (thisObj.value<QNetworkProxy::Capabilities>() == otherObj.value<QNetworkProxy::Capabilities>())));
+}
+
+static QScriptValue qtscript_create_QNetworkProxy_Capabilities_class(QScriptEngine *engine)
+{
+    QScriptValue ctor = qtscript_create_flags_class_helper(
+        engine, qtscript_construct_QNetworkProxy_Capabilities, qtscript_QNetworkProxy_Capabilities_valueOf,
+        qtscript_QNetworkProxy_Capabilities_toString, qtscript_QNetworkProxy_Capabilities_equals);
+    qScriptRegisterMetaType<QNetworkProxy::Capabilities>(engine, qtscript_QNetworkProxy_Capabilities_toScriptValue,
+        qtscript_QNetworkProxy_Capabilities_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
+    return ctor;
+}
+
+//
 // QNetworkProxy
 //
 
@@ -171,7 +347,7 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 13;
+        _id = 0xBABE0000 + 15;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -179,32 +355,39 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QNetworkProxy.%0(): this object is not a QNetworkProxy")
-            .arg(qtscript_QNetworkProxy_function_names[_id+1]));
+            .arg(qtscript_QNetworkProxy_function_names[_id+3]));
     }
 
     switch (_id) {
     case 0:
+    if (context->argumentCount() == 0) {
+        QFlags<QNetworkProxy::Capability> _q_result = _q_self->capabilities();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 1:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->hostName();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 1:
+    case 2:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isCachingProxy();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isTransparentProxy();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 3:
+    case 4:
     if (context->argumentCount() == 1) {
         QNetworkProxy _q_arg0 = qscriptvalue_cast<QNetworkProxy>(context->argument(0));
         bool _q_result = _q_self->operator==(_q_arg0);
@@ -212,21 +395,29 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->password();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         unsigned short _q_result = _q_self->port();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
+    if (context->argumentCount() == 1) {
+        QFlags<QNetworkProxy::Capability> _q_arg0 = qscriptvalue_cast<QFlags<QNetworkProxy::Capability> >(context->argument(0));
+        _q_self->setCapabilities(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 8:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setHostName(_q_arg0);
@@ -234,7 +425,7 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 7:
+    case 9:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setPassword(_q_arg0);
@@ -242,7 +433,7 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 8:
+    case 10:
     if (context->argumentCount() == 1) {
         unsigned short _q_arg0 = qscriptvalue_cast<unsigned short>(context->argument(0));
         _q_self->setPort(_q_arg0);
@@ -250,7 +441,7 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 9:
+    case 11:
     if (context->argumentCount() == 1) {
         QNetworkProxy::ProxyType _q_arg0 = qscriptvalue_cast<QNetworkProxy::ProxyType>(context->argument(0));
         _q_self->setType(_q_arg0);
@@ -258,7 +449,7 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setUser(_q_arg0);
@@ -266,21 +457,21 @@ static QScriptValue qtscript_QNetworkProxy_prototype_call(QScriptContext *contex
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 0) {
         QNetworkProxy::ProxyType _q_result = _q_self->type();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->user();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 13: {
+    case 15: {
     QString result = QString::fromLatin1("QNetworkProxy");
     return QScriptValue(context->engine(), result);
     }
@@ -386,9 +577,11 @@ QScriptValue qtscript_create_QNetworkProxy_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 1
         , 0
         , 0
+        , 1
         , 1
         , 1
         , 1
@@ -400,7 +593,7 @@ QScriptValue qtscript_create_QNetworkProxy_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QNetworkProxy*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QNetworkProxy*)0));
-    for (int i = 0; i < 14; ++i) {
+    for (int i = 0; i < 16; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QNetworkProxy_prototype_call, function_lengths[i+3]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QNetworkProxy_function_names[i+3]),
@@ -422,5 +615,9 @@ QScriptValue qtscript_create_QNetworkProxy_class(QScriptEngine *engine)
 
     ctor.setProperty(QString::fromLatin1("ProxyType"),
         qtscript_create_QNetworkProxy_ProxyType_class(engine, ctor));
+    ctor.setProperty(QString::fromLatin1("Capability"),
+        qtscript_create_QNetworkProxy_Capability_class(engine, ctor));
+    ctor.setProperty(QString::fromLatin1("Capabilities"),
+        qtscript_create_QNetworkProxy_Capabilities_class(engine));
     return ctor;
 }

@@ -2586,10 +2586,6 @@ fehlgeschlagen: </translation>
         <translation>irregulär</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Wiederholungszähler</translation>
-    </message>
-    <message>
         <source>Staves</source>
         <translation>Notenzeilen</translation>
     </message>
@@ -2608,6 +2604,18 @@ fehlgeschlagen: </translation>
     <message>
         <source>break multi measure rest</source>
         <translation>Mehrtaktpause beenden</translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5569,10 +5577,6 @@ before closing?</source>
     <message>
         <source>Wallpaper</source>
         <translation>Tapete</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>blinkender Cursor</translation>
     </message>
     <message>
         <source>Background</source>

@@ -9,6 +9,7 @@
 #include <qobject.h>
 #include <qsettings.h>
 #include <qstringlist.h>
+#include <qtextcodec.h>
 
 #define QTSCRIPT_IS_GENERATED_FUNCTION(fun) ((fun.data().toUInt32() & 0xFFFF0000) == 0xBABE0000)
 

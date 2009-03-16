@@ -53,7 +53,7 @@ static const char * const qtscript_QXmlStreamWriter_function_signatures[] = {
     , ""
     , ""
     , "bool arg__1"
-    , "int spaces"
+    , "int spacesOrTabs"
     , "QTextCodec codec\nchar codecName"
     , "QIODevice device"
     , "String namespaceUri, String name, String value\nString qualifiedName, String value\nQXmlStreamAttribute attribute"
@@ -70,7 +70,7 @@ static const char * const qtscript_QXmlStreamWriter_function_signatures[] = {
     , "String name"
     , "String namespaceUri, String prefix"
     , "String target, String data"
-    , "\nString version"
+    , "\nString version\nString version, bool standalone"
     , "String namespaceUri, String name\nString qualifiedName"
     , "String namespaceUri, String name, String text\nString qualifiedName, String text"
 ""
@@ -83,7 +83,7 @@ static QScriptValue qtscript_QXmlStreamWriter_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QXmlStreamWriter::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -343,6 +343,12 @@ static QScriptValue qtscript_QXmlStreamWriter_prototype_call(QScriptContext *con
         _q_self->writeStartDocument(_q_arg0);
         return context->engine()->undefinedValue();
     }
+    if (context->argumentCount() == 2) {
+        QString _q_arg0 = context->argument(0).toString();
+        bool _q_arg1 = context->argument(1).toBoolean();
+        _q_self->writeStartDocument(_q_arg0, _q_arg1);
+        return context->engine()->undefinedValue();
+    }
     break;
 
     case 23:
@@ -453,7 +459,7 @@ QScriptValue qtscript_create_QXmlStreamWriter_class(QScriptEngine *engine)
         , 1
         , 2
         , 2
-        , 1
+        , 2
         , 2
         , 3
         , 0

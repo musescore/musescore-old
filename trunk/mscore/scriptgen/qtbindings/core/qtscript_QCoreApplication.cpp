@@ -76,7 +76,7 @@ static const char * const qtscript_QCoreApplication_function_signatures[] = {
     , "List arg__1"
     , ""
     , "ApplicationAttribute attribute"
-    , "char context, char key, char comment, Encoding encoding\nchar context, char key, char comment, Encoding encoding, int n"
+    , "char context, char key, char disambiguation, Encoding encoding\nchar context, char key, char disambiguation, Encoding encoding, int n"
     // prototype
     , "QObject arg__1, QEvent arg__2"
 ""
@@ -89,7 +89,7 @@ static QScriptValue qtscript_QCoreApplication_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QCoreApplication::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -132,7 +132,7 @@ static const char * const qtscript_QCoreApplication_Encoding_keys[] = {
 static QString qtscript_QCoreApplication_Encoding_toStringHelper(QCoreApplication::Encoding value)
 {
     if ((value >= QCoreApplication::CodecForTr) && (value <= QCoreApplication::UnicodeUTF8))
-        return qtscript_QCoreApplication_Encoding_keys[static_cast<int>(value)];
+        return qtscript_QCoreApplication_Encoding_keys[static_cast<int>(value)-static_cast<int>(QCoreApplication::CodecForTr)];
     return QString();
 }
 
@@ -204,7 +204,7 @@ static QScriptValue qtscript_QCoreApplication_prototype_call(QScriptContext *con
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QCoreApplication.%0(): this object is not a QCoreApplication")
-            .arg(qtscript_QCoreApplication_function_names[_id+1]));
+            .arg(qtscript_QCoreApplication_function_names[_id+25]));
     }
 
     switch (_id) {

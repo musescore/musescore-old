@@ -45,7 +45,7 @@ static QScriptValue qtscript_QEventLoop_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QEventLoop::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -96,6 +96,8 @@ static const QEventLoop::ProcessEventsFlag qtscript_QEventLoop_ProcessEventsFlag
     , QEventLoop::WaitForMoreEvents
     , QEventLoop::X11ExcludeTimers
     , QEventLoop::DeferredDeletion
+    , QEventLoop::EventLoopExec
+    , QEventLoop::DialogExec
 };
 
 static const char * const qtscript_QEventLoop_ProcessEventsFlag_keys[] = {
@@ -105,11 +107,13 @@ static const char * const qtscript_QEventLoop_ProcessEventsFlag_keys[] = {
     , "WaitForMoreEvents"
     , "X11ExcludeTimers"
     , "DeferredDeletion"
+    , "EventLoopExec"
+    , "DialogExec"
 };
 
 static QString qtscript_QEventLoop_ProcessEventsFlag_toStringHelper(QEventLoop::ProcessEventsFlag value)
 {
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 8; ++i) {
         if (qtscript_QEventLoop_ProcessEventsFlag_values[i] == value)
             return QString::fromLatin1(qtscript_QEventLoop_ProcessEventsFlag_keys[i]);
     }
@@ -130,7 +134,7 @@ static void qtscript_QEventLoop_ProcessEventsFlag_fromScriptValue(const QScriptV
 static QScriptValue qtscript_construct_QEventLoop_ProcessEventsFlag(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 8; ++i) {
         if (qtscript_QEventLoop_ProcessEventsFlag_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QEventLoop::ProcessEventsFlag>(arg));
     }
@@ -156,7 +160,7 @@ static QScriptValue qtscript_create_QEventLoop_ProcessEventsFlag_class(QScriptEn
         qtscript_QEventLoop_ProcessEventsFlag_valueOf, qtscript_QEventLoop_ProcessEventsFlag_toString);
     qScriptRegisterMetaType<QEventLoop::ProcessEventsFlag>(engine, qtscript_QEventLoop_ProcessEventsFlag_toScriptValue,
         qtscript_QEventLoop_ProcessEventsFlag_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 8; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QEventLoop_ProcessEventsFlag_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QEventLoop_ProcessEventsFlag_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -212,7 +216,7 @@ static QScriptValue qtscript_QEventLoop_ProcessEventsFlags_toString(QScriptConte
 {
     QEventLoop::ProcessEventsFlags value = qscriptvalue_cast<QEventLoop::ProcessEventsFlags>(context->thisObject());
     QString result;
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 8; ++i) {
         if ((value & qtscript_QEventLoop_ProcessEventsFlag_values[i]) == qtscript_QEventLoop_ProcessEventsFlag_values[i]) {
             if (!result.isEmpty())
                 result.append(QString::fromLatin1(","));

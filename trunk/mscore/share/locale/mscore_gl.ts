@@ -2596,12 +2596,20 @@ fallou:</translation>
         <translation>irregular</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Número de repeticións</translation>
-    </message>
-    <message>
         <source>break multi measure rest</source>
         <translation>rachar compás de espera</translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5720,10 +5728,6 @@ before closing?</source>
     <message>
         <source>Misc.</source>
         <translation>Diversos.</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>cursor intermitente</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>

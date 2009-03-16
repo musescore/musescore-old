@@ -17,6 +17,7 @@ static const char * const qtscript_QHostInfo_function_names[] = {
     // static
     , "abortHostLookup"
     , "fromName"
+    , "localDomainName"
     , "localHostName"
     , "lookupHost"
     // prototype
@@ -38,6 +39,7 @@ static const char * const qtscript_QHostInfo_function_signatures[] = {
     // static
     , "int lookupId"
     , "String name"
+    , ""
     , ""
     , "String name, QObject receiver, char member"
     // prototype
@@ -61,7 +63,7 @@ static QScriptValue qtscript_QHostInfo_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QHostInfo::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -104,7 +106,7 @@ static const char * const qtscript_QHostInfo_HostInfoError_keys[] = {
 static QString qtscript_QHostInfo_HostInfoError_toStringHelper(QHostInfo::HostInfoError value)
 {
     if ((value >= QHostInfo::NoError) && (value <= QHostInfo::UnknownError))
-        return qtscript_QHostInfo_HostInfoError_keys[static_cast<int>(value)];
+        return qtscript_QHostInfo_HostInfoError_keys[static_cast<int>(value)-static_cast<int>(QHostInfo::NoError)];
     return QString();
 }
 
@@ -176,7 +178,7 @@ static QScriptValue qtscript_QHostInfo_prototype_call(QScriptContext *context, Q
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QHostInfo.%0(): this object is not a QHostInfo")
-            .arg(qtscript_QHostInfo_function_names[_id+1]));
+            .arg(qtscript_QHostInfo_function_names[_id+6]));
     }
 
     switch (_id) {
@@ -265,8 +267,8 @@ static QScriptValue qtscript_QHostInfo_prototype_call(QScriptContext *context, Q
     Q_ASSERT(false);
     }
     return qtscript_QHostInfo_throw_ambiguity_error_helper(context,
-        qtscript_QHostInfo_function_names[_id+5],
-        qtscript_QHostInfo_function_signatures[_id+5]);
+        qtscript_QHostInfo_function_names[_id+6],
+        qtscript_QHostInfo_function_signatures[_id+6]);
 }
 
 static QScriptValue qtscript_QHostInfo_static_call(QScriptContext *context, QScriptEngine *)
@@ -316,12 +318,19 @@ static QScriptValue qtscript_QHostInfo_static_call(QScriptContext *context, QScr
 
     case 3:
     if (context->argumentCount() == 0) {
-        QString _q_result = QHostInfo::localHostName();
+        QString _q_result = QHostInfo::localDomainName();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 4:
+    if (context->argumentCount() == 0) {
+        QString _q_result = QHostInfo::localHostName();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 5:
     if (context->argumentCount() == 3) {
         QString _q_arg0 = context->argument(0).toString();
         QObject* _q_arg1 = context->argument(1).toQObject();
@@ -351,6 +360,7 @@ QScriptValue qtscript_create_QHostInfo_class(QScriptEngine *engine)
         , 1
         , 1
         , 0
+        , 0
         , 3
         // prototype
         , 0
@@ -368,9 +378,9 @@ QScriptValue qtscript_create_QHostInfo_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QHostInfo*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QHostInfo*)0));
     for (int i = 0; i < 11; ++i) {
-        QScriptValue fun = engine->newFunction(qtscript_QHostInfo_prototype_call, function_lengths[i+5]);
+        QScriptValue fun = engine->newFunction(qtscript_QHostInfo_prototype_call, function_lengths[i+6]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
-        proto.setProperty(QString::fromLatin1(qtscript_QHostInfo_function_names[i+5]),
+        proto.setProperty(QString::fromLatin1(qtscript_QHostInfo_function_names[i+6]),
             fun, QScriptValue::SkipInEnumeration);
     }
 
@@ -379,7 +389,7 @@ QScriptValue qtscript_create_QHostInfo_class(QScriptEngine *engine)
 
     QScriptValue ctor = engine->newFunction(qtscript_QHostInfo_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 5; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QHostInfo_static_call,
             function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i+1)));

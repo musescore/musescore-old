@@ -28,6 +28,7 @@
 #include "score.h"
 #include "sym.h"
 #include "system.h"
+#include "measure.h"
 
 QHash<int, const ChordDescription*> Harmony::chordHash;
 

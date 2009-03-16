@@ -24,6 +24,7 @@
 #include "seq.h"
 #include "layout.h"
 #include "mscore.h"
+#include "measure.h"
 
 const int MIN_VOL = -60;
 const int MAX_VOL = 10;

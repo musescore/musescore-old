@@ -69,6 +69,7 @@
 #include "lyrics.h"
 #include "rest.h"
 #include "slur.h"
+#include "measure.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -125,19 +126,6 @@ Element::~Element()
                         if (debugMode)
                               printf("======~Element: %p still in selection!\n", this);
                         el->removeAt(el->indexOf(this));
-                        }
-                  }
-            UndoList* ul = score()->getUndoList();
-            if (!ul->isEmpty()) {
-                  Undo* undo = ul->back();
-                  s = &undo->selection;
-                  QList<Element*>* el = s->elements();
-                  foreach(Element* e, *el) {
-                        if (e == this) {
-                              if (debugMode)
-                                    printf("======~Element: %p still in undo!\n", this);
-                              el->removeAt(el->indexOf(this));
-                              }
                         }
                   }
             }

@@ -21,8 +21,8 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.10"
-static const int MSCVERSION = 110;
+#define MSC_VERSION     "1.11"
+static const int MSCVERSION = 111;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -32,6 +32,7 @@ static const int MSCVERSION = 110;
 //    1.8   slur id, slur anchor in in Note
 //    1.9   image size stored in mm instead of pixel
 //    1.10  TextLine properties changed
+//    1.11  Instrument name in part saved as TextC
 
 extern int division;
 

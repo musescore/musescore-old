@@ -68,6 +68,9 @@
 #include "beam.h"
 #include "lyrics.h"
 #include "pitchspelling.h"
+#include "measure.h"
+#include "tempo.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -85,13 +88,13 @@ void Score::startCmd()
       // Start collecting low-level undo operations for a
       // user-visible undo action.
 
-      if (cmdActive) {
+      if (_undo->active()) {
             // if (debugMode)
             fprintf(stderr, "Score::startCmd(): cmd already active\n");
             return;
             }
-      undoList.push_back(new Undo(_is, sel));
-      cmdActive = true;
+      _undo->beginMacro();
+      _undo->push(new SaveState(this));
       }
 
 //---------------------------------------------------------
@@ -105,26 +108,13 @@ void Score::startCmd()
 
 void Score::endCmd()
       {
-      if (!cmdActive) {
+      if (!_undo->active()) {
             // if (debugMode)
                   fprintf(stderr, "Score::endCmd(): no cmd active\n");
             end();
             return;
             }
-      if (undoList.back()->empty()) {
-            // nothing to undo
-            delete undoList.back();
-            undoList.pop_back();
-            }
-      else {
-            setDirty(true);
-            for (iUndo i = redoList.begin(); i != redoList.end(); ++i)
-                  delete *i;
-            redoList.clear();
-            getAction("undo")->setEnabled(true);
-            getAction("redo")->setEnabled(false);
-            }
-      cmdActive = false;
+      _undo->endMacro(_undo->current()->childCount() <= 1);
       end();
       }
 
@@ -301,8 +291,8 @@ void Score::cmdRemove(Element* e)
                   iClefEvent nki = ki;
                   ++nki;
                   cl->erase(ki);
-                  undoOp(UndoOp::ChangeClef, staff, tick, oval, -1000);
 
+                  undoChangeClef(staff, tick, oval, -1000);
                   undoRemoveElement(clef);
 
                   Measure* measure = tick2measure(tick);
@@ -312,7 +302,7 @@ void Score::cmdRemove(Element* e)
                   if (nki->second != oval)
                         break;
 
-                  undoOp(UndoOp::ChangeClef, staff, nki->first, oval, -1000);
+                  undoChangeClef(staff, nki->first, oval, -1000);
 
                   tick = nki->first;
                   for (MeasureBase* mb = measure; mb; mb = mb->next()) {
@@ -359,8 +349,8 @@ void Score::cmdRemove(Element* e)
                   iKeyEvent nki = ki;
                   ++nki;
                   kl->erase(ki);
-                  undoOp(UndoOp::ChangeKeySig, staff, tick, oval, NO_KEY);
 
+                  undoChangeKeySig(staff, tick, oval, NO_KEY);
                   undoRemoveElement(ks);
 
                   Measure* measure = tick2measure(tick);
@@ -370,7 +360,7 @@ void Score::cmdRemove(Element* e)
                   if (nki->second != oval)
                         break;
 
-                  undoOp(UndoOp::ChangeKeySig, staff, nki->first, oval, NO_KEY);
+                  undoChangeKeySig(staff, nki->first, oval, NO_KEY);
 
                   tick = nki->first;
                   for (MeasureBase* mb = measure; mb; mb = mb->next()) {
@@ -1254,8 +1244,7 @@ void Score::cmdAddText(int subtype)
                   if (measure->type() != VBOX) {
                         measure = new VBox(this);
                         measure->setTick(0);
-                        addMeasure(measure);
-	                  undoOp(UndoOp::InsertMeasure, measure);
+                        undoInsertMeasure(measure);
                         }
                   s = new Text(this);
                   switch(subtype) {
@@ -1449,7 +1438,7 @@ MeasureBase* Score::appendMeasure(int type)
                   s->add(rest);
                   }
             }
-      undoOp(UndoOp::InsertMeasure, mb);
+      undoInsertMeasure(mb);
       mb->setNext(0);
       _layout->add(mb);
       if (type == MEASURE)
@@ -1553,8 +1542,7 @@ void Score::insertMeasures(int n, int type)
 		            }
                   undoFixTicks();
 		      }
-            addMeasure(m);
-	      undoOp(UndoOp::InsertMeasure, m);
+	      undoInsertMeasure(m);
             if (type == MEASURE) {
                   if (tick == 0) {
                         SigEvent e1 = sigmap->timesig(tick);
@@ -1619,6 +1607,8 @@ void Score::addAccidental(int idx)
 
 void Score::addAccidental(Note* oNote, int accidental)
       {
+      undoChangeAccidental(oNote, accidental);
+#if 0
       UndoOp i;
       i.type     = UndoOp::ChangeAccidental;
       i.element1 = oNote;
@@ -1628,6 +1618,7 @@ void Score::addAccidental(Note* oNote, int accidental)
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
       layoutAll = true;
+#endif
       }
 
 //---------------------------------------------------------
@@ -1660,9 +1651,9 @@ void Score::addArticulation(Element* el, Articulation* atr)
 
 void Score::toggleInvisible(Element* obj)
       {
-      obj->setVisible(!obj->visible());
+      undoToggleInvisible(obj);
+
       obj->setGenerated(false);
-      undoOp(UndoOp::ToggleInvisible, obj);
       refresh |= obj->abbox();
       if (obj->type() == BAR_LINE) {
             Element* e = obj->parent();
@@ -1689,7 +1680,7 @@ void Score::toDefault()
       for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->toDefault();
       layoutAll = true;
-      setDirty(true);
+      setClean(false);
       }
 
 //---------------------------------------------------------
@@ -1702,7 +1693,7 @@ void Score::resetUserStretch()
             if (m->type() == MEASURE)
                   static_cast<Measure*>(m)->setUserStretch(1.0);
             }
-      setDirty();
+      setClean(false);
       layoutAll = true;
       }
 
@@ -1851,16 +1842,6 @@ void Score::cmd(const QString& cmd)
             }
       if (cmd == "print")
             printFile();
-      else if (cmd == "undo") {
-            doUndo();
-            setLayoutAll(true);
-            end();
-            }
-      else if (cmd == "redo") {
-            doRedo();
-            setLayoutAll(true);
-            end();
-            }
       else if (cmd == "note-input") {
             QAction* a = getAction(cmd.toLatin1().data());
             setNoteEntry(a->isChecked());
@@ -1911,7 +1892,7 @@ void Score::cmd(const QString& cmd)
             end();
             }
       else {
-            if (cmdActive) {
+            if (_undo->active()) {
                   printf("Score::cmd(): cmd already active\n");
                   return;
                   }

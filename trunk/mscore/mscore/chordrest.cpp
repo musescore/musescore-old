@@ -35,6 +35,7 @@
 #include "breath.h"
 #include "barline.h"
 #include "articulation.h"
+#include "tempo.h"
 #include "tempotext.h"
 
 //---------------------------------------------------------

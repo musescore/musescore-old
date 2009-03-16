@@ -71,7 +71,7 @@ static QScriptValue qtscript_QTextCodec_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextCodec::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -124,17 +124,19 @@ static const QTextCodec::ConversionFlag qtscript_QTextCodec_ConversionFlag_value
     QTextCodec::ConvertInvalidToNull
     , QTextCodec::DefaultConversion
     , QTextCodec::IgnoreHeader
+    , QTextCodec::FreeFunction
 };
 
 static const char * const qtscript_QTextCodec_ConversionFlag_keys[] = {
     "ConvertInvalidToNull"
     , "DefaultConversion"
     , "IgnoreHeader"
+    , "FreeFunction"
 };
 
 static QString qtscript_QTextCodec_ConversionFlag_toStringHelper(QTextCodec::ConversionFlag value)
 {
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         if (qtscript_QTextCodec_ConversionFlag_values[i] == value)
             return QString::fromLatin1(qtscript_QTextCodec_ConversionFlag_keys[i]);
     }
@@ -155,7 +157,7 @@ static void qtscript_QTextCodec_ConversionFlag_fromScriptValue(const QScriptValu
 static QScriptValue qtscript_construct_QTextCodec_ConversionFlag(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         if (qtscript_QTextCodec_ConversionFlag_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QTextCodec::ConversionFlag>(arg));
     }
@@ -181,7 +183,7 @@ static QScriptValue qtscript_create_QTextCodec_ConversionFlag_class(QScriptEngin
         qtscript_QTextCodec_ConversionFlag_valueOf, qtscript_QTextCodec_ConversionFlag_toString);
     qScriptRegisterMetaType<QTextCodec::ConversionFlag>(engine, qtscript_QTextCodec_ConversionFlag_toScriptValue,
         qtscript_QTextCodec_ConversionFlag_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QTextCodec_ConversionFlag_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QTextCodec_ConversionFlag_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -237,7 +239,7 @@ static QScriptValue qtscript_QTextCodec_ConversionFlags_toString(QScriptContext 
 {
     QTextCodec::ConversionFlags value = qscriptvalue_cast<QTextCodec::ConversionFlags>(context->thisObject());
     QString result;
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 4; ++i) {
         if ((value & qtscript_QTextCodec_ConversionFlag_values[i]) == qtscript_QTextCodec_ConversionFlag_values[i]) {
             if (!result.isEmpty())
                 result.append(QString::fromLatin1(","));
@@ -287,7 +289,7 @@ static QScriptValue qtscript_QTextCodec_prototype_call(QScriptContext *context, 
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QTextCodec.%0(): this object is not a QTextCodec")
-            .arg(qtscript_QTextCodec_function_names[_id+1]));
+            .arg(qtscript_QTextCodec_function_names[_id+11]));
     }
 
     switch (_id) {

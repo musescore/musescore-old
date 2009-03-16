@@ -88,7 +88,7 @@ static QScriptValue qtscript_QFtp_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QFtp::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -133,7 +133,7 @@ static const char * const qtscript_QFtp_TransferType_keys[] = {
 static QString qtscript_QFtp_TransferType_toStringHelper(QFtp::TransferType value)
 {
     if ((value >= QFtp::Binary) && (value <= QFtp::Ascii))
-        return qtscript_QFtp_TransferType_keys[static_cast<int>(value)];
+        return qtscript_QFtp_TransferType_keys[static_cast<int>(value)-static_cast<int>(QFtp::Binary)];
     return QString();
 }
 
@@ -206,7 +206,7 @@ static const char * const qtscript_QFtp_Error_keys[] = {
 static QString qtscript_QFtp_Error_toStringHelper(QFtp::Error value)
 {
     if ((value >= QFtp::NoError) && (value <= QFtp::NotConnected))
-        return qtscript_QFtp_Error_keys[static_cast<int>(value)];
+        return qtscript_QFtp_Error_keys[static_cast<int>(value)-static_cast<int>(QFtp::NoError)];
     return QString();
 }
 
@@ -299,7 +299,7 @@ static const char * const qtscript_QFtp_Command_keys[] = {
 static QString qtscript_QFtp_Command_toStringHelper(QFtp::Command value)
 {
     if ((value >= QFtp::None) && (value <= QFtp::RawCommand))
-        return qtscript_QFtp_Command_keys[static_cast<int>(value)];
+        return qtscript_QFtp_Command_keys[static_cast<int>(value)-static_cast<int>(QFtp::None)];
     return QString();
 }
 
@@ -366,7 +366,7 @@ static const char * const qtscript_QFtp_TransferMode_keys[] = {
 static QString qtscript_QFtp_TransferMode_toStringHelper(QFtp::TransferMode value)
 {
     if ((value >= QFtp::Active) && (value <= QFtp::Passive))
-        return qtscript_QFtp_TransferMode_keys[static_cast<int>(value)];
+        return qtscript_QFtp_TransferMode_keys[static_cast<int>(value)-static_cast<int>(QFtp::Active)];
     return QString();
 }
 
@@ -441,7 +441,7 @@ static const char * const qtscript_QFtp_State_keys[] = {
 static QString qtscript_QFtp_State_toStringHelper(QFtp::State value)
 {
     if ((value >= QFtp::Unconnected) && (value <= QFtp::Closing))
-        return qtscript_QFtp_State_keys[static_cast<int>(value)];
+        return qtscript_QFtp_State_keys[static_cast<int>(value)-static_cast<int>(QFtp::Unconnected)];
     return QString();
 }
 

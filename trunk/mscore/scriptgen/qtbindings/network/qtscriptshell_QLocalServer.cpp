@@ -13,6 +13,7 @@
 
 Q_DECLARE_METATYPE(QChildEvent*)
 Q_DECLARE_METATYPE(QEvent*)
+Q_DECLARE_METATYPE(quintptr)
 Q_DECLARE_METATYPE(QLocalSocket*)
 Q_DECLARE_METATYPE(QTimerEvent*)
 
@@ -86,6 +87,20 @@ bool  QtScriptShell_QLocalServer::hasPendingConnections() const
         return QLocalServer::hasPendingConnections();
     } else {
         return qscriptvalue_cast<bool >(_q_function.call(__qtscript_self));
+    }
+}
+
+void QtScriptShell_QLocalServer::incomingConnection(quintptr  socketDescriptor)
+{
+    QScriptValue _q_function = __qtscript_self.property("incomingConnection");
+    if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
+        || (__qtscript_self.propertyFlags("incomingConnection") & QScriptValue::QObjectMember)) {
+        QLocalServer::incomingConnection(socketDescriptor);
+    } else {
+        QScriptEngine *_q_engine = __qtscript_self.engine();
+        _q_function.call(__qtscript_self,
+            QScriptValueList()
+            << qScriptValueFromValue(_q_engine, socketDescriptor));
     }
 }
 
