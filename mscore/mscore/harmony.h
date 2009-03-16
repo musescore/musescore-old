@@ -167,6 +167,8 @@ class Harmony : public Text {
       void resolveDegreeList();
       void setChordId(int id);
 
+      virtual void textStyleChanged(const QVector<TextStyle*>&s);
+
       static const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       static const ChordDescription* fromXml(const QString& s);
 

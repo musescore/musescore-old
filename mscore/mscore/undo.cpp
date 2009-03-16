@@ -78,7 +78,7 @@ void UndoCommand::redo()
       {
       int n = childList.size();
       for (int i = 0; i < n; ++i)
-            childList[i]->undo();
+            childList[i]->redo();
       }
 
 //---------------------------------------------------------
@@ -161,11 +161,15 @@ void UndoStack::push(UndoCommand* cmd)
       cmd->redo();
       }
 
+//---------------------------------------------------------
+//   setClean
+//---------------------------------------------------------
+
 void UndoStack::setClean()
       {
       if (cleanIdx != curIdx) {
             cleanIdx = curIdx;
-            emit cleanChanged(false);
+            emit cleanChanged(true);
             }
       }
 
@@ -210,11 +214,19 @@ void UndoStack::redo()
             }
       }
 
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
 void UndoGroup::undo()
       {
       if (_activeStack)
             _activeStack->undo();
       }
+
+//---------------------------------------------------------
+//   redo
+//---------------------------------------------------------
 
 void UndoGroup::redo()
       {
@@ -1802,5 +1814,21 @@ void ChangeBracketSpan::flip()
       int oSpan  = staff->bracketSpan(column);
       staff->setBracketSpan(column, span);
       span = oSpan;
+      }
+
+//---------------------------------------------------------
+//   EditText
+//---------------------------------------------------------
+
+void EditText::undo()
+      {
+      while (text->doc()->isUndoAvailable())
+            text->doc()->undo();
+      }
+
+void EditText::redo()
+      {
+      while (text->doc()->isRedoAvailable())
+            text->doc()->redo();
       }
 

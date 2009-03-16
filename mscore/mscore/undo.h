@@ -53,6 +53,7 @@ class MStaff;
 class MeasureBase;
 class Dynamic;
 class Selection;
+class TextB;
 
 class UndoGroup;
 
@@ -146,6 +147,19 @@ class SaveState : public UndoCommand {
    public:
       SaveState(Score*);
       ~SaveState();
+      virtual void undo();
+      virtual void redo();
+      };
+
+//---------------------------------------------------------
+//   EditText
+//---------------------------------------------------------
+
+class EditText : public UndoCommand {
+      TextB* text;
+
+   public:
+      EditText(TextB* t) : text(t) {}
       virtual void undo();
       virtual void redo();
       };

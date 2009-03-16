@@ -345,7 +345,6 @@ class Score : public QObject {
       Selection* sel;
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
-      QString oldInstrumentName;    ///< valid while editing instrument names
 
       System* dragSystem;           ///< Valid if DRAG_STAFF.
       int dragStaff;
