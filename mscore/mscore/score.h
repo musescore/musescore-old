@@ -26,11 +26,11 @@
  Definition of Score class.
 */
 
-#include "undo.h"
 #include "input.h"
 #include "globals.h"
 #include "style.h"
 #include "durationtype.h"
+#include "select.h"
 
 class System;
 class TextStyle;
@@ -72,8 +72,15 @@ class Capella;
 class CapVoice;
 class TextC;
 class Dynamic;
+class Measure;
+class MeasureBase;
+class Staff;
+class Part;
+class Instrument;
+class UndoStack;
 
 struct SigEvent;
+struct TEvent;
 
 extern bool showRubberBand;
 
@@ -172,6 +179,8 @@ class ImagePath {
 class Score : public QObject {
       Q_OBJECT
 
+      UndoStack* _undo;
+
       QList<ImagePath*> imagePathList;
 
       int _magIdx;
@@ -218,9 +227,6 @@ class Score : public QObject {
       QList<Part*> _parts;
       QList<Staff*> _staves;
 
-      UndoList undoList;
-      UndoList redoList;
-
       bool _printing;   ///< True if we are drawing to a printer
       bool _playlistDirty;
       bool _dirty;      ///< Score data was modified.
@@ -266,7 +272,6 @@ class Score : public QObject {
       void convertTrack(MidiTrack*);
       void convertTrack(BBTrack*, int);
 
-      void checkUndoOp();
       void move(const QString& cmd);
       void selectMove(const QString& cmd);
 
@@ -310,9 +315,6 @@ class Score : public QObject {
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
 
-      void doUndo();
-      void doRedo();
-      void processUndoOp(UndoOp*, bool);
       void resetUserStretch();
       void toDefault();
 
@@ -323,7 +325,6 @@ class Score : public QObject {
       void posChanged(int);
 
    public:
-      bool cmdActive;
       int curTick;            // for read optimizations
       int curTrack;
 
@@ -381,6 +382,10 @@ class Score : public QObject {
       void lyricsEndEdit();
       void harmonyEndEdit();
 
+   public slots:
+      void setClean(bool val);
+      void setDirty(bool val = true) { setClean(!val); }
+
    public:
       Score(const Style&);
       ~Score();
@@ -407,18 +412,8 @@ class Score : public QObject {
 
       void addViewer(Viewer* v);
 
-      void undoOp(QList<int>&);
-      void undoOp(UndoOp::UndoType type, MeasureBase* m);
-      void undoOp(UndoOp::UndoType type, Measure*, int, int);
-      void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
-      void undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval);
-      void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
-      void undoOp(UndoOp::UndoType type, Element* object);
-      void undoOp(UndoOp::UndoType type, Element*, const QColor&);
-      void undoOp(UndoOp::UndoType type, Element*, int idx);
-      void undoOp(UndoOp::UndoType type, int a, int b);
-
       void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
+      void undoChangeKeySig(Staff* staff, int tick, int o, int n);
       void undoChangeTempo(int tick, const TEvent& o, const TEvent& n);
       void undoChangeKey(Staff* staff, int tick, int o, int n);
       void undoChangeClef(Staff* staff, int tick, int o, int n);
@@ -434,11 +429,10 @@ class Score : public QObject {
       void undoChangeChordNoStem(Chord* cr, bool noStem);
       void undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t);
       void undoChangeSubtype(Element* element, int st);
-      void undoChangeNoteHead(Note*, int group);
       void undoChangePitch(Note* note, int pitch, int tpc, int userAccidental);
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
-      void undoChangeBeamMode(ChordRest* cr, int mode);
+      void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
       void undoChangeChordRestLen(ChordRest* cr, int len);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);
@@ -451,6 +445,9 @@ class Score : public QObject {
       void undoInsertPart(Part* part, int idx);
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
+      void undoInsertMeasure(MeasureBase*);
+      void undoChangeAccidental(Note*, int);
+      void undoToggleInvisible(Element*);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
 
@@ -579,13 +576,13 @@ class Score : public QObject {
       ChordRest* getSelectedChordRest() const;
       Element* getSelectedElement() const { return sel->element(); }
       Selection* selection() const        { return sel; }
+      void setSelection(Selection* s)     { sel = s;    }
+
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
       Segment* tick2segment(int tick) const;
       void fixTicks();
-      bool undoEmpty() const;
-      bool redoEmpty() const;
       PageFormat* pageFormat() const;
       ScoreLayout* layout() const { return _layout; }
 
@@ -606,7 +603,6 @@ class Score : public QObject {
       void setName(const QString& s) { info.setFile(s); }
 
       bool isSavable() const;
-      void setDirty(bool val = true);
       bool dirty() const        { return _dirty;    }
       void setCreated(bool val) { _created = val;   }
       bool created() const      { return _created;  }
@@ -639,7 +635,8 @@ class Score : public QObject {
       bool noteEntryMode() const              { return _is.noteEntryMode; }
       int inputPos() const                    { return _is.pos();   }
       int inputTrack() const                  { return _is.track;   }
-      InputState* inputState()                { return &_is;        }
+      InputState& inputState()                 { return _is;        }
+      void setInputState(const InputState& st) { _is = st;          }
       void setInputTrack(int);
 
       TextStyle* textStyle(int idx) { return idx < 0 ? 0 : _textStyles[idx]; }
@@ -650,8 +647,6 @@ class Score : public QObject {
       void saveStyle();
       void textStyleChanged(const QVector<TextStyle*>&s);
 
-      void setCopyright(const QString& s);
-      void setCopyrightHtml(const QString& s);
       void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events, int tickOffset);
@@ -660,7 +655,6 @@ class Score : public QObject {
 
       SigList*   getSigmap()  { return sigmap; }
       MeasureBase* appendMeasure(int type);
-      UndoList* getUndoList() { return &undoList; }
       void addLyrics(int tick, int staffIdx, const QString&);
 
       QList<Excerpt*>* excerpts() { return &_excerpts; }
@@ -723,6 +717,11 @@ class Score : public QObject {
       void adjustBracketsDel(int sidx, int eidx);
       void adjustBracketsIns(int sidx, int eidx);
       void renumberMeasures();
+      UndoStack* undo() const { return _undo; }
+      TextC* copyright() { return rights; }
+      void setCopyright(const QString& s);
+      void setCopyrightHtml(const QString& s);
+      void endUndoRedo();
       };
 
 extern Score* gscore;

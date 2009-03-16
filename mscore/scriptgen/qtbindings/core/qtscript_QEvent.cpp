@@ -45,7 +45,7 @@ static QScriptValue qtscript_QEvent_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QEvent::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -214,6 +214,7 @@ static const QEvent::Type qtscript_QEvent_Type_values[] = {
     , QEvent::UngrabMouse
     , QEvent::GrabKeyboard
     , QEvent::UngrabKeyboard
+    , QEvent::CocoaRequestModal
     , QEvent::User
     , QEvent::MaxUser
 };
@@ -361,13 +362,14 @@ static const char * const qtscript_QEvent_Type_keys[] = {
     , "UngrabMouse"
     , "GrabKeyboard"
     , "UngrabKeyboard"
+    , "CocoaRequestModal"
     , "User"
     , "MaxUser"
 };
 
 static QString qtscript_QEvent_Type_toStringHelper(QEvent::Type value)
 {
-    for (int i = 0; i < 144; ++i) {
+    for (int i = 0; i < 145; ++i) {
         if (qtscript_QEvent_Type_values[i] == value)
             return QString::fromLatin1(qtscript_QEvent_Type_keys[i]);
     }
@@ -388,7 +390,7 @@ static void qtscript_QEvent_Type_fromScriptValue(const QScriptValue &value, QEve
 static QScriptValue qtscript_construct_QEvent_Type(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 144; ++i) {
+    for (int i = 0; i < 145; ++i) {
         if (qtscript_QEvent_Type_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QEvent::Type>(arg));
     }
@@ -414,7 +416,7 @@ static QScriptValue qtscript_create_QEvent_Type_class(QScriptEngine *engine, QSc
         qtscript_QEvent_Type_valueOf, qtscript_QEvent_Type_toString);
     qScriptRegisterMetaType<QEvent::Type>(engine, qtscript_QEvent_Type_toScriptValue,
         qtscript_QEvent_Type_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 144; ++i) {
+    for (int i = 0; i < 145; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QEvent_Type_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QEvent_Type_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -444,7 +446,7 @@ static QScriptValue qtscript_QEvent_prototype_call(QScriptContext *context, QScr
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QEvent.%0(): this object is not a QEvent")
-            .arg(qtscript_QEvent_function_names[_id+1]));
+            .arg(qtscript_QEvent_function_names[_id+2]));
     }
 
     switch (_id) {

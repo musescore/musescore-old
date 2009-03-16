@@ -55,6 +55,7 @@
 #include "barline.h"
 #include "system.h"
 #include "magbox.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -87,13 +88,8 @@ Canvas::Canvas(QWidget* parent)
       state            = NORMAL;
       cursor           = 0;
       shadowNote       = 0;
-      cursorTimer      = new QTimer(this);
       mousePressed     = false;
       grips            = 0;
-
-      connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
-      if (preferences.cursorBlink)
-            cursorTimer->start(500);
 
       if (debugMode)
             setMouseTracking(true);
@@ -173,20 +169,6 @@ bool Canvas::event(QEvent* ev)
                   }
             }
       return QWidget::event(ev);
-      }
-
-//---------------------------------------------------------
-//   cursorBlink
-//    cursor timer slot
-//---------------------------------------------------------
-
-void Canvas::cursorBlink()
-      {
-      if (!preferences.cursorBlink) {
-            cursor->noBlinking();
-            cursorTimer->stop();
-            }
-      cursor->blink();
       }
 
 //---------------------------------------------------------
@@ -1168,7 +1150,7 @@ void Canvas::setCursorOn(bool val)
 void Canvas::setShadowNote(const QPointF& p)
       {
       Position pos;
-      bool divideSegment = score()->inputState()->tickLen >= (division/2);
+      bool divideSegment = score()->inputState().tickLen >= (division/2);
       if (!score()->getPosition(&pos, p, divideSegment))
             return;
 
@@ -1179,7 +1161,7 @@ void Canvas::setShadowNote(const QPointF& p)
 
       if (instr->useDrumset) {
             Drumset* ds  = instr->drumset;
-            int pitch    = score()->inputState()->drumNote;
+            int pitch    = score()->inputState().drumNote;
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
                   notehead = ds->noteHead(pitch);

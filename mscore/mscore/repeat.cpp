@@ -25,6 +25,7 @@
 #include "jumpproperties.h"
 #include "markerproperties.h"
 #include "system.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   JumpProperties

@@ -102,19 +102,19 @@ void QtScriptShell_QTranslator::timerEvent(QTimerEvent*  arg__1)
     }
 }
 
-QString  QtScriptShell_QTranslator::translate(const char*  context, const char*  sourceText, const char*  comment) const
+QString  QtScriptShell_QTranslator::translate(const char*  context, const char*  sourceText, const char*  disambiguation) const
 {
     QScriptValue _q_function = __qtscript_self.property("translate");
     if (!_q_function.isFunction() || QTSCRIPT_IS_GENERATED_FUNCTION(_q_function)
         || (__qtscript_self.propertyFlags("translate") & QScriptValue::QObjectMember)) {
-        return QTranslator::translate(context, sourceText, comment);
+        return QTranslator::translate(context, sourceText, disambiguation);
     } else {
         QScriptEngine *_q_engine = __qtscript_self.engine();
         return qscriptvalue_cast<QString >(_q_function.call(__qtscript_self,
             QScriptValueList()
             << qScriptValueFromValue(_q_engine, const_cast<char *>(context))
             << qScriptValueFromValue(_q_engine, const_cast<char *>(sourceText))
-            << qScriptValueFromValue(_q_engine, const_cast<char *>(comment))));
+            << qScriptValueFromValue(_q_engine, const_cast<char *>(disambiguation))));
     }
 }
 

@@ -15,6 +15,7 @@ static const char * const qtscript_QTextEncoder_function_names[] = {
     // static
     // prototype
     , "fromUnicode"
+    , "hasFailure"
     , "toString"
 };
 
@@ -23,6 +24,7 @@ static const char * const qtscript_QTextEncoder_function_signatures[] = {
     // static
     // prototype
     , "String str"
+    , ""
 ""
 };
 
@@ -33,7 +35,7 @@ static QScriptValue qtscript_QTextEncoder_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextEncoder::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -54,7 +56,7 @@ static QScriptValue qtscript_QTextEncoder_prototype_call(QScriptContext *context
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 1;
+        _id = 0xBABE0000 + 2;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -74,7 +76,14 @@ static QScriptValue qtscript_QTextEncoder_prototype_call(QScriptContext *context
     }
     break;
 
-    case 1: {
+    case 1:
+    if (context->argumentCount() == 0) {
+        bool _q_result = _q_self->hasFailure();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 2: {
     QString result = QString::fromLatin1("QTextEncoder");
     return QScriptValue(context->engine(), result);
     }
@@ -121,10 +130,11 @@ QScriptValue qtscript_create_QTextEncoder_class(QScriptEngine *engine)
         // prototype
         , 1
         , 0
+        , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QTextEncoder*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QTextEncoder*)0));
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QTextEncoder_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QTextEncoder_function_names[i+1]),

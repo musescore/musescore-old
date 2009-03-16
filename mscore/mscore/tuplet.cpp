@@ -29,6 +29,7 @@
 #include "element.h"
 #include "layout.h"
 #include "utils.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   Tuplet

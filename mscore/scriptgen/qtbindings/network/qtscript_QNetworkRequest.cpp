@@ -10,7 +10,6 @@
 #include <qbytearray.h>
 #include <qlist.h>
 #include <qnetworkrequest.h>
-#include <qsslconfiguration.h>
 #include <qurl.h>
 
 static const char * const qtscript_QNetworkRequest_function_names[] = {
@@ -26,9 +25,7 @@ static const char * const qtscript_QNetworkRequest_function_names[] = {
     , "setAttribute"
     , "setHeader"
     , "setRawHeader"
-    , "setSslConfiguration"
     , "setUrl"
-    , "sslConfiguration"
     , "url"
     , "toString"
 };
@@ -46,9 +43,7 @@ static const char * const qtscript_QNetworkRequest_function_signatures[] = {
     , "Attribute code, Object value"
     , "KnownHeaders header, Object value"
     , "QByteArray headerName, QByteArray value"
-    , "QSslConfiguration configuration"
     , "QUrl url"
-    , ""
     , ""
 ""
 };
@@ -60,7 +55,7 @@ static QScriptValue qtscript_QNetworkRequest_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QNetworkRequest::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -70,7 +65,6 @@ Q_DECLARE_METATYPE(QNetworkRequest::KnownHeaders)
 Q_DECLARE_METATYPE(QNetworkRequest::Attribute)
 Q_DECLARE_METATYPE(QVariant)
 Q_DECLARE_METATYPE(QList<QByteArray>)
-Q_DECLARE_METATYPE(QSslConfiguration)
 
 static QScriptValue qtscript_create_enum_class_helper(
     QScriptEngine *engine,
@@ -107,7 +101,7 @@ static const char * const qtscript_QNetworkRequest_CacheLoadControl_keys[] = {
 static QString qtscript_QNetworkRequest_CacheLoadControl_toStringHelper(QNetworkRequest::CacheLoadControl value)
 {
     if ((value >= QNetworkRequest::AlwaysNetwork) && (value <= QNetworkRequest::AlwaysCache))
-        return qtscript_QNetworkRequest_CacheLoadControl_keys[static_cast<int>(value)];
+        return qtscript_QNetworkRequest_CacheLoadControl_keys[static_cast<int>(value)-static_cast<int>(QNetworkRequest::AlwaysNetwork)];
     return QString();
 }
 
@@ -182,7 +176,7 @@ static const char * const qtscript_QNetworkRequest_KnownHeaders_keys[] = {
 static QString qtscript_QNetworkRequest_KnownHeaders_toStringHelper(QNetworkRequest::KnownHeaders value)
 {
     if ((value >= QNetworkRequest::ContentTypeHeader) && (value <= QNetworkRequest::SetCookieHeader))
-        return qtscript_QNetworkRequest_KnownHeaders_keys[static_cast<int>(value)];
+        return qtscript_QNetworkRequest_KnownHeaders_keys[static_cast<int>(value)-static_cast<int>(QNetworkRequest::ContentTypeHeader)];
     return QString();
 }
 
@@ -243,6 +237,7 @@ static const QNetworkRequest::Attribute qtscript_QNetworkRequest_Attribute_value
     , QNetworkRequest::ConnectionEncryptedAttribute
     , QNetworkRequest::CacheLoadControlAttribute
     , QNetworkRequest::CacheSaveControlAttribute
+    , QNetworkRequest::SourceIsFromCacheAttribute
     , QNetworkRequest::User
     , QNetworkRequest::UserMax
 };
@@ -254,13 +249,14 @@ static const char * const qtscript_QNetworkRequest_Attribute_keys[] = {
     , "ConnectionEncryptedAttribute"
     , "CacheLoadControlAttribute"
     , "CacheSaveControlAttribute"
+    , "SourceIsFromCacheAttribute"
     , "User"
     , "UserMax"
 };
 
 static QString qtscript_QNetworkRequest_Attribute_toStringHelper(QNetworkRequest::Attribute value)
 {
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 9; ++i) {
         if (qtscript_QNetworkRequest_Attribute_values[i] == value)
             return QString::fromLatin1(qtscript_QNetworkRequest_Attribute_keys[i]);
     }
@@ -281,7 +277,7 @@ static void qtscript_QNetworkRequest_Attribute_fromScriptValue(const QScriptValu
 static QScriptValue qtscript_construct_QNetworkRequest_Attribute(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 9; ++i) {
         if (qtscript_QNetworkRequest_Attribute_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QNetworkRequest::Attribute>(arg));
     }
@@ -307,7 +303,7 @@ static QScriptValue qtscript_create_QNetworkRequest_Attribute_class(QScriptEngin
         qtscript_QNetworkRequest_Attribute_valueOf, qtscript_QNetworkRequest_Attribute_toString);
     qScriptRegisterMetaType<QNetworkRequest::Attribute>(engine, qtscript_QNetworkRequest_Attribute_toScriptValue,
         qtscript_QNetworkRequest_Attribute_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 9; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QNetworkRequest_Attribute_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QNetworkRequest_Attribute_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -329,7 +325,7 @@ static QScriptValue qtscript_QNetworkRequest_prototype_call(QScriptContext *cont
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 13;
+        _id = 0xBABE0000 + 11;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -423,35 +419,20 @@ static QScriptValue qtscript_QNetworkRequest_prototype_call(QScriptContext *cont
 
     case 9:
     if (context->argumentCount() == 1) {
-        QSslConfiguration _q_arg0 = qscriptvalue_cast<QSslConfiguration>(context->argument(0));
-        _q_self->setSslConfiguration(_q_arg0);
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 10:
-    if (context->argumentCount() == 1) {
         QUrl _q_arg0 = qscriptvalue_cast<QUrl>(context->argument(0));
         _q_self->setUrl(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 11:
-    if (context->argumentCount() == 0) {
-        QSslConfiguration _q_result = _q_self->sslConfiguration();
-        return qScriptValueFromValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 12:
+    case 10:
     if (context->argumentCount() == 0) {
         QUrl _q_result = _q_self->url();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 13: {
+    case 11: {
     QString result = QString::fromLatin1("QNetworkRequest");
     return QScriptValue(context->engine(), result);
     }
@@ -517,14 +498,12 @@ QScriptValue qtscript_create_QNetworkRequest_class(QScriptEngine *engine)
         , 2
         , 2
         , 1
-        , 1
-        , 0
         , 0
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QNetworkRequest*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QNetworkRequest*)0));
-    for (int i = 0; i < 14; ++i) {
+    for (int i = 0; i < 12; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QNetworkRequest_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QNetworkRequest_function_names[i+1]),

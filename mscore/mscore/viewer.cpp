@@ -25,6 +25,7 @@
 
 #include "viewer.h"
 #include "score.h"
+#include "element.h"
 
 //---------------------------------------------------------
 //   Viewer

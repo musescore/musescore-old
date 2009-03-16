@@ -23,8 +23,6 @@ static const char * const qtscript_QRectF_function_names[] = {
     , "bottomRight"
     , "center"
     , "contains"
-    , "getCoords"
-    , "getRect"
     , "height"
     , "intersected"
     , "intersects"
@@ -88,8 +86,6 @@ static const char * const qtscript_QRectF_function_signatures[] = {
     , ""
     , ""
     , "QPointF p\nQRectF r\nqreal x, qreal y"
-    , "qreal x1, qreal y1, qreal x2, qreal y2"
-    , "qreal x, qreal y, qreal w, qreal h"
     , ""
     , "QRectF other"
     , "QRectF r"
@@ -149,12 +145,11 @@ static QScriptValue qtscript_QRectF_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QRectF::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QRectF*)
-Q_DECLARE_METATYPE(qreal*)
 Q_DECLARE_METATYPE(QDataStream*)
 
 //
@@ -171,7 +166,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 58;
+        _id = 0xBABE0000 + 56;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -254,35 +249,13 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     break;
 
     case 7:
-    if (context->argumentCount() == 4) {
-        qreal* _q_arg0 = qscriptvalue_cast<qreal*>(context->argument(0));
-        qreal* _q_arg1 = qscriptvalue_cast<qreal*>(context->argument(1));
-        qreal* _q_arg2 = qscriptvalue_cast<qreal*>(context->argument(2));
-        qreal* _q_arg3 = qscriptvalue_cast<qreal*>(context->argument(3));
-        _q_self->getCoords(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 8:
-    if (context->argumentCount() == 4) {
-        qreal* _q_arg0 = qscriptvalue_cast<qreal*>(context->argument(0));
-        qreal* _q_arg1 = qscriptvalue_cast<qreal*>(context->argument(1));
-        qreal* _q_arg2 = qscriptvalue_cast<qreal*>(context->argument(2));
-        qreal* _q_arg3 = qscriptvalue_cast<qreal*>(context->argument(3));
-        _q_self->getRect(_q_arg0, _q_arg1, _q_arg2, _q_arg3);
-        return context->engine()->undefinedValue();
-    }
-    break;
-
-    case 9:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->height();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 10:
+    case 8:
     if (context->argumentCount() == 1) {
         QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
         QRectF _q_result = _q_self->intersected(_q_arg0);
@@ -290,7 +263,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 11:
+    case 9:
     if (context->argumentCount() == 1) {
         QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
         bool _q_result = _q_self->intersects(_q_arg0);
@@ -298,35 +271,35 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 12:
+    case 10:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isEmpty();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 13:
+    case 11:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isNull();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 12:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isValid();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 15:
+    case 13:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->left();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 16:
+    case 14:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->moveBottom(_q_arg0);
@@ -334,7 +307,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 17:
+    case 15:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveBottomLeft(_q_arg0);
@@ -342,7 +315,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 18:
+    case 16:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveBottomRight(_q_arg0);
@@ -350,7 +323,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 19:
+    case 17:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveCenter(_q_arg0);
@@ -358,7 +331,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 20:
+    case 18:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->moveLeft(_q_arg0);
@@ -366,7 +339,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 21:
+    case 19:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->moveRight(_q_arg0);
@@ -374,7 +347,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 22:
+    case 20:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveTo(_q_arg0);
@@ -388,7 +361,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 23:
+    case 21:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->moveTop(_q_arg0);
@@ -396,7 +369,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 24:
+    case 22:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveTopLeft(_q_arg0);
@@ -404,7 +377,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 25:
+    case 23:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->moveTopRight(_q_arg0);
@@ -412,14 +385,14 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 26:
+    case 24:
     if (context->argumentCount() == 0) {
         QRectF _q_result = _q_self->normalized();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 27:
+    case 25:
     if (context->argumentCount() == 1) {
         QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
         bool _q_result = operator==(*_q_self, _q_arg0);
@@ -427,7 +400,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 28:
+    case 26:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator>>(*_q_arg0, *_q_self);
@@ -435,14 +408,14 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 29:
+    case 27:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->right();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 30:
+    case 28:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setBottom(_q_arg0);
@@ -450,7 +423,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 31:
+    case 29:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->setBottomLeft(_q_arg0);
@@ -458,7 +431,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 32:
+    case 30:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->setBottomRight(_q_arg0);
@@ -466,7 +439,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 33:
+    case 31:
     if (context->argumentCount() == 4) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
@@ -477,7 +450,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 34:
+    case 32:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setHeight(_q_arg0);
@@ -485,7 +458,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 35:
+    case 33:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setLeft(_q_arg0);
@@ -493,7 +466,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 36:
+    case 34:
     if (context->argumentCount() == 4) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         qreal _q_arg1 = qscriptvalue_cast<qreal>(context->argument(1));
@@ -504,7 +477,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 37:
+    case 35:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setRight(_q_arg0);
@@ -512,7 +485,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 38:
+    case 36:
     if (context->argumentCount() == 1) {
         QSizeF _q_arg0 = qscriptvalue_cast<QSizeF>(context->argument(0));
         _q_self->setSize(_q_arg0);
@@ -520,7 +493,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 39:
+    case 37:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setTop(_q_arg0);
@@ -528,7 +501,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 40:
+    case 38:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->setTopLeft(_q_arg0);
@@ -536,7 +509,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 41:
+    case 39:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->setTopRight(_q_arg0);
@@ -544,7 +517,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 42:
+    case 40:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setWidth(_q_arg0);
@@ -552,7 +525,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 43:
+    case 41:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setX(_q_arg0);
@@ -560,7 +533,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 44:
+    case 42:
     if (context->argumentCount() == 1) {
         qreal _q_arg0 = qscriptvalue_cast<qreal>(context->argument(0));
         _q_self->setY(_q_arg0);
@@ -568,49 +541,49 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 45:
+    case 43:
     if (context->argumentCount() == 0) {
         QSizeF _q_result = _q_self->size();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 46:
+    case 44:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->toAlignedRect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 47:
+    case 45:
     if (context->argumentCount() == 0) {
         QRect _q_result = _q_self->toRect();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 48:
+    case 46:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->top();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 49:
+    case 47:
     if (context->argumentCount() == 0) {
         QPointF _q_result = _q_self->topLeft();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 50:
+    case 48:
     if (context->argumentCount() == 0) {
         QPointF _q_result = _q_self->topRight();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 51:
+    case 49:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         _q_self->translate(_q_arg0);
@@ -624,7 +597,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 52:
+    case 50:
     if (context->argumentCount() == 1) {
         QPointF _q_arg0 = qscriptvalue_cast<QPointF>(context->argument(0));
         QRectF _q_result = _q_self->translated(_q_arg0);
@@ -638,7 +611,7 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 53:
+    case 51:
     if (context->argumentCount() == 1) {
         QRectF _q_arg0 = qscriptvalue_cast<QRectF>(context->argument(0));
         QRectF _q_result = _q_self->united(_q_arg0);
@@ -646,14 +619,14 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 54:
+    case 52:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->width();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 55:
+    case 53:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator<<(*_q_arg0, *_q_self);
@@ -661,21 +634,21 @@ static QScriptValue qtscript_QRectF_prototype_call(QScriptContext *context, QScr
     }
     break;
 
-    case 56:
+    case 54:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->x();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 57:
+    case 55:
     if (context->argumentCount() == 0) {
         qreal _q_result = _q_self->y();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 58: {
+    case 56: {
     QString result;
     QDebug d(&result);
     d << *_q_self;
@@ -757,8 +730,6 @@ QScriptValue qtscript_create_QRectF_class(QScriptEngine *engine)
         , 0
         , 0
         , 2
-        , 4
-        , 4
         , 0
         , 1
         , 1
@@ -812,7 +783,7 @@ QScriptValue qtscript_create_QRectF_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QRectF*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QRectF*)0));
-    for (int i = 0; i < 59; ++i) {
+    for (int i = 0; i < 57; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QRectF_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QRectF_function_names[i+1]),

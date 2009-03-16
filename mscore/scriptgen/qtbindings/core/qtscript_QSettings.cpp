@@ -14,6 +14,7 @@
 #include <qobject.h>
 #include <qsettings.h>
 #include <qstringlist.h>
+#include <qtextcodec.h>
 
 #include "qtscriptshell_QSettings.h"
 
@@ -39,12 +40,14 @@ static const char * const qtscript_QSettings_function_names[] = {
     , "fileName"
     , "format"
     , "group"
+    , "iniCodec"
     , "isWritable"
     , "organizationName"
     , "remove"
     , "scope"
     , "setArrayIndex"
     , "setFallbacksEnabled"
+    , "setIniCodec"
     , "setValue"
     , "status"
     , "sync"
@@ -76,10 +79,12 @@ static const char * const qtscript_QSettings_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
     , "String key"
     , ""
     , "int i"
     , "bool b"
+    , "QTextCodec codec\nchar codecName"
     , "String key, Object value"
     , ""
     , ""
@@ -94,7 +99,7 @@ static QScriptValue qtscript_QSettings_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSettings::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -103,6 +108,8 @@ Q_DECLARE_METATYPE(QtScriptShell_QSettings*)
 Q_DECLARE_METATYPE(QSettings::Format)
 Q_DECLARE_METATYPE(QSettings::Status)
 Q_DECLARE_METATYPE(QSettings::Scope)
+Q_DECLARE_METATYPE(QTextCodec*)
+Q_DECLARE_METATYPE(char*)
 Q_DECLARE_METATYPE(QVariant)
 
 static QScriptValue qtscript_create_enum_class_helper(
@@ -243,7 +250,7 @@ static const char * const qtscript_QSettings_Status_keys[] = {
 static QString qtscript_QSettings_Status_toStringHelper(QSettings::Status value)
 {
     if ((value >= QSettings::NoError) && (value <= QSettings::FormatError))
-        return qtscript_QSettings_Status_keys[static_cast<int>(value)];
+        return qtscript_QSettings_Status_keys[static_cast<int>(value)-static_cast<int>(QSettings::NoError)];
     return QString();
 }
 
@@ -310,7 +317,7 @@ static const char * const qtscript_QSettings_Scope_keys[] = {
 static QString qtscript_QSettings_Scope_toStringHelper(QSettings::Scope value)
 {
     if ((value >= QSettings::UserScope) && (value <= QSettings::SystemScope))
-        return qtscript_QSettings_Scope_keys[static_cast<int>(value)];
+        return qtscript_QSettings_Scope_keys[static_cast<int>(value)-static_cast<int>(QSettings::UserScope)];
     return QString();
 }
 
@@ -374,7 +381,7 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 25;
+        _id = 0xBABE0000 + 27;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -382,7 +389,7 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QSettings.%0(): this object is not a QSettings")
-            .arg(qtscript_QSettings_function_names[_id+1]));
+            .arg(qtscript_QSettings_function_names[_id+4]));
     }
 
     switch (_id) {
@@ -503,19 +510,26 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
 
     case 15:
     if (context->argumentCount() == 0) {
+        QTextCodec* _q_result = _q_self->iniCodec();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 16:
+    if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isWritable();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 16:
+    case 17:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->organizationName();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 17:
+    case 18:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->remove(_q_arg0);
@@ -523,14 +537,14 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 18:
+    case 19:
     if (context->argumentCount() == 0) {
         QSettings::Scope _q_result = _q_self->scope();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 19:
+    case 20:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setArrayIndex(_q_arg0);
@@ -538,7 +552,7 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 20:
+    case 21:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setFallbacksEnabled(_q_arg0);
@@ -546,7 +560,21 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 21:
+    case 22:
+    if (context->argumentCount() == 1) {
+        if (qscriptvalue_cast<QTextCodec*>(context->argument(0))) {
+            QTextCodec* _q_arg0 = qscriptvalue_cast<QTextCodec*>(context->argument(0));
+            _q_self->setIniCodec(_q_arg0);
+            return context->engine()->undefinedValue();
+        } else if (qscriptvalue_cast<char*>(context->argument(0))) {
+            char* _q_arg0 = qscriptvalue_cast<char*>(context->argument(0));
+            _q_self->setIniCodec(_q_arg0);
+            return context->engine()->undefinedValue();
+        }
+    }
+    break;
+
+    case 23:
     if (context->argumentCount() == 2) {
         QString _q_arg0 = context->argument(0).toString();
         QVariant _q_arg1 = context->argument(1).toVariant();
@@ -555,21 +583,21 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 22:
+    case 24:
     if (context->argumentCount() == 0) {
         QSettings::Status _q_result = _q_self->status();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 23:
+    case 25:
     if (context->argumentCount() == 0) {
         _q_self->sync();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 24:
+    case 26:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QVariant _q_result = _q_self->value(_q_arg0);
@@ -583,7 +611,7 @@ static QScriptValue qtscript_QSettings_prototype_call(QScriptContext *context, Q
     }
     break;
 
-    case 25: {
+    case 27: {
     QString result = QString::fromLatin1("QSettings");
     return QScriptValue(context->engine(), result);
     }
@@ -801,8 +829,10 @@ QScriptValue qtscript_create_QSettings_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 1
         , 0
+        , 1
         , 1
         , 1
         , 2
@@ -814,7 +844,7 @@ QScriptValue qtscript_create_QSettings_class(QScriptEngine *engine)
     engine->setDefaultPrototype(qMetaTypeId<QSettings*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QSettings*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QObject*>()));
-    for (int i = 0; i < 26; ++i) {
+    for (int i = 0; i < 28; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QSettings_prototype_call, function_lengths[i+4]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QSettings_function_names[i+4]),

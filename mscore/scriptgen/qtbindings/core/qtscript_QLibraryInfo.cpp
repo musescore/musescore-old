@@ -37,7 +37,7 @@ static QScriptValue qtscript_QLibraryInfo_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QLibraryInfo::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -93,7 +93,7 @@ static const char * const qtscript_QLibraryInfo_LibraryLocation_keys[] = {
 static QString qtscript_QLibraryInfo_LibraryLocation_toStringHelper(QLibraryInfo::LibraryLocation value)
 {
     if ((value >= QLibraryInfo::PrefixPath) && (value <= QLibraryInfo::ExamplesPath))
-        return qtscript_QLibraryInfo_LibraryLocation_keys[static_cast<int>(value)];
+        return qtscript_QLibraryInfo_LibraryLocation_keys[static_cast<int>(value)-static_cast<int>(QLibraryInfo::PrefixPath)];
     return QString();
 }
 
@@ -165,7 +165,7 @@ static QScriptValue qtscript_QLibraryInfo_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QLibraryInfo.%0(): this object is not a QLibraryInfo")
-            .arg(qtscript_QLibraryInfo_function_names[_id+1]));
+            .arg(qtscript_QLibraryInfo_function_names[_id+5]));
     }
 
     switch (_id) {

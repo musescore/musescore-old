@@ -25,8 +25,10 @@ static const char * const qtscript_QXmlStreamAttributes_function_names[] = {
     , "contains"
     , "count"
     , "empty"
+    , "endsWith"
     , "fill"
     , "first"
+    , "hasAttribute"
     , "indexOf"
     , "isEmpty"
     , "last"
@@ -41,6 +43,7 @@ static const char * const qtscript_QXmlStreamAttributes_function_names[] = {
     , "setSharable"
     , "size"
     , "squeeze"
+    , "startsWith"
     , "toList"
     , "value"
     , "toString"
@@ -58,8 +61,10 @@ static const char * const qtscript_QXmlStreamAttributes_function_signatures[] = 
     , "QXmlStreamAttribute t"
     , "\nQXmlStreamAttribute t"
     , ""
+    , "QXmlStreamAttribute t"
     , "QXmlStreamAttribute t, int size"
     , ""
+    , "String namespaceUri, String name\nString qualifiedName"
     , "QXmlStreamAttribute t, int from"
     , ""
     , ""
@@ -74,6 +79,7 @@ static const char * const qtscript_QXmlStreamAttributes_function_signatures[] = 
     , "bool sharable"
     , ""
     , ""
+    , "QXmlStreamAttribute t"
     , ""
     , "String namespaceUri, String name\nString qualifiedName"
 ""
@@ -86,7 +92,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QXmlStreamAttributes::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -113,7 +119,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 25;
+        _id = 0xBABE0000 + 28;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -121,7 +127,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QXmlStreamAttributes.%0(): this object is not a QXmlStreamAttributes")
-            .arg(qtscript_QXmlStreamAttributes_function_names[_id+1]));
+            .arg(qtscript_QXmlStreamAttributes_function_names[_id+2]));
     }
 
     switch (_id) {
@@ -198,6 +204,14 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     case 7:
     if (context->argumentCount() == 1) {
         QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
+        bool _q_result = _q_self->endsWith(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 8:
+    if (context->argumentCount() == 1) {
+        QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
         QVector<QXmlStreamAttribute> _q_result = _q_self->fill(_q_arg0);
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
@@ -209,14 +223,28 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         QXmlStreamAttribute _q_result = _q_self->first();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
+    if (context->argumentCount() == 1) {
+        QString _q_arg0 = context->argument(0).toString();
+        bool _q_result = _q_self->hasAttribute(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 2) {
+        QString _q_arg0 = context->argument(0).toString();
+        QString _q_arg1 = context->argument(1).toString();
+        bool _q_result = _q_self->hasAttribute(_q_arg0, _q_arg1);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 11:
     if (context->argumentCount() == 1) {
         QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
         int _q_result = _q_self->indexOf(_q_arg0);
@@ -230,21 +258,21 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isEmpty();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 0) {
         QXmlStreamAttribute _q_result = _q_self->last();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 1) {
         QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
         int _q_result = _q_self->lastIndexOf(_q_arg0);
@@ -258,7 +286,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         QVector<QXmlStreamAttribute> _q_result = _q_self->mid(_q_arg0);
@@ -272,7 +300,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 14:
+    case 16:
     if (context->argumentCount() == 1) {
         QVector<QXmlStreamAttribute> _q_arg0;
         qScriptValueToSequence(context->argument(0), _q_arg0);
@@ -281,7 +309,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 15:
+    case 17:
     if (context->argumentCount() == 1) {
         QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
         _q_self->prepend(_q_arg0);
@@ -289,7 +317,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 16:
+    case 18:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->remove(_q_arg0);
@@ -303,7 +331,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 17:
+    case 19:
     if (context->argumentCount() == 2) {
         int _q_arg0 = context->argument(0).toInt32();
         QXmlStreamAttribute _q_arg1 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(1));
@@ -312,7 +340,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 18:
+    case 20:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->reserve(_q_arg0);
@@ -320,7 +348,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 19:
+    case 21:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->resize(_q_arg0);
@@ -328,7 +356,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 20:
+    case 22:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setSharable(_q_arg0);
@@ -336,28 +364,36 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 21:
+    case 23:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->size();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 22:
+    case 24:
     if (context->argumentCount() == 0) {
         _q_self->squeeze();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 23:
+    case 25:
+    if (context->argumentCount() == 1) {
+        QXmlStreamAttribute _q_arg0 = qscriptvalue_cast<QXmlStreamAttribute>(context->argument(0));
+        bool _q_result = _q_self->startsWith(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 26:
     if (context->argumentCount() == 0) {
         QList<QXmlStreamAttribute> _q_result = _q_self->toList();
         return qScriptValueFromSequence(context->engine(), _q_result);
     }
     break;
 
-    case 24:
+    case 27:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         QStringRef _q_result = _q_self->value(_q_arg0);
@@ -379,7 +415,7 @@ static QScriptValue qtscript_QXmlStreamAttributes_prototype_call(QScriptContext 
     }
     break;
 
-    case 25: {
+    case 28: {
     QString result = QString::fromLatin1("QXmlStreamAttributes");
     return QScriptValue(context->engine(), result);
     }
@@ -441,8 +477,10 @@ QScriptValue qtscript_create_QXmlStreamAttributes_class(QScriptEngine *engine)
         , 1
         , 1
         , 0
+        , 1
         , 2
         , 0
+        , 2
         , 2
         , 0
         , 0
@@ -457,13 +495,14 @@ QScriptValue qtscript_create_QXmlStreamAttributes_class(QScriptEngine *engine)
         , 1
         , 0
         , 0
+        , 1
         , 0
         , 2
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QXmlStreamAttributes*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QXmlStreamAttributes*)0));
-    for (int i = 0; i < 26; ++i) {
+    for (int i = 0; i < 29; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QXmlStreamAttributes_prototype_call, function_lengths[i+2]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QXmlStreamAttributes_function_names[i+2]),

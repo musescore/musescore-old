@@ -56,6 +56,8 @@ struct Drumset;
 class TextTools;
 class ScriptEngine;
 
+class UndoGroup;
+
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
@@ -153,6 +155,7 @@ struct Command {
 class MuseScore : public QMainWindow {
       Q_OBJECT
 
+      UndoGroup* _undoGroup;
       QList<Score*> scoreList;
       Score* cs;              // current score
 
@@ -244,7 +247,6 @@ class MuseScore : public QMainWindow {
       void playVisible(bool flag);
       void launchBrowser(const QString whereTo);
 
-      void addScore(const QString& name);
       void saveScoreList();
       void loadScoreList();
       void editInstrList();
@@ -278,7 +280,6 @@ class MuseScore : public QMainWindow {
       void seqStarted();
       void seqStopped();
       void closePlayPanel();
-
       void lineMenu();
       void bracketMenu();
       void barMenu();
@@ -298,6 +299,8 @@ class MuseScore : public QMainWindow {
       void clipboardChanged();
       void pluginTriggered(int);
       void drumPaletteSelected(int);
+      void undo();
+      void redo();
 
    public slots:
       void setCurrentScore(int);

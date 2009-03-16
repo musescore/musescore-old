@@ -9,6 +9,7 @@
 #include <QVariant>
 #include <qbytearray.h>
 #include <qiodevice.h>
+#include <qlocale.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
 
@@ -27,6 +28,7 @@ static const char * const qtscript_QTextStream_function_names[] = {
     , "flush"
     , "generateByteOrderMark"
     , "integerBase"
+    , "locale"
     , "numberFlags"
     , "padChar"
     , "pos"
@@ -40,7 +42,6 @@ static const char * const qtscript_QTextStream_function_names[] = {
     , "readLongLong"
     , "readShort"
     , "readUInt"
-    , "readULongLong"
     , "readUShort"
     , "realNumberNotation"
     , "realNumberPrecision"
@@ -54,6 +55,7 @@ static const char * const qtscript_QTextStream_function_names[] = {
     , "setFieldWidth"
     , "setGenerateByteOrderMark"
     , "setIntegerBase"
+    , "setLocale"
     , "setNumberFlags"
     , "setPadChar"
     , "setRealNumberNotation"
@@ -67,7 +69,6 @@ static const char * const qtscript_QTextStream_function_names[] = {
     , "writeDouble"
     , "writeFloat"
     , "writeInt"
-    , "writeLongLong"
     , "writeShort"
     , "writeString"
     , "toString"
@@ -89,14 +90,14 @@ static const char * const qtscript_QTextStream_function_signatures[] = {
     , ""
     , ""
     , ""
-    , "qint64 maxlen"
-    , ""
-    , ""
-    , ""
-    , ""
     , ""
     , "qint64 maxlen"
     , ""
+    , ""
+    , ""
+    , ""
+    , ""
+    , "qint64 maxlen"
     , ""
     , ""
     , ""
@@ -113,6 +114,7 @@ static const char * const qtscript_QTextStream_function_signatures[] = {
     , "int width"
     , "bool generate"
     , "int base"
+    , "QLocale locale"
     , "NumberFlags flags"
     , "char ch"
     , "RealNumberNotation notation"
@@ -126,7 +128,6 @@ static const char * const qtscript_QTextStream_function_signatures[] = {
     , "double f"
     , "float f"
     , "signed int i"
-    , "qlonglong i"
     , "signed short i"
     , "String s"
 ""
@@ -139,7 +140,7 @@ static QScriptValue qtscript_QTextStream_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QTextStream::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -206,7 +207,7 @@ static const char * const qtscript_QTextStream_RealNumberNotation_keys[] = {
 static QString qtscript_QTextStream_RealNumberNotation_toStringHelper(QTextStream::RealNumberNotation value)
 {
     if ((value >= QTextStream::SmartNotation) && (value <= QTextStream::ScientificNotation))
-        return qtscript_QTextStream_RealNumberNotation_keys[static_cast<int>(value)];
+        return qtscript_QTextStream_RealNumberNotation_keys[static_cast<int>(value)-static_cast<int>(QTextStream::SmartNotation)];
     return QString();
 }
 
@@ -430,7 +431,7 @@ static const char * const qtscript_QTextStream_FieldAlignment_keys[] = {
 static QString qtscript_QTextStream_FieldAlignment_toStringHelper(QTextStream::FieldAlignment value)
 {
     if ((value >= QTextStream::AlignLeft) && (value <= QTextStream::AlignAccountingStyle))
-        return qtscript_QTextStream_FieldAlignment_keys[static_cast<int>(value)];
+        return qtscript_QTextStream_FieldAlignment_keys[static_cast<int>(value)-static_cast<int>(QTextStream::AlignLeft)];
     return QString();
 }
 
@@ -499,7 +500,7 @@ static const char * const qtscript_QTextStream_Status_keys[] = {
 static QString qtscript_QTextStream_Status_toStringHelper(QTextStream::Status value)
 {
     if ((value >= QTextStream::Ok) && (value <= QTextStream::ReadCorruptData))
-        return qtscript_QTextStream_Status_keys[static_cast<int>(value)];
+        return qtscript_QTextStream_Status_keys[static_cast<int>(value)-static_cast<int>(QTextStream::Ok)];
     return QString();
 }
 
@@ -640,26 +641,33 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
 
     case 9:
     if (context->argumentCount() == 0) {
-        QFlags<QTextStream::NumberFlag> _q_result = _q_self->numberFlags();
+        QLocale _q_result = _q_self->locale();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 10:
     if (context->argumentCount() == 0) {
-        QChar _q_result = _q_self->padChar();
+        QFlags<QTextStream::NumberFlag> _q_result = _q_self->numberFlags();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 11:
     if (context->argumentCount() == 0) {
-        qint64 _q_result = _q_self->pos();
+        QChar _q_result = _q_self->padChar();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
     case 12:
+    if (context->argumentCount() == 0) {
+        qint64 _q_result = _q_self->pos();
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 13:
     if (context->argumentCount() == 1) {
         qint64 _q_arg0 = qscriptvalue_cast<qint64>(context->argument(0));
         QString _q_result = _q_self->read(_q_arg0);
@@ -667,14 +675,14 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 13:
+    case 14:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->readAll();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 14:
+    case 15:
     if (context->argumentCount() == 0) {
 
             char __result;
@@ -686,7 +694,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 15:
+    case 16:
     if (context->argumentCount() == 0) {
 
             double __result;
@@ -698,7 +706,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 16:
+    case 17:
     if (context->argumentCount() == 0) {
 
             float __result;
@@ -710,7 +718,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 17:
+    case 18:
     if (context->argumentCount() == 0) {
 
             int __result;
@@ -722,7 +730,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 18:
+    case 19:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->readLine();
         return QScriptValue(context->engine(), _q_result);
@@ -734,7 +742,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 19:
+    case 20:
     if (context->argumentCount() == 0) {
 
             qlonglong __result;
@@ -746,7 +754,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 20:
+    case 21:
     if (context->argumentCount() == 0) {
 
             short __result;
@@ -758,7 +766,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 21:
+    case 22:
     if (context->argumentCount() == 0) {
 
             unsigned int __result;
@@ -766,18 +774,6 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
                     _q_self->operator>>(_q_arg0);
         
             unsigned int _q_convertedResult = __result;
-            return qScriptValueFromValue(context->engine(), _q_convertedResult);
-    }
-    break;
-
-    case 22:
-    if (context->argumentCount() == 0) {
-
-            qulonglong __result;
-            qulonglong & _q_arg0 = __result;
-                    _q_self->operator>>(_q_arg0);
-        
-            qulonglong _q_convertedResult = __result;
             return qScriptValueFromValue(context->engine(), _q_convertedResult);
     }
     break;
@@ -898,13 +894,21 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
 
     case 36:
     if (context->argumentCount() == 1) {
+        QLocale _q_arg0 = qscriptvalue_cast<QLocale>(context->argument(0));
+        _q_self->setLocale(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 37:
+    if (context->argumentCount() == 1) {
         QFlags<QTextStream::NumberFlag> _q_arg0 = qscriptvalue_cast<QFlags<QTextStream::NumberFlag> >(context->argument(0));
         _q_self->setNumberFlags(_q_arg0);
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 37:
+    case 38:
     if (context->argumentCount() == 1) {
         QChar _q_arg0 = qscriptvalue_cast<QChar>(context->argument(0));
         _q_self->setPadChar(_q_arg0);
@@ -912,7 +916,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 38:
+    case 39:
     if (context->argumentCount() == 1) {
         QTextStream::RealNumberNotation _q_arg0 = qscriptvalue_cast<QTextStream::RealNumberNotation>(context->argument(0));
         _q_self->setRealNumberNotation(_q_arg0);
@@ -920,7 +924,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 39:
+    case 40:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setRealNumberPrecision(_q_arg0);
@@ -928,7 +932,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 40:
+    case 41:
     if (context->argumentCount() == 1) {
         QTextStream::Status _q_arg0 = qscriptvalue_cast<QTextStream::Status>(context->argument(0));
         _q_self->setStatus(_q_arg0);
@@ -936,21 +940,21 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 41:
+    case 42:
     if (context->argumentCount() == 0) {
         _q_self->skipWhiteSpace();
         return context->engine()->undefinedValue();
     }
     break;
 
-    case 42:
+    case 43:
     if (context->argumentCount() == 0) {
         QTextStream::Status _q_result = _q_self->status();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 43:
+    case 44:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->operator<<(_q_arg0);
@@ -958,7 +962,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 44:
+    case 45:
     if (context->argumentCount() == 1) {
         char _q_arg0 = qscriptvalue_cast<char>(context->argument(0));
         _q_self->operator<<(_q_arg0);
@@ -966,7 +970,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 45:
+    case 46:
     if (context->argumentCount() == 1) {
         QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
         _q_self->operator<<(_q_arg0);
@@ -974,7 +978,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 46:
+    case 47:
     if (context->argumentCount() == 1) {
         double _q_arg0 = context->argument(0).toNumber();
         _q_self->operator<<(_q_arg0);
@@ -982,7 +986,7 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 47:
+    case 48:
     if (context->argumentCount() == 1) {
         float _q_arg0 = qscriptvalue_cast<float>(context->argument(0));
         _q_self->operator<<(_q_arg0);
@@ -990,17 +994,9 @@ static QScriptValue qtscript_QTextStream_prototype_call(QScriptContext *context,
     }
     break;
 
-    case 48:
-    if (context->argumentCount() == 1) {
-        signed int _q_arg0 = qscriptvalue_cast<signed int>(context->argument(0));
-        _q_self->operator<<(_q_arg0);
-        return context->thisObject();
-    }
-    break;
-
     case 49:
     if (context->argumentCount() == 1) {
-        qlonglong _q_arg0 = qscriptvalue_cast<qlonglong>(context->argument(0));
+        signed int _q_arg0 = qscriptvalue_cast<signed int>(context->argument(0));
         _q_self->operator<<(_q_arg0);
         return context->thisObject();
     }
@@ -1100,6 +1096,7 @@ QScriptValue qtscript_create_QTextStream_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 1
         , 0
         , 1
@@ -1111,7 +1108,6 @@ QScriptValue qtscript_create_QTextStream_class(QScriptEngine *engine)
         , 1
         , 1
         , 1
-        , 1
         , 0
         , 0
         , 0
@@ -1129,9 +1125,9 @@ QScriptValue qtscript_create_QTextStream_class(QScriptEngine *engine)
         , 1
         , 1
         , 1
-        , 0
-        , 0
         , 1
+        , 0
+        , 0
         , 1
         , 1
         , 1

@@ -88,7 +88,7 @@ static QScriptValue qtscript_QDataStream_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QDataStream::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -129,6 +129,7 @@ static const QDataStream::Version qtscript_QDataStream_Version_values[] = {
     , QDataStream::Qt_4_2
     , QDataStream::Qt_4_3
     , QDataStream::Qt_4_4
+    , QDataStream::Qt_4_5
 };
 
 static const char * const qtscript_QDataStream_Version_keys[] = {
@@ -142,12 +143,13 @@ static const char * const qtscript_QDataStream_Version_keys[] = {
     , "Qt_4_2"
     , "Qt_4_3"
     , "Qt_4_4"
+    , "Qt_4_5"
 };
 
 static QString qtscript_QDataStream_Version_toStringHelper(QDataStream::Version value)
 {
-    if ((value >= QDataStream::Qt_1_0) && (value <= QDataStream::Qt_4_4))
-        return qtscript_QDataStream_Version_keys[static_cast<int>(value)];
+    if ((value >= QDataStream::Qt_1_0) && (value <= QDataStream::Qt_4_5))
+        return qtscript_QDataStream_Version_keys[static_cast<int>(value)-static_cast<int>(QDataStream::Qt_1_0)];
     return QString();
 }
 
@@ -165,7 +167,7 @@ static void qtscript_QDataStream_Version_fromScriptValue(const QScriptValue &val
 static QScriptValue qtscript_construct_QDataStream_Version(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QDataStream::Qt_1_0) && (arg <= QDataStream::Qt_4_4))
+    if ((arg >= QDataStream::Qt_1_0) && (arg <= QDataStream::Qt_4_5))
         return qScriptValueFromValue(engine,  static_cast<QDataStream::Version>(arg));
     return context->throwError(QString::fromLatin1("Version(): invalid enum value (%0)").arg(arg));
 }
@@ -189,7 +191,7 @@ static QScriptValue qtscript_create_QDataStream_Version_class(QScriptEngine *eng
         qtscript_QDataStream_Version_valueOf, qtscript_QDataStream_Version_toString);
     qScriptRegisterMetaType<QDataStream::Version>(engine, qtscript_QDataStream_Version_toScriptValue,
         qtscript_QDataStream_Version_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 11; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QDataStream_Version_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QDataStream_Version_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -216,7 +218,7 @@ static const char * const qtscript_QDataStream_Status_keys[] = {
 static QString qtscript_QDataStream_Status_toStringHelper(QDataStream::Status value)
 {
     if ((value >= QDataStream::Ok) && (value <= QDataStream::ReadCorruptData))
-        return qtscript_QDataStream_Status_keys[static_cast<int>(value)];
+        return qtscript_QDataStream_Status_keys[static_cast<int>(value)-static_cast<int>(QDataStream::Ok)];
     return QString();
 }
 

@@ -263,6 +263,9 @@ Score::Score(const Style& s)
       {
       info.setFile("");
 
+      _undo = new UndoStack();
+      connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
+
       _magIdx = MAG_100;
       _mag    = 1.0;
       _xoff   = 0.0;
@@ -287,7 +290,6 @@ Score::Score(const Style& s)
       _pageOffset       = 0;
       _fileDivision     = division;
       _printing         = false;
-      cmdActive         = false;
       _playlistDirty    = false;
       rights            = 0;
       _state            = STATE_NORMAL;
@@ -303,6 +305,7 @@ Score::~Score()
       {
       if (rights)
             delete rights;
+      delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete tempomap;
       delete sigmap;
       delete sel;
@@ -1126,15 +1129,15 @@ void Score::endEdit()
       int st = editObject->subtype();
 
       if (tp == TEXT && (st == TEXT_INSTRUMENT_SHORT || st == TEXT_INSTRUMENT_LONG)) {
+            UndoCommand* uc;
             TextC* in = static_cast<TextC*>(editObject);
-            UndoOp i;
+            QString s = in->getHtml();
+            Part* part = in->staff()->part();
             if (st == TEXT_INSTRUMENT_SHORT)
-                  i.type = UndoOp::ChangeInstrumentShort;
+                  uc = new ChangeInstrumentShort(part, s);
             else
-                  i.type = UndoOp::ChangeInstrumentLong;
-            i.part = in->staff()->part();
-            i.s    = oldInstrumentName;
-            undoList.back()->push_back(i);
+                  uc = new ChangeInstrumentLong(part, s);
+            _undo->push(uc);
             }
       else if (tp == LYRICS)
             lyricsEndEdit();
@@ -1267,7 +1270,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
       midiInputQueue.enqueue(ev);
       QString emptyCmd;
 
-      if (!cmdActive)
+      if (!_undo->active())
             cmd(emptyCmd);
       }
 
@@ -1294,24 +1297,6 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
       }
 
 //---------------------------------------------------------
-//   undoEmpty
-//---------------------------------------------------------
-
-bool Score::undoEmpty() const
-      {
-      return undoList.empty();
-      }
-
-//---------------------------------------------------------
-//   redoEmpty
-//---------------------------------------------------------
-
-bool Score::redoEmpty() const
-      {
-      return redoList.empty();
-      }
-
-//---------------------------------------------------------
 //   setShowInvisible
 //---------------------------------------------------------
 
@@ -1334,11 +1319,12 @@ void Score::setShowFrames(bool v)
       }
 
 //---------------------------------------------------------
-//   setDirty
+//   setClean
 //---------------------------------------------------------
 
-void Score::setDirty(bool val)
+void Score::setClean(bool val)
       {
+      val = !val;
       if (_dirty != val) {
             _dirty = val;
             if (val)
@@ -2033,5 +2019,163 @@ Measure* Score::getCreateMeasure(int tick)
             lastTick += ticks;
             }
       return tick2measure(tick);
+      }
+
+//---------------------------------------------------------
+//   addElement
+//---------------------------------------------------------
+
+/**
+ Add \a element to its parent.
+
+ Several elements (clef, keysig, timesig) need special handling, as they may cause
+ changes throughout the score.
+*/
+
+void Score::addElement(Element* element)
+      {
+      if (debugMode)
+            printf("   Score::addElement %p %s parent %s\n",
+               element, element->name(), element->parent()->name());
+
+      if (element->type() == MEASURE
+         || (element->type() == HBOX && element->parent()->type() != VBOX)
+         || element->type() == VBOX
+         ) {
+            _layout->add(element);
+            return;
+            }
+
+      element->parent()->add(element);
+
+      if (element->type() == CLEF) {
+            int staffIdx = element->staffIdx();
+            Clef* clef   = (Clef*) element;
+            int tick     = clef->tick();
+
+            //-----------------------------------------------
+            //   move notes
+            //-----------------------------------------------
+
+            bool endFound = false;
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* measure = (Measure*)mb;
+                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                        int startTrack = staffIdx * VOICES;
+                        int endTrack   = startTrack + VOICES;
+                        for (int track = startTrack; track < endTrack; ++track) {
+                              Element* ie = segment->element(track);
+                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                                    endFound = true;
+                                    break;
+                                    }
+                              }
+                        if (endFound)
+                              break;
+                        }
+                  if (endFound)
+                        break;
+                  }
+            }
+      else if (element->type() == KEYSIG) {
+            // FIXME: update keymap here (and remove that from Score::changeKeySig)
+            // but only after fixing redo for elements contained in segments
+
+            // fixup all accidentals
+            layoutAll = true;
+            }
+      else if (element->type() == SLUR) {
+            Slur* s = (Slur*)element;
+            ((ChordRest*)s->startElement())->addSlurFor(s);
+            ((ChordRest*)s->endElement())->addSlurBack(s);
+            }
+      }
+
+//---------------------------------------------------------
+//   removeElement
+//---------------------------------------------------------
+
+/**
+ Remove \a element from its parent.
+
+ Several elements (clef, keysig, timesig) need special handling, as they may cause
+ changes throughout the score.
+*/
+
+void Score::removeElement(Element* element)
+      {
+      Element* parent = element->parent();
+
+      if (debugMode)
+            printf("   Score::removeElement %p %s parent %p %s\n",
+               element, element->name(), parent, parent->name());
+
+      // special for MEASURE, HBOX, VBOX
+      // their parent is not static
+
+      if (element->type() == MEASURE
+         || (element->type() == HBOX && parent->type() != VBOX)
+         || element->type() == VBOX) {
+            _layout->remove(element);
+            return;
+            }
+      parent->remove(element);
+
+      switch(element->type()) {
+            case CHORD:
+            case REST:
+                  {
+                  ChordRest* cr = static_cast<ChordRest*>(element);
+                  cr->setBeam(0);
+                  }
+                  break;
+            case CLEF:
+                  {
+                  Clef* clef   = static_cast<Clef*>(element);
+                  int tick     = clef->tick();
+                  int staffIdx = clef->staffIdx();
+
+                  //-----------------------------------------------
+                  //   move notes
+                  //-----------------------------------------------
+
+                  bool endFound = false;
+                  for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* measure = static_cast<Measure*>(mb);
+                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                              int startTrack = staffIdx * VOICES;
+                              int endTrack   = startTrack + VOICES;
+                              for (int track = startTrack; track < endTrack; ++track) {
+                                    Element* ie = segment->element(track);
+                                    if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                                          endFound = true;
+                                          break;
+                                          }
+                                    }
+                              if (endFound)
+                                    break;
+                              }
+                        if (endFound)
+                              break;
+                        }
+                  }
+                  break;
+            case KEYSIG:
+                  layoutAll = true;
+                  break;
+            case SLUR:
+                  {
+                  Slur* s = static_cast<Slur*>(element);
+                  static_cast<ChordRest*>(s->startElement())->removeSlurFor(s);
+                  static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
+                  }
+                  break;
+            default:
+                  break;
+            }
       }
 

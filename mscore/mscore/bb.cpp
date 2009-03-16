@@ -35,6 +35,7 @@
 #include "layoutbreak.h"
 #include "key.h"
 #include "pitchspelling.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   BBTrack

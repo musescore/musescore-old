@@ -363,8 +363,7 @@ void ScScorePrototype::setTitle(const QString& text)
       if (!ml->first() || ml->first()->type() != VBOX) {
             measure = new VBox(thisScore());
             measure->setTick(0);
-            thisScore()->addMeasure(measure);
-	      thisScore()->undoOp(UndoOp::InsertMeasure, measure);
+            thisScore()->undoInsertMeasure(measure);
             }
       else
             measure = ml->first();

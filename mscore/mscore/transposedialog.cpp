@@ -29,6 +29,8 @@
 #include "harmony.h"
 #include "part.h"
 #include "pitchspelling.h"
+#include "measure.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   TransposeDialog
@@ -216,12 +218,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
 
 void Score::cmdConcertPitchChanged(bool flag)
       {
-      checkUndoOp();
-      UndoOp i;
-      i.type   = UndoOp::ChangeConcertPitch;
-      i.val1   = flag;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
+      _undo->push(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
             Instrument* instr = staff->part()->instrument();

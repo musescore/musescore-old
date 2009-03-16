@@ -14,6 +14,10 @@ public:
     QtScriptShell_QHttpRequestHeader(const QString&  str);
     ~QtScriptShell_QHttpRequestHeader();
 
+    int  majorVersion() const;
+    int  minorVersion() const;
+    bool  parseLine(const QString&  line, int  number);
+    QString  toString() const;
 
     QScriptValue __qtscript_self;
 };

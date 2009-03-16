@@ -134,6 +134,19 @@ add_library ( qtscript_core ${LIBTYPE}
       qtscriptshell_QUuid.cpp
       qtscriptshell_QXmlStreamAttributes.cpp
       qtscriptshell_QXmlStreamEntityResolver.cpp
+
+      qtscript_QAbstractItemModel.cpp
+      qtscript_QAbstractListModel.cpp
+      qtscript_QAbstractTableModel.cpp
+      qtscriptshell_QTextCodecPlugin.cpp
+      qtscriptshell_QMimeData.cpp
+      qtscriptshell_QAbstractItemModel.cpp
+      qtscriptshell_QAbstractListModel.cpp
+      qtscriptshell_QAbstractTableModel.cpp
+      qtscript_QTextCodecPlugin.cpp
+      qtscript_QPersistentModelIndex.cpp
+      qtscript_QMimeData.cpp
+      qtscript_QModelIndex.cpp
       )
 
 set_target_properties(qtscript_core

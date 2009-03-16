@@ -2,6 +2,7 @@
 
 #include <QtScript/QScriptEngine>
 #include <QVariant>
+#include <qabstractnetworkcache.h>
 #include <qauthenticator.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
@@ -12,7 +13,6 @@
 #include <qnetworkreply.h>
 #include <qnetworkrequest.h>
 #include <qobject.h>
-#include <qsslerror.h>
 
 #define QTSCRIPT_IS_GENERATED_FUNCTION(fun) ((fun.data().toUInt32() & 0xFFFF0000) == 0xBABE0000)
 

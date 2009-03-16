@@ -36,6 +36,7 @@
 #include "drumset.h"
 #include "slur.h"
 #include "seq.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -628,10 +629,8 @@ void MuseScore::editInstrList()
                   break;
                   }
             }
-      if (sort) {
-            cs->sortStaves(dl);
-            cs->undoOp(dl);
-            }
+      if (sort)
+            cs->undo()->push(new SortStaves(cs, dl));
 
       cs->setLayoutAll(true);
       cs->endCmd();

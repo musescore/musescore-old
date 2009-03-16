@@ -45,7 +45,6 @@ struct MidiRemote {
 //---------------------------------------------------------
 
 struct Preferences {
-      bool cursorBlink;
       bool bgUseColor;
       bool fgUseColor;
       QString bgWallpaper;

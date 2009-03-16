@@ -72,7 +72,6 @@ class Canvas : public QFrame, public Viewer {
 
       //--input state:
       Cursor* cursor;
-      QTimer* cursorTimer;    // blink timer
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
@@ -125,9 +124,6 @@ class Canvas : public QFrame, public Viewer {
       bool dragAboveSystem(const QPointF& pos);
       void updateGrips();
       const QList<const Element*> elementsAt(const QPointF&);
-
-   private slots:
-      void cursorBlink();
 
    public slots:
       void cmdCut();

@@ -1830,12 +1830,10 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
                   _score->undoRemoveElement(e);
             }
 
-      _score->undoOp(UndoOp::RemoveStaves, this, sStaff, eStaff);
-      removeStaves(sStaff, eStaff);
+      _score->undo()->push(new RemoveStaves(this, sStaff, eStaff));
 
       for (int i = eStaff - 1; i >= sStaff; --i)
-            _score->undoOp(UndoOp::RemoveMStaff, this, *(staves.begin() + i), i);
-      staves.erase(staves.begin() + sStaff, staves.begin() + eStaff);
+            _score->undo()->push(new RemoveMStaff(this, *(staves.begin()+i), i));
 
       for (int i = 0; i < staves.size(); ++i)
             staves[i]->lines->setTrack(i * VOICES);
@@ -1850,8 +1848,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
 
 void Measure::cmdAddStaves(int sStaff, int eStaff)
       {
-      _score->undoOp(UndoOp::InsertStaves, this, sStaff, eStaff);
-      insertStaves(sStaff, eStaff);
+      _score->undo()->push(new InsertStaves(this, sStaff, eStaff));
 
       Segment* ts = findSegment(Segment::SegTimeSig, tick());
 
@@ -1863,8 +1860,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             ms->lines->setLines(staff->lines());
             ms->lines->setParent(this);
 
-            insertMStaff(ms, i);
-            score()->undoOp(UndoOp::InsertMStaff, this, ms, i);
+            _score->undo()->push(new InsertMStaff(this, ms, i));
 
             Rest* rest = new Rest(score(), tick(), 0);
             rest->setTrack(i * VOICES);

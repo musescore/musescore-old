@@ -28,6 +28,7 @@
 #include "drumset.h"
 #include "instrtemplate.h"
 #include "text.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   Part
@@ -107,14 +108,18 @@ void Part::read(QDomElement e)
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
                         _longName->setHtml(val);
-                  else
+                  else if (_score->mscVersion() <= 110)
                         _longName->setHtml(Xml::htmlToString(e.firstChildElement()));
+                  else
+                        _longName->read(e);
                   }
             else if (tag == "shortName") {
                   if (_score->mscVersion() <= 101)
                         _shortName->setHtml(val);
-                  else
+                  else if (_score->mscVersion() <= 110)
                         _shortName->setHtml(Xml::htmlToString(e.firstChildElement()));
+                  else
+                        _shortName->read(e);
                   }
             else if (tag == "trackName") {
                   _trackName = val;
@@ -193,16 +198,10 @@ void Part::write(Xml& xml) const
             staff->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
-      if (!_longName->isEmpty()) {
-            xml.stag("name");
-            xml.writeHtml(_longName->getHtml());
-            xml.etag();
-            }
-      if (!_shortName->isEmpty()) {
-            xml.stag("shortName");
-            xml.writeHtml(_shortName->getHtml());
-            xml.etag();
-            }
+      if (!_longName->isEmpty())
+            _longName->write(xml, "name");
+      if (!_shortName->isEmpty())
+            _shortName->write(xml, "shortName");
       if (!_show)
             xml.tag("show", _show);
       _instrument.write(xml);

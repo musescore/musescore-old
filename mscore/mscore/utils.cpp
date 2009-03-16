@@ -33,6 +33,7 @@
 #include "clef.h"
 #include "utils.h"
 #include "system.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   RecordButton

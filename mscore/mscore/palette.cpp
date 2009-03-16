@@ -34,6 +34,7 @@
 #include "note.h"
 #include "chord.h"
 #include "clef.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   needsStaff

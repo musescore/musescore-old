@@ -16,6 +16,7 @@ public:
     bool  event(QEvent*  arg__1);
     bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
     bool  hasPendingConnections() const;
+    void incomingConnection(quintptr  socketDescriptor);
     QLocalSocket*  nextPendingConnection();
     void timerEvent(QTimerEvent*  arg__1);
 

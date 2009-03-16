@@ -33,6 +33,8 @@
 #include "viewer.h"
 #include "system.h"
 #include "style.h"
+#include "segment.h"
+#include "measure.h"
 
 // FIXME!
 // only values for CLEF_G..CLEF_G3 CLEF_F and CLEF_C3 are

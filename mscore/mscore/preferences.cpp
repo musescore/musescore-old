@@ -120,7 +120,6 @@ void Preferences::init()
       {
       // set fallback defaults:
 
-      cursorBlink        = false;
       bgUseColor         = true;
       fgUseColor         = false;
       bgWallpaper        = QString();
@@ -231,7 +230,6 @@ void Preferences::write()
       dirty = false;
       QSettings s;
 
-      s.setValue("cursorBlink",        cursorBlink);
       s.setValue("bgUseColor",         bgUseColor);
       s.setValue("fgUseColor",         fgUseColor);
       s.setValue("bgWallpaper",        bgWallpaper);
@@ -325,7 +323,6 @@ void Preferences::read()
       {
       QSettings s;
 
-      cursorBlink     = s.value("cursorBlink", false).toBool();
       bgUseColor      = s.value("bgUseColor", true).toBool();
       fgUseColor      = s.value("fgUseColor", false).toBool();
       bgWallpaper     = s.value("bgWallpaper").toString();
@@ -505,8 +502,6 @@ void PreferenceDialog::updateValues(Preferences* p)
       {
       useMidiOutput->setChecked(p->useMidiOutput);
       useSynthesizer->setChecked(!p->useMidiOutput);
-
-      cursorBlink->setChecked(p->cursorBlink);
 
       fgWallpaper->setText(p->fgWallpaper);
       bgWallpaper->setText(p->bgWallpaper);
@@ -963,7 +958,6 @@ void PreferenceDialog::apply()
       preferences.dropColor      = selectColorDrop->color();
       preferences.defaultColor   = selectColorDefault->color();
 
-      preferences.cursorBlink = cursorBlink->isChecked();
       preferences.fgWallpaper = fgWallpaper->text();
       preferences.bgWallpaper = bgWallpaper->text();
 

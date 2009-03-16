@@ -9,12 +9,15 @@
 #include <QVariant>
 #include <qdatastream.h>
 #include <qhostaddress.h>
+#include <qpair.h>
 
 static const char * const qtscript_QHostAddress_function_names[] = {
     "QHostAddress"
     // static
+    , "parseSubnet"
     // prototype
     , "clear"
+    , "isInSubnet"
     , "isNull"
     , "equals"
     , "protocol"
@@ -31,8 +34,10 @@ static const char * const qtscript_QHostAddress_function_names[] = {
 static const char * const qtscript_QHostAddress_function_signatures[] = {
     "\nSpecialAddress address\nQHostAddress copy\nQIPv6Address ip6Addr\nString address\nunsigned int ip4Addr"
     // static
+    , "String subnet"
     // prototype
     , ""
+    , "QHostAddress subnet, int netmask\nQPair subnet"
     , ""
     , "SpecialAddress address\nQHostAddress address"
     , ""
@@ -53,13 +58,25 @@ static QScriptValue qtscript_QHostAddress_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QHostAddress::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QHostAddress)
 Q_DECLARE_METATYPE(QHostAddress*)
 Q_DECLARE_METATYPE(QHostAddress::SpecialAddress)
+template <> \
+struct QMetaTypeId< QPair<QHostAddress,int> > \
+{ \
+    enum { Defined = 1 }; \
+    static int qt_metatype_id() \
+    { \
+        static QBasicAtomicInt metatype_id = Q_BASIC_ATOMIC_INITIALIZER(0); \
+        if (!metatype_id) \
+            metatype_id = qRegisterMetaType< QPair<QHostAddress,int> >("QPair<QHostAddress,int>"); \
+        return metatype_id; \
+    } \
+};
 Q_DECLARE_METATYPE(QAbstractSocket::NetworkLayerProtocol)
 Q_DECLARE_METATYPE(QDataStream*)
 Q_DECLARE_METATYPE(QIPv6Address)
@@ -103,7 +120,7 @@ static const char * const qtscript_QHostAddress_SpecialAddress_keys[] = {
 static QString qtscript_QHostAddress_SpecialAddress_toStringHelper(QHostAddress::SpecialAddress value)
 {
     if ((value >= QHostAddress::Null) && (value <= QHostAddress::AnyIPv6))
-        return qtscript_QHostAddress_SpecialAddress_keys[static_cast<int>(value)];
+        return qtscript_QHostAddress_SpecialAddress_keys[static_cast<int>(value)-static_cast<int>(QHostAddress::Null)];
     return QString();
 }
 
@@ -167,7 +184,7 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 12;
+        _id = 0xBABE0000 + 13;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -175,7 +192,7 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QHostAddress.%0(): this object is not a QHostAddress")
-            .arg(qtscript_QHostAddress_function_names[_id+1]));
+            .arg(qtscript_QHostAddress_function_names[_id+2]));
     }
 
     switch (_id) {
@@ -187,13 +204,27 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     break;
 
     case 1:
+    if (context->argumentCount() == 1) {
+        QPair<QHostAddress,int> _q_arg0 = qscriptvalue_cast<QPair<QHostAddress,int> >(context->argument(0));
+        bool _q_result = _q_self->isInSubnet(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    if (context->argumentCount() == 2) {
+        QHostAddress _q_arg0 = qscriptvalue_cast<QHostAddress>(context->argument(0));
+        int _q_arg1 = context->argument(1).toInt32();
+        bool _q_result = _q_self->isInSubnet(_q_arg0, _q_arg1);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 2:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->isNull();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 2:
+    case 3:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QHostAddress::SpecialAddress>() == context->argument(0).toVariant().userType())) {
             QHostAddress::SpecialAddress _q_arg0 = qscriptvalue_cast<QHostAddress::SpecialAddress>(context->argument(0));
@@ -207,14 +238,14 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     }
     break;
 
-    case 3:
+    case 4:
     if (context->argumentCount() == 0) {
         QAbstractSocket::NetworkLayerProtocol _q_result = _q_self->protocol();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 4:
+    case 5:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator>>(*_q_arg0, *_q_self);
@@ -222,14 +253,14 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->scopeId();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 1) {
         if ((qMetaTypeId<QIPv6Address>() == context->argument(0).toVariant().userType())) {
             QIPv6Address _q_arg0 = qscriptvalue_cast<QIPv6Address>(context->argument(0));
@@ -247,7 +278,7 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setScopeId(_q_arg0);
@@ -255,28 +286,28 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 0) {
         uint _q_result = _q_self->toIPv4Address();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 9:
+    case 10:
     if (context->argumentCount() == 0) {
         QIPv6Address _q_result = _q_self->toIPv6Address();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 10:
+    case 11:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->toString();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 11:
+    case 12:
     if (context->argumentCount() == 1) {
         QDataStream* _q_arg0 = qscriptvalue_cast<QDataStream*>(context->argument(0));
         operator<<(*_q_arg0, *_q_self);
@@ -288,8 +319,8 @@ static QScriptValue qtscript_QHostAddress_prototype_call(QScriptContext *context
     Q_ASSERT(false);
     }
     return qtscript_QHostAddress_throw_ambiguity_error_helper(context,
-        qtscript_QHostAddress_function_names[_id+1],
-        qtscript_QHostAddress_function_signatures[_id+1]);
+        qtscript_QHostAddress_function_names[_id+2],
+        qtscript_QHostAddress_function_signatures[_id+2]);
 }
 
 static QScriptValue qtscript_QHostAddress_static_call(QScriptContext *context, QScriptEngine *)
@@ -336,6 +367,14 @@ static QScriptValue qtscript_QHostAddress_static_call(QScriptContext *context, Q
     }
     break;
 
+    case 1:
+    if (context->argumentCount() == 1) {
+        QString _q_arg0 = context->argument(0).toString();
+        QPair<QHostAddress,int> _q_result = QHostAddress::parseSubnet(_q_arg0);
+        return qScriptValueFromValue(context->engine(), _q_result);
+    }
+    break;
+
     default:
     Q_ASSERT(false);
     }
@@ -349,8 +388,10 @@ QScriptValue qtscript_create_QHostAddress_class(QScriptEngine *engine)
     static const int function_lengths[] = {
         1
         // static
+        , 1
         // prototype
         , 0
+        , 2
         , 0
         , 1
         , 0
@@ -365,10 +406,10 @@ QScriptValue qtscript_create_QHostAddress_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QHostAddress*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QHostAddress*)0));
-    for (int i = 0; i < 12; ++i) {
-        QScriptValue fun = engine->newFunction(qtscript_QHostAddress_prototype_call, function_lengths[i+1]);
+    for (int i = 0; i < 13; ++i) {
+        QScriptValue fun = engine->newFunction(qtscript_QHostAddress_prototype_call, function_lengths[i+2]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
-        proto.setProperty(QString::fromLatin1(qtscript_QHostAddress_function_names[i+1]),
+        proto.setProperty(QString::fromLatin1(qtscript_QHostAddress_function_names[i+2]),
             fun, QScriptValue::SkipInEnumeration);
     }
 
@@ -377,6 +418,13 @@ QScriptValue qtscript_create_QHostAddress_class(QScriptEngine *engine)
 
     QScriptValue ctor = engine->newFunction(qtscript_QHostAddress_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
+    for (int i = 0; i < 1; ++i) {
+        QScriptValue fun = engine->newFunction(qtscript_QHostAddress_static_call,
+            function_lengths[i+1]);
+        fun.setData(QScriptValue(engine, uint(0xBABE0000 + i+1)));
+        ctor.setProperty(QString::fromLatin1(qtscript_QHostAddress_function_names[i+1]),
+            fun, QScriptValue::SkipInEnumeration);
+    }
 
     ctor.setProperty(QString::fromLatin1("SpecialAddress"),
         qtscript_create_QHostAddress_SpecialAddress_class(engine, ctor));

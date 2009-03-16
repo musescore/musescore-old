@@ -68,6 +68,8 @@
 #include "zip.h"
 #include "unzip.h"
 #include "magbox.h"
+#include "measure.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   load
@@ -276,7 +278,7 @@ bool Score::saveFile(bool autosave)
                   QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
                   return false;
                   }
-            setDirty(false);
+            _undo->setClean();
             return true;
             }
       //
@@ -343,7 +345,7 @@ bool Score::saveFile(bool autosave)
                tr("renaming <") + tmpName + tr("> to <") + name + tr("> failed"));
             return false;
             }
-      setDirty(false);
+      _undo->setClean();
       setSaved(true);
       return true;
       }
@@ -411,7 +413,7 @@ bool Score::saveAs(bool saveCopy)
             if (rv && !saveCopy) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
-                  setDirty(false);
+                  _undo->setClean();
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   }
@@ -467,7 +469,7 @@ bool Score::saveAs(bool saveCopy)
 
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
       if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")) && !saveCopy)
-            setDirty(false);
+            _undo->setClean();
 
       QFileInfo fi(fn);
       if (saveCopy)

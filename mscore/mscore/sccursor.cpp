@@ -27,6 +27,7 @@
 #include "note.h"
 #include "stafftext.h"
 #include "text.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   SCursor

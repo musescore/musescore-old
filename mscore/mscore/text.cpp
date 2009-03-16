@@ -34,6 +34,7 @@
 #include "textline.h"
 #include "preferences.h"
 #include "system.h"
+#include "measure.h"
 
 TextPalette* textPalette;
 

@@ -48,6 +48,9 @@
 #include "navigate.h"
 #include "articulation.h"
 #include "drumset.h"
+#include "measure.h"
+#include "tempo.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -672,38 +675,32 @@ void Score::cmdFlipStemDirection()
                               if (!set) {
                                     if (cr->type() == CHORD) {
                                           Chord* chord = static_cast<Chord*>(cr);
-                                          if (chord->stemDirection() != dir) {
-                                                chord->setStemDirection(dir);
-                                                undoOp(UndoOp::SetStemDirection, chord, int(dir));
-                                                }
+                                          if (chord->stemDirection() != dir)
+                                                _undo->push(new SetStemDirection(chord, dir));
                                           set = true;
                                           }
                                     }
                               else {
                                     if (cr->type() == CHORD) {
                                           Chord* chord = static_cast<Chord*>(cr);
-                                          if (chord->stemDirection() != AUTO) {
-                                                chord->setStemDirection(AUTO);
-                                                undoOp(UndoOp::SetStemDirection, chord, int(AUTO));
-                                                }
+                                          if (chord->stemDirection() != AUTO)
+                                                _undo->push(new SetStemDirection(chord, AUTO));
                                           }
                                     }
                               }
 
                         }
                   else {
-                        undoOp(UndoOp::SetStemDirection, chord, int(dir));
+                        _undo->push(new SetStemDirection(chord, dir));
                         }
                   }
             else if (e->type() == SLUR_SEGMENT) {
                   SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();
-                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
-                  undoOp(UndoOp::FlipSlurDirection, slur);
+                  _undo->push(new FlipSlurDirection(slur));
                   }
             else if (e->type() == BEAM) {
                   Beam* beam = static_cast<Beam*>(e);
-                  beam->setBeamDirection(beam->isUp() ? DOWN : UP);
-                  undoOp(UndoOp::FlipBeamDirection, beam);
+                  _undo->push(new FlipBeamDirection(beam));
                   }
             }
       layoutAll = true;
@@ -786,23 +783,13 @@ void Score::deleteItem(Element* el)
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
                         TextC* in = static_cast<TextC*>(el);
-                        UndoOp i;
-                        i.type = UndoOp::ChangeInstrumentLong;
-                        i.part = in->staff()->part();
-                        i.s    = in->getHtml();
-                        undoList.back()->push_back(i);
-                        el->staff()->part()->setLongName(QString());
+                        _undo->push(new ChangeInstrumentLong(in->staff()->part(), in->getHtml()));
                         _layout->setInstrumentNames();
                         break;
                         }
                   else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
                         TextC* in = static_cast<TextC*>(el);
-                        UndoOp i;
-                        i.type = UndoOp::ChangeInstrumentShort;
-                        i.part = in->staff()->part();
-                        i.s    = in->getHtml();
-                        undoList.back()->push_back(i);
-                        el->staff()->part()->setShortName(QString());
+                        _undo->push(new ChangeInstrumentShort(in->staff()->part(), in->getHtml()));
                         _layout->setInstrumentNames();
                         break;
                         }
@@ -1421,10 +1408,8 @@ void Score::colorItem(Element* element)
 
       foreach(Element* e, *sel->elements()) {
             if (e->color() != c) {
-                  QColor color = e->color();
-                  e->setColor(c);
+                  _undo->push(new ChangeColor(e, c));
                   e->setGenerated(false);
-                  undoOp(UndoOp::ChangeColor, e, color);
                   refresh |= e->abbox();
                   if (e->type() == BAR_LINE) {
                         Element* ep = e->parent();

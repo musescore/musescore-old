@@ -2593,11 +2593,19 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Repeat Count</source>
+        <source>break multi measure rest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>break multi measure rest</source>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5715,10 +5723,6 @@ before closing?</source>
     </message>
     <message>
         <source>Misc.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

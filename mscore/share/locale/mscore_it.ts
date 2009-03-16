@@ -2589,10 +2589,6 @@ fallito: </translation>
         <translation>Irregolare</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Conteggio Ripetizioni</translation>
-    </message>
-    <message>
         <source>Staves</source>
         <translation>Pentagrammi</translation>
     </message>
@@ -2611,6 +2607,18 @@ fallito: </translation>
     <message>
         <source>break multi measure rest</source>
         <translation>interrompi le pause di più battute</translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5585,10 +5593,6 @@ prima di chiudere?</translation>
     <message>
         <source>Canvas</source>
         <translation>Area di Visualizzazione</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>cursore lampeggiante</translation>
     </message>
     <message>
         <source>Background</source>

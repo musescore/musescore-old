@@ -22,6 +22,7 @@
 #define __LAYOUT_H__
 
 #include "bsp.h"
+#include "element.h"
 
 class Score;
 class PageFormat;

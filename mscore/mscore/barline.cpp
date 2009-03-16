@@ -28,6 +28,8 @@
 #include "viewer.h"
 #include "staff.h"
 #include "system.h"
+#include "measure.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   BarLine

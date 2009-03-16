@@ -8,6 +8,9 @@
 #include <qhttp.h>
 #include <QVariant>
 #include <qhttp.h>
+#include <qlist.h>
+#include <qpair.h>
+#include <qstringlist.h>
 
 #include "qtscriptshell_QHttpResponseHeader.h"
 
@@ -15,12 +18,9 @@ static const char * const qtscript_QHttpResponseHeader_function_names[] = {
     "QHttpResponseHeader"
     // static
     // prototype
-    , "majorVersion"
-    , "minorVersion"
     , "reasonPhrase"
     , "setStatusLine"
     , "statusCode"
-    , "toString"
 };
 
 static const char * const qtscript_QHttpResponseHeader_function_signatures[] = {
@@ -28,10 +28,7 @@ static const char * const qtscript_QHttpResponseHeader_function_signatures[] = {
     // static
     // prototype
     , ""
-    , ""
-    , ""
     , "int code, String text, int majorVer, int minorVer"
-    , ""
     , ""
 };
 
@@ -42,7 +39,7 @@ static QScriptValue qtscript_QHttpResponseHeader_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QHttpResponseHeader::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -50,6 +47,7 @@ Q_DECLARE_METATYPE(QHttpResponseHeader)
 Q_DECLARE_METATYPE(QHttpResponseHeader*)
 Q_DECLARE_METATYPE(QtScriptShell_QHttpResponseHeader)
 Q_DECLARE_METATYPE(QtScriptShell_QHttpResponseHeader*)
+Q_DECLARE_METATYPE(QHttpHeader*)
 
 //
 // QHttpResponseHeader
@@ -65,7 +63,7 @@ static QScriptValue qtscript_QHttpResponseHeader_prototype_call(QScriptContext *
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 6;
+        _id = 0xBABE0000 + 3;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -79,26 +77,12 @@ static QScriptValue qtscript_QHttpResponseHeader_prototype_call(QScriptContext *
     switch (_id) {
     case 0:
     if (context->argumentCount() == 0) {
-        int _q_result = _q_self->majorVersion();
-        return QScriptValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 1:
-    if (context->argumentCount() == 0) {
-        int _q_result = _q_self->minorVersion();
-        return QScriptValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 2:
-    if (context->argumentCount() == 0) {
         QString _q_result = _q_self->reasonPhrase();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 3:
+    case 1:
     if (context->argumentCount() == 1) {
         int _q_arg0 = context->argument(0).toInt32();
         _q_self->setStatusLine(_q_arg0);
@@ -127,16 +111,9 @@ static QScriptValue qtscript_QHttpResponseHeader_prototype_call(QScriptContext *
     }
     break;
 
-    case 4:
+    case 2:
     if (context->argumentCount() == 0) {
         int _q_result = _q_self->statusCode();
-        return QScriptValue(context->engine(), _q_result);
-    }
-    break;
-
-    case 5:
-    if (context->argumentCount() == 0) {
-        QString _q_result = _q_self->toString();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
@@ -226,15 +203,13 @@ QScriptValue qtscript_create_QHttpResponseHeader_class(QScriptEngine *engine)
         // static
         // prototype
         , 0
-        , 0
-        , 0
         , 4
-        , 0
         , 0
     };
     engine->setDefaultPrototype(qMetaTypeId<QHttpResponseHeader*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QHttpResponseHeader*)0));
-    for (int i = 0; i < 6; ++i) {
+    proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QHttpHeader*>()));
+    for (int i = 0; i < 3; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QHttpResponseHeader_prototype_call, function_lengths[i+1]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QHttpResponseHeader_function_names[i+1]),

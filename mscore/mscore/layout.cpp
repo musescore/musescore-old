@@ -42,6 +42,7 @@
 #include "system.h"
 #include "part.h"
 #include "utils.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree

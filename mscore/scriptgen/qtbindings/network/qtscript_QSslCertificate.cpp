@@ -75,7 +75,7 @@ static QScriptValue qtscript_QSslCertificate_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSslCertificate::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -142,7 +142,7 @@ static const char * const qtscript_QSslCertificate_SubjectInfo_keys[] = {
 static QString qtscript_QSslCertificate_SubjectInfo_toStringHelper(QSslCertificate::SubjectInfo value)
 {
     if ((value >= QSslCertificate::Organization) && (value <= QSslCertificate::StateOrProvinceName))
-        return qtscript_QSslCertificate_SubjectInfo_keys[static_cast<int>(value)];
+        return qtscript_QSslCertificate_SubjectInfo_keys[static_cast<int>(value)-static_cast<int>(QSslCertificate::Organization)];
     return QString();
 }
 
@@ -214,7 +214,7 @@ static QScriptValue qtscript_QSslCertificate_prototype_call(QScriptContext *cont
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QSslCertificate.%0(): this object is not a QSslCertificate")
-            .arg(qtscript_QSslCertificate_function_names[_id+1]));
+            .arg(qtscript_QSslCertificate_function_names[_id+4]));
     }
 
     switch (_id) {

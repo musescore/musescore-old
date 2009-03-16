@@ -39,7 +39,7 @@ static QScriptValue qtscript_QCryptographicHash_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QCryptographicHash::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -79,7 +79,7 @@ static const char * const qtscript_QCryptographicHash_Algorithm_keys[] = {
 static QString qtscript_QCryptographicHash_Algorithm_toStringHelper(QCryptographicHash::Algorithm value)
 {
     if ((value >= QCryptographicHash::Md4) && (value <= QCryptographicHash::Sha1))
-        return qtscript_QCryptographicHash_Algorithm_keys[static_cast<int>(value)];
+        return qtscript_QCryptographicHash_Algorithm_keys[static_cast<int>(value)-static_cast<int>(QCryptographicHash::Md4)];
     return QString();
 }
 
@@ -151,7 +151,7 @@ static QScriptValue qtscript_QCryptographicHash_prototype_call(QScriptContext *c
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QCryptographicHash.%0(): this object is not a QCryptographicHash")
-            .arg(qtscript_QCryptographicHash_function_names[_id+1]));
+            .arg(qtscript_QCryptographicHash_function_names[_id+2]));
     }
 
     switch (_id) {

@@ -4,6 +4,7 @@
 #include <QVariant>
 #include <qbytearray.h>
 #include <qiodevice.h>
+#include <qlocale.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
 

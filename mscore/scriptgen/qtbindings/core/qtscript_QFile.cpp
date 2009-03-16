@@ -177,7 +177,7 @@ static const char * const qtscript_QFile_FileError_keys[] = {
 static QString qtscript_QFile_FileError_toStringHelper(QFile::FileError value)
 {
     if ((value >= QFile::NoError) && (value <= QFile::CopyError))
-        return qtscript_QFile_FileError_keys[static_cast<int>(value)];
+        return qtscript_QFile_FileError_keys[static_cast<int>(value)-static_cast<int>(QFile::NoError)];
     return QString();
 }
 
@@ -242,7 +242,7 @@ static const char * const qtscript_QFile_MemoryMapFlags_keys[] = {
 static QString qtscript_QFile_MemoryMapFlags_toStringHelper(QFile::MemoryMapFlags value)
 {
     if ((value >= QFile::NoOptions) && (value <= QFile::NoOptions))
-        return qtscript_QFile_MemoryMapFlags_keys[static_cast<int>(value)];
+        return qtscript_QFile_MemoryMapFlags_keys[static_cast<int>(value)-static_cast<int>(QFile::NoOptions)];
     return QString();
 }
 
@@ -481,7 +481,7 @@ static QScriptValue qtscript_QFile_prototype_call(QScriptContext *context, QScri
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QFile.%0(): this object is not a QFile")
-            .arg(qtscript_QFile_function_names[_id+1]));
+            .arg(qtscript_QFile_function_names[_id+12]));
     }
 
     switch (_id) {

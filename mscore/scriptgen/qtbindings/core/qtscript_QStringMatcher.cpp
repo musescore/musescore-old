@@ -22,11 +22,11 @@ static const char * const qtscript_QStringMatcher_function_names[] = {
 };
 
 static const char * const qtscript_QStringMatcher_function_signatures[] = {
-    "\nString pattern, CaseSensitivity cs\nQStringMatcher other"
+    "\nchar uc, int len, CaseSensitivity cs\nString pattern, CaseSensitivity cs\nQStringMatcher other"
     // static
     // prototype
     , ""
-    , "String str, int from"
+    , "char str, int length, int from\nString str, int from"
     , ""
     , "CaseSensitivity cs"
     , "String pattern"
@@ -40,13 +40,14 @@ static QScriptValue qtscript_QStringMatcher_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QStringMatcher::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
 Q_DECLARE_METATYPE(QStringMatcher)
 Q_DECLARE_METATYPE(QStringMatcher*)
 Q_DECLARE_METATYPE(Qt::CaseSensitivity)
+Q_DECLARE_METATYPE(QChar*)
 
 //
 // QStringMatcher
@@ -88,9 +89,25 @@ static QScriptValue qtscript_QStringMatcher_prototype_call(QScriptContext *conte
         return QScriptValue(context->engine(), _q_result);
     }
     if (context->argumentCount() == 2) {
-        QString _q_arg0 = context->argument(0).toString();
+        if (qscriptvalue_cast<QChar*>(context->argument(0))
+            && context->argument(1).isNumber()) {
+            QChar* _q_arg0 = qscriptvalue_cast<QChar*>(context->argument(0));
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        } else if (context->argument(0).isString()
+            && context->argument(1).isNumber()) {
+            QString _q_arg0 = context->argument(0).toString();
+            int _q_arg1 = context->argument(1).toInt32();
+            int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+            return QScriptValue(context->engine(), _q_result);
+        }
+    }
+    if (context->argumentCount() == 3) {
+        QChar* _q_arg0 = qscriptvalue_cast<QChar*>(context->argument(0));
         int _q_arg1 = context->argument(1).toInt32();
-        int _q_result = _q_self->indexIn(_q_arg0, _q_arg1);
+        int _q_arg2 = context->argument(2).toInt32();
+        int _q_result = _q_self->indexIn(_q_arg0, _q_arg1, _q_arg2);
         return QScriptValue(context->engine(), _q_result);
     }
     break;
@@ -158,9 +175,26 @@ static QScriptValue qtscript_QStringMatcher_static_call(QScriptContext *context,
             return _q_result;
         }
     } else if (context->argumentCount() == 2) {
-        QString _q_arg0 = context->argument(0).toString();
-        Qt::CaseSensitivity _q_arg1 = qscriptvalue_cast<Qt::CaseSensitivity>(context->argument(1));
-        QStringMatcher _q_cpp_result(_q_arg0, _q_arg1);
+        if (qscriptvalue_cast<QChar*>(context->argument(0))
+            && context->argument(1).isNumber()) {
+            QChar* _q_arg0 = qscriptvalue_cast<QChar*>(context->argument(0));
+            int _q_arg1 = context->argument(1).toInt32();
+            QStringMatcher _q_cpp_result(_q_arg0, _q_arg1);
+            QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
+            return _q_result;
+        } else if (context->argument(0).isString()
+            && (qMetaTypeId<Qt::CaseSensitivity>() == context->argument(1).toVariant().userType())) {
+            QString _q_arg0 = context->argument(0).toString();
+            Qt::CaseSensitivity _q_arg1 = qscriptvalue_cast<Qt::CaseSensitivity>(context->argument(1));
+            QStringMatcher _q_cpp_result(_q_arg0, _q_arg1);
+            QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
+            return _q_result;
+        }
+    } else if (context->argumentCount() == 3) {
+        QChar* _q_arg0 = qscriptvalue_cast<QChar*>(context->argument(0));
+        int _q_arg1 = context->argument(1).toInt32();
+        Qt::CaseSensitivity _q_arg2 = qscriptvalue_cast<Qt::CaseSensitivity>(context->argument(2));
+        QStringMatcher _q_cpp_result(_q_arg0, _q_arg1, _q_arg2);
         QScriptValue _q_result = context->engine()->newVariant(context->thisObject(), qVariantFromValue(_q_cpp_result));
         return _q_result;
     }
@@ -177,11 +211,11 @@ static QScriptValue qtscript_QStringMatcher_static_call(QScriptContext *context,
 QScriptValue qtscript_create_QStringMatcher_class(QScriptEngine *engine)
 {
     static const int function_lengths[] = {
-        2
+        3
         // static
         // prototype
         , 0
-        , 2
+        , 3
         , 0
         , 1
         , 1

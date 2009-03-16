@@ -81,7 +81,7 @@ static QScriptValue qtscript_QAbstractSocket_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QAbstractSocket::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -129,7 +129,7 @@ static const char * const qtscript_QAbstractSocket_SocketType_keys[] = {
 static QString qtscript_QAbstractSocket_SocketType_toStringHelper(QAbstractSocket::SocketType value)
 {
     if ((value >= QAbstractSocket::UnknownSocketType) && (value <= QAbstractSocket::UdpSocket))
-        return qtscript_QAbstractSocket_SocketType_keys[static_cast<int>(value)];
+        return qtscript_QAbstractSocket_SocketType_keys[static_cast<int>(value)-static_cast<int>(QAbstractSocket::UnknownSocketType)];
     return QString();
 }
 
@@ -199,6 +199,11 @@ static const QAbstractSocket::SocketError qtscript_QAbstractSocket_SocketError_v
     , QAbstractSocket::UnfinishedSocketOperationError
     , QAbstractSocket::ProxyAuthenticationRequiredError
     , QAbstractSocket::SslHandshakeFailedError
+    , QAbstractSocket::ProxyConnectionRefusedError
+    , QAbstractSocket::ProxyConnectionClosedError
+    , QAbstractSocket::ProxyConnectionTimeoutError
+    , QAbstractSocket::ProxyNotFoundError
+    , QAbstractSocket::ProxyProtocolError
 };
 
 static const char * const qtscript_QAbstractSocket_SocketError_keys[] = {
@@ -217,12 +222,17 @@ static const char * const qtscript_QAbstractSocket_SocketError_keys[] = {
     , "UnfinishedSocketOperationError"
     , "ProxyAuthenticationRequiredError"
     , "SslHandshakeFailedError"
+    , "ProxyConnectionRefusedError"
+    , "ProxyConnectionClosedError"
+    , "ProxyConnectionTimeoutError"
+    , "ProxyNotFoundError"
+    , "ProxyProtocolError"
 };
 
 static QString qtscript_QAbstractSocket_SocketError_toStringHelper(QAbstractSocket::SocketError value)
 {
-    if ((value >= QAbstractSocket::UnknownSocketError) && (value <= QAbstractSocket::SslHandshakeFailedError))
-        return qtscript_QAbstractSocket_SocketError_keys[static_cast<int>(value)];
+    if ((value >= QAbstractSocket::UnknownSocketError) && (value <= QAbstractSocket::ProxyProtocolError))
+        return qtscript_QAbstractSocket_SocketError_keys[static_cast<int>(value)-static_cast<int>(QAbstractSocket::UnknownSocketError)];
     return QString();
 }
 
@@ -240,7 +250,7 @@ static void qtscript_QAbstractSocket_SocketError_fromScriptValue(const QScriptVa
 static QScriptValue qtscript_construct_QAbstractSocket_SocketError(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    if ((arg >= QAbstractSocket::UnknownSocketError) && (arg <= QAbstractSocket::SslHandshakeFailedError))
+    if ((arg >= QAbstractSocket::UnknownSocketError) && (arg <= QAbstractSocket::ProxyProtocolError))
         return qScriptValueFromValue(engine,  static_cast<QAbstractSocket::SocketError>(arg));
     return context->throwError(QString::fromLatin1("SocketError(): invalid enum value (%0)").arg(arg));
 }
@@ -264,7 +274,7 @@ static QScriptValue qtscript_create_QAbstractSocket_SocketError_class(QScriptEng
         qtscript_QAbstractSocket_SocketError_valueOf, qtscript_QAbstractSocket_SocketError_toString);
     qScriptRegisterMetaType<QAbstractSocket::SocketError>(engine, qtscript_QAbstractSocket_SocketError_toScriptValue,
         qtscript_QAbstractSocket_SocketError_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 20; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QAbstractSocket_SocketError_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QAbstractSocket_SocketError_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
@@ -291,7 +301,7 @@ static const char * const qtscript_QAbstractSocket_NetworkLayerProtocol_keys[] =
 static QString qtscript_QAbstractSocket_NetworkLayerProtocol_toStringHelper(QAbstractSocket::NetworkLayerProtocol value)
 {
     if ((value >= QAbstractSocket::UnknownNetworkLayerProtocol) && (value <= QAbstractSocket::IPv6Protocol))
-        return qtscript_QAbstractSocket_NetworkLayerProtocol_keys[static_cast<int>(value)];
+        return qtscript_QAbstractSocket_NetworkLayerProtocol_keys[static_cast<int>(value)-static_cast<int>(QAbstractSocket::UnknownNetworkLayerProtocol)];
     return QString();
 }
 
@@ -368,7 +378,7 @@ static const char * const qtscript_QAbstractSocket_SocketState_keys[] = {
 static QString qtscript_QAbstractSocket_SocketState_toStringHelper(QAbstractSocket::SocketState value)
 {
     if ((value >= QAbstractSocket::UnconnectedState) && (value <= QAbstractSocket::ClosingState))
-        return qtscript_QAbstractSocket_SocketState_keys[static_cast<int>(value)];
+        return qtscript_QAbstractSocket_SocketState_keys[static_cast<int>(value)-static_cast<int>(QAbstractSocket::UnconnectedState)];
     return QString();
 }
 
@@ -454,13 +464,13 @@ static QScriptValue qtscript_QAbstractSocket_prototype_call(QScriptContext *cont
     case 1:
     if (context->argumentCount() == 2) {
         if ((qMetaTypeId<QHostAddress>() == context->argument(0).toVariant().userType())
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())) {
+            && context->argument(1).isNumber()) {
             QHostAddress _q_arg0 = qscriptvalue_cast<QHostAddress>(context->argument(0));
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
             _q_self->connectToHost(_q_arg0, _q_arg1);
             return context->engine()->undefinedValue();
         } else if (context->argument(0).isString()
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())) {
+            && context->argument(1).isNumber()) {
             QString _q_arg0 = context->argument(0).toString();
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
             _q_self->connectToHost(_q_arg0, _q_arg1);
@@ -469,7 +479,7 @@ static QScriptValue qtscript_QAbstractSocket_prototype_call(QScriptContext *cont
     }
     if (context->argumentCount() == 3) {
         if ((qMetaTypeId<QHostAddress>() == context->argument(0).toVariant().userType())
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())
+            && context->argument(1).isNumber()
             && (qMetaTypeId<QFlags<QIODevice::OpenModeFlag> >() == context->argument(2).toVariant().userType())) {
             QHostAddress _q_arg0 = qscriptvalue_cast<QHostAddress>(context->argument(0));
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));
@@ -477,7 +487,7 @@ static QScriptValue qtscript_QAbstractSocket_prototype_call(QScriptContext *cont
             _q_self->connectToHost(_q_arg0, _q_arg1, _q_arg2);
             return context->engine()->undefinedValue();
         } else if (context->argument(0).isString()
-            && (qMetaTypeId<unsigned short>() == context->argument(1).toVariant().userType())
+            && context->argument(1).isNumber()
             && (qMetaTypeId<QFlags<QIODevice::OpenModeFlag> >() == context->argument(2).toVariant().userType())) {
             QString _q_arg0 = context->argument(0).toString();
             unsigned short _q_arg1 = qscriptvalue_cast<unsigned short>(context->argument(1));

@@ -2577,10 +2577,6 @@ failed: </source>
         <translation>irregular</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Contar repetições</translation>
-    </message>
-    <message>
         <source>Staves</source>
         <translation type="unfinished">Pautas</translation>
     </message>
@@ -2598,6 +2594,18 @@ failed: </source>
     </message>
     <message>
         <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5632,10 +5640,6 @@ before closing?</source>
     <message>
         <source>Draw Antialiased</source>
         <translation>Desenhar Antialiased</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>piscar cursor</translation>
     </message>
     <message>
         <source>Colors</source>

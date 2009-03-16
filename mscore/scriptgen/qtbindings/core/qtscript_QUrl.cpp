@@ -184,7 +184,7 @@ static QScriptValue qtscript_QUrl_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QUrl::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -291,7 +291,7 @@ static const char * const qtscript_QUrl_ParsingMode_keys[] = {
 static QString qtscript_QUrl_ParsingMode_toStringHelper(QUrl::ParsingMode value)
 {
     if ((value >= QUrl::TolerantMode) && (value <= QUrl::StrictMode))
-        return qtscript_QUrl_ParsingMode_keys[static_cast<int>(value)];
+        return qtscript_QUrl_ParsingMode_keys[static_cast<int>(value)-static_cast<int>(QUrl::TolerantMode)];
     return QString();
 }
 
@@ -526,7 +526,7 @@ static QScriptValue qtscript_QUrl_prototype_call(QScriptContext *context, QScrip
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QUrl.%0(): this object is not a QUrl")
-            .arg(qtscript_QUrl_function_names[_id+1]));
+            .arg(qtscript_QUrl_function_names[_id+9]));
     }
 
     switch (_id) {

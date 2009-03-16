@@ -2583,10 +2583,6 @@ failed: </source>
         <translation>Нерегулярная</translation>
     </message>
     <message>
-        <source>Repeat Count</source>
-        <translation>Повторов:</translation>
-    </message>
-    <message>
         <source>Staves</source>
         <translation>Нотные станы</translation>
     </message>
@@ -2604,6 +2600,18 @@ failed: </source>
     </message>
     <message>
         <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>repeat count:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5567,10 +5575,6 @@ before closing?</source>
     <message>
         <source>Wallpaper</source>
         <translation>Обои</translation>
-    </message>
-    <message>
-        <source>blinking Cursor</source>
-        <translation>Мигающий курсор</translation>
     </message>
     <message>
         <source>Background</source>

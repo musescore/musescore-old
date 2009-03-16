@@ -39,6 +39,7 @@
 #include "articulation.h"
 #include "arpeggio.h"
 #include "durationtype.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   ARec

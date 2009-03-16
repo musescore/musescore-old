@@ -42,7 +42,7 @@ static QScriptValue qtscript_QSystemSemaphore_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QSystemSemaphore::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -81,7 +81,7 @@ static const char * const qtscript_QSystemSemaphore_AccessMode_keys[] = {
 static QString qtscript_QSystemSemaphore_AccessMode_toStringHelper(QSystemSemaphore::AccessMode value)
 {
     if ((value >= QSystemSemaphore::Open) && (value <= QSystemSemaphore::Create))
-        return qtscript_QSystemSemaphore_AccessMode_keys[static_cast<int>(value)];
+        return qtscript_QSystemSemaphore_AccessMode_keys[static_cast<int>(value)-static_cast<int>(QSystemSemaphore::Open)];
     return QString();
 }
 
@@ -158,7 +158,7 @@ static const char * const qtscript_QSystemSemaphore_SystemSemaphoreError_keys[] 
 static QString qtscript_QSystemSemaphore_SystemSemaphoreError_toStringHelper(QSystemSemaphore::SystemSemaphoreError value)
 {
     if ((value >= QSystemSemaphore::NoError) && (value <= QSystemSemaphore::UnknownError))
-        return qtscript_QSystemSemaphore_SystemSemaphoreError_keys[static_cast<int>(value)];
+        return qtscript_QSystemSemaphore_SystemSemaphoreError_keys[static_cast<int>(value)-static_cast<int>(QSystemSemaphore::NoError)];
     return QString();
 }
 

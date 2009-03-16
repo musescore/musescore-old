@@ -19,6 +19,7 @@
 static const char * const qtscript_QLocalServer_function_names[] = {
     "QLocalServer"
     // static
+    , "removeServer"
     // prototype
     , "close"
     , "errorString"
@@ -38,6 +39,7 @@ static const char * const qtscript_QLocalServer_function_names[] = {
 static const char * const qtscript_QLocalServer_function_signatures[] = {
     "QObject parent"
     // static
+    , "String name"
     // prototype
     , ""
     , ""
@@ -61,7 +63,7 @@ static QScriptValue qtscript_QLocalServer_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QLocalServer::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -92,7 +94,7 @@ static QScriptValue qtscript_QLocalServer_prototype_call(QScriptContext *context
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QLocalServer.%0(): this object is not a QLocalServer")
-            .arg(qtscript_QLocalServer_function_names[_id+1]));
+            .arg(qtscript_QLocalServer_function_names[_id+2]));
     }
 
     switch (_id) {
@@ -196,8 +198,8 @@ static QScriptValue qtscript_QLocalServer_prototype_call(QScriptContext *context
     Q_ASSERT(false);
     }
     return qtscript_QLocalServer_throw_ambiguity_error_helper(context,
-        qtscript_QLocalServer_function_names[_id+1],
-        qtscript_QLocalServer_function_signatures[_id+1]);
+        qtscript_QLocalServer_function_names[_id+2],
+        qtscript_QLocalServer_function_signatures[_id+2]);
 }
 
 static QScriptValue qtscript_QLocalServer_static_call(QScriptContext *context, QScriptEngine *)
@@ -224,6 +226,14 @@ static QScriptValue qtscript_QLocalServer_static_call(QScriptContext *context, Q
     }
     break;
 
+    case 1:
+    if (context->argumentCount() == 1) {
+        QString _q_arg0 = context->argument(0).toString();
+        bool _q_result = QLocalServer::removeServer(_q_arg0);
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
     default:
     Q_ASSERT(false);
     }
@@ -247,6 +257,7 @@ QScriptValue qtscript_create_QLocalServer_class(QScriptEngine *engine)
     static const int function_lengths[] = {
         1
         // static
+        , 1
         // prototype
         , 0
         , 0
@@ -266,9 +277,9 @@ QScriptValue qtscript_create_QLocalServer_class(QScriptEngine *engine)
     QScriptValue proto = engine->newVariant(qVariantFromValue((QLocalServer*)0));
     proto.setPrototype(engine->defaultPrototype(qMetaTypeId<QObject*>()));
     for (int i = 0; i < 13; ++i) {
-        QScriptValue fun = engine->newFunction(qtscript_QLocalServer_prototype_call, function_lengths[i+1]);
+        QScriptValue fun = engine->newFunction(qtscript_QLocalServer_prototype_call, function_lengths[i+2]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
-        proto.setProperty(QString::fromLatin1(qtscript_QLocalServer_function_names[i+1]),
+        proto.setProperty(QString::fromLatin1(qtscript_QLocalServer_function_names[i+2]),
             fun, QScriptValue::SkipInEnumeration);
     }
 
@@ -277,6 +288,13 @@ QScriptValue qtscript_create_QLocalServer_class(QScriptEngine *engine)
 
     QScriptValue ctor = engine->newFunction(qtscript_QLocalServer_static_call, proto, function_lengths[0]);
     ctor.setData(QScriptValue(engine, uint(0xBABE0000 + 0)));
+    for (int i = 0; i < 1; ++i) {
+        QScriptValue fun = engine->newFunction(qtscript_QLocalServer_static_call,
+            function_lengths[i+1]);
+        fun.setData(QScriptValue(engine, uint(0xBABE0000 + i+1)));
+        ctor.setProperty(QString::fromLatin1(qtscript_QLocalServer_function_names[i+1]),
+            fun, QScriptValue::SkipInEnumeration);
+    }
 
     return ctor;
 }

@@ -19,6 +19,7 @@ static const char * const qtscript_QNetworkCookie_function_names[] = {
     // prototype
     , "domain"
     , "expirationDate"
+    , "isHttpOnly"
     , "isSecure"
     , "isSessionCookie"
     , "name"
@@ -26,6 +27,7 @@ static const char * const qtscript_QNetworkCookie_function_names[] = {
     , "path"
     , "setDomain"
     , "setExpirationDate"
+    , "setHttpOnly"
     , "setName"
     , "setPath"
     , "setSecure"
@@ -45,10 +47,12 @@ static const char * const qtscript_QNetworkCookie_function_signatures[] = {
     , ""
     , ""
     , ""
+    , ""
     , "QNetworkCookie other"
     , ""
     , "String domain"
     , "QDateTime date"
+    , "bool enable"
     , "QByteArray cookieName"
     , "String path"
     , "bool enable"
@@ -65,7 +69,7 @@ static QScriptValue qtscript_QNetworkCookie_throw_ambiguity_error_helper(
     QStringList fullSignatures;
     for (int i = 0; i < lines.size(); ++i)
         fullSignatures.append(QString::fromLatin1("%0(%1)").arg(functionName).arg(lines.at(i)));
-    return context->throwError(QString::fromLatin1("QFile::%0(): could not find a function match; candidates are:\n%1")
+    return context->throwError(QString::fromLatin1("QNetworkCookie::%0(): could not find a function match; candidates are:\n%1")
         .arg(functionName).arg(fullSignatures.join(QLatin1String("\n"))));
 }
 
@@ -103,7 +107,7 @@ static const char * const qtscript_QNetworkCookie_RawForm_keys[] = {
 static QString qtscript_QNetworkCookie_RawForm_toStringHelper(QNetworkCookie::RawForm value)
 {
     if ((value >= QNetworkCookie::NameAndValueOnly) && (value <= QNetworkCookie::Full))
-        return qtscript_QNetworkCookie_RawForm_keys[static_cast<int>(value)];
+        return qtscript_QNetworkCookie_RawForm_keys[static_cast<int>(value)-static_cast<int>(QNetworkCookie::NameAndValueOnly)];
     return QString();
 }
 
@@ -167,7 +171,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     if (context->callee().isFunction())
         _id = context->callee().data().toUInt32();
     else
-        _id = 0xBABE0000 + 15;
+        _id = 0xBABE0000 + 17;
 #endif
     Q_ASSERT((_id & 0xFFFF0000) == 0xBABE0000);
     _id &= 0x0000FFFF;
@@ -175,7 +179,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     if (!_q_self) {
         return context->throwError(QScriptContext::TypeError,
             QString::fromLatin1("QNetworkCookie.%0(): this object is not a QNetworkCookie")
-            .arg(qtscript_QNetworkCookie_function_names[_id+1]));
+            .arg(qtscript_QNetworkCookie_function_names[_id+2]));
     }
 
     switch (_id) {
@@ -195,26 +199,33 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
 
     case 2:
     if (context->argumentCount() == 0) {
-        bool _q_result = _q_self->isSecure();
+        bool _q_result = _q_self->isHttpOnly();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 3:
     if (context->argumentCount() == 0) {
-        bool _q_result = _q_self->isSessionCookie();
+        bool _q_result = _q_self->isSecure();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
     case 4:
     if (context->argumentCount() == 0) {
+        bool _q_result = _q_self->isSessionCookie();
+        return QScriptValue(context->engine(), _q_result);
+    }
+    break;
+
+    case 5:
+    if (context->argumentCount() == 0) {
         QByteArray _q_result = _q_self->name();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 5:
+    case 6:
     if (context->argumentCount() == 1) {
         QNetworkCookie _q_arg0 = qscriptvalue_cast<QNetworkCookie>(context->argument(0));
         bool _q_result = _q_self->operator==(_q_arg0);
@@ -222,14 +233,14 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 6:
+    case 7:
     if (context->argumentCount() == 0) {
         QString _q_result = _q_self->path();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
 
-    case 7:
+    case 8:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setDomain(_q_arg0);
@@ -237,7 +248,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 8:
+    case 9:
     if (context->argumentCount() == 1) {
         QDateTime _q_arg0 = context->argument(0).toDateTime();
         _q_self->setExpirationDate(_q_arg0);
@@ -245,7 +256,15 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 9:
+    case 10:
+    if (context->argumentCount() == 1) {
+        bool _q_arg0 = context->argument(0).toBoolean();
+        _q_self->setHttpOnly(_q_arg0);
+        return context->engine()->undefinedValue();
+    }
+    break;
+
+    case 11:
     if (context->argumentCount() == 1) {
         QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
         _q_self->setName(_q_arg0);
@@ -253,7 +272,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 10:
+    case 12:
     if (context->argumentCount() == 1) {
         QString _q_arg0 = context->argument(0).toString();
         _q_self->setPath(_q_arg0);
@@ -261,7 +280,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 11:
+    case 13:
     if (context->argumentCount() == 1) {
         bool _q_arg0 = context->argument(0).toBoolean();
         _q_self->setSecure(_q_arg0);
@@ -269,7 +288,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 12:
+    case 14:
     if (context->argumentCount() == 1) {
         QByteArray _q_arg0 = qscriptvalue_cast<QByteArray>(context->argument(0));
         _q_self->setValue(_q_arg0);
@@ -277,7 +296,7 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 13:
+    case 15:
     if (context->argumentCount() == 0) {
         QByteArray _q_result = _q_self->toRawForm();
         return qScriptValueFromValue(context->engine(), _q_result);
@@ -289,14 +308,14 @@ static QScriptValue qtscript_QNetworkCookie_prototype_call(QScriptContext *conte
     }
     break;
 
-    case 14:
+    case 16:
     if (context->argumentCount() == 0) {
         QByteArray _q_result = _q_self->value();
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
 
-    case 15: {
+    case 17: {
     QString result;
     QDebug d(&result);
     d << *_q_self;
@@ -374,8 +393,10 @@ QScriptValue qtscript_create_QNetworkCookie_class(QScriptEngine *engine)
         , 0
         , 0
         , 0
+        , 0
         , 1
         , 0
+        , 1
         , 1
         , 1
         , 1
@@ -388,7 +409,7 @@ QScriptValue qtscript_create_QNetworkCookie_class(QScriptEngine *engine)
     };
     engine->setDefaultPrototype(qMetaTypeId<QNetworkCookie*>(), QScriptValue());
     QScriptValue proto = engine->newVariant(qVariantFromValue((QNetworkCookie*)0));
-    for (int i = 0; i < 16; ++i) {
+    for (int i = 0; i < 18; ++i) {
         QScriptValue fun = engine->newFunction(qtscript_QNetworkCookie_prototype_call, function_lengths[i+2]);
         fun.setData(QScriptValue(engine, uint(0xBABE0000 + i)));
         proto.setProperty(QString::fromLatin1(qtscript_QNetworkCookie_function_names[i+2]),

@@ -10,7 +10,6 @@
 #include <qlist.h>
 #include <qnetworkproxy.h>
 #include <qobject.h>
-#include <qsslerror.h>
 #include <qtcpsocket.h>
 
 #define QTSCRIPT_IS_GENERATED_FUNCTION(fun) ((fun.data().toUInt32() & 0xFFFF0000) == 0xBABE0000)
