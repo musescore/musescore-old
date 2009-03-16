@@ -47,7 +47,7 @@ TextBase::TextBase()
       _refCount     = 1;
       _doc          = new QTextDocument(0);
       _doc->setUseDesignMetrics(true);
-      _doc->setUndoRedoEnabled(false);
+      _doc->setUndoRedoEnabled(true);
 
       _hasFrame     = false;
       _frameWidth   = 0.35;         // default line width
@@ -94,7 +94,7 @@ TextBase::TextBase(const TextBase& t)
 bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       {
       if (_doc->blockCount() > 1) {
-            // printf("blocks > 1: %s\n", qPrintable(getText()));
+            //printf("blocks > 1: %s\n", qPrintable(getText()));
             return false;
             }
       int fragments = 0;
@@ -126,9 +126,11 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
          && style->font().underline() == f.underline()
          && fi.italic() == f.italic())
             return true;
+
 //      printf("bad font: %s %f\n", qPrintable(getText()), spatium);
 //      printf("%s\n", qPrintable(style->font(spatium).toString()));
 //      printf("%s\n", qPrintable(f.toString()));
+
       return false;
       }
 

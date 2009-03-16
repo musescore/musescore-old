@@ -1089,29 +1089,24 @@ int Measure::snap(int tick, const QPointF p) const
 void Score::startEdit(Element* element)
       {
       origEditObject = element;
-      editObject     = element->clone();
-
-      int tp = editObject->type();
-      int st = editObject->subtype();
-      if (tp == TEXT && (st == TEXT_INSTRUMENT_SHORT || st == TEXT_INSTRUMENT_LONG)) {
-            TextC* in = static_cast<TextC*>(editObject);
-            oldInstrumentName = in->getHtml();
-            }
-
-      editObject->setSelected(false);
-      origEditObject->resetMode();
-      undoChangeElement(origEditObject, editObject);
-      select(editObject, SELECT_SINGLE, 0);
-      updateAll = true;
-      if (editObject->isTextB()) {
+      if (element->isTextB()) {
+            editObject = element;
             TextB* t = static_cast<TextB*>(editObject);
+            // t->doc()->setModified(false);
             canvas()->setEditText(t);
             mscore->textTools()->setText(t);
             mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
             mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
             }
-
-      layout()->removeBsp(origEditObject);
+      else {
+            editObject = element->clone();
+            editObject->setSelected(false);
+            origEditObject->resetMode();
+            undoChangeElement(origEditObject, editObject);
+            select(editObject, SELECT_SINGLE, 0);
+            layout()->removeBsp(origEditObject);
+            }
+      updateAll = true;
       end();
       }
 
@@ -1125,21 +1120,16 @@ void Score::endEdit()
       editObject->endEdit();
       refresh |= editObject->bbox();
 
-      int tp = editObject->type();
-      int st = editObject->subtype();
-
-      if (tp == TEXT && (st == TEXT_INSTRUMENT_SHORT || st == TEXT_INSTRUMENT_LONG)) {
-            UndoCommand* uc;
-            TextC* in = static_cast<TextC*>(editObject);
-            QString s = in->getHtml();
-            Part* part = in->staff()->part();
-            if (st == TEXT_INSTRUMENT_SHORT)
-                  uc = new ChangeInstrumentShort(part, s);
-            else
-                  uc = new ChangeInstrumentLong(part, s);
-            _undo->push(uc);
+      if (editObject->isTextB()) {
+            TextB* t = static_cast<TextB*>(editObject);
+            if (t->doc()->isUndoAvailable()) {
+                  _undo->push(new EditText(t));
+                  }
             }
-      else if (tp == LYRICS)
+
+      int tp = editObject->type();
+
+      if (tp == LYRICS)
             lyricsEndEdit();
       else if (tp == HARMONY)
             harmonyEndEdit();

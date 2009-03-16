@@ -1142,3 +1142,15 @@ void Harmony::layout(ScoreLayout* l)
       Text::layout(l);
       }
 
+//---------------------------------------------------------
+//   textStyleChanged
+//---------------------------------------------------------
+
+void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
+      {
+printf("style %d\n", _textStyle);
+      clear();
+      TextB::textStyleChanged(s);
+      buildText();
+      }
+
