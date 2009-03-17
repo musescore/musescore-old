@@ -162,6 +162,7 @@ add_executable ( mscore
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp sctext.cpp scbytearray.cpp
+      exportaudio.cpp
       ${AUDIO}
       )
 
@@ -204,6 +205,7 @@ if (MINGW)
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
+      libsndfile-1
       winmm
       )
 
@@ -212,6 +214,7 @@ if (MINGW)
    install_files ( /bin .dll
       ${CROSS}/bin/mingwm10.dll
       ${CROSS}/bin/portaudio.dll
+      ${CROSS}/bin/libsndfile-1.dll
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
@@ -261,6 +264,7 @@ else (MINGW)
       awl
       osdabzip
       rtf2html
+      sndfile
       )
 if (QT45)
    target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )

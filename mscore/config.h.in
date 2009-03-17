@@ -29,6 +29,7 @@
 #cmakedefine HAS_SCRIPT_DEBUG
 #cmakedefine HAS_SCRIPT_INTERFACE
 #cmakedefine STATIC_SCRIPT_BINDINGS
+#cmakedefine HAS_AUDIOFILE
 
 #define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"
