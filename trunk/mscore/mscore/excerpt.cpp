@@ -218,11 +218,11 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
                   }
             else {
                   if (el->track() != -1) {
-                        if (el->type() != VOLTA) {                      // HACK
+//                        if (el->type() != VOLTA) {                      // HACK
                               if (trackOffset[staffIdx] == HIDDEN)
                                     continue;
                               xml.trackDiff = trackOffset[staffIdx];
-                              }
+//                              }
                         }
                   }
             el->write(xml);

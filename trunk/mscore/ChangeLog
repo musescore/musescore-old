@@ -1,4 +1,5 @@
 17.mar (ws)
+      - fix: Voltas on multiple staves causes crash when creating parts
       - fix navigator action check state
       - Update of text undo functionality. Instrument names can be edited again.
 16.mar (ws)
