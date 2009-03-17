@@ -34,6 +34,7 @@ set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
 set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
 set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
+set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 

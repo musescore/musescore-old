@@ -1718,7 +1718,7 @@ int main(int argc, char* argv[])
             cs->layout()->doLayout();
 
             bool rv = true;
-            if (fn.endsWith(".msc")) {
+            if (fn.endsWith(".mscx")) {
                   QFileInfo fi(fn);
                   try {
                         cs->saveFile(fi, false);
@@ -1752,6 +1752,14 @@ int main(int argc, char* argv[])
                   rv = cs->saveSvg(fn);
             else if (fn.endsWith(".ly"))
                   rv = cs->saveLilypond(fn);
+#ifdef HAS_AUDIOFILE
+            else if (fn.endsWith(".wav"))
+                  rv = cs->saveWav(fn);
+            else if (fn.endsWith(".ogg"))
+                  rv = cs->saveOgg(fn);
+            else if (fn.endsWith(".flac"))
+                  rv = cs->saveFlac(fn);
+#endif
             else {
                   fprintf(stderr, "dont know how to convert to %s\n", outFileName);
                   rv = false;

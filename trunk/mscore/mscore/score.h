@@ -31,6 +31,7 @@
 #include "style.h"
 #include "durationtype.h"
 #include "select.h"
+#include "config.h"
 
 class System;
 class TextStyle;
@@ -576,7 +577,12 @@ class Score : public QObject {
       bool savePng(const QString& name);
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);
-
+#ifdef HAS_AUDIOFILE
+      bool saveOgg(const QString& name);
+      bool saveFlac(const QString& name);
+      bool saveWav(const QString& name);
+      bool saveAudio(const QString& name, int format);
+#endif
       ChordRest* getSelectedChordRest() const;
       Element* getSelectedElement() const { return sel->element(); }
       Selection* selection() const        { return sel; }
