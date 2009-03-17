@@ -1,4 +1,6 @@
 17.mar (ws)
+      - fix: set background of frames to transparent, when outputting to png in
+        "screen shot" mode.
       - fix: Measure length does not adjust for new time signature
       - fix: Bar lines through multiple staves causes crash when creating parts
       - fix: Voltas on multiple staves causes crash when creating parts
