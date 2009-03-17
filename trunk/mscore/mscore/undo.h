@@ -152,19 +152,6 @@ class SaveState : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   EditText
-//---------------------------------------------------------
-
-class EditText : public UndoCommand {
-      TextB* text;
-
-   public:
-      EditText(TextB* t) : text(t) {}
-      virtual void undo();
-      virtual void redo();
-      };
-
-//---------------------------------------------------------
 //   InsertPart
 //---------------------------------------------------------
 
@@ -943,6 +930,20 @@ class ChangeConcertPitch : public UndoCommand {
       ChangeConcertPitch(Score* s, bool val);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   EditText
+//---------------------------------------------------------
+
+class EditText : public UndoCommand {
+      TextB* text;
+      int undoLevel;
+
+   public:
+      EditText(TextB* t, int l) : text(t), undoLevel(l) {}
+      virtual void undo();
+      virtual void redo();
       };
 
 #endif

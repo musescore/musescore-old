@@ -1,3 +1,5 @@
+17.mar (ws)
+      - Update of text undo functionality. Instrument names can be edited again.
 16.mar (ws)
       - update core & network part of qtscript bindings
       - big overhaul of the undo/redo code

@@ -1092,11 +1092,12 @@ void Score::startEdit(Element* element)
       if (element->isTextB()) {
             editObject = element;
             TextB* t = static_cast<TextB*>(editObject);
-            // t->doc()->setModified(false);
             canvas()->setEditText(t);
             mscore->textTools()->setText(t);
             mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
             mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
+            textUndoLevel = 0;
+            connect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
       else {
             editObject = element->clone();
@@ -1111,6 +1112,15 @@ void Score::startEdit(Element* element)
       }
 
 //---------------------------------------------------------
+//   textUndoLevelAdded
+//---------------------------------------------------------
+
+void Score::textUndoLevelAdded()
+      {
+      ++textUndoLevel;
+      }
+
+//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 
@@ -1122,9 +1132,10 @@ void Score::endEdit()
 
       if (editObject->isTextB()) {
             TextB* t = static_cast<TextB*>(editObject);
-            if (t->doc()->isUndoAvailable()) {
-                  _undo->push(new EditText(t));
-                  }
+            // if (t->doc()->isUndoAvailable()) {
+            if (textUndoLevel)
+                  _undo->push(new EditText(t, textUndoLevel));
+            disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
 
       int tp = editObject->type();

@@ -248,6 +248,8 @@ class Score : public QObject {
       QString _workTitle;
       QString _source;
 
+      int textUndoLevel;
+
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
       ChordRest* prevMeasure(ChordRest* element);
       void cmdSetBeamMode(int);
@@ -317,6 +319,9 @@ class Score : public QObject {
 
       void resetUserStretch();
       void toDefault();
+
+   private slots:
+      void textUndoLevelAdded();
 
    signals:
       void selectionChanged(int);

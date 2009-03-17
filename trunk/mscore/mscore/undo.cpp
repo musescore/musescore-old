@@ -1822,13 +1822,13 @@ void ChangeBracketSpan::flip()
 
 void EditText::undo()
       {
-      while (text->doc()->isUndoAvailable())
+      for (int i = 0; i < undoLevel; ++i)
             text->doc()->undo();
       }
 
 void EditText::redo()
       {
-      while (text->doc()->isRedoAvailable())
+      for (int i = 0; i < undoLevel; ++i)
             text->doc()->redo();
       }
 
