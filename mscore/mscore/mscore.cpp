@@ -706,10 +706,10 @@ MuseScore::MuseScore()
       connect(playId, SIGNAL(toggled(bool)), SLOT(showPlayPanel(bool)));
       menuDisplay->addAction(playId);
 
-      navigatorId = getAction("toggle-navigator");
-      navigatorId->setCheckable(true);
-      connect(navigatorId, SIGNAL(toggled(bool)), SLOT(showNavigator(bool)));
-      menuDisplay->addAction(navigatorId);
+      a = getAction("toggle-navigator");
+      a->setCheckable(true);
+      connect(a, SIGNAL(toggled(bool)), SLOT(showNavigator(bool)));
+      menuDisplay->addAction(a);
 
       a = getAction("toggle-mixer");
       a->setCheckable(true);
@@ -1095,8 +1095,6 @@ void MuseScore::setCurrentScore(Score* score)
       cs->canvas()->setMag(m);
       cs->canvas()->setOffset(cs->xoff(), cs->yoff());
 
-
-      navigatorId->setChecked(cs->canvas()->navigatorVisible());
 
       setWindowTitle("MuseScore: " + cs->name());
       seq->setScore(cs);

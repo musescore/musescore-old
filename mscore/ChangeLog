@@ -1,4 +1,5 @@
 17.mar (ws)
+      - fix navigator action check state
       - Update of text undo functionality. Instrument names can be edited again.
 16.mar (ws)
       - update core & network part of qtscript bindings
