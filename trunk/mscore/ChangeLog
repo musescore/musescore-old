@@ -1,4 +1,5 @@
 17.mar (ws)
+      - fix: Measure length does not adjust for new time signature
       - fix: Bar lines through multiple staves causes crash when creating parts
       - fix: Voltas on multiple staves causes crash when creating parts
       - fix navigator action check state
