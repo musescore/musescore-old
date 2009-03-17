@@ -481,11 +481,11 @@ bool Score::read(QString name)
                         }
                   }
             }
+
       checkSlurs();
       checkTuplets();
       rebuildMidiMapping();
       updateChannel();
-//      _layout->doLayout();
       layoutAll = false;
       return true;
       }

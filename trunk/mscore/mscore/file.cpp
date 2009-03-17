@@ -1279,6 +1279,19 @@ bool Score::read(QDomElement e)
 //      _layout->doLayout();
 
       _fileDivision = division;
+
+      //
+      //    sanity check for barLineSpan
+      //
+      foreach(Staff* staff, _staves) {
+            int barLineSpan = staff->barLineSpan();
+            int idx = staffIdx(staff);
+            int n = nstaves();
+            if (idx + barLineSpan > n) {
+                  printf("bad span: idx %d  span %d staves %d\n", idx, barLineSpan, n);
+                  staff->setBarLineSpan(n - idx);
+                  }
+            }
       return true;
       }
 
