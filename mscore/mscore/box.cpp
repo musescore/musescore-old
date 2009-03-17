@@ -74,6 +74,7 @@ void Box::draw(QPainter& p) const
             double w = 2.0 / p.matrix().m11();
             pen.setWidthF(w);
             p.setPen(pen);
+            p.setBrush(QBrush());
             p.drawRect(bbox().adjusted(w, w, -w, -w));
             }
       }
