@@ -51,7 +51,6 @@ void MuseScore::showNavigator(bool visible)
       {
       if (cs)
             cs->canvas()->showNavigator(visible);
-      navigatorId->setChecked(visible);
       }
 
 void Canvas::showNavigator(bool visible)
@@ -67,6 +66,7 @@ void Canvas::showNavigator(bool visible)
             connect(navigator, SIGNAL(viewRectMoved(const QRectF&)), SLOT(setViewRect(const QRectF&)));
             }
       navigator->setShown(visible);
+      getAction("toggle-navigator")->setChecked(visible);
       }
 
 //---------------------------------------------------------

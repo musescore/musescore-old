@@ -173,7 +173,6 @@ class MuseScore : public QMainWindow {
       MagBox* mag;
 
       QAction* playId;
-      QAction* navigatorId;
       QAction* transportId;
       QAction* inputId;
 
