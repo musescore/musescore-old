@@ -378,6 +378,8 @@ bool Score::saveAs(bool saveCopy)
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
       fl.append(tr("Lilypond Format (*.ly)"));
       fl.append(tr("Wave Audio (*.wav)"));
+      fl.append(tr("Flac Audio (*.flac)"));
+      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
 
       QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
                                            tr("MuseScore: Save As");
@@ -467,12 +469,23 @@ bool Score::saveAs(bool saveCopy)
                   fn.append(".ly");
             rv = saveLilypond(fn);
             }
-
       else if (selectedFilter == fl[10]) {
             // save as wave file *.wav
             if (!fn.endsWith(".wav"))
                   fn.append(".wav");
             rv = saveWav(fn);
+            }
+      else if (selectedFilter == fl[11]) {
+            // save as lossless compressed audio file *.flac
+            if (!fn.endsWith(".flac"))
+                  fn.append(".flac");
+            rv = saveFlac(fn);
+            }
+      else if (selectedFilter == fl[12]) {
+            // save as compressed audio file *.ogg
+            if (!fn.endsWith(".ogg"))
+                  fn.append(".ogg");
+            rv = saveOgg(fn);
             }
 
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag

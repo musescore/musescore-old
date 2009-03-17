@@ -22,13 +22,14 @@ Licence:
       details.
 
 Requirements:
-      - qt4 gui lib version qt4.4.x
+      - qt4 gui lib version >= qt4.4.x
 
         Note that many linux distributions split packages into a user
         and developer package and that you need to install both.
 
       - ALSA Version 1.0 or newer (audio/midi input/output)
       - CMake >= 2.4.6
+      - libsndfile >= 1.0.18
 
       - recommended: JACK audio server (audio output)
 

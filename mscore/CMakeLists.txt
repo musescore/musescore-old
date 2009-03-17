@@ -19,11 +19,9 @@
 #=============================================================================
 
 project(mscore)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 cmake_policy(SET CMP0003 NEW)
-
-# cmake 2.4.3 does not install all.h and does not link against qtsvg
 
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)

@@ -205,9 +205,12 @@ if (MINGW)
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
-      libsndfile-1
       winmm
       )
+
+   if (HAS_AUDIOFILE)
+      target_link_libraries(mscore libsndfile-1)
+   endif (HAS_AUDIOFILE)
 
    install(TARGETS mscore RUNTIME DESTINATION bin)
 
@@ -266,6 +269,10 @@ else (MINGW)
       rtf2html
       sndfile
       )
+   if (HAS_AUDIOFILE)
+      target_link_libraries(mscore sndfile)
+   endif (HAS_AUDIOFILE)
+
 if (QT45)
    target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
 endif (QT45)
