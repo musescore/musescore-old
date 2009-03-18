@@ -715,6 +715,7 @@ void Score::undoToggleInvisible(Element* e)
 
 void Score::undoAddElement(Element* element)
       {
+      element->setScore(this);
       _undo->push(new AddElement(element));
       }
 
