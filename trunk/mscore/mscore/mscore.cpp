@@ -1359,16 +1359,11 @@ void MuseScore::removeTab(int i)
       tab->blockSignals(true);
       tab->removeTab(i);
       tab->blockSignals(false);
-      delete score;
-
       cs = 0;
       if (i >= (n-1))
             i = 0;
-      if (scoreList.isEmpty())
-            score = 0;
-      else
-            score = scoreList[i];
-      setCurrentScore(score);
+      setCurrentScore(scoreList.isEmpty() ? 0 : scoreList[i]);
+      delete score;
       }
 
 //---------------------------------------------------------
