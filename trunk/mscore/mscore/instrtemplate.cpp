@@ -283,7 +283,7 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
             s.sprintf("error reading file %s at line %d column %d: %s\n",
                instrTemplates.toLatin1().data(), line, column, err.toLatin1().data());
 
-            QMessageBox::critical(0, "MuseScore: Read File", s);
+            QMessageBox::critical(0, "MuseScore: Read Template File", s);
             return true;
             }
 

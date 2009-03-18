@@ -757,9 +757,7 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       a->setChecked(scriptDebug);
       menuHelp->addAction(a);
-#ifndef HAS_SCRIPT_DEBUG
       a->setEnabled(false);
-#endif
 
       menuHelp->addAction(whatsThis);
 

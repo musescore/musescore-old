@@ -26,8 +26,6 @@
 #cmakedefine MSCORE_UNSTABLE
 
 #cmakedefine HAS_MIDI
-#cmakedefine HAS_SCRIPT_DEBUG
-#cmakedefine HAS_SCRIPT_INTERFACE
 #cmakedefine STATIC_SCRIPT_BINDINGS
 #cmakedefine HAS_AUDIOFILE
 
@@ -36,5 +34,3 @@
 #define VERSION           "${Mscore_VERSION_FULL}"
 
 #cmakedefine USE_GLOBAL_FLUID
-
-

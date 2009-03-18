@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: xml.cpp,v 1.20 2006/04/05 08:15:12 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -410,12 +410,8 @@ QString Xml::htmlToString(QDomElement e)
 
 void Xml::writeHtml(const QString& s)
       {
-      if (QT_VERSION < 0x040400)
-            *this << s << "\n";
-      else {
-            QStringList sl(s.split("\n"));
-            for (int i = 1; i < sl.size(); ++i)
-                  *this << sl[i] << "\n";
-            }
+      QStringList sl(s.split("\n"));
+      for (int i = 1; i < sl.size(); ++i)
+            *this << sl[i] << "\n";
       }
 

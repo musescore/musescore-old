@@ -29,8 +29,6 @@ cmake_policy(SET CMP0003 NEW)
 set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
 
 set(USE_GLOBAL_FLUID FALSE)               # use internal fluid lib if false
-set(QT45 TRUE)                            # set to true if you use qt >= 4.5.0
-set(BUILD_SCRIPT_INTERFACE TRUE)          # this requires qt >= 4.4 && cmake 2.6
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
@@ -38,22 +36,14 @@ set(STATIC_SCRIPT_BINDINGS FALSE)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
-      set(QT45 TRUE)
       set(STATIC_SCRIPT_BINDINGS TRUE)
       set(USE_GLOBAL_FLUID FALSE)
 endif (MINGW)
 
 if (APPLE)
-      set (BUILD_SCRIPT_INTERFACE FALSE)
+      set(HAS_AUDIOFILE FALSE)            # requires libsndfile
+      set(STATIC_SCRIPT_BINDINGS TRUE)
 endif (APPLE)
-
-if (QT45)
-      set (HAS_SCRIPT_DEBUG TRUE)
-endif (QT45)
-
-if (BUILD_SCRIPT_INTERFACE)
-      set (HAS_SCRIPT_INTERFACE TRUE)
-endif (BUILD_SCRIPT_INTERFACE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
@@ -82,19 +72,18 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 ##  look for Qt4
 ##
 
-set(QT_MIN_VERSION "4.4.0")
+set(QT_MIN_VERSION "4.5.0")
 set(QT_USE_QTXML     TRUE)
 set(QT_USE_QTSVG     TRUE)
 set(QT_USE_QTNETWORK TRUE)
 set(QT_USE_QTUITOOLS TRUE)
 set(QT_USE_QTDESIGNER TRUE)
-# only available in cmake 2.5:
-set(QT_USE_QTSCRIPT TRUE)
+set(QT_USE_QTSCRIPT   TRUE)
 
-find_package(Qt4 "4.4")
+find_package(Qt4 "4.5")
 
 if (NOT QT4_FOUND)
-      message(FATAL_ERROR "Fatal error: QT (version >= 4.4.0) required."
+      message(FATAL_ERROR "Fatal error: QT (version >= 4.5.0) required."
          " Cmake tries to detect QT4 by searching for 'qmake' in your PATH."
          "If you have QT4 installed, make sure qmake is found in your PATH. "
          "If you compiled QT4 yourself make sure your new qmake ist found"
@@ -117,16 +106,11 @@ FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript
 FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
 FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
 
-if (QT45)
-      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
-      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
-endif (QT45)
+FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
 
 _QT4_ADJUST_LIB_VARS(QTSCRIPT)
 # _QT4_ADJUST_LIB_VARS(QTSCRIPT_TOOLS)
-
-#for cmake 2.4
-# QT_MODULE_SETUP(SCRIPT)
 
 include(${QT_USE_FILE})
 
@@ -204,15 +188,11 @@ if (NOT MINGW)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
-set (subdirs awl osdabzip rtf2html mscore share manual demos)
+set (subdirs awl osdabzip rtf2html mscore share manual demos scriptgen)
 
 if (NOT USE_GLOBAL_FLUID)
       set (subdirs ${subdirs} fluid)
 endif (NOT USE_GLOBAL_FLUID)
-
-if (BUILD_SCRIPT_INTERFACE)
-      set (subdirs ${subdirs} scriptgen)
-endif (BUILD_SCRIPT_INTERFACE)
 
 if (MINGW)
       set (subdirs ${subdirs} portmidi)
