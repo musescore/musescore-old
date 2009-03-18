@@ -916,6 +916,7 @@ void MuseScore::appendScore(Score* score)
                   scoreList.insert(i, score);
                   tab->blockSignals(true);
                   tab->insertTab(i, score->canvas(), score->name());
+                  _undoGroup->addStack(score->undo());
                   tab->blockSignals(false);
                   return;
                   }
@@ -1063,6 +1064,8 @@ void MuseScore::setCurrentScore(Score* score)
             }
       if (!enable) {
             changeState(STATE_DISABLED);
+            seq->setScore(0);
+            _undoGroup->setActiveStack(0);
             return;
             }
 
