@@ -661,7 +661,8 @@ class Score : public QObject {
       bool isVolta(int tick, int repeat) const;
       void toEList(EventMap* events, int tickOffset);
       void toEList(EventMap* events, bool expandRepeats, int tickOffset, int staffIdx);
-      int mscVersion() const { return _mscVersion; }
+      int mscVersion() const    { return _mscVersion; }
+      void setMscVersion(int v) { _mscVersion = v; }
 
       SigList*   getSigmap()  { return sigmap; }
       MeasureBase* appendMeasure(int type);

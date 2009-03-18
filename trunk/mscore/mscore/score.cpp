@@ -261,6 +261,7 @@ bool Score::needLayout() const
 
 Score::Score(const Style& s)
       {
+//      _mscVersion = MSCVERSION;
       info.setFile("");
 
       _undo = new UndoStack();
@@ -308,8 +309,8 @@ Score::~Score()
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete tempomap;
       delete sigmap;
-      delete sel;
       delete _layout;
+      delete sel;
       }
 
 //---------------------------------------------------------

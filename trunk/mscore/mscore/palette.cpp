@@ -1146,9 +1146,11 @@ bool PaletteBox::read(QFile* qf)
       docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  // QString version = e.attribute(QString("version"));
-                  // QStringList sl = version.split('.');
-                  // int versionId = sl[0].toInt() * 100 + sl[1].toInt();
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  int versionId = sl[0].toInt() * 100 + sl[1].toInt();
+                  gscore->setMscVersion(versionId);
+
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "Palette") {
