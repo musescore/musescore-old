@@ -109,8 +109,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1622 révisée JLW 11/03/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1622</translation>
+        <translatorcomment>r1631 révisée JLW 17/03/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1631</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2612,15 +2612,15 @@ failed: </source>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation type="unfinished"></translation>
+        <translation>ajouter au numéro de mesure</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>étirer la mise en page</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de répétitions :</translation>
     </message>
 </context>
 <context>
