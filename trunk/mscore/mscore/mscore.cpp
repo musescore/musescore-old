@@ -300,8 +300,9 @@ MuseScore::MuseScore()
       _statusBar = new QStatusBar;
       _statusBar->addPermanentWidget(_modeText, 0);
       _statusBar->addPermanentWidget(_positionLabel, 0);
-
       setStatusBar(_statusBar);
+
+      _progressBar = 0;
 
       QAction* a;
 
@@ -2199,5 +2200,24 @@ void MuseScore::redo()
       _undoGroup->redo();
       if (cs)
             cs->endUndoRedo();
+      }
+
+//---------------------------------------------------------
+//   showProgressBar
+//---------------------------------------------------------
+
+QProgressBar* MuseScore::showProgressBar()
+      {
+      if (_progressBar == 0)
+            _progressBar = new QProgressBar(this);
+      _statusBar->addWidget(_progressBar);
+      _progressBar->show();
+      return _progressBar;
+      }
+
+void MuseScore::hideProgressBar()
+      {
+      if (_progressBar)
+            _statusBar->removeWidget(_progressBar);
       }
 

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: exportly.cpp,v 1.71 2006/03/28 14:58:58 wschweer Exp $
 //
-//  Copyright (C) 2007 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,15 +18,20 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <sndfile.h>
-
 #include "config.h"
+
+#ifdef HAS_AUDIOFILE
+
+#include <sndfile.h>
 #include "score.h"
 #include "fluid.h"
 #include "tempo.h"
 #include "note.h"
+#include "mscore.h"
 
-#ifdef HAS_AUDIOFILE
+//---------------------------------------------------------
+//   playEvent
+//---------------------------------------------------------
 
 static void playEvent(Score* cs, ISynth* driver, const Event* event)
       {
@@ -86,6 +91,13 @@ bool Score::saveAudio(const QString& name, int format)
             return false;
             }
 
+      QProgressBar* pBar = mscore->showProgressBar();
+      pBar->reset();
+      EventMap::const_iterator endPos = events.constEnd();
+      --endPos;
+      double f = tempomap->tick2time(endPos.key());
+      pBar->setRange(0, int(f));
+
       static const unsigned int FRAMES = 512;
       float buffer[FRAMES * 2];
       int stride = 2;
@@ -119,7 +131,11 @@ bool Score::saveAudio(const QString& name, int format)
             sf_writef_float(sf, buffer, FRAMES);
             if (playPos == events.constEnd())
                   break;
+            double f = tempomap->tick2time(playPos.key());
+            pBar->setValue(int(f));
             }
+
+      mscore->hideProgressBar();
 
       if (sf_close(sf)) {
             fprintf(stderr, "close soundfile failed\n");

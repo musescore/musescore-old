@@ -112,7 +112,11 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
 
       double extraMag = 1.0;
       double mag = _spatium * extraMag / (SPATIUM20 * DPI);
+#ifdef Q_WS_MAC
+      QFont font("MScore1 20");
+#else
       QFont font("MScore1");
+#endif
       font.setPointSizeF(12.0 * mag);     // TODO: get from style
 
       QString sName;

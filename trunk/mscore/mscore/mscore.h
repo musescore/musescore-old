@@ -175,6 +175,7 @@ class MuseScore : public QMainWindow {
       QAction* transportId;
       QAction* inputId;
 
+      QProgressBar* _progressBar;
       PreferenceDialog* preferenceDialog;
       QToolBar* cpitchTools;
       QToolBar* fileTools;
@@ -337,6 +338,8 @@ class MuseScore : public QMainWindow {
       TextTools* textTools();
       void updateTabNames();
       void setCurrentScore(Score*);
+      QProgressBar* showProgressBar();
+      void hideProgressBar();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

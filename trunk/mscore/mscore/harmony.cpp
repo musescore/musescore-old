@@ -796,7 +796,11 @@ void Harmony::buildText()
       cursor.setPosition(0);
       QTextCharFormat f = cursor.charFormat();
       QTextCharFormat noteSymbolFormat(f);
+#ifdef Q_WS_MAC
+      noteSymbolFormat.setFont(QFont("MScore1 20"));
+#else
       noteSymbolFormat.setFont(QFont("MScore1"));
+#endif
 
       QTextCharFormat snoteSymbolFormat(noteSymbolFormat);
       snoteSymbolFormat.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
