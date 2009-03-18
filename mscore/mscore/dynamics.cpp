@@ -123,7 +123,11 @@ void Dynamic::setSubtype(int idx)
                   m *= (::_spatium / (SPATIUM20 * DPI));
             m *= mag();
 
+#ifdef Q_WS_MAC
+            QFont font("MScore1 20");
+#else
             QFont font("MScore1");
+#endif
             font.setPixelSize(lrint(m));
             tf.setFont(font);
             cursor.setBlockCharFormat(tf);

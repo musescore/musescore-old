@@ -153,11 +153,19 @@ QFont fontId2font(int fontId)
       //
       int size = lrint(20.0 * DPI / PPI);
       if (fontId == 0) {
+#ifdef Q_WS_MAC
+            _font = QFont("MScore 20");
+#else
             _font = QFont("MScore");
+#endif
             _font.setStyleStrategy(QFont::NoFontMerging);
             }
       else if (fontId == 1) {
+#ifdef Q_WS_MAC
+            _font = QFont("MScore1 20");
+#else
             _font = QFont("MScore1");
+#endif
             }
       else if (fontId == 2) {
             _font = QFont("Times New Roman");

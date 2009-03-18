@@ -440,6 +440,10 @@ void setDefaultStyle()
 
 QFont TextStyle::font(double _spatium) const
       {
+#ifdef Q_WS_MAC
+      if (family == "MScore")
+            family = "Mscore 20";
+#endif
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);

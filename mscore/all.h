@@ -101,6 +101,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QUndoGroup>
 #include <QtGui/QUndoStack>
+#include <QtGui/QProgressBar>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

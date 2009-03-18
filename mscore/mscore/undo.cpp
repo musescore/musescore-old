@@ -279,7 +279,6 @@ void UndoGroup::removeStack(UndoStack* stack)
 
 void UndoGroup::setActiveStack(UndoStack* stack)
       {
-printf("setActive stack %p\n", stack);
       bool a = canUndo();
       bool b = canRedo();
       bool c = isClean();
