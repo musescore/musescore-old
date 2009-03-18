@@ -1,3 +1,6 @@
+18.mar (ws)
+      - fixed memory corruption in ~Score(). This may fix the crashes seen on
+        removing a score (Ctrl+w).
 17.mar (ws)
       - added wave/ogg-vorbis/flac output; this requires libsndfile-19;
         example: "mscore promenade.mscx -o promenade.wav"
