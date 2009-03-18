@@ -1,4 +1,5 @@
 18.mar (ws)
+      - fix: crash when adding symbols
       - show progress bar while rendering audio output file
       - set minimum required version for qt to 4.5
       - fixed memory corruption in ~Score(). This may fix the crashes seen on
