@@ -22,11 +22,6 @@
 #include "globals.h"
 #include "script.h"
 #include "config.h"
-
-#if (QT_VERSION < 0x040500)
-#include "qscriptembeddeddebugger.h"
-#endif
-
 #include "scscore.h"
 #include "scchord.h"
 #include "sccursor.h"
@@ -169,7 +164,6 @@ void MuseScore::loadPlugins()
 ScriptEngine::ScriptEngine()
    : QScriptEngine()
       {
-#ifdef HAS_SCRIPT_INTERFACE
       const char* xts[] = {
             "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
             };
@@ -180,7 +174,6 @@ ScriptEngine::ScriptEngine()
                   printf("%s\n", qPrintable(val.toString()));
                   }
             }
-#endif
 
       baClass = new ByteArrayClass(this);
       globalObject().setProperty("ByteArray", baClass->constructor());
@@ -238,7 +231,6 @@ void MuseScore::pluginTriggered(int idx)
                         printf("  <%s>\n", qPrintable(s));
                   }
             }
-#ifdef HAS_SCRIPT_DEBUG
       if (scriptDebug) {
             if (debugger == 0) {
                   debugger = new QScriptEngineDebugger();
@@ -246,7 +238,7 @@ void MuseScore::pluginTriggered(int idx)
                   }
             debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
             }
-#endif
+
       QScriptValue v = se->getScoreClass()->newInstance(cs);
       se->globalObject().setProperty("curScore", v);
 

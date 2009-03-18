@@ -1096,7 +1096,7 @@ bool Score::loadCompressedMsc(QString name)
 
 bool Score::loadMsc(QString name)
       {
-      QString ext(".msc");
+      QString ext(".mscx");
 
       info.setFile(name);
       if (info.suffix().isEmpty()) {

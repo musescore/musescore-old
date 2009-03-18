@@ -166,10 +166,6 @@ add_executable ( mscore
       ${AUDIO}
       )
 
-if (BUILD_SCRIPT_DEBUG)
-      target_link_libraries(mscore qtscript_debug)
-endif (BUILD_SCRIPT_DEBUG)
-
 if (STATIC_SCRIPT_BINDINGS)
       target_link_libraries(mscore
             qtscript_core
@@ -261,13 +257,13 @@ else (MINGW)
       ${QT_LIBRARIES}
       QtUiTools
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
+      ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${ALSA_LIB}
       ${JACK_LIB}
       ${PORTAUDIO_LIB}
       awl
       osdabzip
       rtf2html
-      sndfile
       )
    if (HAS_AUDIOFILE)
       target_link_libraries(mscore sndfile)

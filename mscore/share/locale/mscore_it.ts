@@ -6493,6 +6493,18 @@ selezionare una battuta e riprovare</translation>
         <source>MuseScore Format (*.mscx)</source>
         <translation>Formato MuseScore (*.mscx)</translation>
     </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>

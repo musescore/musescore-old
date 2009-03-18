@@ -1,4 +1,5 @@
 18.mar (ws)
+      - set minimum required version for qt to 4.5
       - fixed memory corruption in ~Score(). This may fix the crashes seen on
         removing a score (Ctrl+w).
 17.mar (ws)
