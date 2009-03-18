@@ -348,6 +348,7 @@ void Canvas::resizeEvent(QResizeEvent*)
 void Canvas::updateNavigator(bool layoutChanged) const
       {
       if (navigator) {
+            navigator->setScore(_score);  // adapt to new paper size
             if (layoutChanged)
                   navigator->layoutChanged();
             QRectF r(0.0, 0.0, width(), height());

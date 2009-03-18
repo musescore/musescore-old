@@ -1,4 +1,5 @@
 18.mar (ws)
+      - fix: adapt navigator view when changing paper size
       - fix: crash when adding symbols
       - show progress bar while rendering audio output file
       - set minimum required version for qt to 4.5
