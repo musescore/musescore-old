@@ -2564,7 +2564,7 @@ failed: </source>
     </message>
     <message>
         <source>actual</source>
-        <translation>gebruiken</translation>
+        <translation>actueel</translation>
     </message>
     <message>
         <source>Other</source>
@@ -2600,15 +2600,15 @@ failed: </source>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation type="unfinished"></translation>
+        <translation>voeg toe aan maatnummer</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>indeling uittrekken</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation type="unfinished"></translation>
+        <translation>herhaal telling:</translation>
     </message>
 </context>
 <context>
@@ -4490,7 +4490,7 @@ Toonhoogte</translation>
     </message>
     <message>
         <source>Breaks/Spacer</source>
-        <translation>Onderbr./Verbindingen</translation>
+        <translation>Onderbr./Spaties</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -4948,7 +4948,7 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Afbreken</translation>
+        <translation>Haak</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -6345,7 +6345,7 @@ en probeer het dan opnieuw</translation>
     <message>
         <source>Open Temp File
 </source>
-        <translation></translation>
+        <translation>Open Temp Bestand</translation>
     </message>
     <message>
         <source>
@@ -6386,6 +6386,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Save As</source>
+        <translatorcomment>Musescore Opslaan Als</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -6432,7 +6433,7 @@ failed: </source>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation>PostScript File (*.ps)</translation>
+        <translation>PostScript Bestand (*.ps)</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -6480,15 +6481,15 @@ failed: </source>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
