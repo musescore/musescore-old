@@ -101,8 +101,10 @@ void Seq::setScore(Score* s)
             }
       cs = s;
       playlistChanged = true;
-      if (cs)
+      if (cs) {
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+            initInstruments();
+            }
       }
 
 //---------------------------------------------------------
@@ -670,7 +672,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
 void Seq::initInstruments()
       {
-      foreach(Part* part, *cs->parts()) {
+      foreach(const Part* part, *cs->parts()) {
             const Instrument* instr = part->instrument();
 
             foreach(const Channel* a, instr->channel) {

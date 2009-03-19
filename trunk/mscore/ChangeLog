@@ -1,3 +1,5 @@
+19.mar (ws)
+      - audio output: added missing synthesizer initialization;
 18.mar (ws)
       - fix: adapt navigator view when changing paper size
       - fix: crash when adding symbols
