@@ -96,8 +96,9 @@ bool Score::saveAudio(const QString& name, int format)
       pBar->reset();
       EventMap::const_iterator endPos = events.constEnd();
       --endPos;
-      double f = tempomap->tick2time(endPos.key());
-      pBar->setRange(0, int(f));
+      double et = tempomap->tick2time(endPos.key());
+      et += 1.0;   // add trailer (sec)
+      pBar->setRange(0, int(et));
 
       //
       // init instruments
@@ -117,7 +118,7 @@ bool Score::saveAudio(const QString& name, int format)
 
       static const unsigned int FRAMES = 512;
       float buffer[FRAMES * 2];
-      int stride = 2;
+      int stride      = 2;
       double playTime = 0.0;
 
       for (;;) {
@@ -146,10 +147,10 @@ bool Score::saveAudio(const QString& name, int format)
                   playTime += double(frames)/double(sampleRate);
                   }
             sf_writef_float(sf, buffer, FRAMES);
-            if (playPos == events.constEnd())
+            playTime = endTime;
+            pBar->setValue(int(playTime));
+            if (playTime > et)
                   break;
-            double f = tempomap->tick2time(playPos.key());
-            pBar->setValue(int(f));
             }
 
       mscore->hideProgressBar();
