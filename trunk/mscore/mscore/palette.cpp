@@ -157,8 +157,10 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       int i = idx(ev->pos());
       if (i == -1)
             return;
-      Score* score        = mscore->currentScore();
-      Selection* sel      = score->selection();
+      Score* score   = mscore->currentScore();
+      if (score == 0)
+            return;
+      Selection* sel = score->selection();
 
       if (sel->state() == SEL_NONE)
             return;

@@ -1,4 +1,6 @@
 19.mar (ws)
+      - fixed: voltas and other line types on multiple staves do not anchor
+        properly
       - fixed: 8va affects all staves instead of single staff
       - audio output: added missing synthesizer initialization;
 18.mar (ws)
