@@ -1247,6 +1247,7 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "HairPin") {
                         Hairpin* hairpin = new Hairpin(this);
+                        hairpin->setTick(curTick);
                         hairpin->read(ee);
                         if (hairpin->tick2() == hairpin->tick()) {
                               printf("removed zero length hairpin\n");
@@ -1257,26 +1258,31 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "Ottava") {
                         Ottava* ottava = new Ottava(this);
+                        ottava->setTick(curTick);
                         ottava->read(ee);
                         _layout->add(ottava);
                         }
                   else if (tag == "TextLine") {
                         TextLine* textLine = new TextLine(this);
+                        textLine->setTick(curTick);
                         textLine->read(ee);
                         _layout->add(textLine);
                         }
                   else if (tag == "Volta") {
                         Volta* volta = new Volta(this);
+                        volta->setTick(curTick);
                         volta->read(ee);
                         _layout->add(volta);
                         }
                   else if (tag == "Trill") {
                         Trill* trill = new Trill(this);
+                        trill->setTick(curTick);
                         trill->read(ee);
                         _layout->add(trill);
                         }
                   else if (tag == "Pedal") {
                         Pedal* pedal = new Pedal(this);
+                        pedal->setTick(curTick);
                         pedal->read(ee);
                         _layout->add(pedal);
                         }
