@@ -227,8 +227,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                         }
                   int ottavaShift = 0;
                   foreach(Element* e, *m->score()->gel()) {
-                        if (e->type() == OTTAVA) {
-                              Ottava* ottava = (Ottava*)e;
+                        if ((e->type() == OTTAVA) && (e->staffIdx() == staffIdx)) {
+                              Ottava* ottava = static_cast<Ottava*>(e);
                               int tick1 = ottava->tick();
                               int tick2 = ottava->tick2();
                               if (tick >= tick1 && tick < tick2) {
@@ -236,7 +236,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
                                     }
                               }
                         else if (e->type() == SLUR) {
-                              Slur* slur = (Slur*)e;
+                              Slur* slur = static_cast<Slur*>(e);
+                              if (slur->startElement()->staffIdx() != staffIdx)
+                                    continue;
                               int tick1 = slur->tick();
                               int tick2 = slur->tick2();
                               if (tick >= tick1 && tick < tick2 && slur->track() == track) {
