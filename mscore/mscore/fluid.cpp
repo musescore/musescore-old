@@ -62,6 +62,8 @@ bool ISynth::init(int sampleRate)
             //
             p = ":/data/piano1.sf2";
             }
+      if (debugMode)
+            printf("load soundfont <%s>\n", qPrintable(p));
       bool rv = loadSoundFont(p);
       if (!rv) {
             QString s = QString("Loading Soundfont\n"

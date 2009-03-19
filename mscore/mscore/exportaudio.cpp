@@ -28,6 +28,7 @@
 #include "tempo.h"
 #include "note.h"
 #include "mscore.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   playEvent
@@ -97,6 +98,22 @@ bool Score::saveAudio(const QString& name, int format)
       --endPos;
       double f = tempomap->tick2time(endPos.key());
       pBar->setRange(0, int(f));
+
+      //
+      // init instruments
+      //
+      foreach(const Part* part, _parts) {
+            const Instrument* instr = part->instrument();
+
+            foreach(const Channel* a, instr->channel) {
+                  foreach(Event* e, a->init) {
+                        if (e == 0)
+                              continue;
+                        e->setChannel(a->channel);
+                        playEvent(this, synth, e);
+                        }
+                  }
+            }
 
       static const unsigned int FRAMES = 512;
       float buffer[FRAMES * 2];
