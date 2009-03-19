@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<!DOCTYPE TS><TS>
 <context>
     <name></name>
     <message>
@@ -28,11 +26,11 @@
         <translation>Inglese (US)</translation>
     </message>
     <message>
-        <source>EspaÃ±ol</source>
+        <source>Espa&#xc3;&#xb1;ol</source>
         <translation>Spagnolo</translation>
     </message>
     <message>
-        <source>FranÃ§ais</source>
+        <source>Fran&#xc3;&#xa7;ais</source>
         <translation>Francese</translation>
     </message>
     <message>
@@ -52,19 +50,19 @@
         <translation>Italiano</translation>
     </message>
     <message>
-        <source>PortuguÃªs</source>
+        <source>Portugu&#xc3;&#xaa;s</source>
         <translation>Portoghese</translation>
     </message>
     <message>
-        <source>Brasilian PortuguÃªs</source>
+        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
         <translation>Portoghese brasiliano</translation>
     </message>
     <message>
-        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
+        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
         <translation>Russo</translation>
     </message>
     <message>
-        <source>TÃ¼rkÃ§e</source>
+        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
         <translation>Turco</translation>
     </message>
     <message>
@@ -104,11 +102,11 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Versione: 0.9.5</translation>
+        <translation>Version: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Revisione: 1610</translation>
+        <translation>Revision: 628</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -120,14 +118,14 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;(new line)
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;(new line)
-p, li { white-space: pre-wrap; }(new line)
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;(new line)
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;(new line)
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;(new line)
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;(new line)
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;(new line)
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://www.musescore.org for new versions and&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -135,11 +133,11 @@ p, li { white-space: pre-wrap; }(new line)
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Prerelease instabile della versione:</translation>
+        <translation>Prerelease instabile della versione: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Versione:</translation>
+        <translation>Versione: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
@@ -1018,7 +1016,7 @@ p, li { white-space: pre-wrap; }(new line)
     </message>
     <message>
         <source>Tuplet</source>
-        <translation>Gruppi Irregolari</translation>
+        <translation>Gruppi irregolari</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1351,31 +1349,31 @@ fallito: </translation>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolo</translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancoraggio</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentagramma superiore</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentagramma inferiore</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Accordo</translation>
+        <translation>Accordo</translation>
     </message>
     <message>
         <source>TopChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Accordo superiore</translation>
     </message>
     <message>
         <source>BottomChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Accordo inferiore</translation>
     </message>
 </context>
 <context>
@@ -1574,7 +1572,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>Soglia Riempimento Ultimo Sistema</translation>
+        <translation>Soglia riempimento ultimo sistema</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1710,16 +1708,16 @@ fallito: </translation>
     </message>
     <message>
         <source>dot dot distance</source>
-        <translation>Distamza tra punto e punto</translation>
+        <translation>Distanza tra punto e punto</translation>
     </message>
     <message>
         <source>ledger line width</source>
-        <translation>larghezza della liea</translation>
+        <translation>Larghezza della linea</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished">spazi</translation>
+        <translation>spazi</translation>
     </message>
 </context>
 <context>
@@ -2523,7 +2521,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Tuplets:</source>
-        <translation>Gruppi Irregolari:</translation>
+        <translation>Gruppi irregolari:</translation>
     </message>
     <message>
         <source>Segments:</source>
@@ -2602,7 +2600,7 @@ fallito: </translation>
     </message>
     <message>
         <source>SlashStyle</source>
-        <translation>Sile slash</translation>
+        <translation>Stile slash</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -2610,15 +2608,15 @@ fallito: </translation>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation type="unfinished"></translation>
+        <translation>aggiungi al numero di battuta</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>allargamento</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation type="unfinished"></translation>
+        <translation>conteggio ripetizione:</translation>
     </message>
 </context>
 <context>
@@ -2722,7 +2720,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation>Poeta</translation>
+        <translation>Paroliere</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -2978,7 +2976,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Add Note</source>
-        <translation>Aggiungi nota</translation>
+        <translation>Aggiungi Nota</translation>
     </message>
     <message>
         <source>Breaks...</source>
@@ -3718,7 +3716,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation>Gruppi Irregolari</translation>
+        <translation>Gruppi irregolari</translation>
     </message>
     <message>
         <source>Clefs</source>
@@ -3838,7 +3836,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Nome Accordo</translation>
+        <translation>Nome accordo</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
@@ -3846,11 +3844,11 @@ fallito: </translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation>Aggiungi Segno di Prova</translation>
+        <translation>Aggiungi segno di prova</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Segno di Prova</translation>
+        <translation>Segno di prova</translation>
     </message>
     <message>
         <source>player play</source>
@@ -3914,7 +3912,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Diritti d&apos;Autore</translation>
+        <translation>Diritti d&apos;autore</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
@@ -4178,15 +4176,15 @@ fallito: </translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Altri Gruppi Irregolari</translation>
+        <translation>Altri gruppi irregolari</translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation>Nome Completo Strumento</translation>
+        <translation>Nome completo strumento</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation>Abbreviazione Nome Strumento</translation>
+        <translation>Abbreviazione nome strumento</translation>
     </message>
     <message>
         <source>Symbols1</source>
@@ -4198,7 +4196,7 @@ fallito: </translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
-        <translation>Estratto Strumento</translation>
+        <translation>Parte strumento</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -4206,15 +4204,15 @@ fallito: </translation>
     </message>
     <message>
         <source>Measure Number</source>
-        <translation>Numero Battuta</translation>
+        <translation>Numero battuta</translation>
     </message>
     <message>
         <source>Page Number Odd</source>
-        <translation>Numeri di Pagina Dispari</translation>
+        <translation>Numeri di pagina dispari</translation>
     </message>
     <message>
         <source>Page Number Even</source>
-        <translation>Numeri di Pagina Pari</translation>
+        <translation>Numeri di pagina pari</translation>
     </message>
     <message>
         <source>Translator</source>
@@ -4230,11 +4228,11 @@ fallito: </translation>
     </message>
     <message>
         <source>Chordname</source>
-        <translation>Nome Accordo</translation>
+        <translation>Nome accordo</translation>
     </message>
     <message>
         <source>Repeat Text</source>
-        <translation>Ripeti Testo</translation>
+        <translation>Ripeti testo</translation>
     </message>
     <message>
         <source>Volta</source>
@@ -4470,11 +4468,11 @@ fallito: </translation>
     </message>
     <message>
         <source>String Number</source>
-        <translation>Numero Corda</translation>
+        <translation>Numero corda</translation>
     </message>
     <message>
         <source>file save a copy</source>
-        <translation>salva unacopia del file</translation>
+        <translation>salva una copia del file</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
@@ -4702,7 +4700,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation>inserisci ottava inferiore</translation>
+        <translation>Inserisci ottava inferiore</translation>
     </message>
     <message>
         <source>Ninth Below</source>
@@ -4755,7 +4753,7 @@ fallito: </translation>
     <message>
         <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Salvare le modifiche della partitura &quot;%1&quot;(new line)
+        <translation>Salvare le modifiche della partitura &quot;%1&quot;
 prima di chiudere?</translation>
     </message>
     <message>
@@ -4999,7 +4997,7 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>slur</source>
-        <translation type="unfinished"></translation>
+        <translation>legatura di portamento</translation>
     </message>
 </context>
 <context>
@@ -5026,7 +5024,7 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation>Diritti d&apos;Autore:</translation>
+        <translation>Diritti d&apos;autore:</translation>
     </message>
     <message>
         <source>Create new score from template</source>
@@ -5760,7 +5758,7 @@ prima di chiudere?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Iterrompi</translation>
+        <translation>Interrompi</translation>
     </message>
     <message>
         <source>Play</source>
@@ -6083,11 +6081,11 @@ prima di chiudere?</translation>
         <translation>ms</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with ½ ...</source>
+        <source>Replace 1/2 ... with &#xbd; ...</source>
         <translation>Sostituisci 1/2 ... con ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with © ... in Copyright Text</source>
+        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
         <translation>Sostituisci (C) ... con © ... nellla casella di testo Copyright</translation>
     </message>
 </context>
@@ -6317,19 +6315,19 @@ selezionare una nota o una pausa e ripetere l&apos;operazione
     </message>
     <message>
         <source>Anchor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancoraggio:</translation>
     </message>
     <message>
         <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmento</translation>
     </message>
     <message>
         <source>MEASURE</source>
-        <translation type="unfinished"></translation>
+        <translation>Battuta</translation>
     </message>
     <message>
         <source>digonal</source>
-        <translation type="unfinished"></translation>
+        <translation>diagonale</translation>
     </message>
 </context>
 <context>
@@ -6495,15 +6493,15 @@ selezionare una battuta e riprovare</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wave Audio (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
+        <translation>Flac Audio (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
 </context>
 <context>
@@ -6883,23 +6881,23 @@ selezionare una battuta e riprovare</translation>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formato</translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished">Linea di Testo</translation>
+        <translation>Linea di testo</translation>
     </message>
     <message>
         <source>line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>larghezza linea:</translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation type="unfinished"></translation>
+        <translation>inizio testo</translation>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation type="unfinished"></translation>
+        <translation>continuazione testo</translation>
     </message>
 </context>
 <context>
