@@ -381,12 +381,11 @@ class ChangeAccidental : public UndoCommand {
       int pitch;
       int tpc;
       int acc;
-      void flip();
 
    public:
-      ChangeAccidental(Note*, int pitch, int tpc, int acc);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
+      ChangeAccidental(Note*, int acc);
+      virtual void undo();
+      virtual void redo();
       };
 
 //---------------------------------------------------------

@@ -697,7 +697,7 @@ void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
 
 void Score::undoChangeAccidental(Note* note, int accidental)
       {
-      _undo->push(new ChangeAccidental(note, note->pitch(), note->tpc(), accidental));
+      _undo->push(new ChangeAccidental(note, accidental));
       }
 
 //---------------------------------------------------------
@@ -1078,15 +1078,22 @@ void ChangeTpc::flip()
 //   ChangeAccidental
 //---------------------------------------------------------
 
-ChangeAccidental::ChangeAccidental(Note* _note, int _pitch, int _tpc, int _acc)
+ChangeAccidental::ChangeAccidental(Note* _note, int _acc)
       {
       note  = _note;
-      pitch = _pitch;
-      tpc   = _tpc;
       acc   = _acc;
       }
 
-void ChangeAccidental::flip()
+void ChangeAccidental::redo()
+      {
+      pitch = note->pitch();
+      tpc   = note->tpc();
+      int a = note->accidentalSubtype();
+      note->changeAccidental(acc);
+      acc   = a;
+      }
+
+void ChangeAccidental::undo()
       {
       int a  = note->pitch();
       int b  = note->tpc();

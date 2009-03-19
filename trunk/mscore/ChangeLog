@@ -1,4 +1,5 @@
 19.mar (ws)
+      - fixed regression: drop accidentals
       - fixed: voltas and other line types on multiple staves do not anchor
         properly
       - fixed: 8va affects all staves instead of single staff
