@@ -92,6 +92,10 @@
         <source>Finnish</source>
         <translation>Fins</translation>
     </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
