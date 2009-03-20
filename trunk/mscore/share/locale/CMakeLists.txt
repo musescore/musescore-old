@@ -51,6 +51,8 @@ install(FILES
       mscore_en_GB.qm
       mscore_sv.ts
       mscore_sv.qm
+      mscore_no.ts
+      mscore_no.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 
