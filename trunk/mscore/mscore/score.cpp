@@ -1705,12 +1705,9 @@ Page* Score::searchPage(const QPointF& p) const
 
 static Segment* getNextCRSegment(Segment* s, int staffIdx)
       {
-      while (s && ((s->subtype() != Segment::SegChordRest))) {
-            int idx = staffIdx * VOICES;
-            if (s->element(idx) || s->element(idx+1) || s->element(idx+2) || s->element(idx+3))
-                  break;
+      int idx = staffIdx * VOICES;
+      while (s && ((s->subtype() != Segment::SegChordRest) || !(s->element(idx) || s->element(idx+1) || s->element(idx+2) || s->element(idx+3))))
             s = s->next();
-            }
       return s;
       }
 
@@ -1850,7 +1847,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, bool divideSegment) con
             }
 
       if (segment == 0) {
-//            printf("no segment+\n");
+            printf("no segment+\n");
             return false;
             }
       //

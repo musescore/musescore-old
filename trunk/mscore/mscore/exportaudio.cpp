@@ -78,7 +78,7 @@ bool Score::saveAudio(const QString& name, int format)
       EventMap events;
       toEList(&events, 0);
 
-      EventMap::const_iterator playPos;   // moved in real time thread
+      EventMap::const_iterator playPos;
       playPos = events.constBegin();
 
       SF_INFO info;

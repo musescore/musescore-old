@@ -37,6 +37,7 @@
 #include "slur.h"
 #include "seq.h"
 #include "measure.h"
+#include "line.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -707,8 +708,9 @@ void Score::cmdRemovePart(Part* part)
             }
 
       for (int i = 0; i < n; ++i) {
-            Staff* staff = _staves[sidx];
-            undoRemoveStaff(staff, sidx);
+//            Staff* staff = _staves[sidx];
+//            undoRemoveStaff(staff, sidx);
+            cmdRemoveStaff(sidx);
             }
       undoRemovePart(part, sidx);
       }
@@ -817,11 +819,24 @@ void Score::adjustBracketsIns(int sidx, int eidx)
 void Score::cmdRemoveStaff(int staffIdx)
       {
       foreach(Element* e, _gel) {
-            if (e->type() != SLUR)
-                  continue;
-            Slur* slur = (Slur*)e;
-            if ((slur->staffIdx() == staffIdx) || (slur->staffIdx2() == staffIdx)) {
-                  undoRemoveElement(slur);
+            switch(e->type()) {
+                  case VOLTA:
+                  case TRILL:
+                  case PEDAL:
+                        if (e->staffIdx() == staffIdx) {
+printf("removeStaff: %s\n", e->name());
+                              undoRemoveElement(e);
+                              }
+                        break;
+                  case SLUR:
+                        {
+                        Slur* slur = static_cast<Slur*>(e);
+                        if ((slur->staffIdx() == staffIdx) || (slur->staffIdx2() == staffIdx))
+                              undoRemoveElement(slur);
+                        }
+                        break;
+                  default:
+                        break;
                   }
             }
       Staff* s = staff(staffIdx);

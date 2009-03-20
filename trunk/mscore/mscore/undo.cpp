@@ -351,7 +351,7 @@ void Score::endUndoRedo()
 
 SaveState::SaveState(Score* s)
       {
-      score = s;
+      score     = s;
       selection = 0;
       }
 

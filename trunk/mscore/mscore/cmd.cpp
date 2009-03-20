@@ -657,11 +657,17 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
       while (len) {
             int gap = makeGap(tick, track, len);
 // printf("setNote:: makeGap %d - %d\n", len, gap);
+            if (gap == 0) {
+                  printf("cannot get gap at %d len %d\n", tick, len);
+                  break;
+                  }
             len    -= gap;
 
             note = new Note(this);
-            if (firstNote == 0)
+            if (firstNote == 0) {
                   firstNote = note;
+                  select(0, SELECT_SINGLE, 0);  // deselect all
+                  }
             note->setTrack(track);
             note->setPitch(pitch);
 
@@ -689,7 +695,6 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
                   }
             chord->setParent(seg);
             undoAddElement(chord);
-            select(note, SELECT_SINGLE, 0);
             spell(note);
 
             tick += gap;
@@ -706,6 +711,8 @@ Note* Score::setNote(int tick, int track, int pitch, int len, int headGroup, Dir
       _is.cr = firstNote ? firstNote->chord() : 0;
       if (tie)
             _layout->connectTies();
+      if (note)
+            select(note, SELECT_SINGLE, 0);
       return firstNote;
       }
 
