@@ -1,3 +1,7 @@
+20.mar (ws)
+      - more debugging for note entry with mouse: reduce number of possible input
+        positions in some cases
+      - fix crash when removing staff with volta
 19.mar (ws)
       - fixed regression: drop accidentals
       - fixed: voltas and other line types on multiple staves do not anchor
