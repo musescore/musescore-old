@@ -15,7 +15,7 @@ echo "      $1/share/locale/mscore_tr.ts \\"
 echo "      $1/share/locale/mscore_hi_IN.ts \\"
 echo "      $1/share/locale/mscore_pt_BR.ts \\"
 echo "      $1/share/locale/mscore_pt.ts \\"
-echo "      $1/share/locale/mscore_da.ts \\"
+echo "      $1/share/locale/mscore_sv.ts \\"
 echo "      $1/share/locale/mscore_en_GB.ts"
 
 echo "FORMS = \\"
