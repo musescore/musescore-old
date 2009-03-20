@@ -704,6 +704,10 @@ void Score::cmdFlipStemDirection()
                   Beam* beam = static_cast<Beam*>(e);
                   _undo->push(new FlipBeamDirection(beam));
                   }
+            else if (e->type() == HAIRPIN_SEGMENT) {
+                  Hairpin* hp = static_cast<HairpinSegment*>(e)->hairpin();
+                  _undo->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
+                  }
             }
       layoutAll = true;
       }

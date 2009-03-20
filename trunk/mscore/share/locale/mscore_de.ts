@@ -93,6 +93,10 @@
         <source>Finnish</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -4571,7 +4575,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>line</source>
-        <translation>Zeile</translation>
+        <translation>Linie</translation>
     </message>
     <message>
         <source>Unison Above</source>

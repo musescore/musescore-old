@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name></name>
     <message>
@@ -26,11 +28,11 @@
         <translation>Inglese (US)</translation>
     </message>
     <message>
-        <source>Espa&#xc3;&#xb1;ol</source>
+        <source>EspaÃ±ol</source>
         <translation>Spagnolo</translation>
     </message>
     <message>
-        <source>Fran&#xc3;&#xa7;ais</source>
+        <source>FranÃ§ais</source>
         <translation>Francese</translation>
     </message>
     <message>
@@ -50,19 +52,19 @@
         <translation>Italiano</translation>
     </message>
     <message>
-        <source>Portugu&#xc3;&#xaa;s</source>
+        <source>PortuguÃªs</source>
         <translation>Portoghese</translation>
     </message>
     <message>
-        <source>Brasilian Portugu&#xc3;&#xaa;s</source>
+        <source>Brasilian PortuguÃªs</source>
         <translation>Portoghese brasiliano</translation>
     </message>
     <message>
-        <source>&#xd0;&#xa0;&#xd1;&#x83;&#xd1;&#x81;&#xd1;&#x81;&#xd0;&#xba;&#xd0;&#xb8;&#xd0;&#xb9;</source>
+        <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
         <translation>Russo</translation>
     </message>
     <message>
-        <source>T&#xc3;&#xbc;rk&#xc3;&#xa7;e</source>
+        <source>TÃ¼rkÃ§e</source>
         <translation>Turco</translation>
     </message>
     <message>
@@ -88,6 +90,10 @@
     <message>
         <source>Finnish</source>
         <translation>Finlandese</translation>
+    </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6081,11 +6087,11 @@ prima di chiudere?</translation>
         <translation>ms</translation>
     </message>
     <message>
-        <source>Replace 1/2 ... with &#xbd; ...</source>
+        <source>Replace 1/2 ... with ½ ...</source>
         <translation>Sostituisci 1/2 ... con ½ ...</translation>
     </message>
     <message>
-        <source>Replace (C) ... with &#xa9; ... in Copyright Text</source>
+        <source>Replace (C) ... with © ... in Copyright Text</source>
         <translation>Sostituisci (C) ... con © ... nellla casella di testo Copyright</translation>
     </message>
 </context>

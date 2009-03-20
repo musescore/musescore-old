@@ -1,4 +1,5 @@
 20.mar (ws)
+      - new command: "x" flips hairpin direction
       - more debugging for note entry with mouse: reduce number of possible input
         positions in some cases
       - fix crash when removing staff with volta
