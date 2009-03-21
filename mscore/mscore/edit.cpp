@@ -788,15 +788,11 @@ void Score::deleteItem(Element* el)
       switch(el->type()) {
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
-                        TextC* in = static_cast<TextC*>(el);
-                        _undo->push(new ChangeInstrumentLong(in->staff()->part(), in->getHtml()));
-                        _layout->setInstrumentNames();
+                        _undo->push(new ChangeInstrumentLong(el->staff()->part(), ""));
                         break;
                         }
                   else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
-                        TextC* in = static_cast<TextC*>(el);
-                        _undo->push(new ChangeInstrumentShort(in->staff()->part(), in->getHtml()));
-                        _layout->setInstrumentNames();
+                        _undo->push(new ChangeInstrumentShort(el->staff()->part(), ""));
                         break;
                         }
                   else if (el->subtype() == TEXT_COPYRIGHT) {
@@ -806,7 +802,6 @@ void Score::deleteItem(Element* el)
                   else if (el->subtype() == TEXT_MEASURE_NUMBER) {
                         break;
                         }
-
 
             case SYMBOL:
             case COMPOUND:
