@@ -946,6 +946,43 @@ static void defaults(Xml& xml, Score* s)
       xml.etag();
       }
 
+
+//---------------------------------------------------------
+//   credits
+//---------------------------------------------------------
+
+static void credits(Xml& xml, Score* s)
+      {
+      printf("credits:\n");
+      const MeasureBase* measure = s->measures()->first();
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
+                  bool mustPrint = true;
+                  switch (text->subtype()) {
+                        case TEXT_TITLE:
+                              printf("title");
+                              break;
+                        case TEXT_SUBTITLE:
+                              printf("subtitle");
+                              break;
+                        case TEXT_COMPOSER:
+                              printf("composer");
+                              break;
+                        case TEXT_POET:
+                              printf("poet");
+                              break;
+                        case TEXT_TRANSLATOR:
+                              printf("translator");
+                              break;
+                        default:
+                              mustPrint = false;
+                        }
+                  if (mustPrint) printf(" '%s'\n", text->getText().toUtf8().data());
+                  }
+            }
+      }
+
 //---------------------------------------------------------
 //   pitch2xml
 //---------------------------------------------------------
@@ -2339,6 +2376,8 @@ foreach(Element* el, *(score->gel())) {
       const MeasureBase* measure = score->measures()->first();
       work(measure);
 
+      // LVI TODO: write these text elements as credit-words
+      // use meta data here instead
       xml.stag("identification");
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
@@ -2374,6 +2413,7 @@ foreach(Element* el, *(score->gel())) {
       xml.etag();
 
       defaults(xml, score);
+      credits(xml, score);
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();
