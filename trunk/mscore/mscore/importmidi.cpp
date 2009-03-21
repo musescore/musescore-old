@@ -643,6 +643,7 @@ static QString instrName(int type, int hbank, int lbank, int program)
 class ExportMidi {
       QFile f;
       Score* cs;
+      TempoList tempo;
 
       void writeHeader();
 
@@ -837,7 +838,7 @@ bool ExportMidi::write(const QString& name)
                   track->insert(new ControllerEvent(8, channel, CTRL_CHORUS_SEND, part->chorus()));
                   }
             EventMap events;
-            cs->toEList(&events, preferences.midiExpandRepeats, tickOffset, staffIdx);
+            cs->toEList(&events, &tempo, preferences.midiExpandRepeats, tickOffset, staffIdx);
             for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
                   if (i.value()->type() == ME_NOTEON) {
                         NoteOn* n = (NoteOn*)i.value();

@@ -38,6 +38,10 @@ struct TEvent {
       TEvent() {
             tempo = 0.0;
             }
+      TEvent(const TEvent& e) {
+            tempo = e.tempo;
+            time  = e.time;
+            }
       TEvent(double t) {
             tempo = t;
             time = 0.0;

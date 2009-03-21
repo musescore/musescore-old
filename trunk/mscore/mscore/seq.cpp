@@ -237,7 +237,7 @@ int Seq::sampleRate() const
 
 int Seq::time2tick(double time) const
       {
-      return cs->tempomap->time2tick(time);
+      return tempo.time2tick(time);
       }
 
 //---------------------------------------------------------
@@ -246,7 +246,7 @@ int Seq::time2tick(double time) const
 
 double Seq::tick2time(int tick) const
       {
-      return cs->tempomap->tick2time(tick);
+      return tempo.tick2time(tick);
       }
 
 //---------------------------------------------------------
@@ -546,7 +546,7 @@ void Seq::processMessages()
                   case SEQ_TEMPO_CHANGE:
                         {
                         int tick = time2tick(playTime);
-                        cs->tempomap->setRelTempo(msg.data);
+                        tempo.setRelTempo(msg.data);
                         playTime = tick2time(tick);
                         startTime = curTime() - playTime;
                         }
@@ -702,8 +702,9 @@ void Seq::collectEvents()
             delete e;
 
       events.clear();
+      tempo.clear();
 
-      cs->toEList(&events, 0);
+      cs->toEList(&events, &tempo);
       endTick = 0;
       if (!events.empty()) {
             EventMap::const_iterator e = events.constEnd();
@@ -779,11 +780,11 @@ void Seq::setRelTempo(int relTempo)
       msg.id   = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
-      double tempo = cs->tempomap->tempo(playPos.key()) * relTempo * 0.01;
+      double t = tempo.tempo(playPos.key()) * relTempo * 0.01;
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
-            pp->setTempo(tempo);
+            pp->setTempo(t);
             pp->setRelTempo(relTempo);
             }
       }
