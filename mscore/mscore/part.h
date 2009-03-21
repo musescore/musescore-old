@@ -77,16 +77,24 @@ class Part {
 
       void setStaves(int);
 
-      void setMinPitch(int val)                { _instrument.minPitch = val;     }
-      void setMaxPitch(int val)                { _instrument.maxPitch = val;     }
+      void setAmateurPitchRange(int a, int b)  {
+            _instrument.minPitchA = a;
+            _instrument.maxPitchA = b;
+            }
+      void setProfessionalPitchRange(int a, int b)  {
+            _instrument.minPitchP = a;
+            _instrument.maxPitchP = b;
+            }
 
       void setDrumset(Drumset* ds)             { _instrument.drumset = ds;       }
       Drumset* drumset() const                 { return _instrument.drumset;     }
       bool useDrumset() const                  { return _instrument.useDrumset;  }
       void setUseDrumset(bool val);
 
-      int minPitch() const                     { return _instrument.minPitch;    }
-      int maxPitch() const                     { return _instrument.maxPitch;    }
+      int minPitchP() const                    { return _instrument.minPitchP;    }
+      int maxPitchP() const                    { return _instrument.maxPitchP;    }
+      int minPitchA() const                    { return _instrument.minPitchA;    }
+      int maxPitchA() const                    { return _instrument.maxPitchA;    }
 
       int volume() const;
       int reverb() const;

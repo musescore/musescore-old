@@ -426,4 +426,3 @@ QString pitch2string(int v)
       return QString("%1%2").arg(octave < 0 ? valu[i] : vall[i]).arg(octave);
       }
 
-

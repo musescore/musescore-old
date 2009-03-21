@@ -243,6 +243,7 @@ enum STYLE_TYPE {
       ST_genTimesig,
       ST_genCourtesyTimesig,
       ST_useGermanNoteNames,
+      ST_warnPitchRange,
       ST_chordNamesUseSymbols,
       ST_concertPitch,
       ST_createMultiMeasureRests,
@@ -253,6 +254,7 @@ enum STYLE_TYPE {
       ST_stemDir2,
       ST_stemDir3,
       ST_stemDir4,
+
       ST_gateTime,
       ST_tenutoGateTime,
       ST_staccatoGateTime,

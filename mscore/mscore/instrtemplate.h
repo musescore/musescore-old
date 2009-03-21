@@ -44,8 +44,12 @@ struct InstrumentTemplate {
       int staffLines[MAX_STAVES];
       int smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
-      char minPitch;
-      char maxPitch;
+
+      char minPitchA;         // pitch range playable by an amateur
+      char maxPitchA;
+      char minPitchP;         // pitch range playable by professional
+      char maxPitchP;
+
       char transpose;          // for transposing instruments
       bool useDrumset;
       Drumset* drumset;
@@ -54,6 +58,7 @@ struct InstrumentTemplate {
 
       InstrumentTemplate();
 
+      void setPitchRange(const QString& s, char* a, char* b) const;
       void write(Xml& xml) const;
       void read(const QString& group, QDomElement);
       };

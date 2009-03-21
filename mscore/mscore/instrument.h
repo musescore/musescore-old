@@ -94,8 +94,7 @@ struct Channel {
 //---------------------------------------------------------
 
 struct Instrument {
-      char minPitch;
-      char maxPitch;
+      char minPitchA, maxPitchA, minPitchP, maxPitchP;
       char pitchOffset;
 
       Drumset* drumset;
