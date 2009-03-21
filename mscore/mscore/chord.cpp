@@ -309,7 +309,7 @@ void Chord::setHook(Hook* f)
       _hook = f;
       if (_hook) {
             _hook->setParent(this);
-            _stem->setMag(mag());
+//            _hook->setMag(mag());
             if (_stem)        // should always be true
                   _hook->setVisible(_stem->visible());
             }
@@ -326,7 +326,7 @@ void Chord::setStem(Stem* s)
       _stem = s;
       if (_stem) {
             _stem->setParent(this);
-            _stem->setMag(mag());
+//            _stem->setMag(mag());
             }
       }
 
@@ -452,7 +452,7 @@ QRectF Chord::bbox() const
       QRectF _bbox;
       for (ciNote i = notes.begin(); i != notes.end(); ++i)
             _bbox |= i->second->bbox().translated(i->second->pos());
-      foreach(LedgerLine* l, _ledgerLines)
+      foreach(const LedgerLine* l, _ledgerLines)
             _bbox |= l->bbox().translated(l->pos());
       for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
             _bbox |= (*i)->bbox().translated((*i)->pos());
@@ -780,7 +780,7 @@ void Chord::layout(ScoreLayout* layout)
       //  process ledger lines
       //-----------------------------------------
 
-      foreach(LedgerLine* l, _ledgerLines)
+      foreach(const LedgerLine* l, _ledgerLines)
             delete l;
       _ledgerLines.clear();
 
@@ -873,7 +873,7 @@ void Chord::layout(ScoreLayout* layout)
             Note* note = in->second;
             QList<Text*>& fingering = note->fingering();
             double x = _spatium * 0.8 + note->headWidth();
-            foreach(Text* f, fingering) {
+            foreach(const Text* f, fingering) {
                   f->setPos(x, 0.0);
                   // TODO: x += _spatium;
                   // if we have two fingerings and move the first,
@@ -1363,7 +1363,7 @@ void Chord::collectElements(QList<const Element*>& el) const
       if (_glissando)
             el.append(_glissando);
 
-      foreach(LedgerLine* h, _ledgerLines)
+      foreach(const LedgerLine* h, _ledgerLines)
             el.append(h);
 
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
@@ -1432,5 +1432,30 @@ QPointF LedgerLine::canvasPos() const
       System* system = chord()->measure()->system();
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Chord::setMag(double val)
+      {
+      Element::setMag(val);
+      foreach (LedgerLine* ll, _ledgerLines)
+            ll->setMag(val);
+      if (_stem)
+            _stem->setMag(val);
+      if (_hook)
+            _hook->setMag(val);
+      if (_stemSlash)
+            _stemSlash->setMag(val);
+      if (_arpeggio)
+            _arpeggio->setMag(val);
+      if (_tremolo)
+            _tremolo->setMag(val);
+      if (_glissando)
+            _glissando->setMag(val);
+      for (ciNote in = notes.begin(); in != notes.end(); ++in)
+            in->second->setMag(val);
       }
 

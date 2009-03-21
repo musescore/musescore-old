@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: note.cpp,v 1.63 2006/03/28 14:58:58 wschweer Exp $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1064,7 +1064,7 @@ void Note::layout(ScoreLayout* layout)
       {
       if (parent() == 0)
             return;
-      setMag(chord()->mag());
+//DEBUG      setMag(chord()->mag());
       if (_accidental)
             _accidental->setMag(mag());
       foreach(Element* e, _el) {
@@ -1142,6 +1142,17 @@ void Note::toDefault()
       score()->undoChangeChordRestSpace(chord(), Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
       score()->undoChangeUserOffset(chord(), QPointF());
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Note::setMag(double val)
+      {
+      Element::setMag(val);
+      if (_accidental)
+            _accidental->setMag(val);
       }
 
 

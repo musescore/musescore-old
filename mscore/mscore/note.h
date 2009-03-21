@@ -180,6 +180,7 @@ class Note : public Element {
       void setSubchannel(int val)   { _subchannel = val;  }
 
       virtual void toDefault();
+      virtual void setMag(double val);
       };
 
 //---------------------------------------------------------

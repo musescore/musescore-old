@@ -626,13 +626,16 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
                                           seg->setElement(track, 0);
                                     }
+                              double staffMag = score()->staff(staffIdx)->mag();
                               if (el->type() == CLEF) {
                                     Clef* clef = static_cast<Clef*>(el);
                                     clef->setSmall(!isFirstMeasure || (seg != m->first()));
-                                    // clef->setMag(staffMag);
+                                    clef->setMag(staffMag);
                                     }
-                              double staffMag = score()->staff(staffIdx)->mag();
-                              el->setMag(staffMag);
+                              else if (el->type() == KEYSIG || el->type() == TIMESIG)
+                                    el->setMag(staffMag);
+//TODO                              double staffMag = score()->staff(staffIdx)->mag();
+//                              el->setMag(staffMag);
                               }
                         }
 
