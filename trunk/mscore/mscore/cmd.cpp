@@ -620,9 +620,11 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       seg = measure->createSegment(st, tick);
 
       undoAddElement(seg);
+      double mag = staff(track/VOICES)->mag() * styleD(ST_graceNoteMag);
 
       Note* note = new Note(this);
       note->setTrack(track);
+      note->setMag(mag);
 
       chord = new Chord(this);
       chord->setTick(tick);
@@ -634,6 +636,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       chord->setStemDirection(UP);
       chord->setNoteType(type);
       chord->setParent(seg);
+      chord->setMag(mag);
 
       undoAddElement(chord);
       select(note, SELECT_SINGLE, 0);

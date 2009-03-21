@@ -314,10 +314,12 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets,
 
 void ChordRest::setSmall(bool val)
       {
-      _small = val;
-      double m   = _small ? .7 : 1.0;
+      _small     = val;
+      double m = 1.0;
+      if (_small)
+            m = score()->styleD(ST_smallNoteMag);
       if (staff()->small())
-            m *= .7;
+            m *= score()->styleD(ST_smallStaffMag);
       setMag(m);
       }
 

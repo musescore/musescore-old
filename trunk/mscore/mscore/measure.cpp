@@ -326,7 +326,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
       int tick = segment->tick();
 
       int endTrack = startTrack + VOICES;
-      int voices   = 0;
+      int voices = 0;
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e)
@@ -336,13 +336,11 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
             double m = staffMag;
             if (cr->small())
                   m *= score()->styleD(ST_smallNoteMag);
-            cr->setMag(m);
 
-            if (e->type() == CHORD) {
+            if (cr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
-                  chord->setMag(m);
                   NoteList* nl = chord->noteList();
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note = in->second;
@@ -401,6 +399,7 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                         }
                   chord->computeUp();
                   }
+            cr->setMag(m);
             }
 
       if (drumset || notes.isEmpty())
