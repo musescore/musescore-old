@@ -72,10 +72,10 @@ void InstrumentTemplate::write(Xml& xml) const
                   }
             }
       xml.tag("bracket", bracket);
-      if (minPitch != 0)
-            xml.tag("minPitch", minPitch);
-      if (maxPitch != 127)
-            xml.tag("maxPitch", maxPitch);
+      if (minPitchA != 0 || maxPitchA != 127)
+            xml.tag("aPitchRange", QString("%1-%2").arg(minPitchA).arg(maxPitchA));
+      if (minPitchP != 0 || maxPitchP != 127)
+            xml.tag("pPitchRange", QString("%1-%2").arg(minPitchP).arg(maxPitchP));
       if (transpose)
             xml.tag("transposition", transpose);
       if (useDrumset) {
@@ -87,6 +87,22 @@ void InstrumentTemplate::write(Xml& xml) const
       foreach(const Channel* a, channel)
             a->write(xml);
       xml.etag();
+      }
+
+//---------------------------------------------------------
+//   setPitchRange
+//---------------------------------------------------------
+
+void InstrumentTemplate::setPitchRange(const QString& s, char* a, char* b) const
+      {
+      QStringList sl = s.split("-");
+      if (sl.size() != 2) {
+            *a = 0;
+            *b = 127;
+            return;
+            }
+      *a = sl[0].toInt();
+      *b = sl[1].toInt();
       }
 
 //---------------------------------------------------------
@@ -104,8 +120,10 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
             smallStaff[i] = false;
             }
       bracket    = -1;
-      minPitch   = 0;
-      maxPitch   = 127;
+      minPitchA   = 0;
+      maxPitchA   = 127;
+      minPitchP   = 0;
+      maxPitchP   = 127;
       transpose  = 0;
       useDrumset = false;
 
@@ -198,10 +216,10 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   }
             else if (tag == "bracket")
                   bracket = i;
-            else if (tag == "minPitch")
-                  minPitch = i;
-            else if (tag == "maxPitch")
-                  maxPitch = i;
+            else if (tag == "aPitchRange")
+                  setPitchRange(val, &minPitchA, &maxPitchA);
+            else if (tag == "pPitchRange")
+                  setPitchRange(val, &minPitchP, &maxPitchP);
             else if (tag == "transposition")
                   transpose = i;
             else if (tag == "drumset")

@@ -71,8 +71,10 @@ Instrument::Instrument()
       a->name         = "normal";
       channel.append(a);
 
-      minPitch        = 0;
-      maxPitch        = 127;
+      minPitchA        = 0;
+      maxPitchA        = 127;
+      minPitchP        = 0;
+      maxPitchP        = 127;
       pitchOffset     = 0;
       drumset         = 0;
       useDrumset      = false;
@@ -85,10 +87,14 @@ Instrument::Instrument()
 void Instrument::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      if (minPitch > 0)
-            xml.tag("minPitch", minPitch);
-      if (maxPitch < 127)
-            xml.tag("maxPitch", maxPitch);
+      if (minPitchP > 0)
+            xml.tag("minPitchP", minPitchP);
+      if (maxPitchP < 127)
+            xml.tag("maxPitchP", maxPitchP);
+      if (minPitchA > 0)
+            xml.tag("minPitchA", minPitchA);
+      if (maxPitchA < 127)
+            xml.tag("maxPitchA", maxPitchA);
       if (pitchOffset)
             xml.tag("transposition", pitchOffset);
       if (useDrumset) {
@@ -122,10 +128,23 @@ void Instrument::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "minPitch")
-                  minPitch = i;
-            else if (tag == "maxPitch")
-                  maxPitch = i;
+
+            if (tag == "minPitch") {      // obsolete
+                  minPitchP = i;
+                  minPitchA = i;
+                  }
+            else if (tag == "maxPitch") {       // obsolete
+                  maxPitchP = i;
+                  maxPitchA = i;
+                  }
+            else if (tag == "minPitchA")
+                  minPitchA = i;
+            else if (tag == "minPitchP")
+                  minPitchP = i;
+            else if (tag == "maxPitchA")
+                  maxPitchA = i;
+            else if (tag == "maxPitchP")
+                  maxPitchP = i;
             else if (tag == "transposition")
                   pitchOffset = i;
             else if (tag == "useDrumset") {

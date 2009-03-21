@@ -106,6 +106,7 @@ StyleType styleTypes[] = {
       StyleType("genTimesig",              ST_BOOL),
       StyleType("genCourtesyTimesig",      ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
+      StyleType("warnPitchRange",          ST_BOOL),
       StyleType("chordNamesUseSymbols",    ST_BOOL),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
       StyleType("createMultiMeasureRests", ST_BOOL),
@@ -350,9 +351,10 @@ Style::Style()
             StyleVal(true),                       // ST_genClef,
             StyleVal(true),                       // ST_genKeysig,
             StyleVal(true),                       // ST_genTimesig,
-            StyleVal(true),                       // ST_genCourtesyTimesig,
-            StyleVal(false),                      // ST_useGermanNoteNames,
-            StyleVal(false),                      // ST_chordNamesUseSymbols,
+            StyleVal(true),                       // ST_genCourtesyTimesig
+            StyleVal(false),                      // ST_useGermanNoteNames
+            StyleVal(true),                       // ST_warnPitchRange
+            StyleVal(false),                      // ST_chordNamesUseSymbols
             StyleVal(false),                      // ST_concertPitch,
             StyleVal(false),                      // ST_createMultiMeasureRests,
             StyleVal(2),                          // ST_minEmptyMeasures,

@@ -49,7 +49,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "undo.h"
-
+#include "part.h"
 const int noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym },
       { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,    wholecrossedheadSym },
@@ -456,8 +456,17 @@ void Note::setHeadGroup(int val)
 
 void Note::draw(QPainter& p) const
       {
-      if (!_hidden)
+      if (!_hidden) {
+            if (!selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
+                  Instrument* in = staff()->part()->instrument();
+                  int i = pitch() + (score()->styleB(ST_concertPitch) ? 0 : in->pitchOffset);
+                  if (i < in->minPitchP || i > in->maxPitchP)
+                        p.setPen(Qt::red);
+                  else if (i < in->minPitchA || i > in->maxPitchA)
+                        p.setPen(Qt::yellow);
+                  }
             symbols[_head].draw(p, mag());
+            }
 
       if (chord()) {
             int dots = chord()->dots();
@@ -712,6 +721,7 @@ void ShadowNote::draw(QPainter& p) const
             p.setPen(pen);
 
 //            symbols[quartheadSym].draw(p);
+
             symbols[noteHeads[_headGroup][2]].draw(p);
 
             double x1 = symbols[quartheadSym].width(mag())*.5 - _spatium;
@@ -1064,7 +1074,6 @@ void Note::layout(ScoreLayout* layout)
       {
       if (parent() == 0)
             return;
-//DEBUG      setMag(chord()->mag());
       if (_accidental)
             _accidental->setMag(mag());
       foreach(Element* e, _el) {
