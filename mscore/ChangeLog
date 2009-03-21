@@ -1,6 +1,7 @@
 21.mar (lv)
       - MusicXML export of page layout
        (ws)
+      - unroll tempomap to play repeats with right tempo
       - fix size of grace notes
 20.mar (ws)
       - new command: "x" flips hairpin direction

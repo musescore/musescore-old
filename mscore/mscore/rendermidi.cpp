@@ -40,6 +40,7 @@
 #include "arpeggio.h"
 #include "durationtype.h"
 #include "measure.h"
+#include "tempo.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -191,12 +192,22 @@ void Score::collectChord(EventMap* events, Instrument* instr,
 //   collectMeasureEvents
 //---------------------------------------------------------
 
-void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
+void Score::collectMeasureEvents(EventMap* events, TempoList* tempo, Measure* m, int staffIdx,
    int tickOffset)
       {
       Part* prt         = part(staffIdx);
       Instrument* instr = prt->instrument();
       int pitchOffset   = styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
+
+// printf("collect %d-%d\n", m->tick(), m->tick() + m->tickLen());
+      if (staffIdx == 0) {
+            ciTEvent startE = tempomap->lower_bound(m->tick());
+            ciTEvent endE   = tempomap->lower_bound(m->tick() + m->tickLen());
+            for (ciTEvent i = startE; i != endE; ++i) {
+//                  printf("  addTempo %d %f\n", i->first + tickOffset, i->second.tempo);
+                  tempo->addTempo(i->first + tickOffset, i->second);
+                  }
+            }
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
@@ -360,24 +371,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx,
       }
 
 //---------------------------------------------------------
-//   toEList
-//    export score to event list
-//---------------------------------------------------------
-
-void Score::toEList(EventMap* events, int offset)
-      {
-      bool expandRepeats = getAction("repeat")->isChecked();
-      _foundPlayPosAfterRepeats = false;
-      updateChannel();
-      int staffIdx   = 0;
-      foreach(Part* part, _parts) {
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  toEList(events, expandRepeats, offset, staffIdx++);
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   RepeatLoop
 //---------------------------------------------------------
 
@@ -436,20 +429,24 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 //          - d.s. al coda
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffIdx)
+void Score::toEList(EventMap* events, TempoList* tempo, bool expandRepeats, int offset, int staffIdx)
       {
       if (!expandRepeats) {
+            if (staffIdx == 0) {
+                  for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i)
+                        tempo->addTempo(i->first, i->second);
+                  }
             for (MeasureBase* mb = layout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  collectMeasureEvents(events, (Measure*)mb, staffIdx, offset);
+                  collectMeasureEvents(events, tempo, (Measure*)mb, staffIdx, offset);
                   }
             return;
             }
       QStack<RepeatLoop> rstack;
-      int tickOffset = 0;
+      int tickOffset         = 0;
       int overallRepeatCount = 0;
-      int repeatEnd = -1;
+      int repeatEnd          = -1;
 
       MeasureBase* fm = layout()->first();
       for (MeasureBase* mb = fm; mb;) {
@@ -469,7 +466,7 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
             if (!rstack.isEmpty() && !isVolta(m->tick(), rstack.top().count + 1))
                   tickOffset -= m->tickLen();   // skip this measure
             else
-                  collectMeasureEvents(events, m, staffIdx, tickOffset + offset);
+                  collectMeasureEvents(events, tempo, m, staffIdx, tickOffset + offset);
 
             if (rstack.isEmpty()) {
                   // Jumps are only accepted outside of other repeats
@@ -477,7 +474,7 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                         Jump* s = 0;
                         foreach(Element* e, *m->el()) {
                               if (e->type() == JUMP) {
-                                    s = (Jump*)e;
+                                    s = static_cast<Jump*>(e);
                                     break;
                                     }
                               }
@@ -488,6 +485,8 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                                     rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
                                     tickOffset += m->tick() + m->tickLen() - nmb->tick();
                                     mb = nmb;
+                                    double t = tempomap->tempo(mb->tick());
+                                    tempo->addTempo(mb->tick() + tickOffset, t);
                                     continue;
                                     }
                               else
@@ -509,6 +508,10 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                                     repeatEnd = m->tick();
                                     mb = layout()->first();
                                     tickOffset += m->tick() + m->tickLen() - mb->tick();
+
+                                    double t = tempomap->tempo(mb->tick());
+                                    tempo->addTempo(mb->tick() + tickOffset, t);
+
                                     continue;
                                     }
                               else {
@@ -540,6 +543,10 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                               //
                               mb = rstack.top().m;
                               tickOffset += m->tick() + m->tickLen() - mb->tick();
+
+                              double t = tempomap->tempo(mb->tick());
+                              tempo->addTempo(mb->tick() + tickOffset, t);
+
                               continue;
                               }
                         rstack.pop();     // end this loop
@@ -559,6 +566,9 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
                               printf("Cont label not found: <%s>\n", qPrintable(rstack.top().cont));
 
                         mb = nmb;
+                        double t = tempomap->tempo(mb->tick());
+                        tempo->addTempo(mb->tick() + tickOffset, t);
+
                         rstack.pop();     // end this loop
                         continue;
                         }
@@ -574,4 +584,17 @@ void Score::toEList(EventMap* events, bool expandRepeats, int offset, int staffI
             }
       }
 
+//---------------------------------------------------------
+//   toEList
+//    export score to event list
+//---------------------------------------------------------
+
+void Score::toEList(EventMap* events, TempoList* tempo)
+      {
+      bool expandRepeats = getAction("repeat")->isChecked();
+      _foundPlayPosAfterRepeats = false;
+      updateChannel();
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
+            toEList(events, tempo, expandRepeats, 0, staffIdx);
+      }
 

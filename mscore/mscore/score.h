@@ -280,7 +280,7 @@ class Score : public QObject {
 
       void collectChord(EventMap*, Instrument*,
          int pitchOffset, Chord*, int tick, int gateTime);
-      void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
+      void collectMeasureEvents(EventMap*, TempoList*, Measure*, int staffIdx, int tickOffset);
 
       void padToggle(int n);
       void insertMeasures(int, int);
@@ -659,8 +659,8 @@ class Score : public QObject {
 
       void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;
-      void toEList(EventMap* events, int tickOffset);
-      void toEList(EventMap* events, bool expandRepeats, int tickOffset, int staffIdx);
+      void toEList(EventMap* events, TempoList* tl);
+      void toEList(EventMap* events, TempoList* tl, bool expandRepeats, int tickOffset, int staffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 

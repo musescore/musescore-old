@@ -24,6 +24,7 @@
 #include "event.h"
 #include "driver.h"
 #include "fifo.h"
+#include "tempo.h"
 
 class Synth;
 class Note;
@@ -93,6 +94,8 @@ class Seq : public QObject {
       Driver* driver;
 
       EventMap events;                    // playlist
+      TempoList tempo;
+
       QList<NoteOn*> activeNotes;         // notes sounding
       double playTime;
       double startTime;
