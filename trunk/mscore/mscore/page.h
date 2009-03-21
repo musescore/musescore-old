@@ -70,6 +70,7 @@ struct PageFormat {
       void read(QDomElement);
       void readMusicXML(QDomElement);
       void write(Xml&);
+      void writeMusicXML(Xml&);
       };
 
 //---------------------------------------------------------

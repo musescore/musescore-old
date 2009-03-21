@@ -75,6 +75,7 @@
 #include "pitchspelling.h"
 #include "utils.h"
 #include "articulation.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -923,6 +924,26 @@ void ExportMusicXml::calcDivisions()
 
       div = division / integers[0];
       printf("divisions=%d div=%d\n", integers[0], div);
+      }
+
+//---------------------------------------------------------
+//   defaults
+//---------------------------------------------------------
+
+// _spatium = DPMM * (millimeter * 10.0 / tenths);
+
+static void defaults(Xml& xml, Score* s)
+      {
+      const int tenths = 40;
+      double millimeters = s->layout()->spatium() * tenths / (10 * DPMM);
+      xml.stag("defaults");
+      xml.stag("scaling");
+      xml.tag("millimeters", millimeters);
+      xml.tag("tenths", 40);
+      xml.etag();
+      PageFormat* pf = s->pageFormat();
+      if (pf) pf->writeMusicXML(xml);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -2351,6 +2372,8 @@ foreach(Element* el, *(score->gel())) {
             }
       xml.etag();
       xml.etag();
+
+      defaults(xml, score);
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();

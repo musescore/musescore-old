@@ -505,6 +505,46 @@ void PageFormat::write(Xml& xml)
       }
 
 //---------------------------------------------------------
+//   writeMusicXML
+//---------------------------------------------------------
+
+void PageFormat::writeMusicXML(Xml& xml)
+      {
+      xml.stag("page-layout");
+
+      double t = 2 * PPI * 10 / 9;
+
+      if (name() != "Custom") {
+            xml.tag("pageFormat", QString(name()));
+            if (landscape)
+                  xml.tag("landscape", landscape);
+            }
+      else {
+            xml.tag("page-height", height() * t);
+            xml.tag("page-width", width() * t);
+            }
+      QString type("both");
+      if (twosided) {
+            type = "even";
+            xml.stag(QString("page-margins type=\"%1\"").arg(type));
+            xml.tag("left-margin",   evenLeftMargin * t);
+            xml.tag("right-margin",  evenRightMargin * t);
+            xml.tag("top-margin",    evenTopMargin * t);
+            xml.tag("bottom-margin", evenBottomMargin * t);
+            xml.etag();
+            type = "odd";
+            }
+      xml.stag(QString("page-margins type=\"%1\"").arg(type));
+      xml.tag("left-margin",   oddLeftMargin * t);
+      xml.tag("right-margin",  oddRightMargin * t);
+      xml.tag("top-margin",    oddTopMargin * t);
+      xml.tag("bottom-margin", oddBottomMargin * t);
+      xml.etag();
+
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //   clear
 //---------------------------------------------------------
 
