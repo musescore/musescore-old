@@ -1,6 +1,7 @@
 21.mar (lv)
       - MusicXML export of page layout
        (ws)
+      - fix: delete instrument name
       - mark notes outside of the pitch range of an instrument in red. Mark notes
         only playable by professionals in yellow. The instruments definition file
         is extended for this feature with
