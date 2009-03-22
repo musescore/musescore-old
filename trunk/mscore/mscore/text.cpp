@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -97,6 +97,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
             //printf("blocks > 1: %s\n", qPrintable(getText()));
             return false;
             }
+
       int fragments = 0;
       QTextBlock b = _doc->begin();
       QTextCharFormat cf;
@@ -119,6 +120,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       //
 
       QFontInfo fi(style->font(spatium));
+
       QFont f(cf.font());
       if (fi.family() == f.family()
          && fi.pointSize() == f.pointSize()
@@ -127,7 +129,8 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
          && fi.italic() == f.italic())
             return true;
 
-//      printf("bad font: %s %f\n", qPrintable(getText()), spatium);
+//      printf("bad font: %s %f <%s><%s> %d %d\n", qPrintable(getText()), spatium,
+//         qPrintable(fi.family()), qPrintable(f.family()), fi.pointSize(), f.pointSize());
 //      printf("%s\n", qPrintable(style->font(spatium).toString()));
 //      printf("%s\n", qPrintable(f.toString()));
 
@@ -673,7 +676,7 @@ void TextB::setTextStyle(int idx)
       {
       _textStyle   = idx;
       TextStyle* s = score()->textStyle(idx);
-      doc()->setDefaultFont(s->font());
+      doc()->setDefaultFont(s->font(_spatium));
 
       _align         = s->align;
       _xoff          = s->xoff;

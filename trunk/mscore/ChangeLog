@@ -1,4 +1,5 @@
 22.mar (ws)
+      - chordnames now always change, when text style changes
       - fix crash during drum entry
       - in note entry mode backspace key is now mapped to "undo"
        (tb)

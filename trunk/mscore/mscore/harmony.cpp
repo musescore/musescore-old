@@ -1131,7 +1131,6 @@ void Score::harmonyEndEdit()
 
       if (harmony->isEmpty() && origH->isEmpty()) {
             Measure* measure = (Measure*)(harmony->parent());
-printf("remove empty harmony %d\n", harmony->tick());
             measure->remove(harmony);
             }
       }
@@ -1152,9 +1151,9 @@ void Harmony::layout(ScoreLayout* l)
 
 void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       {
-printf("style %d\n", _textStyle);
-      clear();
       TextB::textStyleChanged(s);
+      TextStyle* ns = s[_textStyle];
+      setDefaultFont(ns->font());   // force
       buildText();
       }
 
