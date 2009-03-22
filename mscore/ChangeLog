@@ -1,4 +1,5 @@
 22.mar (ws)
+      - fix crash during drum entry
       - in note entry mode backspace key is now mapped to "undo"
        (tb)
       - renaming cz locale to cs, based on http://musescore.org/en/node/1318

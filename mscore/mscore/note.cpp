@@ -457,7 +457,7 @@ void Note::setHeadGroup(int val)
 void Note::draw(QPainter& p) const
       {
       if (!_hidden) {
-            if (!selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
+            if (staff() && !selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
                   Instrument* in = staff()->part()->instrument();
                   int i = pitch() + (score()->styleB(ST_concertPitch) ? 0 : in->pitchOffset);
                   if (i < in->minPitchP || i > in->maxPitchP)
@@ -1102,7 +1102,13 @@ QPointF Note::canvasPos() const
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
-      System* system = chord()->measure()->system();
+      Chord* ch = chord();
+      if (ch == 0 || ch->parent() == 0)
+            return pos();
+      Measure* m = ch->measure();
+      if (m == 0)
+            return pos();
+      System* system = m->system();
       if (system == 0)
             return pos();
       double yp = y() + system->staff(staffIdx() + staffMove())->y() + system->y();
