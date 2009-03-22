@@ -1,5 +1,7 @@
 22.mar (ws)
       - in note entry mode backspace key is now mapped to "undo"
+       (tb)
+      - renaming cz locale to cs, based on http://musescore.org/en/node/1318
 21.mar (lv)
       - MusicXML export of page layout
        (ws)
