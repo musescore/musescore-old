@@ -1939,6 +1939,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("1/8 rest"),
          QT_TR_NOOP("enter 1/8 rest")
          ),
+      Shortcut(                     // mapped to undo in note entry mode
+         STATE_NOTE_ENTRY,
+         "backspace",
+         QT_TR_NOOP("backspace"),
+         QKeySequence(Qt::Key_Backspace),
+         Qt::WindowShortcut,
+         QT_TR_NOOP("backspace"),
+         QT_TR_NOOP("backspace")
+         ),
       Shortcut(0, 0, 0),
       };
 

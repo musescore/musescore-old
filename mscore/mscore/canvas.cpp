@@ -1089,11 +1089,9 @@ void Canvas::moveCursor()
             track = 0;
 
       double d = _spatium * .5;
-
       if (track == cursor->track() && cursor->tick() == _score->inputPos()) {
             _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
             return;
-//            return;
             }
 
       cursor->setTrack(track);
@@ -1101,37 +1099,35 @@ void Canvas::moveCursor()
 
       Segment* segment = _score->tick2segment(cursor->tick());
       if (segment) {
-            System* system = segment->measure()->system();
-            if (system == 0) {
-                  // a new measure was appended but no layout took place
-printf("zero SYSTEM\n");
-                  return;
-                  }
-            cursor->setSegment(segment);
-            double x = segment->canvasPos().x();
-            double y = system->bboxStaff(cursor->staffIdx()).y() + system->canvasPos().y();
-
-            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
-            cursor->setPos(x - _spatium, y - _spatium);
-            cursor->setHeight(6.0 * _spatium);
-            _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
+            moveCursor(segment, track / VOICES);
             return;
             }
-//      printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
+// printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
       }
 
-void Canvas::moveCursor(Segment* segment)
+void Canvas::moveCursor(Segment* segment, int staffIdx)
       {
       System* system = segment->measure()->system();
-      double x       = segment->canvasPos().x();
-      double y       = system->bboxStaff(0).y() + system->canvasPos().y();
-      double y2      = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
+      if (system == 0) {
+            // a new measure was appended but no layout took place
+            printf("zero SYSTEM\n");
+            return;
+            }
+      cursor->setSegment(segment);
+      int idx   = staffIdx == -1 ? 0 : staffIdx;
+      double x  = segment->canvasPos().x();
+      double y  = system->bboxStaff(idx).y() + system->canvasPos().y();
+      double y2 = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
 
-      _score->addRefresh(cursor->abbox());
+      double d = _spatium * .5;
+      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setPos(x - _spatium, y - _spatium);
-      cursor->setHeight(y2 - y + 6.0 * _spatium);
+      if (staffIdx == -1)
+            cursor->setHeight(y2 - y + 6.0 * _spatium);
+      else
+            cursor->setHeight(6.0 * _spatium);
+      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       cursor->setTick(segment->tick());
-      _score->addRefresh(cursor->abbox());
       }
 
 //---------------------------------------------------------

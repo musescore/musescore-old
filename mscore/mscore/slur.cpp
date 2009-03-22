@@ -120,7 +120,7 @@ bool SlurSegment::startEdit(Viewer*, const QPointF&)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool SlurSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (slurTie()->type() != SLUR)
             return false;
