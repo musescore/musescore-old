@@ -57,7 +57,7 @@ struct LanguageItem {
 
 LanguageItem languages[] = {
       LanguageItem("",      QT_TR_NOOP("system")),
-      LanguageItem("cz",    QT_TR_NOOP("Czech")),
+      LanguageItem("cs",    QT_TR_NOOP("Czech")),
       LanguageItem("da",    QT_TR_NOOP("Dansk")),
       LanguageItem("nl",    QT_TR_NOOP("Nederlands")),
       LanguageItem("en_GB", QT_TR_NOOP("English (GB)")),
