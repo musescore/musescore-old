@@ -288,6 +288,8 @@ void Seq::start()
       {
       if (!driver)
             return;
+      if (cs->noteEntryMode())
+            cs->setNoteEntry(false);
       QAction* a = getAction("play");
       if (!a->isChecked()) {
             if (pauseState) {
@@ -751,7 +753,7 @@ void Seq::heartBeat()
             }
       if (note) {
             foreach(Viewer* v, cs->getViewer())
-                  v->moveCursor(note->chord()->segment());
+                  v->moveCursor(note->chord()->segment(), -1);
             cs->adjustCanvasPosition(note, true);
             if (pp)
                   pp->heartBeat(note->chord()->tick(), guiPos.key());
@@ -823,7 +825,7 @@ void Seq::seek(int tick)
       Segment* seg = cs->tick2segment(tick);
       if (seg) {
             foreach(Viewer* v, cs->getViewer())
-                  v->moveCursor(seg);
+                  v->moveCursor(seg, -1);
             }
       cs->setPlayPos(tick);
       cs->end();

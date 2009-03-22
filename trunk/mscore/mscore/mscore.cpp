@@ -356,6 +356,7 @@ MuseScore::MuseScore()
          << "system-break" << "page-break"
          << "edit-element"
          << "mag" << "reset-positions" << "inspector" << "script-debug"
+         << "backspace"
          ;
 
       foreach(const QString& s, sl) {
@@ -1856,6 +1857,8 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "script-debug") {
             scriptDebug = a->isChecked();
             }
+      else if (cmd == "backspace")
+            undo();
       else {
             if (cs)
                   cs->cmd(cmd);
@@ -2179,6 +2182,7 @@ void MuseScore::setPos(int t)
          .arg(tick,     3, 10, QLatin1Char('0'))
          );
       }
+
 //---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
