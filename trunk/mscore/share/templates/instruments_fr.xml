@@ -17,6 +17,8 @@
          <short-name>Picc.</short-name>
          <transposition>12</transposition>
          <clef>0</clef>
+         <aPitchRange>74-105</aPitchRange>
+         <pPitchRange>74-108</pPitchRange>
          <channel>
             <program>72</program>
             </channel>
