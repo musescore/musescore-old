@@ -711,6 +711,7 @@
          <staves>2</staves>
          <clef staff="1">0</clef>
          <clef staff="2">4</clef>
+         <bracket>1</bracket>
          <channel>
             <program>21</program>
             </channel>
