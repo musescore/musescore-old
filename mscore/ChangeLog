@@ -1,4 +1,5 @@
 24.mar (ws)
+      - playback fixes for tied notes
       - clear some fields in the new wizard on second call, especially the
         instrument list and title string
       - fix barlines for grand staff instruments

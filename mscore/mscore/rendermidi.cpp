@@ -274,22 +274,6 @@ void Score::collectMeasureEvents(EventMap* events, TempoList* tempo, Measure* m,
                   // compute len of chord
 
                   int len = chord->tickLen();
-                  Note* note = chord->noteList()->front();
-                  if (note->tieBack())
-                        continue;
-                  bool tiedNote = false;
-                  int lastNoteLen = len;
-                  if (note->tieFor()) {
-                        tiedNote = true;
-                        while (note->tieFor()) {
-                              if (note->tieFor()->endNote() == 0)
-                                    break;
-                              note = note->tieFor()->endNote();
-                              lastNoteLen = note->chord()->tickLen();
-                              len += lastNoteLen;
-                              }
-                        }
-
                   int apl = 0;
                   if (!lv.isEmpty()) {
                         foreach(Chord* c, lv) {
@@ -334,18 +318,61 @@ void Score::collectMeasureEvents(EventMap* events, TempoList* tempo, Measure* m,
                         len -= sl;
                         tick += sl;
                         }
-                  if (tiedNote)
-                        len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
-                  else
-                        len = (len * gateTime) / 100 - 1;
-                  collectChord(events,
-                     instr,
-                     pitchOffset + ottavaShift,
-                     chord, tick + tickOffset,
-                     len
-                     );
-                  lv.clear();
-                  sv.clear();
+                  {
+                  pitchOffset += ottavaShift;
+                  tick += tickOffset;
+                  NoteList* nl = chord->noteList();
+                  Arpeggio* arpeggio = chord->arpeggio();
+
+                  int arpeggioOffset = 0;
+                  static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
+                  if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= unsigned(len))
+                        arpeggioOffset = arpeggioNoteDistance;
+
+                  int i = 0;
+                  for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
+                        Note* note = in->second;
+                        if (note->hidden() || note->tieBack())       // do not play overlapping notes
+                              continue;
+                        int idx = instr->channel[note->subchannel()]->channel;
+
+                        int len = note->chord()->tickLen();
+                        bool tiedNote = false;
+                        int lastNoteLen = len;
+                        if (note->tieFor()) {
+                              Note* n = note;
+                              tiedNote = true;
+                              while (n->tieFor()) {
+                                    if (n->tieFor()->endNote() == 0)
+                                          break;
+                                    n = n->tieFor()->endNote();
+                                    lastNoteLen = n->chord()->tickLen();
+                                    len += lastNoteLen;
+                                    }
+                              }
+                        if (tiedNote)
+                              len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
+                        else
+                              len = (len * gateTime) / 100 - 1;
+
+                        NoteOn* ev = new NoteOn();
+                        int pitch = note->pitch() + pitchOffset;
+                        if (pitch > 127)
+                              pitch = 127;
+                        ev->setPitch(pitch);
+                        ev->setVelo(60);
+                        ev->setNote(note);
+                        ev->setChannel(idx);
+                        events->insertMulti(tick + i * arpeggioOffset, ev);
+
+                        ev = new NoteOn();
+                        ev->setPitch(pitch);
+                        ev->setVelo(0);
+                        ev->setNote(note);
+                        ev->setChannel(idx);
+                        events->insertMulti(tick + len, ev);
+                        }
+                  }
                   }
             }
       //
