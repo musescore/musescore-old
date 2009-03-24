@@ -55,6 +55,8 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 
       if (state != EDIT && state != DRAG_EDIT) {
             ev->ignore();
+            if (debugMode)
+                  printf("  ignore\n");
             return;
             }
       Element* e = _score->editObject;

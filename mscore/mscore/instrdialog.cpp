@@ -549,6 +549,7 @@ void MuseScore::editInstrList()
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
                         ++rstaff;
                         }
+                  part->staves()->front()->setBarLineSpan(part->nstaves());
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
                   }

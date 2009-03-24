@@ -356,7 +356,7 @@ MuseScore::MuseScore()
          << "system-break" << "page-break"
          << "edit-element"
          << "mag" << "reset-positions" << "inspector" << "script-debug"
-         << "backspace"
+         << "backspace" << "find"
          ;
 
       foreach(const QString& s, sl) {

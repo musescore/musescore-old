@@ -79,6 +79,7 @@ class Staff;
 class Part;
 class Instrument;
 class UndoStack;
+class FindDialog;
 
 struct SigEvent;
 struct TEvent;
@@ -251,6 +252,8 @@ class Score : public QObject {
 
       int textUndoLevel;
 
+      FindDialog* findDialog;
+
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
       ChordRest* prevMeasure(ChordRest* element);
       void cmdSetBeamMode(int);
@@ -320,6 +323,7 @@ class Score : public QObject {
 
       void resetUserStretch();
       void toDefault();
+      void cmdFind();
 
    private slots:
       void textUndoLevelAdded();
