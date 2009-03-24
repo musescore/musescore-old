@@ -618,6 +618,8 @@ Harmony::Harmony(const Harmony& h)
 
 Harmony::~Harmony()
       {
+      foreach(const TextSegment* ts, textList)
+            delete ts;
       }
 
 //---------------------------------------------------------
@@ -765,141 +767,6 @@ void Harmony::read(QDomElement e)
                   domError(e);
             }
       buildText();
-      }
-
-//---------------------------------------------------------
-//   buildText
-//    construct Chord Symbol
-//---------------------------------------------------------
-
-void Harmony::buildText()
-      {
-      static const QChar majorSym(0x25b3);
-//      static const QChar minorSym(0x2d);
-//      static const QChar augmentedSym(0x2b);
-//      static const QChar diminishedSym(0xb0);
-//      static const QChar halfDiminishedSym(0xf8);
-      static const QChar sharpSym(0xe10c);
-      static const QChar flatSym(0xe10d);
-
-      if (_rootTpc == INVALID_TPC)
-            return;
-
-      clear();
-
-      QString txt(harmonyName());
-      const char* s = strdup(txt.toAscii().data());
-
-//    printf("Harmony:buildText(): Harmony <%s>\n", s);
-
-      QTextCursor cursor(doc());
-      cursor.setPosition(0);
-      QTextCharFormat f = cursor.charFormat();
-      QTextCharFormat noteSymbolFormat(f);
-#ifdef Q_WS_MAC
-      noteSymbolFormat.setFont(QFont("MScore1 20"));
-#else
-      noteSymbolFormat.setFont(QFont("MScore1"));
-#endif
-
-      QTextCharFormat snoteSymbolFormat(noteSymbolFormat);
-      snoteSymbolFormat.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-
-      if (*s == 0)
-            return;
-
-      cursor.insertText(QString(*s++));
-      if (s == 0)
-            return;
-
-      bool useSymbols = score()->styleB(ST_chordNamesUseSymbols);
-
-      if ((*s == '#') || (*s == 'b')) {
-            if (useSymbols)
-                  cursor.insertText(QString(*s), f);
-            else {
-                  if (*s == '#')
-                        cursor.insertText(QString(sharpSym), noteSymbolFormat);
-                  else
-                        cursor.insertText(QString(flatSym), noteSymbolFormat);
-                  }
-            ++s;
-            }
-      if (*s == ' ')
-            ++s;
-
-      QTextCharFormat sf(f);
-      sf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-
-      if (*s == 0)
-            return;
-      if (*s == 'm') {
-            cursor.insertText(QString("m"), f);
-            ++s;
-            }
-      else if (useSymbols && (strncmp(s, "Maj7", 4) == 0)) {
-            cursor.insertText(QString(majorSym), sf);
-            s += 4;
-            }
-      else if (strncmp(s, "Maj", 3) == 0) {
-            cursor.insertText(QString("maj"), f);
-            s += 3;
-            }
-      else if (strncmp(s, "aug", 3) == 0) {
-            cursor.insertText(QString("aug"), f);
-            s += 3;
-            }
-      else if (strncmp(s, "sus", 3) == 0) {
-            cursor.insertText(QString("sus"), f);
-            s += 3;
-            }
-      else if (strncmp(s, "dim", 3) == 0) {
-            cursor.insertText(QString("dim"), f);
-            s += 3;
-            }
-
-      const char* ss = s;
-      while (*ss) {
-            if (*ss == '/')
-                  break;
-            ++ss;
-            }
-      const char* slash = *ss == '/' ? ss+1 : 0;
-      if (ss - s > 0) {
-            while (s < ss) {
-                  if ((*s == '#') || (*s == 'b')) {
-                        if (useSymbols)
-                              cursor.insertText(QString(*s), sf);
-                        else {
-                              if (*s == '#')
-                                    cursor.insertText(QString(sharpSym), snoteSymbolFormat);
-                              else
-                                    cursor.insertText(QString(flatSym), snoteSymbolFormat);
-                              }
-                        ++s;
-                        }
-                  else
-                        cursor.insertText(QString(*s++), sf);
-                  }
-            }
-      if (slash) {
-            cursor.insertText(QString('/'), f);
-            cursor.insertText(QString(*slash++), f);
-
-            if ((*slash == '#') || (*slash == 'b')) {
-                  if (useSymbols)
-                        cursor.insertText(QString(*slash), f);
-                  else {
-                        if (*slash == '#')
-                              cursor.insertText(QString(sharpSym), noteSymbolFormat);
-                        else
-                              cursor.insertText(QString(flatSym), noteSymbolFormat);
-                        }
-                  ++slash;
-                  }
-            if (*slash)
-                  cursor.insertText(QString(slash), f);
-            }
       }
 
 //---------------------------------------------------------
@@ -1142,7 +1009,33 @@ void Score::harmonyEndEdit()
 void Harmony::layout(ScoreLayout* l)
       {
       setSubtype(TEXT_CHORD);    // apply style changes
-      Text::layout(l);
+
+      if (textList.isEmpty()) {
+            Text::layout(l);
+            return;
+            }
+      Element::layout(l);
+      Measure* m = static_cast<Measure*>(parent());
+      double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
+      double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
+      setPos(ipos() + QPointF(x, y));
+
+      y = ipos().y();
+      x = ipos().x();
+
+      QRectF bb;
+      foreach(const TextSegment* ts, textList) {
+            y += ts->baseLineOffset;
+            QFontMetricsF fm(ts->font);
+
+            QRectF br = fm.boundingRect(QRectF(x, y, 0.0, 0.0),
+               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft,
+               ts->text);
+            y -= ts->baseLineOffset;
+            x += br.width();
+            bb |= br;
+            }
+      setbbox(bb);
       }
 
 //---------------------------------------------------------
@@ -1156,4 +1049,212 @@ void Harmony::textStyleChanged(const QVector<TextStyle*>&s)
       setDefaultFont(ns->font());   // force
       buildText();
       }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Harmony::draw(QPainter& p) const
+      {
+      if (textList.isEmpty()) {
+            Text::draw(p);
+            return;
+            }
+      double y = ipos().y();
+      double x = ipos().x();
+
+      foreach(const TextSegment* ts, textList) {
+            y += ts->baseLineOffset;
+            QRectF br;
+            p.setFont(ts->font);
+            p.drawText(QRectF(x, y, 0.0, 0.0),
+               Qt::TextDontClip | Qt::TextSingleLine | Qt::AlignLeft,
+               ts->text, &br);
+            y -= ts->baseLineOffset;
+            x += br.width();
+            }
+      }
+
+//---------------------------------------------------------
+//   buildText
+//    construct Chord Symbol
+//---------------------------------------------------------
+
+void Harmony::buildText()
+      {
+      static const QChar majorSym(0x25b3);
+//      static const QChar minorSym(0x2d);
+//      static const QChar augmentedSym(0x2b);
+//      static const QChar diminishedSym(0xb0);
+//      static const QChar halfDiminishedSym(0xf8);
+      static const QChar sharpSym(0xe10c);
+      static const QChar flatSym(0xe10d);
+
+      if (_rootTpc == INVALID_TPC)
+            return;
+
+      clear();
+      bool useSymbols = score()->styleB(ST_chordNamesUseSymbols);
+
+      QString txt(harmonyName());
+// printf("Harmony <%s>\n", qPrintable(txt));
+      int size = txt.size();
+      int idx  = 0;
+      if (size == idx)
+            return;
+
+      foreach(const TextSegment* s, textList)
+            delete s;
+      textList.clear();
+
+      TextStyle* st = score()->textStyle(_textStyle);
+      QFont font1 = st->fontPx();
+      QFont font2(font1);
+#ifdef Q_WS_MAC
+      font2.setFamily("MScore1 20");
+#else
+      font2.setFamily("MScore1");
+#endif
+      font2.setPixelSize(font2.pixelSize() * 10 / 9);
+      QFont font1s = font1;
+      QFont font2s = font2;
+      double fsize2 = double(font2.pixelSize());
+      double fsize  = double(font1.pixelSize());
+
+      // root name
+      QChar c = txt[idx++];
+      TextSegment* ts = new TextSegment;
+      ts->text = QString(c);
+      ts->font = font1;
+      ts->baseLineOffset = 0.0;
+      textList.append(ts);
+      if (size == idx)
+            return;
+
+      if ((txt[idx] == '#') || (txt[idx] == 'b')) {
+            ts = new TextSegment;
+            if (useSymbols) {
+                  ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
+                  ts->font = font2;
+                  ts->baseLineOffset = -fsize2 * .5;
+                  }
+            else {
+                  ts->text = QString(txt[idx]);
+                  ts->font = font1;
+                  ts->baseLineOffset = 0.0;
+                  }
+            textList.append(ts);
+            ++idx;
+            if (size == idx)
+                  return;
+            }
+      if (txt[idx] == ' ')
+            ++idx;
+      if (size == idx)
+            return;
+
+      int superOffset = -fsize * .3;
+
+      ts = new TextSegment;
+      ts->baseLineOffset = 0;
+      ts->font = font1;
+
+      if (txt.mid(idx, 1) == "m") {
+            ts->text = QString("m");
+            idx++;
+            }
+      else if (useSymbols && (txt.mid(idx, 4) == "Maj7")) {
+            ts->text = QString(majorSym);
+            idx += 4;
+            }
+      else if (txt.mid(idx, 3) == "Maj") {
+            ts->text = "maj";
+            idx += 3;
+            }
+      else if (txt.mid(idx, 3) == "aug") {
+            ts->text = "aug";
+            idx += 3;
+            }
+      else if (txt.mid(idx, 3) == "sus") {
+            ts->text = "sus";
+            idx += 3;
+            }
+      else if (txt.mid(idx, 3) == "dim") {
+            ts->text = "dim";
+            idx += 3;
+            }
+      textList.append(ts);
+      if (size == idx)
+            return;
+
+      int idx2 = idx;
+      while (idx2 < size) {
+            if (txt[idx2] == '/')
+                  break;
+            ++idx2;
+            }
+      int slashIdx = txt[idx2] == '/' ? idx2 + 1 : 0;
+      if (idx2 - idx > 0) {
+            while (idx < idx2) {
+                  ts = new TextSegment;
+                  ts->baseLineOffset = superOffset;
+                  if ((txt[idx] == '#') || (txt[idx] == 'b')) {
+                        if (useSymbols) {
+                              ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
+                              ts->font = font2s;
+                              ts->baseLineOffset -= fsize2 * .4;
+                              }
+                        else {
+                              ts->text = QString(txt[idx]);
+                              ts->font = font1s;
+                              }
+                        }
+                  else {
+                        ts->text = QString(txt[idx]);
+                        ts->font = font1s;
+                        }
+                  ++idx;
+                  textList.append(ts);
+                  }
+            }
+      idx = slashIdx;
+      if (idx) {
+            ts = new TextSegment;
+            ts->font = font1;
+            ts->text = "/" + QString(txt[idx]);
+            ts->baseLineOffset = 0;
+            textList.append(ts);
+            ++idx;
+            if (size == idx)
+                  return;
+            ts = new TextSegment;
+            ts->baseLineOffset = 0;
+            if ((txt[idx] == '#') || (txt[idx] == 'b')) {
+                  if (useSymbols) {
+                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
+                        ts->font = font2;
+                        ts->baseLineOffset -= fsize2 * .4;
+                        }
+                  else {
+                        ts->text = QString(txt[idx]);
+                        ts->font = font1;
+                        }
+                  }
+            else {
+                  ts->text = QString(txt[idx]);
+                  ts->font = font1s;
+                  }
+            ++idx;
+            textList.append(ts);
+            if (size == idx)
+                  return;
+
+            ts                 = new TextSegment;
+            ts->baseLineOffset = 0;
+            ts->text           = QString(txt[idx]);
+            ts->font           = font1;
+            textList.append(ts);
+            }
+      }
+
 

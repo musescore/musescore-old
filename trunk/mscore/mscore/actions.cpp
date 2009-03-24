@@ -1948,6 +1948,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("backspace"),
          QT_TR_NOOP("backspace")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "find",
+         QT_TR_NOOP("find"),
+         Qt::CTRL + Qt::Key_F,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("find"),
+         QT_TR_NOOP("find")
+         ),
       Shortcut(0, 0, 0),
       };
 

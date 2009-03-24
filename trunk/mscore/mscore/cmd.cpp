@@ -2333,6 +2333,8 @@ void Score::cmd(const QString& cmd)
                   toDefault();
             else if (cmd == "reset-stretch")
                   resetUserStretch();
+            else if (cmd == "find")
+                  cmdFind();
             else if (cmd == "")
                   ;
             else
@@ -2856,3 +2858,15 @@ void Score::selectMove(const QString& cmd)
                   }
             }
       }
+
+//---------------------------------------------------------
+//   cmdFind
+//---------------------------------------------------------
+
+void Score::cmdFind()
+      {
+      if (findDialog == 0) {
+            }
+      printf("cmdFind\n");
+      }
+

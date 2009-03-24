@@ -100,6 +100,17 @@ struct ChordDescription {
       };
 
 //---------------------------------------------------------
+//   TextSegment
+//---------------------------------------------------------
+
+struct TextSegment {
+      QString text;
+      double baseLineOffset;
+      QFont font;
+      double width;
+      };
+
+//---------------------------------------------------------
 //   class Harmony
 //
 //    root note and bass note are notatated as
@@ -126,6 +137,10 @@ class Harmony : public Text {
       int _rootTpc;                   // root note for chord
       const ChordDescription* _descr; // chord description
       QList<HDegree> _degreeList;
+
+      QList<TextSegment*> textList;
+
+      virtual void draw(QPainter&) const;
 
    public:
       Harmony(Score*);

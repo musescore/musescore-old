@@ -1,3 +1,8 @@
+24.mar (ws)
+      - fix barlines for grand staff instruments
+      - new experimental rendering implementation of chord names not using a qt
+        text document object. This allows for adjusting of superscript size and
+        position which is hardwired in qt text.
 22.mar (ws)
       - chordnames now always change, when text style changes
       - fix crash during drum entry

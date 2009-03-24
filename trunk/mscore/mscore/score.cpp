@@ -261,7 +261,6 @@ bool Score::needLayout() const
 
 Score::Score(const Style& s)
       {
-//      _mscVersion = MSCVERSION;
       info.setFile("");
 
       _undo = new UndoStack();
@@ -294,6 +293,7 @@ Score::Score(const Style& s)
       _playlistDirty    = false;
       rights            = 0;
       _state            = STATE_NORMAL;
+      findDialog        = 0;
 
       clear();
       }
