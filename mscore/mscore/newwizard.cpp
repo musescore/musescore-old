@@ -67,6 +67,16 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void InstrumentWizard::init()
+      {
+      partiturList->clear();
+      emit completeChanged(false);
+      }
+
+//---------------------------------------------------------
 //   on_instrumentList_itemSelectionChanged
 //---------------------------------------------------------
 
@@ -441,6 +451,19 @@ NewWizardPage1::NewWizardPage1(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   initializePage
+//---------------------------------------------------------
+
+void NewWizardPage1::initializePage()
+      {
+      w->title->setText("");
+      w->subtitle->setText("");
+      // w->composer->text();
+      // w->poet->text();
+      // w->copyright->text();
+      }
+
+//---------------------------------------------------------
 //   NewWizardPage2
 //---------------------------------------------------------
 
@@ -459,6 +482,15 @@ NewWizardPage2::NewWizardPage2(QWidget* parent)
       grid->addWidget(w, 0, 0);
       setLayout(grid);
       connect(w, SIGNAL(completeChanged(bool)), this, SLOT(setComplete(bool)));
+      }
+
+//---------------------------------------------------------
+//   initializePage
+//---------------------------------------------------------
+
+void NewWizardPage2::initializePage()
+      {
+      w->init();
       }
 
 //---------------------------------------------------------
