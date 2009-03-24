@@ -52,6 +52,7 @@ class InstrumentWizard : public QWidget, private Ui::InstrumentWizard {
    public:
       InstrumentWizard(QWidget* parent = 0);
       void createInstruments(Score*);
+      void init();
       };
 
 //---------------------------------------------------------
@@ -95,6 +96,7 @@ class NewWizardPage1 : public QWizardPage {
       QString composer() const           { return w->composer->text();   }
       QString poet() const               { return w->poet->text();       }
       QString copyright() const          { return w->copyright->text();  }
+      virtual void initializePage();
       };
 
 //---------------------------------------------------------
@@ -114,6 +116,7 @@ class NewWizardPage2 : public QWizardPage {
       NewWizardPage2(QWidget* parent = 0);
       virtual bool isComplete() const  { return complete; }
       void createInstruments(Score* s) { w->createInstruments(s); }
+      virtual void initializePage();
       };
 
 //---------------------------------------------------------
@@ -165,6 +168,7 @@ class NewWizardPage5 : public QWizardPage {
       NewWizardPage5(QWidget* parent = 0);
       virtual bool isComplete() const { return true; }
       int keysig() const;
+      void init();
       };
 
 //---------------------------------------------------------

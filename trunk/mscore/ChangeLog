@@ -1,4 +1,6 @@
 24.mar (ws)
+      - clear some fields in the new wizard on second call, especially the
+        instrument list and title string
       - fix barlines for grand staff instruments
       - new experimental rendering implementation of chord names not using a qt
         text document object. This allows for adjusting of superscript size and
