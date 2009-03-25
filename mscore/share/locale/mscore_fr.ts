@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Svenska</source>
-        <translation type="unfinished"></translation>
+        <translation>Svenska - Suédois</translation>
     </message>
 </context>
 <context>
@@ -113,8 +113,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1631 révisée JLW 17/03/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1631</translation>
+        <translatorcomment>r1660 révisée JLW 21/03/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1660</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1459,11 +1459,11 @@ failed: </source>
     </message>
     <message>
         <source>staff v-frame dist.</source>
-        <translation>Distance de la portée au cadre</translation>
+        <translation>Distance de la portée au cadre vertical</translation>
     </message>
     <message>
         <source>v-frame staff dist.</source>
-        <translation>Distance du cadre à la portée</translation>
+        <translation>Distance du cadre vertical à la portée</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -3276,7 +3276,7 @@ failed: </source>
     </message>
     <message>
         <source>add slur</source>
-        <translation>ajouter un coulé</translation>
+        <translation>ajouter un legato</translation>
     </message>
     <message>
         <source>crescendo</source>
@@ -3396,7 +3396,7 @@ failed: </source>
     </message>
     <message>
         <source>tie</source>
-        <translation>liaison</translation>
+        <translation>liaison de prolongation</translation>
     </message>
     <message>
         <source>pad rest</source>
@@ -3880,19 +3880,19 @@ failed: </source>
     </message>
     <message>
         <source>8va</source>
-        <translation>Ottava</translation>
+        <translation>Ottava Alta</translation>
     </message>
     <message>
         <source>15ma</source>
-        <translation>Quintadecima</translation>
+        <translation>Quintadecima Alta</translation>
     </message>
     <message>
         <source>8vb</source>
-        <translation>Ottava bassa</translation>
+        <translation>Ottava Bassa</translation>
     </message>
     <message>
         <source>15mb</source>
-        <translation>Quintadecima bassa</translation>
+        <translation>Quintadecima Bassa</translation>
     </message>
     <message>
         <source>pedal</source>
@@ -3960,7 +3960,7 @@ failed: </source>
     </message>
     <message>
         <source>VarCoda</source>
-        <translation>Coda Variable</translation>
+        <translation>Variation Coda</translation>
     </message>
     <message>
         <source>Codetta</source>
@@ -4878,7 +4878,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation>normal</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>broken</source>
@@ -4971,7 +4971,7 @@ avant de fermer ?</translation>
     <message>
         <source>normal</source>
         <comment>note head</comment>
-        <translation>normal</translation>
+        <translation>normale</translation>
     </message>
     <message>
         <source>crossed</source>
@@ -5005,7 +5005,7 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>slur</source>
-        <translation>coulé</translation>
+        <translation>legato</translation>
     </message>
 </context>
 <context>
@@ -6145,7 +6145,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Veuillez sélectionner une note ou une liaison et réessayez
+        <translation>Veuillez sélectionner une note ou une legato et réessayez
 </translation>
     </message>
     <message>
@@ -6498,15 +6498,15 @@ failed: </source>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation>Format Audio Wave (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
+        <translation>Format Audio Flac (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Format Audio Ogg Vorbis (*.ogg)</translation>
     </message>
 </context>
 <context>
@@ -6687,11 +6687,11 @@ failed: </source>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Coulé</translation>
+        <translation>Legato</translation>
     </message>
     <message>
         <source>Slur End</source>
-        <translation>Fin du coulé</translation>
+        <translation>Fin du Legato</translation>
     </message>
     <message>
         <source>Staff:</source>
@@ -6725,7 +6725,7 @@ failed: </source>
     </message>
     <message>
         <source>Slur Segment</source>
-        <translation>Segment de liaison</translation>
+        <translation>Segment de Legato</translation>
     </message>
     <message>
         <source>Up</source>
@@ -7601,15 +7601,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Treble Clef 8va</source>
-        <translation>Clef de Sol Ottava</translation>
+        <translation>Clef de Sol Ottava Alta</translation>
     </message>
     <message>
         <source>Treble Clef 15ma</source>
-        <translation>Clef de Sol Quintadecima</translation>
+        <translation>Clef de Sol Quintadecima Alta</translation>
     </message>
     <message>
         <source>Treble Clef 8va bassa</source>
-        <translation>Clef de Sol Ottava bassa</translation>
+        <translation>Clef de Sol Ottava Bassa</translation>
     </message>
     <message>
         <source>Bass Clef (F Clef)</source>
@@ -7617,11 +7617,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass Clef 8va bassa</source>
-        <translation>Clef de Fa Ottava bassa</translation>
+        <translation>Clef de Fa Ottava Bassa</translation>
     </message>
     <message>
         <source>Bass Clef 15mb bassa</source>
-        <translation>Clef de Fa Quintadecima bassa</translation>
+        <translation>Clef de Fa Quintadecima Bassa</translation>
     </message>
     <message>
         <source>Baritone Clef</source>
