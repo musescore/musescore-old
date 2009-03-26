@@ -16,7 +16,7 @@
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
          <transposition>12</transposition>
-         <clef>0</clef>
+         <clef>1</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
          <channel>
@@ -26,6 +26,9 @@
       <instrument>
          <name>Flute</name>
          <short-name>Fl.</short-name>
+         <clef>0</clef>
+         <aPitchRange>60-93</aPitchRange>
+         <pPitchRange>59-98</pPitchRange>
          <channel>
             <program>73</program>
             </channel>
@@ -55,7 +58,7 @@
          </instrument>
       <instrument>
            <name>Soprano Recorder</name>
-           <short-name>S.</short-name>
+           <short-name>Spo. Rec.</short-name>
            <clef>1</clef>
            <channel>
              <program>74</program>

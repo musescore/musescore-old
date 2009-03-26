@@ -400,9 +400,9 @@ void Seq::guiStop()
       //
       // deselect all selected notes
       //
-      foreach(const NoteOn* n, markedNotes) {
-            n->note()->setSelected(false);
-            cs->addRefresh(n->note()->abbox());
+      foreach(Note* n, markedNotes) {
+            n->setSelected(false);
+            cs->addRefresh(n->abbox());
             }
       markedNotes.clear();
       cs->setPlayPos(time2tick(playTime));
@@ -740,14 +740,24 @@ void Seq::heartBeat()
                   break;
             if (guiPos.value()->type() == ME_NOTEON) {
                   NoteOn* n = (NoteOn*)guiPos.value();
-                  n->note()->setSelected(n->velo());
-                  cs->addRefresh(n->note()->abbox());
+                  Note* note1 = n->note();
                   if (n->velo()) {
-                        markedNotes.append(n);
-                        note = n->note();
+                        note = note1;
+                        while (note1) {
+                              note1->setSelected(true);
+                              markedNotes.append(note1);
+                              cs->addRefresh(note1->abbox());
+                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
+                              }
+
                         }
                   else {
-                        markedNotes.removeAll(n);
+                        while (note1) {
+                              note1->setSelected(false);
+                              cs->addRefresh(note1->abbox());
+                              markedNotes.removeOne(note1);
+                              note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
+                              }
                         }
                   }
             }

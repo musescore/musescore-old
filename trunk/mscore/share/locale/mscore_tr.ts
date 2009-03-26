@@ -4996,6 +4996,14 @@ kaydetmek ister misiniz?</translation>
         <source>slur</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>find</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>

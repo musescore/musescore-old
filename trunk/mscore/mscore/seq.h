@@ -102,7 +102,7 @@ class Seq : public QObject {
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
-      QList<NoteOn*> markedNotes;         // notes marked as sounding
+      QList<Note*> markedNotes;         // notes marked as sounding
 
       int endTick;
 

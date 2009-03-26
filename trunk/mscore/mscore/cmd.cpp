@@ -2865,8 +2865,6 @@ void Score::selectMove(const QString& cmd)
 
 void Score::cmdFind()
       {
-      if (findDialog == 0) {
-            }
-      printf("cmdFind\n");
+      mscore->showSearchDialog();
       }
 

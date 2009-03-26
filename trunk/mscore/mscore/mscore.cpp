@@ -381,7 +381,35 @@ MuseScore::MuseScore()
 
       layout->addWidget(tab);
 
+      //---------------------------------------------------
+      //    search dialog
+      //---------------------------------------------------
+
+      searchDialog = new QWidget;
+      searchDialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+      QHBoxLayout* searchDialogLayout = new QHBoxLayout;
+      searchDialog->setLayout(searchDialogLayout);
+      layout->addWidget(searchDialog);
+
+      QToolButton* searchExit = new QToolButton;
+      searchExit->setIcon(QIcon(":/data/cancel.png"));
+      connect(searchExit, SIGNAL(clicked()), searchDialog, SLOT(hide()));
+      searchDialogLayout->addWidget(searchExit);
+
+      searchDialogLayout->addWidget(new QLabel(tr("Search: ")));
+
+      searchCombo = new QComboBox;
+      searchCombo->setEditable(true);
+      searchCombo->setInsertPolicy(QComboBox::InsertAtTop);
+      searchDialogLayout->addWidget(searchCombo);
+
+      searchDialogLayout->addStretch(10);
+      searchDialog->hide();
+
       connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+      connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
+         SLOT(searchTextChanged(const QString&)));
+
 
       QAction* whatsThis = QWhatsThis::createAction(this);
 
@@ -1800,7 +1828,9 @@ void MuseScore::cmd(QAction* a)
             }
       else
             lastCmd = cmd;
-      if (cmd == "instruments")
+      if (cmd == "escape" && searchDialog->isVisible())
+            searchDialog->hide();
+      else if (cmd == "instruments")
             editInstrList();
       else if (cmd == "clefs")
             clefMenu();
@@ -2218,9 +2248,38 @@ QProgressBar* MuseScore::showProgressBar()
       return _progressBar;
       }
 
+//---------------------------------------------------------
+//   hideProgressBar
+//---------------------------------------------------------
+
 void MuseScore::hideProgressBar()
       {
       if (_progressBar)
             _statusBar->removeWidget(_progressBar);
       }
+
+//---------------------------------------------------------
+//   showSearchDialog
+//---------------------------------------------------------
+
+void MuseScore::showSearchDialog()
+      {
+      if (!debugMode)
+            return;
+      searchCombo->clearEditText();
+      searchCombo->setFocus();
+      searchDialog->show();
+      }
+
+//---------------------------------------------------------
+//   searchTextChanged
+//---------------------------------------------------------
+
+void MuseScore::searchTextChanged(const QString& s)
+      {
+      if (cs == 0)
+            return;
+      printf("search <%s>\n", qPrintable(s));
+      }
+
 

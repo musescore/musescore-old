@@ -278,6 +278,34 @@ p, li { white-space: pre-wrap; }
         <comment>do not translate</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -1006,29 +1034,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Beam Mode:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>remove top note</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4983,6 +4988,14 @@ before closing?</source>
         <source>Ottava</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>find</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -7529,77 +7542,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -7622,49 +7564,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

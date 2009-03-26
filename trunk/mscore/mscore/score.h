@@ -79,8 +79,6 @@ class Staff;
 class Part;
 class Instrument;
 class UndoStack;
-class FindDialog;
-
 struct SigEvent;
 struct TEvent;
 
@@ -251,8 +249,6 @@ class Score : public QObject {
       QString _source;
 
       int textUndoLevel;
-
-      FindDialog* findDialog;
 
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
       ChordRest* prevMeasure(ChordRest* element);
