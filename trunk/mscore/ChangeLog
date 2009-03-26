@@ -1,3 +1,5 @@
+26.mar (tb)
+      - adding Chinese (Traditional) locale
 24.mar (ws)
       - playback fixes for tied notes
       - clear some fields in the new wizard on second call, especially the
