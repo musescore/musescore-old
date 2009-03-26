@@ -1295,7 +1295,10 @@ void ChangeClef::redo()
       ClefList* kl = staff->clefList();
       if (o != NO_CLEF) {
             iClefEvent ik = kl->find(tick);
-            kl->erase(ik);
+            if (ik == kl->end())
+                  printf("ChangeClef::redo: cannot find clef at %d\n", tick);
+            else
+                  kl->erase(ik);
             }
       if (n != NO_CLEF)
             (*kl)[tick] = n;

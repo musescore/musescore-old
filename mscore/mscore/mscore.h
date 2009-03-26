@@ -192,6 +192,9 @@ class MuseScore : public QMainWindow {
       QMenu* menuLayout;
       QMenu* menuStyle;
 
+      QWidget* searchDialog;
+      QComboBox* searchCombo;
+
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
       PageListEditor* pageListEdit;
@@ -305,6 +308,7 @@ class MuseScore : public QMainWindow {
       void dirtyChanged(Score*);
       void changeState(int);
       void setPos(int tick);
+      void searchTextChanged(const QString& s);
 
    public:
       MuseScore();
@@ -340,6 +344,7 @@ class MuseScore : public QMainWindow {
       void setCurrentScore(Score*);
       QProgressBar* showProgressBar();
       void hideProgressBar();
+      void showSearchDialog();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

@@ -339,19 +339,11 @@ void Staff::changeClef(int tick, int st)
       if (tick == 0 && st == CLEF_PERC)
             part()->setUseDrumset(true);
 
-      int oval = NO_CLEF;
       iClefEvent ki = _clefList->find(tick);
-      if (ki != _clefList->end()) {
-            oval = ki->second;
-            _clefList->erase(ki);
-            }
+      int oval = ki != _clefList->end() ? ki->second : NO_CLEF;
+      bool removeFlag = st == _clefList->clef(tick+1);
+      int nval = removeFlag ? NO_CLEF : st;
 
-      bool removeFlag = st == _clefList->clef(tick);
-      int nval = NO_CLEF;
-      if (!removeFlag) {
-            (*_clefList)[tick] = st;
-            nval = st;
-            }
       _score->undoChangeClef(this, tick, oval, nval);
 
       Measure* measure = _score->tick2measure(tick);
@@ -378,6 +370,8 @@ void Staff::changeClef(int tick, int st)
                   if (segment->subtype() != Segment::SegClef)
                         continue;
                   Clef* e = (Clef*)segment->element(track);
+                  if (e->tick() < tick)
+                        continue;
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;

@@ -37,8 +37,8 @@ install(FILES
       mscore_fr.ts
       mscore_nl.qm
       mscore_nl.ts
-      mscore_cz.qm
-      mscore_cz.ts
+      mscore_cs.qm
+      mscore_cs.ts
       mscore_gl.ts
       mscore_gl.qm
       mscore_tr.ts
