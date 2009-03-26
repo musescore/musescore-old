@@ -1,5 +1,6 @@
 26.mar (tb)
       - adding Chinese (Traditional) locale
+      - adding initial Swedish language update by Magnus Johansson
 24.mar (ws)
       - playback fixes for tied notes
       - clear some fields in the new wizard on second call, especially the
