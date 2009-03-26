@@ -107,10 +107,10 @@ QT4_WRAP_CPP (mocs
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
-if (APPLE OR MINGW)
+if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
       set (AUDIO pa.cpp pm.cpp)
-else (APPLE OR MINGW)
+else (MINGW)
       set (AUDIO "")
       if (USE_PORTAUDIO)
             set (AUDIO ${AUDIO} pa.cpp)
@@ -122,7 +122,13 @@ else (APPLE OR MINGW)
             set (AUDIO ${AUDIO} alsa.cpp midiseq.cpp rtctimer.cpp
                thread.cpp mididriver.cpp)
       endif (USE_ALSA)
-endif (APPLE OR MINGW)
+endif (MINGW)
+
+if (APPLE)
+  if (USE_PORTMIDI)
+    set (AUDIO ${AUDIO} pm.cpp)
+  endif (USE_PORTMIDI)
+ENDIF (APPLE)
 
 add_executable ( mscore
       ${qrc_files}
@@ -268,6 +274,12 @@ else (MINGW)
    if (HAS_AUDIOFILE)
       target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
+
+if (APPLE)
+   if (USE_PORTMIDI)
+      target_link_libraries(mscore portmidi)
+   endif (USE_PORTMIDI)
+endif (APPLE)
 
 if (QT45)
    target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )

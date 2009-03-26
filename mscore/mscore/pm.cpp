@@ -18,8 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <windows.h>
-#include <mmsystem.h>
+#ifndef __APPLE__			// should probably also not be included in linux...
+  #include <windows.h>
+  #include <mmsystem.h>
+#endif
+
 #include "portmidi/porttime/porttime.h"
 
 #include "mididriver.h"

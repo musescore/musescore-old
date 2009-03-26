@@ -356,7 +356,7 @@ int quantizeLen(int, int len, int raster)
 
 double curTime()
       {
-#ifdef __MINGW32__
+#if defined (__MINGW32__) || defined (__APPLE__)
       struct timeval t;
       gettimeofday(&t, 0);
       return (double)((double)t.tv_sec + (t.tv_usec / 1000000.0));
