@@ -423,6 +423,11 @@ TextStyle::TextStyle(
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
    frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag)
       {
+		#ifdef Q_WS_MAC
+		  family = _family+" 20";
+		#else
+		  family = _family;
+		#endif
       }
 
 //---------------------------------------------------------
@@ -442,10 +447,6 @@ void setDefaultStyle()
 
 QFont TextStyle::font(double _spatium) const
       {
-#ifdef Q_WS_MAC
-      if (family == "MScore")
-            family = "Mscore 20";
-#endif
       QFont f(family);
       f.setBold(bold);
       f.setItalic(italic);

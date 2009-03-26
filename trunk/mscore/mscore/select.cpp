@@ -43,7 +43,7 @@
 #include "barline.h"
 #include "xml.h"
 #include "lyrics.h"
-#include "values.h"
+#include "limits.h"
 #include "tuplet.h"
 
 //---------------------------------------------------------
