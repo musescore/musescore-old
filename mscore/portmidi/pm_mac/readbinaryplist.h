@@ -10,6 +10,8 @@
 
 #define MAX_KEY_SIZE 256
 
+#include <stdint.h>
+
 enum
 {
     // Object tags (high nybble)
@@ -34,13 +36,13 @@ enum
 };
 
 
-typedef struct {
+typedef struct pldata_struct {
     uint8_t *data;
     size_t len;
 } pldata_node, *pldata_ptr;
 
 
-typedef struct {
+typedef struct array_struct {
     struct value_struct **array;
     uint64_t length;
 } array_node, *array_ptr;
