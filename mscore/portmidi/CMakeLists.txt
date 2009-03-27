@@ -33,6 +33,7 @@ if (APPLE)
 	porttime/ptmacosx_mach.c
 	porttime/ptmacosx_cf.c
   )
+  include_directories(/Developer/Headers/FlatCarbon)
 else (APPLE)
   add_library (
     portmidi STATIC
@@ -43,7 +44,7 @@ else (APPLE)
       porttime/porttime.c
       porttime/ptwinmm.c
   )
-end (APPLE)
+endif (APPLE)
 
 include_directories(
       ${PROJECT_SOURCE_DIR}/portmidi/pm_common

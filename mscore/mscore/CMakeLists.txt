@@ -128,9 +128,24 @@ if (APPLE)
   if (USE_PORTMIDI)
     set (AUDIO ${AUDIO} pm.cpp)
   endif (USE_PORTMIDI)
-ENDIF (APPLE)
+endif (APPLE)
 
-add_executable ( mscore
+if (APPLE)
+	set (ExecutableName mscore MACOSX_BUNDLE)
+	set (MACOSX_BUNDLE_INFO_STRING MuseScore prerelease for Mac OSX)
+	set (MACOSX_BUNDLE_ICON_FILE data/mscore.icns)
+	set (MACOSX_BUNDLE_GUI_IDENTIFIER net.sourceforge.mscore)
+	set (MACOSX_BUNDLE_LONG_VERSION_STRING ${Mscore_VERSION_FULL})
+	set (MACOSX_BUNDLE_BUNDLE_NAME MuseScore)
+	set (MACOSX_BUNDLE_SHORT_VERSION_STRING ${Mscore_VERSION})
+	set (MACOSX_BUNDLE_BUNDLE_VERSION ${Mscore_VERSION_FULL})
+	set (MACOSX_BUNDLE_COPYRIGHT musescore.org)
+else (APPLE)
+	set (ExecutableName mscore)
+endif (APPLE)
+
+
+add_executable ( ${ExecutableName}
       ${qrc_files}
       ${ui_headers}
       ${mocs}
@@ -214,8 +229,6 @@ if (MINGW)
       target_link_libraries(mscore libsndfile-1)
    endif (HAS_AUDIOFILE)
 
-   install(TARGETS mscore RUNTIME DESTINATION bin)
-
    install_files ( /bin .dll
       ${CROSS}/bin/mingwm10.dll
       ${CROSS}/bin/portaudio.dll
@@ -261,7 +274,6 @@ else (MINGW)
       )
    target_link_libraries(mscore
       ${QT_LIBRARIES}
-      QtUiTools
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${ALSA_LIB}
@@ -275,11 +287,12 @@ else (MINGW)
       target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
 
-if (APPLE)
-   if (USE_PORTMIDI)
-      target_link_libraries(mscore portmidi)
-   endif (USE_PORTMIDI)
-endif (APPLE)
+   if (APPLE)
+     if (USE_PORTMIDI)
+       target_link_libraries(mscore portmidi)
+     endif (USE_PORTMIDI)
+     target_link_libraries(mscore ${OsxFrameworks})
+   endif (APPLE)
 
 if (QT45)
    target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
@@ -291,9 +304,13 @@ endif (QT45)
          target_link_libraries(mscore fluid )
    endif (USE_GLOBAL_FLUID)
 
-   install( TARGETS mscore RUNTIME DESTINATION bin )
-   install( FILES   data/mscore.png DESTINATION share/pixmaps)
-   install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
+   if (APPLE)
+     install (TARGETS mscore BUNDLE DESTINATION "$(HOME)/Applications")
+   else (APPLE)
+     install( TARGETS mscore RUNTIME DESTINATION bin )
+     install( FILES   data/mscore.png DESTINATION share/pixmaps)
+     install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
+   endif (APPLE)
 
 endif (MINGW)
 

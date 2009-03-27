@@ -43,6 +43,13 @@ endif (MINGW)
 if (APPLE)
       set(HAS_AUDIOFILE FALSE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
+      set(CMAKE_OSX_ARCHITECTURES i386 ppc)   # build universal library
+      find_library(AudioToolboxFW NAMES AudioToolbox)
+      find_library(AudioUnitFW NAMES AudioUnit)
+      find_library(CoreAudioFW NAMES CoreAudio)
+      find_library(CoreMidiFW NAMES CoreMIDI)
+      find_library(SystemConfigurationFW NAMES SystemConfiguration)
+      set(OsxFrameworks ${AudioToolboxFW} ${AudioUnitFW} ${CoreAudioFW} ${CoreMidiFW} ${SystemConfigurationFW})
 endif (APPLE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
@@ -116,6 +123,8 @@ include(${QT_USE_FILE})
 
 ##
 ## look for fluidsynth
+##
+
 if (USE_GLOBAL_FLUID)
       PKGCONFIG ( fluidsynth 1.0.0 FLUID_INCDIR FLUID_LIBDIR FLUID_LIB FLUID_CPP )
       if (NOT FLUID_INCDIR)
@@ -175,11 +184,16 @@ else (MINGW)
       message("optional package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
       set ( USE_PORTAUDIO 0 )
    endif (PORTAUDIO_INCDIR)
-   set (USE_PORTMIDI 0)
+   if (APPLE)
+      set ( USE_PORTMIDI  1 )
+   else (APPLE)
+      set (USE_PORTMIDI 0)
+   endif (APPLE)
 endif (MINGW)
 
-# produce config.h file
-#
+##
+## produce config.h file
+##
 configure_file (
       ${PROJECT_SOURCE_DIR}/config.h.in
       ${PROJECT_BINARY_DIR}/config.h
@@ -194,9 +208,9 @@ if (NOT USE_GLOBAL_FLUID)
       set (subdirs ${subdirs} fluid)
 endif (NOT USE_GLOBAL_FLUID)
 
-if (MINGW)
+if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)
-endif (MINGW)
+endif (MINGW OR APPLE)
 
 subdirs(${subdirs})
 
@@ -213,9 +227,10 @@ if (USE_GLOBAL_FLUID)
       include_directories(${FLUID_INCDIR})
 endif (USE_GLOBAL_FLUID)
 
-#
-# create package target
-#
+##
+## create package target
+##
+
 include (InstallRequiredSystemLibraries)
 
   SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MuseScore is a full featured WYSIWYG score editor")
@@ -268,7 +283,9 @@ include (InstallRequiredSystemLibraries)
 if (MINGW)
   set(CPACK_GENERATOR             "NSIS")
 else (MINGW)
-  set(CPACK_GENERATOR             "DEB;TBZ2")
+  if (NOT APPLE)
+    set(CPACK_GENERATOR             "DEB;TBZ2")
+  endif (NOT APPLE)
 endif (MINGW)
   set(CPACK_DEB "on")
 
