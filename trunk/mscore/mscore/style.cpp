@@ -416,7 +416,7 @@ TextStyle::TextStyle(
    bool sd,
    double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag)
 
-   : name(_name), family(_family), size(_size), bold(_bold),
+   : name(_name), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
    align(_align),
    xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
