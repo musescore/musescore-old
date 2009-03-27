@@ -372,6 +372,8 @@ void Score::adjustCanvasPosition(Element* el, bool playBack)
             m = static_cast<Lyrics*>(el)->measure();
       else if (el->type() == HARMONY)
             m = static_cast<Harmony*>(el)->measure();
+      else if (el->type() == MEASURE)
+            m = static_cast<Measure*>(el);
       else
             return;
 

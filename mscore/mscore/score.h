@@ -93,7 +93,8 @@ enum {
       STATE_NORMAL     = 1,
       STATE_NOTE_ENTRY = 2,
       STATE_EDIT       = 4,
-      STATE_PLAY       = 8
+      STATE_PLAY       = 8,
+      STATE_SEARCH     = 16
       };
 
 //---------------------------------------------------------
@@ -319,7 +320,6 @@ class Score : public QObject {
 
       void resetUserStretch();
       void toDefault();
-      void cmdFind();
 
    private slots:
       void textUndoLevelAdded();
@@ -733,6 +733,7 @@ class Score : public QObject {
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
       void endUndoRedo();
+      void search(const QString& s);
       };
 
 extern Score* gscore;

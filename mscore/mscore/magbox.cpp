@@ -95,21 +95,21 @@ double MagBox::getMag(Canvas* canvas)
       double cw      = canvas->fsize().width();
       double ch      = canvas->fsize().height();
       double nmag    = canvas->mag();
-      Score* score   = mscore->currentScore();
+      Score* score   = canvas->score();
       if (score == 0)
             return 1.0;
       PageFormat* pf = score->pageFormat();
       switch(currentIndex()) {
             case MAG_PAGE_WIDTH:      // page width
                   nmag *= cw / (pf->width() * DPI);
-                  canvas->setOffset(0.0, 0.0);
+//                  canvas->setOffset(0.0, 0.0);
                   break;
             case MAG_PAGE:     // page
                   {
                   double mag1 = cw  / (pf->width() * DPI);
                   double mag2 = ch / (pf->height() * DPI);
                   nmag  *= (mag1 > mag2) ? mag2 : mag1;
-                  canvas->setOffset(0.0, 0.0);
+//                  canvas->setOffset(0.0, 0.0);
                   }
                   break;
             case MAG_DBL_PAGE:    // double page
@@ -117,7 +117,7 @@ double MagBox::getMag(Canvas* canvas)
                   double mag1 = cw / (pf->width()*2*DPI+50.0);
                   double mag2 = ch / (pf->height() * DPI);
                   nmag  *= (mag1 > mag2) ? mag2 : mag1;
-                  canvas->setOffset(0.0, 0.0);
+//                  canvas->setOffset(0.0, 0.0);
                   }
                   break;
             case MAG_FREE:

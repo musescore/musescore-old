@@ -2177,3 +2177,48 @@ void Score::removeElement(Element* element)
             }
       }
 
+//---------------------------------------------------------
+//   search
+//---------------------------------------------------------
+
+void Score::search(const QString& s)
+      {
+      bool ok;
+
+      int n = s.toInt(&ok);
+      if (!ok || n <= 0)
+            return;
+
+      int i = 0;
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            ++i;
+            if (i == n) {
+                  Measure* measure = static_cast<Measure*>(mb);
+                  adjustCanvasPosition(measure, true);
+                  int tracks = nstaves() * VOICES;
+                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                        if (segment->subtype() != Segment::SegChordRest)
+                              continue;
+                        int track;
+                        for (track = 0; track < tracks; ++track) {
+                              ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                              if (cr) {
+                                    if (cr->type() == CHORD)
+                                          select(cr, SELECT_SINGLE, 0);
+                                    else
+                                          select(static_cast<Chord*>(cr)->upNote(), SELECT_SINGLE, 0);
+                                    break;
+                                    }
+                              }
+                        if (track != tracks)
+                              break;
+                        }
+                  updateAll = true;
+                  end();
+                  break;
+                  }
+            }
+      }
+

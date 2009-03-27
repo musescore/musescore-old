@@ -299,6 +299,7 @@ class MuseScore : public QMainWindow {
       void drumPaletteSelected(int);
       void undo();
       void redo();
+      void endSearch();
 
    public slots:
       void setCurrentScore(int);
@@ -344,7 +345,6 @@ class MuseScore : public QMainWindow {
       void setCurrentScore(Score*);
       QProgressBar* showProgressBar();
       void hideProgressBar();
-      void showSearchDialog();
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

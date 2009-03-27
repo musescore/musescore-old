@@ -1858,8 +1858,15 @@ void Score::cmd(const QString& cmd)
 //            _is.rest = false;
             end();
             }
+      else if (cmd == "find") {
+            if (_state == STATE_NOTE_ENTRY)
+                  setNoteEntry(false);
+            setState(STATE_SEARCH);
+            }
       else if (cmd == "escape") {
-            if (noteEntryMode())
+            if (state() == STATE_SEARCH)
+                  setState(STATE_NORMAL);
+            else if (noteEntryMode())
                   setNoteEntry(false);
             end();
             }
@@ -2333,8 +2340,6 @@ void Score::cmd(const QString& cmd)
                   toDefault();
             else if (cmd == "reset-stretch")
                   resetUserStretch();
-            else if (cmd == "find")
-                  cmdFind();
             else if (cmd == "")
                   ;
             else
@@ -2857,14 +2862,5 @@ void Score::selectMove(const QString& cmd)
                   adjustCanvasPosition(el, false);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   cmdFind
-//---------------------------------------------------------
-
-void Score::cmdFind()
-      {
-      mscore->showSearchDialog();
       }
 
