@@ -381,35 +381,7 @@ MuseScore::MuseScore()
 
       layout->addWidget(tab);
 
-      //---------------------------------------------------
-      //    search dialog
-      //---------------------------------------------------
-
-      searchDialog = new QWidget;
-      searchDialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-      QHBoxLayout* searchDialogLayout = new QHBoxLayout;
-      searchDialog->setLayout(searchDialogLayout);
-      layout->addWidget(searchDialog);
-
-      QToolButton* searchExit = new QToolButton;
-      searchExit->setIcon(QIcon(":/data/cancel.png"));
-      connect(searchExit, SIGNAL(clicked()), searchDialog, SLOT(hide()));
-      searchDialogLayout->addWidget(searchExit);
-
-      searchDialogLayout->addWidget(new QLabel(tr("Search: ")));
-
-      searchCombo = new QComboBox;
-      searchCombo->setEditable(true);
-      searchCombo->setInsertPolicy(QComboBox::InsertAtTop);
-      searchDialogLayout->addWidget(searchCombo);
-
-      searchDialogLayout->addStretch(10);
-      searchDialog->hide();
-
-      connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
-      connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
-         SLOT(searchTextChanged(const QString&)));
-
+      searchDialog = 0;
 
       QAction* whatsThis = QWhatsThis::createAction(this);
 
@@ -1828,9 +1800,7 @@ void MuseScore::cmd(QAction* a)
             }
       else
             lastCmd = cmd;
-      if (cmd == "escape" && searchDialog->isVisible())
-            searchDialog->hide();
-      else if (cmd == "instruments")
+      if (cmd == "instruments")
             editInstrList();
       else if (cmd == "clefs")
             clefMenu();
@@ -1944,6 +1914,9 @@ void MuseScore::changeState(int val)
                         }
                   }
             }
+      if (cs && (cs->state() == STATE_SEARCH) && (val != STATE_SEARCH))
+            searchDialog->hide();
+
       switch(val) {
             case STATE_DISABLED:
                   _modeText->setText(tr("no score"));
@@ -1965,6 +1938,40 @@ void MuseScore::changeState(int val)
                   break;
             case STATE_PLAY:
                   _modeText->setText(tr("play"));
+                  _modeText->show();
+                  break;
+            case STATE_SEARCH:
+                  if (searchDialog == 0) {
+                        searchDialog = new QWidget;
+                        searchDialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
+                        QHBoxLayout* searchDialogLayout = new QHBoxLayout;
+                        searchDialog->setLayout(searchDialogLayout);
+                        layout->insertWidget(2, searchDialog);
+
+                        QToolButton* searchExit = new QToolButton;
+                        searchExit->setIcon(QIcon(":/data/cancel.png"));
+                        connect(searchExit, SIGNAL(clicked()), SLOT(endSearch()));
+                        searchDialogLayout->addWidget(searchExit);
+
+                        searchDialogLayout->addWidget(new QLabel(tr("Search: ")));
+
+                        searchCombo = new QComboBox;
+                        searchCombo->setEditable(true);
+                        searchCombo->setInsertPolicy(QComboBox::InsertAtTop);
+                        searchDialogLayout->addWidget(searchCombo);
+
+                        searchDialogLayout->addStretch(10);
+                        searchDialog->hide();
+
+                        connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));
+                        connect(searchCombo, SIGNAL(editTextChanged(const QString&)),
+                           SLOT(searchTextChanged(const QString&)));
+                        }
+
+                  searchCombo->clearEditText();
+                  searchCombo->setFocus();
+                  searchDialog->show();
+                  _modeText->setText(tr("Search"));
                   _modeText->show();
                   break;
             default:
@@ -2259,19 +2266,6 @@ void MuseScore::hideProgressBar()
       }
 
 //---------------------------------------------------------
-//   showSearchDialog
-//---------------------------------------------------------
-
-void MuseScore::showSearchDialog()
-      {
-      if (!debugMode)
-            return;
-      searchCombo->clearEditText();
-      searchCombo->setFocus();
-      searchDialog->show();
-      }
-
-//---------------------------------------------------------
 //   searchTextChanged
 //---------------------------------------------------------
 
@@ -2279,7 +2273,16 @@ void MuseScore::searchTextChanged(const QString& s)
       {
       if (cs == 0)
             return;
-      printf("search <%s>\n", qPrintable(s));
+      cs->search(s);
       }
 
+//---------------------------------------------------------
+//   endSearch
+//---------------------------------------------------------
+
+void MuseScore::endSearch()
+      {
+      if (cs)
+            cs->setState(STATE_NORMAL);
+      }
 

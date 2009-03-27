@@ -863,7 +863,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH,
          "escape",
          QT_TR_NOOP("ESCAPE"),
          Qt::Key_Escape,
@@ -1949,7 +1949,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("backspace")
          ),
       Shortcut(
-         STATE_NORMAL,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "find",
          QT_TR_NOOP("find"),
          Qt::CTRL + Qt::Key_F,
