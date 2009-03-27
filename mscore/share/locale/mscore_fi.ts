@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fi_FI">
+<TS version="2.0" language="fi_FI" sourcelanguage="en">
 <defaultcodec></defaultcodec>
 <context>
     <name></name>
     <message>
         <source>system</source>
-        <translation type="unfinished">Järjestelmä</translation>
+        <translation>Järjestelmä</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation type="unfinished">Tšekki</translation>
+        <translation>Tšekki</translation>
     </message>
     <message>
         <source>Dansk</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanska</translation>
     </message>
     <message>
         <source>Nederlands</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollanti</translation>
     </message>
     <message>
         <source>English (GB)</source>
-        <translation type="unfinished">Englanti (GB)</translation>
+        <translation>Englanti (GB)</translation>
     </message>
     <message>
         <source>English (US)</source>
-        <translation type="unfinished">Englanti (US)</translation>
+        <translation>Englanti (US)</translation>
     </message>
     <message>
         <source>EspaÃ±ol</source>
-        <translation type="unfinished"></translation>
+        <translation>Espanja</translation>
     </message>
     <message>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>Suomi</translation>
     </message>
     <message>
         <source>FranÃ§ais</source>
-        <translation type="unfinished"></translation>
+        <translation>Ranska</translation>
     </message>
     <message>
         <source>Galego</source>
-        <translation type="unfinished"></translation>
+        <translation>Galicia</translation>
     </message>
     <message>
         <source>Deutsch</source>
-        <translation type="unfinished"></translation>
+        <translation>Saksa</translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation type="unfinished">Hindi</translation>
+        <translation>Hindi</translation>
     </message>
     <message>
         <source>Italiano</source>
-        <translation type="unfinished"></translation>
+        <translation>Italia</translation>
     </message>
     <message>
         <source>PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugali</translation>
     </message>
     <message>
         <source>Brasilian PortuguÃªs</source>
-        <translation type="unfinished"></translation>
+        <translation>Brasilian Portugali</translation>
     </message>
     <message>
         <source>Ð ÑÑÑÐºÐ¸Ð¹</source>
-        <translation type="unfinished"></translation>
+        <translation>Venäjä</translation>
     </message>
     <message>
         <source>TÃ¼rkÃ§e</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkki</translation>
     </message>
     <message>
         <source>acc discant</source>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Svenska</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruotsi</translation>
     </message>
 </context>
 <context>
@@ -140,15 +140,15 @@ p, li { white-space: pre-wrap; }
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Epävakaa esijulkaisu versiolle:</translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versio: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkistus: %1</translation>
     </message>
 </context>
 <context>
@@ -254,22 +254,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
+        <comment>do not translate</comment>
         <translation>Sointu</translation>
     </message>
     <message>
         <source>Stem</source>
+        <comment>do not translate</comment>
         <translation>Varsi</translation>
     </message>
     <message>
         <source>Hook</source>
+        <comment>do not translate</comment>
         <translation>Haka</translation>
     </message>
     <message>
         <source>Grace Note</source>
+        <comment>do not translate</comment>
         <translation>Koristenuotti</translation>
     </message>
     <message>
         <source>Stem Direction</source>
+        <comment>do not translate</comment>
         <translation>Varren suunta</translation>
     </message>
     <message>
@@ -308,12 +313,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Notes:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Nuotit:</translation>
+        <translation>Nuotit:</translation>
     </message>
     <message>
         <source>Help Lines:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Apuviivat:</translation>
+        <translation>Apuviivat:</translation>
     </message>
 </context>
 <context>
@@ -995,16 +1000,16 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>lisätila edellä</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>lisätila jäljessä</translation>
     </message>
 </context>
 <context>
@@ -1050,23 +1055,23 @@ p, li { white-space: pre-wrap; }
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished">Dynamiikka</translation>
+        <translation>Dynamiikka</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Aseta näkymättömäksi</translation>
+        <translation>Aseta näkymättömäksi</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Aseta näkyväksi</translation>
+        <translation>Aseta näkyväksi</translation>
     </message>
     <message>
         <source>Midi Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi ominaisuudet...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Tekstin ominaisuudet...</translation>
+        <translation>Tekstin ominaisuudet...</translation>
     </message>
 </context>
 <context>
@@ -1088,19 +1093,19 @@ p, li { white-space: pre-wrap; }
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished">MuseScore: Tekstiominaisuudet</translation>
+        <translation>MuseScore: Tekstiominaisuudet</translation>
     </message>
     <message>
         <source>Midi Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi arvot</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nopeus:</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished">tasaa vasen</translation>
+        <translation>tasaa vasen</translation>
     </message>
 </context>
 <context>
@@ -1354,31 +1359,31 @@ epäonnistui:</translation>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished">Symboli</translation>
+        <translation>Symboli</translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ankkurointi</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivaston päällä</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivaston alla</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished">Sointu</translation>
+        <translation>Soinnussa</translation>
     </message>
     <message>
         <source>TopChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Soinnun päällä</translation>
     </message>
     <message>
         <source>BottomChord</source>
-        <translation type="unfinished"></translation>
+        <translation>Soinnun alla</translation>
     </message>
 </context>
 <context>
@@ -1713,16 +1718,16 @@ epäonnistui:</translation>
     </message>
     <message>
         <source>dot dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>kaksoispisteen etäisyys</translation>
     </message>
     <message>
         <source>ledger line width</source>
-        <translation type="unfinished"></translation>
+        <translation>apuviivan paksuus</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -1792,87 +1797,87 @@ epäonnistui:</translation>
     <message>
         <source>Element</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Elementti</translation>
+        <translation></translation>
     </message>
     <message>
         <source>selected</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">valittu</translation>
+        <translation></translation>
     </message>
     <message>
         <source>generated</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">generoitu</translation>
+        <translation></translation>
     </message>
     <message>
         <source>visible</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">näkyvä</translation>
+        <translation></translation>
     </message>
     <message>
         <source>system</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Järjestelmä</translation>
+        <translation></translation>
     </message>
     <message>
         <source>subtype</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">alatyyppi</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Voice</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Stemma</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Staff</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Viivasto</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Time</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Tahtilajit</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Len</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Color</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">väri</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Pos</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CPos</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Offset</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Etäisyys</translation>
+        <translation></translation>
     </message>
     <message>
         <source> sp</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"> sp</translation>
+        <translation></translation>
     </message>
     <message>
         <source>BBox</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mag</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2292,7 +2297,7 @@ failed: </source>
     </message>
     <message>
         <source>dash</source>
-        <translation type="unfinished"></translation>
+        <translation>viiva</translation>
     </message>
     <message>
         <source>dot</source>
@@ -2300,11 +2305,11 @@ failed: </source>
     </message>
     <message>
         <source>dash dot</source>
-        <translation type="unfinished"></translation>
+        <translation>viiva piste</translation>
     </message>
     <message>
         <source>dash dot dot</source>
-        <translation type="unfinished"></translation>
+        <translation>viiva piste piste</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -2316,7 +2321,7 @@ failed: </source>
     </message>
     <message>
         <source>diagonally</source>
-        <translation type="unfinished"></translation>
+        <translation>poikittain</translation>
     </message>
     <message>
         <source>Begin</source>
@@ -2414,7 +2419,7 @@ failed: </source>
     </message>
     <message>
         <source>Syllabic:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tavu:</translation>
     </message>
     <message>
         <source>Single</source>
@@ -2422,19 +2427,19 @@ failed: </source>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished">Aloitus</translation>
+        <translation>Alkuun</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished">Loppu</translation>
+        <translation>Loppuun</translation>
     </message>
     <message>
         <source>Middle</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskelle</translation>
     </message>
     <message>
         <source>Row:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rivi:</translation>
     </message>
     <message>
         <source>End Tick:</source>
@@ -2481,7 +2486,7 @@ failed: </source>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Muoto</translation>
+        <translation>Muoto</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -2497,7 +2502,7 @@ failed: </source>
     </message>
     <message>
         <source>Irregular</source>
-        <translation type="unfinished"></translation>
+        <translation>Epäsäännöllinen</translation>
     </message>
     <message>
         <source>StartRepeat</source>
@@ -2568,7 +2573,7 @@ failed: </source>
     </message>
     <message>
         <source>nominal</source>
-        <translation type="unfinished"></translation>
+        <translation>nimellinen</translation>
     </message>
     <message>
         <source>/</source>
@@ -2576,7 +2581,7 @@ failed: </source>
     </message>
     <message>
         <source>actual</source>
-        <translation type="unfinished"></translation>
+        <translation>todellinen</translation>
     </message>
     <message>
         <source>Other</source>
@@ -2588,7 +2593,7 @@ failed: </source>
     </message>
     <message>
         <source>irregular</source>
-        <translation type="unfinished"></translation>
+        <translation>epäsäännöllinen</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -3572,7 +3577,7 @@ failed: </source>
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempopaletti</translation>
     </message>
     <message>
         <source>Tempo...</source>
@@ -4854,11 +4859,11 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>Lyrics odd lines</source>
-        <translation>Laulutekstin parittomat rivt</translation>
+        <translation>Laulutekstin parittomat rivit</translation>
     </message>
     <message>
         <source>Lyrics even lines</source>
-        <translation>Laulutekstin parilliset rivt</translation>
+        <translation>Laulutekstin parilliset rivit</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -4866,11 +4871,11 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>enable script debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>salli komentosarjan virheentunnistus</translation>
     </message>
     <message>
         <source>Enable Script Debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>Salli komentosarjan virheentunnistus</translation>
     </message>
     <message>
         <source>normal</source>
@@ -5966,7 +5971,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>cz Czech</source>
-        <translation>cz Tšekki</translation>
+        <translation type="unfinished">cz Tšekki</translation>
     </message>
     <message>
         <source>gl Galician</source>
@@ -6290,16 +6295,16 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>lisätila edellä</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">sp</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>lisätila jäljessä</translation>
     </message>
 </context>
 <context>
