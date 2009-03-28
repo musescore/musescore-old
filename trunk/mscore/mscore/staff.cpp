@@ -339,40 +339,37 @@ void Staff::changeClef(int tick, int st)
       if (tick == 0 && st == CLEF_PERC)
             part()->setUseDrumset(true);
 
-      iClefEvent ki = _clefList->find(tick);
-      int oval = ki != _clefList->end() ? ki->second : NO_CLEF;
-      bool removeFlag = st == _clefList->clef(tick+1);
-      int nval = removeFlag ? NO_CLEF : st;
+      iClefEvent ki   = _clefList->find(tick);
+      int oval        = ki != _clefList->end() ? ki->second : NO_CLEF;
+      bool removeFlag = st == _clefList->clef(tick-1);
+      int nval        = removeFlag ? NO_CLEF : st;
 
       _score->undoChangeClef(this, tick, oval, nval);
-
-      Measure* measure = _score->tick2measure(tick);
-      if (!measure) {
-            printf("measure for tick %d not found!\n", tick);
-            return;
-            }
 
       //---------------------------------------------
       //    if the next clef has the same subtype
       //    then its unnecessary and must be removed
       //---------------------------------------------
 
-      for (MeasureBase* mb = measure; mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      Measure* measure = _score->tick2measure(tick);
+      if (!measure) {
+            printf("measure for tick %d not found!\n", tick);
+            return;
+            }
+      Measure* m = measure;
+      if (m->prevMeasure())
+            m = m->prevMeasure();
+      for (; m; m = m->nextMeasure()) {
             bool found = false;
             //
-            // we assume Clefs are only in first track (voice 0)
+            // we assume Clefs are only in first track of staff (voice 0)
             //
             int track = idx() * VOICES;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegClef)
                         continue;
-                  Clef* e = (Clef*)segment->element(track);
-                  if (e->tick() < tick)
-                        continue;
                   int etick = segment->tick();
+                  Clef* e = static_cast<Clef*>(segment->element(track));
                   if (!e || (etick < tick))
                         continue;
                   int est = e->subtype();
@@ -407,13 +404,8 @@ void Staff::changeClef(int tick, int st)
             // if clef is at measure beginning, move to end of
             // previous measure
             //
-            if (measure->tick() == tick) {
-                  MeasureBase* mb = measure->prev();
-                  while (mb && mb->type() != MEASURE)
-                        mb = mb->prev();
-                  if (mb)
-                        measure = static_cast<Measure*>(mb);
-                  }
+            if (measure->tick() == tick && (tick != 0))
+                  measure = measure->prevMeasure();
             Segment::SegmentType stype = Segment::segmentType(CLEF);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
