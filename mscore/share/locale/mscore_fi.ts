@@ -278,39 +278,6 @@ p, li { white-space: pre-wrap; }
         <translation>Varren suunta</translation>
     </message>
     <message>
-        <source>Help Lines:</source>
-        <translation>Apuviivat:</translation>
-    </message>
-    <message>
-        <source>Note Attributes:</source>
-        <translation>Nuotin atribuutit:</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Sointu</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Varsi</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Haka</translation>
-    </message>
-    <message>
-        <source>Grace Note</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Koristenuotti</translation>
-    </message>
-    <message>
-        <source>Stem Direction</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished">Varren suunta</translation>
-    </message>
-    <message>
         <source>Notes:</source>
         <comment>do not translate</comment>
         <translation>Nuotit:</translation>
@@ -5014,6 +4981,14 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
