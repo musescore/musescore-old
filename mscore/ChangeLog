@@ -1,4 +1,5 @@
 28.mar (ws)
+      - fixed: accidental after a tied note
       - fixed: crash when dropping treble clef over bass clef
 27.mar (ws)
       - first code for new search function (Ctrl+F)

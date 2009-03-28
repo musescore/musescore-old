@@ -375,7 +375,8 @@ void Measure::layoutChords(Segment* segment, int startTrack, char* tversatz)
                               int accVal = ((tpc + 1) / 7) - 2;
                               accidental = ACC_NONE;
                               if (accVal != tversatz[line]) {
-                                    tversatz[line] = accVal;
+                                    if (note->tieBack() == 0)
+                                          tversatz[line] = accVal;
                                     switch(accVal) {
                                           case -2: accidental = ACC_FLAT2;  break;
                                           case -1: accidental = ACC_FLAT;   break;
