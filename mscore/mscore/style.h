@@ -245,6 +245,7 @@ enum STYLE_TYPE {
       ST_useGermanNoteNames,
       ST_warnPitchRange,
       ST_chordNamesUseSymbols,
+      ST_chordNamesUseJazzFont,
       ST_concertPitch,
       ST_createMultiMeasureRests,
       ST_minEmptyMeasures,

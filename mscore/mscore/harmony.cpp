@@ -32,6 +32,8 @@
 
 QHash<int, const ChordDescription*> Harmony::chordHash;
 
+static const bool useJazzFont = true;     // DEBUG
+
 //---------------------------------------------------------
 //   HChord
 //---------------------------------------------------------
@@ -1087,14 +1089,15 @@ void Harmony::buildText()
 //      static const QChar augmentedSym(0x2b);
 //      static const QChar diminishedSym(0xb0);
 //      static const QChar halfDiminishedSym(0xf8);
-      static const QChar sharpSym(0xe10c);
-      static const QChar flatSym(0xe10d);
+      QChar sharpSym(0xe10c);
+      QChar flatSym(0xe10d);
 
       if (_rootTpc == INVALID_TPC)
             return;
 
       clear();
-      bool useSymbols = score()->styleB(ST_chordNamesUseSymbols);
+      bool useSymbols  = score()->styleB(ST_chordNamesUseSymbols);
+      bool useJazzFont = score()->styleB(ST_chordNamesUseJazzFont);
 
       QString txt(harmonyName());
 // printf("Harmony <%s>\n", qPrintable(txt));
@@ -1110,11 +1113,16 @@ void Harmony::buildText()
       TextStyle* st = score()->textStyle(_textStyle);
       QFont font1 = st->fontPx();
       QFont font2(font1);
+      QFont font3(font1);
+
 #ifdef Q_WS_MAC
       font2.setFamily("MScore1 20");
+      font3.setFamily("MuseJazz 20");
 #else
       font2.setFamily("MScore1");
+      font3.setFamily("MuseJazz");
 #endif
+
       font2.setPixelSize(font2.pixelSize() * 10 / 9);
       QFont font1s = font1;
       QFont font2s = font2;
@@ -1125,7 +1133,7 @@ void Harmony::buildText()
       QChar c = txt[idx++];
       TextSegment* ts = new TextSegment;
       ts->text = QString(c);
-      ts->font = font1;
+      ts->font = useJazzFont ? font3 : font1;
       ts->baseLineOffset = 0.0;
       textList.append(ts);
       if (size == idx)
@@ -1133,15 +1141,28 @@ void Harmony::buildText()
 
       if ((txt[idx] == '#') || (txt[idx] == 'b')) {
             ts = new TextSegment;
-            if (useSymbols) {
-                  ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
-                  ts->font = font2;
-                  ts->baseLineOffset = -fsize2 * .5;
+            if (useJazzFont) {
+                  sharpSym = 0x5f;
+                  flatSym  = 0x5e;
+                  if ((txt[idx] == '#') || (txt[idx] == 'b')) {
+                        ts = new TextSegment;
+                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
+                        ts->font = font3;
+                        ts->baseLineOffset = 0.0;
+                        }
                   }
             else {
-                  ts->text = QString(txt[idx]);
-                  ts->font = font1;
-                  ts->baseLineOffset = 0.0;
+                  ts = new TextSegment;
+                  if (useSymbols) {
+                        ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
+                        ts->font = font2;
+                        ts->baseLineOffset = -fsize2 * .5;
+                        }
+                  else {
+                        ts->text = QString(txt[idx]);
+                        ts->font = font1;
+                        ts->baseLineOffset = 0.0;
+                        }
                   }
             textList.append(ts);
             ++idx;
@@ -1157,18 +1178,18 @@ void Harmony::buildText()
 
       ts = new TextSegment;
       ts->baseLineOffset = 0;
-      ts->font = font1;
+      ts->font = useJazzFont ? font3 : font1;
 
       if (txt.mid(idx, 1) == "m") {
-            ts->text = QString("m");
+            ts->text = useJazzFont ? QString(0x81) : QString("m");
             idx++;
             }
-      else if (useSymbols && (txt.mid(idx, 4) == "Maj7")) {
+      else if (!useJazzFont && useSymbols && (txt.mid(idx, 4) == "Maj7")) {
             ts->text = QString(majorSym);
             idx += 4;
             }
       else if (txt.mid(idx, 3) == "Maj") {
-            ts->text = "maj";
+            ts->text = useJazzFont ? QString(0x80) : "maj";
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "aug") {
@@ -1176,11 +1197,11 @@ void Harmony::buildText()
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "sus") {
-            ts->text = "sus";
+            ts->text = useJazzFont ? QString(0x85) : QString("sus");
             idx += 3;
             }
       else if (txt.mid(idx, 3) == "dim") {
-            ts->text = "dim";
+            ts->text = useJazzFont ? QString(0x84) : QString("dim");
             idx += 3;
             }
       textList.append(ts);
@@ -1208,6 +1229,23 @@ void Harmony::buildText()
                               ts->text = QString(txt[idx]);
                               ts->font = font1s;
                               }
+                        }
+                  else if (useJazzFont && (txt[idx] == '6' || txt[idx] == '7' || txt[idx] == '9')) {
+                        ts->text           = QString(txt[idx]);
+                        ts->font           = font3;
+                        ts->baseLineOffset = 0;
+                        }
+                  else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '1') {
+                        ts->text = QString(0x82);
+                        ts->font = font3;
+                        ts->baseLineOffset = 0;
+                        ++idx;
+                        }
+                  else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '3') {
+                        ts->text = QString(0x83);
+                        ts->font = font3;
+                        ts->baseLineOffset = 0;
+                        ++idx;
                         }
                   else {
                         ts->text = QString(txt[idx]);

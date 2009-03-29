@@ -1566,6 +1566,11 @@ int main(int argc, char* argv[])
             if (!debugMode)
                   exit(-1);
             }
+      if (-1 == QFontDatabase::addApplicationFont(":/fonts/MuseJazz.ttf")) {
+            fprintf(stderr, "Mscore: fatal error: cannot load internal font MuseJazz.ttf\n");
+            if (!debugMode)
+                  exit(-1);
+            }
 
       seq = new Seq();
       if (converterMode)

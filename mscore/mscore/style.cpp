@@ -355,6 +355,7 @@ Style::Style()
             StyleVal(false),                      // ST_useGermanNoteNames
             StyleVal(true),                       // ST_warnPitchRange
             StyleVal(false),                      // ST_chordNamesUseSymbols
+            StyleVal(false),                      // ST_chordNamesUseJazzFont
             StyleVal(false),                      // ST_concertPitch,
             StyleVal(false),                      // ST_createMultiMeasureRests,
             StyleVal(2),                          // ST_minEmptyMeasures,

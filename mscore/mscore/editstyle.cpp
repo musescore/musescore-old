@@ -104,6 +104,7 @@ void EditStyle::apply()
             }
       cs->setStyle(lstyle);
       cs->startCmd();
+      cs->textStyleChanged(cs->textStyles()); // only to update harmony text
       cs->setLayoutAll(true);
       cs->endCmd();
       cs->setClean(false);
@@ -162,6 +163,7 @@ void EditStyle::getValues()
       lstyle[ST_genCourtesyTimesig]      = StyleVal(genCourtesyTimesig->isChecked());
       lstyle[ST_useGermanNoteNames]      = StyleVal(useGermanNoteNames->isChecked());
       lstyle[ST_chordNamesUseSymbols]    = StyleVal(chordNamesUseSymbols->isChecked());
+      lstyle[ST_chordNamesUseJazzFont]   = StyleVal(chordNamesUseJazzFont->isChecked());
       lstyle[ST_concertPitch]            = StyleVal(concertPitch->isChecked());
       lstyle[ST_createMultiMeasureRests] = StyleVal(multiMeasureRests->isChecked());
       lstyle[ST_minEmptyMeasures]        = StyleVal(minEmptyMeasures->value());
@@ -247,6 +249,7 @@ void EditStyle::setValues()
 
       useGermanNoteNames->setChecked(lstyle[ST_useGermanNoteNames].toBool());
       chordNamesUseSymbols->setChecked(lstyle[ST_chordNamesUseSymbols].toBool());
+      chordNamesUseJazzFont->setChecked(lstyle[ST_chordNamesUseJazzFont].toBool());
       concertPitch->setChecked(lstyle[ST_concertPitch].toBool());
 
       multiMeasureRests->setChecked(lstyle[ST_createMultiMeasureRests].toBool());
