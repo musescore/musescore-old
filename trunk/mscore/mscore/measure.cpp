@@ -536,6 +536,18 @@ void Measure::layout0(int staffIdx)
       initLineList(tversatz, key);
 
       _breakMMRest = false;
+      if (score()->styleB(ST_createMultiMeasureRests)) {
+            // TODO: this is slow!
+            foreach(const Element* el, *score()->gel()) {
+                  if (el->type() == VOLTA) {
+                        const Volta* volta = static_cast<const Volta*>(el);
+                        if (tick() >= volta->tick() && tick() <= volta->tick2()) {
+                              _breakMMRest = true;
+                              break;
+                              }
+                        }
+                  }
+            }
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() == Segment::SegKeySig
                || segment->subtype() == Segment::SegStartRepeatBarLine

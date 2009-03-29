@@ -1,3 +1,7 @@
+29.mar (ws)
+      - added jazz font and new style option "use jazz font" which gives some
+        "real book feeling" for chord names. The implementation & font is currently
+       incomplete (lot of symbols are missing).
 28.mar (ws)
       - fixed: accidental after a tied note
       - fixed: crash when dropping treble clef over bass clef

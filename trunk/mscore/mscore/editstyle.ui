@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>EditStyleBase</class>
- <widget class="QDialog" name="EditStyleBase" >
-  <property name="geometry" >
+ <widget class="QDialog" name="EditStyleBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,161 +10,161 @@
     <height>475</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MuseScore: Edit Style</string>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <widget class="QListWidget" name="pageList" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+  <layout class="QGridLayout">
+   <item row="0" column="0">
+    <widget class="QListWidget" name="pageList">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="horizontalScrollBarPolicy" >
+     <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
-     <property name="alternatingRowColors" >
+     <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
-     <property name="resizeMode" >
+     <property name="resizeMode">
       <enum>QListView::Fixed</enum>
      </property>
-     <property name="uniformItemSizes" >
+     <property name="uniformItemSizes">
       <bool>true</bool>
      </property>
-     <property name="currentRow" >
+     <property name="currentRow">
       <number>-1</number>
      </property>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Score</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Page</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>System</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Measure</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Notes</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Numbers</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Beams</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Sizes</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Hairpins</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Chordnames</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Articulations, Ornaments</string>
       </property>
      </item>
      <item>
-      <property name="text" >
+      <property name="text">
        <string>Voices</string>
       </property>
      </item>
     </widget>
    </item>
-   <item row="0" column="1" >
-    <widget class="QStackedWidget" name="stackedWidget" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+   <item row="0" column="1">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="currentIndex" >
-      <number>10</number>
+     <property name="currentIndex">
+      <number>9</number>
      </property>
-     <widget class="QWidget" name="Seite_5" >
-      <layout class="QVBoxLayout" name="verticalLayout_6" >
+     <widget class="QWidget" name="Seite_5">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <widget class="QCheckBox" name="concertPitch" >
-         <property name="text" >
+        <widget class="QCheckBox" name="concertPitch">
+         <property name="text">
           <string>Display in Concert Pitch</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="multiMeasureRests" >
-         <property name="title" >
+        <widget class="QGroupBox" name="multiMeasureRests">
+         <property name="title">
           <string>Create Multi Measure Rests</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <property name="checkable" >
+         <property name="checkable">
           <bool>true</bool>
          </property>
-         <property name="checked" >
+         <property name="checked">
           <bool>false</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5" >
+         <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <layout class="QFormLayout" name="formLayout_3" >
-            <item row="2" column="0" >
-             <widget class="QLabel" name="label_16" >
-              <property name="text" >
+           <layout class="QFormLayout" name="formLayout_3">
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_16">
+              <property name="text">
                <string>Minumum width of measure:</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1" >
-             <widget class="QDoubleSpinBox" name="minMeasureWidth" >
-              <property name="suffix" >
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="minMeasureWidth">
+              <property name="suffix">
                <string>sp</string>
               </property>
-              <property name="minimum" >
+              <property name="minimum">
                <double>2.000000000000000</double>
               </property>
-              <property name="value" >
+              <property name="value">
                <double>4.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="label_15" >
-              <property name="text" >
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
                <string>Minimum Number of empty measures:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1" >
-             <widget class="QSpinBox" name="minEmptyMeasures" />
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="minEmptyMeasures"/>
             </item>
            </layout>
           </item>
@@ -171,18 +172,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="hideEmptyStaves" >
-         <property name="text" >
+        <widget class="QCheckBox" name="hideEmptyStaves">
+         <property name="text">
           <string>Hide Empty Staves</string>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -192,430 +193,430 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page2" >
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+     <widget class="QWidget" name="page2">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>staff upper border</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="staffUpperBorder" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="staffUpperBorder">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>-1000.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>1000.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="0" column="2" >
-        <widget class="QLabel" name="label_2" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>staff lower border</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="3" >
-        <widget class="QDoubleSpinBox" name="staffLowerBorder" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="0" column="3">
+        <widget class="QDoubleSpinBox" name="staffLowerBorder">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>-1000.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>1000.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_3" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>staff distance</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="staffDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="staffDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>-1000.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>1000.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="1" column="2" >
-        <widget class="QLabel" name="label_4" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>akkolade distance</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="3" >
-        <widget class="QDoubleSpinBox" name="akkoladeDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="akkoladeDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>-1000.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>1000.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_5" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>system distance</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="QDoubleSpinBox" name="systemDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="systemDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>-1000.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>1000.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="label_34" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_34">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>lyrics top distance</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1" >
-        <widget class="QDoubleSpinBox" name="lyricsDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="lyricsDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
         </widget>
        </item>
-       <item row="3" column="2" >
-        <widget class="QLabel" name="label_36" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_36">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>lyrics bottom dist.</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="3" >
-        <widget class="QDoubleSpinBox" name="lyricsMinBottomDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="3" column="3">
+        <widget class="QDoubleSpinBox" name="lyricsMinBottomDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="label_40" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_40">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>staff v-frame dist.</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1" >
-        <widget class="QDoubleSpinBox" name="systemFrameDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="systemFrameDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
         </widget>
        </item>
-       <item row="4" column="2" >
-        <widget class="QLabel" name="label_42" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="4" column="2">
+        <widget class="QLabel" name="label_42">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>v-frame staff dist.</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="3" >
-        <widget class="QDoubleSpinBox" name="frameSystemDistance" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="4" column="3">
+        <widget class="QDoubleSpinBox" name="frameSystemDistance">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>sp</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" >
-        <widget class="QLabel" name="label_6" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Page fill threshold:</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1" >
-        <widget class="QDoubleSpinBox" name="pageFillThreshold" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="pageFillThreshold">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>0</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>0.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>100.000000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>70.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="5" column="2" >
-        <widget class="QLabel" name="label_7" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="5" column="2">
+        <widget class="QLabel" name="label_7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Last system fill threshold</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="3" >
-        <widget class="QDoubleSpinBox" name="lastSystemFillThreshold" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="5" column="3">
+        <widget class="QDoubleSpinBox" name="lastSystemFillThreshold">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>0</number>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>100.000000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>100.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2" >
-        <widget class="QCheckBox" name="genClef" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="6" column="0" colspan="2">
+        <widget class="QCheckBox" name="genClef">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Create clef for all systems</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="2" colspan="2" >
-        <widget class="QCheckBox" name="genTimesig" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="6" column="2" colspan="2">
+        <widget class="QCheckBox" name="genTimesig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Create time signatures</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="0" colspan="2" >
-        <widget class="QCheckBox" name="genKeysig" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="7" column="0" colspan="2">
+        <widget class="QCheckBox" name="genKeysig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Create key sig for all systems</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="2" colspan="2" >
-        <widget class="QCheckBox" name="genCourtesyTimesig" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="7" column="2" colspan="2">
+        <widget class="QCheckBox" name="genCourtesyTimesig">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Create courtesy time signatures</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="0" >
+       <item row="8" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>137</width>
            <height>21</height>
@@ -625,44 +626,44 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_8" >
-      <layout class="QVBoxLayout" name="verticalLayout_3" >
+     <widget class="QWidget" name="Seite_8">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="groupBox_2" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
           <string>System</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2" >
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QFormLayout" name="formLayout" >
-            <item row="0" column="0" >
-             <widget class="QLabel" name="label_52" >
-              <property name="text" >
+           <layout class="QFormLayout" name="formLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_52">
+              <property name="text">
                <string>System Bracket Distance:</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" >
-             <widget class="QDoubleSpinBox" name="bracketDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="bracketDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
-              <property name="decimals" >
+              <property name="decimals">
                <number>1</number>
               </property>
-              <property name="minimum" >
+              <property name="minimum">
                <double>-1000.000000000000000</double>
               </property>
-              <property name="maximum" >
+              <property name="maximum">
                <double>1000.000000000000000</double>
               </property>
              </widget>
@@ -674,210 +675,210 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page3" >
-      <layout class="QVBoxLayout" name="verticalLayout_4" >
+     <widget class="QWidget" name="page3">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QGroupBox" name="groupBox_3" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
           <string>Measure</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2" >
-          <item row="0" column="0" >
-           <layout class="QFormLayout" name="formLayout_2" >
-            <property name="fieldGrowthPolicy" >
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <layout class="QFormLayout" name="formLayout_2">
+            <property name="fieldGrowthPolicy">
              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
             </property>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="label_11" >
-              <property name="text" >
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
                <string>spacing (1=tight)</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" >
-             <widget class="QDoubleSpinBox" name="measureSpacing" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="measureSpacing">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="minimum" >
+              <property name="minimum">
                <double>1.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="label_12" >
-              <property name="text" >
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
                <string>left margin</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1" >
-             <widget class="QDoubleSpinBox" name="barNoteDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="barNoteDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0" >
-             <widget class="QLabel" name="label_13" >
-              <property name="text" >
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
                <string>min. right margin</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1" >
-             <widget class="QDoubleSpinBox" name="noteBarDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="noteBarDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="0" >
-             <widget class="QLabel" name="label_14" >
-              <property name="text" >
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
                <string>min note distance</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1" >
-             <widget class="QDoubleSpinBox" name="minNoteDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="minNoteDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0" >
-             <widget class="QLabel" name="label_18" >
-              <property name="text" >
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_18">
+              <property name="text">
                <string>clef left margin</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1" >
-             <widget class="QDoubleSpinBox" name="clefLeftMargin" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="4" column="1">
+             <widget class="QDoubleSpinBox" name="clefLeftMargin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0" >
-             <widget class="QLabel" name="label_19" >
-              <property name="text" >
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_19">
+              <property name="text">
                <string>keysig left margin</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1" >
-             <widget class="QDoubleSpinBox" name="keysigLeftMargin" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="5" column="1">
+             <widget class="QDoubleSpinBox" name="keysigLeftMargin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="0" >
-             <widget class="QLabel" name="label_20" >
-              <property name="text" >
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_20">
+              <property name="text">
                <string>timesig left margin</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1" >
-             <widget class="QDoubleSpinBox" name="timesigLeftMargin" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="6" column="1">
+             <widget class="QDoubleSpinBox" name="timesigLeftMargin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0" >
-             <widget class="QLabel" name="label_21" >
-              <property name="text" >
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_21">
+              <property name="text">
                <string>clef/key right margin</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1" >
-             <widget class="QDoubleSpinBox" name="clefKeyRightMargin" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="7" column="1">
+             <widget class="QDoubleSpinBox" name="clefKeyRightMargin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="0" >
-             <widget class="QLabel" name="label_17" >
-              <property name="text" >
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="text">
                <string>begin repeat left margin</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1" >
-             <widget class="QDoubleSpinBox" name="beginRepeatLeftMargin" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="8" column="1">
+             <widget class="QDoubleSpinBox" name="beginRepeatLeftMargin">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="0" column="1" >
-           <spacer name="horizontalSpacer" >
-            <property name="orientation" >
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>242</width>
               <height>20</height>
@@ -885,12 +886,12 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="0" >
-           <spacer name="verticalSpacer_4" >
-            <property name="orientation" >
+          <item row="1" column="0">
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>34</height>
@@ -903,23 +904,23 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_9" >
-      <layout class="QVBoxLayout" name="verticalLayout_7" >
+     <widget class="QWidget" name="Seite_9">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QGroupBox" name="groupBox_4" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
           <string>Notes</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_8" >
+         <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
-           <spacer name="verticalSpacer_5" >
-            <property name="orientation" >
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>162</height>
@@ -928,63 +929,63 @@
            </spacer>
           </item>
           <item>
-           <layout class="QFormLayout" name="formLayout_4" >
-            <item row="0" column="0" >
-             <widget class="QLabel" name="label_22" >
-              <property name="text" >
+           <layout class="QFormLayout" name="formLayout_4">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_22">
+              <property name="text">
                <string>note dot distance</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" >
-             <widget class="QDoubleSpinBox" name="noteDotDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="noteDotDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="label_23" >
-              <property name="text" >
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_23">
+              <property name="text">
                <string>dot dot distance</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1" >
-             <widget class="QDoubleSpinBox" name="dotDotDistance" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="dotDotDistance">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0" >
-             <widget class="QLabel" name="label_24" >
-              <property name="text" >
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_24">
+              <property name="text">
                <string>ledger line width</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1" >
-             <widget class="QDoubleSpinBox" name="ledgerLineWidth" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="ledgerLineWidth">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix" >
+              <property name="suffix">
                <string>sp</string>
               </property>
              </widget>
@@ -992,11 +993,11 @@
            </layout>
           </item>
           <item>
-           <spacer name="verticalSpacer_6" >
-            <property name="orientation" >
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>161</height>
@@ -1009,43 +1010,43 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page1" >
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+     <widget class="QWidget" name="page1">
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>8</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="showPageNumber" >
-         <property name="title" >
+        <widget class="QGroupBox" name="showPageNumber">
+         <property name="title">
           <string>Page Numbers</string>
          </property>
-         <property name="checkable" >
+         <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" >
-           <widget class="QCheckBox" name="showFirstPageNumber" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="showFirstPageNumber">
+            <property name="text">
              <string>show first</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="QCheckBox" name="showOddEvenPageNumber" >
-            <property name="text" >
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="showOddEvenPageNumber">
+            <property name="text">
              <string>odd/even</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
+          <item row="1" column="0">
            <spacer>
-            <property name="orientation" >
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>40</height>
@@ -1057,54 +1058,54 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="showMeasureNumber" >
-         <property name="title" >
+        <widget class="QGroupBox" name="showMeasureNumber">
+         <property name="title">
           <string>Measure Numbers</string>
          </property>
-         <property name="checkable" >
+         <property name="checkable">
           <bool>true</bool>
          </property>
-         <property name="checked" >
+         <property name="checked">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" >
-           <widget class="QCheckBox" name="showFirstMeasureNumber" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="showFirstMeasureNumber">
+            <property name="text">
              <string>show first</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="QCheckBox" name="showAllStaffsMeasureNumber" >
-            <property name="text" >
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="showAllStaffsMeasureNumber">
+            <property name="text">
              <string>all staffs</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QRadioButton" name="showEverySystemMeasureNumber" >
-            <property name="text" >
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="showEverySystemMeasureNumber">
+            <property name="text">
              <string>every system</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0" >
-           <widget class="QRadioButton" name="showIntervalMeasureNumber" >
-            <property name="text" >
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="showIntervalMeasureNumber">
+            <property name="text">
              <string>interval</string>
             </property>
-            <property name="checked" >
+            <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="QSpinBox" name="intervalMeasureNumber" >
-            <property name="minimum" >
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="intervalMeasureNumber">
+            <property name="minimum">
              <number>1</number>
             </property>
-            <property name="value" >
+            <property name="value">
              <number>5</number>
             </property>
            </widget>
@@ -1114,68 +1115,68 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite" >
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_26" >
-         <property name="text" >
+     <widget class="QWidget" name="Seite">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_26">
+         <property name="text">
           <string>beam width</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="beamWidth" />
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="beamWidth"/>
        </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_27" >
-         <property name="text" >
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_27">
+         <property name="text">
           <string>beam distance</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="beamDistance" />
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="beamDistance"/>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_28" >
-         <property name="text" >
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_28">
+         <property name="text">
           <string>min. len</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="QDoubleSpinBox" name="beamMinLen" />
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="beamMinLen"/>
        </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="label_29" >
-         <property name="text" >
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_29">
+         <property name="text">
           <string>min. slope</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1" >
-        <widget class="QDoubleSpinBox" name="beamMinSlope" >
-         <property name="maximum" >
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="beamMinSlope">
+         <property name="maximum">
           <double>1.000000000000000</double>
          </property>
-         <property name="singleStep" >
+         <property name="singleStep">
           <double>0.100000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" >
-        <widget class="QLabel" name="label_30" >
-         <property name="text" >
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_30">
+         <property name="text">
           <string>max. slope</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" >
+       <item row="5" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>61</height>
@@ -1183,193 +1184,193 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="1" >
-        <widget class="QDoubleSpinBox" name="beamMaxSlope" >
-         <property name="maximum" >
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="beamMaxSlope">
+         <property name="maximum">
           <double>1.000000000000000</double>
          </property>
-         <property name="singleStep" >
+         <property name="singleStep">
           <double>0.100000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="2" column="2" >
-        <widget class="QLabel" name="label_31" >
-         <property name="text" >
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_31">
+         <property name="text">
           <string>spaces</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2" >
-        <widget class="QLabel" name="label_32" >
-         <property name="text" >
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_32">
+         <property name="text">
           <string>spaces</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2" >
-        <widget class="QLabel" name="label_33" >
-         <property name="text" >
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_33">
+         <property name="text">
           <string>beam width units</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_2" >
-      <layout class="QGridLayout" name="gridLayout" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_38" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+     <widget class="QWidget" name="Seite_2">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_38">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Small Staff Size</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="smallStaffSize" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="smallStaffSize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>10.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>200.000000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>70.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_44" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_44">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Small Note Size</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="smallNoteSize" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="smallNoteSize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>200.000000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>70.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_39" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_39">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Grace Note Size</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="QDoubleSpinBox" name="graceNoteSize" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="graceNoteSize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="minimum" >
+         <property name="minimum">
           <double>10.000000000000000</double>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>199.900000000000006</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>70.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="label_45" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_45">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>Small Clef Size</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1" >
-        <widget class="QDoubleSpinBox" name="smallClefSize" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="smallClefSize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="suffix" >
+         <property name="suffix">
           <string>%</string>
          </property>
-         <property name="decimals" >
+         <property name="decimals">
           <number>1</number>
          </property>
-         <property name="maximum" >
+         <property name="maximum">
           <double>199.000000000000000</double>
          </property>
-         <property name="value" >
+         <property name="value">
           <double>70.000000000000000</double>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" >
+       <item row="4" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>181</height>
@@ -1379,24 +1380,24 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_3" >
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_8" >
-         <property name="text" >
+     <widget class="QWidget" name="Seite_3">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
           <string>Line width</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="hairpinLineWidth" />
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="hairpinLineWidth"/>
        </item>
-       <item row="0" column="2" >
+       <item row="0" column="2">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>40</width>
            <height>20</height>
@@ -1404,32 +1405,32 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_9" >
-         <property name="text" >
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
           <string>Height</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="hairpinHeight" />
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="hairpinHeight"/>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_10" >
-         <property name="text" >
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
           <string>Continue Height</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" >
-        <widget class="QDoubleSpinBox" name="hairpinContinueHeight" />
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="hairpinContinueHeight"/>
        </item>
-       <item row="3" column="0" >
+       <item row="3" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -1439,21 +1440,21 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_4" >
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <widget class="QCheckBox" name="useGermanNoteNames" >
-         <property name="text" >
+     <widget class="QWidget" name="Seite_4">
+      <layout class="QGridLayout">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="useGermanNoteNames">
+         <property name="text">
           <string>use german names</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
+       <item row="0" column="1">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>40</width>
            <height>20</height>
@@ -1461,12 +1462,12 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="0" >
+       <item row="3" column="0">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -1474,75 +1475,82 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" >
-        <widget class="QCheckBox" name="chordNamesUseSymbols" >
-         <property name="text" >
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="chordNamesUseSymbols">
+         <property name="text">
           <string>use symbols</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="chordNamesUseJazzFont">
+         <property name="text">
+          <string>use jazz font</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_6" >
-      <layout class="QVBoxLayout" name="verticalLayout_9" >
+     <widget class="QWidget" name="Seite_6">
+      <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
-        <layout class="QFormLayout" name="formLayout_5" >
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label_35" >
-           <property name="text" >
+        <layout class="QFormLayout" name="formLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_35">
+           <property name="text">
             <string>articulation - note head distance</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QDoubleSpinBox" name="propertyDistanceHead" >
-           <property name="suffix" >
-            <string comment="space unit" >sp</string>
+         <item row="0" column="1">
+          <widget class="QDoubleSpinBox" name="propertyDistanceHead">
+           <property name="suffix">
+            <string comment="space unit">sp</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="label_37" >
-           <property name="text" >
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_37">
+           <property name="text">
             <string>articulation - note stem distance</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1" >
-          <widget class="QDoubleSpinBox" name="propertyDistanceStem" >
-           <property name="suffix" >
-            <string comment="space unit" >sp</string>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="propertyDistanceStem">
+           <property name="suffix">
+            <string comment="space unit">sp</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLabel" name="label_41" >
-           <property name="text" >
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_41">
+           <property name="text">
             <string>articulation - articulation distance</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1" >
-          <widget class="QDoubleSpinBox" name="propertyDistance" >
-           <property name="suffix" >
-            <string comment="space unit" >sp</string>
+         <item row="2" column="1">
+          <widget class="QDoubleSpinBox" name="propertyDistance">
+           <property name="suffix">
+            <string comment="space unit">sp</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="articulationTable" >
-         <property name="wordWrap" >
+        <widget class="QTableWidget" name="articulationTable">
+         <property name="wordWrap">
           <bool>false</bool>
          </property>
-         <property name="cornerButtonEnabled" >
+         <property name="cornerButtonEnabled">
           <bool>false</bool>
          </property>
-         <property name="rowCount" >
+         <property name="rowCount">
           <number>28</number>
          </property>
-         <property name="columnCount" >
+         <property name="columnCount">
           <number>2</number>
          </property>
          <row/>
@@ -1579,107 +1587,107 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_7" >
-      <layout class="QVBoxLayout" name="verticalLayout" >
+     <widget class="QWidget" name="Seite_7">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
           <string>Stem Direction in multi voice context</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_4" >
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_48" >
-            <property name="text" >
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_48">
+            <property name="text">
              <string>Voice 1</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="QRadioButton" name="voice1Up" >
-            <property name="text" >
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="voice1Up">
+            <property name="text">
              <string>Up</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2" >
-           <widget class="QRadioButton" name="voice1Down" >
-            <property name="text" >
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="voice1Down">
+            <property name="text">
              <string>Down</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_49" >
-            <property name="text" >
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_49">
+            <property name="text">
              <string>Voice 2</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="QRadioButton" name="voice2Up" >
-            <property name="text" >
+          <item row="1" column="1">
+           <widget class="QRadioButton" name="voice2Up">
+            <property name="text">
              <string>Up</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2" >
-           <widget class="QRadioButton" name="voice2Down" >
-            <property name="text" >
+          <item row="1" column="2">
+           <widget class="QRadioButton" name="voice2Down">
+            <property name="text">
              <string>Down</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0" >
-           <widget class="QLabel" name="label_50" >
-            <property name="text" >
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_50">
+            <property name="text">
              <string>Voice 3</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="QRadioButton" name="voice3Up" >
-            <property name="text" >
+          <item row="2" column="1">
+           <widget class="QRadioButton" name="voice3Up">
+            <property name="text">
              <string>Up</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="2" >
-           <widget class="QRadioButton" name="voice3Down" >
-            <property name="text" >
+          <item row="2" column="2">
+           <widget class="QRadioButton" name="voice3Down">
+            <property name="text">
              <string>Down</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0" >
-           <widget class="QLabel" name="label_51" >
-            <property name="text" >
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_51">
+            <property name="text">
              <string>Voice 4</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1" >
-           <widget class="QRadioButton" name="voice4Up" >
-            <property name="text" >
+          <item row="3" column="1">
+           <widget class="QRadioButton" name="voice4Up">
+            <property name="text">
              <string>Up</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="2" >
-           <widget class="QRadioButton" name="voice4Down" >
-            <property name="text" >
+          <item row="3" column="2">
+           <widget class="QRadioButton" name="voice4Down">
+            <property name="text">
              <string>Down</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0" >
-           <spacer name="verticalSpacer_3" >
-            <property name="orientation" >
+          <item row="4" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>187</height>
@@ -1694,20 +1702,20 @@
      </widget>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2" >
-    <layout class="QHBoxLayout" >
-     <property name="spacing" >
+   <item row="1" column="0" colspan="2">
+    <layout class="QHBoxLayout">
+     <property name="spacing">
       <number>6</number>
      </property>
-     <property name="margin" >
+     <property name="margin">
       <number>0</number>
      </property>
      <item>
       <spacer>
-       <property name="orientation" >
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -1716,22 +1724,22 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonApply" >
-       <property name="text" >
+      <widget class="QPushButton" name="buttonApply">
+       <property name="text">
         <string>Apply</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonOk" >
-       <property name="text" >
+      <widget class="QPushButton" name="buttonOk">
+       <property name="text">
         <string>OK</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonCancel" >
-       <property name="text" >
+      <widget class="QPushButton" name="buttonCancel">
+       <property name="text">
         <string>Cancel</string>
        </property>
       </widget>
@@ -1748,11 +1756,11 @@
    <receiver>EditStyleBase</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>545</x>
      <y>354</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>96</x>
      <y>254</y>
     </hint>
@@ -1764,11 +1772,11 @@
    <receiver>EditStyleBase</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>626</x>
      <y>354</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>179</x>
      <y>282</y>
     </hint>
@@ -1780,11 +1788,11 @@
    <receiver>stackedWidget</receiver>
    <slot>setCurrentIndex(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>42</x>
      <y>22</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>395</x>
      <y>16</y>
     </hint>

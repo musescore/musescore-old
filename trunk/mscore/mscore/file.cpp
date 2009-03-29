@@ -491,6 +491,11 @@ bool Score::saveAs(bool saveCopy)
             rv = saveOgg(fn);
             }
 #endif
+      else {
+            printf("internal error: unknown filter type <%s>\n",
+               qPrintable(selectedFilter));
+            return false;
+            }
       // after a successful saveas (compressed) MusicXML, clear the "dirty" flag
       if (rv && (fn.endsWith(".xml") || fn.endsWith(".mxl")) && !saveCopy)
             _undo->setClean();
