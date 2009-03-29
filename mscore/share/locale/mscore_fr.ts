@@ -113,8 +113,8 @@
     </message>
     <message>
         <source>Revision: 628</source>
-        <translatorcomment>r1660 révisée JLW 21/03/2009 - QT Linguist v4.5</translatorcomment>
-        <translation>Révision : 1660</translation>
+        <translatorcomment>r1681 révisée JLW 28/03/2009 - QT Linguist v4.5</translatorcomment>
+        <translation>Révision : 1681</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -5009,11 +5009,11 @@ avant de fermer ?</translation>
     </message>
     <message>
         <source>backspace</source>
-        <translation type="unfinished"></translation>
+        <translation>retour arrière</translation>
     </message>
     <message>
         <source>find</source>
-        <translation type="unfinished"></translation>
+        <translation>rechercher</translation>
     </message>
 </context>
 <context>

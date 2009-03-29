@@ -16,7 +16,7 @@
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
          <transposition>12</transposition>
-         <clef>0</clef>
+         <clef>1</clef>
          <aPitchRange>74-105</aPitchRange>
          <pPitchRange>74-108</pPitchRange>
          <channel>
@@ -26,6 +26,9 @@
       <instrument>
          <name>Flûte</name>
          <short-name>Fl.</short-name>
+         <clef>0</clef>
+         <aPitchRange>60-93</aPitchRange>
+         <pPitchRange>59-98</pPitchRange>
          <channel>
             <program>73</program>
             </channel>
@@ -55,7 +58,7 @@
          </instrument>
       <instrument>
            <name>Flûte à Bec Soprano</name>
-           <short-name>S.</short-name>
+           <short-name>Fl Bc S.</short-name>
            <clef>1</clef>
            <channel>
              <program>74</program>
@@ -63,21 +66,21 @@
          </instrument>
       <instrument>
            <name>Flûte à Bec Alto</name>
-           <short-name>A.</short-name>
+           <short-name>Fl Bc A.</short-name>
            <channel>
              <program>74</program>
            </channel>
          </instrument>
       <instrument>
            <name>Flûte à Bec Ténor</name>
-           <short-name>T.</short-name>
+           <short-name>Fl Bc T.</short-name>
            <channel>
              <program>74</program>
            </channel>
          </instrument>
       <instrument>
            <name>Flûte à Bec Basse</name>
-           <short-name>B.</short-name>
+           <short-name>Fl Bc B.</short-name>
            <transposition>12</transposition>
            <clef>4</clef>
            <channel>
