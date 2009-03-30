@@ -31,6 +31,7 @@ class Measure;
 class QPaintDevice;
 class System;
 class MeasureBase;
+class System;
 
 //---------------------------------------------------------
 //   ScoreLayout
@@ -66,7 +67,7 @@ class ScoreLayout : public Element {
       MeasureBase* curMeasure;
       bool doReLayout();
       void rebuildBspTree();
-      Measure* skipEmptyMeasures(Measure*);
+      Measure* skipEmptyMeasures(Measure*, System*);
 
    public:
       ScoreLayout(Score*);

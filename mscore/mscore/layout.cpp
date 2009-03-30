@@ -242,8 +242,11 @@ void ScoreLayout::doLayout()
       //---------------------------------------------------
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-            if (mb->type() == MEASURE)
-                  static_cast<Measure*>(mb)->layout2(this);
+            if (mb->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(mb);
+                  //if (m->multiMeasure() >= 0)
+                        m->layout2(this);
+                  }
             }
 
       foreach(Element* el, *score()->gel())
@@ -536,7 +539,7 @@ bool ScoreLayout::layoutPage()
 //    measures in sequence
 //---------------------------------------------------------
 
-Measure* ScoreLayout::skipEmptyMeasures(Measure* m)
+Measure* ScoreLayout::skipEmptyMeasures(Measure* m, System* system)
       {
       Measure* sm = m;
       int n       = 0;
@@ -553,6 +556,7 @@ Measure* ScoreLayout::skipEmptyMeasures(Measure* m)
       if (n >= score()->styleI(ST_minEmptyMeasures)) {
             for (int i = 0; i < (n-1); ++i) {
                   m->setMultiMeasure(-1);
+                  m->setSystem(system);
                   m = static_cast<Measure*>(m->next());
                   }
             m->setMultiMeasure(n);
@@ -589,7 +593,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             if (curMeasure->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(curMeasure);
                   if (score()->styleB(ST_createMultiMeasureRests))
-                        curMeasure = skipEmptyMeasures(m);
+                        curMeasure = skipEmptyMeasures(m, system);
                   else
                         m->setMultiMeasure(0);
                   }
