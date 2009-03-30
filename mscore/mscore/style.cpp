@@ -50,6 +50,7 @@ StyleType styleTypes[] = {
       StyleType("systemFrameDistance",     ST_SPATIUM),     // dist. between staff and vertical box
       StyleType("frameSystemDistance",     ST_SPATIUM),     // dist. between vertical box and next system
       StyleType("minMeasureWidth",         ST_SPATIUM),
+
       StyleType("barWidth",                ST_SPATIUM),
       StyleType("doubleBarWidth",          ST_SPATIUM),
       StyleType("endBarWidth",             ST_SPATIUM),
@@ -60,6 +61,7 @@ StyleType styleTypes[] = {
       StyleType("clefLeftMargin",          ST_SPATIUM),
       StyleType("keysigLeftMargin",        ST_SPATIUM),
       StyleType("timesigLeftMargin",       ST_SPATIUM),
+
       StyleType("clefKeyRightMargin",      ST_SPATIUM),
       StyleType("stemWidth",               ST_SPATIUM),
       StyleType("beginRepeatLeftMargin",   ST_SPATIUM),
@@ -70,6 +72,7 @@ StyleType styleTypes[] = {
       StyleType("staffLineWidth",          ST_SPATIUM),
       StyleType("ledgerLineWidth",         ST_SPATIUM),
       StyleType("akkoladeWidth",           ST_SPATIUM),
+
       StyleType("prefixDistance",          ST_SPATIUM),
       StyleType("prefixNoteDistance",      ST_SPATIUM),
       StyleType("beamWidth",               ST_SPATIUM),
@@ -80,6 +83,7 @@ StyleType styleTypes[] = {
       StyleType("maxBeamTicks",            ST_INT),
       StyleType("dotNoteDistance",         ST_SPATIUM),
       StyleType("dotRestDistance",         ST_SPATIUM),
+
       StyleType("dotDotDistance",          ST_SPATIUM),
       StyleType("propertyDistanceHead",    ST_SPATIUM),  // note property to note head
       StyleType("propertyDistanceStem",    ST_SPATIUM),  // note property to note stem
@@ -90,6 +94,7 @@ StyleType styleTypes[] = {
       StyleType("hairpinContHeight",       ST_SPATIUM),
       StyleType("hairpinWidth",            ST_SPATIUM),
       StyleType("showPageNumber",          ST_BOOL),
+
       StyleType("showPageNumberOne",       ST_BOOL),
       StyleType("pageNumberOddEven",       ST_BOOL),
       StyleType("showMeasureNumber",       ST_BOOL),
@@ -100,6 +105,7 @@ StyleType styleTypes[] = {
       StyleType("smallNoteMag",            ST_DOUBLE),
       StyleType("graceNoteMag",            ST_DOUBLE),
       StyleType("smallStaffMag",           ST_DOUBLE),
+
       StyleType("smallClefMag",            ST_DOUBLE),
       StyleType("genClef",                 ST_BOOL),           // create clef for all systems, not only for first
       StyleType("genKeysig",               ST_BOOL),         // create key signature for all systems
@@ -108,8 +114,10 @@ StyleType styleTypes[] = {
       StyleType("useGermanNoteNames",      ST_BOOL),
       StyleType("warnPitchRange",          ST_BOOL),
       StyleType("chordNamesUseSymbols",    ST_BOOL),
+      StyleType("chordNamesUseJazzFont",   ST_BOOL),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
-      StyleType("createMultiMeasureRests", ST_BOOL),
+
+/*80*/StyleType("createMultiMeasureRests", ST_BOOL),
       StyleType("minEmptyMeasures",        ST_INT),         // minimum number of empty measures for multi measure rest
       StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
       StyleType("hideEmptyStaves",         ST_BOOL),
@@ -124,6 +132,7 @@ StyleType styleTypes[] = {
 
       StyleType("gateTime",                ST_INT),           // 0-100%
       StyleType("tenutoGateTime",          ST_INT),
+
       StyleType("staccatoGateTime",        ST_INT),
       StyleType("slurGateTime",            ST_INT),
 

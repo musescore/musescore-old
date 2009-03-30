@@ -298,7 +298,10 @@ const ChordDescription Harmony::chordList[] = {
             { 1, "",                "major", 0,                                          HChord("C E G") },        // major triad
             { 2, "Maj",             0, 0,                                                HChord("C E G") },
             { 3, "5b",              0, 0,                                                HChord("C E Gb") },       // major flat 5 triad
-            { 4, "aug",             "augmented", 0,                                      HChord("C E G#") },       // augmented triad
+
+//            { 4, "aug",             "augmented", 0,                                      HChord("C E G#") },       // augmented triad
+            { 4, "+",             "augmented", 0,                                      HChord("C E G#") },       // augmented triad
+
             { 5, "6",               "major-sixth", 0,                                    HChord("C E G A") },      // sixth
             { 6, "Maj7",            "major-seventh", 0,                                  HChord("C E G B") },
             { 7, "Maj9",            "major-ninth", 0,                                    HChord("C E G B D") },
@@ -312,7 +315,10 @@ const ChordDescription Harmony::chordList[] = {
             { 14, "69",             "maj69", 0,                                          HChord("C D E G A") },
             { 15, "2",              "major", "add2",                                     HChord("C D E G") },
             { 16, "m",              "minor", 0,                                          HChord("C Eb G") },
-            { 17, "maug",           "minor", "alt#5",                                    HChord("C Eb G#") },
+
+//            { 17, "maug",           "minor", "alt#5",                                    HChord("C Eb G#") },
+            { 17, "m+",           "minor", "alt#5",                                    HChord("C Eb G#") },
+
             { 18, "mMaj7",          "minor-major", 0,                                    HChord("C Eb G B") },     // minor major 7th = major minor 7th
             { 19, "m7",             "minor-seventh", 0,                                  HChord("C Eb G Bb") },
 
@@ -1246,6 +1252,23 @@ void Harmony::buildText()
                         ts->font = font3;
                         ts->baseLineOffset = 0;
                         ++idx;
+                        }
+                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 's' || txt[idx+1] == 'u' || txt[idx+2] == 's')) {
+                        ts->text = QString(0x85);     // sus
+                        ts->baseLineOffset = 0;
+                        ts->font = font3;
+                        idx += 2;
+                        }
+                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'd' || txt[idx+1] == 'i' || txt[idx+2] == 'm')) {
+                        ts->text = QString(0x86);     // dim
+                        ts->baseLineOffset = 0;
+                        ts->font = font3;
+                        idx += 2;
+                        }
+                  else if (useJazzFont && (txt[idx] == '+')) {
+                        ts->text           = QString(0x86);
+                        ts->font           = font3;
+                        ts->baseLineOffset = 0;
                         }
                   else {
                         ts->text = QString(txt[idx]);
