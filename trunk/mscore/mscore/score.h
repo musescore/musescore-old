@@ -378,6 +378,7 @@ class Score : public QObject {
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
       void transpose();
+      void transpose(Note* n, int diff);
 
       void cmdEnterRest();
       void cmdEnterRest(Duration::DurationType d);
@@ -622,6 +623,7 @@ class Score : public QObject {
 
       bool pos2TickAnchor(const QPointF&, int staffIdx, int* tick, QPointF* anchor) const;
       void spell();
+      void spell(int startStaff, int endStaff, Segment* startSegment, Segment* endSegment);
       void spell(Note*);
       int nextSeg(int tick, int track);
       int nextSeg1(int tick, int& track);

@@ -241,37 +241,28 @@ void Staff::changeKeySig(int tick, int st)
       if (ot == st)
             return;                 // no change
 
-      int oval = -1000;
-      iKeyEvent ki = _keymap->find(tick);
-      if (ki != _keymap->end()) {
-            oval = ki->second;
-            _keymap->erase(ki);
-            }
+      iKeyEvent ki    = _keymap->find(tick);
+      int oval        = ki != _keymap->end() ? ki->second : NO_KEY;
+      bool removeFlag = st == _keymap->key(tick-1);
+      int nval        = removeFlag ? NO_KEY : st;
 
-      bool removeFlag = st == _keymap->key(tick);
-      int nval = -1000;
-      if (!removeFlag) {
-            setKey(tick, st);
-            nval = st;
-            }
       _score->undoChangeKeySig(this, tick, oval, nval);
-//      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, nval);
-
-      Measure* measure = _score->tick2measure(tick);
-      if (!measure) {
-            printf("measure for tick %d not found!\n", tick);
-            return;
-            }
 
       //---------------------------------------------
       //    if the next keysig has the same subtype
       //    then its unnecessary and must be removed
       //---------------------------------------------
 
-      for (MeasureBase* mb = measure; mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      Measure* measure = _score->tick2measure(tick);
+      if (!measure) {
+            printf("measure for tick %d not found!\n", tick);
+            return;
+            }
+      Measure* m = measure;
+      if (m->prevMeasure())
+            m = m->prevMeasure();
+      int track = idx() * VOICES;
+      for (Measure* m = measure; m; m = m->nextMeasure()) {
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegKeySig)
@@ -279,8 +270,7 @@ void Staff::changeKeySig(int tick, int st)
                   //
                   // we assume keySigs are only in first track (voice 0)
                   //
-                  int track = idx() * VOICES;
-                  KeySig* e = (KeySig*)segment->element(track);
+                  KeySig* e = static_cast<KeySig*>(segment->element(track));
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;

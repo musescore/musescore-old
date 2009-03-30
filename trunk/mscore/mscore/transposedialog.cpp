@@ -46,6 +46,19 @@ TransposeDialog::TransposeDialog(QWidget* parent)
 //   transpose
 //---------------------------------------------------------
 
+void Score::transpose(Note* n, int diff)
+      {
+      int npitch = n->pitch() + diff;
+      int d      = diff < 0 ? -diff : diff;
+      int tpc    = (d % 12) == 0 ? n->tpc() : pitch2tpc(npitch, 0);
+      int acc    = (d % 12) == 0 ? n->userAccidental() : 0;
+      undoChangePitch(n, npitch, tpc, acc);
+      }
+
+//---------------------------------------------------------
+//   transpose
+//---------------------------------------------------------
+
 void Score::transpose()
       {
       if (_layout->last() == 0)     // empty score?
@@ -78,16 +91,17 @@ void Score::transpose()
       bool transposeKeys = td.getTransposeKeys();
       if (sel->state() != SEL_SYSTEM)
             transposeKeys = false;
+      int d = diff < 0 ? -diff : diff;
+      bool fullOctave = (d % 12) == 0;
+      if (fullOctave)
+            transposeKeys = false;
 
       if (sel->state() == SEL_SINGLE || sel->state() == SEL_MULT) {
             QList<Element*>* el = sel->elements();
             foreach(Element* e, *el) {
                   if (e->type() != NOTE)
                         continue;
-                  Note* n = static_cast<Note*>(e);
-                  int npitch = n->pitch() + diff;
-                  int tpc    = pitch2tpc(npitch, 0);
-                  undoChangePitch(n, npitch, tpc, 0);
+                  transpose(static_cast<Note*>(e), diff);
                   }
             return;
             }
@@ -111,15 +125,12 @@ void Score::transpose()
                   QList<Note*> nl;
                   for (iNote i = notes->begin(); i != notes->end(); ++i)
                         nl.append(i->second);
-                  foreach(Note* note, nl) {
-                        int npitch = note->pitch() + diff;
-                        int tpc    = pitch2tpc(npitch, 0);
-                        undoChangePitch(note, npitch, tpc, 0);
-                        }
+                  foreach(Note* n, nl)
+                        transpose(n, diff);
                   }
             }
 
-      if (td.getTransposeChordNames()) {
+      if (!fullOctave && td.getTransposeChordNames()) {
             Measure* sm = sel->startSegment()->measure();
             Measure* em = sel->endSegment()->measure();
             int stick = sel->startSegment()->tick();
@@ -157,7 +168,12 @@ void Score::transpose()
                         }
                   }
             }
-      spell();
+      //
+      // do not respell if transposing a full octave
+      //
+      if (!fullOctave) {
+            spell(sel->staffStart, sel->staffEnd, sel->startSegment(), sel->endSegment());
+            }
       }
 
 //---------------------------------------------------------
@@ -186,11 +202,8 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
                         QList<Note*> nl;
                         for (iNote i = notes->begin(); i != notes->end(); ++i)
                               nl.append(i->second);
-                        foreach(Note* n, nl) {
-                              int npitch = n->pitch() + diff;
-                              int tpc    = pitch2tpc(npitch, 0);
-                              undoChangePitch(n, npitch, tpc, 0);
-                              }
+                        foreach(Note* n, nl)
+                              transpose(n, diff);
                         }
                   }
 #if 0
@@ -209,6 +222,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diff)
             int nKey  = transposeKey(oKey, diff);
             undoChangeKey(staff(staffIdx), tick, oKey, nKey);
             }
+      // spell(staffIdx, staffIdx+1, sel->startSegment(), sel->endSegment());
       spell();
       }
 

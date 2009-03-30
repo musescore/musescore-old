@@ -1,3 +1,9 @@
+30.mar (ws)
+      - handle octave transposition as special case: do not respell, keep user set
+        accidentals
+      - fix: Changing to C Major causes freeze
+      - fix: crash during drum note entry
+      - added shortcut ctrl+shift+b for "append multiple measures"
 29.mar (ws)
       - added jazz font and new style option "use jazz font" which gives some
         "real book feeling" for chord names. The implementation & font is currently

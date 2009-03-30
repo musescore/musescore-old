@@ -360,6 +360,7 @@
             <voice>0</voice>
             <name>Side Stick</name>
             <stem>2</stem>
+            <shortcut>C</shortcut>
             </Drum>
          <Drum pitch="38">
             <head>0</head>
@@ -367,6 +368,7 @@
             <voice>0</voice>
             <name>Acoustic Snare</name>
             <stem>2</stem>
+            <shortcut>D</shortcut>
             </Drum>
          <clef>14</clef>
          <stafflines>1</stafflines>

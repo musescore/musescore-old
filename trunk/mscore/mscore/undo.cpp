@@ -1260,7 +1260,10 @@ void ChangeKeySig::redo()
       KeyList* kl = staff->keymap();
       if (oldKeySig != NO_KEY) {
             iKeyEvent ik = kl->find(tick);
-            kl->erase(ik);
+            if (ik == kl->end())
+                  printf("ChangeKeySig::redo: cannot find key at tick %d\n", tick);
+            else
+                  kl->erase(ik);
             }
       if (newKeySig != NO_KEY)
             (*kl)[tick] = newKeySig;

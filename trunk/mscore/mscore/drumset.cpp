@@ -39,8 +39,27 @@ void Drumset::save(Xml& xml)
             xml.tag("voice", voice(i));
             xml.tag("name", name(i));
             xml.tag("stem", int(stemDirection(i)));
-            if (shortcut(i))
-                  xml.tag("shortcut", shortcut(i));
+            if (shortcut(i)) {
+                  switch (shortcut(i)) {
+                        case 'C':
+                        case 'D':
+                        case 'E':
+                        case 'F':
+                        case 'G':
+                        case 'A':
+                        case 'B':
+                              {
+                              char a[2];
+                              a[0] = shortcut(i);
+                              a[1] = 0;
+                              xml.tag("shortcut", a);
+                              }
+                              break;
+                        default:
+                              printf("illegal drum shortcut\n");
+                              break;
+                        }
+                  }
             xml.etag();
             }
       }
@@ -59,7 +78,8 @@ void Drumset::load(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            int i = val.toInt();
+            bool isNum;
+            int i = val.toInt(&isNum);
 
             if (tag == "head")
                   drum[pitch].notehead = i;
@@ -72,7 +92,7 @@ void Drumset::load(QDomElement e)
             else if (tag == "stem")
                   drum[pitch].stemDirection = Direction(i);
             else if (tag == "shortcut")
-                  drum[pitch].shortcut = i;
+                  drum[pitch].shortcut = isNum ? i : toupper(val[0].toAscii());
             else
                   domError(e);
             }
@@ -87,6 +107,7 @@ void Drumset::clear()
       for (int i = 0; i < 128; ++i) {
             drum[i].name = "";
             drum[i].notehead = -1;
+            drum[i].shortcut = 0;
             }
       }
 
