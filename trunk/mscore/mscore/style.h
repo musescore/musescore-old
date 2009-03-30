@@ -187,6 +187,7 @@ enum STYLE_TYPE {
       ST_systemFrameDistance,
       ST_frameSystemDistance,
       ST_minMeasureWidth,
+
       ST_barWidth,
       ST_doubleBarWidth,
       ST_endBarWidth,
@@ -197,6 +198,7 @@ enum STYLE_TYPE {
       ST_clefLeftMargin,
       ST_keysigLeftMargin,
       ST_timesigLeftMargin,
+
       ST_clefKeyRightMargin,
       ST_stemWidth,
       ST_beginRepeatLeftMargin,
@@ -207,6 +209,7 @@ enum STYLE_TYPE {
       ST_staffLineWidth,
       ST_ledgerLineWidth,
       ST_akkoladeWidth,
+
       ST_prefixDistance,
       ST_prefixNoteDistance,
       ST_beamWidth,
@@ -217,6 +220,7 @@ enum STYLE_TYPE {
       ST_maxBeamTicks,
       ST_dotNoteDistance,
       ST_dotRestDistance,
+
       ST_dotDotDistance,
       ST_propertyDistanceHead,
       ST_propertyDistanceStem,
@@ -227,6 +231,7 @@ enum STYLE_TYPE {
       ST_hairpinContHeight,
       ST_hairpinWidth,
       ST_showPageNumber,
+
       ST_showPageNumberOne,
       ST_pageNumberOddEven,
       ST_showMeasureNumber,
@@ -237,6 +242,7 @@ enum STYLE_TYPE {
       ST_smallNoteMag,
       ST_graceNoteMag,
       ST_smallStaffMag,
+
       ST_smallClefMag,
       ST_genClef,
       ST_genKeysig,
@@ -247,6 +253,7 @@ enum STYLE_TYPE {
       ST_chordNamesUseSymbols,
       ST_chordNamesUseJazzFont,
       ST_concertPitch,
+
       ST_createMultiMeasureRests,
       ST_minEmptyMeasures,
       ST_minMMRestWidth,
@@ -255,11 +262,11 @@ enum STYLE_TYPE {
       ST_stemDir2,
       ST_stemDir3,
       ST_stemDir4,
-
       ST_gateTime,
       ST_tenutoGateTime,
+
       ST_staccatoGateTime,
-      ST_slurGateTime,
+      ST_slurGateTime,        // 81
 
       ST_UfermataAnchor,
       ST_DfermataAnchor,
