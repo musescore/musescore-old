@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Svenska</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweeds</translation>
     </message>
 </context>
 <context>
@@ -4999,11 +4999,11 @@ voor dat u afsluit?</translation>
     </message>
     <message>
         <source>backspace</source>
-        <translation type="unfinished"></translation>
+        <translation>spatie terug</translation>
     </message>
     <message>
         <source>find</source>
-        <translation type="unfinished"></translation>
+        <translation>vind</translation>
     </message>
 </context>
 <context>
