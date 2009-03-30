@@ -1,4 +1,5 @@
 30.mar (ws)
+      - fix for multi measure rests and volta brackets
       - handle octave transposition as special case: do not respell, keep user set
         accidentals
       - fix: Changing to C Major causes freeze
