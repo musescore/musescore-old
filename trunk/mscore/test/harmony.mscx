@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.11">
-  <Mag>0.688757</Mag>
-  <xoff>18.1344</xoff>
-  <yoff>-50.9684</yoff>
+  <Mag>0.746171</Mag>
+  <xoff>25.9086</xoff>
+  <yoff>-56.9059</yoff>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
@@ -21,11 +21,13 @@
     <smallNoteMag>0.7</smallNoteMag>
     <graceNoteMag>0.7</graceNoteMag>
     <smallStaffMag>0.7</smallStaffMag>
+    <chordNamesUseJazzFont>1</chordNamesUseJazzFont>
     <concertPitch>1</concertPitch>
-    <minEmptyMeasures>-1077366016</minEmptyMeasures>
-    <minMMRestWidth>-1.83317e-42</minMMRestWidth>
-    <stemDir1>-1077366016</stemDir1>
-    <stemDir3>1</stemDir3>
+    <minEmptyMeasures>0</minEmptyMeasures>
+    <minMMRestWidth>2</minMMRestWidth>
+    <stemDir1>2</stemDir1>
+    <stemDir2>1</stemDir2>
+    <stemDir4>1</stemDir4>
     <gateTime>1</gateTime>
     <staccatoGateTime>40</staccatoGateTime>
     <slurGateTime>90</slurGateTime>

@@ -1223,9 +1223,20 @@ void Harmony::buildText()
       int slashIdx = txt[idx2] == '/' ? idx2 + 1 : 0;
       if (idx2 - idx > 0) {
             while (idx < idx2) {
+// printf("  Harmony(%d) <%s>\n", textList.size(), qPrintable(txt.mid(idx, idx2-idx)));
                   ts = new TextSegment;
                   ts->baseLineOffset = superOffset;
-                  if ((txt[idx] == '#') || (txt[idx] == 'b')) {
+                  if (useJazzFont && (txt[idx] == '#')) {
+                        ts->text           = QString(0x89);
+                        ts->font           = font3;
+                        ts->baseLineOffset = 0;
+                        }
+                  else if (useJazzFont && (txt[idx] == 'b')) {
+                        ts->text           = QString(0x88);
+                        ts->font           = font3;
+                        ts->baseLineOffset = 0;
+                        }
+                  else if ((txt[idx] == '#') || (txt[idx] == 'b')) {
                         if (useSymbols) {
                               ts->text = QString(txt[idx] == '#' ? sharpSym : flatSym);
                               ts->font = font2s;
@@ -1242,31 +1253,42 @@ void Harmony::buildText()
                         ts->baseLineOffset = 0;
                         }
                   else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '1') {
-                        ts->text = QString(0x82);
+                        ts->text = QString(0x82);     // 11
                         ts->font = font3;
                         ts->baseLineOffset = 0;
                         ++idx;
                         }
                   else if (useJazzFont && (idx+1 < idx2) && txt[idx] == '1' && txt[idx+1] == '3') {
-                        ts->text = QString(0x83);
+                        ts->text = QString(0x83);     // 13
                         ts->font = font3;
                         ts->baseLineOffset = 0;
                         ++idx;
                         }
-                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 's' || txt[idx+1] == 'u' || txt[idx+2] == 's')) {
+                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 's') && (txt[idx+1] == 'u') && (txt[idx+2] == 's')) {
                         ts->text = QString(0x85);     // sus
                         ts->baseLineOffset = 0;
                         ts->font = font3;
                         idx += 2;
                         }
-                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'd' || txt[idx+1] == 'i' || txt[idx+2] == 'm')) {
+                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'd') && (txt[idx+1] == 'i') && (txt[idx+2] == 'm')) {
                         ts->text = QString(0x86);     // dim
+                        ts->baseLineOffset = 0;
+                        ts->font = font3;
+                        idx += 2;
+                        }
+                  else if (useJazzFont && (idx + 2 < idx2) && (txt[idx] == 'a') && (txt[idx+1] == 'd') && (txt[idx+2] == 'd')) {
+                        ts->text = QString(0x8b);     // add
                         ts->baseLineOffset = 0;
                         ts->font = font3;
                         idx += 2;
                         }
                   else if (useJazzFont && (txt[idx] == '+')) {
                         ts->text           = QString(0x86);
+                        ts->font           = font3;
+                        ts->baseLineOffset = 0;
+                        }
+                  else if (useJazzFont && (txt[idx] == '5')) {
+                        ts->text           = QString(0x8a);
                         ts->font           = font3;
                         ts->baseLineOffset = 0;
                         }
