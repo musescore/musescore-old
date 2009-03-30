@@ -892,7 +892,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "append-measures",
          QT_TR_NOOP("append measures"),
-         0,
+         Qt::CTRL+Qt::SHIFT+Qt::Key_B,
          Qt::WindowShortcut,
          QT_TR_NOOP("Append Measures...")
          ),

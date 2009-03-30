@@ -438,18 +438,20 @@ void Score::cmdAddPitch(int note, bool addFlag)
       int pitch;
       Drumset* ds = _is.drumset;
       if (ds) {
-            int note1 = "CDEFGAB"[note];
+            char note1 = "CDEFGAB"[note];
             pitch = -1;
             for (int i = 0; i < 127; ++i) {
-                  if (!ds[i].isValid(i))
+                  if (!ds->isValid(i))
                         continue;
                   if (ds->shortcut(i) && (ds->shortcut(i) == note1)) {
                         pitch = i;
                         break;
                         }
                   }
-            if (pitch == -1)
+            if (pitch == -1) {
+                  printf("  shortcut %c not defined in drumset\n", note1);
                   return;
+                  }
             }
       else {
             int octave = _is.pitch / 12;

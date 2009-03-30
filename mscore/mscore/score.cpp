@@ -1417,6 +1417,35 @@ void Score::spell()
             }
       }
 
+void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* endSegment)
+      {
+      for (int i = startStaff; i < endStaff; ++i) {
+            QList<Note*> notes;
+            for(MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = static_cast<Measure*>(mb);
+                  for (Segment* s = startSegment; s && s != endSegment; s = s->next()) {
+                        int strack = i * VOICES;
+                        int etrack = strack + VOICES;
+                        for (int track = strack; track < etrack; ++track) {
+                              Element* e = s->element(track);
+                              if (e && e->type() == CHORD) {
+                                    Chord* chord = static_cast<Chord*>(e);
+                                    const NoteList* nl = chord->noteList();
+                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                          Note* note = in->second;
+                                          notes.append(note);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            spellNotelist(notes);
+            }
+      }
+
+
 //---------------------------------------------------------
 //   prevNote
 //---------------------------------------------------------

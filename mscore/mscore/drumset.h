@@ -35,7 +35,7 @@ struct DrumInstrument {
       int line;               ///< place notehead onto this line
       int voice;
       Direction stemDirection;
-      int shortcut;           ///< accelerator key (CDEFGAB)
+      char shortcut;          ///< accelerator key (CDEFGAB)
       };
 
 static const int DRUM_INSTRUMENTS = 128;
