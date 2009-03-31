@@ -229,6 +229,8 @@ if (MINGW)
       target_link_libraries(mscore libsndfile-1)
    endif (HAS_AUDIOFILE)
 
+   install( TARGETS mscore RUNTIME DESTINATION bin )
+
    install_files ( /bin .dll
       ${CROSS}/bin/mingwm10.dll
       ${CROSS}/bin/portaudio.dll
