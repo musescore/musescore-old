@@ -5,6 +5,9 @@
       - fix: Changing to C Major causes freeze
       - fix: crash during drum note entry
       - added shortcut ctrl+shift+b for "append multiple measures"
+      (db)
+      - added bongos and temple blocks to instruments lists
+      - update handbooks
 29.mar (ws)
       - added jazz font and new style option "use jazz font" which gives some
         "real book feeling" for chord names. The implementation & font is currently
