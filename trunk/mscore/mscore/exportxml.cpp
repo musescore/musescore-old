@@ -953,6 +953,7 @@ static void defaults(Xml& xml, Score* s)
 
 static void credits(Xml& xml, Score* s)
       {
+      // debug
       printf("credits:\n");
       const MeasureBase* measure = s->measures()->first();
       foreach(const Element* element, *measure->el()) {
@@ -981,6 +982,36 @@ static void credits(Xml& xml, Score* s)
                   if (mustPrint) printf(" '%s'\n", text->getText().toUtf8().data());
                   }
             }
+      if (s->copyright()) printf("copyright '%s'\n", s->copyright()->getText().toUtf8().data());
+      printf("end credits\n");
+      // write the credits
+      // TODO add position and formatting
+/*
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
+                  switch (text->subtype()) {
+                        case TEXT_TITLE:
+                        case TEXT_SUBTITLE:
+                        case TEXT_COMPOSER:
+                        case TEXT_POET:
+                        // case TEXT_TRANSLATOR:
+                              xml.stag("credit");
+                              xml.tag("credit-words", text->getText());
+                              xml.etag();
+                              break;
+                        default:
+                              printf("credits: text subtype %s not supported\n",
+                                      text->subtypeName().toUtf8().data());
+                        }
+                  }
+            }
+      if (s->copyright()) {
+            xml.stag("credit");
+            xml.tag("credit-words", s->copyright()->getText());
+            xml.etag();
+            }
+*/
       }
 
 //---------------------------------------------------------
@@ -2398,8 +2429,6 @@ foreach(Element* el, *(score->gel())) {
 
       if (score->rights)
             xml.tag("rights", score->rights->getText());
-      if (!score->source().isEmpty())
-            xml.tag("source", score->source());
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
@@ -2410,6 +2439,8 @@ foreach(Element* el, *(score->gel())) {
             xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
             }
       xml.etag();
+      if (!score->source().isEmpty())
+            xml.tag("source", score->source());
       xml.etag();
 
       defaults(xml, score);

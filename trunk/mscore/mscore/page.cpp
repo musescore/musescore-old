@@ -514,15 +514,8 @@ void PageFormat::writeMusicXML(Xml& xml)
 
       double t = 2 * PPI * 10 / 9;
 
-      if (name() != "Custom") {
-            xml.tag("pageFormat", QString(name()));
-            if (landscape)
-                  xml.tag("landscape", landscape);
-            }
-      else {
-            xml.tag("page-height", height() * t);
-            xml.tag("page-width", width() * t);
-            }
+      xml.tag("page-height", height() * t);
+      xml.tag("page-width", width() * t);
       QString type("both");
       if (twosided) {
             type = "even";
