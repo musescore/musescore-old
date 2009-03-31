@@ -487,6 +487,30 @@
             </channel>
          </instrument>
       <instrument>
+         <name>Bongos</name>
+         <short-name>Bong.</short-name>
+         <drumset>1</drumset>
+         <Drum pitch="60">
+            <head>0</head>
+            <line>3</line>
+            <voice>0</voice>
+            <name>Hi Bongo</name>
+            <stem>1</stem>
+            </Drum>
+         <Drum pitch="61">
+            <head>0</head>
+            <line>5</line>
+            <voice>0</voice>
+            <name>Low Bongo</name>
+            <stem>2</stem>
+            </Drum>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         <channel>
+            <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
          <name>Claves</name>
          <short-name>Clv.</short-name>
          <drumset>1</drumset>
@@ -535,6 +559,14 @@
          <stafflines>1</stafflines>
          <channel>
             <program>0</program>
+            </channel>
+         </instrument>
+      <instrument>
+         <name>Temple Blocks</name>
+         <short-name>Temp. Bl.</short-name>
+         <clef>14</clef>
+         <channel>
+            <program>115</program>
             </channel>
          </instrument>
       </instrument-group>
