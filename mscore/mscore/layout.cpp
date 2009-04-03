@@ -43,6 +43,7 @@
 #include "part.h"
 #include "utils.h"
 #include "measure.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -107,7 +108,7 @@ MeasureBase* ScoreLayout::last()  const
 ScoreLayout::ScoreLayout(Score* score)
    : Element(score)
       {
-      _spatium = ::_spatium;
+      _spatium = preferences.spatium * DPI;     // ::_spatium;
 
       _systems.clear();
       _pages.clear();

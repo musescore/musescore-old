@@ -105,6 +105,7 @@ struct Preferences {
       double paperWidth, paperHeight;     // only valid if paperSize is QPrinter::Custom
       bool landscape;
       bool twosided;
+      double spatium;
       int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
 
