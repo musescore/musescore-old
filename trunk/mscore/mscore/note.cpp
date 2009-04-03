@@ -463,7 +463,7 @@ void Note::draw(QPainter& p) const
       if (!_hidden) {
             if (staff() && !selected() && !score()->printing() && score()->styleB(ST_warnPitchRange)) {
                   Instrument* in = staff()->part()->instrument();
-                  int i = pitch() + (score()->styleB(ST_concertPitch) ? 0 : in->pitchOffset);
+                  int i = ppitch();
                   if (i < in->minPitchP || i > in->maxPitchP)
                         p.setPen(Qt::red);
                   else if (i < in->minPitchA || i > in->maxPitchA)
