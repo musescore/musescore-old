@@ -1,4 +1,5 @@
 3.apr (ws)
+      - fix style setting of stem direction in multi voice context
       - more clean implementation of play repeats
 1.apr (ws)
       - fix: layout position of rests in small staff
