@@ -45,28 +45,30 @@ Ottava::Ottava(Score* s)
 void Ottava::setSubtype(int val)
       {
       setEndHook(true);
-      setEndHookHeight(Spatium(1.5));
-
       Element::setSubtype(val);
       switch(val) {
             case 0:
                   setBeginText("8va", TEXT_STYLE_OTTAVA);
                   setContinueText("(8va)", TEXT_STYLE_OTTAVA);
+                  setEndHookHeight(Spatium(1.5));
                   _pitchShift = 12;
                   break;
             case 1:
                   setBeginText("15ma", TEXT_STYLE_OTTAVA);
                   setContinueText("(15ma)", TEXT_STYLE_OTTAVA);
+                  setEndHookHeight(Spatium(1.5));
                   _pitchShift = 24;
                   break;
             case 2:
                   setBeginText("8vb", TEXT_STYLE_OTTAVA);
                   setContinueText("(8vb)", TEXT_STYLE_OTTAVA);
+                  setEndHookHeight(Spatium(-1.5));
                   _pitchShift = -12;
                   break;
             case 3:
                   setBeginText("15mb", TEXT_STYLE_OTTAVA);
                   setContinueText("(15mb)", TEXT_STYLE_OTTAVA);
+                  setEndHookHeight(Spatium(-1.5));
                   _pitchShift = -24;
                   break;
             }

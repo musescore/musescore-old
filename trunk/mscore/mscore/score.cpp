@@ -64,6 +64,7 @@
 #include "magbox.h"
 #include "textpalette.h"
 #include "preferences.h"
+#include "repeatlist.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -293,6 +294,7 @@ Score::Score(const Style& s)
       _playlistDirty    = false;
       rights            = 0;
       _state            = STATE_NORMAL;
+      _repeatList       = new RepeatList(this);
 
       clear();
       }
@@ -310,6 +312,7 @@ Score::~Score()
       delete sigmap;
       delete _layout;
       delete sel;
+      delete _repeatList;
       }
 
 //---------------------------------------------------------
@@ -381,6 +384,7 @@ void Score::clear()
       sel->clear();
       _showInvisible = true;
       _showFrames = true;
+
       }
 
 //---------------------------------------------------------
@@ -1424,7 +1428,7 @@ void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* 
             for(MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = static_cast<Measure*>(mb);
+                  // Measure* m = static_cast<Measure*>(mb);
                   for (Segment* s = startSegment; s && s != endSegment; s = s->next()) {
                         int strack = i * VOICES;
                         int etrack = strack + VOICES;
@@ -2249,5 +2253,47 @@ void Score::search(const QString& s)
                   break;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   firstMeasure
+//---------------------------------------------------------
+
+Measure* Score::firstMeasure() const
+      {
+      MeasureBase* mb = _measures.first();
+      while (mb && mb->type() != MEASURE)
+            mb = mb->next();
+      return static_cast<Measure*>(mb);
+      }
+
+//---------------------------------------------------------
+//   lastMeasure
+//---------------------------------------------------------
+
+Measure* Score::lastMeasure() const
+      {
+      MeasureBase* mb = _measures.last();
+      while (mb && mb->type() != MEASURE)
+            mb = mb->prev();
+      return static_cast<Measure*>(mb);
+      }
+
+//---------------------------------------------------------
+//   utick2utime
+//---------------------------------------------------------
+
+double Score::utick2utime(int tick) const
+      {
+      return _repeatList->utick2utime(tick);
+      }
+
+//---------------------------------------------------------
+//   utime2utick
+//---------------------------------------------------------
+
+int Score::utime2utick(double utime)
+      {
+      return _repeatList->utime2utick(utime);
       }
 

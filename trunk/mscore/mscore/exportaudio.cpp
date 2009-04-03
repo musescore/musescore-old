@@ -75,9 +75,8 @@ bool Score::saveAudio(const QString& name, int format)
             delete synth;
             return false;
             }
-      TempoList tempo;
       EventMap events;
-      toEList(&events, &tempo);
+      toEList(&events);
 
       EventMap::const_iterator playPos;
       playPos = events.constBegin();
@@ -97,7 +96,7 @@ bool Score::saveAudio(const QString& name, int format)
       pBar->reset();
       EventMap::const_iterator endPos = events.constEnd();
       --endPos;
-      double et = tempo.tick2time(endPos.key());
+      double et = utick2utime(endPos.key());
       et += 1.0;   // add trailer (sec)
       pBar->setRange(0, int(et));
 
@@ -131,7 +130,7 @@ bool Score::saveAudio(const QString& name, int format)
             float* l = buffer;
             float* r = buffer + 1;
             for (; playPos != events.constEnd(); ++playPos) {
-                  double f = tempo.tick2time(playPos.key());
+                  double f = utick2utime(playPos.key());
                   if (f >= endTime)
                         break;
                   int n = lrint((f - playTime) * sampleRate);

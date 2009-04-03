@@ -22,6 +22,7 @@
 #define __GLOBALS_H__
 
 #define MSC_VERSION     "1.11"
+
 static const int MSCVERSION = 111;
 
 // History:

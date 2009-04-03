@@ -1715,6 +1715,10 @@ yapılamadı:</translation>
         <comment>space unit</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>use jazz font</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -5002,6 +5006,14 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -149,21 +149,21 @@ void PlayPanel::posChanged(int tick)
 //   heartBeat
 //---------------------------------------------------------
 
-void PlayPanel::heartBeat(int relTickpos, int absTickpos)
+void PlayPanel::heartBeat(int tick, int utick)
       {
       if (!isVisible())
             return;
-      if (cachedTickPosition == absTickpos)
+      if (cachedTickPosition == utick)
             return;
-      cachedTickPosition = relTickpos;
+      cachedTickPosition = utick;
 
-      int bar, beat, tick;
-      cs->sigmap->tickValues(relTickpos, &bar, &beat, &tick);
+      int bar, beat, t;
+      cs->sigmap->tickValues(tick, &bar, &beat, &t);
 
       char buffer[32];
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);
       posLabel->setText(QString(buffer));
-      posSlider->setValue(absTickpos);
+      posSlider->setValue(utick);
       }
 
 //---------------------------------------------------------

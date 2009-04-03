@@ -41,6 +41,7 @@
 #include "durationtype.h"
 #include "measure.h"
 #include "tempo.h"
+#include "repeatlist.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -192,22 +193,13 @@ void Score::collectChord(EventMap* events, Instrument* instr,
 //   collectMeasureEvents
 //---------------------------------------------------------
 
-void Score::collectMeasureEvents(EventMap* events, TempoList* tempo, Measure* m, int staffIdx,
-   int tickOffset)
+void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
       Part* prt         = part(staffIdx);
       Instrument* instr = prt->instrument();
       int pitchOffset   = styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
 
 // printf("collect %d-%d\n", m->tick(), m->tick() + m->tickLen());
-      if (staffIdx == 0) {
-            ciTEvent startE = tempomap->lower_bound(m->tick());
-            ciTEvent endE   = tempomap->lower_bound(m->tick() + m->tickLen());
-            for (ciTEvent i = startE; i != endE; ++i) {
-//                  printf("  addTempo %d %f\n", i->first + tickOffset, i->second.tempo);
-                  tempo->addTempo(i->first + tickOffset, i->second);
-                  }
-            }
 
       QList<Chord*> lv;       // appoggiatura
       QList<Chord*> sv;       // acciaccatura
@@ -405,12 +397,12 @@ struct RepeatLoop {
       enum LoopType { LOOP_REPEAT, LOOP_JUMP };
 
       LoopType type;
-      MeasureBase* m;   // start measure of LOOP_REPEAT
+      Measure* m;   // start measure of LOOP_REPEAT
       int count;
       QString stop, cont;
 
       RepeatLoop() {}
-      RepeatLoop(MeasureBase* _m)  {
+      RepeatLoop(Measure* _m)  {
             m     = _m;
             count = 0;
             type  = LOOP_REPEAT;
@@ -426,18 +418,16 @@ struct RepeatLoop {
 //   searchLabel
 //---------------------------------------------------------
 
-MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
+Measure* Score::searchLabel(const QString& s, Measure* start)
       {
       if (s == "start")
-            return layout()->first();
-//      else if (s == "end")
-//            ;
+            return firstMeasure();
       if (start == 0)
-            start = layout()->first();
-      for (MeasureBase* m = start; m; m = m->next()) {
+            start = firstMeasure();
+      for (Measure* m = start; m; m = m->nextMeasure()) {
             foreach(const Element* e, *m->el()) {
                   if (e->type() == MARKER) {
-                        Marker* marker = (Marker*)e;
+                        const Marker* marker = static_cast<const Marker*>(e);
                         if (marker->label() == s)
                               return m;
                         }
@@ -448,167 +438,47 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 
 //---------------------------------------------------------
 //   toEList
-//    implements:
-//          - repeats
-//          - volta
-//          - d.c. al fine
-//          - d.s. al fine
-//          - d.s. al coda
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, TempoList* tempo, bool expandRepeats, int offset, int staffIdx)
+void Score::toEList(EventMap* events, int offset, int staffIdx)
+      {
+      foreach(const RepeatSegment* rs, *_repeatList) {
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;
+            int tickOffset = rs->utick - rs->tick;
+            for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
+                  collectMeasureEvents(events, m, staffIdx, tickOffset + offset);
+                  if (m->tick() + m->tickLen() >= endTick)
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   updateRepeatList
+//---------------------------------------------------------
+
+void Score::updateRepeatList(bool expandRepeats)
       {
       if (!expandRepeats) {
-            if (staffIdx == 0) {
-                  for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i)
-                        tempo->addTempo(i->first, i->second);
-                  }
-            for (MeasureBase* mb = layout()->first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  collectMeasureEvents(events, tempo, (Measure*)mb, staffIdx, offset);
-                  }
-            return;
+            foreach(RepeatSegment* s, *_repeatList)
+                  delete s;
+            _repeatList->clear();
+            Measure* m = lastMeasure();
+            if (m == 0)
+                  return;
+            RepeatSegment* s = new RepeatSegment;
+            s->tick  = 0;
+            s->len   = m->tick() + m->tickLen();
+            s->utick = 0;
+            s->utime = 0.0;
+            s->timeOffset = 0.0;
+            _repeatList->append(s);
             }
-      QStack<RepeatLoop> rstack;
-      int tickOffset         = 0;
-      int overallRepeatCount = 0;
-      int repeatEnd          = -1;
-
-      MeasureBase* fm = layout()->first();
-      for (MeasureBase* mb = fm; mb;) {
-            if (mb->type() != MEASURE) {
-                  mb = mb->next();
-                  continue;
-                  }
-            Measure* m = static_cast<Measure*>(mb);
-            if (
-                  (m->repeatFlags() & RepeatStart)
-               && (rstack.isEmpty() || (rstack.top().m != m))
-               && (rstack.isEmpty() || (rstack.top().type != RepeatLoop::LOOP_JUMP))
-               && (repeatEnd == -1)
-               )
-                  rstack.push(RepeatLoop(m));
-
-            if (!rstack.isEmpty() && !isVolta(m->tick(), rstack.top().count + 1))
-                  tickOffset -= m->tickLen();   // skip this measure
-            else
-                  collectMeasureEvents(events, tempo, m, staffIdx, tickOffset + offset);
-
-            if (rstack.isEmpty()) {
-                  // Jumps are only accepted outside of other repeats
-                  if (m->repeatFlags() & RepeatJump) {
-                        Jump* s = 0;
-                        foreach(Element* e, *m->el()) {
-                              if (e->type() == JUMP) {
-                                    s = static_cast<Jump*>(e);
-                                    break;
-                                    }
-                              }
-                        if (s) {
-                              const QString& jumpTo = s->jumpTo();
-                              MeasureBase* nmb = searchLabel(jumpTo);
-                              if (nmb) {
-                                    rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
-                                    tickOffset += m->tick() + m->tickLen() - nmb->tick();
-                                    mb = nmb;
-                                    double t = tempomap->tempo(mb->tick());
-                                    tempo->addTempo(mb->tick() + tickOffset, t);
-                                    continue;
-                                    }
-                              else
-                                    printf("JUMP: label <%s> not found\n",
-                                       qPrintable(jumpTo));
-                              }
-                        else
-                              printf("Jump not found\n");
-                        }
-                  else if (m->repeatFlags() & RepeatEnd) {
-                        // this is a end repeat without start repeat:
-                        //    repeat from beginning
-                        //
-                        // dont repeat inside a repeat
-
-                        if (repeatEnd < 0 || repeatEnd == m->tick()) {
-                              ++overallRepeatCount;
-                              if (overallRepeatCount < m->repeatCount()) {
-                                    repeatEnd = m->tick();
-                                    mb = layout()->first();
-                                    tickOffset += m->tick() + m->tickLen() - mb->tick();
-
-                                    double t = tempomap->tempo(mb->tick());
-                                    tempo->addTempo(mb->tick() + tickOffset, t);
-
-                                    continue;
-                                    }
-                              else {
-                                    overallRepeatCount = 0;
-                                    repeatEnd = -1;
-                                    }
-                              }
-
-                        }
-                  }
-            else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {
-                  if (m->repeatFlags() & RepeatEnd) {
-                        //
-                        // increment repeat count
-                        //
-                        // CHECK for nested repeats:
-                        //    repeat a repeat inside a repeat only on first
-                        //    pass of outer reapeat (?!?)
-                        //
-                        bool nestedRepeat = false;
-                        int n = rstack.size();
-                        if (n > 1 && rstack[n-2].type == RepeatLoop::LOOP_REPEAT) {
-                              if (rstack[n-2].count)
-                                    nestedRepeat = true;
-                              }
-                        if (!nestedRepeat && (++rstack.top().count < m->repeatCount())) {
-                              //
-                              // goto start of loop, fix tickOffset
-                              //
-                              mb = rstack.top().m;
-                              tickOffset += m->tick() + m->tickLen() - mb->tick();
-
-                              double t = tempomap->tempo(mb->tick());
-                              tempo->addTempo(mb->tick() + tickOffset, t);
-
-                              continue;
-                              }
-                        rstack.pop();     // end this loop
-                        }
-                  }
-            else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
-                  MeasureBase* m = searchLabel(rstack.top().stop);
-                  if (m == 0)
-                        printf("LOOP_JUMP: label not found\n");
-                  if (m == mb) {
-                        if (m->next() == 0)
-                              break;
-                        MeasureBase* nmb = searchLabel(rstack.top().cont, m->next());
-                        if (nmb)
-                              tickOffset += m->tick() + m->tickLen() - nmb->tick();
-                        else if (!rstack.top().cont.isEmpty())
-                              printf("Cont label not found: <%s>\n", qPrintable(rstack.top().cont));
-
-                        mb = nmb;
-                        double t = tempomap->tempo(mb->tick());
-                        tempo->addTempo(mb->tick() + tickOffset, t);
-
-                        rstack.pop();     // end this loop
-                        continue;
-                        }
-                  }
-            mb = mb->next();
-            }
-      if (!rstack.isEmpty()) {
-            if (rstack.top().type == RepeatLoop::LOOP_JUMP
-               && rstack.top().stop == "end")
-                  ;
-            else
-                  printf("repeat stack not empty!\n");
-            }
+      else
+            _repeatList->unwind();
+      if (debugMode)
+            _repeatList->dump();
       }
 
 //---------------------------------------------------------
@@ -616,12 +486,12 @@ void Score::toEList(EventMap* events, TempoList* tempo, bool expandRepeats, int 
 //    export score to event list
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, TempoList* tempo)
+void Score::toEList(EventMap* events)
       {
-      bool expandRepeats = getAction("repeat")->isChecked();
+      updateRepeatList(getAction("repeat")->isChecked());
       _foundPlayPosAfterRepeats = false;
       updateChannel();
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
-            toEList(events, tempo, expandRepeats, 0, staffIdx);
+            toEList(events, 0, staffIdx);
       }
 

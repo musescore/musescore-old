@@ -287,6 +287,34 @@ p, li { white-space: pre-wrap; }
         <comment>do not translate</comment>
         <translation>Apuviivat:</translation>
     </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished">Varsi</translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Haka</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished">Koristenuotti</translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished">Varren suunta</translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished">Apuviivat:</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -1695,6 +1723,10 @@ epäonnistui:</translation>
         <source>sp</source>
         <comment>space unit</comment>
         <translation>sp</translation>
+    </message>
+    <message>
+        <source>use jazz font</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

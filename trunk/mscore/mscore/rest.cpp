@@ -366,6 +366,7 @@ void Rest::setDuration(Duration dt)
 
 void Rest::layout(ScoreLayout* l)
       {
+      setDuration(duration());      // apply mag
       layoutAttributes(l);
       Element::layout(l);
       }
