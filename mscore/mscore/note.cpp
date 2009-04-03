@@ -90,6 +90,7 @@ Note::Note(Score* s)
    : Element(s)
       {
       _pitch          = 0;
+      _ppitch         = 0;
       _accidental     = 0;
       _mirror         = false;
       _line           = 0;
@@ -110,6 +111,7 @@ Note::Note(const Note& n)
       {
       _subchannel     = n._subchannel;
       _pitch          = n._pitch;
+      _ppitch         = n._ppitch;
       _tpc            = n._tpc;
       _line           = n._line;
       _staffMove      = n._staffMove;
@@ -141,9 +143,11 @@ void Note::setPitch(int val)
             val = 127;
       else if (val < 0)
             val = 0;
-      _pitch = val;
+      int diff = _ppitch - _pitch;
+      _pitch  = val;
+      _ppitch = val + diff;
       int key = (staff() && chord()) ? staff()->key(chord()->tick()) : 0;
-      _tpc = pitch2tpc(_pitch, key);
+      _tpc    = pitch2tpc(_pitch, key);
       }
 
 //---------------------------------------------------------

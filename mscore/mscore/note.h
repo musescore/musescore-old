@@ -77,9 +77,16 @@ class Note : public Element {
       int _line;              ///< y-Position; 0 - top line.
 
       char _pitch;             ///< Note pitch as midi value (0 - 127).
+      char _ppitch;            ///< played pitch (honor voltas etc.)
       char _tpc;               ///< tonal pitch class
       char _staffMove;         ///< -1, 0, +1, used for crossbeaming
+
       char _userAccidental;    ///< editorial accidental type (0-15)
+      char _headGroup;
+      bool _mirror;           ///< True if note is mirrored at stem.
+      bool _hidden;           ///< markes this note as the hidden one if there are
+                              ///< overlapping notes; hidden notes are not played
+                              ///< and heads are not shown
 
       Accidental* _accidental;
       ElementList _el;        ///< fingering, other text, symbols or images
@@ -88,12 +95,6 @@ class Note : public Element {
 
       int _lineOffset;        ///< Used during mouse dragging.
       int  _head;              ///< note head symbol number
-
-      char _headGroup;
-      bool _mirror;           ///< True if note is mirrored at stem.
-      bool _hidden;           ///< markes this note as the hidden one if there are
-                              ///< overlapping notes; hidden notes are not played
-                              ///< and heads are not shown
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -121,9 +122,12 @@ class Note : public Element {
       int headGroup() const           { return _headGroup; }
       void setHeadGroup(int val);
 
-      int pitch() const               { return _pitch; }
+      int pitch() const               { return _pitch;  }
       void setPitch(int val);
-      int tpc() const                 { return _tpc; }
+      int ppitch() const              { return _ppitch; }
+      void setPpitch(int v)           { _ppitch = v;    }
+
+      int tpc() const                 { return _tpc;    }
       void setTpc(int v);
       void changePitch(int val);
 

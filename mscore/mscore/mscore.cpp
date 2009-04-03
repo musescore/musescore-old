@@ -2084,7 +2084,7 @@ void MuseScore::play(Element* e) const
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
-            play(e, note->pitch() + part->pitchOffset());
+            play(e, note->ppitch());
             }
       }
 

@@ -393,9 +393,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       dragObject = elementNear(startMove);
 
       if (mscore->playEnabled() && dragObject && dragObject->type() == NOTE) {
-            Note* note = (Note*)dragObject;
+            Note* note = static_cast<Note*>(dragObject);
             Part* part = note->staff()->part();
-            int pitch  = note->pitch() + part->pitchOffset();
+            int pitch  = note->ppitch();
             Instrument* i = part->instrument();
             seq->startNote(i->channel[note->subchannel()], pitch, 60, 1000);
             }

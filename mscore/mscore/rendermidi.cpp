@@ -152,7 +152,7 @@ bool Score::isVolta(int tick, int repeat) const
 //---------------------------------------------------------
 
 void Score::collectChord(EventMap* events, Instrument* instr,
-   int pitchOffset, Chord* chord, int tick, int len)
+   Chord* chord, int tick, int len)
       {
       NoteList* nl = chord->noteList();
       Arpeggio* arpeggio = chord->arpeggio();
@@ -171,7 +171,7 @@ void Score::collectChord(EventMap* events, Instrument* instr,
                   continue;
             int idx = instr->channel[note->subchannel()]->channel;
             NoteOn* ev = new NoteOn();
-            int pitch = note->pitch() + pitchOffset;
+            int pitch = note->ppitch();
             if (pitch > 127)
                   pitch = 127;
             ev->setPitch(pitch);
@@ -189,16 +189,72 @@ void Score::collectChord(EventMap* events, Instrument* instr,
             }
       }
 
+struct OttavaShiftSegment {
+      int stick;
+      int etick;
+      int shift;
+      };
+
+//---------------------------------------------------------
+//   fixPpitch
+//    calculate play pitch for all notes
+//---------------------------------------------------------
+
+void Score::fixPpitch()
+      {
+      int ns = nstaves();
+      QList<OttavaShiftSegment> osl[ns];
+
+      //
+      //    collect ottavas
+      //
+      foreach(Element* e, _gel) {
+            if (e->type() == OTTAVA) {
+                  Ottava* ottava = static_cast<Ottava*>(e);
+                  OttavaShiftSegment ss;
+                  ss.stick = ottava->tick();
+                  ss.etick = ottava->tick2();
+                  ss.shift = ottava->pitchShift();
+                  osl[e->staffIdx()].append(ss);
+                  }
+            }
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->pitchOffset;
+
+            for (Segment* seg = firstMeasure()->first(); seg; seg = seg->next1()) {
+                  if (seg->subtype() != Segment::SegChordRest)
+                        continue;
+                  int ottavaShift = 0;
+                  foreach(const OttavaShiftSegment& ss, osl[staffIdx]) {
+                        if (seg->tick() >= ss.stick && seg->tick() < ss.etick) {
+                              ottavaShift = ss.shift;
+                              break;
+                              }
+                        }
+                  int strack = staffIdx * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* el = seg->element(track);
+                        if (!el || el->type() != CHORD)
+                              continue;
+                        Chord* chord = static_cast<Chord*>(el);
+                        NoteList* nl = chord->noteList();
+                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                              Note* note = in->second;
+                              note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
+                              }
+                        }
+                  }
+
+            }
+      }
+
 //---------------------------------------------------------
 //   collectMeasureEvents
 //---------------------------------------------------------
 
 void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
       {
-      Part* prt         = part(staffIdx);
-      Instrument* instr = prt->instrument();
-      int pitchOffset   = styleB(ST_concertPitch) ? 0 : instr->pitchOffset;
-
 // printf("collect %d-%d\n", m->tick(), m->tick() + m->tickLen());
 
       QList<Chord*> lv;       // appoggiatura
@@ -206,6 +262,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
       // for the purpose of knowing whether to find the playPos after repeats
       bool playExpandRepeats = getAction("repeat")->isChecked();
+      Instrument* instr = part(staffIdx)->instrument();
 
       for (int voice = 0; voice < VOICES; ++voice) {
             int track = staffIdx * VOICES + voice;
@@ -228,17 +285,8 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         setPlayPos(tick + tickOffset);
                         _foundPlayPosAfterRepeats = true;
                         }
-                  int ottavaShift = 0;
                   foreach(Element* e, *m->score()->gel()) {
-                        if ((e->type() == OTTAVA) && (e->staffIdx() == staffIdx)) {
-                              Ottava* ottava = static_cast<Ottava*>(e);
-                              int tick1 = ottava->tick();
-                              int tick2 = ottava->tick2();
-                              if (tick >= tick1 && tick < tick2) {
-                                    ottavaShift = ottava->pitchShift();
-                                    }
-                              }
-                        else if (e->type() == SLUR) {
+                        if (e->type() == SLUR) {
                               Slur* slur = static_cast<Slur*>(e);
                               if (slur->startElement()->staffIdx() != staffIdx)
                                     continue;
@@ -247,7 +295,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               if (tick >= tick1 && tick < tick2 && slur->track() == track) {
                                     gateTime = _style[ST_slurGateTime].toInt();
                                     }
-
                               }
                         }
                   foreach(Articulation* a, *chord->getArticulations()) {
@@ -284,7 +331,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         int ssl = sl / sv.size();
                         foreach(Chord* c, sv) {
                               collectChord(events, instr,
-                                 pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset - sl,
                                  ssl * gateTime / 100 - 1
@@ -300,7 +346,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         foreach(Chord* c, lv) {
                               int ssl = c->tickLen();
                               collectChord(events, instr,
-                                 pitchOffset + ottavaShift,
                                  c,
                                  tick + tickOffset + sl,
                                  ssl * gateTime / 100 - 1
@@ -311,7 +356,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         tick += sl;
                         }
                   {
-                  pitchOffset += ottavaShift;
                   tick += tickOffset;
                   NoteList* nl = chord->noteList();
                   Arpeggio* arpeggio = chord->arpeggio();
@@ -348,7 +392,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               len = (len * gateTime) / 100 - 1;
 
                         NoteOn* ev = new NoteOn();
-                        int pitch = note->pitch() + pitchOffset;
+                        int pitch = note->ppitch();
                         if (pitch > 127)
                               pitch = 127;
                         ev->setPitch(pitch);
@@ -376,7 +420,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
             const StaffText* st = static_cast<const StaffText*>(e);
             QString ma(st->midiActionName());
             if (!ma.isEmpty()) {
-                  NamedEventList* nel = prt->instrument()->midiAction(ma);
+                  NamedEventList* nel = instr->midiAction(ma);
                   if (nel) {
                         foreach(Event* ev, nel->events) {
                               Event* event = ev->clone();
