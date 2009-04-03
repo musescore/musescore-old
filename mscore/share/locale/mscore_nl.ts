@@ -1716,6 +1716,10 @@ toonhoogte</translation>
         <comment>space unit</comment>
         <translation>sp</translation>
     </message>
+    <message>
+        <source>use jazz font</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -5004,6 +5008,14 @@ voor dat u afsluit?</translation>
     <message>
         <source>find</source>
         <translation>vind</translation>
+    </message>
+    <message>
+        <source>Search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

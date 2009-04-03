@@ -79,6 +79,8 @@ class Staff;
 class Part;
 class Instrument;
 class UndoStack;
+class RepeatList;
+
 struct SigEvent;
 struct TEvent;
 
@@ -192,6 +194,7 @@ class Score : public QObject {
       QList<MidiMapping> _midiMapping;
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
+      RepeatList* _repeatList;
 
       InputState _is;
 
@@ -280,7 +283,7 @@ class Score : public QObject {
 
       void collectChord(EventMap*, Instrument*,
          int pitchOffset, Chord*, int tick, int gateTime);
-      void collectMeasureEvents(EventMap*, TempoList*, Measure*, int staffIdx, int tickOffset);
+      void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
 
       void padToggle(int n);
       void insertMeasures(int, int);
@@ -294,7 +297,6 @@ class Score : public QObject {
       void addTempo();
       void addMetronome();
 
-      MeasureBase* searchLabel(const QString& s, MeasureBase* start = 0);
       void undoSigInsertTime(int, int);
       void undoFixTicks();
 
@@ -661,8 +663,8 @@ class Score : public QObject {
 
       void pasteStaff(QDomElement, int dstTick, int staffIdx);
       bool isVolta(int tick, int repeat) const;
-      void toEList(EventMap* events, TempoList* tl);
-      void toEList(EventMap* events, TempoList* tl, bool expandRepeats, int tickOffset, int staffIdx);
+      void toEList(EventMap* events);
+      void toEList(EventMap* events, int tickOffset, int staffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
@@ -736,6 +738,13 @@ class Score : public QObject {
       void setCopyrightHtml(const QString& s);
       void endUndoRedo();
       void search(const QString& s);
+      Measure* firstMeasure() const;
+      Measure* lastMeasure() const;
+      Measure* searchLabel(const QString& s, Measure* start = 0);
+      RepeatList* repeatList() { return _repeatList; }
+      double utick2utime(int tick) const;
+      int utime2utick(double utime);
+      void updateRepeatList(bool expandRepeats);
       };
 
 extern Score* gscore;

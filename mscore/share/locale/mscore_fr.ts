@@ -1726,6 +1726,10 @@ failed: </source>
         <comment>space unit</comment>
         <translation>esp</translation>
     </message>
+    <message>
+        <source>use jazz font</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -5014,6 +5018,14 @@ avant de fermer ?</translation>
     <message>
         <source>find</source>
         <translation>rechercher</translation>
+    </message>
+    <message>
+        <source>Search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

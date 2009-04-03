@@ -611,8 +611,8 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endSymbolX->setValue(tl->endSymbolOffset().x());
       endSymbolY->setValue(tl->endSymbolOffset().y());
 
-      beginTextPlace->setCurrentIndex(tl->beginTextPlace());
-      continueTextPlace->setCurrentIndex(tl->continueTextPlace());
+      beginTextPlace->setCurrentIndex(tl->beginTextPlace() == PLACE_LEFT ? 0 : 1);
+      continueTextPlace->setCurrentIndex(tl->continueTextPlace() == PLACE_LEFT ? 0 : 1);
 
       beginHook->setChecked(tl->beginHook());
       endHook->setChecked(tl->endHook());

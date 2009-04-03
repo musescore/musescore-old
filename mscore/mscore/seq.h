@@ -94,7 +94,6 @@ class Seq : public QObject {
       Driver* driver;
 
       EventMap events;                    // playlist
-      TempoList tempo;
 
       QList<NoteOn*> activeNotes;         // notes sounding
       double playTime;
@@ -102,7 +101,7 @@ class Seq : public QObject {
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
-      QList<Note*> markedNotes;         // notes marked as sounding
+      QList<Note*> markedNotes;           // notes marked as sounding
 
       int endTick;
 
@@ -117,8 +116,6 @@ class Seq : public QObject {
 
       void stopTransport();
       void startTransport();
-      int time2tick(double) const;
-      double tick2time(int tick) const;
       void setPos(int);
       void playEvent(const Event*);
       void playEvent(const MidiOutEvent&);

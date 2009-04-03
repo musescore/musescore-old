@@ -70,6 +70,7 @@
 #include "magbox.h"
 #include "measure.h"
 #include "undo.h"
+#include "repeatlist.h"
 
 //---------------------------------------------------------
 //   load
@@ -1327,6 +1328,10 @@ bool Score::read(QDomElement e)
                   staff->setBarLineSpan(n - idx);
                   }
             }
+//DEBUG
+//      _repeatList->unwind();
+//      _repeatList->dump();
+
       return true;
       }
 

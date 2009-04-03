@@ -1,3 +1,7 @@
+3.apr (ws)
+      - more clean implementation of play repeats
+1.apr (ws)
+      - fix: layout position of rests in small staff
 30.mar (ws)
       - fix for multi measure rests and volta brackets
       - handle octave transposition as special case: do not respell, keep user set

@@ -48,6 +48,7 @@
 #include "part.h"
 #include "ottava.h"
 #include "utils.h"
+#include "repeatlist.h"
 
 Seq* seq;
 
@@ -68,6 +69,9 @@ Seq::Seq()
       driver   = 0;
       _volume  = 1.0;
       playPos  = events.constBegin();
+
+      playTime = 0.0;
+      startTime = 0.0;
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
@@ -232,24 +236,6 @@ int Seq::sampleRate() const
       }
 
 //---------------------------------------------------------
-//   time2tick
-//---------------------------------------------------------
-
-int Seq::time2tick(double time) const
-      {
-      return tempo.time2tick(time);
-      }
-
-//---------------------------------------------------------
-//   tick2time
-//---------------------------------------------------------
-
-double Seq::tick2time(int tick) const
-      {
-      return tempo.tick2time(tick);
-      }
-
-//---------------------------------------------------------
 //   inputPorts
 //---------------------------------------------------------
 
@@ -405,7 +391,7 @@ void Seq::guiStop()
             cs->addRefresh(n->abbox());
             }
       markedNotes.clear();
-      cs->setPlayPos(time2tick(playTime));
+      cs->setPlayPos(cs->utime2utick(playTime));
       cs->end();
       if (!pauseState)
             emit stopped();
@@ -547,10 +533,15 @@ void Seq::processMessages()
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         {
-                        int tick = time2tick(playTime);
-                        tempo.setRelTempo(msg.data);
-                        playTime = tick2time(tick);
-                        startTime = curTime() - playTime;
+                        if (playTime != 0) {
+                              int tick = cs->utime2utick(playTime);
+                              cs->getTempomap()->setRelTempo(msg.data);
+                              cs->repeatList()->update();
+                              playTime = cs->utick2utime(tick);
+                              startTime = curTime() - playTime;
+                              }
+                        else
+                              cs->getTempomap()->setRelTempo(msg.data);
                         }
                         break;
                   case SEQ_PLAY:
@@ -589,7 +580,7 @@ void Seq::processMidi()
       if (state == PLAY) {
             double endTime = curTime();
             for (; playPos != events.constEnd(); ++playPos) {
-                  playTime = tick2time(playPos.key());
+                  playTime = cs->utick2utime(playPos.key());
                   double t = startTime + playTime;
                   if (t >= endTime)
                         break;
@@ -636,14 +627,20 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
             //
             double endTime = playTime + double(frames)/double(sampleRate());
             for (; playPos != events.constEnd(); ++playPos) {
-                  double f = tick2time(playPos.key());
+                  double f = cs->utick2utime(playPos.key());
                   if (f >= endTime)
                         break;
                   int n = lrint((f - playTime) * sampleRate());
+
+                  if (n < 0) {
+                        printf("%d:  %f - %f\n", playPos.key(), f, playTime);
+                        abort();
+                        }
                   driver->process(n, l, r, stride);
                   l         += n * stride;
                   r         += n * stride;
                   playTime += double(n)/double(sampleRate());
+
                   frames    -= n;
                   playEvent(playPos.value());
                   }
@@ -702,11 +699,9 @@ void Seq::collectEvents()
       {
       foreach(Event* e, events)
             delete e;
-
       events.clear();
-      tempo.clear();
 
-      cs->toEList(&events, &tempo);
+      cs->toEList(&events);
       endTick = 0;
       if (!events.empty()) {
             EventMap::const_iterator e = events.constEnd();
@@ -735,7 +730,7 @@ void Seq::heartBeat()
             pp->heartBeat2(lrint(endTime));
       Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
-            double f = tick2time(guiPos.key());
+            double f = cs->utick2utime(guiPos.key());
             if (f >= endTime)
                   break;
             if (guiPos.value()->type() == ME_NOTEON) {
@@ -792,7 +787,7 @@ void Seq::setRelTempo(int relTempo)
       msg.id   = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
-      double t = tempo.tempo(playPos.key()) * relTempo * 0.01;
+      double t = cs->getTempomap()->tempo(playPos.key()) * relTempo * 0.01;
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
@@ -807,7 +802,7 @@ void Seq::setRelTempo(int relTempo)
 //    realtime environment
 //---------------------------------------------------------
 
-void Seq::setPos(int tick)
+void Seq::setPos(int utick)
       {
       // send note off events
       foreach(const NoteOn* n, activeNotes) {
@@ -819,9 +814,9 @@ void Seq::setPos(int tick)
             driver->putEvent(e);
             }
       activeNotes.clear();
-      playTime  = tick2time(tick);
+      playTime  = cs->utick2utime(utick);
       startTime = curTime() - playTime;
-      playPos   = events.lowerBound(tick);
+      playPos   = events.lowerBound(utick);
       guiPos    = playPos;
       }
 

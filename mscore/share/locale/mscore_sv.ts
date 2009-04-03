@@ -91,6 +91,10 @@
         <source>acc bayanbase</source>
         <translation>acc bayanbase</translation>
     </message>
+    <message>
+        <source>Svenska</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AboutBox</name>
@@ -273,6 +277,34 @@ p, li { white-space: pre-wrap; }
         <source>Help Lines:</source>
         <comment>do not translate</comment>
         <translation></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished">Ackord</translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished">Hake</translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note Attributes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Lines:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1006,29 +1038,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Dialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Look for three note chords and</source>
-        <translation>Leta efter treklanger och</translation>
-    </message>
-    <message>
-        <source>remove  bottom note</source>
-        <translation>radera lägsta not</translation>
-    </message>
-    <message>
-        <source>remove middle note</source>
-        <translation>radera mellannot</translation>
-    </message>
-    <message>
-        <source>remove top note</source>
-        <translation>radera översta not</translation>
-    </message>
-</context>
-<context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
@@ -1706,6 +1715,10 @@ misslyckades: </translation>
     <message>
         <source>Cancel</source>
         <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>use jazz font</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4992,6 +5005,14 @@ före stängning?</translation>
         <source>find</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -7554,77 +7575,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UnZip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Zipoperation framgångsrikt fullbordad.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Misslyckades att starta eller ladda zlib-biblioteket.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib-biblioteksfel.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Oförmögen att skapa eller öppna fil.</translation>
-    </message>
-    <message>
-        <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation>Delvis korrupt arkiv. Några filer kanske kan extraheras.</translation>
-    </message>
-    <message>
-        <source>Corrupted archive.</source>
-        <translation>Korrupt arkiv.</translation>
-    </message>
-    <message>
-        <source>Wrong password.</source>
-        <translation>Fel lösenord.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Inget arkiv har skapats ännu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Fil eller mapp existerar inte.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Filläsningsfel.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Filskrivningsfel.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Filsökningsfel.</translation>
-    </message>
-    <message>
-        <source>Unable to create a directory.</source>
-        <translation>Oförmögen att skapa en mapp.</translation>
-    </message>
-    <message>
-        <source>Invalid device.</source>
-        <translation>Ogiltig enhet.</translation>
-    </message>
-    <message>
-        <source>Invalid or incompatible zip archive.</source>
-        <translation>Ogiltigt eller inkompatibelt ziparkiv.</translation>
-    </message>
-    <message>
-        <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation>Oförenliga huvudord. Arkivet kan vara korrupt.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Okänt fel.</translation>
-    </message>
-</context>
-<context>
     <name>VBox</name>
     <message>
         <source>Add</source>
@@ -7648,49 +7598,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Reprislista:</translation>
-    </message>
-</context>
-<context>
-    <name>Zip</name>
-    <message>
-        <source>ZIP operation completed successfully.</source>
-        <translation>Zipoperation framgångsrikt fullbordad.</translation>
-    </message>
-    <message>
-        <source>Failed to initialize or load zlib library.</source>
-        <translation>Misllyckades att starta eller ladda zlib-biblioteket.</translation>
-    </message>
-    <message>
-        <source>zlib library error.</source>
-        <translation>zlib-biblioteksfel.</translation>
-    </message>
-    <message>
-        <source>Unable to create or open file.</source>
-        <translation>Oförmögen att skapa eller öppna fil.</translation>
-    </message>
-    <message>
-        <source>No archive has been created yet.</source>
-        <translation>Inget arkiv har skapats ännu.</translation>
-    </message>
-    <message>
-        <source>File or directory does not exist.</source>
-        <translation>Fil eller mapp existerar inte.</translation>
-    </message>
-    <message>
-        <source>File read error.</source>
-        <translation>Filläsningsfel.</translation>
-    </message>
-    <message>
-        <source>File write error.</source>
-        <translation>Filskrivningsfel.</translation>
-    </message>
-    <message>
-        <source>File seek error.</source>
-        <translation>Filsökningsfel.</translation>
-    </message>
-    <message>
-        <source>Unknown error.</source>
-        <translation>Okänt fel.</translation>
     </message>
 </context>
 <context>
