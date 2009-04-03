@@ -948,6 +948,24 @@ static void defaults(Xml& xml, Score* s)
 
 
 //---------------------------------------------------------
+//   creditWords
+//---------------------------------------------------------
+
+static void creditWords(Xml& xml, double x, double y, int fs, QString just, QString val, QString words)
+      {
+      xml.stag("credit page=\"1\"");
+      QString tagname = QString("credit-words");
+      tagname += QString(" default-x=\"%1\"").arg(x);
+      tagname += QString(" default-y=\"%1\"").arg(y);
+      tagname += QString(" font-size=\"%1\"").arg(fs);
+      tagname += " justify=\"" + just + "\"";
+      tagname += " valign=\"" + val + "\"";
+      xml.tag(tagname, words);
+      xml.etag();
+      }
+
+
+//---------------------------------------------------------
 //   credits
 //---------------------------------------------------------
 
@@ -979,26 +997,53 @@ static void credits(Xml& xml, Score* s)
                         default:
                               mustPrint = false;
                         }
-                  if (mustPrint) printf(" '%s'\n", text->getText().toUtf8().data());
+                  if (mustPrint) printf(" '%s at %f,%f'\n",
+                                        text->getText().toUtf8().data(),
+                                        text->canvasPos().x(),
+                                        text->canvasPos().y()
+                                       );
                   }
             }
       if (s->copyright()) printf("copyright '%s'\n", s->copyright()->getText().toUtf8().data());
       printf("end credits\n");
-      // write the credits
-      // TODO add position and formatting
+      // determine formatting
+      PageFormat* pf = s->pageFormat();
+      if (!pf) return;
+      const double t  = 2 * PPI * 10 / 9;
+      const double h  = pf->height() * t;
+      const double w  = pf->width() * t;
+      const double lm = pf->oddLeftMargin * t;
+      const double rm = pf->oddRightMargin * t;
+      const double tm = pf->oddTopMargin * t;
+      const double bm = pf->oddBottomMargin * t;
+      printf("t=%g h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", t, h, w, lm, rm, tm, bm);
 /*
+      // write the credits
+      // TODO add real font size
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
+                  printf("x=%g, y=%g fs=%d\n",
+                         text->canvasPos().x() * t / DPI,
+                         h - text->canvasPos().y() * t / DPI,
+                         text->defaultFont().pointSize()
+                        );
+                  const double ty = h - text->canvasPos().y() * t / DPI;
+                  const int fs = text->defaultFont().pointSize();
                   switch (text->subtype()) {
                         case TEXT_TITLE:
+                              creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
+                              break;
                         case TEXT_SUBTITLE:
+                              creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
+                              break;
                         case TEXT_COMPOSER:
+                              creditWords(xml, w - rm, ty, fs, "right", "top", text->getText());
+                              break;
                         case TEXT_POET:
+                              creditWords(xml, lm, ty, fs, "left", "top", text->getText());
+                              break;
                         // case TEXT_TRANSLATOR:
-                              xml.stag("credit");
-                              xml.tag("credit-words", text->getText());
-                              xml.etag();
                               break;
                         default:
                               printf("credits: text subtype %s not supported\n",
@@ -1007,9 +1052,8 @@ static void credits(Xml& xml, Score* s)
                   }
             }
       if (s->copyright()) {
-            xml.stag("credit");
-            xml.tag("credit-words", s->copyright()->getText());
-            xml.etag();
+            const int fs = s->copyright()->defaultFont().pointSize();
+            creditWords(xml, w / 2, bm, fs, "center", "bottom", s->copyright()->getText());
             }
 */
       }
