@@ -104,6 +104,8 @@ class Seq : public QObject {
       QList<Note*> markedNotes;           // notes marked as sounding
 
       int endTick;
+      int curTick;
+      int curUtick;
 
       float _volume;
 
@@ -179,6 +181,8 @@ class Seq : public QObject {
 
       const MidiPatch* getPatchInfo(bool onlyDrums, const MidiPatch* p);
       Driver* getDriver()  { return driver; }
+      int getCurTime();
+      void getCurTick(int*, int*);
       };
 
 extern Seq* seq;

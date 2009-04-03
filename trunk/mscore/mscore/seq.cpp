@@ -72,6 +72,8 @@ Seq::Seq()
 
       playTime = 0.0;
       startTime = 0.0;
+      curTick   = 0;
+      curUtick  = 0;
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
@@ -715,6 +717,25 @@ void Seq::collectEvents()
       }
 
 //---------------------------------------------------------
+//   getCurTime
+//---------------------------------------------------------
+
+int Seq::getCurTime()
+      {
+      return lrint(curTime() - startTime);
+      }
+
+//---------------------------------------------------------
+//   getCurTick
+//---------------------------------------------------------
+
+void Seq::getCurTick(int* tick, int* utick)
+      {
+      *tick  = curTick;
+      *utick = curUtick;
+      }
+
+//---------------------------------------------------------
 //   heartBeat
 //    paint currently sounding notes
 //---------------------------------------------------------
@@ -760,9 +781,11 @@ void Seq::heartBeat()
             foreach(Viewer* v, cs->getViewer())
                   v->moveCursor(note->chord()->segment(), -1);
             cs->adjustCanvasPosition(note, true);
+            curTick  = note->chord()->tick();
+            curUtick = guiPos.key();
             if (pp)
-                  pp->heartBeat(note->chord()->tick(), guiPos.key());
-            mscore->setPos(note->chord()->tick());
+                  pp->heartBeat(curTick, curUtick);
+            mscore->setPos(curTick);
             }
       cs->end();
       }

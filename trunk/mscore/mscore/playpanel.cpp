@@ -151,8 +151,8 @@ void PlayPanel::posChanged(int tick)
 
 void PlayPanel::heartBeat(int tick, int utick)
       {
-      if (!isVisible())
-            return;
+//      if (!isVisible())
+//            return;
       if (cachedTickPosition == utick)
             return;
       cachedTickPosition = utick;
@@ -172,8 +172,8 @@ void PlayPanel::heartBeat(int tick, int utick)
 
 void PlayPanel::heartBeat2(int sec)
       {
-      if (!isVisible())
-            return;
+//      if (!isVisible())
+//            return;
       if (sec == cachedTimePosition)
             return;
       cachedTimePosition = sec;

@@ -1229,6 +1229,8 @@ void MuseScore::showPlayPanel(bool visible)
             return;
 
       if (playPanel == 0) {
+            if (!visible)
+                  return;
             playPanel = new PlayPanel(this);
             connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setVolume(float)));
             connect(playPanel, SIGNAL(relTempoChanged(int)),seq, SLOT(setRelTempo(int)));
@@ -1240,8 +1242,12 @@ void MuseScore::showPlayPanel(bool visible)
             playPanel->setRelTempo(cs->tempomap->relTempo());
             playPanel->setEndpos(seq->getEndTick());
             playPanel->setScore(cs);
+            int tick, utick;
+            seq->getCurTick(&tick, &utick);
+            playPanel->heartBeat(tick, utick);
+            playPanel->heartBeat2(seq->getCurTime());
             }
-      playPanel->setShown(visible);
+      playPanel->setVisible(visible);
       playId->setChecked(visible);
       }
 
@@ -2083,7 +2089,6 @@ void MuseScore::play(Element* e) const
       {
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
-            Part* part = note->staff()->part();
             play(e, note->ppitch());
             }
       }
