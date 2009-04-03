@@ -281,8 +281,7 @@ class Score : public QObject {
       void move(const QString& cmd);
       void selectMove(const QString& cmd);
 
-      void collectChord(EventMap*, Instrument*,
-         int pitchOffset, Chord*, int tick, int gateTime);
+      void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
       void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
 
       void padToggle(int n);
@@ -745,6 +744,7 @@ class Score : public QObject {
       double utick2utime(int tick) const;
       int utime2utick(double utime);
       void updateRepeatList(bool expandRepeats);
+      void fixPpitch();
       };
 
 extern Score* gscore;

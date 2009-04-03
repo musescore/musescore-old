@@ -197,6 +197,8 @@ bool LineSegment::edit(Viewer*, int curGrip, int key, Qt::KeyboardModifiers modi
             line()->layout(score()->layout());
             if (line()->lineSegments().size() != segments)
                   score()->changeLineSegment(curGrip == 1);
+            if (line()->type() == OTTAVA)
+                  score()->fixPpitch();
             return true;
             }
       return false;

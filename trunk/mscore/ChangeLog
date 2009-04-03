@@ -1,4 +1,5 @@
 3.apr (ws)
+      - playback of notes during editing now honors ottava brackets
       - extended instruments list from Magnus Johansson
       - fix shortcut list (preferences)
       - fix style setting of stem direction in multi voice context

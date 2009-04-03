@@ -490,6 +490,8 @@ bool Score::read(QString name)
       checkTuplets();
       rebuildMidiMapping();
       updateChannel();
+      fixPpitch();
+
       layoutAll = false;
       return true;
       }
@@ -2122,6 +2124,9 @@ void Score::addElement(Element* element)
             ((ChordRest*)s->startElement())->addSlurFor(s);
             ((ChordRest*)s->endElement())->addSlurBack(s);
             }
+      else if (element->type() == OTTAVA) {
+            fixPpitch();
+            }
       }
 
 //---------------------------------------------------------
@@ -2155,6 +2160,10 @@ void Score::removeElement(Element* element)
       parent->remove(element);
 
       switch(element->type()) {
+            case OTTAVA:
+                  fixPpitch();
+                  break;
+
             case CHORD:
             case REST:
                   {
