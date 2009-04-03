@@ -730,33 +730,16 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 void PreferenceDialog::updateSCListView()
       {
       shortcutList->clear();
-      QTreeWidgetItem* stateNormal = new QTreeWidgetItem;
-      stateNormal->setFlags(Qt::ItemIsEnabled);
-      stateNormal->setText(0, tr("Normal State"));
-      stateNormal->setExpanded(true);
-      shortcutList->addTopLevelItem(stateNormal);
-      QTreeWidgetItem* statePlay = new QTreeWidgetItem;
-      statePlay->setFlags(Qt::ItemIsEnabled);
-      statePlay->setText(0, tr("Play State"));
-      statePlay->setExpanded(true);
-      shortcutList->addTopLevelItem(statePlay);
-
       foreach (Shortcut* s, localShortcuts) {
             if (!s)
                   continue;
-            QTreeWidgetItem* newItem;
-            if (s->state & STATE_NORMAL)
-                  newItem = new QTreeWidgetItem(stateNormal);
-            else if (s->state & STATE_PLAY)
-                  newItem = new QTreeWidgetItem(statePlay);
-            else {
-                  return;
-                  }
+            QTreeWidgetItem* newItem = new QTreeWidgetItem;
             newItem->setText(0, s->descr);
             newItem->setIcon(0, *s->icon);
             QKeySequence seq = s->key;
             newItem->setText(1, s->key.toString(QKeySequence::NativeText));
             newItem->setData(0, Qt::UserRole, s->xml);
+            shortcutList->addTopLevelItem(newItem);
             }
       shortcutList->resizeColumnToContents(0);
       }
