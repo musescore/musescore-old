@@ -140,6 +140,11 @@ Score* Score::createExcerpt(Excerpt* excerpt)
 
       s->renumberMeasures();
       s->setCreated(true);
+      s->rebuildMidiMapping();
+      s->updateChannel();
+      s->fixPpitch();
+      s->setLayoutAll(true);
+      s->end();
       return s;
       }
 

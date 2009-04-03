@@ -260,6 +260,9 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
       Score* nscore = score->createExcerpt(excerpt);
       nscore->rebuildMidiMapping();
+      nscore->updateChannel();
+      nscore->fixPpitch();
+
       mscore->appendScore(nscore);
       }
 
