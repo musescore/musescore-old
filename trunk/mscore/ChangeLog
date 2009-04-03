@@ -1,4 +1,5 @@
 3.apr (ws)
+      - fix: ledger lines wrong for rest in voice2
       - fix: position of slider in play panel
       - fix: playback range does not consider octave markings
       - playback of notes during editing now honors ottava brackets
