@@ -117,7 +117,7 @@ StyleType styleTypes[] = {
       StyleType("chordNamesUseJazzFont",   ST_BOOL),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
 
-/*80*/StyleType("createMultiMeasureRests", ST_BOOL),
+/*70*/StyleType("createMultiMeasureRests", ST_BOOL),
       StyleType("minEmptyMeasures",        ST_INT),         // minimum number of empty measures for multi measure rest
       StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
       StyleType("hideEmptyStaves",         ST_BOOL),

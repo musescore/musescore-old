@@ -265,15 +265,15 @@ void EditStyle::setValues()
       propertyDistanceStem->setValue(lstyle[ST_propertyDistanceStem].toSpatium().val());
       propertyDistance->setValue(lstyle[ST_propertyDistance].toSpatium().val());
 
-      voice1Up->setChecked(lstyle[ST_stemDir1].toBool() == UP);
-      voice2Up->setChecked(lstyle[ST_stemDir2].toBool() == UP);
-      voice3Up->setChecked(lstyle[ST_stemDir3].toBool() == UP);
-      voice4Up->setChecked(lstyle[ST_stemDir4].toBool() == UP);
+      voice1Up->setChecked(lstyle[ST_stemDir1].toDirection() == UP);
+      voice2Up->setChecked(lstyle[ST_stemDir2].toDirection() == UP);
+      voice3Up->setChecked(lstyle[ST_stemDir3].toDirection() == UP);
+      voice4Up->setChecked(lstyle[ST_stemDir4].toDirection() == UP);
 
-      voice1Down->setChecked(lstyle[ST_stemDir1].toBool() != UP);
-      voice2Down->setChecked(lstyle[ST_stemDir2].toBool() != UP);
-      voice3Down->setChecked(lstyle[ST_stemDir3].toBool() != UP);
-      voice4Down->setChecked(lstyle[ST_stemDir4].toBool() != UP);
+      voice1Down->setChecked(lstyle[ST_stemDir1].toDirection() != UP);
+      voice2Down->setChecked(lstyle[ST_stemDir2].toDirection() != UP);
+      voice3Down->setChecked(lstyle[ST_stemDir3].toDirection() != UP);
+      voice4Down->setChecked(lstyle[ST_stemDir4].toDirection() != UP);
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
