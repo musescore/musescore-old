@@ -1689,8 +1689,11 @@ printf("\n");
                                     }
                               e->setXpos(xx);
                               }
-                        else if (e->voice() == 1) {          // TODO: check ??
+                        else if (e->voice() == 2) {          // TODO: check ??
                               e->move(0.0, -3 * _spatium);
+                              }
+                        else if (e->voice() == 1 || e->voice() == 3) {
+                              e->move(0.0, 3 * _spatium);
                               }
                         }
                   else if (t == CHORD) {

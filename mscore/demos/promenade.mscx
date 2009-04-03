@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.10">
+<museScore version="1.11">
   <MagIdx>9</MagIdx>
   <xoff>0</xoff>
   <yoff>0</yoff>
@@ -72,7 +72,7 @@
       </sig>
     </siglist>
   <tempolist fix="1.5">
-    <tempo tick="0">1.33333</tempo>
+    <tempo tick="0">2</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -179,9 +179,10 @@
         <style>12</style>
         </Dynamic>
       <Tempo>
-        <tempo>1.33333</tempo>
+        <tempo>2</tempo>
         <subtype>Tempo</subtype>
         <offset x="-5.03286" y="0"/>
+        <selected>1</selected>
         <systemFlag>1</systemFlag>
         <style>14</style>
         <text>Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</text>
@@ -2658,5 +2659,5 @@
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

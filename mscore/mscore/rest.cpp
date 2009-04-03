@@ -120,6 +120,12 @@ void Rest::draw(QPainter& p) const
 void Rest::setUserOffset(double x, double y)
       {
       int line = lrint(y  / _spatium);
+      int off = 0;
+      if (voice() == 2)
+            off = -3;
+      else if (voice() == 1 || voice() == 3)
+            off = 3;
+      line += off;
       if (_sym == wholerestSym && (line <= -2 || line >= 4))
             _sym = outsidewholerestSym;
       else if (_sym == outsidewholerestSym && (line > -2 && line < 4))
@@ -128,7 +134,7 @@ void Rest::setUserOffset(double x, double y)
             _sym = outsidehalfrestSym;
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
-      setUserOff(QPointF(x / _spatium, double(line)));
+      setUserOff(QPointF(x / _spatium, double(line-off)));
       }
 
 //---------------------------------------------------------
@@ -315,6 +321,9 @@ void Rest::remove(Element* e)
 
 void Rest::setDuration(Duration dt)
       {
+      if (dt == duration())
+            return;
+
       // symbols[outsidewholerestSym]        = Sym("outside whole rest",       0xe102, 0);
       // symbols[outsidehalfrestSym]         = Sym("outside half rest",        0xe103, 0);
 
