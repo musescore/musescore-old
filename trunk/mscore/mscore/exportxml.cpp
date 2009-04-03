@@ -1017,7 +1017,7 @@ static void credits(Xml& xml, Score* s)
       const double tm = pf->oddTopMargin * t;
       const double bm = pf->oddBottomMargin * t;
       printf("t=%g h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", t, h, w, lm, rm, tm, bm);
-/*
+/**/
       // write the credits
       // TODO add real font size
       foreach(const Element* element, *measure->el()) {
@@ -1055,7 +1055,7 @@ static void credits(Xml& xml, Score* s)
             const int fs = s->copyright()->defaultFont().pointSize();
             creditWords(xml, w / 2, bm, fs, "center", "bottom", s->copyright()->getText());
             }
-*/
+/**/
       }
 
 //---------------------------------------------------------
@@ -2454,6 +2454,7 @@ foreach(Element* el, *(score->gel())) {
       // LVI TODO: write these text elements as credit-words
       // use meta data here instead
       xml.stag("identification");
+/*
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
@@ -2470,9 +2471,9 @@ foreach(Element* el, *(score->gel())) {
                         }
                   }
             }
-
       if (score->rights)
             xml.tag("rights", score->rights->getText());
+*/
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
@@ -2487,8 +2488,12 @@ foreach(Element* el, *(score->gel())) {
             xml.tag("source", score->source());
       xml.etag();
 
-      defaults(xml, score);
-      credits(xml, score);
+      // to keep most regression testfiles simple, write defaults and credits
+      // in convertmode only when already present in the input file
+      if (!converterMode || score->creditsRead()) {
+            defaults(xml, score);
+            credits(xml, score);
+      }
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();

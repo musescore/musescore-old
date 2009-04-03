@@ -1,4 +1,6 @@
-3.apr (ws)
+3.apr (lv)
+      - MusicXML export of credits
+      (ws)
       - fix: ledger lines wrong for rest in voice2
       - fix: position of slider in play panel
       - fix: playback range does not consider octave markings

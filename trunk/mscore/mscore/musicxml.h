@@ -76,13 +76,13 @@ const int MAX_BRACKETS    = 8;
 //---------------------------------------------------------
 
 struct CreditWords {
-      int defaultX;
-      int defaultY;
+      double defaultX;
+      double defaultY;
       QString justify;
       QString hAlign;
       QString vAlign;
       QString words;
-      CreditWords(int a, int b, QString c, QString d, QString e, QString f) {
+      CreditWords(double a, double b, QString c, QString d, QString e, QString f) {
             defaultX = a;
             defaultY = b;
             justify  = c;

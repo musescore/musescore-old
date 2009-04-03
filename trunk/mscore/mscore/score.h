@@ -251,6 +251,7 @@ class Score : public QObject {
       QString _workNumber;
       QString _workTitle;
       QString _source;
+      bool _creditsRead;             ///< credits were read at MusicXML import
 
       int textUndoLevel;
 
@@ -694,11 +695,13 @@ class Score : public QObject {
       QString workNumber() const               { return _workNumber;     }
       QString workTitle() const                { return _workTitle;      }
       QString source() const                   { return _source;         }
+      bool creditsRead() const                 { return _creditsRead;    }
       void setMovementNumber(const QString& s) { _movementNumber = s;    }
       void setMovementTitle(const QString& s)  { _movementTitle = s;     }
       void setWorkNumber(const QString& s)     { _workNumber = s;        }
       void setWorkTitle(const QString& s)      { _workTitle = s;         }
       void setSource(const QString& s)         { _source = s;            }
+      void setCreditsRead(bool b)              { _creditsRead = b;       }
 
       void lassoSelect(const QRectF&);
       void lassoSelectEnd(const QRectF&);
