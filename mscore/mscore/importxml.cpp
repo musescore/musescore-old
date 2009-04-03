@@ -376,6 +376,7 @@ static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
 
 void MusicXml::doCredits()
       {
+      printf("MusicXml::doCredits()\n");
       PageFormat* pf = score->pageFormat();
       printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
              pf->width(), pf->height(), score->layout()->spatium(), DPMM, DPI);
@@ -388,10 +389,10 @@ void MusicXml::doCredits()
       printf("page format w=%g h=%g\n", pw, ph);
       printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
-/*
+/**/
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
-            printf("credit-words defx=%d defy=%d just=%s hal=%s val=%s words=%s\n",
+            printf("credit-words defx=%g defy=%g just=%s hal=%s val=%s words=%s\n",
                   w->defaultX,
                   w->defaultY,
                   w->justify.toUtf8().data(),
@@ -399,7 +400,7 @@ void MusicXml::doCredits()
                   w->vAlign.toUtf8().data(),
                   w->words.toUtf8().data());
             }
-*/
+/**/
       // apply simple heuristics using only default x and y
       // to recognize the meaning of credit words
       CreditWords* crwTitle = 0;
@@ -411,8 +412,8 @@ void MusicXml::doCredits()
       // it is done first because subtitle detection depends on the title
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
-            int defx = w->defaultX;
-            int defy = w->defaultY;
+            double defx = w->defaultX;
+            double defy = w->defaultY;
             if (defy > ph2 && pw1 < defx && defx < pw2) {
                   // found a possible title
                   if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
@@ -422,8 +423,8 @@ void MusicXml::doCredits()
             // in the middle column and is not the title
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
-            int defx = w->defaultX;
-            int defy = w->defaultY;
+            double defx = w->defaultX;
+            double defy = w->defaultY;
             if (defy > ph2 && pw1 < defx && defx < pw2) {
                   // found a possible subtitle
                   if ((!crwSubTitle || defy > crwSubTitle->defaultY)
@@ -452,19 +453,16 @@ void MusicXml::doCredits()
       if (crwPoet) printf("poet='%s'\n", crwPoet->words.toUtf8().data());
       if (crwCopyRight) printf("copyright='%s'\n", crwCopyRight->words.toUtf8().data());
 
-      // TODO move to score (for use in musicxml export)
-      bool creditsRead = false;
       if (crwTitle || crwSubTitle || crwComposer || crwPoet || crwCopyRight)
-            creditsRead = true;
+            score->setCreditsRead(true);
 
       QString strTitle;
       QString strSubTitle;
       QString strComposer;
       QString strPoet;
       QString strTranslator;
-      QString strCopyRight;
 
-      if (creditsRead) {
+      if (score->creditsRead()) {
             if (crwTitle) strTitle = crwTitle->words;
             if (crwSubTitle) strSubTitle = crwSubTitle->words;
             if (crwComposer) strComposer = crwComposer->words;
@@ -496,6 +494,7 @@ void MusicXml::doCredits()
             vbox->setTick(0);
             score->measures()->add(vbox);
             }
+      if (crwCopyRight) score->setCopyright(crwCopyRight->words);
       }
 
 //---------------------------------------------------------
@@ -540,6 +539,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                         }
                   }
             else if (tag == "identification") {
+                  // TODO: this is metadata !
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "creator") {
                               // type is an arbitrary label
@@ -559,7 +559,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (ee.tagName() == "rights")
-                              score->setCopyright(ee.text());
+                              ; // score->setCopyright(ee.text());
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
                         else if (ee.tagName() == "source")
@@ -633,8 +633,8 @@ void MusicXml::scorePartwise(QDomElement ee)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "credit-words") {
-                              int defaultx    = ee.attribute(QString("default-x")).toInt();
-                              int defaulty    = ee.attribute(QString("default-y")).toInt();
+                              double defaultx    = ee.attribute(QString("default-x")).toDouble();
+                              double defaulty    = ee.attribute(QString("default-y")).toDouble();
                               QString justify = ee.attribute(QString("justify"));
                               QString halign  = ee.attribute(QString("halign"));
                               QString valign  = ee.attribute(QString("valign"));
